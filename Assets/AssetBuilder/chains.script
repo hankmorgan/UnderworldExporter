@@ -1,0 +1,249 @@
+#define __chains_script__
+
+float elevator_49_44_state = 4;
+float elevator_47_44_state = 3;
+float elevator_45_44_state = 2;
+float elevator_43_44_state = 1;
+
+
+void main()
+{
+
+
+}
+
+
+
+
+void start_a_move_trigger_051_061_545()
+{
+sys.println("looktrigger:64*level+0");
+}
+
+void start_a_move_trigger_007_060_912()
+{
+sys.println("End Level. going to 4);
+sys.setcvar("targetX", "7");
+sys.setcvar("targetY", "7");
+
+}
+
+void start_a_move_trigger_042_060_625()
+{
+sys.println("End Level. going to 2);
+sys.setcvar("targetX", "42");
+sys.setcvar("targetY", "42");
+
+}
+
+void start_a_lever_048_055_680()
+{
+}
+
+void start_special_tmap_obj_048_055_794()
+{
+}
+
+void start_a_change_terrain_trap_048_054_793()
+{
+}
+
+void start_a_move_trigger_046_053_973()
+{
+sys.println("End Level. going to 0);
+sys.setcvar("targetX", "44");
+sys.setcvar("targetY", "44");
+
+}
+
+void start_a_move_trigger_056_053_538()
+{
+}
+
+void start_special_tmap_obj_056_053_926()
+{
+}
+
+void start_a_move_trigger_038_052_839()
+{
+sys.println("looktrigger:64*level+0");
+}
+
+void start_a_pouch&pouches_049_052_675()
+{
+}
+
+void start_a_move_trigger_007_051_913()
+{
+sys.println("End Level. going to 4);
+sys.setcvar("targetX", "7");
+sys.setcvar("targetY", "7");
+
+}
+
+void start_a_move_trigger_045_048_975()
+{
+sys.println("End Level. going to 0);
+sys.setcvar("targetX", "26");
+sys.setcvar("targetY", "26");
+
+}
+
+void start_a_switch_038_044_738()
+{
+}
+
+void start_a_book_023_043_866()
+{
+}
+
+void start_a_move_trigger_024_036_981()
+{
+sys.println("End Level. going to 4);
+sys.setcvar("targetX", "23");
+sys.setcvar("targetY", "23");
+
+}
+
+void start_a_move_trigger_003_020_636()
+{
+sys.println("looktrigger:64*level+0");
+}
+
+void start_a_move_trigger_003_016_889()
+{
+$lock006_008.activate($player1);
+
+}
+
+void start_a_move_trigger_032_014_833()
+{
+sys.println("looktrigger:64*level+0");
+}
+
+void start_a_lever_052_013_972()
+{
+sys.println("looktrigger:64*level+3");
+}
+
+void start_a_broken_axe_040_012_648()
+{
+}
+
+void start_a_broken_mace_040_012_649()
+{
+}
+
+void start_special_tmap_obj_052_012_588()
+{
+sys.println("looktrigger:64*level+2");
+}
+
+void start_a_broadsword_040_011_650()
+{
+}
+
+void start_a_move_trigger_025_010_615()
+{
+sys.println("looktrigger:64*level+0");
+}
+
+void start_a_change_terrain_trap_037_010_1009()
+{
+}
+
+void start_a_move_trigger_001_009_829()
+{
+sys.println("looktrigger:64*level+1");
+}
+
+void start_special_tmap_obj_037_009_1010()
+{
+}
+
+void start_a_pull_chain_007_008_892()
+{
+$lock006_008.activate($player1);
+
+}
+
+void start_a_change_terrain_trap_044_008_969()
+{
+}
+
+void start_a_move_trigger_001_007_827()
+{
+sys.println("looktrigger:64*level+1");
+}
+
+void start_a_button_005_007_1021()
+{
+}
+
+void start_a_button_005_007_1022()
+{
+$lock006_008.activate($player1);
+
+}
+
+void start_a_button_005_007_1002()
+{
+}
+
+void start_a_fountain_061_007_631()
+{
+}
+
+void start_a_set_variable_trap_006_006_1016()
+{
+$lock006_008.activate($player1);
+
+}
+
+void start_a_move_trigger_007_006_888()
+{
+$lock006_008.Lock();
+
+}
+
+void start_a_check_variable_trap_005_005_1000()
+{
+}
+
+void start_a_set_variable_trap_006_005_1023()
+{
+}
+
+void start_a_check_variable_trap_006_004_858()
+{
+$lock006_008.activate($player1);
+
+}
+
+void start_a_move_trigger_005_003_1013()
+{
+sys.println("End Level. going to 2);
+sys.setcvar("targetX", "5");
+sys.setcvar("targetY", "5");
+
+}
+
+void start_a_move_trigger_003_002_886()
+{
+$lock006_008.Lock();
+
+}
+
+void start_a_move_trigger_042_002_1003()
+{
+sys.println("End Level. going to 4);
+sys.setcvar("targetX", "42");
+sys.setcvar("targetY", "42");
+
+}
+
+
+
+
+#endif //__<<game>>_<<mapno>>_script__
+

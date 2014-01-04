@@ -1,0 +1,172 @@
+#ifndef __uw_1_script__
+#define  __uw_1_script__
+
+void main()
+
+{
+if ( (sys.getcvar("targetX") == "7") && (sys.getcvar("targetY") == "38"))
+{
+$entrance_007_038.activate($player1);
+}
+
+if ( (sys.getcvar("targetX") == "47") && (sys.getcvar("targetY") == "53"))
+{
+$entrance_047_053.activate($player1);
+}
+
+if ( (sys.getcvar("targetX") == "35") && (sys.getcvar("targetY") == "20"))
+{
+$entrance_035_020.activate($player1);
+}
+
+$a_change_terrain_trap_final_007_034_870.hide();
+
+}
+
+void start_a_move_trigger_042_060_1008()
+{
+sys.println("End Level. going to 3");
+sys.setcvar("targetX", "42");
+sys.setcvar("targetY", "61");
+sys.trigger($trigger_endlevel_042_060);
+}
+
+void start_a_fountain_050_057_947()
+{
+sys.println("Heal");
+}
+
+void start_a_move_trigger_026_055_877()
+{
+sys.println("Lock -targetstate=1");
+$a_door_027_057.Open();
+
+}
+
+void start_a_green_potion_035_052_567()
+{
+sys.println("Mana Boost");
+}
+
+void start_a_green_potion_014_051_872()
+{
+sys.println("Fly");
+}
+
+void start_a_red_potion_014_051_871()
+{
+sys.println("a dirt floor");
+}
+
+void start_an_orb_055_050_824()
+{
+sys.wait(5);
+$a_do_trap_009_034.activate($player1); 
+sys.wait(10);
+$a_do_trap_009_034.activate($player1);
+}
+
+void start_a_buckler_036_043_606()
+{
+sys.println("");
+}
+
+void start_a_lever_054_042_816()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_054_041.activate($player1);
+
+}
+
+void start_a_move_trigger_008_038_1015()
+{
+sys.println("End Level. going to 1");
+sys.setcvar("targetX", "8");
+sys.setcvar("targetY", "34");
+sys.trigger($trigger_endlevel_008_038);
+}
+
+void start_a_scroll_010_035_560()
+{
+sys.println("Gate Travel");
+}
+
+void start_a_move_trigger_008_034_869()
+{
+$a_change_terrain_trap_initial_007_034_870_000.remove();
+
+$a_change_terrain_trap_final_007_034_870.show();
+
+}
+
+void start_a_move_trigger_013_031_844()
+{
+sys.println("Lock -targetstate=2");
+$a_door_013_030.Close();
+sys.wait(5);
+$a_door_013_030.Lock();
+
+}
+
+void start_a_lever_012_029_854()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_013_030.activate($player1);
+
+}
+
+void start_a_move_trigger_034_020_1010()
+{
+sys.println("End Level. going to 1");
+sys.setcvar("targetX", "26");
+sys.setcvar("targetY", "20");
+sys.trigger($trigger_endlevel_034_020);
+}
+
+void start_a_scroll_011_018_570()
+{
+sys.println("Daylight");
+}
+
+void start_a_move_trigger_051_016_575()
+{
+sys.println("You hear a rumbling sound to the west!");
+}
+
+void start_some_writing_045_015_669()
+{
+sys.println("Quarters of Dominus");
+}
+
+void start_a_move_trigger_035_006_807()
+{
+sys.println("End Level. going to 3");
+sys.setcvar("targetX", "25");
+sys.setcvar("targetY", "10");
+sys.trigger($trigger_endlevel_035_006);
+}
+
+void start_a_damage_trap_034_005_595()
+{
+sys.println("End Level. going to 3");
+sys.setcvar("targetX", "25");
+sys.setcvar("targetY", "10");
+sys.trigger($trigger_endlevel_034_005);
+}
+
+void start_a_move_trigger_005_002_1021()
+{
+sys.println("End Level. going to 3");
+sys.setcvar("targetX", "5");
+sys.setcvar("targetY", "2");
+sys.trigger($trigger_endlevel_005_002);
+}
+
+void start_a_move_trigger_052_001_602()
+{
+$a_teleport_trap_050_001_592.activate($player1);
+
+sys.println("You are sucked through the pipe...");
+}
+
+#endif //__uw_1_script__

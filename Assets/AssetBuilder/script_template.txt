@@ -1,0 +1,16 @@
+#define __<<game>>_<<mapno>>_script__
+
+<<scriptglobals>>
+
+void main()
+{
+
+
+}
+
+
+<<scriptchains>>
+
+
+
+#endif //__<<game>>_<<mapno>>_script__

@@ -1,0 +1,581 @@
+#ifndef __uw_2_script__
+#define  __uw_2_script__
+ float $var_0=0;
+ float $var_16=0;
+
+void main()
+
+{
+if ( (sys.getcvar("targetX") == "25") && (sys.getcvar("targetY") == "10"))
+{
+$entrance_025_010.activate($player1);
+}
+
+if ( (sys.getcvar("targetX") == "42") && (sys.getcvar("targetY") == "61"))
+{
+$entrance_042_061.activate($player1);
+}
+
+if ( (sys.getcvar("targetX") == "5") && (sys.getcvar("targetY") == "2"))
+{
+$entrance_005_002.activate($player1);
+}
+
+$a_change_terrain_trap_final_048_054_793.hide();
+
+$a_change_terrain_trap_final_057_053_539.hide();
+
+$a_change_terrain_trap_final_057_053_539.hide();
+
+$a_change_terrain_trap_final_044_012_970.hide();
+
+$a_change_terrain_trap_final_044_008_969.hide();
+
+$a_change_terrain_trap_final_046_007_550.hide();
+
+$a_change_terrain_trap_final_052_013_587.hide();
+
+$a_change_terrain_trap_final_037_010_1009.hide();
+
+$a_change_terrain_trap_final_046_007_550.hide();
+
+}
+
+void start_a_scroll_034_062_547()
+{
+sys.println("Night Vision");
+
+
+}
+
+void start_a_move_trigger_051_061_545()
+{
+sys.println("The dank, malodorous stench of this underground swamp invades your revolted nostrils.  You recoil from the wave of fetid odor.");
+
+
+}
+
+void start_a_move_trigger_007_060_912()
+{
+sys.println("End Level. going to 4");
+sys.setcvar("targetX", "7");
+sys.setcvar("targetY", "61");
+sys.trigger($trigger_endlevel_007_060);
+
+
+}
+
+void start_a_move_trigger_042_060_625()
+{
+sys.println("End Level. going to 2");
+sys.setcvar("targetX", "42");
+sys.setcvar("targetY", "59");
+sys.trigger($trigger_endlevel_042_060);
+
+
+}
+
+void start_special_tmap_obj_048_055_794()
+{
+$a_change_terrain_trap_initial_048_054_793_000.remove();
+
+$a_change_terrain_trap_final_048_054_793.show();
+
+$special_tmap_obj_048_055_794.hide();
+
+
+}
+
+void start_a_change_terrain_trap_048_054_793()
+{
+$special_tmap_obj_048_055_794.hide();
+
+
+}
+
+void start_a_move_trigger_046_053_973()
+{
+$a_teleport_trap_044_048_974.activate($player1);
+
+
+
+}
+
+void start_a_move_trigger_056_053_538()
+{
+$a_change_terrain_trap_initial_057_053_539_000.remove();
+
+$a_change_terrain_trap_final_057_053_539.show();
+
+
+
+}
+
+void start_special_tmap_obj_056_053_926()
+{
+$a_change_terrain_trap_initial_057_053_539_000.remove();
+
+$a_change_terrain_trap_final_057_053_539.show();
+
+
+
+}
+
+void start_a_move_trigger_038_052_839()
+{
+sys.println("The dank, malodorous stench of this underground swamp invades your revolted nostrils.  You recoil from the wave of fetid odor.");
+
+
+}
+
+void start_a_red_potion_049_052_832()
+{
+sys.println("Hallucination");
+
+
+}
+
+void start_a_pouch_pouches_049_052_675()
+{
+sys.println("TODO: a_create_object_trap");
+
+
+}
+
+void start_a_move_trigger_007_051_913()
+{
+sys.println("End Level. going to 4");
+sys.setcvar("targetX", "7");
+sys.setcvar("targetY", "50");
+sys.trigger($trigger_endlevel_007_051);
+
+
+}
+
+void start_a_hand_axe_054_051_895()
+{
+sys.println("");
+
+
+}
+
+void start_a_green_potion_054_051_900()
+{
+sys.println("Heal");
+
+
+}
+
+void start_a_move_trigger_045_048_975()
+{
+$a_teleport_trap_026_055_976.activate($player1);
+
+
+
+}
+
+void start_a_green_potion_026_045_551()
+{
+sys.println("Restore Mana");
+
+
+}
+
+void start_some_writing_029_044_861()
+{
+sys.println("Missile Protection");
+
+
+}
+
+void start_a_wooden_shield_038_044_732()
+{
+sys.println("");
+
+
+}
+
+void start_a_switch_038_044_738()
+{
+sys.println("TODO: a_create_object_trap");
+
+
+}
+
+void start_a_book_023_043_866()
+{
+
+sys.println(var_0);
+
+
+}
+
+void start_a_green_potion_042_038_908()
+{
+sys.println("Lesser Heal");
+
+
+}
+
+void start_some_writing_042_038_578()
+{
+sys.println("Daylight");
+
+
+}
+
+void start_some_writing_018_036_898()
+{
+sys.println("Paralyze");
+
+
+}
+
+void start_a_move_trigger_024_036_981()
+{
+sys.println("End Level. going to 4");
+sys.setcvar("targetX", "23");
+sys.setcvar("targetY", "36");
+sys.trigger($trigger_endlevel_024_036);
+
+
+}
+
+void start_a_leather_cap_018_034_621()
+{
+sys.println("");
+
+
+}
+
+void start_some_writing_044_028_907()
+{
+sys.println("Open");
+
+
+}
+
+void start_a_move_trigger_003_020_636()
+{
+sys.println("The dank, malodorous stench of this underground swamp invades your revolted nostrils.  You recoil from the wave of fetid odor.");
+
+
+}
+
+void start_some_writing_012_020_990()
+{
+sys.println("Greater Heal");
+
+
+}
+
+void start_a_move_trigger_003_016_889()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_006_008.activate($player1);
+
+
+
+}
+
+void start_a_move_trigger_032_014_833()
+{
+sys.println("The dank, malodorous stench of this underground swamp invades your revolted nostrils.  You recoil from the wave of fetid odor.");
+
+
+}
+
+void start_a_lever_052_013_972()
+{
+$a_change_terrain_trap_initial_044_012_970_000.remove();
+$a_change_terrain_trap_initial_044_012_970_001.remove();
+$a_change_terrain_trap_initial_044_012_970_002.remove();
+$a_change_terrain_trap_initial_044_012_970_003.remove();
+$a_change_terrain_trap_initial_044_012_970_004.remove();
+$a_change_terrain_trap_initial_044_012_970_005.remove();
+
+$a_change_terrain_trap_final_044_012_970.show();
+
+sys.println("You hear the roar of tons of water falling to your west.");
+$a_change_terrain_trap_initial_044_008_969_000.remove();
+$a_change_terrain_trap_initial_044_008_969_001.remove();
+$a_change_terrain_trap_initial_044_008_969_002.remove();
+$a_change_terrain_trap_initial_044_008_969_003.remove();
+$a_change_terrain_trap_initial_044_008_969_004.remove();
+$a_change_terrain_trap_initial_044_008_969_005.remove();
+$a_change_terrain_trap_initial_044_008_969_006.remove();
+$a_change_terrain_trap_initial_044_008_969_007.remove();
+$a_change_terrain_trap_initial_044_008_969_008.remove();
+$a_change_terrain_trap_initial_044_008_969_009.remove();
+$a_change_terrain_trap_initial_044_008_969_010.remove();
+$a_change_terrain_trap_initial_044_008_969_011.remove();
+$a_change_terrain_trap_initial_044_008_969_012.remove();
+$a_change_terrain_trap_initial_044_008_969_013.remove();
+$a_change_terrain_trap_initial_044_008_969_014.remove();
+$a_change_terrain_trap_initial_044_008_969_015.remove();
+$a_change_terrain_trap_initial_044_008_969_016.remove();
+$a_change_terrain_trap_initial_044_008_969_017.remove();
+$a_change_terrain_trap_initial_044_008_969_018.remove();
+$a_change_terrain_trap_initial_044_008_969_019.remove();
+$a_change_terrain_trap_initial_044_008_969_020.remove();
+$a_change_terrain_trap_initial_044_008_969_021.remove();
+$a_change_terrain_trap_initial_044_008_969_022.remove();
+$a_change_terrain_trap_initial_044_008_969_023.remove();
+
+$a_change_terrain_trap_final_044_008_969.show();
+
+$a_change_terrain_trap_initial_046_007_550_000.remove();
+
+$a_change_terrain_trap_final_046_007_550.show();
+
+
+
+}
+
+void start_a_broken_axe_040_012_648()
+{
+sys.println("TODO: a_create_object_trap");
+
+
+}
+
+void start_a_broken_mace_040_012_649()
+{
+sys.println("TODO: a_create_object_trap");
+
+
+}
+
+void start_special_tmap_obj_052_012_588()
+{
+$a_change_terrain_trap_initial_052_013_587_000.remove();
+
+$a_change_terrain_trap_final_052_013_587.show();
+
+sys.println("You move the vines aside...");
+$special_tmap_obj_052_012_588.hide();
+
+
+}
+
+void start_a_broadsword_040_011_650()
+{
+sys.println("TODO: a_create_object_trap");
+
+
+}
+
+void start_a_move_trigger_025_010_615()
+{
+sys.println("The dank, malodorous stench of this underground swamp invades your revolted nostrils.  You recoil from the wave of fetid odor.");
+
+
+}
+
+void start_a_change_terrain_trap_037_010_1009()
+{
+$special_tmap_obj_037_009_1010.hide();
+
+
+}
+
+void start_a_move_trigger_001_009_829()
+{
+sys.println("TODO:        a_damage_trap");
+sys.println("You feel the sting of tiny poisonous needles stabbing into the exposed parts of your legs and arms.");
+
+
+}
+
+void start_special_tmap_obj_037_009_1010()
+{
+$a_change_terrain_trap_initial_037_010_1009_000.remove();
+
+$a_change_terrain_trap_final_037_010_1009.show();
+
+$special_tmap_obj_037_009_1010.hide();
+
+
+}
+
+void start_a_pull_chain_007_008_892()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_006_008.activate($player1);
+
+
+
+}
+
+void start_some_writing_023_008_933()
+{
+sys.println("Cure Poison");
+
+
+}
+
+void start_a_light_mace_042_008_616()
+{
+sys.println("");
+
+
+}
+
+void start_a_change_terrain_trap_044_008_969()
+{
+$a_change_terrain_trap_initial_046_007_550_000.remove();
+
+$a_change_terrain_trap_final_046_007_550.show();
+
+
+
+}
+
+void start_some_writing_060_008_885()
+{
+sys.println("Gate Travel");
+
+
+}
+
+void start_a_move_trigger_001_007_827()
+{
+sys.println("TODO:        a_damage_trap");
+sys.println("You feel the sting of tiny poisonous needles stabbing into the exposed parts of your legs and arms.");
+
+
+}
+
+void start_a_button_005_007_1021()
+{
+var_16 =56;
+
+sys.println(var_16);
+
+
+}
+
+void start_a_button_005_007_1022()
+{
+var_16 = (~( var_16 & 3)) & ( var_16 | 3) ;
+
+sys.println(var_16);
+if (var_16 == 51) 
+{
+sys.println("Lock -targetstate=3");
+$a_lock_006_008.activate($player1);
+
+
+
+}
+}
+
+void start_a_button_005_007_1002()
+{
+var_16 = (var_16 * 2) & 63 ; 
+
+sys.println(var_16);
+if (var_16 == 48) 
+{
+sys.println("TODO:           a_pit_trap");
+
+
+}
+}
+
+void start_a_fountain_061_007_631()
+{
+
+sys.println(var_0);
+
+
+}
+
+void start_a_set_variable_trap_006_006_1016()
+{
+if (var_16 == 51) 
+{
+sys.println("Lock -targetstate=3");
+$a_lock_006_008.activate($player1);
+
+
+
+}
+}
+
+void start_a_move_trigger_007_006_888()
+{
+sys.println("Lock -targetstate=2");
+$a_door_006_008.Close();
+sys.wait(5);
+$a_door_006_008.Lock();
+
+
+
+}
+
+void start_a_check_variable_trap_005_005_1000()
+{
+sys.println("TODO:           a_pit_trap");
+
+
+}
+
+void start_a_set_variable_trap_006_005_1023()
+{
+if (var_16 == 48) 
+{
+sys.println("TODO:           a_pit_trap");
+
+
+}
+}
+
+void start_a_check_variable_trap_006_004_858()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_006_008.activate($player1);
+
+
+
+}
+
+void start_some_writing_045_004_914()
+{
+sys.println("Sheet Lightning");
+
+
+}
+
+void start_a_move_trigger_005_003_1013()
+{
+sys.println("End Level. going to 2");
+sys.setcvar("targetX", "5");
+sys.setcvar("targetY", "3");
+sys.trigger($trigger_endlevel_005_003);
+
+
+}
+
+void start_a_move_trigger_003_002_886()
+{
+sys.println("Lock -targetstate=2");
+$a_door_006_008.Close();
+sys.wait(5);
+$a_door_006_008.Lock();
+
+
+
+}
+
+void start_a_move_trigger_042_002_1003()
+{
+sys.println("End Level. going to 4");
+sys.setcvar("targetX", "42");
+sys.setcvar("targetY", "2");
+sys.trigger($trigger_endlevel_042_002);
+
+
+}
+
+#endif //__uw_2_script__

@@ -1,0 +1,4 @@
+level-0-index-623-state-4-trigger-a_use_trigger-Points-a_do_trap-x-49-y-44
+level-0-index-870-state-3-trigger-a_use_trigger-Points-a_do_trap-x-47-y-44
+level-0-index-871-state-2-trigger-a_use_trigger-Points-a_do_trap-x-45-y-44
+level-0-index-872-state-1-trigger-a_use_trigger-Points-a_do_trap-x-43-y-44

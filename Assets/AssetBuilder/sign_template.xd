@@ -1,0 +1,15 @@
+readables/<<gamename>>/sign_<<string_no>>
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"<<string_contents>>"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}

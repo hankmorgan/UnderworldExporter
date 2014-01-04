@@ -1,0 +1,6 @@
+Code credits from previous UW and System Shock Projects.
+
+1 Strings decompression adapted from Abysmal+Underworld Adventures
+2 Bitmap header code adapted from System Shock Dump Texture
+3 System Shock decompression from ss-specs.txt
+4 UW2 decompression from Labyrinth of Worlds project.

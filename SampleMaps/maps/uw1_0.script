@@ -1,0 +1,210 @@
+#ifndef __uw_0_script__
+#define __uw_0__
+ float            a_do_trap_043_044_state=1;
+ float            a_do_trap_045_044_state=2;
+ float            a_do_trap_047_044_state=3;
+ float            a_do_trap_049_044_state=4;
+
+void main()
+
+{
+if ( (sys.getcvar("targetX") == "26") && (sys.getcvar("targetY") == "20"))
+{
+$entrance_026_020.activate($player1);
+}
+
+if ( (sys.getcvar("targetX") == "8") && (sys.getcvar("targetY") == "34"))
+{
+$entrance_008_034.activate($player1);
+}
+
+}
+
+void start_a_fountain_030_061_667()
+{
+sys.println("Heal");
+}
+
+void start_some_writing_054_058_713()
+{
+sys.println("Hallucination");
+}
+
+void start_a_move_trigger_047_053_943()
+{
+sys.println("End Level. going to 2");
+sys.setcvar("targetX", "47");
+sys.setcvar("targetY", "53");
+sys.trigger($trigger_endlevel_047_053);
+}
+
+void start_a_move_trigger_042_051_634()
+{
+sys.println("Lock -targetstate=2");
+$a_door_047_051.Close();
+sys.wait(5);
+$a_door_047_051.Lock();
+
+}
+
+void start_a_button_048_051_840()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_047_051.activate($player1);
+
+}
+
+void start_a_button_055_049_646()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_056_049.activate($player1);
+
+}
+
+void start_a_lever_056_045_872()
+{
+ if (a_do_trap_043_044_state==8) 
+ { 
+ $a_do_trap_043_044.move( DOWN, 105 );
+ a_do_trap_043_044_state=0;
+ } 
+ else
+ {
+ $a_do_trap_043_044.move ( UP, 15 );
+a_do_trap_043_044_state++ ;
+ }
+}
+
+void start_a_lever_057_045_871()
+{
+ if (a_do_trap_045_044_state==8) 
+ { 
+ $a_do_trap_045_044.move( DOWN, 105 );
+ a_do_trap_045_044_state=0;
+ } 
+ else
+ {
+ $a_do_trap_045_044.move ( UP, 15 );
+a_do_trap_045_044_state++ ;
+ }
+}
+
+void start_a_lever_058_045_870()
+{
+ if (a_do_trap_047_044_state==8) 
+ { 
+ $a_do_trap_047_044.move( DOWN, 105 );
+ a_do_trap_047_044_state=0;
+ } 
+ else
+ {
+ $a_do_trap_047_044.move ( UP, 15 );
+a_do_trap_047_044_state++ ;
+ }
+}
+
+void start_a_lever_059_045_623()
+{
+ if (a_do_trap_049_044_state==8) 
+ { 
+ $a_do_trap_049_044.move( DOWN, 105 );
+ a_do_trap_049_044_state=0;
+ } 
+ else
+ {
+ $a_do_trap_049_044.move ( UP, 15 );
+a_do_trap_049_044_state++ ;
+ }
+}
+
+void start_a_lever_009_036_744()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_009_035.activate($player1);
+
+}
+
+void start_a_button_016_035_807()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_015_034.activate($player1);
+
+}
+
+void start_a_move_trigger_007_034_825()
+{
+sys.println("End Level. going to 2");
+sys.setcvar("targetX", "7");
+sys.setcvar("targetY", "38");
+sys.trigger($trigger_endlevel_007_034);
+}
+
+void start_a_move_trigger_015_033_635()
+{
+sys.println("Lock -targetstate=2");
+$a_door_015_034.Close();
+sys.wait(5);
+$a_door_015_034.Lock();
+
+}
+
+void start_a_bottle_of_ale_bottles_of_ale_002_023_616()
+{
+sys.println("Lesser Heal");
+}
+
+void start_a_move_trigger_027_020_991()
+{
+sys.println("End Level. going to 2");
+sys.setcvar("targetX", "35");
+sys.setcvar("targetY", "20");
+sys.trigger($trigger_endlevel_027_020);
+}
+
+void start_a_green_potion_059_016_562()
+{
+sys.println("Mana Boost");
+}
+
+void start_an_orb_058_013_913()
+{
+sys.println("Peering into the crystal ball, a vision of a strange world appears. Bizarre creatures float through space. A green path, flanked by a black void on either side, runs off into the distance. Somehow you know the path leads to Britannia.");
+}
+
+void start_a_switch_004_007_864()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_009_010.activate($player1);
+
+}
+
+void start_a_pull_chain_032_007_994()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_033_008.activate($player1);
+
+}
+
+void start_some_writing_030_002_963()
+{
+sys.println("Fyrgen");
+}
+
+void start_a_button_049_002_817()
+{
+sys.println("Lock -targetstate=3");
+$a_lock_046_008.activate($player1);
+
+}
+
+void start_special_tmap_obj_031_001_535()
+{
+sys.println("The doors are securely locked.");
+}
+
+void start_special_tmap_obj_032_001_545()
+{
+sys.println("The doors are securely locked.");
+}
+
+#endif //__uw_0_script__

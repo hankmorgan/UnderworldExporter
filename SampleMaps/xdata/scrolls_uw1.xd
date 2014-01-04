@@ -1,0 +1,2975 @@
+readables/uw1/scroll_000
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The pages are blank."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_002
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"My dearest Alfred:Go into the Abyss knowing that I will not forget thee. As bitter as the Baron's justice dost seem, tis better than a hangman's noose. No matter the passing of years, I will await thy return. Yours forever,                 Sandra"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_003
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The dim witted Goblins have given me the tool I need; tonight I shall make good my escape from this filthy cell - Bragit"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_004
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Uus Por for large jumps"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_032
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"These blueprints are indecipherable."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_033
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Speak the mantra RA to see thy blows land with greater effectiveness."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_034
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"For better eyesight, use the mantra LU."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_035
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"It is said that chanting UN will allow one to make better deals."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_036
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"To better gauge the quality of a deal, chant HUNN."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_037
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Remove Bet from a Resist Blows spell for better protection."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_064
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Look for Thieves hideout behind storage room"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_065
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"TRIED THIS LEVER! MANY R..."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_066
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Ghastly ones broken haft have.  Search for Blade in southeast.  Behind wall, secrets are."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_067
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Ossikka,  Upon your shoulders does holding together the Lizard folk alliance fall.  Please do not fail me.    Sir Cabirus"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_068
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Speak SAHF to gain tracking."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_069
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Wanderer   Thanking you much, I can lizardman rune-spell talk.  For  walk water, Ylem Por do."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_070
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Speaking FAL increases one's nimbleness and tumbling."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_071
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"To swim better, chant the ONO mantra."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_097
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A book written to help parents frighten their children entitled 'Mondain Strikes Back'"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_099
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A short treatise on fishing technique, including casting technique and choice of lures"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_100
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Diary of a Seer who was embarking on a Troll watching journey"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_101
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The writ of Lorne is thus.  In our days of beginning we must stick together, and not allow petty grievances to stand in the way of respect."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_102
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The maze conceals many chambers.  One is said to lead a chamber once used by the knights."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_103
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Lorne went to the homeland of the Trolls in the hope of building a shrine."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_104
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The maze is locked with a key that is now thought to be lost."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_105
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"I, Baron Almric, hereby condemn thee to the Abyss.  At morn tommorrow thou wilt be brought to the entrance of the cave and released.  If ever thou dost return, thou wilt be considered innocent.  Until then, thou art guilty in the eyes of the land."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_106
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Lakshi - I am writing to discuss with you the possibility of your performing a small service for me, which in the end would be beneficial to ourselves and the Abyss as a whole.  If you could have several of your subjects do some small favors for me, I would be indebted to you for quite some time. P.S.  Just tell my messenger your response - he can be trusted."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_107
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Gratlashuns, Sethar, you done might strng by pertecting us.  Thnks"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_108
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Music and lyrics to a popular Troll fight song."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_109
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A stirring eulogy for Sir Ingvar"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_110
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Certificate of honor, presented to Trisch Wender, upon winning  the Serpent's Hold Four Day CrackShot competition"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_111
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Finally, I can cast Curse!  Now, to find a way out of this pit..."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_112
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The Bullfrog puzzle has a simple solution, but there is more than meets the eye in that place."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_113
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The heights of the north have a hidden counterpart."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_114
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"To pass into the unseen, jump through the seen."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_115
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"One should be more careful to dot one's I's than to cross one's T's."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_128
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thief's Guide volume 1Picking Locks--What Bellowing AAM Won't Tell You"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_129
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thief's Guide volume 2Stealth--What to do After MUL"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_130
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thief's Guide volume 3Scaling Walls--Art or Science?"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_131
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thief's Guide volume 4Traps--Beyond ROMM to Nuts and Bolts"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_132
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"An Corp Mani deals great blows to undead."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_133
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Chanting LAHN helps one to identify one's possessions."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_160
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"On the Properties of Runestones"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_161
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The Origin of Moongates: Do Other Worlds Exist?"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_162
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Dangers of Mandrake Root: The Untold Story"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_163
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A Compendium of Practical Jokes for the Aspiring Mage"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_164
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A History of Britannia"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_165
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Human-Gargish Dictionary"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_166
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Unforeseen Combinations: The Continual Search for New Reagents"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_167
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Not Just Pointy Caps with Stars: What Every Wizard Should Know About Fashion"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_168
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A Study of the Use of Heat in Preparing Reagents"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_169
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Volcanos: Gates to Other Worlds?"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_170
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"How to summon?  Kal... Kal what?  No Xen runestone... Mani perhaps? Must experiment in controlled environment..."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_171
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A volume in a foreign tongue, entitled 'Folanae Fanlo'"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_172
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The Book of Honesty, by Ravenhurst of Moonglow"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_173
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"A tome whose pages have been torn out entitled 'The Book of Duplicity'"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_174
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Many mages have found that the IMU mantra has increased their magical stamina."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_175
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The SOL Mantra: A Useful Shortcut to Magical Power"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_192
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Decided to explore the mines.  There must be some way to bypass the maze. If only there were a way across the pit of lava.  But my maps indicate there must be a secret door in this area.  I enter now..."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_193
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"I'm trapped now.  I dare not return from whence I came, and I dare not brave the caverns.  So many hateful dead things.  If only I'd known this key opened the door on the far side of the lava pit, I wouldn't be in this fix.  I think I'll just rest and wait now.  Perhaps my companions may find me..."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_194
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Indecipherable runes that hurt your head when you look at them for too long"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_195
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Remember to meet with naweohkx'o in the phase room on the 5th cycle."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_196
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"In Lor, Bet In Sanct, Ort Jux, In Mani Ylem, Sanct Hur, Uus Por, Syn Flas? Tor Mes?"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_197
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Garamon, forgive me! I'll revive thee when it's through."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_198
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Demonic Summoning and Control: Theory and Practice"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_199
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"On the Process of Resurrection"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_200
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Dungeon Design and Constuction by Dugali Skowe"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_201
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Leblanc: Horatio has explored the lava pits.  He is now in the northwest mapping that area.  He will send you both when he returns."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_202
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Mysteries of the Abyss"
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/scroll_257
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"This recipe for worm stew requires port, a green mushroom, a dead rotworm, and a bowl to mix them in."
+	}
+	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+readables/uw1/sign_000
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Something indecipherable"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_033
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The empty grave of Garamon"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_034
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The grave of Garamon"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_064
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"We attacked the entrance with all manner of tools, but it gave not a hair.  It simply cannot be breached.  Hence we have resigned ourselves to die in this hellish pit. - Elsmore"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_065
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Oh weary traveler, partake from these waters and feel new life course through thy veins."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_066
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here lies Korianous, the master builder. Long he toiled to rework the Abyss into a home fit for the coming of Cabirus' colonists. Tragedy did strike before his task was done, when a stone block fell upon his head."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_067
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here be the Grand Staircase which descends through all deeps of the Abyss. - Korianous"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_068
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Plant the seed of the Silver Sapling and a new Sapling will spring forth.  In return for this gift of life, thou shalt be granted a new life thyself, when this one doth end."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_069
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Keep Out"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_070
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Seeker of honor and valor in battle, speak Summ Ra, the mantra of Courage."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_071
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Seeker of the mysterious arts, speak Mu Ahm, the mantra of Truth."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_072
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Seeker of the mastery of practical skills, speak Om Cah, the mantra of Love."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_100
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Quarters of Mondor"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_101
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Quarters of Corby"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_102
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Helmet recommended"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_103
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Entrance to Mines"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_104
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"South Branch (to Shak)"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_105
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"North Branch.  Beware of Monster!"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_106
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Unstable mines ahead"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_107
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Warning - Dangerous Undertow"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_108
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Supply Room.  Please Partake Freely."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_136
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Left Right Center"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_137
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Storage Room: East"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_138
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Storage Room: West"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_139
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"ORA, the Mantra of Unarmed combat, helps the unfortunate."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_140
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"To protect thyself, use the ANRA chant."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_141
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Ask Shanklick about crazy wizard."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_142
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Magic Crystal exposes hidden tombs and monsters."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_143
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Mountainman Shak: Master Weaponsmith"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_144
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Heal thyself by using fountain."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_145
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Tom Loves Judy"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_146
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Go to the very base of the Abyss, then battle your way back up, to find the key to your fortitude."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_173
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Trolls welcome"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_174
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"This leaves the great hall to enter the realm of the Trolls"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_175
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"This leaves the great hall to enter the realm of the Knights"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_176
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The Great Stair"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_180
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Right: Main Office.  Left: Checkpoint."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_181
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Office of Troll Watching"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_182
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Treasurer"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_183
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"First Officer"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_184
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Armorer"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_185
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Guards"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_186
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Quarters of Dorna Ironfist, leader of the Knights of the Order of the Crux Ansata"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_187
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Secure outpost ahead.  Be prepared."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_188
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Storage Room"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_189
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Armory"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_192
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here lies Sir Ingvar, Knight of the Order of the Crux Ansata."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_208
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Tombs of the Great Stygian Abyss"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_209
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Herein lies Sir Cabirus"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_210
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Herein lies Garamon, brother of Tyball"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_211
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"High State Chamber"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_212
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Guard personnel only"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_213
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Shrine of the Virtues"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_214
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Herein lies Nolant, formerly Sir, stripped of his title.  He strayed from the path of virtue by murdering the young Endicott in cold blood."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_215
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here lies Nolant, separated ignominiously from the rest of his order."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_216
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Mine dispatch chamber.  Enter only in presence of dispatch operator."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_217
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Teleport door lock.  Mine dispatch operators only."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_218
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Teleport door control"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_219
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Exit corridor"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_220
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here lies Sir Cabirus, whose work created peace and harmony where there was none.  May he rest in peace"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_237
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here lies one who is no longer among the living.  Enter not unless thou dost wish to join him."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_238
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Although no more gargoyles will reside in the Abyss, we thank them for the sacrifice they made."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_239
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Here lie those Gargoyles who perished during the great plague shortly after the foundation of the Colony of the Abyss.  The effort they made to improve the Abyss shall not be forgotten."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_244
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The Academy of the Abyss"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_245
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"To the Great Stair"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_246
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Private Property"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_247
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"To the Shrine"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_248
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Warning: Dangerous Area"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_249
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The Domain of Vilus.  Visitors NOT Welcome."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_250
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Quarters of Dominus"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_251
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Quarters of Frang"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_252
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Quarters of Nedge"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_253
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Library of the Academy.  Please return books promptly!"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_280
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Beware... Evil Dead Beyond"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_281
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"This be my death curse carved in stone on thou who reads it I am now dead"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_282
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Grak is a corpseworm"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_283
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Antimagic + antimagic "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_285
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"HeimdaarnHe who journeyed from afar"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_286
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thost the Fi t"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_289
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thulsoom th MadSurvivor of the Third Age"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_293
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"At last!  Now, all that is left is to conquer the maze..."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_316
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"Thou canst not defeat the Drakhri!"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_352
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The gravestone reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_353
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The tombstone reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_368
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The plaque reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_369
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The plaque reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_370
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"An ancient rune: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_371
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"An ancient rune: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_372
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The sign reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_373
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The sign reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_374
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The sign reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_375
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The sign reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_376
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The writing reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_377
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The writing reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_378
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"An ancient rune: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_379
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"An ancient rune: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_380
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The writing reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_381
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The runes read: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_382
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The runes read: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_383
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"The writing reads: "
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_384
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_wall"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_385
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_door"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_386
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"an_altar"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_387
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"stairs leading up"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_388
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"stairs leading down"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_389
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_pipe"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_390
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_grating"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_391
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_drain"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_392
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_princess chained to a wall"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_393
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_window"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_394
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"a_tapestry"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_395
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"THE FINAL DOOR"
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_508
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"You have a vision of a cup."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_509
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"You have a vision of a cup."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_510
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"You have a vision of a cup."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+
+readables/uw1/sign_511
+{
+	precache
+	"num_pages"	: "1"
+	"page1_title"	:
+	{
+		""
+	}
+	"page1_body"	:
+	{
+		"You don't see a vision this time."
+	}
+	"gui_page1"	: "guis/readables/transparent.gui"
+	"snd_page_turn"	: "readable_page_turn"
+}
+

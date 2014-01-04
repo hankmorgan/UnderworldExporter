@@ -1,0 +1,77 @@
+#define __<<game>>_<<mapno>>_script__float elevator_49_44_state = 4;
+float elevator_47_44_state = 3;
+float elevator_45_44_state = 2;
+float elevator_43_44_state = 1;
+void main(){}
+void move_elevator_49_44()
+ {  
+	sys.println("elevator_49_44");
+	if (elevator_49_44_state==8)
+		 {
+		sys.println("elevator_49_44 down");
+		 $elevator_49_44.move( DOWN, 80 );
+		elevator_49_44_state=0;
+	 }
+else
+	{ 
+		sys.println("elevator_49_44 up");
+		$elevator_49_44.move ( UP, 10 ); 
+		elevator_49_44_state++ ;
+	}
+}
+
+
+void move_elevator_47_44()
+ {  
+	sys.println("elevator_47_44");
+	if (elevator_47_44_state==8)
+		 {
+		sys.println("elevator_47_44 down");
+		 $elevator_47_44.move( DOWN, 80 );
+		elevator_47_44_state=0;
+	 }
+else
+	{ 
+		sys.println("elevator_47_44 up");
+		$elevator_47_44.move ( UP, 10 ); 
+		elevator_47_44_state++ ;
+	}
+}
+
+
+void move_elevator_45_44()
+ {  
+	sys.println("elevator_45_44");
+	if (elevator_45_44_state==8)
+		 {
+		sys.println("elevator_45_44 down");
+		 $elevator_45_44.move( DOWN, 80 );
+		elevator_45_44_state=0;
+	 }
+else
+	{ 
+		sys.println("elevator_45_44 up");
+		$elevator_45_44.move ( UP, 10 ); 
+		elevator_45_44_state++ ;
+	}
+}
+
+
+void move_elevator_43_44()
+ {  
+	sys.println("elevator_43_44");
+	if (elevator_43_44_state==8)
+		 {
+		sys.println("elevator_43_44 down");
+		 $elevator_43_44.move( DOWN, 80 );
+		elevator_43_44_state=0;
+	 }
+else
+	{ 
+		sys.println("elevator_43_44 up");
+		$elevator_43_44.move ( UP, 10 ); 
+		elevator_43_44_state++ ;
+	}
+}
+
+#endif //__<<game>>_<<mapno>>_script__

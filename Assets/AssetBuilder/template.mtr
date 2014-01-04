@@ -1,0 +1,46 @@
+<<texpath>>
+ {
+    description      "stone"
+    qer_editorimage  <<texpath>>.tga
+ 
+    bumpmap          _flat
+    diffusemap       <<texpath>>.tga
+    specularmap      _black
+ 
+
+    {
+        if ( parm11 > 0 )
+        blend       gl_dst_color, gl_one
+        map         _white.tga
+        rgb         0.40 * parm11
+    }
+    {
+        if ( parm11 > 0 )
+        blend       add
+        map         <<texpath>>.tga
+        rgb         0.15 * parm11
+    }
+
+        {
+                if (global5 == 1)
+                blend add
+                map                             <<texpath>>.tga
+                scale                   1, 1
+                red                             global2
+                green                   global3
+                blue                    global4
+        }
+        {
+                if (global5 == 2)
+                blend add
+                program ambientEnvironment.vfp
+                vertexParm              0               1, 1, 1, 1
+                vertexParm              1               1, 1, 1, 1
+                vertexParm              2               global2, global3, global4, 1
+
+                fragmentMap             0               cubeMap env/gen1
+                fragmentMap             1               _flat
+                fragmentMap             2               <<texpath>>.tga
+                fragmentMap             3               _black
+        }
+ }

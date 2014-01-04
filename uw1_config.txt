@@ -1,0 +1,36 @@
+;This is a comment
+;[settings]
+;
+;
+NoOfTextures=160;
+NoOfObjects=100;
+;This are the textures section
+;Structure is texture Id no (matches game texture id).
+;texture description (from game strings)
+;equivilent texture.
+;delimiter is a
+;
+[textures]
+tex_001= 1, "a stone wall", "texture path"
+
+
+;
+;This is the objects section
+;Structure is object id no
+;Object type (entity or model)
+;Object class (helps define how it's data is parsed)
+;Object model path
+;
+;[objects]
+;1
+;{
+;"model"
+;"treasure"
+;"path to model"
+;}
+;2
+;{
+;"entity"
+;"npc"
+;"path to model"
+;}
