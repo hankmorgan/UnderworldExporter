@@ -54,8 +54,8 @@
 typedef struct tile
 {
 int tileType;	//What type of tile I am.
-int floorHeight;	//How high is the floor.
-int ceilingHeight;	//Constant in UW. Variable in shock
+long floorHeight;	//How high is the floor.
+long ceilingHeight;	//Constant in UW. Variable in shock
 int floorTexture;	//At the moment this is the index into the texture table
 int wallTexture;	
 int indexObjectList;	//Points to a linked list of objects in the objects block
@@ -84,8 +84,8 @@ int shockTextureOffset;
 int shockNorthOffset; int shockSouthOffset;
 int shockEastOffset; int shockWestOffset;
 
-int shockNorthCeilHeight; int shockSouthCeilHeight;
-int shockEastCeilHeight; int shockWestCeilHeight;
+long shockNorthCeilHeight; long shockSouthCeilHeight;
+long shockEastCeilHeight; long shockWestCeilHeight;
 
 int DoorIndex;	//Index to the door object if this tile has one.
 

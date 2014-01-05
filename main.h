@@ -73,7 +73,10 @@ extern int CEILING_HEIGHT;
 
 //ceiling constants
 #define UW_CEILING_HEIGHT 19
-#define SHOCK_CEILING_HEIGHT 32	
+//This is now set in buildtilemapshock in order to support variable height levels.
+//#dxefine SHOCK_CEILING_HEIGHT 32	 
+
+//39+ for tall levels.
 
 //Modes
 #define ASCII_MODE 0

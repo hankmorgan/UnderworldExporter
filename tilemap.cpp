@@ -31,6 +31,8 @@
 	#include "gamegraphics.h"
 #endif
 
+extern int SHOCK_CEILING_HEIGHT;
+
 int getTile(int tileData)
 {
 	//gets tile data at bits 0-3 of the tile data
@@ -743,6 +745,7 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	unsigned char *tmp_ark; 
 	unsigned char *sub_ark; 
 	unsigned char *tex_ark;
+	unsigned char *inf_ark;
 	long filepos;
 	long AddressOfBlockStart=0;
 	long address_pointer=4;
@@ -766,7 +769,22 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	tmp_ark = new unsigned char[fileSize];
 	fread(tmp_ark, fileSize, 1,file);
 	fclose(file);  
-	
+	//get the level data from the archive
+	AddressOfBlockStart = getShockBlockAddress(4004+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
+	sub_ark = new unsigned char[chunkPackedLength];	
+	inf_ark = new unsigned char[chunkUnpackedLength];	
+	for (long k=0; k< chunkPackedLength; k++)
+		{
+			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		}
+	unpack_data(sub_ark,inf_ark,chunkUnpackedLength);
+	//long sizeV = getValAtAddress(inf_ark,0,32);
+	//long sizeH = getValAtAddress(inf_ark,4,32);
+	//long always6_1 = getValAtAddress(inf_ark,8,32);
+	//long always6_2 = getValAtAddress(inf_ark,12,32);
+	long HeightUnits = getValAtAddress(inf_ark,16,32);
+	int cSpace = getValAtAddress(inf_ark,24,32);	
+	SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);	//Hope this works. will play havoc with textures.
 	//get the level data from the archive
 	AddressOfBlockStart = getShockBlockAddress(4005+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
 	sub_ark = new unsigned char[64*64*16];	
@@ -840,14 +858,20 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 				LevelInfo[x][y].East = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].isWater=0;
-				LevelInfo[x][y].floorHeight =(lev_ark[address_pointer+1]) & 0x1F;
-				LevelInfo[x][y].ceilingHeight =(lev_ark[address_pointer+2]) & 0x1F;
-				
+				LevelInfo[x][y].floorHeight =((lev_ark[address_pointer+1]) & 0x1F);
+				//((256 >> HeightUnits) * 8 >>3);
+				//if (LevelInfo[x][y].floorHeight !=0)
+				//	{
+				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> HeightUnits)*8 >>3;
+					//}
+				LevelInfo[x][y].ceilingHeight =((lev_ark[address_pointer+2]) & 0x1F) ;
+				LevelInfo[x][y].ceilingHeight = ((LevelInfo[x][y].ceilingHeight <<3) >> HeightUnits)*8 >>3;
 				LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x][y].ceilingHeight;
-				LevelInfo[x][y].shockSteep = lev_ark[address_pointer+3] & 0x0f;
+				LevelInfo[x][y].shockSteep = (lev_ark[address_pointer+3] & 0x0f);
+				LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep <<3) >> HeightUnits)*8 >>3;
 				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=7))
 					{LevelInfo[x][y].tileType =1;}
 				LevelInfo[x][y].indexObjectList = 0;//getValAtAddress(lev_ark,address_pointer+4,16);
@@ -880,10 +904,6 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 		{
 		for (int x=1; x<63;x++)
 			{
-			if ((x==24) && (y==28))
-				{
-				printf("");
-				}
 			//if (
 			//	(LevelInfo[x][y].tileType  != TILE_OPEN) 
 			//	||	((LevelInfo[x][y].tileType  != TILE_OPEN) && (LevelInfo[x][y].UseAdjacentTextures == 1))

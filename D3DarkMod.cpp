@@ -47,6 +47,7 @@ int iGame;
 void RenderEntity(int game,int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
 
 int levelNo;
+int SHOCK_CEILING_HEIGHT;
 
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1025],int game)
 {
