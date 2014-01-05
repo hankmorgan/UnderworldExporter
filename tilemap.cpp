@@ -847,7 +847,6 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 				LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x][y].ceilingHeight;
-				
 				LevelInfo[x][y].shockSteep = lev_ark[address_pointer+3] & 0x0f;
 				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=7))
 					{LevelInfo[x][y].tileType =1;}
@@ -881,6 +880,10 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 		{
 		for (int x=1; x<63;x++)
 			{
+			if ((x==24) && (y==28))
+				{
+				printf("");
+				}
 			//if (
 			//	(LevelInfo[x][y].tileType  != TILE_OPEN) 
 			//	||	((LevelInfo[x][y].tileType  != TILE_OPEN) && (LevelInfo[x][y].UseAdjacentTextures == 1))
@@ -892,34 +895,156 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 					{
 					LevelInfo[x][y].East = LevelInfo[x+1][y].wallTexture   ;
 					LevelInfo[x][y].shockEastOffset =LevelInfo[x+1][y].shockTextureOffset;
-					LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x+1][y].ceilingHeight ;
+					//LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x+1][y].ceilingHeight - LevelInfo[x+1][y].shockSteep ;
+					
 					}
 				if (LevelInfo[x-1][y].UseAdjacentTextures != 1)
 					{					
 					LevelInfo[x][y].West = LevelInfo[x-1][y].wallTexture   ;
 					LevelInfo[x][y].shockWestOffset =LevelInfo[x-1][y].shockTextureOffset;
-					LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x-1][y].ceilingHeight;					
+					//LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x-1][y].ceilingHeight - LevelInfo[x-1][y].shockSteep ;
+										
 					}
 				if (LevelInfo[x][y+1].UseAdjacentTextures != 1)
 					{
 					LevelInfo[x][y].North = LevelInfo[x][y+1].wallTexture   ;
 					LevelInfo[x][y].shockNorthOffset =LevelInfo[x][y+1].shockTextureOffset;
-					LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y+1].ceilingHeight;					
+					//LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y+1].ceilingHeight - LevelInfo[x][y+1].shockSteep ;
+									
 					}
 				if (LevelInfo[x][y-1].UseAdjacentTextures != 1)
 					{
 					LevelInfo[x][y].South  = LevelInfo[x][y-1].wallTexture   ;
 					LevelInfo[x][y].shockSouthOffset =LevelInfo[x][y-1].shockTextureOffset;
-					LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y-1].ceilingHeight;
+					//LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y-1].ceilingHeight - LevelInfo[x][y-1].shockSteep ;
+					
 					}
-				
+				//Need to calculate the adjustment here with the steepness and the direction of the slope.
+				LevelInfo[x][y].shockEastCeilHeight= CalcNeighbourCeilHeight(LevelInfo[x][y],LevelInfo[x+1][y],fEAST);
+				LevelInfo[x][y].shockWestCeilHeight= CalcNeighbourCeilHeight(LevelInfo[x][y],LevelInfo[x-1][y],fWEST);
+				LevelInfo[x][y].shockNorthCeilHeight= CalcNeighbourCeilHeight(LevelInfo[x][y],LevelInfo[x][y+1],fNORTH);
+				LevelInfo[x][y].shockSouthCeilHeight= CalcNeighbourCeilHeight(LevelInfo[x][y],LevelInfo[x][y-1],fSOUTH);
+/*				LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x+1][y].ceilingHeight - LevelInfo[x+1][y].shockSteep ;
+				LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x-1][y].ceilingHeight - LevelInfo[x-1][y].shockSteep ;
+				LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y+1].ceilingHeight - LevelInfo[x][y+1].shockSteep ;
+				LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y-1].ceilingHeight - LevelInfo[x][y-1].shockSteep ;*/	
 				//}
 			}
 		}
 return 1;
 }
 
-
+int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction)
+{//TODO:Test me. I'm terrible.
+// fNORTH 32
+// fSOUTH 16
+// fEAST 8
+// fWEST 4
+	if  ((t2.tileType <=1) ||(t2.shockSlopeFlag == SLOPE_FLOOR_ONLY))
+		{//Don't need to do anything since it has a flat ceiling.
+		return t2.ceilingHeight;
+		}
+	else
+		{
+		//return t2.ceilingHeight;
+		switch (Direction)
+			{
+			case fNORTH:
+				{	
+				switch (t2.tileType)
+					{
+					case TILE_SLOPE_N:
+					case TILE_SLOPE_S:
+						if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+							{
+							return t2.ceilingHeight+t2.shockSteep ;
+							}
+						else
+							{
+							return t2.ceilingHeight;
+							}
+							break;
+					default:
+						return t2.ceilingHeight;
+						break;
+					}
+				}	
+			case fSOUTH:
+				{
+				switch (t2.tileType)
+					{
+					case TILE_SLOPE_S:
+					case TILE_SLOPE_N:
+						if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+							{
+							return t2.ceilingHeight+t2.shockSteep ;
+							}
+						else
+							{
+							return t2.ceilingHeight;
+							}
+							break;
+					default:
+						return t2.ceilingHeight;
+						break;
+					}
+				//if (t2.tileType == TILE_SLOPE_S)
+				//	{
+				//	if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+				//		{
+				//		return t2.ceilingHeight+t2.shockSteep ;
+				//		}
+				//	else
+				//		{
+				//		return t2.ceilingHeight;
+				//		}
+				//	}
+				break;
+				}	
+			case fEAST:
+				{
+				switch (t2.tileType)
+					{
+					case TILE_SLOPE_E:
+					case TILE_SLOPE_W:
+						if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+							{
+							return t2.ceilingHeight+t2.shockSteep ;
+							}
+						else
+							{
+							return t2.ceilingHeight;
+							}
+							break;
+					default:
+						return t2.ceilingHeight;
+						break;
+					}
+				}	
+			case fWEST:
+				{
+				switch (t2.tileType)
+					{
+					case TILE_SLOPE_W:
+					case TILE_SLOPE_E:
+						if ((t2.shockSlopeFlag == SLOPE_BOTH_OPPOSITE) ||(t2.shockSlopeFlag == SLOPE_CEILING_ONLY))
+							{
+							return t2.ceilingHeight+t2.shockSteep ;
+							}
+						else
+							{
+							return t2.ceilingHeight;
+							}
+							break;
+					default:
+						return t2.ceilingHeight;
+						break;
+					}
+				}
+			}
+		}
+	return t2.ceilingHeight;
+}
 
 
 

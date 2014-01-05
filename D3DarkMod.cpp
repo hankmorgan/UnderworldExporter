@@ -70,7 +70,6 @@ int x; int y;
 		{
 		for (x=0; x<=63;x++)
 			{
-			
 			if ((LevelInfo[x][y].hasElevator == 0))
 				{
 				if ( LevelInfo[x][y].TerrainChange == 0)
@@ -688,10 +687,18 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 					{
 					if (iGame == SHOCK)
 						{
-						float shock_ceil = SHOCK_CEILING_HEIGHT+1;
+						float shock_ceil = SHOCK_CEILING_HEIGHT;
+						float floorOffset = shock_ceil-ceilOffset -8;
+						while (floorOffset >=8)
+							{
+							floorOffset -=8;
+							}
 						//float textureVertAlign = ((SHOCK_CEILING_HEIGHT+1)-(ceilOffset+textureOffset)) * BrushSizeZ;
 						//float textureVertAlign = ((ceilOffset+textureOffset)) / (shock_ceil);
-						float textureVertAlign =(textureOffset) * textureMasters[wallTexture].align2_3;
+						//float textureVertAlign =(textureOffset) * textureMasters[wallTexture].align2_3;
+						//fuck it. Just align with it's ceiling
+						//float textureVertAlign = ((ceilOffset)  * (1/shock_ceil));
+						float textureVertAlign = (floorOffset) / 8;
 						printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",
 						textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
 						textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureVertAlign);						
@@ -897,10 +904,6 @@ for (y=0; y<=63;y++)
 
 void RenderSolidTile(int x, int y, tile &t, short Water)
 {
-if ((PrimitiveCount == 834) ||(PrimitiveCount == 919))
-	{
-	printf("");
-	}
 	if (t.Render==1){
 		if (t.isWater==Water)
 			{
