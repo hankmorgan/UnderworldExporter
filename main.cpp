@@ -72,7 +72,7 @@ int main()
 objectMaster *objMasterList;
 BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;	
 
-levelNo=0;
+levelNo=1;
 int NoOfLevels=9;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
 	LoadConfig(UW1);

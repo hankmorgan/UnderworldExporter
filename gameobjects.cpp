@@ -61,6 +61,7 @@ int keycount[256];	//For tracking key usage
 
 void RenderEntity(int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
 {
+//Picks what type of object to generate.
 long patchX;long patchY;long patchZ;int patchOffsetX;int patchOffsetY;
 
 
@@ -162,7 +163,7 @@ void AttachToJoint(ObjectItem &currobj)
 	}
 	
 int isTrigger(ObjectItem currobj)
-	{
+	{//Tells if the object is a trigger that can set of a trap.
 		switch(objectMasters[currobj.item_id].type )
 		{
 			case  A_MOVE_TRIGGER :
@@ -184,7 +185,7 @@ int isTrigger(ObjectItem currobj)
 		}
 	}
 int isButton(ObjectItem currobj)
-{
+{//Guess
 		switch(objectMasters[currobj.item_id].type )
 		{
 			case  BUTTON :
@@ -203,7 +204,7 @@ int isTrap(ObjectItem currobj)
 	{
 	switch (objectMasters[currobj.item_id].type )
 		{
-			case A_DAMAGE_TRAP :
+			case  A_DAMAGE_TRAP :
 			case  A_TELEPORT_TRAP :
 			case  A_ARROW_TRAP :
 			case  A_DO_TRAP :
@@ -251,12 +252,12 @@ int isLock(ObjectItem currobj)
 
 
 long nextObject(ObjectItem &currObj)
-{
+{//Index of next object in the linked list.
 	return currObj.next; 
 }
 
 void createScriptCall(ObjectItem &currobj,int x,int y,int z)
-{
+{//Entity for running a script when triggered.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"atdm:target_callscriptfunction\"\n");
 	printf("\"name\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
@@ -267,7 +268,7 @@ void createScriptCall(ObjectItem &currobj,int x,int y,int z)
 }
 
 void RenderEntityModel (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
-{
+{//A model with no properties.
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"func_static\"\n");
 		//print position+name
@@ -332,7 +333,7 @@ void RenderEntityNPC (int game, int x, int y,int z, ObjectItem &currobj, ObjectI
 				tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
 				tmpobj.joint = JointCount++;							
 				}
-		RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo);
+		RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo); //NPC's inventory.
 		}					
 		
 	return;	
@@ -351,7 +352,7 @@ int doorHeight =96;
 	if (currobj.link !=0)	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it.
 		{
 		printf("\"locked\" \"%d\"\n",(objList[currobj.link].flags & 0x01));
-		//up to 6 keys can be used for a door
+		//up to 6 keys can be used for a door to allow duplicate keys.
 		printf ("\"used_by\" \"a_key_%03d_0\"\n", objList[currobj.link].link & 0x3F);
 		printf ("\"used_by1\" \"a_key_%03d_1\"\n", objList[currobj.link].link & 0x3F);
 		printf ("\"used_by2\" \"a_key_%03d_2\"\n", objList[currobj.link].link & 0x3F);
@@ -563,13 +564,11 @@ void RenderEntityButton (int game, int x, int y,int z, ObjectItem &currobj, Obje
 
 void RenderEntityA_DOOR_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
 {
+//A door trap object for opening doors.
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	
-		//A door trap object for opening doors.
 		printf("\"name\" \"door_%03d_%03d\"\n",currobj.objectOwner, currobj.objectOwnerName);
-		//printf("\"target\" \"door_%03d_%03d\"\n", objList[currobj.objectOwner].special ,objList[currobj.objectOwner].link);
-		printf("\"target\" \"door_%03d_%03d\"\n", currobj.tileX  ,currobj.tileY );
+		printf("\"target\" \"door_%03d_%03d\"\n", currobj.tileX  ,currobj.tileY );	//Doors are refered to by their tile location.
 		printf("\"toggle\" \"1\"\n");	//todo: other types of behaviour.
 		printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
 		printf("}");
@@ -581,14 +580,14 @@ void RenderEntityA_DO_TRAP (int game, int x, int y,int z, ObjectItem &currobj, O
 {
 	switch (currobj.quality )
 		{
-		case 2: //A camera	//untested and I've yet to add it to script building.
+		case 2: //A camera	
 			printf("\n// entity %d\n{\n",EntityCount);
 			printf("\"classname\" \"func_cameraview\"\n");
 			printf("\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY);
 			printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
 			printf("\"trigger\" \"1\"\n");
 			//Aim the camera.
-			EntityRotation(currobj.heading);
+			EntityRotation(currobj.heading);//TODO:Points in wrong direction
 			printf("\n}");
 			EntityCount++;
 			break;
@@ -671,7 +670,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, int x, int y,int z, ObjectItem
 }
 
 void RenderEntityTMAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
-{
+{//Flat patch objects used as decals
 	printf("\n// entity %d\n{\n",EntityCount);
 	if( isTrigger(objList[currobj.link])==0)
 		{
@@ -753,6 +752,7 @@ void RenderEntityA_TELEPORT_TRAP (int game, int x, int y,int z, ObjectItem &curr
 
 void RenderEntityA_MOVE_TRIGGER (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
 {
+//A trigger that fires when you step in it.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
@@ -769,7 +769,7 @@ void RenderEntityA_MOVE_TRIGGER (int game, int x, int y,int z, ObjectItem &curro
 	t.DimX =1; t.DimY=1;
 	t.tileType =1;
 	t.Render=1;
-	t.floorHeight = 15;
+	t.floorHeight = 15;	//TODO:Is this right?
 	t.isWater=0;
 	t.hasElevator=0;
 	RenderGenericTile(currobj.tileX,currobj.tileY,t,15,LevelInfo[currobj.tileX][currobj.tileY].floorHeight );

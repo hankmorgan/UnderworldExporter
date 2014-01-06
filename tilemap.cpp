@@ -31,7 +31,7 @@
 	#include "gamegraphics.h"
 #endif
 
-extern int SHOCK_CEILING_HEIGHT;
+extern long SHOCK_CEILING_HEIGHT;
 
 int getTile(int tileData)
 {
@@ -86,6 +86,9 @@ int getWallTexUw2(unsigned char *buffer, long textureOffset, long tileData)
 
 void CleanUp(tile LevelInfo[64][64], int game)
 {
+
+//Reduces tile complexity. Hides hidden solids and merges matching tiles along axis.
+
 	int x; int y;
 	for (x=0;x<64;x++){
 		for (y=0;y<64;y++){
@@ -237,7 +240,7 @@ for (y=0;y<64;y++){
 
 
 int DoTilesMatch(tile &t1, tile &t2)
-{
+{//TODO:Tiles have a lot more properties now.
 	if ((t1.tileType >1) || (t1.hasElevator==1) || (t1.TerrainChange ==1) ||  (t2.hasElevator==1) || (t2.TerrainChange ==1) || (t1.isWater ==1) || (t2.isWater ==1)){	//autofail no none solid/open/special.
 		return 0;
 	}
@@ -251,7 +254,6 @@ int DoTilesMatch(tile &t1, tile &t2)
 //}
 	if ((t1.tileType==0) && (t2.tileType == 0))	//solid
 		{
-		//return 0;	//temp fail on solids
 		return ((t1.West == t2.West) && (t1.South==t2.South) && (t1.East == t2.East) && (t1.North == t2.North));
 		}
 	else
@@ -311,7 +313,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 		address_pointer =0;
 		//read in the textures
 		FILE *fileT = NULL; 
-		filePath = UW0_TEXTUREW_PATH;	//"C:\\Games\\Ultima\\UWDemo\\DATA\\level13.txm";
+		filePath = UW0_TEXTUREW_PATH;	
 		if ((fileT = fopen(filePath, "rb")) == NULL)
 			printf("Could not open specified file\n");
 		else
@@ -442,9 +444,10 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 						LevelInfo[x][y].wallTexture=CAULK;
 						break;
 					}
-				
+				//UW only has a single ceiling texture so this is ignored.
 				LevelInfo[x][y].shockCeilingTexture = LevelInfo[x][y].floorTexture;					
 				
+				//There is only one possible steepness in UW so I set it's properties to match a similar tile in shock.
 				if (LevelInfo[x][y].tileType >=2)
 					{
 					LevelInfo[x][y].shockSteep = 1;
@@ -454,30 +457,24 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 			
 				//LevelInfo[x][y].isDoor = getDoors(FirstTileInt);
 				
-				//Different textures on solid tiles
+				//Different textures on solid tiles faces
 				LevelInfo[x][y].North = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].South = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].East = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
-				//if (LevelInfo[x][y].tileType == 0)
-				//	{
-					//LevelInfo[x][y].Top =-1	;//caulk
-					//LevelInfo[x][y].Bottom = -1	;		
-				//	}
-				//else
-				//	{
-					LevelInfo[x][y].Top = LevelInfo[x][y].floorTexture; 
-					LevelInfo[x][y].Bottom = LevelInfo[x][y].floorTexture; 
-				//	}
+				LevelInfo[x][y].Top = LevelInfo[x][y].floorTexture; 
+				LevelInfo[x][y].Bottom = LevelInfo[x][y].floorTexture; 
 				LevelInfo[x][y].Diagonal = LevelInfo[x][y].wallTexture;
-				
+				//First index of the linked list of objects.
 				LevelInfo[x][y].indexObjectList = getObject(SecondTileInt);
+				
 				LevelInfo[x][y].Render=1;		
 				LevelInfo[x][y].DimX=1;			
 				LevelInfo[x][y].DimY=1;			
 				LevelInfo[x][y].Grouped=0;	
 				LevelInfo[x][y].VisibleFaces = 63;
 				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0));
+				//Force off water to save on compile time during testing.
 				LevelInfo[x][y].isWater=0;
 				LevelInfo[x][y].TerrainChange=0;
 				LevelInfo[x][y].hasElevator=0;
@@ -698,6 +695,7 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer)
   {
   
  //Robbed and changed slightly from the Labyrinth of Worlds implementation project.
+ //This decompresses UW2 blocks.
  
     int	len = getValAtAddress(tmp,address_pointer,32);	//lword(base);
     unsigned char*	buf = new unsigned char[len+100];
@@ -769,7 +767,7 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	tmp_ark = new unsigned char[fileSize];
 	fread(tmp_ark, fileSize, 1,file);
 	fclose(file);  
-	//get the level data from the archive
+	//get the level info data from the archive
 	AddressOfBlockStart = getShockBlockAddress(4004+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
 	sub_ark = new unsigned char[chunkPackedLength];	
 	inf_ark = new unsigned char[chunkUnpackedLength];	
@@ -782,19 +780,25 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	//long sizeH = getValAtAddress(inf_ark,4,32);
 	//long always6_1 = getValAtAddress(inf_ark,8,32);
 	//long always6_2 = getValAtAddress(inf_ark,12,32);
-	long HeightUnits = getValAtAddress(inf_ark,16,32);
-	int cSpace = getValAtAddress(inf_ark,24,32);	
-	SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);	//Hope this works. will play havoc with textures.
+	long HeightUnits = getValAtAddress(inf_ark,16,32);	//Log2 value. The higher the value the lower the level height.
+	if (HeightUnits > 3)	//Any higher we lose data, 
+		{
+		HeightUnits=3;
+		}
+	int cSpace = getValAtAddress(inf_ark,24,32);	//Per docs should return 1 on cyberspace. Does'nt appear to work.
+	SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);	//Shifts the scale of the level.
+	
 	//get the level data from the archive
 	AddressOfBlockStart = getShockBlockAddress(4005+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
 	sub_ark = new unsigned char[64*64*16];	
 	for (long k=0; k< chunkPackedLength; k++)
-		{
+		{//Copy that particular data.
 			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
 		}
 	lev_ark=new unsigned char[64*64*16];
 	AddressOfBlockStart=0;
 	address_pointer=0;	
+	//Decompress the chunk.
 	unpack_data(sub_ark,lev_ark,64*64*16);
 	
 	
@@ -806,8 +810,6 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 		texture_map[k] = getValAtAddress(tmp_ark,AddressOfBlockStart + address_pointer,16);
 		address_pointer =address_pointer+2;		//tmp_ark[AddressOfBlockStart+k];
 	}
-		
-		
 	AddressOfBlockStart=0;
 	address_pointer=0;	
 
@@ -824,14 +826,16 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 		{
 		for (int x=0; x<64;x++)
 			{
-				//long FirstTileInt = getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+0),16);
-				//long SecondTileInt = getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
-				//
+			if ((x==48) && (y==21))
+				{
+				printf("");
+				}
+				//Read in the tile data 
 				LevelInfo[x][y].tileX = x;
 				LevelInfo[x][y].tileY = y;
-				LevelInfo[x][y].tileType = lev_ark[address_pointer];	//getTile(FirstTileInt);
+				LevelInfo[x][y].tileType = lev_ark[address_pointer];	
 				switch (LevelInfo[x][y].tileType)
-					{//Need to swap some tile types around so that they conform to uw standards.
+					{//Need to swap some tile types around so that they conform to uw naming standards.
 					case 4:	{LevelInfo[x][y].tileType = 5; break;}
 					case 5:	{LevelInfo[x][y].tileType = 4; break;}
 					case 7:	{LevelInfo[x][y].tileType = 8; break;}
@@ -842,37 +846,40 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 				LevelInfo[x][y].DimX=1;			
 				LevelInfo[x][y].DimY=1;			
 				LevelInfo[x][y].Grouped=0;	
+				
 				/* word 6 contains
 					0-5	Wall texture (index into texture list)
 					6-10	Ceiling texture
 					11-15	Floor texture
 				*/
 				LevelInfo[x][y].wallTexture =texture_map[getValAtAddress(lev_ark,address_pointer+6,16) & 0x3F]; 
-				
 				LevelInfo[x][y].shockCeilingTexture=texture_map[(getValAtAddress(lev_ark,address_pointer+6,16) >>6) & 0x1F];
 				LevelInfo[x][y].floorTexture=texture_map[(getValAtAddress(lev_ark,address_pointer+6,16) >>11) & 0x1F];
 				
-				//LevelInfo[x][y].wallTexture=0;
+
 				LevelInfo[x][y].North = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].South = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].East = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
-				LevelInfo[x][y].isWater=0;
+				
+				LevelInfo[x][y].isWater=0;	//No swimming in shock.
 				LevelInfo[x][y].floorHeight =((lev_ark[address_pointer+1]) & 0x1F);
-				//((256 >> HeightUnits) * 8 >>3);
-				//if (LevelInfo[x][y].floorHeight !=0)
-				//	{
-				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> HeightUnits)*8 >>3;
-					//}
+				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
+
 				LevelInfo[x][y].ceilingHeight =((lev_ark[address_pointer+2]) & 0x1F) ;
-				LevelInfo[x][y].ceilingHeight = ((LevelInfo[x][y].ceilingHeight <<3) >> HeightUnits)*8 >>3;
+				LevelInfo[x][y].ceilingHeight = ((LevelInfo[x][y].ceilingHeight <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
+				
+				//Need to know heights in various directions for alignments.
+				//Will set these properly after loading levels.
 				LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x][y].ceilingHeight;
 				LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x][y].ceilingHeight;
+				
 				LevelInfo[x][y].shockSteep = (lev_ark[address_pointer+3] & 0x0f);
-				LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep <<3) >> HeightUnits)*8 >>3;
-				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=7))
+				LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
+				
+				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=6))//If a sloped tile has no slope then it's a open tile.
 					{LevelInfo[x][y].tileType =1;}
 				LevelInfo[x][y].indexObjectList = 0;//getValAtAddress(lev_ark,address_pointer+4,16);
 
@@ -890,12 +897,7 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 				LevelInfo[x][y].shockSouthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockEastOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockWestOffset =LevelInfo[x][y].shockTextureOffset;
-								
-				//if (LevelInfo[x][y].UseAdjacentTextures == 1)
-				//	{
-				//	printf("%d\n",getValAtAddress(lev_ark,address_pointer+8,32));
-				//	}
-				//LevelInfo[x][y].UseAdjacentTextures =0;
+
 				address_pointer=address_pointer+16;
 			}
 		}
@@ -1180,7 +1182,7 @@ void unpack_data (unsigned char *pack,    unsigned char *unpack,
 
 
 void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025])
-{
+{//So I know if the tile contains a door.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
@@ -1206,7 +1208,7 @@ for (int x=0; x<64;x++)
 }
 
 void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025])
-{
+{//So I know the tile contains a patch object. No longer needed?
 ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
@@ -1232,7 +1234,7 @@ for (int x=0; x<64;x++)
 }
 
 void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1025])
-{
+{//So I know the tile contains an elevator.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
@@ -1261,7 +1263,7 @@ for (int x=0; x<64;x++)
 }
 
 void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1025])
-{
+{//So I know that the tile terrains changes and I can later render both versions of the tile.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
@@ -1298,7 +1300,7 @@ for (int x=0; x<64;x++)
 }
 
 void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1025])
-{
+{//Justs some useful info to know.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
@@ -1322,7 +1324,9 @@ for (int x=0; x<64;x++)
 
 long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength)
 {
-int blnLevelFound =0;
+//Finds the address of the block based on the directory block no.
+//Justs loops through until it finds a match.
+	int blnLevelFound =0;
 	long DirectoryAddress=getValAtAddress(tmp_ark,124,32);
 	//printf("\nThe directory is at %d\n", DirectoryAddress);
 	
@@ -1361,7 +1365,7 @@ int blnLevelFound =0;
 		
 	if (blnLevelFound == 0)
 		{
-		printf("Level not found"); 
+		//printf("Level not found"); 
 		return -1;
 		}
 	else

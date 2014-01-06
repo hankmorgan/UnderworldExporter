@@ -47,11 +47,15 @@ int iGame;
 void RenderEntity(int game,int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
 
 int levelNo;
-int SHOCK_CEILING_HEIGHT;
+long SHOCK_CEILING_HEIGHT;
 
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1025],int game)
 {
+//Main processing loop for generating the level.
 iGame =game;
+
+//Levels use different ceiling heights.
+//Shock is variable, UW is fixed.
 switch (game)
 	{
 	case SHOCK:
@@ -60,9 +64,11 @@ switch (game)
 		{CEILING_HEIGHT=UW_CEILING_HEIGHT;break;}
 	}
 int x; int y; 
+//
+//File header of the map file.
 	printf ("Version 2\n");
 	printf("// entity 0\n{\"classname\" \"worldspawn\"\n");
-	//sick of starting at origin.
+	//sick of starting at origin in dr.
 	printf("\"editor_drLastCameraPos\" \"2594.79 -1375.88 1780.4\"\n");
 	printf("\"editor_drLastCameraAngle\" \"-28.5 90.9 0\"\n");
 	PrimitiveCount=0;
@@ -75,19 +81,13 @@ int x; int y;
 				{
 				if ( LevelInfo[x][y].TerrainChange == 0)
 					{
+					//A regular tile with no special properites.
 					RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0);
 					}
 				if (LevelInfo[x][y].isDoor == 1)
-					{
+					{//Adds a UW door frame.
 					RenderDoorway(game,x,y,LevelInfo[x][y],objList[LevelInfo[x][y].DoorIndex]);
 					}
-					
-				//if (LevelInfo[x][y].hasPatch == 1)
-				//	{
-				//	objList[LevelInfo[x][y].PatchIndex].tileX= x;
-				//	objList[LevelInfo[x][y].PatchIndex].tileY= y;
-				//	RenderPatch(game,x,y,LevelInfo[x][y].floorHeight ,LevelInfo[x][y].PatchIndex,objList);
-				//	}
 				}
 			}
 		}
@@ -96,7 +96,8 @@ int x; int y;
 			RenderElevatorLeakProtection(game,LevelInfo);
 			RenderFloorAndCeiling(game,LevelInfo);
 			}
-		printf("}");	//End worldspawn			
+		printf("}");	//End worldspawn section of the .map file.
+		//Now start rendering entities.			
 		EntityCount=1;
 		if (game != SHOCK)
 			{
@@ -112,7 +113,7 @@ int x; int y;
 			for (x=0; x<=63;x++)
 				{
 				if (LevelInfo[x][y].isWater == 1)
-									{	//TODO:Take this section out of the loop and just just one entity for all the water?
+					{	//TODO:Take this section out of the loop and just just one entity for all the water?
 						printf ("\n");
 						PrimitiveCount=0;	//resets for each entity.
 						printf("// entity %d\n", EntityCount);
@@ -178,7 +179,7 @@ int x; int y;
 				}
 
 			}
-		//Ambient world
+		//Ambient world light
 			printf("// entity %d\n", EntityCount++);
 			printf("{\n\"classname\" \"atdm:ambient_world\"");
 			printf("\n\"name\" \"ambient_world\"",EntityCount);
@@ -198,6 +199,7 @@ int x; int y;
 
 void RenderDarkModTile(int game, int x, int y, tile &t, short Water,short invert)
 { 
+//Picks the tile to render based on tile type/flags.
 if (t.Render == 1)
 	{printf ("\n");}
 	switch (t.tileType)
@@ -618,6 +620,8 @@ if (t.Render == 1)
 	
 void getWallTextureName(tile t, int face, short waterWall)
 {
+//Spits out the wall textures.
+//Water is a special case here and in SHOCK the texture needs to be offset
 int wallTexture;
 int textureOffset=1;
 int ceilOffset=0;
@@ -670,7 +674,7 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 	
 	switch (wallTexture)
 		{
-		case TRIGGER_MULTI:
+		case TRIGGER_MULTI:	//For trigger entities.
 			{printf( "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/trigmulti\" 0 0 0\n");break;}
 		case NODRAW:	//nodraw
 			{printf( "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/nodraw\" 0 0 0\n");break;}
@@ -680,43 +684,32 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 			{printf( "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");break;}
 		default:
 			{
-				if (wallTexture > 300)
+			if (iGame == SHOCK)
+				{
+				float shock_ceil = SHOCK_CEILING_HEIGHT;
+				float floorOffset = shock_ceil-ceilOffset -8;	//The floor of the tile if it is 1 texture tall.
+				while (floorOffset >=8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
 					{
-					printf( "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");break;
+					floorOffset -=8;
 					}
-				else
-					{
-					if (iGame == SHOCK)
-						{
-						float shock_ceil = SHOCK_CEILING_HEIGHT;
-						float floorOffset = shock_ceil-ceilOffset -8;
-						while (floorOffset >=8)
-							{
-							floorOffset -=8;
-							}
-						//float textureVertAlign = ((SHOCK_CEILING_HEIGHT+1)-(ceilOffset+textureOffset)) * BrushSizeZ;
-						//float textureVertAlign = ((ceilOffset+textureOffset)) / (shock_ceil);
-						//float textureVertAlign =(textureOffset) * textureMasters[wallTexture].align2_3;
-						//fuck it. Just align with it's ceiling
-						//float textureVertAlign = ((ceilOffset)  * (1/shock_ceil));
-						float textureVertAlign = (floorOffset) / 8;
-						printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",
-						textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
-						textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureVertAlign);						
-						}
-					else
-						{
-						printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",
-						textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
-						textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureMasters[wallTexture].align2_3);						
-						}
-					printf("%s", textureMasters[wallTexture].path );
-					printf("\" 0 0 0\n");
-					}
+				float textureVertAlign = (floorOffset) / 8;	
+				printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",
+				textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
+				textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureVertAlign);						
+				}
+			else
+				{//Texture aligned with the ceiling
+				printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",
+				textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
+				textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureMasters[wallTexture].align2_3);						
+				}
+			printf("%s", textureMasters[wallTexture].path );
+			printf("\" 0 0 0\n");
+					
 			}
 		}
 	}
-else
+else	//Water tile
 	{
 		switch (face)
 			{
@@ -729,7 +722,7 @@ else
 			case fEAST:
 				wallTexture=t.East  ; break;				
 			}
-	//printf( "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/nodraw\" 0 0 0\n");
+	
 	switch (wallTexture)
 		{
 		case TRIGGER_MULTI:
@@ -753,8 +746,7 @@ else
 
 void getFloorTextureName(tile t, int face)
 {
-//{printf( " ( ( 0.0078125 0 0 ) ( 0 0.0078125 0 ) ) \"textures/darkmod/stone/natural/gravel_grey_01\" 0 0 0\n");}
-//return; 
+//Spits out the floor texture for a tile based on the face.
 
 int floorTexture;
 
@@ -796,6 +788,8 @@ if (floorTexture <0)
 
 void RenderFloorAndCeiling(int game, tile LevelInfo[64][64])
 {
+//
+//Not really floor and ceiling but just ceiling.
 switch (game)
 	{
 	case SHOCK:
@@ -856,8 +850,8 @@ switch (game)
 
 void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1025])
 {
+//Parses UW's object list and sets up their x,y,z position.
 int x; int y;
-//print out objects.
 for (y=0; y<=63;y++) 
 	{
 	for (x=0; x<=63;x++)
@@ -2017,10 +2011,10 @@ return;
 
 void RenderDoorway(int game,int x,int y, tile &t , ObjectItem currDoor)
 {
+//TODO:Define door widths in config file. 
 int doorWidth=48;
 int doorHeight =96;
 
-//TODO:Define door widths in config file. For the moment width is 50. height is 100
 int offX= (x*BrushSizeX) + ((currDoor.x) * (BrushSizeX/7));//from obj position code
 int offY= (y*BrushSizeY) + ((currDoor.y) * (BrushSizeY/7));
 
@@ -2035,7 +2029,7 @@ switch (currDoor.heading)
 			{offY =(y*BrushSizeY)+((BrushSizeY-doorWidth)/2)+doorWidth;}
 		else
 			{offY = (y*BrushSizeY)+((BrushSizeY-doorWidth)/2);}			
-		//left side
+			//left side
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
@@ -2318,6 +2312,8 @@ switch (currDoor.heading)
 }
 void RenderPatch(int game, int x, int y, int z,long PatchIndex, ObjectItem objList[1025] )
 {
+//
+//Flat decal object, think the Abyss doors.
 ObjectItem currobj = objList[PatchIndex];
 
 float patchX;float patchY;float patchZ;float patchOffsetX;float patchOffsetY;
@@ -2341,7 +2337,7 @@ float zposRatio = relativeZpos/(nextFloorHeight-floorHeight);	//relative adjustm
 float offZ = LevelInfo[x][y].floorHeight * BrushSizeZ + (zposRatio*BrushSizeZ);
 float tex1 = -1; float tex2 =-1;	//target values
 	switch (currobj.heading)
-		{
+		{//Headings are horribly broken.
 		default:
 		case SOUTH:	//Southfacing
 			{patchX=-BrushSizeX;patchY=0;patchZ=11*BrushSizeZ;patchOffsetX=0; patchOffsetY=-0.1;
@@ -2381,7 +2377,7 @@ float tex1 = -1; float tex2 =-1;	//target values
 				
 void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 	{
-	//First render the enclosing brush under the map to stop it leaking.
+	//Just makes sure the elevator entity does not cause a map leak.
 	for (int y=0; y<=63;y++) 
 		{
 		for (int x=0; x<=63;x++)
@@ -2419,6 +2415,7 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 
 void RenderElevator(int game, tile LevelInfo[64][64], ObjectItem objList[1025])		
 {
+//Unneeded?
 	for (int y=0; y<=63;y++) 
 		{
 		for (int x=0; x<=63;x++)
@@ -2445,6 +2442,8 @@ void RenderElevator(int game, tile LevelInfo[64][64], ObjectItem objList[1025])
 
 void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor)
 {
+//
+//Just for special temporary tiles
 	printf("// primitive %d\n",PrimitiveCount++);
 	printf("{\nbrushDef3\n{\n");
 	//East face
@@ -2509,26 +2508,26 @@ void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1025]
 		FILE *f = NULL;
 		char line[255];
 		const char *filePathE = ENTRANCES_CONFIG_FILE;
-f=fopen(filePathE,"r");
-if (f!=NULL)
-	{
-	fgets(line,254,f);//skip the first line
-	while (fgets(line,255,f))
-		{
-		int level=0;
-		int tileX=0;
-		int tileY=0;
-	
-		sscanf(line, "%d %d %d",&level,&tileX,&tileY);
-		if (level==levelNo)
-			{	//on this level
-				printf("// entity %d\n", EntityCount++);
-				printf("{\n\"classname\" \"func_teleporter\"");
-				printf("\"name\" \"%s_%03d_%03d\"\n","entrance" ,tileX,tileY);		
-				printf("\n\"origin\" \"%d %d %d\"", tileX * BrushSizeX+(BrushSizeX/2),tileY*BrushSizeY+(BrushSizeY/2),(LevelInfo[tileX][tileY].floorHeight)* BrushSizeZ + 30);		
-				printf("}\n");	
+		f=fopen(filePathE,"r");
+		if (f!=NULL)
+			{
+			fgets(line,254,f);//skip the first line
+			while (fgets(line,255,f))
+				{
+				int level=0;
+				int tileX=0;
+				int tileY=0;
+			
+				sscanf(line, "%d %d %d",&level,&tileX,&tileY);
+				if (level==levelNo)
+					{	//on this level
+						printf("// entity %d\n", EntityCount++);
+						printf("{\n\"classname\" \"func_teleporter\"");
+						printf("\"name\" \"%s_%03d_%03d\"\n","entrance" ,tileX,tileY);		
+						printf("\n\"origin\" \"%d %d %d\"", tileX * BrushSizeX+(BrushSizeX/2),tileY*BrushSizeY+(BrushSizeY/2),(LevelInfo[tileX][tileY].floorHeight)* BrushSizeZ + 30);		
+						printf("}\n");	
+					}
+				}
+				fclose(f);
 			}
-		}
-		fclose(f);
 	}
-}
