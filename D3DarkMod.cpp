@@ -49,6 +49,7 @@ void RenderEntity(int game,int x, int y,int z, ObjectItem &currobj, ObjectItem o
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
 
+
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1025],int game)
 {
 //Main processing loop for generating the level.
@@ -99,7 +100,7 @@ int x; int y;
 		printf("}");	//End worldspawn section of the .map file.
 		//Now start rendering entities.			
 		EntityCount=1;
-		if (game != SHOCK)
+		if (game == UW1)
 			{
 			RenderObjectList(game,LevelInfo,objList);
 			RenderElevator(game,LevelInfo,objList);
@@ -671,7 +672,7 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 				break;
 	//		}
 		}
-	
+	if (wallTexture >512) {wallTexture=CAULK;}
 	switch (wallTexture)
 		{
 		case TRIGGER_MULTI:	//For trigger entities.
@@ -722,7 +723,7 @@ else	//Water tile
 			case fEAST:
 				wallTexture=t.East  ; break;				
 			}
-	
+	if (wallTexture >512) {wallTexture=CAULK;}
 	switch (wallTexture)
 		{
 		case TRIGGER_MULTI:
@@ -776,9 +777,16 @@ if (floorTexture <0)
 	}
 	else
 		{
-			printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,textureMasters[floorTexture].floor_align2_1,textureMasters[floorTexture].floor_align2_2,textureMasters[floorTexture].floor_align2_3);	
-			printf("%s", textureMasters[floorTexture].path );
-			printf("\" 0 0 0\n");
+			if (floorTexture >=513)	
+				{
+				printf( "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");
+				}
+			else
+				{
+				printf( "( ( %f %f %f ) ( %f %f %f ) ) \"",textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,textureMasters[floorTexture].floor_align2_1,textureMasters[floorTexture].floor_align2_2,textureMasters[floorTexture].floor_align2_3);	
+				printf("%s", textureMasters[floorTexture].path );
+				printf("\" 0 0 0\n");
+				}
 		}
 
 	return ;
@@ -1153,7 +1161,8 @@ float normalDist =0;
 			//Bottom face
 			//printf ("( 0 0 -1 %d )", +t.ceilingHeight * BrushSizeZ);
 			printf ("( 0 0 -1 %d ) ", +(CEILING_HEIGHT -(t.ceilingHeight))* BrushSizeZ);			
-			getWallTextureName(t,fCEIL,t.isWater );
+			//getWallTextureName(t,fCEIL,t.isWater );
+			getFloorTextureName(t,fCEIL);
 			//Angled face. x & y change
 			normalDist = ( cos(atan((float)BrushY/BrushX)) ) * (y+x+1) * BrushSizeY;
 			printf ("( %f %f 0 %f )", cos(angle),sin(angle),-normalDist);
@@ -1236,7 +1245,8 @@ float normalDist =0;
 			//Bottom face
 			//printf ("( 0 0 -1 %d )", + t.ceilingHeight * BrushSizeZ);
 			printf ("( 0 0 -1 %d ) ", +(CEILING_HEIGHT -(t.ceilingHeight))* BrushSizeZ);			
-			getWallTextureName(t,fCEIL,t.isWater );
+			//getWallTextureName(t,fCEIL,t.isWater );
+			getFloorTextureName(t,fCEIL);
 			//Angled face. x & y change
 			normalDist = ( cos(atan((float)BrushY/BrushX)) ) * (y+x+1) * BrushSizeY;
 			printf ("( -%f -%f 0 %f )", cos(angle),sin(angle),+normalDist);	
@@ -1321,7 +1331,8 @@ float normalDist =0;
 			//Bottom face +absdist
 			//printf ("( 0 0 -1 %d )", +t.ceilingHeight * BrushSizeZ);
 			printf ("( 0 0 -1 %d ) ", +(CEILING_HEIGHT -(t.ceilingHeight))* BrushSizeZ);			
-			getWallTextureName(t,fCEIL,t.isWater );
+			//getWallTextureName(t,fCEIL,t.isWater );
+			getFloorTextureName(t,fCEIL);
 			//Angled face. x & y change
 			normalDist = ( cos(atan((float)BrushY/BrushX)) ) * (x-y) * BrushSizeY;
 			printf ("( %f -%f 0 %f )", cos(angle),sin(angle),-normalDist);

@@ -63,6 +63,7 @@ void extractTextureBitmap(int indexNo)
 	if (indexNo==-1)
 	 {
 	 NoOfTextures=textureFile[3]<<8 | textureFile[2];
+	 
 	 indexNo=0;
 	 }
 	else
@@ -76,7 +77,8 @@ void extractTextureBitmap(int indexNo)
 	{
 	//long textureOffset = (textureFile[(i*4)+7]<<16 | textureFile[(i*4)+6]<<32 | textureFile[(i*4)+5]<<8 | textureFile[(i*4)+4]);
 	long textureOffset = getValAtAddress(textureFile,(i*4)+4,32);
-	writeBMP(textureFile,textureOffset,32,32,i+211,pal);
+	//writeBMP(textureFile,textureOffset,32,32,i+211,pal);
+	writeBMP(textureFile,textureOffset,64,64,i,pal);
 	}   	
 return;	         
 }

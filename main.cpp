@@ -73,7 +73,7 @@ objectMaster *objMasterList;
 BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;	
 
 levelNo=1;
-int NoOfLevels=9;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
+//int NoOfLevels=80;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
 	LoadConfig(UW1);
 //Uncomment this this loop to see everything but note the output will not work in Radiant. 
@@ -83,9 +83,9 @@ int NoOfLevels=9;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0
 //The two modes are ASCII_MODE and D3_MODE.
 
 	//exportMaps(UWDEMO,D3_MODE,0); //export level 0  from Underworld demo.
-	//exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
+	exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
 	//exportMaps(UW2,D3_MODE,levelNo);	//export levelno from Underworld II
-	exportMaps(SHOCK, D3_MODE,levelNo);	//Export Level No from Shock.
+	//exportMaps(SHOCK, D3_MODE,levelNo);	//Export Level No from Shock.
 //	}
 	
 
@@ -155,26 +155,26 @@ if (f!=NULL)
 		&water, &lava);
 		
 		
-		textureMasters[i].textureNo = texNo;
-		strcpy(textureMasters[i].desc, texDesc);
-		strcpy(textureMasters[i].path , texPath);
-		textureMasters[i].align1_1 = align1_1;
-		textureMasters[i].align1_2 = align1_2;
-		textureMasters[i].align1_3 = align1_3;
-		textureMasters[i].align2_1 = align2_1;
-		textureMasters[i].align2_2 = align2_2;
-		textureMasters[i].align2_3 = align2_3;
+		textureMasters[texNo].textureNo = texNo;
+		strcpy(textureMasters[texNo].desc, texDesc);
+		strcpy(textureMasters[texNo].path , texPath);
+		textureMasters[texNo].align1_1 = align1_1;
+		textureMasters[texNo].align1_2 = align1_2;
+		textureMasters[texNo].align1_3 = align1_3;
+		textureMasters[texNo].align2_1 = align2_1;
+		textureMasters[texNo].align2_2 = align2_2;
+		textureMasters[texNo].align2_3 = align2_3;
 
-		textureMasters[i].floor_align1_1 = floor_align1_1;
-		textureMasters[i].floor_align1_2 = floor_align1_2;
-		textureMasters[i].floor_align1_3 = floor_align1_3;
-		textureMasters[i].floor_align2_1 = floor_align2_1;
-		textureMasters[i].floor_align2_2 = floor_align2_2;
-		textureMasters[i].floor_align2_3 = floor_align2_3;		
+		textureMasters[texNo].floor_align1_1 = floor_align1_1;
+		textureMasters[texNo].floor_align1_2 = floor_align1_2;
+		textureMasters[texNo].floor_align1_3 = floor_align1_3;
+		textureMasters[texNo].floor_align2_1 = floor_align2_1;
+		textureMasters[texNo].floor_align2_2 = floor_align2_2;
+		textureMasters[texNo].floor_align2_3 = floor_align2_3;		
 		
 		
-		textureMasters[i].water = water;
-		textureMasters[i].lava = lava;
+		textureMasters[texNo].water = water;
+		textureMasters[texNo].lava = lava;
 		i++;
 		}
 	fclose(f);
@@ -255,9 +255,9 @@ void exportMaps(int game,int mode,int LevelNo)
 			if (BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo) == -1) {return;};
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
 			setObjectTileXY(LevelInfo,objList);
-			setDoorBits(LevelInfo,objList);
-			setPatchBits(LevelInfo,objList);
-			setElevatorBits(LevelInfo,objList);
+			//setDoorBits(LevelInfo,objList);
+			//setPatchBits(LevelInfo,objList);
+			//setElevatorBits(LevelInfo,objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;			
 			}

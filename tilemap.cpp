@@ -32,6 +32,7 @@
 #endif
 
 extern long SHOCK_CEILING_HEIGHT;
+//extern long UW_CEILING_HEIGHT;
 
 int getTile(int tileData)
 {
@@ -290,8 +291,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 	int x;	
 	int y;
 	int i;
-
 	
+	//UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
+	//UW_CEILING_HEIGHT =19;	//Unfortunately UW has stairs which get too high to scale in idtech
 	switch (game)
 	{
 	case UWDEMO:	//UW Demo
@@ -390,7 +392,16 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 		//read in the textures
 		//address_pointer=(LevelNo * 4) + 6 + (80*4);
 		//tex_ark = tmp_ark;	//unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
-		textureAddress=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);		
+		textureAddress=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
+		
+		compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
+		isCompressed =(compressionFlag>>1) & 0x01;
+
+		if (isCompressed == 1)
+			{
+			tex_ark = unpack(tmp_ark,textureAddress);
+			textureAddress=-1;
+			}
 		break;
 		}		
 		
@@ -404,9 +415,19 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 			case UW1:
 				{texture_map[i] = getValAtAddress(lev_ark,textureAddress+(i*2),16);break;}
 			case UW2:
-				{texture_map[i] =getValAtAddress(tmp_ark,textureAddress+(i*2),16);break;}
+				{
+				if (textureAddress == -1)//Texture block was decompressed
+					{
+					texture_map[i] =getValAtAddress(tex_ark,(i*2),16);break;//tmp //textureAddress+
+					}
+				else
+					{
+					texture_map[i] =getValAtAddress(tmp_ark,textureAddress+(i*2),16);break;//tmp //textureAddress+
+					}
+				}
 			}
 		}
+	 
 	for (y=0; y<64;y++)
 		{
 		for (x=0; x<64;x++)
@@ -420,7 +441,10 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 				address_pointer=address_pointer+4;
 
 				LevelInfo[x][y].tileType = getTile(FirstTileInt) ;
+
 				LevelInfo[x][y].floorHeight = getHeight(FirstTileInt) ;
+				//LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
+
 				LevelInfo[x][y].ceilingHeight = UW_CEILING_HEIGHT;	//constant for uw				
 				
 				switch (game)
@@ -436,7 +460,11 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 					case UW2:	//uw2
 						{
 						LevelInfo[x][y].floorTexture = getFloorTexUw2(tmp_ark, textureAddress, FirstTileInt);
-						LevelInfo[x][y].wallTexture = getWallTexUw2(tmp_ark, textureAddress, SecondTileInt);
+						//int val = (FirstTileInt >>10) & 0x0F;
+						LevelInfo[x][y].floorTexture = texture_map[(FirstTileInt >>10) & 0x0F];
+						LevelInfo[x][y].wallTexture = getWallTexUw2(tmp_ark, textureAddress, SecondTileInt);	
+						//(tileData & 0x3F
+						LevelInfo[x][y].wallTexture= texture_map[SecondTileInt & 0x3F];
 						break;
 						}						
 					default:
@@ -444,6 +472,14 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 						LevelInfo[x][y].wallTexture=CAULK;
 						break;
 					}
+				if (LevelInfo[x][y].floorTexture<0)
+					{
+					LevelInfo[x][y].floorTexture=0;
+					}
+				if (LevelInfo[x][y].wallTexture>=256)
+					{
+					LevelInfo[x][y].wallTexture =0;
+					}					
 				//UW only has a single ceiling texture so this is ignored.
 				LevelInfo[x][y].shockCeilingTexture = LevelInfo[x][y].floorTexture;					
 				
@@ -451,6 +487,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 				if (LevelInfo[x][y].tileType >=2)
 					{
 					LevelInfo[x][y].shockSteep = 1;
+					//LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep  <<3) >> 2)*8 >>3;	//Shift copied from shock
 					LevelInfo[x][y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;
 					}
 
@@ -473,7 +510,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 				LevelInfo[x][y].DimY=1;			
 				LevelInfo[x][y].Grouped=0;	
 				LevelInfo[x][y].VisibleFaces = 63;
-				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0));
+				//LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0));
 				//Force off water to save on compile time during testing.
 				LevelInfo[x][y].isWater=0;
 				LevelInfo[x][y].TerrainChange=0;
@@ -826,10 +863,6 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 		{
 		for (int x=0; x<64;x++)
 			{
-			if ((x==48) && (y==21))
-				{
-				printf("");
-				}
 				//Read in the tile data 
 				LevelInfo[x][y].tileX = x;
 				LevelInfo[x][y].tileY = y;
