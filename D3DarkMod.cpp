@@ -100,11 +100,22 @@ int x; int y;
 		printf("}");	//End worldspawn section of the .map file.
 		//Now start rendering entities.			
 		EntityCount=1;
-		if (game == UW1)
+		switch (game)
 			{
-			RenderObjectList(game,LevelInfo,objList);
-			RenderElevator(game,LevelInfo,objList);
-			RenderLevelExits(game,LevelInfo,objList);
+			case UWDEMO:
+				RenderObjectList(game,LevelInfo,objList); break;
+			case UW1:
+				RenderObjectList(game,LevelInfo,objList);
+				RenderElevator(game,LevelInfo,objList);
+				RenderLevelExits(game,LevelInfo,objList);
+				break;
+			case UW2:
+				RenderObjectList(game,LevelInfo,objList);
+			case SHOCK:
+				break;
+			}
+		if (game == UW1 || game == UW2)
+			{
 			}
 		//Now render thewater
 

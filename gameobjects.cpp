@@ -256,6 +256,10 @@ long nextObject(ObjectItem &currObj)
 	return currObj.next; 
 }
 
+long nextObjectShock(shockObjectItem &currObj)
+{//Index of next object in the linked list.
+	return currObj.next; 
+}
 void createScriptCall(ObjectItem &currobj,int x,int y,int z)
 {//Entity for running a script when triggered.
 	printf("\n// entity %d\n{\n",EntityCount);
@@ -808,3 +812,24 @@ void EntityRotation(int heading)
 			{printf("\n\"rotation\" \"1 0 0 0 1 0 0 0 1\"\n");break;}						
 	}
 }
+
+int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex)
+	{//Find the specified object in the array of shock objectmasters
+	int i;
+		for (i=0;i<=475;i++)
+			{
+			if (
+				(shockObjectMasters[i].objClass == objClass)
+				&&
+				(shockObjectMasters[i].objSubClass == objSubClass)
+				&&
+				(shockObjectMasters[i].objSubClassIndex == objSubClassIndex)
+				)
+				{
+					return i;
+				}
+			}
+	
+	return -1;	//not found
+	
+	}

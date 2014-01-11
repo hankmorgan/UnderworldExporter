@@ -33,7 +33,7 @@
 
 extern long SHOCK_CEILING_HEIGHT;
 //extern long UW_CEILING_HEIGHT;
-
+int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
 int getTile(int tileData)
 {
 	//gets tile data at bits 0-3 of the tile data
@@ -728,6 +728,196 @@ switch (game)
 		}
 }
 
+
+void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600], long texture_map[256],char *filePath, int game, int LevelNo)
+{
+
+int InUseFlag;
+int ObjectClass;
+int ObjectSubClass;
+int ObjectSubClassIndex;
+int IndexIntoCrossRef;
+int PrevLink;
+int NextLink;
+int XCoord;
+int YCoord;
+int ZCoord;
+int Angle1;
+int Angle2;
+int Angle3;
+int AIIndex;
+int ObjectType;
+int HitPoints;
+int State;
+
+	FILE *file = NULL;      // File pointer
+	//unsigned char *lev_ark; 
+	unsigned char *tmp_ark; 
+	unsigned char *sub_ark; 
+	//unsigned char *tex_ark;
+	unsigned char *inf_ark;
+	unsigned char *mst_ark;
+	long filepos;
+	long AddressOfBlockStart=0;
+	long address_pointer=4;
+	char blnLevelFound=0;
+
+	int chunkId;
+	long chunkUnpackedLength;
+	long chunkType;//compression type
+	long chunkPackedLength;
+	long chunkContentType;
+	int MasterAddressLookup[1024];
+	
+//read in archive.dat
+	if ((file = fopen(filePath, "rb")) == NULL)
+		printf("Could not open specified file\n");
+	else
+		printf ("");
+	long fileSize = getFileSize(file);
+	filepos = ftell(file);
+	tmp_ark = new unsigned char[fileSize];
+	fread(tmp_ark, fileSize, 1,file);
+	fclose(file);  
+	//get the master object list from the archive
+	AddressOfBlockStart = getShockBlockAddress(LevelNo*100+4008,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+
+	
+	sub_ark = new unsigned char[chunkPackedLength];	
+	mst_ark = new unsigned char[chunkUnpackedLength];	
+	for (long k=0; k< chunkPackedLength; k++)
+		{
+			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		}
+	unpack_data(sub_ark,mst_ark,chunkUnpackedLength);
+
+	int i=0;
+	address_pointer=0;
+	while (address_pointer <= chunkUnpackedLength)
+		{//Get the addresses of the master list data of the mst_ark
+		MasterAddressLookup[i++] = address_pointer;
+		address_pointer+=27;
+		}
+
+
+//Read in the xref table and then read in it's stuff from the master table. I'll then have to go into the class blocks.
+	AddressOfBlockStart = getShockBlockAddress(LevelNo*100+4009,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+	sub_ark = new unsigned char[chunkPackedLength];	
+	inf_ark = new unsigned char[chunkUnpackedLength];	
+	for (long k=0; k< chunkPackedLength; k++)
+		{
+			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		}
+	unpack_data(sub_ark,inf_ark,chunkUnpackedLength);
+	i=0;
+	long mstaddress_pointer;
+	address_pointer=0;
+	while (address_pointer < chunkUnpackedLength)
+		{
+//		printf("\nXRef : %d \n",i);
+//		printf("TileX = %d\n",getValAtAddress(inf_ark,address_pointer+0,16));
+//		printf("TileY = %d\n",getValAtAddress(inf_ark,address_pointer+2,16));
+		int MasterIndex= getValAtAddress(inf_ark,address_pointer+4,16);
+//		printf("Master Index = %d\n",MasterIndex);
+//		printf("Next obj = %d\n",getValAtAddress(inf_ark,address_pointer+6,16));
+//		printf("Next tile = %d\n",getValAtAddress(inf_ark,address_pointer+8,16));
+		
+		shockObjList[i].index = i;
+		shockObjList[i].next = getValAtAddress(inf_ark,address_pointer+6,16);
+		shockObjList[i].tileX= getValAtAddress(inf_ark,address_pointer+0,16);
+		shockObjList[i].tileY =getValAtAddress(inf_ark,address_pointer+2,16);
+		
+		//Now go visit the master list to get more info.
+		
+		mstaddress_pointer = MasterAddressLookup[MasterIndex];
+		
+//			printf("Object : %d \n",i);
+			InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
+//			printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
+			shockObjList[i].InUseFlag = InUseFlag;
+			ObjectClass =getValAtAddress(mst_ark,mstaddress_pointer+1,8);
+//			printf("ObjectClass = %d\n",ObjectClass);
+			shockObjList[i].ObjectClass = ObjectClass;
+			ObjectSubClass=getValAtAddress(mst_ark,mstaddress_pointer+2,8);
+//			printf("ObjectSubClass = %d\n",ObjectSubClass);
+			shockObjList[i].ObjectSubClass = ObjectSubClass;
+
+			//Subclass per sspecs is  a link to the sub table. no the class it self. For that we need the object type.
+			ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
+//			printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);//cross ref this with the class table.
+			//if (ObjectClass==4)
+			//	{
+			//	lookUpSubClass(tmp_ark,LevelNo*100+4014, ObjectSubClassIndex);
+			//	}
+			shockObjList[i].ObjectSubClassIndex = ObjectSubClassIndex;
+//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
+//			printf("Index back to cross = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+			int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);
+			shockObjList[i].LookUpIndex= LookupIndex;
+			shockObjList[i].item_id =LookupIndex;
+//			if (LookupIndex !=-1)
+//				{
+//				printf("It is a %s\n", shockObjectMasters[LookupIndex].desc );
+//				}
+//			else
+//				{
+//				printf("Description not found!\n");
+//				}
+			//printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+//			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
+//			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
+//			printf("XCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+11,8));
+//			printf("XCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8));
+//			printf("YCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
+//			printf("YCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8));
+//			printf("ZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
+//			printf("Angle1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
+//			printf("Angle2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
+//			printf("Angle3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+18,8));
+//			printf("AIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
+//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
+//			printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
+//			printf("State = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
+//			printf("unk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
+//			printf("unk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
+//			printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));
+		
+		
+		
+		address_pointer+=10;
+		i++;
+		}
+
+}
+
+
+void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index)
+{
+//
+	int chunkId;
+	long chunkUnpackedLength;
+	long chunkType;//compression type
+	long chunkPackedLength;
+	long chunkContentType;
+	
+long AddressOfBlockStart = getShockBlockAddress(BlockNo,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+int k= 0;
+int add_ptr=0;
+while (k<=chunkUnpackedLength)
+	{
+	if (k==index)
+		{
+		printf("\n%d",k);
+		printf("Index back=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+0,16));
+		printf("prev=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+2,16));
+		printf("next=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+4,16));
+		}
+add_ptr+=6;
+	k++;
+	}
+return;
+}
+
 unsigned char* unpack(unsigned char *tmp, int address_pointer)
   {
   
@@ -773,7 +963,7 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer)
     return buf;
 }
 
-int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long texture_map[272], char *filePath, int game, int LevelNo)
+int BuildTileMapShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600],long texture_map[272], char *filePath, int game, int LevelNo)
 {
 	FILE *file = NULL;      // File pointer
 	unsigned char *lev_ark; 
@@ -788,9 +978,10 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 
 	int chunkId;
 	long chunkUnpackedLength;
-	long chunkType;
+	long chunkType;//compression type
 	long chunkPackedLength;
 	long chunkContentType;
+	
 
 	
 	
@@ -805,7 +996,7 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	fread(tmp_ark, fileSize, 1,file);
 	fclose(file);  
 	//get the level info data from the archive
-	AddressOfBlockStart = getShockBlockAddress(4004+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
+	AddressOfBlockStart = getShockBlockAddress(4004+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
 	sub_ark = new unsigned char[chunkPackedLength];	
 	inf_ark = new unsigned char[chunkUnpackedLength];	
 	for (long k=0; k< chunkPackedLength; k++)
@@ -826,7 +1017,7 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);	//Shifts the scale of the level.
 	
 	//get the level data from the archive
-	AddressOfBlockStart = getShockBlockAddress(4005+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
+	AddressOfBlockStart = getShockBlockAddress(4005+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
 	sub_ark = new unsigned char[64*64*16];	
 	for (long k=0; k< chunkPackedLength; k++)
 		{//Copy that particular data.
@@ -840,7 +1031,7 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 	
 	
 	//get the texture data from the archive
-	AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength);
+	AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
 	tex_ark = new unsigned char[chunkUnpackedLength];	
 	for (long k=0; k< chunkUnpackedLength; k++)
 	{
@@ -914,7 +1105,11 @@ int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], long text
 				
 				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=6))//If a sloped tile has no slope then it's a open tile.
 					{LevelInfo[x][y].tileType =1;}
-				LevelInfo[x][y].indexObjectList = 0;//getValAtAddress(lev_ark,address_pointer+4,16);
+				LevelInfo[x][y].indexObjectList = getValAtAddress(lev_ark,address_pointer+4,16);
+				if(LevelInfo[x][y].indexObjectList!=0)
+					{
+					printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
+					}
 
 /*
 	xxxxx0xx	Floor & ceiling, same direction
@@ -1355,7 +1550,7 @@ for (int x=0; x<64;x++)
 	}	
 }
 
-long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength)
+long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength, long *chunkType)
 {
 //Finds the address of the block based on the directory block no.
 //Justs loops through until it finds a match.
@@ -1373,13 +1568,13 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPack
 		{
 		long chunkId = getValAtAddress(tmp_ark,address_pointer,16);
 		*chunkUnpackedLength =getValAtAddress(tmp_ark,address_pointer+2,24);
-		long chunkType = getValAtAddress(tmp_ark,address_pointer+5,8);
+		*chunkType = getValAtAddress(tmp_ark,address_pointer+5,8);	//Compression.
 		*chunkPackedLength = getValAtAddress(tmp_ark,address_pointer+6,24);
 		long chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
 		//printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",k,chunkId, chunkUnpackedLength, chunkType,chunkPackedLength,chunkContentType);
 		//printf("Absolute address is %d\n",AddressOfBlockStart);
 		
-		//target chunk id is 4005 + level no * 100 
+		//target chunk id is 4005 + level no * 100 for levels
 		if (chunkId== BlockNo)		//4005+ LevelNo*100
 			{
 			blnLevelFound=1;

@@ -58,6 +58,11 @@ if (objectMasters[currObj.item_id].isSet ==1)
 	return currObj.next; 
 }
 
+long printShockObject(shockObjectItem &currObj)
+{
+printf("%s-",shockObjectMasters[currObj.item_id].desc);
+return currObj.next;
+}
 
 void RenderAsciiTile(tile &t)	//,int x, int y, int BlockStart,unsigned char *buffer
 {
@@ -223,7 +228,7 @@ default:
 }
 }
 
-void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1025],int LevelNo,int mapOnly)
+void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1025], shockObjectItem shockObjList[1600],int LevelNo,int mapOnly)
 {
 int x;
 int y;
@@ -322,6 +327,30 @@ if (game == SHOCK)
 		for (x=0; x<64;x++)
 			{
 				printf("%02d|",LevelInfo[x][y].shockSteep) ;
+			}
+		}
+	
+		printf("\nPrint out object lists for level :%d\n",LevelNo+1);
+	
+	for (y=63; y>=0;y--)
+		{
+		printf ("\n");
+		for (x=0; x<64;x++)
+			{
+			if(LevelInfo[x][y].indexObjectList !=0)
+				{
+				//printf("\nAt tile x=%d, y=%d :",x,y);
+				long nextShockObj = printShockObject(shockObjList[LevelInfo[x][y].indexObjectList]);
+				while (nextShockObj !=0)
+					{
+					nextShockObj=printShockObject(shockObjList[nextShockObj]);
+					}
+				}
+			else
+				{
+				printf("[]");
+				}
+			printf("*");
 			}
 		}
 		

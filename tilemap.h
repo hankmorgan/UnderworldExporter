@@ -120,6 +120,8 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer);
 void unpack_data (unsigned char *pack,    unsigned char *unpack,  unsigned long unpacksize);
 //void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
 //void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength);
+long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength, long *chunkType);
 int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction);
+void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index);
+
 extern tile LevelInfo[64][64];

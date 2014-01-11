@@ -105,6 +105,31 @@ typedef struct ObjectItem
 } ObjectItem;
 
 
+typedef struct shockObjectItem
+{
+int index;
+int LookUpIndex;
+int item_id;
+int InUseFlag;
+int ObjectClass;
+int ObjectSubClass;
+int ObjectSubClassIndex;
+int XCoord;
+int YCoord;
+int ZCoord;
+int Angle1;
+int Angle2;
+int Angle3;
+int AIIndex;
+int ObjectType;
+int HitPoints;
+int State;
+int next;	//Next object in this tile
+int tileX;
+int tileY;
+int extends;	//Flags that this object crosses tiles. I think I will need to ignore it.
+//Need to add extended info for object types
+}shockObjectItem;
 
 //Object types
 //guessing at what I'll need at the moment
@@ -184,6 +209,15 @@ short isSet;
 } objectMaster;
 
 
+typedef struct shockObjectMaster
+{
+int index;
+int objClass;
+int objSubClass;
+int objSubClassIndex;
+char desc[80];
+}shockObjectMaster;
+
 
 
 void EntityRotation(int heading);
@@ -192,8 +226,10 @@ int isTrigger(ObjectItem currobj);
 int isButton(ObjectItem currobj);
 int isTrap(ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
+long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);
 void createScriptCall(ObjectItem &currobj,int x,int y,int z);
 void EntityRotation(int heading);
 
 extern objectMaster *objectMasters;
+extern shockObjectMaster *shockObjectMasters;
