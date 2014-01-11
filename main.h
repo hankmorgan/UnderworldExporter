@@ -41,8 +41,8 @@
 #define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
 #define GRAPHICS_FILE "C:\\Games\\Ultima\\UW2\\DATA\\T64.TR"
 #define GRAPHICS_PAL_FILE "C:\\Games\\Ultima\\UW2\\DATA\\pals.dat"
-#define TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_texture_config.txt"
-#define OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_object_config.txt"
+#define TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_retro_config.txt"
+#define OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_object_config.txt"
 #define STRINGS_FILE "C:\\Games\\Ultima\\UW2\\data\\strings.pak"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
 #define ENTRANCES_CONFIG_FILE  "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_entrances.txt"
@@ -72,7 +72,7 @@ extern int CEILING_HEIGHT;
 #define SHOCK 3
 
 //ceiling constants
-#define UW_CEILING_HEIGHT 19
+//#xdefine UW_CEILING_HEIGHT 19
 //This is now set in buildtilemapshock in order to support variable height levels.
 //#dxefine SHOCK_CEILING_HEIGHT 32	 
 

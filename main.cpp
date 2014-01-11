@@ -75,10 +75,10 @@ int main()
 objectMaster *objMasterList;
 BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;	
 
-levelNo=1;
+levelNo=0;
 //int NoOfLevels=80;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
-	LoadConfig(SHOCK);
+	LoadConfig(UW1);
 	
 //Uncomment this this loop to see everything but note the output will not work in Radiant. 
 //for (levelNo=0; levelNo<NoOfLevels; levelNo++)
@@ -87,10 +87,10 @@ levelNo=1;
 //The two modes are ASCII_MODE and D3_MODE.
 
 	//exportMaps(UWDEMO,D3_MODE,0); //export level 0  from Underworld demo.
-	//exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
+	exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
 	//exportMaps(UW2,D3_MODE,levelNo);	//export levelno from Underworld II
 	
-	exportMaps(SHOCK, ASCII_MODE,levelNo);	//Export Level No from Shock.
+	//exportMaps(SHOCK, ASCII_MODE,levelNo);	//Export Level No from Shock.
 
 //	}
 	
@@ -319,7 +319,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			}		
 		case D3_MODE:		//D3/Dark Mod
 			{
-			//RenderDarkModLevel(LevelInfo,objList,game);		
+			RenderDarkModLevel(LevelInfo,objList,game);		
 			break;
 			}
 		}

@@ -73,7 +73,7 @@ void extractTextureBitmap(int indexNo)
 	//NoOfTextures=0;
 	//printf("Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
 
-	for (i=indexNo; i<NoOfTextures;i++)
+	for (i=indexNo; i<=NoOfTextures;i++)
 	{
 	//long textureOffset = (textureFile[(i*4)+7]<<16 | textureFile[(i*4)+6]<<32 | textureFile[(i*4)+5]<<8 | textureFile[(i*4)+4]);
 	long textureOffset = getValAtAddress(textureFile,(i*4)+4,32);
@@ -97,9 +97,9 @@ void getPalette(palette *pal, int paletteNo)
 	fclose (filePal);
 	i = 0;
 	for (j = paletteNo*256; j < (paletteNo*256+256); j++) {
-		pal[i].green = palf[j*3+0];
-		pal[i].blue = palf[j*3+1];
-		pal[i].red = palf[j*3+2];		
+		pal[i].green = palf[j*3+0]<<1;
+		pal[i].blue = palf[j*3+1]<<1;
+		pal[i].red = palf[j*3+2]<<1;		
 		pal[i].reserved = 0;
 		i++;
 	}			
