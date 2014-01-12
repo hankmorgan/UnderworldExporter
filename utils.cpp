@@ -1,17 +1,14 @@
 #include <fstream>
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif
+#include "main.h"
 
 long getFileSize(FILE *file)
 {
-    long lCurPos, lEndPos;
-    lCurPos = ftell(file);
-    fseek(file, 0, 2);
-    lEndPos = ftell(file);
-    fseek(file, lCurPos, 0);
-    return lEndPos;
+	long lCurPos, lEndPos;
+	lCurPos = ftell(file);
+	fseek(file, 0, 2);
+	lEndPos = ftell(file);
+	fseek(file, lCurPos, 0);
+	return lEndPos;
 }
 
 long ConvertInt16(unsigned char Byte1, unsigned char Byte2)

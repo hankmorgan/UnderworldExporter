@@ -1,19 +1,12 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef d3darkmod_h
-	#define d3darkmod_h
-	#include "D3DarkMod.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#include "math.h"
+#include "main.h"
+#include "tilemap.h"
+#include "textures.h"
+#include "gameobjects.h"
+#include "D3DarkMod.h"
 
 int BrushSizeX;
 int BrushSizeY;

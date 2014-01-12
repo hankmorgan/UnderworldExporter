@@ -1,24 +1,12 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef D3DarkMod_h
-	#define D3DarkMod_h
-	#include "D3DarkMod.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif
-
-#include "math.h"
+#include "main.h"
+#include "tilemap.h"
+#include "textures.h"
+#include "D3DarkMod.h"
+#include "gameobjects.h"
 
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
