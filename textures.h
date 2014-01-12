@@ -1,3 +1,6 @@
+#ifndef textures_h
+	#define textures_h
+	
 #define CAULK -1
 #define VISPORTAL -2
 #define NODRAW -3
@@ -34,3 +37,5 @@ int lava;
 
 
 extern texture *textureMasters;
+
+#endif /* textures_h */

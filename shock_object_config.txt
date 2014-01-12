@@ -103,7 +103,7 @@
 102 6 3 3 TRACE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 103 6 3 4 TOGGLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 104 6 4 0 TEXT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-105 6 4 1 EMAIL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+105 6 4 1 EMAIL atdm:readable_mobile_scroll01 entity 13
 106 6 5 0 MAP_SEGMENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 107 7 0 0 PHONE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 108 7 0 1 VCR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

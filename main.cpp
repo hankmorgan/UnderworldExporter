@@ -2,24 +2,19 @@
 #include <stdlib.h>
 #include <fstream>
 #include <math.h>
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-
 #include <string.h>
+
+
+#include "textures.h"
+#include "gameobjects.h"
+#include "tilemap.h"
+#include "d3darkmod.h"
+#include "main.h"
+
+
+
+
+
 
 using namespace std;
 
@@ -48,15 +43,23 @@ extern int levelNo;
 
 int main()
 {
-BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;	
 
-int game = UW1;
+
+int game = SHOCK;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
-
-	levelNo=0;
+levelNo=1;
+switch (game)
+	{
+	case UWDEMO:
+	case UW1:
+	case UW2:
+		{BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;break;}
+	case SHOCK:
+		{BrushSizeX=120;BrushSizeY=120;BrushSizeZ=15;break;}//To ease on the steepness of some slopes that are impassible
+	}
 //int NoOfLevels=80;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
 	LoadConfig(game);
@@ -291,7 +294,7 @@ void exportMaps(int game,int mode,int LevelNo)
 		}
 
 
-	
+
 	switch (mode)
 		{
 		case ASCII_MODE:		//ascii + other data maps

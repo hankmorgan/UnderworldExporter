@@ -1,5 +1,6 @@
-
-
+#ifndef gamegraphics_h
+	#define gamegraphics_h
+	
 typedef struct palette
 {
 unsigned char red;
@@ -37,3 +38,5 @@ typedef struct {
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255]);
 void writeBMP( unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
+
+#endif /*gamegraphics_h*/

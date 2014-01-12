@@ -1,35 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-
-typedef struct huffman_node
-{
-  int symbol; // symbol in node
-  int parent; //
-  int left;   // -1 when no node
-  int right;  // 
-} huffman_node;
 
 
-typedef struct block_dir
-{
-int block_no;
-int address;
-int NoOfEntries;
-int blockEnd;
-} block_dir;
+
+#include "utils.h"
+#include "main.h"
+#include "gamestrings.h"
+
+
 
 
 void unpackStrings(int game)
@@ -182,12 +161,12 @@ long chunkUnpackedLength;
 		
 		int blnLevelFound =0;
 		long DirectoryAddress=getValAtAddress(tmp_ark,124,32);
-		//printf("\nThe directory is at %d\n", DirectoryAddress);
+		printf("\nThe directory is at %d\n", DirectoryAddress);
 		
 		long NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
-		//printf("there are %d chunks\n",NoOfChunks);
+		printf("there are %d chunks\n",NoOfChunks);
 		long firstChunkAddress = getValAtAddress(tmp_ark,DirectoryAddress+2,32);
-		//printf("The first chunk is at %d\n", firstChunkAddress);
+		printf("The first chunk is at %d\n", firstChunkAddress);
 		long address_pointer=DirectoryAddress+6;
 		long AddressOfBlockStart= firstChunkAddress;
 		for (int k=0; k< NoOfChunks; k++)
@@ -200,8 +179,9 @@ long chunkUnpackedLength;
 			//printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",k,chunkId, chunkUnpackedLength, chunkType,chunkPackedLength,chunkContentType);
 			//printf("Absolute address is %d\n",AddressOfBlockStart);
 			long NoSubChunks = getValAtAddress(tmp_ark,AddressOfBlockStart,16);
-			printf("\nChunk %d has %d sub chunks",k, NoSubChunks);
-			printf("\n+=====================================+\n");
+			//printf("\nIndex: %d Chunk %d has %d sub chunks",k, chunkId, NoSubChunks);
+			printf("\n@Chunk:%d\n{",chunkId);
+			//printf("\n+=====================================+\n");
 			long strPtr=2;
 			for (int i = 0; i<NoSubChunks;i++)
 				{
@@ -209,11 +189,12 @@ long chunkUnpackedLength;
 				long subChunkEnd = AddressOfBlockStart+getValAtAddress(tmp_ark,AddressOfBlockStart+strPtr+4,32);
 				if (subChunkEnd > subChunkStart)
 					{
-					printf("%d = %.*s\n",i, subChunkEnd- subChunkStart, tmp_ark + subChunkStart);			
+					//printf("%d =", i);
+					printf(" %.*s\n", subChunkEnd- subChunkStart, tmp_ark + subChunkStart);			
 					}
 				strPtr+=4;
 				}
-		
+			printf("}\n");
 			AddressOfBlockStart=AddressOfBlockStart+ chunkPackedLength;
 			if ((AddressOfBlockStart % 4) != 0)
 				AddressOfBlockStart = AddressOfBlockStart + 4 - (AddressOfBlockStart % 4); // chunk offsets always fall on 4-byte boundaries

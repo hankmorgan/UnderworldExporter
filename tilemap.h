@@ -1,7 +1,6 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
+#ifndef tilemap_h
+	#define tilemap_h
+	
 
 #define SLOPE_BOTH_PARALLEL 0
 #define SLOPE_BOTH_OPPOSITE 1
@@ -19,8 +18,6 @@
 #define TILE_SLOPE_S 7
 #define	TILE_SLOPE_E 8
 #define TILE_SLOPE_W 9
-
-
 
 
 typedef struct tile
@@ -74,6 +71,8 @@ int TerrainChangeIndex;	//index to the change terrain trap.
 
 
 
+
+
 int getTile(int tileData);
 int getHeight(int tileData);
 int getDoors(long tileData);
@@ -94,6 +93,8 @@ void unpack_data (unsigned char *pack,    unsigned char *unpack,  unsigned long 
 //void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
 long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength, long *chunkType);
 int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction);
-void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index);
+void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index, int *property1,int *property2,int *property3,int *property4);
 
 extern tile LevelInfo[64][64];
+
+#endif /*tilemap_h*/

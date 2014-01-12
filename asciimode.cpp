@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef asciimode_h
-	#define asciimode_h
-	#include "asciimode.h"
-#endif	
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
+
+#include "main.h"
+#include "gameobjects.h"
+#include "tilemap.h"
+#include "asciimode.h"
+
 
 long printObject(ObjectItem &currObj, int TableFormat)
 {

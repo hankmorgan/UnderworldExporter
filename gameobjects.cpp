@@ -1,24 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef D3DarkMod_h
-	#define D3DarkMod_h
-	#include "D3DarkMod.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif
-
 #include "math.h"
+
+	#include "D3DarkMod.h"
+	#include "textures.h"
+	#define utils_h
+	#include "utils.h"
+	#include "main.h"
+	#include "gameobjects.h"
+
 
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
@@ -37,7 +28,7 @@ void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-
+void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 
 int keycount[256];	//For tracking key usage
 //int levelNo;
@@ -746,22 +737,29 @@ void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj,
 //Index
 //currobj.link -200 = pointer to the readable string block in UW
 //heading
-
+int ReadableIndex;
+switch (game)
+	{
+	case SHOCK: 
+		ReadableIndex = currobj.Property2;	//The chunk that the text comes from.
+		break;
+	default:
+		ReadableIndex = currobj.link-0x200;
+		break;
+	}
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );		
-	printf("\"inv_name\" \"Readable_%d\"\n", currobj.link - 0x200);
+	printf("\"inv_name\" \"Readable_%d\"\n", ReadableIndex);
 	switch (game)
 		{
 		case UWDEMO:
 		case UW1:
-			{printf("\"xdata_contents\" \"readables/uw1/scroll_%03d\"\n", currobj.link - 0x200);break;}
+			{printf("\"xdata_contents\" \"readables/uw1/scroll_%03d\"\n", ReadableIndex);break;}
 		case UW2:
-			{printf("\"xdata_contents\" \"readables/uw2/scroll_%03d\"\n", currobj.link - 0x200);break;}
+			{printf("\"xdata_contents\" \"readables/uw2/scroll_%03d\"\n", ReadableIndex);break;}
 		case SHOCK:
-			{//TODO:Whatever needs to go here.
-			//printf("\"xdata_contents\" \"readables/shock/scroll_%03d\"\n", currobj.link - 0x200);
-			break;}
+			{printf("\"xdata_contents\" \"readables/shock/log_%03d\"\n",ReadableIndex);break;}
 		}	
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	EntityRotation(currobj.heading);
@@ -922,3 +920,485 @@ int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex)
 	return -1;	//not found
 	
 	}
+	
+	
+void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo)
+{
+
+int InUseFlag;
+int ObjectClass;
+int ObjectSubClass;
+int ObjectSubClassIndex;
+int property1;	//Generic data pulled back from subclass tables.
+int property2;
+int property3;
+int property4;
+int property5;
+//int IndexIntoCrossRef;
+//int PrevLink;
+//int NextLink;
+//int XCoord;
+//int YCoord;
+//int ZCoord;
+//int Angle1;
+//int Angle2;
+//int Angle3;
+//int AIIndex;
+//int ObjectType;
+//int HitPoints;
+//int State;
+
+	FILE *file = NULL;      // File pointer
+	//unsigned char *lev_ark; 
+	unsigned char *tmp_ark; 
+	unsigned char *sub_ark; 
+	//unsigned char *tex_ark;
+	unsigned char *inf_ark;
+	unsigned char *mst_ark;
+	long filepos;
+	long AddressOfBlockStart=0;
+	long address_pointer=4;
+	char blnLevelFound=0;
+
+//	int chunkId;
+	long chunkUnpackedLength;
+	long chunkType;//compression type
+	long chunkPackedLength;
+//	long chunkContentType;
+	int MasterAddressLookup[1024];
+	
+//read in archive.dat
+	if ((file = fopen(filePath, "rb")) == NULL)
+		printf("Could not open specified file\n");
+	else
+		printf ("");
+	long fileSize = getFileSize(file);
+	filepos = ftell(file);
+	tmp_ark = new unsigned char[fileSize];
+	fread(tmp_ark, fileSize, 1,file);
+	fclose(file);  
+	//get the master object list from the archive
+	AddressOfBlockStart = getShockBlockAddress(LevelNo*100+4008,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+
+	
+	sub_ark = new unsigned char[chunkPackedLength];	
+	mst_ark = new unsigned char[chunkUnpackedLength];	
+	for (long k=0; k< chunkPackedLength; k++)
+		{
+			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		}
+	unpack_data(sub_ark,mst_ark,chunkUnpackedLength);
+
+	int i=0;
+	address_pointer=0;
+	while (address_pointer <= chunkUnpackedLength)
+		{//Get the addresses of the master list data of the mst_ark
+		MasterAddressLookup[i++] = address_pointer;
+		address_pointer+=27;
+		}
+
+
+//Read in the xref table and then read in it's stuff from the master table. I'll then have to go into the class blocks.
+	AddressOfBlockStart = getShockBlockAddress(LevelNo*100+4009,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+	sub_ark = new unsigned char[chunkPackedLength];	
+	inf_ark = new unsigned char[chunkUnpackedLength];	
+	for (long k=0; k< chunkPackedLength; k++)
+		{
+			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		}
+	if (chunkType == 1)
+		{
+		unpack_data(sub_ark,inf_ark,chunkUnpackedLength);
+		}
+	else
+		{
+			for (long k=0; k< chunkUnpackedLength; k++)
+				{
+					inf_ark[k] = tmp_ark[k];
+				}
+		}
+	i=0;
+	long mstaddress_pointer;
+	address_pointer=0;
+	while (address_pointer < chunkUnpackedLength)
+		{
+		//printf("\nXRef : %d \n",i);
+		//printf("TileX = %d\n",getValAtAddress(inf_ark,address_pointer+0,16));
+		//printf("TileY = %d\n",getValAtAddress(inf_ark,address_pointer+2,16));
+		int MasterIndex= getValAtAddress(inf_ark,address_pointer+4,16);
+		//printf("Master Index = %d\n",MasterIndex);
+		//printf("Next obj = %d\n",getValAtAddress(inf_ark,address_pointer+6,16));
+//		printf("Next tile = %d\n",getValAtAddress(inf_ark,address_pointer+8,16));
+		
+		objList[i].index = i;
+		objList[i].link =0;
+		objList[i].joint=0;
+		objList[i].heading=0;
+		objList[i].next = getValAtAddress(inf_ark,address_pointer+6,16);
+		objList[i].tileX= getValAtAddress(inf_ark,address_pointer+0,16);
+		objList[i].tileY =getValAtAddress(inf_ark,address_pointer+2,16);
+
+		//Now go visit the master list to get more info.
+		
+		mstaddress_pointer = MasterAddressLookup[MasterIndex];
+		
+			//printf("Object : %d \n",i);
+			InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
+			//printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
+			objList[i].InUseFlag = InUseFlag;
+			ObjectClass =getValAtAddress(mst_ark,mstaddress_pointer+1,8);
+			//printf("ObjectClass = %d\n",ObjectClass);
+			objList[i].ObjectClass = ObjectClass;
+			ObjectSubClass=getValAtAddress(mst_ark,mstaddress_pointer+2,8);
+			//printf("ObjectSubClass = %d\n",ObjectSubClass);
+			objList[i].ObjectSubClass = ObjectSubClass;
+			int SubClassLink =getValAtAddress(mst_ark,mstaddress_pointer+3,16);
+			//Subclass per sspecs is  a link to the sub table. not the class it self. For that we need the object type.
+			ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
+			objList[i].ObjectSubClassIndex = ObjectSubClassIndex;
+			//printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);//cross ref this with the class table.
+
+		
+//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
+//			printf("Index back to cross = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+			int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
+			//objList[i].LookUpIndex= LookupIndex;
+			objList[i].item_id =LookupIndex;
+			//printf("It is a %s\n", objectMasters[LookupIndex].desc );
+			objList[i].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
+			objList[i].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
+			objList[i].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
+						
+//			if (LookupIndex !=-1)
+//				{
+//				printf("It is a %s\n", shockObjectMasters[LookupIndex].desc );
+//				}
+//			else
+//				{
+//				printf("Description not found!\n");
+//				}
+			//printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+//			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
+//			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
+//			printf("XCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+11,8));
+//			printf("XCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8));
+//			printf("YCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
+//			printf("YCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8));
+
+			
+//			printf("ZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
+//			printf("Angle1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
+//			printf("Angle2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
+//			printf("Angle3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+18,8));
+//			printf("AIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
+//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
+//			printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
+//			printf("State = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
+//			printf("unk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
+//			printf("unk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
+//			printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));
+
+
+
+switch (ObjectClass)	//to get further properties specific to each class
+	{
+	case GUNS_WEAPONS:break;
+	case AMMUNITION:break;
+	case PROJECTILES:break;
+	case GRENADE_EXPLOSIONS:break;
+	case PATCHES:break;
+	case HARDWARE:break;
+	case SOFTWARE_LOGS:
+		{
+		lookUpSubClass(tmp_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SubClassLink,&property1,&property2,&property3,&property4);
+		objList[i].Property1 = property1;	//These will frustrate me eventually.
+		objList[i].Property2 = property2;
+		objList[i].Property3 = property3;
+//		objList[i].Property4 = property4;
+		break;
+		}
+	case FIXTURES:break;
+	case GETTABLES_OTHER:break;
+	case SWITCHES_PANELS:break;
+	case DOORS_GRATINGS:break;
+	case ANIMATED:break;
+	case TRAPS_MARKERS:break;
+	case CONTAINERS_CORPSES:break;
+	case CRITTERS:break;
+	}		
+	
+	
+		//Object Debug output 
+		//printf("\nXRef : %d \n",i);
+		//printf("TileX = %d\n",getValAtAddress(inf_ark,address_pointer+0,16));
+		//printf("TileY = %d\n",getValAtAddress(inf_ark,address_pointer+2,16));
+		//printf("Master Index = %d\n",MasterIndex);
+		//printf("Next obj = %d\n",getValAtAddress(inf_ark,address_pointer+6,16));
+		//printf("Next tile = %d\n",getValAtAddress(inf_ark,address_pointer+8,16));		
+		//printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
+		//printf("ObjectClass = %d\n",ObjectClass);
+		//printf("Object : %d \n",i);
+		//printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
+		//printf("ObjectClass = %d\n",ObjectClass);
+		//printf("ObjectSubClass = %d\n",ObjectSubClass);
+		//printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);//cross ref this with the class table.
+		//printf("It is a %s\n", objectMasters[LookupIndex].desc );
+	
+		
+		
+		address_pointer+=10;
+		i++;
+		}
+
+}
+	void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo)
+{
+	FILE *file = NULL;      // File pointer
+	unsigned char *lev_ark; 
+	unsigned char *tmp_ark;		//for uw2 decompression
+	long fileSize;
+    int NoOfBlocks;
+	long AddressOfBlockStart;
+	long objectsAddress;
+	long address_pointer;
+	//int x;	
+
+
+
+switch (game)
+	{
+	case UWDEMO:	//Underworld Demo
+		{
+		if ((file = fopen(filePath, "rb")) == NULL)
+			printf("Could not open specified file\n");
+		else
+			printf ("");
+		// Get the size of the file in bytes
+		fileSize = getFileSize(file);
+		// Allocate space in the buffer for the whole file
+		lev_ark = new unsigned char[fileSize];
+		// Read the file in to the buffer
+		fread(lev_ark, fileSize, 1,file);
+		fclose(file);  		
+		//Get the first map block
+		AddressOfBlockStart = 0;
+		objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
+		address_pointer = 0;
+		break;
+		}
+	case UW1:	//Underworld 1
+		{
+		if ((file = fopen(filePath, "rb")) == NULL)
+			printf("Could not open specified file\n");
+		else
+			printf ("");
+		// Get the size of the file in bytes
+		fileSize = getFileSize(file);
+		// Allocate space in the buffer for the whole file
+		lev_ark = new unsigned char[fileSize];
+		// Read the file in to the buffer
+		fread(lev_ark, fileSize, 1,file);
+		fclose(file);  		
+		//Get the number of blocks in this file.
+		NoOfBlocks = ConvertInt16(lev_ark[0],lev_ark[1]);
+		//Get the first map block
+		AddressOfBlockStart = getValAtAddress(lev_ark,(LevelNo * 4) + 2,32);
+		objectsAddress = AddressOfBlockStart + (64*64*4); //+ 1;
+		address_pointer =0;
+		break;
+	case UW2:	//Underworld 2
+		{
+		if ((file = fopen(filePath, "rb")) == NULL)
+			printf("Could not open specified file\n");
+		else
+			printf ("");
+		fileSize = getFileSize(file);
+		tmp_ark = new unsigned char[fileSize];
+		fread(tmp_ark, fileSize, 1,file);
+		fclose(file);
+						
+		address_pointer=6;
+		NoOfBlocks=getValAtAddress(tmp_ark,0,32);
+		int compressionFlag=getValAtAddress(tmp_ark,address_pointer + (NoOfBlocks*4) ,32);
+		int isCompressed =(compressionFlag>>1) & 0x01;
+		
+		long dataSize = address_pointer + (2*NoOfBlocks*4);	//????
+		address_pointer=(LevelNo * 4) + 6;
+		if (getValAtAddress(tmp_ark,address_pointer,32)==0)
+			{
+			printf("\nInvalid block address!\n");
+			return;
+			}
+		if (isCompressed == 1)
+			{
+			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
+			}
+			address_pointer=address_pointer+4;
+		AddressOfBlockStart=0;	//since this array only contains that particular block
+		objectsAddress=(64*64*4);
+		address_pointer=0;
+
+			
+		//	}		
+		break;
+		}
+		}
+	}
+	for (int x=0; x<1025;x++)
+		{	//read in master object list
+
+			objList[x].index = x; 
+			objList[x].tileX=-1;
+			objList[x].tileY=-1;
+			//These three will get set when I am rendering the object entity and if the item is an npc's inventory.
+			objList[x].objectOwner =0;
+			objList[x].objectOwnerEntity =0;
+			objList[x].joint =0 ;
+			
+			//Object header.
+			objList[x].item_id = (getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
+			objList[x].flags  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x0F;
+			objList[x].enchantment = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01;
+			objList[x].doordir  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01;
+			objList[x].invis  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01;
+			objList[x].is_quant = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01;
+			
+			//position at +2
+			objList[x].zpos = (getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F;	//bits 0-6 I'll probably ignore this
+			objList[x].heading =  45 * (((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
+			objList[x].y = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 10) & 0x07;	//bits 10-12
+			objList[x].x =((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 13) & 0x07;	//bits 13-15
+			
+			//+4
+			objList[x].quality =(getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F;
+			objList[x].next = (getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF;
+			//+6
+			//objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) ) ;//bits 0-5
+
+			objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+			
+			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
+				{
+				//printf("\n%d\n", texture_map[objList[x].owner]);
+				objList[x].owner = texture_map[objList[x].owner];	//Sets the texture for tmap objects.
+				}
+						
+				
+			//objList[x].special = objList[x].owner;
+			
+			objList[x].link  = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) >> 6 & 0x3FF) ; //bits 6-15
+			//objList[x].link = objList[x].quantity;
+			
+			////printf("\n\tNext Object ID to this object is  %d", objList[x].next  );
+			////printf("\n%d free object. Value 4=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+6,16));
+			
+			//extra info //19 bytes
+			////printf("\n%d free extra inf. Value 5=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+8,8));
+			////printf("\n%d free extra inf. Value 6=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+9,8));
+			////printf("\n%d free extra inf. Value 7=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+10,8));
+			////printf("\n%d free extra inf. Value 8=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+11,8));
+			////printf("\n%d free extra inf. Value 9=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+12,8));
+			////printf("\n%d free extra inf. Value 10=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+13,8));
+			////printf("\n%d free extra inf. Value 11=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+14,8));
+			////printf("\n%d free extra inf. Value 12=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+15,8));
+			////printf("\n%d free extra inf. Value 13=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+16,8));
+			////printf("\n%d free extra inf. Value 14=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+17,8));
+			////printf("\n%d free extra inf. Value 15=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+18,8));
+			////printf("\n%d free extra inf. Value 16=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+19,8));
+			////printf("\n%d free extra inf. Value 17=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+20,8));
+			////printf("\n%d free extra inf. Value 18=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+21,8));
+			////printf("\n%d free extra inf. Value 19=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+22,8));
+			////printf("\n%d free extra inf. Value 20=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+23,8));
+			////printf("\n%d free extra inf. Value 21=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+24,8));
+			////printf("\n%d free extra inf. Value 22=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+25,8));
+			////printf("\n%d free extra inf. Value 23=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+26,8));
+			////
+		if (x<256)	
+			{
+			//mobile objects			
+			objList[x].npc_whoami =getValAtAddress(lev_ark,objectsAddress+address_pointer+26,8);
+			objList[x].npc_attitude = (getValAtAddress(lev_ark,objectsAddress+address_pointer+13,16) >> 14);
+
+			address_pointer=address_pointer+8+19;
+			}
+		else
+			{
+			//Static Objects
+			address_pointer=address_pointer+8;
+			}
+		}
+}
+
+void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index, int *property1,int *property2,int *property3,int *property4)
+{
+//
+//	int chunkId;
+	long chunkUnpackedLength;
+	long chunkType;//compression type
+	long chunkPackedLength;
+//	long chunkContentType;
+	
+long AddressOfBlockStart = getShockBlockAddress(BlockNo,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+int k= 0;
+int add_ptr=0;
+while (k<=chunkUnpackedLength)
+	{
+	if (k==index)
+		{
+		
+		//printf("Subclass Link=%d\n",k);
+		//printf("Index back=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+0,16));
+		//printf("prev=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+2,16));
+		//printf("next=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+4,16));
+		//printf("version=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+6,8));
+		//printf("log chunk=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+7,8));
+		//printf("levelno=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+8,8));
+		*property1=getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+6,8);	//Software version
+		*property2=getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+7,8) + 2488;	//Chunk containing log
+		*property3=getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+8,8);	//Level No of Chunk
+		break;
+		}
+	add_ptr+=9;
+	k++;
+	}
+return;
+}
+
+void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x,int y)
+{
+int ResolutionXY=7;
+int ResolutionZ=127;
+if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
+
+
+		*offX=0;  *offY=0; *offZ=0;
+
+
+		float BrushX=BrushSizeX;
+		float BrushY=BrushSizeY;
+		float BrushZ=BrushSizeZ;
+		
+		*offX= (x*BrushX) + ((objList[nextObj].x) * (BrushX/ResolutionXY));
+		*offY= (y*BrushY) + ((objList[nextObj].y) * (BrushY/ResolutionXY));
+		//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
+		int floorHeight = LevelInfo[x][y].floorHeight <<3 ;
+		int nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
+		float relativeZpos = (float)(objList[nextObj].zpos - floorHeight);
+		float zposRatio = (float)(relativeZpos/(nextFloorHeight-floorHeight));	//relative adjustment
+		//float zposRatio = (float)(relativeZpos/(12*BrushSizeZ));	//relative adjustment
+		*offZ = LevelInfo[x][y].floorHeight * BrushZ + (zposRatio*BrushZ*1);
+		
+		if ((zposRatio !=0) && (objectMasters[objList[nextObj].item_id].type != BRIDGE))
+			{
+			float zpos= objList[nextObj].zpos;
+			float brushZ = BrushSizeZ;
+			float ceiling = CEILING_HEIGHT;
+			*offZ = (zpos/ResolutionZ) * (brushZ*ceiling);
+			}
+		
+		if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0))
+			{
+			*offZ = *offZ + (LevelInfo[x][y].shockSteep * (BrushSizeZ /2));
+			}
+
+}

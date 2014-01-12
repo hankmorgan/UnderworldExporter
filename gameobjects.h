@@ -1,3 +1,6 @@
+#ifndef gameobjects_h
+	#define gameobjects_h
+	
 //Master object type definition
 typedef struct ObjectItem
 {
@@ -91,6 +94,11 @@ int State;
 //int tileX;
 //int tileY;
 int extends;   //into another tile
+
+//Further generic properties for data pulled back from subclasse blocks.
+int Property1;
+int Property2;
+int Property3;
    	
 } ObjectItem;
 
@@ -186,8 +194,6 @@ int extends;   //into another tile
 #define  AN_UNLOCK_TRIGGER 60
 #define  A_FOUNTAIN	61
 
-
-
 //System Shock object classes
 #define GUNS_WEAPONS		0
 #define AMMUNITION		1
@@ -204,6 +210,23 @@ int extends;   //into another tile
 #define TRAPS_MARKERS	12
 #define CONTAINERS_CORPSES	13
 #define CRITTERS	14
+
+//System Shock object classes offsets. For this I will use their chunk offset value.
+#define GUNS_WEAPONS_OFFSET		4010
+#define AMMUNITION_OFFSET		4011
+#define PROJECTILES_OFFSET	4012
+#define GRENADE_EXPLOSIONS_OFFSET	4013	//a guess
+#define PATCHES_OFFSET		4014
+#define HARDWARE_OFFSET	4015
+#define SOFTWARE_LOGS_OFFSET	4016
+#define FIXTURES_OFFSET	4017
+#define GETTABLES_OTHER_OFFSET	4018		//a guess
+#define SWITCHES_PANELS_OFFSET	4019
+#define DOORS_GRATINGS_OFFSET	4020
+#define ANIMATED_OFFSET	4021		//a guess?
+#define TRAPS_MARKERS_OFFSET	4022
+#define CONTAINERS_CORPSES_OFFSET	4023
+#define CRITTERS_OFFSET	4043
 
 
 typedef struct objectMaster
@@ -244,3 +267,5 @@ void EntityRotation(int heading);
 
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
+
+#endif /*gameobjects_h*/

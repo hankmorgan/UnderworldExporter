@@ -1,19 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef d3darkmod_h
-	#define d3darkmod_h
-	#include "D3DarkMod.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
 #include "math.h"
+
+#include "tilemap.h"
+#include "main.h"
+#include "textures.h"
+#include "gameobjects.h"
+
+#include "D3DarkMod.h"
 
 int BrushSizeX;
 int BrushSizeY;
@@ -24,6 +19,7 @@ int CEILING_HEIGHT;
 tile LevelInfo[64][64];
 int iGame;
 void RenderEntity(int game,float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
@@ -848,52 +844,24 @@ switch (game)
 void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {
 //Parses UW's object list and sets up their x,y,z position.
-int ResolutionXY=7;
-int ResolutionZ=127;
-if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
-int x; int y;
+
+int x; int y; 
+float offX;float offY;float offZ;
 for (y=0; y<=63;y++) 
 	{
 	for (x=0; x<=63;x++)
 		{
 		if ((LevelInfo[x][y].indexObjectList !=0))
 			{
-			//TODO: Position objects by x,y values in leveldata
-			long nextObj = LevelInfo[x][y].indexObjectList;
-			float offX=0; float offY=0; float offZ=0;
-			while (nextObj !=0)
-				{
-				objList[nextObj].tileX=x;
-				objList[nextObj].tileY=y;
-				float BrushX=BrushSizeX;
-				float BrushY=BrushSizeY;
-				float BrushZ=BrushSizeZ;
-				
-				offX= (x*BrushX) + ((objList[nextObj].x) * (BrushX/ResolutionXY));
-				offY= (y*BrushY) + ((objList[nextObj].y) * (BrushY/ResolutionXY));
-				//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
-				int floorHeight = LevelInfo[x][y].floorHeight <<3 ;
-				int nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
-				float relativeZpos = (float)(objList[nextObj].zpos - floorHeight);
-				float zposRatio = (float)(relativeZpos/(nextFloorHeight-floorHeight));	//relative adjustment
-				//float zposRatio = (float)(relativeZpos/(12*BrushSizeZ));	//relative adjustment
-				offZ = LevelInfo[x][y].floorHeight * BrushZ + (zposRatio*BrushZ*1);
-				
-				if ((zposRatio !=0) && (objectMasters[objList[nextObj].item_id].type != BRIDGE))
+				long nextObj = LevelInfo[x][y].indexObjectList;
+				while (nextObj !=0)
 					{
-					float zpos= objList[nextObj].zpos;
-					float brushZ = BrushSizeZ;
-					float ceiling = CEILING_HEIGHT;
-					offZ = (zpos/ResolutionZ) * (brushZ*ceiling);
+					objList[nextObj].tileX=x;
+					objList[nextObj].tileY=y;
+					CalcObjectXYZ(game,&offX,&offY,&offZ,LevelInfo,objList,nextObj,x,y);
+					RenderEntity(game,offX,offY,offZ ,objList[nextObj],objList,LevelInfo);
+					nextObj=objList[nextObj].next;
 					}
-				
-				if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0))
-					{
-					offZ = offZ + (LevelInfo[x][y].shockSteep * (BrushSizeZ /2));
-					}
-				RenderEntity(game,offX,offY,offZ ,objList[nextObj],objList,LevelInfo);
-				nextObj=objList[nextObj].next;
-				}
 			}
 		}
 	}	
@@ -2322,24 +2290,27 @@ void RenderPatch(int game, int x, int y, int z,long PatchIndex, ObjectItem objLi
 ObjectItem currobj = objList[PatchIndex];
 
 float patchX;float patchY;float patchZ;float patchOffsetX;float patchOffsetY;
-float offX= (x*BrushSizeX) + ((objList[PatchIndex].x) * (BrushSizeX/7));
-float offY= (y*BrushSizeY) + ((objList[PatchIndex].y) * (BrushSizeY/7));
+////////////float offX= (x*BrushSizeX) + ((objList[PatchIndex].x) * (BrushSizeX/7));
+////////////float offY= (y*BrushSizeY) + ((objList[PatchIndex].y) * (BrushSizeY/7));
+////////////
+////////////if ((objList[PatchIndex].x ==0) ||(objList[PatchIndex].x ==7) )
+////////////	{
+////////////	offY= objList[PatchIndex].tileY * BrushSizeY+ (BrushSizeY/2);
+////////////	}
+////////////if ((objList[PatchIndex].y ==0) || (objList[PatchIndex].y ==7))
+////////////	{
+////////////	offX= objList[PatchIndex].tileX * BrushSizeX+ (BrushSizeX/2);
+////////////	}
+//////////////float offX= objList[PatchIndex].tileX * BrushSizeX + (BrushSizeX/2);
+//////////////float offY= objList[PatchIndex].tileY * BrushSizeY+ (BrushSizeY/2);
+////////////float floorHeight = LevelInfo[x][y].floorHeight <<3 ;
+////////////float nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
+////////////float relativeZpos = objList[PatchIndex].zpos - floorHeight;
+////////////float zposRatio = relativeZpos/(nextFloorHeight-floorHeight);	//relative adjustment
+////////////float offZ = LevelInfo[x][y].floorHeight * BrushSizeZ + (zposRatio*BrushSizeZ);
+float offX;float offY; float offZ;
+CalcObjectXYZ(game,&offX,&offY,&offZ,LevelInfo,objList,PatchIndex,x,y);
 
-if ((objList[PatchIndex].x ==0) ||(objList[PatchIndex].x ==7) )
-	{
-	offY= objList[PatchIndex].tileY * BrushSizeY+ (BrushSizeY/2);
-	}
-if ((objList[PatchIndex].y ==0) || (objList[PatchIndex].y ==7))
-	{
-	offX= objList[PatchIndex].tileX * BrushSizeX+ (BrushSizeX/2);
-	}
-//float offX= objList[PatchIndex].tileX * BrushSizeX + (BrushSizeX/2);
-//float offY= objList[PatchIndex].tileY * BrushSizeY+ (BrushSizeY/2);
-float floorHeight = LevelInfo[x][y].floorHeight <<3 ;
-float nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
-float relativeZpos = objList[PatchIndex].zpos - floorHeight;
-float zposRatio = relativeZpos/(nextFloorHeight-floorHeight);	//relative adjustment
-float offZ = LevelInfo[x][y].floorHeight * BrushSizeZ + (zposRatio*BrushSizeZ);
 float tex1 = -1; float tex2 =-1;	//target values
 	switch (currobj.heading)
 		{//Headings are horribly broken.
