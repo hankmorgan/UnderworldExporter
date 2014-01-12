@@ -32,7 +32,7 @@
 #endif
 
 extern long SHOCK_CEILING_HEIGHT;
-//extern long UW_CEILING_HEIGHT;
+extern long UW_CEILING_HEIGHT;
 int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
 int getTile(int tileData)
 {
@@ -277,7 +277,7 @@ return tileData >> 6;
 
 
 
-int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture_map[256], char *filePath, int game, int LevelNo)
+int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture_map[256], char *filePath, int game, int LevelNo)
 {
 	FILE *file = NULL;      // File pointer
 	unsigned char *lev_ark; 
@@ -292,8 +292,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 	int y;
 	int i;
 	
-	//UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
-	//UW_CEILING_HEIGHT =19;	//Unfortunately UW has stairs which get too high to scale in idtech
+	UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
+	
 	switch (game)
 	{
 	case UWDEMO:	//UW Demo
@@ -443,7 +443,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 				LevelInfo[x][y].tileType = getTile(FirstTileInt) ;
 
 				LevelInfo[x][y].floorHeight = getHeight(FirstTileInt) ;
-				//LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
+				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
 
 				LevelInfo[x][y].ceilingHeight = UW_CEILING_HEIGHT;	//constant for uw				
 				
@@ -487,7 +487,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 				if (LevelInfo[x][y].tileType >=2)
 					{
 					LevelInfo[x][y].shockSteep = 1;
-					//LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep  <<3) >> 2)*8 >>3;	//Shift copied from shock
+					LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep  <<3) >> 2)*8 >>3;	//Shift copied from shock
 					LevelInfo[x][y].shockSlopeFlag = SLOPE_FLOOR_ONLY ;
 					}
 
@@ -550,7 +550,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture
 return 1;
 }
 
-void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1025],long texture_map[256],char *filePath, int game, int LevelNo)
+void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo)
 {
 	FILE *file = NULL;      // File pointer
 	unsigned char *lev_ark; 
@@ -729,7 +729,7 @@ switch (game)
 }
 
 
-void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600], long texture_map[256],char *filePath, int game, int LevelNo)
+void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo)
 {
 
 int InUseFlag;
@@ -822,10 +822,12 @@ int State;
 //		printf("Next obj = %d\n",getValAtAddress(inf_ark,address_pointer+6,16));
 //		printf("Next tile = %d\n",getValAtAddress(inf_ark,address_pointer+8,16));
 		
-		shockObjList[i].index = i;
-		shockObjList[i].next = getValAtAddress(inf_ark,address_pointer+6,16);
-		shockObjList[i].tileX= getValAtAddress(inf_ark,address_pointer+0,16);
-		shockObjList[i].tileY =getValAtAddress(inf_ark,address_pointer+2,16);
+		objList[i].index = i;
+		objList[i].link =0;
+		objList[i].joint=0;
+		objList[i].next = getValAtAddress(inf_ark,address_pointer+6,16);
+		objList[i].tileX= getValAtAddress(inf_ark,address_pointer+0,16);
+		objList[i].tileY =getValAtAddress(inf_ark,address_pointer+2,16);
 		
 		//Now go visit the master list to get more info.
 		
@@ -834,13 +836,13 @@ int State;
 //			printf("Object : %d \n",i);
 			InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
 //			printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
-			shockObjList[i].InUseFlag = InUseFlag;
+			objList[i].InUseFlag = InUseFlag;
 			ObjectClass =getValAtAddress(mst_ark,mstaddress_pointer+1,8);
 //			printf("ObjectClass = %d\n",ObjectClass);
-			shockObjList[i].ObjectClass = ObjectClass;
+			objList[i].ObjectClass = ObjectClass;
 			ObjectSubClass=getValAtAddress(mst_ark,mstaddress_pointer+2,8);
 //			printf("ObjectSubClass = %d\n",ObjectSubClass);
-			shockObjList[i].ObjectSubClass = ObjectSubClass;
+			objList[i].ObjectSubClass = ObjectSubClass;
 
 			//Subclass per sspecs is  a link to the sub table. no the class it self. For that we need the object type.
 			ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
@@ -849,12 +851,16 @@ int State;
 			//	{
 			//	lookUpSubClass(tmp_ark,LevelNo*100+4014, ObjectSubClassIndex);
 			//	}
-			shockObjList[i].ObjectSubClassIndex = ObjectSubClassIndex;
+			objList[i].ObjectSubClassIndex = ObjectSubClassIndex;
 //			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
 //			printf("Index back to cross = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
 			int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);
-			shockObjList[i].LookUpIndex= LookupIndex;
-			shockObjList[i].item_id =LookupIndex;
+			//objList[i].LookUpIndex= LookupIndex;
+			objList[i].item_id =LookupIndex;
+			objList[i].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
+			objList[i].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
+			objList[i].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
+						
 //			if (LookupIndex !=-1)
 //				{
 //				printf("It is a %s\n", shockObjectMasters[LookupIndex].desc );
@@ -870,6 +876,8 @@ int State;
 //			printf("XCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8));
 //			printf("YCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
 //			printf("YCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8));
+
+			
 //			printf("ZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
 //			printf("Angle1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
 //			printf("Angle2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
@@ -963,7 +971,7 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer)
     return buf;
 }
 
-int BuildTileMapShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600],long texture_map[272], char *filePath, int game, int LevelNo)
+int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo)
 {
 	FILE *file = NULL;      // File pointer
 	unsigned char *lev_ark; 
@@ -1106,10 +1114,10 @@ int BuildTileMapShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600]
 				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=6))//If a sloped tile has no slope then it's a open tile.
 					{LevelInfo[x][y].tileType =1;}
 				LevelInfo[x][y].indexObjectList = getValAtAddress(lev_ark,address_pointer+4,16);
-				if(LevelInfo[x][y].indexObjectList!=0)
-					{
-					printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
-					}
+				//if(LevelInfo[x][y].indexObjectList!=0)
+				//	{
+				//	printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
+				//	}
 
 /*
 	xxxxx0xx	Floor & ceiling, same direction
@@ -1409,7 +1417,7 @@ void unpack_data (unsigned char *pack,    unsigned char *unpack,
 //****************************************************************************
 
 
-void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025])
+void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know if the tile contains a door.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
@@ -1435,7 +1443,7 @@ for (int x=0; x<64;x++)
 	}
 }
 
-void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025])
+void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know the tile contains a patch object. No longer needed?
 ObjectItem currObj;
 for (int x=0; x<64;x++)
@@ -1461,7 +1469,7 @@ for (int x=0; x<64;x++)
 	}
 }
 
-void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1025])
+void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know the tile contains an elevator.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
@@ -1490,7 +1498,7 @@ for (int x=0; x<64;x++)
 	
 }
 
-void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1025])
+void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know that the tile terrains changes and I can later render both versions of the tile.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
@@ -1527,7 +1535,7 @@ for (int x=0; x<64;x++)
 	
 }
 
-void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1025])
+void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//Justs some useful info to know.
 ObjectItem currObj;
 for (int x=0; x<64;x++)

@@ -53,18 +53,19 @@ using namespace std;
 
 texture *textureMasters;
 objectMaster *objectMasters;
-shockObjectMaster *shockObjectMasters;
+//shockObjectMaster *shockObjectMasters;
 
-void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture_map[256] ,char *filePath, int game, int LevelNo);
-void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1025],long texture_map[256],char *filePath, int game, int LevelNo);
-void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1025],long texture_map[256],char *filePath, int game, int LevelNo);
-void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
-int BuildTileMapShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600],long texture_map[272], char *filePath, int game, int LevelNo);
-void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1025]);
+void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture_map[256] ,char *filePath, int game, int LevelNo);
+void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
+void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
+//void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
+void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
+int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo);
+void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 void unpackStringsShock();
 extern int levelNo;
@@ -75,10 +76,10 @@ int main()
 objectMaster *objMasterList;
 BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;	
 
-levelNo=0;
+levelNo=1;
 //int NoOfLevels=80;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
-	LoadConfig(UW1);
+	LoadConfig(SHOCK);
 	
 //Uncomment this this loop to see everything but note the output will not work in Radiant. 
 //for (levelNo=0; levelNo<NoOfLevels; levelNo++)
@@ -87,10 +88,10 @@ levelNo=0;
 //The two modes are ASCII_MODE and D3_MODE.
 
 	//exportMaps(UWDEMO,D3_MODE,0); //export level 0  from Underworld demo.
-	exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
+	//exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
 	//exportMaps(UW2,D3_MODE,levelNo);	//export levelno from Underworld II
 	
-	//exportMaps(SHOCK, ASCII_MODE,levelNo);	//Export Level No from Shock.
+	exportMaps(SHOCK, D3_MODE,levelNo);	//Export Level No from Shock.
 
 //	}
 	
@@ -130,15 +131,10 @@ switch (game)
 	case UWDEMO:
 	case UW1:
 	case UW2:
-		{
-		textureMasters =new texture[300];	
-		objectMasters=new objectMaster[1025];
-		break;
-		}
 	case SHOCK:
 		{
 		textureMasters =new texture[300];
-		shockObjectMasters=new shockObjectMaster[476];
+		objectMasters=new objectMaster[1025];
 		}
 	}
 const char *filePathT = TEXTURE_CONFIG_FILE;
@@ -204,12 +200,20 @@ if (f!=NULL)
 			case UWDEMO:
 			case UW1:
 			case UW2:
+			case SHOCK:			
 				{
 				while (fgets(line,173,f))
 					{
-					sscanf(line, "%d %s %s %s %d",&objNo,&objDesc,&objPath,&objCat,&objType );
+					sscanf(line, "%d %d %d %d %s %s %s %d",
+					&objNo, &objClass, &objSubClass, &objSubClassIndex,
+					&objDesc,&objPath,&objCat,&objType );
 					objectMasters[objNo].index=objNo;
 					objectMasters[objNo].isSet=1;
+					
+					objectMasters[objNo].objClass = objClass;
+					objectMasters[objNo].objSubClass = objSubClass;
+					objectMasters[objNo].objSubClassIndex = objSubClassIndex;	
+									
 					strcpy(objectMasters[objNo].desc, objDesc);
 					strcpy(objectMasters[objNo].path , objPath);
 					if (strcmp(objCat,"model") == 0)
@@ -230,19 +234,6 @@ if (f!=NULL)
 				fclose(f);
 				break;
 				}
-			case SHOCK:
-				{
-				while (fgets(line,173,f))
-					{
-					sscanf(line, "%d %d %d %d %s",&objNo,&objClass,&objSubClass,&objSubClassIndex,&objDesc );
-					shockObjectMasters[objNo].index = objNo;
-					shockObjectMasters[objNo].objClass = objClass;
-					shockObjectMasters[objNo].objSubClass = objSubClass;
-					shockObjectMasters[objNo].objSubClassIndex = objSubClassIndex;
-					strcpy(shockObjectMasters[objNo].desc, objDesc);
-					}
-				break;
-				}
 			}
 		}
 }
@@ -250,8 +241,8 @@ if (f!=NULL)
 
 void exportMaps(int game,int mode,int LevelNo)
 {
-	ObjectItem objList[1025];
-	shockObjectItem shockObjList[1600];
+	ObjectItem objList[1600];
+	//shockObjectItem shockObjList[1600];
 	long texture_map[256]; 
 	long texture_map_shock[272]; 
 
@@ -299,8 +290,8 @@ void exportMaps(int game,int mode,int LevelNo)
 		case SHOCK:		//system shock
 			{
 			filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
-			BuildTileMapShock(LevelInfo, shockObjList,texture_map_shock,filePath,game,LevelNo);
-			BuildObjectListShock(LevelInfo, shockObjList,texture_map,filePath,game,LevelNo);
+			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
+			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;
 			}			
@@ -314,7 +305,7 @@ void exportMaps(int game,int mode,int LevelNo)
 		{
 		case ASCII_MODE:		//ascii + other data maps
 			{
-			DumpAscii(game,LevelInfo,objList,shockObjList,LevelNo,0);	//1 for maps only. 0 for extra printouts like objects, textures + heightmaps.
+			DumpAscii(game,LevelInfo,objList,LevelNo,0);	//1 for maps only. 0 for extra printouts like objects, textures + heightmaps.
 			break;
 			}		
 		case D3_MODE:		//D3/Dark Mod

@@ -32,6 +32,6 @@
 #endif
 
 void RenderAsciiTile(tile &t);
-void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1025], shockObjectItem shockObjList[1600],int LevelNo,int mapOnly);
+void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
 
 int isTrigger(ObjectItem currobj);

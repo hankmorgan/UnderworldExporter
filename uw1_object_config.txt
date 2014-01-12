@@ -1,404 +1,404 @@
-0 a_hand_axe TODO ignore 1
-1 a_battle_axe TODO ignore 1
-2 an_axe TODO ignore 1
-3 a_dagger TODO ignore 1
-4 a_shortsword TODO ignore 1
-5 a_longsword TODO ignore 1
-6 a_broadsword TODO ignore 1
-7 a_cudgel TODO ignore 1
-8 a_light_mace TODO ignore 1
-9 a_mace TODO ignore 1
-10 a_shiny_sword TODO ignore 1
-11 a_jeweled_axe TODO ignore 1
-12 a_black_sword TODO ignore 1
-13 a_jeweled_sword TODO ignore 1
-14 a_jeweled_mace TODO ignore 1
-15 a_fist TODO ignore 1
-16 a_sling_stone TODO ignore 1
-17 a_crossbow_bolt TODO ignore 1
-18 an_arrow TODO ignore 1
-19 a_stone TODO ignore 1
-20 a_fireball TODO ignore 1
-21 a_lightning_bolt TODO ignore 1
-22 acid TODO ignore 1
-23 a_magic_missile TODO ignore 1
-24 a_sling TODO ignore 1
-25 a_bow TODO ignore 1
-26 a_crossbow TODO ignore 1
-31 a_jeweled_bow TODO ignore 1
-32 a_leather_vest TODO ignore 2
-33 a_mail_shirt TODO ignore 2
-34 a_breastplate TODO ignore 2
-35 leather_leggings_pairs_of_leather_leggings models/darkmod/wearables/armour/breastplate.lwo model 2
-36 mail_leggings_pairs_of_mail_leggings models/darkmod/wearables/armour/breastplate.lwo model 2
-37 plate_leggings_pairs_of_plate_leggings models/darkmod/wearables/armour/breastplate.lwo model 2
-38 leather_gloves_pairs_of_leather_gloves models/darkmod/wearables/armour/breastplate.lwo model 2
-39 chain_gauntlets_pairs_of_chain_gauntlets models/darkmod/wearables/armour/breastplate.lwo model 2
-40 plate_gauntlets_pairs_of_plate_gauntlets models/darkmod/wearables/armour/breastplate.lwo model 2
-41 leather_boots_pairs_of_leather_boots models/darkmod/wearables/armour/breastplate.lwo model 2
-42 chain_boots_pairs_of_chain_boots models/darkmod/wearables/armour/breastplate.lwo model 2
-43 plate_boots_pairs_of_plate_boots models/darkmod/wearables/armour/breastplate.lwo model 2
-44 a_leather_cap models/darkmod/wearables/headgear/hood01.lwo model 2
-45 a_chain_cowl models/darkmod/wearables/headgear/citywatch_helmet.lwo model 2
-46 a_helmet models/darkmod/wearables/headgear/elitecitywatch_helmet.lwo model 2
-47 a_pair_of_dragon_skin_boots_pairs_of_dragon_skin_boots models/darkmod/wearables/boot_large.lwo model 2
-48 a_crown models/darkmod/loot/exotic/crown01.lwo model 2
-49 a_crown models/darkmod/loot/exotic/crown01.lwo model 2
-50 a_crown models/darkmod/loot/exotic/crown01.lwo model 2
-54 an_iron_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
-55 a_shiny_shield models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
-56 a_gold_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
-57 a_silver_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
-58 a_red_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
-59 a_tower_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
-60 a_wooden_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
-61 a_small_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
-62 a_buckler models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
-63 a_jeweled_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
-64 a_rotworm atdm:ai_spider entity 0
-65 a_flesh_slug atdm:ai_spider entity 0
-66 a_cave_bat atdm:ai_spider entity 0
-67 a_giant_rat atdm:ai_spider entity 0
-68 a_giant_spider atdm:ai_spider entity 0
-69 a_acid_slug atdm:ai_spider entity 0
-70 a_goblin atdm:ai_pagan_common_armed entity 0
-71 a_goblin atdm:ai_pagan_common_armed entity 0
-72 a_giant_rat atdm:ai_spider entity 0
-73 a_vampire_bat atdm:ai_spider entity 0
-74 a_skeleton atdm:ai_undead_skeleton_armed entity 0
-75 an_imp atdm:ai_spider entity 0
-76 a_goblin atdm:ai_pagan_common_armed entity 0
-77 a_goblin atdm:ai_pagan_common_armed entity 0
-78 a_goblin atdm:ai_pagan_common_armed entity 0
-80 a_goblin atdm:ai_pagan_common_armed entity 0
-81 a_mongbat atdm:ai_spider entity 0
-82 a_bloodworm atdm:ai_spider entity 0
-83 a_wolf_spider atdm:ai_spider_huge entity 0
-84 a_mountainman_mountainmen atdm:ai_inventor_scientist entity 0
-85 a_green_lizardman_green_lizardmen atdm:ai_townsfolk_beggar entity 0
-86 a_mountainman_mountainmen atdm:ai_inventor_scientist entity 0
-87 a_lurker atdm:ai_spider entity 0
-88 a_red_lizardman_red_lizardmen atdm:ai_townsfolk_beggar entity 0
-89 a_gray_lizardman_red_lizardmen atdm:ai_townsfolk_beggar entity 0
-90 an_outcast atdm:ai_thief01 entity 0
-91 a_headless_headlesses atdm:ai_undead_revenant entity 0
-92 a_dread_spider atdm:ai_spider_huge entity 0
-93 a_fighter atdm:ai_guard_generic_01 entity 0
-94 a_fighter atdm:ai_guard_generic_01 entity 0
-95 a_fighter atdm:ai_guard_generic_01 entity 0
-96 a_troll atdm:ai_monster_werebeast entity 0
-97 a_ghost atdm:ai_revenant_spirit entity 0
-98 a_fighter atdm:ai_guard_generic_01 entity 0
-99 a_ghoul atdm:ai_undead_zombie entity 0
-100 a_ghost atdm:ai_revenant_spirit entity 0
-101 a_ghost atdm:ai_revenant_spirit entity 0
-102 a_gazer atdm:ai_monster_werebeast entity 0
-103 a_mage atdm:ai_archmage01 entity 0
-104 a_fighter atdm:ai_guard_generic_01 entity 0
-105 a_dark_ghoul atdm:ai_undead_revenant entity 0
-106 a_mage atdm:ai_archmage01 entity 0
-107 a_mage atdm:ai_archmage01 entity 0
-108 a_mage atdm:ai_archmage01 entity 0
-109 a_mage atdm:ai_archmage01 entity 0
-110 a_ghoul atdm:ai_undead_zombie entity 0
-111 a_feral_troll atdm:ai_monster_werebeast entity 0
-112 a_great_troll atdm:ai_monster_werebeast entity 0
-113 a_dire_ghost atdm:ai_revenant_spirit entity 0
-114 an_earth_golem atdm:ai_monster_werebeast entity 0
-115 a_mage atdm:ai_archmage01 entity 0
-116 a_deep_lurker atdm:ai_spider entity 0
-117 a_shadow_beast atdm:ai_undead_revenant entity 0
-118 a_reaper atdm:ai_monster_werebeast entity 0
-119 a_stone_golem atdm:ai_monster_werebeast entity 0
-120 a_fire_elemental atdm:ai_monster_werebeast entity 0
-121 a_metal_golem atdm:ai_monster_werebeast entity 0
-122 a_wisp atdm:ai_lantern_bot entity 0
-127 an_adventurer atdm:ai_thief_thug entity 0
-128 a_sack models/darkmod/containers/bag1_small.lwo entity 19
-129 an_open_sack models/darkmod/containers/bag1_small.lwo entity 19
-130 a_pack models/darkmod/containers/bag1_small.lwo entity 19
-131 an_open_pack models/darkmod/containers/bag1_small.lwo entity 19
-132 a_box_boxes models/darkmod/containers/crate01.lwo model 19
-133 an_open_box_open_boxes models/darkmod/containers/crate01.lwo model 19
-134 a_pouch_pouches models/darkmod/containers/bag1_small.lwo entity 19
-135 an_open_pouch_pouches models/darkmod/containers/bag1_small.lwo entity 19
-136 a_map_case models/darkmod/containers/bag1_small.lwo entity 19
-137 an_open_map_case models/darkmod/containers/bag1_small.lwo entity 19
-138 a_gold_coffer models/darkmod/containers/jewellery_box01.lwo entity 19
-139 an_open_gold_coffer models/darkmod/containers/jewellery_box01.lwo entity 19
-140 an_urn models/darkmod/graveyard/urn.ase entity 19
-141 a_quiver models/darkmod/weapons/quiver_full_bow.lwo entity 19
-142 a_bowl models/darkmod/kitchen/bowl01_large.lwo entity 19
-143 a_rune_bag models/darkmod/containers/bag1_small.lwo entity 19
-144 a_lantern models/darkmod/lights/non-extinguishable/hooded_lantern.lwo model 22
-145 a_torch_torches atdm:playertools_lantern entity 22
-146 a_candle models/darkmod/lights/extinguishable/candle_01.ase model 22
-147 a_taper models/darkmod/lights/extinguishable/candle_01.ase model 22
-148 a_lit_lantern models/darkmod/lights/non-extinguishable/hooded_lantern.lwo model 22
-149 a_lit_torch models/darkmod/lights/extinguishable/torch.lwo model 22
-150 a_lit_candle models/darkmod/lights/extinguishable/candle_01.ase model 22
-151 a_lit_taper models/darkmod/lights/extinguishable/candle_01.ase model 22
-152 a_wand models/darkmod/loot/scepter.ase model 12
-153 a_wand models/darkmod/loot/scepter.ase model 12
-154 a_wand models/darkmod/loot/scepter.ase model 12
-155 a_wand models/darkmod/loot/scepter.ase model 12
-156 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
-157 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
-158 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
-159 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
-160 a_coin models/darkmod/loot/coins/coin_pile.lwo model 18
-161 a_gold_coin models/darkmod/loot/coins/coin_pile.lwo model 18
-162 a_ruby_rubies models/darkmod/loot/ruby.lwo model 18
-163 a_red_gem models/darkmod/loot/ruby.lwo model 18
-164 a_small_blue_gem models/darkmod/loot/ruby.lwo model 18
-165 a_large_blue_gem models/darkmod/loot/ruby.lwo model 18
-166 a_sapphire models/darkmod/loot/ruby.lwo model 18
-167 an_emerald models/darkmod/loot/ruby.lwo model 18
-168 an_amulet models/darkmod/loot/ruby.lwo model 18
-169 a_goblet models/darkmod/loot/chalice.lwo model 18
-170 a_sceptre models/darkmod/loot/scepter.ase model 18
-171 a_gold_chain models/darkmod/loot/jewellery/necklace_jewelled.ase model 18
-172 a_gold_plate models/darkmod/loot/bowl_small.lwo model 18
-173 an_ankh_pendant models/darkmod/loot/jewellery/necklace_jewelled.ase model 18
-174 a_shiny_cup models/darkmod/loot/chalice.lwo model 18
-175 a_large_gold_nugget models/darkmod/loot/ingot_large.ase model 18
-176 a_piece_of_meat_pieces_of_meat models/darkmod/kitchen/food/bacon.lwo model 24
-177 a_loaf_of_bread_loaves_of_bread models/darkmod/kitchen/food/bread_loaf01.lwo model 24
-178 a_piece_of_cheese_pieces_of_cheese models/darkmod/kitchen/food/cheese_wheel.lwo model 24
-179 an_apple models/darkmod/kitchen/food/apple.lwo model 24
-180 an_ear_of_corn_ears_of_corn models/darkmod/kitchen/food/carrot.lwo model 24
-181 a_loaf_of_bread_loaves_of_bread models/darkmod/kitchen/food/bread_loaf01.lwo model 24
-182 a_fish_fish models/darkmod/kitchen/food/fish_bluefish.lwo model 24
-183 some_popcorn_bunches_of_popcorn models/darkmod/kitchen/food/muffin.lwo model 24
-184 a_mushroom models/darkmod/nature/mushroom_01.lwo model 24
-185 a_toadstool models/darkmod/nature/mushroom_01.lwo model 24
-186 a_bottle_of_ale_bottles_of_ale models/darkmod/kitchen/bottle01.lwo model 24
-187 a_red_potion models/darkmod/player_equipment/health_potion.lwo model 14
-188 a_green_potion models/darkmod/player_equipment/health_potion.lwo model 14
-189 a_bottle_of_water_bottles_of_water models/darkmod/kitchen/bottle01.lwo model 24
-190 a_flask_of_port_flasks_of_port models/darkmod/kitchen/bottle01.lwo model 24
-191 a_bottle_of_wine_bottles_of_wine models/darkmod/kitchen/bottle01.lwo model 24
-192 a_plant models/darkmod/nature/plant_02.ase model 25
-193 some_grass_bunches_of_grass models/darkmod/nature/grass_fuzz.ase model 25
-194 a_skull models/darkmod/graveyard/bones/skull.lwo model 23
-195 a_skull models/darkmod/graveyard/bones/skull.lwo model 23
-196 a_bone models/darkmod/graveyard/bones/bone.ase model 23
-197 a_bone models/darkmod/graveyard/bones/bone.ase model 23
-198 a_pile_of_bones_piles_of_bones models/darkmod/graveyard/bones/bone.ase model 23
-199 some_vines_bunches_of_vines models/darkmod/nature/ivy_part01a.lwo model 25
-200 a_broken_axe models/darkmod/junk/sword_broken.lwo model 23
-201 a_broken_sword models/darkmod/junk/sword_broken.lwo model 23
-202 a_broken_mace models/darkmod/junk/sword_broken.lwo model 23
-203 a_broken_shield models/darkmod/junk/sword_broken.lwo model 23
-204 a_piece_of_wood_pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23
-205 a_piece_of_wood_pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23
-206 a_plant models/darkmod/nature/plant_03.ase model 25
-207 a_plant models/darkmod/nature/plant_05.ase model 25
-208 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile02.lwo model 23
-209 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile01.lwo model 23
-210 a_pile_of_debris_piles_of_debris models/darkmod/junk/pot_ceramic_broken.ase model 23
-211 a_stalactite models/darkmod/nature/rocks/crystals1.ase model 25
-212 a_plant models/darkmod/nature/plant_03.ase model 25
-213 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile02.lwo model 23
-214 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile01.lwo model 23
-215 an_anvil models/darkmod/tools/anvil.lwo model 17
-216 a_pole models/darkmod/misc/pole_generic.lwo model 16
-217 a_dead_rotworm models/gibs/brain_2xb.lwo model 16
-218 some_rubble_piles_of_rubble models/darkmod/nature/rocks/rubble_medium_1.ase model 23
-219 a_pile_of_wood_chips_piles_of_wood_chips models/darkmod/junk/scrap_wood_pile01.lwo model 23
-220 a_pile_of_bones_piles_of_bones models/darkmod/graveyard/bones/bone.ase model 23
-221 a_blood_stain models/gibs/brain_2xb.lwo model 23
-222 a_blood_stain models/gibs/brain_2xb.lwo model 23
-223 a_blood_stain models/gibs/brain_2xb.lwo model 23
-224 a_runestone models/darkmod/loot/opal_teardrop.ase model 6
-225 the_Key_of_Truth models/darkmod/loot/jewellery/broach.lwo model 16
-226 the_Key_of_Love models/darkmod/loot/jewellery/broach.lwo model 16
-227 the_Key_of_Courage models/darkmod/loot/jewellery/broach.lwo model 16
-228 a_two_part_key models/darkmod/loot/jewellery/broach.lwo model 16
-229 a_two_part_key models/darkmod/loot/jewellery/broach.lwo model 16
-230 a_two_part_key models/darkmod/loot/jewellery/broach.lwo model 16
-231 the_Key_of_Infinity models/darkmod/loot/jewellery/broach.lwo model 16
-232 an_An_stone models/darkmod/loot/opal_teardrop.ase model 6
-233 a_Bet_stone models/darkmod/loot/opal_teardrop.ase model 6
-234 a_Corp_stone models/darkmod/loot/opal_teardrop.ase model 6
-235 a_Des_stone models/darkmod/loot/opal_teardrop.ase model 6
-236 an_Ex_stone models/darkmod/loot/opal_teardrop.ase model 6
-237 a_Flam_stone models/darkmod/loot/opal_teardrop.ase model 6
-238 a_Grav_stone models/darkmod/loot/opal_teardrop.ase model 6
-239 a_Hur_stone models/darkmod/loot/opal_teardrop.ase model 6
-240 an_In_stone models/darkmod/loot/opal_teardrop.ase model 6
-241 a_Jux_stone models/darkmod/loot/opal_teardrop.ase model 6
-242 a_Kal_stone models/darkmod/loot/opal_teardrop.ase model 6
-243 a_Lor_stone models/darkmod/loot/opal_teardrop.ase model 6
-244 a_Mani_stone models/darkmod/loot/opal_teardrop.ase model 6
-245 a_Nox_stone models/darkmod/loot/opal_teardrop.ase model 6
-246 an_Ort_stone models/darkmod/loot/opal_teardrop.ase model 6
-247 a_Por_stone models/darkmod/loot/opal_teardrop.ase model 6
-248 a_Quas_stone models/darkmod/loot/opal_teardrop.ase model 6
-249 a_Rel_stone models/darkmod/loot/opal_teardrop.ase model 6
-250 a_Sanct_stone models/darkmod/loot/opal_teardrop.ase model 6
-251 a_Tym_stone models/darkmod/loot/opal_teardrop.ase model 6
-252 an_Uus_stone models/darkmod/loot/opal_teardrop.ase model 6
-253 a_Vas_stone models/darkmod/loot/opal_teardrop.ase model 6
-254 a_Wis_stone models/darkmod/loot/opal_teardrop.ase model 6
-255 a_Ylem_stone models/darkmod/loot/opal_teardrop.ase model 6
-256 a_key atdm:key_ornate entity 5
-257 a_lockpick atdm:playertools_lockpick_snake entity 16
-258 a_key atdm:key_ornate entity 5
-259 a_key atdm:key_ornate entity 5
-260 a_key atdm:key_ornate entity 5
-261 a_key atdm:key_ornate entity 5
-262 a_key atdm:key_ornate entity 5
-263 a_key atdm:key_ornate entity 5
-264 a_key atdm:key_ornate entity 5
-265 a_key atdm:key_ornate entity 5
-266 a_key atdm:key_ornate entity 5
-267 a_key atdm:key_ornate entity 5
-268 a_key atdm:key_ornate entity 5
-269 a_key atdm:key_ornate entity 5
-270 a_key atdm:key_ornate entity 5
-271 a_lock atdm:target_changelockstate entity 21
-272 a_picture_of_Tom models/darkmod/decorative/painting_desktop_vertical.ase model 16
-273 a_crystal_splinter models/darkmod/junk/generic_shards/ceramicflind01.ase model 16
-274 an_orb_rock models/darkmod/decorative/pagan_orb_01.lwo model 16
-275 the_Gem_Cutter_of_Coulnes models/darkmod/tools/saw_hand.ase model 16
-276 a_book atdm:readable_mobile_scroll01 entity 11
-277 a_block_of_burning_incense_blocks_of_burning_incense models/darkmod/loot/purse_p.lwo model 16
-278 a_block_of_incense_blocks_of_incense models/darkmod/loot/purse_p.lwo model 16
-279 an_orb models/darkmod/decorative/pagan_orb_01.lwo model 16
-280 a_broken_blade models/darkmod/junk/sword_broken.lwo model 16
-281 a_broken_hilt models/darkmod/junk/sword_broken.lwo model 16
-282 a_figurine models/darkmod/loot/statue_loot.ase model 16
-283 some_rotworm_stew_servings_of_rotworm_stew models/darkmod/kitchen/bowl01_stew.lwo model 16
-284 some_strong_thread_pieces_of_strong_thread models/darkmod/misc/rope_coil.lwo model 16
-285 dragon_scales_bunches_of_dragon_scales models/darkmod/decorative/games/cards_fan.lwo model 16
-286 a_resilient_sphere_some_resilient_spheres models/darkmod/decorative/pagan_orb_01.lwo model 16
-287 a_standard models/darkmod/decorative/wall/banner1.lwo model 16
-288 a_spell TODO ignore 23
-289 a_bedroll models/darkmod/misc/straw_pile01.lwo model 23
-290 a_silver_seed TODO ignore 16
-291 a_mandolin models/darkmod/musical/lute01.lwo model 26
-292 a_flute models/darkmod/musical/pan_pipes01.lwo model 26
-293 some_leeches_bunches_of_leeches models/darkmod/kitchen/jar1.lwo model 14
-294 a_moonstone models/darkmod/decorative/pagan_orb_01.lwo model 16
-295 a_spike models/darkmod/tools/nails/nail_long.lwo model 16
-296 a_rock_hammer models/darkmod/tools/smithyhammer.lwo model 16
-297 a_glowing_rock models/darkmod/decorative/pagan_orb_01.lwo model 16
-298 a_campfire atdm:campfire_typical entity 27
-299 a_fishing_pole models/darkmod/misc/pole_generic.lwo model 16
-300 a_medallion models/darkmod/loot/jewellery/necklace_jewelled.ase model 16
-301 an_oil_flask models/darkmod/lights/non-extinguishable/hooded_lantern.lwo model 16
-302 a_fountain models/darkmod/decorative/vases/pot_ceramic.ase model 61
-303 a_cauldron models/darkmod/kitchen/cauldron_small.lwo model 23
-304 a_book atdm:readable_mobile_scroll01 entity 11
-305 a_book atdm:readable_mobile_scroll01 entity 11
-306 a_book atdm:readable_mobile_scroll01 entity 11
-307 a_book atdm:readable_mobile_scroll01 entity 11
-308 a_book atdm:readable_mobile_scroll01 entity 11
-309 a_book atdm:readable_mobile_scroll01 entity 11
-310 a_book atdm:readable_mobile_scroll01 entity 11
-311 a_book atdm:readable_mobile_scroll01 entity 11
-312 a_scroll atdm:readable_mobile_scroll01 entity 13
-313 a_scroll atdm:readable_mobile_scroll01 entity 13
-314 a_scroll atdm:readable_mobile_scroll01 entity 13
-315 a_map models/darkmod/readables/scroll_tied_up.lwo model 13
-316 a_scroll atdm:readable_mobile_scroll01 entity model 28
-317 a_scroll atdm:readable_mobile_scroll01 entity model 13
-318 a_scroll atdm:readable_mobile_scroll01 entity model 13
-319 a_scroll atdm:readable_mobile_scroll01 entity model 13
-320 a_door atdm:door_96x48_3hinge entity 4
-321 a_door atdm:door_96x48_3hinge entity 4
-322 a_door atdm:door_96x48_3hinge entity 4
-323 a_door atdm:door_96x48_3hinge entity 4
-324 a_door atdm:door_96x48_3hinge entity 4
-325 a_door atdm:door_96x48_3hinge entity 4
-326 a_portcullis_portcullises atdm:door_96x48_3hinge entity 30
-327 a_secret_door atdm:mover_door entity 29
-328 an_open_door atdm:door_96x48_3hinge entity 4
-329 an_open_door atdm:door_96x48_3hinge entity 4
-330 an_open_door atdm:door_96x48_3hinge entity 4
-331 an_open_door atdm:door_96x48_3hinge entity 4
-332 an_open_door atdm:door_96x48_3hinge entity 4
-333 an_open_door atdm:door_96x48_3hinge entity 4
-334 an_open_portcullis atdm:door_96x48_3hinge entity 30
-335 a_secret_door atdm:mover_door entity 29
-336 a_bench_benches models/darkmod/furniture/seating/bench_wooden01.lwo model 23
-337 an_arrow models/darkmod/weapons/broadhead.lwo model 3
-338 a_crossbow_bolt models/darkmod/weapons/crossbow_bolt.lwo model 3
-339 a_large_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
-340 a_large_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
-341 a_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
-342 a_small_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
-343 a_shrine models/darkmod/decorative/statues/the_hammer_medium2.lwo model 17
-344 a_table models/darkmod/furniture/tables/table_wood_rough_small.lwo model 23
-345 a_beam TODO ignore 23
-346 a_moongate TODO ignore 23
-347 a_barrel models/darkmod/containers/barrell_med_closed.lwo entity 19
-348 a_chair models/darkmod/furniture/seating/chair_simple01.lwo model 23
-349 a_chest models/darkmod/containers/openable/chest_wood.ase entity 19
-350 a_nightstand models/darkmod/furniture/small_dresser.ase model 19
-351 a_lotus_turbo_esprit atdm:ai_animal_horse_tame1 entity 23
-352 a_pillar TODO ignore 31
-353 a_lever atdm:mover_button entity 8
-354 a_switch_switches TODO ignore 8
-356 a_bridge models/darkmod/uw1/uw1_bridge.ase model 7
-357 a_gravestone TODO ignore 23
-358 some_writing atdm:readable_base entity 10
-365 force_field TODO ignore 23
-366 special_tmap_obj func_static entity 34
-367 special_tmap_obj func_static entity 35
-368 a_button atdm:mover_button entity 8
-369 a_button atdm:mover_button entity 8
-370 a_button atdm:mover_button entity 8
-371 a_switch atdm:mover_button entity 8
-372 a_switch atdm:mover_button entity 8
-373 a_lever atdm:mover_button entity 8
-374 a_pull_chain atdm:mover_button entity 8
-375 a_pull_chain atdm:mover_button entity 8
-376 a_button atdm:mover_button entity 8
-377 a_button atdm:mover_button entity 8
-378 a_button atdm:mover_button entity 8
-379 a_switch atdm:mover_button entity 8
-380 a_switch atdm:mover_button entity 8
-381 a_lever atdm:mover_button entity 8
-382 a_pull_chain atdm:mover_button entity 8
-383 a_pull_chain atdm:mover_button entity 8
-384 a_damage_trap TODO ignore 37
-385 a_teleport_trap func_teleporter entity 38
-386 a_arrow_trap TODO ignore 39
-387 a_do_trap atdm:target_callscriptfunction entity 40
-388 a_pit_trap TODO ignore 41
-389 a_change_terrain_trap func_static entity 42
-390 a_spelltrap TODO ignore 43
-391 a_create_object_trap TODO ignore 44
-392 a_door_trap atdm:target_changelockstate ignore 45
-393 a_ward_trap TODO ignore 46
-394 a_tell_trap TODO ignore 47
-395 a_delete_object_trap TODO ignore 48
-396 an_inventory_trap TODO ignore 49
-397 a_set_variable_trap TODO ignore 50
-398 a_check_variable_trap TODO ignore 51
-399 a_combination_trap TODO ignore 52
-400 a_text_string_trap TODO ignore 53
-416 a_move_trigger trigger_multiple entity 54
-417 a_pick_up_trigger TODO ignore 55
-418 a_use_trigger TODO ignore 56
-419 a_look_trigger TODO ignore 57
-420 a_step_on_trigger TODO ignore 58
-421 an_open_trigger TODO ignore 59
-422 an_unlock_trigger TODO ignore 60
-448 some_blood TODO ignore 23
-449 a_mist_cloud TODO ignore 25
-450 an_explosion TODO ignore 23
-451 an_explosion TODO ignore 23
-452 an_explosion TODO ignore 23
-453 a_splash_splashes TODO ignore 23
-454 a_splash_splahes TODO ignore 23
-455 a_spell_effect TODO ignore 23
-456 some_smoke TODO ignore 25
-457 a_fountain models/darkmod/decorative/vases/pot_ceramic.ase model 23
-458 a_silver_tree models/darkmod/nature/flowers/flowers_patch_01.ase model 17
-459 some_damage TODO ignore 23
-461 a_sound_source TODO ignore 32
-462 some_changing_terrain TODO ignore 23
-463 a_moving_door TODO ignore 23
+0 0 0 0 a_hand_axe TODO ignore 1
+1 0 0 0 a_battle_axe TODO ignore 1
+2 0 0 0 an_axe TODO ignore 1
+3 0 0 0 a_dagger TODO ignore 1
+4 0 0 0 a_shortsword TODO ignore 1
+5 0 0 0 a_longsword TODO ignore 1
+6 0 0 0 a_broadsword TODO ignore 1
+7 0 0 0 a_cudgel TODO ignore 1
+8 0 0 0 a_light_mace TODO ignore 1
+9 0 0 0 a_mace TODO ignore 1
+10 0 0 0 a_shiny_sword TODO ignore 1
+11 0 0 0 a_jeweled_axe TODO ignore 1
+12 0 0 0 a_black_sword TODO ignore 1
+13 0 0 0 a_jeweled_sword TODO ignore 1
+14 0 0 0 a_jeweled_mace TODO ignore 1
+15 0 0 0 a_fist TODO ignore 1
+16 0 0 0 a_sling_stone TODO ignore 1
+17 0 0 0 a_crossbow_bolt TODO ignore 1
+18 0 0 0 an_arrow TODO ignore 1
+19 0 0 0 a_stone TODO ignore 1
+20 0 0 0 a_fireball TODO ignore 1
+21 0 0 0 a_lightning_bolt TODO ignore 1
+22 0 0 0 acid TODO ignore 1
+23 0 0 0 a_magic_missile TODO ignore 1
+24 0 0 0 a_sling TODO ignore 1
+25 0 0 0 a_bow TODO ignore 1
+26 0 0 0 a_crossbow TODO ignore 1
+31 0 0 0 a_jeweled_bow TODO ignore 1
+32 0 0 0 a_leather_vest TODO ignore 2
+33 0 0 0 a_mail_shirt TODO ignore 2
+34 0 0 0 a_breastplate TODO ignore 2
+35 0 0 0 leather_leggings_pairs_of_leather_leggings models/darkmod/wearables/armour/breastplate.lwo model 2
+36 0 0 0 mail_leggings_pairs_of_mail_leggings models/darkmod/wearables/armour/breastplate.lwo model 2
+37 0 0 0 plate_leggings_pairs_of_plate_leggings models/darkmod/wearables/armour/breastplate.lwo model 2
+38 0 0 0 leather_gloves_pairs_of_leather_gloves models/darkmod/wearables/armour/breastplate.lwo model 2
+39 0 0 0 chain_gauntlets_pairs_of_chain_gauntlets models/darkmod/wearables/armour/breastplate.lwo model 2
+40 0 0 0 plate_gauntlets_pairs_of_plate_gauntlets models/darkmod/wearables/armour/breastplate.lwo model 2
+41 0 0 0 leather_boots_pairs_of_leather_boots models/darkmod/wearables/armour/breastplate.lwo model 2
+42 0 0 0 chain_boots_pairs_of_chain_boots models/darkmod/wearables/armour/breastplate.lwo model 2
+43 0 0 0 plate_boots_pairs_of_plate_boots models/darkmod/wearables/armour/breastplate.lwo model 2
+44 0 0 0 a_leather_cap models/darkmod/wearables/headgear/hood01.lwo model 2
+45 0 0 0 a_chain_cowl models/darkmod/wearables/headgear/citywatch_helmet.lwo model 2
+46 0 0 0 a_helmet models/darkmod/wearables/headgear/elitecitywatch_helmet.lwo model 2
+47 0 0 0 a_pair_of_dragon_skin_boots_pairs_of_dragon_skin_boots models/darkmod/wearables/boot_large.lwo model 2
+48 0 0 0 a_crown models/darkmod/loot/exotic/crown01.lwo model 2
+49 0 0 0 a_crown models/darkmod/loot/exotic/crown01.lwo model 2
+50 0 0 0 a_crown models/darkmod/loot/exotic/crown01.lwo model 2
+54 0 0 0 an_iron_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
+55 0 0 0 a_shiny_shield models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
+56 0 0 0 a_gold_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
+57 0 0 0 a_silver_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
+58 0 0 0 a_red_ring models/darkmod/loot/jewellery/ring_gem_bc01.ase model 2
+59 0 0 0 a_tower_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
+60 0 0 0 a_wooden_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
+61 0 0 0 a_small_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
+62 0 0 0 a_buckler models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
+63 0 0 0 a_jeweled_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 2
+64 0 0 0 a_rotworm atdm:ai_spider entity 0
+65 0 0 0 a_flesh_slug atdm:ai_spider entity 0
+66 0 0 0 a_cave_bat atdm:ai_spider entity 0
+67 0 0 0 a_giant_rat atdm:ai_spider entity 0
+68 0 0 0 a_giant_spider atdm:ai_spider entity 0
+69 0 0 0 a_acid_slug atdm:ai_spider entity 0
+70 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
+71 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
+72 0 0 0 a_giant_rat atdm:ai_spider entity 0
+73 0 0 0 a_vampire_bat atdm:ai_spider entity 0
+74 0 0 0 a_skeleton atdm:ai_undead_skeleton_armed entity 0
+75 0 0 0 an_imp atdm:ai_spider entity 0
+76 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
+77 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
+78 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
+80 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
+81 0 0 0 a_mongbat atdm:ai_spider entity 0
+82 0 0 0 a_bloodworm atdm:ai_spider entity 0
+83 0 0 0 a_wolf_spider atdm:ai_spider_huge entity 0
+84 0 0 0 a_mountainman_mountainmen atdm:ai_inventor_scientist entity 0
+85 0 0 0 a_green_lizardman_green_lizardmen atdm:ai_townsfolk_beggar entity 0
+86 0 0 0 a_mountainman_mountainmen atdm:ai_inventor_scientist entity 0
+87 0 0 0 a_lurker atdm:ai_spider entity 0
+88 0 0 0 a_red_lizardman_red_lizardmen atdm:ai_townsfolk_beggar entity 0
+89 0 0 0 a_gray_lizardman_red_lizardmen atdm:ai_townsfolk_beggar entity 0
+90 0 0 0 an_outcast atdm:ai_thief01 entity 0
+91 0 0 0 a_headless_headlesses atdm:ai_undead_revenant entity 0
+92 0 0 0 a_dread_spider atdm:ai_spider_huge entity 0
+93 0 0 0 a_fighter atdm:ai_guard_generic_01 entity 0
+94 0 0 0 a_fighter atdm:ai_guard_generic_01 entity 0
+95 0 0 0 a_fighter atdm:ai_guard_generic_01 entity 0
+96 0 0 0 a_troll atdm:ai_monster_werebeast entity 0
+97 0 0 0 a_ghost atdm:ai_revenant_spirit entity 0
+98 0 0 0 a_fighter atdm:ai_guard_generic_01 entity 0
+99 0 0 0 a_ghoul atdm:ai_undead_zombie entity 0
+100 0 0 0 a_ghost atdm:ai_revenant_spirit entity 0
+101 0 0 0 a_ghost atdm:ai_revenant_spirit entity 0
+102 0 0 0 a_gazer atdm:ai_monster_werebeast entity 0
+103 0 0 0 a_mage atdm:ai_archmage01 entity 0
+104 0 0 0 a_fighter atdm:ai_guard_generic_01 entity 0
+105 0 0 0 a_dark_ghoul atdm:ai_undead_revenant entity 0
+106 0 0 0 a_mage atdm:ai_archmage01 entity 0
+107 0 0 0 a_mage atdm:ai_archmage01 entity 0
+108 0 0 0 a_mage atdm:ai_archmage01 entity 0
+109 0 0 0 a_mage atdm:ai_archmage01 entity 0
+110 0 0 0 a_ghoul atdm:ai_undead_zombie entity 0
+111 0 0 0 a_feral_troll atdm:ai_monster_werebeast entity 0
+112 0 0 0 a_great_troll atdm:ai_monster_werebeast entity 0
+113 0 0 0 a_dire_ghost atdm:ai_revenant_spirit entity 0
+114 0 0 0 an_earth_golem atdm:ai_monster_werebeast entity 0
+115 0 0 0 a_mage atdm:ai_archmage01 entity 0
+116 0 0 0 a_deep_lurker atdm:ai_spider entity 0
+117 0 0 0 a_shadow_beast atdm:ai_undead_revenant entity 0
+118 0 0 0 a_reaper atdm:ai_monster_werebeast entity 0
+119 0 0 0 a_stone_golem atdm:ai_monster_werebeast entity 0
+120 0 0 0 a_fire_elemental atdm:ai_monster_werebeast entity 0
+121 0 0 0 a_metal_golem atdm:ai_monster_werebeast entity 0
+122 0 0 0 a_wisp atdm:ai_lantern_bot entity 0
+127 0 0 0 an_adventurer atdm:ai_thief_thug entity 0
+128 0 0 0 a_sack models/darkmod/containers/bag1_small.lwo entity 19
+129 0 0 0 an_open_sack models/darkmod/containers/bag1_small.lwo entity 19
+130 0 0 0 a_pack models/darkmod/containers/bag1_small.lwo entity 19
+131 0 0 0 an_open_pack models/darkmod/containers/bag1_small.lwo entity 19
+132 0 0 0 a_box_boxes models/darkmod/containers/crate01.lwo model 19
+133 0 0 0 an_open_box_open_boxes models/darkmod/containers/crate01.lwo model 19
+134 0 0 0 a_pouch_pouches models/darkmod/containers/bag1_small.lwo entity 19
+135 0 0 0 an_open_pouch_pouches models/darkmod/containers/bag1_small.lwo entity 19
+136 0 0 0 a_map_case models/darkmod/containers/bag1_small.lwo entity 19
+137 0 0 0 an_open_map_case models/darkmod/containers/bag1_small.lwo entity 19
+138 0 0 0 a_gold_coffer models/darkmod/containers/jewellery_box01.lwo entity 19
+139 0 0 0 an_open_gold_coffer models/darkmod/containers/jewellery_box01.lwo entity 19
+140 0 0 0 an_urn models/darkmod/graveyard/urn.ase entity 19
+141 0 0 0 a_quiver models/darkmod/weapons/quiver_full_bow.lwo entity 19
+142 0 0 0 a_bowl models/darkmod/kitchen/bowl01_large.lwo entity 19
+143 0 0 0 a_rune_bag models/darkmod/containers/bag1_small.lwo entity 19
+144 0 0 0 a_lantern models/darkmod/lights/non-extinguishable/hooded_lantern.lwo model 22
+145 0 0 0 a_torch_torches atdm:playertools_lantern entity 22
+146 0 0 0 a_candle models/darkmod/lights/extinguishable/candle_01.ase model 22
+147 0 0 0 a_taper models/darkmod/lights/extinguishable/candle_01.ase model 22
+148 0 0 0 a_lit_lantern models/darkmod/lights/non-extinguishable/hooded_lantern.lwo model 22
+149 0 0 0 a_lit_torch models/darkmod/lights/extinguishable/torch.lwo model 22
+150 0 0 0 a_lit_candle models/darkmod/lights/extinguishable/candle_01.ase model 22
+151 0 0 0 a_lit_taper models/darkmod/lights/extinguishable/candle_01.ase model 22
+152 0 0 0 a_wand models/darkmod/loot/scepter.ase model 12
+153 0 0 0 a_wand models/darkmod/loot/scepter.ase model 12
+154 0 0 0 a_wand models/darkmod/loot/scepter.ase model 12
+155 0 0 0 a_wand models/darkmod/loot/scepter.ase model 12
+156 0 0 0 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
+157 0 0 0 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
+158 0 0 0 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
+159 0 0 0 a_broken_wand models/darkmod/junk/handle_long_broken.lwo model 23
+160 0 0 0 a_coin models/darkmod/loot/coins/coin_pile.lwo model 18
+161 0 0 0 a_gold_coin models/darkmod/loot/coins/coin_pile.lwo model 18
+162 0 0 0 a_ruby_rubies models/darkmod/loot/ruby.lwo model 18
+163 0 0 0 a_red_gem models/darkmod/loot/ruby.lwo model 18
+164 0 0 0 a_small_blue_gem models/darkmod/loot/ruby.lwo model 18
+165 0 0 0 a_large_blue_gem models/darkmod/loot/ruby.lwo model 18
+166 0 0 0 a_sapphire models/darkmod/loot/ruby.lwo model 18
+167 0 0 0 an_emerald models/darkmod/loot/ruby.lwo model 18
+168 0 0 0 an_amulet models/darkmod/loot/ruby.lwo model 18
+169 0 0 0 a_goblet models/darkmod/loot/chalice.lwo model 18
+170 0 0 0 a_sceptre models/darkmod/loot/scepter.ase model 18
+171 0 0 0 a_gold_chain models/darkmod/loot/jewellery/necklace_jewelled.ase model 18
+172 0 0 0 a_gold_plate models/darkmod/loot/bowl_small.lwo model 18
+173 0 0 0 an_ankh_pendant models/darkmod/loot/jewellery/necklace_jewelled.ase model 18
+174 0 0 0 a_shiny_cup models/darkmod/loot/chalice.lwo model 18
+175 0 0 0 a_large_gold_nugget models/darkmod/loot/ingot_large.ase model 18
+176 0 0 0 a_piece_of_meat_pieces_of_meat models/darkmod/kitchen/food/bacon.lwo model 24
+177 0 0 0 a_loaf_of_bread_loaves_of_bread models/darkmod/kitchen/food/bread_loaf01.lwo model 24
+178 0 0 0 a_piece_of_cheese_pieces_of_cheese models/darkmod/kitchen/food/cheese_wheel.lwo model 24
+179 0 0 0 an_apple models/darkmod/kitchen/food/apple.lwo model 24
+180 0 0 0 an_ear_of_corn_ears_of_corn models/darkmod/kitchen/food/carrot.lwo model 24
+181 0 0 0 a_loaf_of_bread_loaves_of_bread models/darkmod/kitchen/food/bread_loaf01.lwo model 24
+182 0 0 0 a_fish_fish models/darkmod/kitchen/food/fish_bluefish.lwo model 24
+183 0 0 0 some_popcorn_bunches_of_popcorn models/darkmod/kitchen/food/muffin.lwo model 24
+184 0 0 0 a_mushroom models/darkmod/nature/mushroom_01.lwo model 24
+185 0 0 0 a_toadstool models/darkmod/nature/mushroom_01.lwo model 24
+186 0 0 0 a_bottle_of_ale_bottles_of_ale models/darkmod/kitchen/bottle01.lwo model 24
+187 0 0 0 a_red_potion models/darkmod/player_equipment/health_potion.lwo model 14
+188 0 0 0 a_green_potion models/darkmod/player_equipment/health_potion.lwo model 14
+189 0 0 0 a_bottle_of_water_bottles_of_water models/darkmod/kitchen/bottle01.lwo model 24
+190 0 0 0 a_flask_of_port_flasks_of_port models/darkmod/kitchen/bottle01.lwo model 24
+191 0 0 0 a_bottle_of_wine_bottles_of_wine models/darkmod/kitchen/bottle01.lwo model 24
+192 0 0 0 a_plant models/darkmod/nature/plant_02.ase model 25
+193 0 0 0 some_grass_bunches_of_grass models/darkmod/nature/grass_fuzz.ase model 25
+194 0 0 0 a_skull models/darkmod/graveyard/bones/skull.lwo model 23
+195 0 0 0 a_skull models/darkmod/graveyard/bones/skull.lwo model 23
+196 0 0 0 a_bone models/darkmod/graveyard/bones/bone.ase model 23
+197 0 0 0 a_bone models/darkmod/graveyard/bones/bone.ase model 23
+198 0 0 0 a_pile_of_bones_piles_of_bones models/darkmod/graveyard/bones/bone.ase model 23
+199 0 0 0 some_vines_bunches_of_vines models/darkmod/nature/ivy_part01a.lwo model 25
+200 0 0 0 a_broken_axe models/darkmod/junk/sword_broken.lwo model 23
+201 0 0 0 a_broken_sword models/darkmod/junk/sword_broken.lwo model 23
+202 0 0 0 a_broken_mace models/darkmod/junk/sword_broken.lwo model 23
+203 0 0 0 a_broken_shield models/darkmod/junk/sword_broken.lwo model 23
+204 0 0 0 a_piece_of_wood_pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23
+205 0 0 0 a_piece_of_wood_pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23
+206 0 0 0 a_plant models/darkmod/nature/plant_03.ase model 25
+207 0 0 0 a_plant models/darkmod/nature/plant_05.ase model 25
+208 0 0 0 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile02.lwo model 23
+209 0 0 0 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile01.lwo model 23
+210 0 0 0 a_pile_of_debris_piles_of_debris models/darkmod/junk/pot_ceramic_broken.ase model 23
+211 0 0 0 a_stalactite models/darkmod/nature/rocks/crystals1.ase model 25
+212 0 0 0 a_plant models/darkmod/nature/plant_03.ase model 25
+213 0 0 0 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile02.lwo model 23
+214 0 0 0 a_pile_of_debris_piles_of_debris models/darkmod/junk/scrap_wood_pile01.lwo model 23
+215 0 0 0 an_anvil models/darkmod/tools/anvil.lwo model 17
+216 0 0 0 a_pole models/darkmod/misc/pole_generic.lwo model 16
+217 0 0 0 a_dead_rotworm models/gibs/brain_2xb.lwo model 16
+218 0 0 0 some_rubble_piles_of_rubble models/darkmod/nature/rocks/rubble_medium_1.ase model 23
+219 0 0 0 a_pile_of_wood_chips_piles_of_wood_chips models/darkmod/junk/scrap_wood_pile01.lwo model 23
+220 0 0 0 a_pile_of_bones_piles_of_bones models/darkmod/graveyard/bones/bone.ase model 23
+221 0 0 0 a_blood_stain models/gibs/brain_2xb.lwo model 23
+222 0 0 0 a_blood_stain models/gibs/brain_2xb.lwo model 23
+223 0 0 0 a_blood_stain models/gibs/brain_2xb.lwo model 23
+224 0 0 0 a_runestone models/darkmod/loot/opal_teardrop.ase model 6
+225 0 0 0 the_Key_of_Truth models/darkmod/loot/jewellery/broach.lwo model 16
+226 0 0 0 the_Key_of_Love models/darkmod/loot/jewellery/broach.lwo model 16
+227 0 0 0 the_Key_of_Courage models/darkmod/loot/jewellery/broach.lwo model 16
+228 0 0 0 a_two_part_key models/darkmod/loot/jewellery/broach.lwo model 16
+229 0 0 0 a_two_part_key models/darkmod/loot/jewellery/broach.lwo model 16
+230 0 0 0 a_two_part_key models/darkmod/loot/jewellery/broach.lwo model 16
+231 0 0 0 the_Key_of_Infinity models/darkmod/loot/jewellery/broach.lwo model 16
+232 0 0 0 an_An_stone models/darkmod/loot/opal_teardrop.ase model 6
+233 0 0 0 a_Bet_stone models/darkmod/loot/opal_teardrop.ase model 6
+234 0 0 0 a_Corp_stone models/darkmod/loot/opal_teardrop.ase model 6
+235 0 0 0 a_Des_stone models/darkmod/loot/opal_teardrop.ase model 6
+236 0 0 0 an_Ex_stone models/darkmod/loot/opal_teardrop.ase model 6
+237 0 0 0 a_Flam_stone models/darkmod/loot/opal_teardrop.ase model 6
+238 0 0 0 a_Grav_stone models/darkmod/loot/opal_teardrop.ase model 6
+239 0 0 0 a_Hur_stone models/darkmod/loot/opal_teardrop.ase model 6
+240 0 0 0 an_In_stone models/darkmod/loot/opal_teardrop.ase model 6
+241 0 0 0 a_Jux_stone models/darkmod/loot/opal_teardrop.ase model 6
+242 0 0 0 a_Kal_stone models/darkmod/loot/opal_teardrop.ase model 6
+243 0 0 0 a_Lor_stone models/darkmod/loot/opal_teardrop.ase model 6
+244 0 0 0 a_Mani_stone models/darkmod/loot/opal_teardrop.ase model 6
+245 0 0 0 a_Nox_stone models/darkmod/loot/opal_teardrop.ase model 6
+246 0 0 0 an_Ort_stone models/darkmod/loot/opal_teardrop.ase model 6
+247 0 0 0 a_Por_stone models/darkmod/loot/opal_teardrop.ase model 6
+248 0 0 0 a_Quas_stone models/darkmod/loot/opal_teardrop.ase model 6
+249 0 0 0 a_Rel_stone models/darkmod/loot/opal_teardrop.ase model 6
+250 0 0 0 a_Sanct_stone models/darkmod/loot/opal_teardrop.ase model 6
+251 0 0 0 a_Tym_stone models/darkmod/loot/opal_teardrop.ase model 6
+252 0 0 0 an_Uus_stone models/darkmod/loot/opal_teardrop.ase model 6
+253 0 0 0 a_Vas_stone models/darkmod/loot/opal_teardrop.ase model 6
+254 0 0 0 a_Wis_stone models/darkmod/loot/opal_teardrop.ase model 6
+255 0 0 0 a_Ylem_stone models/darkmod/loot/opal_teardrop.ase model 6
+256 0 0 0 a_key atdm:key_ornate entity 5
+257 0 0 0 a_lockpick atdm:playertools_lockpick_snake entity 16
+258 0 0 0 a_key atdm:key_ornate entity 5
+259 0 0 0 a_key atdm:key_ornate entity 5
+260 0 0 0 a_key atdm:key_ornate entity 5
+261 0 0 0 a_key atdm:key_ornate entity 5
+262 0 0 0 a_key atdm:key_ornate entity 5
+263 0 0 0 a_key atdm:key_ornate entity 5
+264 0 0 0 a_key atdm:key_ornate entity 5
+265 0 0 0 a_key atdm:key_ornate entity 5
+266 0 0 0 a_key atdm:key_ornate entity 5
+267 0 0 0 a_key atdm:key_ornate entity 5
+268 0 0 0 a_key atdm:key_ornate entity 5
+269 0 0 0 a_key atdm:key_ornate entity 5
+270 0 0 0 a_key atdm:key_ornate entity 5
+271 0 0 0 a_lock atdm:target_changelockstate entity 21
+272 0 0 0 a_picture_of_Tom models/darkmod/decorative/painting_desktop_vertical.ase model 16
+273 0 0 0 a_crystal_splinter models/darkmod/junk/generic_shards/ceramicflind01.ase model 16
+274 0 0 0 an_orb_rock models/darkmod/decorative/pagan_orb_01.lwo model 16
+275 0 0 0 the_Gem_Cutter_of_Coulnes models/darkmod/tools/saw_hand.ase model 16
+276 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+277 0 0 0 a_block_of_burning_incense_blocks_of_burning_incense models/darkmod/loot/purse_p.lwo model 16
+278 0 0 0 a_block_of_incense_blocks_of_incense models/darkmod/loot/purse_p.lwo model 16
+279 0 0 0 an_orb models/darkmod/decorative/pagan_orb_01.lwo model 16
+280 0 0 0 a_broken_blade models/darkmod/junk/sword_broken.lwo model 16
+281 0 0 0 a_broken_hilt models/darkmod/junk/sword_broken.lwo model 16
+282 0 0 0 a_figurine models/darkmod/loot/statue_loot.ase model 16
+283 0 0 0 some_rotworm_stew_servings_of_rotworm_stew models/darkmod/kitchen/bowl01_stew.lwo model 16
+284 0 0 0 some_strong_thread_pieces_of_strong_thread models/darkmod/misc/rope_coil.lwo model 16
+285 0 0 0 dragon_scales_bunches_of_dragon_scales models/darkmod/decorative/games/cards_fan.lwo model 16
+286 0 0 0 a_resilient_sphere_some_resilient_spheres models/darkmod/decorative/pagan_orb_01.lwo model 16
+287 0 0 0 a_standard models/darkmod/decorative/wall/banner1.lwo model 16
+288 0 0 0 a_spell TODO ignore 23
+289 0 0 0 a_bedroll models/darkmod/misc/straw_pile01.lwo model 23
+290 0 0 0 a_silver_seed TODO ignore 16
+291 0 0 0 a_mandolin models/darkmod/musical/lute01.lwo model 26
+292 0 0 0 a_flute models/darkmod/musical/pan_pipes01.lwo model 26
+293 0 0 0 some_leeches_bunches_of_leeches models/darkmod/kitchen/jar1.lwo model 14
+294 0 0 0 a_moonstone models/darkmod/decorative/pagan_orb_01.lwo model 16
+295 0 0 0 a_spike models/darkmod/tools/nails/nail_long.lwo model 16
+296 0 0 0 a_rock_hammer models/darkmod/tools/smithyhammer.lwo model 16
+297 0 0 0 a_glowing_rock models/darkmod/decorative/pagan_orb_01.lwo model 16
+298 0 0 0 a_campfire atdm:campfire_typical entity 27
+299 0 0 0 a_fishing_pole models/darkmod/misc/pole_generic.lwo model 16
+300 0 0 0 a_medallion models/darkmod/loot/jewellery/necklace_jewelled.ase model 16
+301 0 0 0 an_oil_flask models/darkmod/lights/non-extinguishable/hooded_lantern.lwo model 16
+302 0 0 0 a_fountain models/darkmod/decorative/vases/pot_ceramic.ase model 61
+303 0 0 0 a_cauldron models/darkmod/kitchen/cauldron_small.lwo model 23
+304 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+305 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+306 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+307 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+308 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+309 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+310 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+311 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
+312 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 13
+313 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 13
+314 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 13
+315 0 0 0 a_map models/darkmod/readables/scroll_tied_up.lwo model 13
+316 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity model
+317 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity model
+318 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity model
+319 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity model
+320 0 0 0 a_door atdm:door_96x48_3hinge entity 4
+321 0 0 0 a_door atdm:door_96x48_3hinge entity 4
+322 0 0 0 a_door atdm:door_96x48_3hinge entity 4
+323 0 0 0 a_door atdm:door_96x48_3hinge entity 4
+324 0 0 0 a_door atdm:door_96x48_3hinge entity 4
+325 0 0 0 a_door atdm:door_96x48_3hinge entity 4
+326 0 0 0 a_portcullis_portcullises atdm:door_96x48_3hinge entity 30
+327 0 0 0 a_secret_door atdm:mover_door entity 29
+328 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
+329 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
+330 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
+331 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
+332 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
+333 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
+334 0 0 0 an_open_portcullis atdm:door_96x48_3hinge entity 30
+335 0 0 0 a_secret_door atdm:mover_door entity 29
+336 0 0 0 a_bench_benches models/darkmod/furniture/seating/bench_wooden01.lwo model 23
+337 0 0 0 an_arrow models/darkmod/weapons/broadhead.lwo model 3
+338 0 0 0 a_crossbow_bolt models/darkmod/weapons/crossbow_bolt.lwo model 3
+339 0 0 0 a_large_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
+340 0 0 0 a_large_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
+341 0 0 0 a_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
+342 0 0 0 a_small_boulder models/darkmod/nature/rocks/rubble_medium_1.ase model 23
+343 0 0 0 a_shrine models/darkmod/decorative/statues/the_hammer_medium2.lwo model 17
+344 0 0 0 a_table models/darkmod/furniture/tables/table_wood_rough_small.lwo model 23
+345 0 0 0 a_beam TODO ignore 23
+346 0 0 0 a_moongate TODO ignore 23
+347 0 0 0 a_barrel models/darkmod/containers/barrell_med_closed.lwo entity 19
+348 0 0 0 a_chair models/darkmod/furniture/seating/chair_simple01.lwo model 23
+349 0 0 0 a_chest models/darkmod/containers/openable/chest_wood.ase entity 19
+350 0 0 0 a_nightstand models/darkmod/furniture/small_dresser.ase model 19
+351 0 0 0 a_lotus_turbo_esprit atdm:ai_animal_horse_tame1 entity 23
+352 0 0 0 a_pillar TODO ignore 31
+353 0 0 0 a_lever atdm:mover_button entity 8
+354 0 0 0 a_switch_switches TODO ignore 8
+356 0 0 0 a_bridge models/darkmod/uw1/uw1_bridge.ase model 7
+357 0 0 0 a_gravestone TODO ignore 23
+358 0 0 0 some_writing atdm:readable_base entity 10
+365 0 0 0 force_field TODO ignore 23
+366 0 0 0 special_tmap_obj func_static entity 34
+367 0 0 0 special_tmap_obj func_static entity 35
+368 0 0 0 a_button atdm:mover_button entity 8
+369 0 0 0 a_button atdm:mover_button entity 8
+370 0 0 0 a_button atdm:mover_button entity 8
+371 0 0 0 a_switch atdm:mover_button entity 8
+372 0 0 0 a_switch atdm:mover_button entity 8
+373 0 0 0 a_lever atdm:mover_button entity 8
+374 0 0 0 a_pull_chain atdm:mover_button entity 8
+375 0 0 0 a_pull_chain atdm:mover_button entity 8
+376 0 0 0 a_button atdm:mover_button entity 8
+377 0 0 0 a_button atdm:mover_button entity 8
+378 0 0 0 a_button atdm:mover_button entity 8
+379 0 0 0 a_switch atdm:mover_button entity 8
+380 0 0 0 a_switch atdm:mover_button entity 8
+381 0 0 0 a_lever atdm:mover_button entity 8
+382 0 0 0 a_pull_chain atdm:mover_button entity 8
+383 0 0 0 a_pull_chain atdm:mover_button entity 8
+384 0 0 0 a_damage_trap TODO ignore 37
+385 0 0 0 a_teleport_trap func_teleporter entity 38
+386 0 0 0 a_arrow_trap TODO ignore 39
+387 0 0 0 a_do_trap atdm:target_callscriptfunction entity 40
+388 0 0 0 a_pit_trap TODO ignore 41
+389 0 0 0 a_change_terrain_trap func_static entity 42
+390 0 0 0 a_spelltrap TODO ignore 43
+391 0 0 0 a_create_object_trap TODO ignore 44
+392 0 0 0 a_door_trap atdm:target_changelockstate ignore 45
+393 0 0 0 a_ward_trap TODO ignore 46
+394 0 0 0 a_tell_trap TODO ignore 47
+395 0 0 0 a_delete_object_trap TODO ignore 48
+396 0 0 0 an_inventory_trap TODO ignore 49
+397 0 0 0 a_set_variable_trap TODO ignore 50
+398 0 0 0 a_check_variable_trap TODO ignore 51
+399 0 0 0 a_combination_trap TODO ignore 52
+400 0 0 0 a_text_string_trap TODO ignore 53
+416 0 0 0 a_move_trigger trigger_multiple entity 54
+417 0 0 0 a_pick_up_trigger TODO ignore 55
+418 0 0 0 a_use_trigger TODO ignore 56
+419 0 0 0 a_look_trigger TODO ignore 57
+420 0 0 0 a_step_on_trigger TODO ignore 58
+421 0 0 0 an_open_trigger TODO ignore 59
+422 0 0 0 an_unlock_trigger TODO ignore 60
+448 0 0 0 some_blood TODO ignore 23
+449 0 0 0 a_mist_cloud TODO ignore 25
+450 0 0 0 an_explosion TODO ignore 23
+451 0 0 0 an_explosion TODO ignore 23
+452 0 0 0 an_explosion TODO ignore 23
+453 0 0 0 a_splash_splashes TODO ignore 23
+454 0 0 0 a_splash_splahes TODO ignore 23
+455 0 0 0 a_spell_effect TODO ignore 23
+456 0 0 0 some_smoke TODO ignore 25
+457 0 0 0 a_fountain models/darkmod/decorative/vases/pot_ceramic.ase model 23
+458 0 0 0 a_silver_tree models/darkmod/nature/flowers/flowers_patch_01.ase model 17
+459 0 0 0 some_damage TODO ignore 23
+461 0 0 0 a_sound_source TODO ignore 32
+462 0 0 0 some_changing_terrain TODO ignore 23
+463 0 0 0 a_moving_door TODO ignore 23

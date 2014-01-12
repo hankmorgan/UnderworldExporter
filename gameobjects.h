@@ -31,7 +31,6 @@
 	#include "gamegraphics.h"
 #endif
 
-
 //Master object type definition
 typedef struct ObjectItem
 {
@@ -101,22 +100,19 @@ typedef struct ObjectItem
    int tileX;	//Position of the object on the tilemap
    int tileY;
    
-   	
-} ObjectItem;
-
-
-typedef struct shockObjectItem
-{
-int index;
-int LookUpIndex;
-int item_id;
+   
+   
+   //Shock specific stuff
+//int index;
+//int LookUpIndex; item_id
+//int item_id;
 int InUseFlag;
 int ObjectClass;
 int ObjectSubClass;
 int ObjectSubClassIndex;
-int XCoord;
-int YCoord;
-int ZCoord;
+//int XCoord;
+//int YCoord;
+//int ZCoord;
 int Angle1;
 int Angle2;
 int Angle3;
@@ -124,12 +120,39 @@ int AIIndex;
 int ObjectType;
 int HitPoints;
 int State;
-int next;	//Next object in this tile
-int tileX;
-int tileY;
-int extends;	//Flags that this object crosses tiles. I think I will need to ignore it.
-//Need to add extended info for object types
-}shockObjectItem;
+//int next;	//Next object in this list
+//int tileX;
+//int tileY;
+int extends;   //into another tile
+   	
+} ObjectItem;
+
+
+//typedef struct shockObjectItem
+//{
+//int index;
+//int LookUpIndex;
+//int item_id;
+//int InUseFlag;
+//int ObjectClass;
+//int ObjectSubClass;
+//int ObjectSubClassIndex;
+//int XCoord;
+//int YCoord;
+//int ZCoord;
+//int Angle1;
+//int Angle2;
+//int Angle3;
+//int AIIndex;
+//int ObjectType;
+//int HitPoints;
+//int State;
+//int next;	//Next object in this tile
+//int tileX;
+//int tileY;
+//int extends;	//Flags that this object crosses tiles. I think I will need to ignore it.
+////Need to add extended info for object types
+//}shockObjectItem;
 
 //Object types
 //guessing at what I'll need at the moment
@@ -206,17 +229,20 @@ char desc[80];
 char path[80]; //to object model
 short isEntity; // 1 for entity. 0 for model. -1 for ignored entries
 short isSet;
+int objClass;	//For Shock
+int objSubClass;
+int objSubClassIndex;
 } objectMaster;
 
 
-typedef struct shockObjectMaster
-{
-int index;
-int objClass;
-int objSubClass;
-int objSubClassIndex;
-char desc[80];
-}shockObjectMaster;
+//typedef struct shockObjectMaster
+//{
+//int index;
+//int objClass;
+//int objSubClass;
+//int objSubClassIndex;
+//char desc[80];
+//}shockObjectMaster;
 
 
 
@@ -226,10 +252,10 @@ int isTrigger(ObjectItem currobj);
 int isButton(ObjectItem currobj);
 int isTrap(ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
-long nextObjectShock(shockObjectItem &currObj);
+//long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);
 void createScriptCall(ObjectItem &currobj,int x,int y,int z);
 void EntityRotation(int heading);
 
 extern objectMaster *objectMasters;
-extern shockObjectMaster *shockObjectMasters;
+//extern shockObjectMaster *shockObjectMasters;

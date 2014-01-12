@@ -58,9 +58,9 @@ if (objectMasters[currObj.item_id].isSet ==1)
 	return currObj.next; 
 }
 
-long printShockObject(shockObjectItem &currObj)
+long printShockObject(ObjectItem &currObj)
 {
-printf("%s-",shockObjectMasters[currObj.item_id].desc);
+printf("%s-",objectMasters[currObj.item_id].desc);
 return currObj.next;
 }
 
@@ -228,7 +228,7 @@ default:
 }
 }
 
-void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1025], shockObjectItem shockObjList[1600],int LevelNo,int mapOnly)
+void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly)
 {
 int x;
 int y;
@@ -340,10 +340,10 @@ if (game == SHOCK)
 			if(LevelInfo[x][y].indexObjectList !=0)
 				{
 				//printf("\nAt tile x=%d, y=%d :",x,y);
-				long nextShockObj = printShockObject(shockObjList[LevelInfo[x][y].indexObjectList]);
+				long nextShockObj = printShockObject(objList[LevelInfo[x][y].indexObjectList]);
 				while (nextShockObj !=0)
 					{
-					nextShockObj=printShockObject(shockObjList[nextShockObj]);
+					nextShockObj=printShockObject(objList[nextShockObj]);
 					}
 				}
 			else
@@ -354,7 +354,7 @@ if (game == SHOCK)
 			}
 		}
 		
-	return;
+	//return;
 	}	
 	
 

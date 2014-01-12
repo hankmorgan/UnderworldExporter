@@ -44,13 +44,14 @@ int EntityCount;
 int CEILING_HEIGHT;
 tile LevelInfo[64][64];
 int iGame;
-void RenderEntity(int game,int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
+void RenderEntity(int game,float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
+long UW_CEILING_HEIGHT;
 
 
-void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1025],int game)
+void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game)
 {
 //Main processing loop for generating the level.
 iGame =game;
@@ -68,7 +69,7 @@ int x; int y;
 //
 //File header of the map file.
 	printf ("Version 2\n");
-	printf("// entity 0\n{\"classname\" \"worldspawn\"\n");
+	printf("// entity 0\n{\n\"classname\" \"worldspawn\"\n");
 	//sick of starting at origin in dr.
 	printf("\"editor_drLastCameraPos\" \"2594.79 -1375.88 1780.4\"\n");
 	printf("\"editor_drLastCameraAngle\" \"-28.5 90.9 0\"\n");
@@ -95,7 +96,7 @@ int x; int y;
 		if (game != SHOCK)
 			{
 			RenderElevatorLeakProtection(game,LevelInfo);
-			RenderFloorAndCeiling(game,LevelInfo);
+			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
 			}
 		printf("}");	//End worldspawn section of the .map file.
 		//Now start rendering entities.			
@@ -112,10 +113,8 @@ int x; int y;
 			case UW2:
 				RenderObjectList(game,LevelInfo,objList);
 			case SHOCK:
+				RenderObjectList(game,LevelInfo,objList);
 				break;
-			}
-		if (game == UW1 || game == UW2)
-			{
 			}
 		//Now render thewater
 
@@ -203,7 +202,7 @@ int x; int y;
 			printf("\n\"noshadows\" \"0\"");
 			printf("\n\"nospecular\" \"0\"");
 			printf("\n\"parallel\" \"0\"");
-			printf("}\n");
+			printf("\n}\n");
 			
 			
 		
@@ -867,9 +866,11 @@ switch (game)
 	}
 }
 
-void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1025])
+void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {
 //Parses UW's object list and sets up their x,y,z position.
+int Resolution=7;
+if (game ==SHOCK){Resolution =255;}
 int x; int y;
 for (y=0; y<=63;y++) 
 	{
@@ -879,22 +880,24 @@ for (y=0; y<=63;y++)
 			{
 			//TODO: Position objects by x,y values in leveldata
 			long nextObj = LevelInfo[x][y].indexObjectList;
-			int offX=0; int offY=0; int offZ=0;
+			float offX=0; float offY=0; float offZ=0;
 			while (nextObj !=0)
 				{
 				objList[nextObj].tileX=x;
 				objList[nextObj].tileY=y;
+				float BrushX=BrushSizeX;
+				float BrushY=BrushSizeY;
+				float BrushZ=BrushSizeZ;
 				
-				
-				offX= (x*BrushSizeX) + ((objList[nextObj].x) * (BrushSizeX/7));
-				offY= (y*BrushSizeY) + ((objList[nextObj].y) * (BrushSizeY/7));
+				offX= (x*BrushX) + ((objList[nextObj].x) * (BrushX/Resolution));
+				offY= (y*BrushY) + ((objList[nextObj].y) * (BrushY/Resolution));
 				//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
 				int floorHeight = LevelInfo[x][y].floorHeight <<3 ;
 				int nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
 				float relativeZpos = (float)(objList[nextObj].zpos - floorHeight);
 				float zposRatio = (float)(relativeZpos/(nextFloorHeight-floorHeight));	//relative adjustment
 				//float zposRatio = (float)(relativeZpos/(12*BrushSizeZ));	//relative adjustment
-				offZ = LevelInfo[x][y].floorHeight * BrushSizeZ + (zposRatio*BrushSizeZ*1);
+				offZ = LevelInfo[x][y].floorHeight * BrushZ + (zposRatio*BrushZ*1);
 				
 				if ((zposRatio !=0) && (objectMasters[objList[nextObj].item_id].type != BRIDGE))
 					{
@@ -2332,7 +2335,7 @@ switch (currDoor.heading)
 		}
 	}
 }
-void RenderPatch(int game, int x, int y, int z,long PatchIndex, ObjectItem objList[1025] )
+void RenderPatch(int game, int x, int y, int z,long PatchIndex, ObjectItem objList[1600] )
 {
 //
 //Flat decal object, think the Abyss doors.
@@ -2435,7 +2438,7 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 		}
 	}
 
-void RenderElevator(int game, tile LevelInfo[64][64], ObjectItem objList[1025])		
+void RenderElevator(int game, tile LevelInfo[64][64], ObjectItem objList[1600])		
 {
 //Unneeded?
 	for (int y=0; y<=63;y++) 
@@ -2489,7 +2492,7 @@ void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor)
 	printf ("}\n}\n");
 }
 
-void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1025])
+void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 	{
 	int i;
 	//go through the objects and find teleport traps with a zpos !=0

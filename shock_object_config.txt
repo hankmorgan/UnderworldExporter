@@ -1,476 +1,476 @@
-0 0 0 0 ML-41_PISTOL
-1 0 0 1 SV-23_DARTGUN
-2 0 0 2 MAGNUM_2100
-3 0 0 3 MARK3_ASSAULT_RIFLE
-4 0 0 4 DC-05_RIOT_GUN
-5 0 1 0 AM-27_FLECHETTE
-6 0 1 1 RF-07_SKORPION
-7 0 2 0 SB-20_MAGPULSE
-8 0 2 1 MM-76_RAIL_GUN
-9 0 3 0 LEAD_PIPE
-10 0 3 1 TS-04_LASER_RAPIER
-11 0 4 0 SPARQ_BEAM
-12 0 4 1 ER-90_BLASTER
-13 0 4 2 RW-45_ION_RIFLE
-14 0 5 0 DH-07_STUNGUN
-15 0 5 1 LG-XX_PLASMA_RIFLE
-16 1 0 0 ML_STANDARD_ROUNDS
-17 1 0 1 ML_TEFLON_COATED_ROUNDS
-18 1 1 0 SV_NEEDLE_DARTS
-19 1 1 1 SV_TRANQ_DARTS
-20 1 2 0 HOLLOW-TIP_2100_CLIP
-21 1 2 1 HEAVY_SLUG_2100_CLIP
-22 1 2 2 DC_RUBBER_SLUGS
-23 1 3 0 MARK3_MAGNESIUM-TIP_SHELLS
-24 1 3 1 MARK3_PENETRATOR_SHELLS
-25 1 4 0 AM_HORNET_CLIP
-26 1 4 1 AM_SPLINTER_CLIP
-27 1 5 0 RF_SLAG_CLIP
-28 1 5 1 RF_LARGE_SLAG_CLIP
-29 1 6 0 SB_MAG_PULSE_CART
-30 1 6 1 MM_RAIL_CLIP
-31 2 0 0 BULLET_TRACER
-32 2 0 1 ENERGY_TRACER
-33 2 0 2 AUTOMATIC_TRACER
-34 2 0 3 NEEDLE_TRACER
-35 2 0 4 GRENADE_TRACER
-36 2 0 5 RUBBER_TRACER
-37 2 1 0 VIRUS_MUTANT_GLOB
-38 2 1 1 ELITE_MUTANT_FIRE
-39 2 1 2 ASSASSIN_STAR
-40 2 1 3 MUTANTBORG_FIRE
-41 2 1 4 ZERO-GRAV_PLASMA
-42 2 1 5 MAG_PULSE_PROJECTILE
-43 2 1 6 RAIL_GUN_PROJECTILE
-44 2 1 7 STUN_WAVE
-45 2 1 8 PLASMA_BLAST
-46 2 1 9 DATA_BOLT
-47 2 1 10 DISRUPTION_PULSE
-48 2 1 11 ICE_DRILL_ATTACK
-49 2 1 12 DISC
-50 2 1 13 STORM_BOLT
-51 2 1 14 CHLORO_BALL
-52 2 1 15 ACIDIC_SLIME
-53 2 2 0 DRONE_CAMERA
-54 2 2 1 EXPLODODRONE
-55 3 0 0 FRAGMENTATION_GRENADE
-56 3 0 1 EMP_GRENADE
-57 3 0 2 GAS_GRENADE
-58 3 0 3 CONCUSSION_BOMB
-59 3 0 4 LAND_MINE
-60 3 1 0 NITROPACK
-61 3 1 1 EARTH_SHAKER_EXPLOSIVE
-62 3 1 2 OBJECT_EXPLOSION
-63 4 0 0 STAMINUP__STIMULANT
-64 4 0 1 SIGHT_VISION_ENHANCEMENT
-65 4 0 2 BERSERK_COMBAT_BOOSTER
-66 4 0 3 MEDIPATCH__HEALING_AGENT
-67 4 0 4 REFLEX_REACTION_AID
-68 4 0 5 GENIUS_MIND-ENHANCER
-69 4 0 6 DETOX_UNIVERSAL_ANTIDOTE
-70 5 0 0 INFRARED_NIGHT_SIGHT_UNIT
-71 5 0 1 TARGET_IDENTIFIER
-72 5 0 2 SENSAROUND_MULTI-VIEW_UNIT
-73 5 0 3 AIM_ENHANCEMENT_HARDWARE
-74 5 0 4 HEAD-UP_DISPLAY_GOGGLES
-75 5 1 0 BIOLOGICAL_SYSTEMS_MONITOR
-76 5 1 1 NAVIGATION_AND_MAPPING_UNIT
-77 5 1 2 ENERGY/PROJECTILE_SHIELD
-78 5 1 3 MULTIMEDIA_DATA_READER
-79 5 1 4 HEAD-MOUNTED_LANTERN
-80 5 1 5 VIEW_CONTROL_UNIT
-81 5 1 6 ENVIRONMENTAL_PROTECTION_SUIT
-82 5 1 7 TURBO_MOTION_BOOSTER_SYSTEM
-83 5 1 8 JUMP-JET_MOTION_HARDWARE
-84 5 1 9 SYSTEM_ANALYZER
-85 6 0 0 ICE_DRILL_DEFENSE_BREAKER
-86 6 0 1 DATASTORM_ASSAULT_SOFTWARE
-87 6 0 2 MINE_EXPLOSIVE_MODULE
-88 6 0 3 DISC_HEAVY_ATTACK_PROGRAM
-89 6 0 4 PULSER_COMBAT_SOFTWARE
-90 6 0 5 SCRAMBLER_SOFTWARE_GRENADE
-91 6 0 6 VIRUS_SOME_COOL_THING
-92 6 1 0 CYBER_SHIELD
-93 6 1 1 OLD_FAKE_ID
-94 6 1 2 ICE_SHIELD
-95 6 2 0 TURBO_NAVIGATION_BOOSTER
-96 6 2 1 FAKE_ID_ICE_INFILTRATOR
-97 6 2 2 DECOY__EVASION_SYSTEM
-98 6 2 3 RECALL_ESCAPE_PROGAM
-99 6 3 0 TRIOPTIMUM_FUN_PACK_MODULE
-100 6 3 1 MONITOR
-101 6 3 2 IDENTIFY
-102 6 3 3 TRACE
-103 6 3 4 TOGGLE
-104 6 4 0 TEXT
-105 6 4 1 EMAIL
-106 6 5 0 MAP_SEGMENT
-107 7 0 0 PHONE
-108 7 0 1 VCR
-109 7 0 2 MICROWAVE_OVEN
-110 7 0 3 STEREO
-111 7 0 4 KEYBOARD
-112 7 0 5 SMALL_CPU
-113 7 0 6 TV
-114 7 0 7 COMPUTER_MONITOR
-115 7 0 8 COMPUTER_NODE
-116 7 1 0 DESK
-117 7 1 1 DESK
-118 7 1 2 CABINET
-119 7 1 3 SHELF
-120 7 1 4 BED
-121 7 1 5 CHAIR
-122 7 1 6 TABLE
-123 7 1 7 COUCH
-124 7 1 8 CHAIR
-125 7 1 9 COATTREE
-126 7 2 0 SIGN
-127 7 2 1 ICON
-128 7 2 2 GRAFFITI
-129 7 2 3 WORDS
-130 7 2 4 PAINTING
-131 7 2 5 POSTER
-132 7 2 6 SCREEN
-133 7 2 7 TEXTURE_MAP
-134 7 2 8 SCREEN
-135 7 2 9 SCREEN
-136 7 2 10 REPULSOR_LIGHTS
-137 7 3 0 LAMP
-138 7 3 1 FLOOR_LAMP
-139 7 3 2 GLOW_BULB
-140 7 3 3 CHANDELIER
-141 7 4 0 CONTROL_PEDESTAL
-142 7 4 1 TUBING
-143 7 4 2 CART
-144 7 4 3 SURGERY_MACHINE
-145 7 4 4 TESTTUBE_RACK
-146 7 4 5 CHAIR
-147 7 4 6 HOSPITAL_BED
-148 7 4 7 BROKEN_LAB_EQUIPMENT
-149 7 4 8 BROKEN_LAB_EQUIPMENT
-150 7 5 0 MICROSCOPE
-151 7 5 1 SCOPE
-152 7 5 2 PROBE
-153 7 5 3 X-RAY_MACHINE
-154 7 5 4 CAMERA
-155 7 5 5 CONTROL_PANEL
-156 7 5 6 CONTROL_PEDESTAL
-157 7 5 7 ENERGY_DRAIN_MINE
-158 7 6 0 STATUE
-159 7 6 1 SHRUB
-160 7 6 2 GRASS
-161 7 6 3 POTTED_PLANT
-162 7 6 4 FUNGUS
-163 7 6 5 FUNGUS
-164 7 6 6 FERN
-165 7 6 7 VINE
-166 7 6 8 VINE
-167 7 6 9 SMALL_PLANT
-168 7 6 10 PINE_TREE
-169 7 6 11 ROCK
-170 7 6 12 BOULDER
-171 7 6 13 SHRUBBERY
-172 7 6 14 VIRUS-INFECTED_SHRUB
-173 7 6 15 VIRUS-INFECTED_SHRUBBERY
-174 7 7 0 BRIDGE
-175 7 7 1 CATWALK
-176 7 7 2 REALWALL
-177 7 7 3 PILLAR
-178 7 7 4 BRASS_RAILING
-179 7 7 5 WOODEN_RAILING
-180 7 7 6 PILLAR
-181 7 7 7 FORCE_BRIDGE
-182 7 7 8 ELEPHANT,_JORP
-183 7 7 9 FORCE_BRIDGE
-184 8 0 0 BEVERAGE_CONTAINER
-185 8 0 1 WRAPPER
-186 8 0 2 PAPERS
-187 8 0 3 WARECASING
-188 8 0 4 FIRE_EXTINGUISHER
-189 8 0 5 WORKER_HELMET
-190 8 0 6 LUMP_OF_CLOTHES
-191 8 0 7 BRIEFCASE
-192 8 1 0 BROKEN_GUN
-193 8 1 1 DEBRIS
-194 8 1 2 DEBRIS
-195 8 1 3 DEBRIS
-196 8 1 4 DEBRIS
-197 8 1 5 BROKEN_PANEL
-198 8 1 6 BROKEN_CLOCK
-199 8 1 7 DEBRIS
-200 8 1 8 BROKEN_LEVER
-201 8 1 9 BROKEN_LEVER
-202 8 2 0 HUMAN_CORPSE
-203 8 2 1 HUMAN_CORPSE
-204 8 2 2 HUMAN_CORPSE
-205 8 2 3 HUMAN_CORPSE
-206 8 2 4 HUMAN_CORPSE
-207 8 2 5 HUMAN_CORPSE
-208 8 2 6 HUMAN_CORPSE
-209 8 2 7 HUMAN_CORPSE
-210 8 2 8 SKELETON
-211 8 2 9 HUMAN_BONES
-212 8 2 10 BONES
-213 8 2 11 SKULL
-214 8 2 12 SEVERED_LIMB
-215 8 2 13 SEVERED_HEAD
-216 8 2 14 SEVERED_HEAD
-217 8 3 0 DISPOSABLE_LOGIC_PROBE
-218 8 3 1 ILLUDIUM-CADMIUM_BATTERY
-219 8 3 2 TELESCOPING_ROD
-220 8 3 3 FIRST_AID_KIT
-221 8 3 4 TRACTOR_BEAM
-222 8 3 5 BATTERY_PACK
-223 8 4 0 CURRENT_ACCESS_LEVELS
-224 8 4 1 STANDARD_ACCESS_CARD
-225 8 4 2 SCIENCE_ACCESS_CARD
-226 8 4 3 STORAGE__ACCESS_CARD
-227 8 4 4 ENGINEERING_ACCESS_CARD
-228 8 4 5 MEDICAL_ACCESS_CARD
-229 8 4 6 MAINTENANCE_ACCESS_CARD
-230 8 4 7 ADMINISTRATIVE_ACCESS_CARD
-231 8 4 8 SECURITY_ACCESS_CARD
-232 8 4 9 COMMAND_ACCESS_CARD
-233 8 4 10 GROUP_ACCESS_CARD
-234 8 4 11 PERSONAL_ACCESS_CARD
-235 8 5 0 MULTIPLEXER
-236 8 5 1 INTEGRITY_RESTORATIVE
-237 8 5 2 SECURITY_DEFENSE_MINE
-238 8 5 3 SECURITY_ID_MODULE
-239 8 5 4 DATA_VIOLATION
-240 8 5 5 ICEWALL
-241 8 5 6 INFORMATION_NODE
-242 8 5 7 CYBERSPACE_EXIT_PORTAL
-243 8 5 8 DATA_FRAGMENT
-244 8 5 9 CYBERSPACE_BARRICADE
-245 8 5 10 CYBERSPACE_DECOY
-246 8 5 11 NAVIGATIONAL_ARROW
-247 8 6 0 BEAM_BLAST
-248 8 6 1 ACID_CORROSION
-249 8 6 2 BULLET_HOLE
-250 8 6 3 EXPLOSION_RESIDUE
-251 8 6 4 BURN_RESIDUE
-252 8 6 5 BLOOD_STAIN
-253 8 6 6 CHEMICAL_STAIN
-254 8 6 7 OIL_PUDDLE
-255 8 6 8 WASTE_SPILL
-256 8 7 0 CHEMICAL_ISOTOPE_X-22
-257 8 7 1 ISOLINEAR_CHIPSET
-258 8 7 2 Z-44_PLASTIQUE(TM)
-259 8 7 3 CHEMICAL_ISOTOPE_X-22
-260 8 7 4 SYSTEMIC_SEQUENCER
-261 8 7 5 SUPERCONDUCTING_PROCESSOR
-262 8 7 6 MONOPOLE_STABILIZER
-263 8 7 7 INTERFACE_DEMODULATOR
-264 9 0 0 SWITCH
-265 9 0 1 SWITCH
-266 9 0 2 BUTTON
-267 9 0 3 BUTTON
-268 9 0 4 LEVER
-269 9 0 5 LEVER
-270 9 0 6 LARGE_BUTTON
-271 9 0 7 EMERGENCY_LEVER
-272 9 0 8 DIAL
-273 9 1 0 ACCESS_CARD_SLOT
-274 9 1 1 CIRCUIT_BOARD_SLOT
-275 9 1 2 POWER_CONVERTOR
-276 9 1 3 ANTENNA_RELAY_PANEL
-277 9 1 4 PLASTIQUED_ANTENNA_RELAY
-278 9 1 5 DESTROYED_ANTENNA_RELAY
-279 9 1 6 RETINAL_ID_SCANNER
-280 9 2 0 CYBERSPACE_TERMINAL
-281 9 2 1 ENERGY_CHARGE_STATION
-282 9 2 2 FIXUP_STATION
-283 9 3 0 ACCESS_PANEL
-284 9 3 1 ACCESS_PANEL
-285 9 3 2 ACCESS_PANEL
-286 9 3 3 ACCESS_PANEL
-287 9 3 4 ELEVATOR_PANEL
-288 9 3 5 ELEVATOR_PANEL
-289 9 3 6 ELEVATOR_PANEL
-290 9 3 7 KEYPAD_PANEL
-291 9 3 8 KEYPAD_PANEL
-292 9 3 9 ACCESS_PANEL
-293 9 3 10 ACCESS_PANEL
-294 9 4 0 AMMO_VENDING_MACHINE
-295 9 4 1 HEAL_VENDING_MACHINE
-296 9 5 0 INACTIVE_SWITCHING_NODE
-297 9 5 1 ACTIVE_SWITCHING_NODE
-298 9 5 2 DATAFLOW_ROUTER
-299 10 0 0 BLAST_DOOR
-300 10 0 1 SERVICE_ACCESS_DOOR
-301 10 0 2 DOOR
-302 10 0 3 DOOR
-303 10 0 4 DOOR
-304 10 0 5 DOOR
-305 10 0 6 STORAGE_ROOM_DOOR
-306 10 0 7 SHIELDED_DOOR
-307 10 0 8 EXECUTIVE_DOOR
-308 10 1 0 THE_WARM_STONE
-309 10 1 1 DOORWAY
-310 10 1 2 DOORWAY
-311 10 1 3 DOORWAY
-312 10 1 4 DOORWAY
-313 10 1 5 GRATING
-314 10 1 6 GRATING
-315 10 1 7 GRATING
-316 10 1 8 GRATING
-317 10 1 9 MY_TOE_IS_AN_EGGPLANT
-318 10 2 0 FORCE_DOOR
-319 10 2 1 FORCE_DOOR
-320 10 2 2 FORCE_DOOR
-321 10 2 3 FORCE_DOOR
-322 10 2 4 FORCE_DOOR
-323 10 2 5 ENERGY_GRATING
-324 10 2 6 GREAT_LORD_SNAQUEOTRAHN
-325 10 3 0 EXECUTIVE_ELEVATOR
-326 10 3 1 ELEVATOR_DOOR
-327 10 3 2 ELEVATOR_DOOR
-328 10 3 3 FREIGHT_ELEVATOR_DOOR
-329 10 3 4 SALT_THE_FRIES
-330 10 4 0 BULKHEAD_DOOR
-331 10 4 1 BULKHEAD_DOOR
-332 10 4 2 IRIS_DOOR
-333 10 4 3 VERTICAL_OPEN_DOOR
-334 10 4 4 VERTICAL_SPLIT_DOOR
-335 10 4 5 DARK_LORD_TUAOHTUA
-336 10 4 6 HIDDEN_DOOR
-337 10 4 7 HIDDEN_DOOR
-338 10 4 8 HIDDEN_DOOR
-339 10 4 9 REPORT_THIS_AS_A_BUG
-340 11 0 0 INACTIVE_EMERGENCY_SIGNAL
-341 11 0 1 ACTIVE_EMERGENCY_SIGNAL
-342 11 0 2 INACTIVE_EMERGENCY_SIGNAL
-343 11 0 3 ACTIVE_EMERGENCY_SIGNAL
-344 11 0 4 SPARKING_CABLES
-345 11 0 5 DEAD_MUTANT
-346 11 0 6 MACHINERY
-347 11 0 7 STATION_HOLOGRAM
-348 11 0 8 DEAD_MUTANT
-349 11 0 9 LIGHT_BLOOD
-350 11 0 10 CAMERA_EXPLOSION
-351 11 0 11 TV_EXPLOSION
-352 11 0 12 SIMPLE_SMOKE
-353 11 0 13 PLANT_EXPLOSION
-354 11 0 14 BULLET_WALL_HIT
-355 11 0 15 BEAM_WALL_HIT
-356 11 0 16 IMPACT
-357 11 0 17 PROJECTILE_HIT
-358 11 0 18 BEAM_HIT
-359 11 0 19 BEAM_HIT
-360 11 0 20 EXPLOSION
-361 11 0 21 EXPLOSION
-362 11 0 22 EXPLOSION
-363 11 0 23 LARGE_EXPLOSION
-364 11 0 24 MAGPULSE_HIT
-365 11 0 25 STUN_HIT
-366 11 0 26 PLASMA_BEAM_HIT
-367 11 0 27 SMOKEY_EXPLOSION
-368 11 0 28 CRATE_EXPLOSION
-369 11 0 29 MONITOR_EXPLOSION
-370 11 0 30 GAS_EXPLOSION
-371 11 0 31 EMP_EXPLOSION
-372 11 0 32 HUMANOID_CORPSE_EXPLOSION
-373 11 0 33 ROBOT_CORPSE_EXPLOSION
-374 12 0 0 ENTRY_TRIGGER
-375 12 0 1 NULL_TRIGGER
-376 12 0 2 FLOOR_TRIGGER
-377 12 0 3 PLAYER_DEATH_TRIGGER
-378 12 0 4 DEATH_WATCH_TRIGGER
-379 12 0 5 AREA_ENTER_TRIGGER
-380 12 0 6 AREA_CONTIN_TRIGGER
-381 12 0 7 CRITTER_AI_HINT
-382 12 0 8 LEVEL_ENTRY_TRIGGER
-383 12 0 9 CONTINUOUS_TRIGGER
-384 12 0 10 REPULSOR
-385 12 0 11 ECOLOGY_TRIGGER
-386 12 0 12 SHODAN_TRIGGER
-387 12 1 0 TRIP_BEAM
-388 12 2 0 BIO-HAZARD_VOODOO_MARK
-389 12 2 1 RAD-HAZARD_VOODOO_MARK
-390 12 2 2 CHEM-HAZARD_VOODOO
-391 12 2 3 MAP_NOTE
-392 12 2 4 MUSIC_VOODOO_MARKER
-393 13 0 0 CRATE
-394 13 0 1 CRATE
-395 13 0 2 CRATE
-396 13 1 0 RADIOACTIVE_WASTE_BARREL
-397 13 1 1 TOXIC_WASTE_BARREL
-398 13 1 2 CHEMICAL_TANK
-399 13 2 0 THERMOS
-400 13 2 1 VIAL
-401 13 2 2 FLASK
-402 13 2 3 BEAKER
-403 13 3 0 DEAD_HUMANOID_MUTANT
-404 13 3 1 DEAD_GOR-TIGER_MUTANT
-405 13 3 2 DEAD_INSECT_MUTANT
-406 13 3 3 DEAD_AVIAN_MUTANT
-407 13 3 4 DEAD_PLANT_MUTANT
-408 13 3 5 DEAD_ZERO-G_MUTANT
-409 13 3 6 DEAD_INVISIBLE_MUTANT
-410 13 3 7 DEAD_VIRUS_MUTANT
-411 13 4 0 DESTROYED_LIFTER_ROBOT
-412 13 4 1 DESTROYED_REPAIRBOT
-413 13 4 2 DESTROYED_SERV-BOT
-414 13 4 3 DESTROYED_EXEC-BOT
-415 13 4 4 DESTROYED_TURRET
-416 13 4 5 DESTROYED_HOPPER
-417 13 4 6 DESTROYED_SECURITY-1_ROBOT
-418 13 4 7 DESTROYED_SECURITY-2_ROBOT
-419 13 4 8 DESTROYED_AUTOBOMB
-420 13 4 9 DESTROYED_MAINTENANCE_ROBOT
-421 13 4 10 DESTROYED_FLIER
-422 13 4 11 DESTROYED_SECURITY-3_ROBOT
-423 13 4 12 DESTROYED__ROBOT
-424 13 5 0 DESTROYED_DRONE_CYBORG
-425 13 5 1 DESTROYED_WARRIOR_CYBORG
-426 13 5 2 DESTROYED_ASSASSIN_CYBORG
-427 13 5 3 DESTROYED_ENFORCER_CYBORG
-428 13 5 4 DESTROYED_ELITE_CYBORG
-429 13 5 5 DESTROYED_CORTEX_REAVER
-430 13 5 6 DESTROYED_MUTATED_CYBORG
-431 13 6 0 DEAD_DIEGO_CYBORG
-432 13 6 1 DESTROYED_CYBER_GUARD
-433 13 6 2 DESTROYED_CYBER_REAVER
-434 13 6 3 DESTROYED_DYNAMIC_ICE
-435 13 6 4 DESTROYED_HUNTER_KILLER
-436 13 6 5 DESTROYED_SHODAN_AVATAR
-437 13 6 6 DESTROYED_VIRUS
-438 13 6 7 DESTROYED_CYBER_DOG
-439 14 0 0 HUMANOID_MUTANT
-440 14 0 1 GORILLA_TIGER_MUTANT
-441 14 0 2 INSECTOID_MUTANT
-442 14 0 3 AVIAN_MUTANT
-443 14 0 4 PLANT_MUTANT
-444 14 0 5 ZERO-GRAVITY_CREATURE
-445 14 0 6 SONIC_THE_HEDGEHOG
-446 14 0 7 INVISIBLE_MUTANT
-447 14 0 8 HUMANOID_MUTANT
-448 14 1 0 LIFTER
-449 14 1 1 REPAIRBOT
-450 14 1 2 SERV-BOT
-451 14 1 3 EXEC-BOT
-452 14 1 4 LARGE_TURRET
-453 14 1 5 HOPPER
-454 14 1 6 SECURITY-1_ROBOT
-455 14 1 7 SECURITY-2_ROBOT
-456 14 1 8 AUTOBOMB
-457 14 1 9 MAINTENANCE_ROBOT
-458 14 1 10 FLIER
-459 14 1 11 SECURITY-3_ROBOT
-460 14 2 0 CYBORG_DRONE
-461 14 2 1 CYBORG_WARRIOR
-462 14 2 2 CYBORG_ASSASSIN
-463 14 2 3 CYBORG_ENFORCER
-464 14 2 4 CYBORG_ELITE_GUARD
-465 14 2 5 CORTEX_REAVER
-466 14 2 6 MUTATED_CYBORG
-467 14 3 0 CYBERDOG
-468 14 3 1 CYBERGUARD
-469 14 3 2 CYBER_CORTEX_REAVER
-470 14 3 3 DYNAMIC_ICE
-471 14 3 4 CYBER_HUNTER_KILLER
-472 14 3 5 SHODAN
-473 14 3 6 CYBERGUARD
-474 14 4 0 SHODAN
-475 14 4 1 CYBORG_OF_EDWARD_DIEGO
+0 0 0 0 ML-41_PISTOL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+1 0 0 1 SV-23_DARTGUN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+2 0 0 2 MAGNUM_2100 models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+3 0 0 3 MARK3_ASSAULT_RIFLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+4 0 0 4 DC-05_RIOT_GUN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+5 0 1 0 AM-27_FLECHETTE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+6 0 1 1 RF-07_SKORPION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+7 0 2 0 SB-20_MAGPULSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+8 0 2 1 MM-76_RAIL_GUN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+9 0 3 0 LEAD_PIPE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+10 0 3 1 TS-04_LASER_RAPIER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+11 0 4 0 SPARQ_BEAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+12 0 4 1 ER-90_BLASTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+13 0 4 2 RW-45_ION_RIFLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+14 0 5 0 DH-07_STUNGUN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+15 0 5 1 LG-XX_PLASMA_RIFLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+16 1 0 0 ML_STANDARD_ROUNDS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+17 1 0 1 ML_TEFLON_COATED_ROUNDS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+18 1 1 0 SV_NEEDLE_DARTS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+19 1 1 1 SV_TRANQ_DARTS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+20 1 2 0 HOLLOW-TIP_2100_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+21 1 2 1 HEAVY_SLUG_2100_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+22 1 2 2 DC_RUBBER_SLUGS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+23 1 3 0 MARK3_MAGNESIUM-TIP_SHELLS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+24 1 3 1 MARK3_PENETRATOR_SHELLS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+25 1 4 0 AM_HORNET_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+26 1 4 1 AM_SPLINTER_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+27 1 5 0 RF_SLAG_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+28 1 5 1 RF_LARGE_SLAG_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+29 1 6 0 SB_MAG_PULSE_CART models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+30 1 6 1 MM_RAIL_CLIP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+31 2 0 0 BULLET_TRACER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+32 2 0 1 ENERGY_TRACER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+33 2 0 2 AUTOMATIC_TRACER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+34 2 0 3 NEEDLE_TRACER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+35 2 0 4 GRENADE_TRACER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+36 2 0 5 RUBBER_TRACER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+37 2 1 0 VIRUS_MUTANT_GLOB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+38 2 1 1 ELITE_MUTANT_FIRE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+39 2 1 2 ASSASSIN_STAR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+40 2 1 3 MUTANTBORG_FIRE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+41 2 1 4 ZERO-GRAV_PLASMA models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+42 2 1 5 MAG_PULSE_PROJECTILE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+43 2 1 6 RAIL_GUN_PROJECTILE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+44 2 1 7 STUN_WAVE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+45 2 1 8 PLASMA_BLAST models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+46 2 1 9 DATA_BOLT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+47 2 1 10 DISRUPTION_PULSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+48 2 1 11 ICE_DRILL_ATTACK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+49 2 1 12 DISC models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+50 2 1 13 STORM_BOLT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+51 2 1 14 CHLORO_BALL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+52 2 1 15 ACIDIC_SLIME models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+53 2 2 0 DRONE_CAMERA models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+54 2 2 1 EXPLODODRONE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+55 3 0 0 FRAGMENTATION_GRENADE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+56 3 0 1 EMP_GRENADE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+57 3 0 2 GAS_GRENADE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+58 3 0 3 CONCUSSION_BOMB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+59 3 0 4 LAND_MINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+60 3 1 0 NITROPACK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+61 3 1 1 EARTH_SHAKER_EXPLOSIVE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+62 3 1 2 OBJECT_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+63 4 0 0 STAMINUP__STIMULANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+64 4 0 1 SIGHT_VISION_ENHANCEMENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+65 4 0 2 BERSERK_COMBAT_BOOSTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+66 4 0 3 MEDIPATCH__HEALING_AGENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+67 4 0 4 REFLEX_REACTION_AID models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+68 4 0 5 GENIUS_MIND-ENHANCER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+69 4 0 6 DETOX_UNIVERSAL_ANTIDOTE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+70 5 0 0 INFRARED_NIGHT_SIGHT_UNIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+71 5 0 1 TARGET_IDENTIFIER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+72 5 0 2 SENSAROUND_MULTI-VIEW_UNIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+73 5 0 3 AIM_ENHANCEMENT_HARDWARE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+74 5 0 4 HEAD-UP_DISPLAY_GOGGLES models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+75 5 1 0 BIOLOGICAL_SYSTEMS_MONITOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+76 5 1 1 NAVIGATION_AND_MAPPING_UNIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+77 5 1 2 ENERGY/PROJECTILE_SHIELD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+78 5 1 3 MULTIMEDIA_DATA_READER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+79 5 1 4 HEAD-MOUNTED_LANTERN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+80 5 1 5 VIEW_CONTROL_UNIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+81 5 1 6 ENVIRONMENTAL_PROTECTION_SUIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+82 5 1 7 TURBO_MOTION_BOOSTER_SYSTEM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+83 5 1 8 JUMP-JET_MOTION_HARDWARE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+84 5 1 9 SYSTEM_ANALYZER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+85 6 0 0 ICE_DRILL_DEFENSE_BREAKER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+86 6 0 1 DATASTORM_ASSAULT_SOFTWARE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+87 6 0 2 MINE_EXPLOSIVE_MODULE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+88 6 0 3 DISC_HEAVY_ATTACK_PROGRAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+89 6 0 4 PULSER_COMBAT_SOFTWARE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+90 6 0 5 SCRAMBLER_SOFTWARE_GRENADE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+91 6 0 6 VIRUS_SOME_COOL_THING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+92 6 1 0 CYBER_SHIELD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+93 6 1 1 OLD_FAKE_ID models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+94 6 1 2 ICE_SHIELD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+95 6 2 0 TURBO_NAVIGATION_BOOSTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+96 6 2 1 FAKE_ID_ICE_INFILTRATOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+97 6 2 2 DECOY__EVASION_SYSTEM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+98 6 2 3 RECALL_ESCAPE_PROGAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+99 6 3 0 TRIOPTIMUM_FUN_PACK_MODULE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+100 6 3 1 MONITOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+101 6 3 2 IDENTIFY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+102 6 3 3 TRACE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+103 6 3 4 TOGGLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+104 6 4 0 TEXT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+105 6 4 1 EMAIL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+106 6 5 0 MAP_SEGMENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+107 7 0 0 PHONE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+108 7 0 1 VCR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+109 7 0 2 MICROWAVE_OVEN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+110 7 0 3 STEREO models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+111 7 0 4 KEYBOARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+112 7 0 5 SMALL_CPU models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+113 7 0 6 TV models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+114 7 0 7 COMPUTER_MONITOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+115 7 0 8 COMPUTER_NODE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+116 7 1 0 DESK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+117 7 1 1 DESK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+118 7 1 2 CABINET models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+119 7 1 3 SHELF models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+120 7 1 4 BED models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+121 7 1 5 CHAIR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+122 7 1 6 TABLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+123 7 1 7 COUCH models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+124 7 1 8 CHAIR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+125 7 1 9 COATTREE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+126 7 2 0 SIGN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+127 7 2 1 ICON models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+128 7 2 2 GRAFFITI models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+129 7 2 3 WORDS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+130 7 2 4 PAINTING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+131 7 2 5 POSTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+132 7 2 6 SCREEN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+133 7 2 7 TEXTURE_MAP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+134 7 2 8 SCREEN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+135 7 2 9 SCREEN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+136 7 2 10 REPULSOR_LIGHTS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+137 7 3 0 LAMP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+138 7 3 1 FLOOR_LAMP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+139 7 3 2 GLOW_BULB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+140 7 3 3 CHANDELIER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+141 7 4 0 CONTROL_PEDESTAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+142 7 4 1 TUBING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+143 7 4 2 CART models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+144 7 4 3 SURGERY_MACHINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+145 7 4 4 TESTTUBE_RACK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+146 7 4 5 CHAIR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+147 7 4 6 HOSPITAL_BED models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+148 7 4 7 BROKEN_LAB_EQUIPMENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+149 7 4 8 BROKEN_LAB_EQUIPMENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+150 7 5 0 MICROSCOPE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+151 7 5 1 SCOPE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+152 7 5 2 PROBE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+153 7 5 3 X-RAY_MACHINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+154 7 5 4 CAMERA models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+155 7 5 5 CONTROL_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+156 7 5 6 CONTROL_PEDESTAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+157 7 5 7 ENERGY_DRAIN_MINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+158 7 6 0 STATUE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+159 7 6 1 SHRUB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+160 7 6 2 GRASS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+161 7 6 3 POTTED_PLANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+162 7 6 4 FUNGUS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+163 7 6 5 FUNGUS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+164 7 6 6 FERN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+165 7 6 7 VINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+166 7 6 8 VINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+167 7 6 9 SMALL_PLANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+168 7 6 10 PINE_TREE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+169 7 6 11 ROCK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+170 7 6 12 BOULDER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+171 7 6 13 SHRUBBERY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+172 7 6 14 VIRUS-INFECTED_SHRUB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+173 7 6 15 VIRUS-INFECTED_SHRUBBERY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+174 7 7 0 BRIDGE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+175 7 7 1 CATWALK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+176 7 7 2 REALWALL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+177 7 7 3 PILLAR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+178 7 7 4 BRASS_RAILING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+179 7 7 5 WOODEN_RAILING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+180 7 7 6 PILLAR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+181 7 7 7 FORCE_BRIDGE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+182 7 7 8 ELEPHANT,_JORP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+183 7 7 9 FORCE_BRIDGE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+184 8 0 0 BEVERAGE_CONTAINER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+185 8 0 1 WRAPPER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+186 8 0 2 PAPERS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+187 8 0 3 WARECASING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+188 8 0 4 FIRE_EXTINGUISHER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+189 8 0 5 WORKER_HELMET models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+190 8 0 6 LUMP_OF_CLOTHES models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+191 8 0 7 BRIEFCASE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+192 8 1 0 BROKEN_GUN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+193 8 1 1 DEBRIS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+194 8 1 2 DEBRIS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+195 8 1 3 DEBRIS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+196 8 1 4 DEBRIS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+197 8 1 5 BROKEN_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+198 8 1 6 BROKEN_CLOCK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+199 8 1 7 DEBRIS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+200 8 1 8 BROKEN_LEVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+201 8 1 9 BROKEN_LEVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+202 8 2 0 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+203 8 2 1 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+204 8 2 2 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+205 8 2 3 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+206 8 2 4 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+207 8 2 5 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+208 8 2 6 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+209 8 2 7 HUMAN_CORPSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+210 8 2 8 SKELETON models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+211 8 2 9 HUMAN_BONES models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+212 8 2 10 BONES models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+213 8 2 11 SKULL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+214 8 2 12 SEVERED_LIMB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+215 8 2 13 SEVERED_HEAD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+216 8 2 14 SEVERED_HEAD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+217 8 3 0 DISPOSABLE_LOGIC_PROBE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+218 8 3 1 ILLUDIUM-CADMIUM_BATTERY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+219 8 3 2 TELESCOPING_ROD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+220 8 3 3 FIRST_AID_KIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+221 8 3 4 TRACTOR_BEAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+222 8 3 5 BATTERY_PACK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+223 8 4 0 CURRENT_ACCESS_LEVELS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+224 8 4 1 STANDARD_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+225 8 4 2 SCIENCE_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+226 8 4 3 STORAGE__ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+227 8 4 4 ENGINEERING_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+228 8 4 5 MEDICAL_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+229 8 4 6 MAINTENANCE_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+230 8 4 7 ADMINISTRATIVE_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+231 8 4 8 SECURITY_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+232 8 4 9 COMMAND_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+233 8 4 10 GROUP_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+234 8 4 11 PERSONAL_ACCESS_CARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+235 8 5 0 MULTIPLEXER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+236 8 5 1 INTEGRITY_RESTORATIVE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+237 8 5 2 SECURITY_DEFENSE_MINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+238 8 5 3 SECURITY_ID_MODULE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+239 8 5 4 DATA_VIOLATION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+240 8 5 5 ICEWALL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+241 8 5 6 INFORMATION_NODE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+242 8 5 7 CYBERSPACE_EXIT_PORTAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+243 8 5 8 DATA_FRAGMENT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+244 8 5 9 CYBERSPACE_BARRICADE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+245 8 5 10 CYBERSPACE_DECOY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+246 8 5 11 NAVIGATIONAL_ARROW models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+247 8 6 0 BEAM_BLAST models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+248 8 6 1 ACID_CORROSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+249 8 6 2 BULLET_HOLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+250 8 6 3 EXPLOSION_RESIDUE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+251 8 6 4 BURN_RESIDUE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+252 8 6 5 BLOOD_STAIN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+253 8 6 6 CHEMICAL_STAIN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+254 8 6 7 OIL_PUDDLE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+255 8 6 8 WASTE_SPILL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+256 8 7 0 CHEMICAL_ISOTOPE_X-22 models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+257 8 7 1 ISOLINEAR_CHIPSET models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+258 8 7 2 Z-44_PLASTIQUE(TM) models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+259 8 7 3 CHEMICAL_ISOTOPE_X-22 models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+260 8 7 4 SYSTEMIC_SEQUENCER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+261 8 7 5 SUPERCONDUCTING_PROCESSOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+262 8 7 6 MONOPOLE_STABILIZER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+263 8 7 7 INTERFACE_DEMODULATOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+264 9 0 0 SWITCH models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+265 9 0 1 SWITCH models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+266 9 0 2 BUTTON models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+267 9 0 3 BUTTON models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+268 9 0 4 LEVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+269 9 0 5 LEVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+270 9 0 6 LARGE_BUTTON models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+271 9 0 7 EMERGENCY_LEVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+272 9 0 8 DIAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+273 9 1 0 ACCESS_CARD_SLOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+274 9 1 1 CIRCUIT_BOARD_SLOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+275 9 1 2 POWER_CONVERTOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+276 9 1 3 ANTENNA_RELAY_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+277 9 1 4 PLASTIQUED_ANTENNA_RELAY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+278 9 1 5 DESTROYED_ANTENNA_RELAY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+279 9 1 6 RETINAL_ID_SCANNER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+280 9 2 0 CYBERSPACE_TERMINAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+281 9 2 1 ENERGY_CHARGE_STATION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+282 9 2 2 FIXUP_STATION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+283 9 3 0 ACCESS_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+284 9 3 1 ACCESS_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+285 9 3 2 ACCESS_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+286 9 3 3 ACCESS_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+287 9 3 4 ELEVATOR_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+288 9 3 5 ELEVATOR_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+289 9 3 6 ELEVATOR_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+290 9 3 7 KEYPAD_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+291 9 3 8 KEYPAD_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+292 9 3 9 ACCESS_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+293 9 3 10 ACCESS_PANEL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+294 9 4 0 AMMO_VENDING_MACHINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+295 9 4 1 HEAL_VENDING_MACHINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+296 9 5 0 INACTIVE_SWITCHING_NODE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+297 9 5 1 ACTIVE_SWITCHING_NODE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+298 9 5 2 DATAFLOW_ROUTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+299 10 0 0 BLAST_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+300 10 0 1 SERVICE_ACCESS_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+301 10 0 2 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+302 10 0 3 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+303 10 0 4 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+304 10 0 5 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+305 10 0 6 STORAGE_ROOM_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+306 10 0 7 SHIELDED_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+307 10 0 8 EXECUTIVE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+308 10 1 0 THE_WARM_STONE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+309 10 1 1 DOORWAY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+310 10 1 2 DOORWAY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+311 10 1 3 DOORWAY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+312 10 1 4 DOORWAY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+313 10 1 5 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+314 10 1 6 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+315 10 1 7 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+316 10 1 8 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+317 10 1 9 MY_TOE_IS_AN_EGGPLANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+318 10 2 0 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+319 10 2 1 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+320 10 2 2 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+321 10 2 3 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+322 10 2 4 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+323 10 2 5 ENERGY_GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+324 10 2 6 GREAT_LORD_SNAQUEOTRAHN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+325 10 3 0 EXECUTIVE_ELEVATOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+326 10 3 1 ELEVATOR_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+327 10 3 2 ELEVATOR_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+328 10 3 3 FREIGHT_ELEVATOR_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+329 10 3 4 SALT_THE_FRIES models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+330 10 4 0 BULKHEAD_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+331 10 4 1 BULKHEAD_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+332 10 4 2 IRIS_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+333 10 4 3 VERTICAL_OPEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+334 10 4 4 VERTICAL_SPLIT_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+335 10 4 5 DARK_LORD_TUAOHTUA models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+336 10 4 6 HIDDEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+337 10 4 7 HIDDEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+338 10 4 8 HIDDEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+339 10 4 9 REPORT_THIS_AS_A_BUG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+340 11 0 0 INACTIVE_EMERGENCY_SIGNAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+341 11 0 1 ACTIVE_EMERGENCY_SIGNAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+342 11 0 2 INACTIVE_EMERGENCY_SIGNAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+343 11 0 3 ACTIVE_EMERGENCY_SIGNAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+344 11 0 4 SPARKING_CABLES models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+345 11 0 5 DEAD_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+346 11 0 6 MACHINERY models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+347 11 0 7 STATION_HOLOGRAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+348 11 0 8 DEAD_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+349 11 0 9 LIGHT_BLOOD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+350 11 0 10 CAMERA_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+351 11 0 11 TV_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+352 11 0 12 SIMPLE_SMOKE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+353 11 0 13 PLANT_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+354 11 0 14 BULLET_WALL_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+355 11 0 15 BEAM_WALL_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+356 11 0 16 IMPACT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+357 11 0 17 PROJECTILE_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+358 11 0 18 BEAM_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+359 11 0 19 BEAM_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+360 11 0 20 EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+361 11 0 21 EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+362 11 0 22 EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+363 11 0 23 LARGE_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+364 11 0 24 MAGPULSE_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+365 11 0 25 STUN_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+366 11 0 26 PLASMA_BEAM_HIT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+367 11 0 27 SMOKEY_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+368 11 0 28 CRATE_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+369 11 0 29 MONITOR_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+370 11 0 30 GAS_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+371 11 0 31 EMP_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+372 11 0 32 HUMANOID_CORPSE_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+373 11 0 33 ROBOT_CORPSE_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+374 12 0 0 ENTRY_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+375 12 0 1 NULL_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+376 12 0 2 FLOOR_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+377 12 0 3 PLAYER_DEATH_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+378 12 0 4 DEATH_WATCH_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+379 12 0 5 AREA_ENTER_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+380 12 0 6 AREA_CONTIN_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+381 12 0 7 CRITTER_AI_HINT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+382 12 0 8 LEVEL_ENTRY_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+383 12 0 9 CONTINUOUS_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+384 12 0 10 REPULSOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+385 12 0 11 ECOLOGY_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+386 12 0 12 SHODAN_TRIGGER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+387 12 1 0 TRIP_BEAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+388 12 2 0 BIO-HAZARD_VOODOO_MARK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+389 12 2 1 RAD-HAZARD_VOODOO_MARK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+390 12 2 2 CHEM-HAZARD_VOODOO models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+391 12 2 3 MAP_NOTE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+392 12 2 4 MUSIC_VOODOO_MARKER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+393 13 0 0 CRATE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+394 13 0 1 CRATE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+395 13 0 2 CRATE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+396 13 1 0 RADIOACTIVE_WASTE_BARREL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+397 13 1 1 TOXIC_WASTE_BARREL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+398 13 1 2 CHEMICAL_TANK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+399 13 2 0 THERMOS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+400 13 2 1 VIAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+401 13 2 2 FLASK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+402 13 2 3 BEAKER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+403 13 3 0 DEAD_HUMANOID_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+404 13 3 1 DEAD_GOR-TIGER_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+405 13 3 2 DEAD_INSECT_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+406 13 3 3 DEAD_AVIAN_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+407 13 3 4 DEAD_PLANT_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+408 13 3 5 DEAD_ZERO-G_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+409 13 3 6 DEAD_INVISIBLE_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+410 13 3 7 DEAD_VIRUS_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+411 13 4 0 DESTROYED_LIFTER_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+412 13 4 1 DESTROYED_REPAIRBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+413 13 4 2 DESTROYED_SERV-BOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+414 13 4 3 DESTROYED_EXEC-BOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+415 13 4 4 DESTROYED_TURRET models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+416 13 4 5 DESTROYED_HOPPER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+417 13 4 6 DESTROYED_SECURITY-1_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+418 13 4 7 DESTROYED_SECURITY-2_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+419 13 4 8 DESTROYED_AUTOBOMB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+420 13 4 9 DESTROYED_MAINTENANCE_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+421 13 4 10 DESTROYED_FLIER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+422 13 4 11 DESTROYED_SECURITY-3_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+423 13 4 12 DESTROYED__ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+424 13 5 0 DESTROYED_DRONE_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+425 13 5 1 DESTROYED_WARRIOR_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+426 13 5 2 DESTROYED_ASSASSIN_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+427 13 5 3 DESTROYED_ENFORCER_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+428 13 5 4 DESTROYED_ELITE_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+429 13 5 5 DESTROYED_CORTEX_REAVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+430 13 5 6 DESTROYED_MUTATED_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+431 13 6 0 DEAD_DIEGO_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+432 13 6 1 DESTROYED_CYBER_GUARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+433 13 6 2 DESTROYED_CYBER_REAVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+434 13 6 3 DESTROYED_DYNAMIC_ICE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+435 13 6 4 DESTROYED_HUNTER_KILLER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+436 13 6 5 DESTROYED_SHODAN_AVATAR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+437 13 6 6 DESTROYED_VIRUS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+438 13 6 7 DESTROYED_CYBER_DOG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+439 14 0 0 HUMANOID_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+440 14 0 1 GORILLA_TIGER_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+441 14 0 2 INSECTOID_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+442 14 0 3 AVIAN_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+443 14 0 4 PLANT_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+444 14 0 5 ZERO-GRAVITY_CREATURE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+445 14 0 6 SONIC_THE_HEDGEHOG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+446 14 0 7 INVISIBLE_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+447 14 0 8 HUMANOID_MUTANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+448 14 1 0 LIFTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+449 14 1 1 REPAIRBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+450 14 1 2 SERV-BOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+451 14 1 3 EXEC-BOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+452 14 1 4 LARGE_TURRET models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+453 14 1 5 HOPPER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+454 14 1 6 SECURITY-1_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+455 14 1 7 SECURITY-2_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+456 14 1 8 AUTOBOMB models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+457 14 1 9 MAINTENANCE_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+458 14 1 10 FLIER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+459 14 1 11 SECURITY-3_ROBOT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+460 14 2 0 CYBORG_DRONE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+461 14 2 1 CYBORG_WARRIOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+462 14 2 2 CYBORG_ASSASSIN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+463 14 2 3 CYBORG_ENFORCER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+464 14 2 4 CYBORG_ELITE_GUARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+465 14 2 5 CORTEX_REAVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+466 14 2 6 MUTATED_CYBORG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+467 14 3 0 CYBERDOG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+468 14 3 1 CYBERGUARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+469 14 3 2 CYBER_CORTEX_REAVER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+470 14 3 3 DYNAMIC_ICE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+471 14 3 4 CYBER_HUNTER_KILLER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+472 14 3 5 SHODAN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+473 14 3 6 CYBERGUARD models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+474 14 4 0 SHODAN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+475 14 4 1 CYBORG_OF_EDWARD_DIEGO models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

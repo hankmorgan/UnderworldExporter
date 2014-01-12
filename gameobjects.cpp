@@ -39,27 +39,27 @@
 
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
-void RenderPatch(int game, int x, int y, int z,long PatchIndex, ObjectItem objList[1025] );
-void RenderEntityModel (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityNPC (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityDoor (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityKey (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]) ;
-void RenderEntityContainer (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityButton (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityA_DOOR_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityA_DO_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityTMAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityBOOK (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntitySIGN (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityA_TELEPORT_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
-void RenderEntityA_MOVE_TRIGGER (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]);
+void RenderPatch(int game, float x, float y, float z,long PatchIndex, ObjectItem objList[1600] );
+void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityDoor (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]) ;
+void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_DOOR_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 
 int keycount[256];	//For tracking key usage
 //int levelNo;
 
-void RenderEntity(int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 //Picks what type of object to generate.
 long patchX;long patchY;long patchZ;int patchOffsetX;int patchOffsetY;
@@ -139,7 +139,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 				printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 				printf("\"name\" \"%s_%03d\"\n",objectMasters[currobj.item_id].desc,EntityCount);	
 				//position
-				printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+				printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 				EntityRotation(currobj.heading);
 				AttachToJoint(currobj);		//for npc items
 				printf("}");
@@ -153,7 +153,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 
 
 void AttachToJoint(ObjectItem &currobj)
-	{
+	{//TODO: fix me up.
 	if (currobj.joint !=0 )
 		{
 		printf("\"bind\" \"NPC_%03d_%03d\"\n",currobj.objectOwnerName,currobj.objectOwnerEntity);
@@ -256,29 +256,36 @@ long nextObject(ObjectItem &currObj)
 	return currObj.next; 
 }
 
-long nextObjectShock(shockObjectItem &currObj)
-{//Index of next object in the linked list.
-	return currObj.next; 
-}
+//long nextObjectShock(shockObjectItem &currObj)
+//{//Index of next object in the linked list.
+//	return currObj.next; 
+//}
 void createScriptCall(ObjectItem &currobj,int x,int y,int z)
 {//Entity for running a script when triggered.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"atdm:target_callscriptfunction\"\n");
 	printf("\"name\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	printf("\"call\" \"start_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 	printf("}\n");EntityCount++;
 
 }
 
-void RenderEntityModel (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {//A model with no properties.
+
+//Params 
+//item_id
+//tileX
+//tileY
+//Index
+
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"func_static\"\n");
 		//print position+name
 		//printf("\"name\" \"entity_%03d\"\n",EntityCount);
 		printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-		printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+		printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 		EntityRotation(currobj.heading);
 		AttachToJoint(currobj);
 		if (currobj.link!=0)
@@ -286,13 +293,19 @@ void RenderEntityModel (int game, int x, int y,int z, ObjectItem &currobj, Objec
 			printf("\"frobable\" \"%d\"\n",1);	
 			printf("\"frob_action_script\" \"start_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 			}
-		printf("\n\"model\" \"%s\"\n}",objectMasters[currobj.item_id].path);
+		printf("\n\"model\" \"%s\"\n}\n",objectMasters[currobj.item_id].path);
 		EntityCount++;
 		return;
 }
 
-void RenderEntityNPC (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//Params
+//item_id
+//npc_whoami
+//npc_attitude
+//link for npc inventory in UW
+//objectOwnerEntity.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.npc_whoami,EntityCount);
@@ -311,7 +324,7 @@ void RenderEntityNPC (int game, int x, int y,int z, ObjectItem &currobj, ObjectI
 		}					
 	
 	//position
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	EntityRotation(currobj.heading);
 	printf("}");
 	EntityCount++;	
@@ -324,27 +337,32 @@ void RenderEntityNPC (int game, int x, int y,int z, ObjectItem &currobj, ObjectI
 		currobj.objectOwner =currobj.index;
 		tmpobj.objectOwnerName = currobj.npc_whoami;
 		currobj.objectOwnerName = currobj.npc_whoami ;
-		if (currobj.objectOwnerEntity ==0 ){currobj.objectOwnerEntity=EntityCount-1;}
+		if (currobj.objectOwnerEntity ==0 ){currobj.objectOwnerEntity=EntityCount-1;} //assumes the previous entity is the npc with the inventory.
+		tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
+		tmpobj.joint = JointCount++;					
+		while( tmpobj.next  !=0 )
+			{
+			RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo);	//Need to fix up the x y z to a better spot.
+			tmpobj = objList[tmpobj.next];
+			//I pass the owner info down the line
+			tmpobj.objectOwner = currobj.objectOwner;
+			tmpobj.objectOwnerName = currobj.objectOwnerName;
 			tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
-			tmpobj.joint = JointCount++;					
-			while( tmpobj.next  !=0 )
-				{
-				RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo);
-				tmpobj = objList[tmpobj.next];
-				//I pass the owner info down the line
-				tmpobj.objectOwner = currobj.objectOwner;
-				tmpobj.objectOwnerName = currobj.objectOwnerName;
-				tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
-				tmpobj.joint = JointCount++;							
-				}
+			tmpobj.joint = JointCount++;							
+			}
 		RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo); //NPC's inventory.
 		}					
 		
 	return;	
 }
 
-void RenderEntityDoor (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityDoor (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//Params
+//item_id
+//tileX
+//tileY
+//Link for a lock
 int doorWidth=48;
 int doorHeight =96;
 
@@ -370,13 +388,13 @@ int doorHeight =96;
 	switch (currobj.heading)
 		{//TODO: replace with proper model offset
 		case EAST:
-			{printf("\"origin\" \"%d %d %d\"\n",x,(currobj.tileY)*BrushSizeY + ( (doorWidth+(BrushSizeY-doorWidth)/2 ) ),z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",x,(currobj.tileY)*BrushSizeY + ( (doorWidth+(BrushSizeY-doorWidth)/2 ) ),z);	break;}
 		case WEST:
-			{printf("\"origin\" \"%d %d %d\"\n",x,(currobj.tileY)*BrushSizeY + ( (0+(BrushSizeY-doorWidth)/2 ) ),z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",x,(currobj.tileY)*BrushSizeY + ( (0+(BrushSizeY-doorWidth)/2 ) ),z);	break;}
 		case NORTH:
-			{printf("\"origin\" \"%d %d %d\"\n",(currobj.tileX)*BrushSizeX + ( (doorWidth+(BrushSizeX-doorWidth)/2 ) ),y,z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",(currobj.tileX)*BrushSizeX + ( (doorWidth+(BrushSizeX-doorWidth)/2 ) ),y,z);	break;}
 		case SOUTH:
-			{printf("\"origin\" \"%d %d %d\"\n",(currobj.tileX)*BrushSizeX + ( (0+(BrushSizeX-doorWidth)/2 ) ),y,z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",(currobj.tileX)*BrushSizeX + ( (0+(BrushSizeX-doorWidth)/2 ) ),y,z);	break;}
 		}
 
 	tile t = LevelInfo[currobj.tileX][currobj.tileY];
@@ -491,15 +509,19 @@ int doorHeight =96;
 		printf("\"name\" \"a_lock_%03d_%03d\"\n",currobj.tileX, currobj.tileY);
 		printf("\"target\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc,currobj.tileX  ,currobj.tileY );
 		printf("\"toggle\" \"1\"\n");	//todo: other types of behaviour.
-		printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+		printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 		printf("}");
 		EntityCount++;	
 		}
 		return;
 }
 
-void RenderEntityKey (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//Params
+//Item_id
+//Owner
+
 	//A key's owner id matches it's lock link id.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
@@ -507,7 +529,7 @@ void RenderEntityKey (int game, int x, int y,int z, ObjectItem &currobj, ObjectI
 	//they also need the following properties
 	printf("\"usable\" \"1\"\n\"frobable\" \"1\"\n\"inv_name\" \"KEY_%03d\"\n\"inv_target\" \"player1\"\n\"inv_stackable\" \"1\"\n\"inv_category\" \"Keys\"\n",currobj.owner);
 	//position
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);
 	EntityRotation(currobj.heading);	
 	AttachToJoint(currobj);		
 	printf("}");
@@ -515,21 +537,30 @@ void RenderEntityKey (int game, int x, int y,int z, ObjectItem &currobj, ObjectI
 	return;
 }
 
-void RenderEntityContainer (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//Params.
+//Item_id
+//link	//To check for a lock and it's list of contents.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 
 	//I need to spawn it's contents at the same location (recursively)
 	//render it first.
-	//TODO: I also need to fix container which are not really entities
+	//TODO: I also need to fix containers which are not really entities
 	printf("\"name\" \"%s_%03d\"\n",objectMasters[currobj.item_id].desc,EntityCount);	
 	if (objectMasters[objList[currobj.link].item_id].type == LOCK)	//container has a lock.
 		{//bit 1 of the flags is the lock?
-		printf("\"locked\" \"%d\"\n\"used_by\" \"KEY_%03d\"\n",(objList[currobj.link].flags & 0x01) ,objList[currobj.link].link & 0x3F);
+		printf("\"locked\" \"%d\"\n",(objList[currobj.link].flags & 0x01));
+		printf ("\"used_by\" \"a_key_%03d_0\"\n", objList[currobj.link].link & 0x3F);
+		printf ("\"used_by1\" \"a_key_%03d_1\"\n", objList[currobj.link].link & 0x3F);
+		printf ("\"used_by2\" \"a_key_%03d_2\"\n", objList[currobj.link].link & 0x3F);
+		printf ("\"used_by3\" \"a_key_%03d_3\"\n", objList[currobj.link].link & 0x3F);
+		printf ("\"used_by4\" \"a_key_%03d_4\"\n", objList[currobj.link].link & 0x3F);
+		printf ("\"used_by5\" \"a_key_%03d_5\"\n", objList[currobj.link].link & 0x3F);		
 		}				
 	//position
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);
 	AttachToJoint(currobj);			
 	printf("}");
 	EntityCount++;
@@ -548,39 +579,53 @@ void RenderEntityContainer (int game, int x, int y,int z, ObjectItem &currobj, O
 	return;
 }
 
-void RenderEntityButton (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//
+//Params
+//item_id
+//tileX
+//tileY
+//index
+//heading
+//Need to pass desc/path for generic handling
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-	printf("\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");
+	printf("\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");	//Need to pass this in.
 	//position
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	printf("\"rotate\" \"0 0 45\"\n");
 	printf("\"interruptable\" \"0\"");
 	EntityRotation(currobj.heading);
-	//printf("\"call\" \"start_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 	printf("\"target\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 	printf("}\n");EntityCount++;
-	createScriptCall(currobj,x,y,z);
+	createScriptCall(currobj,x,y,z);	//To run whatever actions this switch performs.
 	return;
 }
 
-void RenderEntityA_DOOR_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityA_DOOR_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 //A door trap object for opening doors.
+//Params
+//objectOwnerName (passed down from a parent object)
+//objectOwner
+//tileX
+//tileY
+//Need to add path for generic usage.
+
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		printf("\"name\" \"door_%03d_%03d\"\n",currobj.objectOwner, currobj.objectOwnerName);
 		printf("\"target\" \"door_%03d_%03d\"\n", currobj.tileX  ,currobj.tileY );	//Doors are refered to by their tile location.
 		printf("\"toggle\" \"1\"\n");	//todo: other types of behaviour.
-		printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+		printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 		printf("}");
 		EntityCount++;	
 		return;
 }
 
-void RenderEntityA_DO_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 	switch (currobj.quality )
 		{
@@ -588,7 +633,7 @@ void RenderEntityA_DO_TRAP (int game, int x, int y,int z, ObjectItem &currobj, O
 			printf("\n// entity %d\n{\n",EntityCount);
 			printf("\"classname\" \"func_cameraview\"\n");
 			printf("\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY);
-			printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+			printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 			printf("\"trigger\" \"1\"\n");
 			//Aim the camera.
 			EntityRotation(currobj.heading);//TODO:Points in wrong direction
@@ -609,8 +654,10 @@ void RenderEntityA_DO_TRAP (int game, int x, int y,int z, ObjectItem &currobj, O
 		return;
 }
 
-void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+
+//
 	//render func static for the initial tiles.
 	PrimitiveCount=0;
 	int tileCount =0;
@@ -632,7 +679,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, int x, int y,int z, ObjectItem
 		//		printf("\n\"underwater_gui\" \"guis\underwater\underwater_green_thinmurk.gui\"\n");
 	//			}
 			printf("\"model\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
-			printf("\"origin\" \"%d %d %d\"\n",(currobj.tileX+i)*BrushSizeX,(currobj.tileY+j)*BrushSizeY,0);														
+			printf("\"origin\" \"%f %f %f\"\n",(currobj.tileX+i)*BrushSizeX,(currobj.tileY+j)*BrushSizeY,0);														
 			RenderDarkModTile(game,0,0,LevelInfo[currobj.tileX+i][currobj.tileY+j],LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater,0);
 			printf("\n}\n");
 			tileCount++;
@@ -646,7 +693,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, int x, int y,int z, ObjectItem
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_final_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
 	printf("\"model\" \"%s_final_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
-	printf("\"origin\" \"%d %d %d\"\n",currobj.tileX*BrushSizeX,currobj.tileY*BrushSizeY,0);
+	printf("\"origin\" \"%f %f %f\"\n",currobj.tileX*BrushSizeX,currobj.tileY*BrushSizeY,0);
 	
 	for (int i=0;i<=currobj.x;i++)
 		{
@@ -673,8 +720,13 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, int x, int y,int z, ObjectItem
 	return;
 }
 
-void RenderEntityTMAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {//Flat patch objects used as decals
+//params
+//link	to see if it can be activated
+//tileX
+//tileY
+//index
 	printf("\n// entity %d\n{\n",EntityCount);
 	if( isTrigger(objList[currobj.link])==0)
 		{
@@ -688,8 +740,7 @@ void RenderEntityTMAP (int game, int x, int y,int z, ObjectItem &currobj, Object
 		}
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
 	printf("\"model\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
-	//Things like the abyss doors,stairs down//a patch?
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	RenderPatch(game,currobj.tileX,currobj.tileY ,currobj.zpos,currobj.index,objList);
 	printf("\n}\n");
 	EntityCount++;
@@ -700,14 +751,32 @@ void RenderEntityTMAP (int game, int x, int y,int z, ObjectItem &currobj, Object
 	return;
 }
 
-void RenderEntityBOOK (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//Params
+//tileX
+//tileY
+//Index
+//currobj.link -200 = pointer to the readable string block in UW
+//heading
+
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );		
 	printf("\"inv_name\" \"Readable_%d\"\n", currobj.link - 0x200);
-	printf("\"xdata_contents\" \"readables/uw1/scroll_%03d\"\n", currobj.link - 0x200);
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
+	switch (game)
+		{
+		case UWDEMO:
+		case UW1:
+			{printf("\"xdata_contents\" \"readables/uw1/scroll_%03d\"\n", currobj.link - 0x200);break;}
+		case UW2:
+			{printf("\"xdata_contents\" \"readables/uw2/scroll_%03d\"\n", currobj.link - 0x200);break;}
+		case SHOCK:
+			{//TODO:Whatever needs to go here.
+			//printf("\"xdata_contents\" \"readables/shock/scroll_%03d\"\n", currobj.link - 0x200);
+			break;}
+		}	
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	EntityRotation(currobj.heading);
 	AttachToJoint(currobj);		//for npc items
 	printf("}");
@@ -715,15 +784,34 @@ void RenderEntityBOOK (int game, int x, int y,int z, ObjectItem &currobj, Object
 	return;
 }
 
-void RenderEntitySIGN (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+//Params
+//tileX
+//tileY
+//Index
+//currobj.link -200 = pointer to the readable string block in UW
+//heading
+
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );		
 	printf("\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
-	printf("\"origin\" \"%d %d %d\"\n",x,y,z);	
-	printf("\"model\" \"models/darkmod/uw1/uw1_sign.ase\"\n");	
-	switch (currobj.heading)
+	switch (game)
+		{
+		case UWDEMO:
+		case UW1:
+			{printf("\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);break;}
+		case UW2:
+			{printf("\"xdata_contents\" \"readables/uw12/sign_%03d\"\n", currobj.link - 0x200);break;}
+		case SHOCK:
+			{//TODO:Whatever needs to go here.
+			//printf("\"xdata_contents\" \"readables/shock/sign_%03d\"\n", currobj.link - 0x200);
+			break;}
+		}		
+	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
+	printf("\"model\" \"models/darkmod/uw1/uw1_sign.ase\"\n");	//TODO:pass model path in.
+	switch (currobj.heading)	//TODO: need to fix this mess with headings.
 		{
 		case 0:
 			{EntityRotation(270);break;}
@@ -739,31 +827,45 @@ void RenderEntitySIGN (int game, int x, int y,int z, ObjectItem &currobj, Object
 	return;
 }
 
-void RenderEntityA_TELEPORT_TRAP (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64]) 
+void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]) 
 {
+//This is the destination spot of a teleport.
+//zpos = this level
+//item_id for type
+//quality = x coord of destination
+//owner = y coord of destination
+//need to add objectmaster path for generic usage.
+
 	//only show if it points to this level.
 	if (currobj.zpos == 0)
 		{
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.quality ,currobj.owner,currobj.index );	
-		//printf("\"model\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-		printf("\"origin\" \"%d %d %d\"\n",currobj.quality * BrushSizeX+(BrushSizeX/2),currobj.owner * BrushSizeY+(BrushSizeY/2), LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ);	
+		printf("\"origin\" \"%f %f %f\"\n",currobj.quality * BrushSizeX+(BrushSizeX/2),currobj.owner * BrushSizeY+(BrushSizeY/2), LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ);	
 		printf("\n}");		
 		}
 	return;
 }
 
-void RenderEntityA_MOVE_TRIGGER (int game, int x, int y,int z, ObjectItem &currobj, ObjectItem objList[1025], tile LevelInfo[64][64])
+void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 //A trigger that fires when you step in it.
+//Params
+//item_id
+//index
+//tileX
+//tileY
+//need to add objectmaster path for generic usage
+//need to add objectmaster desc for generic usage
+
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 	printf("\"model\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 	printf("\"target\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );						
 	printf("\"wait\" \"5\"\n");						
-	tile t;	//temp tile for rendering
+	tile t;	//temp tile for rendering trigger
 	t.floorTexture = TRIGGER_MULTI;
 	t.wallTexture = TRIGGER_MULTI;	
 	t.East =TRIGGER_MULTI;
@@ -819,11 +921,11 @@ int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex)
 		for (i=0;i<=475;i++)
 			{
 			if (
-				(shockObjectMasters[i].objClass == objClass)
+				(objectMasters[i].objClass == objClass)
 				&&
-				(shockObjectMasters[i].objSubClass == objSubClass)
+				(objectMasters[i].objSubClass == objSubClass)
 				&&
-				(shockObjectMasters[i].objSubClassIndex == objSubClassIndex)
+				(objectMasters[i].objSubClassIndex == objSubClassIndex)
 				)
 				{
 					return i;
