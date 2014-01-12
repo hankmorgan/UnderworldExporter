@@ -1,50 +1,28 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
-
-
 /*Game paths*/
 
 #define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
 #define UW0_TEXTUREW_PATH "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.txm"
+
 #define UW1_LEVEL_PATH  "C:\\Games\\Ultima\\UW1\\Data\\lev.ark"
+#define UW1_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_retro_config.txt"
+#define UW1_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_object_config.txt"
+#define UW1_STRINGS_FILE "C:\\Games\\Ultima\\UW1\\data\\strings.pak"
+
 #define UW2_LEVEL_PATH "C:\\Games\\Ultima\\UW2\\DATA\\lev.ark"
-#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
+#define UW2_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw2_retro_config.txt"
+#define UW2_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw2_object_config.txt"
+#define UW2_STRINGS_FILE "C:\\Games\\Ultima\\UW1\\data\\strings.pak"
+
+//Change these depending on which set of textures you want to extract
 #define GRAPHICS_FILE "C:\\Games\\Ultima\\UW2\\DATA\\T64.TR"
 #define GRAPHICS_PAL_FILE "C:\\Games\\Ultima\\UW2\\DATA\\pals.dat"
-#define TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_texture_config.txt"
-#define OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_object_config.txt"
-#define STRINGS_FILE "C:\\Games\\Ultima\\UW2\\data\\strings.pak"
+
+
+#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
+#define SHOCK_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_texture_config.txt"
+#define SHOCK_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_object_config.txt"
+
 #define ENTRANCES_CONFIG_FILE  "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_entrances.txt"
 
 /*Globals*/
@@ -71,6 +49,7 @@ extern int CEILING_HEIGHT;
 #define UW2 2
 #define SHOCK 3
 
+
 //ceiling constants
 //#xdefine UW_CEILING_HEIGHT 19
 //This is now set in buildtilemapshock in order to support variable height levels.
@@ -81,7 +60,8 @@ extern int CEILING_HEIGHT;
 //Modes
 #define ASCII_MODE 0
 #define D3_MODE 1
-
+#define STRINGS_EXTRACT_MODE 2
+#define BITMAP_EXTRACT_MODE 3
 
 
 void exportMaps(int game,int mode,int LevelNo);

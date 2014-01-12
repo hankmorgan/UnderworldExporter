@@ -1,11 +1,3 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
 #ifndef tilemap_h
 	#define tilemap_h
 	#include "tilemap.h"
@@ -14,26 +6,20 @@
 	#define utils_h
 	#include "utils.h"
 #endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
+#ifndef main_h
+	#define main_h
+	#include "main.h"
 #endif
 #ifndef textures_h
 	#define textures_h
 	#include "textures.h"
 #endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
 
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
 int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
+
+
 int getTile(int tileData)
 {
 	//gets tile data at bits 0-3 of the tile data
@@ -736,19 +722,19 @@ int InUseFlag;
 int ObjectClass;
 int ObjectSubClass;
 int ObjectSubClassIndex;
-int IndexIntoCrossRef;
-int PrevLink;
-int NextLink;
-int XCoord;
-int YCoord;
-int ZCoord;
-int Angle1;
-int Angle2;
-int Angle3;
-int AIIndex;
-int ObjectType;
-int HitPoints;
-int State;
+//int IndexIntoCrossRef;
+//int PrevLink;
+//int NextLink;
+//int XCoord;
+//int YCoord;
+//int ZCoord;
+//int Angle1;
+//int Angle2;
+//int Angle3;
+//int AIIndex;
+//int ObjectType;
+//int HitPoints;
+//int State;
 
 	FILE *file = NULL;      // File pointer
 	//unsigned char *lev_ark; 
@@ -762,11 +748,11 @@ int State;
 	long address_pointer=4;
 	char blnLevelFound=0;
 
-	int chunkId;
+//	int chunkId;
 	long chunkUnpackedLength;
 	long chunkType;//compression type
 	long chunkPackedLength;
-	long chunkContentType;
+//	long chunkContentType;
 	int MasterAddressLookup[1024];
 	
 //read in archive.dat
@@ -902,11 +888,11 @@ int State;
 void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index)
 {
 //
-	int chunkId;
+//	int chunkId;
 	long chunkUnpackedLength;
 	long chunkType;//compression type
 	long chunkPackedLength;
-	long chunkContentType;
+//	long chunkContentType;
 	
 long AddressOfBlockStart = getShockBlockAddress(BlockNo,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
 int k= 0;
@@ -984,11 +970,11 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 	long address_pointer=4;
 	char blnLevelFound=0;
 
-	int chunkId;
+//	int chunkId;
 	long chunkUnpackedLength;
 	long chunkType;//compression type
 	long chunkPackedLength;
-	long chunkContentType;
+//	long chunkContentType;
 	
 
 	
@@ -1537,7 +1523,7 @@ for (int x=0; x<64;x++)
 
 void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//Justs some useful info to know.
-ObjectItem currObj;
+//ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
 	for (int y=0;y<64;y++)

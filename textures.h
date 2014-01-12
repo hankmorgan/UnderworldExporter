@@ -1,36 +1,3 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
-
 #define CAULK -1
 #define VISPORTAL -2
 #define NODRAW -3

@@ -1,22 +1,13 @@
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
 #ifndef gameobjects_h
 	#define gameobjects_h
 	#include "gameobjects.h"
 #endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
+#ifndef D3DarkMod_h
+	#define D3DarkMod_h
+	#include "D3DarkMod.h"
 #endif
 #ifndef textures_h
 	#define textures_h
@@ -25,14 +16,6 @@
 #ifndef main_h
 	#define main_h
 	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
-#ifndef d3darkmod_h
-	#define d3darkmod_h
-	#include "D3DarkMod.h"
 #endif
 
 #include "math.h"
@@ -62,7 +45,8 @@ int keycount[256];	//For tracking key usage
 void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 //Picks what type of object to generate.
-long patchX;long patchY;long patchZ;int patchOffsetX;int patchOffsetY;
+//long patchX;long patchY;long patchZ;
+//int patchOffsetX;int patchOffsetY;
 
 
 switch (objectMasters[currobj.item_id].isEntity )
@@ -260,7 +244,7 @@ long nextObject(ObjectItem &currObj)
 //{//Index of next object in the linked list.
 //	return currObj.next; 
 //}
-void createScriptCall(ObjectItem &currobj,int x,int y,int z)
+void createScriptCall(ObjectItem &currobj,float x,float y, float z)
 {//Entity for running a script when triggered.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"atdm:target_callscriptfunction\"\n");
@@ -363,9 +347,12 @@ void RenderEntityDoor (int game, float x, float y, float z, ObjectItem &currobj,
 //tileX
 //tileY
 //Link for a lock
-int doorWidth=48;
-int doorHeight =96;
-
+float doorWidth=48;
+float doorHeight =96;
+float tileX = currobj.tileX ;
+float tileY = currobj.tileY ;
+float BrushX= BrushSizeX;
+float BrushY= BrushSizeY;
 	//for a door I need to point it's used_by property at the key object's name. This is accessed through a lock object
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
@@ -388,13 +375,13 @@ int doorHeight =96;
 	switch (currobj.heading)
 		{//TODO: replace with proper model offset
 		case EAST:
-			{printf("\"origin\" \"%f %f %f\"\n",x,(currobj.tileY)*BrushSizeY + ( (doorWidth+(BrushSizeY-doorWidth)/2 ) ),z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",x,(tileY)*BrushY + ( (doorWidth+(BrushY-doorWidth)/2 ) ),z);	break;}
 		case WEST:
-			{printf("\"origin\" \"%f %f %f\"\n",x,(currobj.tileY)*BrushSizeY + ( (0+(BrushSizeY-doorWidth)/2 ) ),z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",x,(tileY)*BrushY + ( (0+(BrushY-doorWidth)/2 ) ),z);	break;}
 		case NORTH:
-			{printf("\"origin\" \"%f %f %f\"\n",(currobj.tileX)*BrushSizeX + ( (doorWidth+(BrushSizeX-doorWidth)/2 ) ),y,z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",(tileX)*BrushX + ( (doorWidth+(BrushX-doorWidth)/2 ) ),y,z);	break;}
 		case SOUTH:
-			{printf("\"origin\" \"%f %f %f\"\n",(currobj.tileX)*BrushSizeX + ( (0+(BrushSizeX-doorWidth)/2 ) ),y,z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",(tileX)*BrushX + ( (0+(BrushX-doorWidth)/2 ) ),y,z);	break;}
 		}
 
 	tile t = LevelInfo[currobj.tileX][currobj.tileY];

@@ -1,35 +1,4 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
+
 
 typedef struct palette
 {
@@ -65,6 +34,6 @@ typedef struct {
 
 
 
-void extractTextureBitmap(int indexNo);
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255]);
 void writeBMP( unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal);
-void getPalette(palette *pal, int paletteNo);
+void getPalette(char filePathPal[255], palette *pal, int paletteNo);

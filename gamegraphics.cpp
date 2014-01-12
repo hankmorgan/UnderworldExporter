@@ -1,39 +1,17 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
+#ifndef gamegraphics_h
+	#define gamegraphics_h
+	#include "gamegraphics.h"
 #endif
 #ifndef utils_h
 	#define utils_h
 	#include "utils.h"
 #endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
+#include <fstream>
 
-void extractTextureBitmap(int indexNo)
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255])
 {
-    const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
+    //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
+//    int indexNo;
     //unsigned char *BigEndBuf;          // Pointer to our buffered data (big endian format)
 	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
 	int i;
@@ -47,7 +25,7 @@ void extractTextureBitmap(int indexNo)
     
 	palette *pal;
 	pal = new palette[256];
-	getPalette(pal,0);    
+	getPalette(PaletteFile, pal, 0);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
@@ -60,36 +38,34 @@ void extractTextureBitmap(int indexNo)
 	//printf("xy resolution:%d\n", textureFile[1]);		
 	//printf("No of textures:%d\n", textureFile[3]<<8 | textureFile[2]);
 	long NoOfTextures;
-	if (indexNo==-1)
-	 {
-	 NoOfTextures=textureFile[3]<<8 | textureFile[2];
-	 
-	 indexNo=0;
-	 }
+	if (ImageCount==-1)	//All the images.
+		 {
+		 NoOfTextures=textureFile[3]<<8 | textureFile[2];
+		 }
 	else
-	{
-	NoOfTextures=indexNo;
-	}
+		{
+		NoOfTextures=ImageCount;
+		}
 	//NoOfTextures=0;
 	//printf("Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
 
-	for (i=indexNo; i<=NoOfTextures;i++)
+	for (i=0; i<=NoOfTextures;i++)
 	{
 	//long textureOffset = (textureFile[(i*4)+7]<<16 | textureFile[(i*4)+6]<<32 | textureFile[(i*4)+5]<<8 | textureFile[(i*4)+4]);
 	long textureOffset = getValAtAddress(textureFile,(i*4)+4,32);
 	//writeBMP(textureFile,textureOffset,32,32,i+211,pal);
-	writeBMP(textureFile,textureOffset,64,64,i,pal);
+	writeBMP(textureFile,textureOffset,64,64,i,pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
 	}   	
 return;	         
 }
 
-void getPalette(palette *pal, int paletteNo)
+void getPalette(char filePathPal[255], palette *pal, int paletteNo)
 {
 	FILE *filePal = NULL;
 	unsigned char *palf;
 	int j; int i;
 	
-	const char *filePathPal = GRAPHICS_PAL_FILE	;	//"C:\\Games\\Ultima\\UW1\\DATA\\pals.dat"; 
+	//const char *filePathPal = GRAPHICS_PAL_FILE	;	//"C:\\Games\\Ultima\\UW1\\DATA\\pals.dat"; 
 	filePal = fopen(filePathPal,"rb");
 	long fileSizePal = getFileSize(filePal);
 	palf = new unsigned char[fileSizePal];

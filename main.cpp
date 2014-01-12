@@ -2,51 +2,23 @@
 #include <stdlib.h>
 #include <fstream>
 #include <math.h>
-
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
 #ifndef main_h
 	#define main_h
 	#include "main.h"
 #endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
+#ifndef textures_h
+	#define textures_h
+	#include "textures.h"
 #endif
 #ifndef gameobjects_h
 	#define gameobjects_h
 	#include "gameobjects.h"
 #endif
-#ifndef D3DarkMod_h
-	#define D3DarkMod_h
-	#include "D3DarkMod.h"
+#ifndef tilemap_h
+	#define tilemap_h
+	#include "tilemap.h"
 #endif
-#ifndef asciimode_h
-	#define asciimode_h
-	#include "asciimode.h"
-#endif
+
 #include <string.h>
 
 using namespace std;
@@ -66,45 +38,49 @@ void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long tex
 void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
 int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo);
 void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
-
-void unpackStringsShock();
+void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game);
+void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
+void unpackStrings(int game);
+void unpackStringsShock(char filePath[255]);
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255]);
 extern int levelNo;
 
 
 int main()
 {
-objectMaster *objMasterList;
 BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;	
 
-levelNo=1;
+int game = UW1;
+int mode = D3_MODE;
+//int mode = ASCII_MODE;
+//int mode = STRINGS_EXTRACT_MODE;
+//int mode = BITMAP_EXTRACT_MODE;
+
+	levelNo=0;
 //int NoOfLevels=80;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
-	LoadConfig(SHOCK);
+	LoadConfig(game);
 	
-//Uncomment this this loop to see everything but note the output will not work in Radiant. 
-//for (levelNo=0; levelNo<NoOfLevels; levelNo++)
-//{
-
-//The two modes are ASCII_MODE and D3_MODE.
-
-	//exportMaps(UWDEMO,D3_MODE,0); //export level 0  from Underworld demo.
-	//exportMaps(UW1,D3_MODE,levelNo);	//Export levelno from Underworld.
-	//exportMaps(UW2,D3_MODE,levelNo);	//export levelno from Underworld II
-	
-	exportMaps(SHOCK, D3_MODE,levelNo);	//Export Level No from Shock.
-
-//	}
-	
-
-//Use this to extract bitmaps from UW1. You can change the paths in the function to point to UW2 and Demo texture files and byt files.
-//For Byt files set the NoOfTextures variable to 0;	
-	//extractTextureBitmap(-1);
-	
-//Use this to extract strings from UW1. You can change the paths in the function to point to UW2 and Demo string files 	
-	//unpackStrings();
-	//unpackStringsShock();
-	
-}
+	switch (mode)
+		{
+		case D3_MODE:
+		case ASCII_MODE:
+			exportMaps(game,mode,levelNo);break;
+		case STRINGS_EXTRACT_MODE:
+			if (game == SHOCK)
+				{
+				unpackStringsShock(SHOCK_STRINGS_FILE);
+				}
+			else
+				{
+				unpackStrings(game);
+				}
+			break;
+		case BITMAP_EXTRACT_MODE:
+			extractTextureBitmap(-1,GRAPHICS_FILE,GRAPHICS_PAL_FILE);
+			break;
+		}
+	}
 
 
 
@@ -112,6 +88,7 @@ void LoadConfig(int game)
 {
 //Read in mile
 FILE *f = NULL;
+char filePathT[255];
 int i=0;
 int texNo=0;
 char texDesc[80];
@@ -126,21 +103,23 @@ int objType;
 int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
 
 char line[255];
+textureMasters =new texture[300];
+objectMasters=new objectMaster[1025];
 switch (game)
 	{
 	case UWDEMO:
 	case UW1:
+		strcpy_s(filePathT, UW1_TEXTURE_CONFIG_FILE);break;	
 	case UW2:
+		strcpy_s(filePathT, UW2_TEXTURE_CONFIG_FILE);break;	
 	case SHOCK:
-		{
-		textureMasters =new texture[300];
-		objectMasters=new objectMaster[1025];
-		}
+		strcpy_s(filePathT, SHOCK_TEXTURE_CONFIG_FILE);break;	
 	}
-const char *filePathT = TEXTURE_CONFIG_FILE;
 
-f=fopen(filePathT,"r");
-if (f!=NULL)
+
+
+//f=fopen(filePathT,"r");
+if ((fopen_s(&f,filePathT, "r") == 0))
 	{
 	while (fgets(line,255,f))
 		{
@@ -161,15 +140,15 @@ if (f!=NULL)
 		int water=0;
 		int lava=0;
 		sscanf(line, "%d %s %s %f %f %f %f %f %f %f %f %f %f %f %f %d %d",
-		&texNo,&texDesc,&texPath, 
-		&align1_1, &align1_2, &align1_3, &align2_1, &align2_2, &align2_3, 
-		&floor_align1_1, &floor_align1_2, &floor_align1_3, &floor_align2_1, &floor_align2_2, &floor_align2_3, 
-		&water, &lava);
+			&texNo,&texDesc,&texPath, 
+			&align1_1, &align1_2, &align1_3, &align2_1, &align2_2, &align2_3, 
+			&floor_align1_1, &floor_align1_2, &floor_align1_3, &floor_align2_1, &floor_align2_2, &floor_align2_3, 
+			&water, &lava);
 		
 		
 		textureMasters[texNo].textureNo = texNo;
-		strcpy(textureMasters[texNo].desc, texDesc);
-		strcpy(textureMasters[texNo].path , texPath);
+		strcpy_s(textureMasters[texNo].desc, texDesc);
+		strcpy_s(textureMasters[texNo].path , texPath);
 		textureMasters[texNo].align1_1 = align1_1;
 		textureMasters[texNo].align1_2 = align1_2;
 		textureMasters[texNo].align1_3 = align1_3;
@@ -191,9 +170,19 @@ if (f!=NULL)
 		}
 	fclose(f);
 	}
-	const char *filePathO = OBJECT_CONFIG_FILE;
-	f=fopen(filePathO,"r");
-	if (f!=NULL)
+	char filePathO[255];
+	switch (game)
+	{
+	case UWDEMO:
+	case UW1:
+		strcpy_s(filePathO, UW1_OBJECT_CONFIG_FILE );break;	
+	case UW2:
+		strcpy_s(filePathO, UW2_OBJECT_CONFIG_FILE );break;	
+	case SHOCK:
+		strcpy_s(filePathO, SHOCK_OBJECT_CONFIG_FILE );break;	
+	}
+
+if ((fopen_s(&f,filePathO, "r") == 0))
 	{
 		switch (game)
 			{
@@ -214,8 +203,8 @@ if (f!=NULL)
 					objectMasters[objNo].objSubClass = objSubClass;
 					objectMasters[objNo].objSubClassIndex = objSubClassIndex;	
 									
-					strcpy(objectMasters[objNo].desc, objDesc);
-					strcpy(objectMasters[objNo].path , objPath);
+					strcpy_s(objectMasters[objNo].desc, objDesc);
+					strcpy_s(objectMasters[objNo].path , objPath);
 					if (strcmp(objCat,"model") == 0)
 						{
 						objectMasters[objNo].isEntity = 0;
@@ -247,6 +236,8 @@ void exportMaps(int game,int mode,int LevelNo)
 	long texture_map_shock[272]; 
 
 	char *filePath;
+	
+	
 	switch (game)
 		{
 		case UWDEMO:		//Underworld Demo

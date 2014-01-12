@@ -1,36 +1,3 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
-
 //Master object type definition
 typedef struct ObjectItem
 {
@@ -221,6 +188,24 @@ int extends;   //into another tile
 
 
 
+//System Shock object classes
+#define GUNS_WEAPONS		0
+#define AMMUNITION		1
+#define PROJECTILES	2
+#define GRENADE_EXPLOSIONS	3
+#define PATCHES		4
+#define HARDWARE	5
+#define SOFTWARE_LOGS	6
+#define FIXTURES	7
+#define GETTABLES_OTHER	8
+#define SWITCHES_PANELS	9
+#define DOORS_GRATINGS	10
+#define ANIMATED	11
+#define TRAPS_MARKERS	12
+#define CONTAINERS_CORPSES	13
+#define CRITTERS	14
+
+
 typedef struct objectMaster
 {
 int index;	
@@ -254,7 +239,7 @@ int isTrap(ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
 //long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);
-void createScriptCall(ObjectItem &currobj,int x,int y,int z);
+void createScriptCall(ObjectItem &currobj,float x,float y, float z);
 void EntityRotation(int heading);
 
 extern objectMaster *objectMasters;

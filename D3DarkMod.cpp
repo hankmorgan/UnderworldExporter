@@ -1,38 +1,17 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <fstream>
+#ifndef d3darkmod_h
+	#define d3darkmod_h
+	#include "D3DarkMod.h"
 #endif
 #ifndef main_h
 	#define main_h
 	#include "main.h"
 #endif	
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
-#ifndef d3darkmod_h
-	#define d3darkmod_h
-	#include "D3DarkMod.h"
+#ifndef textures_h
+	#define textures_h
+	#include "textures.h"
 #endif
 #include "math.h"
 
@@ -869,8 +848,9 @@ switch (game)
 void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {
 //Parses UW's object list and sets up their x,y,z position.
-int Resolution=7;
-if (game ==SHOCK){Resolution =255;}
+int ResolutionXY=7;
+int ResolutionZ=127;
+if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 int x; int y;
 for (y=0; y<=63;y++) 
 	{
@@ -889,8 +869,8 @@ for (y=0; y<=63;y++)
 				float BrushY=BrushSizeY;
 				float BrushZ=BrushSizeZ;
 				
-				offX= (x*BrushX) + ((objList[nextObj].x) * (BrushX/Resolution));
-				offY= (y*BrushY) + ((objList[nextObj].y) * (BrushY/Resolution));
+				offX= (x*BrushX) + ((objList[nextObj].x) * (BrushX/ResolutionXY));
+				offY= (y*BrushY) + ((objList[nextObj].y) * (BrushY/ResolutionXY));
 				//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
 				int floorHeight = LevelInfo[x][y].floorHeight <<3 ;
 				int nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
@@ -904,7 +884,7 @@ for (y=0; y<=63;y++)
 					float zpos= objList[nextObj].zpos;
 					float brushZ = BrushSizeZ;
 					float ceiling = CEILING_HEIGHT;
-					offZ = (zpos/127) * (brushZ*ceiling);
+					offZ = (zpos/ResolutionZ) * (brushZ*ceiling);
 					}
 				
 				if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0))

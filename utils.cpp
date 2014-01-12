@@ -1,32 +1,8 @@
 #include <fstream>
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
 #ifndef main_h
 	#define main_h
 	#include "main.h"
-#endif	
+#endif
 
 long getFileSize(FILE *file)
 {
@@ -51,7 +27,7 @@ return Byte3 << 16 | Byte2 << 8 | Byte1 ;
 
 long ConvertInt32(unsigned char Byte1, unsigned char Byte2,  unsigned char Byte3,  unsigned char Byte4)
 {
-return Byte4 << 32 | Byte3 << 16 | Byte2 << 8 | Byte1 ;
+return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1 ;		//24 was 32
 }
 
 int getValAtAddress(unsigned char *buffer, long Address, int size)
