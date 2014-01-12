@@ -1,35 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-#ifndef gamestrings_h
-	#define gamestrings_h
-	#include "gamestrings.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
+#include "gamestrings.h"
+#include "main.h"
+#include "utils.h"
 
-typedef struct huffman_node
+struct huffman_node
 {
   int symbol; // symbol in node
   int parent; //
   int left;   // -1 when no node
   int right;  // 
-} huffman_node;
+};
 
 
-typedef struct block_dir
+struct block_dir
 {
-int block_no;
-int address;
-int NoOfEntries;
-int blockEnd;
-} block_dir;
+	int block_no;
+	int address;
+	int NoOfEntries;
+	int blockEnd;
+};
 
 
 void unpackStrings(int game)

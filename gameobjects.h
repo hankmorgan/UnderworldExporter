@@ -1,3 +1,6 @@
+#ifndef _gameobjects_h_
+#define _gameobjects_h_
+
 //Master object type definition
 typedef struct ObjectItem
 {
@@ -244,3 +247,5 @@ void EntityRotation(int heading);
 
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
+
+#endif // _gameobjects_h_

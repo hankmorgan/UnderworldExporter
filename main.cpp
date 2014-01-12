@@ -1,25 +1,12 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <fstream>
 #include <math.h>
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif	
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-
-#include <string.h>
+#include "main.h"
+#include "textures.h"
+#include "gameobjects.h"
+#include "tilemap.h"
 
 using namespace std;
 

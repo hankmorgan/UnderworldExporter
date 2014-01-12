@@ -1,12 +1,6 @@
-#ifndef gamegraphics_h
-	#define gamegraphics_h
-	#include "gamegraphics.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
 #include <fstream>
+#include "utils.h"
+#include "gamegraphics.h"
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255])
 {

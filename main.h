@@ -1,3 +1,6 @@
+#ifndef _main_h_
+#define _main_h_
+
 /*Game paths*/
 
 #define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
@@ -67,4 +70,4 @@ extern int CEILING_HEIGHT;
 void exportMaps(int game,int mode,int LevelNo);
 void LoadConfig(int game);
 
-
+#endif // _main_h_

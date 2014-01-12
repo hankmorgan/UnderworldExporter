@@ -1,7 +1,5 @@
-#ifndef gameobjects_h
-	#define gameobjects_h
-	#include "gameobjects.h"
-#endif
+#ifndef _tilemap_h_
+#define _tilemap_h_
 
 #define SLOPE_BOTH_PARALLEL 0
 #define SLOPE_BOTH_OPPOSITE 1
@@ -20,59 +18,53 @@
 #define	TILE_SLOPE_E 8
 #define TILE_SLOPE_W 9
 
-
-
-
-typedef struct tile
+struct tile
 {
-int tileType;	//What type of tile I am.
-long floorHeight;	//How high is the floor.
-long ceilingHeight;	//Constant in UW. Variable in shock
-int floorTexture;	//At the moment this is the index into the texture table
-int wallTexture;	
-int indexObjectList;	//Points to a linked list of objects in the objects block
-short isDoor;		
-short Render;		//If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
-short DimX;			//The dimensions (in tilesize) of this tile. 1 for a regular tile. 
-short DimY;			//>1 for when it is a group in which case we do not render it but only render it parent til
-short Grouped;		//textures/darkmod/stone/cobblestones/blocks_uneven06_grey off but when I group a set of tiles this indicates the tile is a child of a group.
-int VisibleFaces;	//Which faces are visible for caulking textures on solidblocks. 0-63 Binary combo. north,south,east,west,top,bottom.
-int North; int South;
-int East; int West;
-int Diagonal;
-int Top; int Bottom;	//Textures in each face
-short isWater;		//Set when it has a water texture.
+	int tileType;	//What type of tile I am.
+	long floorHeight;	//How high is the floor.
+	long ceilingHeight;	//Constant in UW. Variable in shock
+	int floorTexture;	//At the moment this is the index into the texture table
+	int wallTexture;	
+	int indexObjectList;	//Points to a linked list of objects in the objects block
+	short isDoor;		
+	short Render;		//If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
+	short DimX;			//The dimensions (in tilesize) of this tile. 1 for a regular tile. 
+	short DimY;			//>1 for when it is a group in which case we do not render it but only render it parent til
+	short Grouped;		//textures/darkmod/stone/cobblestones/blocks_uneven06_grey off but when I group a set of tiles this indicates the tile is a child of a group.
+	int VisibleFaces;	//Which faces are visible for caulking textures on solidblocks. 0-63 Binary combo. north,south,east,west,top,bottom.
+	int North; int South;
+	int East; int West;
+	int Diagonal;
+	int Top; int Bottom;	//Textures in each face
+	short isWater;		//Set when it has a water texture.
 
-short tileX;
-short tileY;
+	short tileX;
+	short tileY;
 
-//Shock Specific Stuff
-int shockSlopeFlag;	//For controlling ceiling slopes for shock.
-short shockHazard;
-int shockCeilingTexture;
-int shockSteep;
-int UseAdjacentTextures;
-int shockTextureOffset;
-int shockNorthOffset; int shockSouthOffset;
-int shockEastOffset; int shockWestOffset;
+	//Shock Specific Stuff
+	int shockSlopeFlag;	//For controlling ceiling slopes for shock.
+	short shockHazard;
+	int shockCeilingTexture;
+	int shockSteep;
+	int UseAdjacentTextures;
+	int shockTextureOffset;
+	int shockNorthOffset; int shockSouthOffset;
+	int shockEastOffset; int shockWestOffset;
 
-long shockNorthCeilHeight; long shockSouthCeilHeight;
-long shockEastCeilHeight; long shockWestCeilHeight;
+	long shockNorthCeilHeight; long shockSouthCeilHeight;
+	long shockEastCeilHeight; long shockWestCeilHeight;
 
-int DoorIndex;	//Index to the door object if this tile has one.
+	int DoorIndex;	//Index to the door object if this tile has one.
 
-int hasPatch;	//Indicates that this tile has a tmap object in it.
-int PatchIndex;	//Index to the tmap object
+	int hasPatch;	//Indicates that this tile has a tmap object in it.
+	int PatchIndex;	//Index to the tmap object
 
-int hasElevator;	//Indicates that the tile has an elevator
-int ElevatorIndex;	//index to the elevator do_trap
+	int hasElevator;	//Indicates that the tile has an elevator
+	int ElevatorIndex;	//index to the elevator do_trap
 
-int TerrainChange;	//Indicates that the tile can change into another type of tile
-int TerrainChangeIndex;	//index to the change terrain trap.
-} tile;
-
-
-
+	int TerrainChange;	//Indicates that the tile can change into another type of tile
+	int TerrainChangeIndex;	//index to the change terrain trap.
+};
 
 int getTile(int tileData);
 int getHeight(int tileData);
@@ -97,3 +89,5 @@ int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction);
 void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index);
 
 extern tile LevelInfo[64][64];
+
+#endif // _tilemap_h_

@@ -1,7 +1,7 @@
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
+#ifndef _d3ddarkmod_h_
+#define _d3ddarkmod_h_
+
+struct ObjectItem;
 
 #define PI 3.14159265358979323846
 #define DOORORIGINOFFSET 15
@@ -39,3 +39,5 @@ void RenderRidgeSWTile(int x, int y, tile &t, short Water,short invert);
 void RenderRidgeSETile(int x, int y, tile &t, short Water,short invert);
 void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor);
 void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+
+#endif // _d3ddarkmod_h_

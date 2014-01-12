@@ -1,39 +1,41 @@
+#ifndef _gamegraphics_h_
+#define _gamegraphics_h_
 
-
-typedef struct palette
+struct palette
 {
-unsigned char red;
-unsigned char green;
-unsigned char blue;
-unsigned char reserved;
-}palette;
+	unsigned char red;
+	unsigned char green;
+	unsigned char blue;
+	unsigned char reserved;
+};
 
 
-typedef struct { 
-  unsigned short int    bfType; 
-  unsigned int   bfSize; 
-  unsigned short int    bfReserved1; 
-  unsigned short int    bfReserved2; 
-  unsigned int   bfOffBits; 
-} BitMapHeader;
+struct BitMapHeader
+{ 
+	unsigned short int    bfType; 
+	unsigned int   bfSize; 
+	unsigned short int    bfReserved1; 
+	unsigned short int    bfReserved2; 
+	unsigned int   bfOffBits; 
+};
 
-typedef struct {
-  unsigned int  biSize; 
-  int  biWidth; 
-  int  biHeight; 
-  unsigned short int   biPlanes; 
-  unsigned short int   biBitCount; 
-  unsigned int  biCompression; 
-  unsigned int  biSizeImage; 
-  int  biXPelsPerMeter; 
-  int  biYPelsPerMeter; 
-  unsigned int  biClrUsed; 
-  unsigned int  biClrImportant; 
-} BitMapInfoHeader;
-
-
-
+struct BitMapInfoHeader
+{
+	unsigned int  biSize; 
+	int  biWidth; 
+	int  biHeight; 
+	unsigned short int   biPlanes; 
+	unsigned short int   biBitCount; 
+	unsigned int  biCompression; 
+	unsigned int  biSizeImage; 
+	int  biXPelsPerMeter; 
+	int  biYPelsPerMeter; 
+	unsigned int  biClrUsed; 
+	unsigned int  biClrImportant; 
+};
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255]);
 void writeBMP( unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
+
+#endif // _gamegraphics_h_

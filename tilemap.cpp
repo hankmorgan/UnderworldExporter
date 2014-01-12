@@ -1,19 +1,10 @@
-#ifndef tilemap_h
-	#define tilemap_h
-	#include "tilemap.h"
-#endif
-#ifndef utils_h
-	#define utils_h
-	#include "utils.h"
-#endif
-#ifndef main_h
-	#define main_h
-	#include "main.h"
-#endif
-#ifndef textures_h
-	#define textures_h
-	#include "textures.h"
-#endif
+#include <stdio.h>
+#include <string.h>
+#include "main.h"
+#include "utils.h"
+#include "textures.h"
+#include "gameobjects.h"
+#include "tilemap.h"
 
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
