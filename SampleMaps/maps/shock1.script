@@ -1,3 +1,5 @@
+#ifndef __game3_1_script__
+#define __game3_1_script__
 void start_EMAIL_018_046_652()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2513");
@@ -99,3 +101,5 @@ void start_EMAIL_004_004_370()
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2509");
 $data_reader_trigger.activate($player1);
 }
+
+#endif //__game3_1_script__

@@ -10,6 +10,7 @@
 #define UW1_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_retro_config.txt"
 #define UW1_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_object_config.txt"
 #define UW1_STRINGS_FILE "C:\\Games\\Ultima\\UW1\\data\\strings.pak"
+#define UW1_CLEAN_STRINGS_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_stringsclean.txt"
 
 #define UW2_LEVEL_PATH "C:\\Games\\Ultima\\UW2\\DATA\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw2_retro_config.txt"
@@ -27,6 +28,12 @@
 #define SHOCK_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_object_config.txt"
 
 #define ENTRANCES_CONFIG_FILE  "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_entrances.txt"
+
+//temporary paths for testing things before I implement commandline params/interface for file paths once I switch to file I/O
+#define SCRIPT_GlOBAL_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptglobal.txt"
+#define SCRIPT_MAIN_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptmain.txt"
+#define SCRIPT_BODY_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptbody.txt"
+#define SCRIPT_FINAL_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\map.script"
 
 /*Globals*/
 extern int BrushSizeX;
@@ -65,6 +72,8 @@ extern int CEILING_HEIGHT;
 #define D3_MODE 1
 #define STRINGS_EXTRACT_MODE 2
 #define BITMAP_EXTRACT_MODE 3
+#define SCRIPT_BUILD_MODE 4
+#define SUPPORT_FILE_MODE 5
 
 
 

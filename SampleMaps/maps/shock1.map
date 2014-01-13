@@ -38368,15 +38368,13 @@ brushDef3
 
 // entity 70
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_019_011_393"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_070"
+"team" "5"
 "origin" "2280.000000 1394.823486 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 71
 {
 "classname" "func_static"
@@ -38401,15 +38399,13 @@ brushDef3
 
 // entity 73
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_020_011_390"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_073"
+"team" "5"
 "origin" "2400.000000 1394.823486 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 74
 {
 "classname" "func_static"
@@ -38827,26 +38823,22 @@ brushDef3
 
 // entity 112
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_030_012_332"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_112"
+"team" "5"
 "origin" "3602.823486 1535.058838 216.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 113
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_031_012_156"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_113"
+"team" "5"
 "origin" "3722.823486 1535.058838 216.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 114
 {
 "classname" "func_static"
@@ -38871,15 +38863,13 @@ brushDef3
 
 // entity 116
 {
-"classname" "func_static"
-"name" "REPAIRBOT_021_013_194"
+"classname" "atdm:ai_lantern_bot"
+"name" "REPAIRBOT_-858993460_116"
+"team" "5"
 "origin" "2580.235352 1620.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 117
 {
 "classname" "func_static"
@@ -38937,26 +38927,22 @@ brushDef3
 
 // entity 122
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_030_013_237"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_122"
+"team" "5"
 "origin" "3602.823486 1655.058838 188.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 123
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_031_013_219"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_123"
+"team" "5"
 "origin" "3722.823486 1655.058838 188.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 124
 {
 "classname" "func_static"
@@ -39154,15 +39140,13 @@ brushDef3
 
 // entity 142
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_041_014_282"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_142"
+"team" "5"
 "origin" "4980.235352 1740.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 143
 {
 "classname" "func_static"
@@ -39330,15 +39314,13 @@ brushDef3
 
 // entity 158
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_037_016_326"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_158"
+"team" "5"
 "origin" "4503.529297 1964.705933 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 159
 {
 "classname" "func_static"
@@ -39352,15 +39334,13 @@ brushDef3
 
 // entity 160
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_042_016_442"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_160"
+"team" "5"
 "origin" "5100.235352 1980.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 161
 {
 "classname" "func_static"
@@ -40083,15 +40063,13 @@ brushDef3
 
 // entity 227
 {
-"classname" "func_static"
-"name" "SERV-BOT_023_019_210"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_227"
+"team" "5"
 "origin" "2823.529297 2396.235352 99.764709"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 228
 {
 "classname" "func_static"
@@ -40193,15 +40171,13 @@ brushDef3
 
 // entity 237
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_030_019_407"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_237"
+"team" "5"
 "origin" "3660.235352 2340.235352 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 238
 {
 "classname" "func_static"
@@ -40259,15 +40235,13 @@ brushDef3
 
 // entity 243
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_042_019_449"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_243"
+"team" "5"
 "origin" "5100.235352 2340.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 244
 {
 "classname" "func_static"
@@ -40303,15 +40277,13 @@ brushDef3
 
 // entity 247
 {
-"classname" "func_static"
-"name" "SERV-BOT_020_020_180"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_247"
+"team" "5"
 "origin" "2456.000000 2400.000000 110.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 248
 {
 "classname" "func_static"
@@ -40325,15 +40297,13 @@ brushDef3
 
 // entity 249
 {
-"classname" "func_static"
-"name" "SERV-BOT_023_020_309"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_249"
+"team" "5"
 "origin" "2823.529297 2516.235352 99.764709"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 250
 {
 "classname" "func_static"
@@ -40457,15 +40427,13 @@ brushDef3
 
 // entity 261
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_038_020_484"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_261"
+"team" "5"
 "origin" "4620.235352 2460.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 262
 {
 "classname" "func_static"
@@ -40545,15 +40513,13 @@ brushDef3
 
 // entity 269
 {
-"classname" "func_static"
-"name" "SERV-BOT_020_021_174"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_269"
+"team" "5"
 "origin" "2456.000000 2520.000000 110.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 270
 {
 "classname" "func_static"
@@ -40633,15 +40599,13 @@ brushDef3
 
 // entity 277
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_040_021_334"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_277"
+"team" "5"
 "origin" "4860.235352 2580.235352 144.941177"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 278
 {
 "classname" "func_static"
@@ -40655,15 +40619,13 @@ brushDef3
 
 // entity 279
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_044_021_336"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_279"
+"team" "5"
 "origin" "5347.293945 2553.411865 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 280
 {
 "classname" "func_static"
@@ -40795,15 +40757,13 @@ brushDef3
 
 // entity 292
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_017_022_221"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_292"
+"team" "5"
 "origin" "2090.823486 2687.058838 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 293
 {
 "classname" "func_static"
@@ -40913,15 +40873,13 @@ brushDef3
 
 // entity 303
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_037_022_395"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_303"
+"team" "5"
 "origin" "4443.293945 2760.000000 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 304
 {
 "classname" "func_static"
@@ -40935,15 +40893,13 @@ brushDef3
 
 // entity 305
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_038_022_345"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_305"
+"team" "5"
 "origin" "4563.293945 2760.000000 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 306
 {
 "classname" "func_static"
@@ -40979,15 +40935,13 @@ brushDef3
 
 // entity 309
 {
-"classname" "func_static"
-"name" "SERV-BOT_012_023_320"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_309"
+"team" "5"
 "origin" "1500.235352 2820.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 310
 {
 "classname" "func_static"
@@ -41100,15 +41054,13 @@ brushDef3
 
 // entity 320
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_037_023_471"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_320"
+"team" "5"
 "origin" "4443.293945 2880.000000 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 321
 {
 "classname" "func_static"
@@ -41122,15 +41074,13 @@ brushDef3
 
 // entity 322
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_038_023_431"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_322"
+"team" "5"
 "origin" "4563.293945 2880.000000 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 323
 {
 "classname" "func_static"
@@ -41155,15 +41105,13 @@ brushDef3
 
 // entity 325
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_045_023_327"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_325"
+"team" "5"
 "origin" "5460.235352 2820.235352 205.176468"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 326
 {
 "classname" "func_static"
@@ -41339,15 +41287,13 @@ brushDef3
 
 // entity 342
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_007_025_224"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_342"
+"team" "5"
 "origin" "900.235291 3060.235352 39.529411"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 343
 {
 "classname" "func_static"
@@ -41743,15 +41689,13 @@ brushDef3
 
 // entity 379
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_009_026_262"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_379"
+"team" "5"
 "origin" "1140.235352 3180.235352 39.529411"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 380
 {
 "classname" "func_static"
@@ -41787,15 +41731,13 @@ brushDef3
 
 // entity 383
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_012_026_037"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_383"
+"team" "5"
 "origin" "1500.235352 3180.235352 220.235291"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 384
 {
 "classname" "func_static"
@@ -41809,15 +41751,13 @@ brushDef3
 
 // entity 385
 {
-"classname" "func_static"
-"name" "SERV-BOT_020_026_006"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_385"
+"team" "5"
 "origin" "2400.000000 3153.411865 145.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 386
 {
 "classname" "func_static"
@@ -41831,15 +41771,13 @@ brushDef3
 
 // entity 387
 {
-"classname" "func_static"
-"name" "SERV-BOT_021_026_240"
+"classname" "atdm:ai_lantern_bot"
+"name" "SERV-BOT_-858993460_387"
+"team" "5"
 "origin" "2520.000000 3153.411865 96.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 388
 {
 "classname" "func_static"
@@ -42122,15 +42060,13 @@ brushDef3
 
 // entity 414
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_037_027_143"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_414"
+"team" "5"
 "origin" "4500.235352 3300.235352 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 415
 {
 "classname" "func_static"
@@ -42298,15 +42234,13 @@ brushDef3
 
 // entity 430
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_045_028_341"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_430"
+"team" "5"
 "origin" "5460.235352 3420.235352 250.352936"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 431
 {
 "classname" "func_static"
@@ -42633,37 +42567,31 @@ brushDef3
 
 // entity 461
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_016_030_047"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_461"
+"team" "5"
 "origin" "1980.235352 3660.235352 188.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 462
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_018_030_199"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_462"
+"team" "5"
 "origin" "2278.588135 3642.353027 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 463
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_019_030_214"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_463"
+"team" "5"
 "origin" "2398.588135 3642.353027 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 464
 {
 "classname" "func_static"
@@ -42688,15 +42616,13 @@ brushDef3
 
 // entity 466
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_030_030_400"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_466"
+"team" "5"
 "origin" "3716.235352 3600.000000 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 467
 {
 "classname" "func_static"
@@ -42776,15 +42702,13 @@ brushDef3
 
 // entity 474
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_031_030_399"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_474"
+"team" "5"
 "origin" "3836.235352 3600.000000 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 475
 {
 "classname" "func_static"
@@ -42853,15 +42777,13 @@ brushDef3
 
 // entity 481
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_033_030_401"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_481"
+"team" "5"
 "origin" "4020.235352 3660.235352 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 482
 {
 "classname" "func_static"
@@ -42996,15 +42918,13 @@ brushDef3
 
 // entity 494
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_012_031_041"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_494"
+"team" "5"
 "origin" "1500.235352 3780.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 495
 {
 "classname" "func_static"
@@ -43051,15 +42971,13 @@ brushDef3
 
 // entity 499
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_023_031_245"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_499"
+"team" "5"
 "origin" "2808.470703 3798.588135 67.529411"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 500
 {
 "classname" "func_static"
@@ -43095,15 +43013,13 @@ brushDef3
 
 // entity 503
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_030_031_397"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_503"
+"team" "5"
 "origin" "3716.235352 3720.000000 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 504
 {
 "classname" "func_static"
@@ -43117,15 +43033,13 @@ brushDef3
 
 // entity 505
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_031_031_398"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_505"
+"team" "5"
 "origin" "3836.235352 3720.000000 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 506
 {
 "classname" "func_static"
@@ -43183,26 +43097,22 @@ brushDef3
 
 // entity 511
 {
-"classname" "func_static"
-"name" "HOPPER_034_031_599"
+"classname" "atdm:ai_lantern_bot"
+"name" "HOPPER_-858993460_511"
+"team" "5"
 "origin" "4196.235352 3776.000000 220.235291"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 512
 {
-"classname" "func_static"
-"name" "HOPPER_035_031_136"
+"classname" "atdm:ai_lantern_bot"
+"name" "HOPPER_-858993460_512"
+"team" "5"
 "origin" "4316.235352 3776.000000 220.235291"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 513
 {
 "classname" "func_static"
@@ -43260,15 +43170,13 @@ brushDef3
 
 // entity 518
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_045_031_337"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_518"
+"team" "5"
 "origin" "5460.235352 3780.235352 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 519
 {
 "classname" "func_static"
@@ -43370,15 +43278,13 @@ brushDef3
 
 // entity 528
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_029_032_508"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_528"
+"team" "5"
 "origin" "3540.235352 3900.235352 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 529
 {
 "classname" "func_static"
@@ -43546,15 +43452,13 @@ brushDef3
 
 // entity 544
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_020_034_355"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_544"
+"team" "5"
 "origin" "2460.235352 4140.235352 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 545
 {
 "classname" "func_static"
@@ -43975,15 +43879,13 @@ brushDef3
 
 // entity 583
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_034_036_009"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_583"
+"team" "5"
 "origin" "4140.235352 4380.235352 406.588226"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 584
 {
 "classname" "func_static"
@@ -44019,15 +43921,13 @@ brushDef3
 
 // entity 587
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_009_037_531"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_587"
+"team" "5"
 "origin" "1140.235352 4500.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 588
 {
 "classname" "func_static"
@@ -44170,26 +44070,22 @@ brushDef3
 
 // entity 601
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_026_037_098"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_601"
+"team" "5"
 "origin" "3120.000000 4496.000000 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 602
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_027_037_481"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_602"
+"team" "5"
 "origin" "3240.000000 4496.000000 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 603
 {
 "classname" "func_static"
@@ -44717,15 +44613,13 @@ brushDef3
 
 // entity 651
 {
-"classname" "func_static"
-"name" "HUMANOID_MUTANT_047_039_580"
+"classname" "atdm:ai_undead_zombie"
+"name" "HUMANOID_MUTANT_-858993460_651"
+"team" "5"
 "origin" "5700.235352 4740.235352 54.588234"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 652
 {
 "classname" "func_static"
@@ -44871,15 +44765,13 @@ brushDef3
 
 // entity 665
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_026_040_436"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_665"
+"team" "5"
 "origin" "3183.529297 4867.293945 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 666
 {
 "classname" "func_static"
@@ -44970,37 +44862,31 @@ brushDef3
 
 // entity 674
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_037_040_446"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_674"
+"team" "5"
 "origin" "4500.235352 4860.235352 160.000000"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 675
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_045_040_444"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_675"
+"team" "5"
 "origin" "5497.411621 4859.764648 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 676
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_046_040_448"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_676"
+"team" "5"
 "origin" "5617.411621 4859.764648 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 677
 {
 "classname" "func_static"
@@ -45231,15 +45117,13 @@ brushDef3
 
 // entity 698
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_017_042_375"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_698"
+"team" "5"
 "origin" "2100.235352 5100.235352 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 699
 {
 "classname" "func_static"
@@ -45286,15 +45170,13 @@ brushDef3
 
 // entity 703
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_020_042_379"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_703"
+"team" "5"
 "origin" "2460.235352 5100.235352 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 704
 {
 "classname" "func_static"
@@ -45484,15 +45366,13 @@ brushDef3
 
 // entity 721
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_025_043_097"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_721"
+"team" "5"
 "origin" "3060.235352 5220.235352 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 722
 {
 "classname" "func_static"
@@ -45506,37 +45386,31 @@ brushDef3
 
 // entity 723
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_031_043_456"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_723"
+"team" "5"
 "origin" "3780.235352 5220.235352 280.470581"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 724
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_038_043_358"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_724"
+"team" "5"
 "origin" "4676.235352 5231.058594 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 725
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_039_043_356"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_725"
+"team" "5"
 "origin" "4796.235352 5231.058594 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 726
 {
 "classname" "func_static"
@@ -45550,15 +45424,13 @@ brushDef3
 
 // entity 727
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_016_044_269"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_727"
+"team" "5"
 "origin" "1983.529419 5339.764648 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 728
 {
 "classname" "func_static"
@@ -45627,26 +45499,22 @@ brushDef3
 
 // entity 734
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_022_044_438"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_734"
+"team" "5"
 "origin" "2682.353027 5379.764648 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 735
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_023_044_374"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_735"
+"team" "5"
 "origin" "2820.235352 5340.235352 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 736
 {
 "classname" "func_static"
@@ -45825,15 +45693,13 @@ brushDef3
 
 // entity 752
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_022_045_437"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_752"
+"team" "5"
 "origin" "2682.353027 5499.764648 45.176472"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 753
 {
 "classname" "func_static"
@@ -45957,15 +45823,13 @@ brushDef3
 
 // entity 764
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_030_045_678"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_764"
+"team" "5"
 "origin" "3660.235352 5460.235352 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 765
 {
 "classname" "func_static"
@@ -46163,59 +46027,49 @@ brushDef3
 
 // entity 783
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_022_046_469"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_783"
+"team" "5"
 "origin" "2726.117676 5587.293945 271.058838"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 784
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_023_046_841"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_784"
+"team" "5"
 "origin" "2846.117676 5587.293945 271.058838"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 785
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_024_046_258"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_785"
+"team" "5"
 "origin" "2973.646973 5598.588379 271.058838"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 786
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_025_046_292"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_786"
+"team" "5"
 "origin" "3093.646973 5598.588379 271.058838"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 787
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_026_046_018"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_787"
+"team" "5"
 "origin" "3198.588135 5623.529297 276.705872"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 788
 {
 "classname" "func_static"
@@ -46240,26 +46094,22 @@ brushDef3
 
 // entity 790
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_040_046_434"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_790"
+"team" "5"
 "origin" "4893.646973 5613.646973 109.235291"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 791
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_041_046_067"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_791"
+"team" "5"
 "origin" "5013.646973 5613.646973 60.235294"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 792
 {
 "classname" "func_static"
@@ -46306,26 +46156,22 @@ brushDef3
 
 // entity 796
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_020_047_378"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_796"
+"team" "5"
 "origin" "2460.235352 5700.235352 286.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 797
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_026_047_003"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_797"
+"team" "5"
 "origin" "3198.588135 5743.529297 276.705872"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 798
 {
 "classname" "func_static"
@@ -46350,26 +46196,22 @@ brushDef3
 
 // entity 800
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_040_047_506"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_800"
+"team" "5"
 "origin" "4893.646973 5733.646973 109.235291"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 801
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_041_047_498"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_801"
+"team" "5"
 "origin" "5013.646973 5733.646973 60.235294"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 802
 {
 "classname" "func_static"
@@ -46394,26 +46236,22 @@ brushDef3
 
 // entity 804
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_020_048_427"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_804"
+"team" "5"
 "origin" "2448.000000 5872.941406 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 805
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_022_048_424"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_805"
+"team" "5"
 "origin" "2684.705811 5864.941406 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 806
 {
 "classname" "func_static"
@@ -46471,59 +46309,49 @@ brushDef3
 
 // entity 811
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_020_049_428"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_811"
+"team" "5"
 "origin" "2448.000000 5992.941406 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 812
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_022_049_426"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_812"
+"team" "5"
 "origin" "2684.705811 5984.941406 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 813
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_023_049_425"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_813"
+"team" "5"
 "origin" "2804.235352 5896.000000 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 814
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_025_049_415"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_814"
+"team" "5"
 "origin" "3041.882324 5896.941406 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 815
 {
-"classname" "func_static"
-"name" "CYBORG_ASSASSIN_027_049_515"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_ASSASSIN_-858993460_815"
+"team" "5"
 "origin" "3303.529297 5939.764648 220.235291"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 816
 {
 "classname" "func_static"
@@ -46559,15 +46387,13 @@ brushDef3
 
 // entity 819
 {
-"classname" "func_static"
-"name" "CYBORG_WARRIOR_035_049_348"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_WARRIOR_-858993460_819"
+"team" "5"
 "origin" "4260.235352 5940.235352 289.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 820
 {
 "classname" "func_static"
@@ -46658,26 +46484,22 @@ brushDef3
 
 // entity 828
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_023_050_422"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_828"
+"team" "5"
 "origin" "2804.235352 6016.000000 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 829
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_025_050_406"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_829"
+"team" "5"
 "origin" "3041.882324 6016.941406 225.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 830
 {
 "classname" "func_static"
@@ -46768,15 +46590,13 @@ brushDef3
 
 // entity 838
 {
-"classname" "func_static"
-"name" "CYBORG_DRONE_030_052_250"
+"classname" "atdm:ai_undead_revenant"
+"name" "CYBORG_DRONE_-858993460_838"
+"team" "5"
 "origin" "3656.000000 6299.764648 165.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
-
-"model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-
 // entity 839
 {
 "classname" "func_static"

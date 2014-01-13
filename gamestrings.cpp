@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
-
-
+#include <string.h>
 
 #include "utils.h"
 #include "main.h"
@@ -83,8 +82,8 @@ long address_pointer=0;
 			address_pointer=2 + blocks[i].address + blocks[i].NoOfEntries *2;
 			//printf("It's strings begin at %d\n", address_pointer);
 			//printf("It should end at %d\n",blocks[i+1].address );
-			printf("\n+=====================================+\n");
-			printf("Block Name: %d\n", blocks[i].block_no);
+			//printf("\n+=====================================+\n");
+			//printf("Block Name: %d\n", blocks[i].block_no);
 			long strAdd;
 			int blnFnd;
 			strAdd= address_pointer;
@@ -122,7 +121,10 @@ long address_pointer=0;
 					if ((hman[node].symbol !='|') && (hman[node].symbol !=10)){
 						if (blnFnd==0)
 							//{printf("\nBlock %d String %d at %d:",blocks[i].block_no, j, strAdd);	}
-							{printf("\n%03d=",j);	}
+							{
+							//printf("\n%03d=",j);	
+							printf("\n%03d=%03d=",blocks[i].block_no,j);
+							}
 						printf("%c",hman[node].symbol);
 						blnFnd = 1;
 					}
@@ -206,3 +208,36 @@ long chunkUnpackedLength;
 
 	
 }
+
+int lookupString(int BlockNo, int StringNo, char StringOut[255] )
+	{//looks up a flat file of strings to find the specified value
+	//
+	int BlockNoFnd=0;
+	int StringNoFnd=0;
+	char stringContents[255];
+	char filePath[255];
+	char line[255];
+	
+	FILE *file = NULL;      // File pointer
+	strcpy_s(filePath,255,UW1_CLEAN_STRINGS_FILE);
+     if (fopen_s(&file, filePath, "r") == 0)
+		{
+			while (fgets(line,255,file))
+				{
+				sscanf(line,"%d=%d=%[^\n]",&BlockNoFnd,&StringNoFnd,&stringContents);
+				if ((BlockNo==BlockNoFnd) && (StringNo==StringNoFnd))
+					{
+					fclose(file);
+					strcpy_s(StringOut ,255,stringContents);
+					return 1;
+					}
+					
+				}
+			fclose(file);
+			return	-1;
+		}
+	else
+		{
+		return -1;
+		}
+	}

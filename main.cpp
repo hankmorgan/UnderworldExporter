@@ -9,6 +9,7 @@
 #include "gameobjects.h"
 #include "tilemap.h"
 #include "d3darkmod.h"
+#include "scripting.h"
 #include "main.h"
 
 
@@ -50,6 +51,7 @@ int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
+//int mode = SCRIPT_BUILD_MODE;
 levelNo=1;
 switch (game)
 	{
@@ -68,6 +70,7 @@ switch (game)
 		{
 		case D3_MODE:
 		case ASCII_MODE:
+		case SCRIPT_BUILD_MODE:
 			exportMaps(game,mode,levelNo);break;
 		case STRINGS_EXTRACT_MODE:
 			if (game == SHOCK)
@@ -118,8 +121,6 @@ switch (game)
 	case SHOCK:
 		strcpy_s(filePathT, SHOCK_TEXTURE_CONFIG_FILE);break;	
 	}
-
-
 
 //f=fopen(filePathT,"r");
 if ((fopen_s(&f,filePathT, "r") == 0))
@@ -306,6 +307,18 @@ void exportMaps(int game,int mode,int LevelNo)
 			{
 			RenderDarkModLevel(LevelInfo,objList,game);		
 			break;
+			}
+		case SCRIPT_BUILD_MODE:
+			{
+			if (game !=SHOCK)
+				{
+				buildScriptsUW(game,LevelInfo,objList,LevelNo);
+				}
+			else	
+				{
+				BuildScriptsShock(game,LevelInfo,objList,LevelNo);
+				}
+			 break;
 			}
 		}
 	}
