@@ -1,24 +1,24 @@
 #ifndef gamegraphics_h
 	#define gamegraphics_h
 	
-typedef struct palette
+struct palette
 {
 unsigned char red;
 unsigned char green;
 unsigned char blue;
 unsigned char reserved;
-}palette;
+};
 
 
-typedef struct { 
+struct BitMapHeader { 
   unsigned short int    bfType; 
   unsigned int   bfSize; 
   unsigned short int    bfReserved1; 
   unsigned short int    bfReserved2; 
   unsigned int   bfOffBits; 
-} BitMapHeader;
+};
 
-typedef struct {
+struct BitMapInfoHeader{
   unsigned int  biSize; 
   int  biWidth; 
   int  biHeight; 
@@ -30,7 +30,7 @@ typedef struct {
   int  biYPelsPerMeter; 
   unsigned int  biClrUsed; 
   unsigned int  biClrImportant; 
-} BitMapInfoHeader;
+} ;
 
 
 

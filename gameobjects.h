@@ -2,7 +2,7 @@
 	#define gameobjects_h
 	
 //Master object type definition
-typedef struct ObjectItem
+struct ObjectItem
 {
 	int index;	//it's own index in case I need to find myself.
 //000
@@ -100,7 +100,7 @@ int Property1;
 int Property2;
 int Property3;
    	
-} ObjectItem;
+};
 
 
 //typedef struct shockObjectItem
@@ -229,7 +229,7 @@ int Property3;
 #define CRITTERS_OFFSET	4043
 
 
-typedef struct objectMaster
+struct objectMaster
 {
 int index;	
 short type;	//from above
@@ -240,7 +240,7 @@ short isSet;
 int objClass;	//For Shock
 int objSubClass;
 int objSubClassIndex;
-} objectMaster;
+};
 
 
 //typedef struct shockObjectMaster

@@ -20,7 +20,7 @@
 #define TILE_SLOPE_W 9
 
 
-typedef struct tile
+struct tile
 {
 int tileType;	//What type of tile I am.
 long floorHeight;	//How high is the floor.
@@ -66,7 +66,7 @@ int ElevatorIndex;	//index to the elevator do_trap
 
 int TerrainChange;	//Indicates that the tile can change into another type of tile
 int TerrainChangeIndex;	//index to the change terrain trap.
-} tile;
+};
 
 
 
