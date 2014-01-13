@@ -1,0 +1,101 @@
+void start_EMAIL_018_046_652()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2513");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_016_042_360()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2506");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_035_039_357()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2510");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_018_037_416()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2514");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_012_029_457()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2511");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_051_029_297()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2512");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_011_027_606()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2517");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_012_027_605()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2517");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_038_025_583()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2516");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_038_024_588()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2516");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_011_022_361()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2505");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_033_022_394()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2518");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_020_019_631()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2504");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_029_017_592()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2519");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_040_014_364()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2507");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_038_011_365()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2508");
+$data_reader_trigger.activate($player1);
+}
+
+void start_EMAIL_004_004_370()
+{
+$data_reader_trigger.setKey("snd_say","shock_audio_log_2509");
+$data_reader_trigger.activate($player1);
+}

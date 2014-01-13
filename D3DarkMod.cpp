@@ -165,21 +165,40 @@ int x; int y;
 				}
 
 			}
+
 		//Ambient world light
 			printf("// entity %d\n", EntityCount++);
 			printf("{\n\"classname\" \"atdm:ambient_world\"");
 			printf("\n\"name\" \"ambient_world\"",EntityCount);
-			printf("\n\"origin\" \"2500 2500 120\"");
+			printf("\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
 			printf("\n\"light_center\" \"0 0 0\"");
-			printf("\n\"light_radius\" \"4500 4500 2500\"");
+			printf("\n\"light_radius\" \"4500 4500 2500\"");	
 			printf("\n\"color\" \"0.50 0.50 0.50\"");
 			printf("\n\"nodiffuse\" \"0\"");
 			printf("\n\"noshadows\" \"0\"");
 			printf("\n\"nospecular\" \"0\"");
 			printf("\n\"parallel\" \"0\"");
 			printf("\n}\n");
-			
-			
+			if (game == SHOCK)
+				{
+				//Speaker for playing back logs
+				printf("// entity %d\n", EntityCount++);
+				printf("{\n\"classname\" \"atdm:voice\"");
+				printf("\n\"name\" \"data_reader_voice\"",EntityCount);
+				printf("\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
+				printf("\n\"s_shader\" \"silence\"");
+				printf("\n}\n");						
+				
+				printf("// entity %d\n", EntityCount++);
+				printf("{\n\"classname\" \"atdm:trigger_voice\"");
+				printf("\n\"name\" \"data_reader_trigger\"",EntityCount);
+				printf("\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
+				printf("\n\"snd_say\" \"silence\"");
+				printf("\n\"target0\" \"data_reader_voice\"");
+				printf("\n\"as_player\" \"1\"");
+				printf("\n}\n");						
+				
+				}
 		
 }
 

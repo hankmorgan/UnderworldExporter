@@ -37836,11 +37836,20 @@ brushDef3
 "name" "EMAIL_004_004_370"
 "inv_name" "Readable_2509"
 "xdata_contents" "readables/shock/log_2509"
+"trigger_on_open" "runscript_EMAIL_004_004_370"
 "origin" "539.764709 577.411743 9.411765"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 22
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_004_004_370"
+"origin" "539.764709 577.411743 9.411765"
+"call" "start_EMAIL_004_004_370"
+}
+
+// entity 23
 {
 "classname" "func_static"
 "name" "SV_NEEDLE_DARTS_004_004_470"
@@ -37851,7 +37860,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 23
+// entity 24
 {
 "classname" "func_static"
 "name" "BIOLOGICAL_SYSTEMS_MONITOR_004_004_162"
@@ -37862,7 +37871,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 24
+// entity 25
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_027_008_863"
@@ -37873,7 +37882,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 25
+// entity 26
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_028_008_864"
@@ -37884,7 +37893,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 26
+// entity 27
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_030_008_689"
@@ -37895,7 +37904,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 27
+// entity 28
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_031_008_859"
@@ -37906,7 +37915,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 28
+// entity 29
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_033_008_862"
@@ -37917,7 +37926,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 29
+// entity 30
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_034_008_865"
@@ -37928,7 +37937,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 30
+// entity 31
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_036_008_535"
@@ -37939,7 +37948,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 31
+// entity 32
 {
 "classname" "func_static"
 "name" "REPORT_THIS_AS_A_BUG_037_008_650"
@@ -37950,7 +37959,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 32
+// entity 33
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_027_009_704"
@@ -37961,7 +37970,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 33
+// entity 34
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_028_009_300"
@@ -37972,7 +37981,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 34
+// entity 35
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_031_009_307"
@@ -37983,7 +37992,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 35
+// entity 36
 {
 "classname" "func_static"
 "name" "GRAFFITI_033_009_662"
@@ -37994,7 +38003,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 36
+// entity 37
 {
 "classname" "func_static"
 "name" "GRAFFITI_034_009_148"
@@ -38005,7 +38014,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 37
+// entity 38
 {
 "classname" "func_static"
 "name" "BULLET_HOLE_036_009_663"
@@ -38016,7 +38025,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 38
+// entity 39
 {
 "classname" "func_static"
 "name" "BULLET_HOLE_037_009_661"
@@ -38027,7 +38036,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 39
+// entity 40
 {
 "classname" "func_static"
 "name" "BULLET_HOLE_037_009_016"
@@ -38038,7 +38047,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 40
+// entity 41
 {
 "classname" "func_static"
 "name" "LAND_MINE_020_010_530"
@@ -38049,7 +38058,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 41
+// entity 42
 {
 "classname" "func_static"
 "name" "GAS_GRENADE_020_010_088"
@@ -38060,7 +38069,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 42
+// entity 43
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_020_010_094"
@@ -38071,7 +38080,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 43
+// entity 44
 {
 "classname" "func_static"
 "name" "CRATE_021_010_742"
@@ -38082,7 +38091,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 44
+// entity 45
 {
 "classname" "func_static"
 "name" "CRATE_021_010_743"
@@ -38093,7 +38102,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 45
+// entity 46
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_021_010_601"
@@ -38104,7 +38113,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 46
+// entity 47
 {
 "classname" "func_static"
 "name" "CRATE_022_010_714"
@@ -38115,7 +38124,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 47
+// entity 48
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_023_010_593"
@@ -38126,7 +38135,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 48
+// entity 49
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_023_010_597"
@@ -38137,7 +38146,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 49
+// entity 50
 {
 "classname" "func_static"
 "name" "SPARQ_BEAM_024_010_801"
@@ -38148,7 +38157,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 50
+// entity 51
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_024_010_590"
@@ -38159,7 +38168,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 51
+// entity 52
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_026_010_280"
@@ -38170,7 +38179,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 52
+// entity 53
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_026_010_707"
@@ -38181,7 +38190,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 53
+// entity 54
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_027_010_708"
@@ -38192,7 +38201,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 54
+// entity 55
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_027_010_705"
@@ -38203,7 +38212,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 55
+// entity 56
 {
 "classname" "func_static"
 "name" "SKULL_027_010_192"
@@ -38214,7 +38223,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 56
+// entity 57
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_028_010_035"
@@ -38225,7 +38234,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 57
+// entity 58
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_028_010_172"
@@ -38236,7 +38245,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 58
+// entity 59
 {
 "classname" "func_static"
 "name" "DARK_LORD_TUAOHTUA_029_010_835"
@@ -38247,7 +38256,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 59
+// entity 60
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_030_010_310"
@@ -38258,7 +38267,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 60
+// entity 61
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_031_010_052"
@@ -38269,7 +38278,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 61
+// entity 62
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_032_010_850"
@@ -38280,7 +38289,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 62
+// entity 63
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_032_010_038"
@@ -38291,7 +38300,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 63
+// entity 64
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_033_010_322"
@@ -38302,7 +38311,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 64
+// entity 65
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_036_010_316"
@@ -38313,7 +38322,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 65
+// entity 66
 {
 "classname" "func_static"
 "name" "SKELETON_036_010_314"
@@ -38324,7 +38333,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 66
+// entity 67
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_037_010_161"
@@ -38335,7 +38344,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 67
+// entity 68
 {
 "classname" "func_static"
 "name" "BRIEFCASE_038_010_040"
@@ -38346,7 +38355,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 68
+// entity 69
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_019_011_853"
@@ -38357,7 +38366,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 69
+// entity 70
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_019_011_393"
@@ -38368,7 +38377,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 70
+// entity 71
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_020_011_391"
@@ -38379,7 +38388,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 71
+// entity 72
 {
 "classname" "func_static"
 "name" "SKULL_020_011_392"
@@ -38390,7 +38399,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 72
+// entity 73
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_020_011_390"
@@ -38401,7 +38410,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 73
+// entity 74
 {
 "classname" "func_static"
 "name" "SPARQ_BEAM_021_011_235"
@@ -38412,7 +38421,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 74
+// entity 75
 {
 "classname" "func_static"
 "name" "CRATE_021_011_739"
@@ -38423,7 +38432,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 75
+// entity 76
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_021_011_600"
@@ -38434,7 +38443,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 76
+// entity 77
 {
 "classname" "func_static"
 "name" "CRATE_022_011_745"
@@ -38445,7 +38454,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 77
+// entity 78
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_023_011_679"
@@ -38456,7 +38465,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 78
+// entity 79
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_024_011_589"
@@ -38467,7 +38476,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 79
+// entity 80
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_026_011_706"
@@ -38478,7 +38487,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 80
+// entity 81
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_026_011_084"
@@ -38489,7 +38498,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 81
+// entity 82
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_026_011_253"
@@ -38500,7 +38509,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 82
+// entity 83
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_026_011_070"
@@ -38511,7 +38520,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 83
+// entity 84
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_026_011_046"
@@ -38522,7 +38531,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 84
+// entity 85
 {
 "classname" "func_static"
 "name" "BUTTON_027_011_840"
@@ -38533,7 +38542,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 85
+// entity 86
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_027_011_709"
@@ -38544,7 +38553,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 86
+// entity 87
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_027_011_034"
@@ -38555,7 +38564,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 87
+// entity 88
 {
 "classname" "func_static"
 "name" "CART_029_011_641"
@@ -38566,7 +38575,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 88
+// entity 89
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_031_011_308"
@@ -38577,7 +38586,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 89
+// entity 90
 {
 "classname" "func_static"
 "name" "GRATING_033_011_467"
@@ -38588,7 +38597,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 90
+// entity 91
 {
 "classname" "func_static"
 "name" "EXPLOSION_RESIDUE_034_011_664"
@@ -38599,7 +38608,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 91
+// entity 92
 {
 "classname" "func_static"
 "name" "GRATING_034_011_236"
@@ -38610,7 +38619,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 92
+// entity 93
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_036_011_317"
@@ -38621,7 +38630,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 93
+// entity 94
 {
 "classname" "func_static"
 "name" "SKELETON_036_011_315"
@@ -38632,7 +38641,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 94
+// entity 95
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_037_011_313"
@@ -38643,7 +38652,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 95
+// entity 96
 {
 "classname" "func_static"
 "name" "BULLET_HOLE_038_011_347"
@@ -38654,7 +38663,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 96
+// entity 97
 {
 "classname" "func_static"
 "name" "BULLET_HOLE_038_011_556"
@@ -38665,7 +38674,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 97
+// entity 98
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_038_011_658"
@@ -38676,7 +38685,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 98
+// entity 99
 {
 "classname" "func_static"
 "name" "BLOOD_STAIN_038_011_657"
@@ -38687,17 +38696,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 99
+// entity 100
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_038_011_365"
 "inv_name" "Readable_2508"
 "xdata_contents" "readables/shock/log_2508"
+"trigger_on_open" "runscript_EMAIL_038_011_365"
 "origin" "4620.235352 1380.235352 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 100
+// entity 101
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_038_011_365"
+"origin" "4620.235352 1380.235352 129.882355"
+"call" "start_EMAIL_038_011_365"
+}
+
+// entity 102
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_017_012_011"
@@ -38708,7 +38726,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 101
+// entity 103
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_017_012_387"
@@ -38719,7 +38737,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 102
+// entity 104
 {
 "classname" "func_static"
 "name" "SKULL_020_012_702"
@@ -38730,7 +38748,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 103
+// entity 105
 {
 "classname" "func_static"
 "name" "KEYPAD_PANEL_023_012_331"
@@ -38741,7 +38759,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 104
+// entity 106
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_023_012_028"
@@ -38752,7 +38770,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 105
+// entity 107
 {
 "classname" "func_static"
 "name" "ICON_023_012_741"
@@ -38763,7 +38781,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 106
+// entity 108
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_025_012_615"
@@ -38774,7 +38792,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 107
+// entity 109
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_026_012_170"
@@ -38785,7 +38803,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 108
+// entity 110
 {
 "classname" "func_static"
 "name" "CAMERA_028_012_031"
@@ -38796,7 +38814,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 109
+// entity 111
 {
 "classname" "func_static"
 "name" "DOOR_028_012_001"
@@ -38807,7 +38825,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 110
+// entity 112
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_030_012_332"
@@ -38818,7 +38836,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 111
+// entity 113
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_031_012_156"
@@ -38829,7 +38847,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 112
+// entity 114
 {
 "classname" "func_static"
 "name" "BEAM_BLAST_035_012_659"
@@ -38840,7 +38858,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 113
+// entity 115
 {
 "classname" "func_static"
 "name" "GRAFFITI_036_012_737"
@@ -38851,7 +38869,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 114
+// entity 116
 {
 "classname" "func_static"
 "name" "REPAIRBOT_021_013_194"
@@ -38862,7 +38880,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 115
+// entity 117
 {
 "classname" "func_static"
 "name" "ICON_023_013_814"
@@ -38873,7 +38891,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 116
+// entity 118
 {
 "classname" "func_static"
 "name" "SEVERED_HEAD_025_013_086"
@@ -38884,7 +38902,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 117
+// entity 119
 {
 "classname" "func_static"
 "name" "DARK_LORD_TUAOHTUA_027_013_846"
@@ -38895,7 +38913,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 118
+// entity 120
 {
 "classname" "func_static"
 "name" "BUTTON_027_013_832"
@@ -38906,7 +38924,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 119
+// entity 121
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_013_248"
@@ -38917,7 +38935,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 120
+// entity 122
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_030_013_237"
@@ -38928,7 +38946,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 121
+// entity 123
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_031_013_219"
@@ -38939,7 +38957,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 122
+// entity 124
 {
 "classname" "func_static"
 "name" "DOOR_034_013_454"
@@ -38950,7 +38968,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 123
+// entity 125
 {
 "classname" "func_static"
 "name" "BLAST_DOOR_036_013_227"
@@ -38961,7 +38979,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 124
+// entity 126
 {
 "classname" "func_static"
 "name" "SERVICE_ACCESS_DOOR_024_014_057"
@@ -38972,7 +38990,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 125
+// entity 127
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_026_014_328"
@@ -38983,7 +39001,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 126
+// entity 128
 {
 "classname" "func_static"
 "name" "SWITCH_027_014_247"
@@ -38994,7 +39012,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 127
+// entity 129
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_014_813"
@@ -39005,7 +39023,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 128
+// entity 130
 {
 "classname" "func_static"
 "name" "CAMERA_030_014_504"
@@ -39016,7 +39034,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 129
+// entity 131
 {
 "classname" "func_static"
 "name" "DESK_034_014_655"
@@ -39027,7 +39045,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 130
+// entity 132
 {
 "classname" "func_static"
 "name" "CHAIR_035_014_660"
@@ -39038,7 +39056,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 131
+// entity 133
 {
 "classname" "func_static"
 "name" "DESK_035_014_459"
@@ -39049,7 +39067,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 132
+// entity 134
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_036_014_321"
@@ -39060,7 +39078,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 133
+// entity 135
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_037_014_451"
@@ -39071,7 +39089,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 134
+// entity 136
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_038_014_323"
@@ -39082,7 +39100,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 135
+// entity 137
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_038_014_234"
@@ -39093,7 +39111,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 136
+// entity 138
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_039_014_703"
@@ -39104,17 +39122,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 137
+// entity 139
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_040_014_364"
 "inv_name" "Readable_2507"
 "xdata_contents" "readables/shock/log_2507"
+"trigger_on_open" "runscript_EMAIL_040_014_364"
 "origin" "4822.117676 1773.647095 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 138
+// entity 140
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_040_014_364"
+"origin" "4822.117676 1773.647095 129.882355"
+"call" "start_EMAIL_040_014_364"
+}
+
+// entity 141
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_040_014_325"
@@ -39125,7 +39152,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 139
+// entity 142
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_041_014_282"
@@ -39136,7 +39163,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 140
+// entity 143
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_023_015_318"
@@ -39147,7 +39174,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 141
+// entity 144
 {
 "classname" "func_static"
 "name" "FERN_028_015_127"
@@ -39158,7 +39185,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 142
+// entity 145
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_030_015_809"
@@ -39169,7 +39196,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 143
+// entity 146
 {
 "classname" "func_static"
 "name" "CRATE_032_015_189"
@@ -39180,7 +39207,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 144
+// entity 147
 {
 "classname" "func_static"
 "name" "CRATE_032_015_158"
@@ -39191,7 +39218,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 145
+// entity 148
 {
 "classname" "func_static"
 "name" "CRATE_033_015_209"
@@ -39202,7 +39229,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 146
+// entity 149
 {
 "classname" "func_static"
 "name" "DESK_034_015_653"
@@ -39213,7 +39240,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 147
+// entity 150
 {
 "classname" "func_static"
 "name" "GAS_GRENADE_035_015_842"
@@ -39224,7 +39251,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 148
+// entity 151
 {
 "classname" "func_static"
 "name" "DESK_035_015_175"
@@ -39235,7 +39262,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 149
+// entity 152
 {
 "classname" "func_static"
 "name" "DEBRIS_039_015_069"
@@ -39246,7 +39273,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 150
+// entity 153
 {
 "classname" "func_static"
 "name" "DEBRIS_043_015_419"
@@ -39257,7 +39284,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 151
+// entity 154
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_021_016_121"
@@ -39268,7 +39295,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 152
+// entity 155
 {
 "classname" "func_static"
 "name" "SMALL_PLANT_027_016_125"
@@ -39279,7 +39306,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 153
+// entity 156
 {
 "classname" "func_static"
 "name" "GRASS_029_016_071"
@@ -39290,7 +39317,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 154
+// entity 157
 {
 "classname" "func_static"
 "name" "SIGN_030_016_049"
@@ -39301,7 +39328,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 155
+// entity 158
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_037_016_326"
@@ -39312,7 +39339,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 156
+// entity 159
 {
 "classname" "func_static"
 "name" "DEBRIS_038_016_719"
@@ -39323,7 +39350,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 157
+// entity 160
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_042_016_442"
@@ -39334,7 +39361,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 158
+// entity 161
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_015_017_517"
@@ -39345,7 +39372,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 159
+// entity 162
 {
 "classname" "func_static"
 "name" "ECOLOGY_TRIGGER_016_017_629"
@@ -39356,7 +39383,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 160
+// entity 163
 {
 "classname" "func_static"
 "name" "WORDS_016_017_054"
@@ -39367,7 +39394,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 161
+// entity 164
 {
 "classname" "func_static"
 "name" "WORDS_016_017_216"
@@ -39378,7 +39405,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 162
+// entity 165
 {
 "classname" "func_static"
 "name" "CAMERA_016_017_495"
@@ -39389,7 +39416,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 163
+// entity 166
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_017_017_330"
@@ -39400,7 +39427,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 164
+// entity 167
 {
 "classname" "func_static"
 "name" "ACCESS_PANEL_018_017_509"
@@ -39411,7 +39438,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 165
+// entity 168
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_018_017_140"
@@ -39422,7 +39449,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 166
+// entity 169
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_022_017_792"
@@ -39433,7 +39460,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 167
+// entity 170
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_022_017_849"
@@ -39444,7 +39471,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 168
+// entity 171
 {
 "classname" "func_static"
 "name" "SHRUB_028_017_116"
@@ -39455,17 +39482,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 169
+// entity 172
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_029_017_592"
 "inv_name" "Readable_2519"
 "xdata_contents" "readables/shock/log_2519"
+"trigger_on_open" "runscript_EMAIL_029_017_592"
 "origin" "3581.176514 2088.470703 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 170
+// entity 173
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_029_017_592"
+"origin" "3581.176514 2088.470703 129.882355"
+"call" "start_EMAIL_029_017_592"
+}
+
+// entity 174
 {
 "classname" "func_static"
 "name" "GRASS_029_017_616"
@@ -39476,7 +39512,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 171
+// entity 175
 {
 "classname" "func_static"
 "name" "GRASS_029_017_033"
@@ -39487,7 +39523,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 172
+// entity 176
 {
 "classname" "func_static"
 "name" "SEVERED_HEAD_030_017_168"
@@ -39498,7 +39534,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 173
+// entity 177
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_030_017_587"
@@ -39509,7 +39545,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 174
+// entity 178
 {
 "classname" "func_static"
 "name" "DH-07_STUNGUN_043_017_055"
@@ -39520,7 +39556,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 175
+// entity 179
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_043_017_010"
@@ -39531,7 +39567,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 176
+// entity 180
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_046_017_366"
@@ -39542,7 +39578,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 177
+// entity 181
 {
 "classname" "func_static"
 "name" "SV_TRANQ_DARTS_047_017_858"
@@ -39553,7 +39589,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 178
+// entity 182
 {
 "classname" "func_static"
 "name" "ML_TEFLON_COATED_ROUNDS_047_017_802"
@@ -39564,7 +39600,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 179
+// entity 183
 {
 "classname" "func_static"
 "name" "CRATE_012_018_636"
@@ -39575,7 +39611,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 180
+// entity 184
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_015_018_017"
@@ -39586,7 +39622,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 181
+// entity 185
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_016_018_090"
@@ -39597,7 +39633,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 182
+// entity 186
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_017_018_129"
@@ -39608,7 +39644,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 183
+// entity 187
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_018_018_800"
@@ -39619,7 +39655,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 184
+// entity 188
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_018_018_142"
@@ -39630,7 +39666,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 185
+// entity 189
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_018_018_255"
@@ -39641,7 +39677,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 186
+// entity 190
 {
 "classname" "func_static"
 "name" "SV-23_DARTGUN_019_018_329"
@@ -39652,7 +39688,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 187
+// entity 191
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_019_018_063"
@@ -39663,7 +39699,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 188
+// entity 192
 {
 "classname" "func_static"
 "name" "SWITCH_019_018_051"
@@ -39674,7 +39710,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 189
+// entity 193
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_019_018_381"
@@ -39685,7 +39721,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 190
+// entity 194
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_020_018_301"
@@ -39696,7 +39732,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 191
+// entity 195
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_020_018_302"
@@ -39707,7 +39743,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 192
+// entity 196
 {
 "classname" "func_static"
 "name" "ENERGY_CHARGE_STATION_022_018_794"
@@ -39718,7 +39754,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 193
+// entity 197
 {
 "classname" "func_static"
 "name" "CRATE_023_018_797"
@@ -39729,7 +39765,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 194
+// entity 198
 {
 "classname" "func_static"
 "name" "BRIDGE_024_018_081"
@@ -39740,7 +39776,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 195
+// entity 199
 {
 "classname" "func_static"
 "name" "SV-23_DARTGUN_025_018_795"
@@ -39751,7 +39787,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 196
+// entity 200
 {
 "classname" "func_static"
 "name" "SHRUB_027_018_133"
@@ -39762,7 +39798,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 197
+// entity 201
 {
 "classname" "func_static"
 "name" "SHRUB_028_018_126"
@@ -39773,7 +39809,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 198
+// entity 202
 {
 "classname" "func_static"
 "name" "SHRUBBERY_028_018_124"
@@ -39784,7 +39820,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 199
+// entity 203
 {
 "classname" "func_static"
 "name" "FERN_028_018_131"
@@ -39795,7 +39831,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 200
+// entity 204
 {
 "classname" "func_static"
 "name" "SHRUBBERY_029_018_744"
@@ -39806,7 +39842,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 201
+// entity 205
 {
 "classname" "func_static"
 "name" "GRASS_029_018_023"
@@ -39817,7 +39853,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 202
+// entity 206
 {
 "classname" "func_static"
 "name" "CRATE_037_018_820"
@@ -39828,7 +39864,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 203
+// entity 207
 {
 "classname" "func_static"
 "name" "WORKER_HELMET_038_018_228"
@@ -39839,7 +39875,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 204
+// entity 208
 {
 "classname" "func_static"
 "name" "CRATE_038_018_819"
@@ -39850,7 +39886,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 205
+// entity 209
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_044_018_523"
@@ -39861,7 +39897,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 206
+// entity 210
 {
 "classname" "func_static"
 "name" "CRATE_012_019_635"
@@ -39872,7 +39908,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 207
+// entity 211
 {
 "classname" "func_static"
 "name" "CRATE_012_019_632"
@@ -39883,7 +39919,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 208
+// entity 212
 {
 "classname" "func_static"
 "name" "CRATE_012_019_634"
@@ -39894,7 +39930,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 209
+// entity 213
 {
 "classname" "func_static"
 "name" "CRATE_013_019_633"
@@ -39905,7 +39941,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 210
+// entity 214
 {
 "classname" "func_static"
 "name" "CRATE_014_019_637"
@@ -39916,7 +39952,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 211
+// entity 215
 {
 "classname" "func_static"
 "name" "BONES_017_019_107"
@@ -39927,7 +39963,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 212
+// entity 216
 {
 "classname" "func_static"
 "name" "SEVERED_LIMB_017_019_075"
@@ -39938,7 +39974,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 213
+// entity 217
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_019_519"
@@ -39949,7 +39985,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 214
+// entity 218
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_019_518"
@@ -39960,7 +39996,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 215
+// entity 219
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_019_483"
@@ -39971,17 +40007,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 216
+// entity 220
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_020_019_631"
 "inv_name" "Readable_2504"
 "xdata_contents" "readables/shock/log_2504"
+"trigger_on_open" "runscript_EMAIL_020_019_631"
 "origin" "2425.882324 2336.000000 83.647057"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 217
+// entity 221
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_020_019_631"
+"origin" "2425.882324 2336.000000 83.647057"
+"call" "start_EMAIL_020_019_631"
+}
+
+// entity 222
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_020_019_625"
@@ -39992,7 +40037,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 218
+// entity 223
 {
 "classname" "func_static"
 "name" "ICON_020_019_079"
@@ -40003,7 +40048,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 219
+// entity 224
 {
 "classname" "func_static"
 "name" "KEYPAD_PANEL_020_019_151"
@@ -40014,7 +40059,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 220
+// entity 225
 {
 "classname" "func_static"
 "name" "ICON_021_019_376"
@@ -40025,7 +40070,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 221
+// entity 226
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_021_019_676"
@@ -40036,7 +40081,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 222
+// entity 227
 {
 "classname" "func_static"
 "name" "SERV-BOT_023_019_210"
@@ -40047,7 +40092,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 223
+// entity 228
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_024_019_614"
@@ -40058,7 +40103,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 224
+// entity 229
 {
 "classname" "func_static"
 "name" "BRIDGE_024_019_349"
@@ -40069,7 +40114,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 225
+// entity 230
 {
 "classname" "func_static"
 "name" "SV_NEEDLE_DARTS_025_019_305"
@@ -40080,7 +40125,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 226
+// entity 231
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_025_019_122"
@@ -40091,7 +40136,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 227
+// entity 232
 {
 "classname" "func_static"
 "name" "SHRUB_027_019_146"
@@ -40102,7 +40147,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 228
+// entity 233
 {
 "classname" "func_static"
 "name" "SHRUB_028_019_138"
@@ -40113,7 +40158,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 229
+// entity 234
 {
 "classname" "func_static"
 "name" "SHRUBBERY_028_019_076"
@@ -40124,7 +40169,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 230
+// entity 235
 {
 "classname" "func_static"
 "name" "SHRUBBERY_029_019_118"
@@ -40135,7 +40180,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 231
+// entity 236
 {
 "classname" "func_static"
 "name" "GRASS_029_019_096"
@@ -40146,7 +40191,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 232
+// entity 237
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_030_019_407"
@@ -40157,7 +40202,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 233
+// entity 238
 {
 "classname" "func_static"
 "name" "CAMERA_034_019_503"
@@ -40168,7 +40213,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 234
+// entity 239
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_035_019_027"
@@ -40179,7 +40224,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 235
+// entity 240
 {
 "classname" "func_static"
 "name" "SKELETON_036_019_718"
@@ -40190,7 +40235,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 236
+// entity 241
 {
 "classname" "func_static"
 "name" "CRATE_038_019_462"
@@ -40201,7 +40246,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 237
+// entity 242
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_038_019_166"
@@ -40212,7 +40257,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 238
+// entity 243
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_042_019_449"
@@ -40223,7 +40268,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 239
+// entity 244
 {
 "classname" "func_static"
 "name" "WRAPPER_017_020_135"
@@ -40234,7 +40279,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 240
+// entity 245
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_019_020_687"
@@ -40245,7 +40290,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 241
+// entity 246
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_020_020_646"
@@ -40256,7 +40301,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 242
+// entity 247
 {
 "classname" "func_static"
 "name" "SERV-BOT_020_020_180"
@@ -40267,7 +40312,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 243
+// entity 248
 {
 "classname" "func_static"
 "name" "DOOR_020_020_103"
@@ -40278,7 +40323,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 244
+// entity 249
 {
 "classname" "func_static"
 "name" "SERV-BOT_023_020_309"
@@ -40289,7 +40334,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 245
+// entity 250
 {
 "classname" "func_static"
 "name" "STANDARD_ACCESS_CARD_026_020_598"
@@ -40300,7 +40345,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 246
+// entity 251
 {
 "classname" "func_static"
 "name" "LEAD_PIPE_026_020_342"
@@ -40311,7 +40356,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 247
+// entity 252
 {
 "classname" "func_static"
 "name" "NAVIGATION_AND_MAPPING_UNIT_026_020_594"
@@ -40322,7 +40367,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 248
+// entity 253
 {
 "classname" "func_static"
 "name" "BRIEFCASE_026_020_369"
@@ -40333,7 +40378,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 249
+// entity 254
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_026_020_099"
@@ -40344,7 +40389,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 250
+// entity 255
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_026_020_150"
@@ -40355,7 +40400,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 251
+// entity 256
 {
 "classname" "func_static"
 "name" "SYSTEM_ANALYZER_026_020_101"
@@ -40366,7 +40411,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 252
+// entity 257
 {
 "classname" "func_static"
 "name" "ICON_034_020_242"
@@ -40377,7 +40422,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 253
+// entity 258
 {
 "classname" "func_static"
 "name" "SKELETON_036_020_230"
@@ -40388,7 +40433,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 254
+// entity 259
 {
 "classname" "func_static"
 "name" "DEAD_MUTANT_037_020_825"
@@ -40399,7 +40444,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 255
+// entity 260
 {
 "classname" "func_static"
 "name" "ML_STANDARD_ROUNDS_037_020_826"
@@ -40410,7 +40455,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 256
+// entity 261
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_038_020_484"
@@ -40421,7 +40466,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 257
+// entity 262
 {
 "classname" "func_static"
 "name" "BROKEN_CLOCK_038_020_185"
@@ -40432,7 +40477,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 258
+// entity 263
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_041_020_388"
@@ -40443,7 +40488,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 259
+// entity 264
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_046_020_582"
@@ -40454,7 +40499,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 260
+// entity 265
 {
 "classname" "func_static"
 "name" "BED_010_021_203"
@@ -40465,7 +40510,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 261
+// entity 266
 {
 "classname" "func_static"
 "name" "BED_011_021_722"
@@ -40476,7 +40521,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 262
+// entity 267
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_014_021_405"
@@ -40487,7 +40532,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 263
+// entity 268
 {
 "classname" "func_static"
 "name" "DOOR_015_021_014"
@@ -40498,7 +40543,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 264
+// entity 269
 {
 "classname" "func_static"
 "name" "SERV-BOT_020_021_174"
@@ -40509,7 +40554,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 265
+// entity 270
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_020_021_231"
@@ -40520,7 +40565,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 266
+// entity 271
 {
 "classname" "func_static"
 "name" "CAMERA_021_021_491"
@@ -40531,7 +40576,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 267
+// entity 272
 {
 "classname" "func_static"
 "name" "SCREEN_024_021_621"
@@ -40542,7 +40587,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 268
+// entity 273
 {
 "classname" "func_static"
 "name" "DOOR_026_021_008"
@@ -40553,7 +40598,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 269
+// entity 274
 {
 "classname" "func_static"
 "name" "ICON_034_021_190"
@@ -40564,7 +40609,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 270
+// entity 275
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_040_021_669"
@@ -40575,7 +40620,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 271
+// entity 276
 {
 "classname" "func_static"
 "name" "SEVERED_LIMB_040_021_130"
@@ -40586,7 +40631,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 272
+// entity 277
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_040_021_334"
@@ -40597,7 +40642,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 273
+// entity 278
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_041_021_445"
@@ -40608,7 +40653,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 274
+// entity 279
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_044_021_336"
@@ -40619,7 +40664,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 275
+// entity 280
 {
 "classname" "func_static"
 "name" "SHODAN_TRIGGER_046_021_319"
@@ -40630,7 +40675,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 276
+// entity 281
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_046_021_627"
@@ -40641,7 +40686,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 277
+// entity 282
 {
 "classname" "func_static"
 "name" "MAGNUM_2100_048_021_485"
@@ -40652,7 +40697,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 278
+// entity 283
 {
 "classname" "func_static"
 "name" "EMP_GRENADE_048_021_639"
@@ -40663,7 +40708,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 279
+// entity 284
 {
 "classname" "func_static"
 "name" "EMP_GRENADE_048_021_576"
@@ -40674,7 +40719,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 280
+// entity 285
 {
 "classname" "func_static"
 "name" "EMP_GRENADE_048_021_371"
@@ -40685,7 +40730,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 281
+// entity 286
 {
 "classname" "func_static"
 "name" "BED_010_022_720"
@@ -40696,7 +40741,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 282
+// entity 287
 {
 "classname" "func_static"
 "name" "BED_011_022_723"
@@ -40707,7 +40752,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 283
+// entity 288
 {
 "classname" "func_static"
 "name" "GROUP_ACCESS_CARD_011_022_213"
@@ -40718,17 +40763,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 284
+// entity 289
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_011_022_361"
 "inv_name" "Readable_2505"
 "xdata_contents" "readables/shock/log_2505"
+"trigger_on_open" "runscript_EMAIL_011_022_361"
 "origin" "1353.411743 2729.882324 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 285
+// entity 290
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_011_022_361"
+"origin" "1353.411743 2729.882324 129.882355"
+"call" "start_EMAIL_011_022_361"
+}
+
+// entity 291
 {
 "classname" "func_static"
 "name" "SEVERED_HEAD_015_022_288"
@@ -40739,7 +40793,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 286
+// entity 292
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_017_022_221"
@@ -40750,7 +40804,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 287
+// entity 293
 {
 "classname" "func_static"
 "name" "SKULL_018_022_083"
@@ -40761,7 +40815,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 288
+// entity 294
 {
 "classname" "func_static"
 "name" "SCREEN_020_022_291"
@@ -40772,7 +40826,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 289
+// entity 295
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_020_022_147"
@@ -40783,7 +40837,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 290
+// entity 296
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_022_064"
@@ -40794,7 +40848,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 291
+// entity 297
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_025_022_285"
@@ -40805,7 +40859,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 292
+// entity 298
 {
 "classname" "func_static"
 "name" "BUTTON_026_022_343"
@@ -40816,17 +40870,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 293
+// entity 299
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_033_022_394"
 "inv_name" "Readable_2518"
 "xdata_contents" "readables/shock/log_2518"
+"trigger_on_open" "runscript_EMAIL_033_022_394"
 "origin" "3989.646973 2699.764648 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 294
+// entity 300
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_033_022_394"
+"origin" "3989.646973 2699.764648 129.882355"
+"call" "start_EMAIL_033_022_394"
+}
+
+// entity 301
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_033_022_581"
@@ -40837,7 +40900,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 295
+// entity 302
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_037_022_816"
@@ -40848,7 +40911,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 296
+// entity 303
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_037_022_395"
@@ -40859,7 +40922,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 297
+// entity 304
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_038_022_822"
@@ -40870,7 +40933,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 298
+// entity 305
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_038_022_345"
@@ -40881,7 +40944,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 299
+// entity 306
 {
 "classname" "func_static"
 "name" "SKULL_043_022_257"
@@ -40892,7 +40955,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 300
+// entity 307
 {
 "classname" "func_static"
 "name" "BED_010_023_207"
@@ -40903,7 +40966,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 301
+// entity 308
 {
 "classname" "func_static"
 "name" "BED_011_023_730"
@@ -40914,7 +40977,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 302
+// entity 309
 {
 "classname" "func_static"
 "name" "SERV-BOT_012_023_320"
@@ -40925,7 +40988,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 303
+// entity 310
 {
 "classname" "func_static"
 "name" "CART_013_023_748"
@@ -40936,7 +40999,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 304
+// entity 311
 {
 "classname" "func_static"
 "name" "BULKHEAD_DOOR_017_023_177"
@@ -40947,7 +41010,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 305
+// entity 312
 {
 "classname" "func_static"
 "name" "BULKHEAD_DOOR_018_023_179"
@@ -40958,7 +41021,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 306
+// entity 313
 {
 "classname" "func_static"
 "name" "WORDS_029_023_829"
@@ -40969,7 +41032,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 307
+// entity 314
 {
 "classname" "func_static"
 "name" "WORDS_029_023_839"
@@ -40980,7 +41043,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 308
+// entity 315
 {
 "classname" "func_static"
 "name" "WORDS_030_023_731"
@@ -40991,7 +41054,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 309
+// entity 316
 {
 "classname" "func_static"
 "name" "WORDS_030_023_851"
@@ -41002,7 +41065,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 310
+// entity 317
 {
 "classname" "func_static"
 "name" "LEVEL_ENTRY_TRIGGER_031_023_372"
@@ -41013,7 +41076,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 311
+// entity 318
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_035_023_045"
@@ -41024,7 +41087,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 312
+// entity 319
 {
 "classname" "func_static"
 "name" "BLAST_DOOR_035_023_025"
@@ -41035,7 +41098,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 313
+// entity 320
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_037_023_471"
@@ -41046,7 +41109,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 314
+// entity 321
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_038_023_815"
@@ -41057,7 +41120,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 315
+// entity 322
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_038_023_431"
@@ -41068,7 +41131,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 316
+// entity 323
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_040_023_668"
@@ -41079,7 +41142,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 317
+// entity 324
 {
 "classname" "func_static"
 "name" "SKULL_041_023_287"
@@ -41090,7 +41153,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 318
+// entity 325
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_045_023_327"
@@ -41101,7 +41164,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 319
+// entity 326
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_010_024_578"
@@ -41112,7 +41175,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 320
+// entity 327
 {
 "classname" "func_static"
 "name" "GRAFFITI_016_024_074"
@@ -41123,7 +41186,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 321
+// entity 328
 {
 "classname" "func_static"
 "name" "GRAFFITI_017_024_713"
@@ -41134,7 +41197,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 322
+// entity 329
 {
 "classname" "func_static"
 "name" "BONES_017_024_080"
@@ -41145,7 +41208,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 323
+// entity 330
 {
 "classname" "func_static"
 "name" "DOOR_026_024_377"
@@ -41156,7 +41219,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 324
+// entity 331
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_026_024_232"
@@ -41167,7 +41230,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 325
+// entity 332
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_028_024_368"
@@ -41178,7 +41241,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 326
+// entity 333
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_024_274"
@@ -41189,7 +41252,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 327
+// entity 334
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_024_539"
@@ -41200,7 +41263,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 328
+// entity 335
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_024_474"
@@ -41211,7 +41274,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 329
+// entity 336
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_024_159"
@@ -41222,7 +41285,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 330
+// entity 337
 {
 "classname" "func_static"
 "name" "LEVEL_ENTRY_TRIGGER_030_024_039"
@@ -41233,7 +41296,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 331
+// entity 338
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_037_024_818"
@@ -41244,17 +41307,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 332
+// entity 339
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_038_024_588"
 "inv_name" "Readable_2516"
 "xdata_contents" "readables/shock/log_2516"
+"trigger_on_open" "runscript_EMAIL_038_024_588"
 "origin" "4616.000000 3000.000000 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 333
+// entity 340
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_038_024_588"
+"origin" "4616.000000 3000.000000 129.882355"
+"call" "start_EMAIL_038_024_588"
+}
+
+// entity 341
 {
 "classname" "func_static"
 "name" "SCREEN_040_024_827"
@@ -41265,7 +41337,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 334
+// entity 342
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_007_025_224"
@@ -41276,7 +41348,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 335
+// entity 343
 {
 "classname" "func_static"
 "name" "CHAIR_011_025_757"
@@ -41287,7 +41359,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 336
+// entity 344
 {
 "classname" "func_static"
 "name" "SCOPE_012_025_759"
@@ -41298,7 +41370,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 337
+// entity 345
 {
 "classname" "func_static"
 "name" "BLOOD_STAIN_012_025_602"
@@ -41309,7 +41381,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 338
+// entity 346
 {
 "classname" "func_static"
 "name" "SEVERED_HEAD_012_025_595"
@@ -41320,7 +41392,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 339
+// entity 347
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_013_025_220"
@@ -41331,7 +41403,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 340
+// entity 348
 {
 "classname" "func_static"
 "name" "SCOPE_013_025_754"
@@ -41342,7 +41414,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 341
+// entity 349
 {
 "classname" "func_static"
 "name" "SCREEN_013_025_750"
@@ -41353,7 +41425,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 342
+// entity 350
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_013_025_223"
@@ -41364,7 +41436,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 343
+// entity 351
 {
 "classname" "func_static"
 "name" "SCREEN_014_025_751"
@@ -41375,7 +41447,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 344
+// entity 352
 {
 "classname" "func_static"
 "name" "TESTTUBE_RACK_014_025_752"
@@ -41386,7 +41458,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 345
+// entity 353
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_020_025_367"
@@ -41397,7 +41469,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 346
+// entity 354
 {
 "classname" "func_static"
 "name" "ICON_021_025_541"
@@ -41408,7 +41480,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 347
+// entity 355
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_027_025_092"
@@ -41419,7 +41491,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 348
+// entity 356
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_032_025_141"
@@ -41430,7 +41502,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 349
+// entity 357
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_032_025_165"
@@ -41441,7 +41513,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 350
+// entity 358
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_033_025_410"
@@ -41452,7 +41524,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 351
+// entity 359
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_033_025_032"
@@ -41463,7 +41535,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 352
+// entity 360
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_033_025_030"
@@ -41474,7 +41546,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 353
+// entity 361
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_033_025_058"
@@ -41485,7 +41557,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 354
+// entity 362
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_033_025_110"
@@ -41496,7 +41568,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 355
+// entity 363
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_034_025_056"
@@ -41507,7 +41579,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 356
+// entity 364
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_034_025_059"
@@ -41518,7 +41590,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 357
+// entity 365
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_036_025_579"
@@ -41529,7 +41601,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 358
+// entity 366
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_038_025_338"
@@ -41540,7 +41612,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 359
+// entity 367
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_038_025_346"
@@ -41551,17 +41623,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 360
+// entity 368
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_038_025_583"
 "inv_name" "Readable_2516"
 "xdata_contents" "readables/shock/log_2516"
+"trigger_on_open" "runscript_EMAIL_038_025_583"
 "origin" "4616.000000 3120.000000 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 361
+// entity 369
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_038_025_583"
+"origin" "4616.000000 3120.000000 129.882355"
+"call" "start_EMAIL_038_025_583"
+}
+
+// entity 370
 {
 "classname" "func_static"
 "name" "SEVERED_LIMB_038_025_586"
@@ -41572,7 +41653,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 362
+// entity 371
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_038_025_584"
@@ -41583,7 +41664,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 363
+// entity 372
 {
 "classname" "func_static"
 "name" "SPARQ_BEAM_040_025_290"
@@ -41594,7 +41675,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 364
+// entity 373
 {
 "classname" "func_static"
 "name" "SKULL_041_025_272"
@@ -41605,7 +41686,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 365
+// entity 374
 {
 "classname" "func_static"
 "name" "WORDS_046_025_782"
@@ -41616,7 +41697,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 366
+// entity 375
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_046_025_450"
@@ -41627,7 +41708,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 367
+// entity 376
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_047_025_538"
@@ -41638,7 +41719,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 368
+// entity 377
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_008_026_380"
@@ -41649,7 +41730,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 369
+// entity 378
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_008_026_261"
@@ -41660,7 +41741,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 370
+// entity 379
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_009_026_262"
@@ -41671,7 +41752,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 371
+// entity 380
 {
 "classname" "func_static"
 "name" "SCOPE_010_026_761"
@@ -41682,7 +41763,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 372
+// entity 381
 {
 "classname" "func_static"
 "name" "SCOPE_011_026_758"
@@ -41693,7 +41774,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 373
+// entity 382
 {
 "classname" "func_static"
 "name" "SENSAROUND_MULTI-VIEW_UNIT_011_026_191"
@@ -41704,7 +41785,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 374
+// entity 383
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_012_026_037"
@@ -41715,7 +41796,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 375
+// entity 384
 {
 "classname" "func_static"
 "name" "DOOR_015_026_015"
@@ -41726,7 +41807,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 376
+// entity 385
 {
 "classname" "func_static"
 "name" "SERV-BOT_020_026_006"
@@ -41737,7 +41818,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 377
+// entity 386
 {
 "classname" "func_static"
 "name" "ICON_021_026_799"
@@ -41748,7 +41829,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 378
+// entity 387
 {
 "classname" "func_static"
 "name" "SERV-BOT_021_026_240"
@@ -41759,7 +41840,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 379
+// entity 388
 {
 "classname" "func_static"
 "name" "SURGERY_MACHINE_026_026_607"
@@ -41770,7 +41851,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 380
+// entity 389
 {
 "classname" "func_static"
 "name" "ENERGY_CHARGE_STATION_028_026_473"
@@ -41781,7 +41862,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 381
+// entity 390
 {
 "classname" "func_static"
 "name" "WORDS_030_026_683"
@@ -41792,7 +41873,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 382
+// entity 391
 {
 "classname" "func_static"
 "name" "WORDS_031_026_513"
@@ -41803,7 +41884,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 383
+// entity 392
 {
 "classname" "func_static"
 "name" "HUMAN_BONES_032_026_184"
@@ -41814,7 +41895,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 384
+// entity 393
 {
 "classname" "func_static"
 "name" "SKULL_032_026_176"
@@ -41825,7 +41906,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 385
+// entity 394
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_034_026_225"
@@ -41836,7 +41917,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 386
+// entity 395
 {
 "classname" "func_static"
 "name" "SKELETON_039_026_441"
@@ -41847,7 +41928,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 387
+// entity 396
 {
 "classname" "func_static"
 "name" "CRATE_042_026_188"
@@ -41858,7 +41939,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 388
+// entity 397
 {
 "classname" "func_static"
 "name" "BLAST_DOOR_046_026_344"
@@ -41869,7 +41950,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 389
+// entity 398
 {
 "classname" "func_static"
 "name" "SWITCH_055_026_738"
@@ -41880,7 +41961,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 390
+// entity 399
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_011_027_622"
@@ -41891,27 +41972,45 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 391
+// entity 400
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_011_027_606"
 "inv_name" "Readable_2517"
 "xdata_contents" "readables/shock/log_2517"
+"trigger_on_open" "runscript_EMAIL_011_027_606"
 "origin" "1320.000000 3273.411865 190.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 392
+// entity 401
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_011_027_606"
+"origin" "1320.000000 3273.411865 190.117645"
+"call" "start_EMAIL_011_027_606"
+}
+
+// entity 402
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_012_027_605"
 "inv_name" "Readable_2517"
 "xdata_contents" "readables/shock/log_2517"
+"trigger_on_open" "runscript_EMAIL_012_027_605"
 "origin" "1440.000000 3273.411865 190.117645"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 393
+// entity 403
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_012_027_605"
+"origin" "1440.000000 3273.411865 190.117645"
+"call" "start_EMAIL_012_027_605"
+}
+
+// entity 404
 {
 "classname" "func_static"
 "name" "CAMERA_020_027_488"
@@ -41922,7 +42021,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 394
+// entity 405
 {
 "classname" "func_static"
 "name" "WORDS_023_027_746"
@@ -41933,7 +42032,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 395
+// entity 406
 {
 "classname" "func_static"
 "name" "WORDS_023_027_831"
@@ -41944,7 +42043,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 396
+// entity 407
 {
 "classname" "func_static"
 "name" "WORDS_024_027_789"
@@ -41955,7 +42054,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 397
+// entity 408
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_026_027_089"
@@ -41966,7 +42065,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 398
+// entity 409
 {
 "classname" "func_static"
 "name" "CRITTER_AI_HINT_028_027_353"
@@ -41977,7 +42076,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 399
+// entity 410
 {
 "classname" "func_static"
 "name" "WRAPPER_033_027_105"
@@ -41988,7 +42087,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 400
+// entity 411
 {
 "classname" "func_static"
 "name" "SCREEN_035_027_208"
@@ -41999,7 +42098,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 401
+// entity 412
 {
 "classname" "func_static"
 "name" "SCREEN_035_027_206"
@@ -42010,7 +42109,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 402
+// entity 413
 {
 "classname" "func_static"
 "name" "CRITTER_AI_HINT_036_027_352"
@@ -42021,7 +42120,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 403
+// entity 414
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_037_027_143"
@@ -42032,7 +42131,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 404
+// entity 415
 {
 "classname" "func_static"
 "name" "REPULSOR_043_027_134"
@@ -42043,7 +42142,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 405
+// entity 416
 {
 "classname" "func_static"
 "name" "SIGHT_VISION_ENHANCEMENT_049_027_453"
@@ -42054,7 +42153,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 406
+// entity 417
 {
 "classname" "func_static"
 "name" "FIRST_AID_KIT_050_027_373"
@@ -42065,7 +42164,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 407
+// entity 418
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_015_028_804"
@@ -42076,7 +42175,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 408
+// entity 419
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_015_028_806"
@@ -42087,7 +42186,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 409
+// entity 420
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_015_028_803"
@@ -42098,7 +42197,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 410
+// entity 421
 {
 "classname" "func_static"
 "name" "SWITCH_020_028_529"
@@ -42109,7 +42208,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 411
+// entity 422
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_024_028_144"
@@ -42120,7 +42219,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 412
+// entity 423
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_026_028_169"
@@ -42131,7 +42230,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 413
+// entity 424
 {
 "classname" "func_static"
 "name" "WORDS_027_028_163"
@@ -42142,7 +42241,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 414
+// entity 425
 {
 "classname" "func_static"
 "name" "EXPLOSION_RESIDUE_027_028_202"
@@ -42153,7 +42252,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 415
+// entity 426
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_030_028_029"
@@ -42164,7 +42263,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 416
+// entity 427
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_030_028_212"
@@ -42175,7 +42274,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 417
+// entity 428
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_030_028_233"
@@ -42186,7 +42285,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 418
+// entity 429
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_037_028_796"
@@ -42197,7 +42296,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 419
+// entity 430
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_045_028_341"
@@ -42208,7 +42307,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 420
+// entity 431
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_046_028_264"
@@ -42219,7 +42318,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 421
+// entity 432
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_046_028_043"
@@ -42230,7 +42329,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 422
+// entity 433
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_046_028_324"
@@ -42241,7 +42340,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 423
+// entity 434
 {
 "classname" "func_static"
 "name" "ACCESS_PANEL_047_028_735"
@@ -42252,7 +42351,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 424
+// entity 435
 {
 "classname" "func_static"
 "name" "BEVERAGE_CONTAINER_049_028_534"
@@ -42263,7 +42362,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 425
+// entity 436
 {
 "classname" "func_static"
 "name" "BEVERAGE_CONTAINER_049_028_423"
@@ -42274,7 +42373,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 426
+// entity 437
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_050_028_429"
@@ -42285,7 +42384,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 427
+// entity 438
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_011_029_784"
@@ -42296,17 +42395,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 428
+// entity 439
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_012_029_457"
 "inv_name" "Readable_2511"
 "xdata_contents" "readables/shock/log_2511"
+"trigger_on_open" "runscript_EMAIL_012_029_457"
 "origin" "1526.117676 3509.646973 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 429
+// entity 440
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_012_029_457"
+"origin" "1526.117676 3509.646973 129.882355"
+"call" "start_EMAIL_012_029_457"
+}
+
+// entity 441
 {
 "classname" "func_static"
 "name" "SEVERED_LIMB_013_029_296"
@@ -42317,7 +42425,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 430
+// entity 442
 {
 "classname" "func_static"
 "name" "SCREEN_028_029_178"
@@ -42328,7 +42436,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 431
+// entity 443
 {
 "classname" "func_static"
 "name" "LEVER_030_029_543"
@@ -42339,7 +42447,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 432
+// entity 444
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_031_029_554"
@@ -42350,7 +42458,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 433
+// entity 445
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_032_029_561"
@@ -42361,7 +42469,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 434
+// entity 446
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_032_029_562"
@@ -42372,7 +42480,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 435
+// entity 447
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_032_029_559"
@@ -42383,7 +42491,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 436
+// entity 448
 {
 "classname" "func_static"
 "name" "SV_TRANQ_DARTS_033_029_860"
@@ -42394,7 +42502,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 437
+// entity 449
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_034_029_817"
@@ -42405,7 +42513,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 438
+// entity 450
 {
 "classname" "func_static"
 "name" "NITROPACK_039_029_787"
@@ -42416,7 +42524,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 439
+// entity 451
 {
 "classname" "func_static"
 "name" "ELEPHANT,_JORP_046_029_299"
@@ -42427,7 +42535,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 440
+// entity 452
 {
 "classname" "func_static"
 "name" "CRATE_049_029_781"
@@ -42438,17 +42546,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 441
+// entity 453
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_051_029_297"
 "inv_name" "Readable_2512"
 "xdata_contents" "readables/shock/log_2512"
+"trigger_on_open" "runscript_EMAIL_051_029_297"
 "origin" "6180.235352 3540.235352 370.823517"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 442
+// entity 454
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_051_029_297"
+"origin" "6180.235352 3540.235352 370.823517"
+"call" "start_EMAIL_051_029_297"
+}
+
+// entity 455
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_052_029_465"
@@ -42459,7 +42576,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 443
+// entity 456
 {
 "classname" "func_static"
 "name" "SB-20_MAGPULSE_010_030_293"
@@ -42470,7 +42587,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 444
+// entity 457
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_010_030_226"
@@ -42481,7 +42598,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 445
+// entity 458
 {
 "classname" "func_static"
 "name" "LEVEL_ENTRY_TRIGGER_011_030_610"
@@ -42492,7 +42609,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 446
+// entity 459
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_012_030_675"
@@ -42503,7 +42620,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 447
+// entity 460
 {
 "classname" "func_static"
 "name" "DOOR_015_030_042"
@@ -42514,7 +42631,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 448
+// entity 461
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_016_030_047"
@@ -42525,7 +42642,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 449
+// entity 462
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_018_030_199"
@@ -42536,7 +42653,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 450
+// entity 463
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_019_030_214"
@@ -42547,7 +42664,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 451
+// entity 464
 {
 "classname" "func_static"
 "name" "SCREEN_023_030_617"
@@ -42558,7 +42675,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 452
+// entity 465
 {
 "classname" "func_static"
 "name" "BUTTON_027_030_838"
@@ -42569,7 +42686,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 453
+// entity 466
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_030_030_400"
@@ -42580,7 +42697,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 454
+// entity 467
 {
 "classname" "func_static"
 "name" "BUTTON_031_030_117"
@@ -42591,7 +42708,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 455
+// entity 468
 {
 "classname" "func_static"
 "name" "ACCESS_PANEL_031_030_093"
@@ -42602,7 +42719,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 456
+// entity 469
 {
 "classname" "func_static"
 "name" "SCREEN_031_030_608"
@@ -42613,7 +42730,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 457
+// entity 470
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_031_030_848"
@@ -42624,7 +42741,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 458
+// entity 471
 {
 "classname" "func_static"
 "name" "REPULSOR_031_030_788"
@@ -42635,7 +42752,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 459
+// entity 472
 {
 "classname" "func_static"
 "name" "SCREEN_031_030_571"
@@ -42646,7 +42763,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 460
+// entity 473
 {
 "classname" "func_static"
 "name" "CAMERA_031_030_403"
@@ -42657,7 +42774,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 461
+// entity 474
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_031_030_399"
@@ -42668,7 +42785,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 462
+// entity 475
 {
 "classname" "func_static"
 "name" "BUTTON_032_030_569"
@@ -42679,7 +42796,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 463
+// entity 476
 {
 "classname" "func_static"
 "name" "ACCESS_PANEL_032_030_573"
@@ -42690,7 +42807,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 464
+// entity 477
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_032_030_551"
@@ -42701,7 +42818,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 465
+// entity 478
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_032_030_363"
@@ -42712,7 +42829,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 466
+// entity 479
 {
 "classname" "func_static"
 "name" "CAMERA_032_030_404"
@@ -42723,7 +42840,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 467
+// entity 480
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_033_030_644"
@@ -42734,7 +42851,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 468
+// entity 481
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_033_030_401"
@@ -42745,7 +42862,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 469
+// entity 482
 {
 "classname" "func_static"
 "name" "CRITTER_AI_HINT_036_030_351"
@@ -42756,7 +42873,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 470
+// entity 483
 {
 "classname" "func_static"
 "name" "SCREEN_038_030_544"
@@ -42767,7 +42884,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 471
+// entity 484
 {
 "classname" "func_static"
 "name" "CAMERA_038_030_500"
@@ -42778,7 +42895,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 472
+// entity 485
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_038_030_114"
@@ -42789,7 +42906,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 473
+// entity 486
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_039_030_241"
@@ -42800,7 +42917,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 474
+// entity 487
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_041_030_243"
@@ -42811,7 +42928,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 475
+// entity 488
 {
 "classname" "func_static"
 "name" "ELEPHANT,_JORP_046_030_333"
@@ -42822,7 +42939,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 476
+// entity 489
 {
 "classname" "func_static"
 "name" "BATTERY_PACK_050_030_479"
@@ -42833,7 +42950,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 477
+// entity 490
 {
 "classname" "func_static"
 "name" "SB-20_MAGPULSE_010_031_298"
@@ -42844,7 +42961,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 478
+// entity 491
 {
 "classname" "func_static"
 "name" "STAMINUP__STIMULANT_010_031_019"
@@ -42855,7 +42972,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 479
+// entity 492
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_011_031_786"
@@ -42866,7 +42983,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 480
+// entity 493
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_011_031_609"
@@ -42877,7 +42994,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 481
+// entity 494
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_012_031_041"
@@ -42888,7 +43005,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 482
+// entity 495
 {
 "classname" "func_static"
 "name" "BUTTON_017_031_836"
@@ -42899,7 +43016,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 483
+// entity 496
 {
 "classname" "func_static"
 "name" "SCREEN_017_031_004"
@@ -42910,7 +43027,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 484
+// entity 497
 {
 "classname" "func_static"
 "name" "LUMP_OF_CLOTHES_017_031_108"
@@ -42921,7 +43038,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 485
+// entity 498
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_031_157"
@@ -42932,7 +43049,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 486
+// entity 499
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_023_031_245"
@@ -42943,7 +43060,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 487
+// entity 500
 {
 "classname" "func_static"
 "name" "DOORWAY_023_031_013"
@@ -42954,7 +43071,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 488
+// entity 501
 {
 "classname" "func_static"
 "name" "SCREEN_028_031_182"
@@ -42965,7 +43082,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 489
+// entity 502
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_030_031_564"
@@ -42976,7 +43093,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 490
+// entity 503
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_030_031_397"
@@ -42987,7 +43104,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 491
+// entity 504
 {
 "classname" "func_static"
 "name" "CAMERA_031_031_386"
@@ -42998,7 +43115,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 492
+// entity 505
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_031_031_398"
@@ -43009,7 +43126,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 493
+// entity 506
 {
 "classname" "func_static"
 "name" "SCREEN_032_031_563"
@@ -43020,7 +43137,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 494
+// entity 507
 {
 "classname" "func_static"
 "name" "SCREEN_032_031_565"
@@ -43031,7 +43148,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 495
+// entity 508
 {
 "classname" "func_static"
 "name" "CAMERA_032_031_396"
@@ -43042,7 +43159,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 496
+// entity 509
 {
 "classname" "func_static"
 "name" "BUTTON_033_031_828"
@@ -43053,7 +43170,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 497
+// entity 510
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_033_031_568"
@@ -43064,7 +43181,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 498
+// entity 511
 {
 "classname" "func_static"
 "name" "HOPPER_034_031_599"
@@ -43075,7 +43192,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 499
+// entity 512
 {
 "classname" "func_static"
 "name" "HOPPER_035_031_136"
@@ -43086,7 +43203,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 500
+// entity 513
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_039_031_251"
@@ -43097,7 +43214,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 501
+// entity 514
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_039_031_259"
@@ -43108,7 +43225,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 502
+// entity 515
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_039_031_256"
@@ -43119,7 +43236,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 503
+// entity 516
 {
 "classname" "func_static"
 "name" "BROKEN_LEVER_040_031_062"
@@ -43130,7 +43247,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 504
+// entity 517
 {
 "classname" "func_static"
 "name" "DOOR_041_031_496"
@@ -43141,7 +43258,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 505
+// entity 518
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_045_031_337"
@@ -43152,7 +43269,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 506
+// entity 519
 {
 "classname" "func_static"
 "name" "CRATE_047_031_830"
@@ -43163,7 +43280,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 507
+// entity 520
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_053_031_464"
@@ -43174,7 +43291,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 508
+// entity 521
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_011_032_785"
@@ -43185,7 +43302,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 509
+// entity 522
 {
 "classname" "func_static"
 "name" "SCREEN_018_032_160"
@@ -43196,7 +43313,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 510
+// entity 523
 {
 "classname" "func_static"
 "name" "SIGHT_VISION_ENHANCEMENT_022_032_362"
@@ -43207,7 +43324,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 511
+// entity 524
 {
 "classname" "func_static"
 "name" "SIGHT_VISION_ENHANCEMENT_022_032_132"
@@ -43218,7 +43335,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 512
+// entity 525
 {
 "classname" "func_static"
 "name" "SIGHT_VISION_ENHANCEMENT_023_032_852"
@@ -43229,7 +43346,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 513
+// entity 526
 {
 "classname" "func_static"
 "name" "SV-23_DARTGUN_023_032_012"
@@ -43240,7 +43357,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 514
+// entity 527
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_023_032_217"
@@ -43251,7 +43368,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 515
+// entity 528
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_029_032_508"
@@ -43262,7 +43379,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 516
+// entity 529
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_032_032_560"
@@ -43273,7 +43390,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 517
+// entity 530
 {
 "classname" "func_static"
 "name" "WORDS_038_032_128"
@@ -43284,7 +43401,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 518
+// entity 531
 {
 "classname" "func_static"
 "name" "SCREEN_038_032_510"
@@ -43295,7 +43412,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 519
+// entity 532
 {
 "classname" "func_static"
 "name" "CAMERA_038_032_489"
@@ -43306,7 +43423,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 520
+// entity 533
 {
 "classname" "func_static"
 "name" "BROKEN_LEVER_040_032_834"
@@ -43317,7 +43434,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 521
+// entity 534
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_040_032_026"
@@ -43328,7 +43445,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 522
+// entity 535
 {
 "classname" "func_static"
 "name" "BRIDGE_044_032_430"
@@ -43339,7 +43456,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 523
+// entity 536
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_015_033_807"
@@ -43350,7 +43467,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 524
+// entity 537
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_015_033_808"
@@ -43361,7 +43478,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 525
+// entity 538
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_015_033_805"
@@ -43372,7 +43489,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 526
+// entity 539
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_017_033_244"
@@ -43383,7 +43500,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 527
+// entity 540
 {
 "classname" "func_static"
 "name" "DOOR_019_033_306"
@@ -43394,7 +43511,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 528
+// entity 541
 {
 "classname" "func_static"
 "name" "WRAPPER_019_033_112"
@@ -43405,7 +43522,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 529
+// entity 542
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_037_033_239"
@@ -43416,7 +43533,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 530
+// entity 543
 {
 "classname" "func_static"
 "name" "SV_NEEDLE_DARTS_047_033_736"
@@ -43427,7 +43544,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 531
+// entity 544
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_020_034_355"
@@ -43438,7 +43555,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 532
+// entity 545
 {
 "classname" "func_static"
 "name" "CRITTER_AI_HINT_028_034_354"
@@ -43449,7 +43566,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 533
+// entity 546
 {
 "classname" "func_static"
 "name" "WRAPPER_028_034_115"
@@ -43460,7 +43577,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 534
+// entity 547
 {
 "classname" "func_static"
 "name" "DEBRIS_030_034_077"
@@ -43471,7 +43588,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 535
+// entity 548
 {
 "classname" "func_static"
 "name" "CRITTER_AI_HINT_035_034_350"
@@ -43482,7 +43599,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 536
+// entity 549
 {
 "classname" "func_static"
 "name" "ENERGY_CHARGE_STATION_038_034_811"
@@ -43493,7 +43610,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 537
+// entity 550
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_038_034_810"
@@ -43504,7 +43621,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 538
+// entity 551
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_011_035_463"
@@ -43515,7 +43632,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 539
+// entity 552
 {
 "classname" "func_static"
 "name" "HOSPITAL_BED_013_035_460"
@@ -43526,7 +43643,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 540
+// entity 553
 {
 "classname" "func_static"
 "name" "HOSPITAL_BED_014_035_461"
@@ -43537,7 +43654,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 541
+// entity 554
 {
 "classname" "func_static"
 "name" "BULKHEAD_DOOR_016_035_279"
@@ -43548,7 +43665,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 542
+// entity 555
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_017_035_701"
@@ -43559,7 +43676,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 543
+// entity 556
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_017_035_022"
@@ -43570,7 +43687,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 544
+// entity 557
 {
 "classname" "func_static"
 "name" "LEVER_017_035_303"
@@ -43581,7 +43698,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 545
+// entity 558
 {
 "classname" "func_static"
 "name" "BULKHEAD_DOOR_017_035_278"
@@ -43592,7 +43709,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 546
+// entity 559
 {
 "classname" "func_static"
 "name" "DH-07_STUNGUN_026_035_111"
@@ -43603,7 +43720,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 547
+// entity 560
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_026_035_113"
@@ -43614,7 +43731,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 548
+// entity 561
 {
 "classname" "func_static"
 "name" "HIDDEN_DOOR_030_035_552"
@@ -43625,7 +43742,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 549
+// entity 562
 {
 "classname" "func_static"
 "name" "BRIDGE_031_035_002"
@@ -43636,7 +43753,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 550
+// entity 563
 {
 "classname" "func_static"
 "name" "ICON_034_035_550"
@@ -43647,7 +43764,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 551
+// entity 564
 {
 "classname" "func_static"
 "name" "BURN_RESIDUE_035_035_623"
@@ -43658,7 +43775,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 552
+// entity 565
 {
 "classname" "func_static"
 "name" "ICON_035_035_548"
@@ -43669,7 +43786,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 553
+// entity 566
 {
 "classname" "func_static"
 "name" "FIRE_EXTINGUISHER_037_035_164"
@@ -43680,7 +43797,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 554
+// entity 567
 {
 "classname" "func_static"
 "name" "FIRST_AID_KIT_041_035_145"
@@ -43691,7 +43808,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 555
+// entity 568
 {
 "classname" "func_static"
 "name" "X-RAY_MACHINE_013_036_766"
@@ -43702,7 +43819,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 556
+// entity 569
 {
 "classname" "func_static"
 "name" "HOSPITAL_BED_013_036_061"
@@ -43713,7 +43830,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 557
+// entity 570
 {
 "classname" "func_static"
 "name" "HOSPITAL_BED_014_036_466"
@@ -43724,7 +43841,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 558
+// entity 571
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_017_036_218"
@@ -43735,7 +43852,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 559
+// entity 572
 {
 "classname" "func_static"
 "name" "DESTROYED_DRONE_CYBORG_018_036_647"
@@ -43746,7 +43863,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 560
+// entity 573
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_036_020"
@@ -43757,7 +43874,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 561
+// entity 574
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_036_065"
@@ -43768,7 +43885,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 562
+// entity 575
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_036_066"
@@ -43779,7 +43896,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 563
+// entity 576
 {
 "classname" "func_static"
 "name" "ENERGY_GRATING_023_036_271"
@@ -43790,7 +43907,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 564
+// entity 577
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_026_036_260"
@@ -43801,7 +43918,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 565
+// entity 578
 {
 "classname" "func_static"
 "name" "WORDS_030_036_005"
@@ -43812,7 +43929,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 566
+// entity 579
 {
 "classname" "func_static"
 "name" "BURN_RESIDUE_030_036_195"
@@ -43823,7 +43940,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 567
+// entity 580
 {
 "classname" "func_static"
 "name" "CAMERA_031_036_499"
@@ -43834,7 +43951,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 568
+// entity 581
 {
 "classname" "func_static"
 "name" "BRIDGE_031_036_749"
@@ -43845,7 +43962,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 569
+// entity 582
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_031_036_572"
@@ -43856,7 +43973,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 570
+// entity 583
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_034_036_009"
@@ -43867,7 +43984,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 571
+// entity 584
 {
 "classname" "func_static"
 "name" "SKULL_034_036_104"
@@ -43878,7 +43995,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 572
+// entity 585
 {
 "classname" "func_static"
 "name" "FIRST_AID_KIT_046_036_665"
@@ -43889,7 +44006,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 573
+// entity 586
 {
 "classname" "func_static"
 "name" "BRIDGE_046_036_339"
@@ -43900,7 +44017,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 574
+// entity 587
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_009_037_531"
@@ -43911,7 +44028,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 575
+// entity 588
 {
 "classname" "func_static"
 "name" "PAPERS_012_037_823"
@@ -43922,7 +44039,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 576
+// entity 589
 {
 "classname" "func_static"
 "name" "CYBERSPACE_TERMINAL_012_037_417"
@@ -43933,7 +44050,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 577
+// entity 590
 {
 "classname" "func_static"
 "name" "MEDICAL_ACCESS_CARD_014_037_458"
@@ -43944,7 +44061,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 578
+// entity 591
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_015_037_553"
@@ -43955,7 +44072,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 579
+// entity 592
 {
 "classname" "func_static"
 "name" "ELEVATOR_PANEL_015_037_295"
@@ -43966,7 +44083,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 580
+// entity 593
 {
 "classname" "func_static"
 "name" "ELEVATOR_DOOR_015_037_294"
@@ -43977,17 +44094,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 581
+// entity 594
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_018_037_416"
 "inv_name" "Readable_2514"
 "xdata_contents" "readables/shock/log_2514"
+"trigger_on_open" "runscript_EMAIL_018_037_416"
 "origin" "2178.353027 4454.588379 129.882355"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 582
+// entity 595
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_018_037_416"
+"origin" "2178.353027 4454.588379 129.882355"
+"call" "start_EMAIL_018_037_416"
+}
+
+// entity 596
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_018_037_109"
@@ -43998,7 +44124,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 583
+// entity 597
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_019_037_812"
@@ -44009,7 +44135,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 584
+// entity 598
 {
 "classname" "func_static"
 "name" "WORDS_020_037_505"
@@ -44020,7 +44146,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 585
+// entity 599
 {
 "classname" "func_static"
 "name" "LARGE_BUTTON_020_037_193"
@@ -44031,7 +44157,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 586
+// entity 600
 {
 "classname" "func_static"
 "name" "WORDS_021_037_866"
@@ -44042,7 +44168,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 587
+// entity 601
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_026_037_098"
@@ -44053,7 +44179,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 588
+// entity 602
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_027_037_481"
@@ -44064,7 +44190,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 589
+// entity 603
 {
 "classname" "func_static"
 "name" "BRIDGE_031_037_611"
@@ -44075,7 +44201,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 590
+// entity 604
 {
 "classname" "func_static"
 "name" "DOOR_035_037_201"
@@ -44086,7 +44212,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 591
+// entity 605
 {
 "classname" "func_static"
 "name" "DOOR_039_037_682"
@@ -44097,7 +44223,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 592
+// entity 606
 {
 "classname" "func_static"
 "name" "ELEPHANT,_JORP_045_037_311"
@@ -44108,7 +44234,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 593
+// entity 607
 {
 "classname" "func_static"
 "name" "CYBERSPACE_TERMINAL_012_038_335"
@@ -44119,7 +44245,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 594
+// entity 608
 {
 "classname" "func_static"
 "name" "CONCUSSION_BOMB_016_038_068"
@@ -44130,7 +44256,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 595
+// entity 609
 {
 "classname" "func_static"
 "name" "SKELETON_016_038_861"
@@ -44141,7 +44267,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 596
+// entity 610
 {
 "classname" "func_static"
 "name" "LEAD_PIPE_017_038_087"
@@ -44152,7 +44278,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 597
+// entity 611
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_017_038_480"
@@ -44163,7 +44289,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 598
+// entity 612
 {
 "classname" "func_static"
 "name" "ENERGY_GRATING_023_038_073"
@@ -44174,7 +44300,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 599
+// entity 613
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_031_038_171"
@@ -44185,7 +44311,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 600
+// entity 614
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_034_038_768"
@@ -44196,7 +44322,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 601
+// entity 615
 {
 "classname" "func_static"
 "name" "EMERGENCY_LEVER_039_038_409"
@@ -44207,7 +44333,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 602
+// entity 616
 {
 "classname" "func_static"
 "name" "SCOPE_041_038_763"
@@ -44218,7 +44344,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 603
+// entity 617
 {
 "classname" "func_static"
 "name" "VIAL_042_038_779"
@@ -44229,7 +44355,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 604
+// entity 618
 {
 "classname" "func_static"
 "name" "VIAL_042_038_514"
@@ -44240,7 +44366,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 605
+// entity 619
 {
 "classname" "func_static"
 "name" "FLASK_042_038_775"
@@ -44251,7 +44377,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 606
+// entity 620
 {
 "classname" "func_static"
 "name" "ELEPHANT,_JORP_045_038_340"
@@ -44262,7 +44388,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 607
+// entity 621
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_016_039_546"
@@ -44273,7 +44399,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 608
+// entity 622
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_020_039_149"
@@ -44284,7 +44410,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 609
+// entity 623
 {
 "classname" "func_static"
 "name" "SV_TRANQ_DARTS_028_039_567"
@@ -44295,7 +44421,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 610
+// entity 624
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_028_039_728"
@@ -44306,7 +44432,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 611
+// entity 625
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_029_039_755"
@@ -44317,7 +44443,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 612
+// entity 626
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_029_039_249"
@@ -44328,7 +44454,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 613
+// entity 627
 {
 "classname" "func_static"
 "name" "GAS_GRENADE_031_039_238"
@@ -44339,7 +44465,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 614
+// entity 628
 {
 "classname" "func_static"
 "name" "GAS_GRENADE_033_039_095"
@@ -44350,7 +44476,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 615
+// entity 629
 {
 "classname" "func_static"
 "name" "GAS_GRENADE_033_039_666"
@@ -44361,7 +44487,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 616
+// entity 630
 {
 "classname" "func_static"
 "name" "CHAIR_034_039_187"
@@ -44372,7 +44498,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 617
+// entity 631
 {
 "classname" "func_static"
 "name" "TESTTUBE_RACK_035_039_229"
@@ -44383,17 +44509,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 618
+// entity 632
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_035_039_357"
 "inv_name" "Readable_2510"
 "xdata_contents" "readables/shock/log_2510"
+"trigger_on_open" "runscript_EMAIL_035_039_357"
 "origin" "4260.235352 4740.235352 428.647064"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 619
+// entity 633
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_035_039_357"
+"origin" "4260.235352 4740.235352 428.647064"
+"call" "start_EMAIL_035_039_357"
+}
+
+// entity 634
 {
 "classname" "func_static"
 "name" "TESTTUBE_RACK_036_039_765"
@@ -44404,7 +44539,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 620
+// entity 635
 {
 "classname" "func_static"
 "name" "MICROSCOPE_036_039_762"
@@ -44415,7 +44550,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 621
+// entity 636
 {
 "classname" "func_static"
 "name" "SPARQ_BEAM_037_039_153"
@@ -44426,7 +44561,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 622
+// entity 637
 {
 "classname" "func_static"
 "name" "THERMOS_037_039_780"
@@ -44437,7 +44572,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 623
+// entity 638
 {
 "classname" "func_static"
 "name" "PERSONAL_ACCESS_CARD_037_039_734"
@@ -44448,7 +44583,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 624
+// entity 639
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_038_039_044"
@@ -44459,7 +44594,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 625
+// entity 640
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_038_039_186"
@@ -44470,7 +44605,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 626
+// entity 641
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_038_039_833"
@@ -44481,7 +44616,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 627
+// entity 642
 {
 "classname" "func_static"
 "name" "SCREEN_039_039_252"
@@ -44492,7 +44627,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 628
+// entity 643
 {
 "classname" "func_static"
 "name" "DH-07_STUNGUN_039_039_645"
@@ -44503,7 +44638,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 629
+// entity 644
 {
 "classname" "func_static"
 "name" "FLASK_040_039_777"
@@ -44514,7 +44649,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 630
+// entity 645
 {
 "classname" "func_static"
 "name" "BEAKER_040_039_312"
@@ -44525,7 +44660,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 631
+// entity 646
 {
 "classname" "func_static"
 "name" "TESTTUBE_RACK_040_039_740"
@@ -44536,7 +44671,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 632
+// entity 647
 {
 "classname" "func_static"
 "name" "PAPERS_041_039_630"
@@ -44547,7 +44682,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 633
+// entity 648
 {
 "classname" "func_static"
 "name" "SCOPE_041_039_760"
@@ -44558,7 +44693,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 634
+// entity 649
 {
 "classname" "func_static"
 "name" "TESTTUBE_RACK_041_039_753"
@@ -44569,7 +44704,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 635
+// entity 650
 {
 "classname" "func_static"
 "name" "PAPERS_042_039_618"
@@ -44580,7 +44715,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 636
+// entity 651
 {
 "classname" "func_static"
 "name" "HUMANOID_MUTANT_047_039_580"
@@ -44591,7 +44726,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 637
+// entity 652
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_049_039_443"
@@ -44602,7 +44737,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 638
+// entity 653
 {
 "classname" "func_static"
 "name" "LEVER_049_039_211"
@@ -44613,7 +44748,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 639
+// entity 654
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_050_039_673"
@@ -44624,7 +44759,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 640
+// entity 655
 {
 "classname" "func_static"
 "name" "CAMERA_011_040_447"
@@ -44635,7 +44770,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 641
+// entity 656
 {
 "classname" "func_static"
 "name" "IRIS_DOOR_014_040_727"
@@ -44646,7 +44781,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 642
+// entity 657
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_016_040_183"
@@ -44657,7 +44792,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 643
+// entity 658
 {
 "classname" "func_static"
 "name" "CRATE_017_040_717"
@@ -44668,7 +44803,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 644
+// entity 659
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_018_040_418"
@@ -44679,7 +44814,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 645
+// entity 660
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_019_040_844"
@@ -44690,7 +44825,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 646
+// entity 661
 {
 "classname" "func_static"
 "name" "CRATE_019_040_721"
@@ -44701,7 +44836,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 647
+// entity 662
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_020_040_747"
@@ -44712,7 +44847,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 648
+// entity 663
 {
 "classname" "func_static"
 "name" "CRATE_020_040_729"
@@ -44723,7 +44858,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 649
+// entity 664
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_021_040_085"
@@ -44734,7 +44869,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 650
+// entity 665
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_026_040_436"
@@ -44745,7 +44880,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 651
+// entity 666
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_028_040_756"
@@ -44756,7 +44891,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 652
+// entity 667
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_029_040_733"
@@ -44767,7 +44902,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 653
+// entity 668
 {
 "classname" "func_static"
 "name" "ILLUDIUM-CADMIUM_BATTERY_029_040_482"
@@ -44778,7 +44913,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 654
+// entity 669
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_029_040_638"
@@ -44789,7 +44924,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 655
+// entity 670
 {
 "classname" "func_static"
 "name" "REFLEX_REACTION_AID_029_040_648"
@@ -44800,7 +44935,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 656
+// entity 671
 {
 "classname" "func_static"
 "name" "NITROPACK_029_040_667"
@@ -44811,7 +44946,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 657
+// entity 672
 {
 "classname" "func_static"
 "name" "SWITCH_030_040_577"
@@ -44822,7 +44957,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 658
+// entity 673
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_033_040_119"
@@ -44833,7 +44968,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 659
+// entity 674
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_037_040_446"
@@ -44844,7 +44979,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 660
+// entity 675
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_045_040_444"
@@ -44855,7 +44990,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 661
+// entity 676
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_046_040_448"
@@ -44866,7 +45001,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 662
+// entity 677
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_049_040_420"
@@ -44877,7 +45012,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 663
+// entity 678
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_049_040_532"
@@ -44888,7 +45023,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 664
+// entity 679
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_049_040_284"
@@ -44899,7 +45034,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 665
+// entity 680
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_049_040_286"
@@ -44910,7 +45045,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 666
+// entity 681
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_049_040_283"
@@ -44921,7 +45056,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 667
+// entity 682
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_049_040_433"
@@ -44932,7 +45067,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 668
+// entity 683
 {
 "classname" "func_static"
 "name" "SWITCH_012_041_716"
@@ -44943,7 +45078,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 669
+// entity 684
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_018_041_487"
@@ -44954,7 +45089,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 670
+// entity 685
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_019_041_050"
@@ -44965,7 +45100,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 671
+// entity 686
 {
 "classname" "func_static"
 "name" "BEVERAGE_CONTAINER_021_041_712"
@@ -44976,7 +45111,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 672
+// entity 687
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_021_041_710"
@@ -44987,7 +45122,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 673
+// entity 688
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_021_041_711"
@@ -44998,7 +45133,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 674
+// entity 689
 {
 "classname" "func_static"
 "name" "EMP_GRENADE_021_041_196"
@@ -45009,7 +45144,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 675
+// entity 690
 {
 "classname" "func_static"
 "name" "CATWALK_026_041_053"
@@ -45020,7 +45155,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 676
+// entity 691
 {
 "classname" "func_static"
 "name" "CATWALK_027_041_268"
@@ -45031,7 +45166,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 677
+// entity 692
 {
 "classname" "func_static"
 "name" "REPULSOR_030_041_024"
@@ -45042,7 +45177,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 678
+// entity 693
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_047_041_783"
@@ -45053,17 +45188,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 679
+// entity 694
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_016_042_360"
 "inv_name" "Readable_2506"
 "xdata_contents" "readables/shock/log_2506"
+"trigger_on_open" "runscript_EMAIL_016_042_360"
 "origin" "1980.235352 5100.235352 250.352936"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 680
+// entity 695
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_016_042_360"
+"origin" "1980.235352 5100.235352 250.352936"
+"call" "start_EMAIL_016_042_360"
+}
+
+// entity 696
 {
 "classname" "func_static"
 "name" "CAMERA_016_042_516"
@@ -45074,7 +45218,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 681
+// entity 697
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_017_042_222"
@@ -45085,7 +45229,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 682
+// entity 698
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_017_042_375"
@@ -45096,7 +45240,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 683
+// entity 699
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_042_215"
@@ -45107,7 +45251,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 684
+// entity 700
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_042_139"
@@ -45118,7 +45262,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 685
+// entity 701
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_042_726"
@@ -45129,7 +45273,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 686
+// entity 702
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_042_670"
@@ -45140,7 +45284,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 687
+// entity 703
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_020_042_379"
@@ -45151,7 +45295,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 688
+// entity 704
 {
 "classname" "func_static"
 "name" "ENERGY_GRATING_023_042_091"
@@ -45162,7 +45306,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 689
+// entity 705
 {
 "classname" "func_static"
 "name" "CATWALK_026_042_671"
@@ -45173,7 +45317,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 690
+// entity 706
 {
 "classname" "func_static"
 "name" "REPULSOR_026_042_570"
@@ -45184,7 +45328,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 691
+// entity 707
 {
 "classname" "func_static"
 "name" "CATWALK_027_042_672"
@@ -45195,7 +45339,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 692
+// entity 708
 {
 "classname" "func_static"
 "name" "FRAGMENTATION_GRENADE_028_042_421"
@@ -45206,7 +45350,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 693
+// entity 709
 {
 "classname" "func_static"
 "name" "WORDS_035_042_549"
@@ -45217,7 +45361,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 694
+// entity 710
 {
 "classname" "func_static"
 "name" "SWITCH_014_043_389"
@@ -45228,7 +45372,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 695
+// entity 711
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_018_043_654"
@@ -45239,7 +45383,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 696
+// entity 712
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_018_043_468"
@@ -45250,7 +45394,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 697
+// entity 713
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_018_043_100"
@@ -45261,7 +45405,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 698
+// entity 714
 {
 "classname" "func_static"
 "name" "LEVER_018_043_048"
@@ -45272,7 +45416,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 699
+// entity 715
 {
 "classname" "func_static"
 "name" "GRATING_018_043_263"
@@ -45283,7 +45427,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 700
+// entity 716
 {
 "classname" "func_static"
 "name" "PLAYER_DEATH_TRIGGER_019_043_267"
@@ -45294,7 +45438,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 701
+// entity 717
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_043_266"
@@ -45305,7 +45449,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 702
+// entity 718
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_019_043_265"
@@ -45316,7 +45460,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 703
+// entity 719
 {
 "classname" "func_static"
 "name" "WORDS_020_043_821"
@@ -45327,7 +45471,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 704
+// entity 720
 {
 "classname" "func_static"
 "name" "ICON_020_043_270"
@@ -45338,7 +45482,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 705
+// entity 721
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_025_043_097"
@@ -45349,7 +45493,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 706
+// entity 722
 {
 "classname" "func_static"
 "name" "CAMERA_026_043_520"
@@ -45360,7 +45504,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 707
+// entity 723
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_031_043_456"
@@ -45371,7 +45515,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 708
+// entity 724
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_038_043_358"
@@ -45382,7 +45526,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 709
+// entity 725
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_039_043_356"
@@ -45393,7 +45537,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 710
+// entity 726
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_042_043_533"
@@ -45404,7 +45548,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 711
+// entity 727
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_016_044_269"
@@ -45415,7 +45559,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 712
+// entity 728
 {
 "classname" "func_static"
 "name" "CAMERA_016_044_512"
@@ -45426,7 +45570,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 713
+// entity 729
 {
 "classname" "func_static"
 "name" "SCREEN_018_044_439"
@@ -45437,7 +45581,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 714
+// entity 730
 {
 "classname" "func_static"
 "name" "ENERGY_GRATING_019_044_254"
@@ -45448,7 +45592,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 715
+// entity 731
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_044_557"
@@ -45459,7 +45603,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 716
+// entity 732
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_044_120"
@@ -45470,7 +45614,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 717
+// entity 733
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_044_106"
@@ -45481,7 +45625,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 718
+// entity 734
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_022_044_438"
@@ -45492,7 +45636,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 719
+// entity 735
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_023_044_374"
@@ -45503,7 +45647,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 720
+// entity 736
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_025_044_526"
@@ -45514,7 +45658,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 721
+// entity 737
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_025_044_528"
@@ -45525,7 +45669,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 722
+// entity 738
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_025_044_490"
@@ -45536,7 +45680,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 723
+// entity 739
 {
 "classname" "func_static"
 "name" "BUTTON_028_044_435"
@@ -45547,7 +45691,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 724
+// entity 740
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_028_044_692"
@@ -45558,7 +45702,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 725
+// entity 741
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_029_044_412"
@@ -45569,7 +45713,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 726
+// entity 742
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_037_044_472"
@@ -45580,7 +45724,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 727
+// entity 743
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_012_045_540"
@@ -45591,7 +45735,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 728
+// entity 744
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_016_045_408"
@@ -45602,7 +45746,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 729
+// entity 745
 {
 "classname" "func_static"
 "name" "DEATH_WATCH_TRIGGER_021_045_691"
@@ -45613,7 +45757,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 730
+// entity 746
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_045_536"
@@ -45624,7 +45768,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 731
+// entity 747
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_045_574"
@@ -45635,7 +45779,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 732
+// entity 748
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_045_566"
@@ -45646,7 +45790,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 733
+// entity 749
 {
 "classname" "func_static"
 "name" "CAMERA_022_045_494"
@@ -45657,7 +45801,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 734
+// entity 750
 {
 "classname" "func_static"
 "name" "BATTERY_PACK_022_045_524"
@@ -45668,7 +45812,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 735
+// entity 751
 {
 "classname" "func_static"
 "name" "BATTERY_PACK_022_045_492"
@@ -45679,7 +45823,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 736
+// entity 752
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_022_045_437"
@@ -45690,7 +45834,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 737
+// entity 753
 {
 "classname" "func_static"
 "name" "BUTTON_023_045_542"
@@ -45701,7 +45845,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 738
+// entity 754
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_023_045_694"
@@ -45712,7 +45856,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 739
+// entity 755
 {
 "classname" "func_static"
 "name" "BUTTON_024_045_493"
@@ -45723,7 +45867,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 740
+// entity 756
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_024_045_486"
@@ -45734,7 +45878,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 741
+// entity 757
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_026_045_555"
@@ -45745,7 +45889,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 742
+// entity 758
 {
 "classname" "func_static"
 "name" "BUTTON_026_045_521"
@@ -45756,7 +45900,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 743
+// entity 759
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_026_045_440"
@@ -45767,7 +45911,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 744
+// entity 760
 {
 "classname" "func_static"
 "name" "BUTTON_027_045_511"
@@ -45778,7 +45922,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 745
+// entity 761
 {
 "classname" "func_static"
 "name" "BUTTON_027_045_693"
@@ -45789,7 +45933,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 746
+// entity 762
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_027_045_475"
@@ -45800,7 +45944,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 747
+// entity 763
 {
 "classname" "func_static"
 "name" "FORCE_DOOR_028_045_612"
@@ -45811,7 +45955,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 748
+// entity 764
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_030_045_678"
@@ -45822,7 +45966,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 749
+// entity 765
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_031_045_154"
@@ -45833,7 +45977,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 750
+// entity 766
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_032_045_604"
@@ -45844,7 +45988,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 751
+// entity 767
 {
 "classname" "func_static"
 "name" "CAMERA_035_045_537"
@@ -45855,7 +45999,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 752
+// entity 768
 {
 "classname" "func_static"
 "name" "ENERGY_GRATING_038_045_685"
@@ -45866,7 +46010,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 753
+// entity 769
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_016_046_383"
@@ -45877,7 +46021,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 754
+// entity 770
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_016_046_384"
@@ -45888,7 +46032,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 755
+// entity 771
 {
 "classname" "func_static"
 "name" "SKELETON_016_046_382"
@@ -45899,7 +46043,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 756
+// entity 772
 {
 "classname" "func_static"
 "name" "GRATING_017_046_072"
@@ -45910,7 +46054,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 757
+// entity 773
 {
 "classname" "func_static"
 "name" "SCREEN_018_046_152"
@@ -45921,17 +46065,26 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 758
+// entity 774
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_018_046_652"
 "inv_name" "Readable_2513"
 "xdata_contents" "readables/shock/log_2513"
+"trigger_on_open" "runscript_EMAIL_018_046_652"
 "origin" "2178.353027 5572.235352 250.352936"
 
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 759
+// entity 775
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_EMAIL_018_046_652"
+"origin" "2178.353027 5572.235352 250.352936"
+"call" "start_EMAIL_018_046_652"
+}
+
+// entity 776
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_018_046_649"
@@ -45942,7 +46095,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 760
+// entity 777
 {
 "classname" "func_static"
 "name" "DESTROYED_ASSASSIN_CYBORG_018_046_643"
@@ -45953,7 +46106,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 761
+// entity 778
 {
 "classname" "func_static"
 "name" "CAMERA_018_046_501"
@@ -45964,7 +46117,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 762
+// entity 779
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_019_046_651"
@@ -45975,7 +46128,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 763
+// entity 780
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_046_527"
@@ -45986,7 +46139,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 764
+// entity 781
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_046_558"
@@ -45997,7 +46150,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 765
+// entity 782
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_021_046_414"
@@ -46008,7 +46161,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 766
+// entity 783
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_022_046_469"
@@ -46019,7 +46172,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 767
+// entity 784
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_023_046_841"
@@ -46030,7 +46183,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 768
+// entity 785
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_024_046_258"
@@ -46041,7 +46194,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 769
+// entity 786
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_025_046_292"
@@ -46052,7 +46205,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 770
+// entity 787
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_026_046_018"
@@ -46063,7 +46216,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 771
+// entity 788
 {
 "classname" "func_static"
 "name" "CAMERA_030_046_507"
@@ -46074,7 +46227,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 772
+// entity 789
 {
 "classname" "func_static"
 "name" "WORDS_036_046_688"
@@ -46085,7 +46238,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 773
+// entity 790
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_040_046_434"
@@ -46096,7 +46249,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 774
+// entity 791
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_041_046_067"
@@ -46107,7 +46260,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 775
+// entity 792
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_041_046_200"
@@ -46118,7 +46271,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 776
+// entity 793
 {
 "classname" "func_static"
 "name" "ML-41_PISTOL_043_046_684"
@@ -46129,7 +46282,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 777
+// entity 794
 {
 "classname" "func_static"
 "name" "GRATING_017_047_123"
@@ -46140,7 +46293,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 778
+// entity 795
 {
 "classname" "func_static"
 "name" "SCREEN_018_047_402"
@@ -46151,7 +46304,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 779
+// entity 796
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_020_047_378"
@@ -46162,7 +46315,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 780
+// entity 797
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_026_047_003"
@@ -46173,7 +46326,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 781
+// entity 798
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_027_047_497"
@@ -46184,7 +46337,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 782
+// entity 799
 {
 "classname" "func_static"
 "name" "REPULSOR_035_047_545"
@@ -46195,7 +46348,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 783
+// entity 800
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_040_047_506"
@@ -46206,7 +46359,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 784
+// entity 801
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_041_047_498"
@@ -46217,7 +46370,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 785
+// entity 802
 {
 "classname" "func_static"
 "name" "COMPUTER_NODE_041_047_205"
@@ -46228,7 +46381,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 786
+// entity 803
 {
 "classname" "func_static"
 "name" "COMPUTER_NODE_042_047_204"
@@ -46239,7 +46392,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 787
+// entity 804
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_020_048_427"
@@ -46250,7 +46403,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 788
+// entity 805
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_022_048_424"
@@ -46261,7 +46414,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 789
+// entity 806
 {
 "classname" "func_static"
 "name" "CAMERA_030_048_525"
@@ -46272,7 +46425,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 790
+// entity 807
 {
 "classname" "func_static"
 "name" "COMPUTER_NODE_041_048_198"
@@ -46283,7 +46436,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 791
+// entity 808
 {
 "classname" "func_static"
 "name" "COMPUTER_NODE_042_048_060"
@@ -46294,7 +46447,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 792
+// entity 809
 {
 "classname" "func_static"
 "name" "DEATH_WATCH_TRIGGER_044_048_155"
@@ -46305,7 +46458,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 793
+// entity 810
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_045_048_181"
@@ -46316,7 +46469,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 794
+// entity 811
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_020_049_428"
@@ -46327,7 +46480,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 795
+// entity 812
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_022_049_426"
@@ -46338,7 +46491,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 796
+// entity 813
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_023_049_425"
@@ -46349,7 +46502,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 797
+// entity 814
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_025_049_415"
@@ -46360,7 +46513,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 798
+// entity 815
 {
 "classname" "func_static"
 "name" "CYBORG_ASSASSIN_027_049_515"
@@ -46371,7 +46524,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 799
+// entity 816
 {
 "classname" "func_static"
 "name" "SKULL_029_049_477"
@@ -46382,7 +46535,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 800
+// entity 817
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_029_049_478"
@@ -46393,7 +46546,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 801
+// entity 818
 {
 "classname" "func_static"
 "name" "LUMP_OF_CLOTHES_030_049_476"
@@ -46404,7 +46557,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 802
+// entity 819
 {
 "classname" "func_static"
 "name" "CYBORG_WARRIOR_035_049_348"
@@ -46415,7 +46568,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 803
+// entity 820
 {
 "classname" "func_static"
 "name" "ENTRY_TRIGGER_037_049_452"
@@ -46426,7 +46579,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 804
+// entity 821
 {
 "classname" "func_static"
 "name" "CAMERA_039_049_522"
@@ -46437,7 +46590,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 805
+// entity 822
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_041_049_681"
@@ -46448,7 +46601,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 806
+// entity 823
 {
 "classname" "func_static"
 "name" "SCREEN_043_049_197"
@@ -46459,7 +46612,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 807
+// entity 824
 {
 "classname" "func_static"
 "name" "DEATH_WATCH_TRIGGER_044_049_276"
@@ -46470,7 +46623,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 808
+// entity 825
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_045_049_275"
@@ -46481,7 +46634,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 809
+// entity 826
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_046_049_732"
@@ -46492,7 +46645,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 810
+// entity 827
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_046_049_277"
@@ -46503,7 +46656,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 811
+// entity 828
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_023_050_422"
@@ -46514,7 +46667,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 812
+// entity 829
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_025_050_406"
@@ -46525,7 +46678,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 813
+// entity 830
 {
 "classname" "func_static"
 "name" "DEATH_WATCH_TRIGGER_036_050_359"
@@ -46536,7 +46689,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 814
+// entity 831
 {
 "classname" "func_static"
 "name" "SWITCH_020_051_411"
@@ -46547,7 +46700,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 815
+// entity 832
 {
 "classname" "func_static"
 "name" "NULL_TRIGGER_020_051_413"
@@ -46558,7 +46711,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 816
+// entity 833
 {
 "classname" "func_static"
 "name" "STORAGE_ROOM_DOOR_031_051_764"
@@ -46569,7 +46722,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 817
+// entity 834
 {
 "classname" "func_static"
 "name" "CRATE_020_052_725"
@@ -46580,7 +46733,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 818
+// entity 835
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_022_052_385"
@@ -46591,7 +46744,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 819
+// entity 836
 {
 "classname" "func_static"
 "name" "SCREEN_028_052_246"
@@ -46602,7 +46755,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 820
+// entity 837
 {
 "classname" "func_static"
 "name" "SCREEN_029_052_724"
@@ -46613,7 +46766,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 821
+// entity 838
 {
 "classname" "func_static"
 "name" "CYBORG_DRONE_030_052_250"
@@ -46624,7 +46777,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 822
+// entity 839
 {
 "classname" "func_static"
 "name" "SCREEN_030_052_596"
@@ -46635,7 +46788,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 823
+// entity 840
 {
 "classname" "func_static"
 "name" "BUTTON_030_052_137"
@@ -46646,7 +46799,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 824
+// entity 841
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_031_052_776"
@@ -46657,7 +46810,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 825
+// entity 842
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_032_052_677"
@@ -46668,7 +46821,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 826
+// entity 843
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_032_052_773"
@@ -46679,7 +46832,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 827
+// entity 844
 {
 "classname" "func_static"
 "name" "CRATE_020_053_696"
@@ -46690,7 +46843,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 828
+// entity 845
 {
 "classname" "func_static"
 "name" "CRATE_021_053_700"
@@ -46701,7 +46854,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 829
+// entity 846
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_031_053_847"
@@ -46712,7 +46865,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 830
+// entity 847
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_031_053_771"
@@ -46723,7 +46876,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 831
+// entity 848
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_032_053_843"
@@ -46734,7 +46887,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 832
+// entity 849
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_032_053_769"
@@ -46745,7 +46898,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 833
+// entity 850
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_032_053_502"
@@ -46756,7 +46909,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 834
+// entity 851
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_033_053_774"
@@ -46767,7 +46920,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 835
+// entity 852
 {
 "classname" "func_static"
 "name" "TURBO_MOTION_BOOSTER_SYSTEM_031_054_778"
@@ -46778,7 +46931,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 836
+// entity 853
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_031_054_770"
@@ -46789,7 +46942,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 837
+// entity 854
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_032_054_790"
@@ -46800,7 +46953,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 838
+// entity 855
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_032_054_845"
@@ -46811,7 +46964,7 @@ brushDef3
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
 
-// entity 839
+// entity 856
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_032_054_767"
@@ -46821,11 +46974,11 @@ brushDef3
 
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
 }
-// entity 840
+// entity 857
 {
 "classname" "atdm:ambient_world"
 "name" "ambient_world"
-"origin" "2500 2500 120"
+"origin" "3840 3840 120"
 "light_center" "0 0 0"
 "light_radius" "4500 4500 2500"
 "color" "0.50 0.50 0.50"
@@ -46833,4 +46986,20 @@ brushDef3
 "noshadows" "0"
 "nospecular" "0"
 "parallel" "0"
+}
+// entity 858
+{
+"classname" "atdm:voice"
+"name" "data_reader_voice"
+"origin" "3840 3840 120"
+"s_shader" "silence"
+}
+// entity 859
+{
+"classname" "atdm:trigger_voice"
+"name" "data_reader_trigger"
+"origin" "3840 3840 120"
+"snd_say" "silence"
+"target0" "data_reader_voice"
+"as_player" "1"
 }

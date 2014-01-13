@@ -175,6 +175,20 @@ int isButton(ObjectItem currobj)
 				}
 		}
 }
+
+int isLog (ObjectItem currobj)
+	{
+	if ((objectMasters[currobj.item_id].objClass == SOFTWARE_LOGS ) && (objectMasters[currobj.item_id].objSubClass==4) && (objectMasters[currobj.item_id].objSubClassIndex == 1))
+		{
+		return 1;
+		}
+	else
+		{
+		return 0;
+		}
+	
+	}
+
 int isTrap(ObjectItem currobj)
 	{
 	switch (objectMasters[currobj.item_id].type )
@@ -242,8 +256,8 @@ void createScriptCall(ObjectItem &currobj,float x,float y, float z)
 	printf("\"name\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	printf("\"call\" \"start_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-	printf("}\n");EntityCount++;
-
+	printf("}\n");
+	EntityCount++;
 }
 
 void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -759,13 +773,21 @@ switch (game)
 		case UW2:
 			{printf("\"xdata_contents\" \"readables/uw2/scroll_%03d\"\n", ReadableIndex);break;}
 		case SHOCK:
-			{printf("\"xdata_contents\" \"readables/shock/log_%03d\"\n",ReadableIndex);break;}
+			{
+			printf("\"xdata_contents\" \"readables/shock/log_%03d\"\n",ReadableIndex);
+			printf("\"trigger_on_open\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	//plays the audio of this log
+			break;
+			}
 		}	
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	EntityRotation(currobj.heading);
 	AttachToJoint(currobj);		//for npc items
 	printf("}");
 	EntityCount++;
+	if (game == SHOCK)
+		{
+		createScriptCall(currobj,x,y,z);
+		}
 	return;
 }
 

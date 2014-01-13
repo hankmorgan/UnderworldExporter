@@ -1,0 +1,1 @@
+ shock_audio_log_2588 {  	description "shocklogs_2588" 	no_dups 	minDistance 1 	maxDistance 30 	volume -12 	sound/sfx/shock_logs/log_2588.ogg }

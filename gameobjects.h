@@ -259,6 +259,7 @@ void AttachToJoint(ObjectItem &currobj);
 int isTrigger(ObjectItem currobj);
 int isButton(ObjectItem currobj);
 int isTrap(ObjectItem currobj);
+int isLog (ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
 //long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);

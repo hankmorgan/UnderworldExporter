@@ -5,6 +5,7 @@
 #include "main.h"
 #include "gameobjects.h"
 #include "tilemap.h"
+#include "scripting.h"
 #include "asciimode.h"
 
 
@@ -208,7 +209,7 @@ void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int Leve
 {
 int x;
 int y;
-	printf ("\nNow Printing Tile for level :%d.", LevelNo+1);
+	printf ("\nNow Printing Tile for level :%d.", LevelNo);
 	for (y=63; y>=0;y--) //invert for ascii
 		{
 		printf ("\n");
@@ -221,7 +222,7 @@ int y;
 
 if (mapOnly == 1) {return;}
 
-	printf ("\nNow Printing Height Map for level :%d.", LevelNo+1);
+	printf ("\nNow Printing Height Map for level :%d.", LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -231,7 +232,7 @@ if (mapOnly == 1) {return;}
 			}
 		}
 
-	printf ("\nNow Printing floor textures for level :%d.(##)", LevelNo+1);
+	printf ("\nNow Printing floor textures for level :%d.(##)", LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -241,7 +242,7 @@ if (mapOnly == 1) {return;}
 			}
 		}
 
-	printf ("\nNow Printing door positions for level :%d.", LevelNo+1);
+	printf ("\nNow Printing door positions for level :%d.", LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -254,7 +255,7 @@ if (mapOnly == 1) {return;}
 			}
 		}
 	
-	printf ("\nNow Printing wall textures for level :%d.(##)", LevelNo+1);
+	printf ("\nNow Printing wall textures for level :%d.(##)", LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -266,7 +267,7 @@ if (mapOnly == 1) {return;}
 
 if (game == SHOCK)
 	{
-	printf ("\nNow Printing adjacent flags for level :%d.(##)", LevelNo+1);
+	printf ("\nNow Printing adjacent flags for level :%d.(##)", LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -276,7 +277,7 @@ if (game == SHOCK)
 			}
 		}
 
-	printf ("\nNow printing texture offsets :%d.(##)", LevelNo+1);
+	printf ("\nNow printing texture offsets :%d.(##)", LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -286,7 +287,7 @@ if (game == SHOCK)
 			}
 		}
 		
-	printf("\nPrint out ceiling height by tile for level :%d\n",LevelNo+1);
+	printf("\nPrint out ceiling height by tile for level :%d\n",LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -296,7 +297,7 @@ if (game == SHOCK)
 			}
 		}
 
-	printf("\nPrint out slope steepness by tile for level :%d\n",LevelNo+1);
+	printf("\nPrint out slope steepness by tile for level :%d\n",LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
@@ -306,7 +307,7 @@ if (game == SHOCK)
 			}
 		}
 	
-		printf("\nPrint out object lists for level :%d\n",LevelNo+1);
+	printf("\nPrint out object lists for level :%d\n",LevelNo);
 	
 	for (y=63; y>=0;y--)
 		{
@@ -329,6 +330,37 @@ if (game == SHOCK)
 			printf("*");
 			}
 		}
+	printf("\nPrint out audio logs for :%d\n",LevelNo);	
+	printf("Desc ObjID TileX TileY LogChunk\n");
+	for (y=63; y>=0;y--)
+		{
+		for (x=0; x<64;x++)
+			{
+			if(LevelInfo[x][y].indexObjectList !=0)
+				{
+				long nextShockObj = LevelInfo[x][y].indexObjectList;
+				while (nextShockObj !=0)
+					{
+					if (isLog(objList[nextShockObj])==1)
+						{
+						EMAILScript(objectMasters[objList[nextShockObj].item_id].desc
+											,objList[nextShockObj].tileX
+											,objList[nextShockObj].tileY
+											,objList[nextShockObj].index
+											,objList[nextShockObj].Property2);
+						//printf("%s %d %d %d %d\n",
+						//	objectMasters[objList[nextShockObj].item_id].desc 
+						//	,objList[nextShockObj].index
+						//	,objList[nextShockObj].tileX
+						//	,objList[nextShockObj].tileY
+						//	,objList[nextShockObj].Property2
+						//	 );
+						}
+					nextShockObj=objList[nextShockObj].next ;
+					}
+				}
+			}
+		}
 		
 	//return;
 	}	
@@ -336,7 +368,7 @@ if (game == SHOCK)
 
 
 		
-	printf("\nPrint out object lists by tile for level :%d\n",LevelNo+1);
+	printf("\nPrint out object lists by tile for level :%d\n",LevelNo);
 	for (y=63; y>=0;y--) //invert for ascii
 		{
 		printf ("\n");
@@ -362,7 +394,7 @@ if (game == SHOCK)
 			
 		
 		
-	printf("\nPrint out slope flags by tile for level :%d\n",LevelNo+1);
+	printf("\nPrint out slope flags by tile for level :%d\n",LevelNo);
 	for (y=63; y>=0;y--)
 		{
 		printf ("\n");
