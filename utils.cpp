@@ -265,3 +265,46 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPack
 		return AddressOfBlockStart;
 		}
 }
+
+int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archive_ark, unsigned char *OutputChunk,long chunkPackedLength,long chunkUnpackedLength)
+{
+//Util to return an uncompressed shock block. Will use this for all future lookups and replace old ones
+
+
+	int chunkId;
+//	long chunkUnpackedLength;
+	//int chunkType=Compressed;//compression type
+	//long chunkPackedLength;
+	long chunkContentType;
+	long filepos;
+//	long AddressOfBlockStart=0;
+	long address_pointer=4;
+	//int blnLevelFound=0;		
+	
+
+
+	//Find the address of the block. This will also return the file size.
+	//AddressOfBlockStart = getShockBlockAddress(ChunkNo,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);  	
+	if (AddressOfBlockStart == -1)	{return -1;}
+	
+	if (chunkType ==1)	
+		{//Compressed
+			unsigned char *temp_ark = new unsigned char[chunkPackedLength];	
+			for (long k=0; k< chunkPackedLength; k++)
+				{
+					temp_ark[k] = archive_ark[AddressOfBlockStart+k];
+				}
+			
+			unpack_data(temp_ark,OutputChunk,chunkUnpackedLength);
+			return chunkUnpackedLength;
+		}
+	else
+		{//Uncompressed. 
+		//OutputChunk =  new unsigned char[chunkUnpackedLength];
+		for (long k=0; k< chunkUnpackedLength; k++)
+			{
+				OutputChunk[k] = archive_ark[AddressOfBlockStart+k];
+			}		
+		return chunkUnpackedLength;
+		}
+}

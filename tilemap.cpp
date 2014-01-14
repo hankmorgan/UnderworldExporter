@@ -537,49 +537,44 @@ return 1;
 
 int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo)
 {
-	FILE *file = NULL;      // File pointer
+	unsigned char *archive_ark; 
 	unsigned char *lev_ark; 
-	unsigned char *tmp_ark; 
-	unsigned char *sub_ark; 
+/*	unsigned char *tmp_ark; 
+	unsigned char *sub_ark;*/ 
 	unsigned char *tex_ark;
 	unsigned char *inf_ark;
-	long filepos;
 	long AddressOfBlockStart=0;
 	long address_pointer=4;
 	char blnLevelFound=0;
+	long blockAddress =0;
 
 //	int chunkId;
 	long chunkUnpackedLength;
 	long chunkType;//compression type
 	long chunkPackedLength;
 //	long chunkContentType;
-	
 
-	
-	
-//read in archive.dat
+//Read in the archive.
+	FILE *file = NULL;      // File pointer
 	if ((file = fopen(filePath, "rb")) == NULL)
-		printf("Could not open specified file\n");
-	else
-		printf ("");
-	long fileSize = getFileSize(file);
-	filepos = ftell(file);
-	tmp_ark = new unsigned char[fileSize];
-	fread(tmp_ark, fileSize, 1,file);
-	fclose(file);  
-	//get the level info data from the archive
-	AddressOfBlockStart = getShockBlockAddress(4004+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
-	sub_ark = new unsigned char[chunkPackedLength];	
-	inf_ark = new unsigned char[chunkUnpackedLength];	
-	for (long k=0; k< chunkPackedLength; k++)
 		{
-			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		printf("\nArchive not found!\n");
+		return -1;
 		}
-	unpack_data(sub_ark,inf_ark,chunkUnpackedLength);
-	//long sizeV = getValAtAddress(inf_ark,0,32);
-	//long sizeH = getValAtAddress(inf_ark,4,32);
-	//long always6_1 = getValAtAddress(inf_ark,8,32);
-	//long always6_2 = getValAtAddress(inf_ark,12,32);
+	long fileSize = getFileSize(file);
+	int filepos = ftell(file);	
+	archive_ark = new unsigned char[fileSize];
+	fread(archive_ark, fileSize, 1,file);
+	fclose(file);
+	
+	
+	
+	//get the level info data from the archive
+	blockAddress =getShockBlockAddress(LevelNo*100+4004,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+	if (blockAddress == -1) {return-1;}
+	inf_ark=new unsigned char[chunkUnpackedLength];
+	LoadShockChunk(blockAddress, chunkType, archive_ark, inf_ark,chunkPackedLength,chunkUnpackedLength);	
+	//Process level properties (height c-space)
 	long HeightUnits = getValAtAddress(inf_ark,16,32);	//Log2 value. The higher the value the lower the level height.
 	if (HeightUnits > 3)	//Any higher we lose data, 
 		{
@@ -587,27 +582,27 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 		}
 	int cSpace = getValAtAddress(inf_ark,24,32);	//Per docs should return 1 on cyberspace. Does'nt appear to work.
 	SHOCK_CEILING_HEIGHT = ((256 >> HeightUnits) * 8 >>3);	//Shifts the scale of the level.
+	//long sizeV = getValAtAddress(inf_ark,0,32);
+	//long sizeH = getValAtAddress(inf_ark,4,32);
+	//long always6_1 = getValAtAddress(inf_ark,8,32);
+	//long always6_2 = getValAtAddress(inf_ark,12,32);	
 	
-	//get the level data from the archive
-	AddressOfBlockStart = getShockBlockAddress(4005+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
-	sub_ark = new unsigned char[64*64*16];	
-	for (long k=0; k< chunkPackedLength; k++)
-		{//Copy that particular data.
-			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
-		}
-	lev_ark=new unsigned char[64*64*16];
+	//Read the main level data in
+	blockAddress =getShockBlockAddress(LevelNo*100+4005,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+	if (blockAddress == -1) {return-1;}
+	lev_ark=new unsigned char[chunkUnpackedLength]; //or 64*64*16
+	LoadShockChunk(blockAddress, chunkType, archive_ark, lev_ark,chunkPackedLength,chunkUnpackedLength);
 	AddressOfBlockStart=0;
 	address_pointer=0;	
-	//Decompress the chunk.
-	unpack_data(sub_ark,lev_ark,64*64*16);
 	
+
 	
-	//get the texture data from the archive
-	AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, tmp_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
+	//get the texture data from the archive.is never compressed?
+	AddressOfBlockStart = getShockBlockAddress(4007+ LevelNo*100, archive_ark,  &chunkPackedLength, &chunkUnpackedLength,&chunkType);
 	tex_ark = new unsigned char[chunkUnpackedLength];	
 	for (long k=0; k< chunkUnpackedLength; k++)
 	{
-		texture_map[k] = getValAtAddress(tmp_ark,AddressOfBlockStart + address_pointer,16);
+		texture_map[k] = getValAtAddress(archive_ark,AddressOfBlockStart + address_pointer,16);
 		address_pointer =address_pointer+2;		//tmp_ark[AddressOfBlockStart+k];
 	}
 	AddressOfBlockStart=0;

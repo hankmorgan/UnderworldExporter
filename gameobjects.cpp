@@ -29,7 +29,8 @@ void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
-
+void lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, int *property1, int *property2,int *property3,int *property4);
+void PrintShockTriggerAction(int TriggerType);
 int keycount[256];	//For tracking key usage
 //int levelNo;
 
@@ -358,6 +359,9 @@ float tileX = currobj.tileX ;
 float tileY = currobj.tileY ;
 float BrushX= BrushSizeX;
 float BrushY= BrushSizeY;
+float zpos = z;
+if (game == SHOCK)
+	{zpos = LevelInfo[currobj.tileX][currobj.tileY].floorHeight * BrushSizeZ;}
 	//for a door I need to point it's used_by property at the key object's name. This is accessed through a lock object
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
@@ -380,13 +384,13 @@ float BrushY= BrushSizeY;
 	switch (currobj.heading)
 		{//TODO: replace with proper model offset
 		case EAST:
-			{printf("\"origin\" \"%f %f %f\"\n",x,(tileY)*BrushY + ( (doorWidth+(BrushY-doorWidth)/2 ) ),z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",x,(tileY)*BrushY + ( (doorWidth+(BrushY-doorWidth)/2 ) ),zpos);	break;}
 		case WEST:
-			{printf("\"origin\" \"%f %f %f\"\n",x,(tileY)*BrushY + ( (0+(BrushY-doorWidth)/2 ) ),z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",x,(tileY)*BrushY + ( (0+(BrushY-doorWidth)/2 ) ),zpos);	break;}
 		case NORTH:
-			{printf("\"origin\" \"%f %f %f\"\n",(tileX)*BrushX + ( (doorWidth+(BrushX-doorWidth)/2 ) ),y,z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",(tileX)*BrushX + ( (doorWidth+(BrushX-doorWidth)/2 ) ),y,zpos);	break;}
 		case SOUTH:
-			{printf("\"origin\" \"%f %f %f\"\n",(tileX)*BrushX + ( (0+(BrushX-doorWidth)/2 ) ),y,z);	break;}
+			{printf("\"origin\" \"%f %f %f\"\n",(tileX)*BrushX + ( (0+(BrushX-doorWidth)/2 ) ),y,zpos);	break;}
 		}
 
 	tile t = LevelInfo[currobj.tileX][currobj.tileY];
@@ -956,158 +960,92 @@ int property2;
 int property3;
 int property4;
 int property5;
-//int IndexIntoCrossRef;
-//int PrevLink;
-//int NextLink;
-//int XCoord;
-//int YCoord;
-//int ZCoord;
-//int Angle1;
-//int Angle2;
-//int Angle3;
-//int AIIndex;
-//int ObjectType;
-//int HitPoints;
-//int State;
-
-	FILE *file = NULL;      // File pointer
-	//unsigned char *lev_ark; 
-	unsigned char *tmp_ark; 
-	unsigned char *sub_ark; 
-	//unsigned char *tex_ark;
-	unsigned char *inf_ark;
-	unsigned char *mst_ark;
-	long filepos;
-	long AddressOfBlockStart=0;
-	long address_pointer=4;
-	char blnLevelFound=0;
-
-//	int chunkId;
-	long chunkUnpackedLength;
-	long chunkType;//compression type
-	long chunkPackedLength;
-//	long chunkContentType;
+	
 	int MasterAddressLookup[1024];
+	long address_pointer=4;	
 	
-//read in archive.dat
-	if ((file = fopen(filePath, "rb")) == NULL)
-		printf("Could not open specified file\n");
-	else
-		printf ("");
-	long fileSize = getFileSize(file);
-	filepos = ftell(file);
-	tmp_ark = new unsigned char[fileSize];
-	fread(tmp_ark, fileSize, 1,file);
-	fclose(file);  
-	//get the master object list from the archive
-	AddressOfBlockStart = getShockBlockAddress(LevelNo*100+4008,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+	unsigned char *archive_ark;	//the full file.
+	unsigned char *xref_ark;		//The crossref table
+	unsigned char *mst_ark;		//The master table
+	long blockAddress;
+	long chunkUnpackedLength=0;
+	long chunkType=0;//compression type
+	long chunkPackedLength=0;
 
 	
-	sub_ark = new unsigned char[chunkPackedLength];	
-	mst_ark = new unsigned char[chunkUnpackedLength];	
-	for (long k=0; k< chunkPackedLength; k++)
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(filePath, "rb")) == NULL)
 		{
-			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
+		printf("\nArchive not found!\n");
+		return;
 		}
-	unpack_data(sub_ark,mst_ark,chunkUnpackedLength);
+	long fileSize = getFileSize(file);
+	int filepos = ftell(file);	
+	archive_ark = new unsigned char[fileSize];
+	fread(archive_ark, fileSize, 1,file);
+	fclose(file);
+	
+	blockAddress =getShockBlockAddress(LevelNo*100+4009,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+	if (blockAddress == -1) {return;}
+	xref_ark=new unsigned char[chunkUnpackedLength];
+	LoadShockChunk(blockAddress, chunkType, archive_ark, xref_ark,chunkPackedLength,chunkUnpackedLength);
+
+
+	blockAddress =getShockBlockAddress(LevelNo*100+4008,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+	if (blockAddress == -1) {return;}
+	mst_ark=new unsigned char[chunkUnpackedLength];
+	LoadShockChunk(blockAddress,chunkType,archive_ark,mst_ark,chunkPackedLength,chunkUnpackedLength);
+		
+	//chunkUnpackedLength = LoadShockChunk(filePath,LevelNo*100+4009,xref_ark);
+	
+	//mst_ark=new unsigned char[16000];
+	//LoadShockChunk(filePath,LevelNo*100+4008,mst_ark);
 
 	int i=0;
-	address_pointer=0;
-	while (address_pointer <= chunkUnpackedLength)
-		{//Get the addresses of the master list data of the mst_ark
-		MasterAddressLookup[i++] = address_pointer;
-		address_pointer+=27;
-		}
-
-
-//Read in the xref table and then read in it's stuff from the master table. I'll then have to go into the class blocks.
-	AddressOfBlockStart = getShockBlockAddress(LevelNo*100+4009,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
-	sub_ark = new unsigned char[chunkPackedLength];	
-	inf_ark = new unsigned char[chunkUnpackedLength];	
-	for (long k=0; k< chunkPackedLength; k++)
-		{
-			sub_ark[k] = tmp_ark[AddressOfBlockStart+k];
-		}
-	if (chunkType == 1)
-		{
-		unpack_data(sub_ark,inf_ark,chunkUnpackedLength);
-		}
-	else
-		{
-			for (long k=0; k< chunkUnpackedLength; k++)
-				{
-					inf_ark[k] = tmp_ark[k];
-				}
-		}
-	i=0;
 	long mstaddress_pointer;
 	address_pointer=0;
-	while (address_pointer < chunkUnpackedLength)
+	while (i < 1600)
 		{
-		//printf("\nXRef : %d \n",i);
-		//printf("TileX = %d\n",getValAtAddress(inf_ark,address_pointer+0,16));
-		//printf("TileY = %d\n",getValAtAddress(inf_ark,address_pointer+2,16));
-		int MasterIndex= getValAtAddress(inf_ark,address_pointer+4,16);
-		//printf("Master Index = %d\n",MasterIndex);
-		//printf("Next obj = %d\n",getValAtAddress(inf_ark,address_pointer+6,16));
-//		printf("Next tile = %d\n",getValAtAddress(inf_ark,address_pointer+8,16));
-		
+		int MasterIndex= getValAtAddress(xref_ark,address_pointer+4,16);
 		objList[i].index = i;
 		objList[i].link =0;
 		objList[i].joint=0;
 		objList[i].heading=0;
-		objList[i].next = getValAtAddress(inf_ark,address_pointer+6,16);
-		objList[i].tileX= getValAtAddress(inf_ark,address_pointer+0,16);
-		objList[i].tileY =getValAtAddress(inf_ark,address_pointer+2,16);
+		objList[i].next = getValAtAddress(xref_ark,address_pointer+6,16);
+		objList[i].tileX= getValAtAddress(xref_ark,address_pointer+0,16);
+		objList[i].tileY =getValAtAddress(xref_ark,address_pointer+2,16);
 
 		//Now go visit the master list to get more info.
 		
-		mstaddress_pointer = MasterAddressLookup[MasterIndex];
-		
-			//printf("Object : %d \n",i);
+		//mstaddress_pointer = MasterAddressLookup[MasterIndex];
+		mstaddress_pointer = MasterIndex *27;
 			InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
-			//printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
 			objList[i].InUseFlag = InUseFlag;
 			ObjectClass =getValAtAddress(mst_ark,mstaddress_pointer+1,8);
-			//printf("ObjectClass = %d\n",ObjectClass);
 			objList[i].ObjectClass = ObjectClass;
 			ObjectSubClass=getValAtAddress(mst_ark,mstaddress_pointer+2,8);
-			//printf("ObjectSubClass = %d\n",ObjectSubClass);
 			objList[i].ObjectSubClass = ObjectSubClass;
 			int SubClassLink =getValAtAddress(mst_ark,mstaddress_pointer+3,16);
+
 			//Subclass per sspecs is  a link to the sub table. not the class it self. For that we need the object type.
 			ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
-			objList[i].ObjectSubClassIndex = ObjectSubClassIndex;
-			//printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);//cross ref this with the class table.
 
-		
-//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
-//			printf("Index back to cross = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+			objList[i].ObjectSubClassIndex = ObjectSubClassIndex;
+	
 			int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
-			//objList[i].LookUpIndex= LookupIndex;
 			objList[i].item_id =LookupIndex;
-			//printf("It is a %s\n", objectMasters[LookupIndex].desc );
+
 			objList[i].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
 			objList[i].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
 			objList[i].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
 						
-//			if (LookupIndex !=-1)
-//				{
-//				printf("It is a %s\n", shockObjectMasters[LookupIndex].desc );
-//				}
-//			else
-//				{
-//				printf("Description not found!\n");
-//				}
-			//printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+//			printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
 //			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
 //			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
 //			printf("XCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+11,8));
 //			printf("XCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8));
 //			printf("YCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
 //			printf("YCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8));
-
-			
 //			printf("ZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
 //			printf("Angle1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
 //			printf("Angle2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
@@ -1121,6 +1059,30 @@ int property5;
 //			printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));
 
 
+//////if ( i==823 )
+//////{
+//////		//Object Debug output 
+		//////printf("\nXRef : %d \n",i);
+		//////printf("TileX = %d\n",getValAtAddress(xref_ark,address_pointer+0,16));
+		//////printf("TileY = %d\n",getValAtAddress(xref_ark,address_pointer+2,16));
+//////		printf("Master Index = %d\n",MasterIndex);
+//////		printf("Next obj = %d\n",getValAtAddress(xref_ark,address_pointer+6,16));
+//////		printf("Next tile = %d\n",getValAtAddress(xref_ark,address_pointer+8,16));		
+//////		printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
+//////		printf("ObjectClass = %d\n",ObjectClass);
+//////		printf("Object : %d \n",i);
+//////		printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
+//////		printf("ObjectClass = %d\n",ObjectClass);
+//////		printf("ObjectSubClass = %d\n",ObjectSubClass);
+//////		printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);
+//////		printf("ClassLink = %d\n",SubClassLink);
+//////		printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
+//////		printf("State = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
+//////		printf("unk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
+//////		printf("unk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
+//////		printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));		
+		///*/*printf("It is a %s\n", objectMasters[LookupIndex].desc );*/*/
+//////}
 
 switch (ObjectClass)	//to get further properties specific to each class
 	{
@@ -1132,39 +1094,34 @@ switch (ObjectClass)	//to get further properties specific to each class
 	case HARDWARE:break;
 	case SOFTWARE_LOGS:
 		{
-		lookUpSubClass(tmp_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SubClassLink,&property1,&property2,&property3,&property4);
-		objList[i].Property1 = property1;	//These will frustrate me eventually.
-		objList[i].Property2 = property2;
-		objList[i].Property3 = property3;
+		lookUpSubClass(archive_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9,&property1,&property2,&property3, &property4);
+		objList[i].Property1 = property1;	//Software version
+		objList[i].Property2 = property2 + 2488;	//Software log chunk + it's offset in the chunk directory.
+		objList[i].Property3 = property3;	//LevelNo of the log
 //		objList[i].Property4 = property4;
 		break;
 		}
 	case FIXTURES:break;
-	case GETTABLES_OTHER:break;
+	case GETTABLES_OTHER:
+		break;
 	case SWITCHES_PANELS:break;
 	case DOORS_GRATINGS:break;
 	case ANIMATED:break;
-	case TRAPS_MARKERS:break;
+	case TRAPS_MARKERS:
+			{
+			//printf("\nXRef : %d \n",i);
+			//printf("TileX = %d\n",getValAtAddress(xref_ark,address_pointer+0,16));
+			//printf("TileY = %d\n",getValAtAddress(xref_ark,address_pointer+2,16));
+			//printf("It is a %s\n", objectMasters[LookupIndex].desc );
+			lookUpSubClass(archive_ark,LevelNo*100+TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28,&property1,&property2,&property3, &property4);
+			}
+		break;
 	case CONTAINERS_CORPSES:break;
 	case CRITTERS:break;
 	}		
 	
 	
-		//Object Debug output 
-		//printf("\nXRef : %d \n",i);
-		//printf("TileX = %d\n",getValAtAddress(inf_ark,address_pointer+0,16));
-		//printf("TileY = %d\n",getValAtAddress(inf_ark,address_pointer+2,16));
-		//printf("Master Index = %d\n",MasterIndex);
-		//printf("Next obj = %d\n",getValAtAddress(inf_ark,address_pointer+6,16));
-		//printf("Next tile = %d\n",getValAtAddress(inf_ark,address_pointer+8,16));		
-		//printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
-		//printf("ObjectClass = %d\n",ObjectClass);
-		//printf("Object : %d \n",i);
-		//printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
-		//printf("ObjectClass = %d\n",ObjectClass);
-		//printf("ObjectSubClass = %d\n",ObjectSubClass);
-		//printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);//cross ref this with the class table.
-		//printf("It is a %s\n", objectMasters[LookupIndex].desc );
+
 	
 		
 		
@@ -1351,36 +1308,79 @@ switch (game)
 		}
 }
 
-void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index, int *property1,int *property2,int *property3,int *property4)
-{
+void lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, int *property1, int *property2,int *property3,int *property4)
+{//Only works for logs at the moment.
 //
-//	int chunkId;
+	unsigned char *sub_ark ;
 	long chunkUnpackedLength;
 	long chunkType;//compression type
 	long chunkPackedLength;
-//	long chunkContentType;
-	
-long AddressOfBlockStart = getShockBlockAddress(BlockNo,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);
+
+//long chunkUnpackedLength =LoadShockChunk(filePath,BlockNo,sub_ark);
+
+	long blockAddress =getShockBlockAddress(BlockNo,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+	if (blockAddress == -1) {return;}
+	sub_ark=new unsigned char[chunkUnpackedLength];
+	LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
+
+
 int k= 0;
 int add_ptr=0;
 while (k<=chunkUnpackedLength)
 	{
 	if (k==index)
 		{
-		
-		//printf("Subclass Link=%d\n",k);
-		//printf("Index back=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+0,16));
-		//printf("prev=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+2,16));
-		//printf("next=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+4,16));
-		//printf("version=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+6,8));
-		//printf("log chunk=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+7,8));
-		//printf("levelno=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+8,8));
-		*property1=getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+6,8);	//Software version
-		*property2=getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+7,8) + 2488;	//Chunk containing log
-		*property3=getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+8,8);	//Level No of Chunk
+/////*		printf("Subclass Link=%d\n",k);
+////		printf("Index back=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+0,16));
+////		printf("prev=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+2,16));
+////		printf("next=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+4,16));
+////		
+////		printf("prev(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+2,8));
+////		printf("next(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+3,8));
+////		printf("prev(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+4,8));
+////		printf("next(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+5,8));
+////		
+////		printf("val1(16)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+6,16));
+////		printf("val2(16)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+8,16));
+////		printf("val3(16)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+10,16));
+////		
+////		printf("val1(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+6,16));
+////		printf("val2(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+7,16));
+////		printf("val3(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+8,16));		
+////		printf("val4(9)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+9,16));
+////		printf("val5(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+10,16));
+////		printf("val6(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+11,16));	*/	
+		switch(ClassType)
+			{
+			case SOFTWARE_LOGS:
+				{
+				*property1=getValAtAddress(sub_ark,add_ptr+6,8);	//Software version
+				*property2=getValAtAddress(sub_ark,add_ptr+7,8);	//Chunk containing log
+				*property3=getValAtAddress(sub_ark,add_ptr+8,8);	//Level No of Chunk
+				break;
+				}
+			
+			
+			case	TRAPS_MARKERS: //and triggers too
+				{
+/*				printf("Index:%d\n",getValAtAddress(sub_ark,add_ptr+6,16));
+				printf("Prev:%d\n",getValAtAddress(sub_ark,add_ptr+6,16));
+				printf("Next:%d\n",getValAtAddress(sub_ark,add_ptr+6,16));
+				
+				printf("Action:%d\n",getValAtAddress(sub_ark,add_ptr+6,8));
+				PrintShockTriggerAction(getValAtAddress(sub_ark,add_ptr+6,8));
+				printf("Once?:%d\n",getValAtAddress(sub_ark,add_ptr+7,8));
+				
+				printf("Condition1:%d\n",getValAtAddress(sub_ark,add_ptr+8,8));
+				printf("Condition2:%d\n",getValAtAddress(sub_ark,add_ptr+9,8));
+				printf("Condition3:%d\n",getValAtAddress(sub_ark,add_ptr+10,8));
+				printf"Condition4:%d\n",getValAtAddress(sub_ark,add_ptr+11,8));*/
+				break;
+				}
+			}
 		break;
 		}
-	add_ptr+=9;
+	add_ptr+=RecordSize;
 	k++;
 	}
 return;
@@ -1422,5 +1422,47 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 			{
 			*offZ = *offZ + (LevelInfo[x][y].shockSteep * (BrushSizeZ /2));
 			}
+
+}
+
+void PrintShockTriggerAction(int TriggerType)
+{
+switch (TriggerType)
+	{
+	case ACTION_DO_NOTHING :
+		{printf("\tACTION_DO_NOTHING\n");break;}
+	case ACTION_TRANSPORT_LEVEL:
+		{printf("\tACTION_TRANSPORT_LEVEL\n");break;}
+	case ACTION_RESURRECTION:
+		{printf("\tACTION_RESURRECTION\n");break;}
+	case ACTION_CLONE:
+		{printf("\tACTION_CLONE\n");break;}
+	case ACTION_SET_VARIABLE:
+		{printf("\tACTION_SET_VARIABLE\n");break;}
+	case ACTION_ACTIVATE:
+		{printf("\tACTION_ACTIVATE\n");break;}
+	case ACTION_LIGHTING:
+		{printf("\tACTION_LIGHTING\n");break;}
+	case ACTION_EFFECT:
+		{printf("\tACTION_EFFECT\n");break;}
+	case ACTION_MOVING_PLATFORM:
+		{printf("\tACTION_MOVING_PLATFORM\n");break;}
+	case ACTION_CHOICE:
+		{printf("\tACTION_CHOICE\n");break;}
+	case ACTION_EMAIL:
+		{printf("\tACTION_EMAIL\n");break;}
+	case ACTION_RADAWAY:
+		{printf("\tACTION_RADAWAY\n");break;}
+	case ACTION_CHANGE_STATE:
+		{printf("\tACTION_CHANGE_STATE\n");break;}
+	case ACTION_MESSAGE:
+		{printf("\tACTION_MESSAGE\n");break;}
+	case ACTION_SPAWN:	
+		{printf("\tACTION_SPAWN\n");break;}	
+	case ACTION_CHANGE_TYPE:
+		{printf("\tCTION_CHANGE_TYPE\n");break;}
+		
+	
+	}
 
 }

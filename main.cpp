@@ -30,7 +30,7 @@ void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
-//void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockObjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
+//void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockobjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
 void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
 int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo);
 void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
@@ -47,8 +47,8 @@ int main()
 
 
 int game = SHOCK;
-int mode = D3_MODE;
-//int mode = ASCII_MODE;
+//int mode = D3_MODE;
+int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
@@ -235,7 +235,7 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 void exportMaps(int game,int mode,int LevelNo)
 {
 	ObjectItem objList[1600];
-	//shockObjectItem shockObjList[1600];
+	//shockObjectItem shockobjList[1600];
 	long texture_map[256]; 
 	long texture_map_shock[272]; 
 
@@ -287,6 +287,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
 			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
 			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
+			setDoorBits(LevelInfo,objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;
 			}			
