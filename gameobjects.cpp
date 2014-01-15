@@ -29,8 +29,13 @@ void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
-void lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, int *property1, int *property2,int *property3,int *property4);
-void PrintShockTriggerAction(int TriggerType);
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem currObj);
+void getShockTriggerAction(unsigned char *sub_ark,int add_ptr, xrefTable *xRef, int objProperties[10]);
+int isObjectAlreadyInList(ObjectItem objList[1600],int index, int newObj);
+int LookupxRefTable(xrefTable *xref,int x, int y, int MasterIndex, int tableSize);
+void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
+void replaceMapLink(tile levelInfo[64][64], xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
+
 int keycount[256];	//For tracking key usage
 //int levelNo;
 
@@ -759,7 +764,7 @@ int ReadableIndex;
 switch (game)
 	{
 	case SHOCK: 
-		ReadableIndex = currobj.Property2;	//The chunk that the text comes from.
+		ReadableIndex =currobj.shockProperties[SOFT_PROPERTY_LOG];	//currobj.Property1;	//The chunk that the text comes from.
 		break;
 	default:
 		ReadableIndex = currobj.link-0x200;
@@ -955,15 +960,16 @@ int InUseFlag;
 int ObjectClass;
 int ObjectSubClass;
 int ObjectSubClassIndex;
-int property1;	//Generic data pulled back from subclass tables.
-int property2;
-int property3;
-int property4;
-int property5;
+//int property1;	//Generic data pulled back from subclass tables. Messy but the data differs between types
+//int property2;
+//int property3;
+//int property4;
+//int property5;
+//int objProperties[10];
 	
 	int MasterAddressLookup[1024];
 	long address_pointer=4;	
-	
+	ObjectItem tmpObjList[1600];
 	unsigned char *archive_ark;	//the full file.
 	unsigned char *xref_ark;		//The crossref table
 	unsigned char *mst_ark;		//The master table
@@ -989,147 +995,219 @@ int property5;
 	if (blockAddress == -1) {return;}
 	xref_ark=new unsigned char[chunkUnpackedLength];
 	LoadShockChunk(blockAddress, chunkType, archive_ark, xref_ark,chunkPackedLength,chunkUnpackedLength);
+	xrefTable *xref;
+	xref =new xrefTable[chunkUnpackedLength/10];
+	int i=0;
+	int xref_ptr=0; 
+	int xRefLength = (chunkUnpackedLength/10);
 
+	//printf("\nxref\tTileX\tTileY\tMst\tNext\tNextTile\n");
+	for (i=0;i<chunkUnpackedLength/10;i++)
+		{
+		xref[i].tileX= getValAtAddress(xref_ark,xref_ptr+0,16);
+		xref[i].tileY =getValAtAddress(xref_ark,xref_ptr+2,16);	
+		xref[i].MstIndex =getValAtAddress(xref_ark,xref_ptr+4,16);	
+		xref[i].next = getValAtAddress(xref_ark,xref_ptr+6,16);
+		xref[i].nextTile =  getValAtAddress(xref_ark,xref_ptr+8,16);
+		if (xref[i].nextTile!= i)
+			{//object extends over many tiles
+			xref[i].duplicate =1;
+			xref[i].duplicateAssigned=0;
+			}
+		//printf("%d\t%d\t%d\t%d\t%d\t%d\n",
+//		i,xref[i].tileX ,xref[i].tileY,xref[i].MstIndex,xref[i].next,xref[i].nextTile);
+		
+		xref_ptr+=10;
+		}
 
 	blockAddress =getShockBlockAddress(LevelNo*100+4008,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
 	if (blockAddress == -1) {return;}
 	mst_ark=new unsigned char[chunkUnpackedLength];
 	LoadShockChunk(blockAddress,chunkType,archive_ark,mst_ark,chunkPackedLength,chunkUnpackedLength);
-		
-	//chunkUnpackedLength = LoadShockChunk(filePath,LevelNo*100+4009,xref_ark);
 	
-	//mst_ark=new unsigned char[16000];
-	//LoadShockChunk(filePath,LevelNo*100+4008,mst_ark);
-
-	int i=0;
-	long mstaddress_pointer;
-	address_pointer=0;
-	while (i < 1600)
-		{
-		int MasterIndex= getValAtAddress(xref_ark,address_pointer+4,16);
-		objList[i].index = i;
-		objList[i].link =0;
-		objList[i].joint=0;
-		objList[i].heading=0;
-		objList[i].next = getValAtAddress(xref_ark,address_pointer+6,16);
-		objList[i].tileX= getValAtAddress(xref_ark,address_pointer+0,16);
-		objList[i].tileY =getValAtAddress(xref_ark,address_pointer+2,16);
-
-		//Now go visit the master list to get more info.
-		
-		//mstaddress_pointer = MasterAddressLookup[MasterIndex];
-		mstaddress_pointer = MasterIndex *27;
-			InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
-			objList[i].InUseFlag = InUseFlag;
-			ObjectClass =getValAtAddress(mst_ark,mstaddress_pointer+1,8);
-			objList[i].ObjectClass = ObjectClass;
-			ObjectSubClass=getValAtAddress(mst_ark,mstaddress_pointer+2,8);
-			objList[i].ObjectSubClass = ObjectSubClass;
-			int SubClassLink =getValAtAddress(mst_ark,mstaddress_pointer+3,16);
-
-			//Subclass per sspecs is  a link to the sub table. not the class it self. For that we need the object type.
-			ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
-
-			objList[i].ObjectSubClassIndex = ObjectSubClassIndex;
+	long mstaddress_pointer =0;
 	
-			int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
-			objList[i].item_id =LookupIndex;
-
-			objList[i].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
-			objList[i].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
-			objList[i].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
-						
-//			printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
-//			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
-//			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
-//			printf("XCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+11,8));
-//			printf("XCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8));
-//			printf("YCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
-//			printf("YCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8));
-//			printf("ZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
-//			printf("Angle1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
-//			printf("Angle2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
-//			printf("Angle3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+18,8));
-//			printf("AIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
-//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
-//			printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
-//			printf("State = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
-//			printf("unk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
-//			printf("unk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
-//			printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));
-
-
-//////if ( i==823 )
-//////{
-//////		//Object Debug output 
-		//////printf("\nXRef : %d \n",i);
-		//////printf("TileX = %d\n",getValAtAddress(xref_ark,address_pointer+0,16));
-		//////printf("TileY = %d\n",getValAtAddress(xref_ark,address_pointer+2,16));
-//////		printf("Master Index = %d\n",MasterIndex);
-//////		printf("Next obj = %d\n",getValAtAddress(xref_ark,address_pointer+6,16));
-//////		printf("Next tile = %d\n",getValAtAddress(xref_ark,address_pointer+8,16));		
-//////		printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
-//////		printf("ObjectClass = %d\n",ObjectClass);
-//////		printf("Object : %d \n",i);
-//////		printf("InUse = %d\n",getValAtAddress(mst_ark,mstaddress_pointer,8));
-//////		printf("ObjectClass = %d\n",ObjectClass);
-//////		printf("ObjectSubClass = %d\n",ObjectSubClass);
-//////		printf("ObjectSubClassIndex = %d\n",ObjectSubClassIndex);
-//////		printf("ClassLink = %d\n",SubClassLink);
-//////		printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
-//////		printf("State = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
-//////		printf("unk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
-//////		printf("unk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
-//////		printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));		
-		///*/*printf("It is a %s\n", objectMasters[LookupIndex].desc );*/*/
-//////}
-
-switch (ObjectClass)	//to get further properties specific to each class
-	{
-	case GUNS_WEAPONS:break;
-	case AMMUNITION:break;
-	case PROJECTILES:break;
-	case GRENADE_EXPLOSIONS:break;
-	case PATCHES:break;
-	case HARDWARE:break;
-	case SOFTWARE_LOGS:
+//now run through the master table and process the duplicates flag
+	for (i=0;i<chunkUnpackedLength/27;i++)
 		{
-		lookUpSubClass(archive_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9,&property1,&property2,&property3, &property4);
-		objList[i].Property1 = property1;	//Software version
-		objList[i].Property2 = property2 + 2488;	//Software log chunk + it's offset in the chunk directory.
-		objList[i].Property3 = property3;	//LevelNo of the log
-//		objList[i].Property4 = property4;
-		break;
-		}
-	case FIXTURES:break;
-	case GETTABLES_OTHER:
-		break;
-	case SWITCHES_PANELS:break;
-	case DOORS_GRATINGS:break;
-	case ANIMATED:break;
-	case TRAPS_MARKERS:
+		xref_ptr= getValAtAddress(mst_ark,mstaddress_pointer+5,16);
+		if (xref[xref_ptr].duplicate == 1)
 			{
-			//printf("\nXRef : %d \n",i);
-			//printf("TileX = %d\n",getValAtAddress(xref_ark,address_pointer+0,16));
-			//printf("TileY = %d\n",getValAtAddress(xref_ark,address_pointer+2,16));
-			//printf("It is a %s\n", objectMasters[LookupIndex].desc );
-			lookUpSubClass(archive_ark,LevelNo*100+TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28,&property1,&property2,&property3, &property4);
+			xref[xref_ptr].duplicateAssigned =1;	//picks the first duplicate found to show any others will be pushed aside.
 			}
-		break;
-	case CONTAINERS_CORPSES:break;
-	case CRITTERS:break;
-	}		
-	
-	
-
-	
-		
-		
-		address_pointer+=10;
-		i++;
+		mstaddress_pointer+=27;
 		}
+for (i=0;i<1600;i++)
+	{
+	//To stop later crashes in ascii dumps	
+	objList[i].index=i;objList[i].next =0;objList[i].item_id=0;objList[i].link =0;objList[i].owner =0;
+	}
+for(i=0;i<xRefLength;i++)				
+	{
+	if ((xref[i].duplicate==1) && (xref[i].duplicateAssigned !=1))
+		{
+			replaceLink(xref,xRefLength,i,xref[i].next);	//replace the links to the duplicate
+			replaceMapLink(LevelInfo,xref,xRefLength,i,xref[i].next);
+		}
+		
+	}		
+
+//now i can build based on my master list with no duplicates spoiling things.!	
+mstaddress_pointer=0;
+	for (i=0; i < chunkUnpackedLength/27; i++)
+		{
+			xref_ptr =getValAtAddress(mst_ark,mstaddress_pointer+5,16);
+			int MasterIndex=xref[xref_ptr].MstIndex ;
+			objList[MasterIndex].index=MasterIndex;
+			objList[MasterIndex].link =0;
+			objList[MasterIndex].joint=0;
+			objList[MasterIndex].heading=0;
+
+				InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
+				objList[MasterIndex].InUseFlag = InUseFlag;
+					
+			
+				objList[MasterIndex].tileX = xref[xref_ptr].tileX ;
+				objList[MasterIndex].tileY = xref[xref_ptr].tileY ;
+				objList[MasterIndex].next =xref[xref[xref_ptr].next].MstIndex  ;
+
+				ObjectClass =getValAtAddress(mst_ark,mstaddress_pointer+1,8);
+				objList[MasterIndex].ObjectClass = ObjectClass;
+				ObjectSubClass=getValAtAddress(mst_ark,mstaddress_pointer+2,8);
+				objList[MasterIndex].ObjectSubClass = ObjectSubClass;
+				int SubClassLink =getValAtAddress(mst_ark,mstaddress_pointer+3,16);
+
+				//Subclass per sspecs is  a link to the sub table. not the class it self. For that we need the object type.
+				ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
+
+				objList[MasterIndex].ObjectSubClassIndex = ObjectSubClassIndex;
+		
+				int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
+				objList[MasterIndex].item_id =LookupIndex;
+
+				objList[MasterIndex].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
+				objList[MasterIndex].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
+				objList[MasterIndex].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
+									
+			//			printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
+			//			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
+			//			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
+			//			printf("XCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+11,8));
+			//			printf("XCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8));
+			//			printf("YCoord low= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
+			//			printf("YCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8));
+			//			printf("ZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
+			//			printf("Angle1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
+			//			printf("Angle2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
+			//			printf("Angle3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+18,8));
+			//			printf("AIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
+			//			printf("ObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
+			//			printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
+			//			printf("State = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
+			//			printf("unk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
+			//			printf("unk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
+			//			printf("unk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));
+
+			//Debug obj
+
+
+			//if ((MasterIndex == 250) ||(MasterIndex == 502) || (MasterIndex == 713))
+			//	{
+			//	
+			//
+			//			printf("\nIndex = %d \n",objList[MasterIndex].index);
+			//			printf("xref = %d\n",xref_ptr);			
+			//			//printf("master i = %d\n",objList[MasterIndex].mstrIndex);	
+			//			printf("TileX = %d\n",objList[MasterIndex].tileX );
+			//			printf("TileY = %d\n",objList[MasterIndex].tileY);
+			//			printf("It is a %s\n", objectMasters[objList[MasterIndex].item_id].desc );
+			//			printf("InUse = %d\n",objList[MasterIndex].InUseFlag);
+			//			printf("xrefnext = %d (%d)\n", xref[xref_ptr].next,xref[xref[xref_ptr].next].MstIndex ) ;
+			//			printf("xrefnexttile = %d (%d)\n", xref[xref_ptr].nextTile,xref[xref[xref_ptr].nextTile].MstIndex ) ;
+			//			printf("Masterlist next = %d\n", objList[MasterIndex].next);
+			//			printf("Index into tile :%d\n",LevelInfo[objList[MasterIndex].tileX][objList[MasterIndex].tileY].indexObjectList);
+			//		}
+
+			switch (ObjectClass)	//to get further properties specific to each class
+				{
+				case GUNS_WEAPONS:break;
+				case AMMUNITION:break;
+				case PROJECTILES:break;
+				case GRENADE_EXPLOSIONS:break;
+				case PATCHES:break;
+				case HARDWARE:break;
+				case SOFTWARE_LOGS:
+					{
+					if (lookUpSubClass(archive_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList[MasterIndex]) == -1) {printf("\nNo properties found!\n");}
+					break;
+					}
+				case FIXTURES:break;
+				case GETTABLES_OTHER:
+					break;
+				case SWITCHES_PANELS:
+					{
+						//printf("\nIndex = %d \n",objList[MasterIndex].index);
+						//printf("xref = %d\n",xref_ptr);			
+						//printf("TileX = %d\n",objList[MasterIndex].tileX );
+						//printf("TileY = %d\n",objList[MasterIndex].tileY);
+						//printf("It is a %s\n", objectMasters[objList[MasterIndex].item_id].desc );
+						//printf("InUse = %d\n",objList[MasterIndex].InUseFlag);
+					if (lookUpSubClass(archive_ark,LevelNo*100+SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30 ,xref, objList[MasterIndex]) == -1) {printf("\nNo properties found!\n");}
+					break;
+					}
+				case DOORS_GRATINGS:break;
+				case ANIMATED:break;
+				case TRAPS_MARKERS:
+						{
+						if (lookUpSubClass(archive_ark,LevelNo*100+TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28,xref, objList[MasterIndex]) == -1)  {printf("no properties found!");}
+						}
+					break;
+				case CONTAINERS_CORPSES:break;
+				case CRITTERS:break;
+				}						
+
+							
+							
+		mstaddress_pointer +=27;
+		}
+
+//turn obj indices into master indices
+	for (int x=0;x<64;x++)
+		{
+		for(int y=0;y<64;y++)
+		{
+		if (LevelInfo[x][y].indexObjectList !=0)
+			{LevelInfo[x][y].indexObjectList= xref[LevelInfo[x][y].indexObjectList].MstIndex; }
+		}
+		}
+
 
 }
+	
+int isObjectAlreadyInList(ObjectItem objList[1600],int index, int newObj)
+	{
+	int nextObj=index;
+	
+	if (nextObj != newObj)
+		{
+		while(nextObj !=0)
+			{
+			if (nextObj == nextObj)
+				{
+				return 1;
+				}
+			
+			nextObj = objList[nextObj].next;
+			}
+			return -1;
+		}
+	else
+		{
+		return 1;
+		}
+	}
+
+
 	void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo)
 {
 	FILE *file = NULL;      // File pointer
@@ -1227,6 +1305,7 @@ switch (game)
 		{	//read in master object list
 
 			objList[x].index = x; 
+			objList[x].InUseFlag =1;
 			objList[x].tileX=-1;
 			objList[x].tileY=-1;
 			//These three will get set when I am rendering the object entity and if the item is an npc's inventory.
@@ -1255,6 +1334,7 @@ switch (game)
 			//objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) ) ;//bits 0-5
 
 			objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+			
 			
 			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
 				{
@@ -1308,7 +1388,7 @@ switch (game)
 		}
 }
 
-void lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, int *property1, int *property2,int *property3,int *property4)
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem currObj)
 {//Only works for logs at the moment.
 //
 	unsigned char *sub_ark ;
@@ -1319,7 +1399,7 @@ void lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int 
 //long chunkUnpackedLength =LoadShockChunk(filePath,BlockNo,sub_ark);
 
 	long blockAddress =getShockBlockAddress(BlockNo,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
-	if (blockAddress == -1) {return;}
+	if (blockAddress == -1) {return -1;}
 	sub_ark=new unsigned char[chunkUnpackedLength];
 	LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
 
@@ -1350,31 +1430,41 @@ while (k<=chunkUnpackedLength)
 ////		printf("val4(9)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+9,16));
 ////		printf("val5(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+10,16));
 ////		printf("val6(8)=%d\n",getValAtAddress(tmp_ark,AddressOfBlockStart+add_ptr+11,16));	*/	
+		
 		switch(ClassType)
 			{
 			case SOFTWARE_LOGS:
 				{
-				*property1=getValAtAddress(sub_ark,add_ptr+6,8);	//Software version
-				*property2=getValAtAddress(sub_ark,add_ptr+7,8);	//Chunk containing log
-				*property3=getValAtAddress(sub_ark,add_ptr+8,8);	//Level No of Chunk
+				currObj.shockProperties[SOFT_PROPERTY_VERSION]=getValAtAddress(sub_ark,add_ptr+6,8);	//Software version
+				currObj.shockProperties[SOFT_PROPERTY_LOG]=getValAtAddress(sub_ark,add_ptr+7,8) + 2488;	//Chunk containing log
+				currObj.shockProperties[SOFT_PROPERTY_LEVEL]=getValAtAddress(sub_ark,add_ptr+8,8);	//Level No of Chunk
+				return 1;
 				break;
 				}
-			
-			
+			case SWITCHES_PANELS:
+				{
+				//printf("Switch Index:%d\n",getValAtAddress(sub_ark,add_ptr+0,16));
+				//printf("Prev:%d\n",getValAtAddress(sub_ark,add_ptr+2,16));
+				//printf("Next:%d\n",getValAtAddress(sub_ark,add_ptr+4,16));
+				//printf("\tUnknown:%d",getValAtAddress(sub_ark,add_ptr+6,16));
+				//printf("\tVariable:%d",getValAtAddress(sub_ark,add_ptr+8,16));
+				//printf("\tFail Message:%d",getValAtAddress(sub_ark,add_ptr+10,16));
+				//for (int x=0;x<10;x++)
+				//	{
+				//	printf("\t\t\nProperty %d:%d",x*2,getValAtAddress(sub_ark,add_ptr+10+(x*2),16));
+				//	}
+				return 1;
+				break;
+				}
 			case	TRAPS_MARKERS: //and triggers too
 				{
-/*				printf("Index:%d\n",getValAtAddress(sub_ark,add_ptr+6,16));
-				printf("Prev:%d\n",getValAtAddress(sub_ark,add_ptr+6,16));
-				printf("Next:%d\n",getValAtAddress(sub_ark,add_ptr+6,16));
-				
-				printf("Action:%d\n",getValAtAddress(sub_ark,add_ptr+6,8));
-				PrintShockTriggerAction(getValAtAddress(sub_ark,add_ptr+6,8));
-				printf("Once?:%d\n",getValAtAddress(sub_ark,add_ptr+7,8));
-				
-				printf("Condition1:%d\n",getValAtAddress(sub_ark,add_ptr+8,8));
-				printf("Condition2:%d\n",getValAtAddress(sub_ark,add_ptr+9,8));
-				printf("Condition3:%d\n",getValAtAddress(sub_ark,add_ptr+10,8));
-				printf"Condition4:%d\n",getValAtAddress(sub_ark,add_ptr+11,8));*/
+				getShockTriggerAction(sub_ark,add_ptr,xRef,currObj.shockProperties);
+				currObj.TriggerOnce = getValAtAddress(sub_ark,add_ptr+7,8);
+				currObj.conditions[0] = getValAtAddress(sub_ark,add_ptr+8,8);
+				currObj.conditions[1] = getValAtAddress(sub_ark,add_ptr+9,8);
+				currObj.conditions[2] = getValAtAddress(sub_ark,add_ptr+10,8);
+				currObj.conditions[3] = getValAtAddress(sub_ark,add_ptr+11,8);
+				return 1;
 				break;
 				}
 			}
@@ -1383,7 +1473,7 @@ while (k<=chunkUnpackedLength)
 	add_ptr+=RecordSize;
 	k++;
 	}
-return;
+return -1;
 }
 
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x,int y)
@@ -1425,44 +1515,318 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 
 }
 
-void PrintShockTriggerAction(int TriggerType)
+void getShockTriggerAction(unsigned char *sub_ark,int add_ptr, xrefTable *xRef, int objProperties[10])
 {
+int TriggerType =getValAtAddress(sub_ark,add_ptr+6,8);
 switch (TriggerType)
 	{
 	case ACTION_DO_NOTHING :
-		{printf("\tACTION_DO_NOTHING\n");break;}
+		{
+/*		printf("\tACTION_DO_NOTHING\n");
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/			
+		break;	
+		}
 	case ACTION_TRANSPORT_LEVEL:
-		{printf("\tACTION_TRANSPORT_LEVEL\n");break;}
-	case ACTION_RESURRECTION:
-		{printf("\tACTION_RESURRECTION\n");break;}
-	case ACTION_CLONE:
-		{printf("\tACTION_CLONE\n");break;}
-	case ACTION_SET_VARIABLE:
-		{printf("\tACTION_SET_VARIABLE\n");break;}
-	case ACTION_ACTIVATE:
-		{printf("\tACTION_ACTIVATE\n");break;}
-	case ACTION_LIGHTING:
-		{printf("\tACTION_LIGHTING\n");break;}
-	case ACTION_EFFECT:
-		{printf("\tACTION_EFFECT\n");break;}
-	case ACTION_MOVING_PLATFORM:
-		{printf("\tACTION_MOVING_PLATFORM\n");break;}
-	case ACTION_CHOICE:
-		{printf("\tACTION_CHOICE\n");break;}
-	case ACTION_EMAIL:
-		{printf("\tACTION_EMAIL\n");break;}
-	case ACTION_RADAWAY:
-		{printf("\tACTION_RADAWAY\n");break;}
-	case ACTION_CHANGE_STATE:
-		{printf("\tACTION_CHANGE_STATE\n");break;}
-	case ACTION_MESSAGE:
-		{printf("\tACTION_MESSAGE\n");break;}
-	case ACTION_SPAWN:	
-		{printf("\tACTION_SPAWN\n");break;}	
-	case ACTION_CHANGE_TYPE:
-		{printf("\tCTION_CHANGE_TYPE\n");break;}
+		{
+		//printf("\tACTION_TRANSPORT_LEVEL\n");
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+		objProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+12,16);	//Target X of teleport
+		objProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+16,16); //Target Y of teleport
+		objProperties[TRIG_PROPERTY_TARGET_Z]= getValAtAddress(sub_ark,add_ptr+20,16);	//Target Z of teleport
 		
+		break;}
+	case ACTION_RESURRECTION:
+		{
+/*		printf("\tACTION_RESURRECTION\n");
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+		
+		objProperties[TRIG_PROPERTY_VALUE] =	getValAtAddress(sub_ark,add_ptr+16,16);	//Target Health
+		break;
+		}
+	case ACTION_CLONE:
+		{
+		//	000C	int16	Object to transport.
+		//	000E	int16	Delete flag?
+		//	0010	int16	Tile destination X
+		//	0014	int16	Tile destination Y
+		//	0018	int16	Destination height?		
+		//printf("\tACTION_CLONE\n");
+		//printf("\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		//printf("\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
+		//printf("\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		objProperties[TRIG_PROPERTY_OBJECT] =	getValAtAddress(sub_ark,add_ptr+0xC,16);	//obj to transport
+		objProperties[TRIG_PROPERTY_FLAG] = getValAtAddress(sub_ark,add_ptr+0x0E,16);		//Delete flag
+		objProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x14,16);	//Target X
+		objProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x18,16);	//Target Y
+		objProperties[TRIG_PROPERTY_TARGET_Z] = getValAtAddress(sub_ark,add_ptr+0x18,16);	//Target z
+		break;}
+	case ACTION_SET_VARIABLE:
+		{
+		//000C	int16	variable to set
+		//0010	int16	value
+		//0012	int16	?? action 00 set 01 add
+		//0014	int16	Optional message to receive
+/*		printf("\tACTION_SET_VARIABLE\n");
+		printf("\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		printf("\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		printf("\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		printf("\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));*/	
+		objProperties[TRIG_PROPERTY_VARIABLE] =getValAtAddress(sub_ark,add_ptr+0xC,16);
+		objProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark,add_ptr+0x10,16);
+		objProperties[TRIG_PROPERTY_OPERATION]=getValAtAddress(sub_ark,add_ptr+0x12,16);
+		objProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x14,16);
+		break;
+		}
+	case ACTION_ACTIVATE:
+		{
+		//000C	int16	1st object to activate.
+		//000E	int16	Delay before activating object 1.
+		//0010	...	Up to 4 objects and delays stored here.		
+		//printf("\tACTION_ACTIVATE\n");
+
+		//printf("\t\t1st Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		//printf("1st Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0xe,16));
+
+		//printf("\t\t2nd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x10,16));		
+		//printf("2nd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		//
+		//printf("\t\t3rd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("3rd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		//
+		//printf("\t\t4th Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x18,16));		
+		//printf("4th Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x1A,16));	
+		objProperties[0] = getValAtAddress(sub_ark,add_ptr+0xC,16)		;					
+		objProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
+		objProperties[2] = getValAtAddress(sub_ark,add_ptr+0x10,16)		;
+		objProperties[3] = getValAtAddress(sub_ark,add_ptr+0x12,16)		;
+		objProperties[4] = getValAtAddress(sub_ark,add_ptr+0x14,16)		;
+		objProperties[5] = getValAtAddress(sub_ark,add_ptr+0x16,16)		;
+		objProperties[6] = getValAtAddress(sub_ark,add_ptr+0x18,16)		;
+		objProperties[7] = getValAtAddress(sub_ark,add_ptr+0x1A,16)		;
+		break;
+		}
+	case ACTION_LIGHTING:
+		{
+		//000C	int16	Control point 1
+		//000E	int16	Control point 2
+		//	...	?
+		//printf("\tACTION_LIGHTING\n");
+		//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+		objProperties[TRIG_PROPERTY_CONTROL_1] 	= getValAtAddress(sub_ark,add_ptr+12,16);
+		objProperties[TRIG_PROPERTY_CONTROL_2] 	= getValAtAddress(sub_ark,add_ptr+14,16);
+		break;
+		}
+	case ACTION_EFFECT:
+		{
+/*		printf("\tACTION_EFFECT\n");
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/	
+		break;}
+	case ACTION_MOVING_PLATFORM:
+		{
+		//000C	int16	Tile x coord of platform
+		//0010	int16	Tile y coord of platform
+		//0014	int16	Target floor height
+		//0016	int16	Target ceiling height
+		//0018	int16	Speed
+		//printf("\tACTION_MOVING_PLATFORM\n");
+		//printf("\t\tTileX of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tTileY of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tTarget floor height:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("\t\tTarget ceiling height:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		//printf("\t\tSpeed:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		objProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x0C,16);
+		objProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x10,16);
+		objProperties[TRIG_PROPERTY_FLOOR] = getValAtAddress(sub_ark,add_ptr+0x14,16);
+		objProperties[TRIG_PROPERTY_CEILING] = getValAtAddress(sub_ark,add_ptr+0x16,16);
+		objProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
+		break;
+		
+		}
+	case ACTION_CHOICE:
+		{
+		//000C	int16	Trigger 1
+		//0010	int16	Trigger 2
+/*		printf("\tACTION_CHOICE\n");
+		printf("\t\tTrigger1:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		printf("\t\tTrigger2:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));	
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+		objProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark,add_ptr+0x0C,16);	
+		objProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark,add_ptr+0x10,16);	
+		break;
+		}
+	case ACTION_EMAIL:
+		{
+		//printf("\tACTION_EMAIL\n");
+		//	0F Player receives email
+		//000C	int16	Chunk no. of email (offset from 2441 0x0989)
+		//printf("\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
+		objProperties[TRIG_PROPERTY_EMAIL] =getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441;
+		break;
+		
+		}
+	case ACTION_RADAWAY:
+		{
+		//printf("\tACTION_RADAWAY\n");
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+		break;
+		}
+	case ACTION_CHANGE_STATE:
+		{
+		//printf("\tACTION_CHANGE_STATE\n");
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+		break;
+		}
+	case ACTION_MESSAGE:
+		{
+		//16 Trap message
+		//000C	int16	"Success" message
+		//0010	int16	"Fail" message
+		//printf("\tACTION_MESSAGE\n");
+		//	printf("\t\tSuccess Message%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tFail Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		objProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x0C,16);
+		objProperties[TRIG_PROPERTY_MESSAGE2]=getValAtAddress(sub_ark,add_ptr+0x10,16);
+		break;
+		}
+	case ACTION_SPAWN:	
+		{
+		//000C	int32	Class/subclass/type of object to spawn
+		//0010	int16	Control point 1 (object)
+		//0012	int16	Control point 2 (object)
+		//0014		??
+		//0018		??	
+		//printf("\tACTION_SPAWN\n");
+		//printf("\t\Class-sub-type to spawn:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,32));
+		//printf("\t\tControl point object1:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tControl point object2:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));		
+		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));	
+		objProperties[TRIG_PROPERTY_TYPE]=getValAtAddress(sub_ark,add_ptr+0x0C,32);
+		objProperties[TRIG_PROPERTY_CONTROL_1]=getValAtAddress(sub_ark,add_ptr+0x10,16);
+		objProperties[TRIG_PROPERTY_CONTROL_1]=getValAtAddress(sub_ark,add_ptr+0x12,16);
+		break;
+		}	
+	case ACTION_CHANGE_TYPE:
+		{
+		//000C	int16	Object ID to change.
+		//0010	int8	New type.
+		//0012		??
+		//printf("\tACTION_CHANGE_TYPE\n");
+		//printf("\t\Object to Change:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tNew Type:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,8));
+		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));	
+			
+		objProperties[TRIG_PROPERTY_OBJECT] =getValAtAddress(sub_ark,add_ptr+0x0C,16);
+		objProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
+		break;
+		}
+	default:
+		{
+		//printf("\tUnknown triggeraction:%d\n",TriggerType);
+		}	
 	
 	}
 
+}
+
+int LookupxRefTable(xrefTable *xref,int x, int y, int MasterIndex, int tableSize)
+{
+//Gets the index of the xref table at those xy coords for that particular master index
+//Ugly but I want to get the specific table for that xy and object.
+for (int i = 0; i <tableSize;i++)
+	{
+	if ((xref[i].tileX == x) && (xref[i].tileY == y) && (xref[i].MstIndex == MasterIndex) )
+		{
+		return i;
+		}
+	}
+return -1;
+}
+
+void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace)
+	{
+	if ((indexToFind==0) && (linkToReplace ==0))
+		{return;}
+	for (int i=0; i<tableSize;i++)
+		{
+		if (xref[i].next == indexToFind)
+			{
+			xref[i].next =linkToReplace;
+			}
+		}
+	}
+	
+void replaceMapLink(tile levelInfo[64][64], xrefTable *xref, int tableSize, int indexToFind, int linkToReplace)
+{
+	if ((indexToFind==0) && (linkToReplace ==0))
+		{return;}
+		
+	for (int x=0;x<64;x++)
+		{
+		for(int y=0;y<64;y++)
+		{
+			{
+			if (levelInfo[x][y].indexObjectList == indexToFind)
+				{
+				levelInfo[x][y].indexObjectList=linkToReplace;
+				}
+			}
+		}
+	}
 }

@@ -93,13 +93,17 @@ int State;
 //int next;	//Next object in this list
 //int tileX;
 //int tileY;
-int extends;   //into another tile
-
-//Further generic properties for data pulled back from subclasse blocks.
-int Property1;
-int Property2;
-int Property3;
-   	
+int duplicate;   //when it extends into another tile
+int TriggerOnce;
+//Further generic properties for data pulled back from subclass blocks.
+//int Property0;
+//int Property1;
+//int Property2;
+//int Property3;
+//int Property4;
+//int mstrIndex;	//Temp while I sort out ids in shock
+int shockProperties[10]; 
+int conditions[4];  	
 };
 
 
@@ -194,6 +198,29 @@ int Property3;
 #define  AN_UNLOCK_TRIGGER 60
 #define  A_FOUNTAIN	61
 
+
+/*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
+#define	SHOCK_TRIGGER_ENTRY			100	//Player enters trigger's tile
+#define	SHOCK_TRIGGER_NULL			101	//Not set off automatically, must be explicitly activated by a switch or another trigger
+#define	SHOCK_TRIGGER_FLOOR			102
+#define	SHOCK_TRIGGER_PLAYER_DEATH	103
+#define	SHOCK_TRIGGER_DEATHWATCH	104	//Object is destroyed / dies
+#define	SHOCK_TRIGGER_AOE_ENTRY		105
+#define	SHOCK_TRIGGER_AOE_CONTINOUS	106
+#define	SHOCK_TRIGGER_AI_HINT		107
+#define	SHOCK_TRIGGER_LEVEL			108	//Player enters level
+#define	SHOCK_TRIGGER_CONTINUOUS	109
+#define	SHOCK_TRIGGER_REPULSOR		110	//Repulsor lift floor
+#define	SHOCK_TRIGGER_ECOLOGY		111
+#define	SHOCK_TRIGGER_SHODAN		112
+#define	SHOCK_TRIGGER_TRIPBEAM		113
+#define	SHOCK_TRIGGER_BIOHAZARD		114
+#define	SHOCK_TRIGGER_RADHAZARD		115
+#define	SHOCK_TRIGGER_CHEMHAZARD	116
+#define	SHOCK_TRIGGER_MAPNOTE		117	//Map note placed by player (presumably)
+#define	SHOCK_TRIGGER_MUSIC			118
+
+
 //System Shock object classes
 #define GUNS_WEAPONS		0
 #define AMMUNITION		1
@@ -228,6 +255,8 @@ int Property3;
 #define CONTAINERS_CORPSES_OFFSET	4023
 #define CRITTERS_OFFSET	4043
 
+
+
 /*SHOCK TRIGGER ACTION TYPES per ssspecs*/
 #define ACTION_DO_NOTHING 0 
 #define ACTION_TRANSPORT_LEVEL	1
@@ -245,6 +274,34 @@ int Property3;
 #define ACTION_MESSAGE	22
 #define ACTION_SPAWN	23		
 #define ACTION_CHANGE_TYPE	35
+
+/*Some friendly array indices for shock objProperties array*/
+//Software
+#define SOFT_PROPERTY_VERSION 0
+#define SOFT_PROPERTY_LOG 9
+#define SOFT_PROPERTY_LEVEL 2
+
+//Triggers
+#define TRIG_PROPERTY_OBJECT		0
+#define TRIG_PROPERTY_TARGET_X	1
+#define TRIG_PROPERTY_TARGET_Y	2
+#define TRIG_PROPERTY_TARGET_Z	3
+#define TRIG_PROPERTY_FLAG		4
+#define TRIG_PROPERTY_VARIABLE	5
+#define TRIG_PROPERTY_VALUE		6
+#define TRIG_PROPERTY_OPERATION	7
+#define TRIG_PROPERTY_MESSAGE1	8
+#define TRIG_PROPERTY_MESSAGE2	9
+#define TRIG_PROPERTY_CONTROL_1	5 
+#define TRIG_PROPERTY_CONTROL_2	6
+#define TRIG_PROPERTY_FLOOR		5 
+#define TRIG_PROPERTY_CEILING	6
+#define TRIG_PROPERTY_SPEED		7 
+#define TRIG_PROPERTY_TRIG_1		5
+#define TRIG_PROPERTY_TRIG_2		6
+#define TRIG_PROPERTY_EMAIL		9
+#define TRIG_PROPERTY_TYPE		8
+
 
 struct objectMaster
 {
@@ -268,8 +325,28 @@ int objSubClassIndex;
 //int objSubClassIndex;
 //char desc[80];
 //}shockObjectMaster;
+struct xrefTable
+{
+int tileX;// position
+int	tileY;// position
+int next;
+int	MstIndex;// into master object table
+int nextTile; //objects in next tile
+int duplicate;
+int duplicateAssigned;
+int duplicateNextAssigned;
+};
 
-
+struct mstTable
+{
+int index;
+int inuse;
+int objectclass;
+int objectsubclass;
+int subclasslink;
+int xRef;
+int nextlink;
+};
 
 void EntityRotation(int heading);
 void AttachToJoint(ObjectItem &currobj);

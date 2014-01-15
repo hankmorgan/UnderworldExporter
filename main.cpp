@@ -45,7 +45,6 @@ extern int levelNo;
 int main()
 {
 
-
 int game = SHOCK;
 //int mode = D3_MODE;
 int mode = ASCII_MODE;
@@ -287,6 +286,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
 			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
 			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
+			
 			setDoorBits(LevelInfo,objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;

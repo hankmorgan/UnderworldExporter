@@ -490,7 +490,7 @@ void BuildScriptsShock(int game,tile LevelInfo[64][64],ObjectItem objList[1600],
 												,objList[nextShockObj].tileX
 												,objList[nextShockObj].tileY
 												,objList[nextShockObj].index
-												,objList[nextShockObj].Property2);
+												,objList[nextShockObj].shockProperties[SOFT_PROPERTY_LOG]);
 							}
 						nextShockObj=objList[nextShockObj].next ;
 						}

@@ -37,7 +37,7 @@ if (objectMasters[currObj.item_id].isSet ==1)
 
 long printShockObject(ObjectItem &currObj)
 {
-printf("%s-",objectMasters[currObj.item_id].desc);
+printf("Index:%d,%s-",currObj.index, objectMasters[currObj.item_id].desc);
 return currObj.next;
 }
 
@@ -316,6 +316,7 @@ if (game == SHOCK)
 		printf ("\n");
 		for (x=0; x<64;x++)
 			{
+
 			if(LevelInfo[x][y].indexObjectList !=0)
 				{
 				//printf("\nAt tile x=%d, y=%d :",x,y);
@@ -349,13 +350,13 @@ if (game == SHOCK)
 	//										,objList[nextShockObj].tileX
 	//										,objList[nextShockObj].tileY
 	//										,objList[nextShockObj].index
-	//										,objList[nextShockObj].Property2);
+	//										,objList[nextShockObj].Property1);
 	//					//printf("%s %d %d %d %d\n",
 	//					//	objectMasters[objList[nextShockObj].item_id].desc 
 	//					//	,objList[nextShockObj].index
 	//					//	,objList[nextShockObj].tileX
 	//					//	,objList[nextShockObj].tileY
-	//					//	,objList[nextShockObj].Property2
+	//					//	,objList[nextShockObj].Property1
 	//					//	 );
 	//					}
 	//				nextShockObj=objList[nextShockObj].next ;
