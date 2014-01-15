@@ -220,7 +220,6 @@ int conditions[4];
 #define	SHOCK_TRIGGER_MAPNOTE		117	//Map note placed by player (presumably)
 #define	SHOCK_TRIGGER_MUSIC			118
 
-
 //System Shock object classes
 #define GUNS_WEAPONS		0
 #define AMMUNITION		1
@@ -280,6 +279,12 @@ int conditions[4];
 #define SOFT_PROPERTY_VERSION 0
 #define SOFT_PROPERTY_LOG 9
 #define SOFT_PROPERTY_LEVEL 2
+//Buttons and panels
+
+#define BUTTON_PROPERTY_TRIGGER 0
+#define BUTTON_PROPERTY_PUZZLE 1
+#define BUTTON_PROPERTY_COMBO 2
+
 
 //Triggers
 #define TRIG_PROPERTY_OBJECT		0

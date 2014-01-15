@@ -235,7 +235,8 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPack
 		*chunkType = getValAtAddress(tmp_ark,address_pointer+5,8);	//Compression.
 		*chunkPackedLength = getValAtAddress(tmp_ark,address_pointer+6,24);
 		long chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
-		//printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",k,chunkId, chunkUnpackedLength, chunkType,chunkPackedLength,chunkContentType);
+		//printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",
+		//	k,chunkId, *chunkUnpackedLength, *chunkType,*chunkPackedLength,chunkContentType);
 		//printf("Absolute address is %d\n",AddressOfBlockStart);
 		
 		//target chunk id is 4005 + level no * 100 for levels

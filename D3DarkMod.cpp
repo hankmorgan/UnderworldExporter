@@ -2006,9 +2006,19 @@ void RenderDoorway(int game,int x,int y, tile &t , ObjectItem currDoor)
 //TODO:Define door widths in config file. 
 int doorWidth=48;
 int doorHeight =96;
-
-int offX= (x*BrushSizeX) + ((currDoor.x) * (BrushSizeX/7));//from obj position code
-int offY= (y*BrushSizeY) + ((currDoor.y) * (BrushSizeY/7));
+int resolution;
+switch (game)
+	{
+	case SHOCK:	
+		resolution =255;
+		break;
+	default:
+		resolution =7;
+		break;
+	}
+	
+int offX= (x*BrushSizeX) + ((currDoor.x) * (BrushSizeX/resolution));//from obj position code
+int offY= (y*BrushSizeY) + ((currDoor.y) * (BrushSizeY/resolution));
 
 switch (currDoor.heading)
 	{

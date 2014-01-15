@@ -1,102 +1,90 @@
 #ifndef __game3_1_script__
 #define __game3_1_script__
-void start_EMAIL_018_046_652()
+void start_EMAIL_018_046_505()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2513");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_016_042_360()
+void start_EMAIL_016_042_316()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2506");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_035_039_357()
+void start_EMAIL_035_039_317()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2510");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_018_037_416()
+void start_EMAIL_018_037_021()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2514");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_012_029_457()
+void start_EMAIL_012_029_399()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2511");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_051_029_297()
+void start_EMAIL_051_029_465()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2512");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_011_027_606()
+void start_EMAIL_012_027_474()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2517");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_012_027_605()
-{
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2517");
-$data_reader_trigger.activate($player1);
-}
-
-void start_EMAIL_038_025_583()
+void start_EMAIL_038_024_460()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2516");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_038_024_588()
-{
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2516");
-$data_reader_trigger.activate($player1);
-}
-
-void start_EMAIL_011_022_361()
+void start_EMAIL_011_022_315()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2505");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_033_022_394()
+void start_EMAIL_033_022_454()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2518");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_020_019_631()
+void start_EMAIL_020_019_485()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2504");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_029_017_592()
+void start_EMAIL_029_017_462()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2519");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_040_014_364()
+void start_EMAIL_040_014_318()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2507");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_038_011_365()
+void start_EMAIL_038_011_319()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2508");
 $data_reader_trigger.activate($player1);
 }
 
-void start_EMAIL_004_004_370()
+void start_EMAIL_004_004_321()
 {
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2509");
 $data_reader_trigger.activate($player1);
