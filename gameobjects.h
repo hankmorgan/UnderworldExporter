@@ -67,6 +67,7 @@ struct ObjectItem
    
    int joint;	//index to joint no.
    
+   int levelno;
    int tileX;	//Position of the object on the tilemap
    int tileY;
    
@@ -364,6 +365,7 @@ long nextObject(ObjectItem &currObj);
 int isLock(ObjectItem currobj);
 void createScriptCall(ObjectItem &currobj,float x,float y, float z);
 void EntityRotation(int heading);
+char *UniqueObjectName(ObjectItem currObj);
 
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;

@@ -82,7 +82,6 @@ int x; int y;
 				RenderObjectList(game,LevelInfo,objList); break;
 			case UW1:
 				RenderObjectList(game,LevelInfo,objList);
-				RenderElevator(game,LevelInfo,objList);
 				RenderLevelExits(game,LevelInfo,objList);
 				break;
 			case UW2:
@@ -103,9 +102,9 @@ int x; int y;
 						printf ("\n");
 						PrimitiveCount=0;	//resets for each entity.
 						printf("// entity %d\n", EntityCount);
-						printf("{\n\"classname\" \"atdm:liquid_water\"");
-						printf("\n\"name\" \"atdm_liquid_water_%02d\"",EntityCount);
-						printf("\n\"model\" \"atdm_liquid_water_%02d\"",EntityCount);
+						printf("{\n\"classname\" \"atdm:liquid_water\"\n");
+						printf("\n\"name\" \"atdm_liquid_water_%02d\"\n",EntityCount);
+						printf("\n\"model\" \"atdm_liquid_water_%02d\"\n",EntityCount);
 						printf("\n\"underwater_gui\" \"guis\underwater\underwater_green_thinmurk.gui\"\n");	
 						tile t = LevelInfo[x][y];	//temp tile for rendering.
 						//Test each face for waterfalls. Open -> open of different height or slope that does not go in the same direction
@@ -2007,6 +2006,9 @@ void RenderDoorway(int game,int x,int y, tile &t , ObjectItem currDoor)
 int doorWidth=48;
 int doorHeight =96;
 int resolution;
+float BrushX=BrushSizeX;
+float BrushY=BrushSizeY;
+
 switch (game)
 	{
 	case SHOCK:	
@@ -2017,8 +2019,8 @@ switch (game)
 		break;
 	}
 	
-int offX= (x*BrushSizeX) + ((currDoor.x) * (BrushSizeX/resolution));//from obj position code
-int offY= (y*BrushSizeY) + ((currDoor.y) * (BrushSizeY/resolution));
+float offX= (x*BrushX) + ((currDoor.x) * (BrushX/resolution));//from obj position code
+float offY= (y*BrushY) + ((currDoor.y) * (BrushY/resolution));
 
 switch (currDoor.heading)
 	{
@@ -2035,26 +2037,26 @@ switch (currDoor.heading)
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
-			printf ("( 1 0 0 %d )",-((offX+2)));
+			printf ("( 1 0 0 %f )",-((offX+2)));
 			getWallTextureName(t,fEAST,0);
 			//north face 
-			printf ("( 0 1 0 %d )",-((y+1)*BrushSizeY));
+			printf ("( 0 1 0 %f )",-((y+1)*BrushSizeY));
 			getWallTextureName(t,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -(t.floorHeight*BrushSizeZ + doorHeight) );	
+			printf ("( 0 0 1 %f )", -(t.floorHeight*BrushSizeZ + doorHeight) );	
 			getFloorTextureName(t,fTOP);
 			//west face
-			printf ("( -1 0 0 %d )", +((offX-2)));
+			printf ("( -1 0 0 %f )", +((offX-2)));
 			getWallTextureName(t,fWEST,0);
 			//south face
 			if (currDoor.heading == EAST)
-				{printf ("( 0 -1 0 %d )", +(offY));}
+				{printf ("( 0 -1 0 %f )", +(offY));}
 			else
-				printf ("( 0 -1 0 %d )", +(offY)+doorWidth);
+				printf ("( 0 -1 0 %f )", +(offY)+doorWidth);
 			
 			getWallTextureName(t, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", t.floorHeight*BrushSizeZ);	
+			printf ("( 0 0 -1 %f )", t.floorHeight*BrushSizeZ);	
 			getFloorTextureName(t, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");		
@@ -2063,22 +2065,22 @@ switch (currDoor.heading)
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
-			printf ("( 1 0 0 %d )",-((offX+2)));
+			printf ("( 1 0 0 %f )",-((offX+2)));
 			getWallTextureName(t,fEAST,0);
 			//north face 
-			printf ("( 0 1 0 %d )",-((y+1)*BrushSizeY));
+			printf ("( 0 1 0 %f )",-((y+1)*BrushSizeY));
 			getWallTextureName(t,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -BrushSizeZ * (CEILING_HEIGHT+1) );	
+			printf ("( 0 0 1 %f )", -BrushSizeZ * (CEILING_HEIGHT+1) );	
 			getFloorTextureName(t,fTOP);
 			//west face
-			printf ("( -1 0 0 %d )", +((offX-2)));
+			printf ("( -1 0 0 %f )", +((offX-2)));
 			getWallTextureName(t,fWEST,0);
 			//south face
-			printf ("( 0 -1 0 %d )", +(y*BrushSizeY));
+			printf ("( 0 -1 0 %f )", +(y*BrushSizeY));
 			getWallTextureName(t, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", (t.floorHeight*BrushSizeZ)+doorHeight);	
+			printf ("( 0 0 -1 %f )", (t.floorHeight*BrushSizeZ)+doorHeight);	
 			getFloorTextureName(t, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");			
@@ -2087,29 +2089,29 @@ switch (currDoor.heading)
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
-			printf ("( 1 0 0 %d )",-((offX+2)));
+			printf ("( 1 0 0 %f )",-((offX+2)));
 			getWallTextureName(t,fEAST,0);
 			//north face 
 			if (currDoor.heading == EAST)
 				{
-				printf ("( 0 1 0 %d )",-(offY-doorWidth));	
+				printf ("( 0 1 0 %f )",-(offY-doorWidth));	
 				}
 			else
 				{
-				printf ("( 0 1 0 %d )",-(offY));
+				printf ("( 0 1 0 %f )",-(offY));
 				}			
 			getWallTextureName(t,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -(t.floorHeight*BrushSizeZ + doorHeight) );
+			printf ("( 0 0 1 %f )", -(t.floorHeight*BrushSizeZ + doorHeight) );
 			getFloorTextureName(t,fTOP);
 			//west face
-			printf ("( -1 0 0 %d )", +((offX-2)));
+			printf ("( -1 0 0 %f )", +((offX-2)));
 			getWallTextureName(t,fWEST,0);
 			//south face
-			printf ("( 0 -1 0 %d )", +(y * BrushSizeY));
+			printf ("( 0 -1 0 %f )", +(y * BrushSizeY));
 			getWallTextureName(t, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", t.floorHeight*BrushSizeZ);	
+			printf ("( 0 0 -1 %f )", t.floorHeight*BrushSizeZ);	
 			getFloorTextureName(t, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");			
@@ -2129,36 +2131,36 @@ switch (currDoor.heading)
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
-			printf ("( 1 0 0 %d )",-((offX+2)));
+			printf ("( 1 0 0 %f )",-((offX+2)));
 			getWallTextureName(Tmpt,fEAST,0);
 			//north face 
 			if (currDoor.heading == EAST)
 				{
-				printf ("( 0 1 0 %d )",-((offY)));
+				printf ("( 0 1 0 %f )",-((offY)));
 				}
 			else
 				{
-				printf ("( 0 1 0 %d )",-((offY+doorWidth)));
+				printf ("( 0 1 0 %f )",-((offY+doorWidth)));
 				}
 			getWallTextureName(Tmpt,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -((t.floorHeight*BrushSizeZ)+doorHeight) );	
+			printf ("( 0 0 1 %f )", -((t.floorHeight*BrushSizeZ)+doorHeight) );	
 			getWallTextureName(Tmpt,fTOP,0);
 			//west face
-			printf ("( -1 0 0 %d )", +((offX-1)));
+			printf ("( -1 0 0 %f )", +((offX-1)));
 			getWallTextureName(Tmpt,fWEST,0);
 			//south face
 			if (currDoor.heading == EAST)
 				{
-				printf ("( 0 -1 0 %d )", +(offY-doorWidth));
+				printf ("( 0 -1 0 %f )", +(offY-doorWidth));
 				}
 			else
 				{
-				printf ("( 0 -1 0 %d )", +(offY));
+				printf ("( 0 -1 0 %f )", +(offY));
 				}
 			getWallTextureName(Tmpt, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", (t.floorHeight*BrushSizeZ));	
+			printf ("( 0 0 -1 %f )", (t.floorHeight*BrushSizeZ));	
 			getWallTextureName(Tmpt, fBOTTOM,0);
 			//printf("0"); 
 			printf ("}\n}\n");			
@@ -2180,29 +2182,29 @@ switch (currDoor.heading)
 			//east face 
 			if (currDoor.heading == NORTH)
 				{
-				printf ("( 1 0 0 %d )",-(offX-doorWidth));
+				printf ("( 1 0 0 %f )",-(offX-doorWidth));
 								
 				}
 			else
 				{
-				printf ("( 1 0 0 %d )",-(offX));		
+				printf ("( 1 0 0 %f )",-(offX));		
 				}
 			
 			getWallTextureName(t,fEAST,0);
 			//north face 
-			printf ("( 0 1 0 %d )",-(offY+2));
+			printf ("( 0 1 0 %f )",-(offY+2));
 			getWallTextureName(t,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -(t.floorHeight*BrushSizeZ + doorHeight) );	
+			printf ("( 0 0 1 %f )", -(t.floorHeight*BrushSizeZ + doorHeight) );	
 			getFloorTextureName(t,fTOP);
 			//west face
-			printf ("( -1 0 0 %d )", +((x)*BrushSizeX));
+			printf ("( -1 0 0 %f )", +((x)*BrushSizeX));
 			getWallTextureName(t,fWEST,0);
 			//south face
-			printf ("( 0 -1 0 %d )", +(offY-2));
+			printf ("( 0 -1 0 %f )", +(offY-2));
 			getWallTextureName(t, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", t.floorHeight * BrushSizeZ);	//to go underneath
+			printf ("( 0 0 -1 %f )", t.floorHeight * BrushSizeZ);	//to go underneath
 			getFloorTextureName(t, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");
@@ -2210,22 +2212,22 @@ switch (currDoor.heading)
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
-			printf ("( 1 0 0 %d )",-((x+1)*BrushSizeX));
+			printf ("( 1 0 0 %f )",-((x+1)*BrushSizeX));
 			getWallTextureName(t,fEAST,0);
 			//north face 
-			printf ("( 0 1 0 %d )",-(offY+2));
+			printf ("( 0 1 0 %f )",-(offY+2));
 			getWallTextureName(t,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -BrushSizeZ * (CEILING_HEIGHT+1) );	
+			printf ("( 0 0 1 %f )", -BrushSizeZ * (CEILING_HEIGHT+1) );	
 			getFloorTextureName(t,fTOP);
 			//west face
-			printf ("( -1 0 0 %d )", +(x*BrushSizeX));
+			printf ("( -1 0 0 %f )", +(x*BrushSizeX));
 			getWallTextureName(t,fWEST,0);
 			//south face
-			printf ("( 0 -1 0 %d )", +(offY-2));
+			printf ("( 0 -1 0 %f )", +(offY-2));
 			getWallTextureName(t, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", (t.floorHeight*BrushSizeZ) +doorHeight);	//to go underneath
+			printf ("( 0 0 -1 %f )", (t.floorHeight*BrushSizeZ) +doorHeight);	//to go underneath
 			getFloorTextureName(t, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");
@@ -2233,29 +2235,29 @@ switch (currDoor.heading)
 			printf("// primitive %d\n",PrimitiveCount++);
 			printf("{\nbrushDef3\n{\n");
 			//east face 
-			printf ("( 1 0 0 %d )",-((x+1)*BrushSizeX));
+			printf ("( 1 0 0 %f )",-((x+1)*BrushSizeX));
 			getWallTextureName(t,fEAST,0);
 			//north face 
-			printf ("( 0 1 0 %d )",-(offY+2));
+			printf ("( 0 1 0 %f )",-(offY+2));
 			getWallTextureName(t,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -(t.floorHeight*BrushSizeZ + doorHeight) );	
+			printf ("( 0 0 1 %f )", -(t.floorHeight*BrushSizeZ + doorHeight) );	
 			getFloorTextureName(t,fTOP);
 			//west face
 			if (currDoor.heading == NORTH)
 				{
-				printf ("( -1 0 0 %d )", +(offX ));
+				printf ("( -1 0 0 %f )", +(offX ));
 				}
 			else
 				{
-				printf ("( -1 0 0 %d )", +(offX +doorWidth ));
+				printf ("( -1 0 0 %f )", +(offX +doorWidth ));
 				}
 			getWallTextureName(t,fWEST,0);
 			//south face
-			printf ("( 0 -1 0 %d )", +(offY-2));
+			printf ("( 0 -1 0 %f )", +(offY-2));
 			getWallTextureName(t, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", t.floorHeight * BrushSizeZ);	//to go underneath
+			printf ("( 0 0 -1 %f )", t.floorHeight * BrushSizeZ);	//to go underneath
 			getFloorTextureName(t, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");
@@ -2277,34 +2279,34 @@ switch (currDoor.heading)
 			//east face 
 			if (currDoor.heading == NORTH)
 				{
-				printf ("( 1 0 0 %d )",-(offX));	
+				printf ("( 1 0 0 %f )",-(offX));	
 				}
 			else
 				{
-				printf ("( 1 0 0 %d )",-(offX +doorWidth));	
+				printf ("( 1 0 0 %f )",-(offX +doorWidth));	
 				}
 			getWallTextureName(Tmpt,fEAST,0);
 			//north face 
-			printf ("( 0 1 0 %d )",-(offY+2));
+			printf ("( 0 1 0 %f )",-(offY+2));
 			getWallTextureName(Tmpt,fNORTH,0);
 			//top face
-			printf ("( 0 0 1 %d )", -(t.floorHeight*BrushSizeZ + doorHeight));	
+			printf ("( 0 0 1 %f )", -(t.floorHeight*BrushSizeZ + doorHeight));	
 			getFloorTextureName(Tmpt,fTOP);
 			//west face
 			if (currDoor.heading==NORTH)
 				{
-				printf ("( -1 0 0 %d )", +(offX-doorWidth));
+				printf ("( -1 0 0 %f )", +(offX-doorWidth));
 				}
 			else
 				{
-				printf ("( -1 0 0 %d )", +(offX));
+				printf ("( -1 0 0 %f )", +(offX));
 				}
 			getWallTextureName(Tmpt,fWEST,0);
 			//south face
-			printf ("( 0 -1 0 %d )", +(offY-2));
+			printf ("( 0 -1 0 %f )", +(offY-2));
 			getWallTextureName(Tmpt, fSOUTH,0);
 			//bottom face
-			printf ("( 0 0 -1 %d )", (t.floorHeight*BrushSizeZ));	//to go underneath
+			printf ("( 0 0 -1 %f )", (t.floorHeight*BrushSizeZ));	//to go underneath
 			getFloorTextureName(Tmpt, fBOTTOM);
 			//printf("0"); 
 			printf ("}\n}\n");
@@ -2418,33 +2420,6 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 		}
 	}
 
-void RenderElevator(int game, tile LevelInfo[64][64], ObjectItem objList[1600])		
-{
-//Unneeded?
-	for (int y=0; y<=63;y++) 
-		{
-		for (int x=0; x<=63;x++)
-			{
-			if (LevelInfo[x][y].hasElevator==1)
-				{
-				//objList[LevelInfo[x][y].ElevatorIndex].tileX=x;
-				//objList[LevelInfo[x][y].ElevatorIndex].tileY=y;
-				//printf("\n// entity %d\n{\n",EntityCount);
-				//printf("\"classname\" \"func_mover\"\n");
-				//printf("\"name\" \"elevator_%02d_%02d\"\n",x,y);
-				//printf("\"model\" \"elevator_%02d_%02d\"\n",x,y);
-				//PrimitiveCount=0;
-				//int floor =LevelInfo[x][y].floorHeight;
-				////LevelInfo[x][y].floorHeight = -8;	
-				//RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0);
-				//LevelInfo[x][y].floorHeight = floor;
-				//printf("\n}");
-				//EntityCount++;
-				}	
-			}
-		}
-}
-
 void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor)
 {
 //
@@ -2483,7 +2458,7 @@ void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]
 				{
 				//first a trigger to reference in scripting.
 				printf("// entity %d\n", EntityCount++);
-				printf("{\n\"classname\" \"trigger_relay\"");
+				printf("{\n\"classname\" \"trigger_relay\"\n");
 				printf("\"name\" \"%s_%03d_%03d\"\n","trigger_endlevel" ,objList[i].tileX,objList[i].tileY);		
 				printf("\n\"origin\" \"2500 2500 120\"\n");
 				printf("\"target\" \"%s_%03d_%03d\"\n","endlevel" ,objList[i].tileX,objList[i].tileY);		
@@ -2527,9 +2502,9 @@ void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]
 				if (level==levelNo)
 					{	//on this level
 						printf("// entity %d\n", EntityCount++);
-						printf("{\n\"classname\" \"func_teleporter\"");
+						printf("{\n\"classname\" \"func_teleporter\"\n");
 						printf("\"name\" \"%s_%03d_%03d\"\n","entrance" ,tileX,tileY);		
-						printf("\n\"origin\" \"%d %d %d\"", tileX * BrushSizeX+(BrushSizeX/2),tileY*BrushSizeY+(BrushSizeY/2),(LevelInfo[tileX][tileY].floorHeight)* BrushSizeZ + 30);		
+						printf("\n\"origin\" \"%d %d %d\"\n", tileX * BrushSizeX+(BrushSizeX/2),tileY*BrushSizeY+(BrushSizeY/2),(LevelInfo[tileX][tileY].floorHeight)* BrushSizeZ + 30);		
 						printf("}\n");	
 					}
 				}

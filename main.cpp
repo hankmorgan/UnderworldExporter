@@ -45,7 +45,7 @@ extern int levelNo;
 int main()
 {
 
-int game = SHOCK;
+int game = UW1;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;

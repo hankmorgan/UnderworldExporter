@@ -16,19 +16,21 @@ if (objectMasters[currObj.item_id].isSet ==1)
 	{
 	if (TableFormat==0)
 		{
-		printf("Index:%d,Type:%d(%s),TileX=%d,TileY=%d,x=%d,y=%d,z=%d,heading=%d,qual=%d,owner=%d,link=%d,flags=%d,val=%d"
+		printf("Index:%d,Type:%d(%s),TileX=%d,TileY=%d,x=%d,y=%d,z=%d,heading=%d,qual=%d,owner=%d,link=%d,flags=%d,val=%d,angle=(%d,%d,%d)"
 		,currObj.index ,currObj.item_id,objectMasters[currObj.item_id].desc,
 		currObj.tileX,currObj.tileY,
 		currObj.x,currObj.y,currObj.zpos
-		,currObj.heading,currObj.quality,currObj.owner, currObj.link,currObj.flags,value);
+		,currObj.heading,currObj.quality,currObj.owner, currObj.link,currObj.flags,value,currObj.Angle1,currObj.Angle2,currObj.Angle3);
+
 		}
 	else
 		{
-		printf("%d\t%d\t%20s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d"
+		printf("%d\t%d\t%20s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d"
 		,currObj.index ,currObj.item_id,objectMasters[currObj.item_id].desc,
 		currObj.tileX,currObj.tileY,
 		currObj.x,currObj.y,currObj.zpos
-		,currObj.heading,currObj.quality,currObj.owner, currObj.link,currObj.flags,value);
+		,currObj.heading,currObj.quality,currObj.owner, currObj.link,currObj.flags,value,currObj.Angle1,currObj.Angle2,currObj.Angle3);
+
 		}
 	//printf("[id=%d Type=%d(%.20s)(%d,%d,%d)%ddeg qual=%d link(q)=%d owner(s)=%d flags=%d isquant=%d]",currObj.index,currObj.item_id,objectMasters[currObj.item_id].desc,currObj.x ,currObj.y,currObj.zpos, currObj.heading ,currObj.quality,currObj.link,currObj.owner,currObj.flags,currObj.is_quant );
 	}

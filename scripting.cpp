@@ -15,16 +15,16 @@ FILE *fBODY;
 
 int lookupString(int BlockNo, int StringNo, char StringOut[255] );
 
-void EMAILScript(char objName[80], int x, int y, int objId, int logChunk)
+void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 {
-	fprintf(fBODY,"void start_%s_%03d_%03d_%03d()\n{",objName,x,y,objId);
+	fprintf(fBODY,"void start_%s()\n{",UniqueObjectName(currObj));
 	fprintf(fBODY,"\n$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_log_%04d\");",logChunk);
 	fprintf(fBODY,"\n$data_reader_trigger.activate($player1);");
 	fprintf(fBODY,"\n}\n\n");
 }
 
 
-void a_change_terrain_trapSCRIPT(char objDesc[80], int targetX, int targetY, int objId, int dimX, int dimY)
+void a_change_terrain_trapSCRIPT(ObjectItem currObj, int targetX, int targetY, int dimX, int dimY)
 {
 int i;
 int j;
@@ -35,14 +35,14 @@ for (i=0;i<dimX;i++)
 	{
 	for (j=0;j<dimY;j++)
 		{
-		fprintf(fBODY,"\t$%s_initial_%03d_%03d_%03d_%03d.remove();\n"
-			,objDesc,targetX,targetY,objId,k);
+		fprintf(fBODY,"\t$initial_%s_%03d.remove();\n"
+			,UniqueObjectName(currObj));
 		k++;
 		}
 	}
 
-	fprintf(fBODY,"\t$%s_final_%03d_%03d_%objId.show();\n"    
-		,objDesc,targetX,targetY,objId);
+	fprintf(fBODY,"\t$final%s.show();\n"    
+		,UniqueObjectName(currObj));
 }
 
 void a_delete_object_trapSCRIPT(ObjectItem objList[1600], int objectToDelete)
@@ -58,11 +58,11 @@ char pStr[255];
 
 if (lookupString(9, 64 * (targetLevelNo) + stringId ,pStr))
 	{
-	fprintf(fBODY,"\tsys.println(\"%s\");",pStr );
+	fprintf(fBODY,"\tsys.println(\"%s\");\n",pStr );
 	}
 else
 	{
-	fprintf(fBODY,"\tsys.println(\"Text trap String not found %3\");", stringId );
+	fprintf(fBODY,"\tsys.println(\"Text trap String not found %3\n\");\n", stringId );
 	}
 }
 
@@ -79,7 +79,7 @@ else
 	}
 }
 
-void a_teleport_trapSCRIPT(char objDesc[80], int x, int y, int objId, int TargetLevelNo, int triggerX, int triggerY)
+void a_teleport_trapSCRIPT(ObjectItem currObj, int x, int y, int TargetLevelNo, int triggerX, int triggerY)
 {
 if (TargetLevelNo !=0 )	//Move to another level
 	{
@@ -89,8 +89,8 @@ if (TargetLevelNo !=0 )	//Move to another level
 	}
 else
 	{
-	fprintf(fBODY,"\t$%sobjDesc_%03dx_%03dy_%03dobjId.activate($player1);\n"
-		,objDesc,x,y,objId);
+	fprintf(fBODY,"\t$%s.activate($player1);\n"
+		,UniqueObjectName(currObj));
 	}
 }
 
@@ -383,7 +383,7 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
         tobedone("A_DAMAGE_TRAP");
         break;
     case A_TELEPORT_TRAP:
-        a_teleport_trapSCRIPT(objectMasters[currObj.item_id].desc, currObj.tileX , currObj.tileY,currObj.index , currObj.zpos, *TriggerHomeX, *TriggerHomeY);
+        a_teleport_trapSCRIPT(currObj, currObj.tileX , currObj.tileY, currObj.zpos, *TriggerHomeX, *TriggerHomeY);
         break;
     case A_ARROW_TRAP:
         tobedone("A_ARROW_TRAP");
@@ -408,8 +408,9 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
         tobedone("A_PIT_TRAP");
         break;
     case A_CHANGE_TERRAIN_TRAP:
-        a_change_terrain_trapSCRIPT(objectMasters[currObj.item_id].desc, *TriggerTargetX, *TriggerTargetY, currObj.index, currObj.x , currObj.y );
-		fprintf(fMAIN, "$%s_final_%03d_%03d_%03d.hide();\n",objectMasters[currObj.item_id].desc, *TriggerTargetX, *TriggerTargetY,currObj.index );
+        a_change_terrain_trapSCRIPT(currObj,*TriggerTargetX,*TriggerTargetY,currObj.x,currObj.y);
+		//fprintf(fMAIN, "$final_%s.hide();\n",objectMasters[currObj.item_id].desc, *TriggerTargetX, *TriggerTargetY,currObj.index );
+		fprintf(fMAIN, "$final_%s.hide();\n",UniqueObjectName(currObj));
         break;
     case A_SPELLTRAP:
         tobedone("A_SPELLTRAP");
@@ -487,9 +488,7 @@ void BuildScriptsShock(int game,tile LevelInfo[64][64],ObjectItem objList[1600],
 						if (isLog(objList[nextShockObj])==1)
 							{
 							EMAILScript(objectMasters[objList[nextShockObj].item_id].desc
-												,objList[nextShockObj].tileX
-												,objList[nextShockObj].tileY
-												,objList[nextShockObj].index
+												,objList[nextShockObj]
 												,objList[nextShockObj].shockProperties[SOFT_PROPERTY_LOG]);
 							}
 						nextShockObj=objList[nextShockObj].next ;

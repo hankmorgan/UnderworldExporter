@@ -299,10 +299,10 @@
 298 9 5 2 DATAFLOW_ROUTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 299 10 0 0 BLAST_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 300 10 0 1 SERVICE_ACCESS_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-301 10 0 2 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-302 10 0 3 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-303 10 0 4 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-304 10 0 5 DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+301 10 0 2 DOOR atdm:door_96x48_3hinge model 4
+302 10 0 3 DOOR atdm:door_96x48_3hinge model 4
+303 10 0 4 DOOR atdm:door_96x48_3hinge model 4
+304 10 0 5 DOOR atdm:door_96x48_3hinge model 4
 305 10 0 6 STORAGE_ROOM_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 306 10 0 7 SHIELDED_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 307 10 0 8 EXECUTIVE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
@@ -334,9 +334,9 @@
 333 10 4 3 VERTICAL_OPEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 334 10 4 4 VERTICAL_SPLIT_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 335 10 4 5 DARK_LORD_TUAOHTUA models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-336 10 4 6 HIDDEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-337 10 4 7 HIDDEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-338 10 4 8 HIDDEN_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+336 10 4 6 HIDDEN_DOOR atdm:mover_door model 29
+337 10 4 7 HIDDEN_DOOR atdm:mover_door model 29
+338 10 4 8 HIDDEN_DOOR atdm:mover_door model 29
 339 10 4 9 REPORT_THIS_AS_A_BUG models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 340 11 0 0 INACTIVE_EMERGENCY_SIGNAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 341 11 0 1 ACTIVE_EMERGENCY_SIGNAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

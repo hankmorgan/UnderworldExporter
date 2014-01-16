@@ -118,7 +118,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 				{//just the basic name. with no properties.
 				printf("\n// entity %d\n{\n",EntityCount);
 				printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-				printf("\"name\" \"%s_%03d\"\n",objectMasters[currobj.item_id].desc,EntityCount);	
+				printf("\"name\" \"%s_%04d\"\n",objectMasters[currobj.item_id].desc,EntityCount);	
 				//position
 				printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 				EntityRotation(currobj.heading);
@@ -259,9 +259,9 @@ void createScriptCall(ObjectItem &currobj,float x,float y, float z)
 {//Entity for running a script when triggered.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"atdm:target_callscriptfunction\"\n");
-	printf("\"name\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+	printf("\"name\" \"runscript_%s\"\n", UniqueObjectName(currobj));	
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
-	printf("\"call\" \"start_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+	printf("\"call\" \"start_%s\"\n", UniqueObjectName(currobj));
 	printf("}\n");
 	EntityCount++;
 }
@@ -278,15 +278,14 @@ void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"func_static\"\n");
 		//print position+name
-		//printf("\"name\" \"entity_%03d\"\n",EntityCount);
-		printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+		printf("\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 		EntityRotation(currobj.heading);
 		AttachToJoint(currobj);
 		if (currobj.link!=0)
 			{
 			printf("\"frobable\" \"%d\"\n",1);	
-			printf("\"frob_action_script\" \"start_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+			printf("\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));	
 			}
 		printf("\n\"model\" \"%s\"\n}\n",objectMasters[currobj.item_id].path);
 		EntityCount++;
@@ -303,7 +302,7 @@ void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, 
 //objectOwnerEntity.
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	printf("\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.npc_whoami,EntityCount);
+	printf("\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	switch (currobj.npc_attitude)
 		{	
 		case 0:	//hostile
@@ -592,14 +591,14 @@ void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currob
 //Need to pass desc/path for generic handling
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+	printf("\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	printf("\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");	//Need to pass this in.
 	//position
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	printf("\"rotate\" \"0 0 45\"\n");
-	printf("\"interruptable\" \"0\"");
+	printf("\"interruptable\" \"0\"\n");
 	EntityRotation(currobj.heading);
-	printf("\"target\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+	printf("\"target\" \"runscript_%s\n", UniqueObjectName(currobj));
 	printf("}\n");EntityCount++;
 	createScriptCall(currobj,x,y,z);	//To run whatever actions this switch performs.
 	return;
@@ -667,20 +666,21 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, Obj
 		for(int j=0;j<=currobj.y;j++)
 			{
 
-			printf("\n// entity %d\n{\n",EntityCount);
+			printf("\n// entity %d\n{\n",EntityCount++);
 			printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 			//TODO:There is some weirdness when I try and hide water. For now I'll just ignore it.
 			//if (LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater == 0)
 			//	{
-				printf("\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
+				//printf("\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
+			printf("\"name\" \"initial_%s_%03d\"\n", UniqueObjectName(currobj),tileCount);				
 			//	}
 			//else
 			//	{//water
 			//	printf("\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
 		//		printf("\n\"underwater_gui\" \"guis\underwater\underwater_green_thinmurk.gui\"\n");
 	//			}
-			printf("\"model\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
-			printf("\"origin\" \"%f %f %f\"\n",(currobj.tileX+i)*BrushSizeX,(currobj.tileY+j)*BrushSizeY,0);														
+			printf("\"model\" \"initial_%s_%03d\"\n",UniqueObjectName(currobj),tileCount);
+			printf("\"origin\" \"%d %d %d\"\n",(currobj.tileX+i)*BrushSizeX,(currobj.tileY+j)*BrushSizeY,0);														
 			RenderDarkModTile(game,0,0,LevelInfo[currobj.tileX+i][currobj.tileY+j],LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater,0);
 			printf("\n}\n");
 			tileCount++;
@@ -690,11 +690,11 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, Obj
 	
 	//Then render a func static for how it ends up.
 	PrimitiveCount=0;
-	printf("\n// entity %d\n{\n",EntityCount);
+	printf("\n// entity %d\n{\n",EntityCount++);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	printf("\"name\" \"%s_final_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
-	printf("\"model\" \"%s_final_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
-	printf("\"origin\" \"%f %f %f\"\n",currobj.tileX*BrushSizeX,currobj.tileY*BrushSizeY,0);
+	printf("\"name\" \"final_%s\"\n",UniqueObjectName(currobj));
+	printf("\"model\" \"final_%s\"\n",UniqueObjectName(currobj));
+	printf("\"origin\" \"%d %d %d\"\n",currobj.tileX*BrushSizeX,currobj.tileY*BrushSizeY,0);
 	
 	for (int i=0;i<=currobj.x;i++)
 		{
@@ -737,10 +737,10 @@ void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj,
 		{
 		//object is a trigger
 		printf("\"classname\" \"%s\"\n", "atdm:mover_button");	//TODO:Is there something better I can use than this.
-		printf("\"target\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
+		printf("\"target\" \"runscript_%s\"\n",UniqueObjectName(currobj));	
 		}
-	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
-	printf("\"model\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index);
+	printf("\"name\" \"%s\"\n",UniqueObjectName(currobj));
+	printf("\"model\" \"%s\"\n",UniqueObjectName(currobj));
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	RenderPatch(game,currobj.tileX,currobj.tileY ,currobj.zpos,currobj.index,objList);
 	printf("\n}\n");
@@ -772,7 +772,7 @@ switch (game)
 	}
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );		
+	printf("\"name\" \"%s\"\n",UniqueObjectName(currobj));		
 	printf("\"inv_name\" \"Readable_%d\"\n", ReadableIndex);
 	switch (game)
 		{
@@ -784,7 +784,7 @@ switch (game)
 		case SHOCK:
 			{
 			printf("\"xdata_contents\" \"readables/shock/log_%03d\"\n",ReadableIndex);
-			printf("\"trigger_on_open\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	//plays the audio of this log
+			printf("\"trigger_on_open\" \"runscript_%s\"\n",UniqueObjectName(currobj) );	//plays the audio of this log
 			break;
 			}
 		}	
@@ -811,7 +811,7 @@ void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj,
 
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );		
+	printf("\"name\" \"%s\"\n",UniqueObjectName(currobj));		
 	printf("\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
 	switch (game)
 		{
@@ -857,8 +857,8 @@ void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectIte
 		{
 		printf("\n// entity %d\n{\n",EntityCount);
 		printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-		printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.quality ,currobj.owner,currobj.index );	
-		printf("\"origin\" \"%f %f %f\"\n",currobj.quality * BrushSizeX+(BrushSizeX/2),currobj.owner * BrushSizeY+(BrushSizeY/2), LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ);	
+		printf("\"name\" \"%s\"\n",UniqueObjectName(currobj));	
+		printf("\"origin\" \"%d %d %d\"\n",currobj.quality * BrushSizeX+(BrushSizeX/2),currobj.owner * BrushSizeY+(BrushSizeY/2), LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ);	
 		printf("\n}");		
 		}
 	return;
@@ -877,9 +877,9 @@ void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem
 
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	printf("\"name\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-	printf("\"model\" \"%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );	
-	printf("\"target\" \"runscript_%s_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY,currobj.index );						
+	printf("\"name\" \"%s\"\n",UniqueObjectName(currobj));	
+	printf("\"model\" \"%s\"\n",UniqueObjectName(currobj) );	
+	printf("\"target\" \"runscript_%s\"\n",UniqueObjectName(currobj));						
 	printf("\"wait\" \"5\"\n");						
 	tile t;	//temp tile for rendering trigger
 	t.floorTexture = TRIGGER_MULTI;
@@ -1069,7 +1069,7 @@ mstaddress_pointer=0;
 				InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
 				objList[MasterIndex].InUseFlag = InUseFlag;
 					
-			
+				objList[MasterIndex].levelno = LevelNo ;
 				objList[MasterIndex].tileX = xref[xref_ptr].tileX ;
 				objList[MasterIndex].tileY = xref[xref_ptr].tileY ;
 				objList[MasterIndex].next =xref[xref[xref_ptr].next].MstIndex  ;
@@ -1091,7 +1091,11 @@ mstaddress_pointer=0;
 				objList[MasterIndex].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
 				objList[MasterIndex].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
 				objList[MasterIndex].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
-									
+				
+				objList[MasterIndex].Angle1 = getValAtAddress(mst_ark,mstaddress_pointer+16,8);
+				objList[MasterIndex].Angle2 = getValAtAddress(mst_ark,mstaddress_pointer+17,8);
+				objList[MasterIndex].Angle3 = getValAtAddress(mst_ark,mstaddress_pointer+18,8);
+								
 			//			printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
 			//			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
 			//			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
@@ -1170,9 +1174,6 @@ mstaddress_pointer=0;
 				case CONTAINERS_CORPSES:break;
 				case CRITTERS:break;
 				}						
-
-							
-							
 		mstaddress_pointer +=27;
 		}
 
@@ -1289,6 +1290,7 @@ switch (game)
 			objList[x].InUseFlag =1;
 			objList[x].tileX=-1;
 			objList[x].tileY=-1;
+			objList[x].levelno = LevelNo ;			
 			//These three will get set when I am rendering the object entity and if the item is an npc's inventory.
 			objList[x].objectOwner =0;
 			objList[x].objectOwnerEntity =0;
@@ -1907,3 +1909,14 @@ objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=getValAtAddress(sub_a
 	shockProperties[7]  = getValAtAddress(sub_ark,add_ptr+0x1B,16);
 	shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/	
 }
+
+
+char *UniqueObjectName(ObjectItem currObj)
+	{//returns a unique name for the object
+char str[80];
+sprintf_s(str,80,"%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
+return str;
+
+	
+
+	}
