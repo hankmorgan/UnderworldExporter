@@ -3,7 +3,7 @@
 #include "gamegraphics.h"
 #include "utils.h"
 
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255])
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize)
 {
     //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
 //    int indexNo;
@@ -20,7 +20,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	getPalette(PaletteFile, pal, 0);    
+	getPalette(PaletteFile, pal, PaletteNo);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
@@ -49,7 +49,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	//long textureOffset = (textureFile[(i*4)+7]<<16 | textureFile[(i*4)+6]<<32 | textureFile[(i*4)+5]<<8 | textureFile[(i*4)+4]);
 	long textureOffset = getValAtAddress(textureFile,(i*4)+4,32);
 	//writeBMP(textureFile,textureOffset,32,32,i+211,pal);
-	writeBMP(textureFile,textureOffset,64,64,i,pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
+	writeBMP(textureFile,textureOffset,BitmapSize,BitmapSize,i,pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
 	}   	
 return;	         
 }
@@ -110,12 +110,14 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	bmihead.biSizeImage = imwidth * bmihead.biHeight;
 	bmhead.bfSize = bmihead.biSizeImage + 54;
 	
-	char outFile[20]=("Texture_");
-	char fileNumber[4];
+	char outFile[80];//=("Texture_");
+	//char fileNumber[4];
 
-	sprintf(fileNumber,"%03d",index);
+	/*sprintf(fileNumber,"%03d",index);
 	strcat(outFile,fileNumber);
-	strcat(outFile,".bmp");
+	strcat(outFile,".bmp");*/
+	
+	sprintf_s(outFile,80,"file_%04d.bmp", index );
 	//sprintf(outFile,sprintf(outFile, "-%d", index),".bmp");
 
 	FILE *outf ;

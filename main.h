@@ -18,14 +18,15 @@
 #define UW2_STRINGS_FILE "C:\\Games\\Ultima\\UW1\\data\\strings.pak"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\Ultima\\UW2\\DATA\\T64.TR"
-#define GRAPHICS_PAL_FILE "C:\\Games\\Ultima\\UW2\\DATA\\pals.dat"
+#define GRAPHICS_FILE "C:\\Games\\Ultima\\UW1\\DATA\\F32.TR"
+#define GRAPHICS_PAL_FILE "C:\\Games\\Ultima\\UW1\\DATA\\pals.dat"
 
 
 #define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
 #define SHOCK_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_texture_config.txt"
 #define SHOCK_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_object_config.txt"
+#define SHOCK_COMMONOBJ_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\objprop.dat"
 
 #define ENTRANCES_CONFIG_FILE  "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_entrances.txt"
 

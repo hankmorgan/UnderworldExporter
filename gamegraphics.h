@@ -35,7 +35,7 @@ struct BitMapInfoHeader{
 
 
 
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255]);
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize);
 void writeBMP( unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
 

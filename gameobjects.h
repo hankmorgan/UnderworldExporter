@@ -5,7 +5,7 @@
 struct ObjectItem
 {
 	int index;	//it's own index in case I need to find myself.
-//000
+
    int item_id;	//0-8
    int flags;	//9-12
    short enchantment;	//12
@@ -96,6 +96,7 @@ int State;
 //int tileY;
 int duplicate;   //when it extends into another tile
 int TriggerOnce;
+int TriggerAction;	//For triggers
 //Further generic properties for data pulled back from subclass blocks.
 //int Property0;
 //int Property1;
@@ -105,34 +106,9 @@ int TriggerOnce;
 //int mstrIndex;	//Temp while I sort out ids in shock
 int shockProperties[10]; 
 int conditions[4];  	
+int sprite;
 };
 
-
-//typedef struct shockObjectItem
-//{
-//int index;
-//int LookUpIndex;
-//int item_id;
-//int InUseFlag;
-//int ObjectClass;
-//int ObjectSubClass;
-//int ObjectSubClassIndex;
-//int XCoord;
-//int YCoord;
-//int ZCoord;
-//int Angle1;
-//int Angle2;
-//int Angle3;
-//int AIIndex;
-//int ObjectType;
-//int HitPoints;
-//int State;
-//int next;	//Next object in this tile
-//int tileX;
-//int tileY;
-//int extends;	//Flags that this object crosses tiles. I think I will need to ignore it.
-////Need to add extended info for object types
-//}shockObjectItem;
 
 //Object types
 //guessing at what I'll need at the moment
@@ -255,8 +231,6 @@ int conditions[4];
 #define CONTAINERS_CORPSES_OFFSET	4023
 #define CRITTERS_OFFSET	4043
 
-
-
 /*SHOCK TRIGGER ACTION TYPES per ssspecs*/
 #define ACTION_DO_NOTHING 0 
 #define ACTION_TRANSPORT_LEVEL	1
@@ -287,7 +261,7 @@ int conditions[4];
 #define BUTTON_PROPERTY_COMBO 2
 
 
-//Triggers
+//Trigger props
 #define TRIG_PROPERTY_OBJECT		0
 #define TRIG_PROPERTY_TARGET_X	1
 #define TRIG_PROPERTY_TARGET_Y	2
@@ -308,8 +282,7 @@ int conditions[4];
 #define TRIG_PROPERTY_EMAIL		9
 #define TRIG_PROPERTY_TYPE		8
 
-
-struct objectMaster
+struct objectMaster	//For common object properties.
 {
 int index;	
 short type;	//from above
@@ -320,6 +293,11 @@ short isSet;
 int objClass;	//For Shock
 int objSubClass;
 int objSubClassIndex;
+
+
+int renderType;
+int frame1;	//Frame no
+
 };
 
 
@@ -366,6 +344,8 @@ int isLock(ObjectItem currobj);
 void createScriptCall(ObjectItem &currobj,float x,float y, float z);
 void EntityRotation(int heading);
 char *UniqueObjectName(ObjectItem currObj);
+int isButtonSHOCK(ObjectItem currobj);
+int isTriggerSHOCK(ObjectItem currobj);
 
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;

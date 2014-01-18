@@ -14,13 +14,15 @@ FILE *fMAIN;
 FILE *fBODY;
 
 int lookupString(int BlockNo, int StringNo, char StringOut[255] );
+void scriptShockButtons(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj);
+void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj);
 
 void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 {
-	fprintf(fBODY,"void start_%s()\n{",UniqueObjectName(currObj));
-	fprintf(fBODY,"\n$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_log_%04d\");",logChunk);
-	fprintf(fBODY,"\n$data_reader_trigger.activate($player1);");
-	fprintf(fBODY,"\n}\n\n");
+	//printf("void start_%s()\n{",UniqueObjectName(currObj));
+	printf("\n$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_log_%04d\");",logChunk);
+	printf("\n$data_reader_trigger.activate($player1);\n");
+	//printf("\n}\n\n");
 }
 
 
@@ -257,8 +259,8 @@ fprintf(fMAIN,"\nvoid main()\n{\n");
 					if ((isTrigger(objList[nextObj]) || (isButton(objList[nextObj])) || (isTrigger(objList[objList[nextObj].link]))))
 						{
 						//printObject(objList[nextObj],1);	//Prints the first object the inital trigger.
-						fprintf(fBODY,"\n\nvoid start_%s_%03d_%03d_%03d()\n{\n",
-								objectMasters[objList[nextObj].item_id].desc,x,y,objList[nextObj].index);
+						fprintf(fBODY,"\n\nvoid start_%s()\n{\n",
+								UniqueObjectName(objList[nextObj]));
 						conditionalCount = 0;
 						TriggerTargetX=objList[nextObj].quality ;
 						TriggerTargetY=objList[nextObj].owner ;
@@ -469,35 +471,460 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
 void BuildScriptsShock(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo)
 {
 //At the moment I just generate email logs.
-
-	if (fopen_s(&fBODY,SCRIPT_FINAL_FILE, "w")==0)
+if (1)
+	//if (fopen_s(&fBODY,SCRIPT_FINAL_FILE, "w")==0)
 		{
-		fprintf(fBODY,"#ifndef __game%d_%d_script__\n#define __game%d_%d_script__\n",game,LevelNo,game,LevelNo);
+		//fprintf(fBODY,"#ifndef __game%d_%d_script__\n#define __game%d_%d_script__\n",game,LevelNo,game,LevelNo);
 
-			//printf("\nPrint out audio logs for :%d\n",LevelNo);	
-			//printf("Desc ObjID TileX TileY LogChunk\n");
-			for (int y=63; y>=0;y--)
+
+	for (int y=63; y>=0;y--)
+		{
+		for (int x=0; x<64;x++)
 			{
-			for (int x=0; x<64;x++)
-				{
-				if(LevelInfo[x][y].indexObjectList !=0)
+			if(LevelInfo[x][y].indexObjectList !=0)	//there is an object in this tile
+				{//traverse the list 
+				int nextObj = LevelInfo[x][y].indexObjectList;
+				while (nextObj!=0)
 					{
-					long nextShockObj = LevelInfo[x][y].indexObjectList;
-					while (nextShockObj !=0)
+					//is it something that starts a script
+					if ((isButtonSHOCK(objList[nextObj])) || (isLog(objList[nextObj])) || (isTriggerSHOCK(objList[nextObj])))
 						{
-						if (isLog(objList[nextShockObj])==1)
+						//Create the function call.
+						printf("\n\n\nvoid start_%s()\n{\n",
+								UniqueObjectName(objList[nextObj]));
+						
+						switch (objList[nextObj].ObjectClass)
 							{
-							EMAILScript(objectMasters[objList[nextShockObj].item_id].desc
-												,objList[nextShockObj]
-												,objList[nextShockObj].shockProperties[SOFT_PROPERTY_LOG]);
+							case SOFTWARE_LOGS:
+								if (isLog(objList[nextObj]))
+									{//Creates the script that plays a log.
+									EMAILScript(objectMasters[objList[nextObj].item_id].desc
+										,objList[nextObj]
+										,objList[nextObj].shockProperties[SOFT_PROPERTY_LOG]);
+									}
+								break;
+								
+							case SWITCHES_PANELS:
+									//There are many types of switch with different properties
+									scriptShockButtons(LevelInfo,objList,objList[nextObj]);
+								break;
+								
+							case TRAPS_MARKERS:
+								scriptShockTriggerAction(LevelInfo,objList,objList[nextObj]);
+								break;
 							}
-						nextShockObj=objList[nextShockObj].next ;
+							
+						//end the function
+						printf("}\n");
 						}
+						
+				nextObj= objList[nextObj].next;						
 					}
+						
 				}
 			}
-		fprintf(fBODY,"#endif //__game%d_%d_script__",game,LevelNo);
-		fclose(fBODY);
+		}
+	}
+			////////printf("\nPrint out audio logs for :%d\n",LevelNo);	
+			////////printf("Desc ObjID TileX TileY LogChunk\n");
+			//////for (int y=63; y>=0;y--)
+			//////{
+			//////for (int x=0; x<64;x++)
+			//////	{
+			//////	if(LevelInfo[x][y].indexObjectList !=0)
+			//////		{
+			//////		long nextShockObj = LevelInfo[x][y].indexObjectList;
+			//////		while (nextShockObj !=0)
+			//////			{
+			//////			if (isLog(objList[nextShockObj])==1)
+			//////				{
+			//////				EMAILScript(objectMasters[objList[nextShockObj].item_id].desc
+			//////									,objList[nextShockObj]
+			//////									,objList[nextShockObj].shockProperties[SOFT_PROPERTY_LOG]);
+			//////				}
+			//////			nextShockObj=objList[nextShockObj].next ;
+			//////			}
+			//////		}
+			//////	}
+			//////}
+		//fprintf(fBODY,"#endif //__game%d_%d_script__",game,LevelNo);
+		//fclose(fBODY);
+	}
+
+
+
+void scriptShockButtons(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
+{
+
+
+if (currObj.ObjectSubClass ==0)
+	{//regular buttons and switches. Activates a target trigger.
+	if(currObj.shockProperties[BUTTON_PROPERTY_TRIGGER] > 0)
+		{
+		printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]])); 
+		}
+	else
+		{
+		printf("\tsys.println(\"This button does nothing!\")\n");
+		}
+	return;
+	}
+if((currObj.ObjectSubClass==2) && (currObj.ObjectSubClassIndex==0))
+	{//cyberspace terminal
+	int cybLevelX = currObj.shockProperties[0];
+	int cybLevelY = currObj.shockProperties[1];
+	int cybLevelZ = currObj.shockProperties[2];
+	int cybLevelNo = currObj.shockProperties[3]; 
+	printf("\tsys.println(\"Teleporting to a cyberspace level:%d@(%d,%d,%d)\")\n",cybLevelNo,cybLevelX,cybLevelY,cybLevelZ);
+	return;
+	}
+
+if((currObj.ObjectSubClass==2) && (currObj.ObjectSubClassIndex>=1))
+	{//Fixup station/energy station
+	int ChargeLevel = currObj.shockProperties[0] ;  //Amount of charge?/? always 255
+	int SecurityLevel = currObj.shockProperties[1] ;	//Security level?? //reuse timer??
+	printf("\tsys.println(\"Charging up: %d , Security level? %d\")\n",ChargeLevel,SecurityLevel);
+	return;
+	}
+if((currObj.ObjectSubClass==3) && (currObj.ObjectSubClassIndex<=3))
+	{	
+	//puzzle panels. need to see them in the wild before I know what other stuff does. At the moment I just fire them off.
+	//if bit 28 is set (0x10000000) it is a block puzzle, else it is a wire puzzle.
+	printf("\tsys.println(\"Puzzle type was: %d\")\n",currObj.shockProperties[BUTTON_PROPERTY_PUZZLE]);
+	printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]])); 
+	return;
+	}
+
+if((currObj.ObjectSubClass==3) && ((currObj.ObjectSubClassIndex==4) || (currObj.ObjectSubClassIndex==5) || (currObj.ObjectSubClassIndex==6)))
+	{//elevators
+
+	//Elevators (9 3 5):
+	//000C  int16 Map index of Panel of target Level1 (this means the panel no itself!)
+	//000E  int16 Map index of Panel of target Level2
+	//0012  int16 Map index of Panel of target Level3
+	//0018  int16 Bitfield of accessible Levels (Actual)
+	//001A  int16 Bitfield of accessible Levels (Shaft)
+	//	    Levels with a 1 in the "shaft" field but not in the "Actual" field
+	//	     give a "Shaft damage: Unable to go there" message.
+		
+	int Level1_panel =currObj.shockProperties[0];
+	int Level2_panel =currObj.shockProperties[1];
+	int Level3_panel =currObj.shockProperties[2];
+	//currObj.shockProperties[3]//bitfields for access
+	//currObj.shockProperties[4]
+	
+    //printf("\tsys.setcvar(\"targetPanel %d\");\n",y); //eventually set this with the selected value.
+    printf("\tsys.println(\"Moving levels possible panels are: %d, %d, %d \");\n",Level1_panel,Level2_panel,Level3_panel);
+    //printf("\tsys.trigger($trigger_endlevel_%03d_%03d);\n",triggerX,triggerY);//need to set the map name in script  in shock 
+	
+	return;
+	}
+
+if((currObj.ObjectSubClass==3) && ((currObj.ObjectSubClassIndex==7) || (currObj.ObjectSubClassIndex==8) ))
+	{
+	//Number Pads
+	//000C	int16	Combination in BCD
+	//000E  int16 Map Object to trigger
+	//0018  int16 Map Object to Extra Trigger (?)
+	int combo = currObj.shockProperties[BUTTON_PROPERTY_COMBO] ;	
+	
+	//objList[objIndex].shockProperties[3];	//extra trigger?
+	printf("\tsys.println(\"You correcty guess the combination code %d\");\n",combo);
+printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]])); 
+	return;
+	}
+
+
+	printf("\tUnknown Script @ ;",UniqueObjectName(currObj)); 
+//unknown object if all other tests fail. set the usual trigger value and keep an eye on this statement in debugging.
+	printf("\tsys.println(\"Other/unknown Button type.\");\n");
+	printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]])); 
+	
+}
+
+
+
+
+
+void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
+{
+switch (currObj.TriggerAction)
+	{ 
+	case ACTION_DO_NOTHING :
+		{
+		printf("\tsys.println(\"Do nothing. Or maybe a default action.\");\n");
+		break;	
+		}
+	case ACTION_TRANSPORT_LEVEL:
+		{
+		//todo: set up my teleport destinations in advance!
+		int teleportX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];	//Target X of teleport
+		int teleportY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y]; //Target Y of teleport
+		int teleportZ = currObj.shockProperties[TRIG_PROPERTY_TARGET_Z];	//Target Z of teleport
+		printf("\tsys.println(\"Teleporting to %d %d %d \");\n",teleportX,teleportY,teleportZ);
+		break;
+		}
+	case ACTION_RESURRECTION:
+		{
+		currObj.shockProperties[TRIG_PROPERTY_VALUE];//Target Health
+		printf("\tsys.println(\"You live again. Or maybe get turned into a cyborg.\");\n");
+		break;
+		}
+	case ACTION_CLONE:
+		{
+		//	000C	int16	Object to transport.
+		//	000E	int16	Delete flag?
+		//	0010	int16	Tile destination X
+		//	0014	int16	Tile destination Y
+		//	0018	int16	Destination height?		
+		//printf("\tACTION_CLONE\n");
+		//printf("\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		//printf("\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
+		//printf("\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		int objToMove = currObj.shockProperties[TRIG_PROPERTY_OBJECT];	//obj to transport
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]//Delete flag
+		int teleportX =currObj.shockProperties[TRIG_PROPERTY_TARGET_X] ;	//Target X
+		int teleportY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y] ;	//Target Y
+		int teleportZ =currObj.shockProperties[TRIG_PROPERTY_TARGET_Z] ;	//Target z
+		printf("\tsys.println(\"Object cloned. %d (%d,%d,%d)\");\n",objToMove,teleportX,teleportY,teleportZ);
+		break;
+		}
+	case ACTION_SET_VARIABLE:
+		{
+		//000C	int16	variable to set
+		//0010	int16	value
+		//0012	int16	?? action 00 set 01 add
+		//0014	int16	Optional message to receive
+		int varToSet = currObj.shockProperties[TRIG_PROPERTY_VARIABLE];
+		int valToSet = currObj.shockProperties[TRIG_PROPERTY_VALUE];
+		int Operation = currObj.shockProperties[TRIG_PROPERTY_OPERATION];
+		int Message = currObj.shockProperties[TRIG_PROPERTY_MESSAGE1];
+		printf("\tsys.println(\"Variable %d set. Value %d, %d operation. Message %d \");\n",varToSet,valToSet,Operation,Message);
+		break;
+		}
+	case ACTION_ACTIVATE:
+		{
+		//000C	int16	1st object to activate.
+		//000E	int16	Delay before activating object 1.
+		//0010	...	Up to 4 objects and delays stored here.		
+		//printf("\tACTION_ACTIVATE\n");
+
+		//printf("\t\t1st Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		//printf("1st Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0xe,16));
+		//objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark,add_ptr+0xC,16)		;					
+		//objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
+		if ( currObj.shockProperties[0]> 0)
+			{
+			printf("\t$sys.wait(%d);\n",currObj.shockProperties[1]); 
+			printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[0]])); 
+			}
+		//printf("\t\t2nd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x10,16));		
+		//printf("2nd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		//
+		if ( currObj.shockProperties[2]> 0)
+			{
+			printf("\t$sys.wait(%d);\n",currObj.shockProperties[3]); 
+			printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[2]])); 
+			}	
+		//printf("\t\t3rd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("3rd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		//does the fourth trigger exist?
+		if (( currObj.shockProperties[4]> 0) &&  (currObj.shockProperties[4]< 1600))
+			{
+			printf("\t$sys.wait(%d);\n",currObj.shockProperties[5]); 
+			printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[4]])); 
+			}	
+		//printf("\t\t4th Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x18,16));		
+		//printf("4th Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x1A,16));	
+		if ( currObj.shockProperties[6]> 0)
+			{
+			printf("\t$sys.wait(%d);\n",currObj.shockProperties[7]); 
+			printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[6]])); 
+			}
+
+		break;
+		}
+	case ACTION_LIGHTING:
+		{
+		//000C	int16	Control point 1
+		//000E	int16	Control point 2
+		//	...	?
+		//printf("\tACTION_LIGHTING\n");
+		//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	
+		printf("\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n",currObj.shockProperties[TRIG_PROPERTY_CONTROL_1],currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);		
+		break;
+		}
+	case ACTION_EFFECT:
+		{
+/*		printf("\tACTION_EFFECT\n");
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/	
+		printf("\tsys.println(\"Special Effect\");\n");		
+		break;
+		}
+	case ACTION_MOVING_PLATFORM:
+		{
+		//000C	int16	Tile x coord of platform
+		//0010	int16	Tile y coord of platform
+		//0014	int16	Target floor height
+		//0016	int16	Target ceiling height
+		//0018	int16	Speed
+		//printf("\tACTION_MOVING_PLATFORM\n");
+		//printf("\t\tTileX of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tTileY of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tTarget floor height:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("\t\tTarget ceiling height:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		//printf("\t\tSpeed:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
+		int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
+		int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
+		int targetCeiling = currObj.shockProperties[TRIG_PROPERTY_CEILING];
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
+		
+		const char *objDesc="TargetLiftname";
+		
+		printf("\tsys.println(\"A lift. I need to look at this a bit closer for the heights.\");\n");		
+		printf("\tif ( %s_%03d_%03d_state ==1)\n\t\t{\n",objDesc,triggerX,triggerY);
+		printf("\t\t$%s_%03d_%03d.move( DOWN, 105 );\n", objDesc,triggerX,triggerY);
+		printf("\t\t%s_%03d_%03d_state = 0;\n}\n", objDesc,triggerX,triggerY);
+		printf("\telse\n\t\t{\n");
+		printf("\t\t$%s_%03d_%03d.move ( UP, 15 );\n" ,objDesc,triggerX,triggerY);
+		printf("\t\t%s_%03d_%03d_state=1 ;\n\t}\n",objDesc,triggerX,triggerY);		
+		
+		
+		
+		break;
+		
+		}
+	case ACTION_CHOICE:
+		{
+		//000C	int16	Trigger 1
+		//0010	int16	Trigger 2
+/*		printf("\tACTION_CHOICE\n");
+		printf("\t\tTrigger1:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		printf("\t\tTrigger2:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));	
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+		//currObj.shockProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark,add_ptr+0x0C,16);	
+		//currObj.shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark,add_ptr+0x10,16);	
+		printf("\tsys.println(\"Make a choice\");\n");				
+		break;
+		}
+	case ACTION_EMAIL:
+		{
+		//printf("\tACTION_EMAIL\n");
+		//	0F Player receives email
+		//000C	int16	Chunk no. of email (offset from 2441 0x0989)
+		//printf("\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] =getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441;
+		printf("\tsys.println(\"You got mail\");\n");	//Add a readable to the inventory?
+		break;
+		
+		}
+	case ACTION_RADAWAY:
+		{
+		//printf("\tACTION_RADAWAY\n");
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+		printf("\tsys.println(\"Radiation Treatment\");\n");
+		break;
+		}
+	case ACTION_CHANGE_STATE:
+		{
+		//printf("\tACTION_CHANGE_STATE\n");
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+		printf("\tsys.println(\"Change state.\");\n");
+		break;
+		}
+	case ACTION_MESSAGE:
+		{
+		//16 Trap message
+		//000C	int16	"Success" message
+		//0010	int16	"Fail" message
+		//printf("\tACTION_MESSAGE\n");
+		//	printf("\t\tSuccess Message%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tFail Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x0C,16);
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=getValAtAddress(sub_ark,add_ptr+0x10,16);
+		
+		printf("\tsys.println(\"Sucess or failMessage\");\n");
+		break;
+		}
+	case ACTION_SPAWN:	
+		{
+		//000C	int32	Class/subclass/type of object to spawn
+		//0010	int16	Control point 1 (object)
+		//0012	int16	Control point 2 (object)
+		//0014		??
+		//0018		??	
+		//printf("\tACTION_SPAWN\n");
+		//printf("\t\Class-sub-type to spawn:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,32));
+		//printf("\t\tControl point object1:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tControl point object2:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));		
+		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));	
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]=getValAtAddress(sub_ark,add_ptr+0x0C,32);
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]=getValAtAddress(sub_ark,add_ptr+0x10,16);
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]=getValAtAddress(sub_ark,add_ptr+0x12,16);
+		
+		printf("\tsys.println(\"Spawn\");\n");
+		break;
+		}	
+	case ACTION_CHANGE_TYPE:
+		{
+		//000C	int16	Object ID to change.
+		//0010	int8	New type.
+		//0012		??
+		//printf("\tACTION_CHANGE_TYPE\n");
+		//printf("\t\Object to Change:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tNew Type:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,8));
+		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));	
+			
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =getValAtAddress(sub_ark,add_ptr+0x0C,16);
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
+		printf("\tsys.println(\"Change type\");\n");
+		break;
+		}
+	default:
+		{
+		//printf("\tUnknown triggeraction:%d\n",TriggerType);
+		printf("\tsys.println(\"Unknown trigger action.\");\n");
+		}	
+	
 	}
 
 }

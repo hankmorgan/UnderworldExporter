@@ -35,6 +35,7 @@ int LookupxRefTable(xrefTable *xref,int x, int y, int MasterIndex, int tableSize
 void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
 void replaceMapLink(tile levelInfo[64][64], xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
 void getShockButtons(unsigned char *sub_ark,int add_ptr, ObjectItem objList[1600], int objIndex);
+void shockCommonObject();
 
 int keycount[256];	//For tracking key usage
 //int levelNo;
@@ -165,6 +166,12 @@ int isTrigger(ObjectItem currobj)
 			}
 		}
 	}
+	
+int isTriggerSHOCK(ObjectItem currobj)
+	{
+	return (currobj.ObjectClass == TRAPS_MARKERS );
+	}
+		
 int isButton(ObjectItem currobj)
 {//Guess
 		switch(objectMasters[currobj.item_id].type )
@@ -180,6 +187,12 @@ int isButton(ObjectItem currobj)
 				break;
 				}
 		}
+}
+
+
+int isButtonSHOCK(ObjectItem currobj)
+{
+	return (currobj.ObjectClass == SWITCHES_PANELS );
 }
 
 int isLog (ObjectItem currobj)
@@ -978,6 +991,7 @@ int ObjectSubClassIndex;
 	long chunkType=0;//compression type
 	long chunkPackedLength=0;
 
+	//shockCommonObject();
 	
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(filePath, "rb")) == NULL)
@@ -1095,7 +1109,14 @@ mstaddress_pointer=0;
 				objList[MasterIndex].Angle1 = getValAtAddress(mst_ark,mstaddress_pointer+16,8);
 				objList[MasterIndex].Angle2 = getValAtAddress(mst_ark,mstaddress_pointer+17,8);
 				objList[MasterIndex].Angle3 = getValAtAddress(mst_ark,mstaddress_pointer+18,8);
-								
+			//	printf("\tIt is a %s", objectMasters[objList[MasterIndex].item_id].desc );
+				objList[MasterIndex].sprite = getValAtAddress(mst_ark,mstaddress_pointer+23,8);
+			//	printf("\tSprite : %d\n", objList[MasterIndex].sprite  );
+			//			printf("\n\t\tunk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
+			//			printf("\tunk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
+			//			printf("\tunk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));				
+			//			printf("AIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
+			//			printf("HitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
 			//			printf("IndexIntoCrossRef = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+5,16));
 			//			printf("PrevLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+7,16));
 			//			printf("NextLink = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+9,16));
@@ -1487,8 +1508,8 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 			float ceiling = CEILING_HEIGHT;
 			*offZ = (zpos/ResolutionZ) * (brushZ*ceiling);
 			}
-		
-		if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0))
+		//TODO:This may mess with stuff on walls. It's here to prevent models cliping through sloped floors
+		if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0) && (LevelInfo[x][y].shockSlopeFlag !=SLOPE_CEILING_ONLY))
 			{
 			*offZ = *offZ + (LevelInfo[x][y].shockSteep * (BrushSizeZ /2));
 			}
@@ -1498,6 +1519,7 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 void getShockTriggerAction(unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex)
 {
 int TriggerType =getValAtAddress(sub_ark,add_ptr+6,8);
+objList[objIndex].TriggerAction = TriggerType;
 switch (TriggerType)
 	{ 
 	case ACTION_DO_NOTHING :
@@ -1559,8 +1581,8 @@ switch (TriggerType)
 		//printf("\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
 		objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =	getValAtAddress(sub_ark,add_ptr+0xC,16);	//obj to transport
 		objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = getValAtAddress(sub_ark,add_ptr+0x0E,16);		//Delete flag
-		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x14,16);	//Target X
-		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x18,16);	//Target Y
+		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x10,16);	//Target X
+		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x14,16);	//Target Y
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z] = getValAtAddress(sub_ark,add_ptr+0x18,16);	//Target z
 		break;}
 	case ACTION_SET_VARIABLE:
@@ -1854,7 +1876,7 @@ if((objList[objIndex].ObjectSubClass==3) && (objList[objIndex].ObjectSubClassInd
 	objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=getValAtAddress(sub_ark,add_ptr+0x0c,16);
 	
 	//if bit 28 is set (0x10000000) it is a block puzzle, else it is a wire puzzle.
-	objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE]=getValAtAddress(sub_ark,add_ptr+0x10,8);
+	objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE]= getValAtAddress(sub_ark,add_ptr+0x10,8);
 
 	return;
 	}
@@ -1912,11 +1934,61 @@ objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=getValAtAddress(sub_a
 
 
 char *UniqueObjectName(ObjectItem currObj)
-	{//returns a unique name for the object
-char str[80];
-sprintf_s(str,80,"%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
-return str;
-
+{//returns a unique name for the object
+	char str[80]="";
+	//_snprintf(str,80,"%s_%02d_%02d_%02d_%04d", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
+	sprintf_s(str,80,"%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
+	return str;
+}
 	
+void shockCommonObject()
+{//offset dec 5099
+//Read in some common object properties to find some useful info.
+char *filePathCO = SHOCK_COMMONOBJ_FILE;
+FILE *f;
+unsigned char *obj_ark; 
+if ((fopen_s(&f,filePathCO, "r") == 0))
+	{
+		long fileSize = getFileSize(f);
+		obj_ark = new unsigned char[fileSize];
+		fread(obj_ark, fileSize, 1,f);
+		fclose(f);  
+		int frameCount=2;	
+		int ObjOffset = 5099;	//hope this is right
+		int prevClass = objectMasters[0].objClass;
+		for (int i = 0; i<475;i++)
+			{
+			///if (prevClass != objectMasters[i].objClass)
+			//{
+				//frameCount=0;	//Start a new cycle for each class
+				//printf("\n----next class------\n");
+			//	}
+			prevClass = objectMasters[i].objClass;
+			//printf("\n%d:%s\t" ,i ,objectMasters[i].desc);
+			//printf("\tRender:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x7,8));
+			//
+			//printf("\tmodel:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
+			//
+			objectMasters[i].frame1 = frameCount;	
+			frameCount+=(3+((getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8) >>4) & 0x0F));
+			//printf("\tframe:1350_%04d.bmp" ,objectMasters[i].frame1);
+			//printf("Mass %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0,32));
+			//printf("hp  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x04,16));
+			//printf("armour  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x06,8));
+			//printf("Render  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x07,8));
+			//printf("Vulner  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0e,8));
+			//printf("spevul  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0f,8));
+			//printf("defence  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x12,8));
+			//printf("flags  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x14,16));
+			//printf("3d mod  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
+			//printf("frames  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8));
+			//printf("framesbits %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8)>>4);
+			//printf("framesbits19 %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8)>>4);
 
+			prevClass = objectMasters[i].objClass;
+			
+			}
 	}
+
+}
+	
