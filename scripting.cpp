@@ -487,12 +487,15 @@ if (1)
 				while (nextObj!=0)
 					{
 					//is it something that starts a script
+					//This does not include screens just yet.
 					if ((isButtonSHOCK(objList[nextObj])) || (isLog(objList[nextObj])) || (isTriggerSHOCK(objList[nextObj])))
 						{
 						//Create the function call.
 						printf("\n\n\nvoid start_%s()\n{\n",
 								UniqueObjectName(objList[nextObj]));
 						
+						//Create the function body. Unlike UW where I parsed the chain here I associate each trigger with a script so all I do activate each trigger when I need them
+						//Note that I will need to know the type of object I will be triggering for things like door locks which don't follow the naming convention.
 						switch (objList[nextObj].ObjectClass)
 							{
 							case SOFTWARE_LOGS:

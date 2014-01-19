@@ -605,7 +605,7 @@ void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currob
 	printf("\n// entity %d\n{\n",EntityCount);
 	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	printf("\"name\" \"%s\"\n", UniqueObjectName(currobj));
-	printf("\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");	//Need to pass this in.
+	printf("\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");	//TODO:Need to pass this in from config
 	//position
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);	
 	printf("\"rotate\" \"0 0 45\"\n");
@@ -1194,7 +1194,8 @@ mstaddress_pointer=0;
 					break;
 				case CONTAINERS_CORPSES:break;
 				case CRITTERS:break;
-				}						
+				}	
+				UniqueObjectName(objList[MasterIndex]);					
 		mstaddress_pointer +=27;
 		}
 
@@ -1459,12 +1460,20 @@ while (k<=chunkUnpackedLength)
 				}
 			case	TRAPS_MARKERS: //and triggers too
 				{
-				getShockTriggerAction(sub_ark,add_ptr,xRef,objList,objIndex);
-				objList[objIndex].TriggerOnce = getValAtAddress(sub_ark,add_ptr+7,8);
 				objList[objIndex].conditions[0] = getValAtAddress(sub_ark,add_ptr+8,8);
 				objList[objIndex].conditions[1] = getValAtAddress(sub_ark,add_ptr+9,8);
 				objList[objIndex].conditions[2] = getValAtAddress(sub_ark,add_ptr+10,8);
 				objList[objIndex].conditions[3] = getValAtAddress(sub_ark,add_ptr+11,8);
+				objList[objIndex].TriggerOnce = getValAtAddress(sub_ark,add_ptr+7,8);
+				
+				getShockTriggerAction(sub_ark,add_ptr,xRef,objList,objIndex);
+				printf("\tCondition 0: %d\n",objList[objIndex].conditions[0]);
+				printf("\tCondition 1: %d\n",objList[objIndex].conditions[1]);
+				printf("\tCondition 2: %d\n",objList[objIndex].conditions[2]);
+				printf("\tCondition 3: %d\n",objList[objIndex].conditions[3]);
+				printf("\tTrigger once: %d\n",objList[objIndex].TriggerOnce);
+				
+				printf("\n=======\n");			
 				return 1;
 				break;
 				}
@@ -1518,13 +1527,14 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 
 void getShockTriggerAction(unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex)
 {
+printf("",UniqueObjectName(objList[objIndex]));
 int TriggerType =getValAtAddress(sub_ark,add_ptr+6,8);
 objList[objIndex].TriggerAction = TriggerType;
 switch (TriggerType)
 	{ 
 	case ACTION_DO_NOTHING :
 		{
-/*		printf("\tACTION_DO_NOTHING\n");
+		printf("\tACTION_DO_NOTHING for %s\n",UniqueObjectName(objList[objIndex]));
 		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
 		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
@@ -1532,28 +1542,12 @@ switch (TriggerType)
 		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
 		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
 		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/			
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));			
 		break;	
 		}
 	case ACTION_TRANSPORT_LEVEL:
 		{
-		//printf("\tACTION_TRANSPORT_LEVEL\n");
-		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
-		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+12,16);	//Target X of teleport
-		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+16,16); //Target Y of teleport
-		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z]= getValAtAddress(sub_ark,add_ptr+20,16);	//Target Z of teleport
-		
-		break;}
-	case ACTION_RESURRECTION:
-		{
-/*		printf("\tACTION_RESURRECTION\n");
+		printf("\tACTION_TRANSPORT_LEVEL for %s\n",UniqueObjectName(objList[objIndex]));
 		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
 		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
@@ -1561,7 +1555,24 @@ switch (TriggerType)
 		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
 		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
 		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+12,16);	//Target X of teleport
+		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+16,16); //Target Y of teleport
+		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z]= getValAtAddress(sub_ark,add_ptr+20,16);	//Target Z of teleport
+		printf("\n=======\n");	
+		break;
+		}
+	case ACTION_RESURRECTION:
+		{
+		printf("\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 		
 		objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] =	getValAtAddress(sub_ark,add_ptr+16,16);	//Target Health
 		break;
@@ -1573,33 +1584,36 @@ switch (TriggerType)
 		//	0010	int16	Tile destination X
 		//	0014	int16	Tile destination Y
 		//	0018	int16	Destination height?		
-		//printf("\tACTION_CLONE\n");
-		//printf("\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-		//printf("\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
-		//printf("\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
-		//printf("\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-		//printf("\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		printf("\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		printf("\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
+		printf("\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		printf("\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		printf("\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
 		objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =	getValAtAddress(sub_ark,add_ptr+0xC,16);	//obj to transport
 		objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = getValAtAddress(sub_ark,add_ptr+0x0E,16);		//Delete flag
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x10,16);	//Target X
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x14,16);	//Target Y
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z] = getValAtAddress(sub_ark,add_ptr+0x18,16);	//Target z
-		break;}
+		printf("\n=======\n");	
+		break;
+		}
 	case ACTION_SET_VARIABLE:
 		{
 		//000C	int16	variable to set
 		//0010	int16	value
 		//0012	int16	?? action 00 set 01 add
 		//0014	int16	Optional message to receive
-/*		printf("\tACTION_SET_VARIABLE\n");
+		printf("\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
 		printf("\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
 		printf("\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
 		printf("\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-		printf("\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));*/	
+		printf("\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));	
 		objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] =getValAtAddress(sub_ark,add_ptr+0xC,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark,add_ptr+0x10,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION]=getValAtAddress(sub_ark,add_ptr+0x12,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x14,16);
+			
 		break;
 		}
 	case ACTION_ACTIVATE:
@@ -1607,19 +1621,19 @@ switch (TriggerType)
 		//000C	int16	1st object to activate.
 		//000E	int16	Delay before activating object 1.
 		//0010	...	Up to 4 objects and delays stored here.		
-		//printf("\tACTION_ACTIVATE\n");
+		printf("\tACTION_ACTIVATE for %s\n",UniqueObjectName(objList[objIndex]));
 
-		//printf("\t\t1st Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0xC,16));
-		//printf("1st Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0xe,16));
+		printf("\t\t1st Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0xC,16));
+		printf("1st Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0xe,16));
 
-		//printf("\t\t2nd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x10,16));		
-		//printf("2nd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-		//
-		//printf("\t\t3rd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x14,16));
-		//printf("3rd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
-		//
-		//printf("\t\t4th Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x18,16));		
-		//printf("4th Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x1A,16));	
+		printf("\t\t2nd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x10,16));		
+		printf("2nd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		
+		printf("\t\t3rd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		printf("3rd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		
+		printf("\t\t4th Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x18,16));		
+		printf("4th Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x1A,16));	
 		objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark,add_ptr+0xC,16)		;					
 		objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
 		objList[objIndex].shockProperties[2] = getValAtAddress(sub_ark,add_ptr+0x10,16)		;
@@ -1628,6 +1642,7 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[5] = getValAtAddress(sub_ark,add_ptr+0x16,16)		;
 		objList[objIndex].shockProperties[6] = getValAtAddress(sub_ark,add_ptr+0x18,16)		;
 		objList[objIndex].shockProperties[7] = getValAtAddress(sub_ark,add_ptr+0x1A,16)		;
+			
 		break;
 		}
 	case ACTION_LIGHTING:
@@ -1635,9 +1650,9 @@ switch (TriggerType)
 		//000C	int16	Control point 1
 		//000E	int16	Control point 2
 		//	...	?
-		//printf("\tACTION_LIGHTING\n");
-		//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-		//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
 		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
 		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
 		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
@@ -1646,11 +1661,12 @@ switch (TriggerType)
 		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 	= getValAtAddress(sub_ark,add_ptr+12,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	= getValAtAddress(sub_ark,add_ptr+14,16);
+			
 		break;
 		}
 	case ACTION_EFFECT:
 		{
-/*		printf("\tACTION_EFFECT\n");
+		printf("\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
 		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
 		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
@@ -1658,8 +1674,9 @@ switch (TriggerType)
 		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
 		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
 		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/	
-		break;}
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));		
+		break;
+		}
 	case ACTION_MOVING_PLATFORM:
 		{
 		//000C	int16	Tile x coord of platform
@@ -1667,25 +1684,34 @@ switch (TriggerType)
 		//0014	int16	Target floor height
 		//0016	int16	Target ceiling height
 		//0018	int16	Speed
-		//printf("\tACTION_MOVING_PLATFORM\n");
-		//printf("\t\tTileX of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
-		//printf("\t\tTileY of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
-		//printf("\t\tTarget floor height:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-		//printf("\t\tTarget ceiling height:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
-		//printf("\t\tSpeed:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		printf("\tACTION_MOVING_PLATFORM action for %s\n", UniqueObjectName(objList[objIndex]));
+		printf("\t\tTileX of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		printf("\t\tTileY of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		printf("\t\tTarget floor height:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		printf("\t\tTarget ceiling height:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		printf("\t\tSpeed:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x10,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR] = getValAtAddress(sub_ark,add_ptr+0x14,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING] = getValAtAddress(sub_ark,add_ptr+0x16,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
+		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+		
 		break;
 		
 		}
 	case ACTION_CHOICE:
-		{
+		{//A toggle?
 		//000C	int16	Trigger 1
 		//0010	int16	Trigger 2
-/*		printf("\tACTION_CHOICE\n");
+		printf("\tACTION_CHOICE for %s\n",UniqueObjectName(objList[objIndex]));
 		printf("\t\tTrigger1:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
 		printf("\t\tTrigger2:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
 		
@@ -1693,57 +1719,70 @@ switch (TriggerType)
 		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
 		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));	
 		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark,add_ptr+0x0C,16);	
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark,add_ptr+0x10,16);	
 		break;
 		}
 	case ACTION_EMAIL:
 		{
-		//printf("\tACTION_EMAIL\n");
+		printf("\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
 		//	0F Player receives email
 		//000C	int16	Chunk no. of email (offset from 2441 0x0989)
-		//printf("\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
+		printf("\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] =getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441;
+		
 		break;
 		
 		}
 	case ACTION_RADAWAY:
 		{
-		//printf("\tACTION_RADAWAY\n");
-		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
 		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
 		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
 		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
 		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+		printf("\n=======\n");	
 		break;
 		}
 	case ACTION_CHANGE_STATE:
 		{
-		//printf("\tACTION_CHANGE_STATE\n");
-		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-		//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+		printf("\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+			
 		break;
 		}
 	case ACTION_MESSAGE:
 		{
-		//16 Trap message
+		//16 Trap message offset in Chunk 2151 
 		//000C	int16	"Success" message
 		//0010	int16	"Fail" message
-		//printf("\tACTION_MESSAGE\n");
-		//	printf("\t\tSuccess Message%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
-		//printf("\t\tFail Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		printf("\tACTION_MESSAGE for %s\n",UniqueObjectName(objList[objIndex]));
+			printf("\t\tSuccess Message%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		printf("\t\tFail Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
 		objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=getValAtAddress(sub_ark,add_ptr+0x10,16);
+		
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+					
 		break;
 		}
 	case ACTION_SPAWN:	
@@ -1753,15 +1792,16 @@ switch (TriggerType)
 		//0012	int16	Control point 2 (object)
 		//0014		??
 		//0018		??	
-		//printf("\tACTION_SPAWN\n");
-		//printf("\t\Class-sub-type to spawn:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,32));
-		//printf("\t\tControl point object1:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
-		//printf("\t\tControl point object2:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));		
-		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));	
+		printf("\tACTION_SPAWN for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\Class-sub-type to spawn:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,32));
+		printf("\t\tControl point object1:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		printf("\t\tControl point object2:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+		printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));		
+		printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));	
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]=getValAtAddress(sub_ark,add_ptr+0x0C,32);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]=getValAtAddress(sub_ark,add_ptr+0x10,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]=getValAtAddress(sub_ark,add_ptr+0x12,16);
+			
 		break;
 		}	
 	case ACTION_CHANGE_TYPE:
@@ -1769,18 +1809,28 @@ switch (TriggerType)
 		//000C	int16	Object ID to change.
 		//0010	int8	New type.
 		//0012		??
-		//printf("\tACTION_CHANGE_TYPE\n");
-		//printf("\t\Object to Change:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
-		//printf("\t\tNew Type:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,8));
-		//printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));	
+		printf("\tACTION_CHANGE_TYPE for %s\n",UniqueObjectName(objList[objIndex]));
+		printf("\t\Object to Change:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		printf("\t\tNew Type:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,8));
+		printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));	
 			
 		objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
+			
 		break;
 		}
 	default:
 		{
-		//printf("\tUnknown triggeraction:%d\n",TriggerType);
+		printf("\tUnknown triggeraction:%d for %s\n",TriggerType, UniqueObjectName(objList[objIndex]));
+		printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+		printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+		printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+		printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+		printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+		printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+		printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));			
+		
 		}	
 	
 	}

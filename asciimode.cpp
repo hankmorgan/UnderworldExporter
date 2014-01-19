@@ -397,7 +397,15 @@ if (game == SHOCK)
 		}
 	}
 			
-		
+	printf("\nPrint out shade value by tile for level :%d\n",LevelNo);
+	for (y=63; y>=0;y--)
+		{
+		printf ("\n");
+		for (x=0; x<64;x++)
+			{
+				printf("%03d|",LevelInfo[x][y].shockShade) ;
+			}
+		}		
 		
 	printf("\nPrint out slope flags by tile for level :%d\n",LevelNo);
 	for (y=63; y>=0;y--)

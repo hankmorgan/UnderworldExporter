@@ -688,6 +688,10 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].UseAdjacentTextures = (getValAtAddress(lev_ark,address_pointer+8,32) >> 8) & 0x01;
 				LevelInfo[x][y].shockTextureOffset = getValAtAddress(lev_ark,address_pointer+8,32) & 0xF;
 
+				int shockShadeLower  =(getValAtAddress(lev_ark,address_pointer+8,32) >> 16) & 0x0F;
+				int shockShadeUpper  =(getValAtAddress(lev_ark,address_pointer+8,32) >> 24) & 0x0F;
+				LevelInfo[x][y].shockShade = (shockShadeUpper<<4) | shockShadeLower;	//dark is 255.
+
 				LevelInfo[x][y].shockNorthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockSouthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockEastOffset =LevelInfo[x][y].shockTextureOffset;

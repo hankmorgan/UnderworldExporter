@@ -52,7 +52,7 @@ int UseAdjacentTextures;
 int shockTextureOffset;
 int shockNorthOffset; int shockSouthOffset;
 int shockEastOffset; int shockWestOffset;
-
+int shockShade;	//255-0 Dark to light? Made up of two flag values
 long shockNorthCeilHeight; long shockSouthCeilHeight;
 long shockEastCeilHeight; long shockWestCeilHeight;
 
