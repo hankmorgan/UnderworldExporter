@@ -7,7 +7,7 @@
 #define DOORORIGINOFFSET 15
 
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game);
-void RenderDarkModTile(int game, int x, int y, tile &t, short Water,short invert);
+void RenderDarkModTile(int game, int x, int y, tile &t, short Water,short invert,short skipFloor, short skipCeil);
 
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
@@ -16,7 +16,7 @@ void RenderFloorAndCeiling(int game,tile LevelInfo[64][64]);
 void RenderElevatorLeakProtection(int game,tile LevelInfo[64][64]);
 void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
-void RenderElevator(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+
 void RenderSolidTile(int x, int y, tile &t, short Water);
 void RenderOpenTile(int x, int y, tile &t, short Water,short invert);
 void RenderDoorway(int game,int x,int y, tile &t , ObjectItem currDoor);
@@ -39,5 +39,6 @@ void RenderRidgeSWTile(int x, int y, tile &t, short Water,short invert);
 void RenderRidgeSETile(int x, int y, tile &t, short Water,short invert);
 void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor);
 void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void RenderEntityElevator(int game, tile LevelInfo[64][64], ObjectItem &currobj);
 
 #endif /* d3darkmod_h */

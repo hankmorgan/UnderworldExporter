@@ -913,7 +913,7 @@ for (int x=0; x<64;x++)
 				if ((objectMasters[objList[currObj.index].item_id].type == TMAP_SOLID ) || (objectMasters[objList[currObj.index].item_id].type == TMAP_CLIP ))
 					{
 					LevelInfo[x][y].hasPatch= 1;
-					LevelInfo[x][y].PatchIndex = currObj.index;
+//					LevelInfo[x][y].PatchIndex = currObj.index;
 					break;
 					}
 				currObj=objList[currObj.next];
@@ -926,6 +926,7 @@ for (int x=0; x<64;x++)
 
 void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know the tile contains an elevator.
+//Note for shock this is set when I read in the object. I should probably do the same for UW.
 ObjectItem currObj;
 for (int x=0; x<64;x++)
 	{
@@ -939,7 +940,7 @@ for (int x=0; x<64;x++)
 				if ((objectMasters[objList[currObj.index].item_id].type == A_DO_TRAP ) && (currObj.quality==3))
 					{
 					LevelInfo[x][y].hasElevator= 1;
-					LevelInfo[x][y].ElevatorIndex = currObj.index;
+					//LevelInfo[x][y].ElevatorIndex = currObj.index;
 					currObj.tileX=x;
 					currObj.tileY=y;
 					break;
@@ -968,7 +969,7 @@ for (int x=0; x<64;x++)
 				if (objectMasters[objList[currObj.index].item_id].type == A_CHANGE_TERRAIN_TRAP )
 					{
 					LevelInfo[x][y].TerrainChange= 1;
-					LevelInfo[x][y].TerrainChangeIndex = currObj.index;
+					//LevelInfo[x][y].TerrainChangeIndex = currObj.index;
 					//Need to flag the range of tiles affected. X/y of the object gives the dimensions
 					for (int j=x; (j <64 && j<= x+currObj.x); j++  )
 						{

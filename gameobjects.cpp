@@ -28,14 +28,17 @@ void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityNULL_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj);
-void getShockTriggerAction(unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
+void getShockTriggerAction(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
 int LookupxRefTable(xrefTable *xref,int x, int y, int MasterIndex, int tableSize);
 void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
 void replaceMapLink(tile levelInfo[64][64], xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
 void getShockButtons(unsigned char *sub_ark,int add_ptr, ObjectItem objList[1600], int objIndex);
 void shockCommonObject();
+
+extern long SHOCK_CEILING_HEIGHT;
 
 int keycount[256];	//For tracking key usage
 //int levelNo;
@@ -114,7 +117,10 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case A_TELEPORT_TRAP:	//a destination for a teleport.
 				RenderEntityA_TELEPORT_TRAP(game,x,y,z,currobj,objList,LevelInfo);
-				break;			
+				break;	
+			case NULL_TRIGGER:
+				RenderEntityNULL_TRIGGER(game,x,y,z,currobj,objList,LevelInfo);	
+				break;	
 			default:
 				{//just the basic name. with no properties.
 				printf("\n// entity %d\n{\n",EntityCount);
@@ -611,7 +617,7 @@ void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currob
 	printf("\"rotate\" \"0 0 45\"\n");
 	printf("\"interruptable\" \"0\"\n");
 	EntityRotation(currobj.heading);
-	printf("\"target\" \"runscript_%s\n", UniqueObjectName(currobj));
+	printf("\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
 	printf("}\n");EntityCount++;
 	createScriptCall(currobj,x,y,z);	//To run whatever actions this switch performs.
 	return;
@@ -654,18 +660,12 @@ void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &cur
 			EntityCount++;
 			break;
 		case 3:	//rising platform
-			printf("\n// entity %d\n{\n",EntityCount);
-			printf("\"classname\" \"func_mover\"\n");
-			printf("\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY);
-			printf("\"model\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc ,currobj.tileX,currobj.tileY);
-			PrimitiveCount=0;
-			RenderDarkModTile(game,currobj.tileX,currobj.tileY,LevelInfo[currobj.tileX][currobj.tileY],0,0);
-			printf("\n}");
-			EntityCount++;
+			RenderEntityElevator(game,LevelInfo,currobj);
 			break;
 		}
 		return;
 }
+
 
 void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
@@ -694,7 +694,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, Obj
 	//			}
 			printf("\"model\" \"initial_%s_%03d\"\n",UniqueObjectName(currobj),tileCount);
 			printf("\"origin\" \"%d %d %d\"\n",(currobj.tileX+i)*BrushSizeX,(currobj.tileY+j)*BrushSizeY,0);														
-			RenderDarkModTile(game,0,0,LevelInfo[currobj.tileX+i][currobj.tileY+j],LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater,0);
+			RenderDarkModTile(game,0,0,LevelInfo[currobj.tileX+i][currobj.tileY+j],LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater,0,0,0);
 			printf("\n}\n");
 			tileCount++;
 			}
@@ -727,7 +727,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, Obj
 			t.DimY=1;
 			t.DimX=1;
 			t.hasElevator=0;
-			RenderDarkModTile(game,i,j,t,0,0);
+			RenderDarkModTile(game,i,j,t,0,0,0,0);
 			}
 		}
 	printf("\n}\n");
@@ -904,12 +904,18 @@ void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem
 	t.DimX =1; t.DimY=1;
 	t.tileType =1;
 	t.Render=1;
-	t.floorHeight = 15;	//TODO:Is this right?
+	t.floorHeight = 0;	
+	t.ceilingHeight =CEILING_HEIGHT;
 	t.isWater=0;
 	t.hasElevator=0;
-	RenderGenericTile(currobj.tileX,currobj.tileY,t,15,LevelInfo[currobj.tileX][currobj.tileY].floorHeight );
+	RenderGenericTile(currobj.tileX,currobj.tileY,t,CEILING_HEIGHT,0 );
 	printf("\n}");
 	createScriptCall(currobj,x,y,z);	
+}
+
+void RenderEntityNULL_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+createScriptCall(currobj,x,y,z);
 }
 
 
@@ -1466,7 +1472,7 @@ while (k<=chunkUnpackedLength)
 				objList[objIndex].conditions[3] = getValAtAddress(sub_ark,add_ptr+11,8);
 				objList[objIndex].TriggerOnce = getValAtAddress(sub_ark,add_ptr+7,8);
 				
-				getShockTriggerAction(sub_ark,add_ptr,xRef,objList,objIndex);
+				getShockTriggerAction(LevelInfo,sub_ark,add_ptr,xRef,objList,objIndex);
 				printf("\tCondition 0: %d\n",objList[objIndex].conditions[0]);
 				printf("\tCondition 1: %d\n",objList[objIndex].conditions[1]);
 				printf("\tCondition 2: %d\n",objList[objIndex].conditions[2]);
@@ -1525,7 +1531,7 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 
 }
 
-void getShockTriggerAction(unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex)
+void getShockTriggerAction(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex)
 {
 printf("",UniqueObjectName(objList[objIndex]));
 int TriggerType =getValAtAddress(sub_ark,add_ptr+6,8);
@@ -1692,9 +1698,17 @@ switch (TriggerType)
 		printf("\t\tSpeed:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+0x10,16);
-		objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR] = getValAtAddress(sub_ark,add_ptr+0x14,16);
-		objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING] = getValAtAddress(sub_ark,add_ptr+0x16,16);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR] = getValAtAddress(sub_ark,add_ptr+0x14,16);	//5
+		objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING] = getValAtAddress(sub_ark,add_ptr+0x16,16);	//6
 		objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
+		LevelInfo[objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X]][objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y]].hasElevator =1;
+		
+		short ceilingFlag = (objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING]<=SHOCK_CEILING_HEIGHT);
+		short floorFlag = (objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR] <= SHOCK_CEILING_HEIGHT);
+		
+		short elevatorFlag = (ceilingFlag << 1) | (floorFlag);
+		
+		LevelInfo[objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X]][objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y]].hasElevator =elevatorFlag;
 		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
 		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));

@@ -59,7 +59,7 @@ int x; int y;
 				if ( LevelInfo[x][y].TerrainChange == 0)
 					{
 					//A regular tile with no special properites.
-					RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0);
+					RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0,0,0);
 					}
 				if (LevelInfo[x][y].isDoor == 1)
 					{//Adds a UW door frame.
@@ -68,9 +68,10 @@ int x; int y;
 				}
 			}
 		}
+
+		RenderElevatorLeakProtection(game,LevelInfo);
 		if (game != SHOCK)
-			{
-			RenderElevatorLeakProtection(game,LevelInfo);
+			{			
 			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
 			}
 		printf("}");	//End worldspawn section of the .map file.
@@ -88,6 +89,18 @@ int x; int y;
 				RenderObjectList(game,LevelInfo,objList);
 			case SHOCK:
 				RenderObjectList(game,LevelInfo,objList);
+				for (y=0; y<=63;y++) 
+					{
+					for (x=0; x<=63;x++)
+						{
+						if (LevelInfo[x][y].hasElevator >=1)
+							{//render the shock elevators
+							ObjectItem tempObj;
+							tempObj.tileX=x;tempObj.tileY=y;
+							RenderEntityElevator(game,LevelInfo,tempObj);
+							}
+						}
+					}
 				break;
 			}
 		//Now render thewater
@@ -157,7 +170,7 @@ int x; int y;
 							
 							}
 						
-						RenderDarkModTile(game,x,y,t,1,0);
+						RenderDarkModTile(game,x,y,t,1,0,0,0);
 						printf("}\n");
 						EntityCount++;	
 					}
@@ -201,7 +214,7 @@ int x; int y;
 		
 }
 
-void RenderDarkModTile(int game, int x, int y, tile &t, short Water,short invert)
+void RenderDarkModTile(int game, int x, int y, tile &t, short Water,short invert,short skipFloor, short skipCeil)
 { 
 //Picks the tile to render based on tile type/flags.
 if (t.Render == 1)
@@ -215,32 +228,32 @@ if (t.Render == 1)
 			}
 		case TILE_OPEN:		//1
 			{//open
-			RenderOpenTile(x,y,t,Water,0);	//floor
-			if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+			if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+			if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 			return;
 			}
 		case 2: 
 			{//diag se
-			RenderDiagSETile(x,y,t,Water,0);
-			if (game == SHOCK) {RenderDiagSETile(x,y,t,Water,1);}
+			if (skipFloor !=1) {RenderDiagSETile(x,y,t,Water,0);}//floor
+			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagSETile(x,y,t,Water,1);}
 			return;		
 			}
 		case 3: 
 			{	//diag sw 
-			RenderDiagSWTile(x,y,t,Water,0);
-			if (game == SHOCK) {RenderDiagSWTile(x,y,t,Water,1);}
+			if (skipFloor !=1) {RenderDiagSWTile(x,y,t,Water,0);}//floor
+			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagSWTile(x,y,t,Water,1);}
 			return;		
 			}
 		case 4: 	
 			{	//diag ne
-			RenderDiagNETile(x,y,t,Water,invert);
-			if (game == SHOCK) {RenderDiagNETile(x,y,t,Water,1);}
+			if (skipFloor !=1) {RenderDiagNETile(x,y,t,Water,invert);}//floor
+			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagNETile(x,y,t,Water,1);}
 			return;		
 			}
 		case 5: 
 			{//diag nw
-			RenderDiagNWTile(x,y,t,Water,invert);
-			if (game == SHOCK) {RenderDiagNWTile(x,y,t,Water,1);}
+			if (skipFloor !=1) {RenderDiagNWTile(x,y,t,Water,invert);}//floor
+			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagNWTile(x,y,t,Water,1);}
 			return;
 			}	
 		case TILE_SLOPE_N:	//6
@@ -249,26 +262,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderSlopeNTile(x,y,t,Water,0);
-					RenderSlopeNTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderSlopeNTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderSlopeNTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderSlopeNTile(x,y,t,Water,0);
-					RenderSlopeSTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderSlopeNTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) { RenderSlopeSTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderSlopeNTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderSlopeNTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
 					RenderSlopeNTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
 					break;
 					}
 				}
@@ -280,26 +293,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderSlopeSTile(x,y,t,Water,0);
+					if (skipFloor !=1) {RenderSlopeSTile(x,y,t,Water,0);}	//floor
 					RenderSlopeSTile(x,y,t,Water,1);
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderSlopeSTile(x,y,t,Water,0);
+					if (skipFloor !=1) {RenderSlopeSTile(x,y,t,Water,0);}	//floor
 					RenderSlopeNTile(x,y,t,Water,1);
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderSlopeSTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderSlopeSTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderSlopeSTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderSlopeSTile(x,y,t,Water,1);}
 					break;
 					}
 				}	
@@ -311,26 +324,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderSlopeETile(x,y,t,Water,0);
+					if (skipFloor !=1) {RenderSlopeETile(x,y,t,Water,0);}//floor
 					RenderSlopeETile(x,y,t,Water,1);
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderSlopeETile(x,y,t,Water,0);
+					if (skipFloor !=1) {RenderSlopeETile(x,y,t,Water,0);}//floor
 					RenderSlopeWTile(x,y,t,Water,1);
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderSlopeETile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderSlopeETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderSlopeETile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderSlopeETile(x,y,t,Water,1);}
 					break;
 					}
 				}
@@ -342,26 +355,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderSlopeWTile(x,y,t,Water,0);
-					RenderSlopeWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderSlopeWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderSlopeWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderSlopeWTile(x,y,t,Water,0);
-					RenderSlopeETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderSlopeWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderSlopeETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderSlopeWTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderSlopeWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderSlopeWTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderSlopeWTile(x,y,t,Water,1);}
 					break;
 					}
 				}
@@ -373,26 +386,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderValleyNWTile(x,y,t,Water,0);
-					RenderValleyNWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleyNWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderValleyNWTile(x,y,t,Water,0);
-					RenderValleySETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleyNWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderValleyNWTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderValleyNWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleyNWTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNWTile(x,y,t,Water,1);}
 					break;
 					}
 				}			
@@ -404,26 +417,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderValleyNETile(x,y,t,Water,0);
-					RenderValleyNETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleyNETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderValleyNETile(x,y,t,Water,0);
-					RenderValleySWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleyNETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderValleyNETile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderValleyNETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleyNETile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNETile(x,y,t,Water,1);}
 					break;
 					}
 				}						
@@ -435,26 +448,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderValleySETile(x,y,t,Water,0);
-					RenderValleySETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleySETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderValleySETile(x,y,t,Water,0);
-					RenderValleyNWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleySETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderValleySETile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderValleySETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleySETile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySETile(x,y,t,Water,1);}
 					break;
 					}
 				}						
@@ -466,26 +479,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderValleySWTile(x,y,t,Water,0);
-					RenderValleySWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleySWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderValleySWTile(x,y,t,Water,0);
-					RenderValleyNETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderValleySWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderValleySWTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderValleySWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleySWTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySWTile(x,y,t,Water,1);}
 					break;
 					}
 				}			
@@ -497,26 +510,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderRidgeSETile(x,y,t,Water,0);
-					RenderRidgeSETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeSETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeSETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderRidgeSETile(x,y,t,Water,0);
-					RenderRidgeNWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeSETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeNWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderRidgeSETile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderRidgeSETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleySETile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySETile(x,y,t,Water,1);}
 					break;
 					}
 				}			
@@ -528,26 +541,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderRidgeSWTile(x,y,t,Water,0);
-					RenderRidgeSWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeSWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeSWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderRidgeSWTile(x,y,t,Water,0);
-					RenderRidgeNETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeSWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeNETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderRidgeSWTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderRidgeSWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleySWTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleySWTile(x,y,t,Water,1);}
 					break;
 					}
 				}
@@ -559,26 +572,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderRidgeNWTile(x,y,t,Water,0);
-					RenderRidgeNWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeNWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeNWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderRidgeNWTile(x,y,t,Water,0);
-					RenderRidgeSETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeNWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeSETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderRidgeNWTile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderRidgeNWTile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleyNWTile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNWTile(x,y,t,Water,1);}
 					break;
 					}
 				}			
@@ -590,26 +603,26 @@ if (t.Render == 1)
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-					RenderRidgeNETile(x,y,t,Water,0);
-					RenderRidgeNETile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeNETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeNETile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-					RenderRidgeNETile(x,y,t,Water,0);
-					RenderRidgeSWTile(x,y,t,Water,1);
+					if (skipFloor !=1) {RenderRidgeNETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderRidgeSWTile(x,y,t,Water,1);}
 					break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-					RenderRidgeNETile(x,y,t,Water,0);
-					if (game == SHOCK) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
+					if (skipFloor !=1) {RenderRidgeNETile(x,y,t,Water,0);}//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 					break;
 					}
 				case SLOPE_CEILING_ONLY:
 					{
-					RenderValleyNETile(x,y,t,Water,1);
-					RenderOpenTile(x,y,t,Water,0);	//floor
+					if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
+					if ((game == SHOCK) && (skipCeil!=1)) {RenderValleyNETile(x,y,t,Water,1);}
 					break;
 					}
 				}			
@@ -813,7 +826,7 @@ switch (game)
 						if ((LevelInfo[x][y].tileType == 1))
 							//Only do a ceiling for open and diagonals. everything else gets it's ceiling on the first pass due to slope flags
 							{
-							RenderDarkModTile(game,x,y,LevelInfo[x][y],0,1);
+							RenderDarkModTile(game,x,y,LevelInfo[x][y],0,1,0,0);
 							}
 					}
 				}
@@ -2389,8 +2402,9 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 		{
 		for (int x=0; x<=63;x++)
 			{
-			if (LevelInfo[x][y].hasElevator == 1)
+			if (LevelInfo[x][y].hasElevator >= 1)
 				{
+				//Below the map
 				tile t=LevelInfo[x][y];
 				printf ("\n");
 				printf("// primitive %d\n",PrimitiveCount++);
@@ -2415,6 +2429,34 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 				getFloorTextureName(t, fBOTTOM);
 				//printf("0"); 
 				printf ("}\n}\n");
+				
+				//Above the map for shock
+				if (game== SHOCK)
+					{
+					printf ("\n");
+					printf("// primitive %d\n",PrimitiveCount++);
+					printf("{\nbrushDef3\n{\n");
+					//east face 
+					printf ("( 1 0 0 %d )",-((x+t.DimX)*BrushSizeX)-10);
+					getWallTextureName(t,fEAST,0);
+					//north face 
+					printf ("( 0 1 0 %d )",-((y+t.DimY)*BrushSizeY)-10);
+					getWallTextureName(t,fNORTH,0);
+					//top face
+					printf ("( 0 0 1 %d )", -CEILING_HEIGHT*2*BrushSizeZ );	//ugly.
+					getFloorTextureName(t,fTOP);
+					//west face
+					printf ("( -1 0 0 %d )", +((x)*BrushSizeX)-10);
+					getWallTextureName(t,fWEST,0);
+					//south face
+					printf ("( 0 -1 0 %d )", +((y)*BrushSizeY)-10);
+					getWallTextureName(t, fSOUTH,0);
+					//bottom face
+					printf ("( 0 0 -1 %d )", CEILING_HEIGHT*BrushSizeZ);	
+					getFloorTextureName(t, fBOTTOM);
+					//printf("0"); 
+					printf ("}\n}\n");				
+					}
 				}
 			}
 		}
@@ -2511,3 +2553,31 @@ void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]
 				fclose(f);
 			}
 	}
+
+void RenderEntityElevator(int game, tile LevelInfo[64][64], ObjectItem &currobj)
+{
+//	1 = floor only	(uw style)
+//	2 = ceiling only 
+//  3 = both	
+		
+		//floor
+ 		printf("\n// entity %d\n{\n",EntityCount);
+		printf("\"classname\" \"func_mover\"\n");
+		printf("\"name\" \"floor_%03d_%03d\"\n" ,currobj.tileX,currobj.tileY);
+		printf("\"model\" \"floor_%03d_%03d\"\n" ,currobj.tileX,currobj.tileY);
+		PrimitiveCount=0;
+		RenderDarkModTile(game,currobj.tileX,currobj.tileY,LevelInfo[currobj.tileX][currobj.tileY],0,0,0,1);
+		printf("\n}");
+		
+		//ceiling
+		EntityCount++;
+		printf("\n// entity %d\n{\n",EntityCount);
+		printf("\"classname\" \"func_mover\"\n");
+		printf("\"name\" \"ceiling_%03d_%03d\"\n",currobj.tileX,currobj.tileY);
+		printf("\"model\" \"ceiling_%03d_%03d\"\n",currobj.tileX,currobj.tileY);
+		PrimitiveCount=0;
+		RenderDarkModTile(game,currobj.tileX,currobj.tileY,LevelInfo[currobj.tileX][currobj.tileY],0,1,1,0);
+		printf("\n}");
+		EntityCount++;
+
+}

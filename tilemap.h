@@ -59,13 +59,17 @@ long shockEastCeilHeight; long shockWestCeilHeight;
 int DoorIndex;	//Index to the door object if this tile has one.
 
 int hasPatch;	//Indicates that this tile has a tmap object in it.
-int PatchIndex;	//Index to the tmap object
+//int PatchIndex;	//Index to the tmap object
 
 int hasElevator;	//Indicates that the tile has an elevator
-int ElevatorIndex;	//index to the elevator do_trap
+					//Some flags are needed for this to support shock elevators
+					//	1 = floor only	(uw style)
+					//	2 = ceiling only 
+					//  3 = both	
+//int ElevatorIndex;	//index to the elevator do_trap
 
 int TerrainChange;	//Indicates that the tile can change into another type of tile
-int TerrainChangeIndex;	//index to the change terrain trap.
+//int TerrainChangeIndex;	//index to the change terrain trap.
 };
 
 
