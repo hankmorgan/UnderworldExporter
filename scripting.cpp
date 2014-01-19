@@ -822,26 +822,32 @@ switch (currObj.TriggerAction)
 			switch (LevelInfo[triggerX][triggerY].hasElevator)
 				{
 				case 1: //floor only moves
-					printf("\tsys.println(\"Initial global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
-					printf("\tfloat displacement = %d -%s_%03d_%03d_state;\n",targetFloor, objDesc,triggerX,triggerY );
+					printf("\tsys.println(\"Initial floor global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+					
+					printf("\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
 					printf("\t$floor_%03d_%03d.move( UP, displacement * %d  );\n", triggerX,triggerY,BrushSizeZ);
-					printf("\t%s_%03d_%03d_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+					printf("\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
 					break;
 				case 2:	//Ceiling only moves
-					//displacement = _state - targetCeiling;
-					printf("\tsys.println(\"Initial global should be\" + %d);\n",LevelInfo[triggerX][triggerY].ceilingHeight);	
-					printf("\tfloat displacement = %d -%s_%03d_%03d_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+					printf("\tsys.println(\"Initial ceiling global should be\" + %d);\n",LevelInfo[triggerX][triggerY].ceilingHeight);	
+					
+					printf("\tfloat displacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
 					printf("\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
-					printf("\t%s_%03d_%03d_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
+					printf("\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
 					break;
 				case 3: //both move
-					//displacement = _state - targetFloor;
-					printf("\tsys.println(\"Initial global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
-					printf("\tfloat displacement = %d -%s_%03d_%03d_state;\n",targetFloor, objDesc,triggerX,triggerY );
-					printf("\t$ceiling_%03d_%03d.move( UP, %d );\n", triggerX,triggerY);
-					printf("\tdisplacement = %d -%s_%03d_%03d_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+					printf("\tsys.println(\"Initial floor global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+					
+					printf("\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
 					printf("\t$floor_%03d_%03d.move( UP, displacement * %d );\n",triggerX,triggerY,BrushSizeZ);
-					printf("\t%s_%03d_%03d_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+					printf("\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+					
+					printf("\tsys.println(\"Initial ceiling global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+					printf("\tdisplacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+					printf("\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
+					printf("\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
+					
+					
 				}
 				//printf("\t%s_%03d_%03d_state = %s_%03d_%03d_state+displacement;\n\n", objDesc,triggerX,triggerY, objDesc,triggerX,triggerY);
 
