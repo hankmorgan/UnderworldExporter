@@ -671,7 +671,13 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
 				
 				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=6))//If a sloped tile has no slope then it's a open tile.
-					{LevelInfo[x][y].tileType =1;}
+					{
+					LevelInfo[x][y].tileType =1;
+					}
+				if ((LevelInfo[x][y].tileType ==1) && (LevelInfo[x][y].shockSteep >0))	//similarly an open tile can't have a slope at all
+					{
+					 LevelInfo[x][y].shockSteep=0;
+					}
 				LevelInfo[x][y].indexObjectList = getValAtAddress(lev_ark,address_pointer+4,16);
 				//if(LevelInfo[x][y].indexObjectList!=0)
 				//	{

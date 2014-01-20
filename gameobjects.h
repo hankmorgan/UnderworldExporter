@@ -1,113 +1,6 @@
 #ifndef gameobjects_h
 	#define gameobjects_h
 	
-//Master object type definition
-struct ObjectItem
-{
-	int index;	//it's own index in case I need to find myself.
-
-   int item_id;	//0-8
-   int flags;	//9-12
-   short enchantment;	//12
-   short doordir;	//13
-   short invis;		//14
-   short is_quant;	//15
-   //or
-   int texture;	//8-15
-  // Note: some objects don't have flags and use the whole lower byte as a texture number (gravestone, picture, lever, switch, shelf, bridge, ..)
-  // 0002 position
-   int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
-   int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
-   int x; //   10-12   3   "ypos"      Object Y position (0-7)
-   int y; //  13-15   3   "xpos"      Object X position (0-7)
-   //0004 quality / chain
-   int quality;	//;     0- 5   6   "quality"   Quality
-   long next; //    6-15   10  "next"      Index of next object in chain
-   
-   //0006 link / special
-   //     0- 5   6   "owner"     Owner / special
-
-   int owner;	//Also special
-   //     6-15   10  (*)         Quantity / special link / special property
-   
-   int link	;	//also quantity
-   //int quantity; //the same
-   
-   
-   //The values stored in the NPC info area (19 bytes) contain infos for
-   //critters unique to each object.
-   //0008 
-	int npc_hp;	//0-7
-	//0009	
-	//blank?
-	//000a   
-	//blank?
-	//000b   Int16      
-	int npc_goal;	//0-3
-	int npc_gtarg;    //4-11   
-	//000d        
-	int npc_level;	//0-3
-	int npc_talkedto;   //13     
-	int npc_attitude;	//14-15
-    //000f    
-    int npc_height ;//6- 12 ?
-   //0016  
-    int npc_yhome;	// 4-9    
-     int npc_xhome; // 10-15  
-   //0018   0010   Int8   0-4:   npc_heading?
-//   0019      Int8   0-6:   
-   int npc_hunger; //(?)
-   //001a   0012   Int8          
-   int npc_whoami;
-   
-   //Some stuff I need for attaching objects to joints.
-   int objectOwner;	//index to the npc carrying the object
-   int objectOwnerName;	//Npc whoami for
-   int objectOwnerEntity;	//entity number that the owner was given during renderentity
-   
-   int joint;	//index to joint no.
-   
-   int levelno;
-   int tileX;	//Position of the object on the tilemap
-   int tileY;
-   
-   
-   
-   //Shock specific stuff
-//int index;
-//int LookUpIndex; item_id
-//int item_id;
-int InUseFlag;
-int ObjectClass;
-int ObjectSubClass;
-int ObjectSubClassIndex;
-//int XCoord;
-//int YCoord;
-//int ZCoord;
-int Angle1;
-int Angle2;
-int Angle3;
-int AIIndex;
-int ObjectType;
-int HitPoints;
-int State;
-//int next;	//Next object in this list
-//int tileX;
-//int tileY;
-int duplicate;   //when it extends into another tile
-int TriggerOnce;
-int TriggerAction;	//For triggers
-//Further generic properties for data pulled back from subclass blocks.
-//int Property0;
-//int Property1;
-//int Property2;
-//int Property3;
-//int Property4;
-//int mstrIndex;	//Temp while I sort out ids in shock
-int shockProperties[10]; 
-int conditions[4];  	
-int sprite;
-};
 
 
 //Object types
@@ -282,6 +175,102 @@ int sprite;
 #define TRIG_PROPERTY_EMAIL		9
 #define TRIG_PROPERTY_TYPE		8
 
+//Master object type definition
+struct ObjectItem
+{
+   int index;	//it's own index in case I need to find myself.
+   int item_id;	//0-8
+   int flags;	//9-12
+   short enchantment;	//12
+   short doordir;	//13
+   short invis;		//14
+   short is_quant;	//15
+  
+   int texture;	// Note: some objects don't have flags and use the whole lower byte as a texture number 
+				//(gravestone, picture, lever, switch, shelf, bridge, ..)
+
+   int zpos;    //  0- 6   7   "zpos"      Object Z position (0-127)
+   int heading;	//        7- 9   3   "heading"   Heading (*45 deg)
+   int x; //   10-12   3   "ypos"      Object Y position (0-7)
+   int y; //  13-15   3   "xpos"      Object X position (0-7)
+   //0004 quality / chain
+   int quality;	//;     0- 5   6   "quality"   Quality
+   long next; //    6-15   10  "next"      Index of next object in chain
+   
+   //0006 link / special
+   //     0- 5   6   "owner"     Owner / special
+
+   int owner;	//Also special
+   //     6-15   10  (*)         Quantity / special link / special property
+   
+   int link	;	//also quantity
+   
+   //The values stored in the NPC info area (19 bytes) contain infos for
+   //critters unique to each object.
+   //0008 
+	int npc_hp;	//0-7
+	//0009	
+	//blank?
+	//000a   
+	//blank?
+	//000b   Int16      
+	short npc_goal;	//0-3
+	short npc_gtarg;    //4-11   
+	//000d        
+	short npc_level;	//0-3
+	short npc_talkedto;   //13     
+	short npc_attitude;	//14-15
+    //000f    
+    short npc_height ;//6- 12 ?
+   //0016  
+    short npc_yhome;	// 4-9    
+    short npc_xhome; // 10-15  
+   //0018   0010   Int8   0-4:   npc_heading?
+//   0019      Int8   0-6:   
+    short npc_hunger; //(?)
+   //001a   0012   Int8          
+    int npc_whoami;
+   
+   //Some stuff I need for attaching objects to joints.
+   int objectOwner;	//index to the npc carrying the object
+   int objectOwnerName;	//Npc whoami for
+   int objectOwnerEntity;	//entity number that the owner was given during renderentity
+   
+   short joint;	//index to joint no.
+   
+   int levelno;
+   int tileX;	//Position of the object on the tilemap
+   int tileY;
+ 
+   
+   //Shock specific stuff
+	short InUseFlag;
+	int ObjectClass;
+	int ObjectSubClass;
+	int ObjectSubClassIndex;
+	int Angle1;
+	int Angle2;
+	int Angle3;
+	int AIIndex;
+	int ObjectType;
+	int HitPoints;
+	int State;
+	int duplicate;   //when it extends into another tile
+	int TriggerOnce;
+	int TriggerAction;	//For triggers
+	int shockProperties[10]; //Further generic properties for data pulled back from subclass blocks.
+	int conditions[4];  	
+	int sprite;
+	
+	//scripting state flags
+	short global;
+};
+
+
+
+
+
+
 struct objectMaster	//For common object properties.
 {
 int index;	
@@ -295,8 +284,8 @@ int objSubClass;
 int objSubClassIndex;
 
 
-int renderType;
-int frame1;	//Frame no
+short renderType;
+short frame1;	//Frame no
 
 };
 
@@ -316,9 +305,9 @@ int	tileY;// position
 int next;
 int	MstIndex;// into master object table
 int nextTile; //objects in next tile
-int duplicate;
-int duplicateAssigned;
-int duplicateNextAssigned;
+short duplicate;
+short duplicateAssigned;
+short duplicateNextAssigned;
 };
 
 struct mstTable

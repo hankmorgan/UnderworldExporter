@@ -21,6 +21,7 @@ using namespace std;
 
 texture *textureMasters;
 objectMaster *objectMasters;
+FILE *MAPFILE;
 //shockObjectMaster *shockObjectMasters;
 
 void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
@@ -239,8 +240,14 @@ void exportMaps(int game,int mode,int LevelNo)
 	long texture_map_shock[272]; 
 
 	char *filePath;
-	
-	
+	if (mode == D3_MODE)
+		{
+		if (fopen_s(&MAPFILE,MAP_OUTPUT_FILE, "w")!=0)
+		{
+		printf("Unable to create output file for map");
+		return;
+		}
+		}
 	switch (game)
 		{
 		case UWDEMO:		//Underworld Demo
@@ -296,7 +303,6 @@ void exportMaps(int game,int mode,int LevelNo)
 		}
 
 
-
 	switch (mode)
 		{
 		case ASCII_MODE:		//ascii + other data maps
@@ -306,7 +312,8 @@ void exportMaps(int game,int mode,int LevelNo)
 			}		
 		case D3_MODE:		//D3/Dark Mod
 			{
-			RenderDarkModLevel(LevelInfo,objList,game);		
+			RenderDarkModLevel(LevelInfo,objList,game);	
+			fclose(MAPFILE);
 			break;
 			}
 		case SCRIPT_BUILD_MODE:

@@ -31,8 +31,9 @@ float floor_align2_2;
 float floor_align2_3;
 
 
-int water;
-int lava;
+short water;
+short lava;
+short ladder;
 } texture;
 
 

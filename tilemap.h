@@ -44,7 +44,7 @@ short tileX;
 short tileY;
 
 //Shock Specific Stuff
-int shockSlopeFlag;	//For controlling ceiling slopes for shock.
+short shockSlopeFlag;	//For controlling ceiling slopes for shock.
 short shockHazard;
 int shockCeilingTexture;
 int shockSteep;
@@ -58,18 +58,21 @@ long shockEastCeilHeight; long shockWestCeilHeight;
 
 int DoorIndex;	//Index to the door object if this tile has one.
 
-int hasPatch;	//Indicates that this tile has a tmap object in it.
+short hasPatch;	//Indicates that this tile has a tmap object in it.
 //int PatchIndex;	//Index to the tmap object
 
-int hasElevator;	//Indicates that the tile has an elevator
+short hasElevator;	//Indicates that the tile has an elevator
 					//Some flags are needed for this to support shock elevators
 					//	1 = floor only	(uw style)
 					//	2 = ceiling only 
 					//  3 = both	
 //int ElevatorIndex;	//index to the elevator do_trap
 
-int TerrainChange;	//Indicates that the tile can change into another type of tile
+short TerrainChange;	//Indicates that the tile can change into another type of tile
 //int TerrainChangeIndex;	//index to the change terrain trap.
+
+	//scripting state flags
+	short global;
 };
 
 

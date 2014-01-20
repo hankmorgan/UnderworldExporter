@@ -35,7 +35,7 @@
 #define SCRIPT_MAIN_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptmain.txt"
 #define SCRIPT_BODY_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptbody.txt"
 #define SCRIPT_FINAL_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\map.script"
-
+#define MAP_OUTPUT_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\map.map"
 /*Globals*/
 extern int BrushSizeX;
 extern int BrushSizeY;
