@@ -67,7 +67,6 @@
 #define  AN_OPEN_TRIGGER 59
 #define  AN_UNLOCK_TRIGGER 60
 #define  A_FOUNTAIN	61
-#define  NULL_TRIGGER 62
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
 #define	SHOCK_TRIGGER_ENTRY			100	//Player enters trigger's tile

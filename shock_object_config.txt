@@ -373,7 +373,7 @@
 372 11 0 32 HUMANOID_CORPSE_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 373 11 0 33 ROBOT_CORPSE_EXPLOSION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 374 12 0 0 ENTRY_TRIGGER trigger_multiple entity 54
-375 12 0 1 NULL_TRIGGER atdm:target_callscriptfunction entity 62
+375 12 0 1 NULL_TRIGGER atdm:target_callscriptfunction entity 101
 376 12 0 2 FLOOR_TRIGGER models/darkmod/decorative/hourglass.ase model 102
 377 12 0 3 PLAYER_DEATH_TRIGGER models/darkmod/decorative/hourglass.ase model 103
 378 12 0 4 DEATH_WATCH_TRIGGER models/darkmod/decorative/hourglass.ase model 104
@@ -382,7 +382,7 @@
 381 12 0 7 CRITTER_AI_HINT models/darkmod/decorative/hourglass.ase model 107
 382 12 0 8 LEVEL_ENTRY_TRIGGER models/darkmod/decorative/hourglass.ase model 108
 383 12 0 9 CONTINUOUS_TRIGGER models/darkmod/decorative/hourglass.ase model 109
-384 12 0 10 REPULSOR models/darkmod/decorative/hourglass.ase model 110
+384 12 0 10 REPULSOR func_forcefield entity 110
 385 12 0 11 ECOLOGY_TRIGGER models/darkmod/decorative/hourglass.ase model 111
 386 12 0 12 SHODAN_TRIGGER models/darkmod/decorative/hourglass.ase model 112
 387 12 1 0 TRIP_BEAM models/darkmod/decorative/hourglass.ase model 113

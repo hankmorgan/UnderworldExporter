@@ -40,5 +40,6 @@ void RenderRidgeSETile(int x, int y, tile &t, short Water,short invert);
 void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor);
 void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderEntityElevator(int game, tile LevelInfo[64][64], ObjectItem &currobj);
+void RenderGenericTileAroundOrigin(int x, int y, tile &t, int iCeiling ,int iFloor,int tileHeight);
 
 #endif /* d3darkmod_h */

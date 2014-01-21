@@ -2497,6 +2497,40 @@ void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor)
 	fprintf (MAPFILE, "}\n}\n");
 }
 
+
+void RenderGenericTileAroundOrigin(int x, int y, tile &t, int iCeiling ,int iFloor,int tileHeight)
+{
+//
+//Just for special temporary tiles
+
+int xPlane; int yPlane;int zPlane;
+xPlane = BrushSizeX/2;
+yPlane = BrushSizeY/2;
+zPlane = tileHeight/2;
+
+	fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);
+	fprintf (MAPFILE, "{\nbrushDef3\n{\n");
+	//East face
+	fprintf (MAPFILE, "( 1 0 0 %d )",-xPlane);
+	getWallTextureName(t,fEAST,t.isWater);
+	//North face
+	fprintf (MAPFILE, "( 0 1 0 %d ) ",-yPlane);
+	getWallTextureName(t,fNORTH,t.isWater);
+	//Top face
+	fprintf (MAPFILE, "( 0 0 1 %d )", - zPlane );	
+	getFloorTextureName(t,fTOP);
+	//West face
+	fprintf (MAPFILE, "( -1 0 0 %d )", -(xPlane));
+	getWallTextureName(t,fWEST,t.isWater);
+	//South face
+	fprintf (MAPFILE, "( 0 -1 0 %d )", -(yPlane));
+	getWallTextureName(t,fSOUTH,t.isWater);
+	//Bottom face 
+	fprintf (MAPFILE, "( 0 0 -1 %d ) ", -zPlane);	
+	getFloorTextureName(t,fBOTTOM);
+	fprintf (MAPFILE, "}\n}\n");
+}
+
 void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 	{
 	int i;

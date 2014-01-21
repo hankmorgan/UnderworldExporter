@@ -1038,7 +1038,7 @@ switch(objectMasters[targetObj.item_id].type )
 	case DOOR:	//For a door I activate it's lock object
 		fprintf(fBODY,"\t$a_lock_%03d_%03d.activate($player1);\n",targetObj.tileX, targetObj.tileY); 
 		break;
-	case NULL_TRIGGER:	//I activate the script call. *Nullscript can be many things such as cameras so I will need to account for that at some stage.
+	case SHOCK_TRIGGER_NULL:	//I activate the script call. *Nullscript can be many things such as cameras so I will need to account for that at some stage.
 		fprintf(fBODY,"\t$runscript_%s.activate($player1);\n", UniqueObjectName(targetObj)); 
 		break;
 	default:
