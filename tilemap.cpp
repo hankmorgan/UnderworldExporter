@@ -693,7 +693,9 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].shockSlopeFlag = (getValAtAddress(lev_ark,address_pointer+8,32) >> 10) & 0x03;
 				LevelInfo[x][y].UseAdjacentTextures = (getValAtAddress(lev_ark,address_pointer+8,32) >> 8) & 0x01;
 				LevelInfo[x][y].shockTextureOffset = getValAtAddress(lev_ark,address_pointer+8,32) & 0xF;
-
+//unknownflags
+//70E000E0
+//	printf("\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
 				int shockShadeLower  =(getValAtAddress(lev_ark,address_pointer+8,32) >> 16) & 0x0F;
 				int shockShadeUpper  =(getValAtAddress(lev_ark,address_pointer+8,32) >> 24) & 0x0F;
 				LevelInfo[x][y].shockShade = (shockShadeUpper<<4) | shockShadeLower;	//dark is 255.

@@ -844,7 +844,7 @@ switch (currObj.TriggerAction)
 		int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
 		int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
 		int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
-		int targetCeiling = currObj.shockProperties[TRIG_PROPERTY_CEILING];
+		int targetCeiling = CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
 		
 		const char *objDesc="lift";

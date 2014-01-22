@@ -73,6 +73,7 @@ short TerrainChange;	//Indicates that the tile can change into another type of t
 
 	//scripting state flags
 	short global;
+
 };
 
 
