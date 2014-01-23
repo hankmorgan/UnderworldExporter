@@ -942,8 +942,9 @@ void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &curr
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf (MAPFILE, "\"name\" \"repulsor_%s\"\n",UniqueObjectName(currobj));	
 	fprintf (MAPFILE, "\"model\" \"repulsor_s\"\n",UniqueObjectName(currobj));
-	fprintf (MAPFILE, "\"target0\" \"repulsor_%s_target\"\n",UniqueObjectName(currobj));	
-	int originZ = (CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight) - LevelInfo[currobj.tileX][currobj.tileY].floorHeight- 8;
+	fprintf (MAPFILE, "\"target0\" \"repulsor_%s_target_on\"\n",UniqueObjectName(currobj));	
+	//int originZ = (CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight) - LevelInfo[currobj.tileX][currobj.tileY].floorHeight- 8;
+	int originZ = (currobj.State >> 3) * BrushSizeZ - LevelInfo[currobj.tileX][currobj.tileY].floorHeight;
 	fprintf (MAPFILE, "\"origin\" \"%f %f %d\"\n",x,y,(originZ/2)*BrushSizeZ);
 	fprintf (MAPFILE, "\"applyVelocity\" \"1\"\n");	
 	fprintf (MAPFILE, "\"start_on\" \"1\"\n");	
@@ -968,9 +969,20 @@ void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &curr
 	//Now create a target for it.
 	fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount++);
 	fprintf (MAPFILE, "\"classname\" \"target_null\"\n", objectMasters[currobj.item_id].path);
-	fprintf (MAPFILE, "\"name\" \"repulsor_%s_target\"\n",UniqueObjectName(currobj));
-	fprintf (MAPFILE, "\"origin\" \"%f %f %d\"\n",x,y,(CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight - 1) * BrushSizeZ);
-	fprintf (MAPFILE, "\n}");		
+	fprintf (MAPFILE, "\"name\" \"repulsor_%s_target_on\"\n",UniqueObjectName(currobj));
+	//fprintf (MAPFILE, "\"origin\" \"%f %f %d\"\n",x,y,(CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight - 1) * BrushSizeZ);
+	fprintf (MAPFILE, "\"origin\" \"%f %f %d\"\n",x,y, (1+(currobj.State >> 3))*BrushSizeZ);
+	fprintf (MAPFILE, "\n}");	
+	
+	//and for when it is off. At the repulsor trigger origin
+	fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount++);
+	fprintf (MAPFILE, "\"classname\" \"target_null\"\n", objectMasters[currobj.item_id].path);
+	fprintf (MAPFILE, "\"name\" \"repulsor_%s_target_off\"\n",UniqueObjectName(currobj));
+	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);
+	fprintf (MAPFILE, "\n}");	
+	
+	//and a script object for controlling it.
+	createScriptCall(currobj,x,y,z);		
 }
 
 void RenderEntityNULL_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1177,6 +1189,8 @@ mstaddress_pointer=0;
 				objList[MasterIndex].Angle3 = getValAtAddress(mst_ark,mstaddress_pointer+18,8);
 			//	printf("\tIt is a %s", objectMasters[objList[MasterIndex].item_id].desc );
 				objList[MasterIndex].sprite = getValAtAddress(mst_ark,mstaddress_pointer+23,8);
+				
+				objList[MasterIndex].State =  getValAtAddress(mst_ark,mstaddress_pointer+23,8);
 
 					printf("\n++++++++Next object++++++++++++\n");
 					printf("\nIndex = %d \n",objList[MasterIndex].index);
@@ -1184,7 +1198,15 @@ mstaddress_pointer=0;
 					printf("(%s)\n", UniqueObjectName(objList[MasterIndex]) );
 					printf("Class: %d,%d,%d\n",objList[MasterIndex].ObjectClass,objList[MasterIndex].ObjectSubClass,objList[MasterIndex].ObjectSubClassIndex);
 					printf("Location = (%d",objList[MasterIndex].tileX );
-					printf(",%d)\n",objList[MasterIndex].tileY);
+					printf(",%d",objList[MasterIndex].tileY);
+					if (objList[MasterIndex].InUseFlag !=0)
+						{		
+						printf(", %d)\n	",LevelInfo[objList[MasterIndex].tileX][objList[MasterIndex].tileY].floorHeight);
+						}
+					else
+						{
+						printf(")\n");
+						}
 					printf("InUse = %d\n",objList[MasterIndex].InUseFlag);
 					printf("\tAIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
 					printf("\tHitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
@@ -1477,6 +1499,7 @@ while (k<=chunkUnpackedLength)
 				printf("\t\tSwitch Action?:%d",getValAtAddress(sub_ark,add_ptr+6,16));
 				printf("\tVariable:%d",getValAtAddress(sub_ark,add_ptr+8,16));
 				printf("\tFail Message:%d",getValAtAddress(sub_ark,add_ptr+10,16));
+				objList[objIndex].TriggerAction = getValAtAddress(sub_ark,add_ptr+6,16);
 				getShockButtons(sub_ark,add_ptr,objList,objIndex);
 				return 1;
 				break;
@@ -2037,6 +2060,8 @@ void getShockButtons(unsigned char *sub_ark,int add_ptr, ObjectItem objList[1600
 if (objList[objIndex].ObjectSubClass ==0)
 	{//regular buttons and switches
 	objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] = getValAtAddress(sub_ark,add_ptr+12,16);
+	
+	objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER_2] = getValAtAddress(sub_ark,add_ptr+16,16);
 	printf("\tDefault trigger target %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]);
 	printf("\n\tVal_oc: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0c,16));
 	printf("\tVal_oe: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0E,16));

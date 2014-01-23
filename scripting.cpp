@@ -493,6 +493,9 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 				int nextObj = LevelInfo[x][y].indexObjectList;
 				while (nextObj!=0)
 					{
+					printf("\n%d-%d",x,y);
+					if ((x==20) && (y==23))
+					{printf("");}
 					//is it something that starts a script
 					//This does not include screens just yet.
 					if ((isButtonSHOCK(objList[nextObj])) || (isLog(objList[nextObj])) || (isTriggerSHOCK(objList[nextObj])))
@@ -604,7 +607,15 @@ if (currObj.ObjectSubClass ==0)
 	if(currObj.shockProperties[BUTTON_PROPERTY_TRIGGER] > 0)
 		{
 		//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]));
-		shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]); 
+		switch (currObj.TriggerAction)
+			{
+			//case ACTION_ACTIVATE: sets of a bunch of triggers. I need to implement this.
+				
+			case ACTION_CHANGE_STATE:
+				{shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER_2]]); break;}
+			default:
+				{shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]); break;}
+			}
 		}
 	else
 		{
@@ -680,7 +691,7 @@ if((currObj.ObjectSubClass==3) && ((currObj.ObjectSubClassIndex==7) || (currObj.
 	}
 
 
-	fprintf(fBODY,"\tUnknown Script @ ;",UniqueObjectName(currObj)); 
+	fprintf(fBODY,"\t////Unknown Script @ %s ;",UniqueObjectName(currObj)); 
 //unknown object if all other tests fail. set the usual trigger value and keep an eye on this statement in debugging.
 	fprintf(fBODY,"\tsys.println(\"Other/unknown Button type.\");\n");
 	//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]])); 
@@ -1041,12 +1052,15 @@ switch(objectMasters[targetObj.item_id].type )
 	case SHOCK_TRIGGER_NULL:	//I activate the script call. *Nullscript can be many things such as cameras so I will need to account for that at some stage.
 		fprintf(fBODY,"\t$runscript_%s.activate($player1);\n", UniqueObjectName(targetObj)); 
 		break;
+	case SHOCK_TRIGGER_REPULSOR:
+		fprintf(fBODY,"\t$runscript_%s.activate($player1);\n", UniqueObjectName(targetObj)); 
+		break;
 	default:
 		fprintf(fBODY,"\t$%s.activate($player1);\n", UniqueObjectName(targetObj)); 
 	}
 }
 else
 	{
-		fprintf(fBODY,"\tsys.println(\"Object %s: Not in use\");\n", UniqueObjectName(targetObj)); 
+		fprintf(fBODY,"\tsys.println(\"Object %d: Not in use\");\n", targetObj.index ); 
 	}
 }
