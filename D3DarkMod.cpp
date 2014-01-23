@@ -179,20 +179,53 @@ int x; int y;
 				}
 
 			}
-
-		//Ambient world light
-			fprintf (MAPFILE, "// entity %d\n", EntityCount++);
-			fprintf (MAPFILE, "{\n\"classname\" \"atdm:ambient_world\"");
-			fprintf (MAPFILE, "\n\"name\" \"ambient_world\"",EntityCount);
-			fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
-			fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
-			fprintf (MAPFILE, "\n\"light_radius\" \"4500 4500 2500\"");	
-			fprintf (MAPFILE, "\n\"color\" \"0.50 0.50 0.50\"");
-			fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
-			fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
-			fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
-			fprintf (MAPFILE, "\n\"parallel\" \"0\"");
-			fprintf (MAPFILE, "\n}\n");
+			if  ((game == SHOCK) && (0))
+				{//Light her up based on shade values
+				for (y=0; y<=63;y++) 
+					{
+					for (x=0; x<=63;x++)
+						{
+						if (LevelInfo[x][y].tileType != 0)
+							{
+							//put a light here. experimental untested
+							fprintf (MAPFILE, "// entity %d\n", EntityCount++);
+							fprintf (MAPFILE, "{\n\"classname\" \"light\"");
+							fprintf (MAPFILE, "\n\"name\" \"light_%02d_%02d\"",x,y);
+							fprintf (MAPFILE, "\n\"origin\" \"%d %d %d\"",x*BrushSizeX + BrushSizeX/2,y*BrushSizeY + BrushSizeY/2,(LevelInfo[x][y].floorHeight + (CEILING_HEIGHT -LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight)/2)* BrushSizeZ);	//May cause leaks on small maps.
+							fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
+							fprintf (MAPFILE, "\n\"light_radius\" \"%d %d %d\"",BrushSizeX,BrushSizeY, CEILING_HEIGHT);	
+							float shade = 0.50;	//Max brightness.
+							if ( LevelInfo[x][y].shockShade !=0)
+								{
+								shade = shade / LevelInfo[x][y].shockShade;
+								}
+							fprintf (MAPFILE, "\n\"color\" \"%f %f %f\"",shade,shade,shade);	
+							fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
+							fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
+							fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
+							fprintf (MAPFILE, "\n\"parallel\" \"0\"");
+							fprintf (MAPFILE, "\n\"texture\" \"square\"");
+							fprintf (MAPFILE, "\n}\n");
+							} 
+						}
+					}
+				}	
+			else
+				{
+			//Ambient world light
+				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
+				fprintf (MAPFILE, "{\n\"classname\" \"atdm:ambient_world\"");
+				fprintf (MAPFILE, "\n\"name\" \"ambient_world\"",EntityCount);
+				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
+				fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
+				fprintf (MAPFILE, "\n\"light_radius\" \"4500 4500 2500\"");	
+				fprintf (MAPFILE, "\n\"color\" \"0.50 0.50 0.50\"");
+				fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
+				fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
+				fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
+				fprintf (MAPFILE, "\n\"parallel\" \"0\"");
+				fprintf (MAPFILE, "\n}\n");
+				}
 			if (game == SHOCK)
 				{
 				//Speaker for playing back logs
@@ -706,12 +739,13 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 			if (iGame == SHOCK)
 				{
 				float shock_ceil = SHOCK_CEILING_HEIGHT;
-				float floorOffset = shock_ceil-ceilOffset -8;	//The floor of the tile if it is 1 texture tall.
-				while (floorOffset >=8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
-					{
-					floorOffset -=8;
-					}
-				float textureVertAlign = (floorOffset) / 8;	
+				int floorOffset = shock_ceil-ceilOffset -8;	//The floor of the tile if it is 1 texture tall.
+				//while (floorOffset >=8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
+				//	{
+				//	floorOffset -=8;
+				//	}
+				floorOffset = floorOffset % 8;	
+				float textureVertAlign = (float)((floorOffset) / 8);	
 				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
 				textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
 				textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureVertAlign);						
@@ -801,13 +835,25 @@ if (floorTexture <0)
 				}
 			else
 				{
+				float textVertAlign = textureMasters[floorTexture].floor_align2_3 ;	//Default value
 				alignFactor=1;
 				//This is buggy at the moment due to diffent slope types. 
-				//if ((t.shockSteep >=1) && (t.tileType >=2))
-				//	{
-				//	alignFactor = calcAlignmentFactor(BrushSizeX,t.shockSteep * BrushSizeZ);
-				//	}
-				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,textureMasters[floorTexture].floor_align2_1,textureMasters[floorTexture].floor_align2_2 / alignFactor ,textureMasters[floorTexture].floor_align2_3);	
+				if ((t.shockSteep >=1) && (t.tileType >=2))
+					{
+					alignFactor = calcAlignmentFactor(BrushSizeX,t.shockSteep * BrushSizeZ);
+					//basically how much of the slope if extended to the axis is above that axis line.
+					if (face = fCEIL)
+						{
+						textVertAlign = (t.ceilingHeight % t.shockSteep) / t.shockSteep;						
+						}
+					else
+						{
+						textVertAlign = (t.floorHeight % t.shockSteep) / t.shockSteep;						
+						}
+					}
+				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
+						textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,
+						textureMasters[floorTexture].floor_align2_1,textureMasters[floorTexture].floor_align2_2 / alignFactor ,textVertAlign);	
 				fprintf (MAPFILE, "%s", textureMasters[floorTexture].path );
 				fprintf (MAPFILE, "\" 0 0 0\n");
 				}
