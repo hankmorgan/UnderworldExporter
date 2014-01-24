@@ -52,7 +52,7 @@ int game = SHOCK;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 int mode = SCRIPT_BUILD_MODE;
-levelNo=0;
+levelNo=1;
 switch (game)
 	{
 	case UWDEMO:

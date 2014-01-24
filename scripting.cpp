@@ -17,6 +17,12 @@ int lookupString(int BlockNo, int StringNo, char StringOut[255] );
 void scriptShockButtons(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj);
 void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj);
 void shockScriptActivate(ObjectItem objList[1600], ObjectItem targetObj);
+void MovingPlatformSCRIPT(int triggerX, int triggerY, int targetFloor, int targetCeiling, tile LevelInfo[64][64]);
+
+
+extern long SHOCK_CEILING_HEIGHT;
+extern long UW_CEILING_HEIGHT;
+
 void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 {
 	//printf("void start_%s()\n{",UniqueObjectName(currObj));
@@ -609,12 +615,54 @@ if (currObj.ObjectSubClass ==0)
 		//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]));
 		switch (currObj.TriggerAction)
 			{
-			//case ACTION_ACTIVATE: sets of a bunch of triggers. I need to implement this.
-				
-			case ACTION_CHANGE_STATE:
-				{shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER_2]]); break;}
+			case ACTION_CHANGE_STATE:	//There is some sort of value change going on here. I need to see more examples.
+				{
+				fprintf(fBODY,"\tsys.println(\"Action change state by switch:%s)\");\n",UniqueObjectName(currObj));
+				shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER_2]]); 
+				break;
+				}
+			case ACTION_ACTIVATE: //sets off a bunch of triggers
+				{
+				fprintf(fBODY,"\tsys.println(\"Action activate by switch:%s)\");\n",UniqueObjectName(currObj));
+				if ( currObj.shockProperties[0]> 0)
+					{
+					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[1]); 
+					shockScriptActivate(objList,objList[currObj.shockProperties[0]]);
+					}
+				if ( currObj.shockProperties[2]> 0)
+					{
+					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[3]); 
+					shockScriptActivate(objList,objList[currObj.shockProperties[2]]);
+					}	
+				if (( currObj.shockProperties[4]> 0) &&  (currObj.shockProperties[4]< 1600))
+					{
+					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[5]); 
+					shockScriptActivate(objList,objList[currObj.shockProperties[4]]);
+					}	
+				if ( currObj.shockProperties[6]> 0)
+					{
+					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[7]);
+					shockScriptActivate(objList,objList[currObj.shockProperties[6]]); 
+					}
+				break;
+				}
+			case ACTION_MOVING_PLATFORM:
+				{
+				int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
+				int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
+				int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
+				int targetCeiling = SHOCK_CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
+				MovingPlatformSCRIPT(triggerX,triggerY,targetFloor,targetCeiling,LevelInfo);
+				break;
+				}
 			default:
-				{shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]); break;}
+				{
+				if (currObj.TriggerAction !=ACTION_DO_NOTHING)	//default
+					{
+					fprintf(fBODY,"\tsys.println(\"New switch trigger action %d for %s)\");\n",currObj.TriggerAction,UniqueObjectName(currObj));
+					}
+				shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]); break;
+				}
 			}
 		}
 	else
@@ -858,52 +906,54 @@ switch (currObj.TriggerAction)
 		int targetCeiling = CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
 		
-		const char *objDesc="lift";
+		MovingPlatformSCRIPT(triggerX,triggerY,targetFloor,targetCeiling,LevelInfo);
+		
+		//////////const char *objDesc="lift";
 
-			switch (LevelInfo[triggerX][triggerY].hasElevator)
-				{
-				case 1: //floor only moves
-					if (LevelInfo[triggerX][triggerY].global !=1)
-						{
-						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
-						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
-						}
-					
-					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
-					fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d  );\n", triggerX,triggerY,BrushSizeZ);
-					fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
-					break;
-				case 2:	//Ceiling only moves
-					if (LevelInfo[triggerX][triggerY].global !=1)
-						{
-						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
-						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
-						}					
-					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
-					fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
-					fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
-					break;
-				case 3: //both move
-					if (LevelInfo[triggerX][triggerY].global !=1)
-						{
-						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
-						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
-						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
-						}
-					//printf("\tsys.println(\"Initial floor global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
-					
-					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
-					fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d );\n",triggerX,triggerY,BrushSizeZ);
-					fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
-					
-					fprintf(fBODY,"\tsys.println(\"Initial ceiling global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
-					fprintf(fBODY,"\tdisplacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
-					fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
-					fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
-					
-					
-				}
-				//printf("\t%s_%03d_%03d_state = %s_%03d_%03d_state+displacement;\n\n", objDesc,triggerX,triggerY, objDesc,triggerX,triggerY);
+		//////////	switch (LevelInfo[triggerX][triggerY].hasElevator)
+		//////////		{
+		//////////		case 1: //floor only moves
+		//////////			if (LevelInfo[triggerX][triggerY].global !=1)
+		//////////				{
+		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
+		//////////				LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
+		//////////				}
+		//////////			
+		//////////			fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
+		//////////			fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d  );\n", triggerX,triggerY,BrushSizeZ);
+		//////////			fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+		//////////			break;
+		//////////		case 2:	//Ceiling only moves
+		//////////			if (LevelInfo[triggerX][triggerY].global !=1)
+		//////////				{
+		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
+		//////////				LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
+		//////////				}					
+		//////////			fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+		//////////			fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
+		//////////			fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
+		//////////			break;
+		//////////		case 3: //both move
+		//////////			if (LevelInfo[triggerX][triggerY].global !=1)
+		//////////				{
+		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
+		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
+		//////////				LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
+		//////////				}
+		//////////			//printf("\tsys.println(\"Initial floor global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+		//////////			
+		//////////			fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
+		//////////			fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d );\n",triggerX,triggerY,BrushSizeZ);
+		//////////			fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+		//////////			
+		//////////			fprintf(fBODY,"\tsys.println(\"Initial ceiling global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+		//////////			fprintf(fBODY,"\tdisplacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+		//////////			fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
+		//////////			fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
+		//////////			
+		//////////			
+		//////////		}
+		//////////		//printf("\t%s_%03d_%03d_state = %s_%03d_%03d_state+displacement;\n\n", objDesc,triggerX,triggerY, objDesc,triggerX,triggerY);
 
 		
 		
@@ -1064,3 +1114,71 @@ else
 		fprintf(fBODY,"\tsys.println(\"Object %d: Not in use\");\n", targetObj.index ); 
 	}
 }
+
+
+void MovingPlatformSCRIPT(int triggerX, int triggerY, int targetFloor, int targetCeiling, tile LevelInfo[64][64])
+{
+		//000C	int16	Tile x coord of platform
+		//0010	int16	Tile y coord of platform
+		//0014	int16	Target floor height
+		//0016	int16	Target ceiling height
+		//0018	int16	Speed
+		//printf("\tACTION_MOVING_PLATFORM\n");
+		//printf("\t\tTileX of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x0C,16));
+		//printf("\t\tTileY of Platform:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//printf("\t\tTarget floor height:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//printf("\t\tTarget ceiling height:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
+		//printf("\t\tSpeed:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+		
+		//int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
+		//int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
+		//int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
+		//int targetCeiling = CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
+		
+		const char *objDesc="lift";
+
+			switch (LevelInfo[triggerX][triggerY].hasElevator)
+				{
+				case 1: //floor only moves
+					if (LevelInfo[triggerX][triggerY].global !=1)
+						{
+						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
+						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
+						}
+					
+					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
+					fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d  );\n", triggerX,triggerY,BrushSizeZ);
+					fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+					break;
+				case 2:	//Ceiling only moves
+					if (LevelInfo[triggerX][triggerY].global !=1)
+						{
+						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
+						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
+						}					
+					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+					fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
+					fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
+					break;
+				case 3: //both move
+					if (LevelInfo[triggerX][triggerY].global !=1)
+						{
+						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
+						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
+						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
+						}
+					//printf("\tsys.println(\"Initial floor global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+					
+					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
+					fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d );\n",triggerX,triggerY,BrushSizeZ);
+					fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
+					
+					fprintf(fBODY,"\tsys.println(\"Initial ceiling global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
+					fprintf(fBODY,"\tdisplacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
+					fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
+					fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
+					
+					
+				}
+			}
