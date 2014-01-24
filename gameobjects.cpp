@@ -344,7 +344,7 @@ void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, 
 	
 	//position
 	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
-	fprintf (MAPFILE, "\"animal_patrol\" \"1\"\n");	
+	//fprintf (MAPFILE, "\"animal_patrol\" \"1\"\n");	
 	EntityRotation(currobj.heading);
 	fprintf (MAPFILE, "}");
 	EntityCount++;	
@@ -930,7 +930,7 @@ void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem
 
 void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
-//A trigger that fires when you step in it.
+//A thing that lifts you up.
 //Params
 //item_id
 //index
@@ -938,15 +938,15 @@ void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &curr
 //tileY
 //need to add objectmaster path for generic usage
 //need to add objectmaster desc for generic usage
-
+//Need to revisit repulsors.Perhaps a chain of repulsors all the way up that I set on/off dynamically?
 	fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount++);
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf (MAPFILE, "\"name\" \"repulsor_%s\"\n",UniqueObjectName(currobj));	
-	fprintf (MAPFILE, "\"model\" \"repulsor_s\"\n",UniqueObjectName(currobj));
+	fprintf (MAPFILE, "\"model\" \"repulsor_%s\"\n",UniqueObjectName(currobj));
 	fprintf (MAPFILE, "\"target0\" \"repulsor_%s_target\"\n",UniqueObjectName(currobj));	
 	//int originZ = (CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight) - LevelInfo[currobj.tileX][currobj.tileY].floorHeight- 8;
 	int originZ = (currobj.State >> 3) * BrushSizeZ - LevelInfo[currobj.tileX][currobj.tileY].floorHeight;
-	fprintf (MAPFILE, "\"origin\" \"%f %f %d\"\n",x,y,(originZ/2)*BrushSizeZ);
+	fprintf(MAPFILE, "\"origin\" \"%f %f %d\"\n", x, y, (originZ/2));
 	fprintf (MAPFILE, "\"applyVelocity\" \"1\"\n");	
 	fprintf (MAPFILE, "\"start_on\" \"1\"\n");	
 	tile t;	//temp tile for rendering trigger
@@ -963,7 +963,7 @@ void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &curr
 	t.ceilingHeight =CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight -4;
 	t.isWater=0;
 	t.hasElevator=0;
-	RenderGenericTileAroundOrigin(0,0,t,t.ceilingHeight,t.floorHeight,originZ *BrushSizeZ);
+	RenderGenericTileAroundOrigin(0,0,t,t.ceilingHeight,t.floorHeight,originZ);
 	//RenderGenericTile(0,0,t,t.ceilingHeight,t.floorHeight );
 
 	fprintf (MAPFILE, "\n}");
@@ -2049,6 +2049,18 @@ if (objList[objIndex].ObjectSubClass ==0)
 		case ACTION_MOVING_PLATFORM:
 				{
 				setElevatorProperties(LevelInfo,sub_ark,add_ptr,objList,objIndex,1);
+				}
+		case ACTION_CHOICE:
+				{
+				objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
+				break;
+				}
+		case ACTION_LIGHTING:
+				{		
+				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = getValAtAddress(sub_ark, add_ptr + 12, 16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = getValAtAddress(sub_ark, add_ptr + 14, 16);
+				break;
 				}
 		default:	
 				{	

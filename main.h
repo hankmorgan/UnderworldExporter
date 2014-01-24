@@ -6,36 +6,39 @@
 #define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
 #define UW0_TEXTUREW_PATH "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.txm"
 
-#define UW1_LEVEL_PATH  "C:\\Games\\Ultima\\UW1\\Data\\lev.ark"
-#define UW1_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_retro_config.txt"
-#define UW1_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_object_config.txt"
-#define UW1_STRINGS_FILE "C:\\Games\\Ultima\\UW1\\data\\strings.pak"
-#define UW1_CLEAN_STRINGS_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_stringsclean.txt"
+#define UW1_LEVEL_PATH  "C:\\Games\\UW1\\Data\\lev.ark"
+#define UW1_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_retro_config.txt"
+#define UW1_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_object_config.txt"
+#define UW1_STRINGS_FILE "C:\\Games\\UW1\\data\\strings.pak"
+#define UW1_CLEAN_STRINGS_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_stringsclean.txt"
 
-#define UW2_LEVEL_PATH "C:\\Games\\Ultima\\UW2\\DATA\\lev.ark"
-#define UW2_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw2_retro_config.txt"
-#define UW2_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw2_object_config.txt"
-#define UW2_STRINGS_FILE "C:\\Games\\Ultima\\UW1\\data\\strings.pak"
+#define UW2_LEVEL_PATH "C:\\Games\\UW2\\DATA\\lev.ark"
+#define UW2_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config.txt"
+#define UW2_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_object_config.txt"
+#define UW2_STRINGS_FILE "C:\\Games\\UW2\\data\\strings.pak"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\Ultima\\UW1\\DATA\\F32.TR"
-#define GRAPHICS_PAL_FILE "C:\\Games\\Ultima\\UW1\\DATA\\pals.dat"
+#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\F32.TR"
+#define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
 
 
 #define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
-#define SHOCK_TEXTURE_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_texture_config.txt"
-#define SHOCK_OBJECT_CONFIG_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\shock_object_config.txt"
+#define SHOCK_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_texture_config.txt"
+#define SHOCK_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_object_config.txt"
 #define SHOCK_COMMONOBJ_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\objprop.dat"
 
-#define ENTRANCES_CONFIG_FILE  "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\Underworld Exporter\\uw1_entrances.txt"
+#define ENTRANCES_CONFIG_FILE  "C:\\Underworld Exporter\\src\\trunk\\uw1_entrances.txt"
 
 //temporary paths for testing things before I implement commandline params/interface for file paths once I switch to file I/O
-#define SCRIPT_GlOBAL_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptglobal.txt"
-#define SCRIPT_MAIN_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptmain.txt"
-#define SCRIPT_BODY_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\scriptbody.txt"
-#define SCRIPT_FINAL_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\map.script"
-#define MAP_OUTPUT_FILE "C:\\Documents and Settings\\me\\Desktop\\Downloads\\Underworld\\uw_exporter\\Underworld Exporter\\debug\\map.map"
+#define SCRIPT_GlOBAL_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptglobal.txt"
+#define SCRIPT_MAIN_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptmain.txt"
+#define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
+#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\test_map.script"
+#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\test_map.map"
+
+#define ENABLE_LIGHTING 0
+
 /*Globals*/
 extern int BrushSizeX;
 extern int BrushSizeY;

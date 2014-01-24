@@ -139,7 +139,7 @@
 #define ACTION_CHANGE_STATE	19
 #define ACTION_MESSAGE	22
 #define ACTION_SPAWN	23		
-#define ACTION_CHANGE_TYPE	35
+#define ACTION_CHANGE_TYPE	24
 
 /*Some friendly array indices for shock objProperties array*/
 //Software

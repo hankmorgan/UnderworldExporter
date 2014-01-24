@@ -18,7 +18,8 @@ void scriptShockButtons(tile LevelInfo[64][64], ObjectItem objList[1600], Object
 void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj);
 void shockScriptActivate(ObjectItem objList[1600], ObjectItem targetObj);
 void MovingPlatformSCRIPT(int triggerX, int triggerY, int targetFloor, int targetCeiling, tile LevelInfo[64][64]);
-
+void toggleSCRIPT(ObjectItem objList[1600], ObjectItem currObj);
+void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
@@ -140,6 +141,7 @@ switch (targetState)
 		break;
 	}
 }
+
 void entranceteleporters()
 {
 //todo
@@ -607,68 +609,18 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 void scriptShockButtons(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
 {
 
-
 if (currObj.ObjectSubClass ==0)
 	{//regular buttons and switches. Activates a target trigger.
-	if(currObj.shockProperties[BUTTON_PROPERTY_TRIGGER] > 0)
-		{
+	//if(currObj.shockProperties[BUTTON_PROPERTY_TRIGGER] > 0)
+	//{
 		//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]));
-		switch (currObj.TriggerAction)
-			{
-			case ACTION_CHANGE_STATE:	//There is some sort of value change going on here. I need to see more examples.
-				{
-				fprintf(fBODY,"\tsys.println(\"Action change state by switch:%s)\");\n",UniqueObjectName(currObj));
-				shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER_2]]); 
-				break;
-				}
-			case ACTION_ACTIVATE: //sets off a bunch of triggers
-				{
-				fprintf(fBODY,"\tsys.println(\"Action activate by switch:%s)\");\n",UniqueObjectName(currObj));
-				if ( currObj.shockProperties[0]> 0)
-					{
-					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[1]); 
-					shockScriptActivate(objList,objList[currObj.shockProperties[0]]);
-					}
-				if ( currObj.shockProperties[2]> 0)
-					{
-					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[3]); 
-					shockScriptActivate(objList,objList[currObj.shockProperties[2]]);
-					}	
-				if (( currObj.shockProperties[4]> 0) &&  (currObj.shockProperties[4]< 1600))
-					{
-					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[5]); 
-					shockScriptActivate(objList,objList[currObj.shockProperties[4]]);
-					}	
-				if ( currObj.shockProperties[6]> 0)
-					{
-					fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[7]);
-					shockScriptActivate(objList,objList[currObj.shockProperties[6]]); 
-					}
-				break;
-				}
-			case ACTION_MOVING_PLATFORM:
-				{
-				int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
-				int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
-				int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
-				int targetCeiling = SHOCK_CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
-				MovingPlatformSCRIPT(triggerX,triggerY,targetFloor,targetCeiling,LevelInfo);
-				break;
-				}
-			default:
-				{
-				if (currObj.TriggerAction !=ACTION_DO_NOTHING)	//default
-					{
-					fprintf(fBODY,"\tsys.println(\"New switch trigger action %d for %s)\");\n",currObj.TriggerAction,UniqueObjectName(currObj));
-					}
-				shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]); break;
-				}
-			}
-		}
-	else
-		{
-		fprintf(fBODY,"\tsys.println(\"This button does nothing!\");\n");
-		}
+	//		}
+	//	}
+	//else
+	//	{
+	//	fprintf(fBODY,"\tsys.println(\"This button does nothing!\");\n");
+	//	}
+	scriptShockButtonsActions(LevelInfo, objList, currObj);
 	return;
 	}
 if((currObj.ObjectSubClass==2) && (currObj.ObjectSubClassIndex==0))
@@ -739,12 +691,12 @@ if((currObj.ObjectSubClass==3) && ((currObj.ObjectSubClassIndex==7) || (currObj.
 	}
 
 
-	fprintf(fBODY,"\t////Unknown Script @ %s ;",UniqueObjectName(currObj)); 
+	fprintf(fBODY,"\t//Unknown Script @ %s ;\n",UniqueObjectName(currObj)); 
 //unknown object if all other tests fail. set the usual trigger value and keep an eye on this statement in debugging.
 	fprintf(fBODY,"\tsys.println(\"Other/unknown Button type.\");\n");
 	//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]])); 
-	shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]);
-	
+	//shockScriptActivate(objList,objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]);
+	scriptShockButtonsActions(LevelInfo, objList, currObj);
 }
 
 
@@ -903,7 +855,7 @@ switch (currObj.TriggerAction)
 		int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
 		int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
 		int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
-		int targetCeiling = CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
+		int targetCeiling = currObj.shockProperties[TRIG_PROPERTY_CEILING];
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
 		
 		MovingPlatformSCRIPT(triggerX,triggerY,targetFloor,targetCeiling,LevelInfo);
@@ -975,19 +927,8 @@ switch (currObj.TriggerAction)
 		printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
 		//currObj.shockProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark,add_ptr+0x0C,16);	
 		//currObj.shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark,add_ptr+0x10,16);	
-		fprintf(fBODY,"\tsys.println(\"Is this a toggle?\");\n");
-		if (objList[currObj.index].global !=1)
-			{	//Add a global state for this toggle
-			fprintf(fGLOBALS,"\tfloat %s_state = 1;\n",UniqueObjectName(currObj));
-			objList[currObj.index].global =1;
-			}	
-		fprintf(fBODY,"\tif (%s_state == 1)",UniqueObjectName(currObj));
-		fprintf(fBODY,"\n\t\t{\n\t");
-			shockScriptActivate(objList,objList[currObj.shockProperties[TRIG_PROPERTY_TRIG_1]]);
-		fprintf(fBODY,"\t\t%s_state = 0;\n\t\t}",UniqueObjectName(currObj));
-		fprintf(fBODY,"\n\telse\n\t\t{\n\t");
-		shockScriptActivate(objList,objList[currObj.shockProperties[TRIG_PROPERTY_TRIG_2]]);
-		fprintf(fBODY,"\n\t\t%s_state = 1 ;\n\t\t}\n",UniqueObjectName(currObj));
+		
+	    toggleSCRIPT(objList, currObj);
 		break;
 		}
 	case ACTION_EMAIL:
@@ -1081,7 +1022,7 @@ switch (currObj.TriggerAction)
 	default:
 		{
 		//printf("\tUnknown triggeraction:%d\n",TriggerType);
-		fprintf(fBODY,"\tsys.println(\"Unknown trigger action.\");\n");
+		fprintf(fBODY,"\tsys.println(\"Unknown trigger action:%d\");\n",currObj.TriggerAction);
 		}	
 	
 	}
@@ -1135,7 +1076,7 @@ void MovingPlatformSCRIPT(int triggerX, int triggerY, int targetFloor, int targe
 		//int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
 		//int targetCeiling = CEILING_HEIGHT - currObj.shockProperties[TRIG_PROPERTY_CEILING];
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
-		
+		targetCeiling =  targetCeiling;	//needs to be offset from the top.
 		const char *objDesc="lift";
 
 			switch (LevelInfo[triggerX][triggerY].hasElevator)
@@ -1154,7 +1095,7 @@ void MovingPlatformSCRIPT(int triggerX, int triggerY, int targetFloor, int targe
 				case 2:	//Ceiling only moves
 					if (LevelInfo[triggerX][triggerY].global !=1)
 						{
-						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
+						fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,SHOCK_CEILING_HEIGHT - LevelInfo[triggerX][triggerY].ceilingHeight );
 						LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
 						}					
 					fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
@@ -1182,3 +1123,95 @@ void MovingPlatformSCRIPT(int triggerX, int triggerY, int targetFloor, int targe
 					
 				}
 			}
+
+void toggleSCRIPT(ObjectItem objList[1600], ObjectItem currObj)
+{
+	//An action_choice trigger action.- a toggle.
+	//fprintf(fBODY, "\tsys.println(\"Is this a toggle?\");\n");
+	if (objList[currObj.index].global != 1)
+	{	//Add a global state for this toggle
+		fprintf(fGLOBALS, "\tfloat %s_state = 1;\n", UniqueObjectName(currObj));
+		objList[currObj.index].global = 1;
+	}
+	fprintf(fBODY, "\tif (%s_state == 1)", UniqueObjectName(currObj));
+	fprintf(fBODY, "\n\t\t{\n\t");
+	shockScriptActivate(objList, objList[currObj.shockProperties[TRIG_PROPERTY_TRIG_1]]);
+	fprintf(fBODY, "\t\t%s_state = 0;\n\t\t}", UniqueObjectName(currObj));
+	fprintf(fBODY, "\n\telse\n\t\t{\n\t");
+	shockScriptActivate(objList, objList[currObj.shockProperties[TRIG_PROPERTY_TRIG_2]]);
+	fprintf(fBODY, "\n\t\t%s_state = 1 ;\n\t\t}\n", UniqueObjectName(currObj));
+}
+
+void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
+{
+	switch (currObj.TriggerAction)
+	{
+	case ACTION_CHANGE_STATE:	//There is some sort of value change going on here. I need to see more examples.
+		{
+		fprintf(fBODY, "\tsys.println(\"Action change state by switch:%s)\");\n", UniqueObjectName(currObj));
+		shockScriptActivate(objList, objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER_2]]);
+		break;
+		}
+	case ACTION_ACTIVATE: //sets off a bunch of triggers
+		{
+			fprintf(fBODY, "\tsys.println(\"Action activate by switch:%s)\");\n", UniqueObjectName(currObj));
+			if (currObj.shockProperties[0] > 0)
+			{
+				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[1]);
+				shockScriptActivate(objList, objList[currObj.shockProperties[0]]);
+			}
+			if (currObj.shockProperties[2] > 0)
+			{
+				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[3]);
+				shockScriptActivate(objList, objList[currObj.shockProperties[2]]);
+			}
+			if ((currObj.shockProperties[4] > 0) && (currObj.shockProperties[4]< 1600))
+			{
+				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[5]);
+				shockScriptActivate(objList, objList[currObj.shockProperties[4]]);
+			}
+			if (currObj.shockProperties[6]> 0)
+			{
+				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[7]);
+				shockScriptActivate(objList, objList[currObj.shockProperties[6]]);
+			}
+			break;
+		}
+	case ACTION_MOVING_PLATFORM:
+		{
+		int triggerX = currObj.shockProperties[TRIG_PROPERTY_TARGET_X];
+		int triggerY = currObj.shockProperties[TRIG_PROPERTY_TARGET_Y];
+		int targetFloor = currObj.shockProperties[TRIG_PROPERTY_FLOOR];
+		int targetCeiling = currObj.shockProperties[TRIG_PROPERTY_CEILING];
+		MovingPlatformSCRIPT(triggerX, triggerY, targetFloor, targetCeiling, LevelInfo);
+		break;
+		}
+	case ACTION_CHOICE:
+		{
+		toggleSCRIPT(objList, currObj);
+		break;
+		}
+	case ACTION_LIGHTING:
+		{
+		fprintf(fBODY, "\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n", currObj.shockProperties[TRIG_PROPERTY_CONTROL_1], currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);
+		break;
+		}
+
+	case ACTION_CHANGE_TYPE:
+		{
+		fprintf(fBODY, "\tsys.println(\"Change Type\");\n");
+		break;
+		}
+	default:
+		{
+			if (currObj.TriggerAction != ACTION_DO_NOTHING)	//default
+			{
+				fprintf(fBODY, "\tsys.println(\"New switch trigger action %d for %s)\");\n", currObj.TriggerAction, UniqueObjectName(currObj));
+			}
+			if (currObj.shockProperties[BUTTON_PROPERTY_TRIGGER] < 1600)
+			{
+				shockScriptActivate(objList, objList[currObj.shockProperties[BUTTON_PROPERTY_TRIGGER]]); break;
+			}
+		}
+	}
+}

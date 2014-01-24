@@ -120,7 +120,7 @@ int x; int y;
 						fprintf (MAPFILE, "{\n\"classname\" \"atdm:liquid_water\"\n");
 						fprintf (MAPFILE, "\n\"name\" \"atdm_liquid_water_%02d\"\n",EntityCount);
 						fprintf (MAPFILE, "\n\"model\" \"atdm_liquid_water_%02d\"\n",EntityCount);
-						fprintf (MAPFILE, "\n\"underwater_gui\" \"guis\underwater\underwater_green_thinmurk.gui\"\n");	
+						fprintf (MAPFILE, "\n\"underwater_gui\" \"guis\\underwater\\underwater_green_thinmurk.gui\"\n");	
 						tile t = LevelInfo[x][y];	//temp tile for rendering.
 						//Test each face for waterfalls. Open -> open of different height or slope that does not go in the same direction
 						t.East = NODRAW;
@@ -179,7 +179,7 @@ int x; int y;
 				}
 
 			}
-			if  ((game == SHOCK) && (0))
+			if  ((game == SHOCK) && (ENABLE_LIGHTING))
 				{//Light her up based on shade values
 				for (y=0; y<=63;y++) 
 					{
@@ -187,24 +187,24 @@ int x; int y;
 						{
 						if (LevelInfo[x][y].tileType != 0)
 							{
-							//put a light here. experimental untested
+							//put a light here. absolute frame rate killer. Need to merge contigous regions of light together or do something clever with texture brightness
 							fprintf (MAPFILE, "// entity %d\n", EntityCount++);
 							fprintf (MAPFILE, "{\n\"classname\" \"light\"");
 							fprintf (MAPFILE, "\n\"name\" \"light_%02d_%02d\"",x,y);
 							fprintf (MAPFILE, "\n\"origin\" \"%d %d %d\"",x*BrushSizeX + BrushSizeX/2,y*BrushSizeY + BrushSizeY/2,(LevelInfo[x][y].floorHeight + (CEILING_HEIGHT -LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight)/2)* BrushSizeZ);	//May cause leaks on small maps.
 							fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
-							fprintf (MAPFILE, "\n\"light_radius\" \"%d %d %d\"",BrushSizeX,BrushSizeY, CEILING_HEIGHT);	
-							float shade = 0.50;	//Max brightness.
+							fprintf (MAPFILE, "\n\"light_radius\" \"%d %d %d\"",BrushSizeX,BrushSizeY, CEILING_HEIGHT*BrushSizeZ);	
+							float shade =0.50;	//Max brightness.
 							if ( LevelInfo[x][y].shockShade !=0)
 								{
-								shade = shade / LevelInfo[x][y].shockShade;
+								shade = (0.50) * (1-((float)LevelInfo[x][y].shockShade/255));
 								}
-							fprintf (MAPFILE, "\n\"color\" \"%f %f %f\"",shade,shade,shade);	
+							fprintf (MAPFILE, "\n\"_color\" \"%f %f %f\"",shade,shade,shade);	
 							fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
 							fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
 							fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
 							fprintf (MAPFILE, "\n\"parallel\" \"0\"");
-							fprintf (MAPFILE, "\n\"texture\" \"square\"");
+							fprintf (MAPFILE, "\n\"texture\" \"lights/square\"");
 							fprintf (MAPFILE, "\n}\n");
 							} 
 						}
@@ -219,7 +219,7 @@ int x; int y;
 				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
 				fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
 				fprintf (MAPFILE, "\n\"light_radius\" \"4500 4500 2500\"");	
-				fprintf (MAPFILE, "\n\"color\" \"0.50 0.50 0.50\"");
+				fprintf (MAPFILE, "\n\"_color\" \"0.01 0.01 0.01\"");
 				fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
 				fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
 				fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
@@ -739,16 +739,15 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 			if (iGame == SHOCK)
 				{
 				float shock_ceil = SHOCK_CEILING_HEIGHT;
-				int floorOffset = shock_ceil-ceilOffset -8;	//The floor of the tile if it is 1 texture tall.
-				//while (floorOffset >=8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
-				//	{
-				//	floorOffset -=8;
-				//	}
-				floorOffset = floorOffset % 8;	
-				float textureVertAlign = (float)((floorOffset) / 8);	
-				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
-				textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,
-				textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureVertAlign);						
+				float floorOffset = shock_ceil - ceilOffset - 8;	//The floor of the tile if it is 1 texture tall.
+				while (floorOffset >= 8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
+				{
+					floorOffset -= 8;
+				}
+				float textureVertAlign = (floorOffset) / 8;
+				fprintf(MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
+					textureMasters[wallTexture].align1_1, textureMasters[wallTexture].align1_2, textureMasters[wallTexture].align1_3,
+					textureMasters[wallTexture].align2_1, textureMasters[wallTexture].align2_2, textureVertAlign);
 				}
 			else
 				{//Texture aligned with the ceiling
@@ -835,22 +834,22 @@ if (floorTexture <0)
 				}
 			else
 				{
-				float textVertAlign = textureMasters[floorTexture].floor_align2_3 ;	//Default value
-				alignFactor=1;
+				float textVertAlign = textureMasters[floorTexture].floor_align2_3;	//Default value
+				alignFactor = 1;
 				//This is buggy at the moment due to diffent slope types. 
-				if ((t.shockSteep >=1) && (t.tileType >=2))
-					{
-					alignFactor = calcAlignmentFactor(BrushSizeX,t.shockSteep * BrushSizeZ);
+				if ((t.shockSteep >= 1) && (t.tileType >= 2))
+				{
+					alignFactor = calcAlignmentFactor(BrushSizeX, t.shockSteep * BrushSizeZ);
 					//basically how much of the slope if extended to the axis is above that axis line.
-					if (face = fCEIL)
-						{
-						textVertAlign = (t.ceilingHeight % t.shockSteep) / t.shockSteep;						
-						}
-					else
-						{
-						textVertAlign = (t.floorHeight % t.shockSteep) / t.shockSteep;						
-						}
+					if (face = fCEIL) 
+					{
+						textVertAlign = (t.ceilingHeight % t.shockSteep) / t.shockSteep;
 					}
+					else
+					{
+						textVertAlign = (t.floorHeight % t.shockSteep) / t.shockSteep;
+					}
+				}
 				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
 						textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,
 						textureMasters[floorTexture].floor_align2_1,textureMasters[floorTexture].floor_align2_2 / alignFactor ,textVertAlign);	
