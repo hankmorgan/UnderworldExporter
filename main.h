@@ -22,7 +22,7 @@
 #define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
 
 
-#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
+#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.DAT"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
 #define SHOCK_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_texture_config.txt"
 #define SHOCK_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_object_config.txt"
@@ -37,7 +37,7 @@
 #define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\test_map.script"
 #define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\test_map.map"
 
-#define ENABLE_LIGHTING 0
+#define ENABLE_LIGHTING 1
 
 /*Globals*/
 extern int BrushSizeX;

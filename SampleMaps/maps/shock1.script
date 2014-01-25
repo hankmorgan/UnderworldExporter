@@ -1,41 +1,49 @@
-float lift_029_047_state =12;
-float lift_033_040_state =12;
-float lift_019_037_state =12;
-float lift_031_031_state =12;
-float lift_039_031_state =12;
-float lift_030_028_state = 8;
-float lift_032_025_state = 8;
-float lift_033_025_state =12;
-float lift_035_025_state =12;
-float lift_034_025_state =12;
-float lift_018_018_state =8;
-float NULL_TRIGGER_21_46_01_0597_state=1;   
-float NULL_TRIGGER_21_44_01_0557_state=1 ;
-float NULL_TRIGGER_25_44_01_0595_state=1 ;
-float NULL_TRIGGER_18_43_01_0237_state  =1;
-float NULL_TRIGGER_19_36_01_0063_state  =1;
-float ENTRY_TRIGGER_39_31_01_0714_state =1;
-float ENTRY_TRIGGER_30_28_01_0158_state =1;
-float NULL_TRIGGER_33_25_01_0354_state  =1;
-float NULL_TRIGGER_17_12_01_0163_state  =1;
+#ifndef __game3_1_script__
+#define __game3_1_script__
+	float lift_025_051_ceiling_state = 8;
+	float lift_029_047_ceiling_state = 16;
+	float NULL_TRIGGER_21_46_01_0597_state = 1;
+	float NULL_TRIGGER_21_44_01_0557_state = 1;
+	float NULL_TRIGGER_25_44_01_0595_state = 1;
+	float NULL_TRIGGER_18_43_01_0237_state = 1;
+	float lift_033_040_floor_state = 8;
+	float LEVER_49_39_01_0365_state = 1;
+	float NULL_TRIGGER_19_36_01_0063_state = 1;
+	float lift_019_037_floor_state = 16;
+	float ENTRY_TRIGGER_39_31_01_0714_state = 1;
+	float lift_039_031_floor_state = 22;
+	float lift_030_028_floor_state = 8;
+	float ENTRY_TRIGGER_30_28_01_0158_state = 1;
+	float lift_032_025_ceiling_state = 20;
+	float NULL_TRIGGER_33_25_01_0354_state = 1;
+	float lift_033_025_ceiling_state = 20;
+	float lift_034_025_ceiling_state = 20;
+	float lift_018_018_floor_state = 8;
+	float SWITCH_19_18_01_0126_state = 1;
+	float NULL_TRIGGER_17_12_01_0163_state = 1;
+
+
 
 void start_BUTTON_30_52_01_0541()
 {
-	$a_lock_028_012.activate($player1);
+	float displacement = 51 - lift_025_051_ceiling_state;
+	$ceiling_025_051.move( UP, displacement * 15 );
+	lift_025_051_ceiling_state = 51 ;
+
 }
 
 
 
 void start_SWITCH_20_51_01_0355()
 {
-	sys.println("This button does nothing!");
+	sys.println("Object 0: Not in use");
 }
 
 
 
 void start_NULL_TRIGGER_20_51_01_0357()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Unknown trigger action:21");
 }
 
 
@@ -65,9 +73,9 @@ void start_DEATH_WATCH_TRIGGER_44_49_01_0445()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_45_49_01_0506.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_46_49_01_0375.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_46_49_01_0507.activate($player1);
 }
 
 
@@ -98,9 +106,9 @@ void start_DEATH_WATCH_TRIGGER_44_48_01_0475()
 	$sys.wait(80);
 	$runscript_NULL_TRIGGER_45_48_01_0645.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_20_51_01_0357.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_31_45_01_0344.activate($player1);
 }
 
 
@@ -114,10 +122,9 @@ void start_NULL_TRIGGER_45_48_01_0645()
 
 void start_ENTRY_TRIGGER_27_47_01_0598()
 {
-	sys.println("Initial global should be" + 16);
-	float displacement = 24 -lift_029_047_state;
+	float displacement = 24 - lift_029_047_ceiling_state;
 	$ceiling_029_047.move( UP, displacement * 15 );
-	lift_029_047_state = 24 ;
+	lift_029_047_ceiling_state = 24 ;
 
 }
 
@@ -140,7 +147,6 @@ $data_reader_trigger.activate($player1);
 
 void start_NULL_TRIGGER_21_46_01_0597()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_21_46_01_0597_state == 1)
 		{
 		$runscript_NULL_TRIGGER_21_46_01_0590.activate($player1);
@@ -158,14 +164,14 @@ void start_NULL_TRIGGER_21_46_01_0597()
 
 void start_NULL_TRIGGER_21_46_01_0591()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing FORCE_DOOR_23_45_01_0553 to a FORCE_DOOR");
 }
 
 
 
 void start_NULL_TRIGGER_21_46_01_0590()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing FORCE_DOOR_23_45_01_0553 to a GREAT_LORD_SNAQUEOTRAHN");
 }
 
 
@@ -182,7 +188,7 @@ void start_DEATH_WATCH_TRIGGER_21_45_01_0562()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_25_44_01_0594.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_21_45_01_0588.activate($player1);
 }
 
 
@@ -210,6 +216,8 @@ void start_NULL_TRIGGER_21_45_01_0588()
 
 void start_BUTTON_23_45_01_0592()
 {
+	sys.println("Action activate by switch:BUTTON_23_45_01_0592)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_46_01_0597.activate($player1);
 }
 
@@ -217,6 +225,8 @@ void start_BUTTON_23_45_01_0592()
 
 void start_BUTTON_24_45_01_0558()
 {
+	sys.println("Action activate by switch:BUTTON_24_45_01_0558)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_46_01_0597.activate($player1);
 }
 
@@ -227,15 +237,17 @@ void start_ENTRY_TRIGGER_26_45_01_0585()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_45_01_0563.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_25_44_01_0556.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_21_45_01_0587.activate($player1);
 }
 
 
 
 void start_BUTTON_26_45_01_0593()
 {
+	sys.println("Action activate by switch:BUTTON_26_45_01_0593)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_44_01_0557.activate($player1);
 }
 
@@ -243,6 +255,8 @@ void start_BUTTON_26_45_01_0593()
 
 void start_BUTTON_27_45_01_0586()
 {
+	sys.println("Action activate by switch:BUTTON_27_45_01_0586)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_25_44_01_0595.activate($player1);
 }
 
@@ -250,6 +264,8 @@ void start_BUTTON_27_45_01_0586()
 
 void start_BUTTON_27_45_01_0555()
 {
+	sys.println("Action activate by switch:BUTTON_27_45_01_0555)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_44_01_0557.activate($player1);
 }
 
@@ -271,7 +287,6 @@ void start_ENTRY_TRIGGER_32_45_01_0184()
 
 void start_NULL_TRIGGER_21_44_01_0557()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_21_44_01_0557_state == 1)
 		{
 		$runscript_NULL_TRIGGER_21_44_01_0596.activate($player1);
@@ -289,21 +304,20 @@ void start_NULL_TRIGGER_21_44_01_0557()
 
 void start_NULL_TRIGGER_21_44_01_0596()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing FORCE_DOOR_27_45_01_0552 to a GREAT_LORD_SNAQUEOTRAHN");
 }
 
 
 
 void start_NULL_TRIGGER_21_44_01_0589()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing FORCE_DOOR_27_45_01_0552 to a FORCE_DOOR");
 }
 
 
 
 void start_NULL_TRIGGER_25_44_01_0595()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_25_44_01_0595_state == 1)
 		{
 		$runscript_NULL_TRIGGER_25_44_01_0594.activate($player1);
@@ -321,20 +335,22 @@ void start_NULL_TRIGGER_25_44_01_0595()
 
 void start_NULL_TRIGGER_25_44_01_0594()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing FORCE_DOOR_28_44_01_0551 to a GREAT_LORD_SNAQUEOTRAHN");
 }
 
 
 
 void start_NULL_TRIGGER_25_44_01_0556()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing FORCE_DOOR_28_44_01_0551 to a FORCE_DOOR");
 }
 
 
 
 void start_BUTTON_28_44_01_0554()
 {
+	sys.println("Action activate by switch:BUTTON_28_44_01_0554)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_25_44_01_0595.activate($player1);
 }
 
@@ -348,14 +364,13 @@ void start_NULL_TRIGGER_29_44_01_0356()
 
 void start_SWITCH_14_43_01_0603()
 {
-	sys.println("This button does nothing!");
+	sys.println("Object 0: Not in use");
 }
 
 
 
 void start_NULL_TRIGGER_18_43_01_0237()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_18_43_01_0237_state == 1)
 		{
 		$runscript_NULL_TRIGGER_19_42_01_0539.activate($player1);
@@ -387,6 +402,8 @@ void start_NULL_TRIGGER_18_43_01_0160()
 
 void start_LEVER_18_43_01_0227()
 {
+	sys.println("Action activate by switch:LEVER_18_43_01_0227)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_18_43_01_0237.activate($player1);
 }
 
@@ -397,7 +414,7 @@ void start_PLAYER_DEATH_TRIGGER_19_43_01_0230()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_43_01_0229.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_19_43_01_0228.activate($player1);
 }
 
 
@@ -437,7 +454,7 @@ void start_NULL_TRIGGER_19_42_01_0540()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_42_01_0538.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_18_43_01_0397.activate($player1);
 }
 
 
@@ -447,7 +464,7 @@ void start_NULL_TRIGGER_19_42_01_0539()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_42_01_0537.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_18_43_01_0160.activate($player1);
 }
 
 
@@ -475,7 +492,9 @@ void start_REPULSOR_26_42_01_0451()
 
 void start_SWITCH_12_41_01_0525()
 {
-	$IRIS_DOOR_14_40_01_0119.activate($player1);
+	sys.println("Action activate by switch:SWITCH_12_41_01_0525)");
+	$sys.wait(0);
+	$a_lock_014_040.activate($player1);
 }
 
 
@@ -483,13 +502,15 @@ void start_SWITCH_12_41_01_0525()
 void start_REPULSOR_30_41_01_0055()
 {
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	sys.println("Object 1: Not in use");
 }
 
 
 
 void start_SWITCH_30_40_01_0450()
 {
+	sys.println("Action activate by switch:SWITCH_30_40_01_0450)");
+	$sys.wait(0);
 	$a_lock_031_038.activate($player1);
 }
 
@@ -497,10 +518,9 @@ void start_SWITCH_30_40_01_0450()
 
 void start_ENTRY_TRIGGER_33_40_01_0216()
 {
-	sys.println("Initial global should be" + 8);
-	float displacement = 0 -lift_033_040_state;
+	float displacement = 0 - lift_033_040_floor_state;
 	$floor_033_040.move( UP, displacement * 15  );
-	lift_033_040_state = 0 ;
+	lift_033_040_floor_state = 0 ;
 
 }
 
@@ -511,7 +531,7 @@ void start_NULL_TRIGGER_49_40_01_0371()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_49_40_01_0370.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_49_40_01_0326.activate($player1);
 }
 
 
@@ -521,35 +541,35 @@ void start_NULL_TRIGGER_49_40_01_0372()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_49_40_01_0217.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_49_40_01_0373.activate($player1);
 }
 
 
 
 void start_NULL_TRIGGER_49_40_01_0370()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing ELEPHANT,_JORP_45_38_01_0180 to a FORCE_BRIDGE");
 }
 
 
 
 void start_NULL_TRIGGER_49_40_01_0326()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing ELEPHANT,_JORP_45_37_01_0243 to a FORCE_BRIDGE");
 }
 
 
 
 void start_NULL_TRIGGER_49_40_01_0217()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing ELEPHANT,_JORP_45_38_01_0180 to a ELEPHANT,_JORP");
 }
 
 
 
 void start_NULL_TRIGGER_49_40_01_0373()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing ELEPHANT,_JORP_45_37_01_0243 to a ELEPHANT,_JORP");
 }
 
 
@@ -572,7 +592,7 @@ void start_NULL_TRIGGER_38_39_01_0628()
 
 void start_NULL_TRIGGER_38_39_01_0320()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Unknown trigger action:13");
 }
 
 
@@ -586,14 +606,30 @@ void start_NULL_TRIGGER_38_39_01_0408()
 
 void start_LEVER_49_39_01_0365()
 {
-	$runscript_NULL_TRIGGER_49_40_01_0371.activate($player1);
+	if (LEVER_49_39_01_0365_state == 1)
+		{
+		$runscript_NULL_TRIGGER_49_40_01_0371.activate($player1);
+		LEVER_49_39_01_0365_state = 0;
+		}
+	else
+		{
+		$runscript_NULL_TRIGGER_49_40_01_0372.activate($player1);
+
+		LEVER_49_39_01_0365_state = 1 ;
+		}
 }
 
 
 
 void start_EMERGENCY_LEVER_39_38_01_0627()
 {
+	sys.println("Action activate by switch:EMERGENCY_LEVER_39_38_01_0627)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_38_39_01_0628.activate($player1);
+	$sys.wait(0);
+	$runscript_NULL_TRIGGER_38_39_01_0408.activate($player1);
+	$sys.wait(0);
+	$runscript_NULL_TRIGGER_38_39_01_0320.activate($player1);
 }
 
 
@@ -610,7 +646,7 @@ void start_ENTRY_TRIGGER_15_37_01_0727()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_38_39_01_0320.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_38_39_01_0408.activate($player1);
 }
 
 
@@ -633,6 +669,8 @@ $data_reader_trigger.activate($player1);
 
 void start_LARGE_BUTTON_18_37_01_0016()
 {
+	sys.println("Action activate by switch:LARGE_BUTTON_18_37_01_0016)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_36_01_0063.activate($player1);
 }
 
@@ -647,6 +685,8 @@ void start_ENTRY_TRIGGER_19_37_01_0681()
 
 void start_LARGE_BUTTON_20_37_01_0220()
 {
+	sys.println("Action activate by switch:LARGE_BUTTON_20_37_01_0220)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_36_01_0063.activate($player1);
 }
 
@@ -661,7 +701,6 @@ void start_ENTRY_TRIGGER_17_36_01_0498()
 
 void start_NULL_TRIGGER_19_36_01_0063()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_19_36_01_0063_state == 1)
 		{
 		$runscript_NULL_TRIGGER_19_36_01_0007.activate($player1);
@@ -679,10 +718,9 @@ void start_NULL_TRIGGER_19_36_01_0063()
 
 void start_NULL_TRIGGER_19_36_01_0007()
 {
-	sys.println("Initial global should be" + 16);
-	float displacement = 8 -lift_019_037_state;
+	float displacement = 8 - lift_019_037_floor_state;
 	$floor_019_037.move( UP, displacement * 15  );
-	lift_019_037_state = 8 ;
+	lift_019_037_floor_state = 8 ;
 
 }
 
@@ -690,10 +728,9 @@ void start_NULL_TRIGGER_19_36_01_0007()
 
 void start_NULL_TRIGGER_19_36_01_0009()
 {
-	sys.println("Initial global should be" + 16);
-	float displacement = 16 -lift_019_037_state;
+	float displacement = 16 - lift_019_037_floor_state;
 	$floor_019_037.move( UP, displacement * 15  );
-	lift_019_037_state = 16 ;
+	lift_019_037_floor_state = 16 ;
 
 }
 
@@ -715,14 +752,18 @@ void start_NULL_TRIGGER_17_35_01_0024()
 void start_NULL_TRIGGER_17_35_01_0023()
 {
 	$sys.wait(0);
-	$BULKHEAD_DOOR_17_35_01_0240.activate($player1);
+	$a_lock_017_035.activate($player1);
 }
 
 
 
 void start_LEVER_17_35_01_0130()
 {
+	sys.println("Action activate by switch:LEVER_17_35_01_0130)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_35_01_0024.activate($player1);
+	$sys.wait(0);
+	$runscript_NULL_TRIGGER_17_35_01_0023.activate($player1);
 }
 
 
@@ -765,6 +806,8 @@ void start_NULL_TRIGGER_37_33_01_0206()
 
 void start_LARGE_BUTTON_40_32_01_0159()
 {
+	sys.println("Action activate by switch:LARGE_BUTTON_40_32_01_0159)");
+	$sys.wait(0);
 	$ENTRY_TRIGGER_39_31_01_0714.activate($player1);
 }
 
@@ -788,7 +831,7 @@ void start_NULL_TRIGGER_11_31_01_0654()
 
 void start_BUTTON_17_31_01_0701()
 {
-	$GRATING_34_11_01_0003.activate($player1);
+	sys.println("Lighting control cp1=3 cp2=701");
 }
 
 
@@ -801,14 +844,14 @@ void start_NULL_TRIGGER_19_31_01_0600()
 
 void start_BUTTON_33_31_01_0662()
 {
-	sys.println("Object ML-41_PISTOL_-858993460_-858993460_-858993460_0001: Not in use");
+	sys.println("Action change state by switch:BUTTON_33_31_01_0662)");
+	$runscript_REPULSOR_31_30_01_0668.activate($player1);
 }
 
 
 
 void start_ENTRY_TRIGGER_39_31_01_0714()
 {
-	sys.println("Is this a toggle?");
 	if (ENTRY_TRIGGER_39_31_01_0714_state == 1)
 		{
 		$runscript_NULL_TRIGGER_39_31_01_0215.activate($player1);
@@ -826,10 +869,9 @@ void start_ENTRY_TRIGGER_39_31_01_0714()
 
 void start_NULL_TRIGGER_39_31_01_0215()
 {
-	sys.println("Initial global should be" + 22);
-	float displacement = 8 -lift_039_031_state;
+	float displacement = 8 - lift_039_031_floor_state;
 	$floor_039_031.move( UP, displacement * 15  );
-	lift_039_031_state = 8 ;
+	lift_039_031_floor_state = 8 ;
 
 }
 
@@ -837,10 +879,9 @@ void start_NULL_TRIGGER_39_31_01_0215()
 
 void start_NULL_TRIGGER_39_31_01_0214()
 {
-	sys.println("Initial global should be" + 22);
-	float displacement = 24 -lift_039_031_state;
+	float displacement = 24 - lift_039_031_floor_state;
 	$floor_039_031.move( UP, displacement * 15  );
-	lift_039_031_state = 24 ;
+	lift_039_031_floor_state = 24 ;
 
 }
 
@@ -851,14 +892,14 @@ void start_LEVEL_ENTRY_TRIGGER_11_30_01_0653()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_11_31_01_0654.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_11_31_01_0655.activate($player1);
 }
 
 
 
 void start_BUTTON_27_30_01_0700()
 {
-	$GRATING_34_11_01_0003.activate($player1);
+	sys.println("Lighting control cp1=3 cp2=700");
 }
 
 
@@ -873,21 +914,22 @@ void start_NULL_TRIGGER_31_30_01_0708()
 void start_REPULSOR_31_30_01_0668()
 {
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	sys.println("Object 1: Not in use");
 }
 
 
 
 void start_BUTTON_32_30_01_0529()
 {
-	sys.println("Object ML-41_PISTOL_-858993460_-858993460_-858993460_0001: Not in use");
+	sys.println("Action change state by switch:BUTTON_32_30_01_0529)");
+	$runscript_REPULSOR_31_30_01_0668.activate($player1);
 }
 
 
 
 void start_ACCESS_PANEL_32_30_01_0682()
 {
-	sys.println("Puzzle type was: 171");
+	sys.println("Puzzle type was: 0");
 	$a_lock_031_038.activate($player1);
 }
 
@@ -903,6 +945,8 @@ void start_CRITTER_AI_HINT_36_30_01_0309()
 
 void start_LARGE_BUTTON_38_30_01_0110()
 {
+	sys.println("Action activate by switch:LARGE_BUTTON_38_30_01_0110)");
+	$sys.wait(0);
 	$ENTRY_TRIGGER_39_31_01_0714.activate($player1);
 }
 
@@ -932,6 +976,8 @@ $data_reader_trigger.activate($player1);
 
 void start_LEVER_30_29_01_0432()
 {
+	sys.println("Action activate by switch:LEVER_30_29_01_0432)");
+	$sys.wait(0);
 	$ENTRY_TRIGGER_30_28_01_0158.activate($player1);
 }
 
@@ -955,7 +1001,7 @@ $data_reader_trigger.activate($player1);
 
 void start_SWITCH_20_28_01_0093()
 {
-	sys.println("This button does nothing!");
+	sys.println("Object 0: Not in use");
 }
 
 
@@ -974,10 +1020,9 @@ void start_NULL_TRIGGER_26_28_01_0152()
 
 void start_NULL_TRIGGER_30_28_01_0200()
 {
-	sys.println("Initial global should be" + 8);
-	float displacement = 0 -lift_030_028_state;
+	float displacement = 0 - lift_030_028_floor_state;
 	$floor_030_028.move( UP, displacement * 15  );
-	lift_030_028_state = 0 ;
+	lift_030_028_floor_state = 0 ;
 
 }
 
@@ -985,10 +1030,9 @@ void start_NULL_TRIGGER_30_28_01_0200()
 
 void start_NULL_TRIGGER_30_28_01_0027()
 {
-	sys.println("Initial global should be" + 8);
-	float displacement = 8 -lift_030_028_state;
+	float displacement = 8 - lift_030_028_floor_state;
 	$floor_030_028.move( UP, displacement * 15  );
-	lift_030_028_state = 8 ;
+	lift_030_028_floor_state = 8 ;
 
 }
 
@@ -996,7 +1040,6 @@ void start_NULL_TRIGGER_30_28_01_0027()
 
 void start_ENTRY_TRIGGER_30_28_01_0158()
 {
-	sys.println("Is this a toggle?");
 	if (ENTRY_TRIGGER_30_28_01_0158_state == 1)
 		{
 		$runscript_NULL_TRIGGER_30_28_01_0200.activate($player1);
@@ -1017,28 +1060,28 @@ void start_NULL_TRIGGER_46_28_01_0114()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_46_28_01_0298.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_46_28_01_0299.activate($player1);
 }
 
 
 
 void start_NULL_TRIGGER_46_28_01_0299()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing ELEPHANT,_JORP_46_29_01_0290 to a FORCE_BRIDGE");
 }
 
 
 
 void start_NULL_TRIGGER_46_28_01_0298()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Changing ELEPHANT,_JORP_46_30_01_0292 to a FORCE_BRIDGE");
 }
 
 
 
 void start_ACCESS_PANEL_47_28_01_0259()
 {
-	sys.println("Puzzle type was: 99");
+	sys.println("Puzzle type was: 0");
 	$runscript_NULL_TRIGGER_46_28_01_0114.activate($player1);
 }
 
@@ -1079,7 +1122,7 @@ void start_CRITTER_AI_HINT_36_27_01_0310()
 void start_REPULSOR_43_27_01_0366()
 {
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	sys.println("Object 1: Not in use");
 }
 
 
@@ -1093,6 +1136,8 @@ void start_ENERGY_CHARGE_STATION_28_26_01_0411()
 
 void start_LARGE_BUTTON_34_26_01_0536()
 {
+	sys.println("Action activate by switch:LARGE_BUTTON_34_26_01_0536)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_33_25_01_0354.activate($player1);
 }
 
@@ -1100,7 +1145,7 @@ void start_LARGE_BUTTON_34_26_01_0536()
 
 void start_SWITCH_55_26_01_0605()
 {
-	sys.println("This button does nothing!");
+	sys.println("Object 0: Not in use");
 }
 
 
@@ -1114,10 +1159,9 @@ void start_NULL_TRIGGER_27_25_01_0151()
 
 void start_NULL_TRIGGER_32_25_01_0054()
 {
-	sys.println("Initial global should be" + 12);
-	float displacement = 8 -lift_032_025_state;
+	float displacement = 8 - lift_032_025_ceiling_state;
 	$ceiling_032_025.move( UP, displacement * 15 );
-	lift_032_025_state = 8 ;
+	lift_032_025_ceiling_state = 8 ;
 
 }
 
@@ -1125,10 +1169,9 @@ void start_NULL_TRIGGER_32_25_01_0054()
 
 void start_NULL_TRIGGER_32_25_01_0109()
 {
-	sys.println("Initial global should be" + 12);
-	float displacement = 25 -lift_032_025_state;
+	float displacement = 25 - lift_032_025_ceiling_state;
 	$ceiling_032_025.move( UP, displacement * 15 );
-	lift_032_025_state = 25 ;
+	lift_032_025_ceiling_state = 25 ;
 
 }
 
@@ -1136,7 +1179,6 @@ void start_NULL_TRIGGER_32_25_01_0109()
 
 void start_NULL_TRIGGER_33_25_01_0354()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_33_25_01_0354_state == 1)
 		{
 		$runscript_NULL_TRIGGER_33_25_01_0012.activate($player1);
@@ -1154,10 +1196,9 @@ void start_NULL_TRIGGER_33_25_01_0354()
 
 void start_NULL_TRIGGER_33_25_01_0034()
 {
-	sys.println("Initial global should be" + 12);
-	float displacement = 25 -lift_033_025_state;
+	float displacement = 25 - lift_033_025_ceiling_state;
 	$ceiling_033_025.move( UP, displacement * 15 );
-	lift_033_025_state = 25 ;
+	lift_033_025_ceiling_state = 25 ;
 
 }
 
@@ -1168,9 +1209,9 @@ void start_NULL_TRIGGER_33_25_01_0012()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_32_25_01_0054.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_33_25_01_0031.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_34_25_01_0033.activate($player1);
 }
 
 
@@ -1180,19 +1221,18 @@ void start_NULL_TRIGGER_33_25_01_0032()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_32_25_01_0109.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_33_25_01_0034.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_34_25_01_0053.activate($player1);
 }
 
 
 
 void start_NULL_TRIGGER_33_25_01_0031()
 {
-	sys.println("Initial global should be" + 12);
-	float displacement = 8 -lift_033_025_state;
+	float displacement = 8 - lift_033_025_ceiling_state;
 	$ceiling_033_025.move( UP, displacement * 15 );
-	lift_033_025_state = 8 ;
+	lift_033_025_ceiling_state = 8 ;
 
 }
 
@@ -1200,10 +1240,9 @@ void start_NULL_TRIGGER_33_25_01_0031()
 
 void start_NULL_TRIGGER_34_25_01_0033()
 {
-	sys.println("Initial global should be" + 12);
-	float displacement = 8 -lift_034_025_state;
+	float displacement = 8 - lift_034_025_ceiling_state;
 	$ceiling_034_025.move( UP, displacement * 15 );
-	lift_034_025_state = 8 ;
+	lift_034_025_ceiling_state = 8 ;
 
 }
 
@@ -1211,10 +1250,9 @@ void start_NULL_TRIGGER_34_25_01_0033()
 
 void start_NULL_TRIGGER_34_25_01_0053()
 {
-	sys.println("Initial global should be" + 12);
-	float displacement = 25 -lift_034_025_state;
+	float displacement = 25 - lift_034_025_ceiling_state;
 	$ceiling_034_025.move( UP, displacement * 15 );
-	lift_034_025_state = 25 ;
+	lift_034_025_ceiling_state = 25 ;
 
 }
 
@@ -1230,7 +1268,7 @@ void start_ENTRY_TRIGGER_46_25_01_0606()
 
 void start_NULL_TRIGGER_47_25_01_0607()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Unknown trigger action:11");
 }
 
 
@@ -1254,7 +1292,7 @@ void start_NULL_TRIGGER_29_24_01_0209()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_33_01_0601.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_12_45_01_0602.activate($player1);
 }
 
 
@@ -1264,11 +1302,11 @@ void start_NULL_TRIGGER_29_24_01_0599()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_13_01_0211.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_17_12_01_0337.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_41_20_01_0236.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_29_24_01_0209.activate($player1);
 }
 
 
@@ -1278,18 +1316,18 @@ void start_NULL_TRIGGER_29_24_01_0064()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_27_25_01_0151.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_26_27_01_0252.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_41_30_01_0208.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_29_24_01_0599.activate($player1);
 }
 
 
 
 void start_NULL_TRIGGER_29_24_01_0066()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Unknown trigger action:11");
 }
 
 
@@ -1320,6 +1358,8 @@ void start_LEVEL_ENTRY_TRIGGER_31_23_01_0695()
 
 void start_LARGE_BUTTON_35_23_01_0117()
 {
+	sys.println("Action activate by switch:LARGE_BUTTON_35_23_01_0117)");
+	$sys.wait(0);
 	$runscript_NULL_TRIGGER_33_25_01_0354.activate($player1);
 }
 
@@ -1343,7 +1383,7 @@ void start_NULL_TRIGGER_20_22_01_0141()
 
 void start_NULL_TRIGGER_21_22_01_0062()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Unknown trigger action:11");
 }
 
 
@@ -1353,13 +1393,15 @@ void start_NULL_TRIGGER_25_22_01_0696()
 	$sys.wait(0);
 	$a_lock_026_024.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$a_lock_026_021.activate($player1);
 }
 
 
 
 void start_BUTTON_26_22_01_0176()
 {
+	sys.println("Action activate by switch:BUTTON_26_22_01_0176)");
+	$sys.wait(0);
 	$a_lock_026_021.activate($player1);
 }
 
@@ -1385,9 +1427,9 @@ void start_NULL_TRIGGER_20_21_01_0205()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_41_30_01_0208.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_20_22_01_0141.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_29_13_01_0211.activate($player1);
 }
 
 
@@ -1433,7 +1475,7 @@ void start_NULL_TRIGGER_19_19_01_0576()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_19_01_0575.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$runscript_NULL_TRIGGER_19_19_01_0574.activate($player1);
 }
 
 
@@ -1479,10 +1521,9 @@ void start_ENTRY_TRIGGER_18_18_01_0573()
 
 void start_NULL_TRIGGER_18_18_01_0112()
 {
-	sys.println("Initial global should be" + 8);
-	float displacement = 0 -lift_018_018_state;
+	float displacement = 0 - lift_018_018_floor_state;
 	$floor_018_018.move( UP, displacement * 15  );
-	lift_018_018_state = 0 ;
+	lift_018_018_floor_state = 0 ;
 
 }
 
@@ -1490,10 +1531,9 @@ void start_NULL_TRIGGER_18_18_01_0112()
 
 void start_NULL_TRIGGER_18_18_01_0113()
 {
-	sys.println("Initial global should be" + 8);
-	float displacement = 8 -lift_018_018_state;
+	float displacement = 8 - lift_018_018_floor_state;
 	$floor_018_018.move( UP, displacement * 15  );
-	lift_018_018_state = 8 ;
+	lift_018_018_floor_state = 8 ;
 
 }
 
@@ -1501,7 +1541,17 @@ void start_NULL_TRIGGER_18_18_01_0113()
 
 void start_SWITCH_19_18_01_0126()
 {
-	$runscript_NULL_TRIGGER_18_18_01_0112.activate($player1);
+	if (SWITCH_19_18_01_0126_state == 1)
+		{
+		$runscript_NULL_TRIGGER_18_18_01_0112.activate($player1);
+		SWITCH_19_18_01_0126_state = 0;
+		}
+	else
+		{
+		$runscript_NULL_TRIGGER_18_18_01_0113.activate($player1);
+
+		SWITCH_19_18_01_0126_state = 1 ;
+		}
 }
 
 
@@ -1511,7 +1561,7 @@ void start_NULL_TRIGGER_20_18_01_0006()
 	$sys.wait(0);
 	$runscript_NULL_TRIGGER_20_18_01_0036.activate($player1);
 	$sys.wait(0);
-	sys.println("Object ML-41_PISTOL_00_00_01_0000: Not in use");
+	$a_lock_026_021.activate($player1);
 }
 
 
@@ -1558,7 +1608,7 @@ void start_NULL_TRIGGER_17_17_01_0288()
 
 void start_ACCESS_PANEL_18_17_01_0577()
 {
-	sys.println("Puzzle type was: 66");
+	sys.println("Puzzle type was: 0");
 	$runscript_NULL_TRIGGER_19_19_01_0576.activate($player1);
 }
 
@@ -1575,7 +1625,7 @@ $data_reader_trigger.activate($player1);
 
 void start_LARGE_BUTTON_23_15_01_0289()
 {
-	$runscript_NULL_TRIGGER_26_14_01_0300.activate($player1);
+	sys.println("Lighting control cp1=300 cp2=288");
 }
 
 
@@ -1596,14 +1646,14 @@ void start_NULL_TRIGGER_26_14_01_0300()
 
 void start_SWITCH_27_14_01_0210()
 {
-	sys.println("This button does nothing!");
+	sys.println("Object 0: Not in use");
 }
 
 
 
 void start_NULL_TRIGGER_29_14_01_0680()
 {
-	sys.println("Unknown trigger action.");
+	sys.println("Unknown trigger action:11");
 }
 
 
@@ -1619,7 +1669,7 @@ $data_reader_trigger.activate($player1);
 
 void start_BUTTON_27_13_01_0702()
 {
-	$SYSTEM_ANALYZER_26_20_01_0002.activate($player1);
+	sys.println("Lighting control cp1=2 cp2=707");
 }
 
 
@@ -1633,7 +1683,6 @@ void start_NULL_TRIGGER_29_13_01_0211()
 
 void start_NULL_TRIGGER_17_12_01_0163()
 {
-	sys.println("Is this a toggle?");
 	if (NULL_TRIGGER_17_12_01_0163_state == 1)
 		{
 		$runscript_NULL_TRIGGER_18_18_01_0112.activate($player1);
@@ -1666,7 +1715,7 @@ void start_KEYPAD_PANEL_23_12_01_0291()
 
 void start_BUTTON_27_11_01_0703()
 {
-	$GRATING_34_11_01_0003.activate($player1);
+	sys.println("Lighting control cp1=3 cp2=704");
 }
 
 
@@ -1686,3 +1735,4 @@ void start_EMAIL_04_04_01_0321()
 $data_reader_trigger.setKey("snd_say","shock_audio_log_2509");
 $data_reader_trigger.activate($player1);
 }
+#endif //__game3_1_script__

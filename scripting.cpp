@@ -1016,7 +1016,15 @@ switch (currObj.TriggerAction)
 			
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
-		fprintf(fBODY,"\tsys.println(\"Change type\");\n");
+		int objToChange = currObj.shockProperties[TRIG_PROPERTY_OBJECT];
+		if(objToChange == 292)
+		{
+			printf("");
+		}
+		int newObjType = currObj.shockProperties[TRIG_PROPERTY_TYPE];
+		fprintf(fBODY, "\tsys.println(\"Changing %s to a %s\");\n",
+			UniqueObjectName(objList[objToChange]),
+			getObjectNameByClass(objList[objToChange].ObjectClass, objList[objToChange].ObjectSubClass, newObjType));
 		break;
 		}
 	default:
@@ -1199,7 +1207,15 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 
 	case ACTION_CHANGE_TYPE:
 		{
-		fprintf(fBODY, "\tsys.println(\"Change Type\");\n");
+		//fprintf(fBODY, "\tsys.println(\"Change Type\");\n");
+		int objToChange = currObj.shockProperties[TRIG_PROPERTY_OBJECT];
+		int newObjType = currObj.shockProperties[TRIG_PROPERTY_TYPE];
+		fprintf(fBODY, "\tsys.println(\"Changing %s to an %s\");\n",
+				UniqueObjectName(objList[objToChange]),
+				getObjectNameByClass(objList[objToChange].ObjectClass, objList[objToChange].ObjectSubClass,newObjType));
+
+		//printf("\t\tChanges to %s\n", getObjectNameByClass(objList[objIndex].ObjectClass, objList[objIndex].ObjectSubClass, objList[objIndex].ObjectSubClassIndex);
+
 		break;
 		}
 	default:

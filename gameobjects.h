@@ -261,7 +261,7 @@ struct ObjectItem
 	int shockProperties[10]; //Further generic properties for data pulled back from subclass blocks.
 	int conditions[4];  	
 	int sprite;
-	
+	short SHOCKLocked;
 	//scripting state flags
 	short global;
 };
@@ -322,6 +322,7 @@ int nextlink;
 };
 
 void EntityRotation(int heading);
+void EntityRotationSHOCK(int heading);
 void AttachToJoint(ObjectItem &currobj);
 int isTrigger(ObjectItem currobj);
 int isButton(ObjectItem currobj);
@@ -335,6 +336,8 @@ void EntityRotation(int heading);
 char *UniqueObjectName(ObjectItem currObj);
 int isButtonSHOCK(ObjectItem currobj);
 int isTriggerSHOCK(ObjectItem currobj);
+char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
+
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
 

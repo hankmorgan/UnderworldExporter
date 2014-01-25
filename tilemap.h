@@ -12,6 +12,11 @@
 #define EAST 270
 #define WEST 90
 
+#define SHOCK_NORTH 128
+#define SHOCK_SOUTH 0
+#define SHOCK_EAST 64
+#define SHOCK_WEST 192
+
 #define TILE_SOLID 0
 #define TILE_OPEN 1
 #define TILE_SLOPE_N 6
