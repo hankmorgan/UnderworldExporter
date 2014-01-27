@@ -10,6 +10,8 @@ long getFileSize(FILE *file);
 int getValAtAddress(unsigned char *buffer, long Address, int size);
 int getValAtCoordinate(int x, int y, int BlockStart,unsigned char *buffer, int size);
 int LoadShockFile(char *filePath,long fileSize, unsigned char *archive_ark);
+long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPackedLength, long *chunkUnpackedLength, long *chunkType);
 int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archive_ark, unsigned char *OutputChunk,long chunkPackedLength,long chunkUnpackedLength);
+
 
 #endif /*util_h*/

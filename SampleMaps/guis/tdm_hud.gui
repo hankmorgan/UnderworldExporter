@@ -1,0 +1,12 @@
+windowDef Desktop
+{
+   rect   0,0,640,480
+   nocursor  1
+	windowDef panel
+	{
+		rect	0,0,640,480
+		visible	1
+		background	"guis/assets/shock/hud/0617"
+		matcolor	1,1,1,1
+	}
+}

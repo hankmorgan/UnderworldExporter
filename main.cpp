@@ -10,11 +10,8 @@
 #include "tilemap.h"
 #include "d3darkmod.h"
 #include "scripting.h"
+#include "materials.h"
 #include "main.h"
-
-
-
-
 
 
 using namespace std;
@@ -45,13 +42,14 @@ extern int levelNo;
 
 int main()
 {
-
 int game = SHOCK;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
+//int mode = MATERIALS_BUILD_MODE;
+
 levelNo=1;
 switch (game)
 	{
@@ -84,6 +82,9 @@ switch (game)
 			break;
 		case BITMAP_EXTRACT_MODE:
 			extractTextureBitmap(-1,GRAPHICS_FILE,GRAPHICS_PAL_FILE,0, 32);
+			break;
+		case MATERIALS_BUILD_MODE:
+			BuildXDataFile(game);
 			break;
 		}
 	}

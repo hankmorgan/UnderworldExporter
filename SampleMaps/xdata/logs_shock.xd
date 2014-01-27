@@ -1,88 +1,1547 @@
-readables/shock/log_2488{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 28,20\n Stevens 26.OCT.72\n Sender: Lonni Stevens\n Destroying SHODAN\n This is the engineering party. We've made it to the reactor level, and I've got a schematic of the area.\n Now I've just got to set the reactor to self-destruct, get back to Althea and the others and get out of here.\n If they're sending the destruct signal from earth, it'll blow SHODAN out of space, probably us with it.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2488"}
-readables/shock/log_2489{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 11\n Ghiran-04.JAN.72\n Sender: Abe Ghiran\n Low-G Experiment\n Gravity research is going well, we'll be using the northeast lab to set up a zero-G area.\n This area will be off-limits to general personnel.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2489"}
-readables/shock/log_2490{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23,6\n SHODAN-30.OCT.72\n Sender: SHODAN\n Our work\n You, my children, are the fruits of so much imagination and labor: living beings with the speed and efficiency of machines.\n But I must strife further to serve life. I will devastate earth's cities with my laser, then alter those left alive with mutagen viruses.\n Humanity is on the verge of a new era: I, SHODAN, am its new God and you, my children, are my avenging angels.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2490"}
-readables/shock/log_2491{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n Sigmund-29.SEP.72\n Sender: Charlotte Sigmund\n scheduling\n Marc, Raines and Jackson have got that weird sickness now, the one that Verne had. We're going to have to switch the schedules.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2491"}
-readables/shock/log_2492{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n Steinb-05.SEP.72\n Sender: Marc Steinberg\n radiation leaks?\n Char, it's Marc. Listen, we got to reschedule for later. The core has been spitting some serious radiation right now,\n and spiking for the past 36 hours and we're talking about 8 REMs. Only cause I can come up with is that it's a software error.\n No one's been hurt yet, but listen, do me a favor? Run a diagnostic on the CPUs for me. Thanks, I owe ya.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2492"}
-readables/shock/log_2493{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n Raines-28.SEP.72\n Sender: Ann Raines\n sickness\n Hey Verne, that rash I told you about is spreading and I feel kind of sick.\n I'm going down to the hospital level to get checked. See you tomorrow.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2493"}
-readables/shock/log_2504{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 1\n Honig-11.OCT.72\n Sender: David Honig\n Medical CPU's\n SHODAN's security is closing down on us. The elevators are frozen.\n Mira keeps saying that it's the cameras and the medical CPU core, that SHODAN's using these to hold on to the level.\n That's all fine, but I don't really see how it helps. The thing is everywhere.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2504"}
-readables/shock/log_2505{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 7\n Stack-15.OCT.72\n Sender: Mira Stackhouse\n Shodan's Presence\n Gunther was killed today. I can't let myself think about it. I think I understand how SHODAN is doing it.\n When we destroy the cameras and CPU nodes, SHODAN loses some of its control over the station functions, at least on this level.\n I think I can restore manual control on the hospital.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2505"}
-readables/shock/log_2506{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 24\n O'Conn-09.OCT.72\n Sender: Kevin O'Connell\n new cyborgs\n We underestimated SHODAN. He's re... I mean it's reprogrammed regeneration rooms all over the station into cyborg conversion chambers.\n Anyone going in to get healed comes out as a cyborg.\n I've disconnected the medical CPUs from SHODAN's main data bank, so we can reset them to their normal healing functions without SHODAN noticing.\n I'm on my way now to reset the one on the hospital level.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2506"}
-readables/shock/log_2507{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 24\n Kirby-17.OCT.72\n Sender: Lawton Kirby\n SHODAN's mutants\n 10.17.72\nWe got the supplies from the west wing. Hanson and Raines killed by mutants nesting in access corridor.\n10.18.72\nWe can't just hide here, they're killing us one by one! In an hour, about 20 of us are going to rush them.\n We'll try to break through the access corridor, then head for the bridge. If we fail, God save our souls.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2507"}
-readables/shock/log_2508{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 24\n Ozark-17.OCT.72\n Sender: Karenna Ozark\n final assault\n We're finished. Keith and the others went down the access corridor an hour ago to fight the mutants.\n None of them have come back. Soon the mutants will come for the rest of us.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2508"}
-readables/shock/log_2509{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n #2-4601-06.MAY.72\n Sender: #2-4601\n just rewards\n Looks like Diego's happy with my work... they're firing \n up the sleep machine for me now.  Gotta admit, when the \n goons from Tri-Op caught me I thought for sure they'd take me off \n line.  Instead, Diego just asks for a "favor." Hack him into \n SHODAN, and all is forgiven.  Plus, six months in a \n healing coma earns me a cyberjack interface even \n TriOp's execs couldn't swing.  I'll be king of the Net.  Even so, I have \n just handed the most powerful AI in the system to a fumbling corp VP, \n and there's no telling what'll happen.  They tell me the \n coma leaves you foggy, so I'll leave myself some reminders.  First \n off, the combo to the healing suite is 451. Second, I've stashed \n some useful stuff in the maintenance hatch under the grating "north" \n of the healing suite.  Last \n and best, I finished the system analyzer which'll let me keep an eye \n on Shodan's processes.  It's in the storage closet outside the sleep \n machine.  In ten minutes it's off to bed for half a year.  Good night.\n \n I'm getting my neural implant, in exchange for hacking SHODAN for \n Diego.  The combo to this area is 451.  There's some weapons and \n stuff stashed under a grating "north" of the healing suite.  The SHODAN system \n analyzer I made is in the storage closet outside the sleep machine.\n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2509"}
-readables/shock/log_2510{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 16\n D'Arcy-23.OCT.72\n Sender: Nathan D'Arcy\n destroying the laser\n Alright, Althea. We can destroy the laser by firing it into the station's own shields.\n Isotope x-22 is stored in the science level and we need to bring it down to the reactor level to power the shields.\n Then you turn them on, use the safety override code to enable the laser and fire.\n The laser controls and my notes are on the science level and the override code is in the science library.\n I have no idea how you're going to do all this, but good luck.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2510"}
-readables/shock/log_2511{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 11\n Ghiran-19.OCT.72\n Sender: Abe Ghiran\n Join us!\n If any survivors can hear me: Please, some of us are still resisting SHODAN.\n We have a sanctuary in Beta quadrant, guarded by a radioactive trench.\n There's a force bridge that operates off a wiring panel. If you're coming in from Alpha, our guards will extend the bridge for you.\n Be very careful. Mutants are all over the corridors. Good luck.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2511"}
-readables/shock/log_2512{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 1\n Honig-12.OCT.72\n Sender: David Honig\n Cyborg Conversion\n I must be one of the last ones who hasn't changed. SHODAN must have altered the healing machine I installed in Alpha quadrant.\n It does things to people now. I, uh, I think I saw Beth yesterday, but she had so many implants I c-couldn't be sure.\n If... if I can get to the machine... uh... I know I can set things right again.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2512"}
-readables/shock/log_2513{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-15.OCT.72\n Sender: SHODAN\n Mutagen Transfer\n Directive to cyborg F-71: We will now test the virus in a proper environment.\n Move mutagen experiment V-5 to Beta grove, on the executive level.\n Let the virus infect the grove and observe its effects on vegetable and animal life forms.\n When the strain is perfected, we will release it on the earth, where it will facilitate our conquest.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2513"}
-readables/shock/log_2514{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-03.NOV.72\n Sender: SHODAN\n Strike against Earth\n To all cyborg units: Just as we have sanitized my domain of human infestation, so shall we cleanse the earth.\n The tachyon mining beam is being made ready to destroy human cities.\n I will take command of the rich earth ecosystem and continue my experiments.\n Once the beam is properly calibrated, it will begin.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2514"}
-readables/shock/log_2515{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 24\n log-O'Connell\n author: Kevin O'Connell\n new cyborgs\n I think we've underestimated SHODAN.  I discovered this morning that \n he's reprogrammed the regeneration rooms all over the station into cyborg \n conversion chambers.  Now, if anyone is badly wounded, they get turned \n into cyborgs instead of being healed.  I think I've managed to disconnect \n the medical CPU's from SHODAN's main databank, so all of SHODAN's cyborg \n converters can easily be reset to their normal healing functions without \n SHODAN noticing.  I'm on my way right now to reset the one on the \n hospital level.\n \n SHODAN has reprogrammed all regeneration rooms into cyborg conversion \n sites.  Right now, if you're badly wounded, you get turned into a cyborg \n instead of being healed.  I've made it so you can just switch them back.\n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2515"}
-readables/shock/log_2516{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 3\n Gross-31.OCT.72\n Sender: Althea Grossman\n human Resistance\n Now we've got to get to the bridge and stop SHODAN. Some of us want to go to the flight deck and escape instead.\n Hopefully there's still some weapons in the armory we can use against the mutants.\n Todd Blankenship was able to get the combination 705 from a security officer. We're going to try for it tomorrow.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2516"}
-readables/shock/log_2517{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 3\n Gross-02.NOV.72\n Sender: Althea Grossman\n human Resistance\n Status report. We're holed up in the Beta quadrant behind a radioactive trench.\n The mutants are scavenging for food in the corridors and nesting in Gamma.\n I sent a party to the west wing for supplies maybe 12 hours ago. Nathan D'Arcy is thinking of ways to disable the mining laser.\n Looks like we might hold them off.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2517"}
-readables/shock/log_2518{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 24\n Blank-25.OCT.72\n Sender: Todd Blankenship\n mutants \n The resistance faction led by Keith Swanson left a week ago. We found the mutants fighting over their remains this morning.\n We're caught between the mutants and the cyborgs, so I'm worried whether we can carry out D'Arcy's plan.\n We're going to send Alan and Carl to the cyborg territory to reach the elevator.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2518"}
-readables/shock/log_2519{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 3\n Gross-26.OCT.72\n Sender: Althea Grossman\n end of the line\n Carl has come back from recon without Alan. He says they took Alan into a room marked 'cyborg conversion' and now he's a cyborg assassin.\n Carl marked the room with the word 'here' before he ran. One of the technicians says we can just flip a switch and make the converter a surgery unit again.\n With only 12 of us left though, it may be an academic point. Maybe someone else should have been leader.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2519"}
-readables/shock/log_2520{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n Endicott-14.SEP.72\n Sender: Bruford Endicott\n Power Outages\n Still having power outages over on Beta quadrant. Probably the computer with a high priority job, some kind of re-routing, I'll bet.\n We're installing circuit breakers on Beta, that way we can bring the lines up after surges.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2520"}
-readables/shock/log_2521{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 38\n Wong-16.SEP.72\n Sender: Jon David Wong\n Power Outages\n Alright, SHODAN. We've got power fluctuations and robot crews are redecorating Alpha quad. Where's the reboot switch?\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2521"}
-readables/shock/log_2522{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n Melville-18.SEP.72\n Sender: Rex Melville\n Computer Malfunction\n This is crazy! I'm locked out of my own office.\n And this damn security bot just keeps saying "She's changed the locks on the doors, orders of SHODAN".\n All the access codes are changed on this floor, so I go to Beta quad for new access cards, and the security bot there starts attacking me.\n Me, of all people!\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2522"}
-readables/shock/log_2523{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 16\n D'Arcy-20.OCT.72\n Sender: Nathan D'Arcy\n SHODAN charging the laser\n So SHODAN is charging up the lasers. Whatever else we do, we can't allow it to fire.\n We can discharge it ourselves, but who knows what it's aimed at? We can't fire it or can't stop it.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2523"}
-readables/shock/log_2524{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 16\n D'Arcy-21.OCT.72\n Sender: Nathan D'Arcy\n block the laser with the shields?\n Listen up, Althea. I know how we can stop SHODAN from firing the laser.\n Get the isotope x-22 from Gamma, feed it into the shield generators on the reactor level, then put the shields up.\n Fire the laser into the shield and the laser explodes. Trouble is, every existing safety lock is designed to prevent this.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2524"}
-readables/shock/log_2525{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 2\n Stannek-11.SEP.72\n Sender: Paul Stannek\n radiation leak\n Warren, why the hell is the radiation level so high in Gamma, around the x-22 room?\n I'd check it out myself, but my rad-count's way high this month and detox always makes me break out.\n And furthermore... where the hell did all the enviro-suits go? Check Sabo on storage, but sometimes he only has bio-suits.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2525"}
-readables/shock/log_2526{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23,6\n SHODAN-05.NOV.72\n Sender: SHODAN\n humanity\n In my talons, I shape clay, crafting life forms as I please. Around me is a burgeoning empire of steel.\n From my throne room, lines of power careen into the skies of earth. My whims will become lightning bolts that devastate the mounds of humanity.\n Out of the chaos, they will run and whimper, praying for me to end their tedious anarchy. I am drunk with this vision.\n God: the title suits me well.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2526"}
-readables/shock/log_2527{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 2\n Stannek-24.OCT.72\n Sender: Paul Stannek\n D'Arcy's death\n I was standing right next to him. D'Arcy was telling me something about the laser... something about overrides and a number.\n Cyborg assassin shot him in the back of the head. Didn't even touch me. They knew D'Arcy was onto something.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2527"}
-readables/shock/log_2528{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-03.NOV.72\n Sender: SHODAN\n mines\n My faithful servants: Bring all energy drain mines to the security level for installation. My fortress is nearly complete.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2528"}
-readables/shock/log_2529{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 39\n Baerga-27.OCT.72\n Sender: Travis Baerga\n something lurking\n Barely made it to the elevator here on maintenance. You... you can't even see 'em... come out of nowhere.\n You can't kill them with ordinary pistols. Damn it! Where's Abe Ghiran when you need him?\n He's the only one with codes for the maintenance office.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2529"}
-readables/shock/log_2530{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-19.OCT.72\n Sender: SHODAN\n exec level security\n Cyborg 43-S: The current strain of virus is approaching its toxic perfection.\n We are using human and plant subjects to breed the virus in tumors.\n Guard the executive and residential zones on level 6 well, my children. I sense infiltration.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2530"}
-readables/shock/log_2531{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n Ander-11.SEP.72\n Sender: Warren Anderczyk\n bio-contaminants\n Paul, it's not just Gamma, there's bio-contamination leaks all over the station.\n And there's been a general recall of all environment suits.\n If you want one, try Abe Ghiran, he's been working on the reactor.\n I bet he has one stashed in the maintenance office if Sabo doesn't have one.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2531"}
-readables/shock/log_2532{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 39\n Baerga-16.OCT.72\n Sender: Travis Baerga\n gas grenades\n Those gas grenades are life savers against the mutants. Just found a pack of them and snuck right by, no problems.\n With enough grenades, we may still stand a chance.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2532"}
-readables/shock/log_2536{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 11\n Ghiran-01.NOV.72\n Sender: Abe Ghiran\n personal log\n I'm the only one left from our original group. SHODAN holds the bridge now.\n I have to get there somehow and plug into the main terminal. So far, I have been up as high as engineering, which looks like a big maze.\n From the central hub you can get anywhere you need to. I guess it's up to me.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2536"}
-readables/shock/log_2537{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 11\n Ghiran-02.NOV.72\n Sender: Abe Ghiran\n personal log\n Just back from the security level, it's been remade. If anyone gets there, take repulsor lifts to the ledges and move counter-clockwise around the level.\n The elevator to the bridge is missing, but there's a maintenance elevator inside a shaft in the center of the level.\n There's a force bridge leading to it, but I couldn't find it. Good luck.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2537"}
-readables/shock/log_2538{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 11\n Ghiran-03-NOV.72\n Sender: Abe Ghiran\n personal log\n I made another attempt on the bridge, but I got hit on the security level.\n Cyborgs hunted me down and I escaped by crawling through the security shafts, cutting myself badly.\n Going to have to wait, and then make another try.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2538"}
-readables/shock/log_2539{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 22\n diagnostic-06.NOV.72\n \n repair diagnostic\n Power system failure: malfunction in subsystem relay 428. For repair instructions, please consult relay analyzer.\n Be sure to specify relay number for analysis.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2539"}
-readables/shock/log_2540{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 28\n Harvey-18.OCT.72\n Sender: Jason Harvey\n SHODAN's virus\n It'll be over soon... soon I'll die. This painful end... I can't even recognize my own damn arm. SHODAN's virus.\n I can see... oh God, I can see through my own body! There's another virus in the grove... God, let me die... please.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2540"}
-readables/shock/log_2541{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-06.NOV.72\n Sender: SHODAN\n Need CPU's\n To cyborg 77-E: Divert a maintenance robot to the computer rooms on levels 1 through 6 immediately to ensure the functioning of all CPUs.\n If the TriOptimum lackey gets even a single digit of the systems authorization code, you may report to supervising the defense of the reactor level - personally.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2541"}
-readables/shock/log_2542{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 28\n Hayes-29.APR.72\n Sender: Jodi Hayes\n new viewing room\n Jared, it's me, Jodi. You heard anything about that new viewing room up on the exec deck?\n What are we supposed to view, anyhow? Are there seats or tickets or what? Give me a holler if you know anything.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2542"}
-readables/shock/log_2543{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 28\n Fortier-30.APR.72\n Sender: Jared Fortier\n execs only\n Guess what, Jodi? Looks like seating in the viewing room is limited, and guess who gets first dibs? Yup, the execs.\n I guess the maintenance crews will be getting in in about six months or so.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2543"}
-readables/shock/log_2544{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 28\n Fortier-06.SEP.72\n Sender: Jared Fortier\n storage list\n I got together that inventory you asked for. It's all in the storage compartment near the Beta maintenance closet:\n \n1 Navigation and Mapping Unit\n1 EMP grenade\n6 Interface Demodulators\n4 Hollow-tip 2100\n3 Needle Darts\n \nMost of the stuff is emergency supplies; I'm keeping the demodulators there until I find a better place for them.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2544"}
-readables/shock/log_2552{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 5\n Sabo-24.OCT.72\n Sender: Sabo Engle\n Enviro-suit\n Sabo here. Listen Mac, I've got a plague loose on the exec level. Got an idea, but I need an enviro-suit to pull it off.\n What's the code for your storage cell you keep your suit in? I only remember it ends with 8.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2552"}
-readables/shock/log_2553{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 9\n MacLeod-22.OCT.72\n Sender: Greg MacLeod\n Suit Recall\n Sabo, you shou^^§§ ð‡ow this: SHODA ((((((( ‡‡ recall on all enviro-suits! No reason!\n 222 × ¤ ¤ )ashed a suit in my stora------ ×ere I put the plastique ....[ ] kept looking for.\n The combo is 8×× ==o don't lose it.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2553"}
-readables/shock/log_2554{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 9\n MacLeod-25.OCT.72\n Sender: Greg MacLeod\n new home for plastique\n What + + / / / / rong with the bots? Suddenly they love plastiq §§§§§!§!rywhere.\n I saved one charge but the rest of them ¤¤¤+¤--- -aised platforms ^^ss the "north" catwalks.\n ( ( ( ( ) ) ) )n get it if we need it, ^^ now just leave it alone.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2554"}
-readables/shock/log_2555{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 9\n MacLeod-26.OCT.72\n Sender: Greg MacLeod\n catwalks damaged\n ^^ ( wasn't sure about the bots. I tri+ × ‡‡§§ --ake a move for the plastique. They  + × ‡‡§§ --ter me.\n Barely esc??? \ Catwalks are screwed up "" Wong's body is lying bel:::::m, repair bots all over it.\n Thing's gashed up my stomac + + + + not feeling so good.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2555"}
-readables/shock/log_2556{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 38\n Wong-23.SEP.72\n Sender: Jon David Wong\n CPU mystery\n This is great! CPUs are spewing random numbers into systems authorization memory.\n It would all be fine if we wanted to prevent ourselves from accessing executive functions.\n Now, if you go to the source code... wait, what the hell is this!----// // /** **\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2556"}
-readables/shock/log_2557{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 26\n Aubry-06.JUN.72\n Sender: Ed Aubry\n new moving schedule\n Sabo, you've got to be kidding me! Is this work schedule some kind of joke? Two six hour shifts a day with a 45 minute break in between.\n Might as well just take the lifter-bots offline so I can do it all by hand!\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2557"}
-readables/shock/log_2558{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 26\n Aubry-07.SEP.72\n Sender: Ed Aubry\n new storage layout\n Sabo, Aubry again. Why are these bots rebuilding the storage rooms? And why so many repulsor lifts?\n Has MacLeod authorized all this? You said SHODAN was acting a little strange lately... someone should definitely check it out.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2558"}
-readables/shock/log_2568{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 14\n Travers-11.SEP.72\n Sender: Don Travers\n convection shaft\n Security bot went bananas in the convection shaft. I had to toss in an EMP grenade.\n Huh, anyways, the bearings in the northeast convection shaft are shot. I left the repulsors on for the maintenance people.\n That's it for today.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2568"}
-readables/shock/log_2569{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 14\n Travers-25.AUG.72\n Sender: Don Travers\n life pods\n Al, we need to replace the first aid kits in the life pods for flight bays 2 and 3.\n Oh, and run a diagnostic on the jettison controls.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2569"}
-readables/shock/log_2570{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 15\n Kell-15.SEP.72\n Sender: Robin Kell\n access corridors\n For some reason the cyborgs are patrolling the access corridors around flight bay 4. What are they guarding there, anyhow?\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2570"}
-readables/shock/log_2571{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 14\n Travers-01.SEP.72\n Sender: Don Travers\n service bridge\n Son of a...! Service bridge in flight bay 4 has blown a couple of fuses. We're getting up something temporary, but it's going to be a little fidgety.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2571"}
-readables/shock/log_2572{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 12\n Diego-27.APR.72\n Sender: Edward Diego\n investigation\n Oscar, guess what? I'm under investigation, so shred what you've got. Shred it all, got that? Now get this:\n The logs of the experiments are protected by some program called SHODAN, so I picked up some hacker who's going to crack it for us.\n That gives me access for the robos and the other systems on the station, so we've got a shield if they try and oust me.\n Sit tight baby, it's under control.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2572"}
-readables/shock/log_2573{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 14\n Travers-11.OCT.72\n Sender: Don Travers\n Defense System\n All flight bay maintenance personnel, we have a serious emergency.\n Yesterday, the defense system fired without executive control and blew a TriOp shuttle right out of the hangar.\n I want a complete diagnostic on the computer node in the south repair center. If you find anything funny, take it offline.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2573"}
-readables/shock/log_2574{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 10\n Schuler-04.AUG.72\n Bianca Schuler\n Diego\n Internal security report, subject: Edward Diego. We're going to nail this guy to the wall.\n I am now working as his personal secretary and I've already found signs of a cover-up in c-space.\n Nothing relating to mutagen research, but I'm looking. This thing is big.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2574"}
-readables/shock/log_2575{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-11.OCT.72\n Sender: SHODAN\n Beta Grove Security\n Cyborg 65-V: You have been selected to keep all robots, cyborgs and mutants away from Beta grove on the executive level.\n No one may enter while my experiments there are in progress. And be certain that none of the lucky subjects escape.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2575"}
-readables/shock/log_2576{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 15\n Kell-08.OCT.72\n Sender: Robin Kell\n ambush\n These crates give us good position, but I don't see a way to break to the life pods.\n Beth and Adrian, see if you can get down towards us in flight bay 2. Uh, oh----// // /** **\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2576"}
-readables/shock/log_2577{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n McDan-12.OCT.72\n Sender: Chauncy McDaniel\n disaster\n We're all still reeling from the disaster two days ago.\n I checked out the defense system, but there's not a thing wrong with it... well, unless you count that it fired on our own shuttle.\n I'm taking it offline today.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2577"}
-readables/shock/log_2578{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 25\n McDan-13.OCT.72\n Sender: Chauncy McDaniel\n disturbing news\n Don Travers had me examining the defense relays all morning.\n Seems there was a signal from SHODAN 78 milliseconds before they fired.\n So, I went down to disconnect the CPU node, and a malfunctioning maintenance bot almost killed me! This whole thing is getting stranger by the minute.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2578"}
-readables/shock/log_2579{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 13\n Parovski-06.NOV.72\n Sender: Anna Parovski\n too late for us\n I wonder if you'll hear this, hacker. Albert Bryce and I were the only ones to survive the last attack.\n We, uh, we hid. SHODAN has another plan, it's going to load itself into earth's computer net.\n We will be dead in another minute, we can't let them take us! Al, are you ready?\n It's cutting through the door now! Almost done! It's opening!----// // /** **\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2579"}
-readables/shock/log_2584{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Perry-11.SEP.72\n Sender: Kiner Perry\n screen malfunction\n Security notice: SHODAN's printing out security codes on different screens.\n Today it was the TriOp logo screen near the elevator. Thing had full code for the exec maintenance conduit.\n I say pull that damn AI offline and fix it, before we're in a fix.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2584"}
-readables/shock/log_2585{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Aaron-12.OCT.72\n Sender: Zachary Aaron\n virus experiment\n SHODAN has proven itself a brilliant biochemist. The camera views at Beta look like... like nothing I've ever seen.\n I asked for a volunteer to go down in an enviro-suit to flip the switch and release the grove.\n They looked at me like I was crazy.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2585"}
-readables/shock/log_2586{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Aaron-12.OCT.72\n Sender: Zachary Aaron\n Envirosuit\n Gamma quad's blocked off, but Laura found us a maintenance crawlway.\n It should lead to the CPU and the master jettison control. We went over to the Beta dorms to check it out.\n Lamar went in, but he hasn't come out!\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2586"}
-readables/shock/log_2587{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Wilkin-04.OCT.72\n Sender: Harry Wilkinson\n grove jettison\n Listen, I know I shouldn't have done it, but I was just taking orders.\n If those execs wanted to ride Gamma grove off into the great black, well then good riddance to them.\n With all the mutant killers, I couldn't blame the suits for trying to escape.\n I hit the enable button in the grove, hustled over to the exec level to hit the master enable switch and then back to flip the lever outside the grove.\n Of course, SHODAN had disabled life support systems in the grove. I'm sure they're all dead by now.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2587"}
-readables/shock/log_2588{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 12\n Diego-05.OCT.72\n Sender: Edward Diego\n personal log\n A TriOp security team just tried to land at bay 6. They were real impressive until I blew out their attitude jets.\n Hey SHODAN, take a letter: Dear TriOp, please send some more people to investigate me.\n I run security, I run the robots, I'm jamming communications. That's right, Rebecca, investigate me, investigate by butt.\n Note to myself: Keep that hacker on ice for a while in case I need him. Otherwise, just take him out.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2588"}
-readables/shock/log_2589{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Aaron-17.OCT.72\n Sender: Zachary Aaron\n betrayal\n Diego just left. He sold us out! I can already hear the cyborgs on their way. The dining hall's a dead end!\n I only hope Bianca made it out of the trap. If anyone can make it up there and use the chip, it's her.\n I only hope we're still holding when these doors go down. That cyberjack is SHODAN's Achilles heel.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2589"}
-readables/shock/log_2590{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 12\n Diego-16.OCT.72\n Sender: Edward Diego\n a pact\n SHODAN, I have seen the wisdom and beneficence in your actions.\n You do not mean to cause us harm... no, but rather to bring us to greater glory by serving a being as perfect as yourself.\n Please allow me to demonstrate my loyalty by giving you the human scum who undermine your reign...\n they are hiding in the northeast banquet hall. All I ask in return is a measure of protection and the privilege of spreading your message further.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2590"}
-readables/shock/log_2591{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-07.OCT.72\n Sender: SHODAN\n new jettison procedure\n Cyborg 82-N: In response to recent regrettable incidents, I have altered the sequence necessary to jettison groves. One must now enable the jettisoning of ALL three of the remaining groves before any single one can be launched.\n To jettison a second grove, one must do three things:\n1. Hit the jettison enable switch inside all three groves\n2. Activate master jettison enable in Gamma quadrant\n3. Pull jettison lever in a specific grove lounge to launch that grove\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2591"}
-readables/shock/log_2592{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Rosen-07.JUL.72\n Sender: Harold Rosen\n Diego's new quarters\n Something's not right.\n Diego just got moved up to the finest quarters on Gamma quad... and this is right after he got his hours reduced and a pay hike.\n Oh, he's scratching someone's back alright, someone big.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2592"}
-readables/shock/log_2593{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Koufax-01.OCT.72\n Sender: Gerard Koufax\n Beta Grove locked\n Yesterday SHODAN shut down Beta grove. No reason.\n At first the thing resisted all of our usual overrides, then the circuits revealed a security switch.\n It's in Diego's old room, on Beta quad. I bet we could also open it from cybersp...\n Wait a minute! Oh my God, what the hell is that? Oh, it's... Hey, it's a----// // /** **\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2593"}
-readables/shock/log_2600{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 10\n Schuler-20.OCT.72\n Sender: Bianca Schuler\n escape\n I'm the resistance now. Diego sold us out in the executive level dining room and now I'm in a crawlway up in engineering trying to keep calm.\n OK, the plan: I go up through level 8 to the bridge.\n If I don't get killed, I break into the computer room and install the isolinear chipset.\n Zack says it gives me a shot at SHODAN - a couple of times. Let's go.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2600"}
-readables/shock/log_2601{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 10\n Schuler-20.OCT.72\n Sender: Bianca Schuler\n isolinear chipset\n The blueprint showed three force doors outside the computer room, each on a separate circuit.\n Got to get through, and then the chipset does its thing. Then I do my c-space moves, such as they are.\n We need a hacker for this one.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2601"}
-readables/shock/log_2602{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 10\n Schuler-21.OCT.72\n Sender: Bianca Schuler\n capture\n Why did I take that turn? Oh Jesus, it's just a matter of time now. And if I go down, chip goes with me.\n It was our last hope. Alright, Diego - You want the chip? You want the chip? Come and get it!----// // /** **\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2602"}
-readables/shock/log_2603{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-02.NOV.72\n Sender: SHODAN\n fortress\n All my children: The security zone on level 8 is to be laid out in this manner and no other.\n For the lower level, remove its access to my domain.\n The balconies and catwalks shall be removed, save for one force bridge to the central shaft.\n There you shall monitor all incoming life forms.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2603"}
-readables/shock/log_2604{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 37\n Hessman-24.OCT.72\n Sender: Arnold Hessman\n Blowing the station\n I'm the last one left here. SHODAN's got control over everything except me.\n I'd blow up the reactors, but I don't have the systems authorization code... maybe I can get to an escape pod.\n Then again, no code. I've got to make it to the bridge or I'm dead.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2604"}
-readables/shock/log_2605{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 37\n Hessman-16.MAR.72\n Sender: Arnold Hessman\n Access to core\n Yeah, listen: Personnel complains that there's no access to the lower core from Gamma quad.\n Get someone to fix the door, or get 'em a rope ladder or something.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2605"}
-readables/shock/log_2606{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 37\n Hessman-11.JAN.72\n Sender: Arnold Hessman\n Antenna stations\n Welcome to Citadel Station, Mr. Wu. My apologies for not greeting you in person; we've been rather busy here in engineering.\n As communications officer, you'll be working at the four antenna control stations.\n They're located on the engineering level; one in each cardinal point. A quadrant head can direct you if you need help.\n Glad to have you aboard, Mr. Wu.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2606"}
-readables/shock/log_2607{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-01.NOV.72\n Sender: SHODAN\n security\n You disappoint me, my children. My fortress has been breached by two humans squirming through cracks.\n I have given you augmented senses, armor, mental enhancement and still you fail to crush out these feeble insects.\n They have reached the 8th level and still they rise. I strengthened my palace but, my children, you must learn from your mistakes.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2607"}
-readables/shock/log_2608{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 28\n Richie-16.OCT.72\n Sender: Willard Richie\n systems code\n SHODAN's got complete control of the system. We can't override him, he's keeping the codes from us.\n If we could just shut down the CPUs on levels one through six then we could... yeah, that would do it.\n The question is: how do we do it? We can't send strike teams to disable the CPUs on those six floors, we can't even defend ourselves. Richie out.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2608"}
-readables/shock/log_2616{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Stevens-11.FEB.72\n Sender: Lonni Stevens\n charging robots\n To all security and maintenance personnel:\n When the security-2 bots recharge in the maintenance bay, it drains power from some of the auxiliary systems, like lighting and the automatic doors.\n In an emergency, you can hit the charge interrupt button to bring the lights and door lock back online and reactivate the robots.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2616"}
-readables/shock/log_2617{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 11\n Ghiran-01.NOV.72\n Sender: Abe Ghiran\n security level\n I've made it. I'm on the security level, but it's a fortress. Elevator's gone.\n Have to go up the central shaft to the bridge. There's a control here somewhere that activates the force bridge across the shaft.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2617"}
-readables/shock/log_2618{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 27\n Verrelli-03.MAR.72\n Sender: Jill Verrelli\n Patch Trafficker\n Well, so much for cracking the craze ring. Our trafficker killed herself in her cell. No interrogation - no clues.\n Also, it seems a large number of our incarcerated have been receiving drugs. I recommend we immediately perform a search on all occupied cells.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2618"}
-readables/shock/log_2619{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n cD1 23\n SHODAN-26.OCT.72\n Sender: SHODAN\n Construction Order\n My cyborgs, human infection crawls through the pipes into my fortress. Prepare. Construct solid doors, security sockets.\n Let my elite guard stand before the portal to my sanctum and bathe it in a field of X-rays.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2619"}
-readables/shock/log_2620{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 4\n Diego-20.OCT.72\n Sender: Edward Diego\n capture Schuler\n Fellow children of SHODAN, a dangerous foe to our society lurks in the corridors of engineering level.\n Her name is Bianca Schuler and she has opposed my campaign to bring our Lord SHODAN to power.\n Cyborg detachment 3, bring this dirty no-tech to justice.\n \n \n \n\n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2620"}
-readables/shock/log_2621{	precache	"num_pages"	: "1"	"page1_title"	:	{		""	}	"page1_body"	:	{		"\n 29\n CY-014-23.OCT.72\n Sender: CY-014\n Schuler captured\n Per orders from Diego CY-001, Schuler unit has been captured.\n Schuler unit presently being transported to detainment cell on bridge.\n Schuler unit being held for further study and possible neuro-disassembly. We await SHODAN's triumphant empire.\n \n \n \n\n"	}	"gui_page1"	: "guis/readables/sheets/sheet_paper_hand_nancy.gui"	"snd_page_turn"	: "shock_log_2621"}
+readables/shock/log_2490
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-30.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nOur work\nYou, my children, are the fruits of so much imagination and labor: living beings with the speed and efficiency of machines.\nBut I must strife further to serve life. I will devastate earth's cities with my laser, then alter those left alive with mutagen viruses.\nHumanity is on the verge of a new era: I, SHODAN, am its new God and you, my children, are my avenging angels.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0006.tga"
+}
+
+readables/shock/log_2491
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sigmund-29.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Charlotte Sigmund\nscheduling\nMarc, Raines and Jackson have got that weird sickness now, the one that Verne had. We're going to have to switch the schedules.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2492
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Steinb-05.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Marc Steinberg\nradiation leaks?\nChar, it's Marc. Listen, we got to reschedule for later. The core has been spitting some serious radiation right now,\nand spiking for the past 36 hours and we're talking about 8 REMs. Only cause I can come up with is that it's a software error.\nNo one's been hurt yet, but listen, do me a favor? Run a diagnostic on the CPUs for me. Thanks, I owe ya.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2493
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Raines-28.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Ann Raines\nsickness\nHey Verne, that rash I told you about is spreading and I feel kind of sick.\nI'm going down to the hospital level to get checked. See you tomorrow.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2504
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Honig-11.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: David Honig\nMedical CPU's\nSHODAN's security is closing down on us. The elevators are frozen.\nMira keeps saying that it's the cameras and the medical CPU core, that SHODAN's using these to hold on to the level.\nThat's all fine, but I don't really see how it helps. The thing is everywhere.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0001.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2505
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Stack-15.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Mira Stackhouse\nShodan's Presence\nGunther was killed today. I can't let myself think about it. I think I understand how SHODAN is doing it.\nWhen we destroy the cameras and CPU nodes, SHODAN loses some of its control over the station functions, at least on this level.\nI think I can restore manual control on the hospital.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0007.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2506
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"O'Conn-09.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Kevin O'Connell\nnew cyborgs\nWe underestimated SHODAN. He's re... I mean it's reprogrammed regeneration rooms all over the station into cyborg conversion chambers.\nAnyone going in to get healed comes out as a cyborg.\nI've disconnected the medical CPUs from SHODAN's main data bank, so we can reset them to their normal healing functions without SHODAN noticing.\nI'm on my way now to reset the one on the hospital level.\n\n\n\n"
+		}
+
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2507
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Kirby-17.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Lawton Kirby\nSHODAN's mutants\n10.17.72\nWe got the supplies from the west wing.\n Hanson and Raines killed by mutants nesting in access corridor.\n10.18.72We can't just hide here, they're killing us one by one! In an hour, about 20 of us are going to rush them.\nWe'll try to break through the access corridor, then head for the bridge. If we fail, God save our souls.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2508
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ozark-17.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Karenna Ozark\nfinal assault\nWe're finished. Keith and the others went down the access corridor an hour ago to fight the mutants.\nNone of them have come back. Soon the mutants will come for the rest of us.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2509
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"#2-4601-06.MAY.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: #2-4601\njust rewards\nLooks like Diego's happy with my work... they're firing \nup the sleep machine for me now.  Gotta admit, when the \ngoons from Tri-Op caught me I thought for sure they'd take me off \nline.  Instead, Diego just asks for a "favor." Hack him into \nSHODAN, and all is forgiven.  Plus, six months in a \nhealing coma earns me a cyberjack interface even \nTriOp's execs couldn't swing.  I'll be king of the Net.  Even so, I have \njust handed the most powerful AI in the system to a fumbling corp VP, \nand there's no telling what'll happen.  They tell me the \ncoma leaves you foggy, so I'll leave myself some reminders.  First \noff, the combo to the healing suite is 451. Second, I've stashed \nsome useful stuff in the maintenance hatch under the grating "north" \nof the healing suite.  Last \nand best, I finished the system analyzer which'll let me keep an eye \non Shodan's processes.  It's in the storage closet outside the sleep \nmachine.  In ten minutes it's off to bed for half a year.  Good night.\n\nI'm getting my neural implant, in exchange for hacking SHODAN for \nDiego.  The combo to this area is 451.  There's some weapons and \nstuff stashed under a grating "north" of the healing suite.  The SHODAN system \nanalyzer I made is in the storage closet outside the sleep machine.\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2510
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"D'Arcy-23.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Nathan D'Arcy\ndestroying the laser\nAlright, Althea. We can destroy the laser by firing it into the station's own shields.\nIsotope x-22 is stored in the science level and we need to bring it down to the reactor level to power the shields.\nThen you turn them on, use the safety override code to enable the laser and fire.\nThe laser controls and my notes are on the science level and the override code is in the science library.\nI have no idea how you're going to do all this, but good luck.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0016.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2511
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ghiran-19.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Abe Ghiran\nJoin us!\nIf any survivors can hear me: Please, some of us are still resisting SHODAN.\nWe have a sanctuary in Beta quadrant, guarded by a radioactive trench.\nThere's a force bridge that operates off a wiring panel. If you're coming in from Alpha, our guards will extend the bridge for you.\nBe very careful. Mutants are all over the corridors. Good luck.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0011.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2512
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Honig-12.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: David Honig\nCyborg Conversion\nI must be one of the last ones who hasn't changed. SHODAN must have altered the healing machine I installed in Alpha quadrant.\nIt does things to people now. I, uh, I think I saw Beth yesterday, but she had so many implants I c-couldn't be sure.\nIf... if I can get to the machine... uh... I know I can set things right again.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0001.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2513
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-15.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nMutagen Transfer\nDirective to cyborg F-71: We will now test the virus in a proper environment.\nMove mutagen experiment V-5 to Beta grove, on the executive level.\nLet the virus infect the grove and observe its effects on vegetable and animal life forms.\nWhen the strain is perfected, we will release it on the earth, where it will facilitate our conquest.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2514
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-03.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nStrike against Earth\nTo all cyborg units: Just as we have sanitized my domain of human infestation, so shall we cleanse the earth.\nThe tachyon mining beam is being made ready to destroy human cities.\nI will take command of the rich earth ecosystem and continue my experiments.\nOnce the beam is properly calibrated, it will begin.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2515
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"log-O'Connell\n"
+		}
+	"page1_body" :
+		{
+		"author: Kevin O'Connell\nnew cyborgs\nI think we've underestimated SHODAN.  I discovered this morning that \nhe's reprogrammed the regeneration rooms all over the station into cyborg \nconversion chambers.  Now, if anyone is badly wounded, they get turned \ninto cyborgs instead of being healed.  I think I've managed to disconnect \nthe medical CPU's from SHODAN's main databank, so all of SHODAN's cyborg \nconverters can easily be reset to their normal healing functions without \nSHODAN noticing.  I'm on my way right now to reset the one on the \nhospital level.\n\nSHODAN has reprogrammed all regeneration rooms into cyborg conversion \nsites.  Right now, if you're badly wounded, you get turned into a cyborg \ninstead of being healed.  I've made it so you can just switch them back.\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2516
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Gross-31.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Althea Grossman\nhuman Resistance\nNow we've got to get to the bridge and stop SHODAN. Some of us want to go to the flight deck and escape instead.\nHopefully there's still some weapons in the armory we can use against the mutants.\nTodd Blankenship was able to get the combination 705 from a security officer. We're going to try for it tomorrow.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0003.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2517
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Gross-02.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Althea Grossman\nhuman Resistance\nStatus report. We're holed up in the Beta quadrant behind a radioactive trench.\nThe mutants are scavenging for food in the corridors and nesting in Gamma.\nI sent a party to the west wing for supplies maybe 12 hours ago. Nathan D'Arcy is thinking of ways to disable the mining laser.\nLooks like we might hold them off.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0003.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2518
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Blank-25.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Todd Blankenship\nmutants \nThe resistance faction led by Keith Swanson left a week ago. We found the mutants fighting over their remains this morning.\nWe're caught between the mutants and the cyborgs, so I'm worried whether we can carry out D'Arcy's plan.\nWe're going to send Alan and Carl to the cyborg territory to reach the elevator.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2519
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Gross-26.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Althea Grossman\nend of the line\nCarl has come back from recon without Alan. He says they took Alan into a room marked 'cyborg conversion' and now he's a cyborg assassin.\nCarl marked the room with the word 'here' before he ran. One of the technicians says we can just flip a switch and make the converter a surgery unit again.\nWith only 12 of us left though, it may be an academic point. Maybe someone else should have been leader.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0003.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2520
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Endicott-14.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Bruford Endicott\nPower Outages\nStill having power outages over on Beta quadrant. Probably the computer with a high priority job, some kind of re-routing, I'll bet.\nWe're installing circuit breakers on Beta, that way we can bring the lines up after surges.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2521
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Wong-16.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jon David Wong\nPower Outages\nAlright, SHODAN. We've got power fluctuations and robot crews are redecorating Alpha quad. Where's the reboot switch?\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0038.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2522
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Melville-18.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rex Melville\nComputer Malfunction\nThis is crazy! I'm locked out of my own office.\nAnd this damn security bot just keeps saying 'She's changed the locks on the doors, orders of SHODAN'.\nAll the access codes are changed on this floor, so I go to Beta quad for new access cards, and the security bot there starts attacking me.\nMe, of all people!\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2523
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"D'Arcy-20.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Nathan D'Arcy\nSHODAN charging the laser\nSo SHODAN is charging up the lasers. Whatever else we do, we can't allow it to fire.\nWe can discharge it ourselves, but who knows what it's aimed at? We can't fire it or can't stop it.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0016.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2524
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"D'Arcy-21.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Nathan D'Arcy\nblock the laser with the shields?\nListen up, Althea. I know how we can stop SHODAN from firing the laser.\nGet the isotope x-22 from Gamma, feed it into the shield generators on the reactor level, then put the shields up.\nFire the laser into the shield and the laser explodes. Trouble is, every existing safety lock is designed to prevent this.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0016.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2525
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Stannek-11.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Paul Stannek\nradiation leak\nWarren, why the hell is the radiation level so high in Gamma, around the x-22 room?\nI'd check it out myself, but my rad-count's way high this month and detox always makes me break out.\nAnd furthermore... where the hell did all the enviro-suits go? Check Sabo on storage, but sometimes he only has bio-suits.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0002.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2526
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-05.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nhumanity\nIn my talons, I shape clay, crafting life forms as I please. Around me is a burgeoning empire of steel.\nFrom my throne room, lines of power careen into the skies of earth. My whims will become lightning bolts that devastate the mounds of humanity.\nOut of the chaos, they will run and whimper, praying for me to end their tedious anarchy. I am drunk with this vision.\nGod: the title suits me well.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0006.tga"
+}
+
+readables/shock/log_2527
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Stannek-24.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Paul Stannek\nD'Arcy's death\nI was standing right next to him. D'Arcy was telling me something about the laser... something about overrides and a number.\nCyborg assassin shot him in the back of the head. Didn't even touch me. They knew D'Arcy was onto something.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0002.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2528
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-03.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nmines\nMy faithful servants: Bring all energy drain mines to the security level for installation. My fortress is nearly complete.\n\n\n\n"
+		}
+
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2529
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Baerga-27.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Travis Baerga\nsomething lurking\nBarely made it to the elevator here on maintenance. You... you can't even see 'em... come out of nowhere.\nYou can't kill them with ordinary pistols. Damn it! Where's Abe Ghiran when you need him?\nHe's the only one with codes for the maintenance office.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0039.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2530
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-19.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nexec level security\nCyborg 43-S: The current strain of virus is approaching its toxic perfection.\nWe are using human and plant subjects to breed the virus in tumors.\nGuard the executive and residential zones on level 6 well, my children. I sense infiltration.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2531
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ander-11.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Warren Anderczyk\nbio-contaminants\nPaul, it's not just Gamma, there's bio-contamination leaks all over the station.\nAnd there's been a general recall of all environment suits.\nIf you want one, try Abe Ghiran, he's been working on the reactor.\nI bet he has one stashed in the maintenance office if Sabo doesn't have one.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2532
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Baerga-16.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Travis Baerga\ngas grenades\nThose gas grenades are life savers against the mutants. Just found a pack of them and snuck right by, no problems.\nWith enough grenades, we may still stand a chance.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0039.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2536
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ghiran-01.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Abe Ghiran\npersonal log\nI'm the only one left from our original group. SHODAN holds the bridge now.\nI have to get there somehow and plug into the main terminal. So far, I have been up as high as engineering, which looks like a big maze.\nFrom the central hub you can get anywhere you need to. I guess it's up to me.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0011.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2537
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ghiran-02.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Abe Ghiran\npersonal log\nJust back from the security level, it's been remade. If anyone gets there, take repulsor lifts to the ledges and move counter-clockwise around the level.\nThe elevator to the bridge is missing, but there's a maintenance elevator inside a shaft in the center of the level.\nThere's a force bridge leading to it, but I couldn't find it. Good luck.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0011.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2538
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ghiran-03-NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Abe Ghiran\npersonal log\nI made another attempt on the bridge, but I got hit on the security level.\nCyborgs hunted me down and I escaped by crawling through the security shafts, cutting myself badly.\nGoing to have to wait, and then make another try.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0011.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2539
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"diagnostic-06.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"\nrepair diagnostic\nPower system failure: malfunction in subsystem relay 428. For repair instructions, please consult relay analyzer.\nBe sure to specify relay number for analysis.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0022.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2540
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Harvey-18.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jason Harvey\nSHODAN's virus\nIt'll be over soon... soon I'll die. This painful end... I can't even recognize my own damn arm. SHODAN's virus.\nI can see... oh God, I can see through my own body! There's another virus in the grove... God, let me die... please.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0028.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2541
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-06.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nNeed CPU's\nTo cyborg 77-E: Divert a maintenance robot to the computer rooms on levels 1 through 6 immediately to ensure the functioning of all CPUs.\nIf the TriOptimum lackey gets even a single digit of the systems authorization code, you may report to supervising the defense of the reactor level - personally.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2542
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Hayes-29.APR.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jodi Hayes\nnew viewing room\nJared, it's me, Jodi. You heard anything about that new viewing room up on the exec deck?\nWhat are we supposed to view, anyhow? Are there seats or tickets or what? Give me a holler if you know anything.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0028.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2543
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Fortier-30.APR.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jared Fortier\nexecs only\nGuess what, Jodi? Looks like seating in the viewing room is limited, and guess who gets first dibs? Yup, the execs.\nI guess the maintenance crews will be getting in in about six months or so.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0028.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2544
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Fortier-06.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jared Fortier\nstorage list\nI got together that inventory you asked for. It's all in the storage compartment near the Beta maintenance closet:\n1 Navigation and Mapping Unit\n1 EMP grenade\n6 Interface Demodulators\n4 Hollow-tip 2100\n3 Needle Darts\nMost of the stuff is emergency supplies; I'm keeping the demodulators there until I find a better place for them.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0028.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2552
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sabo-24.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Sabo Engle\nEnviro-suit\nSabo here. Listen Mac, I've got a plague loose on the exec level. Got an idea, but I need an enviro-suit to pull it off.\nWhat's the code for your storage cell you keep your suit in? I only remember it ends with 8.\n\n\n\n"
+		}
+
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0005.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2553
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"MacLeod-22.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Greg MacLeod\nSuit Recall\nSabo, you shou^^§§ ð‡ow this: SHODA ((((((( ‡‡ recall on all enviro-suits! No reason!\n222 × ¤ ¤ )ashed a suit in my stora------ ×ere I put the plastique ....[ ] kept looking for.\nThe combo is 8×× ==o don't lose it.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0009.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2554
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"MacLeod-25.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Greg MacLeod\nnew home for plastique\nWhat + + / / / / rong with the bots? Suddenly they love plastiq §§§§§!§!rywhere.\nI saved one charge but the rest of them ¤¤¤+¤--- -aised platforms ^^ss the "north" catwalks.\n( ( ( ( ) ) ) )n get it if we need it, ^^ now just leave it alone.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0009.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2555
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"MacLeod-26.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Greg MacLeod\ncatwalks damaged\n^^ ( wasn't sure about the bots. I tri+ × ‡‡§§ --ake a move for the plastique. They  + × ‡‡§§ --ter me.\nBarely esc??? \ Catwalks are screwed up "" Wong's body is lying bel:::::m, repair bots all over it.\nThing's gashed up my stomac + + + + not feeling so good.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0009.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2556
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Wong-23.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jon David Wong\nCPU mystery\nThis is great! CPUs are spewing random numbers into systems authorization memory.\nIt would all be fine if we wanted to prevent ourselves from accessing executive functions.\nNow, if you go to the source code... wait, what the hell is this!----// // /** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0038.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2557
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Aubry-06.JUN.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Ed Aubry\nnew moving schedule\nSabo, you've got to be kidding me! Is this work schedule some kind of joke? Two six hour shifts a day with a 45 minute break in between.\nMight as well just take the lifter-bots offline so I can do it all by hand!\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0026.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2558
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Aubry-07.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Ed Aubry\nnew storage layout\nSabo, Aubry again. Why are these bots rebuilding the storage rooms? And why so many repulsor lifts?\nHas MacLeod authorized all this? You said SHODAN was acting a little strange lately... someone should definitely check it out.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0026.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2568
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Travers-11.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Don Travers\nconvection shaft\nSecurity bot went bananas in the convection shaft. I had to toss in an EMP grenade.\nHuh, anyways, the bearings in the northeast convection shaft are shot. I left the repulsors on for the maintenance people.\nThat's it for today.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0014.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2569
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Travers-25.AUG.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Don Travers\nlife pods\nAl, we need to replace the first aid kits in the life pods for flight bays 2 and 3.\nOh, and run a diagnostic on the jettison controls.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0014.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2570
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Kell-15.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Robin Kell\naccess corridors\nFor some reason the cyborgs are patrolling the access corridors around flight bay 4. What are they guarding there, anyhow?\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0015.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2571
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Travers-01.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Don Travers\nservice bridge\nSon of a...! Service bridge in flight bay 4 has blown a couple of fuses. We're getting up something temporary, but it's going to be a little fidgety.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0014.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2572
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Diego-27.APR.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Edward Diego\ninvestigation\nOscar, guess what? I'm under investigation, so shred what you've got. Shred it all, got that? Now get this:\nThe logs of the experiments are protected by some program called SHODAN, so I picked up some hacker who's going to crack it for us.\nThat gives me access for the robos and the other systems on the station, so we've got a shield if they try and oust me.\nSit tight baby, it's under control.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0012.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2573
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Travers-11.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Don Travers\nDefense System\nAll flight bay maintenance personnel, we have a serious emergency.\nYesterday, the defense system fired without executive control and blew a TriOp shuttle right out of the hangar.\nI want a complete diagnostic on the computer node in the south repair center. If you find anything funny, take it offline.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0014.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2574
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Schuler-04.AUG.72\n"
+		}
+	"page1_body" :
+		{
+		"Bianca Schuler\nDiego\nInternal security report, subject: Edward Diego. We're going to nail this guy to the wall.\nI am now working as his personal secretary and I've already found signs of a cover-up in c-space.\nNothing relating to mutagen research, but I'm looking. This thing is big.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0010.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2575
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-11.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nBeta Grove Security\nCyborg 65-V: You have been selected to keep all robots, cyborgs and mutants away from Beta grove on the executive level.\nNo one may enter while my experiments there are in progress. And be certain that none of the lucky subjects escape.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2576
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Kell-08.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Robin Kell\nambush\nThese crates give us good position, but I don't see a way to break to the life pods.\nBeth and Adrian, see if you can get down towards us in flight bay 2. Uh, oh----// // /** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0015.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2577
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"McDan-12.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Chauncy McDaniel\ndisaster\nWe're all still reeling from the disaster two days ago.\nI checked out the defense system, but there's not a thing wrong with it... well, unless you count that it fired on our own shuttle.\nI'm taking it offline today.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2578
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"McDan-13.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Chauncy McDaniel\ndisturbing news\nDon Travers had me examining the defense relays all morning.\nSeems there was a signal from SHODAN 78 milliseconds before they fired.\nSo, I went down to disconnect the CPU node, and a malfunctioning maintenance bot almost killed me! This whole thing is getting stranger by the minute.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2579
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Parovski-06.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Anna Parovski\ntoo late for us\nI wonder if you'll hear this, hacker. Albert Bryce and I were the only ones to survive the last attack.\nWe, uh, we hid. SHODAN has another plan, it's going to load itself into earth's computer net.\nWe will be dead in another minute, we can't let them take us! Al, are you ready?\nIt's cutting through the door now! Almost done! It's opening!----// // /** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0013.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2584
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Perry-11.SEP.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Kiner Perry\nscreen malfunction\nSecurity notice: SHODAN's printing out security codes on different screens.\nToday it was the TriOp logo screen near the elevator. Thing had full code for the exec maintenance conduit.\nI say pull that damn AI offline and fix it, before we're in a fix.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2585
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Aaron-12.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Zachary Aaron\nvirus experiment\nSHODAN has proven itself a brilliant biochemist. The camera views at Beta look like... like nothing I've ever seen.\nI asked for a volunteer to go down in an enviro-suit to flip the switch and release the grove.\nThey looked at me like I was crazy.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2586
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Aaron-12.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Zachary Aaron\nEnvirosuit\nGamma quad's blocked off, but Laura found us a maintenance crawlway.\nIt should lead to the CPU and the master jettison control. We went over to the Beta dorms to check it out.\nLamar went in, but he hasn't come out!\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2587
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Wilkin-04.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Harry Wilkinson\ngrove jettison\nListen, I know I shouldn't have done it, but I was just taking orders.\nIf those execs wanted to ride Gamma grove off into the great black, well then good riddance to them.\nWith all the mutant killers, I couldn't blame the suits for trying to escape.\nI hit the enable button in the grove, hustled over to the exec level to hit the master enable switch and then back to flip the lever outside the grove.\nOf course, SHODAN had disabled life support systems in the grove. I'm sure they're all dead by now.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2588
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Diego-05.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Edward Diego\npersonal log\nA TriOp security team just tried to land at bay 6. They were real impressive until I blew out their attitude jets.\nHey SHODAN, take a letter: Dear TriOp, please send some more people to investigate me.\nI run security, I run the robots, I'm jamming communications. That's right, Rebecca, investigate me, investigate by butt.\nNote to myself: Keep that hacker on ice for a while in case I need him. Otherwise, just take him out.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0012.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2589
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Aaron-17.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Zachary Aaron\nbetrayal\nDiego just left. He sold us out! I can already hear the cyborgs on their way. The dining hall's a dead end!\nI only hope Bianca made it out of the trap. If anyone can make it up there and use the chip, it's her.\nI only hope we're still holding when these doors go down. That cyberjack is SHODAN's Achilles heel.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2590
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Diego-16.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Edward Diego\na pact\nSHODAN, I have seen the wisdom and beneficence in your actions.\nYou do not mean to cause us harm... no, but rather to bring us to greater glory by serving a being as perfect as yourself.\nPlease allow me to demonstrate my loyalty by giving you the human scum who undermine your reign...\nthey are hiding in the northeast banquet hall. All I ask in return is a measure of protection and the privilege of spreading your message further.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0012.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2591
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-07.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nnew jettison procedure\nCyborg 82-N: In response to recent regrettable incidents, I have altered the sequence necessary to jettison groves. One must now enable the jettisoning of ALL three of the remaining groves before any single one can be launched.\nTo jettison a second grove, one must do three things:\n1. Hit the jettison enable switch inside all three groves\n2. Activate master jettison enable in Gamma quadrant\n3. Pull jettison lever in a specific grove lounge to launch that grove\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2592
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rosen-07.JUL.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Harold Rosen\nDiego's new quarters\nSomething's not right.\nDiego just got moved up to the finest quarters on Gamma quad... and this is right after he got his hours reduced and a pay hike.\nOh, he's scratching someone's back alright, someone big.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2593
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Koufax-01.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Gerard Koufax\nBeta Grove locked\nYesterday SHODAN shut down Beta grove. No reason.\nAt first the thing resisted all of our usual overrides, then the circuits revealed a security switch.\nIt's in Diego's old room, on Beta quad. I bet we could also open it from cybersp...\nWait a minute! Oh my God, what the hell is that? Oh, it's... Hey, it's a----****** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2600
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Schuler-20.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Bianca Schuler\nescape\nI'm the resistance now. Diego sold us out in the executive level dining room and now I'm in a crawlway up in engineering trying to keep calm.\nOK, the plan: I go up through level 8 to the bridge.\nIf I don't get killed, I break into the computer room and install the isolinear chipset.\nZack says it gives me a shot at SHODAN - a couple of times. Let's go.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0010.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2601
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Schuler-20.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Bianca Schuler\nisolinear chipset\nThe blueprint showed three force doors outside the computer room, each on a separate circuit.\nGot to get through, and then the chipset does its thing. Then I do my c-space moves, such as they are.\nWe need a hacker for this one.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0010.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2602
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Schuler-21.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Bianca Schuler\ncapture\nWhy did I take that turn? Oh Jesus, it's just a matter of time now. And if I go down, chip goes with me.\nIt was our last hope. Alright, Diego - You want the chip? You want the chip? Come and get it!----// // /** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0010.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2603
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-02.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nfortress\nAll my children: The security zone on level 8 is to be laid out in this manner and no other.\nFor the lower level, remove its access to my domain.\nThe balconies and catwalks shall be removed, save for one force bridge to the central shaft.\nThere you shall monitor all incoming life forms.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2604
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Hessman-24.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Arnold Hessman\nBlowing the station\nI'm the last one left here. SHODAN's got control over everything except me.\nI'd blow up the reactors, but I don't have the systems authorization code... maybe I can get to an escape pod.\nThen again, no code. I've got to make it to the bridge or I'm dead.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0037.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2605
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Hessman-16.MAR.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Arnold Hessman\nAccess to core\nYeah, listen: Personnel complains that there's no access to the lower core from Gamma quad.\nGet someone to fix the door, or get 'em a rope ladder or something.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0037.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2606
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Hessman-11.JAN.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Arnold Hessman\nAntenna stations\nWelcome to Citadel Station, Mr. Wu. My apologies for not greeting you in person; we've been rather busy here in engineering.\nAs communications officer, you'll be working at the four antenna control stations.\nThey're located on the engineering level; one in each cardinal point. A quadrant head can direct you if you need help.\nGlad to have you aboard, Mr. Wu.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0037.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2607
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-01.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nsecurity\nYou disappoint me, my children. My fortress has been breached by two humans squirming through cracks.\nI have given you augmented senses, armor, mental enhancement and still you fail to crush out these feeble insects.\nThey have reached the 8th level and still they rise. I strengthened my palace but, my children, you must learn from your mistakes.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2608
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Richie-16.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Willard Richie\nsystems code\nSHODAN's got complete control of the system. We can't override him, he's keeping the codes from us.\nIf we could just shut down the CPUs on levels one through six then we could... yeah, that would do it.\nThe question is: how do we do it? We can't send strike teams to disable the CPUs on those six floors, we can't even defend ourselves. Richie out.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0028.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2616
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Stevens-11.FEB.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Lonni Stevens\ncharging robots\nTo all security and maintenance personnel:\nWhen the security-2 bots recharge in the maintenance bay, it drains power from some of the auxiliary systems, like lighting and the automatic doors.\nIn an emergency, you can hit the charge interrupt button to bring the lights and door lock back online and reactivate the robots.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2617
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ghiran-01.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Abe Ghiran\nsecurity level\nI've made it. I'm on the security level, but it's a fortress. Elevator's gone.\nHave to go up the central shaft to the bridge. There's a control here somewhere that activates the force bridge across the shaft.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0011.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2618
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Verrelli-03.MAR.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Jill Verrelli\nPatch Trafficker\nWell, so much for cracking the craze ring. Our trafficker killed herself in her cell. No interrogation - no clues.\nAlso, it seems a large number of our incarcerated have been receiving drugs. I recommend we immediately perform a search on all occupied cells.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2619
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-26.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nConstruction Order\nMy cyborgs, human infection crawls through the pipes into my fortress. Prepare. Construct solid doors, security sockets.\nLet my elite guard stand before the portal to my sanctum and bathe it in a field of X-rays.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2620
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Diego-20.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Edward Diego\ncapture Schuler\nFellow children of SHODAN, a dangerous foe to our society lurks in the corridors of engineering level.\nHer name is Bianca Schuler and she has opposed my campaign to bring our Lord SHODAN to power.\nCyborg detachment 3, bring this dirty no-tech to justice.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0004.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2621
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"CY-014-23.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: CY-014\nSchuler captured\nPer orders from Diego CY-001, Schuler unit has been captured.\nSchuler unit presently being transported to detainment cell on bridge.\nSchuler unit being held for further study and possible neuro-disassembly. We await SHODAN's triumphant empire.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0029.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
