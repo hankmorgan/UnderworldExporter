@@ -24,7 +24,7 @@ void RenderEntityA_DOOR_TRAP (int game, float x, float y, float z, ObjectItem &c
 void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityBOOK(int game, float x, float y, float z, short message, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
@@ -40,6 +40,7 @@ void getShockButtons(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, 
 void shockCommonObject();
 void setElevatorProperties(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, ObjectItem objList[1600], int objIndex,short PrintDebug);
 void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
+void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
@@ -110,7 +111,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case BOOK:
 			case SCROLL:
-				RenderEntityBOOK(game,x,y,z,currobj,objList,LevelInfo);
+				RenderEntityBOOK(game,x,y,z,0,currobj,objList,LevelInfo);
 				break;	
 			case SIGN:
 				RenderEntitySIGN(game,x,y,z,currobj,objList,LevelInfo);
@@ -291,6 +292,18 @@ void createScriptCall(ObjectItem &currobj,float x,float y, float z)
 	fprintf (MAPFILE, "}\n");
 	EntityCount++;
 }
+
+void createScriptCall(ObjectItem &currobj, float x, float y, float z,char *callname)
+{//Entity for running a script when triggered.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+	fprintf(MAPFILE, "\"classname\" \"atdm:target_callscriptfunction\"\n");
+	fprintf(MAPFILE, "\"name\" \"runscript_%s_%s\"\n", UniqueObjectName(currobj),callname);
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"call\" \"start_%s_%s\"\n", UniqueObjectName(currobj),callname);
+	fprintf(MAPFILE, "}\n");
+	EntityCount++;
+}
+
 
 void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {//A model with no properties.
@@ -841,8 +854,9 @@ void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj,
 	return;
 }
 
-void RenderEntityBOOK (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+void RenderEntityBOOK(int game, float x, float y, float z, short message, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+
 //Params
 //tileX
 //tileY
@@ -859,10 +873,20 @@ switch (game)
 		ReadableIndex = currobj.link-0x200;
 		break;
 	}
-	fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount);
-	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	fprintf (MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));		
-	fprintf (MAPFILE, "\"inv_name\" \"Readable_%d\"\n", ReadableIndex);
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+
+	if (message == 1)//atdm:readable_mobile_scroll01
+		{//This is a hidden email OR MESSAGE
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:readable_mobile_scroll01");
+		fprintf(MAPFILE, "\"name\" \"%s_email\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"hide\" \"1\"\n", UniqueObjectName(currobj));
+		}
+	else
+		{
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
+		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+		}
+	fprintf(MAPFILE, "\"inv_name\" \"Readable_%d\"\n", ReadableIndex);	//Need a better name than this!
 	switch (game)
 		{
 		case UWDEMO:
@@ -873,7 +897,14 @@ switch (game)
 		case SHOCK:
 			{
 			fprintf (MAPFILE, "\"xdata_contents\" \"readables/shock/log_%03d\"\n",ReadableIndex);
-			fprintf (MAPFILE, "\"trigger_on_open\" \"runscript_%s\"\n",UniqueObjectName(currobj) );	//plays the audio of this log
+			if (message == 0)
+				{//plays the audio of this log
+					fprintf(MAPFILE, "\"trigger_on_open\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+				}	
+			else
+				{
+					fprintf(MAPFILE, "\"trigger_on_open\" \"runscript_%s_email\"\n", UniqueObjectName(currobj));
+				}
 			break;
 			}
 		}	
@@ -883,8 +914,17 @@ switch (game)
 	fprintf (MAPFILE, "}");
 	EntityCount++;
 	if (game == SHOCK)
-		{
-		createScriptCall(currobj,x,y,z);
+	{
+		if (message == 0)
+			{
+				createScriptCall(currobj, x, y, z);
+			}
+		else
+			{
+			//char str[80]; 
+			//sprintf_s(str, "runscript_%s_email", UniqueObjectName(currobj));
+			createScriptCall(currobj, x, y, z,"email");
+			}
 		}
 	return;
 }
@@ -1627,7 +1667,7 @@ while (k<=chunkUnpackedLength)
 				objList[objIndex].conditions[2] = getValAtAddress(sub_ark,add_ptr+10,8);
 				objList[objIndex].conditions[3] = getValAtAddress(sub_ark,add_ptr+11,8);
 				objList[objIndex].TriggerOnce = getValAtAddress(sub_ark,add_ptr+7,8);
-
+				objList[objIndex].TriggerOnceGlobal = 0;
 					printf("\tConditions: %d",objList[objIndex].conditions[0]);
 					printf(",%d",objList[objIndex].conditions[1]);
 					printf(",%d",objList[objIndex].conditions[2]);
@@ -2462,3 +2502,21 @@ void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr,int length)
 	//printf("\t\tOther values 8:%d\n", getValAtAddress(sub_ark, add_ptr + 26, 16));
 }
 
+void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
+{//Generates hidden email objects for when triggers have a send email action
+	for (int i = 0; i < 1600; i++)
+	{
+		if (objList[i].InUseFlag == 1)
+		{
+			if (isTriggerSHOCK(objList[i]))
+			{
+				if (objList[i].TriggerAction == ACTION_EMAIL)
+				{
+					float x; float y; float z;
+					CalcObjectXYZ(game, &x, &y, &z, LevelInfo, &objList[i], 0, objList[i].tileX, objList[i].tileY);
+					RenderEntityBOOK(game, x, y, z, 1, objList[i], objList, LevelInfo);
+				}
+			}
+		}
+	}
+}

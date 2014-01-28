@@ -37,7 +37,7 @@
 #define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\test_map.script"
 #define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\test_map.map"
 
-#define ENABLE_LIGHTING 1
+#define ENABLE_LIGHTING 0
 
 /*Globals*/
 extern int BrushSizeX;

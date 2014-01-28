@@ -545,6 +545,27 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 				}
 			}
 		}
+	//Now add the scripts for the email actions
+	for (int i = 0; i < 1600; i++)
+	{
+		if (objList[i].InUseFlag == 1)
+		{
+			if (isTriggerSHOCK(objList[i]))
+			{
+				if (objList[i].TriggerAction == ACTION_EMAIL)
+				{
+					fprintf(fBODY, "\n\n\nvoid start_%s_email()\n{\n",
+						UniqueObjectName(objList[i]));
+					EMAILScript(objectMasters[objList[i].item_id].desc
+						, objList[i]
+						, objList[i].shockProperties[TRIG_PROPERTY_EMAIL]);
+					fprintf(fBODY, "\n}\n");
+				}
+			}
+		}
+	}
+
+
 	fclose(fBODY);
 	//fprintf(fMAIN,"\n}\n");	
 	//fclose(fMAIN);
@@ -705,6 +726,16 @@ if((currObj.ObjectSubClass==3) && ((currObj.ObjectSubClassIndex==7) || (currObj.
 
 void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
 {
+	if (currObj.TriggerOnce == 1)
+	{
+		if (currObj.TriggerOnceGlobal == 0)
+		{//add it's global
+			fprintf(fGLOBALS, "\tfloat %s_triggered = 0;\n", UniqueObjectName(currObj));
+			currObj.TriggerOnceGlobal = 1;
+		}
+		fprintf(fBODY, "\tif (%s_triggered == 0)\n\t{\n\t", UniqueObjectName(currObj));
+		fprintf(fBODY, "\t\t%s_triggered = 1;\n", UniqueObjectName(currObj));
+	}
 switch (currObj.TriggerAction)
 	{ 
 	case ACTION_DO_NOTHING :
@@ -939,6 +970,10 @@ switch (currObj.TriggerAction)
 		//printf("\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] =getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441;
 		fprintf(fBODY,"\tsys.println(\"You got mail:%d\");\n", currObj.shockProperties[TRIG_PROPERTY_EMAIL]);	//Add a readable to the inventory?
+		fprintf(fBODY, "\t$player1.addInvItem($%s_email);\n", UniqueObjectName(currObj));
+		//And activate it straight away/
+		//fprintf(fBODY, "\t$%s_email.activate($player1);\n", UniqueObjectName(currObj));
+		EMAILScript("", currObj, currObj.shockProperties[TRIG_PROPERTY_EMAIL]);
 		break;
 		
 		}
@@ -1034,7 +1069,10 @@ switch (currObj.TriggerAction)
 		}	
 	
 	}
-
+	if (currObj.TriggerOnce == 1)
+	{
+		fprintf(fBODY, "\t}\n");
+	}
 }
 
 void shockScriptActivate(ObjectItem objList[1600], ObjectItem targetObj)

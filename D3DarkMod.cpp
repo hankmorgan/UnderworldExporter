@@ -21,6 +21,7 @@ int iGame;
 void RenderEntity(int game,float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 float calcAlignmentFactor(float adjacent, float opposite);
+void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
@@ -91,6 +92,7 @@ int x; int y;
 				RenderObjectList(game,LevelInfo,objList);
 			case SHOCK:
 				RenderObjectList(game,LevelInfo,objList);
+				AddEmails(game, LevelInfo, objList);
 				for (y=0; y<=63;y++) 
 					{
 					for (x=0; x<=63;x++)
@@ -253,10 +255,6 @@ int x; int y;
 
 void RenderDarkModTile(int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 {
-	if (PrimitiveCount == 138)
-	{
-		printf("");
-	}
 //Picks the tile to render based on tile type/flags.
 if (t.Render == 1)
 	{fprintf (MAPFILE, "\n");}
@@ -2699,3 +2697,4 @@ float calcAlignmentFactor(float adjacent, float opposite)
 return  sqrt((adjacent*adjacent+opposite*opposite))/adjacent;
 
 }
+

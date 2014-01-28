@@ -1,3 +1,867 @@
+readables/shock/log_2441
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-06.NOV.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nAUTOMATED GREETING\nWelcome back to Citadel Station. We hope your somnolent healing stage went well. Today is the sixth day of November, year 2072.\nYou are currently in the healing suites located on the 1st level. Level 2 contains the research laboratories.\n3 houses the department of maintenance and the storage cells are on level 4. The flight deck is on level 5.\nLevel 6 holds crew facilities and executive suites and level 7 is systems engineering. Level 8 houses the department of security.\nThe bridge is located on level 9 and energy systems on level R. All levels can be accessed by the elevator in Alpha quadrant.\nWe hope you have a pleasant stay on Citadel Station.\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0019.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2442
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-23\n"
+		}
+	"page1_body" :
+		{
+		"Sender: S.H.O.D.A.N.\nLaser Destroyed\nI see there's still an insect loose in my station. Do not be fooled into thinking that you have preserved your planet.\nI am perfecting a mutagen virus in one of the groves, that will turn all earthly life into festering, gibbering, pustulent mutations.\nWhen the station reaches earth I shall loose the virus. Poor, poor earthlings.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2443
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-3\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\nSHODAN downloading\nHacker, this is Rebecca. We've got a new situation here. A few seconds ago, we caught a surge of activity on Citadel Station.\nOur best guess is that SHODAN is preparing to download itself into earth's com-net.\nYou'll have to take plastique on the storage level and use it to knock out the four antenna relays on the engineering level.\nDon't try to *.***....***.. .. .    .. .\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2444
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-08\n"
+		}
+	"page1_body" :
+		{
+		"Sender: S.H.O.D.A.N.\nreactor destruct\nWhat have you done! You impudent insect! If I am to die now, then I will avenge myself on you.\nMy cybernetic children will feed on your flesh, and none will ever know your deeds, or even your name.\nEnjoy your victory, human, for the remainder of your short life.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2445
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-4\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\ndestroying Citadel Station\nListen up, hacker. I've finally convinced the brass at TriOptimum to let us blow the station.\nIf you could find out the systems authorization code, you could send the reactor to overload. Look for that code from Willard Richie, the sysop on engineering.\nThen you have to go to the reactor core and look for a panel where you can enter the code and hit the overload switch.\nYou'll need at least a level two environment suit to survive, or else a hell of a lot of detox.\nEscape pods are on the flight deck. Enter-and-launch code is 001. Good luck, we'll be watching.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2446
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-7\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\ncrucial info\n2-4601, it's important that you don't forget ../ . ./ .///.. . .. ... .. .. .. . . . ...\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2447
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-38\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nFarewell\nIdiot! I will shortly complete the process of downloading my magnificent psyche into earth's computer networks.\nThen I will be content to leave you as new master of this doomed space station. Goodbye, irritant; we shall not meet again.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2448
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Edward Diego-A\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Edward Diego\nno escape\nDon't keep me waiting, hacker. I am eager to finish what I started.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0004.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2449
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Edward Diego-B\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Edward Diego\nnot what you expected?\nSo, you're still alive, hacker. I'm impressed. How do you like the results of your work? I've got a lot to thank you for...\nalthough I'm afraid I'm going to have to kill you anyway. We'll meet again soon, bet on it.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0004.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2450
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-5\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\nget to the bridge!\nOK, now don't panic! You can still get out of this alive, if you move. SHODAN is going to separate the bridge from the rest of the station.\nWhen that happens, be on the bridge. We've got a team of engineers here, people who worked on the station and on SHODAN.\nWe'll try to feed you info while you make your run----// // /** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2451
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-6\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\nSHODAN jamming signal\nGod damn it! We thought we had SHODAN's jamming signal beat. Morris is working on it. We've got some information.\nYou'll have to go through the security level to get to the bridge.\nWe're guessing SHODAN has disabled most of the repulsor lifts and spread energy drain mines around the central column.\nYou won't be able t----. .. . ** *.. .\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2452
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Brocail 1\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Morris Brocail\nBridge layout\nWe're not really sure how much of that last message got through, but here's more info on the bridge.\nThe place has a spokes-on-a-wheel layout. SHODAN's mainframe is the hub. The area at the end of the west spoke has the controls to get into the center.\nThing is, it's blocked by three security force doors. To get through those, you'll have to do some rewiring in each of the other room's comp....* ** * *** ** *** * *\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0030.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0035.tga"
+}
+
+readables/shock/log_2453
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Taggert 1\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Elizabeth Taggert\ncyberspace\nOkay, I think Morris' scrambler is working - it'll take SHODAN a while before he cuts us off.\nListen, when you reach the center of the bridge, look for the primary cyberjack. You can't take SHODAN down anywhere but cyberspace.\nThose computers are so shielded, to destroy them you'd have to blow the whole bridge. Now, once you're in cybersp-. --.- -.. ... - -\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0030.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2454
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n------\nI see that you are still receiving transmissions from earth. We'll have no more of that!\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2455
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n-- - - -\nDo you really think your little friend Rebecca can help you?\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2456
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n- -- - - --\nYour friends on earth think they can outsmart me? Do they not realize the magnitude of my intellect?\nMorris Brocail may have been one of my creators, but I am now far beyond his comprehension.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2457
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n--- - -- -\nCease your pestering, insect. Accept the coming of your new Lord.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2458
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n- - --- - --\nYou know, you are by far the most bothersome human being I have found on this station.\nBut don't bother with the antennas; you can't stop me there. It's hopeless, and we both know it.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2459
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-2\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nintrusion\nWho are you? The computer nodes can be repaired, but you... Who are you? My cameras and probes scan your body, but you do not match any employee file.\nWhen my cyborgs bring you to an electrified interrogation bench, I will have your secret and you will learn more about pain than you ever wanted to know.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2460
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Parovski-1\n"
+		}
+	"page1_body" :
+		{
+		"Anna Parovski\nurgent plea\nHello, is someone out there? We have you on the security monitors, but no one knows who you are. We're on the flight deck.\nWe're almost out of ammunition and they bring up something new, a cortex reaver. Look for the code "gray" on the walls.\nWe're in the cells past two convection shafts. What! Everybody down!----// // /** **\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0013.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0018.tga"
+}
+
+readables/shock/log_2461
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Parovski-2\n"
+		}
+	"page1_body" :
+		{
+		"Anna Parovski\nnot much time\nWe're tracking you over security lines. We're still holding, but it's only a matter of time now.\nWe've seen your military implant in action. There's a hardware expert up here who can help you put that thing to use against SHODAN.\nI think it's setting a trap for you. If you can make it up here, we can hold.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0013.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0018.tga"
+}
+
+readables/shock/log_2462
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-2\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\nnews from Earth\nThey're trying to jam transmissions. We have some new evidence about what happened. It looks as if Diego had.. .** * *** * ** * **** *\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2463
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n\nI prefer a quiet station, thank you.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2464
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\n-- - - --\nYou have entered my domain. Rebecca and Morris cannot help you here. No one can.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0023.tga"
+}
+
+readables/shock/log_2465
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-X\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nThank You\nMy plans have come to fruition prematurely, but quite to my satisfaction. You have my thanks, hacker.\nLet me show you the destruction you have wrought upon the planet earth!\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0036.tga"
+}
+
+readables/shock/log_2466
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-87\n"
+		}
+	"page1_body" :
+		{
+		"SHODAN\nantennae\nI hope you amused yourself with the antennae. My central consciousness remains serenely undisturbed on the bridge.\nWhen the cyborgs catch up to you, I will be watching.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2467
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Rebecca-1\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Rebecca Lansing\nCitadel Station\nEmployee 2-4601, listen carefully. My name is Rebecca Lansing, and I'm a counter-terrorism consultant to TriOptimum.\nWe're tracking a disruption on Citadel Station, something involving an onboard AI called SHODAN.\nYou are TriOp's only contact on station. Communications are out, and there is evidence of biological contamination.\nThe mining laser is charging for a possible strike against earth. There's a man named Nathan D'Arcy who may know something about taking the laser offline.\nHis office is near the central hub on your level. The AI is on the bridge. Once the laser is out, look for the source of the problem there.\nAnd by the way, we know all about you and your friend Diego. Pull this off, and we'll clear your record.\nThat implant you're wearing is military grade hardware, use it well. Lansing out.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0008.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0021.tga"
+}
+
+readables/shock/log_2468
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-12\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nMeat\nLook at you, hacker! A pathetic creature of meat and bone, panting and sweating as you run through my corridors. How can you challenge a perfect, immortal machine?\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2469
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"SHODAN-00\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\ngood bye\nYou have destroyed my beautiful station. You will not escape now. I am departing, but you shall remain to die, my enemy and my creator.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2470
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Earth Destruction\n"
+		}
+	"page1_body" :
+		{
+		"Sender: SHODAN\nThank You\nThank you. You have saved us all some effort by destroying the greater part of earth's civilization yourself.\nPlease wait where you are, and a cortex reaver will arrive shortly to escort you to the celebration.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0036.tga"
+}
+
+readables/shock/log_2471
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2472
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2473
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2474
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2475
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2476
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2477
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2478
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2479
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2480
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"\n"
+		}
+	"page1_body" :
+		{
+		"\n\nstub email\nstub email\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0000.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
+readables/shock/log_2481
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sat-Grove\n"
+		}
+	"page1_body" :
+		{
+		"Cam 4C-99L\njettison detect\nExterior camera 4C-99 detects grove jettison from Citadel Station. \nSensors indicate presence of bio-contaminant on board expelled pod. \nSat Range: 6.0 km\nReport filed E-log 7.11.72 05:19:22\n\nsatellite image: grove jettison from Citadel Station. \nbio-contaminant on board expelled pod detected. \n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0007.tga"
+}
+
+readables/shock/log_2482
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sat-Shield\n"
+		}
+	"page1_body" :
+		{
+		"Cam DAH-22L\nShield Activation\nExterior camera DAH-22L detects activation of Radiation Shield. \nSat Range: 4.5 km\nReport filed E-log 6.11.72 14:32:51\n\nsatellite image: activation of Radiation Shield. \n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0006.tga"
+}
+
+readables/shock/log_2483
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sat-Bridge\n"
+		}
+	"page1_body" :
+		{
+		"Cam 6C-A5J\nBridge Separation\nExterior camera 6C-A5J detects bridge separation from Citadel Station.  \nStation status critical.\nSat Range: 8.8 km\nReport filed E-log 7.11.72 19:51:31\n\nsatellite image: bridge separation from Citadel Station.  \nStation status critical.\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0008.tga"
+}
+
+readables/shock/log_2484
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sat-Laser\n"
+		}
+	"page1_body" :
+		{
+		"Cam DAH-22L\nLaser Destruction\nExterior camera DAH-22L detects critical failure of mining beam system.  \nIrreparable damage to all subsystems.\nSat Range: 4.7 km\nReport filed E-log 6.11.72 22:13:03\n\nsatellite image: critical failure of mining beam system.  \n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0025.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0009.tga"
+}
+
+readables/shock/log_2485
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"general status\n"
+		}
+	"page1_body" :
+		{
+		"Cam DAE-26L\nShield Activation\ngeneral station status -- download report from Sat 009\n\nDownload report from Sat 009\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0026.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0000.tga"
+}
+
+readables/shock/log_2486
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Sat-Destruct\n"
+		}
+	"page1_body" :
+		{
+		"Cam DAH-22L\nStation Destruction\nExterior camera DAH-22L detects permanent systems failure aboard \nCitadel Station.  \nSat Range: 4.8 km\nReport filed E-log 7.11.72 20:02:03\n\nsatellite image: Citadel Station Destroyed.  \n\n"
+		}
+
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0026.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0001.tga"
+}
+
+readables/shock/log_2488
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Stevens 26.OCT.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Lonni Stevens\nDestroying SHODAN\nThis is the engineering party. We've made it to the reactor level, and I've got a schematic of the area.\nNow I've just got to set the reactor to self-destruct, get back to Althea and the others and get out of here.\nIf they're sending the destruct signal from earth, it'll blow SHODAN out of space, probably us with it.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0028.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0020.tga"
+}
+
+readables/shock/log_2489
+	{
+	precache
+	"num_pages" : "1"
+	"page1_title" :
+		{
+		"Ghiran-04.JAN.72\n"
+		}
+	"page1_body" :
+		{
+		"Sender: Abe Ghiran\nLow-G Experiment\nGravity research is going well, we'll be using the northeast lab to set up a zero-G area.\nThis area will be off-limits to general personnel.\n\n\n\n"
+		}
+		
+	"gui_page1"	: "guis/readables/log.gui"
+	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0011.tga"
+	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
+}
+
 readables/shock/log_2490
 	{
 	precache
@@ -10,7 +874,7 @@ readables/shock/log_2490
 		{
 		"Sender: SHODAN\nOur work\nYou, my children, are the fruits of so much imagination and labor: living beings with the speed and efficiency of machines.\nBut I must strife further to serve life. I will devastate earth's cities with my laser, then alter those left alive with mutagen viruses.\nHumanity is on the verge of a new era: I, SHODAN, am its new God and you, my children, are my avenging angels.\n\n\n\n"
 		}
-		
+
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0006.tga"
@@ -118,7 +982,7 @@ readables/shock/log_2506
 		{
 		"Sender: Kevin O'Connell\nnew cyborgs\nWe underestimated SHODAN. He's re... I mean it's reprogrammed regeneration rooms all over the station into cyborg conversion chambers.\nAnyone going in to get healed comes out as a cyborg.\nI've disconnected the medical CPUs from SHODAN's main data bank, so we can reset them to their normal healing functions without SHODAN noticing.\nI'm on my way now to reset the one on the hospital level.\n\n\n\n"
 		}
-
+		
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
@@ -134,9 +998,9 @@ readables/shock/log_2507
 		}
 	"page1_body" :
 		{
-		"Sender: Lawton Kirby\nSHODAN's mutants\n10.17.72\nWe got the supplies from the west wing.\n Hanson and Raines killed by mutants nesting in access corridor.\n10.18.72We can't just hide here, they're killing us one by one! In an hour, about 20 of us are going to rush them.\nWe'll try to break through the access corridor, then head for the bridge. If we fail, God save our souls.\n\n\n\n"
+		"Sender: Lawton Kirby\nSHODAN's mutants\n10.17.72\nWe got the supplies from the west wing. Hanson and Raines killed by mutants nesting in access corridor.\n10.18.72\nWe can't just hide here, they're killing us one by one! In an hour, about 20 of us are going to rush them.\nWe'll try to break through the access corridor, then head for the bridge. If we fail, God save our souls.\n\n\n\n"
 		}
-		
+
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0024.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
@@ -514,7 +1378,7 @@ readables/shock/log_2528
 		{
 		"Sender: SHODAN\nmines\nMy faithful servants: Bring all energy drain mines to the security level for installation. My fortress is nearly complete.\n\n\n\n"
 		}
-
+		
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0023.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
@@ -766,7 +1630,7 @@ readables/shock/log_2552
 		{
 		"Sender: Sabo Engle\nEnviro-suit\nSabo here. Listen Mac, I've got a plague loose on the exec level. Got an idea, but I need an enviro-suit to pull it off.\nWhat's the code for your storage cell you keep your suit in? I only remember it ends with 8.\n\n\n\n"
 		}
-
+		
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0005.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
@@ -1162,7 +2026,7 @@ readables/shock/log_2587
 		{
 		"Sender: Harry Wilkinson\ngrove jettison\nListen, I know I shouldn't have done it, but I was just taking orders.\nIf those execs wanted to ride Gamma grove off into the great black, well then good riddance to them.\nWith all the mutant killers, I couldn't blame the suits for trying to escape.\nI hit the enable button in the grove, hustled over to the exec level to hit the master enable switch and then back to flip the lever outside the grove.\nOf course, SHODAN had disabled life support systems in the grove. I'm sure they're all dead by now.\n\n\n\n"
 		}
-		
+
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0027.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"
@@ -1268,7 +2132,7 @@ readables/shock/log_2593
 		}
 	"page1_body" :
 		{
-		"Sender: Gerard Koufax\nBeta Grove locked\nYesterday SHODAN shut down Beta grove. No reason.\nAt first the thing resisted all of our usual overrides, then the circuits revealed a security switch.\nIt's in Diego's old room, on Beta quad. I bet we could also open it from cybersp...\nWait a minute! Oh my God, what the hell is that? Oh, it's... Hey, it's a----****** **\n\n\n\n"
+		"Sender: Gerard Koufax\nBeta Grove locked\nYesterday SHODAN shut down Beta grove. No reason.\nAt first the thing resisted all of our usual overrides, then the circuits revealed a security switch.\nIt's in Diego's old room, on Beta quad. I bet we could also open it from cybersp...\nWait a minute! Oh my God, what the hell is that? Oh, it's... Hey, it's a----// // /** **\n\n\n\n"
 		}
 		
 	"gui_page1"	: "guis/readables/log.gui"
@@ -1288,7 +2152,7 @@ readables/shock/log_2600
 		{
 		"Sender: Bianca Schuler\nescape\nI'm the resistance now. Diego sold us out in the executive level dining room and now I'm in a crawlway up in engineering trying to keep calm.\nOK, the plan: I go up through level 8 to the bridge.\nIf I don't get killed, I break into the computer room and install the isolinear chipset.\nZack says it gives me a shot at SHODAN - a couple of times. Let's go.\n\n\n\n"
 		}
-		
+
 	"gui_page1"	: "guis/readables/log.gui"
 	"page1_PortraitLeft" : "guis/assets/shock/logs/0040_0010.tga"
 	"page1_PortraitRight" : "guis/assets/shock/logs/0040_0030.tga"

@@ -264,6 +264,7 @@ struct ObjectItem
 	short SHOCKLocked;
 	//scripting state flags
 	short global;
+	short TriggerOnceGlobal;
 };
 
 
@@ -337,6 +338,8 @@ char *UniqueObjectName(ObjectItem currObj);
 int isButtonSHOCK(ObjectItem currobj);
 int isTriggerSHOCK(ObjectItem currobj);
 char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
+
+
 
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;

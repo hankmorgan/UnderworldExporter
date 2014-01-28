@@ -56,7 +56,7 @@ void BuildXDataFile(int game)
 			long chunkContentType = getValAtAddress(tmp_ark, address_pointer + 9, 8);
 			long NoSubChunks = getValAtAddress(tmp_ark, AddressOfBlockStart, 16);
 			//printf("\n@Chunk:%d\n{", chunkId);
-			if ((chunkId >= 2490) && (chunkId <= 2621))
+			if ((chunkId >= 2441) && (chunkId <= 2621))
 				{//we have a log.
 				int step = 0;
 					long strPtr = 2;
@@ -172,72 +172,66 @@ void parseInfoLine(char *str, int length, int *left, int *right)
 	int i = 0;
 	while (i < length)
 	{
-		if (str[i] == 'e')
+		if ((str[i] == 'e') || (str[i] == 'c') || (str[i] == 'i'))
 		{
 			i = i + 3;
 		}
 		else
-		{
-			if (str[i] == 'c')
 			{
-				i = i + 3;
+			if ((str[i] == ' ') || (str[i] == ',') || (str[i] == 't'))
+			{
+				i++;
 			}
 			else
 			{
-				if ((str[i] == ' ') || (str[i] == ','))
+				if (fndleft == 0)
 				{
-					i++;
-				}
-				else
-				{
-					if (fndleft == 0)
+					j = 0;
+					while ((i < length) && (j <= 1))
 					{
-						j = 0;
-						while ((i < length) && (j <= 1))
+						if (isdigit(str[i]))
 						{
-							if (isdigit(str[i]))
-							{
-								strleft[j++] = str[i++];
-								fndleft = 1;
-							}
-							else
-							{
-								i++;
-								break;
-						    }
-						}
-						
-					}
-					else
-					{
-						if (fndright == 0)
-						{
-
-							//the right hand value
-							k = 0;
-							while ((i < length) && (k <= 1))
-							{
-								if (isdigit(str[i]))
-									{
-									strright[k++] = str[i++];
-									fndright = 1;
-									}
-								else
-									{
-									i++;
-									break;
-									}
-							}
-							
+							strleft[j++] = str[i++];
+							fndleft = 1;
 						}
 						else
 						{
 							i++;
+							break;
 						}
 					}
-
+						
 				}
+				else
+				{
+					if (fndright == 0)
+					{
+
+						//the right hand value
+						k = 0;
+						while ((i < length) && (k <= 1))
+						{
+							if (isdigit(str[i]))
+								{
+								strright[k++] = str[i++];
+								fndright = 1;
+								}
+							else
+								{
+								i++;
+								break;
+								}
+						}
+							
+					}
+					else
+					{
+						i++;
+					}
+				}
+
 			}
+			
 		}
 
 	}
