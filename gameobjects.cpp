@@ -1705,25 +1705,14 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 		*offX= (x*BrushX) + ((objList[nextObj].x) * (BrushX/ResolutionXY));
 		*offY= (y*BrushY) + ((objList[nextObj].y) * (BrushY/ResolutionXY));
 		//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
-		int floorHeight = LevelInfo[x][y].floorHeight <<3 ;
-		int nextFloorHeight =(LevelInfo[x][y].floorHeight+1) <<3 ;
-		float relativeZpos = (float)(objList[nextObj].zpos - floorHeight);
-		float zposRatio = (float)(relativeZpos/(nextFloorHeight-floorHeight));	//relative adjustment
-		//float zposRatio = (float)(relativeZpos/(12*BrushSizeZ));	//relative adjustment
-		*offZ = LevelInfo[x][y].floorHeight * BrushZ + (zposRatio*BrushZ*1);
-		
-		if ((zposRatio !=0) && (objectMasters[objList[nextObj].item_id].type != BRIDGE))
-			{
-			float zpos= objList[nextObj].zpos;
-			float brushZ = BrushSizeZ;
-			float ceiling = CEILING_HEIGHT;
-			*offZ = (zpos/ResolutionZ) * (brushZ*ceiling);
-			}
+		float zpos = objList[nextObj].zpos;
+		float ceil = CEILING_HEIGHT;
+		*offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
 		//TODO:This may mess with stuff on walls. It's here to prevent models cliping through sloped floors
-		if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0) && (LevelInfo[x][y].shockSlopeFlag !=SLOPE_CEILING_ONLY))
-			{
-			*offZ = *offZ + (LevelInfo[x][y].shockSteep * (BrushSizeZ /2));
-			}
+		//if ((LevelInfo[x][y].tileType >= 6) && (LevelInfo[x][y].tileType <= 9) && (LevelInfo[x][y].isWater == 0) && (LevelInfo[x][y].shockSlopeFlag !=SLOPE_CEILING_ONLY))
+		//	{
+		//	*offZ = *offZ + (LevelInfo[x][y].shockSteep * (BrushSizeZ /2));
+		//	}
 
 }
 

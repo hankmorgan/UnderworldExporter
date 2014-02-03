@@ -43,11 +43,11 @@ extern int levelNo;
 int main()
 {
 int game = SHOCK;
-int mode = D3_MODE;
+//int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
-//int mode = SCRIPT_BUILD_MODE;
+int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 
 levelNo=1;

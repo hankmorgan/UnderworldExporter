@@ -196,7 +196,7 @@ int x; int y;
 							fprintf (MAPFILE, "\n\"origin\" \"%d %d %d\"",x*BrushSizeX + BrushSizeX/2,y*BrushSizeY + BrushSizeY/2,(LevelInfo[x][y].floorHeight + (CEILING_HEIGHT -LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight)/2)* BrushSizeZ);	//May cause leaks on small maps.
 							fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
 							fprintf (MAPFILE, "\n\"light_radius\" \"%d %d %d\"",40+BrushSizeX/2,40+BrushSizeY/2, CEILING_HEIGHT*BrushSizeZ);	
-							float shade =0.50;	//Max brightness.
+							float shade =0.60;	//Max brightness.
 							if ( LevelInfo[x][y].shockShade !=0)
 								{
 								shade = (0.50) * (1-((float)LevelInfo[x][y].shockShade/255));
