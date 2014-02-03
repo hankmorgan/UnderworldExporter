@@ -267,3 +267,29 @@ void parseInfoLine(char *str, int length, int *left, int *right)
 	}
 
 }
+
+void BuildSndShaderFiles()
+{
+
+	for (int i = 1; i <= 106; i++)
+	{
+		FILE *fileOut;
+		char filePath[80]="";
+		sprintf_s(filePath, 80, "c:\\games\\darkmod\\sound\\shock_bark_%d.sndshd", i);
+		if (fopen_s(&fileOut, filePath, "w") != 0)
+		{
+			printf("Unable to create output file for shader");
+			return;
+		}
+		fprintf(fileOut, "shock_audio_bark_%d\n{\n", i);
+		fprintf(fileOut, "\t description \"shock_bark_%d\"\n",i);
+		fprintf(fileOut, "\t no_dups\n", i);
+		fprintf(fileOut, "\t minDistance 1\n");
+		fprintf(fileOut, "\t maxDistance 30\n", i);
+		fprintf(fileOut, "\t volume -12\n", i);
+		fprintf(fileOut, "\t sound/sfx/shock_barks/bark%d.ogg\n", i);
+		fprintf(fileOut, "}", i);
+		fclose(fileOut);
+	}
+
+}

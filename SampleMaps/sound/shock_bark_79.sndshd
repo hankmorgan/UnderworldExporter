@@ -1,0 +1,9 @@
+shock_audio_bark_79
+{
+	 description "shock_bark_79"
+	 no_dups
+	 minDistance 1
+	 maxDistance 30
+	 volume -12
+	 sound/sfx/shock_barks/bark79.ogg
+}

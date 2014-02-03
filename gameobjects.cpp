@@ -315,7 +315,16 @@ void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj
 //Index
 
 		fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount);
-		fprintf (MAPFILE, "\"classname\" \"func_static\"\n");
+		if ((currobj.DeathWatched >= 1) && (game == SHOCK))
+		{
+			fprintf(MAPFILE, "\"classname\" \"func_damagable\"\n");//this can be broken.
+			fprintf(MAPFILE, "\"broken\" \"models/darkmod/junk/bot_parts/lanternbot_boiler.ase\"\n");
+			fprintf(MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+		}
+		else
+		{
+			fprintf(MAPFILE, "\"classname\" \"func_static\"\n");
+		}
 		//print position+name
 		fprintf (MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
@@ -328,6 +337,10 @@ void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj
 			}
 		fprintf (MAPFILE, "\n\"model\" \"%s\"\n}\n",objectMasters[currobj.item_id].path);
 		EntityCount++;
+		if ((currobj.DeathWatched >= 1) && (game == SHOCK))
+		{
+			createScriptCall(currobj, x, y, z);
+		}
 		return;
 }
 
@@ -1372,7 +1385,11 @@ mstaddress_pointer=0;
 					if (lookUpSubClass(archive_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList,MasterIndex) == -1) {printf("\nNo properties found!\n");}
 					break;
 					}
-				case FIXTURES:break;
+				case FIXTURES:
+					{
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					break;
+					}
 				case GETTABLES_OTHER:
 					break;
 				case SWITCHES_PANELS:
@@ -1387,10 +1404,10 @@ mstaddress_pointer=0;
 					}
 				case ANIMATED:break;
 				case TRAPS_MARKERS:
-						{
-						if (lookUpSubClass(archive_ark,LevelNo*100+TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28,xref, objList,MasterIndex) == -1)  {printf("no properties found!");}
-						}
+					{
+					if (lookUpSubClass(archive_ark,LevelNo*100+TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28,xref, objList,MasterIndex) == -1)  {printf("no properties found!");}
 					break;
+					}
 				case CONTAINERS_CORPSES:break;
 				case CRITTERS:break;
 				}	
@@ -1626,6 +1643,37 @@ while (k<=chunkUnpackedLength)
 				printf("\t\tVersion %d",objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]);
 				printf("\tLog Chunk %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]);
 				printf("\tLevel %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]);
+				return 1;
+				break;
+				}
+			case FIXTURES:
+				{
+				printf("\tFixture Properties\n");
+				if ((objList[objIndex].ObjectSubClass == 2) && (objList[objIndex].ObjectSubClassIndex == 3))
+					{
+					printf("Words:");
+					printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
+					printf("\nFont and size %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
+					printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+					}
+				else {
+					if ((objList[objIndex].ObjectSubClass == 2) && ((objList[objIndex].ObjectSubClassIndex >= 6) && (objList[objIndex].ObjectSubClassIndex <= 9)))
+						{
+							printf("Screens:");
+							printf("\nNo of Frames: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+							printf("\nLoop repeats: %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
+							printf("\nStart Frame: %d (from chunk 321)", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+						}
+					else
+						{
+						printf("Regular fixture");
+						printf("\nVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						printf("\nVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+						printf("\nVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+						printf("\nVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+						printf("\nVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+						}
+					}
 				return 1;
 				break;
 				}
@@ -2505,6 +2553,42 @@ void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 					CalcObjectXYZ(game, &x, &y, &z, LevelInfo, &objList[i], 0, objList[i].tileX, objList[i].tileY);
 					RenderEntityBOOK(game, x, y, z, 1, objList[i], objList, LevelInfo);
 				}
+			}
+		}
+	}
+}
+
+void SetDeathWatch(ObjectItem objList[1600])
+{
+	for (int i = 0; i < 1600; i++)
+	{
+		if ((objList[i].ObjectClass == 12) && (objList[i].ObjectSubClass == 0) && (objList[i].ObjectSubClassIndex == 4))
+		{//Is a death watch trigger
+			if (objList[i].conditions[3]==0)	//If 0 for a class. 1 for a specific object?
+			{
+				//Find all objects which have the object class being watched for.
+				int targetClass = objList[i].conditions[2];
+				int targetSubClass = objList[i].conditions[1];
+				int targetSubClassIndex = objList[i].conditions[0];
+				int k=getShockObjectIndex(targetClass, targetSubClass, targetSubClassIndex);
+				if ((k >= 0) && (k <= 475))
+					{
+					objectMasters[k].DeathWatch++;	//Death watch is per class.
+					for (int j = 0; j < 1600; j++)
+						{
+						if ((objList[j].ObjectClass == targetClass)
+							|| (objList[j].ObjectSubClass == targetSubClass)
+							|| (objList[j].ObjectSubClassIndex == targetSubClassIndex))
+							{
+							objList[j].DeathWatched = 1;
+							}
+						}
+					}
+
+
+				//objList[i].DeathWatched++;	//acts as a counter for the no of objects watched for.
+				//objList[j].DeathWatched = 1;	//acts as a flag for the object being watched.
+				//break;
 			}
 		}
 	}

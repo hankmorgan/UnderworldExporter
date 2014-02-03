@@ -262,6 +262,7 @@ struct ObjectItem
 	int conditions[4];  	
 	int sprite;
 	short SHOCKLocked;
+	short DeathWatched;
 	//scripting state flags
 	short global;
 	short TriggerOnceGlobal;
@@ -287,7 +288,7 @@ int objSubClassIndex;
 
 short renderType;
 short frame1;	//Frame no
-
+short DeathWatch;
 };
 
 

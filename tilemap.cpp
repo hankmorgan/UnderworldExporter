@@ -8,7 +8,7 @@
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
 
-int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
+
 
 
 int getTile(int tileData)
@@ -891,7 +891,8 @@ for (int x=0; x<64;x++)
 			currObj = objList[LevelInfo[x][y].indexObjectList];
 			do  
 				{
-				if ((objectMasters[objList[currObj.index].item_id].type == DOOR ) || (objectMasters[objList[currObj.index].item_id].type == HIDDENDOOR ))
+				if ((objectMasters[objList[currObj.index].item_id].type == DOOR ) 
+						|| (objectMasters[objList[currObj.index].item_id].type == HIDDENDOOR ))
 					{
 					if (currObj.Angle1 >0)
 					{

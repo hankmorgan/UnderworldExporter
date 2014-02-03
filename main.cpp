@@ -37,6 +37,8 @@ void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int Leve
 void unpackStrings(int game);
 void unpackStringsShock(char filePath[255]);
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize);
+void SetDeathWatch(ObjectItem objList[1600]);
+
 extern int levelNo;
 
 
@@ -84,7 +86,8 @@ switch (game)
 			extractTextureBitmap(-1,GRAPHICS_FILE,GRAPHICS_PAL_FILE,0, 32);
 			break;
 		case MATERIALS_BUILD_MODE:
-			BuildXDataFile(game);
+			//BuildXDataFile(game);
+			BuildSndShaderFiles();
 			break;
 		}
 	}
@@ -223,6 +226,7 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 						objectMasters[objNo].isEntity = -1;
 						}
 					objectMasters[objNo].type = objType;
+					objectMasters[objNo].DeathWatch = 0;
 					i++;
 					}
 				fclose(f);
@@ -294,7 +298,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
 			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
 			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
-			
+			SetDeathWatch(objList);
 			setDoorBits(LevelInfo,objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;

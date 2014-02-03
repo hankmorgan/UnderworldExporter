@@ -178,12 +178,12 @@ long chunkUnpackedLength;
 			long chunkType = getValAtAddress(tmp_ark,address_pointer+5,8);
 			chunkPackedLength = getValAtAddress(tmp_ark,address_pointer+6,24);
 			long chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
-			//printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",k,chunkId, chunkUnpackedLength, chunkType,chunkPackedLength,chunkContentType);
-			//printf("Absolute address is %d\n",AddressOfBlockStart);
+			printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",k,chunkId, chunkUnpackedLength, chunkType,chunkPackedLength,chunkContentType);
+			printf("Absolute address is %d\n",AddressOfBlockStart);
 			long NoSubChunks = getValAtAddress(tmp_ark,AddressOfBlockStart,16);
-			//printf("\nIndex: %d Chunk %d has %d sub chunks",k, chunkId, NoSubChunks);
+			printf("\nIndex: %d Chunk %d has %d sub chunks",k, chunkId, NoSubChunks);
 			printf("\n@Chunk:%d\n{",chunkId);
-			//printf("\n+=====================================+\n");
+			printf("\n+=====================================+\n");
 			long strPtr=2;
 			for (int i = 0; i<NoSubChunks;i++)
 				{
@@ -191,7 +191,7 @@ long chunkUnpackedLength;
 				long subChunkEnd = AddressOfBlockStart+getValAtAddress(tmp_ark,AddressOfBlockStart+strPtr+4,32);
 				if (subChunkEnd > subChunkStart)
 					{
-					//printf("%d =", i);
+					printf("%d =", i);
 					printf(" %.*s\n", subChunkEnd- subChunkStart, tmp_ark + subChunkStart);			
 					}
 				strPtr+=4;

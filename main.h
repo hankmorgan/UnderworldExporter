@@ -37,7 +37,7 @@
 #define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock1.script"
 #define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock1.map"
 
-#define ENABLE_LIGHTING 1
+#define ENABLE_LIGHTING 0
 
 /*Globals*/
 extern int BrushSizeX;
@@ -83,6 +83,7 @@ extern int CEILING_HEIGHT;
 
 void exportMaps(int game,int mode,int LevelNo);
 void LoadConfig(int game);
+int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
 
 #endif /* main_h */
 

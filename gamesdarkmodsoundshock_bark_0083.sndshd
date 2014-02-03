@@ -1,0 +1,5 @@
+shock_audio_bark_0083
+{
+	 description "shockbarks_0083"
+	 nodups	 minDistance 1	 maxDistance 30	 volume -12	 sound/sfx/shock_barks/bark_04d.ogg
+}

@@ -27,8 +27,8 @@ extern long UW_CEILING_HEIGHT;
 void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 {
 	//printf("void start_%s()\n{",UniqueObjectName(currObj));
-	fprintf(fBODY,"\n$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_log_%04d\");",logChunk);
-	fprintf(fBODY,"\n$data_reader_trigger.activate($player1);\n");
+	fprintf(fBODY,"\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_log_%04d\");",logChunk);
+	fprintf(fBODY,"\n\t$data_reader_trigger.activate($player1);\n");
 	//printf("\n}\n\n");
 }
 
@@ -501,12 +501,12 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 				int nextObj = LevelInfo[x][y].indexObjectList;
 				while (nextObj!=0)
 					{
-					printf("\n%d-%d",x,y);
-					if ((x==20) && (y==23))
-					{printf("");}
 					//is it something that starts a script
 					//This does not include screens just yet.
-					if ((isButtonSHOCK(objList[nextObj])) || (isLog(objList[nextObj])) || (isTriggerSHOCK(objList[nextObj])))
+					if ((isButtonSHOCK(objList[nextObj])) 
+							|| (isLog(objList[nextObj])) 
+								|| (isTriggerSHOCK(objList[nextObj]))
+									|| (objectMasters[objList[nextObj].item_id].DeathWatch  >=1))
 						{
 						//Create the function call.
 						fprintf(fBODY,"\n\n\nvoid start_%s()\n{\n",
@@ -532,6 +532,17 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 								
 							case TRAPS_MARKERS:
 								scriptShockTriggerAction(LevelInfo,objList,objList[nextObj]);
+								break;
+							
+							default:
+								//Something else that can start a script. 
+								if (objectMasters[objList[nextObj].item_id].DeathWatch >=1) //A deathwatch scriptcall.
+									{
+									fprintf(fBODY, "\tdeathwatch_%d%d%d++;\n",
+										objList[nextObj].ObjectClass, objList[nextObj].ObjectSubClass, objList[nextObj].ObjectSubClassIndex);
+									fprintf(fBODY, "\tdeathwatch_script(%d%d%d);\n",
+										objList[nextObj].ObjectClass, objList[nextObj].ObjectSubClass, objList[nextObj].ObjectSubClassIndex);
+									}
 								break;
 							}
 							
@@ -564,7 +575,37 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 			}
 		}
 	}
-
+	//Add the death watch script
+	fprintf(fGLOBALS, "\n\n\nvoid deathwatch_script(float objectId);\n");//the declaration
+	fprintf(fBODY, "\n\n\nvoid deathwatch_script(float objectId)\n{\n");
+	for (int i = 0; i < 1600; i++)
+	{
+		if ((objList[i].ObjectClass == 12) && (objList[i].ObjectSubClass == 0) && (objList[i].ObjectSubClassIndex == 4))
+		{
+			if (objList[i].conditions[3] == 0)
+			{
+				int k = getShockObjectIndex(objList[i].conditions[2], objList[i].conditions[1], objList[i].conditions[0]);
+			fprintf(fBODY, "\tif ((objectId==%d%d%d) && (deathwatch_%d%d%d>=%d))\n\t{\n", 
+					objList[i].conditions[2],
+					objList[i].conditions[1],
+					objList[i].conditions[0],
+					objList[i].conditions[2],
+					objList[i].conditions[1],
+					objList[i].conditions[0],
+					objectMasters[k].DeathWatch);
+			fprintf(fBODY, "\t\t$runscript_%s.activate($player1);\n\t}\n", UniqueObjectName(objList[i]));
+			}
+		}
+	}
+	fprintf(fBODY, "\n}\n");
+	//Add the deathwatch globals
+	for (int i = 0; i <= 1024; i++)
+		{
+		if (objectMasters[i].DeathWatch >= 1)
+			{//This class of objects is being watched
+			fprintf(fGLOBALS, "\tfloat deathwatch_%d%d%d = 0;\n", objectMasters[i].objClass, objectMasters[i].objSubClass, objectMasters[i].objSubClassIndex);
+			}
+		}
 
 	fclose(fBODY);
 	//fprintf(fMAIN,"\n}\n");	
@@ -733,8 +774,8 @@ void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], 
 			fprintf(fGLOBALS, "\tfloat %s_triggered = 0;\n", UniqueObjectName(currObj));
 			currObj.TriggerOnceGlobal = 1;
 		}
-		fprintf(fBODY, "\tif (%s_triggered == 0)\n\t{\n\t", UniqueObjectName(currObj));
-		fprintf(fBODY, "\t\t%s_triggered = 1;\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\tif (%s_triggered == 0)\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\t%s_triggered = 1;\n", UniqueObjectName(currObj));
 	}
 switch (currObj.TriggerAction)
 	{ 
@@ -804,7 +845,7 @@ switch (currObj.TriggerAction)
 		//objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
 		if ( currObj.shockProperties[0]> 0)
 			{
-			fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[1]); 
+			if (currObj.shockProperties[1] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[0]]);
 			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[0]])); 
 			}
@@ -813,7 +854,7 @@ switch (currObj.TriggerAction)
 		//
 		if ( currObj.shockProperties[2]> 0)
 			{
-			fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[3]); 
+			if (currObj.shockProperties[3] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[2]]);
 			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[2]])); 
 			}	
@@ -822,7 +863,7 @@ switch (currObj.TriggerAction)
 		//does the fourth trigger exist?
 		if (( currObj.shockProperties[4]> 0) &&  (currObj.shockProperties[4]< 1600))
 			{
-			fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[5]); 
+			if (currObj.shockProperties[5] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[4]]);
 			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[4]])); 
 			}	
@@ -830,7 +871,7 @@ switch (currObj.TriggerAction)
 		//printf("4th Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x1A,16));	
 		if ( currObj.shockProperties[6]> 0)
 			{
-			fprintf(fBODY,"\t$sys.wait(%d);\n",currObj.shockProperties[7]);
+			if (currObj.shockProperties[7] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[6]]); 
 			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[6]])); 
 			}
@@ -1016,7 +1057,11 @@ switch (currObj.TriggerAction)
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=getValAtAddress(sub_ark,add_ptr+0x10,16);
 		
-		fprintf(fBODY,"\tsys.println(\"Sucess or failMessage\");\n");
+		//fprintf(fBODY,"\tsys.println(\"Message\");\n");
+		fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+		fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
+		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
 		break;
 		}
 	case ACTION_SPAWN:	
@@ -1203,22 +1248,22 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 			fprintf(fBODY, "\tsys.println(\"Action activate by switch:%s)\");\n", UniqueObjectName(currObj));
 			if (currObj.shockProperties[0] > 0)
 			{
-				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[1]);
+				if (currObj.shockProperties[1] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[0]]);
 			}
 			if (currObj.shockProperties[2] > 0)
 			{
-				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[3]);
+				if (currObj.shockProperties[3] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[2]]);
 			}
 			if ((currObj.shockProperties[4] > 0) && (currObj.shockProperties[4]< 1600))
 			{
-				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[5]);
+				if (currObj.shockProperties[5] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[4]]);
 			}
 			if (currObj.shockProperties[6]> 0)
 			{
-				fprintf(fBODY, "\t$sys.wait(%d);\n", currObj.shockProperties[7]);
+				if (currObj.shockProperties[7] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[6]]);
 			}
 			break;
@@ -1242,7 +1287,12 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 		fprintf(fBODY, "\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n", currObj.shockProperties[TRIG_PROPERTY_CONTROL_1], currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);
 		break;
 		}
-
+	case ACTION_MESSAGE:
+		{
+		fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+		fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
+		break;
+		}
 	case ACTION_CHANGE_TYPE:
 		{
 		//fprintf(fBODY, "\tsys.println(\"Change Type\");\n");

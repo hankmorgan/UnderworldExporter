@@ -43,6 +43,11 @@
 
 
 
+void deathwatch_script(float objectId);
+	float deathwatch_708 = 0;
+
+
+
 void start_BUTTON_30_52_01_0541()
 {
 	float displacement = 51 - lift_025_051_ceiling_state;
@@ -78,8 +83,10 @@ void start_ENTRY_TRIGGER_37_49_01_0165()
 {
 	if (ENTRY_TRIGGER_37_49_01_0165_triggered == 0)
 	{
-			ENTRY_TRIGGER_37_49_01_0165_triggered = 1;
-	sys.println("Sucess or failMessage");
+	ENTRY_TRIGGER_37_49_01_0165_triggered = 1;
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_71");
+	$data_reader_trigger.activate($player1);
 	}
 }
 
@@ -93,11 +100,8 @@ void start_NULL_TRIGGER_41_49_01_0583()
 
 void start_DEATH_WATCH_TRIGGER_44_49_01_0445()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_45_49_01_0506.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_46_49_01_0375.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_46_49_01_0507.activate($player1);
 }
 
@@ -124,16 +128,30 @@ void start_NULL_TRIGGER_46_49_01_0375()
 
 
 
+void start_COMPUTER_NODE_41_48_01_0144()
+{
+	deathwatch_708++;
+	deathwatch_script(708);
+}
+
+
+
+void start_COMPUTER_NODE_42_48_01_0115()
+{
+	deathwatch_708++;
+	deathwatch_script(708);
+}
+
+
+
 void start_DEATH_WATCH_TRIGGER_44_48_01_0475()
 {
 	if (DEATH_WATCH_TRIGGER_44_48_01_0475_triggered == 0)
 	{
-			DEATH_WATCH_TRIGGER_44_48_01_0475_triggered = 1;
-	$sys.wait(80);
+	DEATH_WATCH_TRIGGER_44_48_01_0475_triggered = 1;
+	sys.wait(8);
 	$runscript_NULL_TRIGGER_45_48_01_0645.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_20_51_01_0357.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_31_45_01_0344.activate($player1);
 	}
 }
@@ -145,8 +163,8 @@ void start_NULL_TRIGGER_45_48_01_0645()
 	sys.println("You got mail:2459");
 	$player1.addInvItem($NULL_TRIGGER_45_48_01_0645_email);
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2459");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2459");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -167,11 +185,27 @@ void start_REPULSOR_35_47_01_0579()
 
 
 
+void start_COMPUTER_NODE_41_47_01_0166()
+{
+	deathwatch_708++;
+	deathwatch_script(708);
+}
+
+
+
+void start_COMPUTER_NODE_42_47_01_0145()
+{
+	deathwatch_708++;
+	deathwatch_script(708);
+}
+
+
+
 void start_EMAIL_18_46_01_0505()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2513");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2513");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -218,10 +252,8 @@ void start_DEATH_WATCH_TRIGGER_21_45_01_0562()
 {
 	if (DEATH_WATCH_TRIGGER_21_45_01_0562_triggered == 0)
 	{
-			DEATH_WATCH_TRIGGER_21_45_01_0562_triggered = 1;
-	$sys.wait(0);
+	DEATH_WATCH_TRIGGER_21_45_01_0562_triggered = 1;
 	$runscript_NULL_TRIGGER_25_44_01_0594.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_45_01_0588.activate($player1);
 	}
 }
@@ -230,7 +262,9 @@ void start_DEATH_WATCH_TRIGGER_21_45_01_0562()
 
 void start_NULL_TRIGGER_21_45_01_0563()
 {
-	sys.println("Sucess or failMessage");
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_60");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -252,7 +286,6 @@ void start_NULL_TRIGGER_21_45_01_0588()
 void start_BUTTON_23_45_01_0592()
 {
 	sys.println("Action activate by switch:BUTTON_23_45_01_0592)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_46_01_0597.activate($player1);
 }
 
@@ -261,7 +294,6 @@ void start_BUTTON_23_45_01_0592()
 void start_BUTTON_24_45_01_0558()
 {
 	sys.println("Action activate by switch:BUTTON_24_45_01_0558)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_46_01_0597.activate($player1);
 }
 
@@ -271,12 +303,9 @@ void start_ENTRY_TRIGGER_26_45_01_0585()
 {
 	if (ENTRY_TRIGGER_26_45_01_0585_triggered == 0)
 	{
-			ENTRY_TRIGGER_26_45_01_0585_triggered = 1;
-	$sys.wait(0);
+	ENTRY_TRIGGER_26_45_01_0585_triggered = 1;
 	$runscript_NULL_TRIGGER_21_45_01_0563.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_25_44_01_0556.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_45_01_0587.activate($player1);
 	}
 }
@@ -286,7 +315,6 @@ void start_ENTRY_TRIGGER_26_45_01_0585()
 void start_BUTTON_26_45_01_0593()
 {
 	sys.println("Action activate by switch:BUTTON_26_45_01_0593)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_44_01_0557.activate($player1);
 }
 
@@ -295,7 +323,6 @@ void start_BUTTON_26_45_01_0593()
 void start_BUTTON_27_45_01_0586()
 {
 	sys.println("Action activate by switch:BUTTON_27_45_01_0586)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_25_44_01_0595.activate($player1);
 }
 
@@ -304,7 +331,6 @@ void start_BUTTON_27_45_01_0586()
 void start_BUTTON_27_45_01_0555()
 {
 	sys.println("Action activate by switch:BUTTON_27_45_01_0555)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_21_44_01_0557.activate($player1);
 }
 
@@ -314,7 +340,7 @@ void start_NULL_TRIGGER_31_45_01_0344()
 {
 	if (NULL_TRIGGER_31_45_01_0344_triggered == 0)
 	{
-			NULL_TRIGGER_31_45_01_0344_triggered = 1;
+	NULL_TRIGGER_31_45_01_0344_triggered = 1;
 	sys.println("Spawn");
 	}
 }
@@ -325,8 +351,10 @@ void start_ENTRY_TRIGGER_32_45_01_0184()
 {
 	if (ENTRY_TRIGGER_32_45_01_0184_triggered == 0)
 	{
-			ENTRY_TRIGGER_32_45_01_0184_triggered = 1;
-	sys.println("Sucess or failMessage");
+	ENTRY_TRIGGER_32_45_01_0184_triggered = 1;
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_70");
+	$data_reader_trigger.activate($player1);
 	}
 }
 
@@ -397,7 +425,6 @@ void start_NULL_TRIGGER_25_44_01_0556()
 void start_BUTTON_28_44_01_0554()
 {
 	sys.println("Action activate by switch:BUTTON_28_44_01_0554)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_25_44_01_0595.activate($player1);
 }
 
@@ -450,7 +477,6 @@ void start_NULL_TRIGGER_18_43_01_0160()
 void start_LEVER_18_43_01_0227()
 {
 	sys.println("Action activate by switch:LEVER_18_43_01_0227)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_18_43_01_0237.activate($player1);
 }
 
@@ -458,9 +484,7 @@ void start_LEVER_18_43_01_0227()
 
 void start_PLAYER_DEATH_TRIGGER_19_43_01_0230()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_43_01_0229.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_43_01_0228.activate($player1);
 }
 
@@ -490,17 +514,15 @@ void start_NULL_TRIGGER_42_43_01_0604()
 void start_EMAIL_16_42_01_0316()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2506");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2506");
+	$data_reader_trigger.activate($player1);
 }
 
 
 
 void start_NULL_TRIGGER_19_42_01_0540()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_42_01_0538.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_18_43_01_0397.activate($player1);
 }
 
@@ -508,9 +530,7 @@ void start_NULL_TRIGGER_19_42_01_0540()
 
 void start_NULL_TRIGGER_19_42_01_0539()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_42_01_0537.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_18_43_01_0160.activate($player1);
 }
 
@@ -518,14 +538,18 @@ void start_NULL_TRIGGER_19_42_01_0539()
 
 void start_NULL_TRIGGER_19_42_01_0538()
 {
-	sys.println("Sucess or failMessage");
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_2");
+	$data_reader_trigger.activate($player1);
 }
 
 
 
 void start_NULL_TRIGGER_19_42_01_0537()
 {
-	sys.println("Sucess or failMessage");
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_1");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -540,7 +564,6 @@ void start_REPULSOR_26_42_01_0451()
 void start_SWITCH_12_41_01_0525()
 {
 	sys.println("Action activate by switch:SWITCH_12_41_01_0525)");
-	$sys.wait(0);
 	$a_lock_014_040.activate($player1);
 }
 
@@ -548,7 +571,6 @@ void start_SWITCH_12_41_01_0525()
 
 void start_REPULSOR_30_41_01_0055()
 {
-	$sys.wait(0);
 	sys.println("Object 1: Not in use");
 }
 
@@ -557,7 +579,6 @@ void start_REPULSOR_30_41_01_0055()
 void start_SWITCH_30_40_01_0450()
 {
 	sys.println("Action activate by switch:SWITCH_30_40_01_0450)");
-	$sys.wait(0);
 	$a_lock_031_038.activate($player1);
 }
 
@@ -575,9 +596,7 @@ void start_ENTRY_TRIGGER_33_40_01_0216()
 
 void start_NULL_TRIGGER_49_40_01_0371()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_49_40_01_0370.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_49_40_01_0326.activate($player1);
 }
 
@@ -585,9 +604,7 @@ void start_NULL_TRIGGER_49_40_01_0371()
 
 void start_NULL_TRIGGER_49_40_01_0372()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_49_40_01_0217.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_49_40_01_0373.activate($player1);
 }
 
@@ -624,8 +641,8 @@ void start_NULL_TRIGGER_49_40_01_0373()
 void start_EMAIL_35_39_01_0317()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2510");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2510");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -634,12 +651,12 @@ void start_NULL_TRIGGER_38_39_01_0628()
 {
 	if (NULL_TRIGGER_38_39_01_0628_triggered == 0)
 	{
-			NULL_TRIGGER_38_39_01_0628_triggered = 1;
+	NULL_TRIGGER_38_39_01_0628_triggered = 1;
 	sys.println("You got mail:2485");
 	$player1.addInvItem($NULL_TRIGGER_38_39_01_0628_email);
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2485");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2485");
+	$data_reader_trigger.activate($player1);
 	}
 }
 
@@ -679,11 +696,8 @@ void start_LEVER_49_39_01_0365()
 void start_EMERGENCY_LEVER_39_38_01_0627()
 {
 	sys.println("Action activate by switch:EMERGENCY_LEVER_39_38_01_0627)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_38_39_01_0628.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_38_39_01_0408.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_38_39_01_0320.activate($player1);
 }
 
@@ -700,10 +714,8 @@ void start_ENTRY_TRIGGER_15_37_01_0727()
 {
 	if (ENTRY_TRIGGER_15_37_01_0727_triggered == 0)
 	{
-			ENTRY_TRIGGER_15_37_01_0727_triggered = 1;
-	$sys.wait(0);
+	ENTRY_TRIGGER_15_37_01_0727_triggered = 1;
 	$runscript_NULL_TRIGGER_38_39_01_0320.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_38_39_01_0408.activate($player1);
 	}
 }
@@ -720,8 +732,8 @@ void start_ELEVATOR_PANEL_15_37_01_0030()
 void start_EMAIL_18_37_01_0021()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2514");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2514");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -729,7 +741,6 @@ $data_reader_trigger.activate($player1);
 void start_LARGE_BUTTON_18_37_01_0016()
 {
 	sys.println("Action activate by switch:LARGE_BUTTON_18_37_01_0016)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_36_01_0063.activate($player1);
 }
 
@@ -739,12 +750,12 @@ void start_ENTRY_TRIGGER_19_37_01_0681()
 {
 	if (ENTRY_TRIGGER_19_37_01_0681_triggered == 0)
 	{
-			ENTRY_TRIGGER_19_37_01_0681_triggered = 1;
+	ENTRY_TRIGGER_19_37_01_0681_triggered = 1;
 	sys.println("You got mail:2462");
 	$player1.addInvItem($ENTRY_TRIGGER_19_37_01_0681_email);
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2462");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2462");
+	$data_reader_trigger.activate($player1);
 	}
 }
 
@@ -753,7 +764,6 @@ $data_reader_trigger.activate($player1);
 void start_LARGE_BUTTON_20_37_01_0220()
 {
 	sys.println("Action activate by switch:LARGE_BUTTON_20_37_01_0220)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_36_01_0063.activate($player1);
 }
 
@@ -763,8 +773,10 @@ void start_ENTRY_TRIGGER_17_36_01_0498()
 {
 	if (ENTRY_TRIGGER_17_36_01_0498_triggered == 0)
 	{
-			ENTRY_TRIGGER_17_36_01_0498_triggered = 1;
-	sys.println("Sucess or failMessage");
+	ENTRY_TRIGGER_17_36_01_0498_triggered = 1;
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_88");
+	$data_reader_trigger.activate($player1);
 	}
 }
 
@@ -817,7 +829,7 @@ void start_NULL_TRIGGER_17_35_01_0024()
 {
 	if (NULL_TRIGGER_17_35_01_0024_triggered == 0)
 	{
-			NULL_TRIGGER_17_35_01_0024_triggered = 1;
+	NULL_TRIGGER_17_35_01_0024_triggered = 1;
 	sys.println("Variable 1 set. Value 0, 0 operation. Message 0 ");
 	}
 }
@@ -826,7 +838,6 @@ void start_NULL_TRIGGER_17_35_01_0024()
 
 void start_NULL_TRIGGER_17_35_01_0023()
 {
-	$sys.wait(0);
 	$a_lock_017_035.activate($player1);
 }
 
@@ -835,9 +846,7 @@ void start_NULL_TRIGGER_17_35_01_0023()
 void start_LEVER_17_35_01_0130()
 {
 	sys.println("Action activate by switch:LEVER_17_35_01_0130)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_35_01_0024.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_35_01_0023.activate($player1);
 }
 
@@ -845,7 +854,6 @@ void start_LEVER_17_35_01_0130()
 
 void start_CRITTER_AI_HINT_28_34_01_0312()
 {
-	$sys.wait(0);
 	$CRITTER_AI_HINT_35_34_01_0308.activate($player1);
 }
 
@@ -853,7 +861,6 @@ void start_CRITTER_AI_HINT_28_34_01_0312()
 
 void start_CRITTER_AI_HINT_35_34_01_0308()
 {
-	$sys.wait(0);
 	$CRITTER_AI_HINT_36_30_01_0309.activate($player1);
 }
 
@@ -882,7 +889,6 @@ void start_NULL_TRIGGER_37_33_01_0206()
 void start_LARGE_BUTTON_40_32_01_0159()
 {
 	sys.println("Action activate by switch:LARGE_BUTTON_40_32_01_0159)");
-	$sys.wait(0);
 	$ENTRY_TRIGGER_39_31_01_0714.activate($player1);
 }
 
@@ -890,7 +896,6 @@ void start_LARGE_BUTTON_40_32_01_0159()
 
 void start_NULL_TRIGGER_11_31_01_0655()
 {
-	$sys.wait(0);
 	$a_lock_011_032.activate($player1);
 }
 
@@ -898,7 +903,6 @@ void start_NULL_TRIGGER_11_31_01_0655()
 
 void start_NULL_TRIGGER_11_31_01_0654()
 {
-	$sys.wait(0);
 	$a_lock_011_029.activate($player1);
 }
 
@@ -964,9 +968,7 @@ void start_NULL_TRIGGER_39_31_01_0214()
 
 void start_LEVEL_ENTRY_TRIGGER_11_30_01_0653()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_11_31_01_0654.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_11_31_01_0655.activate($player1);
 }
 
@@ -981,14 +983,15 @@ void start_BUTTON_27_30_01_0700()
 
 void start_NULL_TRIGGER_31_30_01_0708()
 {
-	sys.println("Sucess or failMessage");
+
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_96");
+	$data_reader_trigger.activate($player1);
 }
 
 
 
 void start_REPULSOR_31_30_01_0668()
 {
-	$sys.wait(0);
 	sys.println("Object 1: Not in use");
 }
 
@@ -1012,7 +1015,6 @@ void start_ACCESS_PANEL_32_30_01_0682()
 
 void start_CRITTER_AI_HINT_36_30_01_0309()
 {
-	$sys.wait(0);
 	$CRITTER_AI_HINT_36_27_01_0310.activate($player1);
 }
 
@@ -1021,7 +1023,6 @@ void start_CRITTER_AI_HINT_36_30_01_0309()
 void start_LARGE_BUTTON_38_30_01_0110()
 {
 	sys.println("Action activate by switch:LARGE_BUTTON_38_30_01_0110)");
-	$sys.wait(0);
 	$ENTRY_TRIGGER_39_31_01_0714.activate($player1);
 }
 
@@ -1043,8 +1044,8 @@ void start_NULL_TRIGGER_41_30_01_0208()
 void start_EMAIL_12_29_01_0399()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2511");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2511");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1052,7 +1053,6 @@ $data_reader_trigger.activate($player1);
 void start_LEVER_30_29_01_0432()
 {
 	sys.println("Action activate by switch:LEVER_30_29_01_0432)");
-	$sys.wait(0);
 	$ENTRY_TRIGGER_30_28_01_0158.activate($player1);
 }
 
@@ -1068,8 +1068,8 @@ void start_NULL_TRIGGER_34_29_01_0683()
 void start_EMAIL_51_29_01_0465()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2512");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2512");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1132,9 +1132,7 @@ void start_ENTRY_TRIGGER_30_28_01_0158()
 
 void start_NULL_TRIGGER_46_28_01_0114()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_46_28_01_0298.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_46_28_01_0299.activate($player1);
 }
 
@@ -1165,8 +1163,8 @@ void start_ACCESS_PANEL_47_28_01_0259()
 void start_EMAIL_12_27_01_0474()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2517");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2517");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1180,7 +1178,6 @@ void start_NULL_TRIGGER_26_27_01_0252()
 
 void start_CRITTER_AI_HINT_28_27_01_0311()
 {
-	$sys.wait(0);
 	$CRITTER_AI_HINT_28_34_01_0312.activate($player1);
 }
 
@@ -1188,7 +1185,6 @@ void start_CRITTER_AI_HINT_28_27_01_0311()
 
 void start_CRITTER_AI_HINT_36_27_01_0310()
 {
-	$sys.wait(0);
 	$CRITTER_AI_HINT_28_27_01_0311.activate($player1);
 }
 
@@ -1196,7 +1192,6 @@ void start_CRITTER_AI_HINT_36_27_01_0310()
 
 void start_REPULSOR_43_27_01_0366()
 {
-	$sys.wait(0);
 	sys.println("Object 1: Not in use");
 }
 
@@ -1212,7 +1207,6 @@ void start_ENERGY_CHARGE_STATION_28_26_01_0411()
 void start_LARGE_BUTTON_34_26_01_0536()
 {
 	sys.println("Action activate by switch:LARGE_BUTTON_34_26_01_0536)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_33_25_01_0354.activate($player1);
 }
 
@@ -1281,11 +1275,8 @@ void start_NULL_TRIGGER_33_25_01_0034()
 
 void start_NULL_TRIGGER_33_25_01_0012()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_32_25_01_0054.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_33_25_01_0031.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_34_25_01_0033.activate($player1);
 }
 
@@ -1293,11 +1284,8 @@ void start_NULL_TRIGGER_33_25_01_0012()
 
 void start_NULL_TRIGGER_33_25_01_0032()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_32_25_01_0109.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_33_25_01_0034.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_34_25_01_0053.activate($player1);
 }
 
@@ -1337,8 +1325,7 @@ void start_ENTRY_TRIGGER_46_25_01_0606()
 {
 	if (ENTRY_TRIGGER_46_25_01_0606_triggered == 0)
 	{
-			ENTRY_TRIGGER_46_25_01_0606_triggered = 1;
-	$sys.wait(0);
+	ENTRY_TRIGGER_46_25_01_0606_triggered = 1;
 	$runscript_NULL_TRIGGER_47_25_01_0607.activate($player1);
 	}
 }
@@ -1360,7 +1347,6 @@ void start_NULL_TRIGGER_10_24_01_0353()
 
 void start_ENTRY_TRIGGER_26_24_01_0146()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_24_01_0066.activate($player1);
 }
 
@@ -1368,9 +1354,7 @@ void start_ENTRY_TRIGGER_26_24_01_0146()
 
 void start_NULL_TRIGGER_29_24_01_0209()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_33_01_0601.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_12_45_01_0602.activate($player1);
 }
 
@@ -1378,13 +1362,9 @@ void start_NULL_TRIGGER_29_24_01_0209()
 
 void start_NULL_TRIGGER_29_24_01_0599()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_13_01_0211.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_12_01_0337.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_41_20_01_0236.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_24_01_0209.activate($player1);
 }
 
@@ -1392,13 +1372,9 @@ void start_NULL_TRIGGER_29_24_01_0599()
 
 void start_NULL_TRIGGER_29_24_01_0064()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_27_25_01_0151.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_26_27_01_0252.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_41_30_01_0208.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_24_01_0599.activate($player1);
 }
 
@@ -1413,7 +1389,6 @@ void start_NULL_TRIGGER_29_24_01_0066()
 
 void start_LEVEL_ENTRY_TRIGGER_30_24_01_0037()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_24_01_0066.activate($player1);
 }
 
@@ -1422,8 +1397,8 @@ void start_LEVEL_ENTRY_TRIGGER_30_24_01_0037()
 void start_EMAIL_38_24_01_0460()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2516");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2516");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1432,7 +1407,7 @@ void start_LEVEL_ENTRY_TRIGGER_31_23_01_0695()
 {
 	if (LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered == 0)
 	{
-			LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered = 1;
+	LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered = 1;
 	sys.println("You live again. Or maybe get turned into a cyborg.");
 	}
 }
@@ -1442,7 +1417,6 @@ void start_LEVEL_ENTRY_TRIGGER_31_23_01_0695()
 void start_LARGE_BUTTON_35_23_01_0117()
 {
 	sys.println("Action activate by switch:LARGE_BUTTON_35_23_01_0117)");
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_33_25_01_0354.activate($player1);
 }
 
@@ -1451,8 +1425,8 @@ void start_LARGE_BUTTON_35_23_01_0117()
 void start_EMAIL_11_22_01_0315()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2505");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2505");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1473,9 +1447,7 @@ void start_NULL_TRIGGER_21_22_01_0062()
 
 void start_NULL_TRIGGER_25_22_01_0696()
 {
-	$sys.wait(0);
 	$a_lock_026_024.activate($player1);
-	$sys.wait(0);
 	$a_lock_026_021.activate($player1);
 }
 
@@ -1484,7 +1456,6 @@ void start_NULL_TRIGGER_25_22_01_0696()
 void start_BUTTON_26_22_01_0176()
 {
 	sys.println("Action activate by switch:BUTTON_26_22_01_0176)");
-	$sys.wait(0);
 	$a_lock_026_021.activate($player1);
 }
 
@@ -1493,8 +1464,8 @@ void start_BUTTON_26_22_01_0176()
 void start_EMAIL_33_22_01_0454()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2518");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2518");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1507,11 +1478,8 @@ void start_NULL_TRIGGER_14_21_01_0452()
 
 void start_NULL_TRIGGER_20_21_01_0205()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_41_30_01_0208.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_20_22_01_0141.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_29_13_01_0211.activate($player1);
 }
 
@@ -1519,7 +1487,6 @@ void start_NULL_TRIGGER_20_21_01_0205()
 
 void start_SHODAN_TRIGGER_46_21_01_0483()
 {
-	$sys.wait(0);
 	$HIDDEN_DOOR_46_21_01_0482.activate($player1);
 }
 
@@ -1529,7 +1496,7 @@ void start_ENTRY_TRIGGER_19_20_01_0713()
 {
 	if (ENTRY_TRIGGER_19_20_01_0713_triggered == 0)
 	{
-			ENTRY_TRIGGER_19_20_01_0713_triggered = 1;
+	ENTRY_TRIGGER_19_20_01_0713_triggered = 1;
 	sys.println("Variable 145 set. Value 1, 0 operation. Message 0 ");
 	}
 }
@@ -1540,12 +1507,12 @@ void start_ENTRY_TRIGGER_20_20_01_0502()
 {
 	if (ENTRY_TRIGGER_20_20_01_0502_triggered == 0)
 	{
-			ENTRY_TRIGGER_20_20_01_0502_triggered = 1;
+	ENTRY_TRIGGER_20_20_01_0502_triggered = 1;
 	sys.println("You got mail:2441");
 	$player1.addInvItem($ENTRY_TRIGGER_20_20_01_0502_email);
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2441");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2441");
+	$data_reader_trigger.activate($player1);
 	}
 }
 
@@ -1569,10 +1536,8 @@ void start_NULL_TRIGGER_19_19_01_0576()
 {
 	if (NULL_TRIGGER_19_19_01_0576_triggered == 0)
 	{
-			NULL_TRIGGER_19_19_01_0576_triggered = 1;
-	$sys.wait(0);
+	NULL_TRIGGER_19_19_01_0576_triggered = 1;
 	$runscript_NULL_TRIGGER_19_19_01_0575.activate($player1);
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_19_19_01_0574.activate($player1);
 	}
 }
@@ -1583,7 +1548,7 @@ void start_NULL_TRIGGER_19_19_01_0575()
 {
 	if (NULL_TRIGGER_19_19_01_0575_triggered == 0)
 	{
-			NULL_TRIGGER_19_19_01_0575_triggered = 1;
+	NULL_TRIGGER_19_19_01_0575_triggered = 1;
 	sys.println("Variable 252 set. Value 1, 0 operation. Message 0 ");
 	}
 }
@@ -1594,7 +1559,7 @@ void start_NULL_TRIGGER_19_19_01_0574()
 {
 	if (NULL_TRIGGER_19_19_01_0574_triggered == 0)
 	{
-			NULL_TRIGGER_19_19_01_0574_triggered = 1;
+	NULL_TRIGGER_19_19_01_0574_triggered = 1;
 	sys.println("Lighting control cp1=574 cp2=573");
 	}
 }
@@ -1604,8 +1569,8 @@ void start_NULL_TRIGGER_19_19_01_0574()
 void start_EMAIL_20_19_01_0485()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2504");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2504");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1620,7 +1585,6 @@ void start_KEYPAD_PANEL_20_19_01_0096()
 
 void start_ENTRY_TRIGGER_18_18_01_0573()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_17_12_01_0163.activate($player1);
 }
 
@@ -1665,9 +1629,7 @@ void start_SWITCH_19_18_01_0126()
 
 void start_NULL_TRIGGER_20_18_01_0006()
 {
-	$sys.wait(0);
 	$runscript_NULL_TRIGGER_20_18_01_0036.activate($player1);
-	$sys.wait(0);
 	$a_lock_026_021.activate($player1);
 }
 
@@ -1724,8 +1686,8 @@ void start_ACCESS_PANEL_18_17_01_0577()
 void start_EMAIL_29_17_01_0462()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2519");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2519");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1741,8 +1703,7 @@ void start_ENTRY_TRIGGER_30_15_01_0150()
 {
 	if (ENTRY_TRIGGER_30_15_01_0150_triggered == 0)
 	{
-			ENTRY_TRIGGER_30_15_01_0150_triggered = 1;
-	$sys.wait(0);
+	ENTRY_TRIGGER_30_15_01_0150_triggered = 1;
 	$runscript_NULL_TRIGGER_29_14_01_0680.activate($player1);
 	}
 }
@@ -1772,8 +1733,8 @@ void start_NULL_TRIGGER_29_14_01_0680()
 void start_EMAIL_40_14_01_0318()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2507");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2507");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1834,8 +1795,8 @@ void start_BUTTON_27_11_01_0703()
 void start_EMAIL_38_11_01_0319()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2508");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2508");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1843,8 +1804,8 @@ $data_reader_trigger.activate($player1);
 void start_EMAIL_04_04_01_0321()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2509");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2509");
+	$data_reader_trigger.activate($player1);
 }
 
 
@@ -1852,8 +1813,8 @@ $data_reader_trigger.activate($player1);
 void start_ENTRY_TRIGGER_20_20_01_0502_email()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2441");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2441");
+	$data_reader_trigger.activate($player1);
 
 }
 
@@ -1862,8 +1823,8 @@ $data_reader_trigger.activate($player1);
 void start_NULL_TRIGGER_38_39_01_0628_email()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2485");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2485");
+	$data_reader_trigger.activate($player1);
 
 }
 
@@ -1872,8 +1833,8 @@ $data_reader_trigger.activate($player1);
 void start_NULL_TRIGGER_45_48_01_0645_email()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2459");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2459");
+	$data_reader_trigger.activate($player1);
 
 }
 
@@ -1882,8 +1843,27 @@ $data_reader_trigger.activate($player1);
 void start_ENTRY_TRIGGER_19_37_01_0681_email()
 {
 
-$data_reader_trigger.setKey("snd_say","shock_audio_log_2462");
-$data_reader_trigger.activate($player1);
+	$data_reader_trigger.setKey("snd_say","shock_audio_log_2462");
+	$data_reader_trigger.activate($player1);
+
+}
+
+
+
+void deathwatch_script(float objectId)
+{
+	if ((objectId==708) && (deathwatch_708>=3))
+	{
+		$runscript_DEATH_WATCH_TRIGGER_36_50_01_0276.activate($player1);
+	}
+	if ((objectId==708) && (deathwatch_708>=3))
+	{
+		$runscript_DEATH_WATCH_TRIGGER_44_49_01_0445.activate($player1);
+	}
+	if ((objectId==708) && (deathwatch_708>=3))
+	{
+		$runscript_DEATH_WATCH_TRIGGER_44_48_01_0475.activate($player1);
+	}
 
 }
 #endif //__game3_1_script__

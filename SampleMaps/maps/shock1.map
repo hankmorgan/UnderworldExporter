@@ -2,8 +2,8 @@ Version 2
 // entity 0
 {
 "classname" "worldspawn"
-"editor_drLastCameraPos" "3579.57 2775.12 269.583"
-"editor_drLastCameraAngle" "-55.5 256.2 0"
+"editor_drLastCameraPos" "2200.27 5250.78 328.871"
+"editor_drLastCameraAngle" "-26.4 201.3 0"
 // primitive 0
 {
 brushDef3
@@ -38363,7 +38363,7 @@ brushDef3
 "classname" "func_static"
 "name" "BROKEN_GUN_28_09_01_0265"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3367.058838 1200.000000 172.411774"
+"origin" "3367.058838 1200.000000 137.411774"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 34
@@ -38371,7 +38371,7 @@ brushDef3
 "classname" "func_static"
 "name" "HUMAN_CORPSE_31_09_01_0268"
 "model" "models/darkmod/graveyard/bones/bones_spine.ase"
-"origin" "3760.941162 1200.000000 193.117645"
+"origin" "3760.941162 1200.000000 158.117645"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 35
@@ -38379,7 +38379,7 @@ brushDef3
 "classname" "func_static"
 "name" "GRAFFITI_34_09_01_0512"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4124.706055 1143.529419 198.764709"
+"origin" "4124.706055 1143.529419 163.764709"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 36
@@ -38387,7 +38387,7 @@ brushDef3
 "classname" "func_static"
 "name" "BULLET_HOLE_36_09_01_0500"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4421.176270 1124.705933 198.764709"
+"origin" "4421.176270 1124.705933 163.764709"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 37
@@ -38395,7 +38395,7 @@ brushDef3
 "classname" "func_static"
 "name" "BULLET_HOLE_37_09_01_0046"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4526.117676 1109.647095 206.294128"
+"origin" "4526.117676 1109.647095 171.294128"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 38
@@ -38403,7 +38403,7 @@ brushDef3
 "classname" "func_static"
 "name" "BULLET_HOLE_37_09_01_0077"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4500.235352 1140.235352 189.352951"
+"origin" "4500.235352 1140.235352 154.352951"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 39
@@ -38701,7 +38701,7 @@ brushDef3
 "classname" "func_static"
 "name" "CART_29_11_01_0611"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3540.235352 1380.235352 120.000000"
+"origin" "3540.235352 1380.235352 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 76
@@ -38725,7 +38725,7 @@ brushDef3
 "classname" "func_static"
 "name" "EXPLOSION_RESIDUE_34_11_01_0277"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4139.764648 1376.000000 120.000000"
+"origin" "4139.764648 1376.000000 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 79
@@ -38765,7 +38765,7 @@ brushDef3
 "classname" "func_static"
 "name" "BLOOD_STAIN_38_11_01_0379"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4627.293945 1376.000000 120.000000"
+"origin" "4627.293945 1376.000000 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 84
@@ -39023,7 +39023,7 @@ brushDef3
 "classname" "func_static"
 "name" "CHAIR_35_14_01_0378"
 "model" "models/darkmod/furniture/seating/dchair2.lwo"
-"origin" "4263.529297 1747.294067 120.000000"
+"origin" "4263.529297 1747.294067 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 115
@@ -39165,7 +39165,7 @@ brushDef3
 "classname" "func_static"
 "name" "DESK_35_15_01_0069"
 "model" "models/darkmod/furniture/desk1.lwo"
-"origin" "4229.646973 1840.941162 120.000000"
+"origin" "4229.646973 1840.941162 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 131
@@ -39252,7 +39252,7 @@ brushDef3
 "classname" "func_static"
 "name" "ECOLOGY_TRIGGER_16_17_01_0437"
 "model" "models/darkmod/decorative/hourglass.ase"
-"origin" "1980.235352 2100.235352 208.705887"
+"origin" "1980.235352 2100.235352 180.705887"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 142
@@ -39260,7 +39260,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_16_17_01_0248"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1923.294067 2088.470703 295.294128"
+"origin" "1923.294067 2088.470703 267.294128"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 143
@@ -39268,7 +39268,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_16_17_01_0249"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1920.000000 2114.823486 270.823547"
+"origin" "1920.000000 2114.823486 242.823547"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 144
@@ -39276,7 +39276,7 @@ brushDef3
 "classname" "func_static"
 "name" "CAMERA_16_17_01_0415"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "2040.000000 2058.353027 353.647064"
+"origin" "2040.000000 2058.353027 325.647064"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 145
@@ -39292,7 +39292,7 @@ brushDef3
 "name" "ACCESS_PANEL_18_17_01_0577"
 "interruptable" "0"
 "model" "models/darkmod/mechanical/switches/switch_flip.ase"
-"origin" "2280.000000 2127.058838 223.764709"
+"origin" "2280.000000 2127.058838 195.764709"
 "rotate" "0 0 45"
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_ACCESS_PANEL_18_17_01_0577"
@@ -39302,14 +39302,14 @@ brushDef3
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ACCESS_PANEL_18_17_01_0577"
 "call" "start_ACCESS_PANEL_18_17_01_0577"
-"origin" "2280.000000 2127.058838 223.764709"
+"origin" "2280.000000 2127.058838 195.764709"
 }
 // entity 148
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_18_17_01_0137"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "2189.646973 2080.941162 182.352951"
+"origin" "2189.646973 2080.941162 154.352951"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 149
@@ -39563,7 +39563,7 @@ brushDef3
 "classname" "func_static"
 "name" "ENERGY_CHARGE_STATION_22_18_01_0659"
 "model" "models/darkmod/mechanical/generator1_plain.lwo"
-"origin" "2700.235352 2220.235352 180.000000"
+"origin" "2700.235352 2220.235352 180.705887"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 177
@@ -39909,7 +39909,7 @@ brushDef3
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_19_20_01_0713"
 "call" "start_ENTRY_TRIGGER_19_20_01_0713"
-"origin" "2340.235352 2460.235352 141.470596"
+"origin" "2340.235352 2460.235352 120.470596"
 }
 // entity 218
 {
@@ -40021,7 +40021,7 @@ brushDef3
 "classname" "func_static"
 "name" "ICON_34_20_01_0212"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4200.000000 2463.529297 257.647064"
+"origin" "4200.000000 2463.529297 229.647064"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 230
@@ -40144,7 +40144,7 @@ brushDef3
 "classname" "func_static"
 "name" "SCREEN_24_21_01_0661"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3000.000000 2579.764648 284.529419"
+"origin" "3000.000000 2579.764648 263.529419"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 245
@@ -40445,7 +40445,7 @@ brushDef3
 "classname" "func_static"
 "name" "CART_13_23_01_0612"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1634.823486 2812.235352 120.000000"
+"origin" "1634.823486 2812.235352 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 280
@@ -40709,7 +40709,7 @@ brushDef3
 "classname" "func_static"
 "name" "CHAIR_11_25_01_0620"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1380.235352 3060.235352 180.000000"
+"origin" "1380.235352 3060.235352 180.705887"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 311
@@ -40717,7 +40717,7 @@ brushDef3
 "classname" "func_static"
 "name" "BLOOD_STAIN_12_25_01_0472"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1477.176514 3063.529297 180.000000"
+"origin" "1477.176514 3063.529297 180.705887"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 312
@@ -40741,7 +40741,7 @@ brushDef3
 "classname" "func_static"
 "name" "SCOPE_13_25_01_0621"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1582.117676 3089.882324 225.000000"
+"origin" "1582.117676 3089.882324 225.882355"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 315
@@ -40773,7 +40773,7 @@ brushDef3
 "classname" "func_static"
 "name" "TESTTUBE_RACK_14_25_01_0615"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1751.058838 3071.058838 225.000000"
+"origin" "1751.058838 3071.058838 225.882355"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 319
@@ -40989,7 +40989,7 @@ brushDef3
 "classname" "func_static"
 "name" "SCOPE_11_26_01_0622"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "1338.352905 3206.117676 225.000000"
+"origin" "1338.352905 3206.117676 225.882355"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 346
@@ -41044,7 +41044,7 @@ brushDef3
 "classname" "func_static"
 "name" "SURGERY_MACHINE_26_26_01_0613"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3180.235352 3180.235352 60.000000"
+"origin" "3180.235352 3180.235352 60.235298"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 352
@@ -41060,7 +41060,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_31_26_01_0581"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3757.176514 3120.000000 238.823532"
+"origin" "3757.176514 3120.000000 210.823532"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 354
@@ -41169,7 +41169,7 @@ brushDef3
 "classname" "func_static"
 "name" "CAMERA_20_27_01_0413"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "2400.000000 3360.000000 241.235291"
+"origin" "2400.000000 3360.000000 220.235291"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 367
@@ -41177,7 +41177,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_23_27_01_0698"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "2842.353027 3360.000000 233.705887"
+"origin" "2842.353027 3360.000000 212.705887"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 368
@@ -41185,7 +41185,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_23_27_01_0697"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "2834.823486 3360.000000 199.823532"
+"origin" "2834.823486 3360.000000 178.823532"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 369
@@ -41193,7 +41193,7 @@ brushDef3
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_26_27_01_0252"
 "call" "start_NULL_TRIGGER_26_27_01_0252"
-"origin" "3180.235352 3300.235352 141.470596"
+"origin" "3180.235352 3300.235352 120.470596"
 }
 // entity 370
 {
@@ -41368,7 +41368,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_27_28_01_0059"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3240.000000 3416.000000 233.176468"
+"origin" "3240.000000 3416.000000 205.176468"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 389
@@ -41376,7 +41376,7 @@ brushDef3
 "classname" "func_static"
 "name" "EXPLOSION_RESIDUE_27_28_01_0008"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3240.000000 3427.294189 282.117676"
+"origin" "3240.000000 3427.294189 254.117661"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 390
@@ -41476,7 +41476,7 @@ brushDef3
 "name" "ACCESS_PANEL_47_28_01_0259"
 "interruptable" "0"
 "model" "models/darkmod/mechanical/switches/switch_flip.ase"
-"origin" "5673.411621 3427.294189 338.352966"
+"origin" "5673.411621 3427.294189 282.352966"
 "rotate" "0 0 45"
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_ACCESS_PANEL_47_28_01_0259"
@@ -41486,7 +41486,7 @@ brushDef3
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ACCESS_PANEL_47_28_01_0259"
 "call" "start_ACCESS_PANEL_47_28_01_0259"
-"origin" "5673.411621 3427.294189 338.352966"
+"origin" "5673.411621 3427.294189 282.352966"
 }
 // entity 401
 {
@@ -41885,7 +41885,7 @@ brushDef3
 "classname" "func_static"
 "name" "SCREEN_38_30_01_0433"
 "model" "models/darkmod/decorative/wall/banner1.lwo"
-"origin" "4680.000000 3656.000000 267.058838"
+"origin" "4680.000000 3656.000000 239.058823"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 450
@@ -41893,7 +41893,7 @@ brushDef3
 "classname" "func_static"
 "name" "CAMERA_38_30_01_0418"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4649.882324 3625.882324 291.529419"
+"origin" "4649.882324 3625.882324 263.529419"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 451
@@ -41902,7 +41902,7 @@ brushDef3
 "name" "LARGE_BUTTON_38_30_01_0110"
 "interruptable" "0"
 "model" "models/darkmod/mechanical/switches/switch_flip.ase"
-"origin" "4680.000000 3686.117676 206.823532"
+"origin" "4680.000000 3686.117676 178.823532"
 "rotate" "0 0 45"
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_LARGE_BUTTON_38_30_01_0110"
@@ -41912,7 +41912,7 @@ brushDef3
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_LARGE_BUTTON_38_30_01_0110"
 "call" "start_LARGE_BUTTON_38_30_01_0110"
-"origin" "4680.000000 3686.117676 206.823532"
+"origin" "4680.000000 3686.117676 178.823532"
 }
 // entity 453
 {
@@ -42273,7 +42273,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_38_32_01_0496"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4680.000000 3899.764648 208.705887"
+"origin" "4680.000000 3899.764648 180.705887"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 497
@@ -42281,7 +42281,7 @@ brushDef3
 "classname" "func_static"
 "name" "SCREEN_38_32_01_0434"
 "model" "models/darkmod/decorative/wall/banner1.lwo"
-"origin" "4680.000000 3903.529297 267.058838"
+"origin" "4680.000000 3903.529297 239.058823"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 498
@@ -42289,7 +42289,7 @@ brushDef3
 "classname" "func_static"
 "name" "CAMERA_38_32_01_0417"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4653.646973 3933.646973 291.529419"
+"origin" "4653.646973 3933.646973 263.529419"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 499
@@ -42446,7 +42446,7 @@ brushDef3
 "classname" "func_static"
 "name" "ENERGY_CHARGE_STATION_38_34_01_0679"
 "model" "models/darkmod/mechanical/generator1_plain.lwo"
-"origin" "4620.235352 4140.235352 360.000000"
+"origin" "4620.235352 4140.235352 361.411774"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 517
@@ -42573,7 +42573,7 @@ brushDef3
 "classname" "func_static"
 "name" "BURN_RESIDUE_35_35_01_0476"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4263.529297 4320.000000 272.705902"
+"origin" "4263.529297 4320.000000 244.705902"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 531
@@ -42581,7 +42581,7 @@ brushDef3
 "classname" "func_static"
 "name" "ICON_35_35_01_0435"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4200.000000 4320.000000 334.823547"
+"origin" "4200.000000 4320.000000 306.823547"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 532
@@ -42708,7 +42708,7 @@ brushDef3
 "classname" "func_static"
 "name" "WORDS_30_36_01_0567"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3663.529297 4440.000000 314.117645"
+"origin" "3663.529297 4440.000000 286.117645"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 546
@@ -42716,7 +42716,7 @@ brushDef3
 "classname" "func_static"
 "name" "BURN_RESIDUE_30_36_01_0086"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "3600.000000 4376.000000 291.529419"
+"origin" "3600.000000 4376.000000 263.529419"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 547
@@ -43152,7 +43152,7 @@ brushDef3
 "classname" "func_static"
 "name" "CHAIR_34_39_01_0193"
 "model" "models/darkmod/furniture/seating/dchair2.lwo"
-"origin" "4136.000000 4743.529297 360.000000"
+"origin" "4136.000000 4743.529297 361.411774"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 597
@@ -43160,7 +43160,7 @@ brushDef3
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_35_39_01_0317"
 "inv_name" "Readable_2510"
-"origin" "4260.235352 4740.235352 428.647064"
+"origin" "4260.235352 4740.235352 421.647064"
 "rotation" "1 0 0 0 1 0 0 0 1"
 "trigger_on_open" "runscript_EMAIL_35_39_01_0317"
 "xdata_contents" "readables/shock/log_2510"
@@ -43170,14 +43170,14 @@ brushDef3
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_EMAIL_35_39_01_0317"
 "call" "start_EMAIL_35_39_01_0317"
-"origin" "4260.235352 4740.235352 428.647064"
+"origin" "4260.235352 4740.235352 421.647064"
 }
 // entity 599
 {
 "classname" "func_static"
 "name" "TESTTUBE_RACK_36_39_01_0616"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4353.411621 4728.470703 420.000000"
+"origin" "4353.411621 4728.470703 421.647064"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 600
@@ -43185,7 +43185,7 @@ brushDef3
 "classname" "func_static"
 "name" "MICROSCOPE_36_39_01_0625"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4406.117676 4709.646973 420.000000"
+"origin" "4406.117676 4709.646973 421.647064"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 601
@@ -43275,7 +43275,7 @@ brushDef3
 "classname" "func_static"
 "name" "SCOPE_41_39_01_0623"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4979.764648 4698.353027 405.000000"
+"origin" "4979.764648 4698.353027 406.588226"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 612
@@ -43283,7 +43283,7 @@ brushDef3
 "classname" "func_static"
 "name" "TESTTUBE_RACK_41_39_01_0614"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4930.823730 4724.706055 405.000000"
+"origin" "4930.823730 4724.706055 406.588226"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 613
@@ -43607,7 +43607,7 @@ brushDef3
 "classname" "func_static"
 "name" "CATWALK_26_41_01_0260"
 "model" "models/darkmod/uw1/uw1_bridge.ase"
-"origin" "3179.764648 5024.941406 234.375000"
+"origin" "3179.764648 5024.941406 235.294113"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 652
@@ -43615,7 +43615,7 @@ brushDef3
 "classname" "func_static"
 "name" "CATWALK_27_41_01_0261"
 "model" "models/darkmod/uw1/uw1_bridge.ase"
-"origin" "3296.000000 5024.941406 234.375000"
+"origin" "3296.000000 5024.941406 235.294113"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
 // entity 653
@@ -44088,34 +44088,43 @@ brushDef3
 }
 // entity 710
 {
-"classname" "func_static"
+"classname" "func_damagable"
 "name" "DEATH_WATCH_TRIGGER_21_45_01_0562"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/decorative/hourglass.ase"
 "origin" "2580.235352 5460.235352 346.352936"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_DEATH_WATCH_TRIGGER_21_45_01_0562"
 }
 // entity 711
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_DEATH_WATCH_TRIGGER_21_45_01_0562"
+"call" "start_DEATH_WATCH_TRIGGER_21_45_01_0562"
+"origin" "2580.235352 5460.235352 346.352936"
+}
+// entity 712
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_21_45_01_0563"
 "call" "start_NULL_TRIGGER_21_45_01_0563"
 "origin" "2580.235352 5460.235352 346.352936"
 }
-// entity 712
+// entity 713
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_21_45_01_0587"
 "call" "start_NULL_TRIGGER_21_45_01_0587"
 "origin" "2580.235352 5460.235352 346.352936"
 }
-// entity 713
+// entity 714
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_21_45_01_0588"
 "call" "start_NULL_TRIGGER_21_45_01_0588"
 "origin" "2580.235352 5460.235352 346.352936"
 }
-// entity 714
+// entity 715
 {
 "classname" "func_static"
 "name" "CAMERA_22_45_01_0559"
@@ -44123,7 +44132,7 @@ brushDef3
 "origin" "2654.588135 5520.000000 90.352943"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 715
+// entity 716
 {
 "classname" "func_static"
 "name" "BATTERY_PACK_22_45_01_0644"
@@ -44131,7 +44140,7 @@ brushDef3
 "origin" "2699.764648 5440.941406 11.294118"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 716
+// entity 717
 {
 "classname" "func_static"
 "name" "BATTERY_PACK_22_45_01_0560"
@@ -44139,7 +44148,7 @@ brushDef3
 "origin" "2700.235352 5460.235352 11.294118"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 717
+// entity 718
 {
 "classname" "atdm:mover_button"
 "name" "BUTTON_23_45_01_0592"
@@ -44150,14 +44159,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_BUTTON_23_45_01_0592"
 }
-// entity 718
+// entity 719
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_BUTTON_23_45_01_0592"
 "call" "start_BUTTON_23_45_01_0592"
 "origin" "2832.941162 5400.000000 73.411766"
 }
-// entity 719
+// entity 720
 {
 "classname" "atdm:door_96x48_3hinge"
 "name" "FORCE_DOOR_023_045"
@@ -44166,7 +44175,7 @@ brushDef3
 "rotate" "0 90 0"
 "rotation" "0 -1 0 1 0 0 0 0 1"
 }
-// entity 720
+// entity 721
 {
 "classname" "atdm:target_changelockstate"
 "name" "a_lock_023_045"
@@ -44174,7 +44183,7 @@ brushDef3
 "target" "FORCE_DOOR_023_045"
 "toggle" "1"
 }
-// entity 721
+// entity 722
 {
 "classname" "atdm:mover_button"
 "name" "BUTTON_24_45_01_0558"
@@ -44185,14 +44194,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_BUTTON_24_45_01_0558"
 }
-// entity 722
+// entity 723
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_BUTTON_24_45_01_0558"
 "call" "start_BUTTON_24_45_01_0558"
 "origin" "2924.705811 5520.000000 73.411766"
 }
-// entity 723
+// entity 724
 {
 "classname" "trigger_multiple"
 "name" "ENTRY_TRIGGER_26_45_01_0585"
@@ -44212,14 +44221,14 @@ brushDef3
 }
 }
 }
-// entity 724
+// entity 725
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_26_45_01_0585"
 "call" "start_ENTRY_TRIGGER_26_45_01_0585"
 "origin" "3180.235352 5460.235352 60.235298"
 }
-// entity 725
+// entity 726
 {
 "classname" "atdm:mover_button"
 "name" "BUTTON_26_45_01_0593"
@@ -44230,14 +44239,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_BUTTON_26_45_01_0593"
 }
-// entity 726
+// entity 727
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_BUTTON_26_45_01_0593"
 "call" "start_BUTTON_26_45_01_0593"
 "origin" "3194.823486 5520.000000 73.411766"
 }
-// entity 727
+// entity 728
 {
 "classname" "atdm:mover_button"
 "name" "BUTTON_27_45_01_0586"
@@ -44248,14 +44257,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_BUTTON_27_45_01_0586"
 }
-// entity 728
+// entity 729
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_BUTTON_27_45_01_0586"
 "call" "start_BUTTON_27_45_01_0586"
 "origin" "3314.823486 5400.000000 73.411766"
 }
-// entity 729
+// entity 730
 {
 "classname" "atdm:mover_button"
 "name" "BUTTON_27_45_01_0555"
@@ -44266,14 +44275,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_BUTTON_27_45_01_0555"
 }
-// entity 730
+// entity 731
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_BUTTON_27_45_01_0555"
 "call" "start_BUTTON_27_45_01_0555"
 "origin" "3282.353027 5400.000000 73.411766"
 }
-// entity 731
+// entity 732
 {
 "classname" "atdm:door_96x48_3hinge"
 "name" "FORCE_DOOR_027_045"
@@ -44282,7 +44291,7 @@ brushDef3
 "rotate" "0 90 0"
 "rotation" "0 -1 0 1 0 0 0 0 1"
 }
-// entity 732
+// entity 733
 {
 "classname" "atdm:target_changelockstate"
 "name" "a_lock_027_045"
@@ -44290,7 +44299,7 @@ brushDef3
 "target" "FORCE_DOOR_027_045"
 "toggle" "1"
 }
-// entity 733
+// entity 734
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_30_45_01_0221"
@@ -44298,14 +44307,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 734
+// entity 735
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_31_45_01_0344"
 "call" "start_NULL_TRIGGER_31_45_01_0344"
 "origin" "3780.235352 5460.235352 301.176483"
 }
-// entity 735
+// entity 736
 {
 "classname" "trigger_multiple"
 "name" "ENTRY_TRIGGER_32_45_01_0184"
@@ -44325,14 +44334,14 @@ brushDef3
 }
 }
 }
-// entity 736
+// entity 737
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_32_45_01_0184"
 "call" "start_ENTRY_TRIGGER_32_45_01_0184"
 "origin" "3900.235352 5460.235352 301.176483"
 }
-// entity 737
+// entity 738
 {
 "classname" "func_static"
 "name" "CAMERA_35_45_01_0430"
@@ -44340,7 +44349,7 @@ brushDef3
 "origin" "4316.235352 5403.293945 333.176483"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 738
+// entity 739
 {
 "classname" "atdm:door_96x48_3hinge"
 "name" "ENERGY_GRATING_038_045"
@@ -44348,7 +44357,7 @@ brushDef3
 "rotate" "0 90 0"
 "rotation" "-1 0 0 0 -1 0 0 0 1"
 }
-// entity 739
+// entity 740
 {
 "classname" "func_static"
 "name" "BERSERK_COMBAT_BOOSTER_16_46_01_0334"
@@ -44356,7 +44365,7 @@ brushDef3
 "origin" "1949.647095 5520.000000 256.000000"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 740
+// entity 741
 {
 "classname" "func_static"
 "name" "BROKEN_GUN_16_46_01_0333"
@@ -44364,7 +44373,7 @@ brushDef3
 "origin" "1945.882324 5564.706055 257.882355"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 741
+// entity 742
 {
 "classname" "func_static"
 "name" "SKELETON_16_46_01_0332"
@@ -44372,7 +44381,7 @@ brushDef3
 "origin" "1980.235352 5580.235352 276.705902"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 742
+// entity 743
 {
 "classname" "func_static"
 "name" "GRATING_17_46_01_0155"
@@ -44380,7 +44389,7 @@ brushDef3
 "origin" "2040.000000 5580.235352 301.176483"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 743
+// entity 744
 {
 "classname" "func_static"
 "name" "SCREEN_18_46_01_0530"
@@ -44388,7 +44397,7 @@ brushDef3
 "origin" "2219.764648 5520.000000 299.294128"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 744
+// entity 745
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "EMAIL_18_46_01_0505"
@@ -44398,14 +44407,14 @@ brushDef3
 "trigger_on_open" "runscript_EMAIL_18_46_01_0505"
 "xdata_contents" "readables/shock/log_2513"
 }
-// entity 745
+// entity 746
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_EMAIL_18_46_01_0505"
 "call" "start_EMAIL_18_46_01_0505"
 "origin" "2178.353027 5572.235352 250.352951"
 }
-// entity 746
+// entity 747
 {
 "classname" "func_static"
 "name" "HUMAN_CORPSE_18_46_01_0504"
@@ -44413,7 +44422,7 @@ brushDef3
 "origin" "2276.235352 5579.764648 276.705902"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 747
+// entity 748
 {
 "classname" "func_static"
 "name" "DESTROYED_ASSASSIN_CYBORG_18_46_01_0503"
@@ -44421,7 +44430,7 @@ brushDef3
 "origin" "2220.235352 5580.235352 280.470612"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 748
+// entity 749
 {
 "classname" "func_static"
 "name" "CAMERA_18_46_01_0422"
@@ -44429,28 +44438,28 @@ brushDef3
 "origin" "2280.000000 5520.000000 355.764709"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 749
+// entity 750
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_21_46_01_0597"
 "call" "start_NULL_TRIGGER_21_46_01_0597"
 "origin" "2580.235352 5580.235352 286.117645"
 }
-// entity 750
+// entity 751
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_21_46_01_0591"
 "call" "start_NULL_TRIGGER_21_46_01_0591"
 "origin" "2580.235352 5580.235352 286.117645"
 }
-// entity 751
+// entity 752
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_21_46_01_0590"
 "call" "start_NULL_TRIGGER_21_46_01_0590"
 "origin" "2580.235352 5580.235352 286.117645"
 }
-// entity 752
+// entity 753
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_22_46_01_0360"
@@ -44458,7 +44467,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 753
+// entity 754
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_24_46_01_0174"
@@ -44466,7 +44475,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 754
+// entity 755
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_26_46_01_0060"
@@ -44474,7 +44483,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 755
+// entity 756
 {
 "classname" "func_static"
 "name" "CAMERA_30_46_01_0426"
@@ -44482,7 +44491,7 @@ brushDef3
 "origin" "3637.176514 5583.529297 344.470581"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 756
+// entity 757
 {
 "classname" "func_static"
 "name" "WORDS_36_46_01_0569"
@@ -44490,7 +44499,7 @@ brushDef3
 "origin" "4380.235352 5640.000000 271.058838"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 757
+// entity 758
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_40_46_01_0400"
@@ -44498,15 +44507,15 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 758
+// entity 759
 {
 "classname" "func_static"
 "name" "CONTROL_PEDESTAL_41_46_01_0167"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4991.058594 5594.823730 15.000000"
+"origin" "4991.058594 5594.823730 15.058825"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 759
+// entity 760
 {
 "classname" "func_static"
 "name" "ML-41_PISTOL_43_46_01_0565"
@@ -44514,7 +44523,7 @@ brushDef3
 "origin" "5220.235352 5580.235352 30.117649"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 760
+// entity 761
 {
 "classname" "func_static"
 "name" "GRATING_17_47_01_0322"
@@ -44522,7 +44531,7 @@ brushDef3
 "origin" "2040.000000 5700.235352 301.176483"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 761
+// entity 762
 {
 "classname" "func_static"
 "name" "SCREEN_18_47_01_0531"
@@ -44530,7 +44539,7 @@ brushDef3
 "origin" "2220.235352 5760.000000 299.294128"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 762
+// entity 763
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_20_47_01_0090"
@@ -44538,7 +44547,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 763
+// entity 764
 {
 "classname" "trigger_multiple"
 "name" "ENTRY_TRIGGER_27_47_01_0598"
@@ -44558,14 +44567,14 @@ brushDef3
 }
 }
 }
-// entity 764
+// entity 765
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_27_47_01_0598"
 "call" "start_ENTRY_TRIGGER_27_47_01_0598"
 "origin" "3300.235352 5700.235352 301.176483"
 }
-// entity 765
+// entity 766
 {
 "classname" "func_forcefield"
 "name" "repulsor_REPULSOR_35_47_01_0579"
@@ -44575,36 +44584,54 @@ brushDef3
 "start_on" "1"
 "target0" "repulsor_REPULSOR_35_47_01_0579_target"
 }
-// entity 766
+// entity 767
 {
 "classname" "target_null"
 "name" "repulsor_REPULSOR_35_47_01_0579_target"
 "origin" "4260.235352 5700.235352 15"
 }
-// entity 767
+// entity 768
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_REPULSOR_35_47_01_0579"
 "call" "start_REPULSOR_35_47_01_0579"
 "origin" "4260.235352 5700.235352 60.235298"
 }
-// entity 768
-{
-"classname" "func_static"
-"name" "COMPUTER_NODE_41_47_01_0166"
-"model" "models/darkmod/mechanical/alembic.lwo"
-"origin" "4980.235352 5700.235352 15.000000"
-"rotation" "1 0 0 0 1 0 0 0 1"
-}
 // entity 769
 {
-"classname" "func_static"
-"name" "COMPUTER_NODE_42_47_01_0145"
+"classname" "func_damagable"
+"name" "COMPUTER_NODE_41_47_01_0166"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/mechanical/alembic.lwo"
-"origin" "5100.235352 5700.235352 15.000000"
+"origin" "4980.235352 5700.235352 15.058825"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_COMPUTER_NODE_41_47_01_0166"
 }
 // entity 770
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_COMPUTER_NODE_41_47_01_0166"
+"call" "start_COMPUTER_NODE_41_47_01_0166"
+"origin" "4980.235352 5700.235352 15.058825"
+}
+// entity 771
+{
+"classname" "func_damagable"
+"name" "COMPUTER_NODE_42_47_01_0145"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
+"model" "models/darkmod/mechanical/alembic.lwo"
+"origin" "5100.235352 5700.235352 15.058825"
+"rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_COMPUTER_NODE_42_47_01_0145"
+}
+// entity 772
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_COMPUTER_NODE_42_47_01_0145"
+"call" "start_COMPUTER_NODE_42_47_01_0145"
+"origin" "5100.235352 5700.235352 15.058825"
+}
+// entity 773
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_20_48_01_0363"
@@ -44612,7 +44639,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 771
+// entity 774
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_22_48_01_0362"
@@ -44620,7 +44647,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 772
+// entity 775
 {
 "classname" "func_static"
 "name" "CAMERA_30_48_01_0427"
@@ -44628,38 +44655,65 @@ brushDef3
 "origin" "3640.941162 5816.000000 340.705902"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 773
+// entity 776
 {
-"classname" "func_static"
+"classname" "func_damagable"
 "name" "COMPUTER_NODE_41_48_01_0144"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/mechanical/alembic.lwo"
-"origin" "4980.235352 5820.235352 15.000000"
+"origin" "4980.235352 5820.235352 15.058825"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_COMPUTER_NODE_41_48_01_0144"
 }
-// entity 774
+// entity 777
 {
-"classname" "func_static"
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_COMPUTER_NODE_41_48_01_0144"
+"call" "start_COMPUTER_NODE_41_48_01_0144"
+"origin" "4980.235352 5820.235352 15.058825"
+}
+// entity 778
+{
+"classname" "func_damagable"
 "name" "COMPUTER_NODE_42_48_01_0115"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/mechanical/alembic.lwo"
-"origin" "5100.235352 5820.235352 15.000000"
+"origin" "5100.235352 5820.235352 15.058825"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_COMPUTER_NODE_42_48_01_0115"
 }
-// entity 775
+// entity 779
 {
-"classname" "func_static"
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_COMPUTER_NODE_42_48_01_0115"
+"call" "start_COMPUTER_NODE_42_48_01_0115"
+"origin" "5100.235352 5820.235352 15.058825"
+}
+// entity 780
+{
+"classname" "func_damagable"
 "name" "DEATH_WATCH_TRIGGER_44_48_01_0475"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/decorative/hourglass.ase"
 "origin" "5340.235352 5820.235352 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_DEATH_WATCH_TRIGGER_44_48_01_0475"
 }
-// entity 776
+// entity 781
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_DEATH_WATCH_TRIGGER_44_48_01_0475"
+"call" "start_DEATH_WATCH_TRIGGER_44_48_01_0475"
+"origin" "5340.235352 5820.235352 120.470596"
+}
+// entity 782
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_45_48_01_0645"
 "call" "start_NULL_TRIGGER_45_48_01_0645"
 "origin" "5460.235352 5820.235352 120.470596"
 }
-// entity 777
+// entity 783
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_ASSASSIN_27_49_01_0401"
@@ -44667,7 +44721,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 778
+// entity 784
 {
 "classname" "func_static"
 "name" "SKULL_29_49_01_0403"
@@ -44675,7 +44729,7 @@ brushDef3
 "origin" "3543.529297 5977.411621 71.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 779
+// entity 785
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_29_49_01_0404"
@@ -44683,7 +44737,7 @@ brushDef3
 "origin" "3569.882324 5966.117676 75.294121"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 780
+// entity 786
 {
 "classname" "func_static"
 "name" "LUMP_OF_CLOTHES_30_49_01_0402"
@@ -44691,7 +44745,7 @@ brushDef3
 "origin" "3660.235352 5940.235352 24.470589"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 781
+// entity 787
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_WARRIOR_35_49_01_0306"
@@ -44699,7 +44753,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 782
+// entity 788
 {
 "classname" "trigger_multiple"
 "name" "ENTRY_TRIGGER_37_49_01_0165"
@@ -44719,29 +44773,29 @@ brushDef3
 }
 }
 }
-// entity 783
+// entity 789
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_37_49_01_0165"
 "call" "start_ENTRY_TRIGGER_37_49_01_0165"
 "origin" "4500.235352 5940.235352 60.235298"
 }
-// entity 784
+// entity 790
 {
 "classname" "func_static"
 "name" "CAMERA_39_49_01_0428"
 "model" "models/darkmod/wearables/armour/shield_oldfashioned.lwo"
-"origin" "4800.000000 6000.000000 125.588234"
+"origin" "4800.000000 6000.000000 118.588234"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 785
+// entity 791
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_41_49_01_0583"
 "call" "start_NULL_TRIGGER_41_49_01_0583"
 "origin" "5017.411621 5943.529297 318.117645"
 }
-// entity 786
+// entity 792
 {
 "classname" "func_static"
 "name" "SCREEN_43_49_01_0238"
@@ -44749,36 +44803,45 @@ brushDef3
 "origin" "5280.000000 5936.000000 86.588234"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 787
+// entity 793
 {
-"classname" "func_static"
+"classname" "func_damagable"
 "name" "DEATH_WATCH_TRIGGER_44_49_01_0445"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/decorative/hourglass.ase"
 "origin" "5340.235352 5940.235352 120.470596"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_DEATH_WATCH_TRIGGER_44_49_01_0445"
 }
-// entity 788
+// entity 794
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_DEATH_WATCH_TRIGGER_44_49_01_0445"
+"call" "start_DEATH_WATCH_TRIGGER_44_49_01_0445"
+"origin" "5340.235352 5940.235352 120.470596"
+}
+// entity 795
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_45_49_01_0506"
 "call" "start_NULL_TRIGGER_45_49_01_0506"
 "origin" "5460.235352 5940.235352 120.470596"
 }
-// entity 789
+// entity 796
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_46_49_01_0507"
 "call" "start_NULL_TRIGGER_46_49_01_0507"
 "origin" "5580.235352 5940.235352 120.470596"
 }
-// entity 790
+// entity 797
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_46_49_01_0375"
 "call" "start_NULL_TRIGGER_46_49_01_0375"
 "origin" "5580.235352 5940.235352 120.470596"
 }
-// entity 791
+// entity 798
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_23_50_01_0361"
@@ -44786,7 +44849,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 792
+// entity 799
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_25_50_01_0359"
@@ -44794,15 +44857,24 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 793
+// entity 800
 {
-"classname" "func_static"
+"classname" "func_damagable"
 "name" "DEATH_WATCH_TRIGGER_36_50_01_0276"
+"broken" "models/darkmod/junk/bot_parts/lanternbot_boiler.ase"
 "model" "models/darkmod/decorative/hourglass.ase"
 "origin" "4380.235352 6060.235352 60.235298"
 "rotation" "1 0 0 0 1 0 0 0 1"
+"target" "runscript_DEATH_WATCH_TRIGGER_36_50_01_0276"
 }
-// entity 794
+// entity 801
+{
+"classname" "atdm:target_callscriptfunction"
+"name" "runscript_DEATH_WATCH_TRIGGER_36_50_01_0276"
+"call" "start_DEATH_WATCH_TRIGGER_36_50_01_0276"
+"origin" "4380.235352 6060.235352 60.235298"
+}
+// entity 802
 {
 "classname" "atdm:mover_button"
 "name" "SWITCH_20_51_01_0355"
@@ -44813,21 +44885,21 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_SWITCH_20_51_01_0355"
 }
-// entity 795
+// entity 803
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_SWITCH_20_51_01_0355"
 "call" "start_SWITCH_20_51_01_0355"
 "origin" "2460.235352 6180.235352 67.764709"
 }
-// entity 796
+// entity 804
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_20_51_01_0357"
 "call" "start_NULL_TRIGGER_20_51_01_0357"
 "origin" "2460.235352 6180.235352 120.470596"
 }
-// entity 797
+// entity 805
 {
 "classname" "atdm:door_96x48_3hinge"
 "name" "STORAGE_ROOM_DOOR_031_051"
@@ -44835,7 +44907,7 @@ brushDef3
 "rotate" "0 90 0"
 "rotation" "-1 0 0 0 -1 0 0 0 1"
 }
-// entity 798
+// entity 806
 {
 "classname" "func_static"
 "name" "CRATE_20_52_01_0545"
@@ -44843,7 +44915,7 @@ brushDef3
 "origin" "2440.941162 6307.293945 158.117645"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 799
+// entity 807
 {
 "classname" "func_static"
 "name" "MEDIPATCH__HEALING_AGENT_22_52_01_0343"
@@ -44851,7 +44923,7 @@ brushDef3
 "origin" "2700.235352 6300.235352 135.529419"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 800
+// entity 808
 {
 "classname" "func_static"
 "name" "SCREEN_28_52_01_0543"
@@ -44859,7 +44931,7 @@ brushDef3
 "origin" "3419.764648 6240.000000 299.294128"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 801
+// entity 809
 {
 "classname" "func_static"
 "name" "SCREEN_29_52_01_0544"
@@ -44867,7 +44939,7 @@ brushDef3
 "origin" "3539.764648 6240.000000 301.176483"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 802
+// entity 810
 {
 "classname" "atdm:ai_undead_revenant"
 "name" "CYBORG_DRONE_30_52_01_0358"
@@ -44875,7 +44947,7 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "team" "5"
 }
-// entity 803
+// entity 811
 {
 "classname" "func_static"
 "name" "SCREEN_30_52_01_0542"
@@ -44883,7 +44955,7 @@ brushDef3
 "origin" "3659.764648 6240.000000 301.176483"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 804
+// entity 812
 {
 "classname" "atdm:mover_button"
 "name" "BUTTON_30_52_01_0541"
@@ -44894,14 +44966,14 @@ brushDef3
 "rotation" "1 0 0 0 1 0 0 0 1"
 "target" "runscript_BUTTON_30_52_01_0541"
 }
-// entity 805
+// entity 813
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_BUTTON_30_52_01_0541"
 "call" "start_BUTTON_30_52_01_0541"
 "origin" "3720.000000 6311.058594 212.705887"
 }
-// entity 806
+// entity 814
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_31_52_01_0637"
@@ -44909,7 +44981,7 @@ brushDef3
 "origin" "3791.058838 6341.176270 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 807
+// entity 815
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_32_52_01_0634"
@@ -44917,7 +44989,7 @@ brushDef3
 "origin" "3900.235352 6300.235352 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 808
+// entity 816
 {
 "classname" "func_static"
 "name" "CRATE_20_53_01_0547"
@@ -44925,7 +44997,7 @@ brushDef3
 "origin" "2467.294189 6385.882324 139.294128"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 809
+// entity 817
 {
 "classname" "func_static"
 "name" "CRATE_21_53_01_0546"
@@ -44933,7 +45005,7 @@ brushDef3
 "origin" "2580.235352 6420.235352 158.117645"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 810
+// entity 818
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_31_53_01_0631"
@@ -44941,7 +45013,7 @@ brushDef3
 "origin" "3780.235352 6420.235352 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 811
+// entity 819
 {
 "classname" "func_static"
 "name" "TOXIC_WASTE_BARREL_32_53_01_0635"
@@ -44949,7 +45021,7 @@ brushDef3
 "origin" "3914.823486 6374.588379 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 812
+// entity 820
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_32_53_01_0632"
@@ -44957,7 +45029,7 @@ brushDef3
 "origin" "3903.529297 6453.646973 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 813
+// entity 821
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_33_53_01_0633"
@@ -44965,7 +45037,7 @@ brushDef3
 "origin" "3985.882324 6412.235352 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 814
+// entity 822
 {
 "classname" "func_static"
 "name" "TURBO_MOTION_BOOSTER_SYSTEM_31_54_01_0636"
@@ -44973,7 +45045,7 @@ brushDef3
 "origin" "3806.117676 6509.646973 11.294118"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 815
+// entity 823
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_31_54_01_0629"
@@ -44981,7 +45053,7 @@ brushDef3
 "origin" "3802.353027 6543.529297 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 816
+// entity 824
 {
 "classname" "func_static"
 "name" "CHEMICAL_TANK_32_54_01_0630"
@@ -44989,7 +45061,7 @@ brushDef3
 "origin" "3884.705811 6543.529297 39.529411"
 "rotation" "1 0 0 0 1 0 0 0 1"
 }
-// entity 817
+// entity 825
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "ENTRY_TRIGGER_20_20_01_0502_email"
@@ -45000,14 +45072,14 @@ brushDef3
 "trigger_on_open" "runscript_ENTRY_TRIGGER_20_20_01_0502_email"
 "xdata_contents" "readables/shock/log_2441"
 }
-// entity 818
+// entity 826
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_20_20_01_0502_email"
 "call" "start_ENTRY_TRIGGER_20_20_01_0502_email"
 "origin" "2460.235352 2460.235352 120.470596"
 }
-// entity 819
+// entity 827
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "NULL_TRIGGER_38_39_01_0628_email"
@@ -45018,14 +45090,14 @@ brushDef3
 "trigger_on_open" "runscript_NULL_TRIGGER_38_39_01_0628_email"
 "xdata_contents" "readables/shock/log_2485"
 }
-// entity 820
+// entity 828
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_38_39_01_0628_email"
 "call" "start_NULL_TRIGGER_38_39_01_0628_email"
 "origin" "4620.235352 4740.235352 180.705887"
 }
-// entity 821
+// entity 829
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "NULL_TRIGGER_45_48_01_0645_email"
@@ -45036,14 +45108,14 @@ brushDef3
 "trigger_on_open" "runscript_NULL_TRIGGER_45_48_01_0645_email"
 "xdata_contents" "readables/shock/log_2459"
 }
-// entity 822
+// entity 830
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_NULL_TRIGGER_45_48_01_0645_email"
 "call" "start_NULL_TRIGGER_45_48_01_0645_email"
 "origin" "5460.235352 5820.235352 120.470596"
 }
-// entity 823
+// entity 831
 {
 "classname" "atdm:readable_mobile_scroll01"
 "name" "ENTRY_TRIGGER_19_37_01_0681_email"
@@ -45054,14 +45126,14 @@ brushDef3
 "trigger_on_open" "runscript_ENTRY_TRIGGER_19_37_01_0681_email"
 "xdata_contents" "readables/shock/log_2462"
 }
-// entity 824
+// entity 832
 {
 "classname" "atdm:target_callscriptfunction"
 "name" "runscript_ENTRY_TRIGGER_19_37_01_0681_email"
 "call" "start_ENTRY_TRIGGER_19_37_01_0681_email"
 "origin" "2340.235352 4500.235352 301.176483"
 }
-// entity 825
+// entity 833
 {
 "classname" "func_mover"
 "name" "floor_018_018"
@@ -45079,7 +45151,7 @@ brushDef3
 }
 }
 }
-// entity 826
+// entity 834
 {
 "classname" "func_mover"
 "name" "ceiling_018_018"
@@ -45097,7 +45169,7 @@ brushDef3
 }
 }
 }
-// entity 827
+// entity 835
 {
 "classname" "func_mover"
 "name" "floor_032_025"
@@ -45115,7 +45187,7 @@ brushDef3
 }
 }
 }
-// entity 828
+// entity 836
 {
 "classname" "func_mover"
 "name" "ceiling_032_025"
@@ -45133,7 +45205,7 @@ brushDef3
 }
 }
 }
-// entity 829
+// entity 837
 {
 "classname" "func_mover"
 "name" "floor_033_025"
@@ -45151,7 +45223,7 @@ brushDef3
 }
 }
 }
-// entity 830
+// entity 838
 {
 "classname" "func_mover"
 "name" "ceiling_033_025"
@@ -45169,7 +45241,7 @@ brushDef3
 }
 }
 }
-// entity 831
+// entity 839
 {
 "classname" "func_mover"
 "name" "floor_034_025"
@@ -45187,7 +45259,7 @@ brushDef3
 }
 }
 }
-// entity 832
+// entity 840
 {
 "classname" "func_mover"
 "name" "ceiling_034_025"
@@ -45205,7 +45277,7 @@ brushDef3
 }
 }
 }
-// entity 833
+// entity 841
 {
 "classname" "func_mover"
 "name" "floor_030_028"
@@ -45223,7 +45295,7 @@ brushDef3
 }
 }
 }
-// entity 834
+// entity 842
 {
 "classname" "func_mover"
 "name" "ceiling_030_028"
@@ -45241,7 +45313,7 @@ brushDef3
 }
 }
 }
-// entity 835
+// entity 843
 {
 "classname" "func_mover"
 "name" "floor_039_031"
@@ -45259,7 +45331,7 @@ brushDef3
 }
 }
 }
-// entity 836
+// entity 844
 {
 "classname" "func_mover"
 "name" "ceiling_039_031"
@@ -45277,7 +45349,7 @@ brushDef3
 }
 }
 }
-// entity 837
+// entity 845
 {
 "classname" "func_mover"
 "name" "floor_019_037"
@@ -45295,7 +45367,7 @@ brushDef3
 }
 }
 }
-// entity 838
+// entity 846
 {
 "classname" "func_mover"
 "name" "ceiling_019_037"
@@ -45313,7 +45385,7 @@ brushDef3
 }
 }
 }
-// entity 839
+// entity 847
 {
 "classname" "func_mover"
 "name" "floor_033_040"
@@ -45331,7 +45403,7 @@ brushDef3
 }
 }
 }
-// entity 840
+// entity 848
 {
 "classname" "func_mover"
 "name" "ceiling_033_040"
@@ -45349,7 +45421,7 @@ brushDef3
 }
 }
 }
-// entity 841
+// entity 849
 {
 "classname" "func_mover"
 "name" "floor_029_047"
@@ -45367,7 +45439,7 @@ brushDef3
 }
 }
 }
-// entity 842
+// entity 850
 {
 "classname" "func_mover"
 "name" "ceiling_029_047"
@@ -45385,7 +45457,7 @@ brushDef3
 }
 }
 }
-// entity 843
+// entity 851
 {
 "classname" "func_mover"
 "name" "floor_025_051"
@@ -45403,7 +45475,7 @@ brushDef3
 }
 }
 }
-// entity 844
+// entity 852
 {
 "classname" "func_mover"
 "name" "ceiling_025_051"
@@ -45421,7 +45493,7 @@ brushDef3
 }
 }
 }
-// entity 845
+// entity 853
 {
 "classname" "atdm:ambient_world"
 "name" "ambient_world"
@@ -45434,14 +45506,14 @@ brushDef3
 "origin" "3840 3840 120"
 "parallel" "0"
 }
-// entity 846
+// entity 854
 {
 "classname" "atdm:voice"
 "name" "data_reader_voice"
 "origin" "3840 3840 120"
 "s_shader" "silence"
 }
-// entity 847
+// entity 855
 {
 "classname" "atdm:trigger_voice"
 "name" "data_reader_trigger"
@@ -45450,10 +45522,16 @@ brushDef3
 "snd_say" "silence"
 "target0" "data_reader_voice"
 }
-// entity 848
+// entity 856
 {
 "classname" "info_player_start"
 "name" "info_player_start_1"
-"origin" "3537.25 2704.25 170.75"
 "angle" "90"
+"origin" "2086 5242.5 265.75"
+}
+// entity 857
+{
+"classname" "atdm:weapon_shortsword"
+"name" "atdm_weapon_shortsword_1"
+"origin" "5207.5 5959.25 35.25"
 }
