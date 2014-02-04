@@ -2,27 +2,33 @@
 #define __game3_1_script__
 	float lift_025_051_ceiling_state = 8;
 	float ENTRY_TRIGGER_37_49_01_0165_triggered = 0;
+	float global_var_33 = 0;
 	float DEATH_WATCH_TRIGGER_44_48_01_0475_triggered = 0;
 	float lift_029_047_ceiling_state = 16;
 	float NULL_TRIGGER_21_46_01_0597_state = 1;
 	float DEATH_WATCH_TRIGGER_21_45_01_0562_triggered = 0;
+	float global_var_28 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_26_45_01_0585_triggered = 0;
 	float NULL_TRIGGER_31_45_01_0344_triggered = 0;
 	float ENTRY_TRIGGER_32_45_01_0184_triggered = 0;
 	float NULL_TRIGGER_21_44_01_0557_state = 1;
 	float NULL_TRIGGER_25_44_01_0595_state = 1;
 	float NULL_TRIGGER_18_43_01_0237_state = 1;
+	float global_var_100 = 0; //This global was created in addGlobal!
 	float lift_033_040_floor_state = 8;
 	float NULL_TRIGGER_38_39_01_0628_triggered = 0;
 	float LEVER_49_39_01_0365_state = 1;
 	float ENTRY_TRIGGER_15_37_01_0727_triggered = 0;
 	float ENTRY_TRIGGER_19_37_01_0681_triggered = 0;
+	float global_var_17 = 0;
 	float ENTRY_TRIGGER_17_36_01_0498_triggered = 0;
 	float NULL_TRIGGER_19_36_01_0063_state = 1;
 	float lift_019_037_floor_state = 16;
 	float NULL_TRIGGER_17_35_01_0024_triggered = 0;
+	float global_var_1 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_39_31_01_0714_state = 1;
 	float lift_039_031_floor_state = 22;
+	float global_var_30 = 0;
 	float lift_030_028_floor_state = 8;
 	float ENTRY_TRIGGER_30_28_01_0158_state = 1;
 	float lift_032_025_ceiling_state = 20;
@@ -32,12 +38,15 @@
 	float ENTRY_TRIGGER_46_25_01_0606_triggered = 0;
 	float LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered = 0;
 	float ENTRY_TRIGGER_19_20_01_0713_triggered = 0;
+	float global_var_145 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_20_20_01_0502_triggered = 0;
 	float NULL_TRIGGER_19_19_01_0576_triggered = 0;
 	float NULL_TRIGGER_19_19_01_0575_triggered = 0;
+	float global_var_252 = 0; //This global was created in addGlobal!
 	float NULL_TRIGGER_19_19_01_0574_triggered = 0;
 	float lift_018_018_floor_state = 8;
 	float SWITCH_19_18_01_0126_state = 1;
+	float global_var_2 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_30_15_01_0150_triggered = 0;
 	float NULL_TRIGGER_17_12_01_0163_state = 1;
 
@@ -67,6 +76,7 @@ void start_SWITCH_20_51_01_0355()
 
 void start_NULL_TRIGGER_20_51_01_0357()
 {
+	sys.println("357");
 	sys.println("Unknown trigger action:21");
 }
 
@@ -74,6 +84,7 @@ void start_NULL_TRIGGER_20_51_01_0357()
 
 void start_DEATH_WATCH_TRIGGER_36_50_01_0276()
 {
+	sys.println("276");
 	sys.println("Variable 4097 set. Value 1, 1 operation. Message 0 ");
 }
 
@@ -84,6 +95,7 @@ void start_ENTRY_TRIGGER_37_49_01_0165()
 	if (ENTRY_TRIGGER_37_49_01_0165_triggered == 0)
 	{
 	ENTRY_TRIGGER_37_49_01_0165_triggered = 1;
+	sys.println("165");
 
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_71");
 	$data_reader_trigger.activate($player1);
@@ -94,12 +106,14 @@ void start_ENTRY_TRIGGER_37_49_01_0165()
 
 void start_NULL_TRIGGER_41_49_01_0583()
 {
+	sys.println("583");
 }
 
 
 
 void start_DEATH_WATCH_TRIGGER_44_49_01_0445()
 {
+	sys.println("445");
 	$runscript_NULL_TRIGGER_45_49_01_0506.activate($player1);
 	$runscript_NULL_TRIGGER_46_49_01_0375.activate($player1);
 	$runscript_NULL_TRIGGER_46_49_01_0507.activate($player1);
@@ -109,6 +123,7 @@ void start_DEATH_WATCH_TRIGGER_44_49_01_0445()
 
 void start_NULL_TRIGGER_45_49_01_0506()
 {
+	sys.println("506");
 	sys.println("Variable 4129 set. Value 1, 1 operation. Message 0 ");
 }
 
@@ -116,14 +131,22 @@ void start_NULL_TRIGGER_45_49_01_0506()
 
 void start_NULL_TRIGGER_46_49_01_0507()
 {
+	if (global_var_33 >= 4)
+	{
+	sys.println("507");
 	sys.println("Change state.");
+	}
 }
 
 
 
 void start_NULL_TRIGGER_46_49_01_0375()
 {
+	if (global_var_33 >= 4)
+	{
+	sys.println("375");
 	sys.println("Change state.");
+	}
 }
 
 
@@ -149,6 +172,7 @@ void start_DEATH_WATCH_TRIGGER_44_48_01_0475()
 	if (DEATH_WATCH_TRIGGER_44_48_01_0475_triggered == 0)
 	{
 	DEATH_WATCH_TRIGGER_44_48_01_0475_triggered = 1;
+	sys.println("475");
 	sys.wait(8);
 	$runscript_NULL_TRIGGER_45_48_01_0645.activate($player1);
 	$runscript_NULL_TRIGGER_20_51_01_0357.activate($player1);
@@ -160,6 +184,7 @@ void start_DEATH_WATCH_TRIGGER_44_48_01_0475()
 
 void start_NULL_TRIGGER_45_48_01_0645()
 {
+	sys.println("645");
 	sys.println("You got mail:2459");
 	$player1.addInvItem($NULL_TRIGGER_45_48_01_0645_email);
 
@@ -171,6 +196,7 @@ void start_NULL_TRIGGER_45_48_01_0645()
 
 void start_ENTRY_TRIGGER_27_47_01_0598()
 {
+	sys.println("598");
 	float displacement = 24 - lift_029_047_ceiling_state;
 	$ceiling_029_047.move( UP, displacement * 15 );
 	lift_029_047_ceiling_state = 24 ;
@@ -181,6 +207,7 @@ void start_ENTRY_TRIGGER_27_47_01_0598()
 
 void start_REPULSOR_35_47_01_0579()
 {
+	sys.println("579");
 }
 
 
@@ -212,6 +239,7 @@ void start_EMAIL_18_46_01_0505()
 
 void start_NULL_TRIGGER_21_46_01_0597()
 {
+	sys.println("597");
 	if (NULL_TRIGGER_21_46_01_0597_state == 1)
 		{
 		$runscript_NULL_TRIGGER_21_46_01_0590.activate($player1);
@@ -229,6 +257,7 @@ void start_NULL_TRIGGER_21_46_01_0597()
 
 void start_NULL_TRIGGER_21_46_01_0591()
 {
+	sys.println("591");
 	sys.println("Changing FORCE_DOOR_23_45_01_0553 to a FORCE_DOOR");
 }
 
@@ -236,6 +265,7 @@ void start_NULL_TRIGGER_21_46_01_0591()
 
 void start_NULL_TRIGGER_21_46_01_0590()
 {
+	sys.println("590");
 	sys.println("Changing FORCE_DOOR_23_45_01_0553 to a GREAT_LORD_SNAQUEOTRAHN");
 }
 
@@ -243,6 +273,7 @@ void start_NULL_TRIGGER_21_46_01_0590()
 
 void start_NULL_TRIGGER_12_45_01_0602()
 {
+	sys.println("602");
 	sys.println("Lighting control cp1=603 cp2=602");
 }
 
@@ -253,6 +284,7 @@ void start_DEATH_WATCH_TRIGGER_21_45_01_0562()
 	if (DEATH_WATCH_TRIGGER_21_45_01_0562_triggered == 0)
 	{
 	DEATH_WATCH_TRIGGER_21_45_01_0562_triggered = 1;
+	sys.println("562");
 	$runscript_NULL_TRIGGER_25_44_01_0594.activate($player1);
 	$runscript_NULL_TRIGGER_21_45_01_0588.activate($player1);
 	}
@@ -262,6 +294,7 @@ void start_DEATH_WATCH_TRIGGER_21_45_01_0562()
 
 void start_NULL_TRIGGER_21_45_01_0563()
 {
+	sys.println("563");
 
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_60");
 	$data_reader_trigger.activate($player1);
@@ -271,14 +304,18 @@ void start_NULL_TRIGGER_21_45_01_0563()
 
 void start_NULL_TRIGGER_21_45_01_0587()
 {
+	sys.println("587");
 	sys.println("Variable 28 set. Value 1, 0 operation. Message 0 ");
+	global_var_28 = 1;
 }
 
 
 
 void start_NULL_TRIGGER_21_45_01_0588()
 {
+	sys.println("588");
 	sys.println("Variable 28 set. Value 0, 0 operation. Message 0 ");
+	global_var_28 = 0;
 }
 
 
@@ -304,6 +341,7 @@ void start_ENTRY_TRIGGER_26_45_01_0585()
 	if (ENTRY_TRIGGER_26_45_01_0585_triggered == 0)
 	{
 	ENTRY_TRIGGER_26_45_01_0585_triggered = 1;
+	sys.println("585");
 	$runscript_NULL_TRIGGER_21_45_01_0563.activate($player1);
 	$runscript_NULL_TRIGGER_25_44_01_0556.activate($player1);
 	$runscript_NULL_TRIGGER_21_45_01_0587.activate($player1);
@@ -341,6 +379,7 @@ void start_NULL_TRIGGER_31_45_01_0344()
 	if (NULL_TRIGGER_31_45_01_0344_triggered == 0)
 	{
 	NULL_TRIGGER_31_45_01_0344_triggered = 1;
+	sys.println("344");
 	sys.println("Spawn");
 	}
 }
@@ -352,6 +391,7 @@ void start_ENTRY_TRIGGER_32_45_01_0184()
 	if (ENTRY_TRIGGER_32_45_01_0184_triggered == 0)
 	{
 	ENTRY_TRIGGER_32_45_01_0184_triggered = 1;
+	sys.println("184");
 
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_70");
 	$data_reader_trigger.activate($player1);
@@ -362,6 +402,7 @@ void start_ENTRY_TRIGGER_32_45_01_0184()
 
 void start_NULL_TRIGGER_21_44_01_0557()
 {
+	sys.println("557");
 	if (NULL_TRIGGER_21_44_01_0557_state == 1)
 		{
 		$runscript_NULL_TRIGGER_21_44_01_0596.activate($player1);
@@ -379,6 +420,7 @@ void start_NULL_TRIGGER_21_44_01_0557()
 
 void start_NULL_TRIGGER_21_44_01_0596()
 {
+	sys.println("596");
 	sys.println("Changing FORCE_DOOR_27_45_01_0552 to a GREAT_LORD_SNAQUEOTRAHN");
 }
 
@@ -386,6 +428,7 @@ void start_NULL_TRIGGER_21_44_01_0596()
 
 void start_NULL_TRIGGER_21_44_01_0589()
 {
+	sys.println("589");
 	sys.println("Changing FORCE_DOOR_27_45_01_0552 to a FORCE_DOOR");
 }
 
@@ -393,6 +436,7 @@ void start_NULL_TRIGGER_21_44_01_0589()
 
 void start_NULL_TRIGGER_25_44_01_0595()
 {
+	sys.println("595");
 	if (NULL_TRIGGER_25_44_01_0595_state == 1)
 		{
 		$runscript_NULL_TRIGGER_25_44_01_0594.activate($player1);
@@ -410,6 +454,7 @@ void start_NULL_TRIGGER_25_44_01_0595()
 
 void start_NULL_TRIGGER_25_44_01_0594()
 {
+	sys.println("594");
 	sys.println("Changing FORCE_DOOR_28_44_01_0551 to a GREAT_LORD_SNAQUEOTRAHN");
 }
 
@@ -417,6 +462,7 @@ void start_NULL_TRIGGER_25_44_01_0594()
 
 void start_NULL_TRIGGER_25_44_01_0556()
 {
+	sys.println("556");
 	sys.println("Changing FORCE_DOOR_28_44_01_0551 to a FORCE_DOOR");
 }
 
@@ -432,6 +478,7 @@ void start_BUTTON_28_44_01_0554()
 
 void start_NULL_TRIGGER_29_44_01_0356()
 {
+	sys.println("356");
 }
 
 
@@ -445,6 +492,7 @@ void start_SWITCH_14_43_01_0603()
 
 void start_NULL_TRIGGER_18_43_01_0237()
 {
+	sys.println("237");
 	if (NULL_TRIGGER_18_43_01_0237_state == 1)
 		{
 		$runscript_NULL_TRIGGER_19_42_01_0539.activate($player1);
@@ -462,14 +510,18 @@ void start_NULL_TRIGGER_18_43_01_0237()
 
 void start_NULL_TRIGGER_18_43_01_0397()
 {
+	sys.println("397");
 	sys.println("Variable 100 set. Value 0, 0 operation. Message 0 ");
+	global_var_100 = 0;
 }
 
 
 
 void start_NULL_TRIGGER_18_43_01_0160()
 {
+	sys.println("160");
 	sys.println("Variable 100 set. Value 1, 0 operation. Message 0 ");
+	global_var_100 = 1;
 }
 
 
@@ -484,14 +536,19 @@ void start_LEVER_18_43_01_0227()
 
 void start_PLAYER_DEATH_TRIGGER_19_43_01_0230()
 {
+	if (global_var_100 >= 1)
+	{
+	sys.println("230");
 	$runscript_NULL_TRIGGER_19_43_01_0229.activate($player1);
 	$runscript_NULL_TRIGGER_19_43_01_0228.activate($player1);
+	}
 }
 
 
 
 void start_NULL_TRIGGER_19_43_01_0229()
 {
+	sys.println("229");
 	sys.println("Teleporting to 18 42 147 ");
 }
 
@@ -499,6 +556,7 @@ void start_NULL_TRIGGER_19_43_01_0229()
 
 void start_NULL_TRIGGER_19_43_01_0228()
 {
+	sys.println("228");
 	sys.println("You live again. Or maybe get turned into a cyborg.");
 }
 
@@ -506,6 +564,7 @@ void start_NULL_TRIGGER_19_43_01_0228()
 
 void start_NULL_TRIGGER_42_43_01_0604()
 {
+	sys.println("604");
 	sys.println("Lighting control cp1=605 cp2=604");
 }
 
@@ -522,6 +581,7 @@ void start_EMAIL_16_42_01_0316()
 
 void start_NULL_TRIGGER_19_42_01_0540()
 {
+	sys.println("540");
 	$runscript_NULL_TRIGGER_19_42_01_0538.activate($player1);
 	$runscript_NULL_TRIGGER_18_43_01_0397.activate($player1);
 }
@@ -530,6 +590,7 @@ void start_NULL_TRIGGER_19_42_01_0540()
 
 void start_NULL_TRIGGER_19_42_01_0539()
 {
+	sys.println("539");
 	$runscript_NULL_TRIGGER_19_42_01_0537.activate($player1);
 	$runscript_NULL_TRIGGER_18_43_01_0160.activate($player1);
 }
@@ -538,6 +599,7 @@ void start_NULL_TRIGGER_19_42_01_0539()
 
 void start_NULL_TRIGGER_19_42_01_0538()
 {
+	sys.println("538");
 
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_2");
 	$data_reader_trigger.activate($player1);
@@ -547,6 +609,7 @@ void start_NULL_TRIGGER_19_42_01_0538()
 
 void start_NULL_TRIGGER_19_42_01_0537()
 {
+	sys.println("537");
 
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_1");
 	$data_reader_trigger.activate($player1);
@@ -556,6 +619,7 @@ void start_NULL_TRIGGER_19_42_01_0537()
 
 void start_REPULSOR_26_42_01_0451()
 {
+	sys.println("451");
 	sys.println("Do nothing. Or maybe a default action.");
 }
 
@@ -571,6 +635,7 @@ void start_SWITCH_12_41_01_0525()
 
 void start_REPULSOR_30_41_01_0055()
 {
+	sys.println("55");
 	sys.println("Object 1: Not in use");
 }
 
@@ -586,6 +651,7 @@ void start_SWITCH_30_40_01_0450()
 
 void start_ENTRY_TRIGGER_33_40_01_0216()
 {
+	sys.println("216");
 	float displacement = 0 - lift_033_040_floor_state;
 	$floor_033_040.move( UP, displacement * 15  );
 	lift_033_040_floor_state = 0 ;
@@ -596,6 +662,7 @@ void start_ENTRY_TRIGGER_33_40_01_0216()
 
 void start_NULL_TRIGGER_49_40_01_0371()
 {
+	sys.println("371");
 	$runscript_NULL_TRIGGER_49_40_01_0370.activate($player1);
 	$runscript_NULL_TRIGGER_49_40_01_0326.activate($player1);
 }
@@ -604,6 +671,7 @@ void start_NULL_TRIGGER_49_40_01_0371()
 
 void start_NULL_TRIGGER_49_40_01_0372()
 {
+	sys.println("372");
 	$runscript_NULL_TRIGGER_49_40_01_0217.activate($player1);
 	$runscript_NULL_TRIGGER_49_40_01_0373.activate($player1);
 }
@@ -612,6 +680,7 @@ void start_NULL_TRIGGER_49_40_01_0372()
 
 void start_NULL_TRIGGER_49_40_01_0370()
 {
+	sys.println("370");
 	sys.println("Changing ELEPHANT,_JORP_45_38_01_0180 to a FORCE_BRIDGE");
 }
 
@@ -619,6 +688,7 @@ void start_NULL_TRIGGER_49_40_01_0370()
 
 void start_NULL_TRIGGER_49_40_01_0326()
 {
+	sys.println("326");
 	sys.println("Changing ELEPHANT,_JORP_45_37_01_0243 to a FORCE_BRIDGE");
 }
 
@@ -626,6 +696,7 @@ void start_NULL_TRIGGER_49_40_01_0326()
 
 void start_NULL_TRIGGER_49_40_01_0217()
 {
+	sys.println("217");
 	sys.println("Changing ELEPHANT,_JORP_45_38_01_0180 to a ELEPHANT,_JORP");
 }
 
@@ -633,6 +704,7 @@ void start_NULL_TRIGGER_49_40_01_0217()
 
 void start_NULL_TRIGGER_49_40_01_0373()
 {
+	sys.println("373");
 	sys.println("Changing ELEPHANT,_JORP_45_37_01_0243 to a ELEPHANT,_JORP");
 }
 
@@ -652,6 +724,7 @@ void start_NULL_TRIGGER_38_39_01_0628()
 	if (NULL_TRIGGER_38_39_01_0628_triggered == 0)
 	{
 	NULL_TRIGGER_38_39_01_0628_triggered = 1;
+	sys.println("628");
 	sys.println("You got mail:2485");
 	$player1.addInvItem($NULL_TRIGGER_38_39_01_0628_email);
 
@@ -664,6 +737,7 @@ void start_NULL_TRIGGER_38_39_01_0628()
 
 void start_NULL_TRIGGER_38_39_01_0320()
 {
+	sys.println("320");
 	sys.println("Unknown trigger action:13");
 }
 
@@ -671,6 +745,7 @@ void start_NULL_TRIGGER_38_39_01_0320()
 
 void start_NULL_TRIGGER_38_39_01_0408()
 {
+	sys.println("408");
 	sys.println("Object cloned. 49 (39,38,240)");
 }
 
@@ -715,6 +790,7 @@ void start_ENTRY_TRIGGER_15_37_01_0727()
 	if (ENTRY_TRIGGER_15_37_01_0727_triggered == 0)
 	{
 	ENTRY_TRIGGER_15_37_01_0727_triggered = 1;
+	sys.println("727");
 	$runscript_NULL_TRIGGER_38_39_01_0320.activate($player1);
 	$runscript_NULL_TRIGGER_38_39_01_0408.activate($player1);
 	}
@@ -751,6 +827,7 @@ void start_ENTRY_TRIGGER_19_37_01_0681()
 	if (ENTRY_TRIGGER_19_37_01_0681_triggered == 0)
 	{
 	ENTRY_TRIGGER_19_37_01_0681_triggered = 1;
+	sys.println("681");
 	sys.println("You got mail:2462");
 	$player1.addInvItem($ENTRY_TRIGGER_19_37_01_0681_email);
 
@@ -774,9 +851,18 @@ void start_ENTRY_TRIGGER_17_36_01_0498()
 	if (ENTRY_TRIGGER_17_36_01_0498_triggered == 0)
 	{
 	ENTRY_TRIGGER_17_36_01_0498_triggered = 1;
+	sys.println("498");
+	if (global_var_17 >= 112)
+	{
 
+	$data_reader_trigger.setKey("snd_say","shock_audio_bark_65535");
+	$data_reader_trigger.activate($player1);
+	}
+	else
+	{
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_88");
 	$data_reader_trigger.activate($player1);
+	}
 	}
 }
 
@@ -784,6 +870,7 @@ void start_ENTRY_TRIGGER_17_36_01_0498()
 
 void start_NULL_TRIGGER_19_36_01_0063()
 {
+	sys.println("63");
 	if (NULL_TRIGGER_19_36_01_0063_state == 1)
 		{
 		$runscript_NULL_TRIGGER_19_36_01_0007.activate($player1);
@@ -801,6 +888,7 @@ void start_NULL_TRIGGER_19_36_01_0063()
 
 void start_NULL_TRIGGER_19_36_01_0007()
 {
+	sys.println("7");
 	float displacement = 8 - lift_019_037_floor_state;
 	$floor_019_037.move( UP, displacement * 15  );
 	lift_019_037_floor_state = 8 ;
@@ -811,6 +899,7 @@ void start_NULL_TRIGGER_19_36_01_0007()
 
 void start_NULL_TRIGGER_19_36_01_0009()
 {
+	sys.println("9");
 	float displacement = 16 - lift_019_037_floor_state;
 	$floor_019_037.move( UP, displacement * 15  );
 	lift_019_037_floor_state = 16 ;
@@ -821,6 +910,7 @@ void start_NULL_TRIGGER_19_36_01_0009()
 
 void start_NULL_TRIGGER_31_36_01_0584()
 {
+	sys.println("584");
 }
 
 
@@ -830,7 +920,9 @@ void start_NULL_TRIGGER_17_35_01_0024()
 	if (NULL_TRIGGER_17_35_01_0024_triggered == 0)
 	{
 	NULL_TRIGGER_17_35_01_0024_triggered = 1;
+	sys.println("24");
 	sys.println("Variable 1 set. Value 0, 0 operation. Message 0 ");
+	global_var_1 = 0;
 	}
 }
 
@@ -838,6 +930,7 @@ void start_NULL_TRIGGER_17_35_01_0024()
 
 void start_NULL_TRIGGER_17_35_01_0023()
 {
+	sys.println("23");
 	$a_lock_017_035.activate($player1);
 }
 
@@ -854,6 +947,7 @@ void start_LEVER_17_35_01_0130()
 
 void start_CRITTER_AI_HINT_28_34_01_0312()
 {
+	sys.println("312");
 	$CRITTER_AI_HINT_35_34_01_0308.activate($player1);
 }
 
@@ -861,6 +955,7 @@ void start_CRITTER_AI_HINT_28_34_01_0312()
 
 void start_CRITTER_AI_HINT_35_34_01_0308()
 {
+	sys.println("308");
 	$CRITTER_AI_HINT_36_30_01_0309.activate($player1);
 }
 
@@ -875,6 +970,7 @@ void start_ENERGY_CHARGE_STATION_38_34_01_0679()
 
 void start_NULL_TRIGGER_17_33_01_0601()
 {
+	sys.println("601");
 	sys.println("Lighting control cp1=600 cp2=601");
 }
 
@@ -882,6 +978,10 @@ void start_NULL_TRIGGER_17_33_01_0601()
 
 void start_NULL_TRIGGER_37_33_01_0206()
 {
+	if (global_var_1 >= 0)
+	{
+	sys.println("206");
+	}
 }
 
 
@@ -896,6 +996,7 @@ void start_LARGE_BUTTON_40_32_01_0159()
 
 void start_NULL_TRIGGER_11_31_01_0655()
 {
+	sys.println("655");
 	$a_lock_011_032.activate($player1);
 }
 
@@ -903,6 +1004,7 @@ void start_NULL_TRIGGER_11_31_01_0655()
 
 void start_NULL_TRIGGER_11_31_01_0654()
 {
+	sys.println("654");
 	$a_lock_011_029.activate($player1);
 }
 
@@ -917,6 +1019,7 @@ void start_BUTTON_17_31_01_0701()
 
 void start_NULL_TRIGGER_19_31_01_0600()
 {
+	sys.println("600");
 }
 
 
@@ -931,6 +1034,7 @@ void start_BUTTON_33_31_01_0662()
 
 void start_ENTRY_TRIGGER_39_31_01_0714()
 {
+	sys.println("714");
 	if (ENTRY_TRIGGER_39_31_01_0714_state == 1)
 		{
 		$runscript_NULL_TRIGGER_39_31_01_0215.activate($player1);
@@ -948,6 +1052,7 @@ void start_ENTRY_TRIGGER_39_31_01_0714()
 
 void start_NULL_TRIGGER_39_31_01_0215()
 {
+	sys.println("215");
 	float displacement = 8 - lift_039_031_floor_state;
 	$floor_039_031.move( UP, displacement * 15  );
 	lift_039_031_floor_state = 8 ;
@@ -958,6 +1063,7 @@ void start_NULL_TRIGGER_39_31_01_0215()
 
 void start_NULL_TRIGGER_39_31_01_0214()
 {
+	sys.println("214");
 	float displacement = 24 - lift_039_031_floor_state;
 	$floor_039_031.move( UP, displacement * 15  );
 	lift_039_031_floor_state = 24 ;
@@ -968,8 +1074,12 @@ void start_NULL_TRIGGER_39_31_01_0214()
 
 void start_LEVEL_ENTRY_TRIGGER_11_30_01_0653()
 {
+	if (global_var_30 >= 1)
+	{
+	sys.println("653");
 	$runscript_NULL_TRIGGER_11_31_01_0654.activate($player1);
 	$runscript_NULL_TRIGGER_11_31_01_0655.activate($player1);
+	}
 }
 
 
@@ -983,6 +1093,7 @@ void start_BUTTON_27_30_01_0700()
 
 void start_NULL_TRIGGER_31_30_01_0708()
 {
+	sys.println("708");
 
 	$data_reader_trigger.setKey("snd_say","shock_audio_bark_96");
 	$data_reader_trigger.activate($player1);
@@ -992,6 +1103,7 @@ void start_NULL_TRIGGER_31_30_01_0708()
 
 void start_REPULSOR_31_30_01_0668()
 {
+	sys.println("668");
 	sys.println("Object 1: Not in use");
 }
 
@@ -1015,6 +1127,7 @@ void start_ACCESS_PANEL_32_30_01_0682()
 
 void start_CRITTER_AI_HINT_36_30_01_0309()
 {
+	sys.println("309");
 	$CRITTER_AI_HINT_36_27_01_0310.activate($player1);
 }
 
@@ -1030,12 +1143,17 @@ void start_LARGE_BUTTON_38_30_01_0110()
 
 void start_NULL_TRIGGER_39_30_01_0207()
 {
+	if (global_var_1 >= 0)
+	{
+	sys.println("207");
+	}
 }
 
 
 
 void start_NULL_TRIGGER_41_30_01_0208()
 {
+	sys.println("208");
 	sys.println("Lighting control cp1=207 cp2=206");
 }
 
@@ -1060,6 +1178,7 @@ void start_LEVER_30_29_01_0432()
 
 void start_NULL_TRIGGER_34_29_01_0683()
 {
+	sys.println("683");
 	sys.println("Do nothing. Or maybe a default action.");
 }
 
@@ -1083,18 +1202,27 @@ void start_SWITCH_20_28_01_0093()
 
 void start_NULL_TRIGGER_24_28_01_0129()
 {
+	if (global_var_1 >= 0)
+	{
+	sys.println("129");
+	}
 }
 
 
 
 void start_NULL_TRIGGER_26_28_01_0152()
 {
+	if (global_var_1 >= 0)
+	{
+	sys.println("152");
+	}
 }
 
 
 
 void start_NULL_TRIGGER_30_28_01_0200()
 {
+	sys.println("200");
 	float displacement = 0 - lift_030_028_floor_state;
 	$floor_030_028.move( UP, displacement * 15  );
 	lift_030_028_floor_state = 0 ;
@@ -1105,6 +1233,7 @@ void start_NULL_TRIGGER_30_28_01_0200()
 
 void start_NULL_TRIGGER_30_28_01_0027()
 {
+	sys.println("27");
 	float displacement = 8 - lift_030_028_floor_state;
 	$floor_030_028.move( UP, displacement * 15  );
 	lift_030_028_floor_state = 8 ;
@@ -1115,6 +1244,7 @@ void start_NULL_TRIGGER_30_28_01_0027()
 
 void start_ENTRY_TRIGGER_30_28_01_0158()
 {
+	sys.println("158");
 	if (ENTRY_TRIGGER_30_28_01_0158_state == 1)
 		{
 		$runscript_NULL_TRIGGER_30_28_01_0200.activate($player1);
@@ -1132,6 +1262,7 @@ void start_ENTRY_TRIGGER_30_28_01_0158()
 
 void start_NULL_TRIGGER_46_28_01_0114()
 {
+	sys.println("114");
 	$runscript_NULL_TRIGGER_46_28_01_0298.activate($player1);
 	$runscript_NULL_TRIGGER_46_28_01_0299.activate($player1);
 }
@@ -1140,6 +1271,7 @@ void start_NULL_TRIGGER_46_28_01_0114()
 
 void start_NULL_TRIGGER_46_28_01_0299()
 {
+	sys.println("299");
 	sys.println("Changing ELEPHANT,_JORP_46_29_01_0290 to a FORCE_BRIDGE");
 }
 
@@ -1147,6 +1279,7 @@ void start_NULL_TRIGGER_46_28_01_0299()
 
 void start_NULL_TRIGGER_46_28_01_0298()
 {
+	sys.println("298");
 	sys.println("Changing ELEPHANT,_JORP_46_30_01_0292 to a FORCE_BRIDGE");
 }
 
@@ -1171,6 +1304,7 @@ void start_EMAIL_12_27_01_0474()
 
 void start_NULL_TRIGGER_26_27_01_0252()
 {
+	sys.println("252");
 	sys.println("Lighting control cp1=93 cp2=252");
 }
 
@@ -1178,6 +1312,7 @@ void start_NULL_TRIGGER_26_27_01_0252()
 
 void start_CRITTER_AI_HINT_28_27_01_0311()
 {
+	sys.println("311");
 	$CRITTER_AI_HINT_28_34_01_0312.activate($player1);
 }
 
@@ -1185,6 +1320,7 @@ void start_CRITTER_AI_HINT_28_27_01_0311()
 
 void start_CRITTER_AI_HINT_36_27_01_0310()
 {
+	sys.println("310");
 	$CRITTER_AI_HINT_28_27_01_0311.activate($player1);
 }
 
@@ -1192,6 +1328,7 @@ void start_CRITTER_AI_HINT_36_27_01_0310()
 
 void start_REPULSOR_43_27_01_0366()
 {
+	sys.println("366");
 	sys.println("Object 1: Not in use");
 }
 
@@ -1221,6 +1358,7 @@ void start_SWITCH_55_26_01_0605()
 
 void start_NULL_TRIGGER_27_25_01_0151()
 {
+	sys.println("151");
 	sys.println("Lighting control cp1=66 cp2=151");
 }
 
@@ -1228,6 +1366,7 @@ void start_NULL_TRIGGER_27_25_01_0151()
 
 void start_NULL_TRIGGER_32_25_01_0054()
 {
+	sys.println("54");
 	float displacement = 8 - lift_032_025_ceiling_state;
 	$ceiling_032_025.move( UP, displacement * 15 );
 	lift_032_025_ceiling_state = 8 ;
@@ -1238,6 +1377,7 @@ void start_NULL_TRIGGER_32_25_01_0054()
 
 void start_NULL_TRIGGER_32_25_01_0109()
 {
+	sys.println("109");
 	float displacement = 25 - lift_032_025_ceiling_state;
 	$ceiling_032_025.move( UP, displacement * 15 );
 	lift_032_025_ceiling_state = 25 ;
@@ -1248,6 +1388,7 @@ void start_NULL_TRIGGER_32_25_01_0109()
 
 void start_NULL_TRIGGER_33_25_01_0354()
 {
+	sys.println("354");
 	if (NULL_TRIGGER_33_25_01_0354_state == 1)
 		{
 		$runscript_NULL_TRIGGER_33_25_01_0012.activate($player1);
@@ -1265,6 +1406,7 @@ void start_NULL_TRIGGER_33_25_01_0354()
 
 void start_NULL_TRIGGER_33_25_01_0034()
 {
+	sys.println("34");
 	float displacement = 25 - lift_033_025_ceiling_state;
 	$ceiling_033_025.move( UP, displacement * 15 );
 	lift_033_025_ceiling_state = 25 ;
@@ -1275,6 +1417,7 @@ void start_NULL_TRIGGER_33_25_01_0034()
 
 void start_NULL_TRIGGER_33_25_01_0012()
 {
+	sys.println("12");
 	$runscript_NULL_TRIGGER_32_25_01_0054.activate($player1);
 	$runscript_NULL_TRIGGER_33_25_01_0031.activate($player1);
 	$runscript_NULL_TRIGGER_34_25_01_0033.activate($player1);
@@ -1284,6 +1427,7 @@ void start_NULL_TRIGGER_33_25_01_0012()
 
 void start_NULL_TRIGGER_33_25_01_0032()
 {
+	sys.println("32");
 	$runscript_NULL_TRIGGER_32_25_01_0109.activate($player1);
 	$runscript_NULL_TRIGGER_33_25_01_0034.activate($player1);
 	$runscript_NULL_TRIGGER_34_25_01_0053.activate($player1);
@@ -1293,6 +1437,7 @@ void start_NULL_TRIGGER_33_25_01_0032()
 
 void start_NULL_TRIGGER_33_25_01_0031()
 {
+	sys.println("31");
 	float displacement = 8 - lift_033_025_ceiling_state;
 	$ceiling_033_025.move( UP, displacement * 15 );
 	lift_033_025_ceiling_state = 8 ;
@@ -1303,6 +1448,7 @@ void start_NULL_TRIGGER_33_25_01_0031()
 
 void start_NULL_TRIGGER_34_25_01_0033()
 {
+	sys.println("33");
 	float displacement = 8 - lift_034_025_ceiling_state;
 	$ceiling_034_025.move( UP, displacement * 15 );
 	lift_034_025_ceiling_state = 8 ;
@@ -1313,6 +1459,7 @@ void start_NULL_TRIGGER_34_25_01_0033()
 
 void start_NULL_TRIGGER_34_25_01_0053()
 {
+	sys.println("53");
 	float displacement = 25 - lift_034_025_ceiling_state;
 	$ceiling_034_025.move( UP, displacement * 15 );
 	lift_034_025_ceiling_state = 25 ;
@@ -1326,6 +1473,7 @@ void start_ENTRY_TRIGGER_46_25_01_0606()
 	if (ENTRY_TRIGGER_46_25_01_0606_triggered == 0)
 	{
 	ENTRY_TRIGGER_46_25_01_0606_triggered = 1;
+	sys.println("606");
 	$runscript_NULL_TRIGGER_47_25_01_0607.activate($player1);
 	}
 }
@@ -1334,6 +1482,7 @@ void start_ENTRY_TRIGGER_46_25_01_0606()
 
 void start_NULL_TRIGGER_47_25_01_0607()
 {
+	sys.println("607");
 	sys.println("Unknown trigger action:11");
 }
 
@@ -1341,12 +1490,14 @@ void start_NULL_TRIGGER_47_25_01_0607()
 
 void start_NULL_TRIGGER_10_24_01_0353()
 {
+	sys.println("353");
 }
 
 
 
 void start_ENTRY_TRIGGER_26_24_01_0146()
 {
+	sys.println("146");
 	$runscript_NULL_TRIGGER_29_24_01_0066.activate($player1);
 }
 
@@ -1354,6 +1505,7 @@ void start_ENTRY_TRIGGER_26_24_01_0146()
 
 void start_NULL_TRIGGER_29_24_01_0209()
 {
+	sys.println("209");
 	$runscript_NULL_TRIGGER_17_33_01_0601.activate($player1);
 	$runscript_NULL_TRIGGER_12_45_01_0602.activate($player1);
 }
@@ -1362,6 +1514,7 @@ void start_NULL_TRIGGER_29_24_01_0209()
 
 void start_NULL_TRIGGER_29_24_01_0599()
 {
+	sys.println("599");
 	$runscript_NULL_TRIGGER_29_13_01_0211.activate($player1);
 	$runscript_NULL_TRIGGER_17_12_01_0337.activate($player1);
 	$runscript_NULL_TRIGGER_41_20_01_0236.activate($player1);
@@ -1372,6 +1525,7 @@ void start_NULL_TRIGGER_29_24_01_0599()
 
 void start_NULL_TRIGGER_29_24_01_0064()
 {
+	sys.println("64");
 	$runscript_NULL_TRIGGER_27_25_01_0151.activate($player1);
 	$runscript_NULL_TRIGGER_26_27_01_0252.activate($player1);
 	$runscript_NULL_TRIGGER_41_30_01_0208.activate($player1);
@@ -1382,6 +1536,7 @@ void start_NULL_TRIGGER_29_24_01_0064()
 
 void start_NULL_TRIGGER_29_24_01_0066()
 {
+	sys.println("66");
 	sys.println("Unknown trigger action:11");
 }
 
@@ -1389,6 +1544,7 @@ void start_NULL_TRIGGER_29_24_01_0066()
 
 void start_LEVEL_ENTRY_TRIGGER_30_24_01_0037()
 {
+	sys.println("37");
 	$runscript_NULL_TRIGGER_29_24_01_0066.activate($player1);
 }
 
@@ -1408,6 +1564,7 @@ void start_LEVEL_ENTRY_TRIGGER_31_23_01_0695()
 	if (LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered == 0)
 	{
 	LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered = 1;
+	sys.println("695");
 	sys.println("You live again. Or maybe get turned into a cyborg.");
 	}
 }
@@ -1433,6 +1590,7 @@ void start_EMAIL_11_22_01_0315()
 
 void start_NULL_TRIGGER_20_22_01_0141()
 {
+	sys.println("141");
 	sys.println("Lighting control cp1=152 cp2=129");
 }
 
@@ -1440,6 +1598,7 @@ void start_NULL_TRIGGER_20_22_01_0141()
 
 void start_NULL_TRIGGER_21_22_01_0062()
 {
+	sys.println("62");
 	sys.println("Unknown trigger action:11");
 }
 
@@ -1447,6 +1606,7 @@ void start_NULL_TRIGGER_21_22_01_0062()
 
 void start_NULL_TRIGGER_25_22_01_0696()
 {
+	sys.println("696");
 	$a_lock_026_024.activate($player1);
 	$a_lock_026_021.activate($player1);
 }
@@ -1472,12 +1632,14 @@ void start_EMAIL_33_22_01_0454()
 
 void start_NULL_TRIGGER_14_21_01_0452()
 {
+	sys.println("452");
 }
 
 
 
 void start_NULL_TRIGGER_20_21_01_0205()
 {
+	sys.println("205");
 	$runscript_NULL_TRIGGER_41_30_01_0208.activate($player1);
 	$runscript_NULL_TRIGGER_20_22_01_0141.activate($player1);
 	$runscript_NULL_TRIGGER_29_13_01_0211.activate($player1);
@@ -1487,7 +1649,11 @@ void start_NULL_TRIGGER_20_21_01_0205()
 
 void start_SHODAN_TRIGGER_46_21_01_0483()
 {
+	if (global_var_17 >= 1)
+	{
+	sys.println("483");
 	$HIDDEN_DOOR_46_21_01_0482.activate($player1);
+	}
 }
 
 
@@ -1497,7 +1663,9 @@ void start_ENTRY_TRIGGER_19_20_01_0713()
 	if (ENTRY_TRIGGER_19_20_01_0713_triggered == 0)
 	{
 	ENTRY_TRIGGER_19_20_01_0713_triggered = 1;
+	sys.println("713");
 	sys.println("Variable 145 set. Value 1, 0 operation. Message 0 ");
+	global_var_145 = 1;
 	}
 }
 
@@ -1508,6 +1676,7 @@ void start_ENTRY_TRIGGER_20_20_01_0502()
 	if (ENTRY_TRIGGER_20_20_01_0502_triggered == 0)
 	{
 	ENTRY_TRIGGER_20_20_01_0502_triggered = 1;
+	sys.println("502");
 	sys.println("You got mail:2441");
 	$player1.addInvItem($ENTRY_TRIGGER_20_20_01_0502_email);
 
@@ -1520,6 +1689,7 @@ void start_ENTRY_TRIGGER_20_20_01_0502()
 
 void start_NULL_TRIGGER_41_20_01_0236()
 {
+	sys.println("236");
 	sys.println("Lighting control cp1=338 cp2=236");
 }
 
@@ -1527,7 +1697,11 @@ void start_NULL_TRIGGER_41_20_01_0236()
 
 void start_NULL_TRIGGER_46_20_01_0139()
 {
+	if (global_var_17 >= 1)
+	{
+	sys.println("139");
 	sys.println("Do nothing. Or maybe a default action.");
+	}
 }
 
 
@@ -1537,6 +1711,7 @@ void start_NULL_TRIGGER_19_19_01_0576()
 	if (NULL_TRIGGER_19_19_01_0576_triggered == 0)
 	{
 	NULL_TRIGGER_19_19_01_0576_triggered = 1;
+	sys.println("576");
 	$runscript_NULL_TRIGGER_19_19_01_0575.activate($player1);
 	$runscript_NULL_TRIGGER_19_19_01_0574.activate($player1);
 	}
@@ -1549,7 +1724,9 @@ void start_NULL_TRIGGER_19_19_01_0575()
 	if (NULL_TRIGGER_19_19_01_0575_triggered == 0)
 	{
 	NULL_TRIGGER_19_19_01_0575_triggered = 1;
+	sys.println("575");
 	sys.println("Variable 252 set. Value 1, 0 operation. Message 0 ");
+	global_var_252 = 1;
 	}
 }
 
@@ -1560,6 +1737,7 @@ void start_NULL_TRIGGER_19_19_01_0574()
 	if (NULL_TRIGGER_19_19_01_0574_triggered == 0)
 	{
 	NULL_TRIGGER_19_19_01_0574_triggered = 1;
+	sys.println("574");
 	sys.println("Lighting control cp1=574 cp2=573");
 	}
 }
@@ -1585,13 +1763,18 @@ void start_KEYPAD_PANEL_20_19_01_0096()
 
 void start_ENTRY_TRIGGER_18_18_01_0573()
 {
+	if (global_var_252 >= 1)
+	{
+	sys.println("573");
 	$runscript_NULL_TRIGGER_17_12_01_0163.activate($player1);
+	}
 }
 
 
 
 void start_NULL_TRIGGER_18_18_01_0112()
 {
+	sys.println("112");
 	float displacement = 0 - lift_018_018_floor_state;
 	$floor_018_018.move( UP, displacement * 15  );
 	lift_018_018_floor_state = 0 ;
@@ -1602,6 +1785,7 @@ void start_NULL_TRIGGER_18_18_01_0112()
 
 void start_NULL_TRIGGER_18_18_01_0113()
 {
+	sys.println("113");
 	float displacement = 8 - lift_018_018_floor_state;
 	$floor_018_018.move( UP, displacement * 15  );
 	lift_018_018_floor_state = 8 ;
@@ -1629,6 +1813,7 @@ void start_SWITCH_19_18_01_0126()
 
 void start_NULL_TRIGGER_20_18_01_0006()
 {
+	sys.println("6");
 	$runscript_NULL_TRIGGER_20_18_01_0036.activate($player1);
 	$a_lock_026_021.activate($player1);
 }
@@ -1637,7 +1822,9 @@ void start_NULL_TRIGGER_20_18_01_0006()
 
 void start_NULL_TRIGGER_20_18_01_0036()
 {
+	sys.println("36");
 	sys.println("Variable 2 set. Value 1, 0 operation. Message 0 ");
+	global_var_2 = 1;
 }
 
 
@@ -1651,12 +1838,14 @@ void start_ENERGY_CHARGE_STATION_22_18_01_0659()
 
 void start_NULL_TRIGGER_44_18_01_0338()
 {
+	sys.println("338");
 }
 
 
 
 void start_NULL_TRIGGER_15_17_01_0578()
 {
+	sys.println("578");
 	sys.println("Do nothing. Or maybe a default action.");
 }
 
@@ -1664,6 +1853,7 @@ void start_NULL_TRIGGER_15_17_01_0578()
 
 void start_ECOLOGY_TRIGGER_16_17_01_0437()
 {
+	sys.println("437");
 	sys.println("Spawn");
 }
 
@@ -1671,6 +1861,7 @@ void start_ECOLOGY_TRIGGER_16_17_01_0437()
 
 void start_NULL_TRIGGER_17_17_01_0288()
 {
+	sys.println("288");
 }
 
 
@@ -1704,6 +1895,7 @@ void start_ENTRY_TRIGGER_30_15_01_0150()
 	if (ENTRY_TRIGGER_30_15_01_0150_triggered == 0)
 	{
 	ENTRY_TRIGGER_30_15_01_0150_triggered = 1;
+	sys.println("150");
 	$runscript_NULL_TRIGGER_29_14_01_0680.activate($player1);
 	}
 }
@@ -1712,6 +1904,7 @@ void start_ENTRY_TRIGGER_30_15_01_0150()
 
 void start_NULL_TRIGGER_26_14_01_0300()
 {
+	sys.println("300");
 }
 
 
@@ -1725,6 +1918,7 @@ void start_SWITCH_27_14_01_0210()
 
 void start_NULL_TRIGGER_29_14_01_0680()
 {
+	sys.println("680");
 	sys.println("Unknown trigger action:11");
 }
 
@@ -1748,6 +1942,7 @@ void start_BUTTON_27_13_01_0702()
 
 void start_NULL_TRIGGER_29_13_01_0211()
 {
+	sys.println("211");
 	sys.println("Lighting control cp1=210 cp2=211");
 }
 
@@ -1755,6 +1950,7 @@ void start_NULL_TRIGGER_29_13_01_0211()
 
 void start_NULL_TRIGGER_17_12_01_0163()
 {
+	sys.println("163");
 	if (NULL_TRIGGER_17_12_01_0163_state == 1)
 		{
 		$runscript_NULL_TRIGGER_18_18_01_0112.activate($player1);
@@ -1772,6 +1968,7 @@ void start_NULL_TRIGGER_17_12_01_0163()
 
 void start_NULL_TRIGGER_17_12_01_0337()
 {
+	sys.println("337");
 	sys.println("Lighting control cp1=339 cp2=337");
 }
 

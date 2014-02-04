@@ -24,6 +24,8 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
 
+short globals[255];
+
 void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 {
 	//printf("void start_%s()\n{",UniqueObjectName(currObj));
@@ -478,7 +480,7 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
 	
 void BuildScriptsShock(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo)
 {
-
+	
 if (fopen_s(&fBODY,SCRIPT_BODY_FILE, "w")!=0)
 	{
 	printf("Unable to create output file for body");
@@ -508,6 +510,19 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 								|| (isTriggerSHOCK(objList[nextObj]))
 									|| (objectMasters[objList[nextObj].item_id].DeathWatch  >=1))
 						{
+						if (isTriggerSHOCK(objList[nextObj]) && (objList[nextObj].item_id != 378))
+						{//Create global variables for testing conditions.
+							if ((objList[nextObj].conditions[0] >0) && (objList[nextObj].conditions[0])<255)
+							{
+								if (globals[objList[nextObj].conditions[0]]!=1)	//A new global
+								{//add the new global here.
+									fprintf(fGLOBALS, "\tfloat global_var_%d = 0;\n", objList[nextObj].conditions[0]);
+									globals[objList[nextObj].conditions[0]] = 1;
+								}
+							}
+							//create a global for testing conditions
+
+						}
 						//Create the function call.
 						fprintf(fBODY,"\n\n\nvoid start_%s()\n{\n",
 								UniqueObjectName(objList[nextObj]));
@@ -762,21 +777,45 @@ if((currObj.ObjectSubClass==3) && ((currObj.ObjectSubClassIndex==7) || (currObj.
 }
 
 
-
-
+void addGlobalTest(ObjectItem objList[1600], ObjectItem currObj, short VarOnly)
+{
+	if (globals[currObj.conditions[0]] != 1)
+	{//create it's global if we don't have it already.
+		fprintf(fGLOBALS, "\tfloat global_var_%d = 0; //This global was created in addGlobalTest for %s!\n", currObj.conditions[0], UniqueObjectName(currObj));
+		globals[currObj.conditions[0]] = 1;
+	}
+	//add the test
+	if (VarOnly == 0)
+	{
+		fprintf(fBODY, "\tif (global_var_%d >= %d)\n\t{\n", currObj.conditions[0], currObj.conditions[2]);
+	}	
+}
+void addGlobal(int varIndex)
+{
+	if (globals[varIndex] != 1)
+	{//create it's global if we don't have it already.
+		fprintf(fGLOBALS, "\tfloat global_var_%d = 0; //This global was created in addGlobal!\n", varIndex);
+		globals[varIndex] = 1;
+	}
+}
 
 void scriptShockTriggerAction(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
 {
+	if ((currObj.conditions[0] > 0) && (currObj.conditions[0] < 255) && (currObj.item_id !=378) && (currObj.TriggerAction != ACTION_MESSAGE))
+		{//Add a global test
+		addGlobalTest(objList, currObj,0);
+		}
 	if (currObj.TriggerOnce == 1)
 	{
 		if (currObj.TriggerOnceGlobal == 0)
-		{//add it's global
-			fprintf(fGLOBALS, "\tfloat %s_triggered = 0;\n", UniqueObjectName(currObj));
-			currObj.TriggerOnceGlobal = 1;
-		}
+			{//add it's global
+				fprintf(fGLOBALS, "\tfloat %s_triggered = 0;\n", UniqueObjectName(currObj));
+				currObj.TriggerOnceGlobal = 1;
+			}
 		fprintf(fBODY, "\tif (%s_triggered == 0)\n\t{\n", UniqueObjectName(currObj));
 		fprintf(fBODY, "\t%s_triggered = 1;\n", UniqueObjectName(currObj));
 	}
+	fprintf(fBODY, "\tsys.println(\"%d\");\n",currObj.index);	//Default output so at least something happens.
 switch (currObj.TriggerAction)
 	{ 
 	case ACTION_DO_NOTHING :
@@ -831,6 +870,26 @@ switch (currObj.TriggerAction)
 		int Operation = currObj.shockProperties[TRIG_PROPERTY_OPERATION];
 		int Message = currObj.shockProperties[TRIG_PROPERTY_MESSAGE1];
 		fprintf(fBODY,"\tsys.println(\"Variable %d set. Value %d, %d operation. Message %d \");\n",varToSet,valToSet,Operation,Message);
+		if ((currObj.item_id != 378) && ((varToSet >=0) && (varToSet <255)))
+		{
+			addGlobal(varToSet);
+			switch (Operation)
+			{
+			case 0:		//set value
+				fprintf(fBODY, "\tglobal_var_%d = %d;\n", varToSet, valToSet);
+				break;
+			case 1:		//Add value
+				fprintf(fBODY, "\tglobal_var_%d += %d;\n", varToSet, valToSet);
+				break;
+			default:
+				fprintf(fBODY, "\tsys.println(\"Unknown operation %d operation.\");\n", Operation);
+			}
+			if (Message >= 1)
+			{	//play back a message here?
+				fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", Message);
+				fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
+			}
+		}
 		break;
 		}
 	case ACTION_ACTIVATE:
@@ -931,55 +990,7 @@ switch (currObj.TriggerAction)
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED] = getValAtAddress(sub_ark,add_ptr+0x18,16);
 		
 		MovingPlatformSCRIPT(triggerX,triggerY,targetFloor,targetCeiling,LevelInfo);
-		
-		//////////const char *objDesc="lift";
 
-		//////////	switch (LevelInfo[triggerX][triggerY].hasElevator)
-		//////////		{
-		//////////		case 1: //floor only moves
-		//////////			if (LevelInfo[triggerX][triggerY].global !=1)
-		//////////				{
-		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
-		//////////				LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
-		//////////				}
-		//////////			
-		//////////			fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
-		//////////			fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d  );\n", triggerX,triggerY,BrushSizeZ);
-		//////////			fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
-		//////////			break;
-		//////////		case 2:	//Ceiling only moves
-		//////////			if (LevelInfo[triggerX][triggerY].global !=1)
-		//////////				{
-		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
-		//////////				LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
-		//////////				}					
-		//////////			fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
-		//////////			fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
-		//////////			fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
-		//////////			break;
-		//////////		case 3: //both move
-		//////////			if (LevelInfo[triggerX][triggerY].global !=1)
-		//////////				{
-		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_floor_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].floorHeight );
-		//////////				fprintf(fGLOBALS,"\tfloat %s_%03d_%03d_ceiling_state = %d;\n", objDesc,triggerX,triggerY,LevelInfo[triggerX][triggerY].ceilingHeight );
-		//////////				LevelInfo[triggerX][triggerY].global =1;	//Global is already created.
-		//////////				}
-		//////////			//printf("\tsys.println(\"Initial floor global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
-		//////////			
-		//////////			fprintf(fBODY,"\tfloat displacement = %d - %s_%03d_%03d_floor_state;\n",targetFloor, objDesc,triggerX,triggerY );
-		//////////			fprintf(fBODY,"\t$floor_%03d_%03d.move( UP, displacement * %d );\n",triggerX,triggerY,BrushSizeZ);
-		//////////			fprintf(fBODY,"\t%s_%03d_%03d_floor_state = %d ;\n\n", objDesc,triggerX,triggerY,targetFloor);
-		//////////			
-		//////////			fprintf(fBODY,"\tsys.println(\"Initial ceiling global should be\" + %d);\n",LevelInfo[triggerX][triggerY].floorHeight);	
-		//////////			fprintf(fBODY,"\tdisplacement = %d - %s_%03d_%03d_ceiling_state;\n",targetCeiling, objDesc,triggerX,triggerY );
-		//////////			fprintf(fBODY,"\t$ceiling_%03d_%03d.move( UP, displacement * %d );\n", triggerX,triggerY,BrushSizeZ);
-		//////////			fprintf(fBODY,"\t%s_%03d_%03d_ceiling_state = %d ;\n\n", objDesc,triggerX,triggerY,targetCeiling);
-		//////////			
-		//////////			
-		//////////		}
-		//////////		//printf("\t%s_%03d_%03d_state = %s_%03d_%03d_state+displacement;\n\n", objDesc,triggerX,triggerY, objDesc,triggerX,triggerY);
-
-		
 		
 		break;
 		
@@ -1056,10 +1067,22 @@ switch (currObj.TriggerAction)
 		//printf("\t\tFail Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]=getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=getValAtAddress(sub_ark,add_ptr+0x10,16);
-		
 		//fprintf(fBODY,"\tsys.println(\"Message\");\n");
-		fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
-		fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
+		if ((currObj.conditions[0] > 0) && (currObj.conditions[0] < 255))	//has a condition
+		{
+			addGlobalTest(objList, currObj,0);
+			//play the success message
+			fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE1]);
+			fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n\t}");
+			//else the fail message
+			fprintf(fBODY, "\n\telse\n\t{\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+			fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n\t}\n");
+		}
+		else
+		{//Just play the fail message
+			fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+			fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
+		}
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
 		break;
@@ -1097,10 +1120,6 @@ switch (currObj.TriggerAction)
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] =getValAtAddress(sub_ark,add_ptr+0x0C,16);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
 		int objToChange = currObj.shockProperties[TRIG_PROPERTY_OBJECT];
-		if(objToChange == 292)
-		{
-			printf("");
-		}
 		int newObjType = currObj.shockProperties[TRIG_PROPERTY_TYPE];
 		fprintf(fBODY, "\tsys.println(\"Changing %s to a %s\");\n",
 			UniqueObjectName(objList[objToChange]),
@@ -1115,6 +1134,10 @@ switch (currObj.TriggerAction)
 	
 	}
 	if (currObj.TriggerOnce == 1)
+	{
+		fprintf(fBODY, "\t}\n");
+	}
+	if ((currObj.conditions[0] > 0) && (currObj.conditions[0] < 255) && (currObj.item_id != 378) && (currObj.TriggerAction != ACTION_MESSAGE))
 	{
 		fprintf(fBODY, "\t}\n");
 	}
