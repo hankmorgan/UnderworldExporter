@@ -1658,22 +1658,26 @@ while (k<=chunkUnpackedLength)
 					}
 				else {
 					if ((objList[objIndex].ObjectSubClass == 2) && ((objList[objIndex].ObjectSubClassIndex >= 6) && (objList[objIndex].ObjectSubClassIndex <= 9)))
-						{
-							printf("Screens:");
-							printf("\nNo of Frames: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-							printf("\nLoop repeats: %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
-							printf("\nStart Frame: %d (from chunk 321)", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-						}
-					else
-						{
-						printf("Regular fixture");
-						printf("\nVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-						printf("\nVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-						printf("\nVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-						printf("\nVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-						printf("\nVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
-						}
+					{
+						printf("Screens:");
+						printf("\nNo of Frames: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						printf("\nLoop repeats: %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
+						printf("\nStart Frame: %d (from chunk 321)", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
 					}
+					else
+					{
+						printf("Regular fixture");
+						if ((objList[objIndex].ObjectSubClass == 2) && ((objList[objIndex].ObjectSubClassIndex >= 0) && (objList[objIndex].ObjectSubClassIndex < 5)))	//A sign or painting
+						{
+							printf("\n\tImage to use is value in unk1. Offset from image 1350_0390.bmp or 1350_0403.bmp in objart.res or 0078_0000.bmp or 0079_0000 in objart3.res");
+						}
+						printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+						printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+						printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+						printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+					}
+				}
 				return 1;
 				break;
 				}
