@@ -161,7 +161,6 @@ void BuildXDataFile(int game)
 
 }
 
-
 void parseInfoLine(char *str, int length, int *left, int *right)
 {
 	short fndleft = 0;
@@ -379,4 +378,67 @@ void BuildMtrFiles(int MtrType)
 		break;
 }
 
+}
+
+void BuildGuiFiles()
+{
+	int startframe; int noofframes; int loopflag; int startframeactual;
+	char line[255];
+	FILE *fileOut;
+	char filePath[80] = "";
+	FILE *f = NULL;
+
+	if ((fopen_s(&f, "C:\\Underworld Exporter\\src\\trunk\\Debug\\screens.txt", "r") == 0))
+	{
+		while (fgets(line, 255, f))
+		{
+			sscanf(line, "%d %d %d %d",
+				&startframe, &noofframes, &loopflag, &startframeactual);
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\guis\\shock\\screen_%d_%d_%d.gui", startframe, noofframes, loopflag);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+				printf("Unable to create output file for material");
+				
+			}
+			else
+			{
+				fprintf(fileOut,"windowDef Desktop\n{\n\trect 0,0,640,480\n\tnocursor 1\n");
+				fprintf(fileOut, "\t\twindowdef panel\n\t\t{\n");
+				fprintf(fileOut, "\t\trect 0,0,640,480\n\t\tvisible 1\n");
+				fprintf(fileOut, "\t\tbackground \"guis/assets/shock/screens/%04d\";\n\n", startframe + 321);
+				int j = 0;
+				int i = 0;
+				for (i = startframe; i < startframe + noofframes; i++)
+				{
+					fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+					fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
+					fprintf(fileOut, "\t\t}\n");
+				}
+				if (loopflag != 0)
+				{
+					for (i = startframe + noofframes - 2; i > startframe ; i--)
+					{
+						fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+						fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
+						fprintf(fileOut, "\t\t}\n");
+					}
+					//reset a forwards and backwards sequence
+					fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+					//fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
+					fprintf(fileOut, "\t\t\tresetTime \"0\";\n");
+					fprintf(fileOut, "\t\t}\n");
+				}
+				else
+				{
+					//resets a forward only sequence.
+					fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+					fprintf(fileOut, "\t\t\tresetTime \"0\";\n");
+					fprintf(fileOut, "\t\t}\n");
+
+				}
+				fprintf(fileOut, "\t}\n}");
+				fclose(fileOut);
+			}
+		}
+	}
 }

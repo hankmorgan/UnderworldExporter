@@ -130,10 +130,10 @@
 129 7 2 3 WORDS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 130 7 2 4 PAINTING models/darkmod/shock/shock_icon_0000.ase entity 62
 131 7 2 5 POSTER models/darkmod/decorative/wall/banner1.lwo model 18
-132 7 2 6 SCREEN models/darkmod/decorative/wall/banner1.lwo model 18
+132 7 2 6 SCREEN models/darkmod/shock/shock_screen_small.ase entity 63
 133 7 2 7 TEXTURE_MAP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-134 7 2 8 SCREEN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-135 7 2 9 SCREEN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+134 7 2 8 SCREEN models/darkmod/shock/shock_screen_large.ase entity 63
+135 7 2 9 SCREEN models/darkmod/shock/shock_screen_medium.ase entity 63
 136 7 2 10 REPULSOR_LIGHTS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 137 7 3 0 LAMP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 138 7 3 1 FLOOR_LAMP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

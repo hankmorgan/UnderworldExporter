@@ -1,0 +1,39 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "guis/assets/shock/screens/0390";
+
+		onTime 0{
+			set "background" "guis/assets/shock/screens/0390";
+		}
+		onTime 500{
+			set "background" "guis/assets/shock/screens/0391";
+		}
+		onTime 1000{
+			set "background" "guis/assets/shock/screens/0392";
+		}
+		onTime 1500{
+			set "background" "guis/assets/shock/screens/0393";
+		}
+		onTime 2000{
+			set "background" "guis/assets/shock/screens/0394";
+		}
+		onTime 2500{
+			set "background" "guis/assets/shock/screens/0395";
+		}
+		onTime 3000{
+			set "background" "guis/assets/shock/screens/0396";
+		}
+		onTime 3500{
+			set "background" "guis/assets/shock/screens/0397";
+		}
+		onTime 4000{
+			resetTime "0";
+		}
+	}
+}

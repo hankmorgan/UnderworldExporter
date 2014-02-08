@@ -41,7 +41,6 @@ void SetDeathWatch(ObjectItem objList[1600]);
 
 extern int levelNo;
 
-
 int main()
 {
 int game = SHOCK;
@@ -51,7 +50,6 @@ int mode = D3_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
-
 levelNo=1;
 switch (game)
 	{
@@ -71,7 +69,8 @@ switch (game)
 		case D3_MODE:
 		case ASCII_MODE:
 		case SCRIPT_BUILD_MODE:
-			exportMaps(game,mode,levelNo);break;
+			exportMaps(game, mode, levelNo);
+			break;
 		case STRINGS_EXTRACT_MODE:
 			if (game == SHOCK)
 				{
@@ -88,7 +87,8 @@ switch (game)
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
 			//BuildSndShaderFiles();
-			BuildMtrFiles(1);
+			//BuildMtrFiles(1);
+			BuildGuiFiles();
 			break;
 		}
 	}
@@ -314,6 +314,7 @@ void exportMaps(int game,int mode,int LevelNo)
 		case ASCII_MODE:		//ascii + other data maps
 			{
 			DumpAscii(game,LevelInfo,objList,LevelNo,0);	//1 for maps only. 0 for extra printouts like objects, textures + heightmaps.
+			
 			break;
 			}		
 		case D3_MODE:		//D3/Dark Mod

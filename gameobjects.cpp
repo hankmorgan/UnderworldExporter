@@ -42,6 +42,7 @@ void setElevatorProperties(tile LevelInfo[64][64],unsigned char *sub_ark,int add
 void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
@@ -126,6 +127,9 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case SHOCK_DECAL:
 				RenderEntityDecal(game, x, y, z, currobj, objList, LevelInfo);
+				break;
+			case COMPUTER_SCREEN:
+				RenderEntityComputerScreen(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			case SHOCK_TRIGGER_NULL:
 				RenderEntityNULL_TRIGGER(game,x,y,z,currobj,objList,LevelInfo);	
@@ -1166,6 +1170,30 @@ void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj,
 	fprintf(MAPFILE, "\n}");
 }
 
+void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	if (currobj.shockProperties[SCREEN_START]<246)
+	{
+		fprintf(MAPFILE, "\"gui\" \"guis/shock/screen_%d_%d_%d.gui\"\n", currobj.shockProperties[SCREEN_START], currobj.shockProperties[SCREEN_NO_OF_FRAMES], currobj.shockProperties[SCREEN_LOOP_FLAG]);
+	}
+	else
+	{//unimplemented special screens.
+		fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
+	}
+	 
+	//currobj.shockProperties[SCREEN_NO_OF_FRAMES]
+	//currobj.shockProperties[SCREEN_LOOP_FLAG] 
+	//currobj.shockProperties[SCREEN_START] 
+	fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
+	EntityRotationSHOCK(currobj.Angle2);
+	fprintf(MAPFILE, "\n}");
+}
+
 
 void EntityRotation(int heading)
 {//This is a fudge until I figure out the rotation math
@@ -1441,31 +1469,31 @@ mstaddress_pointer=0;
 					case HARDWARE:break;
 					case SOFTWARE_LOGS:
 					{
-										  if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
-										  break;
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					break;
 					}
 					case FIXTURES:
 					{
-									 if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
-									 break;
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					break;
 					}
 					case GETTABLES_OTHER:
 						break;
 					case SWITCHES_PANELS:
 					{
-											if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
-											break;
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					break;
 					}
 					case DOORS_GRATINGS:
 					{
-										   if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
-										   break;
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					break;
 					}
 					case ANIMATED:break;
 					case TRAPS_MARKERS:
 					{
-										  if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
-										  break;
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+					break;
 					}
 					case CONTAINERS_CORPSES:break;
 					case CRITTERS:break;
@@ -1726,9 +1754,21 @@ while (k<=chunkUnpackedLength)
 					if ((objList[objIndex].ObjectSubClass == 2) && ((objList[objIndex].ObjectSubClassIndex >= 6) && (objList[objIndex].ObjectSubClassIndex <= 9)))
 					{
 						printf("Screens:");
-						printf("\nNo of Frames: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-						printf("\nLoop repeats: %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
-						printf("\nStart Frame: %d (from chunk 321)", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+
+						objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES] = getValAtAddress(sub_ark, add_ptr + 6, 16);
+						objList[objIndex].shockProperties[SCREEN_LOOP_FLAG] = getValAtAddress(sub_ark, add_ptr + 8, 16);
+						objList[objIndex].shockProperties[SCREEN_START] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
+
+						printf("\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
+						printf("\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
+						printf("\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
+
+						//fprintf(MAPFILE, "%s\t%d\t%d\t%d\t%d\n",
+						//	UniqueObjectName(objList[objIndex]),
+						//	objList[objIndex].shockProperties[SCREEN_START],
+						//	objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES],
+						//	objList[objIndex].shockProperties[SCREEN_LOOP_FLAG],
+						//	objList[objIndex].shockProperties[SCREEN_START] + 321);
 					}
 					else
 					{

@@ -1,0 +1,320 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+		windowdef panel
+		{
+		rect 0,0,640,480
+		background "guis/assets/shock/screens/0321";
+		visible 1
+		onTime 0{
+			set "background" "guis/assets/shock/screens/0321";
+		}
+		onTime 500{
+			set "background" "guis/assets/shock/screens/0322";
+		}
+		onTime 1000{
+			set "background" "guis/assets/shock/screens/0323";
+		}
+		onTime 1500{
+			set "background" "guis/assets/shock/screens/0324";
+		}
+		onTime 2000{
+			set "background" "guis/assets/shock/screens/0325";
+		}
+		onTime 2500{
+			set "background" "guis/assets/shock/screens/0326";
+		}
+		onTime 3000{
+			set "background" "guis/assets/shock/screens/0327";
+		}
+		onTime 3500{
+			set "background" "guis/assets/shock/screens/0328";
+		}
+		onTime 4000{
+			set "background" "guis/assets/shock/screens/0329";
+		}
+		onTime 4500{
+			set "background" "guis/assets/shock/screens/0330";
+		}
+		onTime 5000{
+			set "background" "guis/assets/shock/screens/0331";
+		}
+		onTime 5500{
+			set "background" "guis/assets/shock/screens/0332";
+		}
+		onTime 6000{
+			set "background" "guis/assets/shock/screens/0333";
+		}
+		onTime 6500{
+			set "background" "guis/assets/shock/screens/0334";
+		}
+		onTime 7000{
+			set "background" "guis/assets/shock/screens/0335";
+		}
+		onTime 7500{
+			set "background" "guis/assets/shock/screens/0336";
+		}
+		onTime 8000{
+			set "background" "guis/assets/shock/screens/0337";
+		}
+		onTime 8500{
+			set "background" "guis/assets/shock/screens/0338";
+		}
+		onTime 9000{
+			set "background" "guis/assets/shock/screens/0339";
+		}
+		onTime 9500{
+			set "background" "guis/assets/shock/screens/0340";
+		}
+		onTime 10000{
+			set "background" "guis/assets/shock/screens/0341";
+		}
+		onTime 10500{
+			set "background" "guis/assets/shock/screens/0342";
+		}
+		onTime 11000{
+			set "background" "guis/assets/shock/screens/0343";
+		}
+		onTime 11500{
+			set "background" "guis/assets/shock/screens/0344";
+		}
+		onTime 12000{
+			set "background" "guis/assets/shock/screens/0345";
+		}
+		onTime 12500{
+			set "background" "guis/assets/shock/screens/0346";
+		}
+		onTime 13000{
+			set "background" "guis/assets/shock/screens/0347";
+		}
+		onTime 13500{
+			set "background" "guis/assets/shock/screens/0348";
+		}
+		onTime 14000{
+			set "background" "guis/assets/shock/screens/0349";
+		}
+		onTime 14500{
+			set "background" "guis/assets/shock/screens/0350";
+		}
+		onTime 15000{
+			set "background" "guis/assets/shock/screens/0351";
+		}
+		onTime 15500{
+			set "background" "guis/assets/shock/screens/0352";
+		}
+		onTime 16000{
+			set "background" "guis/assets/shock/screens/0353";
+		}
+		onTime 16500{
+			set "background" "guis/assets/shock/screens/0354";
+		}
+		onTime 17000{
+			set "background" "guis/assets/shock/screens/0355";
+		}
+		onTime 17500{
+			set "background" "guis/assets/shock/screens/0356";
+		}
+		onTime 18000{
+			set "background" "guis/assets/shock/screens/0357";
+		}
+		onTime 18500{
+			set "background" "guis/assets/shock/screens/0358";
+		}
+		onTime 19000{
+			set "background" "guis/assets/shock/screens/0359";
+		}
+		onTime 19500{
+			set "background" "guis/assets/shock/screens/0360";
+		}
+		onTime 20000{
+			set "background" "guis/assets/shock/screens/0361";
+		}
+		onTime 20500{
+			set "background" "guis/assets/shock/screens/0362";
+		}
+		onTime 21000{
+			set "background" "guis/assets/shock/screens/0363";
+		}
+		onTime 21500{
+			set "background" "guis/assets/shock/screens/0364";
+		}
+		onTime 22000{
+			set "background" "guis/assets/shock/screens/0365";
+		}
+		onTime 22500{
+			set "background" "guis/assets/shock/screens/0366";
+		}
+		onTime 23000{
+			set "background" "guis/assets/shock/screens/0367";
+		}
+		onTime 23500{
+			set "background" "guis/assets/shock/screens/0368";
+		}
+		onTime 24000{
+			set "background" "guis/assets/shock/screens/0369";
+		}
+		onTime 24500{
+			set "background" "guis/assets/shock/screens/0370";
+		}
+		onTime 25000{
+			set "background" "guis/assets/shock/screens/0371";
+		}
+		onTime 25500{
+			set "background" "guis/assets/shock/screens/0372";
+		}
+		onTime 26000{
+			set "background" "guis/assets/shock/screens/0373";
+		}
+		onTime 26500{
+			set "background" "guis/assets/shock/screens/0374";
+		}
+		onTime 27000{
+			set "background" "guis/assets/shock/screens/0375";
+		}
+		onTime 27500{
+			set "background" "guis/assets/shock/screens/0376";
+		}
+		onTime 28000{
+			set "background" "guis/assets/shock/screens/0377";
+		}
+		onTime 28500{
+			set "background" "guis/assets/shock/screens/0378";
+		}
+		onTime 29000{
+			set "background" "guis/assets/shock/screens/0379";
+		}
+		onTime 29500{
+			set "background" "guis/assets/shock/screens/0380";
+		}
+		onTime 30000{
+			set "background" "guis/assets/shock/screens/0381";
+		}
+		onTime 30500{
+			set "background" "guis/assets/shock/screens/0382";
+		}
+		onTime 31000{
+			set "background" "guis/assets/shock/screens/0383";
+		}
+		onTime 31500{
+			set "background" "guis/assets/shock/screens/0384";
+		}
+		onTime 32000{
+			set "background" "guis/assets/shock/screens/0385";
+		}
+		onTime 32500{
+			set "background" "guis/assets/shock/screens/0386";
+		}
+		onTime 33000{
+			set "background" "guis/assets/shock/screens/0387";
+		}
+		onTime 33500{
+			set "background" "guis/assets/shock/screens/0388";
+		}
+		onTime 34000{
+			set "background" "guis/assets/shock/screens/0389";
+		}
+		onTime 34500{
+			set "background" "guis/assets/shock/screens/0390";
+		}
+		onTime 35000{
+			set "background" "guis/assets/shock/screens/0391";
+		}
+		onTime 35500{
+			set "background" "guis/assets/shock/screens/0392";
+		}
+		onTime 36000{
+			set "background" "guis/assets/shock/screens/0393";
+		}
+		onTime 36500{
+			set "background" "guis/assets/shock/screens/0394";
+		}
+		onTime 37000{
+			set "background" "guis/assets/shock/screens/0395";
+		}
+		onTime 37500{
+			set "background" "guis/assets/shock/screens/0396";
+		}
+		onTime 38000{
+			set "background" "guis/assets/shock/screens/0397";
+		}
+		onTime 38500{
+			set "background" "guis/assets/shock/screens/0398";
+		}
+		onTime 39000{
+			set "background" "guis/assets/shock/screens/0399";
+		}
+		onTime 39500{
+			set "background" "guis/assets/shock/screens/0400";
+		}
+		onTime 40000{
+			set "background" "guis/assets/shock/screens/0401";
+		}
+		onTime 40500{
+			set "background" "guis/assets/shock/screens/0402";
+		}
+		onTime 41000{
+			set "background" "guis/assets/shock/screens/0403";
+		}
+		onTime 41500{
+			set "background" "guis/assets/shock/screens/0404";
+		}
+		onTime 42000{
+			set "background" "guis/assets/shock/screens/0405";
+		}
+		onTime 42500{
+			set "background" "guis/assets/shock/screens/0406";
+		}
+		onTime 43000{
+			set "background" "guis/assets/shock/screens/0407";
+		}
+		onTime 43500{
+			set "background" "guis/assets/shock/screens/0408";
+		}
+		onTime 44000{
+			set "background" "guis/assets/shock/screens/0409";
+		}
+		onTime 44500{
+			set "background" "guis/assets/shock/screens/0410";
+		}
+		onTime 45000{
+			set "background" "guis/assets/shock/screens/0411";
+		}
+		onTime 45500{
+			set "background" "guis/assets/shock/screens/0412";
+		}
+		onTime 46000{
+			set "background" "guis/assets/shock/screens/0413";
+		}
+		onTime 46500{
+			set "background" "guis/assets/shock/screens/0414";
+		}
+		onTime 47000{
+			set "background" "guis/assets/shock/screens/0415";
+		}
+		onTime 47500{
+			set "background" "guis/assets/shock/screens/0416";
+		}
+		onTime 48000{
+			set "background" "guis/assets/shock/screens/0417";
+		}
+		onTime 48500{
+			set "background" "guis/assets/shock/screens/0418";
+		}
+		onTime 49000{
+			set "background" "guis/assets/shock/screens/0419";
+		}
+		onTime 49500{
+			set "background" "guis/assets/shock/screens/0420";
+		}
+		onTime 50000{
+			set "background" "guis/assets/shock/screens/0421";
+		}
+		onTime 50500{
+			set "background" "guis/assets/shock/screens/0422";
+		}
+		onTime 51000{
+			resetTime "0";
+		}
+	}
+}

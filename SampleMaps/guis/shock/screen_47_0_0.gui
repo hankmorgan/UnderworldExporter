@@ -1,0 +1,15 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "guis/assets/shock/screens/0368";
+
+		onTime 0{
+			resetTime "0";
+		}
+	}
+}
