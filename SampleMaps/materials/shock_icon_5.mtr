@@ -1,0 +1,15 @@
+textures\shock\icon\0078_0005
+{
+	DECAL_MACRO
+	noShadows
+	twoSided
+	nonsolid
+	noimpact
+	qer_editorimage textures/shock/icon/0078_0005.tga
+	{
+		blend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA
+	colored
+		map textures/shock/icon/0078_0005.tga
+		alphatest 0.8
+	}
+}

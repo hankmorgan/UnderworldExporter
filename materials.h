@@ -3,5 +3,6 @@
 
 void BuildXDataFile(int game);
 void BuildSndShaderFiles();
+void BuildMtrFiles(int MtrType);
 
 #endif /*materials_h*/

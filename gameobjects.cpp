@@ -41,6 +41,7 @@ void shockCommonObject();
 void setElevatorProperties(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, ObjectItem objList[1600], int objIndex,short PrintDebug);
 void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
@@ -122,7 +123,10 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case A_TELEPORT_TRAP:	//a destination for a teleport.
 				RenderEntityA_TELEPORT_TRAP(game,x,y,z,currobj,objList,LevelInfo);
-				break;	
+				break;
+			case SHOCK_DECAL:
+				RenderEntityDecal(game, x, y, z, currobj, objList, LevelInfo);
+				break;
 			case SHOCK_TRIGGER_NULL:
 				RenderEntityNULL_TRIGGER(game,x,y,z,currobj,objList,LevelInfo);	
 				break;	
@@ -1112,6 +1116,57 @@ createScriptCall(currobj,x,y,z);
 }
 
 
+
+void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{//decals like wall icons etc.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	
+	switch (currobj.ObjectSubClassIndex)
+	{
+		case 0:	//sign
+			fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+			fprintf(MAPFILE, "\"skin\" \"shock_sign_%04d\"\n", 390+currobj.unk1);
+			break;
+		case 1:	//icon
+			fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+			fprintf(MAPFILE, "\"skin\" \"shock_icon_%04d\"\n", currobj.unk1);
+			break;
+		case 2:	//graffiti
+			if (currobj.unk1 != 7)
+			{
+				fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+			}
+			else
+			{
+				fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[131].path);	//special case for shodan hearts diego 
+			}
+			fprintf(MAPFILE, "\"skin\" \"shock_graffiti_%04d\"\n", currobj.unk1);
+			break;
+		case 4:	//painting
+			if (currobj.unk1 != 2)
+			{
+				fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+			}
+			else
+			{
+				fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[126].path);//special case for the scream.
+			}
+			fprintf(MAPFILE, "\"skin\" \"shock_painting_%04d\"\n", 403+currobj.unk1);
+
+			break;
+		case 5:	//poster
+			fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+			fprintf(MAPFILE, "\"skin\" \"shock_poster_%04d\"\n", currobj.unk1);
+			break;
+	}
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	EntityRotationSHOCK(currobj.Angle2);
+	fprintf(MAPFILE, "\n}");
+}
+
+
 void EntityRotation(int heading)
 {//This is a fudge until I figure out the rotation math
 	//this also violates the idea of having differing x/y scales
@@ -1321,97 +1376,108 @@ mstaddress_pointer=0;
 				objList[MasterIndex].ObjectSubClassIndex = ObjectSubClassIndex;
 		
 				int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
-				objList[MasterIndex].item_id =LookupIndex;
+				if (LookupIndex != -1)
+				{
 
-				objList[MasterIndex].x =getValAtAddress(mst_ark,mstaddress_pointer+11,8);
-				objList[MasterIndex].y = getValAtAddress(mst_ark,mstaddress_pointer+13,8);
-				objList[MasterIndex].zpos =getValAtAddress(mst_ark,mstaddress_pointer+15,8);
-				
-				objList[MasterIndex].Angle1 = getValAtAddress(mst_ark,mstaddress_pointer+16,8);
-				objList[MasterIndex].Angle2 = getValAtAddress(mst_ark,mstaddress_pointer+17,8);
-				objList[MasterIndex].Angle3 = getValAtAddress(mst_ark,mstaddress_pointer+18,8);
-			//	printf("\tIt is a %s", objectMasters[objList[MasterIndex].item_id].desc );
-				objList[MasterIndex].sprite = getValAtAddress(mst_ark,mstaddress_pointer+23,8);
-				
-				objList[MasterIndex].State =  getValAtAddress(mst_ark,mstaddress_pointer+23,8);
+					objList[MasterIndex].item_id = LookupIndex;
+
+					objList[MasterIndex].x = getValAtAddress(mst_ark, mstaddress_pointer + 11, 8);
+					objList[MasterIndex].y = getValAtAddress(mst_ark, mstaddress_pointer + 13, 8);
+					objList[MasterIndex].zpos = getValAtAddress(mst_ark, mstaddress_pointer + 15, 8);
+
+					objList[MasterIndex].Angle1 = getValAtAddress(mst_ark, mstaddress_pointer + 16, 8);
+					objList[MasterIndex].Angle2 = getValAtAddress(mst_ark, mstaddress_pointer + 17, 8);
+					objList[MasterIndex].Angle3 = getValAtAddress(mst_ark, mstaddress_pointer + 18, 8);
+					//	printf("\tIt is a %s", objectMasters[objList[MasterIndex].item_id].desc );
+
+					objList[MasterIndex].sprite = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
+					objList[MasterIndex].State = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
+					objList[MasterIndex].unk1 = getValAtAddress(mst_ark, mstaddress_pointer + 24, 8);
 
 					printf("\n++++++++Next object++++++++++++\n");
-					printf("\nIndex = %d \n",objList[MasterIndex].index);
-					printf("Desc %s\t", objectMasters[objList[MasterIndex].item_id].desc );
-					printf("(%s)\n", UniqueObjectName(objList[MasterIndex]) );
-					printf("Class: %d,%d,%d\n",objList[MasterIndex].ObjectClass,objList[MasterIndex].ObjectSubClass,objList[MasterIndex].ObjectSubClassIndex);
-					printf("Location = (%d",objList[MasterIndex].tileX );
-					printf(",%d",objList[MasterIndex].tileY);
-					if (objList[MasterIndex].InUseFlag !=0)
-						{		
-						printf(", %d)\n	",LevelInfo[objList[MasterIndex].tileX][objList[MasterIndex].tileY].floorHeight);
-						}
+					printf("\nIndex = %d \n", objList[MasterIndex].index);
+					printf("Desc %s\t", objectMasters[objList[MasterIndex].item_id].desc);
+					printf("(%s)\n", UniqueObjectName(objList[MasterIndex]));
+					printf("Class: %d,%d,%d\n", objList[MasterIndex].ObjectClass, objList[MasterIndex].ObjectSubClass, objList[MasterIndex].ObjectSubClassIndex);
+					printf("Location = (%d", objList[MasterIndex].tileX);
+					printf(",%d", objList[MasterIndex].tileY);
+					if (objList[MasterIndex].InUseFlag != 0)
+					{
+						printf(", %d)\n	", LevelInfo[objList[MasterIndex].tileX][objList[MasterIndex].tileY].floorHeight);
+					}
 					else
-						{
+					{
 						printf(")\n");
-						}
-					printf("InUse = %d\n",objList[MasterIndex].InUseFlag);
-					printf("\tAIIndex = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+19,8));
-					printf("\tHitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
-			
+					}
+					printf("InUse = %d\n", objList[MasterIndex].InUseFlag);
+					printf("\tAIIndex = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 19, 8));
+					printf("\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
+
 					//printf("\tunk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
 					//printf("\tunk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
 					//printf("\tunk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));				
-					printf("\tXCoord= %d",getValAtAddress(mst_ark,mstaddress_pointer+11,8));
+					printf("\tXCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 11, 8));
 					//printf("\tXCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8)); same as tileX
-					printf("\tYCoord= %d",getValAtAddress(mst_ark,mstaddress_pointer+13,8));
+					printf("\tYCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 13, 8));
 					//printf("\tYCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8)); same as tileY
-					printf("\tZCoord = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+15,8));
-					printf("\tAngles = (%d",getValAtAddress(mst_ark,mstaddress_pointer+16,8));
-					printf(",%d",getValAtAddress(mst_ark,mstaddress_pointer+17,8));
-					printf("\,%d)\n",getValAtAddress(mst_ark,mstaddress_pointer+18,8));
-					printf("\tObjectType = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+20,8));
-					printf("\tHitPoints = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+21,16));
-					printf("\tState = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+23,8));
-					printf("\tunk1 = %d",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
-					printf("\tunk2 = %d",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
-					printf("\tunk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));
+					printf("\tZCoord = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 15, 8));
+					printf("\tAngles = (%d", getValAtAddress(mst_ark, mstaddress_pointer + 16, 8));
+					printf(",%d", getValAtAddress(mst_ark, mstaddress_pointer + 17, 8));
+					printf("\,%d)\n", getValAtAddress(mst_ark, mstaddress_pointer + 18, 8));
+					printf("\tObjectType = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 20, 8));
+					printf("\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
+					printf("\tState = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 23, 8));
+					printf("\tunk1 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 24, 8));
+					printf("\tunk2 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 25, 8));
+					printf("\tunk3 = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 26, 8));
 
-			switch (ObjectClass)	//to get further properties specific to each class
+					switch (ObjectClass)	//to get further properties specific to each class
+					{
+					case GUNS_WEAPONS:break;
+					case AMMUNITION:break;
+					case PROJECTILES:break;
+					case GRENADE_EXPLOSIONS:break;
+					case PATCHES:break;
+					case HARDWARE:break;
+					case SOFTWARE_LOGS:
+					{
+										  if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+										  break;
+					}
+					case FIXTURES:
+					{
+									 if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+									 break;
+					}
+					case GETTABLES_OTHER:
+						break;
+					case SWITCHES_PANELS:
+					{
+											if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+											break;
+					}
+					case DOORS_GRATINGS:
+					{
+										   if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+										   break;
+					}
+					case ANIMATED:break;
+					case TRAPS_MARKERS:
+					{
+										  if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+										  break;
+					}
+					case CONTAINERS_CORPSES:break;
+					case CRITTERS:break;
+					}
+					UniqueObjectName(objList[MasterIndex]);
+				}
+				else
 				{
-				case GUNS_WEAPONS:break;
-				case AMMUNITION:break;
-				case PROJECTILES:break;
-				case GRENADE_EXPLOSIONS:break;
-				case PATCHES:break;
-				case HARDWARE:break;
-				case SOFTWARE_LOGS:
-					{
-					if (lookUpSubClass(archive_ark,LevelNo*100+SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList,MasterIndex) == -1) {printf("\nNo properties found!\n");}
-					break;
-					}
-				case FIXTURES:
-					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
-					break;
-					}
-				case GETTABLES_OTHER:
-					break;
-				case SWITCHES_PANELS:
-					{
-					if (lookUpSubClass(archive_ark,LevelNo*100+SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30 ,xref, objList,MasterIndex) == -1) {printf("\nNo properties found!\n");}
-					break;
-					}
-				case DOORS_GRATINGS:
-					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
-					break;
-					}
-				case ANIMATED:break;
-				case TRAPS_MARKERS:
-					{
-					if (lookUpSubClass(archive_ark,LevelNo*100+TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28,xref, objList,MasterIndex) == -1)  {printf("no properties found!");}
-					break;
-					}
-				case CONTAINERS_CORPSES:break;
-				case CRITTERS:break;
-				}	
-				UniqueObjectName(objList[MasterIndex]);					
+					printf("\n\nInvalid item id!!\n");
+				}
+	
+
 		mstaddress_pointer +=27;
 		}
 
@@ -2581,8 +2647,8 @@ void SetDeathWatch(ObjectItem objList[1600])
 					for (int j = 0; j < 1600; j++)
 						{
 						if ((objList[j].ObjectClass == targetClass)
-							|| (objList[j].ObjectSubClass == targetSubClass)
-							|| (objList[j].ObjectSubClassIndex == targetSubClassIndex))
+							&& (objList[j].ObjectSubClass == targetSubClass)
+							&& (objList[j].ObjectSubClassIndex == targetSubClassIndex))
 							{
 							objList[j].DeathWatched = 1;
 							}

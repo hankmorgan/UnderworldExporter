@@ -293,3 +293,90 @@ void BuildSndShaderFiles()
 	}
 
 }
+
+void BuildMtrFiles(int MtrType)
+{
+	switch (MtrType)
+	{
+	case 0://regular textures
+
+		break;
+	case 1://decals
+		for (int i = 0; i <= 17; i++)
+		{//Icons
+			FILE *fileOut;
+			char filePath[80] = "";
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_icon_%d.mtr", i);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+				printf("Unable to create output file for material");
+				return;
+			}
+			fprintf(fileOut, "textures\\shock\\icon\\0078_%04d\n{\n", i);
+			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
+			fprintf(fileOut, "\tqer_editorimage textures/shock/icon/0078_%04d.tga\n", i);
+			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/icon/0078_%04d.tga\n\t\talphatest 0.8\n\t}", i);
+
+			fprintf(fileOut, "\n}", i);
+			fclose(fileOut);
+		}
+		for (int i = 0; i <= 7; i++)
+		{//Graffiti
+			FILE *fileOut;
+			char filePath[80] = "";
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_graffiti_%d.mtr", i);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+				printf("Unable to create output file for material");
+				return;
+			}
+			fprintf(fileOut, "textures\\shock\\graffiti\\0079_%04d\n{\n", i);
+			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
+			fprintf(fileOut, "\tqer_editorimage textures/shock/graffiti/0079_%04d.tga\n", i);
+			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/graffiti/0079_%04d.tga\n\t\talphatest 0.8\n\t}", i);
+
+			fprintf(fileOut, "\n}", i);
+			fclose(fileOut);
+		}
+
+		for (int i = 0; i <= 1; i++)
+		{//signs
+			FILE *fileOut;
+			char filePath[80] = "";
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_sign_%d.mtr", i);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+				printf("Unable to create output file for material");
+				return;
+			}
+			fprintf(fileOut, "textures\\shock\\sign\\1350_%04d\n{\n", 390+i);
+			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
+			fprintf(fileOut, "\tqer_editorimage textures/shock/sign/1350_%04d.tga\n", 390+i);
+			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/sign/1350_%04d.tga\n\t\talphatest 0.8\n\t}", 390 + i);
+
+			fprintf(fileOut, "\n}", i);
+			fclose(fileOut);
+		}
+		for (int i = 0; i <= 2; i++)
+		{//paintings
+			FILE *fileOut;
+			char filePath[80] = "";
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_painting_%d.mtr", i);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+				printf("Unable to create output file for material");
+				return;
+			}
+			fprintf(fileOut, "textures\\shock\\painting\\1350_%04d\n{\n", 403 + i);
+			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
+			fprintf(fileOut, "\tqer_editorimage textures/shock/painting/1350_%04d.tga\n", 403 + i);
+			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/painting/1350_%04d.tga\n\t}", 403 + i);
+
+			fprintf(fileOut, "\n}", i);
+			fclose(fileOut);
+		}
+	case 2://Animated stuff
+		break;
+}
+
+}

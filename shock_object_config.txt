@@ -124,11 +124,11 @@
 123 7 1 7 COUCH models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 124 7 1 8 CHAIR models/darkmod/furniture/seating/dchair2.lwo model 18
 125 7 1 9 COATTREE models/darkmod/hangers/coatrack.ase model 18
-126 7 2 0 SIGN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-127 7 2 1 ICON models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-128 7 2 2 GRAFFITI models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+126 7 2 0 SIGN models/darkmod/shock/shock_sign_0000.ase entity 62
+127 7 2 1 ICON models/darkmod/shock/shock_icon_0000.ase entity 62
+128 7 2 2 GRAFFITI models/darkmod/shock/shock_icon_0000.ase entity 62
 129 7 2 3 WORDS models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-130 7 2 4 PAINTING models/darkmod/decorative/wall/banner1.lwo model 18
+130 7 2 4 PAINTING models/darkmod/shock/shock_icon_0000.ase entity 62
 131 7 2 5 POSTER models/darkmod/decorative/wall/banner1.lwo model 18
 132 7 2 6 SCREEN models/darkmod/decorative/wall/banner1.lwo model 18
 133 7 2 7 TEXTURE_MAP models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
