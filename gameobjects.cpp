@@ -1173,25 +1173,40 @@ void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
-	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
-	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
-	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	if (currobj.shockProperties[SCREEN_START]<246)
+
+
+
+	if (currobj.shockProperties[SCREEN_START] < 246)
 	{
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_damagable");
 		fprintf(MAPFILE, "\"gui\" \"guis/shock/screen_%d_%d_%d.gui\"\n", currobj.shockProperties[SCREEN_START], currobj.shockProperties[SCREEN_NO_OF_FRAMES], currobj.shockProperties[SCREEN_LOOP_FLAG]);
+		fprintf(MAPFILE, "\"target\" \"runscript_%s_destroy\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n", UniqueObjectName(currobj));
 	}
 	else
 	{//unimplemented special screens.
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 		fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
+
 	}
-	 
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+
+
 	//currobj.shockProperties[SCREEN_NO_OF_FRAMES]
 	//currobj.shockProperties[SCREEN_LOOP_FLAG] 
 	//currobj.shockProperties[SCREEN_START] 
 	fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
 	EntityRotationSHOCK(currobj.Angle2);
 	fprintf(MAPFILE, "\n}");
+
+	if (currobj.shockProperties[SCREEN_START] < 246)
+	{//destructable
+		createScriptCall(currobj, x, y, z, "destroy");
+	}
+
+
 }
 
 

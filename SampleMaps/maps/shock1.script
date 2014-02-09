@@ -55,6 +55,58 @@
 void deathwatch_script(float objectId);
 	float deathwatch_708 = 0;
 
+void start_SCREEN_18_32_01_0067_destroy();
+
+void start_SCREEN_17_31_01_0079_destroy();
+
+void start_SCREEN_40_24_01_0128_destroy();
+
+void start_SCREEN_35_27_01_0177_destroy();
+
+void start_SCREEN_35_27_01_0178_destroy();
+
+void start_SCREEN_28_29_01_0185_destroy();
+
+void start_SCREEN_28_31_01_0186_destroy();
+
+void start_SCREEN_20_22_01_0187_destroy();
+
+void start_SCREEN_43_49_01_0238_destroy();
+
+void start_SCREEN_23_30_01_0245_destroy();
+
+void start_SCREEN_18_44_01_0369_destroy();
+
+void start_SCREEN_38_30_01_0433_destroy();
+
+void start_SCREEN_38_32_01_0434_destroy();
+
+void start_SCREEN_32_31_01_0446_destroy();
+
+void start_SCREEN_32_31_01_0447_destroy();
+
+void start_SCREEN_31_30_01_0448_destroy();
+
+void start_SCREEN_31_30_01_0449_destroy();
+
+void start_SCREEN_18_46_01_0530_destroy();
+
+void start_SCREEN_18_47_01_0531_destroy();
+
+void start_SCREEN_39_39_01_0533_destroy();
+
+void start_SCREEN_30_52_01_0542_destroy();
+
+void start_SCREEN_28_52_01_0543_destroy();
+
+void start_SCREEN_29_52_01_0544_destroy();
+
+void start_SCREEN_13_25_01_0617_destroy();
+
+void start_SCREEN_14_25_01_0618_destroy();
+
+void start_SCREEN_24_21_01_0661_destroy();
+
 
 
 void start_BUTTON_30_52_01_0541()
@@ -2062,5 +2114,187 @@ void deathwatch_script(float objectId)
 		$runscript_DEATH_WATCH_TRIGGER_44_48_01_0475.activate($player1);
 	}
 
+}
+
+
+
+void start_SCREEN_18_32_01_0067_destroy()
+{
+	$SCREEN_18_32_01_0067.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_17_31_01_0079_destroy()
+{
+	$SCREEN_17_31_01_0079.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_40_24_01_0128_destroy()
+{
+	$SCREEN_40_24_01_0128.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_35_27_01_0177_destroy()
+{
+	$SCREEN_35_27_01_0177.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_35_27_01_0178_destroy()
+{
+	$SCREEN_35_27_01_0178.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_28_29_01_0185_destroy()
+{
+	$SCREEN_28_29_01_0185.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_28_31_01_0186_destroy()
+{
+	$SCREEN_28_31_01_0186.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_20_22_01_0187_destroy()
+{
+	$SCREEN_20_22_01_0187.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_43_49_01_0238_destroy()
+{
+	$SCREEN_43_49_01_0238.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_23_30_01_0245_destroy()
+{
+	$SCREEN_23_30_01_0245.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_18_44_01_0369_destroy()
+{
+	$SCREEN_18_44_01_0369.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_38_30_01_0433_destroy()
+{
+	$SCREEN_38_30_01_0433.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_38_32_01_0434_destroy()
+{
+	$SCREEN_38_32_01_0434.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_32_31_01_0446_destroy()
+{
+	$SCREEN_32_31_01_0446.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_32_31_01_0447_destroy()
+{
+	$SCREEN_32_31_01_0447.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_31_30_01_0448_destroy()
+{
+	$SCREEN_31_30_01_0448.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_31_30_01_0449_destroy()
+{
+	$SCREEN_31_30_01_0449.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_18_46_01_0530_destroy()
+{
+	$SCREEN_18_46_01_0530.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_18_47_01_0531_destroy()
+{
+	$SCREEN_18_47_01_0531.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_39_39_01_0533_destroy()
+{
+	$SCREEN_39_39_01_0533.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_30_52_01_0542_destroy()
+{
+	$SCREEN_30_52_01_0542.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_28_52_01_0543_destroy()
+{
+	$SCREEN_28_52_01_0543.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_29_52_01_0544_destroy()
+{
+	$SCREEN_29_52_01_0544.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_13_25_01_0617_destroy()
+{
+	$SCREEN_13_25_01_0617.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_14_25_01_0618_destroy()
+{
+	$SCREEN_14_25_01_0618.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
+}
+
+
+
+void start_SCREEN_24_21_01_0661_destroy()
+{
+	$SCREEN_24_21_01_0661.setGuiFloat(GUI_ENTITY1, "destroyed", 1);
 }
 #endif //__game3_1_script__

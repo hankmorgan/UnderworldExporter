@@ -7,7 +7,7 @@
 6 0 1 1 RF-07_SKORPION models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 7 0 2 0 SB-20_MAGPULSE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 8 0 2 1 MM-76_RAIL_GUN models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-9 0 3 0 LEAD_PIPE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+9 0 3 0 LEAD_PIPE atdm:weapon_shortsword entity 18
 10 0 3 1 TS-04_LASER_RAPIER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 11 0 4 0 SPARQ_BEAM models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 12 0 4 1 ER-90_BLASTER models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

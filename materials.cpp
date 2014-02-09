@@ -403,6 +403,7 @@ void BuildGuiFiles()
 			else
 			{
 				fprintf(fileOut,"windowDef Desktop\n{\n\trect 0,0,640,480\n\tnocursor 1\n");
+				fprintf(fileOut, "\tfloat destroyed 0\n");
 				fprintf(fileOut, "\t\twindowdef panel\n\t\t{\n");
 				fprintf(fileOut, "\t\trect 0,0,640,480\n\t\tvisible 1\n");
 				fprintf(fileOut, "\t\tbackground \"guis/assets/shock/screens/%04d\";\n\n", startframe + 321);
@@ -411,7 +412,11 @@ void BuildGuiFiles()
 				for (i = startframe; i < startframe + noofframes; i++)
 				{
 					fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+					fprintf(fileOut, "\t\t\tif (\"gui::destroyed\"==1)\n");
+					fprintf(fileOut, "\t\t\t{resetTime \"%d\";}\n", noofframes * 3 * 500);
+					fprintf(fileOut, "\t\t\telse{\n");
 					fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
+					fprintf(fileOut, "\t\t\t}\n");
 					fprintf(fileOut, "\t\t}\n");
 				}
 				if (loopflag != 0)
@@ -419,23 +424,45 @@ void BuildGuiFiles()
 					for (i = startframe + noofframes - 2; i > startframe ; i--)
 					{
 						fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+						fprintf(fileOut, "\t\t\tif (\"gui::destroyed\"==1)\n");
+						fprintf(fileOut, "\t\t\t{resetTime \"%d\";}\n", noofframes * 3 * 500);
+						fprintf(fileOut, "\t\t\telse{\n");
 						fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
+						fprintf(fileOut, "\t\t\t}\n");
 						fprintf(fileOut, "\t\t}\n");
 					}
 					//reset a forwards and backwards sequence
 					fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+					fprintf(fileOut, "\t\t\tif (\"gui::destroyed\"==1)\n");
+					fprintf(fileOut, "\t\t\t{resetTime \"%d\";}\n", noofframes * 3 * 500);
+					fprintf(fileOut, "\t\t\telse{\n");
 					//fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
 					fprintf(fileOut, "\t\t\tresetTime \"0\";\n");
+					fprintf(fileOut, "\t\t\t}\n");
 					fprintf(fileOut, "\t\t}\n");
 				}
 				else
 				{
 					//resets a forward only sequence.
 					fprintf(fileOut, "\t\tonTime %d{\n", (j++) * 500);
+					fprintf(fileOut, "\t\t\tif (\"gui::destroyed\"==1)\n");
+					fprintf(fileOut, "\t\t\t{resetTime \"%d\";}\n", noofframes * 3 * 500);
+					fprintf(fileOut, "\t\t\telse{\n");
 					fprintf(fileOut, "\t\t\tresetTime \"0\";\n");
+					fprintf(fileOut, "\t\t\t}\n");
 					fprintf(fileOut, "\t\t}\n");
 
 				}
+				//Now the screen destruction sequence
+				j = 0;
+				int startTimeDestructTime = ((noofframes * 3) + 1) * 500;
+				for (i = 16; i < 31; i++)
+				{
+					fprintf(fileOut, "\t\tonTime %d{\n", startTimeDestructTime + (j++)*100);
+					fprintf(fileOut, "\t\t\tset \"background\" \"guis/assets/shock/screens/%04d\";\n", i + 321);
+					fprintf(fileOut, "\t\t}\n");
+				}
+
 				fprintf(fileOut, "\t}\n}");
 				fclose(fileOut);
 			}

@@ -622,6 +622,16 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 			}
 		}
 
+	//The destructable screens
+	for (int i = 0; i < 1600; i++)
+	{
+		if ((objList[i].item_id == 132) || (objList[i].item_id == 134) || (objList[i].item_id == 135))
+		{
+			fprintf(fGLOBALS, "\nvoid start_%s_destroy();\n",UniqueObjectName(objList[i]));//the declaration
+			fprintf(fBODY, "\n\n\nvoid start_%s_destroy()\n{\n", UniqueObjectName(objList[i]));
+			fprintf(fBODY, "\t$%s.setGuiFloat(GUI_ENTITY1, \"destroyed\", 1);\n}\n", UniqueObjectName(objList[i]));
+		}
+	}
 	fclose(fBODY);
 	//fprintf(fMAIN,"\n}\n");	
 	//fclose(fMAIN);
