@@ -1,0 +1,29 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+	float buttonstate 0
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "guis/assets/shock/screens/0983";
+
+		onTime 0{
+			if ("gui::buttonstate"==1)
+			{
+
+                          set "background" "guis/assets/shock/switches/1350_0984";     //On State
+                          }
+                      else
+                          {
+                           set "background" "guis/assets/shock/switches/1350_0983";    //Off State
+
+                        }
+		}
+		onTime 500{
+                         resetTime "0";
+
+		}
+	}
+}

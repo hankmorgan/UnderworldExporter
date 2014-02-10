@@ -541,7 +541,12 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 								break;
 								
 							case SWITCHES_PANELS:
-									//There are many types of switch with different properties
+									//Control the appearance of the switch here
+								fprintf(fBODY, "\n\t\tfloat buttonState = $%s.getGuiFloat(GUI_ENTITY1, \"buttonstate\");", UniqueObjectName(objList[nextObj]));
+								fprintf(fBODY, "\n\t\tif (buttonState == 0)\n\t\t\t{$%s.setGuiFloat(GUI_ENTITY1, \"buttonstate\", 1);}", UniqueObjectName(objList[nextObj]));
+								fprintf(fBODY, "\n\t\telse\n\t\t\t{$%s.setGuiFloat(GUI_ENTITY1, \"buttonstate\", 0);}\n", UniqueObjectName(objList[nextObj]));
+
+								//There are many types of switch with different properties
 									scriptShockButtons(LevelInfo,objList,objList[nextObj]);
 								break;
 								

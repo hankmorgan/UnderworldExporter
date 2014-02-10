@@ -708,26 +708,37 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 	return;
 }
 
-void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+void RenderEntityButton(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
-//
-//Params
-//item_id
-//tileX
-//tileY
-//index
-//heading
-//Need to pass desc/path for generic handling
-	fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount);
-	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	fprintf (MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
-	fprintf (MAPFILE, "\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");	//TODO:Need to pass this in from config
+	//
+	//Params
+	//item_id
+	//tileX
+	//tileY
+	//index
+	//heading
+	//Need to pass desc/path for generic handling
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	//fprintf (MAPFILE, "\"model\" \"models/darkmod/mechanical/switches/switch_flip.ase\"\n");	//TODO:Need to pass this in from config
+	fprintf(MAPFILE, "\"model\" \"%s\"\n",objectMasters[currobj.item_id].path);
 	//position
 	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
-	fprintf (MAPFILE, "\"rotate\" \"0 0 45\"\n");
+	fprintf (MAPFILE, "\"rotate\" \"0 0 1\"\n");
 	fprintf (MAPFILE, "\"interruptable\" \"0\"\n");
-	EntityRotation(currobj.heading);
+	
 	fprintf (MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+	if (game == SHOCK)
+		{//gui related settings
+		fprintf(MAPFILE, "\"gui\" \"guis/shock/switch_%d_%d_%d.gui\"\n",currobj.ObjectClass,currobj.ObjectSubClass,currobj.ObjectSubClassIndex);
+		fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n", currobj.ObjectClass, currobj.ObjectSubClass, currobj.ObjectSubClassIndex);
+		EntityRotationSHOCK(currobj.Angle2);
+		}
+	else
+	{
+		EntityRotation(currobj.heading);
+	}
 	fprintf (MAPFILE, "}\n");EntityCount++;
 	createScriptCall(currobj,x,y,z);	//To run whatever actions this switch performs.
 	return;
