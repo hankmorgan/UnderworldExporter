@@ -57,7 +57,8 @@ int UseAdjacentTextures;
 int shockTextureOffset;
 int shockNorthOffset; int shockSouthOffset;
 int shockEastOffset; int shockWestOffset;
-int shockShade;	//255-0 Dark to light? Made up of two flag values
+short shockShadeUpper;	
+short shockShadeLower;
 long shockNorthCeilHeight; long shockSouthCeilHeight;
 long shockEastCeilHeight; long shockWestCeilHeight;
 
@@ -76,6 +77,7 @@ short hasElevator;	//Indicates that the tile has an elevator
 short TerrainChange;	//Indicates that the tile can change into another type of tile
 //int TerrainChangeIndex;	//index to the change terrain trap.
 
+int SHOCKSTATE[4];	//These should be ff,00,00,00 on an initial map. I'm just bringing them back for research purposes.
 	//scripting state flags
 	short global;
 

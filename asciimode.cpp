@@ -403,9 +403,19 @@ if (game == SHOCK)
 		printf ("\n");
 		for (x=0; x<64;x++)
 			{
-				printf("%03d|",LevelInfo[x][y].shockShade) ;
+			printf("%d-%d|", LevelInfo[x][y].shockShadeUpper, LevelInfo[x][y].shockShadeLower);
 			}
-		}		
+		}	
+	
+	printf("\nPrint out light state by tile for level :%d\n", LevelNo);
+	for (y = 63; y >= 0; y--)
+	{
+		printf("\n");
+		for (x = 0; x<64; x++)
+		{
+			printf("%d-%d|", (LevelInfo[x][y].SHOCKSTATE[3] >> 4 & 0x0F),(LevelInfo[x][y].SHOCKSTATE[3] & 0x0F));
+		}
+	}
 		
 	printf("\nPrint out slope flags by tile for level :%d\n",LevelNo);
 	for (y=63; y>=0;y--)

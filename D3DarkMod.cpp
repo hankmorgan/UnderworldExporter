@@ -189,26 +189,54 @@ int x; int y;
 						{
 						if (LevelInfo[x][y].tileType != 0)
 							{
+							float shade = 0.60;	//Max brightness.
 							//put a light here. absolute frame rate killer. Need to merge contigous regions of light together or do something clever with texture brightness
 							fprintf (MAPFILE, "// entity %d\n", EntityCount++);
 							fprintf (MAPFILE, "{\n\"classname\" \"light\"");
-							fprintf (MAPFILE, "\n\"name\" \"light_%02d_%02d\"",x,y);
-							fprintf (MAPFILE, "\n\"origin\" \"%d %d %d\"",x*BrushSizeX + BrushSizeX/2,y*BrushSizeY + BrushSizeY/2,(LevelInfo[x][y].floorHeight + (CEILING_HEIGHT -LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight)/2)* BrushSizeZ);	//May cause leaks on small maps.
+							fprintf (MAPFILE, "\n\"name\" \"light_%02d_%02d_upper\"",x,y);
+							fprintf (MAPFILE, "\n\"origin\" \"%d %d %d\"",
+								x*BrushSizeX + BrushSizeX/2,
+								y*BrushSizeY + BrushSizeY/2,
+								(LevelInfo[x][y].floorHeight + (3*(CEILING_HEIGHT -LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight)/4))* BrushSizeZ);	
 							fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
-							fprintf (MAPFILE, "\n\"light_radius\" \"%d %d %d\"",40+BrushSizeX/2,40+BrushSizeY/2, CEILING_HEIGHT*BrushSizeZ);	
-							float shade =0.60;	//Max brightness.
-							if ( LevelInfo[x][y].shockShade !=0)
-								{
-								shade = (0.50) * (1-((float)LevelInfo[x][y].shockShade/255));
-								}
+							fprintf (MAPFILE, "\n\"light_radius\" \"%d %d %d\"",
+								40+BrushSizeX/2,
+								40+BrushSizeY/2,
+									((CEILING_HEIGHT - LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight)/2)*BrushSizeZ);
+							
+							shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
 							fprintf (MAPFILE, "\n\"_color\" \"%f %f %f\"",shade,shade,shade);	
 							fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
-							fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
+							fprintf (MAPFILE, "\n\"noshadows\" \"1\"");
 							fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
 							fprintf (MAPFILE, "\n\"parallel\" \"0\"");
 							//fprintf (MAPFILE, "\n\"texture\" \"lights/tdmnofalloff\"");
 							fprintf(MAPFILE, "\n\"texture\" \"lights/square\"");
 							fprintf (MAPFILE, "\n}\n");
+
+							fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+							fprintf(MAPFILE, "{\n\"classname\" \"light\"");
+							fprintf(MAPFILE, "\n\"name\" \"light_%02d_%02d_lower\"", x, y);
+							fprintf(MAPFILE, "\n\"origin\" \"%d %d %d\"",
+								x*BrushSizeX + BrushSizeX / 2,
+								y*BrushSizeY + BrushSizeY / 2,
+								(LevelInfo[x][y].floorHeight + (1 * (CEILING_HEIGHT - LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight) / 4))* BrushSizeZ);
+							fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
+							fprintf(MAPFILE, "\n\"light_radius\" \"%d %d %d\"",
+								40 + BrushSizeX / 2,
+								40 + BrushSizeY / 2,
+								((CEILING_HEIGHT - LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight) / 2)*BrushSizeZ);
+							
+							shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
+							fprintf(MAPFILE, "\n\"_color\" \"%f %f %f\"", shade, shade, shade);
+							fprintf(MAPFILE, "\n\"nodiffuse\" \"0\"");
+							fprintf(MAPFILE, "\n\"noshadows\" \"1\"");
+							fprintf(MAPFILE, "\n\"nospecular\" \"0\"");
+							fprintf(MAPFILE, "\n\"parallel\" \"0\"");
+							//fprintf (MAPFILE, "\n\"texture\" \"lights/tdmnofalloff\"");
+							fprintf(MAPFILE, "\n\"texture\" \"lights/square\"");
+							fprintf(MAPFILE, "\n}\n");
+
 							} 
 						}
 					}

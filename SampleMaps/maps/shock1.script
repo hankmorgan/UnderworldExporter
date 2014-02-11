@@ -111,6 +111,12 @@ void start_SCREEN_24_21_01_0661_destroy();
 
 void start_BUTTON_30_52_01_0541()
 {
+
+		float buttonState = $BUTTON_30_52_01_0541.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_30_52_01_0541.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_30_52_01_0541.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	float displacement = 51 - lift_025_051_ceiling_state;
 	$ceiling_025_051.move( UP, displacement * 15 );
 	lift_025_051_ceiling_state = 51 ;
@@ -121,6 +127,12 @@ void start_BUTTON_30_52_01_0541()
 
 void start_SWITCH_20_51_01_0355()
 {
+
+		float buttonState = $SWITCH_20_51_01_0355.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_20_51_01_0355.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_20_51_01_0355.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Object 0: Not in use");
 }
 
@@ -374,6 +386,12 @@ void start_NULL_TRIGGER_21_45_01_0588()
 
 void start_BUTTON_23_45_01_0592()
 {
+
+		float buttonState = $BUTTON_23_45_01_0592.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_23_45_01_0592.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_23_45_01_0592.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_23_45_01_0592)");
 	$runscript_NULL_TRIGGER_21_46_01_0597.activate($player1);
 }
@@ -382,6 +400,12 @@ void start_BUTTON_23_45_01_0592()
 
 void start_BUTTON_24_45_01_0558()
 {
+
+		float buttonState = $BUTTON_24_45_01_0558.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_24_45_01_0558.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_24_45_01_0558.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_24_45_01_0558)");
 	$runscript_NULL_TRIGGER_21_46_01_0597.activate($player1);
 }
@@ -404,6 +428,12 @@ void start_ENTRY_TRIGGER_26_45_01_0585()
 
 void start_BUTTON_26_45_01_0593()
 {
+
+		float buttonState = $BUTTON_26_45_01_0593.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_26_45_01_0593.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_26_45_01_0593.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_26_45_01_0593)");
 	$runscript_NULL_TRIGGER_21_44_01_0557.activate($player1);
 }
@@ -412,6 +442,12 @@ void start_BUTTON_26_45_01_0593()
 
 void start_BUTTON_27_45_01_0586()
 {
+
+		float buttonState = $BUTTON_27_45_01_0586.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_27_45_01_0586.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_27_45_01_0586.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_27_45_01_0586)");
 	$runscript_NULL_TRIGGER_25_44_01_0595.activate($player1);
 }
@@ -420,6 +456,12 @@ void start_BUTTON_27_45_01_0586()
 
 void start_BUTTON_27_45_01_0555()
 {
+
+		float buttonState = $BUTTON_27_45_01_0555.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_27_45_01_0555.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_27_45_01_0555.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_27_45_01_0555)");
 	$runscript_NULL_TRIGGER_21_44_01_0557.activate($player1);
 }
@@ -522,6 +564,12 @@ void start_NULL_TRIGGER_25_44_01_0556()
 
 void start_BUTTON_28_44_01_0554()
 {
+
+		float buttonState = $BUTTON_28_44_01_0554.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_28_44_01_0554.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_28_44_01_0554.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_28_44_01_0554)");
 	$runscript_NULL_TRIGGER_25_44_01_0595.activate($player1);
 }
@@ -537,6 +585,12 @@ void start_NULL_TRIGGER_29_44_01_0356()
 
 void start_SWITCH_14_43_01_0603()
 {
+
+		float buttonState = $SWITCH_14_43_01_0603.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_14_43_01_0603.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_14_43_01_0603.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Object 0: Not in use");
 }
 
@@ -580,6 +634,12 @@ void start_NULL_TRIGGER_18_43_01_0160()
 
 void start_LEVER_18_43_01_0227()
 {
+
+		float buttonState = $LEVER_18_43_01_0227.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LEVER_18_43_01_0227.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LEVER_18_43_01_0227.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LEVER_18_43_01_0227)");
 	$runscript_NULL_TRIGGER_18_43_01_0237.activate($player1);
 }
@@ -679,6 +739,12 @@ void start_REPULSOR_26_42_01_0451()
 
 void start_SWITCH_12_41_01_0525()
 {
+
+		float buttonState = $SWITCH_12_41_01_0525.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_12_41_01_0525.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_12_41_01_0525.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:SWITCH_12_41_01_0525)");
 	$a_lock_014_040.activate($player1);
 }
@@ -695,6 +761,12 @@ void start_REPULSOR_30_41_01_0055()
 
 void start_SWITCH_30_40_01_0450()
 {
+
+		float buttonState = $SWITCH_30_40_01_0450.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_30_40_01_0450.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_30_40_01_0450.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:SWITCH_30_40_01_0450)");
 	$a_lock_031_038.activate($player1);
 }
@@ -805,6 +877,12 @@ void start_NULL_TRIGGER_38_39_01_0408()
 
 void start_LEVER_49_39_01_0365()
 {
+
+		float buttonState = $LEVER_49_39_01_0365.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LEVER_49_39_01_0365.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LEVER_49_39_01_0365.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	if (LEVER_49_39_01_0365_state == 1)
 		{
 		$runscript_NULL_TRIGGER_49_40_01_0371.activate($player1);
@@ -822,6 +900,12 @@ void start_LEVER_49_39_01_0365()
 
 void start_EMERGENCY_LEVER_39_38_01_0627()
 {
+
+		float buttonState = $EMERGENCY_LEVER_39_38_01_0627.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$EMERGENCY_LEVER_39_38_01_0627.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$EMERGENCY_LEVER_39_38_01_0627.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:EMERGENCY_LEVER_39_38_01_0627)");
 	$runscript_NULL_TRIGGER_38_39_01_0628.activate($player1);
 	$runscript_NULL_TRIGGER_38_39_01_0408.activate($player1);
@@ -832,6 +916,12 @@ void start_EMERGENCY_LEVER_39_38_01_0627()
 
 void start_CYBERSPACE_TERMINAL_12_37_01_0535()
 {
+
+		float buttonState = $CYBERSPACE_TERMINAL_12_37_01_0535.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$CYBERSPACE_TERMINAL_12_37_01_0535.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$CYBERSPACE_TERMINAL_12_37_01_0535.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Teleporting to a cyberspace level:14@(8,47,70)");
 }
 
@@ -852,6 +942,12 @@ void start_ENTRY_TRIGGER_15_37_01_0727()
 
 void start_ELEVATOR_PANEL_15_37_01_0030()
 {
+
+		float buttonState = $ELEVATOR_PANEL_15_37_01_0030.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ELEVATOR_PANEL_15_37_01_0030.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ELEVATOR_PANEL_15_37_01_0030.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Moving levels possible panels are: 193, 30, 0 ");
 }
 
@@ -868,6 +964,12 @@ void start_EMAIL_18_37_01_0021()
 
 void start_LARGE_BUTTON_18_37_01_0016()
 {
+
+		float buttonState = $LARGE_BUTTON_18_37_01_0016.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_18_37_01_0016.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_18_37_01_0016.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LARGE_BUTTON_18_37_01_0016)");
 	$runscript_NULL_TRIGGER_19_36_01_0063.activate($player1);
 }
@@ -892,6 +994,12 @@ void start_ENTRY_TRIGGER_19_37_01_0681()
 
 void start_LARGE_BUTTON_20_37_01_0220()
 {
+
+		float buttonState = $LARGE_BUTTON_20_37_01_0220.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_20_37_01_0220.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_20_37_01_0220.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LARGE_BUTTON_20_37_01_0220)");
 	$runscript_NULL_TRIGGER_19_36_01_0063.activate($player1);
 }
@@ -990,6 +1098,12 @@ void start_NULL_TRIGGER_17_35_01_0023()
 
 void start_LEVER_17_35_01_0130()
 {
+
+		float buttonState = $LEVER_17_35_01_0130.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LEVER_17_35_01_0130.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LEVER_17_35_01_0130.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LEVER_17_35_01_0130)");
 	$runscript_NULL_TRIGGER_17_35_01_0024.activate($player1);
 	$runscript_NULL_TRIGGER_17_35_01_0023.activate($player1);
@@ -1015,6 +1129,12 @@ void start_CRITTER_AI_HINT_35_34_01_0308()
 
 void start_ENERGY_CHARGE_STATION_38_34_01_0679()
 {
+
+		float buttonState = $ENERGY_CHARGE_STATION_38_34_01_0679.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ENERGY_CHARGE_STATION_38_34_01_0679.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ENERGY_CHARGE_STATION_38_34_01_0679.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Charging up: 255 , Security level? 48");
 }
 
@@ -1040,6 +1160,12 @@ void start_NULL_TRIGGER_37_33_01_0206()
 
 void start_LARGE_BUTTON_40_32_01_0159()
 {
+
+		float buttonState = $LARGE_BUTTON_40_32_01_0159.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_40_32_01_0159.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_40_32_01_0159.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LARGE_BUTTON_40_32_01_0159)");
 	$ENTRY_TRIGGER_39_31_01_0714.activate($player1);
 }
@@ -1064,6 +1190,12 @@ void start_NULL_TRIGGER_11_31_01_0654()
 
 void start_BUTTON_17_31_01_0701()
 {
+
+		float buttonState = $BUTTON_17_31_01_0701.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_17_31_01_0701.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_17_31_01_0701.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Lighting control cp1=3 cp2=701");
 }
 
@@ -1078,6 +1210,12 @@ void start_NULL_TRIGGER_19_31_01_0600()
 
 void start_BUTTON_33_31_01_0662()
 {
+
+		float buttonState = $BUTTON_33_31_01_0662.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_33_31_01_0662.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_33_31_01_0662.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action change state by switch:BUTTON_33_31_01_0662)");
 	$runscript_REPULSOR_31_30_01_0668.activate($player1);
 }
@@ -1138,6 +1276,12 @@ void start_LEVEL_ENTRY_TRIGGER_11_30_01_0653()
 
 void start_BUTTON_27_30_01_0700()
 {
+
+		float buttonState = $BUTTON_27_30_01_0700.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_27_30_01_0700.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_27_30_01_0700.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Lighting control cp1=3 cp2=700");
 }
 
@@ -1163,6 +1307,12 @@ void start_REPULSOR_31_30_01_0668()
 
 void start_BUTTON_32_30_01_0529()
 {
+
+		float buttonState = $BUTTON_32_30_01_0529.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_32_30_01_0529.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_32_30_01_0529.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action change state by switch:BUTTON_32_30_01_0529)");
 	$runscript_REPULSOR_31_30_01_0668.activate($player1);
 }
@@ -1171,6 +1321,12 @@ void start_BUTTON_32_30_01_0529()
 
 void start_ACCESS_PANEL_32_30_01_0682()
 {
+
+		float buttonState = $ACCESS_PANEL_32_30_01_0682.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ACCESS_PANEL_32_30_01_0682.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ACCESS_PANEL_32_30_01_0682.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Puzzle type was: 0");
 	$a_lock_031_038.activate($player1);
 }
@@ -1187,6 +1343,12 @@ void start_CRITTER_AI_HINT_36_30_01_0309()
 
 void start_LARGE_BUTTON_38_30_01_0110()
 {
+
+		float buttonState = $LARGE_BUTTON_38_30_01_0110.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_38_30_01_0110.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_38_30_01_0110.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LARGE_BUTTON_38_30_01_0110)");
 	$ENTRY_TRIGGER_39_31_01_0714.activate($player1);
 }
@@ -1222,6 +1384,12 @@ void start_EMAIL_12_29_01_0399()
 
 void start_LEVER_30_29_01_0432()
 {
+
+		float buttonState = $LEVER_30_29_01_0432.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LEVER_30_29_01_0432.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LEVER_30_29_01_0432.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LEVER_30_29_01_0432)");
 	$ENTRY_TRIGGER_30_28_01_0158.activate($player1);
 }
@@ -1247,6 +1415,12 @@ void start_EMAIL_51_29_01_0465()
 
 void start_SWITCH_20_28_01_0093()
 {
+
+		float buttonState = $SWITCH_20_28_01_0093.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_20_28_01_0093.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_20_28_01_0093.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Object 0: Not in use");
 }
 
@@ -1339,6 +1513,12 @@ void start_NULL_TRIGGER_46_28_01_0298()
 
 void start_ACCESS_PANEL_47_28_01_0259()
 {
+
+		float buttonState = $ACCESS_PANEL_47_28_01_0259.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ACCESS_PANEL_47_28_01_0259.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ACCESS_PANEL_47_28_01_0259.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Puzzle type was: 0");
 	$runscript_NULL_TRIGGER_46_28_01_0114.activate($player1);
 }
@@ -1388,6 +1568,12 @@ void start_REPULSOR_43_27_01_0366()
 
 void start_ENERGY_CHARGE_STATION_28_26_01_0411()
 {
+
+		float buttonState = $ENERGY_CHARGE_STATION_28_26_01_0411.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ENERGY_CHARGE_STATION_28_26_01_0411.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ENERGY_CHARGE_STATION_28_26_01_0411.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Charging up: 255 , Security level? 60");
 }
 
@@ -1395,6 +1581,12 @@ void start_ENERGY_CHARGE_STATION_28_26_01_0411()
 
 void start_LARGE_BUTTON_34_26_01_0536()
 {
+
+		float buttonState = $LARGE_BUTTON_34_26_01_0536.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_34_26_01_0536.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_34_26_01_0536.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LARGE_BUTTON_34_26_01_0536)");
 	$runscript_NULL_TRIGGER_33_25_01_0354.activate($player1);
 }
@@ -1403,6 +1595,12 @@ void start_LARGE_BUTTON_34_26_01_0536()
 
 void start_SWITCH_55_26_01_0605()
 {
+
+		float buttonState = $SWITCH_55_26_01_0605.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_55_26_01_0605.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_55_26_01_0605.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Object 0: Not in use");
 }
 
@@ -1625,6 +1823,12 @@ void start_LEVEL_ENTRY_TRIGGER_31_23_01_0695()
 
 void start_LARGE_BUTTON_35_23_01_0117()
 {
+
+		float buttonState = $LARGE_BUTTON_35_23_01_0117.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_35_23_01_0117.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_35_23_01_0117.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:LARGE_BUTTON_35_23_01_0117)");
 	$runscript_NULL_TRIGGER_33_25_01_0354.activate($player1);
 }
@@ -1667,6 +1871,12 @@ void start_NULL_TRIGGER_25_22_01_0696()
 
 void start_BUTTON_26_22_01_0176()
 {
+
+		float buttonState = $BUTTON_26_22_01_0176.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_26_22_01_0176.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_26_22_01_0176.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Action activate by switch:BUTTON_26_22_01_0176)");
 	$a_lock_026_021.activate($player1);
 }
@@ -1807,6 +2017,12 @@ void start_EMAIL_20_19_01_0485()
 
 void start_KEYPAD_PANEL_20_19_01_0096()
 {
+
+		float buttonState = $KEYPAD_PANEL_20_19_01_0096.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$KEYPAD_PANEL_20_19_01_0096.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$KEYPAD_PANEL_20_19_01_0096.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("You correcty guess the combination code 451");
 	$a_lock_020_020.activate($player1);
 }
@@ -1848,6 +2064,12 @@ void start_NULL_TRIGGER_18_18_01_0113()
 
 void start_SWITCH_19_18_01_0126()
 {
+
+		float buttonState = $SWITCH_19_18_01_0126.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_19_18_01_0126.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_19_18_01_0126.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	if (SWITCH_19_18_01_0126_state == 1)
 		{
 		$runscript_NULL_TRIGGER_18_18_01_0112.activate($player1);
@@ -1883,6 +2105,12 @@ void start_NULL_TRIGGER_20_18_01_0036()
 
 void start_ENERGY_CHARGE_STATION_22_18_01_0659()
 {
+
+		float buttonState = $ENERGY_CHARGE_STATION_22_18_01_0659.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ENERGY_CHARGE_STATION_22_18_01_0659.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ENERGY_CHARGE_STATION_22_18_01_0659.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Charging up: 255 , Security level? 48");
 }
 
@@ -1920,6 +2148,12 @@ void start_NULL_TRIGGER_17_17_01_0288()
 
 void start_ACCESS_PANEL_18_17_01_0577()
 {
+
+		float buttonState = $ACCESS_PANEL_18_17_01_0577.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$ACCESS_PANEL_18_17_01_0577.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$ACCESS_PANEL_18_17_01_0577.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Puzzle type was: 0");
 	$runscript_NULL_TRIGGER_19_19_01_0576.activate($player1);
 }
@@ -1937,6 +2171,12 @@ void start_EMAIL_29_17_01_0462()
 
 void start_LARGE_BUTTON_23_15_01_0289()
 {
+
+		float buttonState = $LARGE_BUTTON_23_15_01_0289.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$LARGE_BUTTON_23_15_01_0289.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$LARGE_BUTTON_23_15_01_0289.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Lighting control cp1=300 cp2=288");
 }
 
@@ -1963,6 +2203,12 @@ void start_NULL_TRIGGER_26_14_01_0300()
 
 void start_SWITCH_27_14_01_0210()
 {
+
+		float buttonState = $SWITCH_27_14_01_0210.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$SWITCH_27_14_01_0210.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$SWITCH_27_14_01_0210.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Object 0: Not in use");
 }
 
@@ -1987,6 +2233,12 @@ void start_EMAIL_40_14_01_0318()
 
 void start_BUTTON_27_13_01_0702()
 {
+
+		float buttonState = $BUTTON_27_13_01_0702.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_27_13_01_0702.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_27_13_01_0702.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Lighting control cp1=2 cp2=707");
 }
 
@@ -2028,6 +2280,12 @@ void start_NULL_TRIGGER_17_12_01_0337()
 
 void start_KEYPAD_PANEL_23_12_01_0291()
 {
+
+		float buttonState = $KEYPAD_PANEL_23_12_01_0291.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$KEYPAD_PANEL_23_12_01_0291.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$KEYPAD_PANEL_23_12_01_0291.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("You correcty guess the combination code 705");
 	$a_lock_023_012.activate($player1);
 }
@@ -2036,6 +2294,12 @@ void start_KEYPAD_PANEL_23_12_01_0291()
 
 void start_BUTTON_27_11_01_0703()
 {
+
+		float buttonState = $BUTTON_27_11_01_0703.getGuiFloat(GUI_ENTITY1, "buttonstate");
+		if (buttonState == 0)
+			{$BUTTON_27_11_01_0703.setGuiFloat(GUI_ENTITY1, "buttonstate", 1);}
+		else
+			{$BUTTON_27_11_01_0703.setGuiFloat(GUI_ENTITY1, "buttonstate", 0);}
 	sys.println("Lighting control cp1=3 cp2=704");
 }
 

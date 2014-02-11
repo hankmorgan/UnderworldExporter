@@ -440,6 +440,7 @@ if (game == SHOCK)
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 
 	fprintf (MAPFILE, "\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY);
+	fprintf(MAPFILE, "\"auto_close_time\" \"30\"\n");
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
 		{
 		//up to 6 keys can be used for a door to allow duplicate keys.
@@ -1480,7 +1481,8 @@ mstaddress_pointer=0;
 					printf("\,%d)\n", getValAtAddress(mst_ark, mstaddress_pointer + 18, 8));
 					printf("\tObjectType = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 20, 8));
 					printf("\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
-					printf("\tState = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 23, 8));
+					printf("\tState = %d", objList[MasterIndex].State);
+					printf("\t(%d,%d)\n", (objList[MasterIndex].State >> 4) & 0xF, objList[MasterIndex].State & 0xF);
 					printf("\tunk1 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 24, 8));
 					printf("\tunk2 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 25, 8));
 					printf("\tunk3 = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 26, 8));
@@ -2080,11 +2082,15 @@ switch (TriggerType)
 
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 	= getValAtAddress(sub_ark,add_ptr+12,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	= getValAtAddress(sub_ark,add_ptr+14,16);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE] = getValAtAddress(sub_ark, add_ptr + 24, 8);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE] = getValAtAddress(sub_ark, add_ptr + 25, 8);
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
 			printf("\t\tControl point 1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
-			printf("\t\tControl point 2%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] );
+			printf("\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+			printf("\t\tUpper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE]);
+			printf("\t\tLower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
@@ -2386,6 +2392,7 @@ if (objList[objIndex].ObjectSubClass ==0)
 		{	
 		case ACTION_ACTIVATE:
 				{	//Assume same behaviour as a trigger?
+				printf("Switch:Action_Activate\n");
 				objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark,add_ptr+0xC,16)		;					
 				objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
 				objList[objIndex].shockProperties[2] = getValAtAddress(sub_ark,add_ptr+0x10,16)		;
@@ -2398,27 +2405,32 @@ if (objList[objIndex].ObjectSubClass ==0)
 				}
 		case ACTION_MOVING_PLATFORM:
 				{
+				printf("Switch:Action_Moving_Platform\n");
 				setElevatorProperties(LevelInfo,sub_ark,add_ptr,objList,objIndex,1);
 				}
 		case ACTION_CHOICE:
 				{
+				printf("Switch:Action_Choice\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
 				break;
 				}
 		case ACTION_LIGHTING:
-				{		
+				{	
+				printf("Switch:Action_Lighting\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = getValAtAddress(sub_ark, add_ptr + 12, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = getValAtAddress(sub_ark, add_ptr + 14, 16);
 				break;
 				}
 		case ACTION_CHANGE_TYPE:
 				{
+				printf("Switch:Action_Change_Type\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 0x10, 8);
 				}
 		default:	
-				{	
+				{
+				printf("Switch:Default\n");
 				objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] = getValAtAddress(sub_ark,add_ptr+12,16);
 				objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER_2] = getValAtAddress(sub_ark,add_ptr+16,16);
 				}
@@ -2659,7 +2671,7 @@ void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr,int length)
 {
 	for (int i = 12; i <= length-2; i = i + 2)
 	{
-		printf("\t\tOther values %i:%d (%d,%d)\n",i, 
+		printf("\n\t\tOther values %i:%d (%d,%d)",i, 
 			getValAtAddress(sub_ark, add_ptr + i, 16),
 			getValAtAddress(sub_ark, add_ptr + i, 8),
 			getValAtAddress(sub_ark, add_ptr + i+1, 8)

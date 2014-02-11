@@ -695,14 +695,19 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 //unknownflags
 //70E000E0
 //	printf("\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
-				int shockShadeLower  =(getValAtAddress(lev_ark,address_pointer+8,32) >> 16) & 0x0F;
-				int shockShadeUpper  =(getValAtAddress(lev_ark,address_pointer+8,32) >> 24) & 0x0F;
-				LevelInfo[x][y].shockShade = (shockShadeUpper<<4) | shockShadeLower;	//dark is 255.
+				LevelInfo[x][y].shockShadeLower = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 16) & 0x0F;
+				LevelInfo[x][y].shockShadeUpper = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 24) & 0x0F;
+				 
 
 				LevelInfo[x][y].shockNorthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockSouthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockEastOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockWestOffset =LevelInfo[x][y].shockTextureOffset;
+
+				LevelInfo[x][y].SHOCKSTATE[0] = getValAtAddress(lev_ark, address_pointer + 0xC, 8);
+				LevelInfo[x][y].SHOCKSTATE[1] = getValAtAddress(lev_ark, address_pointer + 0xD, 8);
+				LevelInfo[x][y].SHOCKSTATE[2] = getValAtAddress(lev_ark, address_pointer + 0xE, 8);
+				LevelInfo[x][y].SHOCKSTATE[3] = getValAtAddress(lev_ark, address_pointer + 0xF, 8);
 
 				address_pointer=address_pointer+16;
 			}
