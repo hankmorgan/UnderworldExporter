@@ -491,7 +491,12 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 	printf("Unable to create output file for globals");
 	return;
 	}
-	
+
+if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
+{
+	printf("Unable to create output file for globals");
+	return;
+}
 	//fprintf(fBODY,"#ifndef __game%d_%d_script__\n#define __game%d_%d_script__\n",game,LevelNo,game,LevelNo);
 
 	for (int y=63; y>=0;y--)
@@ -662,18 +667,21 @@ if (fopen_s(&fGLOBALS, SCRIPT_GlOBAL_FILE, "w")!=0)
 				}
 				fclose(fBODY);	
 			}
-/*		if (fopen_s(&fBODY, SCRIPT_MAIN_FILE, "r")!=0)
+
+		//Add the void main that starts our level entry trigger
+		fprintf(fFINALSCRIPT, "\nvoid main()\n\t{\n");
+		fprintf(fFINALSCRIPT, "\tsys.println(\"shock\");\n");
+			
+
+			for (int i = 0; i < 1600; i++)
 			{
-			printf("Unable to read output file for main");
-			}
-		else
-			{
-			while (fgets(line,255,fBODY))
+				if (objectMasters[objList[i].item_id].type  == SHOCK_TRIGGER_LEVEL)	//A level entry trigger
 				{
-				fprintf(fFINALSCRIPT,"%s",line);
+					fprintf(fFINALSCRIPT, "\t$runscript_%s.activate($player1);\n", UniqueObjectName(objList[i]));
 				}
-				fclose(fBODY);
-			}	*/	
+			}
+			fprintf(fFINALSCRIPT, "\n\t}");
+		
 			
 		if (fopen_s(&fBODY,SCRIPT_BODY_FILE, "r")!=0)
 			{
@@ -913,36 +921,21 @@ switch (currObj.TriggerAction)
 		//000E	int16	Delay before activating object 1.
 		//0010	...	Up to 4 objects and delays stored here.		
 		//printf("\tACTION_ACTIVATE\n");
-		//printf("\t\t1st Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0xC,16));
-		//printf("1st Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0xe,16));
-		//objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark,add_ptr+0xC,16)		;					
-		//objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
 		if ( currObj.shockProperties[0]> 0)
 			{
 			if (currObj.shockProperties[1] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[0]]);
-			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[0]])); 
 			}
-		//printf("\t\t2nd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x10,16));		
-		//printf("2nd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-		//
 		if ( currObj.shockProperties[2]> 0)
 			{
 			if (currObj.shockProperties[3] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[2]]);
-			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[2]])); 
 			}	
-		//printf("\t\t3rd Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x14,16));
-		//printf("3rd Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x16,16));
-		//does the fourth trigger exist?
 		if (( currObj.shockProperties[4]> 0) &&  (currObj.shockProperties[4]< 1600))
 			{
 			if (currObj.shockProperties[5] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[4]]);
-			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[4]])); 
 			}	
-		//printf("\t\t4th Object to activate raw :%d\t",getValAtAddress(sub_ark,add_ptr+0x18,16));		
-		//printf("4th Object Delay:%d\n",getValAtAddress(sub_ark,add_ptr+0x1A,16));	
 		if ( currObj.shockProperties[6]> 0)
 			{
 			if (currObj.shockProperties[7] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
@@ -953,22 +946,111 @@ switch (currObj.TriggerAction)
 		break;
 		}
 	case ACTION_LIGHTING:
+	{
+	//000C	int16	Control point 1
+	//000E	int16	Control point 2
+	//	...	?
+	//printf("\tACTION_LIGHTING\n");
+	//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+	//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+	//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+	//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+	//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+	//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+	//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+	//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 
+	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 
+		//shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
+		int shadeUpper1 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_1]; //TRIG_PROPERTY_UPPERSHADE
+		int shadeLower1 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_1];
+		int shadeUpper2 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_2]; //TRIG_PROPERTY_UPPERSHADE
+		int shadeLower2 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_2];
+
+		int x1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileX;
+		int y1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileY;
+		int x2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileX; 
+		int y2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileY;
+		int xMin; int xMax;
+		int yMin; int yMax;
+
+		if (x1 >= x2)
+			{ xMin = x2; xMax = x1; }
+		else
+			{ xMin = x1; xMax = x2; }
+		if (y1 >= y2)
 		{
-		//000C	int16	Control point 1
-		//000E	int16	Control point 2
-		//	...	?
-		//printf("\tACTION_LIGHTING\n");
-		//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-		//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-		//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-		//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-		//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-		//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-		//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-		//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
-		//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 
-		//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	
-		fprintf(fBODY,"\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n",currObj.shockProperties[TRIG_PROPERTY_CONTROL_1],currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);		
+			yMin = y2; yMax = y1;
+		}
+		else
+		{
+			yMin = y1; yMax = y2;
+		}
+		//fprintf(fBODY, "\tfloat dir = 1;\n");
+		fprintf(fBODY, "\tfloat shade = 0;\n");
+		fprintf(fBODY, "\tfloat shadeUpperAdj =0;");
+		fprintf(fBODY, "\tfloat shadeLowerAdj =0;\n");
+		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n\telse\n\t{\n", shadeUpper1, shadeLower1);
+		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n", shadeUpper2, shadeLower2);
+
+		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\tdir = 1 ;\n\t\t%s_light_state = 0;\n\t}\n",  UniqueObjectName(currObj));
+
+		for (int x = xMin; x <= xMax; x++)
+		{
+			for (int y = yMin; y <= yMax; y++)
+			{
+				if (LevelInfo[x][y].tileType != 0)
+				{
+					//if ((LevelInfo[x][y].shadeUpperGlobal == 0) && ((shadeUpper1 >= 1) || (shadeUpper2 >=1)))
+					//{//add a global for this light
+					//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_upper_state = %d;\n",x,y, LevelInfo[x][y].shockShadeUpper);
+					//	LevelInfo[x][y].shadeUpperGlobal = 1;
+					//}
+					//if ((LevelInfo[x][y].shadeLowerGlobal == 0) && ((shadeLower1 >= 1) || (shadeLower2 >= 1)))
+					//	{//add a global for this light
+					//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_lower_state = %d;\n",x,y, LevelInfo[x][y].shockShadeLower);
+					//	LevelInfo[x][y].shadeLowerGlobal = 1;
+					//	}
+					
+
+					
+					if ((shadeUpper1 >= 1) || (shadeUpper2 >= 1))
+					{
+						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((%d + (dir * %d)) / 15)) ;\n", x, y, LevelInfo[x][y].shockShadeUpper);
+						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n", LevelInfo[x][y].shockShadeUpper);
+						//fprintf(fBODY, "\tlight_%02d_%02d_upper_state = light_%02d_%02d_upper_state + (dir * %d);\n", x, y,x,y,shadeUpper);
+						//fprintf(fBODY, "\tsys.println(\"Setting upper shade %02d %02d\"); \n",x,y);
+						//fprintf(fBODY, "\tsys.println(shade); \n");
+						fprintf(fBODY, "\t$light_%02d_%02d_upper.setColor( shade,shade,shade );\n", x, y);
+					}
+					if ((shadeLower1 >= 1) || (shadeLower2 >= 1))
+					{
+						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((light_%02d_%02d_lower_state + (dir * %d)) / 15)) ;\n", x, y, shadeLower);
+						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
+						//fprintf(fBODY, "\tlight_%02d_%02d_lower_state = light_%02d_%02d_lower_state + (dir * %d);\n", x, y, x, y, shadeLower);
+						//fprintf(fBODY, "\tsys.println(\"Setting lower shade %02d %02d\"); \n", x, y);
+						//fprintf(fBODY, "\tsys.println(shade); \n");
+						fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
+					}
+				}
+
+			}
+		}
+		fprintf(fGLOBALS, "\tfloat %s_light_state = 0;\n",UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
+		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
+
+		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
+
+		//fprintf(fBODY,"\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n",currObj.shockProperties[TRIG_PROPERTY_CONTROL_1],currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);		
+
+
 		break;
 		}
 	case ACTION_EFFECT:
@@ -1009,6 +1091,15 @@ switch (currObj.TriggerAction)
 		
 		break;
 		
+		}
+	case ACTION_TIMER:
+		{
+			if (currObj.shockProperties[0]> 0)
+				{
+					if (currObj.shockProperties[1] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
+					shockScriptActivate(objList, objList[currObj.shockProperties[0]]);
+				}
+			break;
 		}
 	case ACTION_CHOICE:
 		{//A toggle?
@@ -1170,7 +1261,15 @@ switch(objectMasters[targetObj.item_id].type )
 		fprintf(fBODY,"\t$a_lock_%03d_%03d.activate($player1);\n",targetObj.tileX, targetObj.tileY); 
 		break;
 	case SHOCK_TRIGGER_NULL:	//I activate the script call. *Nullscript can be many things such as cameras so I will need to account for that at some stage.
-		fprintf(fBODY,"\t$runscript_%s.activate($player1);\n", UniqueObjectName(targetObj)); 
+		if (targetObj.TriggerAction == ACTION_TIMER)
+			{	//Activates a timer linked to the null trigger
+			fprintf(fBODY, "\t$timer_%s.activate($player1);\n", UniqueObjectName(targetObj));
+			}
+		else
+		{
+			fprintf(fBODY, "\t$runscript_%s.activate($player1);\n", UniqueObjectName(targetObj));
+		}
+		
 		break;
 	case SHOCK_TRIGGER_REPULSOR:
 		fprintf(fBODY,"\t$runscript_%s.activate($player1);\n", UniqueObjectName(targetObj)); 

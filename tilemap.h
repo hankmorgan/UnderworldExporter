@@ -80,6 +80,8 @@ short TerrainChange;	//Indicates that the tile can change into another type of t
 int SHOCKSTATE[4];	//These should be ff,00,00,00 on an initial map. I'm just bringing them back for research purposes.
 	//scripting state flags
 	short global;
+	short shadeUpperGlobal;
+	short shadeLowerGlobal;
 
 };
 

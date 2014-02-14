@@ -29,6 +29,7 @@ void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityNULL_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityLEVEL_ENTRY(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj);
@@ -132,6 +133,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 				RenderEntityComputerScreen(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			case SHOCK_TRIGGER_NULL:
+			case SHOCK_TRIGGER_LEVEL:
 				RenderEntityNULL_TRIGGER(game,x,y,z,currobj,objList,LevelInfo);	
 				break;	
 			case SHOCK_TRIGGER_REPULSOR:
@@ -1127,11 +1129,23 @@ void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &curr
 }
 
 void RenderEntityNULL_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-{
-createScriptCall(currobj,x,y,z);
+{//And a level entry as well.
+	if (currobj.TriggerAction == ACTION_TIMER)
+		{
+		//create a timer to set off.
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+		fprintf(MAPFILE, "\"classname\" \"trigger_timer\"\n");
+		fprintf(MAPFILE, "\"name\" \"timer_%s\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+		fprintf(MAPFILE, "\"wait\" \"%d\"\n", 1);
+		//fprintf(MAPFILE, "\"random\" \"%d\"\n", 3);
+		fprintf(MAPFILE, "\"target0\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "}\n");
+		EntityCount++;
+		}
+
+		createScriptCall(currobj,x,y,z);
 }
-
-
 
 void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {//decals like wall icons etc.
@@ -2082,15 +2096,19 @@ switch (TriggerType)
 
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 	= getValAtAddress(sub_ark,add_ptr+12,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	= getValAtAddress(sub_ark,add_ptr+14,16);
-		objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE] = getValAtAddress(sub_ark, add_ptr + 24, 8);
-		objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE] = getValAtAddress(sub_ark, add_ptr + 25, 8);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 22, 8);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 24, 8);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 23, 8);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 25, 8);
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
 			printf("\t\tControl point 1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
 			printf("\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
-			printf("\t\tUpper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE]);
-			printf("\t\tLower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE]);
+			printf("\t\t1st Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
+			printf("\t\t1st Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
+			printf("\t\t2nd Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
+			printf("\t\t2nd Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
@@ -2137,10 +2155,31 @@ switch (TriggerType)
 		//
 		//LevelInfo[objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X]][objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y]].hasElevator &= elevatorFlag;
 		
-
-		
 		break;
 		
+		}
+	case ACTION_TIMER:
+		{
+		//000C	int16	1st object to activate.?
+		//000E	int16	Delay before activating object 1.?
+
+		objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
+		objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark, add_ptr + 0xe, 16);
+		objList[objIndex].shockProperties[2] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
+		objList[objIndex].shockProperties[3] = getValAtAddress(sub_ark, add_ptr + 0x12, 16);
+		objList[objIndex].shockProperties[4] = getValAtAddress(sub_ark, add_ptr + 0x14, 16);
+		objList[objIndex].shockProperties[5] = getValAtAddress(sub_ark, add_ptr + 0x16, 16);
+		objList[objIndex].shockProperties[6] = getValAtAddress(sub_ark, add_ptr + 0x18, 16);
+		objList[objIndex].shockProperties[7] = getValAtAddress(sub_ark, add_ptr + 0x1A, 16);
+		if (PrintDebug == 1)
+			{
+				printf("\tACTION_TIMER (i think) for %s\n", UniqueObjectName(objList[objIndex]));
+
+				printf("\t\t1st Object to activate raw :%d\t", objList[objIndex].shockProperties[0]);
+				printf("1st Object Delay:%d\n", objList[objIndex].shockProperties[1]);
+
+				DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+			}
 		}
 	case ACTION_CHOICE:
 		{//A toggle?

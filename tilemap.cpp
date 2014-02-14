@@ -697,8 +697,8 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 //	printf("\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
 				LevelInfo[x][y].shockShadeLower = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 16) & 0x0F;
 				LevelInfo[x][y].shockShadeUpper = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 24) & 0x0F;
-				 
-
+				LevelInfo[x][y].shadeUpperGlobal = 0;
+				LevelInfo[x][y].shadeLowerGlobal = 0;
 				LevelInfo[x][y].shockNorthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockSouthOffset =LevelInfo[x][y].shockTextureOffset;
 				LevelInfo[x][y].shockEastOffset =LevelInfo[x][y].shockTextureOffset;

@@ -189,7 +189,7 @@ int x; int y;
 						{
 						if (LevelInfo[x][y].tileType != 0)
 							{
-							float shade = 0.60;	//Max brightness.
+							float shade = 0.50;	//Max brightness.
 							//put a light here. absolute frame rate killer. Need to merge contigous regions of light together or do something clever with texture brightness
 							fprintf (MAPFILE, "// entity %d\n", EntityCount++);
 							fprintf (MAPFILE, "{\n\"classname\" \"light\"");
@@ -227,7 +227,7 @@ int x; int y;
 								40 + BrushSizeY / 2,
 								((CEILING_HEIGHT - LevelInfo[x][y].ceilingHeight - LevelInfo[x][y].floorHeight) / 2)*BrushSizeZ);
 							
-							shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
+							shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeLower / 15));
 							fprintf(MAPFILE, "\n\"_color\" \"%f %f %f\"", shade, shade, shade);
 							fprintf(MAPFILE, "\n\"nodiffuse\" \"0\"");
 							fprintf(MAPFILE, "\n\"noshadows\" \"1\"");

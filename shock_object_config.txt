@@ -380,7 +380,7 @@
 379 12 0 5 AREA_ENTER_TRIGGER models/darkmod/decorative/hourglass.ase model 105
 380 12 0 6 AREA_CONTIN_TRIGGER models/darkmod/decorative/hourglass.ase model 106
 381 12 0 7 CRITTER_AI_HINT models/darkmod/decorative/hourglass.ase model 107
-382 12 0 8 LEVEL_ENTRY_TRIGGER models/darkmod/decorative/hourglass.ase model 108
+382 12 0 8 LEVEL_ENTRY_TRIGGER atdm:target_callscriptfunction entity 108
 383 12 0 9 CONTINUOUS_TRIGGER models/darkmod/decorative/hourglass.ase model 109
 384 12 0 10 REPULSOR func_forcefield entity 110
 385 12 0 11 ECOLOGY_TRIGGER models/darkmod/decorative/hourglass.ase model 111
