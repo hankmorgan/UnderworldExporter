@@ -6,6 +6,7 @@
 	float DEATH_WATCH_TRIGGER_44_48_01_0475_triggered = 0;
 	float lift_029_047_ceiling_state = 16;
 	float NULL_TRIGGER_21_46_01_0597_state = 1;
+	float NULL_TRIGGER_12_45_01_0602_light_state = 0;
 	float DEATH_WATCH_TRIGGER_21_45_01_0562_triggered = 0;
 	float global_var_28 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_26_45_01_0585_triggered = 0;
@@ -15,6 +16,7 @@
 	float NULL_TRIGGER_25_44_01_0595_state = 1;
 	float NULL_TRIGGER_18_43_01_0237_state = 1;
 	float global_var_100 = 0; //This global was created in addGlobal!
+	float NULL_TRIGGER_42_43_01_0604_light_state = 0;
 	float lift_033_040_floor_state = 8;
 	float NULL_TRIGGER_38_39_01_0628_triggered = 0;
 	float LEVER_49_39_01_0365_state = 1;
@@ -26,29 +28,38 @@
 	float lift_019_037_floor_state = 16;
 	float NULL_TRIGGER_17_35_01_0024_triggered = 0;
 	float global_var_1 = 0; //This global was created in addGlobal!
+	float NULL_TRIGGER_17_33_01_0601_light_state = 0;
 	float ENTRY_TRIGGER_39_31_01_0714_state = 1;
 	float lift_039_031_floor_state = 22;
 	float global_var_30 = 0;
+	float NULL_TRIGGER_41_30_01_0208_light_state = 0;
 	float lift_030_028_floor_state = 8;
 	float ENTRY_TRIGGER_30_28_01_0158_state = 1;
+	float NULL_TRIGGER_26_27_01_0252_light_state = 0;
+	float NULL_TRIGGER_27_25_01_0151_light_state = 0;
 	float lift_032_025_ceiling_state = 20;
 	float NULL_TRIGGER_33_25_01_0354_state = 1;
 	float lift_033_025_ceiling_state = 20;
 	float lift_034_025_ceiling_state = 20;
 	float ENTRY_TRIGGER_46_25_01_0606_triggered = 0;
 	float LEVEL_ENTRY_TRIGGER_31_23_01_0695_triggered = 0;
+	float NULL_TRIGGER_20_22_01_0141_light_state = 0;
 	float ENTRY_TRIGGER_19_20_01_0713_triggered = 0;
 	float global_var_145 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_20_20_01_0502_triggered = 0;
+	float NULL_TRIGGER_41_20_01_0236_light_state = 0;
 	float NULL_TRIGGER_19_19_01_0576_triggered = 0;
 	float NULL_TRIGGER_19_19_01_0575_triggered = 0;
 	float global_var_252 = 0; //This global was created in addGlobal!
 	float NULL_TRIGGER_19_19_01_0574_triggered = 0;
+	float NULL_TRIGGER_19_19_01_0574_light_state = 0;
 	float lift_018_018_floor_state = 8;
 	float SWITCH_19_18_01_0126_state = 1;
 	float global_var_2 = 0; //This global was created in addGlobal!
 	float ENTRY_TRIGGER_30_15_01_0150_triggered = 0;
+	float NULL_TRIGGER_29_13_01_0211_light_state = 0;
 	float NULL_TRIGGER_17_12_01_0163_state = 1;
+	float NULL_TRIGGER_17_12_01_0337_light_state = 0;
 
 
 
@@ -107,6 +118,14 @@ void start_SCREEN_14_25_01_0618_destroy();
 
 void start_SCREEN_24_21_01_0661_destroy();
 
+void main()
+	{
+	sys.println("shock");
+	$runscript_LEVEL_ENTRY_TRIGGER_30_24_01_0037.activate($player1);
+	$runscript_LEVEL_ENTRY_TRIGGER_11_30_01_0653.activate($player1);
+	$runscript_LEVEL_ENTRY_TRIGGER_31_23_01_0695.activate($player1);
+
+	}
 
 
 void start_BUTTON_30_52_01_0541()
@@ -338,7 +357,44 @@ void start_NULL_TRIGGER_21_46_01_0590()
 void start_NULL_TRIGGER_12_45_01_0602()
 {
 	sys.println("602");
-	sys.println("Lighting control cp1=603 cp2=602");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_12_45_01_0602_light_state == 0)
+	{
+	shadeUpperAdj =1; shadeLowerAdj =8;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_12_43_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_12_43_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_13_43_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_13_43_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_13_44_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeLowerAdj) / 15));
+	$light_13_44_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_14_44_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeLowerAdj) / 15));
+	$light_14_44_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_14_45_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeLowerAdj) / 15));
+	$light_14_45_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_12_45_01_0602_light_state == 0)
+	{
+		NULL_TRIGGER_12_45_01_0602_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_12_45_01_0602_light_state = 0;
+	}
 }
 
 
@@ -677,7 +733,580 @@ void start_NULL_TRIGGER_19_43_01_0228()
 void start_NULL_TRIGGER_42_43_01_0604()
 {
 	sys.println("604");
-	sys.println("Lighting control cp1=605 cp2=604");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_42_43_01_0604_light_state == 0)
+	{
+	shadeUpperAdj =1; shadeLowerAdj =12;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_26_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_26_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_35_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_35_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_42_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeUpperAdj) / 15));
+	$light_42_41_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_42_41_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeUpperAdj) / 15));
+	$light_42_42_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_42_42_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_43_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_43_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_43_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_43_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_43_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_43_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_43_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_40_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_43_40_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_41_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_43_41_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_42_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_43_42_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_26_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_44_26_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_44_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_44_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_44_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_44_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_44_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_44_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_44_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_44_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_44_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_40_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_44_40_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_41_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_44_41_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_42_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_44_42_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_26_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_45_26_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_45_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_45_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_45_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_45_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_45_40_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_45_40_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_26_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_46_26_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_46_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_46_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_46_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_35_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_35_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_46_40_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_46_40_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_26_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_47_26_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_47_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_40_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_47_40_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_47_41_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((1 - shadeLowerAdj) / 15));
+	$light_47_41_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_48_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_48_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_48_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_48_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_48_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_48_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_48_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_48_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_48_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_48_40_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_48_40_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_49_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_49_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_49_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_49_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_49_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_49_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_49_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((4 - shadeLowerAdj) / 15));
+	$light_50_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_50_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_50_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_50_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_50_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((10 - shadeLowerAdj) / 15));
+	$light_51_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_51_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_51_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_51_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_51_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_51_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_51_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_51_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_28_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_52_28_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_52_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_52_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_52_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_52_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_52_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_35_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_52_35_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_52_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_52_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_52_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_29_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_53_29_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_53_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_53_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_53_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_35_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_53_35_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_53_36_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_37_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_53_37_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_38_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_53_38_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_53_39_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_53_39_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_54_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_54_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_54_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_54_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_54_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_54_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_54_34_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_54_34_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_54_35_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeLowerAdj) / 15));
+	$light_54_35_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_54_36_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_54_36_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_42_43_01_0604_light_state == 0)
+	{
+		NULL_TRIGGER_42_43_01_0604_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_42_43_01_0604_light_state = 0;
+	}
 }
 
 
@@ -1143,7 +1772,56 @@ void start_ENERGY_CHARGE_STATION_38_34_01_0679()
 void start_NULL_TRIGGER_17_33_01_0601()
 {
 	sys.println("601");
-	sys.println("Lighting control cp1=600 cp2=601");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_17_33_01_0601_light_state == 0)
+	{
+	shadeUpperAdj =1; shadeLowerAdj =8;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_17_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_17_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_17_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_17_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_18_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_18_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_18_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_18_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_18_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_18_33_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_19_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_19_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_19_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_19_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_19_33_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_19_33_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_17_33_01_0601_light_state == 0)
+	{
+		NULL_TRIGGER_17_33_01_0601_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_17_33_01_0601_light_state = 0;
+	}
 }
 
 
@@ -1368,7 +2046,52 @@ void start_NULL_TRIGGER_39_30_01_0207()
 void start_NULL_TRIGGER_41_30_01_0208()
 {
 	sys.println("208");
-	sys.println("Lighting control cp1=207 cp2=206");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_41_30_01_0208_light_state == 0)
+	{
+	shadeUpperAdj =2; shadeLowerAdj =10;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_37_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_37_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_37_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_37_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_37_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeLowerAdj) / 15));
+	$light_37_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_38_30_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_38_30_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_38_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_38_31_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_38_32_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_38_32_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_39_31_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_39_31_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_41_30_01_0208_light_state == 0)
+	{
+		NULL_TRIGGER_41_30_01_0208_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_41_30_01_0208_light_state = 0;
+	}
 }
 
 
@@ -1537,7 +2260,48 @@ void start_EMAIL_12_27_01_0474()
 void start_NULL_TRIGGER_26_27_01_0252()
 {
 	sys.println("252");
-	sys.println("Lighting control cp1=93 cp2=252");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_26_27_01_0252_light_state == 0)
+	{
+	shadeUpperAdj =2; shadeLowerAdj =7;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_20_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_20_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_21_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_21_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_23_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_23_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_24_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_24_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_25_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_25_27_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_26_27_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_26_27_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_26_27_01_0252_light_state == 0)
+	{
+		NULL_TRIGGER_26_27_01_0252_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_26_27_01_0252_light_state = 0;
+	}
 }
 
 
@@ -1609,7 +2373,28 @@ void start_SWITCH_55_26_01_0605()
 void start_NULL_TRIGGER_27_25_01_0151()
 {
 	sys.println("151");
-	sys.println("Lighting control cp1=66 cp2=151");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_27_25_01_0151_light_state == 0)
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =11;
+	}
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_27_24_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_28_24_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_27_25_01_0151_light_state == 0)
+	{
+		NULL_TRIGGER_27_25_01_0151_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_27_25_01_0151_light_state = 0;
+	}
 }
 
 
@@ -1724,7 +2509,7 @@ void start_ENTRY_TRIGGER_46_25_01_0606()
 	{
 	ENTRY_TRIGGER_46_25_01_0606_triggered = 1;
 	sys.println("606");
-	$runscript_NULL_TRIGGER_47_25_01_0607.activate($player1);
+	$timer_NULL_TRIGGER_47_25_01_0607.activate($player1);
 	}
 }
 
@@ -1733,7 +2518,7 @@ void start_ENTRY_TRIGGER_46_25_01_0606()
 void start_NULL_TRIGGER_47_25_01_0607()
 {
 	sys.println("607");
-	sys.println("Unknown trigger action:11");
+	$runscript_NULL_TRIGGER_42_43_01_0604.activate($player1);
 }
 
 
@@ -1748,7 +2533,7 @@ void start_NULL_TRIGGER_10_24_01_0353()
 void start_ENTRY_TRIGGER_26_24_01_0146()
 {
 	sys.println("146");
-	$runscript_NULL_TRIGGER_29_24_01_0066.activate($player1);
+	$timer_NULL_TRIGGER_29_24_01_0066.activate($player1);
 }
 
 
@@ -1787,7 +2572,7 @@ void start_NULL_TRIGGER_29_24_01_0064()
 void start_NULL_TRIGGER_29_24_01_0066()
 {
 	sys.println("66");
-	sys.println("Unknown trigger action:11");
+	$runscript_NULL_TRIGGER_29_24_01_0064.activate($player1);
 }
 
 
@@ -1795,7 +2580,7 @@ void start_NULL_TRIGGER_29_24_01_0066()
 void start_LEVEL_ENTRY_TRIGGER_30_24_01_0037()
 {
 	sys.println("37");
-	$runscript_NULL_TRIGGER_29_24_01_0066.activate($player1);
+	$timer_NULL_TRIGGER_29_24_01_0066.activate($player1);
 }
 
 
@@ -1847,7 +2632,24 @@ void start_EMAIL_11_22_01_0315()
 void start_NULL_TRIGGER_20_22_01_0141()
 {
 	sys.println("141");
-	sys.println("Lighting control cp1=152 cp2=129");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_20_22_01_0141_light_state == 0)
+	{
+	shadeUpperAdj =2; shadeLowerAdj =10;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	if (NULL_TRIGGER_20_22_01_0141_light_state == 0)
+	{
+		NULL_TRIGGER_20_22_01_0141_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_20_22_01_0141_light_state = 0;
+	}
 }
 
 
@@ -1855,7 +2657,6 @@ void start_NULL_TRIGGER_20_22_01_0141()
 void start_NULL_TRIGGER_21_22_01_0062()
 {
 	sys.println("62");
-	sys.println("Unknown trigger action:11");
 }
 
 
@@ -1952,7 +2753,64 @@ void start_ENTRY_TRIGGER_20_20_01_0502()
 void start_NULL_TRIGGER_41_20_01_0236()
 {
 	sys.println("236");
-	sys.println("Lighting control cp1=338 cp2=236");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_41_20_01_0236_light_state == 0)
+	{
+	shadeUpperAdj =2; shadeLowerAdj =10;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_41_18_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_41_18_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_41_19_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_41_19_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_19_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_42_19_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_42_20_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_42_20_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_18_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_43_18_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_19_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_43_19_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_43_20_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_43_20_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_18_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_44_18_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_19_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_44_19_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_44_20_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_44_20_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_41_20_01_0236_light_state == 0)
+	{
+		NULL_TRIGGER_41_20_01_0236_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_41_20_01_0236_light_state = 0;
+	}
 }
 
 
@@ -2000,7 +2858,30 @@ void start_NULL_TRIGGER_19_19_01_0574()
 	{
 	NULL_TRIGGER_19_19_01_0574_triggered = 1;
 	sys.println("574");
-	sys.println("Lighting control cp1=574 cp2=573");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_19_19_01_0574_light_state == 0)
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =14;
+	}
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_18_18_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeLowerAdj) / 15));
+	$light_18_19_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_19_18_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_19_19_01_0574_light_state == 0)
+	{
+		NULL_TRIGGER_19_19_01_0574_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_19_19_01_0574_light_state = 0;
+	}
 	}
 }
 
@@ -2188,7 +3069,7 @@ void start_ENTRY_TRIGGER_30_15_01_0150()
 	{
 	ENTRY_TRIGGER_30_15_01_0150_triggered = 1;
 	sys.println("150");
-	$runscript_NULL_TRIGGER_29_14_01_0680.activate($player1);
+	$timer_NULL_TRIGGER_29_14_01_0680.activate($player1);
 	}
 }
 
@@ -2217,7 +3098,7 @@ void start_SWITCH_27_14_01_0210()
 void start_NULL_TRIGGER_29_14_01_0680()
 {
 	sys.println("680");
-	sys.println("Unknown trigger action:11");
+	$a_lock_028_012.activate($player1);
 }
 
 
@@ -2247,7 +3128,40 @@ void start_BUTTON_27_13_01_0702()
 void start_NULL_TRIGGER_29_13_01_0211()
 {
 	sys.println("211");
-	sys.println("Lighting control cp1=210 cp2=211");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_29_13_01_0211_light_state == 0)
+	{
+	shadeUpperAdj =2; shadeLowerAdj =10;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =0;
+	}
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_27_13_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_27_13_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_28_13_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_28_13_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((11 - shadeUpperAdj) / 15));
+	$light_28_14_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((13 - shadeLowerAdj) / 15));
+	$light_28_14_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((14 - shadeUpperAdj) / 15));
+	$light_29_13_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((7 - shadeLowerAdj) / 15));
+	$light_29_13_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_29_13_01_0211_light_state == 0)
+	{
+		NULL_TRIGGER_29_13_01_0211_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_29_13_01_0211_light_state = 0;
+	}
 }
 
 
@@ -2273,7 +3187,44 @@ void start_NULL_TRIGGER_17_12_01_0163()
 void start_NULL_TRIGGER_17_12_01_0337()
 {
 	sys.println("337");
-	sys.println("Lighting control cp1=339 cp2=337");
+	float shade = 0;
+	float shadeUpperAdj =0;	float shadeLowerAdj =0;
+	if (NULL_TRIGGER_17_12_01_0337_light_state == 0)
+	{
+	shadeUpperAdj =2; shadeLowerAdj =8;
+	}
+	else
+	{
+	shadeUpperAdj =0; shadeLowerAdj =3;
+	}
+	shade = (0.50) * (1 - ((13 - shadeUpperAdj) / 15));
+	$light_18_12_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((7 - shadeLowerAdj) / 15));
+	$light_18_12_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeUpperAdj) / 15));
+	$light_19_11_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((3 - shadeLowerAdj) / 15));
+	$light_19_11_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeUpperAdj) / 15));
+	$light_19_12_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((12 - shadeLowerAdj) / 15));
+	$light_19_12_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeUpperAdj) / 15));
+	$light_20_11_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((7 - shadeLowerAdj) / 15));
+	$light_20_11_lower.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((0 - shadeUpperAdj) / 15));
+	$light_20_12_upper.setColor( shade,shade,shade );
+	shade = (0.50) * (1 - ((7 - shadeLowerAdj) / 15));
+	$light_20_12_lower.setColor( shade,shade,shade );
+	if (NULL_TRIGGER_17_12_01_0337_light_state == 0)
+	{
+		NULL_TRIGGER_17_12_01_0337_light_state = 1;
+	}
+	else
+	{
+		NULL_TRIGGER_17_12_01_0337_light_state = 0;
+	}
 }
 
 

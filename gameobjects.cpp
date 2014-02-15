@@ -338,7 +338,15 @@ void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj
 		//print position+name
 		fprintf (MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
-		EntityRotation(currobj.heading);
+		if (game == SHOCK)
+		{
+			EntityRotationSHOCK(currobj.Angle2);
+		}
+		else
+		{
+			EntityRotation(currobj.heading);
+		}
+		
 		AttachToJoint(currobj);
 		if (currobj.link!=0)
 			{
@@ -1784,49 +1792,71 @@ while (k<=chunkUnpackedLength)
 				break;
 				}
 			case FIXTURES:
-				{
+			{
 				printf("\tFixture Properties\n");
-				if ((objList[objIndex].ObjectSubClass == 2) && (objList[objIndex].ObjectSubClassIndex == 3))
-					{
-					printf("Words:");
-					printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
-					printf("\nFont and size %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
-					printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-					}
-				else {
-					if ((objList[objIndex].ObjectSubClass == 2) && ((objList[objIndex].ObjectSubClassIndex >= 6) && (objList[objIndex].ObjectSubClassIndex <= 9)))
-					{
-						printf("Screens:");
-
-						objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES] = getValAtAddress(sub_ark, add_ptr + 6, 16);
-						objList[objIndex].shockProperties[SCREEN_LOOP_FLAG] = getValAtAddress(sub_ark, add_ptr + 8, 16);
-						objList[objIndex].shockProperties[SCREEN_START] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
-
-						printf("\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
-						printf("\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
-						printf("\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
-
-						//fprintf(MAPFILE, "%s\t%d\t%d\t%d\t%d\n",
-						//	UniqueObjectName(objList[objIndex]),
-						//	objList[objIndex].shockProperties[SCREEN_START],
-						//	objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES],
-						//	objList[objIndex].shockProperties[SCREEN_LOOP_FLAG],
-						//	objList[objIndex].shockProperties[SCREEN_START] + 321);
-					}
-					else
-					{
-						printf("Regular fixture");
-						if ((objList[objIndex].ObjectSubClass == 2) && ((objList[objIndex].ObjectSubClassIndex >= 0) && (objList[objIndex].ObjectSubClassIndex < 5)))	//A sign or painting
-						{
-							printf("\n\tImage to use is value in unk1. Offset from image 1350_0390.bmp or 1350_0403.bmp in objart.res or 0078_0000.bmp or 0079_0000 in objart3.res");
-						}
+				switch (objList[objIndex].ObjectSubClass)
+				{
+					case 0://regular fixtures
+					case 1:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
 						printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
 						printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
 						printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
 						printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
 						printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
-					}
+						break;
+					case 2:
+						  switch (objList[objIndex].ObjectSubClassIndex)
+						  {
+						  case 0://SIGN
+						  case 1://ICON
+						  case 2://GRAFFITI
+						  case 4://painting
+						  case 5://poster
+							  printf("\n\tImage to use is value in unk1. Offset from image 1350_0390.bmp or 1350_0403.bmp in objart.res or 0078_0000.bmp or 0079_0000 in objart3.res");
+							  break;
+						  case 3:
+							  printf("Words:");
+							  printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
+							  printf("\nFont and size %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
+							  printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+							  break;
+						  case 6:
+						  case 8:
+						  case 9:
+							  printf("Screens:");
+							  objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES] = getValAtAddress(sub_ark, add_ptr + 6, 16);
+							  objList[objIndex].shockProperties[SCREEN_LOOP_FLAG] = getValAtAddress(sub_ark, add_ptr + 8, 16);
+							  objList[objIndex].shockProperties[SCREEN_START] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
+							  printf("\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
+							  printf("\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
+							  printf("\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
+							  break;
+						  default:
+							  printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+							  printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+							  printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+							  printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+							  printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+							  break;
+						  }
+						break;
+					case 7:	//bridges etc
+						printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+						printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+						printf("(%d", getValAtAddress(sub_ark, add_ptr + 0xA, 8));
+						printf(",%d)", getValAtAddress(sub_ark, add_ptr + 0xB, 8));
+						printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+						printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+						break;
 				}
+				
+	
+
 				return 1;
 				break;
 				}
@@ -1845,9 +1875,9 @@ while (k<=chunkUnpackedLength)
 					}
 			
 				for (int j = 0; j < RecordSize; j = j + 2)
-				{
-					printf("j=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr+ j, 16));
-				}
+					{
+						printf("j=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr+ j, 16));
+					}
 
 				return 1;
 				break;

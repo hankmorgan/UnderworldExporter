@@ -1,0 +1,12 @@
+textures\shock\models\model_0499
+{
+	bumpmap	_flat
+	diffusemap	textures\shock\model\0499.tga
+	specularmap	_black
+	qer_editorimage textures/shock/model/0499.tga
+	{
+		blend gl_dst_color, gl_one
+	colored
+		map textures/shock/model/0499.tga
+	}
+}

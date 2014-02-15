@@ -142,7 +142,7 @@
 141 7 4 0 CONTROL_PEDESTAL models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 142 7 4 1 TUBING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 143 7 4 2 CART models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-144 7 4 3 SURGERY_MACHINE models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+144 7 4 3 SURGERY_MACHINE models/darkmod/shock/surgerymachine.ase model 18
 145 7 4 4 TESTTUBE_RACK models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 146 7 4 5 CHAIR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 147 7 4 6 HOSPITAL_BED models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
@@ -279,7 +279,7 @@
 278 9 1 5 DESTROYED_ANTENNA_RELAY models/darkmod/mechanical/switches/switch_rotate_lever.ase model 18
 279 9 1 6 RETINAL_ID_SCANNER models/darkmod/mechanical/switches/switch_rotate_lever.ase model 18
 280 9 2 0 CYBERSPACE_TERMINAL models/darkmod/mechanical/machine_01.ase model 18
-281 9 2 1 ENERGY_CHARGE_STATION models/darkmod/mechanical/generator1_plain.lwo model 18
+281 9 2 1 ENERGY_CHARGE_STATION models/darkmod/shock/rechargestation.ase model 18
 282 9 2 2 FIXUP_STATION models/darkmod/mechanical/generator2.lwo model 18
 283 9 3 0 ACCESS_PANEL models/darkmod/shock/shock_button_16.ase entity 8
 284 9 3 1 ACCESS_PANEL models/darkmod/shock/shock_button_16.ase entity 8

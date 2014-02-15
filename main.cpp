@@ -44,8 +44,8 @@ extern int levelNo;
 int main()
 {
 int game = SHOCK;
-//int mode = D3_MODE;
-int mode = ASCII_MODE;
+int mode = D3_MODE;
+//int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
@@ -87,8 +87,9 @@ switch (game)
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
 			//BuildSndShaderFiles();
-			//BuildMtrFiles(1);
-			BuildGuiFiles();
+			//BuildMtrFiles(3);
+			//BuildGuiFiles();
+			ExportModelFormat();
 			break;
 		}
 	}

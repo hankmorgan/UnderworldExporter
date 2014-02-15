@@ -315,7 +315,6 @@ void BuildMtrFiles(int MtrType)
 			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
 			fprintf(fileOut, "\tqer_editorimage textures/shock/icon/0078_%04d.tga\n", i);
 			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/icon/0078_%04d.tga\n\t\talphatest 0.8\n\t}", i);
-
 			fprintf(fileOut, "\n}", i);
 			fclose(fileOut);
 		}
@@ -333,7 +332,6 @@ void BuildMtrFiles(int MtrType)
 			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
 			fprintf(fileOut, "\tqer_editorimage textures/shock/graffiti/0079_%04d.tga\n", i);
 			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/graffiti/0079_%04d.tga\n\t\talphatest 0.8\n\t}", i);
-
 			fprintf(fileOut, "\n}", i);
 			fclose(fileOut);
 		}
@@ -352,7 +350,6 @@ void BuildMtrFiles(int MtrType)
 			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
 			fprintf(fileOut, "\tqer_editorimage textures/shock/sign/1350_%04d.tga\n", 390+i);
 			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/sign/1350_%04d.tga\n\t\talphatest 0.8\n\t}", 390 + i);
-
 			fprintf(fileOut, "\n}", i);
 			fclose(fileOut);
 		}
@@ -370,12 +367,29 @@ void BuildMtrFiles(int MtrType)
 			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
 			fprintf(fileOut, "\tqer_editorimage textures/shock/painting/1350_%04d.tga\n", 403 + i);
 			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/painting/1350_%04d.tga\n\t}", 403 + i);
-
 			fprintf(fileOut, "\n}", i);
 			fclose(fileOut);
 		}
 	case 2://Animated stuff
 		break;
+	case  3:	//3d model textures
+		for (int i = 475; i <= 525; i++)
+		{//3d models
+			FILE *fileOut;
+			char filePath[80] = "";
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_model_%d.mtr", i);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+				printf("Unable to create output file for material");
+				return;
+			}
+			fprintf(fileOut, "textures\\shock\\models\\model_%04d\n{\n", i);
+			fprintf(fileOut, "\tbumpmap\t_flat\n\tdiffusemap\ttextures\\shock\\model\\%04d.tga\n\tspecularmap\t_black\n", i);
+			fprintf(fileOut, "\tqer_editorimage textures/shock/model/%04d.tga\n", i);
+			fprintf(fileOut, "\t{\n\t\tblend gl_dst_color, gl_one\n\tcolored\n\t\tmap textures/shock/model/%04d.tga\n\t}", i);
+			fprintf(fileOut, "\n}", i);
+			fclose(fileOut);
+		}
 }
 
 }
@@ -468,4 +482,54 @@ void BuildGuiFiles()
 			}
 		}
 	}
+}
+
+
+void ExportModelFormat()
+{
+	unsigned char *archive_ark;
+	unsigned char *model_chunk;
+	FILE *file = NULL;      // File pointer
+	long chunkUnpackedLength = 0;
+	long chunkType = 0;//compression type
+	long chunkPackedLength = 0;
+
+	if ((file = fopen(SHOCK_MODEL_FILE, "rb")) == NULL)
+	{
+		printf("\nArchive not found!\n");
+		return;
+	}
+	long fileSize = getFileSize(file);
+	int filepos = ftell(file);
+	archive_ark = new unsigned char[fileSize];
+	fread(archive_ark, fileSize, 1, file);
+	fclose(file);
+	for (int k = 2300; k <= 2379; k++)
+	{
+		long blockAddress = getShockBlockAddress(k, archive_ark, &chunkPackedLength, &chunkUnpackedLength, &chunkType);
+		if (blockAddress == -1) { return; }
+		model_chunk = new unsigned char[chunkUnpackedLength];
+		LoadShockChunk(blockAddress, chunkType, archive_ark, model_chunk, chunkPackedLength, chunkUnpackedLength);
+		printf("Header 0 : %d\n", getValAtAddress(model_chunk, 0, 8));
+		printf("Header 1 : %d\n", getValAtAddress(model_chunk, 1, 8));
+		printf("Header 2 : %d\n", getValAtAddress(model_chunk, 2, 8));
+		printf("Header 3 : %d\n", getValAtAddress(model_chunk, 3, 8));
+		printf("Header 4 : %d\n", getValAtAddress(model_chunk, 4, 8));
+		printf("Header 5 : %d\n", getValAtAddress(model_chunk, 5, 8));
+		printf("Header 6 : %d\n", getValAtAddress(model_chunk, 6, 16));
+		int noFaces = getValAtAddress(model_chunk, 6, 16); 
+		long add_ptr = 8;
+		while (add_ptr < chunkUnpackedLength)
+		{
+		
+		switch (getValAtAddress(model_chunk, add_ptr, 16))
+			{
+		    case 0:	//End of sub-hull whatever that means
+			default:
+				printf("\n\t%d", getValAtAddress(model_chunk, add_ptr, 16));
+				add_ptr = add_ptr + 2;
+			}
+		}
+	}
+
 }
