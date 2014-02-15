@@ -1447,7 +1447,6 @@ mstaddress_pointer=0;
 				int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
 				if (LookupIndex != -1)
 				{
-
 					objList[MasterIndex].item_id = LookupIndex;
 
 					objList[MasterIndex].x = getValAtAddress(mst_ark, mstaddress_pointer + 11, 8);
@@ -1500,7 +1499,6 @@ mstaddress_pointer=0;
 					printf("\tunk1 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 24, 8));
 					printf("\tunk2 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 25, 8));
 					printf("\tunk3 = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 26, 8));
-
 					switch (ObjectClass)	//to get further properties specific to each class
 					{
 					case GUNS_WEAPONS:break;
@@ -1520,7 +1518,8 @@ mstaddress_pointer=0;
 					break;
 					}
 					case GETTABLES_OTHER:
-						break;
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					break;
 					case SWITCHES_PANELS:
 					{
 					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
@@ -1537,7 +1536,9 @@ mstaddress_pointer=0;
 					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
 					break;
 					}
-					case CONTAINERS_CORPSES:break;
+					case CONTAINERS_CORPSES:
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+					break;
 					case CRITTERS:break;
 					}
 					UniqueObjectName(objList[MasterIndex]);
@@ -1762,14 +1763,14 @@ int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int i
 	sub_ark=new unsigned char[chunkUnpackedLength];
 	LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
 
-int k= 0;
+	int k= 0;
 int add_ptr=0;
 while (k<=chunkUnpackedLength)
 	{
 	if (k==index)
 		{
 		switch(ClassType)
-			{
+		{
 			case SOFTWARE_LOGS:
 				{
 				objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]=getValAtAddress(sub_ark,add_ptr+6,8);	//Software version
@@ -1829,6 +1830,28 @@ while (k<=chunkUnpackedLength)
 				return 1;
 				break;
 				}
+			case GETTABLES_OTHER:
+				{
+				if (objList[objIndex].item_id == 191)	//Brief case contents
+					{
+					objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = getValAtAddress(sub_ark, add_ptr + 0x6, 16);
+					objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = getValAtAddress(sub_ark, add_ptr + 0x8, 16);
+					objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = getValAtAddress(sub_ark, add_ptr + 0xA, 16);
+					objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
+					printf("\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
+					printf("\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
+					printf("\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
+					printf("\tContents 4 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_4]);
+					}
+			
+				for (int j = 0; j < RecordSize; j = j + 2)
+				{
+					printf("j=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr+ j, 16));
+				}
+
+				return 1;
+				break;
+				}
 			case SWITCHES_PANELS:
 				{
 				printf("\n\tSwitch Properties\n");
@@ -1878,9 +1901,30 @@ while (k<=chunkUnpackedLength)
 
 				return 1;
 				break;
+			case CONTAINERS_CORPSES:
+				printf("\n\tContainer Properties\n");
+				objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = getValAtAddress(sub_ark, add_ptr + 0x6, 16);
+				objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = getValAtAddress(sub_ark, add_ptr + 0x8, 16);
+				objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = getValAtAddress(sub_ark, add_ptr + 0xA, 16);
+				objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
+				objList[objIndex].shockProperties[CONTAINER_WIDTH] = getValAtAddress(sub_ark, add_ptr + 0xE, 8);
+				objList[objIndex].shockProperties[CONTAINER_HEIGHT] = getValAtAddress(sub_ark, add_ptr + 0xF, 8);
+				objList[objIndex].shockProperties[CONTAINER_DEPTH] = getValAtAddress(sub_ark, add_ptr + 0x10, 8);
+				objList[objIndex].shockProperties[CONTAINER_TOP] = getValAtAddress(sub_ark, add_ptr + 0x11, 8);
+				objList[objIndex].shockProperties[CONTAINER_SIDE] = getValAtAddress(sub_ark, add_ptr + 0x12, 8);
+				printf("\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
+				printf("\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
+				printf("\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
+				printf("\tContents 4 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_4]);
+				printf("\tWidth : %d", objList[objIndex].shockProperties[CONTAINER_WIDTH]);
+				printf("\tHeight : %d", objList[objIndex].shockProperties[CONTAINER_HEIGHT]);
+				printf("\tDepth : %d\n", objList[objIndex].shockProperties[CONTAINER_DEPTH]);
+				printf("\tTop : %d", objList[objIndex].shockProperties[CONTAINER_TOP]);
+				printf("\tSide : %d", objList[objIndex].shockProperties[CONTAINER_SIDE]);
+				return 1;
+				break;
 				}
 			}
-		break;
 		}
 	add_ptr+=RecordSize;
 	k++;

@@ -962,94 +962,100 @@ switch (currObj.TriggerAction)
 	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 
 	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 
 		//shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
-		int shadeUpper1 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_1]; //TRIG_PROPERTY_UPPERSHADE
-		int shadeLower1 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_1];
-		int shadeUpper2 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_2]; //TRIG_PROPERTY_UPPERSHADE
-		int shadeLower2 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_2];
-
-		int x1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileX;
-		int y1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileY;
-		int x2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileX; 
-		int y2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileY;
-		int xMin; int xMax;
-		int yMin; int yMax;
-
-		if (x1 >= x2)
-			{ xMin = x2; xMax = x1; }
-		else
-			{ xMin = x1; xMax = x2; }
-		if (y1 >= y2)
+		if (ENABLE_LIGHTING == 1)
 		{
-			yMin = y2; yMax = y1;
-		}
-		else
-		{
-			yMin = y1; yMax = y2;
-		}
-		//fprintf(fBODY, "\tfloat dir = 1;\n");
-		fprintf(fBODY, "\tfloat shade = 0;\n");
-		fprintf(fBODY, "\tfloat shadeUpperAdj =0;");
-		fprintf(fBODY, "\tfloat shadeLowerAdj =0;\n");
-		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n\telse\n\t{\n", shadeUpper1, shadeLower1);
-		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n", shadeUpper2, shadeLower2);
+							
+			int shadeUpper1 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_1]; //TRIG_PROPERTY_UPPERSHADE
+			int shadeLower1 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_1];
+			int shadeUpper2 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_2]; //TRIG_PROPERTY_UPPERSHADE
+			int shadeLower2 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_2];
 
-		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-		//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
-		//fprintf(fBODY, "\t\tdir = 1 ;\n\t\t%s_light_state = 0;\n\t}\n",  UniqueObjectName(currObj));
+			int x1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileX;
+			int y1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileY;
+			int x2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileX; 
+			int y2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileY;
+			int xMin; int xMax;
+			int yMin; int yMax;
 
-		for (int x = xMin; x <= xMax; x++)
-		{
-			for (int y = yMin; y <= yMax; y++)
+			if (x1 >= x2)
+				{ xMin = x2; xMax = x1; }
+			else
+				{ xMin = x1; xMax = x2; }
+			if (y1 >= y2)
 			{
-				if (LevelInfo[x][y].tileType != 0)
-				{
-					//if ((LevelInfo[x][y].shadeUpperGlobal == 0) && ((shadeUpper1 >= 1) || (shadeUpper2 >=1)))
-					//{//add a global for this light
-					//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_upper_state = %d;\n",x,y, LevelInfo[x][y].shockShadeUpper);
-					//	LevelInfo[x][y].shadeUpperGlobal = 1;
-					//}
-					//if ((LevelInfo[x][y].shadeLowerGlobal == 0) && ((shadeLower1 >= 1) || (shadeLower2 >= 1)))
-					//	{//add a global for this light
-					//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_lower_state = %d;\n",x,y, LevelInfo[x][y].shockShadeLower);
-					//	LevelInfo[x][y].shadeLowerGlobal = 1;
-					//	}
-					
-
-					
-					if ((shadeUpper1 >= 1) || (shadeUpper2 >= 1))
-					{
-						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((%d + (dir * %d)) / 15)) ;\n", x, y, LevelInfo[x][y].shockShadeUpper);
-						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n", LevelInfo[x][y].shockShadeUpper);
-						//fprintf(fBODY, "\tlight_%02d_%02d_upper_state = light_%02d_%02d_upper_state + (dir * %d);\n", x, y,x,y,shadeUpper);
-						//fprintf(fBODY, "\tsys.println(\"Setting upper shade %02d %02d\"); \n",x,y);
-						//fprintf(fBODY, "\tsys.println(shade); \n");
-						fprintf(fBODY, "\t$light_%02d_%02d_upper.setColor( shade,shade,shade );\n", x, y);
-					}
-					if ((shadeLower1 >= 1) || (shadeLower2 >= 1))
-					{
-						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((light_%02d_%02d_lower_state + (dir * %d)) / 15)) ;\n", x, y, shadeLower);
-						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
-						//fprintf(fBODY, "\tlight_%02d_%02d_lower_state = light_%02d_%02d_lower_state + (dir * %d);\n", x, y, x, y, shadeLower);
-						//fprintf(fBODY, "\tsys.println(\"Setting lower shade %02d %02d\"); \n", x, y);
-						//fprintf(fBODY, "\tsys.println(shade); \n");
-						fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
-					}
-				}
-
+				yMin = y2; yMax = y1;
 			}
+			else
+			{
+				yMin = y1; yMax = y2;
+			}
+			//fprintf(fBODY, "\tfloat dir = 1;\n");
+			fprintf(fBODY, "\tfloat shade = 0;\n");
+			fprintf(fBODY, "\tfloat shadeUpperAdj =0;");
+			fprintf(fBODY, "\tfloat shadeLowerAdj =0;\n");
+			fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+			fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n\telse\n\t{\n", shadeUpper1, shadeLower1);
+			fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n", shadeUpper2, shadeLower2);
+
+			//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+			//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+			//fprintf(fBODY, "\t\tdir = 1 ;\n\t\t%s_light_state = 0;\n\t}\n",  UniqueObjectName(currObj));
+
+			for (int x = xMin; x <= xMax; x++)
+			{
+				for (int y = yMin; y <= yMax; y++)
+				{
+					if (LevelInfo[x][y].tileType != 0)
+					{
+						//if ((LevelInfo[x][y].shadeUpperGlobal == 0) && ((shadeUpper1 >= 1) || (shadeUpper2 >=1)))
+						//{//add a global for this light
+						//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_upper_state = %d;\n",x,y, LevelInfo[x][y].shockShadeUpper);
+						//	LevelInfo[x][y].shadeUpperGlobal = 1;
+						//}
+						//if ((LevelInfo[x][y].shadeLowerGlobal == 0) && ((shadeLower1 >= 1) || (shadeLower2 >= 1)))
+						//	{//add a global for this light
+						//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_lower_state = %d;\n",x,y, LevelInfo[x][y].shockShadeLower);
+						//	LevelInfo[x][y].shadeLowerGlobal = 1;
+						//	}
+					
+
+					
+						if ((shadeUpper1 >= 1) || (shadeUpper2 >= 1))
+						{
+							//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((%d + (dir * %d)) / 15)) ;\n", x, y, LevelInfo[x][y].shockShadeUpper);
+							fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n", LevelInfo[x][y].shockShadeUpper);
+							//fprintf(fBODY, "\tlight_%02d_%02d_upper_state = light_%02d_%02d_upper_state + (dir * %d);\n", x, y,x,y,shadeUpper);
+							//fprintf(fBODY, "\tsys.println(\"Setting upper shade %02d %02d\"); \n",x,y);
+							//fprintf(fBODY, "\tsys.println(shade); \n");
+							fprintf(fBODY, "\t$light_%02d_%02d_upper.setColor( shade,shade,shade );\n", x, y);
+						}
+						if ((shadeLower1 >= 1) || (shadeLower2 >= 1))
+						{
+							//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((light_%02d_%02d_lower_state + (dir * %d)) / 15)) ;\n", x, y, shadeLower);
+							fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
+							//fprintf(fBODY, "\tlight_%02d_%02d_lower_state = light_%02d_%02d_lower_state + (dir * %d);\n", x, y, x, y, shadeLower);
+							//fprintf(fBODY, "\tsys.println(\"Setting lower shade %02d %02d\"); \n", x, y);
+							//fprintf(fBODY, "\tsys.println(shade); \n");
+							fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
+						}
+					}
+
+				}
+			}
+			fprintf(fGLOBALS, "\tfloat %s_light_state = 0;\n",UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
+			//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+			//fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+			//fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
+
+			fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+			fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+			fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
 		}
-		fprintf(fGLOBALS, "\tfloat %s_light_state = 0;\n",UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
-		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-		//fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
-		//fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
-
-		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-		fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
-		fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
-
-		//fprintf(fBODY,"\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n",currObj.shockProperties[TRIG_PROPERTY_CONTROL_1],currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);		
-
+		else
+		{
+							
+			fprintf(fBODY,"\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n",currObj.shockProperties[TRIG_PROPERTY_CONTROL_1],currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);		
+		}
 
 		break;
 		}
