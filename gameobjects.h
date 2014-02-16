@@ -259,16 +259,16 @@ struct ObjectItem
    
    short joint;	//index to joint no.
    
-   int levelno;
-   int tileX;	//Position of the object on the tilemap
-   int tileY;
+   short levelno;
+   short tileX;	//Position of the object on the tilemap
+   short tileY;
  
    
    //Shock specific stuff
 	short InUseFlag;
-	int ObjectClass;
-	int ObjectSubClass;
-	int ObjectSubClassIndex;
+	short ObjectClass;
+	short ObjectSubClass;
+	short ObjectSubClassIndex;
 	int Angle1;
 	int Angle2;
 	int Angle3;
@@ -276,9 +276,9 @@ struct ObjectItem
 	int ObjectType;
 	int HitPoints;
 	int State;
-	int duplicate;   //when it extends into another tile
-	int TriggerOnce;
-	int TriggerAction;	//For triggers
+	//int duplicate;   //when it extends into another tile
+	short TriggerOnce;
+	short TriggerAction;	//For triggers
 	int shockProperties[10]; //Further generic properties for data pulled back from subclass blocks.
 	int conditions[4];  	
 	int sprite;
@@ -288,6 +288,7 @@ struct ObjectItem
 	//scripting state flags
 	short global;
 	short TriggerOnceGlobal;
+	int objectConversion;	//For what an object can turn into
 };
 
 
@@ -303,9 +304,9 @@ char desc[80];
 char path[80]; //to object model
 short isEntity; // 1 for entity. 0 for model. -1 for ignored entries
 short isSet;
-int objClass;	//For Shock
-int objSubClass;
-int objSubClassIndex;
+short objClass;	//For Shock
+short objSubClass;
+short objSubClassIndex;
 
 
 short renderType;
@@ -324,8 +325,8 @@ short DeathWatch;
 //}shockObjectMaster;
 struct xrefTable
 {
-int tileX;// position
-int	tileY;// position
+short tileX;// position
+short tileY;// position
 int next;
 int	MstIndex;// into master object table
 int nextTile; //objects in next tile
@@ -338,9 +339,9 @@ struct mstTable
 {
 int index;
 int inuse;
-int objectclass;
-int objectsubclass;
-int subclasslink;
+short objectclass;
+short objectsubclass;
+short subclasslink;
 int xRef;
 int nextlink;
 };
@@ -361,6 +362,7 @@ char *UniqueObjectName(ObjectItem currObj);
 int isButtonSHOCK(ObjectItem currobj);
 int isTriggerSHOCK(ObjectItem currobj);
 char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
+int getObjectIDByClass(int objClass, int subClass, int subClassIndex);
 
 
 

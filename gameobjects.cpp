@@ -13,7 +13,7 @@
 
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
-void RenderPatch(int game, float x, float y, float z,long PatchIndex, ObjectItem objList[1600] );
+//void RenderPatch(int game, float x, float y, float z,long PatchIndex, ObjectItem objList[1600] );
 void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityDoor (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
@@ -57,7 +57,7 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 //long patchX;long patchY;long patchZ;
 //int patchOffsetX;int patchOffsetY;
 
-
+printf("Rendering:%s\n", UniqueObjectName(currobj));
 switch (objectMasters[currobj.item_id].isEntity )
 	{
 	case -1:	//ignore
@@ -154,7 +154,21 @@ switch (objectMasters[currobj.item_id].isEntity )
 				}
 			}
 		}
-	}		
+	}	
+	if ((currobj.objectConversion != 0) && (game == SHOCK))
+		{
+		//Swap out the object type but generate based on the original properties.
+		int originalObj = objList[currobj.index].item_id;
+		int newObj = currobj.objectConversion;
+		int newObjId = getObjectIDByClass(currobj.ObjectClass, currobj.ObjectSubClass, currobj.objectConversion);
+		objList[currobj.index].item_id = newObjId;
+		objList[currobj.index].objectConversion = 0;
+		objList[currobj.index].invis = 1;	//hide the object
+		RenderEntity(game, x, y, z, currobj, objList, LevelInfo);
+		objList[currobj.index].invis = 0;
+		objList[currobj.index].item_id = originalObj;
+		objList[currobj.index].objectConversion = newObj;
+		}
 }
 
 
@@ -338,6 +352,7 @@ void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj
 		//print position+name
 		fprintf (MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
+		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 		if (game == SHOCK)
 		{
 			EntityRotationSHOCK(currobj.Angle2);
@@ -450,6 +465,8 @@ if (game == SHOCK)
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 
 	fprintf (MAPFILE, "\"name\" \"%s_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+
 	fprintf(MAPFILE, "\"auto_close_time\" \"30\"\n");
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
 		{
@@ -670,6 +687,7 @@ void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, 
 	fprintf (MAPFILE, "\"usable\" \"1\"\n\"frobable\" \"1\"\n\"inv_name\" \"%s\"\n\"inv_target\" \"player1\"\n\"inv_stackable\" \"1\"\n\"inv_category\" \"Keys\"\n", objectMasters[currobj.item_id].desc);
 	//position
 	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	EntityRotation(currobj.heading);	
 	AttachToJoint(currobj);		
 	fprintf (MAPFILE, "}");
@@ -701,6 +719,7 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 		}				
 	//position
 	printf("\"origin\" \"%f %f %f\"\n",x,y,z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	AttachToJoint(currobj);			
 	printf("}");
 	EntityCount++;
@@ -738,6 +757,8 @@ void RenderEntityButton(int game, float x, float y, float z, ObjectItem &currobj
 	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
 	fprintf (MAPFILE, "\"rotate\" \"0 0 1\"\n");
 	fprintf (MAPFILE, "\"interruptable\" \"0\"\n");
+
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n",currobj.invis);
 	
 	fprintf (MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
 	if (game == SHOCK)
@@ -886,7 +907,8 @@ void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj,
 		}
 	fprintf (MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));
 	fprintf (MAPFILE, "\"model\" \"%s\"\n",UniqueObjectName(currobj));
-	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
+	fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	RenderPatch(game,currobj.tileX,currobj.tileY ,currobj.zpos,currobj.index,objList);
 	fprintf (MAPFILE, "\n}\n");
 	EntityCount++;
@@ -922,7 +944,7 @@ switch (game)
 		{//This is a hidden email OR MESSAGE
 		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:readable_mobile_scroll01");
 		fprintf(MAPFILE, "\"name\" \"%s_email\"\n", UniqueObjectName(currobj));
-		fprintf(MAPFILE, "\"hide\" \"1\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"hide\" \"1\"\n");
 		}
 	else
 		{
@@ -984,6 +1006,7 @@ void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj,
 	fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount);
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf (MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));		
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	fprintf (MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
 	switch (game)
 		{
@@ -1200,6 +1223,7 @@ void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj,
 			break;
 	}
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	EntityRotationSHOCK(currobj.Angle2);
 	fprintf(MAPFILE, "\n}");
 }
@@ -1226,7 +1250,7 @@ void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem 
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
-
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 
 	//currobj.shockProperties[SCREEN_NO_OF_FRAMES]
 	//currobj.shockProperties[SCREEN_LOOP_FLAG] 
@@ -1432,7 +1456,8 @@ mstaddress_pointer=0;
 			objList[MasterIndex].link =0;
 			objList[MasterIndex].joint=0;
 			objList[MasterIndex].heading=0;
-
+			objList[MasterIndex].objectConversion = 0;
+			objList[MasterIndex].invis = 0;
 				InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
 				objList[MasterIndex].InUseFlag = InUseFlag;
 					
@@ -1569,8 +1594,6 @@ mstaddress_pointer=0;
 			{LevelInfo[x][y].indexObjectList= xref[LevelInfo[x][y].indexObjectList].MstIndex; }
 		}
 		}
-
-
 }
 	
 void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo)
@@ -1678,6 +1701,8 @@ switch (game)
 			objList[x].objectOwner =0;
 			objList[x].objectOwnerEntity =0;
 			objList[x].joint =0 ;
+			objList[x].objectConversion = 0;
+			objList[x].invis = 0;
 			
 			//Object header.
 			objList[x].item_id = (getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
@@ -2667,7 +2692,7 @@ char *UniqueObjectName(ObjectItem currObj)
 {//returns a unique name for the object
 	char str[80]="";
 	//_snprintf(str,80,"%s_%02d_%02d_%02d_%04d", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
-	sprintf_s(str,80,"%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
+	sprintf_s(str, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
 	return str;
 }
 
@@ -2683,6 +2708,20 @@ char *getObjectNameByClass(int objClass, int subClass, int subClassIndex)
 		}
 	}
 }
+
+int getObjectIDByClass(int objClass, int subClass, int subClassIndex)
+{
+	for (int i = 0; i < 475; i++)
+	{
+		if ((objectMasters[i].objClass == objClass) &&
+			(objectMasters[i].objSubClass == subClass) &&
+			(objectMasters[i].objSubClassIndex == subClassIndex))
+				{
+					return i;
+				}
+	}
+}
+
 void shockCommonObject()
 {//offset dec 5099
 //Read in some common object properties to find some useful info.

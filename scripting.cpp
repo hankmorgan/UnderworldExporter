@@ -668,7 +668,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 				fclose(fBODY);	
 			}
 
-		//Add the void main that starts our level entry trigger
+		//Add the void main that starts our level entry triggers
 		fprintf(fFINALSCRIPT, "\nvoid main()\n\t{\n");
 		fprintf(fFINALSCRIPT, "\tsys.println(\"shock\");\n");
 			
@@ -1233,9 +1233,15 @@ switch (currObj.TriggerAction)
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
 		int objToChange = currObj.shockProperties[TRIG_PROPERTY_OBJECT];
 		int newObjType = currObj.shockProperties[TRIG_PROPERTY_TYPE];
+		int newObjTypeID = getObjectIDByClass(objList[objToChange].ObjectClass, objList[objToChange].ObjectSubClass, currObj.shockProperties[TRIG_PROPERTY_TYPE]);
+		
 		fprintf(fBODY, "\tsys.println(\"Changing %s to a %s\");\n",
 			UniqueObjectName(objList[objToChange]),
 			getObjectNameByClass(objList[objToChange].ObjectClass, objList[objToChange].ObjectSubClass, newObjType));
+
+		fprintf(fBODY, "\t$%s.setModel(\"%s\");\n", UniqueObjectName(objList[objToChange]),objectMasters[newObjTypeID].path);
+		fprintf(fBODY, "\t$%s.becomeSolid();\n", UniqueObjectName(objList[objToChange]));
+
 		break;
 		}
 	default:
