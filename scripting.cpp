@@ -513,7 +513,8 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 					if ((isButtonSHOCK(objList[nextObj])) 
 							|| (isLog(objList[nextObj])) 
 								|| (isTriggerSHOCK(objList[nextObj]))
-									|| (objectMasters[objList[nextObj].item_id].DeathWatch  >=1))
+									|| (objectMasters[objList[nextObj].item_id].DeathWatch  >=1)
+										|| (isContainer(objList[nextObj])))
 						{
 						if (isTriggerSHOCK(objList[nextObj]) && (objList[nextObj].item_id != 378))
 						{//Create global variables for testing conditions.
@@ -567,6 +568,25 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 										objList[nextObj].ObjectClass, objList[nextObj].ObjectSubClass, objList[nextObj].ObjectSubClassIndex);
 									fprintf(fBODY, "\tdeathwatch_script(%d%d%d);\n",
 										objList[nextObj].ObjectClass, objList[nextObj].ObjectSubClass, objList[nextObj].ObjectSubClassIndex);
+									break;
+									}
+								if (isContainer(objList[nextObj]))
+									{
+									fprintf(fGLOBALS, "\tfloat %s_opened = 0;\n", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\tif (%s_opened == 0)\n\t{\n", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\tsys.println(\"Opening container %s\");\n", UniqueObjectName(objList[nextObj]));
+									for (int i = 0; i < 4; i++)
+										{
+										if (objList[nextObj].shockProperties[CONTAINER_CONTENTS_1 + i] > 0)
+											{
+											int contents = objList[nextObj].shockProperties[CONTAINER_CONTENTS_1 + i];
+											fprintf(fBODY, "\t$%s.teleportTo", UniqueObjectName(objList[contents]));
+											fprintf(fBODY, "($%s_spawnpoint_%d); \n", UniqueObjectName(objList[nextObj]),i);
+											}
+										}
+									fprintf(fBODY, "\t%s_opened = 1;\n", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\t}\n");
+									break;
 									}
 								break;
 							}

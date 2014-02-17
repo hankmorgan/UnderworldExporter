@@ -246,6 +246,11 @@ int isLog (ObjectItem currobj)
 	
 	}
 
+int isContainer(ObjectItem currobj)
+{
+	return  (objectMasters[currobj.item_id].type == CONTAINER);
+}
+
 int isTrap(ObjectItem currobj)
 	{
 	switch (objectMasters[currobj.item_id].type )
@@ -700,42 +705,82 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 //Params.
 //Item_id
 //link	//To check for a lock and it's list of contents.
-	printf("\n// entity %d\n{\n",EntityCount);
-	printf("\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 
-	//I need to spawn it's contents at the same location (recursively)
-	//render it first.
-	//TODO: I also need to fix containers which are not really entities
-	printf("\"name\" \"%s_%03d\"\n",objectMasters[currobj.item_id].desc,EntityCount);	
-	if (objectMasters[objList[currobj.link].item_id].type == LOCK)	//container has a lock.
-		{//bit 1 of the flags is the lock?
-		printf("\"locked\" \"%d\"\n",(objList[currobj.link].flags & 0x01));
-		printf ("\"used_by\" \"a_key_%03d_0\"\n", objList[currobj.link].link & 0x3F);
-		printf ("\"used_by1\" \"a_key_%03d_1\"\n", objList[currobj.link].link & 0x3F);
-		printf ("\"used_by2\" \"a_key_%03d_2\"\n", objList[currobj.link].link & 0x3F);
-		printf ("\"used_by3\" \"a_key_%03d_3\"\n", objList[currobj.link].link & 0x3F);
-		printf ("\"used_by4\" \"a_key_%03d_4\"\n", objList[currobj.link].link & 0x3F);
-		printf ("\"used_by5\" \"a_key_%03d_5\"\n", objList[currobj.link].link & 0x3F);		
-		}				
-	//position
-	printf("\"origin\" \"%f %f %f\"\n",x,y,z);
-	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
-	AttachToJoint(currobj);			
-	printf("}");
-	EntityCount++;
+	if (game != SHOCK)
+	{
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");
+		fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+		//I need to spawn it's contents at the same location (recursively)
+		//render it first.
+		//TODO: I also need to fix containers which are not really entities
+		fprintf(MAPFILE, "\"name\" \"%s_%03d\"\n", objectMasters[currobj.item_id].desc, EntityCount);
+		if (objectMasters[objList[currobj.link].item_id].type == LOCK)	//container has a lock.
+			{//bit 1 of the flags is the lock?
+			fprintf(MAPFILE, "\"locked\" \"%d\"\n", (objList[currobj.link].flags & 0x01));
+			fprintf(MAPFILE, "\"used_by\" \"a_key_%03d_0\"\n", objList[currobj.link].link & 0x3F);
+			fprintf(MAPFILE, "\"used_by1\" \"a_key_%03d_1\"\n", objList[currobj.link].link & 0x3F);
+			fprintf(MAPFILE, "\"used_by2\" \"a_key_%03d_2\"\n", objList[currobj.link].link & 0x3F);
+			fprintf(MAPFILE, "\"used_by3\" \"a_key_%03d_3\"\n", objList[currobj.link].link & 0x3F);
+			fprintf(MAPFILE, "\"used_by4\" \"a_key_%03d_4\"\n", objList[currobj.link].link & 0x3F);
+			fprintf(MAPFILE, "\"used_by5\" \"a_key_%03d_5\"\n", objList[currobj.link].link & 0x3F);
+			}				
+		//position
+		printf("\"origin\" \"%f %f %f\"\n",x,y,z);
+		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+		AttachToJoint(currobj);			
+		printf("}");
+		EntityCount++;
 
-	//now recursively get it's contents.
-	if (currobj.link !=0)	//Container has objects
-		{
-		ObjectItem tmpobj = objList[currobj.link];		
-		while( tmpobj.next  !=0 )
+		//now recursively get it's contents.
+		if (currobj.link !=0)	//Container has objects
 			{
+			ObjectItem tmpobj = objList[currobj.link];		
+			while( tmpobj.next  !=0 )
+				{
+				RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo);
+				tmpobj = objList[tmpobj.next];
+				}
 			RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo);
-			tmpobj = objList[tmpobj.next];
+			}			
+		return;
+		}
+	else
+	{
+		//Shock container. contents are different from uw1
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);//"atdm:mover_button"
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");
+		fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+		fprintf(MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "}");
+
+		createScriptCall(currobj, x, y, z);
+
+		//create 4 spawn points around the container to spawn the contents at.
+		int offX = 10; int offY = 10;
+		for (int i = 0; i < 4; i++)
+		{
+			switch (i)
+			{
+			case 0: offX = 10; offY = 10; break;
+			case 1: offX = -10; offY = 10; break;
+			case 2: offX = 10; offY = -10; break;
+			case 3: offX = -10; offY = -10; break;
 			}
-		RenderEntity(game,x,y,z,tmpobj,objList,LevelInfo);
-		}			
-	return;
+
+			if (currobj.shockProperties[CONTAINER_CONTENTS_1 + i] != 0)
+			{
+				fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+				fprintf(MAPFILE, "\"classname\" \"%s\"\n", "target_null");
+				fprintf(MAPFILE, "\"name\" \"%s_spawnpoint_%d\"\n", UniqueObjectName(currobj), i);
+				fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + offX, y + offY, z);
+				fprintf(MAPFILE, "}");
+			}
+		}
+	}
 }
 
 void RenderEntityButton(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
