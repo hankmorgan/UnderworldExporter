@@ -38,6 +38,7 @@
 #define PORTCULLIS 30
 #define PILLAR 31
 #define SOUND 32
+#define CORPSE 33
 
 #define TMAP_SOLID 34
 #define TMAP_CLIP 35

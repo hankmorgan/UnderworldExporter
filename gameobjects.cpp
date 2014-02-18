@@ -19,6 +19,7 @@ void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, 
 void RenderEntityDoor (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]) ;
 void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_DOOR_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
@@ -139,6 +140,9 @@ switch (objectMasters[currobj.item_id].isEntity )
 			case SHOCK_TRIGGER_REPULSOR:
 				RenderEntityREPULSOR(game,x,y,z,currobj,objList,LevelInfo);
 				break;
+			case CORPSE:
+				RenderEntityCorpse(game, x, y, z, currobj, objList, LevelInfo);
+				break;
 			default:
 				{//just the basic name. with no properties.
 				fprintf (MAPFILE, "\n// entity %d\n{\n",EntityCount);
@@ -248,7 +252,7 @@ int isLog (ObjectItem currobj)
 
 int isContainer(ObjectItem currobj)
 {
-	return  (objectMasters[currobj.item_id].type == CONTAINER);
+	return  ((objectMasters[currobj.item_id].type == CONTAINER) || (objectMasters[currobj.item_id].type == CORPSE));
 }
 
 int isTrap(ObjectItem currobj)
@@ -782,6 +786,53 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 		}
 	}
 }
+
+void RenderEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+	//Params.
+	//Item_id
+	//link	//To check for a lock and it's list of contents.
+
+	if (game == SHOCK)
+	{
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);//"atdm:mover_button"
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
+		//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+		fprintf(MAPFILE, "\"grabable\" \"%d\"\n", 0);
+		fprintf(MAPFILE, "\"frobable\" \"%d\"\n", 1);
+		fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "}");
+
+		//createScriptCall(currobj, x, y, z);
+
+		//create 4 spawn points around the container to spawn the contents at.
+		int offX = 10; int offY = 10;
+		for (int i = 0; i < 4; i++)
+		{
+			switch (i)
+			{
+			case 0: offX = 10; offY = 10; break;
+			case 1: offX = -10; offY = 10; break;
+			case 2: offX = 10; offY = -10; break;
+			case 3: offX = -10; offY = -10; break;
+			}
+
+			if (currobj.shockProperties[CONTAINER_CONTENTS_1 + i] != 0)
+			{
+				fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+				fprintf(MAPFILE, "\"classname\" \"%s\"\n", "target_null");
+				fprintf(MAPFILE, "\"name\" \"%s_spawnpoint_%d\"\n", UniqueObjectName(currobj), i);
+				fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + offX, y + offY, z);
+				fprintf(MAPFILE, "}");
+			}
+		}
+	}
+}
+
+
 
 void RenderEntityButton(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
@@ -1893,6 +1944,12 @@ while (k<=chunkUnpackedLength)
 							  printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
 							  printf("\nFont and size %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
 							  printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+
+							  printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+							  printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+							  printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+							  printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+							  printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
 							  break;
 						  case 6:
 						  case 8:

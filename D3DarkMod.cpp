@@ -263,19 +263,28 @@ int x; int y;
 				//Speaker for playing back logs
 				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
 				fprintf (MAPFILE, "{\n\"classname\" \"atdm:voice\"");
-				fprintf (MAPFILE, "\n\"name\" \"data_reader_voice\"",EntityCount);
+				fprintf (MAPFILE, "\n\"name\" \"data_reader_voice\"");
 				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
 				fprintf (MAPFILE, "\n\"s_shader\" \"silence\"");
 				fprintf (MAPFILE, "\n}\n");						
 				
 				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
 				fprintf (MAPFILE, "{\n\"classname\" \"atdm:trigger_voice\"");
-				fprintf (MAPFILE, "\n\"name\" \"data_reader_trigger\"",EntityCount);
+				fprintf (MAPFILE, "\n\"name\" \"data_reader_trigger\"");
 				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
 				fprintf (MAPFILE, "\n\"snd_say\" \"silence\"");
 				fprintf (MAPFILE, "\n\"target0\" \"data_reader_voice\"");
 				fprintf (MAPFILE, "\n\"as_player\" \"1\"");
-				fprintf (MAPFILE, "\n}\n");						
+				fprintf (MAPFILE, "\n}\n");	
+				
+				if (levelNo == 1)
+					{//startposition for player
+					fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+					fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
+					fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
+					fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"",3642.25, 2722.75, 175.75 );
+					fprintf(MAPFILE, "\n}\n");
+					}
 				
 				}
 		
