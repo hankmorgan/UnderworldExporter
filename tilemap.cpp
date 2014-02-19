@@ -880,10 +880,6 @@ int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction)
 }
 
 
-
-
-
-
 void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know if the tile contains a door.
 ObjectItem currObj;

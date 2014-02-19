@@ -39,6 +39,7 @@
 #define PILLAR 31
 #define SOUND 32
 #define CORPSE 33
+#define HIDDENPLACEHOLDER 34
 
 #define TMAP_SOLID 34
 #define TMAP_CLIP 35
@@ -290,6 +291,7 @@ struct ObjectItem
 	short global;
 	short TriggerOnceGlobal;
 	int objectConversion;	//For what an object can turn into
+	short keyCount; //If this is a key then it needs to know which number of key it is.
 };
 
 
@@ -355,6 +357,7 @@ int isButton(ObjectItem currobj);
 int isTrap(ObjectItem currobj);
 int isLog (ObjectItem currobj);
 int isContainer(ObjectItem currobj);
+int hasContents(ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
 //long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);
@@ -365,6 +368,9 @@ int isButtonSHOCK(ObjectItem currobj);
 int isTriggerSHOCK(ObjectItem currobj);
 char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
 int getObjectIDByClass(int objClass, int subClass, int subClassIndex);
+
+
+
 
 
 

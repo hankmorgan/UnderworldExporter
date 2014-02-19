@@ -35,6 +35,123 @@ void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 }
 
 
+void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
+{
+	//000C	int16	Control point 1
+	//000E	int16	Control point 2
+	//	...	?
+	//printf("\tACTION_LIGHTING\n");
+	//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+	//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+	//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+	//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+	//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+	//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+	//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+	//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
+	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 
+	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 
+	//shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
+	if (ENABLE_LIGHTING == 1)
+	{
+
+		int shadeUpper1 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_1]; //TRIG_PROPERTY_UPPERSHADE
+		int shadeLower1 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_1];
+		int shadeUpper2 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_2]; //TRIG_PROPERTY_UPPERSHADE
+		int shadeLower2 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_2];
+
+		int x1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileX;
+		int y1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileY;
+		int x2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileX;
+		int y2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileY;
+		int xMin; int xMax;
+		int yMin; int yMax;
+
+		if (x1 >= x2)
+		{
+			xMin = x2; xMax = x1;
+		}
+		else
+		{
+			xMin = x1; xMax = x2;
+		}
+		if (y1 >= y2)
+		{
+			yMin = y2; yMax = y1;
+		}
+		else
+		{
+			yMin = y1; yMax = y2;
+		}
+		//fprintf(fBODY, "\tfloat dir = 1;\n");
+		fprintf(fBODY, "\tfloat shade = 0;\n");
+		fprintf(fBODY, "\tfloat shadeUpperAdj =0;");
+		fprintf(fBODY, "\tfloat shadeLowerAdj =0;\n");
+		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n\telse\n\t{\n", shadeUpper1, shadeLower1);
+		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n", shadeUpper2, shadeLower2);
+
+		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\tdir = 1 ;\n\t\t%s_light_state = 0;\n\t}\n",  UniqueObjectName(currObj));
+
+		for (int x = xMin; x <= xMax; x++)
+		{
+			for (int y = yMin; y <= yMax; y++)
+			{
+				if (LevelInfo[x][y].tileType != 0)
+				{
+					//if ((LevelInfo[x][y].shadeUpperGlobal == 0) && ((shadeUpper1 >= 1) || (shadeUpper2 >=1)))
+					//{//add a global for this light
+					//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_upper_state = %d;\n",x,y, LevelInfo[x][y].shockShadeUpper);
+					//	LevelInfo[x][y].shadeUpperGlobal = 1;
+					//}
+					//if ((LevelInfo[x][y].shadeLowerGlobal == 0) && ((shadeLower1 >= 1) || (shadeLower2 >= 1)))
+					//	{//add a global for this light
+					//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_lower_state = %d;\n",x,y, LevelInfo[x][y].shockShadeLower);
+					//	LevelInfo[x][y].shadeLowerGlobal = 1;
+					//	}
+
+
+
+					if ((shadeUpper1 >= 1) || (shadeUpper2 >= 1))
+					{
+						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((%d + (dir * %d)) / 15)) ;\n", x, y, LevelInfo[x][y].shockShadeUpper);
+						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n", LevelInfo[x][y].shockShadeUpper);
+						//fprintf(fBODY, "\tlight_%02d_%02d_upper_state = light_%02d_%02d_upper_state + (dir * %d);\n", x, y,x,y,shadeUpper);
+						//fprintf(fBODY, "\tsys.println(\"Setting upper shade %02d %02d\"); \n",x,y);
+						//fprintf(fBODY, "\tsys.println(shade); \n");
+						fprintf(fBODY, "\t$light_%02d_%02d_upper.setColor( shade,shade,shade );\n", x, y);
+					}
+					if ((shadeLower1 >= 1) || (shadeLower2 >= 1))
+					{
+						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((light_%02d_%02d_lower_state + (dir * %d)) / 15)) ;\n", x, y, shadeLower);
+						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
+						//fprintf(fBODY, "\tlight_%02d_%02d_lower_state = light_%02d_%02d_lower_state + (dir * %d);\n", x, y, x, y, shadeLower);
+						//fprintf(fBODY, "\tsys.println(\"Setting lower shade %02d %02d\"); \n", x, y);
+						//fprintf(fBODY, "\tsys.println(shade); \n");
+						fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
+					}
+				}
+
+			}
+		}
+		fprintf(fGLOBALS, "\tfloat %s_light_state = 0;\n", UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
+		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+		//fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
+
+		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
+	}
+	else
+	{
+
+		fprintf(fBODY, "\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n", currObj.shockProperties[TRIG_PROPERTY_CONTROL_1], currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);
+	}
+}
+
 void a_change_terrain_trapSCRIPT(ObjectItem currObj, int targetX, int targetY, int dimX, int dimY)
 {
 int i;
@@ -224,9 +341,6 @@ for(i=1;i<=noofCond;i++)
 }
 
 
-
-
-
 //0       1        2                       3       4      5   6   7     8       9      10       11     12
 //Index   Type    Description             TileX   TileY   x   y   z   heading qual    owner   link    flags
 void buildScriptsUW(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo)
@@ -383,9 +497,6 @@ fprintf(fMAIN,"\nvoid main()\n{\n");
 	
 }
 
-
-
-
 void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *conditionalCount, int *TriggerTargetX,int *TriggerTargetY,int *TriggerQuality,int *TriggerFlags,int *TriggerHomeX,int *TriggerHomeY,int scriptLevelNo)
 	{
 	//picks which script to generate.
@@ -514,7 +625,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 							|| (isLog(objList[nextObj])) 
 								|| (isTriggerSHOCK(objList[nextObj]))
 									|| (objectMasters[objList[nextObj].item_id].DeathWatch  >=1)
-										|| (isContainer(objList[nextObj])))
+									|| ((isContainer(objList[nextObj])) && (hasContents(objList[nextObj]))))
 						{
 						if (isTriggerSHOCK(objList[nextObj]) && (objList[nextObj].item_id != 378))
 						{//Create global variables for testing conditions.
@@ -722,8 +833,8 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 	else
 		{
 		printf("Unable to open output file");
-		}}
-
+		}
+}
 
 
 void scriptShockButtons(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem currObj)
@@ -966,117 +1077,8 @@ switch (currObj.TriggerAction)
 		break;
 		}
 	case ACTION_LIGHTING:
-	{
-	//000C	int16	Control point 1
-	//000E	int16	Control point 2
-	//	...	?
-	//printf("\tACTION_LIGHTING\n");
-	//printf("\t\tControl point 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-	//printf("\t\tControl point 2%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-	//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-	//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-	//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-	//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-	//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-	//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));
-	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 
-	//objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 
-		//shade = (0.50) * (1 - ((float)LevelInfo[x][y].shockShadeUpper / 15));
-		if (ENABLE_LIGHTING == 1)
 		{
-							
-			int shadeUpper1 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_1]; //TRIG_PROPERTY_UPPERSHADE
-			int shadeLower1 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_1];
-			int shadeUpper2 = currObj.shockProperties[TRIG_PROPERTY_UPPERSHADE_2]; //TRIG_PROPERTY_UPPERSHADE
-			int shadeLower2 = currObj.shockProperties[TRIG_PROPERTY_LOWERSHADE_2];
-
-			int x1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileX;
-			int y1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileY;
-			int x2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileX; 
-			int y2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileY;
-			int xMin; int xMax;
-			int yMin; int yMax;
-
-			if (x1 >= x2)
-				{ xMin = x2; xMax = x1; }
-			else
-				{ xMin = x1; xMax = x2; }
-			if (y1 >= y2)
-			{
-				yMin = y2; yMax = y1;
-			}
-			else
-			{
-				yMin = y1; yMax = y2;
-			}
-			//fprintf(fBODY, "\tfloat dir = 1;\n");
-			fprintf(fBODY, "\tfloat shade = 0;\n");
-			fprintf(fBODY, "\tfloat shadeUpperAdj =0;");
-			fprintf(fBODY, "\tfloat shadeLowerAdj =0;\n");
-			fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-			fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n\telse\n\t{\n", shadeUpper1, shadeLower1);
-			fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n", shadeUpper2, shadeLower2);
-
-			//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-			//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
-			//fprintf(fBODY, "\t\tdir = 1 ;\n\t\t%s_light_state = 0;\n\t}\n",  UniqueObjectName(currObj));
-
-			for (int x = xMin; x <= xMax; x++)
-			{
-				for (int y = yMin; y <= yMax; y++)
-				{
-					if (LevelInfo[x][y].tileType != 0)
-					{
-						//if ((LevelInfo[x][y].shadeUpperGlobal == 0) && ((shadeUpper1 >= 1) || (shadeUpper2 >=1)))
-						//{//add a global for this light
-						//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_upper_state = %d;\n",x,y, LevelInfo[x][y].shockShadeUpper);
-						//	LevelInfo[x][y].shadeUpperGlobal = 1;
-						//}
-						//if ((LevelInfo[x][y].shadeLowerGlobal == 0) && ((shadeLower1 >= 1) || (shadeLower2 >= 1)))
-						//	{//add a global for this light
-						//	//fprintf(fGLOBALS, "\n\tfloat light_%02d_%02d_lower_state = %d;\n",x,y, LevelInfo[x][y].shockShadeLower);
-						//	LevelInfo[x][y].shadeLowerGlobal = 1;
-						//	}
-					
-
-					
-						if ((shadeUpper1 >= 1) || (shadeUpper2 >= 1))
-						{
-							//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((%d + (dir * %d)) / 15)) ;\n", x, y, LevelInfo[x][y].shockShadeUpper);
-							fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n", LevelInfo[x][y].shockShadeUpper);
-							//fprintf(fBODY, "\tlight_%02d_%02d_upper_state = light_%02d_%02d_upper_state + (dir * %d);\n", x, y,x,y,shadeUpper);
-							//fprintf(fBODY, "\tsys.println(\"Setting upper shade %02d %02d\"); \n",x,y);
-							//fprintf(fBODY, "\tsys.println(shade); \n");
-							fprintf(fBODY, "\t$light_%02d_%02d_upper.setColor( shade,shade,shade );\n", x, y);
-						}
-						if ((shadeLower1 >= 1) || (shadeLower2 >= 1))
-						{
-							//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((light_%02d_%02d_lower_state + (dir * %d)) / 15)) ;\n", x, y, shadeLower);
-							fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
-							//fprintf(fBODY, "\tlight_%02d_%02d_lower_state = light_%02d_%02d_lower_state + (dir * %d);\n", x, y, x, y, shadeLower);
-							//fprintf(fBODY, "\tsys.println(\"Setting lower shade %02d %02d\"); \n", x, y);
-							//fprintf(fBODY, "\tsys.println(shade); \n");
-							fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
-						}
-					}
-
-				}
-			}
-			fprintf(fGLOBALS, "\tfloat %s_light_state = 0;\n",UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
-			//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-			//fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
-			//fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
-
-			fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
-			fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
-			fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
-		}
-		else
-		{
-							
-			fprintf(fBODY,"\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n",currObj.shockProperties[TRIG_PROPERTY_CONTROL_1],currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);		
-		}
-
+		LightingScript(LevelInfo, objList, currObj);
 		break;
 		}
 	case ACTION_EFFECT:
@@ -1260,7 +1262,15 @@ switch (currObj.TriggerAction)
 			getObjectNameByClass(objList[objToChange].ObjectClass, objList[objToChange].ObjectSubClass, newObjType));
 
 		fprintf(fBODY, "\t$%s.setModel(\"%s\");\n", UniqueObjectName(objList[objToChange]),objectMasters[newObjTypeID].path);
-		fprintf(fBODY, "\t$%s.becomeSolid();\n", UniqueObjectName(objList[objToChange]));
+		if (objectMasters[newObjTypeID].type == HIDDENPLACEHOLDER)
+			{
+				fprintf(fBODY, "\t$%s.becomeNonSolid();\n", UniqueObjectName(objList[objToChange]));
+			}
+			else
+			{
+				fprintf(fBODY, "\t$%s.becomeSolid();\n", UniqueObjectName(objList[objToChange]));
+			}
+		
 
 		break;
 		}
@@ -1454,6 +1464,7 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 	case ACTION_LIGHTING:
 		{
 		fprintf(fBODY, "\tsys.println(\"Lighting control cp1=%d cp2=%d\");\n", currObj.shockProperties[TRIG_PROPERTY_CONTROL_1], currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]);
+		LightingScript(LevelInfo, objList, currObj);
 		break;
 		}
 	case ACTION_MESSAGE:

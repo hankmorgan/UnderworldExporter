@@ -31,6 +31,7 @@ void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long tex
 //void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockobjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
 void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
 int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo);
+void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game);
 void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
@@ -40,6 +41,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 void SetDeathWatch(ObjectItem objList[1600]);
 
 extern int levelNo;
+extern int GAME;
 
 int main()
 {
@@ -51,6 +53,8 @@ int mode = D3_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 levelNo = 1;
+
+GAME = game;
 switch (game)
 	{
 	case UWDEMO:
@@ -267,6 +271,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
+			setKeyCount(game, LevelInfo, objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
 			break; 			
 			}
@@ -280,6 +285,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
+			setKeyCount(game, LevelInfo, objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
 			break; 
 			}
@@ -292,6 +298,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setDoorBits(LevelInfo,objList);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
+			setKeyCount(game, LevelInfo, objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;			
 			}
@@ -302,6 +309,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
 			SetDeathWatch(objList);
 			setDoorBits(LevelInfo,objList);
+			setKeyCount(game, LevelInfo, objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;
 			}			

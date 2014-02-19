@@ -14,24 +14,7 @@
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
 //void RenderPatch(int game, float x, float y, float z,long PatchIndex, ObjectItem objList[1600] );
-void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityNPC (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityDoor (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]) ;
-void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityButton (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityA_DOOR_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityBOOK(int game, float x, float y, float z, short message, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityA_TELEPORT_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityA_MOVE_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityNULL_TRIGGER (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityLEVEL_ENTRY(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
-void RenderEntityREPULSOR (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj);
 void getShockTriggerAction(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
@@ -45,9 +28,28 @@ void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityNPC(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityKey(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityContainer(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityButton(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_DOOR_TRAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityTMAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityBOOK(int game, float x, float y, float z, short message, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntitySIGN(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_TELEPORT_TRAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityNULL_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityLEVEL_ENTRY(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityREPULSOR(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
+int GAME;
 
 int keycount[256];	//For tracking key usage
 //int levelNo;
@@ -133,6 +135,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 			case COMPUTER_SCREEN:
 				RenderEntityComputerScreen(game, x, y, z, currobj, objList, LevelInfo);
 				break;
+			case SHOCK_TRIGGER_DEATHWATCH:
 			case SHOCK_TRIGGER_NULL:
 			case SHOCK_TRIGGER_LEVEL:
 				RenderEntityNULL_TRIGGER(game,x,y,z,currobj,objList,LevelInfo);	
@@ -255,6 +258,18 @@ int isContainer(ObjectItem currobj)
 	return  ((objectMasters[currobj.item_id].type == CONTAINER) || (objectMasters[currobj.item_id].type == CORPSE));
 }
 
+
+int hasContents(ObjectItem currobj)
+{//Returns wether or not a contain contains items
+	return (
+		(currobj.shockProperties[CONTAINER_CONTENTS_1] > 0)
+		|| (currobj.shockProperties[CONTAINER_CONTENTS_2] > 0)
+		|| (currobj.shockProperties[CONTAINER_CONTENTS_3] > 0)
+		|| (currobj.shockProperties[CONTAINER_CONTENTS_4] > 0)
+		);
+	
+}
+
 int isTrap(ObjectItem currobj)
 	{
 	switch (objectMasters[currobj.item_id].type )
@@ -361,7 +376,14 @@ void RenderEntityModel (int game, float x, float y, float z, ObjectItem &currobj
 		//print position+name
 		fprintf (MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf (MAPFILE, "\"origin\" \"%f %f %f\"\n",x,y,z);	
+		if (objectMasters[currobj.item_id].type = HIDDENPLACEHOLDER)
+		{
+			fprintf(MAPFILE, "\"solid\" \"%d\"\n", 1);	//temporarily till I figure out controlling solidity via script
+		}
+
 		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+
+		
 		if (game == SHOCK)
 		{
 			EntityRotationSHOCK(currobj.Angle2);
@@ -674,6 +696,43 @@ if (game == SHOCK)
 		return;
 }
 
+void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
+{
+	int currobj;
+
+	for (int x = 0; x < 64; x++)
+	{
+		for (int y = 0; y < 64; y++)
+		{
+			if (LevelInfo[x][y].indexObjectList != 0)
+			{
+				currobj = LevelInfo[x][y].indexObjectList;
+				do
+				{
+					if (objectMasters[objList[currobj].item_id].type == KEY)
+					{
+						if (game == SHOCK)
+						{
+							keycount[objList[currobj].ObjectSubClassIndex]++;
+							objList[currobj].keyCount = keycount[objList[currobj].ObjectSubClassIndex];
+							printf("%s", UniqueObjectName(objList[currobj]));
+						}
+						else
+						{
+							keycount[objList[currobj].owner]++; 
+							objList[currobj].keyCount = keycount[objList[currobj].owner];
+						}
+					}
+					currobj = objList[currobj].next;
+				} while (currobj > 0);
+			}
+		}
+
+	}
+
+
+}
+
 void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 //Params
@@ -685,11 +744,13 @@ void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, 
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	if (game != SHOCK)
 	{
-		fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, keycount[currobj.owner]++);
+		//fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, keycount[currobj.owner]++);
+		fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, currobj.keyCount);
 	}
 	else
 	{
-		fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, keycount[currobj.ObjectSubClassIndex]++);
+		//fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, keycount[currobj.ObjectSubClassIndex]++);
+		fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, currobj.keyCount);
 	}
 
 	//they also need the following properties
@@ -713,7 +774,7 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 	if (game != SHOCK)
 	{
 		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
-		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 		fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		//I need to spawn it's contents at the same location (recursively)
 		//render it first.
@@ -753,35 +814,44 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 	{
 		//Shock container. contents are different from uw1
 		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);//"atdm:mover_button"
-		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 		fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
-		fprintf(MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+		if (hasContents(currobj))
+		{
+			fprintf(MAPFILE, "\"grabable\" \"%d\"\n", 0);
+			fprintf(MAPFILE, "\"frobable\" \"%d\"\n", 1);
+			fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+		}
+		
 		fprintf(MAPFILE, "}");
 
-		createScriptCall(currobj, x, y, z);
-
-		//create 4 spawn points around the container to spawn the contents at.
-		int offX = 10; int offY = 10;
-		for (int i = 0; i < 4; i++)
-		{
-			switch (i)
+		if (hasContents(currobj))
 			{
-			case 0: offX = 10; offY = 10; break;
-			case 1: offX = -10; offY = 10; break;
-			case 2: offX = 10; offY = -10; break;
-			case 3: offX = -10; offY = -10; break;
-			}
+				//createScriptCall(currobj, x, y, z);
 
-			if (currobj.shockProperties[CONTAINER_CONTENTS_1 + i] != 0)
+			//create 4 spawn points around the container to spawn the contents at.
+			int offX = 10; int offY = 10;
+			for (int i = 0; i < 4; i++)
 			{
-				fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
-				fprintf(MAPFILE, "\"classname\" \"%s\"\n", "target_null");
-				fprintf(MAPFILE, "\"name\" \"%s_spawnpoint_%d\"\n", UniqueObjectName(currobj), i);
-				fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + offX, y + offY, z);
-				fprintf(MAPFILE, "}");
+				switch (i)
+				{
+				case 0: offX = 10; offY = 10; break;
+				case 1: offX = -10; offY = 10; break;
+				case 2: offX = 10; offY = -10; break;
+				case 3: offX = -10; offY = -10; break;
+				}
+
+				if (currobj.shockProperties[CONTAINER_CONTENTS_1 + i] != 0)
+				{
+					fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+					fprintf(MAPFILE, "\"classname\" \"%s\"\n", "target_null");
+					fprintf(MAPFILE, "\"name\" \"%s_spawnpoint_%d\"\n", UniqueObjectName(currobj), i);
+					fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + offX, y + offY, z);
+					fprintf(MAPFILE, "}");
+				}
 			}
 		}
 	}
@@ -801,32 +871,38 @@ void RenderEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj
 		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
-		fprintf(MAPFILE, "\"grabable\" \"%d\"\n", 0);
-		fprintf(MAPFILE, "\"frobable\" \"%d\"\n", 1);
-		fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+		if (hasContents(currobj))
+		{
+			fprintf(MAPFILE, "\"grabable\" \"%d\"\n", 0);
+			fprintf(MAPFILE, "\"frobable\" \"%d\"\n", 1);
+			fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+		}
 		fprintf(MAPFILE, "}");
 
-		//createScriptCall(currobj, x, y, z);
-
-		//create 4 spawn points around the container to spawn the contents at.
-		int offX = 10; int offY = 10;
-		for (int i = 0; i < 4; i++)
-		{
-			switch (i)
+		if (hasContents(currobj))
 			{
-			case 0: offX = 10; offY = 10; break;
-			case 1: offX = -10; offY = 10; break;
-			case 2: offX = 10; offY = -10; break;
-			case 3: offX = -10; offY = -10; break;
-			}
+					//createScriptCall(currobj, x, y, z);
 
-			if (currobj.shockProperties[CONTAINER_CONTENTS_1 + i] != 0)
+			//create 4 spawn points around the container to spawn the contents at.
+			int offX = 10; int offY = 10;
+			for (int i = 0; i < 4; i++)
 			{
-				fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
-				fprintf(MAPFILE, "\"classname\" \"%s\"\n", "target_null");
-				fprintf(MAPFILE, "\"name\" \"%s_spawnpoint_%d\"\n", UniqueObjectName(currobj), i);
-				fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + offX, y + offY, z);
-				fprintf(MAPFILE, "}");
+				switch (i)
+				{
+				case 0: offX = 10; offY = 10; break;
+				case 1: offX = -10; offY = 10; break;
+				case 2: offX = 10; offY = -10; break;
+				case 3: offX = -10; offY = -10; break;
+				}
+
+				if (currobj.shockProperties[CONTAINER_CONTENTS_1 + i] > 0)
+				{
+					fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+					fprintf(MAPFILE, "\"classname\" \"%s\"\n", "target_null");
+					fprintf(MAPFILE, "\"name\" \"%s_spawnpoint_%d\"\n", UniqueObjectName(currobj), i);
+					fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + offX, y + offY, z);
+					fprintf(MAPFILE, "}");
+				}
 			}
 		}
 	}
@@ -1333,6 +1409,7 @@ void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem 
 	if (currobj.shockProperties[SCREEN_START] < 246)
 	{
 		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_damagable");
+		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		fprintf(MAPFILE, "\"gui\" \"guis/shock/screen_%d_%d_%d.gui\"\n", currobj.shockProperties[SCREEN_START], currobj.shockProperties[SCREEN_NO_OF_FRAMES], currobj.shockProperties[SCREEN_LOOP_FLAG]);
 		fprintf(MAPFILE, "\"target\" \"runscript_%s_destroy\"\n", UniqueObjectName(currobj));
 		fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n", UniqueObjectName(currobj));
@@ -1343,7 +1420,7 @@ void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem 
 		fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
 
 	}
-	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
@@ -1351,7 +1428,7 @@ void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem 
 	//currobj.shockProperties[SCREEN_NO_OF_FRAMES]
 	//currobj.shockProperties[SCREEN_LOOP_FLAG] 
 	//currobj.shockProperties[SCREEN_START] 
-	fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
+	//fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
 	EntityRotationSHOCK(currobj.Angle2);
 	fprintf(MAPFILE, "\n}");
 
@@ -1686,9 +1763,9 @@ mstaddress_pointer=0;
 		{
 		for(int y=0;y<64;y++)
 		{
-		if (LevelInfo[x][y].indexObjectList !=0)
-			{LevelInfo[x][y].indexObjectList= xref[LevelInfo[x][y].indexObjectList].MstIndex; }
-		}
+			if (LevelInfo[x][y].indexObjectList !=0)
+				{LevelInfo[x][y].indexObjectList= xref[LevelInfo[x][y].indexObjectList].MstIndex; }
+			}
 		}
 }
 	
@@ -1940,17 +2017,24 @@ while (k<=chunkUnpackedLength)
 							  printf("\n\tImage to use is value in unk1. Offset from image 1350_0390.bmp or 1350_0403.bmp in objart.res or 0078_0000.bmp or 0079_0000 in objart3.res");
 							  break;
 						  case 3:
-							  printf("Words:");
-							  printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
-							  printf("\nFont and size %d ", getValAtAddress(sub_ark, add_ptr + 8, 16));
-							  printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+							  {
+								  //based on SSHP interpretation
+								  int fontID[4] = { 4, 7, 0, 10 };
+								  float scale[4] = { 1.0, 0.75, 0.5, 0.25 };
+								  printf("Words:");
+								  printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
+								  int FontNSize = getValAtAddress(sub_ark, add_ptr + 8, 16);
+								  printf("\nFont %d (+chunk 602)", fontID[FontNSize & 0x03]);
+								  printf("\nSize %d ", fontID[FontNSize>>4 & 0x03]);
+								  printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
 
-							  printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-							  printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-							  printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-							  printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-							  printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
-							  break;
+								  printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+								  printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+								  printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+								  printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+								  printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+								  break;
+							  }
 						  case 6:
 						  case 8:
 						  case 9:
@@ -2659,7 +2743,21 @@ if (objList[objIndex].ObjectSubClass ==0)
 				{	
 				printf("Switch:Action_Lighting\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = getValAtAddress(sub_ark, add_ptr + 12, 16);
+				if (objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] <= 3)
+					{	//seems to be a special case?
+					objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = objIndex;
+					}
 				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = getValAtAddress(sub_ark, add_ptr + 14, 16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 22, 8);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 24, 8);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 23, 8);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 25, 8);
+				printf("\t\tControl point 1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
+				printf("\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+				printf("\t\t1st Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
+				printf("\t\t1st Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
+				printf("\t\t2nd Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
+				printf("\t\t2nd Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
 				break;
 				}
 		case ACTION_CHANGE_TYPE:
@@ -2792,10 +2890,33 @@ objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=getValAtAddress(sub_a
 
 char *UniqueObjectName(ObjectItem currObj)
 {//returns a unique name for the object
-	char str[80]="";
-	//_snprintf(str,80,"%s_%02d_%02d_%02d_%04d", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
-	sprintf_s(str, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
-	return str;
+	char str[80] = "";
+	switch (objectMasters[currObj.item_id].type)
+	{
+		case KEY:
+			if (currObj.keyCount >= 0)
+				{
+				if (GAME != SHOCK)
+					{
+					sprintf_s(str, 80,"%s_%03d_%d\0", objectMasters[currObj.item_id].desc, currObj.owner, currObj.keyCount);
+					return str;
+					break;
+					}
+				else
+					{
+					sprintf_s(str, 80, "%s_%d\0", objectMasters[currObj.item_id].desc, currObj.keyCount);
+					return str;
+					break;
+					}
+				}
+		default:
+			{
+				//_snprintf(str,80,"%s_%02d_%02d_%02d_%04d", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
+				sprintf_s(str, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+				return str;
+				break;
+			}
+	}
 }
 
 char *getObjectNameByClass(int objClass, int subClass, int subClassIndex)
