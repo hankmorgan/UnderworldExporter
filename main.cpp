@@ -52,7 +52,7 @@ int mode = D3_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
-levelNo = 1;
+levelNo = 8;
 
 GAME = game;
 switch (game)
