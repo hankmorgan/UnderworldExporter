@@ -1779,6 +1779,7 @@ mstaddress_pointer=0;
 	
 void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo)
 {
+//parses the object list in UW.
 	FILE *file = NULL;      // File pointer
 	unsigned char *lev_ark; 
 	unsigned char *tmp_ark;		//for uw2 decompression
@@ -2183,9 +2184,9 @@ return -1;
 
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x,int y)
 {
-int ResolutionXY=7;
-int ResolutionZ=127;
-if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
+int ResolutionXY=7;	// A tile has a 7x7 grid for object positioning.
+int ResolutionZ=127;	//UW has 127 posible z positions for an object in tile.
+if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}	//Shock has more "z" in it.
 
 
 		*offX=0;  *offY=0; *offZ=0;
@@ -2211,14 +2212,15 @@ if (game ==SHOCK){ResolutionXY =255;ResolutionZ=255;}
 
 void getShockTriggerAction(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex)
 {
+//Look up what a trigger does in system shock. Different trigger types activate other triggers/ do things in different ways.
 short PrintDebug = 1;// (objList[objIndex].item_id == 384);
-printf("",UniqueObjectName(objList[objIndex]));
+printf("",UniqueObjectName(objList[objIndex]));	//Weirdness with garbage info getting printed out?
 int TriggerType =getValAtAddress(sub_ark,add_ptr+6,8);
 objList[objIndex].TriggerAction = TriggerType;
 switch (TriggerType)
 	{ 
 	case ACTION_DO_NOTHING :
-		{
+		{//Default action.
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2235,7 +2237,7 @@ switch (TriggerType)
 		break;	
 		}
 	case ACTION_TRANSPORT_LEVEL:
-		{
+		{//Sends the player to the specified position in the level.
 
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+12,16);	//Target X of teleport
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y] = getValAtAddress(sub_ark,add_ptr+16,16); //Target Y of teleport
@@ -2258,7 +2260,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_RESURRECTION:
-		{
+		{//Brings the player back to life?
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2276,13 +2278,13 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_CLONE:
-		{
+		{//Need to do more research on what this does?
 		//	000C	int16	Object to transport.
 		//	000E	int16	Delete flag?
 		//	0010	int16	Tile destination X
 		//	0014	int16	Tile destination Y
 		//	0018	int16	Destination height?		
-				if (PrintDebug==1)
+		if (PrintDebug==1)
 			{
 			printf("\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
 			printf("\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
@@ -2311,7 +2313,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_SET_VARIABLE:
-		{
+		{//Sets a game variable. I don't yet know what the various variables are. I suspect they may be in the exe so I'll have to just observe them in the wild?
 		//000C	int16	variable to set
 		//0010	int16	value
 		//0012	int16	?? action 00 set 01 add
@@ -2341,7 +2343,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_ACTIVATE:
-		{
+		{//Turns on up to 4 other triggers.
 		//000C	int16	1st object to activate.
 		//000E	int16	Delay before activating object 1.
 		//0010	...	Up to 4 objects and delays stored here.	
@@ -2382,7 +2384,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_LIGHTING:
-		{
+		{//Controls lighting between the specified control points. The control points are usually null triggers but are sometimes regular objects as well.
 		//000C	int16	Control point 1
 		//000E	int16	Control point 2
 		//	...	?
@@ -2415,7 +2417,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_EFFECT:
-		{
+		{//Preforms a special effect. One example is the power breaker sparking on research level.
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2432,7 +2434,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_MOVING_PLATFORM:
-		{
+		{//Usually a lift or a blast door type setup. Both the floor and ceiling have parameters in this.
 
 		setElevatorProperties(LevelInfo, sub_ark,add_ptr,objList, objIndex,PrintDebug);
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X] = getValAtAddress(sub_ark,add_ptr+0x0C,16);
@@ -2452,7 +2454,7 @@ switch (TriggerType)
 		
 		}
 	case ACTION_TIMER:
-		{
+		{//Delays the trigger getting fired off. A good example is the aftermath of destroying the CPUs on hospital level.
 		//000C	int16	1st object to activate.?
 		//000E	int16	Delay before activating object 1.?
 
@@ -2499,7 +2501,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_EMAIL:
-		{
+		{//Sends the player an email. (Differs from a message in that a message just plays once and does not hit the data reader)
 		if (PrintDebug==1)
 			{
 		printf("\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2523,7 +2525,7 @@ switch (TriggerType)
 		
 		}
 	case ACTION_RADAWAY:
-		{
+		{//Radiation healing on the reactor?
 			if (PrintDebug==1)
 				{
 				printf("\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2540,7 +2542,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_CHANGE_STATE:
-		{
+		{//Used a lot in switches. Needs more research.
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
@@ -2557,7 +2559,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_MESSAGE:
-		{
+		{//A once off message. For example the computer voice when the cyborg conversion is activated.
 		//16 Trap message offset in Chunk 2151 
 		//000C	int16	"Success" message
 		//0010	int16	"Fail" message
