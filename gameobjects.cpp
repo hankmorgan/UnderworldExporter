@@ -698,6 +698,7 @@ if (game == SHOCK)
 
 void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {
+	//Each keey needs a unique name in game. Here we set the key index number on the key so that will work properly for scripting and map generation
 	int currobj;
 
 	for (int x = 0; x < 64; x++)
@@ -735,6 +736,7 @@ void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 
 void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+	//Creates a key. Each key is uniquely named based on a counter. Doors will have a list of potential matching key names to work with keys.
 //Params
 //Item_id
 //Owner
@@ -767,6 +769,7 @@ void RenderEntityKey (int game, float x, float y, float z, ObjectItem &currobj, 
 
 void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+	//Creates something that holds objects. Current behaviour is to spawn objects at various spawn points surrounding the object.
 //Params.
 //Item_id
 //link	//To check for a lock and it's list of contents.
@@ -813,7 +816,7 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 	else
 	{
 		//Shock container. contents are different from uw1
-		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);//"atdm:mover_button"
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
 		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 		fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
@@ -859,6 +862,7 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 
 void RenderEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+	//Some corpses will have inventories. For these we have spawn points that behave just like containers.
 	//Params.
 	//Item_id
 	//link	//To check for a lock and it's list of contents.
@@ -934,7 +938,7 @@ void RenderEntityButton(int game, float x, float y, float z, ObjectItem &currobj
 	
 	fprintf (MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
 	if (game == SHOCK)
-		{//gui related settings
+		{//gui related settings. Sets the gui that controls the 2d animation of this switch.
 		fprintf(MAPFILE, "\"gui\" \"guis/shock/switch_%d_%d_%d.gui\"\n",currobj.ObjectClass,currobj.ObjectSubClass,currobj.ObjectSubClassIndex);
 		fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n", currobj.ObjectClass, currobj.ObjectSubClass, currobj.ObjectSubClassIndex);
 		EntityRotationSHOCK(currobj.Angle2);
@@ -971,6 +975,7 @@ void RenderEntityA_DOOR_TRAP (int game, float x, float y, float z, ObjectItem &c
 
 void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+	//This is a trigger in UW that can do a bunch of different things. Eg cameras/rising platforms.
 	switch (currobj.quality )
 		{
 		case 2: //A camera	
@@ -994,8 +999,9 @@ void RenderEntityA_DO_TRAP (int game, float x, float y, float z, ObjectItem &cur
 
 void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
-
 //
+//A trigger that converts one type of terrain into another.
+//We generate both types of terrain at the start but hide the second type until the trigger is activated.
 	//render func static for the initial tiles.
 	PrimitiveCount=0;
 	int tileCount =0;
@@ -1060,7 +1066,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP (int game, float x, float y, float z, Obj
 }
 
 void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-{//Flat patch objects used as decals
+{//Flat patch objects used as decals. This should be changed into something like a SHOCK screen model?
 //params
 //link	to see if it can be activated
 //tileX
@@ -1094,6 +1100,7 @@ void RenderEntityTMAP (int game, float x, float y, float z, ObjectItem &currobj,
 void RenderEntityBOOK(int game, float x, float y, float z, short message, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 
+	//A book in UW and an audio log/text in Shock. Xdata is generated in advance based on game files.
 //Params
 //tileX
 //tileY
@@ -1168,6 +1175,7 @@ switch (game)
 
 void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
+	//A flat object with a gui that is a readable.
 //Params
 //tileX
 //tileY
