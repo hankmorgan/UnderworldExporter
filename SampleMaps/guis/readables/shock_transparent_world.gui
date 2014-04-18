@@ -1,2 +1,0 @@
-#define WORLD_DISPLAY
-#include "guis/readables/shock_transparent.gui"

@@ -1,9 +1,0 @@
-shock_audio_bark_22
-{
-	 description "shock_bark_22"
-	 no_dups
-	 minDistance 1
-	 maxDistance 30
-	 volume -12
-	 sound/sfx/shock_barks/bark22.ogg
-}
