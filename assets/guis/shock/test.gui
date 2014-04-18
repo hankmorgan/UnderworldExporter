@@ -1,0 +1,84 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+        bordersize   3
+        bordercolor  1, 1, 1, 1
+        backcolor    0.5, 0.5, 0.5, 1
+	nocursor 1
+	float destroyed 0
+
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "guis/assets/shock/screens/0321";
+
+		onTime 0{
+		   if("gui::destroyed"==1)
+		        {
+		        resetTime "0";
+		        set "gui::destroyed" "2";
+		        }
+                     else if ("gui::destroyed"==2)
+                         {
+                         set "background" "guis/assets/shock/screens/0337";
+                         }
+                     else
+                        {
+                        set "background" "guis/assets/shock/screens/0321";
+                        }
+		}
+		onTime 500{
+		   if("gui::destroyed"==1)
+		        {
+		        resetTime "0";
+		        set "gui::destroyed" "2";
+		        }
+                     else if ("gui::destroyed"==2)
+                         {
+                         set "background" "guis/assets/shock/screens/0338";
+                         }
+                     else
+                        {
+                        set "background" "guis/assets/shock/screens/0322";
+                        }
+		}
+		onTime 1000{
+		   if("gui::destroyed"==1)
+		        {
+		        resetTime "0";
+		        set "gui::destroyed" "2";
+		        }
+                     else if ("gui::destroyed"==2)
+                         {
+                         set "background" "guis/assets/shock/screens/0339";
+                         }
+                     else
+                        {
+                        set "background" "guis/assets/shock/screens/0323";
+                        }
+		}
+		onTime 1500{
+		   if("gui::destroyed"==1)
+		        {
+		        resetTime "0";
+		        set "gui::destroyed" "2";
+		        }
+                     else if ("gui::destroyed"==2)
+                         {
+                         set "background" "guis/assets/shock/screens/0340";
+                         }
+                     else
+                        {
+                        set "background" "guis/assets/shock/screens/0324";
+                        }
+		}
+		onTime 2000{
+		       if("gui::destroyed" <=1)
+		             {
+			resetTime "0";
+                              }
+		
+		}
+	}
+}

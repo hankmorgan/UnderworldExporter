@@ -1,0 +1,1 @@
+The tga files for the Shock textures goes here.

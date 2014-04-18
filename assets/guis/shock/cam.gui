@@ -1,0 +1,16 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+	
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "textures/cameraView1";
+
+		onTime 0{
+			set background "textures/cameraView1";
+		}
+	}
+}

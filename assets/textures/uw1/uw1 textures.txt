@@ -1,0 +1,1 @@
+The tga files for the uw1 textures goes here.

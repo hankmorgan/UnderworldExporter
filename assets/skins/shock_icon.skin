@@ -1,0 +1,155 @@
+skin shock_icon_0000
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0000
+}
+skin shock_icon_0001
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0001
+}
+skin shock_icon_0002
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0002
+}
+skin shock_icon_0003
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0003
+}
+skin shock_icon_0004
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0004
+}
+skin shock_icon_0005
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0005
+}
+skin shock_icon_0006
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0006
+}
+skin shock_icon_0007
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0007
+}
+skin shock_icon_0008
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0008
+}
+skin shock_icon_0009
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0009
+}
+skin shock_icon_0010
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0010
+}
+skin shock_icon_0011
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0011
+}
+skin shock_icon_0012
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0012
+}
+skin shock_icon_0013
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0013
+}
+skin shock_icon_0014
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0014
+}
+skin shock_icon_0015
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0015
+}
+skin shock_icon_0016
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0016
+}
+skin shock_icon_0017
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/icon/0078_0017
+}
+skin shock_graffiti_0000
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0000
+}
+skin shock_graffiti_0001
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0001
+}
+skin shock_graffiti_0002
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0002
+}
+skin shock_graffiti_0003
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0003
+}
+skin shock_graffiti_0004
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0004
+}
+skin shock_graffiti_0005
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0005
+}
+skin shock_graffiti_0006
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0006
+}
+skin shock_graffiti_0007
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/graffiti/0079_0007
+}
+skin shock_sign_0390
+{
+   model models/shock/shock_sign_0000.ase
+   textures/shock/sign/1350_0390 textures/shock/sign/1350_0390
+}
+skin shock_sign_0391
+{
+   model models/shock/shock_sign_0000.ase
+   textures/shock/sign/1350_0390 textures/shock/sign/1350_0391
+}
+skin shock_painting_0403
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/painting/1350_0403
+}
+skin shock_painting_0404
+{
+   model models/shock/shock_icon_0000.ase
+   textures/shock/icon/0078_0000 textures/shock/painting/1350_0404
+}
+skin shock_painting_0405
+{
+   model models/shock/shock_sign_0000.ase
+   textures/shock/sign/1350_0390 textures/shock/painting/1350_0405
+}

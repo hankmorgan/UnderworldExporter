@@ -1,0 +1,65 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+	float destroyed 0
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "guis/assets/shock/screens/0350";
+
+		onTime 0{
+			if ("gui::destroyed"==1)
+			{resetTime "0";}
+			else{
+			resetTime "0";
+			}
+		}
+		onTime 500{
+			set "background" "guis/assets/shock/screens/0337";
+		}
+		onTime 600{
+			set "background" "guis/assets/shock/screens/0338";
+		}
+		onTime 700{
+			set "background" "guis/assets/shock/screens/0339";
+		}
+		onTime 800{
+			set "background" "guis/assets/shock/screens/0340";
+		}
+		onTime 900{
+			set "background" "guis/assets/shock/screens/0341";
+		}
+		onTime 1000{
+			set "background" "guis/assets/shock/screens/0342";
+		}
+		onTime 1100{
+			set "background" "guis/assets/shock/screens/0343";
+		}
+		onTime 1200{
+			set "background" "guis/assets/shock/screens/0344";
+		}
+		onTime 1300{
+			set "background" "guis/assets/shock/screens/0345";
+		}
+		onTime 1400{
+			set "background" "guis/assets/shock/screens/0346";
+		}
+		onTime 1500{
+			set "background" "guis/assets/shock/screens/0347";
+		}
+		onTime 1600{
+			set "background" "guis/assets/shock/screens/0348";
+		}
+		onTime 1700{
+			set "background" "guis/assets/shock/screens/0349";
+		}
+		onTime 1800{
+			set "background" "guis/assets/shock/screens/0350";
+		}
+		onTime 1900{
+			set "background" "guis/assets/shock/screens/0351";
+		}
+	}
+}
