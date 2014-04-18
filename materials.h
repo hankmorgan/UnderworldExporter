@@ -6,5 +6,5 @@ void BuildSndShaderFiles();
 void BuildMtrFiles(int MtrType);
 void BuildGuiFiles();
 void ExportModelFormat();
-
+void BuildWORDSXData(int game);
 #endif /*materials_h*/

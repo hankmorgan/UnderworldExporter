@@ -71,6 +71,7 @@
 #define  A_FOUNTAIN	61
 #define  SHOCK_DECAL 62
 #define  COMPUTER_SCREEN 63
+#define  SHOCK_WORDS 64
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
 #define	SHOCK_TRIGGER_ENTRY			100	//Player enters trigger's tile

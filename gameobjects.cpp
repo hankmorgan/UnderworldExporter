@@ -14,7 +14,7 @@
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
 //void RenderPatch(int game, float x, float y, float z,long PatchIndex, ObjectItem objList[1600] );
-
+ 
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj);
 void getShockTriggerAction(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
@@ -46,6 +46,7 @@ void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem 
 void RenderEntityNULL_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityLEVEL_ENTRY(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityREPULSOR(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
@@ -145,6 +146,9 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case CORPSE:
 				RenderEntityCorpse(game, x, y, z, currobj, objList, LevelInfo);
+				break;
+			case SHOCK_WORDS:
+				RenderEntityWords(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			default:
 				{//just the basic name. with no properties.
@@ -1187,7 +1191,7 @@ void RenderEntitySIGN (int game, float x, float y, float z, ObjectItem &currobj,
 	fprintf (MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf (MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));		
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
-	fprintf (MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
+	//fprintf (MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
 	switch (game)
 		{
 		case UWDEMO:
@@ -1402,6 +1406,19 @@ void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj,
 			fprintf(MAPFILE, "\"skin\" \"shock_poster_%04d\"\n", currobj.unk1);
 			break;
 	}
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	EntityRotationSHOCK(currobj.Angle2);
+	fprintf(MAPFILE, "\n}");
+}
+
+void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:readable_base");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	fprintf(MAPFILE, "\"xdata_contents\" \"readables/shock/words_%d\"\n", currobj.shockProperties[0]);
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	EntityRotationSHOCK(currobj.Angle2);
@@ -2031,6 +2048,7 @@ while (k<=chunkUnpackedLength)
 								  int fontID[4] = { 4, 7, 0, 10 };
 								  float scale[4] = { 1.0, 0.75, 0.5, 0.25 };
 								  printf("Words:");
+								  objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark, add_ptr + 6, 16);
 								  printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
 								  int FontNSize = getValAtAddress(sub_ark, add_ptr + 8, 16);
 								  printf("\nFont %d (+chunk 602)", fontID[FontNSize & 0x03]);

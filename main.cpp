@@ -52,7 +52,7 @@ int mode = D3_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
-levelNo = 8;
+levelNo = 1;
 
 GAME = game;
 switch (game)
@@ -93,7 +93,8 @@ switch (game)
 			//BuildSndShaderFiles();
 			//BuildMtrFiles(3);
 			//BuildGuiFiles();
-			ExportModelFormat();
+			//ExportModelFormat();
+			BuildWORDSXData(game);
 			break;
 		}
 	}

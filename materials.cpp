@@ -484,6 +484,95 @@ void BuildGuiFiles()
 	}
 }
 
+void BuildWORDSXData(int game)
+{
+	int right; int left;	//portraits.
+
+	//this looks familiar.
+	//long BlockNo;
+	unsigned char *tmp_ark;
+	long chunkPackedLength;
+	long chunkUnpackedLength;
+	char *filePath = SHOCK_STRINGS_FILE;
+	FILE *file = NULL;      // File pointer
+
+	if (fopen_s(&file, filePath, "rb") != 0)
+	{
+		printf("Could not open specified file\n");
+	}
+	else
+	{
+		// Get the size of the file in bytes
+		long fileSize = getFileSize(file);
+
+		// Allocate space in the tmp_ark for the whole file
+
+		tmp_ark = new unsigned char[fileSize];
+		fread(tmp_ark, fileSize, 1, file);
+		fclose(file);
+
+		int blnLevelFound = 0;
+		long DirectoryAddress = getValAtAddress(tmp_ark, 124, 32);
+		//printf("\nThe directory is at %d\n", DirectoryAddress);
+
+		long NoOfChunks = getValAtAddress(tmp_ark, DirectoryAddress, 16);
+		//printf("there are %d chunks\n", NoOfChunks);
+		long firstChunkAddress = getValAtAddress(tmp_ark, DirectoryAddress + 2, 32);
+		//printf("The first chunk is at %d\n", firstChunkAddress);
+		long address_pointer = DirectoryAddress + 6;
+		long AddressOfBlockStart = firstChunkAddress;
+		for (int k = 0; k < NoOfChunks; k++)
+		{
+			long chunkId = getValAtAddress(tmp_ark, address_pointer, 16);
+			chunkUnpackedLength = getValAtAddress(tmp_ark, address_pointer + 2, 24);
+			long chunkType = getValAtAddress(tmp_ark, address_pointer + 5, 8);
+			chunkPackedLength = getValAtAddress(tmp_ark, address_pointer + 6, 24);
+			long chunkContentType = getValAtAddress(tmp_ark, address_pointer + 9, 8);
+			long NoSubChunks = getValAtAddress(tmp_ark, AddressOfBlockStart, 16);
+			//printf("\n@Chunk:%d\n{", chunkId);
+			if (chunkId == 2152) //The words
+			{
+				long strPtr = 2;
+				for (int i = 0; i<NoSubChunks; i++)
+				{
+					long subChunkStart = AddressOfBlockStart + getValAtAddress(tmp_ark, AddressOfBlockStart + strPtr, 32);
+					long subChunkEnd = AddressOfBlockStart + getValAtAddress(tmp_ark, AddressOfBlockStart + strPtr + 4, 32);
+					if (subChunkEnd > subChunkStart)
+					{
+
+						printf("readables/shock/words_%d",i);
+						printf("\n{");
+						printf("\n\tprecache");
+						printf("\n\t\"num_pages\"	: \"1\"");
+						printf("\n\t\"page1_title\" :");
+						printf("\n\t{");
+						printf("\n\t\t\"\"");
+						printf("\n\t}");
+						printf("\n\t\"page1_body\" :");
+						printf("\n\t{");
+						//The works go here.
+						printf("\n\t\t\"%.*s\"\n", subChunkEnd - subChunkStart, tmp_ark + subChunkStart);
+						printf("\n\t}");
+						printf("\n\t\"gui_page1\" : \"guis/readables/transparent.gui\"");
+						printf("\n\t\"snd_page_turn\" : \"readable_page_turn\"");
+						printf("\n}\n");
+
+						//printf("%d =", i);
+						
+					}
+					strPtr += 4;
+				}
+				break;
+			}
+			AddressOfBlockStart = AddressOfBlockStart + chunkPackedLength;
+			if ((AddressOfBlockStart % 4) != 0)
+				AddressOfBlockStart = AddressOfBlockStart + 4 - (AddressOfBlockStart % 4); // chunk offsets always fall on 4-byte boundaries
+
+
+			address_pointer = address_pointer + 10;
+		}
+	}
+}
 
 void ExportModelFormat()
 {
