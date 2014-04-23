@@ -47,6 +47,7 @@ void RenderEntityNULL_TRIGGER(int game, float x, float y, float z, ObjectItem &c
 void RenderEntityLEVEL_ENTRY(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityREPULSOR(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntityGrating(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
@@ -149,6 +150,9 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case SHOCK_WORDS:
 				RenderEntityWords(game, x, y, z, currobj, objList, LevelInfo);
+				break;
+			case SHOCK_GRATING:
+				RenderEntityGrating(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			default:
 				{//just the basic name. with no properties.
@@ -1412,6 +1416,18 @@ void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj,
 	fprintf(MAPFILE, "\n}");
 }
 
+void RenderEntityGrating(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{//Transparent Gratings.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	fprintf(MAPFILE, "\"skin\" \"shock_grating_%03d\"\n", currobj.ObjectSubClassIndex-4);
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	EntityRotationSHOCK(currobj.Angle2);
+	fprintf(MAPFILE, "\n}");
+}
 void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);

@@ -311,10 +311,10 @@
 310 10 1 2 DOORWAY atdm:door_96x48_3hinge entity 4
 311 10 1 3 DOORWAY atdm:door_96x48_3hinge entity 4
 312 10 1 4 DOORWAY atdm:door_96x48_3hinge entity 4
-313 10 1 5 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-314 10 1 6 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-315 10 1 7 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-316 10 1 8 GRATING models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+313 10 1 5 GRATING models/darkmod/shock/grating.ase entity 65
+314 10 1 6 GRATING models/darkmod/shock/grating.ase entity 65
+315 10 1 7 GRATING models/darkmod/shock/grating.ase entity 65
+316 10 1 8 GRATING models/darkmod/shock/grating.ase entity 65
 317 10 1 9 MY_TOE_IS_AN_EGGPLANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 318 10 2 0 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 319 10 2 1 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
