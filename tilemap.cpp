@@ -894,7 +894,7 @@ for (int x=0; x<64;x++)
 				{
 				if ((objectMasters[objList[currObj.index].item_id].type == DOOR ) 
 						|| (objectMasters[objList[currObj.index].item_id].type == HIDDENDOOR ))
-					{
+				 {
 					if (currObj.Angle1 >0)
 					{
 						//This door is a flat grating. I don't support that yet!
@@ -907,6 +907,14 @@ for (int x=0; x<64;x++)
 					}
 					break;
 					}
+				else
+				{
+					if (objectMasters[objList[currObj.index].item_id].type == SHOCK_DOOR)
+						{
+						LevelInfo[x][y].shockDoor = 1;
+						LevelInfo[x][y].DoorIndex = currObj.index;
+						}
+				}
 				currObj=objList[currObj.next];
 				}while (currObj.index !=0);
 			}

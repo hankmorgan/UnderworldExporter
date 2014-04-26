@@ -33,7 +33,8 @@ long ceilingHeight;	//Constant in UW. Variable in shock
 int floorTexture;	//At the moment this is the index into the texture table
 int wallTexture;	
 int indexObjectList;	//Points to a linked list of objects in the objects block
-short isDoor;		
+short isDoor;	
+short shockDoor;
 short Render;		//If set then we output this tile. Is off when it is a subpart of a group or is hidden from sight.
 short DimX;			//The dimensions (in tilesize) of this tile. 1 for a regular tile. 
 short DimY;			//>1 for when it is a group in which case we do not render it but only render it parent til

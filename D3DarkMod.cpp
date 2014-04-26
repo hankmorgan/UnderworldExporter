@@ -22,6 +22,7 @@ void RenderEntity(int game,float x, float y, float z, ObjectItem &currobj, Objec
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 float calcAlignmentFactor(float adjacent, float opposite);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void RenderShockDoorway(int game, int x, int y, tile &t, ObjectItem currDoor, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
@@ -67,6 +68,10 @@ int x; int y;
 				if (LevelInfo[x][y].isDoor == 1)
 					{//Adds a UW door frame.
 					RenderDoorway(game,x,y,LevelInfo[x][y],objList[LevelInfo[x][y].DoorIndex]);
+					}
+				if (LevelInfo[x][y].shockDoor  == 1)
+					{//Adds a Shock door frame.
+						RenderShockDoorway(game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex],LevelInfo,objList);
 					}
 				}
 			}
@@ -775,6 +780,8 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/editor/visportal\" 0 0 0\n");break;}
 		case CAULK:
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");break;}
+		case COLLISION:
+			{fprintf(MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/collision\" 0 0 0\n"); break; }
 		default:
 			{
 			if (iGame == SHOCK)
@@ -826,6 +833,8 @@ else	//Water tile
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/editor/visportal\" 0 0 0\n");break;}
 		case CAULK:
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");break;}
+		case COLLISION:
+			{fprintf(MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n"); break; }
 		default:
 			{
 			fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",textureMasters[wallTexture].align1_1,textureMasters[wallTexture].align1_2,textureMasters[wallTexture].align1_3,textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureMasters[wallTexture].align2_3);	
@@ -862,6 +871,8 @@ if (floorTexture <0)
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/nodraw\" 0 0 0\n");break;}
 		case VISPORTAL:	//visportal
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/editor/visportal\" 0 0 0\n");break;}
+		case COLLISION:
+			{fprintf(MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/collision\" 0 0 0\n"); break; }
 		case CAULK:
 		default:
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");break;}
@@ -2108,6 +2119,55 @@ if (invert ==0)
 		}
 	}
 return;
+}
+
+void RenderShockDoorway(int game, int x, int y, tile &t, ObjectItem currDoor, tile LevelInfo[64][64], ObjectItem objList[1600])
+{
+	float offX; float offY; float offZ;
+	CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, currDoor.index, x, y);
+	//The visportal.
+	tile Tmpt;	//tmp tile for rendering a visportal.
+
+	switch (currDoor.Angle2)
+		case SHOCK_SOUTH:
+		case SHOCK_NORTH:
+		{
+	Tmpt.tileType = 0;
+	Tmpt.isWater = 0;
+	Tmpt.wallTexture = NODRAW;
+	Tmpt.North = NODRAW;
+	Tmpt.South = VISPORTAL;
+	Tmpt.East = NODRAW;
+	Tmpt.West = NODRAW;
+	Tmpt.Top = NODRAW;
+	Tmpt.Bottom = NODRAW;
+	Tmpt.DimX = 1; Tmpt.DimY = 1;
+
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+ 		fprintf(MAPFILE, "( 1 0 0 %d )", -((x + Tmpt.DimX)*BrushSizeX));
+		getWallTextureName(Tmpt, fEAST, 0);
+		//north face 
+		//fprintf(MAPFILE, "( 0 1 0 %d )", -((y + Tmpt.DimY)*BrushSizeY)-1);
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 0.05));
+		getWallTextureName(Tmpt, fNORTH, 0);
+		//top face
+//		fprintf(MAPFILE, "( 0 0 1 %d )", -BrushSizeZ * (CEILING_HEIGHT + 1));
+		fprintf(MAPFILE, "( 0 0 1 %d )",-( 120+LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ));
+		getFloorTextureName(Tmpt, fTOP);
+		//west face
+		fprintf(MAPFILE, "( -1 0 0 %d )", +((x)*BrushSizeX));
+		getWallTextureName(Tmpt, fWEST, 0);
+		//south face
+		//fprintf(MAPFILE, "( 0 -1 0 %d )", +((y)*BrushSizeY));
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY-0.05));
+		getWallTextureName(Tmpt, fSOUTH, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %d )", LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ);
+		getFloorTextureName(Tmpt, fBOTTOM);
+		fprintf(MAPFILE, "}\n}\n");
+	}
 }
 
 

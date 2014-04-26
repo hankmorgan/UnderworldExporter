@@ -625,7 +625,9 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 							|| (isLog(objList[nextObj])) 
 								|| (isTriggerSHOCK(objList[nextObj]))
 									|| (objectMasters[objList[nextObj].item_id].DeathWatch  >=1)
-									|| ((isContainer(objList[nextObj])) && (hasContents(objList[nextObj]))))
+										|| ((isContainer(objList[nextObj])) && (hasContents(objList[nextObj])))
+											|| (isSHOCKDoor(objList[nextObj]))
+									 )
 						{
 						if (isTriggerSHOCK(objList[nextObj]) && (objList[nextObj].item_id != 378))
 						{//Create global variables for testing conditions.
@@ -648,6 +650,30 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 						//Note that I will need to know the type of object I will be triggering for things like door locks which don't follow the naming convention.
 						switch (objList[nextObj].ObjectClass)
 							{
+							case DOORS_GRATINGS:
+								if (objectMasters[objList[nextObj].item_id].type == SHOCK_DOOR)
+								{
+									fprintf(fGLOBALS, "\n\tfloat %s_state = 0; ", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\n\t\tif ($%s_%03d_%03d.IsLocked() == 0)\n\t\t{", objectMasters[objList[nextObj].item_id].desc, objList[nextObj].tileX, objList[nextObj].tileY);
+									fprintf(fBODY, "\n\t\t$%s.setFrobable(0); ",UniqueObjectName(objList[nextObj]));   //Turn off frobbing for a short delay
+									fprintf(fBODY, "\n\t\t$%s_way.setFrobable(0); ", UniqueObjectName(objList[nextObj]));   //Turn off frobbing for a short delay
+									fprintf(fBODY, "\n\t\tif (%s_state == 0){", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\n\t\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 1); ", UniqueObjectName(objList[nextObj]));   //Set to opening.
+									fprintf(fBODY, "\n\t\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 1);", UniqueObjectName(objList[nextObj]));
+									//fprintf(fBODY, "\n\t\t$%s_%03d_%03d.hide();", objectMasters[objList[nextObj].item_id].desc, objList[nextObj].tileX, objList[nextObj].tileY);
+									fprintf(fBODY, "\n\t\t%s_state = 1;}", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\n\t\telse{");
+									fprintf(fBODY, "\n\t\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 0);", UniqueObjectName(objList[nextObj]));    //Set to closing.
+									fprintf(fBODY, "\n\t\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 0);", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\n\t\t%s_state = 0;", UniqueObjectName(objList[nextObj]));
+									//fprintf(fBODY, "\n\t\t$%s_%03d_%03d.show();", objectMasters[objList[nextObj].item_id].desc, objList[nextObj].tileX, objList[nextObj].tileY);
+									fprintf(fBODY, "\n\t\t}");
+									fprintf(fBODY, "\n\t\t$%s_%03d_%03d.activate($player1);", objectMasters[objList[nextObj].item_id].desc, objList[nextObj].tileX, objList[nextObj].tileY);
+									fprintf(fBODY, "\n\t\tsys.wait(2);");
+									fprintf(fBODY, "\n\t\t$%s.setFrobable(1);" , UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\n\t\t$%s.setFrobable(1);\n", UniqueObjectName(objList[nextObj]));
+									fprintf(fBODY, "\n\t\t}\n");
+								}
 							case SOFTWARE_LOGS:
 								if (isLog(objList[nextObj]))
 									{//Creates the script that plays a log.
@@ -1301,6 +1327,25 @@ switch(objectMasters[targetObj.item_id].type )
 	{
 	case DOOR:	//For a door I activate it's lock object
 		fprintf(fBODY,"\t$a_lock_%03d_%03d.activate($player1);\n",targetObj.tileX, targetObj.tileY); 
+		break;
+	case SHOCK_DOOR:
+		//change it's gui here as well.
+		fprintf(fBODY, "\n\t$a_lock_%03d_%03d.activate($player1);\n", targetObj.tileX, targetObj.tileY);
+
+		fprintf(fBODY, "\n\t\t$%s.setFrobable(0); ", UniqueObjectName(targetObj));   //Turn off frobbing for a short delay
+		fprintf(fBODY, "\n\t\t$%s_way.setFrobable(0); ", UniqueObjectName(targetObj));   //Turn off frobbing for a short delay
+		fprintf(fBODY, "\n\t\tif (%s_state == 0){", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\n\t\t\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 1); ", UniqueObjectName(targetObj));   //Set to opening.
+		fprintf(fBODY, "\n\t\t\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 1);", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\n\t\t\t%s_state = 1;\n\n\t}", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\n\t\telse\n\t\t\t{");
+		fprintf(fBODY, "\n\t\t\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 0);", UniqueObjectName(targetObj));    //Set to closing.
+		fprintf(fBODY, "\n\t\t\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 0);", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\n\t\t\t%s_state = 0;", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\n\t\t}");
+		fprintf(fBODY, "\n\t\tsys.wait(2);");
+		fprintf(fBODY, "\n\t\t$%s.setFrobable(1);", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\n\t\t$%s.setFrobable(1);\n", UniqueObjectName(targetObj));
 		break;
 	case SHOCK_TRIGGER_NULL:	//I activate the script call. *Nullscript can be many things such as cameras so I will need to account for that at some stage.
 		if (targetObj.TriggerAction == ACTION_TIMER)

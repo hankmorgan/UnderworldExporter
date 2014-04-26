@@ -71,6 +71,7 @@
 #define COMPUTER_SCREEN 63
 #define SHOCK_WORDS 64
 #define SHOCK_GRATING 65 
+#define SHOCK_DOOR 66
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
@@ -358,6 +359,7 @@ int isButton(ObjectItem currobj);
 int isTrap(ObjectItem currobj);
 int isLog (ObjectItem currobj);
 int isContainer(ObjectItem currobj);
+int isSHOCKDoor(ObjectItem currobj);
 int hasContents(ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
 //long nextObjectShock(shockObjectItem &currObj);

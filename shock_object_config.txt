@@ -301,7 +301,7 @@
 300 10 0 1 SERVICE_ACCESS_DOOR atdm:door_96x48_3hinge entity 4
 301 10 0 2 DOOR atdm:door_96x48_3hinge entity 4
 302 10 0 3 DOOR atdm:door_96x48_3hinge entity 4
-303 10 0 4 DOOR atdm:door_96x48_3hinge entity 4
+303 10 0 4 DOOR models/darkmod/shock/doorway.ase entity 66
 304 10 0 5 DOOR atdm:door_96x48_3hinge entity 4
 305 10 0 6 STORAGE_ROOM_DOOR atdm:door_96x48_3hinge entity 4
 306 10 0 7 SHIELDED_DOOR atdm:door_96x48_3hinge entity 4

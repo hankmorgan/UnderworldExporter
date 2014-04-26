@@ -5,6 +5,7 @@
 #define VISPORTAL -2
 #define NODRAW -3
 #define TRIGGER_MULTI -4
+#define COLLISION -5
 
 typedef struct texture
 {

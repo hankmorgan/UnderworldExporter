@@ -48,6 +48,7 @@ void RenderEntityLEVEL_ENTRY(int game, float x, float y, float z, ObjectItem &cu
 void RenderEntityREPULSOR(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityGrating(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
@@ -83,6 +84,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 				}
 			case HIDDENDOOR:
+				printf("");
 			case DOOR:
 				{
 				RenderEntityDoor(game,x,y,z,currobj,objList,LevelInfo);
@@ -153,6 +155,9 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 			case SHOCK_GRATING:
 				RenderEntityGrating(game, x, y, z, currobj, objList, LevelInfo);
+				break;
+			case SHOCK_DOOR:
+				RenderEntitySHOCKDoor(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			default:
 				{//just the basic name. with no properties.
@@ -266,6 +271,10 @@ int isContainer(ObjectItem currobj)
 	return  ((objectMasters[currobj.item_id].type == CONTAINER) || (objectMasters[currobj.item_id].type == CORPSE));
 }
 
+int isSHOCKDoor(ObjectItem currobj)
+{
+	return  ((objectMasters[currobj.item_id].type == SHOCK_DOOR));
+}
 
 int hasContents(ObjectItem currobj)
 {//Returns wether or not a contain contains items
@@ -571,7 +580,10 @@ if (game == SHOCK)
 	}
 	else
 	{
-		EntityRotationSHOCK(currobj.Angle2);
+		if (objectMasters[currobj.item_id].type != HIDDENDOOR)
+		{
+			EntityRotationSHOCK(currobj.Angle2);
+		}
 	}
 	
 	if (objectMasters[currobj.item_id].type == HIDDENDOOR)
@@ -1480,6 +1492,147 @@ void RenderEntityComputerScreen(int game, float x, float y, float z, ObjectItem 
 
 
 }
+
+
+void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+	//The animated door graphics.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s_way\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"gui\" \"guis/shock/doortest.gui\"\n");
+	fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n");
+	fprintf(MAPFILE, "\"gui2\" \"guis/shock/doortest.gui\"\n");
+	fprintf(MAPFILE, "\"gui2_parm1\" \"0\"\n");
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	fprintf(MAPFILE, "\"solid\" \"%d\"\n", 0);
+	EntityRotationSHOCK(currobj.Angle2);
+	fprintf(MAPFILE, "\n}");
+
+	//The door frame model
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s_frame\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", "models/darkmod/shock/doorframe.ase");
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	fprintf(MAPFILE, "\"frobable\" \"1\"\n");
+	fprintf(MAPFILE, "\"frob_peer\" \"%s\"\n", UniqueObjectName(currobj));
+	EntityRotationSHOCK(currobj.Angle2);
+	fprintf(MAPFILE, "\n}");
+
+	//The collision mesh that will act as the door.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_door_sliding");
+	//fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"name\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.tileX, currobj.tileY);
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	//fprintf(MAPFILE, "\"model\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", "models/darkmod/shock/slidingdoor.ase");
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	fprintf(MAPFILE, "\"rotate\" \"%d %d %d\"\n", 0 , 0, 0);
+	fprintf(MAPFILE, "\"translate_speed\" \"%d\"\n", 500);
+	fprintf(MAPFILE, "\"translate\" \"%d %d %d\"\n", 0, 0, -120);
+	fprintf(MAPFILE, "\"frobable\" \"%d\"\n", "1");
+	fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+
+	//Lock stuff
+	if ((currobj.link != 0) || (currobj.SHOCKLocked > 0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
+	{
+		fprintf(MAPFILE, "\"locked\" \"%d\"\n", 1);
+		if ((currobj.link > 0) && (currobj.link <= 11))	//Only this many keycards
+		{
+			char *strKeyName = getObjectNameByClass(GETTABLES_OTHER, 4, currobj.link);
+			fprintf(MAPFILE, "\"used_by\" \"%s_0\"\n", strKeyName);
+			fprintf(MAPFILE, "\"used_by1\" \"%s_1\"\n", strKeyName);
+			fprintf(MAPFILE, "\"used_by2\" \"%s_2\"\n", strKeyName);
+			fprintf(MAPFILE, "\"used_by3\" \"%s_3\"\n", strKeyName);
+			fprintf(MAPFILE, "\"used_by4\" \"%s_4\"\n", strKeyName);
+			fprintf(MAPFILE, "\"used_by5\" \"%s_5\"\n", strKeyName);
+			fprintf(MAPFILE, "\"used_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+		}
+	}
+	fprintf(MAPFILE, "\n}");
+
+
+	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
+	{	//if it has a lock it needs a lock object for scripting purposes
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:target_changelockstate");
+		//A lock trap object for opening doors.
+		fprintf(MAPFILE, "\"name\" \"a_lock_%03d_%03d\"\n", currobj.tileX, currobj.tileY);
+		fprintf(MAPFILE, "\"target\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.tileX, currobj.tileY);
+		fprintf(MAPFILE, "\"toggle\" \"1\"\n");	//todo: other types of behaviour.
+		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+		fprintf(MAPFILE, "}");
+		EntityCount++;
+	}
+
+
+	//EntityRotationSHOCK(currobj.Angle2);
+	//the primitive for this slider.  It's the same as its visportal only slightly bigger.
+
+	//tile Tmpt;	//tmp tile for rendering a visportal.
+
+	//switch (currobj.Angle2)
+	//	case SHOCK_SOUTH:
+	//	case SHOCK_NORTH:
+	//	{
+	//	    Tmpt.floorHeight = LevelInfo[currobj.tileX][currobj.tileY].floorHeight;
+	//		Tmpt.ceilingHeight = LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight;
+	//		Tmpt.shockWestCeilHeight = 16;
+	//		Tmpt.shockEastCeilHeight = 16;
+	//		Tmpt.shockSouthCeilHeight = 16;
+	//		Tmpt.shockNorthCeilHeight = 16;
+	//		Tmpt.tileType = 0;
+	//		Tmpt.isWater = 0;
+	//		Tmpt.wallTexture = 205;
+	//		Tmpt.North = 205;
+	//		Tmpt.South = 205;
+	//		Tmpt.East = 205;
+	//		Tmpt.West = 205;
+	//		Tmpt.Top = 205;
+	//		Tmpt.Bottom = 205;
+	//		Tmpt.DimX = 1; Tmpt.DimY = 1;
+
+	//		fprintf(MAPFILE, "// primitive %d\n", 0);
+	//		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+	//		//east face 
+	//		fprintf(MAPFILE, "( 1 0 0 %d )", -((currobj.tileX + Tmpt.DimX)*BrushSizeX));
+	//		getWallTextureName(Tmpt, fEAST, 0);
+	//		//north face 
+	//		//fprintf(MAPFILE, "( 0 1 0 %d )", -((y + Tmpt.DimY)*BrushSizeY)-1);
+	//		fprintf(MAPFILE, "( 0 1 0 %f )", -(y + 1));
+	//		getWallTextureName(Tmpt, fNORTH, 0);
+	//		//top face
+	//		//		fprintf(MAPFILE, "( 0 0 1 %d )", -BrushSizeZ * (CEILING_HEIGHT + 1));
+	//		fprintf(MAPFILE, "( 0 0 1 %d )", -(120 + LevelInfo[currobj.tileX][currobj.tileY].floorHeight  * BrushSizeZ));
+	//		getFloorTextureName(Tmpt, fTOP);
+	//		//west face
+	//		fprintf(MAPFILE, "( -1 0 0 %d )", +((currobj.tileX)*BrushSizeX));
+	//		getWallTextureName(Tmpt, fWEST, 0);
+	//		//south face
+	//		//fprintf(MAPFILE, "( 0 -1 0 %d )", +((y)*BrushSizeY));
+	//		fprintf(MAPFILE, "( 0 -1 0 %f )", +(y - 1));
+	//		getWallTextureName(Tmpt, fSOUTH, 0);
+	//		//bottom face
+	//		fprintf(MAPFILE, "( 0 0 -1 %d )", LevelInfo[currobj.tileX][currobj.tileY].floorHeight  * BrushSizeZ);
+	//		getFloorTextureName(Tmpt, fBOTTOM);
+	//		fprintf(MAPFILE, "}\n}\n");
+	//	}
+
+
+
+
+
+	
+
+
+
+}
+
 
 
 void EntityRotation(int heading)
