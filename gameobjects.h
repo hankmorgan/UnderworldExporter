@@ -72,6 +72,7 @@
 #define SHOCK_WORDS 64
 #define SHOCK_GRATING 65 
 #define SHOCK_DOOR 66
+#define SHOCK_DOOR_TRANSPARENT 67
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

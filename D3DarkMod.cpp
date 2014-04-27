@@ -2129,44 +2129,84 @@ void RenderShockDoorway(int game, int x, int y, tile &t, ObjectItem currDoor, ti
 	tile Tmpt;	//tmp tile for rendering a visportal.
 
 	switch (currDoor.Angle2)
+	{
+	
 		case SHOCK_SOUTH:
 		case SHOCK_NORTH:
 		{
-	Tmpt.tileType = 0;
-	Tmpt.isWater = 0;
-	Tmpt.wallTexture = NODRAW;
-	Tmpt.North = NODRAW;
-	Tmpt.South = VISPORTAL;
-	Tmpt.East = NODRAW;
-	Tmpt.West = NODRAW;
-	Tmpt.Top = NODRAW;
-	Tmpt.Bottom = NODRAW;
-	Tmpt.DimX = 1; Tmpt.DimY = 1;
+			Tmpt.tileType = 0;
+			Tmpt.isWater = 0;
+			Tmpt.wallTexture = NODRAW;
+			Tmpt.North = NODRAW;
+			Tmpt.South = VISPORTAL;
+			Tmpt.East = NODRAW;
+			Tmpt.West = NODRAW;
+			Tmpt.Top = NODRAW;
+			Tmpt.Bottom = NODRAW;
+			Tmpt.DimX = 1; Tmpt.DimY = 1;
 
-		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-		//east face 
- 		fprintf(MAPFILE, "( 1 0 0 %d )", -((x + Tmpt.DimX)*BrushSizeX));
-		getWallTextureName(Tmpt, fEAST, 0);
-		//north face 
-		//fprintf(MAPFILE, "( 0 1 0 %d )", -((y + Tmpt.DimY)*BrushSizeY)-1);
-		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 0.05));
-		getWallTextureName(Tmpt, fNORTH, 0);
-		//top face
-//		fprintf(MAPFILE, "( 0 0 1 %d )", -BrushSizeZ * (CEILING_HEIGHT + 1));
-		fprintf(MAPFILE, "( 0 0 1 %d )",-( 120+LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ));
-		getFloorTextureName(Tmpt, fTOP);
-		//west face
-		fprintf(MAPFILE, "( -1 0 0 %d )", +((x)*BrushSizeX));
-		getWallTextureName(Tmpt, fWEST, 0);
-		//south face
-		//fprintf(MAPFILE, "( 0 -1 0 %d )", +((y)*BrushSizeY));
-		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY-0.05));
-		getWallTextureName(Tmpt, fSOUTH, 0);
-		//bottom face
-		fprintf(MAPFILE, "( 0 0 -1 %d )", LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ);
-		getFloorTextureName(Tmpt, fBOTTOM);
-		fprintf(MAPFILE, "}\n}\n");
+				fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+				fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+				//east face 
+ 				fprintf(MAPFILE, "( 1 0 0 %d )", -((x + Tmpt.DimX)*BrushSizeX));
+				getWallTextureName(Tmpt, fEAST, 0);
+				//north face 
+				fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 0.05));
+				getWallTextureName(Tmpt, fNORTH, 0);
+				//top face
+				fprintf(MAPFILE, "( 0 0 1 %d )",-( 120+LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ));
+				getFloorTextureName(Tmpt, fTOP);
+				//west face
+				fprintf(MAPFILE, "( -1 0 0 %d )", +((x)*BrushSizeX));
+				getWallTextureName(Tmpt, fWEST, 0);
+				//south face
+				fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY-0.05));
+				getWallTextureName(Tmpt, fSOUTH, 0);
+				//bottom face
+				fprintf(MAPFILE, "( 0 0 -1 %d )", LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ);
+				getFloorTextureName(Tmpt, fBOTTOM);
+				fprintf(MAPFILE, "}\n}\n");
+				break;
+	}
+		case SHOCK_EAST:
+		case SHOCK_WEST:
+		{
+			Tmpt.tileType = 0;
+			Tmpt.isWater = 0;
+			Tmpt.wallTexture = NODRAW;
+			Tmpt.North = NODRAW;
+			Tmpt.South = NODRAW;
+			Tmpt.East = VISPORTAL;
+			Tmpt.West = NODRAW;
+			Tmpt.Top = NODRAW;
+			Tmpt.Bottom = NODRAW;
+			Tmpt.DimX = 1; Tmpt.DimY = 1;
+
+			fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+			//east face 
+			//fprintf(MAPFILE, "( 1 0 0 %d )", -((x + t.DimX)*BrushSizeX));
+			fprintf(MAPFILE, "( 1 0 0 %f )", -(offX + 0.05));
+			getWallTextureName(Tmpt, fEAST, 0);
+			//north face 
+			fprintf(MAPFILE, "( 0 1 0 %d )", -((y + t.DimY)*BrushSizeY));
+			getWallTextureName(Tmpt, fNORTH, 0);
+			//top face
+			fprintf(MAPFILE, "( 0 0 1 %d )", -(120 + LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ));
+			getFloorTextureName(Tmpt, fTOP);
+			//west face
+			//fprintf(MAPFILE, "( -1 0 0 %d )", +((x)*BrushSizeX));
+			fprintf(MAPFILE, "( -1 0 0 %f )", +(offX - 0.05));
+			getWallTextureName(Tmpt, fWEST, 0);
+			//south face
+			fprintf(MAPFILE, "( 0 -1 0 %d )", +((y)*BrushSizeY));
+			getWallTextureName(Tmpt, fSOUTH, 0);
+			//bottom face
+			fprintf(MAPFILE, "( 0 0 -1 %d )", LevelInfo[currDoor.tileX][currDoor.tileY].floorHeight  * BrushSizeZ);
+			getFloorTextureName(Tmpt, fBOTTOM);
+			fprintf(MAPFILE, "}\n}\n");
+			break;
+		}
 	}
 }
 

@@ -157,6 +157,7 @@ switch (objectMasters[currobj.item_id].isEntity )
 				RenderEntityGrating(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			case SHOCK_DOOR:
+			case SHOCK_DOOR_TRANSPARENT:
 				RenderEntitySHOCKDoor(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			default:
@@ -1500,9 +1501,9 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
 	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 	fprintf(MAPFILE, "\"name\" \"%s_way\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"gui\" \"guis/shock/doortest.gui\"\n");
+	fprintf(MAPFILE, "\"gui\" \"guis/shock/door_%d_%d_%d.gui\"\n", currobj.ObjectClass, currobj.ObjectSubClass, currobj.ObjectSubClassIndex);
 	fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n");
-	fprintf(MAPFILE, "\"gui2\" \"guis/shock/doortest.gui\"\n");
+	fprintf(MAPFILE, "\"gui2\" \"guis/shock/door_%d_%d_%d.gui\"\n",currobj.ObjectClass, currobj.ObjectSubClass,currobj.ObjectSubClassIndex);
 	fprintf(MAPFILE, "\"gui2_parm1\" \"0\"\n");
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
@@ -1519,7 +1520,7 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", "models/darkmod/shock/doorframe.ase");
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	fprintf(MAPFILE, "\"frobable\" \"1\"\n");
-	fprintf(MAPFILE, "\"frob_peer\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"frob_peer\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.tileX, currobj.tileY);
 	EntityRotationSHOCK(currobj.Angle2);
 	fprintf(MAPFILE, "\n}");
 
@@ -1529,14 +1530,20 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	//fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"name\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.tileX, currobj.tileY);
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	EntityRotationSHOCK(currobj.Angle2);
 	//fprintf(MAPFILE, "\"model\" \"%s\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"model\" \"%s\"\n", "models/darkmod/shock/slidingdoor.ase");
-	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", "models/darkmod/shock/slidingdoor.ase");	//Need to provide a number of variants for transparency.
+	//if (objectMasters[currobj.item_id].type == SHOCK_DOOR_TRANSPARENT)
+	//{
+	//	fprintf(MAPFILE, "\"hide\" \"%d\"\n", 1);
+	//}
+	fprintf(MAPFILE, "\"interruptable\" \"%d\"\n", 0); 
 	fprintf(MAPFILE, "\"rotate\" \"%d %d %d\"\n", 0 , 0, 0);
 	fprintf(MAPFILE, "\"translate_speed\" \"%d\"\n", 500);
 	fprintf(MAPFILE, "\"translate\" \"%d %d %d\"\n", 0, 0, -120);
 	fprintf(MAPFILE, "\"frobable\" \"%d\"\n", "1");
-	fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+	//fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"state_change_callback\" \"start_%s_callback\"\n", UniqueObjectName(currobj));
 
 	//Lock stuff
 	if ((currobj.link != 0) || (currobj.SHOCKLocked > 0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw

@@ -1,0 +1,87 @@
+windowDef Desktop
+{
+	rect 0,0,640,480
+	nocursor 1
+	float doorstate 0
+	float lockstate 0
+		windowdef panel
+		{
+		rect 0,0,640,480
+		visible 1
+		background "guis/assets/shock/doors/2401/2401_0000";
+                
+                //Loop on Closed frame
+		onTime 0{
+			set "background" "guis/assets/shock/doors/2401/2401_0000";
+		}
+
+                onTime 50{
+			if ("gui::doorstate"==0)
+			{resetTime "0";}
+			else
+			//Start Opening Sequence
+			{set "background" "guis/assets/shock/doors/2401/2401_0002";}
+		}
+
+                //Door Opening sequence
+		onTime 100{
+			set "background" "guis/assets/shock/doors/2401/2401_0002";
+		}
+
+               onTime 150{
+			set "background" "guis/assets/shock/doors/2401/2401_0003";
+		}
+
+                onTime 200{
+			set "background" "guis/assets/shock/doors/2401/2401_0004";
+		}
+
+                onTime 250{
+			set "background" "guis/assets/shock/doors/2401/2401_0005";
+		}
+
+		onTime 300{
+			set "background" "guis/assets/shock/doors/2401/2401_0006";
+		}
+
+               onTime 350{      //Door Opened
+			set "background" "guis/assets/shock/doors/2401/2401_0007";
+		}
+
+                onTime 400{ //Loop on Open door
+			if ("gui::doorstate"==1)
+			{resetTime "350";}
+			else
+			//Start closing Sequence
+			{set "background" "guis/assets/shock/doors/2401/2401_0006";}
+                }
+
+                onTime 450{
+			set "background" "guis/assets/shock/doors/2401/2401_0005";
+		}
+
+                onTime 500{
+			set "background" "guis/assets/shock/doors/2401/2401_0004";
+		}
+
+                onTime 450{
+			set "background" "guis/assets/shock/doors/2401/2401_0003";
+		}
+		
+                onTime 500{
+			set "background" "guis/assets/shock/doors/2401/2401_0002";
+		}
+
+                onTime 550{
+			set "background" "guis/assets/shock/doors/2401/2401_0001";
+		}
+		
+                onTime 600{
+			set "background" "guis/assets/shock/doors/2401/2401_0000";
+		}
+		
+                onTime 650{ //return to closed loop
+			resetTime "0";
+		}
+	}
+}
