@@ -1503,7 +1503,7 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(MAPFILE, "\"name\" \"%s_way\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"gui\" \"guis/shock/door_%d_%d_%d.gui\"\n", currobj.ObjectClass, currobj.ObjectSubClass, currobj.ObjectSubClassIndex);
 	fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n");
-	fprintf(MAPFILE, "\"gui2\" \"guis/shock/door_%d_%d_%d.gui\"\n",currobj.ObjectClass, currobj.ObjectSubClass,currobj.ObjectSubClassIndex);
+	fprintf(MAPFILE, "\"gui2\" \"guis/shock/door_%d_%d_%d_reverse.gui\"\n",currobj.ObjectClass, currobj.ObjectSubClass,currobj.ObjectSubClassIndex);
 	fprintf(MAPFILE, "\"gui2_parm1\" \"0\"\n");
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
