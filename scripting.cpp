@@ -136,7 +136,7 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 
 			}
 		}
-		fprintf(fGLOBALS, "\tfloat %s_light_state = 0;\n", UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
+		fprintf(fGLOBALS, "\tfloat %s_light_state = 1;\n", UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
 		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
 		//fprintf(fBODY, "\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
 		//fprintf(fBODY, "\t\t%s_light_state = 0;\n\t}\n", UniqueObjectName(currObj));
