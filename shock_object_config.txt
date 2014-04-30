@@ -316,10 +316,10 @@
 315 10 1 7 GRATING models/darkmod/shock/grating.ase entity 65
 316 10 1 8 GRATING models/darkmod/shock/grating.ase entity 65
 317 10 1 9 MY_TOE_IS_AN_EGGPLANT models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-318 10 2 0 FORCE_DOOR models/darkmod/shock/doorway.ase entity 66
-319 10 2 1 FORCE_DOOR models/darkmod/shock/doorway.ase entity 66
-320 10 2 2 FORCE_DOOR models/darkmod/shock/doorway.ase entity 66
-321 10 2 3 FORCE_DOOR models/darkmod/shock/doorway.ase entity 66
+318 10 2 0 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+319 10 2 1 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+320 10 2 2 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+321 10 2 3 FORCE_DOOR models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 322 10 2 4 FORCE_DOOR models/darkmod/shock/doorway.ase entity 66
 323 10 2 5 ENERGY_GRATING models/darkmod/shock/doorway.ase entity 67
 324 10 2 6 GREAT_LORD_SNAQUEOTRAHN models/darkmod/decorative/hourglass.ase model 18
