@@ -2752,6 +2752,18 @@ switch (TriggerType)
 			}
 		break;
 		}
+	case ACTION_AWAKEN:
+		{//Wakes up sleeping drones in between the two control points and sends them after you. (maybe)
+		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = getValAtAddress(sub_ark, add_ptr + 0x12, 16);
+		if (PrintDebug == 1)
+		{
+			printf("\tACTION_AWAKEN for %s\n", UniqueObjectName(objList[objIndex]));
+			printf("\t\tControl point object1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
+			printf("\t\tControl point object2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+		}
+		}
 	case ACTION_MESSAGE:
 		{//A once off message. For example the computer voice when the cyborg conversion is activated.
 		//16 Trap message offset in Chunk 2151 

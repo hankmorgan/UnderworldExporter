@@ -646,7 +646,8 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].shockCeilingTexture=texture_map[(getValAtAddress(lev_ark,address_pointer+6,16) >>6) & 0x1F];
 				LevelInfo[x][y].floorTexture=texture_map[(getValAtAddress(lev_ark,address_pointer+6,16) >>11) & 0x1F];
 				
-
+				//LevelInfo[x][y].floorTexture = 273;//debug
+				//LevelInfo[x][y].shockCeilingTexture = 273;
 				LevelInfo[x][y].North = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].South = LevelInfo[x][y].wallTexture;
 				LevelInfo[x][y].East = LevelInfo[x][y].wallTexture;

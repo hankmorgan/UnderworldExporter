@@ -851,15 +851,26 @@ void getFloorTextureName(tile t, int face)
 //Spits out the floor texture for a tile based on the face.
 
 int floorTexture;
+
+float floorAlign1;
+float floorAlign2;
+float floorAlign3;
+float floorAlign4;
+float floorAlign5;
+float floorAlign6;
+
 float alignFactor;	//For stretching floor textures.
-	if (face == fCEIL)
-		{
-		floorTexture = t.shockCeilingTexture ;
-		}
-	else
-		{
-		floorTexture=t.floorTexture ;
-		}
+
+if (face == fCEIL)
+{
+	floorTexture = t.shockCeilingTexture;
+}
+else
+{
+	floorTexture = t.floorTexture;
+}
+
+
 
 if (floorTexture <0)
 	{
@@ -886,6 +897,144 @@ if (floorTexture <0)
 				}
 			else
 				{
+				//default values first.
+				floorAlign1 = textureMasters[floorTexture].floor_align1_1;
+				floorAlign2 = textureMasters[floorTexture].floor_align1_2;
+				floorAlign3 = textureMasters[floorTexture].floor_align1_3;
+				floorAlign4 = textureMasters[floorTexture].floor_align2_1;
+				floorAlign5 = textureMasters[floorTexture].floor_align2_2;
+				floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+				switch (t.tileType)  //different tile orientations take different alignment values.
+					{
+					case TILE_SLOPE_N:
+					{
+					if (
+						(t.shockSlopeFlag == SLOPE_BOTH_PARALLEL)
+						||
+						((face == fCEIL) && (t.shockSlopeFlag == SLOPE_CEILING_ONLY))
+						||
+						((face != fCEIL) && (t.shockSlopeFlag == SLOPE_FLOOR_ONLY) || (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+						)
+						{
+							floorAlign1 = textureMasters[floorTexture].floor_align1_2;
+							floorAlign2 = textureMasters[floorTexture].floor_align1_3;
+							floorAlign3 = textureMasters[floorTexture].floor_align1_1;
+							floorAlign4 = textureMasters[floorTexture].floor_align2_3;
+							floorAlign5 = - textureMasters[floorTexture].floor_align2_1;
+							floorAlign6 = textureMasters[floorTexture].floor_align2_2;	//Shift factor
+						}
+					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+						{//do t tile slope s alignment.
+						floorAlign1 = textureMasters[floorTexture].floor_align2_1;
+						floorAlign2 = textureMasters[floorTexture].floor_align2_2;
+						floorAlign3 = textureMasters[floorTexture].floor_align2_3;
+						floorAlign4 = textureMasters[floorTexture].floor_align1_1;
+						floorAlign5 = -textureMasters[floorTexture].floor_align1_2;
+						floorAlign6 = textureMasters[floorTexture].floor_align1_3;	//shift factor.
+						}
+					break;
+					}
+					case TILE_SLOPE_S:
+					{
+					if (
+						(t.shockSlopeFlag == SLOPE_BOTH_PARALLEL)
+						||
+						((face == fCEIL) && (t.shockSlopeFlag == SLOPE_CEILING_ONLY))
+						||
+						((face != fCEIL) && (t.shockSlopeFlag == SLOPE_FLOOR_ONLY) || (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+						)
+					{
+						floorAlign1 = textureMasters[floorTexture].floor_align2_1;
+						floorAlign2 = textureMasters[floorTexture].floor_align2_2;
+						floorAlign3 = textureMasters[floorTexture].floor_align2_3;
+						floorAlign4 = textureMasters[floorTexture].floor_align1_1;
+						floorAlign5 = -textureMasters[floorTexture].floor_align1_2;
+						floorAlign6 = textureMasters[floorTexture].floor_align1_3;	//shift factor.
+					}
+					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+					{//do t tile slope n alignment.
+						floorAlign1 = textureMasters[floorTexture].floor_align1_2;
+						floorAlign2 = textureMasters[floorTexture].floor_align1_3;
+						floorAlign3 = textureMasters[floorTexture].floor_align1_1;
+						floorAlign4 = textureMasters[floorTexture].floor_align2_3;
+						floorAlign5 = -textureMasters[floorTexture].floor_align2_1;
+						floorAlign6 = textureMasters[floorTexture].floor_align2_2;	//Shift factor
+					}
+					break;
+					}
+					case TILE_SLOPE_E:
+					{
+					if (
+						(t.shockSlopeFlag == SLOPE_BOTH_PARALLEL)
+						||
+						((face == fCEIL) && (t.shockSlopeFlag == SLOPE_CEILING_ONLY))
+						||
+						((face != fCEIL) && (t.shockSlopeFlag == SLOPE_FLOOR_ONLY) || (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+						)
+						{
+							floorAlign1 = textureMasters[floorTexture].floor_align1_1;
+							floorAlign2 = textureMasters[floorTexture].floor_align2_1;
+							floorAlign3 = textureMasters[floorTexture].floor_align1_3;	//Shift factor.
+							floorAlign4 = textureMasters[floorTexture].floor_align1_2;
+							floorAlign5 = textureMasters[floorTexture].floor_align2_2;
+							floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+						}
+					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+						{//do t tile slope w alignment.
+						floorAlign1 = textureMasters[floorTexture].floor_align1_1;
+						floorAlign2 = textureMasters[floorTexture].floor_align1_2;
+						floorAlign3 = textureMasters[floorTexture].floor_align1_3; //Shift factor.
+						floorAlign4 = textureMasters[floorTexture].floor_align2_1;
+						floorAlign5 = textureMasters[floorTexture].floor_align2_2;
+						floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+						}
+					break;
+					}
+
+					case TILE_SLOPE_W:
+					{
+					if (
+					(t.shockSlopeFlag == SLOPE_BOTH_PARALLEL)
+						||
+						((face == fCEIL) && (t.shockSlopeFlag == SLOPE_CEILING_ONLY))
+						||
+						((face != fCEIL) && (t.shockSlopeFlag == SLOPE_FLOOR_ONLY) || (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+						)
+					{
+						floorAlign1 = textureMasters[floorTexture].floor_align1_1;
+						floorAlign2 = textureMasters[floorTexture].floor_align1_2;
+						floorAlign3 = textureMasters[floorTexture].floor_align1_3; //Shift factor.
+						floorAlign4 = textureMasters[floorTexture].floor_align2_1;
+						floorAlign5 = textureMasters[floorTexture].floor_align2_2;
+						floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+					}
+					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
+					{//do t tile slope e alignment.
+						floorAlign1 = textureMasters[floorTexture].floor_align1_1;
+						floorAlign2 = textureMasters[floorTexture].floor_align2_1;
+						floorAlign3 = textureMasters[floorTexture].floor_align1_3;	//Shift factor.
+						floorAlign4 = textureMasters[floorTexture].floor_align1_2;
+						floorAlign5 = textureMasters[floorTexture].floor_align2_2;
+						floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+					}
+					break;
+					}
+					default:
+					{
+					floorAlign1 = textureMasters[floorTexture].floor_align1_1;
+					floorAlign2 = textureMasters[floorTexture].floor_align1_2;
+					floorAlign3 = textureMasters[floorTexture].floor_align1_3;
+					floorAlign4 = textureMasters[floorTexture].floor_align2_1;
+					floorAlign5 = textureMasters[floorTexture].floor_align2_2;
+					floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+					break;
+					}
+				}
+
+
+
+
+
 				//float textVertAlign = textureMasters[floorTexture].floor_align2_3;	//Default value
 				//alignFactor = 1;
 				////This is buggy at the moment due to diffent slope types. 
@@ -902,9 +1051,13 @@ if (floorTexture <0)
 				//		textVertAlign = (t.floorHeight % t.shockSteep) / t.shockSteep;
 				//	}
 				//}
-				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
-						textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,
-						textureMasters[floorTexture].floor_align2_1, textureMasters[floorTexture].floor_align2_2, textureMasters[floorTexture].floor_align2_3);
+				//fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
+				//		textureMasters[floorTexture].floor_align1_1,textureMasters[floorTexture].floor_align1_2,textureMasters[floorTexture].floor_align1_3,
+				//		textureMasters[floorTexture].floor_align2_1, textureMasters[floorTexture].floor_align2_2, textureMasters[floorTexture].floor_align2_3);
+
+				fprintf(MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
+					floorAlign1, floorAlign2, floorAlign3,
+					floorAlign4, floorAlign5, floorAlign6);
 //				fprintf(MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
 //					textureMasters[floorTexture].floor_align1_1, textureMasters[floorTexture].floor_align1_2, textureMasters[floorTexture].floor_align1_3,
 //					textureMasters[floorTexture].floor_align2_1, textureMasters[floorTexture].floor_align2_2 / alignFactor, textVertAlign);

@@ -1254,6 +1254,10 @@ switch (currObj.TriggerAction)
 		fprintf(fBODY,"\tsys.println(\"Change state.\");\n");
 		break;
 		}
+	case ACTION_AWAKEN:
+		{
+
+		}
 	case ACTION_MESSAGE:
 		{
 		//16 Trap message
