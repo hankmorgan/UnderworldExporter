@@ -23,6 +23,7 @@ void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelI
 float calcAlignmentFactor(float adjacent, float opposite);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderShockDoorway(int game, int x, int y, tile &t, ObjectItem currDoor, tile LevelInfo[64][64], ObjectItem objList[1600]);
+float getSteepOffset(int steepness);
 
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
@@ -297,6 +298,10 @@ int x; int y;
 
 void RenderDarkModTile(int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 {
+	if (PrimitiveCount == 88)
+	{
+		printf("");
+	}
 //Picks the tile to render based on tile type/flags.
 if (t.Render == 1)
 	{fprintf (MAPFILE, "\n");}
@@ -852,6 +857,7 @@ void getFloorTextureName(tile t, int face)
 
 int floorTexture;
 
+
 float floorAlign1;
 float floorAlign2;
 float floorAlign3;
@@ -859,7 +865,11 @@ float floorAlign4;
 float floorAlign5;
 float floorAlign6;
 
-float alignFactor;	//For stretching floor textures.
+float scaleFactor=1;	//For stretching floor textures.
+float shiftFactor=1; //for aligning floor textures.
+float BrushZ = (float)BrushSizeZ;
+float BrushX = (float)BrushSizeX;
+
 
 if (face == fCEIL)
 {
@@ -896,7 +906,7 @@ if (floorTexture <0)
 				fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/caulk\" 0 0 0\n");
 				}
 			else
-				{
+			{
 				//default values first.
 				floorAlign1 = textureMasters[floorTexture].floor_align1_1;
 				floorAlign2 = textureMasters[floorTexture].floor_align1_2;
@@ -904,6 +914,7 @@ if (floorTexture <0)
 				floorAlign4 = textureMasters[floorTexture].floor_align2_1;
 				floorAlign5 = textureMasters[floorTexture].floor_align2_2;
 				floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+				scaleFactor = calcAlignmentFactor(BrushX, (float)t.shockSteep * BrushZ);
 				switch (t.tileType)  //different tile orientations take different alignment values.
 					{
 					case TILE_SLOPE_N:
@@ -920,17 +931,14 @@ if (floorTexture <0)
 							floorAlign2 = textureMasters[floorTexture].floor_align1_3;
 							floorAlign3 = textureMasters[floorTexture].floor_align1_1;
 							floorAlign4 = textureMasters[floorTexture].floor_align2_3;
-							floorAlign5 = - textureMasters[floorTexture].floor_align2_1;
-							floorAlign6 = textureMasters[floorTexture].floor_align2_2;	//Shift factor
+							floorAlign5 = - textureMasters[floorTexture].floor_align2_1 / scaleFactor;  //scale factor
+							float shiftPoint = t.floorHeight - (t.tileY * t.shockSteep); //get a position where that slope intercects the axis
+							shiftFactor = getSteepOffset(t.shockSteep) * (float)shiftPoint;
+							floorAlign6 = 1 + shiftFactor;
 						}
 					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
 						{//do t tile slope s alignment.
-						floorAlign1 = textureMasters[floorTexture].floor_align2_1;
-						floorAlign2 = textureMasters[floorTexture].floor_align2_2;
-						floorAlign3 = textureMasters[floorTexture].floor_align2_3;
-						floorAlign4 = textureMasters[floorTexture].floor_align1_1;
-						floorAlign5 = -textureMasters[floorTexture].floor_align1_2;
-						floorAlign6 = textureMasters[floorTexture].floor_align1_3;	//shift factor.
+						printf("s");
 						}
 					break;
 					}
@@ -948,17 +956,15 @@ if (floorTexture <0)
 						floorAlign2 = textureMasters[floorTexture].floor_align2_2;
 						floorAlign3 = textureMasters[floorTexture].floor_align2_3;
 						floorAlign4 = textureMasters[floorTexture].floor_align1_1;
-						floorAlign5 = -textureMasters[floorTexture].floor_align1_2;
-						floorAlign6 = textureMasters[floorTexture].floor_align1_3;	//shift factor.
+						floorAlign5 = -textureMasters[floorTexture].floor_align1_2 / scaleFactor;  //scale factor
+						float shiftPoint = t.floorHeight + (t.tileY * t.shockSteep); //get a position where that slope intercects the axis
+						shiftFactor = getSteepOffset(t.shockSteep) * (float)shiftPoint;
+						floorAlign6 =  shiftFactor;
+						//floorAlign6 = textureMasters[floorTexture].floor_align1_3;	//shift factor.
 					}
 					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
 					{//do t tile slope n alignment.
-						floorAlign1 = textureMasters[floorTexture].floor_align1_2;
-						floorAlign2 = textureMasters[floorTexture].floor_align1_3;
-						floorAlign3 = textureMasters[floorTexture].floor_align1_1;
-						floorAlign4 = textureMasters[floorTexture].floor_align2_3;
-						floorAlign5 = -textureMasters[floorTexture].floor_align2_1;
-						floorAlign6 = textureMasters[floorTexture].floor_align2_2;	//Shift factor
+						printf("north");
 					}
 					break;
 					}
@@ -973,20 +979,17 @@ if (floorTexture <0)
 						)
 						{
 							floorAlign1 = textureMasters[floorTexture].floor_align1_1;
-							floorAlign2 = textureMasters[floorTexture].floor_align2_1;
-							floorAlign3 = textureMasters[floorTexture].floor_align1_3;	//Shift factor.
-							floorAlign4 = textureMasters[floorTexture].floor_align1_2;
+							floorAlign2 = textureMasters[floorTexture].floor_align2_1/scaleFactor;   //vert scale
+							float shiftPoint = -t.floorHeight + (t.tileX * t.shockSteep); //get a position where that slope intercects the axis
+							shiftFactor = getSteepOffset(t.shockSteep) * (float)shiftPoint;
+							floorAlign3 = shiftFactor;// 	//horz Shift factor.textureMasters[floorTexture].floor_align1_3;
+							floorAlign4 = textureMasters[floorTexture].floor_align1_2 ;  //horz scale factor
 							floorAlign5 = textureMasters[floorTexture].floor_align2_2;
 							floorAlign6 = textureMasters[floorTexture].floor_align2_3;
 						}
 					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
 						{//do t tile slope w alignment.
-						floorAlign1 = textureMasters[floorTexture].floor_align1_1;
-						floorAlign2 = textureMasters[floorTexture].floor_align1_2;
-						floorAlign3 = textureMasters[floorTexture].floor_align1_3; //Shift factor.
-						floorAlign4 = textureMasters[floorTexture].floor_align2_1;
-						floorAlign5 = textureMasters[floorTexture].floor_align2_2;
-						floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+						printf("west");
 						}
 					break;
 					}
@@ -1004,18 +1007,13 @@ if (floorTexture <0)
 						floorAlign1 = textureMasters[floorTexture].floor_align1_1;
 						floorAlign2 = textureMasters[floorTexture].floor_align1_2;
 						floorAlign3 = textureMasters[floorTexture].floor_align1_3; //Shift factor.
-						floorAlign4 = textureMasters[floorTexture].floor_align2_1;
+						floorAlign4 = textureMasters[floorTexture].floor_align2_1 / scaleFactor; //scale factor
 						floorAlign5 = textureMasters[floorTexture].floor_align2_2;
 						floorAlign6 = textureMasters[floorTexture].floor_align2_3;
 					}
 					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
 					{//do t tile slope e alignment.
-						floorAlign1 = textureMasters[floorTexture].floor_align1_1;
-						floorAlign2 = textureMasters[floorTexture].floor_align2_1;
-						floorAlign3 = textureMasters[floorTexture].floor_align1_3;	//Shift factor.
-						floorAlign4 = textureMasters[floorTexture].floor_align1_2;
-						floorAlign5 = textureMasters[floorTexture].floor_align2_2;
-						floorAlign6 = textureMasters[floorTexture].floor_align2_3;
+						printf("east");
 					}
 					break;
 					}
@@ -2985,6 +2983,29 @@ float calcAlignmentFactor(float adjacent, float opposite)
 {
 
 return  sqrt((adjacent*adjacent+opposite*opposite))/adjacent;
+
+}
+
+float getSteepOffset(int steepness)
+{
+	switch (steepness)
+	{
+	case 1:return 1.969 / 128.0;
+	case 2:return 3.764 / 128.0;
+	case 3:return 5.26 / 128.0;
+	case 4:return 6.4 / 128.0;
+	case 5:return 7.191 / 128.0;
+	case 6:return 7.68 / 128.0;
+	case 7:return 7.929 / 128.0;
+	case 8:return 8.0 / 128.0;
+	case 9:return 7.944 / 128.0;
+	case 10:return 7.804 / 128.0;
+	default:return 0;
+
+
+
+
+}
 
 }
 

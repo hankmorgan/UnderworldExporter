@@ -669,7 +669,10 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				
 				LevelInfo[x][y].shockSteep = (lev_ark[address_pointer+3] & 0x0f);
 				LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
-				
+				if (LevelInfo[x][y].shockSteep >10)
+				{
+					printf("");
+				}
 				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=6))//If a sloped tile has no slope then it's a open tile.
 					{
 					LevelInfo[x][y].tileType =1;
@@ -679,6 +682,8 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 					 LevelInfo[x][y].shockSteep=0;
 					}
 				LevelInfo[x][y].indexObjectList = getValAtAddress(lev_ark,address_pointer+4,16);
+
+
 				//if(LevelInfo[x][y].indexObjectList!=0)
 				//	{
 				//	printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
@@ -709,6 +714,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].SHOCKSTATE[1] = getValAtAddress(lev_ark, address_pointer + 0xD, 8);
 				LevelInfo[x][y].SHOCKSTATE[2] = getValAtAddress(lev_ark, address_pointer + 0xE, 8);
 				LevelInfo[x][y].SHOCKSTATE[3] = getValAtAddress(lev_ark, address_pointer + 0xF, 8);
+
 
 				address_pointer=address_pointer+16;
 			}
