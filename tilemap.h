@@ -63,6 +63,8 @@ short shockShadeLower;
 long shockNorthCeilHeight; long shockSouthCeilHeight;
 long shockEastCeilHeight; long shockWestCeilHeight;
 
+short ActualType;
+
 int DoorIndex;	//Index to the door object if this tile has one.
 
 short hasPatch;	//Indicates that this tile has a tmap object in it.

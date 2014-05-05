@@ -1832,6 +1832,10 @@ mstaddress_pointer=0;
 			objList[MasterIndex].heading=0;
 			objList[MasterIndex].objectConversion = 0;
 			objList[MasterIndex].invis = 0;
+			objList[MasterIndex].x = 0;
+			objList[MasterIndex].y = 0;
+			objList[MasterIndex].zpos =0;
+
 				InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
 				objList[MasterIndex].InUseFlag = InUseFlag;
 					
@@ -1850,10 +1854,10 @@ mstaddress_pointer=0;
 				ObjectSubClassIndex =getValAtAddress(mst_ark,mstaddress_pointer+20,8);	
 
 				objList[MasterIndex].ObjectSubClassIndex = ObjectSubClassIndex;
-		
 				int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
 				if (LookupIndex != -1)
 				{
+
 					objList[MasterIndex].item_id = LookupIndex;
 
 					objList[MasterIndex].x = getValAtAddress(mst_ark, mstaddress_pointer + 11, 8);
@@ -1946,12 +1950,15 @@ mstaddress_pointer=0;
 					case CONTAINERS_CORPSES:
 					if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
 					break;
-					case CRITTERS:break;
+					case CRITTERS:
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+						break;
 					}
 					UniqueObjectName(objList[MasterIndex]);
 				}
 				else
 				{
+					objList[MasterIndex].InUseFlag=0;
 					printf("\n\nInvalid item id!!\n");
 				}
 	
@@ -2173,6 +2180,13 @@ int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int i
 
 	int k= 0;
 int add_ptr=0;
+//if (ClassType == CRITTERS)
+//{
+//for (int z = 0; z < chunkUnpackedLength; z = z + 2)
+//{
+//	printf("z=%d, %d\n",z, getValAtAddress(sub_ark, add_ptr + z, 8));
+//}
+//}
 while (k<=chunkUnpackedLength)
 	{
 	if (k==index)
@@ -2368,6 +2382,14 @@ while (k<=chunkUnpackedLength)
 				return 1;
 				break;
 				}
+			case CRITTERS:
+				printf("\Critter Properties\n");
+				for (int j = 0; j < RecordSize; j = j + 2)
+				{
+					printf("\tj=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr + j, 16));
+				}
+				return 1;
+				break;
 			}
 		}
 	add_ptr+=RecordSize;

@@ -618,104 +618,112 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 	//C/space other	Map 15 (chunk 55xx)
 	for (int y=0; y<64;y++)
 		{
-		for (int x=0; x<64;x++)
-			{
-				//Read in the tile data 
-				LevelInfo[x][y].tileX = x;
-				LevelInfo[x][y].tileY = y;
-				LevelInfo[x][y].tileType = lev_ark[address_pointer];	
-				switch (LevelInfo[x][y].tileType)
-					{//Need to swap some tile types around so that they conform to uw naming standards.
-					case 4:	{LevelInfo[x][y].tileType = 5; break;}
-					case 5:	{LevelInfo[x][y].tileType = 4; break;}
-					case 7:	{LevelInfo[x][y].tileType = 8; break;}
-					case 8:	{LevelInfo[x][y].tileType = 7; break;}
-					}
-				LevelInfo[x][y].indexObjectList =0;
-				LevelInfo[x][y].Render=1;		
-				LevelInfo[x][y].DimX=1;			
-				LevelInfo[x][y].DimY=1;			
-				LevelInfo[x][y].Grouped=0;	
-				
-				/* word 6 contains
-					0-5	Wall texture (index into texture list)
-					6-10	Ceiling texture
-					11-15	Floor texture
+		for (int x = 0; x < 64; x++)
+		{
+			//Read in the tile data 
+			LevelInfo[x][y].tileX = x;
+			LevelInfo[x][y].tileY = y;
+			LevelInfo[x][y].tileType = lev_ark[address_pointer];
+			switch (LevelInfo[x][y].tileType)
+			{//Need to swap some tile types around so that they conform to uw naming standards.
+			case 4:	{LevelInfo[x][y].tileType = 5; break; }
+			case 5:	{LevelInfo[x][y].tileType = 4; break; }
+			case 7:	{LevelInfo[x][y].tileType = 8; break; }
+			case 8:	{LevelInfo[x][y].tileType = 7; break; }
+			}
+			LevelInfo[x][y].ActualType = LevelInfo[x][y].tileType;
+			LevelInfo[x][y].indexObjectList = 0;
+			LevelInfo[x][y].Render = 1;
+			LevelInfo[x][y].DimX = 1;
+			LevelInfo[x][y].DimY = 1;
+			LevelInfo[x][y].Grouped = 0;
+
+			/* word 6 contains
+				0-5	Wall texture (index into texture list)
+				6-10	Ceiling texture
+				11-15	Floor texture
 				*/
-				LevelInfo[x][y].wallTexture =texture_map[getValAtAddress(lev_ark,address_pointer+6,16) & 0x3F]; 
-				LevelInfo[x][y].shockCeilingTexture=texture_map[(getValAtAddress(lev_ark,address_pointer+6,16) >>6) & 0x1F];
-				LevelInfo[x][y].floorTexture=texture_map[(getValAtAddress(lev_ark,address_pointer+6,16) >>11) & 0x1F];
-				
-				//LevelInfo[x][y].floorTexture = 273;//debug
-				//LevelInfo[x][y].shockCeilingTexture = 273;
-				LevelInfo[x][y].North = LevelInfo[x][y].wallTexture;
-				LevelInfo[x][y].South = LevelInfo[x][y].wallTexture;
-				LevelInfo[x][y].East = LevelInfo[x][y].wallTexture;
-				LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
-				
-				LevelInfo[x][y].isWater=0;	//No swimming in shock.
-				LevelInfo[x][y].floorHeight =((lev_ark[address_pointer+1]) & 0x1F);
-				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
+			LevelInfo[x][y].wallTexture = texture_map[getValAtAddress(lev_ark, address_pointer + 6, 16) & 0x3F];
+			LevelInfo[x][y].shockCeilingTexture = texture_map[(getValAtAddress(lev_ark, address_pointer + 6, 16) >> 6) & 0x1F];
+			LevelInfo[x][y].floorTexture = texture_map[(getValAtAddress(lev_ark, address_pointer + 6, 16) >> 11) & 0x1F];
 
-				LevelInfo[x][y].ceilingHeight =((lev_ark[address_pointer+2]) & 0x1F) ;
-				LevelInfo[x][y].ceilingHeight = ((LevelInfo[x][y].ceilingHeight <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
-				
-				//Need to know heights in various directions for alignments.
-				//Will set these properly after loading levels.
-				LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y].ceilingHeight;
-				LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y].ceilingHeight;
-				LevelInfo[x][y].shockEastCeilHeight =LevelInfo[x][y].ceilingHeight;
-				LevelInfo[x][y].shockWestCeilHeight =LevelInfo[x][y].ceilingHeight;
-				
-				LevelInfo[x][y].shockSteep = (lev_ark[address_pointer+3] & 0x0f);
-				LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep <<3) >> HeightUnits)*8 >>3; //Shift it for varying height scales
-				if (LevelInfo[x][y].shockSteep >10)
-				{
-					printf("");
-				}
-				if ((LevelInfo[x][y].shockSteep ==0) && (LevelInfo[x][y].tileType >=6))//If a sloped tile has no slope then it's a open tile.
-					{
-					LevelInfo[x][y].tileType =1;
-					}
-				if ((LevelInfo[x][y].tileType ==1) && (LevelInfo[x][y].shockSteep >0))	//similarly an open tile can't have a slope at all
-					{
-					 LevelInfo[x][y].shockSteep=0;
-					}
-				LevelInfo[x][y].indexObjectList = getValAtAddress(lev_ark,address_pointer+4,16);
+			//LevelInfo[x][y].wallTexture = 270;//debug
+			//LevelInfo[x][y].shockCeilingTexture = 273;
+			LevelInfo[x][y].North = LevelInfo[x][y].wallTexture;
+			LevelInfo[x][y].South = LevelInfo[x][y].wallTexture;
+			LevelInfo[x][y].East = LevelInfo[x][y].wallTexture;
+			LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
 
+			LevelInfo[x][y].isWater = 0;	//No swimming in shock.
+			LevelInfo[x][y].floorHeight = ((lev_ark[address_pointer + 1]) & 0x1F);
+			LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
-				//if(LevelInfo[x][y].indexObjectList!=0)
-				//	{
-				//	printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
-				//	}
+			LevelInfo[x][y].ceilingHeight = ((lev_ark[address_pointer + 2]) & 0x1F);
+			LevelInfo[x][y].ceilingHeight = ((LevelInfo[x][y].ceilingHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
-/*
-	xxxxx0xx	Floor & ceiling, same direction
-	xxxxx4xx	Floor & ceiling, ceiling opposite dir to tile type
-	xxxxx8xx	Floor only
-	xxxxxCxx	Ceiling only
-*/
-				LevelInfo[x][y].shockSlopeFlag = (getValAtAddress(lev_ark,address_pointer+8,32) >> 10) & 0x03;
-				LevelInfo[x][y].UseAdjacentTextures = (getValAtAddress(lev_ark,address_pointer+8,32) >> 8) & 0x01;
-				LevelInfo[x][y].shockTextureOffset = getValAtAddress(lev_ark,address_pointer+8,32) & 0xF;
-//unknownflags
-//70E000E0
-//	printf("\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
-				LevelInfo[x][y].shockShadeLower = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 16) & 0x0F;
-				LevelInfo[x][y].shockShadeUpper = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 24) & 0x0F;
-				LevelInfo[x][y].shadeUpperGlobal = 0;
-				LevelInfo[x][y].shadeLowerGlobal = 0;
-				LevelInfo[x][y].shockNorthOffset =LevelInfo[x][y].shockTextureOffset;
-				LevelInfo[x][y].shockSouthOffset =LevelInfo[x][y].shockTextureOffset;
-				LevelInfo[x][y].shockEastOffset =LevelInfo[x][y].shockTextureOffset;
-				LevelInfo[x][y].shockWestOffset =LevelInfo[x][y].shockTextureOffset;
+			//Need to know heights in various directions for alignments.
+			//Will set these properly after loading levels.
+			LevelInfo[x][y].shockNorthCeilHeight = LevelInfo[x][y].ceilingHeight;
+			LevelInfo[x][y].shockSouthCeilHeight = LevelInfo[x][y].ceilingHeight;
+			LevelInfo[x][y].shockEastCeilHeight = LevelInfo[x][y].ceilingHeight;
+			LevelInfo[x][y].shockWestCeilHeight = LevelInfo[x][y].ceilingHeight;
 
-				LevelInfo[x][y].SHOCKSTATE[0] = getValAtAddress(lev_ark, address_pointer + 0xC, 8);
-				LevelInfo[x][y].SHOCKSTATE[1] = getValAtAddress(lev_ark, address_pointer + 0xD, 8);
-				LevelInfo[x][y].SHOCKSTATE[2] = getValAtAddress(lev_ark, address_pointer + 0xE, 8);
-				LevelInfo[x][y].SHOCKSTATE[3] = getValAtAddress(lev_ark, address_pointer + 0xF, 8);
+			LevelInfo[x][y].shockSteep = (lev_ark[address_pointer + 3] & 0x0f);
+			LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+			if ((LevelInfo[x][y].shockSteep == 13) || (LevelInfo[x][y].shockSteep >= 15))
+			{
+				printf("");
+			}
+			if ((LevelInfo[x][y].shockSteep == 0) && (LevelInfo[x][y].tileType >= 6))//If a sloped tile has no slope then it's a open tile.
+			{
+				LevelInfo[x][y].tileType = 1;
+			}
+			if ((LevelInfo[x][y].tileType == 1) && (LevelInfo[x][y].shockSteep > 0))	//similarly an open tile can't have a slope at all
+			{
+				LevelInfo[x][y].shockSteep = 0;
+			}
+			LevelInfo[x][y].indexObjectList = getValAtAddress(lev_ark, address_pointer + 4, 16);
 
 
+			//if(LevelInfo[x][y].indexObjectList!=0)
+			//	{
+			//	printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
+			//	}
+
+			/*
+				xxxxx0xx	Floor & ceiling, same direction
+				xxxxx4xx	Floor & ceiling, ceiling opposite dir to tile type
+				xxxxx8xx	Floor only
+				xxxxxCxx	Ceiling only
+				*/
+			LevelInfo[x][y].shockSlopeFlag = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 10) & 0x03;
+			LevelInfo[x][y].UseAdjacentTextures = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 8) & 0x01;
+			LevelInfo[x][y].shockTextureOffset = getValAtAddress(lev_ark, address_pointer + 8, 32) & 0xF;
+			//unknownflags
+			//70E000E0
+			//	printf("\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
+			LevelInfo[x][y].shockShadeLower = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 16) & 0x0F;
+			LevelInfo[x][y].shockShadeUpper = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 24) & 0x0F;
+			LevelInfo[x][y].shadeUpperGlobal = 0;
+			LevelInfo[x][y].shadeLowerGlobal = 0;
+			LevelInfo[x][y].shockNorthOffset = LevelInfo[x][y].shockTextureOffset;
+			LevelInfo[x][y].shockSouthOffset = LevelInfo[x][y].shockTextureOffset;
+			LevelInfo[x][y].shockEastOffset = LevelInfo[x][y].shockTextureOffset;
+			LevelInfo[x][y].shockWestOffset = LevelInfo[x][y].shockTextureOffset;
+
+			LevelInfo[x][y].SHOCKSTATE[0] = getValAtAddress(lev_ark, address_pointer + 0xC, 8);
+			LevelInfo[x][y].SHOCKSTATE[1] = getValAtAddress(lev_ark, address_pointer + 0xD, 8);
+			LevelInfo[x][y].SHOCKSTATE[2] = getValAtAddress(lev_ark, address_pointer + 0xE, 8);
+			LevelInfo[x][y].SHOCKSTATE[3] = getValAtAddress(lev_ark, address_pointer + 0xF, 8);
+			
+			//LevelInfo[x][y].indexObjectList=0;
+			//if (y == 0)
+			//{
+			//	LevelInfo[x][y].tileType = TILE_SLOPE_N;
+			//	LevelInfo[x][y].shockSlopeFlag=SLOPE_FLOOR_ONLY;
+			//	LevelInfo[x][y].floorHeight=x;
+			//	LevelInfo[x][y].shockSteep=11;
+			//}
 				address_pointer=address_pointer+16;
 			}
 		}
