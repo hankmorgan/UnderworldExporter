@@ -309,41 +309,48 @@ if (t.Render == 1)
 		{
 		case TILE_SOLID:	//0
 			{	//solid
+								break;
 			RenderSolidTile(x,y,t,Water);
 			return;
 			}
 		case TILE_OPEN:		//1
 			{//open
+								break;
 			if (skipFloor !=1) {RenderOpenTile(x,y,t,Water,0);}	//floor
 			if ((game == SHOCK) && (skipCeil!=1)) {RenderOpenTile(x,y,t,Water,1);}	//ceiling
 			return;
 			}
 		case 2: 
 			{//diag se
+				  break;
 			if (skipFloor !=1) {RenderDiagSETile(x,y,t,Water,0);}//floor
 			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagSETile(x,y,t,Water,1);}
 			return;		
 			}
 		case 3: 
 			{	//diag sw 
+				  break;
 			if (skipFloor !=1) {RenderDiagSWTile(x,y,t,Water,0);}//floor
 			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagSWTile(x,y,t,Water,1);}
 			return;		
 			}
 		case 4: 	
 			{	//diag ne
+				  break;
 			if (skipFloor !=1) {RenderDiagNETile(x,y,t,Water,invert);}//floor
 			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagNETile(x,y,t,Water,1);}
 			return;		
 			}
 		case 5: 
 			{//diag nw
+				  break;
 			if (skipFloor !=1) {RenderDiagNWTile(x,y,t,Water,invert);}//floor
 			if ((game == SHOCK) && (skipCeil!=1)) {RenderDiagNWTile(x,y,t,Water,1);}
 			return;
 			}	
 		case TILE_SLOPE_N:	//6
 			{//slope n
+								break;
 			switch (t.shockSlopeFlag)
 				{
 				case SLOPE_BOTH_PARALLEL:
@@ -406,6 +413,7 @@ if (t.Render == 1)
 			}
 		case TILE_SLOPE_E:		//slope e 8	
 			{
+									break;
 			switch (t.shockSlopeFlag)
 				{
 				case SLOPE_BOTH_PARALLEL:
@@ -437,6 +445,7 @@ if (t.Render == 1)
 			}
 		case TILE_SLOPE_W: 	//9
 			{ //slope w
+								break;
 			switch (t.shockSlopeFlag)
 				{
 				case SLOPE_BOTH_PARALLEL:
@@ -952,14 +961,18 @@ if (floorTexture <0)
 						((face != fCEIL) && (t.shockSlopeFlag == SLOPE_FLOOR_ONLY) || (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
 						)
 					{
+						if (PrimitiveCount == 135)
+						{
+							printf("");
+						}
 						floorAlign1 = textureMasters[floorTexture].floor_align2_1;
 						floorAlign2 = textureMasters[floorTexture].floor_align2_2;
 						floorAlign3 = textureMasters[floorTexture].floor_align2_3;
 						floorAlign4 = textureMasters[floorTexture].floor_align1_1;
 						floorAlign5 = -textureMasters[floorTexture].floor_align1_2 / scaleFactor;  //scale factor
-						float shiftPoint = t.floorHeight + (t.tileY * t.shockSteep); //get a position where that slope intercects the axis
+						float shiftPoint =(t.tileY+1) * t.shockSteep+t.floorHeight;
 						shiftFactor = getSteepOffset(t.shockSteep) * (float)shiftPoint;
-						floorAlign6 =  shiftFactor;
+						floorAlign6 =  -shiftFactor;
 						//floorAlign6 = textureMasters[floorTexture].floor_align1_3;	//shift factor.
 					}
 					else if ((face = fCEIL) && (t.shockSlopeFlag == SLOPE_BOTH_OPPOSITE))
