@@ -1,264 +1,264 @@
-0 a_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-1 a_mossy_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-2 a_cracked_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-3 a_drain textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-4 a_vine-covered_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-5 a_tapestry textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-6 the_Banner_of_Cabirus textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-7 a_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-8 a_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-9 the_Standard_of_the_Mountainfolk textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-10 the_Standard_of_the_Knights textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-11 a_grating textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-12 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-13 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-14 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-15 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-16 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-17 a_mossy_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-18 the_Standard_of_the_Silver_Serpent textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-19 a_cracked_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-20 a_drain textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-21 a_vine-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-22 a_tapestry textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-23 a_grating textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-24 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-25 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-26 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-27 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-28 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-29 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-30 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-31 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-32 a_mossy_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-33 a_mossy_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-34 a_waterfall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-35 a_grating textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-36 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-37 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-38 the_locked_doors_of_the_Abyss textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-39 the_locked_doors_of_the_Abyss textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0
-40 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-41 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-42 a_vine-covered_natural_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-43 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-44 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-45 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-46 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-47 a_stone_slab_with_a_three-pronged_indentation textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-48 a_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-49 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-50 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-51 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-52 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-53 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-54 a_drain textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-55 a_cracked_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-56 a_vine-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-57 a_grating textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-58 a_moss-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-59 the_Banner_of_Cabirus textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-60 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-61 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-62 the_Standard_of_the_Silver_Sapling textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-63 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0
-64 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0
-65 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-66 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-67 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-68 a_moss-covered_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-69 a_moss-covered_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-70 a_pipe textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-71 a_drain textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-72 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-73 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0
-74 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0
-75 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0
-76 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-77 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-78 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-79 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-80 a_peeling_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-81 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-82 a_peeling_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-83 a_small_rusty_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-84 a_brick_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-85 a_brick_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-86 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-87 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-88 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-89 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-90 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-91 a_Standard_of_the_Silver_Serpent textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-92 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-93 a_peeling_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-94 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0
-95 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0
-96 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-97 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-98 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-99 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-100 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0
-101 nothing textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-102 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-103 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-104 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-105 a_mossy_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-106 a_cracked_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-107 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-108 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-109 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-110 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-111 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-112 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-113 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-114 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-115 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-116 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-117 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-118 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-119 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-120 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-121 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-122 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-123 the_Standard_of_the_Silver_Serpent textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-124 the_Standard_of_the_Seers textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-125 the_Standard_of_the_Seers textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-126 a_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0
-127 a_window textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-128 a_gold-veined_rough_hewn_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-129 a_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0
-130 a_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0
-131 a_mossy_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0
-132 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-133 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-134 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-135 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-136 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-137 a_stairway_leading_down textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-138 a_moss-covered_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-139 a_stairway_leading_up textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-140 a_stairway_leading_up textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-141 a_stairway_leading_down textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-142 a_window textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-143 a_princess_chained_to_a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-144 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-145 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-146 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-147 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-148 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-149 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-150 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-151 a_cracked_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-152 a_vine-covered_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-153 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-154 a_mossy_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-155 the_Banner_of_Cabirus textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-156 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-157 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-158 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-159 the_Standard_of_the_Knights textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-160 a_caved-in_stairway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-161 a_caved-in_passageway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-162 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-163 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-164 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-165 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-166 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-167 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-168 a_mossy_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-169 a_cracked_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-170 a_drain textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-171 a_vine-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-172 a_tapestry textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-173 a_grating textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-174 a_moss-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-175 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-176 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-177 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0
-178 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-179 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-180 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-181 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-182 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-183 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-184 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-185 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-186 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-187 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-188 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-189 an_ankh textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-190 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-191 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-192 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-193 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-194 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-195 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-196 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-197 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-198 a_waterfall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-199 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-200 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-201 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-202 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-203 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-204 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-205 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0
-206 a_lavafall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-207 a_rough_hewn_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-208 a_rough_hewn_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-209 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-210 a_psychedellic_sixties_kaleidescope_viewed_through_rose_colored_glasses textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-211 a_glowing_blue_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-212 a_glowing_blue_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-213 a_glowing_blue_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-214 a_glowing_red_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-215 a_glowing_red_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-216 a_glowing_red_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-217 a_glowing_green_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-218 a_glowing_green_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-219 a_glowing_green_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-220 a_straw_bed textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-221 rivulets_of_lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-222 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-223 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-224 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-225 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-226 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-227 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-228 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-229 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-230 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-231 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-232 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-233 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-234 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-235 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-236 nothing textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-237 lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-238 lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-239 rivulets_of_lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-240 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-241 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-242 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-243 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-244 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-245 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-246 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-247 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-248 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-249 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-250 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-251 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-252 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-253 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-254 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-255 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-256 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-257 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-258 a_stone_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-259 a_puddle textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-260 a_puddle textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-261 a_stone_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-262 a_stone_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
-263 the_ceiling textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0
+0 a_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+1 a_mossy_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+2 a_cracked_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+3 a_drain textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+4 a_vine-covered_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+5 a_tapestry textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+6 the_Banner_of_Cabirus textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+7 a_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+8 a_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+9 the_Standard_of_the_Mountainfolk textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+10 the_Standard_of_the_Knights textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+11 a_grating textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+12 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+13 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+14 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+15 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+16 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+17 a_mossy_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+18 the_Standard_of_the_Silver_Serpent textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+19 a_cracked_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+20 a_drain textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+21 a_vine-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+22 a_tapestry textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+23 a_grating textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+24 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+25 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+26 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+27 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+28 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+29 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+30 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+31 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+32 a_mossy_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+33 a_mossy_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+34 a_waterfall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+35 a_grating textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+36 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+37 a_natural_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+38 the_locked_doors_of_the_Abyss textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+39 the_locked_doors_of_the_Abyss textures/darkmod/stone/brick/rough_big_blocks03 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+40 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+41 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+42 a_vine-covered_natural_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+43 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+44 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+45 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+46 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+47 a_stone_slab_with_a_three-pronged_indentation textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+48 a_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+49 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+50 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+51 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+52 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+53 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+54 a_drain textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+55 a_cracked_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+56 a_vine-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+57 a_grating textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+58 a_moss-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+59 the_Banner_of_Cabirus textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+60 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+61 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+62 the_Standard_of_the_Silver_Sapling textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+63 an_irregular_stone_wall textures/darkmod/stone/brick/rough_blocks02 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+64 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+65 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+66 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+67 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+68 a_moss-covered_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+69 a_moss-covered_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+70 a_pipe textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+71 a_drain textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+72 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+73 a_natural_stone_wall textures/darkmod/stone/natural/deep_cave_dark_01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+74 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+75 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+76 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+77 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+78 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+79 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+80 a_peeling_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+81 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+82 a_peeling_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+83 a_small_rusty_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+84 a_brick_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+85 a_brick_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+86 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+87 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+88 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+89 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+90 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+91 a_Standard_of_the_Silver_Serpent textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+92 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+93 a_peeling_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+94 a_stucco_wall textures/darkmod/plaster/adobe_rough 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+95 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+96 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+97 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+98 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+99 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+100 nothing textures/common/caulk 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+101 nothing textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+102 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+103 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+104 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+105 a_mossy_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+106 a_cracked_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+107 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+108 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+109 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+110 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+111 a_finished_oak_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+112 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+113 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+114 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+115 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+116 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+117 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+118 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+119 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+120 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+121 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+122 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+123 the_Standard_of_the_Silver_Serpent textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+124 the_Standard_of_the_Seers textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+125 the_Standard_of_the_Seers textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+126 a_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+127 a_window textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+128 a_gold-veined_rough_hewn_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+129 a_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+130 a_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+131 a_mossy_rough_hewn_wall textures/darkmod/stone/natural/grey_cracked_001 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+132 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+133 a_tapestry textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+134 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+135 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+136 a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+137 a_stairway_leading_down textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+138 a_moss-covered_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+139 a_stairway_leading_up textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+140 a_stairway_leading_up textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+141 a_stairway_leading_down textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+142 a_window textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+143 a_princess_chained_to_a_brick_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+144 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+145 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+146 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+147 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+148 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+149 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+150 a_drain textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+151 a_cracked_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+152 a_vine-covered_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+153 a_grating textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+154 a_mossy_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+155 the_Banner_of_Cabirus textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+156 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+157 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+158 an_irregular_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+159 the_Standard_of_the_Knights textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+160 a_caved-in_stairway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+161 a_caved-in_passageway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+162 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+163 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+164 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+165 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+166 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+167 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+168 a_mossy_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+169 a_cracked_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+170 a_drain textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+171 a_vine-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+172 a_tapestry textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+173 a_grating textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+174 a_moss-covered_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+175 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+176 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+177 an_irregular_stone_wall textures/darkmod/stone/brick/rough_big_blocks04_brown 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+178 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+179 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+180 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+181 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+182 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+183 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+184 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+185 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+186 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+187 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+188 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+189 an_ankh textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+190 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+191 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+192 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+193 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+194 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+195 a_stone_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+196 a_massive_stone_door textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+197 a_marble_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+198 a_waterfall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+199 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+200 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+201 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+202 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+203 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+204 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+205 a_marble_wall textures/darkmod/stone/flat/rough_marble_dark01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+206 a_lavafall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+207 a_rough_hewn_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+208 a_rough_hewn_wall textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+209 a_pipe textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+210 a_psychedellic_sixties_kaleidescope_viewed_through_rose_colored_glasses textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+211 a_glowing_blue_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+212 a_glowing_blue_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+213 a_glowing_blue_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+214 a_glowing_red_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+215 a_glowing_red_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+216 a_glowing_red_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+217 a_glowing_green_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+218 a_glowing_green_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+219 a_glowing_green_pathway textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+220 a_straw_bed textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+221 rivulets_of_lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+222 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+223 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+224 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+225 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+226 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+227 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+228 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+229 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+230 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+231 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+232 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+233 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+234 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+235 a_rough_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+236 nothing textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+237 lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+238 lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+239 rivulets_of_lava textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+240 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+241 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+242 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+243 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+244 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+245 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+246 water textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+247 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+248 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+249 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+250 a_marble_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+251 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+252 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+253 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+254 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+255 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+256 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+257 a_dirt_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+258 a_stone_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+259 a_puddle textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+260 a_puddle textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+261 a_stone_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+262 a_stone_floor textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0
+263 the_ceiling textures/darkmod/carpet/rugs/ornate_black_gold01 0.0078125 0 0 0.0078125 0 0 0 0.0078125 0 -0.0078125 0 0 0 0

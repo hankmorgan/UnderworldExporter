@@ -90,6 +90,10 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 		fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
 		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n\telse\n\t{\n", shadeUpper1, shadeLower1);
 		fprintf(fBODY, "\tshadeUpperAdj =%d; shadeLowerAdj =%d;\n\t}\n", shadeUpper2, shadeLower2);
+		
+		//fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n",15);
+		//fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n",15);
+
 
 		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
 		//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
@@ -118,6 +122,7 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 					{
 						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((%d + (dir * %d)) / 15)) ;\n", x, y, LevelInfo[x][y].shockShadeUpper);
 						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeUpperAdj) / 15));\n", LevelInfo[x][y].shockShadeUpper);
+
 						//fprintf(fBODY, "\tlight_%02d_%02d_upper_state = light_%02d_%02d_upper_state + (dir * %d);\n", x, y,x,y,shadeUpper);
 						//fprintf(fBODY, "\tsys.println(\"Setting upper shade %02d %02d\"); \n",x,y);
 						//fprintf(fBODY, "\tsys.println(shade); \n");
@@ -126,10 +131,11 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 					if ((shadeLower1 >= 1) || (shadeLower2 >= 1))
 					{
 						//fprintf(fBODY, "\tshade =  (0.50) * (1 - ((light_%02d_%02d_lower_state + (dir * %d)) / 15)) ;\n", x, y, shadeLower);
-						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
 						//fprintf(fBODY, "\tlight_%02d_%02d_lower_state = light_%02d_%02d_lower_state + (dir * %d);\n", x, y, x, y, shadeLower);
 						//fprintf(fBODY, "\tsys.println(\"Setting lower shade %02d %02d\"); \n", x, y);
 						//fprintf(fBODY, "\tsys.println(shade); \n");
+
+						fprintf(fBODY, "\tshade = (0.50) * (1 - ((%d - shadeLowerAdj) / 15));\n", LevelInfo[x][y].shockShadeLower);
 						fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
 					}
 				}
@@ -1117,22 +1123,22 @@ switch (currObj.TriggerAction)
 		//printf("\tACTION_ACTIVATE\n");
 		if ( currObj.shockProperties[0]> 0)
 			{
-			if (currObj.shockProperties[1] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
+			if (currObj.shockProperties[1] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[0]]);
 			}
 		if ( currObj.shockProperties[2]> 0)
 			{
-			if (currObj.shockProperties[3] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
+			if (currObj.shockProperties[3] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[2]]);
 			}	
 		if (( currObj.shockProperties[4]> 0) &&  (currObj.shockProperties[4]< 1600))
 			{
-			if (currObj.shockProperties[5] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
+			if (currObj.shockProperties[5] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[4]]);
 			}	
 		if ( currObj.shockProperties[6]> 0)
 			{
-			if (currObj.shockProperties[7] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
+			if (currObj.shockProperties[7] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
 			shockScriptActivate(objList,objList[currObj.shockProperties[6]]); 
 			//printf("\t$%s.activate();\n",UniqueObjectName(objList[currObj.shockProperties[6]])); 
 			}
@@ -1504,6 +1510,40 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 {
 	switch (currObj.TriggerAction)
 	{
+	case ACTION_SET_VARIABLE:
+		{
+			//000C	int16	variable to set
+			//0010	int16	value
+			//0012	int16	?? action 00 set 01 add
+			//0014	int16	Optional message to receive
+			int varToSet = currObj.shockProperties[TRIG_PROPERTY_VARIABLE];
+			int valToSet = currObj.shockProperties[TRIG_PROPERTY_VALUE];
+			int Operation = currObj.shockProperties[TRIG_PROPERTY_OPERATION];
+			int Message = currObj.shockProperties[TRIG_PROPERTY_MESSAGE1];
+			fprintf(fBODY, "\tsys.println(\"Variable %d set. Value %d, %d operation. Message %d \");\n", varToSet, valToSet, Operation, Message);
+			if ((currObj.item_id != 378) && ((varToSet >= 0) && (varToSet <255)))
+			{
+				addGlobal(varToSet);
+				switch (Operation)
+				{
+				case 0:		//set value
+					fprintf(fBODY, "\tglobal_var_%d = %d;\n", varToSet, valToSet);
+					break;
+				case 1:		//Add value
+					fprintf(fBODY, "\tglobal_var_%d += %d;\n", varToSet, valToSet);
+					break;
+				default:
+					fprintf(fBODY, "\tsys.println(\"Unknown operation %d operation.\");\n", Operation);
+				}
+				if (Message >= 1)
+				{	//play back a message here?
+					fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", Message);
+					fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
+				}
+			}
+			break;
+		}
+
 	case ACTION_CHANGE_STATE:	//There is some sort of value change going on here. I need to see more examples.
 		{
 		fprintf(fBODY, "\tsys.println(\"Action change state by switch:%s)\");\n", UniqueObjectName(currObj));
@@ -1515,22 +1555,22 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 			fprintf(fBODY, "\tsys.println(\"Action activate by switch:%s)\");\n", UniqueObjectName(currObj));
 			if (currObj.shockProperties[0] > 0)
 			{
-				if (currObj.shockProperties[1] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
+				if (currObj.shockProperties[1] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[1] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[0]]);
 			}
 			if (currObj.shockProperties[2] > 0)
 			{
-				if (currObj.shockProperties[3] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
+				if (currObj.shockProperties[3] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[3] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[2]]);
 			}
 			if ((currObj.shockProperties[4] > 0) && (currObj.shockProperties[4]< 1600))
 			{
-				if (currObj.shockProperties[5] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
+				if (currObj.shockProperties[5] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[5] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[4]]);
 			}
 			if (currObj.shockProperties[6]> 0)
 			{
-				if (currObj.shockProperties[7] != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
+				if (currObj.shockProperties[7] / 10 != 0){ fprintf(fBODY, "\tsys.wait(%d);\n", currObj.shockProperties[7] / 10); }
 				shockScriptActivate(objList, objList[currObj.shockProperties[6]]);
 			}
 			break;

@@ -45,14 +45,17 @@ extern int GAME;
 
 int main()
 {
-int game = SHOCK;
+//int game = SHOCK;
+//int game = UWDEMO;
+int game = UW1;
+//int game = UW2;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
-levelNo = 1;
+levelNo = 0;
 
 GAME = game;
 switch (game)
@@ -60,7 +63,7 @@ switch (game)
 	case UWDEMO:
 	case UW1:
 	case UW2:
-		{BrushSizeX=80;BrushSizeY=80;BrushSizeZ=15;break;}
+		{BrushSizeX=120;BrushSizeY=120;BrushSizeZ=15;break;}
 	case SHOCK:
 		{BrushSizeX=120;BrushSizeY=120;BrushSizeZ=15;break;}//To ease on the steepness of some slopes that are impassible
 	}
@@ -73,7 +76,11 @@ switch (game)
 		case D3_MODE:
 		case ASCII_MODE:
 		case SCRIPT_BUILD_MODE:
-			exportMaps(game, mode, levelNo);
+			//for (levelNo = 0; levelNo < 15; levelNo++)
+			//{
+				printf("============================Level %d=========================\n", levelNo);
+				exportMaps(game, mode, levelNo);
+			//}
 			break;
 		case STRINGS_EXTRACT_MODE:
 			if (game == SHOCK)

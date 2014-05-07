@@ -84,7 +84,6 @@ switch (objectMasters[currobj.item_id].isEntity )
 				break;
 				}
 			case HIDDENDOOR:
-				printf("");
 			case DOOR:
 				{
 				RenderEntityDoor(game,x,y,z,currobj,objList,LevelInfo);
@@ -815,10 +814,10 @@ void RenderEntityContainer (int game, float x, float y, float z, ObjectItem &cur
 			fprintf(MAPFILE, "\"used_by5\" \"a_key_%03d_5\"\n", objList[currobj.link].link & 0x3F);
 			}				
 		//position
-		printf("\"origin\" \"%f %f %f\"\n",x,y,z);
+		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 		fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 		AttachToJoint(currobj);			
-		printf("}");
+		fprintf(MAPFILE, "}");
 		EntityCount++;
 
 		//now recursively get it's contents.
@@ -2937,6 +2936,7 @@ void replaceMapLink(tile levelInfo[64][64], xrefTable *xref, int tableSize, int 
 
 void getShockButtons(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, ObjectItem objList[1600], int objIndex)
 {
+//I'm keeping this seperate from trigger action retrieval for the moment.
 
 	//printf("\n\tVal_oc: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0c,16));
 	//printf("\tVal_oe: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0E,16));
@@ -2952,6 +2952,24 @@ if (objList[objIndex].ObjectSubClass ==0)
 	{//regular buttons and switches
 	switch (objList[objIndex].TriggerAction)	//Switches have action types as well.
 		{	
+			case ACTION_SET_VARIABLE:
+			{//Sets a game variable. I don't yet know what the various variables are. I suspect they may be in the exe so I'll have to just observe them in the wild?
+				//000C	int16	variable to set
+				//0010	int16	value
+				//0012	int16	?? action 00 set 01 add
+				//0014	int16	Optional message to receive
+				printf("\tACTION_SET_VARIABLE for %s\n", UniqueObjectName(objList[objIndex]));
+				printf("\t\tVariable to Set:%d\n", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+				printf("\t\tValue:%d", getValAtAddress(sub_ark, add_ptr + 0x10, 16));
+				printf("\t\taction?:%d (00 set 01 add)\n", getValAtAddress(sub_ark, add_ptr + 0x12, 16));
+				printf("\t\tOptional Message:%d\n", getValAtAddress(sub_ark, add_ptr + 0x14, 16));
+				DebugPrintTriggerVals(sub_ark, add_ptr, 28);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_OPERATION] = getValAtAddress(sub_ark, add_ptr + 0x12, 16);
+				objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1] = getValAtAddress(sub_ark, add_ptr + 0x14, 16);
+			break;
+			}
 		case ACTION_ACTIVATE:
 				{	//Assume same behaviour as a trigger?
 				printf("Switch:Action_Activate\n");
@@ -3118,7 +3136,7 @@ objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=getValAtAddress(sub_a
 	shockProperties[6]  = getValAtAddress(sub_ark,add_ptr+0x1A,16);
 	shockProperties[7]  = getValAtAddress(sub_ark,add_ptr+0x1B,16);
 	shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/	
-	printf("\tUnknown button type!");
+	printf("\tOther button type!");
 	DebugPrintTriggerVals(sub_ark, add_ptr, 30);
 
 }

@@ -491,14 +491,13 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].isWater=0;
 				LevelInfo[x][y].TerrainChange=0;
 				LevelInfo[x][y].hasElevator=0;
-				
 			}
 		}
 	for (y=0; y<64;y++)
 		{
 		for (x=0; x<64;x++)
 			{
-			if (LevelInfo[x][y].tileType == 0) //solid
+			if (LevelInfo[x][y].tileType >= 0) //was just solid only. Note: If textures are all wrong it's probably caused here!
 				{
 				//assign it's north texture
 				if (y<63)
