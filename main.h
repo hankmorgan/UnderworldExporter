@@ -18,7 +18,7 @@
 #define UW2_STRINGS_FILE "C:\\Games\\UW2\\data\\strings.pak"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\F32.TR"
+#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\OBJECTS.GR"
 #define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
 
 
@@ -64,12 +64,19 @@ extern int CEILING_HEIGHT;
 #define UW2 2
 #define SHOCK 3
 
-
 //ceiling constants
 //#xdefine UW_CEILING_HEIGHT 19
 //This is now set in buildtilemapshock in order to support variable height levels.
 //#dxefine SHOCK_CEILING_HEIGHT 32	 
 
+//Uw graphic formats.
+#define UW_GRAPHICS_BITMAPS -1	//BYT
+#define UW_GRAPHICS_TEXTURES 0	//.tr
+#define UW_GRAPHICS_GR 1	//.gr
+#define UW_GRAPHICS_TR 2
+#define UW_GRAPHICS_CR 3
+#define UW_GRAPHICS_SR 4
+#define UW_GRAPHICS_AR 5
 
 
 //Modes

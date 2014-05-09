@@ -2,14 +2,17 @@
 
 #include "gamegraphics.h"
 #include "utils.h"
+#include "main.h"
 
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize)
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType)
 {
     //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
 //    int indexNo;
     //unsigned char *BigEndBuf;          // Pointer to our buffered data (big endian format)
 	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
 	int i;
+	long NoOfTextures;
+
 	FILE *file = NULL;      // File pointer
 	
     if ((file = fopen(filePathIn, "rb")) == NULL)
@@ -29,28 +32,77 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     fread(textureFile, fileSize, 1,file);
 	fclose(file); 
 
-	//printf("Is always 2:%d\n", textureFile[0]);
-	//printf("xy resolution:%d\n", textureFile[1]);		
-	//printf("No of textures:%d\n", textureFile[3]<<8 | textureFile[2]);
-	long NoOfTextures;
-	if (ImageCount==-1)	//All the images.
-		 {
-		 NoOfTextures=textureFile[3]<<8 | textureFile[2];
-		 }
-	else
-		{
-		NoOfTextures=ImageCount;
-		}
+
+
+	switch (FileType)
+	{
+		case UW_GRAPHICS_BITMAPS:	//BYT
+		case UW_GRAPHICS_TEXTURES :	//.tr
+			printf("File Type :%d\n",  textureFile[0]);
+			printf("xy resolution:%d\n", textureFile[1]);
+			printf("No of textures:%d\n", textureFile[3] << 8 | textureFile[2]);
+			if (ImageCount == -1)	//All the images.
+				{
+				NoOfTextures = textureFile[3] << 8 | textureFile[2];
+				}
+			else
+				{
+				NoOfTextures = ImageCount;
+				}
+			for (i = 0; i <= NoOfTextures; i++)
+				{
+				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
+				writeBMP(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
+				}
+			break;
+		case UW_GRAPHICS_GR :	//.gr
+		case UW_GRAPHICS_TR :
+		case UW_GRAPHICS_CR :
+		case UW_GRAPHICS_SR :
+		case UW_GRAPHICS_AR :
+			printf("File Type (should be %d):%d\n", FileType, textureFile[0]);
+			printf("No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
+			if (ImageCount == -1)	//All the images.
+			{
+				NoOfTextures = textureFile[2] << 8 | textureFile[1];
+			}
+			else
+			{
+				NoOfTextures = ImageCount;
+			}
+			for (i = 0; i < NoOfTextures; i++)
+			{
+				long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
+				int BitMapWidth = getValAtAddress(textureFile,textureOffset+1, 8);;
+				int BitMapHeight = getValAtAddress(textureFile, textureOffset+2, 8);;
+				switch (getValAtAddress(textureFile, textureOffset, 8))
+					{
+					case 0x4://8 bit uncompressed
+						printf("8 bit uncompressed\n");
+						textureOffset = textureOffset + 5;
+						break;
+					case 0x8://4 bit run-length
+						printf("4 bit run-length\n");
+						textureOffset = textureOffset + 5;
+						break;
+					case 0xA://4 bit uncompressed
+						printf("4 bit uncompressed\n");
+						textureOffset = textureOffset + 5;
+						break;
+					default:
+						printf("Unknown file type\n");
+						break;
+					}
+				writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
+			}
+			break;
+	}
+
+
 	//NoOfTextures=0;
 	//printf("Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
 
-	for (i=0; i<=NoOfTextures;i++)
-	{
-	//long textureOffset = (textureFile[(i*4)+7]<<16 | textureFile[(i*4)+6]<<32 | textureFile[(i*4)+5]<<8 | textureFile[(i*4)+4]);
-	long textureOffset = getValAtAddress(textureFile,(i*4)+4,32);
-	//writeBMP(textureFile,textureOffset,32,32,i+211,pal);
-	writeBMP(textureFile,textureOffset,BitmapSize,BitmapSize,i,pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
-	}   	
+ 	
 return;	         
 }
 
@@ -117,7 +169,7 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	strcat(outFile,fileNumber);
 	strcat(outFile,".bmp");*/
 	
-	sprintf_s(outFile,80,"file_%04d.bmp", index );
+	sprintf_s(outFile,80,"Door_%04d.bmp", index );
 	//sprintf(outFile,sprintf(outFile, "-%d", index),".bmp");
 
 	FILE *outf ;
@@ -141,3 +193,5 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 
 
 }
+
+

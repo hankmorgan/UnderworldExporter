@@ -37,7 +37,7 @@ void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game
 void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
 void unpackStrings(int game);
 void unpackStringsShock(char filePath[255]);
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize);
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType);
 void SetDeathWatch(ObjectItem objList[1600]);
 
 extern int levelNo;
@@ -49,13 +49,13 @@ int main()
 //int game = UWDEMO;
 int game = UW1;
 //int game = UW2;
-int mode = D3_MODE;
+//int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
-//int mode = BITMAP_EXTRACT_MODE;
+int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
-levelNo = 0;
+levelNo = 2;
 
 GAME = game;
 switch (game)
@@ -93,7 +93,7 @@ switch (game)
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
-			extractTextureBitmap(-1,GRAPHICS_FILE,GRAPHICS_PAL_FILE,0, 32);
+			extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);

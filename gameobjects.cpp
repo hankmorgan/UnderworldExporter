@@ -719,38 +719,59 @@ if (game == SHOCK)
 void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {
 	//Each keey needs a unique name in game. Here we set the key index number on the key so that will work properly for scripting and map generation
-	int currobj;
+	//int currobj;
 
-	for (int x = 0; x < 64; x++)
+	//for (int x = 0; x < 64; x++)
+	//{
+	//	for (int y = 0; y < 64; y++)
+	//	{
+	//		if (LevelInfo[x][y].indexObjectList != 0)
+	//		{
+	//			currobj = LevelInfo[x][y].indexObjectList;
+	//			do
+	//			{
+	//				if (objectMasters[objList[currobj].item_id].type == KEY)
+	//				{
+	//					if (game == SHOCK)
+	//					{
+	//						//keycount[objList[currobj].ObjectSubClassIndex]++;
+	//						//objList[currobj].keyCount = keycount[objList[currobj].ObjectSubClassIndex];
+	//						//printf("%s", UniqueObjectName(objList[currobj]));
+	//					}
+	//					else
+	//					{
+	//						//keycount[objList[currobj].owner]++; 
+	//						//objList[currobj].keyCount = keycount[objList[currobj].owner];
+	//					}
+	//				}
+	//				currobj = objList[currobj].next;
+	//			} while (currobj > 0);
+	//		}
+	//	}
+
+	//}
+
+	for (int i = 0; i < 1600; i++)
 	{
-		for (int y = 0; y < 64; y++)
+		if ((objList[i].item_id >= 1) && (objList[i].item_id <= 1000))
 		{
-			if (LevelInfo[x][y].indexObjectList != 0)
+		
+			if (objectMasters[objList[i].item_id].type == KEY)
 			{
-				currobj = LevelInfo[x][y].indexObjectList;
-				do
+				if (game == SHOCK)
 				{
-					if (objectMasters[objList[currobj].item_id].type == KEY)
-					{
-						if (game == SHOCK)
-						{
-							keycount[objList[currobj].ObjectSubClassIndex]++;
-							objList[currobj].keyCount = keycount[objList[currobj].ObjectSubClassIndex];
-							printf("%s", UniqueObjectName(objList[currobj]));
-						}
-						else
-						{
-							keycount[objList[currobj].owner]++; 
-							objList[currobj].keyCount = keycount[objList[currobj].owner];
-						}
-					}
-					currobj = objList[currobj].next;
-				} while (currobj > 0);
+					keycount[objList[i].ObjectSubClassIndex]++;
+					objList[i].keyCount = keycount[objList[i].ObjectSubClassIndex];
+					//printf("%s", UniqueObjectName(objList[i]));
+				}
+				else
+				{
+					keycount[objList[i].owner]++;
+					objList[i].keyCount = keycount[objList[i].owner];
+				}
 			}
 		}
-
 	}
-
 
 }
 

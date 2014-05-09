@@ -486,11 +486,11 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].DimY=1;			
 				LevelInfo[x][y].Grouped=0;	
 				LevelInfo[x][y].VisibleFaces = 63;
-				//LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0));
+				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0));
 				//Force off water to save on compile time during testing.
-				LevelInfo[x][y].isWater=0;
-				LevelInfo[x][y].TerrainChange=0;
-				LevelInfo[x][y].hasElevator=0;
+				//LevelInfo[x][y].isWater=0;
+				//LevelInfo[x][y].TerrainChange=0;
+				//LevelInfo[x][y].hasElevator=0;
 			}
 		}
 	for (y=0; y<64;y++)
