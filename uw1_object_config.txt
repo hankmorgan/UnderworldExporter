@@ -113,6 +113,7 @@
 120 0 0 0 a_fire_elemental atdm:ai_monster_werebeast entity 0
 121 0 0 0 a_metal_golem atdm:ai_monster_werebeast entity 0
 122 0 0 0 a_wisp atdm:ai_lantern_bot entity 0
+123 0 0 0 GREAT_LORD_SNAQUEOTRAHN models/darkmod/decorative/hourglass.ase ignore 1
 127 0 0 0 an_adventurer atdm:ai_thief_thug entity 0
 128 0 0 0 a_sack models/darkmod/containers/bag1_small.lwo entity 19
 129 0 0 0 an_open_sack models/darkmod/containers/bag1_small.lwo entity 19

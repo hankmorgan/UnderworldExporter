@@ -104,15 +104,26 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxpal, pal,auxPalIndex);
 						outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						DecodeRLEBitmap(imgNibbles,datalen,outputImg,auxpal,i);
-						//writeBMP(pixels, 0, BitMapWidth, BitMapHeight, i, pal);
+						DecodeRLEBitmap(imgNibbles,datalen,BitMapWidth,BitMapHeight,outputImg,auxpal,i);
 						break;
 					case 0xA://4 bit uncompressed
 						printf("4 bit uncompressed\n");
-						textureOffset = textureOffset + 5;
+						//printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
+						//printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+						auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
+						//printf("Aux Pal = %d\n", auxPalIndex);
+						//printf("Data length = %d\n", getValAtAddress(textureFile, textureOffset + 4, 16));
+						datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
+						imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
+
+						textureOffset = textureOffset + 6;	//Start of raw data.
+						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
+						LoadAuxilaryPal(auxpal, pal, auxPalIndex);
+						//outputImg = new unsigned char[BitMapWidth*BitMapHeight];
+						writeBMP4(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal);
 						break;
 					default:
-						printf("Unknown file type\n");
+						printf("Unknown file type : %d\n", getValAtAddress(textureFile, textureOffset, 8));
 						break;
 					}
 				
@@ -162,7 +173,7 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	bmhead.bfOffBits = 1078;
 	bmihead.biSize = 40;
 	bmihead.biPlanes = 1;
-	bmihead.biBitCount = 4;
+	bmihead.biBitCount = 8;
 	bmihead.biCompression = 0;
 	bmihead.biXPelsPerMeter = 0;
 	bmihead.biYPelsPerMeter = 0;
@@ -240,7 +251,7 @@ void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex)
 
 }
 
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, unsigned char *outputImg, palette auxpal[16], int index)
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight ,unsigned char *outputImg, palette auxpal[16], int index)
 {
 int state=0; 
 int curr_pxl=0;
@@ -250,7 +261,7 @@ char nibble;
 
 int add_ptr=0;
 
-while ((curr_pxl<256) || (add_ptr<=datalen))
+while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 {
 	switch (state)
 	{
@@ -279,6 +290,10 @@ while ((curr_pxl<256) || (add_ptr<=datalen))
 				//get nibble for the palette;
 				nibble = getNibble(imageData, &add_ptr);
 				//for count times copy the palette data to the image at the output pointer
+				if (imageWidth*imageHeight - curr_pxl < count)
+					{
+						count = imageWidth*imageHeight - curr_pxl;
+					}
 				for (int i = 0; i < count; i++)
 					{
 					//printf("%d=%d\n", curr_pxl, nibble);
@@ -301,6 +316,10 @@ while ((curr_pxl<256) || (add_ptr<=datalen))
 		{
 		//printf("\nRunRecord\n");
 		count = getcount(imageData, &add_ptr, 4);
+		if (imageWidth*imageHeight - curr_pxl < count)
+			{
+				count = imageWidth*imageHeight - curr_pxl;
+			}
 		//printf("Count is %d\n", count);
 			//for that count copy the data / pal as it is
 			for (int i = 0; i < count; i++)
@@ -315,7 +334,7 @@ while ((curr_pxl<256) || (add_ptr<=datalen))
 		}
 	}
 }
-writeBMP4(outputImg,0,16,16,index, auxpal);
+writeBMP4(outputImg,0,imageWidth,imageHeight,index, auxpal);
 
 }
 
