@@ -18,8 +18,9 @@
 #define UW2_STRINGS_FILE "C:\\Games\\UW2\\data\\strings.pak"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\OBJECTS.GR"
+#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\objects.gr"
 #define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
+#define AUXILARY_PAL_FILE "C:\\Games\\UW1\\DATA\\allpals.dat"
 
 
 #define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
