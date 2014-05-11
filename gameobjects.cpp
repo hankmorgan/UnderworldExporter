@@ -601,7 +601,7 @@ switch (game)
 			objList[x].doordir  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01;
 			objList[x].invis  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 14 )& 0x01;
 			objList[x].is_quant = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 15) & 0x01;
-			
+
 			//position at +2
 			objList[x].zpos = (getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) & 0x7F;	//bits 0-6 I'll probably ignore this
 			objList[x].heading =  45 * (((getValAtAddress(lev_ark,objectsAddress+address_pointer+2,16)) >> 7) & 0x07); //bits 7-9
@@ -611,6 +611,7 @@ switch (game)
 			//+4
 			objList[x].quality =(getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)) & 0x3F;
 			objList[x].next = (getValAtAddress(lev_ark,objectsAddress+address_pointer+4,16)>>6) & 0x3FF;
+			
 			//+6
 			//objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) ) ;//bits 0-5
 
@@ -632,34 +633,73 @@ switch (game)
 			////printf("\n\tNext Object ID to this object is  %d", objList[x].next  );
 			////printf("\n%d free object. Value 4=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+6,16));
 			
-			//extra info //19 bytes
-			////printf("\n%d free extra inf. Value 5=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+8,8));
-			////printf("\n%d free extra inf. Value 6=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+9,8));
-			////printf("\n%d free extra inf. Value 7=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+10,8));
-			////printf("\n%d free extra inf. Value 8=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+11,8));
-			////printf("\n%d free extra inf. Value 9=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+12,8));
-			////printf("\n%d free extra inf. Value 10=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+13,8));
-			////printf("\n%d free extra inf. Value 11=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+14,8));
-			////printf("\n%d free extra inf. Value 12=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+15,8));
-			////printf("\n%d free extra inf. Value 13=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+16,8));
-			////printf("\n%d free extra inf. Value 14=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+17,8));
-			////printf("\n%d free extra inf. Value 15=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+18,8));
-			////printf("\n%d free extra inf. Value 16=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+19,8));
-			////printf("\n%d free extra inf. Value 17=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+20,8));
-			////printf("\n%d free extra inf. Value 18=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+21,8));
-			////printf("\n%d free extra inf. Value 19=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+22,8));
-			////printf("\n%d free extra inf. Value 20=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+23,8));
-			////printf("\n%d free extra inf. Value 21=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+24,8));
-			////printf("\n%d free extra inf. Value 22=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+25,8));
-			////printf("\n%d free extra inf. Value 23=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+26,8));
+
 			//cleanup of shock related stuff
 			objList[x].SHOCKLocked = 0;
 			////
+			UniqueObjectName(objList[x]);
+			printf("\n\nIndex: %d", objList[x].index);
+			printf("\tName: %s", UniqueObjectName(objList[x]));
+			printf("\n\tObject Type : %d %s", objList[x].item_id,objectMasters[objList[x].item_id].desc);
+			printf("\n\tLocation Tile(%d,%d) Position(%d,%d,%d) Heading (%d)", objList[x].tileX, objList[x].tileY, objList[x].x, objList[x].y, objList[x].zpos, objList[x].heading);
+
+			printf("\n\tFlags: %d", objList[x].flags);
+			printf("\n\t\tEnchantment: %d", objList[x].enchantment );
+			printf("\n\t\tDoordir : %d", objList[x].doordir);
+			printf("\n\t\tInvis : %d", objList[x].invis);
+			printf("\n\t\tIs Quant : %d", objList[x].is_quant);
+
+			printf("\n\tQuality : %d", objList[x].quality);
+			printf("\n\tNext : %d", objList[x].next);
+
+			printf("\n\tOwner : ", objList[x].owner);
+			if (objList[x].is_quant == 1)
+				{
+				if (objList[x].link > 512)
+					{
+					printf("\n\tSpecial Property) : %d", objList[x].link);
+					printf("\tless 512 is %d : ", objList[x].link -512);
+					}
+				else
+					{
+					printf("\n\tQuantity : %d", objList[x].link);
+					}
+					
+				}
+			else
+				{
+					printf("\n\tSpecial Link : %d", objList[x].link);
+				}
+			
+
 		if (x<256)	
 			{
 			//mobile objects			
 			objList[x].npc_whoami =getValAtAddress(lev_ark,objectsAddress+address_pointer+26,8);
 			objList[x].npc_attitude = (getValAtAddress(lev_ark,objectsAddress+address_pointer+13,16) >> 14);
+			printf("\n\tNPC Who Am I : %d ", objList[x].npc_whoami);
+			printf("\n\tNPC Attitude : %d ", objList[x].npc_attitude);
+
+			//extra info //19 bytes
+			printf("\n\tFree extra inf. Value 5=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+8,8));
+			printf("\n\t\t free extra inf. Value 6=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+9,8));
+			printf("\n\t\t free extra inf. Value 7=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+10,8));
+			printf("\n\t\t free extra inf. Value 8=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+11,8));
+			printf("\n\t\t free extra inf. Value 9=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+12,8));
+			printf("\n\t\t free extra inf. Value 10=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+13,8));
+			printf("\n\t\t free extra inf. Value 11=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+14,8));
+			printf("\n\t\t free extra inf. Value 12=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+15,8));
+			printf("\n\t\t free extra inf. Value 13=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+16,8));
+			printf("\n\t\t free extra inf. Value 14=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+17,8));
+			printf("\n\t\t free extra inf. Value 15=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+18,8));
+			printf("\n\t\t free extra inf. Value 16=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+19,8));
+			printf("\n\t\t free extra inf. Value 17=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+20,8));
+			printf("\n\t\t free extra inf. Value 18=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+21,8));
+			printf("\n\t\t free extra inf. Value 19=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+22,8));
+			printf("\n\t\t free extra inf. Value 20=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+23,8));
+			printf("\n\t\t free extra inf. Value 21=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+24,8));
+			printf("\n\t\t free extra inf. Value 22=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+25,8));
+			printf("\n\t\t free extra inf. Value 23=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+26,8));
 
 			address_pointer=address_pointer+8+19;
 			}
