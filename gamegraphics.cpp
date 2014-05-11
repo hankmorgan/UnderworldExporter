@@ -120,7 +120,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxpal, pal, auxPalIndex);
 						//outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						writeBMP4(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal);
+						writeBMP(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal);
 						break;
 					default:
 						printf("Unknown file type : %d\n", getValAtAddress(textureFile, textureOffset, 8));
@@ -334,7 +334,7 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 		}
 	}
 }
-writeBMP4(outputImg,0,imageWidth,imageHeight,index, auxpal);
+writeBMP(outputImg,0,imageWidth,imageHeight,index, auxpal);
 
 }
 
@@ -391,65 +391,65 @@ int i = 0;
 		}
 }
 
-void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16])
-{
-	BitMapHeader bmhead;
-	BitMapInfoHeader bmihead;
-
-	bmhead.bfType = 19778;
-	bmhead.bfReserved1 = 0;
-	bmhead.bfReserved2 = 0;
-	bmhead.bfOffBits = 1078;
-	bmihead.biSize = 40;
-	bmihead.biPlanes = 1;
-	bmihead.biBitCount = 8;
-	bmihead.biCompression = 0;
-	bmihead.biXPelsPerMeter = 0;
-	bmihead.biYPelsPerMeter = 0;
-	bmihead.biClrUsed = 0;
-	bmihead.biClrImportant = 0;
-
-	bmhead.bfOffBits = 1078; // Set up the .bmp header info
-	bmihead.biBitCount = 8;
-	bmihead.biClrUsed = 0;
-	bmihead.biClrImportant = 0;
-
-
-	//unsigned char *bits = unpackdat + substart + 28;
-	bmihead.biWidth = SizeH;	//bm->width;
-	bmihead.biHeight = SizeV;	// bm->height;
-	int imwidth = SizeH;		//bmihead.biWidth;
-	imwidth += (4 - (imwidth % 4));
-	bmihead.biSizeImage = imwidth * bmihead.biHeight;
-	bmhead.bfSize = bmihead.biSizeImage + 54;
-
-
-	char outFile[80];
-
-	sprintf_s(outFile, 80, "obj_%04d.bmp", index);
-
-	FILE *outf;
-	outf = fopen(outFile, "wb");
-
-	fwrite(&bmhead.bfType, 2, 1, outf);
-	fwrite(&bmhead.bfSize, 4, 1, outf);
-	fwrite(&bmhead.bfReserved1, 2, 1, outf);
-	fwrite(&bmhead.bfReserved2, 2, 1, outf);
-	fwrite(&bmhead.bfOffBits, 4, 1, outf);
-	fwrite(&bmihead, sizeof(BitMapInfoHeader), 1, outf);
-	fwrite(auxpal, 256 * 4, 1, outf);
-	char ch = 0;
-	for (int k = bmihead.biHeight - 1; k >= 0; k--) {
-		fwrite(Start + bits + (k*bmihead.biWidth), 1, bmihead.biWidth, outf);
-		if (bmihead.biWidth % 4 != 0)
-		for (int buf = 4; buf > bmihead.biWidth % 4; buf--)
-			fwrite(&ch, 1, 1, outf);
-	}
-
-		//fwrite(bits,SizeH*SizeV,1,outf);
-
-	
-	fclose(outf);
-
-
-}
+//void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16])
+//{
+//	BitMapHeader bmhead;
+//	BitMapInfoHeader bmihead;
+//
+//	bmhead.bfType = 19778;
+//	bmhead.bfReserved1 = 0;
+//	bmhead.bfReserved2 = 0;
+//	bmhead.bfOffBits = 1078;
+//	bmihead.biSize = 40;
+//	bmihead.biPlanes = 1;
+//	bmihead.biBitCount = 8;
+//	bmihead.biCompression = 0;
+//	bmihead.biXPelsPerMeter = 0;
+//	bmihead.biYPelsPerMeter = 0;
+//	bmihead.biClrUsed = 0;
+//	bmihead.biClrImportant = 0;
+//
+//	bmhead.bfOffBits = 1078; // Set up the .bmp header info
+//	bmihead.biBitCount = 8;
+//	bmihead.biClrUsed = 0;
+//	bmihead.biClrImportant = 0;
+//
+//
+//	//unsigned char *bits = unpackdat + substart + 28;
+//	bmihead.biWidth = SizeH;	//bm->width;
+//	bmihead.biHeight = SizeV;	// bm->height;
+//	int imwidth = SizeH;		//bmihead.biWidth;
+//	imwidth += (4 - (imwidth % 4));
+//	bmihead.biSizeImage = imwidth * bmihead.biHeight;
+//	bmhead.bfSize = bmihead.biSizeImage + 54;
+//
+//
+//	char outFile[80];
+//
+//	sprintf_s(outFile, 80, "obj_%04d.bmp", index);
+//
+//	FILE *outf;
+//	outf = fopen(outFile, "wb");
+//
+//	fwrite(&bmhead.bfType, 2, 1, outf);
+//	fwrite(&bmhead.bfSize, 4, 1, outf);
+//	fwrite(&bmhead.bfReserved1, 2, 1, outf);
+//	fwrite(&bmhead.bfReserved2, 2, 1, outf);
+//	fwrite(&bmhead.bfOffBits, 4, 1, outf);
+//	fwrite(&bmihead, sizeof(BitMapInfoHeader), 1, outf);
+//	fwrite(auxpal, 256 * 4, 1, outf);
+//	char ch = 0;
+//	for (int k = bmihead.biHeight - 1; k >= 0; k--) {
+//		fwrite(Start + bits + (k*bmihead.biWidth), 1, bmihead.biWidth, outf);
+//		if (bmihead.biWidth % 4 != 0)
+//		for (int buf = 4; buf > bmihead.biWidth % 4; buf--)
+//			fwrite(&ch, 1, 1, outf);
+//	}
+//
+//		//fwrite(bits,SizeH*SizeV,1,outf);
+//
+//	
+//	fclose(outf);
+//
+//
+//}

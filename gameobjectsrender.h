@@ -5,6 +5,8 @@
 #include "gameobjects.h"
 
 void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x, int y);
+void EntityRotation(int heading);
+void EntityRotationSHOCK(int heading);
 
 void RenderEntityA_DOOR_TRAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderEntityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);

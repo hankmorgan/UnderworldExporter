@@ -1,6 +1,8 @@
 #ifndef main_h
 	#define main_h
 
+#include "tilemap.h"
+#include "gameobjects.h"
 /*Game paths*/
 
 #define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
@@ -93,6 +95,19 @@ extern int CEILING_HEIGHT;
 void exportMaps(int game,int mode,int LevelNo);
 void LoadConfig(int game);
 int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
+
+int BuildTileMapUW(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256], char *filePath, int game, int LevelNo);
+int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[272], char *filePath, int game, int LevelNo);
+void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256], char *filePath, int game, int LevelNo);
+void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256], char *filePath, int game, int LevelNo);
+
+void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
+
+void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+
+ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 #endif /* main_h */
 

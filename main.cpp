@@ -12,6 +12,9 @@
 #include "scripting.h"
 #include "materials.h"
 #include "main.h"
+#include "asciimode.h"
+#include "gamestrings.h"
+#include "gamegraphics.h"
 
 
 using namespace std;
@@ -21,24 +24,23 @@ objectMaster *objectMasters;
 FILE *MAPFILE;
 //shockObjectMaster *shockObjectMasters;
 
-void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
-int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture_map[256] ,char *filePath, int game, int LevelNo);
-void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
-void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
-void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
-void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
-void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
-//void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockobjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
-void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
-int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1600],long texture_map[272], char *filePath, int game, int LevelNo);
-void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
-void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
-void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game);
-void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
-void unpackStrings(int game);
-void unpackStringsShock(char filePath[255]);
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType);
-void SetDeathWatch(ObjectItem objList[1600]);
+//void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+//
+
+//void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+//
+//
+//void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
+////void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockobjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
+//
+//
+//
+//
+//void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game);
+//void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
+
+//
+//
 
 extern int levelNo;
 extern int GAME;
@@ -280,6 +282,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
+			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
 			break; 			
 			}

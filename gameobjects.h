@@ -355,8 +355,9 @@ int xRef;
 int nextlink;
 };
 
-void EntityRotation(int heading);
-void EntityRotationSHOCK(int heading);
+
+
+
 void AttachToJoint(ObjectItem &currobj);
 int isTrigger(ObjectItem currobj);
 int isButton(ObjectItem currobj);
@@ -369,7 +370,7 @@ long nextObject(ObjectItem &currObj);
 //long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);
 //void createScriptCall(ObjectItem &currobj,float x,float y, float z);
-void EntityRotation(int heading);
+
 char *UniqueObjectName(ObjectItem currObj);
 int isButtonSHOCK(ObjectItem currobj);
 int isTriggerSHOCK(ObjectItem currobj);
@@ -387,7 +388,9 @@ void getShockButtons(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr
 void setElevatorProperties(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, ObjectItem objList[1600], int objIndex, short PrintDebug);
 void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 
-
+void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
+void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
+void SetDeathWatch(ObjectItem objList[1600]);
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
 
