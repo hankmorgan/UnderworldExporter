@@ -1,7 +1,7 @@
 #ifndef gameobjects_h
 	#define gameobjects_h
 	
-
+#include "tilemap.h"
 
 //Object types
 //guessing at what I'll need at the moment
@@ -368,17 +368,24 @@ int hasContents(ObjectItem currobj);
 long nextObject(ObjectItem &currObj);
 //long nextObjectShock(shockObjectItem &currObj);
 int isLock(ObjectItem currobj);
-void createScriptCall(ObjectItem &currobj,float x,float y, float z);
+//void createScriptCall(ObjectItem &currobj,float x,float y, float z);
 void EntityRotation(int heading);
 char *UniqueObjectName(ObjectItem currObj);
 int isButtonSHOCK(ObjectItem currobj);
 int isTriggerSHOCK(ObjectItem currobj);
 char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
 int getObjectIDByClass(int objClass, int subClass, int subClassIndex);
+void shockCommonObject();
 
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType, int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj);
+void getShockTriggerAction(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
+int LookupxRefTable(xrefTable *xref, int x, int y, int MasterIndex, int tableSize);
+void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
+void replaceMapLink(tile levelInfo[64][64], xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);
+void getShockButtons(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, ObjectItem objList[1600], int objIndex);
 
-
-
+void setElevatorProperties(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, ObjectItem objList[1600], int objIndex, short PrintDebug);
+void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 
 
 extern objectMaster *objectMasters;
