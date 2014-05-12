@@ -24,7 +24,6 @@ float calcAlignmentFactor(float adjacent, float opposite);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderShockDoorway(int game, int x, int y, tile &t, ObjectItem currDoor, tile LevelInfo[64][64], ObjectItem objList[1600]);
 float getSteepOffset(int steepness);
-void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floorAlign1, float *floorAlign2, float *floorAlign3, float *floorAlign4, float *floorAlign5, float *floorAlign6);
 
 int levelNo;
 long SHOCK_CEILING_HEIGHT;
@@ -93,7 +92,7 @@ int x; int y;
 				RenderObjectList(game,LevelInfo,objList); break;
 			case UW1:
 				RenderObjectList(game,LevelInfo,objList);
-				RenderLevelExits(game,LevelInfo,objList);
+				RenderLevelExits (game,LevelInfo,objList);
 				break;
 			case UW2:
 				RenderObjectList(game,LevelInfo,objList);

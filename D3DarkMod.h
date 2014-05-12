@@ -16,6 +16,8 @@ void RenderFloorAndCeiling(int game,tile LevelInfo[64][64]);
 void RenderElevatorLeakProtection(int game,tile LevelInfo[64][64]);
 void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
+void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floorAlign1, float *floorAlign2, float *floorAlign3, float *floorAlign4, float *floorAlign5, float *floorAlign6);
+
 
 void RenderSolidTile(int x, int y, tile &t, short Water);
 void RenderOpenTile(int x, int y, tile &t, short Water,short invert);

@@ -15,7 +15,7 @@
 #include "asciimode.h"
 #include "gamestrings.h"
 #include "gamegraphics.h"
-
+#include "Conversations.h"
 
 using namespace std;
 
@@ -51,12 +51,14 @@ int main()
 //int game = UWDEMO;
 int game = UW1;
 //int game = UW2;
-int mode = D3_MODE;
+//int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
+int mode = CONVERSATION_MODE;
+
 levelNo = 5;
 
 GAME = game;
@@ -104,6 +106,9 @@ switch (game)
 			//BuildGuiFiles();
 			//ExportModelFormat();
 			BuildWORDSXData(game);
+			break;
+		case CONVERSATION_MODE:
+			ExtractConversations(UW1);
 			break;
 		}
 	}
@@ -297,6 +302,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
+			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
 			break; 
 			}
@@ -310,6 +316,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
+			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;			
 			}

@@ -610,7 +610,9 @@ void PrintUWObjects(ObjectItem objList[1600])
 //Prints the object debug info for UW.
 	for (int x = 0; x < 1600; x++)
 		{
-	
+		if (objList[x].InUseFlag == 1)
+		{
+		
 		UniqueObjectName(objList[x]);
 		printf("\n\nIndex: %d", objList[x].index);
 		printf("\tName: %s", UniqueObjectName(objList[x]));
@@ -645,11 +647,12 @@ void PrintUWObjects(ObjectItem objList[1600])
 			printf("\n\tSpecial Link : %d", objList[x].link);
 		}
 
-		if (objList[x].npc_whoami !=0)
+		if (objList[x].npc_whoami >0)
 			{
 			printf("\n\tNPC Who Am I : %d ", objList[x].npc_whoami);
 			printf("\n\tNPC Attitude : %d ", objList[x].npc_attitude);
 			}
 
 		}
+	}
 }

@@ -14,6 +14,8 @@
 #define UW1_STRINGS_FILE "C:\\Games\\UW1\\data\\strings.pak"
 #define UW1_CLEAN_STRINGS_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_stringsclean.txt"
 
+#define UW1_CONVERSATION "C:\\Games\\UW1\\data\\cnv.ark"
+
 #define UW2_LEVEL_PATH "C:\\Games\\UW2\\DATA\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config.txt"
 #define UW2_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_object_config.txt"
@@ -89,6 +91,7 @@ extern int CEILING_HEIGHT;
 #define BITMAP_EXTRACT_MODE 3
 #define SCRIPT_BUILD_MODE 4
 #define MATERIALS_BUILD_MODE 5
+#define CONVERSATION_MODE 6
 
 
 

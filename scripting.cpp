@@ -393,6 +393,7 @@ fprintf(fMAIN,"\nvoid main()\n{\n");
 						fprintf(fBODY,"\n\nvoid start_%s()\n{\n",
 								UniqueObjectName(objList[nextObj]));
 						conditionalCount = 0;
+						//UW triggers get some of their parameters from the triggers that called them.
 						TriggerTargetX=objList[nextObj].quality ;
 						TriggerTargetY=objList[nextObj].owner ;
 						TriggerQuality=objList[nextObj].quality ;
