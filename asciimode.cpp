@@ -612,7 +612,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 		{
 		if (objList[x].InUseFlag == 1)
 		{
-		
+			printf("\n\nIn use %d", objList[x].InUseFlag);
 		UniqueObjectName(objList[x]);
 		printf("\n\nIndex: %d", objList[x].index);
 		printf("\tName: %s", UniqueObjectName(objList[x]));

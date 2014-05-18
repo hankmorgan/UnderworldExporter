@@ -49,17 +49,17 @@ int main()
 {
 //int game = SHOCK;
 //int game = UWDEMO;
-int game = UW1;
-//int game = UW2;
-//int mode = D3_MODE;
+//int game = UW1;
+int game = UW2;
+int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
-int mode = CONVERSATION_MODE;
+//int mode = CONVERSATION_MODE;
 
-levelNo = 5;
+levelNo =24;
 
 GAME = game;
 switch (game)

@@ -79,10 +79,10 @@ int x; int y;
 		}
 
 		RenderElevatorLeakProtection(game,LevelInfo);
-		if (game != SHOCK)
-			{			
-			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
-			}
+		//if (game != SHOCK)
+		//	{			
+		//	RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
+		//	}
 		fprintf (MAPFILE, "}");	//End worldspawn section of the .map file.
 		//Now start rendering entities.			
 		EntityCount=1;
@@ -578,6 +578,9 @@ void RenderFloorAndCeiling(int game, tile LevelInfo[64][64])
 //Not really floor and ceiling but just ceiling.
 switch (game)
 	{
+	case UWDEMO:
+	case UW1:
+	case UW2:
 	case SHOCK:
 		{//due to variable ceiling heights I have to render each tile's roof.
 			for (int y=0; y<=63;y++) 

@@ -583,7 +583,7 @@ switch (game)
 		{	//read in master object list
 
 			objList[x].index = x; 
-			objList[x].InUseFlag = 1;
+			objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 			objList[x].tileX=-1;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
 			objList[x].tileY=-1;
 			objList[x].levelno = LevelNo ;			

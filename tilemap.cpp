@@ -130,7 +130,7 @@ void CleanUp(tile LevelInfo[64][64], int game)
 			}
 		}
 	}
-return;
+if (game == SHOCK) {return;}
 	int j=1 ;
 	//Now lets combine the solids along particular axis
 	for (x=0;x<64;x++){
@@ -267,6 +267,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	int x;	
 	int y;
 	int i;
+	int CeilingTexture=0;
+	int textureMapSize;
 	
 	UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
 	
@@ -274,6 +276,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	{
 	case UWDEMO:	//UW Demo
 		{
+		textureMapSize=0x7a;
 		if ((file = fopen(filePath, "rb")) == NULL)
 			printf("Could not open specified file\n");
 		else
@@ -304,6 +307,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		}
 	case UW1:	//UW1
 		{
+		textureMapSize = 0x7a;
 		if ((file = fopen(filePath, "rb")) == NULL)
 			printf("Could not open specified file\n");
 		else
@@ -326,6 +330,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	
 	case UW2:	//Underworld 2
 		{
+		textureMapSize = 0x86;
 		if ((file = fopen(filePath, "rb")) == NULL)
 			printf("Could not open specified file\n");
 		else
@@ -382,24 +387,46 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		}		
 		
 	}
-	for (i=0; i<256;i++)
+
+	
+	for (i = 0; i<textureMapSize; i++)	//256
 		{//TODO: Only use this for texture lookups.
 		switch (game)
 			{
 			case UWDEMO:
 				{texture_map[i] = getValAtAddress(tex_ark,textureAddress+(i*2),16);break;}//tex_ark[textureAddress+i];break;}
 			case UW1:
-				{texture_map[i] = getValAtAddress(lev_ark,textureAddress+(i*2),16);break;}
+				{
+				if (i<58)	//Wall and floor textures are int 16s
+					{
+						texture_map[i] = getValAtAddress(lev_ark, textureAddress + (i * 2), 16);
+					}
+				else
+					{ //door textures are int 8s
+						texture_map[i] = getValAtAddress(lev_ark, textureAddress + (i * 1), 8);
+					}
+				if (i == 57)
+					{
+					CeilingTexture = texture_map[i]+210;
+					}
+				break;
+				}
 			case UW2:
 				{
 				if (textureAddress == -1)//Texture block was decompressed
 					{
-					texture_map[i] =getValAtAddress(tex_ark,(i*2),16);break;//tmp //textureAddress+
+					texture_map[i] =getValAtAddress(tex_ark,(i*2),16);//tmp //textureAddress+
 					}
 				else
 					{
-					texture_map[i] =getValAtAddress(tmp_ark,textureAddress+(i*2),16);break;//tmp //textureAddress+
+					texture_map[i] =getValAtAddress(tmp_ark,textureAddress+(i*2),16);//tmp //textureAddress+
 					}
+				printf("\nTexture %d = %d", i, texture_map[i]);
+				if (i == 0xf)
+					{
+					CeilingTexture=texture_map[i];
+					}
+				break;
 				}
 			}
 		}
@@ -421,7 +448,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].floorHeight = getHeight(FirstTileInt) ;
 				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
 
-				LevelInfo[x][y].ceilingHeight = UW_CEILING_HEIGHT;	//constant for uw				
+				LevelInfo[x][y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
 				
 				switch (game)
 					{
@@ -457,8 +484,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 					LevelInfo[x][y].wallTexture =0;
 					}					
 				//UW only has a single ceiling texture so this is ignored.
-				LevelInfo[x][y].shockCeilingTexture = LevelInfo[x][y].floorTexture;					
-				
+				//LevelInfo[x][y].shockCeilingTexture = LevelInfo[x][y].floorTexture;					
+				LevelInfo[x][y].shockCeilingTexture=CeilingTexture;
 				//There is only one possible steepness in UW so I set it's properties to match a similar tile in shock.
 				if (LevelInfo[x][y].tileType >=2)
 					{
@@ -1044,6 +1071,7 @@ for (int x=0; x<64;x++)
 				{
 				objList[nextObj].tileX=x;
 				objList[nextObj].tileY=y;
+				objList[nextObj].InUseFlag = 1;
 				nextObj=objList[nextObj].next;
 				}
 
