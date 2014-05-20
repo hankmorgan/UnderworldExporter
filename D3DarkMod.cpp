@@ -807,7 +807,7 @@ void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floo
 	case TILE_OPEN:
 		{
 			//flip the fourth parameter since I'm an idiot who did'nt check his work
-			*floorAlign4= -*floorAlign4;
+			//*floorAlign4= -*floorAlign4;
 			break;
 		}
 	case TILE_SLOPE_N:
