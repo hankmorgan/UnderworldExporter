@@ -122,6 +122,8 @@
 121 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 122 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 123 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+124 0 0 0 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+125 0 0 0 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 126 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 127 0 0 0 an_adventurer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 128 0 0 0 a_sack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

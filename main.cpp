@@ -59,7 +59,7 @@ int mode = D3_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 
-levelNo =24;
+levelNo =0;
 
 GAME = game;
 switch (game)
@@ -347,7 +347,7 @@ void exportMaps(int game,int mode,int LevelNo)
 		case D3_MODE:		//D3/Dark Mod
 			{
 			RenderDarkModLevel(LevelInfo,objList,game);	
-			fclose(MAPFILE);
+			fclose (MAPFILE) ;
 			break;
 			}
 		case SCRIPT_BUILD_MODE:
