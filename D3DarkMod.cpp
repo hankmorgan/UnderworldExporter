@@ -33,21 +33,32 @@ extern FILE *MAPFILE;
 
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game)
 {
+
 //Main processing loop for generating the level.
+
+	int x;
+	int y;
+
 iGame =game;
 
 //Levels use different ceiling heights.
 //Shock is variable, UW is fixed.
 switch (game)
 	{
-	case SHOCK:
-		{CEILING_HEIGHT=SHOCK_CEILING_HEIGHT;break;}
-	default:
-		{CEILING_HEIGHT=UW_CEILING_HEIGHT;break;}
+		case SHOCK:
+		{
+		CEILING_HEIGHT = SHOCK_CEILING_HEIGHT;
+		break;
+		}
+		default:
+		{
+			CEILING_HEIGHT = UW_CEILING_HEIGHT;
+			break;
+		}
+
 	}
-int x; int y; 
-//
-//File header of the map file.
+
+	//File header of the map file.
 	fprintf (MAPFILE, "Version 2\n");
 	fprintf (MAPFILE, "// entity 0\n{\n\"classname\" \"worldspawn\"\n");
 	//sick of starting at origin in dr.
@@ -55,6 +66,7 @@ int x; int y;
 	fprintf (MAPFILE, "\"editor_drLastCameraAngle\" \"-28.5 90.9 0\"\n");
 	PrimitiveCount=0;
 	fprintf (MAPFILE, "\n");
+
 	for (y=0; y<=63;y++) 
 		{
 		for (x=0; x<=63;x++)
@@ -73,16 +85,23 @@ int x; int y;
 				if (LevelInfo[x][y].shockDoor  == 1)
 					{//Adds a Shock door frame.
 						RenderShockDoorway(game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex],LevelInfo,objList);
+					} 
+				if ((LevelInfo[x][y].isWater == 1) && ((LevelInfo[x][y].tileType == TILE_OPEN) || (LevelInfo[x][y].tileType >= TILE_SLOPE_N)))
+					{
+						//render the ceilings of water tiles
+					LevelInfo[x][y].isWater=0;
+					RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
+					LevelInfo[x][y].isWater = 1;
 					}
 				}
 			}
 		}
 
 		RenderElevatorLeakProtection(game,LevelInfo);
-		//if (game != SHOCK)
-		//	{			
-		//	RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
-		//	}
+		if (game != SHOCK)
+			{			
+			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
+			}
 		fprintf (MAPFILE, "}");	//End worldspawn section of the .map file.
 		//Now start rendering entities.			
 		EntityCount=1;
@@ -180,7 +199,7 @@ int x; int y;
 							
 							}
 						
-						RenderDarkModTile(game,x,y,t,1,0,0,0);
+						RenderDarkModTile(game,x,y,t,1,0,0,1);
 						fprintf (MAPFILE, "}\n");
 						EntityCount++;	
 					}
@@ -578,43 +597,43 @@ void RenderFloorAndCeiling(int game, tile LevelInfo[64][64])
 //Not really floor and ceiling but just ceiling.
 switch (game)
 	{
-	case UWDEMO:
-	case UW1:
-	case UW2:
-	case SHOCK:
-		{//due to variable ceiling heights I have to render each tile's roof.
-			for (int y=0; y<=63;y++) 
-				{
-				fprintf (MAPFILE, "\n");
-				for (int x=0; x<=63;x++)
-					{
-						if ((LevelInfo[x][y].tileType == 1))
-							//Only do a ceiling for open and diagonals. everything else gets it's ceiling on the first pass due to slope flags
-							{
-							RenderDarkModTile(game,x,y,LevelInfo[x][y],0,1,0,0);
-							}
-					}
-				}
-		break;
-		}	
+	//case UWDEMO:
+	//case UW1:
+	//case UW2:
+	//case SHOCK:
+	//	{//due to variable ceiling heights I have to render each tile's roof.
+	//		for (int y=0; y<=63;y++) 
+	//			{
+	//			fprintf (MAPFILE, "\n");
+	//			for (int x=0; x<=63;x++)
+	//				{
+	//					if ((LevelInfo[x][y].tileType == 1))
+	//						//Only do a ceiling for open and diagonals. everything else gets it's ceiling on the first pass due to slope flags
+	//						{
+	//						//RenderDarkModTile(game,x,y,LevelInfo[x][y],0,1,0,0);
+	//						}
+	//				}
+	//			}
+	//	break;
+	//	}	
 	default:
 		{//UW has a single height ceiling. Just need to put a roof on her and a riverbed for water features.
 		//put a roof on her 
-		fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);
-		fprintf (MAPFILE, "{\nbrushDef3\n{\n");
-		//001	east face -absdist
-		fprintf (MAPFILE, "( 1 0 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n",-(64*BrushSizeX));
-		//010 north face -absdist
-		fprintf (MAPFILE, "( 0 1 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n",-(64*BrushSizeY));
-		//100	top face -absdist
-		fprintf (MAPFILE, "( 0 0 1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", -BrushSizeZ * (CEILING_HEIGHT+1));	
-		//00-1	west face +absdist
-		fprintf (MAPFILE, "( -1 0 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", +(0));
-		//0-1 0	south face +absdist
-		fprintf (MAPFILE, "( 0 -1 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", +(0));
-		//-100	bottom face +absdist
-		fprintf (MAPFILE, "( 0 0 -1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/darkmod/stone/flat/slate_rough_dark01\" 0 0 0\n", (BrushSizeZ * (CEILING_HEIGHT)));	
-		fprintf (MAPFILE, "}\n}\n");
+		//////fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);
+		//////fprintf (MAPFILE, "{\nbrushDef3\n{\n");
+		////////001	east face -absdist
+		//////fprintf (MAPFILE, "( 1 0 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n",-(64*BrushSizeX));
+		////////010 north face -absdist
+		//////fprintf (MAPFILE, "( 0 1 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n",-(64*BrushSizeY));
+		////////100	top face -absdist
+		//////fprintf (MAPFILE, "( 0 0 1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", -BrushSizeZ * (CEILING_HEIGHT+1));	
+		////////00-1	west face +absdist
+		//////fprintf (MAPFILE, "( -1 0 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", +(0));
+		////////0-1 0	south face +absdist
+		//////fprintf (MAPFILE, "( 0 -1 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", +(0));
+		////////-100	bottom face +absdist
+		//////fprintf (MAPFILE, "( 0 0 -1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/darkmod/stone/flat/slate_rough_dark01\" 0 0 0\n", (BrushSizeZ * (CEILING_HEIGHT)));	
+		//////fprintf (MAPFILE, "}\n}\n");
 		
 		//and a ceiling 
 		fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);

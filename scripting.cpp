@@ -241,12 +241,12 @@ void a_do_trap_cameraSCRIPT(char objDesc[80], int triggerX, int triggerY, int ob
 
 void a_do_trap_platformSCRIPT(char objDesc[80], int triggerX, int triggerY, int objId,int state,int up, int down)
 {
-    fprintf(fBODY,"\tif ( %s_%03d_%03d_state ==8)\n\t\t{\n",objDesc,triggerX,triggerY);
-    fprintf(fBODY,"\t\t$floor_%03d_%03d.move( DOWN, %d );\n", objDesc,triggerX,triggerY,down);
-    fprintf(fBODY,"\t\t%s_floor_%03d_%03d_state = 0;\n}\n", triggerX,triggerY);
+    fprintf(fBODY,"\tif ( %s_%03d_%03d_state ==8)\n\t\t{\n",objDesc, triggerX,triggerY);
+    fprintf(fBODY,"\t\t$floor_%03d_%03d.move( DOWN, %d );\n", triggerX,triggerY,down);
+    fprintf(fBODY,"\t\t%s_%03d_%03d_state = 0;\n}\n",objDesc, triggerX,triggerY);
     fprintf(fBODY,"\telse\n\t\t{\n");
-    fprintf(fBODY,"\t\t$floor_%03d_%03d.move ( UP, %d );\n" ,triggerX,triggerY,up);
-    fprintf(fBODY,"\t\t%s_floor_%03d_%03d_state++ ;\n\t}\n",objDesc,triggerX,triggerY);
+    fprintf(fBODY,"\t\t$floor_%03d_%03d.move ( UP, %d );\n" , triggerX,triggerY,up);
+    fprintf(fBODY,"\t\t%s_%03d_%03d_state++ ;\n\t}\n",objDesc,triggerX,triggerY);
 }
 
 void a_lock(int doorX, int doorY, int targetState)

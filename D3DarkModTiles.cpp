@@ -15,7 +15,6 @@ extern FILE *MAPFILE;
 
 void RenderDarkModTile(int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 {
-
 	//Picks the tile to render based on tile type/flags.
 	if (t.Render == 1)
 	{
@@ -2110,8 +2109,8 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 				fprintf(MAPFILE, "}\n}\n");
 
 				//Above the map for shock
-				if (game == SHOCK)
-				{
+				/*if (game == SHOCK)
+				{*/
 					fprintf(MAPFILE, "\n");
 					fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
 					fprintf(MAPFILE, "{\nbrushDef3\n{\n");
@@ -2131,11 +2130,11 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 					fprintf(MAPFILE, "( 0 -1 0 %d )", +((y)*BrushSizeY) - 10);
 					getWallTextureName(t, fSOUTH, 0);
 					//bottom face
-					fprintf(MAPFILE, "( 0 0 -1 %d )", CEILING_HEIGHT*BrushSizeZ);
+					fprintf(MAPFILE, "( 0 0 -1 %d )", (CEILING_HEIGHT+1)*BrushSizeZ);
 					getFloorTextureName(t, fBOTTOM);
 					//fprintf (MAPFILE, "0"); 
 					fprintf(MAPFILE, "}\n}\n");
-				}
+				//}
 			}
 		}
 	}
