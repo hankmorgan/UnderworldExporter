@@ -17,7 +17,7 @@ void RenderElevatorLeakProtection(int game,tile LevelInfo[64][64]);
 void RenderObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floorAlign1, float *floorAlign2, float *floorAlign3, float *floorAlign4, float *floorAlign5, float *floorAlign6);
-
+void getObjectTextureName(int game, int textureIndex, int face, int objType);
 
 void RenderSolidTile(int x, int y, tile &t, short Water);
 void RenderOpenTile(int x, int y, tile &t, short Water,short invert);
@@ -43,5 +43,7 @@ void RenderGenericTile(int x, int y, tile &t, int iCeiling ,int iFloor);
 void RenderLevelExits(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderEntityElevator(int game, tile LevelInfo[64][64], ObjectItem &currobj);
 void RenderGenericTileAroundOrigin(int x, int y, tile &t, int iCeiling ,int iFloor,int tileHeight);
+
+void RenderPillars(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 #endif /* d3darkmod_h */

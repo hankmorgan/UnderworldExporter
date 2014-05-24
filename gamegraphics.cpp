@@ -196,7 +196,7 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	
 	char outFile[80];
 
-	sprintf_s(outFile,80,"tmflat_%04d.bmp", index );
+	sprintf_s(outFile,80,"tmobj_%02d.bmp", index );
 
 	FILE *outf ;
 	outf = fopen(outFile,"wb");

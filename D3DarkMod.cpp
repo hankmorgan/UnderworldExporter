@@ -101,6 +101,7 @@ switch (game)
 		if (game != SHOCK)
 			{			
 			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
+			RenderPillars(game, LevelInfo, objList);
 			}
 		fprintf (MAPFILE, "}");	//End worldspawn section of the .map file.
 		//Now start rendering entities.			
@@ -876,10 +877,6 @@ void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floo
 			shiftFactor = getSteepOffset(t.shockSteep) * (float)shiftPoint;
 			*floorAlign6 = 1 + shiftFactor;
 		}
-		else
-		{
-			printf("x");
-		}
 
 		break;
 	}
@@ -1056,4 +1053,76 @@ void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floo
 	}
 
 
+}
+
+void RenderPillars(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
+{
+//Renders a pillar as a brush. I can't use an object here since it needs to extend to variable heights etc.
+int x; int y;
+float offX; float offY; float offZ;
+
+	for (y = 0; y <= 63; y++)
+	{
+		for (x = 0; x <= 63; x++)
+		{
+			if ((LevelInfo[x][y].indexObjectList != 0))
+			{
+				long nextObj = LevelInfo[x][y].indexObjectList;
+				while (nextObj != 0)
+				{
+					if (objectMasters[objList[nextObj].item_id].type == PILLAR)
+					{
+						int objType = objectMasters[objList[nextObj].item_id].type;
+						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
+						//Draw it around this point
+						int textureIndex = objList[nextObj].flags & 0x3F;	//Bottom 2 bits give the index of the pillar texture
+						fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+						fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+						//East face
+						fprintf(MAPFILE, "( 1 0 0 %f )", -(offX+5));
+						getObjectTextureName(game, textureIndex, fEAST, objType);
+						//North face
+						fprintf(MAPFILE, "( 0 1 0 %f ) ", -(offY+5));
+						getObjectTextureName(game, textureIndex, fNORTH, objType);
+						//Top face
+						fprintf(MAPFILE, "( 0 0 1 %d )", -( UW_CEILING_HEIGHT - LevelInfo[x][y].ceilingHeight)* BrushSizeZ);
+						getObjectTextureName(game, textureIndex, fTOP, objType);
+						//West face
+						fprintf(MAPFILE, "( -1 0 0 %f )", +(offX - 5));
+						getObjectTextureName(game, textureIndex, fWEST, objType);
+						//South face
+						fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 5));
+						getObjectTextureName(game, textureIndex, fSOUTH, objType);
+						//Bottom face 
+						fprintf(MAPFILE, "( 0 0 -1 %d ) ", LevelInfo[x][y].floorHeight * BrushSizeZ);
+						getObjectTextureName(game, textureIndex, fBOTTOM, objType);
+						fprintf(MAPFILE, "}\n}\n");
+
+					}
+					nextObj = objList[nextObj].next;
+				}
+			}
+		}
+	}
+}
+
+void getObjectTextureName(int game, int textureIndex, int face,int objType)
+{
+//Gets the texture for specified object.
+
+	switch (objType)
+		case PILLAR:
+		{//0.125 0 0 ) ( 0 0.03125 0 
+			fprintf(MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"", 0.125, 0.0, 0.0, 0.0, 0.03125, 0.0);
+			switch (game)
+				{
+				case UWDEMO:
+				case UW1:
+				{fprintf(MAPFILE, "textures/uw1/tmobj/tmobj_%02d", textureIndex); break; }
+				case UW2:
+				{fprintf(MAPFILE, "textures/uw2/tmobj/tmobj_%02d", textureIndex); break; }
+				}
+			fprintf(MAPFILE, "\" 0 0 0\n");
+			break;
+		}
 }

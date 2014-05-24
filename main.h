@@ -22,7 +22,7 @@
 #define UW2_STRINGS_FILE "C:\\Games\\UW2\\data\\strings.pak"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\HEADS.gr"
+#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\tmobj.gr"
 #define GRAPHICS_PAL_FILE "C:\\Games\\UW2\\DATA\\pals.dat"
 #define AUXILARY_PAL_FILE "C:\\Games\\UW2\\DATA\\allpals.dat"
 
@@ -44,6 +44,7 @@
 #define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock1.map"
 
 #define ENABLE_LIGHTING 1
+#define ENABLE_WATER 0
 
 /*Globals*/
 extern int BrushSizeX;

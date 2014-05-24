@@ -1464,7 +1464,7 @@ void RenderEntityTMAP(int game, float x, float y, float z, ObjectItem &currobj, 
 	}
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+//	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	//Renders a patch to display the object
 	RenderPatch(game, currobj.tileX, currobj.tileY, currobj.zpos, currobj.index, objList);
