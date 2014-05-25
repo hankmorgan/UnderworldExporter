@@ -102,10 +102,11 @@ switch (game)
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
 			//BuildSndShaderFiles();
-			//BuildMtrFiles(3);
+			//BuildShockMtrFiles(3);
+			BuildUWMtrFiles(UW2,1);
 			//BuildGuiFiles();
 			//ExportModelFormat();
-			BuildWORDSXData(game);
+			//BuildWORDSXData(game);
 			break;
 		case CONVERSATION_MODE:
 			ExtractConversations(UW1);

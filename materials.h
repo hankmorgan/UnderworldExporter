@@ -3,8 +3,9 @@
 
 void BuildXDataFile(int game);
 void BuildSndShaderFiles();
-void BuildMtrFiles(int MtrType);
+void BuildSHOCKMtrFiles(int MtrType);
 void BuildGuiFiles();
 void ExportModelFormat();
 void BuildWORDSXData(int game);
+void BuildUWMtrFiles(int game, int mtrType);
 #endif /*materials_h*/

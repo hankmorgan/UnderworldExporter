@@ -109,13 +109,15 @@ switch (game)
 		switch (game)
 			{
 			case UWDEMO:
-				RenderObjectList(game,LevelInfo,objList); break;
+				RenderObjectList(game,LevelInfo,objList); 
+				break;
 			case UW1:
 				RenderObjectList(game,LevelInfo,objList);
 				RenderLevelExits (game,LevelInfo,objList);
 				break;
 			case UW2:
 				RenderObjectList(game,LevelInfo,objList);
+				break;
 			case SHOCK:
 				RenderObjectList(game,LevelInfo,objList);
 				AddEmails(game, LevelInfo, objList);
@@ -675,7 +677,9 @@ for (y=0; y<=63;y++)
 					objList[nextObj].tileX=x;
 					objList[nextObj].tileY=y;
 					CalcObjectXYZ(game,&offX,&offY,&offZ,LevelInfo,objList,nextObj,x,y);
-					RenderEntity(game,offX,offY,offZ ,objList[nextObj],objList,LevelInfo);
+					if (objList[nextObj].AlreadyRendered != 1)
+						{RenderEntity(game,offX,offY,offZ ,objList[nextObj],objList,LevelInfo);}
+					objList[nextObj].AlreadyRendered=1;
 					nextObj=objList[nextObj].next;
 					}
 			}
