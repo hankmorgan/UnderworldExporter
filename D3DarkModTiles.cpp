@@ -1705,151 +1705,150 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 	case SHOCK_EAST:
 	case SHOCK_WEST:
 	{
+		//if(currDoor.heading == EAST) {offY =offY+DOORORIGINOFFSET;}else{offY =offY+DOORORIGINOFFSET;}
+		if ((heading == EAST) || (heading == SHOCK_EAST))
+		{
+			offY = (y*BrushY) + ((BrushY - doorWidth) / 2) + doorWidth;
+		}
+		else
+		{
+			offY = (y*BrushY) + ((BrushY - doorWidth) / 2);
+		}
+		//left side
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+		getWallTextureName(t, fSELF, 0);
+		//north face 
+		fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
+		getWallTextureName(t, fSELF, 0);
+		//top face
+		fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
+		getFloorTextureName(t, fTOP);
+		//west face
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
+		getWallTextureName(t, fSELF, 0);
+		//south face
+		if ((heading == EAST) || (heading == SHOCK_EAST))
+		{
+			fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY));
+		}
+		else
+			fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY)+doorWidth);
 
-					   //if(currDoor.heading == EAST) {offY =offY+DOORORIGINOFFSET;}else{offY =offY+DOORORIGINOFFSET;}
-					   if ((heading == EAST) || (heading == SHOCK_EAST))
-					   {
-						   offY = (y*BrushY) + ((BrushY - doorWidth) / 2) + doorWidth;
-					   }
-					   else
-					   {
-						   offY = (y*BrushY) + ((BrushY - doorWidth) / 2);
-					   }
-					   //left side
-					   fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-					   fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-					   //east face 
-					   fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
-					   getWallTextureName(t, fSELF, 0);
-					   //north face 
-					   fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
-					   getWallTextureName(t, fSELF, 0);
-					   //top face
-					   fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
-					   getFloorTextureName(t, fTOP);
-					   //west face
-					   fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
-					   getWallTextureName(t, fSELF, 0);
-					   //south face
-					   if ((heading == EAST) || (heading == SHOCK_EAST))
-					   {
-						   fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY));
-					   }
-					   else
-						   fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY)+doorWidth);
+		getWallTextureName(t, fSELF, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight*BrushZ);
+		getFloorTextureName(t, fBOTTOM);
+		//fprintf (MAPFILE, "0"); 
+		fprintf(MAPFILE, "}\n}\n");
 
-					   getWallTextureName(t, fSELF, 0);
-					   //bottom face
-					   fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight*BrushZ);
-					   getFloorTextureName(t, fBOTTOM);
-					   //fprintf (MAPFILE, "0"); 
-					   fprintf(MAPFILE, "}\n}\n");
+		//over the door
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+		getWallTextureName(t, fSELF, 0);
+		//north face 
+		fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
+		getWallTextureName(t, fSELF, 0);
+		//top face
+		fprintf(MAPFILE, "( 0 0 1 %f )", -BrushZ * (CEILING_HEIGHT + 1));
+		getFloorTextureName(t, fTOP);
+		//west face
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
+		getWallTextureName(t, fSELF, 0);
+		//south face
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(y*BrushY));
+		getWallTextureName(t, fSELF, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ) + doorHeight);
+		getFloorTextureName(t, fBOTTOM);
+		//fprintf (MAPFILE, "0"); 
+		fprintf(MAPFILE, "}\n}\n");
 
-					   //over the door
-					   fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-					   fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-					   //east face 
-					   fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
-					   getWallTextureName(t, fSELF, 0);
-					   //north face 
-					   fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
-					   getWallTextureName(t, fSELF, 0);
-					   //top face
-					   fprintf(MAPFILE, "( 0 0 1 %f )", -BrushZ * (CEILING_HEIGHT + 1));
-					   getFloorTextureName(t, fTOP);
-					   //west face
-					   fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
-					   getWallTextureName(t, fSELF, 0);
-					   //south face
-					   fprintf(MAPFILE, "( 0 -1 0 %f )", +(y*BrushY));
-					   getWallTextureName(t, fSELF, 0);
-					   //bottom face
-					   fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ) + doorHeight);
-					   getFloorTextureName(t, fBOTTOM);
-					   //fprintf (MAPFILE, "0"); 
-					   fprintf(MAPFILE, "}\n}\n");
-
-					   // right side
-					   fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-					   fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-					   //east face 
-					   fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
-					   getWallTextureName(t, fSELF, 0);
-					   //north face 
-					   if ((heading == EAST) || (heading == SHOCK_EAST))
-					   {
-						   fprintf(MAPFILE, "( 0 1 0 %f )", -(offY - doorWidth));
-					   }
-					   else
-					   {
-						   fprintf(MAPFILE, "( 0 1 0 %f )", -(offY));
-					   }
-					   getWallTextureName(t, fSELF, 0);
-					   //top face
-					   fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
-					   getFloorTextureName(t, fTOP);
-					   //west face
-					   fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
-					   getWallTextureName(t, fSELF, 0);
-					   //south face
-					   fprintf(MAPFILE, "( 0 -1 0 %f )", +(y * BrushY));
-					   getWallTextureName(t, fSELF, 0);
-					   //bottom face
-					   fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight*BrushZ);
-					   getFloorTextureName(t, fBOTTOM);
-					   //fprintf (MAPFILE, "0"); 
-					   fprintf(MAPFILE, "}\n}\n");
-					   if (t.TerrainChange == 0)
-					   {
-						   tile Tmpt;	//tmp tile for rendering a visportal.
-						   Tmpt.tileType = 0;
-						   Tmpt.isWater = 0;
-						   Tmpt.wallTexture = NODRAW;
-						   Tmpt.North = NODRAW;
-						   Tmpt.South = NODRAW;
-						   Tmpt.East = VISPORTAL;
-						   Tmpt.West = NODRAW;
-						   Tmpt.Top = NODRAW;
-						   Tmpt.Bottom = NODRAW;
-						   //Visportal
-						   fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-						   fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-						   //east face 
-						   fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
-						   getWallTextureName(Tmpt, fSELF, 0);
-						   //north face 
-						   if ((heading == EAST) || (heading == SHOCK_EAST))
-						   {
-							   fprintf(MAPFILE, "( 0 1 0 %f )", -((offY)));
-						   }
-						   else
-						   {
-							   fprintf(MAPFILE, "( 0 1 0 %f )", -((offY + doorWidth)));
-						   }
-						   getWallTextureName(Tmpt, fSELF, 0);
-						   //top face
-						   fprintf(MAPFILE, "( 0 0 1 %f )", -((t.floorHeight*BrushZ) + doorHeight));
-						   getWallTextureName(Tmpt, fTOP, 0);
-						   //west face
-						   fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 1)));
-						   getWallTextureName(Tmpt, fSELF, 0);
-						   //south face
-						   if ((heading == EAST) || (heading == SHOCK_EAST))
-						   {
-							   fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - doorWidth));
-						   }
-						   else
-						   {
-							   fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY));
-						   }
-						   getWallTextureName(Tmpt, fSELF, 0);
-						   //bottom face
-						   fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ));
-						   getWallTextureName(Tmpt, fBOTTOM, 0);
-						   //fprintf (MAPFILE, "0"); 
-						   fprintf(MAPFILE, "}\n}\n");
-					   }
-					   break;
+		// right side
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+		getWallTextureName(t, fSELF, 0);
+		//north face 
+		if ((heading == EAST) || (heading == SHOCK_EAST))
+		{
+			fprintf(MAPFILE, "( 0 1 0 %f )", -(offY - doorWidth));
+		}
+		else
+		{
+			fprintf(MAPFILE, "( 0 1 0 %f )", -(offY));
+		}
+		getWallTextureName(t, fSELF, 0);
+		//top face
+		fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
+		getFloorTextureName(t, fTOP);
+		//west face
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
+		getWallTextureName(t, fSELF, 0);
+		//south face
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(y * BrushY));
+		getWallTextureName(t, fSELF, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight*BrushZ);
+		getFloorTextureName(t, fBOTTOM);
+		//fprintf (MAPFILE, "0"); 
+		fprintf(MAPFILE, "}\n}\n");
+		if (t.TerrainChange == 0)
+		{
+			tile Tmpt;	//tmp tile for rendering a visportal.
+			Tmpt.tileType = 0;
+			Tmpt.isWater = 0;
+			Tmpt.wallTexture = NODRAW;
+			Tmpt.North = NODRAW;
+			Tmpt.South = NODRAW;
+			Tmpt.East = VISPORTAL;
+			Tmpt.West = NODRAW;
+			Tmpt.Top = NODRAW;
+			Tmpt.Bottom = NODRAW;
+			//Visportal
+			fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+			//east face 
+			fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+			getWallTextureName(Tmpt, fEAST, 0);
+			//north face 
+			if ((heading == EAST) || (heading == SHOCK_EAST))
+			{
+				fprintf(MAPFILE, "( 0 1 0 %f )", -((offY)));
+			}
+			else
+			{
+				fprintf(MAPFILE, "( 0 1 0 %f )", -((offY + doorWidth)));
+			}
+			getWallTextureName(Tmpt, fNORTH, 0);
+			//top face
+			fprintf(MAPFILE, "( 0 0 1 %f )", -((t.floorHeight*BrushZ) + doorHeight));
+			getWallTextureName(Tmpt, fTOP, 0);
+			//west face
+			fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 1)));
+			getWallTextureName(Tmpt, fWEST, 0);
+			//south face
+			if ((heading == EAST) || (heading == SHOCK_EAST))
+			{
+				fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - doorWidth));
+			}
+			else
+			{
+				fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY));
+			}
+			getWallTextureName(Tmpt, fSOUTH, 0);
+			//bottom face
+			fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ));
+			getWallTextureName(Tmpt, fBOTTOM, 0);
+			//fprintf (MAPFILE, "0"); 
+			fprintf(MAPFILE, "}\n}\n");
+		}
+		break;
 
 	}
 	case NORTH:	//north south (0)
@@ -1858,149 +1857,149 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		//case SHOCK_SOUTH:
 	{
 
-						if ((heading == NORTH) || (heading == SHOCK_NORTH))
-						{
-							offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2) + doorWidth;
-						}
-						else
-						{
-							offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2);
-						}
-						//left side
-						fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-						fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-						//east face 
-						if ((heading == NORTH) || (heading == SHOCK_NORTH))
-						{
-							fprintf(MAPFILE, "( 1 0 0 %f )", -(offX - doorWidth));
+		if ((heading == NORTH) || (heading == SHOCK_NORTH))
+		{
+			offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2) + doorWidth;
+		}
+		else
+		{
+			offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2);
+		}
+		//left side
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+		if ((heading == NORTH) || (heading == SHOCK_NORTH))
+		{
+			fprintf(MAPFILE, "( 1 0 0 %f )", -(offX - doorWidth));
 
-						}
-						else
-						{
-							fprintf(MAPFILE, "( 1 0 0 %f )", -(offX));
-						}
+		}
+		else
+		{
+			fprintf(MAPFILE, "( 1 0 0 %f )", -(offX));
+		}
 
-						getWallTextureName(t, fSELF, 0);
-						//north face 
-						fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
-						getWallTextureName(t, fSELF, 0);
-						//top face
-						fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
-						getFloorTextureName(t, fTOP);
-						//west face
-						fprintf(MAPFILE, "( -1 0 0 %f )", +((x)*BrushX));
-						getWallTextureName(t, fSELF, 0);
-						//south face
-						fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
-						getWallTextureName(t, fSELF, 0);
-						//bottom face
-						fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight * BrushZ);	//to go underneath
-						getFloorTextureName(t, fBOTTOM);
-						//fprintf (MAPFILE, "0"); 
-						fprintf(MAPFILE, "}\n}\n");
-						//top
-						fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-						fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-						//east face 
-						fprintf(MAPFILE, "( 1 0 0 %f )", -((x + 1)*BrushX));
-						getWallTextureName(t, fSELF, 0);
-						//north face 
-						fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
-						getWallTextureName(t, fSELF, 0);
-						//top face
-						fprintf(MAPFILE, "( 0 0 1 %f )", -BrushZ * (CEILING_HEIGHT + 1));
-						getFloorTextureName(t, fTOP);
-						//west face
-						fprintf(MAPFILE, "( -1 0 0 %f )", +(x*BrushX));
-						getWallTextureName(t, fSELF, 0);
-						//south face
-						fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
-						getWallTextureName(t, fSELF, 0);
-						//bottom face
-						fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ) + doorHeight);	//to go underneath
-						getFloorTextureName(t, fBOTTOM);
-						//fprintf (MAPFILE, "0"); 
-						fprintf(MAPFILE, "}\n}\n");
-						//right
-						fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-						fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-						//east face 
-						fprintf(MAPFILE, "( 1 0 0 %f )", -((x + 1)*BrushX));
-						getWallTextureName(t, fSELF, 0);
-						//north face 
-						fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
-						getWallTextureName(t, fSELF, 0);
-						//top face
-						fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
-						getFloorTextureName(t, fTOP);
-						//west face
-						if ((heading == NORTH) || (heading == SHOCK_NORTH))
-						{
-							fprintf(MAPFILE, "( -1 0 0 %f )", +(offX));
-						}
-						else
-						{
-							fprintf(MAPFILE, "( -1 0 0 %f )", +(offX + doorWidth));
-						}
-						getWallTextureName(t, fSELF, 0);
-						//south face
-						fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
-						getWallTextureName(t, fSELF, 0);
-						//bottom face
-						fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight * BrushZ);	//to go underneath
-						getFloorTextureName(t, fBOTTOM);
-						//fprintf (MAPFILE, "0"); 
-						fprintf(MAPFILE, "}\n}\n");
-						if (t.TerrainChange == 0)
-						{
-							//visportal.
-							tile Tmpt;	//tmp tile for rendering a visportal.
-							Tmpt.tileType = 0;
-							Tmpt.isWater = 0;
-							Tmpt.wallTexture = NODRAW;
-							Tmpt.North = NODRAW;
-							Tmpt.South = VISPORTAL;
-							Tmpt.East = NODRAW;
-							Tmpt.West = NODRAW;
-							Tmpt.Top = NODRAW;
-							Tmpt.Bottom = NODRAW;
-							fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
-							fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-							//east face 
-							if ((heading == NORTH) || (heading == SHOCK_NORTH))
-							{
-								fprintf(MAPFILE, "( 1 0 0 %f )", -(offX));
-							}
-							else
-							{
-								fprintf(MAPFILE, "( 1 0 0 %f )", -(offX + doorWidth));
-							}
-							getWallTextureName(Tmpt, fSELF, 0);
-							//north face 
-							fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
-							getWallTextureName(Tmpt, fSELF, 0);
-							//top face
-							fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
-							getFloorTextureName(Tmpt, fTOP);
-							//west face
-							if ((heading == NORTH) || (heading == SHOCK_NORTH))
-							{
-								fprintf(MAPFILE, "( -1 0 0 %f )", +(offX - doorWidth));
-							}
-							else
-							{
-								fprintf(MAPFILE, "( -1 0 0 %f )", +(offX));
-							}
-							getWallTextureName(Tmpt, fSELF, 0);
-							//south face
-							fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
-							getWallTextureName(Tmpt, fSELF, 0);
-							//bottom face
-							fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ));	//to go underneath
-							getFloorTextureName(Tmpt, fBOTTOM);
-							//fprintf (MAPFILE, "0"); 
-							fprintf(MAPFILE, "}\n}\n");
-						}
+		getWallTextureName(t, fSELF, 0);
+		//north face 
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+		getWallTextureName(t, fSELF, 0);
+		//top face
+		fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
+		getFloorTextureName(t, fTOP);
+		//west face
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((x)*BrushX));
+		getWallTextureName(t, fSELF, 0);
+		//south face
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+		getWallTextureName(t, fSELF, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight * BrushZ);	//to go underneath
+		getFloorTextureName(t, fBOTTOM);
+		//fprintf (MAPFILE, "0"); 
+		fprintf(MAPFILE, "}\n}\n");
+		//top
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((x + 1)*BrushX));
+		getWallTextureName(t, fSELF, 0);
+		//north face 
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+		getWallTextureName(t, fSELF, 0);
+		//top face
+		fprintf(MAPFILE, "( 0 0 1 %f )", -BrushZ * (CEILING_HEIGHT + 1));
+		getFloorTextureName(t, fTOP);
+		//west face
+		fprintf(MAPFILE, "( -1 0 0 %f )", +(x*BrushX));
+		getWallTextureName(t, fSELF, 0);
+		//south face
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+		getWallTextureName(t, fSELF, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ) + doorHeight);	//to go underneath
+		getFloorTextureName(t, fBOTTOM);
+		//fprintf (MAPFILE, "0"); 
+		fprintf(MAPFILE, "}\n}\n");
+		//right
+		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+		//east face 
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((x + 1)*BrushX));
+		getWallTextureName(t, fSELF, 0);
+		//north face 
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+		getWallTextureName(t, fSELF, 0);
+		//top face
+		fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
+		getFloorTextureName(t, fTOP);
+		//west face
+		if ((heading == NORTH) || (heading == SHOCK_NORTH))
+		{
+			fprintf(MAPFILE, "( -1 0 0 %f )", +(offX));
+		}
+		else
+		{
+			fprintf(MAPFILE, "( -1 0 0 %f )", +(offX + doorWidth));
+		}
+		getWallTextureName(t, fSELF, 0);
+		//south face
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+		getWallTextureName(t, fSELF, 0);
+		//bottom face
+		fprintf(MAPFILE, "( 0 0 -1 %f )", t.floorHeight * BrushZ);	//to go underneath
+		getFloorTextureName(t, fBOTTOM);
+		//fprintf (MAPFILE, "0"); 
+		fprintf(MAPFILE, "}\n}\n");
+		if (t.TerrainChange == 0)
+		{
+			//visportal.
+			tile Tmpt;	//tmp tile for rendering a visportal.
+			Tmpt.tileType = 0;
+			Tmpt.isWater = 0;
+			Tmpt.wallTexture = NODRAW;
+			Tmpt.North = NODRAW;
+			Tmpt.South = VISPORTAL;
+			Tmpt.East = NODRAW;
+			Tmpt.West = NODRAW;
+			Tmpt.Top = NODRAW;
+			Tmpt.Bottom = NODRAW;
+			fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
+			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+			//east face 
+			if ((heading == NORTH) || (heading == SHOCK_NORTH))
+			{
+				fprintf(MAPFILE, "( 1 0 0 %f )", -(offX));
+			}
+			else
+			{
+				fprintf(MAPFILE, "( 1 0 0 %f )", -(offX + doorWidth));
+			}
+			getWallTextureName(Tmpt, fEAST, 0);
+			//north face 
+			fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+			getWallTextureName(Tmpt, fNORTH, 0);
+			//top face
+			fprintf(MAPFILE, "( 0 0 1 %f )", -(t.floorHeight*BrushZ + doorHeight));
+			getFloorTextureName(Tmpt, fTOP);
+			//west face
+			if ((heading == NORTH) || (heading == SHOCK_NORTH))
+			{
+				fprintf(MAPFILE, "( -1 0 0 %f )", +(offX - doorWidth));
+			}
+			else
+			{
+				fprintf(MAPFILE, "( -1 0 0 %f )", +(offX));
+			}
+			getWallTextureName(Tmpt, fWEST, 0);
+			//south face
+			fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+			getWallTextureName(Tmpt, fSOUTH, 0);
+			//bottom face
+			fprintf(MAPFILE, "( 0 0 -1 %f )", (t.floorHeight*BrushZ));	//to go underneath
+			getFloorTextureName(Tmpt, fBOTTOM);
+			//fprintf (MAPFILE, "0"); 
+			fprintf(MAPFILE, "}\n}\n");
+		}
 	}
 	}
 }

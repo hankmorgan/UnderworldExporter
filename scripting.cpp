@@ -376,7 +376,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w")!=0)
 	}	
 	
 fprintf(fMAIN,"\nvoid main()\n{\n");
-//$light_1.bind( $player1 );
+fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 	for (int y=63; y>=0;y--)
 		{
 		for (int x=0; x<64;x++)

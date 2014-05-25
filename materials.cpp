@@ -295,44 +295,67 @@ void BuildSndShaderFiles()
 
 void BuildUWMtrFiles(int game, int mtrType)
 {
-	switch (mtrType)
+	int noOfImages = 0;
+	int noOfDoors = 0;
+	int gameNo = 0;
+	switch (game)
 	{
+	case UWDEMO:
+	case UW1:
+		noOfImages = 38;
+		noOfDoors = 13;
+		gameNo = 1;
+		break;
+	case UW2:
+		noOfImages = 53;
+		noOfDoors = 14;
+		gameNo = 2;
+		break;
+	}
+	switch (mtrType)
+		{
 		case 0://regular textures
 			break;
 		case 1:
 			//tmobj files
-			int noOfImages =0;
-			int gameNo = 0;
-			switch (game)
-				{
-				case UWDEMO:
-				case UW1:
-					noOfImages=38;
-					gameNo=1;
-					break;
-				case UW2:
-					noOfImages = 53;
-					gameNo = 2;
-					break;
-				}
-		for (int i = 0; i < noOfImages; i++)
-		{
-			FILE *fileOut;
-			char filePath[80] = "";
-			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw%d_model_%02d.mtr",gameNo, i);
-			if (fopen_s(&fileOut, filePath, "w") != 0)
+
+			for (int i = 0; i < noOfImages; i++)
 			{
-				printf("Unable to create output file for material");
-				return;
-			}//textures\uw1\tmobj\tmobj_02
-			fprintf(fileOut, "textures\\uw%d\\tmobj\\tmobj_%02d\n{\n",gameNo, i);
-			fprintf(fileOut, "\tbumpmap\t_flat\n\tdiffusemap\ttextures\\uw%d\\tmobj\\tmobj_%02d.tga\n\tspecularmap\t_black\n",gameNo, i);
-			fprintf(fileOut, "\tqer_editorimage textures\\uw%d\\tmobj\\tmobj_%02d.tga\n", gameNo, i);
-			fprintf(fileOut, "\t{\n\t\tblend gl_dst_color, gl_one\n\tcolored\n\t\tmap textures\\uw%d\\tmobj\\tmobj_%02d.tga\n\t}", gameNo, i);
-			fprintf(fileOut, "\n}", i);
-			fclose(fileOut);
+				FILE *fileOut;
+				char filePath[80] = "";
+				sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw%d_model_%02d.mtr",gameNo, i);
+				if (fopen_s(&fileOut, filePath, "w") != 0)
+				{
+					printf("Unable to create output file for material");
+					return;
+				}//textures\uw1\tmobj\tmobj_02
+				fprintf(fileOut, "textures\\uw%d\\tmobj\\tmobj_%02d\n{\n",gameNo, i);
+				fprintf(fileOut, "\tbumpmap\t_flat\n\tdiffusemap\ttextures\\uw%d\\tmobj\\tmobj_%02d.tga\n\tspecularmap\t_black\n",gameNo, i);
+				fprintf(fileOut, "\tqer_editorimage textures\\uw%d\\tmobj\\tmobj_%02d.tga\n", gameNo, i);
+				fprintf(fileOut, "\t{\n\t\tblend gl_dst_color, gl_one\n\tcolored\n\t\tmap textures\\uw%d\\tmobj\\tmobj_%02d.tga\n\t}", gameNo, i);
+				fprintf(fileOut, "\n}", i);
+				fclose(fileOut);
+			}
+			break;
+		case 2:
+			for (int i = 0; i < noOfDoors; i++)
+			{
+				FILE *fileOut;
+				char filePath[80] = "";
+				sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw%d_doors_%02d.mtr", gameNo, i);
+				if (fopen_s(&fileOut, filePath, "w") != 0)
+				{
+					printf("Unable to create output file for material");
+					return;
+				}//textures\uw1\tmobj\tmobj_02
+				fprintf(fileOut, "textures\\uw%d\\doors\\doors_%02d\n{\n", gameNo, i);
+				fprintf(fileOut, "\tbumpmap\t_flat\n\tdiffusemap\ttextures\\uw%d\\doors\\doors_%02d.tga\n\tspecularmap\t_black\n", gameNo, i);
+				fprintf(fileOut, "\tqer_editorimage textures\\uw%d\\doors\\doors_%02d.tga\n", gameNo, i);
+				fprintf(fileOut, "\t{\n\t\tblend gl_dst_color, gl_one\n\tcolored\n\t\tmap textures\\uw%d\\doors\\doors_%02d.tga\n\t}", gameNo, i);
+				fprintf(fileOut, "\n}", i);
+				fclose(fileOut);
+			}
 		}
-	}
 }
 
 

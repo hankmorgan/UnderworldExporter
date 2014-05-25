@@ -353,7 +353,7 @@
 352 0 0 0 a_pillar worldspawn ignore 31
 353 0 0 0 a_lever models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 354 0 0 0 a_switch&switches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-355 0 0 0 a_painting models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+355 0 0 0 a_painting models/darkmod/uw2/painting.ase entity 68
 356 0 0 0 a_bridge models/darkmod/uw1/uw1_bridge.ase model 7
 357 0 0 0 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 358 0 0 0 some_writing models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

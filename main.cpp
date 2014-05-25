@@ -49,8 +49,8 @@ int main()
 {
 //int game = SHOCK;
 //int game = UWDEMO;
-//int game = UW1;
-int game = UW2;
+int game = UW1;
+//int game = UW2;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
@@ -103,7 +103,7 @@ switch (game)
 			//BuildXDataFile(game);
 			//BuildSndShaderFiles();
 			//BuildShockMtrFiles(3);
-			BuildUWMtrFiles(UW2,1);
+			BuildUWMtrFiles(game,2);
 			//BuildGuiFiles();
 			//ExportModelFormat();
 			//BuildWORDSXData(game);

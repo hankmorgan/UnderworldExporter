@@ -308,7 +308,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		}
 	case UW1:	//UW1
 		{
-		textureMapSize = 0x7a;
+		textureMapSize = 64; // 0x7a;
 		if ((file = fopen(filePath, "rb")) == NULL)
 			printf("Could not open specified file\n");
 		else
@@ -331,7 +331,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	
 	case UW2:	//Underworld 2
 		{
-		textureMapSize = 0x86;
+		textureMapSize = 70;	//0x86;
 		if ((file = fopen(filePath, "rb")) == NULL)
 			printf("Could not open specified file\n");
 		else
@@ -389,7 +389,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		
 	}
 
-	
+	int offset=0;
 	for (i = 0; i<textureMapSize; i++)	//256
 		{//TODO: Only use this for texture lookups.
 		switch (game)
@@ -400,11 +400,14 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				{
 				if (i<58)	//Wall and floor textures are int 16s
 					{
-						texture_map[i] = getValAtAddress(lev_ark, textureAddress + (i * 2), 16);
+					texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 16); //(i * 2)
+						offset=offset+2;
+						
 					}
 				else
 					{ //door textures are int 8s
-						texture_map[i] = getValAtAddress(lev_ark, textureAddress + (i * 1), 8);
+						texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 8); //(i * 1)
+						offset++;
 					}
 				if (i == 57)
 					{
@@ -416,11 +419,29 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				{
 				if (textureAddress == -1)//Texture block was decompressed
 					{
-					texture_map[i] =getValAtAddress(tex_ark,(i*2),16);//tmp //textureAddress+
+					if (i<64)
+						{
+						texture_map[i] =getValAtAddress(tex_ark,offset ,16);//tmp //textureAddress+ //(i*2)
+						offset = offset + 2;
+						}
+					else
+						{//door textures
+							texture_map[i] = getValAtAddress(tex_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+							offset++;
+						}
 					}
 				else
 					{
-					texture_map[i] =getValAtAddress(tmp_ark,textureAddress+(i*2),16);//tmp //textureAddress+
+					if (i<64)
+						{
+						texture_map[i] =getValAtAddress(tmp_ark,textureAddress+offset,16);//tmp //textureAddress+//(i*2)
+						offset = offset + 2;
+						}
+					else
+						{//door textures
+						texture_map[i] = getValAtAddress(tmp_ark, textureAddress + offset, 8);//tmp //textureAddress+//(i*2)
+						offset++;
+						}
 					}
 				printf("\nTexture %d = %d", i, texture_map[i]);
 				if (i == 0xf)
@@ -431,7 +452,28 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				}
 			}
 		}
-	 
+	//Assign door textures to the object masters list
+	//Depends on the correct values in the config!!
+	switch (game)
+	{
+		case UWDEMO:
+		case UW1:
+			objectMasters[320].extraInfo = texture_map[58];
+			objectMasters[321].extraInfo = texture_map[59];
+			objectMasters[322].extraInfo = texture_map[60];
+			objectMasters[323].extraInfo = texture_map[61];
+			objectMasters[324].extraInfo = texture_map[62];
+			objectMasters[325].extraInfo = texture_map[63];
+			break;
+		case UW2:
+			objectMasters[320].extraInfo = texture_map[64];
+			objectMasters[321].extraInfo = texture_map[65];
+			objectMasters[322].extraInfo = texture_map[66];
+			objectMasters[323].extraInfo = texture_map[67];
+			objectMasters[324].extraInfo = texture_map[68];
+			objectMasters[325].extraInfo = texture_map[69];
+			break;
+	}
 	for (y=0; y<64;y++)
 		{
 		for (x=0; x<64;x++)

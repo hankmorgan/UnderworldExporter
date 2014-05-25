@@ -272,48 +272,95 @@ switch (game)
 			else
 				{
 			//Ambient world light
+				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
+				fprintf (MAPFILE, "{\n\"classname\" \"atdm:ambient_world\"");
+				fprintf (MAPFILE, "\n\"name\" \"ambient_world\"",EntityCount);
+				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
+				fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
+				fprintf (MAPFILE, "\n\"light_radius\" \"4500 4500 2500\"");	
+				fprintf (MAPFILE, "\n\"_color\" \"0.21 0.21 0.21\"");
+				fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
+				fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
+				fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
+				fprintf (MAPFILE, "\n\"parallel\" \"0\"");
+				fprintf (MAPFILE, "\n}\n");
+				}
 
-					fprintf (MAPFILE, "// entity %d\n", EntityCount++);
-					fprintf (MAPFILE, "{\n\"classname\" \"atdm:ambient_world\"");
-					fprintf (MAPFILE, "\n\"name\" \"ambient_world\"",EntityCount);
-					fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
-					fprintf (MAPFILE, "\n\"light_center\" \"0 0 0\"");
-					fprintf (MAPFILE, "\n\"light_radius\" \"4500 4500 2500\"");	
-					fprintf (MAPFILE, "\n\"_color\" \"0.21 0.21 0.21\"");
-					fprintf (MAPFILE, "\n\"nodiffuse\" \"0\"");
-					fprintf (MAPFILE, "\n\"noshadows\" \"0\"");
-					fprintf (MAPFILE, "\n\"nospecular\" \"0\"");
-					fprintf (MAPFILE, "\n\"parallel\" \"0\"");
-					fprintf (MAPFILE, "\n}\n");
-					}
-			if (game == SHOCK)
+			switch (game)	//Some game specific stuff
 				{
-				//Speaker for playing back logs
-				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
-				fprintf (MAPFILE, "{\n\"classname\" \"atdm:voice\"");
-				fprintf (MAPFILE, "\n\"name\" \"data_reader_voice\"");
-				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
-				fprintf (MAPFILE, "\n\"s_shader\" \"silence\"");
-				fprintf (MAPFILE, "\n}\n");						
-				
-				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
-				fprintf (MAPFILE, "{\n\"classname\" \"atdm:trigger_voice\"");
-				fprintf (MAPFILE, "\n\"name\" \"data_reader_trigger\"");
-				fprintf (MAPFILE, "\n\"origin\" \"%d %d 120\"",32 * BrushSizeX,32 * BrushSizeY);	//May cause leaks on small maps.
-				fprintf (MAPFILE, "\n\"snd_say\" \"silence\"");
-				fprintf (MAPFILE, "\n\"target0\" \"data_reader_voice\"");
-				fprintf (MAPFILE, "\n\"as_player\" \"1\"");
-				fprintf (MAPFILE, "\n}\n");	
-				
-				if (levelNo == 1)
-					{//startposition for player
-					fprintf(MAPFILE, "// entity %d\n", EntityCount++);
-					fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
-					fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
-					fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"",3642.25, 2722.75, 175.75 );
-					fprintf(MAPFILE, "\n}\n");
+				case UWDEMO:
+				case UW1:
+					if (levelNo == 0)
+						{
+						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
+						fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
+						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3642.25, 2722.75, 175.75);
+						fprintf(MAPFILE, "\n}\n");
+
+						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+						fprintf(MAPFILE, "{\n\"classname\" \"light\"");
+						fprintf(MAPFILE, "\n\"name\" \"light_1\"", EntityCount);
+						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3642.25, 2722.75, 225);
+						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
+						fprintf(MAPFILE, "\n\"light_radius\" \"320 320 320\"");
+						fprintf(MAPFILE, "\n\"_color\" \"0.45 0.45 0.45\"");
+						fprintf(MAPFILE, "\n\"nodiffuse\" \"0\"");
+						fprintf(MAPFILE, "\n\"noshadows\" \"0\"");
+						fprintf(MAPFILE, "\n\"nospecular\" \"0\"");
+						fprintf(MAPFILE, "\n\"parallel\" \"0\"");
+						fprintf(MAPFILE, "\n}\n");
+						}
+					break;
+				case UW2:
+					if (levelNo == 0)
+					{
+						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
+						fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
+						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 2465.0, 5794.5, 360.5);
+						fprintf(MAPFILE, "\n}\n");
+
+						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+						fprintf(MAPFILE, "{\n\"classname\" \"light\"");
+						fprintf(MAPFILE, "\n\"name\" \"light_1\"", EntityCount);
+						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 2465.0, 5794.5, 410.0);
+						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
+						fprintf(MAPFILE, "\n\"light_radius\" \"320 320 320\"");
+						fprintf(MAPFILE, "\n\"_color\" \"0.45 0.45 0.45\"");
+						fprintf(MAPFILE, "\n\"nodiffuse\" \"0\"");
+						fprintf(MAPFILE, "\n\"noshadows\" \"0\"");
+						fprintf(MAPFILE, "\n\"nospecular\" \"0\"");
+						fprintf(MAPFILE, "\n\"parallel\" \"0\"");
+						fprintf(MAPFILE, "\n}\n");
 					}
-				
+					break;
+				case SHOCK:
+					//Speaker for playing back logs
+					fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+					fprintf(MAPFILE, "{\n\"classname\" \"atdm:voice\"");
+					fprintf(MAPFILE, "\n\"name\" \"data_reader_voice\"");
+					fprintf(MAPFILE, "\n\"origin\" \"%d %d 120\"", 32 * BrushSizeX, 32 * BrushSizeY);	//May cause leaks on small maps.
+					fprintf(MAPFILE, "\n\"s_shader\" \"silence\"");
+					fprintf(MAPFILE, "\n}\n");
+
+					fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+					fprintf(MAPFILE, "{\n\"classname\" \"atdm:trigger_voice\"");
+					fprintf(MAPFILE, "\n\"name\" \"data_reader_trigger\"");
+					fprintf(MAPFILE, "\n\"origin\" \"%d %d 120\"", 32 * BrushSizeX, 32 * BrushSizeY);	//May cause leaks on small maps.
+					fprintf(MAPFILE, "\n\"snd_say\" \"silence\"");
+					fprintf(MAPFILE, "\n\"target0\" \"data_reader_voice\"");
+					fprintf(MAPFILE, "\n\"as_player\" \"1\"");
+					fprintf(MAPFILE, "\n}\n");
+					if (levelNo == 1)
+						{//startposition for player
+							fprintf(MAPFILE, "// entity %d\n", EntityCount++);
+							fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
+							fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3642.25, 2722.75, 175.75);
+							fprintf(MAPFILE, "\n}\n");
+						}
+					break;
 				}
 		
 }

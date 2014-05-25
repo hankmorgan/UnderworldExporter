@@ -98,7 +98,7 @@ void EntityRotation(int heading)
 	case 45:
 	{fprintf(MAPFILE, "\n\"rotation\" \"0.707107 0.707107 0 -0.707107 0.707107 0 0 0 1\"\n"); break; }
 	case 90:
-	{fprintf(MAPFILE, "\n\"rotation\" \"0 1 0 -1 0 0 0 0 1\"\n"); break; }
+	{fprintf(MAPFILE, "\n\"rotation\" \"0 -1 0 1 0 0 0 0 1\"\n"); break; }
 	case 135:
 	{fprintf(MAPFILE, "\n\"rotation\" \"-0.707107 0.707107 0 -0.707107 -0.707107 0 0 0 1\"\n"); break; }
 	case 180:
@@ -106,7 +106,7 @@ void EntityRotation(int heading)
 	case 225:
 	{fprintf(MAPFILE, "\n\"rotation\" \"-0.707107 -0.707107 0 0.707107 -0.707107 0 0 0 1\"\n"); break; }
 	case 270:
-	{fprintf(MAPFILE, "\n\"rotation\" \"0 -1 0 1 0 0 0 0 1\"\n"); break; }
+	{fprintf(MAPFILE, "\n\"rotation\" \"0 1 0 -1 0 0 0 0 1\"\n"); break; }
 	case 315:
 	{fprintf(MAPFILE, "\n\"rotation\" \"0.707107 -0.707107 0 0.707107 0.707107 0 0 0 1\"\n"); break; }
 	default:
@@ -237,6 +237,9 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 				case SHOCK_DOOR:
 				case SHOCK_DOOR_TRANSPARENT:
 					RenderEntitySHOCKDoor(game, x, y, z, currobj, objList, LevelInfo);
+					break;
+				case UW_PAINTING:
+					RenderEntityPaintingUW(game, x, y, z, currobj, objList, LevelInfo);
 					break;
 				default:
 				{//just the basic name. with no properties.
@@ -795,6 +798,20 @@ void RenderEntityDecal(int game, float x, float y, float z, ObjectItem &currobj,
 	fprintf(MAPFILE, "\n}");
 }
 
+
+void RenderEntityPaintingUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{//UW2 wall paintings.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis); 
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	fprintf(MAPFILE, "\"skin\" \"uw2_painting_%02d\"\n", currobj.flags & 0x7);
+	EntityRotation(currobj.heading);
+	fprintf(MAPFILE, "\n}");
+}
+
 void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 	//Params
@@ -825,7 +842,11 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 
 	fprintf(MAPFILE, "\"name\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.tileX, currobj.tileY);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
-
+	if ((game != SHOCK) && (objectMasters[currobj.item_id].type == DOOR))
+		{
+		fprintf(MAPFILE, "\"model\" \"%s\"\n", "models/darkmod/uw1/uw_door.ase");
+		fprintf(MAPFILE, "\"skin\" \"uw%d_doors_%02d\"\n",game,objectMasters[currobj.item_id].extraInfo);
+		}
 	fprintf(MAPFILE, "\"auto_close_time\" \"30\"\n");
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
 	{
@@ -856,7 +877,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 		}
 	}
 
-	fprintf(MAPFILE, "\"rotate\" \"0 90 0\"\n");
+	//fprintf(MAPFILE, "\"rotate\" \"0 90 0\"\n");
 	//position
 	int heading = 0;
 	if (game != SHOCK)
@@ -872,10 +893,10 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 	{//TODO: replace with proper model offset
 	case SHOCK_EAST:
 	case EAST:
-	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, (tileY)*BrushY + ((doorWidth + (BrushY - doorWidth) / 2)), zpos);	break; }
+	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, (tileY)*BrushY + ((0 + (BrushY - doorWidth) / 2)), zpos);	break; }
 	case SHOCK_WEST:
 	case WEST:
-	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, (tileY)*BrushY + ((0 + (BrushY - doorWidth) / 2)), zpos);	break; }
+	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, (tileY)*BrushY + ((doorWidth + (BrushY - doorWidth) / 2)), zpos);	break; }
 	case SHOCK_NORTH:
 	case NORTH:
 	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", (tileX)*BrushX + ((doorWidth + (BrushX - doorWidth) / 2)), y, zpos);	break; }
@@ -885,17 +906,18 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 
 
 	tile t = LevelInfo[currobj.tileX][currobj.tileY];
-	if (game != SHOCK)
-	{
-		EntityRotation(currobj.heading);
-	}
-	else
-	{
-		if (objectMasters[currobj.item_id].type != HIDDENDOOR)
+	//if (game != SHOCK)
+	//{
+	//	EntityRotation(currobj.heading);
+	//}
+	//else
+	//{
+	if ((objectMasters[currobj.item_id].type != HIDDENDOOR) && (game !=SHOCK))
 		{
-			EntityRotationSHOCK(currobj.Angle2);
+			EntityRotation(currobj.heading);
+			//EntityRotationSHOCK(currobj.Angle2);
 		}
-	}
+	//}
 
 	if (objectMasters[currobj.item_id].type == HIDDENDOOR)
 	{//For a secret door I need to render a brush to match the wall
@@ -914,29 +936,6 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 		{
 		case EAST:
 		case SHOCK_EAST:
-			fprintf(MAPFILE, "// primitive %d\n", 0);
-			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-			//east face 
-			fprintf(MAPFILE, "( 1 0 0 %d )", -(3));
-			getWallTextureName(t, fEAST, 0);
-			//north face 
-			fprintf(MAPFILE, "( 0 1 0 %d )", -(0));
-			getWallTextureName(t, fNORTH, 0);
-			//top face
-			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
-			getFloorTextureName(t, fTOP);
-			//west face
-			fprintf(MAPFILE, "( -1 0 0 %d )", -(3));
-			getWallTextureName(t, fWEST, 0);
-			//south face
-			fprintf(MAPFILE, "( 0 -1 0 %f )", -(doorWidth));
-			getWallTextureName(t, fSOUTH, 0);
-			//bottom face
-			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
-			getFloorTextureName(t, fBOTTOM);
-			break;
-		case WEST:
-		case SHOCK_WEST:
 			fprintf(MAPFILE, "// primitive %f\n", 0);
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
@@ -953,6 +952,29 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			getWallTextureName(t, fWEST, 0);
 			//south face
 			fprintf(MAPFILE, "( 0 -1 0 %d )", -(0));
+			getWallTextureName(t, fSOUTH, 0);
+			//bottom face
+			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
+			getFloorTextureName(t, fBOTTOM);
+			break;
+		case WEST:
+		case SHOCK_WEST:
+			fprintf(MAPFILE, "// primitive %d\n", 0);
+			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+			//east face 
+			fprintf(MAPFILE, "( 1 0 0 %d )", -(3));
+			getWallTextureName(t, fEAST, 0);
+			//north face 
+			fprintf(MAPFILE, "( 0 1 0 %d )", -(0));
+			getWallTextureName(t, fNORTH, 0);
+			//top face
+			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
+			getFloorTextureName(t, fTOP);
+			//west face
+			fprintf(MAPFILE, "( -1 0 0 %d )", -(3));
+			getWallTextureName(t, fWEST, 0);
+			//south face
+			fprintf(MAPFILE, "( 0 -1 0 %f )", -(doorWidth));
 			getWallTextureName(t, fSOUTH, 0);
 			//bottom face
 			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
