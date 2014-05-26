@@ -157,32 +157,21 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 				switch (objectMasters[currobj.item_id].type)
 				{
 				case NPC:
-				{
-							//
-							RenderEntityNPC(game, x, y, z, currobj, objList, LevelInfo);
-							break;
-				}
+					RenderEntityNPC(game, x, y, z, currobj, objList, LevelInfo);
+					break;
 				case HIDDENDOOR:
 				case DOOR:
-				{
-							 RenderEntityDoor(game, x, y, z, currobj, objList, LevelInfo);
-							 break;
-				}
+					RenderEntityDoor(game, x, y, z, currobj, objList, LevelInfo);
+					break;
 				case KEY:
-				{
-							RenderEntityKey(game, x, y, z, currobj, objList, LevelInfo);
-							break;
-				}
+					RenderEntityKey(game, x, y, z, currobj, objList, LevelInfo);
+					break;
 				case CONTAINER:
-				{
-								  RenderEntityContainer(game, x, y, z, currobj, objList, LevelInfo);
-								  break;
-				}
+					RenderEntityContainer(game, x, y, z, currobj, objList, LevelInfo);
+					break;
 				case BUTTON:
-				{
-							   RenderEntityButton(game, x, y, z, currobj, objList, LevelInfo);
-							   break;
-				}
+					RenderEntityButton(game, x, y, z, currobj, objList, LevelInfo);
+					break;
 				case LOCK:
 				case A_DOOR_TRAP:
 					RenderEntityA_DOOR_TRAP(game, x, y, z, currobj, objList, LevelInfo);
@@ -206,7 +195,6 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 					break;
 				case A_MOVE_TRIGGER:
 					RenderEntityA_MOVE_TRIGGER(game, x, y, z, currobj, objList, LevelInfo);
-
 					break;
 				case A_TELEPORT_TRAP:	//a destination for a teleport.
 					RenderEntityA_TELEPORT_TRAP(game, x, y, z, currobj, objList, LevelInfo);
@@ -241,21 +229,23 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 				case UW_PAINTING:
 					RenderEntityPaintingUW(game, x, y, z, currobj, objList, LevelInfo);
 					break;
+				case BRIDGE:
+					RenderEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
+					break; 
 				default:
-				{//just the basic name. with no properties.
-						   fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
-						   fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-						   fprintf(MAPFILE, "\"name\" \"%s_%04d\"\n", objectMasters[currobj.item_id].desc, EntityCount);
-						   //position
-						   fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
-						   EntityRotation(currobj.heading);
-						   AttachToJoint(currobj);		//for npc items
-						   fprintf(MAPFILE, "}");
-						   EntityCount++;
-						   break;
+				//just the basic name. with no properties.
+					fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+					fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
+					fprintf(MAPFILE, "\"name\" \"%s_%04d\"\n", objectMasters[currobj.item_id].desc, EntityCount);
+					//position
+					fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+					EntityRotation(currobj.heading);
+					AttachToJoint(currobj);		//for npc items
+					fprintf(MAPFILE, "}");
+					EntityCount++;
+					break;
 				}
-				}
-	}
+		}
 	}
 	if ((currobj.objectConversion != 0) && (game == SHOCK))
 	{
@@ -402,6 +392,10 @@ void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem 
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"wait\" \"5\"\n");
+	if (game==UW2)
+		{
+		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+		}
 	tile t;	//temp tile for rendering trigger
 	t.floorTexture = TRIGGER_MULTI;
 	t.wallTexture = TRIGGER_MULTI;
@@ -422,7 +416,15 @@ void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem 
 	}
 	else
 	{	//step on behaviour
-		RenderGenericTile(currobj.tileX, currobj.tileY, t, BrushSizeZ, LevelInfo[currobj.tileX][currobj.tileY].floorHeight);
+		if (game != UW2)
+		{
+			RenderGenericTile(currobj.tileX, currobj.tileY, t, LevelInfo[currobj.tileX][currobj.tileY].floorHeight + 1, LevelInfo[currobj.tileX][currobj.tileY].floorHeight);
+		}
+		else
+		{//UW2 move triggers are embedded in the walls for stairs up/down
+			RenderGenericTileAroundOrigin(currobj.tileX, currobj.tileY, t, LevelInfo[currobj.tileX][currobj.tileY].floorHeight + 1, LevelInfo[currobj.tileX][currobj.tileY].floorHeight, BrushSizeZ);
+		}
+		
 	}
 	fprintf(MAPFILE, "\n}");
 	createScriptCall(currobj, x, y, z);
@@ -812,6 +814,19 @@ void RenderEntityPaintingUW(int game, float x, float y, float z, ObjectItem &cur
 	fprintf(MAPFILE, "\n}");
 }
 
+void RenderEntityBridgeUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{//UW2 wall paintings.
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_%02d\"\n",game, currobj.flags & 0x7);
+	EntityRotation(currobj.heading);
+	fprintf(MAPFILE, "\n}");
+}
+
 void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 {
 	//Params
@@ -940,19 +955,19 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
 			fprintf(MAPFILE, "( 1 0 0 %d )", -(3));
-			getWallTextureName(t, fEAST, 0);
+			getWallTextureName(t, fSELF, 0);
 			//north face 
 			fprintf(MAPFILE, "( 0 1 0 %f )", -(doorWidth));
-			getWallTextureName(t, fNORTH, 0);
+			getWallTextureName(t, fSELF, 0);
 			//top face
 			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
 			getFloorTextureName(t, fTOP);
 			//west face
 			fprintf(MAPFILE, "( -1 0 0 %d )", -(3));
-			getWallTextureName(t, fWEST, 0);
+			getWallTextureName(t, fSELF, 0);
 			//south face
 			fprintf(MAPFILE, "( 0 -1 0 %d )", -(0));
-			getWallTextureName(t, fSOUTH, 0);
+			getWallTextureName(t, fSELF, 0);
 			//bottom face
 			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
 			getFloorTextureName(t, fBOTTOM);
@@ -963,19 +978,19 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
 			fprintf(MAPFILE, "( 1 0 0 %d )", -(3));
-			getWallTextureName(t, fEAST, 0);
+			getWallTextureName(t, fSELF, 0);
 			//north face 
 			fprintf(MAPFILE, "( 0 1 0 %d )", -(0));
-			getWallTextureName(t, fNORTH, 0);
+			getWallTextureName(t, fSELF, 0);
 			//top face
 			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
 			getFloorTextureName(t, fTOP);
 			//west face
 			fprintf(MAPFILE, "( -1 0 0 %d )", -(3));
-			getWallTextureName(t, fWEST, 0);
+			getWallTextureName(t, fSELF, 0);
 			//south face
 			fprintf(MAPFILE, "( 0 -1 0 %f )", -(doorWidth));
-			getWallTextureName(t, fSOUTH, 0);
+			getWallTextureName(t, fSELF, 0);
 			//bottom face
 			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
 			getFloorTextureName(t, fBOTTOM);
@@ -986,19 +1001,19 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
 			fprintf(MAPFILE, "( 1 0 0 %d )", -(0));
-			getWallTextureName(t, fEAST, 0);
+			getWallTextureName(t, fSELF, 0);
 			//north face 
 			fprintf(MAPFILE, "( 0 1 0 %d )", -(3));
-			getWallTextureName(t, fNORTH, 0);
+			getWallTextureName(t, fSELF, 0);
 			//top face
 			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
 			getFloorTextureName(t, fTOP);
 			//west face
 			fprintf(MAPFILE, "( -1 0 0 %f )", -(doorWidth));
-			getWallTextureName(t, fWEST, 0);
+			getWallTextureName(t, fSELF, 0);
 			//south face
 			fprintf(MAPFILE, "( 0 -1 0 %d )", -(3));
-			getWallTextureName(t, fSOUTH, 0);
+			getWallTextureName(t, fSELF, 0);
 			//bottom face
 			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
 			getFloorTextureName(t, fBOTTOM);
@@ -1010,19 +1025,19 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 					  fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 					  //east face 
 					  fprintf(MAPFILE, "( 1 0 0 %f )", -(doorWidth));
-					  getWallTextureName(t, fEAST, 0);
+					  getWallTextureName(t, fSELF, 0);
 					  //north face 
 					  fprintf(MAPFILE, "( 0 1 0 %d )", -(3));
-					  getWallTextureName(t, fNORTH, 0);
+					  getWallTextureName(t, fSELF, 0);
 					  //top face
 					  fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
 					  getFloorTextureName(t, fTOP);
 					  //west face
 					  fprintf(MAPFILE, "( -1 0 0 %d )", +(0));
-					  getWallTextureName(t, fWEST, 0);
+					  getWallTextureName(t, fSELF, 0);
 					  //south face
 					  fprintf(MAPFILE, "( 0 -1 0 %d )", -(3));
-					  getWallTextureName(t, fSOUTH, 0);
+					  getWallTextureName(t, fSELF, 0);
 					  //bottom face
 					  fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
 					  getFloorTextureName(t, fBOTTOM);
@@ -1440,9 +1455,13 @@ void RenderEntitySIGN(int game, float x, float y, float z, ObjectItem &currobj, 
 	{
 	case UWDEMO:
 	case UW1:
-	{fprintf(MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200); break; }
+		fprintf(MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
+		fprintf(MAPFILE, "\"skin\" \"uw1_sign_%02d\"\n", currobj.flags & 0x7);
+		break; 
 	case UW2:
-	{fprintf(MAPFILE, "\"xdata_contents\" \"readables/uw12/sign_%03d\"\n", currobj.link - 0x200); break; }
+		fprintf(MAPFILE, "\"xdata_contents\" \"readables/uw2/sign_%03d\"\n", currobj.link - 0x200); 
+		fprintf(MAPFILE, "\"skin\" \"uw2_sign_%02d\"\n", currobj.flags & 0x7);
+		break; 
 	case SHOCK:
 	{//TODO:Whatever needs to go here.
 				  //fprintf (MAPFILE, "\"xdata_contents\" \"readables/shock/sign_%03d\"\n", currobj.link - 0x200);
@@ -1450,16 +1469,16 @@ void RenderEntitySIGN(int game, float x, float y, float z, ObjectItem &currobj, 
 	}
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"model\" \"models/darkmod/uw1/uw1_sign.ase\"\n");	//TODO:pass model path in.
-	switch (currobj.heading)	//TODO: need to fix this mess with headings.
-	{
-	case 0:
-	{EntityRotation(270); break; }
-	case 270:
-	{EntityRotation(0); break; }
-	default:
-	{EntityRotation(currobj.heading + 90); break; }
-	}
-	//EntityRotation(currobj.heading);
+	//switch (currobj.heading)	//TODO: need to fix this mess with headings.
+	//{
+	//case 0:
+	//{EntityRotation(270); break; }
+	//case 270:
+	//{EntityRotation(0); break; }
+	//default:
+	//{EntityRotation(currobj.heading + 90); break; }
+	//}
+	EntityRotation(currobj.heading);
 	AttachToJoint(currobj);		//for npc items
 	fprintf(MAPFILE, "\n}");
 	EntityCount++;

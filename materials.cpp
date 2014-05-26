@@ -6,7 +6,6 @@
 #include "main.h"
 #include "utils.h"
 
-
 void parseInfoLine(char *str, int length, int *left, int *right);
 
 void BuildXDataFile(int game)
@@ -357,7 +356,6 @@ void BuildUWMtrFiles(int game, int mtrType)
 			}
 		}
 }
-
 
 void BuildSHOCKMtrFiles(int MtrType)
 {

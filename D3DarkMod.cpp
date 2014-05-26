@@ -295,13 +295,13 @@ switch (game)
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
 						fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
-						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3642.25, 2722.75, 175.75);
+						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 360.0);
 						fprintf(MAPFILE, "\n}\n");
 
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"light\"");
 						fprintf(MAPFILE, "\n\"name\" \"light_1\"", EntityCount);
-						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3642.25, 2722.75, 225);
+						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 410.0);
 						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
 						fprintf(MAPFILE, "\n\"light_radius\" \"320 320 320\"");
 						fprintf(MAPFILE, "\n\"_color\" \"0.45 0.45 0.45\"");
