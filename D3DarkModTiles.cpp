@@ -2060,7 +2060,7 @@ void RenderPatch(int game, int x, int y, int z, long PatchIndex, ObjectItem objL
 	//fprintf (MAPFILE, "\"model\" \"%s_%03d_%03d\"",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY );
 	//Things like the abyss doors,stairs down//a patch?
 	fprintf(MAPFILE, "\n//primitive %d\n{\npatchDef2\n{\n", 0);
-	fprintf(MAPFILE, "\"%s\"\n", textureMasters[currobj.owner].path);
+	fprintf(MAPFILE, "\"%s\"\n", textureMasters[currobj.texture].path);
 	fprintf(MAPFILE, "( 3 5 0 0 0 )\n(\n");	//not sure what they mean but they appear to stay constant?
 	for (int j = 0; j <3; j++)
 	{

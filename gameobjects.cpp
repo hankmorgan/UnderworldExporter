@@ -620,9 +620,26 @@ switch (game)
 			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
 				{
 				//printf("\n%d\n", texture_map[objList[x].owner]);
-				objList[x].owner = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
+				//objList[x].owner = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
+				objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				}
-						
+			if (objectMasters[objList[x].item_id].type == BRIDGE)
+			{
+				//printf("\n%d\n", texture_map[objList[x].owner]);
+				if (objList[x].flags >= 2)
+				{
+					if (game == UW2)
+					{
+						objList[x].texture = texture_map[objList[x].flags-2];	//Sets the texture for bridge
+					}
+					else
+					{
+						objList[x].texture = texture_map[objList[x].flags-2+48];	//Sets the texture for bridge
+					}
+					
+				}
+				
+			}
 				
 			//objList[x].special = objList[x].owner;
 			

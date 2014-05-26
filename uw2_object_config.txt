@@ -342,7 +342,7 @@
 341 0 0 0 a_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 342 0 0 0 a_small_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 343 0 0 0 a_shrine models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-344 0 0 0 a_table models/darkmod/furniture/tables/table_wood_rough_small.lwo model 23
+344 0 0 0 a_table models/darkmod/furniture/tables/tabLe_wood_rough_small.lwo model 23
 345 0 0 0 a_beam models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 346 0 0 0 a_moongate models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 347 0 0 0 a_barrel models/darkmod/containers/barrell_med_closed.lwo entity 19
@@ -354,7 +354,7 @@
 353 0 0 0 a_lever models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 354 0 0 0 a_switch&switches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 355 0 0 0 a_painting models/darkmod/uw2/painting.ase entity 68
-356 0 0 0 a_bridge models/darkmod/uw1/uw1_bridge_new.ase model 7
+356 0 0 0 a_bridge models/darkmod/uw1/uw1_bridge_new.ase entity 7
 357 0 0 0 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
 358 0 0 0 some_writing atdm:readable_base entity 10
 359 0 0 0 a_bed models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18

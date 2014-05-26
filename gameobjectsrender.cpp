@@ -815,14 +815,23 @@ void RenderEntityPaintingUW(int game, float x, float y, float z, ObjectItem &cur
 }
 
 void RenderEntityBridgeUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-{//UW2 wall paintings.
+{//UW2 bridges
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
 	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_%02d\"\n",game, currobj.flags & 0x7);
+	if (currobj.flags < 2)
+	{
+		fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_%02d\"\n", game, currobj.flags & 0x7);
+	}
+	else
+	{
+		printf("\nMake sure this skin exists!"); //uw2_bridge_texture_189
+		fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_texture_%03d\"\n", game, currobj.texture);
+	}
+	
 	EntityRotation(currobj.heading);
 	fprintf(MAPFILE, "\n}");
 }
