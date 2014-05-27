@@ -223,8 +223,13 @@ if (TargetLevelNo !=0 )	//Move to another level
 	}
 else
 	{
-	fprintf(fBODY,"\t$%s.activate($player1);\n"
-		,UniqueObjectName(currObj));
+		fprintf(fBODY, "\tif (JustTeleported == 0)\n\t{");
+		fprintf(fBODY, "\n\tJustTeleported = 1;");
+		fprintf(fBODY, "\n\t$%s.activate($player1);", UniqueObjectName(currObj));
+		fprintf(fBODY, "\n\tsys.wait(5);");	//wait a few seconds before we try and teleport again
+		fprintf(fBODY, "\n\tJustTeleported = 0;");
+		fprintf(fBODY, "\n\t}");
+		
 	}
 }
 
@@ -375,6 +380,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w")!=0)
 	return;
 	}	
 	
+fprintf(fGLOBALS,"\tfloat JustTeleported = 0;\n");
 fprintf(fMAIN,"\nvoid main()\n{\n");
 fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 	for (int y=63; y>=0;y--)
@@ -454,7 +460,7 @@ fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 	char line[255];
 	if (fopen_s(&fFINALSCRIPT,SCRIPT_FINAL_FILE, "w")==0)
 		{
-		fprintf(fFINALSCRIPT,"#ifndef __game%d_%d_script__\n#__game%d_%d_script__\n",game,LevelNo,game,LevelNo);
+		//fprintf(fFINALSCRIPT,"#ifndef __game%d_%d_script__\n#__game%d_%d_script__\n",game,LevelNo,game,LevelNo);
 		
 	
 		if (fopen_s(&fBODY, SCRIPT_GlOBAL_FILE, "r")!=0)
@@ -495,7 +501,7 @@ fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 				fclose(fBODY);
 			}					
 				
-		fprintf(fFINALSCRIPT,"#endif //__game%d_%d_script__",game,LevelNo);
+		//fprintf(fFINALSCRIPT,"#endif //__game%d_%d_script__",game,LevelNo);
 		fclose(fFINALSCRIPT);
 		}		
 	else
@@ -854,7 +860,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 	char line[255];
 	if (fopen_s(&fFINALSCRIPT,SCRIPT_FINAL_FILE, "w")==0)
 		{
-		fprintf(fFINALSCRIPT,"#ifndef __game%d_%d_script__\n#define __game%d_%d_script__\n",game,LevelNo,game,LevelNo);
+		//fprintf(fFINALSCRIPT,"#ifndef __game%d_%d_script__\n#define __game%d_%d_script__\n",game,LevelNo,game,LevelNo);
 		
 	
 		if (fopen_s(&fBODY, SCRIPT_GlOBAL_FILE, "r")!=0)
@@ -898,7 +904,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 				fclose(fBODY);
 			}					
 				
-		fprintf(fFINALSCRIPT,"#endif //__game%d_%d_script__",game,LevelNo);
+		//fprintf(fFINALSCRIPT,"#endif //__game%d_%d_script__",game,LevelNo);
 		fclose(fFINALSCRIPT);
 		}		
 	else
