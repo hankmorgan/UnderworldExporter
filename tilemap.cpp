@@ -79,15 +79,18 @@ void CleanUp(tile LevelInfo[64][64], int game)
 					switch (x)
 					{
 					case 0:	//bl corner
-						if ((LevelInfo[x+1][y].tileType == 0) && (LevelInfo[x][y+1].tileType == 0))
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y + 1].tileType == 0)
+						 && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y+1].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0 ; ;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					case 63://br corner
-						if ((LevelInfo[x-1][y].tileType == 0) && (LevelInfo[x][y+1].tileType == 0))
+						if ((LevelInfo[x - 1][y].tileType == 0) && (LevelInfo[x][y + 1].tileType == 0)
+						 && (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x][y+1].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0 ;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					default: // invert t
-						if ((LevelInfo[x+1][y].tileType == 0) && (LevelInfo[x][y+1].tileType == 0) && (LevelInfo[x-1][y].tileType == 0))
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x + 1][y].tileType == 0) 
+						&& (LevelInfo[x+1][y].TerrainChange == 0) && (LevelInfo[x][y+1].TerrainChange == 0) && (LevelInfo[x+1][y].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0 ;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					}
@@ -96,15 +99,18 @@ void CleanUp(tile LevelInfo[64][64], int game)
 					switch (x)
 					{
 					case 0:	//tl corner
-						if ((LevelInfo[x+1][y].tileType == 0) && (LevelInfo[x][y-1].tileType == 0))
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) 
+						&& (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y-1].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0 ;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					case 63://tr corner
-						if ((LevelInfo[x-1][y].tileType == 0) && (LevelInfo[x][y-1].tileType == 0))
+						if ((LevelInfo[x - 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) 
+						&& (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x][y-1].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0 ;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					default: //  t
-						if ((LevelInfo[x+1][y].tileType == 0) && (LevelInfo[x][y-1].tileType == 0) && (LevelInfo[x-1][y].tileType == 0))
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) && (LevelInfo[x - 1][y].tileType == 0) 
+						&& (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x-1][y].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					}	
@@ -113,15 +119,18 @@ void CleanUp(tile LevelInfo[64][64], int game)
 					switch (x)
 					{
 					case 0:		//left edge
-						if ((LevelInfo[x][y+1].tileType  == 0) && (LevelInfo[x+1][y].tileType  == 0) && (LevelInfo[x][y-1].tileType  == 0))
+						if ((LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) 
+							&& (LevelInfo[x][y+1].TerrainChange == 0) && (LevelInfo[x+1][y].TerrainChange == 0) && (LevelInfo[x][y-1].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					case 63:	//right edge
-						if ((LevelInfo[x][y+1].tileType  == 0) && (LevelInfo[x-1][y].tileType  == 0) && (LevelInfo[x][y-1].tileType  == 0))
+						if ((LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x - 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) 
+							&& (LevelInfo[x][y+1].TerrainChange == 0) && (LevelInfo[x-1][y].TerrainChange == 0) && (LevelInfo[x][y-1].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0 ;break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					default:		//+
-					if ((LevelInfo[x][y+1].tileType  == 0) && (LevelInfo[x+1][y].tileType  == 0) && (LevelInfo[x][y-1].tileType  == 0) && (LevelInfo[x-1][y].tileType  == 0) )
+						if ((LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) && (LevelInfo[x - 1][y].tileType == 0) 
+							&& (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x-1][y].TerrainChange == 0))
 						{LevelInfo[x][y].Render =0; break;}
 						else {LevelInfo[x][y].Render =1 ;break;}
 					}
@@ -443,7 +452,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 						offset++;
 						}
 					}
-				printf("\nTexture %d = %d", i, texture_map[i]);
+				printf("\nTexture %d = %d (%s)", i, texture_map[i],textureMasters[texture_map[i]].desc);
 				if (i == 0xf)
 					{
 					CeilingTexture=texture_map[i];

@@ -51,15 +51,15 @@ int main()
 //int game = UWDEMO;
 //int game = UW1;
 int game = UW2;
-//int mode = D3_MODE;
+int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
-int mode = SCRIPT_BUILD_MODE;
+//int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 
-levelNo =0;
+levelNo =24;
 
 GAME = game;
 switch (game)
@@ -80,7 +80,7 @@ switch (game)
 		case D3_MODE:
 		case ASCII_MODE:
 		case SCRIPT_BUILD_MODE:
-			//for (levelNo = 0; levelNo < 15; levelNo++)
+			//for (levelNo = 0; levelNo < 80; levelNo++)
 			//{
 				printf("============================Level %d=========================\n", levelNo);
 				exportMaps(game, mode, levelNo);
@@ -317,6 +317,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setDoorBits(LevelInfo,objList);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
+			setTerrainChangeBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.

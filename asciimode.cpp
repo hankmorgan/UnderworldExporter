@@ -608,10 +608,10 @@ void PrintLevelEntrances(tile LevelInfo[64][64], ObjectItem objList[1600], int L
 void PrintUWObjects(ObjectItem objList[1600])
 {
 //Prints the object debug info for UW.
-	for (int x = 0; x < 1600; x++)
+	for (int x = 0; x < 1024; x++)
 		{
-		if (objList[x].InUseFlag == 1)
-		{
+		//if (objList[x].InUseFlag == 1)
+		//{
 			printf("\n\nIn use %d", objList[x].InUseFlag);
 		UniqueObjectName(objList[x]);
 		printf("\n\nIndex: %d", objList[x].index);
@@ -628,7 +628,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 		printf("\n\tQuality : %d", objList[x].quality);
 		printf("\n\tNext : %d", objList[x].next);
 
-		printf("\n\tOwner : ", objList[x].owner);
+		printf("\n\tOwner : %d", objList[x].owner);
 		if (objList[x].is_quant == 1)
 		{
 			if (objList[x].link > 512)
@@ -654,5 +654,5 @@ void PrintUWObjects(ObjectItem objList[1600])
 			}
 
 		}
-	}
+	//}
 }

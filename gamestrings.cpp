@@ -82,8 +82,8 @@ long address_pointer=0;
 			address_pointer=2 + blocks[i].address + blocks[i].NoOfEntries *2;
 			//printf("It's strings begin at %d\n", address_pointer);
 			//printf("It should end at %d\n",blocks[i+1].address );
-			//printf("\n+=====================================+\n");
-			//printf("Block Name: %d\n", blocks[i].block_no);
+			printf("\n+=====================================+\n");
+			printf("Block Name: %d\n", blocks[i].block_no);
 			long strAdd;
 			int blnFnd;
 			strAdd= address_pointer;
@@ -123,7 +123,7 @@ long address_pointer=0;
 							//{printf("\nBlock %d String %d at %d:",blocks[i].block_no, j, strAdd);	}
 							{
 							//printf("\n%03d=",j);	
-							printf("\n%03d=%03d=",blocks[i].block_no,j);
+							printf("\n%03d=%03d=%03d=",i,blocks[i].block_no,j);
 							}
 						printf("%c",hman[node].symbol);
 						blnFnd = 1;

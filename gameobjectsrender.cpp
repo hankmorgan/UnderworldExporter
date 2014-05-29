@@ -357,8 +357,17 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 			tile t;	//temporary tile for rendering.
 			t.tileType = currobj.quality & 0x01;
 			t.Render = 1;
-			t.floorHeight = currobj.zpos >> 3;	//heights in uw are shifted
-			t.floorTexture = (currobj.quality >> 1) + 210;
+			t.floorHeight = ((currobj.zpos >> 3) >> 2) * 8 ;	//heights in uw are shifted
+			t.ceilingHeight = 0;
+			if (game!=UW2)
+				{
+				t.floorTexture = (currobj.quality >> 1) + 210;
+				}
+			else
+				{
+				t.floorTexture = LevelInfo[currobj.tileX ][currobj.tileY].floorTexture;//?
+				}
+			t.shockCeilingTexture = LevelInfo[i][j].shockCeilingTexture;
 			t.wallTexture = LevelInfo[i][j].wallTexture;
 			t.West = LevelInfo[i][j].wallTexture;//LevelInfo[i][j].West;
 			t.East = LevelInfo[i][j].wallTexture;//LevelInfo[i][j].East;
