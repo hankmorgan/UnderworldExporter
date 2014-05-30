@@ -354,6 +354,10 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 	{
 		for (int j = 0; j <= currobj.y; j++)
 		{
+			if (currobj.index == 996)
+			{
+				printf("");
+			}
 			tile t;	//temporary tile for rendering.
 			t.tileType = currobj.quality & 0x01;
 			t.Render = 1;
@@ -367,12 +371,12 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 				{
 				t.floorTexture = LevelInfo[currobj.tileX ][currobj.tileY].floorTexture;//?
 				}
-			t.shockCeilingTexture = LevelInfo[i][j].shockCeilingTexture;
-			t.wallTexture = LevelInfo[i][j].wallTexture;
-			t.West = LevelInfo[i][j].wallTexture;//LevelInfo[i][j].West;
-			t.East = LevelInfo[i][j].wallTexture;//LevelInfo[i][j].East;
-			t.North = LevelInfo[i][j].wallTexture;//LevelInfo[i][j].North;
-			t.South = LevelInfo[i][j].wallTexture;//LevelInfo[i][j].South ;
+			t.shockCeilingTexture = LevelInfo[currobj.tileX+i][currobj.tileY+j].shockCeilingTexture;
+			t.wallTexture = LevelInfo[currobj.tileX + i][currobj.tileY+j].wallTexture;
+			t.West = LevelInfo[currobj.tileX + i][currobj.tileY+j].West;
+			t.East = LevelInfo[currobj.tileX + i][currobj.tileY+j].East;
+			t.North = LevelInfo[currobj.tileX + i][currobj.tileY+j].North;
+			t.South = LevelInfo[currobj.tileX + i][currobj.tileY+j].South;
 			t.isWater = 0;
 			t.DimY = 1;
 			t.DimX = 1;

@@ -64,8 +64,8 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 		int y1 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_1]].tileY;
 		int x2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileX;
 		int y2 = objList[currObj.shockProperties[TRIG_PROPERTY_CONTROL_2]].tileY;
-		int xMin; int xMax;
-		int yMin; int yMax;
+		int xMin=0; int xMax=0;
+		int yMin=0; int yMax=0;
 
 		if (x1 >= x2)
 		{
@@ -83,6 +83,8 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 		{
 			yMin = y1; yMax = y2;
 		}
+		if (yMin < 0){ yMin = 0; }
+		if (xMin < 0){ xMin = 0; }
 		//fprintf(fBODY, "\tfloat dir = 1;\n");
 		fprintf(fBODY, "\tfloat shade = 0;\n");
 		fprintf(fBODY, "\tfloat shadeUpperAdj =0;");
@@ -98,7 +100,9 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 		//fprintf(fBODY, "\tif (%s_light_state == 0)\n\t{\n", UniqueObjectName(currObj));
 		//fprintf(fBODY, "\t\tdir = -1 ;\n\t\t%s_light_state = 1;\n\t}\n\telse\n\t{\n", UniqueObjectName(currObj));
 		//fprintf(fBODY, "\t\tdir = 1 ;\n\t\t%s_light_state = 0;\n\t}\n",  UniqueObjectName(currObj));
-
+		//if ((yMin >= 0) || (xMin >= 0))
+		//{
+		
 		for (int x = xMin; x <= xMax; x++)
 		{
 			for (int y = yMin; y <= yMax; y++)
@@ -139,7 +143,7 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 						fprintf(fBODY, "\t$light_%02d_%02d_lower.setColor( shade,shade,shade );\n", x, y);
 					}
 				}
-
+//			}
 			}
 		}
 		fprintf(fGLOBALS, "\tfloat %s_light_state = 1;\n", UniqueObjectName(currObj));	//Global for the master trigger state for on / off behaviour.
