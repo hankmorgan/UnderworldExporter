@@ -403,4 +403,4 @@
 459 0 0 0 some_damage TODO ignore 23
 461 0 0 0 a_sound_source models/darkmod/decorative/hourglass.ase model 32
 462 0 0 0 some_changing_terrain TODO ignore 23
-463 0 0 0 a_moving_door TODO ignore 23
+463 0 0 0 a_moving_door TODO ignore 23  

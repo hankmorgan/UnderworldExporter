@@ -684,8 +684,36 @@ switch (game)
 		////////-100	bottom face +absdist
 		//////fprintf (MAPFILE, "( 0 0 -1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/darkmod/stone/flat/slate_rough_dark01\" 0 0 0\n", (BrushSizeZ * (CEILING_HEIGHT)));	
 		//////fprintf (MAPFILE, "}\n}\n");
-		
-		//and a ceiling 
+
+
+			   for (int y = 0; y <= 63; y++)
+			   {
+
+				   for (int x = 0; x <= 63; x++)
+				   {
+					   if (LevelInfo[x][y].TerrainChange == 1)
+					   {//Renders a ceiling for that tile
+						tile tmp;
+						tmp.tileType =1;
+						tmp.Render=1;
+						tmp.isWater=0;
+						tmp.tileX=x;
+						tmp.tileY = y;
+						tmp.DimX=1;
+						tmp.DimY=1;
+						tmp.floorTexture = LevelInfo[x][y].floorTexture;
+						tmp.shockCeilingTexture = LevelInfo[x][y].shockCeilingTexture;
+						tmp.East= LevelInfo[x][y].East;
+						tmp.West = LevelInfo[x][y].West;
+						tmp.North = LevelInfo[x][y].North;
+						tmp.South = LevelInfo[x][y].South;
+						RenderDarkModTile(game, x, y, tmp,0,0,1,0);
+					   }
+				   }
+
+				}
+
+		//and a floor 
 		fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);
 		fprintf (MAPFILE, "{\nbrushDef3\n{\n");
 		//001	east face -absdist
@@ -810,8 +838,9 @@ void RenderEntityElevator(int game, tile LevelInfo[64][64], ObjectItem &currobj)
 		fprintf (MAPFILE, "\"classname\" \"func_mover\"\n");
 		fprintf (MAPFILE, "\"name\" \"floor_%03d_%03d\"\n" ,currobj.tileX,currobj.tileY);
 		fprintf (MAPFILE, "\"model\" \"floor_%03d_%03d\"\n" ,currobj.tileX,currobj.tileY);
+		fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY, 0);
 		PrimitiveCount=0;
-		RenderDarkModTile(game,currobj.tileX,currobj.tileY,LevelInfo[currobj.tileX][currobj.tileY],0,0,0,1);
+		RenderDarkModTile(game,0,0,LevelInfo[currobj.tileX][currobj.tileY],0,0,0,1);
 		fprintf (MAPFILE, "\n}");
 		
 		//ceiling
@@ -820,8 +849,9 @@ void RenderEntityElevator(int game, tile LevelInfo[64][64], ObjectItem &currobj)
 		fprintf (MAPFILE, "\"classname\" \"func_mover\"\n");
 		fprintf (MAPFILE, "\"name\" \"ceiling_%03d_%03d\"\n",currobj.tileX,currobj.tileY);
 		fprintf (MAPFILE, "\"model\" \"ceiling_%03d_%03d\"\n",currobj.tileX,currobj.tileY);
+		fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY, 0);
 		PrimitiveCount=0;
-		RenderDarkModTile(game,currobj.tileX,currobj.tileY,LevelInfo[currobj.tileX][currobj.tileY],0,1,1,0);
+		RenderDarkModTile(game,0,0,LevelInfo[currobj.tileX][currobj.tileY],0,1,1,0);
 		fprintf (MAPFILE, "\n}");
 		EntityCount++;
 

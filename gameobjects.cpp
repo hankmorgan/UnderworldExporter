@@ -1670,8 +1670,16 @@ char *UniqueObjectName(ObjectItem currObj)
 				}
 		default:
 			{
+			if (objectMasters[currObj.item_id].isSet == 1)
+				{
+					sprintf_s(str, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+				}
+			else
+				{
+					sprintf_s(str, 80, "BUGGEDOBJECT_%02d_%04d\0", currObj.levelno, currObj.index);
+				}
 				//_snprintf(str,80,"%s_%02d_%02d_%02d_%04d", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno ,currObj.index);
-				sprintf_s(str, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY, currObj.levelno, currObj.index);
+				
 				return str;
 				break;
 			}

@@ -612,13 +612,19 @@ void PrintUWObjects(ObjectItem objList[1600])
 		{
 		//if (objList[x].InUseFlag == 1)
 		//{
-			printf("\n\nIn use %d", objList[x].InUseFlag);
 		UniqueObjectName(objList[x]);
 		printf("\n\nIndex: %d", objList[x].index);
 		printf("\tName: %s", UniqueObjectName(objList[x]));
-		printf("\n\tObject Type : %d %s", objList[x].item_id, objectMasters[objList[x].item_id].desc);
+		if(objectMasters[objList[x].item_id].isSet==1)
+			{
+			printf("\n\tObject Type : %d %s", objList[x].item_id, objectMasters[objList[x].item_id].desc);
+			}
+		else
+			{
+			printf("\n\tObject Type : %d %s", objList[x].item_id, "Unknown or bugged");
+			}
 		printf("\n\tLocation Tile(%d,%d) Position(%d,%d,%d) Heading (%d)", objList[x].tileX, objList[x].tileY, objList[x].x, objList[x].y, objList[x].zpos, objList[x].heading);
-
+		printf("\n\nIn use %d", objList[x].InUseFlag);
 		printf("\n\tFlags: %d", objList[x].flags);
 		printf("\n\t\tEnchantment: %d", objList[x].enchantment);
 		printf("\n\t\tDoordir : %d", objList[x].doordir);

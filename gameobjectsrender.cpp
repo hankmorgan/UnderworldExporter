@@ -335,7 +335,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 			//			}
 			fprintf(MAPFILE, "\"model\" \"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
 			fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", (currobj.tileX + i)*BrushSizeX, (currobj.tileY + j)*BrushSizeY, 0);
-			RenderDarkModTile(game, 0, 0, LevelInfo[currobj.tileX + i][currobj.tileY + j], LevelInfo[currobj.tileX + i][currobj.tileY + j].isWater, 0, 0, 0);
+			RenderDarkModTile(game, 0, 0, LevelInfo[currobj.tileX + i][currobj.tileY + j], LevelInfo[currobj.tileX + i][currobj.tileY + j].isWater, 0, 0, 1);
 			fprintf(MAPFILE, "\n}\n");
 			tileCount++;
 		}
@@ -354,10 +354,6 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 	{
 		for (int j = 0; j <= currobj.y; j++)
 		{
-			if (currobj.index == 996)
-			{
-				printf("");
-			}
 			tile t;	//temporary tile for rendering.
 			t.tileType = currobj.quality & 0x01;
 			t.Render = 1;
@@ -381,7 +377,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 			t.DimY = 1;
 			t.DimX = 1;
 			t.hasElevator = 0;
-			RenderDarkModTile(game, i, j, t, 0, 0, 0, 0);
+			RenderDarkModTile(game, i, j, t, 0, 0, 0, 1);
 		}
 	}
 	fprintf(MAPFILE, "\n}\n");
@@ -405,10 +401,20 @@ void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem 
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"wait\" \"5\"\n");
-	if (game==UW2)
+	switch (game)
 		{
-		fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+		case UWDEMO:
+		case UW1:	//At the corner of the tile
+			fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY, LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ);
+			break;
+		case UW2:	//Positioned around the triggers origin.
+			fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+			break;
+		case SHOCK:	//At the corner of the tile.
+			fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY,0);
+			break;
 		}
+
 	tile t;	//temp tile for rendering trigger
 	t.floorTexture = TRIGGER_MULTI;
 	t.wallTexture = TRIGGER_MULTI;
@@ -423,22 +429,21 @@ void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem 
 	t.ceilingHeight = CEILING_HEIGHT;
 	t.isWater = 0;
 	t.hasElevator = 0;
-	if (game == SHOCK)
-	{	//enter tile behaviour.
-		RenderGenericTile(currobj.tileX, currobj.tileY, t, CEILING_HEIGHT, 0);
+	switch (game)
+	{
+	case UWDEMO:
+	case UW1:
+		RenderGenericTile(0, 0, t, 1, 0);
+		break;
+	case UW2:
+		RenderGenericTileAroundOrigin(currobj.tileX, currobj.tileY, t, LevelInfo[currobj.tileX][currobj.tileY].floorHeight + 1, LevelInfo[currobj.tileX][currobj.tileY].floorHeight, BrushSizeZ);
+		break;
+	case SHOCK:
+		//enter any part of tile
+		RenderGenericTile(0, 0, t, CEILING_HEIGHT, 0);
+		break;
 	}
-	else
-	{	//step on behaviour
-		if (game != UW2)
-		{
-			RenderGenericTile(currobj.tileX, currobj.tileY, t, LevelInfo[currobj.tileX][currobj.tileY].floorHeight + 1, LevelInfo[currobj.tileX][currobj.tileY].floorHeight);
-		}
-		else
-		{//UW2 move triggers are embedded in the walls for stairs up/down
-			RenderGenericTileAroundOrigin(currobj.tileX, currobj.tileY, t, LevelInfo[currobj.tileX][currobj.tileY].floorHeight + 1, LevelInfo[currobj.tileX][currobj.tileY].floorHeight, BrushSizeZ);
-		}
-		
-	}
+
 	fprintf(MAPFILE, "\n}");
 	createScriptCall(currobj, x, y, z);
 }
@@ -1528,9 +1533,10 @@ void RenderEntityTMAP(int game, float x, float y, float z, ObjectItem &currobj, 
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", UniqueObjectName(currobj));
 //	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"origin\" \"%d %d %f\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY, z);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	//Renders a patch to display the object
-	RenderPatch(game, currobj.tileX, currobj.tileY, currobj.zpos, currobj.index, objList);
+	RenderPatch(game, 0, 0, currobj.zpos, currobj.index, objList);
 	fprintf(MAPFILE, "\n}\n");
 	EntityCount++;
 	if (isTrigger(objList[currobj.link]) == 1)
