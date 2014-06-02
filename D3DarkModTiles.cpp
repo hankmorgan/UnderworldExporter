@@ -2201,3 +2201,64 @@ void RenderGenericTileAroundOrigin(int x, int y, tile &t, int iCeiling, int iFlo
 	getFloorTextureName(t, fBOTTOM);
 	fprintf(MAPFILE, "}\n}\n");
 }
+
+
+void RenderWaterTiles(int game, tile LevelInfo[64][64], int x, int y)
+{
+	//Renders water tiles properly with the correct border textures
+	tile t = LevelInfo[x][y];	//temp tile for rendering.
+	//Test each face for waterfalls. Open -> open of different height or slope that does not go in the same direction
+	t.East = NODRAW;
+	t.West = NODRAW;
+	t.North = NODRAW;
+	t.South = NODRAW;
+	t.wallTexture = NODRAW;
+	t.DimY=1;
+	t.DimX = 1;
+	if (t.tileType != TILE_SOLID)
+	{
+		//test south.
+		if ((LevelInfo[x][y - 1].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x][y - 1].floorHeight))
+		{
+			t.South = t.Top;	//force face texture to be water.
+		}
+		if ((LevelInfo[x][y - 1].tileType == TILE_SLOPE_S) || (LevelInfo[x][y - 1].tileType == TILE_SLOPE_E) || (LevelInfo[x][y - 1].tileType == TILE_SLOPE_W))
+		{
+			t.South = t.Top;
+		}
+
+		//test north.
+		if ((LevelInfo[x][y + t.DimY].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x][y + t.DimY].floorHeight))
+		{
+			t.North = t.Top;	//force face texture to be water.
+		}
+		if ((LevelInfo[x][y + t.DimY].tileType == TILE_SLOPE_N) || (LevelInfo[x][y + t.DimY].tileType == TILE_SLOPE_E) || (LevelInfo[x][y + t.DimY].tileType == TILE_SLOPE_W))
+		{
+			t.North = t.Top;
+		}
+
+		//test west.
+		if ((LevelInfo[x - 1][y].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x - 1][y].floorHeight))
+		{
+			t.West = t.Top;	//force face texture to be water.
+		}
+		if ((LevelInfo[x - 1][y].tileType == TILE_SLOPE_N) || (LevelInfo[x - 1][y].tileType == TILE_SLOPE_E) || (LevelInfo[x - 1][y].tileType == TILE_SLOPE_S))
+		{
+			t.West = t.Top;
+		}
+
+		//test east.
+		if ((LevelInfo[x + t.DimX][y].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x + t.DimX][y].floorHeight))
+		{
+			t.East = t.Top;	//force face texture to be water.
+		}
+		if ((LevelInfo[x + t.DimX][y].tileType == TILE_SLOPE_N) || (LevelInfo[x + t.DimX][y].tileType == TILE_SLOPE_S) || (LevelInfo[x + t.DimX][y].tileType == TILE_SLOPE_W))
+		{
+			t.East = t.Top;
+		}
+
+	}
+
+	RenderDarkModTile(game, x, y, t, 1, 0, 0, 1);
+
+}

@@ -46,7 +46,7 @@ int East; int West;
 int Diagonal;
 int Top; int Bottom;	//Textures in each face
 short isWater;		//Set when it has a water texture.
-
+short waterRegion;	//Index to the water contigous area.
 short tileX;
 short tileY;
 
@@ -114,7 +114,8 @@ void unpack_data (unsigned char *pack,    unsigned char *unpack,  unsigned long 
 long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength, long *chunkType);
 int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction);
 void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index, int *property1,int *property2,int *property3,int *property4);
-
+void MergeCurrentWaterRegion(tile LevelInfo[64][64], int currRegion, int x, int y);
+void MergeWaterRegions(tile LevelInfo[64][64]);
 extern tile LevelInfo[64][64];
 
 #endif /*tilemap_h*/

@@ -566,6 +566,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].Grouped=0;	
 				LevelInfo[x][y].VisibleFaces = 63;
 				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0) && (ENABLE_WATER==1));
+				LevelInfo[x][y].waterRegion=0;
 				//Force off water to save on compile time during testing.
 				//LevelInfo[x][y].isWater=0;
 				//LevelInfo[x][y].TerrainChange=0;
@@ -733,6 +734,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 			LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
 
 			LevelInfo[x][y].isWater = 0;	//No swimming in shock.
+			LevelInfo[x][y].waterRegion=0;
 			LevelInfo[x][y].floorHeight = ((lev_ark[address_pointer + 1]) & 0x1F);
 			LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
@@ -1131,4 +1133,51 @@ for (int x=0; x<64;x++)
 	
 		}	
 	}	
+}
+
+void MergeWaterRegions(tile LevelInfo[64][64])
+{
+int currRegion;
+currRegion =1;
+	for (int x = 0; x<64; x++)
+	{
+		for (int y = 0; y<64; y++)
+		{
+			if ((LevelInfo[x][y].isWater == 1) && (LevelInfo[x][y].waterRegion==0))//Unset water region.
+			{
+				LevelInfo[x][y].waterRegion = currRegion;
+				MergeCurrentWaterRegion(LevelInfo, currRegion, x, y);
+				currRegion++;
+			}
+		}
+	}
+}
+
+void MergeCurrentWaterRegion(tile LevelInfo[64][64], int currRegion, int x, int y)
+{
+	//north
+	if ((LevelInfo[x+1][y].isWater==1) && (LevelInfo[x+1][y].waterRegion == 0))
+		{
+		LevelInfo[x+1][y].waterRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x + 1, y);
+		}
+	//south
+	if ((LevelInfo[x - 1][y].isWater == 1) && (LevelInfo[x - 1][y].waterRegion == 0))
+	{
+		LevelInfo[x - 1][y].waterRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x - 1, y);
+	}
+	//east
+	if ((LevelInfo[x][y + 1].isWater == 1) && (LevelInfo[x][y + 1].waterRegion == 0))
+	{
+		LevelInfo[x][y+1].waterRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x, y + 1);
+	}
+	//west
+	if ((LevelInfo[x][y - 1].isWater == 1) && (LevelInfo[x][y - 1].waterRegion == 0))
+	{
+		LevelInfo[x][y-1].waterRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x, y - 1);
+	}
+
 }

@@ -223,6 +223,7 @@ void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int Leve
 
 	printDoorPositions(LevelInfo, objList, LevelNo);
 	
+	printWaterRegions(LevelInfo,LevelNo);
 
 
 if (game == SHOCK)
@@ -661,4 +662,20 @@ void PrintUWObjects(ObjectItem objList[1600])
 
 		}
 	//}
+}
+
+void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
+{
+	//Prints the tilemap 
+	int x; int y;
+	printf("\nNow Printing Water Regions for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+	{
+		printf("\n");
+		for (x = 0; x <= 63; x++)
+		{
+			printf("%02d-",LevelInfo[x][y].waterRegion);
+		}
+	}
+
 }

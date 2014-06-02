@@ -9,6 +9,7 @@
 #include "gameobjects.h"
 #include "gameobjectsrender.h"
 #include "D3DarkMod.h"
+#include "D3DarkModTiles.h"
 
 int BrushSizeX;
 int BrushSizeY;
@@ -136,79 +137,52 @@ switch (game)
 				break;
 			}
 		//Now render thewater
-
-		for (y=0; y<=63;y++) 
+		int currRegion = 1;
+		for (x = 0; x<64; x++)
+		{
+			for (y = 0; y<64; y++)
 			{
-
-			for (x=0; x<=63;x++)
-				{
-				if (LevelInfo[x][y].isWater == 1)
-					{	//TODO:Take this section out of the loop and just just one entity for all the water?
-						fprintf (MAPFILE, "\n");
-						PrimitiveCount=0;	//resets for each entity.
-						fprintf (MAPFILE, "// entity %d\n", EntityCount);
-						fprintf (MAPFILE, "{\n\"classname\" \"atdm:liquid_water\"\n");
-						fprintf (MAPFILE, "\n\"name\" \"atdm_liquid_water_%02d\"\n",EntityCount);
-						fprintf (MAPFILE, "\n\"model\" \"atdm_liquid_water_%02d\"\n",EntityCount);
-						fprintf (MAPFILE, "\n\"underwater_gui\" \"guis\\underwater\\underwater_green_thinmurk.gui\"\n");	
-						tile t = LevelInfo[x][y];	//temp tile for rendering.
-						//Test each face for waterfalls. Open -> open of different height or slope that does not go in the same direction
-						t.East = NODRAW;
-						t.West = NODRAW;
-						t.North =NODRAW;
-						t.South =NODRAW;
-						t.wallTexture = NODRAW;
-						if (t.tileType !=TILE_SOLID)
+				if (LevelInfo[x][y].waterRegion == currRegion)
+				{//Found a water region.
+					fprintf(MAPFILE, "\n");
+					PrimitiveCount = 0;	//resets for each entity.
+					fprintf(MAPFILE, "// entity %d\n", EntityCount);
+					fprintf(MAPFILE, "{\n\"classname\" \"atdm:liquid_water\"\n");
+					fprintf(MAPFILE, "\n\"name\" \"WaterRegion_%02d\"\n", currRegion);
+					//fprintf(MAPFILE, "\n\"model\" \"atdm_liquid_water_%02d\"\n", EntityCount);
+					fprintf(MAPFILE, "\n\"model\" \"WaterRegion_%02d\"\n", currRegion);
+					fprintf(MAPFILE, "\n\"underwater_gui\" \"guis\\underwater\\underwater_green_thinmurk.gui\"\n");
+					//fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", x*BrushSizeX, y*BrushSizeY, 0); 
+					for (int i = 0; i < 64; i++)
+					{
+						for (int j = 0; j < 64; j++)
+						{
+							if ((LevelInfo[i][j].isWater == 1) && (LevelInfo[i][j].waterRegion== currRegion))
 							{
-							//test south.
-							if ((LevelInfo[x][y-1].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x][y-1].floorHeight ))
-								{
-								t.South = t.Top ;	//force face texture to be water.
-								}
-							if ( (LevelInfo[x][y-1].tileType == TILE_SLOPE_S) || (LevelInfo[x][y-1].tileType == TILE_SLOPE_E) || (LevelInfo[x][y-1].tileType == TILE_SLOPE_W) )
-								{
-								t.South = t.Top ;
-								}
-								
-							//test north.
-							if ((LevelInfo[x][y+t.DimY].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x][y+t.DimY].floorHeight ))
-								{
-								t.North  = t.Top ;	//force face texture to be water.
-								}
-							if ( (LevelInfo[x][y+t.DimY].tileType == TILE_SLOPE_N) || (LevelInfo[x][y+t.DimY].tileType == TILE_SLOPE_E) || (LevelInfo[x][y+t.DimY].tileType == TILE_SLOPE_W) )
-								{
-								t.North = t.Top ;
-								}	
-
-							//test west.
-							if ((LevelInfo[x-1][y].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x-1][y].floorHeight ))
-								{
-								t.West = t.Top ;	//force face texture to be water.
-								}
-							if ( (LevelInfo[x-1][y].tileType == TILE_SLOPE_N) || (LevelInfo[x-1][y].tileType == TILE_SLOPE_E) || (LevelInfo[x-1][y].tileType == TILE_SLOPE_S) )
-								{
-								t.West = t.Top ;
-								}	
-								
-							//test east.
-							if ((LevelInfo[x+t.DimX][y].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x+t.DimX][y].floorHeight ))
-								{
-								t.East  = t.Top ;	//force face texture to be water.
-								}
-							if ( (LevelInfo[x+t.DimX][y].tileType == TILE_SLOPE_N) || (LevelInfo[x+t.DimX][y].tileType == TILE_SLOPE_S) || (LevelInfo[x+t.DimX][y].tileType == TILE_SLOPE_W) )
-								{
-								t.East = t.Top ;
-								}																								
-							
+							RenderWaterTiles(game, LevelInfo, i, j);
 							}
-						
-						RenderDarkModTile(game,x,y,t,1,0,0,1);
-						fprintf (MAPFILE, "}\n");
-						EntityCount++;	
+						}
 					}
+					fprintf(MAPFILE, "}\n");
+					EntityCount++;
+					currRegion++;
+					x=-1;y=-1;	//restart the loop.
 				}
-
 			}
+		}
+
+		//for (y=0; y<=63;y++) 
+		//	{
+
+		//	for (x=0; x<=63;x++)
+		//		{
+		//		if (LevelInfo[x][y].isWater == 1)
+		//			{	//TODO:Take this section out of the loop and just just one entity for all the water?
+		//			
+		//			}
+		//		}
+		//	}
+
 			if  ((game == SHOCK) && (ENABLE_LIGHTING))
 				{//Light her up based on shade values
 				for (y=0; y<=63;y++) 
@@ -364,7 +338,8 @@ switch (game)
 				}
 		
 }
-	
+
+
 void getWallTextureName(tile t, int face, short waterWall)
 {
 //Spits out the wall textures.

@@ -44,7 +44,7 @@
 #define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\uw1_1.map"
 
 #define ENABLE_LIGHTING 0
-#define ENABLE_WATER 0
+#define ENABLE_WATER 1
 
 /*Globals*/
 extern int BrushSizeX;

@@ -305,7 +305,8 @@ void exportMaps(int game,int mode,int LevelNo)
 			setTerrainChangeBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
-			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
+			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
+			MergeWaterRegions(LevelInfo);
 			break; 
 			}
 		case UW2:		//Underworld 2
