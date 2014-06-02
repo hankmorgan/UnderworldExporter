@@ -107,7 +107,7 @@ void BuildObjectListShock(tile LevelInfo[64][64], ObjectItem objList[1600], long
 
 void setElevatorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
-void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setObjectTileXY(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 

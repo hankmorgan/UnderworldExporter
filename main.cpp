@@ -283,7 +283,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			filePath = UW0_LEVEL_PATH ;	//"C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st";
 			BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
-			setObjectTileXY(LevelInfo,objList);
+			setObjectTileXY(game,LevelInfo,objList);
 			setDoorBits(LevelInfo,objList);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
@@ -298,7 +298,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			filePath = UW1_LEVEL_PATH ;	// "C:\\Games\\Ultima\\UW1\\DATA\\lev.ark";
 			BuildTileMapUW(LevelInfo,objList, texture_map,filePath,game,LevelNo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
-			setObjectTileXY(LevelInfo,objList);
+			setObjectTileXY(game, LevelInfo, objList);
 			setDoorBits(LevelInfo,objList);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
@@ -314,7 +314,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			filePath = UW2_LEVEL_PATH;	//"C:\\Games\\Ultima\\UW2\\DATA\\lev.ark";
 			if (BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo) == -1) {return;};
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
-			setObjectTileXY(LevelInfo,objList);
+			setObjectTileXY(game, LevelInfo, objList);
 			setDoorBits(LevelInfo,objList);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
@@ -322,6 +322,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
+			MergeWaterRegions(LevelInfo);
 			break;			
 			}
 		case SHOCK:		//system shock

@@ -1111,7 +1111,7 @@ for (int x=0; x<64;x++)
 	
 }
 
-void setObjectTileXY(tile LevelInfo[64][64], ObjectItem objList[1600])
+void setObjectTileXY(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {//Justs some useful info to know.
 //ObjectItem currObj;
 for (int x=0; x<64;x++)
@@ -1126,13 +1126,29 @@ for (int x=0; x<64;x++)
 				objList[nextObj].tileX=x;
 				objList[nextObj].tileY=y;
 				objList[nextObj].InUseFlag = 1;
+				if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC))
+					{//Include the containers contents as having this tilex/y
+					if (objList[nextObj].link != 0)
+						{
+						ObjectItem tmpobj = objList[objList[nextObj].link];
+						while (tmpobj.next != 0)
+							{
+								objList[tmpobj.index].tileX = x;
+								objList[tmpobj.index].tileY = y;
+								objList[tmpobj.index].InUseFlag = 1;
+								tmpobj = objList[tmpobj.next];
+							}
+						objList[tmpobj.index].tileX = x;
+						objList[tmpobj.index].tileY = y;
+						objList[tmpobj.index].InUseFlag = 1;
+						}
+					}
 				nextObj=objList[nextObj].next;
 				}
 
 			}
-	
 		}	
-	}	
+	}
 }
 
 void MergeWaterRegions(tile LevelInfo[64][64])
