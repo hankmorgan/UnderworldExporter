@@ -2216,7 +2216,7 @@ void RenderWaterTiles(int game, tile LevelInfo[64][64], int x, int y)
 	t.wallTexture = NODRAW;
 	t.DimY=1;
 	t.DimX = 1;
-	if (t.tileType != TILE_SOLID)
+	if ((t.tileType != TILE_SOLID) && (t.TerrainChange ==0))
 	{
 		//test south.
 		if ((LevelInfo[x][y - 1].tileType == TILE_OPEN) && (t.floorHeight > LevelInfo[x][y - 1].floorHeight))

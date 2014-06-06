@@ -407,21 +407,28 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				{texture_map[i] = getValAtAddress(tex_ark,textureAddress+(i*2),16);break;}//tex_ark[textureAddress+i];break;}
 			case UW1:
 				{
-				if (i<58)	//Wall and floor textures are int 16s
+				if (i<48)	//Wall and floor textures are int 16s
 					{
 					texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 16); //(i * 2)
 						offset=offset+2;
 						
 					}
+				else if (i<57)	//Wall and floor textures are int 16s
+				{
+					texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 16)+210; //(i * 2)
+					offset = offset + 2;
+
+				}
 				else
 					{ //door textures are int 8s
-						texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 8); //(i * 1)
+						texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
 						offset++;
 					}
 				if (i == 57)
 					{
-					CeilingTexture = texture_map[i]+210;
+					CeilingTexture = texture_map[i];
 					}
+				printf("\nTexture %d = %d (%s)", i, texture_map[i], textureMasters[texture_map[i]].desc);
 				break;
 				}
 			case UW2:
@@ -1096,6 +1103,7 @@ for (int x=0; x<64;x++)
 						for (int k=y; (k <64 && k<= y+currObj.y); k++  )
 							{
 							LevelInfo[j][k].TerrainChange = 1;
+							LevelInfo[j][k].isWater  = 0;// turn off water in terrain change tiles
 							}						
 						}
 					currObj.tileX=x;

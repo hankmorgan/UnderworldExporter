@@ -619,7 +619,6 @@ switch (game)
 
 			objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
 			
-			
 			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
 				{
 				//printf("\n%d\n", texture_map[objList[x].owner]);

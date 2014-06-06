@@ -51,15 +51,15 @@ int main()
 //int game = UWDEMO;
 int game = UW1;
 //int game = UW2;
-int mode = D3_MODE;
+//int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
-//int mode = SCRIPT_BUILD_MODE;
+int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 
-levelNo = 3;
+levelNo = 2;
 
 GAME = game;
 switch (game)
@@ -290,6 +290,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setTerrainChangeBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
+			MergeWaterRegions(LevelInfo);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
 			break; 			
 			}

@@ -172,14 +172,14 @@ k = 0;
 for (i=0;i<dimX;i++)
 	{
 	for (j=0;j<dimY;j++)
-		{
+		{//\"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
 		fprintf(fBODY,"\t$initial_%s_%03d.remove();\n"
-			,UniqueObjectName(currObj));
+			,UniqueObjectName(currObj),k);
 		k++;
 		}
 	}
 
-	fprintf(fBODY,"\t$final%s.show();\n"    
+	fprintf(fBODY,"\t$final_%s.show();\n"    
 		,UniqueObjectName(currObj));
 }
 
@@ -343,7 +343,7 @@ void a_check_variable_trapSCRIPT(int variable, int value)
 {
 //Will need to expand on this for more complex checks
 
- fprintf(fBODY,"\tif (var_%d == %d) \n{\n",variable,value);
+ fprintf(fBODY,"\tif (var_%d == %d) \n\t{\n",variable,value);
 }
 
 void addConditionals(int noofCond)
@@ -351,7 +351,7 @@ void addConditionals(int noofCond)
 int i = 1;
 for(i=1;i<=noofCond;i++)
 	{
-    fprintf(fBODY,"\n}");
+    fprintf(fBODY,"\n\t}");
     }
 }
 
@@ -584,7 +584,7 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
         break;
     case A_CHECK_VARIABLE_TRAP:
         a_check_variable_trapSCRIPT(currObj.zpos, (((currObj.owner & 0x7) <<3) | (currObj.y )));
-        conditionalCount++;
+		*conditionalCount = *conditionalCount+1;
         break;
     case A_COMBINATION_TRAP:
         tobedone("A_COMBINATION_TRAP");

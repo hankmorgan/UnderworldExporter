@@ -676,6 +676,7 @@ switch (game)
 						tmp.tileY = y;
 						tmp.DimX=1;
 						tmp.DimY=1;
+						tmp.ceilingHeight =0;
 						tmp.floorTexture = LevelInfo[x][y].floorTexture;
 						tmp.shockCeilingTexture = LevelInfo[x][y].shockCeilingTexture;
 						tmp.East= LevelInfo[x][y].East;
