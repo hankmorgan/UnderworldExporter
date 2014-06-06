@@ -358,6 +358,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 			t.tileType = currobj.quality & 0x01;
 			t.Render = 1;
 			t.floorHeight = ((currobj.zpos >> 3) >> 2) * 8 ;	//heights in uw are shifted
+			t.floorHeight = (currobj.zpos >> 2) ;	//heights in uw are shifted
 			t.ceilingHeight = 0;
 			if (game!=UW2)
 				{
@@ -632,13 +633,13 @@ void RenderEntityContainer(int game, float x, float y, float z, ObjectItem &curr
 
 	if (game != SHOCK)
 	{
-		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
 		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
 		fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		//I need to spawn it's contents at the same location (recursively)
 		//render it first.
 		//TODO: I also need to fix containers which are not really entities
-		fprintf(MAPFILE, "\"name\" \"%s_%03d\"\n", objectMasters[currobj.item_id].desc, EntityCount);
+		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		if (objectMasters[objList[currobj.link].item_id].type == LOCK)	//container has a lock.
 		{//bit 1 of the flags is the lock?
 			fprintf(MAPFILE, "\"locked\" \"%d\"\n", (objList[currobj.link].flags & 0x01));
@@ -662,7 +663,10 @@ void RenderEntityContainer(int game, float x, float y, float z, ObjectItem &curr
 			ObjectItem tmpobj = objList[currobj.link];
 			while (tmpobj.next != 0)
 			{
-				RenderEntity(game, x, y, z, tmpobj, objList, LevelInfo);
+				if (objectMasters[objList[currobj.link].item_id].type != LOCK) 
+					{
+					RenderEntity(game, x, y, z, tmpobj, objList, LevelInfo);
+					}
 				tmpobj = objList[tmpobj.next];
 			}
 			RenderEntity(game, x, y, z, tmpobj, objList, LevelInfo);

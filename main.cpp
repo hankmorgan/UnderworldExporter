@@ -59,7 +59,7 @@ int mode = D3_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 
-levelNo = 0;
+levelNo = 3;
 
 GAME = game;
 switch (game)
