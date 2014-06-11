@@ -142,7 +142,7 @@ switch (game)
 		{
 			for (y = 0; y<64; y++)
 			{
-				if (LevelInfo[x][y].waterRegion == currRegion)
+				if ((LevelInfo[x][y].roomRegion == currRegion) && (LevelInfo[x][y].isWater ==1))
 				{//Found a water region.
 					fprintf(MAPFILE, "\n");
 					PrimitiveCount = 0;	//resets for each entity.
@@ -157,7 +157,7 @@ switch (game)
 					{
 						for (int j = 0; j < 64; j++)
 						{
-							if ((LevelInfo[i][j].isWater == 1) && (LevelInfo[i][j].waterRegion== currRegion))
+							if ((LevelInfo[i][j].isWater == 1) && (LevelInfo[i][j].roomRegion== currRegion))
 							{
 							RenderWaterTiles(game, LevelInfo, i, j);
 							}
@@ -871,6 +871,7 @@ float getSteepOffset(int steepness)
 
 void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floorAlign1, float *floorAlign2, float *floorAlign3, float *floorAlign4, float *floorAlign5, float *floorAlign6)
 {
+//TODO: Swap the sign of floorAlign4 around.
 
 	float BrushZ = (float)BrushSizeZ;
 	float BrushX = (float)BrushSizeX;
@@ -884,7 +885,7 @@ void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floo
 	case TILE_OPEN:
 		{
 			//flip the fourth parameter since I'm an idiot who did'nt check his work
-			//*floorAlign4= -*floorAlign4;
+			*floorAlign4= -*floorAlign4;
 			break;
 		}
 	case TILE_SLOPE_N:
@@ -982,10 +983,6 @@ void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floo
 				float shiftPoint = (t.tileY + 1) * t.shockSteep + (CEILING_HEIGHT - t.ceilingHeight - t.shockSteep);
 				shiftFactor = getSteepOffset(t.shockSteep) * (float)shiftPoint;
 				*floorAlign6 = +shiftFactor;
-			}
-			else
-			{
-				printf("x");
 			}
 			break;
 		}

@@ -52,14 +52,14 @@ int main()
 int game = UW1;
 //int game = UW2;
 //int mode = D3_MODE;
-//int mode = ASCII_MODE;
+int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
-int mode = SCRIPT_BUILD_MODE;
+//int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 
-levelNo = 2;
+levelNo = 0;
 
 GAME = game;
 switch (game)
@@ -265,7 +265,8 @@ void exportMaps(int game,int mode,int LevelNo)
 	ObjectItem objList[1600];
 	//shockObjectItem shockobjList[1600];
 	long texture_map[256]; 
-	long texture_map_shock[272]; 
+	long texture_map_shock[272];
+	int roomIndex=1; 
 
 	char *filePath;
 	if (mode == D3_MODE)
@@ -282,9 +283,12 @@ void exportMaps(int game,int mode,int LevelNo)
 			{
 			filePath = UW0_LEVEL_PATH ;	//"C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st";
 			BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
+			setTileNeighbourCount(LevelInfo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
 			setObjectTileXY(game,LevelInfo,objList);
 			setDoorBits(LevelInfo,objList);
+			setCorridors(LevelInfo, &roomIndex);
+			setRooms(LevelInfo, &roomIndex);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
@@ -298,9 +302,12 @@ void exportMaps(int game,int mode,int LevelNo)
 			{
 			filePath = UW1_LEVEL_PATH ;	// "C:\\Games\\Ultima\\UW1\\DATA\\lev.ark";
 			BuildTileMapUW(LevelInfo,objList, texture_map,filePath,game,LevelNo);
+			setTileNeighbourCount(LevelInfo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
 			setObjectTileXY(game, LevelInfo, objList);
 			setDoorBits(LevelInfo,objList);
+			setCorridors(LevelInfo, &roomIndex);
+			setRooms(LevelInfo,&roomIndex);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
@@ -314,9 +321,12 @@ void exportMaps(int game,int mode,int LevelNo)
 			{
 			filePath = UW2_LEVEL_PATH;	//"C:\\Games\\Ultima\\UW2\\DATA\\lev.ark";
 			if (BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo) == -1) {return;};
+			setTileNeighbourCount(LevelInfo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
 			setObjectTileXY(game, LevelInfo, objList);
 			setDoorBits(LevelInfo,objList);
+			setCorridors(LevelInfo, &roomIndex);
+			setRooms(LevelInfo, &roomIndex);
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);

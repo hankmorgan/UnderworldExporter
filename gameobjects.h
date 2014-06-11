@@ -300,6 +300,8 @@ struct ObjectItem
 	int objectConversion;	//For what an object can turn into
 	short keyCount; //If this is a key then it needs to know which number of key it is.
 	short AlreadyRendered;
+
+	long address;	//The file address of the object in question.
 };
 
 

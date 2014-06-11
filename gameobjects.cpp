@@ -343,7 +343,7 @@ mstaddress_pointer=0;
 			objList[MasterIndex].x = 0;
 			objList[MasterIndex].y = 0;
 			objList[MasterIndex].zpos =0;
-
+			objList[MasterIndex].address=mstaddress_pointer;
 				InUseFlag=getValAtAddress(mst_ark,mstaddress_pointer,8);
 				objList[MasterIndex].InUseFlag = InUseFlag;
 					
@@ -589,7 +589,8 @@ switch (game)
 			objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 			objList[x].tileX=-1;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
 			objList[x].tileY=-1;
-			objList[x].levelno = LevelNo ;			
+			objList[x].levelno = LevelNo ;	
+			objList[x].address = objectsAddress+address_pointer;
 			//These three will get set when I am rendering the object entity and if the item is an npc's inventory.
 			objList[x].objectOwner =0;
 			objList[x].objectOwnerEntity =0;

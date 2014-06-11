@@ -40,8 +40,8 @@
 #define SCRIPT_GlOBAL_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptglobal.txt"
 #define SCRIPT_MAIN_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptmain.txt"
 #define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
-#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\uw1_2.script"
-#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\uw1_2.map"
+#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\uw2_47.script"
+#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\uw2_47.map"
 
 #define ENABLE_LIGHTING 0
 #define ENABLE_WATER 1

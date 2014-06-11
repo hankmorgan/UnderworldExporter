@@ -223,8 +223,11 @@ void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int Leve
 
 	printDoorPositions(LevelInfo, objList, LevelNo);
 	
-	printWaterRegions(LevelInfo,LevelNo);
+	//printWaterRegions(LevelInfo,LevelNo);
 
+	printNeighbourCounts(LevelInfo, LevelNo);
+
+	printRoomRegions(LevelInfo,LevelNo);
 
 if (game == SHOCK)
 	{
@@ -674,8 +677,57 @@ void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
 		printf("\n");
 		for (x = 0; x <= 63; x++)
 		{
-			printf("%02d-",LevelInfo[x][y].waterRegion);
+			printf("%02d-",LevelInfo[x][y].roomRegion);
 		}
 	}
 
+}
+
+void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo)
+{
+	int x; int y;
+	printf("\nNow Printing Neighbour counts for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+	{
+		printf("\n");
+		for (x = 0; x <= 63; x++)
+		{
+			printf("%d-", LevelInfo[x][y].noOfNeighbours);
+		}
+	}
+}
+
+
+void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
+{
+	int x; int y;
+	printf("\nNow Printing Room  regions for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+	{
+		printf("\n");
+		for (x = 0; x <= 63; x++)
+		{
+			if (LevelInfo[x][y].tileType == TILE_SOLID)
+				{
+				printf("S%03d-", LevelInfo[x][y].roomRegion);
+				}
+
+				else if (LevelInfo[x][y].isWater == 1)
+					{
+						printf("W%03d-", LevelInfo[x][y].roomRegion);
+					}
+				else if (LevelInfo[x][y].isCorridor == 1)
+					{
+						printf("C%03d-", LevelInfo[x][y].roomRegion);
+					}
+				else if (LevelInfo[x][y].isDoor == 1)
+				{
+					printf("D%03d-", LevelInfo[x][y].roomRegion);
+				}
+				else
+					{
+						printf("R%03d-", LevelInfo[x][y].roomRegion);
+					}
+		}
+	}
 }

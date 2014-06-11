@@ -496,6 +496,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			{
 				LevelInfo[x][y].tileX = x;
 				LevelInfo[x][y].tileY = y;
+				LevelInfo[x][y].address = AddressOfBlockStart+address_pointer;
 				long FirstTileInt = getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+0),16);
 				// FirstTileInt = getValAtCoordinate(x,y,AddressOfBlockStart,lev_ark,16);
 				//long SecondTileInt = (getValAtCoordinate(x,y,AddressOfBlockStart,lev_ark,32) >> 16);
@@ -508,7 +509,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
 
 				LevelInfo[x][y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
-				
+				LevelInfo[x][y].noOfNeighbours=0;
+				LevelInfo[x][y].tileTested = 0;
 				switch (game)
 					{
 					case UWDEMO:	//special case for demo since textures mappings are in a seperate file
@@ -573,7 +575,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].Grouped=0;	
 				LevelInfo[x][y].VisibleFaces = 63;
 				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0) && (ENABLE_WATER==1));
-				LevelInfo[x][y].waterRegion=0;
+				//LevelInfo[x][y].waterRegion=0;
+				LevelInfo[x][y].roomRegion = 0;
 				//Force off water to save on compile time during testing.
 				//LevelInfo[x][y].isWater=0;
 				//LevelInfo[x][y].TerrainChange=0;
@@ -741,7 +744,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 			LevelInfo[x][y].West = LevelInfo[x][y].wallTexture;
 
 			LevelInfo[x][y].isWater = 0;	//No swimming in shock.
-			LevelInfo[x][y].waterRegion=0;
+			LevelInfo[x][y].roomRegion=0;
 			LevelInfo[x][y].floorHeight = ((lev_ark[address_pointer + 1]) & 0x1F);
 			LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
 
@@ -1167,9 +1170,9 @@ currRegion =1;
 	{
 		for (int y = 0; y<64; y++)
 		{
-			if ((LevelInfo[x][y].isWater == 1) && (LevelInfo[x][y].waterRegion==0))//Unset water region.
+			if ((LevelInfo[x][y].isWater == 1) && (LevelInfo[x][y].roomRegion==0))//Unset water region.
 			{
-				LevelInfo[x][y].waterRegion = currRegion;
+				LevelInfo[x][y].roomRegion = currRegion;
 				MergeCurrentWaterRegion(LevelInfo, currRegion, x, y);
 				currRegion++;
 			}
@@ -1180,28 +1183,245 @@ currRegion =1;
 void MergeCurrentWaterRegion(tile LevelInfo[64][64], int currRegion, int x, int y)
 {
 	//north
-	if ((LevelInfo[x+1][y].isWater==1) && (LevelInfo[x+1][y].waterRegion == 0))
+	if ((LevelInfo[x][y+1].isWater==1) && (LevelInfo[x][y+1].roomRegion == 0))
 		{
-		LevelInfo[x+1][y].waterRegion = currRegion;
-		MergeCurrentWaterRegion(LevelInfo, currRegion, x + 1, y);
+		LevelInfo[x][y + 1].roomRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x, y+1);
 		}
 	//south
-	if ((LevelInfo[x - 1][y].isWater == 1) && (LevelInfo[x - 1][y].waterRegion == 0))
+	if ((LevelInfo[x][y - 1].isWater == 1) && (LevelInfo[x][y - 1].roomRegion == 0))
 	{
-		LevelInfo[x - 1][y].waterRegion = currRegion;
-		MergeCurrentWaterRegion(LevelInfo, currRegion, x - 1, y);
+		LevelInfo[x][y - 1].roomRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x , y-1);
 	}
 	//east
-	if ((LevelInfo[x][y + 1].isWater == 1) && (LevelInfo[x][y + 1].waterRegion == 0))
+	if ((LevelInfo[x + 1][y].isWater == 1) && (LevelInfo[x + 1][y].roomRegion == 0))
 	{
-		LevelInfo[x][y+1].waterRegion = currRegion;
-		MergeCurrentWaterRegion(LevelInfo, currRegion, x, y + 1);
+		LevelInfo[x + 1][y].roomRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x+1, y);
 	}
 	//west
-	if ((LevelInfo[x][y - 1].isWater == 1) && (LevelInfo[x][y - 1].waterRegion == 0))
+	if ((LevelInfo[x - 1][y].isWater == 1) && (LevelInfo[x - 1][y].roomRegion == 0))
 	{
-		LevelInfo[x][y-1].waterRegion = currRegion;
-		MergeCurrentWaterRegion(LevelInfo, currRegion, x, y - 1);
+		LevelInfo[x - 1][y].roomRegion = currRegion;
+		MergeCurrentWaterRegion(LevelInfo, currRegion, x-1, y);
+	}
+}
+
+void setTileNeighbourCount(tile LevelInfo[64][64])
+{ 
+
+	for (int x = 0; x<64; x++)
+	{
+		for (int y = 0; y<64; y++)
+		{
+			if (LevelInfo[x][y].tileType != TILE_SOLID)
+			{
+			
+			//test north
+				if (y != 63)
+					{
+					if (LevelInfo[x][y + 1].tileType!=TILE_SOLID)
+						{
+						LevelInfo[x][y].noOfNeighbours++;
+						}
+					}
+
+			//test south
+				if (y != 0)
+				{
+					if (LevelInfo[x][y - 1].tileType != TILE_SOLID)
+					{
+						LevelInfo[x][y].noOfNeighbours++;
+					}
+				}
+	
+			//test east
+				if (x != 63)
+				{
+					if (LevelInfo[x+1][y].tileType != TILE_SOLID)
+					{
+						LevelInfo[x][y].noOfNeighbours++;
+					}
+				}
+
+			//test west
+				if (y != 0)
+				{
+					if (LevelInfo[x-1][y].tileType != TILE_SOLID)
+					{
+						LevelInfo[x][y].noOfNeighbours++;
+					}
+				}
+			}
+			else
+			{
+				LevelInfo[x][y].noOfNeighbours=0;
+			}
+		}
+	}
+}
+
+void setCorridors(tile LevelInfo[64][64], int *RoomIndex)
+{
+//int corridorIndex=1;
+	for (int x = 0; x<64; x++)
+	{
+		for (int y = 0; y<64; y++)
+		{
+			if (((LevelInfo[x][y].noOfNeighbours == 1) || (LevelInfo[x][y].noOfNeighbours == 2))
+				&&
+				(LevelInfo[x][y].tileTested == 0)  && (LevelInfo[x][y].isDoor == 0) && (LevelInfo[x][y].isWater == 0))
+				{
+				if (*RoomIndex == 17)
+				{
+					printf("");
+				}
+				int currentCorridorCount=0;
+				MergeCorridors(LevelInfo, &currentCorridorCount, *RoomIndex, x, y,0);
+				if (currentCorridorCount >= 4)
+					{//Found a corridor
+						ResetTileTests(LevelInfo);
+						LevelInfo[x][y].isCorridor = 1;
+						LevelInfo[x][y].roomRegion = *RoomIndex;
+						MergeCorridors(LevelInfo, &currentCorridorCount, *RoomIndex, x, y, 1);
+						*RoomIndex = *RoomIndex +1;
+					}
+				}
+		}
+
 	}
 
+}
+
+void MergeCorridors(tile LevelInfo[64][64], int *currentCorridorCount, int corridorIndex, int x, int y, int SetValue)
+{
+	if (((LevelInfo[x][y].noOfNeighbours == 1) || (LevelInfo[x][y].noOfNeighbours == 2))
+		&&
+		((LevelInfo[x][y].tileTested == 0)) && (LevelInfo[x][y].isDoor == 0) && (LevelInfo[x][y].isWater == 0))
+			{
+	
+			if (LevelInfo[x][y].tileTested != 1)
+				{
+				*currentCorridorCount = *currentCorridorCount+1;
+				LevelInfo[x][y].tileTested = 1;
+
+				//test north
+				if (y < 63)
+					{
+					MergeCorridors(LevelInfo, currentCorridorCount, corridorIndex, x, y + 1,SetValue);
+					}
+
+				//test south
+				if (y > 0)
+					{
+					MergeCorridors(LevelInfo, currentCorridorCount, corridorIndex, x, y - 1, SetValue);
+					}
+
+				//test east
+				if (x < 63)
+					{
+					MergeCorridors(LevelInfo, currentCorridorCount, corridorIndex, x + 1, y, SetValue);
+					}
+				//test west
+				if (x > 0)
+					{
+					MergeCorridors(LevelInfo, currentCorridorCount, corridorIndex, x - 1, y, SetValue);
+					}
+				
+				if (SetValue == 1)
+					{
+						LevelInfo[x][y].isCorridor = 1;
+						LevelInfo[x][y].roomRegion = corridorIndex;
+					}
+			}
+		else
+			{
+			LevelInfo[x][y].tileTested = 1;
+			}
+	
+	}
+}
+
+
+void setRooms(tile LevelInfo[64][64],int *RoomIndex)
+{
+	ResetTileTests(LevelInfo);
+	for (int x = 0; x<64; x++)
+	{
+		for (int y = 0; y<64; y++)
+		{
+			if (isMergeableRoom(LevelInfo,x,y))
+				{//Start Merging
+				MergeCurrentRoomRegion(LevelInfo, *RoomIndex, x, y );
+				LevelInfo[x][y].roomRegion = *RoomIndex;
+				*RoomIndex = *RoomIndex+1;
+				}
+		}
+	}
+}
+
+void MergeCurrentRoomRegion(tile LevelInfo[64][64], int currRegion, int x, int y)
+{
+	//north
+	if (isMergeableRoom(LevelInfo,x,y+1))
+	{
+		LevelInfo[x][y+1].roomRegion = currRegion;
+		MergeCurrentRoomRegion(LevelInfo, currRegion, x, y + 1);
+	}
+	//south
+	if (isMergeableRoom(LevelInfo, x, y-1))
+	{
+		LevelInfo[x][y-1].roomRegion = currRegion;
+		MergeCurrentRoomRegion(LevelInfo, currRegion, x, y - 1);
+	}
+	//east
+	if (isMergeableRoom(LevelInfo, x+1, y))
+	{
+		LevelInfo[x+1][y].roomRegion = currRegion;
+		MergeCurrentRoomRegion(LevelInfo, currRegion, x + 1, y);
+	}
+	//west
+	if (isMergeableRoom(LevelInfo, x-1, y))
+	{
+		LevelInfo[x-1][y].roomRegion = currRegion;
+		MergeCurrentRoomRegion(LevelInfo, currRegion, x-1, y);
+	}
+}
+
+
+void ResetTileTests(tile LevelInfo[64][64])
+{
+	for (int x = 0; x<64; x++)
+	{
+		for (int y = 0; y<64; y++)
+		{
+			LevelInfo[x][y].tileTested=0;
+		}
+	}
+
+}
+
+int isMergeableRoom(tile LevelInfo[64][64], int x, int y)
+{
+	if (
+		(LevelInfo[x][y].isDoor == 0)
+		&&
+		(LevelInfo[x][y].isWater == 0)
+		&&
+		(LevelInfo[x][y].shockDoor == 0)
+		&&
+		(LevelInfo[x][y].tileType != TILE_SOLID)
+		&&
+		(LevelInfo[x][y].isCorridor==0)
+		&&
+		(LevelInfo[x][y].roomRegion==0)
+		)
+		{
+		return 1;
+		}
+	else
+		{
+		return 0;
+		}
 }

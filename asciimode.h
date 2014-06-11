@@ -21,5 +21,7 @@ void PrintShadeValues(tile LevelInfo[64][64], int LevelNo);
 void PrintLightStates(tile LevelInfo[64][64], int LevelNo);
 void PrintLevelEntrances(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);
 void printWaterRegions(tile LevelInfo[64][64], int LevelNo);
+void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo);
+void printRoomRegions(tile LevelInfo[64][64], int LevelNo);
 //int isTrigger(ObjectItem currobj);
 #endif /* asciimode_h */
