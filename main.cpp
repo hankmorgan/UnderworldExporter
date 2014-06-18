@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 
-
+#include "utils.h"
 #include "textures.h"
 #include "gameobjects.h"
 #include "tilemap.h"
@@ -49,17 +49,18 @@ int main()
 {
 //int game = SHOCK;
 //int game = UWDEMO;
-int game = UW1;
-//int game = UW2;
+//int game = UW1;
+int game = UW2;
 //int mode = D3_MODE;
-int mode = ASCII_MODE;
+//int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
+int mode = REPACK_MODE;
 
-levelNo = 0;
+levelNo =5;
 
 GAME = game;
 switch (game)
@@ -82,7 +83,7 @@ switch (game)
 		case SCRIPT_BUILD_MODE:
 			//for (levelNo = 0; levelNo < 80; levelNo++)
 			//{
-				printf("============================Level %d=========================\n", levelNo);
+				printf("\n============================Level %d=========================\n", levelNo);
 				exportMaps(game, mode, levelNo);
 			//}
 			break;
@@ -111,6 +112,9 @@ switch (game)
 			break;
 		case CONVERSATION_MODE:
 			ExtractConversations(UW1);
+			break;
+		case REPACK_MODE:
+			Repack(game);
 			break;
 		}
 	}
@@ -342,7 +346,10 @@ void exportMaps(int game,int mode,int LevelNo)
 			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
 			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
 			SetDeathWatch(objList);
+			setTileNeighbourCount(LevelInfo);
 			setDoorBits(LevelInfo,objList);
+			setCorridors(LevelInfo, &roomIndex);
+			setRooms(LevelInfo, &roomIndex);
 			setKeyCount(game, LevelInfo, objList);
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;

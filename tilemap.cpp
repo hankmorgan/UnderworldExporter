@@ -368,7 +368,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			}
 		if (isCompressed == 1)
 			{
-			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
+			int datalen;
+			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			address_pointer=address_pointer+4;
 			AddressOfBlockStart=0;
 			//ObjectsAddress=1024;
@@ -390,7 +391,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 
 		if (isCompressed == 1)
 			{
-			tex_ark = unpack(tmp_ark,textureAddress);
+			int datalen;
+			tex_ark = unpack(tmp_ark,textureAddress,&datalen);
 			textureAddress=-1;
 			}
 		break;
@@ -750,6 +752,9 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 
 			LevelInfo[x][y].ceilingHeight = ((lev_ark[address_pointer + 2]) & 0x1F);
 			LevelInfo[x][y].ceilingHeight = ((LevelInfo[x][y].ceilingHeight << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
+
+			LevelInfo[x][y].shockFloorOrientation = ((lev_ark[address_pointer + 1]) >> 5) & 0x3;
+			LevelInfo[x][y].shockCeilOrientation = ((lev_ark[address_pointer + 2]) >> 5) & 0x3;
 
 			//Need to know heights in various directions for alignments.
 			//Will set these properly after loading levels.

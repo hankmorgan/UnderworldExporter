@@ -1,7 +1,7 @@
 #include <fstream>
 
 #include "main.h"
-
+#include "utils.h"
 
 long getFileSize(FILE *file)
 {
@@ -58,7 +58,7 @@ int getValAtCoordinate(int x, int y, int BlockStart,unsigned char *buffer,int si
 }
 
 
-unsigned char* unpack(unsigned char *tmp, int address_pointer)
+unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen)
   {
   
  //Robbed and changed slightly from the Labyrinth of Worlds implementation project.
@@ -67,7 +67,7 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer)
     int	len = getValAtAddress(tmp,address_pointer,32);	//lword(base);
     unsigned char*	buf = new unsigned char[len+100];
     unsigned char*	up = buf;
-
+	*datalen = len+100;
     address_pointer += 4;
 
     while(up < buf+len)
@@ -308,4 +308,254 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 			}		
 		return chunkUnpackedLength;
 		}
+}
+
+
+
+void Repack(int game)
+{
+	//hopefully repacks a compressed level file into one containing uncompressed chuncks that I can edit to test object properties.
+
+	FILE *file = NULL;
+	char *filePath;
+	//char *filePathO;
+	long fileSize;
+	unsigned char *lev_ark;
+	int NoOfBlocks;
+	if ((file = fopen(UW2_LEVEL_PATH, "rb")) == NULL)
+		printf("Could not open specified file\n");
+	else
+		printf("");
+	fileSize = getFileSize(file);
+	lev_ark = new unsigned char[fileSize];
+	//tex_ark = new unsigned char[fileSize];
+	fread(lev_ark, fileSize, 1, file);
+	//fread(tex_ark,fileSize,1,file);
+	fclose(file);
+
+	NoOfBlocks = getValAtAddress(lev_ark,0,16);
+	
+
+	//tables that I have to write.
+	long BlockAddress[320];	//No of blocks in UW2
+	int CompressionFlags[320];
+	int DataSize[320];
+	int AvailableSpace[320];
+	long currAddress;
+	long address_pointer = 6;
+
+	BlockAddress[0] = getValAtAddress(lev_ark, 6 , 32);//The first block
+	long LastBlockAddress = BlockAddress[0];
+	for (int x = 0; x < 320; x++)
+		{
+		if (x < 80)
+			{
+			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			if (currAddress != 0)
+				{
+				if (x >=1)
+					{
+					BlockAddress[x] = LastBlockAddress + 0x7c08;//Size of a map block
+					LastBlockAddress = BlockAddress[x];
+					}
+				}
+			else
+				{
+					BlockAddress[x] = 0; 
+				}
+			}
+		else
+			{
+			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			if (currAddress != 0)
+				{
+				BlockAddress[x] = LastBlockAddress + getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+				LastBlockAddress = BlockAddress[x];
+				}
+			else
+				{
+				BlockAddress[x] = 0;
+				}
+			}
+		}
+	
+	//////if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
+	//////	printf("Could not open specified file\n");
+	//////else
+	//////	printf("");
+	//////for (int x = 0; x < 1; x++)
+	//////{
+	//////	long currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+	//////	int compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+	//////	int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+	//////	int isCompressed = (compressionFlag >> 1) & 0x01;
+	//////		switch (isCompressed)
+	//////		{
+	//////		case 0:
+	//////			//DataSize[x] = DataLen;
+	//////			for (int y = currAddress; y < DataLen; y++)
+	//////			{//Copy the bytes
+	//////				fputc(lev_ark[y], file);
+	//////			}
+	//////			break;
+	//////		case 1://compressed block
+	//////		case 2:
+	//////			unsigned char *tmp_ark;
+	//////			tmp_ark = unpack(lev_ark, currAddress, &DataLen);
+	//////			for (int y = 0; y < 0x7c06+2; y++)
+	//////			{//Copy the bytes
+	//////				fputc(tmp_ark[y], file);
+	//////			}
+	//////			}
+	//////}	
+	//////fclose(file);
+	////////Write out a file.
+
+	if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
+		printf("Could not open specified file\n");
+	else
+		printf("");
+
+	//Write the number of blocks
+	WriteInt16(file,320);
+	//write 4x0
+	WriteInt32(file, 0);
+
+	//write my block addresses. increment by the size of the decompressed data.
+	for (int x = 0; x < 320; x++)
+	{
+		//long currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+		WriteInt32(file, BlockAddress[x]);
+	}
+
+	//write my compression flags. each shoudld be 0 0 0
+	for (int x = 0; x < 320; x++)
+	{
+		if (x<80)
+			{
+			WriteInt32(file, 0);
+			}
+		else
+		{//copy the existing flags.
+			int compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+			WriteInt32(file,compressionFlag);
+		}
+	}
+	//write the space used
+	for (int x = 0; x < 320; x++)
+	{
+		if (x <80)
+		{
+			WriteInt32(file, 0x7c08);
+		}
+		else
+		{//copy the existing values
+			int DataLen = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+			WriteInt32(file, DataLen);
+		}
+	}
+	//write my available space should not matter for compression so I'll just put the block size here.
+	for (int x = 0; x < 320; x++)
+	{
+		if (x <80)
+		{
+			WriteInt32(file, 0x7c08);
+		}
+		else
+		{//copy the existing values
+			int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+			WriteInt32(file, DataLen);
+		}
+	}
+	//write my uncompressed blocks.
+	for (int x = 0; x < 320; x++)
+		{
+			long currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			int compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+			int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+			int isCompressed = (compressionFlag >> 1) & 0x01;
+			if (x < 80)
+				{
+					switch (isCompressed)
+					{
+					case 0:
+						//DataSize[x] = DataLen;
+						for (int y = currAddress; y < 0x7c08; y++)
+						{//Copy the bytes
+							fputc(lev_ark[y], file);
+						}
+						break;
+					case 1://compressed block
+					case 2:
+						unsigned char *tmp_ark;
+						tmp_ark = unpack(lev_ark, currAddress, &DataLen);
+						//DataSize[x] = DataLen;
+						for (int y = 0; y < 0x7c08; y++)
+						{//Copy the bytes
+							fputc(tmp_ark[y], file);
+						}
+						break;
+					}
+				}
+			else
+				{	//non map. just copy the bytes
+				//DataSize[x] = DataLen;
+				for (int y = currAddress; y < currAddress+DataLen; y++)
+					{//Copy the bytes
+						fputc(lev_ark[y], file);
+					}
+				}
+		}
+
+
+
+	fclose(file);
+	//////if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
+	//////	printf("Could not open specified file\n");
+	//////else
+	//////	printf("");
+	//////for (int i = 0; i < fileSize; i++)
+	//////	{
+	//////	fputc(lev_ark[i],file);
+	//////	}
+	//////fclose(file);
+	
+}
+
+void WriteInt16(FILE *file, long val)
+{
+	unsigned char valOut;
+	valOut = val & 0xff;
+	fputc(valOut, file);
+
+	valOut = val >> 8 & 0xff;
+	fputc(valOut,file);
+
+
+	//return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1;
+}
+
+
+void WriteInt32(FILE *file, long val)
+{
+unsigned char valOut;
+
+valOut = val & 0xff;
+fputc(valOut, file);
+
+valOut = val >> 8 & 0xff;
+fputc(valOut, file);
+
+valOut = val >> 16 & 0xff;
+fputc(valOut, file);
+
+	valOut= val >> 24 & 0xff;
+	fputc(valOut, file);
+
+
+
+
+
+
+	//return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1;
 }

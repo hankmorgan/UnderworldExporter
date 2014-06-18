@@ -23,5 +23,7 @@ void PrintLevelEntrances(tile LevelInfo[64][64], ObjectItem objList[1600], int L
 void printWaterRegions(tile LevelInfo[64][64], int LevelNo);
 void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo);
 void printRoomRegions(tile LevelInfo[64][64], int LevelNo);
+void printFloorOrientations(tile LevelInfo[64][64], int LevelNo);
+void printCeilOrientations(tile LevelInfo[64][64], int LevelNo);
 //int isTrigger(ObjectItem currobj);
 #endif /* asciimode_h */

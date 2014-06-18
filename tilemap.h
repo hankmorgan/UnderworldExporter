@@ -24,6 +24,14 @@
 #define TILE_SLOPE_S 7
 #define	TILE_SLOPE_E 8
 #define TILE_SLOPE_W 9
+#define TILE_VALLEY_NW 10
+#define TILE_VALLEY_NE 11
+#define TILE_VALLEY_SE 12
+#define TILE_VALLEY_SW 13
+#define TILE_RIDGE_SE 14
+#define TILE_RIDGE_SW 15
+#define TILE_RIDGE_NW 16
+#define TILE_RIDGE_NE 17
 
 
 struct tile
@@ -67,6 +75,7 @@ short shockShadeUpper;
 short shockShadeLower;
 long shockNorthCeilHeight; long shockSouthCeilHeight;
 long shockEastCeilHeight; long shockWestCeilHeight;
+short shockFloorOrientation; short shockCeilOrientation;
 
 short ActualType;
 
@@ -112,7 +121,7 @@ void CleanUp(tile LevelInfo[64][64],int game);
 //long returnObject(ObjectItem &currObj);
 //int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture_map[256] ,char *filePath, int game, int LevelNo);
 //void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1025],long texture_map[256],char *filePath, int game, int LevelNo);
-unsigned char* unpack(unsigned char *tmp, int address_pointer);
+unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen);
 //int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], char *filePath, int game, int LevelNo);
 void unpack_data (unsigned char *pack,    unsigned char *unpack,  unsigned long unpacksize);
 

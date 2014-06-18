@@ -243,6 +243,9 @@ if (game == SHOCK)
 	PrintShadeValues(LevelInfo,LevelNo);
 	PrintLightStates(LevelInfo,LevelNo);
 
+  	printFloorOrientations(LevelInfo,LevelNo);
+	printCeilOrientations(LevelInfo, LevelNo);
+
 	//printf("\nPrint out audio logs for :%d\n",LevelNo);	
 	//printf("Desc ObjID TileX TileY LogChunk\n");
 	//for (y=63; y>=0;y--)
@@ -410,7 +413,6 @@ int x; int y;
 			printf("%02d|", LevelInfo[x][y].floorHeight);
 		}
 	}
-
 }
 
 void printFloorTextures(tile LevelInfo[64][64], int LevelNo)
@@ -728,6 +730,34 @@ void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
 					{
 						printf("R%03d-", LevelInfo[x][y].roomRegion);
 					}
+		}
+	}
+}
+
+void printFloorOrientations(tile LevelInfo[64][64], int LevelNo)
+{
+	int x; int y;
+	printf("\nNow Printing Floor orientations for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--)
+	{
+		printf("\n");
+		for (x = 0; x<64; x++)
+		{
+			printf("%d|", LevelInfo[x][y].shockFloorOrientation);
+		}
+	}
+}
+
+void printCeilOrientations(tile LevelInfo[64][64], int LevelNo)
+{
+	int x; int y;
+	printf("\nNow Printing ceiling orientations for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--)
+	{
+		printf("\n");
+		for (x = 0; x<64; x++)
+		{
+			printf("%d|", LevelInfo[x][y].shockCeilOrientation);
 		}
 	}
 }

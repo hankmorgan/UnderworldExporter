@@ -1023,7 +1023,7 @@ void CalcSlopedTextureAlignments(tile t, int face, int floorTexture, float *floo
 			*floorAlign6 = textureMasters[floorTexture].floor_align2_3;
 		}
 		else if ((face == fCEIL) && ((t.shockSlopeFlag == SLOPE_BOTH_PARALLEL) || (t.shockSlopeFlag == SLOPE_CEILING_ONLY)))
-		{//The a east slope from the ceiling.
+		{//The a east slope from the ceiling. 
 			*floorAlign1 = textureMasters[floorTexture].floor_align1_1;
 			*floorAlign2 = textureMasters[floorTexture].floor_align2_1 / scaleFactor;   //vert scale
 			float shiftPoint = -(CEILING_HEIGHT - t.ceilingHeight - t.shockSteep) + (t.tileX * t.shockSteep); //get a position where that slope intercects the axis

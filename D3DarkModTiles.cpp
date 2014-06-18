@@ -23,408 +23,408 @@ void RenderDarkModTile(int game, int x, int y, tile &t, short Water, short inver
 	switch (t.tileType)
 	{
 	case TILE_SOLID:	//0
-	{	//solid
-							RenderSolidTile(x, y, t, Water);
-							return;
-	}
+		{	//solid
+			RenderSolidTile(x, y, t, Water);
+			return;
+		}
 	case TILE_OPEN:		//1
-	{//open
-							if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-							if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling	//(game == SHOCK) && 
-							return;
-	}
+		{//open
+			if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+			if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling	//(game == SHOCK) && 
+			return;
+		}
 	case 2:
-	{//diag se
-			  if (skipFloor != 1) { RenderDiagSETile(x, y, t, Water, 0); }//floor
-			  if ((skipCeil != 1)) { RenderDiagSETile(x, y, t, Water, 1); }
-			  return;
-	}
+		{//diag se
+			if (skipFloor != 1) { RenderDiagSETile(x, y, t, Water, 0); }//floor
+			if ((skipCeil != 1)) { RenderDiagSETile(x, y, t, Water, 1); }
+			return;
+		}
 	case 3:
-	{	//diag sw
-			  if (skipFloor != 1) { RenderDiagSWTile(x, y, t, Water, 0); }//floor
-			  if ((skipCeil != 1)) { RenderDiagSWTile(x, y, t, Water, 1); }
-			  return;
-	}
+		{	//diag sw
+			if (skipFloor != 1) { RenderDiagSWTile(x, y, t, Water, 0); }//floor
+			if ((skipCeil != 1)) { RenderDiagSWTile(x, y, t, Water, 1); }
+			return;
+		}
 	case 4:
-	{	//diag ne
-			  if (skipFloor != 1) { RenderDiagNETile(x, y, t, Water, invert); }//floor
-			  if ((skipCeil != 1)) { RenderDiagNETile(x, y, t, Water, 1); }
-			  return;
-	}
+		{	//diag ne
+			if (skipFloor != 1) { RenderDiagNETile(x, y, t, Water, invert); }//floor
+			if ((skipCeil != 1)) { RenderDiagNETile(x, y, t, Water, 1); }
+			return;
+		}
 	case 5:
-	{//diag nw
-			  if (skipFloor != 1) { RenderDiagNWTile(x, y, t, Water, invert); }//floor
-			  if ((skipCeil != 1)) { RenderDiagNWTile(x, y, t, Water, 1); }
-			  return;
-	}
+		{//diag nw
+			if (skipFloor != 1) { RenderDiagNWTile(x, y, t, Water, invert); }//floor
+			if ((skipCeil != 1)) { RenderDiagNWTile(x, y, t, Water, 1); }
+			return;
+		}
 	case TILE_SLOPE_N:	//6
-	{//slope n
-							switch (t.shockSlopeFlag)
-							{
-							case SLOPE_BOTH_PARALLEL:
-							{
-														if (skipFloor != 1) { RenderSlopeNTile(x, y, t, Water, 0); }//floor
-														if ((skipCeil != 1)) { RenderSlopeNTile(x, y, t, Water, 1); }
-														break;
-							}
-							case SLOPE_BOTH_OPPOSITE:
-							{
-														if (skipFloor != 1) { RenderSlopeNTile(x, y, t, Water, 0); }//floor
-														if ((skipCeil != 1)) { RenderSlopeSTile(x, y, t, Water, 1); }
-														break;
-							}
-							case SLOPE_FLOOR_ONLY:
-							{
-													 if (skipFloor != 1) { RenderSlopeNTile(x, y, t, Water, 0); }//floor
-													 if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-													 break;
-							}
-							case SLOPE_CEILING_ONLY:
-							{
-													   if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-													   RenderSlopeNTile(x, y, t, Water, 1);
-													   break;
-							}
-							}
-							return;
-	}
+		{//slope n
+		switch (t.shockSlopeFlag)
+			{
+			case SLOPE_BOTH_PARALLEL:
+				{
+					if (skipFloor != 1) { RenderSlopeNTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderSlopeNTile(x, y, t, Water, 1); }
+					break;
+				}
+			case SLOPE_BOTH_OPPOSITE:
+				{
+					if (skipFloor != 1) { RenderSlopeNTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderSlopeSTile(x, y, t, Water, 1); }
+					break;
+				}
+			case SLOPE_FLOOR_ONLY:
+				{
+					if (skipFloor != 1) { RenderSlopeNTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
+				}
+			case SLOPE_CEILING_ONLY:
+				{
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					RenderSlopeNTile(x, y, t, Water, 1);
+					break;
+				}
+			}
+		return;
+		}
 	case TILE_SLOPE_S: //slope s	7
-	{
-						   switch (t.shockSlopeFlag)
-						   {
-						   case SLOPE_BOTH_PARALLEL:
-						   {
-													   if (skipFloor != 1) { RenderSlopeSTile(x, y, t, Water, 0); }	//floor
-													   RenderSlopeSTile(x, y, t, Water, 1);
-													   break;
-						   }
-						   case SLOPE_BOTH_OPPOSITE:
-						   {
-													   if (skipFloor != 1) { RenderSlopeSTile(x, y, t, Water, 0); }	//floor
-													   RenderSlopeNTile(x, y, t, Water, 1);
-													   break;
-						   }
-						   case SLOPE_FLOOR_ONLY:
-						   {
-													if (skipFloor != 1) { RenderSlopeSTile(x, y, t, Water, 0); }	//floor
-													if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-													break;
-						   }
-						   case SLOPE_CEILING_ONLY:
-						   {
-													  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-													  if ((skipCeil != 1)) { RenderSlopeSTile(x, y, t, Water, 1); }
-													  break;
-						   }
-						   }
-						   return;
-	}
+		{
+			switch (t.shockSlopeFlag)
+			{
+			case SLOPE_BOTH_PARALLEL:
+				{
+					if (skipFloor != 1) { RenderSlopeSTile(x, y, t, Water, 0); }	//floor
+					RenderSlopeSTile(x, y, t, Water, 1);
+					break;
+				}
+			case SLOPE_BOTH_OPPOSITE:
+				{
+					if (skipFloor != 1) { RenderSlopeSTile(x, y, t, Water, 0); }	//floor
+					RenderSlopeNTile(x, y, t, Water, 1);
+					break;
+				}
+			case SLOPE_FLOOR_ONLY:
+				{
+					if (skipFloor != 1) { RenderSlopeSTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
+				}
+			case SLOPE_CEILING_ONLY:
+				{
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderSlopeSTile(x, y, t, Water, 1); }
+					break;
+				}
+			}
+			return;
+		}
 	case TILE_SLOPE_E:		//slope e 8	
-	{
-								switch (t.shockSlopeFlag)
-								{
-								case SLOPE_BOTH_PARALLEL:
-								{
-															if (skipFloor != 1) { RenderSlopeETile(x, y, t, Water, 0); }//floor
-															RenderSlopeETile(x, y, t, Water, 1);
-															break;
-								}
-								case SLOPE_BOTH_OPPOSITE:
-								{
-															if (skipFloor != 1) { RenderSlopeETile(x, y, t, Water, 0); }//floor
-															RenderSlopeWTile(x, y, t, Water, 1);
-															break;
-								}
-								case SLOPE_FLOOR_ONLY:
-								{
-														 if (skipFloor != 1) { RenderSlopeETile(x, y, t, Water, 0); }//floor
-														 if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-														 break;
-								}
-								case SLOPE_CEILING_ONLY:
-								{
-														   if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-														   if ((skipCeil != 1)) { RenderSlopeETile(x, y, t, Water, 1); }
-														   break;
-								}
-								}
-								return;
-	}
+		{
+		switch (t.shockSlopeFlag)
+			{
+			case SLOPE_BOTH_PARALLEL:
+				{
+					if (skipFloor != 1) { RenderSlopeETile(x, y, t, Water, 0); }//floor
+					RenderSlopeETile(x, y, t, Water, 1);
+					break;
+				}
+			case SLOPE_BOTH_OPPOSITE:
+				{
+					if (skipFloor != 1) { RenderSlopeETile(x, y, t, Water, 0); }//floor
+					RenderSlopeWTile(x, y, t, Water, 1);
+					break;
+				}
+			case SLOPE_FLOOR_ONLY:
+				{
+					if (skipFloor != 1) { RenderSlopeETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
+				}
+			case SLOPE_CEILING_ONLY:
+				{
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderSlopeETile(x, y, t, Water, 1); }
+					break;
+				}
+			}
+		return;
+		}
 	case TILE_SLOPE_W: 	//9
-	{ //slope w
-							switch (t.shockSlopeFlag)
-							{
-							case SLOPE_BOTH_PARALLEL:
-							{
-														if (skipFloor != 1) { RenderSlopeWTile(x, y, t, Water, 0); }//floor
-														if ((skipCeil != 1)) { RenderSlopeWTile(x, y, t, Water, 1); }
-														break;
-							}
-							case SLOPE_BOTH_OPPOSITE:
-							{
-														if (skipFloor != 1) { RenderSlopeWTile(x, y, t, Water, 0); }//floor
-														if ((skipCeil != 1)) { RenderSlopeETile(x, y, t, Water, 1); }
-														break;
-							}
-							case SLOPE_FLOOR_ONLY:
-							{
-													 if (skipFloor != 1) { RenderSlopeWTile(x, y, t, Water, 0); }//floor
-													 if ( (skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-													 break;
-							}
-							case SLOPE_CEILING_ONLY:
-							{
-													   if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-													   if ((skipCeil != 1)) { RenderSlopeWTile(x, y, t, Water, 1); }
-													   break;
-							}
-							}
-							return;
-	}
-	case 10:
+		{ //slope w
+			switch (t.shockSlopeFlag)
+			{
+			case SLOPE_BOTH_PARALLEL:
+				{
+					if (skipFloor != 1) { RenderSlopeWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderSlopeWTile(x, y, t, Water, 1); }
+					break;
+				}
+			case SLOPE_BOTH_OPPOSITE:
+				{
+					if (skipFloor != 1) { RenderSlopeWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderSlopeETile(x, y, t, Water, 1); }
+					break;
+				}
+			case SLOPE_FLOOR_ONLY:
+				{
+					if (skipFloor != 1) { RenderSlopeWTile(x, y, t, Water, 0); }//floor
+					if ( (skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
+				}
+			case SLOPE_CEILING_ONLY:
+				{
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderSlopeWTile(x, y, t, Water, 1); }
+					break;
+				}
+			}
+			return;
+		}
+	case TILE_VALLEY_NW:
 	{	//valleyNw(a)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
-			   {
-										   if (skipFloor != 1) { RenderValleyNWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
-										   break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleyNWTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
+						break;
+				   }
 			   case SLOPE_BOTH_OPPOSITE:
-			   {
-										   if (skipFloor != 1) { RenderValleyNWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
-										   break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleyNWTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
+						break;
+				   }
 			   case SLOPE_FLOOR_ONLY:
-			   {
-										if (skipFloor != 1) { RenderValleyNWTile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleyNWTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+						break;
+				   }
 			   case SLOPE_CEILING_ONLY:
-			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-										  if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
-										  break;
+				   {
+						if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+						if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
+						break;
+				   }
 			   }
-			   }
-			   return;
+			  return;
 	}
-	case 11:
+	case TILE_VALLEY_NE:
 	{	//valleyne(b)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
-			   {
-										   if (skipFloor != 1) { RenderValleyNETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
-										   break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleyNETile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
+						break;
+				   }
 			   case SLOPE_BOTH_OPPOSITE:
-			   {
-										   if (skipFloor != 1) { RenderValleyNETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
-										   break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleyNETile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
+						break;
+				   }
 			   case SLOPE_FLOOR_ONLY:
-			   {
-										if (skipFloor != 1) { RenderValleyNETile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleyNETile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+						break;
+					}
 			   case SLOPE_CEILING_ONLY:
-			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }//floor
-										  if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
-										  break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
+						break;
+				   }
 			   }
 			   return;
 	}
-	case 12:
+	case TILE_VALLEY_SE:
 	{	//valleyse(c)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
-			   {
-										   if (skipFloor != 1) { RenderValleySETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
-										   break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleySETile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
+						break;
+				   }
 			   case SLOPE_BOTH_OPPOSITE:
-			   {
-										   if (skipFloor != 1) { RenderValleySETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
-										   break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleySETile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
+						break;
+				   }
 			   case SLOPE_FLOOR_ONLY:
-			   {
-										if (skipFloor != 1) { RenderValleySETile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderValleySETile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+						break;
+				   }
 			   case SLOPE_CEILING_ONLY:
-			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-										  if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
-										  break;
-			   }
+				   {
+						if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+						if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
+						break;
+				   }
 			   }
 			   return;
 	}
-	case 13:
+	case TILE_VALLEY_SW:
 	{	//valleysw(d)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
 			   {
-										   if (skipFloor != 1) { RenderValleySWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderValleySWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_BOTH_OPPOSITE:
 			   {
-										   if (skipFloor != 1) { RenderValleySWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderValleySWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_FLOOR_ONLY:
 			   {
-										if (skipFloor != 1) { RenderValleySWTile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
+					if (skipFloor != 1) { RenderValleySWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
 			   }
 			   case SLOPE_CEILING_ONLY:
 			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-										  if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
-										  break;
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   }
 			   return;
 	}
-	case 14:
+	case TILE_RIDGE_SE:
 	{	//ridge se(f)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
 			   {
-										   if (skipFloor != 1) { RenderRidgeSETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeSETile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeSETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeSETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_BOTH_OPPOSITE:
 			   {
-										   if (skipFloor != 1) { RenderRidgeSETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeNWTile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeSETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeNWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_FLOOR_ONLY:
 			   {
-										if (skipFloor != 1) { RenderRidgeSETile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
+					if (skipFloor != 1) { RenderRidgeSETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
 			   }
 			   case SLOPE_CEILING_ONLY:
 			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }//floor
-										  if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
-										  break;
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderValleySETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   }
 			   return;
 	}
-	case 15:
+	case TILE_RIDGE_SW:
 	{	//ridgesw(g)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
 			   {
-										   if (skipFloor != 1) { RenderRidgeSWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeSWTile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeSWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeSWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_BOTH_OPPOSITE:
 			   {
-										   if (skipFloor != 1) { RenderRidgeSWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeNETile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeSWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeNETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_FLOOR_ONLY:
 			   {
-										if (skipFloor != 1) { RenderRidgeSWTile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
+					if (skipFloor != 1) { RenderRidgeSWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
 			   }
 			   case SLOPE_CEILING_ONLY:
 			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-										  if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
-										  break;
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderValleySWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   }
 			   return;
 	}
-	case 16:
+	case TILE_RIDGE_NW:
 	{	//ridgenw(h)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
 			   {
-										   if (skipFloor != 1) { RenderRidgeNWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeNWTile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeNWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeNWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_BOTH_OPPOSITE:
 			   {
-										   if (skipFloor != 1) { RenderRidgeNWTile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeSETile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeNWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeSETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_FLOOR_ONLY:
 			   {
-										if (skipFloor != 1) { RenderRidgeNWTile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
+					if (skipFloor != 1) { RenderRidgeNWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
 			   }
 			   case SLOPE_CEILING_ONLY:
 			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-										  if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
-										  break;
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderValleyNWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   }
 			   return;
 	}
-	case 17:
+	case TILE_RIDGE_NE:
 	{	//ridgene(i)
 			   switch (t.shockSlopeFlag)
 			   {
 			   case SLOPE_BOTH_PARALLEL:
 			   {
-										   if (skipFloor != 1) { RenderRidgeNETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeNETile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeNETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeNETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_BOTH_OPPOSITE:
 			   {
-										   if (skipFloor != 1) { RenderRidgeNETile(x, y, t, Water, 0); }//floor
-										   if ((skipCeil != 1)) { RenderRidgeSWTile(x, y, t, Water, 1); }
-										   break;
+					if (skipFloor != 1) { RenderRidgeNETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderRidgeSWTile(x, y, t, Water, 1); }
+					break;
 			   }
 			   case SLOPE_FLOOR_ONLY:
 			   {
-										if (skipFloor != 1) { RenderRidgeNETile(x, y, t, Water, 0); }//floor
-										if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
-										break;
+					if (skipFloor != 1) { RenderRidgeNETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderOpenTile(x, y, t, Water, 1); }	//ceiling
+					break;
 			   }
 			   case SLOPE_CEILING_ONLY:
 			   {
-										  if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
-										  if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
-										  break;
+					if (skipFloor != 1) { RenderOpenTile(x, y, t, Water, 0); }	//floor
+					if ((skipCeil != 1)) { RenderValleyNETile(x, y, t, Water, 1); }
+					break;
 			   }
 			   }
 			   return;

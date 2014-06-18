@@ -566,7 +566,8 @@ switch (game)
 			}
 		if (isCompressed == 1)
 			{
-			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
+			int datalen;
+			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			}
 			address_pointer=address_pointer+4;
 		AddressOfBlockStart=0;	//since this array only contains that particular block
