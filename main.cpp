@@ -60,7 +60,7 @@ int game = UW2;
 //int mode = CONVERSATION_MODE;
 int mode = REPACK_MODE;
 
-levelNo =5;
+levelNo =0;
 
 GAME = game;
 switch (game)

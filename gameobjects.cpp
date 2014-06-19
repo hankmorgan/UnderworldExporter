@@ -569,7 +569,20 @@ switch (game)
 			int datalen;
 			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			}
-			address_pointer=address_pointer+4;
+		else
+			{//
+			//printf("how do i get an uncompressed object list");
+			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
+			int j = 0;
+			AddressOfBlockStart = 0;
+			lev_ark = new unsigned char[0x7c08];
+			for (int i = BlockStart; i < BlockStart + 0x7c08; i++)
+			{
+				lev_ark[j] = tmp_ark[i];
+				j++;
+			}
+			}
+		address_pointer=address_pointer+4;
 		AddressOfBlockStart=0;	//since this array only contains that particular block
 		objectsAddress=(64*64*4);
 		address_pointer=0;

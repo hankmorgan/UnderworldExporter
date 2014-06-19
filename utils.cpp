@@ -328,9 +328,7 @@ void Repack(int game)
 		printf("");
 	fileSize = getFileSize(file);
 	lev_ark = new unsigned char[fileSize];
-	//tex_ark = new unsigned char[fileSize];
 	fread(lev_ark, fileSize, 1, file);
-	//fread(tex_ark,fileSize,1,file);
 	fclose(file);
 
 	NoOfBlocks = getValAtAddress(lev_ark,0,16);
@@ -338,25 +336,55 @@ void Repack(int game)
 
 	//tables that I have to write.
 	long BlockAddress[320];	//No of blocks in UW2
-	int CompressionFlags[320];
-	int DataSize[320];
-	int AvailableSpace[320];
+	long PreviousUsedLength;
+	//int CompressionFlags[320];
+	//int DataSize[320];
+	//int AvailableSpace[320];
 	long currAddress;
 	long address_pointer = 6;
 
-	BlockAddress[0] = getValAtAddress(lev_ark, 6 , 32);//The first block
+	int compressionFlag ;
+	int DataLen;
+	int isCompressed;
+	printf("Original Blocks\n");
+	for (int x = 0; x < 320; x++)
+	{
+		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+		long DataAvail = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+
+		printf("Block no %d\n",x);
+		printf("\tAddress %d", currAddress);
+		printf("\tFlags %d\n", compressionFlag);
+		printf("\tData Size %d", DataSizeVal);
+		printf("\tAvailable %d\n", DataAvail);
+		printf("\tNext if using datasize %d\n", currAddress+DataSizeVal);
+		printf("\tNext if using available %d\n", currAddress + DataAvail);
+	}
+
+	BlockAddress[0] = getValAtAddress(lev_ark, 6 , 32);//The first block stays the same
 	long LastBlockAddress = BlockAddress[0];
 	for (int x = 0; x < 320; x++)
 		{
+		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+		DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+		isCompressed = (compressionFlag >> 1) & 0x01;
+		if (x == 72)
+			{
+			printf("");
+			}
 		if (x < 80)
 			{
-			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			//currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 			if (currAddress != 0)
 				{
 				if (x >=1)
 					{
 					BlockAddress[x] = LastBlockAddress + 0x7c08;//Size of a map block
 					LastBlockAddress = BlockAddress[x];
+					PreviousUsedLength=0x7c08;
 					}
 				}
 			else
@@ -366,17 +394,18 @@ void Repack(int game)
 			}
 		else
 			{
-			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 			if (currAddress != 0)
-				{
-				BlockAddress[x] = LastBlockAddress + getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+				{//is this correct for all compression flags???
+				BlockAddress[x] = LastBlockAddress + PreviousUsedLength;
 				LastBlockAddress = BlockAddress[x];
+				PreviousUsedLength = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
 				}
 			else
 				{
 				BlockAddress[x] = 0;
 				}
 			}
+		printf("\nBlock Address %d = %d", x, BlockAddress[x]);
 		}
 	
 	//////if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
@@ -433,33 +462,51 @@ void Repack(int game)
 	{
 		if (x<80)
 			{
-			WriteInt32(file, 0);
+				WriteInt32(file, 0);
 			}
 		else
 		{//copy the existing flags.
-			int compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+			compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
 			WriteInt32(file,compressionFlag);
 		}
 	}
 	//write the space used
 	for (int x = 0; x < 320; x++)
 	{
+		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		if (x <80)
 		{
-			WriteInt32(file, 0x7c08);
+			if (currAddress != 0)
+				{
+				WriteInt32(file, 0x7c08);
+				}
+			else
+				{
+				DataLen = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+				WriteInt32(file, DataLen);
+				}
 		}
 		else
 		{//copy the existing values
-			int DataLen = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+			DataLen = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
 			WriteInt32(file, DataLen);
 		}
 	}
-	//write my available space should not matter for compression so I'll just put the block size here.
+	//write my available space should not matter for decompression so I'll just put the block size here (?)
 	for (int x = 0; x < 320; x++)
 	{
+		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		if (x <80)
 		{
-			WriteInt32(file, 0x7c08);
+			if (currAddress != 0)
+			{
+				WriteInt32(file, 0x7c08);
+			}
+			else
+			{
+				int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+				WriteInt32(file, DataLen);
+			}
 		}
 		else
 		{//copy the existing values
@@ -470,39 +517,44 @@ void Repack(int game)
 	//write my uncompressed blocks.
 	for (int x = 0; x < 320; x++)
 		{
-			long currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
-			int compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-			int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
-			int isCompressed = (compressionFlag >> 1) & 0x01;
+			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+			DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+			isCompressed = (compressionFlag >> 1) & 0x01;
 			if (x < 80)
 				{
-					switch (isCompressed)
+				if (currAddress!=0)
 					{
-					case 0:
-						//DataSize[x] = DataLen;
-						for (int y = currAddress; y < 0x7c08; y++)
-						{//Copy the bytes
-							fputc(lev_ark[y], file);
+					switch (isCompressed)
+						{
+						case 0:
+							//DataSize[x] = DataLen;
+							for (int y = currAddress; y < currAddress + 0x7c08; y++)
+							{//Copy the bytes
+								fputc(lev_ark[y], file);
+							}
+							break;
+						case 1://compressed block
+						case 2:
+							unsigned char *tmp_ark;
+							tmp_ark = unpack(lev_ark, currAddress, &DataLen);
+							//DataSize[x] = DataLen;
+							for (int y = 0; y < 0x7c08; y++)
+							{//Copy the bytes
+								fputc(tmp_ark[y], file);
+							}
+							break;
 						}
-						break;
-					case 1://compressed block
-					case 2:
-						unsigned char *tmp_ark;
-						tmp_ark = unpack(lev_ark, currAddress, &DataLen);
-						//DataSize[x] = DataLen;
-						for (int y = 0; y < 0x7c08; y++)
-						{//Copy the bytes
-							fputc(tmp_ark[y], file);
-						}
-						break;
 					}
 				}
 			else
 				{	//non map. just copy the bytes
-				//DataSize[x] = DataLen;
-				for (int y = currAddress; y < currAddress+DataLen; y++)
-					{//Copy the bytes
-						fputc(lev_ark[y], file);
+				if (currAddress != 0)
+					{
+					for (int y = currAddress; y < currAddress+DataLen; y++)
+						{//Copy the bytes
+							fputc(lev_ark[y], file);
+						}
 					}
 				}
 		}
@@ -510,6 +562,33 @@ void Repack(int game)
 
 
 	fclose(file);
+
+
+	if ((file = fopen(UW2_OUT_PATH, "rb")) == NULL)
+		printf("Could not open specified file\n");
+	else
+		printf("");
+	fileSize = getFileSize(file);
+	lev_ark = new unsigned char[fileSize];
+	fread(lev_ark, fileSize, 1, file);
+	fclose(file);
+	printf("New Blocks\n");
+	for (int x = 0; x < 320; x++)
+	{
+		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+		long DataAvail = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+
+		printf("Block no %d\n", x);
+		printf("\tAddress %d", currAddress);
+		printf("\tFlags %d\n", compressionFlag);
+		printf("\tData Size %d", DataSizeVal);
+		printf("\tAvailable %d\n", DataAvail);
+		printf("\tNext if using datasize %d\n", currAddress + DataSizeVal);
+		printf("\tNext if using available %d\n", currAddress + DataAvail);
+	}
+
 	//////if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
 	//////	printf("Could not open specified file\n");
 	//////else

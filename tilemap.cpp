@@ -377,7 +377,16 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			}
 		else
 			{
-			printf("uncompressed? what do i do here???");
+			//printf("uncompressed? what do i do here???");
+			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
+			int j=0;
+			AddressOfBlockStart=0;
+			lev_ark = new unsigned char[0x7c08];
+			for (i = BlockStart; i < BlockStart + 0x7c08; i++)
+				{
+				lev_ark[j] = tmp_ark[i];
+				j++;
+				}
 			}	
 		
 		
@@ -385,7 +394,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		//address_pointer=(LevelNo * 4) + 6 + (80*4);
 		//tex_ark = tmp_ark;	//unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
 		textureAddress=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
-		
+		printf("\nTextures address: %d", textureAddress);
 		compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
 		isCompressed =(compressionFlag>>1) & 0x01;
 
