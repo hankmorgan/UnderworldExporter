@@ -16,7 +16,7 @@
 
 #define UW1_CONVERSATION "C:\\Games\\UW1\\data\\cnv.ark"
 
-#define UW2_LEVEL_PATH "C:\\Games\\UW2\\Data\\lev.ark"
+#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config.txt"
 #define UW2_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_object_config.txt"
 #define UW2_STRINGS_FILE "C:\\Games\\UW2\\data\\strings.pak"

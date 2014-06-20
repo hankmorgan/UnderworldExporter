@@ -67,7 +67,7 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen)
     int	len = getValAtAddress(tmp,address_pointer,32);	//lword(base);
     unsigned char*	buf = new unsigned char[len+100];
     unsigned char*	up = buf;
-	*datalen = len+100;
+	*datalen = 0;
     address_pointer += 4;
 
     while(up < buf+len)
@@ -79,6 +79,7 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen)
 	    {
 	    //printf("transfer %d\ at %d\n", byte(base),base);
 		*up++ = tmp[address_pointer++];
+		*datalen = *datalen+1;
 		}
 	    else
 	      {
@@ -94,7 +95,10 @@ unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen)
 		    o += 0x1000;
 		 
 		while(c--)
-		    *up++ = buf[o++];
+		    {
+			*up++ = buf[o++];
+			*datalen = *datalen+1;
+			}
 	      }
 	    bits >>= 1;
 	  }
@@ -346,6 +350,7 @@ void Repack(int game)
 	int compressionFlag ;
 	int DataLen;
 	int isCompressed;
+	long mapSize[80];// = 0x7c08;
 	printf("Original Blocks\n");
 	for (int x = 0; x < 320; x++)
 	{
@@ -361,35 +366,37 @@ void Repack(int game)
 		printf("\tAvailable %d\n", DataAvail);
 		printf("\tNext if using datasize %d\n", currAddress+DataSizeVal);
 		printf("\tNext if using available %d\n", currAddress + DataAvail);
+		if (x < 80)
+			{
+			mapSize[x]=0x7c08;//default size
+			}
 	}
 
 	BlockAddress[0] = getValAtAddress(lev_ark, 6 , 32);//The first block stays the same
 	long LastBlockAddress = BlockAddress[0];
+	PreviousUsedLength = 0;
+
 	for (int x = 0; x < 320; x++)
 		{
 		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
 		DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
 		isCompressed = (compressionFlag >> 1) & 0x01;
-		if (x == 72)
-			{
-			printf("");
-			}
 		if (x < 80)
 			{
 			//currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 			if (currAddress != 0)
 				{
-				if (x >=1)
-					{
-					BlockAddress[x] = LastBlockAddress + 0x7c08;//Size of a map block
-					LastBlockAddress = BlockAddress[x];
-					PreviousUsedLength=0x7c08;
-					}
+				unpack(lev_ark, currAddress, &DataLen);
+				mapSize[x]=DataLen;
+				BlockAddress[x] = LastBlockAddress + PreviousUsedLength;//Size of a map block
+				LastBlockAddress = BlockAddress[x];
+				PreviousUsedLength = mapSize[x];
 				}
 			else
 				{
 					BlockAddress[x] = 0; 
+					mapSize[x]=0;
 				}
 			}
 		else
@@ -478,7 +485,7 @@ void Repack(int game)
 		{
 			if (currAddress != 0)
 				{
-				WriteInt32(file, 0x7c08);
+				WriteInt32(file, mapSize[x]);
 				}
 			else
 				{
@@ -500,7 +507,7 @@ void Repack(int game)
 		{
 			if (currAddress != 0)
 			{
-				WriteInt32(file, 0x7c08);
+				WriteInt32(file, mapSize[x]);
 			}
 			else
 			{
@@ -529,7 +536,7 @@ void Repack(int game)
 						{
 						case 0:
 							//DataSize[x] = DataLen;
-							for (int y = currAddress; y < currAddress + 0x7c08; y++)
+							for (int y = currAddress; y < currAddress + mapSize[x]; y++)
 							{//Copy the bytes
 								fputc(lev_ark[y], file);
 							}
@@ -539,7 +546,7 @@ void Repack(int game)
 							unsigned char *tmp_ark;
 							tmp_ark = unpack(lev_ark, currAddress, &DataLen);
 							//DataSize[x] = DataLen;
-							for (int y = 0; y < 0x7c08; y++)
+							for (int y = 0; y < mapSize[x]; y++)
 							{//Copy the bytes
 								fputc(tmp_ark[y], file);
 							}
