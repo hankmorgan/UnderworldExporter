@@ -118,14 +118,9 @@ int getWallTexUw2(unsigned char *buffer, long textureOffset, long tileData);
 int getObject(long tileData);
 int DoTilesMatch(tile &t1, tile &t2);
 void CleanUp(tile LevelInfo[64][64],int game);
-//long returnObject(ObjectItem &currObj);
-//int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1025], long texture_map[256] ,char *filePath, int game, int LevelNo);
-//void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1025],long texture_map[256],char *filePath, int game, int LevelNo);
-unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen);
-//int BuildTileMapShock(tile LevelInfo[64][64],ObjectItem objList[1025], char *filePath, int game, int LevelNo);
-void unpack_data (unsigned char *pack,    unsigned char *unpack,  unsigned long unpacksize);
 
-long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPackedLength,long *chunkUnpackedLength, long *chunkType);
+
+
 int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction);
 void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index, int *property1,int *property2,int *property3,int *property4);
 void MergeCurrentWaterRegion(tile LevelInfo[64][64], int currRegion, int x, int y);

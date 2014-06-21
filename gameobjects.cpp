@@ -567,7 +567,7 @@ switch (game)
 		if (isCompressed == 1)
 			{
 			int datalen;
-			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
+			lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			}
 		else
 			{//

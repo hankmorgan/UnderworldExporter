@@ -58,7 +58,7 @@ int getValAtCoordinate(int x, int y, int BlockStart,unsigned char *buffer,int si
 }
 
 
-unsigned char* unpack(unsigned char *tmp, int address_pointer, int *datalen)
+unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen)
   {
   
  //Robbed and changed slightly from the Labyrinth of Worlds implementation project.
@@ -226,7 +226,7 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPack
 	long DirectoryAddress=getValAtAddress(tmp_ark,124,32);
 	//printf("\nThe directory is at %d\n", DirectoryAddress);
 	
-	long NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
+	int NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
 	//printf("there are %d chunks\n",NoOfChunks);
 	long firstChunkAddress = getValAtAddress(tmp_ark,DirectoryAddress+2,32);
 	//printf("The first chunk is at %d\n", firstChunkAddress);
@@ -234,11 +234,11 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark , long *chunkPack
 	long AddressOfBlockStart= firstChunkAddress;
 	for (int k=0; k< NoOfChunks; k++)
 		{
-		long chunkId = getValAtAddress(tmp_ark,address_pointer,16);
+		int chunkId = getValAtAddress(tmp_ark,address_pointer,16);
 		*chunkUnpackedLength =getValAtAddress(tmp_ark,address_pointer+2,24);
 		*chunkType = getValAtAddress(tmp_ark,address_pointer+5,8);	//Compression.
 		*chunkPackedLength = getValAtAddress(tmp_ark,address_pointer+6,24);
-		long chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
+		short chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
 		//printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",
 		//	k,chunkId, *chunkUnpackedLength, *chunkType,*chunkPackedLength,chunkContentType);
 		//printf("Absolute address is %d\n",AddressOfBlockStart);
@@ -280,7 +280,7 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 //	long chunkUnpackedLength;
 	//int chunkType=Compressed;//compression type
 	//long chunkPackedLength;
-	long chunkContentType;
+	//long chunkContentType;
 	long filepos;
 //	long AddressOfBlockStart=0;
 	long address_pointer=4;
@@ -316,7 +316,7 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 
 
 
-void Repack(int game)
+void RepackUW2()
 {
 	//hopefully repacks a compressed level file into one containing uncompressed chuncks that I can edit to test object properties.
 
@@ -327,9 +327,10 @@ void Repack(int game)
 	unsigned char *lev_ark;
 	int NoOfBlocks;
 	if ((file = fopen(UW2_LEVEL_PATH, "rb")) == NULL)
+	{
 		printf("Could not open specified file\n");
-	else
-		printf("");
+		return;
+	}
 	fileSize = getFileSize(file);
 	lev_ark = new unsigned char[fileSize];
 	fread(lev_ark, fileSize, 1, file);
@@ -353,7 +354,7 @@ void Repack(int game)
 	long mapSize[80];// = 0x7c08;
 	printf("Original Blocks\n");
 	for (int x = 0; x < 320; x++)
-	{
+	{//Just dump out some original data for info.
 		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
 		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
@@ -367,11 +368,12 @@ void Repack(int game)
 		printf("\tNext if using datasize %d\n", currAddress+DataSizeVal);
 		printf("\tNext if using available %d\n", currAddress + DataAvail);
 		if (x < 80)
-			{
+			{//This default size covers most of the map data except for the animation overlays + other stuff I know nothing about.
 			mapSize[x]=0x7c08;//default size
 			}
 	}
 
+	//Initial values for the loop for calculating block addresses.
 	BlockAddress[0] = getValAtAddress(lev_ark, 6 , 32);//The first block stays the same
 	long LastBlockAddress = BlockAddress[0];
 	PreviousUsedLength = 0;
@@ -384,12 +386,11 @@ void Repack(int game)
 		isCompressed = (compressionFlag >> 1) & 0x01;
 		if (x < 80)
 			{
-			//currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 			if (currAddress != 0)
-				{
-				unpack(lev_ark, currAddress, &DataLen);
+				{//Map blocks are always compressed in UW2.
+				unpackUW2(lev_ark, currAddress, &DataLen);		//Unpack and see how much space I need to allow for.
 				mapSize[x]=DataLen;
-				BlockAddress[x] = LastBlockAddress + PreviousUsedLength;//Size of a map block
+				BlockAddress[x] = LastBlockAddress + PreviousUsedLength;  //Size of a map block
 				LastBlockAddress = BlockAddress[x];
 				PreviousUsedLength = mapSize[x];
 				}
@@ -448,9 +449,11 @@ void Repack(int game)
 	////////Write out a file.
 
 	if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
+		{
 		printf("Could not open specified file\n");
-	else
-		printf("");
+		return;
+		}
+
 
 	//Write the number of blocks
 	WriteInt16(file,320);
@@ -544,7 +547,7 @@ void Repack(int game)
 						case 1://compressed block
 						case 2:
 							unsigned char *tmp_ark;
-							tmp_ark = unpack(lev_ark, currAddress, &DataLen);
+							tmp_ark = unpackUW2(lev_ark, currAddress, &DataLen);
 							//DataSize[x] = DataLen;
 							for (int y = 0; y < mapSize[x]; y++)
 							{//Copy the bytes
@@ -572,9 +575,10 @@ void Repack(int game)
 
 
 	if ((file = fopen(UW2_OUT_PATH, "rb")) == NULL)
-		printf("Could not open specified file\n");
-	else
-		printf("");
+		{
+			printf("Could not open specified file\n");
+			return;
+		}
 	fileSize = getFileSize(file);
 	lev_ark = new unsigned char[fileSize];
 	fread(lev_ark, fileSize, 1, file);
@@ -608,6 +612,14 @@ void Repack(int game)
 	
 }
 
+
+void WriteInt8(FILE *file, long val)
+{
+	unsigned char valOut;
+	valOut = val & 0xff;
+	fputc(valOut, file);
+}
+
 void WriteInt16(FILE *file, long val)
 {
 	unsigned char valOut;
@@ -626,22 +638,235 @@ void WriteInt32(FILE *file, long val)
 {
 unsigned char valOut;
 
-valOut = val & 0xff;
-fputc(valOut, file);
+	valOut = val & 0xff;
+	fputc(valOut, file);
 
-valOut = val >> 8 & 0xff;
-fputc(valOut, file);
+	valOut = val >> 8 & 0xff;
+	fputc(valOut, file);
 
-valOut = val >> 16 & 0xff;
-fputc(valOut, file);
+	valOut = val >> 16 & 0xff;
+	fputc(valOut, file);
 
 	valOut= val >> 24 & 0xff;
 	fputc(valOut, file);
 
-
-
-
-
-
 	//return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1;
+}
+
+void WriteInt24(FILE *file, long val)
+{
+	unsigned char valOut;
+
+	valOut = val & 0xff;
+	fputc(valOut, file);
+
+	valOut = val >> 8 & 0xff;
+	fputc(valOut, file);
+
+	valOut = val >> 16 & 0xff;
+	fputc(valOut, file);
+}
+
+void RepackShock()
+{
+	unsigned char *archive_ark;
+	unsigned char *tmp_ark;
+	long DirectoryAddress;
+	int NoOfChunks;
+	long address_pointer;
+	long AddressOfBlockStart;
+	long NewBlockAddress;
+	long BlockAddressesOld[834];
+	long BlockAddressesNew[834];
+	long NewBlockBoundary[834];
+	int chunkNos[834];
+	long UnpackedSize[834];
+	long PackedSize[834];
+	short contentType[834];
+	short compressionFlags[834];
+//load the shock resource file.
+	//Read in the archive.
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(SHOCK_LEVEL_PATH, "rb")) == NULL)
+	{
+		printf("\nArchive not found!\n");
+		return;
+	}
+	long fileSize = getFileSize(file);
+	int filepos = ftell(file);
+	archive_ark = new unsigned char[fileSize];
+	fread(archive_ark, fileSize, 1, file);
+	fclose(file);
+
+
+//Get the directory address
+	DirectoryAddress = getValAtAddress(archive_ark,124,32);
+	printf("\nThe Directory is at %d\n",DirectoryAddress);
+//Read in the directory
+	NoOfChunks = getValAtAddress(archive_ark, DirectoryAddress, 16);
+	printf("No of chunks = %d\n",NoOfChunks);
+	AddressOfBlockStart = getValAtAddress(archive_ark, DirectoryAddress + 2, 32);//The first chunk
+	NewBlockAddress= AddressOfBlockStart;
+	address_pointer = DirectoryAddress + 6;
+	for (int x = 0; x < NoOfChunks; x++)
+		{
+		int chunkId = getValAtAddress(archive_ark, address_pointer, 16);
+		chunkNos[x]=chunkId;
+
+		int chunkUnpackedLength = getValAtAddress(archive_ark, address_pointer + 2, 24);
+		UnpackedSize[x]=chunkUnpackedLength;
+
+		int chunkCompression = getValAtAddress(archive_ark, address_pointer + 5, 8);	//Compression.
+		compressionFlags[x]=chunkCompression;
+
+		int chunkPackedLength = getValAtAddress(archive_ark, address_pointer + 6, 24);	//Does not matter
+		PackedSize[x]=chunkPackedLength;
+
+		short chunkContentType = getValAtAddress(archive_ark, address_pointer + 9, 8);
+		contentType[x]=chunkContentType;
+
+		printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",
+			x,chunkId, chunkUnpackedLength, chunkCompression,chunkPackedLength,chunkContentType);
+		printf("Absolute address is %d",AddressOfBlockStart);
+		
+		BlockAddressesOld[x] = AddressOfBlockStart;
+		BlockAddressesNew[x] = NewBlockAddress;
+		printf("\tNew Block will be at %d\n", BlockAddressesNew[x]);
+		
+		AddressOfBlockStart = AddressOfBlockStart + chunkPackedLength;//The next block
+		if ((AddressOfBlockStart % 4) != 0)
+			AddressOfBlockStart = AddressOfBlockStart + 4 - (AddressOfBlockStart % 4); // chunk offsets always fall on 4-byte boundaries
+		
+		NewBlockAddress = NewBlockAddress + chunkUnpackedLength;	//The next block
+		NewBlockBoundary[x]=0;
+		//printf("\n%d\n",NewBlockAddress % 4);
+		if ((NewBlockAddress % 4) != 0)
+			{
+			NewBlockBoundary[x] = 4 - (NewBlockAddress % 4);//Need to write these bytes to make it all match up.
+			NewBlockAddress = NewBlockAddress + 4 - (NewBlockAddress % 4); // chunk offsets always fall on 4-byte boundaries
+			}
+
+		address_pointer = address_pointer + 10;
+		}
+
+//Write my data.
+	if ((file = fopen(SHOCK_OUT_PATH, "w+b")) == NULL)
+	{
+		printf("Could not open specified file\n");
+		return;
+	}
+//Copy the header
+	for (int i = 0; i < 124; i++)
+		{
+		fputc(archive_ark[i],file);
+		}
+
+//My last chunk address is the directory.
+	printf("\nThe New directory is at %d", NewBlockAddress);
+	WriteInt32(file, NewBlockAddress);
+	
+
+	for (int x = 0; x < NoOfChunks; x++)
+		{
+		switch (compressionFlags[x])
+			{
+			case 0:	//Flat uncompressed. Just copy the bytes
+				for (int i = 0; i < UnpackedSize[x]; i++)
+					{
+					fputc(archive_ark[BlockAddressesOld[x] + i], file);
+					//WriteInt8(file, x+1);
+					}
+				if (NewBlockBoundary[x]>0)
+					{	
+					for (int i = 0; i < NewBlockBoundary[x]; i++)
+							{//Write to the 4 byte boundary.
+							WriteInt8(file,0);
+							}
+					}
+				break;
+			case 1:	//Flat compressed. Unpacked and copy the output.
+				tmp_ark = new unsigned char[UnpackedSize[x]];
+				//unpack_data(archive_ark, tmp_ark, UnpackedSize[x]);
+				LoadShockChunk(BlockAddressesOld[x], compressionFlags[x], archive_ark, tmp_ark, PackedSize[x], UnpackedSize[x]);
+				for (int i = 0; i < UnpackedSize[x]; i++)
+					{
+					fputc(tmp_ark[i], file);
+					//WriteInt8(file,x+1);
+					}
+				if (NewBlockBoundary[x]>0)
+				{
+					for (int i = 0; i < NewBlockBoundary[x]; i++)
+					{//Write to the 4 byte boundary.
+						WriteInt8(file, 0);
+					}
+				}
+				break;
+			case 2:
+			case 3:
+				printf("\nA subdir! What do I do here!!!\n");
+				break;
+			}
+		}
+
+		//Write the directory
+
+		//No of chunks (int16)
+		WriteInt16(file,NoOfChunks);
+		//Offset to first chunk (int32)
+		WriteInt32(file,BlockAddressesNew[0]);
+		//Loop through
+		for (int x = 0; x < NoOfChunks; x++)
+		{
+		//Chunk Id (int 16)
+			WriteInt16(file, chunkNos[x]);
+		//chunk unpacked length (int 24)
+			WriteInt24(file, UnpackedSize[x]);
+		//Chunk compression type (int 8)
+			WriteInt8(file, 0);
+		//chunk packed length (int 24)
+			WriteInt24(file, UnpackedSize[x]);	//uncompressed.
+		//Chunk content type.(int 8)
+			WriteInt8(file,contentType[x]);
+		}
+	fclose(file);
+
+
+//Reread my data
+	//*file = NULL;      // File pointer
+	if ((file = fopen(SHOCK_OUT_PATH, "rb")) == NULL)
+	{
+		printf("\nArchive not found!\n");
+		return;
+	}
+	fileSize = getFileSize(file);
+
+	archive_ark = new unsigned char[fileSize];
+	fread(archive_ark, fileSize, 1, file);
+	fclose(file);
+
+	//Get the directory address
+	DirectoryAddress = getValAtAddress(archive_ark, 124, 32);
+	printf("\nThe Directory is at %d\n", DirectoryAddress);
+	//Read in the directory
+	NoOfChunks = getValAtAddress(archive_ark, DirectoryAddress, 16);
+	printf("No of chunks = %d\n", NoOfChunks);
+	AddressOfBlockStart = getValAtAddress(archive_ark, DirectoryAddress + 2, 32);//The first chunk
+	address_pointer = DirectoryAddress + 6;
+	for (int x = 0; x < NoOfChunks; x++)
+	{
+		int chunkId = getValAtAddress(archive_ark, address_pointer, 16);
+		int chunkUnpackedLength = getValAtAddress(archive_ark, address_pointer + 2, 24);
+		int chunkCompression = getValAtAddress(archive_ark, address_pointer + 5, 8);	//Compression.
+		int chunkPackedLength = getValAtAddress(archive_ark, address_pointer + 6, 24);	//Does not matter
+		short chunkContentType = getValAtAddress(archive_ark, address_pointer + 9, 8);
+		printf("Index: %d, Chunk %d, Unpack size %d, compression %d, packed size %d, content type %d\t",
+			x, chunkId, chunkUnpackedLength, chunkCompression, chunkPackedLength, chunkContentType);
+		printf("Absolute address is %d\n", AddressOfBlockStart);
+
+		AddressOfBlockStart = AddressOfBlockStart + chunkPackedLength;//The next block
+		if ((AddressOfBlockStart % 4) != 0)
+			AddressOfBlockStart = AddressOfBlockStart + 4 - (AddressOfBlockStart % 4); // chunk offsets always fall on 4-byte boundaries
+
+		address_pointer = address_pointer + 10;
+	}
 }

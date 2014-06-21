@@ -369,7 +369,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		if (isCompressed == 1)
 			{
 			int datalen;
-			lev_ark = unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
+			lev_ark = unpackUW2(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32),&datalen);
 			address_pointer=address_pointer+4;
 			AddressOfBlockStart=0;
 			//ObjectsAddress=1024;
@@ -401,7 +401,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		if (isCompressed == 1)
 			{
 			int datalen;
-			tex_ark = unpack(tmp_ark,textureAddress,&datalen);
+			tex_ark = unpackUW2(tmp_ark, textureAddress, &datalen);
 			textureAddress=-1;
 			}
 		break;

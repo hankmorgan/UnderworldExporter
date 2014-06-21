@@ -47,10 +47,10 @@ extern int GAME;
 
 int main()
 {
-//int game = SHOCK;
+int game = SHOCK;
 //int game = UWDEMO;
 //int game = UW1;
-int game = UW2;
+//int game = UW2;
 //int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
@@ -60,7 +60,7 @@ int game = UW2;
 //int mode = CONVERSATION_MODE;
 int mode = REPACK_MODE;
 
-levelNo =0;
+levelNo =1;
 
 GAME = game;
 switch (game)
@@ -114,7 +114,17 @@ switch (game)
 			ExtractConversations(UW1);
 			break;
 		case REPACK_MODE:
-			Repack(game);
+			if (game==UW2)
+				{
+				RepackUW2();
+				}
+			else
+			{
+				if (game == SHOCK)
+				{
+					RepackShock();
+				}
+			}
 			break;
 		}
 	}

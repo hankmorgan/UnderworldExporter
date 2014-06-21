@@ -9,7 +9,9 @@ long ConvertInt32(unsigned char Byte1, unsigned char Byte2,  unsigned char Byte3
 
 
 void WriteInt32(FILE *file, long val);
+void WriteInt24(FILE *file, long val);
 void WriteInt16(FILE *file, long val);
+void WriteInt8(FILE *file, long val);
 
 long getFileSize(FILE *file);
 int getValAtAddress(unsigned char *buffer, long Address, int size);
@@ -18,5 +20,11 @@ int LoadShockFile(char *filePath,long fileSize, unsigned char *archive_ark);
 long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPackedLength, long *chunkUnpackedLength, long *chunkType);
 int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archive_ark, unsigned char *OutputChunk,long chunkPackedLength,long chunkUnpackedLength);
 
-void Repack(int game);
+unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen);
+void unpack_data(unsigned char *pack, unsigned char *unpack, unsigned long unpacksize);
+long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPackedLength, long *chunkUnpackedLength, long *chunkType);
+
+void RepackUW2();
+void RepackShock();
+
 #endif /*util_h*/

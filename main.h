@@ -34,6 +34,7 @@
 #define SHOCK_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_object_config.txt"
 #define SHOCK_COMMONOBJ_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\objprop.dat"
 #define SHOCK_MODEL_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\obj3d.res"
+#define SHOCK_OUT_PATH "C:\\Games\\SystemShock\\Res\\DATA\\archive_out.dat"
 
 #define ENTRANCES_CONFIG_FILE  "C:\\Underworld Exporter\\src\\trunk\\uw1_entrances.txt"
 
@@ -41,8 +42,8 @@
 #define SCRIPT_GlOBAL_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptglobal.txt"
 #define SCRIPT_MAIN_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptmain.txt"
 #define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
-#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock_5.script"
-#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_5.map"
+#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock_1.script"
+#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_1.map"
 
 #define ENABLE_LIGHTING 0
 #define ENABLE_WATER 1
