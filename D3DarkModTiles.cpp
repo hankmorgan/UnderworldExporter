@@ -1672,9 +1672,11 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 	int doorWidth = 48;
 	int doorHeight = 96;
 	int resolution;
+	float doorThickness = 2;
 	float BrushX = BrushSizeX;
 	float BrushY = BrushSizeY;
 	float BrushZ = BrushSizeZ;
+	float doorOffset=0;
 
 	switch (game)
 	{
@@ -1706,6 +1708,20 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 	case SHOCK_EAST:
 	case SHOCK_WEST:
 	{
+		switch (game)
+			{
+			case SHOCK:
+				break;
+			default:
+				if (currDoor.x == 0)
+				{
+					doorOffset = +2;
+				}
+				if (currDoor.x == 7)
+				{
+					doorOffset = -2;
+				}
+			}
 		//if(currDoor.heading == EAST) {offY =offY+DOORORIGINOFFSET;}else{offY =offY+DOORORIGINOFFSET;}
 		if ((heading == EAST) || (heading == SHOCK_EAST))
 		{
@@ -1719,7 +1735,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
 		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 		//east face 
-		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + doorThickness + doorOffset)));
 		getWallTextureName(t, fSELF, 0);
 		//north face 
 		fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
@@ -1728,7 +1744,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
 		getFloorTextureName(t, fTOP);
 		//west face
-		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - doorThickness + doorOffset)));
 		getWallTextureName(t, fSELF, 0);
 		//south face
 		if ((heading == EAST) || (heading == SHOCK_EAST))
@@ -1749,7 +1765,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
 		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 		//east face 
-		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + doorThickness + doorOffset)));
 		getWallTextureName(t, fSELF, 0);
 		//north face 
 		fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
@@ -1758,7 +1774,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( 0 0 1 %f )", -BrushZ * (CEILING_HEIGHT + 1));
 		getFloorTextureName(t, fTOP);
 		//west face
-		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - doorThickness + doorOffset)));
 		getWallTextureName(t, fSELF, 0);
 		//south face
 		fprintf(MAPFILE, "( 0 -1 0 %f )", +(y*BrushY));
@@ -1773,7 +1789,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
 		fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 		//east face 
-		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+		fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + doorThickness + doorOffset)));
 		getWallTextureName(t, fSELF, 0);
 		//north face 
 		if ((heading == EAST) || (heading == SHOCK_EAST))
@@ -1789,7 +1805,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
 		getFloorTextureName(t, fTOP);
 		//west face
-		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 2)));
+		fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - doorThickness + doorOffset)));
 		getWallTextureName(t, fSELF, 0);
 		//south face
 		fprintf(MAPFILE, "( 0 -1 0 %f )", +(y * BrushY));
@@ -1815,7 +1831,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 			fprintf(MAPFILE, "// primitive %d\n", PrimitiveCount++);
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
-			fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + 2)));
+			fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + doorThickness + doorOffset)));
 			getWallTextureName(Tmpt, fEAST, 0);
 			//north face 
 			if ((heading == EAST) || (heading == SHOCK_EAST))
@@ -1831,7 +1847,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 			fprintf(MAPFILE, "( 0 0 1 %f )", -((offZ*BrushZ) + doorHeight));
 			getWallTextureName(Tmpt, fTOP, 0);
 			//west face
-			fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - 1)));
+			fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - doorThickness + doorOffset)));
 			getWallTextureName(Tmpt, fWEST, 0);
 			//south face
 			if ((heading == EAST) || (heading == SHOCK_EAST))
@@ -1858,6 +1874,23 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		//case SHOCK_SOUTH:
 	{
 
+//							printf("%d %d",currDoor.x,currDoor.y);
+		switch (game)
+			{
+			case SHOCK:
+				break;
+			default:
+				if (currDoor.y == 0)
+					{
+					doorOffset=+2;
+					}
+				if (currDoor.y == 7)
+					{
+						doorOffset = -2;
+					}
+			}
+
+						
 		if ((heading == NORTH) || (heading == SHOCK_NORTH))
 		{
 			offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2) + doorWidth;
@@ -1882,7 +1915,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 
 		getWallTextureName(t, fSELF, 0);
 		//north face 
-		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + doorThickness + doorOffset));
 		getWallTextureName(t, fSELF, 0);
 		//top face
 		fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
@@ -1891,7 +1924,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( -1 0 0 %f )", +((x)*BrushX));
 		getWallTextureName(t, fSELF, 0);
 		//south face
-		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - doorThickness + doorOffset));
 		getWallTextureName(t, fSELF, 0);
 		//bottom face
 		fprintf(MAPFILE, "( 0 0 -1 %f )", offZ * BrushZ);	//to go underneath
@@ -1905,7 +1938,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( 1 0 0 %f )", -((x + 1)*BrushX));
 		getWallTextureName(t, fSELF, 0);
 		//north face 
-		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + doorThickness + doorOffset));
 		getWallTextureName(t, fSELF, 0);
 		//top face
 		fprintf(MAPFILE, "( 0 0 1 %f )", -BrushZ * (CEILING_HEIGHT + 1));
@@ -1914,7 +1947,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( -1 0 0 %f )", +(x*BrushX));
 		getWallTextureName(t, fSELF, 0);
 		//south face
-		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - doorThickness + doorOffset));
 		getWallTextureName(t, fSELF, 0);
 		//bottom face
 		fprintf(MAPFILE, "( 0 0 -1 %f )", (offZ*BrushZ) + doorHeight);	//to go underneath
@@ -1928,7 +1961,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		fprintf(MAPFILE, "( 1 0 0 %f )", -((x + 1)*BrushX));
 		getWallTextureName(t, fSELF, 0);
 		//north face 
-		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+		fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + doorThickness + doorOffset));
 		getWallTextureName(t, fSELF, 0);
 		//top face
 		fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
@@ -1944,7 +1977,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 		}
 		getWallTextureName(t, fSELF, 0);
 		//south face
-		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+		fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - doorThickness + doorOffset));
 		getWallTextureName(t, fSELF, 0);
 		//bottom face
 		fprintf(MAPFILE, "( 0 0 -1 %f )", offZ * BrushZ);	//to go underneath
@@ -1977,7 +2010,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 			}
 			getWallTextureName(Tmpt, fEAST, 0);
 			//north face 
-			fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + 2));
+			fprintf(MAPFILE, "( 0 1 0 %f )", -(offY + doorThickness + doorOffset));
 			getWallTextureName(Tmpt, fNORTH, 0);
 			//top face
 			fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
@@ -1993,7 +2026,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 			}
 			getWallTextureName(Tmpt, fWEST, 0);
 			//south face
-			fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - 2));
+			fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY - doorThickness + doorOffset));
 			getWallTextureName(Tmpt, fSOUTH, 0);
 			//bottom face
 			fprintf(MAPFILE, "( 0 0 -1 %f )", (offZ*BrushZ));	//to go underneath
@@ -2203,6 +2236,27 @@ void RenderGenericTileAroundOrigin(int x, int y, tile &t, int iCeiling, int iFlo
 	fprintf(MAPFILE, "}\n}\n");
 }
 
+void RenderChangeTerrainTiles(int game, tile LevelInfo[64][64])
+{
+	for (int i = 0; i < 63; i++)
+		{
+		for (int j = 0; j < 63; j++)
+			{
+			if (LevelInfo[i][j].TerrainChange == 1)
+				{
+				fprintf(MAPFILE, "\n");
+				PrimitiveCount = 0;	//resets for each entity.
+				fprintf(MAPFILE, "// entity %d\n", EntityCount);
+				fprintf(MAPFILE, "{\n\"classname\" \"func_static\"\n");
+				fprintf(MAPFILE, "\n\"name\" \"tile_%02d_%02d\"\n", i,j);
+				fprintf(MAPFILE, "\n\"model\" \"tile_%02d_%02d\"\n", i, j);
+				fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", i*BrushSizeX , j*BrushSizeY , 0);
+				RenderDarkModTile(game, 0, 0, LevelInfo[i][j],0,0,0,1);
+				fprintf(MAPFILE, "}\n");
+				}
+			}
+		}
+}
 
 void RenderWaterTiles(int game, tile LevelInfo[64][64], int x, int y)
 {

@@ -671,7 +671,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 			printf("\n\tObject Type : %d %s", objList[x].item_id, "Unknown or bugged");
 			}
 		printf("\n\tLocation Tile(%d,%d) Position(%d,%d,%d) Heading (%d)", objList[x].tileX, objList[x].tileY, objList[x].x, objList[x].y, objList[x].zpos, objList[x].heading);
-		printf("\n\nIn use %d", objList[x].InUseFlag);
+		printf("\n\tIn use %d", objList[x].InUseFlag);
 		printf("\n\tFlags: %d", objList[x].flags);
 		printf("\n\t\tEnchantment: %d", objList[x].enchantment);
 		printf("\n\t\tDoordir : %d", objList[x].doordir);

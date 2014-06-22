@@ -522,6 +522,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].ceilingHeight = 0;//UW_CEILING_HEIGHT;	//constant for uw				
 				LevelInfo[x][y].noOfNeighbours=0;
 				LevelInfo[x][y].tileTested = 0;
+				LevelInfo[x][y].TerrainChangeCount=0;
 				switch (game)
 					{
 					case UWDEMO:	//special case for demo since textures mappings are in a seperate file
@@ -1115,17 +1116,19 @@ for (int x=0; x<64;x++)
 					LevelInfo[x][y].TerrainChange= 1;
 					//LevelInfo[x][y].TerrainChangeIndex = currObj.index;
 					//Need to flag the range of tiles affected. X/y of the object gives the dimensions
-					for (int j=x; (j <64 && j<= x+currObj.x); j++  )
+					for (int j=x; j<= x+currObj.x; j++ )
 						{
-						for (int k=y; (k <64 && k<= y+currObj.y); k++  )
+						for (int k=y; k<= y+currObj.y; k++  )
 							{
 							LevelInfo[j][k].TerrainChange = 1;
+							LevelInfo[j][k].TerrainChangeIndices[LevelInfo[j][k].TerrainChangeCount]=currObj.index;
+							LevelInfo[j][k].TerrainChangeCount++;
 							LevelInfo[j][k].isWater  = 0;// turn off water in terrain change tiles
 							}						
 						}
 					currObj.tileX=x;
 					currObj.tileY=y;
-					break;
+					//break;
 					}
 				currObj=objList[currObj.next];
 				}while (currObj.index !=0);

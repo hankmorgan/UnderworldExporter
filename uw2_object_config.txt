@@ -395,7 +395,7 @@
 397 0 0 0 a_set_variable_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 398 0 0 0 a_check_variable_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 399 0 0 0 a_null_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
-400 0 0 0 a_text_string_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+400 0 0 0 a_text_string_trap models/darkmod/decorative/hourglass.ase model 53 NOTHING NOTHING
 401 0 0 0 an_experience_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 402 0 0 0 a_jump_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 403 0 0 0 a_change_from_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
@@ -408,8 +408,8 @@
 415 0 0 0 a_tym_rune models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 416 0 0 0 a_move_trigger trigger_multiple entity 54 NOTHING NOTHING
 417 0 0 0 a_pick_up_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
-418 0 0 0 a_use_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
-419 0 0 0 a_look_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+418 0 0 0 a_use_trigger models/darkmod/decorative/hourglass.ase model 56 NOTHING NOTHING
+419 0 0 0 a_look_trigger models/darkmod/decorative/hourglass.ase model 57 NOTHING NOTHING
 420 0 0 0 a_pressure_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 421 0 0 0 a_pressure_release_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
 422 0 0 0 an_enter_trigger trigger_multiple entity 54 NOTHING NOTHING

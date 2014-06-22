@@ -100,6 +100,8 @@ short hasElevator;	//Indicates that the tile has an elevator
 //int ElevatorIndex;	//index to the elevator do_trap
 
 short TerrainChange;	//Indicates that the tile can change into another type of tile
+short TerrainChangeCount;	//No of terrain changes acting on this tile
+int TerrainChangeIndices[10];	//Array of terrain change objects affecting this tile. I'll need this for scripting.
 //int TerrainChangeIndex;	//index to the change terrain trap.
 
 int SHOCKSTATE[4];	//These should be ff,00,00,00 on an initial map. I'm just bringing them back for research purposes.

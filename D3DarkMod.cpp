@@ -124,9 +124,11 @@ iGame =game;
 			case UW1:
 				RenderObjectList(game,LevelInfo,objList);
 				RenderLevelExits (game,LevelInfo,objList);
+				RenderChangeTerrainTiles(game,LevelInfo);
 				break;
 			case UW2:
 				RenderObjectList(game,LevelInfo,objList);
+				RenderChangeTerrainTiles(game, LevelInfo);
 				break;
 			case SHOCK:
 				RenderObjectList(game,LevelInfo,objList);

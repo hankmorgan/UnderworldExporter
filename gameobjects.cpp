@@ -601,8 +601,8 @@ switch (game)
 		//}
 			objList[x].index = x; 
 			objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
-			objList[x].tileX=-1;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
-			objList[x].tileY=-1;
+			objList[x].tileX=99;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
+			objList[x].tileY=99;
 			objList[x].levelno = LevelNo ;	
 			objList[x].address = objectsAddress+address_pointer;
 			//These three will get set when I am rendering the object entity and if the item is an npc's inventory.
@@ -657,7 +657,6 @@ switch (game)
 				}
 				
 			}
-				
 			//objList[x].special = objList[x].owner;
 			
 			objList[x].link  = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) >> 6 & 0x3FF) ; //bits 6-15

@@ -162,53 +162,74 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 	}
 }
 
-void a_change_terrain_trapSCRIPT(ObjectItem currObj, int targetX, int targetY, int dimX, int dimY)
+void a_change_terrain_trapSCRIPT(ObjectItem currObj, int targetX, int targetY, int dimX, int dimY, ObjectItem objList[1600])
 {//This needs to be updated to support multiple traps working on a single tile.
 int i;
 int j;
-int k;
-k = 0;
-if (currObj.index == 587)
+if (currObj.index == 996)
 {
 	printf("");
 }
-if ((dimX == 0) && (dimY == 0))
-	{//A single tile trap.
-		fprintf(fBODY, "\t$initial_%s_%03d.remove();\n"
-			, UniqueObjectName(currObj), 0);
-	}
-for (i=0;i<dimX;i++)
+//int k;
+//k = 0;
+
+//if ((dimX == 0) && (dimY == 0))
+//	{//A single tile trap.
+//		fprintf(fBODY, "\t$initial_%s_%03d.remove();\n"
+//			, UniqueObjectName(currObj), 0);
+//	}
+for (i=0;i<=dimX;i++)
 	{
-	for (j=0;j<dimY;j++)
+	for (j=0;j<=dimY;j++)
 		{//\"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
-		fprintf(fBODY,"\t$initial_%s_%03d.remove();\n"
-			,UniqueObjectName(currObj),k);
-		k++;
+		fprintf(fBODY, "\n\t//Change terrain script %s\n", UniqueObjectName(currObj));
+		fprintf(fBODY, "\tif (tile_%02d_%02d_removed == 0)\n", currObj.tileX + i, currObj.tileY + j);
+		fprintf(fBODY,"\t{\n\t\t$tile_%02d_%02d.remove();\n"
+			,currObj.tileX+i,currObj.tileY+j);
+		fprintf(fBODY, "\t\ttile_%02d_%02d_removed = 1;\n", currObj.tileX + i, currObj.tileY + j);
+		fprintf(fBODY, "\t}\n");
+		//Hide the other terrain changes on the affected tiles
+		for (int k = 0; k < LevelInfo[currObj.tileX + i][currObj.tileY + j].TerrainChangeCount; k++)
+			{
+			if (LevelInfo[currObj.tileX + i][currObj.tileY + j].TerrainChangeIndices[k] != currObj.index)
+				{
+				fprintf(fBODY, "\t$%s_%02d_%02d.hide();\n"
+					, UniqueObjectName(objList[LevelInfo[currObj.tileX + i][currObj.tileY + j].TerrainChangeIndices[k]]), currObj.tileX + i, currObj.tileY + j);
+				}
+			}
+		fprintf(fBODY, "\t$%s_%02d_%02d.show();\n"
+			, UniqueObjectName(currObj), currObj.tileX + i, currObj.tileY+j);
 		}
 	}
 
-	fprintf(fBODY,"\t$final_%s.show();\n"    
-		,UniqueObjectName(currObj));
+//	fprintf(fBODY,"\t$final_%s.show();\n"    
+//		,UniqueObjectName(currObj));
 }
 
 void a_delete_object_trapSCRIPT(ObjectItem objList[1600], int objectToDelete)
 {
-    fprintf(fBODY,"\t$%s_%03d_%03d_%03d.hide();"
-		,objectMasters[objList[objectToDelete].item_id].desc,objList[objectToDelete].tileX ,objList[objectToDelete].tileY ,objList[objectToDelete].index );
+    fprintf(fBODY,"\t$%s.hide();"
+		, UniqueObjectName(objList[objectToDelete]));
 
 }
 
-void a_text_string_trapSCRIPT(int stringId, int targetLevelNo)
+void a_text_string_trapSCRIPT(int game, int stringId, int targetLevelNo)
 {
 char pStr[255];
-
-if (lookupString(9, 64 * (targetLevelNo) + stringId ,pStr))
+if (game == UW1)
 	{
-	fprintf(fBODY,"\tsys.println(\"%s\");\n",pStr );
+	if (lookupString(9, 64 * (targetLevelNo) + stringId ,pStr))
+		{
+		fprintf(fBODY,"\tsys.println(\"%s\");\n",pStr );
+		}
+	else
+		{
+		fprintf(fBODY,"\tsys.println(\"Text trap String not found %3\n\");\n", stringId );
+		}
 	}
 else
 	{
-	fprintf(fBODY,"\tsys.println(\"Text trap String not found %3\n\");\n", stringId );
+	fprintf(fBODY, "\tsys.println(\"UW2 Text trap String not found\");\n");
 	}
 }
 
@@ -393,22 +414,61 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w")!=0)
 	}	
 	
 fprintf(fGLOBALS,"\tfloat JustTeleported = 0;\n");
+for (int x = 0; x <63; x++)
+{
+	for (int y = 0; y <63; y++)
+	{
+		if (LevelInfo[x][y].TerrainChange == 1)
+			{
+			fprintf(fGLOBALS, "\tfloat tile_%02d_%02d_removed = 0;\n",x,y);
+			}
+	}
+}
 fprintf(fMAIN,"\nvoid main()\n{\n");
 fprintf(fMAIN, "\t$light_1.bind($player1);\n");
+for (int i = 0; i < 1600; i++)
+	{
+	if (objList[i].item_id >0)
+		{
+			if (objectMasters[objList[i].item_id].type == A_USE_TRIGGER)
+				{
+				fprintf(fGLOBALS, "\tfloat %s_state = 0;\n", UniqueObjectName(objList[i]));
+				}
+		}
+	if (objList[i].InUseFlag >0)
+		{
+	
+		if (objectMasters[objList[i].item_id].type == A_CHANGE_TERRAIN_TRAP)
+			{
+			for (int x = 0; x <= objList[i].x; x++)
+				{
+					for (int y = 0; y <= objList[i].y; y++)
+					{
+						fprintf(fMAIN, "\t$%s_%02d_%02d.hide();\n", UniqueObjectName(objList[i]), objList[i].tileX + x, objList[i].tileY+y);
+					}
+				}
+			}
+		}
+	}
+
 	for (int y=63; y>=0;y--)
 		{
 		for (int x=0; x<64;x++)
 			{
 			if(LevelInfo[x][y].indexObjectList !=0)	//there is an object in this tile
 				{
-
+				
 				long nextObj = LevelInfo[x][y].indexObjectList;
 				while (nextObj !=0)
 					{
+					if (nextObj == 1000)
+					{
+						printf("");
+					}
 					if ((isTrigger(objList[nextObj]) || (isButton(objList[nextObj])) || (isTrigger(objList[objList[nextObj].link]))))
 						{
 						//printObject(objList[nextObj],1);	//Prints the first object the inital trigger.
-						fprintf(fBODY,"\n\nvoid start_%s()\n{\n",
+						fprintf(fBODY,"\n\nvoid start_%s()\n\t{\n",
 								UniqueObjectName(objList[nextObj]));
 						conditionalCount = 0;
 						//UW triggers get some of their parameters from the triggers that called them.
@@ -431,23 +491,46 @@ fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 										{
 										//printObject(objList[nextInChain],1);fprintf(fBODY,"\n");
 										//scriptChainFunctions(objList[nextInChain]);
-										scriptChainFunctionsUW(objList,objList[nextInChain],&conditionalCount,&TriggerTargetX,&TriggerTargetY,&TriggerQuality,&TriggerFlags,&TriggerHomeX,&TriggerHomeY,LevelNo);
+										scriptChainFunctionsUW(game, objList,objList[nextInChain],&conditionalCount,&TriggerTargetX,&TriggerTargetY,&TriggerQuality,&TriggerFlags,&TriggerHomeX,&TriggerHomeY,LevelNo);
 										nextInChain=0;
 										break;
 										}
+									case A_USE_TRIGGER:
+										if (objList[nextInChain].next != 0)
+											{
+											fprintf(fBODY, "\n//A use trigger (%s) with a next (%s)\n", UniqueObjectName(objList[nextInChain]), UniqueObjectName(objList[objList[nextInChain].next]));
+											fprintf(fBODY, "\n\tif (%s_state==1)\n\t{", UniqueObjectName(objList[nextInChain]));
+											fprintf(fBODY, "\n\t\t %s_state=0;\n", UniqueObjectName(objList[nextInChain]));
+											int originalNext = nextInChain;
+											nextInChain = objList[objList[nextInChain].next].link;
+											while (nextInChain!=0)
+												{
+												scriptChainFunctionsUW(game, objList, objList[nextInChain], &conditionalCount, &TriggerTargetX, &TriggerTargetY, &TriggerQuality, &TriggerFlags, &TriggerHomeX, &TriggerHomeY, LevelNo);
+												nextInChain = objList[nextInChain].link;
+												}
+											fprintf(fBODY, "\n\t}");
+											fprintf(fBODY, "\n\telse\n\t{");
+											fprintf(fBODY, "\n\t\t %s_state=1;\n", UniqueObjectName(objList[originalNext]));
+											conditionalCount++;
+											nextInChain = originalNext;
+											}
 									default:
 										{
 										//printObject(objList[nextInChain],1); fprintf(fBODY,"\n");
-										scriptChainFunctionsUW(objList,objList[nextInChain],&conditionalCount,&TriggerTargetX,&TriggerTargetY,&TriggerQuality,&TriggerFlags,&TriggerHomeX,&TriggerHomeY,LevelNo);
+										scriptChainFunctionsUW(game, objList,objList[nextInChain],&conditionalCount,&TriggerTargetX,&TriggerTargetY,&TriggerQuality,&TriggerFlags,&TriggerHomeX,&TriggerHomeY,LevelNo);
 										nextInChain = objList[nextInChain].link;
+										if (nextInChain !=0)
+											{fprintf(fBODY, "\n\t//NextInChain is %d - %s\n", nextInChain,UniqueObjectName(objList[nextInChain]));}
 										break;
 										}
 									}
 								}
 							else
 								{
-								//if (nextInChain !=0)
-								//{
+								if (nextInChain !=0)
+									{
+										fprintf(fBODY, "\n\t//NextInChain is %d - %s (breaks chain)\n", nextInChain, UniqueObjectName(objList[nextInChain]));
+									}
 									//fprintf(fBODY,"break on no trigger,trap or button\n");
 									//printObject(objList[nextInChain],1);	fprintf(fBODY,"\n");								
 									nextInChain=0;
@@ -523,7 +606,7 @@ fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 	
 }
 
-void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *conditionalCount, int *TriggerTargetX,int *TriggerTargetY,int *TriggerQuality,int *TriggerFlags,int *TriggerHomeX,int *TriggerHomeY,int scriptLevelNo)
+void scriptChainFunctionsUW(int game, ObjectItem objList[1600], ObjectItem currObj,int *conditionalCount, int *TriggerTargetX,int *TriggerTargetY,int *TriggerQuality,int *TriggerFlags,int *TriggerHomeX,int *TriggerHomeY,int scriptLevelNo)
 	{
 	//picks which script to generate.
     switch (objectMasters[currObj.item_id].type)
@@ -557,9 +640,9 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
         tobedone("A_PIT_TRAP");
         break;
     case A_CHANGE_TERRAIN_TRAP:
-        a_change_terrain_trapSCRIPT(currObj,*TriggerTargetX,*TriggerTargetY,currObj.x,currObj.y);
+        a_change_terrain_trapSCRIPT(currObj,*TriggerTargetX,*TriggerTargetY,currObj.x,currObj.y,objList);
 		//fprintf(fMAIN, "$final_%s.hide();\n",objectMasters[currObj.item_id].desc, *TriggerTargetX, *TriggerTargetY,currObj.index );
-		fprintf(fMAIN, "$final_%s.hide();\n",UniqueObjectName(currObj));
+		//fprintf(fMAIN, "$final_%s.hide();\n",UniqueObjectName(currObj));
         break;
     case A_SPELLTRAP:
         tobedone("A_SPELLTRAP");
@@ -587,7 +670,8 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
         tobedone("AN_INVENTORY_TRAP");
         break;
     case A_SET_VARIABLE_TRAP:
-        fprintf(fGLOBALS,"\nfloat $var_%d = 0; \n",currObj.zpos);
+        //fprintf(fGLOBALS,"\nfloat $var_%d = 0; \n",currObj.zpos);
+		addGlobal(currObj.zpos);
         a_set_variable_trapSCRIPT(currObj.zpos, (((currObj.owner & 0x7) <<3) | (currObj.y )), currObj.heading / 45);
         break;
     case A_CHECK_VARIABLE_TRAP:
@@ -598,7 +682,7 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
         tobedone("A_COMBINATION_TRAP");
         break;
     case A_TEXT_STRING_TRAP:
-        a_text_string_trapSCRIPT(currObj.owner,scriptLevelNo);
+        a_text_string_trapSCRIPT(game, currObj.owner,scriptLevelNo);
         break;        
     case A_MOVE_TRIGGER:
     case A_PICK_UP_TRIGGER: 
@@ -608,6 +692,7 @@ void scriptChainFunctionsUW(ObjectItem objList[1600], ObjectItem currObj,int *co
     case AN_UNLOCK_TRIGGER:	       
         *TriggerTargetX =currObj.quality ;
         *TriggerTargetY = currObj.owner;
+		fprintf(fBODY,"\n\t//Trigger set to %d %d",currObj.quality,currObj.owner);
         break;
 //    case ENCHANTMENT:  //Cast a spell
 //       enchantment(currObj.link);
@@ -1033,6 +1118,7 @@ void addGlobalTest(ObjectItem objList[1600], ObjectItem currObj, short VarOnly)
 		fprintf(fBODY, "\tif (global_var_%d >= %d)\n\t{\n", currObj.conditions[0], currObj.conditions[2]);
 	}	
 }
+
 void addGlobal(int varIndex)
 {
 	if (globals[varIndex] != 1)

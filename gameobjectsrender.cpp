@@ -318,45 +318,44 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 	//render func static for the initial tiles.
 	PrimitiveCount = 0;
 	int tileCount = 0;
+	//for (int i = 0; i <= currobj.x; i++)
+	//{
+	//	for (int j = 0; j <= currobj.y; j++)
+	//	{
+
+	//		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	//		fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	//		//TODO:There is some weirdness when I try and hide water. For now I'll just ignore it.
+	//		//if (LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater == 0)
+	//		//	{
+	//		//fprintf (MAPFILE, "\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
+	//		fprintf(MAPFILE, "\"name\" \"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
+	//		//	}
+	//		//else
+	//		//	{//water
+	//		//	fprintf (MAPFILE, "\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
+	//		//		fprintf (MAPFILE, "\n\"underwater_gui\" \"guis\underwater\underwater_green_thinmurk.gui\"\n");
+	//		//			}
+	//		fprintf(MAPFILE, "\"model\" \"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
+	//		fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", (currobj.tileX + i)*BrushSizeX, (currobj.tileY + j)*BrushSizeY, 0);
+	//		RenderDarkModTile(game, 0, 0, LevelInfo[currobj.tileX + i][currobj.tileY + j], LevelInfo[currobj.tileX + i][currobj.tileY + j].isWater, 0, 0, 1);
+	//		fprintf(MAPFILE, "\n}\n");
+	//		tileCount++;
+	//	}
+	//}
+
 	for (int i = 0; i <= currobj.x; i++)
 	{
 		for (int j = 0; j <= currobj.y; j++)
 		{
-
+			//Then render a func static for how it ends up.
+			PrimitiveCount = 0;
 			fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
 			fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-			//TODO:There is some weirdness when I try and hide water. For now I'll just ignore it.
-			//if (LevelInfo[currobj.tileX+i][currobj.tileY+j].isWater == 0)
-			//	{
-			//fprintf (MAPFILE, "\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
-			fprintf(MAPFILE, "\"name\" \"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
-			//	}
-			//else
-			//	{//water
-			//	fprintf (MAPFILE, "\"name\" \"%s_initial_%03d_%03d_%03d_%03d\"\n",objectMasters[currobj.item_id].desc,currobj.tileX,currobj.tileY,currobj.index,tileCount);
-			//		fprintf (MAPFILE, "\n\"underwater_gui\" \"guis\underwater\underwater_green_thinmurk.gui\"\n");
-			//			}
-			fprintf(MAPFILE, "\"model\" \"initial_%s_%03d\"\n", UniqueObjectName(currobj), tileCount);
-			fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", (currobj.tileX + i)*BrushSizeX, (currobj.tileY + j)*BrushSizeY, 0);
-			RenderDarkModTile(game, 0, 0, LevelInfo[currobj.tileX + i][currobj.tileY + j], LevelInfo[currobj.tileX + i][currobj.tileY + j].isWater, 0, 0, 1);
-			fprintf(MAPFILE, "\n}\n");
-			tileCount++;
-		}
-	}
+			fprintf(MAPFILE, "\"name\" \"%s_%02d_%02d\"\n", UniqueObjectName(currobj),currobj.tileX+i,currobj.tileY+j);
+			fprintf(MAPFILE, "\"model\" \"%s_%02d_%02d\"\n", UniqueObjectName(currobj), currobj.tileX + i, currobj.tileY + j);
+			fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX + (i*BrushSizeX), currobj.tileY*BrushSizeY + (j*BrushSizeY), 0);
 
-
-	//Then render a func static for how it ends up.
-	PrimitiveCount = 0;
-	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
-	fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	fprintf(MAPFILE, "\"name\" \"final_%s\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"model\" \"final_%s\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY, 0);
-
-	for (int i = 0; i <= currobj.x; i++)
-	{
-		for (int j = 0; j <= currobj.y; j++)
-		{
 			tile t;	//temporary tile for rendering.
 			t.tileType = currobj.quality & 0x01;
 			t.Render = 1;
@@ -381,11 +380,12 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 			t.DimY = 1;
 			t.DimX = 1;
 			t.hasElevator = 0;
-			RenderDarkModTile(game, i, j, t, 0, 0, 0, 1);
+			RenderDarkModTile(game, 0, 0, t, 0, 0, 0, 1);
+			fprintf(MAPFILE, "\n}\n");
+			
 		}
 	}
-	fprintf(MAPFILE, "\n}\n");
-	return;
+
 }
 
 void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -870,12 +870,15 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 	//Link for a lock
 	float doorWidth = 48;
 	float doorHeight = 96;
+	int doorThickness = 2;
+	float doorOffset =0;
 	float tileX = currobj.tileX;
 	float tileY = currobj.tileY;
 	float BrushX = BrushSizeX;
 	float BrushY = BrushSizeY;
 	float zpos = z;
-
+	
+	zpos = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ;//Force the door to stay on the ground.
 
 	if (game == SHOCK)
 	{
@@ -939,19 +942,47 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 	}
 
 	switch (heading)
+	{
+	case EAST:
+	case SHOCK_EAST:
+	case WEST:
+	case SHOCK_WEST:
+		if (game != SHOCK)
+		{
+			if (currobj.x == 0)
+				doorOffset = +2;
+			if (currobj.x == 7)
+				doorOffset = -2;
+		}
+		break;
+	case NORTH:
+	case SHOCK_NORTH:
+	case SOUTH:
+		if (game !=SHOCK)
+			{
+			if (currobj.y == 0)
+					doorOffset = +2;
+			if (currobj.y == 7)
+					doorOffset = -2;
+			}
+	}
+
+
+	switch (heading)
 	{//TODO: replace with proper model offset
 	case SHOCK_EAST:
 	case EAST:
-	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, (tileY)*BrushY + ((0 + (BrushY - doorWidth) / 2)), zpos);	break; }
+	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + doorOffset, (tileY)*BrushY + ((0 + (BrushY - doorWidth) / 2)), zpos);	break; }
 	case SHOCK_WEST:
 	case WEST:
-	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, (tileY)*BrushY + ((doorWidth + (BrushY - doorWidth) / 2)), zpos);	break; }
+	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x + doorOffset, (tileY)*BrushY + ((doorWidth + (BrushY - doorWidth) / 2)), zpos);	break; }
 	case SHOCK_NORTH:
 	case NORTH:
-	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", (tileX)*BrushX + ((doorWidth + (BrushX - doorWidth) / 2)), y, zpos);	break; }
+	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", (tileX)*BrushX + ((doorWidth + (BrushX - doorWidth) / 2)), y+doorOffset, zpos);	break; }
 	case SOUTH:
-	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", (tileX)*BrushX + ((0 + (BrushX - doorWidth) / 2)), y, zpos);	break; }
+	{fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", (tileX)*BrushX + ((0 + (BrushX - doorWidth) / 2)), y + doorOffset, zpos);	break; }
 	}
+
 
 
 	tile t = LevelInfo[currobj.tileX][currobj.tileY];
@@ -988,7 +1019,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "// primitive %f\n", 0);
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
-			fprintf(MAPFILE, "( 1 0 0 %d )", -(3));
+			fprintf(MAPFILE, "( 1 0 0 %d )", -(doorThickness));
 			getWallTextureName(t, fSELF, 0);
 			//north face 
 			fprintf(MAPFILE, "( 0 1 0 %f )", -(doorWidth));
@@ -997,7 +1028,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
 			getFloorTextureName(t, fTOP);
 			//west face
-			fprintf(MAPFILE, "( -1 0 0 %d )", -(3));
+			fprintf(MAPFILE, "( -1 0 0 %d )", -(doorThickness));
 			getWallTextureName(t, fSELF, 0);
 			//south face
 			fprintf(MAPFILE, "( 0 -1 0 %d )", -(0));
@@ -1011,7 +1042,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "// primitive %d\n", 0);
 			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
 			//east face 
-			fprintf(MAPFILE, "( 1 0 0 %d )", -(3));
+			fprintf(MAPFILE, "( 1 0 0 %d )", -(doorThickness));
 			getWallTextureName(t, fSELF, 0);
 			//north face 
 			fprintf(MAPFILE, "( 0 1 0 %d )", -(0));
@@ -1020,7 +1051,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
 			getFloorTextureName(t, fTOP);
 			//west face
-			fprintf(MAPFILE, "( -1 0 0 %d )", -(3));
+			fprintf(MAPFILE, "( -1 0 0 %d )", -(doorThickness));
 			getWallTextureName(t, fSELF, 0);
 			//south face
 			fprintf(MAPFILE, "( 0 -1 0 %f )", -(doorWidth));
@@ -1037,7 +1068,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "( 1 0 0 %d )", -(0));
 			getWallTextureName(t, fSELF, 0);
 			//north face 
-			fprintf(MAPFILE, "( 0 1 0 %d )", -(3));
+			fprintf(MAPFILE, "( 0 1 0 %d )", -(doorThickness));
 			getWallTextureName(t, fSELF, 0);
 			//top face
 			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
@@ -1046,7 +1077,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			fprintf(MAPFILE, "( -1 0 0 %f )", -(doorWidth));
 			getWallTextureName(t, fSELF, 0);
 			//south face
-			fprintf(MAPFILE, "( 0 -1 0 %d )", -(3));
+			fprintf(MAPFILE, "( 0 -1 0 %d )", -(doorThickness));
 			getWallTextureName(t, fSELF, 0);
 			//bottom face
 			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
@@ -1061,7 +1092,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 					  fprintf(MAPFILE, "( 1 0 0 %f )", -(doorWidth));
 					  getWallTextureName(t, fSELF, 0);
 					  //north face 
-					  fprintf(MAPFILE, "( 0 1 0 %d )", -(3));
+					  fprintf(MAPFILE, "( 0 1 0 %d )", -(doorThickness));
 					  getWallTextureName(t, fSELF, 0);
 					  //top face
 					  fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
@@ -1070,7 +1101,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 					  fprintf(MAPFILE, "( -1 0 0 %d )", +(0));
 					  getWallTextureName(t, fSELF, 0);
 					  //south face
-					  fprintf(MAPFILE, "( 0 -1 0 %d )", -(3));
+					  fprintf(MAPFILE, "( 0 -1 0 %d )", -(doorThickness));
 					  getWallTextureName(t, fSELF, 0);
 					  //bottom face
 					  fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
