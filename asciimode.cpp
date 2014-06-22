@@ -1,3 +1,10 @@
+/*
+UNDERWORLD EXPORTER
+asciimode.cpp
+
+Functions for printing out usefull information, tilemaps and object lists.
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
@@ -8,9 +15,12 @@
 //#include "scripting.h"
 #include "asciimode.h"
 
-
 long printObject(ObjectItem &currObj, int TableFormat)
 {
+	/*
+	Outputs some debug info on an object.
+	Returns the index to next object in the chain
+	*/
 int value = (((currObj.owner & 0x7) <<3) | (currObj.y ));	//for check variables
 if (objectMasters[currObj.item_id].isSet ==1)
 	{
@@ -24,7 +34,7 @@ if (objectMasters[currObj.item_id].isSet ==1)
 
 		}
 	else
-		{
+		{//Tab delimited.
 		printf("%d\t%d\t%20s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d"
 		,currObj.index ,currObj.item_id,objectMasters[currObj.item_id].desc,
 		currObj.tileX,currObj.tileY,
@@ -38,7 +48,10 @@ if (objectMasters[currObj.item_id].isSet ==1)
 }
 
 long printObject(ObjectItem &currObj)
-{//Prints the specified object and returns it's next object.
+{
+/*
+Prints the specified object and returns it's next object.
+*/
 //printf("Index:%d,%s-",currObj.index, objectMasters[currObj.item_id].desc);
 	printf("%s", UniqueObjectName(currObj));
 return currObj.next;
@@ -46,10 +59,13 @@ return currObj.next;
 
 void RenderAsciiTile(tile &t)	//,int x, int y, int BlockStart,unsigned char *buffer
 {
+	/*
+	Picks which ascii character is printed for a particular tile type.
+	*/
 
 switch (t.tileType )
 	{
-case 0:	
+case TILE_SOLID:	
 	{//solid	
 		if (t.Render ==1) 
 			{printf("#");}
@@ -57,7 +73,7 @@ case 0:
 			{printf("*");}
 		return;
 	}
-case 1: 
+case TILE_OPEN: 
 	{//open
 		if (t.Render ==1) 
 			{printf(".");}
@@ -65,7 +81,7 @@ case 1:
 			{printf(".");}
 		return;	
 	}
-case 2: 
+case TILE_DIAG_SE:
 		{//diag se
 		if (t.Render ==1) 
 			{printf("/");}
@@ -73,7 +89,7 @@ case 2:
 			{printf(" ");}
 		return;	
 	}
-case 3: 
+case TILE_DIAG_SW:
 		{//diag sw
 		if (t.Render ==1) 
 			{printf("\\");}
@@ -81,7 +97,7 @@ case 3:
 			{printf(" ");}
 		return;	
 	}
-case 4: 	
+case TILE_DIAG_NE:
 		{//diag ne
 		if (t.Render ==1) 
 			{printf("\\");}
@@ -89,7 +105,7 @@ case 4:
 			{printf(" ");}
 		return;	
 	}
-case 5: 
+case TILE_DIAG_NW:
 	{//diag nw
 		if (t.Render ==1) 
 			{printf("/");}
@@ -97,7 +113,7 @@ case 5:
 			{printf(" ");}
 		return;	
 	}
-case 6: 
+case TILE_SLOPE_N: 
 		{//slope n
 		if (t.Render ==1) 
 			{printf("n");}
@@ -105,7 +121,7 @@ case 6:
 			{printf(" ");}
 		return;	
 	}
-case 7: 	
+case TILE_SLOPE_S: 	
 		{//slope s
 		if (t.Render ==1) 
 			{printf("x");}
@@ -113,7 +129,7 @@ case 7:
 			{printf(" ");}
 		return;	
 	}
-case 8: 	
+case TILE_SLOPE_E: 	
 		{//slope e
 		if (t.Render ==1) 
 			{printf("e");}
@@ -121,7 +137,7 @@ case 8:
 			{printf(" ");}
 		return;	
 	}
-case 9: 	
+case TILE_SLOPE_W: 	
 	{//slopew
 		if (t.Render ==1) 
 			{printf("w");}
@@ -130,32 +146,32 @@ case 9:
 		return;	
 	}
 	
-case 10:
-	{//slope se->nw	valley
+case TILE_VALLEY_NW:
+	{//nw valley
 		if (t.Render ==1) 
 			{printf("a");}
 		else 
 			{printf(" ");}
 		return;	
 	}
-case 11:
-	{//slope sw->ne valley
+case TILE_VALLEY_NE:
+	{//ne valley
 		if (t.Render ==1) 
 			{printf("b");}
 		else 
 			{printf(" ");}
 		return;	
 	}
-case 12:
-	{//slope nw->se valley
+case TILE_VALLEY_SE:
+	{//se valley
 		if (t.Render ==1) 
 			{printf("c");}
 		else 
 			{printf(" ");}
 		return;	
 	}
-case 13:
-	{//slope ne->sw valley
+case TILE_VALLEY_SW:
+	{//sw valley
 		if (t.Render ==1) 
 			{printf("d");}
 		else 
@@ -163,32 +179,32 @@ case 13:
 		return;	
 	}
 	
-case 14:
-	{//slope nw->se ridge
+case TILE_RIDGE_SE:
+	{//se ridge
 		if (t.Render ==1) 
 			{printf("f");}
 		else 
 			{printf(" ");}
 		return;	
 	}
-case 15:
-	{//slope ne->sw ridge
+case TILE_RIDGE_SW:
+	{//sw ridge
 		if (t.Render ==1) 
 			{printf("g");}
 		else 
 			{printf(" ");}
 		return;	
 	}
-case 16:
-	{//slope se->nw ridge
+case TILE_RIDGE_NW:
+	{//nw ridge
 		if (t.Render ==1) 
 			{printf("h");}
 		else 
 			{printf(" ");}
 		return;	
 	}
-case 17:
-	{//slope sw->ne ridge
+case TILE_RIDGE_NE:
+	{//ne ridge
 		if (t.Render ==1) 
 			{printf("i");}
 		else 
@@ -198,7 +214,7 @@ case 17:
 
 
 default:
-	{
+	{//Unknown tile type.
 	if (t.Render ==1) 
 			{printf("?");}
 		else 
@@ -210,6 +226,10 @@ default:
 
 void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly)
 {
+	/*
+	Runs every ASCII report.
+	Not every report applies to each game.
+	*/
 
 	printTileMap(LevelInfo,LevelNo);
 
@@ -403,6 +423,8 @@ void printTileMap(tile LevelInfo[64][64], int LevelNo)
 
 void printFloorHeights(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the height map of the level.
+
 int x; int y;
 	printf("\nNow Printing Floor Heights for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -417,6 +439,7 @@ int x; int y;
 
 void printFloorTextures(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the floor textures (the mapped values) of the level.
 int x; int y;
 	printf("\nNow Printing floor textures for level :%d.(##)", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -431,6 +454,9 @@ int x; int y;
 
 void printDoorPositions(tile LevelInfo[64][64], ObjectItem objList[1600],int LevelNo)
 {
+//Shows which tiles contain doors.
+//Door flags set by setDoorBits()
+
 int x; int y;
 	printf("\nNow Printing door positions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -453,6 +479,10 @@ int x; int y;
 
 void printWallTextures(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the value of the wall texture of the tile.
+//When rendering a tile we actually use the adjacent wall texture value which is set to the north,south,east and west fields
+//Exception is when the adjacent flag is set. In that case north,south,east and west uses the tile value.
+
 int x; int y;
 	printf("\nNow Printing wall textures for level :%d.(##)", LevelNo);
 	printf("\n\tNote that the rendered textures are the adjacent north, south, east and west values which are got from the neighbour tiles.");
@@ -468,6 +498,7 @@ int x; int y;
 
 void printAdjacentFlags(tile LevelInfo[64][64], int LevelNo)
 {
+//What tiles sets their north,south,east and west values from their neighbour tiles.
 int x;int y;
 	printf("\nNow Printing adjacent flags for level :%d.(##)", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -482,6 +513,7 @@ int x;int y;
 
 void printTextureOffsets(tile LevelInfo[64][64], int LevelNo)
 {
+//Texture offset is how much the wall texture is shifted from the ceiling.
 int x; int y;
 	printf("\nNow printing texture offsets :%d.(##)", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -496,6 +528,7 @@ int x; int y;
 
 void printCeilingHeights(tile LevelInfo[64][64], int LevelNo)
 {
+//The actual ceiling height is actually the max ceiling height less this value.
 int x; int y;
 	printf("\nPrint out ceiling height by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -510,6 +543,7 @@ int x; int y;
 
 void printSlopeSteepness(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the number of "levels" a slope changes by.
 int x; int y;
 	printf("\nPrint out slope steepness by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -524,6 +558,8 @@ int x; int y;
 
 void printSlopeFlags(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the flags which determine whether a slope is floor or ceiling only, both, inverted etc.
+
 int x; int y;
 
 	printf("\nPrint out slope flags by tile for level :%d\n", LevelNo);
@@ -539,6 +575,7 @@ int x; int y;
 
 void PrintObjectsByTile(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo)
 {
+//Prints a tile map that lists each object in it
 int x; int y;
 	printf("\nPrint out objects by Tile for level :%d\n", LevelNo);
 
@@ -571,6 +608,7 @@ int x; int y;
 
 void PrintShadeValues(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints out the tile shading values for System Shock.
 int x; int y;
 	printf("\nPrint out shade value by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -585,6 +623,7 @@ int x; int y;
 
 void PrintLightStates(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the state value that Shock stores for the light calculations.
 int x; int y;
 	printf("\nPrint out light state by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -599,6 +638,8 @@ int x; int y;
 
 void PrintLevelEntrances(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo)
 {
+//UW. Prints the teleport traps that point to a different level i.e. level entrances.
+
 	printf("\nLevel Entrances\n");		//go through the objects and find teleport traps with a zpos !=0
 	printf("LevelNo\tTileX\tTileY\n");
 	for (int i = 0; i<1024; i++)
@@ -671,7 +712,8 @@ void PrintUWObjects(ObjectItem objList[1600])
 
 void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
 {
-	//Prints the tilemap 
+	//Prints a tilemap of the water bodies only.
+
 	int x; int y;
 	printf("\nNow Printing Water Regions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
@@ -679,7 +721,15 @@ void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
 		printf("\n");
 		for (x = 0; x <= 63; x++)
 		{
-			printf("%02d-",LevelInfo[x][y].roomRegion);
+			if (LevelInfo[x][y].isWater == 1)
+			{
+				printf("%02d-", LevelInfo[x][y].roomRegion);
+			}
+			else
+			{
+				printf("  -");
+			}
+			
 		}
 	}
 
@@ -687,6 +737,8 @@ void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
 
 void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints a tile map showing a count of neighbouring (nonsolid) tiles.
+
 	int x; int y;
 	printf("\nNow Printing Neighbour counts for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
@@ -702,6 +754,8 @@ void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo)
 
 void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints a tilemap that shows the various room regions that we have generated.
+//Room regions can be rooms, corridors, water and doors.
 	int x; int y;
 	printf("\nNow Printing Room  regions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
@@ -736,6 +790,8 @@ void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
 
 void printFloorOrientations(tile LevelInfo[64][64], int LevelNo)
 {
+//Prints the texture direction for floor tiles in SHOCK.
+
 	int x; int y;
 	printf("\nNow Printing Floor orientations for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
@@ -750,6 +806,8 @@ void printFloorOrientations(tile LevelInfo[64][64], int LevelNo)
 
 void printCeilOrientations(tile LevelInfo[64][64], int LevelNo)
 {
+
+//Prints the ceiling texture orientations in SHOCK.
 	int x; int y;
 	printf("\nNow Printing ceiling orientations for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)

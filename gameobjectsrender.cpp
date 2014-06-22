@@ -232,6 +232,9 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 				case BRIDGE:
 					RenderEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
 					break; 
+				case PARTICLE:
+					RenderEntityParticle(game,x,y,z,currobj,objList,LevelInfo);
+					break;
 				default:
 				//just the basic name. with no properties.
 					fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
@@ -1564,5 +1567,14 @@ void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj,
 }
 
 
-
+void RenderEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].particle);
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+	fprintf(MAPFILE, "\n}");
+}
 

@@ -1,450 +1,450 @@
-0 0 0 0 a_hand_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-1 0 0 0 a_battle_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-2 0 0 0 an_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-3 0 0 0 a_dagger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-4 0 0 0 a_shortsword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-5 0 0 0 a_longsword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-6 0 0 0 a_broadsword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-7 0 0 0 a_cudgel models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-8 0 0 0 a_light_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-9 0 0 0 a_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-10 0 0 0 a_jewelled_dagger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-11 0 0 0 a_jeweled_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-12 0 0 0 a_black_sword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-13 0 0 0 a_jeweled_sword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-14 0 0 0 a_jeweled_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-15 0 0 0 a_fist models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-16 0 0 0 a_sling_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-17 0 0 0 a_crossbow_bolt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-18 0 0 0 an_arrow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-19 0 0 0 a_skull models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-20 0 0 0 a_fireball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-21 0 0 0 a_lightning_bolt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-22 0 0 0 acid models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-23 0 0 0 a_magic_arrow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-24 0 0 0 a_sling models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-25 0 0 0 a_bow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-26 0 0 0 a_crossbow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-27 0 0 0 a_homing_dart models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-28 0 0 0 a_snowball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-29 0 0 0 a_fireball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-30 0 0 0 a_satellite models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-31 0 0 0 a_jeweled_bow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-32 0 0 0 a_leather_vest models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-33 0 0 0 a_mail_shirt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-34 0 0 0 a_breastplate models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-35 0 0 0 leather_leggings&pairs_of_leather_leggings models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-36 0 0 0 mail_leggings&pairs_of_mail_leggings models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-37 0 0 0 plate_leggings&pairs_of_plate_leggings models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-38 0 0 0 leather_gloves&pairs_of_leather_gloves models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-39 0 0 0 chain_gauntlets&pairs_of_chain_gauntlets models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-40 0 0 0 plate_gauntlets&pairs_of_plate_gauntlets models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-41 0 0 0 leather_boots&pairs_of_leather_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-42 0 0 0 chain_boots&pairs_of_chain_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-43 0 0 0 plate_boots&pairs_of_plate_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-44 0 0 0 a_leather_cap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-45 0 0 0 a_chain_cowl models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-46 0 0 0 a_helmet models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-47 0 0 0 a_pair_of_swamp_boots&pairs_of_swamp_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-48 0 0 0 a_crown models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-49 0 0 0 a_crown models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-50 0 0 0 a_crown models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-51 0 0 0 fraznium_gauntlets&pairs_of_fraznium_gauntlets models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-52 0 0 0 a_fraznium_circlet models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-53 0 0 0 a_Guardian_signet_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-54 0 0 0 a_strange_artifact models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-55 0 0 0 a_copper_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-56 0 0 0 a_gold_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-57 0 0 0 a_silver_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-58 0 0 0 a_red_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-59 0 0 0 a_tower_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-60 0 0 0 a_wooden_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-61 0 0 0 a_small_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-62 0 0 0 a_buckler models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-63 0 0 0 a_jeweled_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-64 0 0 0 a_rotworm models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-65 0 0 0 a_cave_bat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-66 0 0 0 a_vampire_bat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-67 0 0 0 a_giant_tan_rat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-68 0 0 0 a_giant_grey_rat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-69 0 0 0 a_flesh_slug models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-70 0 0 0 an_acid_slug models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-71 0 0 0 a_mongbat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-72 0 0 0 a_skeleton atdm:ai_undead_skeleton_armed entity 0
-73 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
-74 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0
-75 0 0 0 an_imp models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-76 0 0 0 a_giant_spider atdm:ai_spider entity 0
-77 0 0 0 a_lurker models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-78 0 0 0 a_bloodworm models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-79 0 0 0 a_stickman models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-80 0 0 0 a_white_worm models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-81 0 0 0 a_snow_cat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-82 0 0 0 a_yeti&yeti models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-83 0 0 0 a_headless&headlesses models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-84 0 0 0 a_Talorid models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-85 0 0 0 a_ghost models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-86 0 0 0 a_wolf_spider atdm:ai_spider_huge entity 0
-87 0 0 0 a_trilkhun&trilkhai models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-88 0 0 0 a_brain_creature models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-89 0 0 0 a_deep_lurker models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-90 0 0 0 a_dread_spider models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-91 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-92 0 0 0 a_great_troll models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-93 0 0 0 a_spectre models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-94 0 0 0 a_hordling models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-95 0 0 0 an_earth_golem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-96 0 0 0 a_fire_elemental models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-97 0 0 0 an_ice_golem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-98 0 0 0 a_dire_ghost models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-99 0 0 0 a_reaper models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-100 0 0 0 a_despoiler models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-101 0 0 0 a_metal_golem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-102 0 0 0 a_haunt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-103 0 0 0 a_dire_reaper models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-104 0 0 0 a_destroyer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-105 0 0 0 a_liche models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-106 0 0 0 a_liche models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-107 0 0 0 a_liche models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-108 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-109 0 0 0 a_vorz models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-110 0 0 0 a_fighter atdm:ai_guard_archer_01 entity 0
-111 0 0 0 a_gazer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-112 0 0 0 a_human atdm:ai_townsfolk_commoner entity 0
-113 0 0 0 a_human atdm:ai_townsfolk_wench entity 0
-114 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-115 0 0 0 a_human atdm:ai_noblewoman01 entity 0
-116 0 0 0 a_human atdm:ai_noblewoman01 entity 0
-117 0 0 0 a_human atdm:ai_mage01 entity 0
-118 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-119 0 0 0 a_human atdm:ai_archmage01 entity 0
-120 0 0 0 a_human atdm:ai_guard_female_rogue entity 0
-121 0 0 0 a_human atdm:ai_proguard entity 0
-122 0 0 0 a_human atdm:ai_nobleman entity 0
-123 0 0 0 a_human atdm:ai_guard_female_rogue entity 0
-124 0 0 0 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-125 0 0 0 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-126 0 0 0 a_human atdm:ai_townsfolk_wench entity 0
-127 0 0 0 an_adventurer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-128 0 0 0 a_sack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-129 0 0 0 an_open_sack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-130 0 0 0 a_pack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-131 0 0 0 an_open_pack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-132 0 0 0 a_box&boxes models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-133 0 0 0 an_open_box&open_boxes models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-134 0 0 0 a_pouch&pouches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-135 0 0 0 an_open_pouch&pouches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-136 0 0 0 a_map_case models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-137 0 0 0 an_open_map_case models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-138 0 0 0 a_gold_coffer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-139 0 0 0 an_open_gold_coffer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-140 0 0 0 a_key_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-141 0 0 0 a_quiver models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-142 0 0 0 a_bowl models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-143 0 0 0 a_rune_bag models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-144 0 0 0 a_lantern models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-145 0 0 0 a_torch&torches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-146 0 0 0 a_candle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-147 0 0 0 a_light-sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-148 0 0 0 a_lit_lantern models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-149 0 0 0 a_lit_torch models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-150 0 0 0 a_lit_candle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-151 0 0 0 a_lit_light-sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-152 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-153 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-154 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-155 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-156 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-157 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-158 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-159 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-160 0 0 0 a_coin models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-161 0 0 0 a_storage_crystal models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-162 0 0 0 a_ruby&rubies models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-163 0 0 0 a_red_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-164 0 0 0 a_small_blue_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-165 0 0 0 a_large_blue_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-166 0 0 0 a_sapphire models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-167 0 0 0 an_emerald models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-168 0 0 0 a_black_pearl models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-169 0 0 0 a_goblet models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-170 0 0 0 a_sceptre models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-171 0 0 0 a_black_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-172 0 0 0 a_white_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-173 0 0 0 a_grey_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-174 0 0 0 a_delgnigzator models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-175 0 0 0 a_pocketwatch&pocketwatches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-176 0 0 0 a_piece_of_meat&pieces_of_meat models/darkmod/kitchen/food/bacon.lwo model 18
-177 0 0 0 a_piece_of_meat&pieces_of_meat models/darkmod/kitchen/food/bacon.lwo model 18
-178 0 0 0 a_piece_of_cheese&pieces_of_cheese models/darkmod/kitchen/food/cheese_wedge.lwo model 18
-179 0 0 0 an_apple models/darkmod/kitchen/food/apple.lwo model 18
-180 0 0 0 an_ear_of_corn&ears_of_corn models/darkmod/kitchen/food/turnip.ase model 18
-181 0 0 0 a_loaf_of_bread&loaves_of_bread models/darkmod/kitchen/food/bread_loaf01.lwo model 18
-182 0 0 0 a_fish&fish models/darkmod/kitchen/food/fish_bluefish.lwo model 18
-183 0 0 0 some_popcorn&bunches_of_popcorn models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-184 0 0 0 a_pastry&pastries models/darkmod/kitchen/food/cake.lwo model 18
-185 0 0 0 a_mushroom models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-186 0 0 0 a_honeycomb models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-187 0 0 0 a_bottle_of_ale&bottles_of_ale models/darkmod/kitchen/bottle01.lwo model 24
-188 0 0 0 a_bottle_of_water&bottles_of_water models/darkmod/kitchen/bottle02.lwo model 24
-189 0 0 0 a_bottle_of_wine&bottles_of_wine models/darkmod/kitchen/wine_bottle02.lwo model 24
-190 0 0 0 some_meat-on-a-stick&pieces_of_meat-on-a-stick models/darkmod/kitchen/food/bacon.lwo model 18
-191 0 0 0 a_nutritious_wafer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-192 0 0 0 a_plant models/darkmod/nature/plant_02.ase model 25
-193 0 0 0 some_grass&bunches_of_grass models/darkmod/nature/grass_fuzz.ase model 25
-194 0 0 0 a_skull models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-195 0 0 0 a_skull models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-196 0 0 0 a_bone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-197 0 0 0 a_bone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-198 0 0 0 a_pile_of_bones&piles_of_bones models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-199 0 0 0 a_broken_dagger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-200 0 0 0 a_broken_sword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-201 0 0 0 a_broken_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-202 0 0 0 a_broken_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-203 0 0 0 a_broken_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-204 0 0 0 a_piece_of_wood&pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23
-205 0 0 0 a_piece_of_wood&pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23
-206 0 0 0 a_plant models/darkmod/nature/plant_03.ase model 25
-207 0 0 0 models/darkmod/nature/plant_05.ase model 25
-208 0 0 0 a_pile_of_debris&piles_of_debris models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-209 0 0 0 a_pile_of_debris&piles_of_debris models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-210 0 0 0 a_lump_of_wax&lumps_of_wax models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-211 0 0 0 a_stalactite models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-212 0 0 0 a_plant models/darkmod/nature/weed_dandelion01.lwo model 25
-213 0 0 0 an_icicle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-214 0 0 0 a_pile_of_debris&piles_of_debris models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-215 0 0 0 an_anvil models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-216 0 0 0 a_pole models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-217 0 0 0 a_plant models/darkmod/nature/flowers/lily_small.ase model 25
-218 0 0 0 a_plant models/darkmod/nature/flowers/lily_tall.ase model 25
-219 0 0 0 some_rubble&piles_of_rubble models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-220 0 0 0 a_pile_of_wood_chips&piles_of_wood_chips models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-221 0 0 0 a_pile_of_bones&piles_of_bones models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-222 0 0 0 a_blood_stain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-223 0 0 0 a_blood_stain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-224 0 0 0 a_runestone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-225 0 0 0 a_black_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-226 0 0 0 a_purple_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-227 0 0 0 a_yellow_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-228 0 0 0 a_green_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-229 0 0 0 a_red_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-230 0 0 0 a_colorless_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-231 0 0 0 a_brown_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-232 0 0 0 an_An_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-233 0 0 0 a_Bet_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-234 0 0 0 a_Corp_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-235 0 0 0 a_Des_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-236 0 0 0 an_Ex_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-237 0 0 0 a_Flam_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-238 0 0 0 a_Grav_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-239 0 0 0 a_Hur_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-240 0 0 0 an_In_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-241 0 0 0 a_Jux_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-242 0 0 0 a_Kal_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-243 0 0 0 a_Lor_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-244 0 0 0 a_Mani_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-245 0 0 0 a_Nox_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-246 0 0 0 an_Ort_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-247 0 0 0 a_Por_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-248 0 0 0 a_Quas_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-249 0 0 0 a_Rel_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-250 0 0 0 a_Sanct_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-251 0 0 0 a_Tym_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-252 0 0 0 an_Uus_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-253 0 0 0 a_Vas_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-254 0 0 0 a_Wis_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-255 0 0 0 a_Ylem_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-256 0 0 0 a_curious_implement models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-257 0 0 0 a_lockpick models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-258 0 0 0 a_key atdm:key_ornate entity 5
-259 0 0 0 a_key atdm:key_ornate entity 5
-260 0 0 0 a_key atdm:key_ornate entity 5
-261 0 0 0 a_key atdm:key_ornate entity 5
-262 0 0 0 a_key atdm:key_ornate entity 5
-263 0 0 0 a_key atdm:key_ornate entity 5
-264 0 0 0 a_key atdm:key_ornate entity 5
-265 0 0 0 a_key atdm:key_ornate entity 5
-266 0 0 0 a_key atdm:key_ornate entity 5
-267 0 0 0 a_key atdm:key_ornate entity 5
-268 0 0 0 a_key atdm:key_ornate entity 5
-269 0 0 0 a_key atdm:key_ornate entity 5
-270 0 0 0 a_key atdm:key_ornate entity 5
-271 0 0 0 a_lock models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-272 0 0 0 an_eyeball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-273 0 0 0 a_horn models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-274 0 0 0 a_pearl-tipped_rod&pearl-tipped_rods models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-275 0 0 0 a_black_eggshell&black_eggshells models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-276 0 0 0 a_plant models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-277 0 0 0 a_serpent_statue&serpent_statues models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-278 0 0 0 a_bottle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-279 0 0 0 an_amethyst_rod&amethyst_rods models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-280 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-281 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-282 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-283 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-284 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-285 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-286 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-287 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-288 0 0 0 a_spell models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-289 0 0 0 a_bedroll models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-290 0 0 0 an_orb models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-291 0 0 0 a_mandolin models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-292 0 0 0 a_flute models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-293 0 0 0 some_leeches&bunches_of_leeches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-294 0 0 0 a_moonstone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-295 0 0 0 a_force_field models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-296 0 0 0 a_rock_hammer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-297 0 0 0 a_resilient_sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-298 0 0 0 a_campfire models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-299 0 0 0 a_fishing_pole models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-300 0 0 0 some_thread&pieces_of_thread models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-301 0 0 0 an_oil_flask models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-302 0 0 0 a_fountain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-303 0 0 0 a_banner models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-304 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
-305 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
-306 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
-307 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
-308 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11
-309 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11
-310 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11
-311 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11
-312 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11
-313 0 0 0 a_bit_of_a_map models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-314 0 0 0 a_map models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-315 0 0 0 a_dead_plant models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-316 0 0 0 a_dead_plant models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-317 0 0 0 a_bottle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-318 0 0 0 a_stick models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-319 0 0 0 a_resilient_sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-320 0 0 0 a_door atdm:door_96x48_3hinge entity 4
-321 0 0 0 a_door atdm:door_96x48_3hinge entity 4
-322 0 0 0 a_door atdm:door_96x48_3hinge entity 4
-323 0 0 0 a_door atdm:door_96x48_3hinge entity 4
-324 0 0 0 a_door atdm:door_96x48_3hinge entity 4
-325 0 0 0 a_door atdm:door_96x48_3hinge entity 4
-326 0 0 0 a_portcullis&portcullises models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-327 0 0 0 a_secret_door atdm:mover_door entity 29
-328 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
-329 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
-330 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
-331 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
-332 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
-333 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4
-334 0 0 0 an_open_portcullis models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-335 0 0 0 a_secret_door atdm:mover_door entity 29
-336 0 0 0 a_bench&benches models/darkmod/furniture/seating/bench_wooden01.lwo model 23
-337 0 0 0 an_arrow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-338 0 0 0 a_crossbow_bolt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-339 0 0 0 a_large_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-340 0 0 0 a_large_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-341 0 0 0 a_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-342 0 0 0 a_small_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-343 0 0 0 a_shrine models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-344 0 0 0 a_table models/darkmod/furniture/tables/tabLe_wood_rough_small.lwo model 23
-345 0 0 0 a_beam models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-346 0 0 0 a_moongate models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-347 0 0 0 a_barrel models/darkmod/containers/barrell_med_closed.lwo entity 19
-348 0 0 0 a_chair models/darkmod/furniture/seating/chair_simple01.lwo model 23
-349 0 0 0 a_chest models/darkmod/containers/openable/chest_wood.ase entity 19
-350 0 0 0 a_nightstand models/darkmod/furniture/small_dresser.ase model 19
-351 0 0 0 a_lotus_turbo_esprit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-352 0 0 0 a_pillar worldspawn ignore 31
-353 0 0 0 a_lever models/darkmod/mechanical/switches/switch_flip.ase entity 8
-354 0 0 0 a_switch&switches models/darkmod/mechanical/switches/switch_flip.ase entity 8
-355 0 0 0 a_painting models/darkmod/uw2/painting.ase entity 68
-356 0 0 0 a_bridge models/darkmod/uw1/uw1_bridge_new.ase entity 7
-357 0 0 0 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-358 0 0 0 some_writing atdm:readable_base entity 10
-359 0 0 0 a_bed models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-360 0 0 0 a_large_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-361 0 0 0 a_shelf models/darkmod/furniture/shelves/wall_shelf_ornate1.lwo model 18
-365 0 0 0 force_field models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-366 0 0 0 special_tmap_obj func_static entity 34
-367 0 0 0 special_tmap_obj func_static entity 35
-368 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8
-369 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8
-370 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8
-371 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8
-372 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8
-373 0 0 0 a_lever models/darkmod/mechanical/switches/switch_flip.ase entity 8
-374 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8
-375 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8
-376 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8
-377 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8
-378 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8
-379 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8
-380 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8
-381 0 0 0 a_lever models/darkmod/mechanical/switches/switch_flip.ase entity 8
-382 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8
-383 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8
-384 0 0 0 a_damage_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-385 0 0 0 a_teleport_trap func_teleporter entity 38
-386 0 0 0 a_arrow_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-387 0 0 0 a_hack_trap atdm:target_callscriptfunction entity 40
-388 0 0 0 a_special_effects_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-389 0 0 0 a_change_terrain_trap func_static entity 42
-390 0 0 0 a_spelltrap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-391 0 0 0 a_create_object_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-392 0 0 0 a_door_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-393 0 0 0 a_ward_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-394 0 0 0 a_skill_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-395 0 0 0 a_delete_object_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-396 0 0 0 an_inventory_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-397 0 0 0 a_set_variable_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-398 0 0 0 a_check_variable_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-399 0 0 0 a_null_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-400 0 0 0 a_text_string_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-401 0 0 0 an_experience_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-402 0 0 0 a_jump_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-403 0 0 0 a_change_from_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-404 0 0 0 a_change_to_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-405 0 0 0 an_oscillator_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-406 0 0 0 a_proximity_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-407 0 0 0 a_pit_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-408 0 0 0 a_bridge_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-414 0 0 0 a_flam_rune models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-415 0 0 0 a_tym_rune models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-416 0 0 0 a_move_trigger trigger_multiple entity 54
-417 0 0 0 a_pick_up_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-418 0 0 0 a_use_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-419 0 0 0 a_look_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-420 0 0 0 a_pressure_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-421 0 0 0 a_pressure_release_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-422 0 0 0 an_enter_trigger trigger_multiple entity 54
-423 0 0 0 an_exit_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-424 0 0 0 an_unlock_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-425 0 0 0 a_timer_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-426 0 0 0 an_open_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-427 0 0 0 a_close_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-428 0 0 0 a_scheduled_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-432 0 0 0 a_move_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-433 0 0 0 a_pick_up_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-434 0 0 0 a_use_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-435 0 0 0 a_look_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-436 0 0 0 a_pressure_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-437 0 0 0 a_pressure_release_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-438 0 0 0 an_enter_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-439 0 0 0 an_exit_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-440 0 0 0 an_unlock_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-441 0 0 0 a_timer_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-442 0 0 0 an_open_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-443 0 0 0 a_close_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-444 0 0 0 a_scheduled_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-448 0 0 0 some_blood models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-449 0 0 0 a_mist_cloud models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-450 0 0 0 an_explosion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-451 0 0 0 an_explosion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-452 0 0 0 an_explosion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-453 0 0 0 lightning models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-454 0 0 0 a_splash&splashes models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-455 0 0 0 some_spacey_twinkles models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-456 0 0 0 some_smoke models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-457 0 0 0 a_fountain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-458 0 0 0 some_frost models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-459 0 0 0 a_flash models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-460 0 0 0 lightning models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-461 0 0 0 a_wisp models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-462 0 0 0 a_vapor_trail models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
-463 0 0 0 a_moving_door models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18
+0 0 0 0 a_hand_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+1 0 0 0 a_battle_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+2 0 0 0 an_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+3 0 0 0 a_dagger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+4 0 0 0 a_shortsword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+5 0 0 0 a_longsword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+6 0 0 0 a_broadsword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+7 0 0 0 a_cudgel models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+8 0 0 0 a_light_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+9 0 0 0 a_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+10 0 0 0 a_jewelled_dagger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+11 0 0 0 a_jeweled_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+12 0 0 0 a_black_sword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+13 0 0 0 a_jeweled_sword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+14 0 0 0 a_jeweled_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+15 0 0 0 a_fist models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+16 0 0 0 a_sling_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+17 0 0 0 a_crossbow_bolt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+18 0 0 0 an_arrow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+19 0 0 0 a_skull models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+20 0 0 0 a_fireball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+21 0 0 0 a_lightning_bolt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+22 0 0 0 acid models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+23 0 0 0 a_magic_arrow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+24 0 0 0 a_sling models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+25 0 0 0 a_bow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+26 0 0 0 a_crossbow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+27 0 0 0 a_homing_dart models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+28 0 0 0 a_snowball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+29 0 0 0 a_fireball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+30 0 0 0 a_satellite models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+31 0 0 0 a_jeweled_bow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+32 0 0 0 a_leather_vest models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+33 0 0 0 a_mail_shirt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+34 0 0 0 a_breastplate models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+35 0 0 0 leather_leggings&pairs_of_leather_leggings models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+36 0 0 0 mail_leggings&pairs_of_mail_leggings models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+37 0 0 0 plate_leggings&pairs_of_plate_leggings models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+38 0 0 0 leather_gloves&pairs_of_leather_gloves models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+39 0 0 0 chain_gauntlets&pairs_of_chain_gauntlets models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+40 0 0 0 plate_gauntlets&pairs_of_plate_gauntlets models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+41 0 0 0 leather_boots&pairs_of_leather_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+42 0 0 0 chain_boots&pairs_of_chain_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+43 0 0 0 plate_boots&pairs_of_plate_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+44 0 0 0 a_leather_cap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+45 0 0 0 a_chain_cowl models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+46 0 0 0 a_helmet models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+47 0 0 0 a_pair_of_swamp_boots&pairs_of_swamp_boots models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+48 0 0 0 a_crown models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+49 0 0 0 a_crown models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+50 0 0 0 a_crown models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+51 0 0 0 fraznium_gauntlets&pairs_of_fraznium_gauntlets models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+52 0 0 0 a_fraznium_circlet models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+53 0 0 0 a_Guardian_signet_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+54 0 0 0 a_strange_artifact models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+55 0 0 0 a_copper_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+56 0 0 0 a_gold_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+57 0 0 0 a_silver_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+58 0 0 0 a_red_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+59 0 0 0 a_tower_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+60 0 0 0 a_wooden_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+61 0 0 0 a_small_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+62 0 0 0 a_buckler models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+63 0 0 0 a_jeweled_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+64 0 0 0 a_rotworm models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+65 0 0 0 a_cave_bat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+66 0 0 0 a_vampire_bat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+67 0 0 0 a_giant_tan_rat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+68 0 0 0 a_giant_grey_rat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+69 0 0 0 a_flesh_slug models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+70 0 0 0 an_acid_slug models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+71 0 0 0 a_mongbat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+72 0 0 0 a_skeleton atdm:ai_undead_skeleton_armed entity 0 NOTHING NOTHING
+73 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0 NOTHING NOTHING
+74 0 0 0 a_goblin atdm:ai_pagan_common_armed entity 0 NOTHING NOTHING
+75 0 0 0 an_imp models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+76 0 0 0 a_giant_spider atdm:ai_spider entity 0 NOTHING NOTHING
+77 0 0 0 a_lurker models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+78 0 0 0 a_bloodworm models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+79 0 0 0 a_stickman models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+80 0 0 0 a_white_worm models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+81 0 0 0 a_snow_cat models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+82 0 0 0 a_yeti&yeti models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+83 0 0 0 a_headless&headlesses models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+84 0 0 0 a_Talorid models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+85 0 0 0 a_ghost models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+86 0 0 0 a_wolf_spider atdm:ai_spider_huge entity 0 NOTHING NOTHING
+87 0 0 0 a_trilkhun&trilkhai models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+88 0 0 0 a_brain_creature models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+89 0 0 0 a_deep_lurker models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+90 0 0 0 a_dread_spider models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+91 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+92 0 0 0 a_great_troll models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+93 0 0 0 a_spectre models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+94 0 0 0 a_hordling models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+95 0 0 0 an_earth_golem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+96 0 0 0 a_fire_elemental models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+97 0 0 0 an_ice_golem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+98 0 0 0 a_dire_ghost models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+99 0 0 0 a_reaper models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+100 0 0 0 a_despoiler models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+101 0 0 0 a_metal_golem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+102 0 0 0 a_haunt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+103 0 0 0 a_dire_reaper models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+104 0 0 0 a_destroyer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+105 0 0 0 a_liche models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+106 0 0 0 a_liche models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+107 0 0 0 a_liche models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+108 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+109 0 0 0 a_vorz models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+110 0 0 0 a_fighter atdm:ai_guard_archer_01 entity 0 NOTHING NOTHING
+111 0 0 0 a_gazer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+112 0 0 0 a_human atdm:ai_townsfolk_commoner entity 0 NOTHING NOTHING
+113 0 0 0 a_human atdm:ai_townsfolk_wench entity 0 NOTHING NOTHING
+114 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+115 0 0 0 a_human atdm:ai_noblewoman01 entity 0 NOTHING NOTHING
+116 0 0 0 a_human atdm:ai_noblewoman01 entity 0 NOTHING NOTHING
+117 0 0 0 a_human atdm:ai_mage01 entity 0 NOTHING NOTHING
+118 0 0 0 a_human models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+119 0 0 0 a_human atdm:ai_archmage01 entity 0 NOTHING NOTHING
+120 0 0 0 a_human atdm:ai_guard_female_rogue entity 0 NOTHING NOTHING
+121 0 0 0 a_human atdm:ai_proguard entity 0 NOTHING NOTHING
+122 0 0 0 a_human atdm:ai_nobleman entity 0 NOTHING NOTHING
+123 0 0 0 a_human atdm:ai_guard_female_rogue entity 0 NOTHING NOTHING
+124 0 0 0 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+125 0 0 0 etherealvoidshit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+126 0 0 0 a_human atdm:ai_townsfolk_wench entity 0 NOTHING NOTHING
+127 0 0 0 an_adventurer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+128 0 0 0 a_sack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+129 0 0 0 an_open_sack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+130 0 0 0 a_pack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+131 0 0 0 an_open_pack models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+132 0 0 0 a_box&boxes models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+133 0 0 0 an_open_box&open_boxes models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+134 0 0 0 a_pouch&pouches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+135 0 0 0 an_open_pouch&pouches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+136 0 0 0 a_map_case models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+137 0 0 0 an_open_map_case models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+138 0 0 0 a_gold_coffer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+139 0 0 0 an_open_gold_coffer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+140 0 0 0 a_key_ring models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+141 0 0 0 a_quiver models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+142 0 0 0 a_bowl models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+143 0 0 0 a_rune_bag models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+144 0 0 0 a_lantern models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+145 0 0 0 a_torch&torches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+146 0 0 0 a_candle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+147 0 0 0 a_light-sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+148 0 0 0 a_lit_lantern models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+149 0 0 0 a_lit_torch models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+150 0 0 0 a_lit_candle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+151 0 0 0 a_lit_light-sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+152 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+153 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+154 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+155 0 0 0 a_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+156 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+157 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+158 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+159 0 0 0 a_broken_wand models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+160 0 0 0 a_coin models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+161 0 0 0 a_storage_crystal models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+162 0 0 0 a_ruby&rubies models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+163 0 0 0 a_red_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+164 0 0 0 a_small_blue_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+165 0 0 0 a_large_blue_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+166 0 0 0 a_sapphire models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+167 0 0 0 an_emerald models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+168 0 0 0 a_black_pearl models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+169 0 0 0 a_goblet models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+170 0 0 0 a_sceptre models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+171 0 0 0 a_black_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+172 0 0 0 a_white_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+173 0 0 0 a_grey_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+174 0 0 0 a_delgnigzator models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+175 0 0 0 a_pocketwatch&pocketwatches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+176 0 0 0 a_piece_of_meat&pieces_of_meat models/darkmod/kitchen/food/bacon.lwo model 18 NOTHING NOTHING
+177 0 0 0 a_piece_of_meat&pieces_of_meat models/darkmod/kitchen/food/bacon.lwo model 18 NOTHING NOTHING
+178 0 0 0 a_piece_of_cheese&pieces_of_cheese models/darkmod/kitchen/food/cheese_wedge.lwo model 18 NOTHING NOTHING
+179 0 0 0 an_apple models/darkmod/kitchen/food/apple.lwo model 18 NOTHING NOTHING
+180 0 0 0 an_ear_of_corn&ears_of_corn models/darkmod/kitchen/food/turnip.ase model 18 NOTHING NOTHING
+181 0 0 0 a_loaf_of_bread&loaves_of_bread models/darkmod/kitchen/food/bread_loaf01.lwo model 18 NOTHING NOTHING
+182 0 0 0 a_fish&fish models/darkmod/kitchen/food/fish_bluefish.lwo model 18 NOTHING NOTHING
+183 0 0 0 some_popcorn&bunches_of_popcorn models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+184 0 0 0 a_pastry&pastries models/darkmod/kitchen/food/cake.lwo model 18 NOTHING NOTHING
+185 0 0 0 a_mushroom models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+186 0 0 0 a_honeycomb models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+187 0 0 0 a_bottle_of_ale&bottles_of_ale models/darkmod/kitchen/bottle01.lwo model 24 NOTHING NOTHING
+188 0 0 0 a_bottle_of_water&bottles_of_water models/darkmod/kitchen/bottle02.lwo model 24 NOTHING NOTHING
+189 0 0 0 a_bottle_of_wine&bottles_of_wine models/darkmod/kitchen/wine_bottle02.lwo model 24 NOTHING NOTHING
+190 0 0 0 some_meat-on-a-stick&pieces_of_meat-on-a-stick models/darkmod/kitchen/food/bacon.lwo model 18 NOTHING NOTHING
+191 0 0 0 a_nutritious_wafer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+192 0 0 0 a_plant models/darkmod/nature/plant_02.ase model 25 NOTHING NOTHING
+193 0 0 0 some_grass&bunches_of_grass models/darkmod/nature/grass_fuzz.ase model 25 NOTHING NOTHING
+194 0 0 0 a_skull models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+195 0 0 0 a_skull models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+196 0 0 0 a_bone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+197 0 0 0 a_bone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+198 0 0 0 a_pile_of_bones&piles_of_bones models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+199 0 0 0 a_broken_dagger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+200 0 0 0 a_broken_sword models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+201 0 0 0 a_broken_axe models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+202 0 0 0 a_broken_mace models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+203 0 0 0 a_broken_shield models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+204 0 0 0 a_piece_of_wood&pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23 NOTHING NOTHING
+205 0 0 0 a_piece_of_wood&pieces_of_wood models/darkmod/junk/plank_scrap02_small.lwo model 23 NOTHING NOTHING
+206 0 0 0 a_plant models/darkmod/nature/plant_03.ase model 25 NOTHING NOTHING
+207 0 0 0 models/darkmod/nature/plant_05.ase model 25  NOTHING NOTHING
+208 0 0 0 a_pile_of_debris&piles_of_debris models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+209 0 0 0 a_pile_of_debris&piles_of_debris models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+210 0 0 0 a_lump_of_wax&lumps_of_wax models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+211 0 0 0 a_stalactite models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+212 0 0 0 a_plant models/darkmod/nature/weed_dandelion01.lwo model 25 NOTHING NOTHING
+213 0 0 0 an_icicle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+214 0 0 0 a_pile_of_debris&piles_of_debris models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+215 0 0 0 an_anvil models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+216 0 0 0 a_pole models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+217 0 0 0 a_plant models/darkmod/nature/flowers/lily_small.ase model 25 NOTHING NOTHING
+218 0 0 0 a_plant models/darkmod/nature/flowers/lily_tall.ase model 25 NOTHING NOTHING
+219 0 0 0 some_rubble&piles_of_rubble models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+220 0 0 0 a_pile_of_wood_chips&piles_of_wood_chips models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+221 0 0 0 a_pile_of_bones&piles_of_bones models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+222 0 0 0 a_blood_stain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+223 0 0 0 a_blood_stain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+224 0 0 0 a_runestone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+225 0 0 0 a_black_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+226 0 0 0 a_purple_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+227 0 0 0 a_yellow_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+228 0 0 0 a_green_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+229 0 0 0 a_red_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+230 0 0 0 a_colorless_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+231 0 0 0 a_brown_potion models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+232 0 0 0 an_An_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+233 0 0 0 a_Bet_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+234 0 0 0 a_Corp_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+235 0 0 0 a_Des_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+236 0 0 0 an_Ex_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+237 0 0 0 a_Flam_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+238 0 0 0 a_Grav_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+239 0 0 0 a_Hur_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+240 0 0 0 an_In_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+241 0 0 0 a_Jux_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+242 0 0 0 a_Kal_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+243 0 0 0 a_Lor_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+244 0 0 0 a_Mani_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+245 0 0 0 a_Nox_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+246 0 0 0 an_Ort_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+247 0 0 0 a_Por_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+248 0 0 0 a_Quas_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+249 0 0 0 a_Rel_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+250 0 0 0 a_Sanct_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+251 0 0 0 a_Tym_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+252 0 0 0 an_Uus_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+253 0 0 0 a_Vas_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+254 0 0 0 a_Wis_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+255 0 0 0 a_Ylem_stone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+256 0 0 0 a_curious_implement models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+257 0 0 0 a_lockpick models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+258 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+259 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+260 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+261 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+262 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+263 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+264 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+265 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+266 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+267 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+268 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+269 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+270 0 0 0 a_key atdm:key_ornate entity 5 NOTHING NOTHING
+271 0 0 0 a_lock models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+272 0 0 0 an_eyeball models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+273 0 0 0 a_horn models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+274 0 0 0 a_pearl-tipped_rod&pearl-tipped_rods models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+275 0 0 0 a_black_eggshell&black_eggshells models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+276 0 0 0 a_plant models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+277 0 0 0 a_serpent_statue&serpent_statues models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+278 0 0 0 a_bottle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+279 0 0 0 an_amethyst_rod&amethyst_rods models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+280 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+281 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+282 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+283 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+284 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+285 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+286 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+287 0 0 0 a_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+288 0 0 0 a_spell models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+289 0 0 0 a_bedroll models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+290 0 0 0 an_orb models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+291 0 0 0 a_mandolin models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+292 0 0 0 a_flute models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+293 0 0 0 some_leeches&bunches_of_leeches models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+294 0 0 0 a_moonstone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+295 0 0 0 a_force_field models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+296 0 0 0 a_rock_hammer models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+297 0 0 0 a_resilient_sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+298 0 0 0 a_campfire models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+299 0 0 0 a_fishing_pole models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+300 0 0 0 some_thread&pieces_of_thread models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+301 0 0 0 an_oil_flask models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+302 0 0 0 a_fountain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+303 0 0 0 a_banner models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+304 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+305 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+306 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+307 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+308 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+309 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+310 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+311 0 0 0 a_scroll atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+312 0 0 0 a_book atdm:readable_mobile_scroll01 entity 11 NOTHING NOTHING
+313 0 0 0 a_bit_of_a_map models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+314 0 0 0 a_map models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+315 0 0 0 a_dead_plant models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+316 0 0 0 a_dead_plant models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+317 0 0 0 a_bottle models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+318 0 0 0 a_stick models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+319 0 0 0 a_resilient_sphere models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+320 0 0 0 a_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+321 0 0 0 a_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+322 0 0 0 a_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+323 0 0 0 a_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+324 0 0 0 a_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+325 0 0 0 a_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+326 0 0 0 a_portcullis&portcullises models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+327 0 0 0 a_secret_door atdm:mover_door entity 29 NOTHING NOTHING
+328 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+329 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+330 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+331 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+332 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+333 0 0 0 an_open_door atdm:door_96x48_3hinge entity 4 NOTHING NOTHING
+334 0 0 0 an_open_portcullis models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+335 0 0 0 a_secret_door atdm:mover_door entity 29 NOTHING NOTHING
+336 0 0 0 a_bench&benches models/darkmod/furniture/seating/bench_wooden01.lwo model 23 NOTHING NOTHING
+337 0 0 0 an_arrow models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+338 0 0 0 a_crossbow_bolt models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+339 0 0 0 a_large_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+340 0 0 0 a_large_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+341 0 0 0 a_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+342 0 0 0 a_small_boulder models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+343 0 0 0 a_shrine models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+344 0 0 0 a_table models/darkmod/furniture/tables/tabLe_wood_rough_small.lwo model 23 NOTHING NOTHING
+345 0 0 0 a_beam models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+346 0 0 0 a_moongate models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+347 0 0 0 a_barrel models/darkmod/containers/barrell_med_closed.lwo entity 19 NOTHING NOTHING
+348 0 0 0 a_chair models/darkmod/furniture/seating/chair_simple01.lwo model 23 NOTHING NOTHING
+349 0 0 0 a_chest models/darkmod/containers/openable/chest_wood.ase entity 19 NOTHING NOTHING
+350 0 0 0 a_nightstand models/darkmod/furniture/small_dresser.ase model 19 NOTHING NOTHING
+351 0 0 0 a_lotus_turbo_esprit models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+352 0 0 0 a_pillar worldspawn ignore 31 NOTHING NOTHING
+353 0 0 0 a_lever models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+354 0 0 0 a_switch&switches models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+355 0 0 0 a_painting models/darkmod/uw2/painting.ase entity 68 NOTHING NOTHING
+356 0 0 0 a_bridge models/darkmod/uw1/uw1_bridge_new.ase entity 7 NOTHING NOTHING
+357 0 0 0 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+358 0 0 0 some_writing atdm:readable_base entity 10 NOTHING NOTHING
+359 0 0 0 a_bed models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+360 0 0 0 a_large_blackrock_gem models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+361 0 0 0 a_shelf models/darkmod/furniture/shelves/wall_shelf_ornate1.lwo model 18 NOTHING NOTHING
+365 0 0 0 force_field models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+366 0 0 0 special_tmap_obj func_static entity 34 NOTHING NOTHING
+367 0 0 0 special_tmap_obj func_static entity 35 NOTHING NOTHING
+368 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+369 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+370 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+371 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+372 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+373 0 0 0 a_lever models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+374 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+375 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+376 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+377 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+378 0 0 0 a_button models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+379 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+380 0 0 0 a_switch models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+381 0 0 0 a_lever models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+382 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+383 0 0 0 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase entity 8 NOTHING NOTHING
+384 0 0 0 a_damage_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+385 0 0 0 a_teleport_trap func_teleporter entity 38 NOTHING NOTHING
+386 0 0 0 a_arrow_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+387 0 0 0 a_hack_trap atdm:target_callscriptfunction entity 40 NOTHING NOTHING
+388 0 0 0 a_special_effects_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+389 0 0 0 a_change_terrain_trap func_static entity 42 NOTHING NOTHING
+390 0 0 0 a_spelltrap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+391 0 0 0 a_create_object_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+392 0 0 0 a_door_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+393 0 0 0 a_ward_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+394 0 0 0 a_skill_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+395 0 0 0 a_delete_object_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+396 0 0 0 an_inventory_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+397 0 0 0 a_set_variable_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+398 0 0 0 a_check_variable_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+399 0 0 0 a_null_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+400 0 0 0 a_text_string_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+401 0 0 0 an_experience_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+402 0 0 0 a_jump_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+403 0 0 0 a_change_from_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+404 0 0 0 a_change_to_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+405 0 0 0 an_oscillator_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+406 0 0 0 a_proximity_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+407 0 0 0 a_pit_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+408 0 0 0 a_bridge_trap models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+414 0 0 0 a_flam_rune models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+415 0 0 0 a_tym_rune models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+416 0 0 0 a_move_trigger trigger_multiple entity 54 NOTHING NOTHING
+417 0 0 0 a_pick_up_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+418 0 0 0 a_use_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+419 0 0 0 a_look_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+420 0 0 0 a_pressure_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+421 0 0 0 a_pressure_release_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+422 0 0 0 an_enter_trigger trigger_multiple entity 54 NOTHING NOTHING
+423 0 0 0 an_exit_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+424 0 0 0 an_unlock_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+425 0 0 0 a_timer_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+426 0 0 0 an_open_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+427 0 0 0 a_close_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+428 0 0 0 a_scheduled_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+432 0 0 0 a_move_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+433 0 0 0 a_pick_up_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+434 0 0 0 a_use_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+435 0 0 0 a_look_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+436 0 0 0 a_pressure_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+437 0 0 0 a_pressure_release_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+438 0 0 0 an_enter_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+439 0 0 0 an_exit_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+440 0 0 0 an_unlock_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+441 0 0 0 a_timer_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+442 0 0 0 an_open_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+443 0 0 0 a_close_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+444 0 0 0 a_scheduled_trigger models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+448 0 0 0 some_blood models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+449 0 0 0 a_mist_cloud func_emitter entity 69 uw_mist_cloud.prt sound
+450 0 0 0 an_explosion func_emitter entity 69 imp_explosion.prt NOTHING
+451 0 0 0 an_explosion func_emitter entity 69 imp_explosion.prt NOTHING
+452 0 0 0 an_explosion func_emitter entity 69 imp_explosion.prt NOTHING
+453 0 0 0 lightning  func_emitter entity 69 caco_lightningball.prt NOTHING
+454 0 0 0 a_splash&splashes func_emitter entity 69 water_splash_large.prt sound
+455 0 0 0 some_spacey_twinkles func_emitter entity 69 tdm_arclight.prt NOTHING
+456 0 0 0 some_smoke func_emitter entity 69 mc1_smoke1.prt NOTHING
+457 0 0 0 a_fountain models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+458 0 0 0 some_frost models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+459 0 0 0 a_flash models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+460 0 0 0 lightning models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+461 0 0 0 a_wisp models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+462 0 0 0 a_vapor_trail models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING
+463 0 0 0 a_moving_door models/darkmod/wearables/armour/shield_oldfashioned.lwo model 18 NOTHING NOTHING

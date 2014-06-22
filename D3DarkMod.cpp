@@ -1,3 +1,10 @@
+/*
+UNDERWORLD EXPORTER
+D3DarkMod.cpp
+
+Functions for writing out the .map files
+
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <fstream>
@@ -11,15 +18,18 @@
 #include "D3DarkMod.h"
 #include "D3DarkModTiles.h"
 
+//The length, breadth and height of a tile unit. BrushSizeZ is a single step.
 int BrushSizeX;
 int BrushSizeY;
 int BrushSizeZ;
-int PrimitiveCount;
-int EntityCount;
+
+int PrimitiveCount;	//Counter for the worldspawn primities.
+int EntityCount;	//Counter for the object entities.
 int CEILING_HEIGHT;
 tile LevelInfo[64][64];
 int iGame;
 //void RenderEntity(int game,float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+
 void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 float calcAlignmentFactor(float adjacent, float opposite);
 void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
@@ -34,7 +44,6 @@ extern FILE *MAPFILE;
 
 void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game)
 {
-
 //Main processing loop for generating the level.
 
 	int x;
@@ -44,20 +53,20 @@ iGame =game;
 
 //Levels use different ceiling heights.
 //Shock is variable, UW is fixed.
-switch (game)
-	{
-		case SHOCK:
+	switch (game)
 		{
-		CEILING_HEIGHT = SHOCK_CEILING_HEIGHT;
-		break;
-		}
-		default:
-		{
-			CEILING_HEIGHT = UW_CEILING_HEIGHT;
-			break;
-		}
+			case SHOCK:
+				{
+				CEILING_HEIGHT = SHOCK_CEILING_HEIGHT;
+				break;
+				}
+			default://UW1&2
+				{
+				CEILING_HEIGHT = UW_CEILING_HEIGHT;
+				break;
+				}
 
-	}
+		}
 
 	//File header of the map file.
 	fprintf (MAPFILE, "Version 2\n");
@@ -72,9 +81,9 @@ switch (game)
 		{
 		for (x=0; x<=63;x++)
 			{
-			if ((LevelInfo[x][y].hasElevator == 0))
+			if ((LevelInfo[x][y].hasElevator == 0))//Elevators are rendered as func_statics
 				{
-				if ( LevelInfo[x][y].TerrainChange == 0)
+				if ( LevelInfo[x][y].TerrainChange == 0) //Does a Terrain change trap acts on this tile
 					{
 					//A regular tile with no special properites.
 					RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0,0,0);
@@ -89,8 +98,8 @@ switch (game)
 					} 
 				if ((LevelInfo[x][y].isWater == 1) && ((LevelInfo[x][y].tileType == TILE_OPEN) || (LevelInfo[x][y].tileType >= TILE_SLOPE_N)))
 					{
-						//render the ceilings of water tiles
-					LevelInfo[x][y].isWater=0;
+					//render the ceilings of water tiles
+					LevelInfo[x][y].isWater=0;//Temporarily turn off water
 					RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
 					LevelInfo[x][y].isWater = 1;
 					}
@@ -101,7 +110,7 @@ switch (game)
 		RenderElevatorLeakProtection(game,LevelInfo);
 		if (game != SHOCK)
 			{			
-			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done.
+			RenderFloorAndCeiling(game,LevelInfo);	//Shocks ceils are already done as part of the til.
 			RenderPillars(game, LevelInfo, objList);
 			}
 		fprintf (MAPFILE, "}");	//End worldspawn section of the .map file.
@@ -136,10 +145,10 @@ switch (game)
 					}
 				break;
 			}
-		//Now render thewater
+		//Now render the water
 		int currRegion = 1;
 		for (x = 0; x<64; x++)
-		{
+		{//Loop through until we find a matching region that is both water and of this id.
 			for (y = 0; y<64; y++)
 			{
 				if ((LevelInfo[x][y].roomRegion == currRegion) && (LevelInfo[x][y].isWater ==1))
@@ -149,12 +158,10 @@ switch (game)
 					fprintf(MAPFILE, "// entity %d\n", EntityCount);
 					fprintf(MAPFILE, "{\n\"classname\" \"atdm:liquid_water\"\n");
 					fprintf(MAPFILE, "\n\"name\" \"WaterRegion_%02d\"\n", currRegion);
-					//fprintf(MAPFILE, "\n\"model\" \"atdm_liquid_water_%02d\"\n", EntityCount);
 					fprintf(MAPFILE, "\n\"model\" \"WaterRegion_%02d\"\n", currRegion);
 					fprintf(MAPFILE, "\n\"underwater_gui\" \"guis\\underwater\\underwater_green_thinmurk.gui\"\n");
-					//fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", x*BrushSizeX, y*BrushSizeY, 0); 
 					for (int i = 0; i < 64; i++)
-					{
+					{//We've found a match so lets now render all the members of that region. we search again. Sigh.
 						for (int j = 0; j < 64; j++)
 						{
 							if ((LevelInfo[i][j].isWater == 1) && (LevelInfo[i][j].roomRegion== currRegion))
@@ -184,7 +191,7 @@ switch (game)
 		//	}
 
 			if  ((game == SHOCK) && (ENABLE_LIGHTING))
-				{//Light her up based on shade values
+				{//Light her up based on shade values. Shock currently has 2 lights per tile (sigh again)
 				for (y=0; y<=63;y++) 
 					{
 					for (x=0; x<=63;x++)
@@ -245,7 +252,7 @@ switch (game)
 				}	
 			else
 				{
-			//Ambient world light
+			//Ambient world light for when I've turned off lighting while testing.
 				fprintf (MAPFILE, "// entity %d\n", EntityCount++);
 				fprintf (MAPFILE, "{\n\"classname\" \"atdm:ambient_world\"");
 				fprintf (MAPFILE, "\n\"name\" \"ambient_world\"",EntityCount);
@@ -265,7 +272,7 @@ switch (game)
 				case UWDEMO:
 				case UW1:
 					if (levelNo == 0)
-						{
+						{//Temp code for providing a player start on level one as well as a "head" light.
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
 						fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
@@ -288,7 +295,7 @@ switch (game)
 					break;
 				case UW2:
 					if (levelNo == 0)
-					{
+					{//Temp code for providing a player start on level one as well as a "head" light.
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
 						fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
@@ -342,7 +349,7 @@ switch (game)
 
 void getWallTextureName(tile t, int face, short waterWall)
 {
-//Spits out the wall textures.
+//Spits out the wall textures in the .map format
 //Water is a special case here and in SHOCK the texture needs to be offset
 int wallTexture;
 int textureOffset=1;
@@ -351,16 +358,14 @@ float scaleFactor = 1;
 float shiftFactorH= 0;
 wallTexture = t.wallTexture;
 if (iGame==SHOCK)
-	{ 
+	{ //I need to calculate an offset for SHOCK.
 	textureOffset = t.shockTextureOffset;
 	ceilOffset = t.ceilingHeight ;
 	}
 if ((t.isWater != 1 )|| (waterWall == 0 ))
 	{
-	//if ((t.tileType == 0))  //solid
-	//	{
 		switch (face)
-			{
+			{//Pick which texture is rendered for the selected face.
 			case fNORTH:
 				wallTexture=t.North ; 
 				if ((iGame==SHOCK))
@@ -393,11 +398,11 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 					ceilOffset = t.shockEastCeilHeight;
 					}
 				break;
-	//		}
+
 		}
 	if (wallTexture >512) {wallTexture=CAULK;}
 	switch (wallTexture)
-		{
+		{//Some special hard coded textures.
 		case TRIGGER_MULTI:	//For trigger entities.
 			{fprintf (MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/trigmulti\" 0 0 0\n");break;}
 		case NODRAW:	//nodraw
@@ -409,13 +414,13 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 		case COLLISION:
 			{fprintf(MAPFILE, "( ( 0 0.03125 0 ) ( -0.03125 0 0 ) ) \"textures/common/collision\" 0 0 0\n"); break; }
 		default:
-			{
-			if ((t.tileType >= 2) && (t.tileType <= 5) && (face==fSELF))
-				   {//The angled portion of a diagonal tile
+			{//The actual textures.
+				   if ((t.tileType >= TILE_DIAG_SE) && (t.tileType <= TILE_DIAG_NW) && (face == fSELF))
+				   {//The angled portion of a diagonal tile. Calculate how much the texture is stretched here
 				   scaleFactor = calcAlignmentFactor(BrushSizeX,BrushSizeY);
 				   switch (t.tileType)
 					   {
-						case 2: 
+				   case TILE_DIAG_SE:
 							if ((t.tileX - t.tileY) % 2 == 0)
 							{
 								shiftFactorH = 0;
@@ -425,7 +430,7 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 								shiftFactorH = 0.5;
 							}
 							break;
-						case 3: 
+				   case TILE_DIAG_SW:
 							if ((t.tileX - t.tileY) % 2 == 0)
 							{
 								shiftFactorH = 0.5;
@@ -435,7 +440,7 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 								shiftFactorH = 0;
 							}
 							break;
-						case 4: 
+				   case TILE_DIAG_NE:
 							if ((t.tileX - t.tileY) % 2 == 0)
 							{
 								shiftFactorH = 0.5;
@@ -445,7 +450,7 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 								shiftFactorH = 0;
 							}
 							break;
-						case 5: 
+				   case TILE_DIAG_NW:
 							if ((t.tileX - t.tileY) % 2 == 0)
 							{
 								shiftFactorH = 0;
@@ -458,7 +463,8 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 					   }
 				   }
 			if (iGame == SHOCK)
-				{
+				{//The stepping of texture vertical positions can only be 8 different values. I shift the value down to get the remainder
+				//Really should use a division here for this.
 				float shock_ceil = SHOCK_CEILING_HEIGHT;
 				float floorOffset = shock_ceil - ceilOffset - 8;	//The floor of the tile if it is 1 texture tall.
 				while (floorOffset >= 8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
@@ -466,17 +472,19 @@ if ((t.isWater != 1 )|| (waterWall == 0 ))
 					floorOffset -= 8;
 				}
 				float textureVertAlign = (floorOffset) / 8;
+				//Write the texture to file
 				fprintf(MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
 					textureMasters[wallTexture].align1_1 / scaleFactor, textureMasters[wallTexture].align1_2, shiftFactorH,
 					textureMasters[wallTexture].align2_1, textureMasters[wallTexture].align2_2, textureVertAlign);
 				}
 			else
 				{//Texture aligned with the ceiling
+				//Write the texture to file
 				fprintf (MAPFILE, "( ( %f %f %f ) ( %f %f %f ) ) \"",
 				textureMasters[wallTexture].align1_1 / scaleFactor,textureMasters[wallTexture].align1_2,shiftFactorH,
 				textureMasters[wallTexture].align2_1,textureMasters[wallTexture].align2_2,textureMasters[wallTexture].align2_3);						
 				}
-			fprintf (MAPFILE, "%s", textureMasters[wallTexture].path );
+			fprintf (MAPFILE, "%s", textureMasters[wallTexture].path );//The texture path
 			fprintf (MAPFILE, "\" 0 0 0\n");
 					
 			}

@@ -20,6 +20,14 @@
 
 #define TILE_SOLID 0
 #define TILE_OPEN 1
+/*
+Note the order of these 4 tiles are actually different in SHOCK. I swap them around in BuildTileMapShock for consistancy
+*/
+#define TILE_DIAG_SE 2
+#define TILE_DIAG_SW 3
+#define TILE_DIAG_NE 4
+#define TILE_DIAG_NW 5
+
 #define TILE_SLOPE_N 6
 #define TILE_SLOPE_S 7
 #define	TILE_SLOPE_E 8

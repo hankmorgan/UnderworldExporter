@@ -1,9 +1,19 @@
+/*
+UNDERWORLD EXPORTER
+conversations.cpp
+
+Functions for implementing conversations in UW1&2
+
+*/
 #include "utils.h"
 #include "main.h"
 
 
 void ExtractConversations(int game)
 {
+//UW1&2
+//Pulls info outo cnv.ark 
+//At the moment just trying to understand the problems of implementing conversations.
 	FILE *file = NULL;
 
 	unsigned char *cnv_ark;

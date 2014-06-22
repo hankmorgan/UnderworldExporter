@@ -163,12 +163,20 @@ void LightingScript(tile LevelInfo[64][64], ObjectItem objList[1600], ObjectItem
 }
 
 void a_change_terrain_trapSCRIPT(ObjectItem currObj, int targetX, int targetY, int dimX, int dimY)
-{
+{//This needs to be updated to support multiple traps working on a single tile.
 int i;
 int j;
 int k;
 k = 0;
-
+if (currObj.index == 587)
+{
+	printf("");
+}
+if ((dimX == 0) && (dimY == 0))
+	{//A single tile trap.
+		fprintf(fBODY, "\t$initial_%s_%03d.remove();\n"
+			, UniqueObjectName(currObj), 0);
+	}
 for (i=0;i<dimX;i++)
 	{
 	for (j=0;j<dimY;j++)

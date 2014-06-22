@@ -74,6 +74,7 @@
 #define SHOCK_DOOR 66
 #define SHOCK_DOOR_TRANSPARENT 67
 #define UW_PAINTING	68
+#define PARTICLE 69
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
@@ -315,6 +316,8 @@ int index;
 short type;	//from above
 char desc[80];
 char path[80]; //to object model
+char particle[80];
+char sound[80];
 short isEntity; // 1 for entity. 0 for model. -1 for ignored entries
 short isSet;
 short objClass;	//For Shock
