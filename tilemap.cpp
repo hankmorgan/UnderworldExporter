@@ -424,12 +424,12 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 						offset=offset+2;
 						
 					}
-				else if (i<57)	//Wall and floor textures are int 16s
-				{
-					texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 16)+210; //(i * 2)
-					offset = offset + 2;
+				else if (i<=57)	//Wall and floor textures are int 16s
+					{
+						texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 16)+210; //(i * 2)
+						offset = offset + 2;
 
-				}
+					}
 				else
 					{ //door textures are int 8s
 						texture_map[i] = getValAtAddress(lev_ark, textureAddress + offset, 8) ;//+210; //(i * 1)
@@ -1013,7 +1013,8 @@ for (int x=0; x<64;x++)
 			do  
 				{
 				if ((objectMasters[objList[currObj.index].item_id].type == DOOR ) 
-						|| (objectMasters[objList[currObj.index].item_id].type == HIDDENDOOR ))
+						|| (objectMasters[objList[currObj.index].item_id].type == HIDDENDOOR )
+							|| (objectMasters[objList[currObj.index].item_id].type == PORTCULLIS))
 				 {
 					if (currObj.Angle1 >0)
 					{

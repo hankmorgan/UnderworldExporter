@@ -161,6 +161,7 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 					break;
 				case HIDDENDOOR:
 				case DOOR:
+				case PORTCULLIS:
 					RenderEntityDoor(game, x, y, z, currobj, objList, LevelInfo);
 					break;
 				case KEY:
@@ -928,7 +929,11 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 			}
 		}
 	}
-
+	if (objectMasters[currobj.item_id].type == PORTCULLIS)
+	{
+		fprintf(MAPFILE, "\"rotate\" \"0 0 0\"\n");
+		fprintf(MAPFILE, "\"translate\" \"0 0 80\"\n");
+	}
 	//fprintf(MAPFILE, "\"rotate\" \"0 90 0\"\n");
 	//position
 	int heading = 0;
@@ -1086,27 +1091,27 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 		case SOUTH:
 			//case SHOCK_SOUTH:
 		{
-					  fprintf(MAPFILE, "// primitive %f\n", 0);
-					  fprintf(MAPFILE, "{\nbrushDef3\n{\n");
-					  //east face 
-					  fprintf(MAPFILE, "( 1 0 0 %f )", -(doorWidth));
-					  getWallTextureName(t, fSELF, 0);
-					  //north face 
-					  fprintf(MAPFILE, "( 0 1 0 %d )", -(doorThickness));
-					  getWallTextureName(t, fSELF, 0);
-					  //top face
-					  fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
-					  getFloorTextureName(t, fTOP);
-					  //west face
-					  fprintf(MAPFILE, "( -1 0 0 %d )", +(0));
-					  getWallTextureName(t, fSELF, 0);
-					  //south face
-					  fprintf(MAPFILE, "( 0 -1 0 %d )", -(doorThickness));
-					  getWallTextureName(t, fSELF, 0);
-					  //bottom face
-					  fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
-					  getFloorTextureName(t, fBOTTOM);
-					  break;
+			fprintf(MAPFILE, "// primitive %f\n", 0);
+			fprintf(MAPFILE, "{\nbrushDef3\n{\n");
+			//east face 
+			fprintf(MAPFILE, "( 1 0 0 %f )", -(doorWidth));
+			getWallTextureName(t, fSELF, 0);
+			//north face 
+			fprintf(MAPFILE, "( 0 1 0 %d )", -(doorThickness));
+			getWallTextureName(t, fSELF, 0);
+			//top face
+			fprintf(MAPFILE, "( 0 0 1 %f )", -doorHeight);
+			getFloorTextureName(t, fTOP);
+			//west face
+			fprintf(MAPFILE, "( -1 0 0 %d )", +(0));
+			getWallTextureName(t, fSELF, 0);
+			//south face
+			fprintf(MAPFILE, "( 0 -1 0 %d )", -(doorThickness));
+			getWallTextureName(t, fSELF, 0);
+			//bottom face
+			fprintf(MAPFILE, "( 0 0 -1 %d )", 0);
+			getFloorTextureName(t, fBOTTOM);
+			break;
 		}
 
 		}
