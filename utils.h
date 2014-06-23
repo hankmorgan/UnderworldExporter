@@ -26,5 +26,5 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPacke
 
 void RepackUW2();
 void RepackShock();
-
+void ParseTerrainProperties(int game);
 #endif /*util_h*/

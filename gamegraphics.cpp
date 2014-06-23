@@ -453,3 +453,91 @@ int i = 0;
 //
 //
 //}
+
+
+void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game)
+{
+	//const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
+	//    int indexNo;
+	//unsigned char *BigEndBuf;          // Pointer to our buffered data (big endian format)
+	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
+	int i;
+	long NoOfTextures;
+
+	FILE *file = NULL;      // File pointer
+
+	if ((file = fopen(filePathIn, "rb")) == NULL)
+	{
+		printf("Could not open specified file\n"); return;
+	}
+
+	// Get the size of the file in bytes
+	long fileSize = getFileSize(file);
+
+	palette *pal;
+	pal = new palette[256];
+	getPalette(PaletteFile, pal, PaletteNo);
+
+	// Allocate space in the buffer for the whole file
+	//BigEndBuf = new unsigned char[fileSize];
+	textureFile = new unsigned char[fileSize];
+	// Read the file in to the buffer
+	fread(textureFile, fileSize, 1, file);
+	fclose(file);
+
+
+
+	switch (FileType)
+	{
+	case UW_GRAPHICS_GR:	//.gr
+	case UW_GRAPHICS_TR:
+	case UW_GRAPHICS_CR:
+	case UW_GRAPHICS_SR:
+	case UW_GRAPHICS_AR:
+		printf("File Type (should be %d):%d\n", FileType, textureFile[0]);
+		printf("No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
+		if (ImageCount == -1)	//All the images.
+		{
+			NoOfTextures = textureFile[2] << 8 | textureFile[1];
+		}
+		else
+		{
+			NoOfTextures = ImageCount;
+		}
+		//NoOfTextures=1;
+		for (i = 0; i < NoOfTextures; i++)
+		{
+			long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
+			int BitMapWidth = 83;  //getValAtAddress(textureFile, textureOffset + 1, 8);
+			int BitMapHeight = 114; // getValAtAddress(textureFile, textureOffset + 2, 8);
+			if (game == UW2)
+				{
+				BitMapWidth=79;
+				BitMapHeight = 112;
+				}
+			int datalen;
+			palette auxpal[16];
+			int auxPalIndex;
+			unsigned char *imgNibbles;
+			unsigned char *outputImg;
+			//switch (getValAtAddress(textureFile, textureOffset, 8))
+			//{
+			//default://8 bit uncompressed
+				printf("8 bit uncompressed\n");
+				printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
+				printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+				//textureOffset = 1;//textureOffset + 1;
+				writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal);
+				//break;
+			//}
+		}
+		break;
+	}
+
+
+	//NoOfTextures=0;
+	//printf("Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
+
+
+	return;
+}

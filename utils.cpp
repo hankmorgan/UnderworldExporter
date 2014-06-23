@@ -2,6 +2,7 @@
 
 #include "main.h"
 #include "utils.h"
+#include "textures.h"
 
 long getFileSize(FILE *file)
 {
@@ -869,4 +870,120 @@ void RepackShock()
 
 		address_pointer = address_pointer + 10;
 	}
+}
+
+void ParseTerrainProperties(int game)
+{
+long fileSize;
+unsigned char *terraindat;
+
+	FILE *file = NULL;      // File pointer
+	switch (game)
+		{
+		case UW1:
+			{
+			if ((file = fopen(UW1_TERRAIN_PROPS, "rb")) == NULL)
+				{
+				printf("\nArchive not found!\n");
+				return;
+				}
+			break;
+			}
+		case UW2:
+			{
+			if ((file = fopen(UW2_TERRAIN_PROPS, "rb")) == NULL)
+				{
+					printf("\nArchive not found!\n");
+					return;
+				}
+			break;
+			}
+		}
+	fileSize = getFileSize(file);
+	terraindat = new unsigned char[fileSize];
+	fread(terraindat, fileSize, 1, file);
+	fclose(file);
+	printf("Print texture properties from terrain.dat");
+	int j=0;
+	for (int i = 0; i < 512; i++)
+		{
+		if (i < 256)
+			{
+			printf("\nWall:");
+			}
+		else
+			{
+			
+			printf("\nFloor:");
+			}
+		if (j == 255)
+			{
+			j=0;
+			}
+		printf("%d %s", i, textureMasters[j].desc);
+		int textureProp = getValAtAddress(terraindat, i * 2, 16);
+		switch (textureProp)
+				{
+				case 0x0://Normal
+					printf(" normal");
+					break;
+				case 0x2://Ankh Mural
+					printf(" anhk mural");
+					break;
+				case 0x3://Stairs Up
+					printf(" stairs up");
+					break;
+				case 0x4://Stairs down
+					printf(" stairs down");
+					break;
+				case 0x5://Pipe
+					printf(" pipe");
+					break;
+				case 0x6://Grating
+					printf(" grating");
+					break;
+				case 0x7://Drain
+					printf(" Drain");
+					break;
+				case 0x8://Chained up princess
+					printf(" chained up princess");
+					break;
+				case 0x9://Window
+					printf(" Window");
+					break;
+				case 0xa://Tapestry
+					printf(" Tapestry");
+					break;
+				case 0xb://Textured Door
+					printf(" Textured door");
+					break;
+				case 0x10://Water
+					printf(" water");
+					break;
+				case 0x20://Lava
+					printf(" Lava");
+					break;
+				case 0x40://Waterfall
+					printf(" waterfall");
+					break;
+				case 0xC0://Ice wall
+					printf(" waterfall");
+					break;
+				case 0xD8://Unknown
+					printf(" unknown");
+					break;
+				case 0xE8://Ice wall (crumbling)
+					printf(" ice wall (crumbling)");
+					break;
+				case 0x80://Lavafall
+					printf(" lava fall");
+					break;
+				case 0xf8://Ice
+					printf(" ice");
+					break;
+				default:
+					printf(" unknown value %d", textureProp);
+				}
+		j++;
+		}
 }

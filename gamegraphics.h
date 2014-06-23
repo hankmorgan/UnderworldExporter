@@ -38,6 +38,7 @@ struct BitMapInfoHeader{
 
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType);
+void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game);
 void writeBMP( unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
 void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex);

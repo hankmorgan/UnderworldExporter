@@ -14,6 +14,7 @@ Functions for printing out usefull information, tilemaps and object lists.
 #include "tilemap.h"
 //#include "scripting.h"
 #include "asciimode.h"
+#include "utils.h"
 
 long printObject(ObjectItem &currObj, int TableFormat)
 {
@@ -303,6 +304,7 @@ if (game == SHOCK)
 else
 {
 	PrintLevelEntrances(LevelInfo,objList,LevelNo);
+	ParseTerrainProperties(game);
 }
 	
 	PrintObjectsByTile(LevelInfo, objList, LevelNo);
