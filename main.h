@@ -15,6 +15,8 @@
 #define UW1_CLEAN_STRINGS_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_stringsclean.txt"
 #define UW1_TERRAIN_PROPS "C:\\Games\\UW1\\Data\\terrain.dat"
 #define UW1_CONVERSATION "C:\\Games\\UW1\\data\\cnv.ark"
+#define UW1_CRITTER_ASSOC "C:\\Games\\UW1\\crit\\assoc.anm"
+#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR00PAGE.N00"
 
 #define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config.txt"
@@ -25,7 +27,7 @@
 
 //Change these depending on which set of textures you want to extract
 #define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\panels.gr"
-#define GRAPHICS_PAL_FILE "C:\\Games\\UW2\\DATA\\pals.dat"
+#define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
 #define AUXILARY_PAL_FILE "C:\\Games\\UW1\\DATA\\allpals.dat"
 
 

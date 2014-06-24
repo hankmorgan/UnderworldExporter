@@ -39,12 +39,13 @@ struct BitMapInfoHeader{
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType);
 void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game);
+void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo);
 void writeBMP( unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
 void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex);
 void copyNibbles(unsigned char *InputData, unsigned char  *OutputData, int NoOfNibbles, int add_ptr);
 int getcount(unsigned char *nibbles, int *addr_ptr, int size);
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg, palette auxpal[16], int index);
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg, palette *auxpal, int index);
 void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16]);
 int getNibble(unsigned char *nibbles, int *addr_ptr);
 

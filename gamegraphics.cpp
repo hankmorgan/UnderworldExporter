@@ -251,7 +251,7 @@ void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex)
 
 }
 
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight ,unsigned char *outputImg, palette auxpal[16], int index)
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight ,unsigned char *outputImg, palette *auxpal, int index)
 {
 int state=0; 
 int curr_pxl=0;
@@ -390,6 +390,7 @@ int i = 0;
 		OutputData[i] = (getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F;
 		}
 }
+
 
 //void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16])
 //{
@@ -540,4 +541,99 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 
 
 	return;
+}
+
+void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo)
+{
+	palette *pal;
+	pal = new palette[256];
+	getPalette(PaletteFile, pal, PaletteNo);
+
+	palette auxpal[32];
+	long fileSize;
+	unsigned char *assocFile;
+	unsigned char *critterFile;
+	int auxPalNo;
+	int anim;
+	int AddressPointer;
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(UW1_CRITTER_ASSOC, "rb")) == NULL)
+	{
+		printf("\nArchive not found!\n");
+		return;
+	}
+	fileSize = getFileSize(file);
+	assocFile = new unsigned char[fileSize];
+	fread(assocFile, fileSize, 1, file);
+	fclose(file);
+	//AddressPointer= CritterNo *8;
+	for (int i = 0; i < 8; i++)
+		{
+		printf("%c", assocFile[(CritterNo * 8) + i]);
+		}
+	anim = getValAtAddress(assocFile, (32 * 8) + (CritterNo * 2) + 0, 8);
+	auxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
+	printf("\nAnim is %d, AuxPal is %d", anim,auxPalNo);
+	//LoadAuxilaryPal(auxpal,pal,auxPalNo);
+
+	//*file = NULL;      // File pointer
+	if ((file = fopen(UW1_CRITTER_FILE, "rb")) == NULL)
+	{
+		printf("\nArchive not found!\n");
+		return;
+	}
+	fileSize = getFileSize(file);
+	critterFile = new unsigned char[fileSize];
+	fread(critterFile, fileSize, 1, file);
+	fclose(file);
+	printf("Slot base %d\n",getValAtAddress(critterFile,0,8));
+	int NoOfSlots = getValAtAddress(critterFile,1,8);
+	printf("No of Slots %d\n", NoOfSlots);
+	for (int i = 0; i < NoOfSlots; i++)
+	{
+		printf("\nIndex %d = %d",i,getValAtAddress(critterFile,2+i,8));
+	}
+	int NoOfSegs = getValAtAddress(critterFile, 2 + NoOfSlots, 8);
+	printf("\nNo of anim segments=%d", getValAtAddress(critterFile, 2 + NoOfSlots, 8));
+	for (int i = 0; i < NoOfSegs*8; i++)
+		{
+		printf("\n%d = %d", i, getValAtAddress(critterFile,1+2+NoOfSlots+i,8));
+		AddressPointer = 1 + 2 + NoOfSlots + i;
+		}
+	AddressPointer++;
+	int NoOfPals = getValAtAddress(critterFile, AddressPointer, 8);
+	AddressPointer++;
+	printf("\nNo of Palettes %d",NoOfPals);
+	//AddressPointer = AddressPointer + auxPalNo*32;
+	for (int i = 0; i < 32; i++)
+		{
+		int value = getValAtAddress(critterFile,(AddressPointer)+(auxPalNo*i),8);
+		auxpal[i].green = pal[value].green;
+		auxpal[i].blue = pal[value].blue;
+		auxpal[i].red = pal[value].red;
+		auxpal[i].reserved = pal[value].reserved;
+		}
+	
+	AddressPointer=AddressPointer+NoOfPals*32;
+	int NoOfFrames = getValAtAddress(critterFile,AddressPointer,8);
+	printf("\nNo of Frames %d", NoOfFrames);
+	printf("\nCompression Type %d", getValAtAddress(critterFile, AddressPointer+1, 8));
+	AddressPointer=AddressPointer+2;
+	for (int i = 0; i < NoOfFrames; i++)
+	{
+		int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
+		printf("\n%d @ %d", i , frameOffset);
+		int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+		int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+		int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+		int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+		int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
+		int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
+		unsigned char *imgNibbles;
+		unsigned char *outputImg;
+		imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
+		copyNibbles(critterFile, imgNibbles, datalen, frameOffset+7);
+		outputImg = new unsigned char[BitMapWidth*BitMapHeight];
+		DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i);
+	}
 }

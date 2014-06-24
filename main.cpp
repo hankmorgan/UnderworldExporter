@@ -99,7 +99,8 @@ switch (game)
 			break;
 		case BITMAP_EXTRACT_MODE:
 			//extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR);
-			extractPanels(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,game);
+			//extractPanels(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,game);
+			extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
