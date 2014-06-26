@@ -70,6 +70,7 @@ short tileTested;  //for recursive region tests
 short tileX;
 short tileY;
 
+short BullFrog;	//Tile is a bullfrog tile. UW1/lvl3
 //Shock Specific Stuff
 short shockSlopeFlag;	//For controlling ceiling slopes for shock.
 short shockHazard;

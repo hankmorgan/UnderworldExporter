@@ -60,7 +60,7 @@ int mode = D3_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
 
-levelNo =0;
+levelNo =3;
 
 GAME = game;
 switch (game)
@@ -331,6 +331,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setPatchBits(LevelInfo,objList);
 			setElevatorBits(LevelInfo,objList);
 			setTerrainChangeBits(LevelInfo,objList);
+			SetBullFrog(LevelInfo,objList,LevelNo);
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.

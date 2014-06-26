@@ -688,7 +688,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 		{
 			if (objList[x].link > 512)
 			{
-				printf("\n\tSpecial Property) : %d", objList[x].link);
+				printf("\n\tSpecial Property : %d", objList[x].link);
 				printf("\tless 512 is %d : ", objList[x].link - 512);
 			}
 			else

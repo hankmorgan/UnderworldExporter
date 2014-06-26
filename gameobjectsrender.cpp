@@ -284,9 +284,21 @@ void RenderEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem &curr
 		EntityCount++;
 		break;
 	case 3:	//rising platform
-		RenderEntityElevator(game, LevelInfo, currobj);
+		//RenderEntityBullfrog(game, LevelInfo, currobj);
 		break;
+	//case 24://Bullfrog
+	//	
+	//default:
+	//	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+	//	fprintf(MAPFILE, "\"classname\" \"func_static\"\n");
+	//	fprintf(MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));
+	//	//models/darkmod/decorative/hourglass.ase
+	//	fprintf(MAPFILE, "\n\"model\" \"models/darkmod/decorative/hourglass.ase\"");
+	//	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	//	fprintf(MAPFILE, "\n}");
+	//	EntityCount++;
 	}
+
 	return;
 }
 
@@ -381,6 +393,7 @@ void RenderEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z, Obje
 			t.DimY = 1;
 			t.DimX = 1;
 			t.hasElevator = 0;
+			t.BullFrog = 0;
 			RenderDarkModTile(game, 0, 0, t, 0, 0, 0, 1);
 			fprintf(MAPFILE, "\n}\n");
 			
@@ -434,6 +447,7 @@ void RenderEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem 
 	t.ceilingHeight = CEILING_HEIGHT;
 	t.isWater = 0;
 	t.hasElevator = 0;
+	t.BullFrog=0;
 	switch (game)
 	{
 	case UWDEMO:
@@ -1380,21 +1394,22 @@ void RenderEntityNPC(int game, float x, float y, float z, ObjectItem &currobj, O
 	//npc_attitude
 	//link for npc inventory in UW
 	//objectOwnerEntity.
+
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 	fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	switch (currobj.npc_attitude)
 	{
 	case 0:	//hostile
-	{
+		{
 				fprintf(MAPFILE, "\"team\" \"5\"\n");	//Criminals team
 				break;
-	}
+		}
 	default:
-	{
+		{
 			   fprintf(MAPFILE, "\"team\" \"5\"\n");	//Beggars team
 			   break;
-	}
+		}
 	}
 
 	//position
@@ -1490,6 +1505,7 @@ void RenderEntityREPULSOR(int game, float x, float y, float z, ObjectItem &curro
 	t.ceilingHeight = CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight - 4;
 	t.isWater = 0;
 	t.hasElevator = 0;
+	t.BullFrog = 0;
 	RenderGenericTileAroundOrigin(0, 0, t, t.ceilingHeight, t.floorHeight, originZ);
 	//RenderGenericTile(0,0,t,t.ceilingHeight,t.floorHeight );
 

@@ -83,7 +83,7 @@ iGame =game;
 			{
 			if ((LevelInfo[x][y].hasElevator == 0))//Elevators are rendered as func_statics
 				{
-				if ( LevelInfo[x][y].TerrainChange == 0) //Does a Terrain change trap acts on this tile
+				if ((LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0)) //Does a Terrain change trap acts on this tile
 					{
 					//A regular tile with no special properites.
 					RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0,0,0);
@@ -125,6 +125,10 @@ iGame =game;
 				RenderObjectList(game,LevelInfo,objList);
 				RenderLevelExits (game,LevelInfo,objList);
 				RenderChangeTerrainTiles(game,LevelInfo);
+				if (levelNo==3)
+					{
+					RenderBullFrogTiles(game, LevelInfo);
+					}
 				break;
 			case UW2:
 				RenderObjectList(game,LevelInfo,objList);
@@ -676,7 +680,7 @@ switch (game)
 
 				   for (int x = 0; x <= 63; x++)
 				   {
-					   if (LevelInfo[x][y].TerrainChange == 1)
+					   if ((LevelInfo[x][y].TerrainChange == 1) || (LevelInfo[x][y].BullFrog == 1))
 					   {//Renders a ceiling for that tile
 						tile tmp;
 						tmp.tileType =1;

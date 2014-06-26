@@ -1876,3 +1876,45 @@ void SetDeathWatch(ObjectItem objList[1600])
 		}
 	}
 }
+
+void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600],int LevelNo)
+{
+//Special UW1 case
+	if (LevelNo==3)
+		{
+		for (int x= 48; x< 56;x++)
+			{
+			for (int y = 48; y< 56; y++)
+				{
+				LevelInfo[x][y].BullFrog=1;
+				}
+			}	
+		}
+//for (int i = 0; i < 1600; i++)
+//	{
+//	if (objList[i].item_id >= 0)
+//		{
+//		if ((objectMasters[objList[i].item_id].type == A_USE_TRIGGER))
+//			{
+//			int Special = objList[i].link;
+//			int triggerXOffset = objList[i].x; 
+//			int triggerYOffset = objList[i].y;
+//			if (objectMasters[objList[Special].item_id].type == A_DO_TRAP)
+//				{
+//				if (objList[Special].quality==24)
+//					{//A bullfrog trap at tile 
+//					printf("Bullfrog offsets %d %d\n", triggerXOffset, triggerYOffset);
+//					for (int x = objList[Special].tileX + triggerXOffset; x<objList[Special].tileX + triggerXOffset+8; x++)
+//						{
+//						for (int y = objList[Special].tileY + triggerYOffset; y<objList[Special].tileY + triggerYOffset + 8; y++)
+//							{
+//							printf("Bullfrog %d %d\n",x,y);
+//							LevelInfo[x][y].BullFrog = 0;
+//							}
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+}

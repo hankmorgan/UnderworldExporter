@@ -738,6 +738,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 			LevelInfo[x][y].DimX = 1;
 			LevelInfo[x][y].DimY = 1;
 			LevelInfo[x][y].Grouped = 0;
+			LevelInfo[x][y].BullFrog=0;
 
 			/* word 6 contains
 				0-5	Wall texture (index into texture list)

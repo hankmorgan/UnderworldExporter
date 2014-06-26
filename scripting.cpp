@@ -26,6 +26,200 @@ extern long UW_CEILING_HEIGHT;
 
 short globals[255];
 
+void BullFrogScript()
+{
+	fprintf(fGLOBALS, "\tfloat bullfrog_targetX=48;\n");
+	fprintf(fGLOBALS, "\tfloat bullfrog_targetY=48;\n");
+		
+	for (int x = 48; x< 56; x++)
+	{
+		for (int y = 48; y< 56; y++)
+		{
+			fprintf(fGLOBALS, "\tfloat bullfrog_%d_%d_state=0;\n",x,y);
+			//Lift and drop functions for each tile
+			fprintf(fBODY, "\nvoid Raise_bullfrog_%d_%d(float distance)", x, y);
+			fprintf(fBODY, "\n\t{\n");
+			fprintf(fBODY, "\tsys.println(\"raise %d %d\");\n", x,y);
+			fprintf(fBODY, "\tif ( bullfrog_%d_%d_state <=360)\n\t\t{\n",x, y);
+			fprintf(fBODY, "\tsys.println(\"raise %d %d execute\");\n", x, y);
+			fprintf(fBODY, "\t\t$bullfrog_%d_%d.move( UP, distance );\n", x, y);
+			fprintf(fBODY, "\t\tbullfrog_%d_%d_state=bullfrog_%d_%d_state+distance;\n", x, y, x, y);
+			fprintf(fBODY, "\tsys.println(\"raise %d %d Completed\");\n", x, y);
+			fprintf(fBODY, "\t\t}");
+			fprintf(fBODY, "\n\t}");
+
+			fprintf(fBODY, "\nvoid Lower_bullfrog_%d_%d(float distance)", x, y);
+			fprintf(fBODY, "\n\t{\n");
+			fprintf(fBODY, "\tsys.println(\"lower %d %d\");\n", x, y);
+			fprintf(fBODY, "\tif ( bullfrog_%d_%d_state >=0)\n\t\t{\n", x, y);
+			fprintf(fBODY, "\tsys.println(\"lower %d %d execute\");\n", x, y);
+			fprintf(fBODY, "\t\t$bullfrog_%d_%d.move( DOWN, distance );\n", x, y);
+			fprintf(fBODY, "\t\tbullfrog_%d_%d_state=bullfrog_%d_%d_state-distance;\n", x, y,x,y);
+			fprintf(fBODY, "\tsys.println(\"lower %d %d Completed\");\n", x, y);
+			fprintf(fBODY, "\t\t}");
+			fprintf(fBODY, "\n\t}");
+		}
+	}
+
+	fprintf(fBODY, "\nvoid ExecuteBullFrogUp(float targetX, float targetY)\n\t{\n");
+	fprintf(fBODY, "\tsys.println(targetX);\n");
+	fprintf(fBODY, "\tsys.println(targetY);\n");
+	for (int x = 48; x< 56; x++)
+	{
+		for (int y = 48; y< 56; y++)
+		{
+			//fprintf(fBODY, "\tsys.println(\"Testing up %d %d\");\n", x, y);
+			fprintf(fBODY, "\n\tif ( (targetX==%d) && (targetY == %d) )",x,y);
+			fprintf(fBODY, "\n\t\t{");
+			fprintf(fBODY, "\tsys.println(\"Passed %d %d\");\n", x, y);
+			fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(60);", x, y);
+			//fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d();", x, y);
+			switch (x)
+				{
+				case 48://West edge
+					switch (y)
+						{
+						case 48://sw corner
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x+1, y);
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x , y+1);
+							break;
+						case 55://nw corner
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x+1, y);
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y-1);
+							break;
+						default://west edge
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x+1, y+1 );
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y+1);
+							fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x,y-1 );
+							break;
+						}
+					break;
+				case 55://east edge
+					switch (y)
+					{
+					case 48://se corner
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x -1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x , y+1);
+						break;
+					case 55://ne corner
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x , y-1);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x-1 , y);
+						break;
+					default://east edge
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y-1);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x-1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y+1);
+						break;
+					}
+					break;
+				default:
+					switch (y)
+					{
+					case 48://south edge
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x+1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x-1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y+1);
+						break;
+					case 55://north edge
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x+1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x-1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y-1);
+						break;
+					default://middle
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x+1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x-1, y);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y+1);
+						fprintf(fBODY, "\n\t\tRaise_bullfrog_%d_%d(45);", x, y-1);
+						break;
+					}
+					break;
+				}
+			fprintf(fBODY, "\n\t\t}");
+		}
+	}
+	fprintf(fBODY, "\n\t}");
+
+	fprintf(fBODY, "\nvoid ExecuteBullFrogDown(float targetX, float targetY)\n\t{\n");
+	fprintf(fBODY, "\tsys.println(targetX);\n");
+	fprintf(fBODY, "\tsys.println(targetY);\n");
+	for (int x = 48; x< 56; x++)
+	{
+		for (int y = 48; y< 56; y++)
+		{
+			//fprintf(fBODY, "\tsys.println(\"testing down %d %d\");\n", x, y);
+			fprintf(fBODY, "\n\tif ( (targetX == %d) && (targetY == %d) )", x, y);
+			fprintf(fBODY, "\n\t\t{");
+			fprintf(fBODY, "\tsys.println(\"passed down %d %d\");\n", x, y);
+			fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(60);", x, y);
+			fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(60);", x, y);
+			switch (x)
+			{
+			case 48://West edge
+				switch (y)
+				{
+				case 48://sw corner
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x + 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y + 1);
+					break;
+				case 55://nw corner
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x + 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y - 1);
+					break;
+				default://west edge
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x + 1, y + 1);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y + 1);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y - 1);
+					break;
+				}
+				break;
+			case 55://east edge
+				switch (y)
+				{
+				case 48://se corner
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x - 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y + 1);
+					break;
+				case 55://ne corner
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y - 1);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x - 1, y);
+					break;
+				default://east edge
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y - 1);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x - 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y + 1);
+					break;
+				}
+				break;
+			default:
+				switch (y)
+				{
+				case 48://south edge
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x + 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x - 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y + 1);
+					break;
+				case 55://north edge
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x + 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x - 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y - 1);
+					break;
+				default://middle
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x + 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x - 1, y);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y + 1);
+					fprintf(fBODY, "\n\t\tLower_bullfrog_%d_%d(45);", x, y - 1);
+					break;
+				}
+				break;
+			}
+
+			fprintf(fBODY, "\n\t\t}");
+		}
+	}
+	fprintf(fBODY, "\n\t}");
+}
+
+
 void EMAILScript(char objName[80], ObjectItem currObj, int logChunk)
 {
 	//printf("void start_%s()\n{",UniqueObjectName(currObj));
@@ -266,7 +460,6 @@ else
 	}
 }
 
-
 void a_do_trap_cameraSCRIPT(char objDesc[80], int triggerX, int triggerY, int objId)
 {
 //chainArray(objDescription) & "_" & Format(TriggerTargetX, "00#") & "_" & Format(TriggerTargetY, "00#")
@@ -331,25 +524,25 @@ void a_set_variable_trapSCRIPT(int variable, int value, int operation)
 		switch(operation)
 			{
 			case 0 : //add
-				fprintf(fBODY,"\tvar_%d += %d ;\n",variable,value);
+				fprintf(fBODY,"\tglobal_var_%d += %d ;\n",variable,value);
 				break;
 			case 1:  //sub
-				fprintf(fBODY,"\tvar_%d -= %d ;\n",variable,value);
+				fprintf(fBODY,"\tglobal_var_%d -= %d ;\n",variable,value);
 				break;
 			case 2 : //set
-				fprintf(fBODY,"\tvar_%d  = %d ;\n",variable,value);
+				fprintf(fBODY,"\tglobal_var_%d  = %d ;\n",variable,value);
 				break;
 			case 3 : //and
-				fprintf(fBODY,"\tvar_%d &= %d ;\n",variable,value); //Does this work??
+				fprintf(fBODY,"\tglobal_var_%d &= %d ;\n",variable,value); //Does this work??
 				break;
 			case 4:  //or
-				fprintf(fBODY,"\tvar_%d  |=  %d ;\n",variable,value);
+				fprintf(fBODY,"\tglobal_var_%d  |=  %d ;\n",variable,value);
 				break;
 			case 5 : //xor ! ((a&b) & (a|b))
-				fprintf(fBODY,"\tvar_%d = (~( var_%d & %d) ) & ( var_%d | %d) ;\n",variable,variable,value,variable,value);
+				fprintf(fBODY,"\tglobal_var_%d = (~( global_var_%d & %d) ) & ( global_var_%d | %d) ;\n",variable,variable,value,variable,value);
 				break;
 			case 6:  //shiftleft double by value times
-				fprintf(fBODY,"\tvar_%d = (var_%d * %d ) & 63 ;\n",variable,variable,2*value);
+				fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);
 				break;
            }
     }
@@ -372,7 +565,7 @@ void a_check_variable_trapSCRIPT(int variable, int value)
 {
 //Will need to expand on this for more complex checks
 
- fprintf(fBODY,"\tif (var_%d == %d) \n\t{\n",variable,value);
+ fprintf(fBODY,"\tif (global_var_%d == %d) \n\t{\n",variable,value);
 }
 
 void addConditionals(int noofCond)
@@ -424,6 +617,11 @@ for (int x = 0; x <63; x++)
 			}
 	}
 }
+if ((game == UW1) && (LevelNo == 3))
+{
+	BullFrogScript();
+}
+
 fprintf(fMAIN,"\nvoid main()\n{\n");
 fprintf(fMAIN, "\t$light_1.bind($player1);\n");
 for (int i = 0; i < 1600; i++)
@@ -545,10 +743,10 @@ for (int i = 0; i < 1600; i++)
 				}
 			}
 		}
-	fclose(fBODY);
+	fclose ( fBODY );
 	fprintf(fMAIN,"\n}\n");	
-	fclose(fMAIN);
-	fclose(fGLOBALS);
+	fclose ( fMAIN );
+	fclose ( fGLOBALS );
 	
 	//now merge these three together
 	FILE *fFINALSCRIPT;
@@ -591,19 +789,54 @@ for (int i = 0; i < 1600; i++)
 			{
 			while (fgets(line,255,fBODY))
 				{
-				fprintf(fFINALSCRIPT,"%s",line);
+				fprintf (fFINALSCRIPT,"%s",line);
 				}
 				fclose(fBODY);
 			}					
 				
 		//fprintf(fFINALSCRIPT,"#endif //__game%d_%d_script__",game,LevelNo);
-		fclose(fFINALSCRIPT);
+		fclose (fFINALSCRIPT);
 		}		
 	else
 		{
 		printf("Unable to open output file");
 		}
 	
+}
+
+void a_do_trapBullfrogSCRIPT(int game, ObjectItem objList[1600], ObjectItem currObj, int Operation )
+{
+	switch (Operation)
+		{
+		case 0:	//up
+			fprintf(fBODY, "\n\t//Move up\n");
+			fprintf(fBODY, "\n\tExecuteBullFrogUp(bullfrog_targetX, bullfrog_targetY);\n");
+			break;
+		case 1:	//down
+			fprintf(fBODY, "\n\t//Move down\n");
+			fprintf(fBODY, "\n\tExecuteBullFrogDown(bullfrog_targetX, bullfrog_targetY);\n");
+			break;
+		case 2://increase x
+			fprintf(fBODY, "\n\tbullfrog_targetX = bullfrog_targetX + 1 ;");
+			fprintf(fBODY, "\n\tif (bullfrog_targetX >= 56){bullfrog_targetX=48;}\n");
+			break;
+		case 3://increase x
+			fprintf(fBODY, "\n\tbullfrog_targetY = bullfrog_targetY + 1 ;");
+			fprintf(fBODY, "\n\tif (bullfrog_targetY >= 56){bullfrog_targetY=48;}\n");
+			break;
+		case 4: //reset
+			fprintf(fBODY, "\tsys.println(\"Resetting Bullfrog\");\n");
+			for (int x = 48; x< 56; x++)
+			{
+				for (int y = 48; y< 56; y++)
+				{
+					fprintf(fBODY, "\n\tbullfrog_%d_%d.move( DOWN, - (bullfrog_%d_%d_state*60) );",x,y,x,y);
+					fprintf(fBODY, "\n\tbullfrog_%d_%d_state = 0;", x, y, x, y);
+				}
+			}
+			break;
+		}
+
 }
 
 void scriptChainFunctionsUW(int game, ObjectItem objList[1600], ObjectItem currObj,int *conditionalCount, int *TriggerTargetX,int *TriggerTargetY,int *TriggerQuality,int *TriggerFlags,int *TriggerHomeX,int *TriggerHomeY,int scriptLevelNo)
@@ -633,9 +866,13 @@ void scriptChainFunctionsUW(int game, ObjectItem objList[1600], ObjectItem currO
 				fprintf(fGLOBALS,"\nfloat %s_%03d_%03d_state = %d; \n",objectMasters[currObj.item_id].desc, *TriggerTargetX, *TriggerTargetY,*TriggerFlags);
 				a_do_trap_platformSCRIPT(objectMasters[currObj.item_id].desc, *TriggerTargetX, *TriggerTargetY,currObj.index,*TriggerFlags,BrushSizeZ,8*BrushSizeZ);
 				break;
+			case 24://Bullfrog
+				{
+				a_do_trapBullfrogSCRIPT(game,objList,currObj,currObj.owner);
 				}
 			}
         break;
+		}
     case A_PIT_TRAP:
         tobedone("A_PIT_TRAP");
         break;
@@ -947,7 +1184,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 		}
 	}
 
-	fclose(fBODY);
+	fclose (fBODY);
 	//fprintf(fMAIN,"\n}\n");	
 	//fclose(fMAIN);
 	fclose(fGLOBALS);
@@ -1002,7 +1239,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 			}					
 				
 		//fprintf(fFINALSCRIPT,"#endif //__game%d_%d_script__",game,LevelNo);
-		fclose(fFINALSCRIPT);
+		fclose (fFINALSCRIPT);
 		}		
 	else
 		{

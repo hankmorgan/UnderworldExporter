@@ -488,9 +488,17 @@ void RenderOpenTile(int x, int y, tile &t, short Water, short invert)
 				fprintf(MAPFILE, "( 0 -1 0 %d )", +((y)*BrushSizeY));
 				getWallTextureName(t, fSOUTH, t.isWater);
 				//Bottom face 
-				if (t.hasElevator == 0)
+				if ((t.hasElevator == 0))
 				{
-					fprintf(MAPFILE, "( 0 0 -1 %d ) ", -2 * BrushSizeZ);
+					if (t.BullFrog >0)
+					{
+						fprintf(MAPFILE, "( 0 0 -1 %d ) ", -16 * BrushSizeZ);	//-2
+					}
+					else
+					{
+						fprintf(MAPFILE, "( 0 0 -1 %d ) ", -2 * BrushSizeZ);	//-2
+					}
+					
 				}
 				else
 				{
@@ -2116,7 +2124,7 @@ void RenderElevatorLeakProtection(int game, tile LevelInfo[64][64])
 	{
 		for (int x = 0; x <= 63; x++)
 		{
-			if (LevelInfo[x][y].hasElevator >= 1)
+			if ((LevelInfo[x][y].hasElevator >= 1) || (LevelInfo[x][y].BullFrog))
 			{
 				//Below the map
 				tile t = LevelInfo[x][y];
@@ -2256,6 +2264,29 @@ void RenderChangeTerrainTiles(int game, tile LevelInfo[64][64])
 				}
 			}
 		}
+}
+
+void RenderBullFrogTiles(int game, tile LevelInfo[64][64])
+{
+	for (int i = 0; i < 63; i++)
+	{
+		for (int j = 0; j < 63; j++)
+		{
+			if (LevelInfo[i][j].BullFrog == 1)
+			{
+				fprintf(MAPFILE, "\n");
+				PrimitiveCount = 0;	//resets for each entity.
+				fprintf(MAPFILE, "// entity %d\n", EntityCount);
+				fprintf(MAPFILE, "{\n\"classname\" \"func_mover\"\n");
+				fprintf(MAPFILE, "\n\"name\" \"bullfrog_%02d_%02d\"\n", i, j);
+				fprintf(MAPFILE, "\n\"model\" \"bullfrog_%02d_%02d\"\n", i, j);
+				fprintf(MAPFILE, "\n\"movespeed\" \"500\"\n");
+				fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", i*BrushSizeX, j*BrushSizeY, 0);
+				RenderDarkModTile(game, 0, 0, LevelInfo[i][j], 0, 0, 0, 1);
+				fprintf(MAPFILE, "}\n");
+			}
+		}
+	}
 }
 
 void RenderWaterTiles(int game, tile LevelInfo[64][64], int x, int y)
