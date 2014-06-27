@@ -196,7 +196,7 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	
 	char outFile[80];
 
-	sprintf_s(outFile,80,"doors_%02d.bmp", index );
+	sprintf_s(outFile,80,"OBJECTS_%03d.bmp", index );
 
 	FILE *outf ;
 	outf = fopen(outFile,"wb");

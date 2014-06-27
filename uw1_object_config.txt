@@ -1,7 +1,7 @@
-0 0 0 0 a_hand_axe TODO ignore 1 NOTHING NOTHING
+0 0 0 0 a_hand_axe func_emitter entity 69 uw1_object_000.prt sound
 1 0 0 0 a_battle_axe TODO ignore 1 NOTHING NOTHING
 2 0 0 0 an_axe TODO ignore 1 NOTHING NOTHING
-3 0 0 0 a_dagger TODO ignore 1 NOTHING NOTHING
+3 0 0 0 a_dagger func_emitter entity 69 uw1_object_003.prt sound
 4 0 0 0 a_shortsword TODO ignore 1 NOTHING NOTHING
 5 0 0 0 a_longsword TODO ignore 1 NOTHING NOTHING
 6 0 0 0 a_broadsword TODO ignore 1 NOTHING NOTHING
@@ -112,7 +112,7 @@
 119 0 0 0 a_stone_golem atdm:ai_spider entity 0 NOTHING NOTHING
 120 0 0 0 a_fire_elemental atdm:ai_spider entity 0 NOTHING NOTHING
 121 0 0 0 a_metal_golem atdm:ai_spider entity 0 NOTHING NOTHING
-122 0 0 0 a_wisp atdm:ai_lantern_bot entity 0 NOTHING NOTHING
+122 0 0 0 a_wisp func_emitter entity 69 tdm_arclight.prt sound
 123 0 0 0 tybal atdm:ai_archmage01 entity 0 NOTHING NOTHING
 124 0 0 0 slasher_of_veils atdm:ai_lantern_bot entity 0 NOTHING NOTHING
 127 0 0 0 an_adventurer atdm:ai_thief_thug entity 0 NOTHING NOTHING
@@ -180,7 +180,7 @@
 189 0 0 0 a_bottle_of_water_bottles_of_water models/darkmod/kitchen/bottle01.lwo model 24 NOTHING NOTHING
 190 0 0 0 a_flask_of_port_flasks_of_port models/darkmod/kitchen/bottle01.lwo model 24 NOTHING NOTHING
 191 0 0 0 a_bottle_of_wine_bottles_of_wine models/darkmod/kitchen/bottle01.lwo model 24 NOTHING NOTHING
-192 0 0 0 a_plant models/darkmod/nature/plant_02.ase model 25 NOTHING NOTHING
+192 0 0 0 a_plant func_emitter entity 69 uw1_object_192.prt sound
 193 0 0 0 some_grass_bunches_of_grass models/darkmod/nature/grass_fuzz.ase model 25 NOTHING NOTHING
 194 0 0 0 a_skull models/darkmod/graveyard/bones/skull.lwo model 23 NOTHING NOTHING
 195 0 0 0 a_skull models/darkmod/graveyard/bones/skull.lwo model 23 NOTHING NOTHING

@@ -26,7 +26,7 @@
 #define UW2_OUT_PATH "C:\\Games\\UW2\\data\\lev_out.ark"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\panels.gr"
+#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\objects.gr"
 #define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
 #define AUXILARY_PAL_FILE "C:\\Games\\UW1\\DATA\\allpals.dat"
 
@@ -45,8 +45,8 @@
 #define SCRIPT_GlOBAL_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptglobal.txt"
 #define SCRIPT_MAIN_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptmain.txt"
 #define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
-#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\uw1_3.script"
-#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\uw1_3.map"
+#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\uw1_1.script"
+#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\uw1_1.map"
 
 #define ENABLE_LIGHTING 0
 #define ENABLE_WATER 1
