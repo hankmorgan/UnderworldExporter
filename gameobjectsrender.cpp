@@ -288,7 +288,8 @@ void RenderEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem &curr
 		break;
 	//case 24://Bullfrog
 	//	
-	//default:
+	default:
+		RenderEntityParticle(game,x,y,z,currobj,objList,LevelInfo);
 	//	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 	//	fprintf(MAPFILE, "\"classname\" \"func_static\"\n");
 	//	fprintf(MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));
@@ -894,7 +895,7 @@ void RenderEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, 
 	float zpos = z;
 	
 	zpos = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ;//Force the door to stay on the ground.
-
+	z=zpos;
 	if (game == SHOCK)
 	{
 		zpos = LevelInfo[currobj.tileX][currobj.tileY].floorHeight * BrushSizeZ;

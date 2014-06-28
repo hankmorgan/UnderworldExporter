@@ -848,57 +848,58 @@ void BuildUWXData(int game, int TargetBlock)
 void BuildUWParticles()
 {
 
-	//for (int x =0; x<=454; x++)
-	//{
-	//	FILE *fileOut;
-	//	char filePath[80] = "";
-	//	sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\uw1_object_%03d.prt", x);
-	//	if (fopen_s(&fileOut, filePath, "w") != 0)
-	//		{
-	//		printf("Unable to create output file for material");
-	//		return;
-	//		}
-	//
-	//	fprintf(fileOut, "particle uw1_object_%03d {\n", x);
-	//	fprintf(fileOut, "{\n");
-	//	fprintf(fileOut, "count\t1\n");
-	//	fprintf(fileOut, "material\ttextures/uw1/objects/objects_%03d\n", x);
-	//	fprintf(fileOut, "time\t0.050\n");
-	//	fprintf(fileOut, "cycles\t0.000\n");
-	//	fprintf(fileOut, "bunching\t0.000\n");
-	//	fprintf(fileOut, "distribution\trect 0.000 0.000 0.000\n");
-	//	fprintf(fileOut, "direction\tcone \"0.000\"\n");
-	//	fprintf(fileOut, "orientation\tview\n");
-	//	fprintf(fileOut, "speed\t\"0.000\"\n");
-	//	fprintf(fileOut, "size\t\"16.000\"\n");
-	//	fprintf(fileOut, "aspect\t\"-1.000\"\n");
-	//	fprintf(fileOut, "rotation\t\"-1.000\"\n");
-	//	fprintf(fileOut, "angle\t180.000\n");
-	//	fprintf(fileOut, "randomDistribution\t0\n");
-	//	fprintf(fileOut, "boundsExpansion\t0.000\n");
-	//	fprintf(fileOut, "fadeIn\t0.000\n");
-	//	fprintf(fileOut, "fadeOut\t0.000\n");
-	//	fprintf(fileOut, "fadeIndex\t0.000\n");
-	//	fprintf(fileOut, "color\t1.000 1.000 1.000 1.000\n");
-	//	fprintf(fileOut, "fadeColor\t0.000 0.000 0.000 0.000\n");
-	//	fprintf(fileOut, "offset\t0.000 0.000 0.000\n");
-	//	fprintf(fileOut, "gravity\t0.000\n");
-	//	fprintf(fileOut, "}\n");
-	//	fprintf(fileOut, "}\n");
-	//}
-
-	for (int x = 0; x <= 454; x++)
+	for (int x =0; x<=463; x++)
 	{
 		FILE *fileOut;
 		char filePath[80] = "";
-		sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw1_object_%03d.mtr", x);
+		sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\uw2_object_%03d.prt", x);
+		if (fopen_s(&fileOut, filePath, "w") != 0)
+			{
+			printf("Unable to create output file for material");
+			return;
+			}
+	
+		fprintf(fileOut, "particle uw2_object_%03d {\n", x);
+		fprintf(fileOut, "{\n");
+		fprintf(fileOut, "count\t1\n");
+		fprintf(fileOut, "material\ttextures/uw2/objects/objects_%03d\n", x);
+		fprintf(fileOut, "time\t0.050\n");
+		fprintf(fileOut, "cycles\t0.000\n");
+		fprintf(fileOut, "bunching\t0.000\n");
+		fprintf(fileOut, "distribution\trect 0.000 0.000 0.000\n");
+		fprintf(fileOut, "direction\tcone \"0.000\"\n");
+		fprintf(fileOut, "orientation\tview\n");
+		fprintf(fileOut, "speed\t\"0.000\"\n");
+		fprintf(fileOut, "size\t\"16.000\"\n");
+		fprintf(fileOut, "aspect\t\"-1.000\"\n");
+		fprintf(fileOut, "rotation\t\"-1.000\"\n");
+		fprintf(fileOut, "angle\t180.000\n");
+		fprintf(fileOut, "randomDistribution\t0\n");
+		fprintf(fileOut, "boundsExpansion\t0.000\n");
+		fprintf(fileOut, "fadeIn\t0.000\n");
+		fprintf(fileOut, "fadeOut\t0.000\n");
+		fprintf(fileOut, "fadeIndex\t0.000\n");
+		fprintf(fileOut, "color\t1.000 1.000 1.000 1.000\n");
+		fprintf(fileOut, "fadeColor\t0.000 0.000 0.000 0.000\n");
+		fprintf(fileOut, "offset\t0.000 0.000 0.000\n");
+		fprintf(fileOut, "gravity\t0.000\n");
+		fprintf(fileOut, "}\n");
+		fprintf(fileOut, "}\n");
+		fclose(fileOut);
+	}
+
+	for (int x = 0; x <= 463; x++)
+	{
+		FILE *fileOut;
+		char filePath[80] = "";
+		sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw2_object_%03d.mtr", x);
 		if (fopen_s(&fileOut, filePath, "w") != 0)
 			{
 			printf("Unable to create output file for material");
 			return;
 			}
 
-		fprintf(fileOut, "textures\\uw1\\objects\\objects_%03d\n",x);
+		fprintf(fileOut, "textures\\uw2\\objects\\objects_%03d\n",x);
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut,  "DECAL_MACRO\n");
 		fprintf(fileOut, "noShadows\n");
@@ -906,14 +907,15 @@ void BuildUWParticles()
 		fprintf(fileOut, "nonsolid\n");
 		fprintf(fileOut, "noimpact\n");
        	
-		fprintf(fileOut, "qer_editorimage textures/uw1/objects/objects_%03d.tga\n",x);
+		fprintf(fileOut, "qer_editorimage textures/uw2/objects/objects_%03d.tga\n",x);
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut, "blend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
 		fprintf(fileOut, "colored\n");
 		fprintf(fileOut, "clamp\n");
-		fprintf(fileOut," map textures/uw1/objects/objects_%03d.tga\n",x);
+		fprintf(fileOut," map textures/uw2/objects/objects_%03d.tga\n",x);
 		fprintf(fileOut, "}\n");
 		fprintf(fileOut, "}\n");
+		fclose(fileOut);
 	}
 
 }

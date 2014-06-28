@@ -49,8 +49,8 @@ int main()
 {
 //int game = SHOCK;
 //int game = UWDEMO;
-int game = UW1;
-//int game = UW2;
+//int game = UW1;
+int game = UW2;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
@@ -60,7 +60,7 @@ int mode = D3_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
 
-levelNo =6;
+levelNo =24;
 
 GAME = game;
 switch (game)
@@ -390,7 +390,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			{
 			RenderDarkModLevel(LevelInfo,objList,game);	
 			fclose (MAPFILE) ;
-			break;
+			//break;
 			}
 		case SCRIPT_BUILD_MODE:
 			{

@@ -26,9 +26,9 @@
 #define UW2_OUT_PATH "C:\\Games\\UW2\\data\\lev_out.ark"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\objects.gr"
-#define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
-#define AUXILARY_PAL_FILE "C:\\Games\\UW1\\DATA\\allpals.dat"
+#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\objects.gr"
+#define GRAPHICS_PAL_FILE "C:\\Games\\UW2\\DATA\\pals.dat"
+#define AUXILARY_PAL_FILE "C:\\Games\\UW2\\DATA\\allpals.dat"
 
 
 #define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\archive.dat"
@@ -45,8 +45,8 @@
 #define SCRIPT_GlOBAL_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptglobal.txt"
 #define SCRIPT_MAIN_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptmain.txt"
 #define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
-#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\uw1_6.script"
-#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\uw1_6.map"
+#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\UW2_24.script"
+#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\UW2_24.map"
 
 #define ENABLE_LIGHTING 0
 #define ENABLE_WATER 1

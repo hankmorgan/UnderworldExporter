@@ -1699,6 +1699,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 	float offX = (x*BrushX) + ((currDoor.x) * (BrushX / resolution));//from obj position code
 	float offY = (y*BrushY) + ((currDoor.y) * (BrushY / resolution));
 	float offZ = (currDoor.zpos) >>2;//The floor level of the actual door object
+	offZ=t.floorHeight ;
 	int heading = 0;
 	if (game != SHOCK)
 	{
