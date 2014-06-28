@@ -60,7 +60,7 @@ int mode = D3_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
 
-levelNo =0;
+levelNo =6;
 
 GAME = game;
 switch (game)
@@ -107,10 +107,11 @@ switch (game)
 			//BuildSndShaderFiles();
 			//BuildShockMtrFiles(3);
 			//BuildUWMtrFiles(game,2);
-			BuildUWXData(game, 8);
+			//BuildUWXData(game, 8);
 			//BuildGuiFiles();
 			//ExportModelFormat();
 			//BuildWORDSXData(game);
+			BuildUWParticles();
 			break;
 		case CONVERSATION_MODE:
 			ExtractConversations(UW1);
@@ -270,6 +271,7 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 						}
 					objectMasters[objNo].type = objType;
 					objectMasters[objNo].DeathWatch = 0;
+					//printf("uw1_object_%03d.prt\n",objNo);
 					i++;
 					}
 				fclose(f);

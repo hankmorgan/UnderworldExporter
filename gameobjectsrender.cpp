@@ -1312,15 +1312,17 @@ void RenderEntityKey(int game, float x, float y, float z, ObjectItem &currobj, O
 	{
 		//fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, keycount[currobj.owner]++);
 		fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, currobj.keyCount);
+		fprintf(MAPFILE, "\"inv_name\" \"%s_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.owner);
 	}
 	else
 	{
 		//fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, keycount[currobj.ObjectSubClassIndex]++);
 		fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, currobj.keyCount);
+		fprintf(MAPFILE, "\"inv_name\" \"%s\"\n", objectMasters[currobj.item_id].desc);
 	}
 
 	//they also need the following properties
-	fprintf(MAPFILE, "\"usable\" \"1\"\n\"frobable\" \"1\"\n\"inv_name\" \"%s\"\n\"inv_target\" \"player1\"\n\"inv_stackable\" \"1\"\n\"inv_category\" \"Keys\"\n", objectMasters[currobj.item_id].desc);
+	fprintf(MAPFILE, "\"usable\" \"1\"\n\"frobable\" \"1\"\n\n\"inv_target\" \"player1\"\n\"inv_stackable\" \"1\"\n\"inv_category\" \"Keys\"\n");
 	//position
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
@@ -1625,7 +1627,7 @@ void RenderEntityParticle(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].particle);
-	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z+15);
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z+12);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	fprintf(MAPFILE, "\n}");
 }

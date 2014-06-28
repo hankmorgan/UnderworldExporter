@@ -277,7 +277,7 @@ iGame =game;
 				{
 				case UWDEMO:
 				case UW1:
-					if (levelNo == 0)
+					if (levelNo <= 1)
 						{//Temp code for providing a player start on level one as well as a "head" light.
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
@@ -288,7 +288,14 @@ iGame =game;
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"light\"");
 						fprintf(MAPFILE, "\n\"name\" \"light_1\"", EntityCount);
-						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 410.0);
+						switch (levelNo)
+						{
+						case 0:
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 410.0);break;
+						case 1:
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 895.0, 4620.0, 370.0); break;
+						}
+						
 						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
 						fprintf(MAPFILE, "\n\"light_radius\" \"320 320 320\"");
 						fprintf(MAPFILE, "\n\"_color\" \"0.45 0.45 0.45\"");
@@ -300,7 +307,7 @@ iGame =game;
 						}
 					break;
 				case UW2:
-					if (levelNo == 0)
+					if (levelNo <= 1)
 					{//Temp code for providing a player start on level one as well as a "head" light.
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
@@ -311,7 +318,13 @@ iGame =game;
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"light\"");
 						fprintf(MAPFILE, "\n\"name\" \"light_1\"", EntityCount);
-						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 2465.0, 5794.5, 410.0);
+						switch (levelNo)
+							{
+							case 0:
+								fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 2465.0, 5794.5, 410.0);break;
+							case 1:
+								fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 902, 4622, 432.0); break;
+							}
 						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
 						fprintf(MAPFILE, "\n\"light_radius\" \"320 320 320\"");
 						fprintf(MAPFILE, "\n\"_color\" \"0.45 0.45 0.45\"");
