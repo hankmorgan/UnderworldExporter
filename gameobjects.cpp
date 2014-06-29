@@ -69,6 +69,7 @@ int isButton(ObjectItem currobj)
 {//Guess
 		switch(objectMasters[currobj.item_id].type )
 		{
+			case ACTIVATOR:
 			case  BUTTON :
 				{
 				return 1;

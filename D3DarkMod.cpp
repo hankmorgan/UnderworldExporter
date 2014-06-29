@@ -76,7 +76,6 @@ iGame =game;
 	fprintf (MAPFILE, "\"editor_drLastCameraAngle\" \"-28.5 90.9 0\"\n");
 	PrimitiveCount=0;
 	fprintf (MAPFILE, "\n");
-
 	for (y=0; y<=63;y++) 
 		{
 		for (x=0; x<=63;x++)
@@ -106,7 +105,6 @@ iGame =game;
 				}
 			}
 		}
-
 		RenderElevatorLeakProtection(game,LevelInfo);
 		if (game != SHOCK)
 			{			
@@ -277,12 +275,24 @@ iGame =game;
 				{
 				case UWDEMO:
 				case UW1:
-					if (levelNo <= 1)
+					if (levelNo <= 2)
 						{//Temp code for providing a player start on level one as well as a "head" light.
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
 						fprintf(MAPFILE, "\n\"name\" \"info_player_start\"");
-						fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 360.0);
+						
+						switch (levelNo)
+						{
+						case 0:
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 410.0); break;
+
+						case 2:
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 660.0, 255.0, 370.0); break;
+
+						default:
+								fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 360.0);
+						}
+
 						fprintf(MAPFILE, "\n}\n");
 
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
@@ -292,8 +302,10 @@ iGame =game;
 						{
 						case 0:
 							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 410.0);break;
-						case 1:
-							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 895.0, 4620.0, 370.0); break;
+						//case 1:
+						//	fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 895.0, 4620.0, 370.0); break;
+						case 2:
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 660.0, 255.0, 424.0); break;
 						}
 						
 						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
@@ -307,7 +319,7 @@ iGame =game;
 						}
 					break;
 				case UW2:
-					if (levelNo <= 1)
+					if (levelNo <= 0)
 					{//Temp code for providing a player start on level one as well as a "head" light.
 						fprintf(MAPFILE, "// entity %d\n", EntityCount++);
 						fprintf(MAPFILE, "{\n\"classname\" \"info_player_start\"");
@@ -322,8 +334,10 @@ iGame =game;
 							{
 							case 0:
 								fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 2465.0, 5794.5, 410.0);break;
-							case 1:
-								fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 902, 4622, 432.0); break;
+							//case 1:
+							//	fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 902, 4622, 432.0); break;
+							//case 2:
+							//	fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 660, 255, 432.0); break;
 							}
 						fprintf(MAPFILE, "\n\"light_center\" \"0 0 0\"");
 						fprintf(MAPFILE, "\n\"light_radius\" \"320 320 320\"");

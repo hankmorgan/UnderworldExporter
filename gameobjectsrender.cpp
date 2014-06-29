@@ -170,6 +170,9 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 				case CONTAINER:
 					RenderEntityContainer(game, x, y, z, currobj, objList, LevelInfo);
 					break;
+				case ACTIVATOR:
+					RenderEntityActivator(game, x, y, z, currobj, objList, LevelInfo);
+					break;
 				case BUTTON:
 					RenderEntityButton(game, x, y, z, currobj, objList, LevelInfo);
 					break;
@@ -294,6 +297,10 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 	if (objectMasters[currobj.item_id].hasParticle == 1)
 	{
 		RenderEntityParticle(game, x, y, z, currobj, objList, LevelInfo,1);
+	}
+	if (objectMasters[currobj.item_id].hasSound == 1)
+	{
+		RenderEntitySound(game, x, y, z, currobj, objList, LevelInfo, 1);
 	}
 	if ((currobj.objectConversion != 0) && (game == SHOCK))
 	{
@@ -1404,7 +1411,7 @@ void RenderEntityModel(int game, float x, float y, float z, ObjectItem &currobj,
 	//print position+name
 	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
-	if (objectMasters[currobj.item_id].type = HIDDENPLACEHOLDER)
+	if (objectMasters[currobj.item_id].type == HIDDENPLACEHOLDER)
 	{
 		fprintf(MAPFILE, "\"solid\" \"%d\"\n", 1);	//temporarily till I figure out controlling solidity via script
 	}
@@ -1689,3 +1696,48 @@ void RenderEntityParticle(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(MAPFILE, "\n}");
 }
 
+
+void RenderEntityActivator(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+{
+
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");
+	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].base);
+
+	//position
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+	fprintf(MAPFILE, "\"rotate\" \"0 0 1\"\n");
+	fprintf(MAPFILE, "\"interruptable\" \"0\"\n");
+	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
+
+	fprintf(MAPFILE, "\"target\" \"runscript_%s\"\n", UniqueObjectName(currobj));
+	EntityRotation(currobj.heading);
+
+	fprintf(MAPFILE, "}\n"); EntityCount++;
+	createScriptCall(currobj, x, y, z);	//To run whatever actions this switch performs.
+	return;
+}
+
+
+void RenderEntitySound(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int bind)
+{
+	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "speaker");
+	if (bind == 1)
+	{
+		fprintf(MAPFILE, "\"name\" \"%s_sound\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"bind\" \"%s\"\n", UniqueObjectName(currobj));
+	}
+	else
+	{
+		fprintf(MAPFILE, "\"name\" \"%s_sound\"\n", UniqueObjectName(currobj));
+	}
+	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z + 12);
+	fprintf(MAPFILE, "\"s_shader\" \"%s\"\n",objectMasters[currobj.item_id].sound);
+	fprintf(MAPFILE, "\"s_mindistance\" \"0\"\n");
+	fprintf(MAPFILE, "\"s_maxdistance\" \"10\"\n");
+	fprintf(MAPFILE, "\"s_looping\" \"1\"\n");
+	
+	fprintf(MAPFILE, "\n}");
+}

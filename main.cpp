@@ -47,9 +47,9 @@ extern int GAME;
 
 int main()
 {
-int game = SHOCK;
+//int game = SHOCK;
 //int game = UWDEMO;
-//int game = UW1;
+int game = UW1;
 //int game = UW2;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
@@ -60,7 +60,7 @@ int mode = D3_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
 
-levelNo =0;
+levelNo =2;
 
 GAME = game;
 switch (game)
@@ -256,7 +256,6 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 						&objDesc, &objPath, &hasPart, &objParticle, &hasSound, &objSound, &objBase, &isSolid, &isMoveable, &isInventory, &invIcon);
 					objectMasters[objNo].index=objNo;
 					objectMasters[objNo].isSet=1;
-					
 					objectMasters[objNo].objClass = objClass;
 					objectMasters[objNo].objSubClass = objSubClass;
 					objectMasters[objNo].objSubClassIndex = objSubClassIndex;	
