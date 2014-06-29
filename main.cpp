@@ -47,10 +47,10 @@ extern int GAME;
 
 int main()
 {
-//int game = SHOCK;
+int game = SHOCK;
 //int game = UWDEMO;
 //int game = UW1;
-int game = UW2;
+//int game = UW2;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
@@ -60,7 +60,7 @@ int mode = D3_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
 
-levelNo =24;
+levelNo =0;
 
 GAME = game;
 switch (game)
@@ -150,7 +150,15 @@ char objPath[80];
 char objCat[10];
 char objSound[80];
 char objParticle[80];
+char objBase[80];
+char invIcon[80];
 int objType;
+int hasPart;
+int hasSound;
+int isSolid;
+int isMoveable;
+int isInventory;
+
 
 int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
 
@@ -241,22 +249,24 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 			case UW2:
 			case SHOCK:			
 				{
-				while (fgets(line,173,f))
+				while (fgets(line,255,f))
 					{
-					sscanf(line, "%d %d %d %d %s %s %s %d %s %s",
-					&objNo, &objClass, &objSubClass, &objSubClassIndex,
-					&objDesc,&objPath,&objCat,&objType,&objParticle, &objSound );
+					sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s",
+						&objNo, &objClass, &objSubClass, &objSubClassIndex, &objCat, &objType,
+						&objDesc, &objPath, &hasPart, &objParticle, &hasSound, &objSound, &objBase, &isSolid, &isMoveable, &isInventory, &invIcon);
 					objectMasters[objNo].index=objNo;
 					objectMasters[objNo].isSet=1;
 					
 					objectMasters[objNo].objClass = objClass;
 					objectMasters[objNo].objSubClass = objSubClass;
 					objectMasters[objNo].objSubClassIndex = objSubClassIndex;	
+					
 									
 					strcpy_s(objectMasters[objNo].desc, objDesc);
 					strcpy_s(objectMasters[objNo].path , objPath);
 					strcpy_s(objectMasters[objNo].particle, objParticle);
 					strcpy_s(objectMasters[objNo].sound, objSound);
+					strcpy_s(objectMasters[objNo].base , objBase);
 					if (strcmp(objCat,"model") == 0)
 						{
 						objectMasters[objNo].isEntity = 0;
@@ -271,6 +281,13 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 						}
 					objectMasters[objNo].type = objType;
 					objectMasters[objNo].DeathWatch = 0;
+					objectMasters[objNo].hasParticle=hasPart;
+					objectMasters[objNo].hasSound=hasSound;
+					objectMasters[objNo].isSolid = isSolid;
+					objectMasters[objNo].isMoveable=isMoveable;
+					objectMasters[objNo].isInventory =isInventory;
+					strcpy_s(objectMasters[objNo].InvIcon,invIcon);
+					
 					//printf("uw1_object_%03d.prt\n",objNo);
 					i++;
 					}

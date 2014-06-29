@@ -329,6 +329,14 @@ short extraInfo;	//For stuff like door texture info.
 short renderType;
 short frame1;	//Frame no
 short DeathWatch;
+
+short hasParticle;
+short hasSound;
+char base[80];
+int isSolid;
+int isMoveable;
+int isInventory;
+char InvIcon[80];
 };
 
 

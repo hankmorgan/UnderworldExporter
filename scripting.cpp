@@ -635,7 +635,12 @@ for (int i = 0; i < 1600; i++)
 		}
 	if (objList[i].InUseFlag >0)
 		{
-	
+		if ((objectMasters[objList[i].item_id].isMoveable == 1) && (objectMasters[objList[i].item_id].isInventory == 1))
+			{//For hiding the particle attached to this objec"gt when it's picked up.
+			fprintf(fBODY, "\nvoid %s_frob()", UniqueObjectName(objList[i]));
+			fprintf(fBODY, "\n\t{\n\t$%s_particle.activate($player1);\n\t}\n", UniqueObjectName(objList[i]));
+			}
+
 		if (objectMasters[objList[i].item_id].type == A_CHANGE_TERRAIN_TRAP)
 			{
 			for (int x = 0; x <= objList[i].x; x++)
@@ -659,10 +664,6 @@ for (int i = 0; i < 1600; i++)
 				long nextObj = LevelInfo[x][y].indexObjectList;
 				while (nextObj !=0)
 					{
-					if (nextObj == 1000)
-					{
-						printf("");
-					}
 					if ((isTrigger(objList[nextObj]) || (isButton(objList[nextObj])) || (isTrigger(objList[objList[nextObj].link]))))
 						{
 						//printObject(objList[nextObj],1);	//Prints the first object the inital trigger.

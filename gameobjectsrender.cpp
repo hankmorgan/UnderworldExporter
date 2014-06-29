@@ -234,22 +234,66 @@ void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, Obje
 					RenderEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
 					break; 
 				case PARTICLE:
-					RenderEntityParticle(game,x,y,z,currobj,objList,LevelInfo);
+					RenderEntityParticle(game,x,y,z,currobj,objList,LevelInfo,0);
 					break;
 				default:
 				//just the basic name. with no properties.
 					fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
-					fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-					fprintf(MAPFILE, "\"name\" \"%s_%04d\"\n", objectMasters[currobj.item_id].desc, EntityCount);
+					
+					//fprintf(MAPFILE, "\"name\" \"%s_%04d\"\n", objectMasters[currobj.item_id].desc, EntityCount);
+					fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 					//position
-					fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+					
 					EntityRotation(currobj.heading);
-					AttachToJoint(currobj);		//for npc items
+					AttachToJoint(currobj);		//for models/darkmod/containers/bag1_small.lwonpc items
+					
+					if (objectMasters[currobj.item_id].isMoveable == 1)
+						{
+						if (objectMasters[currobj.item_id].isInventory==1)
+							{
+							fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:moveable_custom_item");
+							}
+						else
+							{
+							fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:grabable_custom_item");
+							}
+						fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z+12);
+						fprintf(MAPFILE, "\"bouncyness\" \"0.1\"\n");
+						fprintf(MAPFILE, "\"friction\" \"0.1\"\n");
+						fprintf(MAPFILE, "\"frobable\" \"1\"\n");
+						fprintf(MAPFILE, "\"mass\" \"0.6\"\n");
+						fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].base );
+						fprintf(MAPFILE, "\"notpushable\" \"0\"\n");
+						fprintf(MAPFILE, "\"snd_bounce\" \"tdm_impact_small_hard_object\"\n");
+						fprintf(MAPFILE, "\"spr_object_hardness\" \"hard\"\n");
+						fprintf(MAPFILE, "\"spr_object_size\" \"medium\"\n");
+
+						//fprintf(MAPFILE, "\"frob_action_script\" \"testfrob\"\n");
+						}
+					else
+					{
+						fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
+						fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
+					}
+
+					if (objectMasters[currobj.item_id].isInventory == 1)
+					{
+						fprintf(MAPFILE, "\"inv_icon\" \"%s\"\n", objectMasters[currobj.item_id].InvIcon);
+						fprintf(MAPFILE, "\"inv_name\" \"%s\"\n", objectMasters[currobj.item_id].desc);
+						fprintf(MAPFILE, "\"inv_map_start\" \"0\"\n");
+						fprintf(MAPFILE, "\"inv_droppable\" \"0\"\n");
+						fprintf(MAPFILE, "\"frob_action_script\" \"%s_frob\"\n", UniqueObjectName(currobj));
+					}
+
 					fprintf(MAPFILE, "}");
 					EntityCount++;
 					break;
 				}
 		}
+	}
+	if (objectMasters[currobj.item_id].hasParticle == 1)
+	{
+		RenderEntityParticle(game, x, y, z, currobj, objList, LevelInfo,1);
 	}
 	if ((currobj.objectConversion != 0) && (game == SHOCK))
 	{
@@ -289,7 +333,7 @@ void RenderEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem &curr
 	//case 24://Bullfrog
 	//	
 	default:
-		RenderEntityParticle(game,x,y,z,currobj,objList,LevelInfo);
+		RenderEntityParticle(game,x,y,z,currobj,objList,LevelInfo,0);
 	//	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 	//	fprintf(MAPFILE, "\"classname\" \"func_static\"\n");
 	//	fprintf(MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));
@@ -523,6 +567,7 @@ void RenderEntityBOOK(int game, float x, float y, float z, short message, Object
 		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 	}
 	fprintf(MAPFILE, "\"inv_name\" \"Readable_%d\"\n", ReadableIndex);	//Need a better name than this!
+	fprintf(MAPFILE, "\"inv_icon\" \"%s\"\n", objectMasters[currobj.item_id].InvIcon);
 	switch (game)
 	{
 	case UWDEMO:
@@ -1314,12 +1359,14 @@ void RenderEntityKey(int game, float x, float y, float z, ObjectItem &currobj, O
 		//fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, keycount[currobj.owner]++);
 		fprintf(MAPFILE, "\"name\" \"%s_%03d_%d\"\n", objectMasters[currobj.item_id].desc, currobj.owner, currobj.keyCount);
 		fprintf(MAPFILE, "\"inv_name\" \"%s_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.owner);
+		fprintf(MAPFILE, "\"inv_icon\" \"%s\"\n", objectMasters[currobj.item_id].InvIcon);
 	}
 	else
 	{
 		//fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, keycount[currobj.ObjectSubClassIndex]++);
 		fprintf(MAPFILE, "\"name\" \"%s_%d\"\n", objectMasters[currobj.item_id].desc, currobj.keyCount);
 		fprintf(MAPFILE, "\"inv_name\" \"%s\"\n", objectMasters[currobj.item_id].desc);
+		fprintf(MAPFILE, "\"inv_icon\" \"%s\"\n", objectMasters[currobj.item_id].InvIcon);
 	}
 
 	//they also need the following properties
@@ -1444,6 +1491,7 @@ void RenderEntityNPC(int game, float x, float y, float z, ObjectItem &currobj, O
 			tmpobj.joint = JointCount++;
 		}
 		RenderEntity(game, x, y, z, tmpobj, objList, LevelInfo); //NPC's inventory.
+
 	}
 
 	return;
@@ -1622,11 +1670,19 @@ void RenderEntityWords(int game, float x, float y, float z, ObjectItem &currobj,
 }
 
 
-void RenderEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+void RenderEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],int bind)
 {
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount++);
-	fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-	fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_emitter");
+	if (bind == 1)
+	{
+		fprintf(MAPFILE, "\"name\" \"%s_particle\"\n", UniqueObjectName(currobj));
+		fprintf(MAPFILE, "\"bind\" \"%s\"\n", UniqueObjectName(currobj));
+	}
+	else
+	{
+		fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
+	}
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].particle);
 	fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z+12);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
