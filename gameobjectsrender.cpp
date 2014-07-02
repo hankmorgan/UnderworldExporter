@@ -335,6 +335,7 @@ void RenderEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem &curr
 		EntityCount++;
 		break;
 	case 3:	//rising platform
+		RenderEntityElevator(game, LevelInfo, currobj);
 		//RenderEntityBullfrog(game, LevelInfo, currobj);
 		break;
 	//case 24://Bullfrog
