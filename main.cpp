@@ -9,6 +9,7 @@
 #include "gameobjects.h"
 #include "tilemap.h"
 #include "d3darkmod.h"
+#include "SourceEngine.h"
 #include "scripting.h"
 #include "materials.h"
 #include "main.h"
@@ -51,7 +52,7 @@ int main()
 //int game = UWDEMO;
 int game = UW1;
 //int game = UW2;
-int mode = D3_MODE;
+//int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
@@ -59,6 +60,7 @@ int mode = D3_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
+int mode= SOURCE_MODE;
 
 levelNo =0;
 
@@ -81,6 +83,7 @@ switch (game)
 		case D3_MODE:
 		case ASCII_MODE:
 		case SCRIPT_BUILD_MODE:
+		case SOURCE_MODE:
 			//for (levelNo = 0; levelNo < 80; levelNo++)
 			//{
 				printf("\n============================Level %d=========================\n", levelNo);
@@ -307,7 +310,7 @@ void exportMaps(int game,int mode,int LevelNo)
 	int roomIndex=1; 
 
 	char *filePath;
-	if (mode == D3_MODE)
+	if ((mode == D3_MODE) || (mode == SOURCE_MODE))
 		{
 		if (fopen_s(&MAPFILE,MAP_OUTPUT_FILE, "w")!=0)
 		{
@@ -407,6 +410,11 @@ void exportMaps(int game,int mode,int LevelNo)
 			RenderDarkModLevel(LevelInfo,objList,game);	
 			fclose (MAPFILE) ;
 			//break;
+			}
+		case SOURCE_MODE:	//Source engine
+			{
+			RenderSourceEnginelLevel(LevelInfo, objList, game);
+			fclose(MAPFILE);
 			}
 		case SCRIPT_BUILD_MODE:
 			{

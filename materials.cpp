@@ -848,21 +848,21 @@ void BuildUWXData(int game, int TargetBlock)
 void BuildUWParticles()
 {
 
-	for (int x =0; x<=463; x++)
+	for (int x =0; x<=1705; x++)
 	{
 		FILE *fileOut;
 		char filePath[80] = "";
-		sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\uw2_object_%03d.prt", x);
+		sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\shock_object_%04d.prt", x);
 		if (fopen_s(&fileOut, filePath, "w") != 0)
 			{
 			printf("Unable to create output file for material");
 			return;
 			}
 	
-		fprintf(fileOut, "particle uw2_object_%03d {\n", x);
+		fprintf(fileOut, "particle shock_object_%04d {\n", x);
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut, "count\t1\n");
-		fprintf(fileOut, "material\ttextures/uw2/objects/objects_%03d\n", x);
+		fprintf(fileOut, "material\ttextures/shock/objects/objects_%04d\n", x);
 		fprintf(fileOut, "time\t0.050\n");
 		fprintf(fileOut, "cycles\t0.000\n");
 		fprintf(fileOut, "bunching\t0.000\n");
@@ -888,18 +888,18 @@ void BuildUWParticles()
 		fclose(fileOut);
 	}
 
-	for (int x = 0; x <= 463; x++)
+	for (int x = 0; x <= 1705; x++)
 	{
 		FILE *fileOut;
 		char filePath[80] = "";
-		sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw2_object_%03d.mtr", x);
+		sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_object_%04d.mtr", x);
 		if (fopen_s(&fileOut, filePath, "w") != 0)
 			{
 			printf("Unable to create output file for material");
 			return;
 			}
 
-		fprintf(fileOut, "textures\\uw2\\objects\\objects_%03d\n",x);
+		fprintf(fileOut, "textures\\shock\\objects\\objects_%04d\n",x);
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut,  "DECAL_MACRO\n");
 		fprintf(fileOut, "noShadows\n");
@@ -907,12 +907,12 @@ void BuildUWParticles()
 		fprintf(fileOut, "nonsolid\n");
 		fprintf(fileOut, "noimpact\n");
        	
-		fprintf(fileOut, "qer_editorimage textures/uw2/objects/objects_%03d.tga\n",x);
+		fprintf(fileOut, "qer_editorimage textures/shock/objects/shock_object_1350_%04d.tga\n",x);
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut, "blend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
 		fprintf(fileOut, "colored\n");
 		fprintf(fileOut, "clamp\n");
-		fprintf(fileOut," map textures/uw2/objects/objects_%03d.tga\n",x);
+		fprintf(fileOut," map textures/shock/objects/shock_object_1350_%04d.tga\n",x);
 		fprintf(fileOut, "}\n");
 		fprintf(fileOut, "}\n");
 		fclose(fileOut);
