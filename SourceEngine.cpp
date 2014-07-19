@@ -91,9 +91,6 @@ fprintf(MAPFILE, "versioninfo\n");
 			fprintf(MAPFILE, "}\n");
 }
 
-
-
-
 void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 {
 	//Picks the tile to render based on tile type/flags.
@@ -111,19 +108,406 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 			return;
 		}
 	
-case 2:
-	{//diag se
-			  if (skipFloor != 1) { RenderSourceDiagSETile(x, y, t, Water, 0); }//floor
-			  if ((skipCeil != 1)) { RenderSourceDiagSETile(x, y, t, Water, 1); }
-			  return;
-	}
+	case 2:
+		{//diag se
+					if (skipFloor != 1) { RenderSourceDiagSETile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderSourceDiagSETile(x, y, t, Water, 1); }
+					return;
+		}
 
-case 5:
-{//diag nw
-		  if (skipFloor != 1) { RenderSourceDiagNWTile(x, y, t, Water, invert); }//floor
-		  if ((skipCeil != 1)) { RenderSourceDiagNWTile(x, y, t, Water, 1); }
-		  return;
-}
+	case 3:
+		{	//diag sw
+					if (skipFloor != 1) { RenderSourceDiagSWTile(x, y, t, Water, 0); }//floor
+					if ((skipCeil != 1)) { RenderSourceDiagSWTile(x, y, t, Water, 1); }
+					return;
+		}
+
+	case 4:
+		{	//diag ne
+			  if (skipFloor != 1) { RenderSourceDiagNETile(x, y, t, Water, invert); }//floor
+			  if ((skipCeil != 1)) { RenderSourceDiagNETile(x, y, t, Water, 1); }
+				  return;
+		}
+
+	case 5:
+		{//diag nw
+			//if (skipFloor != 1) { RenderSourceDiagNWTile(x, y, t, Water, invert); }//floor
+			//if ((skipCeil != 1)) { RenderSourceDiagNWTile(x, y, t, Water, 1); }
+			return;
+		}
+
+	case TILE_SLOPE_N:	//6
+		{//slope n
+			switch (t.shockSlopeFlag)
+				{
+				case SLOPE_BOTH_PARALLEL:
+					{
+						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderSourceSlopeNTile(x, y, t, Water, 1); }
+						break;
+					}
+				case SLOPE_BOTH_OPPOSITE:
+					{
+						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderSourceSlopeSTile(x, y, t, Water, 1); }
+						break;
+					}
+				case SLOPE_FLOOR_ONLY:
+					{
+						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0); }//floor
+						if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						break;
+					}
+				case SLOPE_CEILING_ONLY:
+				{
+					if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+					RenderSourceSlopeNTile(x, y, t, Water, 1);
+					break;
+				}
+				}
+			return;
+		}
+	case TILE_SLOPE_S: //slope s	7
+		{
+			switch (t.shockSlopeFlag)
+			{
+			case SLOPE_BOTH_PARALLEL:
+			{
+				if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0); }	//floor
+				RenderSourceSlopeSTile(x, y, t, Water, 1);
+				break;
+			}
+			case SLOPE_BOTH_OPPOSITE:
+			{
+				if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0); }	//floor
+				RenderSourceSlopeNTile(x, y, t, Water, 1);
+				break;
+			}
+			case SLOPE_FLOOR_ONLY:
+			{
+				if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0); }	//floor
+				if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+			break;
+			}
+			case SLOPE_CEILING_ONLY:
+			{
+				if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+				if ((skipCeil != 1)) { RenderSourceSlopeSTile(x, y, t, Water, 1); }
+				break;
+			}
+		}
+		return;
+	}
+	case TILE_SLOPE_E:		//slope e 8	
+	{
+		switch (t.shockSlopeFlag)
+		{
+		case SLOPE_BOTH_PARALLEL:
+		{
+			if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0); }//floor
+			RenderSourceSlopeETile(x, y, t, Water, 1);
+			break;
+		}
+		case SLOPE_BOTH_OPPOSITE:
+		{
+			if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0); }//floor
+			RenderSourceSlopeWTile(x, y, t, Water, 1);
+			break;
+		}
+		case SLOPE_FLOOR_ONLY:
+		{
+			if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+			break;
+		}
+		case SLOPE_CEILING_ONLY:
+		{
+			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeETile(x, y, t, Water, 1); }
+			break;
+		}
+		}
+		return;
+	}
+	case TILE_SLOPE_W: 	//9
+	{ //slope w
+		switch (t.shockSlopeFlag)
+			{
+			case SLOPE_BOTH_PARALLEL:
+			{
+			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeWTile(x, y, t, Water, 1); }
+			break;
+			}
+			case SLOPE_BOTH_OPPOSITE:
+			{
+			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeETile(x, y, t, Water, 1); }
+			break;
+			}
+			case SLOPE_FLOOR_ONLY:
+			{
+			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+			break;
+			}
+			case SLOPE_CEILING_ONLY:
+			{
+			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeWTile(x, y, t, Water, 1); }
+			break;
+			}
+		}
+		return;
+	}
+	case TILE_VALLEY_NW:
+	{	//valleyNw(a)
+						   switch (t.shockSlopeFlag)
+						   {
+						   case SLOPE_BOTH_PARALLEL:
+						   {
+													   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0); }//floor
+													   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+													   break;
+						   }
+						   case SLOPE_BOTH_OPPOSITE:
+						   {
+													   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0); }//floor
+													   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+													   break;
+						   }
+						   case SLOPE_FLOOR_ONLY:
+						   {
+													if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0); }//floor
+													if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+													break;
+						   }
+						   case SLOPE_CEILING_ONLY:
+						   {
+													  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+													  if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+													  break;
+						   }
+						   }
+						   return;
+	}
+	case TILE_VALLEY_NE:
+	{	//valleyne(b)
+						   switch (t.shockSlopeFlag)
+						   {
+						   case SLOPE_BOTH_PARALLEL:
+						   {
+							if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0); }//floor
+							if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+							break;
+						   }
+						   case SLOPE_BOTH_OPPOSITE:
+						   {
+							if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0); }//floor
+							if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+							break;
+						   }
+						   case SLOPE_FLOOR_ONLY:
+						   {
+							if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0); }//floor
+							if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+							break;
+						   }
+						   case SLOPE_CEILING_ONLY:
+						   {
+								if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }//floor
+								if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+								break;
+						   }
+						   }
+						   return;
+	}
+	case TILE_VALLEY_SE:
+	{	//valleyse(c)
+						   switch (t.shockSlopeFlag)
+						   {
+						   case SLOPE_BOTH_PARALLEL:
+						   {
+													   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0); }//floor
+													   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+													   break;
+						   }
+						   case SLOPE_BOTH_OPPOSITE:
+						   {
+													   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0); }//floor
+													   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+													   break;
+						   }
+						   case SLOPE_FLOOR_ONLY:
+						   {
+													if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0); }//floor
+													if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+													break;
+						   }
+						   case SLOPE_CEILING_ONLY:
+						   {
+													  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+													  if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+													  break;
+						   }
+						   }
+						   return;
+	}
+	case TILE_VALLEY_SW:
+	{	//valleysw(d)
+						   switch (t.shockSlopeFlag)
+						   {
+						   case SLOPE_BOTH_PARALLEL:
+						   {
+													   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0); }//floor
+													   if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+													   break;
+						   }
+						   case SLOPE_BOTH_OPPOSITE:
+						   {
+													   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0); }//floor
+													   if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+													   break;
+						   }
+						   case SLOPE_FLOOR_ONLY:
+						   {
+													if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0); }//floor
+													if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+													break;
+						   }
+						   case SLOPE_CEILING_ONLY:
+						   {
+													  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+													  if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+													  break;
+						   }
+						   }
+						   return;
+	}
+	case TILE_RIDGE_SE:
+	{	//ridge se(f)
+						  switch (t.shockSlopeFlag)
+						  {
+						  case SLOPE_BOTH_PARALLEL:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeSETile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_BOTH_OPPOSITE:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeNWTile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_FLOOR_ONLY:
+						  {
+												   if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0); }//floor
+												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+												   break;
+						  }
+						  case SLOPE_CEILING_ONLY:
+						  {
+													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }//floor
+													 if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+													 break;
+						  }
+						  }
+						  return;
+	}
+	case TILE_RIDGE_SW:
+	{	//ridgesw(g)
+						  switch (t.shockSlopeFlag)
+						  {
+						  case SLOPE_BOTH_PARALLEL:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeSWTile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_BOTH_OPPOSITE:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeNETile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_FLOOR_ONLY:
+						  {
+												   if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0); }//floor
+												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+												   break;
+						  }
+						  case SLOPE_CEILING_ONLY:
+						  {
+													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+													 if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+													 break;
+						  }
+						  }
+						  return;
+	}
+	case TILE_RIDGE_NW:
+	{	//ridgenw(h)
+						  switch (t.shockSlopeFlag)
+						  {
+						  case SLOPE_BOTH_PARALLEL:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeNWTile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_BOTH_OPPOSITE:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeSETile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_FLOOR_ONLY:
+						  {
+												   if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0); }//floor
+												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+												   break;
+						  }
+						  case SLOPE_CEILING_ONLY:
+						  {
+													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+													 if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+													 break;
+						  }
+						  }
+						  return;
+	}
+	case TILE_RIDGE_NE:
+	{	//ridgene(i)
+						  switch (t.shockSlopeFlag)
+						  {
+						  case SLOPE_BOTH_PARALLEL:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeNETile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_BOTH_OPPOSITE:
+						  {
+													  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0); }//floor
+													  if ((skipCeil != 1)) { RenderSourceRidgeSWTile(x, y, t, Water, 1); }
+													  break;
+						  }
+						  case SLOPE_FLOOR_ONLY:
+						  {
+												   if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0); }//floor
+												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+												   break;
+						  }
+						  case SLOPE_CEILING_ONLY:
+						  {
+													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
+													 if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+													 break;
+						  }
+						  }
+						  return;
+	}
 	}
 	////////case 2:
 	////////{//diag se
@@ -521,9 +905,7 @@ case 5:
 	////////					  }
 	////////					  return;
 	////////}
-	}
-
-
+}
 
 void RenderSourceSolidTile(int x, int y, tile &t, short Water)
 {
@@ -675,7 +1057,7 @@ void RenderSourceOpenTile(int x, int y, tile &t, short Water, short invert)
 			else
 			{
 				//Ceiling version of the tile
-				RenderSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT - t.ceilingHeight + 1);
+				RenderSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1);
 			}
 		}
 	}
@@ -709,7 +1091,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TLeftZ = Top*BrushSizeZ;
 	TRightX = t.tileX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
-	TRightZ = (CEILING_HEIGHT + 1)*BrushSizeZ;
+	TRightZ = Top*BrushSizeZ;
 	Plane(2, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
 
 	//top Face
@@ -747,19 +1129,6 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
 	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
-
-	//South face
-	BLeftX = t.tileX*BrushSizeX;
-	BLeftY = t.tileY*BrushSizeY;
-	BLeftZ = Bottom*BrushSizeZ;
-	TLeftX = t.tileX*BrushSizeX;
-	TLeftY = t.tileY*BrushSizeY;
-	TLeftZ = Top*BrushSizeZ;
-	TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
-	TRightY = t.tileY*BrushSizeY;
-	TRightZ = Top*BrushSizeZ;
-	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
-
 
 	//bottom face
 	BLeftX = t.tileX*BrushSizeX;
@@ -836,6 +1205,136 @@ void RenderSourceDiagNWTile(int x, int y, tile &t, short Water, short invert)
 	return;
 }
 
+void RenderSourceDiagSWTile(int x, int y, tile &t, short Water, short invert)
+{
+	if (t.Render == 1)
+	{
+		if (invert == 0)
+		{
+			if (Water != 1)
+			{
+				//Its wall
+				RenderSourceDiagSWPortion(- 2, CEILING_HEIGHT + 1, t);
+			}
+			if (t.isWater == Water)
+			{
+				//it's floor
+				RenderSourceDiagNEPortion(-2, t.floorHeight, t);
+			}
+		}
+		else
+		{
+			//its' ceiling.
+			RenderSourceDiagNEPortion(CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t);
+		}
+	}
+	return;
+}
+
+void RenderSourceDiagNETile(int x, int y, tile &t, short Water, short invert)
+{
+
+	if (t.Render == 1){
+		if (invert == 0)
+		{
+
+			if (Water != 1)
+			{
+				RenderSourceDiagNEPortion(-2, CEILING_HEIGHT + 1, t);
+			}
+			if (t.isWater == Water)
+			{
+				//it's floor
+				RenderSourceDiagSWPortion(-2, t.floorHeight, t);
+			}
+		}
+		else
+		{//it's ceiling
+			RenderSourceDiagSWPortion(CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t);
+		}
+	}
+	return;
+}
+
+void RenderSourceSlopeNTile(int x, int y, tile &t, short Water, short invert)
+{
+	if (t.Render == 1){
+		if (invert == 0)
+		{
+			if (t.isWater == Water)
+			{
+			//A floor
+				RenderSlopedSourceCuboid(x,y,t,Water,-2,t.floorHeight,TILE_SLOPE_N,t.shockSteep,1);
+			}
+		}
+		else
+		{
+		//It's invert
+			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_N, t.shockSteep, 0);
+		}
+	}
+	return;
+}
+
+void RenderSourceSlopeSTile(int x, int y, tile &t, short Water, short invert)
+{
+	if (t.Render == 1){
+		if (invert == 0)
+		{
+			if (t.isWater == Water)
+			{
+				//A floor
+				RenderSlopedSourceCuboid(x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1);
+			}
+		}
+		else
+		{
+			//It's invert
+			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_S, t.shockSteep, 0);
+		}
+	}
+	return;
+}
+
+void RenderSourceSlopeWTile(int x, int y, tile &t, short Water, short invert)
+{
+	if (t.Render == 1){
+		if (invert == 0)
+		{
+			if (t.isWater == Water)
+			{
+				//A floor
+				RenderSlopedSourceCuboid(x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1);
+			}
+		}
+		else
+		{
+			//It's invert
+			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_W, t.shockSteep, 0);
+		}
+	}
+	return;
+}
+
+void RenderSourceSlopeETile(int x, int y, tile &t, short Water, short invert)
+{
+	if (t.Render == 1){
+		if (invert == 0)
+		{
+			if (t.isWater == Water)
+			{
+				//A floor
+				RenderSlopedSourceCuboid(x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1);
+			}
+		}
+		else
+		{
+			//It's invert
+			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_E, t.shockSteep, 0);
+		}
+	}
+	return;
+}
 
 void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 {
@@ -901,6 +1400,77 @@ void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 	Plane(5, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
 
 	fprintf(MAPFILE, "\t}\n");
+}
+
+void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
+{
+	int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
+	fprintf(MAPFILE, "\tsolid\n");
+	fprintf(MAPFILE, "\t{\n");
+	fprintf(MAPFILE, "\t\t\"id\" \"%d\"\n", PrimitiveCount++);
+	//Angled Face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = (t.tileY+1)*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = (t.tileY + 1)*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = (t.tileX+1)*BrushSizeX;
+	TRightY = (t.tileY)*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	
+	//Eastern face
+	BLeftX = (t.tileX + 1)*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = (t.tileX + 1)*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = (t.tileX + 1)*BrushSizeX;
+	TRightY = (t.tileY + 1)*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(2, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//Northern face
+	BLeftX = (t.tileX + 1)*BrushSizeX;
+	BLeftY = (t.tileY + 1)*BrushSizeY;
+	BLeftZ = Bottom * BrushSizeZ;
+	TLeftX = (t.tileX + 1)*BrushSizeX;
+	TLeftY = (t.tileY + 1)*BrushSizeY;
+	TLeftZ = (Top)* BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX;;
+	TRightY = (t.tileY + 1)*BrushSizeY;
+	TRightZ = (Top)* BrushSizeZ;
+	Plane(3, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//Top Face
+	BLeftX = (t.tileX)*BrushSizeX;
+	BLeftY = (t.tileY + 1)*BrushSizeY;
+	BLeftZ = Top*BrushSizeZ;
+	TLeftX = (t.tileX + 1)*BrushSizeX;
+	TLeftY = (t.tileY + 1)*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = (t.tileX + 1)*BrushSizeX;
+	TRightY = (t.tileY)*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//Bottom Face
+	BLeftX = (t.tileX+1)*BrushSizeX;
+	BLeftY = (t.tileY+1)*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = (t.tileX)*BrushSizeX;;
+	TLeftY = (t.tileY+1)*BrushSizeY;
+	TLeftZ = Bottom*BrushSizeZ;
+	TRightX = (t.tileX + 1)*BrushSizeX;
+	TRightY = (t.tileY)*BrushSizeY;;
+	TRightZ = Bottom*BrushSizeZ;
+	Plane(5, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	fprintf(MAPFILE, "\t}\n");
+
+
 }
 
 void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
@@ -970,4 +1540,353 @@ void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
 	Plane(5, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
 
 	fprintf(MAPFILE, "\t}\n");
+}
+
+void RenderSourceDiagNEPortion(int Bottom, int Top, tile t)
+{
+	int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
+	fprintf(MAPFILE, "\tsolid\n");
+	fprintf(MAPFILE, "\t{\n");
+	fprintf(MAPFILE, "\t\t\"id\" \"%d\"\n", PrimitiveCount++);
+	//Angled Face
+	BLeftX = (t.tileX+1)*BrushSizeX;
+	BLeftY = (t.tileY)*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = (t.tileX+1)*BrushSizeX;
+	TLeftY = (t.tileY )*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = (t.tileX)*BrushSizeX;
+	TRightY = (t.tileY+1)*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+//western face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = (t.tileY + 1)*BrushSizeY;
+	BLeftZ = Bottom * BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = (t.tileY + 1)*BrushSizeY;
+	TLeftZ = (Top)* BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX;;
+	TRightY = t.tileY*BrushSizeY;
+	TRightZ = (Top)* BrushSizeZ;
+	Plane(2, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+//Southern face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = (t.tileX + 1)*BrushSizeX;
+	TRightY = t.tileY*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(3, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+//Top Face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY;
+	BLeftZ = Top*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = (t.tileY+1)*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = (t.tileX+1)*BrushSizeX;;
+	TRightY = t.tileY*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(4, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+//Bottom Face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = (t.tileY+1)*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = (t.tileY)*BrushSizeY;
+	TLeftZ = Bottom*BrushSizeZ;
+	TRightX = (t.tileX+1)*BrushSizeX;
+	TRightY = (t.tileY + 1)*BrushSizeY;
+	TRightZ = Bottom*BrushSizeZ;
+	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	fprintf(MAPFILE, "\t}\n");
+}
+
+void RenderSlopedSourceCuboid(int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor)
+{
+	fprintf(MAPFILE, "\tsolid\n");
+	fprintf(MAPFILE, "\t{\n");
+	fprintf(MAPFILE, "\t\t\"id\" \"%d\"\n", PrimitiveCount++);
+
+	//Plane goes here Points are clockwise as you face the plane
+	//East Face
+	int BLeftX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	int BLeftY = t.tileY*BrushSizeY;
+	int BLeftZ = Bottom*BrushSizeZ;
+	int TLeftX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	int TLeftY = t.tileY*BrushSizeY;
+	int TLeftZ = Top*BrushSizeZ;
+	int TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	int TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	int TRightZ = Top*BrushSizeZ;
+	Plane(1, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//North Face
+	BLeftX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX;
+	TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(2, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//top Face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY;
+	BLeftZ = Top*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX + t.DimX + BrushSizeX;
+	TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	if (Floor == 1)
+		{
+		switch (SlopeDir)
+			{
+			case TILE_SLOPE_N:
+				BLeftZ = Top*BrushSizeZ;
+				TLeftZ = (Top + Steepness)*BrushSizeZ;
+				TRightZ = (Top + Steepness)*BrushSizeZ;
+				break;
+			case TILE_SLOPE_S:
+				BLeftZ = (Top + Steepness)*BrushSizeZ;
+				TLeftZ = Top*BrushSizeZ;
+				TRightZ = Top*BrushSizeZ;
+				break;
+			case TILE_SLOPE_E:
+				BLeftZ = Top*BrushSizeZ;
+				TLeftZ = Top*BrushSizeZ;
+				TRightZ = (Top + Steepness)*BrushSizeZ;
+				break;
+			case TILE_SLOPE_W:
+				BLeftZ = (Top + Steepness)*BrushSizeZ;
+				TLeftZ = (Top + Steepness)*BrushSizeZ;
+				TRightZ = Top*BrushSizeZ;
+				break;
+			}
+		}
+	Plane(3, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//west Face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX;
+	TRightY = t.tileY*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(4, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+	//South face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;//?
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY;
+	TLeftZ = Top*BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	TRightY = t.tileY*BrushSizeY;
+	TRightZ = Top*BrushSizeZ;
+	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	
+	//bottom face
+	BLeftX = t.tileX*BrushSizeX;
+	BLeftY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
+	BLeftZ = Bottom*BrushSizeZ;
+	TLeftX = t.tileX*BrushSizeX;
+	TLeftY = t.tileY*BrushSizeY;
+	TLeftZ = Bottom*BrushSizeZ;
+	TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
+	TRightY = t.tileY*BrushSizeY;
+	TRightZ = Bottom*BrushSizeZ;
+
+if (Floor == 0)
+	{
+		switch (SlopeDir)
+		{
+		case TILE_SLOPE_N:
+			BLeftZ = Bottom*BrushSizeZ;
+			TLeftZ = (Bottom - Steepness)*BrushSizeZ;
+			TRightZ = (Bottom - Steepness)*BrushSizeZ;
+			break;
+		case TILE_SLOPE_S:
+			BLeftZ = (Bottom - Steepness)*BrushSizeZ;
+			TLeftZ = Bottom*BrushSizeZ;
+			TRightZ = Bottom*BrushSizeZ;
+			break;
+		case TILE_SLOPE_E:
+			BLeftZ = (Bottom - Steepness)*BrushSizeZ;
+			TLeftZ = (Bottom - Steepness)*BrushSizeZ;
+			TRightZ = Bottom*BrushSizeZ;
+			break;
+		case TILE_SLOPE_W:
+			BLeftZ = Bottom*BrushSizeZ;
+			TLeftZ = Bottom*BrushSizeZ;
+			TRightZ = (Bottom - Steepness)*BrushSizeZ;
+			break;
+		}
+	}
+	Plane(6, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+
+
+	//fprintf(MAPFILE, "\t\t}\n");
+	fprintf(MAPFILE, "\t}\n");
+
+}
+
+void RenderSourceValleyNWTile(int x, int y, tile &t, short Water, short invert)
+{
+	int originalTile = t.tileType;
+	t.tileType = TILE_SLOPE_N;
+	RenderSourceSlopeNTile(x, y, t, Water, invert);
+	t.tileType = TILE_SLOPE_W;
+	RenderSourceSlopeWTile(x, y, t, Water, invert);
+	t.tileType = originalTile;
+	return;
+}
+
+void RenderSourceValleyNETile(int x, int y, tile &t, short Water, short invert)
+{
+	int originalTile = t.tileType;
+	t.tileType = TILE_SLOPE_E;
+	RenderSourceSlopeETile(x, y, t, Water, invert);
+	t.tileType = TILE_SLOPE_N;
+	RenderSourceSlopeNTile(x, y, t, Water, invert);
+	t.tileType = originalTile;
+	return;
+}
+
+void RenderSourceValleySWTile(int x, int y, tile &t, short Water, short invert)
+{
+	int originalTile = t.tileType;
+	t.tileType = TILE_SLOPE_W;
+	RenderSourceSlopeWTile(x, y, t, Water, invert);
+	t.tileType = TILE_SLOPE_S;
+	RenderSourceSlopeSTile(x, y, t, Water, invert);
+	t.tileType = originalTile;
+	return;
+}
+
+void RenderSourceValleySETile(int x, int y, tile &t, short Water, short invert)
+{
+	int originalTile = t.tileType;
+	t.tileType = TILE_SLOPE_E;
+	RenderSourceSlopeETile(x, y, t, Water, invert);
+	t.tileType = TILE_SLOPE_S;
+	RenderSourceSlopeSTile(x, y, t, Water, invert);
+	t.tileType = originalTile;
+	return;
+}
+
+void RenderSourceRidgeNWTile(int x, int y, tile &t, short Water, short invert)
+{
+
+	if (t.Render == 1)
+		{
+		if (invert == 0)
+
+			{//consists of a slope n and a slope w
+				if (t.isWater == Water)
+				{
+					RenderSourceSlopeNTile(x,y,t,Water,invert);
+					RenderSourceSlopeWTile(x, y, t, Water, invert);
+				}
+			}
+		else
+			{
+			//made of upper slope e and upper slope s
+
+			RenderSourceSlopeETile(x, y, t, Water, invert);
+			RenderSourceSlopeSTile(x, y, t, Water, invert);
+			}
+
+	}
+	return;
+}
+
+void RenderSourceRidgeNETile(int x, int y, tile &t, short Water, short invert)
+{
+	//consists of a slope n and a slope e
+
+	if (t.Render == 1){
+		if (invert == 0){
+			if (t.isWater == Water)
+			{
+				RenderSourceSlopeNTile(x, y, t, Water, invert);
+				RenderSourceSlopeETile(x, y, t, Water, invert);
+			}
+		}
+		else
+		{//invert is south and west slopes
+			RenderSourceSlopeSTile(x, y, t, Water, invert);
+			RenderSourceSlopeWTile(x, y, t, Water, invert);
+		}
+	}
+
+	return;
+}
+
+void RenderSourceRidgeSWTile(int x, int y, tile &t, short Water, short invert)
+{
+	//consists of a slope s and a slope w
+	if (t.Render == 1)
+	if (invert == 0)
+	{
+		{
+			if (t.isWater == Water)
+			{
+				RenderSourceSlopeSTile(x, y, t, Water, invert);
+				RenderSourceSlopeWTile(x, y, t, Water, invert);
+			}
+		}
+	}
+	else
+	{	//invert is n and w slopes
+		//render a ceiling version of this tile
+		RenderSourceSlopeNTile(x, y, t, Water, invert);
+		RenderSourceSlopeWTile(x, y, t, Water, invert);
+
+	}
+	return;
+}
+
+void RenderSourceRidgeSETile(int x, int y, tile &t, short Water, short invert)
+{
+	//consists of a slope s and a slope e
+	//done
+
+	if (t.Render == 1)
+	{
+		if (invert == 0)
+		{
+			if (t.isWater == Water)
+			{
+				RenderSourceSlopeSTile(x, y, t, Water, invert);
+				RenderSourceSlopeETile(x, y, t, Water, invert);
+			}
+		}
+		else
+		{//invert is n w
+			//render a ceiling version of this tile
+			//top and bottom faces move up
+			RenderSourceSlopeNTile(x, y, t, Water, invert);
+			RenderSourceSlopeWTile(x, y, t, Water, invert);
+		}
+	}
+	return;
 }
