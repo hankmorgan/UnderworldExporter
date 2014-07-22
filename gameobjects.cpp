@@ -723,8 +723,9 @@ int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int i
 	long blockAddress =getShockBlockAddress(BlockNo,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
 	if (blockAddress == -1) {return -1;}
 	sub_ark=new unsigned char[chunkUnpackedLength];
+	printf("\nLoading Chunk at %d\n",blockAddress);
 	LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
-
+	
 	int k= 0;
 int add_ptr=0;
 //if (ClassType == CRITTERS)
@@ -901,7 +902,8 @@ while (k<=chunkUnpackedLength)
 					printf(",%d",objList[objIndex].conditions[2]);
 					printf(",%d\n",objList[objIndex].conditions[3]);
 					printf("\tTrigger once: %d\n",objList[objIndex].TriggerOnce);
-		
+					objList[objIndex].address = blockAddress+add_ptr;
+					printf("\tObject is at address %d\n", objList[objIndex].address);
 				getShockTriggerAction(LevelInfo,sub_ark,add_ptr,xRef,objList,objIndex);
 
 				return 1;
@@ -1126,6 +1128,7 @@ switch (TriggerType)
 
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] 	= getValAtAddress(sub_ark,add_ptr+12,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] 	= getValAtAddress(sub_ark,add_ptr+14,16);
+		objList[objIndex].shockProperties[TRIG_PROPERTY_LIGHT_OP] = getValAtAddress(sub_ark, add_ptr + 16, 16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 22, 8);//22,24,23,25
 		objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 23, 8);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 24, 8);
@@ -1133,12 +1136,13 @@ switch (TriggerType)
 		if (PrintDebug==1)
 			{
 			printf("\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
+			printf("\t\t(%d)Lighting Operation: %d\n", objList[objIndex].address+16, objList[objIndex].shockProperties[TRIG_PROPERTY_LIGHT_OP]);
 			printf("\t\tControl point 1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
 			printf("\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
-			printf("\t\t1st Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
-			printf("\t\t1st Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
-			printf("\t\t2nd Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
-			printf("\t\t2nd Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
+			printf("\t\t(%d)Not used? Upper Shade adjustment = %d\n", objList[objIndex].address +22, objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
+			printf("\t\t(%d)Not used? Lower Shade adjustment = %d\n", objList[objIndex].address +23 ,objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
+			printf("\t\t(%d)Upper Shade adjustment = %d\n", objList[objIndex].address +24 ,objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
+			printf("\t\t(%d)Lower Shade adjustment = %d\n", objList[objIndex].address +25 ,objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));

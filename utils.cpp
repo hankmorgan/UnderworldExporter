@@ -295,6 +295,7 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 	
 	if (chunkType ==1)	
 		{//Compressed
+		//printf("\nCompressed chunk");
 			unsigned char *temp_ark = new unsigned char[chunkPackedLength];	
 			for (long k=0; k< chunkPackedLength; k++)
 				{
@@ -306,6 +307,7 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 		}
 	else
 		{//Uncompressed. 
+		//printf("\nUncompressed chunk");
 		//OutputChunk =  new unsigned char[chunkUnpackedLength];
 		for (long k=0; k< chunkUnpackedLength; k++)
 			{

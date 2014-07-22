@@ -131,8 +131,8 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 
 	case 5:
 		{//diag nw
-			//if (skipFloor != 1) { RenderSourceDiagNWTile(x, y, t, Water, invert); }//floor
-			//if ((skipCeil != 1)) { RenderSourceDiagNWTile(x, y, t, Water, 1); }
+			if (skipFloor != 1) { RenderSourceDiagNWTile(x, y, t, Water, invert); }//floor
+			if ((skipCeil != 1)) { RenderSourceDiagNWTile(x, y, t, Water, 1); }
 			return;
 		}
 

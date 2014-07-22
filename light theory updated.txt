@@ -1,0 +1,13 @@
+Values at offset +24 and +25 of the subclass define the possible values of the shade adjustments. N
+
+Lighting Operations are stored in offset +16      
+(badly eyeballed)
+
+00= On and off.
+01= Light pulses on and off
+02= ditto
+04= ditto
+
+
+If appears the +24 and +25 offsets control the upper and lower shade adjustments in nibbles. There may be a bit flag here though
+as the behaviour is not always as expected for the values entered.
