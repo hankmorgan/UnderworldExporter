@@ -9,4 +9,4 @@ Uw2
 40-47 Academy
 48-51 Tomb
 56-58 Pits
-64-72 Void
+64-72 Void 65 is stickman level

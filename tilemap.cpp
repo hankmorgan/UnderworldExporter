@@ -64,10 +64,37 @@ int getWallTexUw2(unsigned char *buffer, long textureOffset, long tileData)
 
 void CleanUp(tile LevelInfo[64][64], int game)
 {
-
-//Reduces tile complexity. Hides hidden solids and merges matching tiles along axis.
-
 	int x; int y;
+//Reduces tile complexity. Hides hidden solids and merges matching tiles along axis.
+	if (game != SHOCK)
+	{
+	
+	for (x = 1; x<63; x++){
+		for (y = 1; y<63; y++){
+			if (LevelInfo[x][y].tileType ==TILE_OPEN)
+				{
+				if (LevelInfo[x + 1][y].floorHeight >= LevelInfo[x][y].floorHeight)
+					{
+					LevelInfo[x][y].East=CAULK;
+					}
+				if (LevelInfo[x-1][y].floorHeight >= LevelInfo[x][y].floorHeight)
+					{
+						LevelInfo[x][y].West = CAULK;
+					}
+				if (LevelInfo[x][y+1].floorHeight >= LevelInfo[x][y].floorHeight)
+					{
+						LevelInfo[x][y].North = CAULK;
+					}
+				if (LevelInfo[x][y-1].floorHeight >= LevelInfo[x][y].floorHeight)
+					{
+						LevelInfo[x][y].South = CAULK;
+					}
+				}
+			}
+		}
+	}
+
+
 	for (x=0;x<64;x++){
 		for (y=0;y<64;y++){
 	//lets test this tile for visibility
@@ -139,7 +166,7 @@ void CleanUp(tile LevelInfo[64][64], int game)
 			}
 		}
 	}
-	return;
+	//return;
 //if (game == SHOCK) {return;}
 	int j=1 ;
 	//Now lets combine the solids along particular axis
@@ -170,29 +197,29 @@ void CleanUp(tile LevelInfo[64][64], int game)
 		}
 	}
 	j=1;
-////Now combine parallel solids
-//	for (x=0;x<64;x++){
-//		for (y=0;y<63;y++){
-//			if  ((LevelInfo[x][y].Grouped ==1) && (LevelInfo[x][y].Render  ==1))  //is a start of a group
-//			{
-//			//test it's next door neighbour
-//				if  ((LevelInfo[x][y+1].Grouped ==1) && (LevelInfo[x][y+1].Render  ==1))	//Neighbour is also a group,
-//				{
-//				if (DoTilesMatch(LevelInfo[x][y],LevelInfo[x+LevelInfo[x][y+1].DimX][y+1]))//test the first tile against the opposite corner of it's neighbour
-//				{
-//					//they match. -> merge em.
-//					LevelInfo[x][y].DimX++;
-//					for ( int k =1; k <=LevelInfo[x][y+1].DimX;k++)
-//					{
-//					LevelInfo[k][y+1].Render =0;
-//					LevelInfo[k][y+1].Grouped =1;
-//					
-//					}
-//				}
-//				}
-//			}
-//		}
-//	}
+//////Now combine parallel solids
+////	for (x=0;x<64;x++){
+////		for (y=0;y<63;y++){
+////			if  ((LevelInfo[x][y].Grouped ==1) && (LevelInfo[x][y].Render  ==1))  //is a start of a group
+////			{
+////			//test it's next door neighbour
+////				if  ((LevelInfo[x][y+1].Grouped ==1) && (LevelInfo[x][y+1].Render  ==1))	//Neighbour is also a group,
+////				{
+////				if (DoTilesMatch(LevelInfo[x][y],LevelInfo[x+LevelInfo[x][y+1].DimX][y+1]))//test the first tile against the opposite corner of it's neighbour
+////				{
+////					//they match. -> merge em.
+////					LevelInfo[x][y].DimX++;
+////					for ( int k =1; k <=LevelInfo[x][y+1].DimX;k++)
+////					{
+////					LevelInfo[k][y+1].Render =0;
+////					LevelInfo[k][y+1].Grouped =1;
+////					
+////					}
+////				}
+////				}
+////			}
+////		}
+////	}
 
 	////Now lets combine solids along the other axis
 for (y=0;y<64;y++){
@@ -241,11 +268,14 @@ int DoTilesMatch(tile &t1, tile &t2)
 //}
 	if ((t1.tileType==0) && (t2.tileType == 0))	//solid
 		{
-		return ((t1.West == t2.West) && (t1.South==t2.South) && (t1.East == t2.East) && (t1.North == t2.North));
+		return ((t1.wallTexture==t2.wallTexture) && (t1.West == t2.West) && (t1.South == t2.South) && (t1.East == t2.East) && (t1.North == t2.North) && (t1.UseAdjacentTextures == t2.UseAdjacentTextures));
 		}
 	else
 		{
-	return (t1.floorTexture == t2.floorTexture ) && (t1.floorHeight == t2.floorHeight)
+		return (t1.shockCeilingTexture == t2.shockCeilingTexture)
+			&& (t1.floorTexture == t2.floorTexture) 
+			&& (t1.floorHeight == t2.floorHeight)
+			&& (t1.ceilingHeight == t2.ceilingHeight )
 			&& (t1.DimX==t2.DimX) && (t1.DimY == t2.DimY ) 
 			&& (t1.wallTexture == t2.wallTexture)
 			&& (t1.tileType == t2.tileType ) 

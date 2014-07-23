@@ -204,7 +204,15 @@ void unpack_data (unsigned char *pack,    unsigned char *unpack,
       }
       for (i = 0; i < len_token [val]; ++i)
       {
-	*exptr++ = unpack [i + offs_token [val]];
+		  if (i + offs_token[val]<unpacksize)
+		  {
+			  *exptr++ = unpack[i + offs_token[val]];
+		  }
+		  else
+		  {
+			  printf("Oh shit");
+		  }
+	
       }
 
     }
@@ -679,14 +687,14 @@ void RepackShock()
 	long address_pointer;
 	long AddressOfBlockStart;
 	long NewBlockAddress;
-	long BlockAddressesOld[834];
-	long BlockAddressesNew[834];
-	long NewBlockBoundary[834];
-	int chunkNos[834];
-	long UnpackedSize[834];
-	long PackedSize[834];
-	short contentType[834];
-	short compressionFlags[834];
+	long BlockAddressesOld[1000];
+	long BlockAddressesNew[1000];
+	long NewBlockBoundary[1000];
+	int chunkNos[1000];
+	long UnpackedSize[1000];
+	long PackedSize[1000];
+	short contentType[1000];
+	short compressionFlags[1000];
 //load the shock resource file.
 	//Read in the archive.
 	FILE *file = NULL;      // File pointer
@@ -774,6 +782,7 @@ void RepackShock()
 		switch (compressionFlags[x])
 			{
 			case 0:	//Flat uncompressed. Just copy the bytes
+				printf("\nCopying uncompressed chunk %d",x);
 				for (int i = 0; i < UnpackedSize[x]; i++)
 					{
 					fputc(archive_ark[BlockAddressesOld[x] + i], file);
@@ -781,6 +790,7 @@ void RepackShock()
 					}
 				if (NewBlockBoundary[x]>0)
 					{	
+					printf("\nWriting a 4 byte boundary");
 					for (int i = 0; i < NewBlockBoundary[x]; i++)
 							{//Write to the 4 byte boundary.
 							WriteInt8(file,0);
@@ -790,6 +800,7 @@ void RepackShock()
 			case 1:	//Flat compressed. Unpacked and copy the output.
 				tmp_ark = new unsigned char[UnpackedSize[x]];
 				//unpack_data(archive_ark, tmp_ark, UnpackedSize[x]);
+				printf("\nUnpacking compressed chunk %d", x);
 				LoadShockChunk(BlockAddressesOld[x], compressionFlags[x], archive_ark, tmp_ark, PackedSize[x], UnpackedSize[x]);
 				for (int i = 0; i < UnpackedSize[x]; i++)
 					{
@@ -798,6 +809,7 @@ void RepackShock()
 					}
 				if (NewBlockBoundary[x]>0)
 				{
+					printf("\nWriting a 4 byte boundary");
 					for (int i = 0; i < NewBlockBoundary[x]; i++)
 					{//Write to the 4 byte boundary.
 						WriteInt8(file, 0);
@@ -812,7 +824,7 @@ void RepackShock()
 		}
 
 		//Write the directory
-
+		printf("\nWriting a new boundary");
 		//No of chunks (int16)
 		WriteInt16(file,NoOfChunks);
 		//Offset to first chunk (int32)

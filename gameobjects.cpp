@@ -333,6 +333,7 @@ for (i=0;i<1600;i++)
 mstaddress_pointer=0;
 	for (i=0; i < chunkUnpackedLength/27; i++)
 		{
+			
 			xref_ptr =getValAtAddress(mst_ark,mstaddress_pointer+5,16);
 			int MasterIndex=xref[xref_ptr].MstIndex ;
 			objList[MasterIndex].index=MasterIndex;
@@ -383,6 +384,7 @@ mstaddress_pointer=0;
 					objList[MasterIndex].unk1 = getValAtAddress(mst_ark, mstaddress_pointer + 24, 8);
 
 					printf("\n++++++++Next object++++++++++++\n");
+					printf("\nMaster Record at %d", blockAddress + mstaddress_pointer);
 					printf("\nIndex = %d \n", objList[MasterIndex].index);
 					printf("Desc %s\t", objectMasters[objList[MasterIndex].item_id].desc);
 					printf("(%s)\n", UniqueObjectName(objList[MasterIndex]));
@@ -408,13 +410,13 @@ mstaddress_pointer=0;
 					//printf("\tXCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8)); same as tileX
 					printf("\tYCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 13, 8));
 					//printf("\tYCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8)); same as tileY
-					printf("\tZCoord = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 15, 8));
+					printf("\t(%d) ZCoord = %d\n", blockAddress + mstaddress_pointer + 15, getValAtAddress(mst_ark, mstaddress_pointer + 15, 8));
 					printf("\tAngles = (%d", getValAtAddress(mst_ark, mstaddress_pointer + 16, 8));
 					printf(",%d", getValAtAddress(mst_ark, mstaddress_pointer + 17, 8));
 					printf("\,%d)\n", getValAtAddress(mst_ark, mstaddress_pointer + 18, 8));
 					printf("\tObjectType = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 20, 8));
 					printf("\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
-					printf("\tState = %d", objList[MasterIndex].State);
+					printf("\t(%d) State = %d", blockAddress + mstaddress_pointer+23, objList[MasterIndex].State);
 					printf("\t(%d,%d)\n", (objList[MasterIndex].State >> 4) & 0xF, objList[MasterIndex].State & 0xF);
 					printf("\tunk1 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 24, 8));
 					printf("\tunk2 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 25, 8));
@@ -904,6 +906,20 @@ while (k<=chunkUnpackedLength)
 					printf("\tTrigger once: %d\n",objList[objIndex].TriggerOnce);
 					objList[objIndex].address = blockAddress+add_ptr;
 					printf("\tObject is at address %d\n", objList[objIndex].address);
+					if (objectMasters[objList[objIndex].item_id].type == SHOCK_TRIGGER_REPULSOR)
+						{
+						objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark, add_ptr + 21, 8);
+						objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = getValAtAddress(sub_ark, add_ptr + 24, 8);
+						printf("\tRepulsor Upwards Displacement is %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE]);
+						if (objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] == 1)
+							{
+							printf("\tRepulsor is off (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
+							}
+						else
+							{
+							printf("\tRepulsor is on (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
+							}
+						}
 				getShockTriggerAction(LevelInfo,sub_ark,add_ptr,xRef,objList,objIndex);
 
 				return 1;
