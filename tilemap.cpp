@@ -1695,7 +1695,7 @@ int DoTilesMatch(tile &t1, tile &t2, int Surface)
 				&& (t1.floorTexture == t2.floorTexture)
 				&& (t1.floorHeight == t2.floorHeight)
 				&& (t1.DimX == t2.DimX) && (t1.DimY == t2.DimY)
-				&& (t1.wallTexture == t2.wallTexture)
+				&& (t1.West == t2.West) && (t1.South == t2.South) && (t1.East == t2.East) && (t1.North == t2.North) && (t1.UseAdjacentTextures == t2.UseAdjacentTextures)
 				&& (t1.tileType == t2.tileType);
 		}
 		break;

@@ -48,9 +48,9 @@ extern int GAME;
 
 int main()
 {
-int game = SHOCK;
+//int game = SHOCK;
 //int game = UWDEMO;
-//int game = UW1;
+int game = UW1;
 //int game = UW2;
 int mode = D3_MODE;
 //int mode = ASCII_MODE;
@@ -62,7 +62,7 @@ int mode = D3_MODE;
 //int mode = REPACK_MODE;
 //int mode= SOURCE_MODE;
 
-levelNo = 1;
+levelNo = 0;
 
 GAME = game;
 switch (game)

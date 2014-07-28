@@ -92,6 +92,29 @@ iGame =game;
 			}
 		}
 	}
+	if (game == SHOCK)
+	{
+		//Cleanup Ceilings
+		ResetCleanup(LevelInfo, game);
+		CaulkHiddenWalls(LevelInfo, game, SURFACE_CEIL);
+		CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_OPEN, SURFACE_CEIL);
+		CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_OPEN, SURFACE_CEIL);
+		CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_N, SURFACE_CEIL);
+		CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_S, SURFACE_CEIL);
+		CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_E, SURFACE_CEIL);
+		CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_W, SURFACE_CEIL);
+
+		for (y = 0; y <= 63; y++)
+		{
+			for (x = 0; x <= 63; x++)
+			{
+				if ((LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) && (LevelInfo[x][y].tileType != TILE_SOLID))
+				{
+					RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
+				}
+			}
+		}
+	}
 
 //Cleanup Floors
 	ResetCleanup(LevelInfo, game);
@@ -113,27 +136,19 @@ iGame =game;
 		}
 	}
 
-	//Cleanup Ceilings
 	ResetCleanup(LevelInfo, game);
-	CaulkHiddenWalls(LevelInfo, game, SURFACE_CEIL);
-	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_OPEN, SURFACE_CEIL);
-	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_OPEN, SURFACE_CEIL);
-	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_N, SURFACE_CEIL);
-	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_S, SURFACE_CEIL);
-	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_E, SURFACE_CEIL);
-	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_W, SURFACE_CEIL);
-	
+	//Diag tiles with water
 	for (y = 0; y <= 63; y++)
 	{
 		for (x = 0; x <= 63; x++)
 		{
-			if ((LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) && (LevelInfo[x][y].tileType != TILE_SOLID))
-			{
-				RenderDarkModTile(game, x, y, LevelInfo[x][y], LevelInfo[x][y].isWater, 0, 1, 0);
-			}
+			if ((LevelInfo[x][y].isWater == 1) && (LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) 
+				&& ((LevelInfo[x][y].tileType >= TILE_DIAG_SE) && (LevelInfo[x][y].tileType <= TILE_DIAG_NW)))
+				{
+				RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 0, 0);
+				}
 		}
 	}
-
 
 	//Render doorways
 	for (y=0; y<=63;y++) 
@@ -159,13 +174,13 @@ iGame =game;
 					{//Adds a Shock door frame.
 						RenderShockDoorway(game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex],LevelInfo,objList);
 					} 
-				//////if ((LevelInfo[x][y].isWater == 1) && ((LevelInfo[x][y].tileType == TILE_OPEN) || (LevelInfo[x][y].tileType >= TILE_SLOPE_N)))
-				//////	{
-				//////	//render the ceilings of water tiles
-				//////	LevelInfo[x][y].isWater=0;//Temporarily turn off water
-				//////	RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
-				//////	LevelInfo[x][y].isWater = 1;
-				//////	}
+				//if ((LevelInfo[x][y].isWater == 1) && ((LevelInfo[x][y].tileType == TILE_OPEN) || (LevelInfo[x][y].tileType >= TILE_SLOPE_N)))
+				//	{
+				//	//render the ceilings of water tiles
+				//	LevelInfo[x][y].isWater=0;//Temporarily turn off water
+				//	RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
+				//	LevelInfo[x][y].isWater = 1;
+				//	}
 				}
 			}
 		}
@@ -348,7 +363,7 @@ iGame =game;
 						switch (levelNo)
 						{
 						case 0:
-							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 410.0); break;
+							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 3840.0, 250.0, 370.0); break;
 
 						case 2:
 							fprintf(MAPFILE, "\n\"origin\" \"%f %f %f\"", 660.0, 255.0, 370.0); break;
@@ -766,33 +781,50 @@ switch (game)
 		//////fprintf (MAPFILE, "}\n}\n");
 
 
-			   for (int y = 0; y <= 63; y++)
-			   {
+			 //////  for (int y = 0; y <= 63; y++)
+			 //////  {
 
-				   for (int x = 0; x <= 63; x++)
-				   {
-					   if ((LevelInfo[x][y].TerrainChange == 1) || (LevelInfo[x][y].BullFrog == 1))
-					   {//Renders a ceiling for that tile
-						tile tmp;
-						tmp.tileType =1;
-						tmp.Render=1;
-						tmp.isWater=0;
-						tmp.tileX=x;
-						tmp.tileY = y;
-						tmp.DimX=1;
-						tmp.DimY=1;
-						tmp.ceilingHeight =0;
-						tmp.floorTexture = LevelInfo[x][y].floorTexture;
-						tmp.shockCeilingTexture = LevelInfo[x][y].shockCeilingTexture;
-						tmp.East= LevelInfo[x][y].East;
-						tmp.West = LevelInfo[x][y].West;
-						tmp.North = LevelInfo[x][y].North;
-						tmp.South = LevelInfo[x][y].South;
-						RenderDarkModTile(game, x, y, tmp,0,0,1,0);
-					   }
-				   }
+				//////   for (int x = 0; x <= 63; x++)
+				//////   {
+				//////	   if ((LevelInfo[x][y].TerrainChange == 1) || (LevelInfo[x][y].BullFrog == 1))
+				//////	   {//Renders a ceiling for that tile
+				//////		tile tmp;
+				//////		tmp.tileType =1;
+				//////		tmp.Render=1;
+				//////		tmp.isWater=0;
+				//////		tmp.tileX=x;
+				//////		tmp.tileY = y;
+				//////		tmp.DimX=1;
+				//////		tmp.DimY=1;
+				//////		tmp.ceilingHeight =0;
+				//////		tmp.floorTexture = LevelInfo[x][y].floorTexture;
+				//////		tmp.shockCeilingTexture = LevelInfo[x][y].shockCeilingTexture;
+				//////		tmp.East= LevelInfo[x][y].East;
+				//////		tmp.West = LevelInfo[x][y].West;
+				//////		tmp.North = LevelInfo[x][y].North;
+				//////		tmp.South = LevelInfo[x][y].South;
+				//////		RenderDarkModTile(game, x, y, tmp,0,0,1,0);
+				//////	   }
+				//////   }
 
-				}
+				//////}
+			tile tmp;
+			tmp.tileType =1;
+			tmp.Render=1;
+			tmp.isWater=0;
+			tmp.tileX=0;
+			tmp.tileY = 0;
+			tmp.DimX=64;
+			tmp.DimY=64;
+			tmp.ceilingHeight =0;
+			tmp.floorTexture = LevelInfo[0][0].shockCeilingTexture;
+			tmp.shockCeilingTexture = LevelInfo[0][0].shockCeilingTexture;
+			tmp.East= CAULK;
+			tmp.West = CAULK;
+			tmp.North = CAULK;
+			tmp.South = CAULK;
+			RenderDarkModTile(game, 0, 0, tmp,0,0,1,0);
+
 
 		//and a floor 
 		fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);
