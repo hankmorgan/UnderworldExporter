@@ -66,33 +66,33 @@ void CleanUp(tile LevelInfo[64][64], int game)
 {
 	int x; int y;
 //Reduces tile complexity. Hides hidden solids and merges matching tiles along axis.
-	if (game != SHOCK)
-	{
-	
-	for (x = 1; x<63; x++){
-		for (y = 1; y<63; y++){
-			if (LevelInfo[x][y].tileType ==TILE_OPEN)
-				{
-				if (LevelInfo[x + 1][y].floorHeight >= LevelInfo[x][y].floorHeight)
-					{
-					LevelInfo[x][y].East=CAULK;
-					}
-				if (LevelInfo[x-1][y].floorHeight >= LevelInfo[x][y].floorHeight)
-					{
-						LevelInfo[x][y].West = CAULK;
-					}
-				if (LevelInfo[x][y+1].floorHeight >= LevelInfo[x][y].floorHeight)
-					{
-						LevelInfo[x][y].North = CAULK;
-					}
-				if (LevelInfo[x][y-1].floorHeight >= LevelInfo[x][y].floorHeight)
-					{
-						LevelInfo[x][y].South = CAULK;
-					}
-				}
-			}
-		}
-	}
+	////if (game != SHOCK)
+	////{
+	////
+	////for (x = 1; x<63; x++){
+	////	for (y = 1; y<63; y++){
+	////		if (LevelInfo[x][y].tileType ==TILE_OPEN)
+	////			{
+	////			if (LevelInfo[x + 1][y].floorHeight >= LevelInfo[x][y].floorHeight)
+	////				{
+	////				LevelInfo[x][y].East=CAULK;
+	////				}
+	////			if (LevelInfo[x-1][y].floorHeight >= LevelInfo[x][y].floorHeight)
+	////				{
+	////					LevelInfo[x][y].West = CAULK;
+	////				}
+	////			if (LevelInfo[x][y+1].floorHeight >= LevelInfo[x][y].floorHeight)
+	////				{
+	////					LevelInfo[x][y].North = CAULK;
+	////				}
+	////			if (LevelInfo[x][y-1].floorHeight >= LevelInfo[x][y].floorHeight)
+	////				{
+	////					LevelInfo[x][y].South = CAULK;
+	////				}
+	////			}
+	////		}
+	////	}
+	////}
 
 
 	for (x=0;x<64;x++){
@@ -652,7 +652,11 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 					{LevelInfo[x][y].West =LevelInfo[x-1][y].wallTexture;}
 				else
 					{LevelInfo[x][y].West =-1;}				
-				}				
+				}
+			LevelInfo[x][y].UpperEast = LevelInfo[x][y].East;
+			LevelInfo[x][y].UpperWest = LevelInfo[x][y].West;
+			LevelInfo[x][y].UpperNorth = LevelInfo[x][y].North;
+			LevelInfo[x][y].UpperSouth = LevelInfo[x][y].South;
 			}
 return 1;
 }
@@ -913,6 +917,11 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].shockNorthCeilHeight =LevelInfo[x][y+1].ceilingHeight - LevelInfo[x][y+1].shockSteep ;
 				LevelInfo[x][y].shockSouthCeilHeight =LevelInfo[x][y-1].ceilingHeight - LevelInfo[x][y-1].shockSteep ;*/	
 				//}
+
+				LevelInfo[x][y].UpperEast = LevelInfo[x][y].East;
+				LevelInfo[x][y].UpperWest = LevelInfo[x][y].West;
+				LevelInfo[x][y].UpperNorth = LevelInfo[x][y].North;
+				LevelInfo[x][y].UpperSouth = LevelInfo[x][y].South;
 			}
 		}
 return 1;
@@ -1472,5 +1481,291 @@ int isMergeableRoom(tile LevelInfo[64][64], int x, int y)
 	else
 		{
 		return 0;
+		}
+}
+
+
+void CleanUp(tile LevelInfo[64][64], int game, int CleanupType, int tileType, int Surface)
+{
+int j;
+	switch (CleanupType)
+	{
+	case CLEANUPHIDDEN:
+		{
+		CleanUpHiddenTiles(LevelInfo, game);
+		break;
+		}
+	case CLEANUPXAXIS:
+		{
+		j = 1;
+		//Now lets combine the solids along particular axis
+		for (int x = 0; x<64; x++){
+			for (int y = 0; y<63; y++){
+				if ((LevelInfo[x][y].Grouped == 0) && (LevelInfo[x][y].tileType==tileType))
+				{
+					j = 1;
+					while ((LevelInfo[x][y].Render == 1) && (LevelInfo[x][y + j].Render == 1) && (LevelInfo[x][y + j].Grouped == 0))		//&& (LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y+j].tileType ==0)
+					{
+						//combine these two if they match and they are not already part of a group
+						if (DoTilesMatch(LevelInfo[x][y], LevelInfo[x][y + j],Surface)){
+							LevelInfo[x][y + j].Render = 0;
+							LevelInfo[x][y + j].Grouped = 1;
+							LevelInfo[x][y].Grouped = 1;
+							//LevelInfo[x][y].DimY++;
+							j++;
+						}
+						else
+						{
+							break;
+						}
+
+					}
+					LevelInfo[x][y].DimY = LevelInfo[x][y].DimY + j - 1;
+					j = 1;
+				}
+			}
+		}
+		break;
+		}
+	case CLEANUPYAXIS:
+		{
+		for (int y = 0; y<64; y++)
+			{
+			for (int x = 0; x<63; x++)
+				{
+				if ((LevelInfo[x][y].Grouped == 0) && (LevelInfo[x][y].tileType == tileType))
+					{
+						j = 1;
+						while ((LevelInfo[x][y].Render == 1) && (LevelInfo[x + j][y].Render == 1) && (LevelInfo[x + j][y].Grouped == 0))		//&& (LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y+j].tileType ==0)
+						{
+							//combine these two if they match and they are not already part of a group
+							if (DoTilesMatch(LevelInfo[x][y], LevelInfo[x + j][y],Surface)){
+								LevelInfo[x + j][y].Render = 0;
+								LevelInfo[x + j][y].Grouped = 1;
+								LevelInfo[x][y].Grouped = 1;
+								//LevelInfo[x][y].DimY++;
+								j++;
+							}
+							else
+							{
+								break;
+							}
+
+						}
+						LevelInfo[x][y].DimX = LevelInfo[x][y].DimX + j - 1;
+						j = 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+void ResetCleanup(tile LevelInfo[64][64], int game)
+{//Resets tile cleanup so I can retest with new rules.
+	for (int y = 0; y <= 63; y++)
+	{
+		for (int x = 0; x <= 63; x++)
+		{
+			LevelInfo[x][y].Render = 1;
+			LevelInfo[x][y].Grouped = 0;
+			LevelInfo[x][y].DimX = 1;
+			LevelInfo[x][y].DimY = 1;
+			LevelInfo[x][y].UpperEast = LevelInfo[x][y].East;
+			LevelInfo[x][y].UpperWest = LevelInfo[x][y].West;
+			LevelInfo[x][y].UpperNorth = LevelInfo[x][y].North;
+			LevelInfo[x][y].UpperSouth = LevelInfo[x][y].South;
+		}
+	}
+}
+
+
+void CleanUpHiddenTiles(tile LevelInfo[64][64], int game)
+{
+	for (int x = 0; x<64; x++){
+		for (int y = 0; y<64; y++){
+			//lets test this tile for visibility
+			//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
+			if ((LevelInfo[x][y].tileType == 0) && (LevelInfo[x][y].indexObjectList == 0) && (LevelInfo[x][y].TerrainChange == 0)){
+				switch (y)
+				{
+				case 0:	//bottom row
+					switch (x)
+					{
+					case 0:	//bl corner
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y + 1].tileType == 0)
+							&& (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y + 1].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0;; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					case 63://br corner
+						if ((LevelInfo[x - 1][y].tileType == 0) && (LevelInfo[x][y + 1].tileType == 0)
+							&& (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x][y + 1].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					default: // invert t
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x + 1][y].tileType == 0)
+							&& (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x + 1][y].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					}
+					break;
+				case 63: //Top row
+					switch (x)
+					{
+					case 0:	//tl corner
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0)
+							&& (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					case 63://tr corner
+						if ((LevelInfo[x - 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0)
+							&& (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					default: //  t
+						if ((LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) && (LevelInfo[x - 1][y].tileType == 0)
+							&& (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x - 1][y].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					}
+					break;
+				default: //
+					switch (x)
+					{
+					case 0:		//left edge
+						if ((LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0)
+							&& (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					case 63:	//right edge
+						if ((LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x - 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0)
+							&& (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					default:		//+
+						if ((LevelInfo[x][y + 1].tileType == 0) && (LevelInfo[x + 1][y].tileType == 0) && (LevelInfo[x][y - 1].tileType == 0) && (LevelInfo[x - 1][y].tileType == 0)
+							&& (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x - 1][y].TerrainChange == 0))
+						{
+							LevelInfo[x][y].Render = 0; break;
+						}
+						else { LevelInfo[x][y].Render = 1; break; }
+					}
+					break;
+				}
+			}
+		}
+	}
+}
+
+
+int DoTilesMatch(tile &t1, tile &t2, int Surface)
+{//TODO:Tiles have a lot more properties now.
+	if ((t1.hasElevator == 1) || (t1.TerrainChange == 1) || (t2.hasElevator == 1) || (t2.TerrainChange == 1) || (t1.isWater != t2.isWater) || (t2.BullFrog == 1) || (t2.BullFrog == 1))
+		{	//autofail on special or changes to water
+		return 0;
+		}
+
+	switch (Surface)
+	{
+	case SURFACE_FLOOR:
+		{
+		if ((t1.tileType == 0) && (t2.tileType == 0))	//solid
+			{
+			return ((t1.wallTexture == t2.wallTexture) && (t1.West == t2.West) && (t1.South == t2.South) && (t1.East == t2.East) && (t1.North == t2.North) && (t1.UseAdjacentTextures == t2.UseAdjacentTextures));
+			}
+		else
+		{
+			return (t1.shockCeilingTexture == t2.shockCeilingTexture)
+				&& (t1.floorTexture == t2.floorTexture)
+				&& (t1.floorHeight == t2.floorHeight)
+				&& (t1.DimX == t2.DimX) && (t1.DimY == t2.DimY)
+				&& (t1.wallTexture == t2.wallTexture)
+				&& (t1.tileType == t2.tileType);
+		}
+		break;
+		}
+	case SURFACE_CEIL:
+		{
+		if ((t1.tileType == 0) && (t2.tileType == 0))	//solid
+		{
+			return ((t1.wallTexture == t2.wallTexture) && (t1.West == t2.West) && (t1.South == t2.South) && (t1.East == t2.East) && (t1.North == t2.North) && (t1.UseAdjacentTextures == t2.UseAdjacentTextures));
+		}
+		else
+		{
+			return (t1.shockCeilingTexture == t2.shockCeilingTexture)
+				&& (t1.ceilingHeight == t2.ceilingHeight)
+				&& (t1.DimX == t2.DimX) && (t1.DimY == t2.DimY)
+				&& (t1.UpperWest == t2.UpperWest) && (t1.UpperSouth == t2.UpperSouth) && (t1.UpperEast == t2.UpperEast) && (t1.UpperNorth == t2.UpperNorth)
+				&& (t1.tileType == t2.tileType);
+		}
+		break;
+		}	
+	default:
+		return 0;
+	}
+	//return (t1.shockCeilingTexture == t2.shockCeilingTexture)
+	//	&& (t1.floorTexture == t2.floorTexture)
+	//	&& (t1.floorHeight == t2.floorHeight)
+	//	&& (t1.ceilingHeight == t2.ceilingHeight)
+	//	&& (t1.DimX == t2.DimX) && (t1.DimY == t2.DimY)
+	//	&& (t1.wallTexture == t2.wallTexture)
+	//	&& (t1.tileType == t2.tileType)
+	//	&& (t1.isDoor == 0) && (t2.isDoor == 0);
+
+}
+
+void CaulkHiddenWalls(tile LevelInfo[64][64], int game, int surface)
+{
+	for (int x = 1; x < 62; x++)
+		{
+		for (int y = 1; y < 62; y++)
+			{
+			if (LevelInfo[x][y].tileType == TILE_OPEN)
+				{
+				switch (surface)
+					{
+					case SURFACE_CEIL:
+						{
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x][y + 1].ceilingHeight) && (LevelInfo[x][y + 1].tileType == TILE_OPEN)) || (LevelInfo[x][y + 1].tileType == TILE_SOLID))
+							{
+							LevelInfo[x][y].UpperNorth=CAULK;
+							}
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x][y - 1].ceilingHeight) && (LevelInfo[x][y - 1].tileType == TILE_OPEN)) || (LevelInfo[x][y - 1].tileType == TILE_SOLID))
+							{
+							LevelInfo[x][y].UpperSouth = CAULK;
+							}
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x+1][y].ceilingHeight) && (LevelInfo[x+1][y].tileType == TILE_OPEN)) || (LevelInfo[x+1][y].tileType == TILE_SOLID))
+							{
+							LevelInfo[x][y].UpperEast = CAULK;
+							}
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x-1][y].ceilingHeight) && (LevelInfo[x - 1][y].tileType == TILE_OPEN)) || (LevelInfo[x - 1][y].tileType == TILE_SOLID))
+						{
+							LevelInfo[x][y].UpperWest = CAULK;
+						}
+						break;
+						}
+					case SURFACE_FLOOR:
+						{
+						break;
+						}
+					}
+				}
+			}
 		}
 }

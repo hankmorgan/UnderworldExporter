@@ -50,7 +50,7 @@
 //#define MAP_OUTPUT_FILE "C:\\source.vmf"
 
 #define ENABLE_LIGHTING 0
-#define ENABLE_WATER 0
+#define ENABLE_WATER 1
 
 /*Globals*/
 extern int BrushSizeX;

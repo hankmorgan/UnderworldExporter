@@ -76,17 +76,81 @@ iGame =game;
 	fprintf (MAPFILE, "\"editor_drLastCameraAngle\" \"-28.5 90.9 0\"\n");
 	PrimitiveCount=0;
 	fprintf (MAPFILE, "\n");
+	//Cleanup solids
+	ResetCleanup(LevelInfo,game);
+	CleanUpHiddenTiles(LevelInfo,game);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SOLID, SURFACE_FLOOR);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SOLID, SURFACE_FLOOR);
+	for (y = 0; y <= 63; y++)
+	{
+		for (x = 0; x <= 63; x++)
+		{
+			if ((LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) && (LevelInfo[x][y].tileType==TILE_SOLID))
+			{
+			//Render my solid tiles
+				RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 0, 0);
+			}
+		}
+	}
+
+//Cleanup Floors
+	ResetCleanup(LevelInfo, game);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_OPEN, SURFACE_FLOOR);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_OPEN, SURFACE_FLOOR);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_N, SURFACE_FLOOR);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_S, SURFACE_FLOOR);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_E, SURFACE_FLOOR);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_W, SURFACE_FLOOR);
+	//Cleanup solids
+	for (y = 0; y <= 63; y++)
+	{
+		for (x = 0; x <= 63; x++)
+		{
+			if ((LevelInfo[x][y].isWater == 0) && (LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) && (LevelInfo[x][y].tileType != TILE_SOLID))
+			{
+				RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 0, 1);
+			}
+		}
+	}
+
+	//Cleanup Ceilings
+	ResetCleanup(LevelInfo, game);
+	CaulkHiddenWalls(LevelInfo, game, SURFACE_CEIL);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_OPEN, SURFACE_CEIL);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_OPEN, SURFACE_CEIL);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_N, SURFACE_CEIL);
+	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_S, SURFACE_CEIL);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_E, SURFACE_CEIL);
+	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_SLOPE_W, SURFACE_CEIL);
+	
+	for (y = 0; y <= 63; y++)
+	{
+		for (x = 0; x <= 63; x++)
+		{
+			if ((LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) && (LevelInfo[x][y].tileType != TILE_SOLID))
+			{
+				RenderDarkModTile(game, x, y, LevelInfo[x][y], LevelInfo[x][y].isWater, 0, 1, 0);
+			}
+		}
+	}
+
+
+	//Render doorways
 	for (y=0; y<=63;y++) 
 		{
 		for (x=0; x<=63;x++)
 			{
 			if ((LevelInfo[x][y].hasElevator == 0))//Elevators are rendered as func_statics
 				{
-				if ((LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0)) //Does a Terrain change trap acts on this tile
-					{
-					//A regular tile with no special properites.
-					RenderDarkModTile(game,x,y,LevelInfo[x][y],0,0,0,0);
-					}
+				////if ((LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0)) //Does a Terrain change trap acts on this tile
+				////	{
+				////	//A regular tile with no special properties.
+				////	//RenderDarkModTile(game, x, y,LevelInfo[x][y], 0, 0, 0, 1);//floor
+				////	//if (LevelInfo[x][y].tileType!=TILE_SOLID)
+				////	//	{
+				////	//	RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);//ceiling
+				////	//	}
+				////	}
 				if (LevelInfo[x][y].isDoor == 1)
 					{//Adds a UW door frame.
 					RenderDoorway(game,x,y,LevelInfo[x][y],objList[LevelInfo[x][y].DoorIndex]);
@@ -95,13 +159,13 @@ iGame =game;
 					{//Adds a Shock door frame.
 						RenderShockDoorway(game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex],LevelInfo,objList);
 					} 
-				if ((LevelInfo[x][y].isWater == 1) && ((LevelInfo[x][y].tileType == TILE_OPEN) || (LevelInfo[x][y].tileType >= TILE_SLOPE_N)))
-					{
-					//render the ceilings of water tiles
-					LevelInfo[x][y].isWater=0;//Temporarily turn off water
-					RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
-					LevelInfo[x][y].isWater = 1;
-					}
+				//////if ((LevelInfo[x][y].isWater == 1) && ((LevelInfo[x][y].tileType == TILE_OPEN) || (LevelInfo[x][y].tileType >= TILE_SLOPE_N)))
+				//////	{
+				//////	//render the ceilings of water tiles
+				//////	LevelInfo[x][y].isWater=0;//Temporarily turn off water
+				//////	RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 1, 0);
+				//////	LevelInfo[x][y].isWater = 1;
+				//////	}
 				}
 			}
 		}

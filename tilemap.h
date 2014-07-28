@@ -41,6 +41,12 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 #define TILE_RIDGE_NW 16
 #define TILE_RIDGE_NE 17
 
+#define CLEANUPHIDDEN  1
+#define CLEANUPXAXIS 2
+#define CLEANUPYAXIS 3
+
+#define SURFACE_FLOOR 1
+#define SURFACE_CEIL 2
 
 struct tile
 {
@@ -59,6 +65,8 @@ short Grouped;		//textures/darkmod/stone/cobblestones/blocks_uneven06_grey off b
 int VisibleFaces;	//Which faces are visible for caulking textures on solidblocks. 0-63 Binary combo. north,south,east,west,top,bottom.
 int North; int South;
 int East; int West;
+int UpperNorth; int UpperSouth;
+int UpperEast; int UpperWest;
 int Diagonal;
 int Top; int Bottom;	//Textures in each face
 short noOfNeighbours;	//Non solid neighbour tile count.
@@ -143,6 +151,12 @@ void ResetTileTests(tile LevelInfo[64][64]);
 int isMergeableRoom(tile LevelInfo[64][64], int x, int y);
 void MergeCurrentRoomRegion(tile LevelInfo[64][64], int currRegion, int x, int y);
 void setRooms(tile LevelInfo[64][64], int *RoomIndex);
+void CleanUp(tile LevelInfo[64][64], int game, int CleanupType, int tileType, int Surface);
+void ResetCleanup(tile LevelInfo[64][64], int game);
+void CleanUpHiddenTiles(tile LevelInfo[64][64], int game);
+int DoTilesMatch(tile &t1, tile &t2, int Surface);
+void CaulkHiddenWalls(tile LevelInfo[64][64], int game, int surface);
+
 extern tile LevelInfo[64][64];
 
 #endif /*tilemap_h*/

@@ -52,8 +52,8 @@ int game = SHOCK;
 //int game = UWDEMO;
 //int game = UW1;
 //int game = UW2;
-//int mode = D3_MODE;
-int mode = ASCII_MODE;
+int mode = D3_MODE;
+//int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
 //int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
@@ -62,7 +62,7 @@ int mode = ASCII_MODE;
 //int mode = REPACK_MODE;
 //int mode= SOURCE_MODE;
 
-levelNo =1;
+levelNo = 1;
 
 GAME = game;
 switch (game)
@@ -336,7 +336,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
 			MergeWaterRegions(LevelInfo);
-			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
+			//CleanUp(LevelInfo,game); //Get rid of unneeded tiles.			
 			break; 			
 			}
 		case UW1:		//Underworld 1
@@ -355,7 +355,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			SetBullFrog(LevelInfo,objList,LevelNo);
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
-			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
+			//CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			MergeWaterRegions(LevelInfo);
 			break; 
 			}
@@ -374,7 +374,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setTerrainChangeBits(LevelInfo,objList);
 			setKeyCount(game, LevelInfo, objList);
 			PrintUWObjects(objList);	//Since I can't get full debug info until I have TileX/Y set.
-			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
+			//CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			MergeWaterRegions(LevelInfo);
 			break;			
 			}
@@ -389,7 +389,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			setCorridors(LevelInfo, &roomIndex);
 			setRooms(LevelInfo, &roomIndex);
 			setKeyCount(game, LevelInfo, objList);
-			CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
+			//CleanUp(LevelInfo,game); //Get rid of unneeded tiles.
 			break;
 			}			
 		default:
