@@ -67,6 +67,8 @@ int North; int South;
 int East; int West;
 int UpperNorth; int UpperSouth;
 int UpperEast; int UpperWest;
+int LowerNorth; int LowerSouth;
+int LowerEast; int LowerWest;
 int Diagonal;
 int Top; int Bottom;	//Textures in each face
 short noOfNeighbours;	//Non solid neighbour tile count.

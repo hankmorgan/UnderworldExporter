@@ -657,6 +657,11 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			LevelInfo[x][y].UpperWest = LevelInfo[x][y].West;
 			LevelInfo[x][y].UpperNorth = LevelInfo[x][y].North;
 			LevelInfo[x][y].UpperSouth = LevelInfo[x][y].South;
+			LevelInfo[x][y].LowerEast = LevelInfo[x][y].East;
+			LevelInfo[x][y].LowerWest = LevelInfo[x][y].West;
+			LevelInfo[x][y].LowerNorth = LevelInfo[x][y].North;
+			LevelInfo[x][y].LowerSouth = LevelInfo[x][y].South;
+
 			}
 return 1;
 }
@@ -922,6 +927,10 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 				LevelInfo[x][y].UpperWest = LevelInfo[x][y].West;
 				LevelInfo[x][y].UpperNorth = LevelInfo[x][y].North;
 				LevelInfo[x][y].UpperSouth = LevelInfo[x][y].South;
+				LevelInfo[x][y].LowerEast = LevelInfo[x][y].East;
+				LevelInfo[x][y].LowerWest = LevelInfo[x][y].West;
+				LevelInfo[x][y].LowerNorth = LevelInfo[x][y].North;
+				LevelInfo[x][y].LowerSouth = LevelInfo[x][y].South;
 			}
 		}
 return 1;
@@ -1687,15 +1696,20 @@ int DoTilesMatch(tile &t1, tile &t2, int Surface)
 		{
 		if ((t1.tileType == 0) && (t2.tileType == 0))	//solid
 			{
-			return ((t1.wallTexture == t2.wallTexture) && (t1.West == t2.West) && (t1.South == t2.South) && (t1.East == t2.East) && (t1.North == t2.North) && (t1.UseAdjacentTextures == t2.UseAdjacentTextures));
+			return ((t1.wallTexture == t2.wallTexture) 
+				&& (t1.West == t2.West) && (t1.South == t2.South) 
+				&& (t1.East == t2.East) && (t1.North == t2.North) 
+				&& (t1.UseAdjacentTextures == t2.UseAdjacentTextures));
 			}
 		else
 		{
 			return (t1.shockCeilingTexture == t2.shockCeilingTexture)
 				&& (t1.floorTexture == t2.floorTexture)
 				&& (t1.floorHeight == t2.floorHeight)
+				&& (t1.isWater == t2.isWater)
 				&& (t1.DimX == t2.DimX) && (t1.DimY == t2.DimY)
-				&& (t1.West == t2.West) && (t1.South == t2.South) && (t1.East == t2.East) && (t1.North == t2.North) && (t1.UseAdjacentTextures == t2.UseAdjacentTextures)
+				&& (t1.LowerWest == t2.LowerWest) && (t1.LowerSouth == t2.LowerSouth) && (t1.LowerEast == t2.LowerEast) && (t1.LowerNorth == t2.LowerNorth) 
+				&& (t1.UseAdjacentTextures == t2.UseAdjacentTextures)
 				&& (t1.tileType == t2.tileType);
 		}
 		break;
@@ -1712,6 +1726,7 @@ int DoTilesMatch(tile &t1, tile &t2, int Surface)
 				&& (t1.ceilingHeight == t2.ceilingHeight)
 				&& (t1.DimX == t2.DimX) && (t1.DimY == t2.DimY)
 				&& (t1.UpperWest == t2.UpperWest) && (t1.UpperSouth == t2.UpperSouth) && (t1.UpperEast == t2.UpperEast) && (t1.UpperNorth == t2.UpperNorth)
+				&& (t1.UseAdjacentTextures == t2.UseAdjacentTextures)
 				&& (t1.tileType == t2.tileType);
 		}
 		break;
@@ -1742,19 +1757,23 @@ void CaulkHiddenWalls(tile LevelInfo[64][64], int game, int surface)
 					{
 					case SURFACE_CEIL:
 						{
-						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x][y + 1].ceilingHeight) && (LevelInfo[x][y + 1].tileType == TILE_OPEN)) || (LevelInfo[x][y + 1].tileType == TILE_SOLID))
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x][y + 1].ceilingHeight) 
+								&& (LevelInfo[x][y + 1].tileType == TILE_OPEN)) || (LevelInfo[x][y + 1].tileType == TILE_SOLID))
 							{
 							LevelInfo[x][y].UpperNorth=CAULK;
 							}
-						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x][y - 1].ceilingHeight) && (LevelInfo[x][y - 1].tileType == TILE_OPEN)) || (LevelInfo[x][y - 1].tileType == TILE_SOLID))
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x][y - 1].ceilingHeight) 
+								&& (LevelInfo[x][y - 1].tileType == TILE_OPEN)) || (LevelInfo[x][y - 1].tileType == TILE_SOLID))
 							{
 							LevelInfo[x][y].UpperSouth = CAULK;
 							}
-						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x+1][y].ceilingHeight) && (LevelInfo[x+1][y].tileType == TILE_OPEN)) || (LevelInfo[x+1][y].tileType == TILE_SOLID))
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x+1][y].ceilingHeight) 
+								&& (LevelInfo[x+1][y].tileType == TILE_OPEN)) || (LevelInfo[x+1][y].tileType == TILE_SOLID))
 							{
 							LevelInfo[x][y].UpperEast = CAULK;
 							}
-						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x-1][y].ceilingHeight) && (LevelInfo[x - 1][y].tileType == TILE_OPEN)) || (LevelInfo[x - 1][y].tileType == TILE_SOLID))
+						if (((LevelInfo[x][y].ceilingHeight == LevelInfo[x-1][y].ceilingHeight) 
+								&& (LevelInfo[x - 1][y].tileType == TILE_OPEN)) || (LevelInfo[x - 1][y].tileType == TILE_SOLID))
 						{
 							LevelInfo[x][y].UpperWest = CAULK;
 						}
@@ -1762,6 +1781,30 @@ void CaulkHiddenWalls(tile LevelInfo[64][64], int game, int surface)
 						}
 					case SURFACE_FLOOR:
 						{
+							if ((((LevelInfo[x][y].floorHeight == LevelInfo[x][y + 1].floorHeight) 
+								&& (LevelInfo[x][y + 1].tileType == TILE_OPEN)) || (LevelInfo[x][y + 1].tileType == TILE_SOLID))
+								&& (LevelInfo[x][y+1].isWater==0))
+							{
+								LevelInfo[x][y].LowerNorth = CAULK;
+							}
+							if ((((LevelInfo[x][y].floorHeight == LevelInfo[x][y - 1].floorHeight) 
+								&& (LevelInfo[x][y - 1].tileType == TILE_OPEN)) || (LevelInfo[x][y - 1].tileType == TILE_SOLID))
+								&& (LevelInfo[x][y - 1].isWater == 0))
+							{
+								LevelInfo[x][y].LowerSouth = CAULK;
+							}
+							if ((((LevelInfo[x][y].floorHeight == LevelInfo[x + 1][y].floorHeight) 
+								&& (LevelInfo[x + 1][y].tileType == TILE_OPEN)) || (LevelInfo[x + 1][y].tileType == TILE_SOLID))
+								&& (LevelInfo[x+1][y].isWater == 0))
+							{
+								LevelInfo[x][y].LowerEast = CAULK;
+							}
+							if ((((LevelInfo[x][y].floorHeight == LevelInfo[x - 1][y].floorHeight) 
+								&& (LevelInfo[x - 1][y].tileType == TILE_OPEN)) || (LevelInfo[x - 1][y].tileType == TILE_SOLID))
+								&& (LevelInfo[x-1][y].isWater == 0))
+							{
+								LevelInfo[x][y].LowerWest = CAULK;
+							}
 						break;
 						}
 					}

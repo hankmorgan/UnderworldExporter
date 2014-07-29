@@ -31,7 +31,7 @@
 #define AUXILARY_PAL_FILE "C:\\Games\\UW2\\DATA\\allpals.dat"
 
 
-#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\SAVGAM00.dat"
+#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\ARCHIVE.dat"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
 #define SHOCK_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_texture_config.txt"
 #define SHOCK_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_object_config.txt"

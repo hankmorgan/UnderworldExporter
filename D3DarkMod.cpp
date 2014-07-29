@@ -118,6 +118,7 @@ iGame =game;
 
 //Cleanup Floors
 	ResetCleanup(LevelInfo, game);
+	CaulkHiddenWalls(LevelInfo,game,SURFACE_FLOOR);
 	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_OPEN, SURFACE_FLOOR);
 	CleanUp(LevelInfo, game, CLEANUPYAXIS, TILE_OPEN, SURFACE_FLOOR);
 	CleanUp(LevelInfo, game, CLEANUPXAXIS, TILE_SLOPE_N, SURFACE_FLOOR);
@@ -137,6 +138,7 @@ iGame =game;
 	}
 
 	ResetCleanup(LevelInfo, game);
+
 	//Diag tiles with water
 	for (y = 0; y <= 63; y++)
 	{
@@ -145,7 +147,7 @@ iGame =game;
 			if ((LevelInfo[x][y].isWater == 1) && (LevelInfo[x][y].hasElevator == 0) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0) 
 				&& ((LevelInfo[x][y].tileType >= TILE_DIAG_SE) && (LevelInfo[x][y].tileType <= TILE_DIAG_NW)))
 				{
-				RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 0, 0);
+				RenderDarkModTile(game, x, y, LevelInfo[x][y], 0, 0, 0, 1);
 				}
 		}
 	}
@@ -824,7 +826,7 @@ switch (game)
 			tmp.North = CAULK;
 			tmp.South = CAULK;
 			RenderDarkModTile(game, 0, 0, tmp,0,0,1,0);
-
+			
 
 		//and a floor 
 		fprintf (MAPFILE, "// primitive %d\n",PrimitiveCount++);
@@ -834,7 +836,9 @@ switch (game)
 		//010 north face -absdist
 		fprintf (MAPFILE, "( 0 1 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n",-(64*BrushSizeY));
 		//100	top face -absdist
-		fprintf (MAPFILE, "( 0 0 1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/darkmod/stone/natural/tiling_1d/gravel_red_01\" 0 0 0\n", +(2*BrushSizeZ) );	
+//		fprintf (MAPFILE, "( 0 0 1 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/darkmod/stone/natural/tiling_1d/gravel_red_01\" 0 0 0\n", +(2*BrushSizeZ) );	
+		fprintf(MAPFILE, "( 0 0 1 %d )", +2 * BrushSizeZ);	//to go underneath
+		getFloorTextureName(tmp, fCEIL);		
 		//00-1	west face +absdist
 		fprintf (MAPFILE, "( -1 0 0 %d ) ( ( 0.03125 0 0 ) ( 0 0.03125 0 ) ) \"textures/common/caulk\" 0 0 0\n", +(0));
 		//0-1 0	south face +absdist
