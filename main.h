@@ -10,6 +10,7 @@
 
 #define UW1_LEVEL_PATH  "C:\\Games\\UW1\\Data\\lev.ark"
 #define UW1_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_retro_config.txt"
+#define UW1_TEXTURE_CONFIG_FILE_SOURCE "C:\\Underworld Exporter\\src\\trunk\\uw1_retro_config_source.txt"
 #define UW1_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_object_config.txt"
 #define UW1_STRINGS_FILE "C:\\Games\\UW1\\data\\strings.pak"
 #define UW1_CLEAN_STRINGS_FILE "C:\\Underworld Exporter\\src\\trunk\\uw1_stringsclean.txt"
@@ -20,6 +21,7 @@
 
 #define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config.txt"
+#define UW2_TEXTURE_CONFIG_FILE_SOURCE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config_source.txt"
 #define UW2_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_object_config.txt"
 #define UW2_STRINGS_FILE "C:\\Games\\UW2\\data\\strings.pak"
 #define UW2_TERRAIN_PROPS "C:\\Games\\UW2\\Data\\terrain.dat"
@@ -34,6 +36,7 @@
 #define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\ARCHIVE.dat"
 #define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
 #define SHOCK_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_texture_config.txt"
+#define SHOCK_TEXTURE_CONFIG_FILE_SOURCE "C:\\Underworld Exporter\\src\\trunk\\shock_texture_config_source.txt"
 #define SHOCK_OBJECT_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\shock_object_config.txt"
 #define SHOCK_COMMONOBJ_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\objprop.dat"
 #define SHOCK_MODEL_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\obj3d.res"
@@ -46,11 +49,11 @@
 #define SCRIPT_MAIN_FILE "C:\\Underworld Exporter\\src\\trunk\\debug\\scriptmain.txt"
 #define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
 #define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock_1.script"
-#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_1.map"
-//#define MAP_OUTPUT_FILE "C:\\source.vmf"
+//#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_1.map"
+#define MAP_OUTPUT_FILE "C:\\source.vmf"
 
 #define ENABLE_LIGHTING 0
-#define ENABLE_WATER 1
+#define ENABLE_WATER 0
 
 /*Globals*/
 extern int BrushSizeX;
@@ -105,7 +108,7 @@ extern int CEILING_HEIGHT;
 
 
 void exportMaps(int game,int mode,int LevelNo);
-void LoadConfig(int game);
+void LoadConfig(int game, int mode);
 int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);
 
 int BuildTileMapUW(tile LevelInfo[64][64], ObjectItem objList[1600], long texture_map[256], char *filePath, int game, int LevelNo);

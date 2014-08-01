@@ -1010,7 +1010,7 @@ void RenderSourceSolidTile(int x, int y, tile &t, short Water)
 	return;
 }
 
-void Plane(int index, int face, int BLeftX, int BLeftY, int BLeftZ, int TLeftX, int TLeftY, int TLeftZ, int TRightX, int TRightY, int TRightZ, tile t)
+void Plane(int index, int face, int BLeftX, int BLeftY, int BLeftZ, int TLeftX, int TLeftY, int TLeftZ, int TRightX, int TRightY, int TRightZ, tile t, int surface)
 	{
 	fprintf(MAPFILE, "\t\tside\n");
 	fprintf(MAPFILE, "\t\t{\n");
@@ -1019,14 +1019,128 @@ void Plane(int index, int face, int BLeftX, int BLeftY, int BLeftZ, int TLeftX, 
 	fprintf(MAPFILE, "(%d %d %d) ", BLeftX, BLeftY, BLeftZ);
 	fprintf(MAPFILE, "(%d %d %d) ", TLeftX, TLeftY, TLeftZ);
 	fprintf(MAPFILE, "(%d %d %d)\" \n", TRightX, TRightY, TRightZ);
-	fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL001A\"\n");
-	fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[1 0 0 0] 0.25\"\n");
-	fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[0 -1 0 0] 0.25\"\n");
+	switch (surface)
+	{
+	case SURFACE_CEIL:
+	case SURFACE_FLOOR:
+	case SURFACE_SLOPE:
+		//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKFLOOR001A\"\n");
+		//fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[1 0 0 0] 0.25\"\n");
+		//fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[0 -1 0 0] 0.25\"\n");
+		FloorTexture(face,t);
+		break;
+	case SURFACE_WALL:
+		WallTexture(face, t);
+		//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL001A\"\n");
+		//fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[0 1 0 0] 0.25\"\n");
+		//fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[0 0 -1 0] 0.25\"\n");
+		break;
+
+	}
 	fprintf(MAPFILE, "\t\t\t\"rotation\" \"0\"\n");
 	fprintf(MAPFILE, "\t\t\t\"lightmapscale\" \"16\"\n");
 	fprintf(MAPFILE, "\t\t\t\"smoothing_groups\" \"0\"\n");
 	fprintf(MAPFILE, "\t\t\}\n");
 	}
+
+void WallTexture(int face, tile t)
+{
+int wallTexture;
+float uAx_1=0;
+float uAx_2=1;
+float uAx_3=0;
+float uAx_4=0;
+float vAx_1=0;
+float vAx_2=0;
+float vAx_3=-1;
+float vAx_4=0;
+wallTexture=t.wallTexture;
+	switch (face)
+		{
+		case fSOUTH:
+			wallTexture = t.South;
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
+			uAx_1 = 1;
+			uAx_2 = 0;
+			uAx_3 = 0;
+			uAx_4 = 0;
+			vAx_1 = 0;
+			vAx_2 = 0;
+			vAx_3 = -1;
+			vAx_4 = 0;
+			break;
+		case fNORTH:
+			wallTexture = t.North;
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL014D\"\n");
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
+			uAx_1 = -1;
+			uAx_2 = 0;
+			uAx_3 = 0;
+			uAx_4 = 0;
+			vAx_1 = 0;
+			vAx_2 = 0;
+			vAx_3 = -1;
+			vAx_4 = 0;
+			break;
+		case fEAST:
+			wallTexture = t.East;
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL034D\"\n");
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
+			uAx_1 = 0;
+			uAx_2 = 1;
+			uAx_3 = 0;
+			uAx_4 = 0;
+			vAx_1 = 0;
+			vAx_2 = 0;
+			vAx_3 = -1;
+			vAx_4 = 0;
+			break;
+		case fWEST:
+			wallTexture = t.West;
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL045i\"\n");
+			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
+			uAx_1 = 0;
+			uAx_2 = -1;
+			uAx_3 = 0;
+			uAx_4 = 0;
+			vAx_1 = 0;
+			vAx_2 = 0;
+			vAx_3 = -1;
+			vAx_4 = 0;
+			break;
+		}
+	if ((wallTexture<0) || (wallTexture >512))
+		{
+		wallTexture=0;
+		}
+
+	fprintf(MAPFILE, "\t\t\t\"material\" \"%s\"\n", textureMasters[wallTexture].path);
+	fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[%f %f %f %f] %f\"\n", uAx_1, uAx_2, uAx_3, uAx_4, 0.9375);
+	fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[%f %f %f %f] %f\"\n", vAx_1, vAx_2, vAx_3, vAx_4, 0.9375);
+}
+
+void FloorTexture(int face, tile t)
+{
+int floorTexture;
+
+if (face == fCEIL)
+	{
+		floorTexture = t.shockCeilingTexture;
+	}
+else
+	{
+		floorTexture = t.floorTexture;
+	}
+
+if ((floorTexture<0) || (floorTexture >512))
+	{
+		floorTexture = 0;
+	}
+
+	fprintf(MAPFILE, "\t\t\t\"material\" \"%s\"\n", textureMasters[floorTexture].path);
+	fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[1 0 0 0] 0.9375\"\n");
+	fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[0 -1 0 0] 0.9375\"\n");
+}
 
 void RenderSourceOpenTile(int x, int y, tile &t, short Water, short invert)
 {
@@ -1080,7 +1194,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	int TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
 	int TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
 	int TRightZ = Top*BrushSizeZ;
-	Plane(1, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(1, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//North Face
 	BLeftX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
@@ -1092,7 +1206,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TRightX = t.tileX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(2, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(2, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//top Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1104,7 +1218,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TRightX = t.tileX*BrushSizeX + t.DimX + BrushSizeX;
 	TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(3, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(3, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_CEIL);
 
 	//west Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1116,7 +1230,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TRightX = t.tileX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(4, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(4, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//South face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1128,7 +1242,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//bottom face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1140,7 +1254,7 @@ void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
 	TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Bottom*BrushSizeZ;
-	Plane(6, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(6, fCEIL, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_FLOOR);
 
 
 	//fprintf(MAPFILE, "\t\t}\n");
@@ -1351,7 +1465,7 @@ void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;
 	TRightY = (t.tileY + 1)*BrushSizeX;
 	TRightZ = (Top)* BrushSizeZ;
-	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t,SURFACE_WALL);
 	//Western face
 	BLeftX = t.tileX*BrushSizeX;
 	BLeftY = (t.tileY + 1)*BrushSizeY;
@@ -1362,7 +1476,7 @@ void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 	TRightX = t.tileX*BrushSizeX;;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = (Top)* BrushSizeZ;
-	Plane(2, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(2, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 	//Northern face
 	BLeftX = (t.tileX + 1)*BrushSizeX;
 	BLeftY = (t.tileY + 1)*BrushSizeY;
@@ -1373,7 +1487,7 @@ void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 	TRightX = t.tileX*BrushSizeX;;
 	TRightY = (t.tileY + 1)*BrushSizeY;
 	TRightZ = (Top)* BrushSizeZ;
-	Plane(3, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(3, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//Top Face
 	BLeftX = (t.tileX)*BrushSizeX;
@@ -1385,7 +1499,7 @@ void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;;
 	TRightY = (t.tileY + 1)*BrushSizeY;
 	TRightZ = (Top)* BrushSizeZ;
-	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t,SURFACE_FLOOR);
 
 	//Bottom Face
 	BLeftX = (t.tileX)*BrushSizeX;
@@ -1397,7 +1511,7 @@ void RenderSourceDiagSEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX)*BrushSizeX;;
 	TRightY = (t.tileY + 1)*BrushSizeY;
 	TRightZ = (Bottom)* BrushSizeZ;
-	Plane(5, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(5, fCEIL, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_CEIL);
 
 	fprintf(MAPFILE, "\t}\n");
 }
@@ -1418,7 +1532,7 @@ void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX+1)*BrushSizeX;
 	TRightY = (t.tileY)*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t,SURFACE_WALL);
 	
 	//Eastern face
 	BLeftX = (t.tileX + 1)*BrushSizeX;
@@ -1430,7 +1544,7 @@ void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;
 	TRightY = (t.tileY + 1)*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(2, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(2, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//Northern face
 	BLeftX = (t.tileX + 1)*BrushSizeX;
@@ -1442,7 +1556,7 @@ void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
 	TRightX = t.tileX*BrushSizeX;;
 	TRightY = (t.tileY + 1)*BrushSizeY;
 	TRightZ = (Top)* BrushSizeZ;
-	Plane(3, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(3, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//Top Face
 	BLeftX = (t.tileX)*BrushSizeX;
@@ -1454,7 +1568,7 @@ void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;
 	TRightY = (t.tileY)*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_FLOOR);
 
 	//Bottom Face
 	BLeftX = (t.tileX+1)*BrushSizeX;
@@ -1466,7 +1580,7 @@ void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;
 	TRightY = (t.tileY)*BrushSizeY;;
 	TRightZ = Bottom*BrushSizeZ;
-	Plane(5, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(5, fCEIL, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_CEIL);
 
 	fprintf(MAPFILE, "\t}\n");
 
@@ -1489,7 +1603,7 @@ void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
 	TRightX =(t.tileX)*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ =Top*BrushSizeZ;
-	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t,SURFACE_WALL);
 	
 	//Eastern face
 	BLeftX = (t.tileX+1)*BrushSizeX;
@@ -1501,7 +1615,7 @@ void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX+1)*BrushSizeX;
 	TRightY = (t.tileY+1)*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(2, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(2, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 	
 	//South face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1513,7 +1627,7 @@ void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX+1)*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(3, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(3, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//Top Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1525,7 +1639,7 @@ void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX+1)*BrushSizeX;
 	TRightY = (t.tileY)*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(4, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_FLOOR);
 
 	//Bottom Face
 	BLeftX = (t.tileX )*BrushSizeX;
@@ -1537,7 +1651,7 @@ void RenderSourceDiagNWPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;
 	TRightY = (t.tileY)*BrushSizeY;
 	TRightZ = Bottom*BrushSizeZ;
-	Plane(5, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(5, fCEIL, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_CEIL);
 
 	fprintf(MAPFILE, "\t}\n");
 }
@@ -1558,7 +1672,7 @@ void RenderSourceDiagNEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX)*BrushSizeX;
 	TRightY = (t.tileY+1)*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 //western face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1570,7 +1684,7 @@ void RenderSourceDiagNEPortion(int Bottom, int Top, tile t)
 	TRightX = t.tileX*BrushSizeX;;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = (Top)* BrushSizeZ;
-	Plane(2, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(2, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 //Southern face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1582,7 +1696,7 @@ void RenderSourceDiagNEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX + 1)*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(3, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(3, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 //Top Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1594,7 +1708,7 @@ void RenderSourceDiagNEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX+1)*BrushSizeX;;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(4, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(4, fBOTTOM, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_FLOOR);
 
 //Bottom Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1606,7 +1720,7 @@ void RenderSourceDiagNEPortion(int Bottom, int Top, tile t)
 	TRightX = (t.tileX+1)*BrushSizeX;
 	TRightY = (t.tileY + 1)*BrushSizeY;
 	TRightZ = Bottom*BrushSizeZ;
-	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(5, fCEIL, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_CEIL);
 
 	fprintf(MAPFILE, "\t}\n");
 }
@@ -1628,7 +1742,7 @@ void RenderSlopedSourceCuboid(int x, int y, tile &t, short Water, int Bottom, in
 	int TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
 	int TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
 	int TRightZ = Top*BrushSizeZ;
-	Plane(1, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(1, fEAST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//North Face
 	BLeftX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
@@ -1640,7 +1754,7 @@ void RenderSlopedSourceCuboid(int x, int y, tile &t, short Water, int Bottom, in
 	TRightX = t.tileX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY + t.DimY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(2, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(2, fNORTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//top Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1678,7 +1792,7 @@ void RenderSlopedSourceCuboid(int x, int y, tile &t, short Water, int Bottom, in
 				break;
 			}
 		}
-	Plane(3, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(3, fTOP, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_SLOPE);
 
 	//west Face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1690,7 +1804,7 @@ void RenderSlopedSourceCuboid(int x, int y, tile &t, short Water, int Bottom, in
 	TRightX = t.tileX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(4, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(4, fWEST, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 
 	//South face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1702,7 +1816,7 @@ void RenderSlopedSourceCuboid(int x, int y, tile &t, short Water, int Bottom, in
 	TRightX = t.tileX*BrushSizeX + t.DimX*BrushSizeX;
 	TRightY = t.tileY*BrushSizeY;
 	TRightZ = Top*BrushSizeZ;
-	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(5, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t, SURFACE_WALL);
 	
 	//bottom face
 	BLeftX = t.tileX*BrushSizeX;
@@ -1741,7 +1855,7 @@ if (Floor == 0)
 			break;
 		}
 	}
-	Plane(6, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t);
+	Plane(6, fSOUTH, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t,SURFACE_SLOPE);
 
 
 	//fprintf(MAPFILE, "\t\t}\n");

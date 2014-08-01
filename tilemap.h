@@ -47,6 +47,8 @@ Note the order of these 4 tiles are actually different in SHOCK. I swap them aro
 
 #define SURFACE_FLOOR 1
 #define SURFACE_CEIL 2
+#define SURFACE_WALL 3
+#define SURFACE_SLOPE 4
 
 struct tile
 {
