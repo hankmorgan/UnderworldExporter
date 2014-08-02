@@ -55,12 +55,12 @@ int game = UW2;
 //int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
-//int mode = BITMAP_EXTRACT_MODE;
+int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
 //int mode = REPACK_MODE;
-int mode= SOURCE_MODE;
+//int mode= SOURCE_MODE;
 
 levelNo = 0;
 
@@ -101,7 +101,7 @@ switch (game)
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
-			extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR);
+			extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 32, UW_GRAPHICS_TEXTURES);
 			//extractPanels(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,game);
 			//extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
 			break;

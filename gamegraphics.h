@@ -8,10 +8,10 @@
 	
 struct palette
 {
-unsigned char red;
-unsigned char green;
-unsigned char blue;
-unsigned char reserved;
+	unsigned char blue;
+	unsigned char green;
+	unsigned char red;
+	unsigned char reserved;
 };
 
 struct BitMapHeader { 

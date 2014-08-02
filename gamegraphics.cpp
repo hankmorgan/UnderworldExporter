@@ -50,7 +50,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				{
 				NoOfTextures = ImageCount;
 				}
-			for (i = 0; i <= NoOfTextures; i++)
+			for (i = 0; i <NoOfTextures; i++)
 				{
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
 				writeBMP(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
@@ -152,13 +152,16 @@ void getPalette(char filePathPal[255], palette *pal, int paletteNo)
 	fread(palf, fileSizePal, 1, filePal);
 	fclose (filePal);
 	i = 0;
-	for (j = paletteNo*256; j < (paletteNo*256+256); j++) {
-		pal[i].green = palf[j*3+0]<<1;
-		pal[i].blue = palf[j*3+1]<<1;
-		pal[i].red = palf[j*3+2]<<1;		
+int palAddr = paletteNo * 256;
+	for (j = 0; j < 256; j++) {
+		pal[i].red = palf[palAddr + 0]<<2;//getValAtAddress(palf, palAddr + 0, 8);//palf[j * 3 + 2] << 2;
+		pal[i].green = palf[palAddr + 1] << 2;//getValAtAddress(palf, palAddr +1, 8);//palf[j * 3 + 0] << 2;
+		pal[i].blue = palf[palAddr + 2] << 2;//getValAtAddress(palf, palAddr + 2, 8);//palf[j * 3 + 1] << 2;
 		pal[i].reserved = 0;
+		palAddr = palAddr +3;
 		i++;
-	}			
+	}
+
 return;
 }
 
@@ -208,6 +211,13 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	fwrite(&bmhead.bfOffBits,4,1,outf);
 	fwrite(&bmihead,sizeof(BitMapInfoHeader),1,outf);
 	fwrite(pal,256*4,1,outf);
+	//for (int z = 0; z<256; z++)
+	//{
+	//	fwrite(&pal[z].red, 1, 1, outf);
+	//	fwrite(&pal[z].green , 1, 1, outf);
+	//	fwrite(&pal[z].blue , 1, 1, outf);
+	//	fwrite(&pal[z].reserved, 1, 1, outf);
+	//}
 	char ch = 0;
 	for (int k = bmihead.biHeight-1; k >= 0; k--) {
 		fwrite(Start+bits+(k*bmihead.biWidth),1,bmihead.biWidth,outf);
