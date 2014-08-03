@@ -6,3 +6,4 @@ Code credits from previous UW and System Shock Projects.
 4 UW2 decompression from Labyrinth of Worlds project.
 5 Height unit shifting idea borrowed from Abysmal.
 6 UW Image Decompression algorithm based on abysmal version.
+7 RLE Decoder lifted from UWAdventures
