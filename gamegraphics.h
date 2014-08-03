@@ -45,8 +45,11 @@ void getPalette(char filePathPal[255], palette *pal, int paletteNo);
 void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex);
 void copyNibbles(unsigned char *InputData, unsigned char  *OutputData, int NoOfNibbles, int add_ptr);
 int getcount(unsigned char *nibbles, int *addr_ptr, int size);
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg, palette *auxpal, int index);
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg, palette *auxpal, int index, int BitSize);
 void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16]);
 int getNibble(unsigned char *nibbles, int *addr_ptr);
+
+
+void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr, unsigned char *auxpal);
 
 #endif /*gamegraphics_h*/

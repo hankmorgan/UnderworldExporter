@@ -17,7 +17,7 @@
 #define UW1_TERRAIN_PROPS "C:\\Games\\UW1\\Data\\terrain.dat"
 #define UW1_CONVERSATION "C:\\Games\\UW1\\data\\cnv.ark"
 #define UW1_CRITTER_ASSOC "C:\\Games\\UW1\\crit\\assoc.anm"
-#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR00PAGE.N00"
+#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
 
 #define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "C:\\Underworld Exporter\\src\\trunk\\uw2_retro_config.txt"
@@ -50,7 +50,7 @@
 #define SCRIPT_BODY_FILE "C:\\Underworld Exporter\\src\\trunk\\scriptbody.txt"
 #define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock_1.script"
 #define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_1.map"
-//#define MAP_OUTPUT_FILE "C:\\source.vmf"
+#define MAP_OUTPUT_FILE_SOURCE "C:\\source.vmf"
 
 #define ENABLE_LIGHTING 0
 #define ENABLE_WATER 0

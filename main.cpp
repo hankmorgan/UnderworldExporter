@@ -50,8 +50,8 @@ int main()
 {
 //int game = SHOCK;
 //int game = UWDEMO;
-//int game = UW1;
-int game = UW2;
+int game = UW1;
+//int game = UW2;
 //int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
@@ -101,9 +101,9 @@ switch (game)
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
-			extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 32, UW_GRAPHICS_TEXTURES);
+			//extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 32, UW_GRAPHICS_TEXTURES);
 			//extractPanels(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,game);
-			//extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
+			extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
@@ -334,14 +334,22 @@ void exportMaps(int game,int mode,int LevelNo)
 	int roomIndex=1; 
 
 	char *filePath;
-	if ((mode == D3_MODE) || (mode == SOURCE_MODE))
+	if ((mode == D3_MODE))
 		{
 		if (fopen_s(&MAPFILE,MAP_OUTPUT_FILE, "w")!=0)
+			{
+			printf("Unable to create output file for map");
+			return;
+			}
+		}
+	if ((mode == SOURCE_MODE))
+	{
+		if (fopen_s(&MAPFILE, MAP_OUTPUT_FILE_SOURCE, "w") != 0)
 		{
-		printf("Unable to create output file for map");
-		return;
+			printf("Unable to create output file for map");
+			return;
 		}
-		}
+	}
 	switch (game)
 		{
 		case UWDEMO:		//Underworld Demo

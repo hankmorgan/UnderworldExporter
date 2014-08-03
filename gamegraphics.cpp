@@ -104,7 +104,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxpal, pal,auxPalIndex);
 						outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						DecodeRLEBitmap(imgNibbles,datalen,BitMapWidth,BitMapHeight,outputImg,auxpal,i);
+						DecodeRLEBitmap(imgNibbles,datalen,BitMapWidth,BitMapHeight,outputImg,auxpal,i,4);
 						break;
 					case 0xA://4 bit uncompressed
 						printf("4 bit uncompressed\n");
@@ -261,7 +261,7 @@ void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex)
 
 }
 
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight ,unsigned char *outputImg, palette *auxpal, int index)
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight ,unsigned char *outputImg, palette *auxpal, int index,int BitSize)
 {
 int state=0; 
 int curr_pxl=0;
@@ -277,14 +277,14 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 	{
 		case repeat_record_start:
 			{
-			count = getcount(imageData, &add_ptr,4);
+			count = getcount(imageData, &add_ptr,BitSize);
 			if (count == 1)
 				{
 				state = run_record;
 				}
 			else if (count == 2)
 				{
-				repeatcount = getcount(imageData, &add_ptr, 4)-1;
+				repeatcount = getcount(imageData, &add_ptr, BitSize) - 1;
 				state = repeat_record_start;
 				}
 			else
@@ -325,7 +325,7 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 	case 2:	//runrecord
 		{
 		//printf("\nRunRecord\n");
-		count = getcount(imageData, &add_ptr, 4);
+		count = getcount(imageData, &add_ptr, BitSize);
 		if (imageWidth*imageHeight - curr_pxl < count)
 			{
 				count = imageWidth*imageHeight - curr_pxl;
@@ -401,6 +401,60 @@ int i = 0;
 		}
 }
 
+void copyNibbles5Bit(unsigned char *InputData, unsigned char *OutputData, int NoOfNibbles, int add_ptr)
+{
+int bit_ptr=0;
+int bits_needed=5;
+int bits_avail=7;
+int mask[6];
+int i=0;
+mask[0] = 0x0;
+mask[1] = 0x1;
+mask[2] = 0x3;
+mask[3] = 0x7;
+mask[4] = 0xF;
+mask[5] = 0x1F;
+//mask[6] = 0x3F;
+//mask[7] = 0xFF;
+	while (NoOfNibbles > 0)
+		{
+		unsigned char buf;
+		printf("\n**%d***\n", i);
+		//read in my byte and take the needed bits from it
+		if (bit_ptr<=2)
+			{
+			bits_avail=5;
+			}
+		else 
+			{
+			bits_avail = 8 - bit_ptr;
+			}
+		if (bits_avail == 0)
+			{
+			add_ptr++;
+			bit_ptr=0;
+			bits_avail=5;
+			}
+		printf("\nReading in %d bits @ %d",bits_avail,bit_ptr);
+		buf = (InputData[add_ptr] >> (bit_ptr)) & mask[bits_avail];
+		bit_ptr=bit_ptr+bits_avail;
+		bits_needed= bits_needed-bits_avail;
+	
+		if (bits_needed > 0)
+			{//I need more bits. Read in the next byte and take whats there.
+			printf("\nI need %d bits", bits_needed);
+				add_ptr++;
+				bit_ptr = 0;
+				printf("\nReading in %d bits @ %d", bits_needed, bit_ptr);
+				buf = ((InputData[add_ptr] & mask[bits_needed])<<bits_needed) | buf;
+				bit_ptr=bits_needed;
+			}
+		OutputData[i]=buf;
+		i++;
+		bits_needed=5;
+		NoOfNibbles--;
+		}
+}
 
 //void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16])
 //{
@@ -556,6 +610,7 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo)
 {
 	palette *pal;
+	unsigned char auxpalval[32];
 	pal = new palette[256];
 	getPalette(PaletteFile, pal, PaletteNo);
 
@@ -615,9 +670,14 @@ void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo,
 	AddressPointer++;
 	printf("\nNo of Palettes %d",NoOfPals);
 	//AddressPointer = AddressPointer + auxPalNo*32;
+	if (auxPalNo==0)
+		{
+		auxPalNo=1;
+		}
 	for (int i = 0; i < 32; i++)
 		{
 		int value = getValAtAddress(critterFile,(AddressPointer)+(auxPalNo*i),8);
+		auxpalval[i]=value;
 		auxpal[i].green = pal[value].green;
 		auxpal[i].blue = pal[value].blue;
 		auxpal[i].red = pal[value].red;
@@ -639,11 +699,220 @@ void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo,
 		int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
 		int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
 		int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
-		unsigned char *imgNibbles;
+		//unsigned char *imgNibbles;
 		unsigned char *outputImg;
-		imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
-		copyNibbles(critterFile, imgNibbles, datalen, frameOffset+7);
+		//imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
+		//copyNibbles5Bit(critterFile, imgNibbles, datalen, frameOffset+7);
+		//copyNibbles(critterFile, imgNibbles, datalen, frameOffset + 7);
 		outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-		DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i);
+		ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+		writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal);
+		//DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i,4);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits,
+	unsigned int datalen, unsigned int maxpix, int addr_ptr,unsigned char *auxpal)
+{
+	// bit extraction variables
+	unsigned int bits_avail = 0;
+	unsigned int rawbits = 0;
+	unsigned int bitmask = ((1 << bits) - 1) << (8 - bits);
+	unsigned int nibble;
+
+	// rle decoding vars
+	unsigned int pixcount = 0;
+	unsigned int stage = 0; // we start in stage 0
+	unsigned int count = 0;
+	unsigned int record = 0; // we start with record 0=repeat (3=run)
+	unsigned int repeatcount = 0;
+
+	while (datalen>0 && pixcount<maxpix)
+	{
+		// get new bits
+		if (bits_avail<bits)
+		{
+			// not enough bits available
+			if (bits_avail>0)
+			{
+				nibble = ((rawbits & bitmask) >> (8 - bits_avail));
+				nibble <<= (bits - bits_avail);
+			}
+			else
+				nibble = 0;
+
+			//rawbits = (unsigned int)fgetc(fd);
+			rawbits = (unsigned int)getValAtAddress(FileIn,addr_ptr,8);
+			addr_ptr++;
+			if ((int)rawbits == EOF)
+				return;
+
+			//         printf("fgetc: %02x\n",rawbits);
+
+			unsigned int shiftval = 8 - (bits - bits_avail);
+
+			nibble |= (rawbits >> shiftval);
+
+			rawbits = (rawbits << (8 - shiftval)) & 0xFF;
+
+			bits_avail = shiftval;
+		}
+		else
+		{
+			// we still have enough bits
+			nibble = (rawbits & bitmask) >> (8 - bits);
+			bits_avail -= bits;
+			rawbits <<= bits;
+		}
+
+		//      printf("nibble: %02x\n",nibble);
+
+		// now that we have a nibble
+		datalen--;
+
+		switch (stage)
+		{
+		case 0: // we retrieve a new count
+			if (nibble == 0)
+				stage++;
+			else
+			{
+				count = nibble;
+				stage = 6;
+			}
+			break;
+		case 1:
+			count = nibble;
+			stage++;
+			break;
+
+		case 2:
+			count = (count << 4) | nibble;
+			if (count == 0)
+				stage++;
+			else
+				stage = 6;
+			break;
+
+		case 3:
+		case 4:
+		case 5:
+			count = (count << 4) | nibble;
+			stage++;
+			break;
+		}
+
+		if (stage<6) continue;
+
+		switch (record)
+		{
+		case 0:
+			// repeat record stage 1
+			//         printf("repeat: new count: %x\n",count);
+
+			if (count == 1)
+			{
+				record = 3; // skip this record; a run follows
+				break;
+			}
+
+			if (count == 2)
+			{
+				record = 2; // multiple run records
+				break;
+			}
+
+			record = 1; // read next nibble; it's the color to repeat
+			continue;
+
+		case 1:
+			// repeat record stage 2
+
+		{
+				  // repeat 'nibble' color 'count' times
+				  for (unsigned int n = 0; n<count; n++)
+				  {
+					  pixels[pixcount++] = auxpal[nibble];
+					  if (pixcount >= maxpix)
+						  break;
+				  }
+		}
+
+			//         printf("repeat: wrote %x times a '%x'\n",count,nibble);
+
+			if (repeatcount == 0)
+			{
+				record = 3; // next one is a run record
+			}
+			else
+			{
+				repeatcount--;
+				record = 0; // continue with repeat records
+			}
+			break;
+
+		case 2:
+			// multiple repeat stage
+
+			// 'count' specifies the number of repeat record to appear
+			//         printf("multiple repeat: %u\n",count);
+			repeatcount = count - 1;
+			record = 0;
+			break;
+
+		case 3:
+			// run record stage 1
+			// copy 'count' nibbles
+
+			//         printf("run: count: %x\n",count);
+
+			record = 4; // retrieve next nibble
+			continue;
+
+		case 4:
+			// run record stage 2
+
+			// now we have a nibble to write
+			pixels[pixcount++] = auxpal[nibble];
+
+			if (--count == 0)
+			{
+				//            printf("run: finished\n");
+				record = 0; // next one is a repeat again
+			}
+			else
+				continue;
+			break;
+		}
+
+		stage = 0;
+		// end of while loop
 	}
 }

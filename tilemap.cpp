@@ -166,7 +166,7 @@ void CleanUp(tile LevelInfo[64][64], int game)
 			}
 		}
 	}
-	//return;
+	return;
 //if (game == SHOCK) {return;}
 	int j=1 ;
 	//Now lets combine the solids along particular axis
