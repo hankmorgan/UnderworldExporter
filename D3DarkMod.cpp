@@ -821,10 +821,10 @@ switch (game)
 			tmp.ceilingHeight =0;
 			tmp.floorTexture = LevelInfo[0][0].shockCeilingTexture;
 			tmp.shockCeilingTexture = LevelInfo[0][0].shockCeilingTexture;
-			tmp.East= CAULK;
-			tmp.West = CAULK;
-			tmp.North = CAULK;
-			tmp.South = CAULK;
+			tmp.East = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			tmp.West = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			tmp.North = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			tmp.South = LevelInfo[0][0].shockCeilingTexture;//CAULK;
 			RenderDarkModTile(game, 0, 0, tmp,0,0,1,0);
 			
 

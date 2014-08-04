@@ -48,14 +48,16 @@ extern int GAME;
 
 int main()
 {
+int game=-1;
+int mode=-1;
 //int game = SHOCK;
 //int game = UWDEMO;
-int game = UW1;
+//int game = UW1;
 //int game = UW2;
 //int mode = D3_MODE;
 //int mode = ASCII_MODE;
 //int mode = STRINGS_EXTRACT_MODE;
-int mode = BITMAP_EXTRACT_MODE;
+//int mode = BITMAP_EXTRACT_MODE;
 //int mode = SCRIPT_BUILD_MODE;
 //int mode = MATERIALS_BUILD_MODE;
 //int mode = CONVERSATION_MODE;
@@ -63,6 +65,127 @@ int mode = BITMAP_EXTRACT_MODE;
 //int mode= SOURCE_MODE;
 
 levelNo = 0;
+printf("Welcome to Underworld Exporter.\n");
+	printf("\nAvailable games\n");
+	printf("0) Ultima Underworld Demo (probably doesn't work!)\n");
+	printf("1) Ultima Underworld 1: The Stygian Abyss\n");
+	printf("2) Ultima Underworld 2: The Labyrinth of Worlds\n");
+	printf("3) System Shock 1\n");
+	printf("Please select a game.\n>");
+	scanf("%d",&game);
+	if ((game < UWDEMO) || (game > SHOCK))
+		{
+		printf("Invalid input. Bye.");
+		return 0;
+		}
+
+printf("Available Modes.\n");
+printf("%d) Ascii dump.\n",ASCII_MODE);
+printf("%d) IDTech/DarkMod export.\n",D3_MODE);
+printf("%d) String Extraction\n",STRINGS_EXTRACT_MODE);
+printf("%d) Bitmap Extraction\n",BITMAP_EXTRACT_MODE);
+printf("%d) Script build(Also runs as part of IDTech export)\n",SCRIPT_BUILD_MODE);
+printf("%d) Support Materials Builder\n",MATERIALS_BUILD_MODE);
+printf("%d) Conversation code dump (unfinished!)\n",CONVERSATION_MODE);
+printf("%d) Repacker mode (UW2 and Shock only. Use at own risk!)\n",REPACK_MODE);
+printf("%d) Source Engine export.\n",SOURCE_MODE);
+printf("Please select a mode.\n>");
+scanf("%d", &mode);
+if ((mode < 0) || (mode > 8))
+{
+	printf("Invalid input. Bye.");
+	return 0;
+}
+
+switch (mode)
+{
+case ASCII_MODE:
+case D3_MODE:
+case SOURCE_MODE:
+case SCRIPT_BUILD_MODE:
+	{
+	switch (game)
+		{
+			case UWDEMO:
+				levelNo = 0;	//only possible value
+				break;
+			case UW1://Print list of UW1 levels.
+				printf("\nPick a level\n");
+				printf("0)Entrance level.\n");
+				printf("1)Domain of the Mountainmen.\n");
+				printf("2)The Swamp and Lizardmen.\n");
+				printf("3)Trolls and Knights.\n");
+				printf("4)Catacombs and banquet halls.\n");
+				printf("5)The Seers.\n");
+				printf("6)Tybals Lair.\n");
+				printf("7)The Volcano.\n");
+				printf("8)Ethereal Void.\n");
+				printf(">");
+				scanf("%d", &levelNo);
+				if ((levelNo < 0) || (levelNo > 9))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+				break;
+			case UW2:
+				printf("\nPick a level\n");
+				printf("0 - 4 Britannia\n");
+				printf("8 - 15 Prison Tower\n");
+				printf("16 - 17 Killorn Keep\n");
+				printf("24 - 25 Ice Cavern\n");
+				printf("32 - 33 Talorus\n");
+				printf("40 - 47 Academy\n");
+				printf("48 - 51 Tomb\n");
+				printf("56 - 58 Pits\n");
+				printf("64 - 72 Void (65 is stickman level)\n");
+				printf(">");
+				scanf("%d", &levelNo);
+				if (!(
+					((levelNo >= 0) && (levelNo <= 4))
+					|| ((levelNo >= 8) && (levelNo <= 15))
+					|| ((levelNo >= 16) && (levelNo <= 17))
+					|| ((levelNo >= 24) && (levelNo <= 25))
+					|| ((levelNo >= 32) && (levelNo <= 33))
+					|| ((levelNo >= 40) && (levelNo <= 47))
+					|| ((levelNo >= 48) && (levelNo <= 51))
+					|| ((levelNo >= 56) && (levelNo <= 58))
+					|| ((levelNo >= 64) && (levelNo <= 72))
+					))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+				break;
+			case SHOCK:
+				printf("\nPick a level (need to dblchk these)\n");
+				printf("0)Reactor\n");
+				printf("1)Med SCI\n");
+				printf("2)Research\n");
+				printf("3)Maintenance\n");
+				printf("4)Storage\n");
+				printf("5)Flight Deck\n");
+				printf("6)Executive\n");
+				printf("7)System Engineering\n");
+				printf("8)Security\n");
+				printf("9)Bridge\n");
+				printf("10)Cyberspace 1 (Shodan)\n");
+				printf("11)Grove 1\n");
+				printf("12)Grove 1\n");
+				printf("13)Grove 1\n");
+				printf("14)Cyberspace 2\n");
+				printf("15)Cyberspace 3\n");
+				printf(">");
+				scanf("%d", &levelNo);
+				if ((levelNo < 0) || (levelNo > 15))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+				break;
+				}
+		}
+	}
 
 GAME = game;
 switch (game)
@@ -101,9 +224,9 @@ switch (game)
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
-			//extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 32, UW_GRAPHICS_TEXTURES);
+			extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 32, UW_GRAPHICS_GR);
 			//extractPanels(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,game);
-			extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
+			//extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);

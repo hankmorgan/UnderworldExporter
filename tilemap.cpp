@@ -311,7 +311,6 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	int textureMapSize;
 	
 	UW_CEILING_HEIGHT = ((128 >> 2) * 8 >>3);	//Shifts the scale of the level. Idea borrowed from abysmal
-	
 	switch (game)
 	{
 	case UWDEMO:	//UW Demo

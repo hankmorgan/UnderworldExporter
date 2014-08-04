@@ -38,6 +38,8 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	switch (FileType)
 	{
 		case UW_GRAPHICS_BITMAPS:	//BYT
+			writeBMP(textureFile, 0, 320, 200, 0, pal);
+			break;
 		case UW_GRAPHICS_TEXTURES :	//.tr
 			printf("File Type :%d\n",  textureFile[0]);
 			printf("xy resolution:%d\n", textureFile[1]);

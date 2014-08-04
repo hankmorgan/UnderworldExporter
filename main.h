@@ -28,8 +28,8 @@
 #define UW2_OUT_PATH "C:\\Games\\UW2\\data\\lev_out.ark"
 
 //Change these depending on which set of textures you want to extract
-#define GRAPHICS_FILE "C:\\Games\\UW1\\DATA\\F32.TR"
-#define GRAPHICS_PAL_FILE "C:\\Games\\UW1\\DATA\\pals.dat"
+#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\DOORS.GR"
+#define GRAPHICS_PAL_FILE "C:\\Games\\UW2\\DATA\\pals.dat"
 #define AUXILARY_PAL_FILE "C:\\Games\\UW2\\DATA\\allpals.dat"
 
 
