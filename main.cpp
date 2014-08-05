@@ -41,8 +41,10 @@ char Graphics_Pal[255];
 char path_uw0[100];
 char path_uw1[100];
 char path_uw2[100];
-char path_target_platform[100];
 char path_shock[100];
+char TempOutFileName[255];
+
+char path_target_platform[100];
 char OutFileName[255];
 char GameFilePath[255];
 FILE *f = NULL;
@@ -238,6 +240,7 @@ case ASCII_MODE:
 case D3_MODE:
 case SOURCE_MODE:
 case SCRIPT_BUILD_MODE:
+case REPACK_MODE:
 	{
 	switch (game)
 		{
@@ -268,15 +271,30 @@ case SCRIPT_BUILD_MODE:
 				}
 			break;
 		case SHOCK:
+			printf("\nPick a level archive or save game to open\n");
+			for (int i = 0; i < 9; i++)
+				{
+				printf("%d) %s\n", i, shock_game_files[i]);
+				}
+			printf(">");
+			scanf("%d", &gamefile);
+			if ((gamefile < 0) || (gamefile >= 10))
+				{
+				printf("Invalid input. Bye.");
+				return 0;
+				}
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_shock, shock_game_files[gamefile]);
 			break;
 		}
+	if (mode !=REPACK_MODE)
+	{
 	switch (game)
 		{
 			case UWDEMO:
 				levelNo = 0;	//only possible value
 				break;
 			case UW1://Print list of UW1 levels.
-				printf("\nPick a level\n");
+				printf("\nPick a level.\n");
 				printf("0)Entrance level.\n");
 				printf("1)Domain of the Mountainmen.\n");
 				printf("2)The Swamp and Lizardmen.\n");
@@ -350,10 +368,34 @@ case SCRIPT_BUILD_MODE:
 					}
 				break;
 				}
-	printf("Enter a filename for output (%s\\[filename].map)\n>", path_target_platform);
-	char TempOutFileName[255];
-	scanf("%s", TempOutFileName);
-	sprintf_s(OutFileName, 255, "%s\\%s", path_target_platform, TempOutFileName);
+		printf("Enter a filename for output (%s\\[filename].map)\n>", path_target_platform);
+		
+		scanf("%s", TempOutFileName);
+		sprintf_s(OutFileName, 255, "%s\\%s", path_target_platform, TempOutFileName);
+		}
+	else
+		{
+		switch (game)
+			
+			{
+				case UW2:
+				printf("Enter a filename for repacking into (%s\\data\\[filename].ark)\n>", path_uw2);
+				
+				scanf("%s", TempOutFileName);
+				sprintf_s(OutFileName, 255, "%s\\data\\%s.ark", path_uw2, TempOutFileName);
+				break;
+			case SHOCK:
+				printf("Enter a filename for repacking into (%s\\[filename].data)\n>", path_shock);
+				scanf("%s", TempOutFileName);
+				sprintf_s(OutFileName, 255, "%s\\res\\data\\%s.ark", path_target_platform, TempOutFileName);
+				break;
+			default:
+				printf("\nInvalid game for repacking. Goodbye");
+				return 0;
+			}
+
+		}
+		
 	break;
 	}
 case BITMAP_EXTRACT_MODE:
@@ -520,13 +562,13 @@ switch (game)
 		case REPACK_MODE:
 			if (game==UW2)
 				{
-				RepackUW2();
+				RepackUW2(GameFilePath,OutFileName);
 				}
 			else
 				{
 					if (game == SHOCK)
 					{
-						RepackShock();
+					RepackShock(GameFilePath, OutFileName);
 					}
 				}
 			break;
@@ -731,6 +773,7 @@ void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char fileP
 	long texture_map_shock[272];
 	int roomIndex=1; 
 	char Map_Output_File[255];
+	char Script_Output_File[255];
 	//char *filePath;
 	
 	if ((mode == D3_MODE))
@@ -852,13 +895,14 @@ void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char fileP
 			}
 		case SCRIPT_BUILD_MODE:
 			{
+			sprintf_s(Script_Output_File, 255, "%s.script", OutFileName);
 			if (game !=SHOCK)
 				{
-				buildScriptsUW(game,LevelInfo,objList,LevelNo);
+				buildScriptsUW(game, LevelInfo, objList, LevelNo, Script_Output_File);
 				}
 			else	
 				{
-				BuildScriptsShock(game,LevelInfo,objList,LevelNo);
+				BuildScriptsShock(game, LevelInfo, objList, LevelNo, Script_Output_File);
 				}
 			 break;
 			}

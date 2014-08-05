@@ -327,7 +327,7 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 
 
 
-void RepackUW2()
+void RepackUW2(char InputFile[255], char OutputFile[255])
 {
 	//hopefully repacks a compressed level file into one containing uncompressed chuncks that I can edit to test object properties.
 
@@ -337,7 +337,7 @@ void RepackUW2()
 	long fileSize;
 	unsigned char *lev_ark;
 	int NoOfBlocks;
-	if ((file = fopen(UW2_LEVEL_PATH, "rb")) == NULL)
+	if ((file = fopen(InputFile, "rb")) == NULL)
 	{
 		printf("Could not open specified file\n");
 		return;
@@ -459,7 +459,7 @@ void RepackUW2()
 	//////fclose(file);
 	////////Write out a file.
 
-	if ((file = fopen(UW2_OUT_PATH, "w+b")) == NULL)
+	if ((file = fopen(OutputFile, "w+b")) == NULL)
 		{
 		printf("Could not open specified file\n");
 		return;
@@ -585,7 +585,7 @@ void RepackUW2()
 	fclose(file);
 
 
-	if ((file = fopen(UW2_OUT_PATH, "rb")) == NULL)
+	if ((file = fopen(OutputFile, "rb")) == NULL)
 		{
 			printf("Could not open specified file\n");
 			return;
@@ -678,7 +678,7 @@ void WriteInt24(FILE *file, long val)
 	fputc(valOut, file);
 }
 
-void RepackShock()
+void RepackShock(char InputFile[255], char OutputFile[255])
 {
 	unsigned char *archive_ark;
 	unsigned char *tmp_ark;
@@ -698,7 +698,7 @@ void RepackShock()
 //load the shock resource file.
 	//Read in the archive.
 	FILE *file = NULL;      // File pointer
-	if ((file = fopen(SHOCK_LEVEL_PATH, "rb")) == NULL)
+	if ((file = fopen(InputFile, "rb")) == NULL)
 	{
 		printf("\nArchive not found!\n");
 		return;
@@ -761,7 +761,7 @@ void RepackShock()
 		}
 
 //Write my data.
-	if ((file = fopen(SHOCK_OUT_PATH, "w+b")) == NULL)
+	if ((file = fopen(OutputFile, "w+b")) == NULL)
 	{
 		printf("Could not open specified file\n");
 		return;
@@ -848,7 +848,7 @@ void RepackShock()
 
 //Reread my data
 	//*file = NULL;      // File pointer
-	if ((file = fopen(SHOCK_OUT_PATH, "rb")) == NULL)
+	if ((file = fopen(OutputFile, "rb")) == NULL)
 	{
 		printf("\nArchive not found!\n");
 		return;

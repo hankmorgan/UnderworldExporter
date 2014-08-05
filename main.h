@@ -19,13 +19,13 @@
 #define UW1_CRITTER_ASSOC "crit\\assoc.anm"
 #define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
 
-#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
+//#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "uw2_retro_config.txt"
 #define UW2_TEXTURE_CONFIG_FILE_SOURCE "uw2_retro_config_source.txt"
 #define UW2_OBJECT_CONFIG_FILE "uw2_object_config.txt"
 #define UW2_STRINGS_FILE "data\\strings.pak"
 #define UW2_TERRAIN_PROPS "Data\\terrain.dat"
-#define UW2_OUT_PATH "C:\\Games\\UW2\\data\\Repacked.ark"
+//#define UW2_OUT_PATH "C:\\Games\\UW2\\data\\Repacked.ark"
 
 //Change these depending on which set of textures you want to extract
 //#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\DOORS.GR"
@@ -33,14 +33,14 @@
 #define AUXILARY_PAL_FILE "C:\\Games\\UW2\\DATA\\allpals.dat"
 
 
-#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\ARCHIVE.dat"
-#define SHOCK_STRINGS_FILE "C:\\Games\\SystemShock\\Res\\DATA\\CYBSTRNG.RES"
+//#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\ARCHIVE.dat"
+#define SHOCK_STRINGS_FILE "\\Res\\DATA\\CYBSTRNG.RES"
 #define SHOCK_TEXTURE_CONFIG_FILE "shock_texture_config.txt"
 #define SHOCK_TEXTURE_CONFIG_FILE_SOURCE "shock_texture_config_source.txt"
 #define SHOCK_OBJECT_CONFIG_FILE "shock_object_config.txt"
-#define SHOCK_COMMONOBJ_FILE  "DATA\\objprop.dat"
-#define SHOCK_MODEL_FILE  "DATA\\obj3d.res"
-#define SHOCK_OUT_PATH "C:\\Games\\SystemShock\\Res\\DATA\\Repacked.dat"
+#define SHOCK_COMMONOBJ_FILE  "Res\\DATA\\objprop.dat"
+#define SHOCK_MODEL_FILE  "Res\\DATA\\obj3d.res"
+//#define SHOCK_OUT_PATH "C:\\Games\\SystemShock\\Res\\DATA\\Repacked.dat"
 
 #define ENTRANCES_CONFIG_FILE  "uw1_entrances.txt"
 
@@ -48,7 +48,7 @@
 #define SCRIPT_GlOBAL_FILE "scriptglobal.txt"
 #define SCRIPT_MAIN_FILE "scriptmain.txt"
 #define SCRIPT_BODY_FILE "scriptbody.txt"
-#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock_1.script"
+//#define SCRIPT_FINAL_FILE "C:\\games\\darkmod\\maps\\shock_1.script"
 //#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_1.map"
 #define MAP_OUTPUT_FILE_SOURCE "C:\\source.vmf"
 

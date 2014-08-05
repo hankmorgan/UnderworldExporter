@@ -580,7 +580,7 @@ for(i=1;i<=noofCond;i++)
 
 //0       1        2                       3       4      5   6   7     8       9      10       11     12
 //Index   Type    Description             TileX   TileY   x   y   z   heading qual    owner   link    flags
-void buildScriptsUW(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo)
+void buildScriptsUW(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo, char Script_Final_File[255])
 {
 int conditionalCount =0;
 int TriggerTargetX=-1;
@@ -752,7 +752,7 @@ for (int i = 0; i < 1600; i++)
 	//now merge these three together
 	FILE *fFINALSCRIPT;
 	char line[255];
-	if (fopen_s(&fFINALSCRIPT,SCRIPT_FINAL_FILE, "w")==0)
+	if (fopen_s(&fFINALSCRIPT,Script_Final_File, "w")==0)
 		{
 		//fprintf(fFINALSCRIPT,"#ifndef __game%d_%d_script__\n#__game%d_%d_script__\n",game,LevelNo,game,LevelNo);
 		
@@ -938,7 +938,7 @@ void scriptChainFunctionsUW(int game, ObjectItem objList[1600], ObjectItem currO
 		}
 	}
 	
-void BuildScriptsShock(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo)
+void BuildScriptsShock(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo, char Script_Final_File[255])
 {
 	
 if (fopen_s(&fBODY,SCRIPT_BODY_FILE, "w")!=0)
@@ -1193,7 +1193,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 	//now merge these three together
 	FILE *fFINALSCRIPT;
 	char line[255];
-	if (fopen_s(&fFINALSCRIPT,SCRIPT_FINAL_FILE, "w")==0)
+	if (fopen_s(&fFINALSCRIPT, Script_Final_File, "w") == 0)
 		{
 		//fprintf(fFINALSCRIPT,"#ifndef __game%d_%d_script__\n#define __game%d_%d_script__\n",game,LevelNo,game,LevelNo);
 		
