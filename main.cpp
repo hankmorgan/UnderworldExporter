@@ -23,25 +23,6 @@ using namespace std;
 texture *textureMasters;
 objectMaster *objectMasters;
 FILE *MAPFILE;
-//shockObjectMaster *shockObjectMasters;
-
-//void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
-//
-
-//void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
-//
-//
-//void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long texture_map[256],char *filePath, int game, int LevelNo);
-////void BuildObjectListShock(tile LevelInfo[64][64], shockObjectItem shockobjList[1600], long texture_map[256],char *filePath, int game, int LevelNo);
-//
-//
-//
-//
-//void RenderDarkModLevel(tile LevelInfo[64][64],ObjectItem objList[1600],int game);
-//void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
-
-//
-//
 
 extern int levelNo;
 extern int GAME;
@@ -50,6 +31,159 @@ int main()
 {
 int game=-1;
 int mode=-1;
+int gamefile=-1;
+int graphics_file_no=-1;
+int graphics_mode;
+int BitMapSize=32;
+int panels = 0;//Panels.gr are a special case for extraction
+char Graphics_File[255];
+char Graphics_Pal[255];
+char path_uw0[100];
+char path_uw1[100];
+char path_uw2[100];
+char path_target_platform[100];
+char path_shock[100];
+char OutFileName[255];
+char GameFilePath[255];
+FILE *f = NULL;
+if ((f = fopen("gamepaths.txt", "r")) == NULL)
+	{
+	printf("Could not open specified file\n");
+	return 0;
+	}
+
+fgets(path_uw0, 100, f);
+int ln = strlen(path_uw0) - 1;
+if (path_uw0[ln] == '\n')
+path_uw0[ln] = '\0';
+
+fgets(path_uw1, 100, f);
+ln = strlen(path_uw1) - 1;
+if (path_uw1[ln] == '\n')
+path_uw1[ln] = '\0';
+
+fgets(path_uw2, 100, f);
+ln = strlen(path_uw2) - 1;
+if (path_uw2[ln] == '\n')
+path_uw2[ln] = '\0';
+
+fgets(path_shock, 100, f);
+ln = strlen(path_shock) - 1;
+if (path_shock[ln] == '\n')
+path_shock[ln] = '\0';
+
+fgets(path_target_platform, 100, f);
+ln = strlen(path_target_platform) - 1;
+if (path_target_platform[ln] == '\n')
+path_target_platform[ln] = '\0';
+
+fclose(f);
+const char *uw_game_files[6];
+uw_game_files[0] = "Data\\lev.ark";
+uw_game_files[1] = "Save0\\lev.ark";
+uw_game_files[2] = "Save1\\lev.ark";
+uw_game_files[3] = "Save2\\lev.ark";
+uw_game_files[4] = "Save3\\lev.ark";
+uw_game_files[5] = "Save4\\lev.ark";
+
+const char *shock_game_files[9];
+shock_game_files[0] = "Data\\archive.dat";
+shock_game_files[1] = "Data\\SAVGAM00.dat";
+shock_game_files[2] = "Data\\SAVGAM01.dat";
+shock_game_files[3] = "Data\\SAVGAM02.dat";
+shock_game_files[4] = "Data\\SAVGAM03.dat";
+shock_game_files[5] = "Data\\SAVGAM04.dat";
+shock_game_files[6] = "Data\\SAVGAM05.dat";
+shock_game_files[7] = "Data\\SAVGAM06.dat";
+shock_game_files[8] = "Data\\SAVGAM07.dat";
+
+
+
+const char *uw1_graphics_file[45];
+const char *uw2_graphics_file[36];
+uw1_graphics_file[0] = "F16.tr";// - Floor textures 16x16");
+uw1_graphics_file[1] = "F32.tr";// - Floor textures 32x32\n");
+uw1_graphics_file[2] = "W16.tr";// - Wall textures 16x16");
+uw1_graphics_file[3] = "W64.tr";// - Wall textures 64x64\n");
+uw1_graphics_file[4] = "3DWIN.GR";
+uw1_graphics_file[5] = "ANIMO.GR";
+uw1_graphics_file[6] = "ARMOR_F.GR";
+uw1_graphics_file[7] = "ARMOR_G.GR";
+uw1_graphics_file[8] = "BODIES.GR";
+uw1_graphics_file[9] = "BUTTONS.GR";
+uw1_graphics_file[10] = "CHAINS.GR";
+uw1_graphics_file[11] = "CHARHEAD.GR";
+uw1_graphics_file[12] = "CHRBTNS.GR";
+uw1_graphics_file[13] = "COMPASS.GR";
+uw1_graphics_file[14] = "CONVERSE.GR";
+uw1_graphics_file[15] = "CURSORS.GR";
+uw1_graphics_file[16] = "DOORS.GR";
+uw1_graphics_file[17] = "DRAGONS.GR";
+uw1_graphics_file[18] = "EYES.GR";
+uw1_graphics_file[19] = "FLASKS.GR";
+uw1_graphics_file[20] = "GENHEAD.GR";
+uw1_graphics_file[21] = "HEADS.GR";
+uw1_graphics_file[22] = "INV.GR";
+uw1_graphics_file[23] = "LFTI.GR";
+uw1_graphics_file[24] = "OBJECTS.GR";
+uw1_graphics_file[25] = "OPTBN";
+uw1_graphics_file[26] = "OPTB";
+uw1_graphics_file[27] = "OPTBNS";
+uw1_graphics_file[28] = "PANELS.GR";
+uw1_graphics_file[29] = "POWER.GR";
+uw1_graphics_file[30] = "QUEST.GR";
+uw1_graphics_file[31] = "SCRLEDGE.GR";
+uw1_graphics_file[32] = "SPELLS.GR";
+uw1_graphics_file[33] = "TMFLAT.GR";
+uw1_graphics_file[34] = "TMOBJ.GR";
+uw1_graphics_file[35] = "WEAPONS.GR";
+uw1_graphics_file[36] = "BLNKMAP.BYT";
+uw1_graphics_file[37] = "CHARGEN.BYT";
+uw1_graphics_file[38] = "CONV.BYT";
+uw1_graphics_file[39] = "MAIN.BYT";
+uw1_graphics_file[40] = "OPSCR.BYT";
+uw1_graphics_file[41] = "PRES1.BYT";
+uw1_graphics_file[42] = "PRES2.BYT";
+uw1_graphics_file[43] = "WIN1.BYT";
+uw1_graphics_file[44] = "WIN2.BYT";
+
+uw2_graphics_file[0] = "T64.tr";//uw2 textures
+uw2_graphics_file[1] = "3DWIN.GR";
+uw2_graphics_file[2] = "ANIMO.GR";
+uw2_graphics_file[3] = "ARMOR_F.GR";
+uw2_graphics_file[4] = "ARMOR_G.GR";
+uw2_graphics_file[5] = "BODIES.GR";
+uw2_graphics_file[6] = "BUTTONS.GR";
+uw2_graphics_file[7] = "CHAINS.GR";
+uw2_graphics_file[8] = "CHARHEAD.GR";
+uw2_graphics_file[9] = "CHRBTNS.GR";
+uw2_graphics_file[10] = "COMPASS.GR";
+uw2_graphics_file[11] = "CONVERSE.GR";
+uw2_graphics_file[12] = "CURSORS.GR";
+uw2_graphics_file[13] = "DOORS.GR";
+uw2_graphics_file[14] = "DRAGONS.GR";
+uw2_graphics_file[15] = "EYES.GR";
+uw2_graphics_file[16] = "FLASKS.GR";
+uw2_graphics_file[17] = "GEMPT.GR";
+uw2_graphics_file[18] = "GENHEAD.GR";
+uw2_graphics_file[19] = "GHEAD.GR";
+uw2_graphics_file[20] = "HEADS.GR";
+uw2_graphics_file[21] = "INV.GR";
+uw2_graphics_file[22] = "LFTI.GR";
+uw2_graphics_file[23] = "OBJECTS.GR";
+uw2_graphics_file[24] = "OPTBN";
+uw2_graphics_file[25] = "OPTB";
+uw2_graphics_file[26] = "OPTBNS";
+uw2_graphics_file[27] = "PANELS.GR";
+uw2_graphics_file[28] = "POWER.GR";
+uw2_graphics_file[29] = "QUESTION.GR";
+uw2_graphics_file[30] = "SCRLEDGE.GR";
+uw2_graphics_file[31] = "SPELLS.GR";
+uw2_graphics_file[32] = "TMFLAT.GR";
+uw2_graphics_file[33] = "TMOBJ.GR";
+uw2_graphics_file[34] = "VIEWS.GR";
+uw2_graphics_file[35] = "WEAP.GR";
+
 //int game = SHOCK;
 //int game = UWDEMO;
 //int game = UW1;
@@ -64,7 +198,7 @@ int mode=-1;
 //int mode = REPACK_MODE;
 //int mode= SOURCE_MODE;
 
-levelNo = 0;
+levelNo = -1;
 printf("Welcome to Underworld Exporter.\n");
 	printf("\nAvailable games\n");
 	printf("0) Ultima Underworld Demo (probably doesn't work!)\n");
@@ -88,7 +222,8 @@ printf("%d) Script build(Also runs as part of IDTech export)\n",SCRIPT_BUILD_MOD
 printf("%d) Support Materials Builder\n",MATERIALS_BUILD_MODE);
 printf("%d) Conversation code dump (unfinished!)\n",CONVERSATION_MODE);
 printf("%d) Repacker mode (UW2 and Shock only. Use at own risk!)\n",REPACK_MODE);
-printf("%d) Source Engine export.\n",SOURCE_MODE);
+printf("%d) Source Engine export\n",SOURCE_MODE);
+printf("%d) Critter Art Extract\n", CRITTER_EXTRACT_MODE);
 printf("Please select a mode.\n>");
 scanf("%d", &mode);
 if ((mode < 0) || (mode > 8))
@@ -104,6 +239,37 @@ case D3_MODE:
 case SOURCE_MODE:
 case SCRIPT_BUILD_MODE:
 	{
+	switch (game)
+		{
+		case UWDEMO:
+			sprintf_s(GameFilePath, 255, "%s\\level13.st", path_uw0);
+			break;
+		case UW1:
+		case UW2:
+			printf("\nPick a level archive or save game to open\n");
+			for (int i = 0; i < 6; i++)
+				{
+				printf("%d) %s\n",i,uw_game_files[i]);
+				}
+			printf(">");
+			scanf("%d", &gamefile);
+			if ((gamefile < 0) || (gamefile >= 6))
+				{
+				printf("Invalid input. Bye.");
+				return 0;
+				}
+			if(game==UW1)
+				{
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw1, uw_game_files[gamefile]);
+				}
+			else
+				{
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw2, uw_game_files[gamefile]);
+				}
+			break;
+		case SHOCK:
+			break;
+		}
 	switch (game)
 		{
 			case UWDEMO:
@@ -184,9 +350,112 @@ case SCRIPT_BUILD_MODE:
 					}
 				break;
 				}
-		}
+	printf("Enter a filename for output (%s\\[filename].map)\n>", path_target_platform);
+	char TempOutFileName[255];
+	scanf("%s", TempOutFileName);
+	sprintf_s(OutFileName, 255, "%s\\%s", path_target_platform, TempOutFileName);
+	break;
 	}
-
+case BITMAP_EXTRACT_MODE:
+	switch (game)
+		{
+		case UWDEMO:
+			printf("\nCome back later...\n");
+			return 0;
+			break;
+		case UW1:
+			for (int i = 0; i < 45; i++)
+				{
+				printf("%d) %s",i, uw1_graphics_file[i]);
+				if (i % 2 == 0)
+					{
+					printf("\t");
+					}
+				else
+					{
+					printf("\n");
+					}
+				}
+			printf("Pick a file\n>");
+			scanf("%d", &graphics_file_no);
+			if ((graphics_file_no < 0) || (graphics_file_no > 44))
+				{
+				printf("Invalid input. Bye.");
+				return 0;
+				}
+			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw1, uw1_graphics_file[graphics_file_no]);
+			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
+			if (graphics_file_no <= 3)
+				{
+				graphics_mode = UW_GRAPHICS_TEXTURES;
+				switch (graphics_file_no)
+					{
+						case 0:
+							BitMapSize=16; break;
+						case 1:
+							BitMapSize = 32; break;
+						case 2:
+							BitMapSize = 16; break;
+						case 3:
+							BitMapSize = 64; break;
+					}
+				}
+			else if (graphics_file_no <= 35)
+				{
+				if (graphics_file_no == 27)//Panels
+					{
+					panels=1;
+					}
+				graphics_mode = UW_GRAPHICS_GR;
+				}
+			else
+				{
+				graphics_mode = UW_GRAPHICS_BITMAPS;
+				}
+			break;
+		case UW2:
+			for (int i = 0; i < 36; i++)
+				{
+				printf("%d) %s", i, uw2_graphics_file[i]);
+				if (i % 2 == 0)
+					{
+					printf("\t");
+					}
+				else
+					{
+					printf("\n");
+					}
+				}
+			printf("Pick a file\n>");
+			scanf("%d", &graphics_file_no);
+			if ((graphics_file_no < 0) || (graphics_file_no > 44))
+				{
+				printf("Invalid input. Bye.");
+				return 0;
+				}
+			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw2, uw2_graphics_file[graphics_file_no]);
+			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
+			if (graphics_file_no <= 0)
+				{
+				graphics_mode = UW_GRAPHICS_TEXTURES;
+				BitMapSize = 64;
+				}
+			else 
+				{
+				graphics_mode = UW_GRAPHICS_GR;
+				if (graphics_file_no == 28)//Panels
+					{
+					panels = 1;
+					}
+				}
+			break;
+		case SHOCK:
+			printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+			return 0;
+		}
+	printf("Enter a filename for output ([filename]_###.bmp)\n>");
+	scanf("%s", OutFileName);
+	}
 GAME = game;
 switch (game)
 	{
@@ -207,11 +476,8 @@ switch (game)
 		case ASCII_MODE:
 		case SCRIPT_BUILD_MODE:
 		case SOURCE_MODE:
-			//for (levelNo = 0; levelNo < 80; levelNo++)
-			//{
-				printf("\n============================Level %d=========================\n", levelNo);
-				exportMaps(game, mode, levelNo);
-			//}
+			printf("\n============================Level %d=========================\n", levelNo);
+			exportMaps(game, mode, levelNo, OutFileName,GameFilePath);
 			break;
 		case STRINGS_EXTRACT_MODE:
 			if (game == SHOCK)
@@ -224,9 +490,18 @@ switch (game)
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
-			extractTextureBitmap(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 32, UW_GRAPHICS_GR);
-			//extractPanels(-1, GRAPHICS_FILE, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,game);
-			//extractCritters( UW1_CRITTER_ASSOC, GRAPHICS_PAL_FILE, 0, 64, UW_GRAPHICS_GR,UW1,0);
+			if (panels==0)
+				{
+				extractTextureBitmap(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, graphics_mode, OutFileName);
+				}
+			else
+				{
+				extractPanels(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, UW_GRAPHICS_GR, game,OutFileName);
+				}
+			
+			break;
+		case CRITTER_EXTRACT_MODE:
+			extractCritters(UW1_CRITTER_ASSOC, Graphics_Pal, 0, 64, UW_GRAPHICS_GR, UW1, 0, OutFileName);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
@@ -248,12 +523,12 @@ switch (game)
 				RepackUW2();
 				}
 			else
-			{
-				if (game == SHOCK)
 				{
-					RepackShock();
+					if (game == SHOCK)
+					{
+						RepackShock();
+					}
 				}
-			}
 			break;
 		}
 	}
@@ -448,18 +723,20 @@ if ((fopen_s(&f,filePathO, "r") == 0))
 }
 
 
-void exportMaps(int game,int mode,int LevelNo)
+void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char filePath[255])
 {
 	ObjectItem objList[1600];
 	//shockObjectItem shockobjList[1600];
 	long texture_map[256]; 
 	long texture_map_shock[272];
 	int roomIndex=1; 
-
-	char *filePath;
+	char Map_Output_File[255];
+	//char *filePath;
+	
 	if ((mode == D3_MODE))
 		{
-		if (fopen_s(&MAPFILE,MAP_OUTPUT_FILE, "w")!=0)
+		sprintf_s(Map_Output_File, 255, "%s.map", OutFileName);
+		if (fopen_s(&MAPFILE, Map_Output_File, "w") != 0)
 			{
 			printf("Unable to create output file for map");
 			return;
@@ -467,7 +744,8 @@ void exportMaps(int game,int mode,int LevelNo)
 		}
 	if ((mode == SOURCE_MODE))
 	{
-		if (fopen_s(&MAPFILE, MAP_OUTPUT_FILE_SOURCE, "w") != 0)
+	sprintf_s(Map_Output_File, 255, "%s.vmf", OutFileName);
+	if (fopen_s(&MAPFILE, Map_Output_File, "w") != 0)
 		{
 			printf("Unable to create output file for map");
 			return;
@@ -477,7 +755,7 @@ void exportMaps(int game,int mode,int LevelNo)
 		{
 		case UWDEMO:		//Underworld Demo
 			{
-			filePath = UW0_LEVEL_PATH ;	//"C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st";
+			//filePath = UW0_LEVEL_PATH ;	//"C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st";
 			BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
 			setTileNeighbourCount(LevelInfo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
@@ -496,7 +774,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			}
 		case UW1:		//Underworld 1
 			{
-			filePath = UW1_LEVEL_PATH ;	// "C:\\Games\\Ultima\\UW1\\DATA\\lev.ark";
+			//filePath = UW1_LEVEL_PATH ;	// "C:\\Games\\Ultima\\UW1\\DATA\\lev.ark";
 			BuildTileMapUW(LevelInfo,objList, texture_map,filePath,game,LevelNo);
 			setTileNeighbourCount(LevelInfo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
@@ -516,7 +794,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			}
 		case UW2:		//Underworld 2
 			{
-			filePath = UW2_LEVEL_PATH;	//"C:\\Games\\Ultima\\UW2\\DATA\\lev.ark";
+			//filePath = UW2_LEVEL_PATH;	//"C:\\Games\\Ultima\\UW2\\DATA\\lev.ark";
 			if (BuildTileMapUW(LevelInfo,objList,texture_map,filePath,game,LevelNo) == -1) {return;};
 			setTileNeighbourCount(LevelInfo);
 			BuildObjectListUW(LevelInfo,objList,texture_map,filePath,game,LevelNo);
@@ -535,7 +813,7 @@ void exportMaps(int game,int mode,int LevelNo)
 			}
 		case SHOCK:		//system shock
 			{
-			filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
+			//filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
 			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
 			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
 			SetDeathWatch(objList);

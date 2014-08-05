@@ -5,7 +5,7 @@
 #include "main.h"
 
 
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType)
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255])
 {
     //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
 //    int indexNo;
@@ -38,7 +38,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	switch (FileType)
 	{
 		case UW_GRAPHICS_BITMAPS:	//BYT
-			writeBMP(textureFile, 0, 320, 200, 0, pal);
+			writeBMP(textureFile, 0, 320, 200, 0, pal,OutFileName);
 			break;
 		case UW_GRAPHICS_TEXTURES :	//.tr
 			printf("File Type :%d\n",  textureFile[0]);
@@ -55,7 +55,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			for (i = 0; i <NoOfTextures; i++)
 				{
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
-				writeBMP(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
+				writeBMP(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
 				}
 			break;
 		case UW_GRAPHICS_GR :	//.gr
@@ -90,7 +90,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						printf("Width = %d\n",getValAtAddress(textureFile, textureOffset + 1, 8));
 						printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 						textureOffset = textureOffset + 5;
-						writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal);	
+						writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName);
 						break;
 					case 0x8://4 bit run-length
 						printf("4 bit run-length\n");
@@ -106,7 +106,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxpal, pal,auxPalIndex);
 						outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						DecodeRLEBitmap(imgNibbles,datalen,BitMapWidth,BitMapHeight,outputImg,auxpal,i,4);
+						DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i, 4,OutFileName);
 						break;
 					case 0xA://4 bit uncompressed
 						printf("4 bit uncompressed\n");
@@ -122,7 +122,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxpal, pal, auxPalIndex);
 						//outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						writeBMP(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal);
+						writeBMP(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName);
 						break;
 					default:
 						printf("Unknown file type : %d\n", getValAtAddress(textureFile, textureOffset, 8));
@@ -167,7 +167,7 @@ int palAddr = paletteNo * 256;
 return;
 }
 
-void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal)
+void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255])
 {
 	BitMapHeader bmhead;
 	BitMapInfoHeader bmihead;
@@ -199,9 +199,9 @@ void writeBMP( unsigned char *bits, long Start, long SizeH, long SizeV, int inde
 	bmihead.biSizeImage = imwidth * bmihead.biHeight;
 	bmhead.bfSize = bmihead.biSizeImage + 54;
 	
-	char outFile[80];
+	char outFile[255];
 
-	sprintf_s(outFile,80,"OBJECTS_%03d.bmp", index );
+	sprintf_s(outFile, 255, "%s_%03d.bmp", OutFileName, index);
 
 	FILE *outf ;
 	outf = fopen(outFile,"wb");
@@ -263,7 +263,7 @@ void LoadAuxilaryPal(palette auxpal[16], palette gamepal[256], int PalIndex)
 
 }
 
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight ,unsigned char *outputImg, palette *auxpal, int index,int BitSize)
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg, palette *auxpal, int index, int BitSize, char OutFileName[255])
 {
 int state=0; 
 int curr_pxl=0;
@@ -346,7 +346,7 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 		}
 	}
 }
-writeBMP(outputImg,0,imageWidth,imageHeight,index, auxpal);
+writeBMP(outputImg, 0, imageWidth, imageHeight, index, auxpal, OutFileName);
 
 }
 
@@ -522,7 +522,7 @@ mask[5] = 0x1F;
 //}
 
 
-void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game)
+void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, char OutFileName[255])
 {
 	//const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
 	//    int indexNo;
@@ -594,7 +594,7 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 				printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
 				printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 				//textureOffset = 1;//textureOffset + 1;
-				writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal);
+				writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName);
 				//break;
 			//}
 		}
@@ -609,7 +609,7 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 	return;
 }
 
-void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo)
+void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255])
 {
 	palette *pal;
 	unsigned char auxpalval[32];
@@ -708,7 +708,7 @@ void extractCritters(char filePathIn[255], char PaletteFile[255], int PaletteNo,
 		//copyNibbles(critterFile, imgNibbles, datalen, frameOffset + 7);
 		outputImg = new unsigned char[BitMapWidth*BitMapHeight];
 		ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-		writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal);
+		writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
 		//DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i,4);
 	}
 }
