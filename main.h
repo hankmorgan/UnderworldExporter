@@ -5,19 +5,19 @@
 #include "gameobjects.h"
 /*Game paths*/
 
-#define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
+//#define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
 #define UW0_TEXTUREW_PATH "DATA\\level13.txm"
 
 //#define UW1_LEVEL_PATH  "C:\\Games\\UW1\\Data\\lev.ark"
 #define UW1_TEXTURE_CONFIG_FILE "uw1_retro_config.txt"
 #define UW1_TEXTURE_CONFIG_FILE_SOURCE "uw1_retro_config_source.txt"
 #define UW1_OBJECT_CONFIG_FILE "uw1_object_config.txt"
-#define UW1_STRINGS_FILE "data\\strings.pak"
+#define UW1_STRINGS_FILE "dta\\strings.pak"
 #define UW1_CLEAN_STRINGS_FILE "uw1_stringsclean.txt"
 #define UW1_TERRAIN_PROPS "Data\\terrain.dat"
 #define UW1_CONVERSATION "data\\cnv.ark"
 #define UW1_CRITTER_ASSOC "crit\\assoc.anm"
-#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
+//#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
 
 //#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
 #define UW2_TEXTURE_CONFIG_FILE "uw2_retro_config.txt"
@@ -25,12 +25,13 @@
 #define UW2_OBJECT_CONFIG_FILE "uw2_object_config.txt"
 #define UW2_STRINGS_FILE "data\\strings.pak"
 #define UW2_TERRAIN_PROPS "Data\\terrain.dat"
+#define UW2_CRITTER_ASSOC "crit\\AS.AN"
 //#define UW2_OUT_PATH "C:\\Games\\UW2\\data\\Repacked.ark"
 
 //Change these depending on which set of textures you want to extract
 //#define GRAPHICS_FILE "C:\\Games\\UW2\\DATA\\DOORS.GR"
 //#define GRAPHICS_PAL_FILE "C:\\Games\\UW2\\DATA\\pals.dat"
-#define AUXILARY_PAL_FILE "C:\\Games\\UW2\\DATA\\allpals.dat"
+#define AUXILARY_PAL_FILE "DATA\\allpals.dat"
 
 
 //#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\ARCHIVE.dat"
@@ -105,6 +106,7 @@ extern int CEILING_HEIGHT;
 #define REPACK_MODE 7
 #define SOURCE_MODE 8
 #define CRITTER_EXTRACT_MODE 9
+#define CUTSCENE_EXTRACT_MODE 10
 
 
 

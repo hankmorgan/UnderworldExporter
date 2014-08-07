@@ -43,10 +43,12 @@ char path_uw1[100];
 char path_uw2[100];
 char path_shock[100];
 char TempOutFileName[255];
-
+char auxPalPath[255];
 char path_target_platform[100];
 char OutFileName[255];
 char GameFilePath[255];
+char fileAssoc[255];
+char fileCrit[255];
 FILE *f = NULL;
 if ((f = fopen("gamepaths.txt", "r")) == NULL)
 	{
@@ -226,9 +228,10 @@ printf("%d) Conversation code dump (unfinished!)\n",CONVERSATION_MODE);
 printf("%d) Repacker mode (UW2 and Shock only. Use at own risk!)\n",REPACK_MODE);
 printf("%d) Source Engine export\n",SOURCE_MODE);
 printf("%d) Critter Art Extract\n", CRITTER_EXTRACT_MODE);
+printf("%d) Cutscene Art Extract\n", CUTSCENE_EXTRACT_MODE);
 printf("Please select a mode.\n>");
 scanf("%d", &mode);
-if ((mode < 0) || (mode > 8))
+if ((mode < 0) || (mode > 10))
 {
 	printf("Invalid input. Bye.");
 	return 0;
@@ -376,11 +379,9 @@ case REPACK_MODE:
 	else
 		{
 		switch (game)
-			
 			{
 				case UW2:
 				printf("Enter a filename for repacking into (%s\\data\\[filename].ark)\n>", path_uw2);
-				
 				scanf("%s", TempOutFileName);
 				sprintf_s(OutFileName, 255, "%s\\data\\%s.ark", path_uw2, TempOutFileName);
 				break;
@@ -427,6 +428,7 @@ case BITMAP_EXTRACT_MODE:
 				}
 			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw1, uw1_graphics_file[graphics_file_no]);
 			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
+			sprintf_s(auxPalPath, 255, "%s\\$s", path_uw1, AUXILARY_PAL_FILE);
 			if (graphics_file_no <= 3)
 				{
 				graphics_mode = UW_GRAPHICS_TEXTURES;
@@ -477,6 +479,7 @@ case BITMAP_EXTRACT_MODE:
 				}
 			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw2, uw2_graphics_file[graphics_file_no]);
 			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
+			sprintf_s(auxPalPath, 255, "%s\\$s", path_uw2, AUXILARY_PAL_FILE);
 			if (graphics_file_no <= 0)
 				{
 				graphics_mode = UW_GRAPHICS_TEXTURES;
@@ -492,11 +495,73 @@ case BITMAP_EXTRACT_MODE:
 				}
 			break;
 		case SHOCK:
-			printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+			printf("\nI don't have a graphics extractor for System Shock as part of this program yet. You'll have to find one yourself.\n");
 			return 0;
 		}
 	printf("Enter a filename for output ([filename]_###.bmp)\n>");
 	scanf("%s", OutFileName);
+	break;
+	case STRINGS_EXTRACT_MODE:
+		break;
+	case MATERIALS_BUILD_MODE:
+		break;
+	case CRITTER_EXTRACT_MODE:
+		if (game == SHOCK)
+			{
+			printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+			return 0;
+			}
+		printf("\nType a critter filename for extraction from. gamepath\crit\\[filename]\n");
+		scanf("%s",TempOutFileName);
+		switch (game)
+			{
+			case UWDEMO:
+				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw0, TempOutFileName);
+				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw0, UW1_CRITTER_ASSOC);
+				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw0);
+				sprintf_s(auxPalPath, 255, "%s\\$s", path_uw0, AUXILARY_PAL_FILE);
+				break;
+			case UW1:
+				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
+				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw1, UW1_CRITTER_ASSOC);
+				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
+				sprintf_s(auxPalPath, 255, "%s\\$s", path_uw1, AUXILARY_PAL_FILE);
+				break;
+			case UW2:
+				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw2, TempOutFileName);
+				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw2, UW2_CRITTER_ASSOC);
+				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
+				sprintf_s(auxPalPath, 255, "%s\\$s", path_uw2, AUXILARY_PAL_FILE);
+				break;
+			}
+		printf("Enter a filename for output ([filename]_###.bmp)\n>");
+		scanf("%s", OutFileName);
+		break;
+	case CUTSCENE_EXTRACT_MODE:
+		if (game == SHOCK)
+			{
+			printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+			return 0;
+			}
+		printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
+		scanf("%s", TempOutFileName);
+		switch (game)
+			{
+				case UWDEMO:
+					sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw0, TempOutFileName);
+					break;
+				case UW1:
+					sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw1, TempOutFileName);
+					break;
+				case UW2:
+					sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
+					break;
+			}
+		printf("Enter a filename for output ([filename]_###.bmp)\n>");
+		scanf("%s", OutFileName);
+		break;
+	case CONVERSATION_MODE:
+		break;
 	}
 GAME = game;
 switch (game)
@@ -534,7 +599,7 @@ switch (game)
 		case BITMAP_EXTRACT_MODE:
 			if (panels==0)
 				{
-				extractTextureBitmap(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, graphics_mode, OutFileName);
+				extractTextureBitmap(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, graphics_mode, OutFileName,auxPalPath);
 				}
 			else
 				{
@@ -543,7 +608,10 @@ switch (game)
 			
 			break;
 		case CRITTER_EXTRACT_MODE:
-			extractCritters(UW1_CRITTER_ASSOC, Graphics_Pal, 0, 64, UW_GRAPHICS_GR, UW1, 0, OutFileName);
+			extractCritters(fileAssoc, fileCrit, Graphics_Pal, 0, 64, UW_GRAPHICS_GR,game, 0, OutFileName);
+			break;
+		case CUTSCENE_EXTRACT_MODE:
+			load_cuts_anim(Graphics_File, OutFileName);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
@@ -554,7 +622,8 @@ switch (game)
 			//BuildGuiFiles();
 			//ExportModelFormat();
 			//BuildWORDSXData(game);
-			BuildUWParticles();
+			//BuildUWParticles();
+			printf("Materials builder turned off at the moment.");
 			break;
 		case CONVERSATION_MODE:
 			ExtractConversations(UW1);
