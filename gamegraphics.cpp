@@ -690,13 +690,13 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	palette *pal;
 	unsigned char auxpalval[32];
 	pal = new palette[256];
-	getPalette(PaletteFile, pal, PaletteNo);
+	getPalette(PaletteFile, pal, 0);//always palette 0?
 
 	palette auxpal[32];
 	long fileSize;
 	unsigned char *assocFile;
 	unsigned char *critterFile;
-	int auxPalNo;
+	int auxPalNo=PaletteNo;
 	int anim;
 	int AddressPointer;
 	FILE *file = NULL;      // File pointer
@@ -717,14 +717,14 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 			printf("%c", assocFile[(CritterNo * 8) + i]);
 			}
 		anim = getValAtAddress(assocFile, (32 * 8) + (CritterNo * 2) + 0, 8);
-		auxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
-		printf("\nAnim is %d, AuxPal is %d", anim, auxPalNo);
+		int DefaultauxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
+		printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
 		}
 	else
 		{
 		anim = getValAtAddress(assocFile, (CritterNo * 2) + 0, 8);
-		auxPalNo = getValAtAddress(assocFile, (CritterNo * 2) + 1, 8);
-		printf("\nAnim is %d, AuxPal is %d", anim, auxPalNo);
+		int DefaultauxPalNo = getValAtAddress(assocFile, (CritterNo * 2) + 1, 8);
+		printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
 		}
 	if ((file = fopen(fileCrit, "rb")) == NULL)
 	{
@@ -756,13 +756,13 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 			AddressPointer++;
 			printf("\nNo of Palettes %d",NoOfPals);
 			//AddressPointer = AddressPointer + auxPalNo*32;
-			if (auxPalNo==0)
-				{
-				auxPalNo=1;
-				}
+			//if (auxPalNo==0)
+			//	{
+			//	auxPalNo=0;//?
+			//	}
 			for (int i = 0; i < 32; i++)
 				{
-				int value = getValAtAddress(critterFile,(AddressPointer)+(auxPalNo*i),8);
+				int value = getValAtAddress(critterFile,(AddressPointer)+(auxPalNo*32)+i,8);
 				auxpalval[i]=value;
 				auxpal[i].green = pal[value].green;
 				auxpal[i].blue = pal[value].blue;
@@ -799,12 +799,13 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	else
 		{//UW2 uses a different method
 		//Starting at offset 0x80
-		AddressPointer=0;
-		auxPalNo=0;
+		
+		//auxPalNo=2;
+		AddressPointer=auxPalNo*32;
 		int i=0;
 		for (int i = 0; i < 32; i++)
 			{
-			int value = getValAtAddress(critterFile, (AddressPointer)+(auxPalNo*i), 8);
+			int value = getValAtAddress(critterFile, (AddressPointer), 8);
 			auxpalval[i] = value;
 			auxpal[i].green = pal[value].green;
 			auxpal[i].blue = pal[value].blue;

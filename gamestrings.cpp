@@ -10,19 +10,19 @@
 
 
 
-void unpackStrings(int game)
+void unpackStrings(int game, char filePath[255])
 {
-char filePath[255];
-switch (game)
-	{
-	case UWDEMO:
-	case UW1:
-		strcpy_s(filePath, UW1_STRINGS_FILE);break;	
-	case UW2:
-		strcpy_s(filePath, UW2_STRINGS_FILE);break;	
-	case SHOCK:
-		strcpy_s(filePath, SHOCK_STRINGS_FILE);break;	
-	}
+//char filePath[255];
+//switch (game)
+//	{
+//	case UWDEMO:
+//	case UW1:
+//		strcpy_s(filePath, UW1_STRINGS_FILE);break;	
+//	case UW2:
+//		strcpy_s(filePath, UW2_STRINGS_FILE);break;	
+//	case SHOCK:
+//		strcpy_s(filePath, SHOCK_STRINGS_FILE);break;	
+//	}
 huffman_node *hman;
 block_dir *blocks;
 unsigned char *Buffer;

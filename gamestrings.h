@@ -23,7 +23,7 @@ int blockEnd;
 } ;
 
 
-void unpackStrings(int game);
+void unpackStrings(int game, char filePath[255]);
 void unpackStringsShock(char filePath[255]);
 
 #endif /*gamestrings*/

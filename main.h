@@ -12,7 +12,7 @@
 #define UW1_TEXTURE_CONFIG_FILE "uw1_retro_config.txt"
 #define UW1_TEXTURE_CONFIG_FILE_SOURCE "uw1_retro_config_source.txt"
 #define UW1_OBJECT_CONFIG_FILE "uw1_object_config.txt"
-#define UW1_STRINGS_FILE "dta\\strings.pak"
+#define UW1_STRINGS_FILE "data\\strings.pak"
 #define UW1_CLEAN_STRINGS_FILE "uw1_stringsclean.txt"
 #define UW1_TERRAIN_PROPS "Data\\terrain.dat"
 #define UW1_CONVERSATION "data\\cnv.ark"

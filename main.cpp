@@ -49,6 +49,7 @@ char OutFileName[255];
 char GameFilePath[255];
 char fileAssoc[255];
 char fileCrit[255];
+int critPal=0;
 FILE *f = NULL;
 if ((f = fopen("gamepaths.txt", "r")) == NULL)
 	{
@@ -428,7 +429,7 @@ case BITMAP_EXTRACT_MODE:
 				}
 			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw1, uw1_graphics_file[graphics_file_no]);
 			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
-			sprintf_s(auxPalPath, 255, "%s\\$s", path_uw1, AUXILARY_PAL_FILE);
+			sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
 			if (graphics_file_no <= 3)
 				{
 				graphics_mode = UW_GRAPHICS_TEXTURES;
@@ -479,7 +480,7 @@ case BITMAP_EXTRACT_MODE:
 				}
 			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw2, uw2_graphics_file[graphics_file_no]);
 			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
-			sprintf_s(auxPalPath, 255, "%s\\$s", path_uw2, AUXILARY_PAL_FILE);
+			sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
 			if (graphics_file_no <= 0)
 				{
 				graphics_mode = UW_GRAPHICS_TEXTURES;
@@ -502,6 +503,21 @@ case BITMAP_EXTRACT_MODE:
 	scanf("%s", OutFileName);
 	break;
 	case STRINGS_EXTRACT_MODE:
+		switch (game)
+			{
+			case UWDEMO:
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw0, UW1_STRINGS_FILE);
+				break;
+			case UW1:
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw1, UW1_STRINGS_FILE);
+				break;
+			case UW2:
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw2, UW2_STRINGS_FILE);
+				break;
+			case SHOCK:
+				sprintf_s(GameFilePath, 255, "%s\\%s", path_shock, SHOCK_STRINGS_FILE);
+				break;
+			}
 		break;
 	case MATERIALS_BUILD_MODE:
 		break;
@@ -519,21 +535,23 @@ case BITMAP_EXTRACT_MODE:
 				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw0, TempOutFileName);
 				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw0, UW1_CRITTER_ASSOC);
 				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw0);
-				sprintf_s(auxPalPath, 255, "%s\\$s", path_uw0, AUXILARY_PAL_FILE);
+				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw0, AUXILARY_PAL_FILE);
 				break;
 			case UW1:
 				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
 				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw1, UW1_CRITTER_ASSOC);
 				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
-				sprintf_s(auxPalPath, 255, "%s\\$s", path_uw1, AUXILARY_PAL_FILE);
+				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
 				break;
 			case UW2:
 				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw2, TempOutFileName);
 				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw2, UW2_CRITTER_ASSOC);
 				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
-				sprintf_s(auxPalPath, 255, "%s\\$s", path_uw2, AUXILARY_PAL_FILE);
+				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
 				break;
 			}
+		printf("\nEnter a palette number to use.(0 to 3)\n>");
+		scanf("%d", &critPal);
 		printf("Enter a filename for output ([filename]_###.bmp)\n>");
 		scanf("%s", OutFileName);
 		break;
@@ -589,11 +607,11 @@ switch (game)
 		case STRINGS_EXTRACT_MODE:
 			if (game == SHOCK)
 				{
-				unpackStringsShock(SHOCK_STRINGS_FILE);
+				unpackStringsShock(GameFilePath);
 				}
 			else
 				{
-				unpackStrings(game);
+				unpackStrings(game,GameFilePath);
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
@@ -608,7 +626,7 @@ switch (game)
 			
 			break;
 		case CRITTER_EXTRACT_MODE:
-			extractCritters(fileAssoc, fileCrit, Graphics_Pal, 0, 64, UW_GRAPHICS_GR,game, 0, OutFileName);
+			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName);
 			break;
 		case CUTSCENE_EXTRACT_MODE:
 			load_cuts_anim(Graphics_File, OutFileName);
@@ -643,8 +661,6 @@ switch (game)
 			break;
 		}
 	}
-
-
 
 void LoadConfig(int game,int mode)
 {
