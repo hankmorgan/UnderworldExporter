@@ -53,5 +53,6 @@ int getNibble(unsigned char *nibbles, int *addr_ptr);
 bool load_cuts_anim(char filePathIn[255], char filePathOut[255]);
 
 void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr, unsigned char *auxpal);
+void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,char OutFileName[255]);
 
 #endif /*gamegraphics_h*/

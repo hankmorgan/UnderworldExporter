@@ -81,6 +81,47 @@ typedef struct {
 
 void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP);
 
+void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,char OutFileName[255])
+{
+	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
+	int i;
+	long NoOfTextures;
+
+	FILE *file = NULL;      // File pointer
+	
+    if ((file = fopen(filePathIn, "rb")) == NULL)
+       { printf("Could not open specified file\n"); return;}
+
+    // Get the size of the file in bytes
+    long fileSize = getFileSize(file);
+    textureFile = new unsigned char[fileSize];
+    fread(textureFile, fileSize, 1,file);
+	fclose(file); 
+	palette *pal;
+	pal = new palette[256];
+	getPalette(PaletteFile, pal, PaletteNo);  
+	NoOfTextures = getValAtAddress(textureFile,0,8);
+	for (i = 0; i <NoOfTextures; i++)
+		{
+		long textureOffset = getValAtAddress(textureFile, (i * 4) + 6, 32);
+		if (textureOffset !=0)
+			{
+			int compressionFlag=getValAtAddress(textureFile,((i * 4) + 6)+(NoOfTextures*4),32);
+			int isCompressed =(compressionFlag>>1) & 0x01;
+			if (isCompressed==1)	
+				{
+				int datalen;
+				unsigned char *outputImg = unpackUW2(textureFile,textureOffset,&datalen);		
+				writeBMP(outputImg, 0, 320, 200, i, pal, OutFileName);
+				}
+			else
+				{
+				writeBMP(textureFile, textureOffset, 320, 200, i, pal, OutFileName);
+				}
+			}
+		}	
+}
+
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255])
 {
     //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 

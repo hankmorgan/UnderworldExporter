@@ -50,6 +50,7 @@ char GameFilePath[255];
 char fileAssoc[255];
 char fileCrit[255];
 int critPal=0;
+int bytark=0;
 FILE *f = NULL;
 if ((f = fopen("gamepaths.txt", "r")) == NULL)
 	{
@@ -105,7 +106,7 @@ shock_game_files[8] = "Data\\SAVGAM07.dat";
 
 
 const char *uw1_graphics_file[45];
-const char *uw2_graphics_file[36];
+const char *uw2_graphics_file[37];
 uw1_graphics_file[0] = "F16.tr";// - Floor textures 16x16");
 uw1_graphics_file[1] = "F32.tr";// - Floor textures 32x32\n");
 uw1_graphics_file[2] = "W16.tr";// - Wall textures 16x16");
@@ -188,6 +189,7 @@ uw2_graphics_file[32] = "TMFLAT.GR";
 uw2_graphics_file[33] = "TMOBJ.GR";
 uw2_graphics_file[34] = "VIEWS.GR";
 uw2_graphics_file[35] = "WEAP.GR";
+uw2_graphics_file[36] = "BYT.ARK";
 
 //int game = SHOCK;
 //int game = UWDEMO;
@@ -420,7 +422,7 @@ case BITMAP_EXTRACT_MODE:
 					printf("\n");
 					}
 				}
-			printf("Pick a file\n>");
+			printf("\nPick a file\n>");
 			scanf("%d", &graphics_file_no);
 			if ((graphics_file_no < 0) || (graphics_file_no > 44))
 				{
@@ -459,7 +461,7 @@ case BITMAP_EXTRACT_MODE:
 				}
 			break;
 		case UW2:
-			for (int i = 0; i < 36; i++)
+			for (int i = 0; i < 37; i++)
 				{
 				printf("%d) %s", i, uw2_graphics_file[i]);
 				if (i % 2 == 0)
@@ -471,16 +473,21 @@ case BITMAP_EXTRACT_MODE:
 					printf("\n");
 					}
 				}
-			printf("Pick a file\n>");
+			printf("\nPick a file\n>");
 			scanf("%d", &graphics_file_no);
-			if ((graphics_file_no < 0) || (graphics_file_no > 44))
+			if ((graphics_file_no < 0) || (graphics_file_no > 36))
 				{
 				printf("Invalid input. Bye.");
 				return 0;
 				}
+			if (graphics_file_no == 36)
+				{//UW2 Byt ark
+				bytark=1;
+				}
 			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw2, uw2_graphics_file[graphics_file_no]);
 			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
 			sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
+
 			if (graphics_file_no <= 0)
 				{
 				graphics_mode = UW_GRAPHICS_TEXTURES;
@@ -617,7 +624,14 @@ switch (game)
 		case BITMAP_EXTRACT_MODE:
 			if (panels==0)
 				{
-				extractTextureBitmap(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, graphics_mode, OutFileName,auxPalPath);
+				if (bytark!=1)
+					{
+					extractTextureBitmap(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, graphics_mode, OutFileName,auxPalPath);
+					}
+				else
+					{
+					extractUW2Bitmaps(Graphics_File,Graphics_Pal,0,OutFileName);
+					}
 				}
 			else
 				{
