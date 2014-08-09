@@ -17,6 +17,7 @@
 #define UW1_TERRAIN_PROPS "Data\\terrain.dat"
 #define UW1_CONVERSATION "data\\cnv.ark"
 #define UW1_CRITTER_ASSOC "crit\\assoc.anm"
+#define UW1_WEAPON_PAL "data\\WEAPONS.CM"	//Palette file for weapon skin colours.
 //#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
 
 //#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
@@ -26,6 +27,7 @@
 #define UW2_STRINGS_FILE "data\\strings.pak"
 #define UW2_TERRAIN_PROPS "Data\\terrain.dat"
 #define UW2_CRITTER_ASSOC "crit\\AS.AN"
+#define UW2_WEAPON_PAL "data\\WEAP.CM"
 //#define UW2_OUT_PATH "C:\\Games\\UW2\\data\\Repacked.ark"
 
 //Change these depending on which set of textures you want to extract

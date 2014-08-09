@@ -504,7 +504,7 @@ case BITMAP_EXTRACT_MODE:
 				graphics_mode = UW_GRAPHICS_GR;
 				if (graphics_file_no == 28)//Panels
 					{
-					panels = 1;
+					panels = 1;//special case due to file headers
 					}
 				}
 			break;
@@ -512,6 +512,8 @@ case BITMAP_EXTRACT_MODE:
 			printf("\nI don't have a graphics extractor for System Shock as part of this program yet. You'll have to find one yourself.\n");
 			return 0;
 		}
+	printf("\nEnter a palette number to use.(0 to 7)\n>");
+	scanf("%d", &critPal);
 	printf("Enter a filename for output ([filename]_###.bmp)\n>");
 	scanf("%s", OutFileName);
 	break;
@@ -632,11 +634,11 @@ switch (game)
 				{
 				if (bytark!=1)
 					{
-					extractTextureBitmap(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, graphics_mode, OutFileName,auxPalPath);
+					extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName,auxPalPath);
 					}
 				else
 					{
-					extractUW2Bitmaps(Graphics_File,Graphics_Pal,0,OutFileName);
+					extractUW2Bitmaps(Graphics_File,Graphics_Pal,critPal,OutFileName);
 					}
 				}
 			else
