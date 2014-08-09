@@ -111,6 +111,12 @@ extern int CEILING_HEIGHT;
 #define CUTSCENE_EXTRACT_MODE 10
 
 
+//UW2 Ark block numbers
+#define UW2_OFFSET_BLOCK 0
+#define UW2_COMPRESS_BLOCK 1
+#define UW2_SIZE_BLOCK 2
+#define UW2_SPACE_BLOCK 3
+
 
 void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char filePath[255]);
 void LoadConfig(int game, int mode);

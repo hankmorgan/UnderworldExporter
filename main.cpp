@@ -51,7 +51,7 @@ char fileAssoc[255];
 char fileCrit[255];
 int critPal=0;
 int bytark=0;
-int BlocksToRepack=80;//UW2 blocks to repack
+int BlocksToRepack=320;//UW2 blocks to repack
 FILE *f = NULL;
 if ((f = fopen("gamepaths.txt", "r")) == NULL)
 	{

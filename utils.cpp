@@ -371,9 +371,9 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 	for (int x = 0; x < NoOfBlocks; x++)
 	{//Just dump out some original data for info.
 		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
-		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
-		long DataAvail = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+		compressionFlag = getValAtAddress(lev_ark, address_pointer + (UW2_COMPRESS_BLOCK *(NoOfBlocks * 4)) + (x * 4), 32);
+		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+		long DataAvail = getValAtAddress(lev_ark, address_pointer + (UW2_SPACE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 
 		printf("Block no %d\n",x);
 		printf("\tAddress %d", currAddress);
@@ -385,6 +385,7 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 		//if (x < BlocksToUnpack)
 		//	{//This default size covers most of the map data except for the animation overlays + other stuff I know nothing about.
 		//	mapSize[x]=0x7c08;//default size
+		mapSize[x]= DataSizeVal;
 		//	}
 	}
 
@@ -397,13 +398,13 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 		{
 		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-		DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+		DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 		isCompressed = (compressionFlag >> 1) & 0x01;
 		if (x < BlocksToUnpack)
 			{
 			if (currAddress != 0)
 				{//Map blocks are always compressed in UW2.
-				if (isCompressed)
+				if (isCompressed == 1)
 					{
 					unpackUW2(lev_ark, currAddress, &DataLen);		//Unpack and see how much space I need to allow for.
 					mapSize[x]=DataLen;
@@ -415,7 +416,8 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 					{
 					BlockAddress[x] = LastBlockAddress + PreviousUsedLength;
 				    LastBlockAddress = BlockAddress[x];
-				    PreviousUsedLength = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+				    PreviousUsedLength = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+				    //Set mapsize here???
 					}
 				}
 			else
@@ -430,7 +432,7 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 				{//is this correct for all compression flags???
 				BlockAddress[x] = LastBlockAddress + PreviousUsedLength;
 				LastBlockAddress = BlockAddress[x];
-				PreviousUsedLength = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+				PreviousUsedLength = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 				}
 			else
 				{
@@ -462,6 +464,9 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 	//write my compression flags. each shoudld be 0 0 0
 	for (int x = 0; x < NoOfBlocks; x++)
 	{
+		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+		DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+		isCompressed = (compressionFlag >> 1) & 0x01;
 		if (x<BlocksToUnpack)
 			{
 				WriteInt32(file, 0);
@@ -484,13 +489,13 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 				}
 			else
 				{
-				DataLen = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+				DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 				WriteInt32(file, DataLen);
 				}
 		}
 		else
 		{//copy the existing values
-			DataLen = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
+			DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 			WriteInt32(file, DataLen);
 		}
 	}
@@ -506,13 +511,13 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 			}
 			else
 			{
-				int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+				int DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 				WriteInt32(file, DataLen);
 			}
 		}
 		else
 		{//copy the existing values
-			int DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+			int DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 			WriteInt32(file, DataLen);
 		}
 	}
@@ -521,7 +526,7 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 		{
 			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 			compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-			DataLen = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+			DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 			isCompressed = (compressionFlag >> 1) & 0x01;
 			if (x < BlocksToUnpack)
 				{
@@ -531,7 +536,7 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 						{
 						case 0:
 							//DataSize[x] = DataLen;
-							for (int y = currAddress; y < currAddress + mapSize[x]; y++)
+							for (int y = currAddress; y < currAddress + DataLen; y++)
 							{//Copy the bytes
 								fputc(lev_ark[y], file);
 							}
@@ -580,8 +585,8 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 	{
 		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (2 * (NoOfBlocks * 4)) + (x * 4), 32);
-		long DataAvail = getValAtAddress(lev_ark, address_pointer + (3 * (NoOfBlocks * 4)) + (x * 4), 32);
+		long DataSizeVal = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+		long DataAvail = getValAtAddress(lev_ark, address_pointer + (UW2_SPACE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 
 		printf("Block no %d\n", x);
 		printf("\tAddress %d", currAddress);
