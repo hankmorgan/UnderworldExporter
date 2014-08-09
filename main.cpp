@@ -51,6 +51,7 @@ char fileAssoc[255];
 char fileCrit[255];
 int critPal=0;
 int bytark=0;
+int BlocksToRepack=80;//UW2 blocks to repack
 FILE *f = NULL;
 if ((f = fopen("gamepaths.txt", "r")) == NULL)
 	{
@@ -84,13 +85,14 @@ if (path_target_platform[ln] == '\n')
 path_target_platform[ln] = '\0';
 
 fclose(f);
-const char *uw_game_files[6];
+const char *uw_game_files[7];
 uw_game_files[0] = "Data\\lev.ark";
 uw_game_files[1] = "Save0\\lev.ark";
 uw_game_files[2] = "Save1\\lev.ark";
 uw_game_files[3] = "Save2\\lev.ark";
 uw_game_files[4] = "Save3\\lev.ark";
 uw_game_files[5] = "Save4\\lev.ark";
+uw_game_files[6] = "data\\byt.ark";	//UW2 ark files.
 
 const char *shock_game_files[9];
 shock_game_files[0] = "Data\\archive.dat";
@@ -260,9 +262,13 @@ case REPACK_MODE:
 				{
 				printf("%d) %s\n",i,uw_game_files[i]);
 				}
+				if ((game==UW2) && (mode==REPACK_MODE))
+					{
+					printf("%d) %s\n",6,uw_game_files[6]);
+					}				
 			printf(">");
 			scanf("%d", &gamefile);
-			if ((gamefile < 0) || (gamefile >= 6))
+			if ((gamefile < 0) || (gamefile >= 7))
 				{
 				printf("Invalid input. Bye.");
 				return 0;
@@ -663,7 +669,7 @@ switch (game)
 		case REPACK_MODE:
 			if (game==UW2)
 				{
-				RepackUW2(GameFilePath,OutFileName);
+				RepackUW2(GameFilePath,OutFileName,BlocksToRepack);
 				}
 			else
 				{

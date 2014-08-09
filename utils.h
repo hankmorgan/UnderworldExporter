@@ -24,7 +24,7 @@ unsigned char* unpackUW2(unsigned char *tmp, int address_pointer, int *datalen);
 void unpack_data(unsigned char *pack, unsigned char *unpack, unsigned long unpacksize);
 long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPackedLength, long *chunkUnpackedLength, long *chunkType);
 
-void RepackUW2(char InputFile[255], char OutputFile[255]);
+void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack);
 void RepackShock(char InputFile[255], char OutputFile[255]);
 void ParseTerrainProperties(int game);
 #endif /*util_h*/
