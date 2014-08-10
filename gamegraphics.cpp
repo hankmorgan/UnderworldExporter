@@ -14,74 +14,54 @@ typedef __int16 signed Sint16;
 typedef __int8 signed Sint8;
 
 typedef struct {
-
+//Borrowed from Underworld Adventures for extracting cutscenes.
 	Uint32 id;    /* 4 character ID == "LPF " */
-
 	Uint16 maxLps;    /* max # largePages allowed. 256 FOR NOW.   */
-
 	Uint16 nLps;    /* # largePages in this file. */
-
 	Uint32 nRecords;  /* # records in this file.  65534 is current limit plus */
 	/* one for last-to-first delta for looping the animation */
-
 	Uint16 maxRecsPerLp;  /* # records permitted in an lp. 256 FOR NOW.   */
-
 	Uint16 lpfTableOffset;  /* Absolute Seek position of lpfTable.  1280 FOR NOW.
 							The lpf Table is an array of 256 large page structures
 							that is used to facilitate finding records in an anim
 							file without having to seek through all of the Large
 							Pages to find which one a specific record lives in. */
-
 	Uint32 contentType;  /* 4 character ID == "ANIM" */
-
 	Uint16 width;    /* Width of screen in pixels. */
 	Uint16 height;    /* Height of screen in pixels. */
 	Uint8 variant;  /*   0==ANIM. */
 	Uint8 version;  /*   0==frame rate is multiple of 18 cycles/sec.
 					1==frame rate is multiple of 70 cycles/sec.  */
-
 	Uint8 hasLastDelta;  /* 1==Last record is a delta from last-to-first frame. */
-
 	Uint8 lastDeltaValid;  /* 0==The last-to-first delta (if present) hasn't been
 						   updated to match the current first&last frames,  so it
 						   should be ignored. */
-
 	Uint8 pixelType;  /* 0==256 color. */
-
 	Uint8 CompressionType;  /* 1==(RunSkipDump) Only one used FOR NOW. */
-
 	Uint8 otherRecsPerFrm;  /* 0 FOR NOW. */
-
 	Uint8 bitmaptype;  /*   1==320x200, 256-color.  Only one implemented so far. */
-
 	Uint8 recordTypes[32];  /* Not yet implemented. */
-
 	Uint32 nFrames;   /*   In case future version adds other records at end of
 					  file, we still know how many actual frames.
 					  NOTE: DOES include last-to-first delta when present. */
-
 	Uint16 framesPerSecond;  /* Number of frames to play per second. */
-
 	Uint16 pad2[29];  /* 58 bytes of filler to round up to 128 bytes total. */
 	} lpfileheader;
 
-/* this is the format of an large page structure */
+/* this is the format of an large page structure 
+Borrowed from Underworld adventures
+*/
 typedef struct {
 	Uint16 baseRecord;  /* Number of first record in this large page. */
-
 	Uint16 nRecords;  /* Number of records in lp.
 					  bit 15 of "nRecords" == "has continuation from previous lp".
 					  bit 14 of "nRecords" == "final record continues on next lp". */
-
 	Uint16 nBytes;    /* Total number of bytes of contents, excluding header. */
-
 	} lp_descriptor;
-
-
 
 void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP);
 
-void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,char OutFileName[255])
+void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,char OutFileName[255], int useTGA)
 {
 	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
 	int i;
@@ -122,7 +102,7 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 		}	
 }
 
-void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255])
+void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255],int useTGA)
 {
     //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
 //    int indexNo;
@@ -155,7 +135,14 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	switch (FileType)
 	{
 		case UW_GRAPHICS_BITMAPS:	//BYT
-			writeBMP(textureFile, 0, 320, 200, 0, pal,OutFileName);
+			if (useTGA==1)
+				{
+				writeTGA(textureFile, 0, 320, 200, 0, pal,OutFileName,1);
+				}
+			else
+				{
+				writeBMP(textureFile, 0, 320, 200, 0, pal,OutFileName);
+				}
 			break;
 		case UW_GRAPHICS_TEXTURES :	//.tr
 			printf("File Type :%d\n",  textureFile[0]);
@@ -172,7 +159,14 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			for (i = 0; i <NoOfTextures; i++)
 				{
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
-				writeBMP(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName);	//The numbers are the size of the bitmap. These change depending on what you extract (usually 32 or 64)
+				if (useTGA==1)
+					{
+					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName,1);
+					}
+				else
+					{
+					writeBMP(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName);
+					}
 				}
 			break;
 		case UW_GRAPHICS_GR :	//.gr
@@ -207,7 +201,14 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						printf("Width = %d\n",getValAtAddress(textureFile, textureOffset + 1, 8));
 						printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 						textureOffset = textureOffset + 5;
-						writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+						if (useTGA==1)
+							{
+							writeTGA(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);
+							}
+						else
+							{
+							writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+							}
 						break;
 					case 0x8://4 bit run-length
 						printf("4 bit run-length\n");
@@ -223,7 +224,17 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxPalPath, auxpal, pal,auxPalIndex);
 						outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i, 4,OutFileName);
+//						DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i, 4,OutFileName);
+						DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg,4);
+						if (useTGA==1)
+							{
+							writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName,1);
+							}
+						else
+							{
+							writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName);
+							}
+						
 						break;
 					case 0xA://4 bit uncompressed
 						printf("4 bit uncompressed\n");
@@ -239,7 +250,15 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
 						LoadAuxilaryPal(auxPalPath, auxpal, pal, auxPalIndex);
 						//outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-						writeBMP(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName);
+						if (useTGA==1)
+							{
+							writeTGA(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName,1);
+							}
+						else
+							{
+							writeBMP(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName);
+							}
+						
 						break;
 					default:
 						printf("Unknown file type : %d\n", getValAtAddress(textureFile, textureOffset, 8));
@@ -380,7 +399,8 @@ void LoadAuxilaryPal(char auxpalPath[255], palette auxpal[16], palette gamepal[2
 
 }
 
-void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg, palette *auxpal, int index, int BitSize, char OutFileName[255])
+void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int imageHeight, unsigned char *outputImg , int BitSize)
+//, palette *auxpal, int index, int BitSize, char OutFileName[255])
 {
 int state=0; 
 int curr_pxl=0;
@@ -463,8 +483,6 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 		}
 	}
 }
-writeBMP(outputImg, 0, imageWidth, imageHeight, index, auxpal, OutFileName);
-
 }
 
 int getcount(unsigned char *nibbles, int *addr_ptr , int size)
@@ -575,71 +593,7 @@ mask[5] = 0x1F;
 		}
 }
 
-//void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16])
-//{
-//	BitMapHeader bmhead;
-//	BitMapInfoHeader bmihead;
-//
-//	bmhead.bfType = 19778;
-//	bmhead.bfReserved1 = 0;
-//	bmhead.bfReserved2 = 0;
-//	bmhead.bfOffBits = 1078;
-//	bmihead.biSize = 40;
-//	bmihead.biPlanes = 1;
-//	bmihead.biBitCount = 8;
-//	bmihead.biCompression = 0;
-//	bmihead.biXPelsPerMeter = 0;
-//	bmihead.biYPelsPerMeter = 0;
-//	bmihead.biClrUsed = 0;
-//	bmihead.biClrImportant = 0;
-//
-//	bmhead.bfOffBits = 1078; // Set up the .bmp header info
-//	bmihead.biBitCount = 8;
-//	bmihead.biClrUsed = 0;
-//	bmihead.biClrImportant = 0;
-//
-//
-//	//unsigned char *bits = unpackdat + substart + 28;
-//	bmihead.biWidth = SizeH;	//bm->width;
-//	bmihead.biHeight = SizeV;	// bm->height;
-//	int imwidth = SizeH;		//bmihead.biWidth;
-//	imwidth += (4 - (imwidth % 4));
-//	bmihead.biSizeImage = imwidth * bmihead.biHeight;
-//	bmhead.bfSize = bmihead.biSizeImage + 54;
-//
-//
-//	char outFile[80];
-//
-//	sprintf_s(outFile, 80, "obj_%04d.bmp", index);
-//
-//	FILE *outf;
-//	outf = fopen(outFile, "wb");
-//
-//	fwrite(&bmhead.bfType, 2, 1, outf);
-//	fwrite(&bmhead.bfSize, 4, 1, outf);
-//	fwrite(&bmhead.bfReserved1, 2, 1, outf);
-//	fwrite(&bmhead.bfReserved2, 2, 1, outf);
-//	fwrite(&bmhead.bfOffBits, 4, 1, outf);
-//	fwrite(&bmihead, sizeof(BitMapInfoHeader), 1, outf);
-//	fwrite(auxpal, 256 * 4, 1, outf);
-//	char ch = 0;
-//	for (int k = bmihead.biHeight - 1; k >= 0; k--) {
-//		fwrite(Start + bits + (k*bmihead.biWidth), 1, bmihead.biWidth, outf);
-//		if (bmihead.biWidth % 4 != 0)
-//		for (int buf = 4; buf > bmihead.biWidth % 4; buf--)
-//			fwrite(&ch, 1, 1, outf);
-//	}
-//
-//		//fwrite(bits,SizeH*SizeV,1,outf);
-//
-//	
-//	fclose(outf);
-//
-//
-//}
-
-
-void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, char OutFileName[255])
+void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, char OutFileName[255], int useTGA)
 {
 	//const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
 	//    int indexNo;
@@ -726,7 +680,7 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 	return;
 }
 
-void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255])
+void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA)
 {
 	palette *pal;
 	unsigned char auxpalval[32];
@@ -833,7 +787,15 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 				//copyNibbles(critterFile, imgNibbles, datalen, frameOffset + 7);
 				outputImg = new unsigned char[BitMapWidth*BitMapHeight];
 				ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-				writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+				if (useTGA==1)
+					{
+					writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);	
+					}
+				else
+					{
+					writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);	
+					}
+				
 				//DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i,4);
 				}
 			}
@@ -869,7 +831,15 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 				unsigned char *outputImg;
 				outputImg = new unsigned char[BitMapWidth*BitMapHeight];
 				ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-				writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+				if (useTGA==1)
+					{
+					writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);
+					}
+				else
+					{
+					writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+					}
+				
 				i++;
 				}
 			}
@@ -879,9 +849,9 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 }
 
 
-void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits,
-	unsigned int datalen, unsigned int maxpix, int addr_ptr,unsigned char *auxpal)
-{//Code lifted from Underworld adventures.
+void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr,unsigned char *auxpal)
+{
+	//Code lifted from Underworld adventures.
 	// bit extraction variables
 	unsigned int bits_avail = 0;
 	unsigned int rawbits = 0;
@@ -1060,75 +1030,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 
 
 
-//void cutsceneextract()
-//	{
-//	unsigned char *cutsFile;          // Pointer to our buffered data (little endian format)
-//	palette *pal;
-//	pal = new palette[256];
-//	long add_ptr=0;
-//	int NoOfPages = 0;
-//	int Width;
-//	int Height;
-//	FILE *file = NULL;      // File pointer
-//
-//	if ((file = fopen("C:\\Games\\Uw1\\CUTS\\CS000.N02", "rb")) == NULL)
-//		{
-//		printf("Could not open specified file\n"); return;
-//		}
-//
-//	// Get the size of the file in bytes
-//	long fileSize = getFileSize(file);
-//
-//	
-//	cutsFile = new unsigned char[fileSize];
-//	// Read the file in to the buffer
-//	fread(cutsFile, fileSize, 1, file);
-//	fclose(file);
-//
-//	printf("%c", getValAtAddress(cutsFile,0,8));
-//	printf("%c", getValAtAddress(cutsFile, 1, 8));//LPF
-//	printf("%c", getValAtAddress(cutsFile, 2, 8));
-//	printf("%c\n", getValAtAddress(cutsFile, 3, 8));
-//	NoOfPages = getValAtAddress(cutsFile, 6, 16);
-//	printf("No of pages = %d\n",NoOfPages);
-//	printf("%c", getValAtAddress(cutsFile, 16, 8));//anim
-//	printf("%c", getValAtAddress(cutsFile, 17, 8));
-//	printf("%c", getValAtAddress(cutsFile, 18, 8));
-//	printf("%c", getValAtAddress(cutsFile, 19, 8));
-//	Width = getValAtAddress(cutsFile, 20, 16);
-//	Height = getValAtAddress(cutsFile, 22, 16);
-//	printf("Width=%d Height=%d", Width, Height);
-//	add_ptr = 256;
-//	for (int i = 0; i < 256; i++)
-//		{
-//		pal[i].red = getValAtAddress(cutsFile,add_ptr+0,8);
-//		pal[i].green = getValAtAddress(cutsFile, add_ptr+1, 8);
-//		pal[i].blue = getValAtAddress(cutsFile, add_ptr+2, 8);
-//		pal[i].reserved = getValAtAddress(cutsFile, add_ptr+3, 8);
-//		add_ptr=add_ptr+4;
-//		i++;
-//		} 
-//	printf("Large page descriptions.\n");
-//	for (int i = 0; i < 256; i++)
-//		{
-//		printf("\nRecord %d\n",i);
-//		printf("No of First Record %d\n",getValAtAddress(cutsFile,add_ptr+0,16));
-//		printf("No of records in large page %d\n", getValAtAddress(cutsFile, add_ptr + 2, 16));
-//		printf("Total No of bytes(ex header)%d\n", getValAtAddress(cutsFile, add_ptr + 4, 16));
-//		add_ptr = add_ptr + 6;
-//		i++;
-//
-//		}
-//	printf("%c",getValAtAddress(cutsFile,add_ptr+0,8));
-//	printf("%c", getValAtAddress(cutsFile, add_ptr + 1, 8));
-//	printf("%c", getValAtAddress(cutsFile, add_ptr + 2, 8));
-//	printf("%c", getValAtAddress(cutsFile, add_ptr + 3, 8));
-//	printf("%c", getValAtAddress(cutsFile, add_ptr + 4, 8));
-//	printf("%c", getValAtAddress(cutsFile, add_ptr + 5, 8));
-//
-//	}
-
-bool load_cuts_anim(char filePathIn[255], char filePathOut[255])
+bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 	{
 //This is lifted wholesale from the Underworld Adventures implementation 
 	lpfileheader lpheader;
@@ -1225,8 +1127,14 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255])
 		printf("Decoding frame %d of %d\n", framenumber, lpheader.nFrames);
 		myPlayRunSkipDump(ppointer, outbuffer);
 		printf("Writing frame %d of %d to file\n", framenumber, lpheader.nFrames);
-		writeBMP(outbuffer, 0, lpheader.width, lpheader.height, framenumber,pal,filePathOut);
-
+		if (useTGA==1)
+			{
+			writeTGA(outbuffer, 0, lpheader.width, lpheader.height, framenumber,pal,filePathOut,0);//No alpha on cutscenes.
+			}
+		else
+			{
+			writeBMP(outbuffer, 0, lpheader.width, lpheader.height, framenumber,pal,filePathOut);
+			}
 		}
 
 	printf("Cutscene decoded\n");
@@ -1234,7 +1142,7 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255])
 	}
 
 void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
-	{
+	{//From an implemtation by Underworld Adventures (hacking tools)
 	while (true)
 		{
 		Sint8 cnt = (Sint8)*srcP++;
@@ -1316,3 +1224,83 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 			}
 		}
 	}
+
+
+void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha)
+{
+	FILE *fptr;
+	char outFile[255];
+
+	sprintf_s(outFile, 255, "%s_%03d.tga", OutFileName, index);
+		
+   /* Write the result as a uncompressed TGA */
+   if ((fptr = fopen(outFile,"w")) == NULL) {
+      fprintf(stderr,"Failed to open outputfile\n");
+      exit(-1);
+   }
+   putc(0,fptr);
+   putc(0,fptr);
+   putc(2,fptr);                         /* uncompressed RGB */
+   putc(0,fptr); putc(0,fptr);
+   putc(0,fptr); putc(0,fptr);
+   putc(0,fptr);
+   putc(0,fptr); putc(0,fptr);           /* X origin */
+   putc(0,fptr); putc(0,fptr);           /* y origin */
+   putc((SizeH & 0x00FF),fptr);
+   putc((SizeH & 0xFF00) / 256,fptr);
+   putc((SizeV & 0x00FF),fptr);
+   putc((SizeV & 0xFF00) / 256,fptr);
+   putc(32,fptr);                        /* 32 bit bitmap */
+   putc(8,fptr);
+   
+   //Flip my bits
+   
+   
+  // for (int i=0;i<SizeH*SizeV;i++) {
+	 // int pixel = getValAtAddress(bits,i,8);
+	 //// printf("%d\n",pixel);
+	 // putc(pal[pixel].blue,fptr);
+	 // putc(pal[pixel].green,fptr);
+	 // putc(pal[pixel].red,fptr);
+	 // if (pixel !=0)	//Alpha
+		//{
+		//fputc(255,fptr);
+		//}
+	 // else
+		//{
+		//fputc(0,fptr);
+		//}
+	 // //putc(pal[pixel].reserved,fptr);
+  // }
+
+for (int iRow=SizeV-1; iRow>=0;iRow--)
+	{
+	for (int j=(iRow *SizeH); j <(iRow*SizeH)+SizeH;j++)
+		{
+		int pixel = getValAtAddress(bits,Start+j,8);
+		putc(pal[pixel].blue,fptr);
+		putc(pal[pixel].green,fptr);
+		putc(pal[pixel].red,fptr);
+		if (Alpha==1)
+			{
+			if (pixel !=0)	//Alpha
+				{
+				fputc(255,fptr);
+				}
+			  else
+				{
+				fputc(0,fptr);
+				}
+			}
+			else
+				{
+				fputc(255,fptr);//No alpha
+				}
+		}
+	}
+
+
+   fclose(fptr);
+
+
+}

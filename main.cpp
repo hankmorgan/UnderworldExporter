@@ -35,7 +35,7 @@ int gamefile=-1;
 int graphics_file_no=-1;
 int graphics_mode;
 int BitMapSize=32;
-int panels = 0;//Panels.gr are a special case for extraction
+short panels = 0;//Panels.gr are a special case for extraction
 char Graphics_File[255];
 char Graphics_Pal[255];
 char path_uw0[100];
@@ -52,6 +52,7 @@ char fileCrit[255];
 int critPal=0;
 int bytark=0;
 int BlocksToRepack=320;//UW2 blocks to repack
+int useTGA=0;
 FILE *f = NULL;
 if ((f = fopen("gamepaths.txt", "r")) == NULL)
 	{
@@ -108,494 +109,528 @@ shock_game_files[8] = "Data\\SAVGAM07.dat";
 
 
 const char *uw1_graphics_file[45];
-const char *uw2_graphics_file[37];
-uw1_graphics_file[0] = "F16.tr";// - Floor textures 16x16");
-uw1_graphics_file[1] = "F32.tr";// - Floor textures 32x32\n");
-uw1_graphics_file[2] = "W16.tr";// - Wall textures 16x16");
-uw1_graphics_file[3] = "W64.tr";// - Wall textures 64x64\n");
-uw1_graphics_file[4] = "3DWIN.GR";
-uw1_graphics_file[5] = "ANIMO.GR";
-uw1_graphics_file[6] = "ARMOR_F.GR";
-uw1_graphics_file[7] = "ARMOR_G.GR";
-uw1_graphics_file[8] = "BODIES.GR";
-uw1_graphics_file[9] = "BUTTONS.GR";
-uw1_graphics_file[10] = "CHAINS.GR";
-uw1_graphics_file[11] = "CHARHEAD.GR";
-uw1_graphics_file[12] = "CHRBTNS.GR";
-uw1_graphics_file[13] = "COMPASS.GR";
-uw1_graphics_file[14] = "CONVERSE.GR";
-uw1_graphics_file[15] = "CURSORS.GR";
-uw1_graphics_file[16] = "DOORS.GR";
-uw1_graphics_file[17] = "DRAGONS.GR";
-uw1_graphics_file[18] = "EYES.GR";
-uw1_graphics_file[19] = "FLASKS.GR";
-uw1_graphics_file[20] = "GENHEAD.GR";
-uw1_graphics_file[21] = "HEADS.GR";
-uw1_graphics_file[22] = "INV.GR";
-uw1_graphics_file[23] = "LFTI.GR";
-uw1_graphics_file[24] = "OBJECTS.GR";
-uw1_graphics_file[25] = "OPTBN";
-uw1_graphics_file[26] = "OPTB";
-uw1_graphics_file[27] = "OPTBNS";
-uw1_graphics_file[28] = "PANELS.GR";
-uw1_graphics_file[29] = "POWER.GR";
-uw1_graphics_file[30] = "QUEST.GR";
-uw1_graphics_file[31] = "SCRLEDGE.GR";
-uw1_graphics_file[32] = "SPELLS.GR";
-uw1_graphics_file[33] = "TMFLAT.GR";
-uw1_graphics_file[34] = "TMOBJ.GR";
-uw1_graphics_file[35] = "WEAPONS.GR";
-uw1_graphics_file[36] = "BLNKMAP.BYT";
-uw1_graphics_file[37] = "CHARGEN.BYT";
-uw1_graphics_file[38] = "CONV.BYT";
-uw1_graphics_file[39] = "MAIN.BYT";
-uw1_graphics_file[40] = "OPSCR.BYT";
-uw1_graphics_file[41] = "PRES1.BYT";
-uw1_graphics_file[42] = "PRES2.BYT";
-uw1_graphics_file[43] = "WIN1.BYT";
-uw1_graphics_file[44] = "WIN2.BYT";
+const char *uw2_graphics_file[45];
+uw1_graphics_file[0] = "Data\\F16.tr";// - Floor textures 16x16");
+uw1_graphics_file[1] = "Data\\F32.tr";// - Floor textures 32x32\n");
+uw1_graphics_file[2] = "Data\\W16.tr";// - Wall textures 16x16");
+uw1_graphics_file[3] = "Data\\W64.tr";// - Wall textures 64x64\n");
+uw1_graphics_file[4] = "Data\\3DWIN.GR";
+uw1_graphics_file[5] = "Data\\ANIMO.GR";
+uw1_graphics_file[6] = "Data\\ARMOR_F.GR";
+uw1_graphics_file[7] = "Data\\ARMOR_G.GR";
+uw1_graphics_file[8] = "Data\\BODIES.GR";
+uw1_graphics_file[9] = "Data\\BUTTONS.GR";
+uw1_graphics_file[10] = "Data\\CHAINS.GR";
+uw1_graphics_file[11] = "Data\\CHARHEAD.GR";
+uw1_graphics_file[12] = "Data\\CHRBTNS.GR";
+uw1_graphics_file[13] = "Data\\COMPASS.GR";
+uw1_graphics_file[14] = "Data\\CONVERSE.GR";
+uw1_graphics_file[15] = "Data\\CURSORS.GR";
+uw1_graphics_file[16] = "Data\\DOORS.GR";
+uw1_graphics_file[17] = "Data\\DRAGONS.GR";
+uw1_graphics_file[18] = "Data\\EYES.GR";
+uw1_graphics_file[19] = "Data\\FLASKS.GR";
+uw1_graphics_file[20] = "Data\\GENHEAD.GR";
+uw1_graphics_file[21] = "Data\\HEADS.GR";
+uw1_graphics_file[22] = "Data\\INV.GR";
+uw1_graphics_file[23] = "Data\\LFTI.GR";
+uw1_graphics_file[24] = "Data\\OBJECTS.GR";
+uw1_graphics_file[25] = "Data\\OPTBN";
+uw1_graphics_file[26] = "Data\\OPTB";
+uw1_graphics_file[27] = "Data\\OPTBNS";
+uw1_graphics_file[28] = "Data\\PANELS.GR";
+uw1_graphics_file[29] = "Data\\POWER.GR";
+uw1_graphics_file[30] = "Data\\QUEST.GR";
+uw1_graphics_file[31] = "Data\\SCRLEDGE.GR";
+uw1_graphics_file[32] = "Data\\SPELLS.GR";
+uw1_graphics_file[33] = "Data\\TMFLAT.GR";
+uw1_graphics_file[34] = "Data\\TMOBJ.GR";
+uw1_graphics_file[35] = "Data\\WEAPONS.GR";
+uw1_graphics_file[36] = "Data\\BLNKMAP.BYT";
+uw1_graphics_file[37] = "Data\\CHARGEN.BYT";
+uw1_graphics_file[38] = "Data\\CONV.BYT";
+uw1_graphics_file[39] = "Data\\MAIN.BYT";
+uw1_graphics_file[40] = "Data\\OPSCR.BYT";
+uw1_graphics_file[41] = "Data\\PRES1.BYT";
+uw1_graphics_file[42] = "Data\\PRES2.BYT";
+uw1_graphics_file[43] = "Data\\WIN1.BYT";
+uw1_graphics_file[44] = "Data\\WIN2.BYT";
 
-uw2_graphics_file[0] = "T64.tr";//uw2 textures
-uw2_graphics_file[1] = "3DWIN.GR";
-uw2_graphics_file[2] = "ANIMO.GR";
-uw2_graphics_file[3] = "ARMOR_F.GR";
-uw2_graphics_file[4] = "ARMOR_G.GR";
-uw2_graphics_file[5] = "BODIES.GR";
-uw2_graphics_file[6] = "BUTTONS.GR";
-uw2_graphics_file[7] = "CHAINS.GR";
-uw2_graphics_file[8] = "CHARHEAD.GR";
-uw2_graphics_file[9] = "CHRBTNS.GR";
-uw2_graphics_file[10] = "COMPASS.GR";
-uw2_graphics_file[11] = "CONVERSE.GR";
-uw2_graphics_file[12] = "CURSORS.GR";
-uw2_graphics_file[13] = "DOORS.GR";
-uw2_graphics_file[14] = "DRAGONS.GR";
-uw2_graphics_file[15] = "EYES.GR";
-uw2_graphics_file[16] = "FLASKS.GR";
-uw2_graphics_file[17] = "GEMPT.GR";
-uw2_graphics_file[18] = "GENHEAD.GR";
-uw2_graphics_file[19] = "GHEAD.GR";
-uw2_graphics_file[20] = "HEADS.GR";
-uw2_graphics_file[21] = "INV.GR";
-uw2_graphics_file[22] = "LFTI.GR";
-uw2_graphics_file[23] = "OBJECTS.GR";
-uw2_graphics_file[24] = "OPTBN";
-uw2_graphics_file[25] = "OPTB";
-uw2_graphics_file[26] = "OPTBNS";
-uw2_graphics_file[27] = "PANELS.GR";
-uw2_graphics_file[28] = "POWER.GR";
-uw2_graphics_file[29] = "QUESTION.GR";
-uw2_graphics_file[30] = "SCRLEDGE.GR";
-uw2_graphics_file[31] = "SPELLS.GR";
-uw2_graphics_file[32] = "TMFLAT.GR";
-uw2_graphics_file[33] = "TMOBJ.GR";
-uw2_graphics_file[34] = "VIEWS.GR";
-uw2_graphics_file[35] = "WEAP.GR";
-uw2_graphics_file[36] = "BYT.ARK";
+uw2_graphics_file[0] = "Data\\T64.tr";//uw2 textures
+uw2_graphics_file[1] = "Data\\3DWIN.GR";
+uw2_graphics_file[2] = "Data\\ANIMO.GR";
+uw2_graphics_file[3] = "Data\\ARMOR_F.GR";
+uw2_graphics_file[4] = "Data\\ARMOR_G.GR";
+uw2_graphics_file[5] = "Data\\BODIES.GR";
+uw2_graphics_file[6] = "Data\\BUTTONS.GR";
+uw2_graphics_file[7] = "Data\\CHAINS.GR";
+uw2_graphics_file[8] = "Data\\CHARHEAD.GR";
+uw2_graphics_file[9] = "Data\\CHRBTNS.GR";
+uw2_graphics_file[10] = "Data\\COMPASS.GR";
+uw2_graphics_file[11] = "Data\\CONVERSE.GR";
+uw2_graphics_file[12] = "Data\\CURSORS.GR";
+uw2_graphics_file[13] = "Data\\DOORS.GR";
+uw2_graphics_file[14] = "Data\\DRAGONS.GR";
+uw2_graphics_file[15] = "Data\\EYES.GR";
+uw2_graphics_file[16] = "Data\\FLASKS.GR";
+uw2_graphics_file[17] = "Data\\GEMPT.GR";
+uw2_graphics_file[18] = "Data\\GENHEAD.GR";
+uw2_graphics_file[19] = "Data\\GHEAD.GR";
+uw2_graphics_file[20] = "Data\\HEADS.GR";
+uw2_graphics_file[21] = "Data\\INV.GR";
+uw2_graphics_file[22] = "Data\\LFTI.GR";
+uw2_graphics_file[23] = "Data\\OBJECTS.GR";
+uw2_graphics_file[24] = "Data\\OPTBN";
+uw2_graphics_file[25] = "Data\\OPTB";
+uw2_graphics_file[26] = "Data\\OPTBNS";
+uw2_graphics_file[27] = "Data\\PANELS.GR";
+uw2_graphics_file[28] = "Data\\POWER.GR";
+uw2_graphics_file[29] = "Data\\QUESTION.GR";
+uw2_graphics_file[30] = "Data\\SCRLEDGE.GR";
+uw2_graphics_file[31] = "Data\\SPELLS.GR";
+uw2_graphics_file[32] = "Data\\TMFLAT.GR";
+uw2_graphics_file[33] = "Data\\TMOBJ.GR";
+uw2_graphics_file[34] = "Data\\VIEWS.GR";
+uw2_graphics_file[35] = "Data\\WEAP.GR";
+uw2_graphics_file[36] = "Data\\BYT.ARK";
+uw2_graphics_file[37] = "Cuts\\LBACK000.BYT";
+uw2_graphics_file[38] = "Cuts\\LBACK001.BYT";
+uw2_graphics_file[39] = "Cuts\\LBACK002.BYT";
+uw2_graphics_file[40] = "Cuts\\LBACK003.BYT";
+uw2_graphics_file[41] = "Cuts\\LBACK004.BYT";
+uw2_graphics_file[42] = "Cuts\\LBACK005.BYT";
+uw2_graphics_file[43] = "Cuts\\LBACK006.BYT";
+uw2_graphics_file[44] = "Cuts\\LBACK007.BYT";
 
-//int game = SHOCK;
-//int game = UWDEMO;
-//int game = UW1;
-//int game = UW2;
-//int mode = D3_MODE;
-//int mode = ASCII_MODE;
-//int mode = STRINGS_EXTRACT_MODE;
-//int mode = BITMAP_EXTRACT_MODE;
-//int mode = SCRIPT_BUILD_MODE;
-//int mode = MATERIALS_BUILD_MODE;
-//int mode = CONVERSATION_MODE;
-//int mode = REPACK_MODE;
-//int mode= SOURCE_MODE;
 
 levelNo = -1;
-printf("Welcome to Underworld Exporter.\n");
-	printf("\nAvailable games\n");
-	printf("0) Ultima Underworld Demo (probably doesn't work!)\n");
-	printf("1) Ultima Underworld 1: The Stygian Abyss\n");
-	printf("2) Ultima Underworld 2: The Labyrinth of Worlds\n");
-	printf("3) System Shock 1\n");
-	printf("Please select a game.\n>");
-	scanf("%d",&game);
-	if ((game < UWDEMO) || (game > SHOCK))
-		{
+if (true)
+	{
+	printf("Welcome to Underworld Exporter.\n");
+		printf("\nAvailable games\n");
+		printf("0) Ultima Underworld Demo (probably doesn't work!)\n");
+		printf("1) Ultima Underworld 1: The Stygian Abyss\n");
+		printf("2) Ultima Underworld 2: The Labyrinth of Worlds\n");
+		printf("3) System Shock 1\n");
+		printf("Please select a game.\n>");
+		scanf("%d",&game);
+		if ((game < UWDEMO) || (game > SHOCK))
+			{
+			printf("Invalid input. Bye.");
+			return 0;
+			}
+
+	printf("Available Modes.\n");
+	printf("%d) Ascii dump.\n",ASCII_MODE);
+	printf("%d) IDTech/DarkMod export.\n",D3_MODE);
+	printf("%d) String Extraction\n",STRINGS_EXTRACT_MODE);
+	printf("%d) Bitmap Extraction\n",BITMAP_EXTRACT_MODE);
+	printf("%d) Script build(Also runs as part of IDTech export)\n",SCRIPT_BUILD_MODE);
+	printf("%d) Support Materials Builder\n",MATERIALS_BUILD_MODE);
+	printf("%d) Conversation code dump (unfinished!)\n",CONVERSATION_MODE);
+	printf("%d) Repacker mode (UW2 and Shock only. Use at own risk!)\n",REPACK_MODE);
+	printf("%d) Source Engine export\n",SOURCE_MODE);
+	printf("%d) Critter Art Extract\n", CRITTER_EXTRACT_MODE);
+	printf("%d) Cutscene Art Extract\n", CUTSCENE_EXTRACT_MODE);
+	printf("Please select a mode.\n>");
+	scanf("%d", &mode);
+	if ((mode < 0) || (mode > 10))
+	{
 		printf("Invalid input. Bye.");
 		return 0;
-		}
-
-printf("Available Modes.\n");
-printf("%d) Ascii dump.\n",ASCII_MODE);
-printf("%d) IDTech/DarkMod export.\n",D3_MODE);
-printf("%d) String Extraction\n",STRINGS_EXTRACT_MODE);
-printf("%d) Bitmap Extraction\n",BITMAP_EXTRACT_MODE);
-printf("%d) Script build(Also runs as part of IDTech export)\n",SCRIPT_BUILD_MODE);
-printf("%d) Support Materials Builder\n",MATERIALS_BUILD_MODE);
-printf("%d) Conversation code dump (unfinished!)\n",CONVERSATION_MODE);
-printf("%d) Repacker mode (UW2 and Shock only. Use at own risk!)\n",REPACK_MODE);
-printf("%d) Source Engine export\n",SOURCE_MODE);
-printf("%d) Critter Art Extract\n", CRITTER_EXTRACT_MODE);
-printf("%d) Cutscene Art Extract\n", CUTSCENE_EXTRACT_MODE);
-printf("Please select a mode.\n>");
-scanf("%d", &mode);
-if ((mode < 0) || (mode > 10))
-{
-	printf("Invalid input. Bye.");
-	return 0;
-}
-
-switch (mode)
-{
-case ASCII_MODE:
-case D3_MODE:
-case SOURCE_MODE:
-case SCRIPT_BUILD_MODE:
-case REPACK_MODE:
-	{
-	switch (game)
-		{
-		case UWDEMO:
-			sprintf_s(GameFilePath, 255, "%s\\level13.st", path_uw0);
-			break;
-		case UW1:
-		case UW2:
-			printf("\nPick a level archive or save game to open\n");
-			for (int i = 0; i < 6; i++)
-				{
-				printf("%d) %s\n",i,uw_game_files[i]);
-				}
-				if ((game==UW2) && (mode==REPACK_MODE))
-					{
-					printf("%d) %s\n",6,uw_game_files[6]);
-					}				
-			printf(">");
-			scanf("%d", &gamefile);
-			if ((gamefile < 0) || (gamefile >= 7))
-				{
-				printf("Invalid input. Bye.");
-				return 0;
-				}
-			if(game==UW1)
-				{
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw1, uw_game_files[gamefile]);
-				}
-			else
-				{
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw2, uw_game_files[gamefile]);
-				}
-			break;
-		case SHOCK:
-			printf("\nPick a level archive or save game to open\n");
-			for (int i = 0; i < 9; i++)
-				{
-				printf("%d) %s\n", i, shock_game_files[i]);
-				}
-			printf(">");
-			scanf("%d", &gamefile);
-			if ((gamefile < 0) || (gamefile >= 10))
-				{
-				printf("Invalid input. Bye.");
-				return 0;
-				}
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_shock, shock_game_files[gamefile]);
-			break;
-		}
-	if (mode !=REPACK_MODE)
-	{
-	switch (game)
-		{
-			case UWDEMO:
-				levelNo = 0;	//only possible value
-				break;
-			case UW1://Print list of UW1 levels.
-				printf("\nPick a level.\n");
-				printf("0)Entrance level.\n");
-				printf("1)Domain of the Mountainmen.\n");
-				printf("2)The Swamp and Lizardmen.\n");
-				printf("3)Trolls and Knights.\n");
-				printf("4)Catacombs and banquet halls.\n");
-				printf("5)The Seers.\n");
-				printf("6)Tybals Lair.\n");
-				printf("7)The Volcano.\n");
-				printf("8)Ethereal Void.\n");
-				printf(">");
-				scanf("%d", &levelNo);
-				if ((levelNo < 0) || (levelNo > 9))
-					{
-					printf("Invalid input. Bye.");
-					return 0;
-					}
-				break;
-			case UW2:
-				printf("\nPick a level\n");
-				printf("0 - 4 Britannia\n");
-				printf("8 - 15 Prison Tower\n");
-				printf("16 - 17 Killorn Keep\n");
-				printf("24 - 25 Ice Cavern\n");
-				printf("32 - 33 Talorus\n");
-				printf("40 - 47 Academy\n");
-				printf("48 - 51 Tomb\n");
-				printf("56 - 58 Pits\n");
-				printf("64 - 72 Void (65 is stickman level)\n");
-				printf(">");
-				scanf("%d", &levelNo);
-				if (!(
-					((levelNo >= 0) && (levelNo <= 4))
-					|| ((levelNo >= 8) && (levelNo <= 15))
-					|| ((levelNo >= 16) && (levelNo <= 17))
-					|| ((levelNo >= 24) && (levelNo <= 25))
-					|| ((levelNo >= 32) && (levelNo <= 33))
-					|| ((levelNo >= 40) && (levelNo <= 47))
-					|| ((levelNo >= 48) && (levelNo <= 51))
-					|| ((levelNo >= 56) && (levelNo <= 58))
-					|| ((levelNo >= 64) && (levelNo <= 72))
-					))
-					{
-					printf("Invalid input. Bye.");
-					return 0;
-					}
-				break;
-			case SHOCK:
-				printf("\nPick a level (need to dblchk these)\n");
-				printf("0)Reactor\n");
-				printf("1)Med SCI\n");
-				printf("2)Research\n");
-				printf("3)Maintenance\n");
-				printf("4)Storage\n");
-				printf("5)Flight Deck\n");
-				printf("6)Executive\n");
-				printf("7)System Engineering\n");
-				printf("8)Security\n");
-				printf("9)Bridge\n");
-				printf("10)Cyberspace 1 (Shodan)\n");
-				printf("11)Grove 1\n");
-				printf("12)Grove 1\n");
-				printf("13)Grove 1\n");
-				printf("14)Cyberspace 2\n");
-				printf("15)Cyberspace 3\n");
-				printf(">");
-				scanf("%d", &levelNo);
-				if ((levelNo < 0) || (levelNo > 15))
-					{
-					printf("Invalid input. Bye.");
-					return 0;
-					}
-				break;
-				}
-		printf("Enter a filename for output (%s\\[filename].map)\n>", path_target_platform);
-		
-		scanf("%s", TempOutFileName);
-		sprintf_s(OutFileName, 255, "%s\\%s", path_target_platform, TempOutFileName);
-		}
-	else
-		{
-		switch (game)
-			{
-				case UW2:
-				printf("Enter a filename for repacking into (%s\\data\\[filename].ark)\n>", path_uw2);
-				scanf("%s", TempOutFileName);
-				sprintf_s(OutFileName, 255, "%s\\data\\%s.ark", path_uw2, TempOutFileName);
-				break;
-			case SHOCK:
-				printf("Enter a filename for repacking into (%s\\[filename].data)\n>", path_shock);
-				scanf("%s", TempOutFileName);
-				sprintf_s(OutFileName, 255, "%s\\res\\data\\%s.ark", path_target_platform, TempOutFileName);
-				break;
-			default:
-				printf("\nInvalid game for repacking. Goodbye");
-				return 0;
-			}
-
-		}
-		
-	break;
 	}
-case BITMAP_EXTRACT_MODE:
-	switch (game)
-		{
-		case UWDEMO:
-			printf("\nCome back later...\n");
-			return 0;
-			break;
-		case UW1:
-			for (int i = 0; i < 45; i++)
-				{
-				printf("%d) %s",i, uw1_graphics_file[i]);
-				if (i % 2 == 0)
-					{
-					printf("\t");
-					}
-				else
-					{
-					printf("\n");
-					}
-				}
-			printf("\nPick a file\n>");
-			scanf("%d", &graphics_file_no);
-			if ((graphics_file_no < 0) || (graphics_file_no > 44))
-				{
-				printf("Invalid input. Bye.");
-				return 0;
-				}
-			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw1, uw1_graphics_file[graphics_file_no]);
-			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
-			sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
-			if (graphics_file_no <= 3)
-				{
-				graphics_mode = UW_GRAPHICS_TEXTURES;
-				switch (graphics_file_no)
-					{
-						case 0:
-							BitMapSize=16; break;
-						case 1:
-							BitMapSize = 32; break;
-						case 2:
-							BitMapSize = 16; break;
-						case 3:
-							BitMapSize = 64; break;
-					}
-				}
-			else if (graphics_file_no <= 35)
-				{
-				if (graphics_file_no == 27)//Panels
-					{
-					panels=1;
-					}
-				graphics_mode = UW_GRAPHICS_GR;
-				}
-			else
-				{
-				graphics_mode = UW_GRAPHICS_BITMAPS;
-				}
-			break;
-		case UW2:
-			for (int i = 0; i < 37; i++)
-				{
-				printf("%d) %s", i, uw2_graphics_file[i]);
-				if (i % 2 == 0)
-					{
-					printf("\t");
-					}
-				else
-					{
-					printf("\n");
-					}
-				}
-			printf("\nPick a file\n>");
-			scanf("%d", &graphics_file_no);
-			if ((graphics_file_no < 0) || (graphics_file_no > 36))
-				{
-				printf("Invalid input. Bye.");
-				return 0;
-				}
-			if (graphics_file_no == 36)
-				{//UW2 Byt ark
-				bytark=1;
-				}
-			sprintf_s(Graphics_File, 255, "%s\\data\\%s", path_uw2, uw2_graphics_file[graphics_file_no]);
-			sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
-			sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
 
-			if (graphics_file_no <= 0)
-				{
-				graphics_mode = UW_GRAPHICS_TEXTURES;
-				BitMapSize = 64;
-				}
-			else 
-				{
-				graphics_mode = UW_GRAPHICS_GR;
-				if (graphics_file_no == 28)//Panels
-					{
-					panels = 1;//special case due to file headers
-					}
-				}
-			break;
-		case SHOCK:
-			printf("\nI don't have a graphics extractor for System Shock as part of this program yet. You'll have to find one yourself.\n");
-			return 0;
-		}
-	printf("\nEnter a palette number to use.(0 to 7)\n>");
-	scanf("%d", &critPal);
-	printf("Enter a filename for output ([filename]_###.bmp)\n>");
-	scanf("%s", OutFileName);
-	break;
-	case STRINGS_EXTRACT_MODE:
+	switch (mode)
+	{
+	case ASCII_MODE:
+	case D3_MODE:
+	case SOURCE_MODE:
+	case SCRIPT_BUILD_MODE:
+	case REPACK_MODE:
+		{
 		switch (game)
 			{
 			case UWDEMO:
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw0, UW1_STRINGS_FILE);
+				sprintf_s(GameFilePath, 255, "%s\\level13.st", path_uw0);
 				break;
 			case UW1:
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw1, UW1_STRINGS_FILE);
-				break;
 			case UW2:
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_uw2, UW2_STRINGS_FILE);
+				printf("\nPick a level archive or save game to open\n");
+				for (int i = 0; i < 6; i++)
+					{
+					printf("%d) %s\n",i,uw_game_files[i]);
+					}
+					if ((game==UW2) && (mode==REPACK_MODE))
+						{
+						printf("%d) %s\n",6,uw_game_files[6]);
+						}				
+				printf(">");
+				scanf("%d", &gamefile);
+				if ((gamefile < 0) || (gamefile >= 7))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+				if(game==UW1)
+					{
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_uw1, uw_game_files[gamefile]);
+					}
+				else
+					{
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_uw2, uw_game_files[gamefile]);
+					}
 				break;
 			case SHOCK:
-				sprintf_s(GameFilePath, 255, "%s\\%s", path_shock, SHOCK_STRINGS_FILE);
+				printf("\nPick a level archive or save game to open\n");
+				for (int i = 0; i < 9; i++)
+					{
+					printf("%d) %s\n", i, shock_game_files[i]);
+					}
+				printf(">");
+				scanf("%d", &gamefile);
+				if ((gamefile < 0) || (gamefile >= 10))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_shock, shock_game_files[gamefile]);
 				break;
 			}
-		break;
-	case MATERIALS_BUILD_MODE:
-		break;
-	case CRITTER_EXTRACT_MODE:
-		if (game == SHOCK)
-			{
-			printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
-			return 0;
-			}
-		printf("\nType a critter filename for extraction from. gamepath\crit\\[filename]\n");
-		scanf("%s",TempOutFileName);
-		switch (game)
-			{
-			case UWDEMO:
-				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw0, TempOutFileName);
-				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw0, UW1_CRITTER_ASSOC);
-				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw0);
-				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw0, AUXILARY_PAL_FILE);
-				break;
-			case UW1:
-				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
-				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw1, UW1_CRITTER_ASSOC);
-				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
-				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
-				break;
-			case UW2:
-				sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw2, TempOutFileName);
-				sprintf_s(fileAssoc, 255, "%s\\%s", path_uw2, UW2_CRITTER_ASSOC);
-				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
-				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
-				break;
-			}
-		printf("\nEnter a palette number to use.(0 to 3)\n>");
-		scanf("%d", &critPal);
-		printf("Enter a filename for output ([filename]_###.bmp)\n>");
-		scanf("%s", OutFileName);
-		break;
-	case CUTSCENE_EXTRACT_MODE:
-		if (game == SHOCK)
-			{
-			printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
-			return 0;
-			}
-		printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
-		scanf("%s", TempOutFileName);
+		if (mode !=REPACK_MODE)
+		{
 		switch (game)
 			{
 				case UWDEMO:
-					sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw0, TempOutFileName);
+					levelNo = 0;	//only possible value
 					break;
-				case UW1:
-					sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw1, TempOutFileName);
+				case UW1://Print list of UW1 levels.
+					printf("\nPick a level.\n");
+					printf("0)Entrance level.\n");
+					printf("1)Domain of the Mountainmen.\n");
+					printf("2)The Swamp and Lizardmen.\n");
+					printf("3)Trolls and Knights.\n");
+					printf("4)Catacombs and banquet halls.\n");
+					printf("5)The Seers.\n");
+					printf("6)Tybals Lair.\n");
+					printf("7)The Volcano.\n");
+					printf("8)Ethereal Void.\n");
+					printf(">");
+					scanf("%d", &levelNo);
+					if ((levelNo < 0) || (levelNo > 9))
+						{
+						printf("Invalid input. Bye.");
+						return 0;
+						}
 					break;
 				case UW2:
-					sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
+					printf("\nPick a level\n");
+					printf("0 - 4 Britannia\n");
+					printf("8 - 15 Prison Tower\n");
+					printf("16 - 17 Killorn Keep\n");
+					printf("24 - 25 Ice Cavern\n");
+					printf("32 - 33 Talorus\n");
+					printf("40 - 47 Academy\n");
+					printf("48 - 51 Tomb\n");
+					printf("56 - 58 Pits\n");
+					printf("64 - 72 Void (65 is stickman level)\n");
+					printf(">");
+					scanf("%d", &levelNo);
+					if (!(
+						((levelNo >= 0) && (levelNo <= 4))
+						|| ((levelNo >= 8) && (levelNo <= 15))
+						|| ((levelNo >= 16) && (levelNo <= 17))
+						|| ((levelNo >= 24) && (levelNo <= 25))
+						|| ((levelNo >= 32) && (levelNo <= 33))
+						|| ((levelNo >= 40) && (levelNo <= 47))
+						|| ((levelNo >= 48) && (levelNo <= 51))
+						|| ((levelNo >= 56) && (levelNo <= 58))
+						|| ((levelNo >= 64) && (levelNo <= 72))
+						))
+						{
+						printf("Invalid input. Bye.");
+						return 0;
+						}
 					break;
+				case SHOCK:
+					printf("\nPick a level (need to dblchk these)\n");
+					printf("0)Reactor\n");
+					printf("1)Med SCI\n");
+					printf("2)Research\n");
+					printf("3)Maintenance\n");
+					printf("4)Storage\n");
+					printf("5)Flight Deck\n");
+					printf("6)Executive\n");
+					printf("7)System Engineering\n");
+					printf("8)Security\n");
+					printf("9)Bridge\n");
+					printf("10)Cyberspace 1 (Shodan)\n");
+					printf("11)Grove 1\n");
+					printf("12)Grove 1\n");
+					printf("13)Grove 1\n");
+					printf("14)Cyberspace 2\n");
+					printf("15)Cyberspace 3\n");
+					printf(">");
+					scanf("%d", &levelNo);
+					if ((levelNo < 0) || (levelNo > 15))
+						{
+						printf("Invalid input. Bye.");
+						return 0;
+						}
+					break;
+					}
+			printf("Enter a filename for output (%s\\[filename].map)\n>", path_target_platform);
+			
+			scanf("%s", TempOutFileName);
+			sprintf_s(OutFileName, 255, "%s\\%s", path_target_platform, TempOutFileName);
 			}
-		printf("Enter a filename for output ([filename]_###.bmp)\n>");
+		else
+			{
+			switch (game)
+				{
+					case UW2:
+					printf("Enter a filename for repacking into (%s\\data\\[filename].ark)\n>", path_uw2);
+					scanf("%s", TempOutFileName);
+					sprintf_s(OutFileName, 255, "%s\\data\\%s.ark", path_uw2, TempOutFileName);
+					break;
+				case SHOCK:
+					printf("Enter a filename for repacking into (%s\\[filename].data)\n>", path_shock);
+					scanf("%s", TempOutFileName);
+					sprintf_s(OutFileName, 255, "%s\\res\\data\\%s.ark", path_target_platform, TempOutFileName);
+					break;
+				default:
+					printf("\nInvalid game for repacking. Goodbye");
+					return 0;
+				}
+
+			}
+			
+		break;
+		}
+	case BITMAP_EXTRACT_MODE:
+		switch (game)
+			{
+			case UWDEMO:
+				printf("\nCome back later...\n");
+				return 0;
+				break;
+			case UW1:
+				for (int i = 0; i < 45; i++)
+					{
+					printf("%d) %s",i, uw1_graphics_file[i]);
+					if (i % 2 == 0)
+						{
+						printf("\t");
+						}
+					else
+						{
+						printf("\n");
+						}
+					}
+				printf("\nPick a file\n>");
+				scanf("%d", &graphics_file_no);
+				if ((graphics_file_no < 0) || (graphics_file_no > 44))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+				sprintf_s(Graphics_File, 255, "%s\\%s", path_uw1, uw1_graphics_file[graphics_file_no]);
+				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
+				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
+				if (graphics_file_no <= 3)
+					{
+					graphics_mode = UW_GRAPHICS_TEXTURES;
+					switch (graphics_file_no)
+						{
+							case 0:
+								BitMapSize=16; break;
+							case 1:
+								BitMapSize = 32; break;
+							case 2:
+								BitMapSize = 16; break;
+							case 3:
+								BitMapSize = 64; break;
+						}
+					}
+				else if (graphics_file_no <= 35)
+					{
+					if (graphics_file_no == 27)//Panels
+						{
+						panels=1;
+						}
+					graphics_mode = UW_GRAPHICS_GR;
+					}
+				else
+					{
+					graphics_mode = UW_GRAPHICS_BITMAPS;
+					}
+				break;
+			case UW2:
+				for (int i = 0; i < 45; i++)
+					{
+					printf("%d) %s", i, uw2_graphics_file[i]);
+					if (i % 2 == 0)
+						{
+						printf("\t");
+						}
+					else
+						{
+						printf("\n");
+						}
+					}
+				printf("\nPick a file\n>");
+				scanf("%d", &graphics_file_no);
+				if ((graphics_file_no < 0) || (graphics_file_no > 45))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}
+				if (graphics_file_no == 36)
+					{//UW2 Byt ark
+					bytark=1;
+					}
+				sprintf_s(Graphics_File, 255, "%s\\%s", path_uw2, uw2_graphics_file[graphics_file_no]);
+				sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
+				sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
+
+				if (graphics_file_no <= 0)
+					{//only on texture file in uw2
+					graphics_mode = UW_GRAPHICS_TEXTURES;
+					BitMapSize = 64;
+					}
+					else if (graphics_file_no>=37)
+						{//Byt files in cuts dir
+						graphics_mode=UW_GRAPHICS_BITMAPS;
+						}
+					else 
+						{
+						graphics_mode = UW_GRAPHICS_GR;
+						if (graphics_file_no == 28)//Panels
+							{
+							panels = 1;//special case due to file headers
+							}
+						
+						}
+				break;
+			case SHOCK:
+				printf("\nI don't have a graphics extractor for System Shock as part of this program yet. You'll have to find one yourself.\n");
+				return 0;
+			}
+		printf("\nEnter a palette number to use.(0 to 7)\n>");
+		scanf("%d", &critPal);
+		printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
+		scanf("%d", &useTGA);
+		if (useTGA==1)
+			{
+			printf("Enter a filename for output ([filename]_###.tga)\n>");
+			}
+		else
+			{
+			printf("Enter a filename for output ([filename]_###.bmp)\n>");
+			}
 		scanf("%s", OutFileName);
 		break;
-	case CONVERSATION_MODE:
-		break;
+		case STRINGS_EXTRACT_MODE:
+			switch (game)
+				{
+				case UWDEMO:
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_uw0, UW1_STRINGS_FILE);
+					break;
+				case UW1:
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_uw1, UW1_STRINGS_FILE);
+					break;
+				case UW2:
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_uw2, UW2_STRINGS_FILE);
+					break;
+				case SHOCK:
+					sprintf_s(GameFilePath, 255, "%s\\%s", path_shock, SHOCK_STRINGS_FILE);
+					break;
+				}
+			break;
+		case MATERIALS_BUILD_MODE:
+			break;
+		case CRITTER_EXTRACT_MODE:
+			if (game == SHOCK)
+				{
+				printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+				return 0;
+				}
+			printf("\nType a critter filename for extraction from. gamepath\crit\\[filename]\n");
+			scanf("%s",TempOutFileName);
+			switch (game)
+				{
+				case UWDEMO:
+					sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw0, TempOutFileName);
+					sprintf_s(fileAssoc, 255, "%s\\%s", path_uw0, UW1_CRITTER_ASSOC);
+					sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw0);
+					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw0, AUXILARY_PAL_FILE);
+					break;
+				case UW1:
+					sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
+					sprintf_s(fileAssoc, 255, "%s\\%s", path_uw1, UW1_CRITTER_ASSOC);
+					sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
+					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
+					break;
+				case UW2:
+					sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw2, TempOutFileName);
+					sprintf_s(fileAssoc, 255, "%s\\%s", path_uw2, UW2_CRITTER_ASSOC);
+					sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
+					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
+					break;
+				}
+			printf("\nEnter a palette number to use.(0 to 3)\n>");
+			scanf("%d", &critPal);
+			printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
+			scanf("%d", &useTGA);
+			if (useTGA==1)
+				{
+				printf("Enter a filename for output ([filename]_###.tga)\n>");
+				}
+			else
+				{
+				printf("Enter a filename for output ([filename]_###.bmp)\n>");
+				}		
+			scanf("%s", OutFileName);
+			break;
+		case CUTSCENE_EXTRACT_MODE:
+			if (game == SHOCK)
+				{
+				printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+				return 0;
+				}
+			printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
+			scanf("%s", TempOutFileName);
+			switch (game)
+				{
+					case UWDEMO:
+						sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw0, TempOutFileName);
+						break;
+					case UW1:
+						sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw1, TempOutFileName);
+						break;
+					case UW2:
+						sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
+						break;
+				}
+			printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
+			scanf("%d", &useTGA);
+			if (useTGA==1)
+				{
+				printf("Enter a filename for output ([filename]_###.tga)\n>");
+				}
+			else
+				{
+				printf("Enter a filename for output ([filename]_###.bmp)\n>");
+				}	
+			scanf("%s", OutFileName);
+			break;
+		case CONVERSATION_MODE:
+			break;
+		}
 	}
+	else
+		{
+		printf("commandline args processing eventually");
+		}
 GAME = game;
 switch (game)
 	{
@@ -606,7 +641,6 @@ switch (game)
 	case SHOCK:
 		{BrushSizeX=120;BrushSizeY=120;BrushSizeZ=15;break;}//To ease on the steepness of some slopes that are impassible
 	}
-//int NoOfLevels=80;		//uw1 has 9, uw2 has 80(kind of), shock has 15, uw demo has 0. Level no 0 is the first level.
 
 	LoadConfig(game,mode);
 	
@@ -634,24 +668,24 @@ switch (game)
 				{
 				if (bytark!=1)
 					{
-					extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName,auxPalPath);
+					extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName,auxPalPath,useTGA);
 					}
 				else
 					{
-					extractUW2Bitmaps(Graphics_File,Graphics_Pal,critPal,OutFileName);
+					extractUW2Bitmaps(Graphics_File,Graphics_Pal,critPal,OutFileName,useTGA);
 					}
 				}
 			else
 				{
-				extractPanels(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, UW_GRAPHICS_GR, game,OutFileName);
+				extractPanels(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, UW_GRAPHICS_GR, game,OutFileName,useTGA);
 				}
 			
 			break;
 		case CRITTER_EXTRACT_MODE:
-			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName);
+			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA);
 			break;
 		case CUTSCENE_EXTRACT_MODE:
-			load_cuts_anim(Graphics_File, OutFileName);
+			load_cuts_anim(Graphics_File, OutFileName,useTGA);
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
@@ -675,7 +709,7 @@ switch (game)
 				}
 			else
 				{
-					if (game == SHOCK)
+				if (game == SHOCK)
 					{
 					RepackShock(GameFilePath, OutFileName);
 					}
