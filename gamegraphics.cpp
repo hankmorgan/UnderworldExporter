@@ -1273,7 +1273,7 @@ void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index
    //Flip my bits
 for (int iRow=SizeV-1; iRow>=0;iRow--)
 	{
-	for (int j=(iRow *SizeH); j <(iRow*SizeH)+SizeH;j++)
+	for (long j=(iRow *SizeH); j <(iRow*SizeH)+SizeH;j++)
 		{
 		int pixel = getValAtAddress(bits,Start+j,8);
 		putc(pal[pixel].blue,fOut);
@@ -1295,6 +1295,14 @@ for (int iRow=SizeV-1; iRow>=0;iRow--)
 				fputc(255,fOut);//No alpha
 				}
 		}
+		if (SizeH %4 !=0)
+			{
+			char ch = 0;
+			for (int k=4; k>SizeH%4;k--)
+				{
+				fputc(ch,fOut);
+				}
+			}
 	}
 
 printf(".");
@@ -1322,9 +1330,10 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 	tmp_ark = new unsigned char[fileSize];
 	fread(tmp_ark, fileSize, 1,file);
 	fclose(file);	
-
-if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
-	{
+//for (int p=0; p<20;p++)
+//{
+//if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
+//	{
 	long DirectoryAddress=getValAtAddress(tmp_ark,124,32);//Get the list of chunks in this archive.
 	int NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
 	long address_pointer=DirectoryAddress+6;
@@ -1333,6 +1342,58 @@ if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
 		int chunkId = getValAtAddress(tmp_ark,address_pointer,16);
 		short chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
 		address_pointer=address_pointer+10;	//next chunk
+		switch (chunkId)
+			{//ss_xtract. However the fuck he got them!
+			case 0x01a9:
+				PaletteChunk=2;
+				break;
+			case 0x01aa:
+				PaletteChunk=3;
+				break;
+			case 0x01ab:
+				PaletteChunk=4;
+				break;
+			case 0x01ac:
+				PaletteChunk=5;
+				break;
+			case 0x01ad:
+			case 0x01ae:
+				PaletteChunk=6;
+				break;
+			case 0x01af:
+			case 0x01b0:
+				PaletteChunk=7;
+				break;
+			case 0x01b1:
+			case 0x01b2:
+			case 0x01b3:
+				PaletteChunk=8;
+				break;
+			case 0x01b4:
+				PaletteChunk=9;
+				break;	
+			case 0x01b5:		
+				PaletteChunk=10;
+				break;
+			case 0x01b7:	
+			case 0x01b8:			
+				PaletteChunk=11;
+				break;
+			case 0x01b9:
+				PaletteChunk=12;
+				break;	
+			case 0x01ba:
+				PaletteChunk=13;
+				break;	
+			case 0x01bb:						
+				PaletteChunk=14;
+				break;	
+			default:
+				break;
+			}
+		if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
+			{
+
 		
 		if ((chunkContentType==2) || (chunkContentType==17))	//Bitmap and sometimes audio log
 			{//load this chunk and extract
@@ -1344,6 +1405,7 @@ if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
 				int blockAddress =getShockBlockAddress(chunkId,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
 				if (blockAddress != -1)
 					{
+					printf("\nChunk %d, type %d", chunkId, chunkType);
 					art_ark=new unsigned char[chunkUnpackedLength];
 					LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark,chunkPackedLength,chunkUnpackedLength);
 					
@@ -1352,7 +1414,7 @@ if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
 					
 					//printf("No of texture subblocks %d\n",NoOfTextures);
 					//printf("Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
-
+			
 					for (int i =0; i<NoOfTextures; i++)
 						{
 						long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
@@ -1366,7 +1428,7 @@ if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
 			}
 		}	
 	}
-
+//}//endof
 }
 
 int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo)
@@ -1496,18 +1558,37 @@ void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbit
 void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA)
 {
 //Process a system shock bitmap chunk
+int BitMapHeaderSize=28;
+int CompressionType;
+int Width;
+int Height;
 
-	
-	
-	//First 28 bytes are header info.
-	//printf("\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
-	int CompressionType=getValAtAddress(art_ark,textureOffset+4,16);
-	//printf("\nType=%d",CompressionType);
-	int Width=getValAtAddress(art_ark,textureOffset+8,16);
-	//printf("\nWidth=%d",Width);
-	int Height=getValAtAddress(art_ark,textureOffset+10,16);
-	//printf("\nHeight=%d",Height);		
-	
+		//First 28 bytes are header info.
+		//printf("\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
+		CompressionType=getValAtAddress(art_ark,textureOffset+4,16);
+		//printf("\nType=%d",CompressionType);
+		Width=getValAtAddress(art_ark,textureOffset+8,16);
+		//printf("\nWidth=%d",Width);
+		Height=getValAtAddress(art_ark,textureOffset+10,16);
+		//Height=150;//?cutscenes???
+		
+////printf("\nBitmap header\n");
+////printf("Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
+////printf("Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
+////printf("??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
+////printf("Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
+////printf("Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
+////printf("Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
+////printf("log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
+////printf("log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
+////printf("%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
+////printf("%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
+////printf("%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
+////printf("%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
+////printf("??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
+		
+		
+		//printf("\nHeight=%d",Height);		
 	if ((Width>0) && (Height >0))
 		{
 		//printf("\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
@@ -1519,7 +1600,7 @@ void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textu
 			//printf("Compressed bmp\n");
 			unsigned char *outputImg;
 			outputImg = new unsigned char[Width*Height];
-			UncompressBitmap(art_ark+textureOffset+28, outputImg,Height*Width);
+			UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
 			if (useTGA==1)
 				{
 				writeTGA(outputImg,0,Width,Height,index,pal,OutFileName,1);
@@ -1533,12 +1614,226 @@ void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textu
 			{
 			if (useTGA==1)
 				{
-				writeTGA(art_ark,textureOffset+28,Width,Height,index,pal,OutFileName,1);
+				writeTGA(art_ark,textureOffset+BitMapHeaderSize,Width,Height,index,pal,OutFileName,1);
 				}
 			else
 				{
-				writeBMP(art_ark,textureOffset+28,Width,Height,index,pal,OutFileName);
+				writeBMP(art_ark,textureOffset+BitMapHeaderSize,Width,Height,index,pal,OutFileName);
 				}
 			}			
 		}
 	}
+
+
+void ExtractShockCutscenes(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA)
+{
+PaletteChunk=2;
+	palette *pal;
+	pal = new palette[256];
+	
+	unsigned char *art_ark;
+	unsigned char *tmp_ark;
+
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(GraphicsFile, "rb")) == NULL)
+		{
+		printf("\nGraphics file not found!\n");
+		return;
+		}
+	long fileSize = getFileSize(file);
+	tmp_ark = new unsigned char[fileSize];
+	fread(tmp_ark, fileSize, 1,file);
+	fclose(file);	
+//for (int p=0; p<20;p++)
+//{
+
+	long DirectoryAddress=getValAtAddress(tmp_ark,124,32);//Get the list of chunks in this archive.
+	int NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
+	long address_pointer=DirectoryAddress+6;
+	for (int k=0; k< NoOfChunks; k++)
+		{
+		int chunkId = getValAtAddress(tmp_ark,address_pointer,16);
+		short chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
+		address_pointer=address_pointer+10;	//next chunk
+		switch (chunkId)
+			{//ss_xtract. However the fuck he got them!
+			case 0x01a9:
+				PaletteChunk=2;
+				break;
+			case 0x01aa:
+				PaletteChunk=3;
+				break;
+			case 0x01ab:
+				PaletteChunk=4;
+				break;
+			case 0x01ac:
+				PaletteChunk=5;
+				break;
+			case 0x01ad:
+			case 0x01ae:
+				PaletteChunk=6;
+				break;
+			case 0x01af:
+			case 0x01b0:
+				PaletteChunk=7;
+				break;
+			case 0x01b1:
+			case 0x01b2:
+			case 0x01b3:
+				PaletteChunk=8;
+				break;
+			case 0x01b4:
+				PaletteChunk=9;
+				break;	
+			case 0x01b5:		
+				PaletteChunk=10;
+				break;
+			case 0x01b7:	
+			case 0x01b8:			
+				PaletteChunk=11;
+				break;
+			case 0x01b9:
+				PaletteChunk=12;
+				break;	
+			case 0x01ba:
+				PaletteChunk=13;
+				break;	
+			case 0x01bb:						
+				PaletteChunk=14;
+				break;	
+			default:
+				break;
+			}
+		if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
+			{
+			if ((chunkContentType==2) || (chunkContentType==17))	//Bitmap and sometimes audio log
+				{//load this chunk and extract
+					char NewOutFileName[255];
+					sprintf_s(NewOutFileName, 255, "%s_%04d", OutFileName, chunkId);
+					long chunkUnpackedLength;
+					long chunkType;//compression type
+					long chunkPackedLength;
+					int blockAddress =getShockBlockAddress(chunkId,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+					if (blockAddress != -1)
+						{
+						printf("\nChunk %d, type %d", chunkId, chunkType);
+						art_ark=new unsigned char[chunkUnpackedLength];
+						LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark,chunkPackedLength,chunkUnpackedLength);
+						
+						//Read in my chunk header
+						int NoOfTextures=getValAtAddress(art_ark,0,16);
+						
+						//printf("No of texture subblocks %d\n",NoOfTextures);
+						//printf("Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
+						unsigned char *keyframe=new unsigned char[320*150];
+						for (int i =0; i<NoOfTextures; i++)
+							{
+							long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
+							WriteShockCutsceneBitmaps(keyframe,art_ark,pal,i,textureOffset, NewOutFileName,useTGA);
+							}
+						}
+					else
+						{
+						printf("Graphics chunk %d not found in %s\n", chunkId,GraphicsFile);
+						}
+				}
+		}
+	}	
+//}//endof
+}
+
+
+
+void WriteShockCutsceneBitmaps(unsigned char KeyFrame[48000], unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA)
+{
+//Process a system shock bitmap chunk
+int BitMapHeaderSize=28;
+int CompressionType;
+int Width;
+int Height;
+
+		//First 28 bytes are header info.
+		//printf("\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
+		CompressionType=getValAtAddress(art_ark,textureOffset+4,16);
+		//printf("\nType=%d",CompressionType);
+		Width=getValAtAddress(art_ark,textureOffset+8,16);
+		//printf("\nWidth=%d",Width);
+		Height=getValAtAddress(art_ark,textureOffset+10,16);
+		Height=150;//?cutscenes???
+		
+		
+		
+		//printf("\nHeight=%d",Height);		
+	if ((Width>0) && (Height >0))
+		{
+		//printf("\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
+		//printf("\nAt E =%d",getValAtAddress(art_ark,textureOffset+0xE,8));
+		//printf("\nAt F =%d",getValAtAddress(art_ark,textureOffset+0xF,8));
+		//printf("\nAt 18 =%d",getValAtAddress(art_ark,textureOffset+0x18,32));
+		if(CompressionType==4)
+			{//compressed
+			//printf("Compressed bmp\n");
+			unsigned char *outputImg;
+			outputImg = new unsigned char[Width*Height];
+			if (index==0)
+				{//Keyframe
+				//KeyFrame = new unsigned char[Width*Height];
+				UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, KeyFrame,Height*Width);
+				//copy keyframe to outputimg
+				for (int z=0;z<Height*Width;z++)
+					{
+					outputImg[z]=KeyFrame[z];
+					}
+				}
+			else
+				{
+				UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
+				//ApplyKeyFrame(KeyFrame,outputImg,Height*Width);
+				for (int z=0;z<Height*Width;z++)
+					{
+					if (getValAtAddress(outputImg,z,8)==0)
+						{
+						outputImg[z]=KeyFrame[z];
+						//outputImg[z]=KeyFrame[z]^outputImg[z];
+						}
+					}
+				}
+			if (useTGA==1)
+				{
+				writeTGA(outputImg,0,Width,Height,index,pal,OutFileName,0);//Doesn't appear to work properly?
+				}
+			else
+				{
+				writeBMP(outputImg,0,Width,Height,index,pal,OutFileName);
+				}
+			////copy output img to key frame.
+			//	for (int z=0;z<Height*Width;z++)
+			//		{
+			//		KeyFrame[z]=outputImg[z];
+			//		}
+			}
+		else
+			{
+			if (useTGA==1)
+				{
+				writeTGA(art_ark,textureOffset+BitMapHeaderSize,Width,Height,index,pal,OutFileName,1);
+				}
+			else
+				{
+				writeBMP(art_ark,textureOffset+BitMapHeaderSize,Width,Height,index,pal,OutFileName);
+				}
+			}			
+		}
+	}
+//	
+//void ApplyKeyFrame(unsigned char *keyframe,unsigned char *output,int BitMapSize)
+//{
+////Merge animation frames into the key frame.
+//for (int i=0;i<BitMapSize;i++)
+//	{
+//	if (output[i]==0)
+//		{
+//		output[i]=keyframe[i];
+//		}
+//	}
+//}

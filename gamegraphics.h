@@ -58,7 +58,10 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 
 
 void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA);
+void ExtractShockCutscenes(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA);
 int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo);
 void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbits);
 void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA);
+void WriteShockCutsceneBitmaps(unsigned char *KeyFrame, unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA);
+//void ApplyKeyFrame(unsigned char *keyframe,unsigned char *output,int BitMapSize);
 #endif /*gamegraphics_h*/

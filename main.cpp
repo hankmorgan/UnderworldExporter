@@ -202,7 +202,7 @@ uw2_graphics_file[42] = "Cuts\\LBACK005.BYT";
 uw2_graphics_file[43] = "Cuts\\LBACK006.BYT";
 uw2_graphics_file[44] = "Cuts\\LBACK007.BYT";
 
-const char *shock_graphics_file[17];
+const char *shock_graphics_file[18];
 shock_graphics_file[0] = "RES\\DATA\\OBJART.RES";
 shock_graphics_file[1] = "RES\\DATA\\OBJART2.RES";
 shock_graphics_file[2] = "RES\\DATA\\OBJART3.RES";
@@ -219,13 +219,18 @@ shock_graphics_file[12] = "RES\\DATA\\INTRO.RES";
 shock_graphics_file[13] = "RES\\DATA\\SVGADETH.RES";
 shock_graphics_file[14] = "RES\\DATA\\SVGAEND.RES";
 shock_graphics_file[15] = "RES\\DATA\\SVGAINTR.RES";
-shock_graphics_file[16] = "RES\\DATA\\WIN1.RES";
+shock_graphics_file[16] = "RES\\DATA\\vidmail.RES";
+shock_graphics_file[17] = "RES\\DATA\\WIN1.RES";
 
 const char *shock_pal_file[3];
 shock_pal_file[0] = "RES\\DATA\\gamepal.res";
 shock_pal_file[1] = "RES\\DATA\\cutspal.res";
 shock_pal_file[2] = "RES\\DATA\\splshpal.res";
 
+const char *shock_cuts_file[3];
+shock_cuts_file[0] = "RES\\DATA\\START1.RES";
+shock_cuts_file[1] = "RES\\DATA\\DEATH.RES";
+shock_cuts_file[2] = "RES\\DATA\\WIN1.RES";
 
 levelNo = -1;
 if (true)
@@ -536,7 +541,7 @@ if (true)
 						}
 				break;
 			case SHOCK:
-				for (int i = 0; i < 17; i++)
+				for (int i = 0; i < 18; i++)
 					{
 					printf("%d) %s",i, shock_graphics_file[i]);
 					if (i % 2 == 0)
@@ -550,7 +555,7 @@ if (true)
 					}
 				printf("\nPick a file\n>");
 				scanf("%d", &graphics_file_no);
-				if ((graphics_file_no < 0) || (graphics_file_no > 17))
+				if ((graphics_file_no < 0) || (graphics_file_no > 18))
 					{
 					printf("Invalid input. Bye.");
 					return 0;
@@ -649,8 +654,38 @@ if (true)
 		case CUTSCENE_EXTRACT_MODE:
 			if (game == SHOCK)
 				{
-				printf("\nUse the bitmap extraction mode here!\n");
-				return 0;
+				for (int i = 0; i < 3; i++)
+					{
+					printf("%d) %s",i, shock_cuts_file[i]);
+					if (i % 2 == 0)
+						{
+						printf("\t\t");
+						}
+					else
+						{
+						printf("\n");
+						}
+					}
+				printf("\nPick a file\n>");
+				scanf("%d", &graphics_file_no);
+				if ((graphics_file_no < 0) || (graphics_file_no > 3))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}									
+				sprintf_s(Graphics_File, 255, "%s\\%s", path_shock, shock_cuts_file[graphics_file_no]);
+				for (int i = 0; i < 3; i++)
+					{
+					printf("%d) %s\n",i, shock_pal_file[i]);
+					}
+				printf("\nPick a file\n>");
+				scanf("%d", &graphics_file_no);
+				if ((graphics_file_no < 0) || (graphics_file_no > 3))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}	
+				sprintf_s(Graphics_Pal, 255, "%s\\%s", path_shock, shock_pal_file[graphics_file_no]);
 				}
 			else
 				{
@@ -669,8 +704,8 @@ if (true)
 							break;
 					}
 				}
-				printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
-				scanf("%d", &useTGA);
+				//printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
+				//scanf("%d", &useTGA);
 				if (useTGA==1)
 					{
 					printf("Enter a filename for output ([filename]_###.tga)\n>");
@@ -749,7 +784,14 @@ switch (game)
 			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA);
 			break;
 		case CUTSCENE_EXTRACT_MODE:
-			load_cuts_anim(Graphics_File, OutFileName,useTGA);
+			if (game == SHOCK)
+				{
+				ExtractShockCutscenes( Graphics_File, Graphics_Pal,critPal,OutFileName,0);//Bitmap only so far
+				}
+			else
+				{
+				load_cuts_anim(Graphics_File, OutFileName,useTGA);
+				}
 			break;
 		case MATERIALS_BUILD_MODE:
 			//BuildXDataFile(game);
