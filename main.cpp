@@ -202,6 +202,30 @@ uw2_graphics_file[42] = "Cuts\\LBACK005.BYT";
 uw2_graphics_file[43] = "Cuts\\LBACK006.BYT";
 uw2_graphics_file[44] = "Cuts\\LBACK007.BYT";
 
+const char *shock_graphics_file[17];
+shock_graphics_file[0] = "RES\\DATA\\OBJART.RES";
+shock_graphics_file[1] = "RES\\DATA\\OBJART2.RES";
+shock_graphics_file[2] = "RES\\DATA\\OBJART3.RES";
+shock_graphics_file[3] = "RES\\DATA\\CITMAT.RES";
+shock_graphics_file[4] = "RES\\DATA\\GAMESCR.RES";
+shock_graphics_file[5] = "RES\\DATA\\HANDART.RES";
+shock_graphics_file[6] = "RES\\DATA\\MFDART.RES";
+shock_graphics_file[7] = "RES\\DATA\\SIDEART.RES";
+shock_graphics_file[8] = "RES\\DATA\\START1.RES";
+shock_graphics_file[9] = "RES\\DATA\\SPLASH.RES";
+shock_graphics_file[10] = "RES\\DATA\\TEXTURE.RES";
+shock_graphics_file[11] = "RES\\DATA\\DEATH.RES";
+shock_graphics_file[12] = "RES\\DATA\\INTRO.RES";
+shock_graphics_file[13] = "RES\\DATA\\SVGADETH.RES";
+shock_graphics_file[14] = "RES\\DATA\\SVGAEND.RES";
+shock_graphics_file[15] = "RES\\DATA\\SVGAINTR.RES";
+shock_graphics_file[16] = "RES\\DATA\\WIN1.RES";
+
+const char *shock_pal_file[3];
+shock_pal_file[0] = "RES\\DATA\\gamepal.res";
+shock_pal_file[1] = "RES\\DATA\\cutspal.res";
+shock_pal_file[2] = "RES\\DATA\\splshpal.res";
+
 
 levelNo = -1;
 if (true)
@@ -419,7 +443,7 @@ if (true)
 					printf("%d) %s",i, uw1_graphics_file[i]);
 					if (i % 2 == 0)
 						{
-						printf("\t");
+						printf("\t\t");
 						}
 					else
 						{
@@ -470,7 +494,7 @@ if (true)
 					printf("%d) %s", i, uw2_graphics_file[i]);
 					if (i % 2 == 0)
 						{
-						printf("\t");
+						printf("\t\t");
 						}
 					else
 						{
@@ -512,10 +536,41 @@ if (true)
 						}
 				break;
 			case SHOCK:
-				printf("\nI don't have a graphics extractor for System Shock as part of this program yet. You'll have to find one yourself.\n");
-				return 0;
+				for (int i = 0; i < 17; i++)
+					{
+					printf("%d) %s",i, shock_graphics_file[i]);
+					if (i % 2 == 0)
+						{
+						printf("\t\t");
+						}
+					else
+						{
+						printf("\n");
+						}
+					}
+				printf("\nPick a file\n>");
+				scanf("%d", &graphics_file_no);
+				if ((graphics_file_no < 0) || (graphics_file_no > 17))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}									
+				sprintf_s(Graphics_File, 255, "%s\\%s", path_shock, shock_graphics_file[graphics_file_no]);
+				for (int i = 0; i < 3; i++)
+					{
+					printf("%d) %s\n",i, shock_pal_file[i]);
+					}
+				printf("\nPick a file\n>");
+				scanf("%d", &graphics_file_no);
+				if ((graphics_file_no < 0) || (graphics_file_no > 3))
+					{
+					printf("Invalid input. Bye.");
+					return 0;
+					}	
+				sprintf_s(Graphics_Pal, 255, "%s\\%s", path_shock, shock_pal_file[graphics_file_no]);
+				//return 0;
 			}
-		printf("\nEnter a palette number to use.(0 to 7)\n>");
+		printf("\nEnter a palette number to use.(Typically 0 to 7)\n>");
 		scanf("%d", &critPal);
 		printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
 		scanf("%d", &useTGA);
@@ -594,34 +649,37 @@ if (true)
 		case CUTSCENE_EXTRACT_MODE:
 			if (game == SHOCK)
 				{
-				printf("\nI don't have a graphics extractor for System Shock as part of this program. You'll have to find one yourself.\n");
+				printf("\nUse the bitmap extraction mode here!\n");
 				return 0;
-				}
-			printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
-			scanf("%s", TempOutFileName);
-			switch (game)
-				{
-					case UWDEMO:
-						sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw0, TempOutFileName);
-						break;
-					case UW1:
-						sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw1, TempOutFileName);
-						break;
-					case UW2:
-						sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
-						break;
-				}
-			printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
-			scanf("%d", &useTGA);
-			if (useTGA==1)
-				{
-				printf("Enter a filename for output ([filename]_###.tga)\n>");
 				}
 			else
 				{
-				printf("Enter a filename for output ([filename]_###.bmp)\n>");
-				}	
-			scanf("%s", OutFileName);
+				printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
+				scanf("%s", TempOutFileName);
+				switch (game)
+					{
+						case UWDEMO:
+							sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw0, TempOutFileName);
+							break;
+						case UW1:
+							sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw1, TempOutFileName);
+							break;
+						case UW2:
+							sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
+							break;
+					}
+				}
+				printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
+				scanf("%d", &useTGA);
+				if (useTGA==1)
+					{
+					printf("Enter a filename for output ([filename]_###.tga)\n>");
+					}
+				else
+					{
+					printf("Enter a filename for output ([filename]_###.bmp)\n>");
+					}	
+				scanf("%s", OutFileName);
 			break;
 		case CONVERSATION_MODE:
 			break;
@@ -664,22 +722,28 @@ switch (game)
 				}
 			break;
 		case BITMAP_EXTRACT_MODE:
-			if (panels==0)
+			if (game != SHOCK)
 				{
-				if (bytark!=1)
+				if (panels==0)
 					{
-					extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName,auxPalPath,useTGA);
+					if (bytark!=1)
+						{
+						extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName,auxPalPath,useTGA);
+						}
+					else
+						{
+						extractUW2Bitmaps(Graphics_File,Graphics_Pal,critPal,OutFileName,useTGA);
+						}
 					}
 				else
 					{
-					extractUW2Bitmaps(Graphics_File,Graphics_Pal,critPal,OutFileName,useTGA);
+					extractPanels(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, UW_GRAPHICS_GR, game,OutFileName,useTGA);
 					}
 				}
 			else
 				{
-				extractPanels(-1, Graphics_File, Graphics_Pal, 0, BitMapSize, UW_GRAPHICS_GR, game,OutFileName,useTGA);
+				ExtractShockGraphics( Graphics_File, Graphics_Pal,critPal,OutFileName,useTGA);
 				}
-			
 			break;
 		case CRITTER_EXTRACT_MODE:
 			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA);

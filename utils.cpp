@@ -301,27 +301,71 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 	//AddressOfBlockStart = getShockBlockAddress(ChunkNo,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType);  	
 	if (AddressOfBlockStart == -1)	{return -1;}
 	
-	if (chunkType ==1)	
-		{//Compressed
-		//printf("\nCompressed chunk");
-			unsigned char *temp_ark = new unsigned char[chunkPackedLength];	
-			for (long k=0; k< chunkPackedLength; k++)
+	//if (chunkType ==1)
+	switch (chunkType)
+		{
+		case 0:
+			{//Flat uncompressed
+			for (long k=0; k< chunkUnpackedLength; k++)
 				{
-					temp_ark[k] = archive_ark[AddressOfBlockStart+k];
-				}
-			
-			unpack_data(temp_ark,OutputChunk,chunkUnpackedLength);
+					OutputChunk[k] = archive_ark[AddressOfBlockStart+k];
+				}		
 			return chunkUnpackedLength;
-		}
-	else
-		{//Uncompressed. 
-		//printf("\nUncompressed chunk");
-		//OutputChunk =  new unsigned char[chunkUnpackedLength];
-		for (long k=0; k< chunkUnpackedLength; k++)
+			break;
+			}
+		case 1:	
+			{//flat Compressed
+			//printf("\nCompressed chunk");
+				unsigned char *temp_ark = new unsigned char[chunkPackedLength];	
+				for (long k=0; k< chunkPackedLength; k++)
+					{
+						temp_ark[k] = archive_ark[AddressOfBlockStart+k];
+					}
+				
+				unpack_data(temp_ark,OutputChunk,chunkUnpackedLength);
+				return chunkUnpackedLength;
+				break;
+			}
+		
+		case 3://Subdir compressed	//Just return the compressed data and unpack the sub chunks individually?
 			{
-				OutputChunk[k] = archive_ark[AddressOfBlockStart+k];
-			}		
-		return chunkUnpackedLength;
+			//uncompressed the sub chunks
+			int NoOfEntries=getValAtAddress(archive_ark,AddressOfBlockStart,16);
+			int SubDirLength=(NoOfEntries+1) * 4 + 2;
+			unsigned char *temp_ark = new unsigned char[chunkPackedLength];	
+			unsigned char *tmpchunk = new unsigned char[chunkUnpackedLength];	
+				for (long k=0; k< chunkPackedLength; k++)
+					{
+						temp_ark[k] = archive_ark[AddressOfBlockStart+k+SubDirLength];
+					}
+					unpack_data(temp_ark,tmpchunk,chunkUnpackedLength);
+				//Merge my subdir and uncompressed subdir data back together.
+				for (long k=0;k<SubDirLength;k++)
+					{//Subdir
+					OutputChunk[k]=archive_ark[AddressOfBlockStart+k];
+					}
+				for (long k=SubDirLength;k<chunkUnpackedLength;k++)
+					{//Subdir
+					OutputChunk[k]=tmpchunk[k-SubDirLength];
+					}
+			return chunkUnpackedLength;					
+			break;
+			}
+		case 2://Subdir uncompressed
+			{
+			printf("Uncompressed subdir!");
+			}
+		default:
+			{//Uncompressed. 
+			//printf("\nUncompressed chunk");
+			//OutputChunk =  new unsigned char[chunkUnpackedLength];
+			for (long k=0; k< chunkUnpackedLength; k++)
+				{
+					OutputChunk[k] = archive_ark[AddressOfBlockStart+k];
+				}		
+			return chunkUnpackedLength;
+			break;
+			}
 		}
 }
 

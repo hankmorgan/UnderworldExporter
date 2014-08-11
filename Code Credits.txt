@@ -8,7 +8,7 @@ Code credits from previous UW and System Shock Projects.
 6 UW Image Decompression algorithm based on abysmal version.
 7 RLE Decoder lifted from UWAdventures
 8 Cutscene implementation stolen from UWAdventures.
-
+9 Bitmap decompression for SHOCK from the DumpTex utility
 
 
 THANKS!!!!!!

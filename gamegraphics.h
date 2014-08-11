@@ -56,4 +56,9 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA);
 void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr, unsigned char *auxpal);
 void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,char OutFileName[255], int useTGA);
 
+
+void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA);
+int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo);
+void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbits);
+void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA);
 #endif /*gamegraphics_h*/

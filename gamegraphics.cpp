@@ -337,7 +337,7 @@ void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 	
 	char outFile[255];
 
-	sprintf_s(outFile, 255, "%s_%03d.bmp", OutFileName, index);
+	sprintf_s(outFile, 255, "%s_%04d.bmp", OutFileName, index);
 
 	FILE *outf ;
 	outf = fopen(outFile,"wb");
@@ -363,6 +363,7 @@ void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 			for (int buf = 4; buf > bmihead.biWidth%4; buf--)
 				fwrite(&ch,1,1,outf);
 	}
+	printf(".");
 	fclose(outf);	
 
 
@@ -1228,79 +1229,316 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha)
 {
-	FILE *fptr;
+	FILE *fOut;
 	char outFile[255];
 
-	sprintf_s(outFile, 255, "%s_%03d.tga", OutFileName, index);
+	sprintf_s(outFile, 255, "%s_%04d.tga", OutFileName, index);
 		
    /* Write the result as a uncompressed TGA */
-   if ((fptr = fopen(outFile,"w")) == NULL) {
+   if ((fOut = fopen(outFile,"w")) == NULL) {
       fprintf(stderr,"Failed to open outputfile\n");
       exit(-1);
    }
-   putc(0,fptr);
-   putc(0,fptr);
-   putc(2,fptr);                         /* uncompressed RGB */
-   putc(0,fptr); putc(0,fptr);
-   putc(0,fptr); putc(0,fptr);
-   putc(0,fptr);
-   putc(0,fptr); putc(0,fptr);           /* X origin */
-   putc(0,fptr); putc(0,fptr);           /* y origin */
-   putc((SizeH & 0x00FF),fptr);
-   putc((SizeH & 0xFF00) / 256,fptr);
-   putc((SizeV & 0x00FF),fptr);
-   putc((SizeV & 0xFF00) / 256,fptr);
-   putc(32,fptr);                        /* 32 bit bitmap */
-   putc(8,fptr);
-   
-   //Flip my bits
-   
+   putc(0,fOut);
+   putc(0,fOut);
+   putc(2,fOut);                         /* uncompressed RGB */
+   putc(0,fOut); putc(0,fOut);
+   putc(0,fOut); putc(0,fOut);
+   putc(0,fOut);
+   putc(0,fOut); putc(0,fOut);           /* X origin */
+   putc(0,fOut); putc(0,fOut);           /* y origin */
+   putc((SizeH & 0x00FF),fOut);
+   putc((SizeH & 0xFF00) / 256,fOut);
+   putc((SizeV & 0x00FF),fOut);
+   putc((SizeV & 0xFF00) / 256,fOut);
+   putc(32,fOut);                        /* 32 bit bitmap */
+   putc(8,fOut);			//For alpha channel in 32 bit tga.
    
   // for (int i=0;i<SizeH*SizeV;i++) {
 	 // int pixel = getValAtAddress(bits,i,8);
 	 //// printf("%d\n",pixel);
-	 // putc(pal[pixel].blue,fptr);
-	 // putc(pal[pixel].green,fptr);
-	 // putc(pal[pixel].red,fptr);
+	 // putc(pal[pixel].blue,fOut);
+	 // putc(pal[pixel].green,fOut);
+	 // putc(pal[pixel].red,fOut);
 	 // if (pixel !=0)	//Alpha
 		//{
-		//fputc(255,fptr);
+		//fputc(255,fOut);
 		//}
 	 // else
 		//{
-		//fputc(0,fptr);
+		//fputc(0,fOut);
 		//}
-	 // //putc(pal[pixel].reserved,fptr);
+	 // //putc(pal[pixel].reserved,fOut);
   // }
-
+   //Flip my bits
 for (int iRow=SizeV-1; iRow>=0;iRow--)
 	{
 	for (int j=(iRow *SizeH); j <(iRow*SizeH)+SizeH;j++)
 		{
 		int pixel = getValAtAddress(bits,Start+j,8);
-		putc(pal[pixel].blue,fptr);
-		putc(pal[pixel].green,fptr);
-		putc(pal[pixel].red,fptr);
+		putc(pal[pixel].blue,fOut);
+		putc(pal[pixel].green,fOut);
+		putc(pal[pixel].red,fOut);
 		if (Alpha==1)
 			{
 			if (pixel !=0)	//Alpha
 				{
-				fputc(255,fptr);
+				fputc(255,fOut);
 				}
 			  else
 				{
-				fputc(0,fptr);
+				fputc(0,fOut);
 				}
 			}
 			else
 				{
-				fputc(255,fptr);//No alpha
+				fputc(255,fOut);//No alpha
 				}
 		}
 	}
 
-
-   fclose(fptr);
+printf(".");
+   fclose(fOut);
 
 
 }
+
+
+void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA)
+{
+	palette *pal;
+	pal = new palette[256];
+	
+	unsigned char *art_ark;
+	unsigned char *tmp_ark;
+
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(GraphicsFile, "rb")) == NULL)
+		{
+		printf("\nGraphics file not found!\n");
+		return;
+		}
+	long fileSize = getFileSize(file);
+	tmp_ark = new unsigned char[fileSize];
+	fread(tmp_ark, fileSize, 1,file);
+	fclose(file);	
+
+if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
+	{
+	long DirectoryAddress=getValAtAddress(tmp_ark,124,32);//Get the list of chunks in this archive.
+	int NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
+	long address_pointer=DirectoryAddress+6;
+	for (int k=0; k< NoOfChunks; k++)
+		{
+		int chunkId = getValAtAddress(tmp_ark,address_pointer,16);
+		short chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
+		address_pointer=address_pointer+10;	//next chunk
+		
+		if ((chunkContentType==2) || (chunkContentType==17))	//Bitmap and sometimes audio log
+			{//load this chunk and extract
+				char NewOutFileName[255];
+				sprintf_s(NewOutFileName, 255, "%s_%04d", OutFileName, chunkId);
+				long chunkUnpackedLength;
+				long chunkType;//compression type
+				long chunkPackedLength;
+				int blockAddress =getShockBlockAddress(chunkId,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+				if (blockAddress != -1)
+					{
+					art_ark=new unsigned char[chunkUnpackedLength];
+					LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark,chunkPackedLength,chunkUnpackedLength);
+					
+					//Read in my chunk header
+					int NoOfTextures=getValAtAddress(art_ark,0,16);
+					
+					//printf("No of texture subblocks %d\n",NoOfTextures);
+					//printf("Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
+
+					for (int i =0; i<NoOfTextures; i++)
+						{
+						long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
+						WriteShockBitmaps(art_ark,pal,i,textureOffset, NewOutFileName,useTGA);
+						}
+					}
+				else
+					{
+					printf("Graphics chunk %d not found in %s\n", chunkId,GraphicsFile);
+					}
+			}
+		}	
+	}
+
+}
+
+int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo)
+	{
+	//Loads a system shock palette.
+	unsigned char *pal_ark;
+	unsigned char *tmp_ark;
+	int chunkId=-1;
+	long chunkUnpackedLength;
+	long chunkType;//compression type
+	long chunkPackedLength;
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(PaletteFile, "rb")) == NULL)
+		{
+		printf("\nPalette file not found!\n");
+		return -1;
+		}
+	long fileSize = getFileSize(file);
+	tmp_ark = new unsigned char[fileSize];
+	fread(tmp_ark, fileSize, 1,file);
+	fclose(file);	
+	int MatchesFound=-1;
+	long DirectoryAddress=getValAtAddress(tmp_ark,124,32);//Get the list of chunks in this archive.
+	int NoOfChunks = getValAtAddress(tmp_ark,DirectoryAddress,16);
+	long address_pointer=DirectoryAddress+6;
+	for (int k=0; k< NoOfChunks; k++)
+		{
+		
+		short chunkContentType = getValAtAddress(tmp_ark,address_pointer+9,8);
+		
+		
+		if ((chunkContentType==0))	//Gamepal
+			{
+			MatchesFound++;
+			chunkId = getValAtAddress(tmp_ark,address_pointer,16);//If I can find a match I'll just use the last one I found.
+			if (MatchesFound==PaletteNo)
+				{
+				k=NoOfChunks+1;//break my loop.
+				}
+			}
+		address_pointer=address_pointer+10;	//next chunk
+		}
+	
+	if (chunkId==-1)
+		{
+		return -1;
+		}
+	
+	
+	int blockAddress =getShockBlockAddress(chunkId,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
+	if (blockAddress != -1)
+		{
+		pal_ark=new unsigned char[chunkUnpackedLength];
+		LoadShockChunk(blockAddress, chunkType, tmp_ark, pal_ark,chunkPackedLength,chunkUnpackedLength);
+		int i=0;
+		int palAddr=0;
+		for (int j = 0; j < 256; j++) {
+			pal[i].red = pal_ark[palAddr + 0];//<<2;
+			pal[i].green = pal_ark[palAddr + 1];// << 2;
+			pal[i].blue = pal_ark[palAddr + 2];// << 2;
+			pal[i].reserved = 0;
+			palAddr = palAddr +3;
+			i++;
+			}
+			return 1;
+		}
+	else
+		{
+		printf("Palette %d not found in %c", PaletteNo,PaletteFile);
+		return-1;
+		}
+	return -1;
+	}
+
+// This one is also almost directly from Jim Cameron's code.
+void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbits) {
+	int i,xc;
+	unsigned char *bits_end;
+
+	bits_end = bits + numbits;
+
+	memset(bits,0,numbits);
+
+	while (bits < bits_end)
+	{
+		xc = *chunk_bits++;
+		if (xc == 0)
+		{
+			xc = *chunk_bits++;
+			for (i = 0; i < xc && bits < bits_end; ++i)
+			{
+				*bits++ = *chunk_bits;
+			}
+			++chunk_bits;
+		}
+		else if (xc < 0x81)
+		{
+			if (xc == 0x80)
+			{
+				xc = *chunk_bits++;
+				if (xc == 0)
+				{
+					break;
+				}
+				if (*chunk_bits < 0x80)
+				{
+					bits += xc + (*chunk_bits << 8);
+					xc = 0;
+				}
+				/*  	  xc = *chunk_bits++; */
+				++chunk_bits;
+			}
+			for (i = 0; i < xc && bits < bits_end; ++i)
+			{
+				*bits++ = *chunk_bits++;
+			}
+		}
+		else
+		{
+			bits += (xc & 0x7f);
+		}
+	}
+
+}
+
+
+void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA)
+{
+//Process a system shock bitmap chunk
+
+	
+	
+	//First 28 bytes are header info.
+	//printf("\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
+	int CompressionType=getValAtAddress(art_ark,textureOffset+4,16);
+	//printf("\nType=%d",CompressionType);
+	int Width=getValAtAddress(art_ark,textureOffset+8,16);
+	//printf("\nWidth=%d",Width);
+	int Height=getValAtAddress(art_ark,textureOffset+10,16);
+	//printf("\nHeight=%d",Height);		
+	
+	if ((Width>0) && (Height >0))
+		{
+		//printf("\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
+		//printf("\nAt E =%d",getValAtAddress(art_ark,textureOffset+0xE,8));
+		//printf("\nAt F =%d",getValAtAddress(art_ark,textureOffset+0xF,8));
+		//printf("\nAt 18 =%d",getValAtAddress(art_ark,textureOffset+0x18,32));
+		if(CompressionType==4)
+			{//compressed
+			//printf("Compressed bmp\n");
+			unsigned char *outputImg;
+			outputImg = new unsigned char[Width*Height];
+			UncompressBitmap(art_ark+textureOffset+28, outputImg,Height*Width);
+			if (useTGA==1)
+				{
+				writeTGA(outputImg,0,Width,Height,index,pal,OutFileName,1);
+				}
+			else
+				{
+				writeBMP(outputImg,0,Width,Height,index,pal,OutFileName);
+				}
+			}
+		else
+			{
+			if (useTGA==1)
+				{
+				writeTGA(art_ark,textureOffset+28,Width,Height,index,pal,OutFileName,1);
+				}
+			else
+				{
+				writeBMP(art_ark,textureOffset+28,Width,Height,index,pal,OutFileName);
+				}
+			}			
+		}
+	}
