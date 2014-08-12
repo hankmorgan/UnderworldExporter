@@ -92,11 +92,26 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 				{
 				int datalen;
 				unsigned char *outputImg = unpackUW2(textureFile,textureOffset,&datalen);		
-				writeBMP(outputImg, 0, 320, 200, i, pal, OutFileName);
+				if (useTGA == 1)
+					{
+					writeTGA(outputImg, 0, 320, 200, i, pal, OutFileName,0);
+					}
+				else
+					{
+					writeBMP(outputImg, 0, 320, 200, i, pal, OutFileName);
+					}
+				
 				}
 			else
 				{
-				writeBMP(textureFile, textureOffset, 320, 200, i, pal, OutFileName);
+				if (useTGA == 1)
+					{
+					writeTGA(textureFile, textureOffset, 320, 200, i, pal, OutFileName,0);
+					}
+				else
+					{
+					writeBMP(textureFile, textureOffset, 320, 200, i, pal, OutFileName);
+					}
 				}
 			}
 		}	
@@ -151,6 +166,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			if (ImageCount == -1)	//All the images.
 				{
 				NoOfTextures = textureFile[3] << 8 | textureFile[2];
+				NoOfTextures=256;//Count is wrong???
 				}
 			else
 				{
@@ -161,7 +177,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
 				if (useTGA==1)
 					{
-					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName,1);
+					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName,0);
 					}
 				else
 					{
@@ -349,13 +365,6 @@ void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 	fwrite(&bmhead.bfOffBits,4,1,outf);
 	fwrite(&bmihead,sizeof(BitMapInfoHeader),1,outf);
 	fwrite(pal,256*4,1,outf);
-	//for (int z = 0; z<256; z++)
-	//{
-	//	fwrite(&pal[z].red, 1, 1, outf);
-	//	fwrite(&pal[z].green , 1, 1, outf);
-	//	fwrite(&pal[z].blue , 1, 1, outf);
-	//	fwrite(&pal[z].reserved, 1, 1, outf);
-	//}
 	char ch = 0;
 	for (int k = bmihead.biHeight-1; k >= 0; k--) {
 		fwrite(Start+bits+(k*bmihead.biWidth),1,bmihead.biWidth,outf);
@@ -1228,88 +1237,63 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 
 
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha)
-{
-	FILE *fOut;
+	{
+	FILE *fptr;
 	char outFile[255];
 
 	sprintf_s(outFile, 255, "%s_%04d.tga", OutFileName, index);
-		
-   /* Write the result as a uncompressed TGA */
-   if ((fOut = fopen(outFile,"w")) == NULL) {
-      fprintf(stderr,"Failed to open outputfile\n");
-      exit(-1);
-   }
-   putc(0,fOut);
-   putc(0,fOut);
-   putc(2,fOut);                         /* uncompressed RGB */
-   putc(0,fOut); putc(0,fOut);
-   putc(0,fOut); putc(0,fOut);
-   putc(0,fOut);
-   putc(0,fOut); putc(0,fOut);           /* X origin */
-   putc(0,fOut); putc(0,fOut);           /* y origin */
-   putc((SizeH & 0x00FF),fOut);
-   putc((SizeH & 0xFF00) / 256,fOut);
-   putc((SizeV & 0x00FF),fOut);
-   putc((SizeV & 0xFF00) / 256,fOut);
-   putc(32,fOut);                        /* 32 bit bitmap */
-   putc(8,fOut);			//For alpha channel in 32 bit tga.
-   
-  // for (int i=0;i<SizeH*SizeV;i++) {
-	 // int pixel = getValAtAddress(bits,i,8);
-	 //// printf("%d\n",pixel);
-	 // putc(pal[pixel].blue,fOut);
-	 // putc(pal[pixel].green,fOut);
-	 // putc(pal[pixel].red,fOut);
-	 // if (pixel !=0)	//Alpha
-		//{
-		//fputc(255,fOut);
-		//}
-	 // else
-		//{
-		//fputc(0,fOut);
-		//}
-	 // //putc(pal[pixel].reserved,fOut);
-  // }
-   //Flip my bits
-for (int iRow=SizeV-1; iRow>=0;iRow--)
-	{
-	for (long j=(iRow *SizeH); j <(iRow*SizeH)+SizeH;j++)
+
+	/* Write the result as a uncompressed TGA */
+	if ((fptr = fopen(outFile, "w")) == NULL) {
+		fprintf(stderr, "Failed to open outputfile\n");
+		exit(-1);
+		}
+	putc(0, fptr);
+	putc(0, fptr);
+	putc(2, fptr);                         /* uncompressed RGB */
+	putc(0, fptr); putc(0, fptr);
+	putc(0, fptr); putc(0, fptr);
+	putc(0, fptr);
+	putc(0, fptr); putc(0, fptr);           /* X origin */
+	putc(0, fptr); putc(0, fptr);           /* y origin */
+	putc((SizeH & 0x00FF), fptr);
+	putc((SizeH & 0xFF00) / 256, fptr);
+	putc((SizeV & 0x00FF), fptr);
+	putc((SizeV & 0xFF00) / 256, fptr);
+	putc(32, fptr);                        /* 32 bit bitmap */
+	putc(8, fptr);
+
+	for (int iRow = SizeV - 1; iRow >= 0; iRow--)
 		{
-		int pixel = getValAtAddress(bits,Start+j,8);
-		putc(pal[pixel].blue,fOut);
-		putc(pal[pixel].green,fOut);
-		putc(pal[pixel].red,fOut);
-		if (Alpha==1)
+		for (int j = (iRow *SizeH); j <(iRow*SizeH) + SizeH; j++)
 			{
-			if (pixel !=0)	//Alpha
+			int pixel = getValAtAddress(bits, Start + j, 8);
+			putc(pal[pixel].blue, fptr);
+			putc(pal[pixel].green, fptr);
+			putc(pal[pixel].red, fptr);
+			if (Alpha == 1)
 				{
-				fputc(255,fOut);
+				if (pixel != 0)	//Alpha
+					{
+					fputc(255, fptr);
+					}
+				else
+					{
+					fputc(0, fptr);
+					}
 				}
-			  else
-				{
-				fputc(0,fOut);
-				}
-			}
 			else
 				{
-				fputc(255,fOut);//No alpha
-				}
-		}
-		if (SizeH %4 !=0)
-			{
-			char ch = 0;
-			for (int k=4; k>SizeH%4;k--)
-				{
-				fputc(ch,fOut);
+				fputc(255, fptr);//No alpha
 				}
 			}
+		}
+
+
+	fclose(fptr);
+
+
 	}
-
-printf(".");
-   fclose(fOut);
-
-
-}
 
 
 void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA)
@@ -1319,7 +1303,7 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 	
 	unsigned char *art_ark;
 	unsigned char *tmp_ark;
-
+	int isCutscene=0;
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(GraphicsFile, "rb")) == NULL)
 		{
@@ -1344,48 +1328,70 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 		address_pointer=address_pointer+10;	//next chunk
 		switch (chunkId)
 			{//ss_xtract. However the fuck he got them!
+			case 0x001e:
+				isCutscene = 1;
+				PaletteChunk = 0;
+				break;
+			case 0x001f:
+			case 0x0020:
+				isCutscene = 1;
+				PaletteChunk = 1;
+				break;
 			case 0x01a9:
+				isCutscene=1;
 				PaletteChunk=2;
 				break;
 			case 0x01aa:
+				isCutscene = 1;
 				PaletteChunk=3;
 				break;
 			case 0x01ab:
+				isCutscene = 1;
 				PaletteChunk=4;
 				break;
 			case 0x01ac:
+				isCutscene = 1;
 				PaletteChunk=5;
 				break;
 			case 0x01ad:
 			case 0x01ae:
+				isCutscene = 1;
 				PaletteChunk=6;
 				break;
 			case 0x01af:
 			case 0x01b0:
+				isCutscene = 1;
 				PaletteChunk=7;
 				break;
 			case 0x01b1:
 			case 0x01b2:
 			case 0x01b3:
+				isCutscene = 1;
 				PaletteChunk=8;
 				break;
 			case 0x01b4:
+				isCutscene = 1;
 				PaletteChunk=9;
 				break;	
-			case 0x01b5:		
+			case 0x01b5:	
+				isCutscene = 1;
 				PaletteChunk=10;
 				break;
 			case 0x01b7:	
-			case 0x01b8:			
+			case 0x01b8:		
+				isCutscene = 1;
 				PaletteChunk=11;
 				break;
 			case 0x01b9:
+				isCutscene = 1;
 				PaletteChunk=12;
 				break;	
 			case 0x01ba:
+				isCutscene = 1;
 				PaletteChunk=13;
 				break;	
-			case 0x01bb:						
+			case 0x01bb:		
+				isCutscene = 1;
 				PaletteChunk=14;
 				break;	
 			default:
@@ -1418,7 +1424,7 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 					for (int i =0; i<NoOfTextures; i++)
 						{
 						long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
-						WriteShockBitmaps(art_ark,pal,i,textureOffset, NewOutFileName,useTGA);
+						WriteShockBitmaps(art_ark,pal,i,textureOffset, NewOutFileName,useTGA,isCutscene);
 						}
 					}
 				else
@@ -1555,7 +1561,7 @@ void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbit
 }
 
 
-void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA)
+void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA,int isCutscene)
 {
 //Process a system shock bitmap chunk
 int BitMapHeaderSize=28;
@@ -1571,7 +1577,11 @@ int Height;
 		//printf("\nWidth=%d",Width);
 		Height=getValAtAddress(art_ark,textureOffset+10,16);
 		//Height=150;//?cutscenes???
-		
+		if (isCutscene == 1)
+			{
+			Width=320;
+			Height=150;
+			}
 ////printf("\nBitmap header\n");
 ////printf("Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
 ////printf("Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
@@ -1657,6 +1667,13 @@ PaletteChunk=2;
 		address_pointer=address_pointer+10;	//next chunk
 		switch (chunkId)
 			{//ss_xtract. However the fuck he got them!
+			case 0x001E:
+				PaletteChunk=0;
+					break;
+			case 0x001F:
+			case 0x0020:
+				PaletteChunk = 1;
+				break;
 			case 0x01a9:
 				PaletteChunk=2;
 				break;
