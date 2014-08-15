@@ -352,9 +352,9 @@ int LoadShockChunk(long AddressOfBlockStart, int chunkType, unsigned char *archi
 			break;
 			}
 		case 2://Subdir uncompressed
-			{
-			printf("Uncompressed subdir!");
-			}
+			//{
+			//printf("Uncompressed subdir!");
+			//}
 		default:
 			{//Uncompressed. 
 			//printf("\nUncompressed chunk");

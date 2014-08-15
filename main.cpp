@@ -96,15 +96,15 @@ uw_game_files[5] = "Save4\\lev.ark";
 uw_game_files[6] = "data\\byt.ark";	//UW2 ark files.
 
 const char *shock_game_files[9];
-shock_game_files[0] = "Data\\archive.dat";
-shock_game_files[1] = "Data\\SAVGAM00.dat";
-shock_game_files[2] = "Data\\SAVGAM01.dat";
-shock_game_files[3] = "Data\\SAVGAM02.dat";
-shock_game_files[4] = "Data\\SAVGAM03.dat";
-shock_game_files[5] = "Data\\SAVGAM04.dat";
-shock_game_files[6] = "Data\\SAVGAM05.dat";
-shock_game_files[7] = "Data\\SAVGAM06.dat";
-shock_game_files[8] = "Data\\SAVGAM07.dat";
+shock_game_files[0] = "res\\Data\\archive.dat";
+shock_game_files[1] = "res\\Data\\SAVGAM00.dat";
+shock_game_files[2] = "res\\Data\\SAVGAM01.dat";
+shock_game_files[3] = "res\\Data\\SAVGAM02.dat";
+shock_game_files[4] = "res\\Data\\SAVGAM03.dat";
+shock_game_files[5] = "res\\Data\\SAVGAM04.dat";
+shock_game_files[6] = "res\\Data\\SAVGAM05.dat";
+shock_game_files[7] = "res\\Data\\SAVGAM06.dat";
+shock_game_files[8] = "res\\Data\\SAVGAM07.dat";
 
 
 

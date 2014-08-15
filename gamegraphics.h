@@ -65,4 +65,6 @@ void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbit
 void WriteShockBitmaps(unsigned char *art_ark, palette *pal, int index, int textureOffset, char OutFileName[255], int useTGA, int isCutscene);
 void WriteShockCutsceneBitmaps(unsigned char *KeyFrame, unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA);
 //void ApplyKeyFrame(unsigned char *keyframe,unsigned char *output,int BitMapSize);
+void cyclePalette(palette *pal, int Start, int length);
+void copyPalette(palette *inPal, palette *outPal);
 #endif /*gamegraphics_h*/

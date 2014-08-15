@@ -372,7 +372,7 @@ void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 			for (int buf = 4; buf > bmihead.biWidth%4; buf--)
 				fwrite(&ch,1,1,outf);
 	}
-	printf(".");
+	//printf(".");
 	fclose(outf);	
 
 
@@ -1301,8 +1301,14 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 	palette *pal;
 	pal = new palette[256];
 	
+	/*Palette cycled palettes*/
+	palette *pal1;
+	palette *pal2;
+	palette *pal3;
+	palette *pal4;
 	unsigned char *art_ark;
 	unsigned char *tmp_ark;
+	int bCyclePalettes=0;
 	int isCutscene=0;
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(GraphicsFile, "rb")) == NULL)
@@ -1397,11 +1403,40 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 			default:
 				break;
 			}
+		if ((chunkId >= 1000) || (chunkId <= 1272))
+			{//Textures.
+			bCyclePalettes=1;
+			}
 		if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
 			{
+			if (bCyclePalettes == 1)
+				{
+				pal1 = new palette[256];
+				pal2 = new palette[256];
+				pal3 = new palette[256];
+				pal4 = new palette[256];
+				copyPalette(pal, pal1);
+				copyPalette(pal, pal2);
+				copyPalette(pal, pal3);
+				copyPalette(pal, pal4);
+				for (int p=16; p<40;p=p+4)
+					{
+					cyclePalette(pal1, p, 4);
+					cyclePalette(pal2, p, 4);
+					cyclePalette(pal2, p, 4);
+					cyclePalette(pal3, p, 4);
+					cyclePalette(pal3, p, 4);
+					cyclePalette(pal3, p, 4);
+					cyclePalette(pal4, p, 4);
+					cyclePalette(pal4, p, 4);
+					cyclePalette(pal4, p, 4);
+					cyclePalette(pal4, p, 4);
+					}
+				bCyclePalettes==2;//only need to cycle once
+				}
 
 		
-		if ((chunkContentType==2) || (chunkContentType==17))	//Bitmap and sometimes audio log
+			if (((chunkContentType == 2) || (chunkContentType == 17)) && (chunkId >= 1000) && (chunkId <= 1272))	//Bitmap and sometimes audio log
 			{//load this chunk and extract
 				char NewOutFileName[255];
 				sprintf_s(NewOutFileName, 255, "%s_%04d", OutFileName, chunkId);
@@ -1424,7 +1459,29 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 					for (int i =0; i<NoOfTextures; i++)
 						{
 						long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
-						WriteShockBitmaps(art_ark,pal,i,textureOffset, NewOutFileName,useTGA,isCutscene);
+						if ((bCyclePalettes == 1) || (bCyclePalettes == 2))
+							{
+							char Pal0OutFileName[255];
+							char Pal1OutFileName[255];
+							char Pal2OutFileName[255];
+							char Pal3OutFileName[255];
+							char Pal4OutFileName[255];
+							sprintf_s(Pal0OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 0);
+							sprintf_s(Pal1OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId,1);
+							sprintf_s(Pal2OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 2);
+							sprintf_s(Pal3OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 3);
+							sprintf_s(Pal4OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 4);
+							WriteShockBitmaps(art_ark, pal, i, textureOffset, Pal0OutFileName, useTGA, isCutscene);
+							WriteShockBitmaps(art_ark, pal1, i, textureOffset, Pal1OutFileName, useTGA, isCutscene);
+							WriteShockBitmaps(art_ark, pal2, i, textureOffset, Pal2OutFileName, useTGA, isCutscene);
+							WriteShockBitmaps(art_ark, pal3, i, textureOffset, Pal3OutFileName, useTGA, isCutscene);
+							WriteShockBitmaps(art_ark, pal4, i, textureOffset, Pal4OutFileName, useTGA, isCutscene);
+							}
+						else
+							{
+							WriteShockBitmaps(art_ark, pal, i, textureOffset, NewOutFileName, useTGA, isCutscene);
+							}
+						
 						}
 					}
 				else
@@ -1854,3 +1911,35 @@ int Height;
 //		}
 //	}
 //}
+
+
+
+void cyclePalette(palette *pal, int Start, int length)
+	{
+	/*Shifts the palette values around between the start and start+length. Used for texture animations and special effects*/
+	unsigned char firstRed=pal[Start].red;
+	unsigned char firstGreen = pal[Start].green;
+	unsigned char firstBlue = pal[Start].blue;
+	for (int i = Start; i < Start+length-1; i++)
+		{
+		pal[i].red = pal[i+1].red;
+		pal[i].green = pal[i+1].green;
+		pal[i].blue  = pal[i+1].blue;
+		}
+	pal[Start + length-1].red = firstRed;
+	pal[Start + length-1].green = firstGreen;
+	pal[Start + length-1].blue = firstBlue;
+	}
+
+void copyPalette(palette *inPal, palette *outPal)
+	{
+	/*Copies one palette to another.*/
+	for (int i = 0; i < 256; i++)
+		{
+		outPal[i].red = inPal[i].red;
+		outPal[i].green = inPal[i].green;
+		outPal[i].blue = inPal[i].blue;
+		outPal[i].reserved = inPal[i].reserved;
+		}
+	}
+
