@@ -794,6 +794,7 @@ switch (game)
 				}
 			break;
 		case MATERIALS_BUILD_MODE:
+			BuildSHOCKMtrFiles(0);
 			//BuildXDataFile(game);
 			//BuildSndShaderFiles();
 			//BuildShockMtrFiles(3);

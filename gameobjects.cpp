@@ -1318,12 +1318,13 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = getValAtAddress(sub_ark, add_ptr + 0x12, 16);
 		if (PrintDebug == 1)
-		{
+			{
 			printf("\tACTION_AWAKEN for %s\n", UniqueObjectName(objList[objIndex]));
 			printf("\t\tControl point object1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
 			printf("\t\tControl point object2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-		}
+			}
+		break;
 		}
 	case ACTION_MESSAGE:
 		{//A once off message. For example the computer voice when the cyborg conversion is activated.
@@ -1686,6 +1687,14 @@ char *UniqueObjectName(ObjectItem currObj)
 	char str[80] = "";
 	switch (objectMasters[currObj.item_id].type)
 	{
+		case DOOR:
+		case SHOCK_DOOR:
+		case SHOCK_DOOR_TRANSPARENT:
+			{// a_door_%03d_%03d\");", doorX, doorY);
+			sprintf_s(str, 80, "%s_%03d_%03d\0", objectMasters[currObj.item_id].desc, currObj.tileX, currObj.tileY);
+			return str;
+			break;
+			}
 		case KEY:
 			if (currObj.keyCount >= 0)
 				{

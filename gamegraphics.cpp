@@ -1461,17 +1461,17 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 						long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
 						if ((bCyclePalettes == 1) || (bCyclePalettes == 2))
 							{
-							char Pal0OutFileName[255];
+							//char Pal0OutFileName[255];
 							char Pal1OutFileName[255];
 							char Pal2OutFileName[255];
 							char Pal3OutFileName[255];
 							char Pal4OutFileName[255];
-							sprintf_s(Pal0OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 0);
-							sprintf_s(Pal1OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId,1);
-							sprintf_s(Pal2OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 2);
-							sprintf_s(Pal3OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 3);
-							sprintf_s(Pal4OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 4);
-							WriteShockBitmaps(art_ark, pal, i, textureOffset, Pal0OutFileName, useTGA, isCutscene);
+							//sprintf_s(Pal0OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 0);
+							sprintf_s(Pal1OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 1);
+							sprintf_s(Pal2OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 2);
+							sprintf_s(Pal3OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 3);
+							sprintf_s(Pal4OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 4);
+							WriteShockBitmaps(art_ark, pal, i, textureOffset, NewOutFileName, useTGA, isCutscene);
 							WriteShockBitmaps(art_ark, pal1, i, textureOffset, Pal1OutFileName, useTGA, isCutscene);
 							WriteShockBitmaps(art_ark, pal2, i, textureOffset, Pal2OutFileName, useTGA, isCutscene);
 							WriteShockBitmaps(art_ark, pal3, i, textureOffset, Pal3OutFileName, useTGA, isCutscene);

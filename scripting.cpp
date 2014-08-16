@@ -485,14 +485,18 @@ void a_lock(int doorX, int doorY, int targetState)
 switch (targetState)
 	{
 	case 1:	//Try open
+		fprintf(fBODY, "\tsys.println(\"Try Open -> a_door_%03d_%03d\");", doorX, doorY);
 	    fprintf(fBODY,"\t$a_door_%03d_%03d.Open();\n",doorX,doorY);
 		break;
 	case 2:	//Try close
+		fprintf(fBODY, "\tsys.println(\"Try Close -> a_door_%03d_%03d\");", doorX, doorY);
         fprintf(fBODY,"\t$a_door_%03d_%03d.Close();\n",doorX,doorY);
-        fprintf(fBODY,"\tsys.wait(5);\n");
+        fprintf(fBODY,"\tsys.wait(2);\n");
+		fprintf(fBODY, "\t//sys.println(\"Try Lock -> a_door_%03d_%03d\");", doorX, doorY);
         fprintf(fBODY,"\t$a_door_%03d_%03d.Lock();",doorX,doorY);	
 		break;
 	default:	//toggle
+		fprintf(fBODY, "\tsys.println(\"toggle -> a_door_%03d_%03d\");", doorX, doorY);
 		fprintf(fBODY,"\t$a_lock_%03d_%03d.activate($player1);\n",doorX,doorY);
 		break;
 	}
@@ -1148,42 +1152,150 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 			fprintf(fBODY, "\t$%s.setGuiFloat(GUI_ENTITY1, \"destroyed\", 1);\n}\n", UniqueObjectName(objList[i]));
 		}
 	}
-
-	//The gui driven doors.
 	for (int i = 0; i < 1600; i++)
 	{
-		if ((isSHOCKDoor(objList[i]) )|| (objectMasters[objList[i].item_id].type == SHOCK_DOOR_TRANSPARENT))
+	if ((isSHOCKDoor(objList[i])) || (objectMasters[objList[i].item_id].type == SHOCK_DOOR_TRANSPARENT))
 		{
-			//fprintf(fGLOBALS, "\nvoid start_%s_callback(entity door, boolean bOpen, boolean bLocked, boolean bInterrupted);", UniqueObjectName(objList[i]));//the declaration
+		int NoOfFrames = 6;
+		fprintf(fBODY, "\n\n\nvoid start_%s()\n\t{", UniqueObjectName(objList[i]));
+		fprintf(fBODY, "\tif ($%s.IsOpen())\n", UniqueObjectName(objList[i]));
+		fprintf(fBODY, "\t{\n");
+		fprintf(fBODY, "\tsys.println(\"Close\");\n");
+		fprintf(fBODY, "\t\t$%s.Close();\n", UniqueObjectName(objList[i]));
+		for (int k = NoOfFrames; k >= 0; k--)
+			{
+			fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
+			fprintf(fBODY, "\n\tsys.wait(0.2);");
+			}
+		fprintf(fBODY, "\n\t}\n");
+		fprintf(fBODY, "\telse\n");
+		fprintf(fBODY, "\t{\n");
+		fprintf(fBODY, "\tsys.println(\"Open\");\n");
+		fprintf(fBODY, "\t\t$%s.Open();\n", UniqueObjectName(objList[i]));
+		for (int k = 0; k <= NoOfFrames; k++)
+			{
+			fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
+			fprintf(fBODY, "\n\tsys.wait(0.2);");
+			}
+		fprintf(fBODY, "\t}\n}\n");
+		////// If locked unlock it and open
+		////fprintf(fBODY, "\tif ($%s.IsLocked())\n", UniqueObjectName(targetObj));
+		////fprintf(fBODY, "\t{\n");
+		////fprintf(fBODY, "\tsys.println(\"Unlock\");\n");
+		////fprintf(fBODY, "\t\t$%s.Unlock();\n", UniqueObjectName(targetObj));
+		//////fprintf(fBODY, "\tsys.println(\"Opening\");\n");
+		////fprintf(fBODY, "\t\t$%s.Open();\n", UniqueObjectName(targetObj));
+		////fprintf(fBODY, "\tsys.println(\"Animate Opening\");\n");
+		//////perform my animation.
+		////for (int k = 0; k <= NoOfFrames; k++)
+		////	{
+		////	fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(targetObj), k);
+		////	fprintf(fBODY, "\n\tsys.wait(0.2);");
+		////	}
 
-			fprintf(fBODY, "\n\n\nvoid start_%s_callback(entity door, boolean bOpen, boolean bLocked, boolean bInterrupted)\n{\n", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\tif (!bOpen && !bLocked)");
-			fprintf(fBODY, "\n\t{//closed and unlocked");
-			fprintf(fBODY, "\n\t\tsys.println(\"!bOpen !bLocked\");");
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 0);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 0);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t}");
-			fprintf(fBODY, "\n\telse if (!bOpen && bLocked)");
-			fprintf(fBODY, "\n\t{//closed and locked");
-			fprintf(fBODY, "\n\t\tsys.println(\"!bOpen bLocked\");");
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 0);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 0);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t}");
-			fprintf(fBODY, "\n\telse if (bOpen && !bLocked)");
-			fprintf(fBODY, "\n\t{//Open and  unlocked");
-			fprintf(fBODY, "\n\t\t\tsys.println(\"bOpen !bLocked\");");
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 1);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 1);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t}");
-			fprintf(fBODY, "\n\telse if (bOpen && bLocked)");
-			fprintf(fBODY, "\n\t{//Open and  locked");
-			fprintf(fBODY, "\n\t\t\tsys.println(\"bOpen bLocked\");");
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 1);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 1);", UniqueObjectName(objList[i]));
-			fprintf(fBODY, "\n\t}");
-			fprintf(fBODY, "\n}\n");
+		////fprintf(fBODY, "\n\t}\n");
+		////fprintf(fBODY, "\telse\n");
+		////fprintf(fBODY, "\t{\n");
+		//////lock and close
+		////fprintf(fBODY, "\tsys.println(\"Closing\");\n");
+		////fprintf(fBODY, "\t\t$%s.Close();\n", UniqueObjectName(targetObj));
+		////fprintf(fBODY, "\tsys.println(\"Anim closing\");\n");
+		//////perform my animation
+		////for (int k = NoOfFrames; k >= 0; k--)
+		////	{
+		////	fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(targetObj), k);
+		////	fprintf(fBODY, "\n\tsys.wait(0.2);");
+		////	}
+		////fprintf(fBODY, "\n\t\tsys.wait(1);\n");
+		////fprintf(fBODY, "\tsys.println(\"Locking\");\n");
+		////fprintf(fBODY, "\t\t$%s.Lock();\n", UniqueObjectName(targetObj));
+		////fprintf(fBODY, "\tsys.println(\"Locked\");\n");
+		////fprintf(fBODY, "\t}\n");
+
 		}
 	}
+	////////////The gui driven doors.
+	//////////for (int i = 0; i < 1600; i++)
+	//////////{
+	//////////	if ((isSHOCKDoor(objList[i]) )|| (objectMasters[objList[i].item_id].type == SHOCK_DOOR_TRANSPARENT))
+	//////////	{
+	//////////	int NoOfFrames = 6;
+	//////////		//fprintf(fGLOBALS, "\nvoid start_%s_callback(entity door, boolean bOpen, boolean bLocked, boolean bInterrupted);", UniqueObjectName(objList[i]));//the declaration
+	//////////		switch (objList[i].item_id)
+	//////////			{
+	//////////			default:
+	//////////				NoOfFrames=6;
+	//////////				break;
+	//////////			}
+	//////////		fprintf(fGLOBALS, "\n\tfloat %s_called=0; //Flag to stop state_change getting called twice when activated by script on locked doors.\n",UniqueObjectName(objList[i]));
+	//////////		fprintf(fBODY, "\n\n\nvoid start_%s_callback(entity door, boolean bOpen, boolean bLocked, boolean bInterrupted)\n{\n", UniqueObjectName(objList[i]));
+	//////////		if (!((objList[i].link != 0) || (objList[i].SHOCKLocked > 0)))//Object does not have a lock
+	//////////			{
+	//////////			fprintf(fBODY, "\n\t%s_called = 1;", UniqueObjectName(objList[i]));
+	//////////			}
+	//////////		fprintf(fBODY, "\n\tif (%s_called==1)\n\t{\n", UniqueObjectName(objList[i]));
+	//////////		if ((objList[i].link != 0) || (objList[i].SHOCKLocked > 0))//Object has a lock
+	//////////			{
+	//////////			fprintf(fBODY, "\n\t%s_called = 0;", UniqueObjectName(objList[i]));
+	//////////			}
+	//////////		fprintf(fBODY, "\n\t\tif (!bOpen && !bLocked)");
+	//////////		fprintf(fBODY, "\n\t\t\t{//closed and unlocked");
+	//////////		fprintf(fBODY, "\n\t\tsys.println(\"!bOpen !bLocked\");");
+	//////////		fprintf(fBODY, "\n\t\tsys.println(\"Closed unlocked door\");");
+	//////////		for (int k = NoOfFrames; k >= 0; k--)
+	//////////			{
+	//////////			 fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
+	//////////			 fprintf(fBODY, "\n\tsys.wait(0.2);");
+	//////////			}
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 0);", UniqueObjectName(objList[i]));
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 0);", UniqueObjectName(objList[i]));
+	//////////		fprintf(fBODY, "\n\t}");
+	//////////		fprintf(fBODY, "\n\t\telse if (!bOpen && bLocked)");
+	//////////		fprintf(fBODY, "\n\t\t{//closed and locked");
+	//////////		fprintf(fBODY, "\n\t\tsys.println(\"!bOpen bLocked\");");
+	//////////		fprintf(fBODY, "\n\t\tsys.println(\"Close and lock door?\");");
+	//////////		for (int k = NoOfFrames; k >= 0; k--)
+	//////////			{
+	//////////			fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
+	//////////			fprintf(fBODY, "\n\tsys.wait(0.2);");
+	//////////			}
+
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 0);", UniqueObjectName(objList[i]));
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 0);", UniqueObjectName(objList[i]));
+	//////////		fprintf(fBODY, "\n\t}");
+	//////////		fprintf(fBODY, "\n\telse if (bOpen && !bLocked)");
+	//////////		fprintf(fBODY, "\n\t{//Open and  unlocked");
+	//////////		fprintf(fBODY, "\n\t\t\tsys.println(\"bOpen !bLocked\");");
+	//////////		fprintf(fBODY, "\n\t\tsys.println(\"Door Operation 3; Open unlocked door.\");");
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 1);", UniqueObjectName(objList[i]));
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 1);", UniqueObjectName(objList[i]));
+	//////////		for (int k = 0; k <= NoOfFrames; k++)
+	//////////			{
+	//////////			fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
+	//////////			fprintf(fBODY, "\n\tsys.wait(0.2);");
+	//////////			}
+	//////////		fprintf(fBODY, "\n\t}");
+	//////////		fprintf(fBODY, "\n\telse if (bOpen && bLocked)");
+	//////////		fprintf(fBODY, "\n\t{//Open and  locked");
+	//////////		fprintf(fBODY, "\n\t\t\tsys.println(\"bOpen bLocked\");");
+	//////////		fprintf(fBODY, "\n\t\tsys.println(\"Door Operation 4\");");
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY1, \"doorstate\", 1);", UniqueObjectName(objList[i]));
+	//////////		//fprintf(fBODY, "\n\t$%s_way.setGuiFloat(GUI_ENTITY2, \"doorstate\", 1);", UniqueObjectName(objList[i]));
+	//////////		//for (int k = NoOfFrames; k >= 0; k--)
+	//////////		//	{
+	//////////		//	fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
+	//////////		//	fprintf(fBODY, "\n\tsys.wait(0.2);");
+	//////////		//	}
+	//////////		fprintf(fBODY, "\n\t}");
+	//////////		fprintf(fBODY, "\n\t}");
+	//////////		fprintf(fBODY, "\n\telse\n\t{");
+	//////////		fprintf(fBODY, "\n\t\t\tsys.println(\"Damnit\");");
+	//////////		fprintf(fBODY, "\n\tif ($%s.IsLocked()){\nsys.println(\"Locked\");}else{sys.println(\"UnLocked\");};", UniqueObjectName(objList[i]));
+	//////////		fprintf(fBODY, "\n\t%s_called = 1;", UniqueObjectName(objList[i]));
+	//////////		fprintf(fBODY, "\n}\n");
+	//////////		fprintf(fBODY, "\n}\n");
+	//////////	}
+	//////////}
 
 	fclose (fBODY);
 	//fprintf(fMAIN,"\n}\n");	
@@ -1453,7 +1565,7 @@ switch (currObj.TriggerAction)
 			}
 			if (Message >= 1)
 			{	//play back a message here?
-				fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", Message);
+				fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\"); //Message played by action_set_varaiable", Message);
 				fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
 			}
 		}
@@ -1606,7 +1718,8 @@ switch (currObj.TriggerAction)
 		}
 	case ACTION_AWAKEN:
 		{
-
+		fprintf(fBODY, "\tsys.println(\"Action Awaken.\");\n");
+		break;
 		}
 	case ACTION_MESSAGE:
 		{
@@ -1623,15 +1736,15 @@ switch (currObj.TriggerAction)
 		{
 			addGlobalTest(objList, currObj,0);
 			//play the success message
-			fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE1]);
+			fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");//Success", currObj.shockProperties[TRIG_PROPERTY_MESSAGE1]);
 			fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n\t}");
 			//else the fail message
-			fprintf(fBODY, "\n\telse\n\t{\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+			fprintf(fBODY, "\n\telse\n\t{\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");//Fail", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
 			fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n\t}\n");
 		}
 		else
 		{//Just play the fail message
-			fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+			fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");//Fail (no cond)", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
 			fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
 		}
 		//objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
@@ -1711,19 +1824,57 @@ switch (currObj.TriggerAction)
 void shockScriptActivate(ObjectItem objList[1600], ObjectItem targetObj)
 {
 //produces the code to activate a particular obect. some objects are special cases but in general it's all handled by the trigger.
-
+int NoOfFrames = 6;
 if (targetObj.InUseFlag ==1)
 {
 switch(objectMasters[targetObj.item_id].type )
 	{
 	case DOOR:	//For a door I activate it's lock object
-	case SHOCK_DOOR:
-	case SHOCK_DOOR_TRANSPARENT:
 		fprintf(fBODY,"\t$a_lock_%03d_%03d.activate($player1);\n",targetObj.tileX, targetObj.tileY); 
 		break;
 
+	case SHOCK_DOOR:
+	case SHOCK_DOOR_TRANSPARENT:
+		// a_door_%03d_%03d\");", doorX, doorY);
+		// If locked unlock it and open
+		fprintf(fBODY, "\tif ($%s.IsLocked())\n", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\t{\n");
+		fprintf(fBODY, "\tsys.println(\"Unlock\");\n");
+		fprintf(fBODY, "\t\t$%s.Unlock();\n", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\tsys.println(\"Opening\");\n");
+		//fprintf(fBODY, "\t\t$%s.Open();\n", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\tsys.println(\"Animate Opening\");\n");
+		//perform my animation.
+		for (int k = 0; k <= NoOfFrames; k++)
+			{
+				fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(targetObj), k);
+				fprintf(fBODY, "\n\tsys.wait(0.2);");
+			}
+
+		fprintf(fBODY, "\n\t}\n");
+		fprintf(fBODY, "\telse\n");
+		fprintf(fBODY, "\t{\n");
+		//lock and close
+		fprintf(fBODY, "\tsys.println(\"Closing\");\n");
+		fprintf(fBODY, "\t\t$%s.Close();\n", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\tsys.println(\"Anim closing\");\n");
+		//perform my animation
+		for (int k = NoOfFrames; k >= 0; k--)
+			{
+				fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(targetObj), k);
+				fprintf(fBODY, "\n\tsys.wait(0.2);");
+			}
+		fprintf(fBODY, "\n\t\tsys.wait(1);\n");
+		fprintf(fBODY, "\tsys.println(\"Locking\");\n");
+		fprintf(fBODY, "\t\t$%s.Lock();\n", UniqueObjectName(targetObj));
+		fprintf(fBODY, "\tsys.println(\"Locked\");\n");
+		fprintf(fBODY, "\t}\n");
+
+		
+		
+		break;
 		//change it's gui here as well.
-		fprintf(fBODY, "\n\t$a_lock_%03d_%03d.activate($player1);\n", targetObj.tileX, targetObj.tileY);
+		//fprintf(fBODY, "\n\t$a_lock_%03d_%03d.activate($player1);\n", targetObj.tileX, targetObj.tileY);
 
 		//fprintf(fBODY, "\n\t\t$%s.setFrobable(0); ", UniqueObjectName(targetObj));   //Turn off frobbing for a short delay
 		//fprintf(fBODY, "\n\t\t$%s_way.setFrobable(0); ", UniqueObjectName(targetObj));   //Turn off frobbing for a short delay
@@ -1941,7 +2092,7 @@ void scriptShockButtonsActions(tile LevelInfo[64][64], ObjectItem objList[1600],
 		}
 	case ACTION_MESSAGE:
 		{
-		fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\");", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+		fprintf(fBODY, "\n\t$data_reader_trigger.setKey(\"snd_say\",\"shock_audio_bark_%d\"); //Action_message from button", currObj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
 		fprintf(fBODY, "\n\t$data_reader_trigger.activate($player1);\n");
 		break;
 		}

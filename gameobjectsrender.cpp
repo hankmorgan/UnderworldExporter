@@ -1248,9 +1248,9 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(MAPFILE, "\"rotate\" \"%d %d %d\"\n", 0, 0, 0);
 	fprintf(MAPFILE, "\"translate_speed\" \"%d\"\n", 500);
 	fprintf(MAPFILE, "\"translate\" \"%d %d %d\"\n", 0, 0, -120);
-	fprintf(MAPFILE, "\"frobable\" \"%d\"\n", "1");
-	//fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
-	fprintf(MAPFILE, "\"state_change_callback\" \"start_%s_callback\"\n", UniqueObjectName(currobj));
+	fprintf(MAPFILE, "\"frobable\" \"%d\"\n", 1);
+	fprintf(MAPFILE, "\"frob_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+	//fprintf(MAPFILE, "\"state_change_callback\" \"start_%s_callback\"\n", UniqueObjectName(currobj));
 
 	//Lock stuff
 	if ((currobj.link != 0) || (currobj.SHOCKLocked > 0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
@@ -1271,7 +1271,7 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(MAPFILE, "\n}");
 
 
-	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
+	if ((currobj.link != 0) || (currobj.SHOCKLocked >0) && (game!=SHOCK))
 	{	//if it has a lock it needs a lock object for scripting purposes
 		fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 		fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:target_changelockstate");

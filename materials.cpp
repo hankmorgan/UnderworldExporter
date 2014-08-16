@@ -363,7 +363,47 @@ void BuildSHOCKMtrFiles(int MtrType)
 	switch (MtrType)
 	{
 	case 0://regular textures
-
+		for (int i = 0; i <= 272; i++)
+			{
+			FILE *fileOut;
+			char filePath[80] = "";
+			sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_%03d.mtr", i);
+			if (fopen_s(&fileOut, filePath, "w") != 0)
+				{
+				printf("Unable to create output file for material");
+				return;
+				}
+			fprintf(fileOut, "textures\\shock\\shock_%03d\n{\n", i);
+			fprintf(fileOut, "\tdescription\t\"stone\"\n");
+			fprintf(fileOut, "\tqer_editorimage\ttextures\\shock\\shock_%04d_%04d.tga\n",i+1000, 0);
+			fprintf(fileOut, "\tbumpmap\t_flat\n");
+			fprintf(fileOut, "\tdiffusemap\ttextures\\shock\\shock_%04d_%04d.tga\n", i + 1000, 0);
+			fprintf(fileOut, "\tspecularmap\t_black\n");
+			fprintf(fileOut, "\t{\n");
+			//fprintf(fileOut, "\tif (parm11 > 0)\n");
+			fprintf(fileOut, "\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+			fprintf(fileOut, "\tmap\ttextures\\shock\\shock_%04d_%04d.tga\n", i + 1000, 0);
+			fprintf(fileOut, "\t}\n");
+			//Animation. Loop through palette textures.
+			fprintf(fileOut, "\n\t{");
+			fprintf(fileOut, "\n\tif ((time * 5) %% 4 == 0)");
+			fprintf(fileOut, "\n\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+			fprintf(fileOut, "\n\tmap\ttextures\\shock\\shock_%04d_%04d.tga\n", i + 1000, 0);//Original frame
+			fprintf(fileOut, "\t}");
+//////shock_1000_PC01_0000
+////			//Other frames. Texture file has palette cycle number in their name
+			int MaxFrames =4;
+			for (int k=1;k<=MaxFrames;k++)
+				{
+				fprintf(fileOut, "\n\t{");
+				fprintf(fileOut, "\n\tif ((time * %d) %% %d == 0)",MaxFrames, k);
+				fprintf(fileOut, "\n\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+				fprintf(fileOut, "\n\tmap\ttextures\\shock\\shock_%04d_pc%02d_%04d.tga\n", i + 1000, k, 0);
+				fprintf(fileOut, "\t}");
+				}
+			fprintf(fileOut, "\n}");
+			fclose(fileOut);
+			}
 		break;
 	case 1://decals
 		for (int i = 0; i <= 17; i++)
@@ -397,7 +437,7 @@ void BuildSHOCKMtrFiles(int MtrType)
 			fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
 			fprintf(fileOut, "\tqer_editorimage textures/shock/graffiti/0079_%04d.tga\n", i);
 			fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\tcolored\n\t\tmap textures/shock/graffiti/0079_%04d.tga\n\t\talphatest 0.8\n\t}", i);
-			fprintf(fileOut, "\n}", i);
+			fprintf(fileOut, "\n}");
 			fclose(fileOut);
 		}
 
