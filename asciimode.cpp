@@ -17,646 +17,593 @@ Functions for printing out usefull information, tilemaps and object lists.
 #include "utils.h"
 
 long printObject(ObjectItem &currObj, int TableFormat)
-{
+	{
 	/*
 	Outputs some debug info on an object.
 	Returns the index to next object in the chain
 	*/
-int value = (((currObj.owner & 0x7) <<3) | (currObj.y ));	//for check variables
-if (objectMasters[currObj.item_id].isSet ==1)
-	{
-	if (TableFormat==0)
+	int value = (((currObj.owner & 0x7) << 3) | (currObj.y));	//for check variables
+	if (objectMasters[currObj.item_id].isSet == 1)
 		{
-		printf("Index:%d,Type:%d(%s),TileX=%d,TileY=%d,x=%d,y=%d,z=%d,heading=%d,qual=%d,owner=%d,link=%d,flags=%d,val=%d,angle=(%d,%d,%d)"
-		,currObj.index ,currObj.item_id,objectMasters[currObj.item_id].desc,
-		currObj.tileX,currObj.tileY,
-		currObj.x,currObj.y,currObj.zpos
-		,currObj.heading,currObj.quality,currObj.owner, currObj.link,currObj.flags,value,currObj.Angle1,currObj.Angle2,currObj.Angle3);
+		if (TableFormat == 0)
+			{
+			printf("Index:%d,Type:%d(%s),TileX=%d,TileY=%d,x=%d,y=%d,z=%d,heading=%d,qual=%d,owner=%d,link=%d,flags=%d,val=%d,angle=(%d,%d,%d)"
+				, currObj.index, currObj.item_id, objectMasters[currObj.item_id].desc,
+				currObj.tileX, currObj.tileY,
+				currObj.x, currObj.y, currObj.zpos
+				, currObj.heading, currObj.quality, currObj.owner, currObj.link, currObj.flags, value, currObj.Angle1, currObj.Angle2, currObj.Angle3);
 
-		}
-	else
-		{//Tab delimited.
-		printf("%d\t%d\t%20s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d"
-		,currObj.index ,currObj.item_id,objectMasters[currObj.item_id].desc,
-		currObj.tileX,currObj.tileY,
-		currObj.x,currObj.y,currObj.zpos
-		,currObj.heading,currObj.quality,currObj.owner, currObj.link,currObj.flags,value,currObj.Angle1,currObj.Angle2,currObj.Angle3);
+			}
+		else
+			{//Tab delimited.
+			printf("%d\t%d\t%20s\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d"
+				, currObj.index, currObj.item_id, objectMasters[currObj.item_id].desc,
+				currObj.tileX, currObj.tileY,
+				currObj.x, currObj.y, currObj.zpos
+				, currObj.heading, currObj.quality, currObj.owner, currObj.link, currObj.flags, value, currObj.Angle1, currObj.Angle2, currObj.Angle3);
 
+			}
+		//printf("[id=%d Type=%d(%.20s)(%d,%d,%d)%ddeg qual=%d link(q)=%d owner(s)=%d flags=%d isquant=%d]",currObj.index,currObj.item_id,objectMasters[currObj.item_id].desc,currObj.x ,currObj.y,currObj.zpos, currObj.heading ,currObj.quality,currObj.link,currObj.owner,currObj.flags,currObj.is_quant );
 		}
-	//printf("[id=%d Type=%d(%.20s)(%d,%d,%d)%ddeg qual=%d link(q)=%d owner(s)=%d flags=%d isquant=%d]",currObj.index,currObj.item_id,objectMasters[currObj.item_id].desc,currObj.x ,currObj.y,currObj.zpos, currObj.heading ,currObj.quality,currObj.link,currObj.owner,currObj.flags,currObj.is_quant );
+	return currObj.next;
 	}
-	return currObj.next; 
-}
 
 long printObject(ObjectItem &currObj)
-{
-/*
-Prints the specified object and returns it's next object.
-*/
-//printf("Index:%d,%s-",currObj.index, objectMasters[currObj.item_id].desc);
+	{
+	/*
+	Prints the specified object and returns it's next object.
+	*/
+	//printf("Index:%d,%s-",currObj.index, objectMasters[currObj.item_id].desc);
 	printf("%s", UniqueObjectName(currObj));
-return currObj.next;
-}
+	return currObj.next;
+	}
 
 void RenderAsciiTile(tile &t)	//,int x, int y, int BlockStart,unsigned char *buffer
-{
+	{
 	/*
 	Picks which ascii character is printed for a particular tile type.
 	*/
 
-switch (t.tileType )
+	switch (t.tileType)
+		{
+			case TILE_SOLID:
+				{//solid	
+				if (t.Render == 1)
+					{
+					printf("#");
+					}
+				else
+					{
+					printf("*");
+					}
+				return;
+				}
+			case TILE_OPEN:
+				{//open
+				if (t.Render == 1)
+					{
+					printf(".");
+					}
+				else
+					{
+					printf(".");
+					}
+				return;
+				}
+			case TILE_DIAG_SE:
+				{//diag se
+				if (t.Render == 1)
+					{
+					printf("/");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_DIAG_SW:
+				{//diag sw
+				if (t.Render == 1)
+					{
+					printf("\\");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_DIAG_NE:
+				{//diag ne
+				if (t.Render == 1)
+					{
+					printf("\\");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_DIAG_NW:
+				{//diag nw
+				if (t.Render == 1)
+					{
+					printf("/");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_SLOPE_N:
+				{//slope n
+				if (t.Render == 1)
+					{
+					printf("n");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_SLOPE_S:
+				{//slope s
+				if (t.Render == 1)
+					{
+					printf("x");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_SLOPE_E:
+				{//slope e
+				if (t.Render == 1)
+					{
+					printf("e");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_SLOPE_W:
+				{//slopew
+				if (t.Render == 1)
+					{
+					printf("w");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+
+			case TILE_VALLEY_NW:
+				{//nw valley
+				if (t.Render == 1)
+					{
+					printf("a");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_VALLEY_NE:
+				{//ne valley
+				if (t.Render == 1)
+					{
+					printf("b");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_VALLEY_SE:
+				{//se valley
+				if (t.Render == 1)
+					{
+					printf("c");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_VALLEY_SW:
+				{//sw valley
+				if (t.Render == 1)
+					{
+					printf("d");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+
+			case TILE_RIDGE_SE:
+				{//se ridge
+				if (t.Render == 1)
+					{
+					printf("f");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_RIDGE_SW:
+				{//sw ridge
+				if (t.Render == 1)
+					{
+					printf("g");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_RIDGE_NW:
+				{//nw ridge
+				if (t.Render == 1)
+					{
+					printf("h");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+			case TILE_RIDGE_NE:
+				{//ne ridge
+				if (t.Render == 1)
+					{
+					printf("i");
+					}
+				else
+					{
+					printf(" ");
+					}
+				return;
+				}
+
+
+			default:
+				{//Unknown tile type.
+				if (t.Render == 1)
+					{
+					printf("?");
+					}
+				else
+					{
+					printf("?");
+					}
+				return;
+				}
+		}
+	}
+
+void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo, int mapOnly)
 	{
-case TILE_SOLID:	
-	{//solid	
-		if (t.Render ==1) 
-			{printf("#");}
-		else 
-			{printf("*");}
-		return;
-	}
-case TILE_OPEN: 
-	{//open
-		if (t.Render ==1) 
-			{printf(".");}
-		else 
-			{printf(".");}
-		return;	
-	}
-case TILE_DIAG_SE:
-		{//diag se
-		if (t.Render ==1) 
-			{printf("/");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_DIAG_SW:
-		{//diag sw
-		if (t.Render ==1) 
-			{printf("\\");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_DIAG_NE:
-		{//diag ne
-		if (t.Render ==1) 
-			{printf("\\");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_DIAG_NW:
-	{//diag nw
-		if (t.Render ==1) 
-			{printf("/");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_SLOPE_N: 
-		{//slope n
-		if (t.Render ==1) 
-			{printf("n");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_SLOPE_S: 	
-		{//slope s
-		if (t.Render ==1) 
-			{printf("x");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_SLOPE_E: 	
-		{//slope e
-		if (t.Render ==1) 
-			{printf("e");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_SLOPE_W: 	
-	{//slopew
-		if (t.Render ==1) 
-			{printf("w");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-	
-case TILE_VALLEY_NW:
-	{//nw valley
-		if (t.Render ==1) 
-			{printf("a");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_VALLEY_NE:
-	{//ne valley
-		if (t.Render ==1) 
-			{printf("b");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_VALLEY_SE:
-	{//se valley
-		if (t.Render ==1) 
-			{printf("c");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_VALLEY_SW:
-	{//sw valley
-		if (t.Render ==1) 
-			{printf("d");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-	
-case TILE_RIDGE_SE:
-	{//se ridge
-		if (t.Render ==1) 
-			{printf("f");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_RIDGE_SW:
-	{//sw ridge
-		if (t.Render ==1) 
-			{printf("g");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_RIDGE_NW:
-	{//nw ridge
-		if (t.Render ==1) 
-			{printf("h");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-case TILE_RIDGE_NE:
-	{//ne ridge
-		if (t.Render ==1) 
-			{printf("i");}
-		else 
-			{printf(" ");}
-		return;	
-	}
-
-
-default:
-	{//Unknown tile type.
-	if (t.Render ==1) 
-			{printf("?");}
-		else 
-			{printf("?");}
-		return;	
-	}
-}
-}
-
-void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly)
-{
 	/*
 	Runs every ASCII report.
 	Not every report applies to each game.
 	*/
 
-	printTileMap(LevelInfo,LevelNo);
+	printTileMap(LevelInfo, LevelNo);
 
-	if (mapOnly == 1) {return;}
+	if (mapOnly == 1) { return; }
 
-	printFloorHeights(LevelInfo,LevelNo);
+	printFloorHeights(LevelInfo, LevelNo);
 
-	printFloorTextures(LevelInfo,LevelNo);
+	printFloorTextures(LevelInfo, LevelNo);
 
-	printWallTextures(LevelInfo,LevelNo);
+	printWallTextures(LevelInfo, LevelNo);
 
 	printDoorPositions(LevelInfo, objList, LevelNo);
-	
+
 	//printWaterRegions(LevelInfo,LevelNo);
 
 	printNeighbourCounts(LevelInfo, LevelNo);
 
-	printRoomRegions(LevelInfo,LevelNo);
+	printRoomRegions(LevelInfo, LevelNo);
 
-if (game == SHOCK)
-	{
-	printCeilingHeights(LevelInfo,LevelNo);
+	if (game == SHOCK)
+		{
+		printCeilingHeights(LevelInfo, LevelNo);
 
-	printSlopeSteepness(LevelInfo,LevelNo);
-	printSlopeFlags(LevelInfo,LevelNo);
+		printSlopeSteepness(LevelInfo, LevelNo);
+		printSlopeFlags(LevelInfo, LevelNo);
 
-	printAdjacentFlags(LevelInfo,LevelNo);
+		printAdjacentFlags(LevelInfo, LevelNo);
 
-	printTextureOffsets(LevelInfo,LevelNo);
+		printTextureOffsets(LevelInfo, LevelNo);
 
-	PrintShadeValues(LevelInfo,LevelNo);
-	PrintLightStates(LevelInfo,LevelNo);
+		PrintShadeValues(LevelInfo, LevelNo);
+		PrintLightStates(LevelInfo, LevelNo);
 
-  	printFloorOrientations(LevelInfo,LevelNo);
-	printCeilOrientations(LevelInfo, LevelNo);
+		printFloorOrientations(LevelInfo, LevelNo);
+		printCeilOrientations(LevelInfo, LevelNo);
 
-	//printf("\nPrint out audio logs for :%d\n",LevelNo);	
-	//printf("Desc ObjID TileX TileY LogChunk\n");
-	//for (y=63; y>=0;y--)
-	//	{
-	//	for (x=0; x<64;x++)
-	//		{
-	//		if(LevelInfo[x][y].indexObjectList !=0)
-	//			{
-	//			long nextShockObj = LevelInfo[x][y].indexObjectList;
-	//			while (nextShockObj !=0)
-	//				{
-	//				if (isLog(objList[nextShockObj])==1)
-	//					{
-	//					EMAILScript(objectMasters[objList[nextShockObj].item_id].desc
-	//										,objList[nextShockObj].tileX
-	//										,objList[nextShockObj].tileY
-	//										,objList[nextShockObj].index
-	//										,objList[nextShockObj].Property1);
-	//					//printf("%s %d %d %d %d\n",
-	//					//	objectMasters[objList[nextShockObj].item_id].desc 
-	//					//	,objList[nextShockObj].index
-	//					//	,objList[nextShockObj].tileX
-	//					//	,objList[nextShockObj].tileY
-	//					//	,objList[nextShockObj].Property1
-	//					//	 );
-	//					}
-	//				nextShockObj=objList[nextShockObj].next ;
-	//				}
-	//			}
-	//		}
-	//	}
-		
-	//return;
-	}	
-else
-{
-	PrintLevelEntrances(LevelInfo,objList,LevelNo);
-	ParseTerrainProperties(game);
-}
-	
+		}
+	else
+		{
+		PrintLevelEntrances(LevelInfo, objList, LevelNo);
+		ParseTerrainProperties(game);
+		}
+
 	PrintObjectsByTile(LevelInfo, objList, LevelNo);
-
-
-
-	//printf("\nprint switches and their targets\n");
-	//	for (x=0;x<=1024;x++)
-	//	{
-	//	if (objectMasters[objList[x].item_id].type == BUTTON)
-	//		{//check if this what this switches state is.
-	//		printf("index:%d-state:%d-",objList[x].index, objList[x].flags);
-	//		printf("trigger:%s-", objectMasters[objList[objList[x].link].item_id].desc);
-	//		printf("Points:%s-",objectMasters[objList[objList[objList[x].link].link].item_id].desc);
-	//		printf("x-%d-y:%d",objList[objList[x].link].quality , objList[objList[x].link].owner);
-	//		printf("\n");
-	//		}
-	//	}
-	
-	//printf("\nPrint switches and trigger chains\n");
-	//	printf("Index\tType\t%-20s\tTileX\tTileY\tx\ty\tz\theading\tqual\towner\tlink\tflags\tValue\n","Description");	
-	//	for (y=63; y>=0;y--)
-	//	{
-	//	for (x=0; x<64;x++)
-	//		{
-	//		if(LevelInfo[x][y].indexObjectList !=0)	//there is an object in this tile
-	//			{
-	//			//printf("\nAt tile x=%d, y=%d :",x,y);
-	//			long nextObj = LevelInfo[x][y].indexObjectList;
-	//			while (nextObj !=0)
-	//				{
-	//				if ((isTrigger(objList[nextObj]) || (isButton(objList[nextObj])) || (isTrigger(objList[objList[nextObj].link]))))
-	//					{
-	//					//long nextInChain = nextObj;
-	//					printObject(objList[nextObj],1);	//Prints the first object the inital trigger.
-	//					long nextInChain = objList[nextObj].link; 
-	//					printf("\n{\n");
-	//					while (nextInChain !=0)
-	//						{
-	//						if (isTrigger(objList[nextInChain]) || (isButton(objList[nextInChain])) || (isTrap(objList[nextInChain])) || (isLock(objList[nextInChain])))
-	//							{
-	//							switch (objectMasters[objList[nextInChain].item_id].type)
-	//								{
-	//								case A_DELETE_OBJECT_TRAP:	//Need to stop on this due to infinite looks if the trigger object is being deleted.
-	//								case LOCK://A lock uses it's link to set the key needed. stop here.
-	//									{
-	//									printObject(objList[nextInChain],1);printf("\n");
-	//									nextInChain=0;
-	//									break;
-	//									}
-	//								default:
-	//									{
-	//									printObject(objList[nextInChain],1); printf("\n");
-	//									nextInChain = objList[nextInChain].link;
-	//									}
-	//								}
-	//							}
-	//						else
-	//							{
-	//							if (nextInChain !=0)
-	//							{
-	//								printf("break on no trigger,trap or button\n");
-	//								printObject(objList[nextInChain],1);	printf("\n");								
-	//								nextInChain=0;
-	//								}
-	//							}
-
-	//						}
-	//					printf("}\n\n\n");
-	//					}
-	//				else if (objList[nextObj].enchantment ==1)
-	//					{//enchanted objects.
-	//					printObject(objList[nextObj],1);
-	//					printf("\n{\n");
-	//					//dummy trigger for the spell script
-	//						//Index	Type	Description  TileX	TileY	x	y	z	heading	qual	owner	link	flags						
-	//					int link=objList[nextObj].link;	//the link changes depending on the object type
-	//					switch	(objectMasters[objList[nextObj].item_id].type )
-	//						{//TODO:This is probably wrong.
-	//						case A_FOUNTAIN:
-	//							//no adjustment
-	//							link=objList[nextObj].link-512;
-	//							break;
-	//						default:
-	//							link=objList[nextObj].link-512;
-	//							if(link <=63){link=link+256;}
-	//							else{link=link+144;}
-	//							break;
-	//						}					
-	//					printf("99999\t99999\tenchantment\t-1\t-1\t0\t0\t0\t0\t%d\t%d\t%d\t%d",objList[nextObj].quality,objList[nextObj].owner,link,objList[nextObj].flags );
-	//					printf("\n}\n");
-	//					}
-	//				nextObj=nextObject(objList[nextObj]);
-	//				}
-	//			}
-	//		}
-	//	}
-		
-
-}
+	}
 
 void printTileMap(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the tilemap 
+	{
+	//Prints the tilemap 
 	int x; int y;
 	printf("\nNow Printing Tile for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			RenderAsciiTile(LevelInfo[x][y]);
 			printf("|");//delimiter.
+			}
 		}
-	}
 
-}
+	}
 
 void printFloorHeights(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the height map of the level.
+	{
+	//Prints the height map of the level.
 
-int x; int y;
+	int x; int y;
 	printf("\nNow Printing Floor Heights for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%02d|", LevelInfo[x][y].floorHeight);
+			}
 		}
 	}
-}
 
 void printFloorTextures(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the floor textures (the mapped values) of the level.
-int x; int y;
+	{
+	//Prints the floor textures (the mapped values) of the level.
+	int x; int y;
 	printf("\nNow Printing floor textures for level :%d.(##)", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%d|", LevelInfo[x][y].floorTexture);
+			}
 		}
 	}
-}
 
-void printDoorPositions(tile LevelInfo[64][64], ObjectItem objList[1600],int LevelNo)
-{
-//Shows which tiles contain doors.
-//Door flags set by setDoorBits()
+void printDoorPositions(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo)
+	{
+	//Shows which tiles contain doors.
+	//Door flags set by setDoorBits()
 
-int x; int y;
+	int x; int y;
 	printf("\nNow Printing door positions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			if (LevelInfo[x][y].isDoor == 1)
-			{
+				{
 				printf("%d(%d,%d)|", objList[LevelInfo[x][y].indexObjectList].heading, objList[LevelInfo[x][y].indexObjectList].x, objList[LevelInfo[x][y].indexObjectList].y);
-			}
+				}
 			else
-			{
+				{
 				printf(".|");
+				}
 			}
 		}
+
 	}
 
-}
-
 void printWallTextures(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the value of the wall texture of the tile.
-//When rendering a tile we actually use the adjacent wall texture value which is set to the north,south,east and west fields
-//Exception is when the adjacent flag is set. In that case north,south,east and west uses the tile value.
+	{
+	//Prints the value of the wall texture of the tile.
+	//When rendering a tile we actually use the adjacent wall texture value which is set to the north,south,east and west fields
+	//Exception is when the adjacent flag is set. In that case north,south,east and west uses the tile value.
 
-int x; int y;
+	int x; int y;
 	printf("\nNow Printing wall textures for level :%d.(##)", LevelNo);
 	printf("\n\tNote that the rendered textures are the adjacent north, south, east and west values which are got from the neighbour tiles.");
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			printf("%d|", LevelInfo[x][y].wallTexture);
+			}
 		}
 	}
-}
 
 void printAdjacentFlags(tile LevelInfo[64][64], int LevelNo)
-{
-//What tiles sets their north,south,east and west values from their neighbour tiles.
-int x;int y;
+	{
+	//What tiles sets their north,south,east and west values from their neighbour tiles.
+	int x; int y;
 	printf("\nNow Printing adjacent flags for level :%d.(##)", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			printf("%d|", LevelInfo[x][y].UseAdjacentTextures);
+			}
 		}
 	}
-}
 
 void printTextureOffsets(tile LevelInfo[64][64], int LevelNo)
-{
-//Texture offset is how much the wall texture is shifted from the ceiling.
-int x; int y;
+	{
+	//Texture offset is how much the wall texture is shifted from the ceiling.
+	int x; int y;
 	printf("\nNow printing texture offsets :%d.(##)", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			printf("%d|", LevelInfo[x][y].shockTextureOffset);
+			}
 		}
 	}
-}
 
 void printCeilingHeights(tile LevelInfo[64][64], int LevelNo)
-{
-//The actual ceiling height is actually the max ceiling height less this value.
-int x; int y;
+	{
+	//The actual ceiling height is actually the max ceiling height less this value.
+	int x; int y;
 	printf("\nPrint out ceiling height by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%02d|", LevelInfo[x][y].ceilingHeight);
+			}
 		}
 	}
-}
 
 void printSlopeSteepness(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the number of "levels" a slope changes by.
-int x; int y;
+	{
+	//Prints the number of "levels" a slope changes by.
+	int x; int y;
 	printf("\nPrint out slope steepness by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%02d|", LevelInfo[x][y].shockSteep);
+			}
 		}
 	}
-}
 
 void printSlopeFlags(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the flags which determine whether a slope is floor or ceiling only, both, inverted etc.
+	{
+	//Prints the flags which determine whether a slope is floor or ceiling only, both, inverted etc.
 
-int x; int y;
+	int x; int y;
 
 	printf("\nPrint out slope flags by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%02d|", LevelInfo[x][y].shockSlopeFlag);
+			}
 		}
 	}
-}
 
 void PrintObjectsByTile(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo)
-{
-//Prints a tile map that lists each object in it
-int x; int y;
+	{
+	//Prints a tile map that lists each object in it
+	int x; int y;
 	printf("\nPrint out objects by Tile for level :%d\n", LevelNo);
 
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 
 			if (LevelInfo[x][y].indexObjectList != 0)
-			{
+				{
 				//printf("\nAt tile x=%d, y=%d :",x,y);
 				long nextShockObj = printObject(objList[LevelInfo[x][y].indexObjectList]);
 				while (nextShockObj != 0)
-				{
+					{
 					printf("-");
 					nextShockObj = printObject(objList[nextShockObj]);
-					
-				}
-			}
-			else
-			{
-				printf("[]");
-			}
-			printf("*");
-		}
-	}
 
-}
+					}
+				}
+			else
+				{
+				printf("[]");
+				}
+			printf("*");
+			}
+		}
+
+	}
 
 void PrintShadeValues(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints out the tile shading values for System Shock.
-int x; int y;
+	{
+	//Prints out the tile shading values for System Shock.
+	int x; int y;
 	printf("\nPrint out shade value by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%d-%d|", LevelInfo[x][y].shockShadeUpper, LevelInfo[x][y].shockShadeLower);
+			}
 		}
 	}
-}
 
 void PrintLightStates(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the state value that Shock stores for the light calculations.
-int x; int y;
+	{
+	//Prints the state value that Shock stores for the light calculations.
+	int x; int y;
 	printf("\nPrint out light state by tile for level :%d\n", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%d-%d|", (LevelInfo[x][y].SHOCKSTATE[3] >> 4 & 0x0F), (LevelInfo[x][y].SHOCKSTATE[3] & 0x0F));
+			}
 		}
 	}
-}
 
 void PrintLevelEntrances(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo)
-{
-//UW. Prints the teleport traps that point to a different level i.e. level entrances.
+	{
+	//UW. Prints the teleport traps that point to a different level i.e. level entrances.
 
 	printf("\nLevel Entrances\n");		//go through the objects and find teleport traps with a zpos !=0
 	printf("LevelNo\tTileX\tTileY\n");
 	for (int i = 0; i<1024; i++)
-	{
+		{
 		if ((isTrigger(objList[i])) && (objectMasters[objList[objList[i].link].item_id].type == A_TELEPORT_TRAP))
 		if ((objList[objList[i].link].zpos != 0))	//Trap goes to another level
-		{
+			{
 			printf("%d\t%d\t%d\n", objList[objList[i].link].zpos - 1, objList[objList[i].link].quality, objList[objList[i].link].owner);
+			}
 		}
 	}
-}
 
 void PrintUWObjects(ObjectItem objList[1600])
-{
-//Prints the object debug info for UW.
+	{
+	//Prints the object debug info for UW.
 	for (int x = 0; x < 1024; x++)
 		{
 		//if (objList[x].InUseFlag == 1)
@@ -664,7 +611,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 		UniqueObjectName(objList[x]);
 		printf("\n\nIndex: %d", objList[x].index);
 		printf("\tName: %s", UniqueObjectName(objList[x]));
-		if(objectMasters[objList[x].item_id].isSet==1)
+		if (objectMasters[objList[x].item_id].isSet == 1)
 			{
 			printf("\n\tObject Type : %d %s", objList[x].item_id, objectMasters[objList[x].item_id].desc);
 			}
@@ -685,22 +632,22 @@ void PrintUWObjects(ObjectItem objList[1600])
 
 		printf("\n\tOwner : %d", objList[x].owner);
 		if (objList[x].is_quant == 1)
-		{
-			if (objList[x].link > 512)
 			{
+			if (objList[x].link > 512)
+				{
 				printf("\n\tSpecial Property : %d", objList[x].link);
 				printf("\tless 512 is %d : ", objList[x].link - 512);
-			}
+				}
 			else
-			{
+				{
 				printf("\n\tQuantity : %d", objList[x].link);
-			}
+				}
 
-		}
+			}
 		else
-		{
+			{
 			printf("\n\tSpecial Link : %d", objList[x].link);
-		}
+			}
 
 		if (objList[x].npc_whoami >0)
 			{
@@ -710,114 +657,114 @@ void PrintUWObjects(ObjectItem objList[1600])
 
 		}
 	//}
-}
+	}
 
 void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
-{
+	{
 	//Prints a tilemap of the water bodies only.
 
 	int x; int y;
 	printf("\nNow Printing Water Regions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			if (LevelInfo[x][y].isWater == 1)
-			{
+				{
 				printf("%02d-", LevelInfo[x][y].roomRegion);
-			}
+				}
 			else
-			{
+				{
 				printf("  -");
+				}
+
 			}
-			
 		}
+
 	}
 
-}
-
 void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints a tile map showing a count of neighbouring (nonsolid) tiles.
+	{
+	//Prints a tile map showing a count of neighbouring (nonsolid) tiles.
 
 	int x; int y;
 	printf("\nNow Printing Neighbour counts for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			printf("%d-", LevelInfo[x][y].noOfNeighbours);
+			}
 		}
 	}
-}
 
 
 void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints a tilemap that shows the various room regions that we have generated.
-//Room regions can be rooms, corridors, water and doors.
+	{
+	//Prints a tilemap that shows the various room regions that we have generated.
+	//Room regions can be rooms, corridors, water and doors.
 	int x; int y;
 	printf("\nNow Printing Room  regions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
-	{
+		{
 		printf("\n");
 		for (x = 0; x <= 63; x++)
-		{
+			{
 			if (LevelInfo[x][y].tileType == TILE_SOLID)
 				{
 				printf("S%03d-", LevelInfo[x][y].roomRegion);
 				}
 
-				else if (LevelInfo[x][y].isWater == 1)
-					{
-						printf("W%03d-", LevelInfo[x][y].roomRegion);
-					}
-				else if (LevelInfo[x][y].isCorridor == 1)
-					{
-						printf("C%03d-", LevelInfo[x][y].roomRegion);
-					}
-				else if (LevelInfo[x][y].isDoor == 1)
+			else if (LevelInfo[x][y].isWater == 1)
 				{
-					printf("D%03d-", LevelInfo[x][y].roomRegion);
+				printf("W%03d-", LevelInfo[x][y].roomRegion);
 				}
-				else
-					{
-						printf("R%03d-", LevelInfo[x][y].roomRegion);
-					}
+			else if (LevelInfo[x][y].isCorridor == 1)
+				{
+				printf("C%03d-", LevelInfo[x][y].roomRegion);
+				}
+			else if (LevelInfo[x][y].isDoor == 1)
+				{
+				printf("D%03d-", LevelInfo[x][y].roomRegion);
+				}
+			else
+				{
+				printf("R%03d-", LevelInfo[x][y].roomRegion);
+				}
+			}
 		}
 	}
-}
 
 void printFloorOrientations(tile LevelInfo[64][64], int LevelNo)
-{
-//Prints the texture direction for floor tiles in SHOCK.
+	{
+	//Prints the texture direction for floor tiles in SHOCK.
 
 	int x; int y;
 	printf("\nNow Printing Floor orientations for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%d|", LevelInfo[x][y].shockFloorOrientation);
+			}
 		}
 	}
-}
 
 void printCeilOrientations(tile LevelInfo[64][64], int LevelNo)
-{
+	{
 
-//Prints the ceiling texture orientations in SHOCK.
+	//Prints the ceiling texture orientations in SHOCK.
 	int x; int y;
 	printf("\nNow Printing ceiling orientations for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--)
-	{
+		{
 		printf("\n");
 		for (x = 0; x<64; x++)
-		{
+			{
 			printf("%d|", LevelInfo[x][y].shockCeilOrientation);
+			}
 		}
 	}
-}
