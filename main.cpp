@@ -794,7 +794,7 @@ switch (game)
 				}
 			break;
 		case MATERIALS_BUILD_MODE:
-			BuildSHOCKMtrFiles(0);
+			//BuildSHOCKMtrFiles(0);
 			//BuildXDataFile(game);
 			//BuildSndShaderFiles();
 			//BuildShockMtrFiles(3);
@@ -803,7 +803,7 @@ switch (game)
 			//BuildGuiFiles();
 			//ExportModelFormat();
 			//BuildWORDSXData(game);
-			//BuildUWParticles();
+			BuildParticles(game);
 			printf("Materials builder turned off at the moment.");
 			break;
 		case CONVERSATION_MODE:

@@ -382,12 +382,16 @@ void BuildSHOCKMtrFiles(int MtrType)
 			fprintf(fileOut, "\t{\n");
 			//fprintf(fileOut, "\tif (parm11 > 0)\n");
 			fprintf(fileOut, "\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+			//fprintf(fileOut, "\tblend gl_dst_color, gl_src_color\n");
+			//fprintf(fileOut, "\n\tblend none\n");
 			fprintf(fileOut, "\tmap\ttextures\\shock\\shock_%04d_%04d.tga\n", i + 1000, 0);
 			fprintf(fileOut, "\t}\n");
 			//Animation. Loop through palette textures.
 			fprintf(fileOut, "\n\t{");
-			fprintf(fileOut, "\n\tif ((time * 5) %% 4 == 0)");
+			fprintf(fileOut, "\n\tif ((time * 4) %% 4 == 0)");
 			fprintf(fileOut, "\n\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+			//fprintf(fileOut, "\n\tblend gl_dst_color, gl_src_color\n");
+			//fprintf(fileOut, "\n\tblend none\n");
 			fprintf(fileOut, "\n\tmap\ttextures\\shock\\shock_%04d_%04d.tga\n", i + 1000, 0);//Original frame
 			fprintf(fileOut, "\t}");
 //////shock_1000_PC01_0000
@@ -398,6 +402,8 @@ void BuildSHOCKMtrFiles(int MtrType)
 				fprintf(fileOut, "\n\t{");
 				fprintf(fileOut, "\n\tif ((time * %d) %% %d == 0)",MaxFrames, k);
 				fprintf(fileOut, "\n\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+				//fprintf(fileOut, "\n\tblend gl_dst_color, gl_src_color\n");
+				//fprintf(fileOut, "\n\tblend none\n");
 				fprintf(fileOut, "\n\tmap\ttextures\\shock\\shock_%04d_pc%02d_%04d.tga\n", i + 1000, k, 0);
 				fprintf(fileOut, "\t}");
 				}
@@ -478,6 +484,7 @@ void BuildSHOCKMtrFiles(int MtrType)
 	case 2://Animated stuff
 		break;
 	case  3:	//3d model textures
+		{
 		for (int i = 475; i <= 525; i++)
 		{//3d models
 			FILE *fileOut;
@@ -494,6 +501,47 @@ void BuildSHOCKMtrFiles(int MtrType)
 			fprintf(fileOut, "\t{\n\t\tblend gl_dst_color, gl_one\n\tcolored\n\t\tmap textures/shock/model/%04d.tga\n\t}", i);
 			fprintf(fileOut, "\n}", i);
 			fclose(fileOut);
+		}
+		break;
+		}
+	case 4://Shaders for door animations
+		{
+		for (int i = 299; i <= 338; i++)
+			{
+			int NoOfFrames=-1; int ChunkId=-1;
+			getNoOfFramesForShockDoors(i,&NoOfFrames,&ChunkId);
+			if (NoOfFrames!=-1)
+				{
+				FILE *fileOut;
+				char filePath[80] = "";
+				sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_door_anim_%03d.mtr", i);
+				if (fopen_s(&fileOut, filePath, "w") != 0)
+					{
+					printf("Unable to create output file for material");
+					return;
+					}
+				fprintf(fileOut, "textures\\shock\\doors\\dooranim_%03d\n{\n", i);
+				//fprintf(fileOut, "\tDECAL_MACRO\n\tnoShadows\n\ttwoSided\n\tnonsolid\n\tnoimpact\n");
+				//fprintf(fileOut, "\tsort decal\n\tsort nearest\n");
+				fprintf(fileOut, "\tqer_editorimage textures\\shock\\doors\\%04d\\%04d_0000.tga\n", ChunkId,ChunkId);
+				fprintf(fileOut, "\t{\n\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n\t\tcolored\n\talphatest 0.0\n");
+				fprintf(fileOut, "\t\tmap textures\\shock\\doors\\%04d\\%04d_%04d.tga\n", ChunkId, ChunkId,NoOfFrames);
+				fprintf(fileOut, "\n\t}");
+				for (int k = 0; k <= NoOfFrames; k++)
+					{
+					fprintf(fileOut, "\n\t\t{");
+					fprintf(fileOut, "\n\t\t\tif (parm8 == %d)",k);
+					fprintf(fileOut, "\n\t\t\t\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA");
+					fprintf(fileOut, "\n\t\t\t\tcolored\n\t\t\talphatest 0.0");
+					fprintf(fileOut, "\n\t\t\t\tmap textures\\shock\\doors\\%04d\\%04d_%04d.tga\n", ChunkId, ChunkId, k);
+					fprintf(fileOut, "\n\t\t}");
+					}
+				fprintf(fileOut, "\n}");
+
+				fclose(fileOut);
+				}
+			}
+
 		}
 }
 
@@ -885,24 +933,75 @@ void BuildUWXData(int game, int TargetBlock)
 	}
 }
 
-void BuildUWParticles()
+void BuildParticles(int game)
 {
-
-	for (int x =0; x<=1705; x++)
+int NoOfParticles=0;
+switch (game)
+	{
+	case UW1:
+		NoOfParticles = 460;
+		break;
+	case UW2:
+		NoOfParticles = 464;
+		break;
+	case SHOCK:
+		NoOfParticles =1706;
+		break;
+	default:
+		return;
+	}
+for (int x = 0; x < NoOfParticles; x++)
 	{
 		FILE *fileOut;
 		char filePath[80] = "";
-		sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\shock_object_%04d.prt", x);
+		switch (game)
+			{
+			case UW1:
+				sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\uw1_object_%03d.prt", x);
+				break;
+			case UW2:
+				sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\uw2_object_%03d.prt", x);
+				break;
+			case SHOCK:
+				sprintf_s(filePath, 80, "c:\\games\\darkmod\\particles\\shock_object_%04d.prt", x);
+				break;
+			}
 		if (fopen_s(&fileOut, filePath, "w") != 0)
 			{
 			printf("Unable to create output file for material");
 			return;
 			}
 	
-		fprintf(fileOut, "particle shock_object_%04d {\n", x);
+		//fprintf(fileOut, "particle shock_object_%04d {\n", x);
+		switch (game)
+			{
+			case UW1:
+				fprintf(fileOut, "particle uw1_object_%03d {\n", x);
+				break;
+			case UW2:
+				fprintf(fileOut, "particle uw2_object_%03d {\n", x);
+				break;
+			case SHOCK:
+				fprintf(fileOut, "particle shock_object_%04d {\n", x);
+				break;
+			}
+		
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut, "count\t1\n");
-		fprintf(fileOut, "material\ttextures/shock/objects/objects_%04d\n", x);
+		//
+		switch (game)
+			{
+			case UW1:
+				fprintf(fileOut, "material\ttextures/uw1/objects/objects_%03d\n", x);
+				break;
+			case UW2:
+				fprintf(fileOut, "material\ttextures/uw2/objects/objects_%03d\n", x);
+				break;
+			case SHOCK:
+				fprintf(fileOut, "material\ttextures/shock/objects/objects_%04d\n", x);
+				break;
+			}
+		
 		fprintf(fileOut, "time\t0.050\n");
 		fprintf(fileOut, "cycles\t0.000\n");
 		fprintf(fileOut, "bunching\t0.000\n");
@@ -928,31 +1027,81 @@ void BuildUWParticles()
 		fclose(fileOut);
 	}
 
-	for (int x = 0; x <= 1705; x++)
+for (int x = 0; x < NoOfParticles; x++)
 	{
 		FILE *fileOut;
 		char filePath[80] = "";
-		sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_object_%04d.mtr", x);
+		//sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_object_%04d.mtr", x);
+		switch (game)
+			{
+				case UW1:
+					sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw1_object_%03d.mtr", x);
+					break;
+				case UW2:
+					sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\uw2_object_%03d.mtr", x);
+					break;
+				case SHOCK:
+					sprintf_s(filePath, 80, "c:\\games\\darkmod\\materials\\shock_object_%04d.mtr", x);
+					break;
+			}
+		
 		if (fopen_s(&fileOut, filePath, "w") != 0)
 			{
 			printf("Unable to create output file for material");
 			return;
 			}
-
-		fprintf(fileOut, "textures\\shock\\objects\\objects_%04d\n",x);
+		switch (game)
+			{
+			case UW1:
+				fprintf(fileOut, "textures\\uw1\\objects\\objects_%03d\n", x);
+				break;
+			case UW2:
+				fprintf(fileOut, "textures\\uw2\\objects\\objects_%03d\n", x);
+				break;
+			case SHOCK:
+				fprintf(fileOut, "textures\\shock\\objects\\objects_%04d\n", x);
+				break;
+			}
+		
 		fprintf(fileOut, "{\n");
 		fprintf(fileOut,  "DECAL_MACRO\n");
 		fprintf(fileOut, "noShadows\n");
 		fprintf(fileOut, "twoSided\n");
 		fprintf(fileOut, "nonsolid\n");
 		fprintf(fileOut, "noimpact\n");
-       	
-		fprintf(fileOut, "qer_editorimage textures/shock/objects/shock_object_1350_%04d.tga\n",x);
+		fprintf(fileOut, "\tsort decal\n\tsort nearest\n");
+		switch (game)
+			{
+			case UW1:
+				fprintf(fileOut, "qer_editorimage textures/uw1/objects/objects_%03d.tga\n", x);
+				break;
+			case UW2:
+				fprintf(fileOut, "qer_editorimage textures/uw2/objects/objects_%03d.tga\n", x);
+				break;
+			case SHOCK:
+				fprintf(fileOut, "qer_editorimage textures/shock/objects/shock_object_1350_%04d.tga\n", x);
+				break;
+			}
+	
 		fprintf(fileOut, "{\n");
-		fprintf(fileOut, "blend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
-		fprintf(fileOut, "colored\n");
-		fprintf(fileOut, "clamp\n");
-		fprintf(fileOut," map textures/shock/objects/shock_object_1350_%04d.tga\n",x);
+		fprintf(fileOut, "\tblend GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA\n");
+		fprintf(fileOut, "\tcolored\n");
+		fprintf(fileOut, "\tclamp\n");
+		//fprintf(fileOut, "\talphatest 0.0\n");
+		//
+		switch (game)
+			{
+			case UW1:
+				fprintf(fileOut, "\tmap textures/uw1/objects/objects_%03d.tga\n", x);
+				break;
+			case UW2:
+				fprintf(fileOut, "\tmap textures/uw2/objects/objects_%03d.tga\n", x);
+				break;
+			case SHOCK:
+				fprintf(fileOut, " map textures/shock/objects/shock_object_1350_%04d.tga\n", x);
+				break;
+			}
+		
 		fprintf(fileOut, "}\n");
 		fprintf(fileOut, "}\n");
 		fclose(fileOut);

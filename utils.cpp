@@ -1019,3 +1019,97 @@ unsigned char *terraindat;
 		j++;
 		}
 }
+
+void getNoOfFramesForShockDoors(int index, int *NoOfFrames, int *ChunkId)
+	{//Frame zero to end
+	switch (index)
+		{
+			case 299://blastdoor
+			*ChunkId = 2400;
+			*NoOfFrames=6;
+			break;
+		case 300://service access
+			*ChunkId =2401;
+			*NoOfFrames =7;
+			break;
+		case 301:
+			*ChunkId =2402;
+			*NoOfFrames =7;
+			break;
+		case 302:
+			*ChunkId =2403;
+			*NoOfFrames =7;
+			break;
+		case 303:
+			*ChunkId = 2404;
+			*NoOfFrames =5;
+			break;
+		case 304:
+			*ChunkId =2405;
+			*NoOfFrames =5;
+			break;
+		case 305:
+			*ChunkId =2406;
+			*NoOfFrames =7;
+			break;
+		case 306:
+			*ChunkId =2407;
+			*NoOfFrames =6;
+			break;
+		case 318:
+		case 319:
+		case 320:
+		case 321:
+			*ChunkId =2423;//????
+			*NoOfFrames =7;
+		case 322:
+		case 323:
+			*ChunkId =2424;
+			*NoOfFrames =5;//??
+			break;
+		case 325:
+			*ChunkId =2426;
+			*NoOfFrames =6;
+			break;
+		case 326:
+			*ChunkId =2427;
+			*NoOfFrames =6;
+			break;
+		case 327:
+			*ChunkId =2428;
+			*NoOfFrames =7;
+			break;
+		case 328:
+			*ChunkId =2429;
+			*NoOfFrames =7;
+			break;
+		case 330:
+			*ChunkId =2431;
+			*NoOfFrames =7;
+			break;
+		case 331:
+			*ChunkId =2432;
+			*NoOfFrames =7;
+			break;
+		case 332:
+			*ChunkId =2433;
+			*NoOfFrames =6;
+			break;
+		case 336:
+			*ChunkId =2437;
+			*NoOfFrames =4;
+			break;
+		case 337:
+			*ChunkId = 2438;
+			*NoOfFrames =5;
+			break;
+		case 338:
+			*ChunkId =2439;
+			*NoOfFrames =5;
+			break;
+		default:
+			*ChunkId=-1;
+			*NoOfFrames=-1;
+		}
+
+	}

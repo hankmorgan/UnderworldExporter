@@ -27,4 +27,5 @@ long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPacke
 void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack);
 void RepackShock(char InputFile[255], char OutputFile[255]);
 void ParseTerrainProperties(int game);
+void getNoOfFramesForShockDoors(int index, int *NoOfFrames, int *ChunkId);
 #endif /*util_h*/

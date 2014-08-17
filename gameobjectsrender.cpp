@@ -1216,6 +1216,7 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 	fprintf(MAPFILE, "\"hide\" \"%d\"\n", currobj.invis);
 	fprintf(MAPFILE, "\"solid\" \"%d\"\n", 0);
+	fprintf(MAPFILE, "\"skin\" \"shock_anim_door_%03d\"\n", currobj.item_id);
 	EntityRotationSHOCK(currobj.Angle2);
 	fprintf(MAPFILE, "\n}");
 
@@ -1265,7 +1266,8 @@ void RenderEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &curr
 			fprintf(MAPFILE, "\"used_by3\" \"%s_3\"\n", strKeyName);
 			fprintf(MAPFILE, "\"used_by4\" \"%s_4\"\n", strKeyName);
 			fprintf(MAPFILE, "\"used_by5\" \"%s_5\"\n", strKeyName);
-			fprintf(MAPFILE, "\"used_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+			//fprintf(MAPFILE, "\"used_action_script\" \"start_%s\"\n", UniqueObjectName(currobj));
+			fprintf(MAPFILE, "\"open_on_unlock\" \"0\"\n");//For animation compatability
 		}
 	}
 	fprintf(MAPFILE, "\n}");

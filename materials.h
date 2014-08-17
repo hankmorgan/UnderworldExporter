@@ -9,5 +9,5 @@ void ExportModelFormat();
 void BuildWORDSXData(int game);
 void BuildUWXData(int game, int TargetBlock);
 void BuildUWMtrFiles(int game, int mtrType);
-void BuildUWParticles();
+void BuildParticles(int game);
 #endif /*materials_h*/

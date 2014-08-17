@@ -1158,6 +1158,8 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 		{
 		int NoOfFrames = 6;
 		fprintf(fBODY, "\n\n\nvoid start_%s()\n\t{", UniqueObjectName(objList[i]));
+		fprintf(fBODY, "\tif (!$%s.IsLocked())\n", UniqueObjectName(objList[i]));
+		fprintf(fBODY, "\t{\n");
 		fprintf(fBODY, "\tif ($%s.IsOpen())\n", UniqueObjectName(objList[i]));
 		fprintf(fBODY, "\t{\n");
 		fprintf(fBODY, "\tsys.println(\"Close\");\n");
@@ -1177,7 +1179,7 @@ if (fopen_s(&fMAIN, SCRIPT_MAIN_FILE, "w") != 0)
 			fprintf(fBODY, "\n\t$%s_way.setShaderParm(8,%d);", UniqueObjectName(objList[i]), k);
 			fprintf(fBODY, "\n\tsys.wait(0.2);");
 			}
-		fprintf(fBODY, "\t}\n}\n");
+		fprintf(fBODY, "\t}\n}\n}\n");
 		////// If locked unlock it and open
 		////fprintf(fBODY, "\tif ($%s.IsLocked())\n", UniqueObjectName(targetObj));
 		////fprintf(fBODY, "\t{\n");

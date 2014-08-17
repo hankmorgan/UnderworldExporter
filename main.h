@@ -55,7 +55,7 @@
 //#define MAP_OUTPUT_FILE "C:\\games\\darkmod\\maps\\shock_1.map"
 #define MAP_OUTPUT_FILE_SOURCE "C:\\source.vmf"
 
-#define ENABLE_LIGHTING 0
+#define ENABLE_LIGHTING 1
 #define ENABLE_WATER 0
 
 /*Globals*/
