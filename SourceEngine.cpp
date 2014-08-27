@@ -1077,11 +1077,22 @@ float vAx_1=0;
 float vAx_2=0;
 float vAx_3=-1;
 float vAx_4=0;
-wallTexture=t.wallTexture;
+//int textureOffset = 1;
+int ceilOffset = 0;
+	wallTexture=t.wallTexture;
+	if (iGame == SHOCK)
+		{ //I need to calculate an offset for SHOCK.
+		ceilOffset = t.ceilingHeight;
+		}
+
 	switch (face)
 		{
 		case fSOUTH:
 			wallTexture = t.South;
+			if ((iGame == SHOCK))
+				{
+				ceilOffset = t.shockSouthCeilHeight;
+				}
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
 			uAx_1 = 1;
 			uAx_2 = 0;
@@ -1094,6 +1105,10 @@ wallTexture=t.wallTexture;
 			break;
 		case fNORTH:
 			wallTexture = t.North;
+			if ((iGame == SHOCK))
+				{
+				ceilOffset = t.shockNorthCeilHeight;
+				}
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL014D\"\n");
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
 			uAx_1 = -1;
@@ -1107,6 +1122,10 @@ wallTexture=t.wallTexture;
 			break;
 		case fEAST:
 			wallTexture = t.East;
+			if ((iGame == SHOCK))
+				{
+				ceilOffset = t.shockEastCeilHeight;
+				}
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL034D\"\n");
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
 			uAx_1 = 0;
@@ -1120,6 +1139,10 @@ wallTexture=t.wallTexture;
 			break;
 		case fWEST:
 			wallTexture = t.West;
+			if ((iGame == SHOCK))
+				{
+				ceilOffset = t.shockWestCeilHeight;
+				}
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL045i\"\n");
 			//fprintf(MAPFILE, "\t\t\t\"material\" \"BRICK/BRICKWALL009A\"\n");
 			uAx_1 = 0;
@@ -1136,6 +1159,20 @@ wallTexture=t.wallTexture;
 		{
 		wallTexture=0;
 		}
+
+	if (iGame == SHOCK)
+		{
+		float shock_ceil = SHOCK_CEILING_HEIGHT;
+		float floorOffset = shock_ceil - ceilOffset - 8;	//The floor of the tile if it is 1 texture tall.
+		while (floorOffset >= 8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
+			{
+			floorOffset -= 8;
+			}
+		vAx_4 = (floorOffset)* 16;
+		}
+		
+
+
 
 	fprintf(MAPFILE, "\t\t\t\"material\" \"%s\"\n", textureMasters[wallTexture].path);
 	fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[%f %f %f %f] %f\"\n", uAx_1, uAx_2, uAx_3, uAx_4, 0.9375);
