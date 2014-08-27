@@ -27,6 +27,7 @@ void RenderSourceEnginelLevel(tile LevelInfo[64][64], ObjectItem objList[1600], 
 {
 int x;
 int y;
+int skipCeil=0;
 
 iGame = game;
 
@@ -41,6 +42,7 @@ switch (game)
 		}
 	default://UW1&2
 		{
+		skipCeil = 1;
 			CEILING_HEIGHT = UW_CEILING_HEIGHT;
 			break;
 		}
@@ -75,10 +77,31 @@ fprintf(MAPFILE, "versioninfo\n");
 		{
 			for (x = 0; x <= 63; x++)
 			{
-				RenderSourceTile(game, x, y, LevelInfo[x][y], 0, 0, 0, 0);
+				RenderSourceTile(game, x, y, LevelInfo[x][y], 0, 0, 0, skipCeil);
 			}
 
 		}
+
+		if (game != SHOCK)
+			{
+			//Render UW ceiling
+			tile tmp;
+			tmp.tileType = 1;
+			tmp.Render = 1;
+			tmp.isWater = 0;
+			tmp.tileX = 0;
+			tmp.tileY = 0;
+			tmp.DimX = 64;
+			tmp.DimY = 64;
+			tmp.ceilingHeight = 0;
+			tmp.floorTexture = LevelInfo[0][0].shockCeilingTexture;
+			tmp.shockCeilingTexture = LevelInfo[0][0].shockCeilingTexture;
+			tmp.East = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			tmp.West = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			tmp.North = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			tmp.South = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+			RenderSourceTile(game, 0, 0, tmp, 0, 0, 1, 0);
+			}
 
 
 		fprintf(MAPFILE, "}\n");
