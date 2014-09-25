@@ -382,7 +382,10 @@ mstaddress_pointer=0;
 					objList[MasterIndex].sprite = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
 					objList[MasterIndex].State = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
 					objList[MasterIndex].unk1 = getValAtAddress(mst_ark, mstaddress_pointer + 24, 8);
-
+					if (objList[MasterIndex].index == 98)
+						{
+						printf("");
+						}
 					printf("\n++++++++Next object++++++++++++\n");
 					printf("\nMaster Record at %d", blockAddress + mstaddress_pointer);
 					printf("\nIndex = %d \n", objList[MasterIndex].index);
@@ -602,6 +605,7 @@ switch (game)
 		//{
 		//	printf("");
 		//}
+
 			objList[x].index = x; 
 			objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 			objList[x].tileX=99;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists

@@ -118,6 +118,9 @@ extern int CEILING_HEIGHT;
 #define UW2_SIZE_BLOCK 2
 #define UW2_SPACE_BLOCK 3
 
+//Turn off alpha channels globally.
+#define ALPHA 0
+
 
 void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char filePath[255]);
 void LoadConfig(int game, int mode);

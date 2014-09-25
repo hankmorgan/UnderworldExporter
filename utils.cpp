@@ -820,6 +820,34 @@ void RepackShock(char InputFile[255], char OutputFile[255])
 				//unpack_data(archive_ark, tmp_ark, UnpackedSize[x]);
 				printf("\nUnpacking compressed chunk %d", x);
 				LoadShockChunk(BlockAddressesOld[x], compressionFlags[x], archive_ark, tmp_ark, PackedSize[x], UnpackedSize[x]);
+				if (chunkNos[x] == 4105)
+					{
+					int add_ptr=0;
+					for (int i = 0; i<63; i++)
+						{
+						for (int j = 0; j<63; j++)
+							{
+							if ((i == 20) || (j == 27) || (i == 32) || (j == 20))
+								{
+								tmp_ark[add_ptr] = 0;
+								//tmp_ark[add_ptr + 1] = tmp_ark[add_ptr + 1] & 0xE0;
+								//tmp_ark[add_ptr+4] = 0;
+								//tmp_ark[add_ptr+5] = 0;
+								}
+							else
+								{
+								if ((i != 0) || (j != 0)|| (i != 63) || (j != 63))
+									{
+									tmp_ark[add_ptr] = 1;
+									tmp_ark[add_ptr + 1] = tmp_ark[add_ptr + 1] & 0xE0;
+									//tmp_ark[add_ptr+4] = 0;
+									//tmp_ark[add_ptr+5] = 0;
+									}
+								}
+							add_ptr = add_ptr + 16;
+							}
+						}
+					}
 				for (int i = 0; i < UnpackedSize[x]; i++)
 					{
 					fputc(tmp_ark[i], file);

@@ -21,6 +21,99 @@ extern FILE *MAPFILE;
 extern int iGame;
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
+FILE *UNITYFILE;
+
+char *UniqueTileName(int x, int y, int surface, int part)
+	{
+	char str[20] = "";
+	switch (surface)
+		{
+			case SURFACE_WALL:
+				{
+				sprintf_s(str, 20, "Tile_%02d_%02d\0", x, y);
+				return str;
+				break;
+				}
+			case SURFACE_CEIL:
+				{
+				if (part == 0)
+					{
+					sprintf_s(str, 20, "Ceiling_%02d_%02d\0", x, y);
+					}
+				else
+					{
+					sprintf_s(str, 20, "Ceiling_%02d_%02d_%d\0", x, y, part);
+					}
+				return str;
+				break;
+				}
+			case SURFACE_FLOOR:
+			case SURFACE_SLOPE:
+			default:
+				{
+				if (part == 0)
+					{
+					sprintf_s(str, 20, "Floor_%02d_%02d\0", x, y);
+					}
+				else
+					{
+					sprintf_s(str, 20, "Floor_%02d_%02d_%d\0", x, y, part);
+					}
+				return str;
+				break;
+				}
+		}
+	return str;
+	}
+
+
+void StoreTileName(int x, int y, int surface, int part)
+	{
+
+	char str[20] = "";
+	switch (surface)
+		{
+			case SURFACE_WALL:
+				{
+				sprintf_s(str, 20, "Tile_%02d_%02d\0", x, y);
+				break;
+				}
+			case SURFACE_CEIL:
+				{
+				if (part == 0)
+					{
+					sprintf_s(str, 20, "Ceiling_%02d_%02d\0", x, y);
+					}
+				else
+					{
+					sprintf_s(str, 20, "Ceiling_%02d_%02d_%d\0", x, y, part);
+					}
+				break;
+				}
+			case SURFACE_FLOOR:
+			case SURFACE_SLOPE:
+			default:
+				{
+				if (part == 0)
+					{
+					sprintf_s(str, 20, "Floor_%02d_%02d\0", x, y);
+					}
+				else
+					{
+					sprintf_s(str, 20, "Floor_%02d_%02d_%d\0", x, y, part);
+					}
+				break;
+				}
+		}
+
+
+
+	printf("Tilename %s\n",str);
+	//Matches a tile name with it's brush numbers so I can rename the brush later on.
+	fprintf(UNITYFILE, "RenameBrushes(\"world.worldspawn.Brush_%d\",\"", PrimitiveCount);
+	fprintf(UNITYFILE, "%s", str);
+	fprintf(UNITYFILE, "\");\n");
+	}
 
 void RenderSourceEnginelLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 //Main processing loop for generating the level.
@@ -30,7 +123,10 @@ int y;
 int skipCeil=0;
 
 iGame = game;
-
+if (fopen_s(&UNITYFILE, "unity_tiles.txt", "w") != 0)
+	{
+	printf("Unable to create output file for unity tile mappings! Carrying on regardless.");
+	}
 //Levels use different ceiling heights.
 //Shock is variable, UW is fixed.
 switch (game)
@@ -112,6 +208,8 @@ fprintf(MAPFILE, "versioninfo\n");
 			fprintf(MAPFILE, "\t\"maxs\" \"(%d %d %d)\"\n", 64 * BrushSizeX, 64 * BrushSizeY, 64 * BrushSizeZ);
 			fprintf(MAPFILE, "\t\"active\" \"0\"");
 			fprintf(MAPFILE, "}\n");
+
+			fclose(UNITYFILE);
 }
 
 void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
@@ -126,8 +224,8 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 		}
 	case TILE_OPEN:		//1
 		{//open
-			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling	
+			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0,SURFACE_FLOOR); }	//floor
+			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling	
 			return;
 		}
 	
@@ -165,26 +263,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 				{
 				case SLOPE_BOTH_PARALLEL:
 					{
-						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0); }//floor
-						if ((skipCeil != 1)) { RenderSourceSlopeNTile(x, y, t, Water, 1); }
+						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0,SURFACE_FLOOR,0); }//floor
+						if ((skipCeil != 1)) { RenderSourceSlopeNTile(x, y, t, Water, 1,SURFACE_CEIL,0); }
 						break;
 					}
 				case SLOPE_BOTH_OPPOSITE:
 					{
-						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0); }//floor
-						if ((skipCeil != 1)) { RenderSourceSlopeSTile(x, y, t, Water, 1); }
+					if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+					if ((skipCeil != 1)) { RenderSourceSlopeSTile(x, y, t, Water, 1, SURFACE_CEIL, 0); }
 						break;
 					}
 				case SLOPE_FLOOR_ONLY:
 					{
-						if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0); }//floor
-						if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+					if (skipFloor != 1) { RenderSourceSlopeNTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+					if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 						break;
 					}
 				case SLOPE_CEILING_ONLY:
 				{
-					if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-					RenderSourceSlopeNTile(x, y, t, Water, 1);
+					if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0,SURFACE_FLOOR); }	//floor
+					RenderSourceSlopeNTile(x, y, t, Water, 1, SURFACE_CEIL, 0);
 					break;
 				}
 				}
@@ -196,26 +294,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 			{
 			case SLOPE_BOTH_PARALLEL:
 			{
-				if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0); }	//floor
-				RenderSourceSlopeSTile(x, y, t, Water, 1);
+			if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }	//floor
+			RenderSourceSlopeSTile(x, y, t, Water, 1, SURFACE_CEIL, 0);
 				break;
 			}
 			case SLOPE_BOTH_OPPOSITE:
 			{
-				if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0); }	//floor
-				RenderSourceSlopeNTile(x, y, t, Water, 1);
+			if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }	//floor
+			RenderSourceSlopeNTile(x, y, t, Water, 1, SURFACE_CEIL, 0);
 				break;
 			}
 			case SLOPE_FLOOR_ONLY:
 			{
-				if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0); }	//floor
-				if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+			if (skipFloor != 1) { RenderSourceSlopeSTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }	//floor
+			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 			break;
 			}
 			case SLOPE_CEILING_ONLY:
 			{
-				if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-				if ((skipCeil != 1)) { RenderSourceSlopeSTile(x, y, t, Water, 1); }
+			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+				if ((skipCeil != 1)) { RenderSourceSlopeSTile(x, y, t, Water, 1,SURFACE_CEIL,0); }
 				break;
 			}
 		}
@@ -227,26 +325,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 		{
 		case SLOPE_BOTH_PARALLEL:
 		{
-			if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0); }//floor
-			RenderSourceSlopeETile(x, y, t, Water, 1);
+		if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+		RenderSourceSlopeETile(x, y, t, Water, 1, SURFACE_CEIL, 0);
 			break;
 		}
 		case SLOPE_BOTH_OPPOSITE:
 		{
-			if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0); }//floor
-			RenderSourceSlopeWTile(x, y, t, Water, 1);
+		if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+		RenderSourceSlopeWTile(x, y, t, Water, 1, SURFACE_CEIL, 0);
 			break;
 		}
 		case SLOPE_FLOOR_ONLY:
 		{
-			if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0); }//floor
-			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+		if (skipFloor != 1) { RenderSourceSlopeETile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+		if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 			break;
 		}
 		case SLOPE_CEILING_ONLY:
 		{
-			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-			if ((skipCeil != 1)) { RenderSourceSlopeETile(x, y, t, Water, 1); }
+		if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeETile(x, y, t, Water, 1, SURFACE_CEIL, 0); }
 			break;
 		}
 		}
@@ -258,26 +356,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 			{
 			case SLOPE_BOTH_PARALLEL:
 			{
-			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0); }//floor
-			if ((skipCeil != 1)) { RenderSourceSlopeWTile(x, y, t, Water, 1); }
+			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeWTile(x, y, t, Water, 1, SURFACE_CEIL, 0); }
 			break;
 			}
 			case SLOPE_BOTH_OPPOSITE:
 			{
-			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0); }//floor
-			if ((skipCeil != 1)) { RenderSourceSlopeETile(x, y, t, Water, 1); }
+			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeETile(x, y, t, Water, 1, SURFACE_CEIL, 0); }
 			break;
 			}
 			case SLOPE_FLOOR_ONLY:
 			{
-			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0); }//floor
-			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+			if (skipFloor != 1) { RenderSourceSlopeWTile(x, y, t, Water, 0, SURFACE_FLOOR, 0); }//floor
+			if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 			break;
 			}
 			case SLOPE_CEILING_ONLY:
 			{
-			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-			if ((skipCeil != 1)) { RenderSourceSlopeWTile(x, y, t, Water, 1); }
+			if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+			if ((skipCeil != 1)) { RenderSourceSlopeWTile(x, y, t, Water, 1, SURFACE_CEIL, 0); }
 			break;
 			}
 		}
@@ -289,26 +387,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						   {
 						   case SLOPE_BOTH_PARALLEL:
 						   {
-													   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0); }//floor
-													   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													   break;
 						   }
 						   case SLOPE_BOTH_OPPOSITE:
 						   {
-													   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0); }//floor
-													   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													   break;
 						   }
 						   case SLOPE_FLOOR_ONLY:
 						   {
-													if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0); }//floor
-													if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						   if (skipFloor != 1) { RenderSourceValleyNWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 													break;
 						   }
 						   case SLOPE_CEILING_ONLY:
 						   {
-													  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-													  if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+						   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						   }
 						   }
@@ -320,26 +418,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						   {
 						   case SLOPE_BOTH_PARALLEL:
 						   {
-							if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0); }//floor
-							if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1, SURFACE_CEIL); }
 							break;
 						   }
 						   case SLOPE_BOTH_OPPOSITE:
 						   {
-							if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0); }//floor
-							if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 							break;
 						   }
 						   case SLOPE_FLOOR_ONLY:
 						   {
-							if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0); }//floor
-							if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						   if (skipFloor != 1) { RenderSourceValleyNETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 							break;
 						   }
 						   case SLOPE_CEILING_ONLY:
 						   {
-								if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }//floor
-								if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1, SURFACE_CEIL); }
 								break;
 						   }
 						   }
@@ -351,26 +449,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						   {
 						   case SLOPE_BOTH_PARALLEL:
 						   {
-													   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0); }//floor
-													   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													   break;
 						   }
 						   case SLOPE_BOTH_OPPOSITE:
 						   {
-													   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0); }//floor
-													   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													   break;
 						   }
 						   case SLOPE_FLOOR_ONLY:
 						   {
-													if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0); }//floor
-													if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						   if (skipFloor != 1) { RenderSourceValleySETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 													break;
 						   }
 						   case SLOPE_CEILING_ONLY:
 						   {
-													  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-													  if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+						   if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						   }
 						   }
@@ -382,26 +480,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						   {
 						   case SLOPE_BOTH_PARALLEL:
 						   {
-													   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0); }//floor
-													   if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													   break;
 						   }
 						   case SLOPE_BOTH_OPPOSITE:
 						   {
-													   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0); }//floor
-													   if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													   break;
 						   }
 						   case SLOPE_FLOOR_ONLY:
 						   {
-													if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0); }//floor
-													if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						   if (skipFloor != 1) { RenderSourceValleySWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 													break;
 						   }
 						   case SLOPE_CEILING_ONLY:
 						   {
-													  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-													  if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+						   if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+						   if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						   }
 						   }
@@ -413,26 +511,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						  {
 						  case SLOPE_BOTH_PARALLEL:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeSETile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeSETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_BOTH_OPPOSITE:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeNWTile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeNWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_FLOOR_ONLY:
 						  {
-												   if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0); }//floor
-												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						  if (skipFloor != 1) { RenderSourceRidgeSETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 												   break;
 						  }
 						  case SLOPE_CEILING_ONLY:
 						  {
-													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }//floor
-													 if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceValleySETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													 break;
 						  }
 						  }
@@ -444,26 +542,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						  {
 						  case SLOPE_BOTH_PARALLEL:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeSWTile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeSWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_BOTH_OPPOSITE:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeNETile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeNETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_FLOOR_ONLY:
 						  {
-												   if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0); }//floor
-												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						  if (skipFloor != 1) { RenderSourceRidgeSWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 												   break;
 						  }
 						  case SLOPE_CEILING_ONLY:
 						  {
-													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-													 if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+						  if ((skipCeil != 1)) { RenderSourceValleySWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													 break;
 						  }
 						  }
@@ -475,26 +573,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						  {
 						  case SLOPE_BOTH_PARALLEL:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeNWTile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeNWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_BOTH_OPPOSITE:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeSETile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeSETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_FLOOR_ONLY:
 						  {
-												   if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0); }//floor
-												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						  if (skipFloor != 1) { RenderSourceRidgeNWTile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 												   break;
 						  }
 						  case SLOPE_CEILING_ONLY:
 						  {
-													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-													 if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+						  if ((skipCeil != 1)) { RenderSourceValleyNWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													 break;
 						  }
 						  }
@@ -506,26 +604,26 @@ void RenderSourceTile(int game, int x, int y, tile &t, short Water, short invert
 						  {
 						  case SLOPE_BOTH_PARALLEL:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeNETile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeNETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_BOTH_OPPOSITE:
 						  {
-													  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0); }//floor
-													  if ((skipCeil != 1)) { RenderSourceRidgeSWTile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceRidgeSWTile(x, y, t, Water, 1, SURFACE_CEIL); }
 													  break;
 						  }
 						  case SLOPE_FLOOR_ONLY:
 						  {
-												   if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0); }//floor
-												   if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1); }	//ceiling
+						  if (skipFloor != 1) { RenderSourceRidgeNETile(x, y, t, Water, 0, SURFACE_FLOOR); }//floor
+						  if ((skipCeil != 1)) { RenderSourceOpenTile(x, y, t, Water, 1, SURFACE_CEIL); }	//ceiling
 												   break;
 						  }
 						  case SLOPE_CEILING_ONLY:
 						  {
-													 if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0); }	//floor
-													 if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1); }
+						  if (skipFloor != 1) { RenderSourceOpenTile(x, y, t, Water, 0, SURFACE_FLOOR); }	//floor
+						  if ((skipCeil != 1)) { RenderSourceValleyNETile(x, y, t, Water, 1, SURFACE_CEIL); }
 													 break;
 						  }
 						  }
@@ -938,7 +1036,8 @@ void RenderSourceSolidTile(int x, int y, tile &t, short Water)
 ///////*			fprintf(MAPFILE, "\tsolid\n");
 //////			fprintf(MAPFILE, "\t{\n");
 //////			fprin*/tf(MAPFILE, "\t\t\"id\" \"%d\"\n",PrimitiveCount++);
-			RenderSourceCuboid(x,y,t,Water,-2,CEILING_HEIGHT+1);
+		    StoreTileName(x, y, SURFACE_WALL, 0);
+			RenderSourceCuboid(x,y,t,Water,-2,CEILING_HEIGHT+1,SURFACE_WALL);
 //////			//Plane goes here Points are clockwise as you face the plane
 //////			//East Face
 //////			int BLeftX = t.tileX*BrushSizeX+t.DimX*BrushSizeX;
@@ -1068,6 +1167,7 @@ void Plane(int index, int face, int BLeftX, int BLeftY, int BLeftZ, int TLeftX, 
 
 void WallTexture(int face, tile t)
 {
+float Reverse=1;
 int wallTexture;
 float uAx_1=0;
 float uAx_2=1;
@@ -1154,6 +1254,13 @@ int ceilOffset = 0;
 			vAx_3 = -1;
 			vAx_4 = 0;
 			break;
+		case fSELF:
+			{
+			if ((t.tileType == TILE_DIAG_SW) || (t.tileType == TILE_DIAG_NW))
+				{
+				Reverse=-1;
+				}
+			}
 		}
 	if ((wallTexture<0) || (wallTexture >512))
 		{
@@ -1175,7 +1282,7 @@ int ceilOffset = 0;
 
 
 	fprintf(MAPFILE, "\t\t\t\"material\" \"%s\"\n", textureMasters[wallTexture].path);
-	fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[%f %f %f %f] %f\"\n", uAx_1, uAx_2, uAx_3, uAx_4, 0.9375);
+	fprintf(MAPFILE, "\t\t\t\"uaxis\" \"[%f %f %f %f] %f\"\n", uAx_1, uAx_2, uAx_3, uAx_4, Reverse*0.9375);
 	fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[%f %f %f %f] %f\"\n", vAx_1, vAx_2, vAx_3, vAx_4, 0.9375);
 }
 
@@ -1202,7 +1309,7 @@ if ((floorTexture<0) || (floorTexture >512))
 	fprintf(MAPFILE, "\t\t\t\"vaxis\" \"[0 -1 0 0] 0.9375\"\n");
 }
 
-void RenderSourceOpenTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceOpenTile(int x, int y, tile &t, short Water, short invert,int surface)
 {
 	if (t.Render == 1){
 		if (t.isWater == Water)
@@ -1214,33 +1321,39 @@ void RenderSourceOpenTile(int x, int y, tile &t, short Water, short invert)
 				{
 					if (t.BullFrog >0)
 					{
-						RenderSourceCuboid(x,y,t,Water,-16,t.floorHeight);
+					    StoreTileName(x, y, SURFACE_FLOOR,0);
+						RenderSourceCuboid(x,y,t,Water,-16,t.floorHeight,SURFACE_FLOOR);
 					}
 					else
 					{
-						RenderSourceCuboid(x, y, t, Water, -2, t.floorHeight);
+					    StoreTileName(x, y, SURFACE_FLOOR, 0);
+						RenderSourceCuboid(x, y, t, Water, -2, t.floorHeight, SURFACE_FLOOR);
 					}
 
 				}
 				else
 				{
-					RenderSourceCuboid(x, y, t, Water, -8, t.floorHeight);
+				   StoreTileName(x, y, SURFACE_FLOOR, 0);
+				   RenderSourceCuboid(x, y, t, Water, -8, t.floorHeight, SURFACE_FLOOR);
 				}
 
 			}
 			else
 			{
+			    StoreTileName(x, y, SURFACE_CEIL, 0);
 				//Ceiling version of the tile
-				RenderSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1);
+				RenderSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, SURFACE_CEIL);
 			}
 		}
 	}
 }
 
-void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top)
+void RenderSourceCuboid(int x, int y, tile &t, short Water,int Bottom, int Top,int surface)
 {
+   // StoreTileName(x, y, SURFACE_FLOOR,0);
 	fprintf(MAPFILE, "\tsolid\n");
 	fprintf(MAPFILE, "\t{\n");
+	
 	fprintf(MAPFILE, "\t\t\"id\" \"%d\"\n", PrimitiveCount++);
 
 	//Plane goes here Points are clockwise as you face the plane
@@ -1334,17 +1447,20 @@ void RenderSourceDiagSETile(int x, int y, tile &t, short Water, short invert)
 			if (Water != 1)
 			{
 				//the wall part
+			    StoreTileName(x, y, SURFACE_WALL, 0);
 				RenderSourceDiagSEPortion(-2,CEILING_HEIGHT+1,t);
 
 			}
 			if (t.isWater == Water)
 			{
 				//it's floor
+			    StoreTileName(x, y, SURFACE_FLOOR, 0);
 				RenderSourceDiagNWPortion(-2,t.floorHeight,t);
 			}
 		}
 		else
 		{//it's ceiling
+		    StoreTileName(x, y, SURFACE_CEIL, 0);
 			RenderSourceDiagNWPortion(CEILING_HEIGHT-t.ceilingHeight, CEILING_HEIGHT+1, t);
 		}
 	}
@@ -1361,6 +1477,7 @@ void RenderSourceDiagNWTile(int x, int y, tile &t, short Water, short invert)
 			if (Water != 1)
 			{
 				//It's wall.
+			     StoreTileName(x, y, SURFACE_WALL, 0);
 				RenderSourceDiagNWPortion(- 2, CEILING_HEIGHT + 1, t);
 			}
 
@@ -1368,11 +1485,13 @@ void RenderSourceDiagNWTile(int x, int y, tile &t, short Water, short invert)
 			if (t.isWater == Water)
 			{
 				//it's floor
+			    StoreTileName(x, y, SURFACE_FLOOR, 0);
 				RenderSourceDiagSEPortion(-2, t.floorHeight, t);
 			}
 		}
 		else
 		{//it's ceiling
+		    StoreTileName(x, y, SURFACE_CEIL, 0);
 			RenderSourceDiagSEPortion(CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t);
 		}
 	}
@@ -1388,17 +1507,20 @@ void RenderSourceDiagSWTile(int x, int y, tile &t, short Water, short invert)
 			if (Water != 1)
 			{
 				//Its wall
+			StoreTileName(x, y, SURFACE_WALL, 0);
 				RenderSourceDiagSWPortion(- 2, CEILING_HEIGHT + 1, t);
 			}
 			if (t.isWater == Water)
 			{
 				//it's floor
+			StoreTileName(x, y, SURFACE_FLOOR, 0);
 				RenderSourceDiagNEPortion(-2, t.floorHeight, t);
 			}
 		}
 		else
 		{
 			//its' ceiling.
+		    StoreTileName(x, y, SURFACE_CEIL, 0);
 			RenderSourceDiagNEPortion(CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t);
 		}
 	}
@@ -1414,23 +1536,26 @@ void RenderSourceDiagNETile(int x, int y, tile &t, short Water, short invert)
 
 			if (Water != 1)
 			{
+			StoreTileName(x, y, SURFACE_WALL, 0);
 				RenderSourceDiagNEPortion(-2, CEILING_HEIGHT + 1, t);
 			}
 			if (t.isWater == Water)
 			{
 				//it's floor
+			    StoreTileName(x, y, SURFACE_FLOOR, 0);
 				RenderSourceDiagSWPortion(-2, t.floorHeight, t);
 			}
 		}
 		else
 		{//it's ceiling
+		StoreTileName(x, y, SURFACE_CEIL, 0);
 			RenderSourceDiagSWPortion(CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, t);
 		}
 	}
 	return;
 }
 
-void RenderSourceSlopeNTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceSlopeNTile(int x, int y, tile &t, short Water, short invert, int surface,int part)
 {
 	if (t.Render == 1){
 		if (invert == 0)
@@ -1438,19 +1563,21 @@ void RenderSourceSlopeNTile(int x, int y, tile &t, short Water, short invert)
 			if (t.isWater == Water)
 			{
 			//A floor
+			StoreTileName(x, y, SURFACE_FLOOR, part);
 				RenderSlopedSourceCuboid(x,y,t,Water,-2,t.floorHeight,TILE_SLOPE_N,t.shockSteep,1);
 			}
 		}
 		else
 		{
 		//It's invert
+		    StoreTileName(x, y, SURFACE_CEIL, part);
 			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_N, t.shockSteep, 0);
 		}
 	}
 	return;
 }
 
-void RenderSourceSlopeSTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceSlopeSTile(int x, int y, tile &t, short Water, short invert, int surface, int part)
 {
 	if (t.Render == 1){
 		if (invert == 0)
@@ -1458,19 +1585,21 @@ void RenderSourceSlopeSTile(int x, int y, tile &t, short Water, short invert)
 			if (t.isWater == Water)
 			{
 				//A floor
+			StoreTileName(x, y, SURFACE_FLOOR, part);
 				RenderSlopedSourceCuboid(x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1);
 			}
 		}
 		else
 		{
 			//It's invert
+		StoreTileName(x, y, SURFACE_CEIL, part);
 			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_S, t.shockSteep, 0);
 		}
 	}
 	return;
 }
 
-void RenderSourceSlopeWTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceSlopeWTile(int x, int y, tile &t, short Water, short invert, int surface, int part)
 {
 	if (t.Render == 1){
 		if (invert == 0)
@@ -1478,19 +1607,21 @@ void RenderSourceSlopeWTile(int x, int y, tile &t, short Water, short invert)
 			if (t.isWater == Water)
 			{
 				//A floor
+			StoreTileName(x, y, SURFACE_FLOOR, part);
 				RenderSlopedSourceCuboid(x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1);
 			}
 		}
 		else
 		{
 			//It's invert
+		StoreTileName(x, y, SURFACE_CEIL, part);
 			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_W, t.shockSteep, 0);
 		}
 	}
 	return;
 }
 
-void RenderSourceSlopeETile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceSlopeETile(int x, int y, tile &t, short Water, short invert, int surface, int part)
 {
 	if (t.Render == 1){
 		if (invert == 0)
@@ -1498,12 +1629,14 @@ void RenderSourceSlopeETile(int x, int y, tile &t, short Water, short invert)
 			if (t.isWater == Water)
 			{
 				//A floor
+			StoreTileName(x, y, SURFACE_FLOOR, part);
 				RenderSlopedSourceCuboid(x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1);
 			}
 		}
 		else
 		{
 			//It's invert
+		StoreTileName(x, y, SURFACE_CEIL, part);
 			RenderSlopedSourceCuboid(x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_E, t.shockSteep, 0);
 		}
 	}
@@ -1595,6 +1728,16 @@ void RenderSourceDiagSWPortion(int Bottom, int Top, tile t)
 	Plane(1, fSELF, BLeftX, BLeftY, BLeftZ, TLeftX, TLeftY, TLeftZ, TRightX, TRightY, TRightZ, t,SURFACE_WALL);
 	
 	//Eastern face
+	//BLeftX = (t.tileX + 1)*BrushSizeX;
+	//BLeftY = t.tileY*BrushSizeY;
+	//BLeftZ = Bottom*BrushSizeZ;
+	//TLeftX = (t.tileX + 1)*BrushSizeX;
+	//TLeftY = t.tileY*BrushSizeY;
+	//TLeftZ = Top*BrushSizeZ;
+	//TRightX = (t.tileX + 1)*BrushSizeX;
+	//TRightY = (t.tileY + 1)*BrushSizeY;
+	//TRightZ = Top*BrushSizeZ;
+
 	BLeftX = (t.tileX + 1)*BrushSizeX;
 	BLeftY = t.tileY*BrushSizeY;
 	BLeftZ = Bottom*BrushSizeZ;
@@ -1923,51 +2066,51 @@ if (Floor == 0)
 
 }
 
-void RenderSourceValleyNWTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceValleyNWTile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	int originalTile = t.tileType;
 	t.tileType = TILE_SLOPE_N;
-	RenderSourceSlopeNTile(x, y, t, Water, invert);
+	RenderSourceSlopeNTile(x, y, t, Water, invert,surface,1);
 	t.tileType = TILE_SLOPE_W;
-	RenderSourceSlopeWTile(x, y, t, Water, invert);
+	RenderSourceSlopeWTile(x, y, t, Water, invert,surface,2);
 	t.tileType = originalTile;
 	return;
 }
 
-void RenderSourceValleyNETile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceValleyNETile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	int originalTile = t.tileType;
 	t.tileType = TILE_SLOPE_E;
-	RenderSourceSlopeETile(x, y, t, Water, invert);
+	RenderSourceSlopeETile(x, y, t, Water, invert,surface,1);
 	t.tileType = TILE_SLOPE_N;
-	RenderSourceSlopeNTile(x, y, t, Water, invert);
+	RenderSourceSlopeNTile(x, y, t, Water, surface, invert, 2);
 	t.tileType = originalTile;
 	return;
 }
 
-void RenderSourceValleySWTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceValleySWTile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	int originalTile = t.tileType;
 	t.tileType = TILE_SLOPE_W;
-	RenderSourceSlopeWTile(x, y, t, Water, invert);
+	RenderSourceSlopeWTile(x, y, t, Water, invert, surface, 1);
 	t.tileType = TILE_SLOPE_S;
-	RenderSourceSlopeSTile(x, y, t, Water, invert);
+	RenderSourceSlopeSTile(x, y, t, Water, invert, surface, 2);
 	t.tileType = originalTile;
 	return;
 }
 
-void RenderSourceValleySETile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceValleySETile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	int originalTile = t.tileType;
 	t.tileType = TILE_SLOPE_E;
-	RenderSourceSlopeETile(x, y, t, Water, invert);
+	RenderSourceSlopeETile(x, y, t, Water, invert, surface,1);
 	t.tileType = TILE_SLOPE_S;
-	RenderSourceSlopeSTile(x, y, t, Water, invert);
+	RenderSourceSlopeSTile(x, y, t, Water, invert, surface,2);
 	t.tileType = originalTile;
 	return;
 }
 
-void RenderSourceRidgeNWTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceRidgeNWTile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 
 	if (t.Render == 1)
@@ -1977,23 +2120,23 @@ void RenderSourceRidgeNWTile(int x, int y, tile &t, short Water, short invert)
 			{//consists of a slope n and a slope w
 				if (t.isWater == Water)
 				{
-					RenderSourceSlopeNTile(x,y,t,Water,invert);
-					RenderSourceSlopeWTile(x, y, t, Water, invert);
+					RenderSourceSlopeNTile(x,y,t,Water,invert,surface,1);
+					RenderSourceSlopeWTile(x, y, t, Water, invert, surface, 2);
 				}
 			}
 		else
 			{
 			//made of upper slope e and upper slope s
 
-			RenderSourceSlopeETile(x, y, t, Water, invert);
-			RenderSourceSlopeSTile(x, y, t, Water, invert);
+			RenderSourceSlopeETile(x, y, t, Water, invert, surface, 1);
+			RenderSourceSlopeSTile(x, y, t, Water, invert, surface, 2);
 			}
 
 	}
 	return;
 }
 
-void RenderSourceRidgeNETile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceRidgeNETile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	//consists of a slope n and a slope e
 
@@ -2001,21 +2144,21 @@ void RenderSourceRidgeNETile(int x, int y, tile &t, short Water, short invert)
 		if (invert == 0){
 			if (t.isWater == Water)
 			{
-				RenderSourceSlopeNTile(x, y, t, Water, invert);
-				RenderSourceSlopeETile(x, y, t, Water, invert);
+			RenderSourceSlopeNTile(x, y, t, Water, invert, surface, 1);
+			RenderSourceSlopeETile(x, y, t, Water, invert, surface, 2);
 			}
 		}
 		else
 		{//invert is south and west slopes
-			RenderSourceSlopeSTile(x, y, t, Water, invert);
-			RenderSourceSlopeWTile(x, y, t, Water, invert);
+		RenderSourceSlopeSTile(x, y, t, Water, invert, surface, 1);
+		RenderSourceSlopeWTile(x, y, t, Water, invert, surface, 2);
 		}
 	}
 
 	return;
 }
 
-void RenderSourceRidgeSWTile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceRidgeSWTile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	//consists of a slope s and a slope w
 	if (t.Render == 1)
@@ -2024,22 +2167,22 @@ void RenderSourceRidgeSWTile(int x, int y, tile &t, short Water, short invert)
 		{
 			if (t.isWater == Water)
 			{
-				RenderSourceSlopeSTile(x, y, t, Water, invert);
-				RenderSourceSlopeWTile(x, y, t, Water, invert);
+			RenderSourceSlopeSTile(x, y, t, Water, invert, surface, 1);
+			RenderSourceSlopeWTile(x, y, t, Water, invert, surface, 2);
 			}
 		}
 	}
 	else
 	{	//invert is n and w slopes
 		//render a ceiling version of this tile
-		RenderSourceSlopeNTile(x, y, t, Water, invert);
-		RenderSourceSlopeWTile(x, y, t, Water, invert);
+	RenderSourceSlopeNTile(x, y, t, Water, invert, surface, 1);
+	RenderSourceSlopeWTile(x, y, t, Water, invert, surface, 2);
 
 	}
 	return;
 }
 
-void RenderSourceRidgeSETile(int x, int y, tile &t, short Water, short invert)
+void RenderSourceRidgeSETile(int x, int y, tile &t, short Water, short invert, int surface)
 {
 	//consists of a slope s and a slope e
 	//done
@@ -2050,16 +2193,16 @@ void RenderSourceRidgeSETile(int x, int y, tile &t, short Water, short invert)
 		{
 			if (t.isWater == Water)
 			{
-				RenderSourceSlopeSTile(x, y, t, Water, invert);
-				RenderSourceSlopeETile(x, y, t, Water, invert);
+			RenderSourceSlopeSTile(x, y, t, Water, invert, surface, 1);
+			RenderSourceSlopeETile(x, y, t, Water, invert, surface, 2);
 			}
 		}
 		else
 		{//invert is n w
 			//render a ceiling version of this tile
 			//top and bottom faces move up
-			RenderSourceSlopeNTile(x, y, t, Water, invert);
-			RenderSourceSlopeWTile(x, y, t, Water, invert);
+		RenderSourceSlopeNTile(x, y, t, Water, invert, surface, 1);
+		RenderSourceSlopeWTile(x, y, t, Water, invert, surface, 2);
 		}
 	}
 	return;

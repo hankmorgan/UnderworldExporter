@@ -18,6 +18,8 @@
 #include "gamegraphics.h"
 #include "Conversations.h"
 #include "fbxExport.h"
+#include "Unity.h"
+
 
 using namespace std;
 
@@ -118,7 +120,7 @@ uw1_graphics_file[3] = "Data\\W64.tr";// - Wall textures 64x64\n");
 uw1_graphics_file[4] = "Data\\3DWIN.GR";
 uw1_graphics_file[5] = "Data\\ANIMO.GR";
 uw1_graphics_file[6] = "Data\\ARMOR_F.GR";
-uw1_graphics_file[7] = "Data\\ARMOR_G.GR";
+uw1_graphics_file[7] = "Data\\ARMOR_M.GR";
 uw1_graphics_file[8] = "Data\\BODIES.GR";
 uw1_graphics_file[9] = "Data\\BUTTONS.GR";
 uw1_graphics_file[10] = "Data\\CHAINS.GR";
@@ -161,7 +163,7 @@ uw2_graphics_file[0] = "Data\\T64.tr";//uw2 textures
 uw2_graphics_file[1] = "Data\\3DWIN.GR";
 uw2_graphics_file[2] = "Data\\ANIMO.GR";
 uw2_graphics_file[3] = "Data\\ARMOR_F.GR";
-uw2_graphics_file[4] = "Data\\ARMOR_G.GR";
+uw2_graphics_file[4] = "Data\\ARMOR_M.GR";
 uw2_graphics_file[5] = "Data\\BODIES.GR";
 uw2_graphics_file[6] = "Data\\BUTTONS.GR";
 uw2_graphics_file[7] = "Data\\CHAINS.GR";
@@ -427,7 +429,7 @@ if (true)
 				case SHOCK:
 					printf("Enter a filename for repacking into (%s\\[filename].data)\n>", path_shock);
 					scanf("%s", TempOutFileName);
-					sprintf_s(OutFileName, 255, "%s\\res\\data\\%s.ark", path_target_platform, TempOutFileName);
+					sprintf_s(OutFileName, 255, "%s\\res\\data\\%s.ark", path_shock, TempOutFileName);
 					break;
 				default:
 					printf("\nInvalid game for repacking. Goodbye");
@@ -485,7 +487,7 @@ if (true)
 					}
 				else if (graphics_file_no <= 35)
 					{
-					if (graphics_file_no == 27)//Panels
+					if (graphics_file_no == 28)//Panels
 						{
 						panels=1;
 						}
@@ -1159,7 +1161,8 @@ void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char fileP
 			 break;
 			}
 		case FBX_MODE:
-			CleanUp(LevelInfo, game); //Get rid of unneeded tiles.
-			RenderFBXLevel(LevelInfo,objList,game);
+			RenderUnityObjectList(game,LevelInfo,objList);
+			//CleanUp(LevelInfo, game); //Get rid of unneeded tiles.
+			//RenderFBXLevel(LevelInfo,objList,game);
 		}
 	}

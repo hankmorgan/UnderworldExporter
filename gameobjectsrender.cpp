@@ -1701,7 +1701,7 @@ void RenderEntityParticle(int game, float x, float y, float z, ObjectItem &curro
 
 
 void RenderEntityActivator(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-{
+{//Something in the game world that can fire off events
 
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 	fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:mover_button");

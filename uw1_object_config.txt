@@ -390,7 +390,7 @@
 389 0 0 0 entity 42 a_change_terrain_trap func_static 1 uw1_object_389.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_389.tga
 390 0 0 0 model 43 a_spelltrap models/darkmod/decorative/hourglass.ase 1 uw1_object_390.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_390.tga
 391 0 0 0 model 44 a_create_object_trap models/darkmod/decorative/hourglass.ase 1 uw1_object_391.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_391.tga
-392 0 0 0 ignore 45 a_door_trap atdm:target_changelockstate 1 uw1_object_392.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_392.tga
+392 0 0 0 model 45 a_door_trap atdm:target_changelockstate 1 uw1_object_392.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_392.tga
 393 0 0 0 model 46 a_ward_trap models/darkmod/decorative/hourglass.ase 1 uw1_object_393.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_393.tga
 394 0 0 0 model 47 a_tell_trap models/darkmod/decorative/hourglass.ase 1 uw1_object_394.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_394.tga
 395 0 0 0 model 48 a_delete_object_trap models/darkmod/decorative/hourglass.ase 1 uw1_object_395.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 guis/assets/hud/inventory_icons/uw1_object_395.tga

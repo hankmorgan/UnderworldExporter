@@ -152,7 +152,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 		case UW_GRAPHICS_BITMAPS:	//BYT
 			if (useTGA==1)
 				{
-				writeTGA(textureFile, 0, 320, 200, 0, pal,OutFileName,1);
+				writeTGA(textureFile, 0, 320, 200, 0, pal,OutFileName,ALPHA);
 				}
 			else
 				{
@@ -219,7 +219,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						textureOffset = textureOffset + 5;
 						if (useTGA==1)
 							{
-							writeTGA(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);
+							writeTGA(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName, ALPHA);
 							}
 						else
 							{
@@ -244,7 +244,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg,4);
 						if (useTGA==1)
 							{
-							writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName,1);
+							writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName, ALPHA);
 							}
 						else
 							{
@@ -268,7 +268,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						//outputImg = new unsigned char[BitMapWidth*BitMapHeight];
 						if (useTGA==1)
 							{
-							writeTGA(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName,1);
+							writeTGA(imgNibbles, 0, BitMapWidth, BitMapHeight, i, auxpal, OutFileName, ALPHA);
 							}
 						else
 							{
@@ -675,7 +675,15 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 				printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
 				printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 				//textureOffset = 1;//textureOffset + 1;
-				writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+				if (useTGA == 1)
+					{
+					writeTGA(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName,0);
+					}
+				else
+					{
+					writeBMP(textureFile, textureOffset, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+					}
+				
 				//break;
 			//}
 		}

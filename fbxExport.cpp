@@ -2322,8 +2322,8 @@ void CreateFBXMaterials(FbxScene*& gScene, int game)
 		gTexture->SetMaterialUse(FbxFileTexture::eModelMaterial);
 		gTexture->SetSwapUV(false);
 		gTexture->SetTranslation(0.0, 0.0);
-		gTexture->SetScale(1, 4);
-		gTexture->SetRotation(45.0, 0.0);
+		gTexture->SetScale(1, 1);
+		gTexture->SetRotation(0, 0.0);
 		gTexture->SetWrapMode(FbxTexture::EWrapMode::eRepeat, FbxTexture::EWrapMode::eRepeat);
 
 		gMaterial->Diffuse.ConnectSrcObject(gTexture);
