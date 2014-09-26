@@ -1,0 +1,84 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class a_do_trap_platform : MonoBehaviour {
+
+	private GameObject triggerObj;
+	private ObjectVariables Var;
+	private UILabel MessageLog;
+
+	public int state;
+
+
+	// Use this for initialization
+	void Start () {
+		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+		Var=GetComponent<ObjectVariables>();
+		triggerObj=GameObject.Find (Var.trigger);
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	if (triggerObj = null)
+		{//For when objects are added at run time.
+			triggerObj=GameObject.Find (Var.trigger);
+		}
+	}
+
+	public void Activate()
+	{
+		GameObject platformTile= Var.FindTile (Var.triggerX,Var.triggerY,1);
+		//Do what it needs to do.
+		MessageLog.text=MessageLog.text + name + "\n activated @ x=" + Var.triggerX + " y=" + Var.triggerY + "\n";
+		if (state==8)
+		{
+			//Move the tile to the bottom
+			MessageLog.text=MessageLog.text + platformTile.name + " reset";
+			//platformTile.transform.Translate(Vector3.up())
+			Debug.Log("PreMoveTileStart");
+			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.15f*8f,0f) ,0.5f));
+			Debug.Log("PostMoveTileStart");
+			//platformTile.transform.position = new Vector3(0f,0f,1.0f);
+			state = 0;
+		}
+		else
+		{
+			//move the tile up one step.
+			MessageLog.text=MessageLog.text  + platformTile.name +  " up";
+			//platformTile.transform.position = new Vector3(0f,0f,1.0f);
+			//platformTile.transform.position.z += 1.22;
+			//Debug.Log("PreMoveTileStart");
+			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.15f,0f) ,0.5f));
+			//Debug.Log("PostMoveTileStart");
+			//MoveTile (platformTile.transform, Vector3(0.0f,0.0f,1.2f), 1.0f);
+			state++;
+		}
+		if (triggerObj !=null)
+		{
+			Debug.Log ("Triggering " + Var.trigger);
+			triggerObj.SendMessage ("Activate");
+		}
+	}
+
+	IEnumerator MoveTile(Transform platform, Vector3 dist, float traveltime)
+		{
+		//Debug.Log("MoveTileStart");
+		float rate = 1.0f/traveltime;
+		float index = 0.0f;
+		Vector3 StartPos = platform.position;
+		Vector3 EndPos = StartPos + dist;
+		//Debug.Log(StartPos);
+		//Debug.Log (EndPos);
+		while (index <1.0f)
+			{
+			platform.position = Vector3.Lerp (StartPos,EndPos,index);
+			index += rate * Time.deltaTime;
+			//Debug.Log (index);
+			//WaitForSeconds(0.1f);
+			//yield return new WaitForSeconds (0.1f);
+			yield return new WaitForSeconds(0.01f);
+			}
+		platform.position = EndPos;
+		//Debug.Log("MoveTileEnd");
+		}
+}

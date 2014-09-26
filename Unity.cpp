@@ -344,11 +344,11 @@ void RenderUnityEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem 
 				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 				if (currobj.link !=0)
 					{
-					fprintf(UNITY_FILE, "\n\tCreateUWScriptObjects(myObj,0,0,\"%s\",\"a_do_trap_platform\",0);", UniqueObjectName(objList[currobj.link]));
+					fprintf(UNITY_FILE, "\n\tCreateUWScriptObjects(myObj,0,0,\"%s\",\"a_do_trap_platform\",%d);", UniqueObjectName(objList[currobj.link]), currobj.flags);
 					}
 				else
 					{
-					fprintf(UNITY_FILE, "\n\tCreateUWScriptObjects(myObj,0,0,\"\",\"a_do_trap_platform\",0);");
+					fprintf(UNITY_FILE, "\n\tCreateUWScriptObjects(myObj,0,0,\"\",\"a_do_trap_platform\",%d);",currobj.flags);
 					}
 
 				break;
@@ -855,11 +855,11 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				switch (currobj.quality)
 					{
 						case 0x02://Camera
-							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d);",currobj.quality); break;}
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);",currobj.quality,currobj.flags); break;}
 						case 0x03://Platform
-							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d);", currobj.quality); break; }
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						case 0x18:	//bullfrog
-							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj,%d);", currobj.quality); break; }
+							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						default:
 							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj);"); break; }
 					}
