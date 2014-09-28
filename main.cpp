@@ -265,9 +265,10 @@ if (true)
 	printf("%d) Critter Art Extract\n", CRITTER_EXTRACT_MODE);
 	printf("%d) Cutscene Art Extract\n", CUTSCENE_EXTRACT_MODE);
 	printf("%d) FBX Export\n", FBX_MODE);
+	printf("%d) Unity script generation\n", UNITY_MODE);
 	printf("Please select a mode.\n>");
 	scanf("%d", &mode);
-	if ((mode < 0) || (mode > 11))
+	if ((mode < 0) || (mode > 12))
 	{
 		printf("Invalid input. Bye.");
 		return 0;
@@ -281,6 +282,7 @@ if (true)
 	case SCRIPT_BUILD_MODE:
 	case REPACK_MODE:
     case FBX_MODE:
+    case UNITY_MODE:
 		{
 		switch (game)
 			{
@@ -749,6 +751,7 @@ switch (game)
 		case SCRIPT_BUILD_MODE:
 		case SOURCE_MODE:
 		case FBX_MODE:
+		case UNITY_MODE:
 			printf("\n============================Level %d=========================\n", levelNo);
 			exportMaps(game, mode, levelNo, OutFileName,GameFilePath);
 			break;
@@ -1161,8 +1164,11 @@ void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char fileP
 			 break;
 			}
 		case FBX_MODE:
-			RenderUnityObjectList(game,LevelInfo,objList);
-			//CleanUp(LevelInfo, game); //Get rid of unneeded tiles.
-			//RenderFBXLevel(LevelInfo,objList,game);
+			CleanUp(LevelInfo, game); //Get rid of unneeded tiles.
+			RenderFBXLevel(LevelInfo,objList,game);
+			break;
+		case UNITY_MODE:
+			RenderUnityObjectList(game,LevelNo,LevelInfo,objList);
+			break;
 		}
 	}

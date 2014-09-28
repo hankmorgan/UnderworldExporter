@@ -18,6 +18,7 @@ public class GoblinAI : MonoBehaviour {
 	private GameObject player;
 	private Animator anim;
 	private int currentState=-1;
+	private bool followPlayer=false;
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -34,12 +35,14 @@ public class GoblinAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//Vector3 target = player.transform.position;
-		//float angle = Quaternion.Angle(transform.rotation, player.transform.rotation);
 
-		//Vector3 dir = (player.transform.position - transform.position).normalized;
-		//float direction = Vector3.Dot(dir, transform.forward);
-		//agent.SetDestination(target);
+		//float angle = Quaternion.Angle(transform.rotation, player.transform.rotation);
+		if (followPlayer==true)
+		{
+			//Vector3 target = player.transform.position;
+			agent.SetDestination(player.transform.position);
+		}
+
 
 		Vector3 direction = player.transform.position - transform.position;
 		float angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
@@ -164,6 +167,32 @@ public class GoblinAI : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	void OnMouseDown()
+	{
+		switch (ObjectVariables.InteractionMode)
+		{
+		case 0://Options
+			MessageLog.text = "Nothing will happen in options mode " + name;
+			break;
+		case 1://Talk
+			MessageLog.text = "You can't talk to " + name;
+			break;
+		case 2://Pickup
+			MessageLog.text = "You pick up a " + name;
+			break;
+		case 4://Look
+			MessageLog.text = "You see a " + name;
+			break;
+		case 8://Attack
+			MessageLog.text = "You attack a " + name;
+			followPlayer=true;
+			break;
+		case 16://Use
+			MessageLog.text = "You use a " + name;
+			break;
 		}
 	}
 }

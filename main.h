@@ -110,6 +110,7 @@ extern int CEILING_HEIGHT;
 #define CRITTER_EXTRACT_MODE 9
 #define CUTSCENE_EXTRACT_MODE 10
 #define FBX_MODE 11
+#define UNITY_MODE 12
 
 
 //UW2 Ark block numbers

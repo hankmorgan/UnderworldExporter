@@ -3,5 +3,5 @@
 #include "tilemap.h"
 #include "gameobjects.h"
 
-void RenderUnityObjectList(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void RenderUnityObjectList(int game, int Level, tile LevelInfo[64][64], ObjectItem objList[1600]);
 #endif

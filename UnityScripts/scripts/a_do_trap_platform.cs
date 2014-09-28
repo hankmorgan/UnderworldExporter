@@ -6,10 +6,7 @@ public class a_do_trap_platform : MonoBehaviour {
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
-
-	public int state;
-
-
+	//public int state;
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -19,7 +16,7 @@ public class a_do_trap_platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (triggerObj = null)
+	if ((triggerObj = null) && (Var.trigger != ""))
 		{//For when objects are added at run time.
 			triggerObj=GameObject.Find (Var.trigger);
 		}
@@ -27,31 +24,34 @@ public class a_do_trap_platform : MonoBehaviour {
 
 	public void Activate()
 	{
+
 		GameObject platformTile= Var.FindTile (Var.triggerX,Var.triggerY,1);
-		//Do what it needs to do.
+		//Find the object that called me
+
 		MessageLog.text=MessageLog.text + name + "\n activated @ x=" + Var.triggerX + " y=" + Var.triggerY + "\n";
-		if (state==8)
+		if (Var.state==8)
 		{
 			//Move the tile to the bottom
-			MessageLog.text=MessageLog.text + platformTile.name + " reset";
+			MessageLog.text=MessageLog.text + platformTile.name + " reset " + Var.state;
 			//platformTile.transform.Translate(Vector3.up())
-			Debug.Log("PreMoveTileStart");
+			//Debug.Log("PreMoveTileStart");
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.15f*8f,0f) ,0.5f));
-			Debug.Log("PostMoveTileStart");
+			//Debug.Log("PostMoveTileStart");
 			//platformTile.transform.position = new Vector3(0f,0f,1.0f);
-			state = 0;
+			Var.state = 1;
 		}
 		else
 		{
 			//move the tile up one step.
-			MessageLog.text=MessageLog.text  + platformTile.name +  " up";
+			MessageLog.text=MessageLog.text  + platformTile.name +  " up " + Var.state;
 			//platformTile.transform.position = new Vector3(0f,0f,1.0f);
 			//platformTile.transform.position.z += 1.22;
 			//Debug.Log("PreMoveTileStart");
 			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.15f,0f) ,0.5f));
 			//Debug.Log("PostMoveTileStart");
 			//MoveTile (platformTile.transform, Vector3(0.0f,0.0f,1.2f), 1.0f);
-			state++;
+			//triggeringObject.state++;
+			Var.state++;
 		}
 		if (triggerObj !=null)
 		{

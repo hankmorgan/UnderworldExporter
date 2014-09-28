@@ -3,12 +3,15 @@ using System.Collections;
 
 public class ObjectVariables : MonoBehaviour {
 
+	public static int InteractionMode;
 	public int triggerX;
 	public int triggerY;
 	public int Hidden;//Is the object visible
-
+	public int state;
 	public string trigger;
 	private GameObject level;
+	//public string triggeringObject;
+
 	// Use this for initialization
 	void Start () {
 		level=GameObject.Find("uw1_level0");
@@ -17,6 +20,11 @@ public class ObjectVariables : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	public GameObject findDoor(int x, int y)
+	{//Finds a door in the tile pointed to by two coordinates.
+		Debug.Log ("trying to find door called door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
+		return GameObject.Find ("door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
 	}
 
 	public GameObject FindTile(int x, int y, int surface)
@@ -70,5 +78,10 @@ public class ObjectVariables : MonoBehaviour {
 		}
 		}
 		return tileName;
+	}
+
+	public static string LookupString(int BlockNo, int StringNo)
+	{//Finds the string
+		return BlockNo + "_" + StringNo;
 	}
 }

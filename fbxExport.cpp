@@ -795,10 +795,10 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 void RenderFBXTile(FbxScene*& gScene,int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 	{
-	if (PrimCount != 0)
-		{
-return;
-		}
+//	if (PrimCount != 0)
+//		{
+//return;
+//		}
 	//Picks the tile to render based on tile type/flags.
 	switch (t.tileType)
 		{
@@ -1308,10 +1308,10 @@ if (false)
 
 		//East
 		RenderFBXPlane(gScene, x, y, t, Water, Bottom, Top, "EAST", fEAST, SURFACE_WALL,
-			(t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ,
-			(t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ,
 			(t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ,
 			(t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ,
+			(t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ,
+			(t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ,
 			lNormalXPos
 			);
 
@@ -1356,23 +1356,30 @@ FbxVector4 lControlPoint7(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bot
 // Create control points.
 lMesh->InitControlPoints(24);
 FbxVector4* lControlPoints = lMesh->GetControlPoints();
+//These directions are wrongly labeled???!!!
 //Top
 lControlPoints[0] = lControlPoint0;
 lControlPoints[1] = lControlPoint1;
 lControlPoints[2] = lControlPoint2;
 lControlPoints[3] = lControlPoint3;
 
-//Bottom
-lControlPoints[4] = lControlPoint1;
-lControlPoints[5] = lControlPoint5;
-lControlPoints[6] = lControlPoint6;
-lControlPoints[7] = lControlPoint2;
+//was Bottom is probably east.
+//lControlPoints[4] = lControlPoint1;
+//lControlPoints[5] = lControlPoint5;
+//lControlPoints[6] = lControlPoint6;
+//lControlPoints[7] = lControlPoint2;
+lControlPoints[4] = lControlPoint5;
+lControlPoints[5] = lControlPoint6;
+lControlPoints[6] = lControlPoint2;
+lControlPoints[7] = lControlPoint1;
 
-//East
+
+//not East?
 lControlPoints[8] = lControlPoint5;
 lControlPoints[9] = lControlPoint4;
 lControlPoints[10] = lControlPoint7;
 lControlPoints[11] = lControlPoint6;
+
 
 //West
 lControlPoints[12] = lControlPoint7;
@@ -1391,6 +1398,7 @@ lControlPoints[20] = lControlPoint4;
 lControlPoints[21] = lControlPoint5;
 lControlPoints[22] = lControlPoint1;
 lControlPoints[23] = lControlPoint0;
+
 
 // We want to have one normal for each vertex (or control point),
 // so we set the mapping mode to eByControlPoint.
@@ -1443,15 +1451,28 @@ FBX_ASSERT(lUVDiffuseElement != NULL);
 lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
 
+//Wall vectors
 FbxVector2 lVectors0(0, 0);
 FbxVector2 lVectors1(1, 0);
-FbxVector2 lVectors2(1, 1);
-FbxVector2 lVectors3(0, 1);
+FbxVector2 lVectors2(1, 4);
+FbxVector2 lVectors3(0, 4);
+//floor vectors
+FbxVector2 lVectors4(0, 0);
+FbxVector2 lVectors5(1, 0);
+FbxVector2 lVectors6(1, 1);
+FbxVector2 lVectors7(0, 1);
 
 lUVDiffuseElement->GetDirectArray().Add(lVectors0);
 lUVDiffuseElement->GetDirectArray().Add(lVectors1);
 lUVDiffuseElement->GetDirectArray().Add(lVectors2);
 lUVDiffuseElement->GetDirectArray().Add(lVectors3);
+lUVDiffuseElement->GetDirectArray().Add(lVectors4);
+lUVDiffuseElement->GetDirectArray().Add(lVectors5);
+lUVDiffuseElement->GetDirectArray().Add(lVectors6);
+lUVDiffuseElement->GetDirectArray().Add(lVectors7);
+
+//FbxGeometryElementUV* lUVElement = lMesh->GetElementUV(0);
+//lUVElement->
 
 //Now we have set the UVs as eIndexToDirect reference and in eByPolygonVertex  mapping mode
 //we must update the size of the index array.
@@ -1462,15 +1483,28 @@ for (i = 0; i < 6; i++)
 	{
 	// all faces of the cube have the same texture
 	lMesh->BeginPolygon(-1, -1, -1, false);
-
-	for (j = 0; j < 4; j++)
+	if ((i == 0) || (i==2))//Top and bottom
 		{
-		// Control point index
-		lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
-
-		// update the index array of the UVs that map the texture to the face
-		lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
+		for (j = 4; j < 8; j++)
+			{
+			// Control point index
+			lMesh->AddPolygon(lPolygonVertices[i * 4 + (j-4)]);
+			
+			// update the index array of the UVs that map the texture to the face
+			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + (j-4), j);
+			}
 		}
+	else
+		{//east,west,north,south
+		for (j = 0; j < 4; j++)
+			{
+			// Control point index
+			lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
+			// update the index array of the UVs that map the texture to the face
+			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
+			}
+		}
+	
 
 	lMesh->EndPolygon();
 	}
@@ -2075,33 +2109,48 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 	lMesh->InitControlPoints(24);
 	FbxVector4* lControlPoints = lMesh->GetControlPoints();
 
-	
+	//These directions are wrongly labeled???!!!
+	//Top
 	lControlPoints[0] = lControlPoint0;
 	lControlPoints[1] = lControlPoint1;
 	lControlPoints[2] = lControlPoint2;
 	lControlPoints[3] = lControlPoint3;
 
+	//was Bottom is probably east.
+	//lControlPoints[4] = lControlPoint1;
+	//lControlPoints[5] = lControlPoint5;
+	//lControlPoints[6] = lControlPoint6;
+	//lControlPoints[7] = lControlPoint2;
+	lControlPoints[4] = lControlPoint5;
+	lControlPoints[5] = lControlPoint6;
+	lControlPoints[6] = lControlPoint2;
+	lControlPoints[7] = lControlPoint1;
 
-	lControlPoints[4] = lControlPoint1;
-	lControlPoints[5] = lControlPoint5;
-	lControlPoints[6] = lControlPoint6;
-	lControlPoints[7] = lControlPoint2;
+
+	//not East?
 	lControlPoints[8] = lControlPoint5;
 	lControlPoints[9] = lControlPoint4;
 	lControlPoints[10] = lControlPoint7;
 	lControlPoints[11] = lControlPoint6;
-	lControlPoints[12] = lControlPoint4;
-	lControlPoints[13] = lControlPoint0;
-	lControlPoints[14] = lControlPoint3;
-	lControlPoints[15] = lControlPoint7;
-	lControlPoints[16] = lControlPoint3;
-	lControlPoints[17] = lControlPoint2;
-	lControlPoints[18] = lControlPoint6;
-	lControlPoints[19] = lControlPoint7;
-	lControlPoints[20] = lControlPoint1;
-	lControlPoints[21] = lControlPoint0;
-	lControlPoints[22] = lControlPoint4;
-	lControlPoints[23] = lControlPoint5;
+
+
+	//West
+	lControlPoints[12] = lControlPoint7;
+	lControlPoints[13] = lControlPoint4;
+	lControlPoints[14] = lControlPoint0;
+	lControlPoints[15] = lControlPoint3;
+
+	//North
+	lControlPoints[16] = lControlPoint6;
+	lControlPoints[17] = lControlPoint7;
+	lControlPoints[18] = lControlPoint3;
+	lControlPoints[19] = lControlPoint2;
+
+	//South
+	lControlPoints[20] = lControlPoint4;
+	lControlPoints[21] = lControlPoint5;
+	lControlPoints[22] = lControlPoint1;
+	lControlPoints[23] = lControlPoint0;
 
 	// We want to have one normal for each vertex (or control point),
 	// so we set the mapping mode to eByControlPoint.
@@ -2149,16 +2198,25 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 	FBX_ASSERT(lUVDiffuseElement != NULL);
 	lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 	lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
-
+	
 	FbxVector2 lVectors0(0, 0);
 	FbxVector2 lVectors1(1, 0);
 	FbxVector2 lVectors2(1, 1);
 	FbxVector2 lVectors3(0, 1);
+	//floor vectors
+	FbxVector2 lVectors4(0, 0);
+	FbxVector2 lVectors5(1, 0);
+	FbxVector2 lVectors6(1, 1);
+	FbxVector2 lVectors7(0, 1);
 
 	lUVDiffuseElement->GetDirectArray().Add(lVectors0);
 	lUVDiffuseElement->GetDirectArray().Add(lVectors1);
 	lUVDiffuseElement->GetDirectArray().Add(lVectors2);
 	lUVDiffuseElement->GetDirectArray().Add(lVectors3);
+	lUVDiffuseElement->GetDirectArray().Add(lVectors4);
+	lUVDiffuseElement->GetDirectArray().Add(lVectors5);
+	lUVDiffuseElement->GetDirectArray().Add(lVectors6);
+	lUVDiffuseElement->GetDirectArray().Add(lVectors7);
 
 	//Now we have set the UVs as eIndexToDirect reference and in eByPolygonVertex  mapping mode
 	//we must update the size of the index array.
@@ -2169,16 +2227,27 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 		{
 		// all faces of the cube have the same texture
 		lMesh->BeginPolygon(-1, -1, -1, false);
-
-		for (j = 0; j < 4; j++)
+		if ((i == 0) || (i == 2))//Top and bottom
 			{
-			// Control point index
-			lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
-
-			// update the index array of the UVs that map the texture to the face
-			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
+			for (j = 4; j < 8; j++)
+				{
+				// Control point index
+				lMesh->AddPolygon(lPolygonVertices[i * 4 + (j - 4)]);
+				// update the index array of the UVs that map the texture to the face
+				lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + (j - 4), j);
+				}
 			}
-
+		else
+			{//east,west,north,south
+			for (j = 0; j < 4; j++)
+				{
+				// Control point index
+				lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
+				// update the index array of the UVs that map the texture to the face
+				lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
+			
+				}
+			}
 		lMesh->EndPolygon();
 		}
 
