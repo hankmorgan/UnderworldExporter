@@ -49,6 +49,7 @@ void RenderFBXPlane(FbxScene*& gScene, int x, int y, tile &t, short Water, int B
 	, FbxVector4 Normal
 	);
 void insertTexture(int *texArray, int targetIndex, int textureNo, int arraysize);
+float CalcCeilOffset(int game, int face, tile &t);
 
 //
 //int    gCubeNumber = 1;     // Cube Number
@@ -754,7 +755,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 	int skipCeil = 0;
 	FbxManager*   gSdkManager = NULL;
 	FbxScene*        gScene = NULL;
-
+	iGame = game;
 	//Levels use different ceiling heights.
 	//Shock is variable, UW is fixed.
 	switch (game)
@@ -1449,38 +1450,29 @@ FbxGeometryElementUV* lUVDiffuseElement = lMesh->CreateElementUV("DiffuseUV");
 FBX_ASSERT(lUVDiffuseElement != NULL);
 lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
-float textureScale = 4;
-//Wall vectors
-//if (t.tileType != 0)
-//	{
-//	textureScale=(textureScale/32)*t.floorHeight;
-//	}
-//else
-//	{
-//	textureScale=4.125;
-//	}
 
 float PolySize= Top-Bottom;
 float offset=0;//-0.125;
-FbxVector2 lVectorsNorth0(0, Bottom*0.125+offset);//bottom left corner
-FbxVector2 lVectorsNorth1(1, Bottom*0.125 + offset);//bottom right corner
-FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
-FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
-
-FbxVector2 lVectorsSouth0(0, Bottom*0.125 + offset);//bottom left corner
-FbxVector2 lVectorsSouth1(1, Bottom*0.125 + offset);//bottom right corner
-FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
-FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
-
-FbxVector2 lVectorsEast0(0, Bottom*0.125 + offset);//bottom left corner
-FbxVector2 lVectorsEast1(1, Bottom*0.125 + offset);//bottom right corner
-FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
-FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
-
-FbxVector2 lVectorsWest0(0, Bottom*0.125 + offset);//bottom left corner
-FbxVector2 lVectorsWest1(1, Bottom*0.125 + offset);//bottom right corner
-FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
-FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
+offset = CalcCeilOffset(iGame, fNORTH, t);
+FbxVector2 lVectorsNorth0(0, Bottom*0.125 - offset);//bottom left corner
+FbxVector2 lVectorsNorth1(1, Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+offset = CalcCeilOffset(iGame, fSOUTH, t);
+FbxVector2 lVectorsSouth0(0, Bottom*0.125 - offset);//bottom left corner
+FbxVector2 lVectorsSouth1(1, Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+offset = CalcCeilOffset(iGame, fEAST, t);
+FbxVector2 lVectorsEast0(0, Bottom*0.125 - offset);//bottom left corner
+FbxVector2 lVectorsEast1(1, Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+offset = CalcCeilOffset(iGame, fWEST, t);
+FbxVector2 lVectorsWest0(0, Bottom*0.125 - offset);//bottom left corner
+FbxVector2 lVectorsWest1(1, Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 
 //bottom vectors
 FbxVector2 lVectorsBottom0(0, 0);
@@ -1499,6 +1491,7 @@ lUVDiffuseElement->GetDirectArray().Add(lVectorsTop1);
 lUVDiffuseElement->GetDirectArray().Add(lVectorsTop2);
 lUVDiffuseElement->GetDirectArray().Add(lVectorsTop3);
 //East
+
 lUVDiffuseElement->GetDirectArray().Add(lVectorsEast0);
 lUVDiffuseElement->GetDirectArray().Add(lVectorsEast1);
 lUVDiffuseElement->GetDirectArray().Add(lVectorsEast2);
@@ -2111,44 +2104,67 @@ void RenderFBXSlopeETile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor)
 	{
-	int AdjustNorth = 0;
-	int AdjustSouth = 0;
-	int AdjustEast = 0;
-	int AdjustWest = 0;
-	
+	int AdjustUpperNorth = 0;
+	int AdjustUpperSouth = 0;
+	int AdjustUpperEast = 0;
+	int AdjustUpperWest = 0;
 
+	int AdjustLowerNorth = 0;
+	int AdjustLowerSouth = 0;
+	int AdjustLowerEast = 0;
+	int AdjustLowerWest = 0;
 	if (Floor == 1)
 		{
 		switch (SlopeDir)
 			{
 			case TILE_SLOPE_N:
-				AdjustNorth=Steepness*BrushSizeZ;
+				AdjustUpperNorth = Steepness*BrushSizeZ;
 				break;
 			case TILE_SLOPE_S:
-				AdjustSouth = Steepness*BrushSizeZ;
+				AdjustUpperSouth = Steepness*BrushSizeZ;
 				break;
 			case TILE_SLOPE_E:
-				AdjustEast = Steepness*BrushSizeZ;
+				AdjustUpperEast = Steepness*BrushSizeZ;
 				break;
 			case TILE_SLOPE_W:
-				AdjustWest = Steepness*BrushSizeZ;
+				AdjustUpperWest = Steepness*BrushSizeZ;
 				break;
 			}
 		}
+	if (Floor == 0)
+		{
+		switch (SlopeDir)
+			{
+				case TILE_SLOPE_N:
+					AdjustLowerNorth = -Steepness*BrushSizeZ;
+					break;
+				case TILE_SLOPE_S:
+					AdjustLowerSouth = -Steepness*BrushSizeZ;
+					break;
+				case TILE_SLOPE_E:
+					AdjustLowerEast = -Steepness*BrushSizeZ;
+					break;
+				case TILE_SLOPE_W:
+					AdjustLowerWest = -Steepness*BrushSizeZ;
+					break;
+			}
+		}
+
 	FbxString lCubeName = "SLOPE";
 	//lCubeName += FbxString(gCubeNumber);
 	// create a new cube
 	int i, j;
 	FbxMesh* lMesh = FbxMesh::Create(gScene, lCubeName);
 
-	FbxVector4 lControlPoint0(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ+AdjustWest+AdjustSouth);
-	FbxVector4 lControlPoint1((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ+AdjustEast+AdjustSouth);
-	FbxVector4 lControlPoint2((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ+AdjustEast+AdjustNorth);
-	FbxVector4 lControlPoint3(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ+AdjustWest+AdjustNorth);
-	FbxVector4 lControlPoint4(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ);
-	FbxVector4 lControlPoint5((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ);
-	FbxVector4 lControlPoint6((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ);
-	FbxVector4 lControlPoint7(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ);
+	FbxVector4 lControlPoint0(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ + AdjustUpperWest + AdjustUpperSouth);
+	FbxVector4 lControlPoint1((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ + AdjustUpperEast + AdjustUpperSouth);
+	FbxVector4 lControlPoint2((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ + AdjustUpperEast + AdjustUpperNorth);
+	FbxVector4 lControlPoint3(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ + AdjustUpperWest + AdjustUpperNorth);
+	
+	FbxVector4 lControlPoint4(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ + AdjustLowerEast + AdjustLowerNorth);
+	FbxVector4 lControlPoint5((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ + AdjustLowerWest + AdjustLowerNorth);
+	FbxVector4 lControlPoint6((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ+ AdjustLowerWest + AdjustLowerSouth);
+	FbxVector4 lControlPoint7(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ + AdjustLowerEast + AdjustLowerSouth);
 
 	FbxVector4 lNormalXPos(1, 0, 0);
 	FbxVector4 lNormalXNeg(-1, 0, 0);
@@ -2250,55 +2266,94 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 	FBX_ASSERT(lUVDiffuseElement != NULL);
 	lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 	lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
-	
-	FbxVector2 lVectors0(0, 0);
-	FbxVector2 lVectors1(1, 0);
-	FbxVector2 lVectors2(1, 1);
-	FbxVector2 lVectors3(0, 1);
-	//floor vectors
-	FbxVector2 lVectors4(0, 0);
-	FbxVector2 lVectors5(1, 0);
-	FbxVector2 lVectors6(1, 1);
-	FbxVector2 lVectors7(0, 1);
 
-	lUVDiffuseElement->GetDirectArray().Add(lVectors0);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors1);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors2);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors3);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors4);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors5);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors6);
-	lUVDiffuseElement->GetDirectArray().Add(lVectors7);
+	float PolySize = Top - Bottom;
+	float offset = 0;//-0.125;
+	offset = CalcCeilOffset(iGame, fNORTH, t);
+	FbxVector2 lVectorsNorth0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsNorth1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	offset = CalcCeilOffset(iGame, fSOUTH, t);
+	FbxVector2 lVectorsSouth0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsSouth1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	offset = CalcCeilOffset(iGame, fEAST, t);
+	FbxVector2 lVectorsEast0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsEast1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	offset = CalcCeilOffset(iGame, fWEST, t);
+	FbxVector2 lVectorsWest0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsWest1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+
+	//bottom vectors
+	FbxVector2 lVectorsBottom0(0, 0);
+	FbxVector2 lVectorsBottom1(1, 0);
+	FbxVector2 lVectorsBottom2(1, 1);
+	FbxVector2 lVectorsBottom3(0, 1);
+
+	//top vectors
+	FbxVector2 lVectorsTop0(0, 0);
+	FbxVector2 lVectorsTop1(1, 0);
+	FbxVector2 lVectorsTop2(1, 1);
+	FbxVector2 lVectorsTop3(0, 1);
+	//Top
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop3);
+	//East
+
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast3);
+	//Bottom
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom3);
+	//West
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest3);
+	//North
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth3);
+	//South
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth3);
+
+
+	//FbxGeometryElementUV* lUVElement = lMesh->GetElementUV(0);
+	//lUVElement->
 
 	//Now we have set the UVs as eIndexToDirect reference and in eByPolygonVertex  mapping mode
 	//we must update the size of the index array.
 	lUVDiffuseElement->GetIndexArray().SetCount(24);
-
+	int k = 0;
 	// Create polygons. Assign texture and texture UV indices.
 	for (i = 0; i < 6; i++)
 		{
 		// all faces of the cube have the same texture
 		lMesh->BeginPolygon(-1, -1, -1, false);
-		if ((i == 0) || (i == 2))//Top and bottom
+
+		for (j = 0; j < 4; j++)
 			{
-			for (j = 4; j < 8; j++)
-				{
-				// Control point index
-				lMesh->AddPolygon(lPolygonVertices[i * 4 + (j - 4)]);
-				// update the index array of the UVs that map the texture to the face
-				lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + (j - 4), j);
-				}
-			}
-		else
-			{//east,west,north,south
-			for (j = 0; j < 4; j++)
-				{
-				// Control point index
-				lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
-				// update the index array of the UVs that map the texture to the face
-				lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
-			
-				}
+			// Control point index
+			lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
+			// update the index array of the UVs that map the texture to the face
+			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, k);
+			k++;
 			}
 		lMesh->EndPolygon();
 		}
@@ -2581,4 +2636,37 @@ int FloorTexture(FbxScene*& gScene, FbxNode*& lNode, int face, tile t)
 	//printf("\nTexture is %d", floorTexture);
 	//lNode->AddMaterial(gScene->GetMaterial(floorTexture));
 	return floorTexture;
+	}
+
+
+float CalcCeilOffset(int game, int face, tile &t)
+	{
+	int ceilOffset = t.ceilingHeight;
+
+	if (game != SHOCK)
+		{
+		return 0;
+		}
+	else
+		{
+		switch (face)
+			{
+				case fEAST:
+					ceilOffset = t.shockEastCeilHeight; break;
+				case fWEST:
+					ceilOffset = t.shockWestCeilHeight; break;
+				case fSOUTH:
+					ceilOffset = t.shockSouthCeilHeight; break;
+				case fNORTH:
+					ceilOffset = t.shockNorthCeilHeight; break;
+			}
+		float shock_ceil = SHOCK_CEILING_HEIGHT;
+		float floorOffset = shock_ceil - ceilOffset - 8;	//The floor of the tile if it is 1 texture tall.
+		while (floorOffset >= 8)	//Reduce the offset to 0 to 7 since textures go up in steps of 1/8ths
+			{
+			floorOffset -= 8;
+			}
+		return floorOffset * 0.125;
+		}
+
 	}
