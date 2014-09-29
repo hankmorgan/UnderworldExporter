@@ -795,10 +795,10 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 void RenderFBXTile(FbxScene*& gScene,int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 	{
-//	if (PrimCount != 0)
-//		{
+	if (PrimCount > 1)
+		{
 //return;
-//		}
+		}
 	//Picks the tile to render based on tile type/flags.
 	switch (t.tileType)
 		{
@@ -1373,7 +1373,6 @@ lControlPoints[5] = lControlPoint6;
 lControlPoints[6] = lControlPoint2;
 lControlPoints[7] = lControlPoint1;
 
-
 //not East?
 lControlPoints[8] = lControlPoint5;
 lControlPoints[9] = lControlPoint4;
@@ -1450,26 +1449,81 @@ FbxGeometryElementUV* lUVDiffuseElement = lMesh->CreateElementUV("DiffuseUV");
 FBX_ASSERT(lUVDiffuseElement != NULL);
 lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
-
+float textureScale = 4;
 //Wall vectors
-FbxVector2 lVectors0(0, 0);
-FbxVector2 lVectors1(1, 0);
-FbxVector2 lVectors2(1, 4);
-FbxVector2 lVectors3(0, 4);
-//floor vectors
-FbxVector2 lVectors4(0, 0);
-FbxVector2 lVectors5(1, 0);
-FbxVector2 lVectors6(1, 1);
-FbxVector2 lVectors7(0, 1);
+//if (t.tileType != 0)
+//	{
+//	textureScale=(textureScale/32)*t.floorHeight;
+//	}
+//else
+//	{
+//	textureScale=4.125;
+//	}
 
-lUVDiffuseElement->GetDirectArray().Add(lVectors0);
-lUVDiffuseElement->GetDirectArray().Add(lVectors1);
-lUVDiffuseElement->GetDirectArray().Add(lVectors2);
-lUVDiffuseElement->GetDirectArray().Add(lVectors3);
-lUVDiffuseElement->GetDirectArray().Add(lVectors4);
-lUVDiffuseElement->GetDirectArray().Add(lVectors5);
-lUVDiffuseElement->GetDirectArray().Add(lVectors6);
-lUVDiffuseElement->GetDirectArray().Add(lVectors7);
+float PolySize= Top-Bottom;
+float offset=0;//-0.125;
+FbxVector2 lVectorsNorth0(0, Bottom*0.125+offset);//bottom left corner
+FbxVector2 lVectorsNorth1(1, Bottom*0.125 + offset);//bottom right corner
+FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
+FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
+
+FbxVector2 lVectorsSouth0(0, Bottom*0.125 + offset);//bottom left corner
+FbxVector2 lVectorsSouth1(1, Bottom*0.125 + offset);//bottom right corner
+FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
+FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
+
+FbxVector2 lVectorsEast0(0, Bottom*0.125 + offset);//bottom left corner
+FbxVector2 lVectorsEast1(1, Bottom*0.125 + offset);//bottom right corner
+FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
+FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
+
+FbxVector2 lVectorsWest0(0, Bottom*0.125 + offset);//bottom left corner
+FbxVector2 lVectorsWest1(1, Bottom*0.125 + offset);//bottom right corner
+FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125));//top right corner
+FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125));//top left corner.
+
+//bottom vectors
+FbxVector2 lVectorsBottom0(0, 0);
+FbxVector2 lVectorsBottom1(1, 0);
+FbxVector2 lVectorsBottom2(1, 1);
+FbxVector2 lVectorsBottom3(0, 1);
+
+//top vectors
+FbxVector2 lVectorsTop0(0, 0);
+FbxVector2 lVectorsTop1(1, 0);
+FbxVector2 lVectorsTop2(1, 1);
+FbxVector2 lVectorsTop3(0, 1);
+//Top
+lUVDiffuseElement->GetDirectArray().Add(lVectorsTop0);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsTop1);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsTop2);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsTop3);
+//East
+lUVDiffuseElement->GetDirectArray().Add(lVectorsEast0);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsEast1);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsEast2);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsEast3);
+//Bottom
+lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom0);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom1);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom2);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom3);
+//West
+lUVDiffuseElement->GetDirectArray().Add(lVectorsWest0);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsWest1);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsWest2);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsWest3);
+//North
+lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth0);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth1);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth2);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth3);
+//South
+lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth0);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth1);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth2);
+lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth3);
+
 
 //FbxGeometryElementUV* lUVElement = lMesh->GetElementUV(0);
 //lUVElement->
@@ -1477,34 +1531,32 @@ lUVDiffuseElement->GetDirectArray().Add(lVectors7);
 //Now we have set the UVs as eIndexToDirect reference and in eByPolygonVertex  mapping mode
 //we must update the size of the index array.
 lUVDiffuseElement->GetIndexArray().SetCount(24);
-
+int k=0;
 // Create polygons. Assign texture and texture UV indices.
 for (i = 0; i < 6; i++)
 	{
 	// all faces of the cube have the same texture
 	lMesh->BeginPolygon(-1, -1, -1, false);
-	if ((i == 0) || (i==2))//Top and bottom
-		{
-		for (j = 4; j < 8; j++)
-			{
-			// Control point index
-			lMesh->AddPolygon(lPolygonVertices[i * 4 + (j-4)]);
-			
-			// update the index array of the UVs that map the texture to the face
-			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + (j-4), j);
-			}
-		}
-	else
-		{//east,west,north,south
-		for (j = 0; j < 4; j++)
-			{
-			// Control point index
-			lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
-			// update the index array of the UVs that map the texture to the face
-			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
-			}
-		}
-	
+
+			for (j = 0; j < 4; j++)
+				{
+				// Control point index
+				lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
+				// update the index array of the UVs that map the texture to the face
+				lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, k);
+				k++;
+				}
+			//break;
+
+			//for (j = 0; j < 4; j++)
+			//	{
+			//	// Control point index
+			//	lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
+			//	// update the index array of the UVs that map the texture to the face
+			//	lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, j);
+			//	}
+		//}
+
 
 	lMesh->EndPolygon();
 	}

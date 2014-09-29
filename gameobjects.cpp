@@ -382,10 +382,6 @@ mstaddress_pointer=0;
 					objList[MasterIndex].sprite = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
 					objList[MasterIndex].State = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
 					objList[MasterIndex].unk1 = getValAtAddress(mst_ark, mstaddress_pointer + 24, 8);
-					if (objList[MasterIndex].index == 98)
-						{
-						printf("");
-						}
 					printf("\n++++++++Next object++++++++++++\n");
 					printf("\nMaster Record at %d", blockAddress + mstaddress_pointer);
 					printf("\nIndex = %d \n", objList[MasterIndex].index);
