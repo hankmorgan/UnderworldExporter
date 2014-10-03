@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ObjectInteraction : MonoBehaviour {
 	private UILabel MessageLog;
+	public Sprite InventoryIcon;
+	public string InventoryString;
+	public static GameObject player;
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -25,6 +28,9 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 		case 2://Pickup
 			MessageLog.text = "You pick up a " + name;
+			//Cursor.SetCursor (InventoryIcon.texture,Vector2.zero, CursorMode.ForceSoftware);
+			player.GetComponent <UWCharacter>().CursorIcon= InventoryIcon.texture;
+			player.GetComponent <UWCharacter>().CurrObjectSprite = InventoryString;
 			break;
 		case 4://Look
 			MessageLog.text = "You see a " + name;

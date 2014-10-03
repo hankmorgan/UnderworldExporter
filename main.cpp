@@ -826,8 +826,9 @@ switch (game)
 			else
 				{
 				if (game == SHOCK)
-					{
+					{//C:\Games\Terra Nova\CD\Terra_Nova\MAPS
 					RepackShock(GameFilePath, OutFileName);
+					//RepackShock("C:\\Games\\Terra Nova\\CD\\Terra_Nova\\MAPS\\FLAT.RES", OutFileName);
 					}
 				}
 			break;

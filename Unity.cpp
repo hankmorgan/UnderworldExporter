@@ -14,7 +14,7 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.3f,0.3f,0.3f);");
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.3f,0.3f,0.3f,\"OBJECTS_%03d\");",currobj.item_id);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])

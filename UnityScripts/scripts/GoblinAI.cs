@@ -25,7 +25,7 @@ public class GoblinAI : MonoBehaviour {
 		//MessageLog.text="StartUp";
 		//GameObject targetPoint = GameObject.Find ("a_goblin_52_59_00_0202");
 		agent = GetComponent<NavMeshAgent>();
-		player = GameObject.Find ("First Person Controller");
+		player = GameObject.Find ("Gronk");
 		//var agent: NavMeshAgent GetComponent.<NavMeshAgent>();
 		//anim = GameObject.Find (name + "_Animation").GetComponent<Animator>();
 		//anim = (Animator)transform.FindChild (name + "_Sprite").GetComponent<Animator>();
