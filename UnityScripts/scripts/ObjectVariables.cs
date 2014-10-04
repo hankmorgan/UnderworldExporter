@@ -10,11 +10,13 @@ public class ObjectVariables : MonoBehaviour {
 	public int state;
 	public string trigger;
 	private GameObject level;
+
+//public string SpriteNameOpened;
 	//public string triggeringObject;
 
 	// Use this for initialization
 	void Start () {
-		level=GameObject.Find("uw1_level0");
+		level=GameObject.Find("uw1_lvl_00");
 	}
 	
 	// Update is called once per frame
@@ -30,7 +32,7 @@ public class ObjectVariables : MonoBehaviour {
 	public GameObject FindTile(int x, int y, int surface)
 	{//May need to update tile finding to support multiple levels!
 		string tileName = GetTileName (x,y,surface);
-		Debug.Log("Looking for tile" + tileName);
+		Debug.Log("Looking for tile " + tileName);
 		return level.transform.FindChild (tileName).gameObject;
 	}
 
@@ -44,7 +46,7 @@ public class ObjectVariables : MonoBehaviour {
 		{
 		case 3:  //SURFACE_WALL:
 		{
-			tileName= "Tile_" + X + "_" + Y;
+			tileName= "Wall_" + X + "_" + Y;
 			//sprintf_s(tileName, 20, "Tile_%02d_%02d\0", x, y);
 			break;
 		}
@@ -65,7 +67,7 @@ public class ObjectVariables : MonoBehaviour {
 		case 4://SURFACE_SLOPE:
 		default:
 		{
-			tileName="Floor_" + X  + "_" + Y;
+			tileName="Tile_" + X  + "_" + Y;
 			//if (part == 0)
 			//{
 			//	sprintf_s(str, 20, "Floor_%02d_%02d\0", x, y);

@@ -13,19 +13,24 @@ public class UWCharacter : MonoBehaviour {
 	private bool MouseLookEnabled;
 	private GameObject MainCam;
 	public string CurrObjectSprite;
-	
+	public string ObjectInHand;
+	public bool isFemale;
+	public bool isLefty;
+	public bool CursorInMainWindow;
+	public bool JustPickedup;
 	// Use this for initialization
 	void Start () {
 		
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		Screen.lockCursor=true;
-		
+
 		
 		Debug.Log ("Setting player to " + this.gameObject);
 		//Cursor.SetCursor (CursorIcon,Vector2.zero, CursorMode.ForceSoftware);
 		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
 		InventorySlot.player=this.gameObject;
+		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		//CursorIcon=(Texture2D)Resources.Load("Assets/HUD/cursors/cursors_0000.tga",typeof(Texture2D));
 		Debug.Log ("the player is " + ObjectInteraction.player.name);
 		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
@@ -45,7 +50,7 @@ public class UWCharacter : MonoBehaviour {
 			
 			if (MouseLookEnabled==false)
 			{
-				Debug.Log("Turning on mouselook");
+				//Debug.Log("Turning on mouselook");
 				Screen.lockCursor = true;
 				XAxis.enabled=true;
 				YAxis.enabled=true;
@@ -53,7 +58,7 @@ public class UWCharacter : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log("Turning off mouselook");
+				//Debug.Log("Turning off mouselook");
 				Screen.lockCursor = false;
 				XAxis.enabled=false;
 				YAxis.enabled=false;

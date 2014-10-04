@@ -35,7 +35,10 @@ public class GoblinAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (anim == null)
+		{
+			anim = GetComponentInChildren<Animator>();
+		}
 		//float angle = Quaternion.Angle(transform.rotation, player.transform.rotation);
 		if (followPlayer==true)
 		{
@@ -101,6 +104,7 @@ public class GoblinAI : MonoBehaviour {
 		{
 			//MessageLog.text= name + "Playing anim:" + pAnim;
 			currentState=newState;
+			//MessageLog.text= name + "Playing anim:" + anim.animation.isPlaying;
 			anim.Play(pAnim);
 			//print(pAnim);
 		}

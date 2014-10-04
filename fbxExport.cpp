@@ -37,7 +37,8 @@ void RenderFBXValleyNETile(FbxScene*& gScene, int x, int y, tile &t, short Water
 void RenderFBXValleySETile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert);
 void RenderFBXValleySWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert);
 void RenderFBXValleyNWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert);
-void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor);
+//void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor);
+void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor, char *TileName);
 void CreateFBXMaterials(FbxScene*& gScene, int game);
 int FloorTexture(FbxScene*& gScene, FbxNode*& lNode, int face, tile t);
 int WallTexture(FbxScene*& gScene, FbxNode*& lNode, int face, tile t);
@@ -805,6 +806,32 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		tmp.North = LevelInfo[0][0].shockCeilingTexture;//CAULK;
 		tmp.South = LevelInfo[0][0].shockCeilingTexture;//CAULK;
 		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
+
+		//Now render a room to store objects
+		tmp.DimX = 1;
+		tmp.DimY = 1;
+		tmp.floorHeight = 0;
+		for (x = 65; x < 68; x++)
+			{
+			for (y = 65; y < 68; y++)
+				{
+				tmp.tileX = x;
+				tmp.tileY = y;
+				if ((x != 66) || (y!=66))
+					{
+					tmp.tileType = 0;
+					}
+				else
+					{
+					tmp.tileType = 1;
+					}
+				RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
+				}
+			}
+
+
+
+
 		}
 
 	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 0, false);
@@ -812,10 +839,6 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 void RenderFBXTile(FbxScene*& gScene,int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
 	{
-	if (PrimCount > 1)
-		{
-//return;
-		}
 	//Picks the tile to render based on tile type/flags.
 	switch (t.tileType)
 		{
@@ -1239,7 +1262,7 @@ if (t.Render == 1)
 	if (t.isWater == Water)
 		{
 		char TileName[80]="";
-		sprintf_s(TileName, 80, "%s_%02d_%02d\0", "SOLID", x, y);
+		sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Wall", x, y);
 		RenderFBXCuboid(gScene, x, y, t, Water, -2, CEILING_HEIGHT + 1, TileName);
 		PrimCount++;
 		}
@@ -1264,20 +1287,20 @@ void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, sh
 						}
 					else
 						{
-						sprintf_s(TileName, 80, "%s_%02d_%02d\0", "OpenFloor", x, y);
+						sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);//Floor_%02d_%02d
 						RenderFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TileName);
 						}
 					}
 				else
 					{
-					sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Elevator", x, y);
+					sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
 					RenderFBXCuboid(gScene, x, y, t, Water, -8, t.floorHeight, TileName);
 					}
 				}
 			else
 				{
 				//Ceiling version of the tile
-				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "OpenCeiling", x, y);
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Ceiling", x, y);
 				RenderFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TileName);
 				}
 			}
@@ -1699,6 +1722,7 @@ void RenderFBXPlane(FbxScene*& gScene, int x, int y, tile &t, short Water, int B
 
 void RenderFBXDiagSETile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
+	char TileName[80] = "";
 	int BLeftX; int BLeftY; int BLeftZ; int TLeftX; int TLeftY; int TLeftZ; int TRightX; int TRightY; int TRightZ;
 
 	if (t.Render == 1)
@@ -1709,7 +1733,8 @@ void RenderFBXDiagSETile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 			if (Water != 1)
 				{
 				//the wall part
-				RenderFBXDiagSEPortion(gScene, -2, CEILING_HEIGHT + 1, t,"DiagSE1");
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Wall", x, y);
+				RenderFBXDiagSEPortion(gScene, -2, CEILING_HEIGHT + 1, t,TileName);
 
 				}
 			if (t.isWater == Water)
@@ -1730,7 +1755,7 @@ void RenderFBXDiagSETile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderFBXDiagNWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
-
+	char TileName[80] = "";
 	if (t.Render == 1)
 		{
 		if (invert == 0)
@@ -1738,7 +1763,8 @@ void RenderFBXDiagNWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 			if (Water != 1)
 				{
 				//It's wall.
-				RenderFBXDiagNWPortion(gScene, -2, CEILING_HEIGHT + 1, t, "DiagNW2");
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Wall", x, y);
+				RenderFBXDiagNWPortion(gScene, -2, CEILING_HEIGHT + 1, t, TileName);
 				}
 
 
@@ -1760,6 +1786,7 @@ void RenderFBXDiagNWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderFBXDiagSWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
+	char TileName[80] = "";
 	if (t.Render == 1)
 		{
 		if (invert == 0)
@@ -1767,7 +1794,8 @@ void RenderFBXDiagSWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 			if (Water != 1)
 				{
 				//Its wall
-				RenderFBXDiagSWPortion(gScene, -2, CEILING_HEIGHT + 1, t, "DiagSW1");
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Wall", x, y);
+				RenderFBXDiagSWPortion(gScene, -2, CEILING_HEIGHT + 1, t, TileName);
 				}
 			if (t.isWater == Water)
 				{
@@ -1788,14 +1816,15 @@ void RenderFBXDiagSWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderFBXDiagNETile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
-
+	char TileName[80] = "";
 	if (t.Render == 1){
 		if (invert == 0)
 			{
 
 			if (Water != 1)
 				{
-				RenderFBXDiagNEPortion(gScene, -2, CEILING_HEIGHT + 1, t, "TileNe3");
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Wall", x, y);
+				RenderFBXDiagNEPortion(gScene, -2, CEILING_HEIGHT + 1, t, TileName);
 				}
 			if (t.isWater == Water)
 				{
@@ -3117,19 +3146,22 @@ void RenderFBXRidgeSETile(FbxScene*& gScene, int x, int y, tile &t, short Water,
 
 void RenderFBXSlopeNTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
+	char TileName[80] = "";
 	if (t.Render == 1){
 		if (invert == 0)
 			{
 			if (t.isWater == Water)
 				{
 				//A floor
-				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_N, t.shockSteep, 1);
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
+				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_N, t.shockSteep, 1, TileName);
 				}
 			}
 		else
 			{
 			//It's invert
-			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_N, t.shockSteep, 0);
+			sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Ceiling", x, y);
+			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_N, t.shockSteep, 0, TileName);
 			}
 		}
 	return;
@@ -3137,19 +3169,22 @@ void RenderFBXSlopeNTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderFBXSlopeSTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
+	char TileName[80] = "";
 	if (t.Render == 1){
 		if (invert == 0)
 			{
 			if (t.isWater == Water)
 				{
 				//A floor
-				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1);
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
+				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_S, t.shockSteep, 1, TileName);
 				}
 			}
 		else
 			{
 			//It's invert
-			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_S, t.shockSteep, 0);
+			sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Ceiling", x, y);
+			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_S, t.shockSteep, 0, TileName);
 			}
 		}
 	return;
@@ -3157,19 +3192,22 @@ void RenderFBXSlopeSTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderFBXSlopeWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
+	char TileName[80] = "";
 	if (t.Render == 1){
 		if (invert == 0)
 			{
 			if (t.isWater == Water)
 				{
 				//A floor
-				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1);
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
+				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_W, t.shockSteep, 1, TileName);
 				}
 			}
 		else
 			{
 			//It's invert
-			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_W, t.shockSteep, 0);
+			sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Ceiling", x, y);
+			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_W, t.shockSteep, 0, TileName);
 			}
 		}
 	return;
@@ -3177,25 +3215,28 @@ void RenderFBXSlopeWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 
 void RenderFBXSlopeETile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert)
 	{
+	char TileName[80] = "";
 	if (t.Render == 1){
 		if (invert == 0)
 			{
 			if (t.isWater == Water)
 				{
 				//A floor
-				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1);
+				sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
+				RenderSlopedFBXCuboid(gScene, x, y, t, Water, -2, t.floorHeight, TILE_SLOPE_E, t.shockSteep, 1, TileName);
 				}
 			}
 		else
 			{
 			//It's invert
-			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_E, t.shockSteep, 0);
+			sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Ceiling", x, y);
+			RenderSlopedFBXCuboid(gScene, x, y, t, Water, CEILING_HEIGHT - t.ceilingHeight, CEILING_HEIGHT + 1, TILE_SLOPE_E, t.shockSteep, 0, TileName);
 			}
 		}
 	return;
 	}
 
-void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor)
+void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, int SlopeDir, int Steepness, int Floor, char *TileName)
 	{
 	int AdjustUpperNorth = 0;
 	int AdjustUpperSouth = 0;
@@ -3243,7 +3284,7 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 			}
 		}
 
-	FbxString lCubeName = "SLOPE";
+	FbxString lCubeName = TileName;
 	//lCubeName += FbxString(gCubeNumber);
 	// create a new cube
 	int i, j;

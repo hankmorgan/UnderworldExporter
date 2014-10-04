@@ -106,7 +106,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%s\",\"Assets/Sprites/objects_%03d.tga\");", objectMasters[currobj.item_id].desc, currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%s\",\"Assets/Sprites/objects_%03d\");", objectMasters[currobj.item_id].desc, currobj.item_id);
 	switch (currobj.npc_attitude)
 		{
 			case 0:	//hostile
@@ -814,7 +814,7 @@ void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, 
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Assets/Sprites/objects_%03d.tga\",true);", currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
 	if ((currobj.DeathWatched >= 1) && (game == SHOCK))
 		{
 		//If all object of this type are destroyed then do something.
