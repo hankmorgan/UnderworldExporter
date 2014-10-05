@@ -26,13 +26,13 @@ public class UWCharacter : MonoBehaviour {
 		Screen.lockCursor=true;
 
 		
-		Debug.Log ("Setting player to " + this.gameObject);
+		//Debug.Log ("Setting player to " + this.gameObject);
 		//Cursor.SetCursor (CursorIcon,Vector2.zero, CursorMode.ForceSoftware);
-		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
-		InventorySlot.player=this.gameObject;
-		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
+		//ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
+		//InventorySlot.player=this.gameObject;
+		//InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		//CursorIcon=(Texture2D)Resources.Load("Assets/HUD/cursors/cursors_0000.tga",typeof(Texture2D));
-		Debug.Log ("the player is " + ObjectInteraction.player.name);
+		//Debug.Log ("the player is " + ObjectInteraction.player.name);
 		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
 		//Rect Position = new Rect(Event.current.mousePosition.x-cursorSizeX/2,Event.current.mousePosition.y-cursorSizeY/2,cursorSizeX,cursorSizeY);
 		//GUI.DrawTexture (Position,CursorIcon);
@@ -40,7 +40,7 @@ public class UWCharacter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 	
 	void OnGUI()

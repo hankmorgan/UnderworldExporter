@@ -1,0 +1,73 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class ContainerOpened : MonoBehaviour {
+
+	//public string ContainerTarget; //What container those this widget point back to. blank for player inventory. only matters for the slots
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+	void CloseChildContainer(Container ClosingParent)
+	{//Recursively closes open child containers
+		ClosingParent.isOpenOnPanel=false;
+		for (int i = 0;i<40;i++)
+		{
+			if (ClosingParent.items[i] !="")
+			{
+				GameObject currObj = GameObject.Find (ClosingParent.items[i]);
+				{
+					if (currObj.GetComponent<ObjectInteraction>().isContainer ==true)
+					{
+						CloseChildContainer (currObj.GetComponent<Container>());
+					}
+				}
+			}
+		}
+	}
+
+	void OnClick()
+	{
+		UWCharacter player=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		if (player.ObjectInHand=="")
+		{//Player has no object in their hand. We close up the container.
+			Container currentContainerObj = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			pInv.currentContainer = currentContainerObj.ContainerParent;
+			currentContainerObj.isOpenOnPanel=false;
+			//Close child containers as well
+			CloseChildContainer (currentContainerObj);
+			Container DestinationContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			if (pInv.currentContainer == "Gronk")
+			{
+				GetComponent<UISprite>().spriteName="object_blank";
+			}
+			for (int i = 0; i<8; i++)
+			{
+				InventorySlot currSlot = transform.parent.FindChild ("Backpack_Slot_" + i.ToString ("D2")).GetComponent<InventorySlot>();
+				string sItem = DestinationContainer.GetItemAt(i);
+				pInv.SetObjectAtSlot(i+11,sItem);
+			}
+		}
+		else
+		{
+			//Move the contents out of the container into the parent.
+			Debug.Log ("Moving contents out of bag");
+			Container CurrentContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
+			if (DestinationContainer.AddItemToContainer(player.ObjectInHand))
+			{//Object has moved
+				UWCharacter playerUW = player.GetComponent<UWCharacter>();
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.CurrObjectSprite = "";
+				playerUW.ObjectInHand="";
+			}
+		}
+	}
+}

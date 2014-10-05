@@ -9,22 +9,41 @@ public class ObjectInteraction : MonoBehaviour {
 	public string InventoryIconEquipString;
 
 	public static GameObject player;
-	public static GameObject InvMarker=GameObject.Find ("InventoryMarker");
+	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
 	private UWCharacter playerUW;
+	public bool isContainer;
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		playerUW=player.GetComponent<UWCharacter>();
+		if (player!=null)
+		{
+			playerUW=player.GetComponent<UWCharacter>();
+		}
 
+		if (InvMarker==null)
+		{
+			InvMarker=GameObject.Find ("InventoryMarker");
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if ((player!=null) && (playerUW==null))
+			{
+			playerUW=player.GetComponent<UWCharacter>();
+			}
+		if (InvMarker==null)
+			{
+			InvMarker=GameObject.Find ("InventoryMarker");
+			}
 	}
 
 	void OnMouseDown()
 	{
+		if (playerUW.CursorInMainWindow==false)
+		{//Stop items outside the viewport from being triggered.
+			return;
+		}
 		switch (ObjectVariables.InteractionMode)
 		{
 		case 0://Options
@@ -34,6 +53,10 @@ public class ObjectInteraction : MonoBehaviour {
 			MessageLog.text = "You can't talk to " + name;
 			break;
 		case 2://Pickup
+			if (playerUW==null)
+			{
+				player.GetComponent<UWCharacter>();
+			}
 			if (playerUW.ObjectInHand=="")
 			{
 				MessageLog.text = "You pick up a " + name;
@@ -41,10 +64,11 @@ public class ObjectInteraction : MonoBehaviour {
 				playerUW.CursorIcon= InventoryIcon.texture;
 				playerUW.CurrObjectSprite = InventoryString;
 				playerUW.ObjectInHand=name;
-				playerUW.JustPickedup=true;
+				playerUW.JustPickedup=true;//To stop me throwing it away immediately.
+				//Move the selected gameobject to the box.
 				this.transform.position = InvMarker.transform.position;
 			}
-			//Move the selected gameobject to the box.
+
 			break;
 		case 4://Look
 			MessageLog.text = "You see a " + name;

@@ -268,16 +268,23 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 		if (currobj.link != 0)	//Container has objects
 			{
 			fprintf(UNITY_FILE, "\n\t////Container contents");
+			fprintf(UNITY_FILE, "\n\tParentContainer = myObj.AddComponent<Container>();");
+			fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
 			ObjectItem tmpobj = objList[currobj.link];
+			int count = 0;
 			while (tmpobj.next != 0)
 				{
 				if (objectMasters[objList[currobj.link].item_id].type != LOCK)
 					{
 					RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
+					fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+					fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
 					}
 				tmpobj = objList[tmpobj.next];
 				}
 			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
+			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
 			}
 		fprintf(UNITY_FILE, "\n\t////Container contents complete");
 		return;
@@ -1100,7 +1107,8 @@ float offX; float offY; float offZ;
 		}
 	//Some quick declarations
 	fprintf(UNITY_FILE, "\n\tGameObject myObj;\n\tVector3 pos;");
-
+	fprintf(UNITY_FILE, "\n\tGameObject invMarker = GameObject.Find(\"InventoryMarker\");");
+	fprintf(UNITY_FILE, "\n\tContainer ParentContainer;");
 	/*Parses the object list and sets up their x,y,z position.
 	Object lists in-game are linked lists. The index into the list is stored on the tilemap*/
 

@@ -9,13 +9,14 @@ public class InventorySlot : MonoBehaviour {
 	public static GameObject player;
 	public static UWCharacter playerUW;
 
-	public GameObject ObjectInSlot;
+	//public GameObject ObjectInSlot;
 	public string ObjectSpriteString;
 	public Texture2D ObjectSprite;
 	private PlayerInventory pInv;
 	public GameObject GronkSlot;
 
 	public int slotIndex;//What type of inventory slot is this
+
 	// Use this for initialization
 	void Start () {
 //		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -62,33 +63,111 @@ public class InventorySlot : MonoBehaviour {
 
 	void OnClick()
 	{
-		Debug.Log (name + " clicked");
 		PlayerInventory pInv = player.GetComponent<PlayerInventory>();
-		string sNewObj = pInv.ObjectPickedUp(slotIndex,playerUW.ObjectInHand);
-		if (sNewObj=="")
+		Container SubContainer;
+		switch (ObjectVariables.InteractionMode)
 		{
-			playerUW.CursorIcon= playerUW.CursorIconDefault;
-			playerUW.CurrObjectSprite = "";
-			playerUW.ObjectInHand="";
-		}
-		else
+		case 2://pickup
 		{
-			GameObject NewObj = GameObject.Find (sNewObj);
-			if (NewObj != null)
-			{
-				playerUW.CursorIcon= NewObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-				playerUW.CurrObjectSprite = NewObj.GetComponent<ObjectInteraction>().InventoryString;
-				playerUW.ObjectInHand=sNewObj;
-			}
+			string sNewObj;
+
+			if (pInv.currentContainer=="Gronk")
+				{
+				sNewObj= pInv.ObjectPickedUp(slotIndex,playerUW.ObjectInHand);
+				}
 			else
-			{
-				Debug.Log ("unable to find " + sNewObj);
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
-				playerUW.ObjectInHand="";
+				{
+				string slotToTest= pInv.GetObjectAtSlot(slotIndex) ;
+				if (slotToTest!="")
+					{
+					Debug.Log ("Testing slot (" + slotIndex + ")" + slotToTest );
+						
+					if (GameObject.Find (slotToTest).GetComponent<ObjectInteraction>().isContainer==true)
+						{
+							//test if object is already open in inventory;
+						if (GameObject.Find (slotToTest).GetComponent<Container>().isOpenOnPanel==true)
+							{
+								Debug.Log ("Attempt to to pick up an already open container at " + slotToTest);
+								return;
+							}
+						}
+					}
+
+
+
+				SubContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+				sNewObj = SubContainer.ObjectPickedUp (slotIndex,playerUW.ObjectInHand);
+				}
+			
+				if (sNewObj=="")
+				{
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.CurrObjectSprite = "";
+					playerUW.ObjectInHand="";
+				}
+				else
+				{
+					GameObject NewObj ;
+					NewObj = GameObject.Find (sNewObj);
+					if (NewObj != null)
+					{
+						playerUW.CursorIcon= NewObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+						playerUW.CurrObjectSprite = NewObj.GetComponent<ObjectInteraction>().InventoryString;
+						playerUW.ObjectInHand=sNewObj;
+					}
+					else
+					{
+						Debug.Log ("unable to find " + sNewObj);
+						playerUW.CursorIcon= playerUW.CursorIconDefault;
+						playerUW.CurrObjectSprite = "";
+						playerUW.ObjectInHand="";
+					}
+					
+				}
 			}
 
+			break;
+
+		case 16://use
+
+			string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+			if (ObjectName !="")
+			{
+				GameObject currObj = GameObject.Find (ObjectName);
+				Debug.Log("you use this" + currObj.name);
+				ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
+				if (currObjInt.isContainer)
+				{
+					transform.parent.FindChild("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
+					//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
+					
+					//display the container contents.
+					Container currObjCont = currObj.GetComponent<Container>();
+					currObjCont.isOpenOnPanel=true;
+					//currObjCont.ContainerParent=pInv.currentContainer;
+					//pInv.atTopLevel=false;
+					pInv.currentContainer=currObjCont.name;
+					if (pInv.currentContainer=="")
+					{
+						pInv.currentContainer="Gronk";
+						currObjCont.ContainerParent="Gronk";
+					}
+					for (int i = 0; i<8; i++)
+					{
+						//transform.parent.FindChild ()
+						//Debug.Log ("Looking for " + "Backpack_Slot_" + i.ToString ("D2"));
+						//Debug.Log ("Parent is " + transform.parent.name);
+						InventorySlot currSlot = transform.parent.FindChild ("Backpack_Slot_" + i.ToString ("D2")).GetComponent<InventorySlot>();
+						string sItem = currObjCont.GetItemAt(i);
+						pInv.SetObjectAtSlot(i+11,sItem);
+					}
+				}
+			}
+
+			break;
 		}
+	
+
 	}
 
 

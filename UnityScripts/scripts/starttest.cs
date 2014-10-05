@@ -5,7 +5,12 @@ public class starttest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		CreateObj();
+		GameObject player= GameObject.Find ("Gronk");
+		ObjectInteraction.player=player;//Set the player controller for all interaction scripts.
+		InventorySlot.player=player;
+		InventorySlot.playerUW=player.GetComponent<UWCharacter>();
+
+		//CreateObj();
 	}
 	
 	// Update is called once per frame
