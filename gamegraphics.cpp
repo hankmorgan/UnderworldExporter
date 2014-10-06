@@ -725,19 +725,19 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	//AddressPointer= CritterNo *8;
 	if (game !=UW2)
 		{
-		for (int i = 0; i < 8; i++)
-			{
-			printf("%c", assocFile[(CritterNo * 8) + i]);
-			}
+		//for (int i = 0; i < 8; i++)
+		//	{
+		//	printf("%c", assocFile[(CritterNo * 8) + i]);
+		//	}
 		anim = getValAtAddress(assocFile, (32 * 8) + (CritterNo * 2) + 0, 8);
 		int DefaultauxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
-		printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
+		//printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
 		}
 	else
 		{
 		anim = getValAtAddress(assocFile, (CritterNo * 2) + 0, 8);
 		int DefaultauxPalNo = getValAtAddress(assocFile, (CritterNo * 2) + 1, 8);
-		printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
+		//printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
 		}
 	if ((file = fopen(fileCrit, "rb")) == NULL)
 	{
@@ -761,7 +761,7 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 			printf("\nNo of anim segments=%d", getValAtAddress(critterFile, 2 + NoOfSlots, 8));
 			for (int i = 0; i < NoOfSegs*8; i++)
 				{
-				printf("\n%d = %d", i, getValAtAddress(critterFile,1+2+NoOfSlots+i,8));
+				printf("\t%d = %d,", i, getValAtAddress(critterFile,1+2+NoOfSlots+i,8));
 				AddressPointer = 1 + 2 + NoOfSlots + i;
 				}
 			AddressPointer++;
@@ -1951,3 +1951,48 @@ void copyPalette(palette *inPal, palette *outPal)
 		}
 	}
 
+
+
+
+
+
+void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, char OutFileName[255], int useTGA)
+	{
+	palette auxpal[32];
+	if (game != UW1)
+		{
+		printf("UW1 only for the moment");
+		return;
+		}
+	long fileSize;
+	unsigned char *assocFile;
+	int AssocPtr=0;
+//Read in the assoc.anim file
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(fileAssoc, "rb")) == NULL)
+		{
+		printf("\nArchive not found!\n");
+		return;
+		}
+	fileSize = getFileSize(file);
+	assocFile = new unsigned char[fileSize];
+	fread(assocFile, fileSize, 1, file);
+	fclose(file);
+	AssocPtr=256;
+	for (int i = 0; i < 64; i++)
+		{
+		char fileCrit[255];
+		int auxPalNo = getValAtAddress(assocFile, AssocPtr + 1, 8);
+		int CritterID = getValAtAddress(assocFile, AssocPtr + 0, 8);
+		printf("\n Anim ID: %d - which is %s", CritterID, objectMasters[CritterID+0x40].desc );
+		printf("\t Palette is %d", auxPalNo);
+		sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N00", CritPath,CritterID);//page 1
+		sprintf_s(OutFileName, 255, "CR%02oPAGE_N00_%d", CritterID, auxPalNo);
+		extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA);
+		sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N01", CritPath, CritterID);//page 2
+		sprintf_s(OutFileName, 255, "CR%02oPAGE_N01_%d", CritterID, auxPalNo);
+		extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA);
+		//
+		AssocPtr=AssocPtr+2;
+		}
+	}

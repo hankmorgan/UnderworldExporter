@@ -278,12 +278,14 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 					{
 					RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
 					fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+					fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
 					fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
 					}
 				tmpobj = objList[tmpobj.next];
 				}
 			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
 			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+			fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
 			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
 			}
 		fprintf(UNITY_FILE, "\n\t////Container contents complete");

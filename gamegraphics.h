@@ -67,4 +67,6 @@ void WriteShockCutsceneBitmaps(unsigned char *KeyFrame, unsigned char *art_ark, 
 //void ApplyKeyFrame(unsigned char *keyframe,unsigned char *output,int BitMapSize);
 void cyclePalette(palette *pal, int Start, int length);
 void copyPalette(palette *inPal, palette *outPal);
+
+void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, char OutFileName[255], int useTGA);
 #endif /*gamegraphics_h*/

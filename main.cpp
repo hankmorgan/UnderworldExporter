@@ -633,6 +633,7 @@ if (true)
 					break;
 				case UW1:
 					sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
+					//sprintf_s(fileCrit, 255, "%s\\crit\\", path_uw1);
 					sprintf_s(fileAssoc, 255, "%s\\%s", path_uw1, UW1_CRITTER_ASSOC);
 					sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
 					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
@@ -790,6 +791,7 @@ switch (game)
 				}
 			break;
 		case CRITTER_EXTRACT_MODE:
+			//extractAllCritters(fileAssoc, fileCrit, Graphics_Pal, UW1, OutFileName, useTGA);
 			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA);
 			break;
 		case CUTSCENE_EXTRACT_MODE:
