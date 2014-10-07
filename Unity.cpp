@@ -823,6 +823,7 @@ void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, 
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
+	//fprintf(UNITY_FILE, "\n\tmyObj.transform.localScale.x = new Vector3(2, 2, 2);");
 	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
 	if ((currobj.DeathWatched >= 1) && (game == SHOCK))
 		{
@@ -1126,7 +1127,7 @@ float offX; float offY; float offZ;
 					objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					objList[nextObj].tileY = y;
 					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);//Figures out where the object should be.
-					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0)+((BrushZ*1.5)/100);
+					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0)+((BrushZ*1.5)/100);//shift up the z a small bit.
 					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])))
 						{//Everything but traps and triggers
 						if (objList[nextObj].AlreadyRendered != 1)

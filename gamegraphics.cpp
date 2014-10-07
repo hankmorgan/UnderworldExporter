@@ -70,7 +70,7 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 	FILE *file = NULL;      // File pointer
 	
     if ((file = fopen(filePathIn, "rb")) == NULL)
-       { printf("Could not open specified file\n"); return;}
+       { fprintf(LOGFILE,"Could not open specified file\n"); return;}
 
     // Get the size of the file in bytes
     long fileSize = getFileSize(file);
@@ -129,7 +129,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	FILE *file = NULL;      // File pointer
 	
     if ((file = fopen(filePathIn, "rb")) == NULL)
-       { printf("Could not open specified file\n"); return;}
+       { fprintf(LOGFILE,"Could not open specified file\n"); return;}
 
     // Get the size of the file in bytes
     long fileSize = getFileSize(file);
@@ -160,9 +160,9 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				}
 			break;
 		case UW_GRAPHICS_TEXTURES :	//.tr
-			printf("File Type :%d\n",  textureFile[0]);
-			printf("xy resolution:%d\n", textureFile[1]);
-			printf("No of textures:%d\n", textureFile[3] << 8 | textureFile[2]);
+			fprintf(LOGFILE,"File Type :%d\n",  textureFile[0]);
+			fprintf(LOGFILE,"xy resolution:%d\n", textureFile[1]);
+			fprintf(LOGFILE,"No of textures:%d\n", textureFile[3] << 8 | textureFile[2]);
 			if (ImageCount == -1)	//All the images.
 				{
 				NoOfTextures = textureFile[3] << 8 | textureFile[2];
@@ -190,8 +190,8 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 		case UW_GRAPHICS_CR :
 		case UW_GRAPHICS_SR :
 		case UW_GRAPHICS_AR :
-			printf("File Type (should be %d):%d\n", FileType, textureFile[0]);
-			printf("No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
+			fprintf(LOGFILE,"File Type (should be %d):%d\n", FileType, textureFile[0]);
+			fprintf(LOGFILE,"No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
 			if (ImageCount == -1)	//All the images.
 			{
 				NoOfTextures = textureFile[2] << 8 | textureFile[1];
@@ -213,9 +213,9 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				switch (getValAtAddress(textureFile, textureOffset, 8))
 					{
 					case 0x4://8 bit uncompressed
-						printf("8 bit uncompressed\n");
-						printf("Width = %d\n",getValAtAddress(textureFile, textureOffset + 1, 8));
-						printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+						fprintf(LOGFILE,"8 bit uncompressed\n");
+						fprintf(LOGFILE,"Width = %d\n",getValAtAddress(textureFile, textureOffset + 1, 8));
+						fprintf(LOGFILE,"Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 						textureOffset = textureOffset + 5;
 						if (useTGA==1)
 							{
@@ -227,12 +227,12 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 							}
 						break;
 					case 0x8://4 bit run-length
-						printf("4 bit run-length\n");
-						//printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
-						//printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+						fprintf(LOGFILE,"4 bit run-length\n");
+						//fprintf(LOGFILE,"Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
+						//fprintf(LOGFILE,"Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 						auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
-						//printf("Aux Pal = %d\n", auxPalIndex);
-						//printf("Data length = %d\n", getValAtAddress(textureFile, textureOffset + 4, 16));
+						//fprintf(LOGFILE,"Aux Pal = %d\n", auxPalIndex);
+						//fprintf(LOGFILE,"Data length = %d\n", getValAtAddress(textureFile, textureOffset + 4, 16));
 						datalen = getValAtAddress(textureFile,textureOffset+4,16);
 						imgNibbles = new unsigned char[BitMapWidth*BitMapHeight*2];
 
@@ -253,12 +253,12 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						
 						break;
 					case 0xA://4 bit uncompressed
-						printf("4 bit uncompressed\n");
-						//printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
-						//printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+						fprintf(LOGFILE,"4 bit uncompressed\n");
+						//fprintf(LOGFILE,"Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
+						//fprintf(LOGFILE,"Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 						auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
-						//printf("Aux Pal = %d\n", auxPalIndex);
-						//printf("Data length = %d\n", getValAtAddress(textureFile, textureOffset + 4, 16));
+						//fprintf(LOGFILE,"Aux Pal = %d\n", auxPalIndex);
+						//fprintf(LOGFILE,"Data length = %d\n", getValAtAddress(textureFile, textureOffset + 4, 16));
 						datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
 						imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
 
@@ -277,7 +277,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 						
 						break;
 					default:
-						printf("Unknown file type : %d\n", getValAtAddress(textureFile, textureOffset, 8));
+						fprintf(LOGFILE,"Unknown file type : %d\n", getValAtAddress(textureFile, textureOffset, 8));
 						break;
 					}
 				
@@ -287,7 +287,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 
 
 	//NoOfTextures=0;
-	//printf("Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
+	//fprintf(LOGFILE,"Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
 
  	
 return;	         
@@ -372,7 +372,7 @@ void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 			for (int buf = 4; buf > bmihead.biWidth%4; buf--)
 				fwrite(&ch,1,1,outf);
 	}
-	//printf(".");
+	//fprintf(LOGFILE,".");
 	fclose(outf);	
 
 
@@ -403,7 +403,7 @@ void LoadAuxilaryPal(char auxpalPath[255], palette auxpal[16], palette gamepal[2
 		auxpal[j].red = gamepal[value].red;
 		auxpal[j].reserved = gamepal[value].reserved;
 
-		//printf("%d\n", auxpal[j]);
+		//fprintf(LOGFILE,"%d\n", auxpal[j]);
 	}
 	return;
 
@@ -444,8 +444,8 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 			}
 		case repeat_record:
 			{
-				//printf("\nRepeatRecord\n");
-				//printf("Count is %d\n",count);
+				//fprintf(LOGFILE,"\nRepeatRecord\n");
+				//fprintf(LOGFILE,"Count is %d\n",count);
 				//get nibble for the palette;
 				nibble = getNibble(imageData, &add_ptr);
 				//for count times copy the palette data to the image at the output pointer
@@ -455,7 +455,7 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 					}
 				for (int i = 0; i < count; i++)
 					{
-					//printf("%d=%d\n", curr_pxl, nibble);
+					//fprintf(LOGFILE,"%d=%d\n", curr_pxl, nibble);
 					outputImg[curr_pxl++] = nibble;
 					}
 				if (repeatcount == 0 )
@@ -473,19 +473,19 @@ while ((curr_pxl<imageWidth*imageHeight) || (add_ptr<=datalen))
 
 	case 2:	//runrecord
 		{
-		//printf("\nRunRecord\n");
+		//fprintf(LOGFILE,"\nRunRecord\n");
 		count = getcount(imageData, &add_ptr, BitSize);
 		if (imageWidth*imageHeight - curr_pxl < count)
 			{
 				count = imageWidth*imageHeight - curr_pxl;
 			}
-		//printf("Count is %d\n", count);
+		//fprintf(LOGFILE,"Count is %d\n", count);
 			//for that count copy the data / pal as it is
 			for (int i = 0; i < count; i++)
 			{
 				//get nibble for the palette;
 				nibble = getNibble(imageData, &add_ptr);
-				//printf("%d=%d\n", curr_pxl, nibble);
+				//fprintf(LOGFILE,"%d=%d\n", curr_pxl, nibble);
 				outputImg[curr_pxl++] = nibble;
 			}
 			state = repeat_record_start;
@@ -537,7 +537,7 @@ int i = 0;
 	{
 		OutputData[i] = (getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F;		//High nibble
 		OutputData[i + 1] = (getValAtAddress(InputData, add_ptr, 8)) & 0xf;	//Low nibble
-		//printf("%d,%d\n", OutputData[i], OutputData[i+1]);
+		//fprintf(LOGFILE,"%d,%d\n", OutputData[i], OutputData[i+1]);
 		i=i+2;
 		add_ptr++;
 		NoOfNibbles = NoOfNibbles-2;
@@ -566,7 +566,7 @@ mask[5] = 0x1F;
 	while (NoOfNibbles > 0)
 		{
 		unsigned char buf;
-		printf("\n**%d***\n", i);
+		fprintf(LOGFILE,"\n**%d***\n", i);
 		//read in my byte and take the needed bits from it
 		if (bit_ptr<=2)
 			{
@@ -582,17 +582,17 @@ mask[5] = 0x1F;
 			bit_ptr=0;
 			bits_avail=5;
 			}
-		printf("\nReading in %d bits @ %d",bits_avail,bit_ptr);
+		fprintf(LOGFILE,"\nReading in %d bits @ %d",bits_avail,bit_ptr);
 		buf = (InputData[add_ptr] >> (bit_ptr)) & mask[bits_avail];
 		bit_ptr=bit_ptr+bits_avail;
 		bits_needed= bits_needed-bits_avail;
 	
 		if (bits_needed > 0)
 			{//I need more bits. Read in the next byte and take whats there.
-			printf("\nI need %d bits", bits_needed);
+			fprintf(LOGFILE,"\nI need %d bits", bits_needed);
 				add_ptr++;
 				bit_ptr = 0;
-				printf("\nReading in %d bits @ %d", bits_needed, bit_ptr);
+				fprintf(LOGFILE,"\nReading in %d bits @ %d", bits_needed, bit_ptr);
 				buf = ((InputData[add_ptr] & mask[bits_needed])<<bits_needed) | buf;
 				bit_ptr=bits_needed;
 			}
@@ -616,7 +616,7 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 
 	if ((file = fopen(filePathIn, "rb")) == NULL)
 	{
-		printf("Could not open specified file\n"); return;
+		fprintf(LOGFILE,"Could not open specified file\n"); return;
 	}
 
 	// Get the size of the file in bytes
@@ -642,8 +642,8 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 	case UW_GRAPHICS_CR:
 	case UW_GRAPHICS_SR:
 	case UW_GRAPHICS_AR:
-		printf("File Type (should be %d):%d\n", FileType, textureFile[0]);
-		printf("No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
+		fprintf(LOGFILE,"File Type (should be %d):%d\n", FileType, textureFile[0]);
+		fprintf(LOGFILE,"No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
 		if (ImageCount == -1)	//All the images.
 		{
 			NoOfTextures = textureFile[2] << 8 | textureFile[1];
@@ -671,9 +671,9 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 			//switch (getValAtAddress(textureFile, textureOffset, 8))
 			//{
 			//default://8 bit uncompressed
-				printf("8 bit uncompressed\n");
-				printf("Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
-				printf("Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
+				fprintf(LOGFILE,"8 bit uncompressed\n");
+				fprintf(LOGFILE,"Width = %d\n", getValAtAddress(textureFile, textureOffset + 1, 8));
+				fprintf(LOGFILE,"Height = %d\n", getValAtAddress(textureFile, textureOffset + 2, 8));
 				//textureOffset = 1;//textureOffset + 1;
 				if (useTGA == 1)
 					{
@@ -692,19 +692,20 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 
 
 	//NoOfTextures=0;
-	//printf("Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
+	//fprintf(LOGFILE,"Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
 
 
 	return;
 }
 
-void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA)
+void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput)
 {
+//char *CritterAnims[6] = { "CombatIdle" , "AttackBash" , "AttackSlash", "AttackThrust", "AttackSecondary","Walking"  };
 	palette *pal;
 	unsigned char auxpalval[32];
 	pal = new palette[256];
 	getPalette(PaletteFile, pal, 0);//always palette 0?
-
+	int slotIndices[128];
 	palette auxpal[32];
 	long fileSize;
 	unsigned char *assocFile;
@@ -712,10 +713,11 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	int auxPalNo=PaletteNo;
 	int anim;
 	int AddressPointer;
+	int slotBase = 0;//I offset the animations slots by this number!!!! 
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(fileAssoc, "rb")) == NULL)
 	{
-		printf("\nArchive not found!\n");
+		fprintf(LOGFILE,"\nArchive not found!\n");
 		return;
 	}
 	fileSize = getFileSize(file);
@@ -723,25 +725,25 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	fread(assocFile, fileSize, 1, file);
 	fclose(file);
 	//AddressPointer= CritterNo *8;
-	if (game !=UW2)
-		{
-		//for (int i = 0; i < 8; i++)
-		//	{
-		//	printf("%c", assocFile[(CritterNo * 8) + i]);
-		//	}
-		anim = getValAtAddress(assocFile, (32 * 8) + (CritterNo * 2) + 0, 8);
-		int DefaultauxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
-		//printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
-		}
-	else
-		{
-		anim = getValAtAddress(assocFile, (CritterNo * 2) + 0, 8);
-		int DefaultauxPalNo = getValAtAddress(assocFile, (CritterNo * 2) + 1, 8);
-		//printf("\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
-		}
+	////////if (game !=UW2)
+	////////	{
+	////////	//for (int i = 0; i < 8; i++)
+	////////	//	{
+	////////	//	fprintf(LOGFILE,"%c", assocFile[(CritterNo * 8) + i]);
+	////////	//	}
+	////////	anim = getValAtAddress(assocFile, (32 * 8) + (CritterNo * 2) + 0, 8);
+	////////	int DefaultauxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
+	////////	//fprintf(LOGFILE,"\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
+	////////	}
+	////////else
+	////////	{
+	////////	anim = getValAtAddress(assocFile, (CritterNo * 2) + 0, 8);
+	////////	int DefaultauxPalNo = getValAtAddress(assocFile, (CritterNo * 2) + 1, 8);
+	////////	//fprintf(LOGFILE,"\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
+	////////	}
 	if ((file = fopen(fileCrit, "rb")) == NULL)
 	{
-		printf("\nArchive not found!\n");
+		fprintf(LOGFILE,"\nArchive not found!\n");
 		return;
 	}
 	fileSize = getFileSize(file);
@@ -750,24 +752,53 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	fclose(file);
 	if (game !=UW2)
 			{
-			printf("\nSlot base %d\n", getValAtAddress(critterFile, 0, 8));
-			int NoOfSlots = getValAtAddress(critterFile,1,8);
-			printf("No of Slots %d\n", NoOfSlots);
+			AddressPointer = 0;
+			fprintf(LOGFILE, "\nFile:%s, Palette = %d", fileCrit,PaletteNo);
+			slotBase = getValAtAddress(critterFile, AddressPointer, 8);
+			fprintf(LOGFILE, "\nSlot base %d\n", slotBase);
+			int NoOfSlots = getValAtAddress(critterFile, AddressPointer+1, 8);
+			fprintf(LOGFILE,"No of Slots %d\n", NoOfSlots);
+			AddressPointer=2;
+			int k=0;
 			for (int i = 0; i < NoOfSlots; i++)
 			{
-				printf("\nIndex %d = %d",i,getValAtAddress(critterFile,2+i,8));
-			}
-			int NoOfSegs = getValAtAddress(critterFile, 2 + NoOfSlots, 8);
-			printf("\nNo of anim segments=%d", getValAtAddress(critterFile, 2 + NoOfSlots, 8));
-			for (int i = 0; i < NoOfSegs*8; i++)
-				{
-				printf("\t%d = %d,", i, getValAtAddress(critterFile,1+2+NoOfSlots+i,8));
-				AddressPointer = 1 + 2 + NoOfSlots + i;
+			if (getValAtAddress(critterFile, AddressPointer, 8) !=255)
+			     {
+				 slotIndices[k++] = i;//getValAtAddress(critterFile, AddressPointer, 8);
+				 fprintf(LOGFILE, "\nIndex %d = %d", i, getValAtAddress(critterFile, AddressPointer, 8));
 				}
+				
+				AddressPointer++;
+			}
+			int NoOfSegs = getValAtAddress(critterFile,AddressPointer, 8);
+			fprintf(LOGFILE,"\nNo of anim segments=%d", NoOfSegs);
 			AddressPointer++;
+			for (int i = 0; i < NoOfSegs; i++)
+				{
+				for (int j = 0; j < 8; j++)
+					{
+					if (getValAtAddress(critterFile, AddressPointer, 8) != 255)
+						{
+						fprintf(LOGFILE, "\nSlot %d ", slotIndices[i] + slotBase);
+						PrintAnimName(game, slotIndices[i]+slotBase);
+						fprintf(LOGFILE, "= Anim Frame %d is %d %s_%04d", j, getValAtAddress(critterFile, AddressPointer, 8), fileCrit, getValAtAddress(critterFile, AddressPointer, 8));
+						if (useTGA == 1)
+							{
+							fprintf(LOGFILE, ".tga");
+							}
+						else
+							{
+							fprintf(LOGFILE, ".bmp");
+							}
+						}
+					AddressPointer++;
+					}
+				//AddressPointer = 1 + 2 + NoOfSlots + i;
+
+				}
 			int NoOfPals = getValAtAddress(critterFile, AddressPointer, 8);
 			AddressPointer++;
-			printf("\nNo of Palettes %d",NoOfPals);
+			fprintf(LOGFILE,"\nNo of Palettes %d",NoOfPals);
 			//AddressPointer = AddressPointer + auxPalNo*32;
 			//if (auxPalNo==0)
 			//	{
@@ -785,13 +816,13 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	
 			AddressPointer=AddressPointer+NoOfPals*32;
 			int NoOfFrames = getValAtAddress(critterFile,AddressPointer,8);
-			printf("\nNo of Frames %d", NoOfFrames);
-			printf("\nCompression Type %d", getValAtAddress(critterFile, AddressPointer+1, 8));
+			//fprintf(LOGFILE,"\nNo of Frames Offsets %d", NoOfFrames);
+			//fprintf(LOGFILE,"\nCompression Type %d", getValAtAddress(critterFile, AddressPointer+1, 8));
 			AddressPointer=AddressPointer+2;
 			for (int i = 0; i < NoOfFrames; i++)
 				{
 				int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
-				printf("\n%d @ %d", i, frameOffset);
+				//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
 				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
 				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
 				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
@@ -800,21 +831,20 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 				int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
 				//unsigned char *imgNibbles;
 				unsigned char *outputImg;
-				//imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
-				//copyNibbles5Bit(critterFile, imgNibbles, datalen, frameOffset+7);
-				//copyNibbles(critterFile, imgNibbles, datalen, frameOffset + 7);
+
 				outputImg = new unsigned char[BitMapWidth*BitMapHeight];
 				ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-				if (useTGA==1)
+				if (SkipFileOutput==1)
 					{
-					writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);	
+					if (useTGA == 1)
+						{
+						writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName, 1);
+						}
+					else
+						{
+						writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+						}
 					}
-				else
-					{
-					writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);	
-					}
-				
-				//DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, outputImg, auxpal, i,4);
 				}
 			}
 	else
@@ -839,7 +869,7 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 			int frameOffset = getValAtAddress(critterFile, index, 16);
 			if (frameOffset != 0)
 				{
-				printf("\n%d @ %d", i, frameOffset);
+				fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
 				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
 				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
 				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
@@ -903,7 +933,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 			if ((int)rawbits == EOF)
 				return;
 
-			//         printf("fgetc: %02x\n",rawbits);
+			//         fprintf(LOGFILE,"fgetc: %02x\n",rawbits);
 
 			unsigned int shiftval = 8 - (bits - bits_avail);
 
@@ -921,7 +951,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 			rawbits <<= bits;
 		}
 
-		//      printf("nibble: %02x\n",nibble);
+		//      fprintf(LOGFILE,"nibble: %02x\n",nibble);
 
 		// now that we have a nibble
 		datalen--;
@@ -964,7 +994,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 		{
 		case 0:
 			// repeat record stage 1
-			//         printf("repeat: new count: %x\n",count);
+			//         fprintf(LOGFILE,"repeat: new count: %x\n",count);
 
 			if (count == 1)
 			{
@@ -994,7 +1024,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 				  }
 		}
 
-			//         printf("repeat: wrote %x times a '%x'\n",count,nibble);
+			//         fprintf(LOGFILE,"repeat: wrote %x times a '%x'\n",count,nibble);
 
 			if (repeatcount == 0)
 			{
@@ -1011,7 +1041,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 			// multiple repeat stage
 
 			// 'count' specifies the number of repeat record to appear
-			//         printf("multiple repeat: %u\n",count);
+			//         fprintf(LOGFILE,"multiple repeat: %u\n",count);
 			repeatcount = count - 1;
 			record = 0;
 			break;
@@ -1020,7 +1050,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 			// run record stage 1
 			// copy 'count' nibbles
 
-			//         printf("run: count: %x\n",count);
+			//         fprintf(LOGFILE,"run: count: %x\n",count);
 
 			record = 4; // retrieve next nibble
 			continue;
@@ -1033,7 +1063,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 
 			if (--count == 0)
 			{
-				//            printf("run: finished\n");
+				//            fprintf(LOGFILE,"run: finished\n");
 				record = 0; // next one is a repeat again
 			}
 			else
@@ -1065,7 +1095,7 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 	fopen_s(&fd, filePathIn, "rb");
 	if (fd == NULL)
 		{
-		printf("Unable to open file!");
+		fprintf(LOGFILE,"Unable to open file!");
 		return 0;
 		}
 
@@ -1073,13 +1103,13 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 	fseek(fd, 0, SEEK_END);
 	long filesize = ftell(fd);
 	fseek(fd, 0, SEEK_SET);
-	printf("Reading in cutscene header\n");
+	fprintf(LOGFILE,"Reading in cutscene header\n");
 	// read in anim file header
 	fread(&lpheader, sizeof(lpfileheader), 1, fd);
 
 	// skip color cycling structures
 	fseek(fd, 128, SEEK_CUR);
-	printf("Reading in cutscene palette\n");
+	fprintf(LOGFILE,"Reading in cutscene palette\n");
 	// read in color palette
 	for (int i = 0; i<256; i++)
 		{
@@ -1097,7 +1127,7 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 		}
 
 	// read in large page descriptors
-	printf("Reading in cutscene page descriptors\n");
+	fprintf(LOGFILE,"Reading in cutscene page descriptors\n");
 	fread(lparray, sizeof(lp_descriptor), 256, fd);
 
 	// the file pointer now points to the first large page structure
@@ -1106,7 +1136,7 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 	filesize -= ftell(fd);
 	pages = new Uint8[filesize];
 	fread(pages, filesize, 1, fd);
-	printf("All pages read into memory\n");
+	fprintf(LOGFILE,"All pages read into memory\n");
 	fclose(fd);
 
 	// alloc memory for the outbuffer
@@ -1142,9 +1172,9 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 
 		// extract data to the output buffer
 		//   CPlayRunSkipDump(ppointer, outbuffer);
-		printf("Decoding frame %d of %d\n", framenumber, lpheader.nFrames);
+		fprintf(LOGFILE,"Decoding frame %d of %d\n", framenumber, lpheader.nFrames);
 		myPlayRunSkipDump(ppointer, outbuffer);
-		printf("Writing frame %d of %d to file\n", framenumber, lpheader.nFrames);
+		fprintf(LOGFILE,"Writing frame %d of %d to file\n", framenumber, lpheader.nFrames);
 		if (useTGA==1)
 			{
 			writeTGA(outbuffer, 0, lpheader.width, lpheader.height, framenumber,pal,filePathOut,0);//No alpha on cutscenes.
@@ -1155,7 +1185,7 @@ bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 			}
 		}
 
-	printf("Cutscene decoded\n");
+	fprintf(LOGFILE,"Cutscene decoded\n");
 	return true;
 	}
 
@@ -1321,7 +1351,7 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(GraphicsFile, "rb")) == NULL)
 		{
-		printf("\nGraphics file not found!\n");
+		fprintf(LOGFILE,"\nGraphics file not found!\n");
 		return;
 		}
 	long fileSize = getFileSize(file);
@@ -1454,15 +1484,15 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 				int blockAddress =getShockBlockAddress(chunkId,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
 				if (blockAddress != -1)
 					{
-					printf("\nChunk %d, type %d", chunkId, chunkType);
+					fprintf(LOGFILE,"\nChunk %d, type %d", chunkId, chunkType);
 					art_ark=new unsigned char[chunkUnpackedLength];
 					LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark,chunkPackedLength,chunkUnpackedLength);
 					
 					//Read in my chunk header
 					int NoOfTextures=getValAtAddress(art_ark,0,16);
 					
-					//printf("No of texture subblocks %d\n",NoOfTextures);
-					//printf("Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
+					//fprintf(LOGFILE,"No of texture subblocks %d\n",NoOfTextures);
+					//fprintf(LOGFILE,"Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
 			
 					for (int i =0; i<NoOfTextures; i++)
 						{
@@ -1494,7 +1524,7 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 					}
 				else
 					{
-					printf("Graphics chunk %d not found in %s\n", chunkId,GraphicsFile);
+					fprintf(LOGFILE,"Graphics chunk %d not found in %s\n", chunkId,GraphicsFile);
 					}
 			}
 		}	
@@ -1514,7 +1544,7 @@ int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo)
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(PaletteFile, "rb")) == NULL)
 		{
-		printf("\nPalette file not found!\n");
+		fprintf(LOGFILE,"\nPalette file not found!\n");
 		return -1;
 		}
 	long fileSize = getFileSize(file);
@@ -1568,7 +1598,7 @@ int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo)
 		}
 	else
 		{
-		printf("Palette %d not found in %c", PaletteNo,PaletteFile);
+		fprintf(LOGFILE,"Palette %d not found in %c", PaletteNo,PaletteFile);
 		return-1;
 		}
 	return -1;
@@ -1635,11 +1665,11 @@ int Width;
 int Height;
 
 		//First 28 bytes are header info.
-		//printf("\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
+		//fprintf(LOGFILE,"\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
 		CompressionType=getValAtAddress(art_ark,textureOffset+4,16);
-		//printf("\nType=%d",CompressionType);
+		//fprintf(LOGFILE,"\nType=%d",CompressionType);
 		Width=getValAtAddress(art_ark,textureOffset+8,16);
-		//printf("\nWidth=%d",Width);
+		//fprintf(LOGFILE,"\nWidth=%d",Width);
 		Height=getValAtAddress(art_ark,textureOffset+10,16);
 		//Height=150;//?cutscenes???
 		if (isCutscene == 1)
@@ -1647,32 +1677,32 @@ int Height;
 			Width=320;
 			Height=150;
 			}
-////printf("\nBitmap header\n");
-////printf("Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
-////printf("Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
-////printf("??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
-////printf("Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
-////printf("Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
-////printf("Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
-////printf("log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
-////printf("log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
-////printf("%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
-////printf("%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
-////printf("%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
-////printf("%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
-////printf("??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
+////fprintf(LOGFILE,"\nBitmap header\n");
+////fprintf(LOGFILE,"Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
+////fprintf(LOGFILE,"Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
+////fprintf(LOGFILE,"??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
+////fprintf(LOGFILE,"Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
+////fprintf(LOGFILE,"Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
+////fprintf(LOGFILE,"Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
+////fprintf(LOGFILE,"log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
+////fprintf(LOGFILE,"log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
+////fprintf(LOGFILE,"%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
+////fprintf(LOGFILE,"%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
+////fprintf(LOGFILE,"%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
+////fprintf(LOGFILE,"%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
+////fprintf(LOGFILE,"??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
 		
 		
-		//printf("\nHeight=%d",Height);		
+		//fprintf(LOGFILE,"\nHeight=%d",Height);		
 	if ((Width>0) && (Height >0))
 		{
-		//printf("\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
-		//printf("\nAt E =%d",getValAtAddress(art_ark,textureOffset+0xE,8));
-		//printf("\nAt F =%d",getValAtAddress(art_ark,textureOffset+0xF,8));
-		//printf("\nAt 18 =%d",getValAtAddress(art_ark,textureOffset+0x18,32));
+		//fprintf(LOGFILE,"\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
+		//fprintf(LOGFILE,"\nAt E =%d",getValAtAddress(art_ark,textureOffset+0xE,8));
+		//fprintf(LOGFILE,"\nAt F =%d",getValAtAddress(art_ark,textureOffset+0xF,8));
+		//fprintf(LOGFILE,"\nAt 18 =%d",getValAtAddress(art_ark,textureOffset+0x18,32));
 		if(CompressionType==4)
 			{//compressed
-			//printf("Compressed bmp\n");
+			//fprintf(LOGFILE,"Compressed bmp\n");
 			unsigned char *outputImg;
 			outputImg = new unsigned char[Width*Height];
 			UncompressBitmap(art_ark+textureOffset+BitMapHeaderSize, outputImg,Height*Width);
@@ -1712,7 +1742,7 @@ PaletteChunk=2;
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(GraphicsFile, "rb")) == NULL)
 		{
-		printf("\nGraphics file not found!\n");
+		fprintf(LOGFILE,"\nGraphics file not found!\n");
 		return;
 		}
 	long fileSize = getFileSize(file);
@@ -1798,15 +1828,15 @@ PaletteChunk=2;
 					int blockAddress =getShockBlockAddress(chunkId,tmp_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
 					if (blockAddress != -1)
 						{
-						printf("\nChunk %d, type %d", chunkId, chunkType);
+						fprintf(LOGFILE,"\nChunk %d, type %d", chunkId, chunkType);
 						art_ark=new unsigned char[chunkUnpackedLength];
 						LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark,chunkPackedLength,chunkUnpackedLength);
 						
 						//Read in my chunk header
 						int NoOfTextures=getValAtAddress(art_ark,0,16);
 						
-						//printf("No of texture subblocks %d\n",NoOfTextures);
-						//printf("Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
+						//fprintf(LOGFILE,"No of texture subblocks %d\n",NoOfTextures);
+						//fprintf(LOGFILE,"Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
 						unsigned char *keyframe=new unsigned char[320*150];
 						for (int i =0; i<NoOfTextures; i++)
 							{
@@ -1816,7 +1846,7 @@ PaletteChunk=2;
 						}
 					else
 						{
-						printf("Graphics chunk %d not found in %s\n", chunkId,GraphicsFile);
+						fprintf(LOGFILE,"Graphics chunk %d not found in %s\n", chunkId,GraphicsFile);
 						}
 				}
 		}
@@ -1835,26 +1865,26 @@ int Width;
 int Height;
 
 		//First 28 bytes are header info.
-		//printf("\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
+		//fprintf(LOGFILE,"\nAlways 0=%d",getValAtAddress(art_ark,textureOffset+0,32));
 		CompressionType=getValAtAddress(art_ark,textureOffset+4,16);
-		//printf("\nType=%d",CompressionType);
+		//fprintf(LOGFILE,"\nType=%d",CompressionType);
 		Width=getValAtAddress(art_ark,textureOffset+8,16);
-		//printf("\nWidth=%d",Width);
+		//fprintf(LOGFILE,"\nWidth=%d",Width);
 		Height=getValAtAddress(art_ark,textureOffset+10,16);
 		Height=150;//?cutscenes???
 		
 		
 		
-		//printf("\nHeight=%d",Height);		
+		//fprintf(LOGFILE,"\nHeight=%d",Height);		
 	if ((Width>0) && (Height >0))
 		{
-		//printf("\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
-		//printf("\nAt E =%d",getValAtAddress(art_ark,textureOffset+0xE,8));
-		//printf("\nAt F =%d",getValAtAddress(art_ark,textureOffset+0xF,8));
-		//printf("\nAt 18 =%d",getValAtAddress(art_ark,textureOffset+0x18,32));
+		//fprintf(LOGFILE,"\nAt 6 =%d",getValAtAddress(art_ark,textureOffset+6,16));
+		//fprintf(LOGFILE,"\nAt E =%d",getValAtAddress(art_ark,textureOffset+0xE,8));
+		//fprintf(LOGFILE,"\nAt F =%d",getValAtAddress(art_ark,textureOffset+0xF,8));
+		//fprintf(LOGFILE,"\nAt 18 =%d",getValAtAddress(art_ark,textureOffset+0x18,32));
 		if(CompressionType==4)
 			{//compressed
-			//printf("Compressed bmp\n");
+			//fprintf(LOGFILE,"Compressed bmp\n");
 			unsigned char *outputImg;
 			outputImg = new unsigned char[Width*Height];
 			if (index==0)
@@ -1956,12 +1986,13 @@ void copyPalette(palette *inPal, palette *outPal)
 
 
 
-void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, char OutFileName[255], int useTGA)
+void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA)
 	{
+	char OutFileName[255];
 	palette auxpal[32];
 	if (game != UW1)
 		{
-		printf("UW1 only for the moment");
+		fprintf(LOGFILE,"UW1 only for the moment");
 		return;
 		}
 	long fileSize;
@@ -1971,7 +2002,7 @@ void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFil
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(fileAssoc, "rb")) == NULL)
 		{
-		printf("\nArchive not found!\n");
+		fprintf(LOGFILE,"\nArchive not found!\n");
 		return;
 		}
 	fileSize = getFileSize(file);
@@ -1984,15 +2015,47 @@ void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFil
 		char fileCrit[255];
 		int auxPalNo = getValAtAddress(assocFile, AssocPtr + 1, 8);
 		int CritterID = getValAtAddress(assocFile, AssocPtr + 0, 8);
-		printf("\n Anim ID: %d - which is %s", CritterID, objectMasters[CritterID+0x40].desc );
-		printf("\t Palette is %d", auxPalNo);
+		fprintf(LOGFILE,"\n Anim ID: %d - which is %s", i, objectMasters[i+0x40].desc );
+		//fprintf(LOGFILE,"\t Palette is %d", auxPalNo);
 		sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N00", CritPath,CritterID);//page 1
 		sprintf_s(OutFileName, 255, "CR%02oPAGE_N00_%d", CritterID, auxPalNo);
-		extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA);
+		extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA,0);
 		sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N01", CritPath, CritterID);//page 2
 		sprintf_s(OutFileName, 255, "CR%02oPAGE_N01_%d", CritterID, auxPalNo);
-		extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA);
+		extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA,0);
 		//
 		AssocPtr=AssocPtr+2;
+		}
+	}
+
+void PrintAnimName(int game, int animNo)
+	{
+	switch (animNo)
+		{
+		case 0x0:fprintf(LOGFILE, "combat idle");break;
+		case 0x1:fprintf(LOGFILE, "attack, bash"); break;
+		case 0x2:fprintf(LOGFILE, "attack, slash"); break;
+		case 0x3:fprintf(LOGFILE, "attack, thrust"); break;
+		case 0x5:fprintf(LOGFILE, "second weapon attack"); break;
+		case 0x7:fprintf(LOGFILE, "walking / running towards player"); break;
+		case 0xc:fprintf(LOGFILE, "death"); break;
+		case 0xd:fprintf(LOGFILE, "begin combat?"); break;
+		case 0x20:fprintf(LOGFILE, "idle, facing away from player(180 degrees)"); break;
+		case 0x21:fprintf(LOGFILE, "idle, 135 deg."); break;
+		case 0x22:fprintf(LOGFILE, "idle, angle 90 deg."); break;
+		case 0x23:fprintf(LOGFILE, "idle, angle 45 deg."); break;
+		case 0x24:fprintf(LOGFILE, "idle, facing towards player, 0 deg."); break;
+		case 0x25:fprintf(LOGFILE, "idle, angle - 45 deg."); break;
+		case 0x26:fprintf(LOGFILE, "idle, angle - 90 deg."); break;
+		case 0x27:fprintf(LOGFILE, "idle, angle - 135 deg."); break;
+		case 0x80:fprintf(LOGFILE, "walking, facing away from player(180 degrees)"); break;
+		case 0x81:fprintf(LOGFILE, "walking, 135 deg."); break;
+		case 0x82:fprintf(LOGFILE, "walking, angle 90 deg."); break;
+		case 0x83:fprintf(LOGFILE, "walking, angle 45 deg."); break;
+		case 0x84:fprintf(LOGFILE, "walking, facing towards player, 0 deg."); break;
+		case 0x85:fprintf(LOGFILE, "walking, angle - 45 deg."); break;
+		case 0x86:fprintf(LOGFILE, "walking, angle - 90 deg."); break;
+		case 0x87:fprintf(LOGFILE, "walking, angle - 135 deg."); break;
+		default:fprintf(LOGFILE, "unknown anim"); break;
 		}
 	}

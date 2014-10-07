@@ -123,6 +123,9 @@ extern int CEILING_HEIGHT;
 #define ALPHA 1
 
 
+#define LOGFILENAME "UWEXPORT_LOG.txt"
+extern FILE *LOGFILE;
+
 void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char filePath[255]);
 void LoadConfig(int game, int mode);
 int getShockObjectIndex(int objClass, int objSubClass, int objSubClassIndex);

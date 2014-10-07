@@ -192,7 +192,7 @@ void setKeyCount(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 				{
 					keycount[objList[i].ObjectSubClassIndex]++;
 					objList[i].keyCount = keycount[objList[i].ObjectSubClassIndex];
-					//printf("%s", UniqueObjectName(objList[i]));
+					//fprintf(LOGFILE,"%s", UniqueObjectName(objList[i]));
 				}
 				else
 				{
@@ -256,7 +256,7 @@ int ObjectSubClassIndex;
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(filePath, "rb")) == NULL)
 		{
-		printf("\nArchive not found!\n");
+		fprintf(LOGFILE,"\nArchive not found!\n");
 		return;
 		}
 	long fileSize = getFileSize(file);
@@ -275,7 +275,7 @@ int ObjectSubClassIndex;
 	int xref_ptr=0; 
 	int xRefLength = (chunkUnpackedLength/10);
 
-	//printf("\nxref\tTileX\tTileY\tMst\tNext\tNextTile\n");
+	//fprintf(LOGFILE,"\nxref\tTileX\tTileY\tMst\tNext\tNextTile\n");
 	for (i=0;i<chunkUnpackedLength/10;i++)
 		{
 		xref[i].tileX= getValAtAddress(xref_ark,xref_ptr+0,16);
@@ -288,7 +288,7 @@ int ObjectSubClassIndex;
 			xref[i].duplicate =1;
 			xref[i].duplicateAssigned=0;	//when this changes to 1 in a later loop it is the particular instance to use.
 			}
-		//printf("%d\t%d\t%d\t%d\t%d\t%d\n",
+		//fprintf(LOGFILE,"%d\t%d\t%d\t%d\t%d\t%d\n",
 //		i,xref[i].tileX ,xref[i].tileY,xref[i].MstIndex,xref[i].next,xref[i].nextTile);
 		
 		xref_ptr+=10;
@@ -377,49 +377,49 @@ mstaddress_pointer=0;
 					objList[MasterIndex].Angle1 = getValAtAddress(mst_ark, mstaddress_pointer + 16, 8);
 					objList[MasterIndex].Angle2 = getValAtAddress(mst_ark, mstaddress_pointer + 17, 8);
 					objList[MasterIndex].Angle3 = getValAtAddress(mst_ark, mstaddress_pointer + 18, 8);
-					//	printf("\tIt is a %s", objectMasters[objList[MasterIndex].item_id].desc );
+					//	fprintf(LOGFILE,"\tIt is a %s", objectMasters[objList[MasterIndex].item_id].desc );
 
 					objList[MasterIndex].sprite = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
 					objList[MasterIndex].State = getValAtAddress(mst_ark, mstaddress_pointer + 23, 8);
 					objList[MasterIndex].unk1 = getValAtAddress(mst_ark, mstaddress_pointer + 24, 8);
-					printf("\n++++++++Next object++++++++++++\n");
-					printf("\nMaster Record at %d", blockAddress + mstaddress_pointer);
-					printf("\nIndex = %d \n", objList[MasterIndex].index);
-					printf("Desc %s\t", objectMasters[objList[MasterIndex].item_id].desc);
-					printf("(%s)\n", UniqueObjectName(objList[MasterIndex]));
-					printf("Class: %d,%d,%d\n", objList[MasterIndex].ObjectClass, objList[MasterIndex].ObjectSubClass, objList[MasterIndex].ObjectSubClassIndex);
-					printf("Location = (%d", objList[MasterIndex].tileX);
-					printf(",%d", objList[MasterIndex].tileY);
+					fprintf(LOGFILE,"\n++++++++Next object++++++++++++\n");
+					fprintf(LOGFILE,"\nMaster Record at %d", blockAddress + mstaddress_pointer);
+					fprintf(LOGFILE,"\nIndex = %d \n", objList[MasterIndex].index);
+					fprintf(LOGFILE,"Desc %s\t", objectMasters[objList[MasterIndex].item_id].desc);
+					fprintf(LOGFILE,"(%s)\n", UniqueObjectName(objList[MasterIndex]));
+					fprintf(LOGFILE,"Class: %d,%d,%d\n", objList[MasterIndex].ObjectClass, objList[MasterIndex].ObjectSubClass, objList[MasterIndex].ObjectSubClassIndex);
+					fprintf(LOGFILE,"Location = (%d", objList[MasterIndex].tileX);
+					fprintf(LOGFILE,",%d", objList[MasterIndex].tileY);
 					if (objList[MasterIndex].InUseFlag != 0)
 					{
-						printf(", %d)\n	", LevelInfo[objList[MasterIndex].tileX][objList[MasterIndex].tileY].floorHeight);
+						fprintf(LOGFILE,", %d)\n	", LevelInfo[objList[MasterIndex].tileX][objList[MasterIndex].tileY].floorHeight);
 					}
 					else
 					{
-						printf(")\n");
+						fprintf(LOGFILE,")\n");
 					}
-					printf("InUse = %d\n", objList[MasterIndex].InUseFlag);
-					printf("\tAIIndex = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 19, 8));
-					printf("\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
+					fprintf(LOGFILE,"InUse = %d\n", objList[MasterIndex].InUseFlag);
+					fprintf(LOGFILE,"\tAIIndex = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 19, 8));
+					fprintf(LOGFILE,"\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
 
-					//printf("\tunk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
-					//printf("\tunk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
-					//printf("\tunk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));				
-					printf("\tXCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 11, 8));
-					//printf("\tXCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8)); same as tileX
-					printf("\tYCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 13, 8));
-					//printf("\tYCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8)); same as tileY
-					printf("\t(%d) ZCoord = %d\n", blockAddress + mstaddress_pointer + 15, getValAtAddress(mst_ark, mstaddress_pointer + 15, 8));
-					printf("\tAngles = (%d", getValAtAddress(mst_ark, mstaddress_pointer + 16, 8));
-					printf(",%d", getValAtAddress(mst_ark, mstaddress_pointer + 17, 8));
-					printf("\,%d)\n", getValAtAddress(mst_ark, mstaddress_pointer + 18, 8));
-					printf("\tObjectType = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 20, 8));
-					printf("\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
-					printf("\t(%d) State = %d", blockAddress + mstaddress_pointer+23, objList[MasterIndex].State);
-					printf("\t(%d,%d)\n", (objList[MasterIndex].State >> 4) & 0xF, objList[MasterIndex].State & 0xF);
-					printf("\tunk1 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 24, 8));
-					printf("\tunk2 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 25, 8));
-					printf("\tunk3 = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 26, 8));
+					//fprintf(LOGFILE,"\tunk1 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+24,8));
+					//fprintf(LOGFILE,"\tunk2 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+25,8));
+					//fprintf(LOGFILE,"\tunk3 = %d\n",getValAtAddress(mst_ark,mstaddress_pointer+26,8));				
+					fprintf(LOGFILE,"\tXCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 11, 8));
+					//fprintf(LOGFILE,"\tXCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+12,8)); same as tileX
+					fprintf(LOGFILE,"\tYCoord= %d", getValAtAddress(mst_ark, mstaddress_pointer + 13, 8));
+					//fprintf(LOGFILE,"\tYCoord high= %d\n",getValAtAddress(mst_ark,mstaddress_pointer+14,8)); same as tileY
+					fprintf(LOGFILE,"\t(%d) ZCoord = %d\n", blockAddress + mstaddress_pointer + 15, getValAtAddress(mst_ark, mstaddress_pointer + 15, 8));
+					fprintf(LOGFILE,"\tAngles = (%d", getValAtAddress(mst_ark, mstaddress_pointer + 16, 8));
+					fprintf(LOGFILE,",%d", getValAtAddress(mst_ark, mstaddress_pointer + 17, 8));
+					fprintf(LOGFILE,"\,%d)\n", getValAtAddress(mst_ark, mstaddress_pointer + 18, 8));
+					fprintf(LOGFILE,"\tObjectType = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 20, 8));
+					fprintf(LOGFILE,"\tHitPoints = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 21, 16));
+					fprintf(LOGFILE,"\t(%d) State = %d", blockAddress + mstaddress_pointer+23, objList[MasterIndex].State);
+					fprintf(LOGFILE,"\t(%d,%d)\n", (objList[MasterIndex].State >> 4) & 0xF, objList[MasterIndex].State & 0xF);
+					fprintf(LOGFILE,"\tunk1 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 24, 8));
+					fprintf(LOGFILE,"\tunk2 = %d", getValAtAddress(mst_ark, mstaddress_pointer + 25, 8));
+					fprintf(LOGFILE,"\tunk3 = %d\n", getValAtAddress(mst_ark, mstaddress_pointer + 26, 8));
 					switch (ObjectClass)	//to get further properties specific to each class
 					{
 					case GUNS_WEAPONS:break;
@@ -430,38 +430,38 @@ mstaddress_pointer=0;
 					case HARDWARE:break;
 					case SOFTWARE_LOGS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					}
 					case FIXTURES:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					}
 					case GETTABLES_OTHER:
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					case SWITCHES_PANELS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					}
 					case DOORS_GRATINGS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { printf("\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					}
 					case ANIMATED:break;
 					case TRAPS_MARKERS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { fprintf(LOGFILE,"no properties found!"); }
 					break;
 					}
 					case CONTAINERS_CORPSES:
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex) == -1)  { fprintf(LOGFILE,"no properties found!"); }
 					break;
 					case CRITTERS:
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, MasterIndex) == -1)  { printf("no properties found!"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, MasterIndex) == -1)  { fprintf(LOGFILE,"no properties found!"); }
 						break;
 					}
 					UniqueObjectName(objList[MasterIndex]);
@@ -469,7 +469,7 @@ mstaddress_pointer=0;
 				else
 				{
 					objList[MasterIndex].InUseFlag=0;
-					printf("\n\nInvalid item id!!\n");
+					fprintf(LOGFILE,"\n\nInvalid item id!!\n");
 				}
 	
 
@@ -507,7 +507,7 @@ switch (game)
 	case UWDEMO:	//Underworld Demo
 		{
 		if ((file = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
 			printf ("");
 		// Get the size of the file in bytes
@@ -526,7 +526,7 @@ switch (game)
 	case UW1:	//Underworld 1
 		{
 		if ((file = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
 			printf ("");
 		// Get the size of the file in bytes
@@ -546,7 +546,7 @@ switch (game)
 	case UW2:	//Underworld 2
 		{
 		if ((file = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
 			printf ("");
 		fileSize = getFileSize(file);
@@ -563,7 +563,7 @@ switch (game)
 		address_pointer=(LevelNo * 4) + 6;
 		if (getValAtAddress(tmp_ark,address_pointer,32)==0)
 			{
-			printf("\nInvalid block address!\n");
+			fprintf(LOGFILE,"\nInvalid block address!\n");
 			return;
 			}
 		if (isCompressed == 1)
@@ -573,7 +573,7 @@ switch (game)
 			}
 		else
 			{//
-			//printf("how do i get an uncompressed object list");
+			//fprintf(LOGFILE,"how do i get an uncompressed object list");
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
 			int j = 0;
 			AddressOfBlockStart = 0;
@@ -599,7 +599,7 @@ switch (game)
 		{	//read in master object list
 		//if (x == 602)
 		//{
-		//	printf("");
+		//	fprintf(LOGFILE,"");
 		//}
 
 			objList[x].index = x; 
@@ -639,13 +639,13 @@ switch (game)
 			
 			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
 				{
-				//printf("\n%d\n", texture_map[objList[x].owner]);
+				//fprintf(LOGFILE,"\n%d\n", texture_map[objList[x].owner]);
 				//objList[x].owner = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				}
 			if (objectMasters[objList[x].item_id].type == BRIDGE)
 			{
-				//printf("\n%d\n", texture_map[objList[x].owner]);
+				//fprintf(LOGFILE,"\n%d\n", texture_map[objList[x].owner]);
 				if (objList[x].flags >= 2)
 				{
 					if (game == UW2)
@@ -665,8 +665,8 @@ switch (game)
 			objList[x].link  = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) >> 6 & 0x3FF) ; //bits 6-15
 			//objList[x].link = objList[x].quantity;
 			
-			////printf("\n\tNext Object ID to this object is  %d", objList[x].next  );
-			////printf("\n%d free object. Value 4=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+6,16));
+			////fprintf(LOGFILE,"\n\tNext Object ID to this object is  %d", objList[x].next  );
+			////fprintf(LOGFILE,"\n%d free object. Value 4=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+6,16));
 			
 
 			//cleanup of shock related stuff
@@ -681,25 +681,25 @@ switch (game)
 			objList[x].npc_attitude = (getValAtAddress(lev_ark,objectsAddress+address_pointer+13,16) >> 14);
 
 			////extra info //19 bytes
-			//printf("\n\tFree extra inf. Value 5=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+8,8));
-			//printf("\n\t\t free extra inf. Value 6=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+9,8));
-			//printf("\n\t\t free extra inf. Value 7=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+10,8));
-			//printf("\n\t\t free extra inf. Value 8=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+11,8));
-			//printf("\n\t\t free extra inf. Value 9=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+12,8));
-			//printf("\n\t\t free extra inf. Value 10=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+13,8));
-			//printf("\n\t\t free extra inf. Value 11=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+14,8));
-			//printf("\n\t\t free extra inf. Value 12=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+15,8));
-			//printf("\n\t\t free extra inf. Value 13=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+16,8));
-			//printf("\n\t\t free extra inf. Value 14=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+17,8));
-			//printf("\n\t\t free extra inf. Value 15=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+18,8));
-			//printf("\n\t\t free extra inf. Value 16=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+19,8));
-			//printf("\n\t\t free extra inf. Value 17=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+20,8));
-			//printf("\n\t\t free extra inf. Value 18=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+21,8));
-			//printf("\n\t\t free extra inf. Value 19=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+22,8));
-			//printf("\n\t\t free extra inf. Value 20=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+23,8));
-			//printf("\n\t\t free extra inf. Value 21=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+24,8));
-			//printf("\n\t\t free extra inf. Value 22=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+25,8));
-			//printf("\n\t\t free extra inf. Value 23=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+26,8));
+			//fprintf(LOGFILE,"\n\tFree extra inf. Value 5=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+8,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 6=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+9,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 7=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+10,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 8=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+11,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 9=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+12,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 10=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+13,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 11=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+14,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 12=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+15,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 13=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+16,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 14=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+17,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 15=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+18,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 16=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+19,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 17=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+20,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 18=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+21,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 19=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+22,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 20=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+23,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 21=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+24,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 22=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+25,8));
+			//fprintf(LOGFILE,"\n\t\t free extra inf. Value 23=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+26,8));
 
 			address_pointer=address_pointer+8+19;
 			}
@@ -707,7 +707,7 @@ switch (game)
 			{
 			//Static Objects
 			address_pointer=address_pointer+8;
-			//printf("\n%s", UniqueObjectName(objList[x]));
+			//fprintf(LOGFILE,"\n%s", UniqueObjectName(objList[x]));
 			}
 		}
 }
@@ -725,7 +725,7 @@ int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int i
 	long blockAddress =getShockBlockAddress(BlockNo,archive_ark,&chunkPackedLength,&chunkUnpackedLength,&chunkType); 
 	if (blockAddress == -1) {return -1;}
 	sub_ark=new unsigned char[chunkUnpackedLength];
-	printf("\nLoading Chunk at %d\n",blockAddress);
+	fprintf(LOGFILE,"\nLoading Chunk at %d\n",blockAddress);
 	LoadShockChunk(blockAddress,chunkType,archive_ark,sub_ark,chunkPackedLength,chunkUnpackedLength);
 	
 	int k= 0;
@@ -734,7 +734,7 @@ int add_ptr=0;
 //{
 //for (int z = 0; z < chunkUnpackedLength; z = z + 2)
 //{
-//	printf("z=%d, %d\n",z, getValAtAddress(sub_ark, add_ptr + z, 8));
+//	fprintf(LOGFILE,"z=%d, %d\n",z, getValAtAddress(sub_ark, add_ptr + z, 8));
 //}
 //}
 while (k<=chunkUnpackedLength)
@@ -748,16 +748,16 @@ while (k<=chunkUnpackedLength)
 				objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]=getValAtAddress(sub_ark,add_ptr+6,8);	//Software version
 				objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]=getValAtAddress(sub_ark,add_ptr+7,8) + 2488;	//Chunk containing log
 				objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]=getValAtAddress(sub_ark,add_ptr+8,8);	//Level No of Chunk
-				printf("\tSoftware Properties\n");
-				printf("\t\tVersion %d",objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]);
-				printf("\tLog Chunk %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]);
-				printf("\tLevel %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]);
+				fprintf(LOGFILE,"\tSoftware Properties\n");
+				fprintf(LOGFILE,"\t\tVersion %d",objList[objIndex].shockProperties[SOFT_PROPERTY_VERSION]);
+				fprintf(LOGFILE,"\tLog Chunk %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LOG]);
+				fprintf(LOGFILE,"\tLevel %d",objList[objIndex].shockProperties[SOFT_PROPERTY_LEVEL]);
 				return 1;
 				break;
 				}
 			case FIXTURES:
 			{
-				printf("\tFixture Properties\n");
+				fprintf(LOGFILE,"\tFixture Properties\n");
 				switch (objList[objIndex].ObjectSubClass)
 				{
 					case 0://regular fixtures
@@ -766,11 +766,11 @@ while (k<=chunkUnpackedLength)
 					case 4:
 					case 5:
 					case 6:
-						printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-						printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-						printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-						printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-						printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+						fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+						fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+						fprintf(LOGFILE,"\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+						fprintf(LOGFILE,"\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
 						break;
 					case 2:
 						  switch (objList[objIndex].ObjectSubClassIndex)
@@ -780,56 +780,56 @@ while (k<=chunkUnpackedLength)
 						  case 2://GRAFFITI
 						  case 4://painting
 						  case 5://poster
-							  printf("\n\tImage to use is value in unk1. Offset from image 1350_0390.bmp or 1350_0403.bmp in objart.res or 0078_0000.bmp or 0079_0000 in objart3.res");
+							  fprintf(LOGFILE,"\n\tImage to use is value in unk1. Offset from image 1350_0390.bmp or 1350_0403.bmp in objart.res or 0078_0000.bmp or 0079_0000 in objart3.res");
 							  break;
 						  case 3:
 							  {
 								  //based on SSHP interpretation
 								  int fontID[4] = { 4, 7, 0, 10 };
 								  float scale[4] = { 1.0, 0.75, 0.5, 0.25 };
-								  printf("Words:");
+								  fprintf(LOGFILE,"Words:");
 								  objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark, add_ptr + 6, 16);
-								  printf("\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
+								  fprintf(LOGFILE,"\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
 								  int FontNSize = getValAtAddress(sub_ark, add_ptr + 8, 16);
-								  printf("\nFont %d (+chunk 602)", fontID[FontNSize & 0x03]);
-								  printf("\nSize %d ", fontID[FontNSize>>4 & 0x03]);
-								  printf("\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+								  fprintf(LOGFILE,"\nFont %d (+chunk 602)", fontID[FontNSize & 0x03]);
+								  fprintf(LOGFILE,"\nSize %d ", fontID[FontNSize>>4 & 0x03]);
+								  fprintf(LOGFILE,"\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
 
-								  printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-								  printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-								  printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-								  printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-								  printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+								  fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+								  fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+								  fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+								  fprintf(LOGFILE,"\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+								  fprintf(LOGFILE,"\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
 								  break;
 							  }
 						  case 6:
 						  case 8:
 						  case 9:
-							  printf("Screens:");
+							  fprintf(LOGFILE,"Screens:");
 							  objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES] = getValAtAddress(sub_ark, add_ptr + 6, 16);
 							  objList[objIndex].shockProperties[SCREEN_LOOP_FLAG] = getValAtAddress(sub_ark, add_ptr + 8, 16);
 							  objList[objIndex].shockProperties[SCREEN_START] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
-							  printf("\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
-							  printf("\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
-							  printf("\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
+							  fprintf(LOGFILE,"\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
+							  fprintf(LOGFILE,"\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
+							  fprintf(LOGFILE,"\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
 							  break;
 						  default:
-							  printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-							  printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-							  printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-							  printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-							  printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+							  fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+							  fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+							  fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+							  fprintf(LOGFILE,"\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+							  fprintf(LOGFILE,"\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
 							  break;
 						  }
 						break;
 					case 7:	//bridges etc
-						printf("\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
-						printf("\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-						printf("\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-						printf("(%d", getValAtAddress(sub_ark, add_ptr + 0xA, 8));
-						printf(",%d)", getValAtAddress(sub_ark, add_ptr + 0xB, 8));
-						printf("\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-						printf("\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+						fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+						fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
+						fprintf(LOGFILE,"(%d", getValAtAddress(sub_ark, add_ptr + 0xA, 8));
+						fprintf(LOGFILE,",%d)", getValAtAddress(sub_ark, add_ptr + 0xB, 8));
+						fprintf(LOGFILE,"\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+						fprintf(LOGFILE,"\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
 						break;
 				}
 				
@@ -846,15 +846,15 @@ while (k<=chunkUnpackedLength)
 					objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = getValAtAddress(sub_ark, add_ptr + 0x8, 16);
 					objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = getValAtAddress(sub_ark, add_ptr + 0xA, 16);
 					objList[objIndex].shockProperties[CONTAINER_CONTENTS_4] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
-					printf("\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
-					printf("\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
-					printf("\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
-					printf("\tContents 4 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_4]);
+					fprintf(LOGFILE,"\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
+					fprintf(LOGFILE,"\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
+					fprintf(LOGFILE,"\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
+					fprintf(LOGFILE,"\tContents 4 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_4]);
 					}
 			
 				for (int j = 0; j < RecordSize; j = j + 2)
 					{
-						printf("j=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr+ j, 16));
+						fprintf(LOGFILE,"j=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr+ j, 16));
 					}
 
 				return 1;
@@ -862,10 +862,10 @@ while (k<=chunkUnpackedLength)
 				}
 			case SWITCHES_PANELS:
 				{
-				printf("\n\tSwitch Properties\n");
-				printf("\t\tSwitch Action?:%d",getValAtAddress(sub_ark,add_ptr+6,16));
-				printf("\tVariable:%d",getValAtAddress(sub_ark,add_ptr+8,16));
-				printf("\tFail Message:%d",getValAtAddress(sub_ark,add_ptr+10,16));
+				fprintf(LOGFILE,"\n\tSwitch Properties\n");
+				fprintf(LOGFILE,"\t\tSwitch Action?:%d",getValAtAddress(sub_ark,add_ptr+6,16));
+				fprintf(LOGFILE,"\tVariable:%d",getValAtAddress(sub_ark,add_ptr+8,16));
+				fprintf(LOGFILE,"\tFail Message:%d",getValAtAddress(sub_ark,add_ptr+10,16));
 				objList[objIndex].TriggerAction = getValAtAddress(sub_ark,add_ptr+6,16);
 				getShockButtons(LevelInfo,sub_ark,add_ptr,objList,objIndex);
 				return 1;
@@ -873,7 +873,7 @@ while (k<=chunkUnpackedLength)
 				}
 			case DOORS_GRATINGS:
 				{
-				printf("\n\tDoor Properties\n");
+				fprintf(LOGFILE,"\n\tDoor Properties\n");
 				int crossref = getValAtAddress(sub_ark, add_ptr + 6, 16);
 				if (crossref != 0)
 					{
@@ -885,9 +885,9 @@ while (k<=chunkUnpackedLength)
 					}
 				objList[objIndex].link = getValAtAddress(sub_ark, add_ptr + 10, 8);	//Link to it's key. reusage from uw.
 
-				printf("\t\tTrigger xref?:%d (%d)", xRef[crossref].MstIndex, crossref);
-				printf("\tMessage:%d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-				printf("\tAccess Required:%d\n", getValAtAddress(sub_ark, add_ptr + 10, 8));
+				fprintf(LOGFILE,"\t\tTrigger xref?:%d (%d)", xRef[crossref].MstIndex, crossref);
+				fprintf(LOGFILE,"\tMessage:%d", getValAtAddress(sub_ark, add_ptr + 8, 16));
+				fprintf(LOGFILE,"\tAccess Required:%d\n", getValAtAddress(sub_ark, add_ptr + 10, 8));
 				return 1;
 				break;
 				}
@@ -899,25 +899,25 @@ while (k<=chunkUnpackedLength)
 				objList[objIndex].conditions[3] = getValAtAddress(sub_ark,add_ptr+11,8);
 				objList[objIndex].TriggerOnce = getValAtAddress(sub_ark,add_ptr+7,8);
 				objList[objIndex].TriggerOnceGlobal = 0;
-					printf("\tConditions: %d",objList[objIndex].conditions[0]);
-					printf(",%d",objList[objIndex].conditions[1]);
-					printf(",%d",objList[objIndex].conditions[2]);
-					printf(",%d\n",objList[objIndex].conditions[3]);
-					printf("\tTrigger once: %d\n",objList[objIndex].TriggerOnce);
+					fprintf(LOGFILE,"\tConditions: %d",objList[objIndex].conditions[0]);
+					fprintf(LOGFILE,",%d",objList[objIndex].conditions[1]);
+					fprintf(LOGFILE,",%d",objList[objIndex].conditions[2]);
+					fprintf(LOGFILE,",%d\n",objList[objIndex].conditions[3]);
+					fprintf(LOGFILE,"\tTrigger once: %d\n",objList[objIndex].TriggerOnce);
 					objList[objIndex].address = blockAddress+add_ptr;
-					printf("\tObject is at address %d\n", objList[objIndex].address);
+					fprintf(LOGFILE,"\tObject is at address %d\n", objList[objIndex].address);
 					if (objectMasters[objList[objIndex].item_id].type == SHOCK_TRIGGER_REPULSOR)
 						{
 						objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark, add_ptr + 21, 8);
 						objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] = getValAtAddress(sub_ark, add_ptr + 24, 8);
-						printf("\tRepulsor Upwards Displacement is %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE]);
+						fprintf(LOGFILE,"\tRepulsor Upwards Displacement is %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE]);
 						if (objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG] == 1)
 							{
-							printf("\tRepulsor is off (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
+							fprintf(LOGFILE,"\tRepulsor is off (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
 							}
 						else
 							{
-							printf("\tRepulsor is on (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
+							fprintf(LOGFILE,"\tRepulsor is on (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
 							}
 						}
 				getShockTriggerAction(LevelInfo,sub_ark,add_ptr,xRef,objList,objIndex);
@@ -925,7 +925,7 @@ while (k<=chunkUnpackedLength)
 				return 1;
 				break;
 			case CONTAINERS_CORPSES:
-				printf("\n\tContainer Properties\n");
+				fprintf(LOGFILE,"\n\tContainer Properties\n");
 				objList[objIndex].shockProperties[CONTAINER_CONTENTS_1] = getValAtAddress(sub_ark, add_ptr + 0x6, 16);
 				objList[objIndex].shockProperties[CONTAINER_CONTENTS_2] = getValAtAddress(sub_ark, add_ptr + 0x8, 16);
 				objList[objIndex].shockProperties[CONTAINER_CONTENTS_3] = getValAtAddress(sub_ark, add_ptr + 0xA, 16);
@@ -935,23 +935,23 @@ while (k<=chunkUnpackedLength)
 				objList[objIndex].shockProperties[CONTAINER_DEPTH] = getValAtAddress(sub_ark, add_ptr + 0x10, 8);
 				objList[objIndex].shockProperties[CONTAINER_TOP] = getValAtAddress(sub_ark, add_ptr + 0x11, 8);
 				objList[objIndex].shockProperties[CONTAINER_SIDE] = getValAtAddress(sub_ark, add_ptr + 0x12, 8);
-				printf("\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
-				printf("\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
-				printf("\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
-				printf("\tContents 4 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_4]);
-				printf("\tWidth : %d", objList[objIndex].shockProperties[CONTAINER_WIDTH]);
-				printf("\tHeight : %d", objList[objIndex].shockProperties[CONTAINER_HEIGHT]);
-				printf("\tDepth : %d\n", objList[objIndex].shockProperties[CONTAINER_DEPTH]);
-				printf("\tTop : %d", objList[objIndex].shockProperties[CONTAINER_TOP]);
-				printf("\tSide : %d", objList[objIndex].shockProperties[CONTAINER_SIDE]);
+				fprintf(LOGFILE,"\tContents 1 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_1]);
+				fprintf(LOGFILE,"\tContents 2 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_2]);
+				fprintf(LOGFILE,"\tContents 3 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_3]);
+				fprintf(LOGFILE,"\tContents 4 : %d\n", objList[objIndex].shockProperties[CONTAINER_CONTENTS_4]);
+				fprintf(LOGFILE,"\tWidth : %d", objList[objIndex].shockProperties[CONTAINER_WIDTH]);
+				fprintf(LOGFILE,"\tHeight : %d", objList[objIndex].shockProperties[CONTAINER_HEIGHT]);
+				fprintf(LOGFILE,"\tDepth : %d\n", objList[objIndex].shockProperties[CONTAINER_DEPTH]);
+				fprintf(LOGFILE,"\tTop : %d", objList[objIndex].shockProperties[CONTAINER_TOP]);
+				fprintf(LOGFILE,"\tSide : %d", objList[objIndex].shockProperties[CONTAINER_SIDE]);
 				return 1;
 				break;
 				}
 			case CRITTERS:
-				printf("\Critter Properties\n");
+				fprintf(LOGFILE,"\Critter Properties\n");
 				for (int j = 0; j < RecordSize; j = j + 2)
 				{
-					printf("\tj=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr + j, 16));
+					fprintf(LOGFILE,"\tj=%d val(16) = %d\n", j, getValAtAddress(sub_ark, add_ptr + j, 16));
 				}
 				return 1;
 				break;
@@ -967,7 +967,7 @@ void getShockTriggerAction(tile LevelInfo[64][64],unsigned char *sub_ark,int add
 {
 //Look up what a trigger does in system shock. Different trigger types activate other triggers/ do things in different ways.
 short PrintDebug = 1;// (objList[objIndex].item_id == 384);
-printf("",UniqueObjectName(objList[objIndex]));	//Weirdness with garbage info getting printed out?
+fprintf(LOGFILE,"",UniqueObjectName(objList[objIndex]));	//Weirdness with garbage info getting printed out?
 int TriggerType =getValAtAddress(sub_ark,add_ptr+6,8);
 objList[objIndex].TriggerAction = TriggerType;
 switch (TriggerType)
@@ -976,16 +976,16 @@ switch (TriggerType)
 		{//Default action.
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\tACTION_DO_NOTHING or default for %s\n",UniqueObjectName(objList[objIndex]));
 			DebugPrintTriggerVals(sub_ark, add_ptr,28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 			}		
 		break;	
 		}
@@ -998,17 +998,17 @@ switch (TriggerType)
 		
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_TRANSPORT_LEVEL for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\tDestination (%d,%d,%d)\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X], objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y],objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z] );
+			fprintf(LOGFILE,"\tACTION_TRANSPORT_LEVEL for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\tDestination (%d,%d,%d)\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X], objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y],objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Z] );
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 			}		
 		break;
 		}
@@ -1016,16 +1016,16 @@ switch (TriggerType)
 		{//Brings the player back to life?
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\tACTION_RESURRECTION for %s\n",UniqueObjectName(objList[objIndex]));
 			DebugPrintTriggerVals(sub_ark, add_ptr,30);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 			}
 		objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] =	getValAtAddress(sub_ark,add_ptr+16,16);	//Target Health
 		break;
@@ -1039,21 +1039,21 @@ switch (TriggerType)
 		//	0018	int16	Destination height?		
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-			printf("\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
-			printf("\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
-			printf("\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
-			printf("\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
+			fprintf(LOGFILE,"\tACTION_CLONE for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\tObject to transport:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+			fprintf(LOGFILE,"\t\tDeleteFlag?:%d\n",getValAtAddress(sub_ark,add_ptr+0xE,16));
+			fprintf(LOGFILE,"\t\tDestination tileX:%d\n",getValAtAddress(sub_ark,add_ptr+0x10,16));
+			fprintf(LOGFILE,"\t\tDestination tileY:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+			fprintf(LOGFILE,"\t\tDestination height:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 
 			
 		}
@@ -1073,20 +1073,20 @@ switch (TriggerType)
 		//0014	int16	Optional message to receive
 				if (PrintDebug==1)
 					{
-					printf("\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
-					printf("\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
-					printf("\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
-					printf("\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
-					printf("\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
+					fprintf(LOGFILE,"\tACTION_SET_VARIABLE for %s\n",UniqueObjectName(objList[objIndex]));
+					fprintf(LOGFILE,"\t\tVariable to Set:%d\n",getValAtAddress(sub_ark,add_ptr+0xC,16));
+					fprintf(LOGFILE,"\t\tValue:%d",getValAtAddress(sub_ark,add_ptr+0x10,16));
+					fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n",getValAtAddress(sub_ark,add_ptr+0x12,16));
+					fprintf(LOGFILE,"\t\tOptional Message:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));
 					DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*					printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-					printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-					printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-					printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-					printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-					printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-					printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-					printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/					
+/*					fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+					fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+					fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+					fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+					fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+					fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+					fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+					fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/					
 					}
 		objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] =getValAtAddress(sub_ark,add_ptr+0xC,16);
 		objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark,add_ptr+0x10,16);
@@ -1110,28 +1110,28 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[7] = getValAtAddress(sub_ark,add_ptr+0x1A,16)		;
 		if (PrintDebug==1)
 			{	
-			printf("\tACTION_ACTIVATE for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\tACTION_ACTIVATE for %s\n",UniqueObjectName(objList[objIndex]));
 
-			printf("\t\t1st Object to activate raw :%d\t",objList[objIndex].shockProperties[0]);
-			printf("1st Object Delay:%d\n",objList[objIndex].shockProperties[1]);
+			fprintf(LOGFILE,"\t\t1st Object to activate raw :%d\t",objList[objIndex].shockProperties[0]);
+			fprintf(LOGFILE,"1st Object Delay:%d\n",objList[objIndex].shockProperties[1]);
 
-			printf("\t\t2nd Object to activate raw :%d\t",objList[objIndex].shockProperties[2]);		
-			printf("2nd Object Delay:%d\n",objList[objIndex].shockProperties[3]);
+			fprintf(LOGFILE,"\t\t2nd Object to activate raw :%d\t",objList[objIndex].shockProperties[2]);		
+			fprintf(LOGFILE,"2nd Object Delay:%d\n",objList[objIndex].shockProperties[3]);
 			
-			printf("\t\t3rd Object to activate raw :%d\t",objList[objIndex].shockProperties[4]);
-			printf("3rd Object Delay:%d\n",objList[objIndex].shockProperties[5]);
+			fprintf(LOGFILE,"\t\t3rd Object to activate raw :%d\t",objList[objIndex].shockProperties[4]);
+			fprintf(LOGFILE,"3rd Object Delay:%d\n",objList[objIndex].shockProperties[5]);
 			
-			printf("\t\t4th Object to activate raw :%d\t",objList[objIndex].shockProperties[6]);		
-			printf("4th Object Delay:%d\n",objList[objIndex].shockProperties[7]);	
+			fprintf(LOGFILE,"\t\t4th Object to activate raw :%d\t",objList[objIndex].shockProperties[6]);		
+			fprintf(LOGFILE,"4th Object Delay:%d\n",objList[objIndex].shockProperties[7]);	
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*			printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/						
+/*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/						
 			}
 
 		break;
@@ -1151,23 +1151,23 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 25, 8);
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\t(%d)Lighting Operation: %d\n", objList[objIndex].address+16, objList[objIndex].shockProperties[TRIG_PROPERTY_LIGHT_OP]);
-			printf("\t\tControl point 1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
-			printf("\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
-			printf("\t\t(%d)Not used? Upper Shade adjustment = %d\n", objList[objIndex].address +22, objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
-			printf("\t\t(%d)Not used? Lower Shade adjustment = %d\n", objList[objIndex].address +23 ,objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
-			printf("\t\t(%d)Upper Shade adjustment = %d\n", objList[objIndex].address +24 ,objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
-			printf("\t\t(%d)Lower Shade adjustment = %d\n", objList[objIndex].address +25 ,objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
+			fprintf(LOGFILE,"\tACTION_LIGHTING for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\t(%d)Lighting Operation: %d\n", objList[objIndex].address+16, objList[objIndex].shockProperties[TRIG_PROPERTY_LIGHT_OP]);
+			fprintf(LOGFILE,"\t\tControl point 1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
+			fprintf(LOGFILE,"\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+			fprintf(LOGFILE,"\t\t(%d)Not used? Upper Shade adjustment = %d\n", objList[objIndex].address +22, objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
+			fprintf(LOGFILE,"\t\t(%d)Not used? Lower Shade adjustment = %d\n", objList[objIndex].address +23 ,objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
+			fprintf(LOGFILE,"\t\t(%d)Upper Shade adjustment = %d\n", objList[objIndex].address +24 ,objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
+			fprintf(LOGFILE,"\t\t(%d)Lower Shade adjustment = %d\n", objList[objIndex].address +25 ,objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 		}			
 		break;
 		}
@@ -1175,16 +1175,16 @@ switch (TriggerType)
 		{//Preforms a special effect. One example is the power breaker sparking on research level.
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\tACTION_EFFECT for %s\n",UniqueObjectName(objList[objIndex]));
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 			}		
 		break;
 		}
@@ -1223,10 +1223,10 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[7] = getValAtAddress(sub_ark, add_ptr + 0x1A, 16);
 		if (PrintDebug == 1)
 			{
-				printf("\tACTION_TIMER (i think) for %s\n", UniqueObjectName(objList[objIndex]));
+				fprintf(LOGFILE,"\tACTION_TIMER (i think) for %s\n", UniqueObjectName(objList[objIndex]));
 
-				printf("\t\t1st Object to activate raw :%d\t", objList[objIndex].shockProperties[0]);
-				printf("1st Object Delay:%d\n", objList[objIndex].shockProperties[1]);
+				fprintf(LOGFILE,"\t\t1st Object to activate raw :%d\t", objList[objIndex].shockProperties[0]);
+				fprintf(LOGFILE,"1st Object Delay:%d\n", objList[objIndex].shockProperties[1]);
 
 				DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 			}
@@ -1240,18 +1240,18 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark,add_ptr+0x10,16);	
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_CHOICE for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\tTrigger1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1]);
-			printf("\t\tTrigger2:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2]);
+			fprintf(LOGFILE,"\tACTION_CHOICE for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\tTrigger1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1]);
+			fprintf(LOGFILE,"\t\tTrigger2:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 			}
 		break;
 		}
@@ -1259,20 +1259,20 @@ switch (TriggerType)
 		{//Sends the player an email. (Differs from a message in that a message just plays once and does not hit the data reader)
 		if (PrintDebug==1)
 			{
-		printf("\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
+		fprintf(LOGFILE,"\tACTION_EMAIL for %s\n",UniqueObjectName(objList[objIndex]));
 		//	0F Player receives email
 		//000C	int16	Chunk no. of email (offset from 2441 0x0989)
 		//Note the subject line of an email may be used to chain a sequence of emails together (see sspecs)
-		printf("\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
+		fprintf(LOGFILE,"\t\tEmail chunk:", getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441);
 		DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*			printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+/*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
 		}			
 		objList[objIndex].shockProperties[TRIG_PROPERTY_EMAIL] =getValAtAddress(sub_ark,add_ptr+0x0C,16)+2441;
 		
@@ -1283,16 +1283,16 @@ switch (TriggerType)
 		{//Radiation healing on the reactor?
 			if (PrintDebug==1)
 				{
-				printf("\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
+				fprintf(LOGFILE,"\tACTION_RADAWAY for %s\n",UniqueObjectName(objList[objIndex]));
 				DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*				printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-				printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-				printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-				printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-				printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-				printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-				printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-				printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
+/*				fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+				fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+				fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+				fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+				fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+				fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+				fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+				fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));*/	
 				}
 		break;
 		}
@@ -1300,16 +1300,16 @@ switch (TriggerType)
 		{//Used a lot in switches. Needs more research.
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-			//printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			//printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			//printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			//printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			//printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			//printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			//printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			//printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
+			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			//fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			//fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			//fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			//fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			//fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			//fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	
 			}
 		break;
 		}
@@ -1319,9 +1319,9 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2] = getValAtAddress(sub_ark, add_ptr + 0x12, 16);
 		if (PrintDebug == 1)
 			{
-			printf("\tACTION_AWAKEN for %s\n", UniqueObjectName(objList[objIndex]));
-			printf("\t\tControl point object1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
-			printf("\t\tControl point object2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+			fprintf(LOGFILE,"\tACTION_AWAKEN for %s\n", UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\tControl point object1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
+			fprintf(LOGFILE,"\t\tControl point object2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 			}
 		break;
@@ -1335,18 +1335,18 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]=getValAtAddress(sub_ark,add_ptr+0x10,16);
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_MESSAGE for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\tSuccess Message%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]);
-			printf("\t\tFail Message:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]);
+			fprintf(LOGFILE,"\tACTION_MESSAGE for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\tSuccess Message%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE1]);
+			fprintf(LOGFILE,"\t\tFail Message:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_MESSAGE2]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*			printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/	
+/*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/	
 			}			
 		break;
 		}
@@ -1363,21 +1363,21 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]=getValAtAddress(sub_ark,add_ptr+0x12,16);
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_SPAWN for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\Class-sub-type to spawn:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
-			printf("\t\tControl point object1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
-			printf("\t\tControl point object2:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
-			printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));		
-			printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));	
+			fprintf(LOGFILE,"\tACTION_SPAWN for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\Class-sub-type to spawn:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
+			fprintf(LOGFILE,"\t\tControl point object1:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
+			fprintf(LOGFILE,"\t\tControl point object2:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+			fprintf(LOGFILE,"\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x14,16));		
+			fprintf(LOGFILE,"\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x18,16));	
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*			printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));		*/	
+/*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));		*/	
 			}
 				break;
 		}	
@@ -1391,20 +1391,20 @@ switch (TriggerType)
 		objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] =getValAtAddress(sub_ark,add_ptr+0x10,8);
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_CHANGE_TYPE for %s\n",UniqueObjectName(objList[objIndex]));
-			printf("\t\Object to Change:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
-			printf("\t\tNew Type (within subclass):%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
-			//printf("\t\tChanges to %s\n", getObjectNameByClass(objList[objIndex].ObjectClass, objList[objIndex].ObjectSubClass, objList[objIndex].ObjectSubClassIndex);
-			printf("\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));	
+			fprintf(LOGFILE,"\tACTION_CHANGE_TYPE for %s\n",UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\Object to Change:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
+			fprintf(LOGFILE,"\t\tNew Type (within subclass):%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
+			//fprintf(LOGFILE,"\t\tChanges to %s\n", getObjectNameByClass(objList[objIndex].ObjectClass, objList[objIndex].ObjectSubClass, objList[objIndex].ObjectSubClassIndex);
+			fprintf(LOGFILE,"\t\t??:%d\n",getValAtAddress(sub_ark,add_ptr+0x12,16));	
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*			printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/		
+/*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/		
 			}			
 		break;
 		}
@@ -1412,16 +1412,16 @@ switch (TriggerType)
 		{
 		if (PrintDebug==1)
 			{
-				printf("\tUnknown triggeraction:%d for %s\n",TriggerType, UniqueObjectName(objList[objIndex]));
+				fprintf(LOGFILE,"\tUnknown triggeraction:%d for %s\n",TriggerType, UniqueObjectName(objList[objIndex]));
 				DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*				printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-				printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-				printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-				printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-				printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-				printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-				printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-				printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/		
+/*				fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+				fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+				fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+				fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+				fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+				fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+				fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+				fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/		
 			}
 		}	
 	
@@ -1479,16 +1479,16 @@ void getShockButtons(tile LevelInfo[64][64],unsigned char *sub_ark,int add_ptr, 
 {
 //I'm keeping this seperate from trigger action retrieval for the moment.
 
-	//printf("\n\tVal_oc: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0c,16));
-	//printf("\tVal_oe: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0E,16));
-	//printf("\tVal_10: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x10,16));
-	//printf("\tVal_12: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x12,16));
-	//printf("\tVal_14: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x14,16));
-	//printf("\tVal_16: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x16,16));
-	//printf("\tVal_18: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x18,16));
-	//printf("\tVal_1a: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x1A,16));	
+	//fprintf(LOGFILE,"\n\tVal_oc: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0c,16));
+	//fprintf(LOGFILE,"\tVal_oe: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0E,16));
+	//fprintf(LOGFILE,"\tVal_10: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x10,16));
+	//fprintf(LOGFILE,"\tVal_12: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x12,16));
+	//fprintf(LOGFILE,"\tVal_14: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x14,16));
+	//fprintf(LOGFILE,"\tVal_16: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x16,16));
+	//fprintf(LOGFILE,"\tVal_18: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x18,16));
+	//fprintf(LOGFILE,"\tVal_1a: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x1A,16));	
 	//
-	printf("\tSwitch Properties\n");
+	fprintf(LOGFILE,"\tSwitch Properties\n");
 if (objList[objIndex].ObjectSubClass ==0)
 	{//regular buttons and switches
 	switch (objList[objIndex].TriggerAction)	//Switches have action types as well.
@@ -1499,11 +1499,11 @@ if (objList[objIndex].ObjectSubClass ==0)
 				//0010	int16	value
 				//0012	int16	?? action 00 set 01 add
 				//0014	int16	Optional message to receive
-				printf("\tACTION_SET_VARIABLE for %s\n", UniqueObjectName(objList[objIndex]));
-				printf("\t\tVariable to Set:%d\n", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-				printf("\t\tValue:%d", getValAtAddress(sub_ark, add_ptr + 0x10, 16));
-				printf("\t\taction?:%d (00 set 01 add)\n", getValAtAddress(sub_ark, add_ptr + 0x12, 16));
-				printf("\t\tOptional Message:%d\n", getValAtAddress(sub_ark, add_ptr + 0x14, 16));
+				fprintf(LOGFILE,"\tACTION_SET_VARIABLE for %s\n", UniqueObjectName(objList[objIndex]));
+				fprintf(LOGFILE,"\t\tVariable to Set:%d\n", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
+				fprintf(LOGFILE,"\t\tValue:%d", getValAtAddress(sub_ark, add_ptr + 0x10, 16));
+				fprintf(LOGFILE,"\t\taction?:%d (00 set 01 add)\n", getValAtAddress(sub_ark, add_ptr + 0x12, 16));
+				fprintf(LOGFILE,"\t\tOptional Message:%d\n", getValAtAddress(sub_ark, add_ptr + 0x14, 16));
 				DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_VARIABLE] = getValAtAddress(sub_ark, add_ptr + 0xC, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_VALUE] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
@@ -1513,7 +1513,7 @@ if (objList[objIndex].ObjectSubClass ==0)
 			}
 		case ACTION_ACTIVATE:
 				{	//Assume same behaviour as a trigger?
-				printf("Switch:Action_Activate\n");
+				fprintf(LOGFILE,"Switch:Action_Activate\n");
 				objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark,add_ptr+0xC,16)		;					
 				objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0xe,16)		;
 				objList[objIndex].shockProperties[2] = getValAtAddress(sub_ark,add_ptr+0x10,16)		;
@@ -1526,19 +1526,19 @@ if (objList[objIndex].ObjectSubClass ==0)
 				}
 		case ACTION_MOVING_PLATFORM:
 				{
-				printf("Switch:Action_Moving_Platform\n");
+				fprintf(LOGFILE,"Switch:Action_Moving_Platform\n");
 				setElevatorProperties(LevelInfo,sub_ark,add_ptr,objList,objIndex,1);
 				}
 		case ACTION_CHOICE:
 				{
-				printf("Switch:Action_Choice\n");
+				fprintf(LOGFILE,"Switch:Action_Choice\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_1] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TRIG_2] = getValAtAddress(sub_ark, add_ptr + 0x10, 16);
 				break;
 				}
 		case ACTION_LIGHTING:
 				{	
-				printf("Switch:Action_Lighting\n");
+				fprintf(LOGFILE,"Switch:Action_Lighting\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] = getValAtAddress(sub_ark, add_ptr + 12, 16);
 				if (objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1] <= 3)
 					{	//seems to be a special case?
@@ -1549,37 +1549,37 @@ if (objList[objIndex].ObjectSubClass ==0)
 				objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1] = getValAtAddress(sub_ark, add_ptr + 24, 8);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 23, 8);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2] = getValAtAddress(sub_ark, add_ptr + 25, 8);
-				printf("\t\tControl point 1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
-				printf("\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
-				printf("\t\t1st Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
-				printf("\t\t1st Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
-				printf("\t\t2nd Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
-				printf("\t\t2nd Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
+				fprintf(LOGFILE,"\t\tControl point 1:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_1]);
+				fprintf(LOGFILE,"\t\tControl point 2:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_CONTROL_2]);
+				fprintf(LOGFILE,"\t\t1st Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_1]);
+				fprintf(LOGFILE,"\t\t1st Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_1]);
+				fprintf(LOGFILE,"\t\t2nd Time Upper Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_UPPERSHADE_2]);
+				fprintf(LOGFILE,"\t\t2nd Time Lower Shade adjustment = %d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_LOWERSHADE_2]);
 				break;
 				}
 		case ACTION_CHANGE_TYPE:
 				{
-				printf("Switch:Action_Change_Type\n");
+				fprintf(LOGFILE,"Switch:Action_Change_Type\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 0x10, 8);
 				}
 		default:	
 				{
-				printf("Switch:Default\n");
+				fprintf(LOGFILE,"Switch:Default\n");
 				objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] = getValAtAddress(sub_ark,add_ptr+12,16);
 				objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER_2] = getValAtAddress(sub_ark,add_ptr+16,16);
 				}
 		}
 		
-		printf("\tDefault trigger target %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]);
-		//printf("\n\tVal_oc: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0c,16));
-		//printf("\tVal_oe: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0E,16));
-		//printf("\tVal_10: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x10,16));
-		//printf("\tVal_12: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x12,16));
-		//printf("\tVal_14: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x14,16));
-		//printf("\tVal_16: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x16,16));
-		//printf("\tVal_18: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x18,16));
-		//printf("\tVal_1a: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x1A,16));	
+		fprintf(LOGFILE,"\tDefault trigger target %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]);
+		//fprintf(LOGFILE,"\n\tVal_oc: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0c,16));
+		//fprintf(LOGFILE,"\tVal_oe: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x0E,16));
+		//fprintf(LOGFILE,"\tVal_10: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x10,16));
+		//fprintf(LOGFILE,"\tVal_12: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x12,16));
+		//fprintf(LOGFILE,"\tVal_14: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x14,16));
+		//fprintf(LOGFILE,"\tVal_16: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x16,16));
+		//fprintf(LOGFILE,"\tVal_18: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x18,16));
+		//fprintf(LOGFILE,"\tVal_1a: %d\n" ,getValAtAddress(sub_ark,add_ptr+0x1A,16));	
 		DebugPrintTriggerVals(sub_ark, add_ptr, 30);
 			
 	return;
@@ -1594,7 +1594,7 @@ if((objList[objIndex].ObjectSubClass==2) && (objList[objIndex].ObjectSubClassInd
 	objList[objIndex].shockProperties[1] = getValAtAddress(sub_ark,add_ptr+0x10,16); 
 	objList[objIndex].shockProperties[2] = getValAtAddress(sub_ark,add_ptr+0x14,16); 
 	objList[objIndex].shockProperties[3] = getValAtAddress(sub_ark,add_ptr+0x18,16); 
-	printf("\tCyberspace (%d,%d,%d @ %d)\n",objList[objIndex].shockProperties[0],objList[objIndex].shockProperties[1],objList[objIndex].shockProperties[2],objList[objIndex].shockProperties[3]);
+	fprintf(LOGFILE,"\tCyberspace (%d,%d,%d @ %d)\n",objList[objIndex].shockProperties[0],objList[objIndex].shockProperties[1],objList[objIndex].shockProperties[2],objList[objIndex].shockProperties[3]);
 	return;
 	}
 
@@ -1602,7 +1602,7 @@ if((objList[objIndex].ObjectSubClass==2) && (objList[objIndex].ObjectSubClassInd
 	{//Fixup station/energy station
 	objList[objIndex].shockProperties[0]  = getValAtAddress(sub_ark,add_ptr+0x0c,16);   //Amount of charge?/? always 255
 	objList[objIndex].shockProperties[1]  = getValAtAddress(sub_ark,add_ptr+0x10,16);	//Security level?? //reuse timer??
-	printf("\tEnergy Charge: %d %d\n",objList[objIndex].shockProperties[0] ,objList[objIndex].shockProperties[1] );
+	fprintf(LOGFILE,"\tEnergy Charge: %d %d\n",objList[objIndex].shockProperties[0] ,objList[objIndex].shockProperties[1] );
 	return;
 	}
 if((objList[objIndex].ObjectSubClass==3) && (objList[objIndex].ObjectSubClassIndex<=3))
@@ -1614,13 +1614,13 @@ if((objList[objIndex].ObjectSubClass==3) && (objList[objIndex].ObjectSubClassInd
 	objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE]= (getValAtAddress(sub_ark,add_ptr+0x10,8)>>28) & 0x01;
 	if (objList[objIndex].shockProperties[BUTTON_PROPERTY_PUZZLE] == 1)
 		{
-		printf("\tPuzzle panel: Type is block\n");
+		fprintf(LOGFILE,"\tPuzzle panel: Type is block\n");
 		}
 	else
 		{
-		printf("\tPuzzle panel: Type is wire\n");
+		fprintf(LOGFILE,"\tPuzzle panel: Type is wire\n");
 		}
-	printf("\tTrigger is %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]);
+	fprintf(LOGFILE,"\tTrigger is %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]);
 	return;
 	}
 
@@ -1641,8 +1641,8 @@ if((objList[objIndex].ObjectSubClass==3) && ((objList[objIndex].ObjectSubClassIn
 	objList[objIndex].shockProperties[2]  = getValAtAddress(sub_ark,add_ptr+0x12,16);
 	objList[objIndex].shockProperties[3]  = getValAtAddress(sub_ark,add_ptr+0x18,16);//bitfields for access
 	objList[objIndex].shockProperties[4]  = getValAtAddress(sub_ark,add_ptr+0x1A,16);
-	printf("\tElevator to one of %d, %d or %d panels on other levels\n",objList[objIndex].shockProperties[0],objList[objIndex].shockProperties[2],objList[objIndex].shockProperties[2]);
-	printf("\tAccesable levels actual:%d shaft:%d\n",objList[objIndex].shockProperties[3],objList[objIndex].shockProperties[4]);
+	fprintf(LOGFILE,"\tElevator to one of %d, %d or %d panels on other levels\n",objList[objIndex].shockProperties[0],objList[objIndex].shockProperties[2],objList[objIndex].shockProperties[2]);
+	fprintf(LOGFILE,"\tAccesable levels actual:%d shaft:%d\n",objList[objIndex].shockProperties[3],objList[objIndex].shockProperties[4]);
 	
 	return;
 	}
@@ -1662,7 +1662,7 @@ if((objList[objIndex].ObjectSubClass==3) && ((objList[objIndex].ObjectSubClassIn
 	
 	objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]  = getValAtAddress(sub_ark,add_ptr+0x0E,16);
 	objList[objIndex].shockProperties[3]  = getValAtAddress(sub_ark,add_ptr+0x18,16);	//extra trigger?
-	printf("\tNumber pad. Combo is %d, Triggers %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_COMBO],objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] );
+	fprintf(LOGFILE,"\tNumber pad. Combo is %d, Triggers %d",objList[objIndex].shockProperties[BUTTON_PROPERTY_COMBO],objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER] );
 	return;
 	}
 
@@ -1677,7 +1677,7 @@ objList[objIndex].shockProperties[BUTTON_PROPERTY_TRIGGER]=getValAtAddress(sub_a
 	shockProperties[6]  = getValAtAddress(sub_ark,add_ptr+0x1A,16);
 	shockProperties[7]  = getValAtAddress(sub_ark,add_ptr+0x1B,16);
 	shockProperties[8]  = getValAtAddress(sub_ark,add_ptr+0x1C,16);	*/	
-	printf("\tOther button type!");
+	fprintf(LOGFILE,"\tOther button type!");
 	DebugPrintTriggerVals(sub_ark, add_ptr, 30);
 
 }
@@ -1775,29 +1775,29 @@ if ((fopen_s(&f,filePathCO, "r") == 0))
 			///if (prevClass != objectMasters[i].objClass)
 			//{
 				//frameCount=0;	//Start a new cycle for each class
-				//printf("\n----next class------\n");
+				//fprintf(LOGFILE,"\n----next class------\n");
 			//	}
 			prevClass = objectMasters[i].objClass;
-			//printf("\n%d:%s\t" ,i ,objectMasters[i].desc);
-			//printf("\tRender:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x7,8));
+			//fprintf(LOGFILE,"\n%d:%s\t" ,i ,objectMasters[i].desc);
+			//fprintf(LOGFILE,"\tRender:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x7,8));
 			//
-			//printf("\tmodel:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
+			//fprintf(LOGFILE,"\tmodel:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
 			//
 			objectMasters[i].frame1 = frameCount;	
 			frameCount+=(3+((getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8) >>4) & 0x0F));
-			//printf("\tframe:1350_%04d.bmp" ,objectMasters[i].frame1);
-			//printf("Mass %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0,32));
-			//printf("hp  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x04,16));
-			//printf("armour  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x06,8));
-			//printf("Render  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x07,8));
-			//printf("Vulner  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0e,8));
-			//printf("spevul  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0f,8));
-			//printf("defence  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x12,8));
-			//printf("flags  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x14,16));
-			//printf("3d mod  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
-			//printf("frames  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8));
-			//printf("framesbits %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8)>>4);
-			//printf("framesbits19 %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8)>>4);
+			//fprintf(LOGFILE,"\tframe:1350_%04d.bmp" ,objectMasters[i].frame1);
+			//fprintf(LOGFILE,"Mass %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0,32));
+			//fprintf(LOGFILE,"hp  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x04,16));
+			//fprintf(LOGFILE,"armour  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x06,8));
+			//fprintf(LOGFILE,"Render  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x07,8));
+			//fprintf(LOGFILE,"Vulner  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0e,8));
+			//fprintf(LOGFILE,"spevul  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0f,8));
+			//fprintf(LOGFILE,"defence  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x12,8));
+			//fprintf(LOGFILE,"flags  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x14,16));
+			//fprintf(LOGFILE,"3d mod  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
+			//fprintf(LOGFILE,"frames  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8));
+			//fprintf(LOGFILE,"framesbits %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8)>>4);
+			//fprintf(LOGFILE,"framesbits19 %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8)>>4);
 
 			prevClass = objectMasters[i].objClass;
 			
@@ -1831,22 +1831,22 @@ void setElevatorProperties(tile LevelInfo[64][64],unsigned char *sub_ark,int add
 
 		if (PrintDebug==1)
 			{
-			printf("\tACTION_MOVING_PLATFORM action for %s\n", UniqueObjectName(objList[objIndex]));
-			printf("\t\tTileX of Platform:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X]);
-			printf("\t\tTileY of Platform:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y]);
-			printf("\t\tTarget floor height:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR]);
-			printf("\t\tTarget ceiling height:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING]);
-			printf("\t\tSpeed:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED]);
-			printf("\t\tMy elevator flag=%d\n",elevatorFlag);
+			fprintf(LOGFILE,"\tACTION_MOVING_PLATFORM action for %s\n", UniqueObjectName(objList[objIndex]));
+			fprintf(LOGFILE,"\t\tTileX of Platform:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_X]);
+			fprintf(LOGFILE,"\t\tTileY of Platform:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_TARGET_Y]);
+			fprintf(LOGFILE,"\t\tTarget floor height:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_FLOOR]);
+			fprintf(LOGFILE,"\t\tTarget ceiling height:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_CEILING]);
+			fprintf(LOGFILE,"\t\tSpeed:%d\n",objList[objIndex].shockProperties[TRIG_PROPERTY_SPEED]);
+			fprintf(LOGFILE,"\t\tMy elevator flag=%d\n",elevatorFlag);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
-/*			printf("\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
-			printf("\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
-			printf("\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
-			printf("\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
-			printf("\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
-			printf("\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
-			printf("\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
-			printf("\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/		
+/*			fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
+			fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
+			fprintf(LOGFILE,"\t\tOther values 3:%d\n",getValAtAddress(sub_ark,add_ptr+16,16));
+			fprintf(LOGFILE,"\t\tOther values 4:%d\n",getValAtAddress(sub_ark,add_ptr+18,16));
+			fprintf(LOGFILE,"\t\tOther values 5:%d\n",getValAtAddress(sub_ark,add_ptr+20,16));
+			fprintf(LOGFILE,"\t\tOther values 6:%d\n",getValAtAddress(sub_ark,add_ptr+22,16));		
+			fprintf(LOGFILE,"\t\tOther values 7:%d\n",getValAtAddress(sub_ark,add_ptr+24,16));		
+			fprintf(LOGFILE,"\t\tOther values 8:%d\n",getValAtAddress(sub_ark,add_ptr+26,16));	*/		
 		}	
 
 }
@@ -1855,20 +1855,20 @@ void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr,int length)
 {
 	for (int i = 12; i <= length-2; i = i + 2)
 	{
-		printf("\n\t\tOther values %i:%d (%d,%d)",i, 
+		fprintf(LOGFILE,"\n\t\tOther values %i:%d (%d,%d)",i, 
 			getValAtAddress(sub_ark, add_ptr + i, 16),
 			getValAtAddress(sub_ark, add_ptr + i, 8),
 			getValAtAddress(sub_ark, add_ptr + i+1, 8)
 			);
 	}
-	//printf("\t\tOther values 1:%d\n", getValAtAddress(sub_ark, add_ptr + 12, 16));
-	//printf("\t\tOther values 2:%d\n", getValAtAddress(sub_ark, add_ptr + 14, 16));
-	//printf("\t\tOther values 3:%d\n", getValAtAddress(sub_ark, add_ptr + 16, 16));
-	//printf("\t\tOther values 4:%d\n", getValAtAddress(sub_ark, add_ptr + 18, 16));
-	//printf("\t\tOther values 5:%d\n", getValAtAddress(sub_ark, add_ptr + 20, 16));
-	//printf("\t\tOther values 6:%d\n", getValAtAddress(sub_ark, add_ptr + 22, 16));
-	//printf("\t\tOther values 7:%d\n", getValAtAddress(sub_ark, add_ptr + 24, 16));
-	//printf("\t\tOther values 8:%d\n", getValAtAddress(sub_ark, add_ptr + 26, 16));
+	//fprintf(LOGFILE,"\t\tOther values 1:%d\n", getValAtAddress(sub_ark, add_ptr + 12, 16));
+	//fprintf(LOGFILE,"\t\tOther values 2:%d\n", getValAtAddress(sub_ark, add_ptr + 14, 16));
+	//fprintf(LOGFILE,"\t\tOther values 3:%d\n", getValAtAddress(sub_ark, add_ptr + 16, 16));
+	//fprintf(LOGFILE,"\t\tOther values 4:%d\n", getValAtAddress(sub_ark, add_ptr + 18, 16));
+	//fprintf(LOGFILE,"\t\tOther values 5:%d\n", getValAtAddress(sub_ark, add_ptr + 20, 16));
+	//fprintf(LOGFILE,"\t\tOther values 6:%d\n", getValAtAddress(sub_ark, add_ptr + 22, 16));
+	//fprintf(LOGFILE,"\t\tOther values 7:%d\n", getValAtAddress(sub_ark, add_ptr + 24, 16));
+	//fprintf(LOGFILE,"\t\tOther values 8:%d\n", getValAtAddress(sub_ark, add_ptr + 26, 16));
 }
 
 void SetDeathWatch(ObjectItem objList[1600])
@@ -1933,12 +1933,12 @@ void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600],int LevelNo)
 //				{
 //				if (objList[Special].quality==24)
 //					{//A bullfrog trap at tile 
-//					printf("Bullfrog offsets %d %d\n", triggerXOffset, triggerYOffset);
+//					fprintf(LOGFILE,"Bullfrog offsets %d %d\n", triggerXOffset, triggerYOffset);
 //					for (int x = objList[Special].tileX + triggerXOffset; x<objList[Special].tileX + triggerXOffset+8; x++)
 //						{
 //						for (int y = objList[Special].tileY + triggerYOffset; y<objList[Special].tileY + triggerYOffset + 8; y++)
 //							{
-//							printf("Bullfrog %d %d\n",x,y);
+//							fprintf(LOGFILE,"Bullfrog %d %d\n",x,y);
 //							LevelInfo[x][y].BullFrog = 0;
 //							}
 //						}

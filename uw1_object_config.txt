@@ -77,7 +77,7 @@
 76 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw1_object_076.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_076.tga
 77 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw1_object_077.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_077.tga
 78 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw1_object_078.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_078.tga
-79 0 0 0 entity 69 unknown uw1_object_079.prt 0 uw1_object_079.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_079.tga
+79 0 0 0 entity 69 etherealvoidcreatures uw1_object_079.prt 0 uw1_object_079.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_079.tga
 80 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 uw1_object_080.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_080.tga
 81 0 0 0 entity 0 a_mongbat atdm:ai_spider 0 uw1_object_081.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_081.tga
 82 0 0 0 entity 0 a_bloodworm atdm:ai_spider 0 uw1_object_082.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 guis/assets/hud/inventory_icons/uw1_object_082.tga

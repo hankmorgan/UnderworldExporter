@@ -39,7 +39,7 @@ struct BitMapInfoHeader{
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255],int useTGA);
 void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, char OutFileName[255], int useTGA);
-void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA);
+void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput);
 void writeBMP(unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255]);
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
@@ -68,5 +68,6 @@ void WriteShockCutsceneBitmaps(unsigned char *KeyFrame, unsigned char *art_ark, 
 void cyclePalette(palette *pal, int Start, int length);
 void copyPalette(palette *inPal, palette *outPal);
 
-void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, char OutFileName[255], int useTGA);
+void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA);
+void PrintAnimName(int game, int animNo);
 #endif /*gamegraphics_h*/

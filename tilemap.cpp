@@ -264,7 +264,7 @@ int DoTilesMatch(tile &t1, tile &t2)
 //		&& (t1.DimX==t2.DimX) && (t1.DimY == t2.DimY ) 
 //		 && (t1.tileType == t2.tileType ) 
 //		 && (t1.isDoor==0) && (t2.isDoor ==0)) {
-//printf("");
+//fprintf(LOGFILE,"");
 //}
 	if ((t1.tileType==0) && (t2.tileType == 0))	//solid
 		{
@@ -317,9 +317,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		{
 		textureMapSize=0x7a;
 		if ((file = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
-			printf ("");
+			fprintf(LOGFILE,"");
 		long fileSize = getFileSize(file);
 		lev_ark = new unsigned char[fileSize];
 		fread(lev_ark, fileSize, 1,file);
@@ -335,9 +335,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		FILE *fileT = NULL; 
 		filePath = UW0_TEXTUREW_PATH;	
 		if ((fileT = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
-			printf ("");
+			fprintf(LOGFILE,"");
 		fileSize = getFileSize(fileT);
 		tex_ark = new unsigned char[fileSize];
 		fread(tex_ark, fileSize, 1,fileT);
@@ -348,9 +348,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		{
 		textureMapSize = 64; // 0x7a;
 		if ((file = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
-			printf ("");
+			fprintf(LOGFILE,"");
 		fileSize = getFileSize(file);
 		lev_ark = new unsigned char[fileSize];
 		fread(lev_ark, fileSize, 1,file);
@@ -371,9 +371,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		{
 		textureMapSize = 70;	//0x86;
 		if ((file = fopen(filePath, "rb")) == NULL)
-			printf("Could not open specified file\n");
+			fprintf(LOGFILE,"Could not open specified file\n");
 		else
-			printf ("");
+			fprintf(LOGFILE,"");
 		fileSize = getFileSize(file);
 		tmp_ark = new unsigned char[fileSize];
 		//tex_ark = new unsigned char[fileSize];
@@ -392,7 +392,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		address_pointer=(LevelNo * 4) + 6;
 		if (getValAtAddress(tmp_ark,address_pointer,32)==0)
 			{
-			printf("\nInvalid block address!\n");
+			fprintf(LOGFILE,"\nInvalid block address!\n");
 			return -1;
 			}
 		if (isCompressed == 1)
@@ -406,7 +406,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			}
 		else
 			{
-			//printf("uncompressed? what do i do here???");
+			//fprintf(LOGFILE,"uncompressed? what do i do here???");
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
 			int j=0;
 			AddressOfBlockStart=0;
@@ -423,7 +423,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		//address_pointer=(LevelNo * 4) + 6 + (80*4);
 		//tex_ark = tmp_ark;	//unpack(tmp_ark,getValAtAddress(tmp_ark,address_pointer,32));
 		textureAddress=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4),32);	
-		printf("\nTextures address: %d", textureAddress);
+		fprintf(LOGFILE,"\nTextures address: %d", textureAddress);
 		compressionFlag=getValAtAddress(tmp_ark,(LevelNo * 4) + 6 + (80*4)+ (NoOfBlocks*4),32);
 		isCompressed =(compressionFlag>>1) & 0x01;
 
@@ -468,7 +468,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 					{
 					CeilingTexture = texture_map[i];
 					}
-				printf("\nTexture %d = %d (%s)", i, texture_map[i], textureMasters[texture_map[i]].desc);
+				fprintf(LOGFILE,"\nTexture %d = %d (%s)", i, texture_map[i], textureMasters[texture_map[i]].desc);
 				break;
 				}
 			case UW2:
@@ -499,7 +499,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 						offset++;
 						}
 					}
-				printf("\nTexture %d = %d (%s)", i, texture_map[i],textureMasters[texture_map[i]].desc);
+				fprintf(LOGFILE,"\nTexture %d = %d (%s)", i, texture_map[i],textureMasters[texture_map[i]].desc);
 				if (i == 0xf)
 					{
 					CeilingTexture=texture_map[i];
@@ -696,7 +696,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(filePath, "rb")) == NULL)
 		{
-		printf("\nArchive not found!\n");
+		fprintf(LOGFILE,"\nArchive not found!\n");
 		return -1;
 		}
 	long fileSize = getFileSize(file);
@@ -814,10 +814,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 
 			LevelInfo[x][y].shockSteep = (lev_ark[address_pointer + 3] & 0x0f);
 			LevelInfo[x][y].shockSteep = ((LevelInfo[x][y].shockSteep << 3) >> HeightUnits) * 8 >> 3; //Shift it for varying height scales
-			if ((LevelInfo[x][y].shockSteep == 13) || (LevelInfo[x][y].shockSteep >= 15))
-			{
-				printf("");
-			}
+
 			if ((LevelInfo[x][y].shockSteep == 0) && (LevelInfo[x][y].tileType >= 6))//If a sloped tile has no slope then it's a open tile.
 			{
 				LevelInfo[x][y].tileType = 1;
@@ -831,7 +828,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 
 			//if(LevelInfo[x][y].indexObjectList!=0)
 			//	{
-			//	printf("At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
+			//	fprintf(LOGFILE,"At %d %d we have: %d\n", x,y,LevelInfo[x][y].indexObjectList);
 			//	}
 
 			/*
@@ -845,7 +842,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 			LevelInfo[x][y].shockTextureOffset = getValAtAddress(lev_ark, address_pointer + 8, 32) & 0xF;
 			//unknownflags
 			//70E000E0
-			//	printf("\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
+			//	fprintf(LOGFILE,"\nUnknownflags @ %d %d= %d",x,y, getValAtAddress(lev_ark,address_pointer+8,32) & 0x70E000E0);
 			LevelInfo[x][y].shockShadeLower = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 16) & 0x0F;
 			LevelInfo[x][y].shockShadeUpper = (getValAtAddress(lev_ark, address_pointer + 8, 32) >> 24) & 0x0F;
 			LevelInfo[x][y].shadeUpperGlobal = 0;
@@ -1341,7 +1338,7 @@ void setCorridors(tile LevelInfo[64][64], int *RoomIndex)
 				{
 				if (*RoomIndex == 17)
 				{
-					printf("");
+					fprintf(LOGFILE,"");
 				}
 				int currentCorridorCount=0;
 				MergeCorridors(LevelInfo, &currentCorridorCount, *RoomIndex, x, y,0);

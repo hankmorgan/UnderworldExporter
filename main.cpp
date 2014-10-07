@@ -632,8 +632,8 @@ if (true)
 					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw0, AUXILARY_PAL_FILE);
 					break;
 				case UW1:
-					sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
-					//sprintf_s(fileCrit, 255, "%s\\crit\\", path_uw1);
+					//sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw1, TempOutFileName);
+					sprintf_s(fileCrit, 255, "%s\\crit\\", path_uw1);
 					sprintf_s(fileAssoc, 255, "%s\\%s", path_uw1, UW1_CRITTER_ASSOC);
 					sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
 					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
@@ -744,7 +744,16 @@ switch (game)
 	}
 
 	LoadConfig(game,mode);
-	
+
+	char Logfile[255];
+	strcpy_s(Logfile, LOGFILENAME);
+	//sprintf_s(Logfile, 255, "%s", LOGFILENAME);
+	if (fopen_s(&LOGFILE, Logfile, "w") != 0)
+		{
+		printf("Unable to create output file for logfile");
+		return 0;
+		}
+
 	switch (mode)
 		{
 		case D3_MODE:
@@ -753,7 +762,7 @@ switch (game)
 		case SOURCE_MODE:
 		case FBX_MODE:
 		case UNITY_MODE:
-			printf("\n============================Level %d=========================\n", levelNo);
+			printf("\n================Game %d==Level %d==Mode %d===================\n", game, levelNo, mode);
 			exportMaps(game, mode, levelNo, OutFileName,GameFilePath);
 			break;
 		case STRINGS_EXTRACT_MODE:
@@ -791,8 +800,8 @@ switch (game)
 				}
 			break;
 		case CRITTER_EXTRACT_MODE:
-			//extractAllCritters(fileAssoc, fileCrit, Graphics_Pal, UW1, OutFileName, useTGA);
-			extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA);
+			extractAllCritters(fileAssoc, fileCrit, Graphics_Pal, UW1, useTGA);
+			//extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA,1);
 			break;
 		case CUTSCENE_EXTRACT_MODE:
 			if (game == SHOCK)
@@ -835,6 +844,7 @@ switch (game)
 				}
 			break;
 		}
+	fclose(LOGFILE);
 	}
 
 void LoadConfig(int game,int mode)
