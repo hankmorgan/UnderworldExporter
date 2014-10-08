@@ -41,10 +41,7 @@ int BitMapSize=32;
 short panels = 0;//Panels.gr are a special case for extraction
 char Graphics_File[255];
 char Graphics_Pal[255];
-char path_uw0[100];
-char path_uw1[100];
-char path_uw2[100];
-char path_shock[100];
+
 char TempOutFileName[255];
 char auxPalPath[255];
 char path_target_platform[100];
@@ -639,7 +636,8 @@ if (true)
 					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw1, AUXILARY_PAL_FILE);
 					break;
 				case UW2:
-					sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw2, TempOutFileName);
+					//sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw2, TempOutFileName);
+					sprintf_s(fileCrit, 255, "%s\\crit\\", path_uw2);
 					sprintf_s(fileAssoc, 255, "%s\\%s", path_uw2, UW2_CRITTER_ASSOC);
 					sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw2);
 					sprintf_s(auxPalPath, 255, "%s\\%s", path_uw2, AUXILARY_PAL_FILE);
@@ -800,7 +798,7 @@ switch (game)
 				}
 			break;
 		case CRITTER_EXTRACT_MODE:
-			extractAllCritters(fileAssoc, fileCrit, Graphics_Pal, UW1, useTGA);
+			extractAllCritters(fileAssoc, fileCrit, Graphics_Pal, game, useTGA);
 			//extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA,1);
 			break;
 		case CUTSCENE_EXTRACT_MODE:

@@ -70,4 +70,5 @@ void copyPalette(palette *inPal, palette *outPal);
 
 void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA);
 void PrintAnimName(int game, int animNo);
+void PrintCritAngle(int angle);
 #endif /*gamegraphics_h*/

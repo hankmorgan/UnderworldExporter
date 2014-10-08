@@ -143,5 +143,11 @@ void setTerrainChangeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 void RenderEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
+extern char path_uw0[100];
+extern char path_uw1[100];
+extern char path_uw2[100];
+extern char path_shock[100];
+
+
 #endif /* main_h */
 
