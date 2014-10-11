@@ -7,20 +7,23 @@ public class UWCharacter : MonoBehaviour {
 	public Texture2D CursorIconBlank;
 	private int cursorSizeX =64;
 	private int cursorSizeY =64;
-	public GameObject currInventorySlot;
+	//
 	private MouseLook XAxis;
 	private MouseLook YAxis;
 	private bool MouseLookEnabled;
 	private GameObject MainCam;
 	public string CurrObjectSprite;
-	public string ObjectInHand;
+	//
 	public bool isFemale;
 	public bool isLefty;
 	public bool CursorInMainWindow;
-	public bool JustPickedup;
+
 	// Use this for initialization
 	void Start () {
-		
+
+		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
+		InventorySlot.player=this.gameObject;
+		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		Screen.lockCursor=true;

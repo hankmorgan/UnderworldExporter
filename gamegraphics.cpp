@@ -73,7 +73,6 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 	long NoOfTextures;
 
 	FILE *file = NULL;      // File pointer
-	
     if ((file = fopen(filePathIn, "rb")) == NULL)
        { fprintf(LOGFILE,"Could not open specified file\n"); return;}
 
@@ -505,7 +504,7 @@ int getcount(unsigned char *nibbles, int *addr_ptr , int size)
 int n1;
 int n2;
 int n3;
-int inc_ptr;
+//int inc_ptr;
 int count=0;
 
 	n1 = getNibble(nibbles,addr_ptr);
@@ -703,22 +702,159 @@ void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], 
 	return;
 }
 
-void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput)
-{
-//char *CritterAnims[6] = { "CombatIdle" , "AttackBash" , "AttackSlash", "AttackThrust", "AttackSecondary","Walking"  };
-	palette *pal;
-	unsigned char auxpalval[32];
-	pal = new palette[256];
-	getPalette(PaletteFile, pal, 0);//always palette 0?
+void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput, int ItemId, int fileXX, int fileYY)
+	{
 	int slotIndices[128];
+	int slotBase = 0;//I offset the animations slots by this number!!!! 
+	palette *pal;
+	int AddressPointer;
+	unsigned char *critterFile;
+	unsigned char auxpalval[32];
 	palette auxpal[32];
+	int auxPalNo = PaletteNo;
+
 	long fileSize;
 	unsigned char *assocFile;
-	unsigned char *critterFile;
-	int auxPalNo=PaletteNo;
-//	int anim;
-	int AddressPointer;
-	int slotBase = 0;//I offset the animations slots by this number!!!! 
+	
+	pal = new palette[256];
+	getPalette(PaletteFile, pal, 0);//always palette 0?
+
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(fileAssoc, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "//\nArchive %s not found!\n", fileAssoc);
+		return;
+		}
+	fileSize = getFileSize(file);
+	assocFile = new unsigned char[fileSize];
+	fread(assocFile, fileSize, 1, file);
+	fclose(file);
+
+	if ((file = fopen(fileCrit, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "//\nArchive %s not found!\n", fileCrit);
+		return;
+		}
+	fileSize = getFileSize(file);
+	critterFile = new unsigned char[fileSize];
+	fread(critterFile, fileSize, 1, file);
+	fclose(file);
+
+	AddressPointer = 0;
+	fprintf(LOGFILE, "\n//\tFile:%s, Palette = %d", fileCrit, PaletteNo);
+	slotBase = getValAtAddress(critterFile, AddressPointer, 8);
+	//fprintf(LOGFILE, "\n//\tSlot base %d\n", slotBase);
+	int NoOfSlots = getValAtAddress(critterFile, AddressPointer + 1, 8);
+	//fprintf(LOGFILE, "\t//No of Slots %d\n", NoOfSlots);
+	AddressPointer = 2;
+	int k = 0;
+	for (int i = 0; i < NoOfSlots; i++)
+		{
+		if (getValAtAddress(critterFile, AddressPointer, 8) != 255)
+			{
+			slotIndices[k++] = i;//getValAtAddress(critterFile, AddressPointer, 8);
+			//fprintf(LOGFILE, "\n//\tIndex %d = %d", i, getValAtAddress(critterFile, AddressPointer, 8));
+			}
+
+		AddressPointer++;
+		}
+	int NoOfSegs = getValAtAddress(critterFile, AddressPointer, 8);
+	//fprintf(LOGFILE, "\n//\tNo of anim segments=%d", NoOfSegs);
+	AddressPointer++;
+	for (int i = 0; i < NoOfSegs; i++)
+		{
+		fprintf(LOGFILE, "\n\tCreateAnimationUW(\"%d_", ItemId, slotIndices[i] + slotBase);
+		PrintAnimName(game, slotIndices[i] + slotBase);
+		fprintf(LOGFILE, "\",");
+		int ValidCount=0;
+		for (int j = 0; j < 8; j++)
+			{
+			if (getValAtAddress(critterFile, AddressPointer, 8) != 255)
+				{
+				//fprintf(LOGFILE, "\n\tAnim Frame %d is %d %s_%04d", j, getValAtAddress(critterFile, AddressPointer, 8), fileCrit, getValAtAddress(critterFile, AddressPointer, 8));
+				fprintf(LOGFILE, " \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
+				ValidCount++;
+				//if (useTGA == 1)
+				//	{
+				//	fprintf(LOGFILE, ".tga");
+				//	}
+				//else
+				//	{
+				//	fprintf(LOGFILE, ".bmp");
+				//	}
+				}
+			else
+				{
+				fprintf(LOGFILE," \"\" ,");
+				}
+			AddressPointer++;
+			}
+		fprintf(LOGFILE, "%d);",ValidCount);
+		}
+	int NoOfPals = getValAtAddress(critterFile, AddressPointer, 8);
+	AddressPointer++;
+	//fprintf(LOGFILE, "\n//\tNo of Palettes %d", NoOfPals);
+
+	for (int i = 0; i < 32; i++)
+		{
+		int value = getValAtAddress(critterFile, (AddressPointer)+(auxPalNo * 32) + i, 8);
+		auxpalval[i] = value;
+		auxpal[i].green = pal[value].green;
+		auxpal[i].blue = pal[value].blue;
+		auxpal[i].red = pal[value].red;
+		auxpal[i].reserved = pal[value].reserved;
+		}
+
+	AddressPointer = AddressPointer + NoOfPals * 32;
+	int NoOfFrames = getValAtAddress(critterFile, AddressPointer, 8);
+	//fprintf(LOGFILE,"\nNo of Frames Offsets %d", NoOfFrames);
+	//fprintf(LOGFILE,"\nCompression Type %d", getValAtAddress(critterFile, AddressPointer+1, 8));
+	AddressPointer = AddressPointer + 2;
+	for (int i = 0; i < NoOfFrames; i++)
+		{
+		int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
+		//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
+		int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+		int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+		int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+		int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+		int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
+		int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
+		//unsigned char *imgNibbles;
+		unsigned char *outputImg;
+
+		outputImg = new unsigned char[BitMapWidth*BitMapHeight];
+		ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+		if (SkipFileOutput == 1)
+			{
+			if (useTGA == 1)
+				{
+				writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName, 1);
+				}
+			else
+				{
+				writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+				}
+			}
+		}
+	}
+
+void extractCrittersUW2(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput)
+{
+palette *pal;
+unsigned char *critterFile;
+unsigned char auxpalval[32];
+palette auxpal[32];
+int auxPalNo = PaletteNo;
+int AddressPointer;
+
+	pal = new palette[256];
+	getPalette(PaletteFile, pal, 0);//always palette 0?
+
+	
+	long fileSize;
+	unsigned char *assocFile;
+	
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(fileAssoc, "rb")) == NULL)
 	{
@@ -729,23 +865,7 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	assocFile = new unsigned char[fileSize];
 	fread(assocFile, fileSize, 1, file);
 	fclose(file);
-	//AddressPointer= CritterNo *8;
-	////////if (game !=UW2)
-	////////	{
-	////////	//for (int i = 0; i < 8; i++)
-	////////	//	{
-	////////	//	fprintf(LOGFILE,"%c", assocFile[(CritterNo * 8) + i]);
-	////////	//	}
-	////////	anim = getValAtAddress(assocFile, (32 * 8) + (CritterNo * 2) + 0, 8);
-	////////	int DefaultauxPalNo = getValAtAddress(assocFile,(32 * 8) + (CritterNo*2)+1,8);
-	////////	//fprintf(LOGFILE,"\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
-	////////	}
-	////////else
-	////////	{
-	////////	anim = getValAtAddress(assocFile, (CritterNo * 2) + 0, 8);
-	////////	int DefaultauxPalNo = getValAtAddress(assocFile, (CritterNo * 2) + 1, 8);
-	////////	//fprintf(LOGFILE,"\nAnim is %d, AuxPal is %d", anim, DefaultauxPalNo);
-	////////	}
+
 	if ((file = fopen(fileCrit, "rb")) == NULL)
 	{
 	    fprintf(LOGFILE, "\nArchive %s not found!\n", fileCrit);
@@ -755,154 +875,53 @@ void extractCritters(char fileAssoc[255], char fileCrit[255], char PaletteFile[2
 	critterFile = new unsigned char[fileSize];
 	fread(critterFile, fileSize, 1, file);
 	fclose(file);
-	if (game !=UW2)
-			{
-			AddressPointer = 0;
-			fprintf(LOGFILE, "\n\tFile:%s, Palette = %d", fileCrit,PaletteNo);
-			slotBase = getValAtAddress(critterFile, AddressPointer, 8);
-			fprintf(LOGFILE, "\n\tSlot base %d\n", slotBase);
-			int NoOfSlots = getValAtAddress(critterFile, AddressPointer+1, 8);
-			fprintf(LOGFILE,"\tNo of Slots %d\n", NoOfSlots);
-			AddressPointer=2;
-			int k=0;
-			for (int i = 0; i < NoOfSlots; i++)
-			{
-			if (getValAtAddress(critterFile, AddressPointer, 8) !=255)
-			     {
-				 slotIndices[k++] = i;//getValAtAddress(critterFile, AddressPointer, 8);
-				 fprintf(LOGFILE, "\n\tIndex %d = %d", i, getValAtAddress(critterFile, AddressPointer, 8));
-				}
-				
-				AddressPointer++;
-			}
-			int NoOfSegs = getValAtAddress(critterFile,AddressPointer, 8);
-			fprintf(LOGFILE,"\n\tNo of anim segments=%d", NoOfSegs);
-			AddressPointer++;
-			for (int i = 0; i < NoOfSegs; i++)
-				{
-				for (int j = 0; j < 8; j++)
-					{
-					if (getValAtAddress(critterFile, AddressPointer, 8) != 255)
-						{
-						fprintf(LOGFILE, "\n\tSlot %d ", slotIndices[i] + slotBase);
-						PrintAnimName(game, slotIndices[i]+slotBase);
-						fprintf(LOGFILE, "= Anim Frame %d is %d %s_%04d", j, getValAtAddress(critterFile, AddressPointer, 8), fileCrit, getValAtAddress(critterFile, AddressPointer, 8));
-						if (useTGA == 1)
-							{
-							fprintf(LOGFILE, ".tga");
-							}
-						else
-							{
-							fprintf(LOGFILE, ".bmp");
-							}
-						}
-					AddressPointer++;
-					}
-				//AddressPointer = 1 + 2 + NoOfSlots + i;
-
-				}
-			int NoOfPals = getValAtAddress(critterFile, AddressPointer, 8);
-			AddressPointer++;
-			fprintf(LOGFILE,"\n\tNo of Palettes %d",NoOfPals);
-			//AddressPointer = AddressPointer + auxPalNo*32;
-			//if (auxPalNo==0)
-			//	{
-			//	auxPalNo=0;//?
-			//	}
-			for (int i = 0; i < 32; i++)
-				{
-				int value = getValAtAddress(critterFile,(AddressPointer)+(auxPalNo*32)+i,8);
-				auxpalval[i]=value;
-				auxpal[i].green = pal[value].green;
-				auxpal[i].blue = pal[value].blue;
-				auxpal[i].red = pal[value].red;
-				auxpal[i].reserved = pal[value].reserved;
-				}
 	
-			AddressPointer=AddressPointer+NoOfPals*32;
-			int NoOfFrames = getValAtAddress(critterFile,AddressPointer,8);
-			//fprintf(LOGFILE,"\nNo of Frames Offsets %d", NoOfFrames);
-			//fprintf(LOGFILE,"\nCompression Type %d", getValAtAddress(critterFile, AddressPointer+1, 8));
-			AddressPointer=AddressPointer+2;
-			for (int i = 0; i < NoOfFrames; i++)
-				{
-				int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
-				//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
-				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
-				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
-				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
-				int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
-				int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
-				int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
-				//unsigned char *imgNibbles;
-				unsigned char *outputImg;
-
-				outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-				ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-				if (SkipFileOutput==1)
-					{
-					if (useTGA == 1)
-						{
-						writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName, 1);
-						}
-					else
-						{
-						writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
-						}
-					}
-				}
-			}
-	else
-		{//UW2 uses a different method
-		//Starting at offset 0x80
-		fprintf(LOGFILE, "\n\t%s - palette = %d",fileCrit,auxPalNo);
-		//auxPalNo=2;
-		AddressPointer=auxPalNo*32;
-		int i=0;
-		for (int i = 0; i < 32; i++)
-			{
-			int value = getValAtAddress(critterFile, (AddressPointer), 8);
-			auxpalval[i] = value;
-			auxpal[i].green = pal[value].green;
-			auxpal[i].blue = pal[value].blue;
-			auxpal[i].red = pal[value].red;
-			auxpal[i].reserved = pal[value].reserved;
-			AddressPointer++;
-			}
-		for (int index = 128; index < 640; index=index+2)
-			{
-			int frameOffset = getValAtAddress(critterFile, index, 16);
-			if (frameOffset != 0)
-				{
-				//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
-				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
-				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
-				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
-				int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
-				int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
-				int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
-				unsigned char *outputImg;
-				outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-				ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-				if (SkipFileOutput == 1)
-					{
-					if (useTGA==1)
-						{
-						writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);
-						}
-					else
-						{
-						writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
-						}
-					}
-				i++;
-				}
-			}
-
+//UW2 uses a different method
+	//Starting at offset 0x80
+	fprintf(LOGFILE, "\n\t%s - palette = %d",fileCrit,auxPalNo);
+	//auxPalNo=2;
+	AddressPointer=auxPalNo*32;
+	int i=0;
+	for (int i = 0; i < 32; i++)
+		{
+		int value = getValAtAddress(critterFile, (AddressPointer), 8);
+		auxpalval[i] = value;
+		auxpal[i].green = pal[value].green;
+		auxpal[i].blue = pal[value].blue;
+		auxpal[i].red = pal[value].red;
+		auxpal[i].reserved = pal[value].reserved;
+		AddressPointer++;
 		}
-
+	for (int index = 128; index < 640; index=index+2)
+		{
+		int frameOffset = getValAtAddress(critterFile, index, 16);
+		if (frameOffset != 0)
+			{
+			//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
+			int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+			int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+			int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+			int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+			int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
+			int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
+			unsigned char *outputImg;
+			outputImg = new unsigned char[BitMapWidth*BitMapHeight];
+			ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+			if (SkipFileOutput == 1)
+				{
+				if (useTGA==1)
+					{
+					writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);
+					}
+				else
+					{
+					writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+					}
+				}
+			i++;
+			}
+		}
 }
-
 
 void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr,unsigned char *auxpal)
 {
@@ -1082,8 +1101,6 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 		// end of while loop
 	}
 }
-
-
 
 bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 	{
@@ -1280,7 +1297,6 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 		}
 	}
 
-
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha)
 	{
 	FILE *fptr;
@@ -1333,13 +1349,8 @@ void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 				}
 			}
 		}
-
-
 	fclose(fptr);
-
-
 	}
-
 
 void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA)
 {
@@ -1662,7 +1673,6 @@ void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbit
 
 }
 
-
 void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA,int isCutscene)
 {
 //Process a system shock bitmap chunk
@@ -1735,7 +1745,6 @@ int Height;
 			}			
 		}
 	}
-
 
 void ExtractShockCutscenes(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA)
 {
@@ -1861,8 +1870,6 @@ PaletteChunk=2;
 //}//endof
 }
 
-
-
 void WriteShockCutsceneBitmaps(unsigned char KeyFrame[48000], unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA)
 {
 //Process a system shock bitmap chunk
@@ -1957,8 +1964,6 @@ int Height;
 //	}
 //}
 
-
-
 void cyclePalette(palette *pal, int Start, int length)
 	{
 	/*Shifts the palette values around between the start and start+length. Used for texture animations and special effects*/
@@ -1988,207 +1993,189 @@ void copyPalette(palette *inPal, palette *outPal)
 		}
 	}
 
-
-void extractAllCritters(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA)
+void extractAllCrittersUW1(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA)
 	{
 	char OutFileName[255];
-//	palette auxpal[32];
-	if (game == UW1)
+	long fileSize;
+	unsigned char *assocFile;
+	int AssocPtr = 0;
+	//Read in the assoc.anim file
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(fileAssoc, "rb")) == NULL)
 		{
-			long fileSize;
-			unsigned char *assocFile;
-			int AssocPtr=0;
-			//Read in the assoc.anim file
-			FILE *file = NULL;      // File pointer
-			if ((file = fopen(fileAssoc, "rb")) == NULL)
-				{
-				fprintf(LOGFILE,"\nArchive not found!\n");
-				return;
-				}
-			fileSize = getFileSize(file);
-			assocFile = new unsigned char[fileSize];
-			fread(assocFile, fileSize, 1, file);
-			fclose(file);
-			AssocPtr=256;
-			for (int i = 0; i < 64; i++)
-				{
-				char fileCrit[255];
-				int auxPalNo = getValAtAddress(assocFile, AssocPtr + 1, 8);
-				int CritterID = getValAtAddress(assocFile, AssocPtr + 0, 8);
-				int PageNo =0;
-
-				fprintf(LOGFILE,"\n Anim ID: %d - which is %s", i, objectMasters[i+0x40].desc );
-				fprintf(LOGFILE,"\t Palette is %d", auxPalNo);
-				for (int pageNo=0; pageNo<=1;pageNo++)
-					{
-					sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N%02d", CritPath, CritterID, PageNo);//page 1
-					sprintf_s(OutFileName, 255, "CR%02oPAGE_N%02d_%d", CritterID, PageNo, auxPalNo);
-					extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA,0);
-					}
-				//
-				AssocPtr=AssocPtr+2;
-				}
+		fprintf(LOGFILE, "\n//Archive not found!\n");
+		return;
 		}
-		else
+	fileSize = getFileSize(file);
+	assocFile = new unsigned char[fileSize];
+	fread(assocFile, fileSize, 1, file);
+	fclose(file);
+	AssocPtr = 256;
+	for (int i = 0; i < 64; i++)
 		{
-		int frameIndices[6];
-		int frameFiles[8];
-		long fileSize;
-		unsigned char *assocFile;
-		int AssocPtr = 0;
-		int PageNo;
-		//Read in the assoc.anim file
-		FILE *file = NULL;      // File pointer
-		if ((file = fopen(fileAssoc, "rb")) == NULL)
+		char fileCrit[255];
+		int auxPalNo = getValAtAddress(assocFile, AssocPtr + 1, 8);
+		int CritterID = getValAtAddress(assocFile, AssocPtr + 0, 8);
+
+		fprintf(LOGFILE, "\n //Anim ID: %d - which is %s", i, objectMasters[i + 0x40].desc);
+		//fprintf(LOGFILE, "//\t Palette is %d", auxPalNo);
+		for (int pageNo = 0; pageNo <= 1; pageNo++)
 			{
-			fprintf(LOGFILE, "\nArchive not found!\n");
-			return;
+			sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N%02d", CritPath, CritterID, pageNo);//page 1
+			sprintf_s(OutFileName, 255, "CR%02oPAGE_N%02d_%d", CritterID, pageNo, auxPalNo);
+			extractCrittersUW1(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA, ACTUALLY_EXTRACT_FILES, i + 0x40, CritterID, pageNo);
 			}
-		fileSize = getFileSize(file);
-		assocFile = new unsigned char[fileSize];
-		fread(assocFile, fileSize, 1, file);
-		fclose(file);
-		int NoOfCritters = fileSize / 2;
-//Load the paging file
-		char filePGMP[255];
-		sprintf_s(filePGMP, 255, "%s\\%s", path_uw2, "Crit\\PG.MP");
-		unsigned char *PGMP;
-		if ((file = fopen(filePGMP, "rb")) == NULL)
-			{
-			fprintf(LOGFILE, "\nArchive %s not found!\n", filePGMP);
-			return;
-			}
-		fileSize = getFileSize(file);
-		PGMP = new unsigned char[fileSize];
-		fread(PGMP, fileSize, 1, file);
-		fclose(file);
+		AssocPtr = AssocPtr + 2;
+		}
+	}
+
+void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA)
+{
+	/*Extracts all UW2 critters and dumps their animation frames
+	Animations are first looked up in the as.am file with associates the creatures item id-0x40 with the XX portion of a CRXX.YY file.
+	Then a look up of the CR.AN file gives a listing of the animation frames for each anim and angle as detailed in Abysmals uw-formats.txt
+	From there a lookup is made to PG.MP for each frame. PG.MP lists the final frame of each YY file in order. So to get YY for a specific animation
+	you just get which position in PG.MP the animation frame is in. 
+	Additionally since my tools extract every file in the crxx.yy without frame numbers files I subtract the value in pg.mp from the frame no to match up.
+*/
+	char OutFileName[255];
+//	palette auxpal[32];
+	int frameIndices[6];
+	int frameFiles[8];
+	long fileSize;
+	unsigned char *assocFile;
+	int AssocPtr = 0;
+	int PageNo;
+	//Read in the assoc.anim file
+	FILE *file = NULL;      // File pointer
+	if ((file = fopen(fileAssoc, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "\nArchive not found!\n");
+		return;
+		}
+	fileSize = getFileSize(file);
+	assocFile = new unsigned char[fileSize];
+	fread(assocFile, fileSize, 1, file);
+	fclose(file);
+	int NoOfCritters = fileSize / 2;//Two bytes per critter. Each critter corresponds with an item id in the object list.
+	
+	//Load the paging file pg.mp
+	char filePGMP[255];
+	sprintf_s(filePGMP, 255, "%s\\%s", path_uw2, "Crit\\PG.MP");
+	unsigned char *PGMP;
+	if ((file = fopen(filePGMP, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "\nArchive %s not found!\n", filePGMP);
+		return;
+		}
+	fileSize = getFileSize(file);
+	PGMP = new unsigned char[fileSize];
+	fread(PGMP, fileSize, 1, file);
+	fclose(file);
 		
-		char fileCRAN[255];
-		sprintf_s(fileCRAN, 255, "%s\\%s", path_uw2, "Crit\\CR.AN");
-		unsigned char *CRAN;
-		if ((file = fopen(fileCRAN, "rb")) == NULL)
-			{
-			fprintf(LOGFILE, "\nArchive %s not found!\n", fileCRAN);
-			return;
-			}
-		fileSize = getFileSize(file);
-		CRAN = new unsigned char[fileSize];
-		fread(CRAN, fileSize, 1, file);
-		fclose(file);
+	//Load the animation frame listings in cr.an
+	char fileCRAN[255];
+	sprintf_s(fileCRAN, 255, "%s\\%s", path_uw2, "Crit\\CR.AN");
+	unsigned char *CRAN;
+	if ((file = fopen(fileCRAN, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "\nArchive %s not found!\n", fileCRAN);
+		return;
+		}
+	fileSize = getFileSize(file);
+	CRAN = new unsigned char[fileSize];
+	fread(CRAN, fileSize, 1, file);
+	fclose(file);
 
-		for (int i = 0; i < NoOfCritters; i++)
+	for (int i = 0; i < NoOfCritters; i++)
+		{
+		char fileCrit[255];
+		int auxPalNo = getValAtAddress(assocFile, AssocPtr + 1, 8);//Which palette is used in the graphics for this critter. The palettes are stored in the animation file.
+		int CritterID = getValAtAddress(assocFile, AssocPtr + 0, 8);//The XX portion of the file name.
+		fprintf(LOGFILE, "\n//Anim ID: %d - which is %s", i, objectMasters[i + 0x40].desc);
+		AssocPtr = AssocPtr + 2;
+		if (CritterID != 255)
 			{
-			char fileCrit[255];
-			int auxPalNo = getValAtAddress(assocFile, AssocPtr + 1, 8);
-			int CritterID = getValAtAddress(assocFile, AssocPtr + 0, 8);
-			fprintf(LOGFILE, "\nAnim ID: %d - which is %s", i, objectMasters[i + 0x40].desc);
-			if (i == 27)
+			//Extract the graphics in order.
+			//Go through the pg.mp file to get the page files
+			int ExtractPageNo=0;
+			for (int i = 0; i < 8; i++)
 				{
-				printf("");
+				if (getValAtAddress(PGMP, CritterID * 8 + i, 8)!=255)//Checks if a exists at this index in the page file.
+					{
+					sprintf_s(fileCrit, 255, "%s\\CR%02o.%02d", CritPath, CritterID, ExtractPageNo);//Create a file name to extract from
+					sprintf_s(OutFileName, 255, "CR%02o_%02d_%d", CritterID, ExtractPageNo, auxPalNo);//Get a name to extract to
+					extractCrittersUW2(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA, ACTUALLY_EXTRACT_FILES);
+					ExtractPageNo++;
+					}
 				}
-			AssocPtr = AssocPtr + 2;
-			if (CritterID != 255)
+
+			for (int i = 0; i < 8; i++)
+				{//Store the page file last frame in .YY file values 
+				frameFiles[i] = getValAtAddress(PGMP, i + (8 * CritterID), 8);
+				}
+			int cranAdd = (CritterID * 512);//Address when the anim info starts
+			for (int Animation = 0; Animation<8; Animation++)//The the animation slot
 				{
-				//Extract the graphics
-					//Go through the pg.mp file to get the page files.
-				int ExtractPageNo=0;
-				for (int i = 0; i < 8; i++)
+				fprintf(LOGFILE, "\n\tAnimation is ");
+				PrintAnimName(game,Animation);//Prints out what the animation is.
+				for (int Angle = 0; Angle<8; Angle++)//Each animation has every possible angle.
 					{
-					if (getValAtAddress(PGMP, CritterID * 8 + i, 8)!=255)
+					fprintf(LOGFILE, "\n\t\tAngle is ", Angle);
+					PrintCritAngle(Angle); //Prints out the cardinal direction (front,left,right,rear etc) for the animation
+					int ValidEntries = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
+					fprintf(LOGFILE, " Valid is %d",ValidEntries);
+					for (int FrameNo = 0; FrameNo < 6; FrameNo++)//Each animation has up to 6 frames. We keep the last valid one for the page lookup
 						{
-						sprintf_s(fileCrit, 255, "%s\CR%02o.%02d", CritPath, CritterID, ExtractPageNo);
-						sprintf_s(OutFileName, 255, "CR%02o_%02d_%d", CritterID, ExtractPageNo, auxPalNo);
-						extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA, 0);
-						ExtractPageNo++;
-						}
-					}
-					//sprintf_s(fileCrit, 255, "%s\CR%02oPAGE.N%02d", CritPath, CritterID, PageNo);
-
-				for (int i = 0; i < 8; i++)
-					{
-					frameFiles[i] = getValAtAddress(PGMP, i + (8 * CritterID), 8);
-					}
-				int LastFrame = -1;
-				int cranAdd = (CritterID * 512);//Address when the anim info starts
-				for (int Animation = 0; Animation<8; Animation++)//The the animation slot
-					{
-					fprintf(LOGFILE, "\n\tAnimation is ");
-					PrintAnimName(game,Animation);
-					for (int Angle = 0; Angle<8; Angle++)//Each animation has every possible angle.
-						{
-						fprintf(LOGFILE, "\n\t\tAngle is ", Angle);
-						PrintCritAngle(Angle);
-						LastFrame = -1;
-						int ValidEntries = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);
-						fprintf(LOGFILE, " Valid is %d",ValidEntries);
-						for (int FrameNo = 0; FrameNo < 6; FrameNo++)//Each animation has up to 6 frames. We keep the last valid one for the page lookup
-							{
-							frameIndices[FrameNo]=255;//reset the value
-							int currFrame = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle*8) + (FrameNo), 8);
-							frameIndices[FrameNo] = currFrame;
-							if (FrameNo>ValidEntries)
-								{
-								frameIndices[FrameNo]=255;
-								}
-							//if ((FrameNo>0) && (frameIndices[FrameNo] != 255))
-								//{
-								//if (frameIndices[FrameNo] == frameIndices[0])
-									//{
-									//frameIndices[FrameNo] = frameIndices[0] + FrameNo;//Frame is repeated. Do I just advance?????
-									//}
-								//}
+						frameIndices[FrameNo]=255;//reset the value
+						int currFrame = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle*8) + (FrameNo), 8);
+						frameIndices[FrameNo] = currFrame;
+						if (FrameNo>ValidEntries)
+							{//I don't store any frames after the valid value.
+							frameIndices[FrameNo]=255;
 							}
+						}
 						
-						//	sprintf_s(fileCrit, 255, "%s\CR%02o.%02d", CritPath, CritterID, PageNo-1);
-							
-						//Calculate which page the anim is part of
-							for (int x = 0; x < 6; x++)
+					//Calculate which page the anim is part of
+					for (int x = 0; x < 6; x++)
+						{
+						if (frameIndices[x] != 255)
+							{
+							PageNo = 0;//default
+							for (int i = 0; i < 6; i++)
 								{
-								if (frameIndices[x] != 255)
+								if (i == 0)
 									{
-									PageNo = 0;//default
-									for (int i = 0; i < 6; i++)
-										{
-										if (i == 0)
-											{
-											if (frameIndices[x] <= frameFiles[0])
-												{
-												PageNo= 0;
-												}
-											}
-										else   
-											{
-											if ((frameIndices[x] > frameFiles[i - 1]) && (frameIndices[x] <= frameFiles[i]))//In between 
-												{
-												PageNo= i;
-												}
-											}
+									if (frameIndices[x] <= frameFiles[0])
+										{//Frame is in the CRXX.00 file.
+										PageNo= 0;
 										}
-									sprintf_s(fileCrit, 255, "%s\CR%02o_%02d_%d", CritPath, CritterID, PageNo,auxPalNo);
-									fprintf(LOGFILE, "\t%s", fileCrit);
-									if (PageNo == 0)
-										{
-										fprintf(LOGFILE, "_[%04d]", frameIndices[x]);
+									}
+								else   
+									{
+									if ((frameIndices[x] > frameFiles[i - 1]) && (frameIndices[x] <= frameFiles[i]))//In between 
+										{//The frame is in the CRXX.i file.
+										PageNo= i;
 										}
-									else
-										{
-										fprintf(LOGFILE, "_[%04d]", frameIndices[x]-frameFiles[PageNo-1]-1);//Shift my frame values down to match the extracted graphics files.
-										}
-									
-
-									
 									}
 								}
+							sprintf_s(fileCrit, 255, "%s\CR%02o_%02d_%d", CritPath, CritterID, PageNo,auxPalNo);
+							fprintf(LOGFILE, "\t%s", fileCrit);
+							if (PageNo == 0)
+								{
+								fprintf(LOGFILE, "_[%04d]", frameIndices[x]);
+								}
+							else
+								{
+								fprintf(LOGFILE, "_[%04d]", frameIndices[x]-frameFiles[PageNo-1]-1);//Shift my frame values down to match the extracted graphics files.
+								}
+									
 
-							//sprintf_s(OutFileName, 255, "Critter_%03d_anim_%02d_angle_%02d_pal_%02d,", CritterID, Animation, Angle, auxPalNo);
-							//extractCritters(fileAssoc, fileCrit, PaletteFile, auxPalNo, 64, UW_GRAPHICS_GR, game, 0, OutFileName, useTGA, 1);
-							LastFrame = -1;
+									
 							}
-								
+						}
 					}
-
 				}
-				
 			}
 		}
 }
@@ -2199,31 +2186,31 @@ void PrintAnimName(int game, int animNo)
 		{
 		switch (animNo)
 			{
-				case 0x0:fprintf(LOGFILE, "combat idle"); break;
-				case 0x1:fprintf(LOGFILE, "attack, bash"); break;
-				case 0x2:fprintf(LOGFILE, "attack, slash"); break;
-				case 0x3:fprintf(LOGFILE, "attack, thrust"); break;
-				case 0x5:fprintf(LOGFILE, "second weapon attack"); break;
-				case 0x7:fprintf(LOGFILE, "walking / running towards player"); break;
+				case 0x0:fprintf(LOGFILE, "idle_combat"); break;
+				case 0x1:fprintf(LOGFILE, "attack_bash"); break;
+				case 0x2:fprintf(LOGFILE, "attack_slash"); break;
+				case 0x3:fprintf(LOGFILE, "attack_thrust"); break;
+				case 0x5:fprintf(LOGFILE, "attack_secondary"); break;
+				case 0x7:fprintf(LOGFILE, "walking_towards"); break;
 				case 0xc:fprintf(LOGFILE, "death"); break;
-				case 0xd:fprintf(LOGFILE, "begin combat?"); break;
-				case 0x20:fprintf(LOGFILE, "idle, facing away from player(180 degrees)"); break;
-				case 0x21:fprintf(LOGFILE, "idle, 135 deg."); break;
-				case 0x22:fprintf(LOGFILE, "idle, angle 90 deg."); break;
-				case 0x23:fprintf(LOGFILE, "idle, angle 45 deg."); break;
-				case 0x24:fprintf(LOGFILE, "idle, facing towards player, 0 deg."); break;
-				case 0x25:fprintf(LOGFILE, "idle, angle - 45 deg."); break;
-				case 0x26:fprintf(LOGFILE, "idle, angle - 90 deg."); break;
-				case 0x27:fprintf(LOGFILE, "idle, angle - 135 deg."); break;
-				case 0x80:fprintf(LOGFILE, "walking, facing away from player(180 degrees)"); break;
-				case 0x81:fprintf(LOGFILE, "walking, 135 deg."); break;
-				case 0x82:fprintf(LOGFILE, "walking, angle 90 deg."); break;
-				case 0x83:fprintf(LOGFILE, "walking, angle 45 deg."); break;
-				case 0x84:fprintf(LOGFILE, "walking, facing towards player, 0 deg."); break;
-				case 0x85:fprintf(LOGFILE, "walking, angle - 45 deg."); break;
-				case 0x86:fprintf(LOGFILE, "walking, angle - 90 deg."); break;
-				case 0x87:fprintf(LOGFILE, "walking, angle - 135 deg."); break;
-				default:fprintf(LOGFILE, "unknown anim"); break;
+				case 0xd:fprintf(LOGFILE, "begin_combat"); break;
+				case 0x20:fprintf(LOGFILE, "idle_rear"); break;
+				case 0x21:fprintf(LOGFILE, "idle_rear_right"); break;
+				case 0x22:fprintf(LOGFILE, "idle_right"); break;
+				case 0x23:fprintf(LOGFILE, "idle_front_right"); break;
+				case 0x24:fprintf(LOGFILE, "idle_front"); break;
+				case 0x25:fprintf(LOGFILE, "idle_front_left"); break;
+				case 0x26:fprintf(LOGFILE, "idle_left"); break;
+				case 0x27:fprintf(LOGFILE, "idle_rear_left"); break;
+				case 0x80:fprintf(LOGFILE, "walking_rear"); break;
+				case 0x81:fprintf(LOGFILE, "walking_rear_right"); break;
+				case 0x82:fprintf(LOGFILE, "walking_right"); break;
+				case 0x83:fprintf(LOGFILE, "walking_front_right"); break;
+				case 0x84:fprintf(LOGFILE, "walking_front"); break;
+				case 0x85:fprintf(LOGFILE, "walking_front_left"); break;
+				case 0x86:fprintf(LOGFILE, "walking_left"); break;
+				case 0x87:fprintf(LOGFILE, "walking_rear_left"); break;
+				default:fprintf(LOGFILE, "unknown_anim"); break;
 			}
 		}
 	else

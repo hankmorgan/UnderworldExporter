@@ -4,19 +4,21 @@ using System.Collections;
 public class PlayerInventory : MonoBehaviour {
 
 	//The game objects at the various slots. (not in use?)
-	private GameObject Helm;
-	private GameObject Chest;
-	private GameObject Legs;
-	private GameObject Boots;
-	private GameObject Gloves;
-	private GameObject LeftHand;
-	private GameObject RightHand;
-	private GameObject LeftRing;
-	private GameObject RightRing;
-	private GameObject LeftShoulder;
-	private GameObject RightShoulder;
-	private GameObject[] BackPack= new GameObject[8];
+	//private GameObject Helm;
+	//private GameObject Chest;
+	//private GameObject Legs;
+	//private GameObject Boots;
+	//private GameObject Gloves;
+	//private GameObject LeftHand;
+	//private GameObject RightHand;
+	//private GameObject LeftRing;
+	//private GameObject RightRing;
+	//private GameObject LeftShoulder;
+	//private GameObject RightShoulder;
+	//private GameObject[] BackPack= new GameObject[8];
 
+	public string ObjectInHand; //What is the current active object held by the player
+	public bool JustPickedup; //Has the player just picked something up.
 	//The game object name of the item.
 	public string sHelm;
 	public string sChest;
@@ -118,6 +120,12 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		if (hasChanged==true)
 		{
+			if (objName =="")
+			{
+				Label.spriteName="object_blank";
+				hasChanged=false;
+				return;
+			}
 			GameObject objToDisplay=GameObject.Find (objName);
 			hasChanged=false;
 			if (objToDisplay != null)
@@ -150,7 +158,7 @@ public class PlayerInventory : MonoBehaviour {
 			switch (slotIndex)
 			{
 		case 0://Helm
-			if (Container.InteractTwoObjects (sObjectInHand,sHelm) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sHelm,slotIndex) == false)
 			{
 				bHelm=true;
 				ExistingObject=sHelm;
@@ -162,7 +170,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 1://Chest
-			if (Container.InteractTwoObjects (sObjectInHand,sChest) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sChest,slotIndex) == false)
 			{
 				bChest=true;
 				ExistingObject=sChest;
@@ -174,7 +182,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 2://Leggings
-			if (Container.InteractTwoObjects (sObjectInHand,sLegs) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sLegs,slotIndex) == false)
 			{
 				bLegs=true;
 				ExistingObject=sLegs;
@@ -186,7 +194,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 3://Boots
-			if (Container.InteractTwoObjects (sObjectInHand,sBoots) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sBoots,slotIndex) == false)
 			{
 				bBoots=true;
 				ExistingObject=sBoots;
@@ -198,7 +206,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 4://Gloves
-			if (Container.InteractTwoObjects (sObjectInHand,sGloves) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sGloves,slotIndex) == false)
 			{
 				bGloves=true;
 				ExistingObject=sGloves;
@@ -210,7 +218,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 5://ShoulderRight
-			if (Container.InteractTwoObjects (sObjectInHand,sRightShoulder) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sRightShoulder,slotIndex) == false)
 			{
 				bRightShoulder=true;
 				ExistingObject=sRightShoulder;
@@ -222,7 +230,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 6://ShoulderLeft
-			if (Container.InteractTwoObjects (sObjectInHand,sLeftShoulder) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sLeftShoulder,slotIndex) == false)
 			{
 				bLeftShoulder=true;
 				ExistingObject=sLeftShoulder;
@@ -234,7 +242,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 7://HandRight
-			if (Container.InteractTwoObjects (sObjectInHand,sRightHand) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sRightHand,slotIndex) == false)
 			{
 				bRightHand=true;
 				ExistingObject=sRightHand;
@@ -246,7 +254,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 8://HandLeft
-			if (Container.InteractTwoObjects (sObjectInHand,sLeftHand) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sLeftHand,slotIndex) == false)
 			{
 				bLeftHand=true;
 				ExistingObject=sLeftHand;
@@ -258,7 +266,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 9://RingRight
-			if (Container.InteractTwoObjects (sObjectInHand,sRightRing) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sRightRing,slotIndex) == false)
 			{
 				bRightRing=true;
 				ExistingObject=sRightRing;
@@ -270,7 +278,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 10://RingLeft
-			if (Container.InteractTwoObjects (sObjectInHand,sLeftRing) == false)
+			if (Container.InteractTwoObjects (sObjectInHand,sLeftRing,slotIndex) == false)
 			{
 				bLeftRing=true;
 				ExistingObject=sLeftRing;
@@ -284,7 +292,7 @@ public class PlayerInventory : MonoBehaviour {
 			default://Inventory Slots 0-7		
 				if ((slotIndex>=11)&&(slotIndex<=18))
 				{
-				if (Container.InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11]) == false)
+				if (Container.InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11],slotIndex) == false)
 				{
 					bBackPack[slotIndex-11]=true;
 					ExistingObject=sBackPack[slotIndex-11];
@@ -314,37 +322,26 @@ public class PlayerInventory : MonoBehaviour {
 			{
 			case 0://Helm
 				return sHelm;
-				break;
 			case 1://Chest
 				return sChest;
-				break;
 			case 2://Leggings
 				return sLegs;
-				break;
 			case 3://Boots
 				return sBoots;
-				break;
 			case 4://Gloves
 				return sGloves;
-				break;
 			case 5://ShoulderRight
 				return sRightShoulder;
-				break;
 			case 6://ShoulderLeft
 				return sLeftShoulder;
-				break;
 			case 7://HandRight
 				return sRightHand;
-				break;
 			case 8://HandLeft
 				return sLeftHand;
-				break;
 			case 9://RingRight
 				return sRightRing;
-				break;
 			case 10://RingLeft
 				return sLeftRing;
-				break;
 			default://Inventory Slots 0-7		
 				if ((slotIndex>=11)&&(slotIndex<=18))
 					{
@@ -354,7 +351,6 @@ public class PlayerInventory : MonoBehaviour {
 					{
 						return "";
 					}
-				break;
 		}
 	}
 

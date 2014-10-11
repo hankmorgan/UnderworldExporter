@@ -103,7 +103,7 @@ public class Container : MonoBehaviour {
 		}
 
 
-	static public bool InteractTwoObjects(string ObjectInHand, string ObjectUsedOn)
+	static public bool InteractTwoObjects(string ObjectInHand, string ObjectUsedOn,int slotIndex)
 	{
 		Debug.Log ("Interacting " + ObjectInHand + " and " + ObjectUsedOn);
 		//returns true if they have an effect on each other.
@@ -147,7 +147,15 @@ public class Container : MonoBehaviour {
 				{
 					PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 					Container subContainer=objInHand.GetComponent<Container>();
-					subContainer.ContainerParent=pInv.currentContainer;
+					if (slotIndex >=11)
+					{//Object is being added to a bag container
+						subContainer.ContainerParent=pInv.currentContainer;
+					}
+					else
+					{//object is being added to an equipment slot
+						subContainer.ContainerParent="Gronk";
+					}
+
 				}
 				}
 			return false;
@@ -158,14 +166,12 @@ public class Container : MonoBehaviour {
 	public string ObjectPickedUp(int slotIndex, string sObjectInHand)
 	{//Returns the game object of the object already in the slot
 		PlayerInventory pInv =GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-		GameObject NewObject = GameObject.Find (sObjectInHand);
-		GameObject ExistingObj;
 		string ExistingObject="";
 
 		switch (slotIndex)
 		{
 		case 0://Helm
-			if (InteractTwoObjects (sObjectInHand,pInv.sHelm) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sHelm,slotIndex) == false)
 			{
 				pInv.bHelm=true;
 				ExistingObject=pInv.sHelm;
@@ -177,7 +183,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 1://Chest
-			if (InteractTwoObjects (sObjectInHand,pInv.sChest) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sChest,slotIndex) == false)
 			{
 				pInv.bChest=true;
 				ExistingObject=pInv.sChest;
@@ -189,7 +195,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 2://Leggings
-			if (InteractTwoObjects (sObjectInHand,pInv.sLegs) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sLegs,slotIndex) == false)
 			{
 				pInv.bLegs=true;
 				ExistingObject=pInv.sLegs;
@@ -201,7 +207,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 3://Boots
-			if (InteractTwoObjects (sObjectInHand,pInv.sBoots) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sBoots,slotIndex) == false)
 			{
 				pInv.bBoots=true;
 				ExistingObject=pInv.sBoots;
@@ -213,7 +219,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 4://Gloves
-			if (InteractTwoObjects (sObjectInHand,pInv.sGloves) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sGloves,slotIndex) == false)
 			{
 				pInv.bGloves=true;
 				ExistingObject=pInv.sGloves;
@@ -225,7 +231,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 5://ShoulderRight
-			if (InteractTwoObjects (sObjectInHand,pInv.sRightShoulder) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sRightShoulder,slotIndex) == false)
 			{
 				pInv.bRightShoulder=true;
 				ExistingObject=pInv.sRightShoulder;
@@ -237,7 +243,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 6://ShoulderLeft
-			if (InteractTwoObjects (sObjectInHand,pInv.sLeftShoulder) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sLeftShoulder,slotIndex) == false)
 			{
 				pInv.bLeftShoulder=true;
 				ExistingObject=pInv.sLeftShoulder;
@@ -249,7 +255,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 7://HandRight
-			if (InteractTwoObjects (sObjectInHand,pInv.sRightHand) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sRightHand,slotIndex) == false)
 			{
 				pInv.bRightHand=true;
 				ExistingObject=pInv.sRightHand;
@@ -261,7 +267,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 8://HandLeft
-			if (InteractTwoObjects (sObjectInHand,pInv.sLeftHand) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sLeftHand,slotIndex) == false)
 			{
 				pInv.bLeftHand=true;
 				ExistingObject=pInv.sLeftHand;
@@ -273,7 +279,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 9://RingRight
-			if (InteractTwoObjects (sObjectInHand,pInv.sRightRing) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sRightRing,slotIndex) == false)
 			{
 				pInv.bRightRing=true;
 				ExistingObject=pInv.sRightRing;
@@ -285,7 +291,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 10://RingLeft
-			if (InteractTwoObjects (sObjectInHand,pInv.sLeftRing) == false)
+			if (InteractTwoObjects (sObjectInHand,pInv.sLeftRing,slotIndex) == false)
 			{
 				pInv.bLeftRing=true;
 				ExistingObject=pInv.sLeftRing;
@@ -299,7 +305,7 @@ public class Container : MonoBehaviour {
 		default://Inventory Slots 0-7	
 			if ((slotIndex>=11)&&(slotIndex<=18))
 			{
-				if (InteractTwoObjects (sObjectInHand,pInv.sBackPack[slotIndex-11])==false)
+				if (InteractTwoObjects (sObjectInHand,pInv.sBackPack[slotIndex-11],slotIndex)==false)
 				{
 					pInv.bBackPack[slotIndex-11]=true;
 					ExistingObject=pInv.sBackPack[slotIndex-11];

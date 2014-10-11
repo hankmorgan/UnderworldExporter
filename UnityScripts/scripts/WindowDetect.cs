@@ -5,10 +5,12 @@ public class WindowDetect : MonoBehaviour {
 	//private UILabel MessageLog;
 	//public int InteractionMode;
 	UWCharacter playerUW;
+	PlayerInventory pInv;
 	// Use this for initialization
 	void Start () {
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		playerUW=GameObject.Find ("Gronk").GetComponent <UWCharacter>();
+		pInv=GameObject.Find ("Gronk").GetComponent <PlayerInventory>();
 	}
 
 	
@@ -33,21 +35,22 @@ public class WindowDetect : MonoBehaviour {
 
 	void OnClick()
 	{
-		if (playerUW.ObjectInHand!="")
+		if (pInv.ObjectInHand!="")
 			{
-			if (playerUW.JustPickedup==false)
+			if (pInv.JustPickedup==false)
 				{
-				Debug.Log ("heave ho" + playerUW.ObjectInHand);
-				GameObject droppedItem = GameObject.Find(playerUW.ObjectInHand);
+				Debug.Log ("heave ho" + pInv.ObjectInHand);
+				GameObject droppedItem = GameObject.Find(pInv.ObjectInHand);
+				droppedItem.transform.parent=null;
 				droppedItem.transform.position=playerUW.transform.position;
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
 				playerUW.CurrObjectSprite = "";
-				playerUW.ObjectInHand="";
+				pInv.ObjectInHand="";
 				}
 			else
 			{
-				Debug.Log ("wait a mo" + playerUW.ObjectInHand);
-				playerUW.JustPickedup=false;
+				Debug.Log ("wait a mo" + pInv.ObjectInHand);
+				pInv.JustPickedup=false;
 			}
 				//try and drop the item in the world
 

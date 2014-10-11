@@ -34,9 +34,9 @@ public class ContainerOpened : MonoBehaviour {
 
 	void OnClick()
 	{
-		UWCharacter player=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		UWCharacter playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-		if (player.ObjectInHand=="")
+		if (pInv.ObjectInHand=="")
 		{//Player has no object in their hand. We close up the container.
 			Container currentContainerObj = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			pInv.currentContainer = currentContainerObj.ContainerParent;
@@ -50,7 +50,6 @@ public class ContainerOpened : MonoBehaviour {
 			}
 			for (int i = 0; i<8; i++)
 			{
-				InventorySlot currSlot = transform.parent.FindChild ("Backpack_Slot_" + i.ToString ("D2")).GetComponent<InventorySlot>();
 				string sItem = DestinationContainer.GetItemAt(i);
 				pInv.SetObjectAtSlot(i+11,sItem);
 			}
@@ -61,12 +60,12 @@ public class ContainerOpened : MonoBehaviour {
 			Debug.Log ("Moving contents out of bag");
 			Container CurrentContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
-			if (DestinationContainer.AddItemToContainer(player.ObjectInHand))
+			if (DestinationContainer.AddItemToContainer(pInv.ObjectInHand))
 			{//Object has moved
-				UWCharacter playerUW = player.GetComponent<UWCharacter>();
+				//UWCharacter playerUW = player.GetComponent<UWCharacter>();
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
 				playerUW.CurrObjectSprite = "";
-				playerUW.ObjectInHand="";
+				pInv.ObjectInHand="";
 			}
 		}
 	}

@@ -122,6 +122,9 @@ extern int CEILING_HEIGHT;
 //Turn off alpha channels globally.
 #define ALPHA 1
 
+//Should graphics be actually extracted or should I just go through the motions?
+#define ACTUALLY_EXTRACT_FILES 1
+
 
 #define LOGFILENAME "UWEXPORT_LOG.txt"
 extern FILE *LOGFILE;

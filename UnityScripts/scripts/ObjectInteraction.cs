@@ -11,13 +11,16 @@ public class ObjectInteraction : MonoBehaviour {
 	public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
 	private UWCharacter playerUW;
+	private PlayerInventory pInv;
 	public bool isContainer;
 	// Use this for initialization
+
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		if (player!=null)
 		{
 			playerUW=player.GetComponent<UWCharacter>();
+			pInv=player.GetComponent<PlayerInventory>();
 		}
 
 		if (InvMarker==null)
@@ -32,6 +35,10 @@ public class ObjectInteraction : MonoBehaviour {
 			{
 			playerUW=player.GetComponent<UWCharacter>();
 			}
+		if ((player!=null) && (pInv==null))
+		{
+			pInv=player.GetComponent<PlayerInventory>();
+		}
 		if (InvMarker==null)
 			{
 			InvMarker=GameObject.Find ("InventoryMarker");
@@ -57,16 +64,17 @@ public class ObjectInteraction : MonoBehaviour {
 			{
 				player.GetComponent<UWCharacter>();
 			}
-			if (playerUW.ObjectInHand=="")
+			if (pInv.ObjectInHand=="")
 			{
 				MessageLog.text = "You pick up a " + name;
 				//Cursor.SetCursor (InventoryIcon.texture,Vector2.zero, CursorMode.ForceSoftware);
 				playerUW.CursorIcon= InventoryIcon.texture;
 				playerUW.CurrObjectSprite = InventoryString;
-				playerUW.ObjectInHand=name;
-				playerUW.JustPickedup=true;//To stop me throwing it away immediately.
+				pInv.ObjectInHand=name;
+				pInv.JustPickedup=true;//To stop me throwing it away immediately.
 				//Move the selected gameobject to the box.
 				this.transform.position = InvMarker.transform.position;
+				this.transform.parent=InvMarker.transform;//Adds to the marker so it will persist.
 			}
 
 			break;

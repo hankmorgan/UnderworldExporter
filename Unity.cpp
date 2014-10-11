@@ -14,7 +14,7 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.3f,0.3f,0.3f,\"OBJECTS_%03d\");",currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\");",currobj.item_id);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -106,7 +106,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%s\",\"Assets/Sprites/objects_%03d\");", objectMasters[currobj.item_id].desc, currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"Sprites/objects_%03d\");", currobj.item_id, currobj.item_id);
 	switch (currobj.npc_attitude)
 		{
 			case 0:	//hostile
@@ -1049,6 +1049,9 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnityEntityParticle(game, x, y, z, currobj, objList, LevelInfo, 0);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case SCENERY:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
@@ -1127,7 +1130,7 @@ float offX; float offY; float offZ;
 					objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					objList[nextObj].tileY = y;
 					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);//Figures out where the object should be.
-					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0)+((BrushZ*1.5)/100);//shift up the z a small bit.
+					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);//+((BrushZ*1.25)/100);//shift up the z a small bit.
 					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])))
 						{//Everything but traps and triggers
 						if (objList[nextObj].AlreadyRendered != 1)
@@ -1138,7 +1141,7 @@ float offX; float offY; float offZ;
 							//fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 							//fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Assets/Sprites/objects_%03d.tga\");", objList[nextObj].item_id);
 							}
-						objList[nextObj].AlreadyRendered = 1;//Prevent possible duplication of objects due to system shock supporting objects that take occupy multiple tiles
+						objList[nextObj].AlreadyRendered = 1;//Prevent possible duplication of0 objects due to system shock supporting objects that take occupy multiple tiles
 						}
 					nextObj = objList[nextObj].next;//In linked list.
 					}

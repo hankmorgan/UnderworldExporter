@@ -8,13 +8,12 @@ public class InventorySlot : MonoBehaviour {
 	//public int InteractionMode;
 	public static GameObject player;
 	public static UWCharacter playerUW;
-
+	//public static GameObject currInventorySlot;
 	//public GameObject ObjectInSlot;
 	public string ObjectSpriteString;
 	public Texture2D ObjectSprite;
 	private PlayerInventory pInv;
 	public GameObject GronkSlot;
-
 	public int slotIndex;//What type of inventory slot is this
 
 	// Use this for initialization
@@ -45,21 +44,21 @@ public class InventorySlot : MonoBehaviour {
 	//	MessageLog.text=name +"triggered";
 	//}
 	
-	void OnHover( bool isOver )
-	{
-		if( isOver )
-		{
-			playerUW.currInventorySlot=this.gameObject;
-			//MessageLog.text=name + "Hovered over";
-		}
-
-		else
-		{
-			playerUW.currInventorySlot=null;
-			//MessageLog.text=name + "Hovered out";
-		}
-			
-	}
+//	void OnHover( bool isOver )
+//	{
+//		if( isOver )
+//		{
+//			InventorySlot.currInventorySlot=this.gameObject;
+//		//	playerUW.currInventorySlot=this.gameObject;
+//			//MessageLog.text=name + "Hovered over";
+//		}
+//		else
+//		{
+//			InventorySlot.currInventorySlot=null;
+//			//playerUW.currInventorySlot=null;
+//			//MessageLog.text=name + "Hovered out";
+//		}
+//	}
 
 	void OnClick()
 	{
@@ -73,7 +72,7 @@ public class InventorySlot : MonoBehaviour {
 
 			if (pInv.currentContainer=="Gronk")
 				{
-				sNewObj= pInv.ObjectPickedUp(slotIndex,playerUW.ObjectInHand);
+				sNewObj= pInv.ObjectPickedUp(slotIndex,pInv.ObjectInHand);
 				}
 			else
 				{
@@ -96,14 +95,14 @@ public class InventorySlot : MonoBehaviour {
 
 
 				SubContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
-				sNewObj = SubContainer.ObjectPickedUp (slotIndex,playerUW.ObjectInHand);
+				sNewObj = SubContainer.ObjectPickedUp (slotIndex,pInv.ObjectInHand);
 				}
 			
 				if (sNewObj=="")
 				{
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
 					playerUW.CurrObjectSprite = "";
-					playerUW.ObjectInHand="";
+				    pInv.ObjectInHand="";
 				}
 				else
 				{
@@ -113,14 +112,14 @@ public class InventorySlot : MonoBehaviour {
 					{
 						playerUW.CursorIcon= NewObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
 						playerUW.CurrObjectSprite = NewObj.GetComponent<ObjectInteraction>().InventoryString;
-						playerUW.ObjectInHand=sNewObj;
+					    pInv.ObjectInHand=sNewObj;
 					}
 					else
 					{
 						Debug.Log ("unable to find " + sNewObj);
 						playerUW.CursorIcon= playerUW.CursorIconDefault;
 						playerUW.CurrObjectSprite = "";
-						playerUW.ObjectInHand="";
+					    pInv.ObjectInHand="";
 					}
 					
 				}
@@ -157,7 +156,7 @@ public class InventorySlot : MonoBehaviour {
 						//transform.parent.FindChild ()
 						//Debug.Log ("Looking for " + "Backpack_Slot_" + i.ToString ("D2"));
 						//Debug.Log ("Parent is " + transform.parent.name);
-						InventorySlot currSlot = transform.parent.FindChild ("Backpack_Slot_" + i.ToString ("D2")).GetComponent<InventorySlot>();
+						//InventorySlot currSlot = transform.parent.FindChild ("Backpack_Slot_" + i.ToString ("D2")).GetComponent<InventorySlot>();
 						string sItem = currObjCont.GetItemAt(i);
 						pInv.SetObjectAtSlot(i+11,sItem);
 					}

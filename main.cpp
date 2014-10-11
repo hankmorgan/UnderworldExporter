@@ -798,7 +798,11 @@ switch (game)
 				}
 			break;
 		case CRITTER_EXTRACT_MODE:
-			extractAllCritters(fileAssoc, fileCrit, Graphics_Pal, game, useTGA);
+			switch (game)
+				{
+					case UW1:extractAllCrittersUW1(fileAssoc, fileCrit, Graphics_Pal, game, useTGA); break;
+					case UW2:extractAllCrittersUW2(fileAssoc, fileCrit, Graphics_Pal, game, useTGA); break;
+				}
 			//extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA,1);
 			break;
 		case CUTSCENE_EXTRACT_MODE:
@@ -821,7 +825,7 @@ switch (game)
 			//BuildGuiFiles();
 			//ExportModelFormat();
 			//BuildWORDSXData(game);
-			BuildParticles(game);
+			//BuildParticles(game);
 			printf("Materials builder turned off at the moment.");
 			break;
 		case CONVERSATION_MODE:

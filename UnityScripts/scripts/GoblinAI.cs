@@ -4,14 +4,31 @@ using System.Collections;
 
 public class GoblinAI : MonoBehaviour {
 
-	public string IdleForward;
-	public string IdleAway;
-	public string IdleRight;
-	public string IdleLeft;
-	public string IdleForwardRight;
-	public string IdleForwardLeft;
-	public string IdleAwayRight;
-	public string IdleAwayLeft;
+	public int State=1;//Multiple of 10 for
+	public string CurrentAnim;
+	public string Idle_Front;
+	public string Idle_Rear;
+	public string Idle_Right;
+	public string Idle_Left;
+	public string Idle_Front_Right;
+	public string Idle_Front_Left;
+	public string Idle_Rear_Right;
+	public string Idle_Rear_Left;
+	public string Walking_Front;
+	public string Walking_Rear;
+	public string Walking_Right;
+	public string Walking_Left;
+	public string Walking_Front_Right;
+	public string Walking_Front_Left;
+	public string Walking_Rear_Right;
+	public string Walking_Rear_Left;
+	public string idle_combat;
+	public string attack_bash;
+	public string attack_slash;
+	public string attack_thrust;
+	public string attack_secondary;
+	public string death;
+	public string begin_combat;//?
 
 	private UILabel MessageLog;
 	private NavMeshAgent agent;
@@ -20,7 +37,7 @@ public class GoblinAI : MonoBehaviour {
 	private int currentState=-1;
 	private bool followPlayer=false;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		//MessageLog.text="StartUp";
 		//GameObject targetPoint = GameObject.Find ("a_goblin_52_59_00_0202");
@@ -30,7 +47,8 @@ public class GoblinAI : MonoBehaviour {
 		//anim = GameObject.Find (name + "_Animation").GetComponent<Animator>();
 		//anim = (Animator)transform.FindChild (name + "_Sprite").GetComponent<Animator>();
 		//anim = GameObject.Find (name + "_sprite").GetComponent<Animator>();
-		anim = GetComponentInChildren<Animator>();
+		//anim = GetComponentInChildren<Animator>();
+		anim=GetComponentInChildren<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -50,51 +68,90 @@ public class GoblinAI : MonoBehaviour {
 		Vector3 direction = player.transform.position - transform.position;
 		float angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
 
-
 	
 		//print (angle);
 		switch (facing(angle))
 		{
-		case 0:
-			{	
-			playAnimation(IdleForward,0);
-			break;
-			}
 		case 1:
 			{	
-			playAnimation(IdleForwardLeft,1);
+			playAnimation(Idle_Front,0);
 			break;
 			}
 		case 2:
 			{	
-			playAnimation(IdleLeft,2);
+			playAnimation(Idle_Front_Left,1);
 			break;
 			}
 		case 3:
 			{	
-			playAnimation(IdleAwayLeft,3);
+			playAnimation(Idle_Left,2);
 			break;
 			}
 		case 4:
 			{	
-			playAnimation(IdleAway,4);
+			playAnimation(Idle_Rear_Left,3);
 			break;
 			}
 		case 5:
 			{	
-			playAnimation(IdleAwayRight,5);
+			playAnimation(Idle_Rear,4);
 			break;
 			}
 		case 6:
 			{	
-			playAnimation(IdleRight,6);
+			playAnimation(Idle_Rear_Right,5);
 			break;
 			}
 		case 7:
 			{	
-			playAnimation(IdleForwardRight,7);
+			playAnimation(Idle_Right,6);
 			break;
 			}
+		case 8:
+			{	
+			playAnimation(Idle_Front_Right,7);
+			break;
+			}
+		case 10:
+		{	
+			playAnimation(Walking_Front,0);
+			break;
+		}
+		case 20:
+		{	
+			playAnimation(Walking_Front_Left,1);
+			break;
+		}
+		case 30:
+		{	
+			playAnimation(Walking_Left,2);
+			break;
+		}
+		case 40:
+		{	
+			playAnimation(Walking_Rear_Left,3);
+			break;
+		}
+		case 50:
+		{	
+			playAnimation(Walking_Rear,4);
+			break;
+		}
+		case 60:
+		{	
+			playAnimation(Walking_Rear_Right,5);
+			break;
+		}
+		case 70:
+		{	
+			playAnimation(Walking_Right,6);
+			break;
+		}
+		case 80:
+		{	
+			playAnimation(Walking_Front_Right,7);
+			break;
+		}
 		}
 	}
 
@@ -105,7 +162,15 @@ public class GoblinAI : MonoBehaviour {
 			//MessageLog.text= name + "Playing anim:" + pAnim;
 			currentState=newState;
 			//MessageLog.text= name + "Playing anim:" + anim.animation.isPlaying;
-			anim.Play(pAnim);
+			//try
+			//{
+				CurrentAnim=pAnim;
+				anim.Play(pAnim);
+			//}
+			//catch
+			//{
+			//	Debug.Log ("Failed to play anim" + pAnim);
+			//}
 			//print(pAnim);
 		}
 		//currentState=newState;
@@ -117,53 +182,53 @@ public class GoblinAI : MonoBehaviour {
 		//Breaks down the angle in the the facing sector. Clockwise from 0)
 		if ((angle >= -22.5) && (angle <= 22.5)) 
 				{
-				return 0;//Facing forward
+				return 1*State;//Facing forward
 				} 
 		else 
 			{
 			if ((angle>22.5)&&(angle<=67.5))
 				{//Facing forward left
-				return 1;
+				return 2*State;
 				}
 			else
 			{
 				if ((angle >67.5)&&(angle<=112.5))
 				{//facing left
-					return 2;
+					return 3*State;
 				}
 				else
 				{
 					if ((angle >112.5)&&(angle<=157.5))
 					{//Facing away left
-						return 3;
+						return 4*State;
 					}
 					else
 					{
 						if (((angle >157.5)&&(angle<=180.0)) || ((angle>=-180)&&(angle<=-157.5)))
 						{//Facing away
-							return 4;
+							return 5*State;
 						}
 						else
 						{
 							if ((angle >=-157.5)&&(angle<-112.5))
 							{//Facing away right
-								return 5;
+								return 6*State;
 							}
 							else
 							{
 								if ((angle >-112.5)&&(angle<-67.5))
 								{//Facing right
-									return 6;
+									return 7*State;
 								}
 								else
 								{
 									if ((angle >-67.5)&&(angle<-22.5))
 									{//Facing forward right
-										return 7;
+										return 8*State;
 									}
 									else
 									{
-										return 0;//default
+										return 0*State;//default
 									}
 								}
 							}
@@ -183,6 +248,7 @@ public class GoblinAI : MonoBehaviour {
 			break;
 		case 1://Talk
 			MessageLog.text = "You can't talk to " + name;
+			State=1;
 			break;
 		case 2://Pickup
 			MessageLog.text = "You pick up a " + name;
@@ -196,6 +262,7 @@ public class GoblinAI : MonoBehaviour {
 			break;
 		case 16://Use
 			MessageLog.text = "You use a " + name;
+			State=10;
 			break;
 		}
 	}
