@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class UWCharacter : MonoBehaviour {
+	public static int InteractionMode;
 	public Texture2D CursorIcon;
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;
@@ -12,16 +13,26 @@ public class UWCharacter : MonoBehaviour {
 	private MouseLook YAxis;
 	private bool MouseLookEnabled;
 	private GameObject MainCam;
+
+	public int AttackCharging;
+	public float Charge;
+	public float chargeRate=33.0f;
+
+	public float weaponRange=0.5f;
+
 	public string CurrObjectSprite;
 	//
 	public bool isFemale;
 	public bool isLefty;
 	public bool CursorInMainWindow;
 
+	public float InteractionDistance;
+
 	// Use this for initialization
 	void Start () {
 
 		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
+		ButtonHandler.player=this.gameObject;
 		InventorySlot.player=this.gameObject;
 		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		XAxis = GetComponent<MouseLook>();
@@ -43,7 +54,48 @@ public class UWCharacter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(Input.GetMouseButton(1) && (CursorInMainWindow==true) && (UWCharacter.InteractionMode==8) && (AttackCharging==0))
+		{
+			AttackCharging=1;
+			Charge=0;
+			Debug.Log ("attack charging begun");
+		}
+		if ((AttackCharging==1) && (Charge<100))
+			{
+			Charge=(Charge+(chargeRate*Time.deltaTime));
+			Debug.Log ("Charging is " + Charge);
+			if (Charge>100)
+				{
+				Charge=100;
+				}
+			}
+		if (Input.GetMouseButtonUp (1) && (CursorInMainWindow==true) && (AttackCharging==1))
+			{
+			Debug.Log ("Attack released with charge of " + Charge +"%");
+			AttackCharging=0;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit = new RaycastHit(); 
+			if (Physics.Raycast(ray,out hit,weaponRange))
+			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
+			{
+				if (hit.transform.Equals(this.transform))
+				{
+					Debug.Log ("you've hit yourself ? " + hit.transform.name);
+				}
+				else
+				{
+					Debug.Log ("you've hit " + hit.transform.name);
+					hit.transform.SendMessage("ApplyDamage");
+					//Destroy(hit.collider.gameObject);
+				}
 
+			}
+			else
+			{
+				Debug.Log ("MISS");
+			}
+
+			}
 	}
 	
 	void OnGUI()

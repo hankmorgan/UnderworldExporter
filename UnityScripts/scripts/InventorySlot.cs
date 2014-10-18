@@ -64,7 +64,7 @@ public class InventorySlot : MonoBehaviour {
 	{
 		PlayerInventory pInv = player.GetComponent<PlayerInventory>();
 		Container SubContainer;
-		switch (ObjectVariables.InteractionMode)
+		switch (UWCharacter.InteractionMode)
 		{
 		case 2://pickup
 		{

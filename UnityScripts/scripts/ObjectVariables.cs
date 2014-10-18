@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ObjectVariables : MonoBehaviour {
 
-	public static int InteractionMode;
+
 	public int triggerX;
 	public int triggerY;
 	public int Hidden;//Is the object visible

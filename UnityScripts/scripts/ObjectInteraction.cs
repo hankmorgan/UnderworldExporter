@@ -10,6 +10,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
+
 	private UWCharacter playerUW;
 	private PlayerInventory pInv;
 	public bool isContainer;
@@ -47,11 +48,13 @@ public class ObjectInteraction : MonoBehaviour {
 
 	void OnMouseDown()
 	{
+		float distance;
 		if (playerUW.CursorInMainWindow==false)
 		{//Stop items outside the viewport from being triggered.
 			return;
 		}
-		switch (ObjectVariables.InteractionMode)
+
+		switch (UWCharacter.InteractionMode)
 		{
 		case 0://Options
 			MessageLog.text = "Nothing will happen in options mode " + name;
@@ -64,17 +67,27 @@ public class ObjectInteraction : MonoBehaviour {
 			{
 				player.GetComponent<UWCharacter>();
 			}
+
 			if (pInv.ObjectInHand=="")
 			{
-				MessageLog.text = "You pick up a " + name;
-				//Cursor.SetCursor (InventoryIcon.texture,Vector2.zero, CursorMode.ForceSoftware);
-				playerUW.CursorIcon= InventoryIcon.texture;
-				playerUW.CurrObjectSprite = InventoryString;
-				pInv.ObjectInHand=name;
-				pInv.JustPickedup=true;//To stop me throwing it away immediately.
-				//Move the selected gameobject to the box.
-				this.transform.position = InvMarker.transform.position;
-				this.transform.parent=InvMarker.transform;//Adds to the marker so it will persist.
+				distance =Vector3.Distance(transform.position,player.transform.position);
+				if (distance<=playerUW.InteractionDistance)
+				{
+					MessageLog.text = "You pick up a " + name;
+					//Cursor.SetCursor (InventoryIcon.texture,Vector2.zero, CursorMode.ForceSoftware);
+					playerUW.CursorIcon= InventoryIcon.texture;
+					playerUW.CurrObjectSprite = InventoryString;
+					pInv.ObjectInHand=name;
+					pInv.JustPickedup=true;//To stop me throwing it away immediately.
+					//Move the selected gameobject to the box.
+					this.transform.position = InvMarker.transform.position;
+					this.transform.parent=InvMarker.transform;//Adds to the marker so it will persist.
+
+				}
+				else
+				{
+					MessageLog.text = "That is too far away to take";
+				}
 			}
 
 			break;
@@ -85,7 +98,15 @@ public class ObjectInteraction : MonoBehaviour {
 			MessageLog.text = "You attack a " + name;
 			break;
 		case 16://Use
+			distance =Vector3.Distance(transform.position,player.transform.position);
+			if (distance<=playerUW.InteractionDistance)
+			{
 			MessageLog.text = "You use a " + name;
+			}
+			else
+			{
+				MessageLog.text = "That is too far away to use";
+			}
 			break;
 		}
 	}

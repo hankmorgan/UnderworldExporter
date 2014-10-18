@@ -28,6 +28,8 @@ public class WindowDetect : MonoBehaviour {
 		}
 		else
 		{
+			playerUW.AttackCharging=0;
+			playerUW.Charge=0;
 			playerUW.CursorInMainWindow=false;
 			//MessageLog.text="unHover window";
 		}

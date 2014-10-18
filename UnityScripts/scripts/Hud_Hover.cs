@@ -35,7 +35,7 @@ public class Hud_Hover : MonoBehaviour {
 
 	void OnClick()
 	{
-		ObjectVariables.InteractionMode=InteractionMode;
+		UWCharacter.InteractionMode=InteractionMode;
 		MessageLog.text="Interaction mode is now " + name + "("+InteractionMode+")";
 	}
 }

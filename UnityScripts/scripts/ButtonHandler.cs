@@ -7,15 +7,22 @@ public class ButtonHandler : MonoBehaviour {
 	public int triggerY;
 	public int state;
 	public int maxstate;
+	public static GameObject player;
 
 	private GameObject triggerObj;
 	private UILabel MessageLog;
 	private ObjectVariables Var;
+	private UWCharacter playerUW;
+
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		triggerObj=GameObject.Find (trigger);
 		Var=GetComponent<ObjectVariables>();
+		if (player!=null)
+		{
+			playerUW=player.GetComponent<UWCharacter>();
+		}
 	}
 	
 	// Update is called once per frame
@@ -23,6 +30,10 @@ public class ButtonHandler : MonoBehaviour {
 	if (triggerObj == null)
 		{
 			triggerObj=GameObject.Find (trigger);
+		}
+		if ((player!=null) && (playerUW==null))
+		{
+			playerUW=player.GetComponent<UWCharacter>();
 		}
 	}
 
@@ -50,7 +61,8 @@ public class ButtonHandler : MonoBehaviour {
 
 	void OnMouseDown()
 		{
-		switch (ObjectVariables.InteractionMode)
+		float distance;
+		switch (UWCharacter.InteractionMode)
 			{
 			case 0://Options
 				MessageLog.text = "Nothing will happen in options mode " + name;
@@ -68,6 +80,9 @@ public class ButtonHandler : MonoBehaviour {
 				MessageLog.text = "You attack a " + name;
 				break;
 			case 16://Use
+			distance =Vector3.Distance(transform.position,player.transform.position);
+			if (distance<=playerUW.InteractionDistance)
+				{
 				MessageLog.text = "You use a " + name;
 				ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
 				targetvars.triggerX=triggerX;
@@ -83,9 +98,13 @@ public class ButtonHandler : MonoBehaviour {
 					{
 						Var.state++;
 					}
-				break;
+				}
+			else
+			{
+				MessageLog.text = "That is too far away to use";
 			}
-
+			break;
+		}
 	}	
 }
 
