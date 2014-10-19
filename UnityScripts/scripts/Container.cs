@@ -138,7 +138,7 @@ public class Container : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log ("This is where I need to sort it");
+			//Debug.Log ("This is where I need to sort it");
 			if (ObjectInHand!="")
 				{
 				GameObject objInHand= GameObject.Find (ObjectInHand);

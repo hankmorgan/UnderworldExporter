@@ -24,12 +24,12 @@ public class InventorySlot : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 		//if (playerUW==null)
 		//{
 		//	playerUW=player.GetComponent<UWCharacter>();
 		//}
-	}
+	//}
 
 
 
@@ -60,109 +60,169 @@ public class InventorySlot : MonoBehaviour {
 //		}
 //	}
 
+	void PickupFromSlot()
+	{
+		pInv = player.GetComponent<PlayerInventory>();
+		Container SubContainer;
+		string sNewObj;
+		
+		if (pInv.currentContainer=="Gronk")
+		{
+			sNewObj= pInv.ObjectPickedUp(slotIndex,pInv.ObjectInHand);
+		}
+		else
+		{
+			string slotToTest= pInv.GetObjectAtSlot(slotIndex) ;
+			if (slotToTest!="")
+			{
+				Debug.Log ("Testing slot (" + slotIndex + ")" + slotToTest );
+				
+				if (GameObject.Find (slotToTest).GetComponent<ObjectInteraction>().isContainer==true)
+				{
+					//test if object is already open in inventory;
+					if (GameObject.Find (slotToTest).GetComponent<Container>().isOpenOnPanel==true)
+					{
+						Debug.Log ("Attempt to to pick up an already open container at " + slotToTest);
+						return;
+					}
+				}
+			}
+			
+			SubContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			sNewObj = SubContainer.ObjectPickedUp (slotIndex,pInv.ObjectInHand);
+		}
+		
+		if (sNewObj=="")
+		{
+			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.CurrObjectSprite = "";
+			pInv.ObjectInHand="";
+		}
+		else
+		{
+			GameObject NewObj ;
+			NewObj = GameObject.Find (sNewObj);
+			if (NewObj != null)
+			{
+				playerUW.CursorIcon= NewObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+				playerUW.CurrObjectSprite = NewObj.GetComponent<ObjectInteraction>().InventoryString;
+				pInv.ObjectInHand=sNewObj;
+			}
+			else
+			{
+				Debug.Log ("unable to find " + sNewObj);
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.CurrObjectSprite = "";
+				pInv.ObjectInHand="";
+			}
+			
+		}
+	}
+
+
+	void UseFromSlot()
+	{
+		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		if (ObjectName !="")
+		{
+			GameObject currObj = GameObject.Find (ObjectName);
+			Debug.Log("you use this" + currObj.name);
+			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
+			if (currObjInt.isContainer)
+			{
+				transform.parent.FindChild("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
+				//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
+				
+				//display the container contents.
+				Container currObjCont = currObj.GetComponent<Container>();
+				currObjCont.isOpenOnPanel=true;
+				//currObjCont.ContainerParent=pInv.currentContainer;
+				//pInv.atTopLevel=false;
+				pInv.currentContainer=currObjCont.name;
+				if (pInv.currentContainer=="")
+				{
+					pInv.currentContainer="Gronk";
+					currObjCont.ContainerParent="Gronk";
+				}
+				for (int i = 0; i<8; i++)
+				{
+					string sItem = currObjCont.GetItemAt(i);
+					pInv.SetObjectAtSlot(i+11,sItem);
+				}
+			}
+		}
+	}
+
+
+	void LookFromSlot()
+	{
+		return;
+	}
+
 	void OnClick()
 	{
-		PlayerInventory pInv = player.GetComponent<PlayerInventory>();
-		Container SubContainer;
+		bool leftClick=true;
+		//Debug.Log (UICamera.currentTouchID);
+		if (UICamera.currentTouchID == -2)
+		{
+			leftClick=false;
+		}
+		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
+		//Container SubContainer;
 		switch (UWCharacter.InteractionMode)
 		{
+		case 1://talk
+			if (leftClick)
+				{//Left Click
+					UseFromSlot();
+				}
+			else 
+				{//right click
+					LookFromSlot();
+				}
+			break;
 		case 2://pickup
-		{
-			string sNewObj;
-
-			if (pInv.currentContainer=="Gronk")
-				{
-				sNewObj= pInv.ObjectPickedUp(slotIndex,pInv.ObjectInHand);
-				}
-			else
-				{
-				string slotToTest= pInv.GetObjectAtSlot(slotIndex) ;
-				if (slotToTest!="")
+			pInv = player.GetComponent<PlayerInventory>();
+			if ((leftClick) && (pInv.ObjectInHand!=""))
+				{//Left Click and i'm carrying something
+				if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
 					{
-					Debug.Log ("Testing slot (" + slotIndex + ")" + slotToTest );
-						
-					if (GameObject.Find (slotToTest).GetComponent<ObjectInteraction>().isContainer==true)
-						{
-							//test if object is already open in inventory;
-						if (GameObject.Find (slotToTest).GetComponent<Container>().isOpenOnPanel==true)
-							{
-								Debug.Log ("Attempt to to pick up an already open container at " + slotToTest);
-								return;
-							}
-						}
+					PickupFromSlot();
 					}
-
-
-
-				SubContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
-				sNewObj = SubContainer.ObjectPickedUp (slotIndex,pInv.ObjectInHand);
-				}
-			
-				if (sNewObj=="")
-				{
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					playerUW.CurrObjectSprite = "";
-				    pInv.ObjectInHand="";
-				}
 				else
-				{
-					GameObject NewObj ;
-					NewObj = GameObject.Find (sNewObj);
-					if (NewObj != null)
 					{
-						playerUW.CursorIcon= NewObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-						playerUW.CurrObjectSprite = NewObj.GetComponent<ObjectInteraction>().InventoryString;
-					    pInv.ObjectInHand=sNewObj;
-					}
-					else
-					{
-						Debug.Log ("unable to find " + sNewObj);
-						playerUW.CursorIcon= playerUW.CursorIconDefault;
-						playerUW.CurrObjectSprite = "";
-					    pInv.ObjectInHand="";
+					UseFromSlot();
 					}
 					
 				}
-			}
+			else 
+				{//right click
+				PickupFromSlot();
+				}
 
 			break;
-
-		case 16://use
-
-			string ObjectName= pInv.GetObjectAtSlot(slotIndex);
-			if (ObjectName !="")
-			{
-				GameObject currObj = GameObject.Find (ObjectName);
-				Debug.Log("you use this" + currObj.name);
-				ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
-				if (currObjInt.isContainer)
-				{
-					transform.parent.FindChild("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
-					//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
-					
-					//display the container contents.
-					Container currObjCont = currObj.GetComponent<Container>();
-					currObjCont.isOpenOnPanel=true;
-					//currObjCont.ContainerParent=pInv.currentContainer;
-					//pInv.atTopLevel=false;
-					pInv.currentContainer=currObjCont.name;
-					if (pInv.currentContainer=="")
-					{
-						pInv.currentContainer="Gronk";
-						currObjCont.ContainerParent="Gronk";
-					}
-					for (int i = 0; i<8; i++)
-					{
-						//transform.parent.FindChild ()
-						//Debug.Log ("Looking for " + "Backpack_Slot_" + i.ToString ("D2"));
-						//Debug.Log ("Parent is " + transform.parent.name);
-						//InventorySlot currSlot = transform.parent.FindChild ("Backpack_Slot_" + i.ToString ("D2")).GetComponent<InventorySlot>();
-						string sItem = currObjCont.GetItemAt(i);
-						pInv.SetObjectAtSlot(i+11,sItem);
-					}
+		case 4://look
+			if (leftClick)
+				{//Left Click
+					UseFromSlot();
 				}
-			}
-
+			else 
+				{//right click
+					LookFromSlot();
+				}
+			break;
+		case 8://attack
+			if (leftClick)
+				{//Left Click
+					UseFromSlot();
+				}
+			else 
+				{//right click
+					LookFromSlot();
+				}
+			break;
+		case 16://use
+			UseFromSlot ();
 			break;
 		}
 	

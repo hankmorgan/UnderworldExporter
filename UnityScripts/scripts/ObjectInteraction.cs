@@ -32,6 +32,7 @@ public class ObjectInteraction : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		return;
 		if ((player!=null) && (playerUW==null))
 			{
 			playerUW=player.GetComponent<UWCharacter>();
@@ -48,6 +49,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	void OnMouseDown()
 	{
+		return;
 		float distance;
 		if (playerUW.CursorInMainWindow==false)
 		{//Stop items outside the viewport from being triggered.

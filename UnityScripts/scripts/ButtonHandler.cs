@@ -57,10 +57,37 @@ public class ButtonHandler : MonoBehaviour {
 		//MessageLog.text=name +"exited";
 	}
 
-
+	public void Activate()
+	{
+		float distance;
+		distance =Vector3.Distance(transform.position,player.transform.position);
+		if (distance<=playerUW.InteractionDistance)
+		{
+			MessageLog.text = "You use a " + name;
+			ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
+			targetvars.triggerX=triggerX;
+			targetvars.triggerY=triggerY;
+			targetvars.state=Var.state;
+			MessageLog.text=name +"_clicked";
+			triggerObj.SendMessage ("Activate");
+			if (Var.state == 8)
+			{
+				Var.state=0;
+			}
+			else
+			{
+				Var.state++;
+			}
+		}
+		else
+		{
+			MessageLog.text = "That is too far away to use";
+		}
+	}
 
 	void OnMouseDown()
 		{
+		return;
 		float distance;
 		switch (UWCharacter.InteractionMode)
 			{
