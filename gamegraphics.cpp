@@ -4,6 +4,9 @@
 #include "utils.h"
 #include "main.h"
 
+//#define STB_IMAGE_WRITE_IMPLEMENTATION
+//#include "stb-master\stb_image_write.h"
+
 char path_uw0[100];
 char path_uw1[100];
 char path_uw2[100];
@@ -1299,11 +1302,14 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha)
 	{
+	
+	//return;
 	FILE *fptr;
 	char outFile[255];
 
 	sprintf_s(outFile, 255, "%s_%04d.tga", OutFileName, index);
-
+	//stbi_write_tga(outFile, SizeH, SizeH, Alpha, bits + Start);
+	//return;
 	/* Write the result as a uncompressed TGA */
 	if ((fptr = fopen(outFile, "w")) == NULL) {
 		fprintf(stderr, "Failed to open outputfile\n");

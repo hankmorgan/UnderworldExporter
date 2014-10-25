@@ -103,60 +103,73 @@ public class Container : MonoBehaviour {
 		}
 
 
+	static bool AddObjectToContainer(GameObject objInHand, GameObject objUseOn)
+	{
+		Container subContainer = objUseOn.GetComponent<Container>();
+		if (subContainer.AddItemToContainer(objInHand.name))
+		{
+			if (objInHand.GetComponent<ObjectInteraction>().isContainer)
+			{
+				subContainer=objInHand.GetComponent<Container>();
+				subContainer.ContainerParent=objUseOn.name;
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	static public bool InteractTwoObjects(string ObjectInHand, string ObjectUsedOn,int slotIndex)
 	{
 		Debug.Log ("Interacting " + ObjectInHand + " and " + ObjectUsedOn);
 		//returns true if they have an effect on each other.
 		if ((ObjectInHand !="") && (ObjectUsedOn !=""))
-		{
+		{//Object is being used on something.
 			GameObject objInHand= GameObject.Find (ObjectInHand);
 			GameObject objUseOn = GameObject.Find (ObjectUsedOn);
 
 			//Add item to container
 			if (objUseOn.GetComponent<ObjectInteraction>().isContainer)
 			{
-				Container subContainer = objUseOn.GetComponent<Container>();
-				if (subContainer.AddItemToContainer(ObjectInHand))
-				{
-					if (objInHand.GetComponent<ObjectInteraction>().isContainer)
-					{
-						subContainer=objInHand.GetComponent<Container>();
-						subContainer.ContainerParent=ObjectUsedOn;
-					}
-					return true;
-				}
-				else
-				{
-					return false;
-				}
+				return Container.AddObjectToContainer(objInHand,objUseOn);
+			}
 
+			if(objUseOn.GetComponent<ObjectInteraction>().isRuneBag)
+			{//Add a runestone to the rune bag.
+				if(objInHand.GetComponent<ObjectInteraction>().isRuneStone)
+				{
+					UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+					playerUW.Runes[objInHand.GetComponent<ObjectInteraction>().item_id-232]=true;
+					//Add rune to rune bag.
+					GameObject.Destroy(objInHand);
+					ObjectInHand="";
+				}
+				return true;
 			}
-			else
-			{
-				return false;
-			}
+			return true;
 		}
 		else
-		{
-			//Debug.Log ("This is where I need to sort it");
+		{//Object is just being placed in a slot. 
 			if (ObjectInHand!="")
 				{
 				GameObject objInHand= GameObject.Find (ObjectInHand);
 				//Container subContainer = objUseOn.GetComponent<Container>();
 				if (objInHand.GetComponent<ObjectInteraction>().isContainer)
-				{
-					PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-					Container subContainer=objInHand.GetComponent<Container>();
-					if (slotIndex >=11)
-					{//Object is being added to a bag container
-						subContainer.ContainerParent=pInv.currentContainer;
-					}
-					else
-					{//object is being added to an equipment slot
-						subContainer.ContainerParent="Gronk";
-					}
+					{
+						PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+						Container subContainer=objInHand.GetComponent<Container>();
+						if (slotIndex >=11)
+						{//Object is being added to a bag container
+							subContainer.ContainerParent=pInv.currentContainer;
+						}
+						else
+						{//object is being added to an equipment slot
+							subContainer.ContainerParent="Gronk";
+						}
 
-				}
+					}
 				}
 			return false;
 		}

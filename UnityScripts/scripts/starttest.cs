@@ -13,8 +13,8 @@ public class starttest : MonoBehaviour {
 		//if (skul!=null)
 		//{
 		string filePath ="c:\\objects_0000.tga";
-		Debug.Log (filePath);
-		SpriteRenderer sprt = skul.GetComponent<SpriteRenderer>();
+		//Debug.Log (filePath);
+		SpriteRenderer sprt = skul.GetComponentInChildren<SpriteRenderer>();
 		//Sprite newimage= new Sprite();
 		//Texture2D newtex= new Texture2D(22,11);
 		Texture2D newTex = TGALoader.LoadTGA (filePath);
@@ -29,9 +29,20 @@ public class starttest : MonoBehaviour {
 		Material[] myMat = theWallBrotha.renderer.materials;
 		for (int i = 0; i<myMat.GetUpperBound(0);i++)
 		{
-			Debug.Log (myMat[i].name);
+			//Debug.Log (myMat[i].name);
 			myMat[i].mainTexture=newTex;
 		}
+
+		Mesh mesh =theWallBrotha.GetComponent<MeshFilter>().mesh;
+		Vector3[] vertices = mesh.vertices;
+		Vector2[] uvs = new Vector2[vertices.Length];
+		int j = 0;
+		while (j < uvs.Length) {
+			uvs[j] = new Vector2(vertices[j].x, vertices[j].z);
+			j++;
+		}
+		//mesh.uv = uvs;
+
 			//if (newimage!=null)
 			//{
 				//Debug.Log("New image loaded");

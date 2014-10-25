@@ -33,6 +33,8 @@ public class UWCharacter : MonoBehaviour {
 
 	private UILabel MessageLog;
 
+	public bool[] Runes=new bool[24];
+	public int[] ActiveRunes=new int[3];
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +43,8 @@ public class UWCharacter : MonoBehaviour {
 		ButtonHandler.player=this.gameObject;
 		InventorySlot.player=this.gameObject;
 		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
+		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		Screen.lockCursor=true;

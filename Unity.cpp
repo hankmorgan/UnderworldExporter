@@ -14,7 +14,8 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\");",currobj.item_id);
+	
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d, %d);", currobj.item_id, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -76,10 +77,25 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 	//////createScriptCall(currobj, x, y, z);
 	}
 
+void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{//Runestone
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
+	fprintf(UNITY_FILE, "\n\tSetObjectAsRuneStone(myObj);\n");
+	}
+
+void RenderUnityEntityRuneBag(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{//Runestone
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\tSetObjectAsRuneBag(myObj);\n");
+	}
+
 void RenderUnityEntityPaintingUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//UW2 wall paintings.
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	
 	}
 
 void CreateUnityScriptCall(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], char *ScriptName)
@@ -1049,6 +1065,16 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnityEntityParticle(game, x, y, z, currobj, objList, LevelInfo, 0);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case RUNE:
+							{
+							RenderUnityEntityRuneStone(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+							}
+						case RUNEBAG:
+							{
+							RenderUnityEntityRuneBag(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+							}
 						case SCENERY:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							break;

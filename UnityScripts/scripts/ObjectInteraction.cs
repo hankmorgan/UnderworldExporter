@@ -8,12 +8,16 @@ public class ObjectInteraction : MonoBehaviour {
 	public Sprite InventoryIconEquip;
 	public string InventoryIconEquipString;
 
+	public int item_id;
+
 	public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
 
 	private UWCharacter playerUW;
 	private PlayerInventory pInv;
 	public bool isContainer;
+	public bool isRuneBag;
+	public bool isRuneStone;
 	// Use this for initialization
 
 	void Start () {
@@ -103,7 +107,7 @@ public class ObjectInteraction : MonoBehaviour {
 			distance =Vector3.Distance(transform.position,player.transform.position);
 			if (distance<=playerUW.InteractionDistance)
 			{
-			MessageLog.text = "You use a " + name;
+			MessageLog.text = "You use a " + name + "ObjectInteraction.OnMouseDown";
 			}
 			else
 			{

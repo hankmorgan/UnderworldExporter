@@ -834,7 +834,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 		}
 
-	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 0, false);
+	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 1, false);
 	}
 
 void RenderFBXTile(FbxScene*& gScene,int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)

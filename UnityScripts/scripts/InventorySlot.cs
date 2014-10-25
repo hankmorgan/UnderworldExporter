@@ -120,34 +120,30 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 
+
+
 	void UseFromSlot()
 	{
+		pInv = player.GetComponent<PlayerInventory>();
 		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
 		if (ObjectName !="")
 		{
 			GameObject currObj = GameObject.Find (ObjectName);
-			Debug.Log("you use this" + currObj.name);
+			Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
 			if (currObjInt.isContainer)
 			{
-				transform.parent.FindChild("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
-				//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
-				
-				//display the container contents.
-				Container currObjCont = currObj.GetComponent<Container>();
-				currObjCont.isOpenOnPanel=true;
-				//currObjCont.ContainerParent=pInv.currentContainer;
-				//pInv.atTopLevel=false;
-				pInv.currentContainer=currObjCont.name;
-				if (pInv.currentContainer=="")
+				OpenContainer (currObj, currObjInt);
+			}
+			if (currObjInt.isRuneBag)
+			{
+				if (pInv.ObjectInHand == "")
 				{
-					pInv.currentContainer="Gronk";
-					currObjCont.ContainerParent="Gronk";
+					OpenRuneBag();
 				}
-				for (int i = 0; i<8; i++)
+				else
 				{
-					string sItem = currObjCont.GetItemAt(i);
-					pInv.SetObjectAtSlot(i+11,sItem);
+					PickupFromSlot();
 				}
 			}
 		}
@@ -227,6 +223,37 @@ public class InventorySlot : MonoBehaviour {
 		}
 	
 
+	}
+
+	void OpenRuneBag()
+	{
+		chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
+		if (chainControl!=null)
+		{
+			chainControl.ActiveControl=2;
+		}
+	}
+
+	void OpenContainer(GameObject currObj, ObjectInteraction currObjInt)
+	{
+		transform.parent.FindChild("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
+		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
+		//display the container contents.
+		Container currObjCont = currObj.GetComponent<Container>();
+		currObjCont.isOpenOnPanel=true;
+		//currObjCont.ContainerParent=pInv.currentContainer;
+		//pInv.atTopLevel=false;
+		pInv.currentContainer=currObjCont.name;
+		if (pInv.currentContainer=="")
+		{
+			pInv.currentContainer="Gronk";
+			currObjCont.ContainerParent="Gronk";
+		}
+		for (int i = 0; i<8; i++)
+		{
+			string sItem = currObjCont.GetItemAt(i);
+			pInv.SetObjectAtSlot(i+11,sItem);
+		}
 	}
 
 

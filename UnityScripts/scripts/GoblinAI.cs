@@ -5,6 +5,7 @@ using System.Collections;
 
 public class GoblinAI : MonoBehaviour {
 
+	public bool executeAttack=false;
 	public int AnimRange=1;//Multiple of 10 for dividing animations
 	public string NPC_ID;
 	public string CurrentAnim;
@@ -62,7 +63,34 @@ public class GoblinAI : MonoBehaviour {
 		isDead=true;
 	}
 
+	void ExecuteAttack()
+	{
+		float weaponRange=1.0f;
+		//Debug.Log ("Attack released with charge of " + Charge +"%");
+		//AttackCharging=0;
+		Ray ray = new Ray(this.transform.position,Vector3.forward); 
+		RaycastHit hit = new RaycastHit(); 
+		if (Physics.Raycast(ray,out hit,weaponRange))
+			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
+		{
+			if (hit.transform.Equals(this.transform))
+			{
+				Debug.Log ("you've hit yourself ? " + hit.transform.name);
+			}
+			else
+			{
+				Debug.Log ("you've hit " + hit.transform.name);
+				//hit.transform.SendMessage("ApplyDamage");
+				//Destroy(hit.collider.gameObject);
+			}
+			
+		}
+		else
+		{
+			Debug.Log ("MISS");
+		}
 
+	}
 
 
 	// Update is called once per frame
@@ -86,7 +114,12 @@ public class GoblinAI : MonoBehaviour {
 			currentState=-1;
 			oldNPC_ID=NPC_ID;
 		}
-
+		if (executeAttack==true)
+		{
+			AnimRange=1000;
+			ExecuteAttack();
+			executeAttack=false;
+		}
 
 		Vector3 direction = player.transform.position - transform.position;
 		float angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;

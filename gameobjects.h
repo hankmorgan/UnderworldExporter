@@ -75,6 +75,7 @@
 #define SHOCK_DOOR_TRANSPARENT 67
 #define UW_PAINTING	68
 #define PARTICLE 69
+#define RUNEBAG 70
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

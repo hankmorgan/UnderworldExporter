@@ -163,4 +163,6 @@ void CaulkHiddenWalls(tile LevelInfo[64][64], int game, int surface);
 
 extern tile LevelInfo[64][64];
 
+void LaunchEditor(tile LevelInfo[64][64]);
+
 #endif /*tilemap_h*/

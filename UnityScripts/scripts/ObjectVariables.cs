@@ -8,6 +8,7 @@ public class ObjectVariables : MonoBehaviour {
 	public int triggerY;
 	public int Hidden;//Is the object visible
 	public int state;
+
 	public string trigger;
 	private GameObject level;
 

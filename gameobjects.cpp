@@ -573,7 +573,6 @@ switch (game)
 			}
 		else
 			{//
-			//fprintf(LOGFILE,"how do i get an uncompressed object list");
 			int BlockStart = getValAtAddress(tmp_ark, address_pointer, 32);
 			int j = 0;
 			AddressOfBlockStart = 0;
@@ -589,19 +588,13 @@ switch (game)
 		objectsAddress=(64*64*4);
 		address_pointer=0;
 
-			
-		//	}		
+		
 		break;
 		}
 		}
 	}
 	for (int x=0; x<1025;x++)
 		{	//read in master object list
-		//if (x == 602)
-		//{
-		//	fprintf(LOGFILE,"");
-		//}
-
 			objList[x].index = x; 
 			objList[x].InUseFlag = 0;//Force off until I set tile x and tile y.
 			objList[x].tileX=99;	//since we won't know what tile an object is in tile we have them all loaded and we can process the linked lists
@@ -639,13 +632,10 @@ switch (game)
 			
 			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
 				{
-				//fprintf(LOGFILE,"\n%d\n", texture_map[objList[x].owner]);
-				//objList[x].owner = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 				}
 			if (objectMasters[objList[x].item_id].type == BRIDGE)
 			{
-				//fprintf(LOGFILE,"\n%d\n", texture_map[objList[x].owner]);
 				if (objList[x].flags >= 2)
 				{
 					if (game == UW2)
@@ -707,7 +697,6 @@ switch (game)
 			{
 			//Static Objects
 			address_pointer=address_pointer+8;
-			//fprintf(LOGFILE,"\n%s", UniqueObjectName(objList[x]));
 			}
 		}
 }

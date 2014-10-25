@@ -32,6 +32,7 @@ public class PlayerInventory : MonoBehaviour {
 	public string sLeftShoulder;
 	public string sRightShoulder;
 	public string[] sBackPack= new string[8];
+	//public bool[] runes = new bool[24];
 
 	//Force Redraw on next update.
 	public bool bHelm=true;
@@ -317,7 +318,7 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public string GetObjectAtSlot(int slotIndex)
-		{
+	{
 		switch (slotIndex)
 			{
 			case 0://Helm
