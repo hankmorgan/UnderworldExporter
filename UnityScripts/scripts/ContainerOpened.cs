@@ -48,6 +48,10 @@ public class ContainerOpened : MonoBehaviour {
 			{
 				GetComponent<UISprite>().spriteName="object_blank";
 			}
+			else
+			{
+				GetComponent<UISprite>().spriteName=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryString;
+			}
 			for (int i = 0; i<8; i++)
 			{
 				string sItem = DestinationContainer.GetItemAt(i);

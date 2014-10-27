@@ -18,6 +18,8 @@ public class ObjectInteraction : MonoBehaviour {
 	public bool isContainer;
 	public bool isRuneBag;
 	public bool isRuneStone;
+	public bool isMap;
+
 	// Use this for initialization
 
 	void Start () {
@@ -59,6 +61,7 @@ public class ObjectInteraction : MonoBehaviour {
 		{//Stop items outside the viewport from being triggered.
 			return;
 		}
+
 
 		switch (UWCharacter.InteractionMode)
 		{

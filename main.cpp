@@ -135,9 +135,9 @@ uw1_graphics_file[21] = "Data\\HEADS.GR";
 uw1_graphics_file[22] = "Data\\INV.GR";
 uw1_graphics_file[23] = "Data\\LFTI.GR";
 uw1_graphics_file[24] = "Data\\OBJECTS.GR";
-uw1_graphics_file[25] = "Data\\OPTBN";
-uw1_graphics_file[26] = "Data\\OPTB";
-uw1_graphics_file[27] = "Data\\OPTBNS";
+uw1_graphics_file[25] = "Data\\OPTBN.GR";
+uw1_graphics_file[26] = "Data\\OPTB.GR";
+uw1_graphics_file[27] = "Data\\OPTBTNS.GR";
 uw1_graphics_file[28] = "Data\\PANELS.GR";
 uw1_graphics_file[29] = "Data\\POWER.GR";
 uw1_graphics_file[30] = "Data\\QUEST.GR";
@@ -780,7 +780,13 @@ switch (game)
 					{
 					if (bytark!=1)
 						{
-						extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName,auxPalPath,useTGA);
+						for (int f = 0; f < 8; f++)
+							{
+							sprintf(OutFileName, "%d",f);
+							extractTextureBitmap(-1, Graphics_File, Graphics_Pal, f, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
+							//extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
+							}
+						
 						}
 					else
 						{

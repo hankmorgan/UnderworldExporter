@@ -30,7 +30,10 @@ public class ActiveRuneSlot : MonoBehaviour {
 
 	void OnClick()
 	{
-	//cast spell
-		Magic.castSpell(playerUW.ActiveRunes[0],playerUW.ActiveRunes[1],playerUW.ActiveRunes[2]);
+	//cast spell. Readies it if possible.
+		if (playerUW.ReadiedSpell=="")
+		{
+			Magic.castSpell(playerUW.gameObject,playerUW.ActiveRunes[0],playerUW.ActiveRunes[1],playerUW.ActiveRunes[2],true);
+		}
 	}
 }

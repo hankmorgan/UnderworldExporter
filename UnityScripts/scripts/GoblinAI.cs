@@ -135,7 +135,7 @@ public class GoblinAI : MonoBehaviour {
 			}
 		case 2:
 			{	
-			playAnimation(NPC_ID +"_idle_front_left",1);
+			playAnimation(NPC_ID +"_idle_front_right",1);
 			break;
 			}
 		case 3:
@@ -145,7 +145,7 @@ public class GoblinAI : MonoBehaviour {
 			}
 		case 4:
 			{	
-			playAnimation(NPC_ID +"_idle_rear_left",3);
+			playAnimation(NPC_ID +"_idle_rear_right",3);
 			break;
 			}
 		case 5:
@@ -155,7 +155,7 @@ public class GoblinAI : MonoBehaviour {
 			}
 		case 6:
 			{	
-			playAnimation(NPC_ID + "_idle_rear_right",5);
+			playAnimation(NPC_ID + "_idle_rear_left",5);
 			break;
 			}
 		case 7:
@@ -165,7 +165,7 @@ public class GoblinAI : MonoBehaviour {
 			}
 		case 8:
 			{	
-			playAnimation(NPC_ID +"_idle_front_right",7);
+			playAnimation(NPC_ID +"_idle_front_left",7);
 			break;
 			}
 		case 10:

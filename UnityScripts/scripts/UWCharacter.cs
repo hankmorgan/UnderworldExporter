@@ -18,6 +18,8 @@ public class UWCharacter : MonoBehaviour {
 	public float Charge;
 	public float chargeRate=33.0f;
 
+	public string ReadiedSpell;
+
 	public float weaponRange=1.0f;
 	public float pickupRange=3.0f;
 	public float useRange=3.0f;
@@ -69,7 +71,11 @@ public class UWCharacter : MonoBehaviour {
 			{//Stop items outside the viewport from being triggered.
 			return;
 			}
-
+		if (ReadiedSpell!="")
+		{//Player has a spell thats about to be cast. All other activity is ignored.
+			SpellMode ();
+			return;
+		}
 		switch (UWCharacter.InteractionMode)
 		{
 		case 0://Options mode
@@ -93,6 +99,15 @@ public class UWCharacter : MonoBehaviour {
 
 	}
 
+	void SpellMode()
+	{
+		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
+		{
+			Debug.Log(ReadiedSpell + " is cast in main wind");
+			Magic.castSpell(this.gameObject, ReadiedSpell,false);
+			//ReadiedSpell="";
+		}
+	}
 
 	void UseMode()
 	{
@@ -157,11 +172,12 @@ public class UWCharacter : MonoBehaviour {
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,talkRange))
 			{
-				MessageLog.text = "You see " + hit.transform.name;
+				MessageLog.text = "You see " + hit.transform.name + " UWCharacter.LookMode()";
+				Debug.Log (hit.normal);
 			}
 			else
 			{
-				MessageLog.text = "You see nothing";
+				MessageLog.text = "You see nothing  UWCharacter.LookMode()";
 			}
 		}
 	}

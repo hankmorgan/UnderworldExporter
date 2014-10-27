@@ -133,7 +133,14 @@ public class InventorySlot : MonoBehaviour {
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
 			if (currObjInt.isContainer)
 			{
-				OpenContainer (currObj, currObjInt);
+				if (pInv.ObjectInHand == "")
+				{
+					OpenContainer (currObj, currObjInt);
+				}
+				else
+				{
+					pInv.InteractTwoObjects(pInv.ObjectInHand,ObjectName,slotIndex);
+				}
 			}
 			if (currObjInt.isRuneBag)
 			{
@@ -145,6 +152,32 @@ public class InventorySlot : MonoBehaviour {
 				{
 					PickupFromSlot();
 				}
+			}
+
+			if(currObjInt.isMap)
+			{
+				Debug.Log ("This is a map");
+				GameObject map = GameObject.Find ("Automap");
+
+				//Turn on the camera
+				foreach(Transform child in map.transform)
+				{
+					if (child.name == "Camera")
+					{
+						child.gameObject.SetActive(true);
+					}
+				}
+				//Turn off the main hud
+				GameObject UWHud =GameObject.Find ("UW_HUD");
+				foreach(Transform child in UWHud.transform)
+				{
+					if ((child.name == "Anchor")||(child.name == "Camera"))
+					{
+						child.gameObject.SetActive(false);
+					}
+				}
+
+
 			}
 		}
 	}
@@ -255,6 +288,8 @@ public class InventorySlot : MonoBehaviour {
 			pInv.SetObjectAtSlot(i+11,sItem);
 		}
 	}
+
+
 
 
 //	void OnClick()

@@ -159,7 +159,7 @@ public class PlayerInventory : MonoBehaviour {
 			switch (slotIndex)
 			{
 		case 0://Helm
-			if (Container.InteractTwoObjects (sObjectInHand,sHelm,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sHelm,slotIndex) == false)
 			{
 				bHelm=true;
 				ExistingObject=sHelm;
@@ -171,7 +171,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 1://Chest
-			if (Container.InteractTwoObjects (sObjectInHand,sChest,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sChest,slotIndex) == false)
 			{
 				bChest=true;
 				ExistingObject=sChest;
@@ -183,7 +183,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 2://Leggings
-			if (Container.InteractTwoObjects (sObjectInHand,sLegs,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sLegs,slotIndex) == false)
 			{
 				bLegs=true;
 				ExistingObject=sLegs;
@@ -195,7 +195,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 3://Boots
-			if (Container.InteractTwoObjects (sObjectInHand,sBoots,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sBoots,slotIndex) == false)
 			{
 				bBoots=true;
 				ExistingObject=sBoots;
@@ -207,7 +207,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 4://Gloves
-			if (Container.InteractTwoObjects (sObjectInHand,sGloves,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sGloves,slotIndex) == false)
 			{
 				bGloves=true;
 				ExistingObject=sGloves;
@@ -219,7 +219,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 5://ShoulderRight
-			if (Container.InteractTwoObjects (sObjectInHand,sRightShoulder,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sRightShoulder,slotIndex) == false)
 			{
 				bRightShoulder=true;
 				ExistingObject=sRightShoulder;
@@ -231,7 +231,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 6://ShoulderLeft
-			if (Container.InteractTwoObjects (sObjectInHand,sLeftShoulder,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sLeftShoulder,slotIndex) == false)
 			{
 				bLeftShoulder=true;
 				ExistingObject=sLeftShoulder;
@@ -243,7 +243,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 7://HandRight
-			if (Container.InteractTwoObjects (sObjectInHand,sRightHand,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sRightHand,slotIndex) == false)
 			{
 				bRightHand=true;
 				ExistingObject=sRightHand;
@@ -255,7 +255,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 8://HandLeft
-			if (Container.InteractTwoObjects (sObjectInHand,sLeftHand,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sLeftHand,slotIndex) == false)
 			{
 				bLeftHand=true;
 				ExistingObject=sLeftHand;
@@ -267,7 +267,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 9://RingRight
-			if (Container.InteractTwoObjects (sObjectInHand,sRightRing,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sRightRing,slotIndex) == false)
 			{
 				bRightRing=true;
 				ExistingObject=sRightRing;
@@ -279,7 +279,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 10://RingLeft
-			if (Container.InteractTwoObjects (sObjectInHand,sLeftRing,slotIndex) == false)
+			if (InteractTwoObjects (sObjectInHand,sLeftRing,slotIndex) == false)
 			{
 				bLeftRing=true;
 				ExistingObject=sLeftRing;
@@ -293,7 +293,7 @@ public class PlayerInventory : MonoBehaviour {
 			default://Inventory Slots 0-7		
 				if ((slotIndex>=11)&&(slotIndex<=18))
 				{
-				if (Container.InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11],slotIndex) == false)
+				if (InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11],slotIndex) == false)
 				{
 					bBackPack[slotIndex-11]=true;
 					ExistingObject=sBackPack[slotIndex-11];
@@ -412,4 +412,69 @@ public class PlayerInventory : MonoBehaviour {
 			break;
 		}
 	}
+
+	public bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
+	{
+		Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
+		//returns true if they have an effect on each other.
+		if ((sObjectInHand !="") && (sObjectUsedOn !=""))
+		{//Object is being used on something.
+			GameObject objInHand= GameObject.Find (sObjectInHand);
+			GameObject objUseOn = GameObject.Find (sObjectUsedOn);
+			
+			//Add item to container
+			if (objUseOn.GetComponent<ObjectInteraction>().isContainer)
+			{
+				if(Container.AddObjectToContainer(objInHand,objUseOn))
+				{
+					ObjectInHand="";
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.CurrObjectSprite = "";
+					//ObjectInHand="";
+				}
+			}
+			
+			if(objUseOn.GetComponent<ObjectInteraction>().isRuneBag)
+			{//Add a runestone to the rune bag.
+				if(objInHand.GetComponent<ObjectInteraction>().isRuneStone)
+				{
+					UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+					playerUW.Runes[objInHand.GetComponent<ObjectInteraction>().item_id-232]=true;
+					//Add rune to rune bag.
+					GameObject.Destroy(objInHand);
+					ObjectInHand="";
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.CurrObjectSprite = "";
+				}
+				return true;
+			}
+			return true;
+		}
+		else
+		{//Object is just being placed in a slot. 
+			if (ObjectInHand!="")
+			{
+				GameObject objInHand= GameObject.Find (sObjectInHand);
+				//Container subContainer = objUseOn.GetComponent<Container>();
+				if (objInHand.GetComponent<ObjectInteraction>().isContainer)
+				{
+					//PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+					Container subContainer=objInHand.GetComponent<Container>();
+					if (slotIndex >=11)
+					{//Object is being added to a bag container
+						subContainer.ContainerParent=currentContainer;
+					}
+					else
+					{//object is being added to an equipment slot
+						subContainer.ContainerParent="Gronk";
+					}
+					
+				}
+			}
+			return false;
+		}
+		
+	}
+
+
 }
