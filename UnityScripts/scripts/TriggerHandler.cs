@@ -7,7 +7,9 @@ using System.Collections;
 //LOOK_MODE 4
 //ATTACK_MODE 8
 //USE_MODE 16
-
+/*
+Functions for activating the next trigger in the chain.
+ */
 public class TriggerHandler : MonoBehaviour {
 	public int triggerX;
 	public int triggerY;

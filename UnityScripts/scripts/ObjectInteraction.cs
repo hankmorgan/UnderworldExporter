@@ -79,9 +79,9 @@ public class ObjectInteraction : MonoBehaviour {
 
 			if (pInv.ObjectInHand=="")
 			{
-				distance =Vector3.Distance(transform.position,player.transform.position);
-				if (distance<=playerUW.InteractionDistance)
-				{
+				//distance =Vector3.Distance(transform.position,player.transform.position);
+				//if (distance<=playerUW.InteractionDistance)
+				//{
 					MessageLog.text = "You pick up a " + name;
 					//Cursor.SetCursor (InventoryIcon.texture,Vector2.zero, CursorMode.ForceSoftware);
 					playerUW.CursorIcon= InventoryIcon.texture;
@@ -92,11 +92,11 @@ public class ObjectInteraction : MonoBehaviour {
 					this.transform.position = InvMarker.transform.position;
 					this.transform.parent=InvMarker.transform;//Adds to the marker so it will persist.
 
-				}
-				else
-				{
-					MessageLog.text = "That is too far away to take";
-				}
+				//}
+				//else
+				//{
+				//	MessageLog.text = "That is too far away to take";
+				//}
 			}
 
 			break;
@@ -107,15 +107,15 @@ public class ObjectInteraction : MonoBehaviour {
 			MessageLog.text = "You attack a " + name;
 			break;
 		case 16://Use
-			distance =Vector3.Distance(transform.position,player.transform.position);
-			if (distance<=playerUW.InteractionDistance)
-			{
+			//distance =Vector3.Distance(transform.position,player.transform.position);
+			//if (distance<=playerUW.InteractionDistance)
+			//{
 			MessageLog.text = "You use a " + name + "ObjectInteraction.OnMouseDown";
-			}
-			else
-			{
-				MessageLog.text = "That is too far away to use";
-			}
+			//}
+			//else
+			//{
+			//	MessageLog.text = "That is too far away to use";
+			//}
 			break;
 		}
 	}

@@ -1,46 +1,58 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+The basic character. Stats and interaction.
+ */ 
 public class UWCharacter : MonoBehaviour {
+	//What mode are we in and various ranges
 	public static int InteractionMode;
-	public Texture2D CursorIcon;
-	public Texture2D CursorIconDefault;
-	public Texture2D CursorIconBlank;
-	private int cursorSizeX =64;
-	private int cursorSizeY =64;
-	//
-	private MouseLook XAxis;
-	private MouseLook YAxis;
-	private bool MouseLookEnabled;
-	private GameObject MainCam;
-
-	public int AttackCharging;
-	public float Charge;
-	public float chargeRate=33.0f;
-
-	public string ReadiedSpell;
-
 	public float weaponRange=1.0f;
 	public float pickupRange=3.0f;
 	public float useRange=3.0f;
 	public float talkRange=20.0f;
-	public string CurrObjectSprite;
+	public float lookRange=25.0f;
+	//public float InteractionDistance;
 
-	public bool isFemale;
-	public bool isLefty;
+	//The cursor to display on the gui
+	public Texture2D CursorIcon;
+	public Texture2D CursorIconDefault;
+	public Texture2D CursorIconBlank;
+	public string CurrObjectSprite;
+	private int cursorSizeX =64;
+	private int cursorSizeY =64;
+
+	//For controlling switching between mouse look and interaction
+	private MouseLook XAxis;
+	private MouseLook YAxis;
+	private bool MouseLookEnabled;
+	private GameObject MainCam;
 	public bool CursorInMainWindow;
 
-	public float InteractionDistance;
-	public static GameObject InvMarker;
+	//Combat variables
+	public int AttackCharging;
+	public float Charge;
+	public float chargeRate=33.0f;
 
-	private UILabel MessageLog;
-
+	//Magic spell to be cast on next click in window
+	public string ReadiedSpell;
+	//Runes that the character has picked up and is currently using
 	public bool[] Runes=new bool[24];
 	public int[] ActiveRunes=new int[3];
 
+	//Character related info
+	public bool isFemale;
+	public bool isLefty;
+
+	//The storage location for container items.
+	public static GameObject InvMarker;
+
+	//The message log on the main screen.
+	private UILabel MessageLog;
+
 	// Use this for initialization
 	void Start () {
-
+		//Initialise some basic references on other objects.
 		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
 		ButtonHandler.player=this.gameObject;
 		InventorySlot.player=this.gameObject;
@@ -67,6 +79,7 @@ public class UWCharacter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Performs actions depending on the interaction mode.
 		if (CursorInMainWindow==false)
 			{//Stop items outside the viewport from being triggered.
 			return;
@@ -100,7 +113,7 @@ public class UWCharacter : MonoBehaviour {
 	}
 
 	void SpellMode()
-	{
+	{//Casts a spell on right click.
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		{
 			Debug.Log(ReadiedSpell + " is cast in main wind");
@@ -110,7 +123,7 @@ public class UWCharacter : MonoBehaviour {
 	}
 
 	void UseMode()
-	{
+	{//Uses the object on right click
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 			{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -123,6 +136,8 @@ public class UWCharacter : MonoBehaviour {
 				{
 					MessageLog.text = "You use a " + hit.transform.name;
 				}
+
+				//Activates switches.
 				ButtonHandler objButton = hit.transform.GetComponent<ButtonHandler>();
 				if (objButton!=null)
 				{
@@ -134,25 +149,25 @@ public class UWCharacter : MonoBehaviour {
 
 
 	void PickupMode()
-	{
+	{//Picks up the clicked object in the view.
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 			{
 			PlayerInventory pInv = this.GetComponent<PlayerInventory>();
 			if (InvMarker==null)
-			{
+				{
 				InvMarker=GameObject.Find ("InventoryMarker");
-			}
-			if (pInv.ObjectInHand=="")
-			{
+				}
+			if (pInv.ObjectInHand=="")//Player is not holding anything.
+			{//Find the object within the pickup range.
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit = new RaycastHit(); 
 				if (Physics.Raycast(ray,out hit,pickupRange))
 				{
 					ObjectInteraction objPicked;
 					objPicked=hit.transform.GetComponent<ObjectInteraction>();
-					if (objPicked!=null)
+					if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 					{
-						MessageLog.text = "You pick up a " + hit.transform.name;
+						//MessageLog.text = "You pick up a " + hit.transform.name;
 						CursorIcon=objPicked.InventoryIcon.texture;
 						CurrObjectSprite=objPicked.InventoryString;
 						pInv.ObjectInHand=hit.transform.name;
@@ -165,12 +180,12 @@ public class UWCharacter : MonoBehaviour {
 	}
 
 	void LookMode()
-	{
+	{//Look at the clicked item.
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
-			if (Physics.Raycast(ray,out hit,talkRange))
+			if (Physics.Raycast(ray,out hit,lookRange))
 			{
 				MessageLog.text = "You see " + hit.transform.name + " UWCharacter.LookMode()";
 				Debug.Log (hit.normal);
@@ -183,7 +198,7 @@ public class UWCharacter : MonoBehaviour {
 	}
 
 	void TalkMode()
-	{
+	{//Talk to the object clicked on.
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -194,21 +209,23 @@ public class UWCharacter : MonoBehaviour {
 			}
 			else
 			{
-				MessageLog.text = "Talking to yourself? ";
+				MessageLog.text = "Talking to yourself?";
 			}
 		}
 	}
 
 	void AttackModeMelee()
 	{//Code to handle melee Combat
+		//Begins to charge and attack. 
+		//As long as the cursor is in the main window the attack will continue to build up.
 		if(Input.GetMouseButton(1) && (CursorInMainWindow==true) && (AttackCharging==0))
-		{
+		{//Begin the attack.
 			AttackCharging=1;
 			Charge=0;
 			Debug.Log ("attack charging begun");
 		}
 		if ((AttackCharging==1) && (Charge<100))
-		{
+		{//While still charging increase the charge by the charge rate.
 			Charge=(Charge+(chargeRate*Time.deltaTime));
 			Debug.Log ("Charging is " + Charge);
 			if (Charge>100)
@@ -217,38 +234,38 @@ public class UWCharacter : MonoBehaviour {
 			}
 		}
 		if (Input.GetMouseButtonUp (1) && (CursorInMainWindow==true) && (AttackCharging==1))
-		{
+		{//On right click find out what is at the mouse cursor and execute the attack along the raycast
 			Debug.Log ("Attack released with charge of " + Charge +"%");
 			AttackCharging=0;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,weaponRange))
 				//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
-			{
-				if (hit.transform.Equals(this.transform))
 				{
-					Debug.Log ("you've hit yourself ? " + hit.transform.name);
+					if (hit.transform.Equals(this.transform))
+					{
+						Debug.Log ("you've hit yourself ? " + hit.transform.name);
+					}
+					else
+					{
+						Debug.Log ("you've hit " + hit.transform.name);
+						hit.transform.SendMessage("ApplyDamage");
+						//Destroy(hit.collider.gameObject);
+					}
+					
 				}
-				else
-				{
-					Debug.Log ("you've hit " + hit.transform.name);
-					hit.transform.SendMessage("ApplyDamage");
-					//Destroy(hit.collider.gameObject);
-				}
-				
-			}
 			else
 				{
 				Debug.Log ("MISS");
 				}
-			
+		
 		}
 
 	}
 
 
 	void OnGUI()
-	{
+	{//Controls switching between Mouselook and interaction.
 		if (Event.current.Equals(Event.KeyboardEvent("e")))
 		{
 			
@@ -273,11 +290,9 @@ public class UWCharacter : MonoBehaviour {
 		//Debug.Log ("ongui");
 		if (MouseLookEnabled == true)
 		{
-			
 			Rect Position = new Rect((Screen.width/2) - (cursorSizeX/2),(Screen.height/2) - (cursorSizeY/2),cursorSizeX,cursorSizeY);
 			//GUI.DrawTexture (Rect(Event.current.mousePosition.x-cursorSizeX/2, Event.current.mousePosition.y-cursorSizeY/2, cursorSizeX, cursorSizeY), CursorIcon);
 			GUI.DrawTexture (Position,CursorIcon);
-			
 		}
 		else
 		{

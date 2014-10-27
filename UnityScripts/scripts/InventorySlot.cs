@@ -18,7 +18,7 @@ public class InventorySlot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-//		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 //		slot = GetComponent<UISprite>();
 
 	}
@@ -185,7 +185,13 @@ public class InventorySlot : MonoBehaviour {
 
 	void LookFromSlot()
 	{
-		return;
+		pInv = player.GetComponent<PlayerInventory>();
+		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		if (ObjectName !="")
+		{
+			MessageLog.text="You see a " + ObjectName;
+		}
+			return;
 	}
 
 	void OnClick()

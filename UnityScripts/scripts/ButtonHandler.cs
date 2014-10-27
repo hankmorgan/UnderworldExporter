@@ -59,30 +59,30 @@ public class ButtonHandler : MonoBehaviour {
 
 	public void Activate()
 	{
-		float distance;
-		distance =Vector3.Distance(transform.position,player.transform.position);
-		if (distance<=playerUW.InteractionDistance)
+		//float distance;
+		//distance =Vector3.Distance(transform.position,player.transform.position);
+		//if (distance<=playerUW.useRange)
+		//{
+		MessageLog.text = "You use a " + name;
+		ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
+		targetvars.triggerX=triggerX;
+		targetvars.triggerY=triggerY;
+		targetvars.state=Var.state;
+		MessageLog.text=name +"_clicked";
+		triggerObj.SendMessage ("Activate");
+		if (Var.state == 8)
 		{
-			MessageLog.text = "You use a " + name;
-			ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
-			targetvars.triggerX=triggerX;
-			targetvars.triggerY=triggerY;
-			targetvars.state=Var.state;
-			MessageLog.text=name +"_clicked";
-			triggerObj.SendMessage ("Activate");
-			if (Var.state == 8)
-			{
-				Var.state=0;
-			}
-			else
-			{
-				Var.state++;
-			}
+			Var.state=0;
 		}
 		else
 		{
-			MessageLog.text = "That is too far away to use";
+			Var.state++;
 		}
+		//}
+		//else
+		//{
+		//	MessageLog.text = "That is too far away to use";
+		//}
 	}
 
 	void OnMouseDown()
@@ -107,9 +107,9 @@ public class ButtonHandler : MonoBehaviour {
 				MessageLog.text = "You attack a " + name;
 				break;
 			case 16://Use
-			distance =Vector3.Distance(transform.position,player.transform.position);
-			if (distance<=playerUW.InteractionDistance)
-				{
+			//distance =Vector3.Distance(transform.position,player.transform.position);
+			//if (distance<=playerUW.InteractionDistance)
+				//{
 				MessageLog.text = "You use a " + name;
 				ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
 				targetvars.triggerX=triggerX;
@@ -125,11 +125,11 @@ public class ButtonHandler : MonoBehaviour {
 					{
 						Var.state++;
 					}
-				}
-			else
-			{
-				MessageLog.text = "That is too far away to use";
-			}
+				//}
+			//else
+			//{
+			//	MessageLog.text = "That is too far away to use";
+			//}
 			break;
 		}
 	}	
