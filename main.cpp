@@ -780,12 +780,12 @@ switch (game)
 					{
 					if (bytark!=1)
 						{
-						for (int f = 0; f < 8; f++)
-							{
-							sprintf(OutFileName, "%d",f);
-							extractTextureBitmap(-1, Graphics_File, Graphics_Pal, f, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
-							//extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
-							}
+						//for (int f = 0; f < 8; f++)
+						//	{
+						//	sprintf(OutFileName, "%d",f);
+							//extractTextureBitmap(-1, Graphics_File, Graphics_Pal, f, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
+							extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
+						//	}
 						
 						}
 					else

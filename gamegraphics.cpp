@@ -1311,7 +1311,7 @@ void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 	//stbi_write_tga(outFile, SizeH, SizeH, Alpha, bits + Start);
 	//return;
 	/* Write the result as a uncompressed TGA */
-	if ((fptr = fopen(outFile, "w")) == NULL) {
+	if ((fptr = fopen(outFile, "wb")) == NULL) {
 		fprintf(stderr, "Failed to open outputfile\n");
 		exit(-1);
 		}
@@ -1467,7 +1467,7 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 			}
 		if ((chunkId >= 1000) || (chunkId <= 1272))
 			{//Textures.
-			bCyclePalettes=1;
+			bCyclePalettes=0;//1
 			}
 		if (LoadShockPal(pal,PaletteFile,PaletteChunk)==1)
 			{
@@ -1498,7 +1498,8 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 				}
 
 		
-			if (((chunkContentType == 2) || (chunkContentType == 17)) && (chunkId >= 1000) && (chunkId <= 1272))	//Bitmap and sometimes audio log
+			//if (((chunkContentType == 2) || (chunkContentType == 17)) && (chunkId >= 1000) && (chunkId <= 1272))	//Bitmap and sometimes audio log
+			if (((chunkContentType == 2) || (chunkContentType == 17)))	//Bitmap and sometimes audio log
 			{//load this chunk and extract
 				char NewOutFileName[255];
 				sprintf_s(NewOutFileName, 255, "%s_%04d", OutFileName, chunkId);

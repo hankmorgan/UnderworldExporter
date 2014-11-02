@@ -344,7 +344,7 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 
 		printFloorOrientations(LevelInfo, LevelNo);
 		printCeilOrientations(LevelInfo, LevelNo);
-
+		shockCommonObject();
 		}
 	else
 		{

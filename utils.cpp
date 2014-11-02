@@ -30,7 +30,7 @@ long ConvertInt32(unsigned char Byte1, unsigned char Byte2,  unsigned char Byte3
 return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1 ;		//24 was 32
 }
 
-int getValAtAddress(unsigned char *buffer, long Address, int size)
+long getValAtAddress(unsigned char *buffer, long Address, int size)
 	{//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
 		switch (size)
 		{
@@ -41,7 +41,7 @@ int getValAtAddress(unsigned char *buffer, long Address, int size)
 		case 24:
 			{return ConvertInt24(buffer[Address],buffer[Address+1],buffer[Address+2]);}
 		case 32:	//may be buggy!
-			{return ConvertInt32(buffer[Address],buffer[Address+1],buffer[Address+2],buffer[Address+3]);}
+			{return ConvertInt32(buffer[Address], buffer[Address + 1], buffer[Address + 2], buffer[Address + 3]); }
 		default:
 			{
 			printf("Invalid size entered!");

@@ -713,7 +713,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 		return -1;
 		}
 	long fileSize = getFileSize(file);
-	int filepos = ftell(file);	
+	//int filepos = ftell(file);	
 	archive_ark = new unsigned char[fileSize];
 	fread(archive_ark, fileSize, 1,file);
 	fclose(file);

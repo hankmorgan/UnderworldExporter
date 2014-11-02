@@ -14,7 +14,7 @@ void WriteInt16(FILE *file, long val);
 void WriteInt8(FILE *file, long val);
 
 long getFileSize(FILE *file);
-int getValAtAddress(unsigned char *buffer, long Address, int size);
+long getValAtAddress(unsigned char *buffer, long Address, int size);
 int getValAtCoordinate(int x, int y, int BlockStart,unsigned char *buffer, int size);
 int LoadShockFile(char *filePath,long fileSize, unsigned char *archive_ark);
 long getShockBlockAddress(long BlockNo, unsigned char *tmp_ark, long *chunkPackedLength, long *chunkUnpackedLength, long *chunkType);

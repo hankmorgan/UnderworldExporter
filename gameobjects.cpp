@@ -1749,44 +1749,70 @@ void shockCommonObject()
 //Read in some common object properties file to find some useful info.
 char *filePathCO = SHOCK_COMMONOBJ_FILE;
 FILE *f;
+int RunningTotalExtraFrames=0;
 unsigned char *obj_ark; 
-if ((fopen_s(&f,filePathCO, "r") == 0))
+if ((fopen_s(&f,filePathCO, "rb") == 0))
 	{
+	long add_ptr;
 		long fileSize = getFileSize(f);
 		obj_ark = new unsigned char[fileSize];
 		fread(obj_ark, fileSize, 1,f);
 		fclose(f);  
-		int frameCount=2;	
-		int ObjOffset = 5099;	//hope this is right
+		//int frameCount=2;	
+		add_ptr = 5099;
+		//long ObjOffset = 5099;	//hope this is right
 		int prevClass = objectMasters[0].objClass;
-		for (int i = 0; i<475;i++)
+		fprintf(LOGFILE, "\nSystem Shock Common object Properties");
+		fprintf(LOGFILE, "\nIndex\t");
+		fprintf(LOGFILE, "Desc\t");
+		fprintf(LOGFILE, "Address\t");
+		
+		fprintf(LOGFILE, "Mass\t");
+		fprintf(LOGFILE, "hp\t");
+		fprintf(LOGFILE, "armour\t");
+		fprintf(LOGFILE, "Render\t");
+		fprintf(LOGFILE, "Vulner\t");
+		fprintf(LOGFILE, "spevul\t");
+		fprintf(LOGFILE, "defence\t");
+		fprintf(LOGFILE, "flags\t");
+		fprintf(LOGFILE, "3d mod\t");
+		fprintf(LOGFILE, "frames\t");
+		fprintf(LOGFILE, "framesbits 4-7\t");
+		fprintf(LOGFILE, "framesbits 0-3\t");
+		fprintf(LOGFILE, "Running total Extra\t");
+		for (long i = 0; i<475;i++)
 			{
-			///if (prevClass != objectMasters[i].objClass)
-			//{
+			//if (prevClass != objectMasters[i].objClass)
+				//{
 				//frameCount=0;	//Start a new cycle for each class
-				//fprintf(LOGFILE,"\n----next class------\n");
-			//	}
+				//fprintf(LOGFILE,"\n----next class------");
+				//}
 			prevClass = objectMasters[i].objClass;
-			//fprintf(LOGFILE,"\n%d:%s\t" ,i ,objectMasters[i].desc);
+			fprintf(LOGFILE, "\n%d\t", i);
+			fprintf(LOGFILE,"%s\t" ,objectMasters[i].desc);
 			//fprintf(LOGFILE,"\tRender:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x7,8));
-			//
+			
 			//fprintf(LOGFILE,"\tmodel:%d", getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
-			//
-			objectMasters[i].frame1 = frameCount;	
-			frameCount+=(3+((getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8) >>4) & 0x0F));
+			
+			//objectMasters[i].frame1 = frameCount;	
+			//frameCount+=(3+((getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8) >>4) & 0x0F));
 			//fprintf(LOGFILE,"\tframe:1350_%04d.bmp" ,objectMasters[i].frame1);
-			//fprintf(LOGFILE,"Mass %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0,32));
-			//fprintf(LOGFILE,"hp  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x04,16));
-			//fprintf(LOGFILE,"armour  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x06,8));
-			//fprintf(LOGFILE,"Render  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x07,8));
-			//fprintf(LOGFILE,"Vulner  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0e,8));
-			//fprintf(LOGFILE,"spevul  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x0f,8));
-			//fprintf(LOGFILE,"defence  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x12,8));
-			//fprintf(LOGFILE,"flags  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x14,16));
-			//fprintf(LOGFILE,"3d mod  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x16,16));
-			//fprintf(LOGFILE,"frames  %d\t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8));
-			//fprintf(LOGFILE,"framesbits %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x18,8)>>4);
-			//fprintf(LOGFILE,"framesbits19 %d \t",getValAtAddress(obj_ark,ObjOffset+i*27+0x19,8)>>4);
+			fprintf(LOGFILE, "%d\t", add_ptr);
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0, 32));//Mass 
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x04, 16));//hp  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x06, 8));//armour  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x07, 8));//Render  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0e, 8));//Vulner  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x0f, 8));//spevul  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x12, 8));//defence  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x14, 16));//flags  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x16, 16));//3d mod  
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x19, 8));//frames  
+			fprintf(LOGFILE, "%d\t", (getValAtAddress(obj_ark, add_ptr + 0x19, 8) >> 4) & 0x7);//framesbits 4-7
+			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr  + 0x19, 8) & 0x7);//framesbits 0-3 
+			RunningTotalExtraFrames = RunningTotalExtraFrames + ((getValAtAddress(obj_ark, add_ptr + 0x19, 8) >> 4) & 0x7);
+			fprintf(LOGFILE, "%d", RunningTotalExtraFrames);
+			add_ptr=add_ptr+27;
 
 			prevClass = objectMasters[i].objClass;
 			
