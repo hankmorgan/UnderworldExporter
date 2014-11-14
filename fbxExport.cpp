@@ -17,6 +17,16 @@ void RenderFBXTile(FbxScene*& gScene, int game, int x, int y, tile &t, short Wat
 void RenderFBXSolidTile(FbxScene*& gScene, int x, int y, tile &t, short Water);
 void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert);
 void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName);
+void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+	FbxVector4 lControlPoint0,
+	FbxVector4 lControlPoint1,
+	FbxVector4 lControlPoint2,
+	FbxVector4 lControlPoint3,
+	FbxVector4 lControlPoint4,
+	FbxVector4 lControlPoint5,
+	FbxVector4 lControlPoint6,
+	FbxVector4 lControlPoint7
+	);
 void RenderFBXDiagSEPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char *TileName);
 void RenderFBXDiagSWPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char *TileName);
 void RenderFBXDiagNWPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char *TileName);
@@ -51,6 +61,7 @@ void RenderFBXPlane(FbxScene*& gScene, int x, int y, tile &t, short Water, int B
 	);
 void insertTexture(int *texArray, int targetIndex, int textureNo, int arraysize);
 float CalcCeilOffset(int game, int face, tile &t);
+void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor);
 
 //
 //int    gCubeNumber = 1;     // Cube Number
@@ -828,10 +839,23 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 				RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
 				}
 			}
-
-
-
-
+		}
+//Render doors
+	if (game != SHOCK)
+		{
+		for (y = 0; y <= 63; y++)
+			{
+			for (x = 0; x <= 63; x++)
+				{
+				if ((LevelInfo[x][y].hasElevator == 0))//Elevators are rendered as func_statics
+					{
+					if (LevelInfo[x][y].isDoor == 1)
+						{//Adds a UW door frame.
+						RenderFBXDoorway(gScene,game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex]);
+						}
+					}
+				}
+			}
 		}
 
 	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 1, false);
@@ -1596,6 +1620,305 @@ gScene->GetRootNode()->AddChild(lNode);
 
 
 }
+
+void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+	FbxVector4 lControlPoint0,
+	FbxVector4 lControlPoint1,
+	FbxVector4 lControlPoint2,
+	FbxVector4 lControlPoint3,
+	FbxVector4 lControlPoint4,
+	FbxVector4 lControlPoint5,
+	FbxVector4 lControlPoint6,
+	FbxVector4 lControlPoint7
+)
+	{
+	FbxVector4 lNormalXPos(1, 0, 0);
+	FbxVector4 lNormalXNeg(-1, 0, 0);
+	FbxVector4 lNormalYPos(0, 1, 0);
+	FbxVector4 lNormalYNeg(0, -1, 0);
+	FbxVector4 lNormalZPos(0, 0, 1);
+	FbxVector4 lNormalZNeg(0, 0, -1);
+
+	FbxString lCubeName = TileName;
+	//lCubeName += FbxString(gCubeNumber);
+
+	// create a new cube
+	int i, j;
+	FbxMesh* lMesh = FbxMesh::Create(gScene, lCubeName);
+
+	//FbxVector4 lControlPoint0(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ);
+	//FbxVector4 lControlPoint1((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ);
+	//FbxVector4 lControlPoint2((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ);
+	//FbxVector4 lControlPoint3(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ);
+	//FbxVector4 lControlPoint4(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ);
+	//FbxVector4 lControlPoint5((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ);
+	//FbxVector4 lControlPoint6((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ);
+	//FbxVector4 lControlPoint7(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ);
+
+
+	// Create control points.
+	lMesh->InitControlPoints(24);
+	FbxVector4* lControlPoints = lMesh->GetControlPoints();
+	//These directions are wrongly labeled???!!!
+	//Top
+	lControlPoints[0] = lControlPoint0;
+	lControlPoints[1] = lControlPoint1;
+	lControlPoints[2] = lControlPoint2;
+	lControlPoints[3] = lControlPoint3;
+
+	//was Bottom is probably east.
+	//lControlPoints[4] = lControlPoint1;
+	//lControlPoints[5] = lControlPoint5;
+	//lControlPoints[6] = lControlPoint6;
+	//lControlPoints[7] = lControlPoint2;
+	lControlPoints[4] = lControlPoint5;
+	lControlPoints[5] = lControlPoint6;
+	lControlPoints[6] = lControlPoint2;
+	lControlPoints[7] = lControlPoint1;
+
+	//not East?
+	lControlPoints[8] = lControlPoint5;
+	lControlPoints[9] = lControlPoint4;
+	lControlPoints[10] = lControlPoint7;
+	lControlPoints[11] = lControlPoint6;
+
+
+	//West
+	lControlPoints[12] = lControlPoint7;
+	lControlPoints[13] = lControlPoint4;
+	lControlPoints[14] = lControlPoint0;
+	lControlPoints[15] = lControlPoint3;
+
+	//North
+	lControlPoints[16] = lControlPoint6;
+	lControlPoints[17] = lControlPoint7;
+	lControlPoints[18] = lControlPoint3;
+	lControlPoints[19] = lControlPoint2;
+
+	//South
+	lControlPoints[20] = lControlPoint4;
+	lControlPoints[21] = lControlPoint5;
+	lControlPoints[22] = lControlPoint1;
+	lControlPoints[23] = lControlPoint0;
+
+
+	// We want to have one normal for each vertex (or control point),
+	// so we set the mapping mode to eByControlPoint.
+	FbxGeometryElementNormal* lGeometryElementNormal = lMesh->CreateElementNormal();
+
+	lGeometryElementNormal->SetMappingMode(FbxGeometryElement::eByControlPoint);
+
+	// Set the normal values for every control point.
+	lGeometryElementNormal->SetReferenceMode(FbxGeometryElement::eDirect);
+	//top
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZPos);
+
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXPos);
+
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZNeg);//was neg
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZNeg);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZNeg);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalZNeg);
+	//north?
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXNeg);//was Neg
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXNeg);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXNeg);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalXNeg);
+
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYPos);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYPos);
+
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYNeg);//WasNeg
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYNeg);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYNeg);
+	lGeometryElementNormal->GetDirectArray().Add(lNormalYNeg);
+
+
+	// Array of polygon vertices.
+	int lPolygonVertices[] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,
+		14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+
+
+	// Create UV for Diffuse channel.
+	FbxGeometryElementUV* lUVDiffuseElement = lMesh->CreateElementUV("DiffuseUV");
+	FBX_ASSERT(lUVDiffuseElement != NULL);
+	lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
+	lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
+
+	float PolySize = Top - Bottom;
+	float offset = 0;//-0.125;
+	offset = CalcCeilOffset(iGame, fNORTH, t);
+	FbxVector2 lVectorsNorth0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsNorth1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	offset = CalcCeilOffset(iGame, fSOUTH, t);
+	FbxVector2 lVectorsSouth0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsSouth1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	offset = CalcCeilOffset(iGame, fEAST, t);
+	FbxVector2 lVectorsEast0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsEast1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	offset = CalcCeilOffset(iGame, fWEST, t);
+	FbxVector2 lVectorsWest0(0, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsWest1(1, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+
+	//bottom vectors
+	FbxVector2 lVectorsBottom0(0, 0);
+	FbxVector2 lVectorsBottom1(1 * t.DimX, 0);
+	FbxVector2 lVectorsBottom2(1 * t.DimX, 1 * t.DimY);
+	FbxVector2 lVectorsBottom3(0, 1 * t.DimY);
+
+	//top vectors
+	FbxVector2 lVectorsTop0(0, 0);
+	FbxVector2 lVectorsTop1(1 * t.DimX, 0);
+	FbxVector2 lVectorsTop2(1 * t.DimX, 1 * t.DimY);
+	FbxVector2 lVectorsTop3(0, 1 * t.DimY);
+	//Top
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop3);
+	//East
+
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsEast3);
+	//Bottom
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsBottom3);
+	//West
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsWest3);
+	//North
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsNorth3);
+	//South
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth0);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth1);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth2);
+	lUVDiffuseElement->GetDirectArray().Add(lVectorsSouth3);
+
+
+	//FbxGeometryElementUV* lUVElement = lMesh->GetElementUV(0);
+	//lUVElement->
+
+	//Now we have set the UVs as eIndexToDirect reference and in eByPolygonVertex  mapping mode
+	//we must update the size of the index array.
+	lUVDiffuseElement->GetIndexArray().SetCount(24);
+	int k = 0;
+	// Create polygons. Assign texture and texture UV indices.
+	for (i = 0; i < 6; i++)
+		{
+		// all faces of the cube have the same texture
+		lMesh->BeginPolygon(-1, -1, -1, false);
+
+		for (j = 0; j < 4; j++)
+			{
+			// Control point index
+			lMesh->AddPolygon(lPolygonVertices[i * 4 + j]);
+			// update the index array of the UVs that map the texture to the face
+			lUVDiffuseElement->GetIndexArray().SetAt(i * 4 + j, k);
+			k++;
+			}
+
+		lMesh->EndPolygon();
+		}
+
+	// create a FbxNode
+	FbxNode* lNode = FbxNode::Create(gScene, lCubeName);
+
+	// set the node attribute
+	lNode->SetNodeAttribute(lMesh);
+
+	// set the shading mode to view texture
+	lNode->SetShadingMode(FbxNode::eTextureShading);
+
+
+	//Assigned the materials to the mesh
+
+	FbxGeometryElementMaterial* lMaterialElement = lMesh->CreateElementMaterial();
+	lMaterialElement->SetMappingMode(FbxGeometryElement::eByPolygon);
+	lMaterialElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
+
+
+	if (lNode == NULL)
+		return;
+
+	// We are in eByPolygon, so there's only need for 6 index (a cube has 6 polygons).
+	lMaterialElement->GetIndexArray().SetCount(6);
+
+	int TextureArray[] = { 0, 999, 999, 999, 999, 999, 999 };
+	int ceilTex = -1;
+	int eastTex = -1;
+	int westTex = -1;
+	int southTex = -1;
+	int northTex = -1;
+	int bottomTex = -1;
+
+	ceilTex = FloorTexture(gScene, lNode, fCEIL, t);//0
+	eastTex = WallTexture(gScene, lNode, fEAST, t);//1
+	westTex = WallTexture(gScene, lNode, fWEST, t);//2
+	southTex = WallTexture(gScene, lNode, fSOUTH, t);//3
+	northTex = WallTexture(gScene, lNode, fNORTH, t);//4
+	bottomTex = FloorTexture(gScene, lNode, fBOTTOM, t);//5
+
+	insertTexture(TextureArray, 1, bottomTex, 6);
+	insertTexture(TextureArray, 3, ceilTex, 6);
+	insertTexture(TextureArray, 2, eastTex, 6);
+	insertTexture(TextureArray, 4, westTex, 6);
+	insertTexture(TextureArray, 5, northTex, 6);
+	insertTexture(TextureArray, 6, southTex, 7);
+
+	int counter = 0;
+	for (int i = 1; i <= 6; i++)
+		{
+		if (TextureArray[i] >= 0)
+			{//Just add the material at that index.
+			//printf("\nAdding Material %d at %d", TextureArray[i],i);
+			lNode->AddMaterial(gScene->GetMaterial(TextureArray[i]));
+			//Turn that texture index back into a counter.
+			TextureArray[i] = counter;
+			counter++;
+			}
+		}
+
+	for (int i = 1; i <= 6; i++)
+		{
+		if (TextureArray[i] < 0)
+			{
+			lMaterialElement->GetIndexArray().SetAt(i - 1, TextureArray[-TextureArray[i]]);
+			}
+		else
+			{
+			lMaterialElement->GetIndexArray().SetAt(i - 1, TextureArray[i]);
+			}
+		}
+
+	gScene->GetRootNode()->AddChild(lNode);
+
+
+	}
 
 void insertTexture(int *texArray, int targetIndex, int textureNo,int arraysize)
 	{
@@ -3800,6 +4123,178 @@ float CalcCeilOffset(int game, int face, tile &t)
 			floorOffset -= 8;
 			}
 		return floorOffset * 0.125;
+		}
+
+	}
+
+void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor)
+	{//Renders Door frames for UW
+	//TODO:Define door widths in config file. 
+	int doorWidth = 48;
+	int doorHeight = 96;
+	int resolution=7;
+	float doorThickness = 2;
+	float BrushX = BrushSizeX;
+	float BrushY = BrushSizeY;
+	float BrushZ = BrushSizeZ;
+	float doorOffset = 0;
+
+	float x0; float y0; float z0;
+	float x1; float y1; float z1;
+
+	float offX = (x*BrushX) + ((currDoor.x) * (BrushX / resolution));//from obj position code
+	float offY = (y*BrushY) + ((currDoor.y) * (BrushY / resolution));
+	float offZ = (currDoor.zpos) >> 2;//The floor level of the actual door object
+	offZ = t.floorHeight;
+	int heading = 0;
+
+	tile tmpt;
+	tmpt.tileType = t.tileType;
+	tmpt.DimX=1;
+	tmpt.DimY = 1;
+	tmpt.East=t.wallTexture;
+	tmpt.West = t.wallTexture;
+	tmpt.South = t.wallTexture;
+	tmpt.North = t.wallTexture;
+	tmpt.floorHeight=t.floorHeight;
+	tmpt.ceilingHeight=t.ceilingHeight;
+	tmpt.tileX=t.tileX;
+	tmpt.tileY = t.tileY;
+	if (game != SHOCK)
+		{
+		heading = currDoor.heading;
+		}
+	
+
+	switch (heading)
+		{
+		case EAST:
+		case WEST:
+			{
+			if (currDoor.x == 0)
+				{
+				doorOffset = +2;
+				}
+			if (currDoor.x == 7)
+				{
+				doorOffset = -2;
+				}
+
+			if (heading == EAST)
+				{
+				offY = (y*BrushY) + ((BrushY - doorWidth) / 2) + doorWidth;
+				}
+			else
+				{
+				offY = (y*BrushY) + ((BrushY - doorWidth) / 2);
+				}
+			}
+			//left side	
+			//east face 
+			//fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + doorThickness + doorOffset)));
+			x1 = ((offX + doorThickness + doorOffset));
+			//north face 
+			//fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
+			y1 = ((y + 1)*BrushY);
+			//top face
+			//fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
+			z1 = (offZ*BrushZ + doorHeight);
+			//west face
+			//fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - doorThickness + doorOffset)));
+			x0 = ((offX - doorThickness + doorOffset));
+			//south face
+			if ((heading == EAST) || (heading == SHOCK_EAST))
+				{
+				y0 = (offY);
+				//fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY));
+				}
+			else
+				{
+				y0 = (offY)+doorWidth;
+				}
+				//fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY)+doorWidth);
+			//bottom face
+			z0 = offZ*BrushZ;
+			//fprintf(MAPFILE, "( 0 0 -1 %f )", offZ*BrushZ);
+
+			FbxVector4 lControlPointl0(x0, y0, z1);
+			FbxVector4 lControlPointl1(x1, y0, z1);
+			FbxVector4 lControlPointl2(x1, y1, z1);
+			FbxVector4 lControlPointl3(x0, y1, z1);
+			FbxVector4 lControlPointl4(x0, y0, z0);
+			FbxVector4 lControlPointl5(x1, y0, z0);
+			FbxVector4 lControlPointl6(x1, y1, z0);
+			FbxVector4 lControlPointl7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "lefthand", 
+				lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3, 
+				lControlPointl4,	lControlPointl5, lControlPointl6, lControlPointl7);
+
+
+			//over the door
+
+			//east face 
+			x1= ((offX + doorThickness + doorOffset));
+			//north face 
+			y1= ((y + 1)*BrushY);
+			//top face
+			z1= BrushZ * (CEILING_HEIGHT + 1);
+			//west face
+			x0 = +((offX - doorThickness + doorOffset));
+			//south face
+			y0= +(y*BrushY);
+			//bottom face
+			z0= (offZ*BrushZ) + doorHeight;
+			FbxVector4 lControlPointo0(x0, y0, z1);
+			FbxVector4 lControlPointo1(x1, y0, z1);
+			FbxVector4 lControlPointo2(x1, y1, z1);
+			FbxVector4 lControlPointo3(x0, y1, z1);
+			FbxVector4 lControlPointo4(x0, y0, z0);
+			FbxVector4 lControlPointo5(x1, y0, z0);
+			FbxVector4 lControlPointo6(x1, y1, z0);
+			FbxVector4 lControlPointo7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "over",
+				lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
+				lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7);
+			
+
+			// right side
+			//east face 
+			x1=((offX + doorThickness + doorOffset));
+
+			//north face 
+			if ((heading == EAST) || (heading == SHOCK_EAST))
+				{
+				y1=(offY - doorWidth);
+				}
+			else
+				{
+				y1=(offY);
+				}
+
+			//top face
+			z1= (offZ*BrushZ + doorHeight);
+
+			//west face
+			x0=+((offX - doorThickness + doorOffset));
+
+			//south face
+			y0=+(y * BrushY);
+
+			//bottom face
+			z0=offZ*BrushZ;
+			FbxVector4 lControlPointr0(x0, y0, z1);
+			FbxVector4 lControlPointr1(x1, y0, z1);
+			FbxVector4 lControlPointr2(x1, y1, z1);
+			FbxVector4 lControlPointr3(x0, y1, z1);
+			FbxVector4 lControlPointr4(x0, y0, z0);
+			FbxVector4 lControlPointr5(x1, y0, z0);
+			FbxVector4 lControlPointr6(x1, y1, z0);
+			FbxVector4 lControlPointr7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "rightdoor",
+				lControlPointr0, lControlPointr1, lControlPointr2, lControlPointr3,
+				lControlPointr4, lControlPointr5, lControlPointr6, lControlPointr7);
+
+
 		}
 
 	}

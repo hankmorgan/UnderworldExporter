@@ -1810,8 +1810,8 @@ if ((fopen_s(&f,filePathCO, "rb") == 0))
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr + 0x19, 8));//frames  
 			fprintf(LOGFILE, "%d\t", (getValAtAddress(obj_ark, add_ptr + 0x19, 8) >> 4) & 0x7);//framesbits 4-7
 			fprintf(LOGFILE, "%d\t", getValAtAddress(obj_ark, add_ptr  + 0x19, 8) & 0x7);//framesbits 0-3 
-			RunningTotalExtraFrames = RunningTotalExtraFrames + ((getValAtAddress(obj_ark, add_ptr + 0x19, 8) >> 4) & 0x7);
 			fprintf(LOGFILE, "%d", RunningTotalExtraFrames);
+			RunningTotalExtraFrames = RunningTotalExtraFrames + ((getValAtAddress(obj_ark, add_ptr + 0x19, 8) >> 4) & 0x7);
 			add_ptr=add_ptr+27;
 
 			prevClass = objectMasters[i].objClass;
