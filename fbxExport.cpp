@@ -3,6 +3,8 @@
 #include "gameobjects.h"
 #include "main.h"
 #include "fbxExport.h"
+#include "gameobjectsrender.h"
+#include "textures.h"
 #include <vector>
 
 int PrimCount=0;
@@ -66,6 +68,8 @@ void RenderFBXPlane(FbxScene*& gScene, int x, int y, tile &t, short Water, int B
 void insertTexture(int *texArray, int targetIndex, int textureNo, int arraysize);
 float CalcCeilOffset(int game, int face, tile &t);
 void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor);
+void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
 //
 //int    gCubeNumber = 1;     // Cube Number
@@ -861,6 +865,14 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 				}
 			}
 		}
+
+//Render Pillars
+	if (game != SHOCK)
+		{
+		RenderFBXPillars(gScene,game,LevelInfo,objList);
+		RenderFBXBridges(gScene, game, LevelInfo, objList);
+		}
+
 
 	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 1, false);
 	}
@@ -3892,7 +3904,7 @@ void CreateFBXMaterials(FbxScene*& gScene, int game)
 		{
 		case UWDEMO:
 		case UW1:
-			NoOfMaterials = 261;
+			NoOfMaterials = 268;
 			break;
 		case UW2:
 			NoOfMaterials = 255;
@@ -3909,7 +3921,19 @@ void CreateFBXMaterials(FbxScene*& gScene, int game)
 			{
 			case UWDEMO:
 			case UW1:
-				sprintf_s(MaterialName, 20, "uw1_%03d\0", i);
+				sprintf_s(MaterialName, 20, textureMasters[i].path);
+				//if (i <= 262)
+				//	{//Regular textures
+				//	sprintf_s(MaterialName, 20, "uw1_%03d\0", i);
+				//	}
+				//else if(i <= 266)
+				//	{//pillars
+				//	sprintf_s(MaterialName, 20, "tmobj_%02d\0", i-263);
+				//	}
+				//else if (i <= 268)
+				//	{//pillars
+				//	sprintf_s(MaterialName, 20, "tmobj_%02d\0", i - 263);
+				//	}
 				break;
 			case UW2:
 				sprintf_s(MaterialName, 20, "uw2_%03d\0", i);
@@ -4147,7 +4171,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 
 	tile tmpt;
 	tmpt.tileType = TILE_SOLID;//t.tileType;
-	tmpt.DimX=1;
+	tmpt.DimX = 1;
 	tmpt.DimY = 1;
 
 	tmpt.East = t.wallTexture;
@@ -4404,6 +4428,149 @@ over the door, east west door
 				lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
 				lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0, 1, 0, 1);
 			break;
+			}
+		}
+	}
+
+void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600])
+	{
+	//Renders a pillar as a brush. I can't use an object here since it needs to extend to variable heights etc.
+	int x; int y;
+	float offX; float offY; float offZ;
+	float x0; float y0; float z0;
+	float x1; float y1; float z1;
+
+	for (y = 0; y <= 63; y++)
+		{
+		for (x = 0; x <= 63; x++)
+			{
+			if ((LevelInfo[x][y].indexObjectList != 0))
+				{
+				long nextObj = LevelInfo[x][y].indexObjectList;
+				while (nextObj != 0)
+					{
+					if (objectMasters[objList[nextObj].item_id].type == PILLAR)
+						{
+						int textureIndex = objList[nextObj].flags & 0x3F;
+						tile tmpt;
+						tmpt.tileType = TILE_SOLID;//t.tileType;
+						tmpt.DimX = 1;
+						tmpt.DimY = 1;
+						tmpt.wallTexture = 263 + textureIndex;
+						tmpt.floorTexture = LevelInfo[x][y].floorTexture;
+						tmpt.East =263 + textureIndex;// LevelInfo[x][y].wallTexture;
+						tmpt.West = 263 + textureIndex;// LevelInfo[x][y].wallTexture;
+						tmpt.South = 263 + textureIndex;//LevelInfo[x][y].wallTexture;
+						tmpt.North = 263 + textureIndex;//LevelInfo[x][y].wallTexture;
+						tmpt.floorHeight = LevelInfo[x][y].ceilingHeight;//this is deliberate
+						tmpt.ceilingHeight = LevelInfo[x][y].ceilingHeight;
+						tmpt.tileX = LevelInfo[x][y].tileX;
+						tmpt.tileY = LevelInfo[x][y].tileY;
+
+						int objType = objectMasters[objList[nextObj].item_id].type;
+						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
+						//Draw it around this point
+							//Bottom 2 bits give the index of the pillar texture
+						x1 = offX + 5;
+						y1 = offY+5;
+						z1 = BrushSizeZ * (CEILING_HEIGHT + 1); //(offZ*BrushZ + doorHeight);
+						x0 = offX - 5;
+						y0 = offY - 5;
+						z0 = -2 * BrushSizeZ;
+						FbxVector4 lControlPointl0(x0, y0, z1);
+						FbxVector4 lControlPointl1(x1, y0, z1);
+						FbxVector4 lControlPointl2(x1, y1, z1);
+						FbxVector4 lControlPointl3(x0, y1, z1);
+						FbxVector4 lControlPointl4(x0, y0, z0);
+						FbxVector4 lControlPointl5(x1, y0, z0);
+						FbxVector4 lControlPointl6(x1, y1, z0);
+						FbxVector4 lControlPointl7(x0, y1, z0);
+						RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "Pillar",
+							lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
+							lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
+							0, 1,
+							0, 1,
+							0, 1,
+							0, 1);
+
+
+
+						}
+					nextObj = objList[nextObj].next;
+					}
+				}
+			}
+		}
+	}
+
+void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600])
+	{
+	//Renders bridges as a brush. I can't use an object here since it needs to extend to variable heights etc.
+	int x; int y;
+	float offX; float offY; float offZ;
+	float x0; float y0; float z0;
+	float x1; float y1; float z1;
+
+	for (y = 0; y <= 63; y++)
+		{
+		for (x = 0; x <= 63; x++)
+			{
+			if ((LevelInfo[x][y].indexObjectList != 0))
+				{
+				long nextObj = LevelInfo[x][y].indexObjectList;
+				while (nextObj != 0)
+					{
+					if (objectMasters[objList[nextObj].item_id].type == BRIDGE)
+						{
+						int textureIndex = objList[nextObj].flags & 0x3F;
+						tile tmpt;
+						tmpt.tileType = TILE_OPEN;//t.tileType;
+						tmpt.DimX = 1;
+						tmpt.DimY = 1;
+						tmpt.wallTexture = 267 + textureIndex;
+						tmpt.floorTexture = 267 + textureIndex;
+						tmpt.shockCeilingTexture = 267 + textureIndex;
+						tmpt.East = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
+						tmpt.West = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
+						tmpt.South = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
+						tmpt.North = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
+						tmpt.floorHeight = LevelInfo[x][y].ceilingHeight;//this is deliberate
+						tmpt.ceilingHeight = LevelInfo[x][y].ceilingHeight;
+						tmpt.tileX = LevelInfo[x][y].tileX;
+						tmpt.tileY = LevelInfo[x][y].tileY;
+
+						int objType = objectMasters[objList[nextObj].item_id].type;
+						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
+						//Move it's xy to the center of the tile
+						offX = x*BrushSizeX + BrushSizeX / 2;
+						offY = y*BrushSizeY + BrushSizeY / 2;
+						//Draw it around this point
+						//Bottom 2 bits give the index of the pillar texture
+						x1 = offX + BrushSizeX / 2;
+						y1 = offY + BrushSizeY / 2;
+						z1 = offZ + 5;
+						x0 = offX - BrushSizeX / 2;
+						y0 = offY - BrushSizeY / 2;
+						z0 = offZ - 5;
+						FbxVector4 lControlPointl0(x0, y0, z1);
+						FbxVector4 lControlPointl1(x1, y0, z1);
+						FbxVector4 lControlPointl2(x1, y1, z1);
+						FbxVector4 lControlPointl3(x0, y1, z1);
+						FbxVector4 lControlPointl4(x0, y0, z0);
+						FbxVector4 lControlPointl5(x1, y0, z0);
+						FbxVector4 lControlPointl6(x1, y1, z0);
+						FbxVector4 lControlPointl7(x0, y1, z0);
+						RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
+							lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
+							lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
+							0, 1,
+							0, 1,
+							0, 1,
+							0, 1);
+						}
+					nextObj = objList[nextObj].next;
+					}
+				}
 			}
 		}
 	}
