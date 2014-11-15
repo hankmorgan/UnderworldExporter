@@ -25,7 +25,11 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	FbxVector4 lControlPoint4,
 	FbxVector4 lControlPoint5,
 	FbxVector4 lControlPoint6,
-	FbxVector4 lControlPoint7
+	FbxVector4 lControlPoint7,
+	float HorzOffsetEastPos, float HorzOffsetEastScale,
+	float HorzOffsetWestPos, float HorzOffsetWestScale,
+	float HorzOffsetNorthPos, float HorzOffsetNorthScale,
+	float HorzOffsetSouthPos, float HorzOffsetSouthScale
 	);
 void RenderFBXDiagSEPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char *TileName);
 void RenderFBXDiagSWPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char *TileName);
@@ -1629,7 +1633,11 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	FbxVector4 lControlPoint4,
 	FbxVector4 lControlPoint5,
 	FbxVector4 lControlPoint6,
-	FbxVector4 lControlPoint7
+	FbxVector4 lControlPoint7,
+	float HorzOffsetEastPos, float HorzOffsetEastScale,
+	float HorzOffsetWestPos, float HorzOffsetWestScale,
+	float HorzOffsetNorthPos, float HorzOffsetNorthScale,
+	float HorzOffsetSouthPos, float HorzOffsetSouthScale
 )
 	{
 	FbxVector4 lNormalXPos(1, 0, 0);
@@ -1646,16 +1654,6 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	int i, j;
 	FbxMesh* lMesh = FbxMesh::Create(gScene, lCubeName);
 
-	//FbxVector4 lControlPoint0(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ);
-	//FbxVector4 lControlPoint1((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Top*BrushSizeZ);
-	//FbxVector4 lControlPoint2((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ);
-	//FbxVector4 lControlPoint3(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Top*BrushSizeZ);
-	//FbxVector4 lControlPoint4(t.tileX*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ);
-	//FbxVector4 lControlPoint5((t.tileX + t.DimX)*BrushSizeX, t.tileY*BrushSizeY, Bottom*BrushSizeZ);
-	//FbxVector4 lControlPoint6((t.tileX + t.DimX)*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ);
-	//FbxVector4 lControlPoint7(t.tileX*BrushSizeX, (t.tileY + t.DimY)*BrushSizeY, Bottom*BrushSizeZ);
-
-
 	// Create control points.
 	lMesh->InitControlPoints(24);
 	FbxVector4* lControlPoints = lMesh->GetControlPoints();
@@ -1666,11 +1664,7 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	lControlPoints[2] = lControlPoint2;
 	lControlPoints[3] = lControlPoint3;
 
-	//was Bottom is probably east.
-	//lControlPoints[4] = lControlPoint1;
-	//lControlPoints[5] = lControlPoint5;
-	//lControlPoints[6] = lControlPoint6;
-	//lControlPoints[7] = lControlPoint2;
+	//east.
 	lControlPoints[4] = lControlPoint5;
 	lControlPoints[5] = lControlPoint6;
 	lControlPoints[6] = lControlPoint2;
@@ -1756,25 +1750,25 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	float PolySize = Top - Bottom;
 	float offset = 0;//-0.125;
 	offset = CalcCeilOffset(iGame, fNORTH, t);
-	FbxVector2 lVectorsNorth0(0, Bottom*0.125 - offset);//bottom left corner
-	FbxVector2 lVectorsNorth1(1, Bottom*0.125 - offset);//bottom right corner
-	FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
-	FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	FbxVector2 lVectorsNorth0(HorzOffsetNorthPos, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsNorth1(HorzOffsetNorthScale, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsNorth2(HorzOffsetNorthScale, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsNorth3(HorzOffsetNorthPos, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 	offset = CalcCeilOffset(iGame, fSOUTH, t);
-	FbxVector2 lVectorsSouth0(0, Bottom*0.125 - offset);//bottom left corner
-	FbxVector2 lVectorsSouth1(1, Bottom*0.125 - offset);//bottom right corner
-	FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
-	FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	FbxVector2 lVectorsSouth0(HorzOffsetSouthPos, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsSouth1(HorzOffsetSouthScale, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsSouth2(HorzOffsetSouthScale, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsSouth3(HorzOffsetSouthPos, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 	offset = CalcCeilOffset(iGame, fEAST, t);
-	FbxVector2 lVectorsEast0(0, Bottom*0.125 - offset);//bottom left corner
-	FbxVector2 lVectorsEast1(1, Bottom*0.125 - offset);//bottom right corner
-	FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
-	FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	FbxVector2 lVectorsEast0(HorzOffsetEastPos, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsEast1(HorzOffsetEastScale, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsEast2(HorzOffsetEastScale, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsEast3(HorzOffsetEastPos, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 	offset = CalcCeilOffset(iGame, fWEST, t);
-	FbxVector2 lVectorsWest0(0, Bottom*0.125 - offset);//bottom left corner
-	FbxVector2 lVectorsWest1(1, Bottom*0.125 - offset);//bottom right corner
-	FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
-	FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
+	FbxVector2 lVectorsWest0(HorzOffsetWestPos, Bottom*0.125 - offset);//bottom left corner
+	FbxVector2 lVectorsWest1(HorzOffsetWestScale, Bottom*0.125 - offset);//bottom right corner
+	FbxVector2 lVectorsWest2(HorzOffsetWestScale, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+	FbxVector2 lVectorsWest3(HorzOffsetWestPos, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 
 	//bottom vectors
 	FbxVector2 lVectorsBottom0(0, 0);
@@ -4130,8 +4124,11 @@ float CalcCeilOffset(int game, int face, tile &t)
 void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor)
 	{//Renders Door frames for UW
 	//TODO:Define door widths in config file. 
-	int doorWidth = 48;
-	int doorHeight = 96;
+	int doorWidth = 60;
+	//int doorHeight = 96;
+	int doorHeightUnits =6;
+	int FrameSideX = (BrushSizeX - doorWidth) / 2;
+	int FrameSideY = (BrushSizeY - doorWidth) / 2;
 	int resolution=7;
 	float doorThickness = 2;
 	float BrushX = BrushSizeX;
@@ -4149,14 +4146,15 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 	int heading = 0;
 
 	tile tmpt;
-	tmpt.tileType = t.tileType;
+	tmpt.tileType = TILE_SOLID;//t.tileType;
 	tmpt.DimX=1;
 	tmpt.DimY = 1;
-	tmpt.East=t.wallTexture;
+
+	tmpt.East = t.wallTexture;
 	tmpt.West = t.wallTexture;
 	tmpt.South = t.wallTexture;
 	tmpt.North = t.wallTexture;
-	tmpt.floorHeight=t.floorHeight;
+	tmpt.floorHeight=t.ceilingHeight;//this is deliberate
 	tmpt.ceilingHeight=t.ceilingHeight;
 	tmpt.tileX=t.tileX;
 	tmpt.tileY = t.tileY;
@@ -4165,7 +4163,6 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 		heading = currDoor.heading;
 		}
 	
-
 	switch (heading)
 		{
 		case EAST:
@@ -4188,22 +4185,15 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				{
 				offY = (y*BrushY) + ((BrushY - doorWidth) / 2);
 				}
-			}
-			//left side	
-			//east face 
-			//fprintf(MAPFILE, "( 1 0 0 %f )", -((offX + doorThickness + doorOffset)));
+		
+/*
+left side. east west door	
+*/
 			x1 = ((offX + doorThickness + doorOffset));
-			//north face 
-			//fprintf(MAPFILE, "( 0 1 0 %f )", -((y + 1)*BrushY));
 			y1 = ((y + 1)*BrushY);
-			//top face
-			//fprintf(MAPFILE, "( 0 0 1 %f )", -(offZ*BrushZ + doorHeight));
-			z1 = (offZ*BrushZ + doorHeight);
-			//west face
-			//fprintf(MAPFILE, "( -1 0 0 %f )", +((offX - doorThickness + doorOffset)));
+			z1 = BrushZ * (CEILING_HEIGHT + 1); //(offZ*BrushZ + doorHeight);
 			x0 = ((offX - doorThickness + doorOffset));
-			//south face
-			if ((heading == EAST) || (heading == SHOCK_EAST))
+			if (heading == EAST)
 				{
 				y0 = (offY);
 				//fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY));
@@ -4212,11 +4202,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				{
 				y0 = (offY)+doorWidth;
 				}
-				//fprintf(MAPFILE, "( 0 -1 0 %f )", +(offY)+doorWidth);
-			//bottom face
-			z0 = offZ*BrushZ;
-			//fprintf(MAPFILE, "( 0 0 -1 %f )", offZ*BrushZ);
-
+			z0 = -2*BrushZ;
 			FbxVector4 lControlPointl0(x0, y0, z1);
 			FbxVector4 lControlPointl1(x1, y0, z1);
 			FbxVector4 lControlPointl2(x1, y1, z1);
@@ -4225,44 +4211,19 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 			FbxVector4 lControlPointl5(x1, y0, z0);
 			FbxVector4 lControlPointl6(x1, y1, z0);
 			FbxVector4 lControlPointl7(x0, y1, z0);
-			RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "lefthand", 
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "lefthand",
 				lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3, 
-				lControlPointl4,	lControlPointl5, lControlPointl6, lControlPointl7);
+				lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7, 
+				-FrameSideY / BrushY, (((BrushY - doorWidth) / 2) / BrushY) - (FrameSideY / BrushY),
+				0, ((BrushY - doorWidth) / 2) / BrushY,
+				0, 1, 
+				0, 1);
 
-
-			//over the door
-
-			//east face 
-			x1= ((offX + doorThickness + doorOffset));
-			//north face 
-			y1= ((y + 1)*BrushY);
-			//top face
-			z1= BrushZ * (CEILING_HEIGHT + 1);
-			//west face
-			x0 = +((offX - doorThickness + doorOffset));
-			//south face
-			y0= +(y*BrushY);
-			//bottom face
-			z0= (offZ*BrushZ) + doorHeight;
-			FbxVector4 lControlPointo0(x0, y0, z1);
-			FbxVector4 lControlPointo1(x1, y0, z1);
-			FbxVector4 lControlPointo2(x1, y1, z1);
-			FbxVector4 lControlPointo3(x0, y1, z1);
-			FbxVector4 lControlPointo4(x0, y0, z0);
-			FbxVector4 lControlPointo5(x1, y0, z0);
-			FbxVector4 lControlPointo6(x1, y1, z0);
-			FbxVector4 lControlPointo7(x0, y1, z0);
-			RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "over",
-				lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
-				lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7);
-			
-
-			// right side
-			//east face 
+/* 
+right side east west door
+*/
 			x1=((offX + doorThickness + doorOffset));
-
-			//north face 
-			if ((heading == EAST) || (heading == SHOCK_EAST))
+			if (heading == EAST)
 				{
 				y1=(offY - doorWidth);
 				}
@@ -4270,18 +4231,10 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				{
 				y1=(offY);
 				}
-
-			//top face
-			z1= (offZ*BrushZ + doorHeight);
-
-			//west face
+			z1 = BrushZ * (CEILING_HEIGHT + 1);
 			x0=+((offX - doorThickness + doorOffset));
-
-			//south face
 			y0=+(y * BrushY);
-
-			//bottom face
-			z0=offZ*BrushZ;
+			z0 = -2 * BrushZ;
 			FbxVector4 lControlPointr0(x0, y0, z1);
 			FbxVector4 lControlPointr1(x1, y0, z1);
 			FbxVector4 lControlPointr2(x1, y1, z1);
@@ -4290,11 +4243,167 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 			FbxVector4 lControlPointr5(x1, y0, z0);
 			FbxVector4 lControlPointr6(x1, y1, z0);
 			FbxVector4 lControlPointr7(x0, y1, z0);
-			RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "rightdoor",
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "rightdoor",
 				lControlPointr0, lControlPointr1, lControlPointr2, lControlPointr3,
-				lControlPointr4, lControlPointr5, lControlPointr6, lControlPointr7);
+				lControlPointr4, lControlPointr5, lControlPointr6, lControlPointr7, 
+				0, ((BrushY - doorWidth) / 2) / BrushY, 
+				-FrameSideY / BrushY, (((BrushY - doorWidth) / 2) / BrushY) - (FrameSideY / BrushY),
+				0, 1, 
+				0, 1);
 
 
+/*
+over the door, east west door
+*/			tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
+			tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - doorHeightUnits;
+			x1 = ((offX + doorThickness + doorOffset));
+			y1 = ((y + 1)*BrushY);
+			z1 = BrushZ * (CEILING_HEIGHT + 1);
+			x0 = +((offX - doorThickness + doorOffset));
+			y0 = +(y * BrushY);
+			z0 = (CEILING_HEIGHT - tmpt.ceilingHeight) * BrushZ;
+			FbxVector4 lControlPointo0(x0, y0, z1);
+			FbxVector4 lControlPointo1(x1, y0, z1);
+			FbxVector4 lControlPointo2(x1, y1, z1);
+			FbxVector4 lControlPointo3(x0, y1, z1);
+			FbxVector4 lControlPointo4(x0, y0, z0);
+			FbxVector4 lControlPointo5(x1, y0, z0);
+			FbxVector4 lControlPointo6(x1, y1, z0);
+			FbxVector4 lControlPointo7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "over",
+				lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
+				lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1,0,1,0,1,0,1);
+
+			break;
+			}
+		
+	case NORTH:
+	case SOUTH:
+			{
+			if (currDoor.y == 0)
+				{
+				doorOffset = +2;
+				}
+			if (currDoor.y == 7)
+				{
+				doorOffset = -2;
+				}
+			if (heading == NORTH) 
+				{
+				offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2) + doorWidth;
+				}
+			else
+				{
+				offX = (x*BrushSizeX) + ((BrushSizeX - doorWidth) / 2);
+				}
+
+			/*Left Side. north south door*/
+			//left side
+			//east face 
+			if ((heading == NORTH) || (heading == SHOCK_NORTH))
+				{
+				x1= (offX - doorWidth);
+				}
+			else
+				{
+				x1 = (offX);
+				}
+			//north face 
+			y1=(offY + doorThickness + doorOffset);
+			//top face
+			//z1=(offZ*BrushZ + doorHeight);
+			z1 = BrushZ * (CEILING_HEIGHT + 1); //(offZ*BrushZ + doorHeight);
+			//west face
+			x0=((x)*BrushX);
+			//south face
+			y0=(offY - doorThickness + doorOffset);
+			//bottom face
+
+			z0 = -2 * BrushZ;
+			FbxVector4 lControlPointl0(x0, y0, z1);
+			FbxVector4 lControlPointl1(x1, y0, z1);
+			FbxVector4 lControlPointl2(x1, y1, z1);
+			FbxVector4 lControlPointl3(x0, y1, z1);
+			FbxVector4 lControlPointl4(x0, y0, z0);
+			FbxVector4 lControlPointl5(x1, y0, z0);
+			FbxVector4 lControlPointl6(x1, y1, z0);
+			FbxVector4 lControlPointl7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "lefthand_ns",
+				lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
+				lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
+				0, 1,
+				0, 1,
+				-FrameSideX / BrushX, (((BrushX - doorWidth) / 2) / BrushX) - (FrameSideX / BrushX),
+				0, ((BrushX - doorWidth) / 2) / BrushX
+				);
+
+			/*Right side. north south doorway*/
+			//right
+			//east face 
+			x1=((x + 1)*BrushX);
+			//north face 
+			y1=(offY + doorThickness + doorOffset);
+			//top face
+			//z1=(offZ*BrushZ + doorHeight);
+			z1 = BrushZ * (CEILING_HEIGHT + 1);
+			//west face
+			if ((heading == NORTH) || (heading == SHOCK_NORTH))
+				{
+				x0=(offX);
+				}
+			else
+				{
+				x0=(offX + doorWidth);
+				}
+			//south face
+			y0=(offY - doorThickness + doorOffset);
+			//bottom face
+			//z0= offZ * BrushZ);	//to go underneath
+			z0 = -2 * BrushZ;
+			FbxVector4 lControlPointr0(x0, y0, z1);
+			FbxVector4 lControlPointr1(x1, y0, z1);
+			FbxVector4 lControlPointr2(x1, y1, z1);
+			FbxVector4 lControlPointr3(x0, y1, z1);
+			FbxVector4 lControlPointr4(x0, y0, z0);
+			FbxVector4 lControlPointr5(x1, y0, z0);
+			FbxVector4 lControlPointr6(x1, y1, z0);
+			FbxVector4 lControlPointr7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "rightdoorns",
+				lControlPointr0, lControlPointr1, lControlPointr2, lControlPointr3,
+				lControlPointr4, lControlPointr5, lControlPointr6, lControlPointr7,
+				0, 1,
+				0, 1,
+				0, ((BrushY - doorWidth) / 2) / BrushY,
+				-FrameSideY / BrushY, (((BrushY - doorWidth) / 2) / BrushY) - (FrameSideY / BrushY));
+
+			/*Over the door North South*/
+			tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
+			tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - doorHeightUnits;
+			//top
+			//east face 
+			x1= ((x + 1)*BrushX);
+			//north face 
+			y1= (offY + doorThickness + doorOffset);
+			//top face
+			z1 = BrushZ * (CEILING_HEIGHT + 1);
+			//west face
+			x0=+(x*BrushX);
+			//south face
+			y0=+(offY - doorThickness + doorOffset);
+			//bottom face
+			z0 = (CEILING_HEIGHT - tmpt.ceilingHeight) * BrushZ;
+			FbxVector4 lControlPointo0(x0, y0, z1);
+			FbxVector4 lControlPointo1(x1, y0, z1);
+			FbxVector4 lControlPointo2(x1, y1, z1);
+			FbxVector4 lControlPointo3(x0, y1, z1);
+			FbxVector4 lControlPointo4(x0, y0, z0);
+			FbxVector4 lControlPointo5(x1, y0, z0);
+			FbxVector4 lControlPointo6(x1, y1, z0);
+			FbxVector4 lControlPointo7(x0, y1, z0);
+			RenderFBXCuboid(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "overns",
+				lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
+				lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0, 1, 0, 1);
+			break;
+			}
 		}
-
 	}

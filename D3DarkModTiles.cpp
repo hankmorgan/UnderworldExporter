@@ -1895,7 +1895,7 @@ void RenderDoorway(int game, int x, int y, tile &t, ObjectItem currDoor)
 					}
 				if (currDoor.y == 7)
 					{
-						doorOffset = -2;
+					doorOffset = -2;
 					}
 			}
 
