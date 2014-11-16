@@ -6,6 +6,4 @@ void FBXExport();
 void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game);
 
 
-
-
 #endif

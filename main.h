@@ -125,6 +125,10 @@ extern int CEILING_HEIGHT;
 //Should graphics be actually extracted or should I just go through the motions?
 #define ACTUALLY_EXTRACT_FILES 1
 
+//Door size defaults
+#define DOORWIDTH 60
+#define DOORTHICKNESS 2
+#define DOORHEIGHTUNITS 6
 
 #define LOGFILENAME "UWEXPORT_LOG.txt"
 extern FILE *LOGFILE;

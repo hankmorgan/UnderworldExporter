@@ -142,6 +142,14 @@ public class UWCharacter : MonoBehaviour {
 				if (objButton!=null)
 				{
 					objButton.Activate();
+					return;
+				}
+				//Activates door.
+				DoorControl objDoor = hit.transform.GetComponent<DoorControl>();
+				if (objDoor!=null)
+				{
+					objDoor.Activate();
+					return;
 				}
 			}
 		}

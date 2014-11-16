@@ -3,6 +3,7 @@
 #include "gameobjectsrender.h"
 #include <fstream>
 #include "main.h"
+#include "Unity.h"
 void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
@@ -185,11 +186,29 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 
 	//RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"door_%03d_%03d\");",currobj.tileX, currobj.tileY);//Create the object
+	switch (currobj.heading)
+		{//Move the object position so it can pivot properly.
+		case WEST:
+		case EAST:
+			y = (currobj.tileY*BrushSizeY + ((BrushSizeY - DOORWIDTH) / 2)) / 100.0;
+			break;
+		case NORTH:
+		case SOUTH:
+			x = (currobj.tileX*BrushSizeX + ((BrushSizeX - DOORWIDTH) / 2)) / 100.0;
+			break;
+		}
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Assets/Sprites/objects_%03d.tga\",true);", currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\");", objectMasters[currobj.item_id].extraInfo);
+
+
+	if (game != SHOCK)
+		{
+		UnityRotation(game, -90,currobj.heading,0);
+		}
 	
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+//	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
 		{
@@ -1156,7 +1175,7 @@ float offX; float offY; float offZ;
 					objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					objList[nextObj].tileY = y;
 					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);//Figures out where the object should be.
-					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);//+((BrushZ*1.25)/100);//shift up the z a small bit.
+					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);
 					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])))
 						{//Everything but traps and triggers
 						if (objList[nextObj].AlreadyRendered != 1)
@@ -1194,4 +1213,17 @@ float offX; float offY; float offZ;
 			}
 		
 	fclose(UNITY_FILE);
+	}
+
+void UnityRotation(int game, int angle1, int angle2, int angle3)
+	{
+	switch (game)
+		{
+		case SHOCK:
+			break;
+		default:
+			fprintf(UNITY_FILE, "\n\tSetRotation(myObj,%d,%d,%d);",angle1,angle2-180,angle3);
+			break;
+		}
+
 	}

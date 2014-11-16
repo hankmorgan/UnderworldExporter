@@ -81,4 +81,5 @@ public class a_do_trap_platform : MonoBehaviour {
 		platform.position = EndPos;
 		//Debug.Log("MoveTileEnd");
 		}
+
 }
