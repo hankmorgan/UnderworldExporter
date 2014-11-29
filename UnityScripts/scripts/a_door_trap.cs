@@ -7,6 +7,7 @@ public class a_door_trap : MonoBehaviour {
 	private ObjectVariables Var;
 	private UILabel MessageLog;
 	public int quality;
+
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -24,18 +25,24 @@ public class a_door_trap : MonoBehaviour {
 	public void Activate()
 	{
 		GameObject door = Var.findDoor(Var.triggerX,Var.triggerY);
+
 		if (door!=null)
 		{
+			DoorControl DC = door.GetComponent<DoorControl>();
 			switch (quality)
 			{
 			case 1://try open
 				MessageLog.text=MessageLog.text + door.name + " opened\n";
+				DC.UnlockDoor();
+				DC.OpenDoor();
 				break;
 			case 2://try close
 				MessageLog.text=MessageLog.text + door.name + " closed\n";
+				DC.CloseDoor();
 				break;
 			case 3://try toggle
 				MessageLog.text=MessageLog.text + door.name + " toggled\n";
+				DC.ToggleDoor();
 				break;
 			}
 

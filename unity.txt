@@ -198,6 +198,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_258",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_258",258, 1);
+	CreateKey(myObj, 2);
 	myObj = new GameObject("a_acid_slug_55_04_00_0227");
 	pos = new Vector3(66.514290f, 2.418898f, 5.314286f);
 	myObj.transform.position = pos;
@@ -206,7 +207,7 @@
 	pos = new Vector3(26.914284f, 3.023622f, 6.300000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_321",true);
-	CreateDoor(myObj,"textures/doors/doors_03");
+	CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("an_Ort_stone_28_05_00_0586");
 	pos = new Vector3(34.285717f, 3.023622f, 6.171429f);
@@ -228,7 +229,7 @@
 	pos = new Vector3(45.900002f, 3.023622f, 6.514286f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_327",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_rotworm_05_06_00_0252");
 	pos = new Vector3(6.514286f, 0.302362f, 7.714286f);
@@ -247,6 +248,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_262",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_262",262, 1);
+	CreateKey(myObj, 1);
 	myObj.transform.position = invMarker.transform.position;
 	myObj.transform.parent = invMarker.transform;
 	AddObjectToContainer(myObj, ParentContainer, 0);
@@ -353,7 +355,7 @@
 	pos = new Vector3(69.085716f, 2.418898f, 7.500000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_323",true);
-	CreateDoor(myObj,"textures/doors/doors_06");
+	CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("a_switch_04_07_00_0864");
 	pos = new Vector3(4.800000f, 1.209449f, 9.085714f);
@@ -368,7 +370,7 @@
 	pos = new Vector3(29.100000f, 3.023622f, 8.914286f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_blood_stain_28_07_00_0594");
 	pos = new Vector3(34.457142f, 3.023622f, 8.742857f);
@@ -420,13 +422,13 @@
 	pos = new Vector3(40.457142f, 3.023622f, 9.900000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 0, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("door_036_008");
 	pos = new Vector3(43.500000f, 3.023622f, 10.114285f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_321",true);
-	CreateDoor(myObj,"textures/doors/doors_03");
+	CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_broken_mace_37_08_00_0968");
 	pos = new Vector3(45.428570f, 3.023622f, 10.457142f);
@@ -457,7 +459,7 @@
 	pos = new Vector3(55.500000f, 2.721260f, 10.285714f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_325",true);
-	CreateDoor(myObj,"textures/doors/doors_09");
+	CreateDoor(myObj,"textures/doors/doors_09", 0, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_pile_of_debris_piles_of_debris_32_09_00_0975");
 	pos = new Vector3(39.257145f, 3.023622f, 11.657143f);
@@ -479,10 +481,10 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_366",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 	myObj = new GameObject("door_009_010");
-	pos = new Vector3(11.100000f, 0.302362f, 13.200000f);
+	pos = new Vector3(11.700000f, 0.302362f, 13.200000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 0, 1);
 	SetRotation(myObj,-90,0,0);
 	myObj = new GameObject("a_shortsword_18_10_00_0603");
 	pos = new Vector3(21.771429f, 3.628346f, 12.171429f);
@@ -645,7 +647,7 @@
 	pos = new Vector3(44.700001f, 3.023622f, 14.914286f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_321",true);
-	CreateDoor(myObj,"textures/doors/doors_03");
+	CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_bench_benches_15_13_00_0880");
 	pos = new Vector3(18.514286f, 3.628346f, 15.942858f);
@@ -738,10 +740,10 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_041",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_041",41, 1);
 	myObj = new GameObject("door_021_015");
-	pos = new Vector3(25.200001f, 3.628346f, 18.299999f);
+	pos = new Vector3(25.200001f, 3.628346f, 18.900000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 1, 1);
 	SetRotation(myObj,-90,-90,0);
 	myObj = new GameObject("an_outcast_33_15_00_0239");
 	pos = new Vector3(40.457142f, 2.116535f, 18.857141f);
@@ -788,10 +790,10 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"72","Sprites/objects_072");
 	myObj = new GameObject("door_022_017");
-	pos = new Vector3(26.700001f, 3.628346f, 21.428572f);
+	pos = new Vector3(27.299999f, 3.628346f, 21.428572f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,0,0);
 	myObj = new GameObject("some_writing_41_17_00_0699");
 	pos = new Vector3(49.200001f, 4.233071f, 20.400000f);
@@ -837,7 +839,7 @@
 	pos = new Vector3(11.314286f, 3.628346f, 23.100000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_323",true);
-	CreateDoor(myObj,"textures/doors/doors_06");
+	CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("an_outcast_22_19_00_0242");
 	pos = new Vector3(26.914284f, 3.628346f, 23.314285f);
@@ -889,10 +891,10 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_366",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 	myObj = new GameObject("door_026_021");
-	pos = new Vector3(31.500000f, 3.023622f, 26.228571f);
+	pos = new Vector3(32.099998f, 3.023622f, 26.228571f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_323",true);
-	CreateDoor(myObj,"textures/doors/doors_06");
+	CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
 	SetRotation(myObj,-90,0,0);
 	myObj = new GameObject("a_piece_of_wood_pieces_of_wood_37_21_00_0862");
 	pos = new Vector3(45.428570f, 3.628346f, 25.714285f);
@@ -965,7 +967,7 @@
 	pos = new Vector3(26.700001f, 3.628346f, 31.542856f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_324",true);
-	CreateDoor(myObj,"textures/doors/doors_07");
+	CreateDoor(myObj,"textures/doors/doors_07", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_giant_spider_29_26_00_0253");
 	pos = new Vector3(35.314285f, 3.628346f, 31.714285f);
@@ -1003,7 +1005,7 @@
 	pos = new Vector3(6.300000f, 2.721260f, 38.914284f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_ruby_rubies_10_32_00_0653");
 	pos = new Vector3(12.857142f, 0.302362f, 38.742855f);
@@ -1030,6 +1032,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_258",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_258",258, 1);
+	CreateKey(myObj, 2);
 	myObj = new GameObject("special_tmap_obj_16_33_00_0806");
 	pos = new Vector3(19.714287f, 2.116535f, 40.799999f);
 	myObj.transform.position = pos;
@@ -1083,7 +1086,7 @@
 	pos = new Vector3(18.299999f, 2.116535f, 41.657143f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_326",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 4, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_pile_of_debris_piles_of_debris_34_34_00_0857");
 	pos = new Vector3(41.657143f, 3.628346f, 41.657143f);
@@ -1094,7 +1097,7 @@
 	pos = new Vector3(11.100000f, 3.628346f, 42.171432f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_326",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 0, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_goblin_15_35_00_0220");
 	pos = new Vector3(18.514286f, 2.116535f, 42.514286f);
@@ -1105,6 +1108,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_266",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266",266, 1);
+	CreateKey(myObj, 4);
 	myObj = new GameObject("a_button_16_35_00_0807");
 	pos = new Vector3(19.714287f, 2.721260f, 42.000000f);
 	myObj.transform.position = pos;
@@ -1142,13 +1146,13 @@
 	pos = new Vector3(62.700001f, 2.418898f, 43.714287f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_323",true);
-	CreateDoor(myObj,"textures/doors/doors_06");
+	CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("door_056_036");
-	pos = new Vector3(67.500000f, 2.418898f, 43.714287f);
+	pos = new Vector3(68.099998f, 2.418898f, 43.714287f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_323",true);
-	CreateDoor(myObj,"textures/doors/doors_06");
+	CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
 	SetRotation(myObj,-90,0,0);
 	myObj = new GameObject("a_bench_benches_18_37_00_0781");
 	pos = new Vector3(22.114285f, 2.116535f, 44.914288f);
@@ -1384,7 +1388,7 @@
 	pos = new Vector3(65.099998f, 3.628346f, 48.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_bridge_38_41_00_0893");
 	pos = new Vector3(46.114288f, 3.552756f, 49.714287f);
@@ -1453,7 +1457,7 @@
 	pos = new Vector3(14.914286f, 3.628346f, 53.099998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_324",true);
-	CreateDoor(myObj,"textures/doors/doors_07");
+	CreateDoor(myObj,"textures/doors/doors_07", 53, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("some_leeches_bunches_of_leeches_26_44_00_0597");
 	pos = new Vector3(32.400002f, 2.418898f, 53.485714f);
@@ -1536,7 +1540,7 @@
 	pos = new Vector3(66.514290f, 3.628346f, 55.500000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_323",true);
-	CreateDoor(myObj,"textures/doors/doors_06");
+	CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("a_goblin_04_47_00_0200");
 	pos = new Vector3(5.314286f, 3.628346f, 57.257145f);
@@ -1570,7 +1574,7 @@
 	pos = new Vector3(65.099998f, 3.628346f, 56.914288f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_327",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("some_writing_03_48_00_0617");
 	pos = new Vector3(4.628572f, 4.233071f, 58.799999f);
@@ -1581,7 +1585,7 @@
 	pos = new Vector3(6.514286f, 3.628346f, 57.900002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("a_bedroll_09_48_00_0756");
 	pos = new Vector3(11.314286f, 3.930709f, 57.771431f);
@@ -1623,7 +1627,7 @@
 	pos = new Vector3(5.100000f, 3.628346f, 59.314285f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_321",true);
-	CreateDoor(myObj,"textures/doors/doors_03");
+	CreateDoor(myObj,"textures/doors/doors_03", 4, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_bench_benches_11_49_00_0769");
 	pos = new Vector3(13.714286f, 3.628346f, 59.142857f);
@@ -1655,7 +1659,7 @@
 	pos = new Vector3(67.714287f, 3.628346f, 59.099998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_326",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("a_chest_03_50_00_0758");
 	pos = new Vector3(3.942857f, 3.628346f, 60.342857f);
@@ -1742,13 +1746,13 @@
 	pos = new Vector3(50.914288f, 3.628346f, 61.500000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("door_047_051");
 	pos = new Vector3(56.914288f, 3.628346f, 61.500000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_326",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("a_button_48_51_00_0840");
 	pos = new Vector3(58.114288f, 4.233071f, 61.200001f);
@@ -1768,7 +1772,7 @@
 	pos = new Vector3(9.900000f, 3.628346f, 62.914288f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_324",true);
-	CreateDoor(myObj,"textures/doors/doors_07");
+	CreateDoor(myObj,"textures/doors/doors_07", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_blood_stain_21_52_00_0829");
 	pos = new Vector3(25.885715f, 2.721260f, 63.428570f);
@@ -1822,7 +1826,7 @@
 	pos = new Vector3(68.699997f, 3.628346f, 64.114288f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_321",true);
-	CreateDoor(myObj,"textures/doors/doors_03");
+	CreateDoor(myObj,"textures/doors/doors_03", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_broken_sword_18_54_00_0832");
 	pos = new Vector3(21.942856f, 2.721260f, 65.657143f);
@@ -1898,7 +1902,7 @@
 	pos = new Vector3(37.500000f, 3.628346f, 66.342857f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_320",true);
-	CreateDoor(myObj,"textures/doors/doors_00");
+	CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_goblin_46_55_00_0236");
 	pos = new Vector3(55.714287f, 3.628346f, 66.514290f);
@@ -1917,6 +1921,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_269",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_269",269, 1);
+	CreateKey(myObj, 3);
 	myObj = new GameObject("a_bench_benches_02_56_00_0772");
 	pos = new Vector3(2.914286f, 3.628346f, 67.714287f);
 	myObj.transform.position = pos;
@@ -1962,6 +1967,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_266",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266",266, 1);
+	CreateKey(myObj, 4);
 	myObj = new GameObject("some_strong_thread_pieces_of_strong_thread_20_57_00_0919");
 	pos = new Vector3(24.685715f, 2.721260f, 68.742859f);
 	myObj.transform.position = pos;
@@ -2019,7 +2025,7 @@
 	pos = new Vector3(42.299999f, 3.628346f, 69.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_327",true);
-	CreateDoor(myObj,"textures/doors/doors_-12851");
+	CreateDoor(myObj,"textures/doors/doors_-12851", 53, 1);
 	SetRotation(myObj,-90,-180,0);
 	myObj = new GameObject("a_goblin_51_58_00_0203");
 	pos = new Vector3(62.228569f, 3.023622f, 69.942856f);
@@ -2141,7 +2147,7 @@
 	pos = new Vector3(66.514290f, 3.628346f, 71.099998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_322",true);
-	CreateDoor(myObj,"textures/doors/doors_05");
+	CreateDoor(myObj,"textures/doors/doors_05", 3, 1);
 	SetRotation(myObj,-90,90,0);
 	myObj = new GameObject("a_flesh_slug_37_60_00_0221");
 	pos = new Vector3(44.914288f, 2.721260f, 72.514290f);
@@ -2217,6 +2223,7 @@
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_257",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_257",257, 1);
+	CreateKey(myObj, 0);
 	myObj = new GameObject("some_writing_38_61_00_0902");
 	pos = new Vector3(46.114288f, 3.930709f, 74.400002f);
 	myObj.transform.position = pos;
@@ -2401,12 +2408,12 @@
 	pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-	Create_a_do_trap(myObj,3,3297948);
+	Create_a_do_trap(myObj,3,1462440);
 	myObj = new GameObject("a_do_trap_45_44_00_0624");
 	pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-	Create_a_do_trap(myObj,3,3297948);
+	Create_a_do_trap(myObj,3,1462440);
 	myObj = new GameObject("a_use_trigger_99_99_00_0625");
 	pos = new Vector3(-1.000000f, -1.000000f, -1.000000f);
 	myObj.transform.position = pos;
@@ -2421,12 +2428,12 @@
 	pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-	Create_a_do_trap(myObj,3,3297948);
+	Create_a_do_trap(myObj,3,1462440);
 	myObj = new GameObject("a_do_trap_47_44_00_0628");
 	pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-	Create_a_do_trap(myObj,3,3297948);
+	Create_a_do_trap(myObj,3,1462440);
 	myObj = new GameObject("a_use_trigger_99_99_00_0629");
 	pos = new Vector3(-1.000000f, -1.000000f, -1.000000f);
 	myObj.transform.position = pos;

@@ -86,7 +86,7 @@ public class MyTools
 		pos = new Vector3(36.000000f, 4.233071f, 3.257143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("a_plant_30_02_00_1017");
 		pos = new Vector3(36.514286f, 3.628346f, 2.914286f);
 		myObj.transform.position = pos;
@@ -115,7 +115,7 @@ public class MyTools
 		pos = new Vector3(43.714287f, 3.628346f, 3.257143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_458",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_458");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_458",458, 1);
 		myObj = new GameObject("a_button_49_02_00_0817");
 		pos = new Vector3(59.314285f, 3.325984f, 2.400000f);
 		myObj.transform.position = pos;
@@ -129,22 +129,22 @@ public class MyTools
 		pos = new Vector3(8.914286f, 0.302362f, 4.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("a_bedroll_18_03_00_0823");
 		pos = new Vector3(22.114285f, 3.628346f, 4.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("a_bone_23_03_00_0609");
 		pos = new Vector3(27.771429f, 3.023622f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_23_03_00_0608");
 		pos = new Vector3(28.114285f, 3.023622f, 4.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_204",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_204");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_204",204, 1);
 		myObj = new GameObject("a_blood_stain_23_03_00_0607");
 		pos = new Vector3(27.942856f, 3.023622f, 4.457143f);
 		myObj.transform.position = pos;
@@ -153,12 +153,12 @@ public class MyTools
 		pos = new Vector3(36.857143f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_sack_33_03_00_0942");
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_128",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_128");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_128",128, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -166,7 +166,7 @@ public class MyTools
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_003",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_003");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_003",3, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -174,7 +174,7 @@ public class MyTools
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_145",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145",145, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
@@ -182,7 +182,7 @@ public class MyTools
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_315",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_315");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_315",315, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
@@ -190,7 +190,7 @@ public class MyTools
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_182",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182",182, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 3);
@@ -198,7 +198,7 @@ public class MyTools
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_177",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177",177, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
@@ -206,7 +206,7 @@ public class MyTools
 		pos = new Vector3(39.771427f, 3.628346f, 3.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_179",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_179");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_179",179, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 5);
@@ -215,46 +215,52 @@ public class MyTools
 		pos = new Vector3(42.000000f, 3.930709f, 4.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("special_tmap_obj_04_04_00_1021");
 		pos = new Vector3(4.800000f, 0.000000f, 5.314286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("a_toadstool_16_04_00_0582");
 		pos = new Vector3(19.714287f, 3.628346f, 5.314286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_185",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_185");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_185",185, 1);
 		myObj = new GameObject("a_toadstool_16_04_00_0581");
 		pos = new Vector3(20.057142f, 3.628346f, 4.971428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_185",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_185");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_185",185, 1);
 		myObj = new GameObject("a_Jux_stone_28_04_00_0587");
 		pos = new Vector3(34.457142f, 3.023622f, 5.142857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_241",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_241");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_241",241, 1);
+		SetObjectAsRuneStone(myObj);
+		
 		myObj = new GameObject("a_key_002_3");
 		pos = new Vector3(65.828568f, 3.023622f, 5.314286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_258",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_258");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_258",258, 1);
+		CreateKey(myObj, 2);
 		myObj = new GameObject("a_acid_slug_55_04_00_0227");
 		pos = new Vector3(66.514290f, 2.418898f, 5.314286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"69","Sprites/objects_069");
 		myObj = new GameObject("door_022_005");
-		pos = new Vector3(26.914284f, 3.023622f, 6.514286f);
+		pos = new Vector3(26.914284f, 3.023622f, 6.300000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_321.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_321");
+		CreateObjectGraphics(myObj,"Sprites/objects_321",true);
+		CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("an_Ort_stone_28_05_00_0586");
 		pos = new Vector3(34.285717f, 3.023622f, 6.171429f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_246",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_246");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_246",246, 1);
+		SetObjectAsRuneStone(myObj);
+		
 		myObj = new GameObject("a_blood_stain_28_05_00_0585");
 		pos = new Vector3(34.628571f, 3.023622f, 6.514286f);
 		myObj.transform.position = pos;
@@ -263,12 +269,13 @@ public class MyTools
 		pos = new Vector3(34.457142f, 3.023622f, 6.857143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("door_038_005");
-		pos = new Vector3(46.114288f, 3.023622f, 6.514286f);
+		pos = new Vector3(45.900002f, 3.023622f, 6.514286f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_327.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_327");
+		CreateObjectGraphics(myObj,"Sprites/objects_327",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_rotworm_05_06_00_0252");
 		pos = new Vector3(6.514286f, 0.302362f, 7.714286f);
 		myObj.transform.position = pos;
@@ -277,7 +284,7 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_130",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_130");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_130",130, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -285,7 +292,8 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_262",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_262");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_262",262, 1);
+		CreateKey(myObj, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -293,7 +301,7 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_312",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_312");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_312",312, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
@@ -301,8 +309,9 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_143",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_143");
-		////Container contents complete
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_143",143, 1);
+		SetObjectAsRuneBag(myObj);
+		
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
@@ -310,7 +319,9 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_233",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_233");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_233",233, 1);
+		SetObjectAsRuneStone(myObj);
+		
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 3);
@@ -318,7 +329,9 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_240",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_240");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_240",240, 1);
+		SetObjectAsRuneStone(myObj);
+		
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
@@ -326,7 +339,9 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_243",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_243");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_243",243, 1);
+		SetObjectAsRuneStone(myObj);
+		
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 5);
@@ -334,7 +349,9 @@ public class MyTools
 		pos = new Vector3(27.771429f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_250",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_250");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_250",250, 1);
+		SetObjectAsRuneStone(myObj);
+		
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 6);
@@ -347,17 +364,17 @@ public class MyTools
 		pos = new Vector3(27.942856f, 3.023622f, 8.057143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_28_06_00_0591");
 		pos = new Vector3(34.628571f, 3.023622f, 7.542857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_bone_28_06_00_0590");
 		pos = new Vector3(34.457142f, 3.023622f, 7.200000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_197",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_197");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_197",197, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_28_06_00_0589");
 		pos = new Vector3(34.114285f, 3.023622f, 7.714286f);
 		myObj.transform.position = pos;
@@ -370,7 +387,7 @@ public class MyTools
 		pos = new Vector3(38.914284f, 3.023622f, 7.714286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_200",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_200");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_200",200, 1);
 		myObj = new GameObject("a_cave_bat_45_06_00_0229");
 		pos = new Vector3(54.514286f, 2.116535f, 7.714286f);
 		myObj.transform.position = pos;
@@ -380,10 +397,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/objects_066");
 		myObj = new GameObject("door_057_006");
-		pos = new Vector3(69.085716f, 2.418898f, 7.714286f);
+		pos = new Vector3(69.085716f, 2.418898f, 7.500000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_323.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_323");
+		CreateObjectGraphics(myObj,"Sprites/objects_323",true);
+		CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("a_switch_04_07_00_0864");
 		pos = new Vector3(4.800000f, 1.209449f, 9.085714f);
 		myObj.transform.position = pos;
@@ -394,10 +412,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"90","Sprites/objects_090");
 		myObj = new GameObject("door_024_007");
-		pos = new Vector3(29.314285f, 3.023622f, 8.914286f);
+		pos = new Vector3(29.100000f, 3.023622f, 8.914286f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_blood_stain_28_07_00_0594");
 		pos = new Vector3(34.457142f, 3.023622f, 8.742857f);
 		myObj.transform.position = pos;
@@ -415,17 +434,17 @@ public class MyTools
 		pos = new Vector3(5.828571f, 0.302362f, 10.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_060",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_060");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_060",60, 1);
 		myObj = new GameObject("special_tmap_obj_06_08_00_1022");
 		pos = new Vector3(7.714286f, 0.000000f, 10.800000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("a_candle_16_08_00_0580");
 		pos = new Vector3(19.371428f, 3.628346f, 10.628572f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_146",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146",146, 1);
 		myObj = new GameObject("a_giant_rat_22_08_00_0254");
 		pos = new Vector3(27.428572f, 3.023622f, 10.457142f);
 		myObj.transform.position = pos;
@@ -434,56 +453,59 @@ public class MyTools
 		pos = new Vector3(26.914284f, 3.023622f, 10.628572f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_178",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_178");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_178",178, 1);
 		myObj = new GameObject("a_piece_of_meat_pieces_of_meat_22_08_00_0946");
 		pos = new Vector3(26.914284f, 3.023622f, 10.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176",176, 1);
 		myObj = new GameObject("a_plant_30_08_00_0954");
 		pos = new Vector3(36.857143f, 3.628346f, 10.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_207",true);
 		myObj = new GameObject("door_033_008");
-		pos = new Vector3(40.457142f, 3.023622f, 10.114285f);
+		pos = new Vector3(40.457142f, 3.023622f, 9.900000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 0, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("door_036_008");
-		pos = new Vector3(43.714287f, 3.023622f, 10.114285f);
+		pos = new Vector3(43.500000f, 3.023622f, 10.114285f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_321.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_321");
+		CreateObjectGraphics(myObj,"Sprites/objects_321",true);
+		CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_broken_mace_37_08_00_0968");
 		pos = new Vector3(45.428570f, 3.023622f, 10.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_202",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_202");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_202",202, 1);
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_38_08_00_0969");
 		pos = new Vector3(46.114288f, 3.023622f, 10.800000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",205, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_38_08_00_0970");
 		pos = new Vector3(46.457142f, 3.023622f, 9.942857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_bone_38_08_00_0973");
 		pos = new Vector3(45.942856f, 3.023622f, 10.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("a_skull_38_08_00_0974");
 		pos = new Vector3(46.114288f, 3.023622f, 10.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("door_046_008");
-		pos = new Vector3(55.714287f, 2.721260f, 10.285714f);
+		pos = new Vector3(55.500000f, 2.721260f, 10.285714f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_325.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_325");
+		CreateObjectGraphics(myObj,"Sprites/objects_325",true);
+		CreateDoor(myObj,"textures/doors/doors_09", 0, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_32_09_00_0975");
 		pos = new Vector3(39.257145f, 3.023622f, 11.657143f);
 		myObj.transform.position = pos;
@@ -492,62 +514,63 @@ public class MyTools
 		pos = new Vector3(46.457142f, 3.023622f, 10.971428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195",195, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_38_09_00_0972");
 		pos = new Vector3(46.114288f, 3.023622f, 11.314286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("special_tmap_obj_02_10_00_0884");
 		pos = new Vector3(2.400000f, 0.000000f, 12.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("door_009_010");
-		pos = new Vector3(11.485714f, 0.302362f, 13.200000f);
+		pos = new Vector3(11.700000f, 0.302362f, 13.200000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 0, 1);
+		SetRotation(myObj,-90,0,0);
 		myObj = new GameObject("a_shortsword_18_10_00_0603");
 		pos = new Vector3(21.771429f, 3.628346f, 12.171429f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_004",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_004");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_004",4, 1);
 		myObj = new GameObject("special_tmap_obj_23_10_00_0952");
 		pos = new Vector3(28.114285f, 3.023622f, 12.342857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("leather_leggings_pairs_of_leather_leggings_24_10_00_0939");
 		pos = new Vector3(29.314285f, 3.023622f, 12.000000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_035",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_035");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_035",35, 1);
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_28_10_00_0976");
 		pos = new Vector3(34.114285f, 3.023622f, 12.857142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_204",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_204");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_204",204, 1);
 		myObj = new GameObject("special_tmap_obj_29_10_00_0999");
 		pos = new Vector3(35.314285f, 3.023622f, 13.200000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_31_10_00_0978");
 		pos = new Vector3(37.714283f, 3.023622f, 12.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_skull_31_10_00_0980");
 		pos = new Vector3(38.057144f, 3.023622f, 12.857142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_sack_38_10_00_0847");
 		pos = new Vector3(46.285713f, 3.023622f, 12.685714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_128",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_128");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_128",128, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -555,7 +578,7 @@ public class MyTools
 		pos = new Vector3(46.285713f, 3.023622f, 12.685714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_146",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146",146, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -563,7 +586,7 @@ public class MyTools
 		pos = new Vector3(46.285713f, 3.023622f, 12.685714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_184");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_184",184, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
@@ -571,7 +594,7 @@ public class MyTools
 		pos = new Vector3(46.285713f, 3.023622f, 12.685714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_007",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_007");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_007",7, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
@@ -580,12 +603,12 @@ public class MyTools
 		pos = new Vector3(2.400000f, 0.000000f, 13.714286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("special_tmap_obj_02_12_00_0882");
 		pos = new Vector3(2.400000f, 0.000000f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_09_12_00_0868");
 		pos = new Vector3(11.657143f, 0.302362f, 15.257142f);
 		myObj.transform.position = pos;
@@ -614,43 +637,43 @@ public class MyTools
 		pos = new Vector3(31.371428f, 3.023622f, 14.571428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_142",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_142");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_142",142, 1);
 		////Container contents complete
 		myObj = new GameObject("a_hand_axe_26_12_00_0604");
 		pos = new Vector3(31.371428f, 3.023622f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_000",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_000");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_000",0, 1);
 		myObj = new GameObject("a_torch_torches_26_12_00_0605");
 		pos = new Vector3(31.371428f, 3.023622f, 15.257142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_145",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145",145, 1);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_28_12_00_0583");
 		pos = new Vector3(34.114285f, 2.872441f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_209",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_209");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_209",209, 1);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_28_12_00_0584");
 		pos = new Vector3(34.114285f, 2.872441f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_209",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_209");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_209",209, 1);
 		myObj = new GameObject("a_flask_of_port_flasks_of_port_30_12_00_0739");
 		pos = new Vector3(36.171429f, 1.814173f, 15.257142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_190",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_190");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_190",190, 1);
 		myObj = new GameObject("a_piece_of_meat_pieces_of_meat_30_12_00_0740");
 		pos = new Vector3(36.857143f, 1.814173f, 14.742858f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176",176, 1);
 		myObj = new GameObject("a_campfire_30_12_00_0741");
 		pos = new Vector3(36.514286f, 1.814173f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298",298, 0);
 		myObj = new GameObject("an_outcast_33_12_00_0241");
 		pos = new Vector3(40.457142f, 2.116535f, 14.914286f);
 		myObj.transform.position = pos;
@@ -659,17 +682,18 @@ public class MyTools
 		pos = new Vector3(40.114285f, 2.116535f, 15.600000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("a_bedroll_33_12_00_0737");
 		pos = new Vector3(40.114285f, 2.116535f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("door_037_012");
-		pos = new Vector3(44.914288f, 3.023622f, 14.914286f);
+		pos = new Vector3(44.700001f, 3.023622f, 14.914286f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_321.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_321");
+		CreateObjectGraphics(myObj,"Sprites/objects_321",true);
+		CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_bench_benches_15_13_00_0880");
 		pos = new Vector3(18.514286f, 3.628346f, 15.942858f);
 		myObj.transform.position = pos;
@@ -678,12 +702,12 @@ public class MyTools
 		pos = new Vector3(20.228571f, 3.628346f, 16.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_301");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_301",301, 1);
 		myObj = new GameObject("an_oil_flask_16_13_00_0601");
 		pos = new Vector3(20.057142f, 3.628346f, 15.942858f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_301");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_301",301, 1);
 		myObj = new GameObject("a_cauldron_20_13_00_0734");
 		pos = new Vector3(24.514284f, 3.023622f, 16.114286f);
 		myObj.transform.position = pos;
@@ -692,22 +716,22 @@ public class MyTools
 		pos = new Vector3(28.114285f, 3.023622f, 16.114286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_216",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216",216, 1);
 		myObj = new GameObject("a_pole_24_13_00_0611");
 		pos = new Vector3(28.799999f, 3.023622f, 16.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_216",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216",216, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_28_13_00_0904");
 		pos = new Vector3(34.285717f, 2.721260f, 16.628572f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_skull_28_13_00_0905");
 		pos = new Vector3(34.457142f, 2.721260f, 16.114286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195",195, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_28_13_00_0906");
 		pos = new Vector3(34.114285f, 2.721260f, 16.457142f);
 		myObj.transform.position = pos;
@@ -716,27 +740,27 @@ public class MyTools
 		pos = new Vector3(34.457142f, 2.721260f, 15.771428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201",201, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_28_13_00_0908");
 		pos = new Vector3(34.628571f, 2.721260f, 16.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_bone_28_13_00_0909");
 		pos = new Vector3(33.942856f, 2.721260f, 16.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("a_skull_28_13_00_0912");
 		pos = new Vector3(34.114285f, 2.721260f, 16.114286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_bedroll_33_13_00_0735");
 		pos = new Vector3(40.114285f, 2.116535f, 16.114286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("an_orb_58_13_00_0913");
 		pos = new Vector3(70.114288f, 3.930709f, 16.114286f);
 		myObj.transform.position = pos;
@@ -754,17 +778,18 @@ public class MyTools
 		pos = new Vector3(3.428571f, 0.302362f, 18.685715f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_044",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_044");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_044",44, 1);
 		myObj = new GameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722");
 		pos = new Vector3(2.914286f, 0.302362f, 18.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_041",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_041");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_041",41, 1);
 		myObj = new GameObject("door_021_015");
-		pos = new Vector3(25.200001f, 3.628346f, 18.685715f);
+		pos = new Vector3(25.200001f, 3.628346f, 18.900000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 1, 1);
+		SetRotation(myObj,-90,-90,0);
 		myObj = new GameObject("an_outcast_33_15_00_0239");
 		pos = new Vector3(40.457142f, 2.116535f, 18.857141f);
 		myObj.transform.position = pos;
@@ -777,22 +802,22 @@ public class MyTools
 		pos = new Vector3(44.571430f, 3.023622f, 20.057142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("some_writing_51_16_00_0700");
 		pos = new Vector3(62.400002f, 4.233071f, 20.400000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("a_green_potion_59_16_00_0562");
 		pos = new Vector3(71.657143f, 2.116535f, 19.885714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_188",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_188");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_188",188, 1);
 		myObj = new GameObject("a_skull_59_16_00_0676");
 		pos = new Vector3(71.828568f, 2.116535f, 19.371428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_plant_59_16_00_0677");
 		pos = new Vector3(71.657143f, 2.116535f, 20.228571f);
 		myObj.transform.position = pos;
@@ -810,30 +835,31 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"72","Sprites/objects_072");
 		myObj = new GameObject("door_022_017");
-		pos = new Vector3(27.085716f, 3.628346f, 21.428572f);
+		pos = new Vector3(27.299999f, 3.628346f, 21.428572f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,0,0);
 		myObj = new GameObject("some_writing_41_17_00_0699");
 		pos = new Vector3(49.200001f, 4.233071f, 20.400000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_57_17_00_0675");
 		pos = new Vector3(68.742859f, 2.116535f, 21.257143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210",210, 1);
 		myObj = new GameObject("a_candle_02_18_00_0658");
 		pos = new Vector3(2.400000f, 2.721260f, 22.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_146",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146",146, 1);
 		myObj = new GameObject("a_bone_37_18_00_0809");
 		pos = new Vector3(45.428570f, 3.023622f, 21.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("a_shrine_46_18_00_0879");
 		pos = new Vector3(55.714287f, 3.628346f, 22.114285f);
 		myObj.transform.position = pos;
@@ -855,10 +881,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"67","Sprites/objects_067");
 		myObj = new GameObject("door_009_019");
-		pos = new Vector3(11.314286f, 3.628346f, 23.314285f);
+		pos = new Vector3(11.314286f, 3.628346f, 23.100000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_323.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_323");
+		CreateObjectGraphics(myObj,"Sprites/objects_323",true);
+		CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("an_outcast_22_19_00_0242");
 		pos = new Vector3(26.914284f, 3.628346f, 23.314285f);
 		myObj.transform.position = pos;
@@ -867,7 +894,7 @@ public class MyTools
 		pos = new Vector3(12.685714f, 3.628346f, 25.028572f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_134",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_134");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_134",134, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -875,7 +902,7 @@ public class MyTools
 		pos = new Vector3(12.685714f, 3.628346f, 25.028572f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_162",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162",162, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -884,12 +911,12 @@ public class MyTools
 		pos = new Vector3(12.514286f, 3.628346f, 24.514284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_189",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_189");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_189",189, 1);
 		myObj = new GameObject("a_scroll_12_20_00_0642");
 		pos = new Vector3(15.428572f, 3.628346f, 24.857143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_318",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318",318, 1);
 		myObj = new GameObject("an_imp_12_20_00_0213");
 		pos = new Vector3(14.914286f, 3.930709f, 24.514284f);
 		myObj.transform.position = pos;
@@ -898,7 +925,7 @@ public class MyTools
 		pos = new Vector3(33.599998f, 3.023622f, 24.685715f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("an_outcast_33_20_00_0243");
 		pos = new Vector3(40.114285f, 3.628346f, 24.685715f);
 		myObj.transform.position = pos;
@@ -907,17 +934,18 @@ public class MyTools
 		pos = new Vector3(74.400002f, 2.116535f, 24.857143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("door_026_021");
-		pos = new Vector3(31.885715f, 3.023622f, 26.228571f);
+		pos = new Vector3(32.099998f, 3.023622f, 26.228571f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_323.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_323");
+		CreateObjectGraphics(myObj,"Sprites/objects_323",true);
+		CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
+		SetRotation(myObj,-90,0,0);
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_37_21_00_0862");
 		pos = new Vector3(45.428570f, 3.628346f, 25.714285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",205, 1);
 		myObj = new GameObject("a_giant_rat_02_22_00_0216");
 		pos = new Vector3(2.914286f, 2.721260f, 26.914284f);
 		myObj.transform.position = pos;
@@ -926,7 +954,7 @@ public class MyTools
 		pos = new Vector3(2.571429f, 2.721260f, 28.457144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_186",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_186");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_186",186, 1);
 		myObj = new GameObject("a_lurker_14_23_00_0250");
 		pos = new Vector3(17.314285f, 0.302362f, 28.114285f);
 		myObj.transform.position = pos;
@@ -939,52 +967,53 @@ public class MyTools
 		pos = new Vector3(12.514286f, 0.604724f, 29.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_293",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_293");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_293",293, 1);
 		myObj = new GameObject("a_bridge_36_24_00_1004");
 		pos = new Vector3(43.714287f, 3.552756f, 29.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_37_24_00_1007");
 		pos = new Vector3(44.914288f, 3.552756f, 29.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_38_24_00_1008");
 		pos = new Vector3(46.114288f, 3.552756f, 29.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("some_writing_46_24_00_0668");
 		pos = new Vector3(55.885712f, 4.233071f, 30.000000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("a_torch_torches_02_25_00_0540");
 		pos = new Vector3(2.571429f, 2.721260f, 30.857143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_145",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145",145, 1);
 		myObj = new GameObject("a_bridge_36_25_00_1003");
 		pos = new Vector3(43.714287f, 3.552756f, 30.514284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_37_25_00_1005");
 		pos = new Vector3(44.914288f, 3.552756f, 30.514284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_38_25_00_1006");
 		pos = new Vector3(46.114288f, 3.552756f, 30.514284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("door_022_026");
-		pos = new Vector3(26.914284f, 3.628346f, 31.542856f);
+		pos = new Vector3(26.700001f, 3.628346f, 31.542856f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_324.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_324");
+		CreateObjectGraphics(myObj,"Sprites/objects_324",true);
+		CreateDoor(myObj,"textures/doors/doors_07", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_giant_spider_29_26_00_0253");
 		pos = new Vector3(35.314285f, 3.628346f, 31.714285f);
 		myObj.transform.position = pos;
@@ -993,7 +1022,7 @@ public class MyTools
 		pos = new Vector3(36.342857f, 3.628346f, 31.371428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_180",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_180");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_180",180, 1);
 		myObj = new GameObject("a_blood_stain_38_27_00_0863");
 		pos = new Vector3(46.114288f, 3.628346f, 32.914284f);
 		myObj.transform.position = pos;
@@ -1002,12 +1031,12 @@ public class MyTools
 		pos = new Vector3(47.142857f, 3.023622f, 33.257145f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_016",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016",16, 1);
 		myObj = new GameObject("some_rubble_piles_of_rubble_28_28_00_0853");
 		pos = new Vector3(34.114285f, 3.628346f, 33.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_218",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_218");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_218",218, 0);
 		myObj = new GameObject("a_goblin_36_28_00_0225");
 		pos = new Vector3(43.714287f, 3.628346f, 34.114285f);
 		myObj.transform.position = pos;
@@ -1016,42 +1045,44 @@ public class MyTools
 		pos = new Vector3(43.371429f, 3.023622f, 36.857143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("door_005_032");
-		pos = new Vector3(6.514286f, 2.721260f, 38.914284f);
+		pos = new Vector3(6.300000f, 2.721260f, 38.914284f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_ruby_rubies_10_32_00_0653");
 		pos = new Vector3(12.857142f, 0.302362f, 38.742855f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_162",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162",162, 1);
 		myObj = new GameObject("special_tmap_obj_35_32_00_0881");
 		pos = new Vector3(42.000000f, 3.628346f, 38.914284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("a_torch_torches_03_33_00_0541");
 		pos = new Vector3(4.457143f, 3.628346f, 40.285717f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_145",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145",145, 1);
 		myObj = new GameObject("a_buckler_03_33_00_0696");
 		pos = new Vector3(3.942857f, 3.628346f, 39.771427f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_062",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_062");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_062",62, 1);
 		myObj = new GameObject("a_key_002_2");
 		pos = new Vector3(12.857142f, 0.302362f, 40.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_258",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_258");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_258",258, 1);
+		CreateKey(myObj, 2);
 		myObj = new GameObject("special_tmap_obj_16_33_00_0806");
 		pos = new Vector3(19.714287f, 2.116535f, 40.799999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("a_flesh_slug_26_33_00_0207");
 		pos = new Vector3(31.714285f, 2.116535f, 40.114285f);
 		myObj.transform.position = pos;
@@ -1060,57 +1091,59 @@ public class MyTools
 		pos = new Vector3(33.257145f, 2.116535f, 39.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",205, 1);
 		myObj = new GameObject("a_skull_27_33_00_0865");
 		pos = new Vector3(32.914284f, 2.116535f, 40.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_27_33_00_0869");
 		pos = new Vector3(33.257145f, 2.116535f, 40.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210",210, 1);
 		myObj = new GameObject("a_cudgel_53_33_00_0998");
 		pos = new Vector3(64.114288f, 3.628346f, 40.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_007",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_007");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_007",7, 1);
 		myObj = new GameObject("a_chain_cowl_55_33_00_0804");
 		pos = new Vector3(66.514290f, 3.628346f, 40.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_045",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_045");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_045",45, 1);
 		myObj = new GameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839");
 		pos = new Vector3(4.285714f, 3.628346f, 41.657143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_177",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177",177, 1);
 		myObj = new GameObject("a_sling_stone_03_34_00_0957");
 		pos = new Vector3(4.628572f, 3.628346f, 41.485714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_016",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016",16, 1);
 		myObj = new GameObject("special_tmap_obj_07_34_00_0916");
 		pos = new Vector3(8.400000f, 0.000000f, 41.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("door_015_034");
-		pos = new Vector3(18.514286f, 2.116535f, 41.657143f);
+		pos = new Vector3(18.299999f, 2.116535f, 41.657143f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_326.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_326");
+		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 4, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_34_34_00_0857");
 		pos = new Vector3(41.657143f, 3.628346f, 41.657143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210",210, 1);
 		myObj = new GameObject("door_009_035");
-		pos = new Vector3(11.314286f, 3.628346f, 42.171432f);
+		pos = new Vector3(11.100000f, 3.628346f, 42.171432f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_326.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_326");
+		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 0, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_goblin_15_35_00_0220");
 		pos = new Vector3(18.514286f, 2.116535f, 42.514286f);
 		myObj.transform.position = pos;
@@ -1119,7 +1152,8 @@ public class MyTools
 		pos = new Vector3(18.514286f, 2.116535f, 42.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_266",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266",266, 1);
+		CreateKey(myObj, 4);
 		myObj = new GameObject("a_button_16_35_00_0807");
 		pos = new Vector3(19.714287f, 2.721260f, 42.000000f);
 		myObj.transform.position = pos;
@@ -1138,12 +1172,12 @@ public class MyTools
 		pos = new Vector3(24.342857f, 1.209449f, 44.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",205, 1);
 		myObj = new GameObject("a_bridge_21_36_00_0659");
 		pos = new Vector3(25.885715f, 0.982677f, 43.714287f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_box_boxes_22_36_00_0652");
 		pos = new Vector3(26.914284f, 1.209449f, 43.714287f);
 		myObj.transform.position = pos;
@@ -1152,17 +1186,19 @@ public class MyTools
 		pos = new Vector3(45.771431f, 3.628346f, 44.228569f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("door_052_036");
-		pos = new Vector3(62.914288f, 2.418898f, 43.714287f);
+		pos = new Vector3(62.700001f, 2.418898f, 43.714287f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_323.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_323");
+		CreateObjectGraphics(myObj,"Sprites/objects_323",true);
+		CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("door_056_036");
-		pos = new Vector3(67.885712f, 2.418898f, 43.714287f);
+		pos = new Vector3(68.099998f, 2.418898f, 43.714287f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_323.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_323");
+		CreateObjectGraphics(myObj,"Sprites/objects_323",true);
+		CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
+		SetRotation(myObj,-90,0,0);
 		myObj = new GameObject("a_bench_benches_18_37_00_0781");
 		pos = new Vector3(22.114285f, 2.116535f, 44.914288f);
 		myObj.transform.position = pos;
@@ -1171,7 +1207,7 @@ public class MyTools
 		pos = new Vector3(42.171432f, 3.628346f, 44.571430f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",205, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_40_37_00_0573");
 		pos = new Vector3(48.857143f, 3.628346f, 44.742855f);
 		myObj.transform.position = pos;
@@ -1184,7 +1220,7 @@ public class MyTools
 		pos = new Vector3(49.371429f, 3.628346f, 45.257145f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201",201, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_41_37_00_0565");
 		pos = new Vector3(49.371429f, 3.628346f, 44.571430f);
 		myObj.transform.position = pos;
@@ -1193,27 +1229,27 @@ public class MyTools
 		pos = new Vector3(51.085712f, 3.552756f, 44.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_43_37_00_0898");
 		pos = new Vector3(52.285713f, 3.552756f, 44.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_44_37_00_0897");
 		pos = new Vector3(53.485714f, 3.552756f, 44.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_45_37_00_0553");
 		pos = new Vector3(54.857143f, 3.628346f, 44.742855f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_bridge_45_37_00_0894");
 		pos = new Vector3(54.685715f, 3.552756f, 44.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_blood_stain_52_37_00_0858");
 		pos = new Vector3(63.257145f, 2.418898f, 45.257145f);
 		myObj.transform.position = pos;
@@ -1230,7 +1266,7 @@ public class MyTools
 		pos = new Vector3(14.228572f, 3.628346f, 45.771431f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_146",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146",146, 1);
 		myObj = new GameObject("a_lurker_26_38_00_0223");
 		pos = new Vector3(31.714285f, 0.907087f, 46.114288f);
 		myObj.transform.position = pos;
@@ -1239,7 +1275,7 @@ public class MyTools
 		pos = new Vector3(43.714287f, 3.628346f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_219",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_219");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_219",219, 0);
 		myObj = new GameObject("a_blood_stain_40_38_00_0552");
 		pos = new Vector3(48.171432f, 3.628346f, 46.628571f);
 		myObj.transform.position = pos;
@@ -1252,22 +1288,22 @@ public class MyTools
 		pos = new Vector3(51.085712f, 3.552756f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_43_38_00_0899");
 		pos = new Vector3(52.285713f, 3.552756f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_44_38_00_0896");
 		pos = new Vector3(53.485714f, 3.552756f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_45_38_00_0895");
 		pos = new Vector3(54.685715f, 3.552756f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_goblin_54_38_00_0224");
 		pos = new Vector3(65.314285f, 3.628346f, 46.114288f);
 		myObj.transform.position = pos;
@@ -1276,42 +1312,42 @@ public class MyTools
 		pos = new Vector3(73.714287f, 3.628346f, 46.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210",210, 1);
 		myObj = new GameObject("a_fish_fish_03_39_00_0671");
 		pos = new Vector3(4.457143f, 3.325984f, 46.971432f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_182",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182",182, 1);
 		myObj = new GameObject("a_piece_of_meat_pieces_of_meat_03_39_00_0774");
 		pos = new Vector3(4.628572f, 3.325984f, 47.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176",176, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_03_39_00_0775");
 		pos = new Vector3(4.457143f, 3.325984f, 47.828568f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_skull_03_39_00_0782");
 		pos = new Vector3(3.771429f, 3.325984f, 47.657143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_campfire_03_39_00_0778");
 		pos = new Vector3(4.114285f, 3.325984f, 47.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298",298, 0);
 		myObj = new GameObject("a_rock_hammer_09_39_00_0598");
 		pos = new Vector3(11.828571f, 3.628346f, 47.657143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_296",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_296");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_296",296, 1);
 		myObj = new GameObject("a_coin_09_39_00_0654");
 		pos = new Vector3(11.142858f, 3.628346f, 47.657143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_160",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_160");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_160",160, 1);
 		myObj = new GameObject("a_plant_38_39_00_0555");
 		pos = new Vector3(45.771431f, 3.628346f, 46.971432f);
 		myObj.transform.position = pos;
@@ -1320,27 +1356,27 @@ public class MyTools
 		pos = new Vector3(46.114288f, 3.552756f, 47.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_39_39_00_0888");
 		pos = new Vector3(47.314285f, 3.552756f, 47.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_38_40_00_0892");
 		pos = new Vector3(46.114288f, 3.552756f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_39_40_00_0889");
 		pos = new Vector3(47.314285f, 3.552756f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_gold_coffer_49_40_00_0685");
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_138",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_138");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_138",138, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -1348,7 +1384,7 @@ public class MyTools
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_170",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_170");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_170",170, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -1356,7 +1392,7 @@ public class MyTools
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_032",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_032");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_032",32, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
@@ -1364,7 +1400,7 @@ public class MyTools
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_002",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_002");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_002",2, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
@@ -1372,7 +1408,7 @@ public class MyTools
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_035",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_035");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_035",35, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 3);
@@ -1380,7 +1416,7 @@ public class MyTools
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_044",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_044");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_044",44, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
@@ -1388,26 +1424,27 @@ public class MyTools
 		pos = new Vector3(59.314285f, 3.023622f, 48.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_286",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_286");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_286",286, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 5);
 		////Container contents complete
 		myObj = new GameObject("door_054_040");
-		pos = new Vector3(65.314285f, 3.628346f, 48.000000f);
+		pos = new Vector3(65.099998f, 3.628346f, 48.000000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_bridge_38_41_00_0893");
 		pos = new Vector3(46.114288f, 3.552756f, 49.714287f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_bridge_39_41_00_0890");
 		pos = new Vector3(47.314285f, 3.552756f, 49.714287f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_gravestone_50_41_00_0686");
 		pos = new Vector3(60.857143f, 3.023622f, 49.371429f);
 		myObj.transform.position = pos;
@@ -1416,27 +1453,27 @@ public class MyTools
 		pos = new Vector3(10.114285f, 3.325984f, 51.428570f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176",176, 1);
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_08_42_00_0785");
 		pos = new Vector3(10.628572f, 3.325984f, 51.085712f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",205, 1);
 		myObj = new GameObject("a_skull_08_42_00_0915");
 		pos = new Vector3(10.457142f, 3.325984f, 50.571430f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195",195, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_08_42_00_1002");
 		pos = new Vector3(9.771429f, 3.325984f, 50.742855f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_campfire_08_42_00_0767");
 		pos = new Vector3(10.114285f, 3.325984f, 50.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298",298, 0);
 		myObj = new GameObject("a_cauldron_11_42_00_0763");
 		pos = new Vector3(13.714286f, 3.628346f, 50.914288f);
 		myObj.transform.position = pos;
@@ -1462,50 +1499,51 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_222",true);
 		myObj = new GameObject("door_012_044");
-		pos = new Vector3(14.914286f, 3.628346f, 53.314285f);
+		pos = new Vector3(14.914286f, 3.628346f, 53.099998f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_324.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_324");
+		CreateObjectGraphics(myObj,"Sprites/objects_324",true);
+		CreateDoor(myObj,"textures/doors/doors_07", 53, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("some_leeches_bunches_of_leeches_26_44_00_0597");
 		pos = new Vector3(32.400002f, 2.418898f, 53.485714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_293",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_293");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_293",293, 1);
 		myObj = new GameObject("a_red_gem_26_44_00_0799");
 		pos = new Vector3(32.057144f, 2.418898f, 53.828568f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_163",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_163");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_163",163, 1);
 		myObj = new GameObject("a_bedroll_07_45_00_0640");
 		pos = new Vector3(8.914286f, 3.930709f, 55.028568f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("a_bedroll_09_45_00_0979");
 		pos = new Vector3(11.314286f, 3.930709f, 55.028568f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("a_bedroll_11_45_00_0768");
 		pos = new Vector3(13.714286f, 3.930709f, 55.028568f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("a_bone_26_45_00_0797");
 		pos = new Vector3(32.057144f, 2.418898f, 54.857143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_197",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_197");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_197",197, 1);
 		myObj = new GameObject("a_broken_sword_26_45_00_0798");
 		pos = new Vector3(31.714285f, 2.418898f, 54.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201",201, 1);
 		myObj = new GameObject("a_skull_27_45_00_0796");
 		pos = new Vector3(32.914284f, 2.418898f, 54.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_lever_56_45_00_0872");
 		pos = new Vector3(67.885712f, 4.233071f, 54.000000f);
 		myObj.transform.position = pos;
@@ -1542,12 +1580,13 @@ public class MyTools
 		pos = new Vector3(55.714287f, 0.000000f, 55.714287f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_196",196, 1);
 		myObj = new GameObject("door_055_046");
-		pos = new Vector3(66.514290f, 3.628346f, 55.714287f);
+		pos = new Vector3(66.514290f, 3.628346f, 55.500000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_323.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_323");
+		CreateObjectGraphics(myObj,"Sprites/objects_323",true);
+		CreateDoor(myObj,"textures/doors/doors_06", 2, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("a_goblin_04_47_00_0200");
 		pos = new Vector3(5.314286f, 3.628346f, 57.257145f);
 		myObj.transform.position = pos;
@@ -1556,17 +1595,17 @@ public class MyTools
 		pos = new Vector3(34.457142f, 2.418898f, 56.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195",195, 1);
 		myObj = new GameObject("a_torch_torches_36_47_00_0618");
 		pos = new Vector3(44.228569f, 2.721260f, 57.428570f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_145",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145",145, 1);
 		myObj = new GameObject("a_buckler_37_47_00_1020");
 		pos = new Vector3(44.914288f, 2.721260f, 57.599998f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_062",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_062");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_062",62, 1);
 		myObj = new GameObject("a_stalactite_37_47_00_0789");
 		pos = new Vector3(45.257145f, 4.535433f, 57.428570f);
 		myObj.transform.position = pos;
@@ -1575,27 +1614,29 @@ public class MyTools
 		pos = new Vector3(61.714287f, 0.000000f, 56.914288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_181",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_181");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_181",181, 1);
 		myObj = new GameObject("door_054_047");
-		pos = new Vector3(65.314285f, 3.628346f, 56.914288f);
+		pos = new Vector3(65.099998f, 3.628346f, 56.914288f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_327.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_327");
+		CreateObjectGraphics(myObj,"Sprites/objects_327",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("some_writing_03_48_00_0617");
 		pos = new Vector3(4.628572f, 4.233071f, 58.799999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("door_005_048");
-		pos = new Vector3(6.514286f, 3.628346f, 58.114288f);
+		pos = new Vector3(6.514286f, 3.628346f, 57.900002f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("a_bedroll_09_48_00_0756");
 		pos = new Vector3(11.314286f, 3.930709f, 57.771431f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_23_48_00_0822");
 		pos = new Vector3(28.457144f, 2.418898f, 58.457142f);
 		myObj.transform.position = pos;
@@ -1616,22 +1657,23 @@ public class MyTools
 		pos = new Vector3(69.428566f, 3.628346f, 57.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_216",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216",216, 1);
 		myObj = new GameObject("a_scroll_57_48_00_0631");
 		pos = new Vector3(68.914284f, 3.628346f, 58.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_318",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318",318, 1);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_58_48_00_0714");
 		pos = new Vector3(70.114288f, 3.628346f, 58.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210",210, 1);
 		myObj = new GameObject("door_004_049");
-		pos = new Vector3(5.314286f, 3.628346f, 59.314285f);
+		pos = new Vector3(5.100000f, 3.628346f, 59.314285f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_321.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_321");
+		CreateObjectGraphics(myObj,"Sprites/objects_321",true);
+		CreateDoor(myObj,"textures/doors/doors_03", 4, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_bench_benches_11_49_00_0769");
 		pos = new Vector3(13.714286f, 3.628346f, 59.142857f);
 		myObj.transform.position = pos;
@@ -1640,7 +1682,7 @@ public class MyTools
 		pos = new Vector3(28.114285f, 2.343307f, 59.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_stalactite_32_49_00_0795");
 		pos = new Vector3(38.914284f, 4.535433f, 59.314285f);
 		myObj.transform.position = pos;
@@ -1659,15 +1701,16 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_369",true);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0643",40,0,0,8);
 		myObj = new GameObject("door_056_049");
-		pos = new Vector3(67.714287f, 3.628346f, 59.314285f);
+		pos = new Vector3(67.714287f, 3.628346f, 59.099998f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_326.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_326");
+		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("a_chest_03_50_00_0758");
 		pos = new Vector3(3.942857f, 3.628346f, 60.342857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_349",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_349");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_349",349, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -1675,7 +1718,7 @@ public class MyTools
 		pos = new Vector3(3.942857f, 3.628346f, 60.342857f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_168",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_168");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_168",168, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -1684,7 +1727,7 @@ public class MyTools
 		pos = new Vector3(28.114285f, 2.343307f, 60.514286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_356",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_356",356, 1);
 		myObj = new GameObject("a_stalactite_35_50_00_0792");
 		pos = new Vector3(42.857143f, 4.535433f, 60.857143f);
 		myObj.transform.position = pos;
@@ -1693,7 +1736,7 @@ public class MyTools
 		pos = new Vector3(3.942857f, 3.628346f, 61.200001f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",347, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -1701,7 +1744,7 @@ public class MyTools
 		pos = new Vector3(3.942857f, 3.628346f, 61.200001f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_181",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_181");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_181",181, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -1710,7 +1753,7 @@ public class MyTools
 		pos = new Vector3(4.628572f, 3.628346f, 62.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",347, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -1718,7 +1761,7 @@ public class MyTools
 		pos = new Vector3(4.628572f, 3.628346f, 62.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176",176, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -1727,7 +1770,7 @@ public class MyTools
 		pos = new Vector3(5.485714f, 3.628346f, 62.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",347, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -1735,7 +1778,7 @@ public class MyTools
 		pos = new Vector3(5.485714f, 3.628346f, 62.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_182",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182",182, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -1745,15 +1788,17 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_193",true);
 		myObj = new GameObject("door_042_051");
-		pos = new Vector3(50.914288f, 3.628346f, 61.714287f);
+		pos = new Vector3(50.914288f, 3.628346f, 61.500000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("door_047_051");
-		pos = new Vector3(56.914288f, 3.628346f, 61.714287f);
+		pos = new Vector3(56.914288f, 3.628346f, 61.500000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_326.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_326");
+		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("a_button_48_51_00_0840");
 		pos = new Vector3(58.114288f, 4.233071f, 61.200001f);
 		myObj.transform.position = pos;
@@ -1763,16 +1808,17 @@ public class MyTools
 		pos = new Vector3(68.228569f, 3.930709f, 62.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_289",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",289, 1);
 		myObj = new GameObject("a_goblin_60_51_00_0238");
 		pos = new Vector3(72.514290f, 3.628346f, 61.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"80","Sprites/objects_080");
 		myObj = new GameObject("door_008_052");
-		pos = new Vector3(10.114285f, 3.628346f, 62.914288f);
+		pos = new Vector3(9.900000f, 3.628346f, 62.914288f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_324.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_324");
+		CreateObjectGraphics(myObj,"Sprites/objects_324",true);
+		CreateDoor(myObj,"textures/doors/doors_07", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_blood_stain_21_52_00_0829");
 		pos = new Vector3(25.885715f, 2.721260f, 63.428570f);
 		myObj.transform.position = pos;
@@ -1805,37 +1851,38 @@ public class MyTools
 		pos = new Vector3(37.028572f, 3.628346f, 64.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_176",176, 1);
 		myObj = new GameObject("leather_gloves_pairs_of_leather_gloves_37_53_00_0800");
 		pos = new Vector3(44.571430f, 3.325984f, 63.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_038",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_038");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_038",38, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_37_53_00_0802");
 		pos = new Vector3(44.914288f, 3.325984f, 64.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("an_ear_of_corn_ears_of_corn_38_53_00_0619");
 		pos = new Vector3(45.942856f, 3.325984f, 64.628571f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_180",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_180");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_180",180, 1);
 		myObj = new GameObject("door_057_053");
-		pos = new Vector3(68.914284f, 3.628346f, 64.114288f);
+		pos = new Vector3(68.699997f, 3.628346f, 64.114288f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_321.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_321");
+		CreateObjectGraphics(myObj,"Sprites/objects_321",true);
+		CreateDoor(myObj,"textures/doors/doors_03", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_broken_sword_18_54_00_0832");
 		pos = new Vector3(21.942856f, 2.721260f, 65.657143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_201",201, 1);
 		myObj = new GameObject("a_skull_18_54_00_0922");
 		pos = new Vector3(22.114285f, 2.721260f, 65.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_stalactite_19_54_00_0786");
 		pos = new Vector3(23.314285f, 4.535433f, 65.314285f);
 		myObj.transform.position = pos;
@@ -1860,12 +1907,12 @@ public class MyTools
 		pos = new Vector3(45.771431f, 3.325984f, 65.142853f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_195",195, 1);
 		myObj = new GameObject("a_spike_38_54_00_0596");
 		pos = new Vector3(45.771431f, 3.325984f, 64.971428f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_295",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_295");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_295",295, 1);
 		myObj = new GameObject("a_fountain_08_55_00_0836");
 		pos = new Vector3(10.114285f, 1.814173f, 66.514290f);
 		myObj.transform.position = pos;
@@ -1875,7 +1922,7 @@ public class MyTools
 		pos = new Vector3(10.114285f, 1.851969f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457",457, 1);
 		myObj = new GameObject("a_fountain_13_55_00_0835");
 		pos = new Vector3(16.114286f, 1.814173f, 66.514290f);
 		myObj.transform.position = pos;
@@ -1885,22 +1932,23 @@ public class MyTools
 		pos = new Vector3(16.114286f, 1.851969f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457",457, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_18_55_00_0833");
 		pos = new Vector3(22.457144f, 2.721260f, 66.171432f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_leather_vest_19_55_00_0819");
 		pos = new Vector3(23.142857f, 2.721260f, 66.857147f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_032",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_032");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_032",32, 1);
 		myObj = new GameObject("door_031_055");
-		pos = new Vector3(37.714283f, 3.628346f, 66.342857f);
+		pos = new Vector3(37.500000f, 3.628346f, 66.342857f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_320.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_320");
+		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_goblin_46_55_00_0236");
 		pos = new Vector3(55.714287f, 3.628346f, 66.514290f);
 		myObj.transform.position = pos;
@@ -1917,7 +1965,8 @@ public class MyTools
 		pos = new Vector3(68.914284f, 3.628346f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_269",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_269");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_269",269, 1);
+		CreateKey(myObj, 3);
 		myObj = new GameObject("a_bench_benches_02_56_00_0772");
 		pos = new Vector3(2.914286f, 3.628346f, 67.714287f);
 		myObj.transform.position = pos;
@@ -1930,22 +1979,22 @@ public class MyTools
 		pos = new Vector3(5.314286f, 3.628346f, 67.714287f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_318",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318",318, 1);
 		myObj = new GameObject("some_strong_thread_pieces_of_strong_thread_20_56_00_0920");
 		pos = new Vector3(24.000000f, 2.721260f, 67.885712f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_284",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284",284, 1);
 		myObj = new GameObject("some_strong_thread_pieces_of_strong_thread_20_56_00_0923");
 		pos = new Vector3(24.514284f, 2.721260f, 68.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_284",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284",284, 1);
 		myObj = new GameObject("a_pile_of_debris_piles_of_debris_38_56_00_0852");
 		pos = new Vector3(46.114288f, 3.628346f, 67.714287f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_208",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_208");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_208",208, 1);
 		myObj = new GameObject("a_goblin_45_56_00_0237");
 		pos = new Vector3(54.514286f, 3.628346f, 67.714287f);
 		myObj.transform.position = pos;
@@ -1962,27 +2011,28 @@ public class MyTools
 		pos = new Vector3(3.600000f, 3.628346f, 68.742859f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_266",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266",266, 1);
+		CreateKey(myObj, 4);
 		myObj = new GameObject("some_strong_thread_pieces_of_strong_thread_20_57_00_0919");
 		pos = new Vector3(24.685715f, 2.721260f, 68.742859f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_284",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284",284, 1);
 		myObj = new GameObject("a_pile_of_bones_piles_of_bones_29_57_00_0647");
 		pos = new Vector3(35.142857f, 3.628346f, 69.257141f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("some_rubble_piles_of_rubble_41_57_00_0854");
 		pos = new Vector3(49.714287f, 3.628346f, 68.914284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_218",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_218");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_218",218, 0);
 		myObj = new GameObject("a_fish_fish_47_57_00_0669");
 		pos = new Vector3(56.571430f, 3.325984f, 68.571434f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_182",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182",182, 1);
 		myObj = new GameObject("a_blood_stain_47_57_00_0717");
 		pos = new Vector3(57.257145f, 3.325984f, 68.742859f);
 		myObj.transform.position = pos;
@@ -1991,17 +2041,17 @@ public class MyTools
 		pos = new Vector3(57.257145f, 3.325984f, 69.257141f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",198, 1);
 		myObj = new GameObject("a_skull_47_57_00_0719");
 		pos = new Vector3(56.914288f, 3.325984f, 69.428566f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",194, 1);
 		myObj = new GameObject("a_campfire_47_57_00_0720");
 		pos = new Vector3(56.914288f, 3.325984f, 68.914284f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298",298, 0);
 		myObj = new GameObject("a_bench_benches_02_58_00_0771");
 		pos = new Vector3(2.914286f, 3.628346f, 70.285713f);
 		myObj.transform.position = pos;
@@ -2010,17 +2060,18 @@ public class MyTools
 		pos = new Vector3(4.457143f, 3.628346f, 70.457146f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_298",298, 0);
 		myObj = new GameObject("a_mandolin_03_58_00_0542");
 		pos = new Vector3(3.942857f, 3.628346f, 70.285713f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_291",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_291");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_291",291, 1);
 		myObj = new GameObject("door_035_058");
-		pos = new Vector3(42.514286f, 3.628346f, 69.599998f);
+		pos = new Vector3(42.299999f, 3.628346f, 69.599998f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_327.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_327");
+		CreateObjectGraphics(myObj,"Sprites/objects_327",true);
+		CreateDoor(myObj,"textures/doors/doors_-12851", 53, 1);
+		SetRotation(myObj,-90,-180,0);
 		myObj = new GameObject("a_goblin_51_58_00_0203");
 		pos = new Vector3(62.228569f, 3.023622f, 69.942856f);
 		myObj.transform.position = pos;
@@ -2029,12 +2080,12 @@ public class MyTools
 		pos = new Vector3(66.000000f, 4.233071f, 70.457146f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("a_sack_56_58_00_0693");
 		pos = new Vector3(67.542854f, 3.628346f, 69.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_128",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_128");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_128",128, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -2042,7 +2093,7 @@ public class MyTools
 		pos = new Vector3(67.542854f, 3.628346f, 69.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_016",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016",16, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -2050,7 +2101,7 @@ public class MyTools
 		pos = new Vector3(67.542854f, 3.628346f, 69.942856f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_016",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_016",16, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
@@ -2059,12 +2110,12 @@ public class MyTools
 		pos = new Vector3(69.085716f, 3.628346f, 70.457146f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_144",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_144");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_144",144, 1);
 		myObj = new GameObject("a_gold_coffer_57_58_00_0709");
 		pos = new Vector3(68.914284f, 3.628346f, 70.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_138",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_138");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_138",138, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -2072,7 +2123,7 @@ public class MyTools
 		pos = new Vector3(68.914284f, 3.628346f, 70.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_160",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_160");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_160",160, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -2080,7 +2131,7 @@ public class MyTools
 		pos = new Vector3(68.914284f, 3.628346f, 70.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_162",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162",162, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
@@ -2088,7 +2139,7 @@ public class MyTools
 		pos = new Vector3(68.914284f, 3.628346f, 70.114288f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_166",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_166");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_166",166, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
@@ -2102,7 +2153,7 @@ public class MyTools
 		pos = new Vector3(10.114285f, 1.851969f, 71.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457",457, 1);
 		myObj = new GameObject("a_fountain_13_59_00_0925");
 		pos = new Vector3(16.114286f, 1.814173f, 71.314285f);
 		myObj.transform.position = pos;
@@ -2112,7 +2163,7 @@ public class MyTools
 		pos = new Vector3(16.114286f, 1.851969f, 71.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457",457, 1);
 		myObj = new GameObject("some_grass_bunches_of_grass_26_59_00_0660");
 		pos = new Vector3(32.228573f, 1.209449f, 71.657143f);
 		myObj.transform.position = pos;
@@ -2138,10 +2189,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"80","Sprites/objects_080");
 		myObj = new GameObject("door_055_059");
-		pos = new Vector3(66.514290f, 3.628346f, 71.314285f);
+		pos = new Vector3(66.514290f, 3.628346f, 71.099998f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Assets/Sprites/objects_322.tga",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_322");
+		CreateObjectGraphics(myObj,"Sprites/objects_322",true);
+		CreateDoor(myObj,"textures/doors/doors_05", 3, 1);
+		SetRotation(myObj,-90,90,0);
 		myObj = new GameObject("a_flesh_slug_37_60_00_0221");
 		pos = new Vector3(44.914288f, 2.721260f, 72.514290f);
 		myObj.transform.position = pos;
@@ -2150,7 +2202,7 @@ public class MyTools
 		pos = new Vector3(68.057144f, 3.628346f, 72.685715f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",347, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -2158,7 +2210,7 @@ public class MyTools
 		pos = new Vector3(68.057144f, 3.628346f, 72.685715f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_182",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_182",182, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -2167,7 +2219,7 @@ public class MyTools
 		pos = new Vector3(69.085716f, 3.628346f, 72.000000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",347, 1);
 		////Container contents
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
@@ -2175,7 +2227,7 @@ public class MyTools
 		pos = new Vector3(69.085716f, 3.628346f, 72.000000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_177",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177",177, 1);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
@@ -2184,28 +2236,28 @@ public class MyTools
 		pos = new Vector3(68.742859f, 3.628346f, 72.685715f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",347, 1);
 		////Container contents complete
 		myObj = new GameObject("special_tmap_obj_24_61_00_0886");
 		pos = new Vector3(29.314285f, 1.209449f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("special_tmap_obj_25_61_00_0887");
 		pos = new Vector3(30.514284f, 1.209449f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("some_writing_30_61_00_0665");
 		pos = new Vector3(36.514286f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("a_fountain_30_61_00_0666");
 		pos = new Vector3(36.685715f, 1.549606f, 73.885712f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_457",457, 1);
 		myObj = new GameObject("a_fountain_30_61_00_0667");
 		pos = new Vector3(36.685715f, 1.511811f, 73.885712f);
 		myObj.transform.position = pos;
@@ -2215,17 +2267,18 @@ public class MyTools
 		pos = new Vector3(42.857143f, 3.023622f, 74.057144f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_257",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_257");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_257",257, 1);
+		CreateKey(myObj, 0);
 		myObj = new GameObject("some_writing_38_61_00_0902");
 		pos = new Vector3(46.114288f, 3.930709f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_358",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",358, 1);
 		myObj = new GameObject("special_tmap_obj_38_61_00_0903");
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_366",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",366, 1);
 		myObj = new GameObject("a_set_variable_trap_99_99_00_0004");
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
@@ -2400,12 +2453,12 @@ public class MyTools
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-		Create_a_do_trap(myObj,3,3428192);
+		Create_a_do_trap(myObj,3,1462440);
 		myObj = new GameObject("a_do_trap_45_44_00_0624");
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-		Create_a_do_trap(myObj,3,3428192);
+		Create_a_do_trap(myObj,3,1462440);
 		myObj = new GameObject("a_use_trigger_99_99_00_0625");
 		pos = new Vector3(-1.000000f, -1.000000f, -1.000000f);
 		myObj.transform.position = pos;
@@ -2420,12 +2473,12 @@ public class MyTools
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-		Create_a_do_trap(myObj,3,3428192);
+		Create_a_do_trap(myObj,3,1462440);
 		myObj = new GameObject("a_do_trap_47_44_00_0628");
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_387",true);
-		Create_a_do_trap(myObj,3,3428192);
+		Create_a_do_trap(myObj,3,1462440);
 		myObj = new GameObject("a_use_trigger_99_99_00_0629");
 		pos = new Vector3(-1.000000f, -1.000000f, -1.000000f);
 		myObj.transform.position = pos;
@@ -2575,9 +2628,10 @@ public class MyTools
 		pos = new Vector3(46.114288f, 2.418898f, 74.400002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_385",true);
-		Create_a_teleport_trap(myObj);
+		Create_a_teleport_trap(myObj);		
 
-			
+		
+
 		
 
 	}
@@ -2594,7 +2648,7 @@ public class MyTools
 	[MenuItem("MyTools/CreateAnim")]
 	static void GenerateAnimationAssets()
 	{
-		//return; //takes a long time to run..
+		return; //takes a long time to run..
 		//Anim ID: 0 - which is a_rotworm
 		//	File:c:\games\uw1\crit\CR26PAGE.N00, Palette = 0
 		CreateAnimationUW("64_combat_idle", "CR26PAGE_N00_0_0000" , "CR26PAGE_N00_0_0001" , "CR26PAGE_N00_0_0002" , "CR26PAGE_N00_0_0003" , "" , "" , "" , "" ,4);
@@ -4266,14 +4320,14 @@ public class MyTools
 		curveBinding.path = "";
 		curveBinding.propertyName = "m_Sprite";
 
-		ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[NoOfValid];
+		ObjectReferenceKeyframe[] keyFrames = new ObjectReferenceKeyframe[NoOfValid+1];
 
 		for(int i = 0; i<NoOfValid; i++)
 		{
 			keyFrames[i] = new ObjectReferenceKeyframe();
 			keyFrames[i].time = 0.2f * i;
 			Sprite currFrame = Resources.Load <Sprite> ("Sprites/critters/" + Frames[i]);
-			Debug.Log ("Sprites/Critters/" + Frames[i]);
+			//Debug.Log ("Sprites/Critters/" + Frames[i]);
 			if (currFrame == null)
 			{
 				Debug.Log ("Resource not loaded!");
@@ -4281,6 +4335,15 @@ public class MyTools
 			sprt.sprite=currFrame;
 			keyFrames[i].value=currFrame;
 		}
+		if (NoOfValid !=0)
+		{
+			keyFrames[NoOfValid] = new ObjectReferenceKeyframe();
+			keyFrames[NoOfValid].time = 0.2f * NoOfValid;
+			Sprite currFrame = Resources.Load <Sprite> ("Sprites/critters/" + Frames[NoOfValid-1]);
+			sprt.sprite=currFrame;
+			keyFrames[NoOfValid].value=currFrame; //Hold on the last frame
+		}
+
 		AnimationUtility.SetObjectReferenceCurve(animClip, curveBinding, keyFrames);
 		AssetDatabase.CreateAsset(animClip,"Assets/Resources/animation/"+  animClip.name + ".anim" );
 	}
@@ -4324,21 +4387,21 @@ public class MyTools
 	static void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
 	{	
 		//Create a sprite.
-		//GameObject SpriteController = new GameObject(myObj.name + "_sprite");
-		//SpriteController.transform.position = myObj.transform.position;
+		GameObject SpriteController = new GameObject(myObj.name + "_sprite");
+		SpriteController.transform.position = myObj.transform.position;
 
-		SpriteRenderer mysprite = myObj.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
+		SpriteRenderer mysprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
 		//mysprite.transform.position = new Vector3 (0f, 0f, 0f);
 		//Sprite image = Resources.LoadAssetAtPath <Sprite> (AssetPath);//Loads the sprite.
 		Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
 		mysprite.sprite = image;//Assigns the sprite to the object.
-		//SpriteController.transform.parent = myObj.transform;
+		SpriteController.transform.parent = myObj.transform;
 		//SpriteController.transform.localScale = new Vector3(30.0f, 30.0f, 30.0f);
 		//Create a billboard script for display
 		// Billboard ScriptController = 
 		if (BillBoard)
 		{
-			myObj.AddComponent<Billboard> ();
+			SpriteController.AddComponent<Billboard> ();
 		}
 
 	}
@@ -4389,7 +4452,7 @@ public class MyTools
 		box.isTrigger=true;
 	}
 
-	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string InventoryString)
+	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string InventoryString, int ItemId, int isMoveable)
 	{
 		//Debug.Log (myObj.name);
 		//Add a script.
@@ -4400,9 +4463,12 @@ public class MyTools
 		//box.transform.position = myObj.transform.position;
 		//box.transform.localScale = new Vector3(DimX, DimZ, DimY);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
-		box.isTrigger=true;
+		//box.isTrigger=true;
+
+
+
 		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
-		SpriteRenderer objSprite =  myObj.GetComponent<SpriteRenderer>();
+		SpriteRenderer objSprite =  myObj.GetComponentInChildren<SpriteRenderer>();
 		if (objSprite==null)
 		{
 			Debug.Log (myObj.name + " is null");
@@ -4411,6 +4477,14 @@ public class MyTools
 		objInteract.InventoryString=InventoryString;
 		objInteract.InventoryIconEquip=objSprite.sprite;
 		objInteract.InventoryIconEquipString=InventoryString;
+		objInteract.item_id=ItemId;
+
+		if (isMoveable==1)
+		{
+			Rigidbody rgd = myObj.AddComponent<Rigidbody>();
+			rgd.freezeRotation =true;
+		}
+
 	}
 
 	static void CreateTrigger(GameObject myObj,int triggerX, int triggerY, string target)
@@ -4425,7 +4499,7 @@ public class MyTools
 		trig.trigger=target;
 	}
 
-	static void CreateNPC(GameObject myObj, string NPC_Name, string EditorSprite)
+	static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite)
 	{
 		//Add the AI.
 		//My anims are backwards!!!!!
@@ -4433,32 +4507,33 @@ public class MyTools
 		//Since I have only one animation I change names
 		//NPC_Name="GreenGoblin";
 		//NPC_Name="127";
-		gronk.Idle_Front=NPC_Name + "_idle_front";
-		gronk.Idle_Rear=NPC_Name+"_idle_rear";
-		gronk.Idle_Right=NPC_Name+"_idle_right";
-		gronk.Idle_Left=NPC_Name+"_idle_left";
-		gronk.Idle_Front_Right=NPC_Name+"_idle_front_right";
-		gronk.Idle_Front_Left=NPC_Name+"_idle_front_left";
-		gronk.Idle_Rear_Right=NPC_Name+"_idle_rear_right";
-		gronk.Idle_Rear_Left=NPC_Name+"_idle_rear_left";
+		gronk.NPC_ID=NPC_ID;
+		//gronk.Idle_Front=NPC_Name + "_idle_front";
+		//gronk.Idle_Rear=NPC_Name+"_idle_rear";
+		//gronk.Idle_Right=NPC_Name+"_idle_right";
+		//gronk.Idle_Left=NPC_Name+"_idle_left";
+		//gronk.Idle_Front_Right=NPC_Name+"_idle_front_right";
+		//gronk.Idle_Front_Left=NPC_Name+"_idle_front_left";
+		//gronk.Idle_Rear_Right=NPC_Name+"_idle_rear_right";
+		//gronk.Idle_Rear_Left=NPC_Name+"_idle_rear_left";
 
-		gronk.Walking_Front=NPC_Name + "_walking_front";
-		gronk.Walking_Rear=NPC_Name+"_walking_rear";
-		gronk.Walking_Right=NPC_Name+"_walking_right";
-		gronk.Walking_Left=NPC_Name+"_walking_left";
-		gronk.Walking_Front_Right=NPC_Name+"_walking_front_right";
-		gronk.Walking_Front_Left=NPC_Name+"_walking_front_left";
-		gronk.Walking_Rear_Right=NPC_Name+"_walking_rear_right";
-		gronk.Walking_Rear_Left=NPC_Name+"_idle_rear_left";
+		//gronk.Walking_Front=NPC_Name + "_walking_front";
+		//gronk.Walking_Rear=NPC_Name+"_walking_rear";
+		//gronk.Walking_Right=NPC_Name+"_walking_right";
+		//gronk.Walking_Left=NPC_Name+"_walking_left";
+		//gronk.Walking_Front_Right=NPC_Name+"_walking_front_right";
+		//gronk.Walking_Front_Left=NPC_Name+"_walking_front_left";
+		//gronk.Walking_Rear_Right=NPC_Name+"_walking_rear_right";
+		//gronk.Walking_Rear_Left=NPC_Name+"_walking_rear_left";
 
 
-		gronk.idle_combat=NPC_Name+"_idle_combat";
-		gronk.attack_bash=NPC_Name+"_attack_bash";
-		gronk.attack_slash=NPC_Name+"_attack_slash";
-		gronk.attack_thrust=NPC_Name+"_attack_thrust";
-		gronk.attack_secondary=NPC_Name+"_attack_secondary";
-		gronk.death=NPC_Name+"_death";
-		gronk.begin_combat=NPC_Name+"_begin_combat";
+		//gronk.idle_combat=NPC_Name+"_idle_combat";
+		//gronk.attack_bash=NPC_Name+"_attack_bash";
+		//gronk.attack_slash=NPC_Name+"_attack_slash";
+		//gronk.attack_thrust=NPC_Name+"_attack_thrust";
+		//gronk.attack_secondary=NPC_Name+"_attack_secondary";
+		//gronk.death=NPC_Name+"_death";
+		//gronk.begin_combat=NPC_Name+"_begin_combat";
 		//Add the Nav mesh
 		NavMeshAgent nav = myObj.AddComponent<NavMeshAgent>();
 		nav.height=0.8f;
@@ -4483,7 +4558,7 @@ public class MyTools
 
 		SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
 		Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
-		Debug.Log (EditorSprite);
+		//Debug.Log (EditorSprite);
 		if (image ==  null)
 		{
 			Debug.Log ("No sprite renderer found.");
@@ -4688,6 +4763,55 @@ public class MyTools
 	static void AddObjectToContainer(GameObject myObj, Container ParentContainer, int index)
 	{
 		ParentContainer.AddItemToContainer(myObj.name,index);
+	}
+
+	static void SetObjectAsRuneStone(GameObject myObj)
+	{//Sets an object as being a rune stone
+		ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
+		objInt.isRuneStone=true;
+		objInt.isRuneBag=false;//Mutually exclusive
+	}
+
+	static void SetObjectAsRuneBag(GameObject myObj)
+	{//Sets an object as being a rune bag
+		ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
+		objInt.isRuneStone=false;
+		objInt.isRuneBag=true;//Mutually exclusive
+	}
+
+	static void SetRotation(GameObject myObj, float angle1, float angle2, float angle3)
+	{
+		myObj.transform.Rotate(angle1,angle2,angle3);
+	}
+
+	static void CreateDoor(GameObject myObj, string DoorTexturePath, int DoorKey, int Locked)
+	{
+		GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
+		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		ObjectInteraction doorInteract = myObj.AddComponent<ObjectInteraction>();
+		doorInteract.isDoor=true;
+		doorInteract.Link = DoorKey;
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;
+		newObj.renderer.material.mainTexture= Resources.Load <Texture2D> (DoorTexturePath);
+		newObj.GetComponent<MeshCollider>().enabled=false;
+		MeshCollider mc = myObj.AddComponent<MeshCollider>();
+		mc.isTrigger=true;
+		mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
+		mc = myObj.AddComponent<MeshCollider>();
+		mc.isTrigger=false;
+		mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
+		DoorControl dc = myObj.AddComponent<DoorControl>();
+		dc.KeyIndex=DoorKey;
+		dc.locked = (Locked==1);
+	}
+
+	static void CreateKey(GameObject myObj, int KeyId)
+	{
+		ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
+		objInt.isKey=true;
+		objInt.Owner=KeyId;
 	}
 }
 

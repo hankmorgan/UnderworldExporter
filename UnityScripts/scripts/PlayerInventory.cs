@@ -414,7 +414,7 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
-	{
+	{//How two objects affect each other. eventually I will implement a table for object combining.
 		Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
 		//returns true if they have an effect on each other.
 		if ((sObjectInHand !="") && (sObjectUsedOn !=""))
@@ -448,6 +448,21 @@ public class PlayerInventory : MonoBehaviour {
 				}
 				return true;
 			}
+
+			if ((objUseOn.GetComponent<ObjectInteraction>().isDoor) && (objInHand.GetComponent<ObjectInteraction>().isKey) )
+				{
+				//Try and use a key on a door.
+				Debug.Log ("A key is used on a door");
+				if(objUseOn.GetComponent<ObjectInteraction>().Link==objInHand.GetComponent<ObjectInteraction>().Owner)
+					{
+					Debug.Log ("A key is used to unlock a door");
+					DoorControl DC=objUseOn.GetComponent<DoorControl>();
+					DC.ToggleLock();
+					}
+				ObjectInHand="";
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.CurrObjectSprite = "";				
+				}
 			return true;
 		}
 		else

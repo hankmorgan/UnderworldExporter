@@ -15,10 +15,19 @@ public class ObjectInteraction : MonoBehaviour {
 
 	private UWCharacter playerUW;
 	private PlayerInventory pInv;
+	public bool CanBePickedUp;
+	public bool CanBeUsed;
+	public bool CanBeMoved;
 	public bool isContainer;
 	public bool isRuneBag;
 	public bool isRuneStone;
 	public bool isMap;
+	public bool isDoor;
+	public bool isKey;
+
+	//UW specific info.
+	public int Owner;	//Used for keys
+	public int Link;
 
 	// Use this for initialization
 
@@ -35,7 +44,7 @@ public class ObjectInteraction : MonoBehaviour {
 			InvMarker=GameObject.Find ("InventoryMarker");
 		}
 	}
-	
+/*
 	// Update is called once per frame
 	void Update () {
 		return;
@@ -119,4 +128,5 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 		}
 	}
+	*/
 }

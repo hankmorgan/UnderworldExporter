@@ -5,6 +5,7 @@ public class DoorControl : MonoBehaviour {
 	public bool locked;
 	public int KeyIndex;
 	private bool state;
+	public bool isPortcullis;
 	public bool DoorBusy;
 	// Use this for initialization
 	void Start () {
@@ -41,7 +42,14 @@ public class DoorControl : MonoBehaviour {
 		if(!DoorBusy)
 		{
 			Debug.Log ("Move door to open position");
-			StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
+			if (isPortcullis==false)
+			{
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
+			}
+			else
+			{
+				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,0.85f,0f),1.0f));
+			}
 			state=true;
 		}
 	}
@@ -51,7 +59,14 @@ public class DoorControl : MonoBehaviour {
 		if(!DoorBusy)
 		{
 			Debug.Log ("Move door to closed position");
-			StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
+			if (isPortcullis==false)
+			{
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * -85,1.0f));
+			}
+			else
+			{
+				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-0.85f,0f),1.0f));
+			}
 			state=false;
 		}
 	}
@@ -80,6 +95,20 @@ public class DoorControl : MonoBehaviour {
 		}
 	}
 
+	public void ToggleDoor()
+	{
+		if (state==false)//Closed
+		{
+			UnlockDoor();
+			OpenDoor();	
+		}
+		else
+		{
+			CloseDoor ();
+			LockDoor();
+		}
+	}
+
 
 	IEnumerator RotateDoor(Transform door, Vector3 turningAngle, float traveltime)
 	{
@@ -93,5 +122,23 @@ public class DoorControl : MonoBehaviour {
 		}
 		DoorBusy=false;
 	}
+	
+	IEnumerator RaiseDoor(Transform door, Vector3 TransformDir, float traveltime)
+	{
+		float rate = 1.0f/traveltime;
+		float index = 0.0f;
+		Vector3 StartPos = door.position;
+		Vector3 EndPos = StartPos + TransformDir;
+		DoorBusy=true;
+		while (index <traveltime)
+		{
+			door.position = Vector3.Lerp (StartPos,EndPos,index);
+			index += rate * Time.deltaTime;
+			yield return new WaitForSeconds(0.01f);
+		}
+		DoorBusy=false;
+		door.position = EndPos;
+	}
+
 
 }

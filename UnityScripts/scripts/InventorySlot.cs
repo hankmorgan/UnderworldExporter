@@ -132,7 +132,7 @@ public class InventorySlot : MonoBehaviour {
 			Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
 			if (currObjInt.isContainer)
-			{
+			{//Use a container
 				if (pInv.ObjectInHand == "")
 				{
 					OpenContainer (currObj, currObjInt);
@@ -141,9 +141,10 @@ public class InventorySlot : MonoBehaviour {
 				{
 					pInv.InteractTwoObjects(pInv.ObjectInHand,ObjectName,slotIndex);
 				}
+				return;
 			}
 			if (currObjInt.isRuneBag)
-			{
+			{//Use a rune bag
 				if (pInv.ObjectInHand == "")
 				{
 					OpenRuneBag();
@@ -152,10 +153,11 @@ public class InventorySlot : MonoBehaviour {
 				{
 					PickupFromSlot();
 				}
+				return;
 			}
 
 			if(currObjInt.isMap)
-			{
+			{//Use a map
 				Debug.Log ("This is a map");
 				GameObject map = GameObject.Find ("Automap");
 
@@ -176,9 +178,13 @@ public class InventorySlot : MonoBehaviour {
 						child.gameObject.SetActive(false);
 					}
 				}
-
-
+				return;
 			}
+
+			//use an object. change the cursor
+			playerUW.CursorIcon= currObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+			playerUW.CurrObjectSprite = currObj.GetComponent<ObjectInteraction>().InventoryString;
+			pInv.ObjectInHand=ObjectName;
 		}
 	}
 

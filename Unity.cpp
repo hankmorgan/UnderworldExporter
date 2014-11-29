@@ -189,10 +189,14 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 	switch (currobj.heading)
 		{//Move the object position so it can pivot properly.
 		case WEST:
+			y = (currobj.tileY*BrushSizeY + DOORWIDTH + ((BrushSizeY - DOORWIDTH) / 2)) / 100.0;
+			break;
 		case EAST:
 			y = (currobj.tileY*BrushSizeY + ((BrushSizeY - DOORWIDTH) / 2)) / 100.0;
 			break;
 		case NORTH:
+			x = (currobj.tileX*BrushSizeX + DOORWIDTH + ((BrushSizeX - DOORWIDTH) / 2)) / 100.0;
+			break;
 		case SOUTH:
 			x = (currobj.tileX*BrushSizeX + ((BrushSizeX - DOORWIDTH) / 2)) / 100.0;
 			break;
@@ -200,8 +204,13 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
-	fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\");", objectMasters[currobj.item_id].extraInfo);
-
+	if (game != SHOCK)
+		{//bit 0-6 of the lock objects link is the keyid for opening it in uw
+		// The flags control the lock state
+		fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
+			objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
+			objList[currobj.link].flags & 0x01);
+		}
 
 	if (game != SHOCK)
 		{
@@ -212,7 +221,6 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
 		{
-		//up to 6 keys can be used for a door to allow duplicate keys.
 		if (game != SHOCK)
 			{
 			//The door is locked and needs a key
@@ -281,6 +289,7 @@ void RenderUnityEntityKey(int game, float x, float y, float z, ObjectItem &curro
 	//A key's owner id matches it's lock link id.
 	RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\tCreateKey(myObj, %d);",currobj.owner);
 	return;
 	}
 
