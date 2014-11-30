@@ -28,6 +28,7 @@ block_dir *blocks;
 unsigned char *Buffer;
 long NoOfNodes; long NoOfStringBlocks;
 long address_pointer=0;
+short FirstLine=0;
 //char *str;
 
 	FILE *file = NULL;      // File pointer
@@ -56,7 +57,7 @@ long address_pointer=0;
 			hman[i].parent= Buffer[address_pointer+1];
 			hman[i].left= Buffer[address_pointer+2];
 			hman[i].right= Buffer[address_pointer+3];
-			printf("Node:%d parent=%d, left=%d, right=%d, symbol=%c\n",i,hman[i].parent, hman[i].left, hman[i].right, hman[i].symbol);
+			//fprintf(LOGFILE, "Node:%d parent=%d, left=%d, right=%d, symbol=%c\n", i, hman[i].parent, hman[i].left, hman[i].right, hman[i].symbol);
 			i++;
 			address_pointer=address_pointer+4;
 			}
@@ -82,8 +83,8 @@ long address_pointer=0;
 			address_pointer=2 + blocks[i].address + blocks[i].NoOfEntries *2;
 			//printf("It's strings begin at %d\n", address_pointer);
 			//printf("It should end at %d\n",blocks[i+1].address );
-			printf("\n+=====================================+\n");
-			printf("Block Name: %d\n", blocks[i].block_no);
+			//fprintf(LOGFILE, "\n+=====================================+\n");
+			//fprintf(LOGFILE, "Block Name: %d\n", blocks[i].block_no);
 			long strAdd;
 			int blnFnd;
 			strAdd= address_pointer;
@@ -122,10 +123,11 @@ long address_pointer=0;
 						if (blnFnd==0)
 							//{printf("\nBlock %d String %d at %d:",blocks[i].block_no, j, strAdd);	}
 							{
+							if (FirstLine != 0){ fprintf(LOGFILE, "\n"); }else{ FirstLine = 1; }
 							//printf("\n%03d=",j);	
-							printf("\n%03d=%03d=%03d=",i,blocks[i].block_no,j);
+							fprintf(LOGFILE, "%03d€%03d€%03d€", i, blocks[i].block_no, j);
 							}
-						printf("%c",hman[node].symbol);
+						fprintf(LOGFILE, "%c", hman[node].symbol);
 						blnFnd = 1;
 					}
 				} while (hman[node].symbol != '|');		
@@ -224,7 +226,7 @@ int lookupString(int BlockNo, int StringNo, char StringOut[255] )
 		{
 			while (fgets(line,255,file))
 				{
-				sscanf(line,"%d=%d=%[^\n]",&BlockNoFnd,&StringNoFnd,&stringContents);
+				sscanf(line,"%d€%d€%[^\n]",&BlockNoFnd,&StringNoFnd,&stringContents);
 				if ((BlockNo==BlockNoFnd) && (StringNo==StringNoFnd))
 					{
 					fclose(file);

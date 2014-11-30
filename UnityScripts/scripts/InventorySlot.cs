@@ -192,12 +192,13 @@ public class InventorySlot : MonoBehaviour {
 	void LookFromSlot()
 	{
 		pInv = player.GetComponent<PlayerInventory>();
-		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
-		if (ObjectName !="")
-		{
-			MessageLog.text="You see a " + ObjectName;
-		}
-			return;
+		//string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		//if (ObjectName !="")
+		//{
+		MessageLog.text="You see a " + pInv.GetObjectDescAtSlot(slotIndex);
+			//MessageLog.text="You see a " + ObjectName;
+		//}
+		//	return;
 	}
 
 	void OnClick()

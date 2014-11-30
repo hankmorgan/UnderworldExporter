@@ -29,6 +29,8 @@ public class UWCharacter : MonoBehaviour {
 	private GameObject MainCam;
 	public bool CursorInMainWindow;
 
+	public StringController StringControl;
+
 	//Combat variables
 	public int AttackCharging;
 	public float Charge;
@@ -52,13 +54,18 @@ public class UWCharacter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		StringControl=new StringController();
+		StringControl.InitStringController("c:\\uw1_strings.txt");
 		//Initialise some basic references on other objects.
 		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
+		ObjectInteraction.SC=StringControl;
+		//ObjectInteraction.SC = GameObject.Find ("StringController").GetComponent<StringController>();
 		ButtonHandler.player=this.gameObject;
 		InventorySlot.player=this.gameObject;
 		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
+
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		Screen.lockCursor=true;
@@ -195,8 +202,14 @@ public class UWCharacter : MonoBehaviour {
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,lookRange))
 			{
-				MessageLog.text = "You see " + hit.transform.name + " UWCharacter.LookMode()";
-				Debug.Log (hit.normal);
+				//MessageLog.text = "You see " + hit.transform.name + " UWCharacter.LookMode()";
+				ObjectInteraction objInt = hit.transform.GetComponent<ObjectInteraction>();
+				if (objInt != null)
+					{
+					MessageLog.text = "You see " + objInt.LookDescription() + "( " + hit.transform.name + " in UWCharacter.LookMode() )";
+					Debug.Log ("lookmode:" + hit.normal + " " + objInt.LookDescription());
+					}
+
 			}
 			else
 			{

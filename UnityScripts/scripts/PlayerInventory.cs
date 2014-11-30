@@ -317,6 +317,27 @@ public class PlayerInventory : MonoBehaviour {
 
 	}
 
+	public string GetObjectDescAtSlot(int SlotIndex)
+	{
+		string objectName=GetObjectAtSlot (SlotIndex);
+		if (objectName!="")
+		{
+			ObjectInteraction objInt = GameObject.Find (objectName).GetComponent<ObjectInteraction>();
+			if (objInt != null)
+			{
+				return objInt.LookDescription();
+			}
+			else
+			{
+				return "DESC NOT FOUND!!";
+			}
+		}
+		else
+		{
+			return "DESC NOT FOUND!!";
+		}
+	}
+
 	public string GetObjectAtSlot(int slotIndex)
 	{
 		switch (slotIndex)

@@ -12,6 +12,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
+	public static StringController SC;	//String controller reference
 
 	private UWCharacter playerUW;
 	private PlayerInventory pInv;
@@ -43,6 +44,11 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			InvMarker=GameObject.Find ("InventoryMarker");
 		}
+	}
+
+	public string LookDescription()
+	{//Returns the description of this object.
+		return SC.GetString("004",item_id.ToString ("000"));
 	}
 /*
 	// Update is called once per frame
