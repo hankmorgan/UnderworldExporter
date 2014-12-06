@@ -816,7 +816,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		{
 		for (x = 0; x <= 63; x++)
 			{
-			//RenderFBXTile(gScene,game, x, y, LevelInfo[x][y], 0, 0, 0, skipCeil);
+			RenderFBXTile(gScene,game, x, y, LevelInfo[x][y], 0, 0, 0, skipCeil);
 			}
 
 		}
@@ -857,7 +857,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 					{
 					tmp.tileType = 1;
 					}
-				//RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
+				RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
 				}
 			}
 		}
