@@ -61,7 +61,7 @@ public class DoorControl : MonoBehaviour {
 			Debug.Log ("Move door to closed position");
 			if (isPortcullis==false)
 			{
-				StartCoroutine(RotateDoor (this.transform,Vector3.up * -85,1.0f));
+				StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
 			}
 			else
 			{

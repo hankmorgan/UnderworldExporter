@@ -4,7 +4,7 @@
 #include <fstream>
 #include "main.h"
 #include "Unity.h"
-void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int billboard);
 void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
@@ -15,8 +15,8 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d, %d);", currobj.item_id, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
+	//TODO: put control of object string into config file.
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -29,7 +29,7 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 	//tileY
 	//need to add objectmaster path for generic usage
 	//need to add objectmaster desc for generic usage
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo,0);
 	switch (game)
 		{
 			case UWDEMO:
@@ -80,21 +80,21 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Runestone
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
 	fprintf(UNITY_FILE, "\n\tSetObjectAsRuneStone(myObj);\n");
 	}
 
 void RenderUnityEntityRuneBag(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Runestone
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo,1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	fprintf(UNITY_FILE, "\n\tSetObjectAsRuneBag(myObj);\n");
 	}
 
 void RenderUnityEntityPaintingUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//UW2 wall paintings.
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	
 	}
@@ -258,7 +258,7 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 
 void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 	//Lock stuff
@@ -287,7 +287,7 @@ void RenderUnityEntityKey(int game, float x, float y, float z, ObjectItem &curro
 	//Owner
 
 	//A key's owner id matches it's lock link id.
-	RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	fprintf(UNITY_FILE, "\n\tCreateKey(myObj, %d);",currobj.owner);
 	return;
@@ -301,7 +301,7 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 	//link	//To check for a lock and it's list of contents.
 	if (game != SHOCK)
 		{
-		RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
+		RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 		if (objectMasters[objList[currobj.link].item_id].type == LOCK)	//container has a lock.
@@ -338,7 +338,7 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 	else
 		{
 		//Shock container. contents are different from uw1
-		RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+		RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 
 		if (hasContents(currobj))
 			{
@@ -371,7 +371,7 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 
 void RenderUnityEntityActivator(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Something in the game world that can fire off events
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	CreateUnityScriptCall(game,x,y,z,currobj,objList,LevelInfo,"ButtonHandler");
 	return;
 	}
@@ -386,7 +386,7 @@ void RenderUnityEntityButton(int game, float x, float y, float z, ObjectItem &cu
 	//index
 	//heading
 	//Need to pass desc/path for generic handling
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler"); 
 	return;
 	}
@@ -398,7 +398,7 @@ void RenderUnityEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem 
 	switch (currobj.quality)
 		{
 			case 2: //A camera	
-				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 				//fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 				//fprintf(MAPFILE, "\"classname\" \"func_cameraview\"\n");
 				//fprintf(MAPFILE, "\"name\" \"%s_%03d_%03d\"\n", objectMasters[currobj.item_id].desc, currobj.tileX, currobj.tileY);
@@ -410,7 +410,7 @@ void RenderUnityEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem 
 				//EntityCount++;
 				break;
 			case 3:	//rising platform
-				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 				if (currobj.link !=0)
 					{
 					fprintf(UNITY_FILE, "\n\tCreateUWScriptObjects(myObj,0,0,\"%s\",\"a_do_trap_platform\",%d);", UniqueObjectName(objList[currobj.link]), currobj.flags);
@@ -425,7 +425,7 @@ void RenderUnityEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem 
 				//	
 			default:
 				//RenderEntityParticle(game, x, y, z, currobj, objList, LevelInfo, 0);
-				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 				//	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 				//	fprintf(MAPFILE, "\"classname\" \"func_static\"\n");
 				//	fprintf(MAPFILE, "\"name\" \"%s\"\n",UniqueObjectName(currobj));
@@ -448,7 +448,7 @@ void RenderUnityEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z,
 	//////PrimitiveCount = 0;
 	//////int tileCount = 0;
 	
-RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 
 	//////for (int i = 0; i <= currobj.x; i++)
 	//////	{
@@ -502,7 +502,7 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	//tileX
 	//tileY
 	//index
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 0);
 
 	if (isTrigger(objList[currobj.link]) != 0)
 		{
@@ -536,7 +536,7 @@ void RenderUnityEntityBOOK(int game, float x, float y, float z, short message, O
 				ReadableIndex = currobj.link - 0x200;
 				break;
 		}
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (message == 1)//atdm:readable_mobile_scroll01
 		{//This is a hidden email OR MESSAGE
@@ -603,9 +603,12 @@ void RenderUnityEntitySIGN(int game, float x, float y, float z, ObjectItem &curr
 	//currobj.link -200 = pointer to the readable string block in UW
 	//heading
 
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 0);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-
+		
+	fprintf(UNITY_FILE, "\n\tSetSprite(myObj, \"Sprites/tmobj/tmobj_%02d\");", 20 + (currobj.flags & 0x07));
+	setLink(currobj);
+	
 	//fprintf (MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
 	////////switch (game)
 	////////	{
@@ -636,7 +639,7 @@ void RenderUnityEntityA_TELEPORT_TRAP(int game, float x, float y, float z, Objec
 	//owner = y coord of destination
 	//need to add objectmaster path for generic usage.
 
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 	//only show if it points to this level.
@@ -654,7 +657,7 @@ void RenderUnityEntityA_TELEPORT_TRAP(int game, float x, float y, float z, Objec
 void RenderUnityEntityDecal(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//decals like wall icons etc.
 	
-RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo,0);
 RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 	switch (currobj.ObjectSubClassIndex)
@@ -699,7 +702,7 @@ RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 void RenderUnityEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 0);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (currobj.shockProperties[SCREEN_START] < 246)
 		{
@@ -727,7 +730,7 @@ void RenderUnityEntityComputerScreen(int game, float x, float y, float z, Object
 
 void RenderUnityEntityNULL_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//And a level entry as well.
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (currobj.TriggerAction == ACTION_TIMER)
 		{
@@ -760,7 +763,7 @@ void RenderUnityEntityREPULSOR(int game, float x, float y, float z, ObjectItem &
 	//tileX
 	//tileY
 
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 
 	}
 
@@ -770,7 +773,7 @@ void RenderUnityEntityCorpse(int game, float x, float y, float z, ObjectItem &cu
 	//Params.
 	//Item_id
 	//link	//To check for a lock and it's list of contents.
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	
 	if (game == SHOCK)
@@ -821,7 +824,7 @@ void RenderUnityEntityCorpse(int game, float x, float y, float z, ObjectItem &cu
 
 void RenderUnityEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 0);
 
 	//fprintf(MAPFILE, "\"xdata_contents\" \"readables/shock/words_%d\"\n", currobj.shockProperties[0]);
 
@@ -829,13 +832,13 @@ void RenderUnityEntityWords(int game, float x, float y, float z, ObjectItem &cur
 
 void RenderUnityEntityGrating(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Transparent Gratings.
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	//fprintf(MAPFILE, "\"skin\" \"shock_grating_%03d\"\n", currobj.ObjectSubClassIndex - 4);
 	}
 
 void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//UW2 bridges
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 0);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (currobj.flags < 2)
 		{
@@ -850,12 +853,10 @@ void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &
 
 void RenderUnityEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int bind)
 	{
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	}
 
-
-
-void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int billboard)
 	{//A model with no properties.
 
 	//Params 
@@ -867,8 +868,17 @@ void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, 
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
+
 	//fprintf(UNITY_FILE, "\n\tmyObj.transform.localScale.x = new Vector3(2, 2, 2);");
-	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
+	if (billboard == 1)
+		{
+		fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
+		}
+	else
+		{
+		fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",false);", currobj.item_id);
+		}
+
 	if ((currobj.DeathWatched >= 1) && (game == SHOCK))
 		{
 		//If all object of this type are destroyed then do something.
@@ -910,7 +920,7 @@ void RenderUnityTrigger(int game, float x, float y, float z, ObjectItem &currobj
 	//TriggerTargetX = currobj.quality;
 	//TriggerTargetY = currobj.owner;
 	//target = objList[nextObj].link
-	RenderUnityModel(game,-1.0,-1.0,-1.0,currobj,objList,LevelInfo);
+	RenderUnityModel(game, -1.0, -1.0, -1.0, currobj, objList, LevelInfo, 1);
 	fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
 	}
 
@@ -922,7 +932,7 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 	if (x < -1){ x = -1; }
 	if (y < -1){ y = -1; }
 	if (z < -1){ z = -1; }
-	RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 	switch (objectMasters[currobj.item_id].type)
 		{
 			case  A_DAMAGE_TRAP:
@@ -1001,7 +1011,7 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 				{return; break; }
 			case 0:	//Model
 				{
-				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 				break;
 				}
 			case 1:	//entity
@@ -1104,10 +1114,10 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							break;
 							}
 						case SCENERY:
-							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 							break;
 						default:
-							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
 							//EntityCount++;
 							break;
@@ -1235,4 +1245,14 @@ void UnityRotation(int game, int angle1, int angle2, int angle3)
 			break;
 		}
 
+	}
+
+void setLink(ObjectItem currobj)
+	{
+	fprintf(UNITY_FILE, "\n\tSetLink(myObj,%d);", currobj.link);
+	}
+
+void setSprite(unsigned char *SpriteName)
+	{
+	fprintf(UNITY_FILE, "\n\tSetSprite(myObj,%s);", SpriteName);
 	}

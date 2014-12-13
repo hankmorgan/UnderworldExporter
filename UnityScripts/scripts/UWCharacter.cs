@@ -65,6 +65,7 @@ public class UWCharacter : MonoBehaviour {
 		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
@@ -83,9 +84,10 @@ public class UWCharacter : MonoBehaviour {
 		//Rect Position = new Rect(Event.current.mousePosition.x-cursorSizeX/2,Event.current.mousePosition.y-cursorSizeY/2,cursorSizeX,cursorSizeY);
 		//GUI.DrawTexture (Position,CursorIcon);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+		return;
 		//Performs actions depending on the interaction mode.
 		if (CursorInMainWindow==false)
 			{//Stop items outside the viewport from being triggered.
@@ -119,7 +121,7 @@ public class UWCharacter : MonoBehaviour {
 
 	}
 
-	void SpellMode()
+	public void SpellMode()
 	{//Casts a spell on right click.
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		{
@@ -129,19 +131,20 @@ public class UWCharacter : MonoBehaviour {
 		}
 	}
 
-	void UseMode()
+	public void UseMode()
 	{//Uses the object on right click
-		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
-			{
+		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
+			//{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
-			if (Physics.Raycast(ray,out hit,pickupRange))
+			if (Physics.Raycast(ray,out hit,useRange))
 			{
 				ObjectInteraction objPicked;
 				objPicked=hit.transform.GetComponent<ObjectInteraction>();
 				if (objPicked!=null)
 				{
-					MessageLog.text = "You use a " + hit.transform.name;
+					ObjectInteraction.Activate (objPicked);
+					//MessageLog.text = "You use a " + hit.transform.name;
 				}
 
 				//Activates switches.
@@ -152,21 +155,22 @@ public class UWCharacter : MonoBehaviour {
 					return;
 				}
 				//Activates door.
-				DoorControl objDoor = hit.transform.GetComponent<DoorControl>();
-				if (objDoor!=null)
-				{
-					objDoor.Activate();
-					return;
-				}
+				//DoorControl objDoor = hit.transform.GetComponent<DoorControl>();
+				//if (objDoor!=null)
+				//{
+				//	objDoor.Activate();
+				//	return;
+				//}
 			}
-		}
+	//	}
 	}
 
 
-	void PickupMode()
+	public void PickupMode()
 	{//Picks up the clicked object in the view.
-		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
-			{
+		//Debug.Log (Input.GetMouseButtonDown(1))
+		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
+		//	{
 			PlayerInventory pInv = this.GetComponent<PlayerInventory>();
 			if (InvMarker==null)
 				{
@@ -191,13 +195,13 @@ public class UWCharacter : MonoBehaviour {
 					}
 				}
 			}
-		}
+		//}
 	}
 
-	void LookMode()
+	public void LookMode()
 	{//Look at the clicked item.
-		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
-		{
+		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
+		//{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,lookRange))
@@ -215,13 +219,13 @@ public class UWCharacter : MonoBehaviour {
 			{
 				MessageLog.text = "You see nothing  UWCharacter.LookMode()";
 			}
-		}
+		//}
 	}
 
-	void TalkMode()
+	public void TalkMode()
 	{//Talk to the object clicked on.
-		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
-		{
+		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
+		//{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,talkRange))
@@ -232,54 +236,69 @@ public class UWCharacter : MonoBehaviour {
 			{
 				MessageLog.text = "Talking to yourself?";
 			}
+		//}
+	}
+
+	public void MeleeBegin()
+	{//Begins to charge and attack. 
+		AttackCharging=1;
+		Charge=0;
+		Debug.Log ("attack charging begun");
+	}
+
+	public void MeleeCharging()	
+	{//While still charging increase the charge by the charge rate.
+		Charge=(Charge+(chargeRate*Time.deltaTime));
+		Debug.Log ("Charging up ");
+		if (Charge>100)
+		{
+			Charge=100;
 		}
 	}
 
-	void AttackModeMelee()
+
+	public void MeleeExecute()
+	{
+		Debug.Log ("Attack released");//with charge of " + Charge +"%");
+		AttackCharging=0;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit = new RaycastHit(); 
+		if (Physics.Raycast(ray,out hit,weaponRange))
+			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
+		{
+			if (hit.transform.Equals(this.transform))
+			{
+				Debug.Log ("you've hit yourself ? " + hit.transform.name);
+			}
+			else
+			{
+				Debug.Log ("you've hit " + hit.transform.name);
+				hit.transform.SendMessage("ApplyDamage");
+				//Destroy(hit.collider.gameObject);
+			}
+		}
+		else
+		{
+			Debug.Log ("MISS");
+		}
+	}
+
+	public void AttackModeMelee()
 	{//Code to handle melee Combat
+		return;
 		//Begins to charge and attack. 
 		//As long as the cursor is in the main window the attack will continue to build up.
 		if(Input.GetMouseButton(1) && (CursorInMainWindow==true) && (AttackCharging==0))
 		{//Begin the attack.
-			AttackCharging=1;
-			Charge=0;
-			Debug.Log ("attack charging begun");
+			MeleeBegin();
 		}
 		if ((AttackCharging==1) && (Charge<100))
 		{//While still charging increase the charge by the charge rate.
-			Charge=(Charge+(chargeRate*Time.deltaTime));
-			Debug.Log ("Charging is " + Charge);
-			if (Charge>100)
-			{
-				Charge=100;
-			}
+			MeleeCharging ();
 		}
 		if (Input.GetMouseButtonUp (1) && (CursorInMainWindow==true) && (AttackCharging==1))
 		{//On right click find out what is at the mouse cursor and execute the attack along the raycast
-			Debug.Log ("Attack released with charge of " + Charge +"%");
-			AttackCharging=0;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit = new RaycastHit(); 
-			if (Physics.Raycast(ray,out hit,weaponRange))
-				//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
-				{
-					if (hit.transform.Equals(this.transform))
-					{
-						Debug.Log ("you've hit yourself ? " + hit.transform.name);
-					}
-					else
-					{
-						Debug.Log ("you've hit " + hit.transform.name);
-						hit.transform.SendMessage("ApplyDamage");
-						//Destroy(hit.collider.gameObject);
-					}
-					
-				}
-			else
-				{
-				Debug.Log ("MISS");
-				}
-		
+			MeleeExecute ();
 		}
 
 	}

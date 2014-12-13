@@ -10,9 +10,11 @@ Functions dealing with the following
 public class WindowDetect : MonoBehaviour {
 	//private UILabel MessageLog;
 	//public int InteractionMode;
-	UWCharacter playerUW;
+	public static UWCharacter playerUW;
 	PlayerInventory pInv;
+	private bool MouseHeldDown=false;
 	//public bool ThrowArea;
+
 	// Use this for initialization
 	void Start () {
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -23,7 +25,21 @@ public class WindowDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==true))
+		{
+			if(playerUW.AttackCharging==0)
+			{//Begin the attack
+				playerUW.MeleeBegin();
+			}
+			if ((playerUW.AttackCharging==1) && (playerUW.Charge<100))
+			{//While still charging increase the charge by the charge rate.
+				playerUW.MeleeCharging ();
+			}
+		}
+		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==false) && (playerUW.AttackCharging==1))
+		{//Player has been building an attack up and has released it.
+			playerUW.MeleeExecute();
+		}
 	}
 
 	void OnHover( bool isOver )
@@ -44,6 +60,7 @@ public class WindowDetect : MonoBehaviour {
 
 	void OnClick()
 	{
+		Debug.Log (UICamera.currentTouchID);
 		/*
 		 * Cursor Click on main view area
 		 */
@@ -54,21 +71,41 @@ public class WindowDetect : MonoBehaviour {
 			return;//do nothing
 			break;
 		case 1://Talk
-			return;
+			playerUW.TalkMode();
 			break;
 		case 2://Pickup
-			ThrowObjectInHand();
+			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+				{
+				ThrowObjectInHand();
+				}
+			else
+				{
+				playerUW.PickupMode();
+				}
+
 			break;
 		case 4://look
-			return;//do nothing
+			playerUW.LookMode();//do nothing
 			break;
 		case 8:	//attack
-			return; //do nothing
+			playerUW.AttackModeMelee() ;//do nothing
 			break;
 		case 16://Use
-			UseObjectInHand ();
+			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+				{
+				UseObjectInHand ();
+				}
+			else
+				{
+				playerUW.UseMode();
+				}
 			break;
 		}
+	}
+
+void OnPress(bool isDown)
+	{
+		MouseHeldDown=isDown;
 	}
 
 void UseObjectInHand()

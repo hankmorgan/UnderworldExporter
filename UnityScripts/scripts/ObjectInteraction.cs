@@ -16,15 +16,18 @@ public class ObjectInteraction : MonoBehaviour {
 
 	private UWCharacter playerUW;
 	private PlayerInventory pInv;
-	public bool CanBePickedUp;
-	public bool CanBeUsed;
-	public bool CanBeMoved;
+	public bool CanBePickedUp;	//unimplemented
+	public bool CanBeUsed;//unimplemented
+	public bool CanBeMoved;//unimplemented
+
 	public bool isContainer;
 	public bool isRuneBag;
 	public bool isRuneStone;
 	public bool isMap;
 	public bool isDoor;
 	public bool isKey;
+
+	public int ItemType; //UWexporter item type id
 
 	//UW specific info.
 	public int Owner;	//Used for keys
@@ -49,6 +52,33 @@ public class ObjectInteraction : MonoBehaviour {
 	public string LookDescription()
 	{//Returns the description of this object.
 		return SC.GetString("004",item_id.ToString ("000"));
+	}
+
+	static public void Activate(ObjectInteraction objInt)
+	{//Code to handle using specific objects
+		switch (objInt.ItemType)
+		{
+		case 4://Door
+			{
+				DoorControl objDoor = objInt.gameObject.GetComponent<DoorControl>();
+				if (objDoor!=null)
+				{
+					objDoor.Activate();
+					return;
+				}
+				break;
+			}
+		case 10://Signs
+		{
+			objInt.MessageLog.text = SC.GetString (8,objInt.Link - 0x200);
+			break;
+		}
+		default:
+			{
+				objInt.MessageLog.text = "Default: Type=" + objInt.ItemType + ", You use a " + objInt.gameObject.name;
+				break;
+			}
+		}
 	}
 /*
 	// Update is called once per frame

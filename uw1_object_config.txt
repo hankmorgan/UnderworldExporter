@@ -356,7 +356,7 @@
 355 0 0 0 entity 25 unknown uw1_object_355.prt 0 uw1_object_355.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_355.tga
 356 0 0 0 entity 7 a_bridge models/darkmod/uw1/uw1_bridge_new.ase 0 uw1_object_356.prt 1 creak_wooden_sign01 models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_356.tga
 357 0 0 0 model 23 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 uw1_object_357.prt 0 catacombs01_z models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_357.tga
-358 0 0 0 entity 10 some_writing atdm:readable_base 0 uw1_object_358.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_358.tga
+358 0 0 0 entity 10 some_writing atdm:readable_base 0 uw1_object_358.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw1_object_358.tga
 359 0 0 0 entity 25 unknown uw1_object_359.prt 0 uw1_object_359.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_359.tga
 360 0 0 0 entity 25 unknown uw1_object_360.prt 0 uw1_object_360.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_360.tga
 361 0 0 0 entity 25 unknown uw1_object_361.prt 0 uw1_object_361.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_361.tga
