@@ -6,6 +6,7 @@ public class a_text_string_trap : MonoBehaviour {
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
+	public static StringController SC;
 	public int StringNo;	//What string we are spitting out. (num is based on level no)
 	public int StringBlock; //From what block the string is from.
 	
@@ -29,7 +30,8 @@ public class a_text_string_trap : MonoBehaviour {
 		
 		//Do what it needs to do.
 		//MessageLog.text=MessageLog.text + name + " activated";
-		MessageLog.text=MessageLog.text + name + " string returned is " + ObjectVariables.LookupString(StringBlock,StringNo);
+		MessageLog.text=MessageLog.text + SC.GetString(StringBlock,StringNo);
+		//MessageLog.text=MessageLog.text + name + " string returned is " + ObjectVariables.LookupString(StringBlock,StringNo);
 		if (triggerObj !=null )
 		{
 			triggerObj.SendMessage ("Activate");
