@@ -29,10 +29,15 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 	//tileX
 	//tileY
 	//need to add objectmaster path for generic usage
-	//need to add objectmaster desc for generic usage
+
+	//Center the object in the tile
+	x = (currobj.tileX*BrushSizeX + (BrushSizeX/2) )/100.0;
+	y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2) )/100.0;
+
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-
+	fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
+	fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.20f,1.20f,1.20f);");
 	switch (game)
 		{
 			case UWDEMO:
@@ -252,6 +257,7 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 		//The door is a portcullis and must translate up.
 		//fprintf(MAPFILE, "\"rotate\" \"0 0 0\"\n");
 		//fprintf(MAPFILE, "\"translate\" \"0 0 80\"\n");
+		fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
 		}
 
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
@@ -953,7 +959,7 @@ void RenderUnityTrigger(int game, float x, float y, float z, ObjectItem &currobj
 	//TriggerTargetX = currobj.quality;
 	//TriggerTargetY = currobj.owner;
 	//target = objList[nextObj].link
-	RenderUnityModel(game, -1.0, -1.0, -1.0, currobj, objList, LevelInfo);
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
 	}
@@ -1251,18 +1257,30 @@ float offX; float offY; float offZ;
 			}
 		}
 	if (game!=SHOCK)
-		{//Render my uw triggers and traps
+		{//Render my uw triggers and traps after the main object lists
 		for (int i = 0; i < 1024; i++)
 			{
 			if (objList[i].AlreadyRendered!=1)
 					{
 					if (isTrigger(objList[i]))
 						{
-						RenderUnityTrigger(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
+						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
+						switch (objectMasters[objList[i].item_id].type)
+							{
+							case A_MOVE_TRIGGER:
+								RenderUnityEntityA_MOVE_TRIGGER(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+								break;
+							default:
+								RenderUnityTrigger(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+								break;
+							}
 						}
 
 					if (isTrap(objList[i]))
 						{
+						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
+						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
 						RenderUnityTrap(game, offX, offY, offZ, objList[i], objList, LevelInfo);
 						}
 					}

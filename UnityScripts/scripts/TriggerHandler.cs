@@ -50,4 +50,10 @@ public class TriggerHandler : MonoBehaviour {
 			Var.state++;
 		}
 	}
+
+	void OnTriggerEnter(Collider other)
+		{
+		//Debug.Log ("TriggerEntered");
+		Activate ();
+		}
 }

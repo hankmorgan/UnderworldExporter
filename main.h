@@ -126,9 +126,9 @@ extern int CEILING_HEIGHT;
 #define ACTUALLY_EXTRACT_FILES 1
 
 //Door size defaults
-#define DOORWIDTH 60
+#define DOORWIDTH 80
 #define DOORTHICKNESS 2
-#define DOORHEIGHTUNITS 6
+#define DOORHEIGHTUNITS 7
 
 #define LOGFILENAME "UWEXPORT_LOG.txt"
 extern FILE *LOGFILE;

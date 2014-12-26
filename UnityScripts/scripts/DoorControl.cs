@@ -48,7 +48,7 @@ public class DoorControl : MonoBehaviour {
 			}
 			else
 			{
-				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,0.85f,0f),1.0f));
+				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.0f,0f),1.0f));
 			}
 			state=true;
 		}
@@ -65,7 +65,7 @@ public class DoorControl : MonoBehaviour {
 			}
 			else
 			{
-				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-0.85f,0f),1.0f));
+				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.0f,0f),1.0f));
 			}
 			state=false;
 		}
