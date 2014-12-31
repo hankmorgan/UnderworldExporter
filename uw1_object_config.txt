@@ -364,8 +364,8 @@
 363 0 0 0 entity 25 unknown uw1_object_363.prt 0 uw1_object_363.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_363.tga
 364 0 0 0 entity 25 unknown uw1_object_364.prt 0 uw1_object_364.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_364.tga
 365 0 0 0 model 23 force_field models/darkmod/decorative/hourglass.ase 0 uw1_object_365.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_365.tga
-366 0 0 0 entity 34 special_tmap_obj func_static 0 uw1_object_366.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_366.tga
-367 0 0 0 entity 35 special_tmap_obj func_static 0 uw1_object_367.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_367.tga
+366 0 0 0 entity 34 special_tmap_obj func_static 0 uw1_object_366.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw1_object_366.tga
+367 0 0 0 entity 35 special_tmap_obj func_static 0 uw1_object_367.prt 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/uw1_object_367.tga
 368 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw1_object_368.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_368.tga
 369 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw1_object_369.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_369.tga
 370 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 uw1_object_370.prt 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 guis/assets/hud/inventory_icons/uw1_object_370.tga

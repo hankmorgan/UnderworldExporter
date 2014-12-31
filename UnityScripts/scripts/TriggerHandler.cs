@@ -53,7 +53,10 @@ public class TriggerHandler : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 		{
+		if (other.name=="Gronk")
 		//Debug.Log ("TriggerEntered");
-		Activate ();
+			{
+			Activate ();
+			}
 		}
 }

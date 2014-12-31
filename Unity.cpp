@@ -4,6 +4,8 @@
 #include <fstream>
 #include "main.h"
 #include "Unity.h"
+#include "textures.h"
+
 void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderUnitySprite(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int billboard);
 void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
@@ -523,9 +525,37 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	//tileX
 	//tileY
 	//index
+	if (currobj.y == 0)
+		{
+		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2))/100.0;
+		y=y+0.02;
+		}
+	if (currobj.y == 7)
+		{
+		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2)) / 100.0;
+		y = y - 0.02;
+		}
+	if (currobj.x == 0)
+		{
+		y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2)) / 100.0;
+		x = x + 0.02;
+		}
+	if (currobj.x == 7)
+		{
+		y = (currobj.tileY*BrushSizeX + (BrushSizeY / 2)) / 100.0;
+		x = x - 0.02;
+		}
+	//x=(currobj.tileX*BrushSizeX+(BrushSizeX/2));
+	//y = (currobj.tileX*BrushSizeX + (BrushSizeX / 2));
+//	z = (LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ)/100.0;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-
+	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\");", textureMasters[currobj.texture].path);
+	//textureMasters[currobj.texture].path
+	if (game != SHOCK)
+		{
+		UnityRotation(game, 0, currobj.heading, 0);
+		}
 	if (isTrigger(objList[currobj.link]) != 0)
 		{
 		//object is a trigger
@@ -663,18 +693,27 @@ void RenderUnityEntityA_TELEPORT_TRAP(int game, float x, float y, float z, Objec
 	//owner = y coord of destination
 	//need to add objectmaster path for generic usage.
 
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	//RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-
+	
 	//only show if it points to this level.
+
 	if (currobj.zpos == 0)
 		{
+		fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj,(float)%f,(float)%f,(float)%f,false);"
+			, (currobj.quality * BrushSizeX + (BrushSizeX / 2))/100.0, (currobj.owner * BrushSizeY + (BrushSizeY / 2))/100.0, (LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ)/100.0);
+		
 		////fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 		////fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		////fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		////fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.quality * BrushSizeX + (BrushSizeX / 2), currobj.owner * BrushSizeY + (BrushSizeY / 2), LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ);
 		////fprintf(MAPFILE, "\n}");
+		}
+	else
+		{
+		fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj,(float)%f,(float)%f,(float)%f,true);"
+			, (currobj.quality * BrushSizeX + (BrushSizeX / 2)) / 100.0, (currobj.owner * BrushSizeY + (BrushSizeY / 2)) / 100.0, (LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ) / 100.0);
 		}
 	return;
 	}
@@ -980,7 +1019,8 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				fprintf(UNITY_FILE,"\n\tCreate_a_damage_trap(myObj);");
 				break;
 			case  A_TELEPORT_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj);");
+				//fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj);");
+				RenderUnityEntityA_TELEPORT_TRAP(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			case  A_ARROW_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_arrow_trap(myObj);");
@@ -1010,7 +1050,7 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				fprintf(UNITY_FILE, "\n\tCreate_a_spelltrap(myObj);");
 				break;
 			case  A_CREATE_OBJECT_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj);");
+				fprintf(UNITY_FILE, "\n\tCreate_a_create_object_trap(myObj);");
 				break;
 			case  A_DOOR_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_door_trap(myObj,%d);",currobj.quality);
