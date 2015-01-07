@@ -12,19 +12,23 @@ public class a_damage_trap : MonoBehaviour {
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		Var=GetComponent<ObjectVariables>();
+		triggerObj=GameObject.Find (Var.trigger);
 	}
 	
 	// Update is called once per frame
-	//void Update () {
-	
-	//}
+	void Update () {
+		if ((triggerObj == null) && (Var.trigger != "") && (Var.trigger != null))
+		{//For when objects are added at run time.
+			triggerObj=GameObject.Find (Var.trigger);
+		}
+	}
 	
 	public void Activate()
 	{
 		//Do what it needs to do.
-		MessageLog.text=MessageLog.text + name + " activated\n";
-		if (Var.trigger !="")
-		{//Trigger the next object in it's chain
+		Debug.Log(name + " activated." + Var.trigger) ;
+		if (triggerObj !=null )
+		{
 			triggerObj.SendMessage ("Activate");
 		}
 	}

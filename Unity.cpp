@@ -1016,7 +1016,15 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 	switch (objectMasters[currobj.item_id].type)
 		{
 			case  A_DAMAGE_TRAP:
-				fprintf(UNITY_FILE,"\n\tCreate_a_damage_trap(myObj);");
+				if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+					{
+					fprintf(UNITY_FILE, "\n\tCreate_a_damage_trap(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
+					}
+				else
+					{
+					fprintf(UNITY_FILE, "\n\tCreate_a_damage_trap(myObj);");
+					}
+
 				break;
 			case  A_TELEPORT_TRAP:
 				//fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj);");

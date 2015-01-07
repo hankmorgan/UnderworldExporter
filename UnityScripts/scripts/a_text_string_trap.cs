@@ -19,7 +19,7 @@ public class a_text_string_trap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((triggerObj = null) && (Var.trigger != "") && (Var.trigger != null))
+		if ((triggerObj == null) && (Var.trigger != "") && (Var.trigger != null))
 			{//For when objects are added at run time.
 				triggerObj=GameObject.Find (Var.trigger);
 			}
@@ -30,7 +30,7 @@ public class a_text_string_trap : MonoBehaviour {
 		
 		//Do what it needs to do.
 		//MessageLog.text=MessageLog.text + name + " activated";
-		MessageLog.text=MessageLog.text + SC.GetString(StringBlock,StringNo);
+		MessageLog.text= SC.GetString(StringBlock,StringNo);
 		//MessageLog.text=MessageLog.text + name + " string returned is " + ObjectVariables.LookupString(StringBlock,StringNo);
 		if (triggerObj !=null )
 		{

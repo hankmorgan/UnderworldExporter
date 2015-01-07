@@ -45,8 +45,6 @@ public class MyTools
 
 		
 		
-		
-		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
@@ -2542,7 +2540,7 @@ public class MyTools
 		pos = new Vector3(1.200000f, 4.535433f, 12.000000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_384",false);
-		Create_a_damage_trap(myObj);
+		Create_a_damage_trap(myObj,"a_text_string_trap_99_99_02_0745");
 		myObj = new GameObject("a_move_trigger_01_09_02_0829");
 		pos = new Vector3(1.800000f, 3.628346f, 11.400000f);
 		myObj.transform.position = pos;
@@ -2821,7 +2819,7 @@ public class MyTools
 		pos = new Vector3(7.200000f, 0.604724f, 6.171429f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_397",false);
-		Create_a_set_variable_trap(myObj);
+		Create_a_set_variable_trap(myObj);		
 
 		
 
@@ -4798,7 +4796,16 @@ public class MyTools
 	{
 		//Add some gamevars
 		//ObjectVariables objVar =
-			myObj.AddComponent<ObjectVariables>();
+		myObj.AddComponent<ObjectVariables>();
+		myObj.AddComponent<a_damage_trap>();
+	}
+
+	static void Create_a_damage_trap(GameObject myObj, string Trigger)
+	{
+		//Add some gamevars
+		//ObjectVariables objVar =
+		ObjectVariables myvars= myObj.AddComponent<ObjectVariables>();
+		myvars.trigger=Trigger;
 		myObj.AddComponent<a_damage_trap>();
 	}
 
@@ -4829,7 +4836,7 @@ public class MyTools
 	{
 		//Add some gamevars
 		//ObjectVariables objVar = 
-			myObj.AddComponent<ObjectVariables>();
+		myObj.AddComponent<ObjectVariables>();
 		switch (trapType)
 		{
 		case 0x02://Camera

@@ -16,7 +16,7 @@ public class a_do_trap_platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if ((triggerObj = null) && (Var.trigger != ""))
+	if ((triggerObj == null) && (Var.trigger != ""))
 		{//For when objects are added at run time.
 			triggerObj=GameObject.Find (Var.trigger);
 		}

@@ -38,7 +38,8 @@ public class TriggerHandler : MonoBehaviour {
 		targetvars.triggerX=triggerX;
 		targetvars.triggerY=triggerY;
 		targetvars.state=Var.state;
-		MessageLog.text=MessageLog.text + name +"_activated";
+		//MessageLog.text=MessageLog.text + name +"_activated";
+		Debug.Log ("TriggerHandler:" + name);
 		triggerObj.SendMessage ("Activate");
 		
 		if (Var.state == 8)

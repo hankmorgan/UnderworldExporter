@@ -14,7 +14,7 @@ public class a_move_trigger : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 	}
 	
-	// Update is called once per frame
+	// Update is callede once per frame
 	//void Update () {
 	
 	//}
@@ -22,7 +22,7 @@ public class a_move_trigger : MonoBehaviour {
 	public void Activate()
 	{
 		//Do what it needs to do.
-		MessageLog.text=MessageLog.text + name + " activated\n";
+		Debug.Log (name + " activated");
 		if (Var.trigger !="")
 		{//Trigger the next object in it's chain
 			triggerObj.SendMessage ("Activate");
