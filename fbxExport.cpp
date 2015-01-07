@@ -82,6 +82,7 @@ float CalcCeilOffset(int game, int face, tile &t);
 void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor);
 void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
+void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void CreateDoorModel(FbxScene*& gScene);
 
 //
@@ -886,6 +887,11 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		RenderFBXBridges(gScene, game, LevelInfo, objList);
 		}
 
+	if (game != SHOCK)
+		{
+		RenderTerrainChangeTiles(gScene,game,LevelInfo,objList);
+		}
+
 //	CreateDoorModel(gScene);
 	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 1, false);
 	}
@@ -1391,10 +1397,10 @@ lMesh->InitControlPoints(24);
 FbxVector4* lControlPoints = lMesh->GetControlPoints();
 //These directions are wrongly labeled???!!!
 //Top
-lControlPoints[0] = lControlPoint0;
-lControlPoints[1] = lControlPoint1;
-lControlPoints[2] = lControlPoint2;
-lControlPoints[3] = lControlPoint3;
+lControlPoints[0] = lControlPoint3;//0,1,2,3
+lControlPoints[1] = lControlPoint0;
+lControlPoints[2] = lControlPoint1;
+lControlPoints[3] = lControlPoint2;
 
 //was Bottom is probably east.
 //lControlPoints[4] = lControlPoint1;
@@ -1970,7 +1976,7 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	FbxVector4* lControlPoints = lMesh->GetControlPoints();
 	//These directions are wrongly labeled???!!!
 	//Top
-	lControlPoints[0] = lControlPoint0;
+	lControlPoints[0] = lControlPoint0;//0,1,2,3
 	lControlPoints[1] = lControlPoint1;
 	lControlPoints[2] = lControlPoint2;
 	lControlPoints[3] = lControlPoint3;
@@ -3937,10 +3943,23 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 
 	//These directions are wrongly labeled???!!!
 	//Top
-	lControlPoints[0] = lControlPoint0;
-	lControlPoints[1] = lControlPoint1;
-	lControlPoints[2] = lControlPoint2;
-	lControlPoints[3] = lControlPoint3;
+	switch (t.tileType)
+		{
+			case TILE_SLOPE_N:
+		    case TILE_SLOPE_S:
+				lControlPoints[0] = lControlPoint2;
+				lControlPoints[1] = lControlPoint3;
+				lControlPoints[2] = lControlPoint0;
+				lControlPoints[3] = lControlPoint1;
+				break;
+			default:
+				lControlPoints[0] = lControlPoint0;
+				lControlPoints[1] = lControlPoint1;
+				lControlPoints[2] = lControlPoint2;
+				lControlPoints[3] = lControlPoint3;
+				break;
+		}
+
 
 	//was Bottom is probably east.
 	//lControlPoints[4] = lControlPoint1;
@@ -4798,6 +4817,68 @@ void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 			}
 		}
 	}
+
+
+void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600])
+	{
+
+	for (int k = 0; k < 1024; k++)
+		{
+		if (objectMasters[objList[k].item_id].type == A_CHANGE_TERRAIN_TRAP)
+			{
+
+			for (int i = 0; i <= objList[k].x; i++)
+				{
+				for (int j = 0; j <= objList[k].y; j++)
+					{
+					//Then render a func static for how it ends up.
+
+					tile t;	//temporary tile for rendering.
+					t.tileX = objList[k].tileX+64+i;
+					t.tileY = objList[k].tileY+j;
+					t.tileType = objList[k].quality & 0x01;
+					t.Render = 1;
+					t.floorHeight = ((objList[k].zpos >> 3) >> 2) * 8;	//heights in uw are shifted
+					t.floorHeight = (objList[k].zpos >> 2);	//heights in uw are shifted
+					t.ceilingHeight = 0;
+					if (game != UW2)
+						{
+						t.floorTexture = (objList[k].quality >> 1) + 210;
+						}
+					else
+						{
+						t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+						}
+					t.shockCeilingTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].shockCeilingTexture;
+					t.wallTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].wallTexture;
+					t.West = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].West;
+					t.East = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].East;
+					t.North = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].North;
+					t.South = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].South;
+					t.isWater = 0;
+					t.DimY = 1;
+					t.DimX = 1;
+					t.hasElevator = 0;
+					t.BullFrog = 0;
+					//RenderFBXTile(gScene,game,64+t.tileX,60+t.tileY,t,0,0,0,1);
+
+					char TileName[80] = "";
+					sprintf_s(TileName, 80, "%s_%02d_%02d\0", UniqueObjectName(objList[k]), i, j);
+
+					if (t.tileType == TILE_SOLID)
+						{
+						RenderFBXCuboid(gScene, objList[k].tileX + i, objList[k].tileY + j, t, t.isWater, -2, CEILING_HEIGHT + 1, TileName);
+						}
+					else
+						{
+						RenderFBXCuboid(gScene, objList[k].tileX + i, objList[k].tileY + j, t, t.isWater, -2, t.floorHeight, TileName);
+						}
+					}
+				}
+			}
+		}
+	}
+
 
 void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 	{
