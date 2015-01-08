@@ -1321,7 +1321,7 @@ if (t.Render == 1)
 	if (t.isWater == Water)
 		{
 		char TileName[80]="";
-		sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Wall", x, y);
+		sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
 		RenderFBXCuboid(gScene, x, y, t, Water, -2, CEILING_HEIGHT + 1, TileName);
 		PrimCount++;
 		}

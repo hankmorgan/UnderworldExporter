@@ -187,6 +187,7 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 	//tileX
 	//tileY
 	//Link for a lock
+int hasLock=0;
 
 	//float BrushX = BrushSizeX;
 	//float BrushY = BrushSizeY;
@@ -220,9 +221,13 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 	if (game != SHOCK)
 		{//bit 0-6 of the lock objects link is the keyid for opening it in uw
 		// The flags control the lock state
+		if (currobj.link != 0)
+			{
+			hasLock=1;
+			}
 		fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
 			objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
-			objList[currobj.link].flags & 0x01);
+			hasLock);
 		}
 
 	if (game != SHOCK)
@@ -1052,7 +1057,14 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				fprintf(UNITY_FILE, "\n\tCreate_a_pit_trap(myObj);");
 				break;
 			case  A_CHANGE_TERRAIN_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj);");
+				if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+					{
+					fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d,\"%s\");", currobj.tileX, currobj.tileY, currobj.x, currobj.y, UniqueObjectName(objList[currobj.link]));
+					}
+				else
+					{
+					fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d);", currobj.tileX, currobj.tileY, currobj.x, currobj.y);
+					}
 				break;
 			case  A_SPELLTRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_spelltrap(myObj);");
@@ -1085,7 +1097,15 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				fprintf(UNITY_FILE, "\n\tCreate_a_combination_trap(myObj);");
 				break;
 			case  A_TEXT_STRING_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d);", 9, 64 * (LevelNo)+currobj.owner);//block no and string no
+				if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+					{
+					fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d,\"%s\");", 9, 64 * (LevelNo)+currobj.owner, UniqueObjectName(objList[currobj.link]));//block no and string no
+					}
+				else
+					{
+					fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d);", 9, 64 * (LevelNo)+currobj.owner);//block no and string no
+					}
+					
 				break;
 		}
 	}
@@ -1299,6 +1319,7 @@ float offX; float offY; float offZ;
 							}
 						objList[nextObj].AlreadyRendered = 1;//Prevent possible duplication of0 objects due to system shock supporting objects that take occupy multiple tiles
 						}
+					fprintf(UNITY_FILE, "\n");
 					nextObj = objList[nextObj].next;//In linked list.
 					}
 				}
@@ -1323,6 +1344,7 @@ float offX; float offY; float offZ;
 								RenderUnityTrigger(game, offX, offY, offZ, objList[i], objList, LevelInfo);
 								break;
 							}
+						fprintf(UNITY_FILE, "\n");
 						}
 
 					if (isTrap(objList[i]))
@@ -1330,6 +1352,7 @@ float offX; float offY; float offZ;
 						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
 						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
 						RenderUnityTrap(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+						fprintf(UNITY_FILE, "\n");
 						}
 					}
 				}

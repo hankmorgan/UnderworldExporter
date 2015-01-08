@@ -17,7 +17,7 @@ public class ObjectVariables : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		level=GameObject.Find("uw1_lvl_00");
+		level=GameObject.Find("fbx_output");
 	}
 	
 	// Update is called once per frame
@@ -34,6 +34,7 @@ public class ObjectVariables : MonoBehaviour {
 	{//May need to update tile finding to support multiple levels!
 		string tileName = GetTileName (x,y,surface);
 		Debug.Log("Looking for tile " + tileName);
+		//Debug.Log ("level is " + level.name);
 		return level.transform.FindChild (tileName).gameObject;
 	}
 
@@ -83,6 +84,12 @@ public class ObjectVariables : MonoBehaviour {
 		return tileName;
 	}
 
+
+	public GameObject FindTileByName(string tileName)
+	{//Finds the tile in the level.
+		Debug.Log("Looking for tile " + tileName);
+		return level.transform.FindChild (tileName).gameObject;
+	}
 	public static string LookupString(int BlockNo, int StringNo)
 	{//Finds the string
 		return BlockNo + "_" + StringNo;

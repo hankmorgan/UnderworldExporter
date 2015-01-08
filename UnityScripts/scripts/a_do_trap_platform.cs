@@ -16,15 +16,15 @@ public class a_do_trap_platform : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if ((triggerObj == null) && (Var.trigger != ""))
-		{//For when objects are added at run time.
-			triggerObj=GameObject.Find (Var.trigger);
-		}
+
 	}
 
 	public void Activate()
 	{
-
+		if ((triggerObj == null) && (Var.trigger != ""))
+		{//For when objects are added at run time.
+			triggerObj=GameObject.Find (Var.trigger);
+		}
 		GameObject platformTile= Var.FindTile (Var.triggerX,Var.triggerY,1);
 		//Find the object that called me
 
