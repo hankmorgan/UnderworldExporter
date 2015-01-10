@@ -646,10 +646,13 @@ switch (game)
 					{
 						objList[x].texture = texture_map[objList[x].flags-2+48];	//Sets the texture for bridge
 					}
-					
 				}
-				
 			}
+
+			if (objectMasters[objList[x].item_id].type == BUTTON)
+				{
+				objList[x].texture=objList[x].flags;
+				}
 			//objList[x].special = objList[x].owner;
 			
 			objList[x].link  = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) >> 6 & 0x3FF) ; //bits 6-15

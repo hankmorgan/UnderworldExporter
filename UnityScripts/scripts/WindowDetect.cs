@@ -60,11 +60,11 @@ public class WindowDetect : MonoBehaviour {
 
 	void OnClick()
 	{
-		Debug.Log (UICamera.currentTouchID);
+		//Debug.Log (UICamera.currentTouchID);
 		/*
 		 * Cursor Click on main view area
 		 */
-		Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
+		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
 		switch (UWCharacter.InteractionMode)
 		{
 		case 0://Options mode

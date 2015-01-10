@@ -121,6 +121,7 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		if (hasChanged==true)
 		{
+			Debug.Log (objName + " changed");
 			if (objName =="")
 			{
 				Label.spriteName="object_blank";
@@ -137,11 +138,13 @@ public class PlayerInventory : MonoBehaviour {
 				}
 				else
 				{
+					Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
 					Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
 				}
 			}
 			else
 			{
+				Debug.Log ("Displaying blank");
 				Label.spriteName="object_blank";
 			}
 		}

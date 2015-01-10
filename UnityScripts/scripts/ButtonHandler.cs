@@ -14,6 +14,10 @@ public class ButtonHandler : MonoBehaviour {
 	private ObjectVariables Var;
 	private UWCharacter playerUW;
 
+	public int item_id;
+
+	public static StringController SC;	//String controller reference
+
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -55,6 +59,11 @@ public class ButtonHandler : MonoBehaviour {
 	void OnMouseExit()
 	{
 		//MessageLog.text=name +"exited";
+	}
+
+	public string LookDescription()
+	{//Returns the description of this object.
+		return SC.GetString("004",item_id.ToString ("000"));
 	}
 
 	public void Activate()

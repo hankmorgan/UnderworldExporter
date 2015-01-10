@@ -657,6 +657,14 @@ void PrintUWObjects(ObjectItem objList[1600])
 			fprintf(LOGFILE,"\n\tNPC Attitude : %d ", objList[x].npc_attitude);
 			}
 
+		if ((objectMasters[objList[x].item_id].type == TMAP_SOLID) 
+			|| (objectMasters[objList[x].item_id].type == TMAP_CLIP)
+			|| (objectMasters[objList[x].item_id].type == BRIDGE)
+			|| (objectMasters[objList[x].item_id].type == BUTTON)
+			)
+			{
+			fprintf(LOGFILE, "\n\tTexture: %d", objList[x].texture);
+			}
 		}
 	//}
 	}

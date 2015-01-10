@@ -20,7 +20,16 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d);", objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d);"
+		, objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
+	}
+
+void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
+	{
+	//TODO: put control of object string into config file.
+	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d, \"%s\");"
+		, objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable, ChildName);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -120,7 +129,7 @@ void CreateUnityScriptCall(int game, float x, float y, float z, ObjectItem &curr
 	//target = objList[nextObj].link
 	if (currobj.link !=0)
 		{//Need to update max state on this
-		fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]),currobj.quality,currobj.owner,currobj.flags,8);
+		fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]),currobj.quality,currobj.owner,currobj.flags,8, currobj.item_id);
 		}
 	}
 
@@ -233,10 +242,10 @@ int hasLock=0;
 
 	if (game != SHOCK)
 		{
-		UnityRotation(game, -90,currobj.heading,0);
+		UnityRotation(game, -90,currobj.heading-180,0);
 		}
 	
-//	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+//	RenderUnityObjectInteraction(game, x, y, z, currobj-, objList, LevelInfo);
 
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
 		{
@@ -397,6 +406,7 @@ void RenderUnityEntityActivator(int game, float x, float y, float z, ObjectItem 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	CreateUnityScriptCall(game,x,y,z,currobj,objList,LevelInfo,"ButtonHandler");
+	//RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
 	return;
 	}
 
@@ -534,22 +544,22 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	if (currobj.y == 0)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2))/100.0;
-		y=y+0.02;
+		y=y+0.01;
 		}
 	if (currobj.y == 7)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2)) / 100.0;
-		y = y - 0.02;
+		y = y - 0.01;
 		}
 	if (currobj.x == 0)
 		{
 		y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2)) / 100.0;
-		x = x + 0.02;
+		x = x + 0.01;
 		}
 	if (currobj.x == 7)
 		{
 		y = (currobj.tileY*BrushSizeX + (BrushSizeY / 2)) / 100.0;
-		x = x - 0.02;
+		x = x - 0.01;
 		}
 	//x=(currobj.tileX*BrushSizeX+(BrushSizeX/2));
 	//y = (currobj.tileX*BrushSizeX + (BrushSizeX / 2));
@@ -664,7 +674,7 @@ void RenderUnityEntitySIGN(int game, float x, float y, float z, ObjectItem &curr
 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo,"Activator");
 	UnityRotation(game, 0, currobj.heading, 0);
 	fprintf(UNITY_FILE, "\n\tSetSprite(myObj, \"Sprites/tmobj/tmobj_%02d\");", 20 + (currobj.flags & 0x07));
 	setLink(currobj);
@@ -1381,7 +1391,7 @@ void UnityRotation(int game, int angle1, int angle2, int angle3)
 		case SHOCK:
 			break;
 		default:
-			fprintf(UNITY_FILE, "\n\tSetRotation(myObj,%d,%d,%d);",angle1,angle2-180,angle3);
+			fprintf(UNITY_FILE, "\n\tSetRotation(myObj,%d,%d,%d);",angle1,angle2,angle3);//-180
 			break;
 		}
 

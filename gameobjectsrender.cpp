@@ -36,8 +36,8 @@ void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x, int y)
 {
 	int ResolutionXY = 7;	// A tile has a 7x7 grid for object positioning.
-	int ResolutionZ = 127;	//UW has 127 posible z positions for an object in tile.
-	if (game == SHOCK){ ResolutionXY = 255; ResolutionZ = 255; }	//Shock has more "z" in it.
+	int ResolutionZ = 128;	//UW has 127 posible z positions for an object in tile.
+	if (game == SHOCK){ ResolutionXY = 256; ResolutionZ = 256; }	//Shock has more "z" in it.
 
 
 	*offX = 0;  *offY = 0; *offZ = 0;

@@ -54,6 +54,24 @@ public class ObjectInteraction : MonoBehaviour {
 		return SC.GetString("004",item_id.ToString ("000"));
 	}
 
+	public string LookDescription(ObjectInteraction objInt)
+	{//Returns the description of this object.
+		switch (objInt.ItemType)
+		{
+		case 10://signs
+			{
+				return objInt.MessageLog.text = SC.GetString (8,objInt.Link - 0x200);
+				break;
+			}
+		default:
+			{
+				return SC.GetString("004",item_id.ToString ("000"));
+			}
+
+		}
+
+	}
+
 	static public void Activate(ObjectInteraction objInt)
 	{//Code to handle using specific objects
 		switch (objInt.ItemType)
