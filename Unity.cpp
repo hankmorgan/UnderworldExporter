@@ -1023,14 +1023,14 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 	switch (objectMasters[currobj.item_id].type)
 		{
 			case  A_DAMAGE_TRAP:
-				if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
-					{
-					fprintf(UNITY_FILE, "\n\tCreate_a_damage_trap(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
-					}
-				else
-					{
+				//if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+				//	{
+				//	fprintf(UNITY_FILE, "\n\tCreate_a_damage_trap(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
+				//	}
+				//else
+				//	{
 					fprintf(UNITY_FILE, "\n\tCreate_a_damage_trap(myObj);");
-					}
+				//	}
 
 				break;
 			case  A_TELEPORT_TRAP:
@@ -1059,14 +1059,14 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				fprintf(UNITY_FILE, "\n\tCreate_a_pit_trap(myObj);");
 				break;
 			case  A_CHANGE_TERRAIN_TRAP:
-				if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
-					{
-					fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d,\"%s\");", currobj.tileX, currobj.tileY, currobj.x, currobj.y, UniqueObjectName(objList[currobj.link]));
-					}
-				else
-					{
+				//if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+				//	{
+				//	fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d,\"%s\");", currobj.tileX, currobj.tileY, currobj.x, currobj.y, UniqueObjectName(objList[currobj.link]));
+				//	}
+				//else
+				//	{
 					fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d);", currobj.tileX, currobj.tileY, currobj.x, currobj.y);
-					}
+				//	}
 				break;
 			case  A_SPELLTRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_spelltrap(myObj);");
@@ -1099,16 +1099,27 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				fprintf(UNITY_FILE, "\n\tCreate_a_combination_trap(myObj);");
 				break;
 			case  A_TEXT_STRING_TRAP:
-				if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
-					{
-					fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d,\"%s\");", 9, 64 * (LevelNo)+currobj.owner, UniqueObjectName(objList[currobj.link]));//block no and string no
-					}
-				else
-					{
+				//if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+				//	{
+				//	fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d,\"%s\");", 9, 64 * (LevelNo)+currobj.owner, UniqueObjectName(objList[currobj.link]));//block no and string no
+				//	}
+				//else
+				//	{
 					fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d);", 9, 64 * (LevelNo)+currobj.owner);//block no and string no
-					}
-					
+				//	}
 				break;
+		}
+	
+	if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
+		{
+		switch (objectMasters[objList[currobj.link].item_id].type)
+			{
+				case A_DELETE_OBJECT_TRAP:	//Need to stop on this due to infinite loops if the trigger object is being deleted.
+				case LOCK://A lock uses it's link to set the key needed. stop here.
+					break;
+				default:
+					fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
+			}
 		}
 	}
 
