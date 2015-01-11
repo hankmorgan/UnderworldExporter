@@ -121,7 +121,6 @@ public class PlayerInventory : MonoBehaviour {
 	{
 		if (hasChanged==true)
 		{
-			Debug.Log (objName + " changed");
 			if (objName =="")
 			{
 				Label.spriteName="object_blank";

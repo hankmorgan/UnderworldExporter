@@ -17,7 +17,7 @@ public class ObjectVariables : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		level=GameObject.Find("fbx_output");
+		level=GameObject.Find("uw1_lvl_00");
 	}
 	
 	// Update is called once per frame

@@ -61,6 +61,52 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 
 }
 
+void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x, int y, short WallAdjust)
+	{
+	int ResolutionXY = 7;	// A tile has a 7x7 grid for object positioning.
+	int ResolutionZ = 128;	//UW has 127 posible z positions for an object in tile.
+	if (game == SHOCK){ ResolutionXY = 256; ResolutionZ = 256; }	//Shock has more "z" in it.
+
+	*offX = 0;  *offY = 0; *offZ = 0;
+
+	float BrushX = BrushSizeX;
+	float BrushY = BrushSizeY;
+	float BrushZ = BrushSizeZ;
+
+	*offX = (x*BrushX) + ((objList[nextObj].x) * (BrushX / ResolutionXY));
+	*offY = (y*BrushY) + ((objList[nextObj].y) * (BrushY / ResolutionXY));
+	//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
+	float zpos = objList[nextObj].zpos;
+	float ceil = CEILING_HEIGHT;
+	*offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
+	if (WallAdjust == 1)
+		{//Adjust the object x,y to avoid clipping into walls.
+		switch (game)
+			{
+			case SHOCK:
+				break;
+			default:
+				if (objList[nextObj].x == 0)
+					{
+					*offX=*offX+2.0f;
+					}
+				if (objList[nextObj].x == 7)
+					{
+					*offX = *offX - 2.0f;
+					}
+				if (objList[nextObj].y == 0)
+					{
+					*offY = *offY + 2.0f;
+					}
+				if (objList[nextObj].y == 7)
+					{
+					*offY = *offY - 2.0f;
+					}
+				break;
+			}
+		}
+	}
+
 void createScriptCall(ObjectItem &currobj, float x, float y, float z)
 {//Entity for running a script when triggered.
 	fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);

@@ -5,6 +5,7 @@
 #include "gameobjects.h"
 
 void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x, int y);
+void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj, int x, int y, short WallAdjust);
 void EntityRotation(int heading);
 void EntityRotationSHOCK(int heading);
 

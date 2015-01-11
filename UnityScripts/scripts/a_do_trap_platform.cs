@@ -28,14 +28,14 @@ public class a_do_trap_platform : MonoBehaviour {
 		GameObject platformTile= Var.FindTile (Var.triggerX,Var.triggerY,1);
 		//Find the object that called me
 
-		MessageLog.text=MessageLog.text + name + "\n activated @ x=" + Var.triggerX + " y=" + Var.triggerY + "\n";
-		if (Var.state==8)
+		//MessageLog.text=MessageLog.text + name + "\n activated @ x=" + Var.triggerX + " y=" + Var.triggerY + "\n";
+		if (Var.state==7)
 		{
 			//Move the tile to the bottom
-			MessageLog.text=MessageLog.text + platformTile.name + " reset " + Var.state;
+			//MessageLog.text=MessageLog.text + platformTile.name + " reset " + Var.state;
 			//platformTile.transform.Translate(Vector3.up())
 			//Debug.Log("PreMoveTileStart");
-			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.15f*8f,0f) ,0.5f));
+			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,-0.3f*7f,0f) ,0.5f));
 			//Debug.Log("PostMoveTileStart");
 			//platformTile.transform.position = new Vector3(0f,0f,1.0f);
 			Var.state = 1;
@@ -43,11 +43,11 @@ public class a_do_trap_platform : MonoBehaviour {
 		else
 		{
 			//move the tile up one step.
-			MessageLog.text=MessageLog.text  + platformTile.name +  " up " + Var.state;
+			//MessageLog.text=MessageLog.text  + platformTile.name +  " up " + Var.state;
 			//platformTile.transform.position = new Vector3(0f,0f,1.0f);
 			//platformTile.transform.position.z += 1.22;
 			//Debug.Log("PreMoveTileStart");
-			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.15f,0f) ,0.5f));
+			StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,0.3f,0f) ,0.5f));
 			//Debug.Log("PostMoveTileStart");
 			//MoveTile (platformTile.transform, Vector3(0.0f,0.0f,1.2f), 1.0f);
 			//triggeringObject.state++;

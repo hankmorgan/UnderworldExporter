@@ -45,19 +45,21 @@ public class MyTools
 
 		
 		
+		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
 		Container ParentContainer;
 		myObj = new GameObject("special_tmap_obj_31_01_00_0535");
-		pos = new Vector3(37.799999f, 3.600000f, 1.210000f);
+		pos = new Vector3(37.799999f, 3.600000f, 1.220000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_039");
 		SetRotation(myObj,0,180,0);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0559",0,37,0,8,366);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0559",0,37,0,7,366);
 		
 		myObj = new GameObject("some_grass_bunches_of_grass_31_01_00_0982");
-		pos = new Vector3(38.057144f, 3.600000f, 2.400000f);
+		pos = new Vector3(38.057144f, 3.600000f, 2.380000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
@@ -67,11 +69,12 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
 		myObj = new GameObject("special_tmap_obj_32_01_00_0545");
-		pos = new Vector3(39.000000f, 3.600000f, 1.210000f);
+		pos = new Vector3(39.000000f, 3.600000f, 1.220000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_038");
 		SetRotation(myObj,0,180,0);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0574",0,46,0,8,366);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0574",0,46,0,7,366);
 		
 		myObj = new GameObject("some_grass_bunches_of_grass_33_01_00_0961");
 		pos = new Vector3(40.285717f, 3.600000f, 2.228571f);
@@ -95,7 +98,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
 		
 		myObj = new GameObject("some_writing_30_02_00_0963");
-		pos = new Vector3(36.000000f, 4.200000f, 3.257143f);
+		pos = new Vector3(36.020000f, 4.200000f, 3.257143f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -140,10 +143,12 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_458",69,458, 1);
 		
 		myObj = new GameObject("a_button_49_02_00_0817");
-		pos = new Vector3(59.314285f, 3.300000f, 2.400000f);
+		pos = new Vector3(59.314285f, 3.300000f, 2.420000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0816",40,0,0,8,377);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0816",40,0,0,7,377);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
 		myObj = new GameObject("a_rotworm_58_02_00_0222");
 		pos = new Vector3(70.114288f, 1.500000f, 2.914286f);
@@ -244,7 +249,7 @@ public class MyTools
 		////Container contents complete
 		
 		myObj = new GameObject("some_writing_35_03_00_0929");
-		pos = new Vector3(42.000000f, 3.900000f, 4.114285f);
+		pos = new Vector3(42.020000f, 3.900000f, 4.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -253,8 +258,9 @@ public class MyTools
 		SetLink(myObj,580);
 		
 		myObj = new GameObject("special_tmap_obj_04_04_00_1021");
-		pos = new Vector3(4.810000f, 0.000000f, 5.400000f);
+		pos = new Vector3(4.820000f, 0.000000f, 5.400000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_170");
 		SetRotation(myObj,0,270,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -425,7 +431,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",23,198, 1);
 		
 		myObj = new GameObject("a_bone_28_06_00_0590");
-		pos = new Vector3(34.457142f, 3.000000f, 7.200000f);
+		pos = new Vector3(34.457142f, 3.000000f, 7.220000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_197",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_197",23,197, 1);
@@ -464,10 +470,12 @@ public class MyTools
 		SetRotation(myObj,-90,90,0);
 		
 		myObj = new GameObject("a_switch_04_07_00_0864");
-		pos = new Vector3(4.800000f, 1.200000f, 9.085714f);
+		pos = new Vector3(4.820000f, 1.200000f, 9.085714f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_372",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0691",40,0,0,8,372);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_372",false);
+		SetRotation(myObj,0,270,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0691",40,0,0,7,372);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0004", "Sprites/tmflat/tmflat_0012");
 		
 		
 		myObj = new GameObject("an_outcast_17_07_00_0240");
@@ -493,10 +501,12 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
 		myObj = new GameObject("a_pull_chain_32_07_00_0994");
-		pos = new Vector3(39.599998f, 3.600000f, 9.085714f);
+		pos = new Vector3(39.580002f, 3.600000f, 9.085714f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_375",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0992",40,0,0,8,375);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_375",false);
+		SetRotation(myObj,0,90,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0992",40,0,0,7,375);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0007", "Sprites/tmflat/tmflat_0015");
 		
 		myObj = new GameObject("a_wooden_shield_04_08_00_0808");
 		pos = new Vector3(5.828571f, 0.300000f, 10.457142f);
@@ -505,8 +515,9 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_060",2,60, 1);
 		
 		myObj = new GameObject("special_tmap_obj_06_08_00_1022");
-		pos = new Vector3(7.800000f, 0.000000f, 10.790000f);
+		pos = new Vector3(7.800000f, 0.000000f, 10.780000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_170");
 		SetRotation(myObj,0,0,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -560,7 +571,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_202",23,202, 1);
 		
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_38_08_00_0969");
-		pos = new Vector3(46.114288f, 3.000000f, 10.800000f);
+		pos = new Vector3(46.114288f, 3.000000f, 10.780000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_205",23,205, 1);
@@ -608,14 +619,15 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",23,198, 1);
 		
 		myObj = new GameObject("special_tmap_obj_02_10_00_0884");
-		pos = new Vector3(2.410000f, 0.000000f, 12.600000f);
+		pos = new Vector3(2.420000f, 0.000000f, 12.600000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_071");
 		SetRotation(myObj,0,270,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
 		
 		myObj = new GameObject("door_009_010");
-		pos = new Vector3(11.800000f, 0.300000f, 13.200000f);
+		pos = new Vector3(11.800000f, 0.300000f, 13.180000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
 		CreateDoor(myObj,"textures/doors/doors_00", 0, 1);
@@ -630,12 +642,13 @@ public class MyTools
 		myObj = new GameObject("special_tmap_obj_23_10_00_0952");
 		pos = new Vector3(28.114285f, 3.000000f, 12.342857f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_173");
 		SetRotation(myObj,0,315,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
 		
 		myObj = new GameObject("leather_leggings_pairs_of_leather_leggings_24_10_00_0939");
-		pos = new Vector3(29.314285f, 3.000000f, 12.000000f);
+		pos = new Vector3(29.314285f, 3.000000f, 12.020000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_035",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_035",2,35, 1);
@@ -647,8 +660,9 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_204",23,204, 1);
 		
 		myObj = new GameObject("special_tmap_obj_29_10_00_0999");
-		pos = new Vector3(35.400002f, 3.000000f, 13.190000f);
+		pos = new Vector3(35.400002f, 3.000000f, 13.180000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_023");
 		SetRotation(myObj,0,0,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -700,15 +714,17 @@ public class MyTools
 		////Container contents complete
 		
 		myObj = new GameObject("special_tmap_obj_02_11_00_0883");
-		pos = new Vector3(2.410000f, 0.000000f, 13.800000f);
+		pos = new Vector3(2.420000f, 0.000000f, 13.800000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_071");
 		SetRotation(myObj,0,270,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
 		
 		myObj = new GameObject("special_tmap_obj_02_12_00_0882");
-		pos = new Vector3(2.410000f, 0.000000f, 15.000000f);
+		pos = new Vector3(2.420000f, 0.000000f, 15.000000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_071");
 		SetRotation(myObj,0,270,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -798,7 +814,7 @@ public class MyTools
 		CreateNPC(myObj,"90","Sprites/objects_090");
 		
 		myObj = new GameObject("a_bedroll_33_12_00_0736");
-		pos = new Vector3(40.114285f, 2.100000f, 15.600000f);
+		pos = new Vector3(40.114285f, 2.100000f, 15.580000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_289",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_289",16,289, 1);
@@ -845,7 +861,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216",16,216, 1);
 		
 		myObj = new GameObject("a_pole_24_13_00_0611");
-		pos = new Vector3(28.799999f, 3.000000f, 16.457142f);
+		pos = new Vector3(28.820000f, 3.000000f, 16.457142f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_216",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_216",16,216, 1);
@@ -902,7 +918,7 @@ public class MyTools
 		pos = new Vector3(70.114288f, 3.900000f, 16.114286f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_279",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_look_trigger_99_99_00_0910",40,0,0,8,279);
+		CreateUWActivators(myObj,"ButtonHandler","a_look_trigger_99_99_00_0910",40,0,0,7,279);
 		
 		myObj = new GameObject("a_acid_slug_59_14_00_0226");
 		pos = new Vector3(71.314285f, 3.300000f, 17.314285f);
@@ -927,7 +943,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_041",2,41, 1);
 		
 		myObj = new GameObject("door_021_015");
-		pos = new Vector3(25.200001f, 3.600000f, 19.000000f);
+		pos = new Vector3(25.219999f, 3.600000f, 19.000000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
 		CreateDoor(myObj,"textures/doors/doors_00", 1, 1);
@@ -950,7 +966,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_198",23,198, 1);
 		
 		myObj = new GameObject("some_writing_51_16_00_0700");
-		pos = new Vector3(62.400002f, 4.200000f, 20.400000f);
+		pos = new Vector3(62.380001f, 4.200000f, 20.379999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -1001,7 +1017,7 @@ public class MyTools
 		
 		
 		myObj = new GameObject("some_writing_41_17_00_0699");
-		pos = new Vector3(49.200001f, 4.200000f, 20.400000f);
+		pos = new Vector3(49.220001f, 4.200000f, 20.420000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -1016,7 +1032,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_210",23,210, 1);
 		
 		myObj = new GameObject("a_candle_02_18_00_0658");
-		pos = new Vector3(2.400000f, 2.700000f, 22.114285f);
+		pos = new Vector3(2.420000f, 2.700000f, 22.114285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_146",9,146, 1);
@@ -1100,8 +1116,9 @@ public class MyTools
 		CreateNPC(myObj,"75","Sprites/objects_075");
 		
 		myObj = new GameObject("special_tmap_obj_27_20_00_0987");
-		pos = new Vector3(33.590000f, 3.000000f, 24.600000f);
+		pos = new Vector3(33.580002f, 3.000000f, 24.600000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_137");
 		SetRotation(myObj,0,90,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -1116,8 +1133,9 @@ public class MyTools
 		
 		
 		myObj = new GameObject("special_tmap_obj_61_20_00_0885");
-		pos = new Vector3(74.389999f, 2.100000f, 24.600000f);
+		pos = new Vector3(74.379997f, 2.100000f, 24.600000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_071");
 		SetRotation(myObj,0,90,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -1175,7 +1193,7 @@ public class MyTools
 		myObj.transform.position = pos;
 		
 		myObj = new GameObject("some_writing_46_24_00_0668");
-		pos = new Vector3(55.885712f, 4.200000f, 30.000000f);
+		pos = new Vector3(55.885712f, 4.200000f, 29.980000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -1263,8 +1281,9 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_162",18,162, 1);
 		
 		myObj = new GameObject("special_tmap_obj_35_32_00_0881");
-		pos = new Vector3(42.009998f, 3.600000f, 39.000000f);
+		pos = new Vector3(42.020000f, 3.600000f, 39.000000f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_142");
 		SetRotation(myObj,0,270,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -1293,8 +1312,9 @@ public class MyTools
 		
 		
 		myObj = new GameObject("special_tmap_obj_16_33_00_0806");
-		pos = new Vector3(19.799999f, 2.100000f, 40.790001f);
+		pos = new Vector3(19.799999f, 2.100000f, 40.779999f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_006");
 		SetRotation(myObj,0,0,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -1351,8 +1371,9 @@ public class MyTools
 		
 		
 		myObj = new GameObject("special_tmap_obj_07_34_00_0916");
-		pos = new Vector3(8.410000f, 0.000000f, 41.400002f);
+		pos = new Vector3(8.420000f, 0.000000f, 41.400002f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_137");
 		SetRotation(myObj,0,270,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -1392,10 +1413,12 @@ public class MyTools
 		CreateKey(myObj, 4);
 		
 		myObj = new GameObject("a_button_16_35_00_0807");
-		pos = new Vector3(19.714287f, 2.700000f, 42.000000f);
+		pos = new Vector3(19.714287f, 2.700000f, 42.020000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0637",40,0,0,8,377);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0637",40,0,0,7,377);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
 		myObj = new GameObject("a_skeleton_54_35_00_0204");
 		pos = new Vector3(65.314285f, 2.400000f, 42.514286f);
@@ -1404,10 +1427,12 @@ public class MyTools
 		
 		
 		myObj = new GameObject("a_lever_09_36_00_0744");
-		pos = new Vector3(12.000000f, 4.200000f, 44.057144f);
+		pos = new Vector3(11.980000f, 4.200000f, 44.057144f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0742",40,0,0,8,373);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
+		SetRotation(myObj,0,90,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0742",40,0,0,7,373);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
 		
 		myObj = new GameObject("a_piece_of_wood_pieces_of_wood_20_36_00_0649");
 		pos = new Vector3(24.342857f, 1.200000f, 44.057144f);
@@ -1689,7 +1714,7 @@ public class MyTools
 		////Container contents complete
 		
 		myObj = new GameObject("door_054_040");
-		pos = new Vector3(65.000000f, 3.600000f, 48.000000f);
+		pos = new Vector3(65.000000f, 3.600000f, 48.020000f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_320",true);
 		CreateDoor(myObj,"textures/doors/doors_00", 53, 0);
@@ -1776,7 +1801,7 @@ public class MyTools
 		SetRotation(myObj,-90,90,0);
 		
 		myObj = new GameObject("some_leeches_bunches_of_leeches_26_44_00_0597");
-		pos = new Vector3(32.400002f, 2.400000f, 53.485714f);
+		pos = new Vector3(32.380001f, 2.400000f, 53.485714f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_293",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_293",16,293, 1);
@@ -1828,28 +1853,36 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_194",23,194, 1);
 		
 		myObj = new GameObject("a_lever_56_45_00_0872");
-		pos = new Vector3(67.885712f, 4.200000f, 54.000000f);
+		pos = new Vector3(67.885712f, 4.200000f, 54.020000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0626",63,0,1,8,353);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0626",63,0,1,7,353);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj = new GameObject("a_lever_57_45_00_0871");
-		pos = new Vector3(68.914284f, 4.200000f, 54.000000f);
+		pos = new Vector3(68.914284f, 4.200000f, 54.020000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0629",63,0,2,8,353);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0629",63,0,2,7,353);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj = new GameObject("a_lever_58_45_00_0870");
-		pos = new Vector3(70.114288f, 4.200000f, 54.000000f);
+		pos = new Vector3(70.114288f, 4.200000f, 54.020000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0625",63,0,3,8,353);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0625",63,0,3,7,353);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj = new GameObject("a_lever_59_45_00_0623");
-		pos = new Vector3(71.314285f, 4.200000f, 54.000000f);
+		pos = new Vector3(71.314285f, 4.200000f, 54.020000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0621",63,0,4,8,353);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0621",63,0,4,7,353);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj = new GameObject("a_giant_spider_27_46_00_0247");
 		pos = new Vector3(32.914284f, 2.400000f, 55.714287f);
@@ -1897,7 +1930,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_145",9,145, 1);
 		
 		myObj = new GameObject("a_buckler_37_47_00_1020");
-		pos = new Vector3(44.914288f, 2.700000f, 57.599998f);
+		pos = new Vector3(44.914288f, 2.700000f, 57.580002f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_062",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_062",2,62, 1);
@@ -1921,7 +1954,7 @@ public class MyTools
 		SetRotation(myObj,-90,-180,0);
 		
 		myObj = new GameObject("some_writing_03_48_00_0617");
-		pos = new Vector3(4.628572f, 4.200000f, 58.799999f);
+		pos = new Vector3(4.628572f, 4.200000f, 58.779999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -2017,10 +2050,12 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
 		
 		myObj = new GameObject("a_button_55_49_00_0646");
-		pos = new Vector3(66.514290f, 3.900000f, 60.000000f);
+		pos = new Vector3(66.514290f, 3.900000f, 59.980000f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_369",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0643",40,0,0,8,369);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_369",false);
+		SetRotation(myObj,0,0,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0643",40,0,0,7,369);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0001", "Sprites/tmflat/tmflat_0009");
 		
 		myObj = new GameObject("door_056_049");
 		pos = new Vector3(67.714287f, 3.600000f, 59.000000f);
@@ -2058,7 +2093,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
 		
 		myObj = new GameObject("a_barrel_03_51_00_0762");
-		pos = new Vector3(3.942857f, 3.600000f, 61.200001f);
+		pos = new Vector3(3.942857f, 3.600000f, 61.220001f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_347",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",19,347, 1);
@@ -2066,7 +2101,7 @@ public class MyTools
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		myObj = new GameObject("a_loaf_of_bread_loaves_of_bread_03_51_00_0749");
-		pos = new Vector3(3.942857f, 3.600000f, 61.200001f);
+		pos = new Vector3(3.942857f, 3.600000f, 61.220001f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_181",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_181",24,181, 1);
@@ -2133,10 +2168,12 @@ public class MyTools
 		SetPortcullis(myObj,true);
 		
 		myObj = new GameObject("a_button_48_51_00_0840");
-		pos = new Vector3(58.114288f, 4.200000f, 61.200001f);
+		pos = new Vector3(58.114288f, 4.200000f, 61.220001f);
 		myObj.transform.position = pos;
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0639",40,0,0,8,377);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
+		SetRotation(myObj,0,180,0);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0639",40,0,0,7,377);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
 		myObj = new GameObject("a_bedroll_56_51_00_0846");
 		pos = new Vector3(68.228569f, 3.900000f, 62.057144f);
@@ -2277,7 +2314,7 @@ public class MyTools
 		pos = new Vector3(10.114285f, 1.800000f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,8,302);
+		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,7,302);
 		
 		myObj = new GameObject("a_fountain_08_55_00_0764");
 		pos = new Vector3(10.114285f, 1.837500f, 66.514290f);
@@ -2289,7 +2326,7 @@ public class MyTools
 		pos = new Vector3(16.114286f, 1.800000f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,8,302);
+		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,7,302);
 		
 		myObj = new GameObject("a_fountain_13_55_00_0765");
 		pos = new Vector3(16.114286f, 1.837500f, 66.514290f);
@@ -2355,7 +2392,7 @@ public class MyTools
 		
 		
 		myObj = new GameObject("some_strong_thread_pieces_of_strong_thread_20_56_00_0920");
-		pos = new Vector3(24.000000f, 2.700000f, 67.885712f);
+		pos = new Vector3(24.020000f, 2.700000f, 67.885712f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_284",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_284",16,284, 1);
@@ -2383,11 +2420,11 @@ public class MyTools
 		CreateNPC(myObj,"76","Sprites/objects_076");
 		
 		myObj = new GameObject("a_goblin_02_57_00_0231");
-		pos = new Vector3(3.600000f, 3.600000f, 68.742859f);
+		pos = new Vector3(3.580000f, 3.600000f, 68.742859f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"71","Sprites/objects_071");
 		myObj = new GameObject("a_key_004_1");
-		pos = new Vector3(3.600000f, 3.600000f, 68.742859f);
+		pos = new Vector3(3.580000f, 3.600000f, 68.742859f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_266",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_266",5,266, 1);
@@ -2460,7 +2497,7 @@ public class MyTools
 		
 		
 		myObj = new GameObject("door_035_058");
-		pos = new Vector3(42.200001f, 3.600000f, 69.599998f);
+		pos = new Vector3(42.200001f, 3.600000f, 69.620003f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_327",true);
 		CreateDoor(myObj,"textures/doors/doors_-12851", 53, 0);
@@ -2472,7 +2509,7 @@ public class MyTools
 		CreateNPC(myObj,"76","Sprites/objects_076");
 		
 		myObj = new GameObject("some_writing_54_58_00_0713");
-		pos = new Vector3(66.000000f, 4.200000f, 70.457146f);
+		pos = new Vector3(65.980003f, 4.200000f, 70.457146f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -2550,7 +2587,7 @@ public class MyTools
 		pos = new Vector3(10.114285f, 1.800000f, 71.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,8,302);
+		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,7,302);
 		
 		myObj = new GameObject("a_fountain_08_59_00_0766");
 		pos = new Vector3(10.114285f, 1.837500f, 71.314285f);
@@ -2562,7 +2599,7 @@ public class MyTools
 		pos = new Vector3(16.114286f, 1.800000f, 71.314285f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,8,302);
+		CreateUWActivators(myObj,"ButtonHandler","a_jeweled_shield_99_99_00_0001",40,0,0,7,302);
 		
 		myObj = new GameObject("a_fountain_13_59_00_0834");
 		pos = new Vector3(16.114286f, 1.837500f, 71.314285f);
@@ -2632,7 +2669,7 @@ public class MyTools
 		////Container contents complete
 		
 		myObj = new GameObject("a_barrel_57_60_00_0711");
-		pos = new Vector3(69.085716f, 3.600000f, 72.000000f);
+		pos = new Vector3(69.085716f, 3.600000f, 72.019997f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_347",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_347",19,347, 1);
@@ -2640,7 +2677,7 @@ public class MyTools
 		ParentContainer = myObj.AddComponent<Container>();
 		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		myObj = new GameObject("a_loaf_of_bread_loaves_of_bread_57_60_00_0704");
-		pos = new Vector3(69.085716f, 3.600000f, 72.000000f);
+		pos = new Vector3(69.085716f, 3.600000f, 72.019997f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_177",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_177",24,177, 1);
@@ -2657,21 +2694,23 @@ public class MyTools
 		////Container contents complete
 		
 		myObj = new GameObject("special_tmap_obj_24_61_00_0886");
-		pos = new Vector3(29.400000f, 1.200000f, 74.389999f);
+		pos = new Vector3(29.400000f, 1.200000f, 74.379997f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_071");
 		SetRotation(myObj,0,0,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
 		
 		myObj = new GameObject("special_tmap_obj_25_61_00_0887");
-		pos = new Vector3(30.600000f, 1.200000f, 74.389999f);
+		pos = new Vector3(30.600000f, 1.200000f, 74.379997f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_071");
 		SetRotation(myObj,0,0,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
 		
 		myObj = new GameObject("some_writing_30_61_00_0665");
-		pos = new Vector3(36.514286f, 2.400000f, 74.400002f);
+		pos = new Vector3(36.514286f, 2.400000f, 74.379997f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -2689,7 +2728,7 @@ public class MyTools
 		pos = new Vector3(36.685715f, 1.500000f, 73.885712f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-		CreateUWActivators(myObj,"ButtonHandler","a_toadstool_16_04_00_0582",40,0,8,8,302);
+		CreateUWActivators(myObj,"ButtonHandler","a_toadstool_16_04_00_0582",40,0,8,7,302);
 		
 		myObj = new GameObject("a_lockpick_000_3");
 		pos = new Vector3(42.857143f, 3.000000f, 74.057144f);
@@ -2699,7 +2738,7 @@ public class MyTools
 		CreateKey(myObj, 0);
 		
 		myObj = new GameObject("some_writing_38_61_00_0902");
-		pos = new Vector3(46.114288f, 3.900000f, 74.400002f);
+		pos = new Vector3(46.114288f, 3.900000f, 74.379997f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
@@ -2708,8 +2747,9 @@ public class MyTools
 		SetLink(myObj,579);
 		
 		myObj = new GameObject("special_tmap_obj_38_61_00_0903");
-		pos = new Vector3(46.200001f, 2.400000f, 74.389999f);
+		pos = new Vector3(46.200001f, 2.400000f, 74.379997f);
 		myObj.transform.position = pos;
+		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
 		CreateTMAP(myObj,"textures/tmap/uw1_160");
 		SetRotation(myObj,0,0,0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_366",34,366, 0);
@@ -2929,13 +2969,13 @@ public class MyTools
 		pos = new Vector3(58.799999f, 0.600000f, 52.799999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,1921532);
+		Create_a_do_trap(myObj,3,1067944);
 		
 		myObj = new GameObject("a_do_trap_45_44_00_0624");
 		pos = new Vector3(54.000000f, 0.600000f, 52.799999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,1921532);
+		Create_a_do_trap(myObj,3,1067944);
 		
 		myObj = new GameObject("a_use_trigger_99_99_00_0625");
 		pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
@@ -2953,13 +2993,13 @@ public class MyTools
 		pos = new Vector3(51.599998f, 0.600000f, 52.799999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,1921532);
+		Create_a_do_trap(myObj,3,1067944);
 		
 		myObj = new GameObject("a_do_trap_47_44_00_0628");
 		pos = new Vector3(56.400002f, 0.600000f, 52.799999f);
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,1921532);
+		Create_a_do_trap(myObj,3,1067944);
 		
 		myObj = new GameObject("a_use_trigger_99_99_00_0629");
 		pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
@@ -3151,6 +3191,10 @@ public class MyTools
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
 
 
+		
+
+
+
 
 
 
@@ -3173,7 +3217,7 @@ public class MyTools
 		return; //takes a long time to run..
 		//Anim ID: 0 - which is a_rotworm
 		//	File:c:\games\uw1\crit\CR26PAGE.N00, Palette = 0
-		CreateAnimationUW("64_combat_idle", "CR26PAGE_N00_0_0000" , "CR26PAGE_N00_0_0001" , "CR26PAGE_N00_0_0002" , "CR26PAGE_N00_0_0003" , "" , "" , "" , "" ,4);
+/**		CreateAnimationUW("64_combat_idle", "CR26PAGE_N00_0_0000" , "CR26PAGE_N00_0_0001" , "CR26PAGE_N00_0_0002" , "CR26PAGE_N00_0_0003" , "" , "" , "" , "" ,4);
 		CreateAnimationUW("64_attack_bash", "CR26PAGE_N00_0_0004" , "CR26PAGE_N00_0_0005" , "CR26PAGE_N00_0_0006" , "CR26PAGE_N00_0_0005" , "" , "" , "" , "" ,4);
 		CreateAnimationUW("64_walking_towards", "CR26PAGE_N00_0_0000" , "CR26PAGE_N00_0_0001" , "CR26PAGE_N00_0_0002" , "CR26PAGE_N00_0_0003" , "" , "" , "" , "" ,4);
 		CreateAnimationUW("64_death", "CR26PAGE_N00_0_0004" , "CR26PAGE_N00_0_0007" , "CR26PAGE_N00_0_0008" , "CR26PAGE_N00_0_0008" , "" , "" , "" , "" ,4);
@@ -4806,7 +4850,7 @@ public class MyTools
 		CreateAnimationUW("127_walking_front_left", "CR32PAGE_N01_0_0039" , "CR32PAGE_N01_0_0016" , "CR32PAGE_N01_0_0040" , "CR32PAGE_N01_0_0041" , "" , "" , "" , "" ,4);
 		CreateAnimationUW("127_walking_left", "CR32PAGE_N01_0_0042" , "CR32PAGE_N01_0_0043" , "CR32PAGE_N01_0_0044" , "CR32PAGE_N01_0_0019" , "" , "" , "" , "" ,4);
 		CreateAnimationUW("127_walking_rear_left", "CR32PAGE_N01_0_0045" , "CR32PAGE_N01_0_0046" , "CR32PAGE_N01_0_0022" , "CR32PAGE_N01_0_0047" , "" , "" , "" , "" ,4);
-
+*/
 
 		//string[] animArray= {"","",""};
 		//CreateAnimationAsset ("Animname", animArray, 2);
@@ -5453,6 +5497,41 @@ public class MyTools
 	{
 		ObjectVariables myvars= myObj.GetComponent<ObjectVariables>();
 		myvars.trigger=Trigger;
+	}
+
+	static void SetButtonProperties(GameObject myObj, int on, string SpriteOn, string SpriteOff)
+	{
+		ButtonHandler BH = myObj.GetComponentInChildren<ButtonHandler>();
+		if (BH != null)
+		{
+			BH.isOn= (on==1);
+			BH.spriteOn=SpriteOn;
+			BH.spriteOff=SpriteOff;
+		}
+	}
+
+	static void SetButtonProperties(GameObject myObj, string Sprite0, string Sprite1, string Sprite2, string Sprite3, string Sprite4, string Sprite5, string Sprite6, string Sprite7)
+	{
+		ButtonHandler BH = myObj.GetComponentInChildren<ButtonHandler>();
+		if (BH != null)
+		{
+			BH.isRotarySwitch=true;
+			BH.RotarySprites[0]=Sprite0;
+			BH.RotarySprites[1]=Sprite1;
+			BH.RotarySprites[2]=Sprite2;
+			BH.RotarySprites[3]=Sprite3;
+			BH.RotarySprites[4]=Sprite4;
+			BH.RotarySprites[5]=Sprite5;
+			BH.RotarySprites[6]=Sprite6;
+			BH.RotarySprites[7]=Sprite7;
+		}
+	}
+
+
+
+	static void SetScale(GameObject myObj, float x, float y, float z)
+	{
+		myObj.transform.localScale=new Vector3(x,y,z);
 	}
 
 }

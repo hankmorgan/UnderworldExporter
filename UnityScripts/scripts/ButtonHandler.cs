@@ -9,10 +9,18 @@ public class ButtonHandler : MonoBehaviour {
 	public int maxstate;
 	public static GameObject player;
 
+	public bool isOn;
+	public string spriteOn;
+	public string spriteOff;
+
+	public bool isRotarySwitch;
+	public string[] RotarySprites=new string[8];
+
 	private GameObject triggerObj;
 	private UILabel MessageLog;
 	private ObjectVariables Var;
 	private UWCharacter playerUW;
+	private SpriteRenderer ButtonSprite;
 
 	public int item_id;
 
@@ -26,6 +34,22 @@ public class ButtonHandler : MonoBehaviour {
 		if (player!=null)
 		{
 			playerUW=player.GetComponent<UWCharacter>();
+		}
+		ButtonSprite=this.transform.parent.GetComponentInChildren<SpriteRenderer>();
+		if (isRotarySwitch==false)
+		{
+			if (isOn==true)
+			{
+				setSprite(spriteOn);
+			}
+			else
+			{
+				setSprite(spriteOff);
+			}
+		}
+		else
+		{
+			setRotarySprite(state);
 		}
 	}
 	
@@ -72,14 +96,13 @@ public class ButtonHandler : MonoBehaviour {
 		//distance =Vector3.Distance(transform.position,player.transform.position);
 		//if (distance<=playerUW.useRange)
 		//{
-		MessageLog.text = "You use a " + name;
+		//MessageLog.text = "You use a " + name;
 		ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
 		targetvars.triggerX=triggerX;
 		targetvars.triggerY=triggerY;
 		targetvars.state=Var.state;
-		MessageLog.text=name +"_clicked";
 		triggerObj.SendMessage ("Activate");
-		if (Var.state == 8)
+		if (Var.state == maxstate)
 		{
 			Var.state=0;
 		}
@@ -87,6 +110,28 @@ public class ButtonHandler : MonoBehaviour {
 		{
 			Var.state++;
 		}
+		state=Var.state;
+		if (isRotarySwitch ==false)
+		{
+			if (isOn==false)
+			{
+				isOn=true;
+				setSprite(spriteOn);
+			}
+			else
+			{
+				isOn=false;
+				setSprite(spriteOff);
+			}
+		}
+		else
+		{
+			setRotarySprite(state);
+		}
+
+
+
+
 		//}
 		//else
 		//{
@@ -94,8 +139,26 @@ public class ButtonHandler : MonoBehaviour {
 		//}
 	}
 
-	void OnMouseDown()
+
+	public void setSprite(string SpriteName)
+	{
+
+		if (SpriteName!="")
 		{
+			Debug.Log (this.name+ ":setting sprite " + SpriteName);
+			Sprite image = Resources.Load <Sprite> (SpriteName);//Loads the sprite.
+			ButtonSprite.sprite = image;//Assigns the sprite to the object.
+		}
+	}
+
+	public void setRotarySprite(int index)
+	{
+		setSprite (RotarySprites[index]);
+	}
+
+/*	void OnMouseDown()
+		{
+		//THIS IS NOT IN USE!!!!!!!!!
 		return;
 		float distance;
 		switch (UWCharacter.InteractionMode)
@@ -134,6 +197,7 @@ public class ButtonHandler : MonoBehaviour {
 					{
 						Var.state++;
 					}
+				
 				//}
 			//else
 			//{
@@ -141,6 +205,6 @@ public class ButtonHandler : MonoBehaviour {
 			//}
 			break;
 		}
-	}	
+	}*/	
 }
 

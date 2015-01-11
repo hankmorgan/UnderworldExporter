@@ -129,7 +129,7 @@ void CreateUnityScriptCall(int game, float x, float y, float z, ObjectItem &curr
 	//target = objList[nextObj].link
 	if (currobj.link !=0)
 		{//Need to update max state on this
-		fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]),currobj.quality,currobj.owner,currobj.flags,8, currobj.item_id);
+		fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]),currobj.quality,currobj.owner,currobj.flags,7, currobj.item_id);
 		}
 	}
 
@@ -421,9 +421,80 @@ void RenderUnityEntityButton(int game, float x, float y, float z, ObjectItem &cu
 	//heading
 	//Need to pass desc/path for generic handling
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	if (game != SHOCK)
+		{
+		UnityRotation(game, 0, currobj.heading, 0);
+		}
 	CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler"); 
+
+	//Set the on/off artwork.
+	switch (game)
+		{
+		case UWDEMO:
+		case UW1:
+			if ((currobj.item_id >= 368) && (currobj.item_id <= 375))
+				{//Button is a turned off one.
+				SetButtonProperties(game, 0, currobj.item_id - 368, currobj.item_id - 368 + 8);
+				}
+			else if((currobj.item_id >= 376) && (currobj.item_id <= 383))
+				{//Button is a turned on one.
+				SetButtonProperties(game, 1, currobj.item_id - 368, currobj.item_id - 368 - 8);
+				}
+			else if ((currobj.item_id == 353))//Rotary Switch
+				{
+				SetButtonProperties(game, 4);
+				}
+			else if ((currobj.item_id == 354))//Rotary Switch
+				{
+				SetButtonProperties(game, 12);
+				}
+			break;
+		case UW2:
+			break;
+		case SHOCK:
+			break;
+		}
 	return;
+	}
+
+void SetButtonProperties(int game, short on, int SpriteNoOn, int SpriteNoOff)
+	{
+	switch (game)
+		{
+			case UWDEMO:
+			case UW1:
+				fprintf(UNITY_FILE, "\n\tSetButtonProperties(myObj, %d, \"Sprites/tmflat/tmflat_00%02d\", \"Sprites/tmflat/tmflat_00%02d\");", on, SpriteNoOn,SpriteNoOff);
+				break;
+			case UW2:
+				break;
+			case SHOCK:
+				break;
+		}
+	}
+
+void SetButtonProperties(int game, int SpriteNoBegin)
+	{//For rotary buttons.
+	fprintf(UNITY_FILE, "\n\tSetButtonProperties(myObj,");
+	switch (game)
+		{
+			case UWDEMO:
+			case UW1:
+				for (int i = 0; i < 8; i++)
+					{
+					fprintf(UNITY_FILE, "\"Sprites/tmobj/tmobj_%02d\"",i+SpriteNoBegin);
+					if (i != 7)
+						{
+						fprintf(UNITY_FILE, ",");
+						}
+					}
+				fprintf(UNITY_FILE, ");");
+				break;
+			case UW2:
+				break;
+			case SHOCK:
+				break;
+		}
 	}
 
 void RenderUnityEntityA_DO_TRAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -544,27 +615,28 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	if (currobj.y == 0)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2))/100.0;
-		y=y+0.01;
+		//y=y+0.01;
 		}
 	if (currobj.y == 7)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2)) / 100.0;
-		y = y - 0.01;
+		//y = y - 0.01;
 		}
 	if (currobj.x == 0)
 		{
 		y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2)) / 100.0;
-		x = x + 0.01;
+		//x = x + 0.01;
 		}
 	if (currobj.x == 7)
 		{
 		y = (currobj.tileY*BrushSizeX + (BrushSizeY / 2)) / 100.0;
-		x = x - 0.01;
+		//x = x - 0.01;
 		}
 	//x=(currobj.tileX*BrushSizeX+(BrushSizeX/2));
 	//y = (currobj.tileX*BrushSizeX + (BrushSizeX / 2));
 //	z = (LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ)/100.0;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	SetScale(0.9375f,0.9375f,0.9375f);
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\");", textureMasters[currobj.texture].path);
 	//textureMasters[currobj.texture].path
@@ -1328,7 +1400,7 @@ float offX; float offY; float offZ;
 					{
 					objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					objList[nextObj].tileY = y;
-					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);//Figures out where the object should be.
+					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y,1);//Figures out where the object should be.
 					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);
 					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])))
 						{//Everything but traps and triggers
@@ -1405,4 +1477,9 @@ void setLink(ObjectItem currobj)
 void setSprite(unsigned char *SpriteName)
 	{
 	fprintf(UNITY_FILE, "\n\tSetSprite(myObj,%s);", SpriteName);
+	}
+
+void SetScale(float x, float y, float z)
+	{
+	fprintf(UNITY_FILE, "\n\tSetScale(myObj,(float)%f,(float)%f,(float)%f);", x, y, z);
 	}

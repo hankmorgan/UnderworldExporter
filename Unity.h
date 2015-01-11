@@ -7,4 +7,7 @@ void RenderUnityObjectList(int game, int Level, tile LevelInfo[64][64], ObjectIt
 void UnityRotation(int game, int angle1, int angle2, int angle3);
 void setLink(ObjectItem currobj);
 void setSprite(unsigned char *SpriteName);
+void SetButtonProperties(int game, short on, int SpriteNoOn, int SpriteNoOff);
+void SetButtonProperties(int game, int SpriteNoBegin);
+void SetScale(float x, float y, float z);
 #endif
