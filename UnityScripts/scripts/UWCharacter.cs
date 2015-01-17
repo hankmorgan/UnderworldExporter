@@ -89,6 +89,11 @@ public class UWCharacter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (ReadiedSpell!="")
+		{//Player has a spell thats about to be cast. All other activity is ignored.
+			SpellMode ();
+			return;
+		}
 		return;
 		//Performs actions depending on the interaction mode.
 		if (CursorInMainWindow==false)

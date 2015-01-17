@@ -837,6 +837,10 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		tmp.West = LevelInfo[0][0].shockCeilingTexture;//CAULK;
 		tmp.North = LevelInfo[0][0].shockCeilingTexture;//CAULK;
 		tmp.South = LevelInfo[0][0].shockCeilingTexture;//CAULK;
+		tmp.shockEastCeilHeight = 0;
+		tmp.shockWestCeilHeight = 0;
+		tmp.shockNorthCeilHeight = 0;
+		tmp.shockSouthCeilHeight = 0;
 		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
 
 		//Now render a room to store objects
@@ -1395,10 +1399,10 @@ lMesh->InitControlPoints(24);
 FbxVector4* lControlPoints = lMesh->GetControlPoints();
 //These directions are wrongly labeled???!!!
 //Top
-lControlPoints[0] = lControlPoint3;//0,1,2,3
-lControlPoints[1] = lControlPoint0;
-lControlPoints[2] = lControlPoint1;
-lControlPoints[3] = lControlPoint2;
+lControlPoints[0] = lControlPoint0;//0,1,2,3
+lControlPoints[1] = lControlPoint1;
+lControlPoints[2] = lControlPoint2;
+lControlPoints[3] = lControlPoint3;
 
 //was Bottom is probably east.
 //lControlPoints[4] = lControlPoint1;

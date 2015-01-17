@@ -9,6 +9,7 @@
 void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 void RenderUnitySprite(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int billboard);
 void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
+void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64]);
 
 extern long SHOCK_CEILING_HEIGHT;
 extern long UW_CEILING_HEIGHT;
@@ -127,9 +128,17 @@ void CreateUnityScriptCall(int game, float x, float y, float z, ObjectItem &curr
 	//TriggerTargetX = currobj.quality;
 	//TriggerTargetY = currobj.owner;
 	//target = objList[nextObj].link
-	if (currobj.link !=0)
-		{//Need to update max state on this
-		fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]),currobj.quality,currobj.owner,currobj.flags,7, currobj.item_id);
+	if (game != SHOCK)
+		{
+		if (currobj.link != 0)
+			{//Need to update max state on this
+			fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]), currobj.quality, currobj.owner, currobj.flags, 7, currobj.item_id);
+			}
+		}
+	else
+		{
+//CreateSHOCKActivators(GameObject myObj, int TriggerAction)
+		fprintf(UNITY_FILE, "\n\tCreateSHOCKActivators(myObj,%d);", currobj.TriggerAction);
 		}
 	}
 
@@ -289,23 +298,23 @@ void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem 
 	{
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
-	//Lock stuff
-	if ((currobj.link != 0) || (currobj.SHOCKLocked > 0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
-		{
-		//the door is locked
-		if ((currobj.link > 0) && (currobj.link <= 11))	//Only this many keycards
-			{
-			//What keys open this door.
-			}
-		}
+	////Lock stuff
+	//if ((currobj.link != 0) || (currobj.SHOCKLocked > 0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
+	//	{
+	//	//the door is locked
+	//	if ((currobj.link > 0) && (currobj.link <= 11))	//Only this many keycards
+	//		{
+	//		//What keys open this door.
+	//		}
+	//	}
+	fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d);", currobj.link, currobj.SHOCKLocked);
 
-
-	if ((currobj.link != 0) || (currobj.SHOCKLocked >0) && (game != SHOCK))
-		{	
-		//if it has a lock it needs a lock object for scripting purposes
-		}
+	//if ((currobj.link != 0) || (currobj.SHOCKLocked >0) && (game != SHOCK))
+	//	{	
+	//	//if it has a lock it needs a lock object for scripting purposes
+	//	}
 
 	}
 
@@ -424,9 +433,15 @@ void RenderUnityEntityButton(int game, float x, float y, float z, ObjectItem &cu
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	if (game != SHOCK)
 		{
+		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler");
 		UnityRotation(game, 0, currobj.heading, 0);
 		}
-	CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler"); 
+	else
+		{
+		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ShockButtonHandler");
+		AddShockTriggerActions(game, x, y, z, currobj, objList, LevelInfo);
+		}
+
 
 	//Set the on/off artwork.
 	switch (game)
@@ -882,26 +897,85 @@ void RenderUnityEntityComputerScreen(int game, float x, float y, float z, Object
 
 	}
 
+void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	switch (currobj.TriggerAction)
+		{
+			case ACTION_DO_NOTHING:
+				fprintf(UNITY_FILE, "\n\tAddACTION_DO_NOTHING(myObj);"); break;
+			case ACTION_TRANSPORT_LEVEL:
+				fprintf(UNITY_FILE, "\n\tAddACTION_TRANSPORT_LEVEL(myObj);"); break;
+			case ACTION_RESURRECTION:
+				fprintf(UNITY_FILE, "\n\tAddACTION_RESURRECTION(myObj);"); break;
+			case ACTION_CLONE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_CLONE(myObj);"); break;
+			case ACTION_SET_VARIABLE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_SET_VARIABLE(myObj);"); break;
+			case ACTION_ACTIVATE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_ACTIVATE(myObj, ");
+				//000C	int16	1st object to activate.
+				//000E	int16	Delay before activating object 1.
+				//0010	...	Up to 4 objects and delays stored here.		
+				//printf("\tACTION_ACTIVATE\n");
+				for (int i = 0; i <= 3; i++)
+					{
+					if ((currobj.shockProperties[i * 2]>0) && (currobj.shockProperties[i * 2]<1600))
+						{//The object to activate and the delay in activating
+						fprintf(UNITY_FILE, "\"%s\", %d", UniqueObjectName(objList[currobj.shockProperties[i * 2]]), currobj.shockProperties[1 + i * 2]);
+						}
+					else
+						{
+						fprintf(UNITY_FILE, "\"\",0");
+						}
+					if (i < 3)
+						{
+						fprintf(UNITY_FILE, ",");
+						}
+					else
+						{
+						fprintf(UNITY_FILE, ");");
+						}
+					}
+
+				break;
+			case ACTION_LIGHTING:
+				fprintf(UNITY_FILE, "\n\tAddACTION_LIGHTING(myObj);"); break;
+			case ACTION_EFFECT:
+				fprintf(UNITY_FILE, "\n\tAddACTION_EFFECT(myObj);"); break;
+			case ACTION_MOVING_PLATFORM:
+				fprintf(UNITY_FILE, "\n\tAddACTION_MOVING_PLATFORM(myObj);"); break;
+			case ACTION_TIMER:
+				fprintf(UNITY_FILE, "\n\tAddACTION_TIMER(myObj);"); break;
+			case ACTION_CHOICE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_CHOICE(myObj);"); break;
+			case ACTION_EMAIL:
+				fprintf(UNITY_FILE, "\n\tAddACTION_EMAIL(myObj);"); break;
+			case ACTION_RADAWAY:
+				fprintf(UNITY_FILE, "\n\tAddACTION_RADAWAY(myObj);"); break;
+			case ACTION_CHANGE_STATE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_CHANGE_STATE(myObj);"); break;
+			case ACTION_AWAKEN:
+				fprintf(UNITY_FILE, "\n\tAddACTION_AWAKEN(myObj);"); break;
+			case ACTION_MESSAGE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_MESSAGE(myObj);"); break;
+			case ACTION_SPAWN:
+				fprintf(UNITY_FILE, "\n\tAddACTION_SPAWN(myObj);"); break;
+			case ACTION_CHANGE_TYPE:
+				fprintf(UNITY_FILE, "\n\tAddACTION_CHANGE_TYPE(myObj);"); break;
+			default:
+				fprintf(UNITY_FILE, "\n\tAddACTION_UNKNOWN(myObj);"); break;
+				break;
+		}
+	}
+
 void RenderUnityEntityNULL_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//And a level entry as well.
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-	if (currobj.TriggerAction == ACTION_TIMER)
-		{
-		//create a timer to set off.
-		//fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
-		//fprintf(MAPFILE, "\"classname\" \"trigger_timer\"\n");
-		//fprintf(MAPFILE, "\"name\" \"timer_%s\"\n", UniqueObjectName(currobj));
-		//fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
-		//fprintf(MAPFILE, "\"wait\" \"%d\"\n", 1);
-		////fprintf(MAPFILE, "\"random\" \"%d\"\n", 3);
-		//fprintf(MAPFILE, "\"target0\" \"runscript_%s\"\n", UniqueObjectName(currobj));
-		//fprintf(MAPFILE, "}\n");
-		//EntityCount++;
-		}
-
-	//createScriptCall(currobj, x, y, z);
+	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\tCreateNull_Trigger(myObj, %d,%d,%d,%d,%d,%d);"
+		, currobj.TriggerAction, currobj.TriggerOnce, currobj.conditions[0], currobj.conditions[1], currobj.conditions[2], currobj.conditions[3]);
+	AddShockTriggerActions(game,x,y,z,currobj,objList,LevelInfo);
 	}
 
 void RenderUnityEntityREPULSOR(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])

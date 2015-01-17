@@ -444,7 +444,13 @@ public class PlayerInventory : MonoBehaviour {
 		{//Object is being used on something.
 			GameObject objInHand= GameObject.Find (sObjectInHand);
 			GameObject objUseOn = GameObject.Find (sObjectUsedOn);
-			
+			if(objUseOn.GetComponent<ObjectInteraction>() ==null)
+			{//Object has no interaction component.
+				ObjectInHand="";
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.CurrObjectSprite = "";
+				return false;
+			}
 			//Add item to container
 			if (objUseOn.GetComponent<ObjectInteraction>().isContainer)
 			{

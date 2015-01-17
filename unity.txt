@@ -397,6 +397,8 @@
 	pos = new Vector3(33.482811f, 1.800000f, 14.395312f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
+	CreateSHOCKActivators(myObj,7);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("HUMAN_CORPSE_27_11_01_0161");
 	pos = new Vector3(32.620312f, 1.575000f, 13.720312f);
@@ -461,24 +463,28 @@
 	pos = new Vector3(21.000000f, 1.800000f, 15.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_17_12_01_0337");
 	pos = new Vector3(21.000000f, 1.800000f, 15.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("KEYPAD_PANEL_23_12_01_0291");
 	pos = new Vector3(27.600000f, 2.062500f, 14.695313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0991",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("STORAGE_ROOM_DOOR_023_012");
 	pos = new Vector3(28.200001f, 1.800000f, 14.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("ICON_23_12_01_0515");
 	pos = new Vector3(27.600000f, 2.006250f, 15.482813f);
@@ -501,7 +507,7 @@
 	pos = new Vector3(34.200001f, 1.800000f, 14.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("BEAM_BLAST_35_12_01_0057");
 	pos = new Vector3(42.599998f, 1.650000f, 15.595312f);
@@ -534,12 +540,15 @@
 	pos = new Vector3(32.995312f, 2.100000f, 16.795313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
+	CreateSHOCKActivators(myObj,7);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_29_13_01_0211");
 	pos = new Vector3(35.400002f, 1.800000f, 16.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("HUMANOID_MUTANT_30_13_01_0203");
 	pos = new Vector3(36.028126f, 1.593750f, 16.546875f);
@@ -551,36 +560,40 @@
 	pos = new Vector3(41.400002f, 1.800000f, 16.795313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("BLAST_DOOR_036_013");
 	pos = new Vector3(43.799999f, 1.781250f, 15.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,299, 0);
+	CreateShockDoor(myObj,10,0);
 
 	myObj = new GameObject("SERVICE_ACCESS_DOOR_024_014");
 	pos = new Vector3(29.400000f, 1.800000f, 16.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1030",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",67,300, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("NULL_TRIGGER_26_14_01_0300");
 	pos = new Vector3(31.799999f, 1.593750f, 17.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("SWITCH_27_14_01_0210");
 	pos = new Vector3(33.000000f, 1.275000f, 17.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_29_14_01_0680");
 	pos = new Vector3(35.400002f, 1.800000f, 17.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
+	AddACTION_TIMER(myObj);
 
 	myObj = new GameObject("CAMERA_30_14_01_0420");
 	pos = new Vector3(36.632813f, 3.543750f, 16.799999f);
@@ -631,6 +644,8 @@
 	pos = new Vector3(28.232813f, 1.912500f, 18.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,7);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("FERN_28_15_01_0122");
 	pos = new Vector3(34.200001f, 1.350000f, 18.600000f);
@@ -712,7 +727,8 @@
 	pos = new Vector3(18.600000f, 2.400000f, 21.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 0,0,0,0,0,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("ECOLOGY_TRIGGER_16_17_01_0437");
 	pos = new Vector3(19.799999f, 1.800000f, 21.000000f);
@@ -738,12 +754,15 @@
 	pos = new Vector3(21.000000f, 1.800000f, 21.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("ACCESS_PANEL_18_17_01_0577");
 	pos = new Vector3(22.795313f, 1.950000f, 21.267187f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0959",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("MEDIPATCH__HEALING_AGENT_18_17_01_0137");
 	pos = new Vector3(21.895313f, 1.537500f, 20.807812f);
@@ -806,7 +825,7 @@
 	pos = new Vector3(56.395313f, 1.800000f, 21.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("SV_TRANQ_DARTS_47_17_01_0568");
 	pos = new Vector3(56.957813f, 1.293750f, 20.770313f);
@@ -824,7 +843,7 @@
 	pos = new Vector3(19.195313f, 2.400000f, 22.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,10,0);
 
 	myObj = new GameObject("HUMAN_BONES_17_18_01_0038");
 	pos = new Vector3(20.657812f, 1.462500f, 22.082813f);
@@ -837,13 +856,15 @@
 	pos = new Vector3(22.200001f, 0.600000f, 22.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_18_18_01_0113");
 	pos = new Vector3(22.200001f, 0.600000f, 22.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("SV_23_DARTGUN_19_18_01_0336");
 	pos = new Vector3(23.357813f, 0.225000f, 22.495312f);
@@ -861,6 +882,8 @@
 	pos = new Vector3(23.357813f, 0.787500f, 22.795313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,12);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("HUMAN_BONES_19_18_01_0061");
 	pos = new Vector3(23.400000f, 0.262500f, 22.200001f);
@@ -872,13 +895,15 @@
 	pos = new Vector3(24.600000f, 1.800000f, 22.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_20_18_01_0036", 0,"DOOR_026_021", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_20_18_01_0036");
 	pos = new Vector3(24.600000f, 1.800000f, 22.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("ENERGY_CHARGE_STATION_22_18_01_0659");
 	pos = new Vector3(27.000000f, 1.800000f, 22.200001f);
@@ -935,7 +960,8 @@
 	pos = new Vector3(53.400002f, 1.800000f, 22.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("CRATE_12_19_01_0488");
 	pos = new Vector3(14.995313f, 1.987500f, 22.832813f);
@@ -972,19 +998,22 @@
 	pos = new Vector3(23.400000f, 1.200000f, 23.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,1,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_19_01_0575", 0,"NULL_TRIGGER_19_19_01_0574", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_19_19_01_0575");
 	pos = new Vector3(23.400000f, 1.200000f, 23.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,1,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_19_19_01_0574");
 	pos = new Vector3(23.400000f, 1.200000f, 23.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,1,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("EMAIL_20_19_01_0485");
 	pos = new Vector3(24.257813f, 0.693750f, 23.357813f);
@@ -1008,6 +1037,8 @@
 	pos = new Vector3(24.000000f, 1.200000f, 23.770313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0991",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("SERV_BOT_23_19_01_0135");
 	pos = new Vector3(28.232813f, 0.993750f, 23.957813f);
@@ -1056,7 +1087,7 @@
 	pos = new Vector3(43.195313f, 1.800000f, 23.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,10,0);
 
 	myObj = new GameObject("CRATE_38_19_01_0690");
 	pos = new Vector3(46.200001f, 1.575000f, 23.400000f);
@@ -1086,7 +1117,7 @@
 	pos = new Vector3(24.000000f, 1.200000f, 24.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("STANDARD_ACCESS_CARD_1");
 	pos = new Vector3(31.682812f, 0.731250f, 24.970312f);
@@ -1166,13 +1197,15 @@
 	pos = new Vector3(49.799999f, 1.800000f, 24.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_46_20_01_0139");
 	pos = new Vector3(55.799999f, 1.800000f, 24.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 0,0,17,48,1,255);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("BED_11_21_01_0169");
 	pos = new Vector3(14.020312f, 1.481250f, 25.907812f);
@@ -1183,13 +1216,14 @@
 	pos = new Vector3(17.400000f, 1.800000f, 25.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("DOOR_015_021");
 	pos = new Vector3(19.195313f, 1.800000f, 25.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,1,0);
 
 	myObj = new GameObject("SERV_BOT_20_21_01_0004");
 	pos = new Vector3(24.557812f, 0.956250f, 25.200001f);
@@ -1201,7 +1235,8 @@
 	pos = new Vector3(24.600000f, 1.800000f, 25.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_41_30_01_0208", 0,"NULL_TRIGGER_20_22_01_0141", 0,"NULL_TRIGGER_29_13_01_0211", 0,"",0);
 
 	myObj = new GameObject("CAMERA_21_21_01_0414");
 	pos = new Vector3(26.057812f, 1.818750f, 25.532812f);
@@ -1218,7 +1253,7 @@
 	pos = new Vector3(31.799999f, 1.200000f, 26.395313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("SEVERED_LIMB_40_21_01_0107");
 	pos = new Vector3(48.295311f, 1.350000f, 26.020313f);
@@ -1252,7 +1287,7 @@
 	pos = new Vector3(56.395313f, 1.800000f, 25.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,255,1);
 
 	myObj = new GameObject("MAGNUM_2100_48_21_01_0656");
 	pos = new Vector3(58.045311f, 1.387500f, 25.832813f);
@@ -1317,24 +1352,29 @@
 	pos = new Vector3(24.600000f, 1.800000f, 27.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_22_01_0062");
 	pos = new Vector3(25.799999f, 1.800000f, 27.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
+	AddACTION_TIMER(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_25_22_01_0696");
 	pos = new Vector3(30.600000f, 1.200000f, 27.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "DOOR_026_024", 0,"DOOR_026_021", 0,"",0,"",0);
 
 	myObj = new GameObject("BUTTON_26_22_01_0176");
 	pos = new Vector3(31.232813f, 1.331250f, 26.882813f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "DOOR_026_021", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("EMAIL_33_22_01_0454");
 	pos = new Vector3(39.895313f, 1.293750f, 26.995312f);
@@ -1389,13 +1429,13 @@
 	pos = new Vector3(21.000000f, 1.800000f, 27.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,330, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("BULKHEAD_DOOR_018_023");
 	pos = new Vector3(22.200001f, 1.800000f, 27.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,331, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("WORDS_29_23_01_0699");
 	pos = new Vector3(35.765625f, 2.250000f, 28.795313f);
@@ -1411,18 +1451,21 @@
 	pos = new Vector3(37.799999f, 1.800000f, 28.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",108,382, 0);
+	CreateNull_Trigger(myObj, 2,1,0,0,0,0);
+	AddACTION_RESURRECTION(myObj);
 
 	myObj = new GameObject("LARGE_BUTTON_35_23_01_0117");
 	pos = new Vector3(42.370312f, 1.800000f, 28.795313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_33_25_01_0354", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("BLAST_DOOR_035_023");
 	pos = new Vector3(43.195313f, 1.800000f, 28.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,299, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("CHEMICAL_TANK_38_23_01_0685");
 	pos = new Vector3(46.200001f, 1.593750f, 28.200001f);
@@ -1450,7 +1493,8 @@
 	pos = new Vector3(12.600000f, 2.400000f, 29.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("GRAFFITI_17_24_01_0044");
 	pos = new Vector3(20.845312f, 2.718750f, 28.799999f);
@@ -1468,7 +1512,7 @@
 	pos = new Vector3(31.799999f, 1.200000f, 28.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,1,0);
 
 
 	myObj = new GameObject("MEDIPATCH__HEALING_AGENT_28_24_01_0133");
@@ -1481,31 +1525,36 @@
 	pos = new Vector3(35.400002f, 2.250000f, 29.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_33_01_0601", 0,"NULL_TRIGGER_12_45_01_0602", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_29_24_01_0599");
 	pos = new Vector3(35.400002f, 2.250000f, 29.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_13_01_0211", 0,"NULL_TRIGGER_17_12_01_0337", 0,"NULL_TRIGGER_41_20_01_0236", 0,"NULL_TRIGGER_29_24_01_0209", 0);
 
 	myObj = new GameObject("NULL_TRIGGER_29_24_01_0064");
 	pos = new Vector3(35.400002f, 2.250000f, 29.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_27_25_01_0151", 0,"NULL_TRIGGER_26_27_01_0252", 0,"NULL_TRIGGER_41_30_01_0208", 0,"NULL_TRIGGER_29_24_01_0599", 0);
 
 	myObj = new GameObject("NULL_TRIGGER_29_24_01_0066");
 	pos = new Vector3(35.400002f, 2.250000f, 29.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
+	AddACTION_TIMER(myObj);
 
 	myObj = new GameObject("LEVEL_ENTRY_TRIGGER_30_24_01_0037");
 	pos = new Vector3(36.599998f, 2.250000f, 29.400000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",108,382, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_24_01_0066", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("CHEMICAL_TANK_37_24_01_0686");
 	pos = new Vector3(45.000000f, 1.593750f, 29.400000f);
@@ -1595,61 +1644,71 @@
 	pos = new Vector3(33.000000f, 1.200000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_32_25_01_0054");
 	pos = new Vector3(39.000000f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_32_25_01_0109");
 	pos = new Vector3(39.000000f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_33_25_01_0354");
 	pos = new Vector3(40.200001f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_33_25_01_0034");
 	pos = new Vector3(40.200001f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_33_25_01_0012");
 	pos = new Vector3(40.200001f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_32_25_01_0054", 0,"NULL_TRIGGER_33_25_01_0031", 0,"NULL_TRIGGER_34_25_01_0033", 0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_33_25_01_0032");
 	pos = new Vector3(40.200001f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_32_25_01_0109", 0,"NULL_TRIGGER_33_25_01_0034", 0,"NULL_TRIGGER_34_25_01_0053", 0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_33_25_01_0031");
 	pos = new Vector3(40.200001f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_34_25_01_0033");
 	pos = new Vector3(41.400002f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_34_25_01_0053");
 	pos = new Vector3(41.400002f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("HUMAN_CORPSE_36_25_01_0459");
 	pos = new Vector3(43.799999f, 1.575000f, 30.600000f);
@@ -1701,7 +1760,8 @@
 	pos = new Vector3(57.000000f, 1.800000f, 30.600000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
+	AddACTION_TIMER(myObj);
 
 	myObj = new GameObject("MEDIPATCH__HEALING_AGENT_08_26_01_0225");
 	pos = new Vector3(9.857813f, 0.150000f, 32.057812f);
@@ -1741,7 +1801,7 @@
 	pos = new Vector3(19.195313f, 1.800000f, 31.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,1,0);
 
 	myObj = new GameObject("SERV_BOT_21_26_01_0098");
 	pos = new Vector3(25.200001f, 0.956250f, 31.532812f);
@@ -1779,6 +1839,8 @@
 	pos = new Vector3(41.995312f, 2.006250f, 31.795313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_33_25_01_0354", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("SKELETON_39_26_01_0388");
 	pos = new Vector3(47.400002f, 1.556250f, 31.799999f);
@@ -1795,12 +1857,14 @@
 	pos = new Vector3(55.799999f, 2.700000f, 31.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,299, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("SWITCH_55_26_01_0605");
 	pos = new Vector3(66.599998f, 1.275000f, 31.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("HUMAN_CORPSE_11_27_01_0473");
 	pos = new Vector3(13.800000f, 2.175000f, 33.000000f);
@@ -1833,7 +1897,8 @@
 	pos = new Vector3(31.799999f, 1.200000f, 33.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("CRITTER_AI_HINT_28_27_01_0311");
 	pos = new Vector3(34.200001f, 1.593750f, 33.000000f);
@@ -1888,7 +1953,7 @@
 	pos = new Vector3(19.195313f, 2.400000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("FRAGMENTATION_GRENADE_15_28_01_0674");
 	pos = new Vector3(18.600000f, 1.950000f, 34.200001f);
@@ -1906,18 +1971,22 @@
 	pos = new Vector3(24.600000f, 1.275000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_24_28_01_0129");
 	pos = new Vector3(29.400000f, 1.800000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_26_28_01_0152");
 	pos = new Vector3(31.799999f, 1.800000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("WORDS_27_28_01_0059");
 	pos = new Vector3(32.400002f, 2.043750f, 34.157814f);
@@ -1933,20 +2002,22 @@
 	pos = new Vector3(36.599998f, 0.600000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_30_28_01_0027");
 	pos = new Vector3(36.599998f, 0.600000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 
 	myObj = new GameObject("HIDDEN_DOOR_037_028");
 	pos = new Vector3(45.595314f, 1.800000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("HUMANOID_MUTANT_45_28_01_0297");
 	pos = new Vector3(54.599998f, 2.493750f, 34.200001f);
@@ -1958,24 +2029,29 @@
 	pos = new Vector3(55.799999f, 2.700000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_46_28_01_0298", 0,"NULL_TRIGGER_46_28_01_0299", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_46_28_01_0299");
 	pos = new Vector3(55.799999f, 2.700000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_46_28_01_0298");
 	pos = new Vector3(55.799999f, 2.700000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("ACCESS_PANEL_47_28_01_0259");
 	pos = new Vector3(56.732811f, 2.812500f, 34.270313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0974",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("BEVERAGE_CONTAINER_49_28_01_0393");
 	pos = new Vector3(59.545311f, 3.693750f, 33.895313f);
@@ -1991,13 +2067,13 @@
 	pos = new Vector3(61.195313f, 4.200000f, 34.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("STORAGE_ROOM_DOOR_011_029");
 	pos = new Vector3(13.200000f, 1.800000f, 35.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("EMAIL_12_29_01_0399");
 	pos = new Vector3(15.257813f, 1.293750f, 35.095314f);
@@ -2020,6 +2096,8 @@
 	pos = new Vector3(36.032814f, 0.600000f, 35.470314f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0897",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "ENTRY_TRIGGER_30_28_01_0158", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("CONTROL_PEDESTAL_31_29_01_0442");
 	pos = new Vector3(37.799999f, 0.000000f, 35.400002f);
@@ -2053,7 +2131,8 @@
 	pos = new Vector3(41.400002f, 0.600000f, 35.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 0,0,0,0,0,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("NITROPACK_39_29_01_0667");
 	pos = new Vector3(47.095314f, 1.350000f, 35.657814f);
@@ -2099,7 +2178,8 @@
 	pos = new Vector3(13.800000f, 1.800000f, 36.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",108,382, 0);
+	CreateNull_Trigger(myObj, 6,0,30,0,1,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_11_31_01_0654", 0,"NULL_TRIGGER_11_31_01_0655", 0,"",0,"",0);
 
 	myObj = new GameObject("HUMAN_CORPSE_12_30_01_0014");
 	pos = new Vector3(14.957812f, 1.575000f, 36.632813f);
@@ -2111,7 +2191,7 @@
 	pos = new Vector3(18.000000f, 1.800000f, 36.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("HUMANOID_MUTANT_16_30_01_0082");
 	pos = new Vector3(19.799999f, 1.593750f, 36.599998f);
@@ -2135,6 +2215,8 @@
 	pos = new Vector3(32.995312f, 2.250000f, 37.195313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
+	CreateSHOCKActivators(myObj,7);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("SCREEN_31_30_01_0448");
 	pos = new Vector3(37.795311f, 2.437500f, 36.000000f);
@@ -2146,7 +2228,8 @@
 	pos = new Vector3(37.799999f, 0.600000f, 36.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
+	AddACTION_MESSAGE(myObj);
 
 	myObj = new GameObject("REPULSOR_31_30_01_0668");
 	pos = new Vector3(37.799999f, 0.600000f, 36.599998f);
@@ -2168,11 +2251,15 @@
 	pos = new Vector3(38.545311f, 3.187500f, 36.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,19);
+	AddACTION_CHANGE_STATE(myObj);
 
 	myObj = new GameObject("ACCESS_PANEL_32_30_01_0682");
 	pos = new Vector3(38.545311f, 2.887500f, 36.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0964",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("CAMERA_32_30_01_0351");
 	pos = new Vector3(39.482811f, 1.631250f, 36.145313f);
@@ -2211,18 +2298,22 @@
 	pos = new Vector3(46.795311f, 1.781250f, 36.857811f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "ENTRY_TRIGGER_39_31_01_0714", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_39_30_01_0207");
 	pos = new Vector3(47.400002f, 2.400000f, 36.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_41_30_01_0208");
 	pos = new Vector3(49.799999f, 1.800000f, 36.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("ELEPHANT_JORP_46_30_01_0292");
 	pos = new Vector3(55.799999f, 2.062500f, 36.599998f);
@@ -2244,13 +2335,15 @@
 	pos = new Vector3(13.800000f, 1.800000f, 37.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "STORAGE_ROOM_DOOR_011_032", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_11_31_01_0654");
 	pos = new Vector3(13.800000f, 1.800000f, 37.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "STORAGE_ROOM_DOOR_011_029", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("HUMANOID_MUTANT_12_31_01_0142");
 	pos = new Vector3(15.000000f, 1.593750f, 37.799999f);
@@ -2262,6 +2355,8 @@
 	pos = new Vector3(20.995312f, 2.006250f, 38.395313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
+	CreateSHOCKActivators(myObj,7);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("SCREEN_17_31_01_0079");
 	pos = new Vector3(20.995312f, 3.112500f, 37.795311f);
@@ -2278,7 +2373,8 @@
 	pos = new Vector3(23.400000f, 1.800000f, 37.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("HUMANOID_MUTANT_23_31_01_0244");
 	pos = new Vector3(28.082813f, 0.393750f, 37.982811f);
@@ -2330,6 +2426,8 @@
 	pos = new Vector3(40.795311f, 0.150000f, 37.832813f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,19);
+	AddACTION_CHANGE_STATE(myObj);
 
 	myObj = new GameObject("CONTROL_PEDESTAL_33_31_01_0582");
 	pos = new Vector3(40.200001f, 0.000000f, 37.799999f);
@@ -2347,19 +2445,21 @@
 	pos = new Vector3(47.400002f, 1.800000f, 37.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_39_31_01_0214");
 	pos = new Vector3(47.400002f, 1.800000f, 37.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("DOOR_041_031");
 	pos = new Vector3(49.200001f, 4.200000f, 37.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("HUMANOID_MUTANT_45_31_01_0296");
 	pos = new Vector3(54.599998f, 2.793750f, 37.799999f);
@@ -2382,7 +2482,7 @@
 	pos = new Vector3(13.200000f, 1.800000f, 39.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("SCREEN_18_32_01_0067");
 	pos = new Vector3(22.007813f, 2.925000f, 38.995312f);
@@ -2450,6 +2550,8 @@
 	pos = new Vector3(48.000000f, 4.200000f, 38.732811f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "ENTRY_TRIGGER_39_31_01_0714", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("BRIDGE_44_32_01_0364");
 	pos = new Vector3(53.400002f, 2.343750f, 39.000000f);
@@ -2460,7 +2562,7 @@
 	pos = new Vector3(19.195313f, 1.800000f, 40.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("MEDIPATCH__HEALING_AGENT_15_33_01_0676");
 	pos = new Vector3(18.557812f, 1.350000f, 39.857811f);
@@ -2478,13 +2580,14 @@
 	pos = new Vector3(21.000000f, 1.800000f, 40.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("DOOR_019_033");
 	pos = new Vector3(23.995312f, 1.800000f, 40.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("WRAPPER_19_33_01_0105");
 	pos = new Vector3(23.695313f, 1.312500f, 40.045311f);
@@ -2495,7 +2598,8 @@
 	pos = new Vector3(45.000000f, 1.800000f, 40.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("SV_NEEDLE_DARTS_47_33_01_0377");
 	pos = new Vector3(56.582813f, 2.493750f, 40.532814f);
@@ -2538,7 +2642,7 @@
 	pos = new Vector3(46.795311f, 4.200000f, 41.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("CONTROL_PEDESTAL_11_35_01_0509");
 	pos = new Vector3(13.800000f, 0.000000f, 42.599998f);
@@ -2549,30 +2653,34 @@
 	pos = new Vector3(19.799999f, 1.800000f, 42.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,331, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("NULL_TRIGGER_17_35_01_0024");
 	pos = new Vector3(21.000000f, 1.800000f, 42.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,1,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_17_35_01_0023");
 	pos = new Vector3(21.000000f, 1.800000f, 42.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "BULKHEAD_DOOR_017_035", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("LEVER_17_35_01_0130");
 	pos = new Vector3(21.595312f, 1.800000f, 42.595314f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0897",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_35_01_0024", 0,"NULL_TRIGGER_17_35_01_0023", 0,"",0,"",0);
 
 	myObj = new GameObject("BULKHEAD_DOOR_017_035");
 	pos = new Vector3(21.000000f, 1.800000f, 42.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,330, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("DH_07_STUNGUN_26_35_01_0331");
 	pos = new Vector3(32.170311f, 2.568750f, 42.557812f);
@@ -2590,7 +2698,7 @@
 	pos = new Vector3(36.599998f, 1.200000f, 42.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,337, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("BRIDGE_31_35_01_0020");
 	pos = new Vector3(37.799999f, 1.162500f, 42.599998f);
@@ -2639,31 +2747,34 @@
 	pos = new Vector3(23.400000f, 1.800000f, 43.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_19_36_01_0007");
 	pos = new Vector3(23.400000f, 1.800000f, 43.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_19_36_01_0009");
 	pos = new Vector3(23.400000f, 1.800000f, 43.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("ENERGY_GRATING_023_036");
 	pos = new Vector3(28.200001f, 3.000000f, 43.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",67,323, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("STORAGE_ROOM_DOOR_026_036");
 	pos = new Vector3(31.799999f, 3.000000f, 44.395313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,10,0);
 
 	myObj = new GameObject("WORDS_30_36_01_0567");
 	pos = new Vector3(36.632813f, 2.850000f, 44.395313f);
@@ -2689,7 +2800,8 @@
 	pos = new Vector3(37.799999f, 1.800000f, 43.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("CYBORG_DRONE_34_36_01_0302");
 	pos = new Vector3(41.400002f, 4.050000f, 43.799999f);
@@ -2740,12 +2852,14 @@
 	pos = new Vector3(18.000000f, 1.912500f, 44.995312f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0983",false);
+	CreateSHOCKActivators(myObj,1);
+	AddACTION_TRANSPORT_LEVEL(myObj);
 
 	myObj = new GameObject("ELEVATOR_DOOR_015_037");
 	pos = new Vector3(18.600000f, 1.800000f, 44.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1109",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,326, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("EMAIL_18_37_01_0021");
 	pos = new Vector3(21.782812f, 1.293750f, 44.545311f);
@@ -2757,6 +2871,8 @@
 	pos = new Vector3(22.195313f, 1.818750f, 45.595314f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_36_01_0063", 0,"",0,"",0,"",0);
 
 
 	myObj = new GameObject("WORDS_20_37_01_0715");
@@ -2768,6 +2884,8 @@
 	pos = new Vector3(24.295313f, 3.000000f, 44.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_36_01_0063", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("CYBORG_ASSASSIN_27_37_01_0089");
 	pos = new Vector3(32.400002f, 2.793750f, 44.957813f);
@@ -2784,13 +2902,13 @@
 	pos = new Vector3(42.599998f, 4.200000f, 45.595314f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("DOOR_039_037");
 	pos = new Vector3(47.400002f, 4.200000f, 45.595314f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,303, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("ELEPHANT_JORP_45_37_01_0243");
 	pos = new Vector3(54.599998f, 2.343750f, 45.000000f);
@@ -2824,13 +2942,13 @@
 	pos = new Vector3(28.200001f, 3.000000f, 46.795311f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",67,323, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("FORCE_DOOR_031_038");
 	pos = new Vector3(37.799999f, 1.800000f, 45.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,322, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("HUMAN_CORPSE_34_38_01_0272");
 	pos = new Vector3(41.400002f, 3.975000f, 46.200001f);
@@ -2842,6 +2960,8 @@
 	pos = new Vector3(46.799999f, 4.462500f, 46.495312f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0909",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_38_39_01_0628", 0,"NULL_TRIGGER_38_39_01_0408", 0,"NULL_TRIGGER_38_39_01_0320", 0,"",0);
 
 	myObj = new GameObject("VIAL_42_38_01_0642");
 	pos = new Vector3(51.000000f, 4.162500f, 46.200001f);
@@ -2936,19 +3056,22 @@
 	pos = new Vector3(46.200001f, 1.800000f, 47.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 15,1,0,0,0,0);
+	AddACTION_EMAIL(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_38_39_01_0320");
 	pos = new Vector3(46.200001f, 1.800000f, 47.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 13,0,0,0,0,0);
+	AddACTION_UNKNOWN(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_38_39_01_0408");
 	pos = new Vector3(46.200001f, 1.800000f, 47.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 3,0,0,0,0,0);
+	AddACTION_CLONE(myObj);
 
 	myObj = new GameObject("SCREEN_39_39_01_0533");
 	pos = new Vector3(46.799999f, 4.181250f, 47.395313f);
@@ -3003,6 +3126,8 @@
 	pos = new Vector3(59.400002f, 4.200000f, 47.995312f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0897",false);
+	CreateSHOCKActivators(myObj,12);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("CAMERA_11_40_01_0429");
 	pos = new Vector3(14.395312f, 2.212500f, 48.000000f);
@@ -3013,7 +3138,7 @@
 	pos = new Vector3(17.995312f, 1.800000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1126",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,332, 0);
+	CreateShockDoor(myObj,0,1);
 
 	myObj = new GameObject("CHEMICAL_TANK_16_40_01_0048");
 	pos = new Vector3(19.907812f, 1.593750f, 48.182812f);
@@ -3083,6 +3208,8 @@
 	pos = new Vector3(36.932812f, 1.912500f, 48.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "FORCE_DOOR_031_038", 0,"",0,"",0,"",0);
 
 
 	myObj = new GameObject("CYBORG_ASSASSIN_37_40_01_0262");
@@ -3101,42 +3228,50 @@
 	pos = new Vector3(59.400002f, 1.200000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_49_40_01_0370", 0,"NULL_TRIGGER_49_40_01_0326", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_49_40_01_0372");
 	pos = new Vector3(59.400002f, 1.200000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_49_40_01_0217", 0,"NULL_TRIGGER_49_40_01_0373", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_49_40_01_0370");
 	pos = new Vector3(59.400002f, 1.200000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_49_40_01_0326");
 	pos = new Vector3(59.400002f, 1.200000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_49_40_01_0217");
 	pos = new Vector3(59.400002f, 1.200000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_49_40_01_0373");
 	pos = new Vector3(59.400002f, 1.200000f, 48.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("SWITCH_12_41_01_0525");
 	pos = new Vector3(14.400000f, 1.818750f, 49.795311f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "IRIS_DOOR_014_040", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("BEVERAGE_CONTAINER_21_41_01_0526");
 	pos = new Vector3(25.799999f, 0.093750f, 49.799999f);
@@ -3197,7 +3332,7 @@
 	pos = new Vector3(21.595312f, 3.000000f, 51.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,322, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("CYBORG_DRONE_17_42_01_0328");
 	pos = new Vector3(21.000000f, 2.850000f, 51.000000f);
@@ -3209,25 +3344,29 @@
 	pos = new Vector3(23.400000f, 3.000000f, 51.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_42_01_0538", 0,"NULL_TRIGGER_18_43_01_0397", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_19_42_01_0539");
 	pos = new Vector3(23.400000f, 3.000000f, 51.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_42_01_0537", 0,"NULL_TRIGGER_18_43_01_0160", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_19_42_01_0538");
 	pos = new Vector3(23.400000f, 3.000000f, 51.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
+	AddACTION_MESSAGE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_19_42_01_0537");
 	pos = new Vector3(23.400000f, 3.000000f, 51.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
+	AddACTION_MESSAGE(myObj);
 
 	myObj = new GameObject("CYBORG_ASSASSIN_20_42_01_0330");
 	pos = new Vector3(24.600000f, 2.793750f, 51.000000f);
@@ -3239,7 +3378,7 @@
 	pos = new Vector3(28.200001f, 3.000000f, 51.595314f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",67,323, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("REPULSOR_26_42_01_0451");
 	pos = new Vector3(31.799999f, 0.600000f, 51.000000f);
@@ -3261,29 +3400,36 @@
 	pos = new Vector3(17.400000f, 1.875000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_18_43_01_0237");
 	pos = new Vector3(22.200001f, 3.000000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_18_43_01_0397");
 	pos = new Vector3(22.200001f, 3.000000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_18_43_01_0160");
 	pos = new Vector3(22.200001f, 3.000000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("LEVER_18_43_01_0227");
 	pos = new Vector3(22.795313f, 2.925000f, 52.120312f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0899",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_18_43_01_0237", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("GRATING_18_43_01_0232");
 	pos = new Vector3(22.200001f, 3.000000f, 51.599998f);
@@ -3299,13 +3445,15 @@
 	pos = new Vector3(23.400000f, 3.000000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 1,0,0,0,0,0);
+	AddACTION_TRANSPORT_LEVEL(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_19_43_01_0228");
 	pos = new Vector3(23.400000f, 3.000000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 2,0,0,0,0,0);
+	AddACTION_RESURRECTION(myObj);
 
 	myObj = new GameObject("WORDS_20_43_01_0153");
 	pos = new Vector3(24.000000f, 2.737500f, 52.270313f);
@@ -3345,7 +3493,8 @@
 	pos = new Vector3(51.000000f, 1.800000f, 52.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("CYBORG_DRONE_16_44_01_0092");
 	pos = new Vector3(19.832813f, 2.850000f, 53.395313f);
@@ -3368,25 +3517,28 @@
 	pos = new Vector3(23.995312f, 3.000000f, 53.395313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",67,323, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("NULL_TRIGGER_21_44_01_0557");
 	pos = new Vector3(25.799999f, 3.000000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_44_01_0596");
 	pos = new Vector3(25.799999f, 3.000000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_44_01_0589");
 	pos = new Vector3(25.799999f, 3.000000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("CYBORG_DRONE_22_44_01_0368");
 	pos = new Vector3(26.821875f, 0.450000f, 53.793751f);
@@ -3404,24 +3556,29 @@
 	pos = new Vector3(30.600000f, 0.600000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_25_44_01_0594");
 	pos = new Vector3(30.600000f, 0.600000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_25_44_01_0556");
 	pos = new Vector3(30.600000f, 0.600000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("BUTTON_28_44_01_0554");
 	pos = new Vector3(34.795311f, 0.750000f, 53.545311f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_25_44_01_0595", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("FORCE_DOOR_28_44_01_0551");
 	pos = new Vector3(34.200001f, 0.600000f, 53.995312f);
@@ -3432,7 +3589,8 @@
 	pos = new Vector3(35.400002f, 1.200000f, 53.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("MEDIPATCH__HEALING_AGENT_37_44_01_0409");
 	pos = new Vector3(44.732811f, 2.550000f, 53.395313f);
@@ -3444,31 +3602,36 @@
 	pos = new Vector3(15.000000f, 1.200000f, 54.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
+	AddACTION_LIGHTING(myObj);
 
 	myObj = new GameObject("DEATH_WATCH_TRIGGER_21_45_01_0562");
 	pos = new Vector3(25.799999f, 3.450000f, 54.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",104,378, 0);
+	CreateNull_Trigger(myObj, 6,1,47,2,0,1);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_25_44_01_0594", 0,"NULL_TRIGGER_21_45_01_0588", 0,"",0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_21_45_01_0563");
 	pos = new Vector3(25.799999f, 3.450000f, 54.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
+	AddACTION_MESSAGE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_45_01_0587");
 	pos = new Vector3(25.799999f, 3.450000f, 54.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_45_01_0588");
 	pos = new Vector3(25.799999f, 3.450000f, 54.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("CAMERA_22_45_01_0559");
 	pos = new Vector3(26.545313f, 0.900000f, 55.195313f);
@@ -3489,6 +3652,8 @@
 	pos = new Vector3(28.326563f, 0.731250f, 54.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_46_01_0597", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("FORCE_DOOR_23_45_01_0553");
 	pos = new Vector3(28.795313f, 0.600000f, 54.599998f);
@@ -3499,22 +3664,30 @@
 	pos = new Vector3(29.245312f, 0.731250f, 55.195313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_46_01_0597", 0,"",0,"",0,"",0);
 
 
 	myObj = new GameObject("BUTTON_26_45_01_0593");
 	pos = new Vector3(31.945313f, 0.731250f, 55.195313f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_44_01_0557", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("BUTTON_27_45_01_0586");
 	pos = new Vector3(33.145313f, 0.731250f, 54.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_25_44_01_0595", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("BUTTON_27_45_01_0555");
 	pos = new Vector3(32.821877f, 0.731250f, 54.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,6);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_44_01_0557", 0,"",0,"",0,"",0);
 
 	myObj = new GameObject("FORCE_DOOR_27_45_01_0552");
 	pos = new Vector3(33.595314f, 0.600000f, 54.599998f);
@@ -3531,7 +3704,8 @@
 	pos = new Vector3(37.799999f, 3.000000f, 54.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 23,1,0,0,0,0);
+	AddACTION_SPAWN(myObj);
 
 
 	myObj = new GameObject("CAMERA_35_45_01_0430");
@@ -3543,7 +3717,7 @@
 	pos = new Vector3(46.200001f, 3.000000f, 54.000000f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",67,323, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("BERSERK_COMBAT_BOOSTER_16_46_01_0334");
 	pos = new Vector3(19.495312f, 2.550000f, 55.200001f);
@@ -3600,19 +3774,22 @@
 	pos = new Vector3(25.799999f, 2.850000f, 55.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
+	AddACTION_CHOICE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_46_01_0591");
 	pos = new Vector3(25.799999f, 2.850000f, 55.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_21_46_01_0590");
 	pos = new Vector3(25.799999f, 2.850000f, 55.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
+	AddACTION_CHANGE_TYPE(myObj);
 
 	myObj = new GameObject("CYBORG_DRONE_22_46_01_0360");
 	pos = new Vector3(27.257813f, 2.700000f, 55.870312f);
@@ -3723,13 +3900,15 @@
 	pos = new Vector3(53.400002f, 1.200000f, 58.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",104,378, 0);
+	CreateNull_Trigger(myObj, 6,1,8,0,7,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_45_48_01_0645", 80,"NULL_TRIGGER_20_51_01_0357", 0,"NULL_TRIGGER_31_45_01_0344", 0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_45_48_01_0645");
 	pos = new Vector3(54.599998f, 1.200000f, 58.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 15,0,0,0,0,0);
+	AddACTION_EMAIL(myObj);
 
 	myObj = new GameObject("CYBORG_ASSASSIN_27_49_01_0401");
 	pos = new Vector3(33.032814f, 2.193750f, 59.395313f);
@@ -3769,7 +3948,8 @@
 	pos = new Vector3(50.170311f, 3.168750f, 59.432812f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
+	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
 
 	myObj = new GameObject("SCREEN_43_49_01_0238");
 	pos = new Vector3(52.795311f, 0.862500f, 59.357811f);
@@ -3781,25 +3961,29 @@
 	pos = new Vector3(53.400002f, 1.200000f, 59.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",104,378, 0);
+	CreateNull_Trigger(myObj, 6,0,8,0,7,0);
+	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_45_49_01_0506", 0,"NULL_TRIGGER_46_49_01_0375", 0,"NULL_TRIGGER_46_49_01_0507", 0,"",0);
 
 	myObj = new GameObject("NULL_TRIGGER_45_49_01_0506");
 	pos = new Vector3(54.599998f, 1.200000f, 59.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_46_49_01_0507");
 	pos = new Vector3(55.799999f, 1.200000f, 59.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 19,0,33,16,4,0);
+	AddACTION_CHANGE_STATE(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_46_49_01_0375");
 	pos = new Vector3(55.799999f, 1.200000f, 59.400002f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 19,0,33,16,4,0);
+	AddACTION_CHANGE_STATE(myObj);
 
 	myObj = new GameObject("CYBORG_DRONE_23_50_01_0361");
 	pos = new Vector3(28.040625f, 2.250000f, 60.159374f);
@@ -3817,24 +4001,28 @@
 	pos = new Vector3(43.799999f, 0.600000f, 60.599998f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",104,378, 0);
+	CreateNull_Trigger(myObj, 4,0,8,0,7,0);
+	AddACTION_SET_VARIABLE(myObj);
 
 	myObj = new GameObject("SWITCH_20_51_01_0355");
 	pos = new Vector3(24.600000f, 0.675000f, 61.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
+	CreateSHOCKActivators(myObj,0);
+	AddACTION_DO_NOTHING(myObj);
 
 	myObj = new GameObject("NULL_TRIGGER_20_51_01_0357");
 	pos = new Vector3(24.600000f, 1.200000f, 61.799999f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",101,375, 0);
+	CreateNull_Trigger(myObj, 21,0,0,0,0,0);
+	AddACTION_AWAKEN(myObj);
 
 	myObj = new GameObject("STORAGE_ROOM_DOOR_031_051");
 	pos = new Vector3(37.799999f, 0.600000f, 61.200001f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",66,305, 0);
+	CreateShockDoor(myObj,0,0);
 
 	myObj = new GameObject("CRATE_20_52_01_0545");
 	pos = new Vector3(24.407812f, 1.575000f, 63.070313f);
@@ -3875,6 +4063,8 @@
 	pos = new Vector3(37.195313f, 2.118750f, 63.107811f);
 	myObj.transform.position = pos;
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
+	CreateSHOCKActivators(myObj,9);
+	AddACTION_MOVING_PLATFORM(myObj);
 
 	myObj = new GameObject("TOXIC_WASTE_BARREL_31_52_01_0637");
 	pos = new Vector3(37.907814f, 0.393750f, 63.407814f);
