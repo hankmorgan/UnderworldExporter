@@ -821,8 +821,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 			}
 
 		}
-	if (game != SHOCK)
-		{
+
 		tile tmp;
 		tmp.tileType = 1;
 		tmp.Render = 1;
@@ -861,7 +860,6 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 				RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
 				}
 			}
-		}
 //Render doors
 	if (game != SHOCK)
 		{

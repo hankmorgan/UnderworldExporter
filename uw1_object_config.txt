@@ -77,7 +77,7 @@
 76 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_076 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_076
 77 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_077 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_077
 78 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_078 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_078
-79 0 0 0 entity 69 etherealvoidcreatures uw1_object_079.prt 0 Sprites/OBJECTS_079 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_079
+79 0 0 0 entity 0 etherealvoidcreatures uw1_object_079.prt 0 Sprites/OBJECTS_079 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_079
 80 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_080 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_080
 81 0 0 0 entity 0 a_mongbat atdm:ai_spider 0 Sprites/OBJECTS_081 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_081
 82 0 0 0 entity 0 a_bloodworm atdm:ai_spider 0 Sprites/OBJECTS_082 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_082
@@ -120,11 +120,11 @@
 119 0 0 0 entity 0 a_stone_golem atdm:ai_spider 0 Sprites/OBJECTS_119 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_119
 120 0 0 0 entity 0 a_fire_elemental atdm:ai_spider 0 Sprites/OBJECTS_120 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_120
 121 0 0 0 entity 0 a_metal_golem atdm:ai_spider 0 Sprites/OBJECTS_121 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_121
-122 0 0 0 entity 69 a_wisp uw1_object_122.prt 0 Sprites/OBJECTS_122 0 sound models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_122
+122 0 0 0 entity 0 a_wisp uw1_object_122.prt 0 Sprites/OBJECTS_122 0 sound models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_122
 123 0 0 0 entity 0 tybal atdm:ai_archmage01 0 Sprites/OBJECTS_123 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_123
 124 0 0 0 entity 0 slasher_of_veils atdm:ai_lantern_bot 0 Sprites/OBJECTS_124 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_124
-125 0 0 0 entity 25 unknown uw1_object_125.prt 0 Sprites/OBJECTS_125 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_125
-126 0 0 0 entity 25 unknown uw1_object_126.prt 0 Sprites/OBJECTS_126 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_126
+125 0 0 0 entity 0 unknown uw1_object_125.prt 0 Sprites/OBJECTS_125 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_125
+126 0 0 0 entity 0 unknown uw1_object_126.prt 0 Sprites/OBJECTS_126 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_126
 127 0 0 0 entity 0 an_adventurer atdm:ai_thief_thug 0 Sprites/OBJECTS_127 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_127
 128 0 0 0 entity 19 a_sack models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_128 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_128
 129 0 0 0 entity 19 an_open_sack models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_129 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_129
