@@ -21,8 +21,8 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d);"
-		, objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
+		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d);"
+			, objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
@@ -296,8 +296,10 @@ int hasLock=0;
 
 void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
+	z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ/100.0;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	SetScale(1.875f, 1.875f, 1.875f);
 	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 	////Lock stuff
@@ -309,7 +311,7 @@ void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem 
 	//		//What keys open this door.
 	//		}
 	//	}
-	fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d);", currobj.link, currobj.SHOCKLocked);
+	fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d,%s);", currobj.link, currobj.SHOCKLocked,objectMasters[currobj.item_id].path);
 
 	//if ((currobj.link != 0) || (currobj.SHOCKLocked >0) && (game != SHOCK))
 	//	{	
@@ -1005,7 +1007,7 @@ void RenderUnityEntityCorpse(int game, float x, float y, float z, ObjectItem &cu
 	//link	//To check for a lock and it's list of contents.
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	
 	if (game == SHOCK)
 		{
@@ -1113,13 +1115,12 @@ void RenderUnityModel(int game, float x, float y, float z, ObjectItem &currobj, 
 	//tileY
 	//Index
 
-	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
-	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
-	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-
-	//fprintf(UNITY_FILE, "\n\tmyObj.transform.localScale.x = new Vector3(2, 2, 2);");
-
-
+	//fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
+	//fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
+	//fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
+	
+	fprintf(UNITY_FILE, "\n\tmyObj= CreateGameObject(\"%s\",%ff,%ff,%ff);", UniqueObjectName(currobj), x, z, y);
+	
 	if ((currobj.DeathWatched >= 1) && (game == SHOCK))
 		{
 		//If all object of this type are destroyed then do something.

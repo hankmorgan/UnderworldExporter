@@ -6,11 +6,32 @@ public class DoorControlShock : MonoBehaviour {
 	public int KeyIndex;
 	private bool state;
 	public bool DoorBusy;
+	public int DoorSpriteIndex;
+	public int NoOfFrames;
+	private SpriteRenderer sc;
 	// Use this for initialization
 	void Start () {
-		
+		sc=this.GetComponentInChildren<SpriteRenderer>();
+		if (sc!=null)
+		{
+			if (state==false)//Closed
+			{
+				setSprite (0);
+			}
+			else
+			{
+				setSprite (NoOfFrames-1);
+			}
+		}
 	}
-	
+
+	void setSprite(int index)
+	{
+		Sprite Image=new Sprite();
+		Image=Resources.Load <Sprite> ("Doors/" + DoorSpriteIndex + "/" + DoorSpriteIndex + "_" + index.ToString ("D4"));
+		sc.sprite=Image;
+	}
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -55,6 +76,7 @@ public class DoorControlShock : MonoBehaviour {
 		{
 			Debug.Log ("Move door to open position");
 			//StartCoroutine(AnimateDoor (this.transform,Vector3.up * 90,1.0f));
+			setSprite (NoOfFrames-1);
 			state=true;
 		}
 	}
@@ -64,6 +86,7 @@ public class DoorControlShock : MonoBehaviour {
 		if(!DoorBusy)
 		{
 			Debug.Log ("Move door to closed position");
+			setSprite (0);
 			//StartCoroutine(AnimateDoor (this.transform,Vector3.up * -90,1.0f));
 			state=false;
 		}
