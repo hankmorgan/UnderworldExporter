@@ -5094,12 +5094,23 @@ public class MyTools
 			Debug.Log("Unknown door: " +DoorSpriteIndex);
 			dc.NoOfFrames=7; 
 			break;
-
-
 		}
+
+		AddBoxCollider (myObj, 0.0f, 0.025f, 0.0f, 0.64f, 0.05f, 0.01f,true);
+		AddBoxCollider (myObj, 0.0f, 0.615f, 0.0f, 0.64f, 0.05f, 0.01f,true);
+		AddBoxCollider (myObj, -0.3f, 0.317f, 0.0f, 0.05f, 0.55f,0.01f,true);
+		AddBoxCollider (myObj, 0.3f, 0.317f, 0.0f, 0.05f, 0.55f, 0.01f,true);
 
 	}
 
+
+	static void AddBoxCollider(GameObject myObj, float CentreX, float CentreY, float CentreZ, float DimX, float DimY, float DimZ, bool IsTrigger)
+	{
+		BoxCollider bc = myObj.AddComponent<BoxCollider>();
+		bc.center=new Vector3(CentreX, CentreY, CentreZ);
+		bc.size=new Vector3(DimX , DimY , DimZ);
+		bc.isTrigger=IsTrigger;
+	}
 	static void CreateKey(GameObject myObj, int KeyId)
 	{
 		ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();

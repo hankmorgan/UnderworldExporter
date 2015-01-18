@@ -9,6 +9,7 @@ public class DoorControlShock : MonoBehaviour {
 	public int DoorSpriteIndex;
 	public int NoOfFrames;
 	private SpriteRenderer sc;
+	public BoxCollider bc;
 	// Use this for initialization
 	void Start () {
 		sc=this.GetComponentInChildren<SpriteRenderer>();
@@ -17,12 +18,14 @@ public class DoorControlShock : MonoBehaviour {
 			if (state==false)//Closed
 			{
 				setSprite (0);
+				AddDoorCollision();
 			}
 			else
 			{
 				setSprite (NoOfFrames-1);
 			}
 		}
+
 	}
 
 	void setSprite(int index)
@@ -50,7 +53,7 @@ public class DoorControlShock : MonoBehaviour {
 			}
 		}
 
-	public void PlayerTouch()
+	void OnMouseDown()
 	{
 		//Debug.Log (this.name + " touched");
 		if (locked==false)
@@ -75,8 +78,9 @@ public class DoorControlShock : MonoBehaviour {
 		if(!DoorBusy)
 		{
 			Debug.Log ("Move door to open position");
-			//StartCoroutine(AnimateDoor (this.transform,Vector3.up * 90,1.0f));
-			setSprite (NoOfFrames-1);
+			RemoveDoorCollision();
+			StartCoroutine(AnimateDoorOpen (1.0f));
+			//setSprite (NoOfFrames-1);
 			state=true;
 		}
 	}
@@ -86,7 +90,9 @@ public class DoorControlShock : MonoBehaviour {
 		if(!DoorBusy)
 		{
 			Debug.Log ("Move door to closed position");
-			setSprite (0);
+			AddDoorCollision();
+			//setSprite (0);
+			StartCoroutine(AnimateDoorClose (1.0f));
 			//StartCoroutine(AnimateDoor (this.transform,Vector3.up * -90,1.0f));
 			state=false;
 		}
@@ -129,8 +135,58 @@ public class DoorControlShock : MonoBehaviour {
 			LockDoor();
 		}
 	}
-	
-	
+
+	IEnumerator AnimateDoorOpen(float traveltime)
+	{
+		float animationFrameTime= traveltime/ NoOfFrames;
+		int currentFrame=0;
+		float nextFrameTime=animationFrameTime;
+		setSprite(currentFrame++);
+		for (float t = 0.0f; t<traveltime; t+=Time.deltaTime/traveltime)
+		{
+			if(t>=nextFrameTime)
+				{
+				setSprite(currentFrame++);
+				nextFrameTime+=animationFrameTime;
+				}
+			yield return null;
+		}
+	}
+
+	IEnumerator AnimateDoorClose(float traveltime)
+	{
+		float animationFrameTime= traveltime/ NoOfFrames;
+		int currentFrame=NoOfFrames-1;
+		float nextFrameTime=animationFrameTime;
+		setSprite(currentFrame--);
+		for (float t = 0.0f; t<traveltime; t+=Time.deltaTime/traveltime)
+		{
+			if(t>=nextFrameTime)
+			{
+				setSprite(currentFrame--);
+				nextFrameTime+=animationFrameTime;
+			}
+			yield return null;
+		}
+	}
+
+	private void AddDoorCollision()
+	{
+		if (bc==null)
+		{
+			bc = this.gameObject.AddComponent<BoxCollider>();
+			bc.center=new Vector3(0.0f,0.317f,0.0f);
+			bc.size=new Vector3(0.64f, 0.64f, 0.01f);
+		}
+	}
+
+	private void RemoveDoorCollision()
+	{
+		if (bc!=null)
+		{
+			Destroy (bc);
+		}
+	}
 /*	IEnumerator AnimateDoor(Transform door, Vector3 turningAngle, float traveltime)
 	{
 		Quaternion StartAngle = door.rotation;

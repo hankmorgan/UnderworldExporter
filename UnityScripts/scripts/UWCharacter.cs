@@ -85,6 +85,7 @@ public class UWCharacter : MonoBehaviour {
 		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
 		//Rect Position = new Rect(Event.current.mousePosition.x-cursorSizeX/2,Event.current.mousePosition.y-cursorSizeY/2,cursorSizeX,cursorSizeY);
 		//GUI.DrawTexture (Position,CursorIcon);
+
 	}
 
 	// Update is called once per frame
