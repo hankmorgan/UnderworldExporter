@@ -5320,4 +5320,15 @@ public class MyTools
 	{
 		Action_Awaken aa = myObj.AddComponent<Action_Awaken>();
 	}
+
+	static void CreateComputerScreen(GameObject myObj, int ScreenStart, int NoOfFrames, int Looping)
+	{
+		ComputerScreen cs = myObj.AddComponent<ComputerScreen>();
+		cs.ScreenStart=ScreenStart;
+		cs.NoOfFrames=NoOfFrames;
+		if (Looping != 0)
+			{
+			cs.LoopFrames = true;
+			}
+	}
 }

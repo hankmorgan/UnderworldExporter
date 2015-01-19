@@ -874,20 +874,15 @@ void RenderUnityEntityComputerScreen(int game, float x, float y, float z, Object
 	{
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (currobj.shockProperties[SCREEN_START] < 246)
 		{
-		//fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_damagable");
-		//fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
-		//fprintf(MAPFILE, "\"gui\" \"guis/shock/screen_%d_%d_%d.gui\"\n", currobj.shockProperties[SCREEN_START], currobj.shockProperties[SCREEN_NO_OF_FRAMES], currobj.shockProperties[SCREEN_LOOP_FLAG]);
-		//fprintf(MAPFILE, "\"target\" \"runscript_%s_destroy\"\n", UniqueObjectName(currobj));
-		//fprintf(MAPFILE, "\"gui_parm1\" \"0\"\n", UniqueObjectName(currobj));
+		fprintf(UNITY_FILE, "\n\tCreateComputerScreen(myObj,%d,%d,%d);"
+			, currobj.shockProperties[SCREEN_START], currobj.shockProperties[SCREEN_NO_OF_FRAMES], currobj.shockProperties[SCREEN_LOOP_FLAG]);
 		}
 	else
 		{//unimplemented special screens.
-		//fprintf(MAPFILE, "\"classname\" \"%s\"\n", "func_static");
-		//fprintf(MAPFILE, "\"gui\" \"guis/shock/screen.gui\"\n");
-
+		fprintf(UNITY_FILE, "\n\tCreateComputerScreen(myObj,%d,%d,%d);", 0, 100, 1);
 		}
 
 
