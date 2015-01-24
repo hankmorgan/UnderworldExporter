@@ -253,6 +253,10 @@ int hasLock=0;
 		{
 		UnityRotation(game, -90,currobj.heading-180,0);
 		}
+	else
+		{
+		UnityRotation(game,currobj.Angle1, currobj.Angle2, currobj.Angle3);
+		}
 	
 //	RenderUnityObjectInteraction(game, x, y, z, currobj-, objList, LevelInfo);
 
@@ -442,6 +446,9 @@ void RenderUnityEntityButton(int game, float x, float y, float z, ObjectItem &cu
 		{
 		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ShockButtonHandler");
 		AddShockTriggerActions(game, x, y, z, currobj, objList, LevelInfo);
+
+		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+
 		}
 
 
@@ -661,6 +668,10 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 		{
 		UnityRotation(game, 0, currobj.heading, 0);
 		}
+	else
+		{
+		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+		}
 	if (isTrigger(objList[currobj.link]) != 0)
 		{
 		//object is a trigger
@@ -764,7 +775,14 @@ void RenderUnityEntitySIGN(int game, float x, float y, float z, ObjectItem &curr
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo,"Activator");
-	UnityRotation(game, 0, currobj.heading, 0);
+	if (game != SHOCK)
+		{
+		UnityRotation(game, 0, currobj.heading, 0);
+		}
+	else
+		{
+		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+		}
 	fprintf(UNITY_FILE, "\n\tSetSprite(myObj, \"Sprites/tmobj/tmobj_%02d\");", 20 + (currobj.flags & 0x07));
 	setLink(currobj);
 	
@@ -873,19 +891,30 @@ RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 void RenderUnityEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	
 	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (currobj.shockProperties[SCREEN_START] < 246)
 		{
+		//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 		fprintf(UNITY_FILE, "\n\tCreateComputerScreen(myObj,%d,%d,%d);"
 			, currobj.shockProperties[SCREEN_START], currobj.shockProperties[SCREEN_NO_OF_FRAMES], currobj.shockProperties[SCREEN_LOOP_FLAG]);
 		}
 	else
-		{//unimplemented special screens.
-		fprintf(UNITY_FILE, "\n\tCreateComputerScreen(myObj,%d,%d,%d);", 0, 100, 1);
+		{
+		if ((currobj.shockProperties[SCREEN_START] >= 248) && (currobj.shockProperties[SCREEN_START] <= 255))
+			{
+			//Surveillance Screen
+			fprintf(UNITY_FILE, "\n\tCreateSurveillanceScreen(myObj,\"%s\");", UniqueObjectName(objList[currobj.shockProperties[SCREEN_SURVEILLANCE_TARGET]]));
+			}
+		else
+			{//unimplemented special screens.
+			RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+			fprintf(UNITY_FILE, "\n\tCreateComputerScreen(myObj,%d,%d,%d);", 0, 100, 1);
+			}
+		
 		}
 
-
+	UnityRotation(game,currobj.Angle1,currobj.Angle2 ,currobj.Angle3);
 	if (currobj.shockProperties[SCREEN_START] < 246)
 		{//destructable
 		//createScriptCall(currobj, x, y, z, "destroy");
@@ -973,6 +1002,7 @@ void RenderUnityEntityNULL_TRIGGER(int game, float x, float y, float z, ObjectIt
 	fprintf(UNITY_FILE, "\n\tCreateNull_Trigger(myObj, %d,%d,%d,%d,%d,%d);"
 		, currobj.TriggerAction, currobj.TriggerOnce, currobj.conditions[0], currobj.conditions[1], currobj.conditions[2], currobj.conditions[3]);
 	AddShockTriggerActions(game,x,y,z,currobj,objList,LevelInfo);
+	UnityRotation(game,currobj.Angle1,currobj.Angle2,currobj.Angle3);//Needed for surveillance cameras.
 	}
 
 void RenderUnityEntityREPULSOR(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1528,9 +1558,13 @@ float offX; float offY; float offZ;
 
 void UnityRotation(int game, int angle1, int angle2, int angle3)
 	{
+	float ang1 = angle1;
+	float ang2 = angle2;
+	float ang3 = angle3;
 	switch (game)
 		{
 		case SHOCK:
+			fprintf(UNITY_FILE, "\n\tSetRotation(myObj,(float)%f,(float)%f,(float)%f);", -((float)ang1 / 256.0)*360.0, ((float)ang2 / 256.0)*360.0, ((float)ang3 / 256.0)*360.0);
 			break;
 		default:
 			fprintf(UNITY_FILE, "\n\tSetRotation(myObj,%d,%d,%d);",angle1,angle2,angle3);//-180

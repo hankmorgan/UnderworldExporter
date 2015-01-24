@@ -3,42 +3,82 @@ using System.Collections;
 
 public class RemoteCamera : MonoBehaviour {
 	public GameObject ScreenToDisplayOn;
-	public int X;
-	public int Y;
-	private Camera cam;
+	//public int X;
+	//public int Y;
+	public RemoteCameraCapture cam;
+	private int FrameInterval=30;
+	private int FrameIntervalCounter=30;
+	//public Texture2D RenderedImage;
+	public string Target;
+	Material[] myMat;
 	// Use this for initialization
 	void Start () {
-		cam = this.GetComponent<Camera>();
+		GameObject TargetCamera= GameObject.Find (Target);
+		if (TargetCamera!=null)
+		{
+			cam = TargetCamera.GetComponent<RemoteCameraCapture>();
+			if (cam==null)
+			{
+				cam=TargetCamera.AddComponent<RemoteCameraCapture>();
+			}
+		}
+
+		myMat = ScreenToDisplayOn.renderer.materials;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-	}
 
-	void OnPostRender()
-	{
-		if (ScreenToDisplayOn!=null)
+		//Material[] myMat = ScreenToDisplayOn.renderer.materials;
+		//for (int i = 0; i<myMat.GetUpperBound(0);i++)
+		//{
+			//Debug.Log (myMat[i].name);
+		//	myMat[i].mainTexture=RenderedImage;
+		//}
+		//RenderedImage=CaptureImage(cam,Screen.width,Screen.height);
+		FrameIntervalCounter++;
+		if (FrameIntervalCounter>=FrameInterval)
 		{
-			SpriteRenderer SR = ScreenToDisplayOn.GetComponent<SpriteRenderer>();
-			if (SR!=null)
+			FrameIntervalCounter=0;
+			for (int i = 0; i<=myMat.GetUpperBound(0);i++)
 			{
-				Texture2D newTex=CaptureImage(cam,Screen.width,Screen.height);
-				Sprite newSprite= Sprite.Create( newTex,new Rect(0,0,newTex.width,newTex.height), new Vector2(0.5f, 0.5f));
-				SR.sprite= newSprite;
+				//Debug.Log (myMat[i].name);
+				myMat[i].mainTexture=cam.RenderedImage;
 			}
 		}
+
 	}
 
-	/*Source: http://raypendergraph.wikidot.com/codesnippet:capturing-a-camera-image-in-unity*/
-	public Texture2D CaptureImage (Camera camera, int width, int height)
-	{
-		Texture2D captured = new Texture2D (width, height);
-		camera.Render();
-		RenderTexture.active = camera.targetTexture;
-		captured.ReadPixels(new Rect(0,0,width,height),0,0);
-		captured.Apply();
-		RenderTexture.active = null;
-		return captured;
-	}
+	//void OnPostRender()
+	//{
+	//	Debug.Log ("Onpostrender");
+		//if (ScreenToDisplayOn!=null)
+		//{
+			//SpriteRenderer SR = ScreenToDisplayOn.GetComponent<SpriteRenderer>();
+			//if (SR!=null)
+		//{
+		//#pragma warning disable
+	//	RenderedImage=CaptureImage(cam,Screen.width,Screen.height);
+		//#pragma warning restore
+
+
+				//Sprite newSprite= Sprite.Create( RenderedImage,new Rect(0,0,RenderedImage.width,RenderedImage.height), new Vector2(0.5f, 0.5f));
+				//SR.sprite= newSprite;
+			//}
+	//	}
+	//}
+
+	///*Source: http://raypendergraph.wikidot.com/codesnippet:capturing-a-camera-image-in-unity*/
+	//public Texture2D CaptureImage (Camera camera, int width, int height)
+	//{
+	//	Debug.Log ("Capturing");
+	//	Texture2D captured = new Texture2D (width, height);
+	//	camera.Render();
+	//	RenderTexture.active = camera.targetTexture;
+	//	captured.ReadPixels(new Rect(0,0,width,height),0,0);
+	//	captured.Apply();
+	//	RenderTexture.active = null;
+	//	return captured;
+	//}
 }

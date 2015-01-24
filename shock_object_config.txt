@@ -445,7 +445,7 @@
 444 14 0 5 entity 18 ZERO_GRAVITY_CREATURE atdm:ai_undead_zombie 0 Sprites/objects_1350_1556 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 445 14 0 6 entity 18 SONIC_THE_HEDGEHOG atdm:ai_undead_zombie 0 Sprites/objects_1350_1559 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 446 14 0 7 entity 18 INVISIBLE_MUTANT atdm:ai_undead_zombie 0 Sprites/objects_1350_1562 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-447 14 0 8 entity 18 HUMANOID_MUTANT atdm:ai_undead_zombie 0 Sprites/objects_1350_1565 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+447 14 0 8 entity 18 VIRUS_MUTANT atdm:ai_undead_zombie 0 Sprites/objects_1350_1565 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 448 14 1 0 entity 18 LIFTER atdm:ai_lantern_bot 0 Sprites/objects_1350_1568 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 449 14 1 1 entity 18 REPAIRBOT atdm:ai_lantern_bot 0 Sprites/objects_1350_1571 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 450 14 1 2 entity 18 SERV_BOT atdm:ai_lantern_bot 0 Sprites/objects_1350_1574 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga

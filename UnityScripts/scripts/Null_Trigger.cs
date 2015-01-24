@@ -59,7 +59,7 @@ public class Null_Trigger : MonoBehaviour {
 		case 16: //Action_Radaway
 			this.GetComponent<Action_Radaway>().PerformAction ();
 			break;
-		case 17: //Action_Change_State
+		case 19: //Action_Change_State
 			this.GetComponent<Action_Change_State>().PerformAction ();
 			break;
 		case 21: //Action_Awaken

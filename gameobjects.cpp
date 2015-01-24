@@ -430,38 +430,38 @@ mstaddress_pointer=0;
 					case HARDWARE:break;
 					case SOFTWARE_LOGS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex,LevelNo) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					}
 					case FIXTURES:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					}
 					case GETTABLES_OTHER:
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
+						if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					case SWITCHES_PANELS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					}
 					case DOORS_GRATINGS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					}
 					case ANIMATED:break;
 					case TRAPS_MARKERS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex) == -1)  { fprintf(LOGFILE,"no properties found!"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
 					break;
 					}
 					case CONTAINERS_CORPSES:
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex) == -1)  { fprintf(LOGFILE,"no properties found!"); }
+						if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
 					break;
 					case CRITTERS:
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, MasterIndex) == -1)  { fprintf(LOGFILE,"no properties found!"); }
+						if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
 						break;
 					}
 					UniqueObjectName(objList[MasterIndex]);
@@ -704,9 +704,10 @@ switch (game)
 		}
 }
 
-int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int objIndex)
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int objIndex,int levelNo)
 {
 //
+
 	unsigned char *sub_ark ;
 	long chunkUnpackedLength;
 	long chunkType;//compression type
@@ -804,6 +805,19 @@ while (k<=chunkUnpackedLength)
 							  fprintf(LOGFILE,"\nNo of Frames: %d", objList[objIndex].shockProperties[SCREEN_NO_OF_FRAMES]);
 							  fprintf(LOGFILE,"\nLoop repeats: %d ", objList[objIndex].shockProperties[SCREEN_LOOP_FLAG]);
 							  fprintf(LOGFILE,"\nStart Frame: %d (from chunk 321) = %d", objList[objIndex].shockProperties[SCREEN_START], 321 + objList[objIndex].shockProperties[SCREEN_START]);
+							  if ((objList[objIndex].shockProperties[SCREEN_START] >= 248) && (objList[objIndex].shockProperties[SCREEN_START] <= 255))
+								  {//Survellance
+								  unsigned char *sur_ark;
+								  blockAddress = getShockBlockAddress(levelNo * 100 + SURVELLANCE_OFFSET, archive_ark, &chunkPackedLength, &chunkUnpackedLength, &chunkType);
+								  if (blockAddress != -1) 
+									  {
+									  sur_ark = new unsigned char[chunkUnpackedLength];
+									  fprintf(LOGFILE, "\n\tSurvellance Chunk at %d\n", blockAddress);
+									  LoadShockChunk(blockAddress, chunkType, archive_ark, sur_ark, chunkPackedLength, chunkUnpackedLength);
+									  objList[objIndex].shockProperties[SCREEN_SURVEILLANCE_TARGET] = getValAtAddress(sur_ark, (objList[objIndex].shockProperties[SCREEN_START]-248)*2, 16);
+									  fprintf(LOGFILE, "\tSurveillance item id: %d", objList[objIndex].shockProperties[SCREEN_SURVEILLANCE_TARGET]);
+									  }
+								  }
 							  break;
 						  default:
 							  fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));

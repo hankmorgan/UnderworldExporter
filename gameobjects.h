@@ -208,6 +208,7 @@
 #define SCREEN_NO_OF_FRAMES 0
 #define SCREEN_LOOP_FLAG 1
 #define SCREEN_START 2
+#define SCREEN_SURVEILLANCE_TARGET 3
 //Master object type definition
 struct ObjectItem
 {
@@ -396,7 +397,7 @@ char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
 int getObjectIDByClass(int objClass, int subClass, int subClassIndex);
 void shockCommonObject();
 
-int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType, int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj);
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType, int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj, int LevelNo);
 void getShockTriggerAction(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
 int LookupxRefTable(xrefTable *xref, int x, int y, int MasterIndex, int tableSize);
 void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);

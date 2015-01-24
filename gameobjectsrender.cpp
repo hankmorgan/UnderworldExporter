@@ -84,6 +84,22 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 		switch (game)
 			{
 			case SHOCK:
+				if (objList[nextObj].x == 0)
+					{
+					*offX = *offX + 2.0f;
+					}
+				if (objList[nextObj].x == 128)
+					{
+					*offX = *offX - 2.0f;
+					}
+				if (objList[nextObj].y == 0)
+					{
+					*offY = *offY + 2.0f;
+					}
+				if (objList[nextObj].y == 128)
+					{
+					*offY = *offY - 2.0f;
+					}
 				break;
 			default:
 				if (objList[nextObj].x == 0)

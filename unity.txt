@@ -3,86 +3,86 @@
 	Vector3 pos;
 	GameObject invMarker = GameObject.Find("InventoryMarker");
 	Container ParentContainer;
-	myObj= CreateGameObject("BROKEN_LEVER_04_04_01_0049",4.800000f,4.462500f,5.695313f);
+	myObj= CreateGameObject("BROKEN_LEVER_04_04_01_0049",4.820000f,4.462500f,5.695313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0615",true);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0648",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0648",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0647",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0647",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("SV_TRANQ_DARTS_04_04_01_0387",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("SV_TRANQ_DARTS_04_04_01_0387",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0058",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,19, 0);
 
-	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0489",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0489",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
-	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0436",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0436",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
-	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0660",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0660",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
-	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0493",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0493",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
-	myObj= CreateGameObject("GROUP_ACCESS_CARD_2",5.400000f,0.131250f,5.400000f);
+	myObj= CreateGameObject("GROUP_ACCESS_CARD_2",5.380000f,0.131250f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0788",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",5,233, 0);
 	CreateKey(myObj, 0);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0477",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0477",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("BEVERAGE_CONTAINER_04_04_01_0478",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("BEVERAGE_CONTAINER_04_04_01_0478",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0568",true);
 
-	myObj= CreateGameObject("SKULL_04_04_01_0479",5.400000f,0.112500f,5.400000f);
+	myObj= CreateGameObject("SKULL_04_04_01_0479",5.380000f,0.112500f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("SKULL_04_04_01_0481",5.400000f,0.112500f,5.400000f);
+	myObj= CreateGameObject("SKULL_04_04_01_0481",5.380000f,0.112500f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("LAND_MINE_04_04_01_0671",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("LAND_MINE_04_04_01_0671",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0189",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,59, 0);
 
-	myObj= CreateGameObject("LAND_MINE_04_04_01_0492",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("LAND_MINE_04_04_01_0492",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0189",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,59, 0);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0664",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0664",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("BIOLOGICAL_SYSTEMS_MONITOR_04_04_01_0550",5.400000f,0.131250f,5.400000f);
+	myObj= CreateGameObject("BIOLOGICAL_SYSTEMS_MONITOR_04_04_01_0550",5.380000f,0.131250f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0235",true);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0549",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0549",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0548",5.400000f,0.150000f,5.400000f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_04_04_01_0548",5.380000f,0.150000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("MULTIMEDIA_DATA_READER_04_04_01_0147",5.400000f,0.075000f,5.400000f);
+	myObj= CreateGameObject("MULTIMEDIA_DATA_READER_04_04_01_0147",5.380000f,0.075000f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0246",true);
 
 	myObj= CreateGameObject("EMAIL_04_04_01_0321",5.395312f,0.093750f,5.770312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0018",5.400000f,0.093750f,5.400000f);
+	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0018",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
@@ -129,10 +129,10 @@
 	myObj= CreateGameObject("BULLET_HOLE_37_09_01_0046",45.257813f,1.706250f,11.095312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0836",true);
 
-	myObj= CreateGameObject("BULLET_HOLE_37_09_01_0077",45.000000f,1.537500f,11.400000f);
+	myObj= CreateGameObject("BULLET_HOLE_37_09_01_0077",44.980000f,1.537500f,11.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0836",true);
 
-	myObj= CreateGameObject("LAND_MINE_20_10_01_0339",24.600000f,1.350000f,12.600000f);
+	myObj= CreateGameObject("LAND_MINE_20_10_01_0339",24.580000f,1.350000f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0189",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,59, 0);
 
@@ -156,35 +156,35 @@
 	myObj= CreateGameObject("HUMAN_CORPSE_23_10_01_0467",28.420313f,1.556250f,12.970312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_23_10_01_0466",28.200001f,1.462500f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_23_10_01_0466",28.180000f,1.462500f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0692",true);
 
-	myObj= CreateGameObject("SPARQ_BEAM_24_10_01_0323",29.400000f,1.293750f,12.600000f);
+	myObj= CreateGameObject("SPARQ_BEAM_24_10_01_0323",29.379999f,1.293750f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0034",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,11, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_26_10_01_0256",31.799999f,1.575000f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_26_10_01_0256",31.780001f,1.575000f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
-	myObj= CreateGameObject("SKULL_27_10_01_0056",33.000000f,1.312500f,12.600000f);
+	myObj= CreateGameObject("SKULL_27_10_01_0056",32.980000f,1.312500f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_28_10_01_0099",34.200001f,1.462500f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_28_10_01_0099",34.180000f,1.462500f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0692",true);
 
-	myObj= CreateGameObject("DARK_LORD_TUAOHTUA_29_10_01_0704",35.400002f,1.800000f,12.600000f);
+	myObj= CreateGameObject("DARK_LORD_TUAOHTUA_29_10_01_0704",35.380001f,1.800000f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_30_10_01_0270",36.599998f,1.575000f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_30_10_01_0270",36.580002f,1.575000f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_32_10_01_0267",39.000000f,1.575000f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_32_10_01_0267",38.980000f,1.575000f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
 	myObj= CreateGameObject("BROKEN_GUN_32_10_01_0279",38.657814f,1.368750f,12.670313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0592",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_33_10_01_0280",40.200001f,1.575000f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_33_10_01_0280",40.180000f,1.575000f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
 	myObj= CreateGameObject("BROKEN_GUN_36_10_01_0275",44.095314f,1.368750f,13.157812f);
@@ -194,10 +194,10 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0702",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,210, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_37_10_01_0196",45.000000f,1.556250f,12.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_37_10_01_0196",44.980000f,1.556250f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
-	myObj= CreateGameObject("BRIEFCASE_38_10_01_0246",46.200001f,1.443750f,12.600000f);
+	myObj= CreateGameObject("BRIEFCASE_38_10_01_0246",46.180000f,1.443750f,12.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0588",true);
 
 	myObj= CreateGameObject("STAMINUP__STIMULANT_20_11_01_0342",24.107813f,1.350000f,14.207812f);
@@ -207,7 +207,7 @@
 	myObj= CreateGameObject("SKULL_20_11_01_0341",24.482813f,1.312500f,14.320313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_20_11_01_0340",24.000000f,1.593750f,13.945313f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_20_11_01_0340",24.020000f,1.593750f,13.945313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
@@ -221,10 +221,10 @@
 	myObj= CreateGameObject("HUMAN_CORPSE_21_11_01_0469",26.057812f,1.462500f,13.232813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0692",true);
 
-	myObj= CreateGameObject("CRATE_22_11_01_0519",27.000000f,1.575000f,13.800000f);
+	myObj= CreateGameObject("CRATE_22_11_01_0519",26.980000f,1.575000f,13.780000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1402",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_24_11_01_0464",29.432812f,1.556250f,13.200000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_24_11_01_0464",29.432812f,1.556250f,13.220000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
 	myObj= CreateGameObject("BROKEN_GUN_26_11_01_0127",32.207813f,1.368750f,13.532812f);
@@ -233,7 +233,7 @@
 	myObj= CreateGameObject("HUMAN_CORPSE_26_11_01_0052",32.170311f,1.575000f,13.345312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
-	myObj= CreateGameObject("STAMINUP__STIMULANT_26_11_01_0070",31.799999f,1.350000f,13.800000f);
+	myObj= CreateGameObject("STAMINUP__STIMULANT_26_11_01_0070",31.780001f,1.350000f,13.780000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0200",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,63, 0);
 
@@ -245,23 +245,24 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
 	CreateSHOCKActivators(myObj,7);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_27_11_01_0161",32.620312f,1.575000f,13.720312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
-	myObj= CreateGameObject("CART_29_11_01_0611",35.400002f,1.200000f,13.800000f);
+	myObj= CreateGameObject("CART_29_11_01_0611",35.380001f,1.200000f,13.780000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_31_11_01_0269",37.799999f,1.462500f,13.800000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_31_11_01_0269",37.779999f,1.462500f,13.780000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0692",true);
 
-	myObj= CreateGameObject("GRATING_33_11_01_0175",40.200001f,1.800000f,14.395312f);
+	myObj= CreateGameObject("GRATING_33_11_01_0175",40.180000f,1.800000f,14.395312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1076",true);
 
 	myObj= CreateGameObject("EXPLOSION_RESIDUE_34_11_01_0277",41.395313f,1.200000f,13.757813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0840",true);
 
-	myObj= CreateGameObject("GRATING_34_11_01_0003",41.400002f,1.800000f,14.395312f);
+	myObj= CreateGameObject("GRATING_34_11_01_0003",41.380001f,1.800000f,14.395312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1076",true);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_37_11_01_0273",45.332813f,1.575000f,14.020312f);
@@ -276,31 +277,34 @@
 	myObj= CreateGameObject("BLOOD_STAIN_38_11_01_0379",46.270313f,1.200000f,13.757813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0846",true);
 
-	myObj= CreateGameObject("EMAIL_38_11_01_0319",46.200001f,1.293750f,13.800000f);
+	myObj= CreateGameObject("EMAIL_38_11_01_0319",46.180000f,1.293750f,13.780000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_17_12_01_0163",21.000000f,1.800000f,15.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_17_12_01_0163",20.980000f,1.800000f,14.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_17_12_01_0337",21.000000f,1.800000f,15.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_17_12_01_0337",20.980000f,1.800000f,14.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("KEYPAD_PANEL_23_12_01_0291",27.600000f,2.062500f,14.695313f);
+	myObj= CreateGameObject("KEYPAD_PANEL_23_12_01_0291",27.620001f,2.062500f,14.695313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0991",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_023_012",28.200001f,1.200000f,14.400000f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_023_012",28.180000f,1.200000f,14.420000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2406);
 
-	myObj= CreateGameObject("ICON_23_12_01_0515",27.600000f,2.006250f,15.482813f);
+	myObj= CreateGameObject("ICON_23_12_01_0515",27.620001f,2.006250f,15.482813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,127, 0);
 
@@ -308,76 +312,81 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0712",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,211, 0);
 
-	myObj= CreateGameObject("CAMERA_28_12_01_0421",33.599998f,2.193750f,14.470312f);
+	myObj= CreateGameObject("CAMERA_28_12_01_0421",33.619999f,2.193750f,14.470312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("DOOR_028_012",34.200001f,1.200000f,14.400000f);
+	myObj= CreateGameObject("DOOR_028_012",34.180000f,1.200000f,14.420000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2404);
 
-	myObj= CreateGameObject("BEAM_BLAST_35_12_01_0057",42.599998f,1.650000f,15.595312f);
+	myObj= CreateGameObject("BEAM_BLAST_35_12_01_0057",42.580002f,1.650000f,15.595312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0831",true);
 
 	myObj= CreateGameObject("GRAFFITI_36_12_01_0513",44.395313f,1.912500f,14.995313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0399",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,128, 0);
 
-	myObj= CreateGameObject("REPAIRBOT_21_13_01_0192",25.799999f,1.593750f,16.200001f);
+	myObj= CreateGameObject("REPAIRBOT_21_13_01_0192",25.780001f,1.593750f,16.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1571",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,449, 0);
 
-	myObj= CreateGameObject("SEVERED_HEAD_25_13_01_0083",30.600000f,1.425000f,16.200001f);
+	myObj= CreateGameObject("SEVERED_HEAD_25_13_01_0083",30.580000f,1.425000f,16.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0724",true);
 
-	myObj= CreateGameObject("DARK_LORD_TUAOHTUA_27_13_01_0707",33.000000f,1.800000f,16.200001f);
+	myObj= CreateGameObject("DARK_LORD_TUAOHTUA_27_13_01_0707",32.980000f,1.800000f,16.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("BUTTON_27_13_01_0702",32.995312f,2.100000f,16.795313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
 	CreateSHOCKActivators(myObj,7);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_13_01_0211",35.400002f,1.800000f,16.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_13_01_0211",35.380001f,1.800000f,16.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("HUMANOID_MUTANT_30_13_01_0203",36.028126f,1.593750f,16.546875f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("DOOR_034_013",41.400002f,1.200000f,16.795313f);
+	myObj= CreateGameObject("DOOR_034_013",41.380001f,1.200000f,16.795313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2404);
 
-	myObj= CreateGameObject("BLAST_DOOR_036_013",43.799999f,1.200000f,15.600000f);
+	myObj= CreateGameObject("BLAST_DOOR_036_013",43.779999f,1.200000f,15.620000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,10,0,2400);
 
-	myObj= CreateGameObject("SERVICE_ACCESS_DOOR_024_014",29.400000f,1.200000f,16.799999f);
+	myObj= CreateGameObject("SERVICE_ACCESS_DOOR_024_014",29.379999f,1.200000f,16.820000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1030",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2401);
 
-	myObj= CreateGameObject("NULL_TRIGGER_26_14_01_0300",31.799999f,1.593750f,17.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_26_14_01_0300",31.780001f,1.593750f,17.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SWITCH_27_14_01_0210",33.000000f,1.275000f,17.400000f);
+	myObj= CreateGameObject("SWITCH_27_14_01_0210",32.980000f,1.275000f,17.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_14_01_0680",35.400002f,1.800000f,17.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_14_01_0680",35.380001f,1.800000f,17.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
 	AddACTION_TIMER(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CAMERA_30_14_01_0420",36.632813f,3.543750f,16.799999f);
+	myObj= CreateGameObject("CAMERA_30_14_01_0420",36.632813f,3.543750f,16.820000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("CHAIR_35_14_01_0378",42.632813f,1.200000f,17.470312f);
@@ -386,7 +395,7 @@
 	myObj= CreateGameObject("HUMAN_CORPSE_36_14_01_0111",44.395313f,1.462500f,17.245312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0692",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_38_14_01_0281",46.200001f,1.575000f,17.400000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_38_14_01_0281",46.180000f,1.575000f,17.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
 	myObj= CreateGameObject("BROKEN_GUN_38_14_01_0282",46.457813f,1.368750f,17.132813f);
@@ -399,16 +408,17 @@
 	myObj= CreateGameObject("HUMAN_CORPSE_40_14_01_0283",48.257813f,1.556250f,17.282812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_41_14_01_0286",49.799999f,1.593750f,17.400000f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_41_14_01_0286",49.779999f,1.593750f,17.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("LARGE_BUTTON_23_15_01_0289",28.232813f,1.912500f,18.000000f);
+	myObj= CreateGameObject("LARGE_BUTTON_23_15_01_0289",28.232813f,1.912500f,18.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,7);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("FERN_28_15_01_0122",34.200001f,1.350000f,18.600000f);
+	myObj= CreateGameObject("FERN_28_15_01_0122",34.180000f,1.350000f,18.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0507",true);
 
 
@@ -431,13 +441,13 @@
 	myObj= CreateGameObject("DEBRIS_43_15_01_0384",52.307812f,1.181250f,18.932812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0601",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_21_16_01_0118",25.799999f,0.356250f,19.799999f);
+	myObj= CreateGameObject("HUMAN_CORPSE_21_16_01_0118",25.780001f,0.356250f,19.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
 	myObj= CreateGameObject("SMALL_PLANT_27_16_01_0124",32.695313f,1.425000f,19.945313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0516",true);
 
-	myObj= CreateGameObject("GRASS_29_16_01_0073",35.400002f,1.575000f,19.799999f);
+	myObj= CreateGameObject("GRASS_29_16_01_0073",35.380001f,1.575000f,19.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0495",true);
 
 	myObj= CreateGameObject("SIGN_30_16_01_0514",37.195313f,2.325000f,19.795313f);
@@ -451,36 +461,39 @@
 	myObj= CreateGameObject("DEBRIS_38_16_01_0197",46.270313f,1.500000f,19.682812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0604",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_42_16_01_0287",51.000000f,1.593750f,19.799999f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_42_16_01_0287",50.980000f,1.593750f,19.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_15_17_01_0578",18.600000f,2.400000f,21.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_15_17_01_0578",18.580000f,2.400000f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 0,0,0,0,0,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("ECOLOGY_TRIGGER_16_17_01_0437",19.799999f,1.800000f,21.000000f);
+	myObj= CreateGameObject("ECOLOGY_TRIGGER_16_17_01_0437",19.780001f,1.800000f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1373",true);
 
 	myObj= CreateGameObject("WORDS_16_17_01_0248",19.232813f,2.662500f,20.882813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("WORDS_16_17_01_0249",19.200001f,2.418750f,21.145313f);
+	myObj= CreateGameObject("WORDS_16_17_01_0249",19.219999f,2.418750f,21.145313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("CAMERA_16_17_01_0415",20.395313f,3.243750f,20.582813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_17_17_01_0288",21.000000f,1.800000f,21.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_17_17_01_0288",20.980000f,1.800000f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("ACCESS_PANEL_18_17_01_0577",22.795313f,1.950000f,21.267187f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0959",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_18_17_01_0137",21.895313f,1.537500f,20.807812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
@@ -494,30 +507,30 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("SHRUB_28_17_01_0081",34.200001f,1.781250f,21.000000f);
+	myObj= CreateGameObject("SHRUB_28_17_01_0081",34.180000f,1.781250f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0492",true);
 
 	myObj= CreateGameObject("EMAIL_29_17_01_0462",35.807812f,1.293750f,20.882813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("GRASS_29_17_01_0080",35.400002f,1.575000f,21.000000f);
+	myObj= CreateGameObject("GRASS_29_17_01_0080",35.380001f,1.575000f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0495",true);
 
 	myObj= CreateGameObject("SEVERED_HEAD_30_17_01_0156",36.970314f,1.425000f,20.920313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0734",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_30_17_01_0461",36.599998f,1.556250f,21.000000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_30_17_01_0461",36.580002f,1.556250f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
 	myObj= CreateGameObject("DH_07_STUNGUN_43_17_01_0382",51.857811f,1.368750f,20.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0043",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,14, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_43_17_01_0381",52.200001f,1.556250f,21.000000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_43_17_01_0381",52.180000f,1.556250f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
-	myObj= CreateGameObject("HIDDEN_DOOR_046_017",56.395313f,1.200000f,21.000000f);
+	myObj= CreateGameObject("HIDDEN_DOOR_046_017",56.395313f,1.200000f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2438);
@@ -530,7 +543,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0052",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,17, 0);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_015_018",19.195313f,1.800000f,22.200001f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_015_018",19.195313f,1.800000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,10,0,2406);
@@ -540,15 +553,17 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,211, 0);
 
 
-	myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0112",22.200001f,0.600000f,22.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0112",22.180000f,0.600000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0113",22.200001f,0.600000f,22.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0113",22.180000f,0.600000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SV_23_DARTGUN_19_18_01_0336",23.357813f,0.225000f,22.495312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0004",true);
@@ -562,28 +577,31 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,12);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("HUMAN_BONES_19_18_01_0061",23.400000f,0.262500f,22.200001f);
+	myObj= CreateGameObject("HUMAN_BONES_19_18_01_0061",23.379999f,0.262500f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0712",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,211, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_20_18_01_0006",24.600000f,1.800000f,22.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_20_18_01_0006",24.580000f,1.800000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_20_18_01_0036", 0,"DOOR_026_021", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_20_18_01_0036",24.600000f,1.800000f,22.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_20_18_01_0036",24.580000f,1.800000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("ENERGY_CHARGE_STATION_22_18_01_0659",27.000000f,1.800000f,22.200001f);
+	myObj= CreateGameObject("ENERGY_CHARGE_STATION_22_18_01_0659",26.980000f,1.800000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0952",true);
 
 	myObj= CreateGameObject("CRATE_23_18_01_0663",28.270313f,1.987500f,22.307812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("BRIDGE_24_18_01_0170",29.400000f,1.762500f,22.200001f);
+	myObj= CreateGameObject("BRIDGE_24_18_01_0170",29.379999f,1.762500f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SV_23_DARTGUN_25_18_01_0035",30.220312f,0.825000f,22.420313f);
@@ -608,10 +626,11 @@
 	myObj= CreateGameObject("CRATE_38_18_01_0688",45.970314f,1.387500f,22.457813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_44_18_01_0338",53.400002f,1.800000f,22.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_44_18_01_0338",53.380001f,1.800000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CRATE_12_19_01_0488",14.995313f,1.987500f,22.832813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
@@ -619,33 +638,36 @@
 	myObj= CreateGameObject("CRATE_12_19_01_0487",15.482813f,1.987500f,23.357813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("CRATE_12_19_01_0486",15.000000f,1.987500f,23.400000f);
+	myObj= CreateGameObject("CRATE_12_19_01_0486",14.980000f,1.987500f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("CRATE_14_19_01_0490",17.400000f,1.987500f,23.400000f);
+	myObj= CreateGameObject("CRATE_14_19_01_0490",17.379999f,1.987500f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
 	myObj= CreateGameObject("BONES_17_19_01_0103",21.370312f,1.368750f,23.170313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0715",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,212, 0);
 
-	myObj= CreateGameObject("SEVERED_LIMB_17_19_01_0101",21.000000f,1.500000f,23.400000f);
+	myObj= CreateGameObject("SEVERED_LIMB_17_19_01_0101",20.980000f,1.500000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0720",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_19_01_0576",23.400000f,1.200000f,23.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_19_01_0576",23.379999f,1.200000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,1,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_19_01_0575", 0,"NULL_TRIGGER_19_19_01_0574", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_19_01_0575",23.400000f,1.200000f,23.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_19_01_0575",23.379999f,1.200000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,1,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_19_01_0574",23.400000f,1.200000f,23.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_19_01_0574",23.379999f,1.200000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,1,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("EMAIL_20_19_01_0485",24.257813f,0.693750f,23.357813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
@@ -658,23 +680,24 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,127, 0);
 
-	myObj= CreateGameObject("KEYPAD_PANEL_20_19_01_0096",24.000000f,1.200000f,23.770313f);
+	myObj= CreateGameObject("KEYPAD_PANEL_20_19_01_0096",24.020000f,1.200000f,23.770313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0991",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SERV_BOT_23_19_01_0135",28.232813f,0.993750f,23.957813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1574",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,450, 0);
 
-	myObj= CreateGameObject("BRIDGE_24_19_01_0143",29.400000f,1.762500f,23.400000f);
+	myObj= CreateGameObject("BRIDGE_24_19_01_0143",29.379999f,1.762500f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SV_NEEDLE_DARTS_25_19_01_0191",30.595312f,0.693750f,23.582813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
-	myObj= CreateGameObject("CONTROL_PEDESTAL_25_19_01_0131",30.000000f,0.637500f,23.545313f);
+	myObj= CreateGameObject("CONTROL_PEDESTAL_25_19_01_0131",30.020000f,0.637500f,23.545313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SHRUBBERY_28_19_01_0121",34.420311f,1.781250f,23.282812f);
@@ -683,26 +706,26 @@
 	myObj= CreateGameObject("GRASS_29_19_01_0074",35.245312f,1.575000f,23.245312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0495",true);
 
-	myObj= CreateGameObject("CYBORG_DRONE_30_19_01_0352",36.599998f,1.650000f,23.400000f);
+	myObj= CreateGameObject("CYBORG_DRONE_30_19_01_0352",36.580002f,1.650000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
 	myObj= CreateGameObject("CAMERA_34_19_01_0419",41.920311f,2.587500f,22.907812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_035_019",43.195313f,1.200000f,23.400000f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_035_019",43.195313f,1.200000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,10,0,2406);
 
-	myObj= CreateGameObject("CRATE_38_19_01_0690",46.200001f,1.575000f,23.400000f);
+	myObj= CreateGameObject("CRATE_38_19_01_0690",46.180000f,1.575000f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1402",true);
 
 	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_38_19_01_0412",46.045311f,1.350000f,22.982813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("CYBORG_ASSASSIN_42_19_01_0347",51.000000f,1.593750f,23.400000f);
+	myObj= CreateGameObject("CYBORG_ASSASSIN_42_19_01_0347",50.980000f,1.593750f,23.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,462, 0);
 
@@ -711,7 +734,7 @@
 
 
 
-	myObj= CreateGameObject("DOOR_020_020",24.000000f,0.600000f,24.600000f);
+	myObj= CreateGameObject("DOOR_020_020",24.020000f,0.600000f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2404);
@@ -750,60 +773,64 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0702",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,210, 0);
 
-	myObj= CreateGameObject("DEAD_MUTANT_37_20_01_0692",45.000000f,2.700000f,24.600000f);
+	myObj= CreateGameObject("DEAD_MUTANT_37_20_01_0692",44.980000f,2.700000f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1178",true);
 
-	myObj= CreateGameObject("ML_STANDARD_ROUNDS_37_20_01_0691",45.000000f,2.493750f,24.600000f);
+	myObj= CreateGameObject("ML_STANDARD_ROUNDS_37_20_01_0691",44.980000f,2.493750f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0049",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,16, 0);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_38_20_01_0219",46.200001f,1.593750f,24.600000f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_38_20_01_0219",46.180000f,1.593750f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("BROKEN_CLOCK_38_20_01_0198",46.200001f,1.406250f,24.600000f);
+	myObj= CreateGameObject("BROKEN_CLOCK_38_20_01_0198",46.180000f,1.406250f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0610",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_41_20_01_0236",49.799999f,1.800000f,24.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_41_20_01_0236",49.779999f,1.800000f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_46_20_01_0139",55.799999f,1.800000f,24.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_46_20_01_0139",55.779999f,1.800000f,24.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 0,0,17,48,1,255);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BED_11_21_01_0169",14.020312f,1.481250f,25.907812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_14_21_01_0452",17.400000f,1.800000f,25.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_14_21_01_0452",17.379999f,1.800000f,25.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("DOOR_015_021",19.195313f,1.200000f,25.799999f);
+	myObj= CreateGameObject("DOOR_015_021",19.195313f,1.200000f,25.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,1,0,2404);
 
-	myObj= CreateGameObject("SERV_BOT_20_21_01_0004",24.557812f,0.956250f,25.200001f);
+	myObj= CreateGameObject("SERV_BOT_20_21_01_0004",24.557812f,0.956250f,25.219999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1574",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,450, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_20_21_01_0205",24.600000f,1.800000f,25.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_20_21_01_0205",24.580000f,1.800000f,25.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_41_30_01_0208", 0,"NULL_TRIGGER_20_22_01_0141", 0,"NULL_TRIGGER_29_13_01_0211", 0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_21_21_01_0414",26.057812f,1.818750f,25.532812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SCREEN_24_21_01_0661",29.995312f,2.625000f,25.795313f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	CreateComputerScreen(myObj,81,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("DOOR_026_021",31.799999f,0.600000f,26.395313f);
+	myObj= CreateGameObject("DOOR_026_021",31.780001f,0.600000f,26.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2404);
@@ -811,7 +838,7 @@
 	myObj= CreateGameObject("SEVERED_LIMB_40_21_01_0107",48.295311f,1.350000f,26.020313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0720",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_40_21_01_0293",48.599998f,1.443750f,25.799999f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_40_21_01_0293",48.580002f,1.443750f,25.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
@@ -823,10 +850,10 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("SHODAN_TRIGGER_46_21_01_0483",55.799999f,1.800000f,25.799999f);
+	myObj= CreateGameObject("SHODAN_TRIGGER_46_21_01_0483",55.779999f,1.800000f,25.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1376",true);
 
-	myObj= CreateGameObject("HIDDEN_DOOR_046_021",56.395313f,1.200000f,25.799999f);
+	myObj= CreateGameObject("HIDDEN_DOOR_046_021",56.395313f,1.200000f,25.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,255,1,2438);
@@ -847,7 +874,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0180",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,56, 0);
 
-	myObj= CreateGameObject("GROUP_ACCESS_CARD_1",13.800000f,1.331250f,27.000000f);
+	myObj= CreateGameObject("GROUP_ACCESS_CARD_1",13.780000f,1.331250f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0788",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",5,233, 0);
 	CreateKey(myObj, 0);
@@ -867,65 +894,69 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
 	myObj= CreateGameObject("SCREEN_20_22_01_0187",24.032812f,1.293750f,26.995312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,6,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_20_22_01_0141",24.600000f,1.800000f,27.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_20_22_01_0141",24.580000f,1.800000f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_22_01_0062",25.799999f,1.800000f,27.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_22_01_0062",25.780001f,1.800000f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
 	AddACTION_TIMER(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_25_22_01_0696",30.600000f,1.200000f,27.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_25_22_01_0696",30.580000f,1.200000f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "DOOR_026_024", 0,"DOOR_026_021", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BUTTON_26_22_01_0176",31.232813f,1.331250f,26.882813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "DOOR_026_021", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("EMAIL_33_22_01_0454",39.895313f,1.293750f,26.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_33_22_01_0453",40.200001f,1.575000f,27.000000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_33_22_01_0453",40.180000f,1.575000f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
 	myObj= CreateGameObject("CHEMICAL_TANK_37_22_01_0684",45.032814f,1.593750f,26.957813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
-	myObj= CreateGameObject("CHEMICAL_TANK_38_22_01_0687",46.200001f,1.593750f,27.000000f);
+	myObj= CreateGameObject("CHEMICAL_TANK_38_22_01_0687",46.180000f,1.593750f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
 	myObj= CreateGameObject("CYBORG_DRONE_38_22_01_0303",45.632813f,1.650000f,27.595312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("SKULL_43_22_01_0389",52.200001f,1.162500f,27.000000f);
+	myObj= CreateGameObject("SKULL_43_22_01_0389",52.180000f,1.162500f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
 	myObj= CreateGameObject("BED_11_23_01_0168",14.020312f,1.481250f,28.232813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("SERV_BOT_12_23_01_0278",15.000000f,1.593750f,28.200001f);
+	myObj= CreateGameObject("SERV_BOT_12_23_01_0278",14.980000f,1.593750f,28.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1574",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,450, 0);
 
 	myObj= CreateGameObject("CART_13_23_01_0612",16.345312f,1.200000f,28.120312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("BULKHEAD_DOOR_017_023",21.000000f,1.200000f,27.600000f);
+	myObj= CreateGameObject("BULKHEAD_DOOR_017_023",20.980000f,1.200000f,27.620001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2431);
 
-	myObj= CreateGameObject("BULKHEAD_DOOR_018_023",22.200001f,1.200000f,27.600000f);
+	myObj= CreateGameObject("BULKHEAD_DOOR_018_023",22.180000f,1.200000f,27.620001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2432);
@@ -936,40 +967,43 @@
 	myObj= CreateGameObject("WORDS_30_23_01_0718",36.346874f,2.250000f,28.795313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_31_23_01_0695",37.799999f,1.800000f,28.200001f);
+	myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_31_23_01_0695",37.779999f,1.800000f,28.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
 	CreateNull_Trigger(myObj, 2,1,0,0,0,0);
 	AddACTION_RESURRECTION(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("LARGE_BUTTON_35_23_01_0117",42.370312f,1.800000f,28.795313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_33_25_01_0354", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("BLAST_DOOR_035_023",43.195313f,1.200000f,28.200001f);
+	myObj= CreateGameObject("BLAST_DOOR_035_023",43.195313f,1.200000f,28.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2400);
 
-	myObj= CreateGameObject("CHEMICAL_TANK_38_23_01_0685",46.200001f,1.593750f,28.200001f);
+	myObj= CreateGameObject("CHEMICAL_TANK_38_23_01_0685",46.180000f,1.593750f,28.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_40_23_01_0017",48.599998f,1.425000f,28.200001f);
+	myObj= CreateGameObject("HUMAN_CORPSE_40_23_01_0017",48.580002f,1.425000f,28.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0662",true);
 
 	myObj= CreateGameObject("SKULL_41_23_01_0257",49.645313f,1.162500f,28.382813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_45_23_01_0295",54.599998f,2.043750f,28.200001f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_45_23_01_0295",54.580002f,2.043750f,28.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_10_24_01_0353",12.600000f,2.400000f,29.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_10_24_01_0353",12.580000f,2.400000f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("GRAFFITI_17_24_01_0044",20.845312f,2.718750f,28.799999f);
+	myObj= CreateGameObject("GRAFFITI_17_24_01_0044",20.845312f,2.718750f,28.820000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0399",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,128, 0);
 
@@ -977,7 +1011,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0715",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,212, 0);
 
-	myObj= CreateGameObject("DOOR_026_024",31.799999f,0.600000f,28.799999f);
+	myObj= CreateGameObject("DOOR_026_024",31.780001f,0.600000f,28.820000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,1,0,2404);
@@ -987,53 +1021,59 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0209",35.400002f,2.250000f,29.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0209",35.380001f,2.250000f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_33_01_0601", 0,"NULL_TRIGGER_12_45_01_0602", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0599",35.400002f,2.250000f,29.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0599",35.380001f,2.250000f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_13_01_0211", 0,"NULL_TRIGGER_17_12_01_0337", 0,"NULL_TRIGGER_41_20_01_0236", 0,"NULL_TRIGGER_29_24_01_0209", 0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0064",35.400002f,2.250000f,29.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0064",35.380001f,2.250000f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_27_25_01_0151", 0,"NULL_TRIGGER_26_27_01_0252", 0,"NULL_TRIGGER_41_30_01_0208", 0,"NULL_TRIGGER_29_24_01_0599", 0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0066",35.400002f,2.250000f,29.400000f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_24_01_0066",35.380001f,2.250000f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
 	AddACTION_TIMER(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_30_24_01_0037",36.599998f,2.250000f,29.400000f);
+	myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_30_24_01_0037",36.580002f,2.250000f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_24_01_0066", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CHEMICAL_TANK_37_24_01_0686",45.000000f,1.593750f,29.400000f);
+	myObj= CreateGameObject("CHEMICAL_TANK_37_24_01_0686",44.980000f,1.593750f,29.379999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
 	myObj= CreateGameObject("EMAIL_38_24_01_0460",46.157814f,1.293750f,29.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("SCREEN_40_24_01_0128",48.000000f,1.631250f,29.395313f);
+	myObj= CreateGameObject("SCREEN_40_24_01_0128",48.020000f,1.631250f,29.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	CreateComputerScreen(myObj,0,100,1);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_07_25_01_0132",9.000000f,0.393750f,30.600000f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_07_25_01_0132",8.980000f,0.393750f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("CHAIR_11_25_01_0620",13.800000f,1.800000f,30.600000f);
+	myObj= CreateGameObject("CHAIR_11_25_01_0620",13.780000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("BLOOD_STAIN_12_25_01_0472",14.770312f,1.800000f,30.632813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0846",true);
 
-	myObj= CreateGameObject("SEVERED_HEAD_12_25_01_0470",15.000000f,2.025000f,30.600000f);
+	myObj= CreateGameObject("SEVERED_HEAD_12_25_01_0470",14.980000f,2.025000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0724",true);
 
 	myObj= CreateGameObject("BERSERK_COMBAT_BOOSTER_13_25_01_0173",16.345312f,2.400000f,30.857813f);
@@ -1043,79 +1083,89 @@
 	myObj= CreateGameObject("SCOPE_13_25_01_0621",15.820313f,2.250000f,30.895313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("SCREEN_13_25_01_0617",15.970312f,2.625000f,30.000000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	myObj= CreateGameObject("SCREEN_13_25_01_0617",15.970312f,2.625000f,30.020000f);
+	CreateComputerScreen(myObj,85,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("STAMINUP__STIMULANT_13_25_01_0172",16.200001f,2.400000f,30.600000f);
+	myObj= CreateGameObject("STAMINUP__STIMULANT_13_25_01_0172",16.180000f,2.400000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0200",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,63, 0);
 
-	myObj= CreateGameObject("SCREEN_14_25_01_0618",17.432812f,2.625000f,30.000000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	myObj= CreateGameObject("SCREEN_14_25_01_0618",17.432812f,2.625000f,30.020000f);
+	CreateComputerScreen(myObj,81,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("TESTTUBE_RACK_14_25_01_0615",17.507813f,2.250000f,30.707813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_20_25_01_0271",24.600000f,0.956250f,30.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_20_25_01_0271",24.580000f,0.956250f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
-	myObj= CreateGameObject("ICON_21_25_01_0431",25.200001f,2.325000f,30.782812f);
+	myObj= CreateGameObject("ICON_21_25_01_0431",25.219999f,2.325000f,30.782812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,127, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_27_25_01_0151",33.000000f,1.200000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_27_25_01_0151",32.980000f,1.200000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_32_25_01_0054",39.000000f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_32_25_01_0054",38.980000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_32_25_01_0109",39.000000f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_32_25_01_0109",38.980000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0354",40.200001f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0354",40.180000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0034",40.200001f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0034",40.180000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0012",40.200001f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0012",40.180000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_32_25_01_0054", 0,"NULL_TRIGGER_33_25_01_0031", 0,"NULL_TRIGGER_34_25_01_0033", 0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0032",40.200001f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0032",40.180000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_32_25_01_0109", 0,"NULL_TRIGGER_33_25_01_0034", 0,"NULL_TRIGGER_34_25_01_0053", 0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0031",40.200001f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_33_25_01_0031",40.180000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_34_25_01_0033",41.400002f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_34_25_01_0033",41.380001f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_34_25_01_0053",41.400002f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_34_25_01_0053",41.380001f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_36_25_01_0459",43.799999f,1.575000f,30.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_36_25_01_0459",43.779999f,1.575000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
 	myObj= CreateGameObject("STAMINUP__STIMULANT_38_25_01_0305",46.307812f,1.350000f,30.632813f);
@@ -1129,7 +1179,7 @@
 	myObj= CreateGameObject("SEVERED_LIMB_38_25_01_0457",45.970314f,1.500000f,30.595312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0720",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_38_25_01_0455",46.200001f,1.556250f,30.600000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_38_25_01_0455",46.180000f,1.556250f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
 	myObj= CreateGameObject("SPARQ_BEAM_40_25_01_0204",48.407814f,1.143750f,30.632813f);
@@ -1139,52 +1189,53 @@
 	myObj= CreateGameObject("SKULL_41_25_01_0258",49.532814f,1.162500f,30.745312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("WORDS_46_25_01_0239",55.200001f,3.018750f,30.670313f);
+	myObj= CreateGameObject("WORDS_46_25_01_0239",55.220001f,3.018750f,30.670313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 
-	myObj= CreateGameObject("NULL_TRIGGER_47_25_01_0607",57.000000f,1.800000f,30.600000f);
+	myObj= CreateGameObject("NULL_TRIGGER_47_25_01_0607",56.980000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 11,0,0,0,0,0);
 	AddACTION_TIMER(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_08_26_01_0225",9.857813f,0.150000f,32.057812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_08_26_01_0224",10.200000f,0.356250f,31.799999f);
+	myObj= CreateGameObject("HUMAN_CORPSE_08_26_01_0224",10.180000f,0.356250f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_09_26_01_0188",11.400000f,0.393750f,31.799999f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_09_26_01_0188",11.380000f,0.393750f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
 	myObj= CreateGameObject("SCOPE_11_26_01_0622",13.382813f,2.250000f,32.057812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("SENSAROUND_MULTI_VIEW_UNIT_11_26_01_0179",13.800000f,2.343750f,31.799999f);
+	myObj= CreateGameObject("SENSAROUND_MULTI_VIEW_UNIT_11_26_01_0179",13.780000f,2.343750f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0227",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_12_26_01_0040",15.000000f,2.193750f,31.799999f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_12_26_01_0040",14.980000f,2.193750f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("DOOR_015_026",19.195313f,1.200000f,31.799999f);
+	myObj= CreateGameObject("DOOR_015_026",19.195313f,1.200000f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,1,0,2404);
 
-	myObj= CreateGameObject("SERV_BOT_21_26_01_0098",25.200001f,0.956250f,31.532812f);
+	myObj= CreateGameObject("SERV_BOT_21_26_01_0098",25.219999f,0.956250f,31.532812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1574",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,450, 0);
 
-	myObj= CreateGameObject("SURGERY_MACHINE_26_26_01_0613",31.799999f,0.600000f,31.799999f);
+	myObj= CreateGameObject("SURGERY_MACHINE_26_26_01_0613",31.780001f,0.600000f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("ENERGY_CHARGE_STATION_28_26_01_0411",34.200001f,1.293750f,31.799999f);
+	myObj= CreateGameObject("ENERGY_CHARGE_STATION_28_26_01_0411",34.180000f,1.293750f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0952",true);
 
-	myObj= CreateGameObject("WORDS_31_26_01_0581",37.570313f,2.100000f,31.200001f);
+	myObj= CreateGameObject("WORDS_31_26_01_0581",37.570313f,2.100000f,31.219999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("HUMAN_BONES_32_26_01_0015",39.145313f,1.462500f,31.495312f);
@@ -1198,32 +1249,34 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_33_25_01_0354", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SKELETON_39_26_01_0388",47.400002f,1.556250f,31.799999f);
+	myObj= CreateGameObject("SKELETON_39_26_01_0388",47.380001f,1.556250f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0702",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,210, 0);
 
 	myObj= CreateGameObject("CRATE_42_26_01_0534",51.182812f,1.537500f,31.982813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("BLAST_DOOR_046_026",55.799999f,2.100000f,31.200001f);
+	myObj= CreateGameObject("BLAST_DOOR_046_026",55.779999f,2.100000f,31.219999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2400);
 
-	myObj= CreateGameObject("SWITCH_55_26_01_0605",66.599998f,1.275000f,31.799999f);
+	myObj= CreateGameObject("SWITCH_55_26_01_0605",66.580002f,1.275000f,31.780001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_11_27_01_0473",13.800000f,2.175000f,33.000000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_11_27_01_0473",13.780000f,2.175000f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0642",true);
 
-	myObj= CreateGameObject("EMAIL_12_27_01_0474",14.400000f,1.893750f,32.732811f);
+	myObj= CreateGameObject("EMAIL_12_27_01_0474",14.420000f,1.893750f,32.732811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("CAMERA_20_27_01_0413",24.000000f,2.193750f,33.595314f);
+	myObj= CreateGameObject("CAMERA_20_27_01_0413",24.020000f,2.193750f,33.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("WORDS_23_27_01_0698",28.420313f,2.118750f,33.595314f);
@@ -1232,33 +1285,34 @@
 	myObj= CreateGameObject("WORDS_23_27_01_0697",28.345312f,1.781250f,33.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_26_27_01_0252",31.799999f,1.200000f,33.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_26_27_01_0252",31.780001f,1.200000f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CRITTER_AI_HINT_28_27_01_0311",34.200001f,1.593750f,33.000000f);
+	myObj= CreateGameObject("CRITTER_AI_HINT_28_27_01_0311",34.180000f,1.593750f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1361",true);
 
-	myObj= CreateGameObject("WRAPPER_33_27_01_0100",40.200001f,1.312500f,33.000000f);
+	myObj= CreateGameObject("WRAPPER_33_27_01_0100",40.180000f,1.312500f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0570",true);
 
-	myObj= CreateGameObject("SCREEN_35_27_01_0177",42.670311f,1.912500f,32.400002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	myObj= CreateGameObject("SCREEN_35_27_01_0177",42.670311f,1.912500f,32.419998f);
+	CreateComputerScreen(myObj,8,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SCREEN_35_27_01_0178",42.670311f,2.887500f,32.400002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	myObj= CreateGameObject("SCREEN_35_27_01_0178",42.670311f,2.887500f,32.419998f);
+	CreateComputerScreen(myObj,55,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CRITTER_AI_HINT_36_27_01_0310",43.799999f,1.593750f,33.000000f);
+	myObj= CreateGameObject("CRITTER_AI_HINT_36_27_01_0310",43.779999f,1.593750f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1361",true);
 
-	myObj= CreateGameObject("CYBORG_DRONE_37_27_01_0251",45.000000f,1.650000f,33.000000f);
+	myObj= CreateGameObject("CYBORG_DRONE_37_27_01_0251",44.980000f,1.650000f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("REPULSOR_43_27_01_0366",52.200001f,1.050000f,33.000000f);
+	myObj= CreateGameObject("REPULSOR_43_27_01_0366",52.180000f,1.050000f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
 
 	myObj= CreateGameObject("SIGHT_VISION_ENHANCEMENT_49_27_01_0394",59.695313f,3.750000f,33.070313f);
@@ -1268,12 +1322,12 @@
 	myObj= CreateGameObject("FIRST_AID_KIT_50_27_01_0395",60.295311f,3.768750f,33.032814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0750",true);
 
-	myObj= CreateGameObject("HIDDEN_DOOR_015_028",19.195313f,1.800000f,34.200001f);
+	myObj= CreateGameObject("HIDDEN_DOOR_015_028",19.195313f,1.800000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2438);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_15_28_01_0674",18.600000f,1.950000f,34.200001f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_15_28_01_0674",18.580000f,1.950000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
@@ -1281,66 +1335,75 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("SWITCH_20_28_01_0093",24.600000f,1.275000f,34.200001f);
+	myObj= CreateGameObject("SWITCH_20_28_01_0093",24.580000f,1.275000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_24_28_01_0129",29.400000f,1.800000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_24_28_01_0129",29.379999f,1.800000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_26_28_01_0152",31.799999f,1.800000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_26_28_01_0152",31.780001f,1.800000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("WORDS_27_28_01_0059",32.400002f,2.043750f,34.157814f);
+	myObj= CreateGameObject("WORDS_27_28_01_0059",32.419998f,2.043750f,34.157814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("EXPLOSION_RESIDUE_27_28_01_0008",32.400002f,2.531250f,34.270313f);
+	myObj= CreateGameObject("EXPLOSION_RESIDUE_27_28_01_0008",32.419998f,2.531250f,34.270313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0840",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_30_28_01_0200",36.599998f,0.600000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_30_28_01_0200",36.580002f,0.600000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_30_28_01_0027",36.599998f,0.600000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_30_28_01_0027",36.580002f,0.600000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 
-	myObj= CreateGameObject("HIDDEN_DOOR_037_028",45.595314f,1.200000f,34.200001f);
+	myObj= CreateGameObject("HIDDEN_DOOR_037_028",45.595314f,1.200000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2438);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_45_28_01_0297",54.599998f,2.493750f,34.200001f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_45_28_01_0297",54.580002f,2.493750f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0114",55.799999f,2.700000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0114",55.779999f,2.700000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_46_28_01_0298", 0,"NULL_TRIGGER_46_28_01_0299", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0299",55.799999f,2.700000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0299",55.779999f,2.700000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0298",55.799999f,2.700000f,34.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0298",55.779999f,2.700000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("ACCESS_PANEL_47_28_01_0259",56.732811f,2.812500f,34.270313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0974",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-315.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BEVERAGE_CONTAINER_49_28_01_0393",59.545311f,3.693750f,33.895313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0568",true);
@@ -1348,12 +1411,12 @@
 	myObj= CreateGameObject("BEVERAGE_CONTAINER_49_28_01_0392",59.132813f,3.693750f,34.345314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0568",true);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_050_028",61.195313f,3.600000f,34.200001f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_050_028",61.195313f,3.600000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2406);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_029",13.200000f,1.200000f,35.400002f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_029",13.220000f,1.200000f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2406);
@@ -1366,15 +1429,16 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0720",true);
 
 	myObj= CreateGameObject("SCREEN_28_29_01_0185",34.195313f,3.337500f,35.995312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,91,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("LEVER_30_29_01_0432",36.032814f,0.600000f,35.470314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0897",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "ENTRY_TRIGGER_30_28_01_0158", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CONTROL_PEDESTAL_31_29_01_0442",37.799999f,0.000000f,35.400002f);
+	myObj= CreateGameObject("CONTROL_PEDESTAL_31_29_01_0442",37.779999f,0.000000f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("BERSERK_COMBAT_BOOSTER_32_29_01_0444",39.370312f,0.150000f,35.920311f);
@@ -1392,50 +1456,52 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0058",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,19, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_34_29_01_0683",41.400002f,0.600000f,35.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_34_29_01_0683",41.380001f,0.600000f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 0,0,0,0,0,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NITROPACK_39_29_01_0667",47.095314f,1.350000f,35.657814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0192",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,60, 0);
 
-	myObj= CreateGameObject("ELEPHANT_JORP_46_29_01_0290",55.799999f,2.062500f,35.400002f);
+	myObj= CreateGameObject("ELEPHANT_JORP_46_29_01_0290",55.779999f,2.062500f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
 
 	myObj= CreateGameObject("CRATE_49_29_01_0646",59.545311f,0.337500f,35.432812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("EMAIL_51_29_01_0465",61.799999f,3.693750f,35.400002f);
+	myObj= CreateGameObject("EMAIL_51_29_01_0465",61.779999f,3.693750f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_52_29_01_0511",63.000000f,3.975000f,35.400002f);
+	myObj= CreateGameObject("HUMAN_CORPSE_52_29_01_0511",62.980000f,3.975000f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
 	myObj= CreateGameObject("SB_20_MAGPULSE_10_30_01_0171",12.407812f,1.500000f,37.082813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0022",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,7, 0);
 
-	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_10_30_01_0223",12.600000f,1.350000f,36.599998f);
+	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_10_30_01_0223",12.580000f,1.350000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_11_30_01_0653",13.800000f,1.800000f,36.599998f);
+	myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_11_30_01_0653",13.780000f,1.800000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
 	CreateNull_Trigger(myObj, 6,0,30,0,1,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_11_31_01_0654", 0,"NULL_TRIGGER_11_31_01_0655", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_12_30_01_0014",14.957812f,1.575000f,36.632813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
-	myObj= CreateGameObject("DOOR_015_030",18.000000f,1.200000f,36.599998f);
+	myObj= CreateGameObject("DOOR_015_030",18.020000f,1.200000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2404);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_16_30_01_0082",19.799999f,1.593750f,36.599998f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_16_30_01_0082",19.780001f,1.593750f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
@@ -1443,43 +1509,47 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
-	myObj= CreateGameObject("SCREEN_23_30_01_0245",28.195313f,2.437500f,36.000000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_23_30_01_0245",28.195313f,2.437500f,36.020000f);
+	CreateComputerScreen(myObj,8,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BUTTON_27_30_01_0700",32.995312f,2.250000f,37.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
 	CreateSHOCKActivators(myObj,7);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SCREEN_31_30_01_0448",37.795311f,2.437500f,36.000000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_31_30_01_0448",37.795311f,2.437500f,36.020000f);
+	CreateSurveillanceScreen(myObj,"NULL_TRIGGER_31_36_01_0584");
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_31_30_01_0708",37.799999f,0.600000f,36.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_31_30_01_0708",37.779999f,0.600000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
 	AddACTION_MESSAGE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("REPULSOR_31_30_01_0668",37.799999f,0.600000f,36.599998f);
+	myObj= CreateGameObject("REPULSOR_31_30_01_0668",37.779999f,0.600000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
 
-	myObj= CreateGameObject("SCREEN_31_30_01_0449",37.200001f,2.437500f,36.595314f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_31_30_01_0449",37.220001f,2.437500f,36.595314f);
+	CreateComputerScreen(myObj,81,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_31_30_01_0348",37.420311f,1.631250f,36.182812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("BUTTON_32_30_01_0529",38.545311f,3.187500f,36.000000f);
+	myObj= CreateGameObject("BUTTON_32_30_01_0529",38.545311f,3.187500f,36.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,19);
 	AddACTION_CHANGE_STATE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("ACCESS_PANEL_32_30_01_0682",38.545311f,2.887500f,36.000000f);
+	myObj= CreateGameObject("ACCESS_PANEL_32_30_01_0682",38.545311f,2.887500f,36.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0964",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_32_30_01_0351",39.482811f,1.631250f,36.145313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -1488,16 +1558,16 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("CYBORG_DRONE_33_30_01_0346",40.200001f,0.450000f,36.599998f);
+	myObj= CreateGameObject("CYBORG_DRONE_33_30_01_0346",40.180000f,0.450000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("CRITTER_AI_HINT_36_30_01_0309",43.799999f,1.593750f,36.599998f);
+	myObj= CreateGameObject("CRITTER_AI_HINT_36_30_01_0309",43.779999f,1.593750f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1361",true);
 
 	myObj= CreateGameObject("SCREEN_38_30_01_0433",46.795311f,2.381250f,36.557812f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,79,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_38_30_01_0418",46.495312f,2.625000f,36.257813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -1506,38 +1576,43 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "ENTRY_TRIGGER_39_31_01_0714", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_39_30_01_0207",47.400002f,2.400000f,36.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_39_30_01_0207",47.380001f,2.400000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_41_30_01_0208",49.799999f,1.800000f,36.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_41_30_01_0208",49.779999f,1.800000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("ELEPHANT_JORP_46_30_01_0292",55.799999f,2.062500f,36.599998f);
+	myObj= CreateGameObject("ELEPHANT_JORP_46_30_01_0292",55.779999f,2.062500f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
 
-	myObj= CreateGameObject("BATTERY_PACK_50_30_01_0405",60.599998f,1.762500f,36.599998f);
+	myObj= CreateGameObject("BATTERY_PACK_50_30_01_0405",60.580002f,1.762500f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0756",true);
 
-	myObj= CreateGameObject("STAMINUP__STIMULANT_10_31_01_0222",12.600000f,1.350000f,37.799999f);
+	myObj= CreateGameObject("STAMINUP__STIMULANT_10_31_01_0222",12.580000f,1.350000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0200",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,63, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_11_31_01_0655",13.800000f,1.800000f,37.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_11_31_01_0655",13.780000f,1.800000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "STORAGE_ROOM_DOOR_011_032", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_11_31_01_0654",13.800000f,1.800000f,37.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_11_31_01_0654",13.780000f,1.800000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "STORAGE_ROOM_DOOR_011_029", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_12_31_01_0142",15.000000f,1.593750f,37.799999f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_12_31_01_0142",14.980000f,1.593750f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
@@ -1545,32 +1620,34 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0885",false);
 	CreateSHOCKActivators(myObj,7);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SCREEN_17_31_01_0079",20.995312f,3.112500f,37.795311f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,40,4,0);
+	SetRotation(myObj,(float)-43.593750,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("LUMP_OF_CLOTHES_17_31_01_0104",21.000000f,1.443750f,37.799999f);
+	myObj= CreateGameObject("LUMP_OF_CLOTHES_17_31_01_0104",20.980000f,1.443750f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0585",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_31_01_0600",23.400000f,1.800000f,37.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_31_01_0600",23.379999f,1.800000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("HUMANOID_MUTANT_23_31_01_0244",28.082813f,0.393750f,37.982811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
 
-	myObj= CreateGameObject("SCREEN_28_31_01_0186",34.195313f,3.318750f,37.200001f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	myObj= CreateGameObject("SCREEN_28_31_01_0186",34.195313f,3.318750f,37.220001f);
+	CreateComputerScreen(myObj,0,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CONTROL_PEDESTAL_30_31_01_0440",36.599998f,0.000000f,37.799999f);
+	myObj= CreateGameObject("CONTROL_PEDESTAL_30_31_01_0440",36.580002f,0.000000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("CYBORG_DRONE_30_31_01_0345",37.157814f,0.450000f,37.200001f);
+	myObj= CreateGameObject("CYBORG_DRONE_30_31_01_0345",37.157814f,0.450000f,37.220001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
@@ -1578,12 +1655,12 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SCREEN_32_31_01_0446",38.995312f,2.437500f,38.395313f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	CreateSurveillanceScreen(myObj,"NULL_TRIGGER_41_49_01_0583");
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SCREEN_32_31_01_0447",39.595314f,2.437500f,37.795311f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	CreateComputerScreen(myObj,89,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_32_31_01_0350",39.520313f,1.631250f,38.282814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -1592,8 +1669,9 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,19);
 	AddACTION_CHANGE_STATE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CONTROL_PEDESTAL_33_31_01_0582",40.200001f,0.000000f,37.799999f);
+	myObj= CreateGameObject("CONTROL_PEDESTAL_33_31_01_0582",40.180000f,0.000000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("HOPPER_34_31_01_0307",41.957813f,2.193750f,37.757813f);
@@ -1601,39 +1679,41 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,453, 0);
 
 
-	myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0215",47.400002f,1.800000f,37.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0215",47.380001f,1.800000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0214",47.400002f,1.800000f,37.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0214",47.380001f,1.800000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("DOOR_041_031",49.200001f,3.600000f,37.799999f);
+	myObj= CreateGameObject("DOOR_041_031",49.220001f,3.600000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2404);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_45_31_01_0296",54.599998f,2.793750f,37.799999f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_45_31_01_0296",54.580002f,2.793750f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
 	myObj= CreateGameObject("CRATE_47_31_01_0694",57.107811f,2.587500f,38.132813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_53_31_01_0510",64.199997f,3.956250f,37.799999f);
+	myObj= CreateGameObject("HUMAN_CORPSE_53_31_01_0510",64.180000f,3.956250f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_032",13.200000f,1.200000f,39.000000f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_032",13.220000f,1.200000f,38.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2406);
 
 	myObj= CreateGameObject("SCREEN_18_32_01_0067",22.007813f,2.925000f,38.995312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,50,4,0);
+	SetRotation(myObj,(float)-43.593750,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SIGHT_VISION_ENHANCEMENT_22_32_01_0325",27.595312f,0.150000f,39.257813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0203",true);
@@ -1643,7 +1723,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0203",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,64, 0);
 
-	myObj= CreateGameObject("SV_23_DARTGUN_23_32_01_0242",28.200001f,0.225000f,39.000000f);
+	myObj= CreateGameObject("SV_23_DARTGUN_23_32_01_0242",28.180000f,0.225000f,38.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0004",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,1, 0);
 
@@ -1651,19 +1731,19 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("CYBORG_DRONE_29_32_01_0580",35.400002f,2.250000f,39.000000f);
+	myObj= CreateGameObject("CYBORG_DRONE_29_32_01_0580",35.380001f,2.250000f,38.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("CONTROL_PEDESTAL_32_32_01_0439",39.000000f,0.000000f,39.000000f);
+	myObj= CreateGameObject("CONTROL_PEDESTAL_32_32_01_0439",38.980000f,0.000000f,38.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("WORDS_38_32_01_0496",46.795311f,1.800000f,38.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SCREEN_38_32_01_0434",46.795311f,2.381250f,39.032814f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,43,4,43);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_38_32_01_0417",46.532814f,2.625000f,39.332813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -1671,15 +1751,16 @@
 	myObj= CreateGameObject("BROKEN_LEVER_40_32_01_0494",49.195313f,4.331250f,38.507813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0618",true);
 
-	myObj= CreateGameObject("LARGE_BUTTON_40_32_01_0159",48.000000f,4.200000f,38.732811f);
+	myObj= CreateGameObject("LARGE_BUTTON_40_32_01_0159",48.020000f,4.200000f,38.732811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "ENTRY_TRIGGER_39_31_01_0714", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("BRIDGE_44_32_01_0364",53.400002f,2.343750f,39.000000f);
+	myObj= CreateGameObject("BRIDGE_44_32_01_0364",53.380001f,2.343750f,38.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("HIDDEN_DOOR_015_033",19.195313f,1.200000f,40.200001f);
+	myObj= CreateGameObject("HIDDEN_DOOR_015_033",19.195313f,1.200000f,40.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2438);
@@ -1692,12 +1773,13 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_17_33_01_0601",21.000000f,1.800000f,40.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_17_33_01_0601",20.980000f,1.800000f,40.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("DOOR_019_033",23.995312f,1.200000f,40.200001f);
+	myObj= CreateGameObject("DOOR_019_033",23.995312f,1.200000f,40.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2404);
@@ -1705,63 +1787,67 @@
 	myObj= CreateGameObject("WRAPPER_19_33_01_0105",23.695313f,1.312500f,40.045311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0570",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_37_33_01_0206",45.000000f,1.800000f,40.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_37_33_01_0206",44.980000f,1.800000f,40.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,1,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SV_NEEDLE_DARTS_47_33_01_0377",56.582813f,2.493750f,40.532814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,18, 0);
 
-	myObj= CreateGameObject("CYBORG_DRONE_20_34_01_0313",24.600000f,2.850000f,41.400002f);
+	myObj= CreateGameObject("CYBORG_DRONE_20_34_01_0313",24.580000f,2.850000f,41.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("CRITTER_AI_HINT_28_34_01_0312",34.200001f,1.593750f,41.400002f);
+	myObj= CreateGameObject("CRITTER_AI_HINT_28_34_01_0312",34.180000f,1.593750f,41.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1361",true);
 
 	myObj= CreateGameObject("WRAPPER_28_34_01_0042",34.270313f,1.312500f,41.020313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0570",true);
 
-	myObj= CreateGameObject("DEBRIS_30_34_01_0071",36.599998f,1.331250f,41.400002f);
+	myObj= CreateGameObject("DEBRIS_30_34_01_0071",36.580002f,1.331250f,41.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0601",true);
 
-	myObj= CreateGameObject("CRITTER_AI_HINT_35_34_01_0308",42.599998f,1.593750f,41.400002f);
+	myObj= CreateGameObject("CRITTER_AI_HINT_35_34_01_0308",42.580002f,1.593750f,41.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1361",true);
 
-	myObj= CreateGameObject("ENERGY_CHARGE_STATION_38_34_01_0679",46.200001f,3.600000f,41.400002f);
+	myObj= CreateGameObject("ENERGY_CHARGE_STATION_38_34_01_0679",46.180000f,3.600000f,41.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0952",true);
 
-	myObj= CreateGameObject("HIDDEN_DOOR_038_034",46.795311f,3.600000f,41.400002f);
+	myObj= CreateGameObject("HIDDEN_DOOR_038_034",46.795311f,3.600000f,41.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2438);
 
-	myObj= CreateGameObject("CONTROL_PEDESTAL_11_35_01_0509",13.800000f,0.000000f,42.599998f);
+	myObj= CreateGameObject("CONTROL_PEDESTAL_11_35_01_0509",13.780000f,0.000000f,42.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("BULKHEAD_DOOR_016_035",19.799999f,1.200000f,42.000000f);
+	myObj= CreateGameObject("BULKHEAD_DOOR_016_035",19.780001f,1.200000f,42.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2432);
 
-	myObj= CreateGameObject("NULL_TRIGGER_17_35_01_0024",21.000000f,1.800000f,42.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_17_35_01_0024",20.980000f,1.800000f,42.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,1,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_17_35_01_0023",21.000000f,1.800000f,42.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_17_35_01_0023",20.980000f,1.800000f,42.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "BULKHEAD_DOOR_017_035", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("LEVER_17_35_01_0130",21.595312f,1.800000f,42.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0897",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_35_01_0024", 0,"NULL_TRIGGER_17_35_01_0023", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("BULKHEAD_DOOR_017_035",21.000000f,1.200000f,42.000000f);
+	myObj= CreateGameObject("BULKHEAD_DOOR_017_035",20.980000f,1.200000f,42.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2431);
@@ -1774,18 +1860,18 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("HIDDEN_DOOR_030_035",36.599998f,0.000000f,42.599998f);
+	myObj= CreateGameObject("HIDDEN_DOOR_030_035",36.580002f,0.000000f,42.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2438);
 
-	myObj= CreateGameObject("BRIDGE_31_35_01_0020",37.799999f,1.162500f,42.599998f);
+	myObj= CreateGameObject("BRIDGE_31_35_01_0020",37.779999f,1.162500f,42.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("BURN_RESIDUE_35_35_01_0476",42.632813f,2.437500f,43.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0843",true);
 
-	myObj= CreateGameObject("ICON_35_35_01_0435",42.000000f,3.056250f,43.195313f);
+	myObj= CreateGameObject("ICON_35_35_01_0435",42.020000f,3.056250f,43.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,127, 0);
 
@@ -1795,37 +1881,40 @@
 	myObj= CreateGameObject("FIRST_AID_KIT_41_35_01_0376",49.757813f,2.568750f,42.445313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0750",true);
 
-	myObj= CreateGameObject("X_RAY_MACHINE_13_36_01_0624",16.200001f,0.000000f,43.799999f);
+	myObj= CreateGameObject("X_RAY_MACHINE_13_36_01_0624",16.180000f,0.000000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("HOSPITAL_BED_13_36_01_0508",16.270313f,0.037500f,43.832813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 
-	myObj= CreateGameObject("DESTROYED_DRONE_CYBORG_18_36_01_0501",22.200001f,1.650000f,43.799999f);
+	myObj= CreateGameObject("DESTROYED_DRONE_CYBORG_18_36_01_0501",22.180000f,1.650000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1494",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_36_01_0063",23.400000f,1.800000f,43.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_36_01_0063",23.379999f,1.800000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_36_01_0007",23.400000f,1.800000f,43.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_36_01_0007",23.379999f,1.800000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_36_01_0009",23.400000f,1.800000f,43.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_36_01_0009",23.379999f,1.800000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 9,0,0,0,0,0);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("ENERGY_GRATING_023_036",28.200001f,2.400000f,43.799999f);
+	myObj= CreateGameObject("ENERGY_GRATING_023_036",28.180000f,2.400000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2424);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_026_036",31.799999f,2.400000f,44.395313f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_026_036",31.780001f,2.400000f,44.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,10,0,2406);
@@ -1833,34 +1922,35 @@
 	myObj= CreateGameObject("WORDS_30_36_01_0567",36.632813f,2.850000f,44.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("BURN_RESIDUE_30_36_01_0086",36.000000f,2.625000f,43.757813f);
+	myObj= CreateGameObject("BURN_RESIDUE_30_36_01_0086",36.020000f,2.625000f,43.757813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0843",true);
 
 	myObj= CreateGameObject("CAMERA_31_36_01_0416",37.307812f,3.337500f,44.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("BRIDGE_31_36_01_0619",37.799999f,1.162500f,43.799999f);
+	myObj= CreateGameObject("BRIDGE_31_36_01_0619",37.779999f,1.162500f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_31_36_01_0584",37.799999f,1.800000f,43.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_31_36_01_0584",37.779999f,1.800000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CYBORG_DRONE_34_36_01_0302",41.400002f,4.050000f,43.799999f);
+	myObj= CreateGameObject("CYBORG_DRONE_34_36_01_0302",41.380001f,4.050000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("SKULL_34_36_01_0157",41.400002f,3.712500f,43.799999f);
+	myObj= CreateGameObject("SKULL_34_36_01_0157",41.380001f,3.712500f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 
-	myObj= CreateGameObject("FIRST_AID_KIT_46_36_01_0051",55.799999f,0.318750f,43.799999f);
+	myObj= CreateGameObject("FIRST_AID_KIT_46_36_01_0051",55.779999f,0.318750f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0750",true);
 
-	myObj= CreateGameObject("BRIDGE_46_36_01_0255",55.799999f,2.343750f,43.799999f);
+	myObj= CreateGameObject("BRIDGE_46_36_01_0255",55.779999f,2.343750f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_09_37_01_0284",11.400000f,1.593750f,45.000000f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_09_37_01_0284",11.380000f,1.593750f,44.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
@@ -1876,12 +1966,13 @@
 	CreateKey(myObj, 0);
 
 
-	myObj= CreateGameObject("ELEVATOR_PANEL_15_37_01_0030",18.000000f,1.912500f,44.995312f);
+	myObj= CreateGameObject("ELEVATOR_PANEL_15_37_01_0030",18.020000f,1.912500f,44.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0983",false);
 	CreateSHOCKActivators(myObj,1);
 	AddACTION_TRANSPORT_LEVEL(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("ELEVATOR_DOOR_015_037",18.600000f,1.200000f,44.400002f);
+	myObj= CreateGameObject("ELEVATOR_DOOR_015_037",18.580000f,1.200000f,44.419998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1109",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2427);
@@ -1894,34 +1985,36 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_36_01_0063", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 
-	myObj= CreateGameObject("WORDS_20_37_01_0715",25.082813f,3.337500f,44.400002f);
+	myObj= CreateGameObject("WORDS_20_37_01_0715",25.082813f,3.337500f,44.419998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("LARGE_BUTTON_20_37_01_0220",24.295313f,3.000000f,44.400002f);
+	myObj= CreateGameObject("LARGE_BUTTON_20_37_01_0220",24.295313f,3.000000f,44.419998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_36_01_0063", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CYBORG_ASSASSIN_27_37_01_0089",32.400002f,2.793750f,44.957813f);
+	myObj= CreateGameObject("CYBORG_ASSASSIN_27_37_01_0089",32.419998f,2.793750f,44.957813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,462, 0);
 
-	myObj= CreateGameObject("BRIDGE_31_37_01_0719",37.799999f,1.162500f,45.000000f);
+	myObj= CreateGameObject("BRIDGE_31_37_01_0719",37.779999f,1.162500f,44.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("DOOR_035_037",42.599998f,3.600000f,45.595314f);
+	myObj= CreateGameObject("DOOR_035_037",42.580002f,3.600000f,45.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2404);
 
-	myObj= CreateGameObject("DOOR_039_037",47.400002f,3.600000f,45.595314f);
+	myObj= CreateGameObject("DOOR_039_037",47.380001f,3.600000f,45.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2404);
 
-	myObj= CreateGameObject("ELEPHANT_JORP_45_37_01_0243",54.599998f,2.343750f,45.000000f);
+	myObj= CreateGameObject("ELEPHANT_JORP_45_37_01_0243",54.580002f,2.343750f,44.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
 
 	myObj= CreateGameObject("CONCUSSION_BOMB_16_38_01_0149",20.095312f,2.550000f,46.157814f);
@@ -1939,25 +2032,26 @@
 	myObj= CreateGameObject("BROKEN_GUN_17_38_01_0407",21.220312f,2.568750f,45.895313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0592",true);
 
-	myObj= CreateGameObject("ENERGY_GRATING_023_038",28.200001f,2.400000f,46.795311f);
+	myObj= CreateGameObject("ENERGY_GRATING_023_038",28.180000f,2.400000f,46.795311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2424);
 
-	myObj= CreateGameObject("FORCE_DOOR_031_038",37.799999f,1.200000f,45.599998f);
+	myObj= CreateGameObject("FORCE_DOOR_031_038",37.779999f,1.200000f,45.619999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2423);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_34_38_01_0272",41.400002f,3.975000f,46.200001f);
+	myObj= CreateGameObject("HUMAN_CORPSE_34_38_01_0272",41.380001f,3.975000f,46.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
 
-	myObj= CreateGameObject("EMERGENCY_LEVER_39_38_01_0627",46.799999f,4.462500f,46.495312f);
+	myObj= CreateGameObject("EMERGENCY_LEVER_39_38_01_0627",46.820000f,4.462500f,46.495312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0909",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_38_39_01_0628", 0,"NULL_TRIGGER_38_39_01_0408", 0,"NULL_TRIGGER_38_39_01_0320", 0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("VIAL_42_38_01_0642",51.000000f,4.162500f,46.200001f);
+	myObj= CreateGameObject("VIAL_42_38_01_0642",50.980000f,4.162500f,46.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1420",true);
 
 	myObj= CreateGameObject("VIAL_42_38_01_0641",50.920311f,4.162500f,46.345314f);
@@ -1966,7 +2060,7 @@
 	myObj= CreateGameObject("FLASK_42_38_01_0640",50.695313f,4.162500f,46.045311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1423",true);
 
-	myObj= CreateGameObject("ELEPHANT_JORP_45_38_01_0180",54.599998f,2.343750f,46.200001f);
+	myObj= CreateGameObject("ELEPHANT_JORP_45_38_01_0180",54.580002f,2.343750f,46.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
 
 	myObj= CreateGameObject("SV_TRANQ_DARTS_28_39_01_0726",34.570313f,0.093750f,47.545311f);
@@ -1984,14 +2078,14 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0183",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,57, 0);
 
-	myObj= CreateGameObject("GAS_GRENADE_33_39_01_0380",40.200001f,0.150000f,47.400002f);
+	myObj= CreateGameObject("GAS_GRENADE_33_39_01_0380",40.180000f,0.150000f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0183",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,57, 0);
 
 	myObj= CreateGameObject("CHAIR_34_39_01_0193",41.357811f,3.600000f,47.432812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("EMAIL_35_39_01_0317",42.599998f,4.200000f,47.400002f);
+	myObj= CreateGameObject("EMAIL_35_39_01_0317",42.580002f,4.200000f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
@@ -2013,24 +2107,28 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",5,234, 0);
 	CreateKey(myObj, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_38_39_01_0628",46.200001f,1.800000f,47.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_38_39_01_0628",46.180000f,1.800000f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 15,1,0,0,0,0);
 	AddACTION_EMAIL(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_38_39_01_0320",46.200001f,1.800000f,47.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_38_39_01_0320",46.180000f,1.800000f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 13,0,0,0,0,0);
 	AddACTION_UNKNOWN(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_38_39_01_0408",46.200001f,1.800000f,47.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_38_39_01_0408",46.180000f,1.800000f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 3,0,0,0,0,0);
 	AddACTION_CLONE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SCREEN_39_39_01_0533",46.799999f,4.181250f,47.395313f);
+	myObj= CreateGameObject("SCREEN_39_39_01_0533",46.820000f,4.181250f,47.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	CreateComputerScreen(myObj,0,100,1);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("DH_07_STUNGUN_39_39_01_0108",47.620312f,3.768750f,47.320313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0043",true);
@@ -2039,7 +2137,7 @@
 	myObj= CreateGameObject("FLASK_40_39_01_0639",48.820313f,4.162500f,47.245312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1423",true);
 
-	myObj= CreateGameObject("BEAKER_40_39_01_0532",48.599998f,4.162500f,47.400002f);
+	myObj= CreateGameObject("BEAKER_40_39_01_0532",48.580002f,4.162500f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1426",true);
 
 	myObj= CreateGameObject("SCOPE_41_39_01_0623",49.795311f,4.050000f,46.982811f);
@@ -2051,22 +2149,23 @@
 	myObj= CreateGameObject("PAPERS_42_39_01_0480",50.507813f,4.200000f,47.207813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0573",true);
 
-	myObj= CreateGameObject("HUMANOID_MUTANT_47_39_01_0650",57.000000f,0.543750f,47.400002f);
+	myObj= CreateGameObject("HUMANOID_MUTANT_47_39_01_0650",56.980000f,0.543750f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1541",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,439, 0);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_49_39_01_0264",59.732811f,3.956250f,47.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0662",true);
 
-	myObj= CreateGameObject("LEVER_49_39_01_0365",59.400002f,4.200000f,47.995312f);
+	myObj= CreateGameObject("LEVER_49_39_01_0365",59.380001f,4.200000f,47.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0897",false);
 	CreateSHOCKActivators(myObj,12);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CAMERA_11_40_01_0429",14.395312f,2.212500f,48.000000f);
+	myObj= CreateGameObject("CAMERA_11_40_01_0429",14.395312f,2.212500f,48.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("IRIS_DOOR_014_040",17.995312f,1.200000f,48.599998f);
+	myObj= CreateGameObject("IRIS_DOOR_014_040",17.995312f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1126",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,1,2433);
@@ -2089,14 +2188,14 @@
 	myObj= CreateGameObject("CRATE_20_40_01_0520",24.257813f,1.387500f,48.857811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("TOXIC_WASTE_BARREL_21_40_01_0609",25.799999f,1.593750f,48.599998f);
+	myObj= CreateGameObject("TOXIC_WASTE_BARREL_21_40_01_0609",25.780001f,1.593750f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1410",true);
 
 	myObj= CreateGameObject("CYBORG_DRONE_26_40_01_0367",31.832813f,2.850000f,48.670311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("HUMAN_CORPSE_28_40_01_0725",34.795311f,0.375000f,48.000000f);
+	myObj= CreateGameObject("HUMAN_CORPSE_28_40_01_0725",34.795311f,0.375000f,48.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0682",true);
 
 	myObj= CreateGameObject("ILLUDIUM_CADMIUM_BATTERY_29_40_01_0723",35.170311f,0.112500f,48.332813f);
@@ -2106,17 +2205,18 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0212",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,67, 0);
 
-	myObj= CreateGameObject("NITROPACK_29_40_01_0721",35.400002f,0.150000f,48.599998f);
+	myObj= CreateGameObject("NITROPACK_29_40_01_0721",35.380001f,0.150000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0192",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,60, 0);
 
-	myObj= CreateGameObject("SWITCH_30_40_01_0450",36.932812f,1.912500f,48.000000f);
+	myObj= CreateGameObject("SWITCH_30_40_01_0450",36.932812f,1.912500f,48.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "FORCE_DOOR_031_038", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 
-	myObj= CreateGameObject("CYBORG_ASSASSIN_37_40_01_0262",45.000000f,1.593750f,48.599998f);
+	myObj= CreateGameObject("CYBORG_ASSASSIN_37_40_01_0262",44.980000f,1.593750f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,462, 0);
 
@@ -2124,53 +2224,60 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,462, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0371",59.400002f,1.200000f,48.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0371",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_49_40_01_0370", 0,"NULL_TRIGGER_49_40_01_0326", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0372",59.400002f,1.200000f,48.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0372",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_49_40_01_0217", 0,"NULL_TRIGGER_49_40_01_0373", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0370",59.400002f,1.200000f,48.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0370",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0326",59.400002f,1.200000f,48.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0326",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0217",59.400002f,1.200000f,48.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0217",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0373",59.400002f,1.200000f,48.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0373",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SWITCH_12_41_01_0525",14.400000f,1.818750f,49.795311f);
+	myObj= CreateGameObject("SWITCH_12_41_01_0525",14.420000f,1.818750f,49.795311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "IRIS_DOOR_014_040", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
-	myObj= CreateGameObject("BEVERAGE_CONTAINER_21_41_01_0526",25.799999f,0.093750f,49.799999f);
+	myObj= CreateGameObject("BEVERAGE_CONTAINER_21_41_01_0526",25.780001f,0.093750f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0568",true);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_21_41_01_0528",25.799999f,0.150000f,49.799999f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_21_41_01_0528",25.780001f,0.150000f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("FRAGMENTATION_GRENADE_21_41_01_0522",25.799999f,0.150000f,49.799999f);
+	myObj= CreateGameObject("FRAGMENTATION_GRENADE_21_41_01_0522",25.780001f,0.150000f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("EMP_GRENADE_21_41_01_0527",25.799999f,0.150000f,49.799999f);
+	myObj= CreateGameObject("EMP_GRENADE_21_41_01_0527",25.780001f,0.150000f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0180",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,56, 0);
 
@@ -2180,124 +2287,135 @@
 	myObj= CreateGameObject("CATWALK_27_41_01_0261",32.957813f,2.343750f,50.245312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("REPULSOR_30_41_01_0055",36.599998f,1.800000f,49.799999f);
+	myObj= CreateGameObject("REPULSOR_30_41_01_0055",36.580002f,1.800000f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
 
 	myObj= CreateGameObject("FRAGMENTATION_GRENADE_47_41_01_0649",57.295311f,0.300000f,49.870312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("EMAIL_16_42_01_0316",19.799999f,2.493750f,51.000000f);
+	myObj= CreateGameObject("EMAIL_16_42_01_0316",19.780001f,2.493750f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
 
 	myObj= CreateGameObject("CAMERA_16_42_01_0424",19.495312f,3.375000f,50.620312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("FORCE_DOOR_017_042",21.595312f,2.400000f,51.000000f);
+	myObj= CreateGameObject("FORCE_DOOR_017_042",21.595312f,2.400000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2423);
 
-	myObj= CreateGameObject("CYBORG_DRONE_17_42_01_0328",21.000000f,2.850000f,51.000000f);
+	myObj= CreateGameObject("CYBORG_DRONE_17_42_01_0328",20.980000f,2.850000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0540",23.400000f,3.000000f,51.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0540",23.379999f,3.000000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_42_01_0538", 0,"NULL_TRIGGER_18_43_01_0397", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0539",23.400000f,3.000000f,51.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0539",23.379999f,3.000000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_42_01_0537", 0,"NULL_TRIGGER_18_43_01_0160", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0538",23.400000f,3.000000f,51.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0538",23.379999f,3.000000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
 	AddACTION_MESSAGE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0537",23.400000f,3.000000f,51.000000f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0537",23.379999f,3.000000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
 	AddACTION_MESSAGE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CYBORG_ASSASSIN_20_42_01_0330",24.600000f,2.793750f,51.000000f);
+	myObj= CreateGameObject("CYBORG_ASSASSIN_20_42_01_0330",24.580000f,2.793750f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,462, 0);
 
-	myObj= CreateGameObject("ENERGY_GRATING_023_042",28.200001f,2.400000f,51.595314f);
+	myObj= CreateGameObject("ENERGY_GRATING_023_042",28.180000f,2.400000f,51.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2424);
 
-	myObj= CreateGameObject("REPULSOR_26_42_01_0451",31.799999f,0.600000f,51.000000f);
+	myObj= CreateGameObject("REPULSOR_26_42_01_0451",31.780001f,0.600000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
 
 	myObj= CreateGameObject("FRAGMENTATION_GRENADE_28_42_01_0693",34.345314f,2.550000f,51.182812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 
-	myObj= CreateGameObject("WORDS_35_42_01_0570",42.000000f,1.706250f,51.032814f);
+	myObj= CreateGameObject("WORDS_35_42_01_0570",42.020000f,1.706250f,51.032814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("SWITCH_14_43_01_0603",17.400000f,1.875000f,52.200001f);
+	myObj= CreateGameObject("SWITCH_14_43_01_0603",17.379999f,1.875000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_18_43_01_0237",22.200001f,3.000000f,52.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_18_43_01_0237",22.180000f,3.000000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_18_43_01_0397",22.200001f,3.000000f,52.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_18_43_01_0397",22.180000f,3.000000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_18_43_01_0160",22.200001f,3.000000f,52.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_18_43_01_0160",22.180000f,3.000000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("LEVER_18_43_01_0227",22.795313f,2.925000f,52.120312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0899",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_18_43_01_0237", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("GRATING_18_43_01_0232",22.200001f,3.000000f,51.599998f);
+	myObj= CreateGameObject("GRATING_18_43_01_0232",22.180000f,3.000000f,51.619999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1073",true);
 
-	myObj= CreateGameObject("PLAYER_DEATH_TRIGGER_19_43_01_0230",23.400000f,3.000000f,52.200001f);
+	myObj= CreateGameObject("PLAYER_DEATH_TRIGGER_19_43_01_0230",23.379999f,3.000000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1349",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_43_01_0229",23.400000f,3.000000f,52.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_43_01_0229",23.379999f,3.000000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 1,0,0,0,0,0);
 	AddACTION_TRANSPORT_LEVEL(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_19_43_01_0228",23.400000f,3.000000f,52.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_19_43_01_0228",23.379999f,3.000000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 2,0,0,0,0,0);
 	AddACTION_RESURRECTION(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("WORDS_20_43_01_0153",24.000000f,2.737500f,52.270313f);
+	myObj= CreateGameObject("WORDS_20_43_01_0153",24.020000f,2.737500f,52.270313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("ICON_20_43_01_0234",24.000000f,3.225000f,52.195313f);
+	myObj= CreateGameObject("ICON_20_43_01_0234",24.020000f,3.225000f,52.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",62,127, 0);
 
-	myObj= CreateGameObject("CYBORG_DRONE_25_43_01_0329",30.600000f,2.850000f,52.200001f);
+	myObj= CreateGameObject("CYBORG_DRONE_25_43_01_0329",30.580000f,2.850000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
 	myObj= CreateGameObject("CAMERA_26_43_01_0425",32.320313f,3.543750f,52.757813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("CYBORG_ASSASSIN_31_43_01_0398",37.799999f,2.793750f,52.200001f);
+	myObj= CreateGameObject("CYBORG_ASSASSIN_31_43_01_0398",37.779999f,2.793750f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,462, 0);
 
@@ -2305,10 +2423,11 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_42_43_01_0604",51.000000f,1.800000f,52.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_42_43_01_0604",50.980000f,1.800000f,52.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CYBORG_DRONE_16_44_01_0092",19.832813f,2.850000f,53.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
@@ -2318,93 +2437,106 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("SCREEN_18_44_01_0369",22.195313f,3.000000f,53.995312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	CreateComputerScreen(myObj,0,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("ENERGY_GRATING_019_044",23.995312f,2.400000f,53.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2424);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0557",25.799999f,3.000000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0557",25.780001f,3.000000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0596",25.799999f,3.000000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0596",25.780001f,3.000000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0589",25.799999f,3.000000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0589",25.780001f,3.000000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CYBORG_DRONE_22_44_01_0368",26.821875f,0.450000f,53.793751f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("CYBORG_DRONE_23_44_01_0091",28.200001f,2.850000f,53.400002f);
+	myObj= CreateGameObject("CYBORG_DRONE_23_44_01_0091",28.180000f,2.850000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0595",30.600000f,0.600000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0595",30.580000f,0.600000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0594",30.600000f,0.600000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0594",30.580000f,0.600000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0556",30.600000f,0.600000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0556",30.580000f,0.600000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BUTTON_28_44_01_0554",34.795311f,0.750000f,53.545311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_25_44_01_0595", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("FORCE_DOOR_28_44_01_0551",34.200001f,0.600000f,53.995312f);
+	myObj= CreateGameObject("FORCE_DOOR_28_44_01_0551",34.180000f,0.600000f,53.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_29_44_01_0356",35.400002f,1.200000f,53.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_29_44_01_0356",35.380001f,1.200000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_37_44_01_0409",44.732811f,2.550000f,53.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_12_45_01_0602",15.000000f,1.200000f,54.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_12_45_01_0602",14.980000f,1.200000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 7,0,0,0,0,0);
 	AddACTION_LIGHTING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_21_45_01_0562",25.799999f,3.450000f,54.599998f);
+	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_21_45_01_0562",25.780001f,3.450000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
 	CreateNull_Trigger(myObj, 6,1,47,2,0,1);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_25_44_01_0594", 0,"NULL_TRIGGER_21_45_01_0588", 0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0563",25.799999f,3.450000f,54.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0563",25.780001f,3.450000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
 	AddACTION_MESSAGE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0587",25.799999f,3.450000f,54.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0587",25.780001f,3.450000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0588",25.799999f,3.450000f,54.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0588",25.780001f,3.450000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CAMERA_22_45_01_0559",26.545313f,0.900000f,55.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -2412,76 +2544,82 @@
 	myObj= CreateGameObject("BATTERY_PACK_22_45_01_0644",26.995312f,0.112500f,54.407814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0756",true);
 
-	myObj= CreateGameObject("BATTERY_PACK_22_45_01_0560",27.000000f,0.112500f,54.599998f);
+	myObj= CreateGameObject("BATTERY_PACK_22_45_01_0560",26.980000f,0.112500f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0756",true);
 
-	myObj= CreateGameObject("BUTTON_23_45_01_0592",28.326563f,0.731250f,54.000000f);
+	myObj= CreateGameObject("BUTTON_23_45_01_0592",28.326563f,0.731250f,54.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_46_01_0597", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("FORCE_DOOR_23_45_01_0553",28.795313f,0.600000f,54.599998f);
+	myObj= CreateGameObject("FORCE_DOOR_23_45_01_0553",28.795313f,0.600000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("BUTTON_24_45_01_0558",29.245312f,0.731250f,55.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_46_01_0597", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 
 	myObj= CreateGameObject("BUTTON_26_45_01_0593",31.945313f,0.731250f,55.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_44_01_0557", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("BUTTON_27_45_01_0586",33.145313f,0.731250f,54.000000f);
+	myObj= CreateGameObject("BUTTON_27_45_01_0586",33.145313f,0.731250f,54.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_25_44_01_0595", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("BUTTON_27_45_01_0555",32.821877f,0.731250f,54.000000f);
+	myObj= CreateGameObject("BUTTON_27_45_01_0555",32.821877f,0.731250f,54.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,6);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_44_01_0557", 0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("FORCE_DOOR_27_45_01_0552",33.595314f,0.600000f,54.599998f);
+	myObj= CreateGameObject("FORCE_DOOR_27_45_01_0552",33.595314f,0.600000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("CYBORG_DRONE_30_45_01_0221",36.599998f,2.850000f,54.599998f);
+	myObj= CreateGameObject("CYBORG_DRONE_30_45_01_0221",36.580002f,2.850000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("NULL_TRIGGER_31_45_01_0344",37.799999f,3.000000f,54.599998f);
+	myObj= CreateGameObject("NULL_TRIGGER_31_45_01_0344",37.779999f,3.000000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 23,1,0,0,0,0);
 	AddACTION_SPAWN(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 
 	myObj= CreateGameObject("CAMERA_35_45_01_0430",43.157814f,3.318750f,54.032814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("ENERGY_GRATING_038_045",46.200001f,2.400000f,54.000000f);
+	myObj= CreateGameObject("ENERGY_GRATING_038_045",46.180000f,2.400000f,54.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2424);
 
-	myObj= CreateGameObject("BERSERK_COMBAT_BOOSTER_16_46_01_0334",19.495312f,2.550000f,55.200001f);
+	myObj= CreateGameObject("BERSERK_COMBAT_BOOSTER_16_46_01_0334",19.495312f,2.550000f,55.220001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0205",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,65, 0);
 
 	myObj= CreateGameObject("BROKEN_GUN_16_46_01_0333",19.457813f,2.568750f,55.645313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0592",true);
 
-	myObj= CreateGameObject("SKELETON_16_46_01_0332",19.799999f,2.756250f,55.799999f);
+	myObj= CreateGameObject("SKELETON_16_46_01_0332",19.780001f,2.756250f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0702",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,210, 0);
 
-	myObj= CreateGameObject("GRATING_17_46_01_0155",20.400000f,3.000000f,55.799999f);
+	myObj= CreateGameObject("GRATING_17_46_01_0155",20.420000f,3.000000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1073",true);
 
-	myObj= CreateGameObject("SCREEN_18_46_01_0530",22.195313f,2.981250f,55.200001f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_18_46_01_0530",22.195313f,2.981250f,55.220001f);
+	CreateComputerScreen(myObj,81,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("EMAIL_18_46_01_0505",21.782812f,2.493750f,55.720314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
@@ -2490,26 +2628,29 @@
 	myObj= CreateGameObject("HUMAN_CORPSE_18_46_01_0504",22.757813f,2.756250f,55.795311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
 
-	myObj= CreateGameObject("DESTROYED_ASSASSIN_CYBORG_18_46_01_0503",22.200001f,2.793750f,55.799999f);
+	myObj= CreateGameObject("DESTROYED_ASSASSIN_CYBORG_18_46_01_0503",22.180000f,2.793750f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1500",true);
 
-	myObj= CreateGameObject("CAMERA_18_46_01_0422",22.795313f,3.543750f,55.200001f);
+	myObj= CreateGameObject("CAMERA_18_46_01_0422",22.795313f,3.543750f,55.220001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0597",25.799999f,2.850000f,55.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0597",25.780001f,2.850000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 12,0,0,0,0,0);
 	AddACTION_CHOICE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0591",25.799999f,2.850000f,55.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0591",25.780001f,2.850000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0590",25.799999f,2.850000f,55.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0590",25.780001f,2.850000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
 	AddACTION_CHANGE_TYPE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CYBORG_DRONE_22_46_01_0360",27.257813f,2.700000f,55.870312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
@@ -2526,7 +2667,7 @@
 	myObj= CreateGameObject("CAMERA_30_46_01_0426",36.370312f,3.431250f,55.832813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("WORDS_36_46_01_0569",43.799999f,2.700000f,56.395313f);
+	myObj= CreateGameObject("WORDS_36_46_01_0569",43.779999f,2.700000f,56.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("CYBORG_DRONE_40_46_01_0400",48.932812f,0.600000f,56.132813f);
@@ -2536,29 +2677,29 @@
 	myObj= CreateGameObject("CONTROL_PEDESTAL_41_46_01_0167",49.907814f,0.150000f,55.945313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("ML_41_PISTOL_43_46_01_0565",52.200001f,0.300000f,55.799999f);
+	myObj= CreateGameObject("ML_41_PISTOL_43_46_01_0565",52.180000f,0.300000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0001",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",1,0, 0);
 
-	myObj= CreateGameObject("GRATING_17_47_01_0322",20.400000f,3.000000f,57.000000f);
+	myObj= CreateGameObject("GRATING_17_47_01_0322",20.420000f,3.000000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1073",true);
 
-	myObj= CreateGameObject("SCREEN_18_47_01_0531",22.200001f,2.981250f,57.595314f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_18_47_01_0531",22.180000f,2.981250f,57.595314f);
+	CreateComputerScreen(myObj,85,4,1);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("CYBORG_DRONE_20_47_01_0090",24.600000f,2.850000f,57.000000f);
+	myObj= CreateGameObject("CYBORG_DRONE_20_47_01_0090",24.580000f,2.850000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
 
-	myObj= CreateGameObject("REPULSOR_35_47_01_0579",42.599998f,0.600000f,57.000000f);
+	myObj= CreateGameObject("REPULSOR_35_47_01_0579",42.580002f,0.600000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
 
-	myObj= CreateGameObject("COMPUTER_NODE_41_47_01_0166",49.799999f,0.150000f,57.000000f);
+	myObj= CreateGameObject("COMPUTER_NODE_41_47_01_0166",49.779999f,0.150000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("COMPUTER_NODE_42_47_01_0145",51.000000f,0.150000f,57.000000f);
+	myObj= CreateGameObject("COMPUTER_NODE_42_47_01_0145",50.980000f,0.150000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("CYBORG_DRONE_20_48_01_0363",24.478125f,2.250000f,58.724998f);
@@ -2572,21 +2713,23 @@
 	myObj= CreateGameObject("CAMERA_30_48_01_0427",36.407814f,3.393750f,58.157814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("COMPUTER_NODE_41_48_01_0144",49.799999f,0.150000f,58.200001f);
+	myObj= CreateGameObject("COMPUTER_NODE_41_48_01_0144",49.779999f,0.150000f,58.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("COMPUTER_NODE_42_48_01_0115",51.000000f,0.150000f,58.200001f);
+	myObj= CreateGameObject("COMPUTER_NODE_42_48_01_0115",50.980000f,0.150000f,58.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
-	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_44_48_01_0475",53.400002f,1.200000f,58.200001f);
+	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_44_48_01_0475",53.380001f,1.200000f,58.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
 	CreateNull_Trigger(myObj, 6,1,8,0,7,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_45_48_01_0645", 80,"NULL_TRIGGER_20_51_01_0357", 0,"NULL_TRIGGER_31_45_01_0344", 0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_45_48_01_0645",54.599998f,1.200000f,58.200001f);
+	myObj= CreateGameObject("NULL_TRIGGER_45_48_01_0645",54.580002f,1.200000f,58.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 15,0,0,0,0,0);
 	AddACTION_EMAIL(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CYBORG_ASSASSIN_27_49_01_0401",33.032814f,2.193750f,59.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1610",true);
@@ -2599,10 +2742,10 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("LUMP_OF_CLOTHES_30_49_01_0402",36.599998f,0.243750f,59.400002f);
+	myObj= CreateGameObject("LUMP_OF_CLOTHES_30_49_01_0402",36.580002f,0.243750f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0585",true);
 
-	myObj= CreateGameObject("CYBORG_WARRIOR_35_49_01_0306",42.599998f,2.887500f,59.400002f);
+	myObj= CreateGameObject("CYBORG_WARRIOR_35_49_01_0306",42.580002f,2.887500f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1607",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,461, 0);
 
@@ -2614,30 +2757,36 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 6,0,0,0,0,0);
 	AddACTION_ACTIVATE(myObj, "",0,"",0,"",0,"",0);
+	SetRotation(myObj,(float)-326.250000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SCREEN_43_49_01_0238",52.795311f,0.862500f,59.357811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,132, 0);
+	CreateComputerScreen(myObj,0,100,1);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
-	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_44_49_01_0445",53.400002f,1.200000f,59.400002f);
+	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_44_49_01_0445",53.380001f,1.200000f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
 	CreateNull_Trigger(myObj, 6,0,8,0,7,0);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_45_49_01_0506", 0,"NULL_TRIGGER_46_49_01_0375", 0,"NULL_TRIGGER_46_49_01_0507", 0,"",0);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_45_49_01_0506",54.599998f,1.200000f,59.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_45_49_01_0506",54.580002f,1.200000f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 4,0,0,0,0,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0507",55.799999f,1.200000f,59.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0507",55.779999f,1.200000f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 19,0,33,16,4,0);
 	AddACTION_CHANGE_STATE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0375",55.799999f,1.200000f,59.400002f);
+	myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0375",55.779999f,1.200000f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 19,0,33,16,4,0);
 	AddACTION_CHANGE_STATE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CYBORG_DRONE_23_50_01_0361",28.040625f,2.250000f,60.159374f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
@@ -2647,22 +2796,25 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_36_50_01_0276",43.799999f,0.600000f,60.599998f);
+	myObj= CreateGameObject("DEATH_WATCH_TRIGGER_36_50_01_0276",43.779999f,0.600000f,60.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1352",false);
 	CreateNull_Trigger(myObj, 4,0,8,0,7,0);
 	AddACTION_SET_VARIABLE(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SWITCH_20_51_01_0355",24.600000f,0.675000f,61.799999f);
+	myObj= CreateGameObject("SWITCH_20_51_01_0355",24.580000f,0.675000f,61.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
 	CreateSHOCKActivators(myObj,0);
 	AddACTION_DO_NOTHING(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("NULL_TRIGGER_20_51_01_0357",24.600000f,1.200000f,61.799999f);
+	myObj= CreateGameObject("NULL_TRIGGER_20_51_01_0357",24.580000f,1.200000f,61.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 21,0,0,0,0,0);
 	AddACTION_AWAKEN(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
-	myObj= CreateGameObject("STORAGE_ROOM_DOOR_031_051",37.799999f,0.000000f,61.200001f);
+	myObj= CreateGameObject("STORAGE_ROOM_DOOR_031_051",37.779999f,0.000000f,61.220001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
 	CreateShockDoor(myObj,0,0,2406);
@@ -2670,44 +2822,45 @@
 	myObj= CreateGameObject("CRATE_20_52_01_0545",24.407812f,1.575000f,63.070313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1402",true);
 
-	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_22_52_01_0343",27.000000f,1.350000f,63.000000f);
+	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_22_52_01_0343",26.980000f,1.350000f,62.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,66, 0);
 
-	myObj= CreateGameObject("SCREEN_28_52_01_0543",34.195313f,2.981250f,62.400002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_28_52_01_0543",34.195313f,2.981250f,62.419998f);
+	CreateComputerScreen(myObj,51,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
-	myObj= CreateGameObject("SCREEN_29_52_01_0544",35.395313f,3.000000f,62.400002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_29_52_01_0544",35.395313f,3.000000f,62.419998f);
+	CreateComputerScreen(myObj,89,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CYBORG_DRONE_30_52_01_0358",36.557812f,1.650000f,62.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1604",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,460, 0);
 
-	myObj= CreateGameObject("SCREEN_30_52_01_0542",36.595314f,3.000000f,62.400002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",63,135, 0);
+	myObj= CreateGameObject("SCREEN_30_52_01_0542",36.595314f,3.000000f,62.419998f);
+	CreateComputerScreen(myObj,31,4,0);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BUTTON_30_52_01_0541",37.195313f,2.118750f,63.107811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,9);
 	AddACTION_MOVING_PLATFORM(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("TOXIC_WASTE_BARREL_31_52_01_0637",37.907814f,0.393750f,63.407814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1410",true);
 
-	myObj= CreateGameObject("TOXIC_WASTE_BARREL_32_52_01_0634",39.000000f,0.393750f,63.000000f);
+	myObj= CreateGameObject("TOXIC_WASTE_BARREL_32_52_01_0634",38.980000f,0.393750f,62.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1410",true);
 
 	myObj= CreateGameObject("CRATE_20_53_01_0547",24.670313f,1.387500f,63.857811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
-	myObj= CreateGameObject("CRATE_21_53_01_0546",25.799999f,1.575000f,64.199997f);
+	myObj= CreateGameObject("CRATE_21_53_01_0546",25.780001f,1.575000f,64.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1402",true);
 
-	myObj= CreateGameObject("CHEMICAL_TANK_31_53_01_0631",37.799999f,0.393750f,64.199997f);
+	myObj= CreateGameObject("CHEMICAL_TANK_31_53_01_0631",37.779999f,0.393750f,64.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
 	myObj= CreateGameObject("TOXIC_WASTE_BARREL_32_53_01_0635",39.145313f,0.393750f,63.745312f);
