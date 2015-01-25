@@ -821,8 +821,10 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 			}
 
 		}
-
-		tile tmp;
+	tile tmp;
+	if (game != SHOCK)
+		{
+		//Ceiling
 		tmp.tileType = 1;
 		tmp.Render = 1;
 		tmp.isWater = 0;
@@ -842,28 +844,29 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		tmp.shockNorthCeilHeight = 0;
 		tmp.shockSouthCeilHeight = 0;
 		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
+		}
 
-		//Now render a room to store objects
-		tmp.DimX = 1;
-		tmp.DimY = 1;
-		tmp.floorHeight = 0;
-		for (x = 65; x < 68; x++)
+	//Now render a room to store objects
+	tmp.DimX = 1;
+	tmp.DimY = 1;
+	tmp.floorHeight = 0;
+	for (x = 65; x < 68; x++)
+		{
+		for (y = 65; y < 68; y++)
 			{
-			for (y = 65; y < 68; y++)
+			tmp.tileX = x;
+			tmp.tileY = y;
+			if ((x != 66) || (y!=66))
 				{
-				tmp.tileX = x;
-				tmp.tileY = y;
-				if ((x != 66) || (y!=66))
-					{
-					tmp.tileType = 0;
-					}
-				else
-					{
-					tmp.tileType = 1;
-					}
-				RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
+				tmp.tileType = 0;
 				}
+			else
+				{
+				tmp.tileType = 1;
+				}
+			RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
 			}
+		}
 //Render doors
 	if (game != SHOCK)
 		{

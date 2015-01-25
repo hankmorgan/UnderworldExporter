@@ -75,7 +75,7 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 
 	*offX = (x*BrushX) + ((objList[nextObj].x) * (BrushX / ResolutionXY));
 	*offY = (y*BrushY) + ((objList[nextObj].y) * (BrushY / ResolutionXY));
-	//offZ = objList[nextObj].zpos ; //TODO:Adjust this.
+	
 	float zpos = objList[nextObj].zpos;
 	float ceil = CEILING_HEIGHT;
 	*offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;

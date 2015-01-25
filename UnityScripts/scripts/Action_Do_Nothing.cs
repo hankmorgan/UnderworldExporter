@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Action_Do_Nothing : MonoBehaviour {
+	public string ObjectToActivate;
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +16,8 @@ public class Action_Do_Nothing : MonoBehaviour {
 
 	public void PerformAction()
 	{
-		Debug.Log ("Action Do Nothing");
+		GameObject objToActivate=GameObject.Find (ObjectToActivate);
+		Debug.Log (this.name + " Action Do Nothing");
+		objToActivate.SendMessage("Activate");
 	}
 }

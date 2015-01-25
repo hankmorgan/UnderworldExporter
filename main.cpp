@@ -263,9 +263,10 @@ if (true)
 	printf("%d) Cutscene Art Extract\n", CUTSCENE_EXTRACT_MODE);
 	printf("%d) FBX Export\n", FBX_MODE);
 	printf("%d) Unity script generation\n", UNITY_MODE);
+	printf("%d) Unity Tilemap info generation\n", UNITY_TILEMAP_MODE);
 	printf("Please select a mode.\n>");
 	scanf("%d", &mode);
-	if ((mode < 0) || (mode > 12))
+	if ((mode < 0) || (mode > 13))
 	{
 		printf("Invalid input. Bye.");
 		return 0;
@@ -280,6 +281,7 @@ if (true)
 	case REPACK_MODE:
     case FBX_MODE:
     case UNITY_MODE:
+	case UNITY_TILEMAP_MODE:
 		{
 		switch (game)
 			{
@@ -760,6 +762,7 @@ switch (game)
 		case SOURCE_MODE:
 		case FBX_MODE:
 		case UNITY_MODE:
+		case UNITY_TILEMAP_MODE:
 			printf("\n================Game %d==Level %d==Mode %d===================\n", game, levelNo, mode);
 			exportMaps(game, mode, levelNo, OutFileName,GameFilePath);
 			break;
@@ -1190,6 +1193,9 @@ void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char fileP
 			break;
 		case UNITY_MODE:
 			RenderUnityObjectList(game,LevelNo,LevelInfo,objList);
+			break;
+		case UNITY_TILEMAP_MODE:
+			PrintUnityTileMap(game, LevelNo, LevelInfo);
 			break;
 		}
 	}

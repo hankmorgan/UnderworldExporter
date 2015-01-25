@@ -17,7 +17,7 @@ public class Action_Activate : MonoBehaviour {
 
 	public void PerformAction()
 	{
-		Debug.Log ("Action Activate");
+		Debug.Log (this.name + " Action Activate");
 		for (int i = 0; i<4; i++)
 		{
 			if (ObjectsToActivate[i]!="")

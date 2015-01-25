@@ -155,7 +155,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"Sprites/objects_%03d\");", currobj.item_id, currobj.item_id);
+	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\");", currobj.item_id, objectMasters[currobj.item_id].particle);
 	switch (currobj.npc_attitude)
 		{
 			case 0:	//hostile
@@ -928,7 +928,15 @@ void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &cur
 	switch (currobj.TriggerAction)
 		{
 			case ACTION_DO_NOTHING:
-				fprintf(UNITY_FILE, "\n\tAddACTION_DO_NOTHING(myObj);"); break;
+				if ((currobj.shockProperties[BUTTON_PROPERTY_TRIGGER] < 1600) && (currobj.shockProperties[BUTTON_PROPERTY_TRIGGER] >= 0))
+					{
+					fprintf(UNITY_FILE, "\n\tAddACTION_DO_NOTHING(myObj, \"%s\");", UniqueObjectName(objList[currobj.shockProperties[BUTTON_PROPERTY_TRIGGER]]));
+					}
+				else
+					{
+					fprintf(UNITY_FILE, "\n\tAddACTION_DO_NOTHING(myObj);");
+					}
+				 break;
 			case ACTION_TRANSPORT_LEVEL:
 				fprintf(UNITY_FILE, "\n\tAddACTION_TRANSPORT_LEVEL(myObj);"); break;
 			case ACTION_RESURRECTION:
@@ -969,11 +977,23 @@ void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &cur
 			case ACTION_EFFECT:
 				fprintf(UNITY_FILE, "\n\tAddACTION_EFFECT(myObj);"); break;
 			case ACTION_MOVING_PLATFORM:
-				fprintf(UNITY_FILE, "\n\tAddACTION_MOVING_PLATFORM(myObj);"); break;
+				//int triggerX = currobj.shockProperties[TRIG_PROPERTY_TARGET_X];
+				//int triggerY = currobj.shockProperties[TRIG_PROPERTY_TARGET_Y];
+				//int targetFloor = currobj.shockProperties[TRIG_PROPERTY_FLOOR];
+				//int targetCeiling = currobj.shockProperties[TRIG_PROPERTY_CEILING];
+				//int flag = LevelInfo[triggerX][triggerY].hasElevator;
+				fprintf(UNITY_FILE, "\n\tAddACTION_MOVING_PLATFORM(myObj, %d, %d, %d, %d, %d);"
+					, currobj.shockProperties[TRIG_PROPERTY_TARGET_X], currobj.shockProperties[TRIG_PROPERTY_TARGET_Y]
+					, currobj.shockProperties[TRIG_PROPERTY_FLOOR], CEILING_HEIGHT- currobj.shockProperties[TRIG_PROPERTY_CEILING]
+					, LevelInfo[currobj.shockProperties[TRIG_PROPERTY_TARGET_X]][currobj.shockProperties[TRIG_PROPERTY_TARGET_Y]].hasElevator); break;
 			case ACTION_TIMER:
 				fprintf(UNITY_FILE, "\n\tAddACTION_TIMER(myObj);"); break;
 			case ACTION_CHOICE:
-				fprintf(UNITY_FILE, "\n\tAddACTION_CHOICE(myObj);"); break;
+				fprintf(UNITY_FILE, "\n\tAddACTION_CHOICE(myObj,\"%s\""
+					, UniqueObjectName(objList[currobj.shockProperties[TRIG_PROPERTY_TRIG_1]]));
+				fprintf(UNITY_FILE, ", \"%s\");"
+				, UniqueObjectName(objList[currobj.shockProperties[TRIG_PROPERTY_TRIG_2]])); 
+					break;
 			case ACTION_EMAIL:
 				fprintf(UNITY_FILE, "\n\tAddACTION_EMAIL(myObj);"); break;
 			case ACTION_RADAWAY:
@@ -1454,6 +1474,23 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 		objList[currobj.index].objectConversion = newObj;
 		}
 	}
+
+	void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
+		{
+		if (fopen_s(&UNITY_FILE, "unity.txt", "w") != 0)
+			{
+			printf("Unable to create output file for this thing");
+			return;
+			}
+		for (int x = 0; x <= 63; x++)
+			{
+			for (int y = 0; y <= 63; y++)
+				{
+				fprintf(UNITY_FILE, "\n\tSetTileProp(tilemap, %d,%d,%d,%d,%d,%d);", x, y, LevelInfo[x][y].tileType, LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight);
+				}
+			}
+		fclose(UNITY_FILE);
+		}
 
 void RenderUnityObjectList(int game, int Level, tile LevelInfo[64][64], ObjectItem objList[1600])
 	{
