@@ -328,6 +328,10 @@ return;
 
 void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255])
 {
+if (ACTUALLY_EXTRACT_FILES == 0)
+	{
+	return;
+	}
 	BitMapHeader bmhead;
 	BitMapInfoHeader bmihead;
 	
@@ -1302,7 +1306,10 @@ void myPlayRunSkipDump(Uint8 *srcP, Uint8 *dstP)
 
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha)
 	{
-	
+	if (ACTUALLY_EXTRACT_FILES == 0)
+		{
+		return;
+		}
 	//return;
 	FILE *fptr;
 	char outFile[255];
@@ -1701,20 +1708,21 @@ int Height;
 			Width=320;
 			Height=150;
 			}
-////fprintf(LOGFILE,"\nBitmap header\n");
-////fprintf(LOGFILE,"Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
-////fprintf(LOGFILE,"Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
-////fprintf(LOGFILE,"??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
-////fprintf(LOGFILE,"Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
-////fprintf(LOGFILE,"Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
-////fprintf(LOGFILE,"Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
-////fprintf(LOGFILE,"log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
-////fprintf(LOGFILE,"log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
-////fprintf(LOGFILE,"%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
-////fprintf(LOGFILE,"%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
-////fprintf(LOGFILE,"%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
-////fprintf(LOGFILE,"%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
-////fprintf(LOGFILE,"??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
+fprintf(LOGFILE, "\n%s_%04d", OutFileName,index);
+fprintf(LOGFILE,"\nBitmap header\n");
+fprintf(LOGFILE,"Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
+fprintf(LOGFILE,"Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
+fprintf(LOGFILE,"??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
+fprintf(LOGFILE,"Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
+fprintf(LOGFILE,"Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
+fprintf(LOGFILE,"Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
+fprintf(LOGFILE,"log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
+fprintf(LOGFILE,"log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
+fprintf(LOGFILE,"%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
+fprintf(LOGFILE,"%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
+fprintf(LOGFILE,"%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
+fprintf(LOGFILE,"%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
+fprintf(LOGFILE,"??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
 		
 		
 		//fprintf(LOGFILE,"\nHeight=%d",Height);		

@@ -1537,6 +1537,7 @@ float offX; float offY; float offZ;
 					{
 					objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					objList[nextObj].tileY = y;
+					offX = 0.0; offY = 0.0; offZ = 0.0;
 					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y,1);//Figures out where the object should be.
 					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);
 					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])))
@@ -1565,6 +1566,7 @@ float offX; float offY; float offZ;
 					{
 					if (isTrigger(objList[i]))
 						{
+						offX = 0.0; offY = 0.0; offZ = 0.0;
 						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
 						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
 						switch (objectMasters[objList[i].item_id].type)

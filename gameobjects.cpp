@@ -365,6 +365,10 @@ mstaddress_pointer=0;
 
 				objList[MasterIndex].ObjectSubClassIndex = ObjectSubClassIndex;
 				int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
+				if ((MasterIndex == 485) || (MasterIndex == 484))
+					{
+					printf("");
+					}
 				if (LookupIndex != -1)
 				{
 

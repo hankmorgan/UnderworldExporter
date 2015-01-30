@@ -65,7 +65,7 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 	{
 	float ResolutionXY = 7.0;	// A tile has a 7x7 grid for object positioning.
 	float ResolutionZ = 128.0;	//UW has 127 posible z positions for an object in tile.
-	if (game == SHOCK){ ResolutionXY = 256.0; ResolutionZ = 256.0; }	//Shock has more "z" in it.
+	if (game == SHOCK){ ResolutionXY = 256.0; ResolutionZ =256.0; }	//Shock has more "z" in it.
 
 	*offX = 0;  *offY = 0; *offZ = 0;
 
@@ -75,7 +75,7 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 
 	*offX = (x*BrushX) + ((objList[nextObj].x) * (BrushX / ResolutionXY));
 	*offY = (y*BrushY) + ((objList[nextObj].y) * (BrushY / ResolutionXY));
-	
+
 	float zpos = objList[nextObj].zpos;
 	float ceil = CEILING_HEIGHT;
 	*offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;

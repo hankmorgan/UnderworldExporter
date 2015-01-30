@@ -4,7 +4,7 @@ using System.Text;
 using System.IO;
 
 public class StringController : MonoBehaviour {
-
+	public int game; //Which game is this. 0=uwdemo, 1=uw1, 2=uw2, 3=shock
 	private Hashtable GameStrings;
 	private string StringFilePath;
 	// Use this for initialization
@@ -40,7 +40,8 @@ public class StringController : MonoBehaviour {
 	{
 		string line;
 		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-
+		string PreviousKey="";
+		string PreviousValue="";
 		using (fileReader)
 		{
 			// While there's lines left in the text file, do this:
@@ -49,11 +50,22 @@ public class StringController : MonoBehaviour {
 				line = fileReader.ReadLine();
 				if (line != null)
 				{
-				string[] entries = line.Split('€');
-				if (entries.Length > 0)
+					if (line.IndexOf("€")>=0)
 					{
-					GameStrings[entries[1] + "_" + entries[2]] = entries[3];
-						//Debug.Log (GameStrings[entries[1]+entries[2]]);
+						string[] entries = line.Split('€');
+						if (entries.Length > 0)
+						{
+							GameStrings[entries[1] + "_" + entries[2]] = entries[3];
+							PreviousValue=entries[3];
+							PreviousKey=entries[1] + "_" + entries[2];
+
+						}
+					}
+				else
+					{//possible new line character. Append text to previous entry.
+						GameStrings[PreviousKey]=PreviousValue + "\n" + line;		
+						PreviousValue= PreviousValue + "\n" + line;	
+						//Debug.Log (PreviousKey+"="+PreviousValue);
 					}
 				}
 			}
