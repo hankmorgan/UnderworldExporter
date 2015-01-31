@@ -112,6 +112,7 @@ extern int CEILING_HEIGHT;
 #define FBX_MODE 11
 #define UNITY_MODE 12
 #define UNITY_TILEMAP_MODE 13
+#define FONT_EXTRACT_MODE 14
 
 
 //UW2 Ark block numbers
@@ -124,7 +125,7 @@ extern int CEILING_HEIGHT;
 #define ALPHA 1
 
 //Should graphics be actually extracted or should I just go through the motions?
-#define ACTUALLY_EXTRACT_FILES 0
+#define ACTUALLY_EXTRACT_FILES 1
 
 //Door size defaults
 #define DOORWIDTH 80

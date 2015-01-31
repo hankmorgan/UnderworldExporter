@@ -264,9 +264,10 @@ if (true)
 	printf("%d) FBX Export\n", FBX_MODE);
 	printf("%d) Unity script generation\n", UNITY_MODE);
 	printf("%d) Unity Tilemap info generation\n", UNITY_TILEMAP_MODE);
+	printf("%d) SS1 Font Extraction\n", FONT_EXTRACT_MODE);
 	printf("Please select a mode.\n>");
 	scanf("%d", &mode);
-	if ((mode < 0) || (mode > 13))
+	if ((mode < 0) || (mode > 14))
 	{
 		printf("Invalid input. Bye.");
 		return 0;
@@ -442,6 +443,8 @@ if (true)
 		break;
 		}
 	case BITMAP_EXTRACT_MODE:
+	case FONT_EXTRACT_MODE:
+		if (mode == FONT_EXTRACT_MODE){game=SHOCK;}
 		switch (game)
 			{
 			case UWDEMO:
@@ -806,6 +809,9 @@ switch (game)
 				ExtractShockGraphics( Graphics_File, Graphics_Pal,critPal,OutFileName,useTGA);
 				}
 			break;
+			case FONT_EXTRACT_MODE:
+				ExtractShockFont(Graphics_File, Graphics_Pal, critPal, OutFileName, useTGA);
+				break;
 		case CRITTER_EXTRACT_MODE:
 			switch (game)
 				{

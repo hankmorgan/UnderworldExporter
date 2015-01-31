@@ -385,9 +385,82 @@ if (ACTUALLY_EXTRACT_FILES == 0)
 	}
 	//fprintf(LOGFILE,".");
 	fclose(outf);	
-
-
 }
+
+void writeBMPBW(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255])
+	{
+	if (ACTUALLY_EXTRACT_FILES == 0)
+		{
+		return;
+		}
+	BitMapHeader bmhead;
+	BitMapInfoHeader bmihead;
+
+	bmhead.bfType = 19778;
+	bmhead.bfReserved1 = 0;
+	bmhead.bfReserved2 = 0;
+	bmhead.bfOffBits = 62;
+	bmihead.biSize = 40;
+	bmihead.biPlanes = 1;
+	bmihead.biBitCount = 8;
+	bmihead.biCompression = 0;
+	bmihead.biXPelsPerMeter = 0;
+	bmihead.biYPelsPerMeter = 0;
+	bmihead.biClrUsed = 0;
+	bmihead.biClrImportant = 0;
+
+	bmhead.bfOffBits = 1078; // Set up the .bmp header info
+	bmihead.biBitCount = 1;
+	bmihead.biClrUsed = 0;
+	bmihead.biClrImportant = 0;
+
+
+	//unsigned char *bits = unpackdat + substart + 28;
+	bmihead.biWidth = SizeH;	//bm->width;
+	bmihead.biHeight = SizeV;	// bm->height;
+	int imwidth = SizeH;		//bmihead.biWidth;
+	imwidth += (4 - (imwidth % 4));
+	bmihead.biSizeImage = imwidth * bmihead.biHeight;
+	bmhead.bfSize = bmihead.biSizeImage + 54;
+
+	char outFile[255];
+
+	sprintf_s(outFile, 255, "%s_%04d.bmp", OutFileName, index);
+
+	FILE *outf;
+	outf = fopen(outFile, "wb");
+
+	fwrite(&bmhead.bfType, 2, 1, outf);
+	fwrite(&bmhead.bfSize, 4, 1, outf);
+	fwrite(&bmhead.bfReserved1, 2, 1, outf);
+	fwrite(&bmhead.bfReserved2, 2, 1, outf);
+	fwrite(&bmhead.bfOffBits, 4, 1, outf);
+	fwrite(&bmihead, sizeof(BitMapInfoHeader), 1, outf);
+	//fwrite(pal, 256 * 4, 1, outf);
+	//Black&White palette?
+	short int tmpshrt = 0;
+	fwrite(&tmpshrt, 2, 1, outf);
+	fwrite(&tmpshrt, 2, 1, outf);
+	tmpshrt = -1;
+	fwrite(&tmpshrt, 2, 1, outf);
+	tmpshrt = 255;
+	fwrite(&tmpshrt, 2, 1, outf);
+
+	char ch = 0;
+	for (int k = bmihead.biHeight - 1; k >= 0; k--) {
+		fwrite(Start + bits + (k*bmihead.biWidth), 1, bmihead.biWidth, outf);
+		if (bmihead.biWidth % 4 != 0)
+		for (int buf = 4; buf > bmihead.biWidth % 4; buf--)
+			fwrite(&ch, 1, 1, outf);
+		}
+
+
+
+	//fprintf(LOGFILE,".");
+	fclose(outf);
+
+
+	}
 
 void LoadAuxilaryPal(char auxpalPath[255], palette auxpal[16], palette gamepal[256], int PalIndex)
 {
@@ -1506,7 +1579,8 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 
 		
 			//if (((chunkContentType == 2) || (chunkContentType == 17)) && (chunkId >= 1000) && (chunkId <= 1272))	//Bitmap and sometimes audio log
-			if (((chunkContentType == 2) || (chunkContentType == 17)))	//Bitmap and sometimes audio log
+			if ((chunkContentType == 2) || (chunkContentType == 17)) 	//Bitmap and sometimes audio log
+			//if ((chunkContentType == 3)) 	//Bitmap and sometimes audio log
 			{//load this chunk and extract
 				char NewOutFileName[255];
 				sprintf_s(NewOutFileName, 255, "%s_%04d", OutFileName, chunkId);
@@ -1519,40 +1593,72 @@ void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int Pal
 					fprintf(LOGFILE,"\nChunk %d, type %d", chunkId, chunkType);
 					art_ark=new unsigned char[chunkUnpackedLength];
 					LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark,chunkPackedLength,chunkUnpackedLength);
-					
-					//Read in my chunk header
-					int NoOfTextures=getValAtAddress(art_ark,0,16);
-					
-					//fprintf(LOGFILE,"No of texture subblocks %d\n",NoOfTextures);
-					//fprintf(LOGFILE,"Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
-			
-					for (int i =0; i<NoOfTextures; i++)
-						{
-						long textureOffset = getValAtAddress(art_ark,2+(i*4),32);
-						if ((bCyclePalettes == 1) || (bCyclePalettes == 2))
+					if (chunkContentType == 3)
+						{//Font data
+						long fontAddressPointer=0;
+						int isColour=0;
+						printf("\nChunk No : %d, BlockAddress : %d", chunkId,blockAddress,fontAddressPointer);
+
+						printf("\nColor Flag : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+						if (getValAtAddress(art_ark, fontAddressPointer, 16) != 0)
 							{
-							//char Pal0OutFileName[255];
-							char Pal1OutFileName[255];
-							char Pal2OutFileName[255];
-							char Pal3OutFileName[255];
-							char Pal4OutFileName[255];
-							//sprintf_s(Pal0OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 0);
-							sprintf_s(Pal1OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 1);
-							sprintf_s(Pal2OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 2);
-							sprintf_s(Pal3OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 3);
-							sprintf_s(Pal4OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 4);
-							WriteShockBitmaps(art_ark, pal, i, textureOffset, NewOutFileName, useTGA, isCutscene);
-							WriteShockBitmaps(art_ark, pal1, i, textureOffset, Pal1OutFileName, useTGA, isCutscene);
-							WriteShockBitmaps(art_ark, pal2, i, textureOffset, Pal2OutFileName, useTGA, isCutscene);
-							WriteShockBitmaps(art_ark, pal3, i, textureOffset, Pal3OutFileName, useTGA, isCutscene);
-							WriteShockBitmaps(art_ark, pal4, i, textureOffset, Pal4OutFileName, useTGA, isCutscene);
+							isColour =1;
 							}
-						else
-							{
-							WriteShockBitmaps(art_ark, pal, i, textureOffset, NewOutFileName, useTGA, isCutscene);
-							}
-						
+						fontAddressPointer = fontAddressPointer +2 + 34;
+						printf("\nFirst ASCII Char : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+						fontAddressPointer = fontAddressPointer + 2;
+						printf("\nSecond ASCII Char : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+						fontAddressPointer = fontAddressPointer+2+32;
+						printf("\nPosition Table Offset : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 32), fontAddressPointer);
+						fontAddressPointer = fontAddressPointer+4;
+						printf("\nBitmap Data Offset : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 32), fontAddressPointer);
+						long textureOffset = getValAtAddress(art_ark, fontAddressPointer, 32);
+						fontAddressPointer = fontAddressPointer+4;
+						printf("\nBitmap Width : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+						int width = getValAtAddress(art_ark, fontAddressPointer, 16);
+						fontAddressPointer = fontAddressPointer+2;
+						printf("\nBitmap Height : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+						int height = getValAtAddress(art_ark, fontAddressPointer, 16);
+						WriteShockFont(art_ark, pal, 0, textureOffset, NewOutFileName, useTGA, width,height,isColour);
 						}
+					else
+						{
+						//Read in my chunk header
+						int NoOfTextures = getValAtAddress(art_ark, 0, 16);
+
+						//fprintf(LOGFILE,"No of texture subblocks %d\n",NoOfTextures);
+						//fprintf(LOGFILE,"Offset to first subblock %d\n",getValAtAddress(art_ark,2,32));
+
+						for (int i = 0; i<NoOfTextures; i++)
+							{
+
+							long textureOffset = getValAtAddress(art_ark, 2 + (i * 4), 32);
+							//if ((bCyclePalettes == 1) || (bCyclePalettes == 2))
+							//	{
+							//	//char Pal0OutFileName[255];
+							//	char Pal1OutFileName[255];
+							//	char Pal2OutFileName[255];
+							//	char Pal3OutFileName[255];
+							//	char Pal4OutFileName[255];
+							//	//sprintf_s(Pal0OutFileName, 255, "%s_%04d_%02d", OutFileName, chunkId, 0);
+							//	sprintf_s(Pal1OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 1);
+							//	sprintf_s(Pal2OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 2);
+							//	sprintf_s(Pal3OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 3);
+							//	sprintf_s(Pal4OutFileName, 255, "%s_%04d_PC%02d", OutFileName, chunkId, 4);
+							//	WriteShockBitmaps(art_ark, pal, i, textureOffset, NewOutFileName, useTGA, isCutscene);
+							//	WriteShockBitmaps(art_ark, pal1, i, textureOffset, Pal1OutFileName, useTGA, isCutscene);
+							//	WriteShockBitmaps(art_ark, pal2, i, textureOffset, Pal2OutFileName, useTGA, isCutscene);
+							//	WriteShockBitmaps(art_ark, pal3, i, textureOffset, Pal3OutFileName, useTGA, isCutscene);
+							//	WriteShockBitmaps(art_ark, pal4, i, textureOffset, Pal4OutFileName, useTGA, isCutscene);
+							//	}
+							//else
+							//	{
+							WriteShockBitmaps(art_ark, pal, i, textureOffset, NewOutFileName, useTGA, isCutscene);
+							//	}
+
+							}
+						}
+					
 					}
 				else
 					{
@@ -1708,21 +1814,21 @@ int Height;
 			Width=320;
 			Height=150;
 			}
-fprintf(LOGFILE, "\n%s_%04d", OutFileName,index);
-fprintf(LOGFILE,"\nBitmap header\n");
-fprintf(LOGFILE,"Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
-fprintf(LOGFILE,"Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
-fprintf(LOGFILE,"??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
-fprintf(LOGFILE,"Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
-fprintf(LOGFILE,"Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
-fprintf(LOGFILE,"Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
-fprintf(LOGFILE,"log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
-fprintf(LOGFILE,"log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
-fprintf(LOGFILE,"%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
-fprintf(LOGFILE,"%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
-fprintf(LOGFILE,"%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
-fprintf(LOGFILE,"%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
-fprintf(LOGFILE,"??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
+	fprintf(LOGFILE, "\n%s_%04d", OutFileName,index);
+	fprintf(LOGFILE,"\nBitmap header\n");
+	fprintf(LOGFILE,"Always %d = %d\n",0, getValAtAddress(art_ark,textureOffset+0,32));
+	fprintf(LOGFILE,"Type %d = %d\n",0x4, getValAtAddress(art_ark,textureOffset+0x4,16));
+	fprintf(LOGFILE,"??? %d = %d\n",0x6, getValAtAddress(art_ark,textureOffset+0x6,16));
+	fprintf(LOGFILE,"Width %d = %d\n",0x8, getValAtAddress(art_ark,textureOffset+0x8,16));
+	fprintf(LOGFILE,"Heigth %d = %d\n",0xA, getValAtAddress(art_ark,textureOffset+0xA,16));
+	fprintf(LOGFILE,"Width in bytes %d = %d\n",0xC, getValAtAddress(art_ark,textureOffset+0xC,16));
+	fprintf(LOGFILE,"log2width %d = %d\n",0xE, getValAtAddress(art_ark,textureOffset+0xE,8));
+	fprintf(LOGFILE,"log2height %d = %d\n",0xF, getValAtAddress(art_ark,textureOffset+0xF,8));
+	fprintf(LOGFILE,"%d = %d\n",0x10, getValAtAddress(art_ark,textureOffset+0x10,16));
+	fprintf(LOGFILE,"%d = %d\n",0x12, getValAtAddress(art_ark,textureOffset+0x12,16));
+	fprintf(LOGFILE,"%d = %d\n",0x14, getValAtAddress(art_ark,textureOffset+0x14,16));
+	fprintf(LOGFILE,"%d = %d\n",0x16, getValAtAddress(art_ark,textureOffset+0x16,16));
+	fprintf(LOGFILE,"??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18,32));
 		
 		
 		//fprintf(LOGFILE,"\nHeight=%d",Height);		
@@ -1758,6 +1864,31 @@ fprintf(LOGFILE,"??? %d = %d\n",0x18, getValAtAddress(art_ark,textureOffset+0x18
 				writeBMP(art_ark,textureOffset+BitMapHeaderSize,Width,Height,index,pal,OutFileName);
 				}
 			}			
+		}
+	}
+
+void WriteShockFont(unsigned char *art_ark, palette *pal, int index, int textureOffset, char OutFileName[255], int useTGA, int Width, int Height ,int isColour)
+	{
+	//Process a system shock bitmap chunk
+	int BitMapHeaderSize = 0; //28;
+	if ((Width>0) && (Height >0))
+		{
+		if (useTGA == 1)
+			{
+			writeTGA(art_ark, textureOffset + BitMapHeaderSize, Width, Height, index, pal, OutFileName, 1);
+			}
+		else
+			{
+			//writeBMP(art_ark, textureOffset + BitMapHeaderSize, Width, Height, index, pal, OutFileName);
+			if (isColour == 1)
+				{
+				writeBMP(art_ark, textureOffset + BitMapHeaderSize, Width, Height, index, pal, OutFileName);
+				}
+			else
+				{
+				writeBMPBW(art_ark, textureOffset + BitMapHeaderSize, Width, Height, index, pal, OutFileName);
+				}
+			}
 		}
 	}
 
@@ -2259,5 +2390,311 @@ void PrintCritAngle(int angle)
 			case 5: fprintf(LOGFILE, "front left "); break;
 			case 6: fprintf(LOGFILE, "      left "); break;
 			case 7: fprintf(LOGFILE, "Rear  left "); break;
+		}
+	}
+
+void ExtractShockFont(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk, char OutFileName[255], int useTGA)
+{
+
+int Alpha=1;
+palette *pal;
+pal = new palette[256];
+
+unsigned char *art_ark;
+unsigned char *tmp_ark;
+
+FILE *file = NULL;      // File pointer
+FILE *outf;
+if ((file = fopen(GraphicsFile, "rb")) == NULL)
+	{
+	fprintf(LOGFILE, "\nGraphics file not found!\n");
+	return;
+	}
+long fileSize = getFileSize(file);
+tmp_ark = new unsigned char[fileSize];
+fread(tmp_ark, fileSize, 1, file);
+fclose(file);
+
+if (LoadShockPal(pal, PaletteFile, PaletteChunk) != 1)
+	{
+	fprintf(LOGFILE, "\nPalette not loaded\n");
+	}
+
+long DirectoryAddress = getValAtAddress(tmp_ark, 124, 32);//Get the list of chunks in this archive.
+int NoOfChunks = getValAtAddress(tmp_ark, DirectoryAddress, 16);
+long address_pointer = DirectoryAddress + 6;
+
+for (int k = 0; k< NoOfChunks; k++)
+	{
+	int chunkId = getValAtAddress(tmp_ark, address_pointer, 16);
+	short chunkContentType = getValAtAddress(tmp_ark, address_pointer + 9, 8);
+	address_pointer = address_pointer + 10;	//next chunk
+		if ((chunkContentType == 3)) 	//Font
+			{//load this chunk and extract
+			char NewOutFileName[255];
+			sprintf_s(NewOutFileName, 255, "%s_%04d", OutFileName, chunkId);
+			long chunkUnpackedLength;
+			long chunkType;//compression type
+			long chunkPackedLength;
+			int blockAddress = getShockBlockAddress(chunkId, tmp_ark, &chunkPackedLength, &chunkUnpackedLength, &chunkType);
+			if (blockAddress != -1)
+				{
+				fprintf(LOGFILE, "\nChunk %d, type %d", chunkId, chunkType);
+				art_ark = new unsigned char[chunkUnpackedLength];
+				LoadShockChunk(blockAddress, chunkType, tmp_ark, art_ark, chunkPackedLength, chunkUnpackedLength);
+				if (chunkContentType == 3)
+					{//Font data
+					long fontAddressPointer = 0;
+					int isColour = 0;
+					//printf("\nChunk No : %d, BlockAddress : %d", chunkId, blockAddress, fontAddressPointer);
+
+					//printf("\nColor Flag : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+					if (getValAtAddress(art_ark, fontAddressPointer, 16) != 0)
+						{
+						isColour = 1;
+						}
+					fontAddressPointer = fontAddressPointer + 2 + 34;
+					//printf("\nFirst ASCII Char : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+					int firstChar = getValAtAddress(art_ark, fontAddressPointer, 16);
+					fontAddressPointer = fontAddressPointer + 2;
+					//printf("\nLast ASCII Char : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+					int LastChar = getValAtAddress(art_ark, fontAddressPointer, 16);
+					int positionTableSize = LastChar-firstChar + 1;
+					fontAddressPointer = fontAddressPointer + 2 + 32;
+					//printf("\nPosition Table Offset : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 32), fontAddressPointer);
+					long PositionTable = getValAtAddress(art_ark, fontAddressPointer, 32);
+					fontAddressPointer = fontAddressPointer + 4;
+					//printf("\nBitmap Data Offset : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 32), fontAddressPointer);
+					long textureOffset = getValAtAddress(art_ark, fontAddressPointer, 32);
+					fontAddressPointer = fontAddressPointer + 4;
+					//printf("\nBitmap Width : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+					int width = getValAtAddress(art_ark, fontAddressPointer, 16);
+					fontAddressPointer = fontAddressPointer + 2;
+					//printf("\nBitmap Height : %d (@ %d)", getValAtAddress(art_ark, fontAddressPointer, 16), fontAddressPointer);
+					int SizeV = getValAtAddress(art_ark, fontAddressPointer, 16);
+					//WriteShockFont(art_ark, pal, 0, textureOffset, NewOutFileName, useTGA, width, SizeV, isColour);
+					//Output the position chart.
+					int pos_ptr = 0;
+					for (long index = 0; index < positionTableSize; index++)
+						{
+						//int SizeH =  getValAtAddress(art_ark, PositionTable + pos_ptr + 2, 16) - getValAtAddress(art_ark, PositionTable + pos_ptr, 16);
+						int GlyphOffset = getValAtAddress(art_ark, PositionTable + pos_ptr, 16);
+						int GlyphOffsetNext = getValAtAddress(art_ark, PositionTable + pos_ptr +2 , 16);
+						int SizeH = GlyphOffsetNext-GlyphOffset;
+						unsigned char *bits;
+						if (isColour)
+							bits = art_ark + textureOffset + GlyphOffset;
+						else
+							bits = art_ark + textureOffset + ((GlyphOffset - (GlyphOffsetNext % 8)) / 8);
+
+						pos_ptr = pos_ptr+2;
+//						unsigned char *bits;
+						//bits = art_ark + textureOffset + ((GlyphOffset - (GlyphOffset % 8)) / 8);
+
+						//printf("\nWidth%d", getValAtAddress(art_ark, PositionTable + pos_ptr + 2, 16) - getValAtAddress(art_ark, PositionTable + pos_ptr, 16));
+						//WriteShockFont(art_ark,pal,k+1,GlyphAddress,NewOutFileName, useTGA, GlyphWidth,height,isColour);
+						if (useTGA == 0)
+							{
+							BitMapHeader bmhead;
+							BitMapInfoHeader bmihead;
+							bmhead.bfType = 19778;
+							bmhead.bfReserved1 = 0;
+							bmhead.bfReserved2 = 0;
+							bmhead.bfOffBits = 1078;
+							bmihead.biSize = 40;
+							bmihead.biPlanes = 1;
+							bmihead.biBitCount = 8;
+							bmihead.biCompression = 0;
+							bmihead.biXPelsPerMeter = 0;
+							bmihead.biYPelsPerMeter = 0;
+							bmihead.biClrUsed = 0;
+							bmihead.biClrImportant = 0;
+							bmhead.bfOffBits = 1078; // Set up the .bmp header info
+							bmihead.biBitCount = 8;
+							bmihead.biClrUsed = 0;
+							bmihead.biClrImportant = 0;
+							bmihead.biWidth = SizeH;	//bm->width;
+							bmihead.biHeight = SizeV;	// bm->height;
+							int imwidth = SizeH;		//bmihead.biWidth;
+							imwidth += (4 - (imwidth % 4));
+							bmihead.biSizeImage = imwidth * bmihead.biHeight;
+							bmhead.bfSize = bmihead.biSizeImage + 54;
+							
+							if (isColour == 0)
+								{//Black & White bitmap 
+								bmhead.bfOffBits = 62;
+								bmihead.biBitCount = 1;
+								bmihead.biClrUsed = 0;
+								bmihead.biClrImportant = 0;
+								}
+							char outFile[255];
+							sprintf_s(outFile, 255, "%s_%04d_%04d.bmp", OutFileName, chunkId, index);
+							
+							outf = fopen(outFile, "wb");
+
+							fwrite(&bmhead.bfType, 2, 1, outf);
+							fwrite(&bmhead.bfSize, 4, 1, outf);
+							fwrite(&bmhead.bfReserved1, 2, 1, outf);
+							fwrite(&bmhead.bfReserved2, 2, 1, outf);
+							fwrite(&bmhead.bfOffBits, 4, 1, outf);
+							fwrite(&bmihead, sizeof(BitMapInfoHeader), 1, outf);
+							char ch = 0;
+							if (isColour == 1)
+								{//COLOUR BITMAP
+								fwrite(pal, 256 * 4, 1, outf); // write full game palette
+								char ch = 0;
+								for (int k = bmihead.biHeight - 1; k >= 0; k--) {
+									fwrite(bits + (k*width), 1, bmihead.biWidth, outf);
+									if (bmihead.biWidth % 4 != 0)
+									for (int buf = 4; buf > bmihead.biWidth % 4; buf--)
+										fwrite(&ch, 1, 1, outf);
+									}
+								fclose(outf);
+								}
+							else
+								{
+								//B&W bitmap
+								//unsigned char *bits;
+								//bits = art_ark + textureOffset + ((GlyphOffset - (GlyphOffset % 8)) / 8);
+								
+								short int tmpshrt = 0;
+								fwrite(&tmpshrt, 2, 1, outf);
+								fwrite(&tmpshrt, 2, 1, outf);
+								tmpshrt = -1;
+								fwrite(&tmpshrt, 2, 1, outf);
+								tmpshrt = 255;
+								fwrite(&tmpshrt, 2, 1, outf);
+
+								unsigned char outc;
+								unsigned char tempc1;
+								unsigned char tempc2;
+								unsigned short int shift = GlyphOffset % 8;
+								//Black & White Bitmap
+								for (int k = bmihead.biHeight - 1; k >= 0; k--) 
+									{
+									for (int q = 0; q <= (bmihead.biWidth - bmihead.biWidth % 8) / 8; q++) 
+										{
+										tempc1 = *(bits + (k*width) + q);
+										tempc2 = *(bits + (k*width) + q + 1);
+										outc = (tempc1 << shift) + (tempc2 >> (8 - shift));
+										fwrite(&outc, 1, 1, outf);
+										}
+									if ((((bmihead.biWidth - bmihead.biWidth % 8) / 8) + 1) % 4 != 0)
+										{
+										for (int buf = 4; buf > (((bmihead.biWidth - bmihead.biWidth % 8) / 8) + 1) % 4; buf--)
+											{
+											fwrite(&ch, 1, 1, outf);
+											}
+										}
+									}
+								fclose(outf);
+								}
+							}
+						else
+							{//TGA common details
+							char outFile[255];
+
+							sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, index);
+							/* Write the result as a uncompressed TGA */
+							if ((outf = fopen(outFile, "wb")) == NULL) {
+								fprintf(stderr, "Failed to open outputfile\n");
+								exit(-1);
+								}
+							putc(0, outf);
+							putc(0, outf);
+							putc(2, outf);/* uncompressed RGB */
+							putc(0, outf); putc(0, outf);
+							putc(0, outf); putc(0, outf);
+							putc(0, outf);
+							putc(0, outf); putc(0, outf);           /* X origin */
+							putc(0, outf); putc(0, outf);           /* y origin */
+							putc((SizeH & 0x00FF), outf);
+							putc((SizeH & 0xFF00) / 256, outf);
+							putc((SizeV & 0x00FF), outf);
+							putc((SizeV & 0xFF00) / 256, outf);
+							putc(32, outf);                        /* 32 bit bitmap */
+							putc(8, outf);
+
+							if (isColour == 1)
+								{//COLOUR TGA
+								for (int iRow = SizeV - 1; iRow >= 0; iRow--)
+									{
+									int rowStart = iRow*width;
+									for (int j = 0; j <SizeH; j++)
+										{
+										int pixel = getValAtAddress(bits, rowStart+j , 8);
+										putc(pal[pixel].blue, outf);
+										putc(pal[pixel].green, outf);
+										putc(pal[pixel].red, outf);
+										if (Alpha == 1)
+											{
+											if (pixel != 0)	//Alpha
+												{
+												fputc(255, outf);
+												}
+											else
+												{
+												fputc(0, outf);
+												}
+											}
+										else
+											{
+											fputc(255, outf);//No alpha
+											}
+										}
+									}
+								}
+							else
+								{//Black & White tga
+								unsigned char outc;
+								unsigned char tempc1;
+								unsigned char tempc2;
+								unsigned short int shift = GlyphOffset % 8;
+								char ch = 0;
+
+								for (int k = SizeV-1 ; k >= 0; k--)
+									{
+									for (int q = 0; q <= SizeH; q++)
+										{
+										tempc1 = *(bits + (k*width) + q);
+										tempc2 = *(bits + (k*width) + q + 1);
+										outc = (tempc1 << shift) + (tempc2 >> (8 - shift));
+										fputc(outc, outf);
+										fputc(outc, outf);
+										fputc(outc, outf);
+
+										int pixel = outc;
+
+										//fputc(pal[pixel].blue, outf);
+										//fputc(pal[pixel].green, outf);
+										//fputc(pal[pixel].red, outf);
+										if (Alpha == 1)
+											{
+											if (pixel != 0)	//Alpha
+												{
+												fputc(255, outf);
+												}
+											else
+												{
+												fputc(0, outf);
+												}
+											}
+										else
+											{
+											fputc(255, outf);//No alpha
+											}
+										}
+									}
+								}
+							}
+						fclose(outf);
+						}
+					}
+				}
+			}
+		else
+			{
+			fprintf(LOGFILE, "Graphics chunk %d not found in %s\n", chunkId, GraphicsFile);
+			}
 		}
 	}

@@ -37,11 +37,19 @@ struct BitMapInfoHeader{
   unsigned int  biClrImportant; 
 } ;
 
+struct LGFontHeader {
+	unsigned char duh[76];
+	unsigned long dataoffset;
+	unsigned short width;
+	unsigned short height;
+	} ;
+
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255],int useTGA);
 void extractPanels(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, char OutFileName[255], int useTGA);
 void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput, int ItemId, int fileXX, int fileYY);
 void extractCrittersUW2(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput);
 void writeBMP(unsigned char *buffer, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255]);
+void writeBMPBW(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255]);
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
 void LoadAuxilaryPal(char auxpalPath[255], palette auxpal[16], palette gamepal[256], int PalIndex);
@@ -60,10 +68,12 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 
 void ExtractShockGraphics(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA);
 void ExtractShockCutscenes(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk,  char OutFileName[255], int useTGA);
+void ExtractShockFont(char GraphicsFile[255], char PaletteFile[255], int PaletteChunk, char OutFileName[255], int useTGA);
 int LoadShockPal(palette *pal, char PaletteFile[255], int PaletteNo);
 void UncompressBitmap(unsigned char *chunk_bits, unsigned char *bits, int numbits);
 //void WriteShockBitmaps(unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA);
 void WriteShockBitmaps(unsigned char *art_ark, palette *pal, int index, int textureOffset, char OutFileName[255], int useTGA, int isCutscene);
+void WriteShockFont(unsigned char *art_ark, palette *pal, int index, int textureOffset, char OutFileName[255], int useTGA, int Width, int Height, int isColour);
 void WriteShockCutsceneBitmaps(unsigned char *KeyFrame, unsigned char *art_ark, palette *pal,int index, int textureOffset, char OutFileName[255], int useTGA);
 //void ApplyKeyFrame(unsigned char *keyframe,unsigned char *output,int BitMapSize);
 void cyclePalette(palette *pal, int Start, int length);
