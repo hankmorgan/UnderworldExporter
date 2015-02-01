@@ -2482,10 +2482,13 @@ for (int k = 0; k< NoOfChunks; k++)
 						int GlyphOffsetNext = getValAtAddress(art_ark, PositionTable + pos_ptr +2 , 16);
 						int SizeH = GlyphOffsetNext-GlyphOffset;
 						unsigned char *bits;
-						if (isColour)
+						if (isColour==1)
 							bits = art_ark + textureOffset + GlyphOffset;
 						else
-							bits = art_ark + textureOffset + ((GlyphOffset - (GlyphOffsetNext % 8)) / 8);
+							{
+							bits = art_ark + textureOffset + ((GlyphOffset - (GlyphOffset % 8)) / 8);
+							}
+							
 
 						pos_ptr = pos_ptr+2;
 //						unsigned char *bits;
@@ -2591,32 +2594,30 @@ for (int k = 0; k< NoOfChunks; k++)
 								}
 							}
 						else
-							{//TGA common details
-							char outFile[255];
-
-							sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, index);
-							/* Write the result as a uncompressed TGA */
-							if ((outf = fopen(outFile, "wb")) == NULL) {
-								fprintf(stderr, "Failed to open outputfile\n");
-								exit(-1);
-								}
-							putc(0, outf);
-							putc(0, outf);
-							putc(2, outf);/* uncompressed RGB */
-							putc(0, outf); putc(0, outf);
-							putc(0, outf); putc(0, outf);
-							putc(0, outf);
-							putc(0, outf); putc(0, outf);           /* X origin */
-							putc(0, outf); putc(0, outf);           /* y origin */
-							putc((SizeH & 0x00FF), outf);
-							putc((SizeH & 0xFF00) / 256, outf);
-							putc((SizeV & 0x00FF), outf);
-							putc((SizeV & 0xFF00) / 256, outf);
-							putc(32, outf);                        /* 32 bit bitmap */
-							putc(8, outf);
-
+							{//TGA
 							if (isColour == 1)
 								{//COLOUR TGA
+								char outFile[255];
+								sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, index);
+								/* Write the result as a uncompressed TGA */
+								if ((outf = fopen(outFile, "wb")) == NULL) {
+									fprintf(stderr, "Failed to open outputfile\n");
+									exit(-1);
+									}
+								putc(0, outf);
+								putc(0, outf);
+								putc(2, outf);/* uncompressed RGB */
+								putc(0, outf); putc(0, outf);
+								putc(0, outf); putc(0, outf);
+								putc(0, outf);
+								putc(0, outf); putc(0, outf);           /* X origin */
+								putc(0, outf); putc(0, outf);           /* y origin */
+								putc((SizeH & 0x00FF), outf);
+								putc((SizeH & 0xFF00) / 256, outf);
+								putc((SizeV & 0x00FF), outf);
+								putc((SizeV & 0xFF00) / 256, outf);
+								putc(32, outf);                        /* 32 bit bitmap */
+								putc(8, outf);
 								for (int iRow = SizeV - 1; iRow >= 0; iRow--)
 									{
 									int rowStart = iRow*width;
@@ -2645,46 +2646,79 @@ for (int k = 0; k< NoOfChunks; k++)
 									}
 								}
 							else
-								{//Black & White tga
+								{
+								//COLOUR TGA.
+
+								//Generate a tmp file of bitmap data
+								BitMapHeader bmhead;
+								BitMapInfoHeader bmihead;
+								bmihead.biWidth = SizeH;	//bm->width;
+								bmihead.biHeight = SizeV;	// bm->height;
+								char ch = 0;
 								unsigned char outc;
 								unsigned char tempc1;
 								unsigned char tempc2;
 								unsigned short int shift = GlyphOffset % 8;
-								char ch = 0;
 
-								for (int k = SizeV-1 ; k >= 0; k--)
+								char outFile[255];
+								sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, index);
+								/* Write the result as a uncompressed TGA */
+								if ((outf = fopen(outFile, "wb")) == NULL) {
+									fprintf(stderr, "Failed to open outputfile\n");
+									exit(-1);
+									}
+								putc(0, outf);
+								putc(0, outf);
+								putc(2, outf);/* uncompressed RGB */
+								putc(0, outf); putc(0, outf);
+								putc(0, outf); putc(0, outf);
+								putc(0, outf);
+								putc(0, outf); putc(0, outf);           /* X origin */
+								putc(0, outf); putc(0, outf);           /* y origin */
+								putc((SizeH & 0x00FF), outf);
+								putc((SizeH & 0xFF00) / 256, outf);
+								putc((SizeV & 0x00FF), outf);
+								putc((SizeV & 0xFF00) / 256, outf);
+								putc(32, outf);                        /* 32 bit bitmap */
+								putc(8, outf);
+								//printf("\nBitmap %d\n", index);
+								for (int k = bmihead.biHeight - 1; k >= 0; k--)
 									{
-									for (int q = 0; q <= SizeH; q++)
+									int BitsRemaining=SizeH;
+									for (int q = 0; q <= (bmihead.biWidth - bmihead.biWidth % 8) / 8; q++)
 										{
+										int NextBit = 7;
 										tempc1 = *(bits + (k*width) + q);
 										tempc2 = *(bits + (k*width) + q + 1);
 										outc = (tempc1 << shift) + (tempc2 >> (8 - shift));
-										fputc(outc, outf);
-										fputc(outc, outf);
-										fputc(outc, outf);
-
-										int pixel = outc;
-
-										//fputc(pal[pixel].blue, outf);
-										//fputc(pal[pixel].green, outf);
-										//fputc(pal[pixel].red, outf);
-										if (Alpha == 1)
+										//fwrite(&outc, 1, 1, outf);
+										int pixel =outc;
+										while ((NextBit >= 0) && (BitsRemaining >0))
 											{
-											if (pixel != 0)	//Alpha
+											int bit = (pixel >> NextBit) & 0x1;
+											if (bit == 1)
 												{
+												fputc(255, outf);
+												fputc(255, outf);
+												fputc(255, outf);
 												fputc(255, outf);
 												}
 											else
 												{
 												fputc(0, outf);
+												fputc(0, outf);
+												fputc(0, outf);
+												fputc(0, outf);
 												}
+												//printf("%d",bit);
+											NextBit--; 
+											BitsRemaining--;
 											}
-										else
-											{
-											fputc(255, outf);//No alpha
-											}
+											//printf("\n");
+										//Convert the bits in outc in to pixels
 										}
 									}
+								fclose(outf);
 								}
 							}
 						fclose(outf);
