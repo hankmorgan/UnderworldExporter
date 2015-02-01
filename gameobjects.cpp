@@ -365,10 +365,6 @@ mstaddress_pointer=0;
 
 				objList[MasterIndex].ObjectSubClassIndex = ObjectSubClassIndex;
 				int LookupIndex=getShockObjectIndex(ObjectClass,ObjectSubClass,ObjectSubClassIndex);//Into my object list not the sublist
-				if ((MasterIndex == 485) || (MasterIndex == 484))
-					{
-					printf("");
-					}
 				if (LookupIndex != -1)
 				{
 
@@ -785,13 +781,15 @@ while (k<=chunkUnpackedLength)
 								  int fontID[4] = { 4, 7, 0, 10 };
 								  float scale[4] = { 1.0, 0.75, 0.5, 0.25 };
 								  fprintf(LOGFILE,"Words:");
-								  objList[objIndex].shockProperties[0] = getValAtAddress(sub_ark, add_ptr + 6, 16);
+								  objList[objIndex].shockProperties[WORDS_STRING_NO] = getValAtAddress(sub_ark, add_ptr + 6, 16);
 								  fprintf(LOGFILE,"\nSub chunk %d (from chunk 2152)", getValAtAddress(sub_ark, add_ptr + 6, 16));
 								  int FontNSize = getValAtAddress(sub_ark, add_ptr + 8, 16);
 								  fprintf(LOGFILE,"\nFont %d (+chunk 602)", fontID[FontNSize & 0x03]);
+								  objList[objIndex].shockProperties[WORDS_FONT] = fontID[FontNSize & 0x03] + 602;
 								  fprintf(LOGFILE,"\nSize %d ", fontID[FontNSize>>4 & 0x03]);
+								  objList[objIndex].shockProperties[WORDS_SIZE] = fontID[FontNSize >> 4 & 0x03];
 								  fprintf(LOGFILE,"\nColour %d ", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
-
+								  objList[objIndex].shockProperties[WORDS_COLOUR] = getValAtAddress(sub_ark, add_ptr + 0xA, 16);
 								  fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
 								  fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
 								  fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));

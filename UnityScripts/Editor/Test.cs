@@ -526,10 +526,10 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1373",true);
 		
 		myObj= CreateGameObject("WORDS_16_17_01_0248",19.232813f,2.662500f,20.882813f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 28, 602, 4, 0);
 		
 		myObj= CreateGameObject("WORDS_16_17_01_0249",19.219999f,2.418750f,21.145313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 3, 606, 4, 0);
 		
 		myObj= CreateGameObject("CAMERA_16_17_01_0415",20.395313f,3.243750f,20.582813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -1023,10 +1023,10 @@ public class MyTools
 		CreateShockDoor(myObj,0,0,2432);
 		
 		myObj= CreateGameObject("WORDS_29_23_01_0699",35.765625f,2.250000f,28.795313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 102, 602, 4, 2);
 		
 		myObj= CreateGameObject("WORDS_30_23_01_0718",36.346874f,2.250000f,28.795313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 103, 602, 4, 2);
 		
 		myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_31_23_01_0695",37.779999f,1.800000f,28.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
@@ -1253,7 +1253,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0718",true);
 		
 		myObj= CreateGameObject("WORDS_46_25_01_0239",55.220001f,3.018750f,30.670313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 18, 606, 4, 0);
 		
 		
 		myObj= CreateGameObject("NULL_TRIGGER_47_25_01_0607",56.980000f,1.800000f,30.580000f);
@@ -1302,7 +1302,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0952",true);
 		
 		myObj= CreateGameObject("WORDS_31_26_01_0581",37.570313f,2.100000f,31.219999f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 19, 606, 4, 0);
 		
 		myObj= CreateGameObject("HUMAN_BONES_32_26_01_0015",39.145313f,1.462500f,31.495312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0712",true);
@@ -1346,10 +1346,10 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 		
 		myObj= CreateGameObject("WORDS_23_27_01_0698",28.420313f,2.118750f,33.595314f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 89, 606, 4, 0);
 		
 		myObj= CreateGameObject("WORDS_23_27_01_0697",28.345312f,1.781250f,33.595314f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 90, 606, 4, 0);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_26_27_01_0252",31.780001f,1.200000f,32.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -1421,7 +1421,7 @@ public class MyTools
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("WORDS_27_28_01_0059",32.419998f,2.043750f,34.157814f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 20, 606, 4, 0);
 		
 		myObj= CreateGameObject("EXPLOSION_RESIDUE_27_28_01_0008",32.419998f,2.531250f,34.270313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0840",true);
@@ -1816,7 +1816,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 		
 		myObj= CreateGameObject("WORDS_38_32_01_0496",46.795311f,1.800000f,38.995312f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 18, 606, 4, 0);
 		
 		myObj= CreateGameObject("SCREEN_38_32_01_0434",46.795311f,2.381250f,39.032814f);
 		CreateComputerScreen(myObj,43,4,43);
@@ -1998,7 +1998,7 @@ public class MyTools
 		CreateShockDoor(myObj,10,0,2406);
 		
 		myObj= CreateGameObject("WORDS_30_36_01_0567",36.632813f,2.850000f,44.395313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 17, 606, 4, 0);
 		
 		myObj= CreateGameObject("BURN_RESIDUE_30_36_01_0086",36.020000f,2.625000f,43.757813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0843",true);
@@ -2069,7 +2069,7 @@ public class MyTools
 		
 		
 		myObj= CreateGameObject("WORDS_20_37_01_0715",25.082813f,3.337500f,44.419998f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 92, 606, 4, 0);
 		
 		myObj= CreateGameObject("LARGE_BUTTON_20_37_01_0220",24.295313f,3.000000f,44.419998f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
@@ -2438,7 +2438,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,55, 0);
 		
 		myObj= CreateGameObject("WORDS_35_42_01_0570",42.020000f,1.706250f,51.032814f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 71, 602, 4, 2);
 		
 		myObj= CreateGameObject("SWITCH_14_43_01_0603",17.379999f,1.875000f,52.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
@@ -2489,7 +2489,7 @@ public class MyTools
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("WORDS_20_43_01_0153",24.020000f,2.737500f,52.270313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 85, 609, 10, 0);
 		
 		myObj= CreateGameObject("ICON_20_43_01_0234",24.020000f,3.225000f,52.195313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
@@ -2765,7 +2765,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 		
 		myObj= CreateGameObject("WORDS_36_46_01_0569",43.779999f,2.700000f,56.395313f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateWords(myObj, 66, 602, 4, 0);
 		
 		myObj = new GameObject("CYBORG_DRONE_40_46_01_0400");
 		pos = new Vector3(48.932812f, 0.600000f, 56.132813f);
@@ -2987,6 +2987,8 @@ public class MyTools
 		myObj= CreateGameObject("CHEMICAL_TANK_32_54_01_0630",38.845314f,0.393750f,65.432816f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
+		
+	
 		
 
 
@@ -10056,4 +10058,14 @@ public class MyTools
 		tilemap.CeilingHeight[tileX,tileY]=CeilingHeight;
 		//, x, y, LevelInfo[x][y].tileType, LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight);
 	}
+
+	static void CreateWords(GameObject myObj, int stringNo, int font, int size, int colour)
+		{
+		Words wd = myObj.AddComponent<Words>();
+		wd.StringNo=stringNo;
+		wd.font=font;
+		wd.size=size;
+		wd.colour=colour;
+		wd.BlockNo=2152;
+		}
 }

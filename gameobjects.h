@@ -209,6 +209,11 @@
 #define SCREEN_LOOP_FLAG 1
 #define SCREEN_START 2
 #define SCREEN_SURVEILLANCE_TARGET 3
+
+#define WORDS_STRING_NO 0
+#define WORDS_FONT 1
+#define WORDS_SIZE 2
+#define WORDS_COLOUR 3
 //Master object type definition
 struct ObjectItem
 {

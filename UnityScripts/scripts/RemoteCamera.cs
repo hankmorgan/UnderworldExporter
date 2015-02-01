@@ -11,6 +11,7 @@ public class RemoteCamera : MonoBehaviour {
 	//public Texture2D RenderedImage;
 	public string Target;
 	Material[] myMat;
+
 	// Use this for initialization
 	void Start () {
 		GameObject TargetCamera= GameObject.Find (Target);
@@ -37,6 +38,7 @@ public class RemoteCamera : MonoBehaviour {
 		//	myMat[i].mainTexture=RenderedImage;
 		//}
 		//RenderedImage=CaptureImage(cam,Screen.width,Screen.height);
+
 		FrameIntervalCounter++;
 		if (FrameIntervalCounter>=FrameInterval)
 		{
@@ -47,8 +49,8 @@ public class RemoteCamera : MonoBehaviour {
 				myMat[i].mainTexture=cam.RenderedImage;
 			}
 		}
-
 	}
+
 
 	//void OnPostRender()
 	//{

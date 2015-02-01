@@ -2598,7 +2598,7 @@ for (int k = 0; k< NoOfChunks; k++)
 							if (isColour == 1)
 								{//COLOUR TGA
 								char outFile[255];
-								sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, index);
+								sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, firstChar+index);
 								/* Write the result as a uncompressed TGA */
 								if ((outf = fopen(outFile, "wb")) == NULL) {
 									fprintf(stderr, "Failed to open outputfile\n");
@@ -2661,7 +2661,7 @@ for (int k = 0; k< NoOfChunks; k++)
 								unsigned short int shift = GlyphOffset % 8;
 
 								char outFile[255];
-								sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, index);
+								sprintf_s(outFile, 255, "%s_%04d_%04d.tga", OutFileName, chunkId, firstChar + index);
 								/* Write the result as a uncompressed TGA */
 								if ((outf = fopen(outFile, "wb")) == NULL) {
 									fprintf(stderr, "Failed to open outputfile\n");

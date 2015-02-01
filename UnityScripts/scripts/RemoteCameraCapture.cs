@@ -4,9 +4,10 @@ using System.Collections;
 public class RemoteCameraCapture : MonoBehaviour {
 
 	public Texture2D RenderedImage;
-	public int FrameInterval=30;
-	private int FrameIntervalCounter=30;
+	public int FrameInterval=100;
+	private int FrameIntervalCounter=100;
 	public Camera cam;
+	Texture2D captured;
 
 	// Use this for initialization
 	void Start () {
@@ -32,16 +33,15 @@ public class RemoteCameraCapture : MonoBehaviour {
 		//SpriteRenderer SR = ScreenToDisplayOn.GetComponent<SpriteRenderer>();
 		//if (SR!=null)
 		//{
-		FrameIntervalCounter++;
-		if (FrameIntervalCounter>=FrameInterval)
-		{
-			FrameIntervalCounter=0;
-			#pragma warning disable
-			RenderedImage=CaptureImage(cam,Screen.width,Screen.height);
-			#pragma warning restore
-		}
+			FrameIntervalCounter++;
+			if (FrameIntervalCounter>=FrameInterval)
+			{
+				FrameIntervalCounter=0;
+				#pragma warning disable
+				RenderedImage=CaptureImage(cam,Screen.width,Screen.height);
+				#pragma warning restore
+			}
 
-		
 		
 		//Sprite newSprite= Sprite.Create( RenderedImage,new Rect(0,0,RenderedImage.width,RenderedImage.height), new Vector2(0.5f, 0.5f));
 		//SR.sprite= newSprite;
@@ -50,11 +50,13 @@ public class RemoteCameraCapture : MonoBehaviour {
 	}
 
 
+
+
 	/*Source: http://raypendergraph.wikidot.com/codesnippet:capturing-a-camera-image-in-unity*/
 	public Texture2D CaptureImage (Camera camera, int width, int height)
 	{
 		//Debug.Log ("Capturing");
-		Texture2D captured = new Texture2D (width, height);
+		captured = new Texture2D (width, height);
 		camera.Render();
 		RenderTexture.active = camera.targetTexture;
 		captured.ReadPixels(new Rect(0,0,width,height),0,0);

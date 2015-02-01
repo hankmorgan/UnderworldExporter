@@ -1103,9 +1103,15 @@ void RenderUnityEntityCorpse(int game, float x, float y, float z, ObjectItem &cu
 void RenderUnityEntityWords(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	fprintf(UNITY_FILE, "\n\tCreateWords(myObj, %d, %d, %d, %d);", 
+		currobj.shockProperties[WORDS_STRING_NO],
+		currobj.shockProperties[WORDS_FONT],
+		currobj.shockProperties[WORDS_SIZE],
+		currobj.shockProperties[WORDS_COLOUR]);
 
 	//fprintf(MAPFILE, "\"xdata_contents\" \"readables/shock/words_%d\"\n", currobj.shockProperties[0]);
+
 
 	}
 
@@ -1475,22 +1481,22 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 		}
 	}
 
-	void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
+void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
+	{
+	if (fopen_s(&UNITY_FILE, "unity.txt", "w") != 0)
 		{
-		if (fopen_s(&UNITY_FILE, "unity.txt", "w") != 0)
-			{
-			printf("Unable to create output file for this thing");
-			return;
-			}
-		for (int x = 0; x <= 63; x++)
-			{
-			for (int y = 0; y <= 63; y++)
-				{
-				fprintf(UNITY_FILE, "\n\tSetTileProp(tilemap, %d,%d,%d,%d,%d,%d);", x, y, LevelInfo[x][y].tileType, LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight);
-				}
-			}
-		fclose(UNITY_FILE);
+		printf("Unable to create output file for this thing");
+		return;
 		}
+	for (int x = 0; x <= 63; x++)
+		{
+		for (int y = 0; y <= 63; y++)
+			{
+			fprintf(UNITY_FILE, "\n\tSetTileProp(tilemap, %d,%d,%d,%d,%d,%d);", x, y, LevelInfo[x][y].tileType, LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight);
+			}
+		}
+	fclose(UNITY_FILE);
+	}
 
 void RenderUnityObjectList(int game, int Level, tile LevelInfo[64][64], ObjectItem objList[1600])
 	{
