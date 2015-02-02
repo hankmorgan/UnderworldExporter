@@ -348,6 +348,7 @@ public class MyTools
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_023_012",28.180000f,1.200000f,14.420000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2406);
 		
 		myObj= CreateGameObject("ICON_23_12_01_0515",27.620001f,2.006250f,15.482813f);
@@ -364,6 +365,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_028_012",34.180000f,1.200000f,14.420000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj= CreateGameObject("BEAM_BLAST_35_12_01_0057",42.580002f,1.650000f,15.595312f);
@@ -404,16 +406,19 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_034_013",41.380001f,1.200000f,16.795313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj= CreateGameObject("BLAST_DOOR_036_013",43.779999f,1.200000f,15.620000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,10,0,2400);
 		
 		myObj= CreateGameObject("SERVICE_ACCESS_DOOR_024_014",29.379999f,1.200000f,16.820000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1030",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2401);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_26_14_01_0300",31.780001f,1.593750f,17.379999f);
@@ -470,6 +475,11 @@ public class MyTools
 		myObj= CreateGameObject("FERN_28_15_01_0122",34.180000f,1.350000f,18.580000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0507",true);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_30_15_01_0150",36.599998f,2.400000f,18.600000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_14_01_0680", 0,"",0,"",0,"",0);
+		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("CRATE_32_15_01_0468",39.107811f,3.787500f,18.820313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
@@ -527,9 +537,11 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_16_17_01_0248",19.232813f,2.662500f,20.882813f);
 		CreateWords(myObj, 28, 602, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("WORDS_16_17_01_0249",19.219999f,2.418750f,21.145313f);
 		CreateWords(myObj, 3, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("CAMERA_16_17_01_0415",20.395313f,3.243750f,20.582813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -584,6 +596,7 @@ public class MyTools
 		myObj= CreateGameObject("HIDDEN_DOOR_046_017",56.395313f,1.200000f,20.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2438);
 		
 		myObj= CreateGameObject("SV_TRANQ_DARTS_47_17_01_0568",56.957813f,1.293750f,20.770313f);
@@ -597,12 +610,18 @@ public class MyTools
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_015_018",19.195313f,1.800000f,22.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,10,0,2406);
 		
 		myObj= CreateGameObject("HUMAN_BONES_17_18_01_0038",20.657812f,1.462500f,22.082813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0712",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,211, 0);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_18_18_01_0573",22.200001f,2.400000f,22.200001f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_12_01_0163", 0,"",0,"",0,"",0);
+		CreateEntry_Trigger(myObj, 6,0,252,0,1,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0112",22.180000f,0.600000f,22.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -769,6 +788,7 @@ public class MyTools
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_035_019",43.195313f,1.200000f,23.379999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,10,0,2406);
 		
 		myObj= CreateGameObject("CRATE_38_19_01_0690",46.180000f,1.575000f,23.379999f);
@@ -786,11 +806,22 @@ public class MyTools
 		myObj= CreateGameObject("WRAPPER_17_20_01_0136",20.620312f,1.312500f,24.820313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0570",true);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_19_20_01_0713",23.400000f,2.400000f,24.600000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_SET_VARIABLE(myObj);
+		CreateEntry_Trigger(myObj, 4,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_20_20_01_0502",24.600000f,2.400000f,24.600000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_EMAIL(myObj);
+		CreateEntry_Trigger(myObj, 15,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("DOOR_020_020",24.020000f,0.600000f,24.580000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2404);
 		
 		myObj= CreateGameObject("STANDARD_ACCESS_CARD_1",31.682812f,0.731250f,24.970312f);
@@ -866,6 +897,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_015_021",19.195313f,1.200000f,25.780001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,1,0,2404);
 		
 		myObj = new GameObject("SERV_BOT_20_21_01_0004");
@@ -889,6 +921,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_026_021",31.780001f,0.600000f,26.395313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2404);
 		
 		myObj= CreateGameObject("SEVERED_LIMB_40_21_01_0107",48.295311f,1.350000f,26.020313f);
@@ -914,6 +947,7 @@ public class MyTools
 		myObj= CreateGameObject("HIDDEN_DOOR_046_021",56.395313f,1.200000f,25.780001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,255,1,2438);
 		
 		myObj= CreateGameObject("MAGNUM_2100_48_21_01_0656",58.045311f,1.387500f,25.832813f);
@@ -1015,18 +1049,22 @@ public class MyTools
 		myObj= CreateGameObject("BULKHEAD_DOOR_017_023",20.980000f,1.200000f,27.620001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2431);
 		
 		myObj= CreateGameObject("BULKHEAD_DOOR_018_023",22.180000f,1.200000f,27.620001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2432);
 		
 		myObj= CreateGameObject("WORDS_29_23_01_0699",35.765625f,2.250000f,28.795313f);
 		CreateWords(myObj, 102, 602, 4, 2);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("WORDS_30_23_01_0718",36.346874f,2.250000f,28.795313f);
 		CreateWords(myObj, 103, 602, 4, 2);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("LEVEL_ENTRY_TRIGGER_31_23_01_0695",37.779999f,1.800000f,28.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1364",false);
@@ -1043,6 +1081,7 @@ public class MyTools
 		myObj= CreateGameObject("BLAST_DOOR_035_023",43.195313f,1.200000f,28.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2400);
 		
 		myObj= CreateGameObject("CHEMICAL_TANK_38_23_01_0685",46.180000f,1.593750f,28.180000f);
@@ -1076,8 +1115,14 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_026_024",31.780001f,0.600000f,28.820000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,1,0,2404);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_26_24_01_0146",31.799999f,2.400000f,29.400000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_24_01_0066", 0,"",0,"",0,"",0);
+		CreateEntry_Trigger(myObj, 6,0,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_28_24_01_0133",33.820313f,1.800000f,29.395313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
@@ -1254,7 +1299,13 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_46_25_01_0239",55.220001f,3.018750f,30.670313f);
 		CreateWords(myObj, 18, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_46_25_01_0606",55.799999f,2.400000f,30.600000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_47_25_01_0607", 0,"",0,"",0,"",0);
+		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_47_25_01_0607",56.980000f,1.800000f,30.580000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -1288,6 +1339,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_015_026",19.195313f,1.200000f,31.780001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,1,0,2404);
 		
 		myObj = new GameObject("SERV_BOT_21_26_01_0098");
@@ -1303,6 +1355,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_31_26_01_0581",37.570313f,2.100000f,31.219999f);
 		CreateWords(myObj, 19, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("HUMAN_BONES_32_26_01_0015",39.145313f,1.462500f,31.495312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0712",true);
@@ -1327,6 +1380,7 @@ public class MyTools
 		myObj= CreateGameObject("BLAST_DOOR_046_026",55.779999f,2.100000f,31.219999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2400);
 		
 		myObj= CreateGameObject("SWITCH_55_26_01_0605",66.580002f,1.275000f,31.780001f);
@@ -1347,9 +1401,11 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_23_27_01_0698",28.420313f,2.118750f,33.595314f);
 		CreateWords(myObj, 89, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("WORDS_23_27_01_0697",28.345312f,1.781250f,33.595314f);
 		CreateWords(myObj, 90, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_26_27_01_0252",31.780001f,1.200000f,32.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -1392,6 +1448,7 @@ public class MyTools
 		myObj= CreateGameObject("HIDDEN_DOOR_015_028",19.195313f,1.800000f,34.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2438);
 		
 		myObj= CreateGameObject("FRAGMENTATION_GRENADE_15_28_01_0674",18.580000f,1.950000f,34.180000f);
@@ -1422,6 +1479,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_27_28_01_0059",32.419998f,2.043750f,34.157814f);
 		CreateWords(myObj, 20, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("EXPLOSION_RESIDUE_27_28_01_0008",32.419998f,2.531250f,34.270313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0840",true);
@@ -1438,10 +1496,16 @@ public class MyTools
 		AddACTION_MOVING_PLATFORM(myObj, 30, 28, 8, -4063, 1);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_30_28_01_0158",36.599998f,2.400000f,34.200001f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_CHOICE(myObj,"NULL_TRIGGER_30_28_01_0200", "NULL_TRIGGER_30_28_01_0027");
+		CreateEntry_Trigger(myObj, 12,0,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("HIDDEN_DOOR_037_028",45.595314f,1.200000f,34.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2438);
 		
 		myObj = new GameObject("HUMANOID_MUTANT_45_28_01_0297");
@@ -1482,11 +1546,13 @@ public class MyTools
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_050_028",61.195313f,3.600000f,34.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2406);
 		
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_029",13.220000f,1.200000f,35.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2406);
 		
 		myObj= CreateGameObject("EMAIL_12_29_01_0399",15.257813f,1.293750f,35.095314f);
@@ -1567,6 +1633,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_015_030",18.020000f,1.200000f,36.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj = new GameObject("HUMANOID_MUTANT_16_30_01_0082");
@@ -1753,6 +1820,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"453","Sprites/objects_1350_1583");
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_39_31_01_0714",47.400002f,2.400000f,37.799999f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_CHOICE(myObj,"NULL_TRIGGER_39_31_01_0215", "NULL_TRIGGER_39_31_01_0214");
+		CreateEntry_Trigger(myObj, 12,0,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0215",47.380001f,1.800000f,37.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -1769,6 +1841,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_041_031",49.220001f,3.600000f,37.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2404);
 		
 		myObj = new GameObject("HUMANOID_MUTANT_45_31_01_0296");
@@ -1785,6 +1858,7 @@ public class MyTools
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_032",13.220000f,1.200000f,38.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2406);
 		
 		myObj= CreateGameObject("SCREEN_18_32_01_0067",22.007813f,2.925000f,38.995312f);
@@ -1817,6 +1891,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_38_32_01_0496",46.795311f,1.800000f,38.995312f);
 		CreateWords(myObj, 18, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("SCREEN_38_32_01_0434",46.795311f,2.381250f,39.032814f);
 		CreateComputerScreen(myObj,43,4,43);
@@ -1840,6 +1915,7 @@ public class MyTools
 		myObj= CreateGameObject("HIDDEN_DOOR_015_033",19.195313f,1.200000f,40.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2438);
 		
 		myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_15_33_01_0676",18.557812f,1.350000f,39.857811f);
@@ -1859,6 +1935,7 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_019_033",23.995312f,1.200000f,40.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj= CreateGameObject("WRAPPER_19_33_01_0105",23.695313f,1.312500f,40.045311f);
@@ -1897,6 +1974,7 @@ public class MyTools
 		myObj= CreateGameObject("HIDDEN_DOOR_038_034",46.795311f,3.600000f,41.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2438);
 		
 		myObj= CreateGameObject("CONTROL_PEDESTAL_11_35_01_0509",13.780000f,0.000000f,42.580002f);
@@ -1905,6 +1983,7 @@ public class MyTools
 		myObj= CreateGameObject("BULKHEAD_DOOR_016_035",19.780001f,1.200000f,42.020000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2432);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_17_35_01_0024",20.980000f,1.800000f,42.580002f);
@@ -1928,6 +2007,7 @@ public class MyTools
 		myObj= CreateGameObject("BULKHEAD_DOOR_017_035",20.980000f,1.200000f,42.020000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2431);
 		
 		myObj= CreateGameObject("DH_07_STUNGUN_26_35_01_0331",32.170311f,2.568750f,42.557812f);
@@ -1941,6 +2021,7 @@ public class MyTools
 		myObj= CreateGameObject("HIDDEN_DOOR_030_035",36.580002f,0.000000f,42.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2438);
 		
 		myObj= CreateGameObject("BRIDGE_31_35_01_0020",37.779999f,1.162500f,42.580002f);
@@ -1965,6 +2046,11 @@ public class MyTools
 		myObj= CreateGameObject("HOSPITAL_BED_13_36_01_0508",16.270313f,0.037500f,43.832813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_17_36_01_0498",21.000000f,2.400000f,43.799999f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_MESSAGE(myObj);
+		CreateEntry_Trigger(myObj, 22,1,17,144,112,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("DESTROYED_DRONE_CYBORG_18_36_01_0501",22.180000f,1.650000f,43.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1494",true);
@@ -1990,15 +2076,18 @@ public class MyTools
 		myObj= CreateGameObject("ENERGY_GRATING_023_036",28.180000f,2.400000f,43.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2424);
 		
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_026_036",31.780001f,2.400000f,44.395313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,10,0,2406);
 		
 		myObj= CreateGameObject("WORDS_30_36_01_0567",36.632813f,2.850000f,44.395313f);
 		CreateWords(myObj, 17, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("BURN_RESIDUE_30_36_01_0086",36.020000f,2.625000f,43.757813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0843",true);
@@ -2045,6 +2134,11 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",5,228, 0);
 		CreateKey(myObj, 0);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_15_37_01_0727",18.600000f,2.400000f,45.000000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_38_39_01_0320", 0,"NULL_TRIGGER_38_39_01_0408", 0,"",0,"",0);
+		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("ELEVATOR_PANEL_15_37_01_0030",18.020000f,1.912500f,44.995312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0983",false);
@@ -2055,6 +2149,7 @@ public class MyTools
 		myObj= CreateGameObject("ELEVATOR_DOOR_015_037",18.580000f,1.200000f,44.419998f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1109",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2427);
 		
 		myObj= CreateGameObject("EMAIL_18_37_01_0021",21.782812f,1.293750f,44.545311f);
@@ -2067,9 +2162,15 @@ public class MyTools
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_19_36_01_0063", 0,"",0,"",0,"",0);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_19_37_01_0681",23.400000f,2.400000f,45.000000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_EMAIL(myObj);
+		CreateEntry_Trigger(myObj, 15,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("WORDS_20_37_01_0715",25.082813f,3.337500f,44.419998f);
 		CreateWords(myObj, 92, 606, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("LARGE_BUTTON_20_37_01_0220",24.295313f,3.000000f,44.419998f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
@@ -2088,11 +2189,13 @@ public class MyTools
 		myObj= CreateGameObject("DOOR_035_037",42.580002f,3.600000f,45.595314f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj= CreateGameObject("DOOR_039_037",47.380001f,3.600000f,45.595314f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj= CreateGameObject("ELEPHANT_JORP_45_37_01_0243",54.580002f,2.343750f,44.980000f);
@@ -2116,11 +2219,13 @@ public class MyTools
 		myObj= CreateGameObject("ENERGY_GRATING_023_038",28.180000f,2.400000f,46.795311f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2424);
 		
 		myObj= CreateGameObject("FORCE_DOOR_031_038",37.779999f,1.200000f,45.619999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2423);
 		
 		myObj= CreateGameObject("HUMAN_CORPSE_34_38_01_0272",41.380001f,3.975000f,46.180000f);
@@ -2250,6 +2355,7 @@ public class MyTools
 		myObj= CreateGameObject("IRIS_DOOR_014_040",17.995312f,1.200000f,48.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1126",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,1,2433);
 		
 		myObj= CreateGameObject("CHEMICAL_TANK_16_40_01_0048",19.907812f,1.593750f,48.182812f);
@@ -2298,6 +2404,11 @@ public class MyTools
 		AddACTION_ACTIVATE(myObj, "FORCE_DOOR_031_038", 0,"",0,"",0,"",0);
 		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_33_40_01_0216",40.200001f,2.400000f,48.599998f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_MOVING_PLATFORM(myObj, 33, 40, 0, -4063, 1);
+		CreateEntry_Trigger(myObj, 9,0,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj = new GameObject("CYBORG_ASSASSIN_37_40_01_0262");
 		pos = new Vector3(44.980000f, 1.593750f, 48.580002f);
@@ -2389,6 +2500,7 @@ public class MyTools
 		myObj= CreateGameObject("FORCE_DOOR_017_042",21.595312f,2.400000f,50.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2423);
 		
 		myObj = new GameObject("CYBORG_DRONE_17_42_01_0328");
@@ -2428,6 +2540,7 @@ public class MyTools
 		myObj= CreateGameObject("ENERGY_GRATING_023_042",28.180000f,2.400000f,51.595314f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2424);
 		
 		myObj= CreateGameObject("REPULSOR_26_42_01_0451",31.780001f,0.600000f,50.980000f);
@@ -2439,6 +2552,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_35_42_01_0570",42.020000f,1.706250f,51.032814f);
 		CreateWords(myObj, 71, 602, 4, 2);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("SWITCH_14_43_01_0603",17.379999f,1.875000f,52.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0881",false);
@@ -2490,6 +2604,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_20_43_01_0153",24.020000f,2.737500f,52.270313f);
 		CreateWords(myObj, 85, 609, 10, 0);
+		SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)340.312500);
 		
 		myObj= CreateGameObject("ICON_20_43_01_0234",24.020000f,3.225000f,52.195313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0395",false);
@@ -2534,6 +2649,7 @@ public class MyTools
 		myObj= CreateGameObject("ENERGY_GRATING_019_044",23.995312f,2.400000f,53.395313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2424);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0557",25.780001f,3.000000f,53.380001f);
@@ -2655,6 +2771,11 @@ public class MyTools
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_46_01_0597", 0,"",0,"",0,"",0);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_26_45_01_0585",31.799999f,2.400000f,54.599998f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_45_01_0563", 0,"NULL_TRIGGER_25_44_01_0556", 0,"NULL_TRIGGER_21_45_01_0587", 0,"",0);
+		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("BUTTON_26_45_01_0593",31.945313f,0.731250f,55.195313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
@@ -2688,6 +2809,11 @@ public class MyTools
 		AddACTION_SPAWN(myObj);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_32_45_01_0184",39.000000f,2.400000f,54.599998f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_MESSAGE(myObj);
+		CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("CAMERA_35_45_01_0430",43.157814f,3.318750f,54.032814f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -2695,6 +2821,7 @@ public class MyTools
 		myObj= CreateGameObject("ENERGY_GRATING_038_045",46.180000f,2.400000f,54.020000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2424);
 		
 		myObj= CreateGameObject("BERSERK_COMBAT_BOOSTER_16_46_01_0334",19.495312f,2.550000f,55.220001f);
@@ -2766,6 +2893,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("WORDS_36_46_01_0569",43.779999f,2.700000f,56.395313f);
 		CreateWords(myObj, 66, 602, 4, 0);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj = new GameObject("CYBORG_DRONE_40_46_01_0400");
 		pos = new Vector3(48.932812f, 0.600000f, 56.132813f);
@@ -2791,6 +2919,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"460","Sprites/objects_1350_1604");
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_27_47_01_0598",33.000000f,2.400000f,57.000000f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_MOVING_PLATFORM(myObj, 29, 47, 4095, 8, 2);
+		CreateEntry_Trigger(myObj, 9,0,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("REPULSOR_35_47_01_0579",42.580002f,0.600000f,56.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
@@ -2852,6 +2985,11 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"461","Sprites/objects_1350_1607");
 		
+		myObj= CreateGameObject("ENTRY_TRIGGER_37_49_01_0165",45.000000f,2.400000f,59.400002f);
+		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
+		AddACTION_MESSAGE(myObj);
+		CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
+		CreateCollider(myObj,1.20f,4.800000f,1.20f);
 		
 		myObj= CreateGameObject("CAMERA_39_49_01_0428",47.995312f,1.181250f,59.995312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -2922,6 +3060,7 @@ public class MyTools
 		myObj= CreateGameObject("STORAGE_ROOM_DOOR_031_051",37.779999f,0.000000f,61.220001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
 		SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		CreateShockDoor(myObj,0,0,2406);
 		
 		myObj= CreateGameObject("CRATE_20_52_01_0545",24.407812f,1.575000f,63.070313f);
@@ -2987,13 +3126,7 @@ public class MyTools
 		myObj= CreateGameObject("CHEMICAL_TANK_32_54_01_0630",38.845314f,0.393750f,65.432816f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
-		
-	
-		
 
-
-
-		
 
 
 
@@ -9911,6 +10044,27 @@ public class MyTools
 		nt.conditions[3]=Condition3;
 
 	}
+
+
+	static void CreateEntry_Trigger(GameObject myObj, int TriggerAction, int TriggerOnce, int Condition0,int Condition1,int Condition2,int Condition3)
+	{
+		Entry_Trigger nt =myObj.AddComponent<Entry_Trigger>();
+		nt.TriggerAction=TriggerAction;
+		if (TriggerOnce ==0)
+		{
+			nt.TriggerOnce=false;
+		}
+		else
+		{
+			nt.TriggerOnce=true;
+		}
+		nt.conditions[0]=Condition0;
+		nt.conditions[1]=Condition1;
+		nt.conditions[2]=Condition2;
+		nt.conditions[3]=Condition3;
+		
+	}
+
 
 	static void AddACTION_CHOICE(GameObject myObj, string ActivateTrue, string ActivateFalse)
 	{

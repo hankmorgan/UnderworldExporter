@@ -18,6 +18,8 @@ public class a_move_trigger : MonoBehaviour {
 	//void Update () {
 	
 	//}
+
+
 	
 	public void Activate()
 	{

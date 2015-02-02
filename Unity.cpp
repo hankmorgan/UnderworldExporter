@@ -46,11 +46,25 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 	//Center the object in the tile
 	x = (currobj.tileX*BrushSizeX + (BrushSizeX/2) )/100.0;
 	y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2) )/100.0;
+	if (game == SHOCK)
+		{//Center vertically in the tile
+		z= (CEILING_HEIGHT/2)*BrushSizeZ/100.0;
+		}
 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
-	fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.20f,1.20f,1.20f);");
+	if (game != SHOCK)
+		{
+		fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
+		fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.20f,1.20f,1.20f);");
+		}
+	else
+		{
+		AddShockTriggerActions(game, x, y, z, currobj, objList, LevelInfo);
+		fprintf(UNITY_FILE, "\n\tCreateEntry_Trigger(myObj, %d,%d,%d,%d,%d,%d);"
+			, currobj.TriggerAction, currobj.TriggerOnce, currobj.conditions[0], currobj.conditions[1], currobj.conditions[2], currobj.conditions[3]);
+		fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.20f,%ff,1.20f);" , CEILING_HEIGHT * BrushSizeZ/100.0);
+		}
 	switch (game)
 		{
 			case UWDEMO:
@@ -156,6 +170,16 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\");", currobj.item_id, objectMasters[currobj.item_id].particle);
+	if (game != SHOCK)
+		{
+		UnityRotation(game, 0, currobj.heading, 0);
+		}
+	else
+		{
+		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+		}
+
+
 	switch (currobj.npc_attitude)
 		{
 			case 0:	//hostile
@@ -304,6 +328,7 @@ void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	SetScale(1.875f, 1.875f, 1.875f);
+	UnityRotation(game,currobj.Angle1,currobj.Angle2,currobj.Angle3);
 	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
 	////Lock stuff
@@ -1109,7 +1134,7 @@ void RenderUnityEntityWords(int game, float x, float y, float z, ObjectItem &cur
 		currobj.shockProperties[WORDS_FONT],
 		currobj.shockProperties[WORDS_SIZE],
 		currobj.shockProperties[WORDS_COLOUR]);
-
+	UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
 	//fprintf(MAPFILE, "\"xdata_contents\" \"readables/shock/words_%d\"\n", currobj.shockProperties[0]);
 
 
@@ -1546,8 +1571,8 @@ float offX; float offY; float offZ;
 					offX = 0.0; offY = 0.0; offZ = 0.0;
 					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y,1);//Figures out where the object should be.
 					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);
-					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])))
-						{//Everything but traps and triggers
+					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])) || (game==SHOCK))
+						{//Everything but traps and triggers (uw)
 						if (objList[nextObj].AlreadyRendered != 1)
 							{
 							RenderUnityEntity(game, offX, offY, offZ, objList[nextObj],objList,LevelInfo);
