@@ -306,11 +306,11 @@
 305 10 0 6 entity 66 STORAGE_ROOM_DOOR 2406 0 Sprites/objects_1350_1045 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 306 10 0 7 entity 66 SHIELDED_DOOR 2407 0 Sprites/objects_1350_1048 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 307 10 0 8 entity 66 EXECUTIVE_DOOR 2408 0 Sprites/objects_1350_1051 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-308 10 1 0 ignore 1 THE_WARM_STONE atdm:door_96x48_3hinge 0 Sprites/objects_1350_1054 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-309 10 1 1 ignore 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-310 10 1 2 ignore 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-311 10 1 3 ignore 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-312 10 1 4 ignore 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+308 10 1 0 entity 1 THE_WARM_STONE atdm:door_96x48_3hinge 0 Sprites/objects_1350_1054 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+309 10 1 1 entity 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+310 10 1 2 entity 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+311 10 1 3 entity 1 DOORWAY atdm:door_96x48_3hinge 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+312 10 1 4 entity 65 DOORWAY Sprites/objects_1350_0000 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 313 10 1 5 entity 65 GRATING models/darkmod/shock/grating.ase 0 Sprites/objects_1350_1073 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 314 10 1 6 entity 65 GRATING models/darkmod/shock/grating.ase 0 Sprites/objects_1350_1073 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 315 10 1 7 entity 65 GRATING models/darkmod/shock/grating.ase 0 Sprites/objects_1350_1076 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
@@ -331,8 +331,8 @@
 330 10 4 0 entity 66 BULKHEAD_DOOR 2431 0 Sprites/objects_1350_1120 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 331 10 4 1 entity 66 BULKHEAD_DOOR 2432 0 Sprites/objects_1350_1123 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 332 10 4 2 entity 66 IRIS_DOOR 2433 0 Sprites/objects_1350_1126 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-333 10 4 3 1 0 VERTICAL_OPEN_DOOR ignore 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-334 10 4 4 1 0 VERTICAL_SPLIT_DOOR ignore 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+333 10 4 3 entity 1 VERTICAL_OPEN_DOOR Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+334 10 4 4 entity 1 VERTICAL_SPLIT_DOOR Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 335 10 4 5 model 18 DARK_LORD_TUAOHTUA models/darkmod/shock/null.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 336 10 4 6 entity 66 HIDDEN_DOOR 2437 0 Sprites/objects_1350_1138 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 337 10 4 7 entity 66 HIDDEN_DOOR 2438 0 Sprites/objects_1350_1141 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga

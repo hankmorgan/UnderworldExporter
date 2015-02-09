@@ -324,10 +324,32 @@ int hasLock=0;
 
 void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ/100.0;
+
+	
+//Centre the door within the tile depending on it's angles.
+	if (currobj.Angle1 == 0)//In rare cases doors are on the floor.
+		{
+		z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ / 100.0;
+		switch (currobj.Angle2)
+			{
+			case SHOCK_NORTH:
+			case SHOCK_SOUTH:
+				x=(currobj.tileX*BrushSizeX  + BrushSizeX/2) /100.0;
+				break;
+			case SHOCK_EAST:
+			case SHOCK_WEST:
+				y = (currobj.tileY*BrushSizeY + BrushSizeY / 2) / 100.0;
+				break;
+			}
+		}
+	else
+		{//A flat door on the ground. Center in the tile.
+		x = (currobj.tileX*BrushSizeX + BrushSizeX / 2) / 100.0;
+		y = (currobj.tileY*BrushSizeY + BrushSizeY ) / 100.0;
+		}
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	SetScale(1.875f, 1.875f, 1.875f);
+	SetScale(1.9f, 1.9f, 1.9f);//1.875f
 	UnityRotation(game,currobj.Angle1,currobj.Angle2,currobj.Angle3);
 	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
@@ -340,7 +362,22 @@ void RenderUnityEntitySHOCKDoor(int game, float x, float y, float z, ObjectItem 
 	//		//What keys open this door.
 	//		}
 	//	}
-	fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d,%s);", currobj.link, currobj.SHOCKLocked,objectMasters[currobj.item_id].path);
+	if ((currobj.link != 0) || (currobj.SHOCKLocked > 0))
+		{//Door is locked
+		if ((currobj.link > 0) && (currobj.link <= 11))//Valid range of keycards
+			{
+			fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d,%s);", currobj.link, 1, objectMasters[currobj.item_id].path);
+			}
+		else
+			{
+			fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d,%s);", -1, 1, objectMasters[currobj.item_id].path);
+			}
+		}
+	else
+		{//Door is unlocked
+		fprintf(UNITY_FILE, "\n\tCreateShockDoor(myObj,%d,%d,%s);", currobj.link, 0, objectMasters[currobj.item_id].path);
+		}
+	
 
 	//if ((currobj.link != 0) || (currobj.SHOCKLocked >0) && (game != SHOCK))
 	//	{	
@@ -870,47 +907,54 @@ void RenderUnityEntityDecal(int game, float x, float y, float z, ObjectItem &cur
 	{//decals like wall icons etc.
 	
 RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
+//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+//fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"%s\",false);", objectMasters[currobj.item_id].particle);
 	switch (currobj.ObjectSubClassIndex)
 		{
-			case 0:	//sign
+			case 0:	//sign . 
 				//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 				//fprintf(MAPFILE, "\"skin\" \"shock_sign_%04d\"\n", 390 + currobj.unk1);
+				fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj, \"Sprites/Sign/objects_1350_%04d\",false);", 390 + currobj.unk1);
 				break;
 			case 1:	//icon
 				//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 				//fprintf(MAPFILE, "\"skin\" \"shock_icon_%04d\"\n", currobj.unk1);
+				fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj, \"Sprites/Icons/objects_0078_%04d\",false);", currobj.unk1);
 				break;
 			case 2:	//graffiti
-				if (currobj.unk1 != 7)
-					{
+				//if (currobj.unk1 != 7)
+				//	{
 					//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
-					}
-				else
-					{
+					fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj, \"Sprites/Graffiti/objects_0079_%04d\",false);", currobj.unk1);
+				//	}
+				//else
+				//	{
 					//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[131].path);	//special case for shodan hearts diego 
-					}
+				//	}
 				//fprintf(MAPFILE, "\"skin\" \"shock_graffiti_%04d\"\n", currobj.unk1);
 				break;
 			case 4:	//painting
-				if (currobj.unk1 != 2)
-					{
+				fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj, \"Sprites/Painting/objects_1350_%04d\",false);", 403 + currobj.unk1);
+				//if (currobj.unk1 != 2)
+				//	{
 					//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
-					}
-				else
-					{
+				//	}
+				//else
+				//	{
 					//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[126].path);//special case for the scream.
-					}
+				//	}
 				//fprintf(MAPFILE, "\"skin\" \"shock_painting_%04d\"\n", 403 + currobj.unk1);
 
 				break;
-			case 5:	//poster
+			case 5:	//poster (not in use?)
+				fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj, \"Sprites/Graffiti/objects_1350_%04d\",false);", currobj.unk1);
 				//fprintf(MAPFILE, "\"model\" \"%s\"\n", objectMasters[currobj.item_id].path);
 				//fprintf(MAPFILE, "\"skin\" \"shock_poster_%04d\"\n", currobj.unk1);
 				break;
 		}
+	UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
 	}
 
 void RenderUnityEntityComputerScreen(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1143,7 +1187,11 @@ void RenderUnityEntityWords(int game, float x, float y, float z, ObjectItem &cur
 void RenderUnityEntityGrating(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Transparent Gratings.
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj, \"Sprites/Grating/objects_%04d_0000\",false);", 2414 + currobj.ObjectSubClassIndex - 4);
+	fprintf(UNITY_FILE, "\n\tCreateColliderChild(myObj,0.60f,0.60f,0.05f,false);");
+	UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+	SetScale(2.0f, 2.0f, 2.0f);
 	//fprintf(MAPFILE, "\"skin\" \"shock_grating_%03d\"\n", currobj.ObjectSubClassIndex - 4);
 	}
 
