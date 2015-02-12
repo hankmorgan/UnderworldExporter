@@ -893,7 +893,7 @@ int isInventory;
 int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
 
 char line[255];
-textureMasters =new texture[300];
+textureMasters =new texture[340];
 objectMasters=new objectMaster[1025];
 switch (game)
 	{
@@ -1145,7 +1145,7 @@ void exportMaps(int game,int mode,int LevelNo, char OutFileName[255], char fileP
 			{
 			//filePath = SHOCK_LEVEL_PATH;	//"C:\\Games\\SystemShock\\Res\\DATA\\archive.dat";
 			BuildTileMapShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
-			BuildObjectListShock(LevelInfo, objList,texture_map,filePath,game,LevelNo);
+			BuildObjectListShock(LevelInfo, objList,texture_map_shock,filePath,game,LevelNo);
 			SetDeathWatch(objList);
 			setTileNeighbourCount(LevelInfo);
 			setDoorBits(LevelInfo,objList);

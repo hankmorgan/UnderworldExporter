@@ -76,6 +76,7 @@
 #define UW_PAINTING	68
 #define PARTICLE 69
 #define RUNEBAG 70
+#define SHOCK_BRIDGE 71
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
@@ -214,6 +215,15 @@
 #define WORDS_FONT 1
 #define WORDS_SIZE 2
 #define WORDS_COLOUR 3
+
+#define BRIDGE_X_SIZE 0
+#define BRIDGE_Y_SIZE 1
+#define BRIDGE_HEIGHT 2
+#define BRIDGE_TOP_BOTTOM_TEXTURE 3
+#define BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE 4
+#define BRIDGE_SIDE_TEXTURE 5
+#define BRIDGE_SIDE_TEXTURE_SOURCE 6
+
 //Master object type definition
 struct ObjectItem
 {
@@ -402,7 +412,7 @@ char *getObjectNameByClass(int objClass, int subClass, int subClassIndex);
 int getObjectIDByClass(int objClass, int subClass, int subClassIndex);
 void shockCommonObject();
 
-int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType, int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int currObj, int LevelNo);
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType, int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], long texture_map[256], int objIndex, int levelNo);
 void getShockTriggerAction(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, xrefTable *xRef, ObjectItem objList[1600], int objIndex);
 int LookupxRefTable(xrefTable *xref, int x, int y, int MasterIndex, int tableSize);
 void replaceLink(xrefTable *xref, int tableSize, int indexToFind, int linkToReplace);

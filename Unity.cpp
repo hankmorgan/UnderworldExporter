@@ -1211,6 +1211,37 @@ void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &
 		}
 	}
 
+void RenderUnityEntityBridgeSHOCK(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+int TopBottomOffset =0;
+int SideOffset=0;
+if (currobj.shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE] == 0)
+	{
+	TopBottomOffset=325;
+	}
+if (currobj.shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] == 0)
+	{
+	SideOffset=325;
+	}
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+//CreateShockBridge(GameObject myObj, string TopTexturePath, string SideTexturePat0h, int xSize, int ySize)
+	fprintf(UNITY_FILE, "\n\tCreateShockBridge(myObj, \"textures/%s\", \"textures/%s\", %d, %d, %d);",
+		textureMasters[currobj.shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE]+TopBottomOffset].path, 
+		textureMasters[currobj.shockProperties[BRIDGE_SIDE_TEXTURE]+SideOffset].path,
+		currobj.shockProperties[BRIDGE_HEIGHT], 
+		currobj.shockProperties[BRIDGE_X_SIZE],
+		currobj.shockProperties[BRIDGE_Y_SIZE]);
+	//if (game != SHOCK)
+		//{
+		//UnityRotation(game, -90, currobj.heading - 180, 0);
+	//	}
+	//else
+		//{
+		UnityRotation(game, currobj.Angle1+64, currobj.Angle2, currobj.Angle3);
+		//}
+
+	}
+
 void RenderUnityEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int bind)
 	{
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -1502,6 +1533,9 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							break;
 						case BRIDGE:
 							RenderUnityEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case SHOCK_BRIDGE:
+							RenderUnityEntityBridgeSHOCK(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case PARTICLE:
 							RenderUnityEntityParticle(game, x, y, z, currobj, objList, LevelInfo, 0);

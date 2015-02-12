@@ -84,6 +84,7 @@ void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void CreateDoorModel(FbxScene*& gScene);
+void CreateShockBridgeModel(FbxScene*& gScene);
 
 //
 //int    gCubeNumber = 1;     // Cube Number
@@ -888,16 +889,14 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 //Render Pillars
 	if (game != SHOCK)
 		{
-		RenderFBXPillars(gScene,game,LevelInfo,objList);
 		RenderFBXBridges(gScene, game, LevelInfo, objList);
+		RenderFBXPillars(gScene,game,LevelInfo,objList);
+		
 		}
+	
 
-	if (game != SHOCK)
-		{
-		RenderTerrainChangeTiles(gScene,game,LevelInfo,objList);
-		}
-
-//	CreateDoorModel(gScene);
+	//CreateDoorModel(gScene);
+	//CreateShockBridgeModel(gScene);
 	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 1, false);
 	}
 
@@ -4230,7 +4229,7 @@ void CreateFBXMaterials(FbxScene*& gScene, int game)
 			NoOfMaterials = 255;
 			break;
 		case SHOCK:
-			NoOfMaterials = 273;
+			NoOfMaterials = 339;
 			break;
 		}
 
@@ -4259,7 +4258,8 @@ void CreateFBXMaterials(FbxScene*& gScene, int game)
 				sprintf_s(MaterialName, 20, "uw2_%03d\0", i);
 				break;
 			case SHOCK:
-				sprintf_s(MaterialName, 20, "shock_%03d\0", i);
+				//sprintf_s(MaterialName, 20, "shock_%03d\0", i);
+				sprintf_s(MaterialName, 20, textureMasters[i].path);
 				break;
 			}
 		
@@ -4892,65 +4892,153 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 	float offX; float offY; float offZ;
 	float x0; float y0; float z0;
 	float x1; float y1; float z1;
-
-	for (y = 0; y <= 63; y++)
+	if (game != SHOCK)
 		{
-		for (x = 0; x <= 63; x++)
+		for (y = 0; y <= 63; y++)
 			{
-			if ((LevelInfo[x][y].indexObjectList != 0))
+			for (x = 0; x <= 63; x++)
 				{
-				long nextObj = LevelInfo[x][y].indexObjectList;
-				while (nextObj != 0)
+				if ((LevelInfo[x][y].indexObjectList != 0))
 					{
-					if (objectMasters[objList[nextObj].item_id].type == BRIDGE)
+					long nextObj = LevelInfo[x][y].indexObjectList;
+					while (nextObj != 0)
 						{
-						int textureIndex = objList[nextObj].flags & 0x3F;
-						tile tmpt;
-						tmpt.tileType = TILE_OPEN;//t.tileType;
-						tmpt.DimX = 1;
-						tmpt.DimY = 1;
-						tmpt.wallTexture = 267 + textureIndex;
-						tmpt.floorTexture = 267 + textureIndex;
-						tmpt.shockCeilingTexture = 267 + textureIndex;
-						tmpt.East = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
-						tmpt.West = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
-						tmpt.South = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
-						tmpt.North = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
-						tmpt.floorHeight = LevelInfo[x][y].ceilingHeight;//this is deliberate
-						tmpt.ceilingHeight = LevelInfo[x][y].ceilingHeight;
-						tmpt.tileX = LevelInfo[x][y].tileX;
-						tmpt.tileY = LevelInfo[x][y].tileY;
-
-						int objType = objectMasters[objList[nextObj].item_id].type;
-						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
-						//Move it's xy to the center of the tile
-						offX = x*BrushSizeX + BrushSizeX / 2;
-						offY = y*BrushSizeY + BrushSizeY / 2;
-						//Draw it around this point
-						//Bottom 2 bits give the index of the pillar texture
-						x1 = offX + BrushSizeX / 2;
-						y1 = offY + BrushSizeY / 2;
-						z1 = offZ + 5;
-						x0 = offX - BrushSizeX / 2;
-						y0 = offY - BrushSizeY / 2;
-						z0 = offZ - 5;
-						FbxVector4 lControlPointl0(x0, y0, z1);
-						FbxVector4 lControlPointl1(x1, y0, z1);
-						FbxVector4 lControlPointl2(x1, y1, z1);
-						FbxVector4 lControlPointl3(x0, y1, z1);
-						FbxVector4 lControlPointl4(x0, y0, z0);
-						FbxVector4 lControlPointl5(x1, y0, z0);
-						FbxVector4 lControlPointl6(x1, y1, z0);
-						FbxVector4 lControlPointl7(x0, y1, z0);
-						RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
-							lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
-							lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
-							0, 1,
-							0, 1,
-							0, 1,
-							0, 1);
+						if (objectMasters[objList[nextObj].item_id].type == BRIDGE)
+							{
+							int textureIndex = objList[nextObj].flags & 0x3F;
+							tile tmpt;
+							tmpt.tileType = TILE_OPEN;//t.tileType;
+							tmpt.DimX = 1;
+							tmpt.DimY = 1;
+							tmpt.wallTexture = 267 + textureIndex;
+							tmpt.floorTexture = 267 + textureIndex;
+							tmpt.shockCeilingTexture = 267 + textureIndex;
+							tmpt.East = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
+							tmpt.West = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
+							tmpt.South = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
+							tmpt.North = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
+							tmpt.floorHeight = LevelInfo[x][y].ceilingHeight;//this is deliberate
+							tmpt.ceilingHeight = LevelInfo[x][y].ceilingHeight;
+							tmpt.tileX = LevelInfo[x][y].tileX;
+							tmpt.tileY = LevelInfo[x][y].tileY;
+						
+							int objType = objectMasters[objList[nextObj].item_id].type;
+							CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
+							//Move it's xy to the center of the tile
+							offX = x*BrushSizeX + BrushSizeX / 2;
+							offY = y*BrushSizeY + BrushSizeY / 2;
+							//Draw it around this point
+							//Bottom 2 bits give the index of the pillar texture
+							x1 = offX + BrushSizeX / 2;
+							y1 = offY + BrushSizeY / 2;
+							z1 = offZ + 5;
+							x0 = offX - BrushSizeX / 2;
+							y0 = offY - BrushSizeY / 2;
+							z0 = offZ - 5;
+							FbxVector4 lControlPointl0(x0, y0, z1);
+							FbxVector4 lControlPointl1(x1, y0, z1);
+							FbxVector4 lControlPointl2(x1, y1, z1);
+							FbxVector4 lControlPointl3(x0, y1, z1);
+							FbxVector4 lControlPointl4(x0, y0, z0);
+							FbxVector4 lControlPointl5(x1, y0, z0);
+							FbxVector4 lControlPointl6(x1, y1, z0);
+							FbxVector4 lControlPointl7(x0, y1, z0);
+							RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
+								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
+								lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
+								0, 1,
+								0, 1,
+								0, 1,
+								0, 1);
+							}
+						nextObj = objList[nextObj].next;
 						}
-					nextObj = objList[nextObj].next;
+					}
+				}
+			}
+		}
+	else
+		{//System Shock style bridge.
+		return;
+		for (y = 0; y <= 63; y++)
+			{
+			for (x = 0; x <= 63; x++)
+				{
+				if ((LevelInfo[x][y].indexObjectList != 0))
+					{
+					long nextObj = LevelInfo[x][y].indexObjectList;
+					while (nextObj != 0)
+						{
+						if (objectMasters[objList[nextObj].item_id].type == SHOCK_BRIDGE)
+							{
+							tile tmpt;
+							tmpt.tileType = TILE_OPEN;//t.tileType;
+							tmpt.DimX = 1;
+							tmpt.DimY = 1;
+							if (objList[nextObj].shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] == 1)//Texture is in main texture map.
+								{
+								tmpt.wallTexture = objList[nextObj].shockProperties[BRIDGE_SIDE_TEXTURE];
+								}
+							else
+								{//Add 325 for citimat.res textures.
+								tmpt.wallTexture = 325+objList[nextObj].shockProperties[BRIDGE_SIDE_TEXTURE];
+								}
+							tmpt.East = tmpt.wallTexture;
+							tmpt.West = tmpt.wallTexture;
+							tmpt.South = tmpt.wallTexture;
+							tmpt.North = tmpt.wallTexture;
+
+							if (objList[nextObj].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE] == 1)//Texture is in main texture map.
+								{
+								tmpt.floorTexture = objList[nextObj].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE];
+								tmpt.shockCeilingTexture = objList[nextObj].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE];
+								}
+							else
+								{//Add 325 for citimat.res textures.
+								tmpt.floorTexture = 325 + objList[nextObj].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE];
+								tmpt.shockCeilingTexture = 325 + objList[nextObj].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE];
+								}
+														
+
+							tmpt.floorHeight = LevelInfo[x][y].ceilingHeight;//this is deliberate
+							tmpt.ceilingHeight = LevelInfo[x][y].ceilingHeight;
+							tmpt.shockNorthCeilHeight = LevelInfo[x][y].ceilingHeight;
+							tmpt.shockSouthCeilHeight = LevelInfo[x][y].ceilingHeight;
+							tmpt.shockEastCeilHeight = LevelInfo[x][y].ceilingHeight;
+							tmpt.shockWestCeilHeight = LevelInfo[x][y].ceilingHeight;
+							tmpt.tileX = LevelInfo[x][y].tileX;
+							tmpt.tileY = LevelInfo[x][y].tileY;
+
+							int objType = objectMasters[objList[nextObj].item_id].type;
+							CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
+							//Move it's xy to the center of the tile
+							//offX = x*BrushSizeX + BrushSizeX / 2;
+							//offY = y*BrushSizeY + BrushSizeY / 2;
+							//Draw it around this point
+							x1 = offX + BrushSizeX / 2;
+							y1 = offY + BrushSizeY / 2;
+							z1 = offZ + 0.1;
+							x0 = offX - BrushSizeX / 2;
+							y0 = offY - BrushSizeY / 2;
+							z0 = offZ - 0.1;
+							FbxVector4 lControlPointl0(x0, y0, z1);
+							FbxVector4 lControlPointl1(x1, y0, z1);
+							FbxVector4 lControlPointl2(x1, y1, z1);
+							FbxVector4 lControlPointl3(x0, y1, z1);
+							FbxVector4 lControlPointl4(x0, y0, z0);
+							FbxVector4 lControlPointl5(x1, y0, z0);
+							FbxVector4 lControlPointl6(x1, y1, z0);
+							FbxVector4 lControlPointl7(x0, y1, z0);
+							RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
+								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
+								lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
+								0, 1,
+								0, 1,
+								0, 1,
+								0, 1);
+							}
+						nextObj = objList[nextObj].next;
+						}
 					}
 				}
 			}
@@ -5000,4 +5088,53 @@ void CreateDoorModel(FbxScene*& gScene)
 		lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 		lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 		0, 54.0/64.0);
+	}
+
+void CreateShockBridgeModel(FbxScene*& gScene)
+	{
+	//int DOORWIDTH = 60;
+	//int DOORHEIGHTUNITS = 6;
+	float x0; float y0; float z0;
+	float x1; float y1; float z1;
+	x0 = - BrushSizeX / 2;
+	x1 = + BrushSizeX / 2;
+	y0 = - BrushSizeY / 2;
+	y1 = + BrushSizeY / 2;
+	z0 = -1;
+	z1 = +1;
+
+	FbxVector4 lControlPointl0(x0, y0, z1);
+	FbxVector4 lControlPointl1(x1, y0, z1);
+	FbxVector4 lControlPointl2(x1, y1, z1);
+	FbxVector4 lControlPointl3(x0, y1, z1);
+	FbxVector4 lControlPointl4(x0, y0, z0);
+	FbxVector4 lControlPointl5(x1, y0, z0);
+	FbxVector4 lControlPointl6(x1, y1, z0);
+	FbxVector4 lControlPointl7(x0, y1, z0);
+
+	tile tmpt;
+	tmpt.tileType = TILE_OPEN;//t.tileType;
+	tmpt.DimX = 1;
+	tmpt.DimY = 1;
+	tmpt.wallTexture = 325;
+	tmpt.floorTexture = 325;
+	tmpt.shockCeilingTexture = 325;
+	tmpt.East = 326;// LevelInfo[x][y].wallTexture;
+	tmpt.West = 326;// LevelInfo[x][y].wallTexture;
+	tmpt.South = 326;//LevelInfo[x][y].wallTexture;
+	tmpt.North = 326;//LevelInfo[x][y].wallTexture;
+	tmpt.floorHeight = 0;
+	tmpt.ceilingHeight = 16;
+	tmpt.shockNorthCeilHeight = tmpt.ceilingHeight;
+	tmpt.shockSouthCeilHeight = tmpt.ceilingHeight;
+	tmpt.shockEastCeilHeight = tmpt.ceilingHeight;
+	tmpt.shockWestCeilHeight = tmpt.ceilingHeight;
+	tmpt.tileX = 0;
+	tmpt.tileY = 0;
+
+
+	RenderFBXCuboid(gScene, 0, 0, tmpt, 0, z0, z1, "Bridge",
+		lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
+		lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
+		0, 54.0 / 64.0);
 	}

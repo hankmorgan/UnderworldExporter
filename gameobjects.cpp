@@ -430,38 +430,38 @@ mstaddress_pointer=0;
 					case HARDWARE:break;
 					case SOFTWARE_LOGS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList, MasterIndex,LevelNo) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SOFTWARE_LOGS_OFFSET, SOFTWARE_LOGS, SubClassLink, 9, xref, objList,texture_map, MasterIndex,LevelNo) == -1) { fprintf(LOGFILE,"\nNo properties found!\n"); }
 					break;
 					}
 					case FIXTURES:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + FIXTURES_OFFSET, FIXTURES, SubClassLink, 16, xref, objList, texture_map, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					}
 					case GETTABLES_OTHER:
-						if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
+						if (lookUpSubClass(archive_ark, LevelNo * 100 + GETTABLES_OTHER_OFFSET, GETTABLES_OTHER, SubClassLink, 16, xref, objList, texture_map, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					case SWITCHES_PANELS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + SWITCHES_PANELS_OFFSET, SWITCHES_PANELS, SubClassLink, 30, xref, objList, texture_map, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					}
 					case DOORS_GRATINGS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + DOORS_GRATINGS_OFFSET, DOORS_GRATINGS, SubClassLink, 14, xref, objList, texture_map, MasterIndex, LevelNo) == -1) { fprintf(LOGFILE, "\nNo properties found!\n"); }
 					break;
 					}
 					case ANIMATED:break;
 					case TRAPS_MARKERS:
 					{
-					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
+					if (lookUpSubClass(archive_ark, LevelNo * 100 + TRAPS_MARKERS_OFFSET, TRAPS_MARKERS, SubClassLink, 28, xref, objList, texture_map, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
 					break;
 					}
 					case CONTAINERS_CORPSES:
-						if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
+						if (lookUpSubClass(archive_ark, LevelNo * 100 + CONTAINERS_CORPSES_OFFSET, CONTAINERS_CORPSES, SubClassLink, 21, xref, objList, texture_map, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
 					break;
 					case CRITTERS:
-						if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
+						if (lookUpSubClass(archive_ark, LevelNo * 100 + CRITTERS_OFFSET, CRITTERS, SubClassLink, 46, xref, objList, texture_map, MasterIndex, LevelNo) == -1)  { fprintf(LOGFILE, "no properties found!"); }
 						break;
 					}
 					UniqueObjectName(objList[MasterIndex]);
@@ -704,7 +704,7 @@ switch (game)
 		}
 }
 
-int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType ,int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], int objIndex,int levelNo)
+int lookUpSubClass(unsigned char *archive_ark, int BlockNo, int ClassType, int index, int RecordSize, xrefTable *xRef, ObjectItem objList[1600], long texture_map[256], int objIndex, int levelNo)
 {
 //
 
@@ -831,13 +831,46 @@ while (k<=chunkUnpackedLength)
 						  }
 						break;
 					case 7:	//bridges etc
-						fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
+						int val = getValAtAddress(sub_ark, add_ptr + 0x8, 8);
+						objList[objIndex].shockProperties[BRIDGE_X_SIZE] = val & 0xF;
+						objList[objIndex].shockProperties[BRIDGE_Y_SIZE] = (val >>4) & 0xF;
+						objList[objIndex].shockProperties[BRIDGE_HEIGHT] = getValAtAddress(sub_ark, add_ptr + 0x9, 8);
+						val = getValAtAddress(sub_ark, add_ptr + 0xA, 8);
+						objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE] = (val >> 7) & 0x1;
+						if (objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE]==1)//Retrieve from texture map
+							{
+							objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE] = texture_map[val & 0x7F];
+							}
+						else
+							{
+							objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE] = val & 0x7F;
+							}
+						
+						val = getValAtAddress(sub_ark, add_ptr + 0xB, 8);
+						objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] = (val >> 7) & 0x1;
+						if (objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] == 1)//Retrieve from texture map
+							{
+							objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE] = texture_map[val & 0x7F];
+							}
+						else
+							{
+							objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE] = val & 0x7F;
+							}
+						fprintf(LOGFILE, "\n\tBridge X Size : %d", objList[objIndex].shockProperties[BRIDGE_X_SIZE]);
+						fprintf(LOGFILE, "\n\tBridge Y Size : %d", objList[objIndex].shockProperties[BRIDGE_Y_SIZE]);
+						fprintf(LOGFILE, "\n\tBridge Height : %d", objList[objIndex].shockProperties[BRIDGE_HEIGHT]);
+						fprintf(LOGFILE, "\n\tBridge Top Texture : %d", objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE]);
+						fprintf(LOGFILE, "\n\tBridge Top Texture Source : %d", objList[objIndex].shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE]);
+						fprintf(LOGFILE, "\n\tBridge Side Texture : %d", objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE]);
+						fprintf(LOGFILE, "\n\tBridge Side Texture Source : %d", objList[objIndex].shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE]);
+
+						/*fprintf(LOGFILE,"\n\tVal 0x6: %d", getValAtAddress(sub_ark, add_ptr + 6, 16));
 						fprintf(LOGFILE,"\n\tVal 0x8: %d", getValAtAddress(sub_ark, add_ptr + 8, 16));
 						fprintf(LOGFILE,"\n\tVal 0xA: %d", getValAtAddress(sub_ark, add_ptr + 0xA, 16));
 						fprintf(LOGFILE,"(%d", getValAtAddress(sub_ark, add_ptr + 0xA, 8));
 						fprintf(LOGFILE,",%d)", getValAtAddress(sub_ark, add_ptr + 0xB, 8));
 						fprintf(LOGFILE,"\n\tVal 0xC: %d", getValAtAddress(sub_ark, add_ptr + 0xC, 16));
-						fprintf(LOGFILE,"\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));
+						fprintf(LOGFILE,"\n\tVal 0xE: %d", getValAtAddress(sub_ark, add_ptr + 0xE, 16));*/
 						break;
 				}
 				

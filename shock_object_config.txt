@@ -172,8 +172,8 @@
 171 7 6 13 model 18 SHRUBBERY models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0529 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 172 7 6 14 model 18 VIRUS_INFECTED_SHRUB models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0532 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 173 7 6 15 model 18 VIRUS_INFECTED_SHRUBBERY models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0535 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-174 7 7 0 model 18 BRIDGE models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-175 7 7 1 model 18 CATWALK models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+174 7 7 0 entity 71 BRIDGE models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+175 7 7 1 entity 71 CATWALK models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 176 7 7 2 model 18 REALWALL models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 177 7 7 3 model 18 PILLAR models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 178 7 7 4 model 18 BRASS_RAILING models/darkmod/architecture/handrails/handrail_section_l.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
