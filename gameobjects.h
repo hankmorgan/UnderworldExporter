@@ -77,6 +77,7 @@
 #define PARTICLE 69
 #define RUNEBAG 70
 #define SHOCK_BRIDGE 71
+#define FORCE_DOOR 72
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

@@ -179,8 +179,8 @@
 178 7 7 4 model 18 BRASS_RAILING models/darkmod/architecture/handrails/handrail_section_l.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 179 7 7 5 model 18 WOODEN_RAILING models/darkmod/architecture/handrails/handrail_section_l.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 180 7 7 6 model 18 PILLAR models/darkmod/architecture/pillars/groovedpillar01_small.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-181 7 7 7 model 18 FORCE_BRIDGE models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0560 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-182 7 7 8 model 18 ELEPHANT_JORP models/darkmod/shock/elephant.ase 0 Sprites/objects_1350_0563 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+181 7 7 7 entity 71 FORCE_BRIDGE models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0560 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+182 7 7 8 entity 71 ELEPHANT_JORP models/darkmod/shock/elephant.ase 0 Sprites/objects_1350_0563 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 183 7 7 9 model 18 FORCE_BRIDGE models/darkmod/shock/shock_bridge.ase 0 Sprites/objects_1350_0566 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 184 8 0 0 model 18 BEVERAGE_CONTAINER models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0568 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 185 8 0 1 model 18 WRAPPER models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0570 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
@@ -318,11 +318,11 @@
 317 10 1 9 model 18 MY_TOE_IS_AN_EGGPLANT models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 318 10 2 0 model 18 FORCE_DOOR 2423 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 319 10 2 1 model 18 FORCE_DOOR 2423 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-320 10 2 2 model 18 FORCE_DOOR 2423 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+320 10 2 2 entity 72 FORCE_DOOR 2423 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 321 10 2 3 model 18 FORCE_DOOR 2423 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 322 10 2 4 entity 66 FORCE_DOOR 2423 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 323 10 2 5 entity 67 ENERGY_GRATING 2424 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
-324 10 2 6 model 18 GREAT_LORD_SNAQUEOTRAHN models/darkmod/decorative/hourglass.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
+324 10 2 6 entity 72 GREAT_LORD_SNAQUEOTRAHN models/darkmod/decorative/hourglass.ase 0 Sprites/objects_1350_0000 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 325 10 3 0 entity 66 EXECUTIVE_ELEVATOR 2426 0 Sprites/objects_1350_1108 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 326 10 3 1 entity 66 ELEVATOR_DOOR 2427 0 Sprites/objects_1350_1109 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga
 327 10 3 2 entity 66 ELEVATOR_DOOR 2428 0 Sprites/objects_1350_1109 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 guis/assets/hud/inventory_icons/NOTHING.tga

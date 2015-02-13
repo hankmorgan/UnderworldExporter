@@ -1076,7 +1076,12 @@ void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &cur
 			case ACTION_SPAWN:
 				fprintf(UNITY_FILE, "\n\tAddACTION_SPAWN(myObj);"); break;
 			case ACTION_CHANGE_TYPE:
-				fprintf(UNITY_FILE, "\n\tAddACTION_CHANGE_TYPE(myObj);"); break;
+				fprintf(UNITY_FILE, "\n\tAddACTION_CHANGE_TYPE(myObj, \"%s\", %d, %d, %d);"
+					, UniqueObjectName(objList[currobj.shockProperties[TRIG_PROPERTY_OBJECT]])
+					, objList[currobj.shockProperties[TRIG_PROPERTY_OBJECT]].ObjectClass
+					, objList[currobj.shockProperties[TRIG_PROPERTY_OBJECT]].ObjectSubClass 
+					, currobj.shockProperties[TRIG_PROPERTY_TYPE]);
+				break;
 			default:
 				fprintf(UNITY_FILE, "\n\tAddACTION_UNKNOWN(myObj);"); break;
 				break;
@@ -1211,34 +1216,65 @@ void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &
 		}
 	}
 
+void RenderUnityEntityForceDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	switch (currobj.ObjectSubClassIndex)
+		{
+		case 2://force door
+			fprintf(UNITY_FILE, "\n\tCreateForceDoor(myObj);");
+			UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+			break;
+		case 6://great lord snaq!
+			fprintf(UNITY_FILE, "\n\tCreateGreatLord(myObj);");
+			UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+			break;
+		}
+	}
+
 void RenderUnityEntityBridgeSHOCK(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-int TopBottomOffset =0;
-int SideOffset=0;
-if (currobj.shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE] == 0)
-	{
-	TopBottomOffset=325;
-	}
-if (currobj.shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] == 0)
-	{
-	SideOffset=325;
-	}
+	int TopBottomOffset = 0;
+	int SideOffset = 0;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-//CreateShockBridge(GameObject myObj, string TopTexturePath, string SideTexturePat0h, int xSize, int ySize)
-	fprintf(UNITY_FILE, "\n\tCreateShockBridge(myObj, \"textures/%s\", \"textures/%s\", %d, %d, %d);",
-		textureMasters[currobj.shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE]+TopBottomOffset].path, 
-		textureMasters[currobj.shockProperties[BRIDGE_SIDE_TEXTURE]+SideOffset].path,
-		currobj.shockProperties[BRIDGE_HEIGHT], 
-		currobj.shockProperties[BRIDGE_X_SIZE],
-		currobj.shockProperties[BRIDGE_Y_SIZE]);
-	//if (game != SHOCK)
-		//{
-		//UnityRotation(game, -90, currobj.heading - 180, 0);
-	//	}
-	//else
-		//{
-		UnityRotation(game, currobj.Angle1+64, currobj.Angle2, currobj.Angle3);
-		//}
+
+	switch (currobj.ObjectSubClassIndex)
+		{
+		case 0://Catwalk
+		case 1://Bridge
+			if (currobj.shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE_SOURCE] == 0)
+				{
+				TopBottomOffset = 325;
+				}
+			if (currobj.shockProperties[BRIDGE_SIDE_TEXTURE_SOURCE] == 0)
+				{
+				SideOffset = 325;
+				}
+			fprintf(UNITY_FILE, "\n\tCreateShockBridge(myObj, \"textures/%s\", \"textures/%s\", %d, %d, %d);",
+				textureMasters[currobj.shockProperties[BRIDGE_TOP_BOTTOM_TEXTURE] + TopBottomOffset].path,
+				textureMasters[currobj.shockProperties[BRIDGE_SIDE_TEXTURE] + SideOffset].path,
+				currobj.shockProperties[BRIDGE_HEIGHT],
+				currobj.shockProperties[BRIDGE_X_SIZE],
+				currobj.shockProperties[BRIDGE_Y_SIZE]);
+			UnityRotation(game, currobj.Angle1 + 64, currobj.Angle2, currobj.Angle3);
+			if (currobj.ObjectSubClassIndex == 1)//catwalks are smaller
+				{
+				SetScale(0.6f, 1.0f, 1.0f);
+				}
+			break;
+			
+			case 7://force bridge
+				fprintf(UNITY_FILE, "\n\tCreateForceBridge(myObj);");
+				UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+				break;
+			case 8://elephant jorp
+				fprintf(UNITY_FILE, "\n\tCreateElephantJorp(myObj);");
+				UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+				break;
+		}
+
+	
+
 
 	}
 
@@ -1554,6 +1590,9 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 						case SCENERY:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							break;
+						case FORCE_DOOR:
+							RenderUnityEntityForceDoor(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);

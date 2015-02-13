@@ -309,7 +309,7 @@
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_023_012",28.200001f,1.200000f,14.420000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2406);
 
@@ -326,7 +326,7 @@
 
 	myObj= CreateGameObject("DOOR_028_012",34.200001f,1.200000f,14.420000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2404);
 
@@ -369,19 +369,19 @@
 
 	myObj= CreateGameObject("DOOR_034_013",41.400002f,1.200000f,16.795313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2404);
 
 	myObj= CreateGameObject("BLAST_DOOR_036_013",43.799999f,1.200000f,15.620000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,10,1,2400);
 
 	myObj= CreateGameObject("SERVICE_ACCESS_DOOR_024_014",29.400000f,1.200000f,16.820000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1030",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2401);
 
@@ -562,7 +562,7 @@
 
 	myObj= CreateGameObject("HIDDEN_DOOR_046_017",56.395313f,1.200000f,21.000000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2438);
 
@@ -576,7 +576,7 @@
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_015_018",19.195313f,1.800000f,22.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,10,1,2406);
 
@@ -639,7 +639,8 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
 
 	myObj= CreateGameObject("BRIDGE_24_18_01_0170",29.379999f,1.762500f,22.180000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/shock_035", "textures/citmat_2180_0000", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SV_23_DARTGUN_25_18_01_0035",30.220312f,0.825000f,22.420313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0004",true);
@@ -730,7 +731,8 @@
 	SetRotation(myObj,(float)-0.000000,(float)1.406250,(float)0.000000);
 
 	myObj= CreateGameObject("BRIDGE_24_19_01_0143",29.379999f,1.762500f,23.379999f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/shock_035", "textures/citmat_2180_0000", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SV_NEEDLE_DARTS_25_19_01_0191",30.595312f,0.693750f,23.582813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
@@ -756,7 +758,7 @@
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_035_019",43.195313f,1.200000f,23.400000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,10,1,2406);
 
@@ -790,7 +792,7 @@
 
 	myObj= CreateGameObject("DOOR_020_020",24.020000f,0.600000f,24.600000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2404);
 
@@ -867,7 +869,7 @@
 
 	myObj= CreateGameObject("DOOR_015_021",19.195313f,1.200000f,25.799999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,1,1,2404);
 
@@ -892,7 +894,7 @@
 
 	myObj= CreateGameObject("DOOR_026_021",31.799999f,0.600000f,26.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2404);
 
@@ -920,7 +922,7 @@
 
 	myObj= CreateGameObject("HIDDEN_DOOR_046_021",56.395313f,1.200000f,25.799999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2438);
 
@@ -1025,13 +1027,13 @@
 
 	myObj= CreateGameObject("BULKHEAD_DOOR_017_023",21.000000f,1.200000f,27.620001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2431);
 
 	myObj= CreateGameObject("BULKHEAD_DOOR_018_023",22.200001f,1.200000f,27.620001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2432);
 
@@ -1057,7 +1059,7 @@
 
 	myObj= CreateGameObject("BLAST_DOOR_035_023",43.195313f,1.200000f,28.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2400);
 
@@ -1092,7 +1094,7 @@
 
 	myObj= CreateGameObject("DOOR_026_024",31.799999f,0.600000f,28.820000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,1,1,2404);
 
@@ -1319,7 +1321,7 @@
 
 	myObj= CreateGameObject("DOOR_015_026",19.195313f,1.200000f,31.799999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,1,1,2404);
 
@@ -1361,7 +1363,7 @@
 
 	myObj= CreateGameObject("BLAST_DOOR_046_026",55.799999f,2.100000f,31.219999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1027",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2400);
 
@@ -1430,7 +1432,7 @@
 
 	myObj= CreateGameObject("HIDDEN_DOOR_015_028",19.195313f,1.800000f,34.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2438);
 
@@ -1487,7 +1489,7 @@
 
 	myObj= CreateGameObject("HIDDEN_DOOR_037_028",45.595314f,1.200000f,34.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2438);
 
@@ -1506,13 +1508,13 @@
 	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0299",55.779999f,2.700000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_46_29_01_0290", 7, 7, 7);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0298",55.779999f,2.700000f,34.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_46_30_01_0292", 7, 7, 7);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("ACCESS_PANEL_47_28_01_0259",56.732811f,2.812500f,34.270313f);
@@ -1529,13 +1531,13 @@
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_050_028",61.195313f,3.600000f,34.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2406);
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_029",13.220000f,1.200000f,35.400002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2406);
 
@@ -1585,7 +1587,8 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,60, 0);
 
 	myObj= CreateGameObject("ELEPHANT_JORP_46_29_01_0290",55.779999f,2.062500f,35.380001f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+	CreateElephantJorp(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CRATE_49_29_01_0646",59.545311f,0.337500f,35.432812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
@@ -1616,7 +1619,7 @@
 
 	myObj= CreateGameObject("DOOR_015_030",18.020000f,1.200000f,36.599998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2404);
 
@@ -1716,7 +1719,8 @@
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("ELEPHANT_JORP_46_30_01_0292",55.779999f,2.062500f,36.580002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+	CreateElephantJorp(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BATTERY_PACK_50_30_01_0405",60.580002f,1.762500f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0756",true);
@@ -1836,7 +1840,7 @@
 
 	myObj= CreateGameObject("DOOR_041_031",49.220001f,3.600000f,37.799999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2404);
 
@@ -1854,7 +1858,7 @@
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_011_032",13.220000f,1.200000f,39.000000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2406);
 
@@ -1908,11 +1912,12 @@
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BRIDGE_44_32_01_0364",53.380001f,2.343750f,38.980000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/citmat_2183_0000", "textures/citmat_2183_0000", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("HIDDEN_DOOR_015_033",19.195313f,1.200000f,40.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2438);
 
@@ -1932,7 +1937,7 @@
 
 	myObj= CreateGameObject("DOOR_019_033",23.995312f,1.200000f,40.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2404);
 
@@ -1972,7 +1977,7 @@
 
 	myObj= CreateGameObject("HIDDEN_DOOR_038_034",46.795311f,3.600000f,41.400002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2438);
 
@@ -1981,7 +1986,7 @@
 
 	myObj= CreateGameObject("BULKHEAD_DOOR_016_035",19.799999f,1.200000f,42.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1123",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2432);
 
@@ -2005,7 +2010,7 @@
 
 	myObj= CreateGameObject("BULKHEAD_DOOR_017_035",21.000000f,1.200000f,42.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1120",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2431);
 
@@ -2019,12 +2024,13 @@
 
 	myObj= CreateGameObject("HIDDEN_DOOR_030_035",36.599998f,1.200000f,43.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2438);
 
 	myObj= CreateGameObject("BRIDGE_31_35_01_0020",37.779999f,1.162500f,42.580002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/shock_219", "textures/shock_219", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BURN_RESIDUE_35_35_01_0476",42.632813f,2.437500f,43.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0843",true);
@@ -2074,13 +2080,13 @@
 
 	myObj= CreateGameObject("ENERGY_GRATING_023_036",28.200001f,2.400000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2424);
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_026_036",31.799999f,2.400000f,44.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,10,1,2406);
 
@@ -2095,7 +2101,8 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
 
 	myObj= CreateGameObject("BRIDGE_31_36_01_0619",37.779999f,1.162500f,43.779999f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/shock_219", "textures/shock_219", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_31_36_01_0584",37.779999f,1.800000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -2116,7 +2123,8 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0750",true);
 
 	myObj= CreateGameObject("BRIDGE_46_36_01_0255",55.779999f,2.343750f,43.779999f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/citmat_2183_0000", "textures/citmat_2183_0000", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj = new GameObject("HUMANOID_MUTANT_09_37_01_0284");
 	pos = new Vector3(11.380000f, 1.593750f, 44.980000f);
@@ -2149,7 +2157,7 @@
 
 	myObj= CreateGameObject("ELEVATOR_DOOR_015_037",18.600000f,1.200000f,44.419998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1109",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2427);
 
@@ -2186,22 +2194,24 @@
 	SetRotation(myObj,(float)-0.000000,(float)270.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BRIDGE_31_37_01_0719",37.779999f,1.162500f,44.980000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/shock_219", "textures/shock_219", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("DOOR_035_037",42.599998f,3.600000f,45.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2404);
 
 	myObj= CreateGameObject("DOOR_039_037",47.400002f,3.600000f,45.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2404);
 
 	myObj= CreateGameObject("ELEPHANT_JORP_45_37_01_0243",54.580002f,2.343750f,44.980000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+	CreateElephantJorp(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CONCUSSION_BOMB_16_38_01_0149",20.095312f,2.550000f,46.157814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0186",true);
@@ -2220,13 +2230,13 @@
 
 	myObj= CreateGameObject("ENERGY_GRATING_023_038",28.200001f,2.400000f,46.795311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2424);
 
 	myObj= CreateGameObject("FORCE_DOOR_031_038",37.799999f,1.200000f,45.619999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2423);
 
@@ -2249,7 +2259,8 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1423",true);
 
 	myObj= CreateGameObject("ELEPHANT_JORP_45_38_01_0180",54.580002f,2.343750f,46.180000f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+	CreateElephantJorp(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SV_TRANQ_DARTS_28_39_01_0726",34.570313f,0.093750f,47.545311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0058",true);
@@ -2357,7 +2368,7 @@
 
 	myObj= CreateGameObject("IRIS_DOOR_014_040",17.995312f,1.200000f,48.599998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1126",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,-1,1,2433);
 
@@ -2441,25 +2452,25 @@
 	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0370",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_38_01_0180", 7, 7, 7);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0326",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_37_01_0243", 7, 7, 7);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0217",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_38_01_0180", 7, 7, 8);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0373",59.380001f,1.200000f,48.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_37_01_0243", 7, 7, 8);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("SWITCH_12_41_01_0525",14.420000f,1.818750f,49.795311f);
@@ -2484,10 +2495,14 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,56, 0);
 
 	myObj= CreateGameObject("CATWALK_26_41_01_0260",31.795313f,2.343750f,50.245312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/citmat_2182_0000", "textures/citmat_2182_0000", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)90.000000,(float)0.000000);
+	SetScale(myObj,(float)0.600000,(float)1.000000,(float)1.000000);
 
 	myObj= CreateGameObject("CATWALK_27_41_01_0261",32.957813f,2.343750f,50.245312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateShockBridge(myObj, "textures/citmat_2182_0000", "textures/citmat_2182_0000", 0, 0, 0);
+	SetRotation(myObj,(float)-90.000000,(float)90.000000,(float)0.000000);
+	SetScale(myObj,(float)0.600000,(float)1.000000,(float)1.000000);
 
 	myObj= CreateGameObject("REPULSOR_30_41_01_0055",36.580002f,1.800000f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
@@ -2505,7 +2520,7 @@
 
 	myObj= CreateGameObject("FORCE_DOOR_017_042",21.595312f,2.400000f,51.000000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2423);
 
@@ -2547,7 +2562,7 @@
 
 	myObj= CreateGameObject("ENERGY_GRATING_023_042",28.200001f,2.400000f,51.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2424);
 
@@ -2663,7 +2678,7 @@
 
 	myObj= CreateGameObject("ENERGY_GRATING_019_044",23.995312f,2.400000f,53.400002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2424);
 
@@ -2676,13 +2691,13 @@
 	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0596",25.780001f,3.000000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_27_45_01_0552", 10, 2, 6);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0589",25.780001f,3.000000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_27_45_01_0552", 10, 2, 2);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj = new GameObject("CYBORG_DRONE_22_44_01_0368");
@@ -2706,13 +2721,13 @@
 	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0594",30.580000f,0.600000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_28_44_01_0551", 10, 2, 6);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0556",30.580000f,0.600000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_28_44_01_0551", 10, 2, 2);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BUTTON_28_44_01_0554",34.795311f,0.750000f,53.545311f);
@@ -2722,7 +2737,8 @@
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("FORCE_DOOR_28_44_01_0551",34.180000f,0.600000f,53.995312f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateForceDoor(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_29_44_01_0356",35.380001f,1.200000f,53.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -2780,7 +2796,8 @@
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("FORCE_DOOR_23_45_01_0553",28.795313f,0.600000f,54.580002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateForceDoor(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("BUTTON_24_45_01_0558",29.245312f,0.731250f,55.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
@@ -2813,7 +2830,8 @@
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("FORCE_DOOR_27_45_01_0552",33.595314f,0.600000f,54.580002f);
-	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+	CreateForceDoor(myObj);
+	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj = new GameObject("CYBORG_DRONE_30_45_01_0221");
 	pos = new Vector3(36.580002f, 2.850000f, 54.580002f);
@@ -2838,7 +2856,7 @@
 
 	myObj= CreateGameObject("ENERGY_GRATING_038_045",46.200001f,2.400000f,54.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2424);
 
@@ -2885,13 +2903,13 @@
 	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0591",25.780001f,2.850000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_23_45_01_0553", 10, 2, 2);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0590",25.780001f,2.850000f,55.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-	AddACTION_CHANGE_TYPE(myObj);
+	AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_23_45_01_0553", 10, 2, 6);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj = new GameObject("CYBORG_DRONE_22_46_01_0360");
@@ -3094,7 +3112,7 @@
 
 	myObj= CreateGameObject("STORAGE_ROOM_DOOR_031_051",37.799999f,0.000000f,61.220001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1045",false);
-	SetScale(myObj,(float)1.875000,(float)1.875000,(float)1.875000);
+	SetScale(myObj,(float)1.900000,(float)1.900000,(float)1.900000);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 	CreateShockDoor(myObj,0,0,2406);
 

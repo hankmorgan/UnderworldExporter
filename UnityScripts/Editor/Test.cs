@@ -44,8 +44,6 @@ public class MyTools
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
 
 		
-		
-		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
@@ -1555,13 +1553,13 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0299",55.779999f,2.700000f,34.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_46_29_01_0290", 7, 7, 7);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_46_28_01_0298",55.779999f,2.700000f,34.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_46_30_01_0292", 7, 7, 7);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("ACCESS_PANEL_47_28_01_0259",56.732811f,2.812500f,34.270313f);
@@ -1634,7 +1632,8 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",18,60, 0);
 		
 		myObj= CreateGameObject("ELEPHANT_JORP_46_29_01_0290",55.779999f,2.062500f,35.380001f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+		CreateElephantJorp(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("CRATE_49_29_01_0646",59.545311f,0.337500f,35.432812f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
@@ -1765,7 +1764,8 @@ public class MyTools
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("ELEPHANT_JORP_46_30_01_0292",55.779999f,2.062500f,36.580002f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+		CreateElephantJorp(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("BATTERY_PACK_50_30_01_0405",60.580002f,1.762500f,36.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0756",true);
@@ -2255,7 +2255,8 @@ public class MyTools
 		CreateShockDoor(myObj,0,0,2404);
 		
 		myObj= CreateGameObject("ELEPHANT_JORP_45_37_01_0243",54.580002f,2.343750f,44.980000f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+		CreateElephantJorp(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("CONCUSSION_BOMB_16_38_01_0149",20.095312f,2.550000f,46.157814f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0186",true);
@@ -2303,7 +2304,8 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1423",true);
 		
 		myObj= CreateGameObject("ELEPHANT_JORP_45_38_01_0180",54.580002f,2.343750f,46.180000f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0563",true);
+		CreateElephantJorp(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("SV_TRANQ_DARTS_28_39_01_0726",34.570313f,0.093750f,47.545311f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0058",true);
@@ -2495,25 +2497,25 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0370",59.380001f,1.200000f,48.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_38_01_0180", 7, 7, 7);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0326",59.380001f,1.200000f,48.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_37_01_0243", 7, 7, 7);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0217",59.380001f,1.200000f,48.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_38_01_0180", 7, 7, 8);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_49_40_01_0373",59.380001f,1.200000f,48.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "ELEPHANT_JORP_45_37_01_0243", 7, 7, 8);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("SWITCH_12_41_01_0525",14.420000f,1.818750f,49.795311f);
@@ -2540,10 +2542,12 @@ public class MyTools
 		myObj= CreateGameObject("CATWALK_26_41_01_0260",31.795313f,2.343750f,50.245312f);
 		CreateShockBridge(myObj, "textures/citmat_2182_0000", "textures/citmat_2182_0000", 0, 0, 0);
 		SetRotation(myObj,(float)-90.000000,(float)90.000000,(float)0.000000);
+		SetScale(myObj,(float)0.600000,(float)1.000000,(float)1.000000);
 		
 		myObj= CreateGameObject("CATWALK_27_41_01_0261",32.957813f,2.343750f,50.245312f);
 		CreateShockBridge(myObj, "textures/citmat_2182_0000", "textures/citmat_2182_0000", 0, 0, 0);
 		SetRotation(myObj,(float)-90.000000,(float)90.000000,(float)0.000000);
+		SetScale(myObj,(float)0.600000,(float)1.000000,(float)1.000000);
 		
 		myObj= CreateGameObject("REPULSOR_30_41_01_0055",36.580002f,1.800000f,49.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
@@ -2732,13 +2736,13 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0596",25.780001f,3.000000f,53.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_27_45_01_0552", 10, 2, 6);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_21_44_01_0589",25.780001f,3.000000f,53.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_27_45_01_0552", 10, 2, 2);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj = new GameObject("CYBORG_DRONE_22_44_01_0368");
@@ -2762,13 +2766,13 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0594",30.580000f,0.600000f,53.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_28_44_01_0551", 10, 2, 6);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_25_44_01_0556",30.580000f,0.600000f,53.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_28_44_01_0551", 10, 2, 2);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("BUTTON_28_44_01_0554",34.795311f,0.750000f,53.545311f);
@@ -2778,7 +2782,8 @@ public class MyTools
 		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("FORCE_DOOR_28_44_01_0551",34.180000f,0.600000f,53.995312f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateForceDoor(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_29_44_01_0356",35.380001f,1.200000f,53.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -2836,7 +2841,8 @@ public class MyTools
 		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("FORCE_DOOR_23_45_01_0553",28.795313f,0.600000f,54.580002f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateForceDoor(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("BUTTON_24_45_01_0558",29.245312f,0.731250f,55.195313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
@@ -2869,7 +2875,8 @@ public class MyTools
 		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("FORCE_DOOR_27_45_01_0552",33.595314f,0.600000f,54.580002f);
-		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
+		CreateForceDoor(myObj);
+		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		
 		myObj = new GameObject("CYBORG_DRONE_30_45_01_0221");
 		pos = new Vector3(36.580002f, 2.850000f, 54.580002f);
@@ -2941,13 +2948,13 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0591",25.780001f,2.850000f,55.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_23_45_01_0553", 10, 2, 2);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_21_46_01_0590",25.780001f,2.850000f,55.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 24,0,0,0,0,0);
-		AddACTION_CHANGE_TYPE(myObj);
+		AddACTION_CHANGE_TYPE(myObj, "FORCE_DOOR_23_45_01_0553", 10, 2, 6);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj = new GameObject("CYBORG_DRONE_22_46_01_0360");
@@ -3217,8 +3224,6 @@ public class MyTools
 		
 		myObj= CreateGameObject("CHEMICAL_TANK_32_54_01_0630",38.845314f,0.393750f,65.432816f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
-
-
 
 
 
@@ -9965,32 +9970,72 @@ public class MyTools
 		Texture2D TopTexture= Resources.Load <Texture2D> (TopTexturePath);
 		Texture2D SideTexture= Resources.Load <Texture2D> (SideTexturePath);
 		//newObj.GetComponent<MeshCollider>().enabled=false;
-		MeshCollider mc = myObj.AddComponent<MeshCollider>();
+		MeshCollider mc = newObj.AddComponent<MeshCollider>();//was myobj
 		mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
 
 		Material[] myMat = newObj.renderer.materials;
 		//Debug.Log ("Upperbound is " + myMat.GetUpperBound(0));
 		for (int i = 0; i<=myMat.GetUpperBound(0);i++)
 		{
-			//Debug.Log (i + "next tex is " + myMat[i].name);
-
 			if(myMat[i].mainTexture.name=="citmat_2180_0000")
 			{
-				//Debug.Log (i + "setting texture to top " +TopTexturePath);
 				myMat[i].mainTexture=TopTexture;
 			}
 			else
 			{
-				//Debug.Log (i + "setting texture to side " +SideTexturePath);
 				myMat[i].mainTexture=SideTexture;
 			}
-			//Debug.Log (myMat[i].name);
-			//myMat[i].mainTexture=newTex;
 		}
-		//Debug.Log ("alldone");
-
 	}
 
+	static void CreateElephantJorp(GameObject myObj)
+	{
+		loadGameObjectResourceAsModel(myObj,"Models/elephant");
+		/*GameObject myInstance = Resources.Load("Models/elephant") as GameObject;
+		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;*/
+	}
+
+	static void CreateForceBridge(GameObject myObj)
+	{
+		loadGameObjectResourceAsModel(myObj,"Models/force_bridge");
+		/*GameObject myInstance = Resources.Load("Models/force_bridge") as GameObject;
+		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;*/
+	}
+
+	static void CreateForceDoor(GameObject myObj)
+	{
+		loadGameObjectResourceAsModel(myObj,"Models/force_door");
+		/*GameObject myInstance = Resources.Load("Models/force_door") as GameObject;
+		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;*/
+	}
+
+	static void CreateGreatLord(GameObject myObj)
+	{
+		loadGameObjectResourceAsModel(myObj,"Models/GreatLordSnaq");
+		/*GameObject myInstance = Resources.Load("Models/GreatLordSnaq") as GameObject;
+		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;*/
+	}
+
+	static void loadGameObjectResourceAsModel(GameObject myObj, string path)
+	{
+		GameObject myInstance = Resources.Load(path) as GameObject;
+		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;
+	}
 
 	static void CreateShockDoor(GameObject myObj, int DoorKey, int Locked, int DoorSpriteIndex)
 	{
@@ -10299,9 +10344,13 @@ public class MyTools
 		Action_Message am = myObj.AddComponent<Action_Message>();
 	}
 
-	static void AddACTION_CHANGE_TYPE(GameObject myObj)
+	static void AddACTION_CHANGE_TYPE(GameObject myObj, string ObjectToChange, int ObjectClass, int ObjectSubClass, int SubClassIndex)
 	{
 		Action_Change_Type act = myObj.AddComponent<Action_Change_Type>();
+		act.ObjectClass=ObjectClass;
+		act.ObjectToChange=ObjectToChange;
+		act.SubClass=ObjectSubClass;
+		act.SubClassIndex=SubClassIndex;
 	}
 
 	static void AddACTION_EMAIL(GameObject myObj)

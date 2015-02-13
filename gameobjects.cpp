@@ -928,7 +928,8 @@ while (k<=chunkUnpackedLength)
 
 				fprintf(LOGFILE,"\t\tTrigger xref?:%d (%d)", xRef[crossref].MstIndex, crossref);
 				fprintf(LOGFILE,"\tMessage:%d", getValAtAddress(sub_ark, add_ptr + 8, 16));
-				fprintf(LOGFILE,"\tAccess Required:%d\n", getValAtAddress(sub_ark, add_ptr + 10, 8));
+				fprintf(LOGFILE,"\tAccess Required:%d", getValAtAddress(sub_ark, add_ptr + 0xA, 8));
+				fprintf(LOGFILE, "\tOther val:%d\n", getValAtAddress(sub_ark, add_ptr + 0xB, 16));
 				return 1;
 				break;
 				}
