@@ -1652,7 +1652,7 @@
 	myObj= CreateGameObject("NULL_TRIGGER_31_30_01_0708",37.779999f,0.600000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 0, 96);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("REPULSOR_31_30_01_0668",37.779999f,0.600000f,36.580002f);
@@ -2053,7 +2053,7 @@
 
 	myObj= CreateGameObject("ENTRY_TRIGGER_17_36_01_0498",21.000000f,2.400000f,43.799999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 65535, 88);
 	CreateEntry_Trigger(myObj, 22,1,17,144,112,0);
 	CreateCollider(myObj,1.20f,4.800000f,1.20f);
 
@@ -2545,13 +2545,13 @@
 	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0538",23.379999f,3.000000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 1, 2);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0537",23.379999f,3.000000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 1, 1);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj = new GameObject("CYBORG_ASSASSIN_20_42_01_0330");
@@ -2765,7 +2765,7 @@
 	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0563",25.780001f,3.450000f,54.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 0, 60);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0587",25.780001f,3.450000f,54.580002f);
@@ -2847,7 +2847,7 @@
 
 	myObj= CreateGameObject("ENTRY_TRIGGER_32_45_01_0184",39.000000f,2.400000f,54.599998f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 65535, 70);
 	CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
 	CreateCollider(myObj,1.20f,4.800000f,1.20f);
 
@@ -3038,7 +3038,7 @@
 
 	myObj= CreateGameObject("ENTRY_TRIGGER_37_49_01_0165",45.000000f,2.400000f,59.400002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
-	AddACTION_MESSAGE(myObj);
+	AddACTION_MESSAGE(myObj, 65535, 71);
 	CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
 	CreateCollider(myObj,1.20f,4.800000f,1.20f);
 

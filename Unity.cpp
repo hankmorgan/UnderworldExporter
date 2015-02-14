@@ -1072,7 +1072,9 @@ void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &cur
 			case ACTION_AWAKEN:
 				fprintf(UNITY_FILE, "\n\tAddACTION_AWAKEN(myObj);"); break;
 			case ACTION_MESSAGE:
-				fprintf(UNITY_FILE, "\n\tAddACTION_MESSAGE(myObj);"); break;
+				fprintf(UNITY_FILE, "\n\tAddACTION_MESSAGE(myObj, %d, %d);",
+					currobj.shockProperties[TRIG_PROPERTY_MESSAGE1], currobj.shockProperties[TRIG_PROPERTY_MESSAGE2]);
+				break;
 			case ACTION_SPAWN:
 				fprintf(UNITY_FILE, "\n\tAddACTION_SPAWN(myObj);"); break;
 			case ACTION_CHANGE_TYPE:
