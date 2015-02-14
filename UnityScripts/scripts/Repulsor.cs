@@ -10,11 +10,14 @@ public class Repulsor : MonoBehaviour {
 	public bool PlayerStillInside;
 	public Collider play;
 	public float TravelSpeed=1.0f;
-
+	public Vector3 StartPos;
+	public Vector3 EndPos ;
+	public float index;
 	// Use this for initialization
 	void Start () {
 		TargetPos = this.transform.position;
 		CalcTargetZ();
+		play = GameObject.Find ("Gronk").collider;
 	}
 	
 	// Update is called once per frame
@@ -22,8 +25,21 @@ public class Repulsor : MonoBehaviour {
 	if (PlayerStillInside==true)
 		{
 			PlayerStillInside=false;
-			OnTriggerEnter(play);
+			StartMove ();
 		}
+	}
+
+
+	void Activate()
+	{//Switches repulsor on/off 
+		RepulsorOn= !RepulsorOn;
+		if(PlayerInside==true)
+			{
+			//do something here to restart?
+			Debug.Log("Cancelling");
+			StopCoroutine("MovePlayer");
+			StartMove ();
+			}
 	}
 
 	private void CalcTargetZ()
@@ -42,15 +58,15 @@ public class Repulsor : MonoBehaviour {
 	//void MovePlayer(GameObject player)
 	IEnumerator MovePlayer(GameObject player, Vector3 dist, float traveltime)
 	{
-		Debug.Log ("Travel time is " + traveltime);
+		//Debug.Log ("Travel time is " + traveltime);
+
 		float rate = 1.0f/traveltime;
-		float index = 0.0f;
-		Vector3 StartPos = player.transform.position;
-		Vector3 EndPos = StartPos + dist;
-			//player.transform.position= TargetPos;
+		index = 0.0f;
+		StartPos = player.transform.position;
+		EndPos = StartPos + dist;
 		while (StartPos.y != EndPos.y)
 		{
-			if(PlayerInside==true)
+			if ((PlayerInside==true))
 			{
 				Vector3 nextPosition =  new Vector3(player.transform.position.x,Mathf.Lerp (StartPos.y,EndPos.y,index),player.transform.position.z);
 				player.transform.position=nextPosition;
@@ -72,17 +88,24 @@ public class Repulsor : MonoBehaviour {
 		}
 	}
 
+	void StartMove()
+	{
+		CalcTargetZ();
+		float traveltime =Mathf.Abs(play.transform.position.y - TargetPos.y) *  TravelSpeed;
+		if(RepulsorOn==false)
+		{
+			traveltime=traveltime*4;
+		}
+		StartCoroutine(MovePlayer (play.gameObject, TargetPos-play.transform.position, traveltime));
+	}
+
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.name=="Gronk")
 		{
-			play=other;
 			PlayerInside=true;
-			CalcTargetZ();
-			float traveltime =Mathf.Abs(other.transform.position.y - TargetPos.y) *  TravelSpeed;
-			//Debug.Log ("Starting to Move");
-			StartCoroutine(MovePlayer (other.gameObject, TargetPos-other.transform.position, traveltime));
-			//MovePlayer (other.gameObject);
+			//play=other;
+			StartMove ();
 		}
 	}
 

@@ -37,7 +37,7 @@ public class RemoteCameraCapture : MonoBehaviour {
 		//{
 		if (camEnabled==true)
 			{
-				camEnabled=false;//Limit capture to one time only for memory reasons.
+				//camEnabled=false;//Limit capture to one time only for memory reasons.
 			
 				FrameIntervalCounter++;
 				if (FrameIntervalCounter>=FrameInterval)

@@ -10,6 +10,7 @@ public class RemoteCamera : MonoBehaviour {
 	private int FrameIntervalCounter=30;
 	//public Texture2D RenderedImage;
 	public string Target;
+	private GameObject player;
 	Material[] myMat;
 
 	// Use this for initialization
@@ -25,12 +26,20 @@ public class RemoteCamera : MonoBehaviour {
 		}
 
 		myMat = ScreenToDisplayOn.renderer.materials;
+		player=GameObject.Find ("Gronk");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-
+		if (Vector3.Distance(player.transform.position,this.transform.position)<=3)
+		    {
+			cam.camEnabled=true;
+			}
+		else
+			{
+			cam.camEnabled=false;
+			}
+	
 		//Material[] myMat = ScreenToDisplayOn.renderer.materials;
 		//for (int i = 0; i<myMat.GetUpperBound(0);i++)
 		//{

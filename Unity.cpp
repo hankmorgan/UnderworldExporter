@@ -63,7 +63,7 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 		AddShockTriggerActions(game, x, y, z, currobj, objList, LevelInfo);
 		fprintf(UNITY_FILE, "\n\tCreateEntry_Trigger(myObj, %d,%d,%d,%d,%d,%d);"
 			, currobj.TriggerAction, currobj.TriggerOnce, currobj.conditions[0], currobj.conditions[1], currobj.conditions[2], currobj.conditions[3]);
-		fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.20f,%ff,1.20f);" , CEILING_HEIGHT * BrushSizeZ/100.0);
+		fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.15f,%ff,1.15f);" , CEILING_HEIGHT * BrushSizeZ/100.0);
 		}
 	switch (game)
 		{
@@ -1068,7 +1068,10 @@ void AddShockTriggerActions(int game, float x, float y, float z, ObjectItem &cur
 			case ACTION_RADAWAY:
 				fprintf(UNITY_FILE, "\n\tAddACTION_RADAWAY(myObj);"); break;
 			case ACTION_CHANGE_STATE:
-				fprintf(UNITY_FILE, "\n\tAddACTION_CHANGE_STATE(myObj);"); break;
+				fprintf(UNITY_FILE, "\n\tAddACTION_CHANGE_STATE(myObj, \"%s\", %d);"
+					, UniqueObjectName(objList[currobj.shockProperties[TRIG_PROPERTY_OBJECT]])
+					, currobj.shockProperties[TRIG_PROPERTY_TYPE]);
+				break;
 			case ACTION_AWAKEN:
 				fprintf(UNITY_FILE, "\n\tAddACTION_AWAKEN(myObj);"); break;
 			case ACTION_MESSAGE:
@@ -1117,8 +1120,28 @@ void RenderUnityEntityREPULSOR(int game, float x, float y, float z, ObjectItem &
 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	float displacement = currobj.shockProperties[TRIG_PROPERTY_VALUE];
+	if (displacement == 0)
+		{
+		displacement = CEILING_HEIGHT - LevelInfo[currobj.tileX][currobj.tileY].ceilingHeight - LevelInfo[currobj.tileX][currobj.tileY].floorHeight;
+		displacement = displacement/10 - (0.6);
+		}
+	else
+		{
+		displacement = displacement / (BrushSizeZ * 10);
+		}
 
-	}
+	if (currobj.shockProperties[TRIG_PROPERTY_FLAG] == 1)
+		{//repulsor is off
+		fprintf(UNITY_FILE, "\n\tCreateRepulsor(myObj,(float)%f,false", displacement);
+		}
+	else
+		{//repulsor is on.
+		fprintf(UNITY_FILE, "\n\tCreateRepulsor(myObj,(float)%f,true", displacement);
+		}
+	fprintf(UNITY_FILE, ",(float)0.0f,(float)%ff,(float)0.0f,(float)1.0f,(float)%ff,(float)1.0f);",displacement/2, displacement );
+
+ 	}
 
 void RenderUnityEntityCorpse(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{

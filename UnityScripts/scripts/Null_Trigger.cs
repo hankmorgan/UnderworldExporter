@@ -66,7 +66,7 @@ public class Null_Trigger : MonoBehaviour {
 			this.GetComponent<Action_Awaken>().PerformAction();
 			break;
 		case 22: //Action_Message
-			this.GetComponent<Action_Message>().PerformAction();
+			this.GetComponent<Action_Message>().PerformAction();//Either fail or success depending on conditions!
 			break;
 		case 23: //Action_Spawn
 			this.GetComponent<Action_Spawn>().PerformAction();

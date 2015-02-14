@@ -444,7 +444,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_14_01_0680", 0,"",0,"",0,"",0);
 	CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("CRATE_32_15_01_0468",39.107811f,3.787500f,18.820313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
@@ -588,7 +588,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_12_01_0163", 0,"",0,"",0,"",0);
 	CreateEntry_Trigger(myObj, 6,0,252,0,1,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0112",22.180000f,0.600000f,22.180000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -782,13 +782,13 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_SET_VARIABLE(myObj);
 	CreateEntry_Trigger(myObj, 4,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("ENTRY_TRIGGER_20_20_01_0502",24.600000f,2.400000f,24.600000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_EMAIL(myObj);
 	CreateEntry_Trigger(myObj, 15,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("DOOR_020_020",24.020000f,0.600000f,24.600000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
@@ -1102,7 +1102,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_24_01_0066", 0,"",0,"",0,"",0);
 	CreateEntry_Trigger(myObj, 6,0,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_28_24_01_0133",33.820313f,1.800000f,29.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
@@ -1286,7 +1286,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_47_25_01_0607", 0,"",0,"",0,"",0);
 	CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("NULL_TRIGGER_47_25_01_0607",56.980000f,1.800000f,30.580000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -1422,6 +1422,7 @@
 
 	myObj= CreateGameObject("REPULSOR_43_27_01_0366",52.180000f,1.050000f,32.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+	CreateRepulsor(myObj,(float)1.280000,true,(float)0.0f,(float)0.640000f,(float)0.0f,(float)1.0f,(float)1.280000f,(float)1.0f);
 
 	myObj= CreateGameObject("SIGHT_VISION_ENHANCEMENT_49_27_01_0394",59.695313f,3.750000f,33.070313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0203",true);
@@ -1485,7 +1486,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_CHOICE(myObj,"NULL_TRIGGER_30_28_01_0200", "NULL_TRIGGER_30_28_01_0027");
 	CreateEntry_Trigger(myObj, 12,0,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("HIDDEN_DOOR_037_028",45.595314f,1.200000f,34.200001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
@@ -1657,6 +1658,7 @@
 
 	myObj= CreateGameObject("REPULSOR_31_30_01_0668",37.779999f,0.600000f,36.580002f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+	CreateRepulsor(myObj,(float)0.960000,false,(float)0.0f,(float)0.480000f,(float)0.0f,(float)1.0f,(float)0.960000f,(float)1.0f);
 
 	myObj= CreateGameObject("SCREEN_31_30_01_0449",37.220001f,2.437500f,36.595314f);
 	CreateComputerScreen(myObj,81,4,1);
@@ -1668,7 +1670,7 @@
 	myObj= CreateGameObject("BUTTON_32_30_01_0529",38.545311f,3.187500f,36.020000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,19);
-	AddACTION_CHANGE_STATE(myObj);
+	AddACTION_CHANGE_STATE(myObj, "REPULSOR_31_30_01_0668", 1);
 	SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 
 	myObj= CreateGameObject("ACCESS_PANEL_32_30_01_0682",38.545311f,2.887500f,36.020000f);
@@ -1808,7 +1810,7 @@
 	myObj= CreateGameObject("BUTTON_33_31_01_0662",40.795311f,0.150000f,37.832813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 	CreateSHOCKActivators(myObj,19);
-	AddACTION_CHANGE_STATE(myObj);
+	AddACTION_CHANGE_STATE(myObj, "REPULSOR_31_30_01_0668", 1);
 	SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 
 	myObj= CreateGameObject("CONTROL_PEDESTAL_33_31_01_0582",40.180000f,0.000000f,37.779999f);
@@ -1824,7 +1826,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_CHOICE(myObj,"NULL_TRIGGER_39_31_01_0215", "NULL_TRIGGER_39_31_01_0214");
 	CreateEntry_Trigger(myObj, 12,0,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0215",47.380001f,1.800000f,37.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -2055,7 +2057,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_MESSAGE(myObj, 65535, 88);
 	CreateEntry_Trigger(myObj, 22,1,17,144,112,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("DESTROYED_DRONE_CYBORG_18_36_01_0501",22.180000f,1.650000f,43.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1494",true);
@@ -2147,7 +2149,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_38_39_01_0320", 0,"NULL_TRIGGER_38_39_01_0408", 0,"",0,"",0);
 	CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("ELEVATOR_PANEL_15_37_01_0030",18.020000f,1.912500f,44.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0983",false);
@@ -2175,7 +2177,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_EMAIL(myObj);
 	CreateEntry_Trigger(myObj, 15,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("WORDS_20_37_01_0715",25.082813f,3.337500f,44.419998f);
 	CreateWords(myObj, 92, 606, 4, 0);
@@ -2423,7 +2425,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_MOVING_PLATFORM(myObj, 33, 40, 0, -4063, 1);
 	CreateEntry_Trigger(myObj, 9,0,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj = new GameObject("CYBORG_ASSASSIN_37_40_01_0262");
 	pos = new Vector3(44.980000f, 1.593750f, 48.580002f);
@@ -2506,6 +2508,7 @@
 
 	myObj= CreateGameObject("REPULSOR_30_41_01_0055",36.580002f,1.800000f,49.779999f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+	CreateRepulsor(myObj,(float)1.000000,true,(float)0.0f,(float)0.500000f,(float)0.0f,(float)1.0f,(float)1.000000f,(float)1.0f);
 
 	myObj= CreateGameObject("FRAGMENTATION_GRENADE_47_41_01_0649",57.295311f,0.300000f,49.870312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
@@ -2568,6 +2571,7 @@
 
 	myObj= CreateGameObject("REPULSOR_26_42_01_0451",31.780001f,0.600000f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+	CreateRepulsor(myObj,(float)1.800000,true,(float)0.0f,(float)0.900000f,(float)0.0f,(float)1.0f,(float)1.800000f,(float)1.0f);
 
 	myObj= CreateGameObject("FRAGMENTATION_GRENADE_28_42_01_0693",34.345314f,2.550000f,51.182812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
@@ -2809,7 +2813,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_45_01_0563", 0,"NULL_TRIGGER_25_44_01_0556", 0,"NULL_TRIGGER_21_45_01_0587", 0,"",0);
 	CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("BUTTON_26_45_01_0593",31.945313f,0.731250f,55.195313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
@@ -2849,7 +2853,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_MESSAGE(myObj, 65535, 70);
 	CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("CAMERA_35_45_01_0430",43.157814f,3.318750f,54.032814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -2970,10 +2974,11 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_MOVING_PLATFORM(myObj, 29, 47, 4095, 8, 2);
 	CreateEntry_Trigger(myObj, 9,0,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("REPULSOR_35_47_01_0579",42.580002f,0.600000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+	CreateRepulsor(myObj,(float)1.900000,true,(float)0.0f,(float)0.950000f,(float)0.0f,(float)1.0f,(float)1.900000f,(float)1.0f);
 
 	myObj= CreateGameObject("COMPUTER_NODE_41_47_01_0166",49.779999f,0.150000f,56.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -3040,7 +3045,7 @@
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 	AddACTION_MESSAGE(myObj, 65535, 71);
 	CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
-	CreateCollider(myObj,1.20f,4.800000f,1.20f);
+	CreateCollider(myObj,1.15f,4.800000f,1.15f);
 
 	myObj= CreateGameObject("CAMERA_39_49_01_0428",47.995312f,1.181250f,59.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -3071,13 +3076,13 @@
 	myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0507",55.779999f,1.200000f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 19,0,33,16,4,0);
-	AddACTION_CHANGE_STATE(myObj);
+	AddACTION_CHANGE_STATE(myObj, "SCREEN_43_49_01_0238", 2);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0375",55.779999f,1.200000f,59.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 	CreateNull_Trigger(myObj, 19,0,33,16,4,0);
-	AddACTION_CHANGE_STATE(myObj);
+	AddACTION_CHANGE_STATE(myObj, "CONTROL_PEDESTAL_41_46_01_0167", 2);
 	SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 
 	myObj = new GameObject("CYBORG_DRONE_23_50_01_0361");

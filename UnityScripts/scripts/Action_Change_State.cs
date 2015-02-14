@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Action_Change_State : MonoBehaviour {
 
+	public string ObjectToActivate;
+	public int NewState;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,5 +18,14 @@ public class Action_Change_State : MonoBehaviour {
 	public void PerformAction()
 	{
 		Debug.Log ("Action Change State");
+		GameObject objToActivate = GameObject.Find (ObjectToActivate);
+		if (objToActivate!=null)
+		{
+			objToActivate.SendMessage("Activate");
+		}
+		else
+		{
+			Debug.Log (this.name + " could not find " + ObjectToActivate);
+		}
 	}
 }

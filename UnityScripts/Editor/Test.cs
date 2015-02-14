@@ -42,7 +42,8 @@ public class MyTools
 		////pos = new Vector3(37.885715f, 3.853347f, 1.200000f);
 		///myObj.transform.position = pos;
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
-
+		
+		
 		
 		GameObject myObj;
 		Vector3 pos;
@@ -489,7 +490,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_14_01_0680", 0,"",0,"",0,"",0);
 		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("CRATE_32_15_01_0468",39.107811f,3.787500f,18.820313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1400",true);
@@ -633,7 +634,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_17_12_01_0163", 0,"",0,"",0,"",0);
 		CreateEntry_Trigger(myObj, 6,0,252,0,1,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_18_18_01_0112",22.180000f,0.600000f,22.180000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -827,13 +828,13 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_SET_VARIABLE(myObj);
 		CreateEntry_Trigger(myObj, 4,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("ENTRY_TRIGGER_20_20_01_0502",24.600000f,2.400000f,24.600000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_EMAIL(myObj);
 		CreateEntry_Trigger(myObj, 15,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("DOOR_020_020",24.020000f,0.600000f,24.600000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1039",false);
@@ -1147,7 +1148,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_29_24_01_0066", 0,"",0,"",0,"",0);
 		CreateEntry_Trigger(myObj, 6,0,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("MEDIPATCH__HEALING_AGENT_28_24_01_0133",33.820313f,1.800000f,29.395313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0209",true);
@@ -1331,7 +1332,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_47_25_01_0607", 0,"",0,"",0,"",0);
 		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_47_25_01_0607",56.980000f,1.800000f,30.580000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -1467,6 +1468,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("REPULSOR_43_27_01_0366",52.180000f,1.050000f,32.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+		CreateRepulsor(myObj,(float)1.280000,true,(float)0.0f,(float)0.640000f,(float)0.0f,(float)1.0f,(float)1.280000f,(float)1.0f);
 		
 		myObj= CreateGameObject("SIGHT_VISION_ENHANCEMENT_49_27_01_0394",59.695313f,3.750000f,33.070313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0203",true);
@@ -1530,7 +1532,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_CHOICE(myObj,"NULL_TRIGGER_30_28_01_0200", "NULL_TRIGGER_30_28_01_0027");
 		CreateEntry_Trigger(myObj, 12,0,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("HIDDEN_DOOR_037_028",45.595314f,1.200000f,34.200001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1141",false);
@@ -1697,11 +1699,12 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_31_30_01_0708",37.779999f,0.600000f,36.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 0, 96);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("REPULSOR_31_30_01_0668",37.779999f,0.600000f,36.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+		CreateRepulsor(myObj,(float)0.960000,false,(float)0.0f,(float)0.480000f,(float)0.0f,(float)1.0f,(float)0.960000f,(float)1.0f);
 		
 		myObj= CreateGameObject("SCREEN_31_30_01_0449",37.220001f,2.437500f,36.595314f);
 		CreateComputerScreen(myObj,81,4,1);
@@ -1713,7 +1716,7 @@ public class MyTools
 		myObj= CreateGameObject("BUTTON_32_30_01_0529",38.545311f,3.187500f,36.020000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 		CreateSHOCKActivators(myObj,19);
-		AddACTION_CHANGE_STATE(myObj);
+		AddACTION_CHANGE_STATE(myObj, "REPULSOR_31_30_01_0668", 1);
 		SetRotation(myObj,(float)-0.000000,(float)180.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("ACCESS_PANEL_32_30_01_0682",38.545311f,2.887500f,36.020000f);
@@ -1853,7 +1856,7 @@ public class MyTools
 		myObj= CreateGameObject("BUTTON_33_31_01_0662",40.795311f,0.150000f,37.832813f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
 		CreateSHOCKActivators(myObj,19);
-		AddACTION_CHANGE_STATE(myObj);
+		AddACTION_CHANGE_STATE(myObj, "REPULSOR_31_30_01_0668", 1);
 		SetRotation(myObj,(float)-0.000000,(float)90.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("CONTROL_PEDESTAL_33_31_01_0582",40.180000f,0.000000f,37.779999f);
@@ -1869,7 +1872,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_CHOICE(myObj,"NULL_TRIGGER_39_31_01_0215", "NULL_TRIGGER_39_31_01_0214");
 		CreateEntry_Trigger(myObj, 12,0,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_39_31_01_0215",47.380001f,1.800000f,37.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -2098,9 +2101,9 @@ public class MyTools
 		
 		myObj= CreateGameObject("ENTRY_TRIGGER_17_36_01_0498",21.000000f,2.400000f,43.799999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 65535, 88);
 		CreateEntry_Trigger(myObj, 22,1,17,144,112,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("DESTROYED_DRONE_CYBORG_18_36_01_0501",22.180000f,1.650000f,43.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1494",true);
@@ -2192,7 +2195,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_38_39_01_0320", 0,"NULL_TRIGGER_38_39_01_0408", 0,"",0,"",0);
 		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("ELEVATOR_PANEL_15_37_01_0030",18.020000f,1.912500f,44.995312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0983",false);
@@ -2220,7 +2223,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_EMAIL(myObj);
 		CreateEntry_Trigger(myObj, 15,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("WORDS_20_37_01_0715",25.082813f,3.337500f,44.419998f);
 		CreateWords(myObj, 92, 606, 4, 0);
@@ -2468,7 +2471,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_MOVING_PLATFORM(myObj, 33, 40, 0, -4063, 1);
 		CreateEntry_Trigger(myObj, 9,0,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj = new GameObject("CYBORG_ASSASSIN_37_40_01_0262");
 		pos = new Vector3(44.980000f, 1.593750f, 48.580002f);
@@ -2551,6 +2554,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("REPULSOR_30_41_01_0055",36.580002f,1.800000f,49.779999f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+		CreateRepulsor(myObj,(float)1.000000,true,(float)0.0f,(float)0.500000f,(float)0.0f,(float)1.0f,(float)1.000000f,(float)1.0f);
 		
 		myObj= CreateGameObject("FRAGMENTATION_GRENADE_47_41_01_0649",57.295311f,0.300000f,49.870312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
@@ -2590,13 +2594,13 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0538",23.379999f,3.000000f,50.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 1, 2);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_19_42_01_0537",23.379999f,3.000000f,50.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 1, 1);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj = new GameObject("CYBORG_ASSASSIN_20_42_01_0330");
@@ -2613,6 +2617,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("REPULSOR_26_42_01_0451",31.780001f,0.600000f,50.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+		CreateRepulsor(myObj,(float)1.800000,true,(float)0.0f,(float)0.900000f,(float)0.0f,(float)1.0f,(float)1.800000f,(float)1.0f);
 		
 		myObj= CreateGameObject("FRAGMENTATION_GRENADE_28_42_01_0693",34.345314f,2.550000f,51.182812f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0177",true);
@@ -2810,7 +2815,7 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0563",25.780001f,3.450000f,54.580002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 22,0,0,0,0,0);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 0, 60);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_21_45_01_0587",25.780001f,3.450000f,54.580002f);
@@ -2854,7 +2859,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_ACTIVATE(myObj, "NULL_TRIGGER_21_45_01_0563", 0,"NULL_TRIGGER_25_44_01_0556", 0,"NULL_TRIGGER_21_45_01_0587", 0,"",0);
 		CreateEntry_Trigger(myObj, 6,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("BUTTON_26_45_01_0593",31.945313f,0.731250f,55.195313f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0889",false);
@@ -2892,9 +2897,9 @@ public class MyTools
 		
 		myObj= CreateGameObject("ENTRY_TRIGGER_32_45_01_0184",39.000000f,2.400000f,54.599998f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 65535, 70);
 		CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("CAMERA_35_45_01_0430",43.157814f,3.318750f,54.032814f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -3015,10 +3020,11 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
 		AddACTION_MOVING_PLATFORM(myObj, 29, 47, 4095, 8, 2);
 		CreateEntry_Trigger(myObj, 9,0,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("REPULSOR_35_47_01_0579",42.580002f,0.600000f,56.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1370",false);
+		CreateRepulsor(myObj,(float)1.900000,true,(float)0.0f,(float)0.950000f,(float)0.0f,(float)1.0f,(float)1.900000f,(float)1.0f);
 		
 		myObj= CreateGameObject("COMPUTER_NODE_41_47_01_0166",49.779999f,0.150000f,56.980000f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -3083,9 +3089,9 @@ public class MyTools
 		
 		myObj= CreateGameObject("ENTRY_TRIGGER_37_49_01_0165",45.000000f,2.400000f,59.400002f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1340",false);
-		AddACTION_MESSAGE(myObj);
+		AddACTION_MESSAGE(myObj, 65535, 71);
 		CreateEntry_Trigger(myObj, 22,1,0,0,0,0);
-		CreateCollider(myObj,1.20f,4.800000f,1.20f);
+		CreateCollider(myObj,1.15f,4.800000f,1.15f);
 		
 		myObj= CreateGameObject("CAMERA_39_49_01_0428",47.995312f,1.181250f,59.995312f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -3116,13 +3122,13 @@ public class MyTools
 		myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0507",55.779999f,1.200000f,59.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 19,0,33,16,4,0);
-		AddACTION_CHANGE_STATE(myObj);
+		AddACTION_CHANGE_STATE(myObj, "SCREEN_43_49_01_0238", 2);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj= CreateGameObject("NULL_TRIGGER_46_49_01_0375",55.779999f,1.200000f,59.380001f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
 		CreateNull_Trigger(myObj, 19,0,33,16,4,0);
-		AddACTION_CHANGE_STATE(myObj);
+		AddACTION_CHANGE_STATE(myObj, "CONTROL_PEDESTAL_41_46_01_0167", 2);
 		SetRotation(myObj,(float)-0.000000,(float)0.000000,(float)0.000000);
 		
 		myObj = new GameObject("CYBORG_DRONE_23_50_01_0361");
@@ -3225,7 +3231,16 @@ public class MyTools
 		myObj= CreateGameObject("CHEMICAL_TANK_32_54_01_0630",38.845314f,0.393750f,65.432816f);
 		CreateObjectGraphics(myObj,"Sprites/objects_1350_1413",true);
 
+		
 
+
+
+
+	
+
+
+
+		
 
 
 
@@ -9533,7 +9548,7 @@ public class MyTools
 
 		BoxCollider box= Button.AddComponent<BoxCollider>();
 		box.transform.position = myObj.transform.position;
-		box.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+		box.size = new Vector3(0.3f, 0.3f, 0.05f);
 		box.isTrigger=true;
 	}
 
@@ -10169,7 +10184,18 @@ public class MyTools
 		box.transform.localScale = new Vector3(x, y, z);
 		box.isTrigger=isTrigger;
 	}
-	
+
+
+	static void CreateCollider(GameObject myObj, float posX, float posY, float posZ, float dimX, float dimY, float dimZ, bool isTrigger)
+	{
+		BoxCollider box=myObj.AddComponent<BoxCollider>();
+		box.center = new Vector3 (posX,posY,posZ);
+		box.size= new Vector3(dimX, dimY, dimZ);
+		//box.transform.position = new Vector3 (posX,posY,posZ);
+		//box.transform.localScale = new Vector3(dimX, dimY, dimZ);
+		box.isTrigger=isTrigger;
+	}
+
 	static void CreateColliderChild(GameObject myObj, float x, float y, float z, bool isTrigger)
 	{
 		GameObject MyObjChild = new GameObject(myObj.name + "_collider");
@@ -10329,9 +10355,11 @@ public class MyTools
 		Action_Set_Variable SV = myObj.AddComponent<Action_Set_Variable>();
 	}
 
-	static void AddACTION_CHANGE_STATE(GameObject myObj)
+	static void AddACTION_CHANGE_STATE(GameObject myObj,string ObjectToActivate, int NewState)
 	{
 		Action_Change_State ac = myObj.AddComponent<Action_Change_State>();
+		ac.ObjectToActivate=ObjectToActivate;
+		ac.NewState=NewState;
 	}
 
 	static void AddACTION_SPAWN(GameObject myObj)
@@ -10339,9 +10367,13 @@ public class MyTools
 		Action_Spawn acp = myObj.AddComponent<Action_Spawn>();
 	}
 
-	static void AddACTION_MESSAGE(GameObject myObj)
+	static void AddACTION_MESSAGE(GameObject myObj, int SuccessMessage, int FailMessage)
 	{
 		Action_Message am = myObj.AddComponent<Action_Message>();
+		am.SuccessMessage=SuccessMessage;
+		am.FailMessage=FailMessage;
+		AudioSource aus = myObj.AddComponent<AudioSource>();
+		aus.playOnAwake=false;
 	}
 
 	static void AddACTION_CHANGE_TYPE(GameObject myObj, string ObjectToChange, int ObjectClass, int ObjectSubClass, int SubClassIndex)
@@ -10433,4 +10465,15 @@ public class MyTools
 		wd.colour=colour;
 		wd.BlockNo=2152;
 		}
+
+	static void CreateRepulsor(GameObject myObj,float displacement, bool isOn, float posX, float posY, float posZ, float dimX, float dimY, float dimZ)
+	{
+		//GameObject MyObjChild = new GameObject(myObj.name + "_repulsor");
+		//MyObjChild.transform.position = myObj.transform.position;
+		//MyObjChild.transform.parent = myObj.transform;
+		Repulsor rp = myObj.AddComponent<Repulsor>();
+		rp.TargetHeight=displacement;
+		rp.RepulsorOn=isOn;
+		CreateCollider (myObj,posX,posY,posZ,dimX,dimY,dimZ,true);
+	}
 }

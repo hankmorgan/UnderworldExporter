@@ -962,7 +962,11 @@ while (k<=chunkUnpackedLength)
 							fprintf(LOGFILE,"\tRepulsor is on (%d)\n", objList[objIndex].shockProperties[TRIG_PROPERTY_FLAG]);
 							}
 						}
-				getShockTriggerAction(LevelInfo,sub_ark,add_ptr,xRef,objList,objIndex);
+					else
+						{
+						getShockTriggerAction(LevelInfo, sub_ark, add_ptr, xRef, objList, objIndex);
+						}
+				
 
 				return 1;
 				break;
@@ -1343,6 +1347,10 @@ switch (TriggerType)
 		if (PrintDebug==1)
 			{
 			fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
+			objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 12, 16);
+			objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 16, 16);
+			fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
+			fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
 			DebugPrintTriggerVals(sub_ark, add_ptr, 28);
 			//fprintf(LOGFILE,"\t\tOther values 1:%d\n",getValAtAddress(sub_ark,add_ptr+12,16));
 			//fprintf(LOGFILE,"\t\tOther values 2:%d\n",getValAtAddress(sub_ark,add_ptr+14,16));
@@ -1604,7 +1612,20 @@ if (objList[objIndex].ObjectSubClass ==0)
 				fprintf(LOGFILE,"Switch:Action_Change_Type\n");
 				objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 0x0C, 16);
 				objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 0x10, 8);
-				}
+				fprintf(LOGFILE, "\t\tObject to change:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
+				fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
+				break;
+			    }
+		case ACTION_CHANGE_STATE:
+			{
+			fprintf(LOGFILE, "Switch:Action_Change_State\n");
+			objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE] = getValAtAddress(sub_ark, add_ptr + 12, 16);
+			objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT] = getValAtAddress(sub_ark, add_ptr + 16, 16);
+			fprintf(LOGFILE, "\t\tObject to activate:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_OBJECT]);
+			fprintf(LOGFILE, "\t\tNew type:%d\n", objList[objIndex].shockProperties[TRIG_PROPERTY_TYPE]);
+			DebugPrintTriggerVals(sub_ark, add_ptr, 30);
+			break;
+			}
 		default:	
 				{
 				fprintf(LOGFILE,"Switch:Default\n");
