@@ -894,7 +894,7 @@ int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
 
 char line[255];
 textureMasters =new texture[340];
-objectMasters=new objectMaster[1025];
+objectMasters=new objectMaster[500];
 switch (game)
 	{
 	case UWDEMO:

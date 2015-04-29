@@ -757,18 +757,23 @@ void RenderUnityEntityBOOK(int game, float x, float y, float z, short message, O
 	//currobj.link -200 = pointer to the readable string block in UW
 	//heading
 	int ReadableIndex;
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+
 	switch (game)
 		{
 			case SHOCK:
 				ReadableIndex = currobj.shockProperties[SOFT_PROPERTY_LOG];	//currobj.Property1;	//The chunk that the text comes from.
+				fprintf(UNITY_FILE, "\n\tCreateEmail(myObj,%d);", ReadableIndex);
 				break;
 			default:
 				ReadableIndex = currobj.link - 0x200;
 				break;
 		}
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+
+		
+
 	if (message == 1)//atdm:readable_mobile_scroll01
 		{//This is a hidden email OR MESSAGE
 		//fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:readable_mobile_scroll01");

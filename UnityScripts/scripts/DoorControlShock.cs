@@ -25,7 +25,7 @@ public class DoorControlShock : MonoBehaviour {
 				setSprite (NoOfFrames-1);
 			}
 		}
-
+		locked=false;
 	}
 
 	void setSprite(int index)
@@ -55,7 +55,6 @@ public class DoorControlShock : MonoBehaviour {
 
 	void OnMouseDown()
 	{
-		//Debug.Log (this.name + " touched");
 		if (locked==false)
 		{//Toggle Open and closed
 			if (state==false)

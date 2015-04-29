@@ -81,6 +81,7 @@
 	myObj= CreateGameObject("EMAIL_04_04_01_0321",5.395312f,0.093750f,5.770312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2509);
 
 	myObj= CreateGameObject("SV_NEEDLE_DARTS_04_04_01_0018",5.380000f,0.093750f,5.380000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0055",true);
@@ -288,6 +289,7 @@
 	myObj= CreateGameObject("EMAIL_38_11_01_0319",46.180000f,1.293750f,13.780000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2508);
 
 	myObj= CreateGameObject("NULL_TRIGGER_17_12_01_0163",20.980000f,1.800000f,14.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_1343",false);
@@ -421,6 +423,7 @@
 	myObj= CreateGameObject("EMAIL_40_14_01_0318",48.220314f,1.293750f,17.732813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2507);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_40_14_01_0283",48.257813f,1.556250f,17.282812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
@@ -543,6 +546,7 @@
 	myObj= CreateGameObject("EMAIL_29_17_01_0462",35.807812f,1.293750f,20.882813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2519);
 
 	myObj= CreateGameObject("GRASS_29_17_01_0080",35.380001f,1.575000f,20.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0495",true);
@@ -710,6 +714,7 @@
 	myObj= CreateGameObject("EMAIL_20_19_01_0485",24.257813f,0.693750f,23.357813f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2504);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_20_19_01_0484",24.895313f,0.956250f,23.432812f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
@@ -950,6 +955,7 @@
 	myObj= CreateGameObject("EMAIL_11_22_01_0315",13.532812f,1.293750f,27.295313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2505);
 
 	myObj= CreateGameObject("SEVERED_HEAD_15_22_01_0458",18.557812f,3.225000f,26.770313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0724",true);
@@ -994,6 +1000,7 @@
 	myObj= CreateGameObject("EMAIL_33_22_01_0454",39.895313f,1.293750f,26.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2518);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_33_22_01_0453",40.180000f,1.575000f,26.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
@@ -1144,6 +1151,7 @@
 	myObj= CreateGameObject("EMAIL_38_24_01_0460",46.157814f,1.293750f,29.995312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2516);
 
 	myObj= CreateGameObject("SCREEN_40_24_01_0128",48.020000f,1.631250f,29.395313f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",false);
@@ -1379,6 +1387,7 @@
 	myObj= CreateGameObject("EMAIL_12_27_01_0474",14.420000f,1.893750f,32.732811f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2517);
 
 	myObj= CreateGameObject("CAMERA_20_27_01_0413",24.020000f,2.193750f,33.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -1545,6 +1554,7 @@
 	myObj= CreateGameObject("EMAIL_12_29_01_0399",15.257813f,1.293750f,35.095314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2511);
 
 	myObj= CreateGameObject("SEVERED_LIMB_13_29_01_0491",16.345312f,1.500000f,35.620312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0720",true);
@@ -1597,6 +1607,7 @@
 	myObj= CreateGameObject("EMAIL_51_29_01_0465",61.779999f,3.693750f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2512);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_52_29_01_0511",62.980000f,3.975000f,35.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0672",true);
@@ -2166,6 +2177,7 @@
 	myObj= CreateGameObject("EMAIL_18_37_01_0021",21.782812f,1.293750f,44.545311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2514);
 
 	myObj= CreateGameObject("LARGE_BUTTON_18_37_01_0016",22.195313f,1.818750f,45.595314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0905",false);
@@ -2289,6 +2301,7 @@
 	myObj= CreateGameObject("EMAIL_35_39_01_0317",42.580002f,4.200000f,47.380001f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2510);
 
 	myObj= CreateGameObject("TESTTUBE_RACK_36_39_01_0616",43.532814f,4.200000f,47.282814f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -2517,6 +2530,7 @@
 	myObj= CreateGameObject("EMAIL_16_42_01_0316",19.780001f,2.493750f,50.980000f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2506);
 
 	myObj= CreateGameObject("CAMERA_16_42_01_0424",19.495312f,3.375000f,50.620312f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0000",true);
@@ -2888,6 +2902,7 @@
 	myObj= CreateGameObject("EMAIL_18_46_01_0505",21.782812f,2.493750f,55.720314f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0281",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"guis/assets/hud/inventory_icons/NOTHING.tga",13,105, 0);
+	CreateEmail(myObj,2513);
 
 	myObj= CreateGameObject("HUMAN_CORPSE_18_46_01_0504",22.757813f,2.756250f,55.795311f);
 	CreateObjectGraphics(myObj,"Sprites/objects_1350_0632",true);
