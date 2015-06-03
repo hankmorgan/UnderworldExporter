@@ -5,6 +5,7 @@ using System.Collections;
 The basic character. Stats and interaction.
  */ 
 public class UWCharacter : MonoBehaviour {
+	public int game;
 	//What mode are we in and various ranges
 	public static int InteractionMode;
 	public float weaponRange=1.0f;
@@ -85,7 +86,10 @@ public class UWCharacter : MonoBehaviour {
 		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
 		//Rect Position = new Rect(Event.current.mousePosition.x-cursorSizeX/2,Event.current.mousePosition.y-cursorSizeY/2,cursorSizeX,cursorSizeY);
 		//GUI.DrawTexture (Position,CursorIcon);
-
+		if (game==2)
+			{
+			InteractionMode=2;
+			}
 	}
 
 	// Update is called once per frame
@@ -202,6 +206,10 @@ public class UWCharacter : MonoBehaviour {
 						CurrObjectSprite=objPicked.InventoryString;
 						pInv.ObjectInHand=hit.transform.name;
 						pInv.JustPickedup=true;//To stop me throwing it away immediately.
+						if (objPicked.rigidbody !=null)
+							{
+								objPicked.rigidbody.useGravity=false;
+							}
 						objPicked.transform.position = InvMarker.transform.position;
 					}
 				}

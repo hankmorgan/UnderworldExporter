@@ -64,7 +64,7 @@ public class WindowDetect : MonoBehaviour {
 		/*
 		 * Cursor Click on main view area
 		 */
-		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
+		Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
 		switch (UWCharacter.InteractionMode)
 		{
 		case 0://Options mode
@@ -136,18 +136,22 @@ void ThrowObjectInHand()
 				//Determine what is directly in front of the player via a raycast
 				//If something is in the way then cancel the drop
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
 				RaycastHit hit = new RaycastHit(); 
 				float dropRange=0.5f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the drop
 					//Calculate the force based on how high the mouse is
 					float force = Input.mousePosition.x/Camera.main.pixelHeight *200;
-					Debug.Log ("throw force is " + force);
+//					Debug.Log ("throw force is " + force);
 					//Get the object being dropped and moved towards the end of the ray
 					GameObject droppedItem = GameObject.Find(pInv.ObjectInHand);
 					droppedItem.transform.parent=null;
+					Debug.Log ("drop point is " + ray.GetPoint(dropRange-0.1f));
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
+					droppedItem.rigidbody.useGravity=true;
 					Vector3 ThrowDir = ray.GetPoint(dropRange) - pInv.transform.position;
+					//Debug.Log ("throw dir is " + ThrowDir);
 					//Apply the force along the direction.
 					droppedItem.rigidbody.AddForce(ThrowDir*force);
 					//Clear the object and reset the cursor

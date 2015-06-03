@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PlayerInventory : MonoBehaviour {
@@ -16,7 +16,7 @@ public class PlayerInventory : MonoBehaviour {
 	//private GameObject LeftShoulder;
 	//private GameObject RightShoulder;
 	//private GameObject[] BackPack= new GameObject[8];
-
+	public int game;
 	public string ObjectInHand; //What is the current active object held by the player
 	public bool JustPickedup; //Has the player just picked something up.
 	//The game object name of the item.
@@ -86,6 +86,33 @@ public class PlayerInventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		switch (game)
+		{
+
+		case 2:
+			{
+			UpdateShock();
+				break;
+			}
+		default:
+			{
+			UpdateUW();
+			break;
+			}
+		}
+
+	}
+
+	void UpdateShock()
+	{
+		return;
+	}
+
+
+
+	void UpdateUW()
+	{
 		if (playerUW.isFemale==true)
 		{//female
 			DisplayGameObject (sHelm,Helm_f_Slot,true,ref bHelm);
@@ -102,20 +129,23 @@ public class PlayerInventory : MonoBehaviour {
 			DisplayGameObject (sBoots,Boots_m_Slot,true,ref bBoots);
 			DisplayGameObject (sGloves,Gloves_m_Slot,true,ref bGloves);
 		}
-
+		
 		DisplayGameObject(sLeftShoulder,LeftShoulder_Slot,false,ref bLeftShoulder);
 		DisplayGameObject(sRightShoulder,RightShoulder_Slot,false,ref bRightShoulder);
 		DisplayGameObject(sLeftRing,LeftRing_Slot,false,ref bLeftRing);
 		DisplayGameObject(sRightRing,RightRing_Slot,false,ref bRightRing);
-
+		
 		DisplayGameObject(sLeftHand,LeftHand_Slot,false,ref bLeftHand);
 		DisplayGameObject(sRightHand,RightHand_Slot,false,ref bRightHand);
-
+		
 		for (int i = 0 ; i < 8; i++)
 		{
 			DisplayGameObject (sBackPack[i],BackPack_Slot[i],false,ref bBackPack[i]);
 		}
+		return;
 	}
+
+
 
 	void DisplayGameObject(string objName, UISprite Label, bool isEquipped, ref bool hasChanged)
 	{
