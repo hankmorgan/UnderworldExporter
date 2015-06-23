@@ -37,3 +37,6 @@ Just uncomment out the function calls in main.cpp to try these out. Strings are 
 Some known Issues.
 -A lot of objects are place holders.
 -UW object origin is different from darkmod origin so there may be some weirdmisalignments.
+
+
+Not using DarkMod any more!!
