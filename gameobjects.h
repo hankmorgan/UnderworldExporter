@@ -429,5 +429,5 @@ void SetDeathWatch(ObjectItem objList[1600]);
 void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
-
+void DumpObjectCombinations(char *filePath, int game);
 #endif /*gameobjects_h*/

@@ -132,7 +132,7 @@ public class Container : MonoBehaviour {
 		switch (slotIndex)
 		{
 		case 0://Helm
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sHelm,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sHelm,slotIndex) == false)
 			{
 				pInv.bHelm=true;
 				ExistingObject=pInv.sHelm;
@@ -144,7 +144,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 1://Chest
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sChest,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sChest,slotIndex) == false)
 			{
 				pInv.bChest=true;
 				ExistingObject=pInv.sChest;
@@ -156,7 +156,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 2://Leggings
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sLegs,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLegs,slotIndex) == false)
 			{
 				pInv.bLegs=true;
 				ExistingObject=pInv.sLegs;
@@ -168,7 +168,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 3://Boots
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sBoots,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sBoots,slotIndex) == false)
 			{
 				pInv.bBoots=true;
 				ExistingObject=pInv.sBoots;
@@ -180,7 +180,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 4://Gloves
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sGloves,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sGloves,slotIndex) == false)
 			{
 				pInv.bGloves=true;
 				ExistingObject=pInv.sGloves;
@@ -192,7 +192,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 5://ShoulderRight
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sRightShoulder,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sRightShoulder,slotIndex) == false)
 			{
 				pInv.bRightShoulder=true;
 				ExistingObject=pInv.sRightShoulder;
@@ -204,7 +204,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 6://ShoulderLeft
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sLeftShoulder,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLeftShoulder,slotIndex) == false)
 			{
 				pInv.bLeftShoulder=true;
 				ExistingObject=pInv.sLeftShoulder;
@@ -216,7 +216,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 7://HandRight
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sRightHand,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sRightHand,slotIndex) == false)
 			{
 				pInv.bRightHand=true;
 				ExistingObject=pInv.sRightHand;
@@ -228,7 +228,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 8://HandLeft
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sLeftHand,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLeftHand,slotIndex) == false)
 			{
 				pInv.bLeftHand=true;
 				ExistingObject=pInv.sLeftHand;
@@ -240,7 +240,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 9://RingRight
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sRightRing,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sRightRing,slotIndex) == false)
 			{
 				pInv.bRightRing=true;
 				ExistingObject=pInv.sRightRing;
@@ -252,7 +252,7 @@ public class Container : MonoBehaviour {
 			}
 			break;
 		case 10://RingLeft
-			if (pInv.InteractTwoObjects (sObjectInHand,pInv.sLeftRing,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLeftRing,slotIndex) == false)
 			{
 				pInv.bLeftRing=true;
 				ExistingObject=pInv.sLeftRing;
@@ -266,7 +266,7 @@ public class Container : MonoBehaviour {
 		default://Inventory Slots 0-7	
 			if ((slotIndex>=11)&&(slotIndex<=18))
 			{
-				if (pInv.InteractTwoObjects (sObjectInHand,pInv.sBackPack[slotIndex-11],slotIndex)==false)
+				if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sBackPack[slotIndex-11],slotIndex)==false)
 				{
 					pInv.bBackPack[slotIndex-11]=true;
 					ExistingObject=pInv.sBackPack[slotIndex-11];

@@ -158,7 +158,8 @@ public class UWCharacter : MonoBehaviour {
 				if (objPicked!=null)
 				{
 					Debug.Log("USERMODE:Activating objectinteraction "+ hit.transform.name);
-					ObjectInteraction.Activate (objPicked);
+					objPicked.Activate();
+					//ObjectInteraction.Activate (objPicked);
 					//MessageLog.text = "You use a " + hit.transform.name;
 				}
 				//Activates switches.

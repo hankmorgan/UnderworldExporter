@@ -62,6 +62,7 @@ public class InventorySlot : MonoBehaviour {
 
 	void PickupFromSlot()
 	{
+		Debug.Log ("PickupfromSlot");
 		pInv = player.GetComponent<PlayerInventory>();
 		Container SubContainer;
 		string sNewObj;
@@ -122,8 +123,13 @@ public class InventorySlot : MonoBehaviour {
 
 
 
+
+
+
+
 	void UseFromSlot()
 	{
+		Debug.Log ("UseFromSlot");
 		pInv = player.GetComponent<PlayerInventory>();
 		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
 		if (ObjectName !="")
@@ -131,6 +137,7 @@ public class InventorySlot : MonoBehaviour {
 			GameObject currObj = GameObject.Find (ObjectName);
 			Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
+			//TODO move this code to objinteract.activate()
 			if (currObjInt.isContainer)
 			{//Use a container
 				if (pInv.ObjectInHand == "")
@@ -139,7 +146,8 @@ public class InventorySlot : MonoBehaviour {
 				}
 				else
 				{
-					pInv.InteractTwoObjects(pInv.ObjectInHand,ObjectName,slotIndex);
+					currObjInt.Activate();
+					//pInv.InteractTwoObjects(pInv.ObjectInHand,ObjectName,slotIndex);
 				}
 				return;
 			}
@@ -232,8 +240,30 @@ public class InventorySlot : MonoBehaviour {
 					PickupFromSlot();
 					}
 				else
-					{
-					UseFromSlot();
+					{//There is an object in that slot.
+					GameObject ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+					if (ObjectUsedOn !=null)
+						{
+						if (ObjectUsedOn.GetComponent<ObjectInteraction>() != null)	
+							{
+							if (ObjectUsedOn.GetComponent<ObjectInteraction>().Activate()==false)
+								{
+								//No effect occurred. Swap the two objects.
+								Debug.Log("Swapping (no effect 1)" + ObjectUsedOn.name + " with " + pInv.ObjectInHand);
+								pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
+								pInv.ObjectInHand= ObjectUsedOn.name;
+								playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+								playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+								}
+							}
+						else
+							{
+							//No effect occurred. Swap the two objects. (should not happen?)
+							Debug.Log("Swapping (no effect 2)" + ObjectUsedOn.name + " with " + pInv.ObjectInHand);
+							}
+						}
+					//pInv.InteractTwoObjects(pInv.ObjectInHand,pInv.GetObjectAtSlot(slotIndex),slotIndex);
+					//UseFromSlot();
 					}
 					
 				}
@@ -330,4 +360,51 @@ public class InventorySlot : MonoBehaviour {
 
 //		MessageLog.text=  name + "clicked";
 //	}
+
+	public static bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
+	{//How slots act when objects are used on them.
+		PlayerInventory pinv = playerUW.gameObject.GetComponent<PlayerInventory>();
+		Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
+		//returns true if they have an effect on each other.
+		if ((sObjectInHand !="") && (sObjectUsedOn !=""))
+		{//Object is being used on something.
+			GameObject objInHand= GameObject.Find (sObjectInHand);
+			GameObject objUseOn = GameObject.Find (sObjectUsedOn);
+			if(objUseOn.GetComponent<ObjectInteraction>() ==null)
+			{//Object has no interaction component.
+				pinv.ObjectInHand="";
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.CurrObjectSprite = "";
+				return false;
+			}
+			else
+			{//Object has an interaction. activate it.
+				return objUseOn.GetComponent<ObjectInteraction>().Activate();
+
+			}
+		}
+		else
+		{//Object is just being placed in a slot. 
+			if (sObjectInHand!="")
+			{
+				GameObject objInHand= GameObject.Find (sObjectInHand);
+				//Container subContainer = objUseOn.GetComponent<Container>();
+				if (objInHand.GetComponent<ObjectInteraction>().isContainer)
+				{
+					//PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+					Container subContainer=objInHand.GetComponent<Container>();
+					if (slotIndex >=11)
+					{//Object is being added to a bag container
+						subContainer.ContainerParent=pinv.currentContainer;
+					}
+					else
+					{//object is being added to an equipment slot
+						subContainer.ContainerParent="Gronk";
+					}
+					
+				}
+			}
+			return false;
+		}
+	}
 }

@@ -113,7 +113,7 @@ extern int CEILING_HEIGHT;
 #define UNITY_MODE 12
 #define UNITY_TILEMAP_MODE 13
 #define FONT_EXTRACT_MODE 14
-
+#define COMBINATION_EXTRACT_MODE 15
 
 //UW2 Ark block numbers
 #define UW2_OFFSET_BLOCK 0

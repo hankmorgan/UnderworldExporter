@@ -120,7 +120,11 @@ void UseObjectInHand()
 			if (Physics.Raycast(ray,out hit,playerUW.useRange))
 			{
 				Debug.Log ("Use Object In Hand :" + pInv.ObjectInHand + " on " + hit.transform.gameObject.name);
-				pInv.InteractTwoObjects(pInv.ObjectInHand,hit.transform.gameObject.name,-1);
+				//pInv.InteractTwoObjects(pInv.ObjectInHand,hit.transform.gameObject.name,-1);
+				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
+				{
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Activate();
+				}
 			}
 		}
 	}

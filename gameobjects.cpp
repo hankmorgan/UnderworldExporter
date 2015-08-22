@@ -2037,3 +2037,41 @@ void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600],int LevelNo)
 //		}
 //	}
 }
+
+void DumpObjectCombinations(char *filePath, int game)
+	{
+	FILE *file = NULL;      // File pointer
+	unsigned char *cmb_dat;
+	long fileSize;
+
+	if ((file = fopen(filePath, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "Could not open specified file\n");
+		return;
+		}
+	fileSize = getFileSize(file);
+	cmb_dat = new unsigned char[fileSize];
+	fread(cmb_dat, fileSize, 1, file);
+	fclose (file);
+	int addressPtr=0;
+	for (int i = 0; i < fileSize / 6; i++)
+		{
+		int Object1 = getValAtAddress(cmb_dat,addressPtr, 16) & 0x1FF;
+		int Object1Destroyed = (getValAtAddress(cmb_dat, addressPtr, 16) & 0x8000)>>15;
+		int Object2 = getValAtAddress(cmb_dat, addressPtr + 2, 16) & 0x1FF;
+		int Object2Destroyed = (getValAtAddress(cmb_dat, addressPtr + 2, 16) & 0x8000)>>15;
+		int ObjectOut = getValAtAddress(cmb_dat, addressPtr + 4, 16) & 0x1FF;
+		if (Object1 < 511)
+			{
+			printf("%d. %s(%d)(d:%d) + %s(%d)(d:%d) = %s(%d)\n", 
+				i, 
+				objectMasters[Object1].desc, Object1, Object1Destroyed,
+				objectMasters[Object2].desc, Object2, Object2Destroyed,
+				objectMasters[ObjectOut].desc, ObjectOut);
+
+			}
+
+		addressPtr = addressPtr + 6;
+		}
+	}
+

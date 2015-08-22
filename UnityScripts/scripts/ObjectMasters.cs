@@ -62,7 +62,7 @@ public class ObjectMasters : MonoBehaviour {
 					string[] entries = line.Split(' ');
 					if (entries.Length > 0)
 					{
-						Debug.Log(line);
+						//Debug.Log(line);
 						index[i] = int.Parse(entries[0]);
 						objClass[i]= int.Parse(entries[1]);	//For Shock
 						objSubClass[i]= int.Parse(entries[2]);

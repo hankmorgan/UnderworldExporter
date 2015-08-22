@@ -188,10 +188,11 @@ public class PlayerInventory : MonoBehaviour {
 		//if(ObjectInHand!=null)
 		//{Debug.Log (ObjectInHand.name);
 			//Debug.Log ("Object found");
+		Debug.Log("ObjectPickedUP");
 			switch (slotIndex)
 			{
 		case 0://Helm
-			if (InteractTwoObjects (sObjectInHand,sHelm,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sHelm,slotIndex) == false)
 			{
 				bHelm=true;
 				ExistingObject=sHelm;
@@ -203,7 +204,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 1://Chest
-			if (InteractTwoObjects (sObjectInHand,sChest,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sChest,slotIndex) == false)
 			{
 				bChest=true;
 				ExistingObject=sChest;
@@ -215,7 +216,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 2://Leggings
-			if (InteractTwoObjects (sObjectInHand,sLegs,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLegs,slotIndex) == false)
 			{
 				bLegs=true;
 				ExistingObject=sLegs;
@@ -227,7 +228,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 3://Boots
-			if (InteractTwoObjects (sObjectInHand,sBoots,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sBoots,slotIndex) == false)
 			{
 				bBoots=true;
 				ExistingObject=sBoots;
@@ -239,7 +240,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 4://Gloves
-			if (InteractTwoObjects (sObjectInHand,sGloves,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sGloves,slotIndex) == false)
 			{
 				bGloves=true;
 				ExistingObject=sGloves;
@@ -251,7 +252,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 5://ShoulderRight
-			if (InteractTwoObjects (sObjectInHand,sRightShoulder,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sRightShoulder,slotIndex) == false)
 			{
 				bRightShoulder=true;
 				ExistingObject=sRightShoulder;
@@ -263,7 +264,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 6://ShoulderLeft
-			if (InteractTwoObjects (sObjectInHand,sLeftShoulder,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLeftShoulder,slotIndex) == false)
 			{
 				bLeftShoulder=true;
 				ExistingObject=sLeftShoulder;
@@ -275,7 +276,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 7://HandRight
-			if (InteractTwoObjects (sObjectInHand,sRightHand,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sRightHand,slotIndex) == false)
 			{
 				bRightHand=true;
 				ExistingObject=sRightHand;
@@ -287,7 +288,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 8://HandLeft
-			if (InteractTwoObjects (sObjectInHand,sLeftHand,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLeftHand,slotIndex) == false)
 			{
 				bLeftHand=true;
 				ExistingObject=sLeftHand;
@@ -299,7 +300,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 9://RingRight
-			if (InteractTwoObjects (sObjectInHand,sRightRing,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sRightRing,slotIndex) == false)
 			{
 				bRightRing=true;
 				ExistingObject=sRightRing;
@@ -311,7 +312,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			break;
 		case 10://RingLeft
-			if (InteractTwoObjects (sObjectInHand,sLeftRing,slotIndex) == false)
+			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLeftRing,slotIndex) == false)
 			{
 				bLeftRing=true;
 				ExistingObject=sLeftRing;
@@ -325,7 +326,7 @@ public class PlayerInventory : MonoBehaviour {
 			default://Inventory Slots 0-7		
 				if ((slotIndex>=11)&&(slotIndex<=18))
 				{
-				if (InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11],slotIndex) == false)
+				if (InventorySlot.InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11],slotIndex) == false)
 				{
 					bBackPack[slotIndex-11]=true;
 					ExistingObject=sBackPack[slotIndex-11];
@@ -466,6 +467,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	/*
 	public bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
 	{//How two objects affect each other. eventually I will implement a table for object combining.
 		Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
@@ -547,8 +549,9 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			return false;
 		}
+
+*/
+
+
 		
-	}
-
-
 }

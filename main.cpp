@@ -41,7 +41,7 @@ int BitMapSize=32;
 short panels = 0;//Panels.gr are a special case for extraction
 char Graphics_File[255];
 char Graphics_Pal[255];
-
+char FileToOpen[255];//Generic use file
 char TempOutFileName[255];
 char auxPalPath[255];
 char path_target_platform[100];
@@ -232,6 +232,13 @@ shock_cuts_file[0] = "RES\\DATA\\START1.RES";
 shock_cuts_file[1] = "RES\\DATA\\DEATH.RES";
 shock_cuts_file[2] = "RES\\DATA\\WIN1.RES";
 
+//Object combination files
+const char *uw_objcomb_file;
+uw_objcomb_file = "DATA\\CMB.DAT";
+
+const char *uw2_objcomb_file;
+uw2_objcomb_file = "DATA\\CMB.DAT";
+
 levelNo = -1;
 if (true)
 	{
@@ -265,9 +272,10 @@ if (true)
 	printf("%d) Unity script generation\n", UNITY_MODE);
 	printf("%d) Unity Tilemap info generation\n", UNITY_TILEMAP_MODE);
 	printf("%d) SS1 Font Extraction\n", FONT_EXTRACT_MODE);
+	printf("%d) Show UW Object Combinations\n", COMBINATION_EXTRACT_MODE);
 	printf("Please select a mode.\n>");
 	scanf("%d", &mode);
-	if ((mode < 0) || (mode > 14))
+	if ((mode < 0) || (mode > 15))
 	{
 		printf("Invalid input. Bye.");
 		return 0;
@@ -860,6 +868,24 @@ switch (game)
 					}
 				}
 			break;
+		case COMBINATION_EXTRACT_MODE:
+			{
+			switch (game)
+				{
+				case UW1:
+					{
+					sprintf_s(FileToOpen, 255, "%s\\%s", path_uw1,  uw_objcomb_file);
+					DumpObjectCombinations(FileToOpen,game);
+					break;
+					}
+					case UW2:
+					{
+					sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_objcomb_file);
+					DumpObjectCombinations(FileToOpen,game);
+					break;
+					}
+				}
+			}
 		}
 	fclose(LOGFILE);
 	}
