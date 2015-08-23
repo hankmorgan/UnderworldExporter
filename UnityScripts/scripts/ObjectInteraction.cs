@@ -20,6 +20,10 @@ public class ObjectInteraction : MonoBehaviour {
 	public bool CanBeUsed;//unimplemented
 	public bool CanBeMoved;//unimplemented
 
+	public bool PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
+
+
+	//TODO: remove these!
 	public bool isContainer;
 	public bool isRuneBag;
 	public bool isRuneStone;
@@ -32,6 +36,7 @@ public class ObjectInteraction : MonoBehaviour {
 	//UW specific info.
 	public int Owner;	//Used for keys
 	public int Link;
+	public int Quality;
 
 	// Use this for initialization
 
@@ -100,9 +105,13 @@ public class ObjectInteraction : MonoBehaviour {
 		switch (ItemType)
 		{
 			case 0://	NPC 0
+				//nothing to do
 			case 1://	WEAPON 1
+				//repair with hammer
 			case 2://	ARMOUR 2
+				//repair with hammer
 			case 3://	AMMO 3
+				//nothing
 			break;
 			case 4://	DOOR 4
 					{
@@ -123,44 +132,81 @@ public class ObjectInteraction : MonoBehaviour {
 						break;
 					}
 			case 5://	KEY 5
+				//nothing/use
 			case 6://	RUNE 6
+				//nothing
 			case 7://	BRIDGE 7
+				//nothing
 			case 8://	BUTTON 8	
+				//nothing
 			case 9://	LIGHT 9
+				//?
 			break;
 			case 10://	SIGN 10
-				{
+				{//TODO. Move text handling to component.
 				objInt.MessageLog.text = SC.GetString (8,objInt.Link - 0x200);
 				break;
 				}
 			case 11://	BOOK 11
+				//TODO. Move text handling to component.
 			case 12://	WAND 12	
+				//Nothing/use
 			case 13://	SCROLL 13	//The reading kind
+				//TODO. Move text handling to component.
 			case 14://	POTIONS 14	
+				//Nothing/use
 			case 15://INSERTABLE 15	//Shock style put the circuit board in the slot.
+				//?
 			case 16://	INVENTORY 16	//Quest items and the like with no special properties
+				//Nothing
 			case 17:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+				//Nothing
 			case 18://TREASURE 18
+				//Nothing
 				break;
 			case 19:// CONTAINER 19
 				{
-				//add object to container
+				//TODO:add object to container
 				break;
 				}
 			case 20:// TRAP 20	//not implemented
 			case 21://LOCK 21
+				//Nothing
 			case 22://TORCH 22
+			//Nothing. torch effects handled by objcmb /use
 			case 23://CLUTTER 23
+				//Nothing
 			case 24://FOOD 24
+				{
+					Debug.Log("You eat some food");
+					
+					if (objInt.PickedUp==true)
+						{
+						//Delete from inventory	
+						Debug.Log ("Delete from inventory");
+						}
+					Destroy(objInt.gameObject);
+				break;
+				}
+				//Nothing/use
 			case 25://SCENERY 25
+				//Nothing
 			case 26://INSTRUMENT 26
+			//Nothing/use
 			case 27://FIRE 27
+				//Nothing
 			case 28:// MAP 28
+				//Nothing//use
 			case 29://HIDDENDOOR 29
+				//?
 			case 30://PORTCULLIS 30
+				//?
 			case 31://PILLAR 31
+				//nothing
 			case 32://SOUND 32
+				//nothing
 			case 33://CORPSE 33
+				//Nothing
 			case 34://TMAP_SOLID 34
 			case 35://TMAP_CLIP 35
 			case 36://MAGICSCROLL 36
@@ -197,8 +243,25 @@ public class ObjectInteraction : MonoBehaviour {
 			case 67://SHOCK_DOOR_TRANSPARENT 67
 			case 68://UW_PAINTING	68
 			case 69://PARTICLE 69
+				break;
 			case 70://RUNEBAG 70
-			case 71://SHOCK_BRIDGE 71
+				{
+				if (ObjectInHand != null)
+					{
+					//Try and see if I can add the object to the rune bag.
+					return this.GetComponent<RuneBag>().ActivateByObject(ObjectInHand);
+					}
+				else
+					{
+					//open the rune bag if nothing in hand
+					this.GetComponent<RuneBag>().Activate();
+					return true;
+					}
+
+				break;
+				}
+				
+		case 71://SHOCK_BRIDGE 71
 			case 72://FORCE_DOOR 72
 			case 73://HIDDENPLACEHOLDER 999
 			break;

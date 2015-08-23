@@ -151,6 +151,7 @@ void ThrowObjectInHand()
 					//Get the object being dropped and moved towards the end of the ray
 					GameObject droppedItem = GameObject.Find(pInv.ObjectInHand);
 					droppedItem.transform.parent=null;
+					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 					Debug.Log ("drop point is " + ray.GetPoint(dropRange-0.1f));
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
 					droppedItem.rigidbody.useGravity=true;

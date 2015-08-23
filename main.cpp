@@ -232,12 +232,20 @@ shock_cuts_file[0] = "RES\\DATA\\START1.RES";
 shock_cuts_file[1] = "RES\\DATA\\DEATH.RES";
 shock_cuts_file[2] = "RES\\DATA\\WIN1.RES";
 
-//Object combination files
+//UW Object combination files
 const char *uw_objcomb_file;
 uw_objcomb_file = "DATA\\CMB.DAT";
 
 const char *uw2_objcomb_file;
 uw2_objcomb_file = "DATA\\CMB.DAT";
+
+//UW Common Object properties files
+const char *uw_comp_file;
+uw_comp_file = "DATA\\comobj.dat";
+
+const char *uw2_comp_file;
+uw2_comp_file = "DATA\\comobj.dat";
+
 
 levelNo = -1;
 if (true)
@@ -273,9 +281,10 @@ if (true)
 	printf("%d) Unity Tilemap info generation\n", UNITY_TILEMAP_MODE);
 	printf("%d) SS1 Font Extraction\n", FONT_EXTRACT_MODE);
 	printf("%d) Show UW Object Combinations\n", COMBINATION_EXTRACT_MODE);
+	printf("%d) Show UW Common Object Properties\n",COMMON_PROPERTIES_EXTRACT_MODE);
 	printf("Please select a mode.\n>");
 	scanf("%d", &mode);
-	if ((mode < 0) || (mode > 15))
+	if ((mode < 0) || (mode > 16))
 	{
 		printf("Invalid input. Bye.");
 		return 0;
@@ -885,6 +894,26 @@ switch (game)
 					break;
 					}
 				}
+			break;
+			}
+		case COMMON_PROPERTIES_EXTRACT_MODE:
+			{
+			switch (game)
+				{
+					case UW1:
+						{
+						sprintf_s(FileToOpen, 255, "%s\\%s", path_uw1, uw_comp_file);
+						UWCommonObj(FileToOpen, game);
+						break;
+						}
+					case UW2:
+						{
+						sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_comp_file);
+						UWCommonObj(FileToOpen, game);
+						break;
+						}
+				}
+			break;
 			}
 		}
 	fclose(LOGFILE);

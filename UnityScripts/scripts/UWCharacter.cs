@@ -202,6 +202,7 @@ public class UWCharacter : MonoBehaviour {
 					objPicked=hit.transform.GetComponent<ObjectInteraction>();
 					if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 					{
+						objPicked.PickedUp=true;	
 						//MessageLog.text = "You pick up a " + hit.transform.name;
 						CursorIcon=objPicked.InventoryIcon.texture;
 						CurrObjectSprite=objPicked.InventoryString;

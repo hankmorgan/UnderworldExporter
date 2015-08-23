@@ -2052,19 +2052,19 @@ void DumpObjectCombinations(char *filePath, int game)
 	fileSize = getFileSize(file);
 	cmb_dat = new unsigned char[fileSize];
 	fread(cmb_dat, fileSize, 1, file);
-	fclose (file);
-	int addressPtr=0;
+	fclose(file);
+	int addressPtr = 0;
 	for (int i = 0; i < fileSize / 6; i++)
 		{
-		int Object1 = getValAtAddress(cmb_dat,addressPtr, 16) & 0x1FF;
-		int Object1Destroyed = (getValAtAddress(cmb_dat, addressPtr, 16) & 0x8000)>>15;
+		int Object1 = getValAtAddress(cmb_dat, addressPtr, 16) & 0x1FF;
+		int Object1Destroyed = (getValAtAddress(cmb_dat, addressPtr, 16) & 0x8000) >> 15;
 		int Object2 = getValAtAddress(cmb_dat, addressPtr + 2, 16) & 0x1FF;
-		int Object2Destroyed = (getValAtAddress(cmb_dat, addressPtr + 2, 16) & 0x8000)>>15;
+		int Object2Destroyed = (getValAtAddress(cmb_dat, addressPtr + 2, 16) & 0x8000) >> 15;
 		int ObjectOut = getValAtAddress(cmb_dat, addressPtr + 4, 16) & 0x1FF;
 		if (Object1 < 511)
 			{
-			printf("%d. %s(%d)(d:%d) + %s(%d)(d:%d) = %s(%d)\n", 
-				i, 
+			printf("%d. %s(%d)(d:%d) + %s(%d)(d:%d) = %s(%d)\n",
+				i,
 				objectMasters[Object1].desc, Object1, Object1Destroyed,
 				objectMasters[Object2].desc, Object2, Object2Destroyed,
 				objectMasters[ObjectOut].desc, ObjectOut);
@@ -2073,5 +2073,75 @@ void DumpObjectCombinations(char *filePath, int game)
 
 		addressPtr = addressPtr + 6;
 		}
+	}
+
+void UWCommonObj(char *filePath, int game)
+	{
+	FILE *file = NULL;      // File pointer
+	unsigned char *comobj_dat;
+	long fileSize;
+
+	if ((file = fopen(filePath, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "Could not open specified file\n");
+		return;
+		}
+	fileSize = getFileSize(file);
+	comobj_dat = new unsigned char[fileSize];
+	fread(comobj_dat, fileSize, 1, file);
+	fclose(file);
+	int addressPtr = 2;//First 2 bytes are unknown
+	for (int i = 0; i < fileSize-2 / 11; i++)
+		{
+		printf("%s\n", objectMasters[i].desc);
+		printf("\tHeight = %d\n", getValAtAddress(comobj_dat,addressPtr,8));
+		
+		printf("\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
+		printf("\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
+		printf("\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
+		
+		printf("\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) ) & 0x01);
+		printf("\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
+		printf("\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
+		printf("\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
+		printf("\tFlags (Decal) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);
+		printf("\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
+		printf("\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
+		printf("\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
+
+		printf("\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16) );
+
+		printf("\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8)>>2) & 0x3);
+
+		printf("\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8)>>6) & 0x1);
+
+		printf("\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
+
+		printf("\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8)>>3 )& 0x1);
+
+	/*	0000  Int8    height
+		0001  Int16   mass / stuff:
+     		bits 0 - 2 : radius
+			bit 3 : 1 for npc's, 3d objects and misc. items (animated flg?)
+			bits 4 - 15 : mass in 0.1 stones
+		0003  Int8    flags
+			0 / 2 : object in range[336, 368[seem to be 3d objects
+			3:magic object(? )
+			4 : decal object(always 0 in uw1)
+			5 : is set when object can be picked up
+			7 : is set when object is a container
+		0004  Int16   monetary value
+		0006  Int8    bits 2..3 : quality class (this value * 6 + quality gives index
+			into string block 5
+		0007  Int8    bit 7: if 1, item can have owner("belongs to ...")
+			bits 1..4 : type ? a = talisman, 9 = magic, 3..5 = ammunition
+		0008  Int8    scale value(? )
+		0009  Int8    unknown2
+			bits 0 - 1 : ? ?
+		000A  Int8    bits 0 - 3 : quality type 0 - f
+			bit 4 : printable "look at" description when 1*/
+		addressPtr = addressPtr + 11;
+		}
+	return;
 	}
 
