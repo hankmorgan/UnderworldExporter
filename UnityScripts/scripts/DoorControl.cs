@@ -53,10 +53,12 @@ public class DoorControl : MonoBehaviour {
 		{//Toggle Open and closed
 			if (state==false)
 				{//Door is closed
+				Debug.Log ("Opening door");
 				OpenDoor ();
 				}
 			else
 				{//Door is open
+				Debug.Log ("Closing door");
 				CloseDoor ();
 				}
 		}

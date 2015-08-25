@@ -83,7 +83,7 @@ public class ObjectInteraction : MonoBehaviour {
 		//Get a reference to the object currently in hand
 		//list each object type in the game.
 		//depending on the combination of object in hand/object activate perform all my various actions.
-		GameObject ObjectInHand = new GameObject();
+		GameObject ObjectInHand =null;// = new GameObject();
 		ObjectInteraction objInt = this.GetComponent<ObjectInteraction>();
 		if (player!=null)
 		{
@@ -118,9 +118,13 @@ public class ObjectInteraction : MonoBehaviour {
 						DoorControl objDoor = this.GetComponent<DoorControl>();
 						if (objDoor!=null) //This is a door with a control
 						{
-							if (ObjectInHand !=null)
+						if (this.pInv.ObjectInHand !="")
 								{
 								objDoor.ActivateByObject(ObjectInHand);
+								//Clear the object in hand
+								playerUW.CursorIcon= playerUW.CursorIconDefault;
+								playerUW.CurrObjectSprite = "";
+								pInv.ObjectInHand="";
 								return true;	
 								}
 							else
@@ -132,6 +136,9 @@ public class ObjectInteraction : MonoBehaviour {
 						break;
 					}
 			case 5://	KEY 5
+				{//A key just becomes the object in hand
+					return false;
+				}
 				//nothing/use
 			case 6://	RUNE 6
 				//nothing

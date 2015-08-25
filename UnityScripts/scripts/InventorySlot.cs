@@ -190,10 +190,12 @@ public class InventorySlot : MonoBehaviour {
 			}
 
 			//use an object. change the cursor
-			currObjInt.Activate();
-			//playerUW.CursorIcon= currObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-			//playerUW.CurrObjectSprite = currObj.GetComponent<ObjectInteraction>().InventoryString;
-			//pInv.ObjectInHand=ObjectName;
+			if (currObjInt.Activate()==false)
+			{
+				playerUW.CursorIcon= currObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+				playerUW.CurrObjectSprite = currObj.GetComponent<ObjectInteraction>().InventoryString;
+				pInv.ObjectInHand=ObjectName;
+			}
 		}
 	}
 
