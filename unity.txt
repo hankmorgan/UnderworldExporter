@@ -165,8 +165,9 @@
 
 	myObj= CreateGameObject("a_Jux_stone_28_04_00_0587",34.457142f,3.000000f,5.142857f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_224",6,241, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_241",6,241, 1);
 	SetObjectAsRuneStone(myObj);
+	SetInventoryIcon(myObj,"OBJECTS_241","Sprites/OBJECTS_241");
 
 
 
@@ -190,8 +191,9 @@
 
 	myObj= CreateGameObject("an_Ort_stone_28_05_00_0586",34.285717f,3.000000f,6.171429f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_224",6,246, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_246",6,246, 1);
 	SetObjectAsRuneStone(myObj);
+	SetInventoryIcon(myObj,"OBJECTS_246","Sprites/OBJECTS_246");
 
 
 	myObj= CreateGameObject("a_blood_stain_28_05_00_0585",34.628571f,3.000000f,6.514286f);
@@ -230,6 +232,8 @@
 	myObj= CreateGameObject("a_scroll_23_06_00_0956",27.771429f,3.000000f,7.542857f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_312",13,312, 1);
+	SetReadable(myObj);
+	SetLink(myObj,514);
 	myObj.transform.position = invMarker.transform.position;
 	myObj.transform.parent = invMarker.transform;
 	AddObjectToContainer(myObj, ParentContainer, 1);
@@ -243,32 +247,36 @@
 	AddObjectToContainer(myObj, ParentContainer, 2);
 	myObj= CreateGameObject("a_Bet_stone_23_06_00_0950",27.771429f,3.000000f,7.542857f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_224",6,233, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_233",6,233, 1);
 	SetObjectAsRuneStone(myObj);
+	SetInventoryIcon(myObj,"OBJECTS_233","Sprites/OBJECTS_233");
 
 	myObj.transform.position = invMarker.transform.position;
 	myObj.transform.parent = invMarker.transform;
 	AddObjectToContainer(myObj, ParentContainer, 3);
 	myObj= CreateGameObject("an_In_stone_23_06_00_0949",27.771429f,3.000000f,7.542857f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_224",6,240, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_240",6,240, 1);
 	SetObjectAsRuneStone(myObj);
+	SetInventoryIcon(myObj,"OBJECTS_240","Sprites/OBJECTS_240");
 
 	myObj.transform.position = invMarker.transform.position;
 	myObj.transform.parent = invMarker.transform;
 	AddObjectToContainer(myObj, ParentContainer, 4);
 	myObj= CreateGameObject("a_Lor_stone_23_06_00_0951",27.771429f,3.000000f,7.542857f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_224",6,243, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_243",6,243, 1);
 	SetObjectAsRuneStone(myObj);
+	SetInventoryIcon(myObj,"OBJECTS_243","Sprites/OBJECTS_243");
 
 	myObj.transform.position = invMarker.transform.position;
 	myObj.transform.parent = invMarker.transform;
 	AddObjectToContainer(myObj, ParentContainer, 5);
 	myObj= CreateGameObject("a_Sanct_stone_23_06_00_0947",27.771429f,3.000000f,7.542857f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_224",6,250, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_250",6,250, 1);
 	SetObjectAsRuneStone(myObj);
+	SetInventoryIcon(myObj,"OBJECTS_250","Sprites/OBJECTS_250");
 
 	myObj.transform.position = invMarker.transform.position;
 	myObj.transform.parent = invMarker.transform;
@@ -804,6 +812,8 @@
 	myObj= CreateGameObject("a_scroll_12_20_00_0642",15.428572f,3.600000f,24.857143f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_318",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318",13,318, 1);
+	SetReadable(myObj);
+	SetLink(myObj,516);
 
 	myObj = new GameObject("an_imp_12_20_00_0213");
 	pos = new Vector3(14.914286f, 3.900000f, 24.514284f);
@@ -1489,6 +1499,8 @@
 	myObj= CreateGameObject("a_scroll_57_48_00_0631",68.914284f,3.600000f,58.114288f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_318",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318",13,318, 1);
+	SetReadable(myObj);
+	SetLink(myObj,515);
 
 	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_58_48_00_0714",70.114288f,3.600000f,58.114288f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
@@ -1786,6 +1798,8 @@
 	myObj= CreateGameObject("a_scroll_04_56_00_0810",5.314286f,3.600000f,67.714287f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_318",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_318",13,318, 1);
+	SetReadable(myObj);
+	SetLink(myObj,769);
 
 
 
@@ -2257,11 +2271,11 @@
 
 	myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-	Create_a_do_trap(myObj,3,2575220);
+	Create_a_do_trap(myObj,3,2379020);
 
 	myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-	Create_a_do_trap(myObj,3,2575220);
+	Create_a_do_trap(myObj,3,2379020);
 
 	myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2273,11 +2287,11 @@
 
 	myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-	Create_a_do_trap(myObj,3,2575220);
+	Create_a_do_trap(myObj,3,2379020);
 
 	myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-	Create_a_do_trap(myObj,3,2575220);
+	Create_a_do_trap(myObj,3,2379020);
 
 	myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);

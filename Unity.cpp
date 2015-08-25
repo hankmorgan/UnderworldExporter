@@ -118,7 +118,9 @@ void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
-	fprintf(UNITY_FILE, "\n\tSetObjectAsRuneStone(myObj);\n");
+	fprintf(UNITY_FILE, "\n\tSetObjectAsRuneStone(myObj);");
+	//SetInventoryIcon
+	fprintf(UNITY_FILE, "\n\tSetInventoryIcon(myObj,\"%s\",\"Sprites/%s\");\n", objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].InvIcon);
 	}
 
 void RenderUnityEntityRuneBag(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -760,6 +762,7 @@ void RenderUnityEntityBOOK(int game, float x, float y, float z, short message, O
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	setReadable();
 
 	switch (game)
 		{
@@ -768,7 +771,8 @@ void RenderUnityEntityBOOK(int game, float x, float y, float z, short message, O
 				fprintf(UNITY_FILE, "\n\tCreateEmail(myObj,%d);", ReadableIndex);
 				break;
 			default:
-				ReadableIndex = currobj.link - 0x200;
+				//ReadableIndex = currobj.link - 0x200;
+				setLink(currobj);
 				break;
 		}
 
@@ -1807,4 +1811,9 @@ void setSprite(unsigned char *SpriteName)
 void SetScale(float x, float y, float z)
 	{
 	fprintf(UNITY_FILE, "\n\tSetScale(myObj,(float)%f,(float)%f,(float)%f);", x, y, z);
+	}
+
+void setReadable()
+	{
+	fprintf(UNITY_FILE, "\n\tSetReadable(myObj);");
 	}

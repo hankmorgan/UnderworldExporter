@@ -233,7 +233,7 @@ public class UWCharacter : MonoBehaviour {
 				ObjectInteraction objInt = hit.transform.GetComponent<ObjectInteraction>();
 				if (objInt != null)
 					{
-				MessageLog.text = "You see " + objInt.LookDescription(objInt);//+ "( " + hit.transform.name + " in UWCharacter.LookMode() )";
+				MessageLog.text = objInt.LookDescription(objInt);//+ "( " + hit.transform.name + " in UWCharacter.LookMode() )";
 					Debug.Log ("lookmode:" + hit.normal + " " + objInt.LookDescription());
 					return;
 					}

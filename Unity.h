@@ -11,4 +11,5 @@ void setSprite(unsigned char *SpriteName);
 void SetButtonProperties(int game, short on, int SpriteNoOn, int SpriteNoOff);
 void SetButtonProperties(int game, int SpriteNoBegin);
 void SetScale(float x, float y, float z);
+void setReadable();
 #endif

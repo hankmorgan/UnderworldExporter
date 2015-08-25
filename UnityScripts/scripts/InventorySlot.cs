@@ -202,11 +202,21 @@ public class InventorySlot : MonoBehaviour {
 
 	void LookFromSlot()
 	{
+		Debug.Log ("LookFromSlot");
 		pInv = player.GetComponent<PlayerInventory>();
 		//string ObjectName= pInv.GetObjectAtSlot(slotIndex);
 		//if (ObjectName !="")
 		//{
-		MessageLog.text="You see a " + pInv.GetObjectDescAtSlot(slotIndex);
+		//If object has a readable component then activate(and read) otherwise give a generic description.
+		if(this.GetComponent<Readable>()!= null)
+			{
+			this.GetComponent<ObjectInteraction>().Activate();
+			}
+		else
+			{
+			MessageLog.text="You see a " + pInv.GetObjectDescAtSlot(slotIndex);
+			}
+
 			//MessageLog.text="You see a " + ObjectName;
 		//}
 		//	return;

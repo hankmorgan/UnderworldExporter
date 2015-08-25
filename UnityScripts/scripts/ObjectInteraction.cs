@@ -56,11 +56,13 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public string LookDescription()
 	{//Returns the description of this object.
+		//Debug.Log ("LookDescription");
 		return SC.GetString("004",item_id.ToString ("000"));
 	}
 
 	public string LookDescription(ObjectInteraction objInt)
 	{//Returns the description of this object.
+		//Debug.Log ("LookDescription (objint)");
 		switch (objInt.ItemType)
 		{
 		case 10://signs
@@ -72,9 +74,7 @@ public class ObjectInteraction : MonoBehaviour {
 			{
 				return SC.GetString("004",item_id.ToString ("000"));
 			}
-
 		}
-
 	}
 
 	public bool Activate()
@@ -83,6 +83,7 @@ public class ObjectInteraction : MonoBehaviour {
 		//Get a reference to the object currently in hand
 		//list each object type in the game.
 		//depending on the combination of object in hand/object activate perform all my various actions.
+		Debug.Log ("ObjectInteraction.Activate (" + ItemType + ")");
 		GameObject ObjectInHand =null;// = new GameObject();
 		ObjectInteraction objInt = this.GetComponent<ObjectInteraction>();
 		if (player!=null)
@@ -152,14 +153,25 @@ public class ObjectInteraction : MonoBehaviour {
 			case 10://	SIGN 10
 				{//TODO. Move text handling to component.
 				objInt.MessageLog.text = SC.GetString (8,objInt.Link - 0x200);
+				return true;
 				break;
 				}
 			case 11://	BOOK 11
 				//TODO. Move text handling to component.
+				{
+					objInt.MessageLog.text = SC.GetString (3,objInt.Link - 0x200);
+					return true;
+					break;
+				}
 			case 12://	WAND 12	
 				//Nothing/use
 			case 13://	SCROLL 13	//The reading kind
 				//TODO. Move text handling to component.
+				{
+					objInt.MessageLog.text = SC.GetString (3,objInt.Link - 0x200);
+					return true;
+					break;
+				}
 			case 14://	POTIONS 14	
 				//Nothing/use
 			case 15://INSERTABLE 15	//Shock style put the circuit board in the slot.
