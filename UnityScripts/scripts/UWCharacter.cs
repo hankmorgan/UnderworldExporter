@@ -69,6 +69,7 @@ public class UWCharacter : MonoBehaviour {
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
+		Readable.SC=StringControl;
 
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
@@ -162,14 +163,14 @@ public class UWCharacter : MonoBehaviour {
 					//ObjectInteraction.Activate (objPicked);
 					//MessageLog.text = "You use a " + hit.transform.name;
 				}
-				//Activates switches.
-				ButtonHandler objButton = hit.transform.GetComponent<ButtonHandler>();
-				if (objButton!=null)
-				{
-				Debug.Log("USERMODE:Activating buttonhandler "+ hit.transform.name);
-					objButton.Activate();
-					return;
-				}
+		//		//Activates switches.
+		//		ButtonHandler objButton = hit.transform.GetComponent<ButtonHandler>();
+		//		if (objButton!=null)
+		//		{
+		//		Debug.Log("USERMODE:Activating buttonhandler "+ hit.transform.name);
+		//			objButton.Activate();
+		//			return;
+		//		}
 				//Activates door.
 				//DoorControl objDoor = hit.transform.GetComponent<DoorControl>();
 				//if (objDoor!=null)
@@ -223,7 +224,7 @@ public class UWCharacter : MonoBehaviour {
 	{//Look at the clicked item.
 		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		//{
-		Debug.Log ("Look");
+		//Debug.Log ("Look");
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,lookRange))
@@ -233,22 +234,22 @@ public class UWCharacter : MonoBehaviour {
 				ObjectInteraction objInt = hit.transform.GetComponent<ObjectInteraction>();
 				if (objInt != null)
 					{
-				MessageLog.text = objInt.LookDescription(objInt);//+ "( " + hit.transform.name + " in UWCharacter.LookMode() )";
-					Debug.Log ("lookmode:" + hit.normal + " " + objInt.LookDescription());
+					objInt.LookDescription();//+ "( " + hit.transform.name + " in UWCharacter.LookMode() )";
+					//Debug.Log ("lookmode:" + hit.normal + " " + objInt.LookDescription());
 					return;
 					}
-			ButtonHandler objButton = hit.transform.GetComponent<ButtonHandler>();
-			if (objButton!=null)
-			{
-				MessageLog.text = "You see " + objButton.LookDescription() + "( " + hit.transform.name + " in UWCharacter.LookMode() )";
+			//ButtonHandler objButton = hit.transform.GetComponent<ButtonHandler>();
+			//if (objButton!=null)
+			//{
+			//	MessageLog.text = "You see " + objButton.LookDescription() + "( " + hit.transform.name + " in UWCharacter.LookMode() )";
 				//Debug.Log ("lookmode:" + hit.normal + " " + objInt.LookDescription());
-				return;
+			//	return;
+			//}
 			}
-			}
-			else
-			{
-				MessageLog.text = "You see nothing  UWCharacter.LookMode()";
-			}
+			//else
+			//{
+			//	MessageLog.text = "You see nothing  UWCharacter.LookMode()";
+			//}
 		//}
 	}
 

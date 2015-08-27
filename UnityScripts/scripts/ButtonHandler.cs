@@ -35,7 +35,8 @@ public class ButtonHandler : MonoBehaviour {
 		{
 			playerUW=player.GetComponent<UWCharacter>();
 		}
-		ButtonSprite=this.transform.parent.GetComponentInChildren<SpriteRenderer>();
+
+		ButtonSprite=this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		if (isRotarySwitch==false)
 		{
 			if (isOn==true)
@@ -145,7 +146,7 @@ public class ButtonHandler : MonoBehaviour {
 
 		if (SpriteName!="")
 		{
-			Debug.Log (this.name+ ":setting sprite " + SpriteName);
+			//Debug.Log (this.name+ ":setting sprite " + SpriteName);
 			Sprite image = Resources.Load <Sprite> (SpriteName);//Loads the sprite.
 			ButtonSprite.sprite = image;//Assigns the sprite to the object.
 		}

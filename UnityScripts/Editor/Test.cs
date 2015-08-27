@@ -44,7 +44,6 @@ public class MyTools
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
 		
 		
-		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
@@ -82,7 +81,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_30_02_00_0963",36.020000f,4.200000f,3.257143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,270,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
 		SetLink(myObj,576);
@@ -112,6 +112,7 @@ public class MyTools
 		myObj= CreateGameObject("a_button_49_02_00_0817",59.314285f,3.300000f,2.420000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0816",40,0,0,7,377);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_377",8,377, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
@@ -190,7 +191,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_35_03_00_0929",42.020000f,3.900000f,4.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,270,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
 		SetLink(myObj,580);
@@ -376,6 +378,7 @@ public class MyTools
 		myObj= CreateGameObject("a_switch_04_07_00_0864",4.820000f,1.200000f,9.085714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_372",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0691",40,0,0,7,372);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_372",8,372, 1);
 		SetRotation(myObj,0,270,0);
 		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0004", "Sprites/tmflat/tmflat_0012");
 		
@@ -402,6 +405,7 @@ public class MyTools
 		myObj= CreateGameObject("a_pull_chain_32_07_00_0994",39.580002f,3.600000f,9.085714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_375",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0992",40,0,0,7,375);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_375",8,375, 1);
 		SetRotation(myObj,0,90,0);
 		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0007", "Sprites/tmflat/tmflat_0015");
 		
@@ -749,7 +753,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_51_16_00_0700",62.380001f,4.200000f,20.379999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,90,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
 		SetLink(myObj,582);
@@ -789,7 +794,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_41_17_00_0699",49.220001f,4.200000f,20.420000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,270,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
 		SetLink(myObj,583);
@@ -934,7 +940,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_46_24_00_0668",55.885712f,4.200000f,29.980000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,0,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
 		SetLink(myObj,584);
@@ -1107,6 +1114,7 @@ public class MyTools
 		myObj= CreateGameObject("a_button_16_35_00_0807",19.714287f,2.700000f,42.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0637",40,0,0,7,377);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_377",8,377, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
@@ -1120,6 +1128,7 @@ public class MyTools
 		myObj= CreateGameObject("a_lever_09_36_00_0744",11.980000f,4.200000f,44.057144f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0742",40,0,0,7,373);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_373",8,373, 1);
 		SetRotation(myObj,0,90,0);
 		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
 		
@@ -1428,24 +1437,28 @@ public class MyTools
 		myObj= CreateGameObject("a_lever_56_45_00_0872",67.885712f,4.200000f,54.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0626",63,0,1,7,353);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_353",8,353, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj= CreateGameObject("a_lever_57_45_00_0871",68.914284f,4.200000f,54.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0629",63,0,2,7,353);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_353",8,353, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj= CreateGameObject("a_lever_58_45_00_0870",70.114288f,4.200000f,54.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0625",63,0,3,7,353);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_353",8,353, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
 		myObj= CreateGameObject("a_lever_59_45_00_0623",71.314285f,4.200000f,54.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0621",63,0,4,7,353);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_353",8,353, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
 		
@@ -1506,7 +1519,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_03_48_00_0617",4.628572f,4.200000f,58.779999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,0,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_27");
 		SetLink(myObj,581);
@@ -1577,6 +1591,7 @@ public class MyTools
 		myObj= CreateGameObject("a_button_55_49_00_0646",66.514290f,3.900000f,59.980000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_369",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0643",40,0,0,7,369);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_369",8,369, 1);
 		SetRotation(myObj,0,0,0);
 		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0001", "Sprites/tmflat/tmflat_0009");
 		
@@ -1671,6 +1686,7 @@ public class MyTools
 		myObj= CreateGameObject("a_button_48_51_00_0840",58.114288f,4.200000f,61.220001f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
 		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0639",40,0,0,7,377);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_377",8,377, 1);
 		SetRotation(myObj,0,180,0);
 		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
@@ -1942,7 +1958,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_54_58_00_0713",65.980003f,4.200000f,70.457146f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,90,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
 		SetLink(myObj,581);
@@ -2095,7 +2112,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_30_61_00_0665",36.514286f,2.400000f,74.379997f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,0,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
 		SetLink(myObj,577);
@@ -2115,7 +2133,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("some_writing_38_61_00_0902",46.114288f,3.900000f,74.379997f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0, "Activator");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_358",10,358, 0);
+		SetReadable(myObj);
 		SetRotation(myObj,0,0,0);
 		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
 		SetLink(myObj,579);
@@ -2317,11 +2336,11 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,2379020);
+		Create_a_do_trap(myObj,3,1003764);
 		
 		myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,2379020);
+		Create_a_do_trap(myObj,3,1003764);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2333,11 +2352,11 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,2379020);
+		Create_a_do_trap(myObj,3,1003764);
 		
 		myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		Create_a_do_trap(myObj,3,2379020);
+		Create_a_do_trap(myObj,3,1003764);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2468,7 +2487,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_385",38,385, 0);
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
 
-		
+	
 
 
 
@@ -8751,10 +8770,10 @@ public class MyTools
 			}	
 	}
 
-	static void CreateUWActivators(GameObject myObj,string activatortype, string target, int triggerX, int triggerY, int state, int maxstate, int item_id)
+	static void CreateUWActivators(GameObject Button,string activatortype, string target, int triggerX, int triggerY, int state, int maxstate, int item_id)
 	{
-		GameObject Button = new GameObject(myObj.name + "_activator");
-		Button.transform.parent= myObj.transform;
+		//GameObject Button = new GameObject(myObj.name + "_activator");
+		//Button.transform.parent= myObj.transform;
 		switch (activatortype)
 		{
 			case "ButtonHandler":
@@ -8773,10 +8792,15 @@ public class MyTools
 		}
 
 		//add a mesh for interaction
-		BoxCollider box= Button.AddComponent<BoxCollider>();
-		box.transform.position = myObj.transform.position;
-		box.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-		box.isTrigger=true;
+		//BoxCollider box= Button.AddComponent<BoxCollider>();
+		//box.transform.position = myObj.transform.position;
+		//box.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+		//box.isTrigger=true;
+
+	//	BoxCollider box= Button.AddComponent<BoxCollider>();
+		//box.transform.position =B.transform.position;
+	//	box.size = new Vector3(0.3f, 0.3f, 0.05f);
+	//	box.isTrigger=true;
 	}
 
 	static void CreateSHOCKActivators(GameObject myObj, int TriggerAction)

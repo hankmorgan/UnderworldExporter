@@ -54,15 +54,151 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 	}
 
-	public string LookDescription()
+	public bool LookDescription()
 	{//Returns the description of this object.
-		//Debug.Log ("LookDescription");
-		return SC.GetString("004",item_id.ToString ("000"));
+		Debug.Log ("LookDescription");
+		switch (ItemType)
+		{
+		case 0://	NPC 0
+			//nothing to do
+		case 1://	WEAPON 1
+			//repair with hammer
+		case 2://	ARMOUR 2
+			//repair with hammer
+		case 3://	AMMO 3
+			//nothing
+			break;
+		case 4://	DOOR 4
+		case 5://	KEY 5
+			//nothing/use
+		case 6://	RUNE 6
+			//nothing
+		case 7://	BRIDGE 7
+			//nothing
+		case 8://	BUTTON 8	
+			//nothing
+		case 9://	LIGHT 9
+			//?
+			{
+			MessageLog.text = SC.GetString("004",item_id.ToString ("000"));
+			return false;
+			break;
+			}
+
+		case 10://	SIGN 10
+		case 11://	BOOK 11
+		case 13://	SCROLL 13	//The reading kind
+		{
+			Readable rd =this.gameObject.GetComponent<Readable>();
+			MessageLog.text = rd.Activate();
+			return true;
+			break;
+		}
+		case 12://	WAND 12	
+			//Nothing/use
+
+		case 14://	POTIONS 14	
+			//Nothing/use
+		case 15://INSERTABLE 15	//Shock style put the circuit board in the slot.
+			//?
+		case 16://	INVENTORY 16	//Quest items and the like with no special properties
+			//Nothing
+		case 17:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+			//Nothing
+		case 18://TREASURE 18
+			//Nothing
+			break;
+		case 19:// CONTAINER 19
+		case 20:// TRAP 20	//not implemented
+		case 21://LOCK 21
+			//Nothing
+		case 22://TORCH 22
+			//Nothing. torch effects handled by objcmb /use
+		case 23://CLUTTER 23
+			//Nothing
+		case 24://FOOD 24
+			//Nothing/use
+		case 25://SCENERY 25
+			//Nothing
+		case 26://INSTRUMENT 26
+			//Nothing/use
+		case 27://FIRE 27
+			//Nothing
+		case 28:// MAP 28
+			//Nothing//use
+		case 29://HIDDENDOOR 29
+			//?
+		case 30://PORTCULLIS 30
+			//?
+		case 31://PILLAR 31
+			//nothing
+		case 32://SOUND 32
+			//nothing
+		case 33://CORPSE 33
+			//Nothing
+		case 34://TMAP_SOLID 34
+		case 35://TMAP_CLIP 35
+		case 36://MAGICSCROLL 36
+		case 37: //A_DAMAGE_TRAP 37
+		case 38://A_TELEPORT_TRAP 38
+		case 39://A_ARROW_TRAP 39
+		case 40://A_DO_TRAP 40
+		case 41://A_PIT_TRAP 41
+		case 42://A_CHANGE_TERRAIN_TRAP 42
+		case 43://A_SPELLTRAP 43
+		case 44://A_CREATE_OBJECT_TRAP 44
+		case 45://A_DOOR_TRAP 45
+		case 46://A_WARD_TRAP 46
+		case 47://A_TELL_TRAP  47
+		case 48://A_DELETE_OBJECT_TRAP 48
+		case 49://AN_INVENTORY_TRAP 49
+		case 50://A_SET_VARIABLE_TRAP 50
+		case 51://A_CHECK_VARIABLE_TRAP 51
+		case 52://A_COMBINATION_TRAP 52
+		case 53://A_TEXT_STRING_TRAP 53
+		case 54://A_MOVE_TRIGGER 54
+		case 55:// A_PICK_UP_TRIGGER 55
+		case 56://A_USE_TRIGGER 56
+		case 57://A_LOOK_TRIGGER 57
+		case 58://A_STEP_ON_TRIGGER 58
+		case 59://AN_OPEN_TRIGGER 59
+		case 60://AN_UNLOCK_TRIGGER 60
+		case 61://A_FOUNTAIN	61
+		case 62://SHOCK_DECAL 62
+		case 63://COMPUTER_SCREEN 63
+		case 64://SHOCK_WORDS 64
+		case 65://SHOCK_GRATING 65 
+		case 66://SHOCK_DOOR 66
+		case 67://SHOCK_DOOR_TRANSPARENT 67
+		case 68://UW_PAINTING	68
+		case 69://PARTICLE 69
+		case 70://RUNEBAG 70
+		case 71://SHOCK_BRIDGE 71
+		case 72://FORCE_DOOR 72
+		case 73://HIDDENPLACEHOLDER 999
+			{
+			MessageLog.text =  SC.GetString("004",item_id.ToString ("000"));
+			return false;
+			}
+			break;
+		}
+
+
+
+
+
+
+		return false;//SC.GetString("004",item_id.ToString ("000"));
+
+
 	}
 
-	public string LookDescription(ObjectInteraction objInt)
-	{//Returns the description of this object.
+/*	public string LookDescription(ObjectInteraction objInt)
+	{//Executes the description of this object.
 		//Debug.Log ("LookDescription (objint)");
+
+		return "";//false;
+
 		switch (objInt.ItemType)
 		{
 		case 10://signs
@@ -76,7 +212,7 @@ public class ObjectInteraction : MonoBehaviour {
 			}
 		}
 	}
-
+*/
 	public bool Activate()
 	{//Code to activate specific objects
 		//Returns a reference to the object in hand at the end of the action.
@@ -147,28 +283,26 @@ public class ObjectInteraction : MonoBehaviour {
 				//nothing
 			case 8://	BUTTON 8	
 				//nothing
+				{
+					ButtonHandler objButton = this.gameObject.GetComponent<ButtonHandler>();
+					if (objButton!=null)
+					{
+						objButton.Activate();
+						return true;
+					}
+				break;
+				}
 			case 9://	LIGHT 9
 				//?
 			break;
-			case 10://	SIGN 10
-				{//TODO. Move text handling to component.
-				objInt.MessageLog.text = SC.GetString (8,objInt.Link - 0x200);
-				return true;
-				break;
-				}
-			case 11://	BOOK 11
-				//TODO. Move text handling to component.
-				{
-					objInt.MessageLog.text = SC.GetString (3,objInt.Link - 0x200);
-					return true;
-					break;
-				}
 			case 12://	WAND 12	
 				//Nothing/use
-			case 13://	SCROLL 13	//The reading kind
-				//TODO. Move text handling to component.
+				case 10://	SIGN 10
+				case 11://	BOOK 11
+				case 13://	SCROLL 13	//The reading kind
 				{
-					objInt.MessageLog.text = SC.GetString (3,objInt.Link - 0x200);
+					Readable rd =this.gameObject.GetComponent<Readable>();
+					MessageLog.text = rd.Activate();
 					return true;
 					break;
 				}
@@ -185,7 +319,7 @@ public class ObjectInteraction : MonoBehaviour {
 				break;
 			case 19:// CONTAINER 19
 				{
-				//TODO:add object to container
+				//TODO:add object to container or open container.
 				break;
 				}
 			case 20:// TRAP 20	//not implemented
@@ -195,6 +329,7 @@ public class ObjectInteraction : MonoBehaviour {
 			//Nothing. torch effects handled by objcmb /use
 			case 23://CLUTTER 23
 				//Nothing
+				break;
 			case 24://FOOD 24
 				{
 					Debug.Log("You eat some food");

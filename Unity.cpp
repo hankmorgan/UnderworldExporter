@@ -504,13 +504,14 @@ void RenderUnityEntityButton(int game, float x, float y, float z, ObjectItem &cu
 	if (game != SHOCK)
 		{
 		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler");
+		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 		UnityRotation(game, 0, currobj.heading, 0);
 		}
 	else
 		{
 		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ShockButtonHandler");
 		AddShockTriggerActions(game, x, y, z, currobj, objList, LevelInfo);
-
+		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
 
 		}
@@ -845,7 +846,9 @@ void RenderUnityEntitySIGN(int game, float x, float y, float z, ObjectItem &curr
 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo,"Activator");
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);//,"Activator");
+	setReadable();
+
 	if (game != SHOCK)
 		{
 		UnityRotation(game, 0, currobj.heading, 0);

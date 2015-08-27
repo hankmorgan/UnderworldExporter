@@ -350,7 +350,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	}
 
-	public string GetObjectDescAtSlot(int SlotIndex)
+	public bool GetObjectDescAtSlot(int SlotIndex)
 	{
 		string objectName=GetObjectAtSlot (SlotIndex);
 		if (objectName!="")
@@ -362,12 +362,12 @@ public class PlayerInventory : MonoBehaviour {
 			}
 			else
 			{
-				return "DESC NOT FOUND!!";
+				return false;// "DESC NOT FOUND!!";
 			}
 		}
 		else
 		{
-			return "DESC NOT FOUND!!";
+			return false; //"DESC NOT FOUND!!";
 		}
 	}
 

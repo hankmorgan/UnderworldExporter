@@ -245,9 +245,23 @@ public class InventorySlot : MonoBehaviour {
 				}
 			break;
 		case 2://pickup
+			/*
+	if(objectInHand) or left click
+	{
+	if !Activate
+		{
+		Swap
+		}
+	}
+	else if (right click)
+		{
+		Activate
+		}
+
+			*/
 			pInv = player.GetComponent<PlayerInventory>();
-			if ((leftClick) && (pInv.ObjectInHand!=""))
-				{//Left Click and i'm carrying something
+			if ((leftClick) || (pInv.ObjectInHand!=""))
+				{//Left Click or i'm carrying something
 				if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
 					{
 					PickupFromSlot();
@@ -282,9 +296,16 @@ public class InventorySlot : MonoBehaviour {
 				}
 			else 
 				{//right click
-				PickupFromSlot();
+				//PickupFromSlot();
+				GameObject ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+				if (ObjectUsedOn !=null)
+					{
+						if (ObjectUsedOn.GetComponent<ObjectInteraction>() != null)	
+						{
+							ObjectUsedOn.GetComponent<ObjectInteraction>().Activate();
+						}
+					}
 				}
-
 			break;
 		case 4://look
 			if (leftClick)
