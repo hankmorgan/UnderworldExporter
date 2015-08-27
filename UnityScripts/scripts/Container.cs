@@ -97,7 +97,7 @@ public class Container : MonoBehaviour {
 			}
 		else
 			{
-			Debug.Log (name + " invalid item for removal");
+			Debug.Log (name + "(" +index + ") invalid item for removal");
 			return false;
 			}
 		}
@@ -287,6 +287,30 @@ public class Container : MonoBehaviour {
 		
 		return ExistingObject;
 		
+	}
+
+	public void OpenContainer()
+	{
+		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
+		GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
+		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
+		//display the container contents.
+		//Container currObjCont = currObj.GetComponent<Container>();
+		this.isOpenOnPanel=true;
+		//currObjCont.ContainerParent=pInv.currentContainer;
+		//pInv.atTopLevel=false;
+		pInv.currentContainer=this.name;
+		if (pInv.currentContainer=="")
+		{
+			pInv.currentContainer="Gronk";
+			this.ContainerParent="Gronk";
+		}
+		for (int i = 0; i<8; i++)
+		{
+			string sItem = this.GetItemAt(i);
+			pInv.SetObjectAtSlot(i+11,sItem);
+		}
 	}
 	
 }

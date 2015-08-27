@@ -23,6 +23,7 @@ public class ContainerOpened : MonoBehaviour {
 			{
 				GameObject currObj = GameObject.Find (ClosingParent.items[i]);
 				{
+					Debug.Log ("closing " + currObj.name);
 					if (currObj.GetComponent<ObjectInteraction>().isContainer ==true)
 					{
 						CloseChildContainer (currObj.GetComponent<Container>());
@@ -36,6 +37,10 @@ public class ContainerOpened : MonoBehaviour {
 	{
 		UWCharacter playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		if (pInv.currentContainer=="Gronk")
+		{//Don't do anything on the top level
+			return;
+		}
 		if (pInv.ObjectInHand=="")
 		{//Player has no object in their hand. We close up the container.
 			Container currentContainerObj = GameObject.Find (pInv.currentContainer).GetComponent<Container>();

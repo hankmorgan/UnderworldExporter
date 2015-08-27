@@ -320,6 +320,47 @@ public class ObjectInteraction : MonoBehaviour {
 			case 19:// CONTAINER 19
 				{
 				//TODO:add object to container or open container.
+				Container cn = this.gameObject.GetComponent<Container>();
+				if (pInv.ObjectInHand=="")
+					{//Open the container
+					cn.OpenContainer();
+					return true;
+					}
+				else
+					{//Put the item in the container.
+					bool Valid=true;
+					if (ObjectInHand.GetComponent<Container>() != null)
+						{
+						if (cn.name == ObjectInHand.GetComponent<Container>().name)
+							{
+							Valid=false;
+							Debug.Log ("Attempt to add a container to itself");
+							}
+						}
+
+				if (Valid)
+					{
+					cn.AddItemToContainer(pInv.ObjectInHand);
+					if (cn.isOpenOnPanel == true)
+					{//Container is open for display force a refresh.
+						cn.OpenContainer();
+						//for (int i = 11; i<18;i++)
+						//	{
+						//	pInv.bBackPack[i-11]=true;
+						//	}
+					}
+					pInv.ObjectInHand= "";
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.CurrObjectSprite = "";
+					
+					return true;
+					}
+				else
+					{
+					return false;
+					}
+
+					}
 				break;
 				}
 			case 20:// TRAP 20	//not implemented

@@ -467,6 +467,65 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public void ClearSlot(int slotIndex)
+	{
+		switch (slotIndex)
+		{
+		case 0://Helm
+			sHelm="";
+			bHelm=true;
+			break;
+		case 1://Chest
+			sChest="";
+			bChest=true;
+			break;
+		case 2://Leggings
+			sLegs="";
+			bLegs=true;
+			break;
+		case 3://Boots
+			sBoots="";
+			bBoots=true;
+			break;
+		case 4://Gloves
+			sGloves="";
+			bGloves=true;
+			break;
+		case 5://ShoulderRight
+			sRightShoulder="";
+			bRightShoulder=true;
+			break;
+		case 6://ShoulderLeft
+			sLeftShoulder="";
+			bLeftShoulder=true;
+			break;
+		case 7://HandRight
+			sRightHand="";
+			bRightHand=true;
+			break;
+		case 8://HandLeft
+			sLeftHand="";
+			bLeftHand=true;
+			break;
+		case 9://RingRight
+			sRightRing="";
+			bRightRing=true;
+			break;
+		case 10://RingLeft
+			sLeftRing="";
+			bLeftRing=true;
+			break;
+		default://Inventory Slots 0-7		
+			if ((slotIndex>=11)&&(slotIndex<=18))
+			{
+				sBackPack[slotIndex-11]="";
+				bBackPack[slotIndex-11]=true;
+			}
+			break;
+		}
+	}
+
+
 	/*
 	public bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
 	{//How two objects affect each other. eventually I will implement a table for object combining.
