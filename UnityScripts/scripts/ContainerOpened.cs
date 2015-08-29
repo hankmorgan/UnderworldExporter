@@ -23,7 +23,7 @@ public class ContainerOpened : MonoBehaviour {
 			{
 				GameObject currObj = GameObject.Find (ClosingParent.items[i]);
 				{
-					Debug.Log ("closing " + currObj.name);
+					//Debug.Log ("closing " + currObj.name);
 					if (currObj.GetComponent<ObjectInteraction>().isContainer ==true)
 					{
 						CloseChildContainer (currObj.GetComponent<Container>());
@@ -48,6 +48,7 @@ public class ContainerOpened : MonoBehaviour {
 			currentContainerObj.isOpenOnPanel=false;
 			//Close child containers as well
 			CloseChildContainer (currentContainerObj);
+			Debug.Log("Current Container is " + pInv.currentContainer);
 			Container DestinationContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			if (pInv.currentContainer == "Gronk")
 			{
@@ -66,7 +67,7 @@ public class ContainerOpened : MonoBehaviour {
 		else
 		{
 			//Move the contents out of the container into the parent.
-			Debug.Log ("Moving contents out of bag");
+			//Debug.Log ("Moving contents out of bag");
 			Container CurrentContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
 			if (DestinationContainer.AddItemToContainer(pInv.ObjectInHand))

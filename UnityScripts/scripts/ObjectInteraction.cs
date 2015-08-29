@@ -116,7 +116,7 @@ public class ObjectInteraction : MonoBehaviour {
 		case 13://	SCROLL 13	//The reading kind
 		{
 			Readable rd =this.gameObject.GetComponent<Readable>();
-			MessageLog.text = rd.Activate();
+			rd.Activate();
 			return true;
 			break;
 		}
@@ -142,7 +142,13 @@ public class ObjectInteraction : MonoBehaviour {
 			//Nothing. torch effects handled by objcmb /use
 		case 23://CLUTTER 23
 			//Nothing
+			break;
 		case 24://FOOD 24
+			{
+			Food fd = this.GetComponent<Food>();
+			fd.LookAt();
+			break;
+			}
 			//Nothing/use
 		case 25://SCENERY 25
 			//Nothing
@@ -245,7 +251,7 @@ public class ObjectInteraction : MonoBehaviour {
 		//Get a reference to the object currently in hand
 		//list each object type in the game.
 		//depending on the combination of object in hand/object activate perform all my various actions.
-		Debug.Log ("ObjectInteraction.Activate (" + ItemType + ")");
+		//Debug.Log ("ObjectInteraction.Activate (" + ItemType + ")");
 		GameObject ObjectInHand =null;// = new GameObject();
 		ObjectInteraction objInt = this.GetComponent<ObjectInteraction>();
 		if (player!=null)
@@ -328,7 +334,7 @@ public class ObjectInteraction : MonoBehaviour {
 				case 13://	SCROLL 13	//The reading kind
 				{
 					Readable rd =this.gameObject.GetComponent<Readable>();
-					MessageLog.text = rd.Activate();
+					rd.Activate();
 					return true;
 					break;
 				}
@@ -667,4 +673,16 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 	}
 	*/
+
+	public void consumeObject()
+	{
+		Container cn = getCurrentContainer();
+		//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
+		if (!cn.RemoveItemFromContainer(this.name))
+		{//Try and remove from the paperdoll if not found in the current container.
+			pInv.RemoveItemFromEquipment(this.name);
+		}
+		pInv.Refresh();
+		Destroy (this.gameObject);
+	}
 }

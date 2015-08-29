@@ -60,9 +60,10 @@ public class InventorySlot : MonoBehaviour {
 //		}
 //	}
 
+	/*
 	void PickupFromSlot()
 	{
-		Debug.Log ("PickupfromSlot");
+		//Debug.Log ("PickupfromSlot");
 		pInv = player.GetComponent<PlayerInventory>();
 		Container SubContainer;
 		string sNewObj;
@@ -136,7 +137,7 @@ public class InventorySlot : MonoBehaviour {
 
 
 
-
+*/
 
 
 
@@ -165,6 +166,8 @@ public class InventorySlot : MonoBehaviour {
 				}
 				return;
 			}*/
+
+			/*
 			if (currObjInt.isRuneBag)
 			{//Use a rune bag
 				if (pInv.ObjectInHand == "")
@@ -177,6 +180,7 @@ public class InventorySlot : MonoBehaviour {
 				}
 				return;
 			}
+			*/
 
 			if(currObjInt.isMap)
 			{//Use a map
@@ -303,7 +307,11 @@ public class InventorySlot : MonoBehaviour {
 		GameObject ObjectUsedOn=null;
 		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
-			PickupFromSlot();
+			pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
+			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.CurrObjectSprite = "";
+			pInv.ObjectInHand="";
+			//PickupFromSlot();
 			}
 		else
 			{
@@ -364,7 +372,11 @@ public class InventorySlot : MonoBehaviour {
 
 		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
-			PickupFromSlot();
+			//PickupFromSlot();
+			pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
+			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.CurrObjectSprite = "";
+			pInv.ObjectInHand="";
 			}
 		else
 			{
@@ -437,10 +449,11 @@ public class InventorySlot : MonoBehaviour {
 //		MessageLog.text=  name + "clicked";
 //	}
 
+	/**
 	public static bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
 	{//How slots act when objects are used on them.
 		PlayerInventory pinv = playerUW.gameObject.GetComponent<PlayerInventory>();
-		Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
+		//Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
 		//returns true if they have an effect on each other.
 		if ((sObjectInHand !="") && (sObjectUsedOn !=""))
 		{//Object is being used on something.
@@ -483,4 +496,5 @@ public class InventorySlot : MonoBehaviour {
 			return false;
 		}
 	}
+	*/
 }

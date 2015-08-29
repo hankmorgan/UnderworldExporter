@@ -179,7 +179,8 @@ public class PlayerInventory : MonoBehaviour {
 		}
 
 	}
-
+	/*
+	 * 
 	public string ObjectPickedUp(int slotIndex, string sObjectInHand)
 	{//Returns the game object of the object already in the slot
 		string ExistingObject="";
@@ -350,6 +351,8 @@ public class PlayerInventory : MonoBehaviour {
 
 	}
 
+*/
+
 	public bool GetObjectDescAtSlot(int SlotIndex)
 	{
 		string objectName=GetObjectAtSlot (SlotIndex);
@@ -462,6 +465,8 @@ public class PlayerInventory : MonoBehaviour {
 			{
 				sBackPack[slotIndex-11]=sObject;
 				bBackPack[slotIndex-11]=true;
+				Container cn = GameObject.Find (currentContainer).GetComponent<Container>();
+				cn.items[slotIndex-11]=sObject;
 			}
 			break;
 		}
@@ -555,7 +560,7 @@ public class PlayerInventory : MonoBehaviour {
 		//cn.RemoveItemFromContainer(cObjectInHand);
 		cn.RemoveItemFromContainer(ObjInSlot.name);
 		SetObjectAtSlot(slotIndex,cObjectInHand);
-		if (slotIndex>11)
+		if (slotIndex>=11)
 			{
 			cn.AddItemToContainer(cObjectInHand,slotIndex-11);
 			}
@@ -563,6 +568,86 @@ public class PlayerInventory : MonoBehaviour {
 		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().InventoryIcon.texture;
 		playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
 		Refresh();
+	}
+
+	public bool RemoveItemFromEquipment(string ObjectName)
+	{//Remove the object from wherever it is on the characters paperdoll.
+		if (sHelm==ObjectName)
+		{
+			sHelm="";
+			bHelm=true;
+			return true;
+		}
+		if (sChest==ObjectName)
+		{
+			sChest="";
+			bChest=true;
+			return true;
+		}
+
+		if (sLegs==ObjectName)
+		{
+			sLegs="";
+			bLegs=true;
+			return true;
+		}
+
+		if (sBoots==ObjectName)
+		{
+			sBoots="";
+			bBoots=true;
+			return true;
+		}
+
+		if (sGloves==ObjectName)
+		{
+			sGloves="";
+			bGloves=true;
+			return true;
+		}
+
+		if (sRightShoulder==ObjectName)
+		{
+			sRightShoulder="";
+			bRightShoulder=true;
+			return true;
+		}
+
+		if (sLeftShoulder==ObjectName)
+		{
+			sLeftShoulder="";
+			bLeftShoulder=true;
+			return true;
+		}
+
+		if (sRightHand==ObjectName)
+		{
+			sRightHand="";
+			bRightHand=true;
+			return true;
+		}
+		
+		if (sLeftHand==ObjectName)
+		{
+			sLeftHand="";
+			bLeftHand=true;
+			return true;
+		}
+
+		if (sRightRing==ObjectName)
+		{
+			sRightRing="";
+			bRightRing=true;
+			return true;
+		}
+		
+		if (sLeftRing==ObjectName)
+		{
+			sLeftRing="";
+			bLeftRing=true;
+			return true;
+		}
+		return false;
 	}
 
 	/*

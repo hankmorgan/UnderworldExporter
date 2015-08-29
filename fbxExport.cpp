@@ -865,7 +865,8 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 				{
 				tmp.tileType = 1;
 				}
-			RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 1);
+			RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 0);
+
 			}
 		}
 //Render doors

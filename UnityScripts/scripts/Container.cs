@@ -134,7 +134,7 @@ public class Container : MonoBehaviour {
 		}
 	}
 
-
+	/*
 
 	public string ObjectPickedUp(int slotIndex, string sObjectInHand)
 	{//Returns the game object of the object already in the slot
@@ -300,7 +300,7 @@ public class Container : MonoBehaviour {
 		return ExistingObject;
 		
 	}
-
+*/
 	public void OpenContainer()
 	{
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
@@ -309,8 +309,11 @@ public class Container : MonoBehaviour {
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
 		//display the container contents.
 		//Container currObjCont = currObj.GetComponent<Container>();
-		this.isOpenOnPanel=true;
-		//currObjCont.ContainerParent=pInv.currentContainer;
+		if (this.isOpenOnPanel==false)
+		{
+			this.isOpenOnPanel=true;
+			ContainerParent=pInv.currentContainer;
+		}
 		//pInv.atTopLevel=false;
 		pInv.currentContainer=this.name;
 		if (pInv.currentContainer=="")

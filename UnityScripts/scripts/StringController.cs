@@ -47,6 +47,11 @@ public class StringController : MonoBehaviour {
 		return (GetString (4,objInt.item_id));
 	}
 
+	public string GetSimpleObjectNameUW(ObjectInteraction objInt)
+	{//Eventually this will return things like proper quants etc.
+		return (GetString (4,objInt.item_id));
+	}
+
 	private bool Load(string fileName)
 	{
 		string line;

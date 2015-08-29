@@ -18,7 +18,6 @@ public class Food : MonoBehaviour {
 		//Food gets eaten
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		UWCharacter playerUW = objInt.getPlayerUW();
-		Container cn = objInt.getCurrentContainer();
 		StringController Sc = objInt.getStringController();
 		UILabel ml =objInt.getMessageLog();
 		PlayerInventory pInv = objInt.getPlayerInventory();
@@ -33,15 +32,23 @@ public class Food : MonoBehaviour {
 		{
 			playerUW.FoodLevel = Nutrition+playerUW.FoodLevel;
 			ml.text= "That " + Sc.GetFormattedObjectNameUW(objInt,1) + " " + foodFlavourText(objInt,Sc);
-			cn.RemoveItemFromContainer(this.name);
-			pInv.Refresh();
-			Destroy (this.gameObject);
-			return true; //Food was eaten. It is okay to destroy.
+			objInt.consumeObject();//destroy and remove from inventory/world.
+			return true; //Food was eaten.
 		}
 	}
 
-	private string foodFlavourText(ObjectInteraction objInt, StringController sc)//Literally!
+	public bool LookAt()
 	{
+		//Code for when looking at food. Should one day return quantity and smell properly
+		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		UILabel ml =objInt.getMessageLog();
+		StringController Sc = objInt.getStringController();
+		ml.text = Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
+		return true;
+	}
+
+	private string foodFlavourText(ObjectInteraction objInt, StringController sc)//Literally!
+	{//The quality string of the food. Eg is it disgusting or not etc.
 		int FoodQuality = this.GetComponent<ObjectInteraction>().Quality;
 
 		if (FoodQuality == 0)

@@ -13,27 +13,31 @@ public class Readable : MonoBehaviour {
 	
 	}
 
-	public string Activate()
+	public bool Activate()
 	{//Returns the text of this readable.
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		StringController SC = objInt.getStringController();
+		UILabel ml = objInt.getMessageLog();
 
-		switch (objInt.item_id)
+		switch (objInt.ItemType)
 		{
 		case 10: //Sign
 			{
-			return SC.GetString (8,objInt.Link - 0x200);
+			ml.text = SC.GetString (8,objInt.Link - 0x200);
+			return true;
 			break;
 			}
 		case 11://Book
 		case 13://Scroll
 			{
-			return SC.GetString (3,objInt.Link - 0x200);
+			ml.text = SC.GetString (3,objInt.Link - 0x200);
+			return true;
 			break;
 			}
 		default: 
 			{
-			return "READABLE NOT FOUND!";
+			ml.text = "READABLE TYPE NOT FOUND! (" + objInt.item_id +")";
+			return false;
 			break;
 			}
 		}
