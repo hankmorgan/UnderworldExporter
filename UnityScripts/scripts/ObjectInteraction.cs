@@ -54,6 +54,32 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 	}
 
+	public UWCharacter getPlayerUW()
+		{//Quickly get the player character for other components.
+		return playerUW;
+		}
+
+	public StringController getStringController()
+	{//Quickly get the string controller for other components.
+		return SC;
+	}
+
+	public Container getCurrentContainer()
+	{
+		Container cn = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+		return cn;
+	}
+
+	public PlayerInventory getPlayerInventory()
+		{
+		return pInv;
+		}
+
+	public UILabel getMessageLog()
+	{
+		return MessageLog;
+	}
+
 	public bool LookDescription()
 	{//Returns the description of this object.
 		Debug.Log ("LookDescription");
@@ -373,14 +399,16 @@ public class ObjectInteraction : MonoBehaviour {
 				break;
 			case 24://FOOD 24
 				{
-					Debug.Log("You eat some food");
-					
-					if (objInt.PickedUp==true)
-						{
-						//Delete from inventory	
-						Debug.Log ("Delete from inventory");
-						}
-					Destroy(objInt.gameObject);
+				if (pInv.ObjectInHand=="")
+					{
+					Food fd = this.gameObject.GetComponent<Food>();
+					fd.Activate();
+					return true;
+					}
+				else
+					{
+					return false;
+					}
 				break;
 				}
 				//Nothing/use

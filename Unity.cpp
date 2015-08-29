@@ -21,8 +21,11 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d);"
-			, objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
+		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d, %d, %d, %d, %d, %d);"
+			, objectMasters[currobj.item_id].InvIcon, 
+			objectMasters[currobj.item_id].type, currobj.item_id,
+			currobj.link, currobj.quality, currobj.owner,
+			objectMasters[currobj.item_id].isMoveable);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
@@ -30,7 +33,10 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
 	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d, \"%s\");"
-		, objectMasters[currobj.item_id].InvIcon, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable, ChildName);
+		, objectMasters[currobj.item_id].InvIcon, 
+		objectMasters[currobj.item_id].type, currobj.item_id, 
+		currobj.link, currobj.quality, currobj.owner,
+		objectMasters[currobj.item_id].isMoveable, ChildName);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1631,6 +1637,12 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 						case FORCE_DOOR:
 							RenderUnityEntityForceDoor(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case FOOD:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							fprintf(UNITY_FILE, "\n\tSetFood(myObj);");
+							break;
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -1820,3 +1832,4 @@ void setReadable()
 	{
 	fprintf(UNITY_FILE, "\n\tSetReadable(myObj);");
 	}
+

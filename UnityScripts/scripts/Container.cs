@@ -92,16 +92,28 @@ public class Container : MonoBehaviour {
 		if (items[index] != "")
 			{
 			items[index]="";
-			//itemCount--;
 			return true;
 			}
 		else
 			{
-			Debug.Log (name + "(" +index + ") invalid item for removal");
+		//	Debug.Log (name + "(" +index + ") invalid item for removal");
 			return false;
 			}
 		}
 
+	public bool RemoveItemFromContainer(string objectName)
+	{
+		for (int i =0; i<40;i++)
+			{
+			if (items[i] == objectName)
+				{
+				items[i]="";
+				Debug.Log ("removed " + objectName + " at (" + i + ")");
+				return true;
+				}
+			}
+		return false;
+	}
 
    static public bool AddObjectToContainer(GameObject objInHand, GameObject objUseOn)
 	{

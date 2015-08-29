@@ -259,92 +259,14 @@ public class InventorySlot : MonoBehaviour {
 				}
 			break;
 		case 2://pickup
-			pInv = player.GetComponent<PlayerInventory>();
-			GameObject ObjectUsedOn=null;
-			if (pInv.GetObjectAtSlot(slotIndex) !="")
-				{//Special case for opening containers in pickup mode.
-				ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
-				if ((leftClick==false) && (pInv.ObjectInHand==""))
-					{
-					if (ObjectUsedOn.GetComponent<Container>() !=null)
-						{
-						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
-						if (this.slotIndex>=11)
-						{
-							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(this.slotIndex-11);
-						}
-						pInv.ClearSlot(this.slotIndex);
-						return;
-						}
-					}
-				}
-
-			if ((leftClick) || (pInv.ObjectInHand!=""))
-				{//Left Click or i'm carrying something
-				if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
-					{
-					PickupFromSlot();
-					}
-				else
-					{//There is an object in that slot.
-					//GameObject ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
-					if (ObjectUsedOn !=null)
-						{
-						if (ObjectUsedOn.GetComponent<ObjectInteraction>() != null)	
-							{
-							if (ObjectUsedOn.GetComponent<ObjectInteraction>().Activate()==false)
-								{
-								if (pInv.ObjectInHand != "")
-									{
-									//No effect occurred. Swap the two objects.
-									//Debug.Log("Swapping (no effect 1)" + ObjectUsedOn.name + " with " + pInv.ObjectInHand);
-									pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
-									pInv.ObjectInHand= ObjectUsedOn.name;
-									playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-									playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
-									}
-								else
-									{
-									//Clear the slot
-									//TODO: Make this work with Equipment slots
-									pInv.ObjectInHand= ObjectUsedOn.name;
-									playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-									playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
-									if (this.slotIndex>=11)
-										{
-										Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-										cn.RemoveItemFromContainer(this.slotIndex-11);
-										}
-									pInv.ClearSlot(this.slotIndex);
-									}
-								}
-							}
-						else
-							{
-							//No effect occurred. Swap the two objects. (should not happen?)
-							Debug.Log("Swapping (no effect 2)" + ObjectUsedOn.name + " with " + pInv.ObjectInHand);
-							}
-						}
-					//pInv.InteractTwoObjects(pInv.ObjectInHand,pInv.GetObjectAtSlot(slotIndex),slotIndex);
-					//UseFromSlot();
-					}
-					
-				}
-			else 
-				{//right click
-				//PickupFromSlot();
-				ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
-				if (ObjectUsedOn !=null)
-					{
-						if (ObjectUsedOn.GetComponent<ObjectInteraction>() != null)	
-						{
-							ObjectUsedOn.GetComponent<ObjectInteraction>().Activate();
-						}
-					}
-				}
+			if (leftClick)
+			{
+				LeftClickPickup();
+			}
+			else
+			{
+				RightClickPickup();
+			}
 			break;
 		case 4://look
 			if (leftClick)
@@ -374,6 +296,112 @@ public class InventorySlot : MonoBehaviour {
 
 	}
 
+
+	void LeftClickPickup()
+	{//Code for when I left click in pickup mode
+		pInv = player.GetComponent<PlayerInventory>();
+		GameObject ObjectUsedOn=null;
+		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
+			{
+			PickupFromSlot();
+			}
+		else
+			{
+			//Get the object at the slot and test it's activation.
+			ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			if (ObjectUsedOn.GetComponent<ObjectInteraction>().Activate()==false)
+				{//if nothing happened when I clicked on the object at the slot.
+					if (pInv.ObjectInHand != "")
+						{
+						//TODO: Make sure this works with Equipment slots
+						//No effect occurred. Swap the two objects.
+						pInv.SwapObjects(ObjectUsedOn,slotIndex,pInv.ObjectInHand);
+					}
+					else
+						{//Pick up the item at that slot.
+						//TODO: Make this work with Equipment slots
+						pInv.ObjectInHand= ObjectUsedOn.name;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+						if (this.slotIndex>=11)
+							{
+							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+							cn.RemoveItemFromContainer(this.slotIndex-11);
+							}
+						pInv.ClearSlot(this.slotIndex);
+					}
+				}
+			}
+	}
+
+
+	void RightClickPickup()
+	{	
+		pInv = player.GetComponent<PlayerInventory>();
+		GameObject ObjectUsedOn=null;//The object at the clicked slot
+
+		//Code for when I right click in pickup mode.
+		if (pInv.GetObjectAtSlot(slotIndex) !="")
+		{//Special case for opening containers in pickup mode.
+			ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			if ((pInv.ObjectInHand==""))
+			{
+				if (ObjectUsedOn.GetComponent<Container>() !=null)
+				{
+					pInv.ObjectInHand= ObjectUsedOn.name;
+					playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+					playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+					if (this.slotIndex>=11)
+					{
+						Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+						cn.RemoveItemFromContainer(this.slotIndex-11);
+					}
+					pInv.ClearSlot(this.slotIndex);
+					return;
+				}
+			}
+		}
+
+		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
+			{
+			PickupFromSlot();
+			}
+		else
+			{
+			bool ObjectActivated =false;
+			//Get the object at the slot and test it's activation.
+			ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			//When right clicking only try to activate when an object in in the hand
+			if (pInv.ObjectInHand !="")
+				{
+				ObjectActivated = ObjectUsedOn.GetComponent<ObjectInteraction>().Activate();
+				}
+			if (ObjectActivated==false)
+				{//if nothing happened when I clicked on the object at the slot with something in hand.
+					if (pInv.ObjectInHand != "")
+					{
+						//TODO: Make sure this works with Equipment slots
+						//No effect occurred. Swap the two objects.
+						pInv.SwapObjects(ObjectUsedOn,slotIndex,pInv.ObjectInHand);
+						pInv.Refresh();
+					}
+					else
+				{//Pick up the ite;m at that slot.
+					//TODO: Make this work with Equipment slots
+						pInv.ObjectInHand= ObjectUsedOn.name;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+						if (this.slotIndex>=11)
+						{
+							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+							cn.RemoveItemFromContainer(this.slotIndex-11);
+						}
+						pInv.ClearSlot(this.slotIndex);
+					}
+				}
+			}
+	}
+
 	void OpenRuneBag()
 	{
 		chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
@@ -382,11 +410,6 @@ public class InventorySlot : MonoBehaviour {
 			chainControl.ActiveControl=2;
 		}
 	}
-
-
-
-
-
 
 //	void OnClick()
 //	{

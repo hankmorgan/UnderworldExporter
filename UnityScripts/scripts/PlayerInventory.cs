@@ -167,13 +167,13 @@ public class PlayerInventory : MonoBehaviour {
 				}
 				else
 				{
-					Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
+					//Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
 					Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
 				}
 			}
 			else
 			{
-				Debug.Log ("Displaying blank");
+				//Debug.Log ("Displaying blank");
 				Label.spriteName="object_blank";
 			}
 		}
@@ -525,6 +525,45 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public void Refresh()
+	{//Force a full refresh of inventory display
+		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
+
+		bHelm=true;
+		bChest=true;
+		bLegs=true;
+		bBoots=true;
+		bGloves=true;
+		bRightShoulder=true;
+		bLeftShoulder=true;
+		bRightHand=true;
+		bLeftHand=true;
+		bRightRing=true;
+		bLeftRing=true;
+		for (int i = 11; i<=18; i++)
+			{
+				sBackPack[i-11] = cn.GetItemAt(i-11);
+				bBackPack[i-11]=true;
+			}
+	}
+
+
+	public void SwapObjects(GameObject ObjInSlot, int slotIndex, string cObjectInHand)
+	{//Swaps specified game object as the slot wth the passed object
+		Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
+		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
+		//cn.RemoveItemFromContainer(cObjectInHand);
+		cn.RemoveItemFromContainer(ObjInSlot.name);
+		SetObjectAtSlot(slotIndex,cObjectInHand);
+		if (slotIndex>11)
+			{
+			cn.AddItemToContainer(cObjectInHand,slotIndex-11);
+			}
+		ObjectInHand= ObjInSlot.name;
+		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+		playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
+		Refresh();
+	}
 
 	/*
 	public bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)

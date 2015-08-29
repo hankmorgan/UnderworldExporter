@@ -31,6 +31,8 @@ public class UWCharacter : MonoBehaviour {
 	public bool CursorInMainWindow;
 
 	public StringController StringControl;
+	//The message log on the main screen.
+	private UILabel MessageLog;
 
 	//Combat variables
 	public int AttackCharging;
@@ -43,15 +45,55 @@ public class UWCharacter : MonoBehaviour {
 	public bool[] Runes=new bool[24];
 	public int[] ActiveRunes=new int[3];
 
-	//Character related info
-	public bool isFemale;
-	public bool isLefty;
 
 	//The storage location for container items.
 	public static GameObject InvMarker;
 
-	//The message log on the main screen.
-	private UILabel MessageLog;
+	//Character related info
+	//Character Details
+	public string CharName;
+	public string CharClass;
+	public int CharLevel;
+	public bool isFemale;
+	public bool isLefty;
+
+	//Character Status
+	public int FoodLevel;
+	public int Fatigue;
+	public bool Poisoned;
+
+	//Character Stats
+	public int STR;
+	public int DEX;
+	public int INT;
+	public int MaxVIT;
+	public int CurVIT;
+	public int MaxMana;
+	public int CurMana;
+	public int EXP;
+
+	//Character skills
+	public int Attack;
+	public int Defense;
+	public int Unarmed;
+	public int Axe;
+	public int Mace;
+	public int Missile;
+	public int ManaSkill;
+	public int Lore;
+	public int Casting;
+	public int Traps;
+	public int Search;
+	public int Track;
+	public int Sneak;
+	public int Repair;
+	public int Charm;
+	public int PickLock;
+	public int Acroboat;
+	public int Appraise;
+	public int Swimming;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -69,7 +111,7 @@ public class UWCharacter : MonoBehaviour {
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
-		Readable.SC=StringControl;
+		//Readable.SC=StringControl;
 
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();

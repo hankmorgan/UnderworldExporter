@@ -36,6 +36,17 @@ public class StringController : MonoBehaviour {
 		return (string)GameStrings[BlockNo.ToString("000") + "_" + StringNo.ToString("000")];
 	}
 
+
+	public string GetFormattedObjectNameUW(ObjectInteraction objInt)
+	{//Eventually this will return things like proper quants etc.
+		return (GetString (4,objInt.item_id));
+	}
+
+	public string GetFormattedObjectNameUW(ObjectInteraction objInt,int Quantity)
+	{//Eventually this will return things like proper quants etc.
+		return (GetString (4,objInt.item_id));
+	}
+
 	private bool Load(string fileName)
 	{
 		string line;

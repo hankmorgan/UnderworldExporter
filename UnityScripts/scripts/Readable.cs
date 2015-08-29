@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Readable : MonoBehaviour {
-	public static StringController SC;
+	//public static StringController SC;
 	// Use this for initialization
 	void Start () {
 	
@@ -16,6 +16,7 @@ public class Readable : MonoBehaviour {
 	public string Activate()
 	{//Returns the text of this readable.
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		StringController SC = objInt.getStringController();
 
 		switch (objInt.item_id)
 		{
