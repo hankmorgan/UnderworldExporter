@@ -86,9 +86,23 @@ public class ButtonHandler : MonoBehaviour {
 		//MessageLog.text=name +"exited";
 	}
 
-	public string LookDescription()
-	{//Returns the description of this object.
-		return SC.GetString("004",item_id.ToString ("000"));
+	//public string LookDescription()
+	//{//Returns the description of this object.
+	//	return SC.GetString("004",item_id.ToString ("000"));
+	//}
+
+	public void LookAt()
+	{
+		//Generally gives the object description but depending on the trigger target type it may activate (lookat trigger)
+		ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
+		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		UILabel ml =objInt.getMessageLog();
+		StringController Sc = objInt.getStringController();
+		ml.text = Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
+		if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
+			{
+			this.Activate();
+			}
 	}
 
 	public void Activate()

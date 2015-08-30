@@ -305,7 +305,13 @@ public class Container : MonoBehaviour {
 	{
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
+		if (currObjInt.PickedUp==false)
+			{//The requested container is open in the game world. This can cause problems!
+			Debug.Log ("Can't open a container in the real world in this function!");
+			return;
+			}
 		GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
+
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
 		//display the container contents.
 		//Container currObjCont = currObj.GetComponent<Container>();

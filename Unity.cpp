@@ -269,6 +269,7 @@ int hasLock=0;
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (game != SHOCK)
 		{//bit 0-6 of the lock objects link is the keyid for opening it in uw
 		// The flags control the lock state
@@ -441,6 +442,10 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 					fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
 					fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
 					fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
+					if (objectMasters[currobj.item_id].isMoveable == 1)
+						{
+						fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+						}
 					}
 				tmpobj = objList[tmpobj.next];
 				}
@@ -448,8 +453,12 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
 			fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
 			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
+			if (objectMasters[currobj.item_id].isMoveable == 1)
+				{
+				fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+				}
 			}
-		fprintf(UNITY_FILE, "\n\t////Container contents complete");
+		fprintf(UNITY_FILE, "\n\t////Container contents complete\n");
 		return;
 		}
 	else
@@ -491,7 +500,7 @@ void RenderUnityEntityActivator(int game, float x, float y, float z, ObjectItem 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	CreateUnityScriptCall(game,x,y,z,currobj,objList,LevelInfo,"ButtonHandler");
-	//RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
+	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
 	return;
 	}
 
@@ -1399,6 +1408,7 @@ void RenderUnityTrigger(int game, float x, float y, float z, ObjectItem &currobj
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	}
 
 void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1411,6 +1421,7 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 	if (z < -1){ z = -1; }
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
 	switch (objectMasters[currobj.item_id].type)
 		{
 			case  A_DAMAGE_TRAP:
@@ -1643,6 +1654,12 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							fprintf(UNITY_FILE, "\n\tSetFood(myObj);");
 							break;
+						case MAP:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							fprintf(UNITY_FILE, "\n\tSetMap(myObj);");
+							break;
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -1687,7 +1704,10 @@ void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
 		{
 		for (int y = 0; y <= 63; y++)
 			{
-			fprintf(UNITY_FILE, "\n\tSetTileProp(tilemap, %d,%d,%d,%d,%d,%d);", x, y, LevelInfo[x][y].tileType, LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight);
+			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d);"
+				, x, y, LevelInfo[x][y].tileType, 
+				LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight, 
+				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, 0);  //TODO:Bridges
 			}
 		}
 	fclose(UNITY_FILE);

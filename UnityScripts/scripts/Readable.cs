@@ -21,14 +21,14 @@ public class Readable : MonoBehaviour {
 
 		switch (objInt.ItemType)
 		{
-		case 10: //Sign
+		case ObjectInteraction.SIGN: //Sign
 			{
 			ml.text = SC.GetString (8,objInt.Link - 0x200);
 			return true;
 			break;
 			}
-		case 11://Book
-		case 13://Scroll
+		case ObjectInteraction.BOOK://Book
+		case ObjectInteraction.SCROLL://Scroll
 			{
 			ml.text = SC.GetString (3,objInt.Link - 0x200);
 			return true;

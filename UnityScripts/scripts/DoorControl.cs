@@ -26,7 +26,7 @@ public class DoorControl : MonoBehaviour {
 		{
 			switch (objIntUsed.ItemType)
 				{
-				case 5: //Key
+				case ObjectInteraction.KEY: //Key
 				if(objIntThis.Link==objIntUsed.Owner)//This is a valid key for the door.
 					{
 					Debug.Log ("A key is used to unlock a door");

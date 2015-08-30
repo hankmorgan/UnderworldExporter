@@ -123,7 +123,7 @@ void UseObjectInHand()
 				//pInv.InteractTwoObjects(pInv.ObjectInHand,hit.transform.gameObject.name,-1);
 				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Activate();
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Use();
 				}
 			}
 		}
@@ -154,7 +154,8 @@ void ThrowObjectInHand()
 					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 					Debug.Log ("drop point is " + ray.GetPoint(dropRange-0.1f));
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
-					droppedItem.rigidbody.useGravity=true;
+					//droppedItem.rigidbody.useGravity=true;
+					WindowDetect.UnFreezeMovement(droppedItem);
 					Vector3 ThrowDir = ray.GetPoint(dropRange) - pInv.transform.position;
 					//Debug.Log ("throw dir is " + ThrowDir);
 					//Apply the force along the direction.
@@ -171,6 +172,36 @@ void ThrowObjectInHand()
 				pInv.JustPickedup=false;//The next click event will allow dropping.
 			}
 			//try and drop the item in the world
+		}
+	}
+
+	public static void FreezeMovement(GameObject myObj)
+	{//Stop objects which can move in the 3d world from moving when they are in the inventory or containers.
+		Rigidbody rg = myObj.GetComponent<Rigidbody>();
+		if (rg!=null)
+		{
+			rg.useGravity=false;
+			rg.constraints = 
+					  RigidbodyConstraints.FreezeRotationX 
+					| RigidbodyConstraints.FreezeRotationY 
+					| RigidbodyConstraints.FreezeRotationZ 
+					| RigidbodyConstraints.FreezePositionX 
+					| RigidbodyConstraints.FreezePositionY 
+					| RigidbodyConstraints.FreezePositionZ;
+		}
+	}
+
+	public static void UnFreezeMovement(GameObject myObj)
+	{//Allow objects which can move in the 3d world to moving when they are released.
+		Rigidbody rg = myObj.GetComponent<Rigidbody>();
+		if (rg!=null)
+		{
+			rg.useGravity=true;
+			rg.constraints = 
+				RigidbodyConstraints.FreezeRotationX 
+					| RigidbodyConstraints.FreezeRotationY 
+					| RigidbodyConstraints.FreezeRotationZ;
+
 		}
 	}
 }

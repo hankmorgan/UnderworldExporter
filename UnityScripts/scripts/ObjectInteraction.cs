@@ -2,6 +2,83 @@
 using System.Collections;
 
 public class ObjectInteraction : MonoBehaviour {
+
+	public const int NPC =0;
+	public const int WEAPON =1;
+	public const int ARMOUR =2 ;
+	public const int AMMO =3 ;
+	public const int DOOR =4 ;
+	public const int KEY =5 ;
+	public const int RUNE =6 ;
+	public const int BRIDGE =7 ;
+	public const int BUTTON =8 ;
+	public const int LIGHT =9 ;
+	public const int SIGN =10 ;
+	public const int BOOK =11 ;
+	public const int WAND =12 ;
+	public const int SCROLL= 13; //The reading kind
+	public const int POTIONS =14;
+	public const int INSERTABLE =15; //Shock style put the circuit board in the slot.
+	public const int INVENTORY =16; //Quest items and the like with no special properties
+	public const int ACTIVATOR =17; //Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+	public const int TREASURE =18 ;
+	public const int CONTAINER =19 ;
+	//public const int TRAP =20 ;
+	public const int LOCK =21 ;
+	public const int TORCH =22 ;
+	public const int CLUTTER =23 ;
+	public const int FOOD =24 ;
+	public const int SCENERY =25 ;
+	public const int INSTRUMENT =26 ;
+	public const int FIRE =27 ;
+	public const int MAP= 28 ;
+	public const int HIDDENDOOR =29 ;
+	public const int PORTCULLIS =30 ;
+	public const int PILLAR =31 ;
+	public const int SOUND= 32 ;
+	public const int CORPSE =33 ;
+	public const int TMAP_SOLID =34 ;
+	public const int TMAP_CLIP= 35 ;
+	public const int MAGICSCROLL =36 ;
+	public const int A_DAMAGE_TRAP =37 ;
+	public const int A_TELEPORT_TRAP =38 ;
+	public const int A_ARROW_TRAP =39 ;
+	public const int A_DO_TRAP= 40 ;
+	public const int A_PIT_TRAP= 41 ;
+	public const int A_CHANGE_TERRAIN_TRAP= 42 ;
+	public const int A_SPELLTRAP =43 ;
+	public const int A_CREATE_OBJECT_TRAP =44 ;
+	public const int A_DOOR_TRAP= 45 ;
+	public const int A_WARD_TRAP =46 ;
+	public const int A_TELL_TRAP =47 ;
+	public const int A_DELETE_OBJECT_TRAP= 48 ;
+	public const int AN_INVENTORY_TRAP =49 ;
+	public const int A_SET_VARIABLE_TRAP =50 ;
+	public const int A_CHECK_VARIABLE_TRAP= 51 ;
+	public const int A_COMBINATION_TRAP= 52 ;
+	public const int A_TEXT_STRING_TRAP =53 ;
+	public const int A_MOVE_TRIGGER =54 ;
+	public const int A_PICK_UP_TRIGGER= 55 ;
+	public const int A_USE_TRIGGER =56 ;
+	public const int A_LOOK_TRIGGER =57 ;
+	public const int A_STEP_ON_TRIGGER =58 ;
+	public const int AN_OPEN_TRIGGER =59 ;
+	public const int AN_UNLOCK_TRIGGER =60 ;
+	public const int A_FOUNTAIN= 61 ;
+	public const int SHOCK_DECAL =62 ;
+	public const int COMPUTER_SCREEN=63 ;
+	public const int SHOCK_WORDS =64 ;
+	public const int SHOCK_GRATING= 65 ;
+	public const int SHOCK_DOOR= 66 ;
+	public const int SHOCK_DOOR_TRANSPARENT= 67 ;
+	public const int UW_PAINTING= 68 ;
+	public const int PARTICLE =69 ;
+	public const int RUNEBAG =70 ;
+	public const int SHOCK_BRIDGE =71 ;
+	public const int FORCE_DOOR= 72 ;
+	public const int HIDDENPLACEHOLDER =999 ;
+
+
 	private UILabel MessageLog;
 	public Sprite InventoryIcon;
 	public string InventoryString;
@@ -25,9 +102,9 @@ public class ObjectInteraction : MonoBehaviour {
 
 	//TODO: remove these!
 	public bool isContainer;
-	public bool isRuneBag;
-	public bool isRuneStone;
-	public bool isMap;
+	//public bool isRuneBag;
+	//public bool isRuneStone;
+	//public bool isMap;
 	public bool isDoor;
 	public bool isKey;
 
@@ -82,28 +159,28 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public bool LookDescription()
 	{//Returns the description of this object.
-		Debug.Log ("LookDescription");
+		//Debug.Log ("LookDescription");
 		switch (ItemType)
 		{
-		case 0://	NPC 0
+		case NPC:// 0
 			//nothing to do
-		case 1://	WEAPON 1
+		case WEAPON://	WEAPON 1
 			//repair with hammer
-		case 2://	ARMOUR 2
+		case ARMOUR://	ARMOUR 2
 			//repair with hammer
-		case 3://	AMMO 3
+		case AMMO://	AMMO 3
 			//nothing
 			break;
-		case 4://	DOOR 4
-		case 5://	KEY 5
+		case DOOR://	DOOR 4
+		case KEY://	KEY 5
 			//nothing/use
-		case 6://	RUNE 6
+		case RUNE://	RUNE 6
 			//nothing
-		case 7://	BRIDGE 7
+		case BRIDGE://	BRIDGE 7
 			//nothing
-		case 8://	BUTTON 8	
+		case BUTTON://	BUTTON 8	
 			//nothing
-		case 9://	LIGHT 9
+		case LIGHT://	LIGHT 9
 			//?
 			{
 			MessageLog.text = SC.GetString("004",item_id.ToString ("000"));
@@ -111,103 +188,123 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 			}
 
-		case 10://	SIGN 10
-		case 11://	BOOK 11
-		case 13://	SCROLL 13	//The reading kind
+		case SIGN://	SIGN 10
+		case BOOK://	BOOK 11
+		case SCROLL://	SCROLL 13	//The reading kind
 		{
 			Readable rd =this.gameObject.GetComponent<Readable>();
 			rd.Activate();
 			return true;
 			break;
 		}
-		case 12://	WAND 12	
+		case WAND://	WAND 12	
 			//Nothing/use
 
-		case 14://	POTIONS 14	
+		case POTIONS://	POTIONS 14	
 			//Nothing/use
-		case 15://INSERTABLE 15	//Shock style put the circuit board in the slot.
+		case INSERTABLE://INSERTABLE 15	//Shock style put the circuit board in the slot.
 			//?
-		case 16://	INVENTORY 16	//Quest items and the like with no special properties
+		case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
 			//Nothing
-		case 17:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+		case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
 			//Nothing
-		case 18://TREASURE 18
+			{
+				ButtonHandler bn = this.gameObject.GetComponent<ButtonHandler>();
+				bn.LookAt();
+				return true;
+			}
+		case TREASURE://TREASURE 18
 			//Nothing
 			break;
-		case 19:// CONTAINER 19
-		case 20:// TRAP 20	//not implemented
-		case 21://LOCK 21
+		case CONTAINER:// CONTAINER 19
+		//case TRAP:// TRAP 20	//not implemented
+		case LOCK://LOCK 21
 			//Nothing
-		case 22://TORCH 22
+		case TORCH://TORCH 22
 			//Nothing. torch effects handled by objcmb /use
-		case 23://CLUTTER 23
+		case CLUTTER://CLUTTER 23
 			//Nothing
 			break;
-		case 24://FOOD 24
+		case FOOD://FOOD 24
 			{
 			Food fd = this.GetComponent<Food>();
 			fd.LookAt();
 			break;
 			}
 			//Nothing/use
-		case 25://SCENERY 25
+		case SCENERY://SCENERY 25
 			//Nothing
-		case 26://INSTRUMENT 26
+		case INSTRUMENT://INSTRUMENT 26
 			//Nothing/use
-		case 27://FIRE 27
+		case FIRE://FIRE 27
 			//Nothing
-		case 28:// MAP 28
+			break;
+		case MAP:// MAP 28
 			//Nothing//use
-		case 29://HIDDENDOOR 29
+			{
+			Map mp = this.GetComponent<Map>();
+			mp.LookAt();
+			return true;
+			break;
+			}
+		case HIDDENDOOR://HIDDENDOOR 29
 			//?
-		case 30://PORTCULLIS 30
+		case PORTCULLIS://PORTCULLIS 30
 			//?
-		case 31://PILLAR 31
+		case PILLAR://PILLAR 31
 			//nothing
-		case 32://SOUND 32
+		case SOUND://SOUND 32
 			//nothing
-		case 33://CORPSE 33
+		case CORPSE://CORPSE 33
 			//Nothing
-		case 34://TMAP_SOLID 34
-		case 35://TMAP_CLIP 35
-		case 36://MAGICSCROLL 36
-		case 37: //A_DAMAGE_TRAP 37
-		case 38://A_TELEPORT_TRAP 38
-		case 39://A_ARROW_TRAP 39
-		case 40://A_DO_TRAP 40
-		case 41://A_PIT_TRAP 41
-		case 42://A_CHANGE_TERRAIN_TRAP 42
-		case 43://A_SPELLTRAP 43
-		case 44://A_CREATE_OBJECT_TRAP 44
-		case 45://A_DOOR_TRAP 45
-		case 46://A_WARD_TRAP 46
-		case 47://A_TELL_TRAP  47
-		case 48://A_DELETE_OBJECT_TRAP 48
-		case 49://AN_INVENTORY_TRAP 49
-		case 50://A_SET_VARIABLE_TRAP 50
-		case 51://A_CHECK_VARIABLE_TRAP 51
-		case 52://A_COMBINATION_TRAP 52
-		case 53://A_TEXT_STRING_TRAP 53
-		case 54://A_MOVE_TRIGGER 54
-		case 55:// A_PICK_UP_TRIGGER 55
-		case 56://A_USE_TRIGGER 56
-		case 57://A_LOOK_TRIGGER 57
-		case 58://A_STEP_ON_TRIGGER 58
-		case 59://AN_OPEN_TRIGGER 59
-		case 60://AN_UNLOCK_TRIGGER 60
-		case 61://A_FOUNTAIN	61
-		case 62://SHOCK_DECAL 62
-		case 63://COMPUTER_SCREEN 63
-		case 64://SHOCK_WORDS 64
-		case 65://SHOCK_GRATING 65 
-		case 66://SHOCK_DOOR 66
-		case 67://SHOCK_DOOR_TRANSPARENT 67
-		case 68://UW_PAINTING	68
-		case 69://PARTICLE 69
-		case 70://RUNEBAG 70
-		case 71://SHOCK_BRIDGE 71
-		case 72://FORCE_DOOR 72
-		case 73://HIDDENPLACEHOLDER 999
+		case TMAP_SOLID://TMAP_SOLID 34
+		case TMAP_CLIP://TMAP_CLIP 35
+		case MAGICSCROLL://MAGICSCROLL 36
+		case A_DAMAGE_TRAP: //A_DAMAGE_TRAP 37
+		case A_TELEPORT_TRAP://A_TELEPORT_TRAP 38
+		case A_ARROW_TRAP://A_ARROW_TRAP 39
+		case A_DO_TRAP://A_DO_TRAP 40
+		case A_PIT_TRAP://A_PIT_TRAP 41
+		case A_CHANGE_TERRAIN_TRAP://A_CHANGE_TERRAIN_TRAP 42
+		case A_SPELLTRAP://A_SPELLTRAP 43
+		case A_CREATE_OBJECT_TRAP://A_CREATE_OBJECT_TRAP 44
+		case A_DOOR_TRAP://A_DOOR_TRAP 45
+		case A_WARD_TRAP://A_WARD_TRAP 46
+		case A_TELL_TRAP://A_TELL_TRAP  47
+		case A_DELETE_OBJECT_TRAP://A_DELETE_OBJECT_TRAP 48
+		case AN_INVENTORY_TRAP://AN_INVENTORY_TRAP 49
+		case A_SET_VARIABLE_TRAP://A_SET_VARIABLE_TRAP 50
+		case A_CHECK_VARIABLE_TRAP://A_CHECK_VARIABLE_TRAP 51
+		case A_COMBINATION_TRAP://A_COMBINATION_TRAP 52
+		case A_TEXT_STRING_TRAP://A_TEXT_STRING_TRAP 53
+		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
+		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
+		case A_USE_TRIGGER://A_USE_TRIGGER 56
+		case A_LOOK_TRIGGER://A_LOOK_TRIGGER 57
+		case A_STEP_ON_TRIGGER://A_STEP_ON_TRIGGER 58
+		case AN_OPEN_TRIGGER://AN_OPEN_TRIGGER 59
+		case AN_UNLOCK_TRIGGER://AN_UNLOCK_TRIGGER 60
+		case A_FOUNTAIN://A_FOUNTAIN	61
+		case SHOCK_DECAL://SHOCK_DECAL 62
+		case COMPUTER_SCREEN://COMPUTER_SCREEN 63
+		case SHOCK_WORDS://SHOCK_WORDS 64
+		case SHOCK_GRATING://SHOCK_GRATING 65 
+		case SHOCK_DOOR://SHOCK_DOOR 66
+		case SHOCK_DOOR_TRANSPARENT://SHOCK_DOOR_TRANSPARENT 67
+		case UW_PAINTING://UW_PAINTING	68
+		case PARTICLE://PARTICLE 69
+			break;
+		case RUNEBAG://RUNEBAG 70
+			{
+
+			RuneBag rg= this.gameObject.GetComponent<RuneBag>();
+			rg.LookAt();
+			return true;
+			break;
+			}
+		case SHOCK_BRIDGE://SHOCK_BRIDGE 71
+		case FORCE_DOOR://FORCE_DOOR 72
+		case HIDDENPLACEHOLDER://HIDDENPLACEHOLDER 999
 			{
 			MessageLog.text =  SC.GetString("004",item_id.ToString ("000"));
 			return false;
@@ -215,11 +312,7 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 		}
 
-
-
-
-
-
+		MessageLog.text =  SC.GetString("004",item_id.ToString ("000"));
 		return false;//SC.GetString("004",item_id.ToString ("000"));
 
 
@@ -245,7 +338,7 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 	}
 */
-	public bool Activate()
+	public bool Use()
 	{//Code to activate specific objects
 		//Returns a reference to the object in hand at the end of the action.
 		//Get a reference to the object currently in hand
@@ -273,16 +366,18 @@ public class ObjectInteraction : MonoBehaviour {
 
 		switch (ItemType)
 		{
-			case 0://	NPC 0
+			case NPC://	NPC 0
 				//nothing to do
-			case 1://	WEAPON 1
+			case WEAPON://	WEAPON 1
 				//repair with hammer
-			case 2://	ARMOUR 2
+			case ARMOUR://	ARMOUR 2
 				//repair with hammer
-			case 3://	AMMO 3
+			case AMMO://	AMMO 3
 				//nothing
 			break;
-			case 4://	DOOR 4
+			case DOOR://	DOOR 4
+			case HIDDENDOOR://HIDDENDOOR 29
+			case PORTCULLIS://PORTCULLIS 30
 					{
 						DoorControl objDoor = this.GetComponent<DoorControl>();
 						if (objDoor!=null) //This is a door with a control
@@ -304,16 +399,16 @@ public class ObjectInteraction : MonoBehaviour {
 						}
 						break;
 					}
-			case 5://	KEY 5
+			case KEY://	KEY 5
 				{//A key just becomes the object in hand
 					return false;
 				}
 				//nothing/use
-			case 6://	RUNE 6
+			case RUNE://	RUNE 6
 				//nothing
-			case 7://	BRIDGE 7
+			case BRIDGE://	BRIDGE 7
 				//nothing
-			case 8://	BUTTON 8	
+			case BUTTON://	BUTTON 8	
 				//nothing
 				{
 					ButtonHandler objButton = this.gameObject.GetComponent<ButtonHandler>();
@@ -324,10 +419,10 @@ public class ObjectInteraction : MonoBehaviour {
 					}
 				break;
 				}
-			case 9://	LIGHT 9
+			case LIGHT://	LIGHT 9
 				//?
 			break;
-			case 12://	WAND 12	
+			case WAND://	WAND 12	
 				//Nothing/use
 				case 10://	SIGN 10
 				case 11://	BOOK 11
@@ -338,18 +433,23 @@ public class ObjectInteraction : MonoBehaviour {
 					return true;
 					break;
 				}
-			case 14://	POTIONS 14	
+			case POTIONS://	POTIONS 14	
 				//Nothing/use
-			case 15://INSERTABLE 15	//Shock style put the circuit board in the slot.
+			case INSERTABLE://INSERTABLE 15	//Shock style put the circuit board in the slot.
 				//?
-			case 16://	INVENTORY 16	//Quest items and the like with no special properties
+			case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
 				//Nothing
-			case 17:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+			case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
 				//Nothing
-			case 18://TREASURE 18
+				{
+				ButtonHandler bn = this.gameObject.GetComponent<ButtonHandler>();
+				bn.Activate();
+				return true;
+				}
+			case TREASURE://TREASURE 18
 				//Nothing
 				break;
-			case 19:// CONTAINER 19
+			case CONTAINER:// CONTAINER 19
 				{
 				//TODO:add object to container or open container.
 				Container cn = this.gameObject.GetComponent<Container>();
@@ -395,15 +495,15 @@ public class ObjectInteraction : MonoBehaviour {
 					}
 				break;
 				}
-			case 20:// TRAP 20	//not implemented
-			case 21://LOCK 21
+			//case TRAP:// TRAP 20	//not implemented
+			case LOCK://LOCK 21
 				//Nothing
-			case 22://TORCH 22
+			case TORCH://TORCH 22
 			//Nothing. torch effects handled by objcmb /use
-			case 23://CLUTTER 23
+			case CLUTTER://CLUTTER 23
 				//Nothing
 				break;
-			case 24://FOOD 24
+			case FOOD://FOOD 24
 				{
 				if (pInv.ObjectInHand=="")
 					{
@@ -418,81 +518,84 @@ public class ObjectInteraction : MonoBehaviour {
 				break;
 				}
 				//Nothing/use
-			case 25://SCENERY 25
+			case SCENERY://SCENERY 25
 				//Nothing
-			case 26://INSTRUMENT 26
+			case INSTRUMENT://INSTRUMENT 26
 			//Nothing/use
-			case 27://FIRE 27
+			case FIRE://FIRE 27
 				//Nothing
-			case 28:// MAP 28
-				//Nothing//use
-			case 29://HIDDENDOOR 29
-				//?
-			case 30://PORTCULLIS 30
-				//?
-			case 31://PILLAR 31
-				//nothing
-			case 32://SOUND 32
-				//nothing
-			case 33://CORPSE 33
-				//Nothing
-			case 34://TMAP_SOLID 34
-			case 35://TMAP_CLIP 35
-			case 36://MAGICSCROLL 36
-			case 37: //A_DAMAGE_TRAP 37
-			case 38://A_TELEPORT_TRAP 38
-			case 39://A_ARROW_TRAP 39
-			case 40://A_DO_TRAP 40
-			case 41://A_PIT_TRAP 41
-			case 42://A_CHANGE_TERRAIN_TRAP 42
-			case 43://A_SPELLTRAP 43
-			case 44://A_CREATE_OBJECT_TRAP 44
-			case 45://A_DOOR_TRAP 45
-			case 46://A_WARD_TRAP 46
-			case 47://A_TELL_TRAP  47
-			case 48://A_DELETE_OBJECT_TRAP 48
-			case 49://AN_INVENTORY_TRAP 49
-			case 50://A_SET_VARIABLE_TRAP 50
-			case 51://A_CHECK_VARIABLE_TRAP 51
-			case 52://A_COMBINATION_TRAP 52
-			case 53://A_TEXT_STRING_TRAP 53
-			case 54://A_MOVE_TRIGGER 54
-			case 55:// A_PICK_UP_TRIGGER 55
-			case 56://A_USE_TRIGGER 56
-			case 57://A_LOOK_TRIGGER 57
-			case 58://A_STEP_ON_TRIGGER 58
-			case 59://AN_OPEN_TRIGGER 59
-			case 60://AN_UNLOCK_TRIGGER 60
-			case 61://A_FOUNTAIN	61
-			case 62://SHOCK_DECAL 62
-			case 63://COMPUTER_SCREEN 63
-			case 64://SHOCK_WORDS 64
-			case 65://SHOCK_GRATING 65 
-			case 66://SHOCK_DOOR 66
-			case 67://SHOCK_DOOR_TRANSPARENT 67
-			case 68://UW_PAINTING	68
-			case 69://PARTICLE 69
-				break;
-			case 70://RUNEBAG 70
+			case MAP:// MAP 28
 				{
+				Map mp = this.GetComponent<Map>();
+				mp.OpenMap();
+				return true;
+				break;
+				}
+				//Nothing//use
+
+			//?
+		case PILLAR://PILLAR 31
+			//nothing
+		case SOUND://SOUND 32
+			//nothing
+		case CORPSE://CORPSE 33
+			//Nothing
+		case TMAP_SOLID://TMAP_SOLID 34
+		case TMAP_CLIP://TMAP_CLIP 35
+		case MAGICSCROLL://MAGICSCROLL 36
+		case A_DAMAGE_TRAP: //A_DAMAGE_TRAP 37
+		case A_TELEPORT_TRAP://A_TELEPORT_TRAP 38
+		case A_ARROW_TRAP://A_ARROW_TRAP 39
+		case A_DO_TRAP://A_DO_TRAP 40
+		case A_PIT_TRAP://A_PIT_TRAP 41
+		case A_CHANGE_TERRAIN_TRAP://A_CHANGE_TERRAIN_TRAP 42
+		case A_SPELLTRAP://A_SPELLTRAP 43
+		case A_CREATE_OBJECT_TRAP://A_CREATE_OBJECT_TRAP 44
+		case A_DOOR_TRAP://A_DOOR_TRAP 45
+		case A_WARD_TRAP://A_WARD_TRAP 46
+		case A_TELL_TRAP://A_TELL_TRAP  47
+		case A_DELETE_OBJECT_TRAP://A_DELETE_OBJECT_TRAP 48
+		case AN_INVENTORY_TRAP://AN_INVENTORY_TRAP 49
+		case A_SET_VARIABLE_TRAP://A_SET_VARIABLE_TRAP 50
+		case A_CHECK_VARIABLE_TRAP://A_CHECK_VARIABLE_TRAP 51
+		case A_COMBINATION_TRAP://A_COMBINATION_TRAP 52
+		case A_TEXT_STRING_TRAP://A_TEXT_STRING_TRAP 53
+		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
+		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
+		case A_USE_TRIGGER://A_USE_TRIGGER 56
+		case A_LOOK_TRIGGER://A_LOOK_TRIGGER 57
+		case A_STEP_ON_TRIGGER://A_STEP_ON_TRIGGER 58
+		case AN_OPEN_TRIGGER://AN_OPEN_TRIGGER 59
+		case AN_UNLOCK_TRIGGER://AN_UNLOCK_TRIGGER 60
+		case A_FOUNTAIN://A_FOUNTAIN	61
+		case SHOCK_DECAL://SHOCK_DECAL 62
+		case COMPUTER_SCREEN://COMPUTER_SCREEN 63
+		case SHOCK_WORDS://SHOCK_WORDS 64
+		case SHOCK_GRATING://SHOCK_GRATING 65 
+		case SHOCK_DOOR://SHOCK_DOOR 66
+		case SHOCK_DOOR_TRANSPARENT://SHOCK_DOOR_TRANSPARENT 67
+		case UW_PAINTING://UW_PAINTING	68
+		case PARTICLE://PARTICLE 69
+			break;
+		case RUNEBAG://RUNEBAG 70
+			{
 				if (ObjectInHand != null)
-					{
+				{
 					//Try and see if I can add the object to the rune bag.
 					return this.GetComponent<RuneBag>().ActivateByObject(ObjectInHand);
-					}
+				}
 				else
-					{
+				{
 					//open the rune bag if nothing in hand
 					this.GetComponent<RuneBag>().Activate();
 					return true;
-					}
-
-				break;
 				}
 				
-		case 71://SHOCK_BRIDGE 71
-			case 72://FORCE_DOOR 72
-			case 73://HIDDENPLACEHOLDER 999
+				break;
+			}
+		case SHOCK_BRIDGE://SHOCK_BRIDGE 71
+		case FORCE_DOOR://FORCE_DOOR 72
+		case HIDDENPLACEHOLDER://HIDDENPLACEHOLDER 999
 			break;
 		}
 

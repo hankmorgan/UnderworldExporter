@@ -111,6 +111,7 @@ public class UWCharacter : MonoBehaviour {
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
+		TileMap.gronk=this.gameObject;
 		//Readable.SC=StringControl;
 
 		XAxis = GetComponent<MouseLook>();
@@ -200,8 +201,8 @@ public class UWCharacter : MonoBehaviour {
 				
 				if (objPicked!=null)
 				{
-					Debug.Log("USERMODE:Activating objectinteraction "+ hit.transform.name);
-					objPicked.Activate();
+					//Debug.Log("USE MODE:Activating objectinteraction "+ hit.transform.name);
+					objPicked.Use();
 					//ObjectInteraction.Activate (objPicked);
 					//MessageLog.text = "You use a " + hit.transform.name;
 				}
@@ -253,9 +254,12 @@ public class UWCharacter : MonoBehaviour {
 						pInv.JustPickedup=true;//To stop me throwing it away immediately.
 						if (objPicked.rigidbody !=null)
 							{
-								objPicked.rigidbody.useGravity=false;
+					
+								//objPicked.rigidbody.useGravity=false;
+							WindowDetect.FreezeMovement(objPicked.gameObject);
 							}
 						objPicked.transform.position = InvMarker.transform.position;
+						objPicked.transform.parent=InvMarker.transform;
 					}
 				}
 			}

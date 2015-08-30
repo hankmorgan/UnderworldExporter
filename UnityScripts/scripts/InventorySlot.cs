@@ -182,33 +182,10 @@ public class InventorySlot : MonoBehaviour {
 			}
 			*/
 
-			if(currObjInt.isMap)
-			{//Use a map
-				Debug.Log ("This is a map");
-				GameObject map = GameObject.Find ("Automap");
 
-				//Turn on the camera
-				foreach(Transform child in map.transform)
-				{
-					if (child.name == "Camera")
-					{
-						child.gameObject.SetActive(true);
-					}
-				}
-				//Turn off the main hud
-				GameObject UWHud =GameObject.Find ("UW_HUD");
-				foreach(Transform child in UWHud.transform)
-				{
-					if ((child.name == "Anchor")||(child.name == "Camera"))
-					{
-						child.gameObject.SetActive(false);
-					}
-				}
-				return;
-			}
 
 			//use an object. change the cursor
-			if (currObjInt.Activate()==false)
+			if (currObjInt.Use()==false)
 			{
 				playerUW.CursorIcon= currObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
 				playerUW.CurrObjectSprite = currObj.GetComponent<ObjectInteraction>().InventoryString;
@@ -222,17 +199,19 @@ public class InventorySlot : MonoBehaviour {
 	{
 		Debug.Log ("LookFromSlot");
 		pInv = player.GetComponent<PlayerInventory>();
-		//string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		GameObject objLookedAt = GameObject.Find (ObjectName);
 		//if (ObjectName !="")
 		//{
 		//If object has a readable component then activate(and read) otherwise give a generic description.
-		if(this.GetComponent<Readable>()!= null)
+		if(objLookedAt.GetComponent<Readable>()!= null)
 			{
-			this.GetComponent<ObjectInteraction>().Activate();
+			objLookedAt.GetComponent<ObjectInteraction>().Use();
 			}
 		else
 			{
-			MessageLog.text="You see a " + pInv.GetObjectDescAtSlot(slotIndex);
+			//MessageLog.text="You see a " + pInv.GetObjectDescAtSlot(slotIndex);
+			objLookedAt.GetComponent<ObjectInteraction>().LookDescription();
 			}
 
 			//MessageLog.text="You see a " + ObjectName;
@@ -317,7 +296,7 @@ public class InventorySlot : MonoBehaviour {
 			{
 			//Get the object at the slot and test it's activation.
 			ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
-			if (ObjectUsedOn.GetComponent<ObjectInteraction>().Activate()==false)
+			if (ObjectUsedOn.GetComponent<ObjectInteraction>().Use()==false)
 				{//if nothing happened when I clicked on the object at the slot.
 					if (pInv.ObjectInHand != "")
 						{
@@ -386,7 +365,7 @@ public class InventorySlot : MonoBehaviour {
 			//When right clicking only try to activate when an object in in the hand
 			if (pInv.ObjectInHand !="")
 				{
-				ObjectActivated = ObjectUsedOn.GetComponent<ObjectInteraction>().Activate();
+				ObjectActivated = ObjectUsedOn.GetComponent<ObjectInteraction>().Use();
 				}
 			if (ObjectActivated==false)
 				{//if nothing happened when I clicked on the object at the slot with something in hand.

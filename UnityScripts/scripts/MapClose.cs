@@ -19,7 +19,7 @@ public class MapClose : MonoBehaviour {
 		//Turn on the camera
 		foreach(Transform child in map.transform)
 		{
-			if (child.name == "Camera")
+			if (child.name == "MapCamera")
 			{
 				child.gameObject.SetActive(false);
 			}
