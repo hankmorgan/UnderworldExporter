@@ -143,7 +143,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	getPalette(PaletteFile, pal, PaletteNo);    
+	getPaletteIndex(PaletteFile, pal, PaletteNo);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
@@ -325,6 +325,48 @@ int palAddr = paletteNo * 256;
 
 return;
 }
+
+void getPaletteIndex(char filePathPal[255], palette *pal, int paletteNo)
+	{
+//Returns a palette comprising of just index numbers
+	FILE *filePal = NULL;
+	unsigned char *palf;
+	short j; int i;
+
+	//const char *filePathPal = GRAPHICS_PAL_FILE	;	//"C:\\Games\\Ultima\\UW1\\DATA\\pals.dat"; 
+	filePal = fopen(filePathPal, "rb");
+	long fileSizePal = getFileSize(filePal);
+	palf = new unsigned char[fileSizePal];
+	fread(palf, fileSizePal, 1, filePal);
+	fclose(filePal);
+	
+	//FILE *PALOUT_FILE = NULL;
+	//fopen_s(&PALOUT_FILE, "pal.txt", "w");
+
+	i = 0;
+	int palAddr = paletteNo * 256;
+	for (j = 0; j < 256; j++) {
+		int red;
+		int green;
+		int blue;
+		pal[i].red = j;//<<2;//getValAtAddress(palf, palAddr + 0, 8);//palf[j * 3 + 2] << 2;
+		pal[i].green = j;// << 2;//getValAtAddress(palf, palAddr +1, 8);//palf[j * 3 + 0] << 2;
+		pal[i].blue = j ;//<< 2;//getValAtAddress(palf, palAddr + 2, 8);//palf[j * 3 + 1] << 2;
+		pal[i].reserved = 0;
+
+		red = palf[palAddr + 0] << 2;//getValAtAddress(palf, palAddr + 0, 8);//palf[j * 3 + 2] << 2;
+		green = palf[palAddr + 1] << 2;//getValAtAddress(palf, palAddr +1, 8);//palf[j * 3 + 0] << 2;
+		blue = palf[palAddr + 2] << 2;//getValAtAddress(palf, palAddr + 2, 8);//palf[j * 3 + 1] << 2;
+		
+
+		//fprintf(PALOUT_FILE,"SetPal(%d,%d,%d,%d);\n",i,red,green,blue);
+		palAddr = palAddr + 3;
+		i++;
+		}
+	//fclose(PALOUT_FILE);
+	return;
+	}
+
 
 void writeBMP(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255])
 {

@@ -52,6 +52,7 @@ void writeBMP(unsigned char *buffer, long Start, long SizeH, long SizeV, int ind
 void writeBMPBW(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255]);
 void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette *pal, char OutFileName[255], int Alpha);
 void getPalette(char filePathPal[255], palette *pal, int paletteNo);
+void getPaletteIndex(char filePathPal[255], palette *pal, int paletteNo);
 void LoadAuxilaryPal(char auxpalPath[255], palette auxpal[16], palette gamepal[256], int PalIndex);
 void copyNibbles(unsigned char *InputData, unsigned char  *OutputData, int NoOfNibbles, int add_ptr);
 int getcount(unsigned char *nibbles, int *addr_ptr, int size);
