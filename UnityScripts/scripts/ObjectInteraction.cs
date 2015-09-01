@@ -79,11 +79,16 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int HIDDENPLACEHOLDER =999 ;
 
 
+
 	private UILabel MessageLog;
 	public Sprite InventoryIcon;
 	public string InventoryString;
 	public Sprite InventoryIconEquip;
 	public string InventoryIconEquipString;
+
+	public int SpriteIndexWorld;
+	public int SpriteIndexInventory;
+	public bool ignoreSprite;//For button handlers that do their own sprite work.
 
 	public int item_id;
 
@@ -115,10 +120,16 @@ public class ObjectInteraction : MonoBehaviour {
 	public int Link;
 	public int Quality;
 
+	//Display controls
+	public static TextureController tc;
+	private SpriteRenderer sr =null;
+	public bool isAnimated;
+	private bool animationStarted;
 	// Use this for initialization
 
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+
 		if (player!=null)
 		{
 			playerUW=player.GetComponent<UWCharacter>();
@@ -129,8 +140,28 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			InvMarker=GameObject.Find ("InventoryMarker");
 		}
+
 	}
 
+	void Update()
+	{
+		if (ignoreSprite == false)
+		{
+			if (animationStarted==false)
+			{
+				animationStarted=true;
+				sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
+				if (isAnimated==true)
+				{
+					InvokeRepeating("UpdateAnimation",0.2f,0.2f);
+				}
+				else
+				{
+					UpdateAnimation();
+				}
+			}
+		}
+	}
 	public UWCharacter getPlayerUW()
 		{//Quickly get the player character for other components.
 		return playerUW;
@@ -401,6 +432,9 @@ public class ObjectInteraction : MonoBehaviour {
 					}
 			case KEY://	KEY 5
 				{//A key just becomes the object in hand
+				playerUW.CursorIcon= InventoryIcon.texture;
+				playerUW.CurrObjectSprite = InventoryString;
+				pInv.ObjectInHand=this.name;
 					return false;
 				}
 				//nothing/use
@@ -684,6 +718,15 @@ public class ObjectInteraction : MonoBehaviour {
 
 		return false;
 	}
+
+	void UpdateAnimation()
+		{
+		if (sr== null)
+			{
+				sr=this.GetComponentInChildren<SpriteRenderer>();
+			}
+		sr.sprite= tc.RequestSprite(item_id);
+		}
 //default:
 //			{
 //				objInt.MessageLog.text = "Default: Type=" + objInt.ItemType + ", You use a " + objInt.gameObject.name;

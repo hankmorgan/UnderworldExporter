@@ -7,14 +7,20 @@ public class UWPalette : MonoBehaviour {
 	float[] red = new float[256];
 	float[] blue = new float[256];
 	float[] green = new float[256];
-	public Texture2D SrcImage;
-	public Texture2D DstImage;
-	public Sprite newSprite;
-	private SpriteRenderer sr;
+
+	float[] Defred = new float[256];
+	float[] Defblue = new float[256];
+	float[] Defgreen = new float[256];
+
+
+	//public Texture2D SrcImage;
+	//public Texture2D DstImage;
+	//public Sprite newSprite;
+	//private SpriteRenderer sr;
 	// Use this for initialization
 	void Start () {
 		//Pal= new Texture2D(256, 1 , TextureFormat.ARGB32, false);
-		DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
+		//DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
 		SetPal(0,0,0,4);
 		SetPal(1,0,0,0);
 		SetPal(2,252,148,252);
@@ -273,9 +279,9 @@ public class UWPalette : MonoBehaviour {
 		SetPal(255,104,104,120);
 //		Pal.Apply();
 
-		sr = this.GetComponent<SpriteRenderer>();
+		//sr = this.GetComponent<SpriteRenderer>();
 
-		InvokeRepeating("UpdateAnimation",0.0f,0.1f);
+		InvokeRepeating("UpdateAnimation",0.0f,0.2f);
 
 		//Texture2D output = new Texture2D()
 		/*
@@ -303,6 +309,7 @@ public class UWPalette : MonoBehaviour {
 
 	void CyclePalette(int start, int end)
 	{
+
 		//int start=16;
 		//int end=23;
 		for (int i=end; i>=start;i--)
@@ -321,33 +328,54 @@ public class UWPalette : MonoBehaviour {
 
 	void UpdateAnimation()
 	{
+
+		
+		
+		//newSprite= Sprite.Create( DstImage,new Rect(0,0,DstImage.width,DstImage.height), new Vector2(0.5f, 0.0f));
+		//   sr.sprite= newSprite;
+		//TODO: Seperate palettes for each type of effect depending on source object.
+		CyclePalette(16,22);//fire
+		CyclePalette(48,51);//water?
+		CyclePalette(190,200);//fountain?
+		CyclePalette(100,105);//Silver tree
+
+		//CyclePalette(1,100);//Spell effects somewhere in here.
+		//UITexture uit =GameObject.Find ("animation_test").GetComponent<UITexture>();
+		//uit.mainTexture=DstImage;
+	}
+
+
+	public Texture2D ApplyPalette(Texture2D SrcImage)
+		{
+		Texture2D DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
 		for (int i =0; i<=SrcImage.width;i++)
 		{
 			for (int j =0; j<=SrcImage.height;j++)
 			{
-				//Debug.Log ("src = " +SrcImage.GetPixel(i,j).r);
-				int ColourIndex = (int)(SrcImage.GetPixel(i,j).r * 255.0);
-				//Debug.Log("Colour index =" + ColourIndex) ;
+				int ColourIndex = (int)(SrcImage.GetPixel(i,j).r * 255f);
 				DstImage.SetPixel(i,j,GetPal (ColourIndex));
 			}
-			
+		}
+		DstImage.Apply();
+
+		return DstImage;
+		}
+
+	public Texture2D ApplyPaletteDefault(Texture2D SrcImage)
+	{
+		Texture2D DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
+		for (int i =0; i<=SrcImage.width;i++)
+		{
+			for (int j =0; j<=SrcImage.height;j++)
+			{
+				int ColourIndex = (int)(SrcImage.GetPixel(i,j).r * 255f);
+				DstImage.SetPixel(i,j,GetPalDef (ColourIndex));
+			}
 		}
 		DstImage.Apply();
 		
-		
-		newSprite= Sprite.Create( DstImage,new Rect(0,0,DstImage.width,DstImage.height), new Vector2(0.5f, 0.0f));
-		   sr.sprite= newSprite;
-		//CyclePalette(16,22);//fire
-		//CyclePalette(48,51);//water?
-
-		//CyclePalette(190,200);//fountain?
-
-		//CyclePalette(100,105);//Silver tree
-		//CyclePalette(1,100);//Spell effects somewhere in here.
-		UITexture uit =GameObject.Find ("animation_test").GetComponent<UITexture>();
-		uit.mainTexture=DstImage;
+		return DstImage;
 	}
-
 
 	// Update is called once per frame
 	void Update () {
@@ -359,6 +387,11 @@ public class UWPalette : MonoBehaviour {
 		red[index]=(float)Red/255.0f;
 		green[index]=(float)Green/255.0f;
 		blue[index]=(float)Blue/255.0f;
+
+		Defred[index]=(float)Red/255.0f;
+		Defgreen[index]=(float)Green/255.0f;
+		Defblue[index]=(float)Blue/255.0f;
+
 		//Pal.SetPixel(index,0,new Color(red,green,blue));
 	}
 
@@ -374,15 +407,24 @@ public class UWPalette : MonoBehaviour {
 		//Debug.Log (index);
 		if (index !=0)
 			{
-			//Debug.Log ("index = " +index + "="+red[index]+"," +green[index]+","+blue[index]);
 			return new Color(red[index],green[index],blue[index]);
 			}
 		else
 			{
 			return Color.clear;
 			}
+	}
 
-		//Debug.Log (index + "=" + Pal.GetPixel(index,0).r);
-		//return Pal.GetPixel(index,0);
+	Color GetPalDef(int index)
+	{   //Returns the default palette
+		if (index !=0)
+		{
+			return new Color(Defred[index],Defgreen[index],Defblue[index]);
+		}
+		else
+		{
+			return Color.clear;
+		}
+
 	}
 }

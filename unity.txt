@@ -2257,11 +2257,6 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_398",51, 398, 44, 9, 6, 0);
 	Create_a_check_variable_trap(myObj);
 
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0010",120.000000f,4.425000f,119.142860f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 510, 0, 50, 18, 15728684);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 510, 0, 50, 18, 15728684);
-	Create_a_teleport_trap(myObj,(float)60.600000,(float)22.200000,(float)3.600000,true);
 
 	myObj= CreateGameObject("a_door_trap_99_99_00_0031",119.485710f,2.512500f,118.800003f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
@@ -2274,22 +2269,11 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_395",48, 395, 58, 37, 57, 0);
 	Create_a_delete_object_trap(myObj);
 
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0035",119.657135f,4.275000f,119.314285f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 973, 55, 31, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 973, 55, 31, 15728640);
-	Create_a_teleport_trap(myObj,(float)66.600000,(float)37.800000,(float)3.600000,true);
-
 	myObj= CreateGameObject("a_set_variable_trap_99_99_00_0036",119.657135f,0.225000f,118.971428f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_397",50, 397, 1020, 13, 4, 0);
 	Create_a_set_variable_trap(myObj);
 
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0039",120.000000f,4.650000f,119.485710f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 512, 46, 38, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 512, 46, 38, 15728640);
-	Create_a_teleport_trap(myObj,(float)55.800000,(float)46.200000,(float)3.600000,true);
 
 	myObj= CreateGameObject("a_arrow_trap_99_99_00_0061",118.800003f,4.462500f,118.971428f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
@@ -2301,24 +2285,12 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_386",39, 386, 2, 3, 1, 0);
 	Create_a_arrow_trap(myObj);
 
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0129",119.314285f,4.350000f,118.800003f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 468, 61, 0, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 468, 61, 0, 15728640);
-	Create_a_teleport_trap(myObj,(float)73.800000,(float)0.600000,(float)4.500000,true);
 
 	myObj= CreateGameObject("a_do_trap_99_99_00_0261",119.657135f,3.300000f,119.657135f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_387",40, 387, 744, 62, 33, 0);
 	Create_trap_base(myObj);
 	AddTrapLink(myObj,"a_lever_09_36_00_0744");
-
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0279",118.971428f,2.737500f,118.971428f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 559, 8, 23, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 559, 8, 23, 15728640);
-	Create_a_teleport_trap(myObj,(float)10.200000,(float)28.200000,(float)0.300000,true);
-	AddTrapLink(myObj,"a_use_trigger_99_99_00_0559");
 
 	myObj= CreateGameObject("a_spelltrap_99_99_00_0283",119.657135f,0.900000f,118.800003f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
@@ -2330,23 +2302,11 @@
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_384",37, 384, 928, 11, 13, 0);
 	Create_a_damage_trap(myObj);
 
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0302",118.971428f,4.350000f,119.142860f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 468, 61, 0, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 468, 61, 0, 15728640);
-	Create_a_teleport_trap(myObj,(float)73.800000,(float)0.600000,(float)4.500000,true);
-
 	myObj= CreateGameObject("a_spelltrap_99_99_00_0329",120.000000f,0.225000f,119.485710f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_390",43, 390, 112, 46, 14, 0);
 	Create_a_spelltrap(myObj);
 	AddTrapLink(myObj,"a_switch_99_99_00_0112");
-
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0340",118.971428f,1.237500f,119.485710f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 1021, 9, 49, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 1021, 9, 49, 15728640);
-	Create_a_teleport_trap(myObj,(float)11.400000,(float)59.400000,(float)3.600000,true);
 
 	myObj= CreateGameObject("a_create_object_trap_99_99_00_0342",118.971428f,2.737500f,119.485710f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
@@ -2363,12 +2323,6 @@
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_420",false);
 	CreateTrigger(myObj,6,11,"some_grass_bunches_of_grass_32_02_00_0990");
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_420",58, 420, 990, 6, 11, 0);
-
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0357",119.657135f,2.400000f,119.828575f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 22, 4, 63, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 22, 4, 63, 15728640);
-	Create_a_teleport_trap(myObj,(float)5.400000,(float)76.200000,(float)4.500000,true);
 
 	myObj= CreateGameObject("a_delete_object_trap_99_99_00_0380",118.971428f,0.412500f,120.000000f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
@@ -2395,12 +2349,6 @@
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"OBJECTS_396",49, 396, 1008, 22, 54, 0);
 	Create_an_inventory_trap(myObj);
-
-	myObj= CreateGameObject("BUGGEDOBJECT_00_0443",119.485710f,2.812500f,119.657135f);
-	CreateObjectGraphics(myObj,"Á",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 603, 11, 62, 15728640);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,"",38, 511, 603, 11, 62, 15728640);
-	Create_a_teleport_trap(myObj,(float)13.800000,(float)75.000000,(float)4.500000,true);
 
 	myObj= CreateGameObject("a_tell_trap_99_99_00_0459",120.000000f,0.000000f,118.800003f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_394",false);

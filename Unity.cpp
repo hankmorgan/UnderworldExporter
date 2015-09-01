@@ -1765,7 +1765,14 @@ float offX; float offY; float offZ;
 						{//Everything but traps and triggers (uw)
 						if (objList[nextObj].AlreadyRendered != 1)
 							{
-							RenderUnityEntity(game, offX, offY, offZ, objList[nextObj],objList,LevelInfo);
+							if (objectMasters[objList[nextObj].item_id].isSet == 1)
+								{
+								RenderUnityEntity(game, offX, offY, offZ, objList[nextObj], objList, LevelInfo);
+								}		
+							else
+								{
+								fprintf(UNITY_FILE, "////Bugged object!");
+								}
 							//fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");",UniqueObjectName(objList[nextObj]));//Create the object
 							//fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);",offX,offZ,offY);//Create the object x,z,y
 							//fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object

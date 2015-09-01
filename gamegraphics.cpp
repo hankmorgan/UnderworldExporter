@@ -1460,6 +1460,7 @@ void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 			putc(pal[pixel].blue, fptr);
 			putc(pal[pixel].green, fptr);
 			putc(pal[pixel].red, fptr);
+
 			if (Alpha == 1)
 				{
 				if (pixel != 0)	//Alpha
