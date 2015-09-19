@@ -65,16 +65,19 @@ public class PlayerInventory : MonoBehaviour {
 	public UISprite RightRing_Slot;
 	public UISprite LeftShoulder_Slot;
 	public UISprite RightShoulder_Slot;
-	public UISprite[] BackPack_Slot=new UISprite[8];
+	public UITexture[] BackPack_Slot=new UITexture[8];
 
 	public bool atTopLevel;
 	public string currentContainer;
 
 	private UWCharacter playerUW;
 
+	private Texture2D Blank;
+
 	private Container playerContainer;
 	// Use this for initialization
 	void Start () {
+		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
 		atTopLevel=true;
 		playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		playerContainer = GameObject.Find ("Gronk").GetComponent<Container>();
@@ -178,6 +181,45 @@ public class PlayerInventory : MonoBehaviour {
 			}
 		}
 
+	}
+
+	void DisplayGameObject(string objName, UITexture Label, bool isEquipped, ref bool hasChanged)
+	{
+		hasChanged=true;
+		if (hasChanged==true)
+		{
+			if (objName =="")
+			{
+				Label.mainTexture=Blank;
+
+				//Label.spriteName="object_blank";
+				hasChanged=false;
+				return;
+			}
+			GameObject objToDisplay=GameObject.Find (objName);
+			hasChanged=false;
+			if (objToDisplay != null)
+			{
+				if (isEquipped==true)
+				{
+					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquipString;
+					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquip.texture;
+				}
+				else
+				{
+					//Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
+					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
+					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+				}
+			}
+			else
+			{
+				//Debug.Log ("Displaying blank");
+				Label.mainTexture=Blank;
+				//Label.spriteName="object_blank";
+			}
+		}
+		
 	}
 	/*
 	 * 

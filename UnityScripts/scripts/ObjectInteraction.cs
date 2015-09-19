@@ -726,6 +726,8 @@ public class ObjectInteraction : MonoBehaviour {
 				sr=this.GetComponentInChildren<SpriteRenderer>();
 			}
 		sr.sprite= tc.RequestSprite(item_id);
+		InventoryIcon=sr.sprite;
+		InventoryIconEquip=sr.sprite;
 		}
 //default:
 //			{
