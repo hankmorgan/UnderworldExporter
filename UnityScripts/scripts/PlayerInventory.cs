@@ -166,7 +166,7 @@ public class PlayerInventory : MonoBehaviour {
 			{
 				if (isEquipped==true)
 				{
-					Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquipString;
+					Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
 				}
 				else
 				{
@@ -203,13 +203,13 @@ public class PlayerInventory : MonoBehaviour {
 				if (isEquipped==true)
 				{
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquipString;
-					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquip.texture;
+					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().EquipDisplay.texture;
 				}
 				else
 				{
 					//Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
-					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
 				}
 			}
 			else
@@ -607,7 +607,7 @@ public class PlayerInventory : MonoBehaviour {
 			cn.AddItemToContainer(cObjectInHand,slotIndex-11);
 			}
 		ObjectInHand= ObjInSlot.name;
-		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
 		playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
 		Refresh();
 	}

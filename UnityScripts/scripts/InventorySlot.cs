@@ -335,7 +335,7 @@ public class InventorySlot : MonoBehaviour {
 						{//Pick up the item at that slot.
 						//TODO: Make this work with Equipment slots
 						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
 						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 							{
@@ -372,7 +372,7 @@ public class InventorySlot : MonoBehaviour {
 					if (ObjectUsedOn.GetComponent<Container>() !=null)
 					{
 						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
 						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 						{
@@ -424,7 +424,7 @@ public class InventorySlot : MonoBehaviour {
 					if (DoNotPickup==false)
 						{
 						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
 						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 						{

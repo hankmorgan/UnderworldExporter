@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Armour : MonoBehaviour {
-
+	public int Durability;
+	public int Protection;
 	public string EquipFemaleLowest; 
 	public string EquipFemaleLow;
 	public string EquipFemaleMedium;
@@ -50,7 +51,7 @@ public class Armour : MonoBehaviour {
 				SetEquipTexture(EquipFemaleBest);
 			}
 		}
-		objInt.InventoryIconEquip=Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f));
+		objInt.InventoryDisplay=Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f));
 	}
 	
 	void SetEquipTexture(string EquipTexture)

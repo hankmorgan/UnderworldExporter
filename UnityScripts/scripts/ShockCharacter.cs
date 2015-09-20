@@ -110,7 +110,7 @@ public class ShockCharacter : MonoBehaviour {
 				if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 				{
 					//MessageLog.text = "You pick up a " + hit.transform.name;
-					CursorIcon=objPicked.InventoryIcon.texture;
+					CursorIcon=objPicked.InventoryDisplay.texture;
 					CurrObjectSprite=objPicked.InventoryString;
 					pInv.ObjectInHand=hit.transform.name;
 					pInv.JustPickedup=true;//To stop me throwing it away immediately.

@@ -6,6 +6,11 @@ public class Container : MonoBehaviour {
 	//public int NoOfSlots=40;
 	public string[] items=new string[40];
 	public int start=0;
+
+	public int Capacity;
+	public int NoOfSlots;
+	public int ObjectsAccepted;
+
 	public bool isOpenOnPanel;
 	//public int itemCount=0;
 	public string ContainerParent;
@@ -311,7 +316,7 @@ public class Container : MonoBehaviour {
 			return;
 			}
 		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
-		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.InventoryIcon.texture;
+		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.InventoryDisplay.texture;
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
 		//display the container contents.
 		//Container currObjCont = currObj.GetComponent<Container>();

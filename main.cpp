@@ -906,16 +906,16 @@ int main()
 					{
 						case UW1:
 							{
-							sprintf_s(FileToOpen, 255, "%s\\%s", path_uw1, uw_comp_file);
-							sprintf_s(FileToOpen2, 255, "%s\\%s", path_uw1, uw_obj_prop_file);
-							UWCommonObj(FileToOpen,FileToOpen2, game);
+							//sprintf_s(FileToOpen, 255, "%s\\%s", path_uw1, uw_comp_file);
+							//sprintf_s(FileToOpen2, 255, "%s\\%s", path_uw1, uw_obj_prop_file);
+							UWCommonObj(game);
 							break;
 							}
 						case UW2:
 							{
-							sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_comp_file);
-							sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_obj_prop_file);
-							UWCommonObj(FileToOpen, FileToOpen2, game);
+							//sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_comp_file);
+							//sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_obj_prop_file);
+							UWCommonObj(game);
 							break;
 							}
 					}
@@ -925,219 +925,218 @@ int main()
 	fclose(LOGFILE);
 	}
 
-void LoadConfig(int game, int mode)
-	{
-	//Read in mile
-	FILE *f = NULL;
-	char filePathT[255];
-	int i = 0;
-	int texNo = 0;
-	char texDesc[80];
-	char texPath[80];
-
-	int objNo = 0;
-	char objDesc[80];
-	char objPath[80];
-	char objCat[10];
-	char objSound[80];
-	char objParticle[80];
-	char objBase[80];
-	char invIcon[80];
-	char EquippedIconFemaleLowest[80];
-	char EquippedIconMaleLowest[80];//and default
-	char EquippedIconFemaleLow[80];
-	char EquippedIconMaleLow[80];
-	char EquippedIconFemaleMedium[80];
-	char EquippedIconMaleMedium[80];
-	char EquippedIconFemaleBest[80];
-	char EquippedIconMaleBest[80];
-
-	int objType;
-	int hasPart;
-	int hasSound;
-	int isSolid;
-	int isMoveable;
-	int isInventory;
-	int isAnimated;
-	int useSprite;
-
-
-	int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
-
-	char line[500];
-	textureMasters = new texture[340];
-	objectMasters = new objectMaster[500];
-	switch (game)
+	void LoadConfig(int game, int mode)
 		{
-			case UWDEMO:
-			case UW1:
-				if (mode != SOURCE_MODE)
-					{
-					strcpy_s(filePathT, UW1_TEXTURE_CONFIG_FILE);
-					}
-				else
-					{
-					strcpy_s(filePathT, UW1_TEXTURE_CONFIG_FILE_SOURCE);
-					}
-				break;
-			case UW2:
-				if (mode != SOURCE_MODE)
-					{
-					strcpy_s(filePathT, UW2_TEXTURE_CONFIG_FILE);
-					}
-				else
-					{
-					strcpy_s(filePathT, UW2_TEXTURE_CONFIG_FILE_SOURCE);
-					}
-				break;
-			case SHOCK:
-				if (mode != SOURCE_MODE)
-					{
-					strcpy_s(filePathT, SHOCK_TEXTURE_CONFIG_FILE);
-					}
-				else
-					{
-					strcpy_s(filePathT, SHOCK_TEXTURE_CONFIG_FILE_SOURCE);
-					}
-				break;
-		}
+		//Read in mile
+		FILE *f = NULL;
+		char filePathT[255];
+		int i = 0;
+		int texNo = 0;
+		char texDesc[80];
+		char texPath[80];
 
-	//f=fopen(filePathT,"r");
-	if ((fopen_s(&f, filePathT, "r") == 0))
-		{
-		while (fgets(line, 255, f))
-			{
-			float align1_1 = 0;
-			float align1_2 = 0;
-			float align1_3 = 0;
-			float align2_1 = 0;
-			float align2_2 = 0;
-			float align2_3 = 0;
+		int objNo = 0;
+		char objDesc[80];
+		char objPath[80];
+		char objCat[10];
+		char objSound[80];
+		char objParticle[80];
+		char objBase[80];
+		char invIcon[80];
+		char EquippedIconFemaleLowest[80];
+		char EquippedIconMaleLowest[80];//and default
+		char EquippedIconFemaleLow[80];
+		char EquippedIconMaleLow[80];
+		char EquippedIconFemaleMedium[80];
+		char EquippedIconMaleMedium[80];
+		char EquippedIconFemaleBest[80];
+		char EquippedIconMaleBest[80];
 
-			float floor_align1_1 = 0;
-			float floor_align1_2 = 0;
-			float floor_align1_3 = 0;
-			float floor_align2_1 = 0;
-			float floor_align2_2 = 0;
-			float floor_align2_3 = 0;
-
-			int water = 0;
-			int lava = 0;
-			sscanf(line, "%d %s %s %f %f %f %f %f %f %f %f %f %f %f %f %d %d",
-				&texNo, &texDesc, &texPath,
-				&align1_1, &align1_2, &align1_3, &align2_1, &align2_2, &align2_3,
-				&floor_align1_1, &floor_align1_2, &floor_align1_3, &floor_align2_1, &floor_align2_2, &floor_align2_3,
-				&water, &lava);
+		int objType;
+		int hasPart;
+		int hasSound;
+		int isSolid;
+		int isMoveable;
+		int isInventory;
+		int isAnimated;
+		int useSprite;
 
 
-			textureMasters[texNo].textureNo = texNo;
-			strcpy_s(textureMasters[texNo].desc, texDesc);
-			strcpy_s(textureMasters[texNo].path, texPath);
-			textureMasters[texNo].align1_1 = align1_1;
-			textureMasters[texNo].align1_2 = align1_2;
-			textureMasters[texNo].align1_3 = align1_3;
-			textureMasters[texNo].align2_1 = align2_1;
-			textureMasters[texNo].align2_2 = align2_2;
-			textureMasters[texNo].align2_3 = align2_3;
+		int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
 
-			textureMasters[texNo].floor_align1_1 = floor_align1_1;
-			textureMasters[texNo].floor_align1_2 = floor_align1_2;
-			textureMasters[texNo].floor_align1_3 = floor_align1_3;
-			textureMasters[texNo].floor_align2_1 = floor_align2_1;
-			textureMasters[texNo].floor_align2_2 = floor_align2_2;
-			textureMasters[texNo].floor_align2_3 = floor_align2_3;
-
-
-			textureMasters[texNo].water = water;
-			textureMasters[texNo].lava = lava;
-			i++;
-			}
-		fclose(f);
-		}
-	char filePathO[255];
-	switch (game)
-		{
-			case UWDEMO:
-			case UW1:
-				strcpy_s(filePathO, UW1_OBJECT_CONFIG_FILE); break;
-			case UW2:
-				strcpy_s(filePathO, UW2_OBJECT_CONFIG_FILE); break;
-			case SHOCK:
-				strcpy_s(filePathO, SHOCK_OBJECT_CONFIG_FILE); break;
-		}
-
-	if ((fopen_s(&f, filePathO, "r") == 0))
-		{
+		char line[500];
+		textureMasters = new texture[340];
+		objectMasters = new objectMaster[500];
 		switch (game)
 			{
 				case UWDEMO:
 				case UW1:
-				case UW2:
-				case SHOCK:
-					{
-					while (fgets(line, 500, f))
-						{                                                             //v
-						sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s %s %s %s %s %s %s %s %s %d %d",
-							&objNo, &objClass, &objSubClass, &objSubClassIndex, &objCat, &objType,
-							&objDesc, &objPath, &hasPart, &objParticle, &hasSound, &objSound, &objBase, &isSolid, &isMoveable, &isInventory, &invIcon,
-							&EquippedIconFemaleLowest, &EquippedIconFemaleLow, &EquippedIconFemaleMedium, &EquippedIconFemaleBest,
-							&EquippedIconMaleLowest, &EquippedIconMaleLow, &EquippedIconMaleMedium, &EquippedIconMaleBest,
-							&isAnimated, &useSprite);
-						objectMasters[objNo].index = objNo;
-						objectMasters[objNo].isSet = 1;
-						objectMasters[objNo].objClass = objClass;
-						objectMasters[objNo].objSubClass = objSubClass;
-						objectMasters[objNo].objSubClassIndex = objSubClassIndex;
-
-
-						strcpy_s(objectMasters[objNo].desc, objDesc);
-						strcpy_s(objectMasters[objNo].path, objPath);
-						strcpy_s(objectMasters[objNo].particle, objParticle);
-						strcpy_s(objectMasters[objNo].sound, objSound);
-						strcpy_s(objectMasters[objNo].base, objBase);
-
-						strcpy_s(objectMasters[objNo].EquippedIconFemaleLowest, EquippedIconFemaleLowest);
-						strcpy_s(objectMasters[objNo].EquippedIconMaleLowest, EquippedIconMaleLowest);
-						strcpy_s(objectMasters[objNo].EquippedIconFemaleLow, EquippedIconFemaleLow);
-						strcpy_s(objectMasters[objNo].EquippedIconMaleLow, EquippedIconMaleLow);
-						strcpy_s(objectMasters[objNo].EquippedIconFemaleMedium, EquippedIconFemaleMedium);
-						strcpy_s(objectMasters[objNo].EquippedIconMaleMedium, EquippedIconMaleMedium);
-						strcpy_s(objectMasters[objNo].EquippedIconFemaleBest, EquippedIconFemaleBest);
-						strcpy_s(objectMasters[objNo].EquippedIconMaleBest, EquippedIconMaleBest);
-
-						if (strcmp(objCat, "model") == 0)
-							{
-							objectMasters[objNo].isEntity = 0;
-							}
-						else if (strcmp(objCat, "entity") == 0)
-							{
-							objectMasters[objNo].isEntity = 1;
-							}
-						else
-							{
-							objectMasters[objNo].isEntity = -1;
-							}
-						objectMasters[objNo].type = objType;
-						objectMasters[objNo].DeathWatch = 0;
-						objectMasters[objNo].hasParticle = hasPart;
-						objectMasters[objNo].hasSound = hasSound;
-						objectMasters[objNo].isSolid = isSolid;
-						objectMasters[objNo].isMoveable = isMoveable;
-						objectMasters[objNo].isInventory = isInventory;
-						objectMasters[objNo].isAnimated = isAnimated;
-						objectMasters[objNo].useSprite = useSprite;
-						strcpy_s(objectMasters[objNo].InvIcon, invIcon);
-
-						//printf("uw1_object_%03d.prt\n",objNo);
-						i++;
+					if (mode != SOURCE_MODE)
+						{
+						strcpy_s(filePathT, UW1_TEXTURE_CONFIG_FILE);
 						}
-					fclose(f);
+					else
+						{
+						strcpy_s(filePathT, UW1_TEXTURE_CONFIG_FILE_SOURCE);
+						}
 					break;
-					}
+				case UW2:
+					if (mode != SOURCE_MODE)
+						{
+						strcpy_s(filePathT, UW2_TEXTURE_CONFIG_FILE);
+						}
+					else
+						{
+						strcpy_s(filePathT, UW2_TEXTURE_CONFIG_FILE_SOURCE);
+						}
+					break;
+				case SHOCK:
+					if (mode != SOURCE_MODE)
+						{
+						strcpy_s(filePathT, SHOCK_TEXTURE_CONFIG_FILE);
+						}
+					else
+						{
+						strcpy_s(filePathT, SHOCK_TEXTURE_CONFIG_FILE_SOURCE);
+						}
+					break;
+			}
+
+		//f=fopen(filePathT,"r");
+		if ((fopen_s(&f, filePathT, "r") == 0))
+			{
+			while (fgets(line, 255, f))
+				{
+				float align1_1 = 0;
+				float align1_2 = 0;
+				float align1_3 = 0;
+				float align2_1 = 0;
+				float align2_2 = 0;
+				float align2_3 = 0;
+
+				float floor_align1_1 = 0;
+				float floor_align1_2 = 0;
+				float floor_align1_3 = 0;
+				float floor_align2_1 = 0;
+				float floor_align2_2 = 0;
+				float floor_align2_3 = 0;
+
+				int water = 0;
+				int lava = 0;
+				sscanf(line, "%d %s %s %f %f %f %f %f %f %f %f %f %f %f %f %d %d",
+					&texNo, &texDesc, &texPath,
+					&align1_1, &align1_2, &align1_3, &align2_1, &align2_2, &align2_3,
+					&floor_align1_1, &floor_align1_2, &floor_align1_3, &floor_align2_1, &floor_align2_2, &floor_align2_3,
+					&water, &lava);
+
+
+				textureMasters[texNo].textureNo = texNo;
+				strcpy_s(textureMasters[texNo].desc, texDesc);
+				strcpy_s(textureMasters[texNo].path, texPath);
+				textureMasters[texNo].align1_1 = align1_1;
+				textureMasters[texNo].align1_2 = align1_2;
+				textureMasters[texNo].align1_3 = align1_3;
+				textureMasters[texNo].align2_1 = align2_1;
+				textureMasters[texNo].align2_2 = align2_2;
+				textureMasters[texNo].align2_3 = align2_3;
+
+				textureMasters[texNo].floor_align1_1 = floor_align1_1;
+				textureMasters[texNo].floor_align1_2 = floor_align1_2;
+				textureMasters[texNo].floor_align1_3 = floor_align1_3;
+				textureMasters[texNo].floor_align2_1 = floor_align2_1;
+				textureMasters[texNo].floor_align2_2 = floor_align2_2;
+				textureMasters[texNo].floor_align2_3 = floor_align2_3;
+
+
+				textureMasters[texNo].water = water;
+				textureMasters[texNo].lava = lava;
+				i++;
+				}
+			fclose(f);
+			}
+		char filePathO[255];
+		switch (game)
+			{
+				case UWDEMO:
+				case UW1:
+					strcpy_s(filePathO, UW1_OBJECT_CONFIG_FILE); break;
+				case UW2:
+					strcpy_s(filePathO, UW2_OBJECT_CONFIG_FILE); break;
+				case SHOCK:
+					strcpy_s(filePathO, SHOCK_OBJECT_CONFIG_FILE); break;
+			}
+
+		if ((fopen_s(&f, filePathO, "r") == 0))
+			{
+			switch (game)
+				{
+					case UWDEMO:
+					case UW1:
+					case UW2:
+					case SHOCK:
+						{
+						while (fgets(line, 500, f))
+							{                                                             //v
+							sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s %s %s %s %s %s %s %s %s %d %d",
+								&objNo, &objClass, &objSubClass, &objSubClassIndex, &objCat, &objType,
+								&objDesc, &objPath, &hasPart, &objParticle, &hasSound, &objSound, &objBase, &isSolid, &isMoveable, &isInventory, &invIcon,
+								&EquippedIconFemaleLowest, &EquippedIconFemaleLow, &EquippedIconFemaleMedium, &EquippedIconFemaleBest,
+								&EquippedIconMaleLowest, &EquippedIconMaleLow, &EquippedIconMaleMedium, &EquippedIconMaleBest,
+								&isAnimated, &useSprite);
+							objectMasters[objNo].index = objNo;
+							objectMasters[objNo].isSet = 1;
+							objectMasters[objNo].objClass = objClass;
+							objectMasters[objNo].objSubClass = objSubClass;
+							objectMasters[objNo].objSubClassIndex = objSubClassIndex;
+
+
+							strcpy_s(objectMasters[objNo].desc, objDesc);
+							strcpy_s(objectMasters[objNo].path, objPath);
+							strcpy_s(objectMasters[objNo].particle, objParticle);
+							strcpy_s(objectMasters[objNo].sound, objSound);
+							strcpy_s(objectMasters[objNo].base, objBase);
+
+							strcpy_s(objectMasters[objNo].EquippedIconFemaleLowest, EquippedIconFemaleLowest);
+							strcpy_s(objectMasters[objNo].EquippedIconMaleLowest, EquippedIconMaleLowest);
+							strcpy_s(objectMasters[objNo].EquippedIconFemaleLow, EquippedIconFemaleLow);
+							strcpy_s(objectMasters[objNo].EquippedIconMaleLow, EquippedIconMaleLow);
+							strcpy_s(objectMasters[objNo].EquippedIconFemaleMedium, EquippedIconFemaleMedium);
+							strcpy_s(objectMasters[objNo].EquippedIconMaleMedium, EquippedIconMaleMedium);
+							strcpy_s(objectMasters[objNo].EquippedIconFemaleBest, EquippedIconFemaleBest);
+							strcpy_s(objectMasters[objNo].EquippedIconMaleBest, EquippedIconMaleBest);
+
+							if (strcmp(objCat, "model") == 0)
+								{
+								objectMasters[objNo].isEntity = 0;
+								}
+							else if (strcmp(objCat, "entity") == 0)
+								{
+								objectMasters[objNo].isEntity = 1;
+								}
+							else
+								{
+								objectMasters[objNo].isEntity = -1;
+								}
+							objectMasters[objNo].type = objType;
+							objectMasters[objNo].DeathWatch = 0;
+							objectMasters[objNo].hasParticle = hasPart;
+							objectMasters[objNo].hasSound = hasSound;
+							objectMasters[objNo].isSolid = isSolid;
+							objectMasters[objNo].isMoveable = isMoveable;
+							objectMasters[objNo].isInventory = isInventory;
+							objectMasters[objNo].isAnimated = isAnimated;
+							objectMasters[objNo].useSprite = useSprite;
+							strcpy_s(objectMasters[objNo].InvIcon, invIcon);
+
+							//printf("uw1_object_%03d.prt\n",objNo);
+							i++;
+							}
+						fclose(f);
+						break;
+						}
+				}
 			}
 		}
-	}
-
 
 void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char filePath[255])
 	{
@@ -1192,6 +1191,9 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 			case UW1:		//Underworld 1
 				{
 				//filePath = UW1_LEVEL_PATH ;	// "C:\\Games\\Ultima\\UW1\\DATA\\lev.ark";
+
+				UWCommonObj(game);
+
 				BuildTileMapUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setTileNeighbourCount(LevelInfo);
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);

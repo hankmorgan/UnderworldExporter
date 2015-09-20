@@ -231,6 +231,43 @@
 #define BRIDGE_SIDE_TEXTURE 5
 #define BRIDGE_SIDE_TEXTURE_SOURCE 6
 
+//Common properties from commonobj
+#define UW_PROP_HEIGHT 0
+#define UW_PROP_RADIUS 1
+#define UW_PROP_MASS 2
+#define UW_PROP_VALUE 3
+#define UW_PROP_OWNER 4
+#define UW_PROP_QUALITY 5
+
+//Item type specific properties (for array uwproperites array)
+#define UW_PROP_DURABILITY 10
+
+//Melee Weapons
+#define UW_PROP_WEAP_SLASH 6
+#define UW_PROP_WEAP_BASH 7
+#define UW_PROP_WEAP_STAB 8
+#define UW_PROP_WEAP_SKILL 9
+
+//Armour
+#define UW_PROP_ARM_PROTECTION 6
+
+//Containers
+#define UW_PROP_CONT_CAPACITY 6
+#define UW_PROP_CONT_OBJECTS 7
+#define UW_PROP_CONT_SLOTS 8
+
+//Light Sources
+#define UW_PROP_LIGHT_BRIGHTNESS 6
+#define UW_PROP_LIGHT_DURATION 7
+
+//Animations
+#define UW_PROP_ANIM_PAL 6
+#define UW_PROP_ANIM_START 7
+#define UW_PROP_ANIM_FRAMES 8
+
+
+
+
 //Master object type definition
 struct ObjectItem
 {
@@ -336,44 +373,49 @@ struct ObjectItem
 
 
 struct objectMaster	//For common object properties.
-{
-int index;	
-short type;	//from above
-char desc[80];
-char path[80]; //to object model
-char particle[80];
-char sound[80];
-short isEntity; // 1 for entity. 0 for model. -1 for ignored entries
-short isSet;
-short objClass;	//For Shock
-short objSubClass;
-short objSubClassIndex;
+	{
+	int index;
+	short type;	//from above
+	char desc[80];
+	char path[80]; //to object model
+	char particle[80];
+	char sound[80];
+	short isEntity; // 1 for entity. 0 for model. -1 for ignored entries
+	short isSet;
+	short objClass;	//For Shock
+	short objSubClass;
+	short objSubClassIndex;
 
-short extraInfo;	//For stuff like door texture info.
+	short extraInfo;	//For stuff like door texture info.
 
-short renderType;
-short frame1;	//Frame no
-short DeathWatch;
+	short renderType;
+	short frame1;	//Frame no
+	short DeathWatch;
 
-short hasParticle;
-short hasSound;
-char base[80];
-short isSolid;
-short isMoveable;
-short isInventory;
-short isAnimated;
-short useSprite;
-char InvIcon[80];
+	short hasParticle;
+	short hasSound;
+	char base[80];
+	short isSolid;
+	short isMoveable;
+	short isInventory;
+	short isAnimated;
+	short useSprite;
+	char InvIcon[80];
 
-char EquippedIconFemaleLowest[80];
-char EquippedIconMaleLowest[80];//and default
-char EquippedIconFemaleLow[80];
-char EquippedIconMaleLow[80];
-char EquippedIconFemaleMedium[80];
-char EquippedIconMaleMedium[80];
-char EquippedIconFemaleBest[80];
-char EquippedIconMaleBest[80];
+	char EquippedIconFemaleLowest[80];
+	char EquippedIconMaleLowest[80];//and default
+	char EquippedIconFemaleLow[80];
+	char EquippedIconMaleLow[80];
+	char EquippedIconFemaleMedium[80];
+	char EquippedIconMaleMedium[80];
+	char EquippedIconFemaleBest[80];
+	char EquippedIconMaleBest[80];
+
+	int uwProperties[11];
 };
+
+
+
 
 
 //typedef struct shockObjectMaster
@@ -447,5 +489,5 @@ void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
 void DumpObjectCombinations(char *filePath, int game);
-void UWCommonObj(char *filePathCommon, char *filePathObjects, int game);
+void UWCommonObj(int game);
 #endif /*gameobjects_h*/

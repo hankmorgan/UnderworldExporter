@@ -22,6 +22,7 @@ public class ButtonHandler : MonoBehaviour {
 	private UWCharacter playerUW;
 	private SpriteRenderer ButtonSprite;
 
+	public bool SpriteSet;
 	public int item_id;
 
 	public static StringController SC;	//String controller reference
@@ -63,6 +64,26 @@ public class ButtonHandler : MonoBehaviour {
 		if ((player!=null) && (playerUW==null))
 		{
 			playerUW=player.GetComponent<UWCharacter>();
+		}
+
+		if (SpriteSet==false)
+		{
+			SpriteSet=true;
+			if (isRotarySwitch==false)
+			{
+				if (isOn==true)
+				{
+					setSprite(spriteOn);
+				}
+				else
+				{
+					setSprite(spriteOff);
+				}
+			}
+			else
+			{
+				setRotarySprite(state);
+			}
 		}
 	}
 
@@ -164,6 +185,7 @@ public class ButtonHandler : MonoBehaviour {
 			Sprite image = Resources.Load <Sprite> (SpriteName);//Loads the sprite.
 			ButtonSprite.sprite = image;//Assigns the sprite to the object.
 		}
+
 	}
 
 	public void setRotarySprite(int index)

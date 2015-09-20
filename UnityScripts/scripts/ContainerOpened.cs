@@ -58,7 +58,7 @@ public class ContainerOpened : MonoBehaviour {
 			else
 			{
 				//GetComponent<UISprite>().spriteName=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryString;
-				GetComponent<UITexture>().mainTexture=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryIcon.texture;
+				GetComponent<UITexture>().mainTexture=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
 			}
 			for (int i = 0; i<8; i++)
 			{

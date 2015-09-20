@@ -246,20 +246,23 @@ public class UWCharacter : MonoBehaviour {
 					objPicked=hit.transform.GetComponent<ObjectInteraction>();
 					if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 					{
-						objPicked.PickedUp=true;	
-						//MessageLog.text = "You pick up a " + hit.transform.name;
-						CursorIcon=objPicked.InventoryIcon.texture;
-						CurrObjectSprite=objPicked.InventoryString;
-						pInv.ObjectInHand=hit.transform.name;
-						pInv.JustPickedup=true;//To stop me throwing it away immediately.
-						if (objPicked.rigidbody !=null)
+						if (objPicked.CanBePickedUp==true)
 							{
-					
+							objPicked.PickedUp=true;	
+							//MessageLog.text = "You pick up a " + hit.transform.name;
+							CursorIcon=objPicked.InventoryDisplay.texture;
+							CurrObjectSprite=objPicked.InventoryString;
+							pInv.ObjectInHand=hit.transform.name;
+							pInv.JustPickedup=true;//To stop me throwing it away immediately.
+							if (objPicked.rigidbody !=null)
+								{
+								
 								//objPicked.rigidbody.useGravity=false;
-							WindowDetect.FreezeMovement(objPicked.gameObject);
+								WindowDetect.FreezeMovement(objPicked.gameObject);
+								}
+							objPicked.transform.position = InvMarker.transform.position;
+							objPicked.transform.parent=InvMarker.transform;
 							}
-						objPicked.transform.position = InvMarker.transform.position;
-						objPicked.transform.parent=InvMarker.transform;
 					}
 				}
 			}

@@ -2081,8 +2081,21 @@ void DumpObjectCombinations(char *filePath, int game)
 		}
 	}
 
-void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
+void UWCommonObj(int game)
 	{
+
+	char filePathCommon[255];
+	char filePathObjects[255];
+
+	const char *uw_comp_file;
+	const char *uw_obj_prop_file;
+	uw_comp_file = "DATA\\comobj.dat";
+	uw_obj_prop_file = "DATA\\Objects.dat";
+
+	sprintf_s(filePathCommon, 255, "%s\\%s", path_uw1, uw_comp_file);
+	sprintf_s(filePathObjects, 255, "%s\\%s", path_uw1, uw_obj_prop_file);
+
+
 //Read in the common object and object properties files 
 	FILE *file = NULL;      // File pointer
 	unsigned char *comobj_dat;
@@ -2104,14 +2117,15 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 		{
 		if (j <= 463)
 			{
-			printf("%s\n", objectMasters[j].desc);
-			printf("\tHeight = %d\n", getValAtAddress(comobj_dat, addressPtr, 8));
-
-			printf("\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
-			printf("\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
-			printf("\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
-
-			printf("\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);
+			//printf("%s\n", objectMasters[j].desc);
+			//printf("\tHeight = %d\n", getValAtAddress(comobj_dat, addressPtr, 8));
+			objectMasters[j].uwProperties[UW_PROP_HEIGHT] = getValAtAddress(comobj_dat, addressPtr, 8);
+			//printf("\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
+			objectMasters[j].uwProperties[UW_PROP_RADIUS] = getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7;
+			//printf("\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
+			//printf("\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
+			objectMasters[j].uwProperties[UW_PROP_MASS] = (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4);
+			/*printf("\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);
 			printf("\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
 			printf("\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
 			printf("\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
@@ -2119,16 +2133,16 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 			printf("\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
 			printf("\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
 			printf("\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
-
-			printf("\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16));
-
-			printf("\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);
-
-			printf("\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);
-
-			printf("\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
-
-			printf("\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);
+			*/
+			//printf("\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16));
+			objectMasters[j].uwProperties[UW_PROP_VALUE] = getValAtAddress(comobj_dat, addressPtr + 4, 16);
+			//printf("\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);
+			objectMasters[j].uwProperties[UW_PROP_QUALITY] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
+			//printf("\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);
+			objectMasters[j].uwProperties[UW_PROP_OWNER] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
+			//printf("\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
+			objectMasters[j].uwProperties[UW_PROP_QUALITY] = getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
+			//printf("\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);
 
 			}
 
@@ -2169,20 +2183,25 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 	fclose(file);
 	addressPtr = 2;
 	j=0;
-	printf("\nWeapons\n\tSlash\tBash\tStab\tSkill\tDurability");
+	//printf("\nWeapons\n\tSlash\tBash\tStab\tSkill\tDurability");
 	for (int i = 0; i < 16; i++)
 		{//The weapons table
 		
-		printf("\n\t%d", getValAtAddress(obj_dat,addressPtr,8));//slash
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr+1, 8));//bash
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr+2, 8));//stab
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Skill
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 7, 8));//Durability
-		printf("\t%s", objectMasters[j].desc);
+		//printf("\n\t%d", getValAtAddress(obj_dat,addressPtr,8));//slash
+		objectMasters[j].uwProperties[UW_PROP_WEAP_SLASH] = getValAtAddress(obj_dat, addressPtr, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr+1, 8));//bash
+		objectMasters[j].uwProperties[UW_PROP_WEAP_BASH] = getValAtAddress(obj_dat, addressPtr+1, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//stab
+		objectMasters[j].uwProperties[UW_PROP_WEAP_STAB] = getValAtAddress(obj_dat, addressPtr+2, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Skill
+		objectMasters[j].uwProperties[UW_PROP_WEAP_SKILL] = getValAtAddress(obj_dat, addressPtr+6, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 7, 8));//Durability
+		objectMasters[j].uwProperties[UW_PROP_DURABILITY] = getValAtAddress(obj_dat, addressPtr+7, 8);
+		//printf("\t%s", objectMasters[j].desc);
 		
-		printf("\t(%d", getValAtAddress(obj_dat, addressPtr + 3, 8));//unknown
-		printf(",%d", getValAtAddress(obj_dat, addressPtr + 4, 8));//unknown
-		printf(",%d)", getValAtAddress(obj_dat, addressPtr + 5, 8));//unknown
+		//printf("\t(%d", getValAtAddress(obj_dat, addressPtr + 3, 8));//unknown
+		//printf(",%d", getValAtAddress(obj_dat, addressPtr + 4, 8));//unknown
+		//printf(",%d)", getValAtAddress(obj_dat, addressPtr + 5, 8));//unknown
 		addressPtr=addressPtr+8;
 		j++;
 //		*Melee weapons table(0x0000 - 0x000f)
@@ -2193,17 +2212,17 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 //			0006   Int8   skill type(3: sword, 4 : axe, 5 : mace, 6 : unarmed)
 //			0007   Int8   durability
 		}
-	printf("\nAddress is %d\nRanged\n",addressPtr);
-	printf("\n\tRaw\tAmmo\tDurability");
+	//printf("\nAddress is %d\nRanged\n",addressPtr);
+//	printf("\n\tRaw\tAmmo\tDurability");
 	for (int i = 0; i < 16; i++)
 		{//Ranged weapons
 			//0000   Int16  unknown
 			//bits 9 - 15: ammunition needed(+0x10)
 			//	0002   Int8   durability
-		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 16));
-		printf("\t%d", ((getValAtAddress(obj_dat,addressPtr,16)>>9) & 0x7F));//is this right at all????
-		printf("\t%d", getValAtAddress(obj_dat,addressPtr+2,8));
-		printf("\t%s", objectMasters[j].desc);
+	//	printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 16));
+	//	printf("\t%d", ((getValAtAddress(obj_dat,addressPtr,16)>>9) & 0x7F));//is this right at all????
+		//printf("\t%d", getValAtAddress(obj_dat,addressPtr+2,8));
+	//	printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 3;
 		j++;
 		}
@@ -2224,24 +2243,26 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 			08 : hat
 			09 : ring
 */
-		printf("\n\t%d",getValAtAddress(obj_dat,addressPtr,8));//Protection
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr +1 , 8));//durability
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr +2, 8));//Unknown
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr +3, 8));//Category
-		printf("\t%s", objectMasters[j].desc);
+		//printf("\n\t%d",getValAtAddress(obj_dat,addressPtr,8));//Protection
+		objectMasters[j].uwProperties[UW_PROP_ARM_PROTECTION] = getValAtAddress(obj_dat, addressPtr, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr +1 , 8));//durability
+		objectMasters[j].uwProperties[UW_PROP_DURABILITY] = getValAtAddress(obj_dat, addressPtr + 1, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr +2, 8));//Unknown
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr +3, 8));//Category
+		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 4;
 		j++;
 		}
 
-	printf("\nAddress is %d\nCritters\n", addressPtr);
+	//printf("\nAddress is %d\nCritters\n", addressPtr);
 	for (int i = 0; i < 64; i++)
 		{//Critters
 		addressPtr = addressPtr + 48;
 		j++;
 		}
 
-	printf("\nAddress is %d\nContainers\n", addressPtr);
-	printf("\n\tCap\tTypeofObj\tUnkn\noOfSlots");
+	//printf("\nAddress is %d\nContainers\n", addressPtr);
+	//printf("\n\tCap\tTypeofObj\tUnkn\noOfSlots");
 	for (int i = 0; i < 16; i++)
 		{
 /*		*Containers table(0x0080 - 0x008f)
@@ -2249,14 +2270,16 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 			0001   Int8   objects accepted; 0: runes, 1 : arrows, 2 : scrolls, 3 : edibles, 0xFF : any
 			0002   Int8   number of slots available ? ; 2:, -1 : any
 */
-		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Capacity
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//Objects
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//No of Slots
-		printf("\t%s", objectMasters[j].desc);
+		//printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Capacity
+		objectMasters[j].uwProperties[UW_PROP_CONT_CAPACITY] = getValAtAddress(obj_dat, addressPtr, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//Objects
+		objectMasters[j].uwProperties[UW_PROP_CONT_OBJECTS] = getValAtAddress(obj_dat, addressPtr+1, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//No of Slots
+		objectMasters[j].uwProperties[UW_PROP_CONT_SLOTS] = getValAtAddress(obj_dat, addressPtr+2, 8);
+		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 3;
 		j++;
 		}
-
 
 	printf("\nAddress is %d\nLight Sources\n", addressPtr);
 	printf("\n\tBright\tDuration");
@@ -2267,27 +2290,29 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 		0000   Int8   light brightness (max. is 4; 0 means unlit)
 		0001   Int8   duration (00: doesn't go out, e.g. taper of sacrifice)
 		*/
-		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Brightness.
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//duration
-		printf("\t%s", objectMasters[j].desc);
+		//printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Brightness.
+		objectMasters[j].uwProperties[UW_PROP_LIGHT_BRIGHTNESS] = getValAtAddress(obj_dat, addressPtr, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//duration
+		objectMasters[j].uwProperties[UW_PROP_LIGHT_DURATION] = getValAtAddress(obj_dat, addressPtr+1, 8);
+		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 2;
 		j++;
 		}
 
-	printf("\nAddress is %d\nValuables?\n", addressPtr);
-	printf("\n\t????\t???");
+	//printf("\nAddress is %d\nValuables?\n", addressPtr);
+	//printf("\n\t????\t???");
 	for (int i = 0; i < 16; i++)
 		{
-		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));
-		printf("\t%s", objectMasters[j].desc);
+	//	printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));
+		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 2;
 		j++;
 		}
 
 	j = j + 272;
-	printf("\nAddress is %d\nAnimations\n", addressPtr);
-	printf("\n\tunk\tunk\tStart\tNoOfFrames");
+	//printf("\nAddress is %d\nAnimations\n", addressPtr);
+	//printf("\n\tunk\tunk\tStart\tNoOfFrames");
 	for (int i = 0; i < 11; i++)
 		{
 		/*
@@ -2296,11 +2321,14 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 		0002   Int8   start frame (from animo.gr)
 		0003   Int8   number of frames
 		*/
-		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));
-		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 3, 8));
-		printf("\t%s", objectMasters[j].desc);
+		//printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));
+		objectMasters[j].uwProperties[UW_PROP_ANIM_PAL] = getValAtAddress(obj_dat, addressPtr, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));
+		objectMasters[j].uwProperties[UW_PROP_ANIM_START] = getValAtAddress(obj_dat, addressPtr+2, 8);
+		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 3, 8));
+		objectMasters[j].uwProperties[UW_PROP_ANIM_FRAMES] = getValAtAddress(obj_dat, addressPtr+3, 8);
+		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 4;
 		j++;
 		}
@@ -2316,7 +2344,7 @@ void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 //0d82  0x20     unknown, maybe jewelry info table
 //0da2  0x40     animation object table      16         4 bytes
 //0de2           end
-	printf("DONE");
+	//printf("DONE");
 
 
 

@@ -84,16 +84,19 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
 
-
-
 	private UILabel MessageLog;
-	public Sprite InventoryIcon;
-	public string InventoryString;
-	public Sprite InventoryIconEquip;
-	public string InventoryIconEquipString;
+	public Sprite InventoryDisplay;
+	public Sprite EquipDisplay;
+	public Sprite WorldDisplay;
 
-	public int SpriteIndexWorld;
-	public int SpriteIndexInventory;
+	public string InventoryString;
+	public string EquipString;
+	public string WorldString;
+
+	public int WorldDisplayIndex;
+	public int InvDisplayIndex;
+
+	//public Sprite InventoryIconEquip;
 	public bool ignoreSprite;//For button handlers that do their own sprite work.
 
 	public int item_id;
@@ -104,9 +107,9 @@ public class ObjectInteraction : MonoBehaviour {
 
 	private UWCharacter playerUW;
 	private PlayerInventory pInv;
-	public bool CanBePickedUp;	//unimplemented
+	public bool CanBePickedUp;
 	public bool CanBeUsed;//unimplemented
-	public bool CanBeMoved;//unimplemented
+	//public bool CanBeMoved;//unimplemented
 
 	public bool PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
 
@@ -155,6 +158,7 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			if (animationStarted==false)
 			{
+				CancelInvoke("UpdateAnimation");
 				animationStarted=true;
 				sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 				if (isAnimated==true)
@@ -168,6 +172,12 @@ public class ObjectInteraction : MonoBehaviour {
 			}
 		}
 	}
+
+	public void RefreshAnim()
+	{
+		animationStarted=false;
+	}
+
 	public UWCharacter getPlayerUW()
 		{//Quickly get the player character for other components.
 		return playerUW;
@@ -262,8 +272,13 @@ public class ObjectInteraction : MonoBehaviour {
 		//case TRAP:// TRAP 20	//not implemented
 		case LOCK://LOCK 21
 			//Nothing
+			break;
 		case TORCH://TORCH 22
-			//Nothing. torch effects handled by objcmb /use
+			{
+			LightSource torch=this.gameObject.GetComponent<LightSource>();
+			torch.LookAt();
+			return true;
+			}
 		case CLUTTER://CLUTTER 23
 			//Nothing
 			break;
@@ -448,7 +463,7 @@ public class ObjectInteraction : MonoBehaviour {
 					}
 			case KEY://	KEY 5
 				{//A key just becomes the object in hand
-				playerUW.CursorIcon= InventoryIcon.texture;
+				playerUW.CursorIcon= InventoryDisplay.texture;
 				playerUW.CurrObjectSprite = InventoryString;
 				pInv.ObjectInHand=this.name;
 					return false;
@@ -549,7 +564,11 @@ public class ObjectInteraction : MonoBehaviour {
 			case LOCK://LOCK 21
 				//Nothing
 			case TORCH://TORCH 22
-			//Nothing. torch effects handled by objcmb /use
+				{
+					LightSource torch=this.gameObject.GetComponent<LightSource>();
+					torch.Use();
+					return true;
+				}
 			case CLUTTER://CLUTTER 23
 				//Nothing
 				break;
@@ -739,11 +758,20 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 		if (sr== null)
 			{
-				sr=this.GetComponentInChildren<SpriteRenderer>();
+			sr=this.GetComponentInChildren<SpriteRenderer>();
 			}
-		sr.sprite= tc.RequestSprite(item_id);
-		InventoryIcon=sr.sprite;
-		InventoryIconEquip=sr.sprite;
+		if (this.PickedUp==true)
+			{
+			sr.sprite= tc.RequestSprite(InvDisplayIndex);
+			InventoryDisplay=sr.sprite;
+			}
+		else
+			{
+			sr.sprite= tc.RequestSprite(WorldDisplayIndex);
+			}
+		//sr.sprite= tc.RequestSprite(item_id);
+		//InventoryDisplay=sr.sprite;
+		//EquipDisplay=sr.sprite;
 		}
 //default:
 //			{
