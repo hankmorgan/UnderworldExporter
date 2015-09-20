@@ -6,8 +6,8 @@
 //Object types
 //guessing at what I'll need at the moment
 #define	NPC 0
-#define	WEAPON 1
-#define	ARMOUR 2
+#define	WEAPON 1 
+#define	ARMOUR 2         //Chest pieces
 #define	AMMO 3
 #define	DOOR 4
 #define	KEY 5
@@ -78,6 +78,12 @@
 #define RUNEBAG 70
 #define SHOCK_BRIDGE 71
 #define FORCE_DOOR 72
+#define HELM 73
+#define RING 74
+#define BOOT 75
+#define GLOVES 76
+#define LEGGINGS 77
+#define SHIELD 78
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
@@ -355,7 +361,17 @@ char base[80];
 int isSolid;
 int isMoveable;
 int isInventory;
+int isAnimated;
 char InvIcon[80];
+
+char EquippedIconFemaleLowest[80];
+char EquippedIconMaleLowest[80];//and default
+char EquippedIconFemaleLow[80];
+char EquippedIconMaleLow[80];
+char EquippedIconFemaleMedium[80];
+char EquippedIconMaleMedium[80];
+char EquippedIconFemaleBest[80];
+char EquippedIconMaleBest[80];
 };
 
 

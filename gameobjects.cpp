@@ -610,6 +610,11 @@ switch (game)
 			
 			//Object header.
 			objList[x].item_id = (getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
+			if ((objList[x].item_id >= 464) && (game == UW1))//Fixed for bugged out of range items
+				{
+				objList[x].item_id=464;
+				}
+			//printf("Item ID %d %d\n",x, objList[x].item_id);
 			objList[x].flags  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16))>> 9) & 0x0F;
 			objList[x].enchantment = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 12) & 0x01;
 			objList[x].doordir  = ((getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) >> 13) & 0x01;
@@ -629,30 +634,31 @@ switch (game)
 			//+6
 
 			objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
-			
-			if ((objectMasters[objList[x].item_id].type  == TMAP_SOLID) || (objectMasters[objList[x].item_id].type  == TMAP_CLIP))
-				{
-				objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
-				}
-			if (objectMasters[objList[x].item_id].type == BRIDGE)
-			{
-				if (objList[x].flags >= 2)
-				{
-					if (game == UW2)
-					{
-						objList[x].texture = texture_map[objList[x].flags-2];	//Sets the texture for bridge
-					}
-					else
-					{
-						objList[x].texture = texture_map[objList[x].flags-2+48];	//Sets the texture for bridge
-					}
-				}
-			}
 
-			if (objectMasters[objList[x].item_id].type == BUTTON)
-				{
-				objList[x].texture=objList[x].flags;
-				}
+				if ((objectMasters[objList[x].item_id].type == TMAP_SOLID) || (objectMasters[objList[x].item_id].type == TMAP_CLIP))
+					{
+					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
+					}
+				if (objectMasters[objList[x].item_id].type == BRIDGE)
+					{
+					if (objList[x].flags >= 2)
+						{
+						if (game == UW2)
+							{
+							objList[x].texture = texture_map[objList[x].flags - 2];	//Sets the texture for bridge
+							}
+						else
+							{
+							objList[x].texture = texture_map[objList[x].flags - 2 + 48];	//Sets the texture for bridge
+							}
+						}
+					}
+
+				if (objectMasters[objList[x].item_id].type == BUTTON)
+					{
+					objList[x].texture = objList[x].flags;
+					}
+
 			//objList[x].special = objList[x].owner;
 			
 			objList[x].link  = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) >> 6 & 0x3FF) ; //bits 6-15

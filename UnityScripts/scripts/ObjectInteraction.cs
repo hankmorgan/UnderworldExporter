@@ -78,6 +78,12 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int FORCE_DOOR= 72 ;
 	public const int HIDDENPLACEHOLDER =999 ;
 
+	public const int HELM =73;
+	public const int RING =74;
+	public const int BOOT =75;
+	public const int GLOVES =76;
+	public const int LEGGINGS =77;
+
 
 
 	private UILabel MessageLog;
@@ -198,6 +204,11 @@ public class ObjectInteraction : MonoBehaviour {
 		case WEAPON://	WEAPON 1
 			//repair with hammer
 		case ARMOUR://	ARMOUR 2
+		case HELM ://=73;
+		case RING ://=74;
+		case BOOT ://=75;
+		case GLOVES ://=76;
+		case LEGGINGS: //=77;
 			//repair with hammer
 		case AMMO://	AMMO 3
 			//nothing
@@ -403,6 +414,11 @@ public class ObjectInteraction : MonoBehaviour {
 				//repair with hammer
 			case ARMOUR://	ARMOUR 2
 				//repair with hammer
+			case HELM ://=73;
+			case RING ://=74;
+			case BOOT ://=75;
+			case GLOVES ://=76;
+			case LEGGINGS: //=77;
 			case AMMO://	AMMO 3
 				//nothing
 			break;

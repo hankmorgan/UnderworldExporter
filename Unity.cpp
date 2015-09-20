@@ -21,22 +21,24 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d, %d, %d, %d, %d, %d);"
+		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d, %d, %d, %d, %d, %d, %d);"
 			, objectMasters[currobj.item_id].InvIcon, 
 			objectMasters[currobj.item_id].type, currobj.item_id,
 			currobj.link, currobj.quality, currobj.owner,
-			objectMasters[currobj.item_id].isMoveable);
+			objectMasters[currobj.item_id].isMoveable,
+			objectMasters[currobj.item_id].isAnimated);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d, \"%s\");"
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d, %d, \"%s\");"
 		, objectMasters[currobj.item_id].InvIcon, 
 		objectMasters[currobj.item_id].type, currobj.item_id, 
 		currobj.link, currobj.quality, currobj.owner,
-		objectMasters[currobj.item_id].isMoveable, ChildName);
+		objectMasters[currobj.item_id].isMoveable,
+		objectMasters[currobj.item_id].isAnimated, ChildName);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1330,6 +1332,52 @@ void RenderUnityEntityBridgeSHOCK(int game, float x, float y, float z, ObjectIte
 
 	}
 
+void RenderUnityEntityHelm(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tCreateHelm(myObj, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
+		objectMasters[currobj.item_id].EquippedIconFemaleLowest, objectMasters[currobj.item_id].EquippedIconMaleLowest,
+		objectMasters[currobj.item_id].EquippedIconFemaleLow, objectMasters[currobj.item_id].EquippedIconMaleLow,
+		objectMasters[currobj.item_id].EquippedIconFemaleMedium, objectMasters[currobj.item_id].EquippedIconMaleMedium,
+		objectMasters[currobj.item_id].EquippedIconFemaleBest, objectMasters[currobj.item_id].EquippedIconMaleBest);
+	}
+
+void RenderUnityEntityArmour(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tCreateArmour(myObj, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
+		objectMasters[currobj.item_id].EquippedIconFemaleLowest, objectMasters[currobj.item_id].EquippedIconMaleLowest,
+		objectMasters[currobj.item_id].EquippedIconFemaleLow, objectMasters[currobj.item_id].EquippedIconMaleLow,
+		objectMasters[currobj.item_id].EquippedIconFemaleMedium, objectMasters[currobj.item_id].EquippedIconMaleMedium,
+		objectMasters[currobj.item_id].EquippedIconFemaleBest, objectMasters[currobj.item_id].EquippedIconMaleBest);
+	}
+
+void RenderUnityEntityBoots(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tCreateBoots(myObj, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
+		objectMasters[currobj.item_id].EquippedIconFemaleLowest, objectMasters[currobj.item_id].EquippedIconMaleLowest,
+		objectMasters[currobj.item_id].EquippedIconFemaleLow, objectMasters[currobj.item_id].EquippedIconMaleLow,
+		objectMasters[currobj.item_id].EquippedIconFemaleMedium, objectMasters[currobj.item_id].EquippedIconMaleMedium,
+		objectMasters[currobj.item_id].EquippedIconFemaleBest, objectMasters[currobj.item_id].EquippedIconMaleBest);
+	}
+
+void RenderUnityEntityGloves(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tCreateGloves(myObj, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
+		objectMasters[currobj.item_id].EquippedIconFemaleLowest, objectMasters[currobj.item_id].EquippedIconMaleLowest,
+		objectMasters[currobj.item_id].EquippedIconFemaleLow, objectMasters[currobj.item_id].EquippedIconMaleLow,
+		objectMasters[currobj.item_id].EquippedIconFemaleMedium, objectMasters[currobj.item_id].EquippedIconMaleMedium,
+		objectMasters[currobj.item_id].EquippedIconFemaleBest, objectMasters[currobj.item_id].EquippedIconMaleBest);
+	}
+
+void RenderUnityEntityLeggings(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tCreateLeggings(myObj, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");",
+		objectMasters[currobj.item_id].EquippedIconFemaleLowest, objectMasters[currobj.item_id].EquippedIconMaleLowest,
+		objectMasters[currobj.item_id].EquippedIconFemaleLow, objectMasters[currobj.item_id].EquippedIconMaleLow,
+		objectMasters[currobj.item_id].EquippedIconFemaleMedium, objectMasters[currobj.item_id].EquippedIconMaleMedium,
+		objectMasters[currobj.item_id].EquippedIconFemaleBest, objectMasters[currobj.item_id].EquippedIconMaleBest);
+	}
+
+
 void RenderUnityEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int bind)
 	{
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -1659,6 +1707,36 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							fprintf(UNITY_FILE, "\n\tSetMap(myObj);");
+							break;
+						case HELM:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityHelm(game,x,y,z,currobj,objList,LevelInfo);
+							break;
+						case ARMOUR:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityArmour(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case GLOVES:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityGloves(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case BOOT:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityBoots(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case LEGGINGS:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityLeggings(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);

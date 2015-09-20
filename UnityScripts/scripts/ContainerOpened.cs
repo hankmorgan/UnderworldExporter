@@ -52,11 +52,13 @@ public class ContainerOpened : MonoBehaviour {
 			Container DestinationContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			if (pInv.currentContainer == "Gronk")
 			{
-				GetComponent<UISprite>().spriteName="object_blank";
+				//GetComponent<UISprite>().spriteName="object_blank";
+				GetComponent<UITexture>().mainTexture=pInv.Blank;
 			}
 			else
 			{
-				GetComponent<UISprite>().spriteName=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryString;
+				//GetComponent<UISprite>().spriteName=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryString;
+				GetComponent<UITexture>().mainTexture=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryIcon.texture;
 			}
 			for (int i = 0; i<8; i++)
 			{

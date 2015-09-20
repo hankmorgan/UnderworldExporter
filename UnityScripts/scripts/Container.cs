@@ -310,8 +310,8 @@ public class Container : MonoBehaviour {
 			Debug.Log ("Can't open a container in the real world in this function!");
 			return;
 			}
-		GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
-
+		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
+		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.InventoryIcon.texture;
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
 		//display the container contents.
 		//Container currObjCont = currObj.GetComponent<Container>();

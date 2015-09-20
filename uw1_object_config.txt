@@ -1,464 +1,465 @@
-0 0 0 0 entity 1 a_hand_axe moveable 1 Sprites/OBJECTS_000 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_000
-1 0 0 0 entity 1 a_battle_axe moveable 1 Sprites/OBJECTS_001 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_001
-2 0 0 0 entity 1 an_axe moveable 1 Sprites/OBJECTS_002 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_002
-3 0 0 0 entity 1 a_dagger moveable 1 Sprites/OBJECTS_003 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_003
-4 0 0 0 entity 1 a_shortsword moveable 1 Sprites/OBJECTS_004 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_004
-5 0 0 0 entity 1 a_longsword moveable 1 Sprites/OBJECTS_005 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_005
-6 0 0 0 entity 1 a_broadsword moveable 1 Sprites/OBJECTS_006 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_006
-7 0 0 0 entity 1 a_cudgel moveable 1 Sprites/OBJECTS_007 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_007
-8 0 0 0 entity 1 a_light_mace moveable 1 Sprites/OBJECTS_008 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_008
-9 0 0 0 entity 1 a_mace moveable 1 Sprites/OBJECTS_009 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_009
-10 0 0 0 entity 1 a_shiny_sword moveable 1 Sprites/OBJECTS_010 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_010
-11 0 0 0 entity 1 a_jeweled_axe moveable 1 Sprites/OBJECTS_011 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_011
-12 0 0 0 entity 1 a_black_sword moveable 1 Sprites/OBJECTS_012 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_012
-13 0 0 0 entity 1 a_jeweled_sword moveable 1 Sprites/OBJECTS_013 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_013
-14 0 0 0 entity 1 a_jeweled_mace moveable 1 Sprites/OBJECTS_014 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_014
-15 0 0 0 entity 1 a_fist moveable 1 Sprites/OBJECTS_015 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_015
-16 0 0 0 entity 1 a_sling_stone moveable 1 Sprites/OBJECTS_016 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_016
-17 0 0 0 entity 1 a_crossbow_bolt moveable 1 Sprites/OBJECTS_017 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_017
-18 0 0 0 entity 1 an_arrow moveable 1 Sprites/OBJECTS_018 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_018
-19 0 0 0 entity 1 a_stone moveable 1 Sprites/OBJECTS_019 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_019
-20 0 0 0 entity 1 a_fireball moveable 1 Sprites/OBJECTS_020 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_020
-21 0 0 0 entity 1 a_lightning_bolt moveable 1 Sprites/OBJECTS_021 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_021
-22 0 0 0 entity 1 acid moveable 1 Sprites/OBJECTS_022 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_022
-23 0 0 0 entity 1 a_magic_missile moveable 1 Sprites/OBJECTS_023 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_023
-24 0 0 0 entity 1 a_sling moveable 1 Sprites/OBJECTS_024 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_024
-25 0 0 0 entity 1 a_bow moveable 1 Sprites/OBJECTS_025 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_025
-26 0 0 0 entity 1 a_crossbow moveable 1 Sprites/OBJECTS_026 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_026
-27 0 0 0 entity 1 unknown moveable 1 Sprites/OBJECTS_027 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_027
-28 0 0 0 entity 1 unknown moveable 1 Sprites/OBJECTS_028 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_028
-29 0 0 0 entity 1 unknown moveable 1 Sprites/OBJECTS_029 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_029
-30 0 0 0 entity 1 unknown moveable 1 Sprites/OBJECTS_030 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_030
-31 0 0 0 entity 1 a_jeweled_bow moveable 1 Sprites/OBJECTS_031 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_031
-32 0 0 0 entity 2 a_leather_vest moveable 1 Sprites/OBJECTS_032 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_032
-33 0 0 0 entity 2 a_mail_shirt moveable 1 Sprites/OBJECTS_033 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_033
-34 0 0 0 entity 2 a_breastplate moveable 1 Sprites/OBJECTS_034 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_034
-35 0 0 0 entity 2 leather_leggings_pairs_of_leather_leggings moveable 1 Sprites/OBJECTS_035 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_035
-36 0 0 0 entity 2 mail_leggings_pairs_of_mail_leggings moveable 1 Sprites/OBJECTS_036 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_036
-37 0 0 0 entity 2 plate_leggings_pairs_of_plate_leggings moveable 1 Sprites/OBJECTS_037 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_037
-38 0 0 0 entity 2 leather_gloves_pairs_of_leather_gloves moveable 1 Sprites/OBJECTS_038 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_038
-39 0 0 0 entity 2 chain_gauntlets_pairs_of_chain_gauntlets moveable 1 Sprites/OBJECTS_039 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_039
-40 0 0 0 entity 2 plate_gauntlets_pairs_of_plate_gauntlets moveable 1 Sprites/OBJECTS_040 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_040
-41 0 0 0 entity 2 leather_boots_pairs_of_leather_boots moveable 1 Sprites/OBJECTS_041 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_041
-42 0 0 0 entity 2 chain_boots_pairs_of_chain_boots moveable 1 Sprites/OBJECTS_042 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_042
-43 0 0 0 entity 2 plate_boots_pairs_of_plate_boots moveable 1 Sprites/OBJECTS_043 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_043
-44 0 0 0 entity 2 a_leather_cap moveable 1 Sprites/OBJECTS_044 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_044
-45 0 0 0 entity 2 a_chain_cowl moveable 1 Sprites/OBJECTS_045 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_045
-46 0 0 0 entity 2 a_helmet moveable 1 Sprites/OBJECTS_046 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_046
-47 0 0 0 entity 2 a_pair_of_dragon_skin_boots_pairs_of_dragon_skin_boots moveable 1 Sprites/OBJECTS_047 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_047
-48 0 0 0 entity 2 a_crown moveable 1 Sprites/OBJECTS_048 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_048
-49 0 0 0 entity 2 a_crown moveable 1 Sprites/OBJECTS_049 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_049
-50 0 0 0 entity 2 a_crown moveable 1 Sprites/OBJECTS_050 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_050
-51 0 0 0 entity 2 unknown moveable 1 Sprites/OBJECTS_051 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_051
-52 0 0 0 entity 2 unknown moveable 1 Sprites/OBJECTS_052 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_052
-53 0 0 0 entity 2 unknown moveable 1 Sprites/OBJECTS_053 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_053
-54 0 0 0 entity 2 an_iron_ring moveable 1 Sprites/OBJECTS_054 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_054
-55 0 0 0 entity 2 a_shiny_shield moveable 1 Sprites/OBJECTS_055 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_055
-56 0 0 0 entity 2 a_gold_ring moveable 1 Sprites/OBJECTS_056 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_056
-57 0 0 0 entity 2 a_silver_ring moveable 1 Sprites/OBJECTS_057 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_057
-58 0 0 0 entity 2 a_red_ring moveable 1 Sprites/OBJECTS_058 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_058
-59 0 0 0 entity 2 a_tower_shield moveable 1 Sprites/OBJECTS_059 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_059
-60 0 0 0 entity 2 a_wooden_shield moveable 1 Sprites/OBJECTS_060 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_060
-61 0 0 0 entity 2 a_small_shield moveable 1 Sprites/OBJECTS_061 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_061
-62 0 0 0 entity 2 a_buckler moveable 1 Sprites/OBJECTS_062 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_062
-63 0 0 0 entity 2 a_jeweled_shield moveable 1 Sprites/OBJECTS_063 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_063
-64 0 0 0 entity 0 a_rotworm atdm:ai_spider 0 Sprites/OBJECTS_064 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_064
-65 0 0 0 entity 0 a_flesh_slug atdm:ai_spider 0 Sprites/OBJECTS_065 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_065
-66 0 0 0 entity 0 a_cave_bat atdm:ai_spider 0 Sprites/OBJECTS_066 1 animal_bats02 models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_066
-67 0 0 0 entity 0 a_giant_rat atdm:ai_spider 0 Sprites/OBJECTS_067 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_067
-68 0 0 0 entity 0 a_giant_spider atdm:ai_spider 0 Sprites/OBJECTS_068 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_068
-69 0 0 0 entity 0 a_acid_slug atdm:ai_spider 0 Sprites/OBJECTS_069 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_069
-70 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_070 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_070
-71 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_071 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_071
-72 0 0 0 entity 0 a_giant_rat atdm:ai_spider 0 Sprites/OBJECTS_072 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_072
-73 0 0 0 entity 0 a_vampire_bat atdm:ai_spider 0 Sprites/OBJECTS_073 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_073
-74 0 0 0 entity 0 a_skeleton atdm:ai_undead_skeleton_armed 0 Sprites/OBJECTS_074 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_074
-75 0 0 0 entity 0 an_imp atdm:ai_spider 0 Sprites/OBJECTS_075 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_075
-76 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_076 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_076
-77 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_077 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_077
-78 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_078 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_078
-79 0 0 0 entity 0 etherealvoidcreatures uw1_object_079.prt 0 Sprites/OBJECTS_079 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_079
-80 0 0 0 entity 0 a_goblin atdm:ai_pagan_common_armed 0 Sprites/OBJECTS_080 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_080
-81 0 0 0 entity 0 a_mongbat atdm:ai_spider 0 Sprites/OBJECTS_081 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_081
-82 0 0 0 entity 0 a_bloodworm atdm:ai_spider 0 Sprites/OBJECTS_082 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_082
-83 0 0 0 entity 0 a_wolf_spider atdm:ai_spider_huge 0 Sprites/OBJECTS_083 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_083
-84 0 0 0 entity 0 a_mountainman_mountainmen atdm:ai_inventor_scientist 0 Sprites/OBJECTS_084 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_084
-85 0 0 0 entity 0 a_green_lizardman_green_lizardmen atdm:ai_townsfolk_beggar 0 Sprites/OBJECTS_085 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_085
-86 0 0 0 entity 0 a_mountainman_mountainmen atdm:ai_inventor_scientist 0 Sprites/OBJECTS_086 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_086
-87 0 0 0 entity 0 a_lurker atdm:ai_spider 0 Sprites/OBJECTS_087 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_087
-88 0 0 0 entity 0 a_red_lizardman_red_lizardmen atdm:ai_townsfolk_beggar 0 Sprites/OBJECTS_088 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_088
-89 0 0 0 entity 0 a_gray_lizardman_red_lizardmen atdm:ai_townsfolk_beggar 0 Sprites/OBJECTS_089 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_089
-90 0 0 0 entity 0 an_outcast atdm:ai_thief01 0 Sprites/OBJECTS_090 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_090
-91 0 0 0 entity 0 a_headless_headlesses atdm:ai_undead_revenant 0 Sprites/OBJECTS_091 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_091
-92 0 0 0 entity 0 a_dread_spider atdm:ai_spider_huge 0 Sprites/OBJECTS_092 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_092
-93 0 0 0 entity 0 a_fighter atdm:ai_guard_generic_01 0 Sprites/OBJECTS_093 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_093
-94 0 0 0 entity 0 a_fighter atdm:ai_guard_generic_01 0 Sprites/OBJECTS_094 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_094
-95 0 0 0 entity 0 a_fighter atdm:ai_guard_generic_01 0 Sprites/OBJECTS_095 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_095
-96 0 0 0 entity 0 a_troll atdm:ai_spider 0 Sprites/OBJECTS_096 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_096
-97 0 0 0 entity 0 a_ghost atdm:ai_revenant_spirit 0 Sprites/OBJECTS_097 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_097
-98 0 0 0 entity 0 a_fighter atdm:ai_guard_generic_01 0 Sprites/OBJECTS_098 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_098
-99 0 0 0 entity 0 a_ghoul atdm:ai_undead_zombie 0 Sprites/OBJECTS_099 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_099
-100 0 0 0 entity 0 a_ghost atdm:ai_revenant_spirit 0 Sprites/OBJECTS_100 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_100
-101 0 0 0 entity 0 a_ghost atdm:ai_revenant_spirit 0 Sprites/OBJECTS_101 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_101
-102 0 0 0 entity 0 a_gazer atdm:ai_spider 0 Sprites/OBJECTS_102 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_102
-103 0 0 0 entity 0 a_mage atdm:ai_archmage01 0 Sprites/OBJECTS_103 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_103
-104 0 0 0 entity 0 a_fighter atdm:ai_guard_generic_01 0 Sprites/OBJECTS_104 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_104
-105 0 0 0 entity 0 a_dark_ghoul atdm:ai_undead_revenant 0 Sprites/OBJECTS_105 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_105
-106 0 0 0 entity 0 a_mage atdm:ai_archmage01 0 Sprites/OBJECTS_106 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_106
-107 0 0 0 entity 0 a_mage atdm:ai_archmage01 0 Sprites/OBJECTS_107 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_107
-108 0 0 0 entity 0 a_mage atdm:ai_archmage01 0 Sprites/OBJECTS_108 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_108
-109 0 0 0 entity 0 a_mage atdm:ai_archmage01 0 Sprites/OBJECTS_109 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_109
-110 0 0 0 entity 0 a_ghoul atdm:ai_undead_zombie 0 Sprites/OBJECTS_110 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_110
-111 0 0 0 entity 0 a_feral_troll atdm:ai_spider 0 Sprites/OBJECTS_111 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_111
-112 0 0 0 entity 0 a_great_troll atdm:ai_spider 0 Sprites/OBJECTS_112 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_112
-113 0 0 0 entity 0 a_dire_ghost atdm:ai_revenant_spirit 0 Sprites/OBJECTS_113 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_113
-114 0 0 0 entity 0 an_earth_golem atdm:ai_spider 0 Sprites/OBJECTS_114 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_114
-115 0 0 0 entity 0 a_mage atdm:ai_archmage01 0 Sprites/OBJECTS_115 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_115
-116 0 0 0 entity 0 a_deep_lurker atdm:ai_spider 0 Sprites/OBJECTS_116 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_116
-117 0 0 0 entity 0 a_shadow_beast atdm:ai_undead_revenant 0 Sprites/OBJECTS_117 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_117
-118 0 0 0 entity 0 a_reaper atdm:ai_spider 0 Sprites/OBJECTS_118 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_118
-119 0 0 0 entity 0 a_stone_golem atdm:ai_spider 0 Sprites/OBJECTS_119 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_119
-120 0 0 0 entity 0 a_fire_elemental atdm:ai_spider 0 Sprites/OBJECTS_120 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_120
-121 0 0 0 entity 0 a_metal_golem atdm:ai_spider 0 Sprites/OBJECTS_121 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_121
-122 0 0 0 entity 0 a_wisp uw1_object_122.prt 0 Sprites/OBJECTS_122 0 sound models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_122
-123 0 0 0 entity 0 tybal atdm:ai_archmage01 0 Sprites/OBJECTS_123 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_123
-124 0 0 0 entity 0 slasher_of_veils atdm:ai_lantern_bot 0 Sprites/OBJECTS_124 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_124
-125 0 0 0 entity 0 unknown uw1_object_125.prt 0 Sprites/OBJECTS_125 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_125
-126 0 0 0 entity 0 unknown uw1_object_126.prt 0 Sprites/OBJECTS_126 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_126
-127 0 0 0 entity 0 an_adventurer atdm:ai_thief_thug 0 Sprites/OBJECTS_127 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_127
-128 0 0 0 entity 19 a_sack models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_128 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_128
-129 0 0 0 entity 19 an_open_sack models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_129 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_129
-130 0 0 0 entity 19 a_pack models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_130 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_130
-131 0 0 0 entity 19 an_open_pack models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_131 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_131
-132 0 0 0 model 19 a_box_boxes models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_132 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_132
-133 0 0 0 model 19 an_open_box_open_boxes models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_133 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_133
-134 0 0 0 entity 19 a_pouch_pouches models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_134 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_134
-135 0 0 0 entity 19 an_open_pouch_pouches models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_135 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_135
-136 0 0 0 entity 19 a_map_case models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_136 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_136
-137 0 0 0 entity 19 an_open_map_case models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_137 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_137
-138 0 0 0 entity 19 a_gold_coffer models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_138 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_138
-139 0 0 0 entity 19 an_open_gold_coffer models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_139 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_139
-140 0 0 0 entity 19 an_urn models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_140 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_140
-141 0 0 0 entity 19 a_quiver models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_141 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_141
-142 0 0 0 entity 19 a_bowl models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_142 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_142
-143 0 0 0 entity 70 a_rune_bag models/darkmod/uw1/cm.ase 1 Sprites/OBJECTS_143 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_143
-144 0 0 0 entity 9 a_lantern moveable 1 Sprites/OBJECTS_144 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_144
-145 0 0 0 entity 9 a_torch_torches moveable 1 Sprites/OBJECTS_145 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_145
-146 0 0 0 entity 9 a_candle moveable 1 Sprites/OBJECTS_146 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_146
-147 0 0 0 entity 9 a_taper moveable 1 Sprites/OBJECTS_147 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_147
-148 0 0 0 entity 9 a_lit_lantern moveable 1 Sprites/OBJECTS_148 1 element_fire_torch models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_148
-149 0 0 0 entity 9 a_lit_torch moveable 1 Sprites/OBJECTS_149 1 element_fire_torch models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_149
-150 0 0 0 entity 9 a_lit_candle moveable 1 Sprites/OBJECTS_150 1 element_fire_torch models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_150
-151 0 0 0 entity 9 a_lit_taper moveable 1 Sprites/OBJECTS_151 1 element_fire_torch models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_151
-152 0 0 0 entity 12 a_wand moveable 1 Sprites/OBJECTS_152 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_152
-153 0 0 0 entity 12 a_wand moveable 1 Sprites/OBJECTS_153 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_153
-154 0 0 0 entity 12 a_wand moveable 1 Sprites/OBJECTS_154 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_154
-155 0 0 0 entity 12 a_wand moveable 1 Sprites/OBJECTS_155 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_155
-156 0 0 0 entity 12 a_broken_wand moveable 1 Sprites/OBJECTS_156 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_156
-157 0 0 0 entity 12 a_broken_wand moveable 1 Sprites/OBJECTS_157 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_157
-158 0 0 0 entity 12 a_broken_wand moveable 1 Sprites/OBJECTS_158 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_158
-159 0 0 0 entity 12 a_broken_wand moveable 1 Sprites/OBJECTS_159 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_159
-160 0 0 0 entity 18 a_coin moveable 1 Sprites/OBJECTS_160 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_160
-161 0 0 0 entity 18 a_gold_coin moveable 1 Sprites/OBJECTS_161 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_161
-162 0 0 0 entity 18 a_ruby_rubies moveable 1 Sprites/OBJECTS_162 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_162
-163 0 0 0 entity 18 a_red_gem moveable 1 Sprites/OBJECTS_163 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_163
-164 0 0 0 entity 18 a_small_blue_gem moveable 1 Sprites/OBJECTS_164 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_164
-165 0 0 0 entity 18 a_large_blue_gem moveable 1 Sprites/OBJECTS_165 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_165
-166 0 0 0 entity 18 a_sapphire moveable 1 Sprites/OBJECTS_166 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_166
-167 0 0 0 entity 18 an_emerald moveable 1 Sprites/OBJECTS_167 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_167
-168 0 0 0 entity 18 an_amulet moveable 1 Sprites/OBJECTS_168 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_168
-169 0 0 0 entity 18 a_goblet moveable 1 Sprites/OBJECTS_169 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_169
-170 0 0 0 entity 18 a_sceptre moveable 1 Sprites/OBJECTS_170 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_170
-171 0 0 0 entity 18 a_gold_chain moveable 1 Sprites/OBJECTS_171 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_171
-172 0 0 0 entity 18 a_gold_plate moveable 1 Sprites/OBJECTS_172 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_172
-173 0 0 0 entity 18 an_ankh_pendant moveable 1 Sprites/OBJECTS_173 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_173
-174 0 0 0 entity 18 a_shiny_cup moveable 1 Sprites/OBJECTS_174 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_174
-175 0 0 0 entity 18 a_large_gold_nugget moveable 1 Sprites/OBJECTS_175 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_175
-176 0 0 0 entity 24 a_piece_of_meat_pieces_of_meat moveable 1 Sprites/OBJECTS_176 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_176
-177 0 0 0 entity 24 a_loaf_of_bread_loaves_of_bread moveable 1 Sprites/OBJECTS_177 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_177
-178 0 0 0 entity 24 a_piece_of_cheese_pieces_of_cheese moveable 1 Sprites/OBJECTS_178 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_178
-179 0 0 0 entity 24 an_apple moveable 1 Sprites/OBJECTS_179 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_179
-180 0 0 0 entity 24 an_ear_of_corn_ears_of_corn moveable 1 Sprites/OBJECTS_180 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_180
-181 0 0 0 entity 24 a_loaf_of_bread_loaves_of_bread moveable 1 Sprites/OBJECTS_181 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_181
-182 0 0 0 entity 24 a_fish_fish moveable 1 Sprites/OBJECTS_182 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_182
-183 0 0 0 entity 24 some_popcorn_bunches_of_popcorn moveable 1 Sprites/OBJECTS_183 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_183
-184 0 0 0 entity 24 a_mushroom moveable 1 Sprites/OBJECTS_184 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_184
-185 0 0 0 entity 24 a_toadstool moveable 1 Sprites/OBJECTS_185 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_185
-186 0 0 0 entity 24 a_bottle_of_ale_bottles_of_ale moveable 1 Sprites/OBJECTS_186 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_186
-187 0 0 0 entity 14 a_red_potion moveable 1 Sprites/OBJECTS_187 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_187
-188 0 0 0 entity 14 a_green_potion moveable 1 Sprites/OBJECTS_188 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_188
-189 0 0 0 entity 14 a_bottle_of_water_bottles_of_water moveable 1 Sprites/OBJECTS_189 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_189
-190 0 0 0 entity 14 a_flask_of_port_flasks_of_port moveable 1 Sprites/OBJECTS_190 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_190
-191 0 0 0 entity 14 a_bottle_of_wine_bottles_of_wine moveable 1 Sprites/OBJECTS_191 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_191
-192 0 0 0 entity 25 a_plant moveable 1 Sprites/OBJECTS_192 0 sound models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_192
-193 0 0 0 entity 25 some_grass_bunches_of_grass uw1_object_193.prt 1 Sprites/OBJECTS_193 1 animal_crickets01_loop models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_193
-194 0 0 0 entity 23 a_skull moveable 1 Sprites/OBJECTS_194 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_194
-195 0 0 0 entity 23 a_skull moveable 1 Sprites/OBJECTS_195 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_195
-196 0 0 0 entity 23 a_bone moveable 1 Sprites/OBJECTS_196 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_196
-197 0 0 0 entity 23 a_bone moveable 1 Sprites/OBJECTS_197 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_197
-198 0 0 0 entity 23 a_pile_of_bones_piles_of_bones moveable 1 Sprites/OBJECTS_198 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_198
-199 0 0 0 entity 25 some_vines_bunches_of_vines moveable 1 Sprites/OBJECTS_199 1 forest_outside_loop_z models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_199
-200 0 0 0 entity 23 a_broken_axe moveable 1 Sprites/OBJECTS_200 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_200
-201 0 0 0 entity 23 a_broken_sword moveable 1 Sprites/OBJECTS_201 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_201
-202 0 0 0 entity 23 a_broken_mace moveable 1 Sprites/OBJECTS_202 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_202
-203 0 0 0 entity 23 a_broken_shield moveable 1 Sprites/OBJECTS_203 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_203
-204 0 0 0 entity 23 a_piece_of_wood_pieces_of_wood moveable 1 Sprites/OBJECTS_204 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_204
-205 0 0 0 entity 23 a_piece_of_wood_pieces_of_wood moveable 1 Sprites/OBJECTS_205 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_205
-206 0 0 0 entity 25 a_plant uw1_object_206.prt 1 Sprites/OBJECTS_206 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_206
-207 0 0 0 entity 25 a_plant uw1_object_207.prt 1 Sprites/OBJECTS_207 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_207
-208 0 0 0 entity 23 a_pile_of_debris_piles_of_debris moveable 1 Sprites/OBJECTS_208 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_208
-209 0 0 0 entity 23 a_pile_of_debris_piles_of_debris moveable 1 Sprites/OBJECTS_209 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_209
-210 0 0 0 entity 23 a_pile_of_debris_piles_of_debris moveable 1 Sprites/OBJECTS_210 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_210
-211 0 0 0 entity 25 a_stalactite uw1_object_211.prt 1 Sprites/OBJECTS_211 1 water_drops_01 models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_211
-212 0 0 0 entity 25 a_plant uw1_object_212.prt 1 Sprites/OBJECTS_212 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_212
-213 0 0 0 entity 25 a_pile_of_debris_piles_of_debris moveable 1 Sprites/OBJECTS_213 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_213
-214 0 0 0 entity 25 a_pile_of_debris_piles_of_debris moveable 1 Sprites/OBJECTS_214 0 NOTHING models/darkmod/uw1/cm.ase 1 1 0 OBJECTS_214
-215 0 0 0 entity 17 an_anvil moveable 1 Sprites/OBJECTS_215 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_215
-216 0 0 0 entity 16 a_pole moveable 1 Sprites/OBJECTS_216 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_216
-217 0 0 0 entity 16 a_dead_rotworm moveable 1 Sprites/OBJECTS_217 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_217
-218 0 0 0 entity 69 some_rubble_piles_of_rubble uw1_object_218.prt 1 Sprites/OBJECTS_218 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_218
-219 0 0 0 entity 69 a_pile_of_wood_chips_piles_of_wood_chips uw1_object_219.prt 1 Sprites/OBJECTS_219 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_219
-220 0 0 0 entity 23 a_pile_of_bones_piles_of_bones moveable 1 Sprites/OBJECTS_220 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_220
-221 0 0 0 entity 25 a_blood_stain uw1_object_221.prt 1 Sprites/OBJECTS_221 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_221
-222 0 0 0 entity 25 a_blood_stain uw1_object_222.prt 1 Sprites/OBJECTS_222 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_222
-223 0 0 0 entity 25 a_blood_stain uw1_object_223.prt 1 Sprites/OBJECTS_223 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_223
-224 0 0 0 entity 16 a_runestone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_224
-225 0 0 0 entity 69 the_Key_of_Truth uw1_object_225.prt 1 Sprites/OBJECTS_225 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_225
-226 0 0 0 entity 69 the_Key_of_Love uw1_object_226.prt 1 Sprites/OBJECTS_226 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_226
-227 0 0 0 entity 69 the_Key_of_Courage uw1_object_227.prt 1 Sprites/OBJECTS_227 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_227
-228 0 0 0 entity 69 a_two_part_key uw1_object_228.prt 1 Sprites/OBJECTS_228 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_228
-229 0 0 0 entity 69 a_two_part_key uw1_object_229.prt 1 Sprites/OBJECTS_229 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_229
-230 0 0 0 entity 69 a_two_part_key uw1_object_230.prt 1 Sprites/OBJECTS_230 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_230
-231 0 0 0 entity 69 the_Key_of_Infinity uw1_object_337.prt 1 Sprites/OBJECTS_231 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_231
-232 0 0 0 entity 6 an_An_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_232
-233 0 0 0 entity 6 a_Bet_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_233
-234 0 0 0 entity 6 a_Corp_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_234
-235 0 0 0 entity 6 a_Des_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_235
-236 0 0 0 entity 6 an_Ex_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_236
-237 0 0 0 entity 6 a_Flam_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_237
-238 0 0 0 entity 6 a_Grav_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_238
-239 0 0 0 entity 6 a_Hur_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_239
-240 0 0 0 entity 6 an_In_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_240
-241 0 0 0 entity 6 a_Jux_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_241
-242 0 0 0 entity 6 a_Kal_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_242
-243 0 0 0 entity 6 a_Lor_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_243
-244 0 0 0 entity 6 a_Mani_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_244
-245 0 0 0 entity 6 a_Nox_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_245
-246 0 0 0 entity 6 an_Ort_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_246
-247 0 0 0 entity 6 a_Por_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_247
-248 0 0 0 entity 6 a_Quas_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_248
-249 0 0 0 entity 6 a_Rel_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_249
-250 0 0 0 entity 6 a_Sanct_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_250
-251 0 0 0 entity 6 a_Tym_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_251
-252 0 0 0 entity 6 an_Uus_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_252
-253 0 0 0 entity 6 a_Vas_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_253
-254 0 0 0 entity 6 a_Wis_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_254
-255 0 0 0 entity 6 a_Ylem_stone moveable 1 Sprites/OBJECTS_224 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_255
-256 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_256 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_256
-257 0 0 0 entity 5 a_lockpick atdm:playertools_lockpick_snake 1 Sprites/OBJECTS_257 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_257
-258 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_258 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_258
-259 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_259 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_259
-260 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_260 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_260
-261 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_261 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_261
-262 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_262 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_262
-263 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_263 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_263
-264 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_264 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_264
-265 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_265 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_265
-266 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_266 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_266
-267 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_267 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_267
-268 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_268 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_268
-269 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_269 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_269
-270 0 0 0 entity 5 a_key atdm:key_ornate 1 Sprites/OBJECTS_270 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_270
-271 0 0 0 entity 21 a_lock atdm:target_changelockstate 0 Sprites/OBJECTS_271 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_271
-272 0 0 0 entity 16 a_picture_of_Tom uw1_object_272.prt 1 Sprites/OBJECTS_272 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_272
-273 0 0 0 entity 16 a_crystal_splinter uw1_object_273.prt 1 Sprites/OBJECTS_273 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_273
-274 0 0 0 entity 16 an_orb_rock uw1_object_274.prt 1 Sprites/OBJECTS_274 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_274
-275 0 0 0 entity 16 the_Gem_Cutter_of_Coulnes uw1_object_275.prt 1 Sprites/OBJECTS_275 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_275
-276 0 0 0 entity 16 a_book uw1_object_276.prt 1 Sprites/OBJECTS_276 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_276
-277 0 0 0 entity 16 a_block_of_burning_incense_blocks_of_burning_incense uw1_object_277.prt 1 Sprites/OBJECTS_277 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_277
-278 0 0 0 entity 16 a_block_of_incense_blocks_of_incense uw1_object_278.prt 1 Sprites/OBJECTS_278 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_278
-279 0 0 0 entity 17 an_orb uw1_object_279.prt 1 Sprites/OBJECTS_279 1 pagan_magical01_loop models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_279
-280 0 0 0 entity 16 a_broken_blade uw1_object_280.prt 1 Sprites/OBJECTS_280 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_280
-281 0 0 0 entity 16 a_broken_hilt uw1_object_281.prt 1 Sprites/OBJECTS_281 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_281
-282 0 0 0 entity 16 a_figurine uw1_object_282.prt 1 Sprites/OBJECTS_282 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_282
-283 0 0 0 entity 16 some_rotworm_stew_servings_of_rotworm_stew uw1_object_283.prt 1 Sprites/OBJECTS_283 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_283
-284 0 0 0 entity 16 some_strong_thread_pieces_of_strong_thread uw1_object_284.prt 1 Sprites/OBJECTS_284 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_284
-285 0 0 0 entity 16 dragon_scales_bunches_of_dragon_scales uw1_object_285.prt 1 Sprites/OBJECTS_285 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_285
-286 0 0 0 entity 16 a_resilient_sphere_some_resilient_spheres uw1_object_286.prt 1 Sprites/OBJECTS_286 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_286
-287 0 0 0 entity 16 a_standard uw1_object_287.prt 1 Sprites/OBJECTS_287 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_287
-288 0 0 0 entity 16 a_spell uw1_object_288.prt 1 Sprites/OBJECTS_288 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_288
-289 0 0 0 entity 16 a_bedroll uw1_object_289.prt 1 Sprites/OBJECTS_289 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_289
-290 0 0 0 entity 16 a_silver_seed uw1_object_290.prt 1 Sprites/OBJECTS_290 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_290
-291 0 0 0 entity 16 a_mandolin uw1_object_291.prt 1 Sprites/OBJECTS_291 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_291
-292 0 0 0 entity 16 a_flute uw1_object_292.prt 1 Sprites/OBJECTS_292 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_292
-293 0 0 0 entity 16 some_leeches_bunches_of_leeches uw1_object_293.prt 1 Sprites/OBJECTS_293 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_293
-294 0 0 0 entity 16 a_moonstone uw1_object_294.prt 1 Sprites/OBJECTS_294 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_294
-295 0 0 0 entity 16 a_spike uw1_object_295.prt 1 Sprites/OBJECTS_295 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_295
-296 0 0 0 entity 16 a_rock_hammer uw1_object_296.prt 1 Sprites/OBJECTS_296 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_296
-297 0 0 0 entity 16 a_glowing_rock uw1_object_297.prt 1 Sprites/OBJECTS_297 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_297
-298 0 0 0 entity 16 a_campfire uw1_object_298.prt 1 Sprites/OBJECTS_298 1 element_fire_fireplace models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_298
-299 0 0 0 entity 16 a_fishing_pole uw1_object_299.prt 1 Sprites/OBJECTS_299 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_299
-300 0 0 0 entity 16 a_medallion uw1_object_300.prt 1 Sprites/OBJECTS_300 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_300
-301 0 0 0 entity 16 an_oil_flask uw1_object_301.prt 1 Sprites/OBJECTS_301 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_301
-302 0 0 0 entity 17 a_fountain uw1_object_302.prt 1 Sprites/OBJECTS_302 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_302
-303 0 0 0 entity 25 a_cauldron uw1_object_303.prt 1 Sprites/OBJECTS_303 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_303
-304 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_304 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_304
-305 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_305 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_305
-306 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_306 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_306
-307 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_307 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_307
-308 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_308 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_308
-309 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_309 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_309
-310 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_310 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_310
-311 0 0 0 entity 11 a_book atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_311 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_311
-312 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_312 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_312
-313 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_313 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_313
-314 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_314 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_314
-315 0 0 0 entity 28 a_map models/darkmod/readables/scroll_tied_up.lwo 1 Sprites/OBJECTS_315 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_315
-316 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_316 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_316
-317 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_317 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_317
-318 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_318 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_318
-319 0 0 0 entity 13 a_scroll atdm:readable_mobile_scroll01 1 Sprites/OBJECTS_319 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_319
-320 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_320 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_320
-321 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_321 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_321
-322 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_322 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_322
-323 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_323 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_323
-324 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_324 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_324
-325 0 0 0 entity 4 a_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_325 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_325
-326 0 0 0 entity 30 a_portcullis_portcullises atdm:door_96x48_3hinge 0 Sprites/OBJECTS_326 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_326
-327 0 0 0 entity 29 a_secret_door atdm:mover_door 0 Sprites/OBJECTS_327 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_327
-328 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_328 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_328
-329 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_329 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_329
-330 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_330 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_330
-331 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_331 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_331
-332 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_332 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_332
-333 0 0 0 entity 4 an_open_door atdm:door_96x48_3hinge 0 Sprites/OBJECTS_333 0 NOTHING models/darkmod/uw1/cm.ase 1 0 0 OBJECTS_333
-334 0 0 0 entity 30 an_open_portcullis atdm:door_96x48_3hinge 0 Sprites/OBJECTS_334 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_334
-335 0 0 0 entity 29 a_secret_door atdm:mover_door 0 Sprites/OBJECTS_335 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_335
-336 0 0 0 model 23 a_bench_benches models/darkmod/furniture/seating/bench_wooden01.lwo 0 Sprites/OBJECTS_336 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_336
-337 0 0 0 entity 69 an_arrow uw1_object_337.prt 1 Sprites/OBJECTS_337 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_337
-338 0 0 0 entity 69 a_crossbow_bolt uw1_object_338.prt 1 Sprites/OBJECTS_338 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_338
-339 0 0 0 model 23 a_large_boulder models/darkmod/nature/rocks/rubble_medium_1.ase 0 Sprites/OBJECTS_339 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_339
-340 0 0 0 model 23 a_large_boulder models/darkmod/nature/rocks/rubble_medium_1.ase 0 Sprites/OBJECTS_340 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_340
-341 0 0 0 model 23 a_boulder models/darkmod/nature/rocks/rubble_medium_1.ase 0 Sprites/OBJECTS_341 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_341
-342 0 0 0 model 23 a_small_boulder models/darkmod/nature/rocks/rubble_medium_1.ase 0 Sprites/OBJECTS_342 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_342
-343 0 0 0 model 17 a_shrine models/darkmod/decorative/statues/the_hammer_medium2.lwo 0 Sprites/OBJECTS_343 1 gregorian01c models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_343
-344 0 0 0 model 23 a_table models/darkmod/furniture/tables/table_wood_rough_small.lwo 0 Sprites/OBJECTS_344 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_344
-345 0 0 0 model 23 a_beam models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/OBJECTS_345 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_345
-346 0 0 0 model 23 a_moongate models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/OBJECTS_346 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_346
-347 0 0 0 entity 19 a_barrel models/darkmod/containers/barrell_med_closed.lwo 0 Sprites/OBJECTS_347 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_347
-348 0 0 0 model 23 a_chair models/darkmod/furniture/seating/chair_simple01.lwo 0 Sprites/OBJECTS_348 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_348
-349 0 0 0 entity 19 a_chest models/darkmod/containers/openable/chest_wood.ase 0 Sprites/OBJECTS_349 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_349
-350 0 0 0 model 19 a_nightstand models/darkmod/furniture/small_dresser.ase 0 Sprites/OBJECTS_350 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_350
-351 0 0 0 entity 69 a_lotus_turbo_esprit uw1_object_351.prt 0 Sprites/OBJECTS_351 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_351
-352 0 0 0 ignore 31 a_pillar worldspawn 0 Sprites/OBJECTS_352 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_352
-353 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_353 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_353
-354 0 0 0 model 8 a_switch_switches models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/OBJECTS_354 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_354
-355 0 0 0 entity 25 unknown uw1_object_355.prt 0 Sprites/OBJECTS_355 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_355
-356 0 0 0 entity 7 a_bridge models/darkmod/uw1/uw1_bridge_new.ase 0 Sprites/OBJECTS_356 1 creak_wooden_sign01 models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_356
-357 0 0 0 model 23 a_gravestone models/darkmod/wearables/armour/shield_oldfashioned.lwo 0 Sprites/OBJECTS_357 0 catacombs01_z models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_357
-358 0 0 0 entity 10 some_writing atdm:readable_base 0 Sprites/OBJECTS_358 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_358
-359 0 0 0 entity 25 unknown uw1_object_359.prt 0 Sprites/OBJECTS_359 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_359
-360 0 0 0 entity 25 unknown uw1_object_360.prt 0 Sprites/OBJECTS_360 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_360
-361 0 0 0 entity 25 unknown uw1_object_361.prt 0 Sprites/OBJECTS_361 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_361
-362 0 0 0 entity 25 unknown uw1_object_362.prt 0 Sprites/OBJECTS_362 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_362
-363 0 0 0 entity 25 unknown uw1_object_363.prt 0 Sprites/OBJECTS_363 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_363
-364 0 0 0 entity 25 unknown uw1_object_364.prt 0 Sprites/OBJECTS_364 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_364
-365 0 0 0 model 23 force_field models/darkmod/decorative/hourglass.ase 0 Sprites/OBJECTS_365 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_365
-366 0 0 0 entity 34 special_tmap_obj func_static 0 Sprites/OBJECTS_366 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_366
-367 0 0 0 entity 35 special_tmap_obj func_static 0 Sprites/OBJECTS_367 0 NOTHING models/darkmod/uw1/cm.ase 0 0 0 OBJECTS_367
-368 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_368 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_368
-369 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_369 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_369
-370 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_370 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_370
-371 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_371 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_371
-372 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_372 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_372
-373 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_373 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_373
-374 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_374 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_374
-375 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_375 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_375
-376 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_376 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_376
-377 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_377 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_377
-378 0 0 0 entity 8 a_button models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_378 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_378
-379 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_379 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_379
-380 0 0 0 entity 8 a_switch models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_380 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_380
-381 0 0 0 entity 8 a_lever models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_381 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_381
-382 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_382 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_382
-383 0 0 0 entity 8 a_pull_chain models/darkmod/mechanical/switches/switch_flip.ase 0 Sprites/OBJECTS_383 0 NOTHING models/darkmod/uw1/cm.ase 1 0 1 OBJECTS_383
-384 0 0 0 model 37 a_damage_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_384 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_384
-385 0 0 0 entity 38 a_teleport_trap func_teleporter 1 Sprites/OBJECTS_385 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_385
-386 0 0 0 model 39 a_arrow_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_386 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_386
-387 0 0 0 entity 40 a_do_trap atdm:target_callscriptfunction 1 Sprites/OBJECTS_387 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_387
-388 0 0 0 model 41 a_pit_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_388 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_388
-389 0 0 0 entity 42 a_change_terrain_trap func_static 1 Sprites/OBJECTS_389 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_389
-390 0 0 0 model 43 a_spelltrap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_390 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_390
-391 0 0 0 model 44 a_create_object_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_391 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_391
-392 0 0 0 model 45 a_door_trap atdm:target_changelockstate 1 Sprites/OBJECTS_392 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_392
-393 0 0 0 model 46 a_ward_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_393 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_393
-394 0 0 0 model 47 a_tell_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_394 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_394
-395 0 0 0 model 48 a_delete_object_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_395 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_395
-396 0 0 0 model 49 an_inventory_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_396 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_396
-397 0 0 0 model 50 a_set_variable_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_397 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_397
-398 0 0 0 model 51 a_check_variable_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_398 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_398
-399 0 0 0 model 52 a_combination_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_399 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_399
-400 0 0 0 model 53 a_text_string_trap models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_400 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_400
-401 0 0 0 entity 25 unknown uw1_object_401.prt 1 Sprites/OBJECTS_401 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_401
-402 0 0 0 entity 25 unknown uw1_object_402.prt 1 Sprites/OBJECTS_402 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_402
-403 0 0 0 entity 25 unknown uw1_object_403.prt 1 Sprites/OBJECTS_403 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_403
-404 0 0 0 entity 25 unknown uw1_object_404.prt 1 Sprites/OBJECTS_404 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_404
-405 0 0 0 entity 25 unknown uw1_object_405.prt 1 Sprites/OBJECTS_405 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_405
-406 0 0 0 entity 25 unknown uw1_object_406.prt 1 Sprites/OBJECTS_406 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_406
-407 0 0 0 entity 25 unknown uw1_object_407.prt 1 Sprites/OBJECTS_407 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_407
-408 0 0 0 entity 25 unknown uw1_object_408.prt 1 Sprites/OBJECTS_408 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_408
-409 0 0 0 entity 25 unknown uw1_object_409.prt 1 Sprites/OBJECTS_409 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_409
-410 0 0 0 entity 25 unknown uw1_object_410.prt 1 Sprites/OBJECTS_410 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_410
-411 0 0 0 entity 25 unknown uw1_object_411.prt 1 Sprites/OBJECTS_411 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_411
-412 0 0 0 entity 25 unknown uw1_object_412.prt 1 Sprites/OBJECTS_412 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_412
-413 0 0 0 entity 25 unknown uw1_object_413.prt 1 Sprites/OBJECTS_413 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_413
-414 0 0 0 entity 25 unknown uw1_object_414.prt 1 Sprites/OBJECTS_414 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_414
-415 0 0 0 entity 25 unknown uw1_object_415.prt 1 Sprites/OBJECTS_415 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_415
-416 0 0 0 entity 54 a_move_trigger trigger_multiple 0 Sprites/OBJECTS_416 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_416
-417 0 0 0 model 55 a_pick_up_trigger models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_417 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_417
-418 0 0 0 model 56 a_use_trigger models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_418 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_418
-419 0 0 0 model 57 a_look_trigger models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_419 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_419
-420 0 0 0 model 58 a_step_on_trigger models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_420 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_420
-421 0 0 0 model 59 an_open_trigger models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_421 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_421
-422 0 0 0 model 60 an_unlock_trigger models/darkmod/decorative/hourglass.ase 1 Sprites/OBJECTS_422 0 NOTHING models/darkmod/uw1/cm.ase 0 0 1 OBJECTS_422
-423 0 0 0 entity 25 unknown uw1_object_423.prt 1 Sprites/OBJECTS_423 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_423
-424 0 0 0 entity 25 unknown uw1_object_424.prt 1 Sprites/OBJECTS_424 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_424
-425 0 0 0 entity 25 unknown uw1_object_425.prt 1 Sprites/OBJECTS_425 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_425
-426 0 0 0 entity 25 unknown uw1_object_426.prt 1 Sprites/OBJECTS_426 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_426
-427 0 0 0 entity 25 unknown uw1_object_427.prt 1 Sprites/OBJECTS_427 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_427
-428 0 0 0 entity 25 unknown uw1_object_428.prt 1 Sprites/OBJECTS_428 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_428
-429 0 0 0 entity 25 unknown uw1_object_429.prt 1 Sprites/OBJECTS_429 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_429
-430 0 0 0 entity 25 unknown uw1_object_430.prt 1 Sprites/OBJECTS_430 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_430
-431 0 0 0 entity 25 unknown uw1_object_431.prt 1 Sprites/OBJECTS_431 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_431
-432 0 0 0 entity 25 unknown uw1_object_432.prt 1 Sprites/OBJECTS_432 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_432
-433 0 0 0 entity 25 unknown uw1_object_433.prt 1 Sprites/OBJECTS_433 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_433
-434 0 0 0 entity 25 unknown uw1_object_434.prt 1 Sprites/OBJECTS_434 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_434
-435 0 0 0 entity 25 unknown uw1_object_435.prt 1 Sprites/OBJECTS_435 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_435
-436 0 0 0 entity 25 unknown uw1_object_436.prt 1 Sprites/OBJECTS_436 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_436
-437 0 0 0 entity 25 unknown uw1_object_437.prt 1 Sprites/OBJECTS_437 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_437
-438 0 0 0 entity 25 unknown uw1_object_438.prt 1 Sprites/OBJECTS_438 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_438
-439 0 0 0 entity 25 unknown uw1_object_439.prt 1 Sprites/OBJECTS_439 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_439
-440 0 0 0 entity 25 unknown uw1_object_440.prt 1 Sprites/OBJECTS_440 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_440
-441 0 0 0 entity 25 unknown uw1_object_441.prt 1 Sprites/OBJECTS_441 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_441
-442 0 0 0 entity 25 unknown uw1_object_442.prt 1 Sprites/OBJECTS_442 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_442
-443 0 0 0 entity 25 unknown uw1_object_443.prt 1 Sprites/OBJECTS_443 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_443
-444 0 0 0 entity 25 unknown uw1_object_444.prt 1 Sprites/OBJECTS_444 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_444
-445 0 0 0 entity 25 unknown uw1_object_445.prt 1 Sprites/OBJECTS_445 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_445
-446 0 0 0 entity 25 unknown uw1_object_446.prt 1 Sprites/OBJECTS_446 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_446
-447 0 0 0 entity 25 unknown uw1_object_447.prt 1 Sprites/OBJECTS_447 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_447
-448 0 0 0 model 23 some_blood models/darkmod/wearables/armour/shield_oldfashioned.lwo 1 Sprites/OBJECTS_448 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_448
-449 0 0 0 entity 25 a_mist_cloud uw1_object_449.prt 0 Sprites/OBJECTS_449 1 steam01 models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_449
-450 0 0 0 entity 25 an_explosion uw1_object_450.prt 0 Sprites/OBJECTS_450 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_450
-451 0 0 0 entity 25 an_explosion uw1_object_451.prt 0 Sprites/OBJECTS_451 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_451
-452 0 0 0 entity 25 an_explosion uw1_object_452.prt 0 Sprites/OBJECTS_452 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_452
-453 0 0 0 entity 25 a_splash_splashes uw1_object_453.prt 0 Sprites/OBJECTS_453 1 water_stream01_loop models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_453
-454 0 0 0 entity 25 a_splash_splahes uw1_object_454.prt 0 Sprites/OBJECTS_454 1 water_stream01_loop models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_454
-455 0 0 0 entity 25 a_spell_effect uw1_object_455.prt 0 Sprites/OBJECTS_455 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_455
-456 0 0 0 entity 25 some_smoke uw1_object_456.prt 0 Sprites/OBJECTS_456 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_456
-457 0 0 0 entity 69 a_fountain uw1_object_457.prt 1 Sprites/OBJECTS_457 1 water_medium_running models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_457
-458 0 0 0 entity 69 a_silver_tree uw1_object_458.prt 0 Sprites/OBJECTS_458 1 music_harp02 models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_458
-459 0 0 0 ignore 23 some_damage TODO 0 Sprites/OBJECTS_459 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_459
-460 0 0 0 entity 25 unknown uw1_object_460.prt 0 Sprites/OBJECTS_460 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_460
-461 0 0 0 model 32 a_sound_source models/darkmod/decorative/hourglass.ase 0 Sprites/OBJECTS_461 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_461
-462 0 0 0 ignore 23 some_changing_terrain TODO 0 Sprites/OBJECTS_462 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_462
-463 0 0 0 ignore 23 a_moving_door TODO 0 Sprites/OBJECTS_463 0 NOTHING models/darkmod/uw1/cm.ase 1 1 1 OBJECTS_463
+0 0 0 0 entity 1 a_hand_axe H 1 Sprites/OBJECTS_000 0 L M 1 1 1 Sprites/OBJECTS_000 Sprites/OBJECTS_000 S T U Sprites/OBJECTS_000 W x Y 0
+1 0 0 0 entity 1 a_battle_axe H 1 Sprites/OBJECTS_001 0 L M 1 1 1 Sprites/OBJECTS_001 Sprites/OBJECTS_001 S T U Sprites/OBJECTS_001 W x Y 0
+2 0 0 0 entity 1 an_axe H 1 Sprites/OBJECTS_002 0 L M 1 1 1 Sprites/OBJECTS_002 Sprites/OBJECTS_002 S T U Sprites/OBJECTS_002 W x Y 0
+3 0 0 0 entity 1 a_dagger H 1 Sprites/OBJECTS_003 0 L M 1 1 1 Sprites/OBJECTS_003 Sprites/OBJECTS_003 S T U Sprites/OBJECTS_003 W x Y 0
+4 0 0 0 entity 1 a_shortsword H 1 Sprites/OBJECTS_004 0 L M 1 1 1 Sprites/OBJECTS_004 Sprites/OBJECTS_004 S T U Sprites/OBJECTS_004 W x Y 0
+5 0 0 0 entity 1 a_longsword H 1 Sprites/OBJECTS_005 0 L M 1 1 1 Sprites/OBJECTS_005 Sprites/OBJECTS_005 S T U Sprites/OBJECTS_005 W x Y 0
+6 0 0 0 entity 1 a_broadsword H 1 Sprites/OBJECTS_006 0 L M 1 1 1 Sprites/OBJECTS_006 Sprites/OBJECTS_006 S T U Sprites/OBJECTS_006 W x Y 0
+7 0 0 0 entity 1 a_cudgel H 1 Sprites/OBJECTS_007 0 L M 1 1 1 Sprites/OBJECTS_007 Sprites/OBJECTS_007 S T U Sprites/OBJECTS_007 W x Y 0
+8 0 0 0 entity 1 a_light_mace H 1 Sprites/OBJECTS_008 0 L M 1 1 1 Sprites/OBJECTS_008 Sprites/OBJECTS_008 S T U Sprites/OBJECTS_008 W x Y 0
+9 0 0 0 entity 1 a_mace H 1 Sprites/OBJECTS_009 0 L M 1 1 1 Sprites/OBJECTS_009 Sprites/OBJECTS_009 S T U Sprites/OBJECTS_009 W x Y 0
+10 0 0 0 entity 1 a_shiny_sword H 1 Sprites/OBJECTS_010 0 L M 1 1 1 Sprites/OBJECTS_010 Sprites/OBJECTS_010 S T U Sprites/OBJECTS_010 W x Y 0
+11 0 0 0 entity 1 a_jeweled_axe H 1 Sprites/OBJECTS_011 0 L M 1 1 1 Sprites/OBJECTS_011 Sprites/OBJECTS_011 S T U Sprites/OBJECTS_011 W x Y 0
+12 0 0 0 entity 1 a_black_sword H 1 Sprites/OBJECTS_012 0 L M 1 1 1 Sprites/OBJECTS_012 Sprites/OBJECTS_012 S T U Sprites/OBJECTS_012 W x Y 0
+13 0 0 0 entity 1 a_jeweled_sword H 1 Sprites/OBJECTS_013 0 L M 1 1 1 Sprites/OBJECTS_013 Sprites/OBJECTS_013 S T U Sprites/OBJECTS_013 W x Y 0
+14 0 0 0 entity 1 a_jeweled_mace H 1 Sprites/OBJECTS_014 0 L M 1 1 1 Sprites/OBJECTS_014 Sprites/OBJECTS_014 S T U Sprites/OBJECTS_014 W x Y 0
+15 0 0 0 entity 1 a_fist H 1 Sprites/OBJECTS_015 0 L M 1 1 1 Sprites/OBJECTS_015 Sprites/OBJECTS_015 S T U Sprites/OBJECTS_015 W x Y 0
+16 0 0 0 entity 1 a_sling_stone H 1 Sprites/OBJECTS_016 0 L M 1 1 1 Sprites/OBJECTS_016 Sprites/OBJECTS_016 S T U Sprites/OBJECTS_016 W x Y 0
+17 0 0 0 entity 1 a_crossbow_bolt H 1 Sprites/OBJECTS_017 0 L M 1 1 1 Sprites/OBJECTS_017 Sprites/OBJECTS_017 S T U Sprites/OBJECTS_017 W x Y 0
+18 0 0 0 entity 1 an_arrow H 1 Sprites/OBJECTS_018 0 L M 1 1 1 Sprites/OBJECTS_018 Sprites/OBJECTS_018 S T U Sprites/OBJECTS_018 W x Y 0
+19 0 0 0 entity 1 a_stone H 1 Sprites/OBJECTS_019 0 L M 1 1 1 Sprites/OBJECTS_019 Sprites/OBJECTS_019 S T U Sprites/OBJECTS_019 W x Y 0
+20 0 0 0 entity 1 a_fireball H 1 Sprites/OBJECTS_020 0 L M 1 1 1 Sprites/OBJECTS_020 Sprites/OBJECTS_020 S T U Sprites/OBJECTS_020 W x Y 0
+21 0 0 0 entity 1 a_lightning_bolt H 1 Sprites/OBJECTS_021 0 L M 1 1 1 Sprites/OBJECTS_021 Sprites/OBJECTS_021 S T U Sprites/OBJECTS_021 W x Y 0
+22 0 0 0 entity 1 acid H 1 Sprites/OBJECTS_022 0 L M 1 1 1 Sprites/OBJECTS_022 Sprites/OBJECTS_022 S T U Sprites/OBJECTS_022 W x Y 0
+23 0 0 0 entity 1 a_magic_missile H 1 Sprites/OBJECTS_023 0 L M 1 1 1 Sprites/OBJECTS_023 Sprites/OBJECTS_023 S T U Sprites/OBJECTS_023 W x Y 0
+24 0 0 0 entity 1 a_sling H 1 Sprites/OBJECTS_024 0 L M 1 1 1 Sprites/OBJECTS_024 Sprites/OBJECTS_024 S T U Sprites/OBJECTS_024 W x Y 0
+25 0 0 0 entity 1 a_bow H 1 Sprites/OBJECTS_025 0 L M 1 1 1 Sprites/OBJECTS_025 Sprites/OBJECTS_025 S T U Sprites/OBJECTS_025 W x Y 0
+26 0 0 0 entity 1 a_crossbow H 1 Sprites/OBJECTS_026 0 L M 1 1 1 Sprites/OBJECTS_026 Sprites/OBJECTS_026 S T U Sprites/OBJECTS_026 W x Y 0
+27 0 0 0 entity 1 unknown H 1 Sprites/OBJECTS_027 0 L M 1 1 1 Sprites/OBJECTS_027 Sprites/OBJECTS_027 S T U Sprites/OBJECTS_027 W x Y 0
+28 0 0 0 entity 1 unknown H 1 Sprites/OBJECTS_028 0 L M 1 1 1 Sprites/OBJECTS_028 Sprites/OBJECTS_028 S T U Sprites/OBJECTS_028 W x Y 0
+29 0 0 0 entity 1 unknown H 1 Sprites/OBJECTS_029 0 L M 1 1 1 Sprites/OBJECTS_029 Sprites/OBJECTS_029 S T U Sprites/OBJECTS_029 W x Y 0
+30 0 0 0 entity 1 unknown H 1 Sprites/OBJECTS_030 0 L M 1 1 1 Sprites/OBJECTS_030 Sprites/OBJECTS_030 S T U Sprites/OBJECTS_030 W x Y 0
+31 0 0 0 entity 1 a_jeweled_bow H 1 Sprites/OBJECTS_031 0 L M 1 1 1 Sprites/OBJECTS_031 Sprites/OBJECTS_031 S T U Sprites/OBJECTS_031 W x Y 0
+32 0 0 0 entity 2 a_leather_vest H 1 Sprites/OBJECTS_032 0 L M 1 1 1 Sprites/OBJECTS_032 Sprites/armour/armor_f_0000 Sprites/armour/armor_f_0015 Sprites/armour/armor_f_0030 Sprites/armour/armor_f_0045 Sprites/armour/armor_m_0000 Sprites/armour/armor_m_0015 Sprites/armour/armor_m_0030 Sprites/armour/armor_m_0045 0
+33 0 0 0 entity 2 a_mail_shirt H 1 Sprites/OBJECTS_033 0 L M 1 1 1 Sprites/OBJECTS_033 Sprites/armour/armor_f_0001 Sprites/armour/armor_f_0016 Sprites/armour/armor_f_0031 Sprites/armour/armor_f_0046 Sprites/armour/armor_m_0001 Sprites/armour/armor_m_0016 Sprites/armour/armor_m_0031 Sprites/armour/armor_m_0046 0
+34 0 0 0 entity 2 a_breastplate H 1 Sprites/OBJECTS_034 0 L M 1 1 1 Sprites/OBJECTS_034 Sprites/armour/armor_f_0002 Sprites/armour/armor_f_0017 Sprites/armour/armor_f_0032 Sprites/armour/armor_f_0047 Sprites/armour/armor_m_0002 Sprites/armour/armor_m_0017 Sprites/armour/armor_m_0032 Sprites/armour/armor_m_0047 0
+35 0 0 0 entity 77 leather_leggings_pairs_of_leather_leggings H 1 Sprites/OBJECTS_035 0 L M 1 1 1 Sprites/OBJECTS_035 Sprites/armour/armor_f_0003 Sprites/armour/armor_f_0018 Sprites/armour/armor_f_0033 Sprites/armour/armor_f_0048 Sprites/armour/armor_m_0003 Sprites/armour/armor_m_0018 Sprites/armour/armor_m_0033 Sprites/armour/armor_m_0048 0
+36 0 0 0 entity 77 mail_leggings_pairs_of_mail_leggings H 1 Sprites/OBJECTS_036 0 L M 1 1 1 Sprites/OBJECTS_036 Sprites/armour/armor_f_0004 Sprites/armour/armor_f_0019 Sprites/armour/armor_f_0034 Sprites/armour/armor_f_0049 Sprites/armour/armor_m_0004 Sprites/armour/armor_m_0019 Sprites/armour/armor_m_0034 Sprites/armour/armor_m_0049 0
+37 0 0 0 entity 77 plate_leggings_pairs_of_plate_leggings H 1 Sprites/OBJECTS_037 0 L M 1 1 1 Sprites/OBJECTS_037 Sprites/armour/armor_f_0005 Sprites/armour/armor_f_0020 Sprites/armour/armor_f_0035 Sprites/armour/armor_f_0050 Sprites/armour/armor_m_0005 Sprites/armour/armor_m_0020 Sprites/armour/armor_m_0035 Sprites/armour/armor_m_0050 0
+38 0 0 0 entity 76 leather_gloves_pairs_of_leather_gloves H 1 Sprites/OBJECTS_038 0 L M 1 1 1 Sprites/OBJECTS_038 Sprites/armour/armor_f_0006 Sprites/armour/armor_f_0021 Sprites/armour/armor_f_0036 Sprites/armour/armor_f_0051 Sprites/armour/armor_m_0006 Sprites/armour/armor_m_0021 Sprites/armour/armor_m_0036 Sprites/armour/armor_m_0051 0
+39 0 0 0 entity 76 chain_gauntlets_pairs_of_chain_gauntlets H 1 Sprites/OBJECTS_039 0 L M 1 1 1 Sprites/OBJECTS_039 Sprites/armour/armor_f_0007 Sprites/armour/armor_f_0022 Sprites/armour/armor_f_0037 Sprites/armour/armor_f_0052 Sprites/armour/armor_m_0007 Sprites/armour/armor_m_0022 Sprites/armour/armor_m_0037 Sprites/armour/armor_m_0052 0
+40 0 0 0 entity 76 plate_gauntlets_pairs_of_plate_gauntlets H 1 Sprites/OBJECTS_040 0 L M 1 1 1 Sprites/OBJECTS_040 Sprites/armour/armor_f_0008 Sprites/armour/armor_f_0023 Sprites/armour/armor_f_0038 Sprites/armour/armor_f_0053 Sprites/armour/armor_m_0008 Sprites/armour/armor_m_0023 Sprites/armour/armor_m_0038 Sprites/armour/armor_m_0053 0
+41 0 0 0 entity 75 leather_boots_pairs_of_leather_boots H 1 Sprites/OBJECTS_041 0 L M 1 1 1 Sprites/OBJECTS_041 Sprites/armour/armor_f_0009 Sprites/armour/armor_f_0024 Sprites/armour/armor_f_0039 Sprites/armour/armor_f_0054 Sprites/armour/armor_m_0009 Sprites/armour/armor_m_0024 Sprites/armour/armor_m_0039 Sprites/armour/armor_m_0054 0
+42 0 0 0 entity 75 chain_boots_pairs_of_chain_boots H 1 Sprites/OBJECTS_042 0 L M 1 1 1 Sprites/OBJECTS_042 Sprites/armour/armor_f_0010 Sprites/armour/armor_f_0025 Sprites/armour/armor_f_0040 Sprites/armour/armor_f_0055 Sprites/armour/armor_m_0010 Sprites/armour/armor_m_0025 Sprites/armour/armor_m_0040 Sprites/armour/armor_m_0055 0
+43 0 0 0 entity 75 plate_boots_pairs_of_plate_boots H 1 Sprites/OBJECTS_043 0 L M 1 1 1 Sprites/OBJECTS_043 Sprites/armour/armor_f_0011 Sprites/armour/armor_f_0026 Sprites/armour/armor_f_0041 Sprites/armour/armor_f_0056 Sprites/armour/armor_m_0011 Sprites/armour/armor_m_0026 Sprites/armour/armor_m_0041 Sprites/armour/armor_m_0056 0
+44 0 0 0 entity 73 a_leather_cap H 1 Sprites/OBJECTS_044 0 L M 1 1 1 Sprites/OBJECTS_044 Sprites/armour/armor_f_0012 Sprites/armour/armor_f_0027 Sprites/armour/armor_f_0042 Sprites/armour/armor_f_0057 Sprites/armour/armor_m_0012 Sprites/armour/armor_m_0027 Sprites/armour/armor_m_0042 Sprites/armour/armor_m_0057 0
+45 0 0 0 entity 73 a_chain_cowl H 1 Sprites/OBJECTS_045 0 L M 1 1 1 Sprites/OBJECTS_045 Sprites/armour/armor_f_0013 Sprites/armour/armor_f_0028 Sprites/armour/armor_f_0043 Sprites/armour/armor_f_0058 Sprites/armour/armor_m_0013 Sprites/armour/armor_m_0028 Sprites/armour/armor_m_0043 Sprites/armour/armor_m_0058 0
+46 0 0 0 entity 73 a_helmet H 1 Sprites/OBJECTS_046 0 L M 1 1 1 Sprites/OBJECTS_046 Sprites/armour/armor_f_0014 Sprites/armour/armor_f_0029 Sprites/armour/armor_f_0044 Sprites/armour/armor_f_0059 Sprites/armour/armor_m_0014 Sprites/armour/armor_m_0029 Sprites/armour/armor_m_0044 Sprites/armour/armor_m_0059 0
+47 0 0 0 entity 75 a_pair_of_dragon_skin_boots_pairs_of_dragon_skin_boots H 1 Sprites/OBJECTS_047 0 L M 1 1 1 Sprites/OBJECTS_047 Sprites/armour/armor_f_0060 Sprites/armour/armor_f_0060 Sprites/armour/armor_f_0060 Sprites/armour/armor_f_0060 Sprites/armour/armor_m_0060 Sprites/armour/armor_m_0060 Sprites/armour/armor_m_0060 Sprites/armour/armor_m_0060 0
+48 0 0 0 entity 73 a_crown H 1 Sprites/OBJECTS_048 0 L M 1 1 1 Sprites/OBJECTS_048 Sprites/armour/armor_f_0061 Sprites/armour/armor_f_0061 Sprites/armour/armor_f_0061 Sprites/armour/armor_f_0061 Sprites/armour/armor_m_0061 Sprites/armour/armor_m_0061 Sprites/armour/armor_m_0061 Sprites/armour/armor_m_0061 0
+49 0 0 0 entity 73 a_crown H 1 Sprites/OBJECTS_049 0 L M 1 1 1 Sprites/OBJECTS_049 Sprites/armour/armor_f_0062 Sprites/armour/armor_f_0062 Sprites/armour/armor_f_0062 Sprites/armour/armor_f_0062 Sprites/armour/armor_m_0062 Sprites/armour/armor_m_0062 Sprites/armour/armor_m_0062 Sprites/armour/armor_m_0062 0
+50 0 0 0 entity 73 a_crown H 1 Sprites/OBJECTS_050 0 L M 1 1 1 Sprites/OBJECTS_050 Sprites/armour/armor_f_0063 Sprites/armour/armor_f_0063 Sprites/armour/armor_f_0063 Sprites/armour/armor_f_0063 Sprites/armour/armor_m_0063 Sprites/armour/armor_m_0063 Sprites/armour/armor_m_0063 Sprites/armour/armor_m_0063 0
+51 0 0 0 entity 74 unknownring1 H 1 Sprites/OBJECTS_051 0 L M 1 1 1 Sprites/OBJECTS_051 Sprites/OBJECTS_051 S T U Sprites/OBJECTS_051 W x Y 0
+52 0 0 0 entity 74 unknownring2 H 1 Sprites/OBJECTS_052 0 L M 1 1 1 Sprites/OBJECTS_052 Sprites/OBJECTS_052 S T U Sprites/OBJECTS_052 W x Y 0
+53 0 0 0 entity 74 unknownring3 H 1 Sprites/OBJECTS_053 0 L M 1 1 1 Sprites/OBJECTS_053 Sprites/OBJECTS_053 S T U Sprites/OBJECTS_053 W x Y 0
+54 0 0 0 entity 74 an_iron_ring H 1 Sprites/OBJECTS_054 0 L M 1 1 1 Sprites/OBJECTS_054 Sprites/OBJECTS_054 S T U Sprites/OBJECTS_054 W x Y 0
+55 0 0 0 entity 78 a_shiny_shield H 1 Sprites/OBJECTS_055 0 L M 1 1 1 Sprites/OBJECTS_055 Sprites/OBJECTS_055 S T U Sprites/OBJECTS_055 W x Y 0
+56 0 0 0 entity 74 a_gold_ring H 1 Sprites/OBJECTS_056 0 L M 1 1 1 Sprites/OBJECTS_056 Sprites/OBJECTS_056 S T U Sprites/OBJECTS_056 W x Y 0
+57 0 0 0 entity 74 a_silver_ring H 1 Sprites/OBJECTS_057 0 L M 1 1 1 Sprites/OBJECTS_057 Sprites/OBJECTS_057 S T U Sprites/OBJECTS_057 W x Y 0
+58 0 0 0 entity 74 a_red_ring H 1 Sprites/OBJECTS_058 0 L M 1 1 1 Sprites/OBJECTS_058 Sprites/OBJECTS_058 S T U Sprites/OBJECTS_058 W x Y 0
+59 0 0 0 entity 78 a_tower_shield H 1 Sprites/OBJECTS_059 0 L M 1 1 1 Sprites/OBJECTS_059 Sprites/OBJECTS_059 S T U Sprites/OBJECTS_059 W x Y 0
+60 0 0 0 entity 78 a_wooden_shield H 1 Sprites/OBJECTS_060 0 L M 1 1 1 Sprites/OBJECTS_060 Sprites/OBJECTS_060 S T U Sprites/OBJECTS_060 W x Y 0
+61 0 0 0 entity 78 a_small_shield H 1 Sprites/OBJECTS_061 0 L M 1 1 1 Sprites/OBJECTS_061 Sprites/OBJECTS_061 S T U Sprites/OBJECTS_061 W x Y 0
+62 0 0 0 entity 78 a_buckler H 1 Sprites/OBJECTS_062 0 L M 1 1 1 Sprites/OBJECTS_062 Sprites/OBJECTS_062 S T U Sprites/OBJECTS_062 W x Y 0
+63 0 0 0 entity 78 a_jeweled_shield H 1 Sprites/OBJECTS_063 0 L M 1 1 1 Sprites/OBJECTS_063 Sprites/OBJECTS_063 S T U Sprites/OBJECTS_063 W x Y 0
+64 0 0 0 entity 0 a_rotworm H 0 Sprites/OBJECTS_064 0 L M 1 0 0 Sprites/OBJECTS_064 Sprites/OBJECTS_064 S T U Sprites/OBJECTS_064 W x Y 0
+65 0 0 0 entity 0 a_flesh_slug H 0 Sprites/OBJECTS_065 0 L M 1 0 0 Sprites/OBJECTS_065 Sprites/OBJECTS_065 S T U Sprites/OBJECTS_065 W x Y 0
+66 0 0 0 entity 0 a_cave_bat H 0 Sprites/OBJECTS_066 1 L M 1 0 0 Sprites/OBJECTS_066 Sprites/OBJECTS_066 S T U Sprites/OBJECTS_066 W x Y 0
+67 0 0 0 entity 0 a_giant_rat H 0 Sprites/OBJECTS_067 0 L M 1 0 0 Sprites/OBJECTS_067 Sprites/OBJECTS_067 S T U Sprites/OBJECTS_067 W x Y 0
+68 0 0 0 entity 0 a_giant_spider H 0 Sprites/OBJECTS_068 0 L M 1 0 0 Sprites/OBJECTS_068 Sprites/OBJECTS_068 S T U Sprites/OBJECTS_068 W x Y 0
+69 0 0 0 entity 0 a_acid_slug H 0 Sprites/OBJECTS_069 0 L M 1 0 0 Sprites/OBJECTS_069 Sprites/OBJECTS_069 S T U Sprites/OBJECTS_069 W x Y 0
+70 0 0 0 entity 0 a_goblin H 0 Sprites/OBJECTS_070 0 L M 1 0 0 Sprites/OBJECTS_070 Sprites/OBJECTS_070 S T U Sprites/OBJECTS_070 W x Y 0
+71 0 0 0 entity 0 a_goblin H 0 Sprites/OBJECTS_071 0 L M 1 0 0 Sprites/OBJECTS_071 Sprites/OBJECTS_071 S T U Sprites/OBJECTS_071 W x Y 0
+72 0 0 0 entity 0 a_giant_rat H 0 Sprites/OBJECTS_072 0 L M 1 0 0 Sprites/OBJECTS_072 Sprites/OBJECTS_072 S T U Sprites/OBJECTS_072 W x Y 0
+73 0 0 0 entity 0 a_vampire_bat H 0 Sprites/OBJECTS_073 0 L M 1 0 0 Sprites/OBJECTS_073 Sprites/OBJECTS_073 S T U Sprites/OBJECTS_073 W x Y 0
+74 0 0 0 entity 0 a_skeleton H 0 Sprites/OBJECTS_074 0 L M 1 0 0 Sprites/OBJECTS_074 Sprites/OBJECTS_074 S T U Sprites/OBJECTS_074 W x Y 0
+75 0 0 0 entity 0 an_imp H 0 Sprites/OBJECTS_075 0 L M 1 0 0 Sprites/OBJECTS_075 Sprites/OBJECTS_075 S T U Sprites/OBJECTS_075 W x Y 0
+76 0 0 0 entity 0 a_goblin H 0 Sprites/OBJECTS_076 0 L M 1 0 0 Sprites/OBJECTS_076 Sprites/OBJECTS_076 S T U Sprites/OBJECTS_076 W x Y 0
+77 0 0 0 entity 0 a_goblin H 0 Sprites/OBJECTS_077 0 L M 1 0 0 Sprites/OBJECTS_077 Sprites/OBJECTS_077 S T U Sprites/OBJECTS_077 W x Y 0
+78 0 0 0 entity 0 a_goblin H 0 Sprites/OBJECTS_078 0 L M 1 0 0 Sprites/OBJECTS_078 Sprites/OBJECTS_078 S T U Sprites/OBJECTS_078 W x Y 0
+79 0 0 0 entity 0 etherealvoidcreatures H 0 Sprites/OBJECTS_079 0 L M 1 0 0 Sprites/OBJECTS_079 Sprites/OBJECTS_079 S T U Sprites/OBJECTS_079 W x Y 0
+80 0 0 0 entity 0 a_goblin H 0 Sprites/OBJECTS_080 0 L M 1 0 0 Sprites/OBJECTS_080 Sprites/OBJECTS_080 S T U Sprites/OBJECTS_080 W x Y 0
+81 0 0 0 entity 0 a_mongbat H 0 Sprites/OBJECTS_081 0 L M 1 0 0 Sprites/OBJECTS_081 Sprites/OBJECTS_081 S T U Sprites/OBJECTS_081 W x Y 0
+82 0 0 0 entity 0 a_bloodworm H 0 Sprites/OBJECTS_082 0 L M 1 0 0 Sprites/OBJECTS_082 Sprites/OBJECTS_082 S T U Sprites/OBJECTS_082 W x Y 0
+83 0 0 0 entity 0 a_wolf_spider H 0 Sprites/OBJECTS_083 0 L M 1 0 0 Sprites/OBJECTS_083 Sprites/OBJECTS_083 S T U Sprites/OBJECTS_083 W x Y 0
+84 0 0 0 entity 0 a_mountainman_mountainmen H 0 Sprites/OBJECTS_084 0 L M 1 0 0 Sprites/OBJECTS_084 Sprites/OBJECTS_084 S T U Sprites/OBJECTS_084 W x Y 0
+85 0 0 0 entity 0 a_green_lizardman_green_lizardmen H 0 Sprites/OBJECTS_085 0 L M 1 0 0 Sprites/OBJECTS_085 Sprites/OBJECTS_085 S T U Sprites/OBJECTS_085 W x Y 0
+86 0 0 0 entity 0 a_mountainman_mountainmen H 0 Sprites/OBJECTS_086 0 L M 1 0 0 Sprites/OBJECTS_086 Sprites/OBJECTS_086 S T U Sprites/OBJECTS_086 W x Y 0
+87 0 0 0 entity 0 a_lurker H 0 Sprites/OBJECTS_087 0 L M 1 0 0 Sprites/OBJECTS_087 Sprites/OBJECTS_087 S T U Sprites/OBJECTS_087 W x Y 0
+88 0 0 0 entity 0 a_red_lizardman_red_lizardmen H 0 Sprites/OBJECTS_088 0 L M 1 0 0 Sprites/OBJECTS_088 Sprites/OBJECTS_088 S T U Sprites/OBJECTS_088 W x Y 0
+89 0 0 0 entity 0 a_gray_lizardman_red_lizardmen H 0 Sprites/OBJECTS_089 0 L M 1 0 0 Sprites/OBJECTS_089 Sprites/OBJECTS_089 S T U Sprites/OBJECTS_089 W x Y 0
+90 0 0 0 entity 0 an_outcast H 0 Sprites/OBJECTS_090 0 L M 1 0 0 Sprites/OBJECTS_090 Sprites/OBJECTS_090 S T U Sprites/OBJECTS_090 W x Y 0
+91 0 0 0 entity 0 a_headless_headlesses H 0 Sprites/OBJECTS_091 0 L M 1 0 0 Sprites/OBJECTS_091 Sprites/OBJECTS_091 S T U Sprites/OBJECTS_091 W x Y 0
+92 0 0 0 entity 0 a_dread_spider H 0 Sprites/OBJECTS_092 0 L M 1 0 0 Sprites/OBJECTS_092 Sprites/OBJECTS_092 S T U Sprites/OBJECTS_092 W x Y 0
+93 0 0 0 entity 0 a_fighter H 0 Sprites/OBJECTS_093 0 L M 1 0 0 Sprites/OBJECTS_093 Sprites/OBJECTS_093 S T U Sprites/OBJECTS_093 W x Y 0
+94 0 0 0 entity 0 a_fighter H 0 Sprites/OBJECTS_094 0 L M 1 0 0 Sprites/OBJECTS_094 Sprites/OBJECTS_094 S T U Sprites/OBJECTS_094 W x Y 0
+95 0 0 0 entity 0 a_fighter H 0 Sprites/OBJECTS_095 0 L M 1 0 0 Sprites/OBJECTS_095 Sprites/OBJECTS_095 S T U Sprites/OBJECTS_095 W x Y 0
+96 0 0 0 entity 0 a_troll H 0 Sprites/OBJECTS_096 0 L M 1 0 0 Sprites/OBJECTS_096 Sprites/OBJECTS_096 S T U Sprites/OBJECTS_096 W x Y 0
+97 0 0 0 entity 0 a_ghost H 0 Sprites/OBJECTS_097 0 L M 1 0 0 Sprites/OBJECTS_097 Sprites/OBJECTS_097 S T U Sprites/OBJECTS_097 W x Y 0
+98 0 0 0 entity 0 a_fighter H 0 Sprites/OBJECTS_098 0 L M 1 0 0 Sprites/OBJECTS_098 Sprites/OBJECTS_098 S T U Sprites/OBJECTS_098 W x Y 0
+99 0 0 0 entity 0 a_ghoul H 0 Sprites/OBJECTS_099 0 L M 1 0 0 Sprites/OBJECTS_099 Sprites/OBJECTS_099 S T U Sprites/OBJECTS_099 W x Y 0
+100 0 0 0 entity 0 a_ghost H 0 Sprites/OBJECTS_100 0 L M 1 0 0 Sprites/OBJECTS_100 Sprites/OBJECTS_100 S T U Sprites/OBJECTS_100 W x Y 0
+101 0 0 0 entity 0 a_ghost H 0 Sprites/OBJECTS_101 0 L M 1 0 0 Sprites/OBJECTS_101 Sprites/OBJECTS_101 S T U Sprites/OBJECTS_101 W x Y 0
+102 0 0 0 entity 0 a_gazer H 0 Sprites/OBJECTS_102 0 L M 1 0 0 Sprites/OBJECTS_102 Sprites/OBJECTS_102 S T U Sprites/OBJECTS_102 W x Y 0
+103 0 0 0 entity 0 a_mage H 0 Sprites/OBJECTS_103 0 L M 1 0 0 Sprites/OBJECTS_103 Sprites/OBJECTS_103 S T U Sprites/OBJECTS_103 W x Y 0
+104 0 0 0 entity 0 a_fighter H 0 Sprites/OBJECTS_104 0 L M 1 0 0 Sprites/OBJECTS_104 Sprites/OBJECTS_104 S T U Sprites/OBJECTS_104 W x Y 0
+105 0 0 0 entity 0 a_dark_ghoul H 0 Sprites/OBJECTS_105 0 L M 1 0 0 Sprites/OBJECTS_105 Sprites/OBJECTS_105 S T U Sprites/OBJECTS_105 W x Y 0
+106 0 0 0 entity 0 a_mage H 0 Sprites/OBJECTS_106 0 L M 1 0 0 Sprites/OBJECTS_106 Sprites/OBJECTS_106 S T U Sprites/OBJECTS_106 W x Y 0
+107 0 0 0 entity 0 a_mage H 0 Sprites/OBJECTS_107 0 L M 1 0 0 Sprites/OBJECTS_107 Sprites/OBJECTS_107 S T U Sprites/OBJECTS_107 W x Y 0
+108 0 0 0 entity 0 a_mage H 0 Sprites/OBJECTS_108 0 L M 1 0 0 Sprites/OBJECTS_108 Sprites/OBJECTS_108 S T U Sprites/OBJECTS_108 W x Y 0
+109 0 0 0 entity 0 a_mage H 0 Sprites/OBJECTS_109 0 L M 1 0 0 Sprites/OBJECTS_109 Sprites/OBJECTS_109 S T U Sprites/OBJECTS_109 W x Y 0
+110 0 0 0 entity 0 a_ghoul H 0 Sprites/OBJECTS_110 0 L M 1 0 0 Sprites/OBJECTS_110 Sprites/OBJECTS_110 S T U Sprites/OBJECTS_110 W x Y 0
+111 0 0 0 entity 0 a_feral_troll H 0 Sprites/OBJECTS_111 0 L M 1 0 0 Sprites/OBJECTS_111 Sprites/OBJECTS_111 S T U Sprites/OBJECTS_111 W x Y 0
+112 0 0 0 entity 0 a_great_troll H 0 Sprites/OBJECTS_112 0 L M 1 0 0 Sprites/OBJECTS_112 Sprites/OBJECTS_112 S T U Sprites/OBJECTS_112 W x Y 0
+113 0 0 0 entity 0 a_dire_ghost H 0 Sprites/OBJECTS_113 0 L M 1 0 0 Sprites/OBJECTS_113 Sprites/OBJECTS_113 S T U Sprites/OBJECTS_113 W x Y 0
+114 0 0 0 entity 0 an_earth_golem H 0 Sprites/OBJECTS_114 0 L M 1 0 0 Sprites/OBJECTS_114 Sprites/OBJECTS_114 S T U Sprites/OBJECTS_114 W x Y 0
+115 0 0 0 entity 0 a_mage H 0 Sprites/OBJECTS_115 0 L M 1 0 0 Sprites/OBJECTS_115 Sprites/OBJECTS_115 S T U Sprites/OBJECTS_115 W x Y 0
+116 0 0 0 entity 0 a_deep_lurker H 0 Sprites/OBJECTS_116 0 L M 1 0 0 Sprites/OBJECTS_116 Sprites/OBJECTS_116 S T U Sprites/OBJECTS_116 W x Y 0
+117 0 0 0 entity 0 a_shadow_beast H 0 Sprites/OBJECTS_117 0 L M 1 0 0 Sprites/OBJECTS_117 Sprites/OBJECTS_117 S T U Sprites/OBJECTS_117 W x Y 0
+118 0 0 0 entity 0 a_reaper H 0 Sprites/OBJECTS_118 0 L M 1 0 0 Sprites/OBJECTS_118 Sprites/OBJECTS_118 S T U Sprites/OBJECTS_118 W x Y 0
+119 0 0 0 entity 0 a_stone_golem H 0 Sprites/OBJECTS_119 0 L M 1 0 0 Sprites/OBJECTS_119 Sprites/OBJECTS_119 S T U Sprites/OBJECTS_119 W x Y 0
+120 0 0 0 entity 0 a_fire_elemental H 0 Sprites/OBJECTS_120 0 L M 1 0 0 Sprites/OBJECTS_120 Sprites/OBJECTS_120 S T U Sprites/OBJECTS_120 W x Y 0
+121 0 0 0 entity 0 a_metal_golem H 0 Sprites/OBJECTS_121 0 L M 1 0 0 Sprites/OBJECTS_121 Sprites/OBJECTS_121 S T U Sprites/OBJECTS_121 W x Y 0
+122 0 0 0 entity 0 a_wisp H 0 Sprites/OBJECTS_122 0 L M 1 0 0 Sprites/OBJECTS_122 Sprites/OBJECTS_122 S T U Sprites/OBJECTS_122 W x Y 0
+123 0 0 0 entity 0 tybal H 0 Sprites/OBJECTS_123 0 L M 1 0 0 Sprites/OBJECTS_123 Sprites/OBJECTS_123 S T U Sprites/OBJECTS_123 W x Y 0
+124 0 0 0 entity 0 slasher_of_veils H 0 Sprites/OBJECTS_124 0 L M 1 0 0 Sprites/OBJECTS_124 Sprites/OBJECTS_124 S T U Sprites/OBJECTS_124 W x Y 0
+125 0 0 0 entity 0 unknown H 0 Sprites/OBJECTS_125 0 L M 1 0 0 Sprites/OBJECTS_125 Sprites/OBJECTS_125 S T U Sprites/OBJECTS_125 W x Y 0
+126 0 0 0 entity 0 unknown H 0 Sprites/OBJECTS_126 0 L M 1 0 0 Sprites/OBJECTS_126 Sprites/OBJECTS_126 S T U Sprites/OBJECTS_126 W x Y 0
+127 0 0 0 entity 0 an_adventurer H 0 Sprites/OBJECTS_127 0 L M 1 0 0 Sprites/OBJECTS_127 Sprites/OBJECTS_127 S T U Sprites/OBJECTS_127 W x Y 0
+128 0 0 0 entity 19 a_sack H 1 Sprites/OBJECTS_128 0 L M 1 1 1 Sprites/OBJECTS_128 Sprites/OBJECTS_128 S T U Sprites/OBJECTS_128 W x Y 0
+129 0 0 0 entity 19 an_open_sack H 1 Sprites/OBJECTS_129 0 L M 1 1 1 Sprites/OBJECTS_129 Sprites/OBJECTS_129 S T U Sprites/OBJECTS_129 W x Y 0
+130 0 0 0 entity 19 a_pack H 1 Sprites/OBJECTS_130 0 L M 1 1 1 Sprites/OBJECTS_130 Sprites/OBJECTS_130 S T U Sprites/OBJECTS_130 W x Y 0
+131 0 0 0 entity 19 an_open_pack H 1 Sprites/OBJECTS_131 0 L M 1 1 1 Sprites/OBJECTS_131 Sprites/OBJECTS_131 S T U Sprites/OBJECTS_131 W x Y 0
+132 0 0 0 model 19 a_box_boxes H 1 Sprites/OBJECTS_132 0 L M 1 1 1 Sprites/OBJECTS_132 Sprites/OBJECTS_132 S T U Sprites/OBJECTS_132 W x Y 0
+133 0 0 0 model 19 an_open_box_open_boxes H 1 Sprites/OBJECTS_133 0 L M 1 1 1 Sprites/OBJECTS_133 Sprites/OBJECTS_133 S T U Sprites/OBJECTS_133 W x Y 0
+134 0 0 0 entity 19 a_pouch_pouches H 1 Sprites/OBJECTS_134 0 L M 1 1 1 Sprites/OBJECTS_134 Sprites/OBJECTS_134 S T U Sprites/OBJECTS_134 W x Y 0
+135 0 0 0 entity 19 an_open_pouch_pouches H 1 Sprites/OBJECTS_135 0 L M 1 1 1 Sprites/OBJECTS_135 Sprites/OBJECTS_135 S T U Sprites/OBJECTS_135 W x Y 0
+136 0 0 0 entity 19 a_map_case H 1 Sprites/OBJECTS_136 0 L M 1 1 1 Sprites/OBJECTS_136 Sprites/OBJECTS_136 S T U Sprites/OBJECTS_136 W x Y 0
+137 0 0 0 entity 19 an_open_map_case H 1 Sprites/OBJECTS_137 0 L M 1 1 1 Sprites/OBJECTS_137 Sprites/OBJECTS_137 S T U Sprites/OBJECTS_137 W x Y 0
+138 0 0 0 entity 19 a_gold_coffer H 1 Sprites/OBJECTS_138 0 L M 1 1 1 Sprites/OBJECTS_138 Sprites/OBJECTS_138 S T U Sprites/OBJECTS_138 W x Y 0
+139 0 0 0 entity 19 an_open_gold_coffer H 1 Sprites/OBJECTS_139 0 L M 1 1 1 Sprites/OBJECTS_139 Sprites/OBJECTS_139 S T U Sprites/OBJECTS_139 W x Y 0
+140 0 0 0 entity 19 an_urn H 1 Sprites/OBJECTS_140 0 L M 1 1 1 Sprites/OBJECTS_140 Sprites/OBJECTS_140 S T U Sprites/OBJECTS_140 W x Y 0
+141 0 0 0 entity 19 a_quiver H 1 Sprites/OBJECTS_141 0 L M 1 1 1 Sprites/OBJECTS_141 Sprites/OBJECTS_141 S T U Sprites/OBJECTS_141 W x Y 0
+142 0 0 0 entity 19 a_bowl H 1 Sprites/OBJECTS_142 0 L M 1 1 1 Sprites/OBJECTS_142 Sprites/OBJECTS_142 S T U Sprites/OBJECTS_142 W x Y 0
+143 0 0 0 entity 70 a_rune_bag H 1 Sprites/OBJECTS_143 0 L M 1 1 1 Sprites/OBJECTS_143 Sprites/OBJECTS_143 S T U Sprites/OBJECTS_143 W x Y 0
+144 0 0 0 entity 9 a_lantern H 1 Sprites/OBJECTS_144 0 L M 1 1 1 Sprites/OBJECTS_144 Sprites/OBJECTS_144 S T U Sprites/OBJECTS_144 W x Y 0
+145 0 0 0 entity 9 a_torch_torches H 1 Sprites/OBJECTS_145 0 L M 1 1 1 Sprites/OBJECTS_145 Sprites/OBJECTS_145 S T U Sprites/OBJECTS_145 W x Y 0
+146 0 0 0 entity 9 a_candle H 1 Sprites/OBJECTS_146 0 L M 1 1 1 Sprites/OBJECTS_146 Sprites/OBJECTS_146 S T U Sprites/OBJECTS_146 W x Y 0
+147 0 0 0 entity 9 a_taper H 1 Sprites/OBJECTS_147 0 L M 1 1 1 Sprites/OBJECTS_147 Sprites/OBJECTS_147 S T U Sprites/OBJECTS_147 W x Y 0
+148 0 0 0 entity 9 a_lit_lantern H 1 Sprites/OBJECTS_148 1 L M 1 1 1 Sprites/OBJECTS_148 Sprites/OBJECTS_148 S T U Sprites/OBJECTS_148 W x Y 1
+149 0 0 0 entity 9 a_lit_torch H 1 Sprites/OBJECTS_149 1 L M 1 1 1 Sprites/OBJECTS_149 Sprites/OBJECTS_149 S T U Sprites/OBJECTS_149 W x Y 1
+150 0 0 0 entity 9 a_lit_candle H 1 Sprites/OBJECTS_150 1 L M 1 1 1 Sprites/OBJECTS_150 Sprites/OBJECTS_150 S T U Sprites/OBJECTS_150 W x Y 1
+151 0 0 0 entity 9 a_lit_taper H 1 Sprites/OBJECTS_151 1 L M 1 1 1 Sprites/OBJECTS_151 Sprites/OBJECTS_151 S T U Sprites/OBJECTS_151 W x Y 1
+152 0 0 0 entity 12 a_wand H 1 Sprites/OBJECTS_152 0 L M 1 1 1 Sprites/OBJECTS_152 Sprites/OBJECTS_152 S T U Sprites/OBJECTS_152 W x Y 0
+153 0 0 0 entity 12 a_wand H 1 Sprites/OBJECTS_153 0 L M 1 1 1 Sprites/OBJECTS_153 Sprites/OBJECTS_153 S T U Sprites/OBJECTS_153 W x Y 0
+154 0 0 0 entity 12 a_wand H 1 Sprites/OBJECTS_154 0 L M 1 1 1 Sprites/OBJECTS_154 Sprites/OBJECTS_154 S T U Sprites/OBJECTS_154 W x Y 0
+155 0 0 0 entity 12 a_wand H 1 Sprites/OBJECTS_155 0 L M 1 1 1 Sprites/OBJECTS_155 Sprites/OBJECTS_155 S T U Sprites/OBJECTS_155 W x Y 0
+156 0 0 0 entity 12 a_broken_wand H 1 Sprites/OBJECTS_156 0 L M 1 1 1 Sprites/OBJECTS_156 Sprites/OBJECTS_156 S T U Sprites/OBJECTS_156 W x Y 0
+157 0 0 0 entity 12 a_broken_wand H 1 Sprites/OBJECTS_157 0 L M 1 1 1 Sprites/OBJECTS_157 Sprites/OBJECTS_157 S T U Sprites/OBJECTS_157 W x Y 0
+158 0 0 0 entity 12 a_broken_wand H 1 Sprites/OBJECTS_158 0 L M 1 1 1 Sprites/OBJECTS_158 Sprites/OBJECTS_158 S T U Sprites/OBJECTS_158 W x Y 0
+159 0 0 0 entity 12 a_broken_wand H 1 Sprites/OBJECTS_159 0 L M 1 1 1 Sprites/OBJECTS_159 Sprites/OBJECTS_159 S T U Sprites/OBJECTS_159 W x Y 0
+160 0 0 0 entity 18 a_coin H 1 Sprites/OBJECTS_160 0 L M 1 1 1 Sprites/OBJECTS_160 Sprites/OBJECTS_160 S T U Sprites/OBJECTS_160 W x Y 0
+161 0 0 0 entity 18 a_gold_coin H 1 Sprites/OBJECTS_161 0 L M 1 1 1 Sprites/OBJECTS_161 Sprites/OBJECTS_161 S T U Sprites/OBJECTS_161 W x Y 0
+162 0 0 0 entity 18 a_ruby_rubies H 1 Sprites/OBJECTS_162 0 L M 1 1 1 Sprites/OBJECTS_162 Sprites/OBJECTS_162 S T U Sprites/OBJECTS_162 W x Y 0
+163 0 0 0 entity 18 a_red_gem H 1 Sprites/OBJECTS_163 0 L M 1 1 1 Sprites/OBJECTS_163 Sprites/OBJECTS_163 S T U Sprites/OBJECTS_163 W x Y 0
+164 0 0 0 entity 18 a_small_blue_gem H 1 Sprites/OBJECTS_164 0 L M 1 1 1 Sprites/OBJECTS_164 Sprites/OBJECTS_164 S T U Sprites/OBJECTS_164 W x Y 0
+165 0 0 0 entity 18 a_large_blue_gem H 1 Sprites/OBJECTS_165 0 L M 1 1 1 Sprites/OBJECTS_165 Sprites/OBJECTS_165 S T U Sprites/OBJECTS_165 W x Y 0
+166 0 0 0 entity 18 a_sapphire H 1 Sprites/OBJECTS_166 0 L M 1 1 1 Sprites/OBJECTS_166 Sprites/OBJECTS_166 S T U Sprites/OBJECTS_166 W x Y 0
+167 0 0 0 entity 18 an_emerald H 1 Sprites/OBJECTS_167 0 L M 1 1 1 Sprites/OBJECTS_167 Sprites/OBJECTS_167 S T U Sprites/OBJECTS_167 W x Y 0
+168 0 0 0 entity 18 an_amulet H 1 Sprites/OBJECTS_168 0 L M 1 1 1 Sprites/OBJECTS_168 Sprites/OBJECTS_168 S T U Sprites/OBJECTS_168 W x Y 0
+169 0 0 0 entity 18 a_goblet H 1 Sprites/OBJECTS_169 0 L M 1 1 1 Sprites/OBJECTS_169 Sprites/OBJECTS_169 S T U Sprites/OBJECTS_169 W x Y 0
+170 0 0 0 entity 18 a_sceptre H 1 Sprites/OBJECTS_170 0 L M 1 1 1 Sprites/OBJECTS_170 Sprites/OBJECTS_170 S T U Sprites/OBJECTS_170 W x Y 0
+171 0 0 0 entity 18 a_gold_chain H 1 Sprites/OBJECTS_171 0 L M 1 1 1 Sprites/OBJECTS_171 Sprites/OBJECTS_171 S T U Sprites/OBJECTS_171 W x Y 0
+172 0 0 0 entity 18 a_gold_plate H 1 Sprites/OBJECTS_172 0 L M 1 1 1 Sprites/OBJECTS_172 Sprites/OBJECTS_172 S T U Sprites/OBJECTS_172 W x Y 0
+173 0 0 0 entity 18 an_ankh_pendant H 1 Sprites/OBJECTS_173 0 L M 1 1 1 Sprites/OBJECTS_173 Sprites/OBJECTS_173 S T U Sprites/OBJECTS_173 W x Y 0
+174 0 0 0 entity 18 a_shiny_cup H 1 Sprites/OBJECTS_174 0 L M 1 1 1 Sprites/OBJECTS_174 Sprites/OBJECTS_174 S T U Sprites/OBJECTS_174 W x Y 0
+175 0 0 0 entity 18 a_large_gold_nugget H 1 Sprites/OBJECTS_175 0 L M 1 1 1 Sprites/OBJECTS_175 Sprites/OBJECTS_175 S T U Sprites/OBJECTS_175 W x Y 0
+176 0 0 0 entity 24 a_piece_of_meat_pieces_of_meat H 1 Sprites/OBJECTS_176 0 L M 1 1 1 Sprites/OBJECTS_176 Sprites/OBJECTS_176 S T U Sprites/OBJECTS_176 W x Y 0
+177 0 0 0 entity 24 a_loaf_of_bread_loaves_of_bread H 1 Sprites/OBJECTS_177 0 L M 1 1 1 Sprites/OBJECTS_177 Sprites/OBJECTS_177 S T U Sprites/OBJECTS_177 W x Y 0
+178 0 0 0 entity 24 a_piece_of_cheese_pieces_of_cheese H 1 Sprites/OBJECTS_178 0 L M 1 1 1 Sprites/OBJECTS_178 Sprites/OBJECTS_178 S T U Sprites/OBJECTS_178 W x Y 0
+179 0 0 0 entity 24 an_apple H 1 Sprites/OBJECTS_179 0 L M 1 1 1 Sprites/OBJECTS_179 Sprites/OBJECTS_179 S T U Sprites/OBJECTS_179 W x Y 0
+180 0 0 0 entity 24 an_ear_of_corn_ears_of_corn H 1 Sprites/OBJECTS_180 0 L M 1 1 1 Sprites/OBJECTS_180 Sprites/OBJECTS_180 S T U Sprites/OBJECTS_180 W x Y 0
+181 0 0 0 entity 24 a_loaf_of_bread_loaves_of_bread H 1 Sprites/OBJECTS_181 0 L M 1 1 1 Sprites/OBJECTS_181 Sprites/OBJECTS_181 S T U Sprites/OBJECTS_181 W x Y 0
+182 0 0 0 entity 24 a_fish_fish H 1 Sprites/OBJECTS_182 0 L M 1 1 1 Sprites/OBJECTS_182 Sprites/OBJECTS_182 S T U Sprites/OBJECTS_182 W x Y 0
+183 0 0 0 entity 24 some_popcorn_bunches_of_popcorn H 1 Sprites/OBJECTS_183 0 L M 1 1 1 Sprites/OBJECTS_183 Sprites/OBJECTS_183 S T U Sprites/OBJECTS_183 W x Y 0
+184 0 0 0 entity 24 a_mushroom H 1 Sprites/OBJECTS_184 0 L M 1 1 1 Sprites/OBJECTS_184 Sprites/OBJECTS_184 S T U Sprites/OBJECTS_184 W x Y 0
+185 0 0 0 entity 24 a_toadstool H 1 Sprites/OBJECTS_185 0 L M 1 1 1 Sprites/OBJECTS_185 Sprites/OBJECTS_185 S T U Sprites/OBJECTS_185 W x Y 0
+186 0 0 0 entity 24 a_bottle_of_ale_bottles_of_ale H 1 Sprites/OBJECTS_186 0 L M 1 1 1 Sprites/OBJECTS_186 Sprites/OBJECTS_186 S T U Sprites/OBJECTS_186 W x Y 0
+187 0 0 0 entity 14 a_red_potion H 1 Sprites/OBJECTS_187 0 L M 1 1 1 Sprites/OBJECTS_187 Sprites/OBJECTS_187 S T U Sprites/OBJECTS_187 W x Y 0
+188 0 0 0 entity 14 a_green_potion H 1 Sprites/OBJECTS_188 0 L M 1 1 1 Sprites/OBJECTS_188 Sprites/OBJECTS_188 S T U Sprites/OBJECTS_188 W x Y 0
+189 0 0 0 entity 14 a_bottle_of_water_bottles_of_water H 1 Sprites/OBJECTS_189 0 L M 1 1 1 Sprites/OBJECTS_189 Sprites/OBJECTS_189 S T U Sprites/OBJECTS_189 W x Y 0
+190 0 0 0 entity 14 a_flask_of_port_flasks_of_port H 1 Sprites/OBJECTS_190 0 L M 1 1 1 Sprites/OBJECTS_190 Sprites/OBJECTS_190 S T U Sprites/OBJECTS_190 W x Y 0
+191 0 0 0 entity 14 a_bottle_of_wine_bottles_of_wine H 1 Sprites/OBJECTS_191 0 L M 1 1 1 Sprites/OBJECTS_191 Sprites/OBJECTS_191 S T U Sprites/OBJECTS_191 W x Y 0
+192 0 0 0 entity 25 a_plant H 1 Sprites/OBJECTS_192 0 L M 1 1 1 Sprites/OBJECTS_192 Sprites/OBJECTS_192 S T U Sprites/OBJECTS_192 W x Y 0
+193 0 0 0 entity 25 some_grass_bunches_of_grass H 1 Sprites/OBJECTS_193 1 L M 0 0 0 Sprites/OBJECTS_193 Sprites/OBJECTS_193 S T U Sprites/OBJECTS_193 W x Y 0
+194 0 0 0 entity 23 a_skull H 1 Sprites/OBJECTS_194 0 L M 1 1 0 Sprites/OBJECTS_194 Sprites/OBJECTS_194 S T U Sprites/OBJECTS_194 W x Y 0
+195 0 0 0 entity 23 a_skull H 1 Sprites/OBJECTS_195 0 L M 1 1 0 Sprites/OBJECTS_195 Sprites/OBJECTS_195 S T U Sprites/OBJECTS_195 W x Y 0
+196 0 0 0 entity 23 a_bone H 1 Sprites/OBJECTS_196 0 L M 1 1 0 Sprites/OBJECTS_196 Sprites/OBJECTS_196 S T U Sprites/OBJECTS_196 W x Y 0
+197 0 0 0 entity 23 a_bone H 1 Sprites/OBJECTS_197 0 L M 1 1 0 Sprites/OBJECTS_197 Sprites/OBJECTS_197 S T U Sprites/OBJECTS_197 W x Y 0
+198 0 0 0 entity 23 a_pile_of_bones_piles_of_bones H 1 Sprites/OBJECTS_198 0 L M 1 1 0 Sprites/OBJECTS_198 Sprites/OBJECTS_198 S T U Sprites/OBJECTS_198 W x Y 0
+199 0 0 0 entity 25 some_vines_bunches_of_vines H 1 Sprites/OBJECTS_199 1 L M 1 1 1 Sprites/OBJECTS_199 Sprites/OBJECTS_199 S T U Sprites/OBJECTS_199 W x Y 0
+200 0 0 0 entity 23 a_broken_axe H 1 Sprites/OBJECTS_200 0 L M 1 1 0 Sprites/OBJECTS_200 Sprites/OBJECTS_200 S T U Sprites/OBJECTS_200 W x Y 0
+201 0 0 0 entity 23 a_broken_sword H 1 Sprites/OBJECTS_201 0 L M 1 1 0 Sprites/OBJECTS_201 Sprites/OBJECTS_201 S T U Sprites/OBJECTS_201 W x Y 0
+202 0 0 0 entity 23 a_broken_mace H 1 Sprites/OBJECTS_202 0 L M 1 1 0 Sprites/OBJECTS_202 Sprites/OBJECTS_202 S T U Sprites/OBJECTS_202 W x Y 0
+203 0 0 0 entity 23 a_broken_shield H 1 Sprites/OBJECTS_203 0 L M 1 1 0 Sprites/OBJECTS_203 Sprites/OBJECTS_203 S T U Sprites/OBJECTS_203 W x Y 0
+204 0 0 0 entity 23 a_piece_of_wood_pieces_of_wood H 1 Sprites/OBJECTS_204 0 L M 1 1 1 Sprites/OBJECTS_204 Sprites/OBJECTS_204 S T U Sprites/OBJECTS_204 W x Y 0
+205 0 0 0 entity 23 a_piece_of_wood_pieces_of_wood H 1 Sprites/OBJECTS_205 0 L M 1 1 1 Sprites/OBJECTS_205 Sprites/OBJECTS_205 S T U Sprites/OBJECTS_205 W x Y 0
+206 0 0 0 entity 25 a_plant H 1 Sprites/OBJECTS_206 0 L M 0 0 0 Sprites/OBJECTS_206 Sprites/OBJECTS_206 S T U Sprites/OBJECTS_206 W x Y 0
+207 0 0 0 entity 25 a_plant H 1 Sprites/OBJECTS_207 0 L M 0 0 0 Sprites/OBJECTS_207 Sprites/OBJECTS_207 S T U Sprites/OBJECTS_207 W x Y 0
+208 0 0 0 entity 23 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_208 0 L M 1 1 1 Sprites/OBJECTS_208 Sprites/OBJECTS_208 S T U Sprites/OBJECTS_208 W x Y 0
+209 0 0 0 entity 23 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_209 0 L M 1 1 1 Sprites/OBJECTS_209 Sprites/OBJECTS_209 S T U Sprites/OBJECTS_209 W x Y 0
+210 0 0 0 entity 23 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_210 0 L M 1 1 1 Sprites/OBJECTS_210 Sprites/OBJECTS_210 S T U Sprites/OBJECTS_210 W x Y 0
+211 0 0 0 entity 25 a_stalactite H 1 Sprites/OBJECTS_211 1 L M 0 0 0 Sprites/OBJECTS_211 Sprites/OBJECTS_211 S T U Sprites/OBJECTS_211 W x Y 0
+212 0 0 0 entity 25 a_plant H 1 Sprites/OBJECTS_212 0 L M 0 0 0 Sprites/OBJECTS_212 Sprites/OBJECTS_212 S T U Sprites/OBJECTS_212 W x Y 0
+213 0 0 0 entity 25 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_213 0 L M 1 1 0 Sprites/OBJECTS_213 Sprites/OBJECTS_213 S T U Sprites/OBJECTS_213 W x Y 0
+214 0 0 0 entity 25 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_214 0 L M 1 1 0 Sprites/OBJECTS_214 Sprites/OBJECTS_214 S T U Sprites/OBJECTS_214 W x Y 0
+215 0 0 0 entity 17 an_anvil H 1 Sprites/OBJECTS_215 0 L M 1 1 1 Sprites/OBJECTS_215 Sprites/OBJECTS_215 S T U Sprites/OBJECTS_215 W x Y 0
+216 0 0 0 entity 16 a_pole H 1 Sprites/OBJECTS_216 0 L M 1 1 1 Sprites/OBJECTS_216 Sprites/OBJECTS_216 S T U Sprites/OBJECTS_216 W x Y 0
+217 0 0 0 entity 16 a_dead_rotworm H 1 Sprites/OBJECTS_217 0 L M 1 1 1 Sprites/OBJECTS_217 Sprites/OBJECTS_217 S T U Sprites/OBJECTS_217 W x Y 0
+218 0 0 0 entity 69 some_rubble_piles_of_rubble H 1 Sprites/OBJECTS_218 0 L M 1 0 0 Sprites/OBJECTS_218 Sprites/OBJECTS_218 S T U Sprites/OBJECTS_218 W x Y 0
+219 0 0 0 entity 69 a_pile_of_wood_chips_piles_of_wood_chips H 1 Sprites/OBJECTS_219 0 L M 1 0 0 Sprites/OBJECTS_219 Sprites/OBJECTS_219 S T U Sprites/OBJECTS_219 W x Y 0
+220 0 0 0 entity 23 a_pile_of_bones_piles_of_bones H 1 Sprites/OBJECTS_220 0 L M 1 1 1 Sprites/OBJECTS_220 Sprites/OBJECTS_220 S T U Sprites/OBJECTS_220 W x Y 0
+221 0 0 0 entity 25 a_blood_stain H 1 Sprites/OBJECTS_221 0 L M 1 0 0 Sprites/OBJECTS_221 Sprites/OBJECTS_221 S T U Sprites/OBJECTS_221 W x Y 0
+222 0 0 0 entity 25 a_blood_stain H 1 Sprites/OBJECTS_222 0 L M 1 0 0 Sprites/OBJECTS_222 Sprites/OBJECTS_222 S T U Sprites/OBJECTS_222 W x Y 0
+223 0 0 0 entity 25 a_blood_stain H 1 Sprites/OBJECTS_223 0 L M 1 0 0 Sprites/OBJECTS_223 Sprites/OBJECTS_223 S T U Sprites/OBJECTS_223 W x Y 0
+224 0 0 0 entity 16 a_runestone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_224 Sprites/OBJECTS_224 S T U Sprites/OBJECTS_224 W x Y 0
+225 0 0 0 entity 69 the_Key_of_Truth H 1 Sprites/OBJECTS_225 0 L M 1 1 1 Sprites/OBJECTS_225 Sprites/OBJECTS_225 S T U Sprites/OBJECTS_225 W x Y 0
+226 0 0 0 entity 69 the_Key_of_Love H 1 Sprites/OBJECTS_226 0 L M 1 1 1 Sprites/OBJECTS_226 Sprites/OBJECTS_226 S T U Sprites/OBJECTS_226 W x Y 0
+227 0 0 0 entity 69 the_Key_of_Courage H 1 Sprites/OBJECTS_227 0 L M 1 1 1 Sprites/OBJECTS_227 Sprites/OBJECTS_227 S T U Sprites/OBJECTS_227 W x Y 0
+228 0 0 0 entity 69 a_two_part_key H 1 Sprites/OBJECTS_228 0 L M 1 1 1 Sprites/OBJECTS_228 Sprites/OBJECTS_228 S T U Sprites/OBJECTS_228 W x Y 0
+229 0 0 0 entity 69 a_two_part_key H 1 Sprites/OBJECTS_229 0 L M 1 1 1 Sprites/OBJECTS_229 Sprites/OBJECTS_229 S T U Sprites/OBJECTS_229 W x Y 0
+230 0 0 0 entity 69 a_two_part_key H 1 Sprites/OBJECTS_230 0 L M 1 1 1 Sprites/OBJECTS_230 Sprites/OBJECTS_230 S T U Sprites/OBJECTS_230 W x Y 0
+231 0 0 0 entity 69 the_Key_of_Infinity H 1 Sprites/OBJECTS_231 0 L M 1 1 1 Sprites/OBJECTS_231 Sprites/OBJECTS_231 S T U Sprites/OBJECTS_231 W x Y 0
+232 0 0 0 entity 6 an_An_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_232 Sprites/OBJECTS_232 S T U Sprites/OBJECTS_232 W x Y 0
+233 0 0 0 entity 6 a_Bet_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_233 Sprites/OBJECTS_233 S T U Sprites/OBJECTS_233 W x Y 0
+234 0 0 0 entity 6 a_Corp_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_234 Sprites/OBJECTS_234 S T U Sprites/OBJECTS_234 W x Y 0
+235 0 0 0 entity 6 a_Des_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_235 Sprites/OBJECTS_235 S T U Sprites/OBJECTS_235 W x Y 0
+236 0 0 0 entity 6 an_Ex_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_236 Sprites/OBJECTS_236 S T U Sprites/OBJECTS_236 W x Y 0
+237 0 0 0 entity 6 a_Flam_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_237 Sprites/OBJECTS_237 S T U Sprites/OBJECTS_237 W x Y 0
+238 0 0 0 entity 6 a_Grav_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_238 Sprites/OBJECTS_238 S T U Sprites/OBJECTS_238 W x Y 0
+239 0 0 0 entity 6 a_Hur_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_239 Sprites/OBJECTS_239 S T U Sprites/OBJECTS_239 W x Y 0
+240 0 0 0 entity 6 an_In_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_240 Sprites/OBJECTS_240 S T U Sprites/OBJECTS_240 W x Y 0
+241 0 0 0 entity 6 a_Jux_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_241 Sprites/OBJECTS_241 S T U Sprites/OBJECTS_241 W x Y 0
+242 0 0 0 entity 6 a_Kal_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_242 Sprites/OBJECTS_242 S T U Sprites/OBJECTS_242 W x Y 0
+243 0 0 0 entity 6 a_Lor_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_243 Sprites/OBJECTS_243 S T U Sprites/OBJECTS_243 W x Y 0
+244 0 0 0 entity 6 a_Mani_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_244 Sprites/OBJECTS_244 S T U Sprites/OBJECTS_244 W x Y 0
+245 0 0 0 entity 6 a_Nox_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_245 Sprites/OBJECTS_245 S T U Sprites/OBJECTS_245 W x Y 0
+246 0 0 0 entity 6 an_Ort_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_246 Sprites/OBJECTS_246 S T U Sprites/OBJECTS_246 W x Y 0
+247 0 0 0 entity 6 a_Por_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_247 Sprites/OBJECTS_247 S T U Sprites/OBJECTS_247 W x Y 0
+248 0 0 0 entity 6 a_Quas_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_248 Sprites/OBJECTS_248 S T U Sprites/OBJECTS_248 W x Y 0
+249 0 0 0 entity 6 a_Rel_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_249 Sprites/OBJECTS_249 S T U Sprites/OBJECTS_249 W x Y 0
+250 0 0 0 entity 6 a_Sanct_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_250 Sprites/OBJECTS_250 S T U Sprites/OBJECTS_250 W x Y 0
+251 0 0 0 entity 6 a_Tym_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_251 Sprites/OBJECTS_251 S T U Sprites/OBJECTS_251 W x Y 0
+252 0 0 0 entity 6 an_Uus_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_252 Sprites/OBJECTS_252 S T U Sprites/OBJECTS_252 W x Y 0
+253 0 0 0 entity 6 a_Vas_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_253 Sprites/OBJECTS_253 S T U Sprites/OBJECTS_253 W x Y 0
+254 0 0 0 entity 6 a_Wis_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_254 Sprites/OBJECTS_254 S T U Sprites/OBJECTS_254 W x Y 0
+255 0 0 0 entity 6 a_Ylem_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_255 Sprites/OBJECTS_255 S T U Sprites/OBJECTS_255 W x Y 0
+256 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_256 0 L M 1 1 1 Sprites/OBJECTS_256 Sprites/OBJECTS_256 S T U Sprites/OBJECTS_256 W x Y 0
+257 0 0 0 entity 5 a_lockpick H 1 Sprites/OBJECTS_257 0 L M 1 1 1 Sprites/OBJECTS_257 Sprites/OBJECTS_257 S T U Sprites/OBJECTS_257 W x Y 0
+258 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_258 0 L M 1 1 1 Sprites/OBJECTS_258 Sprites/OBJECTS_258 S T U Sprites/OBJECTS_258 W x Y 0
+259 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_259 0 L M 1 1 1 Sprites/OBJECTS_259 Sprites/OBJECTS_259 S T U Sprites/OBJECTS_259 W x Y 0
+260 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_260 0 L M 1 1 1 Sprites/OBJECTS_260 Sprites/OBJECTS_260 S T U Sprites/OBJECTS_260 W x Y 0
+261 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_261 0 L M 1 1 1 Sprites/OBJECTS_261 Sprites/OBJECTS_261 S T U Sprites/OBJECTS_261 W x Y 0
+262 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_262 0 L M 1 1 1 Sprites/OBJECTS_262 Sprites/OBJECTS_262 S T U Sprites/OBJECTS_262 W x Y 0
+263 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_263 0 L M 1 1 1 Sprites/OBJECTS_263 Sprites/OBJECTS_263 S T U Sprites/OBJECTS_263 W x Y 0
+264 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_264 0 L M 1 1 1 Sprites/OBJECTS_264 Sprites/OBJECTS_264 S T U Sprites/OBJECTS_264 W x Y 0
+265 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_265 0 L M 1 1 1 Sprites/OBJECTS_265 Sprites/OBJECTS_265 S T U Sprites/OBJECTS_265 W x Y 0
+266 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_266 0 L M 1 1 1 Sprites/OBJECTS_266 Sprites/OBJECTS_266 S T U Sprites/OBJECTS_266 W x Y 0
+267 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_267 0 L M 1 1 1 Sprites/OBJECTS_267 Sprites/OBJECTS_267 S T U Sprites/OBJECTS_267 W x Y 0
+268 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_268 0 L M 1 1 1 Sprites/OBJECTS_268 Sprites/OBJECTS_268 S T U Sprites/OBJECTS_268 W x Y 0
+269 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_269 0 L M 1 1 1 Sprites/OBJECTS_269 Sprites/OBJECTS_269 S T U Sprites/OBJECTS_269 W x Y 0
+270 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_270 0 L M 1 1 1 Sprites/OBJECTS_270 Sprites/OBJECTS_270 S T U Sprites/OBJECTS_270 W x Y 0
+271 0 0 0 entity 21 a_lock H 0 Sprites/OBJECTS_271 0 L M 1 1 1 Sprites/OBJECTS_271 Sprites/OBJECTS_271 S T U Sprites/OBJECTS_271 W x Y 0
+272 0 0 0 entity 16 a_picture_of_Tom H 1 Sprites/OBJECTS_272 0 L M 1 1 1 Sprites/OBJECTS_272 Sprites/OBJECTS_272 S T U Sprites/OBJECTS_272 W x Y 0
+273 0 0 0 entity 16 a_crystal_splinter H 1 Sprites/OBJECTS_273 0 L M 1 1 1 Sprites/OBJECTS_273 Sprites/OBJECTS_273 S T U Sprites/OBJECTS_273 W x Y 0
+274 0 0 0 entity 16 an_orb_rock H 1 Sprites/OBJECTS_274 0 L M 0 0 0 Sprites/OBJECTS_274 Sprites/OBJECTS_274 S T U Sprites/OBJECTS_274 W x Y 0
+275 0 0 0 entity 16 the_Gem_Cutter_of_Coulnes H 1 Sprites/OBJECTS_275 0 L M 1 1 1 Sprites/OBJECTS_275 Sprites/OBJECTS_275 S T U Sprites/OBJECTS_275 W x Y 0
+276 0 0 0 entity 16 a_book H 1 Sprites/OBJECTS_276 0 L M 1 1 1 Sprites/OBJECTS_276 Sprites/OBJECTS_276 S T U Sprites/OBJECTS_276 W x Y 0
+277 0 0 0 entity 16 a_block_of_burning_incense_blocks_of_burning_incense H 1 Sprites/OBJECTS_277 0 L M 1 1 1 Sprites/OBJECTS_277 Sprites/OBJECTS_277 S T U Sprites/OBJECTS_277 W x Y 0
+278 0 0 0 entity 16 a_block_of_incense_blocks_of_incense H 1 Sprites/OBJECTS_278 0 L M 1 1 1 Sprites/OBJECTS_278 Sprites/OBJECTS_278 S T U Sprites/OBJECTS_278 W x Y 0
+279 0 0 0 entity 17 an_orb H 1 Sprites/OBJECTS_279 1 L M 1 1 1 Sprites/OBJECTS_279 Sprites/OBJECTS_279 S T U Sprites/OBJECTS_279 W x Y 0
+280 0 0 0 entity 16 a_broken_blade H 1 Sprites/OBJECTS_280 0 L M 1 1 1 Sprites/OBJECTS_280 Sprites/OBJECTS_280 S T U Sprites/OBJECTS_280 W x Y 0
+281 0 0 0 entity 16 a_broken_hilt H 1 Sprites/OBJECTS_281 0 L M 1 1 1 Sprites/OBJECTS_281 Sprites/OBJECTS_281 S T U Sprites/OBJECTS_281 W x Y 0
+282 0 0 0 entity 16 a_figurine H 1 Sprites/OBJECTS_282 0 L M 1 1 1 Sprites/OBJECTS_282 Sprites/OBJECTS_282 S T U Sprites/OBJECTS_282 W x Y 0
+283 0 0 0 entity 16 some_rotworm_stew_servings_of_rotworm_stew H 1 Sprites/OBJECTS_283 0 L M 1 1 1 Sprites/OBJECTS_283 Sprites/OBJECTS_283 S T U Sprites/OBJECTS_283 W x Y 0
+284 0 0 0 entity 16 some_strong_thread_pieces_of_strong_thread H 1 Sprites/OBJECTS_284 0 L M 1 1 1 Sprites/OBJECTS_284 Sprites/OBJECTS_284 S T U Sprites/OBJECTS_284 W x Y 0
+285 0 0 0 entity 16 dragon_scales_bunches_of_dragon_scales H 1 Sprites/OBJECTS_285 0 L M 1 1 1 Sprites/OBJECTS_285 Sprites/OBJECTS_285 S T U Sprites/OBJECTS_285 W x Y 0
+286 0 0 0 entity 16 a_resilient_sphere_some_resilient_spheres H 1 Sprites/OBJECTS_286 0 L M 1 1 1 Sprites/OBJECTS_286 Sprites/OBJECTS_286 S T U Sprites/OBJECTS_286 W x Y 0
+287 0 0 0 entity 16 a_standard H 1 Sprites/OBJECTS_287 0 L M 1 1 1 Sprites/OBJECTS_287 Sprites/OBJECTS_287 S T U Sprites/OBJECTS_287 W x Y 0
+288 0 0 0 entity 16 a_spell H 1 Sprites/OBJECTS_288 0 L M 1 1 1 Sprites/OBJECTS_288 Sprites/OBJECTS_288 S T U Sprites/OBJECTS_288 W x Y 0
+289 0 0 0 entity 16 a_bedroll H 1 Sprites/OBJECTS_289 0 L M 1 1 1 Sprites/OBJECTS_289 Sprites/OBJECTS_289 S T U Sprites/OBJECTS_289 W x Y 0
+290 0 0 0 entity 16 a_silver_seed H 1 Sprites/OBJECTS_290 0 L M 1 1 1 Sprites/OBJECTS_290 Sprites/OBJECTS_290 S T U Sprites/OBJECTS_290 W x Y 1
+291 0 0 0 entity 16 a_mandolin H 1 Sprites/OBJECTS_291 0 L M 1 1 1 Sprites/OBJECTS_291 Sprites/OBJECTS_291 S T U Sprites/OBJECTS_291 W x Y 0
+292 0 0 0 entity 16 a_flute H 1 Sprites/OBJECTS_292 0 L M 1 1 1 Sprites/OBJECTS_292 Sprites/OBJECTS_292 S T U Sprites/OBJECTS_292 W x Y 0
+293 0 0 0 entity 16 some_leeches_bunches_of_leeches H 1 Sprites/OBJECTS_293 0 L M 1 1 1 Sprites/OBJECTS_293 Sprites/OBJECTS_293 S T U Sprites/OBJECTS_293 W x Y 0
+294 0 0 0 entity 16 a_moonstone H 1 Sprites/OBJECTS_294 0 L M 1 1 1 Sprites/OBJECTS_294 Sprites/OBJECTS_294 S T U Sprites/OBJECTS_294 W x Y 0
+295 0 0 0 entity 16 a_spike H 1 Sprites/OBJECTS_295 0 L M 1 1 1 Sprites/OBJECTS_295 Sprites/OBJECTS_295 S T U Sprites/OBJECTS_295 W x Y 0
+296 0 0 0 entity 16 a_rock_hammer H 1 Sprites/OBJECTS_296 0 L M 1 1 1 Sprites/OBJECTS_296 Sprites/OBJECTS_296 S T U Sprites/OBJECTS_296 W x Y 0
+297 0 0 0 entity 16 a_glowing_rock H 1 Sprites/OBJECTS_297 0 L M 1 1 1 Sprites/OBJECTS_297 Sprites/OBJECTS_297 S T U Sprites/OBJECTS_297 W x Y 1
+298 0 0 0 entity 16 a_campfire H 1 Sprites/OBJECTS_298 1 L M 0 0 0 Sprites/OBJECTS_298 Sprites/OBJECTS_298 S T U Sprites/OBJECTS_298 W x Y 0
+299 0 0 0 entity 16 a_fishing_pole H 1 Sprites/OBJECTS_299 0 L M 1 1 1 Sprites/OBJECTS_299 Sprites/OBJECTS_299 S T U Sprites/OBJECTS_299 W x Y 0
+300 0 0 0 entity 16 a_medallion H 1 Sprites/OBJECTS_300 0 L M 1 1 1 Sprites/OBJECTS_300 Sprites/OBJECTS_300 S T U Sprites/OBJECTS_300 W x Y 0
+301 0 0 0 entity 16 an_oil_flask H 1 Sprites/OBJECTS_301 0 L M 1 1 1 Sprites/OBJECTS_301 Sprites/OBJECTS_301 S T U Sprites/OBJECTS_301 W x Y 0
+302 0 0 0 entity 17 a_fountain H 1 Sprites/OBJECTS_302 0 L M 0 0 0 Sprites/OBJECTS_302 Sprites/OBJECTS_302 S T U Sprites/OBJECTS_302 W x Y 0
+303 0 0 0 entity 25 a_cauldron H 1 Sprites/OBJECTS_303 0 L M 1 0 0 Sprites/OBJECTS_303 Sprites/OBJECTS_303 S T U Sprites/OBJECTS_303 W x Y 0
+304 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_304 0 L M 1 1 1 Sprites/OBJECTS_304 Sprites/OBJECTS_304 S T U Sprites/OBJECTS_304 W x Y 0
+305 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_305 0 L M 1 1 1 Sprites/OBJECTS_305 Sprites/OBJECTS_305 S T U Sprites/OBJECTS_305 W x Y 0
+306 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_306 0 L M 1 1 1 Sprites/OBJECTS_306 Sprites/OBJECTS_306 S T U Sprites/OBJECTS_306 W x Y 0
+307 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_307 0 L M 1 1 1 Sprites/OBJECTS_307 Sprites/OBJECTS_307 S T U Sprites/OBJECTS_307 W x Y 0
+308 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_308 0 L M 1 1 1 Sprites/OBJECTS_308 Sprites/OBJECTS_308 S T U Sprites/OBJECTS_308 W x Y 0
+309 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_309 0 L M 1 1 1 Sprites/OBJECTS_309 Sprites/OBJECTS_309 S T U Sprites/OBJECTS_309 W x Y 0
+310 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_310 0 L M 1 1 1 Sprites/OBJECTS_310 Sprites/OBJECTS_310 S T U Sprites/OBJECTS_310 W x Y 0
+311 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_311 0 L M 1 1 1 Sprites/OBJECTS_311 Sprites/OBJECTS_311 S T U Sprites/OBJECTS_311 W x Y 0
+312 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_312 0 L M 1 1 1 Sprites/OBJECTS_312 Sprites/OBJECTS_312 S T U Sprites/OBJECTS_312 W x Y 0
+313 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_313 0 L M 1 1 1 Sprites/OBJECTS_313 Sprites/OBJECTS_313 S T U Sprites/OBJECTS_313 W x Y 0
+314 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_314 0 L M 1 1 1 Sprites/OBJECTS_314 Sprites/OBJECTS_314 S T U Sprites/OBJECTS_314 W x Y 0
+315 0 0 0 entity 28 a_map H 1 Sprites/OBJECTS_315 0 L M 1 1 1 Sprites/OBJECTS_315 Sprites/OBJECTS_315 S T U Sprites/OBJECTS_315 W x Y 0
+316 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_316 0 L M 1 1 1 Sprites/OBJECTS_316 Sprites/OBJECTS_316 S T U Sprites/OBJECTS_316 W x Y 0
+317 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_317 0 L M 1 1 1 Sprites/OBJECTS_317 Sprites/OBJECTS_317 S T U Sprites/OBJECTS_317 W x Y 0
+318 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_318 0 L M 1 1 1 Sprites/OBJECTS_318 Sprites/OBJECTS_318 S T U Sprites/OBJECTS_318 W x Y 0
+319 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_319 0 L M 1 1 1 Sprites/OBJECTS_319 Sprites/OBJECTS_319 S T U Sprites/OBJECTS_319 W x Y 0
+320 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_320 0 L M 1 0 0 Sprites/OBJECTS_320 Sprites/OBJECTS_320 S T U Sprites/OBJECTS_320 W x Y 0
+321 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_321 0 L M 1 0 0 Sprites/OBJECTS_321 Sprites/OBJECTS_321 S T U Sprites/OBJECTS_321 W x Y 0
+322 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_322 0 L M 1 0 0 Sprites/OBJECTS_322 Sprites/OBJECTS_322 S T U Sprites/OBJECTS_322 W x Y 0
+323 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_323 0 L M 1 0 0 Sprites/OBJECTS_323 Sprites/OBJECTS_323 S T U Sprites/OBJECTS_323 W x Y 0
+324 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_324 0 L M 1 0 0 Sprites/OBJECTS_324 Sprites/OBJECTS_324 S T U Sprites/OBJECTS_324 W x Y 0
+325 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_325 0 L M 1 0 0 Sprites/OBJECTS_325 Sprites/OBJECTS_325 S T U Sprites/OBJECTS_325 W x Y 0
+326 0 0 0 entity 30 a_portcullis_portcullises H 0 Sprites/OBJECTS_326 0 L M 1 0 0 Sprites/OBJECTS_326 Sprites/OBJECTS_326 S T U Sprites/OBJECTS_326 W x Y 0
+327 0 0 0 entity 29 a_secret_door H 0 Sprites/OBJECTS_327 0 L M 1 0 0 Sprites/OBJECTS_327 Sprites/OBJECTS_327 S T U Sprites/OBJECTS_327 W x Y 0
+328 0 0 0 entity 4 an_open_door H 0 Sprites/OBJECTS_328 0 L M 1 0 0 Sprites/OBJECTS_328 Sprites/OBJECTS_328 S T U Sprites/OBJECTS_328 W x Y 0
+329 0 0 0 entity 4 an_open_door H 0 Sprites/OBJECTS_329 0 L M 1 0 0 Sprites/OBJECTS_329 Sprites/OBJECTS_329 S T U Sprites/OBJECTS_329 W x Y 0
+330 0 0 0 entity 4 an_open_door H 0 Sprites/OBJECTS_330 0 L M 1 0 0 Sprites/OBJECTS_330 Sprites/OBJECTS_330 S T U Sprites/OBJECTS_330 W x Y 0
+331 0 0 0 entity 4 an_open_door H 0 Sprites/OBJECTS_331 0 L M 1 0 0 Sprites/OBJECTS_331 Sprites/OBJECTS_331 S T U Sprites/OBJECTS_331 W x Y 0
+332 0 0 0 entity 4 an_open_door H 0 Sprites/OBJECTS_332 0 L M 1 0 0 Sprites/OBJECTS_332 Sprites/OBJECTS_332 S T U Sprites/OBJECTS_332 W x Y 0
+333 0 0 0 entity 4 an_open_door H 0 Sprites/OBJECTS_333 0 L M 1 0 0 Sprites/OBJECTS_333 Sprites/OBJECTS_333 S T U Sprites/OBJECTS_333 W x Y 0
+334 0 0 0 entity 30 an_open_portcullis H 0 Sprites/OBJECTS_334 0 L M 1 1 1 Sprites/OBJECTS_334 Sprites/OBJECTS_334 S T U Sprites/OBJECTS_334 W x Y 0
+335 0 0 0 entity 29 a_secret_door H 0 Sprites/OBJECTS_335 0 L M 1 1 1 Sprites/OBJECTS_335 Sprites/OBJECTS_335 S T U Sprites/OBJECTS_335 W x Y 0
+336 0 0 0 model 23 a_bench_benches H 0 Sprites/OBJECTS_336 0 L M 1 1 1 Sprites/OBJECTS_336 Sprites/OBJECTS_336 S T U Sprites/OBJECTS_336 W x Y 0
+337 0 0 0 entity 69 an_arrow H 1 Sprites/OBJECTS_337 0 L M 1 1 1 Sprites/OBJECTS_337 Sprites/OBJECTS_337 S T U Sprites/OBJECTS_337 W x Y 0
+338 0 0 0 entity 69 a_crossbow_bolt H 1 Sprites/OBJECTS_338 0 L M 1 1 1 Sprites/OBJECTS_338 Sprites/OBJECTS_338 S T U Sprites/OBJECTS_338 W x Y 0
+339 0 0 0 model 23 a_large_boulder H 0 Sprites/OBJECTS_339 0 L M 1 1 1 Sprites/OBJECTS_339 Sprites/OBJECTS_339 S T U Sprites/OBJECTS_339 W x Y 0
+340 0 0 0 model 23 a_large_boulder H 0 Sprites/OBJECTS_340 0 L M 1 1 1 Sprites/OBJECTS_340 Sprites/OBJECTS_340 S T U Sprites/OBJECTS_340 W x Y 0
+341 0 0 0 model 23 a_boulder H 0 Sprites/OBJECTS_341 0 L M 1 1 1 Sprites/OBJECTS_341 Sprites/OBJECTS_341 S T U Sprites/OBJECTS_341 W x Y 0
+342 0 0 0 model 23 a_small_boulder H 0 Sprites/OBJECTS_342 0 L M 1 1 1 Sprites/OBJECTS_342 Sprites/OBJECTS_342 S T U Sprites/OBJECTS_342 W x Y 0
+343 0 0 0 model 17 a_shrine H 0 Sprites/OBJECTS_343 1 L M 1 1 1 Sprites/OBJECTS_343 Sprites/OBJECTS_343 S T U Sprites/OBJECTS_343 W x Y 0
+344 0 0 0 model 23 a_table H 0 Sprites/OBJECTS_344 0 L M 1 1 1 Sprites/OBJECTS_344 Sprites/OBJECTS_344 S T U Sprites/OBJECTS_344 W x Y 0
+345 0 0 0 model 23 a_beam H 0 Sprites/OBJECTS_345 0 L M 1 1 1 Sprites/OBJECTS_345 Sprites/OBJECTS_345 S T U Sprites/OBJECTS_345 W x Y 0
+346 0 0 0 model 23 a_moongate H 0 Sprites/OBJECTS_346 0 L M 1 1 1 Sprites/OBJECTS_346 Sprites/OBJECTS_346 S T U Sprites/OBJECTS_346 W x Y 0
+347 0 0 0 entity 19 a_barrel H 0 Sprites/OBJECTS_347 0 L M 1 1 1 Sprites/OBJECTS_347 Sprites/OBJECTS_347 S T U Sprites/OBJECTS_347 W x Y 0
+348 0 0 0 model 23 a_chair H 0 Sprites/OBJECTS_348 0 L M 1 1 1 Sprites/OBJECTS_348 Sprites/OBJECTS_348 S T U Sprites/OBJECTS_348 W x Y 0
+349 0 0 0 entity 19 a_chest H 0 Sprites/OBJECTS_349 0 L M 1 1 1 Sprites/OBJECTS_349 Sprites/OBJECTS_349 S T U Sprites/OBJECTS_349 W x Y 0
+350 0 0 0 model 19 a_nightstand H 0 Sprites/OBJECTS_350 0 L M 1 1 1 Sprites/OBJECTS_350 Sprites/OBJECTS_350 S T U Sprites/OBJECTS_350 W x Y 0
+351 0 0 0 entity 69 a_lotus_turbo_esprit H 0 Sprites/OBJECTS_351 0 L M 1 1 1 Sprites/OBJECTS_351 Sprites/OBJECTS_351 S T U Sprites/OBJECTS_351 W x Y 0
+352 0 0 0 ignore 31 a_pillar H 0 Sprites/OBJECTS_352 0 L M 1 1 1 Sprites/OBJECTS_352 Sprites/OBJECTS_352 S T U Sprites/OBJECTS_352 W x Y 0
+353 0 0 0 entity 8 a_lever H 0 Sprites/OBJECTS_353 0 L M 1 0 1 Sprites/OBJECTS_353 Sprites/OBJECTS_353 S T U Sprites/OBJECTS_353 W x Y 0
+354 0 0 0 model 8 a_switch_switches H 0 Sprites/OBJECTS_354 0 L M 1 0 1 Sprites/OBJECTS_354 Sprites/OBJECTS_354 S T U Sprites/OBJECTS_354 W x Y 0
+355 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_355 0 L M 1 1 1 Sprites/OBJECTS_355 Sprites/OBJECTS_355 S T U Sprites/OBJECTS_355 W x Y 0
+356 0 0 0 entity 7 a_bridge H 0 Sprites/OBJECTS_356 1 L M 1 1 1 Sprites/OBJECTS_356 Sprites/OBJECTS_356 S T U Sprites/OBJECTS_356 W x Y 0
+357 0 0 0 model 23 a_gravestone H 0 Sprites/OBJECTS_357 0 L M 1 1 1 Sprites/OBJECTS_357 Sprites/OBJECTS_357 S T U Sprites/OBJECTS_357 W x Y 0
+358 0 0 0 entity 10 some_writing H 0 Sprites/OBJECTS_358 0 L M 0 0 0 Sprites/OBJECTS_358 Sprites/OBJECTS_358 S T U Sprites/OBJECTS_358 W x Y 0
+359 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_359 0 L M 1 1 1 Sprites/OBJECTS_359 Sprites/OBJECTS_359 S T U Sprites/OBJECTS_359 W x Y 0
+360 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_360 0 L M 1 1 1 Sprites/OBJECTS_360 Sprites/OBJECTS_360 S T U Sprites/OBJECTS_360 W x Y 0
+361 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_361 0 L M 1 1 1 Sprites/OBJECTS_361 Sprites/OBJECTS_361 S T U Sprites/OBJECTS_361 W x Y 0
+362 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_362 0 L M 1 1 1 Sprites/OBJECTS_362 Sprites/OBJECTS_362 S T U Sprites/OBJECTS_362 W x Y 0
+363 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_363 0 L M 1 1 1 Sprites/OBJECTS_363 Sprites/OBJECTS_363 S T U Sprites/OBJECTS_363 W x Y 0
+364 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_364 0 L M 1 1 1 Sprites/OBJECTS_364 Sprites/OBJECTS_364 S T U Sprites/OBJECTS_364 W x Y 0
+365 0 0 0 model 23 force_field H 0 Sprites/OBJECTS_365 0 L M 1 1 1 Sprites/OBJECTS_365 Sprites/OBJECTS_365 S T U Sprites/OBJECTS_365 W x Y 0
+366 0 0 0 entity 34 special_tmap_obj H 0 Sprites/OBJECTS_366 0 L M 0 0 0 Sprites/OBJECTS_366 Sprites/OBJECTS_366 S T U Sprites/OBJECTS_366 W x Y 0
+367 0 0 0 entity 35 special_tmap_obj H 0 Sprites/OBJECTS_367 0 L M 0 0 0 Sprites/OBJECTS_367 Sprites/OBJECTS_367 S T U Sprites/OBJECTS_367 W x Y 0
+368 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_368 0 L M 1 0 1 Sprites/OBJECTS_368 Sprites/OBJECTS_368 S T U Sprites/OBJECTS_368 W x Y 0
+369 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_369 0 L M 1 0 1 Sprites/OBJECTS_369 Sprites/OBJECTS_369 S T U Sprites/OBJECTS_369 W x Y 0
+370 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_370 0 L M 1 0 1 Sprites/OBJECTS_370 Sprites/OBJECTS_370 S T U Sprites/OBJECTS_370 W x Y 0
+371 0 0 0 entity 8 a_switch H 0 Sprites/OBJECTS_371 0 L M 1 0 1 Sprites/OBJECTS_371 Sprites/OBJECTS_371 S T U Sprites/OBJECTS_371 W x Y 0
+372 0 0 0 entity 8 a_switch H 0 Sprites/OBJECTS_372 0 L M 1 0 1 Sprites/OBJECTS_372 Sprites/OBJECTS_372 S T U Sprites/OBJECTS_372 W x Y 0
+373 0 0 0 entity 8 a_lever H 0 Sprites/OBJECTS_373 0 L M 1 0 1 Sprites/OBJECTS_373 Sprites/OBJECTS_373 S T U Sprites/OBJECTS_373 W x Y 0
+374 0 0 0 entity 8 a_pull_chain H 0 Sprites/OBJECTS_374 0 L M 1 0 1 Sprites/OBJECTS_374 Sprites/OBJECTS_374 S T U Sprites/OBJECTS_374 W x Y 0
+375 0 0 0 entity 8 a_pull_chain H 0 Sprites/OBJECTS_375 0 L M 1 0 1 Sprites/OBJECTS_375 Sprites/OBJECTS_375 S T U Sprites/OBJECTS_375 W x Y 0
+376 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_376 0 L M 1 0 1 Sprites/OBJECTS_376 Sprites/OBJECTS_376 S T U Sprites/OBJECTS_376 W x Y 0
+377 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_377 0 L M 1 0 1 Sprites/OBJECTS_377 Sprites/OBJECTS_377 S T U Sprites/OBJECTS_377 W x Y 0
+378 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_378 0 L M 1 0 1 Sprites/OBJECTS_378 Sprites/OBJECTS_378 S T U Sprites/OBJECTS_378 W x Y 0
+379 0 0 0 entity 8 a_switch H 0 Sprites/OBJECTS_379 0 L M 1 0 1 Sprites/OBJECTS_379 Sprites/OBJECTS_379 S T U Sprites/OBJECTS_379 W x Y 0
+380 0 0 0 entity 8 a_switch H 0 Sprites/OBJECTS_380 0 L M 1 0 1 Sprites/OBJECTS_380 Sprites/OBJECTS_380 S T U Sprites/OBJECTS_380 W x Y 0
+381 0 0 0 entity 8 a_lever H 0 Sprites/OBJECTS_381 0 L M 1 0 1 Sprites/OBJECTS_381 Sprites/OBJECTS_381 S T U Sprites/OBJECTS_381 W x Y 0
+382 0 0 0 entity 8 a_pull_chain H 0 Sprites/OBJECTS_382 0 L M 1 0 1 Sprites/OBJECTS_382 Sprites/OBJECTS_382 S T U Sprites/OBJECTS_382 W x Y 0
+383 0 0 0 entity 8 a_pull_chain H 0 Sprites/OBJECTS_383 0 L M 1 0 1 Sprites/OBJECTS_383 Sprites/OBJECTS_383 S T U Sprites/OBJECTS_383 W x Y 0
+384 0 0 0 model 37 a_damage_trap H 1 Sprites/OBJECTS_384 0 L M 0 0 1 Sprites/OBJECTS_384 Sprites/OBJECTS_384 S T U Sprites/OBJECTS_384 W x Y 0
+385 0 0 0 entity 38 a_teleport_trap H 1 Sprites/OBJECTS_385 0 L M 0 0 1 Sprites/OBJECTS_385 Sprites/OBJECTS_385 S T U Sprites/OBJECTS_385 W x Y 0
+386 0 0 0 model 39 a_arrow_trap H 1 Sprites/OBJECTS_386 0 L M 0 0 1 Sprites/OBJECTS_386 Sprites/OBJECTS_386 S T U Sprites/OBJECTS_386 W x Y 0
+387 0 0 0 entity 40 a_do_trap H 1 Sprites/OBJECTS_387 0 L M 0 0 1 Sprites/OBJECTS_387 Sprites/OBJECTS_387 S T U Sprites/OBJECTS_387 W x Y 0
+388 0 0 0 model 41 a_pit_trap H 1 Sprites/OBJECTS_388 0 L M 0 0 1 Sprites/OBJECTS_388 Sprites/OBJECTS_388 S T U Sprites/OBJECTS_388 W x Y 0
+389 0 0 0 entity 42 a_change_terrain_trap H 1 Sprites/OBJECTS_389 0 L M 0 0 1 Sprites/OBJECTS_389 Sprites/OBJECTS_389 S T U Sprites/OBJECTS_389 W x Y 0
+390 0 0 0 model 43 a_spelltrap H 1 Sprites/OBJECTS_390 0 L M 0 0 1 Sprites/OBJECTS_390 Sprites/OBJECTS_390 S T U Sprites/OBJECTS_390 W x Y 0
+391 0 0 0 model 44 a_create_object_trap H 1 Sprites/OBJECTS_391 0 L M 0 0 1 Sprites/OBJECTS_391 Sprites/OBJECTS_391 S T U Sprites/OBJECTS_391 W x Y 0
+392 0 0 0 model 45 a_door_trap H 1 Sprites/OBJECTS_392 0 L M 0 0 1 Sprites/OBJECTS_392 Sprites/OBJECTS_392 S T U Sprites/OBJECTS_392 W x Y 0
+393 0 0 0 model 46 a_ward_trap H 1 Sprites/OBJECTS_393 0 L M 0 0 1 Sprites/OBJECTS_393 Sprites/OBJECTS_393 S T U Sprites/OBJECTS_393 W x Y 0
+394 0 0 0 model 47 a_tell_trap H 1 Sprites/OBJECTS_394 0 L M 0 0 1 Sprites/OBJECTS_394 Sprites/OBJECTS_394 S T U Sprites/OBJECTS_394 W x Y 0
+395 0 0 0 model 48 a_delete_object_trap H 1 Sprites/OBJECTS_395 0 L M 0 0 1 Sprites/OBJECTS_395 Sprites/OBJECTS_395 S T U Sprites/OBJECTS_395 W x Y 0
+396 0 0 0 model 49 an_inventory_trap H 1 Sprites/OBJECTS_396 0 L M 0 0 1 Sprites/OBJECTS_396 Sprites/OBJECTS_396 S T U Sprites/OBJECTS_396 W x Y 0
+397 0 0 0 model 50 a_set_variable_trap H 1 Sprites/OBJECTS_397 0 L M 0 0 1 Sprites/OBJECTS_397 Sprites/OBJECTS_397 S T U Sprites/OBJECTS_397 W x Y 0
+398 0 0 0 model 51 a_check_variable_trap H 1 Sprites/OBJECTS_398 0 L M 0 0 1 Sprites/OBJECTS_398 Sprites/OBJECTS_398 S T U Sprites/OBJECTS_398 W x Y 0
+399 0 0 0 model 52 a_combination_trap H 1 Sprites/OBJECTS_399 0 L M 0 0 1 Sprites/OBJECTS_399 Sprites/OBJECTS_399 S T U Sprites/OBJECTS_399 W x Y 0
+400 0 0 0 model 53 a_text_string_trap H 1 Sprites/OBJECTS_400 0 L M 0 0 1 Sprites/OBJECTS_400 Sprites/OBJECTS_400 S T U Sprites/OBJECTS_400 W x Y 0
+401 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_401 0 L M 1 1 1 Sprites/OBJECTS_401 Sprites/OBJECTS_401 S T U Sprites/OBJECTS_401 W x Y 0
+402 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_402 0 L M 1 1 1 Sprites/OBJECTS_402 Sprites/OBJECTS_402 S T U Sprites/OBJECTS_402 W x Y 0
+403 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_403 0 L M 1 1 1 Sprites/OBJECTS_403 Sprites/OBJECTS_403 S T U Sprites/OBJECTS_403 W x Y 0
+404 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_404 0 L M 1 1 1 Sprites/OBJECTS_404 Sprites/OBJECTS_404 S T U Sprites/OBJECTS_404 W x Y 0
+405 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_405 0 L M 1 1 1 Sprites/OBJECTS_405 Sprites/OBJECTS_405 S T U Sprites/OBJECTS_405 W x Y 0
+406 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_406 0 L M 1 1 1 Sprites/OBJECTS_406 Sprites/OBJECTS_406 S T U Sprites/OBJECTS_406 W x Y 0
+407 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_407 0 L M 1 1 1 Sprites/OBJECTS_407 Sprites/OBJECTS_407 S T U Sprites/OBJECTS_407 W x Y 0
+408 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_408 0 L M 1 1 1 Sprites/OBJECTS_408 Sprites/OBJECTS_408 S T U Sprites/OBJECTS_408 W x Y 0
+409 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_409 0 L M 1 1 1 Sprites/OBJECTS_409 Sprites/OBJECTS_409 S T U Sprites/OBJECTS_409 W x Y 0
+410 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_410 0 L M 1 1 1 Sprites/OBJECTS_410 Sprites/OBJECTS_410 S T U Sprites/OBJECTS_410 W x Y 0
+411 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_411 0 L M 1 1 1 Sprites/OBJECTS_411 Sprites/OBJECTS_411 S T U Sprites/OBJECTS_411 W x Y 0
+412 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_412 0 L M 1 1 1 Sprites/OBJECTS_412 Sprites/OBJECTS_412 S T U Sprites/OBJECTS_412 W x Y 0
+413 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_413 0 L M 1 1 1 Sprites/OBJECTS_413 Sprites/OBJECTS_413 S T U Sprites/OBJECTS_413 W x Y 0
+414 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_414 0 L M 1 1 1 Sprites/OBJECTS_414 Sprites/OBJECTS_414 S T U Sprites/OBJECTS_414 W x Y 0
+415 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_415 0 L M 1 1 1 Sprites/OBJECTS_415 Sprites/OBJECTS_415 S T U Sprites/OBJECTS_415 W x Y 0
+416 0 0 0 entity 54 a_move_trigger H 0 Sprites/OBJECTS_416 0 L M 0 0 1 Sprites/OBJECTS_416 Sprites/OBJECTS_416 S T U Sprites/OBJECTS_416 W x Y 0
+417 0 0 0 model 55 a_pick_up_trigger H 1 Sprites/OBJECTS_417 0 L M 0 0 1 Sprites/OBJECTS_417 Sprites/OBJECTS_417 S T U Sprites/OBJECTS_417 W x Y 0
+418 0 0 0 model 56 a_use_trigger H 1 Sprites/OBJECTS_418 0 L M 0 0 1 Sprites/OBJECTS_418 Sprites/OBJECTS_418 S T U Sprites/OBJECTS_418 W x Y 0
+419 0 0 0 model 57 a_look_trigger H 1 Sprites/OBJECTS_419 0 L M 0 0 1 Sprites/OBJECTS_419 Sprites/OBJECTS_419 S T U Sprites/OBJECTS_419 W x Y 0
+420 0 0 0 model 58 a_step_on_trigger H 1 Sprites/OBJECTS_420 0 L M 0 0 1 Sprites/OBJECTS_420 Sprites/OBJECTS_420 S T U Sprites/OBJECTS_420 W x Y 0
+421 0 0 0 model 59 an_open_trigger H 1 Sprites/OBJECTS_421 0 L M 0 0 1 Sprites/OBJECTS_421 Sprites/OBJECTS_421 S T U Sprites/OBJECTS_421 W x Y 0
+422 0 0 0 model 60 an_unlock_trigger H 1 Sprites/OBJECTS_422 0 L M 0 0 1 Sprites/OBJECTS_422 Sprites/OBJECTS_422 S T U Sprites/OBJECTS_422 W x Y 0
+423 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_423 0 L M 1 1 1 Sprites/OBJECTS_423 Sprites/OBJECTS_423 S T U Sprites/OBJECTS_423 W x Y 0
+424 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_424 0 L M 1 1 1 Sprites/OBJECTS_424 Sprites/OBJECTS_424 S T U Sprites/OBJECTS_424 W x Y 0
+425 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_425 0 L M 1 1 1 Sprites/OBJECTS_425 Sprites/OBJECTS_425 S T U Sprites/OBJECTS_425 W x Y 0
+426 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_426 0 L M 1 1 1 Sprites/OBJECTS_426 Sprites/OBJECTS_426 S T U Sprites/OBJECTS_426 W x Y 0
+427 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_427 0 L M 1 1 1 Sprites/OBJECTS_427 Sprites/OBJECTS_427 S T U Sprites/OBJECTS_427 W x Y 0
+428 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_428 0 L M 1 1 1 Sprites/OBJECTS_428 Sprites/OBJECTS_428 S T U Sprites/OBJECTS_428 W x Y 0
+429 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_429 0 L M 1 1 1 Sprites/OBJECTS_429 Sprites/OBJECTS_429 S T U Sprites/OBJECTS_429 W x Y 0
+430 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_430 0 L M 1 1 1 Sprites/OBJECTS_430 Sprites/OBJECTS_430 S T U Sprites/OBJECTS_430 W x Y 0
+431 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_431 0 L M 1 1 1 Sprites/OBJECTS_431 Sprites/OBJECTS_431 S T U Sprites/OBJECTS_431 W x Y 0
+432 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_432 0 L M 1 1 1 Sprites/OBJECTS_432 Sprites/OBJECTS_432 S T U Sprites/OBJECTS_432 W x Y 0
+433 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_433 0 L M 1 1 1 Sprites/OBJECTS_433 Sprites/OBJECTS_433 S T U Sprites/OBJECTS_433 W x Y 0
+434 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_434 0 L M 1 1 1 Sprites/OBJECTS_434 Sprites/OBJECTS_434 S T U Sprites/OBJECTS_434 W x Y 0
+435 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_435 0 L M 1 1 1 Sprites/OBJECTS_435 Sprites/OBJECTS_435 S T U Sprites/OBJECTS_435 W x Y 0
+436 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_436 0 L M 1 1 1 Sprites/OBJECTS_436 Sprites/OBJECTS_436 S T U Sprites/OBJECTS_436 W x Y 0
+437 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_437 0 L M 1 1 1 Sprites/OBJECTS_437 Sprites/OBJECTS_437 S T U Sprites/OBJECTS_437 W x Y 0
+438 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_438 0 L M 1 1 1 Sprites/OBJECTS_438 Sprites/OBJECTS_438 S T U Sprites/OBJECTS_438 W x Y 0
+439 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_439 0 L M 1 1 1 Sprites/OBJECTS_439 Sprites/OBJECTS_439 S T U Sprites/OBJECTS_439 W x Y 0
+440 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_440 0 L M 1 1 1 Sprites/OBJECTS_440 Sprites/OBJECTS_440 S T U Sprites/OBJECTS_440 W x Y 0
+441 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_441 0 L M 1 1 1 Sprites/OBJECTS_441 Sprites/OBJECTS_441 S T U Sprites/OBJECTS_441 W x Y 0
+442 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_442 0 L M 1 1 1 Sprites/OBJECTS_442 Sprites/OBJECTS_442 S T U Sprites/OBJECTS_442 W x Y 0
+443 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_443 0 L M 1 1 1 Sprites/OBJECTS_443 Sprites/OBJECTS_443 S T U Sprites/OBJECTS_443 W x Y 0
+444 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_444 0 L M 1 1 1 Sprites/OBJECTS_444 Sprites/OBJECTS_444 S T U Sprites/OBJECTS_444 W x Y 0
+445 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_445 0 L M 1 1 1 Sprites/OBJECTS_445 Sprites/OBJECTS_445 S T U Sprites/OBJECTS_445 W x Y 0
+446 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_446 0 L M 1 1 1 Sprites/OBJECTS_446 Sprites/OBJECTS_446 S T U Sprites/OBJECTS_446 W x Y 0
+447 0 0 0 entity 25 unknown H 1 Sprites/OBJECTS_447 0 L M 1 1 1 Sprites/OBJECTS_447 Sprites/OBJECTS_447 S T U Sprites/OBJECTS_447 W x Y 0
+448 0 0 0 model 23 some_blood H 1 Sprites/OBJECTS_448 0 L M 1 1 1 Sprites/OBJECTS_448 Sprites/OBJECTS_448 S T U Sprites/OBJECTS_448 W x Y 0
+449 0 0 0 entity 25 a_mist_cloud H 0 Sprites/OBJECTS_449 1 L M 1 1 1 Sprites/OBJECTS_449 Sprites/OBJECTS_449 S T U Sprites/OBJECTS_449 W x Y 0
+450 0 0 0 entity 25 an_explosion H 0 Sprites/OBJECTS_450 0 L M 1 1 1 Sprites/OBJECTS_450 Sprites/OBJECTS_450 S T U Sprites/OBJECTS_450 W x Y 1
+451 0 0 0 entity 25 an_explosion H 0 Sprites/OBJECTS_451 0 L M 1 1 1 Sprites/OBJECTS_451 Sprites/OBJECTS_451 S T U Sprites/OBJECTS_451 W x Y 1
+452 0 0 0 entity 25 an_explosion H 0 Sprites/OBJECTS_452 0 L M 1 1 1 Sprites/OBJECTS_452 Sprites/OBJECTS_452 S T U Sprites/OBJECTS_452 W x Y 1
+453 0 0 0 entity 25 a_splash_splashes H 0 Sprites/OBJECTS_453 1 L M 1 1 1 Sprites/OBJECTS_453 Sprites/OBJECTS_453 S T U Sprites/OBJECTS_453 W x Y 1
+454 0 0 0 entity 25 a_splash_splahes H 0 Sprites/OBJECTS_454 1 L M 1 1 1 Sprites/OBJECTS_454 Sprites/OBJECTS_454 S T U Sprites/OBJECTS_454 W x Y 1
+455 0 0 0 entity 25 a_spell_effect H 0 Sprites/OBJECTS_455 0 L M 1 1 1 Sprites/OBJECTS_455 Sprites/OBJECTS_455 S T U Sprites/OBJECTS_455 W x Y 1
+456 0 0 0 entity 25 some_smoke H 0 Sprites/OBJECTS_456 0 L M 1 1 1 Sprites/OBJECTS_456 Sprites/OBJECTS_456 S T U Sprites/OBJECTS_456 W x Y 1
+457 0 0 0 entity 69 a_fountain H 1 Sprites/OBJECTS_457 1 L M 1 1 1 Sprites/OBJECTS_457 Sprites/OBJECTS_457 S T U Sprites/OBJECTS_457 W x Y 1
+458 0 0 0 entity 69 a_silver_tree H 0 Sprites/OBJECTS_458 1 L M 1 1 1 Sprites/OBJECTS_458 Sprites/OBJECTS_458 S T U Sprites/OBJECTS_458 W x Y 1
+459 0 0 0 ignore 23 some_damage H 0 Sprites/OBJECTS_459 0 L M 1 1 1 Sprites/OBJECTS_459 Sprites/OBJECTS_459 S T U Sprites/OBJECTS_459 W x Y 0
+460 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_460 0 L M 1 1 1 Sprites/OBJECTS_460 Sprites/OBJECTS_460 S T U Sprites/OBJECTS_460 W x Y 0
+461 0 0 0 model 32 a_sound_source H 0 Sprites/OBJECTS_461 0 L M 1 1 1 Sprites/OBJECTS_461 Sprites/OBJECTS_461 S T U Sprites/OBJECTS_461 W x Y 0
+462 0 0 0 ignore 23 some_changing_terrain H 0 Sprites/OBJECTS_462 0 L M 1 1 1 Sprites/OBJECTS_462 Sprites/OBJECTS_462 S T U Sprites/OBJECTS_462 W x Y 0
+463 0 0 0 ignore 23 a_moving_door H 0 Sprites/OBJECTS_463 0 L M 1 1 1 Sprites/OBJECTS_463 Sprites/OBJECTS_463 S T U Sprites/OBJECTS_463 W x Y 0
+464 0 0 0 ignore 23 outofrange x 0 Sprites/OBJECTS_463 0 x x 1 1 1 Sprites/OBJECTS_463 Sprites/OBJECTS_463 x T U Sprites/OBJECTS_463 W x Y 0

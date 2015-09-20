@@ -143,7 +143,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	getPaletteIndex(PaletteFile, pal, PaletteNo);    
+	getPalette(PaletteFile, pal, PaletteNo);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
@@ -1226,6 +1226,7 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 
 bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
 	{
+useTGA=1;
 //This is lifted wholesale from the Underworld Adventures implementation 
 	lpfileheader lpheader;
 	lp_descriptor lparray[256];

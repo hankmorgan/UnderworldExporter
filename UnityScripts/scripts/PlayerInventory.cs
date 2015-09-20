@@ -49,22 +49,22 @@ public class PlayerInventory : MonoBehaviour {
 	public bool[] bBackPack= new bool[8];
 
 	//Links to the slots where the object will be displayed
-	public UISprite Helm_f_Slot;
-	public UISprite Chest_f_Slot;
-	public UISprite Legs_f_Slot;
-	public UISprite Boots_f_Slot;
-	public UISprite Gloves_f_Slot;
-	public UISprite Helm_m_Slot;
-	public UISprite Chest_m_Slot;
-	public UISprite Legs_m_Slot;
-	public UISprite Boots_m_Slot;
-	public UISprite Gloves_m_Slot;
-	public UISprite LeftHand_Slot;
-	public UISprite RightHand_Slot;
-	public UISprite LeftRing_Slot;
-	public UISprite RightRing_Slot;
-	public UISprite LeftShoulder_Slot;
-	public UISprite RightShoulder_Slot;
+	public UITexture Helm_f_Slot;
+	public UITexture Chest_f_Slot;
+	public UITexture Legs_f_Slot;
+	public UITexture Boots_f_Slot;
+	public UITexture Gloves_f_Slot;
+	public UITexture Helm_m_Slot;
+	public UITexture Chest_m_Slot;
+	public UITexture Legs_m_Slot;
+	public UITexture Boots_m_Slot;
+	public UITexture Gloves_m_Slot;
+	public UITexture LeftHand_Slot;
+	public UITexture RightHand_Slot;
+	public UITexture LeftRing_Slot;
+	public UITexture RightRing_Slot;
+	public UITexture LeftShoulder_Slot;
+	public UITexture RightShoulder_Slot;
 	public UITexture[] BackPack_Slot=new UITexture[8];
 
 	public bool atTopLevel;
@@ -72,7 +72,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	private UWCharacter playerUW;
 
-	private Texture2D Blank;
+	public Texture2D Blank;
 
 	private Container playerContainer;
 	// Use this for initialization
