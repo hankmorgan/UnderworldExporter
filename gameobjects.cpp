@@ -2081,13 +2081,15 @@ void DumpObjectCombinations(char *filePath, int game)
 		}
 	}
 
-void UWCommonObj(char *filePath, int game)
+void UWCommonObj(char *filePathCommon, char *filePathObjects, int game)
 	{
+//Read in the common object and object properties files 
 	FILE *file = NULL;      // File pointer
 	unsigned char *comobj_dat;
+	unsigned char *obj_dat;
 	long fileSize;
 
-	if ((file = fopen(filePath, "rb")) == NULL)
+	if ((file = fopen(filePathCommon, "rb")) == NULL)
 		{
 		fprintf(LOGFILE, "Could not open specified file\n");
 		return;
@@ -2097,33 +2099,38 @@ void UWCommonObj(char *filePath, int game)
 	fread(comobj_dat, fileSize, 1, file);
 	fclose(file);
 	int addressPtr = 2;//First 2 bytes are unknown
+	int j = 0;
 	for (int i = 0; i < fileSize-2 / 11; i++)
 		{
-		printf("%s\n", objectMasters[i].desc);
-		printf("\tHeight = %d\n", getValAtAddress(comobj_dat,addressPtr,8));
-		
-		printf("\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
-		printf("\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
-		printf("\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
-		
-		printf("\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) ) & 0x01);
-		printf("\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
-		printf("\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
-		printf("\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
-		printf("\tFlags (Decal) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);
-		printf("\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
-		printf("\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
-		printf("\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
+		if (j <= 463)
+			{
+			printf("%s\n", objectMasters[j].desc);
+			printf("\tHeight = %d\n", getValAtAddress(comobj_dat, addressPtr, 8));
 
-		printf("\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16) );
+			printf("\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
+			printf("\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
+			printf("\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
 
-		printf("\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8)>>2) & 0x3);
+			printf("\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);
+			printf("\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
+			printf("\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
+			printf("\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
+			printf("\tFlags (Decal) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);
+			printf("\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
+			printf("\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
+			printf("\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
 
-		printf("\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8)>>6) & 0x1);
+			printf("\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16));
 
-		printf("\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
+			printf("\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);
 
-		printf("\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8)>>3 )& 0x1);
+			printf("\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);
+
+			printf("\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
+
+			printf("\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);
+
+			}
 
 	/*	0000  Int8    height
 		0001  Int16   mass / stuff:
@@ -2147,7 +2154,173 @@ void UWCommonObj(char *filePath, int game)
 		000A  Int8    bits 0 - 3 : quality type 0 - f
 			bit 4 : printable "look at" description when 1*/
 		addressPtr = addressPtr + 11;
+		j++;
 		}
+
+
+	if ((file = fopen(filePathObjects, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "Could not open specified file\n");
+		return;
+		}
+	fileSize = getFileSize(file);
+	obj_dat = new unsigned char[fileSize];
+	fread(obj_dat, fileSize, 1, file);
+	fclose(file);
+	addressPtr = 2;
+	j=0;
+	printf("\nWeapons\n\tSlash\tBash\tStab\tSkill\tDurability");
+	for (int i = 0; i < 16; i++)
+		{//The weapons table
+		
+		printf("\n\t%d", getValAtAddress(obj_dat,addressPtr,8));//slash
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr+1, 8));//bash
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr+2, 8));//stab
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Skill
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 7, 8));//Durability
+		printf("\t%s", objectMasters[j].desc);
+		
+		printf("\t(%d", getValAtAddress(obj_dat, addressPtr + 3, 8));//unknown
+		printf(",%d", getValAtAddress(obj_dat, addressPtr + 4, 8));//unknown
+		printf(",%d)", getValAtAddress(obj_dat, addressPtr + 5, 8));//unknown
+		addressPtr=addressPtr+8;
+		j++;
+//		*Melee weapons table(0x0000 - 0x000f)
+//			0000   Int8   damage modifier for Slash attack
+//			0001   Int8   damage modifier for Bash attack
+//			0002   Int8   damage modifier for Stab attack
+//			0003   3      unknown
+//			0006   Int8   skill type(3: sword, 4 : axe, 5 : mace, 6 : unarmed)
+//			0007   Int8   durability
+		}
+	printf("\nAddress is %d\nRanged\n",addressPtr);
+	printf("\n\tRaw\tAmmo\tDurability");
+	for (int i = 0; i < 16; i++)
+		{//Ranged weapons
+			//0000   Int16  unknown
+			//bits 9 - 15: ammunition needed(+0x10)
+			//	0002   Int8   durability
+		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 16));
+		printf("\t%d", ((getValAtAddress(obj_dat,addressPtr,16)>>9) & 0x7F));//is this right at all????
+		printf("\t%d", getValAtAddress(obj_dat,addressPtr+2,8));
+		printf("\t%s", objectMasters[j].desc);
+		addressPtr = addressPtr + 3;
+		j++;
+		}
+
+	printf("\nAddress is %d\nArmour & Wearable\n", addressPtr);
+	printf("\n\tProt\tDurabil\tUnkn\Category");
+	for (int i = 0; i < 32; i++)
+		{
+/*		0000   Int8   protection
+		0001   Int8   durability
+		0002   Int8   unknown
+		0003   Int8   category :
+		    00 : shield
+			01 : body armour
+			03 : leggings
+			04 : gloves
+			05 : boots
+			08 : hat
+			09 : ring
+*/
+		printf("\n\t%d",getValAtAddress(obj_dat,addressPtr,8));//Protection
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr +1 , 8));//durability
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr +2, 8));//Unknown
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr +3, 8));//Category
+		printf("\t%s", objectMasters[j].desc);
+		addressPtr = addressPtr + 4;
+		j++;
+		}
+
+	printf("\nAddress is %d\nCritters\n", addressPtr);
+	for (int i = 0; i < 64; i++)
+		{//Critters
+		addressPtr = addressPtr + 48;
+		j++;
+		}
+
+	printf("\nAddress is %d\nContainers\n", addressPtr);
+	printf("\n\tCap\tTypeofObj\tUnkn\noOfSlots");
+	for (int i = 0; i < 16; i++)
+		{
+/*		*Containers table(0x0080 - 0x008f)
+			0000   Int8   capacity in 0.1 stones
+			0001   Int8   objects accepted; 0: runes, 1 : arrows, 2 : scrolls, 3 : edibles, 0xFF : any
+			0002   Int8   number of slots available ? ; 2:, -1 : any
+*/
+		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Capacity
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//Objects
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//No of Slots
+		printf("\t%s", objectMasters[j].desc);
+		addressPtr = addressPtr + 3;
+		j++;
+		}
+
+
+	printf("\nAddress is %d\nLight Sources\n", addressPtr);
+	printf("\n\tBright\tDuration");
+	for (int i = 0; i < 16; i++)//should be 8
+		{
+		/*
+		* Light source table (0x0090-0x009f)
+		0000   Int8   light brightness (max. is 4; 0 means unlit)
+		0001   Int8   duration (00: doesn't go out, e.g. taper of sacrifice)
+		*/
+		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Brightness.
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//duration
+		printf("\t%s", objectMasters[j].desc);
+		addressPtr = addressPtr + 2;
+		j++;
+		}
+
+	printf("\nAddress is %d\nValuables?\n", addressPtr);
+	printf("\n\t????\t???");
+	for (int i = 0; i < 16; i++)
+		{
+		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));
+		printf("\t%s", objectMasters[j].desc);
+		addressPtr = addressPtr + 2;
+		j++;
+		}
+
+	j = j + 272;
+	printf("\nAddress is %d\nAnimations\n", addressPtr);
+	printf("\n\tunk\tunk\tStart\tNoOfFrames");
+	for (int i = 0; i < 11; i++)
+		{
+		/*
+		0000   Int8   unknown (0x00, 0x21 or 0x84)
+		0001   Int8   unknown (always 0x00)
+		0002   Int8   start frame (from animo.gr)
+		0003   Int8   number of frames
+		*/
+		printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));
+		printf("\t%d", getValAtAddress(obj_dat, addressPtr + 3, 8));
+		printf("\t%s", objectMasters[j].desc);
+		addressPtr = addressPtr + 4;
+		j++;
+		}
+
+//	pos   size     desc                        entries   bytes per entry
+//0000  Int16    unknown, always 0x010f
+//0002  0x80     melee weapons table         16         8 bytes
+//0082  0x30     ranged weapons table        16         3 bytes
+//00b2  0x80     armour and wearables table  32         4 bytes
+//0132  0x0c00   critters table              64        48 bytes
+//0d32  0x30     containers table            16         3 bytes
+//0d62  0x20     light source table          16         2 bytes
+//0d82  0x20     unknown, maybe jewelry info table
+//0da2  0x40     animation object table      16         4 bytes
+//0de2           end
+	printf("DONE");
+
+
+
+
 	return;
 	}
 

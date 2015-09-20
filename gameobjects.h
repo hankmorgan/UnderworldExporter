@@ -358,10 +358,11 @@ short DeathWatch;
 short hasParticle;
 short hasSound;
 char base[80];
-int isSolid;
-int isMoveable;
-int isInventory;
-int isAnimated;
+short isSolid;
+short isMoveable;
+short isInventory;
+short isAnimated;
+short useSprite;
 char InvIcon[80];
 
 char EquippedIconFemaleLowest[80];
@@ -446,5 +447,5 @@ void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);
 extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
 void DumpObjectCombinations(char *filePath, int game);
-void UWCommonObj(char *filePath, int game);
+void UWCommonObj(char *filePathCommon, char *filePathObjects, int game);
 #endif /*gameobjects_h*/

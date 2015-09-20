@@ -21,24 +21,27 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d, %d, %d, %d, %d, %d, %d);"
+		fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d, %d, %d, %d, %d, %d, %d, %d);"
 			, objectMasters[currobj.item_id].InvIcon, 
 			objectMasters[currobj.item_id].type, currobj.item_id,
 			currobj.link, currobj.quality, currobj.owner,
 			objectMasters[currobj.item_id].isMoveable,
-			objectMasters[currobj.item_id].isAnimated);
+			objectMasters[currobj.item_id].isAnimated,
+			objectMasters[currobj.item_id].useSprite);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
 	{
 	//TODO: put control of object string into config file.
 	//fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"OBJECTS_%03d\",%d,%d, %d);", currobj.item_id, objectMasters[currobj.item_id].type, currobj.item_id, objectMasters[currobj.item_id].isMoveable);
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d, %d, \"%s\");"
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",%d,%d, %d, %d, %d \"%s\");"
 		, objectMasters[currobj.item_id].InvIcon, 
 		objectMasters[currobj.item_id].type, currobj.item_id, 
 		currobj.link, currobj.quality, currobj.owner,
 		objectMasters[currobj.item_id].isMoveable,
-		objectMasters[currobj.item_id].isAnimated, ChildName);
+		objectMasters[currobj.item_id].isAnimated, 
+		objectMasters[currobj.item_id].useSprite,
+		ChildName);
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])

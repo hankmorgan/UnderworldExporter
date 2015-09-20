@@ -42,6 +42,7 @@ int main()
 	char Graphics_File[255];
 	char Graphics_Pal[255];
 	char FileToOpen[255];//Generic use file
+	char FileToOpen2[255];//Generic use file
 	char TempOutFileName[255];
 	char auxPalPath[255];
 	char path_target_platform[100];
@@ -241,11 +242,14 @@ int main()
 
 	//UW Common Object properties files
 	const char *uw_comp_file;
+	const char *uw_obj_prop_file;
 	uw_comp_file = "DATA\\comobj.dat";
+	uw_obj_prop_file = "DATA\\Objects.dat";
 
 	const char *uw2_comp_file;
+	const char *uw2_obj_prop_file;
 	uw2_comp_file = "DATA\\comobj.dat";
-
+	uw2_obj_prop_file = "DATA\\Objects.dat";
 
 	levelNo = -1;
 	if (true)
@@ -903,13 +907,15 @@ int main()
 						case UW1:
 							{
 							sprintf_s(FileToOpen, 255, "%s\\%s", path_uw1, uw_comp_file);
-							UWCommonObj(FileToOpen, game);
+							sprintf_s(FileToOpen2, 255, "%s\\%s", path_uw1, uw_obj_prop_file);
+							UWCommonObj(FileToOpen,FileToOpen2, game);
 							break;
 							}
 						case UW2:
 							{
 							sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_comp_file);
-							UWCommonObj(FileToOpen, game);
+							sprintf_s(FileToOpen, 255, "%s\\%s", path_uw2, uw2_obj_prop_file);
+							UWCommonObj(FileToOpen, FileToOpen2, game);
 							break;
 							}
 					}
@@ -953,6 +959,7 @@ void LoadConfig(int game, int mode)
 	int isMoveable;
 	int isInventory;
 	int isAnimated;
+	int useSprite;
 
 
 	int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
@@ -1070,12 +1077,12 @@ void LoadConfig(int game, int mode)
 					{
 					while (fgets(line, 500, f))
 						{                                                             //v
-						sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s %s %s %s %s %s %s %s %s %d",
+						sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s %s %s %s %s %s %s %s %s %d %d",
 							&objNo, &objClass, &objSubClass, &objSubClassIndex, &objCat, &objType,
 							&objDesc, &objPath, &hasPart, &objParticle, &hasSound, &objSound, &objBase, &isSolid, &isMoveable, &isInventory, &invIcon,
 							&EquippedIconFemaleLowest, &EquippedIconFemaleLow, &EquippedIconFemaleMedium, &EquippedIconFemaleBest,
 							&EquippedIconMaleLowest, &EquippedIconMaleLow, &EquippedIconMaleMedium, &EquippedIconMaleBest,
-							&isAnimated);
+							&isAnimated, &useSprite);
 						objectMasters[objNo].index = objNo;
 						objectMasters[objNo].isSet = 1;
 						objectMasters[objNo].objClass = objClass;
@@ -1118,6 +1125,7 @@ void LoadConfig(int game, int mode)
 						objectMasters[objNo].isMoveable = isMoveable;
 						objectMasters[objNo].isInventory = isInventory;
 						objectMasters[objNo].isAnimated = isAnimated;
+						objectMasters[objNo].useSprite = useSprite;
 						strcpy_s(objectMasters[objNo].InvIcon, invIcon);
 
 						//printf("uw1_object_%03d.prt\n",objNo);
