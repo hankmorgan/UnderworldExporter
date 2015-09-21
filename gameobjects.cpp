@@ -2281,19 +2281,20 @@ void UWCommonObj(int game)
 		j++;
 		}
 
-	printf("\nAddress is %d\nLight Sources\n", addressPtr);
-	printf("\n\tBright\tDuration");
+	//printf("\nAddress is %d\nLight Sources\n", addressPtr);
+	//printf("\n\tBright\tDuration");
 	for (int i = 0; i < 16; i++)//should be 8
 		{
 		/*
 		* Light source table (0x0090-0x009f)
+		TODO:This is the wrong way around in UWSpecs!
 		0000   Int8   light brightness (max. is 4; 0 means unlit)
 		0001   Int8   duration (00: doesn't go out, e.g. taper of sacrifice)
 		*/
-		//printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Brightness.
-		objectMasters[j].uwProperties[UW_PROP_LIGHT_BRIGHTNESS] = getValAtAddress(obj_dat, addressPtr, 8);
 		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//duration
-		objectMasters[j].uwProperties[UW_PROP_LIGHT_DURATION] = getValAtAddress(obj_dat, addressPtr+1, 8);
+		objectMasters[j].uwProperties[UW_PROP_LIGHT_DURATION] = getValAtAddress(obj_dat, addressPtr, 8);
+		//printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 8));//Brightness.
+		objectMasters[j].uwProperties[UW_PROP_LIGHT_BRIGHTNESS] = getValAtAddress(obj_dat, addressPtr + 1, 8);
 		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 2;
 		j++;

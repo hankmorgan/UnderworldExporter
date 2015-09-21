@@ -27,16 +27,16 @@ public class WindowDetect : MonoBehaviour {
 	void Update () {
 		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==true))
 		{
-			if(playerUW.AttackCharging==0)
+			if(playerUW.AttackCharging==false)
 			{//Begin the attack
 				playerUW.MeleeBegin();
 			}
-			if ((playerUW.AttackCharging==1) && (playerUW.Charge<100))
+			if ((playerUW.AttackCharging==true) && (playerUW.Charge<100))
 			{//While still charging increase the charge by the charge rate.
 				playerUW.MeleeCharging ();
 			}
 		}
-		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==false) && (playerUW.AttackCharging==1))
+		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==false) && (playerUW.AttackCharging==true))
 		{//Player has been building an attack up and has released it.
 			playerUW.MeleeExecute();
 		}
@@ -51,7 +51,7 @@ public class WindowDetect : MonoBehaviour {
 		}
 		else
 		{
-			playerUW.AttackCharging=0;
+			playerUW.AttackCharging=false;
 			playerUW.Charge=0;
 			playerUW.CursorInMainWindow=false;
 			//MessageLog.text="unHover window";
@@ -124,6 +124,11 @@ void UseObjectInHand()
 				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{
 					hit.transform.gameObject.GetComponent<ObjectInteraction>().Use();
+				}
+				else
+				{
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					pInv.ObjectInHand="";
 				}
 			}
 		}

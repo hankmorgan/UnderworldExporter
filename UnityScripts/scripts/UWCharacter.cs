@@ -35,7 +35,7 @@ public class UWCharacter : MonoBehaviour {
 	private UILabel MessageLog;
 
 	//Combat variables
-	public int AttackCharging;
+	public bool AttackCharging;
 	public float Charge;
 	public float chargeRate=33.0f;
 
@@ -321,15 +321,15 @@ public class UWCharacter : MonoBehaviour {
 
 	public void MeleeBegin()
 	{//Begins to charge and attack. 
-		AttackCharging=1;
+		AttackCharging=true;
 		Charge=0;
-		Debug.Log ("attack charging begun");
+		//Debug.Log ("attack charging begun");
 	}
 
 	public void MeleeCharging()	
 	{//While still charging increase the charge by the charge rate.
 		Charge=(Charge+(chargeRate*Time.deltaTime));
-		Debug.Log ("Charging up ");
+		//Debug.Log ("Charging up ");
 		if (Charge>100)
 		{
 			Charge=100;
@@ -340,7 +340,7 @@ public class UWCharacter : MonoBehaviour {
 	public void MeleeExecute()
 	{
 		Debug.Log ("Attack released");//with charge of " + Charge +"%");
-		AttackCharging=0;
+
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
@@ -361,6 +361,8 @@ public class UWCharacter : MonoBehaviour {
 		{
 			Debug.Log ("MISS");
 		}
+		AttackCharging=false;
+		Charge=0.0f;
 	}
 
 	public void AttackModeMelee()
@@ -368,15 +370,15 @@ public class UWCharacter : MonoBehaviour {
 		return;
 		//Begins to charge and attack. 
 		//As long as the cursor is in the main window the attack will continue to build up.
-		if(Input.GetMouseButton(1) && (CursorInMainWindow==true) && (AttackCharging==0))
+		if(Input.GetMouseButton(1) && (CursorInMainWindow==true) && (AttackCharging==false))
 		{//Begin the attack.
 			MeleeBegin();
 		}
-		if ((AttackCharging==1) && (Charge<100))
+		if ((AttackCharging==true) && (Charge<100))
 		{//While still charging increase the charge by the charge rate.
 			MeleeCharging ();
 		}
-		if (Input.GetMouseButtonUp (1) && (CursorInMainWindow==true) && (AttackCharging==1))
+		if (Input.GetMouseButtonUp (1) && (CursorInMainWindow==true) && (AttackCharging==true))
 		{//On right click find out what is at the mouse cursor and execute the attack along the raycast
 			MeleeExecute ();
 		}

@@ -152,13 +152,13 @@ public class InventorySlot : MonoBehaviour {
 
 	void UseFromSlot()
 	{
-		Debug.Log ("UseFromSlot");
+		//Debug.Log ("UseFromSlot");
 		pInv = player.GetComponent<PlayerInventory>();
 		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
 		if (ObjectName !="")
 		{
 			GameObject currObj = GameObject.Find (ObjectName);
-			Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
+			//Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
 			//TODO move this code to objinteract.activate()
 			/*if (currObjInt.isContainer)

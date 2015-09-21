@@ -116,6 +116,34 @@ public class PlayerInventory : MonoBehaviour {
 
 	void UpdateUW()
 	{
+		//Check for lights
+		Light lt = this.gameObject.GetComponent<Light>();
+		LightSource ls = null;
+		int MaxBrightness=0;
+		for (int i = 5; i<=8; i++)
+		{
+			ls = null;
+			if (GetObjectAtSlot(i) != "")
+			{
+				GameObject objAtSlot = GameObject.Find (GetObjectAtSlot(i));
+				if (objAtSlot != null)
+				{
+					ls =objAtSlot.GetComponent<LightSource>();
+					if (ls != null)
+					{
+						if (ls.IsOn==true)
+						{
+							if (MaxBrightness < ls.Brightness)
+							{
+								MaxBrightness=ls.Brightness;
+							}
+						}
+					}
+				}
+			}					
+		}
+		lt.range=LightSource.BaseBrightness+MaxBrightness;
+
 		if (playerUW.isFemale==true)
 		{//female
 			DisplayGameObject (sHelm,Helm_f_Slot,true,ref bHelm);
@@ -610,6 +638,98 @@ public class PlayerInventory : MonoBehaviour {
 		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 		//playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
 		Refresh();
+	}
+
+
+	public bool RemoveItem(string ObjectName)
+	{//Removes the item from the paperdoll and the current container.
+		if (sHelm==ObjectName)
+		{
+			sHelm="";
+			bHelm=true;
+			return true;
+		}
+		if (sChest==ObjectName)
+		{
+			sChest="";
+			bChest=true;
+			return true;
+		}
+		
+		if (sLegs==ObjectName)
+		{
+			sLegs="";
+			bLegs=true;
+			return true;
+		}
+		
+		if (sBoots==ObjectName)
+		{
+			sBoots="";
+			bBoots=true;
+			return true;
+		}
+		
+		if (sGloves==ObjectName)
+		{
+			sGloves="";
+			bGloves=true;
+			return true;
+		}
+		
+		if (sRightShoulder==ObjectName)
+		{
+			sRightShoulder="";
+			bRightShoulder=true;
+			return true;
+		}
+		
+		if (sLeftShoulder==ObjectName)
+		{
+			sLeftShoulder="";
+			bLeftShoulder=true;
+			return true;
+		}
+		
+		if (sRightHand==ObjectName)
+		{
+			sRightHand="";
+			bRightHand=true;
+			return true;
+		}
+		
+		if (sLeftHand==ObjectName)
+		{
+			sLeftHand="";
+			bLeftHand=true;
+			return true;
+		}
+		
+		if (sRightRing==ObjectName)
+		{
+			sRightRing="";
+			bRightRing=true;
+			return true;
+		}
+		
+		if (sLeftRing==ObjectName)
+		{
+			sLeftRing="";
+			bLeftRing=true;
+			return true;
+		}
+		Container backpack = GameObject.Find(this.currentContainer).GetComponent<Container>();
+		for (int i =0; i<8;i++)
+		{
+			if (ObjectName == backpack.items[i])
+			{
+				backpack.items[i]="";
+				sBackPack[i]="";
+				bBackPack[i]=true;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public bool RemoveItemFromEquipment(string ObjectName)
