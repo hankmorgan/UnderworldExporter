@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Boots : MonoBehaviour {
-	public int Durability;
+public class Boots : Armour {
+	/*public int Durability;
 	public int Protection;
 
 	public string EquipFemaleLowest; 
@@ -58,5 +58,5 @@ public class Boots : MonoBehaviour {
 	void SetEquipTexture(string EquipTexture)
 	{
 		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
-	}
+	}*/
 }

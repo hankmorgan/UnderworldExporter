@@ -58,7 +58,7 @@ public class ContainerOpened : MonoBehaviour {
 			else
 			{
 				//GetComponent<UISprite>().spriteName=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryString;
-				GetComponent<UITexture>().mainTexture=DestinationContainer.transform.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
+				GetComponent<UITexture>().mainTexture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 			}
 			for (int i = 0; i<8; i++)
 			{
@@ -76,7 +76,7 @@ public class ContainerOpened : MonoBehaviour {
 			{//Object has moved
 				//UWCharacter playerUW = player.GetComponent<UWCharacter>();
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
+				//playerUW.CurrObjectSprite = "";
 				pInv.ObjectInHand="";
 			}
 		}

@@ -56,7 +56,7 @@ public class TextureController : MonoBehaviour {
 			}
 		ObjectDstImage[index]=pal.ApplyPalette(ObjectSrcImage[index]);
 		ObjectDstSprite[index]=Sprite.Create(ObjectDstImage[index] ,new Rect(0,0,ObjectDstImage[index].width,ObjectDstImage[index].height), new Vector2(0.5f, 0.0f));
-
+		ObjectDstSprite[index].texture.filterMode=FilterMode.Point;
 		return ObjectDstSprite[index];
 	}
 

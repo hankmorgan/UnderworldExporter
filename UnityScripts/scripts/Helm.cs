@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Helm : MonoBehaviour {
-	public int Durability;
+public class Helm : Armour {
+	/*public int Durability;
 	public int Protection;
 	public string EquipFemaleLowest; 
 	public string EquipFemaleLow;
@@ -59,5 +59,5 @@ public class Helm : MonoBehaviour {
 	{
 		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
 
-	}
+	}*/
 }

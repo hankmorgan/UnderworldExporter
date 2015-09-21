@@ -51,7 +51,7 @@ public class RuneBag : MonoBehaviour {
 			GameObject.Destroy(ObjectUsed);
 			pInv.ObjectInHand="";
 			playerUW.CursorIcon= playerUW.CursorIconDefault;
-			playerUW.CurrObjectSprite = "";
+			//playerUW.CurrObjectSprite = "";
 			return true;
 		}
 		else

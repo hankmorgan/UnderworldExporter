@@ -311,7 +311,7 @@ public class InventorySlot : MonoBehaviour {
 				{
 				pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
+				//playerUW.CurrObjectSprite = "";
 				pInv.ObjectInHand="";
 				}
 			//PickupFromSlot();
@@ -335,8 +335,8 @@ public class InventorySlot : MonoBehaviour {
 						{//Pick up the item at that slot.
 						//TODO: Make this work with Equipment slots
 						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
-						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						//playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 							{
 							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
@@ -372,8 +372,8 @@ public class InventorySlot : MonoBehaviour {
 					if (ObjectUsedOn.GetComponent<Container>() !=null)
 					{
 						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
-						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						//playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 						{
 							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
@@ -392,7 +392,7 @@ public class InventorySlot : MonoBehaviour {
 				{
 				pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
+				//playerUW.CurrObjectSprite = "";
 				pInv.ObjectInHand="";
 				}
 			}
@@ -424,8 +424,8 @@ public class InventorySlot : MonoBehaviour {
 					if (DoNotPickup==false)
 						{
 						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
-						playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
+						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						//playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 						{
 							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();

@@ -203,13 +203,13 @@ public class PlayerInventory : MonoBehaviour {
 				if (isEquipped==true)
 				{
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquipString;
-					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().EquipDisplay.texture;
+					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().GetEquipDisplay().texture;
 				}
 				else
 				{
 					//Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
-					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
+					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				}
 			}
 			else
@@ -607,8 +607,8 @@ public class PlayerInventory : MonoBehaviour {
 			cn.AddItemToContainer(cObjectInHand,slotIndex-11);
 			}
 		ObjectInHand= ObjInSlot.name;
-		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().InventoryDisplay.texture;
-		playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
+		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+		//playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
 		Refresh();
 	}
 

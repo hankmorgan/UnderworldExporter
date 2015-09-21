@@ -85,6 +85,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int LEGGINGS =77;
 
 	private UILabel MessageLog;
+
 	public Sprite InventoryDisplay;
 	public Sprite EquipDisplay;
 	public Sprite WorldDisplay;
@@ -171,6 +172,36 @@ public class ObjectInteraction : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	public Sprite GetInventoryDisplay()
+	{
+		return InventoryDisplay;
+	}
+
+	public void SetInventoryDisplay(Sprite NewSprite)
+	{
+		InventoryDisplay=NewSprite;
+	}
+
+	public Sprite GetEquipDisplay()
+	{
+		return EquipDisplay;
+	}
+	
+	public void SetEquipDisplay(Sprite NewSprite)
+	{
+		EquipDisplay=NewSprite;
+	}
+
+	public Sprite GetWorldDisplay()
+	{
+		return WorldDisplay;
+	}
+	
+	public void SetWorldDisplay(Sprite NewSprite)
+	{
+		WorldDisplay=NewSprite;
 	}
 
 	public void RefreshAnim()
@@ -314,8 +345,14 @@ public class ObjectInteraction : MonoBehaviour {
 			//nothing
 		case CORPSE://CORPSE 33
 			//Nothing
+			break;
 		case TMAP_SOLID://TMAP_SOLID 34
 		case TMAP_CLIP://TMAP_CLIP 35
+			{
+			TMAP tm = this.GetComponent<TMAP>();
+			tm.LookAt();
+			return true;
+			}
 		case MAGICSCROLL://MAGICSCROLL 36
 		case A_DAMAGE_TRAP: //A_DAMAGE_TRAP 37
 		case A_TELEPORT_TRAP://A_TELEPORT_TRAP 38
@@ -334,6 +371,7 @@ public class ObjectInteraction : MonoBehaviour {
 		case A_CHECK_VARIABLE_TRAP://A_CHECK_VARIABLE_TRAP 51
 		case A_COMBINATION_TRAP://A_COMBINATION_TRAP 52
 		case A_TEXT_STRING_TRAP://A_TEXT_STRING_TRAP 53
+			break;
 		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
 		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
 		case A_USE_TRIGGER://A_USE_TRIGGER 56
@@ -449,7 +487,7 @@ public class ObjectInteraction : MonoBehaviour {
 								objDoor.ActivateByObject(ObjectInHand);
 								//Clear the object in hand
 								playerUW.CursorIcon= playerUW.CursorIconDefault;
-								playerUW.CurrObjectSprite = "";
+								//playerUW.CurrObjectSprite = "";
 								pInv.ObjectInHand="";
 								return true;	
 								}
@@ -464,7 +502,7 @@ public class ObjectInteraction : MonoBehaviour {
 			case KEY://	KEY 5
 				{//A key just becomes the object in hand
 				playerUW.CursorIcon= InventoryDisplay.texture;
-				playerUW.CurrObjectSprite = InventoryString;
+				//playerUW.CurrObjectSprite = InventoryString;
 				pInv.ObjectInHand=this.name;
 					return false;
 				}
@@ -548,7 +586,7 @@ public class ObjectInteraction : MonoBehaviour {
 					}
 					pInv.ObjectInHand= "";
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					playerUW.CurrObjectSprite = "";
+					//playerUW.CurrObjectSprite = "";
 					
 					return true;
 					}
@@ -609,8 +647,14 @@ public class ObjectInteraction : MonoBehaviour {
 			//nothing
 		case CORPSE://CORPSE 33
 			//Nothing
+			break;
 		case TMAP_SOLID://TMAP_SOLID 34
 		case TMAP_CLIP://TMAP_CLIP 35
+			{
+			TMAP tm = this.GetComponent<TMAP>();
+			tm.Use();
+			return true;
+			}
 		case MAGICSCROLL://MAGICSCROLL 36
 		case A_DAMAGE_TRAP: //A_DAMAGE_TRAP 37
 		case A_TELEPORT_TRAP://A_TELEPORT_TRAP 38
@@ -629,6 +673,7 @@ public class ObjectInteraction : MonoBehaviour {
 		case A_CHECK_VARIABLE_TRAP://A_CHECK_VARIABLE_TRAP 51
 		case A_COMBINATION_TRAP://A_COMBINATION_TRAP 52
 		case A_TEXT_STRING_TRAP://A_TEXT_STRING_TRAP 53
+			break;
 		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
 		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
 		case A_USE_TRIGGER://A_USE_TRIGGER 56
@@ -636,6 +681,12 @@ public class ObjectInteraction : MonoBehaviour {
 		case A_STEP_ON_TRIGGER://A_STEP_ON_TRIGGER 58
 		case AN_OPEN_TRIGGER://AN_OPEN_TRIGGER 59
 		case AN_UNLOCK_TRIGGER://AN_UNLOCK_TRIGGER 60
+		{
+			Debug.Log ("Activating trigger in use");
+			TriggerHandler th = this.GetComponent<TriggerHandler>();
+			th.Activate();
+			return true;
+		}
 		case A_FOUNTAIN://A_FOUNTAIN	61
 		case SHOCK_DECAL://SHOCK_DECAL 62
 		case COMPUTER_SCREEN://COMPUTER_SCREEN 63
@@ -768,6 +819,7 @@ public class ObjectInteraction : MonoBehaviour {
 		else
 			{
 			sr.sprite= tc.RequestSprite(WorldDisplayIndex);
+			InventoryDisplay= tc.RequestSprite(InvDisplayIndex);
 			}
 		//sr.sprite= tc.RequestSprite(item_id);
 		//InventoryDisplay=sr.sprite;

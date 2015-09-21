@@ -162,7 +162,7 @@ void ThrowObjectInHand()
 					droppedItem.rigidbody.AddForce(ThrowDir*force);
 					//Clear the object and reset the cursor
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					playerUW.CurrObjectSprite = "";
+					//playerUW.CurrObjectSprite = "";
 					pInv.ObjectInHand="";
 				}
 			}

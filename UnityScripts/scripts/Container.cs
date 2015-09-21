@@ -316,7 +316,7 @@ public class Container : MonoBehaviour {
 			return;
 			}
 		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
-		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.InventoryDisplay.texture;
+		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetInventoryDisplay().texture;
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
 		//display the container contents.
 		//Container currObjCont = currObj.GetComponent<Container>();

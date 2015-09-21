@@ -748,9 +748,18 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	//y = (currobj.tileX*BrushSizeX + (BrushSizeX / 2));
 //	z = (LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ)/100.0;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	SetScale(0.9375f,0.9375f,0.9375f);
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\");", textureMasters[currobj.texture].path);
+	if (isTrigger(objList[currobj.link]) != 0)
+		{
+		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"%s\");", textureMasters[currobj.texture].path, UniqueObjectName(objList[currobj.link]));
+		}
+	else
+		{
+		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"\");", textureMasters[currobj.texture].path);
+		}
+
 	//textureMasters[currobj.texture].path
 	if (game != SHOCK)
 		{
@@ -763,12 +772,12 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	if (isTrigger(objList[currobj.link]) != 0)
 		{
 		//object is a trigger
-		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler");
+		//CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler");
 		}
-	else
-		{
-		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-		}
+	//else
+	//	{
+
+	//	}
 	return;
 	}
 

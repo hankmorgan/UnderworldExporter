@@ -51,11 +51,12 @@ public class Armour : MonoBehaviour {
 				SetEquipTexture(EquipFemaleBest);
 			}
 		}
-		objInt.InventoryDisplay=Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f));
+		objInt.SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
 	}
 	
 	void SetEquipTexture(string EquipTexture)
 	{
 		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
+		
 	}
 }

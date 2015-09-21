@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Leggings : MonoBehaviour {
+public class Leggings : Armour {
+	/*
 	public int Durability;
 	public int Protection;
 	public string EquipFemaleLowest; 
@@ -59,4 +60,5 @@ public class Leggings : MonoBehaviour {
 	{
 		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
 	}
+	*/
 }

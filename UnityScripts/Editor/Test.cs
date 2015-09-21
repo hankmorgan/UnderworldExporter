@@ -43,17 +43,16 @@ public class MyTools
 		////pos = new Vector3(37.885715f, 3.853347f, 1.200000f);
 		///myObj.transform.position = pos;
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
-
 		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
 		Container ParentContainer;
 		myObj= CreateGameObject("special_tmap_obj_31_01_00_0535",37.799999f,3.600000f,1.220000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 559, 0, 37, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_039");
+		CreateTMAP(myObj,"textures/tmap/uw1_039", "a_use_trigger_99_99_00_0559");
 		SetRotation(myObj,0,180,0);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0559",0,37,0,7,366);
 		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_31_01_00_0982",38.057144f,3.600000f,2.380000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
@@ -62,10 +61,10 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
 		myObj= CreateGameObject("special_tmap_obj_32_01_00_0545",39.000000f,3.600000f,1.220000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 574, 0, 46, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_038");
+		CreateTMAP(myObj,"textures/tmap/uw1_038", "a_use_trigger_99_99_00_0574");
 		SetRotation(myObj,0,180,0);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_00_0574",0,46,0,7,366);
 		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_33_01_00_0961",40.285717f,3.600000f,2.228571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
@@ -218,10 +217,10 @@ public class MyTools
 		SetLink(myObj,580);
 		
 		myObj= CreateGameObject("special_tmap_obj_04_04_00_1021",4.820000f,0.000000f,5.400000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 39, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_170");
+		CreateTMAP(myObj,"textures/tmap/uw1_170", "");
 		SetRotation(myObj,0,270,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 39, 0, 0, 1);
 		
 		myObj= CreateGameObject("a_toadstool_16_04_00_0582",19.714287f,3.600000f,5.314286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
@@ -443,10 +442,10 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_060", "Sprites/OBJECTS_060", 78, 60, 0, 27, 0, 1, 0, 1);
 		
 		myObj= CreateGameObject("special_tmap_obj_06_08_00_1022",7.800000f,0.000000f,10.780000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 39, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_170");
+		CreateTMAP(myObj,"textures/tmap/uw1_170", "");
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 39, 0, 0, 1);
 		
 		myObj= CreateGameObject("a_candle_16_08_00_0580",19.371428f,3.600000f,10.628572f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
@@ -528,10 +527,10 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 47, 1, 0, 1);
 		
 		myObj= CreateGameObject("special_tmap_obj_02_10_00_0884",2.420000f,0.000000f,12.600000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_071");
+		CreateTMAP(myObj,"textures/tmap/uw1_071", "");
 		SetRotation(myObj,0,270,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 1);
 		
 		myObj = new GameObject("door_009_010");
 		pos = new Vector3(11.800000f, 0.300000f, 13.180000f);
@@ -547,10 +546,10 @@ public class MyTools
 		CreateWeapon(myObj, 6, 3, 6, 3, 18);
 		
 		myObj= CreateGameObject("special_tmap_obj_23_10_00_0952",28.114285f,3.000000f,12.342857f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 16, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_173");
+		CreateTMAP(myObj,"textures/tmap/uw1_173", "");
 		SetRotation(myObj,0,315,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 16, 0, 0, 1);
 		
 		myObj= CreateGameObject("leather_leggings_pairs_of_leather_leggings_24_10_00_0939",29.314285f,3.000000f,12.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_035",true);
@@ -562,10 +561,10 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 0, 40, 0, 1, 0, 1);
 		
 		myObj= CreateGameObject("special_tmap_obj_29_10_00_0999",35.400002f,3.000000f,13.180000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 2, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_023");
+		CreateTMAP(myObj,"textures/tmap/uw1_023", "");
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 2, 0, 0, 1);
 		
 		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_31_10_00_0978",37.714283f,3.000000f,12.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
@@ -612,16 +611,16 @@ public class MyTools
 		
 		
 		myObj= CreateGameObject("special_tmap_obj_02_11_00_0883",2.420000f,0.000000f,13.800000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_071");
+		CreateTMAP(myObj,"textures/tmap/uw1_071", "");
 		SetRotation(myObj,0,270,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 1);
 		
 		myObj= CreateGameObject("special_tmap_obj_02_12_00_0882",2.420000f,0.000000f,15.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_071");
+		CreateTMAP(myObj,"textures/tmap/uw1_071", "");
 		SetRotation(myObj,0,270,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 1);
 		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_09_12_00_0868",11.657143f,0.300000f,15.257142f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
@@ -780,7 +779,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", 73, 44, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3559300, 3559300);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 4147292, 4147292);
 		
 		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -940,10 +939,10 @@ public class MyTools
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("special_tmap_obj_27_20_00_0987",33.580002f,3.000000f,24.600000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_137");
+		CreateTMAP(myObj,"textures/tmap/uw1_137", "");
 		SetRotation(myObj,0,90,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 1);
 		
 		
 		
@@ -956,10 +955,10 @@ public class MyTools
 		
 		
 		myObj= CreateGameObject("special_tmap_obj_61_20_00_0885",74.379997f,2.100000f,24.600000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_071");
+		CreateTMAP(myObj,"textures/tmap/uw1_071", "");
 		SetRotation(myObj,0,90,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 1);
 		
 		myObj = new GameObject("door_026_021");
 		pos = new Vector3(32.200001f, 3.000000f, 26.228571f);
@@ -1081,10 +1080,10 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 0, 1);
 		
 		myObj= CreateGameObject("special_tmap_obj_35_32_00_0881",42.020000f,3.600000f,39.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_142");
+		CreateTMAP(myObj,"textures/tmap/uw1_142", "");
 		SetRotation(myObj,0,270,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 1);
 		
 		
 		
@@ -1105,10 +1104,10 @@ public class MyTools
 		
 		
 		myObj= CreateGameObject("special_tmap_obj_16_33_00_0806",19.799999f,2.100000f,40.779999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 14, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_006");
+		CreateTMAP(myObj,"textures/tmap/uw1_006", "");
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 14, 0, 0, 1);
 		
 		myObj = new GameObject("a_flesh_slug_26_33_00_0207");
 		pos = new Vector3(31.714285f, 2.100000f, 40.114285f);
@@ -1137,7 +1136,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", 73, 45, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3559300, 3559300);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 4147292, 4147292);
 		
 		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1153,10 +1152,10 @@ public class MyTools
 		
 		
 		myObj= CreateGameObject("special_tmap_obj_07_34_00_0916",8.420000f,0.000000f,41.400002f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_137");
+		CreateTMAP(myObj,"textures/tmap/uw1_137", "");
 		SetRotation(myObj,0,270,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 1);
 		
 		myObj = new GameObject("door_015_034");
 		pos = new Vector3(18.200001f, 2.100000f, 41.657143f);
@@ -1412,7 +1411,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", 73, 44, 0, 30, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3558524, 3558524);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 4146516, 4146516);
 		myObj.transform.position = invMarker.transform.position;
 		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
@@ -2268,16 +2267,16 @@ public class MyTools
 		
 		
 		myObj= CreateGameObject("special_tmap_obj_24_61_00_0886",29.400000f,1.200000f,74.379997f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_071");
+		CreateTMAP(myObj,"textures/tmap/uw1_071", "");
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 1);
 		
 		myObj= CreateGameObject("special_tmap_obj_25_61_00_0887",30.600000f,1.200000f,74.379997f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_071");
+		CreateTMAP(myObj,"textures/tmap/uw1_071", "");
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 19, 0, 0, 1);
 		
 		myObj= CreateGameObject("some_writing_30_61_00_0665",36.514286f,2.400000f,74.379997f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
@@ -2310,10 +2309,10 @@ public class MyTools
 		SetLink(myObj,579);
 		
 		myObj= CreateGameObject("special_tmap_obj_38_61_00_0903",46.200001f,2.400000f,74.379997f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0);
 		SetScale(myObj,(float)0.937500,(float)0.937500,(float)0.937500);
-		CreateTMAP(myObj,"textures/tmap/uw1_160");
+		CreateTMAP(myObj,"textures/tmap/uw1_160", "");
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 1);
 		
 		myObj= CreateGameObject("a_set_variable_trap_99_99_00_0004",120.000000f,1.387500f,119.142860f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
@@ -2495,12 +2494,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3559580);
+		Create_a_do_trap(myObj,3,4147572);
 		
 		myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3559580);
+		Create_a_do_trap(myObj,3,4147572);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2515,12 +2514,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3559580);
+		Create_a_do_trap(myObj,3,4147572);
 		
 		myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3559580);
+		Create_a_do_trap(myObj,3,4147572);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2674,6 +2673,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
+
 
 	
 
@@ -5056,26 +5056,26 @@ public class MyTools
 
 		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
 		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
-		if (objSprite==null)
-		{
-			Debug.Log (parentObj.name + ": can't find spriterenderer");
-		}
-		else
-		{
-			Texture2D TexWorld = Resources.Load <Texture2D> ("Sprites/OBJECTS_"+ objInteract.WorldDisplayIndex.ToString("000"));
-			Texture2D TexInv = Resources.Load <Texture2D> ("Sprites/OBJECTS_"+ objInteract.InvDisplayIndex.ToString("000"));
+		//if (objSprite==null)
+		//{
+		//	Debug.Log (parentObj.name + ": can't find spriterenderer");
+		//}
+		//else
+		//{
+			//Texture2D TexWorld = Resources.Load <Texture2D> ("Sprites/OBJECTS_"+ objInteract.WorldDisplayIndex.ToString("000"));
+			//Texture2D TexInv = Resources.Load <Texture2D> ("Sprites/OBJECTS_"+ objInteract.InvDisplayIndex.ToString("000"));
 
-			Sprite sr = Sprite.Create(TexWorld,new Rect(0,0,TexWorld.width,TexWorld.height),new Vector2(0.5f,0.0f));
-			objInteract.WorldDisplay=sr;
+			//Sprite sr = Sprite.Create(TexWorld,new Rect(0,0,TexWorld.width,TexWorld.height),new Vector2(0.5f,0.0f));
+			//objInteract.WorldDisplay=sr;
 
-			sr = Sprite.Create(TexInv,new Rect(0,0,TexInv.width,TexInv.height),new Vector2(0.5f,0.0f));
-			objInteract.InventoryDisplay=sr;
+			//sr = Sprite.Create(TexInv,new Rect(0,0,TexInv.width,TexInv.height),new Vector2(0.5f,0.0f));
+			//objInteract.InventoryDisplay=sr;
 
 
 
 			//objInteract.InventoryDisplay = objSprite.sprite;
 			//objInteract.EquipDisplay=objSprite.sprite;
-		}
+		//}
 		objInteract.WorldString=WorldString;
 		objInteract.InventoryString=InventoryString;
 		//objInteract.InventoryDisplay=InventoryString;
@@ -5715,13 +5715,19 @@ public class MyTools
 		box.isTrigger=isTrigger;
 	}
 
-	static void CreateTMAP(GameObject myObj, string AssetPath)
+	static void CreateTMAP(GameObject myObj, string AssetPath, string trigger)
 	{
 		SpriteRenderer mysprite = myObj.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
 		Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
 		mysprite.sprite = image;//Assigns the sprite to the object.
 		Material myMaterial = Resources.Load("Materials/tmap", typeof(Material)) as Material;
 		mysprite.material  = myMaterial;
+		TMAP tm = myObj.AddComponent<TMAP>();
+		tm.trigger=trigger;
+		BoxCollider bx = myObj.AddComponent<BoxCollider>();
+		bx.size=new Vector3(1.25f,1.25f,0.1f);
+		bx.center=new Vector3(0.0f,0.65f,0.0f);
+		bx.isTrigger=true;
 	}
 
 	static void AddTrapLink(GameObject myObj, string Trigger)
@@ -5995,7 +6001,7 @@ public class MyTools
 		if (objInt != null)
 			{
 			Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
-			objInt.InventoryDisplay = image;//Assigns the sprite to the object.
+			//objInt.InventoryDisplay = image;//Assigns the sprite to the object.
 			objInt.InventoryString=SpriteName;
 			}
 	}

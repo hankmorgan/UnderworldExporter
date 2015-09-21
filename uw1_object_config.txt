@@ -364,8 +364,8 @@
 363 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_363 0 L M 1 1 1 Sprites/OBJECTS_363 Sprites/OBJECTS_363 S T U Sprites/OBJECTS_363 W x Y 0 1
 364 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_364 0 L M 1 1 1 Sprites/OBJECTS_364 Sprites/OBJECTS_364 S T U Sprites/OBJECTS_364 W x Y 0 1
 365 0 0 0 model 23 force_field H 0 Sprites/OBJECTS_365 0 L M 1 1 1 Sprites/OBJECTS_365 Sprites/OBJECTS_365 S T U Sprites/OBJECTS_365 W x Y 0 1
-366 0 0 0 entity 34 special_tmap_obj H 0 Sprites/OBJECTS_366 0 L M 0 0 0 Sprites/OBJECTS_366 Sprites/OBJECTS_366 S T U Sprites/OBJECTS_366 W x Y 0 1
-367 0 0 0 entity 35 special_tmap_obj H 0 Sprites/OBJECTS_367 0 L M 0 0 0 Sprites/OBJECTS_367 Sprites/OBJECTS_367 S T U Sprites/OBJECTS_367 W x Y 0 1
+366 0 0 0 entity 34 special_tmap_obj H 0 Sprites/OBJECTS_366 0 L M 0 0 0 Sprites/OBJECTS_366 Sprites/OBJECTS_366 S T U Sprites/OBJECTS_366 W x Y 0 0
+367 0 0 0 entity 35 special_tmap_obj H 0 Sprites/OBJECTS_367 0 L M 0 0 0 Sprites/OBJECTS_367 Sprites/OBJECTS_367 S T U Sprites/OBJECTS_367 W x Y 0 0
 368 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_368 0 L M 1 0 1 Sprites/OBJECTS_368 Sprites/OBJECTS_368 S T U Sprites/OBJECTS_368 W x Y 0 1
 369 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_369 0 L M 1 0 1 Sprites/OBJECTS_369 Sprites/OBJECTS_369 S T U Sprites/OBJECTS_369 W x Y 0 1
 370 0 0 0 entity 8 a_button H 0 Sprites/OBJECTS_370 0 L M 1 0 1 Sprites/OBJECTS_370 Sprites/OBJECTS_370 S T U Sprites/OBJECTS_370 W x Y 0 1

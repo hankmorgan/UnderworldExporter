@@ -19,7 +19,7 @@ public class UWCharacter : MonoBehaviour {
 	public Texture2D CursorIcon;
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;
-	public string CurrObjectSprite;
+	//public string CurrObjectSprite;
 	private int cursorSizeX =64;
 	private int cursorSizeY =64;
 
@@ -250,8 +250,8 @@ public class UWCharacter : MonoBehaviour {
 							{
 							objPicked.PickedUp=true;	
 							//MessageLog.text = "You pick up a " + hit.transform.name;
-							CursorIcon=objPicked.InventoryDisplay.texture;
-							CurrObjectSprite=objPicked.InventoryString;
+							CursorIcon=objPicked.GetInventoryDisplay().texture;
+							//CurrObjectSprite=objPicked.InventoryString;
 							pInv.ObjectInHand=hit.transform.name;
 							pInv.JustPickedup=true;//To stop me throwing it away immediately.
 							if (objPicked.rigidbody !=null)
