@@ -124,7 +124,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 58, 2, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bone_07_03_00_0812",8.914286f,0.300000f,4.114285f);
@@ -155,7 +155,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", 19, 128, 940, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_dagger_33_03_00_0940",39.771427f,3.600000f,3.942857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 15, 0, 1, 0, 1);
@@ -249,7 +249,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 55, 4, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_022_005");
@@ -287,7 +287,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 5, 6, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("a_pack_23_06_00_0993",27.771429f,3.000000f,7.542857f);
@@ -295,7 +295,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_130", "Sprites/OBJECTS_130", 19, 130, 948, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 250, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_key_001_3",27.771429f,3.000000f,7.542857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_262",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_262", "Sprites/OBJECTS_262", 5, 262, 0, 40, 1, 1, 0, 1);
@@ -389,7 +389,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 45, 6, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_50_06_00_0228");
@@ -399,7 +399,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 50, 6, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_057_006");
@@ -425,7 +425,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 17, 7, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_024_007");
@@ -471,7 +471,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 22, 8, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,225,0);
 		
 		myObj= CreateGameObject("a_piece_of_cheese_pieces_of_cheese_22_08_00_0945",26.914284f,3.000000f,10.628572f);
@@ -595,7 +595,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", 19, 128, 845, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_candle_38_10_00_0845",46.285713f,3.000000f,12.685714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", 22, 146, 2, 31, 0, 1, 1, 1);
@@ -651,7 +651,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 18, 12, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_box_boxes_20_12_00_0728",24.342857f,3.000000f,15.428572f);
@@ -665,7 +665,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_142", "Sprites/OBJECTS_142", 19, 142, 0, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 50, 2, 3);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		////Container contents complete
 		
 		
@@ -707,7 +707,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 12, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bedroll_33_12_00_0736",40.114285f,2.100000f,15.580000f);
@@ -792,7 +792,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 59, 14, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_vampire_bat_02_15_00_0209");
@@ -802,7 +802,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 2, 15, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
@@ -830,7 +830,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 15, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,90,0);
 		
 		myObj = new GameObject("a_cave_bat_12_16_00_0211");
@@ -840,7 +840,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 12, 16, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_37_16_00_0811",44.571430f,3.000000f,20.057142f);
@@ -879,7 +879,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 17, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		
@@ -933,7 +933,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 19, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_009_019");
@@ -951,7 +951,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 22, 19, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pouch_pouches_10_20_00_0723",12.685714f,3.600000f,25.028572f);
@@ -959,7 +959,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", 19, 134, 814, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 20, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_ruby_rubies_10_20_00_0814",12.685714f,3.600000f,25.028572f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 0, 1);
@@ -987,7 +987,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", 0, 75, 0, 12, 20, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("special_tmap_obj_27_20_00_0987",33.580002f,3.000000f,24.600000f);
@@ -1006,7 +1006,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 20, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,270,0);
 		
 		
@@ -1035,7 +1035,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 22, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bottle_of_ale_bottles_of_ale_02_23_00_0616",2.571429f,2.700000f,28.457144f);
@@ -1050,7 +1050,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 14, 23, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_31_23_00_0212");
@@ -1060,7 +1060,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 31, 23, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("some_leeches_bunches_of_leeches_10_24_00_0701",12.514286f,0.600000f,29.314285f);
@@ -1107,7 +1107,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 29, 26, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("an_ear_of_corn_ears_of_corn_30_26_00_0641",36.342857f,3.600000f,31.371428f);
@@ -1134,7 +1134,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 36, 28, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bone_36_30_00_0859",43.371429f,3.000000f,36.857143f);
@@ -1192,7 +1192,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 26, 33, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_27_33_00_0861",33.257145f,2.100000f,39.942856f);
@@ -1267,7 +1267,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 537, 15, 35, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,180,0);
 		myObj= CreateGameObject("a_key_004_2",18.514286f,2.100000f,42.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_266",true);
@@ -1290,7 +1290,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 54, 35, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,180,0);
 		
 		
@@ -1372,7 +1372,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 3, 38, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,45,0);
 		
 		myObj = new GameObject("a_goblin_11_38_00_0218");
@@ -1382,7 +1382,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 11, 38, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("a_candle_11_38_00_0655",14.228572f,3.600000f,45.771431f);
@@ -1397,7 +1397,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 26, 38, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pile_of_wood_chips_piles_of_wood_chips_36_38_00_0855",43.714287f,3.600000f,46.114288f);
@@ -1425,7 +1425,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 54, 38, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_61_38_00_0856",73.714287f,3.600000f,46.457142f);
@@ -1478,7 +1478,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_138", "Sprites/OBJECTS_138", 19, 138, 684, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_sceptre_49_40_00_0684",59.314285f,3.000000f,48.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_170",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", 18, 170, 760, 40, 0, 1, 0, 1);
@@ -1574,7 +1574,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 8, 43, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_10_43_00_0245");
@@ -1584,7 +1584,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 10, 43, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_23_43_00_0210");
@@ -1594,7 +1594,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 23, 43, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_24_43_00_0208");
@@ -1604,7 +1604,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 24, 43, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_blood_stain_39_43_00_0551",46.971432f,3.600000f,52.457142f);
@@ -1689,7 +1689,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 27, 46, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_stalactite_28_46_00_0787",34.114285f,4.500000f,55.714287f);
@@ -1717,7 +1717,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 0, 4, 47, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_skull_28_47_00_0820",34.457142f,2.400000f,56.914288f);
@@ -1843,7 +1843,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_349", "Sprites/OBJECTS_349", 19, 349, 570, 40, 6, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("an_amulet_03_50_00_0745",3.942857f,3.600000f,60.342857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_168",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_168", "Sprites/OBJECTS_168", 18, 168, 1, 40, 6, 1, 0, 1);
@@ -1864,7 +1864,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 749, 40, 6, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_51_00_0749",3.942857f,3.600000f,61.220001f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_181",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_181", "Sprites/OBJECTS_181", 24, 181, 11, 40, 6, 1, 0, 1);
@@ -1881,7 +1881,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 748, 40, 6, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_03_51_00_0748",4.628572f,3.600000f,62.057144f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 10, 40, 6, 1, 0, 1);
@@ -1898,7 +1898,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 757, 40, 6, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_fish_fish_04_51_00_0757",5.485714f,3.600000f,62.057144f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 6, 40, 6, 1, 0, 1);
@@ -1949,7 +1949,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 60, 51, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_008_052");
@@ -1973,7 +1973,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 52, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,270,0);
 		
 		
@@ -1984,7 +1984,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 52, 52, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_blood_stain_19_53_00_0831",23.314285f,2.700000f,64.114288f);
@@ -2042,7 +2042,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", 0, 83, 0, 19, 54, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,135,0);
 		
 		myObj= CreateGameObject("a_blood_stain_20_54_00_0830",24.514284f,2.700000f,65.314285f);
@@ -2058,7 +2058,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 37, 54, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("a_skull_38_54_00_0803",45.771431f,3.300000f,65.142853f);
@@ -2111,7 +2111,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 46, 55, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_lurker_51_55_00_0206");
@@ -2121,7 +2121,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 51, 55, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_57_55_00_0249");
@@ -2131,7 +2131,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 538, 57, 55, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,270,0);
 		myObj= CreateGameObject("a_key_003_1",68.914284f,3.600000f,66.514290f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_269",true);
@@ -2150,7 +2150,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 810, 4, 56, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,90,0);
 		myObj= CreateGameObject("a_scroll_04_56_00_0810",5.314286f,3.600000f,67.714287f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_318",true);
@@ -2181,7 +2181,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 56, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_47_56_00_0235");
@@ -2191,7 +2191,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 47, 56, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_02_57_00_0231");
@@ -2201,7 +2201,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 534, 2, 57, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,90,0);
 		myObj= CreateGameObject("a_key_004_1",3.580000f,3.600000f,68.742859f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_266",true);
@@ -2270,7 +2270,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 51, 58, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("some_writing_54_58_00_0713",65.980003f,4.200000f,70.457146f);
@@ -2286,7 +2286,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", 19, 128, 694, 40, 0, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_sling_stone_56_58_00_0694",67.542854f,3.600000f,69.942856f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_016",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_016", "Sprites/OBJECTS_016", 1, 16, 22, 40, 0, 1, 0, 1);
@@ -2315,7 +2315,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_138", "Sprites/OBJECTS_138", 19, 138, 708, 40, 9, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_coin_57_58_00_0708",68.914284f,3.600000f,70.114288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_160",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_160", "Sprites/OBJECTS_160", 18, 160, 1, 40, 9, 1, 0, 1);
@@ -2380,7 +2380,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 52, 59, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,90,0);
 		
 		myObj = new GameObject("door_055_059");
@@ -2398,7 +2398,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 37, 60, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		SetRotation(myObj,0,0,0);
 		
 		
@@ -2407,7 +2407,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 705, 40, 9, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_fish_fish_56_60_00_0705",68.057144f,3.600000f,72.685715f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 16, 40, 9, 1, 0, 1);
@@ -2424,7 +2424,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 704, 40, 9, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_57_60_00_0704",69.085716f,3.600000f,72.019997f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_177",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", 24, 177, 3, 40, 9, 1, 0, 1);
@@ -2441,7 +2441,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 0, 40, 9, 1, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
-		myObj.GetComponent<ObjectInteraction>().isContainer = true;
+		
 		////Container contents complete
 		
 		
@@ -5640,7 +5640,7 @@ public class MyTools
 		GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
 		ObjectInteraction doorInteract = myObj.GetComponent<ObjectInteraction>();
-		doorInteract.isDoor=true;
+		//doorInteract.isDoor=true;
 		//doorInteract.ItemType=4;
 		//doorInteract.item_id=-1;//ugh
 		doorInteract.Link = DoorKey;
@@ -5807,9 +5807,11 @@ public class MyTools
 	}
 	static void CreateKey(GameObject myObj, int KeyId)
 	{
-		ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
-		objInt.isKey=true;
-		objInt.Owner=KeyId;
+		//ObjectInteraction objInt = myObj.GetComponent<ObjectInteraction>();
+		//objInt.isKey=true;
+		//objInt.Owner=KeyId;
+		DoorKey dk = myObj.AddComponent<DoorKey>();
+		dk.KeyId=KeyId;
 	}
 
 	static void SetLink(GameObject myObj, int link)

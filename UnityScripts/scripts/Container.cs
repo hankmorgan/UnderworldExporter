@@ -126,7 +126,8 @@ public class Container : MonoBehaviour {
 		Container subContainer = objUseOn.GetComponent<Container>();
 		if (subContainer.AddItemToContainer(objInHand.name))
 		{
-			if (objInHand.GetComponent<ObjectInteraction>().isContainer)
+			Container ObjInHandContainer=objInHand.GetComponent<Container>();
+			if (ObjInHandContainer!=null)
 			{
 				subContainer=objInHand.GetComponent<Container>();
 				subContainer.ContainerParent=objUseOn.name;

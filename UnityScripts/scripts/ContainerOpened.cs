@@ -23,10 +23,11 @@ public class ContainerOpened : MonoBehaviour {
 			{
 				GameObject currObj = GameObject.Find (ClosingParent.items[i]);
 				{
+					Container currObjContainer = currObj.GetComponent<Container>();
 					//Debug.Log ("closing " + currObj.name);
-					if (currObj.GetComponent<ObjectInteraction>().isContainer ==true)
+					if (currObjContainer !=null)
 					{
-						CloseChildContainer (currObj.GetComponent<Container>());
+						CloseChildContainer (currObjContainer);
 					}
 				}
 			}

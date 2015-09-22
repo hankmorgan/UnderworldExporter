@@ -188,7 +188,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 		, 255
 		, 255
 		);
-	fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
+	//fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
 
 	if (game != SHOCK)
 		{
@@ -454,7 +454,7 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 			, objectMasters[currobj.item_id].uwProperties[UW_PROP_CONT_SLOTS]
 			, objectMasters[currobj.item_id].uwProperties[UW_PROP_CONT_OBJECTS]
 			);
-		fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
+		//fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
 
 
 		if (objectMasters[objList[currobj.link].item_id].type == LOCK)	//container has a lock.

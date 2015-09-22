@@ -116,12 +116,12 @@ public class ObjectInteraction : MonoBehaviour {
 
 
 	//TODO: remove these!
-	public bool isContainer;
+	//public bool isContainer;
 	//public bool isRuneBag;
 	//public bool isRuneStone;
 	//public bool isMap;
-	public bool isDoor;
-	public bool isKey;
+	//public bool isDoor;
+	//public bool isKey;
 
 	public int ItemType; //UWexporter item type id
 
@@ -774,7 +774,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 		for (int i =0; i <= lstInput1.GetUpperBound(0);i++)
 		{
-			Debug.Log (i + " is " + lstInput1[i] + " and " + lstInput2[i]);
+			//Debug.Log (i + " is " + lstInput1[i] + " and " + lstInput2[i]);
 			if 
 				(//Check both input lists for the two items
 					((ItemID1 == lstInput1[i]) && (ItemID2==lstInput2[i]))

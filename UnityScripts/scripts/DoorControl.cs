@@ -20,18 +20,24 @@ public class DoorControl : MonoBehaviour {
 	public bool ActivateByObject(GameObject ObjectUsed)
 	{//Code for handling otherobjects used on this object
 	//Doors can be used by keys, picks and spikes.
-		ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction>();
+		//ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction>();
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
 			switch (objIntUsed.ItemType)
 				{
 				case ObjectInteraction.KEY: //Key
-				if(objIntThis.Link==objIntUsed.Owner)//This is a valid key for the door.
+				DoorKey dk = ObjectUsed.GetComponent<DoorKey>();
+				if (dk !=null)
 					{
-					Debug.Log ("A key is used to unlock a door");
-					//DoorControl DC=objUseOn.GetComponent<DoorControl>();
-					ToggleLock();
+						//if(objIntThis.Link==objIntUsed.Owner)//This is a valid key for the door.
+						if(KeyIndex==dk.KeyId)//This is a valid key for the door.
+						{
+							Debug.Log ("A key is used to unlock a door");
+							//DoorControl DC=objUseOn.GetComponent<DoorControl>();
+							ToggleLock();
+						}
+
 					}					
 					break;
 				default:
