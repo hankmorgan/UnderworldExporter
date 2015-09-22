@@ -1096,14 +1096,17 @@ int main()
 							strcpy_s(objectMasters[objNo].sound, objSound);
 							strcpy_s(objectMasters[objNo].base, objBase);
 
-							strcpy_s(objectMasters[objNo].EquippedIconFemaleLowest, EquippedIconFemaleLowest);
-							strcpy_s(objectMasters[objNo].EquippedIconMaleLowest, EquippedIconMaleLowest);
-							strcpy_s(objectMasters[objNo].EquippedIconFemaleLow, EquippedIconFemaleLow);
-							strcpy_s(objectMasters[objNo].EquippedIconMaleLow, EquippedIconMaleLow);
-							strcpy_s(objectMasters[objNo].EquippedIconFemaleMedium, EquippedIconFemaleMedium);
-							strcpy_s(objectMasters[objNo].EquippedIconMaleMedium, EquippedIconMaleMedium);
-							strcpy_s(objectMasters[objNo].EquippedIconFemaleBest, EquippedIconFemaleBest);
-							strcpy_s(objectMasters[objNo].EquippedIconMaleBest, EquippedIconMaleBest);
+							if (game == UW1)
+								{
+								strcpy_s(objectMasters[objNo].EquippedIconFemaleLowest, EquippedIconFemaleLowest);
+								strcpy_s(objectMasters[objNo].EquippedIconMaleLowest, EquippedIconMaleLowest);
+								strcpy_s(objectMasters[objNo].EquippedIconFemaleLow, EquippedIconFemaleLow);
+								strcpy_s(objectMasters[objNo].EquippedIconMaleLow, EquippedIconMaleLow);
+								strcpy_s(objectMasters[objNo].EquippedIconFemaleMedium, EquippedIconFemaleMedium);
+								strcpy_s(objectMasters[objNo].EquippedIconMaleMedium, EquippedIconMaleMedium);
+								strcpy_s(objectMasters[objNo].EquippedIconFemaleBest, EquippedIconFemaleBest);
+								strcpy_s(objectMasters[objNo].EquippedIconMaleBest, EquippedIconMaleBest);
+								}
 
 							if (strcmp(objCat, "model") == 0)
 								{
@@ -1124,10 +1127,12 @@ int main()
 							objectMasters[objNo].isSolid = isSolid;
 							objectMasters[objNo].isMoveable = isMoveable;
 							objectMasters[objNo].isInventory = isInventory;
-							objectMasters[objNo].isAnimated = isAnimated;
-							objectMasters[objNo].useSprite = useSprite;
-							strcpy_s(objectMasters[objNo].InvIcon, invIcon);
-
+							if (game == UW1)
+								{
+								objectMasters[objNo].isAnimated = isAnimated;
+								objectMasters[objNo].useSprite = useSprite;
+								strcpy_s(objectMasters[objNo].InvIcon, invIcon);
+								}
 							//printf("uw1_object_%03d.prt\n",objNo);
 							i++;
 							}
