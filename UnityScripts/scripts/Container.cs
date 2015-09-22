@@ -338,5 +338,57 @@ public class Container : MonoBehaviour {
 			pInv.SetObjectAtSlot(i+11,sItem);
 		}
 	}
-	
+
+
+	public static void SetPickedUpFlag(Container cn, bool NewValue)
+	{
+		for (int i =0; i<40;i++)
+		{
+			string ItemName=cn.GetItemAt(i);
+			if (ItemName != "")
+			{
+				GameObject item = GameObject.Find (cn.GetItemAt(i));
+				item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
+				if (item.GetComponent<Container>()!=null)
+				{
+					Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
+				}
+			}
+		}
+	}
+
+	public static void SetItemsPosition(Container cn, Vector3 Position)
+	{
+		for (int i =0; i<40;i++)
+		{
+			string ItemName=cn.GetItemAt(i);
+			if (ItemName != "")
+			{
+				GameObject item = GameObject.Find (cn.GetItemAt(i));
+				item.transform.position=Position;
+				if (item.GetComponent<Container>()!=null)
+				{
+					Container.SetItemsPosition(item.GetComponent<Container>(),Position);
+				}
+			}
+		}
+	}
+
+	public static void SetItemsParent(Container cn, Transform Parent)
+	{
+		for (int i =0; i<40;i++)
+		{
+			string ItemName=cn.GetItemAt(i);
+			if (ItemName != "")
+			{
+				GameObject item = GameObject.Find (cn.GetItemAt(i));
+				item.transform.parent=Parent;
+				if (item.GetComponent<Container>()!=null)
+				{
+					Container.SetItemsParent(item.GetComponent<Container>(),Parent);
+				}
+			}
+		}
+	}
+
 }

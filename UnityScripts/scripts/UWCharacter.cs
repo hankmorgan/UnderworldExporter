@@ -248,15 +248,20 @@ public class UWCharacter : MonoBehaviour {
 					{
 						if (objPicked.CanBePickedUp==true)
 							{
-							objPicked.PickedUp=true;	
+							objPicked.PickedUp=true;
+							if (objPicked.GetComponent<Container>()!=null)
+								{
+								Container.SetPickedUpFlag(objPicked.GetComponent<Container>(),true);
+								Container.SetItemsParent(objPicked.GetComponent<Container>(),InvMarker.transform);
+								Container.SetItemsPosition (objPicked.GetComponent<Container>(),InvMarker.transform.position);
+								}
 							//MessageLog.text = "You pick up a " + hit.transform.name;
 							CursorIcon=objPicked.GetInventoryDisplay().texture;
 							//CurrObjectSprite=objPicked.InventoryString;
 							pInv.ObjectInHand=hit.transform.name;
 							pInv.JustPickedup=true;//To stop me throwing it away immediately.
 							if (objPicked.rigidbody !=null)
-								{
-								
+								{								
 								//objPicked.rigidbody.useGravity=false;
 								WindowDetect.FreezeMovement(objPicked.gameObject);
 								}

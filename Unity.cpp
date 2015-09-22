@@ -176,11 +176,20 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	//link for npc inventory in UW
 	//objectOwnerEntity.
 	//RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
-	
+	int count=0;
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\");", currobj.item_id, objectMasters[currobj.item_id].particle);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\t////Container contents");
+	fprintf(UNITY_FILE, "\n\tParentContainer = CreateContainer(myObj, %d, %d, %d);"
+		, 255
+		, 255
+		, 255
+		);
+	fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
+
 	if (game != SHOCK)
 		{
 		UnityRotation(game, 0, currobj.heading, 0);
@@ -219,15 +228,30 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 		tmpobj.joint = JointCount++;
 		while (tmpobj.next != 0)
 			{
-			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);	//Need to fix up the x y z to a better spot.
 			tmpobj = objList[tmpobj.next];
 			//I pass the owner info down the line
-			tmpobj.objectOwner = currobj.objectOwner;
-			tmpobj.objectOwnerName = currobj.objectOwnerName;
-			tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
-			tmpobj.joint = JointCount++;
+			//tmpobj.objectOwner = currobj.objectOwner;
+			//tmpobj.objectOwnerName = currobj.objectOwnerName;
+			//tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
+			//tmpobj.joint = JointCount++;
+			
+			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);	//Need to fix up the x y z to a better spot.
+			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+			//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
+			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
+			if (objectMasters[currobj.item_id].isMoveable == 1)
+				{
+				fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+				}
 			}
 		RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo); //NPC's inventory.
+		fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+		//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
+		fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
+		if (objectMasters[currobj.item_id].isMoveable == 1)
+			{
+			fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+			}
 
 		}
 
@@ -448,7 +472,7 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 					{
 					RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
 					fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-					fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
+					//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
 					fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
 					if (objectMasters[currobj.item_id].isMoveable == 1)
 						{
@@ -459,7 +483,7 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 				}
 			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
 			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-			fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
+			//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
 			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
 			if (objectMasters[currobj.item_id].isMoveable == 1)
 				{

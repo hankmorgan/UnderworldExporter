@@ -43,6 +43,7 @@ public class MyTools
 		////pos = new Vector3(37.885715f, 3.853347f, 1.200000f);
 		///myObj.transform.position = pos;
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
+
 		
 		GameObject myObj;
 		Vector3 pos;
@@ -120,6 +121,10 @@ public class MyTools
 		pos = new Vector3(70.114288f, 1.500000f, 2.914286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"64","Sprites/OBJECTS_064");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 58, 2, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bone_07_03_00_0812",8.914286f,0.300000f,4.114285f);
@@ -156,16 +161,14 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 15, 0, 1, 0, 1);
 		CreateWeapon(myObj, 4, 2, 5, 3, 5);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
 		myObj= CreateGameObject("a_torch_torches_33_03_00_0936",39.771427f,3.600000f,3.942857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 3, 2, 149, 145);
+		CreateLight(myObj, 2, 3, 149, 145);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
 		
@@ -174,7 +177,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_315", "Sprites/OBJECTS_315", 28, 315, 512, 40, 0, 1, 0, 1);
 		SetMap(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
 		FreezeMovement(myObj);
 		
@@ -183,7 +185,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 0, 40, 0, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 3);
 		FreezeMovement(myObj);
 		
@@ -192,7 +193,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", 24, 177, 0, 40, 0, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
 		FreezeMovement(myObj);
 		
@@ -201,7 +201,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_179", "Sprites/OBJECTS_179", 24, 179, 0, 40, 0, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 5);
 		FreezeMovement(myObj);
 		
@@ -247,6 +246,10 @@ public class MyTools
 		pos = new Vector3(66.514290f, 2.400000f, 5.314286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"69","Sprites/OBJECTS_069");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 55, 4, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_022_005");
@@ -281,6 +284,10 @@ public class MyTools
 		pos = new Vector3(6.514286f, 0.300000f, 7.714286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"64","Sprites/OBJECTS_064");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 5, 6, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("a_pack_23_06_00_0993",27.771429f,3.000000f,7.542857f);
@@ -294,7 +301,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_262", "Sprites/OBJECTS_262", 5, 262, 0, 40, 1, 1, 0, 1);
 		CreateKey(myObj, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -304,7 +310,6 @@ public class MyTools
 		SetReadable(myObj);
 		SetLink(myObj,514);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
 		
@@ -314,7 +319,6 @@ public class MyTools
 		SetObjectAsRuneBag(myObj);
 		
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
 		FreezeMovement(myObj);
 		
@@ -323,7 +327,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_233", 6, 233, 0, 40, 0, 1, 0, 1);
 		SetObjectAsRuneStone(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 3);
 		FreezeMovement(myObj);
 		
@@ -332,7 +335,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_240", 6, 240, 0, 40, 0, 1, 0, 1);
 		SetObjectAsRuneStone(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
 		FreezeMovement(myObj);
 		
@@ -341,7 +343,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_243", 6, 243, 0, 40, 0, 1, 0, 1);
 		SetObjectAsRuneStone(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 5);
 		FreezeMovement(myObj);
 		
@@ -350,7 +351,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_250", 6, 250, 0, 40, 0, 1, 0, 1);
 		SetObjectAsRuneStone(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 6);
 		FreezeMovement(myObj);
 		
@@ -386,12 +386,20 @@ public class MyTools
 		pos = new Vector3(54.514286f, 2.100000f, 7.714286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 45, 6, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_50_06_00_0228");
 		pos = new Vector3(60.514286f, 1.800000f, 7.714286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 50, 6, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_057_006");
@@ -414,6 +422,10 @@ public class MyTools
 		pos = new Vector3(20.914284f, 3.600000f, 8.914286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 17, 7, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_024_007");
@@ -450,12 +462,16 @@ public class MyTools
 		myObj= CreateGameObject("a_candle_16_08_00_0580",19.371428f,3.600000f,10.628572f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", 22, 146, 1, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 12, 1, 150, 146);
+		CreateLight(myObj, 1, 12, 150, 146);
 		
 		myObj = new GameObject("a_giant_rat_22_08_00_0254");
 		pos = new Vector3(27.428572f, 3.000000f, 10.457142f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 22, 8, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,225,0);
 		
 		myObj= CreateGameObject("a_piece_of_cheese_pieces_of_cheese_22_08_00_0945",26.914284f,3.000000f,10.628572f);
@@ -583,9 +599,8 @@ public class MyTools
 		myObj= CreateGameObject("a_candle_38_10_00_0845",46.285713f,3.000000f,12.685714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", 22, 146, 2, 31, 0, 1, 1, 1);
-		CreateLight(myObj, 12, 1, 150, 146);
+		CreateLight(myObj, 1, 12, 150, 146);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -594,7 +609,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 24, 184, 1, 40, 0, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
 		
@@ -603,7 +617,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_007", "Sprites/OBJECTS_007", 1, 7, 0, 19, 0, 1, 0, 1);
 		CreateWeapon(myObj, 3, 6, 2, 5, 2);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
 		FreezeMovement(myObj);
 		
@@ -635,6 +648,10 @@ public class MyTools
 		pos = new Vector3(22.457144f, 3.600000f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 18, 12, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_box_boxes_20_12_00_0728",24.342857f,3.000000f,15.428572f);
@@ -660,7 +677,7 @@ public class MyTools
 		myObj= CreateGameObject("a_torch_torches_26_12_00_0605",31.371428f,3.000000f,15.257142f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 3, 2, 149, 145);
+		CreateLight(myObj, 2, 3, 149, 145);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_28_12_00_0583",34.114285f,2.850000f,14.914286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
@@ -687,6 +704,10 @@ public class MyTools
 		pos = new Vector3(40.457142f, 2.100000f, 14.914286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 12, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bedroll_33_12_00_0736",40.114285f,2.100000f,15.580000f);
@@ -768,18 +789,26 @@ public class MyTools
 		pos = new Vector3(71.314285f, 3.300000f, 17.314285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"69","Sprites/OBJECTS_069");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 59, 14, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_vampire_bat_02_15_00_0209");
 		pos = new Vector3(2.914286f, 1.500000f, 18.514286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"73","Sprites/OBJECTS_073");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 2, 15, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", 73, 44, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 4147292, 4147292);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 1461844, 1461844);
 		
 		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -798,12 +827,20 @@ public class MyTools
 		pos = new Vector3(40.457142f, 2.100000f, 18.857141f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 15, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,90,0);
 		
 		myObj = new GameObject("a_cave_bat_12_16_00_0211");
 		pos = new Vector3(14.914286f, 0.600000f, 19.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 12, 16, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_37_16_00_0811",44.571430f,3.000000f,20.057142f);
@@ -839,6 +876,10 @@ public class MyTools
 		pos = new Vector3(2.914286f, 2.700000f, 20.914284f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"72","Sprites/OBJECTS_072");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 17, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		
@@ -867,7 +908,7 @@ public class MyTools
 		myObj= CreateGameObject("a_candle_02_18_00_0658",2.420000f,2.700000f,22.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", 22, 146, 4, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 12, 1, 150, 146);
+		CreateLight(myObj, 1, 12, 150, 146);
 		
 		myObj= CreateGameObject("a_bone_37_18_00_0809",45.428570f,3.000000f,21.942856f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
@@ -889,6 +930,10 @@ public class MyTools
 		pos = new Vector3(2.914286f, 2.700000f, 23.314285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 19, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_009_019");
@@ -903,6 +948,10 @@ public class MyTools
 		pos = new Vector3(26.914284f, 3.600000f, 23.314285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 22, 19, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pouch_pouches_10_20_00_0723",12.685714f,3.600000f,25.028572f);
@@ -915,7 +964,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -936,6 +984,10 @@ public class MyTools
 		pos = new Vector3(14.914286f, 3.900000f, 24.514284f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"75","Sprites/OBJECTS_075");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", 0, 75, 0, 12, 20, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("special_tmap_obj_27_20_00_0987",33.580002f,3.000000f,24.600000f);
@@ -951,6 +1003,10 @@ public class MyTools
 		pos = new Vector3(40.114285f, 3.600000f, 24.685715f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 20, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,270,0);
 		
 		
@@ -976,6 +1032,10 @@ public class MyTools
 		pos = new Vector3(2.914286f, 2.700000f, 26.914284f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 22, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bottle_of_ale_bottles_of_ale_02_23_00_0616",2.571429f,2.700000f,28.457144f);
@@ -987,12 +1047,20 @@ public class MyTools
 		pos = new Vector3(17.314285f, 0.300000f, 28.114285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 14, 23, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_31_23_00_0212");
 		pos = new Vector3(37.714283f, 1.200000f, 28.114285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 31, 23, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("some_leeches_bunches_of_leeches_10_24_00_0701",12.514286f,0.600000f,29.314285f);
@@ -1016,7 +1084,7 @@ public class MyTools
 		myObj= CreateGameObject("a_torch_torches_02_25_00_0540",2.571429f,2.700000f,30.857143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 3, 2, 149, 145);
+		CreateLight(myObj, 2, 3, 149, 145);
 		
 		myObj= CreateGameObject("a_bridge_36_25_00_1003",43.714287f,3.525000f,30.514284f);
 		
@@ -1036,6 +1104,10 @@ public class MyTools
 		pos = new Vector3(35.314285f, 3.600000f, 31.714285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 29, 26, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("an_ear_of_corn_ears_of_corn_30_26_00_0641",36.342857f,3.600000f,31.371428f);
@@ -1059,6 +1131,10 @@ public class MyTools
 		pos = new Vector3(43.714287f, 3.600000f, 34.114285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 36, 28, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_bone_36_30_00_0859",43.371429f,3.000000f,36.857143f);
@@ -1090,7 +1166,7 @@ public class MyTools
 		myObj= CreateGameObject("a_torch_torches_03_33_00_0541",4.457143f,3.600000f,40.285717f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 3, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 3, 2, 149, 145);
+		CreateLight(myObj, 2, 3, 149, 145);
 		
 		myObj= CreateGameObject("a_buckler_03_33_00_0696",3.942857f,3.600000f,39.771427f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_062",true);
@@ -1113,6 +1189,10 @@ public class MyTools
 		pos = new Vector3(31.714285f, 2.100000f, 40.114285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"65","Sprites/OBJECTS_065");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 26, 33, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_27_33_00_0861",33.257145f,2.100000f,39.942856f);
@@ -1136,7 +1216,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", 73, 45, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 4147292, 4147292);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 1461844, 1461844);
 		
 		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1184,11 +1264,17 @@ public class MyTools
 		pos = new Vector3(18.514286f, 2.100000f, 42.514286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 537, 15, 35, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,180,0);
 		myObj= CreateGameObject("a_key_004_2",18.514286f,2.100000f,42.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_266",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_266", "Sprites/OBJECTS_266", 5, 266, 1, 40, 4, 1, 0, 1);
 		CreateKey(myObj, 4);
+		myObj.transform.position = invMarker.transform.position;
+		AddObjectToContainer(myObj, ParentContainer, 0);
 		
 		myObj= CreateGameObject("a_button_16_35_00_0807",19.714287f,2.700000f,42.020000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
@@ -1201,6 +1287,10 @@ public class MyTools
 		pos = new Vector3(65.314285f, 2.400000f, 42.514286f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"74","Sprites/OBJECTS_074");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 54, 35, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,180,0);
 		
 		
@@ -1279,23 +1369,35 @@ public class MyTools
 		pos = new Vector3(4.114285f, 3.600000f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 3, 38, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,45,0);
 		
 		myObj = new GameObject("a_goblin_11_38_00_0218");
 		pos = new Vector3(13.714286f, 3.600000f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 11, 38, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,270,0);
 		
 		myObj= CreateGameObject("a_candle_11_38_00_0655",14.228572f,3.600000f,45.771431f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", 22, 146, 5, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 12, 1, 150, 146);
+		CreateLight(myObj, 1, 12, 150, 146);
 		
 		myObj = new GameObject("a_lurker_26_38_00_0223");
 		pos = new Vector3(31.714285f, 0.900000f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 26, 38, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pile_of_wood_chips_piles_of_wood_chips_36_38_00_0855",43.714287f,3.600000f,46.114288f);
@@ -1320,6 +1422,10 @@ public class MyTools
 		pos = new Vector3(65.314285f, 3.600000f, 46.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"78","Sprites/OBJECTS_078");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 54, 38, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_61_38_00_0856",73.714287f,3.600000f,46.457142f);
@@ -1377,7 +1483,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_170",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", 18, 170, 760, 40, 0, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -1386,7 +1491,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_032", "Sprites/OBJECTS_032", 2, 32, 0, 30, 0, 1, 0, 1);
 		CreateArmour(myObj, "Sprites/armour/armor_f_0000", "Sprites/armour/armor_m_0000", "Sprites/armour/armor_f_0015", "Sprites/armour/armor_m_0015", "Sprites/armour/armor_f_0030", "Sprites/armour/armor_m_0030", "Sprites/armour/armor_f_0045", "Sprites/armour/armor_m_0045", 2, 8);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
 		
@@ -1395,7 +1499,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", 1, 2, 0, 28, 0, 1, 0, 1);
 		CreateWeapon(myObj, 10, 6, 8, 4, 25);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
 		FreezeMovement(myObj);
 		
@@ -1404,16 +1507,14 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_035", "Sprites/OBJECTS_035", 77, 35, 0, 30, 0, 1, 0, 1);
 		CreateLeggings(myObj, "Sprites/armour/armor_f_0003", "Sprites/armour/armor_m_0003", "Sprites/armour/armor_f_0018", "Sprites/armour/armor_m_0018", "Sprites/armour/armor_f_0033", "Sprites/armour/armor_m_0033", "Sprites/armour/armor_f_0048", "Sprites/armour/armor_m_0048", 2, 4);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 3);
 		FreezeMovement(myObj);
 		
 		myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", 73, 44, 0, 30, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 4146516, 4146516);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 1461068, 1461068);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 4);
 		FreezeMovement(myObj);
 		
@@ -1421,7 +1522,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_286",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_286", "Sprites/OBJECTS_286", 16, 286, 1, 40, 0, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 5);
 		FreezeMovement(myObj);
 		
@@ -1471,24 +1571,40 @@ public class MyTools
 		pos = new Vector3(10.114285f, 3.600000f, 52.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 8, 43, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_10_43_00_0245");
 		pos = new Vector3(12.514286f, 3.600000f, 52.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 10, 43, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_23_43_00_0210");
 		pos = new Vector3(28.114285f, 2.100000f, 52.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 23, 43, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_cave_bat_24_43_00_0208");
 		pos = new Vector3(29.314285f, 2.400000f, 52.114288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 24, 43, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_blood_stain_39_43_00_0551",46.971432f,3.600000f,52.457142f);
@@ -1570,6 +1686,10 @@ public class MyTools
 		pos = new Vector3(32.914284f, 2.400000f, 55.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 27, 46, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_stalactite_28_46_00_0787",34.114285f,4.500000f,55.714287f);
@@ -1594,6 +1714,10 @@ public class MyTools
 		pos = new Vector3(5.314286f, 3.600000f, 57.257145f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 0, 4, 47, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_skull_28_47_00_0820",34.457142f,2.400000f,56.914288f);
@@ -1603,7 +1727,7 @@ public class MyTools
 		myObj= CreateGameObject("a_torch_torches_36_47_00_0618",44.228569f,2.700000f,57.428570f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1);
-		CreateLight(myObj, 3, 2, 149, 145);
+		CreateLight(myObj, 2, 3, 149, 145);
 		
 		myObj= CreateGameObject("a_buckler_37_47_00_1020",44.914288f,2.700000f,57.580002f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_062",true);
@@ -1724,7 +1848,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_168",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_168", "Sprites/OBJECTS_168", 18, 168, 1, 40, 6, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -1747,7 +1870,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_181", "Sprites/OBJECTS_181", 24, 181, 11, 40, 6, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -1765,7 +1887,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 10, 40, 6, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -1783,7 +1904,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 6, 40, 6, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -1826,6 +1946,10 @@ public class MyTools
 		pos = new Vector3(72.514290f, 3.600000f, 61.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 60, 51, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("door_008_052");
@@ -1846,6 +1970,10 @@ public class MyTools
 		pos = new Vector3(54.857143f, 3.600000f, 62.742855f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 52, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,270,0);
 		
 		
@@ -1853,6 +1981,10 @@ public class MyTools
 		pos = new Vector3(62.914288f, 3.000000f, 62.914288f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 52, 52, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj= CreateGameObject("a_blood_stain_19_53_00_0831",23.314285f,2.700000f,64.114288f);
@@ -1907,6 +2039,10 @@ public class MyTools
 		pos = new Vector3(23.314285f, 2.700000f, 65.314285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"83","Sprites/OBJECTS_083");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", 0, 83, 0, 19, 54, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,135,0);
 		
 		myObj= CreateGameObject("a_blood_stain_20_54_00_0830",24.514284f,2.700000f,65.314285f);
@@ -1919,6 +2055,10 @@ public class MyTools
 		pos = new Vector3(45.085712f, 3.300000f, 65.142853f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 37, 54, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("a_skull_38_54_00_0803",45.771431f,3.300000f,65.142853f);
@@ -1968,23 +2108,37 @@ public class MyTools
 		pos = new Vector3(55.714287f, 3.600000f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 46, 55, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_lurker_51_55_00_0206");
 		pos = new Vector3(61.714287f, 2.700000f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 51, 55, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_57_55_00_0249");
 		pos = new Vector3(68.914284f, 3.600000f, 66.514290f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 538, 57, 55, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,270,0);
 		myObj= CreateGameObject("a_key_003_1",68.914284f,3.600000f,66.514290f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_269",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_269", "Sprites/OBJECTS_269", 5, 269, 1, 40, 3, 1, 0, 1);
 		CreateKey(myObj, 3);
+		myObj.transform.position = invMarker.transform.position;
+		AddObjectToContainer(myObj, ParentContainer, 0);
 		
 		myObj= CreateGameObject("a_bench_benches_02_56_00_0772",2.914286f,3.600000f,67.714287f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
@@ -1993,12 +2147,18 @@ public class MyTools
 		pos = new Vector3(5.314286f, 3.600000f, 67.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 810, 4, 56, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,90,0);
 		myObj= CreateGameObject("a_scroll_04_56_00_0810",5.314286f,3.600000f,67.714287f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_318",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_318", "Sprites/OBJECTS_318", 13, 318, 769, 40, 0, 1, 0, 1);
 		SetReadable(myObj);
 		SetLink(myObj,769);
+		myObj.transform.position = invMarker.transform.position;
+		AddObjectToContainer(myObj, ParentContainer, 0);
 		
 		
 		
@@ -2018,23 +2178,37 @@ public class MyTools
 		pos = new Vector3(54.514286f, 3.600000f, 67.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 56, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_47_56_00_0235");
 		pos = new Vector3(56.914288f, 3.600000f, 67.714287f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 47, 56, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		myObj = new GameObject("a_goblin_02_57_00_0231");
 		pos = new Vector3(3.580000f, 3.600000f, 68.742859f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 534, 2, 57, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,90,0);
 		myObj= CreateGameObject("a_key_004_1",3.580000f,3.600000f,68.742859f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_266",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_266", "Sprites/OBJECTS_266", 5, 266, 1, 40, 4, 1, 0, 1);
 		CreateKey(myObj, 4);
+		myObj.transform.position = invMarker.transform.position;
+		AddObjectToContainer(myObj, ParentContainer, 0);
 		
 		myObj= CreateGameObject("some_strong_thread_pieces_of_strong_thread_20_57_00_0919",24.685715f,2.700000f,68.742859f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_284",true);
@@ -2093,6 +2267,10 @@ public class MyTools
 		pos = new Vector3(62.228569f, 3.000000f, 69.942856f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 51, 58, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,180,0);
 		
 		myObj= CreateGameObject("some_writing_54_58_00_0713",65.980003f,4.200000f,70.457146f);
@@ -2114,7 +2292,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_016", "Sprites/OBJECTS_016", 1, 16, 22, 40, 0, 1, 0, 1);
 		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -2123,7 +2300,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_016", "Sprites/OBJECTS_016", 1, 16, 14, 40, 0, 1, 0, 1);
 		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
 		
@@ -2144,7 +2320,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_160",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_160", "Sprites/OBJECTS_160", 18, 160, 1, 40, 9, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -2152,7 +2327,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 9, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
 		
@@ -2160,7 +2334,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_166",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_166", "Sprites/OBJECTS_166", 18, 166, 1, 40, 9, 1, 0, 1);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 2);
 		FreezeMovement(myObj);
 		
@@ -2204,6 +2377,10 @@ public class MyTools
 		pos = new Vector3(63.257145f, 3.600000f, 71.657143f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 52, 59, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,90,0);
 		
 		myObj = new GameObject("door_055_059");
@@ -2218,6 +2395,10 @@ public class MyTools
 		pos = new Vector3(44.914288f, 2.700000f, 72.514290f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"65","Sprites/OBJECTS_065");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 37, 60, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		myObj.GetComponent<ObjectInteraction>().isContainer = true;
 		SetRotation(myObj,0,0,0);
 		
 		
@@ -2232,7 +2413,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 16, 40, 9, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -2250,7 +2430,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", 24, 177, 3, 40, 9, 1, 0, 1);
 		SetFood(myObj);
 		myObj.transform.position = invMarker.transform.position;
-		myObj.transform.parent = invMarker.transform;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
 		
@@ -2494,12 +2673,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,4147572);
+		Create_a_do_trap(myObj,3,1462124);
 		
 		myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,4147572);
+		Create_a_do_trap(myObj,3,1462124);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2514,12 +2693,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,4147572);
+		Create_a_do_trap(myObj,3,1462124);
 		
 		myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,4147572);
+		Create_a_do_trap(myObj,3,1462124);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2674,8 +2853,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
 
-
-	
 
 		}
 
@@ -4947,6 +5124,7 @@ public class MyTools
 		mysprite.sprite = image;//Assigns the sprite to the object.
 		SpriteController.transform.parent = myObj.transform;
 		SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+		mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 		//Create a billboard script for display
 		// Billboard ScriptController = 
 		if (BillBoard)
@@ -5186,6 +5364,7 @@ public class MyTools
 		{
 			Debug.Log ("No sprite renderer found.");
 		}
+		mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 		mysprite.sprite = image;//Assigns the sprite to the object.
 		//newObj.AddComponent<Billboard>();
 

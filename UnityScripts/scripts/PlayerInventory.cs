@@ -625,7 +625,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void SwapObjects(GameObject ObjInSlot, int slotIndex, string cObjectInHand)
 	{//Swaps specified game object as the slot wth the passed object
-		Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
+		//Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
 		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
 		//cn.RemoveItemFromContainer(cObjectInHand);
 		cn.RemoveItemFromContainer(ObjInSlot.name);

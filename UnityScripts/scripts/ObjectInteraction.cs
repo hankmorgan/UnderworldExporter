@@ -751,7 +751,7 @@ public class ObjectInteraction : MonoBehaviour {
 		//a_lit_torch(149)(d:0) + a_honeycomb(186)(d:1) = a_lump_of_wax&lumps_of_wax(210)
 		//a_nutritious_wafer(191)(d:1) + a_bottle_of_water&bottles_of_water(188)(d:1) = a_bottle_of_ale&bottles_of_ale(187)
 
-
+		//Debug.Log ("combining" +ItemID1 + " and " + ItemID2 + " in game " + playerUW.game);
 		switch (playerUW.game)
 		{
 		case 1://uw1
@@ -772,8 +772,9 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 		}
 
-		for (int i =0; i < lstInput1.GetUpperBound(0)-1;i++)
+		for (int i =0; i <= lstInput1.GetUpperBound(0);i++)
 		{
+			Debug.Log (i + " is " + lstInput1[i] + " and " + lstInput2[i]);
 			if 
 				(//Check both input lists for the two items
 					((ItemID1 == lstInput1[i]) && (ItemID2==lstInput2[i]))

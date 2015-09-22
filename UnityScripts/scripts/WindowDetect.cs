@@ -157,7 +157,14 @@ void ThrowObjectInHand()
 					GameObject droppedItem = GameObject.Find(pInv.ObjectInHand);
 					droppedItem.transform.parent=null;
 					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
-					Debug.Log ("drop point is " + ray.GetPoint(dropRange-0.1f));
+					GameObject InvMarker = GameObject.Find ("InventoryMarker");
+					if (droppedItem.GetComponent<Container>()!=null)
+						{
+						Container.SetPickedUpFlag(droppedItem.GetComponent<Container>(),false);
+						Container.SetItemsParent(droppedItem.GetComponent<Container>(),null);
+						Container.SetItemsPosition (droppedItem.GetComponent<Container>(),InvMarker.transform.position);
+						}
+					//Debug.Log ("drop point is " + ray.GetPoint(dropRange-0.1f));
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
 					//droppedItem.rigidbody.useGravity=true;
 					WindowDetect.UnFreezeMovement(droppedItem);
