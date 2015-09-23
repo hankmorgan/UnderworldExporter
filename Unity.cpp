@@ -19,9 +19,10 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d);",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d);",
 		    objectMasters[currobj.item_id].particle,
 			objectMasters[currobj.item_id].InvIcon,
+			objectMasters[currobj.item_id].EquippedIconFemaleLowest,
 			objectMasters[currobj.item_id].type, currobj.item_id,
 			currobj.link, currobj.quality, currobj.owner,
 			objectMasters[currobj.item_id].isMoveable,
@@ -31,9 +32,10 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", %d, %d, %d, %d, %d, %d \"%s\");",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d \"%s\");",
 		objectMasters[currobj.item_id].particle,
 		objectMasters[currobj.item_id].InvIcon,
+		objectMasters[currobj.item_id].EquippedIconFemaleLowest,
 		objectMasters[currobj.item_id].type, currobj.item_id, 
 		currobj.link, currobj.quality, currobj.owner,
 		objectMasters[currobj.item_id].isMoveable,
@@ -789,15 +791,15 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 //	z = (LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ)/100.0;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-	SetScale(0.9375f,0.9375f,0.9375f);
+	//SetScale(0.9375f,0.9375f,0.9375f);
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	if (isTrigger(objList[currobj.link]) != 0)
 		{
-		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"%s\");", textureMasters[currobj.texture].path, UniqueObjectName(objList[currobj.link]));
+		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"%s\", %d, false);", textureMasters[currobj.texture].path, UniqueObjectName(objList[currobj.link]), currobj.texture);
 		}
 	else
 		{
-		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"\");", textureMasters[currobj.texture].path);
+		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"\" , %d, false);", textureMasters[currobj.texture].path, currobj.texture);
 		}
 
 	//textureMasters[currobj.texture].path

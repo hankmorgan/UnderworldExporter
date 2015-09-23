@@ -12,13 +12,13 @@ public class UWPalette : MonoBehaviour {
 	float[] Defblue = new float[256];
 	float[] Defgreen = new float[256];
 
-
+	public bool PaletteReady;
 	//public Texture2D SrcImage;
 	//public Texture2D DstImage;
 	//public Sprite newSprite;
 	//private SpriteRenderer sr;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		//Pal= new Texture2D(256, 1 , TextureFormat.ARGB32, false);
 		//DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
 		SetPal(0,0,0,4);
@@ -305,6 +305,7 @@ public class UWPalette : MonoBehaviour {
 */
 
 	}
+
 
 
 	void CyclePalette(int start, int end)

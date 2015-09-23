@@ -22,7 +22,7 @@ public class TileInfo : MonoBehaviour {
 	public bool isWater;
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame

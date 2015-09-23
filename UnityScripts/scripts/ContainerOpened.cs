@@ -49,7 +49,7 @@ public class ContainerOpened : MonoBehaviour {
 			currentContainerObj.isOpenOnPanel=false;
 			//Close child containers as well
 			CloseChildContainer (currentContainerObj);
-			Debug.Log("Current Container is " + pInv.currentContainer);
+			//Debug.Log("Current Container is " + pInv.currentContainer);
 			Container DestinationContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			if (pInv.currentContainer == "Gronk")
 			{

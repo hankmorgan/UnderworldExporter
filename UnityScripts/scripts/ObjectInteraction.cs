@@ -87,7 +87,7 @@ public class ObjectInteraction : MonoBehaviour {
 	private UILabel MessageLog;
 
 	private Sprite InventoryDisplay;
-	private Sprite EquipDisplay;
+	public Sprite EquipDisplay;
 	private Sprite WorldDisplay;
 
 	public string InventoryString;
@@ -172,6 +172,10 @@ public class ObjectInteraction : MonoBehaviour {
 				}
 			}
 		}
+		if (EquipDisplay==null)
+		{
+			EquipDisplay= tc.RequestSprite(EquipString);
+		}
 	}
 
 	void UpdateAnimation()
@@ -182,17 +186,14 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 		if (this.PickedUp==true)
 		{
-			sr.sprite= tc.RequestSprite(InvDisplayIndex);
+			sr.sprite= tc.RequestSprite(InvDisplayIndex,isAnimated);
 			InventoryDisplay=sr.sprite;
 		}
 		else
 		{
-			sr.sprite= tc.RequestSprite(WorldDisplayIndex);
-			InventoryDisplay= tc.RequestSprite(InvDisplayIndex);
+			sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
+			InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
 		}
-		//sr.sprite= tc.RequestSprite(item_id);
-		//InventoryDisplay=sr.sprite;
-		//EquipDisplay=sr.sprite;
 	}
 
 	public Sprite GetInventoryDisplay()

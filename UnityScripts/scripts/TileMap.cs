@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class TileMap : MonoBehaviour {
@@ -57,7 +57,10 @@ public class TileMap : MonoBehaviour {
 				if (tileHit[0]=="Tile")
 					{
 					//Debug.Log ("Visited "  + hitname);
-					SetTileVisited(int.Parse(tileHit[1]), int.Parse(tileHit[2]));
+					int x = int.Parse(tileHit[1]);
+					int y =int.Parse(tileHit[2]);
+					SetTileVisited(x,y);
+					gronk.GetComponent<UWCharacter>().isSwimming=GetIsWater(x,y);
 					}
 				}
 			//TileInfo ti = hit.transform.gameObject.GetComponent<TileInfo>();

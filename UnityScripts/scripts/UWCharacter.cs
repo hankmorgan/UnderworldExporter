@@ -56,6 +56,7 @@ public class UWCharacter : MonoBehaviour {
 	public int CharLevel;
 	public bool isFemale;
 	public bool isLefty;
+	public bool isSwimming;
 
 	//Character Status
 	public int FoodLevel;
