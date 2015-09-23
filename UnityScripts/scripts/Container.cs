@@ -313,12 +313,12 @@ public class Container : MonoBehaviour {
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
 			{//The requested container is open in the game world. This can cause problems!
-			Debug.Log ("Opening a container in the real world");
+			//Debug.Log ("Opening a container in the real world");
 			SpillContents();
 			return;
 			}
 		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
-		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetInventoryDisplay().texture;
+		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
 		//display the container contents.
 		//Container currObjCont = currObj.GetComponent<Container>();
@@ -371,8 +371,9 @@ public class Container : MonoBehaviour {
 					if (flag==true)
 					{//No object interferes with the spill
 						RemoveItemFromContainer(i);
-						Debug.Log ("putting " + Spilled.name + " at " + randomPoint);
+						//Debug.Log ("putting " + Spilled.name + " at " + randomPoint);
 						Spilled.transform.position=randomPoint;
+						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
 						WindowDetect.UnFreezeMovement(Spilled);
 						//Spilled.rigidbody.AddForce(Random.insideUnitSphere*0.05f);
 					}									
