@@ -69,6 +69,24 @@ public class TileMap : MonoBehaviour {
 		}
 	}
 
+	public bool ValidTile(Vector3 location)
+	{
+		//Checks to see if the tile at a specified location is within the valid game world. (eg is rendered and is not a solid)
+		//Assumes the map is aligned to 0,0,0
+
+		int tileX = (int)(location.x/1.2f);
+		int tileY = (int)(location.y/1.2f);
+
+		int tileType = GetTileType(tileX,tileY);
+		int isRendered = GetTileRender(tileX,tileY);
+		Debug.Log ("testing at " +location);
+		if ((tileType!=TILE_SOLID) && (isRendered==1))
+		{
+			Debug.Log("valid tile at " + location + " at x=" +tileX + " y=" + tileY + " is a " + tileType + " is " +isRendered);
+		}
+		return ((tileType!=TILE_SOLID) && (isRendered==1));
+	}
+
 
 	public Texture2D TileMapImage()
 	{//Generates an image of the tilemap for display

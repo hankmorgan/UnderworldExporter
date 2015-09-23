@@ -130,8 +130,8 @@
 129 0 0 0 entity 19 an_open_sack H 1 Sprites/OBJECTS_129 0 L M 1 1 1 Sprites/OBJECTS_129 Sprites/OBJECTS_129 S T U Sprites/OBJECTS_129 W x Y 0 1
 130 0 0 0 entity 19 a_pack H 1 Sprites/OBJECTS_130 0 L M 1 1 1 Sprites/OBJECTS_130 Sprites/OBJECTS_130 S T U Sprites/OBJECTS_130 W x Y 0 1
 131 0 0 0 entity 19 an_open_pack H 1 Sprites/OBJECTS_131 0 L M 1 1 1 Sprites/OBJECTS_131 Sprites/OBJECTS_131 S T U Sprites/OBJECTS_131 W x Y 0 1
-132 0 0 0 model 19 a_box_boxes H 1 Sprites/OBJECTS_132 0 L M 1 1 1 Sprites/OBJECTS_132 Sprites/OBJECTS_132 S T U Sprites/OBJECTS_132 W x Y 0 1
-133 0 0 0 model 19 an_open_box_open_boxes H 1 Sprites/OBJECTS_133 0 L M 1 1 1 Sprites/OBJECTS_133 Sprites/OBJECTS_133 S T U Sprites/OBJECTS_133 W x Y 0 1
+132 0 0 0 entity 19 a_box_boxes H 1 Sprites/OBJECTS_132 0 L M 1 1 1 Sprites/OBJECTS_132 Sprites/OBJECTS_132 S T U Sprites/OBJECTS_132 W x Y 0 1
+133 0 0 0 entity 19 an_open_box_open_boxes H 1 Sprites/OBJECTS_133 0 L M 1 1 1 Sprites/OBJECTS_133 Sprites/OBJECTS_133 S T U Sprites/OBJECTS_133 W x Y 0 1
 134 0 0 0 entity 19 a_pouch_pouches H 1 Sprites/OBJECTS_134 0 L M 1 1 1 Sprites/OBJECTS_134 Sprites/OBJECTS_134 S T U Sprites/OBJECTS_134 W x Y 0 1
 135 0 0 0 entity 19 an_open_pouch_pouches H 1 Sprites/OBJECTS_135 0 L M 1 1 1 Sprites/OBJECTS_135 Sprites/OBJECTS_135 S T U Sprites/OBJECTS_135 W x Y 0 1
 136 0 0 0 entity 19 a_map_case H 1 Sprites/OBJECTS_136 0 L M 1 1 1 Sprites/OBJECTS_136 Sprites/OBJECTS_136 S T U Sprites/OBJECTS_136 W x Y 0 1

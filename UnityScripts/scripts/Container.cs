@@ -313,7 +313,8 @@ public class Container : MonoBehaviour {
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
 			{//The requested container is open in the game world. This can cause problems!
-			Debug.Log ("Can't open a container in the real world in this function!");
+			Debug.Log ("Opening a container in the real world");
+			SpillContents();
 			return;
 			}
 		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
@@ -338,6 +339,48 @@ public class Container : MonoBehaviour {
 			string sItem = this.GetItemAt(i);
 			pInv.SetObjectAtSlot(i+11,sItem);
 		}
+	}
+
+	public void SpillContents()
+	{//Removes the contents of a container out it in the real world.
+		int counter;
+		TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
+		WindowDetect.FreezeMovement(this.gameObject);
+		BoxCollider bx = this.gameObject.GetComponent<BoxCollider>();
+		//bx.enabled=false;
+		for (int i=0; i<40;i++)
+		{
+			if (GetItemAt (i)!="")
+			{
+				GameObject Spilled = GameObject.Find (GetItemAt (i));
+				if (Spilled!=null)
+				{	
+					bool flag=false;
+					Vector3 randomPoint=this.transform.position;
+					counter=0;
+					while ((flag==false) && (counter<25))
+					{
+						randomPoint = this.transform.position+Random.insideUnitSphere;
+						if(randomPoint.y<this.transform.position.y)
+						{
+							randomPoint.y=this.transform.position.y+0.1f;
+						}
+						flag = ((!Physics.CheckSphere(randomPoint,0.5f)) && (tm.ValidTile(randomPoint)));
+						counter++;
+					}
+					if (flag==true)
+					{//No object interferes with the spill
+						RemoveItemFromContainer(i);
+						Debug.Log ("putting " + Spilled.name + " at " + randomPoint);
+						Spilled.transform.position=randomPoint;
+						WindowDetect.UnFreezeMovement(Spilled);
+						//Spilled.rigidbody.AddForce(Random.insideUnitSphere*0.05f);
+					}									
+				}
+			}
+		}
+		//bx.enabled=true;
+		WindowDetect.UnFreezeMovement(this.gameObject);
 	}
 
 

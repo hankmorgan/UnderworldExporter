@@ -86,9 +86,9 @@ public class ObjectInteraction : MonoBehaviour {
 
 	private UILabel MessageLog;
 
-	public Sprite InventoryDisplay;
-	public Sprite EquipDisplay;
-	public Sprite WorldDisplay;
+	private Sprite InventoryDisplay;
+	private Sprite EquipDisplay;
+	private Sprite WorldDisplay;
 
 	public string InventoryString;
 	public string EquipString;
@@ -150,7 +150,7 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			InvMarker=GameObject.Find ("InventoryMarker");
 		}
-
+		sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 	}
 
 	void Update()
@@ -159,9 +159,9 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			if (animationStarted==false)
 			{
-				CancelInvoke("UpdateAnimation");
+				//CancelInvoke("UpdateAnimation");
 				animationStarted=true;
-				sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
+
 				if (isAnimated==true)
 				{
 					InvokeRepeating("UpdateAnimation",0.2f,0.2f);
@@ -172,6 +172,27 @@ public class ObjectInteraction : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void UpdateAnimation()
+	{
+		if (sr== null)
+		{
+			sr=this.GetComponentInChildren<SpriteRenderer>();
+		}
+		if (this.PickedUp==true)
+		{
+			sr.sprite= tc.RequestSprite(InvDisplayIndex);
+			InventoryDisplay=sr.sprite;
+		}
+		else
+		{
+			sr.sprite= tc.RequestSprite(WorldDisplayIndex);
+			InventoryDisplay= tc.RequestSprite(InvDisplayIndex);
+		}
+		//sr.sprite= tc.RequestSprite(item_id);
+		//InventoryDisplay=sr.sprite;
+		//EquipDisplay=sr.sprite;
 	}
 
 	public Sprite GetInventoryDisplay()
@@ -806,26 +827,7 @@ public class ObjectInteraction : MonoBehaviour {
 		return false;
 	}
 
-	void UpdateAnimation()
-		{
-		if (sr== null)
-			{
-			sr=this.GetComponentInChildren<SpriteRenderer>();
-			}
-		if (this.PickedUp==true)
-			{
-			sr.sprite= tc.RequestSprite(InvDisplayIndex);
-			InventoryDisplay=sr.sprite;
-			}
-		else
-			{
-			sr.sprite= tc.RequestSprite(WorldDisplayIndex);
-			InventoryDisplay= tc.RequestSprite(InvDisplayIndex);
-			}
-		//sr.sprite= tc.RequestSprite(item_id);
-		//InventoryDisplay=sr.sprite;
-		//EquipDisplay=sr.sprite;
-		}
+
 //default:
 //			{
 //				objInt.MessageLog.text = "Default: Type=" + objInt.ItemType + ", You use a " + objInt.gameObject.name;

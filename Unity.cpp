@@ -304,18 +304,6 @@ int hasLock=0;
 			{
 			hasLock=1;
 			}
-		fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
-			objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
-			hasLock);
-		}
-
-	if (game != SHOCK)
-		{
-		UnityRotation(game, -90,currobj.heading-180,0);
-		}
-	else
-		{
-		UnityRotation(game,currobj.Angle1, currobj.Angle2, currobj.Angle3);
 		}
 	
 //	RenderUnityObjectInteraction(game, x, y, z, currobj-, objList, LevelInfo);
@@ -342,13 +330,41 @@ int hasLock=0;
 				}
 			}
 		}
-	if (objectMasters[currobj.item_id].type == PORTCULLIS)
+	if (game != SHOCK)
 		{
-		//The door is a portcullis and must translate up.
-		//fprintf(MAPFILE, "\"rotate\" \"0 0 0\"\n");
-		//fprintf(MAPFILE, "\"translate\" \"0 0 80\"\n");
-		fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
+		switch (objectMasters[currobj.item_id].type)
+			{
+				case DOOR:
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
+						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
+						hasLock);
+					break;
+				case HIDDENDOOR:
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/world/%s\", %d, %d);",
+						textureMasters[LevelInfo[currobj.tileX][currobj.tileY].wallTexture].path, 
+						objList[currobj.link].link & 0x3F,
+						hasLock);
+					break;
+				case PORTCULLIS:
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
+						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
+						hasLock);
+					fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
+					break;
+			}
+		UnityRotation(game, -90, currobj.heading - 180, 0);
 		}
+	else
+		{
+		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+		}
+	//if (objectMasters[currobj.item_id].type == PORTCULLIS)
+	//	{
+	//	//The door is a portcullis and must translate up.
+	//	//fprintf(MAPFILE, "\"rotate\" \"0 0 0\"\n");
+	//	//fprintf(MAPFILE, "\"translate\" \"0 0 80\"\n");
+	//	
+	//	}
 
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
 		{	
