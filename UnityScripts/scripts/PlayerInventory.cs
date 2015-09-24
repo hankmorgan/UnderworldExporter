@@ -74,6 +74,10 @@ public class PlayerInventory : MonoBehaviour {
 
 	public Texture2D Blank;
 
+	//For calculating light levels
+	private Light lt;
+	private LightSource ls;
+
 	private Container playerContainer;
 	// Use this for initialization
 	void Start () {
@@ -112,13 +116,15 @@ public class PlayerInventory : MonoBehaviour {
 		return;
 	}
 
-
-
 	void UpdateUW()
 	{
 		//Check for lights
-		Light lt = this.gameObject.GetComponent<Light>();
-		LightSource ls = null;
+		if (lt==null)
+		{
+			lt = this.gameObject.GetComponent<Light>();
+		}
+
+		ls = null;
 		int MaxBrightness=0;
 		for (int i = 5; i<=8; i++)
 		{

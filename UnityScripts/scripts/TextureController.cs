@@ -13,7 +13,7 @@ public class TextureController : MonoBehaviour {
 	private Texture2D[]TextureDstImage=new Texture2D[500];
 
 	private bool[] TextureReady=new bool[500];
-
+	private bool[] ObjectReady=new bool[500];
 	private Sprite[]ObjectDstSprite=new Sprite[500];
 	//private Texture2D preview;
 	//public bool[]isAnimated;
@@ -57,29 +57,33 @@ public class TextureController : MonoBehaviour {
 
 	public Sprite RequestSprite(int index, bool isAnimated)
 	{
-		if (pal==null)
+		if (ObjectReady[index]==false)
 		{
-			pal=this.gameObject.GetComponent<UWPalette>();
-		}
-		//Debug.Log(index);
-		if (ObjectInUse[index]==false)
-		{//Sprite not already loaded. Request it.
-			ObjectSrcImage[index] = LoadImage ("Sprites/Palette/OBJECTS_BASE_",index);
-			ObjectInUse[index]=true;
-		}
-		//Apply the current palette to the dst image
-		if (isAnimated==true)
+			if (pal==null)
 			{
+				pal=this.gameObject.GetComponent<UWPalette>();
+			}
+			//Debug.Log(index);
+			if (ObjectInUse[index]==false)
+			{//Sprite not already loaded. Request it.
+				ObjectSrcImage[index] = LoadImage ("Sprites/Palette/OBJECTS_BASE_",index);
+				ObjectInUse[index]=true;
+			}
+			//Apply the current palette to the dst image
+			if (isAnimated==true)
+			{
+				ObjectDstImage[index]=pal.ApplyPalette(ObjectSrcImage[index]);
+			}
+			else
+			{
+				//Apply the default palette
+				ObjectDstImage[index]=pal.ApplyPaletteDefault(ObjectSrcImage[index]);
+			}
 			ObjectDstImage[index]=pal.ApplyPalette(ObjectSrcImage[index]);
-			}
-		else
-			{
-			//Apply the default palette
-			ObjectDstImage[index]=pal.ApplyPaletteDefault(ObjectSrcImage[index]);
-			}
-		//ObjectDstImage[index]=pal.ApplyPalette(ObjectSrcImage[index]);
-		ObjectDstSprite[index]=Sprite.Create(ObjectDstImage[index] ,new Rect(0,0,ObjectDstImage[index].width,ObjectDstImage[index].height), new Vector2(0.5f, 0.0f));
-		ObjectDstSprite[index].texture.filterMode=FilterMode.Point;
+			ObjectDstImage[index].filterMode=FilterMode.Point;
+			ObjectDstSprite[index]= Sprite.Create(ObjectDstImage[index] ,new Rect(0,0,ObjectDstImage[index].width,ObjectDstImage[index].height), new Vector2(0.5f, 0.0f));
+			ObjectReady[index]=true;
+		}
 		return ObjectDstSprite[index];
 	}
 
@@ -95,18 +99,18 @@ public class TextureController : MonoBehaviour {
 
 	public Texture2D RequestTexture(int index, bool isAnimated)
 	{
-		if (pal==null)
+		if(TextureReady[index]==false)
 		{
-			pal=this.gameObject.GetComponent<UWPalette>();
-		}
-		if (TextureInUse[index]==false)
-		{//Sprite not already loaded. Request it.
-			TextureSrcImage[index] = LoadImage ("Textures/Palette/UW1_BASE_",index);
-			TextureInUse[index]=true;
-		} 
-		//Apply the current palette to the dst image
-		if (TextureReady[index]==false)
-		{
+			if (pal==null)
+			{
+				pal=this.gameObject.GetComponent<UWPalette>();
+			}
+			if (TextureInUse[index]==false)
+			{//Sprite not already loaded. Request it.
+				TextureSrcImage[index] = LoadImage ("Textures/Palette/UW1_BASE_",index);
+				TextureInUse[index]=true;
+			} 
+			//Apply the current palette to the dst image
 			if (isAnimated==true)
 			{
 				TextureDstImage[index]=pal.ApplyPalette(TextureSrcImage[index]);
@@ -119,9 +123,9 @@ public class TextureController : MonoBehaviour {
 			TextureDstImage[index].filterMode=FilterMode.Point;
 			TextureReady[index]=true;
 		}
+
 	//	else
 		//	{
-				
 		//	}
 		//TextureDstImage[index]=pal.ApplyPalette(TextureSrcImage[index]);
 		//TextureDstSprite[index]=Sprite.Create(ObjectDstImage[index] ,new Rect(0,0,ObjectDstImage[index].width,ObjectDstImage[index].height), new Vector2(0.5f, 0.0f));
@@ -140,6 +144,10 @@ public class TextureController : MonoBehaviour {
 		for (int i=0; i<NoOfTextures;i++)
 		{
 			TextureReady[i]=false;
+		}
+		for (int i=0; i <NoOfObjects;i++)
+		{
+			ObjectReady[i]=false;
 		}
 	}
 

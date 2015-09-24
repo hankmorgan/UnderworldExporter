@@ -21,6 +21,11 @@ public class a_use_trigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+	}
+	
+	public void Activate()
+	{
 		if (triggerObj == null)
 		{
 			triggerObj=GameObject.Find (Var.trigger);
@@ -29,10 +34,6 @@ public class a_use_trigger : MonoBehaviour {
 				triggerObj.GetComponent<ObjectVariables>().state=state;
 			}
 		}
-	}
-	
-	public void Activate()
-	{
 		//Do what it needs to do.
 		MessageLog.text=MessageLog.text + name + " activated";
 		ObjectVariables triggerVars = triggerObj.GetComponent<ObjectVariables>();

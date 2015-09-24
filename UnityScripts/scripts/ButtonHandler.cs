@@ -57,14 +57,6 @@ public class ButtonHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (triggerObj == null)
-		{
-			triggerObj=GameObject.Find (trigger);
-		}
-		if ((player!=null) && (playerUW==null))
-		{
-			playerUW=player.GetComponent<UWCharacter>();
-		}
 
 		if (SpriteSet==false)
 		{
@@ -128,6 +120,15 @@ public class ButtonHandler : MonoBehaviour {
 
 	public void Activate()
 	{
+		if (triggerObj == null)
+		{
+			triggerObj=GameObject.Find (trigger);
+		}
+		if ((player!=null) && (playerUW==null))
+		{
+			playerUW=player.GetComponent<UWCharacter>();
+		}
+
 		//float distance;
 		//distance =Vector3.Distance(transform.position,player.transform.position);
 		//if (distance<=playerUW.useRange)

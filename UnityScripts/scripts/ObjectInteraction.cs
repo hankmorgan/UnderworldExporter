@@ -86,7 +86,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	private UILabel MessageLog;
 
-	private Sprite InventoryDisplay;
+	public Sprite InventoryDisplay;
 	public Sprite EquipDisplay;
 	private Sprite WorldDisplay;
 
@@ -172,10 +172,7 @@ public class ObjectInteraction : MonoBehaviour {
 				}
 			}
 		}
-		if (EquipDisplay==null)
-		{
-			EquipDisplay= tc.RequestSprite(EquipString);
-		}
+
 	}
 
 	void UpdateAnimation()
@@ -192,12 +189,18 @@ public class ObjectInteraction : MonoBehaviour {
 		//else
 		//{
 			sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
+		  //tc.RequestSprite(sr.sprite, WorldDisplayIndex,isAnimated);
 			InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
+			//tc.RequestSprite(InventoryDisplay,InvDisplayIndex,isAnimated);
 		//}
 	}
 
 	public Sprite GetInventoryDisplay()
 	{
+		if (InventoryDisplay==null)
+		{
+			InventoryDisplay =tc.RequestSprite(InvDisplayIndex,isAnimated);
+		}
 		return InventoryDisplay;
 	}
 
@@ -208,6 +211,10 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public Sprite GetEquipDisplay()
 	{
+		if (EquipDisplay==null)
+		{
+			EquipDisplay= tc.RequestSprite(EquipString);
+		}
 		return EquipDisplay;
 	}
 	
@@ -565,6 +572,7 @@ public class ObjectInteraction : MonoBehaviour {
 				//?
 			case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
 				//Nothing
+				break;
 			case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
 				//Nothing
 				{

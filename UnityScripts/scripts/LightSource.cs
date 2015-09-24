@@ -12,7 +12,8 @@ public class LightSource : MonoBehaviour {
 	public bool IsOn;
 
 	public const int BaseBrightness = 6;
-
+	private ObjectInteraction objInt;
+	private UILabel ml;
 	// Use this for initialization
 	void Start () {
 	
@@ -22,7 +23,10 @@ public class LightSource : MonoBehaviour {
 	void Update () {
 		if (IsOn==true)
 		{
-			ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+			if (objInt==null)
+			{
+				objInt = this.gameObject.GetComponent<ObjectInteraction>();
+			}
 			if (objInt.PickedUp==false)
 			{
 				SetOff ();
@@ -32,7 +36,10 @@ public class LightSource : MonoBehaviour {
 
 	public void Use()
 	{
-		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		if (objInt==null)
+		{
+			objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		}
 		if (objInt.PickedUp==false)
 		{
 			if (IsOn==true)
@@ -55,8 +62,15 @@ public class LightSource : MonoBehaviour {
 
 	public void SetOn()
 	{		
-		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		UILabel ml =objInt.getMessageLog();
+		if (objInt==null)
+		{
+			objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		}
+		if(ml==null)
+		{
+			ml =objInt.getMessageLog();
+		}
+
 		//Turn on the torch
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
@@ -95,8 +109,14 @@ public class LightSource : MonoBehaviour {
 	
 	public void SetOff()
 	{
-		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		UILabel ml =objInt.getMessageLog();
+		if (objInt==null)
+		{
+			objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		}
+		if(ml==null)
+		{
+			ml =objInt.getMessageLog();
+		}
 		//Turn off the torch
 		//lt.range=LightSource.BaseLight;
 		IsOn=false;
@@ -109,8 +129,14 @@ public class LightSource : MonoBehaviour {
 
 	public void LookAt()
 	{
-		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		UILabel ml =objInt.getMessageLog();
+		if (objInt==null)
+		{
+			objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		}
+		if(ml==null)
+		{
+			ml =objInt.getMessageLog();
+		}
 		StringController Sc = objInt.getStringController();
 		ml.text = Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
 	}

@@ -59,18 +59,18 @@ public class DoorControl : MonoBehaviour {
 		{//Toggle Open and closed
 			if (state==false)
 				{//Door is closed
-				Debug.Log ("Opening door");
+				//Debug.Log ("Opening door");
 				OpenDoor ();
 				}
 			else
 				{//Door is open
-				Debug.Log ("Closing door");
+				//Debug.Log ("Closing door");
 				CloseDoor ();
 				}
 		}
 		else
 		{
-			Debug.Log(this.name + " is locked");
+//			Debug.Log(this.name + " is locked");
 		}
 	}
 
@@ -78,7 +78,7 @@ public class DoorControl : MonoBehaviour {
 	{
 		if(!DoorBusy)
 		{
-			Debug.Log ("Move door to open position");
+			//Debug.Log ("Move door to open position");
 			if (isPortcullis==false)
 			{
 				StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
@@ -95,7 +95,7 @@ public class DoorControl : MonoBehaviour {
 	{
 		if(!DoorBusy)
 		{
-			Debug.Log ("Move door to closed position");
+			//Debug.Log ("Move door to closed position");
 			if (isPortcullis==false)
 			{
 				StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
@@ -110,13 +110,13 @@ public class DoorControl : MonoBehaviour {
 
 	public void LockDoor()
 	{
-		Debug.Log ("Locking door");
+		//Debug.Log ("Locking door");
 		locked=false;
 	}
 
 	public void UnlockDoor()
 	{
-		Debug.Log ("Locking door");
+		//Debug.Log ("Locking door");
 		locked=true;
 	}
 

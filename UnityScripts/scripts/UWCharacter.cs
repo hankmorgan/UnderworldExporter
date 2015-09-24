@@ -95,6 +95,9 @@ public class UWCharacter : MonoBehaviour {
 	public int Swimming;
 
 
+	public int currentHeading;
+
+	private int[] CompassHeadings={0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
 
 	// Use this for initialization
 	void Start () {
@@ -114,6 +117,7 @@ public class UWCharacter : MonoBehaviour {
 		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 		TileMap.gronk=this.gameObject;
 		HealthFlask.playerUW=this.gameObject.GetComponent<UWCharacter>();
+		Compass.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		//Readable.SC=StringControl;
 
 		XAxis = GetComponent<MouseLook>();
@@ -143,40 +147,10 @@ public class UWCharacter : MonoBehaviour {
 		if (ReadiedSpell!="")
 		{//Player has a spell thats about to be cast. All other activity is ignored.
 			SpellMode ();
-			return;
-		}
-		return;
-		//Performs actions depending on the interaction mode.
-		if (CursorInMainWindow==false)
-			{//Stop items outside the viewport from being triggered.
-			return;
-			}
-		if (ReadiedSpell!="")
-		{//Player has a spell thats about to be cast. All other activity is ignored.
-			SpellMode ();
-			return;
-		}
-		switch (UWCharacter.InteractionMode)
-		{
-		case 0://Options mode
-			break;
-		case 1://Talk
-			TalkMode ();
-			break;
-		case 2://Pickup
-			PickupMode();
-			break;
-		case 4://look
-			LookMode();
-			break;
-		case 8:	//attack
-			AttackModeMelee ();
-			break;
-		case 16://Use
-			UseMode ();
-			break;
 		}
 
+		//Get the current compass heading
+		currentHeading = CompassHeadings[ (int)Mathf.Round((  (this.gameObject.transform.eulerAngles.y % 360) / 22.5f)) ];
 	}
 
 	public void SpellMode()

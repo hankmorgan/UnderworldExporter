@@ -42,27 +42,29 @@ public class TileMap : MonoBehaviour {
 	const int SOUTHWEST=6;
 	const int SOUTHEAST=7;
 
-	// Update is called once per frame
-	void Update () {
+	RaycastHit hit = new RaycastHit(); 
+
+	void PositionDetect()
+	{
 		//Checks the tile name we are standing on and if it gets a match it will flag as visited
-		RaycastHit hit = new RaycastHit(); 
+		//RaycastHit hit = new RaycastHit(); 
 		if(Physics.Raycast(gronk.transform.position, Vector3.down,out hit,1.0f))
 		{
 			string hitname = hit.transform.gameObject.name;
-
+	
 			string[] tileHit =  hitname.Split('_');
 			//Debug.Log ("testing "  + hitname + "upper =" + tileHit.GetUpperBound(0));
 			if (tileHit.GetUpperBound(0)>=2)
-				{
+			{
 				if (tileHit[0]=="Tile")
-					{
+				{
 					//Debug.Log ("Visited "  + hitname);
 					int x = int.Parse(tileHit[1]);
 					int y =int.Parse(tileHit[2]);
 					SetTileVisited(x,y);
 					gronk.GetComponent<UWCharacter>().isSwimming=GetIsWater(x,y);
-					}
 				}
+			}
 			//TileInfo ti = hit.transform.gameObject.GetComponent<TileInfo>();
 			//if (ti!=null)
 			//{
@@ -70,6 +72,13 @@ public class TileMap : MonoBehaviour {
 			//	Debug.Log (ti.east);
 			//}
 		}
+		//hit=null;
+	}
+
+
+	// Update is called once per frame
+	void Update () {
+
 	}
 
 	public bool ValidTile(Vector3 location)
@@ -5058,7 +5067,7 @@ public class TileMap : MonoBehaviour {
 	SetTileProp(63,62,0,1,30,0,0,0,0);
 	SetTileProp(63,63,0,1,30,0,0,0,0);
 		
-
+		InvokeRepeating("PositionDetect",0.0f,0.01f);
 	}
 
 
