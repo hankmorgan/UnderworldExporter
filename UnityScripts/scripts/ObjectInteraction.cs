@@ -184,16 +184,16 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			sr=this.GetComponentInChildren<SpriteRenderer>();
 		}
-		if (this.PickedUp==true)
-		{
-			sr.sprite= tc.RequestSprite(InvDisplayIndex,isAnimated);
-			InventoryDisplay=sr.sprite;
-		}
-		else
-		{
+		//if (this.PickedUp==true)
+		//{
+		//	InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
+			//InventoryDisplay=sr.sprite;
+		//}
+		//else
+		//{
 			sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
 			InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
-		}
+		//}
 	}
 
 	public Sprite GetInventoryDisplay()
@@ -224,6 +224,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public void SetWorldDisplay(Sprite NewSprite)
 	{
 		WorldDisplay=NewSprite;
+		sr.sprite=WorldDisplay;
 	}
 
 	public void RefreshAnim()

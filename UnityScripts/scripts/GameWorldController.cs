@@ -41,7 +41,7 @@ public class GameWorldController : MonoBehaviour {
 				//do something
 			}
 		}
-		Debug.Log ("no of materials " + AnimMaterials.Count);
+		//Debug.Log ("no of materials " + AnimMaterials.Count);
 		if (EnableTextureAnimation==true)
 		{
 			Undo.RegisterUndo(AnimMaterials.ToArray(), "Fix Shared Material");

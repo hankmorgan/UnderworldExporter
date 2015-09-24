@@ -347,6 +347,10 @@ public class Container : MonoBehaviour {
 		TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
 		WindowDetect.FreezeMovement(this.gameObject);
 		BoxCollider bx = this.gameObject.GetComponent<BoxCollider>();
+		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		//objInt.SetWorldDisplay(objInt.GetEquipDisplay());
+		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
+		//objInt.RefreshAnim();
 		//bx.enabled=false;
 		for (int i=0; i<40;i++)
 		{

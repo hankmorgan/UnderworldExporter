@@ -113,6 +113,7 @@ public class UWCharacter : MonoBehaviour {
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 		TileMap.gronk=this.gameObject;
+		HealthFlask.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		//Readable.SC=StringControl;
 
 		XAxis = GetComponent<MouseLook>();

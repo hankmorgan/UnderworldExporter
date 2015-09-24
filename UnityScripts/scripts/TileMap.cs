@@ -82,11 +82,11 @@ public class TileMap : MonoBehaviour {
 
 		int tileType = GetTileType(tileX,tileY);
 		int isRendered = GetTileRender(tileX,tileY);
-		Debug.Log ("testing at " +location);
-		if ((tileType!=TILE_SOLID) && (isRendered==1))
-		{
-			Debug.Log("valid tile at " + location + " at x=" +tileX + " y=" + tileY + " is a " + tileType + " is " +isRendered);
-		}
+		//Debug.Log ("testing at " +location);
+		//if ((tileType!=TILE_SOLID) && (isRendered==1))
+		//{
+		//	Debug.Log("valid tile at " + location + " at x=" +tileX + " y=" + tileY + " is a " + tileType + " is " +isRendered);
+		//}
 		return ((tileType!=TILE_SOLID) && (isRendered==1));
 	}
 
