@@ -5,7 +5,8 @@ public class RuneSlot : MonoBehaviour {
 
 	public static UWCharacter playerUW;
 	public int SlotNumber;
-	private UISprite label;
+	private UITexture thisRune;
+	private bool isSet;
 
 	//private int setRune=-1;
 	static string[] Runes=new string[]{"An","Bet","Corp","Des",
@@ -16,19 +17,21 @@ public class RuneSlot : MonoBehaviour {
 		"Uus","Vas","Wis","Ylem"};
 	// Use this for initialization
 	void Start () {
-		label = this.GetComponent<UISprite>();
+		thisRune = this.GetComponent<UITexture>();
+		thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-			if (playerUW.Runes[SlotNumber] != false)
+			if ((playerUW.Runes[SlotNumber] != false) && (isSet == false))
 			{
-				label.spriteName= "rune_" + SlotNumber.ToString("D2");
+				//label.spriteName= "rune_" + SlotNumber.ToString("D2");
+				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
 			}
-			else
-			{
-				label.spriteName= "rune_blank";
-			}
+			//else
+			//{
+				//label.spriteName= "rune_blank";
+			//}
 
 	}
 

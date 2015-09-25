@@ -240,7 +240,7 @@ public class InventorySlot : MonoBehaviour {
 		//Container SubContainer;
 		switch (UWCharacter.InteractionMode)
 		{
-		case 1://talk
+		case UWCharacter.InteractionModeTalk://talk
 			if (leftClick)
 				{//Left Click
 					UseFromSlot();
@@ -250,7 +250,7 @@ public class InventorySlot : MonoBehaviour {
 					LookFromSlot();
 				}
 			break;
-		case 2://pickup
+		case UWCharacter.InteractionModePickup://pickup
 			if (leftClick)
 			{
 				LeftClickPickup();
@@ -260,7 +260,7 @@ public class InventorySlot : MonoBehaviour {
 				RightClickPickup();
 			}
 			break;
-		case 4://look
+		case UWCharacter.InteractionModeLook://look
 			if (leftClick)
 				{//Left Click
 					UseFromSlot();
@@ -270,7 +270,7 @@ public class InventorySlot : MonoBehaviour {
 					LookFromSlot();
 				}
 			break;
-		case 8://attack
+		case UWCharacter.InteractionModeAttack://attack
 			if (leftClick)
 				{//Left Click
 					UseFromSlot();
@@ -280,7 +280,7 @@ public class InventorySlot : MonoBehaviour {
 					LookFromSlot();
 				}
 			break;
-		case 16://use
+		case UWCharacter.InteractionModeUse://use
 			UseFromSlot ();
 			break;
 		}

@@ -6,9 +6,10 @@ public class ActiveRuneSlot : MonoBehaviour {
 	public static UWCharacter playerUW;
 	// Use this for initialization
 	private int setRune=-2;
-	private UISprite label;
+	private UITexture thisRune;
 	void Start () {
-		label = this.GetComponent<UISprite>();
+		//label = this.GetComponent<UISprite>();
+		thisRune = this.GetComponent<UITexture>();
 	}
 	
 	// Update is called once per frame
@@ -19,11 +20,13 @@ public class ActiveRuneSlot : MonoBehaviour {
 			//Debug.Log ("setting sprite to " +"rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2" ));
 			if (playerUW.ActiveRunes[SlotNumber]!=-1)
 			{
-				label.spriteName= "rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2");
+				//label.spriteName= "rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2");
+				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
 			}
 			else
 			{
-				label.spriteName= "rune_blank";
+				//label.spriteName= "rune_blank";
+				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 			}
 		}
 	}

@@ -307,26 +307,26 @@ public class GoblinAI : MonoBehaviour {
 	{
 		switch (UWCharacter.InteractionMode)
 		{
-		case 0://Options
+		case UWCharacter.InteractionModeOptions://Options
 			MessageLog.text = "Nothing will happen in options mode " + name;
 			break;
-		case 1://Talk
+		case UWCharacter.InteractionModeTalk://Talk
 			MessageLog.text = "You can't talk to " + name;
 			AnimRange=1000;
 			break;
-		case 2://Pickup
+		case UWCharacter.InteractionModePickup://Pickup
 			MessageLog.text = "You pick up a " + name;
 			break;
-		case 4://Look
+		case UWCharacter.InteractionModeLook://Look
 			MessageLog.text = "You see a " + name;
 			AnimRange=1;
 			break;
-		case 8://Attack
+		case UWCharacter.InteractionModeAttack://Attack
 			MessageLog.text = "You attack a " + name;
 			//followPlayer=true;
 			AnimRange=100;
 			break;
-		case 16://Use
+		case UWCharacter.InteractionModeUse://Use
 			MessageLog.text = "You use a " + name;
 			AnimRange=10;
 			break;

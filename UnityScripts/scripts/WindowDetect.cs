@@ -25,7 +25,7 @@ public class WindowDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==true))
+		if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack) && (MouseHeldDown==true))
 		{
 			if(playerUW.AttackCharging==false)
 			{//Begin the attack
@@ -36,7 +36,7 @@ public class WindowDetect : MonoBehaviour {
 				playerUW.MeleeCharging ();
 			}
 		}
-		if ((UWCharacter.InteractionMode==8) && (MouseHeldDown==false) && (playerUW.AttackCharging==true))
+		if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack) && (MouseHeldDown==false) && (playerUW.AttackCharging==true))
 		{//Player has been building an attack up and has released it.
 			playerUW.MeleeExecute();
 		}
@@ -67,13 +67,13 @@ public class WindowDetect : MonoBehaviour {
 		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
 		switch (UWCharacter.InteractionMode)
 		{
-		case 0://Options mode
+		case UWCharacter.InteractionModeOptions://Options mode
 			return;//do nothing
 			break;
-		case 1://Talk
+		case UWCharacter.InteractionModeTalk://Talk
 			playerUW.TalkMode();
 			break;
-		case 2://Pickup
+		case UWCharacter.InteractionModePickup://Pickup
 			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 				{
 				ThrowObjectInHand();
@@ -84,13 +84,13 @@ public class WindowDetect : MonoBehaviour {
 				}
 
 			break;
-		case 4://look
+		case UWCharacter.InteractionModeLook://look
 			playerUW.LookMode();//do nothing
 			break;
-		case 8:	//attack
+		case UWCharacter.InteractionModeAttack:	//attack
 			playerUW.AttackModeMelee() ;//do nothing
 			break;
-		case 16://Use
+		case UWCharacter.InteractionModeUse://Use
 			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 				{
 				UseObjectInHand ();

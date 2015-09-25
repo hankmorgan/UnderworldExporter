@@ -8,6 +8,17 @@ public class UWCharacter : MonoBehaviour {
 	public int game;
 	//What mode are we in and various ranges
 	public static int InteractionMode;
+
+
+	public const int InteractionModeOptions=0;
+	public const int InteractionModeTalk=1;
+	public const int InteractionModePickup=2;
+	public const int InteractionModeLook=3;
+	public const int InteractionModeAttack=4;
+	public const int InteractionModeUse=5;
+	public static int DefaultInteractionMode=UWCharacter.InteractionModeUse;
+
+
 	public float weaponRange=1.0f;
 	public float pickupRange=3.0f;
 	public float useRange=3.0f;
@@ -138,7 +149,11 @@ public class UWCharacter : MonoBehaviour {
 		//GUI.DrawTexture (Position,CursorIcon);
 		if (game==2)
 			{
-			InteractionMode=2;
+			InteractionMode=UWCharacter.InteractionModePickup;
+			}
+		else
+			{
+			InteractionMode=UWCharacter.DefaultInteractionMode;
 			}
 	}
 
