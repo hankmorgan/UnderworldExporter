@@ -158,7 +158,8 @@ public class UWCharacter : MonoBehaviour {
 		//Readable.SC=StringControl;
 		StatsDisplay.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
-
+		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
+		Conversation.SC=ObjectInteraction.SC;
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		Screen.lockCursor=true;
@@ -335,6 +336,13 @@ public class UWCharacter : MonoBehaviour {
 			if (Physics.Raycast(ray,out hit,talkRange))
 			{
 				MessageLog.text = "Talking to " + hit.transform.name;
+				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
+					{
+					if (hit.transform.gameObject.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.NPC_TYPE)
+						{
+						hit.transform.gameObject.GetComponent<ObjectInteraction>().TalkTo();
+						}
+					}
 			}
 			else
 			{

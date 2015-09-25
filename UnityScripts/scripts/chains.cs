@@ -13,7 +13,7 @@ public class chains : MonoBehaviour {
 	{
 	 switch (ActiveControl)
 		{
-		case 0://Inventroy -> Stats
+		case 0://Inventory -> Stats
 			ActiveControl=1;
 			break;
 		case 1://Stats -> Inventory

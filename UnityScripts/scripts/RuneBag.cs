@@ -19,6 +19,7 @@ public class RuneBag : MonoBehaviour {
 		if (chainControl!=null)
 		{
 			chainControl.ActiveControl=2;
+			//Time.timeScale=0;//pause the game
 		}
 	}
 

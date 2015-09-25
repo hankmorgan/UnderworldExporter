@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ObjectInteraction : MonoBehaviour {
 
-	public const int NPC =0;
+	public const int NPC_TYPE =0;
 	public const int WEAPON =1;
 	public const int ARMOUR =2 ;
 	public const int AMMO =3 ;
@@ -272,7 +272,7 @@ public class ObjectInteraction : MonoBehaviour {
 		//Debug.Log ("LookDescription");
 		switch (ItemType)
 		{
-		case NPC:// 0
+		case NPC_TYPE:// 0
 			//nothing to do
 		case WEAPON://	WEAPON 1
 			//repair with hammer
@@ -493,7 +493,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 		switch (ItemType)
 		{
-			case NPC://	NPC 0
+		case NPC_TYPE://	NPC 0
 				//nothing to do
 			case WEAPON://	WEAPON 1
 				//repair with hammer
@@ -762,6 +762,18 @@ public class ObjectInteraction : MonoBehaviour {
 		//If I haven't returned just swap the two objects if one of them is in the inventory.
 
 		return false;
+	}
+
+
+
+	public void TalkTo()
+	{
+		NPC NPCCharacter = this.GetComponent<NPC>();
+		if (NPCCharacter != null)
+		{
+			NPCCharacter.TalkTo();
+		}
+
 	}
 
 	public bool CombineObject(GameObject InputObject1, GameObject InputObject2)
