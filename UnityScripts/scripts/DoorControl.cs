@@ -7,6 +7,9 @@ public class DoorControl : MonoBehaviour {
 	private bool state;
 	public bool isPortcullis;
 	public bool DoorBusy;
+	public bool Pickable;
+
+	static public UWCharacter playerUW;
 	// Use this for initialization
 	void Start () {
 	
@@ -33,13 +36,30 @@ public class DoorControl : MonoBehaviour {
 						//if(objIntThis.Link==objIntUsed.Owner)//This is a valid key for the door.
 						if(KeyIndex==dk.KeyId)//This is a valid key for the door.
 						{
-							Debug.Log ("A key is used to unlock a door");
+//							Debug.Log ("A key is used to unlock a door");
 							//DoorControl DC=objUseOn.GetComponent<DoorControl>();
 							ToggleLock();
 						}
 
 					}					
 					break;
+				case ObjectInteraction.LOCKPICK:	//lockpick
+					{
+					if (Pickable==true)
+						{
+						if (playerUW.TrySkill(UWCharacter.SkillPicklock, objIntUsed.Quality))
+							{
+							UnlockDoor();
+							}
+					else
+							{
+							Debug.Log ("Picklock failed!");
+							objIntUsed.getMessageLog().text = "Your lockpick broke";
+							objIntUsed.consumeObject();
+							}
+						}
+					break;
+					}
 				default:
 					return false;
 				}
@@ -54,7 +74,7 @@ public class DoorControl : MonoBehaviour {
 
 	public void Activate()
 	{
-		Debug.Log (this.name + " touched");
+		//		Debug.Log (this.name + " touched");
 		if (locked==false)
 		{//Toggle Open and closed
 			if (state==false)
@@ -111,13 +131,13 @@ public class DoorControl : MonoBehaviour {
 	public void LockDoor()
 	{
 		//Debug.Log ("Locking door");
-		locked=false;
+		locked=true;
 	}
 
 	public void UnlockDoor()
 	{
 		//Debug.Log ("Locking door");
-		locked=true;
+		locked=false;
 	}
 
 	public void ToggleLock()

@@ -255,7 +255,7 @@
 254 0 0 0 entity 6 a_Wis_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_254 Sprites/OBJECTS_254 S T U Sprites/OBJECTS_254 W x Y 0 1
 255 0 0 0 entity 6 a_Ylem_stone H 1 Sprites/OBJECTS_224 0 L M 1 1 1 Sprites/OBJECTS_255 Sprites/OBJECTS_255 S T U Sprites/OBJECTS_255 W x Y 0 1
 256 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_256 0 L M 1 1 1 Sprites/OBJECTS_256 Sprites/OBJECTS_256 S T U Sprites/OBJECTS_256 W x Y 0 1
-257 0 0 0 entity 5 a_lockpick H 1 Sprites/OBJECTS_257 0 L M 1 1 1 Sprites/OBJECTS_257 Sprites/OBJECTS_257 S T U Sprites/OBJECTS_257 W x Y 0 1
+257 0 0 0 entity 79 a_lockpick H 1 Sprites/OBJECTS_257 0 L M 1 1 1 Sprites/OBJECTS_257 Sprites/OBJECTS_257 S T U Sprites/OBJECTS_257 W x Y 0 1
 258 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_258 0 L M 1 1 1 Sprites/OBJECTS_258 Sprites/OBJECTS_258 S T U Sprites/OBJECTS_258 W x Y 0 1
 259 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_259 0 L M 1 1 1 Sprites/OBJECTS_259 Sprites/OBJECTS_259 S T U Sprites/OBJECTS_259 W x Y 0 1
 260 0 0 0 entity 5 a_key H 1 Sprites/OBJECTS_260 0 L M 1 1 1 Sprites/OBJECTS_260 Sprites/OBJECTS_260 S T U Sprites/OBJECTS_260 W x Y 0 1
@@ -296,7 +296,7 @@
 295 0 0 0 entity 16 a_spike H 1 Sprites/OBJECTS_295 0 L M 1 1 1 Sprites/OBJECTS_295 Sprites/OBJECTS_295 S T U Sprites/OBJECTS_295 W x Y 0 1
 296 0 0 0 entity 16 a_rock_hammer H 1 Sprites/OBJECTS_296 0 L M 1 1 1 Sprites/OBJECTS_296 Sprites/OBJECTS_296 S T U Sprites/OBJECTS_296 W x Y 0 1
 297 0 0 0 entity 16 a_glowing_rock H 1 Sprites/OBJECTS_297 0 L M 1 1 1 Sprites/OBJECTS_297 Sprites/OBJECTS_297 S T U Sprites/OBJECTS_297 W x Y 1 1
-298 0 0 0 entity 16 a_campfire H 1 Sprites/OBJECTS_298 1 L M 0 0 0 Sprites/OBJECTS_298 Sprites/OBJECTS_298 S T U Sprites/OBJECTS_298 W x Y 0 1
+298 0 0 0 entity 16 a_campfire H 1 Sprites/OBJECTS_298 1 L M 0 0 0 Sprites/OBJECTS_298 Sprites/OBJECTS_298 S T U Sprites/OBJECTS_298 W x Y 1 1
 299 0 0 0 entity 16 a_fishing_pole H 1 Sprites/OBJECTS_299 0 L M 1 1 1 Sprites/OBJECTS_299 Sprites/OBJECTS_299 S T U Sprites/OBJECTS_299 W x Y 0 1
 300 0 0 0 entity 16 a_medallion H 1 Sprites/OBJECTS_300 0 L M 1 1 1 Sprites/OBJECTS_300 Sprites/OBJECTS_300 S T U Sprites/OBJECTS_300 W x Y 0 1
 301 0 0 0 entity 16 an_oil_flask H 1 Sprites/OBJECTS_301 0 L M 1 1 1 Sprites/OBJECTS_301 Sprites/OBJECTS_301 S T U Sprites/OBJECTS_301 W x Y 0 1

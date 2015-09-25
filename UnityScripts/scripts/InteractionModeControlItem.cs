@@ -20,13 +20,12 @@ public class InteractionModeControlItem : MonoBehaviour {
 
 	void OnClick()
 	{
-		
-		
 		if (isOn==true)
 		{
 			isOn=false;
 			InteractionModeControl.UpdateNow=true;
-			UWCharacter.InteractionMode=UWCharacter.DefaultInteractionMode;
+			//UWCharacter.InteractionMode=UWCharacter.DefaultInteractionMode;
+			//UWCharacter.InteractionMode=-1;
 		}
 		else
 		{

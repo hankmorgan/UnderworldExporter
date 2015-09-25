@@ -26,14 +26,14 @@ public class ObjectVariables : MonoBehaviour {
 	}
 	public GameObject findDoor(int x, int y)
 	{//Finds a door in the tile pointed to by two coordinates.
-		Debug.Log ("trying to find door called door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
+//		Debug.Log ("trying to find door called door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
 		return GameObject.Find ("door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));
 	}
 
 	public GameObject FindTile(int x, int y, int surface)
 	{//May need to update tile finding to support multiple levels!
 		string tileName = GetTileName (x,y,surface);
-		Debug.Log("Looking for tile " + tileName);
+	//	Debug.Log("Looking for tile " + tileName);
 		//Debug.Log ("level is " + level.name);
 		return level.transform.FindChild (tileName).gameObject;
 	}

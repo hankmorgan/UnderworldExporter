@@ -143,7 +143,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	getPaletteIndex(PaletteFile, pal, PaletteNo);    
+	getPalette(PaletteFile, pal, PaletteNo);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];

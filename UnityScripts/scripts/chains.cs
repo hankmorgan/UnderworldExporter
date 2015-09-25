@@ -62,6 +62,21 @@ public class chains : MonoBehaviour {
 				EnableDisableControl ("ClearRunes",false);
 				//Turn off Stats
 				EnableDisableControl("StatsDisplay",false);
+				EnableDisableControl("StatsCharname",false);
+				EnableDisableControl("StatsCharClass",false);
+				EnableDisableControl("StatsCharClassLevel",false);
+				EnableDisableControl("StatsCharSTR",false);
+				EnableDisableControl("StatsCharDEX",false);
+				EnableDisableControl("StatsCharINT",false);
+				EnableDisableControl("StatsCharVIT",false);
+				EnableDisableControl("StatsCharMana",false);
+				EnableDisableControl("StatsCharEXP",false);
+				EnableDisableControl("StatsCharSkillNames",false);
+				EnableDisableControl("StatsCharSkillValues",false);
+				EnableDisableControl("StatsDisplayUp",false);
+				EnableDisableControl("StatsDisplayDown",false);
+
+
 				//Turn on inventory
 				EnableDisableControl("Backpack_Slot_00",true);
 				EnableDisableControl("Backpack_Slot_01",true);
@@ -87,6 +102,20 @@ public class chains : MonoBehaviour {
 			case 1://Stats Display
 				//Turn on Stats
 				EnableDisableControl("StatsDisplay",true);
+				EnableDisableControl("StatsCharname",true);
+				EnableDisableControl("StatsCharClass",true);
+				EnableDisableControl("StatsCharClassLevel",true);
+				EnableDisableControl("StatsCharSTR",true);
+				EnableDisableControl("StatsCharDEX",true);
+				EnableDisableControl("StatsCharINT",true);
+				EnableDisableControl("StatsCharVIT",true);
+				EnableDisableControl("StatsCharMana",true);
+				EnableDisableControl("StatsCharEXP",true);
+				EnableDisableControl("StatsCharSkillNames",true);
+				EnableDisableControl("StatsCharSkillValues",true);
+				EnableDisableControl("StatsDisplayUp",true);
+				EnableDisableControl("StatsDisplayDown",true);
+
 				//Turn off rune bag (just in case)
 				EnableDisableControl("RuneBagDisplay",false);
 				EnableDisableControl ("RuneSlot00",false);
@@ -168,6 +197,20 @@ public class chains : MonoBehaviour {
 				EnableDisableControl ("ClearRunes",true);
 				//Turn off Stats
 				EnableDisableControl("StatsDisplay",false);
+				EnableDisableControl("StatsCharname",false);
+				EnableDisableControl("StatsCharClass",false);
+				EnableDisableControl("StatsCharClassLevel",false);
+				EnableDisableControl("StatsCharSTR",false);
+				EnableDisableControl("StatsCharDEX",false);
+				EnableDisableControl("StatsCharINT",false);
+				EnableDisableControl("StatsCharVIT",false);
+				EnableDisableControl("StatsCharMana",false);
+				EnableDisableControl("StatsCharEXP",false);
+				EnableDisableControl("StatsCharSkillNames",false);
+				EnableDisableControl("StatsCharSkillValues",false);
+				EnableDisableControl("StatsDisplayUp",false);
+				EnableDisableControl("StatsDisplayDown",false);
+
 				//Turn off inventory
 				EnableDisableControl("Backpack_Slot_00",false);
 				EnableDisableControl("Backpack_Slot_01",false);

@@ -84,6 +84,8 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
 
+	public const int LOCKPICK =78;
+
 	private UILabel MessageLog;
 
 	public Sprite InventoryDisplay;
@@ -532,11 +534,18 @@ public class ObjectInteraction : MonoBehaviour {
 			case KEY://	KEY 5
 				{//A key just becomes the object in hand
 				playerUW.CursorIcon= InventoryDisplay.texture;
-				//playerUW.CurrObjectSprite = InventoryString;
 				pInv.ObjectInHand=this.name;
-					return false;
+				return false;
+				break;
 				}
 				//nothing/use
+			case LOCKPICK:
+				{
+					playerUW.CursorIcon= InventoryDisplay.texture;
+					pInv.ObjectInHand=this.name;
+					return false;
+					break;
+				}
 			case RUNE://	RUNE 6
 				//nothing
 			case BRIDGE://	BRIDGE 7
