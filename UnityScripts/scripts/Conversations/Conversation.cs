@@ -6,6 +6,10 @@ public class Conversation : MonoBehaviour {
 	public static UWCharacter playerUW;
 	public static StringController SC;
 
+	public static int CurrentConversation;
+	public static bool InConversation = false;
+	public static bool ConversationOpen=false;
+
 	public int StringNo;
 
 	public int[] privateVariables=new int[31] ;
@@ -43,24 +47,42 @@ public class Conversation : MonoBehaviour {
 	public int game_time;
 	public int game_days;
 	public int game_mins;
+
+	public int PlayerAnswer;
+
+	bool Ready=false;
+
+	private int WhoAmI;
+
+	public UITextList tl;
+
 	// Use this for initialization
-	//void Start () {
+	void Start () {
+		WhoAmI = this.GetComponent<NPC>().WhoAmI;
 	
-	//}
+	}
 	
 	// Update is called once per frame
-	//void Update () {
-	
-	//}
+	void Update () {
+	if ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true))
+		{
+			ConversationOpen=false;
+			tl.Clear ();
+		}
+	}
 
-	public virtual void main()
+
+
+	public virtual IEnumerator main()
 	{
 		Debug.Log ("Start Conversation");
+		return null;
 	}
 
 	public void say(string WhatToSay)
 	{
-		Debug.Log(WhatToSay);
+		tl.Add(WhatToSay);
+		//Debug.Log(WhatToSay);
 	}
 
 	public void say(int WhatToSay)
@@ -80,7 +102,7 @@ public class Conversation : MonoBehaviour {
 		}
 	}
 
-	public int babl_menu(int unknown, int[] localsArray,int Start)
+	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
 	{
 
 		//If an offset is 0, the conversation slot is empty and no conversation is
@@ -102,7 +124,35 @@ public class Conversation : MonoBehaviour {
 				break;
 			}
 		}
-		Debug.Log(tmp);
-		return 1;
+
+		//Debug.Log(tmp);
+
+		//StartCoroutine (PrintBablMenu(tmp));
+		tl.Add(tmp);
+		Ready=false;
+		//PlayerAnswer=1;
+		PlayerAnswer= Random.Range (1,NoOfAnswers+1);
+		StartCoroutine(Wait(1.0f));
+		while(!Ready){
+			//code for checking my received strings....
+			yield return null;
+		}
+
+		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]) + "\n";
+		//Debug.Log (tmp);
+		//Debug.Log (PlayerAnswer + " out of " + NoOfAnswers + " " + tmp);
+		tl.Add (tmp);
+		//return null;
+		//return playerAnswer;
+		yield return 0;
+	}
+
+
+	public IEnumerator Wait(float waitTime)
+	{
+		//print( " s " + Time.time);
+		yield return new WaitForSeconds(waitTime);
+		Ready=true;
+		//print(" f " + Time.time);
 	}
 }

@@ -2,27 +2,34 @@
 using System.Collections;
 
 public class Conversation_67 : Conversation {
-
-	// Use this for initialization
-	void Start () {
 	
-	}
+	// Use this for initialization
+	//void Start () {
+	
+	//}
+	
+	
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
-	public override void  main() {
+	//void Update () {
 		
+	//}
+	
+	
+	public override IEnumerator main() {
+		tl.Clear();
+		ConversationOpen=true;
+		InConversation=true;
+		tl.textLabel.lineHeight=340;
+		tl.textLabel.lineWidth=480;
 		privateVariables[1] = 0;
-		func_029d();
+		yield return StartCoroutine(func_029d());
 		func_0012();
+		yield return 0;
 	} // end func
 	
 	void func_0012() {
-		
+		InConversation=false;
 		privateVariables[0] = 1;
 	} // end func
 	/*
@@ -153,9 +160,9 @@ public class Conversation_67 : Conversation {
 		
 	} // end func
 	
-	void func_029d() {
+	IEnumerator func_029d() {
 		
-		int[] locals=new int[277];
+		int[] locals=new int[278];
 		
 		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 1;
@@ -171,7 +178,8 @@ public class Conversation_67 : Conversation {
 			locals[5] = 5;
 			locals[6] = 6;
 			locals[7] = 0;
-			locals[25] = babl_menu( 0,locals,4 );
+			yield return StartCoroutine( babl_menu( 0,locals,4 ));
+			locals[25] = PlayerAnswer;
 			switch ( locals[25] ) {
 				
 			case 1:
@@ -210,12 +218,13 @@ public class Conversation_67 : Conversation {
 			goto label_0331;
 			
 		label_0331:;
-
+			
 			say( "Thou needst not be ashamed of thy misfortune, @SS1; thou art in the same pot with all of us now.  If thou art to have a chance of surviving in the Abyss for long, thou must learn the lay of the land." );
 			locals[26] = 11;
 			locals[27] = 12;
 			locals[28] = 0;
-			locals[47] = babl_menu( 0, locals,26 );
+			yield return StartCoroutine(babl_menu( 0, locals,26 ));
+			locals[47] = PlayerAnswer;
 			switch ( locals[47] ) {
 				
 			case 1:
@@ -238,7 +247,8 @@ public class Conversation_67 : Conversation {
 			locals[48] = 14;
 			locals[49] = 15;
 			locals[50] = 0;
-			locals[69] = babl_menu( 0, locals, 48 );
+			yield return StartCoroutine(babl_menu( 0, locals, 48 ));
+			locals[69] = PlayerAnswer;
 			switch ( locals[69] ) {
 				
 			case 1:
@@ -250,12 +260,14 @@ public class Conversation_67 : Conversation {
 			case 2:
 				
 				locals[70] = 2;
+				yield return new WaitForSeconds(5.0f);
 				func_00b1( locals,70 );
+				yield break;
 				break;
 				
 			} // end switch
 			
-
+			
 		label_03ba:;
 			
 			privateVariables[2] = 1;
@@ -263,7 +275,8 @@ public class Conversation_67 : Conversation {
 			locals[71] = 17;
 			locals[72] = 18;
 			locals[73] = 0;
-			locals[92] = babl_menu( 0, locals,71 );
+			yield return StartCoroutine(babl_menu( 0, locals,71 ));
+			locals[92] = PlayerAnswer;
 			switch ( locals[92] ) {
 				
 			case 1:
@@ -286,12 +299,13 @@ public class Conversation_67 : Conversation {
 			goto label_0404;
 			
 		label_0404:;
-
+			
 			say( "The Goblins control most of these upper caves.  Two races there are, the Green and the Gray.  If they do not destroy each other, it is not for lack of trying.\n Be thou especially careful of the Gray Goblins.  I was recently imprisoned by them for trespassing." );
 			locals[93] = 21;
 			locals[94] = 22;
 			locals[95] = 0;
-			locals[114] = babl_menu( 0, locals,93 );
+			yield return StartCoroutine( babl_menu( 0, locals,93 ));
+			locals[114] = PlayerAnswer;
 			switch ( locals[114] ) {
 				
 			case 1:
@@ -308,7 +322,8 @@ public class Conversation_67 : Conversation {
 			locals[115] = 24;
 			locals[116] = 25;
 			locals[117] = 0;
-			locals[136] = babl_menu( 0, locals,115 );
+			yield return StartCoroutine( babl_menu( 0, locals,115 ) );
+			locals[136] = PlayerAnswer;
 			switch ( locals[136] ) {
 				
 			case 1:
@@ -325,7 +340,8 @@ public class Conversation_67 : Conversation {
 			locals[137] = 27;
 			locals[138] = 28;
 			locals[139] = 0;
-			locals[158] = babl_menu( 0, locals,137 );
+			yield return StartCoroutine( babl_menu( 0, locals,137 ) );
+			locals[158] = PlayerAnswer;
 			switch ( locals[158] ) {
 				
 			case 1:
@@ -348,12 +364,13 @@ public class Conversation_67 : Conversation {
 			goto label_04c1;
 			
 		label_04c1:;
-
+			
 			say( "Thou canst find my people by going west from the entrance to the Abyss, and then north. There is a small chasm to jump over, but thou dost seem to be a dextrous @SS1.  Past the chasm is the sign of civilization everywhere throughout the Abyss: the Banner of Cabirus, marked with an ankh, the sign of the Avatar.\n Outside of areas marked with the Banner, thou shouldst watch thyself most carefully.  Most creatures who do not respect Cabirus' legacy are not particularly friendly." );
 			locals[159] = 31;
 			locals[160] = 32;
 			locals[161] = 0;
-			locals[180] = babl_menu( 0, locals,159 );
+			yield return StartCoroutine( babl_menu( 0, locals,159 ));
+			locals[180] = PlayerAnswer;
 			switch ( locals[180] ) {
 				
 			case 1:
@@ -368,7 +385,9 @@ public class Conversation_67 : Conversation {
 			
 			say( "Good luck in thy travels." );
 			locals[181] = 3;
+			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,181 );
+			yield break;
 		} // end if
 		
 		if ( privateVariables[2]==1 ) {
@@ -383,22 +402,25 @@ public class Conversation_67 : Conversation {
 			locals[182] = 35;
 			locals[183] = 36;
 			locals[184] = 0;
-			locals[203] = babl_menu( 0, locals,182 );
+			yield return StartCoroutine( babl_menu( 0, locals,182 ));
+			locals[203] = PlayerAnswer;
 			switch ( locals[203] ) {
 				
 			case 1:
 				
 				locals[204] = 1;
+				yield return new WaitForSeconds(5.0f);
 				func_00b1( locals,204 );
+				yield break;
 				break;
 				
 			case 2:
 				
 				goto label_03ba;
 				break;
-
-			
-			
+				
+				
+				
 			} // end if
 			
 			//Test 
@@ -410,7 +432,8 @@ public class Conversation_67 : Conversation {
 			locals[71] = 17;
 			locals[72] = 18;
 			locals[73] = 0;
-			locals[92] = babl_menu( 0, locals,71 );
+			yield return StartCoroutine( babl_menu( 0, locals,71 ) );
+			locals[92] = PlayerAnswer;
 			switch ( locals[92] ) {
 				
 			case 1:
@@ -427,7 +450,7 @@ public class Conversation_67 : Conversation {
 				
 			} // end switch
 			//end test
-
+			
 		label_03ff:;
 			
 			say( "I do not know.  It is rare that the Baron sends his men into the Abyss.  It must have been important.  Though, by the looks of it, the Goblins defeated them handily./m" );
@@ -439,7 +462,8 @@ public class Conversation_67 : Conversation {
 			locals[93] = 21;
 			locals[94] = 22;
 			locals[95] = 0;
-			locals[114] = babl_menu( 0, locals,93 );
+			yield return StartCoroutine ( babl_menu( 0, locals,93 ));
+			locals[114] = PlayerAnswer;
 			switch ( locals[114] ) {
 				
 			case 1:
@@ -451,10 +475,10 @@ public class Conversation_67 : Conversation {
 				break;
 				
 			} // end switch
-
-
-
-
+			
+			
+			
+			
 		} // end switch
 		
 		if ( privateVariables[3] ==1) {
@@ -466,7 +490,8 @@ public class Conversation_67 : Conversation {
 			locals[206] = 39;
 			locals[207] = 40;
 			locals[208] = 0;
-			locals[226] = babl_menu( 0, locals,205 );
+			yield return StartCoroutine( babl_menu( 0, locals,205 ));
+			locals[226]=PlayerAnswer;
 			switch ( locals[226] ) {
 				
 			case 1:
@@ -493,12 +518,16 @@ public class Conversation_67 : Conversation {
 			
 			say( "Well, 'tis thy decision.  I am sure they would welcome thee." );
 			locals[227] = 2;
+			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,227 );
+			yield break;
 		label_05c8:;
 			
 			say( "Go west from the entrance chamber, past a door, and then north over a chasm. Remember, the Banner of Cabirus -- with the mark of the ankh on it -- is the mark of civilization in the Abyss." );
 			locals[228] = 2;
+			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,228 );
+			yield break;
 		label_05d6:;
 			
 			privateVariables[3] = 1;
@@ -506,19 +535,24 @@ public class Conversation_67 : Conversation {
 			locals[229] = 44;
 			locals[230] = 45;
 			locals[231] = 0;
-			locals[250] = babl_menu( 0, locals,229 );
+			yield return StartCoroutine( babl_menu( 0, locals,229 ) );
+			locals[250] = PlayerAnswer;
 			switch ( locals[250] ) {
 				
 			case 1:
 				
 				locals[251] = 3;
+				yield return new WaitForSeconds(5.0f);
 				func_00b1( locals,251 );
+				yield break;
 				break;
 				
 			case 2:
 				
 				locals[252] = 2;
+				yield return new WaitForSeconds(5.0f);
 				func_00b1( locals,252 );
+				yield break;
 				break;
 			} // end if
 			
@@ -531,32 +565,108 @@ public class Conversation_67 : Conversation {
 		locals[254] = 48;
 		locals[255] = 49;
 		locals[256] = 0;
-		locals[274] = babl_menu( 0, locals,253 );
+		yield return StartCoroutine (babl_menu( 0, locals,253 ));
+		locals[274] = PlayerAnswer;
 		switch ( locals[274] ) {
 			
 		case 1:
 			
 			locals[275] = 2;
+			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,275 );
+			yield break;
 			break;
 			
 		case 2:
 			
 			locals[276] = 2;
+			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,276 );
+			yield break;
 			break;
 			
 		case 3:
 			
 			locals[277] = 3;
+			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,277 );
+			yield break;
 			break;
 			
 		} // end switch
-		
-	} // end func
 
+		yield return new WaitForSeconds(5.0f);
+		yield break;	
+
+	} // end func
+	
+
+	
+	
+}
+
+
+
+/*using UnityEngine;
+using System.Collections;
+
+public class Conversation_67 : Conversation {
+
+	// Use this for initialization
+	//void Start () {
+	
+	//}
+
+
+
+	// Update is called once per frame
+	void Update () {
+	
+	}
+
+
+	public override IEnumerator  main() {
+		tl.Clear();
+		Debug.Log ("main");
+		tl.textLabel.lineHeight=340;
+		tl.textLabel.lineWidth=480;
+		privateVariables[1] = 0;
+		yield return StartCoroutine(func_029d());
+		//func_0012();
+		Debug.Log ("finised 029d");
+		yield return 0;
+	} // end func
+	
+
+	IEnumerator func_029d() {
+		Debug.Log ("Func_029d");
+		int[] locals=new int[277];
+
+		privateVariables[2] = 0;
+		privateVariables[3] = 0;
+		say( "Hail, stranger!  What be thy business?  I have not seen thee in this place before." );
+		locals[4] = 4;
+		locals[5] = 5;
+		locals[6] = 6;
+		locals[7] = 0;
+
+		yield return StartCoroutine(babl_menu (0,locals,4));
+		Debug.Log ("back from coroutine");
+		locals[25] = PlayerAnswer; //babl_menu( 0,locals,4 );
+		switch ( locals[25] ) {
+		
+		case 0:
+			say ("answer 1");break;
+		case 1:
+			say ("answer 2");break;
+		case 2:
+			say ("answer 3");break;
+		default:
+			say ("no anwser!");break;
+		}
+	}
 
 
 
 }
+*/
