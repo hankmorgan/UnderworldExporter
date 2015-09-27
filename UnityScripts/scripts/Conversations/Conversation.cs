@@ -49,12 +49,19 @@ public class Conversation : MonoBehaviour {
 	public int game_mins;
 
 	public int PlayerAnswer;
+	private int MinAnswer=1;
+	private int MaxAnswer=1;
 
 	bool Ready=false;
 
 	private int WhoAmI;
 
+	public bool inputRecieved;
+	public bool WaitingForInput;
+
 	public UITextList tl;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -69,8 +76,47 @@ public class Conversation : MonoBehaviour {
 			ConversationOpen=false;
 			tl.Clear ();
 		}
+		else
+		{
+		if (WaitingForInput)
+			{
+				if (Input.GetKeyDown (KeyCode.Alpha1))
+				{
+					CheckAnswer(1);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha2))
+				{
+					CheckAnswer(2);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha3))
+				{
+					CheckAnswer(3);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha4))
+				{
+					CheckAnswer(4);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha5))
+				{
+					CheckAnswer(5);
+				}
+				else if (Input.GetKeyDown (KeyCode.Alpha6))
+				{
+					CheckAnswer(6);
+				}
+			}
+		}
 	}
 
+	private void CheckAnswer(int AnswerNo)
+	{
+		if (AnswerNo<=MaxAnswer)
+		{
+			WaitingForInput =true;
+			PlayerAnswer=AnswerNo;
+			WaitingForInput=false;
+		}
+	}
 
 
 	public virtual IEnumerator main()
@@ -110,14 +156,14 @@ public class Conversation : MonoBehaviour {
 		//		0007, string number = (conversation slot number - 0x0e00 + 16).
 
 		string tmp="";
-		int NoOfAnswers=0;
+		MaxAnswer=0;
 		int j=1;
 		for (int i = Start; i <=localsArray.GetUpperBound(0) ; i++)
 		{
 			if (localsArray[i]!=0)
 			{
 				tmp = tmp + j++ + "." + SC.GetString(StringNo,localsArray[i]) + "\n";
-				NoOfAnswers++;
+				MaxAnswer++;
 			}
 			else
 			{
@@ -131,10 +177,12 @@ public class Conversation : MonoBehaviour {
 		tl.Add(tmp);
 		Ready=false;
 		//PlayerAnswer=1;
-		PlayerAnswer= Random.Range (1,NoOfAnswers+1);
-		StartCoroutine(Wait(1.0f));
+		//PlayerAnswer= Random.Range (1,NoOfAnswers+1);
+		//StartCoroutine(Wait(1.0f));
+
+		yield return StartCoroutine(WaitForKeyDown(KeyCode.Tab));
+
 		while(!Ready){
-			//code for checking my received strings....
 			yield return null;
 		}
 
@@ -154,5 +202,13 @@ public class Conversation : MonoBehaviour {
 		yield return new WaitForSeconds(waitTime);
 		Ready=true;
 		//print(" f " + Time.time);
+	}
+
+	IEnumerator WaitForKeyDown(KeyCode keyCode)
+	{
+		WaitingForInput=true;
+		while (WaitingForInput)
+			{yield return null;}
+		Ready=true;
 	}
 }
