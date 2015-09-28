@@ -675,9 +675,25 @@ switch (game)
 
 		if (x<256)	
 			{
-			//mobile objects			
-			objList[x].npc_whoami =getValAtAddress(lev_ark,objectsAddress+address_pointer+26,8);
-			objList[x].npc_attitude = (getValAtAddress(lev_ark,objectsAddress+address_pointer+13,16) >> 14);
+			//mobile objects		
+			objList[x].npc_hp = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8);
+			
+			objList[x].npc_goal = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF;
+			objList[x].npc_gtarg = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16)>>4 & 0xFF);
+
+			objList[x].npc_level = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF;
+
+			objList[x].npc_talkedto = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
+			objList[x].npc_attitude = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
+
+			objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 16) >> 4 & 0x3F);
+			objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 16) >> 10 & 0x3F);
+
+			objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 16) >> 4 & 0xF);
+			objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 16) & 0x3F);
+
+			objList[x].npc_whoami = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x1a, 8);
+			//objList[x].npc_attitude = (getValAtAddress(lev_ark,objectsAddress+address_pointer+13,16) >> 14);
 
 			////extra info //19 bytes
 			//fprintf(LOGFILE,"\n\tFree extra inf. Value 5=%d",getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+8,8));

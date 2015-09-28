@@ -612,6 +612,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 		//{
 		UniqueObjectName(objList[x]);
 		fprintf(LOGFILE,"\n\nIndex: %d", objList[x].index);
+		fprintf(LOGFILE, "\n\nAddress: %d", objList[x].address);
 		fprintf(LOGFILE,"\tName: %s", UniqueObjectName(objList[x]));
 		if (objectMasters[objList[x].item_id].isSet == 1)
 			{
@@ -653,8 +654,40 @@ void PrintUWObjects(ObjectItem objList[1600])
 
 		if (objList[x].npc_whoami >0)
 			{
+			fprintf(LOGFILE, "\n\tNPC HP : %d ", objList[x].npc_hp);
+			fprintf(LOGFILE, "\n\tNPC Goal : %d ", objList[x].npc_goal);
+			fprintf(LOGFILE, "\n\tNPC GTarg : %d ", objList[x].npc_gtarg);
+			fprintf(LOGFILE, "\n\tNPC Level : %d ", objList[x].npc_level);
+			fprintf(LOGFILE, "\n\tNPC TalkedTo : %d ", objList[x].npc_talkedto);
+			fprintf(LOGFILE, "\n\tNPC Attitude : %d ", objList[x].npc_attitude);
+			fprintf(LOGFILE, "\n\tNPC yHome : %d ", objList[x].npc_yhome);
+			fprintf(LOGFILE, "\n\tNPC xHome : %d ", objList[x].npc_xhome);
+			fprintf(LOGFILE, "\n\tNPC Heading : %d ", objList[x].npc_heading);
+			fprintf(LOGFILE, "\n\tNPC Hunger : %d ", objList[x].npc_hunger);
 			fprintf(LOGFILE,"\n\tNPC Who Am I : %d ", objList[x].npc_whoami);
-			fprintf(LOGFILE,"\n\tNPC Attitude : %d ", objList[x].npc_attitude);
+			//fprintf(LOGFILE,"\n\tNPC Attitude : %d ", objList[x].npc_attitude);
+
+
+			/*
+
+			objList[x].npc_hp = getValAtAddress(lev_ark, objectsAddress + address_pointer + 8, 8);
+
+			objList[x].npc_goal = getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16) & 0xF;
+			objList[x].npc_gtarg = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16)>>4 & 0xFF);
+
+			objList[x].npc_level = getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16) & 0xF;
+
+			objList[x].npc_talkedto = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16)>>13 & 0x1);
+			objList[x].npc_attitude = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 13, 16) >> 14 & 0x3);
+
+			objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 22, 16) >> 4 & 0xF);
+			objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 22, 16) >> 10 & 0xF);
+
+			objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 24, 16) >> 4 & 0xF);
+			objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 25, 16)  & 0x3F);
+
+
+*/
 			}
 
 		if ((objectMasters[objList[x].item_id].type == TMAP_SOLID) 

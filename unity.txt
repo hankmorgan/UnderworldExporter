@@ -72,7 +72,7 @@
 	myObj = new GameObject("a_rotworm_58_02_00_0222");
 	pos = new Vector3(70.114288f, 1.500000f, 2.914286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"64","Sprites/OBJECTS_064");
+	CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 58, 2, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -194,7 +194,7 @@
 	myObj = new GameObject("a_acid_slug_55_04_00_0227");
 	pos = new Vector3(66.514290f, 2.400000f, 5.314286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"69","Sprites/OBJECTS_069");
+	CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 55, 4, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -231,7 +231,7 @@
 	myObj = new GameObject("a_rotworm_05_06_00_0252");
 	pos = new Vector3(6.514286f, 0.300000f, 7.714286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"64","Sprites/OBJECTS_064");
+	CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 5, 6, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -331,7 +331,7 @@
 	myObj = new GameObject("a_cave_bat_45_06_00_0229");
 	pos = new Vector3(54.514286f, 2.100000f, 7.714286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 45, 6, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -340,7 +340,7 @@
 	myObj = new GameObject("a_cave_bat_50_06_00_0228");
 	pos = new Vector3(60.514286f, 1.800000f, 7.714286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 50, 6, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -365,7 +365,7 @@
 	myObj = new GameObject("an_outcast_17_07_00_0240");
 	pos = new Vector3(20.914284f, 3.600000f, 8.914286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 67);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 17, 7, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -409,7 +409,7 @@
 	myObj = new GameObject("a_giant_rat_22_08_00_0254");
 	pos = new Vector3(27.428572f, 3.000000f, 10.457142f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 22, 8, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -582,7 +582,7 @@
 	myObj = new GameObject("a_giant_rat_18_12_00_0214");
 	pos = new Vector3(22.457144f, 3.600000f, 14.914286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 18, 12, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -652,12 +652,12 @@
 
 	myObj= CreateGameObject("a_campfire_30_12_00_0741",36.514286f,1.800000f,14.914286f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 
 	myObj = new GameObject("an_outcast_33_12_00_0241");
 	pos = new Vector3(40.457142f, 2.100000f, 14.914286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 12, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -741,7 +741,7 @@
 	myObj = new GameObject("a_acid_slug_59_14_00_0226");
 	pos = new Vector3(71.314285f, 3.300000f, 17.314285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"69","Sprites/OBJECTS_069");
+	CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 59, 14, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -750,7 +750,7 @@
 	myObj = new GameObject("a_vampire_bat_02_15_00_0209");
 	pos = new Vector3(2.914286f, 1.500000f, 18.514286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"73","Sprites/OBJECTS_073");
+	CreateNPC(myObj,"73","Sprites/OBJECTS_073", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 2, 15, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -759,7 +759,7 @@
 	myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 6048460, 6048460);
+	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 2772160, 2772160);
 
 	myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -777,7 +777,7 @@
 	myObj = new GameObject("an_outcast_33_15_00_0239");
 	pos = new Vector3(40.457142f, 2.100000f, 18.857141f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 15, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -786,7 +786,7 @@
 	myObj = new GameObject("a_cave_bat_12_16_00_0211");
 	pos = new Vector3(14.914286f, 0.600000f, 19.714287f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 12, 16, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -824,7 +824,7 @@
 	myObj = new GameObject("a_giant_rat_02_17_00_0215");
 	pos = new Vector3(2.914286f, 2.700000f, 20.914284f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"72","Sprites/OBJECTS_072");
+	CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 17, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -877,7 +877,7 @@
 	myObj = new GameObject("a_giant_rat_02_19_00_0217");
 	pos = new Vector3(2.914286f, 2.700000f, 23.314285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 19, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -894,7 +894,7 @@
 	myObj = new GameObject("an_outcast_22_19_00_0242");
 	pos = new Vector3(26.914284f, 3.600000f, 23.314285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 20);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 22, 19, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -928,7 +928,7 @@
 	myObj = new GameObject("an_imp_12_20_00_0213");
 	pos = new Vector3(14.914286f, 3.900000f, 24.514284f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"75","Sprites/OBJECTS_075");
+	CreateNPC(myObj,"75","Sprites/OBJECTS_075", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", 0, 75, 0, 12, 20, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -945,7 +945,7 @@
 	myObj = new GameObject("an_outcast_33_20_00_0243");
 	pos = new Vector3(40.114285f, 3.600000f, 24.685715f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 19);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 20, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -972,7 +972,7 @@
 	myObj = new GameObject("a_giant_rat_02_22_00_0216");
 	pos = new Vector3(2.914286f, 2.700000f, 26.914284f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 22, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -986,7 +986,7 @@
 	myObj = new GameObject("a_lurker_14_23_00_0250");
 	pos = new Vector3(17.314285f, 0.300000f, 28.114285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+	CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 14, 23, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -995,7 +995,7 @@
 	myObj = new GameObject("a_cave_bat_31_23_00_0212");
 	pos = new Vector3(37.714283f, 1.200000f, 28.114285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 31, 23, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1041,7 +1041,7 @@
 	myObj = new GameObject("a_giant_spider_29_26_00_0253");
 	pos = new Vector3(35.314285f, 3.600000f, 31.714285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+	CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 29, 26, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1067,7 +1067,7 @@
 	myObj = new GameObject("a_goblin_36_28_00_0225");
 	pos = new Vector3(43.714287f, 3.600000f, 34.114285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+	CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 36, 28, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1122,7 +1122,7 @@
 	myObj = new GameObject("a_flesh_slug_26_33_00_0207");
 	pos = new Vector3(31.714285f, 2.100000f, 40.114285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"65","Sprites/OBJECTS_065");
+	CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 26, 33, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1149,7 +1149,7 @@
 	myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 6048460, 6048460);
+	CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 2772160, 2772160);
 
 
 	myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1195,7 +1195,7 @@
 	myObj = new GameObject("a_goblin_15_35_00_0220");
 	pos = new Vector3(18.514286f, 2.100000f, 42.514286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+	CreateNPC(myObj,"71","Sprites/OBJECTS_071", 66);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 537, 15, 35, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1217,7 +1217,7 @@
 	myObj = new GameObject("a_skeleton_54_35_00_0204");
 	pos = new Vector3(65.314285f, 2.400000f, 42.514286f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074");
+	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 54, 35, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1319,7 +1319,7 @@
 	myObj = new GameObject("a_goblin_03_38_00_0219");
 	pos = new Vector3(4.114285f, 3.600000f, 46.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+	CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 3, 38, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1328,7 +1328,7 @@
 	myObj = new GameObject("a_goblin_11_38_00_0218");
 	pos = new Vector3(13.714286f, 3.600000f, 46.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+	CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 11, 38, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1342,7 +1342,7 @@
 	myObj = new GameObject("a_lurker_26_38_00_0223");
 	pos = new Vector3(31.714285f, 0.900000f, 46.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+	CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 26, 38, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1369,7 +1369,7 @@
 	myObj = new GameObject("a_goblin_54_38_00_0224");
 	pos = new Vector3(65.314285f, 3.600000f, 46.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"78","Sprites/OBJECTS_078");
+	CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 54, 38, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1399,7 +1399,7 @@
 
 	myObj= CreateGameObject("a_campfire_03_39_00_0778",4.114285f,3.300000f,47.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 
 	myObj= CreateGameObject("a_rock_hammer_09_39_00_0598",11.828571f,3.600000f,47.657143f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_296",true);
@@ -1459,7 +1459,7 @@
 	myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 30, 0, 1, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 6047684, 6047684);
+	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 2771384, 2771384);
 	myObj.transform.position = invMarker.transform.position;
 	AddObjectToContainer(myObj, ParentContainer, 4);
 	FreezeMovement(myObj);
@@ -1508,7 +1508,7 @@
 
 	myObj= CreateGameObject("a_campfire_08_42_00_0767",10.114285f,3.300000f,50.914288f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 
 	myObj= CreateGameObject("a_cauldron_11_42_00_0763",13.714286f,3.600000f,50.914288f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_303",true);
@@ -1516,7 +1516,7 @@
 	myObj = new GameObject("a_goblin_08_43_00_0244");
 	pos = new Vector3(10.114285f, 3.600000f, 52.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+	CreateNPC(myObj,"70","Sprites/OBJECTS_070", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 8, 43, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1525,7 +1525,7 @@
 	myObj = new GameObject("a_goblin_10_43_00_0245");
 	pos = new Vector3(12.514286f, 3.600000f, 52.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+	CreateNPC(myObj,"70","Sprites/OBJECTS_070", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 10, 43, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1534,7 +1534,7 @@
 	myObj = new GameObject("a_cave_bat_23_43_00_0210");
 	pos = new Vector3(28.114285f, 2.100000f, 52.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 23, 43, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1543,7 +1543,7 @@
 	myObj = new GameObject("a_cave_bat_24_43_00_0208");
 	pos = new Vector3(29.314285f, 2.400000f, 52.114288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 24, 43, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1627,7 +1627,7 @@
 	myObj = new GameObject("a_giant_spider_27_46_00_0247");
 	pos = new Vector3(32.914284f, 2.400000f, 55.714287f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+	CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 27, 46, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1654,7 +1654,7 @@
 	myObj = new GameObject("a_goblin_04_47_00_0200");
 	pos = new Vector3(5.314286f, 3.600000f, 57.257145f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+	CreateNPC(myObj,"71","Sprites/OBJECTS_071", 255);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 0, 4, 47, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1881,7 +1881,7 @@
 	myObj = new GameObject("a_goblin_60_51_00_0238");
 	pos = new Vector3(72.514290f, 3.600000f, 61.714287f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+	CreateNPC(myObj,"80","Sprites/OBJECTS_080", 7);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 60, 51, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1904,7 +1904,7 @@
 	myObj = new GameObject("a_goblin_45_52_00_0233");
 	pos = new Vector3(54.857143f, 3.600000f, 62.742855f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 65);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 52, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1914,7 +1914,7 @@
 	myObj = new GameObject("a_goblin_52_52_00_0234");
 	pos = new Vector3(62.914288f, 3.000000f, 62.914288f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 52, 52, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1971,7 +1971,7 @@
 	myObj = new GameObject("a_wolf_spider_19_54_00_0246");
 	pos = new Vector3(23.314285f, 2.700000f, 65.314285f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"83","Sprites/OBJECTS_083");
+	CreateNPC(myObj,"83","Sprites/OBJECTS_083", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", 0, 83, 0, 19, 54, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -1986,7 +1986,7 @@
 	myObj = new GameObject("a_giant_spider_37_54_00_0248");
 	pos = new Vector3(45.085712f, 3.300000f, 65.142853f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+	CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 37, 54, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2038,7 +2038,7 @@
 	myObj = new GameObject("a_goblin_46_55_00_0236");
 	pos = new Vector3(55.714287f, 3.600000f, 66.514290f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 46, 55, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2047,7 +2047,7 @@
 	myObj = new GameObject("a_lurker_51_55_00_0206");
 	pos = new Vector3(61.714287f, 2.700000f, 66.514290f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+	CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 51, 55, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2056,7 +2056,7 @@
 	myObj = new GameObject("a_goblin_57_55_00_0249");
 	pos = new Vector3(68.914284f, 3.600000f, 66.514290f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+	CreateNPC(myObj,"80","Sprites/OBJECTS_080", 8);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 538, 57, 55, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2074,7 +2074,7 @@
 	myObj = new GameObject("a_goblin_04_56_00_0230");
 	pos = new Vector3(5.314286f, 3.600000f, 67.714287f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+	CreateNPC(myObj,"70","Sprites/OBJECTS_070", 10);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 810, 4, 56, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2104,7 +2104,7 @@
 	myObj = new GameObject("a_goblin_45_56_00_0237");
 	pos = new Vector3(54.514286f, 3.600000f, 67.714287f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 64);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 56, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2113,7 +2113,7 @@
 	myObj = new GameObject("a_goblin_47_56_00_0235");
 	pos = new Vector3(56.914288f, 3.600000f, 67.714287f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 47, 56, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2122,7 +2122,7 @@
 	myObj = new GameObject("a_goblin_02_57_00_0231");
 	pos = new Vector3(3.580000f, 3.600000f, 68.742859f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+	CreateNPC(myObj,"71","Sprites/OBJECTS_071", 9);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 534, 2, 57, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2164,14 +2164,14 @@
 
 	myObj= CreateGameObject("a_campfire_47_57_00_0720",56.914288f,3.300000f,68.914284f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 
 	myObj= CreateGameObject("a_bench_benches_02_58_00_0771",2.914286f,3.600000f,70.285713f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
 
 	myObj= CreateGameObject("a_campfire_03_58_00_0543",4.457143f,3.600000f,70.457146f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 
 	myObj= CreateGameObject("a_mandolin_03_58_00_0542",3.942857f,3.600000f,70.285713f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
@@ -2190,7 +2190,7 @@
 	myObj = new GameObject("a_goblin_51_58_00_0203");
 	pos = new Vector3(62.228569f, 3.000000f, 69.942856f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 51, 58, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2297,7 +2297,7 @@
 	myObj = new GameObject("a_goblin_52_59_00_0202");
 	pos = new Vector3(63.257145f, 3.600000f, 71.657143f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+	CreateNPC(myObj,"80","Sprites/OBJECTS_080", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 52, 59, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2314,7 +2314,7 @@
 	myObj = new GameObject("a_flesh_slug_37_60_00_0221");
 	pos = new Vector3(44.914288f, 2.700000f, 72.514290f);
 	myObj.transform.position = pos;
-	CreateNPC(myObj,"65","Sprites/OBJECTS_065");
+	CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 37, 60, 0, 0, 1);
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
@@ -2388,10 +2388,9 @@
 	CreateUWActivators(myObj,"ButtonHandler","a_toadstool_16_04_00_0582",40,0,8,7,302);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", 17, 302, 582, 40, 0, 0, 0, 0);
 
-	myObj= CreateGameObject("a_lockpick_000_3",42.857143f,3.000000f,74.057144f);
+	myObj= CreateGameObject("a_lockpick_35_61_00_0632",42.857143f,3.000000f,74.057144f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_257",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 5, 257, 1, 40, 0, 1, 0, 1);
-	CreateKey(myObj, 0);
+	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 79, 257, 1, 40, 0, 1, 0, 1);
 
 	myObj= CreateGameObject("some_writing_38_61_00_0902",46.114288f,3.900000f,74.379997f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
@@ -2586,12 +2585,12 @@
 	myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,6048740);
+	Create_a_do_trap(myObj,3,2772440);
 
 	myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,6048740);
+	Create_a_do_trap(myObj,3,2772440);
 
 	myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2606,12 +2605,12 @@
 	myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,6048740);
+	Create_a_do_trap(myObj,3,2772440);
 
 	myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,6048740);
+	Create_a_do_trap(myObj,3,2772440);
 
 	myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);

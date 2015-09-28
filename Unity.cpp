@@ -182,7 +182,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\");", currobj.item_id, objectMasters[currobj.item_id].particle);
+	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\", %d);", currobj.item_id, objectMasters[currobj.item_id].particle, currobj.npc_whoami);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	fprintf(UNITY_FILE, "\n\t////Container contents");
 	fprintf(UNITY_FILE, "\n\tParentContainer = CreateContainer(myObj, %d, %d, %d);"

@@ -659,6 +659,7 @@ void copyNibbles(unsigned char *InputData, unsigned char *OutputData, int NoOfNi
 {
 //Split the data up into in's nibbles.
 int i = 0;
+NoOfNibbles=NoOfNibbles*2;
 	while (NoOfNibbles > 1)
 	{
 		OutputData[i] = (getValAtAddress(InputData, add_ptr, 8) >> 4) & 0x0F;		//High nibble

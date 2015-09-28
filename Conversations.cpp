@@ -7,7 +7,7 @@ Functions for implementing conversations in UW1&2
 */
 #include "utils.h"
 #include "main.h"
-
+#include "Conversations.h"
 
 void ExtractConversations(int game)
 	{
@@ -27,15 +27,15 @@ void ExtractConversations(int game)
 		}
 
 	if ((file = fopen(UW1_CONVERSATION, "rb")) == NULL)
-		printf("Could not open specified file\n");
+		fprintf(LOGFILE,"Could not open specified file\n");
 	else
-		printf("");
+		fprintf(LOGFILE,"");
 	long fileSize = getFileSize(file);
 	cnv_ark = new unsigned char[fileSize];
 	fread(cnv_ark, fileSize, 1, file);
 	fclose(file);
 
-	printf("Conversation Header\nNo of Conversations %d", getValAtAddress(cnv_ark, 0, 16));
+	fprintf(LOGFILE,"Conversation Header\nNo of Conversations %d", getValAtAddress(cnv_ark, 0, 16));
 	int noOfConversations = getValAtAddress(cnv_ark, 0, 16);
 	add_ptr = 2;
 	for (int i = 0; i < noOfConversations; i++)
@@ -43,66 +43,115 @@ void ExtractConversations(int game)
 		cnv_ptr = getValAtAddress(cnv_ark, add_ptr, 32);
 		if (cnv_ptr != 0)
 			{
-			printf("\n\t Offset to conversation %d: %d", i, getValAtAddress(cnv_ark, add_ptr, 32));
-			printf("\n\t\tConversation Header:");
-			printf("\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 0, 16));
-			printf("\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 2, 16));
-			printf("\n\t\tCode Size: %d", getValAtAddress(cnv_ark, cnv_ptr + 4, 16));
+			fprintf(LOGFILE,"\n\t Offset to conversation %d: %d", i, getValAtAddress(cnv_ark, add_ptr, 32));
+			fprintf(LOGFILE,"\n\t\tConversation Header:");
+			fprintf(LOGFILE,"\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 0, 16));
+			fprintf(LOGFILE,"\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 2, 16));
+			fprintf(LOGFILE,"\n\t\tCode Size: %d", getValAtAddress(cnv_ark, cnv_ptr + 4, 16));
 			int codeSize = getValAtAddress(cnv_ark, cnv_ptr + 4, 16);
-			printf("\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 6, 16));
-			printf("\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 8, 16));
-			printf("\n\t\tStrings Block: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xA, 16));
-			printf("\n\t\tTalking to: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xA, 16) - 0x0e00 + 16);
-			printf("\n\t\tNo of Memory slots: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xC, 16));
+			fprintf(LOGFILE,"\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 6, 16));
+			fprintf(LOGFILE,"\n\t\tUnknown: %d", getValAtAddress(cnv_ark, cnv_ptr + 8, 16));
+			fprintf(LOGFILE,"\n\t\tStrings Block: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xA, 16));
+			fprintf(LOGFILE,"\n\t\tTalking to: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xA, 16) - 0x0e00 + 16);
+			fprintf(LOGFILE,"\n\t\tNo of Memory slots: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xC, 16));
 			int NoOfImports = getValAtAddress(cnv_ark, cnv_ptr + 0xE, 16);
-			printf("\n\t\tNo of imported globals: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xE, 16));
-			printf("\n\t\t\tImported Functions List");
+			fprintf(LOGFILE,"\n\t\tNo of imported globals: %d", getValAtAddress(cnv_ark, cnv_ptr + 0xE, 16));
+			fprintf(LOGFILE,"\n\t\t\tImported Functions List");
 			int func_ptr = cnv_ptr + 0x10;
 			for (int k = 0; k < NoOfImports; k++)
 				{
-				printf("\n\n\t\t\tLength of Function Name: %d", getValAtAddress(cnv_ark, func_ptr, 16));
+				fprintf(LOGFILE,"\n\n\t\t\tLength of Function Name: %d", getValAtAddress(cnv_ark, func_ptr, 16));
 				int functionLength = getValAtAddress(cnv_ark, func_ptr, 16);
-				printf("\n\t\t\tFunction Name:");
+				fprintf(LOGFILE,"\n\t\t\tFunction Name:");
 				for (int j = 0; j < functionLength; j++)
 					{
-					printf("%c", cnv_ark[func_ptr + 2 + j]);
+					fprintf(LOGFILE,"%c", cnv_ark[func_ptr + 2 + j]);
 					}
 
-				printf("\n\t\t\t\tID (imported func) or Memory address (variable): %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 2, 16));
-				printf("\n\t\t\t\tUnknown: %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 4, 16));
+				fprintf(LOGFILE,"\n\t\t\t\tID (imported func) or Memory address (variable): %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 2, 16));
+				fprintf(LOGFILE,"\n\t\t\t\tUnknown: %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 4, 16));
 				switch (getValAtAddress(cnv_ark, func_ptr + functionLength + 6, 16))//Import Type
 					{
 						case 0x010F:
-							printf("\n\t\t\t\tImport Type: Variable"); break;
+							fprintf(LOGFILE,"\n\t\t\t\tImport Type: Variable"); break;
 						case 0x0111:
-							printf("\n\t\t\t\tImport Type: Imported Func"); break;
+							fprintf(LOGFILE,"\n\t\t\t\tImport Type: Imported Func"); break;
 						default:
-							printf("\n\t\t\t\tImport Type: Unknown %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 6, 16)); break;
+							fprintf(LOGFILE,"\n\t\t\t\tImport Type: Unknown %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 6, 16)); break;
 					}
 				switch (getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16))
 					{
 						case 0x000:
-							printf("\n\t\t\t\tReturn Type: void", getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16)); break;
+							fprintf(LOGFILE,"\n\t\t\t\tReturn Type: void", getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16)); break;
 						case 0x129:
-							printf("\n\t\t\t\tReturn Type: Int", getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16)); break;
+							fprintf(LOGFILE,"\n\t\t\t\tReturn Type: Int", getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16)); break;
 						case 0x12B:
-							printf("\n\t\t\t\tReturn Type: String"); break;
+							fprintf(LOGFILE,"\n\t\t\t\tReturn Type: String"); break;
 						default:
-							printf("\n\t\t\t\tReturn Type: Unknown %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16)); break;
+							fprintf(LOGFILE,"\n\t\t\t\tReturn Type: Unknown %d", getValAtAddress(cnv_ark, func_ptr + functionLength + 8, 16)); break;
 					}
 
 				func_ptr = func_ptr + functionLength + 10;
 				}
-			printf("\n\t\t\t\t\tCode:\n\t\t\t\t\t");
+			fprintf(LOGFILE,"\n\t\t\t\t\tCode:\n");
 			for (int z = 0; z<codeSize * 2; z = z + 2)
 				{
-				printf("%d,", getValAtAddress(cnv_ark, func_ptr + z, 16));
+				fprintf(LOGFILE,"\t\t\t\t\t");
+				int OPCode = getValAtAddress(cnv_ark, func_ptr + z, 16);
+				//fprintf(LOGFILE,"%d,", getValAtAddress(cnv_ark, func_ptr + z, 16));
+				fprintf(LOGFILE,"%d:",z);
+				switch (OPCode)
+					{
+						case cnv_NOP: fprintf(LOGFILE,"NOP\n"); break;
+						case cnv_OPADD: fprintf(LOGFILE,"OPADD\n"); break;
+						case cnv_OPMUL: fprintf(LOGFILE,"OPMUL\n"); break;
+						case cnv_OPSUB: fprintf(LOGFILE,"OPSUB\n"); break;
+						case cnv_OPDIV: fprintf(LOGFILE,"OPDIV\n"); break;
+						case cnv_OPMOD: fprintf(LOGFILE,"OPMOD\n"); break;
+						case cnv_OPOR: fprintf(LOGFILE,"OPOR\n"); break;
+						case cnv_OPAND: fprintf(LOGFILE,"OPAND\n"); break;
+						case cnv_OPNOT: fprintf(LOGFILE,"OPNOT\n"); break;
+						case cnv_TSTGT: fprintf(LOGFILE,"TSTGT\n"); break;
+						case cnv_TSTGE: fprintf(LOGFILE,"TSTGE\n"); break;
+						case cnv_TSTLT: fprintf(LOGFILE,"TSTLT\n"); break;
+						case cnv_TSTLE: fprintf(LOGFILE,"TSTLE\n"); break;
+						case cnv_TSTEQ: fprintf(LOGFILE,"TSTEQ\n"); break;
+						case cnv_TSTNE: fprintf(LOGFILE,"TSTNE\n"); break;
+						case cnv_JMP: fprintf(LOGFILE,"JMP "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_BEQ: fprintf(LOGFILE,"BEQ "); z = z + 2; fprintf(LOGFILE," %d\n,", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_BNE: fprintf(LOGFILE,"BNE "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_BRA: fprintf(LOGFILE,"BRA "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_CALL: fprintf(LOGFILE,"CALL "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_CALLI: fprintf(LOGFILE,"CALLI "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_RET: fprintf(LOGFILE,"RET\n"); break;
+						case cnv_PUSHI: fprintf(LOGFILE,"PUSHI "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_PUSHI_EFF: fprintf(LOGFILE,"PUSHI_EFF "); z = z + 2; fprintf(LOGFILE," %d\n", getValAtAddress(cnv_ark, func_ptr + z, 16)); break;
+						case cnv_POP: fprintf(LOGFILE,"POP\n"); break;
+						case cnv_SWAP: fprintf(LOGFILE,"SWAP\n"); break;
+						case cnv_PUSHBP: fprintf(LOGFILE,"PUSHBP\n"); break;
+						case cnv_POPBP: fprintf(LOGFILE,"POPBP\n"); break;
+						case cnv_SPTOBP: fprintf(LOGFILE,"SPTOBP\n"); break;
+						case cnv_BPTOSP: fprintf(LOGFILE,"BPTOSP\n"); break;
+						case cnv_ADDSP: fprintf(LOGFILE,"ADDSP\n"); break;
+						case cnv_FETCHM: fprintf(LOGFILE,"FETCHM\n"); break;
+						case cnv_STO: fprintf(LOGFILE,"STO\n"); break;
+						case cnv_OFFSET: fprintf(LOGFILE,"OFFSET\n"); break;
+						case cnv_START: fprintf(LOGFILE,"START\n"); break;
+						case cnv_SAVE_REG: fprintf(LOGFILE,"SAVE_REG\n"); break;
+						case cnv_PUSH_REG: fprintf(LOGFILE,"PUSH_REG\n"); break;
+						case cnv_STRCMP: fprintf(LOGFILE,"STRCMP\n"); break;
+						case cnv_EXIT_OP: fprintf(LOGFILE,"EXIT_OP\n"); break;
+						case cnv_SAY_OP: fprintf(LOGFILE,"SAY_OP\n"); break;
+						case cnv_RESPOND_OP: fprintf(LOGFILE,"RESPOND_OP\n"); break;
+						case cnv_OPNEG: fprintf(LOGFILE,"OPNEG\n"); break;
+
+					}
 				}
 
 			}
 		else
 			{
-			//printf("\t (Empty Slot)");
+			//fprintf(LOGFILE,"\t (Empty Slot)");
 			}
 		add_ptr = add_ptr + 4;
 		}

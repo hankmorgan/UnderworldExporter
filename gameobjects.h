@@ -320,6 +320,7 @@ struct ObjectItem
     short npc_yhome;	// 4-9    
     short npc_xhome; // 10-15  
    //0018   0010   Int8   0-4:   npc_heading?
+	short npc_heading;
 //   0019      Int8   0-6:   
     short npc_hunger; //(?)
    //001a   0012   Int8          

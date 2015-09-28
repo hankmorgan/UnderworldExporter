@@ -15,7 +15,7 @@
 #define UW1_STRINGS_FILE "data\\strings.pak"
 #define UW1_CLEAN_STRINGS_FILE "uw1_stringsclean.txt"
 #define UW1_TERRAIN_PROPS "Data\\terrain.dat"
-#define UW1_CONVERSATION "data\\cnv.ark"
+#define UW1_CONVERSATION "C:\\Games\\UW1\\data\\cnv.ark"
 #define UW1_CRITTER_ASSOC "crit\\assoc.anm"
 #define UW1_WEAPON_PAL "data\\WEAPONS.CM"	//Palette file for weapon skin colours.
 //#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
