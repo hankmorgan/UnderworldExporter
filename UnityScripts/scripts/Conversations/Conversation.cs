@@ -67,8 +67,8 @@ public class Conversation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		WhoAmI = this.GetComponent<NPC>().WhoAmI;
-		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-		tl.textLabel.lineWidth=480;
+		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
+		//tl.textLabel.lineWidth=480;
 	}
 	
 	// Update is called once per frame

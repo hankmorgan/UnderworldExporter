@@ -96,35 +96,41 @@ public class DoorControl : MonoBehaviour {
 
 	public void OpenDoor()
 	{
-		if(!DoorBusy)
-		{
-			//Debug.Log ("Move door to open position");
-			if (isPortcullis==false)
+		if (state==false)
 			{
-				StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
-			}
-			else
+			if(!DoorBusy)
 			{
-				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.0f,0f),1.0f));
+				//Debug.Log ("Move door to open position");
+				if (isPortcullis==false)
+				{
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
+				}
+				else
+				{
+					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.0f,0f),1.0f));
+				}
+				state=true;
 			}
-			state=true;
 		}
 	}
 
 	public void CloseDoor()
 	{
-		if(!DoorBusy)
+		if (state==true)
 		{
-			//Debug.Log ("Move door to closed position");
-			if (isPortcullis==false)
+			if(!DoorBusy)
 			{
-				StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
+				//Debug.Log ("Move door to closed position");
+				if (isPortcullis==false)
+				{
+					StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
+				}
+				else
+				{
+					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.0f,0f),1.0f));
+				}
+				state=false;
 			}
-			else
-			{
-				StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.0f,0f),1.0f));
-			}
-			state=false;
 		}
 	}
 

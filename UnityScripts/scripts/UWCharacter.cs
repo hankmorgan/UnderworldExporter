@@ -81,6 +81,7 @@ public class UWCharacter : MonoBehaviour {
 	public bool[] Runes=new bool[24];
 	public int[] ActiveRunes=new int[3];
 
+	public int Body;//Which body/portrait this character has
 
 	//The storage location for container items.
 	public static GameObject InvMarker;
@@ -160,6 +161,8 @@ public class UWCharacter : MonoBehaviour {
 		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		Conversation.SC=ObjectInteraction.SC;
+		NPC.playerUW=this.GetComponent<UWCharacter>();
+
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		Screen.lockCursor=true;

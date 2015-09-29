@@ -20,8 +20,8 @@ public class Conversation_67 : Conversation {
 		tl.Clear();
 		ConversationOpen=true;
 		InConversation=true;
-		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-		tl.textLabel.lineWidth=480;
+		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
+		//tl.textLabel.lineWidth=480;
 		privateVariables[1] = 0;
 		yield return StartCoroutine(func_029d());
 		func_0012();
