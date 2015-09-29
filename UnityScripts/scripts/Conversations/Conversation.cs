@@ -59,14 +59,16 @@ public class Conversation : MonoBehaviour {
 	public bool inputRecieved;
 	public bool WaitingForInput;
 
-	public UITextList tl;
+	public UITextList tl;//Text output.
+	public UITextList tl_input;//player choices
 
-
+	public static Camera maincam;
 
 	// Use this for initialization
 	void Start () {
 		WhoAmI = this.GetComponent<NPC>().WhoAmI;
-	
+		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
+		tl.textLabel.lineWidth=480;
 	}
 	
 	// Update is called once per frame
@@ -75,6 +77,10 @@ public class Conversation : MonoBehaviour {
 		{
 			ConversationOpen=false;
 			tl.Clear ();
+			tl_input.Clear ();
+			tl_input.maxEntries=3;
+			maincam.enabled=true;
+			chains.ActiveControl=0;
 		}
 		else
 		{
@@ -127,7 +133,10 @@ public class Conversation : MonoBehaviour {
 
 	public void say(string WhatToSay)
 	{
+		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
+		tl.textLabel.lineWidth=480;
 		tl.Add(WhatToSay);
+
 		//Debug.Log(WhatToSay);
 	}
 
@@ -174,7 +183,9 @@ public class Conversation : MonoBehaviour {
 		//Debug.Log(tmp);
 
 		//StartCoroutine (PrintBablMenu(tmp));
-		tl.Add(tmp);
+		//tl.Add(tmp);
+		tl_input.maxEntries=1;
+		tl_input.Add (tmp);
 		Ready=false;
 		//PlayerAnswer=1;
 		//PlayerAnswer= Random.Range (1,NoOfAnswers+1);
@@ -189,7 +200,7 @@ public class Conversation : MonoBehaviour {
 		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]) + "\n";
 		//Debug.Log (tmp);
 		//Debug.Log (PlayerAnswer + " out of " + NoOfAnswers + " " + tmp);
-		tl.Add (tmp);
+		tl.Add ("\n" + tmp);
 		//return null;
 		//return playerAnswer;
 		yield return 0;

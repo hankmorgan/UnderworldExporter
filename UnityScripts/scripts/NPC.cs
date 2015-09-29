@@ -19,9 +19,15 @@ public class NPC : MonoBehaviour {
 
 	public void TalkTo()
 	{
-		Debug.Log("Talking to " + WhoAmI) ;
+		//Debug.Log("Talking to " + WhoAmI) ;
+		chains.ActiveControl=3;//Enable UI Elements
 		Conversation x = (Conversation)this.GetComponent("Conversation_67");
-		x.main();
+		Conversation.CurrentConversation=WhoAmI;
+		Conversation.InConversation=true;
+		Conversation.maincam=Camera.main;
+
+		Camera.main.enabled = false;
+		StartCoroutine(x.main ());
 		//Debug.Log (x.val);
 	}
 }

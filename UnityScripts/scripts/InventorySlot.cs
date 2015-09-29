@@ -440,11 +440,12 @@ public class InventorySlot : MonoBehaviour {
 
 	void OpenRuneBag()
 	{
-		chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
-		if (chainControl!=null)
-		{
-			chainControl.ActiveControl=2;
-		}
+		//chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
+		//if (chainControl!=null)
+		//{
+		chains.ActiveControl=2;
+			//chainControl.ActiveControl=2;
+		//}
 	}
 
 //	void OnClick()

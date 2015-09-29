@@ -15,12 +15,13 @@ public class RuneBag : MonoBehaviour {
 
 	void OpenRuneBag()
 	{
-		chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
-		if (chainControl!=null)
-		{
-			chainControl.ActiveControl=2;
+		//chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
+		//if (chainControl!=null)
+		//{
+		chains.ActiveControl=2;
+		//	chainControl.ActiveControl=2;
 			//Time.timeScale=0;//pause the game
-		}
+		//}
 	}
 
 	public void Activate()
