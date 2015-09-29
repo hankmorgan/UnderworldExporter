@@ -9,6 +9,7 @@ Code credits from previous UW and System Shock Projects.
 7 RLE Decoder lifted from UWAdventures
 8 Cutscene implementation stolen from UWAdventures.
 9 Bitmap decompression for SHOCK from the DumpTex utility
+10 Font extraction based taken from UWAdventures hacking tools
 
 
 THANKS!!!!!!

@@ -19,6 +19,7 @@
 #include "Conversations.h"
 #include "fbxExport.h"
 #include "Unity.h"
+#include "hacking.h"
 
 
 using namespace std;
@@ -286,9 +287,10 @@ int main()
 		printf("%d) SS1 Font Extraction\n", FONT_EXTRACT_MODE);
 		printf("%d) Show UW Object Combinations\n", COMBINATION_EXTRACT_MODE);
 		printf("%d) Show UW Common Object Properties\n", COMMON_PROPERTIES_EXTRACT_MODE);
+		printf("%d) Decode UW1 Fonts (using UWAdventures code)", FONT_DECODE_UW1_MODE);
 		printf("Please select a mode.\n>");
 		scanf("%d", &mode);
-		if ((mode < 0) || (mode > 16))
+		if ((mode < 0) || (mode > 17))
 			{
 			printf("Invalid input. Bye.");
 			return 0;
@@ -920,6 +922,10 @@ int main()
 							}
 					}
 				break;
+				}
+			case FONT_DECODE_UW1_MODE:
+				{
+				DecodeUWFont();
 				}
 		}
 	fclose(LOGFILE);

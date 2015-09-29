@@ -18,7 +18,7 @@ void ExtractConversations(int game)
 
 	unsigned char *cnv_ark;
 	unsigned char *bab;
-
+	long fileSize;
 	int add_ptr;
 	int cnv_ptr;
 	if (game != UW1)
@@ -26,11 +26,37 @@ void ExtractConversations(int game)
 		return;
 		}
 
+	if ((file = fopen("c:\\games\\uw1\\save2\\bglobals.dat", "rb")) == NULL)
+		fprintf(LOGFILE, "Could not open specified file\n");
+	else
+		{//Read in the game globals in the specified save file.
+		fileSize = getFileSize(file);
+		bab = new unsigned char[fileSize];
+		fread(bab,fileSize,1,file);
+		fclose(file);
+		add_ptr = 0;
+		while (add_ptr < fileSize)
+			{
+			int convSlot = getValAtAddress(bab,add_ptr,16);
+			add_ptr = add_ptr + 2;
+			int convSlotSize = getValAtAddress(bab, add_ptr, 16);
+			fprintf(LOGFILE,"Slot %d - Size %d\n", convSlot,convSlotSize);
+			for (int k = 0; k < convSlotSize; k++)
+				{
+				add_ptr = add_ptr + 2;
+				fprintf(LOGFILE, "\tGlobal (%d) %d\n",k, getValAtAddress(bab,add_ptr,16));	
+				}
+			add_ptr = add_ptr + 2;
+			}
+		}
+		
+
+
 	if ((file = fopen(UW1_CONVERSATION, "rb")) == NULL)
 		fprintf(LOGFILE,"Could not open specified file\n");
 	else
 		fprintf(LOGFILE,"");
-	long fileSize = getFileSize(file);
+	fileSize = getFileSize(file);
 	cnv_ark = new unsigned char[fileSize];
 	fread(cnv_ark, fileSize, 1, file);
 	fclose(file);
