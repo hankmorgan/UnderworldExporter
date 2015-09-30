@@ -22,17 +22,18 @@ $Id: fontdecode.cpp,v 1.4 2002/08/21 12:48:04 vividos Exp $
 // font decoding
 
 #include "hacking.h"
+#include "gamegraphics.h"
 
 int DecodeUWFont()
 	{
 	char fname[256];
 
-
+	/*
 	// get 256 colors palette
 	char palette[256 * 3];
 		{
 		FILE *pal = fopen("c:\\games\\uw1\\data\\pals.dat", "rb");
-
+		
 		fread(palette, 1, 256 * 3, pal);
 
 		for (int j = 0; j<256 * 3; j++) palette[j] <<= 2;
@@ -46,6 +47,11 @@ int DecodeUWFont()
 
 		fclose(pal);
 		}
+*/
+	palette *pal;
+	pal = new palette[256];
+	getPalette("c:\\games\\uw1\\data\\pals.dat", pal,0);
+
 
 
 	_finddata_t find;
@@ -145,13 +151,13 @@ int DecodeUWFont()
 						{
 						// background
 						if (k >= allcharsizes[j])
-							*curindices = 253; // for 'outside' bits, draw in other color
+							*curindices = 0;//253; // for 'outside' bits, draw in other color
 						else
-							*curindices = 11;
+							*curindices = 0;//11;
 						}
 					else
 						{
-						*curindices = 0;
+						*curindices = 1;//0;
 						}
 					curindices++;
 					raw <<= 1;
@@ -160,14 +166,14 @@ int DecodeUWFont()
 				bits = 0; // reset bit reservoir every line
 				}
 
-			sprintf(fname, "%s_%d.tga", basename, j);
+			sprintf(fname, "%s", basename);
 
-			FILE *tga = fopen(fname, "wb");
+///			FILE *tga = fopen(fname, "wb");
 
-			tga_writeheader(tga, maxwidth, charheight, 1, 1);
+////			tga_writeheader(tga, maxwidth, charheight, 1, 1);
 
 			// write palette
-			fwrite(palette, 1, 256 * 3, tga);
+/////			fwrite(palette, 1, 256 * 3, tga);
 
 			/*   for(int n=0; n<charheight; n++)
 			{
@@ -181,19 +187,19 @@ int DecodeUWFont()
 
 			}*/
 			curindices = &allindices[j*charheight*maxwidth];
-			for (int n = 0; n< charheight*maxwidth; n++)
-				{
-				fputc(curindices[n], tga);
-				}
+//////			for (int n = 0; n< charheight*maxwidth; n++)
+///	//			{
+////				fputc(curindices[n], tga);
+/////				}
 
-			fclose(tga);
-
+/////			fclose(tga);
+			writeTGA(curindices, 0, maxwidth, charheight, j, pal, fname, 1);
 
 			}
 
 			{
 			// now open and write a tga file
-
+			/*
 			sprintf(fname, "%s.tga", basename);
 
 			FILE *tga = fopen(fname, "wb");
@@ -218,8 +224,9 @@ int DecodeUWFont()
 				}
 
 			fclose(tga);
+			*/
 				}
-
+	
 		delete[] allindices;
 		delete[] allcharsizes;
 		delete[] allpatterns;

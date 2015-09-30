@@ -61,7 +61,9 @@ public class Conversation : MonoBehaviour {
 
 	public UITextList tl;//Text output.
 	public UITextList tl_input;//player choices
+	public UITexture OutPutControl;
 
+	public UWFonts FontController;
 	public static Camera maincam;
 
 	// Use this for initialization
@@ -136,6 +138,7 @@ public class Conversation : MonoBehaviour {
 		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		tl.textLabel.lineWidth=480;
 		tl.Add(WhatToSay);
+		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
 		//Debug.Log(WhatToSay);
 	}

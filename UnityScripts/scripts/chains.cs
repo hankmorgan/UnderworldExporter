@@ -51,7 +51,7 @@ public class chains : MonoBehaviour {
 
 	public static void Refresh()
 	{
-		Debug.Log ("Refresh");
+//		Debug.Log ("Refresh");
 		setControl=ActiveControl;
 		switch (ActiveControl)
 		{
