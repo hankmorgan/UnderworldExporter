@@ -52,12 +52,13 @@ public class Conversation : MonoBehaviour {
 	private int MinAnswer=1;
 	private int MaxAnswer=1;
 
-	bool Ready=false;
+	//bool Ready=false;
 
 	private int WhoAmI;
 
 	public bool inputRecieved;
 	public bool WaitingForInput;
+	public bool WaitingForMore;
 
 	public UITextList tl;//Text output.
 	public UITextList tl_input;//player choices
@@ -65,6 +66,9 @@ public class Conversation : MonoBehaviour {
 
 	public UWFonts FontController;
 	public static Camera maincam;
+
+	int LineWidth = 28 ;
+
 
 	// Use this for initialization
 	void Start () {
@@ -113,6 +117,13 @@ public class Conversation : MonoBehaviour {
 					CheckAnswer(6);
 				}
 			}
+			else if (WaitingForMore)
+			{
+				if (Input.GetKeyDown (KeyCode.Space))
+				{
+					WaitingForMore=false;
+				}
+			}
 		}
 	}
 
@@ -133,13 +144,50 @@ public class Conversation : MonoBehaviour {
 		return null;
 	}
 
-	public void say(string WhatToSay)
+	public IEnumerator say(string WhatToSay)
 	{
 		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		tl.textLabel.lineWidth=480;
-		tl.Add(WhatToSay);
+
+		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
+
+		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
+			{
+			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
+			int colCounter=1;
+			string Output="";
+			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
+			{
+				char[] strChars =  StrWords[j].ToCharArray();
+				if (StrWords[j].Length+colCounter>=LineWidth)
+				{
+					colCounter=2; 
+					//Debug.Log ("Adding newline " + Output);
+					tl.Add (Output + " @@@ ");
+					Output=StrWords[j] + " ";
+					colCounter= StrWords[j].Length+1;
+				}	
+				else
+				{
+					Output = Output + StrWords[j] + " ";
+					colCounter= colCounter+StrWords[j].Length + 1;
+				}
+			}
+
+			//Debug.Log ("Adding op " + Output);
+			tl.Add(Output);
+			if (i < Paragraphs.GetUpperBound(0))
+				{//Pause for more when not the last paragraph.
+				tl.Add("@@@ [MORE] " + " @@@ ");
+				FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
+				yield return StartCoroutine(WaitForMore());
+				}
+			}
+
+		//tl.Add(WhatToSay);
 		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
+		yield return 0;
 		//Debug.Log(WhatToSay);
 	}
 
@@ -189,21 +237,31 @@ public class Conversation : MonoBehaviour {
 		//tl.Add(tmp);
 		tl_input.maxEntries=1;
 		tl_input.Add (tmp);
-		Ready=false;
+		//Ready=false;
 		//PlayerAnswer=1;
 		//PlayerAnswer= Random.Range (1,NoOfAnswers+1);
 		//StartCoroutine(Wait(1.0f));
 
-		yield return StartCoroutine(WaitForKeyDown(KeyCode.Tab));
+		yield return StartCoroutine(WaitForInput());
 
-		while(!Ready){
-			yield return null;
-		}
+	//	while(!Ready){
+	//		yield return null;
+	//	}
 
-		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]) + "\n";
+		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
 		//Debug.Log (tmp);
 		//Debug.Log (PlayerAnswer + " out of " + NoOfAnswers + " " + tmp);
-		tl.Add ("\n" + tmp);
+		if (tmp.Length>=LineWidth)
+		{
+			tl.Add("@@@ " + tmp.Substring(0,LineWidth) + " @@@ ");
+			tl.Add (tmp.Substring(LineWidth,tmp.Length-LineWidth) + " @@@ ");
+		}
+		else 
+		{
+			tl.Add ("@@@ " + tmp + " @@@ ");	
+		}
+
+		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 		//return null;
 		//return playerAnswer;
 		yield return 0;
@@ -214,15 +272,24 @@ public class Conversation : MonoBehaviour {
 	{
 		//print( " s " + Time.time);
 		yield return new WaitForSeconds(waitTime);
-		Ready=true;
+		//Ready=true;
 		//print(" f " + Time.time);
 	}
 
-	IEnumerator WaitForKeyDown(KeyCode keyCode)
+	IEnumerator WaitForInput()
 	{
 		WaitingForInput=true;
 		while (WaitingForInput)
 			{yield return null;}
-		Ready=true;
+		//Ready=true;
+	}
+
+	IEnumerator WaitForMore()
+	{
+		Debug.Log ("waitformore");
+		WaitingForMore=true;
+		while (WaitingForMore)
+		{yield return null;}
+		//Ready=true;
 	}
 }

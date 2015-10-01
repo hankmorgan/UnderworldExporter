@@ -173,7 +173,7 @@ public class Conversation_67 : Conversation {
 			
 			privateVariables[2] = 0;
 			privateVariables[3] = 0;
-			say( "Hail, stranger!  What be thy business?  I have not seen thee in this place before." );
+			yield return StartCoroutine( say( "Hail, stranger!  What be thy business?  I have not seen thee in this place before." ));
 			locals[4] = 4;
 			locals[5] = 5;
 			locals[6] = 6;
@@ -204,22 +204,22 @@ public class Conversation_67 : Conversation {
 			
 		label_0322:;
 			
-			say( "Exploring, eh?  Ha, that's a good one.  But if thou dost not wish to speak of thy crime, 'tis not my business to ask./m" );
+			yield return StartCoroutine(say( "Exploring, eh?  Ha, that's a good one.  But if thou dost not wish to speak of thy crime, 'tis not my business to ask./m" ));
 			goto label_0331;
 			
 		label_0327:;
 			
-			say( "Ah, a rescue mission, is it?  Should the Baron's guards not be with thee, to aid thee in thy search?  More likely one of them threw thee in here, eh?/m" );
+			yield return StartCoroutine(say( "Ah, a rescue mission, is it?  Should the Baron's guards not be with thee, to aid thee in thy search?  More likely one of them threw thee in here, eh?/m" ));
 			goto label_0331;
 			
 		label_032c:;
 			
-			say( "Ah, unjustly imprisoned, art thou?  'Tis the usual story, my @SS1, but that is not to say it may not be true in thy case, I suppose./m" );
+			yield return StartCoroutine(say( "Ah, unjustly imprisoned, art thou?  'Tis the usual story, my @SS1, but that is not to say it may not be true in thy case, I suppose./m" ));
 			goto label_0331;
 			
 		label_0331:;
 			
-			say( "Thou needst not be ashamed of thy misfortune, @SS1; thou art in the same pot with all of us now.  If thou art to have a chance of surviving in the Abyss for long, thou must learn the lay of the land." );
+			yield return StartCoroutine(say( "Thou needst not be ashamed of thy misfortune, @SS1; thou art in the same pot with all of us now.  If thou art to have a chance of surviving in the Abyss for long, thou must learn the lay of the land." ));
 			locals[26] = 11;
 			locals[27] = 12;
 			locals[28] = 0;
@@ -243,7 +243,7 @@ public class Conversation_67 : Conversation {
 			
 		label_0371:;
 			
-			say( "Perhaps thou wilt.  I have heard many say the same as thee, and a few are still alive today." );
+			yield return StartCoroutine(say( "Perhaps thou wilt.  I have heard many say the same as thee, and a few are still alive today." ));
 			locals[48] = 14;
 			locals[49] = 15;
 			locals[50] = 0;
@@ -271,7 +271,7 @@ public class Conversation_67 : Conversation {
 		label_03ba:;
 			
 			privateVariables[2] = 1;
-			say( "First off, I would suggest picking up anything thou dost find that seems of use.  Items here are scarce enough - thou wouldst be well advised to take what thou can.\n Scavenge all you want, but stealing is ill-advised. Most of the Abyss' inhabitants guard jealously the few possessions that they have.\n Battlesites are the best for scavenging. That's why I'm here - A battle took place here not long ago - a battle between the Goblins and the above-worlders." );
+			yield return StartCoroutine(say( "First off, I would suggest picking up anything thou dost find that seems of use.  Items here are scarce enough - thou wouldst be well advised to take what thou can. Scavenge all you want, but stealing is ill-advised. Most of the Abyss' inhabitants guard jealously the few possessions that they have. Battlesites are the best for scavenging. That's why I'm here - A battle took place here not long ago - a battle between the Goblins and the above-worlders." ));
 			locals[71] = 17;
 			locals[72] = 18;
 			locals[73] = 0;
@@ -295,12 +295,12 @@ public class Conversation_67 : Conversation {
 			
 		label_03ff:;
 			
-			say( "I do not know.  It is rare that the Baron sends his men into the Abyss.  It must have been important.  Though, by the looks of it, the Goblins defeated them handily./m" );
+			yield return StartCoroutine(say( "I do not know.  It is rare that the Baron sends his men into the Abyss.  It must have been important.  Though, by the looks of it, the Goblins defeated them handily./m" ));
 			goto label_0404;
 			
 		label_0404:;
 			
-			say( "The Goblins control most of these upper caves.  Two races there are, the Green and the Gray.  If they do not destroy each other, it is not for lack of trying.\n Be thou especially careful of the Gray Goblins.  I was recently imprisoned by them for trespassing." );
+			yield return StartCoroutine(say( "The Goblins control most of these upper caves.  Two races there are, the Green and the Gray.  If they do not destroy each other, it is not for lack of trying. Be thou especially careful of the Gray Goblins.  I was recently imprisoned by them for trespassing." ));
 			locals[93] = 21;
 			locals[94] = 22;
 			locals[95] = 0;
@@ -318,7 +318,7 @@ public class Conversation_67 : Conversation {
 				
 			} // end switch
 			
-			say( "My prison cell was evidently a converted storeroom, for it had a stock of useful items, including a long pole.  Using the pole, I was able to reach a button which opened the door to my cell.  I sneaked away and returned to my people.  I do not think I will venture there again." );
+			yield return StartCoroutine(say( "My prison cell was evidently a converted storeroom, for it had a stock of useful items, including a long pole.  Using the pole, I was able to reach a button which opened the door to my cell.  I sneaked away and returned to my people.  I do not think I will venture there again." ));
 			locals[115] = 24;
 			locals[116] = 25;
 			locals[117] = 0;
@@ -336,7 +336,7 @@ public class Conversation_67 : Conversation {
 				
 			} // end switch
 			
-			say( "The humans, like thee and myself, have staked out a small area in which we live in relative peace.  Below us are the Mountainmen, and after that I do not know." );
+			yield return StartCoroutine(say( "The humans, like thee and myself, have staked out a small area in which we live in relative peace.  Below us are the Mountainmen, and after that I do not know." ));
 			locals[137] = 27;
 			locals[138] = 28;
 			locals[139] = 0;
@@ -360,12 +360,12 @@ public class Conversation_67 : Conversation {
 			
 		label_04bc:;
 			
-			say( "A nasty place this is, thou canst be certain of that.  In the parts of the upper caves, uninhabited by Goblins, there are giant spiders and worms.  Our small group is one of the few devoted to peace./m" );
+			yield return StartCoroutine(say( "A nasty place this is, thou canst be certain of that.  In the parts of the upper caves, uninhabited by Goblins, there are giant spiders and worms.  Our small group is one of the few devoted to peace./m" ));
 			goto label_04c1;
 			
 		label_04c1:;
 			
-			say( "Thou canst find my people by going west from the entrance to the Abyss, and then north. There is a small chasm to jump over, but thou dost seem to be a dextrous @SS1.  Past the chasm is the sign of civilization everywhere throughout the Abyss: the Banner of Cabirus, marked with an ankh, the sign of the Avatar.\n Outside of areas marked with the Banner, thou shouldst watch thyself most carefully.  Most creatures who do not respect Cabirus' legacy are not particularly friendly." );
+			yield return StartCoroutine(say( "Thou canst find my people by going west from the entrance to the Abyss, and then north. There is a small chasm to jump over, but thou dost seem to be a dextrous @SS1.  Past the chasm is the sign of civilization everywhere throughout the Abyss: the Banner of Cabirus, marked with an ankh, the sign of the Avatar. Outside of areas marked with the Banner, thou shouldst watch thyself most carefully.  Most creatures who do not respect Cabirus' legacy are not particularly friendly." ));
 			locals[159] = 31;
 			locals[160] = 32;
 			locals[161] = 0;
@@ -383,7 +383,7 @@ public class Conversation_67 : Conversation {
 				
 			} // end switch
 			
-			say( "Good luck in thy travels." );
+			yield return StartCoroutine(say( "Good luck in thy travels." ));
 			locals[181] = 3;
 			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,181 );
@@ -398,7 +398,7 @@ public class Conversation_67 : Conversation {
 			
 		label_0516:;
 			
-			say( "Greetings again!  I am glad to see that thou hast lived this long. It is not easy for one to survive in the Abyss without the help of others." );
+			yield return StartCoroutine(say( "Greetings again!  I am glad to see that thou hast lived this long. It is not easy for one to survive in the Abyss without the help of others." ));
 			locals[182] = 35;
 			locals[183] = 36;
 			locals[184] = 0;
@@ -428,7 +428,7 @@ public class Conversation_67 : Conversation {
 		label_03ba:;
 			
 			privateVariables[2] = 1;
-			say( "First off, I would suggest picking up anything thou dost find that seems of use.  Items here are scarce enough - thou wouldst be well advised to take what thou can.\n Scavenge all you want, but stealing is ill-advised. Most of the Abyss' inhabitants guard jealously the few possessions that they have.\n Battlesites are the best for scavenging. That's why I'm here - A battle took place here not long ago - a battle between the Goblins and the above-worlders." );
+			yield return StartCoroutine(say( "First off, I would suggest picking up anything thou dost find that seems of use.  Items here are scarce enough - thou wouldst be well advised to take what thou can. Scavenge all you want, but stealing is ill-advised. Most of the Abyss' inhabitants guard jealously the few possessions that they have. Battlesites are the best for scavenging. That's why I'm here - A battle took place here not long ago - a battle between the Goblins and the above-worlders." ));
 			locals[71] = 17;
 			locals[72] = 18;
 			locals[73] = 0;
@@ -453,12 +453,12 @@ public class Conversation_67 : Conversation {
 			
 		label_03ff:;
 			
-			say( "I do not know.  It is rare that the Baron sends his men into the Abyss.  It must have been important.  Though, by the looks of it, the Goblins defeated them handily./m" );
+			yield return StartCoroutine(say( "I do not know.  It is rare that the Baron sends his men into the Abyss.  It must have been important.  Though, by the looks of it, the Goblins defeated them handily./m" ));
 			goto label_0404;
 			
 		label_0404:;
 			
-			say( "The Goblins control most of these upper caves.  Two races there are, the Green and the Gray.  If they do not destroy each other, it is not for lack of trying.\n Be thou especially careful of the Gray Goblins.  I was recently imprisoned by them for trespassing." );
+			yield return StartCoroutine(say( "The Goblins control most of these upper caves.  Two races there are, the Green and the Gray.  If they do not destroy each other, it is not for lack of trying. Be thou especially careful of the Gray Goblins.  I was recently imprisoned by them for trespassing." ));
 			locals[93] = 21;
 			locals[94] = 22;
 			locals[95] = 0;
@@ -485,7 +485,7 @@ public class Conversation_67 : Conversation {
 			
 		} else {
 			
-			say( "Greetings!  Hast thou visited our group?" );
+			yield return StartCoroutine(say( "Greetings!  Hast thou visited our group?" ));
 			locals[205] = 38;
 			locals[206] = 39;
 			locals[207] = 40;
@@ -516,14 +516,14 @@ public class Conversation_67 : Conversation {
 			
 		label_05ba:;
 			
-			say( "Well, 'tis thy decision.  I am sure they would welcome thee." );
+			yield return StartCoroutine(say( "Well, 'tis thy decision.  I am sure they would welcome thee." ));
 			locals[227] = 2;
 			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,227 );
 			yield break;
 		label_05c8:;
 			
-			say( "Go west from the entrance chamber, past a door, and then north over a chasm. Remember, the Banner of Cabirus -- with the mark of the ankh on it -- is the mark of civilization in the Abyss." );
+			yield return StartCoroutine(say( "Go west from the entrance chamber, past a door, and then north over a chasm. Remember, the Banner of Cabirus -- with the mark of the ankh on it -- is the mark of civilization in the Abyss." ));
 			locals[228] = 2;
 			yield return new WaitForSeconds(5.0f);
 			func_00b1( locals,228 );
@@ -531,7 +531,7 @@ public class Conversation_67 : Conversation {
 		label_05d6:;
 			
 			privateVariables[3] = 1;
-			say( "I am glad to hear it.  If thou growest weary of thy travels, thou art welcome to stay with us." );
+			yield return StartCoroutine(say( "I am glad to hear it.  If thou growest weary of thy travels, thou art welcome to stay with us." ));
 			locals[229] = 44;
 			locals[230] = 45;
 			locals[231] = 0;
@@ -560,7 +560,7 @@ public class Conversation_67 : Conversation {
 			
 		} // end switch
 		
-		say( "Ah, 'tis thee again.  Hast thou decided to stay with us?" );
+		yield return StartCoroutine(say( "Ah, 'tis thee again.  Hast thou decided to stay with us?" ));
 		locals[253] = 47;
 		locals[254] = 48;
 		locals[255] = 49;

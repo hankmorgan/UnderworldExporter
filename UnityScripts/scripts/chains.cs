@@ -137,6 +137,7 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
+			EnableDisableControl("Conversation_Alpha",false);
 			
 			break;
 		case 1://Stats Display
@@ -221,7 +222,7 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
-			
+			EnableDisableControl("Conversation_Alpha",false);			
 			
 			break;
 		case 2:	//Rune bag
@@ -305,6 +306,7 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
+			EnableDisableControl("Conversation_Alpha",false);
 			break;
 			
 		case 3://Conversation.
@@ -397,6 +399,7 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Upper",true);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",true);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",true);
+			EnableDisableControl("Conversation_Alpha",true);
 			
 			break;
 		}
