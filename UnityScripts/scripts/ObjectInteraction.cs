@@ -267,6 +267,21 @@ public class ObjectInteraction : MonoBehaviour {
 		return MessageLog;
 	}
 
+	public bool Attack(int damage)
+	{
+		switch(ItemType)
+		{
+			case NPC_TYPE:
+				{
+					NPC npc = this.GetComponent<NPC>();
+					npc.ApplyAttack(damage);
+					break;
+				}
+		}
+		return true;
+	}
+
+
 	public bool LookDescription()
 	{//Returns the description of this object.
 		//Debug.Log ("LookDescription");
@@ -951,6 +966,7 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 	}
 	*/
+
 
 	public void consumeObject()
 	{
