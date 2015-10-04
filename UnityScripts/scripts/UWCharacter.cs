@@ -162,6 +162,7 @@ public class UWCharacter : MonoBehaviour {
 		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		Conversation.SC=ObjectInteraction.SC;
 		NPC.playerUW=this.GetComponent<UWCharacter>();
+		GoblinAI.player=this.gameObject;
 
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
@@ -191,6 +192,11 @@ public class UWCharacter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (CurVIT<=0)
+		{
+			//Debug.Log ("You have died!. Queue the laughing skulls.");
+			return;
+		}
 		if (ReadiedSpell!="")
 		{//Player has a spell thats about to be cast. All other activity is ignored.
 			SpellMode ();
@@ -388,7 +394,11 @@ public class UWCharacter : MonoBehaviour {
 			else
 			{
 				Debug.Log ("you've hit " + hit.transform.name);
-				hit.transform.SendMessage("ApplyDamage");
+				if (hit.transform.gameObject.GetComponent<ObjectInteraction>())
+				{
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(5);
+				}
+				//hit.transform.SendMessage("ApplyDamage");
 				//Destroy(hit.collider.gameObject);
 			}
 		}
@@ -493,5 +503,11 @@ public class UWCharacter : MonoBehaviour {
 	{//Prototype skill check code
 		Debug.Log ("Skill check Skill :" + Skillnames[SkillToUse] + " (" +GetSkill(SkillToUse) +") vs " + CheckValue);
 		return (CheckValue<GetSkill(SkillToUse));
+	}
+
+	public void ApplyDamage(int damage)
+	{
+		//Debug.Log ("applying damage");
+		CurVIT=CurVIT-5;
 	}
 }

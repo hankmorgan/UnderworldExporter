@@ -91,7 +91,7 @@ public class UWFonts : MonoBehaviour {
 						Color[] defaultColour= font5x6p[charIndex].GetPixels();
 						//font5x6p[i].alphaIsTransparency=true;
 						//Debug.Log (i + " "+ colCounter * (font5x6pWidth) + " " +(BitMapHeight-(font5x6pHeight*RowCounter)));
-						bgNew.SetPixels(colCounter * (font5x6pWidth), (BitMapHeight - HeightOffset)-(font5x6pHeight*RowCounter),font5x6p[charIndex].width,font5x6p[charIndex].height,defaultColour);
+						bgNew.SetPixels(colCounter * (font5x6pWidth), (BitMapHeight - HeightOffset)-((font5x6pHeight+1)*RowCounter),font5x6p[charIndex].width,font5x6p[charIndex].height,defaultColour);
 						
 						colCounter++;
 					}

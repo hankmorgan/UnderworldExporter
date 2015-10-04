@@ -1,15 +1,54 @@
 ﻿using UnityEngine;
 using System.Collections;
+//using RAIN.BehaviorTrees;
+//using RAIN.Core;
+//using RAIN.Minds;
 
 
 
 public class GoblinAI : MonoBehaviour {
+	public const int AI_RANGE_IDLE = 1 ;
+	public const int AI_RANGE_MOVE = 10 ;
+	public const int AI_RANGE_DEATH = 100 ;
+	public const int AI_RANGE_ATTACK_BASH = 1000 ;
+	public const int AI_RANGE_ATTACK_SLASH = 2000 ;
+	public const int AI_RANGE_ATTACK_THRUST = 3000 ;
+	public const int AI_RANGE_COMBAT_IDLE = 4000 ;
+
+	public const int AI_ANIM_IDLE_FRONT = 1;
+	public const int AI_ANIM_IDLE_FRONT_RIGHT = 2;
+	public const int AI_ANIM_IDLE_RIGHT = 3;
+	public const int AI_ANIM_IDLE_REAR_RIGHT = 4;
+	public const int AI_ANIM_IDLE_REAR = 5;
+	public const int AI_ANIM_IDLE_REAR_LEFT = 6;
+	public const int AI_ANIM_IDLE_LEFT = 7;
+	public const int AI_ANIM_IDLE_FRONT_LEFT = 8;
+
+	public const int AI_ANIM_WALKING_FRONT = 10;
+	public const int AI_ANIM_WALKING_FRONT_RIGHT = 20;
+	public const int AI_ANIM_WALKING_RIGHT = 30;
+	public const int AI_ANIM_WALKING_REAR_RIGHT = 40;
+	public const int AI_ANIM_WALKING_REAR = 50;
+	public const int AI_ANIM_WALKING_REAR_LEFT = 60;
+	public const int AI_ANIM_WALKING_LEFT = 70;
+	public const int AI_ANIM_WALKING_FRONT_LEFT = 80;
+
+	public const int AI_ANIM_DEATH =100;
+	public const int AI_ANIM_ATTACK_BASH =1000;
+	public const int AI_ANIM_ATTACK_SLASH =2000;
+	public const int AI_ANIM_ATTACK_THRUST =3000;
+	public const int AI_ANIM_COMBAT_IDLE =4000;
 
 	public bool executeAttack=false;
 	public int AnimRange=1;//Multiple of 10 for dividing animations
 	public string NPC_ID;
 	public string CurrentAnim;
-	public bool isDead=false;
+	//public bool isDead=false;
+	//public bool isHostile=false;
+	//public int HP;
+
+	public static TileMap tm;
+//	private AIRig ai;
 	//public string Idle_Front;
 	//public string Idle_Rear;
 	//public string Idle_Right;
@@ -36,11 +75,25 @@ public class GoblinAI : MonoBehaviour {
 
 	private UILabel MessageLog;
 	private NavMeshAgent agent;
-	private GameObject player;
+	public static GameObject player;
 	private Animator anim;
 	private int currentState=-1;
 	private bool followPlayer=false;
 	private string oldNPC_ID;
+
+	private int facingIndex;
+	private int PreviousFacing=-1;
+	private int PreviousAnimRange=-1;
+	private int CalcedFacing;
+
+	private int currentHeading;//Integer representation of the current facing of the character. To match with animation angles
+	//public int OriginalCalcedFacing;
+
+	private Vector3 direction;	//vector between the player and the ai.
+	float angle;// The angle to the character from the player.
+
+	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};
+
 	// Use this for initialization
 	void Awake () {
 		oldNPC_ID=NPC_ID;
@@ -48,27 +101,38 @@ public class GoblinAI : MonoBehaviour {
 		//MessageLog.text="StartUp";
 		//GameObject targetPoint = GameObject.Find ("a_goblin_52_59_00_0202");
 		agent = GetComponent<NavMeshAgent>();
-		player = GameObject.Find ("Gronk");
+		//player = GameObject.Find ("Gronk");
 		//var agent: NavMeshAgent GetComponent.<NavMeshAgent>();
 		//anim = GameObject.Find (name + "_Animation").GetComponent<Animator>();
 		//anim = (Animator)transform.FindChild (name + "_Sprite").GetComponent<Animator>();
 		//anim = GameObject.Find (name + "_sprite").GetComponent<Animator>();
 		//anim = GetComponentInChildren<Animator>();
 		anim=GetComponentInChildren<Animator>();
+	//	ai = GetComponentInChildren<AIRig>();
+	//	if (ai != null)
+	//	{
+			//Debug.Log ("init ai");
+	//		ai.AI.Body=this.gameObject;
+	//		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",player);
+			//ai.AI.WorkingMemory.SetItem<Vector3>("moveStartPoint",player.transform.position);
+	//	}
+
 	}
 
-	void ApplyDamage()
-	{
-		playAnimation(NPC_ID+"_death",100);
-		isDead=true;
-	}
 
-	void ExecuteAttack()
+
+	//void ApplyDamage()
+	//{
+
+	//	playAnimation(NPC_ID+"_death",100);
+		//isDead=true;
+	//}
+
+	public void ExecuteAttack()
 	{
-		float weaponRange=1.0f;
-		//Debug.Log ("Attack released with charge of " + Charge +"%");
-		//AttackCharging=0;
-		Ray ray = new Ray(this.transform.position,Vector3.forward); 
+		float weaponRange=2.0f;
+		//Ray ray = new Ray(this.transform.position+Vector3.up*1.0f,Vector3.forward); 
+		Ray ray = new Ray(this.transform.position+Vector3.up*0.5f,this.transform.TransformDirection(Vector3.forward)); 
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
@@ -79,7 +143,12 @@ public class GoblinAI : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log ("you've hit " + hit.transform.name);
+				Debug.Log (this.name + "has hit " + hit.transform.name);
+				if (hit.transform.name == "Gronk")
+				{
+					UWCharacter playerUW =hit.transform.GetComponent<UWCharacter>();
+					playerUW.ApplyDamage(5);
+				}
 				//hit.transform.SendMessage("ApplyDamage");
 				//Destroy(hit.collider.gameObject);
 			}
@@ -95,125 +164,190 @@ public class GoblinAI : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		//if (ai == null)
+		//{
+		//	ai = GetComponentInChildren<AIRig>();
+		//}
+		//else
+		//{
+			//ai.AI.IsActive= Vector3.Distance(this.transform.position, player.transform.position)<10;
+			//if (ai.AI.IsActive)
+			//{
+				//ai.AI.WorkingMemory.SetItem<bool>("isHostile",isHostile);
+				//ai.AI.WorkingMemory.SetItem<int>("HP",HP);
+			//}
+		//}
+
 		if (anim == null)
 		{
 			anim = GetComponentInChildren<Animator>();
 		}
-	if (isDead==true)
-		{
-			return;
-		}
+
+	//if (isDead==true)
+	//	{
+	//		return;
+	//	}
 		//float angle = Quaternion.Angle(transform.rotation, player.transform.rotation);
-		if (followPlayer==true)
-		{
-			//Vector3 target = player.transform.position;
-			agent.SetDestination(player.transform.position);
-		}
+		//if (followPlayer==true)
+		//{
+		//	//Vector3 target = player.transform.position;
+		//	agent.SetDestination(player.transform.position);
+		//}
 		if (NPC_ID!=oldNPC_ID)
 		{
 			currentState=-1;
 			oldNPC_ID=NPC_ID;
 		}
-		if (executeAttack==true)
+		//if (executeAttack==true)
+		//{
+		//	AnimRange=1000;
+		//	ExecuteAttack();
+		//	executeAttack=false;
+		//}
+
+		direction = player.transform.position - this.gameObject.transform.position;
+		angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
+
+		currentHeading = CompassHeadings[ (int)Mathf.Round((  (this.gameObject.transform.eulerAngles.y % 360) / 45f)) ];
+
+		facingIndex = facing(angle);
+		if ((PreviousFacing!=facingIndex) && (AnimRange!=PreviousAnimRange))
 		{
-			AnimRange=1000;
-			ExecuteAttack();
-			executeAttack=false;
+			//Debug.Log (facingIndex-1);
+			PreviousFacing=facingIndex;
+			PreviousAnimRange=AnimRange;
 		}
 
-		Vector3 direction = player.transform.position - transform.position;
-		float angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
-		int facingIndex = facing(angle);
-	
-		//print (angle);
-		switch (facingIndex)
+		CalcedFacing=facingIndex + currentHeading;
+		//OriginalCalcedFacing=CalcedFacing;
+		if (CalcedFacing>=8)
 		{
-		case 1:
+			CalcedFacing=CalcedFacing-8;
+		}
+		if (CalcedFacing<=-8)
+		{
+			CalcedFacing=CalcedFacing+8;
+		}
+		if (CalcedFacing<0)
+		{
+			//Debug.Log ("less than zero");
+			CalcedFacing=8+CalcedFacing;
+		}
+		else if (CalcedFacing>7)
+		{
+			//Debug.Log ("more than zero");
+			CalcedFacing=8-CalcedFacing;
+		}
+
+		//Debug.Log (facingIndex);
+		//print (angle);
+		CalcedFacing=(CalcedFacing+1)*AnimRange;
+		//Debug.Log (CalcedFacing);
+		switch (CalcedFacing)
+		{
+		case AI_ANIM_IDLE_FRONT:
 			{	
-			playAnimation(NPC_ID +"_idle_front",0);
+			playAnimation(NPC_ID +"_idle_front",CalcedFacing);
 			break;
 			}
-		case 2:
+		case AI_ANIM_IDLE_FRONT_RIGHT:
 			{	
-			playAnimation(NPC_ID +"_idle_front_right",1);
+			playAnimation(NPC_ID +"_idle_front_right",CalcedFacing);
 			break;
 			}
-		case 3:
+		case AI_ANIM_IDLE_RIGHT:
 			{	
-			playAnimation(NPC_ID +"_idle_left",2);
+			playAnimation(NPC_ID +"_idle_right",CalcedFacing);
 			break;
 			}
-		case 4:
+		case AI_ANIM_IDLE_REAR_RIGHT:
 			{	
-			playAnimation(NPC_ID +"_idle_rear_right",3);
+			playAnimation(NPC_ID +"_idle_rear_right",CalcedFacing);
 			break;
 			}
-		case 5:
+		case AI_ANIM_IDLE_REAR:
 			{	
-			playAnimation(NPC_ID +"_idle_rear",4);
+			playAnimation(NPC_ID +"_idle_rear",CalcedFacing);
 			break;
 			}
-		case 6:
+		case AI_ANIM_IDLE_REAR_LEFT:
 			{	
-			playAnimation(NPC_ID + "_idle_rear_left",5);
+			playAnimation(NPC_ID + "_idle_rear_left",CalcedFacing);
 			break;
 			}
-		case 7:
+		case AI_ANIM_IDLE_LEFT:
 			{	
-			playAnimation(NPC_ID +"_idle_right",6);
+			playAnimation(NPC_ID +"_idle_left",CalcedFacing);
 			break;
 			}
-		case 8:
+		case AI_ANIM_IDLE_FRONT_LEFT:
 			{	
-			playAnimation(NPC_ID +"_idle_front_left",7);
+			playAnimation(NPC_ID +"_idle_front_left",CalcedFacing);
 			break;
 			}
-		case 10:
+		case AI_ANIM_WALKING_FRONT:
 		{	
-			playAnimation(NPC_ID +"_walking_front",0);
+			playAnimation(NPC_ID +"_walking_front",CalcedFacing);
 			break;
 		}
-		case 20:
+		case AI_ANIM_WALKING_FRONT_RIGHT:
 		{	
-			playAnimation(NPC_ID + "_walking_front_left",1);
+			playAnimation(NPC_ID + "_walking_front_right",CalcedFacing);
 			break;
 		}
-		case 30:
+		case AI_ANIM_WALKING_RIGHT:
 		{	
-			playAnimation(NPC_ID + "_walking_left",2);
+			playAnimation(NPC_ID + "_walking_right",CalcedFacing);
 			break;
 		}
-		case 40:
+		case AI_ANIM_WALKING_REAR_RIGHT:
 		{	
-			playAnimation(NPC_ID +"_walking_rear_left",3);
+			playAnimation(NPC_ID +"_walking_rear_right",CalcedFacing);
 			break;
 		}
-		case 50:
+		case AI_ANIM_WALKING_REAR:
 		{	
-			playAnimation(NPC_ID +"_walking_rear",4);
+			playAnimation(NPC_ID +"_walking_rear",CalcedFacing);
 			break;
 		}
-		case 60:
+		case  AI_ANIM_WALKING_REAR_LEFT:
 		{	
-			playAnimation(NPC_ID +"_walking_Rear_Right",5);
+			playAnimation(NPC_ID +"_walking_rear_left",CalcedFacing);
 			break;
 		}
-		case 70:
+		case  AI_ANIM_WALKING_LEFT:
 		{	
-			playAnimation(NPC_ID + "_walking_right",6);
+			playAnimation(NPC_ID + "_walking_left",CalcedFacing);
 			break;
 		}
-		case 80:
+		case AI_ANIM_WALKING_FRONT_LEFT:
 		{	
-			playAnimation(NPC_ID + "_walking_front_right",7);
+			playAnimation(NPC_ID + "_walking_front_left",CalcedFacing);
 			break;
 		}
 		default://special non angled states
 			{
-				if (AnimRange== 100)//Dying
-					{playAnimation (NPC_ID +"_death",100);}
-				if (AnimRange== 1000)//combat
-					{playAnimation (NPC_ID +"_attack_bash",1000);}
+			switch(AnimRange)
+			{
+			case AI_ANIM_DEATH:
+				{playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;}
+			case AI_ANIM_ATTACK_BASH:
+				{playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;}
+			case AI_ANIM_ATTACK_SLASH:
+				playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);break;
+			case AI_ANIM_ATTACK_THRUST:
+				playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);break;
+			case AI_ANIM_COMBAT_IDLE:
+				playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
+			}
+		/*	if (AnimRange==  AI_ANIM_DEATH)//Dying
+				{playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);}
+			if (AnimRange==  AI_ANIM_ATTACK_BASH)//combat
+				{playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);}
+			if (AnimRange==  AI_ANIM_ATTACK_SLASH)//combat
+				{playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);}
+			if (AnimRange==  AI_ANIM_ATTACK_THRUST)//combat
+				{playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);}*/
 			}
 			break;
 		}
@@ -226,15 +360,12 @@ public class GoblinAI : MonoBehaviour {
 			//MessageLog.text= name + "Playing anim:" + pAnim;
 			currentState=newState;
 			//MessageLog.text= name + "Playing anim:" + anim.animation.isPlaying;
-			//try
-			//{
-				CurrentAnim=pAnim;
-				anim.Play(pAnim);
-			//}
-			//catch
-			//{
-			//	Debug.Log ("Failed to play anim" + pAnim);
-			//}
+			//Debug.Log (pAnim);
+			CurrentAnim=pAnim;
+			anim.Play(pAnim);
+
+
+
 			//print(pAnim);
 		}
 		//currentState=newState;
@@ -246,53 +377,53 @@ public class GoblinAI : MonoBehaviour {
 		//Breaks down the angle in the the facing sector. Clockwise from 0)
 		if ((angle >= -22.5) && (angle <= 22.5)) 
 				{
-			return 1*AnimRange;//Facing forward
+			return 0;//*AnimRange;//Facing forward
 				} 
 		else 
 			{
 			if ((angle>22.5)&&(angle<=67.5))
 				{//Facing forward left
-				return 2*AnimRange;
+				return 1;//*AnimRange;
 				}
 			else
 			{
 				if ((angle >67.5)&&(angle<=112.5))
 				{//facing (right)
-					return 7*AnimRange;
+					return 2;//*AnimRange;
 				}
 				else
 				{
 					if ((angle >112.5)&&(angle<=157.5))
 					{//Facing away left
-						return 4*AnimRange;
+						return 3;//*AnimRange;
 					}
 					else
 					{
 						if (((angle >157.5)&&(angle<=180.0)) || ((angle>=-180)&&(angle<=-157.5)))
 						{//Facing away
-							return 5*AnimRange;
+							return 4;//*AnimRange;
 						}
 						else
 						{
 							if ((angle >=-157.5)&&(angle<-112.5))
 							{//Facing away right
-								return 6*AnimRange;
+								return 5;//*AnimRange;
 							}
 							else
 							{
 								if ((angle >-112.5)&&(angle<-67.5))
 								{//Facing (left)
-									return 3*AnimRange;
+									return 6;//*AnimRange;
 								}
 								else
 								{
 									if ((angle >-67.5)&&(angle<-22.5))
 									{//Facing forward right
-										return 8*AnimRange;
+										return 7;//*AnimRange;
 									}
 									else
 									{
-										return 0*AnimRange;//default
+										return 0;//*AnimRange;//default
 									}
 								}
 							}
@@ -305,6 +436,7 @@ public class GoblinAI : MonoBehaviour {
 
 	void OnMouseDown()
 	{
+		return;
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModeOptions://Options

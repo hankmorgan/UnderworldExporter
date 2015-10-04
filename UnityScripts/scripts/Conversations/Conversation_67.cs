@@ -2,7 +2,11 @@
 using System.Collections;
 
 public class Conversation_67 : Conversation {
-	
+
+
+	//BRAGIT
+	//String No 3651
+
 	// Use this for initialization
 	//void Start () {
 	
@@ -15,16 +19,19 @@ public class Conversation_67 : Conversation {
 		
 	//}
 	
-	
+
 	public override IEnumerator main() {
+		StringNo = 3651;
 		tl.Clear();
 		ConversationOpen=true;
 		InConversation=true;
+		this.GetComponent<NPC>().state= NPC.AI_STATE_STANDING;
 		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		//tl.textLabel.lineWidth=480;
 		privateVariables[1] = 0;
 		yield return StartCoroutine(func_029d());
 		func_0012();
+		this.GetComponent<NPC>().state= NPC.AI_STATE_IDLERANDOM;
 		yield return 0;
 	} // end func
 	
@@ -50,46 +57,46 @@ public class Conversation_67 : Conversation {
 	*/
 	void func_0063() {
 		
-		npc_gtarg = 1;
-		npc_attitude = 1;
-		npc_goal = 6;
+		npc.npc_gtarg = 1;
+		npc.npc_attitude = 1;
+		npc.npc_goal = 6;
 		func_0012();
 	} // end func
 	
 	void func_007c() {
 		
-		npc_goal = 1;
+		npc.npc_goal = 1;
 		func_0012();
 	} // end func
 	
 	void func_008b() {
 		
-		npc_gtarg = 1;
-		npc_goal = 5;
-		npc_attitude = 1;
+		npc.npc_gtarg = 1;
+		npc.npc_goal = 5;
+		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
 	
 	void func_00a4() {
 		
-		npc_attitude = 6;
+		npc.npc_attitude = 6;
 	} // end func
 	
 	void func_00b1(int[] paramArray, int Start) {
 		
-		npc_attitude = param1[0];//play_hunger;
+		npc.npc_attitude = param1[0];//play_hunger;
 		func_0012();
 	} // end func
 	
 	void func_00c2() {
 		
-		npc_attitude = 2;
+		npc.npc_attitude = 2;
 		func_0012();
 	} // end func
 	
 	void func_00d1() {
 		
-		npc_attitude = 1;
+		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
 	

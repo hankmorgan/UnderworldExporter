@@ -94,7 +94,7 @@ public class TileMap : MonoBehaviour {
 		//Debug.Log ("testing at " +location);
 		//if ((tileType!=TILE_SOLID) && (isRendered==1))
 		//{
-		//	Debug.Log("valid tile at " + location + " at x=" +tileX + " y=" + tileY + " is a " + tileType + " is " +isRendered);
+			//Debug.Log("valid tile at " + location + " at x=" +tileX + " y=" + tileY + " is a " + tileType + " is " +isRendered);
 		//}
 		return ((tileType!=TILE_SOLID) && (isRendered==1));
 	}
@@ -969,6 +969,7 @@ public class TileMap : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Action_Moving_Platform.tm=this.gameObject.GetComponent<TileMap>();
+		GoblinAI.tm= this.gameObject.GetComponent<TileMap>();
 	
 	SetTileProp(0,0,0,1,30,0,0,0,0);
 	SetTileProp(0,1,0,1,30,0,0,0,0);

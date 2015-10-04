@@ -28,6 +28,7 @@ public class Conversation : MonoBehaviour {
 	public int play_poison;      //  (not used in uw1)
 	public int play_drawn;       //  is 1 when player has drawn his weapon (?)
 	public int play_sex;         // (not used in uw1)
+/*
 	public int npc_xhome;        //  x coord of home tile
 	public int npc_yhome;        //  y coord of home tile
 	public int npc_whoami;       //  npc conversation slot number
@@ -42,6 +43,7 @@ public class Conversation : MonoBehaviour {
 	public int npc_talkedto;      // is 1 when player already talked to npc
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
+*/
 	public int dungeon_level;    //  (not used in uw1)
 	public int riddlecounter;     // (not used in uw1)
 	public int game_time;
@@ -69,10 +71,12 @@ public class Conversation : MonoBehaviour {
 
 	int LineWidth = 28 ;
 
-
+	public NPC npc;
 	// Use this for initialization
 	void Start () {
-		WhoAmI = this.GetComponent<NPC>().WhoAmI;
+
+		npc = this.GetComponent<NPC>();
+		WhoAmI = npc.WhoAmI;
 		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		//tl.textLabel.lineWidth=480;
 	}
@@ -249,9 +253,11 @@ public class Conversation : MonoBehaviour {
 	//	}
 
 		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
-		//Debug.Log (tmp);
+		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
+		//Debug.Log (tmp); 
 		//Debug.Log (PlayerAnswer + " out of " + NoOfAnswers + " " + tmp);
-		if (tmp.Length>=LineWidth)
+
+		/*if (tmp.Length>=LineWidth)
 		{
 			tl.Add("@@@ " + tmp.Substring(0,LineWidth) + " @@@ ");
 			tl.Add (tmp.Substring(LineWidth,tmp.Length-LineWidth) + " @@@ ");
@@ -262,6 +268,7 @@ public class Conversation : MonoBehaviour {
 		}
 
 		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
+		*/
 		//return null;
 		//return playerAnswer;
 		yield return 0;

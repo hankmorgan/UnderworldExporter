@@ -36,7 +36,7 @@ public class Compass : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	//TODO:Stop reloading the textures each time!
 		if (PreviousHeading!=playerUW.currentHeading)
 		{
 			UpdateNorthIndicator();

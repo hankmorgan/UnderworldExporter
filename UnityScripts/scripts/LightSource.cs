@@ -11,7 +11,7 @@ public class LightSource : MonoBehaviour {
 
 	public bool IsOn;
 
-	public const int BaseBrightness = 6;
+	public const int BaseBrightness = 8;
 	private ObjectInteraction objInt;
 	private UILabel ml;
 	// Use this for initialization

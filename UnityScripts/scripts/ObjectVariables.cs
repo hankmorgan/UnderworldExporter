@@ -87,7 +87,7 @@ public class ObjectVariables : MonoBehaviour {
 
 	public GameObject FindTileByName(string tileName)
 	{//Finds the tile in the level.
-		Debug.Log("Looking for tile " + tileName);
+		//Debug.Log("Looking for tile " + tileName);
 		return level.transform.FindChild (tileName).gameObject;
 	}
 	public static string LookupString(int BlockNo, int StringNo)

@@ -397,10 +397,21 @@ public class Container : MonoBehaviour {
 			if (ItemName != "")
 			{
 				GameObject item = GameObject.Find (cn.GetItemAt(i));
-				item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
-				if (item.GetComponent<Container>()!=null)
+				if (item !=null)
 				{
-					Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
+					if (item.GetComponent<ObjectInteraction>()!=null)
+					{
+						item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
+					}
+					else
+					{
+						Debug.Log (item.name + " has no object interaction!");
+					}
+					if (item.GetComponent<Container>()!=null)
+					{
+						Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
+					}
+
 				}
 			}
 		}
@@ -414,10 +425,17 @@ public class Container : MonoBehaviour {
 			if (ItemName != "")
 			{
 				GameObject item = GameObject.Find (cn.GetItemAt(i));
-				item.transform.position=Position;
-				if (item.GetComponent<Container>()!=null)
+				if (item!=null)
 				{
-					Container.SetItemsPosition(item.GetComponent<Container>(),Position);
+					item.transform.position=Position;
+					if (item.GetComponent<Container>()!=null)
+					{
+						Container.SetItemsPosition(item.GetComponent<Container>(),Position);
+					}
+				else
+					{
+						Debug.Log (">" + ItemName + "< is null!");
+					}
 				}
 			}
 		}
@@ -431,10 +449,17 @@ public class Container : MonoBehaviour {
 			if (ItemName != "")
 			{
 				GameObject item = GameObject.Find (cn.GetItemAt(i));
-				item.transform.parent=Parent;
-				if (item.GetComponent<Container>()!=null)
+				if (item != null)
 				{
-					Container.SetItemsParent(item.GetComponent<Container>(),Parent);
+					item.transform.parent=Parent;
+					if (item.GetComponent<Container>()!=null)
+					{
+						Container.SetItemsParent(item.GetComponent<Container>(),Parent);
+					}
+				}
+				else
+				{
+					Debug.Log(ItemName + " is null!");
 				}
 			}
 		}
