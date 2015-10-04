@@ -50,7 +50,6 @@ public class MyTools
 		///myObj.transform.position = pos;
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
 		
-		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
@@ -59,14 +58,10 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 559, 0, 37, 0, 0, 0);
 		CreateTMAP(myObj,"textures/tmap/uw1_039", "a_use_trigger_99_99_00_0559", 39, false);
 		SetRotation(myObj,0,180,0);
-
-		//AIRig x = myObj.AddComponent<AIRig>();
-		//BasicMind y = (BasicMind)(x.AI.Mind);
-		//y.SetBehavior(Resources.Load<BehaviorTrees>("AI/BehaviourTrees/Bragit"),);
-		//return;
+		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_31_01_00_0982",38.057144f,3.600000f,2.380000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
+		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_31_01_00_0983",38.228573f,3.600000f,2.057143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
@@ -128,8 +123,9 @@ public class MyTools
 		myObj = new GameObject("a_rotworm_58_02_00_0222");
 		pos = new Vector3(70.114288f, 1.500000f, 2.914286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"64","Sprites/OBJECTS_064");
+		CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 58, 2, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 5, 0, 0, 8, 0, 0, 0, 0, 0,"GroundMesh11");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -250,8 +246,9 @@ public class MyTools
 		myObj = new GameObject("a_acid_slug_55_04_00_0227");
 		pos = new Vector3(66.514290f, 2.400000f, 5.314286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"69","Sprites/OBJECTS_069");
+		CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 55, 4, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 6, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh11");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -287,8 +284,9 @@ public class MyTools
 		myObj = new GameObject("a_rotworm_05_06_00_0252");
 		pos = new Vector3(6.514286f, 0.300000f, 7.714286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"64","Sprites/OBJECTS_064");
+		CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 5, 6, 0, 0, 1);
+		SetNPCProps(myObj, 0, 49, 32, 1, 0, 3, 0, 0, 4, 0, 1, 0, 4, 0,"GroundMesh3");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,180,0);
@@ -387,8 +385,9 @@ public class MyTools
 		myObj = new GameObject("a_cave_bat_45_06_00_0229");
 		pos = new Vector3(54.514286f, 2.100000f, 7.714286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 45, 6, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 8, 0, 8, 0, 0, 8, 1, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -396,8 +395,9 @@ public class MyTools
 		myObj = new GameObject("a_cave_bat_50_06_00_0228");
 		pos = new Vector3(60.514286f, 1.800000f, 7.714286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 50, 6, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 8, 0, 8, 0, 0, 8, 1, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -421,8 +421,9 @@ public class MyTools
 		myObj = new GameObject("an_outcast_17_07_00_0240");
 		pos = new Vector3(20.914284f, 3.600000f, 8.914286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateNPC(myObj,"90","Sprites/OBJECTS_090", 67);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 17, 7, 0, 0, 1);
+		SetNPCProps(myObj, 67, 0, 8, 0, 0, 43, 0, 0, 8, 2, 1, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -465,8 +466,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_rat_22_08_00_0254");
 		pos = new Vector3(27.428572f, 3.000000f, 10.457142f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 22, 8, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 0, 0, 4, 0, 0, 4, 1, 1, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,225,0);
@@ -638,8 +640,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_rat_18_12_00_0214");
 		pos = new Vector3(22.457144f, 3.600000f, 14.914286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 18, 12, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 12, 0, 6, 0, 0, 4, 1, 1, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -708,13 +711,14 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_campfire_30_12_00_0741",36.514286f,1.800000f,14.914286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 		
 		myObj = new GameObject("an_outcast_33_12_00_0241");
 		pos = new Vector3(40.457142f, 2.100000f, 14.914286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateNPC(myObj,"90","Sprites/OBJECTS_090", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 12, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 0, 0, 22, 0, 0, 8, 2, 1, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -797,8 +801,9 @@ public class MyTools
 		myObj = new GameObject("a_acid_slug_59_14_00_0226");
 		pos = new Vector3(71.314285f, 3.300000f, 17.314285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"69","Sprites/OBJECTS_069");
+		CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 59, 14, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 0, 0, 6, 0, 0, 4, 1, 0, 0, 0, 0,"GroundMesh11");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -806,8 +811,9 @@ public class MyTools
 		myObj = new GameObject("a_vampire_bat_02_15_00_0209");
 		pos = new Vector3(2.914286f, 1.500000f, 18.514286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"73","Sprites/OBJECTS_073");
+		CreateNPC(myObj,"73","Sprites/OBJECTS_073", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 2, 15, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 13, 0, 0, 4, 0, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -815,7 +821,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 6048460, 6048460);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3741400, 3741400);
 		
 		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -833,8 +839,9 @@ public class MyTools
 		myObj = new GameObject("an_outcast_33_15_00_0239");
 		pos = new Vector3(40.457142f, 2.100000f, 18.857141f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateNPC(myObj,"90","Sprites/OBJECTS_090", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 15, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 0, 0, 36, 0, 0, 8, 2, 1, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,90,0);
@@ -842,8 +849,9 @@ public class MyTools
 		myObj = new GameObject("a_cave_bat_12_16_00_0211");
 		pos = new Vector3(14.914286f, 0.600000f, 19.714287f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 12, 16, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 4, 0, 8, 0, 0, 8, 2, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -880,8 +888,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_rat_02_17_00_0215");
 		pos = new Vector3(2.914286f, 2.700000f, 20.914284f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"72","Sprites/OBJECTS_072");
+		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 17, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 9, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -933,8 +942,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_rat_02_19_00_0217");
 		pos = new Vector3(2.914286f, 2.700000f, 23.314285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 19, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 8, 0, 7, 0, 0, 4, 1, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -950,8 +960,9 @@ public class MyTools
 		myObj = new GameObject("an_outcast_22_19_00_0242");
 		pos = new Vector3(26.914284f, 3.600000f, 23.314285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateNPC(myObj,"90","Sprites/OBJECTS_090", 20);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 22, 19, 0, 0, 1);
+		SetNPCProps(myObj, 20, 0, 8, 0, 0, 34, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -984,8 +995,9 @@ public class MyTools
 		myObj = new GameObject("an_imp_12_20_00_0213");
 		pos = new Vector3(14.914286f, 3.900000f, 24.514284f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"75","Sprites/OBJECTS_075");
+		CreateNPC(myObj,"75","Sprites/OBJECTS_075", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", 0, 75, 0, 12, 20, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 8, 0, 15, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,270,0);
@@ -1001,8 +1013,9 @@ public class MyTools
 		myObj = new GameObject("an_outcast_33_20_00_0243");
 		pos = new Vector3(40.114285f, 3.600000f, 24.685715f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"90","Sprites/OBJECTS_090");
+		CreateNPC(myObj,"90","Sprites/OBJECTS_090", 19);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 20, 0, 0, 1);
+		SetNPCProps(myObj, 19, 0, 4, 12, 0, 50, 0, 0, 8, 1, 1, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,270,0);
@@ -1028,8 +1041,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_rat_02_22_00_0216");
 		pos = new Vector3(2.914286f, 2.700000f, 26.914284f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"67","Sprites/OBJECTS_067");
+		CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 22, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 12, 0, 7, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1042,8 +1056,9 @@ public class MyTools
 		myObj = new GameObject("a_lurker_14_23_00_0250");
 		pos = new Vector3(17.314285f, 0.300000f, 28.114285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+		CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 14, 23, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 20, 0, 0, 4, 0, 0, 0, 0, 0,"WaterMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1051,8 +1066,9 @@ public class MyTools
 		myObj = new GameObject("a_cave_bat_31_23_00_0212");
 		pos = new Vector3(37.714283f, 1.200000f, 28.114285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 31, 23, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 4, 0, 6, 0, 0, 8, 2, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1097,8 +1113,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_spider_29_26_00_0253");
 		pos = new Vector3(35.314285f, 3.600000f, 31.714285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+		CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 29, 26, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 21, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,180,0);
@@ -1123,8 +1140,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_36_28_00_0225");
 		pos = new Vector3(43.714287f, 3.600000f, 34.114285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+		CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 36, 28, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 9, 0, 0, 8, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1178,8 +1196,9 @@ public class MyTools
 		myObj = new GameObject("a_flesh_slug_26_33_00_0207");
 		pos = new Vector3(31.714285f, 2.100000f, 40.114285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"65","Sprites/OBJECTS_065");
+		CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 26, 33, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 4, 0, 5, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,270,0);
@@ -1205,7 +1224,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 6048460, 6048460);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3741400, 3741400);
 		
 		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1251,8 +1270,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_15_35_00_0220");
 		pos = new Vector3(18.514286f, 2.100000f, 42.514286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+		CreateNPC(myObj,"71","Sprites/OBJECTS_071", 66);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 537, 15, 35, 0, 0, 1);
+		SetNPCProps(myObj, 66, 0, 8, 12, 0, 21, 0, 0, 7, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,180,0);
@@ -1273,8 +1293,9 @@ public class MyTools
 		myObj = new GameObject("a_skeleton_54_35_00_0204");
 		pos = new Vector3(65.314285f, 2.400000f, 42.514286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074");
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 54, 35, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 12, 0, 11, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,180,0);
@@ -1375,8 +1396,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_03_38_00_0219");
 		pos = new Vector3(4.114285f, 3.600000f, 46.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+		CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 3, 38, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 0, 0, 16, 0, 0, 2, 1, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,45,0);
@@ -1384,8 +1406,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_11_38_00_0218");
 		pos = new Vector3(13.714286f, 3.600000f, 46.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"77","Sprites/OBJECTS_077");
+		CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 11, 38, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 22, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,270,0);
@@ -1398,8 +1421,9 @@ public class MyTools
 		myObj = new GameObject("a_lurker_26_38_00_0223");
 		pos = new Vector3(31.714285f, 0.900000f, 46.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+		CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 26, 38, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 24, 0, 0, 4, 0, 0, 0, 0, 0,"WaterMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1425,8 +1449,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_54_38_00_0224");
 		pos = new Vector3(65.314285f, 3.600000f, 46.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"78","Sprites/OBJECTS_078");
+		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 54, 38, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 28, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1455,7 +1480,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_campfire_03_39_00_0778",4.114285f,3.300000f,47.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 		
 		myObj= CreateGameObject("a_rock_hammer_09_39_00_0598",11.828571f,3.600000f,47.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_296",true);
@@ -1515,7 +1540,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 30, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 6047684, 6047684);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3740616, 3740616);
 		myObj.transform.position = invMarker.transform.position;
 		AddObjectToContainer(myObj, ParentContainer, 4);
 		FreezeMovement(myObj);
@@ -1564,7 +1589,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_campfire_08_42_00_0767",10.114285f,3.300000f,50.914288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 		
 		myObj= CreateGameObject("a_cauldron_11_42_00_0763",13.714286f,3.600000f,50.914288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_303",true);
@@ -1572,8 +1597,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_08_43_00_0244");
 		pos = new Vector3(10.114285f, 3.600000f, 52.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+		CreateNPC(myObj,"70","Sprites/OBJECTS_070", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 8, 43, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 8, 0, 19, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1581,8 +1607,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_10_43_00_0245");
 		pos = new Vector3(12.514286f, 3.600000f, 52.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+		CreateNPC(myObj,"70","Sprites/OBJECTS_070", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 10, 43, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 0, 0, 15, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1590,8 +1617,9 @@ public class MyTools
 		myObj = new GameObject("a_cave_bat_23_43_00_0210");
 		pos = new Vector3(28.114285f, 2.100000f, 52.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 23, 43, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1599,8 +1627,9 @@ public class MyTools
 		myObj = new GameObject("a_cave_bat_24_43_00_0208");
 		pos = new Vector3(29.314285f, 2.400000f, 52.114288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"66","Sprites/OBJECTS_066");
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 24, 43, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 8, 0, 5, 0, 0, 8, 1, 0, 0, 0, 0,"SkyMesh1");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1683,8 +1712,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_spider_27_46_00_0247");
 		pos = new Vector3(32.914284f, 2.400000f, 55.714287f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+		CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 27, 46, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 4, 0, 16, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1710,8 +1740,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_04_47_00_0200");
 		pos = new Vector3(5.314286f, 3.600000f, 57.257145f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+		CreateNPC(myObj,"71","Sprites/OBJECTS_071", 255);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 0, 4, 47, 0, 0, 1);
+		SetNPCProps(myObj, 255, 0, 4, 0, 0, 71, 0, 0, 12, 1, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1937,8 +1968,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_60_51_00_0238");
 		pos = new Vector3(72.514290f, 3.600000f, 61.714287f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+		CreateNPC(myObj,"80","Sprites/OBJECTS_080", 7);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 60, 51, 0, 0, 1);
+		SetNPCProps(myObj, 7, 0, 8, 0, 0, 32, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -1960,8 +1992,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_45_52_00_0233");
 		pos = new Vector3(54.857143f, 3.600000f, 62.742855f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateNPC(myObj,"76","Sprites/OBJECTS_076", 65);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 52, 0, 0, 1);
+		SetNPCProps(myObj, 65, 0, 8, 8, 0, 26, 0, 0, 7, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,270,0);
@@ -1970,8 +2003,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_52_52_00_0234");
 		pos = new Vector3(62.914288f, 3.000000f, 62.914288f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 52, 52, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 12, 0, 18, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -2027,8 +2061,9 @@ public class MyTools
 		myObj = new GameObject("a_wolf_spider_19_54_00_0246");
 		pos = new Vector3(23.314285f, 2.700000f, 65.314285f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"83","Sprites/OBJECTS_083");
+		CreateNPC(myObj,"83","Sprites/OBJECTS_083", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", 0, 83, 0, 19, 54, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 0, 0, 24, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,135,0);
@@ -2042,8 +2077,9 @@ public class MyTools
 		myObj = new GameObject("a_giant_spider_37_54_00_0248");
 		pos = new Vector3(45.085712f, 3.300000f, 65.142853f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"68","Sprites/OBJECTS_068");
+		CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 37, 54, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 8, 0, 16, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,180,0);
@@ -2094,8 +2130,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_46_55_00_0236");
 		pos = new Vector3(55.714287f, 3.600000f, 66.514290f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 46, 55, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 12, 0, 24, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -2103,8 +2140,9 @@ public class MyTools
 		myObj = new GameObject("a_lurker_51_55_00_0206");
 		pos = new Vector3(61.714287f, 2.700000f, 66.514290f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"87","Sprites/OBJECTS_087");
+		CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 51, 55, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 4, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0,"WaterMesh14");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -2112,8 +2150,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_57_55_00_0249");
 		pos = new Vector3(68.914284f, 3.600000f, 66.514290f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+		CreateNPC(myObj,"80","Sprites/OBJECTS_080", 8);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 538, 57, 55, 0, 0, 1);
+		SetNPCProps(myObj, 8, 0, 8, 8, 0, 53, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,270,0);
@@ -2130,8 +2169,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_04_56_00_0230");
 		pos = new Vector3(5.314286f, 3.600000f, 67.714287f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"70","Sprites/OBJECTS_070");
+		CreateNPC(myObj,"70","Sprites/OBJECTS_070", 10);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 810, 4, 56, 0, 0, 1);
+		SetNPCProps(myObj, 10, 0, 8, 4, 0, 15, 0, 0, 7, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,90,0);
@@ -2160,8 +2200,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_45_56_00_0237");
 		pos = new Vector3(54.514286f, 3.600000f, 67.714287f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateNPC(myObj,"76","Sprites/OBJECTS_076", 64);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 56, 0, 0, 1);
+		SetNPCProps(myObj, 64, 0, 8, 12, 0, 18, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -2169,8 +2210,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_47_56_00_0235");
 		pos = new Vector3(56.914288f, 3.600000f, 67.714287f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 47, 56, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 4, 0, 19, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -2178,8 +2220,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_02_57_00_0231");
 		pos = new Vector3(3.580000f, 3.600000f, 68.742859f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"71","Sprites/OBJECTS_071");
+		CreateNPC(myObj,"71","Sprites/OBJECTS_071", 9);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 534, 2, 57, 0, 0, 1);
+		SetNPCProps(myObj, 9, 0, 8, 0, 0, 55, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,90,0);
@@ -2220,14 +2263,14 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_campfire_47_57_00_0720",56.914288f,3.300000f,68.914284f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 		
 		myObj= CreateGameObject("a_bench_benches_02_58_00_0771",2.914286f,3.600000f,70.285713f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
 		
 		myObj= CreateGameObject("a_campfire_03_58_00_0543",4.457143f,3.600000f,70.457146f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_298",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", "Sprites/OBJECTS_298", 16, 298, 1, 40, 0, 0, 1, 1);
 		
 		myObj= CreateGameObject("a_mandolin_03_58_00_0542",3.942857f,3.600000f,70.285713f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
@@ -2246,8 +2289,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_51_58_00_0203");
 		pos = new Vector3(62.228569f, 3.000000f, 69.942856f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"76","Sprites/OBJECTS_076");
+		CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 51, 58, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 8, 0, 0, 28, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,180,0);
@@ -2353,8 +2397,9 @@ public class MyTools
 		myObj = new GameObject("a_goblin_52_59_00_0202");
 		pos = new Vector3(63.257145f, 3.600000f, 71.657143f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"80","Sprites/OBJECTS_080");
+		CreateNPC(myObj,"80","Sprites/OBJECTS_080", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 52, 59, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 4, 0, 0, 54, 0, 0, 12, 1, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,90,0);
@@ -2370,8 +2415,9 @@ public class MyTools
 		myObj = new GameObject("a_flesh_slug_37_60_00_0221");
 		pos = new Vector3(44.914288f, 2.700000f, 72.514290f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"65","Sprites/OBJECTS_065");
+		CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 37, 60, 0, 0, 1);
+		SetNPCProps(myObj, 0, 0, 0, 4, 0, 7, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		SetRotation(myObj,0,0,0);
@@ -2444,10 +2490,9 @@ public class MyTools
 		CreateUWActivators(myObj,"ButtonHandler","a_toadstool_16_04_00_0582",40,0,8,7,302);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", 17, 302, 582, 40, 0, 0, 0, 0);
 		
-		myObj= CreateGameObject("a_lockpick_000_3",42.857143f,3.000000f,74.057144f);
+		myObj= CreateGameObject("a_lockpick_35_61_00_0632",42.857143f,3.000000f,74.057144f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_257",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 5, 257, 1, 40, 0, 1, 0, 1);
-		CreateKey(myObj, 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 79, 257, 1, 40, 0, 1, 0, 1);
 		
 		myObj= CreateGameObject("some_writing_38_61_00_0902",46.114288f,3.900000f,74.379997f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
@@ -2642,12 +2687,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,6048740);
+		Create_a_do_trap(myObj,3,3741680);
 		
 		myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,6048740);
+		Create_a_do_trap(myObj,3,3741680);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2662,12 +2707,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,6048740);
+		Create_a_do_trap(myObj,3,3741680);
 		
 		myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,6048740);
+		Create_a_do_trap(myObj,3,3741680);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2822,7 +2867,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
 
-	
+
 
 		}
 
@@ -4984,69 +5029,69 @@ public class MyTools
 	[MenuItem("MyTools/TagTilesByName")]
 	static void TagTilesByRoom()
 	{
-
-		SetTileTag(24,61,"WATER_1", 1);SetTileTag(25,61,"WATER_1", 1);SetTileTag(26,61,"WATER_1", 1);SetTileTag(29,61,"WATER_10", 1);SetTileTag(30,61,"WATER_10", 1);SetTileTag(31,61,"WATER_10", 1);SetTileTag(33,61,"LAND_2", 1);SetTileTag(34,61,"LAND_2", 1);SetTileTag(35,61,"LAND_2", 1);SetTileTag(37,61,"LAND_2", 1);SetTileTag(38,61,"LAND_2", 1);SetTileTag(39,61,"LAND_2", 1);
-		SetTileTag(5,60,"LAND_2", 1);SetTileTag(6,60,"LAND_2", 1);SetTileTag(7,60,"LAND_2", 1);SetTileTag(8,60,"LAND_2", 1);SetTileTag(9,60,"LAND_2", 1);SetTileTag(10,60,"LAND_2", 1);SetTileTag(11,60,"LAND_2", 1);SetTileTag(12,60,"LAND_2", 1);SetTileTag(13,60,"LAND_2", 1);SetTileTag(14,60,"LAND_2", 1);SetTileTag(15,60,"LAND_2", 1);SetTileTag(24,60,"WATER_1", 1);SetTileTag(25,60,"WATER_1", 1);SetTileTag(26,60,"WATER_1", 1);SetTileTag(29,60,"LAND_2", 1);SetTileTag(30,60,"LAND_2", 1);SetTileTag(31,60,"LAND_2", 1);SetTileTag(33,60,"LAND_2", 1);SetTileTag(35,60,"LAND_2", 1);SetTileTag(37,60,"LAND_2", 1);SetTileTag(38,60,"LAND_2", 1);SetTileTag(39,60,"LAND_2", 1);SetTileTag(43,60,"LAND_2", 1);SetTileTag(44,60,"LAND_2", 1);SetTileTag(45,60,"LAND_2", 1);SetTileTag(46,60,"LAND_2", 1);SetTileTag(47,60,"LAND_2", 1);SetTileTag(48,60,"LAND_2", 1);SetTileTag(56,60,"LAND_2", 1);SetTileTag(57,60,"LAND_2", 1);
-		SetTileTag(4,59,"LAND_2", 1);SetTileTag(5,59,"LAND_2", 1);SetTileTag(6,59,"LAND_2", 1);SetTileTag(7,59,"LAND_2", 1);SetTileTag(8,59,"WATER_5", 1);SetTileTag(9,59,"WATER_5", 1);SetTileTag(10,59,"LAND_2", 1);SetTileTag(11,59,"LAND_2", 1);SetTileTag(12,59,"WATER_8", 1);SetTileTag(13,59,"WATER_8", 1);SetTileTag(14,59,"LAND_2", 1);SetTileTag(15,59,"LAND_2", 1);SetTileTag(23,59,"WATER_1", 1);SetTileTag(24,59,"WATER_1", 1);SetTileTag(25,59,"WATER_1", 1);SetTileTag(26,59,"LAND_2", 1);SetTileTag(27,59,"LAND_2", 1);SetTileTag(28,59,"LAND_2", 1);SetTileTag(29,59,"LAND_2", 1);SetTileTag(30,59,"LAND_2", 1);SetTileTag(31,59,"LAND_2", 1);SetTileTag(32,59,"LAND_2", 1);SetTileTag(33,59,"LAND_2", 1);SetTileTag(35,59,"LAND_2", 1);SetTileTag(37,59,"LAND_2", 1);SetTileTag(38,59,"LAND_2", 1);SetTileTag(39,59,"LAND_2", 1);SetTileTag(43,59,"LAND_2", 1);SetTileTag(44,59,"LAND_2", 1);SetTileTag(45,59,"LAND_2", 1);SetTileTag(46,59,"LAND_2", 1);SetTileTag(47,59,"LAND_2", 1);SetTileTag(48,59,"LAND_2", 1);SetTileTag(49,59,"LAND_2", 1);SetTileTag(50,59,"LAND_2", 1);SetTileTag(51,59,"LAND_2", 1);SetTileTag(52,59,"LAND_2", 1);SetTileTag(53,59,"LAND_2", 1);SetTileTag(54,59,"LAND_2", 1);SetTileTag(55,59,"LAND_2", 1);SetTileTag(56,59,"LAND_2", 1);SetTileTag(57,59,"LAND_2", 1);
-		SetTileTag(2,58,"LAND_2", 1);SetTileTag(3,58,"LAND_2", 1);SetTileTag(4,58,"LAND_2", 1);SetTileTag(5,58,"LAND_2", 1);SetTileTag(6,58,"LAND_2", 1);SetTileTag(7,58,"LAND_2", 1);SetTileTag(8,58,"WATER_5", 1);SetTileTag(9,58,"LAND_2", 1);SetTileTag(10,58,"LAND_2", 1);SetTileTag(11,58,"LAND_2", 1);SetTileTag(12,58,"LAND_2", 1);SetTileTag(13,58,"WATER_8", 1);SetTileTag(14,58,"LAND_2", 1);SetTileTag(15,58,"LAND_2", 1);SetTileTag(22,58,"WATER_1", 1);SetTileTag(23,58,"WATER_1", 1);SetTileTag(24,58,"WATER_1", 1);SetTileTag(25,58,"WATER_1", 1);SetTileTag(35,58,"LAND_2", 1);SetTileTag(37,58,"LAND_2", 1);SetTileTag(38,58,"LAND_2", 1);SetTileTag(39,58,"LAND_2", 1);SetTileTag(43,58,"LAND_2", 1);SetTileTag(44,58,"LAND_2", 1);SetTileTag(49,58,"LAND_2", 1);SetTileTag(50,58,"LAND_2", 1);SetTileTag(51,58,"LAND_2", 1);SetTileTag(52,58,"LAND_2", 1);SetTileTag(53,58,"LAND_2", 1);SetTileTag(54,58,"LAND_2", 1);SetTileTag(56,58,"LAND_2", 1);SetTileTag(57,58,"LAND_2", 1);
-		SetTileTag(2,57,"LAND_2", 1);SetTileTag(3,57,"LAND_2", 1);SetTileTag(4,57,"LAND_2", 1);SetTileTag(5,57,"LAND_2", 1);SetTileTag(6,57,"LAND_2", 1);SetTileTag(7,57,"LAND_2", 1);SetTileTag(8,57,"LAND_2", 1);SetTileTag(9,57,"LAND_2", 1);SetTileTag(10,57,"LAND_2", 1);SetTileTag(11,57,"LAND_2", 1);SetTileTag(12,57,"LAND_2", 1);SetTileTag(13,57,"LAND_2", 1);SetTileTag(14,57,"LAND_2", 1);SetTileTag(15,57,"LAND_2", 1);SetTileTag(20,57,"LAND_2", 1);SetTileTag(22,57,"WATER_1", 1);SetTileTag(23,57,"WATER_1", 1);SetTileTag(24,57,"WATER_1", 1);SetTileTag(29,57,"LAND_2", 1);SetTileTag(30,57,"LAND_2", 1);SetTileTag(31,57,"LAND_2", 1);SetTileTag(32,57,"LAND_2", 1);SetTileTag(33,57,"LAND_2", 1);SetTileTag(34,57,"LAND_2", 1);SetTileTag(35,57,"LAND_2", 1);SetTileTag(36,57,"LAND_2", 1);SetTileTag(37,57,"LAND_2", 1);SetTileTag(38,57,"LAND_2", 1);SetTileTag(39,57,"LAND_2", 1);SetTileTag(40,57,"LAND_2", 1);SetTileTag(41,57,"LAND_2", 1);SetTileTag(43,57,"LAND_2", 1);SetTileTag(44,57,"LAND_2", 1);SetTileTag(45,57,"LAND_2", 1);SetTileTag(46,57,"LAND_2", 1);SetTileTag(47,57,"LAND_2", 1);SetTileTag(49,57,"LAND_2", 1);SetTileTag(50,57,"LAND_2", 1);SetTileTag(51,57,"LAND_2", 1);SetTileTag(52,57,"LAND_2", 1);SetTileTag(53,57,"LAND_2", 1);SetTileTag(54,57,"LAND_2", 1);
-		SetTileTag(2,56,"LAND_2", 1);SetTileTag(3,56,"LAND_2", 1);SetTileTag(4,56,"LAND_2", 1);SetTileTag(5,56,"LAND_2", 1);SetTileTag(6,56,"LAND_2", 1);SetTileTag(7,56,"LAND_2", 1);SetTileTag(8,56,"WATER_4", 1);SetTileTag(9,56,"LAND_2", 1);SetTileTag(10,56,"LAND_2", 1);SetTileTag(11,56,"LAND_2", 1);SetTileTag(12,56,"LAND_2", 1);SetTileTag(13,56,"WATER_7", 1);SetTileTag(14,56,"LAND_2", 1);SetTileTag(15,56,"LAND_2", 1);SetTileTag(19,56,"LAND_2", 1);SetTileTag(20,56,"LAND_2", 1);SetTileTag(22,56,"WATER_1", 1);SetTileTag(23,56,"WATER_1", 1);SetTileTag(24,56,"WATER_1", 1);SetTileTag(25,56,"WATER_1", 1);SetTileTag(26,56,"WATER_1", 1);SetTileTag(29,56,"LAND_2", 1);SetTileTag(30,56,"LAND_2", 1);SetTileTag(31,56,"LAND_2", 1);SetTileTag(38,56,"LAND_2", 1);SetTileTag(39,56,"LAND_2", 1);SetTileTag(40,56,"LAND_2", 1);SetTileTag(41,56,"LAND_2", 1);SetTileTag(43,56,"LAND_2", 1);SetTileTag(44,56,"LAND_2", 1);SetTileTag(45,56,"LAND_2", 1);SetTileTag(46,56,"LAND_2", 1);SetTileTag(47,56,"LAND_2", 1);SetTileTag(49,56,"LAND_2", 1);SetTileTag(50,56,"LAND_2", 1);SetTileTag(51,56,"WATER_14", 1);SetTileTag(52,56,"WATER_14", 1);SetTileTag(53,56,"LAND_2", 1);SetTileTag(54,56,"LAND_2", 1);SetTileTag(55,56,"LAND_2", 1);SetTileTag(56,56,"LAND_2", 1);SetTileTag(57,56,"LAND_2", 1);SetTileTag(58,56,"LAND_2", 1);
-		SetTileTag(4,55,"LAND_2", 1);SetTileTag(5,55,"LAND_2", 1);SetTileTag(6,55,"LAND_2", 1);SetTileTag(7,55,"LAND_2", 1);SetTileTag(8,55,"WATER_4", 1);SetTileTag(9,55,"WATER_4", 1);SetTileTag(10,55,"LAND_2", 1);SetTileTag(11,55,"LAND_2", 1);SetTileTag(12,55,"WATER_7", 1);SetTileTag(13,55,"WATER_7", 1);SetTileTag(14,55,"LAND_2", 1);SetTileTag(15,55,"LAND_2", 1);SetTileTag(18,55,"LAND_2", 1);SetTileTag(19,55,"LAND_2", 1);SetTileTag(20,55,"LAND_2", 1);SetTileTag(24,55,"WATER_1", 1);SetTileTag(25,55,"WATER_1", 1);SetTileTag(26,55,"WATER_1", 1);SetTileTag(27,55,"WATER_1", 1);SetTileTag(31,55,"LAND_2", 1);SetTileTag(40,55,"LAND_2", 1);SetTileTag(41,55,"LAND_2", 1);SetTileTag(43,55,"LAND_2", 1);SetTileTag(44,55,"LAND_2", 1);SetTileTag(45,55,"LAND_2", 1);SetTileTag(46,55,"LAND_2", 1);SetTileTag(47,55,"LAND_2", 1);SetTileTag(49,55,"LAND_2", 1);SetTileTag(50,55,"LAND_2", 1);SetTileTag(51,55,"WATER_14", 1);SetTileTag(52,55,"WATER_14", 1);SetTileTag(53,55,"LAND_2", 1);SetTileTag(54,55,"LAND_2", 1);SetTileTag(55,55,"LAND_2", 1);SetTileTag(56,55,"LAND_2", 1);SetTileTag(57,55,"LAND_2", 1);SetTileTag(58,55,"LAND_2", 1);
-		SetTileTag(5,54,"LAND_2", 1);SetTileTag(6,54,"LAND_2", 1);SetTileTag(7,54,"LAND_2", 1);SetTileTag(8,54,"LAND_2", 1);SetTileTag(9,54,"LAND_2", 1);SetTileTag(10,54,"LAND_2", 1);SetTileTag(11,54,"LAND_2", 1);SetTileTag(12,54,"LAND_2", 1);SetTileTag(13,54,"LAND_2", 1);SetTileTag(14,54,"LAND_2", 1);SetTileTag(15,54,"LAND_2", 1);SetTileTag(18,54,"LAND_2", 1);SetTileTag(19,54,"LAND_2", 1);SetTileTag(20,54,"LAND_2", 1);SetTileTag(21,54,"LAND_2", 1);SetTileTag(22,54,"LAND_2", 1);SetTileTag(25,54,"WATER_1", 1);SetTileTag(26,54,"WATER_1", 1);SetTileTag(27,54,"WATER_1", 1);SetTileTag(31,54,"LAND_2", 1);SetTileTag(32,54,"LAND_2", 1);SetTileTag(35,54,"LAND_2", 1);SetTileTag(36,54,"LAND_2", 1);SetTileTag(37,54,"LAND_2", 1);SetTileTag(38,54,"LAND_2", 1);SetTileTag(40,54,"LAND_2", 1);SetTileTag(41,54,"LAND_2", 1);SetTileTag(47,54,"LAND_2", 1);SetTileTag(49,54,"LAND_2", 1);SetTileTag(50,54,"LAND_2", 1);SetTileTag(51,54,"WATER_14", 1);SetTileTag(52,54,"WATER_14", 1);SetTileTag(53,54,"LAND_2", 1);SetTileTag(54,54,"LAND_2", 1);SetTileTag(55,54,"LAND_2", 1);SetTileTag(56,54,"LAND_2", 1);SetTileTag(57,54,"LAND_2", 1);SetTileTag(58,54,"LAND_2", 1);
-		SetTileTag(5,53,"LAND_2", 1);SetTileTag(6,53,"LAND_2", 1);SetTileTag(7,53,"LAND_2", 1);SetTileTag(8,53,"LAND_2", 1);SetTileTag(9,53,"LAND_2", 1);SetTileTag(10,53,"LAND_2", 1);SetTileTag(11,53,"LAND_2", 1);SetTileTag(12,53,"LAND_2", 1);SetTileTag(13,53,"LAND_2", 1);SetTileTag(14,53,"LAND_2", 1);SetTileTag(15,53,"LAND_2", 1);SetTileTag(18,53,"LAND_2", 1);SetTileTag(19,53,"LAND_2", 1);SetTileTag(20,53,"LAND_2", 1);SetTileTag(21,53,"LAND_2", 1);SetTileTag(22,53,"LAND_2", 1);SetTileTag(23,53,"LAND_2", 1);SetTileTag(26,53,"WATER_1", 1);SetTileTag(27,53,"WATER_1", 1);SetTileTag(28,53,"WATER_1", 1);SetTileTag(30,53,"LAND_2", 1);SetTileTag(31,53,"LAND_2", 1);SetTileTag(32,53,"LAND_2", 1);SetTileTag(34,53,"LAND_2", 1);SetTileTag(35,53,"LAND_2", 1);SetTileTag(36,53,"LAND_2", 1);SetTileTag(37,53,"LAND_2", 1);SetTileTag(38,53,"LAND_2", 1);SetTileTag(40,53,"LAND_2", 1);SetTileTag(41,53,"LAND_2", 1);SetTileTag(43,53,"LAND_2", 1);SetTileTag(44,53,"LAND_2", 1);SetTileTag(45,53,"LAND_2", 1);SetTileTag(47,53,"WATER_13", 1);SetTileTag(49,53,"LAND_2", 1);SetTileTag(50,53,"LAND_2", 1);SetTileTag(51,53,"LAND_2", 1);SetTileTag(52,53,"LAND_2", 1);SetTileTag(53,53,"LAND_2", 1);SetTileTag(54,53,"LAND_2", 1);SetTileTag(57,53,"LAND_2", 1);
-		SetTileTag(8,52,"LAND_2", 1);SetTileTag(13,52,"LAND_2", 1);SetTileTag(14,52,"LAND_2", 1);SetTileTag(15,52,"LAND_2", 1);SetTileTag(19,52,"LAND_2", 1);SetTileTag(20,52,"LAND_2", 1);SetTileTag(21,52,"LAND_2", 1);SetTileTag(22,52,"LAND_2", 1);SetTileTag(23,52,"LAND_2", 1);SetTileTag(27,52,"WATER_1", 1);SetTileTag(28,52,"WATER_1", 1);SetTileTag(31,52,"LAND_2", 1);SetTileTag(34,52,"LAND_2", 1);SetTileTag(35,52,"LAND_2", 1);SetTileTag(40,52,"LAND_2", 1);SetTileTag(41,52,"LAND_2", 1);SetTileTag(43,52,"LAND_2", 1);SetTileTag(44,52,"LAND_2", 1);SetTileTag(45,52,"LAND_2", 1);SetTileTag(48,52,"LAND_2", 1);SetTileTag(49,52,"LAND_2", 1);SetTileTag(50,52,"LAND_2", 1);SetTileTag(51,52,"LAND_2", 1);SetTileTag(52,52,"LAND_2", 1);SetTileTag(53,52,"LAND_2", 1);SetTileTag(54,52,"LAND_2", 1);SetTileTag(56,52,"LAND_2", 1);SetTileTag(57,52,"LAND_2", 1);SetTileTag(58,52,"LAND_2", 1);SetTileTag(59,52,"LAND_2", 1);SetTileTag(60,52,"LAND_2", 1);
-		SetTileTag(3,51,"LAND_2", 1);SetTileTag(4,51,"LAND_2", 1);SetTileTag(6,51,"LAND_2", 1);SetTileTag(7,51,"LAND_2", 1);SetTileTag(8,51,"LAND_2", 1);SetTileTag(9,51,"LAND_2", 1);SetTileTag(10,51,"LAND_2", 1);SetTileTag(11,51,"LAND_2", 1);SetTileTag(13,51,"LAND_2", 1);SetTileTag(14,51,"LAND_2", 1);SetTileTag(15,51,"LAND_2", 1);SetTileTag(23,51,"LAND_2", 1);SetTileTag(24,51,"LAND_2", 1);SetTileTag(25,51,"LAND_2", 1);SetTileTag(26,51,"WATER_1", 1);SetTileTag(27,51,"WATER_1", 1);SetTileTag(28,51,"WATER_1", 1);SetTileTag(30,51,"LAND_2", 1);SetTileTag(31,51,"LAND_2", 1);SetTileTag(34,51,"LAND_2", 1);SetTileTag(35,51,"LAND_2", 1);SetTileTag(36,51,"LAND_2", 1);SetTileTag(40,51,"LAND_2", 1);SetTileTag(41,51,"LAND_2", 1);SetTileTag(42,51,"LAND_2", 1);SetTileTag(43,51,"LAND_2", 1);SetTileTag(44,51,"LAND_2", 1);SetTileTag(45,51,"LAND_2", 1);SetTileTag(46,51,"LAND_2", 1);SetTileTag(47,51,"LAND_2", 1);SetTileTag(48,51,"LAND_2", 1);SetTileTag(49,51,"LAND_2", 1);SetTileTag(50,51,"LAND_2", 1);SetTileTag(51,51,"LAND_2", 1);SetTileTag(52,51,"LAND_2", 1);SetTileTag(53,51,"LAND_2", 1);SetTileTag(54,51,"LAND_2", 1);SetTileTag(56,51,"LAND_2", 1);SetTileTag(57,51,"LAND_2", 1);SetTileTag(58,51,"LAND_2", 1);SetTileTag(59,51,"LAND_2", 1);SetTileTag(60,51,"LAND_2", 1);
-		SetTileTag(3,50,"LAND_2", 1);SetTileTag(4,50,"LAND_2", 1);SetTileTag(6,50,"LAND_2", 1);SetTileTag(7,50,"LAND_2", 1);SetTileTag(8,50,"LAND_2", 1);SetTileTag(9,50,"LAND_2", 1);SetTileTag(10,50,"LAND_2", 1);SetTileTag(11,50,"LAND_2", 1);SetTileTag(13,50,"LAND_2", 1);SetTileTag(14,50,"LAND_2", 1);SetTileTag(15,50,"LAND_2", 1);SetTileTag(22,50,"WATER_1", 1);SetTileTag(23,50,"WATER_1", 1);SetTileTag(24,50,"WATER_1", 1);SetTileTag(25,50,"WATER_1", 1);SetTileTag(26,50,"WATER_1", 1);SetTileTag(27,50,"WATER_1", 1);SetTileTag(30,50,"LAND_2", 1);SetTileTag(31,50,"LAND_2", 1);SetTileTag(32,50,"LAND_2", 1);SetTileTag(34,50,"LAND_2", 1);SetTileTag(35,50,"LAND_2", 1);SetTileTag(36,50,"LAND_2", 1);SetTileTag(40,50,"LAND_2", 1);SetTileTag(41,50,"LAND_2", 1);SetTileTag(53,50,"LAND_2", 1);SetTileTag(54,50,"LAND_2", 1);SetTileTag(60,50,"LAND_2", 1);
-		SetTileTag(4,49,"LAND_2", 1);SetTileTag(6,49,"LAND_2", 1);SetTileTag(7,49,"LAND_2", 1);SetTileTag(8,49,"LAND_2", 1);SetTileTag(9,49,"LAND_2", 1);SetTileTag(11,49,"LAND_2", 1);SetTileTag(13,49,"LAND_2", 1);SetTileTag(14,49,"LAND_2", 1);SetTileTag(15,49,"LAND_2", 1);SetTileTag(20,49,"WATER_1", 1);SetTileTag(21,49,"WATER_1", 1);SetTileTag(22,49,"WATER_1", 1);SetTileTag(23,49,"WATER_1", 1);SetTileTag(24,49,"WATER_1", 1);SetTileTag(25,49,"WATER_1", 1);SetTileTag(26,49,"WATER_1", 1);SetTileTag(27,49,"WATER_1", 1);SetTileTag(29,49,"LAND_2", 1);SetTileTag(30,49,"LAND_2", 1);SetTileTag(31,49,"LAND_2", 1);SetTileTag(32,49,"LAND_2", 1);SetTileTag(33,49,"LAND_2", 1);SetTileTag(34,49,"LAND_2", 1);SetTileTag(35,49,"LAND_2", 1);SetTileTag(36,49,"LAND_2", 1);SetTileTag(37,49,"LAND_2", 1);SetTileTag(40,49,"LAND_2", 1);SetTileTag(41,49,"LAND_2", 1);SetTileTag(43,49,"LAND_2", 1);SetTileTag(44,49,"LAND_2", 1);SetTileTag(45,49,"LAND_2", 1);SetTileTag(46,49,"LAND_2", 1);SetTileTag(47,49,"LAND_2", 1);SetTileTag(48,49,"LAND_2", 1);SetTileTag(49,49,"LAND_2", 1);SetTileTag(50,49,"LAND_2", 1);SetTileTag(51,49,"LAND_2", 1);SetTileTag(52,49,"LAND_2", 1);SetTileTag(54,49,"LAND_2", 1);SetTileTag(55,49,"LAND_2", 1);SetTileTag(56,49,"LAND_2", 1);SetTileTag(57,49,"LAND_2", 1);SetTileTag(58,49,"LAND_2", 1);SetTileTag(60,49,"WATER_15", 1);
-		SetTileTag(3,48,"LAND_2", 1);SetTileTag(4,48,"LAND_2", 1);SetTileTag(5,48,"LAND_2", 1);SetTileTag(6,48,"LAND_2", 1);SetTileTag(7,48,"LAND_2", 1);SetTileTag(8,48,"LAND_2", 1);SetTileTag(9,48,"LAND_2", 1);SetTileTag(11,48,"WATER_6", 1);SetTileTag(13,48,"LAND_2", 1);SetTileTag(14,48,"LAND_2", 1);SetTileTag(15,48,"LAND_2", 1);SetTileTag(20,48,"WATER_1", 1);SetTileTag(21,48,"WATER_1", 1);SetTileTag(22,48,"WATER_1", 1);SetTileTag(23,48,"LAND_2", 1);SetTileTag(24,48,"LAND_2", 1);SetTileTag(27,48,"LAND_2", 1);SetTileTag(28,48,"LAND_2", 1);SetTileTag(29,48,"LAND_2", 1);SetTileTag(30,48,"LAND_2", 1);SetTileTag(33,48,"LAND_2", 1);SetTileTag(34,48,"LAND_2", 1);SetTileTag(36,48,"LAND_2", 1);SetTileTag(37,48,"LAND_2", 1);SetTileTag(40,48,"LAND_2", 1);SetTileTag(41,48,"LAND_2", 1);SetTileTag(43,48,"LAND_2", 1);SetTileTag(52,48,"LAND_2", 1);SetTileTag(54,48,"LAND_2", 1);SetTileTag(57,48,"LAND_2", 1);SetTileTag(58,48,"LAND_2", 1);
-		SetTileTag(3,47,"LAND_2", 1);SetTileTag(4,47,"LAND_2", 1);SetTileTag(13,47,"LAND_2", 1);SetTileTag(14,47,"LAND_2", 1);SetTileTag(15,47,"LAND_2", 1);SetTileTag(20,47,"WATER_1", 1);SetTileTag(21,47,"WATER_1", 1);SetTileTag(23,47,"LAND_2", 1);SetTileTag(24,47,"LAND_2", 1);SetTileTag(25,47,"LAND_2", 1);SetTileTag(26,47,"LAND_2", 1);SetTileTag(27,47,"LAND_2", 1);SetTileTag(28,47,"LAND_2", 1);SetTileTag(29,47,"LAND_2", 1);SetTileTag(32,47,"WATER_1", 1);SetTileTag(33,47,"WATER_1", 1);SetTileTag(36,47,"LAND_2", 1);SetTileTag(37,47,"LAND_2", 1);SetTileTag(40,47,"LAND_2", 1);SetTileTag(41,47,"LAND_2", 1);SetTileTag(43,47,"LAND_2", 1);SetTileTag(44,47,"LAND_2", 1);SetTileTag(45,47,"LAND_2", 1);SetTileTag(46,47,"LAND_2", 1);SetTileTag(47,47,"LAND_2", 1);SetTileTag(48,47,"LAND_2", 1);SetTileTag(49,47,"LAND_2", 1);SetTileTag(50,47,"LAND_2", 1);SetTileTag(51,47,"LAND_2", 1);SetTileTag(52,47,"LAND_2", 1);SetTileTag(54,47,"LAND_2", 1);
-		SetTileTag(3,46,"LAND_2", 1);SetTileTag(4,46,"LAND_2", 1);SetTileTag(6,46,"WATER_3", 1);SetTileTag(13,46,"LAND_2", 1);SetTileTag(14,46,"LAND_2", 1);SetTileTag(15,46,"LAND_2", 1);SetTileTag(20,46,"WATER_1", 1);SetTileTag(21,46,"WATER_1", 1);SetTileTag(22,46,"WATER_1", 1);SetTileTag(26,46,"LAND_2", 1);SetTileTag(27,46,"LAND_2", 1);SetTileTag(28,46,"LAND_2", 1);SetTileTag(29,46,"LAND_2", 1);SetTileTag(30,46,"WATER_1", 1);SetTileTag(31,46,"WATER_1", 1);SetTileTag(32,46,"WATER_1", 1);SetTileTag(33,46,"WATER_1", 1);SetTileTag(34,46,"WATER_1", 1);SetTileTag(35,46,"WATER_1", 1);SetTileTag(40,46,"LAND_2", 1);SetTileTag(41,46,"LAND_2", 1);SetTileTag(43,46,"LAND_2", 1);SetTileTag(44,46,"LAND_2", 1);SetTileTag(45,46,"LAND_2", 1);SetTileTag(46,46,"LAND_2", 1);SetTileTag(47,46,"LAND_2", 1);SetTileTag(48,46,"LAND_2", 1);SetTileTag(49,46,"LAND_2", 1);SetTileTag(50,46,"LAND_2", 1);SetTileTag(51,46,"LAND_2", 1);SetTileTag(52,46,"LAND_2", 1);SetTileTag(53,46,"LAND_2", 1);SetTileTag(54,46,"LAND_2", 1);SetTileTag(55,46,"LAND_2", 1);SetTileTag(56,46,"LAND_2", 1);SetTileTag(57,46,"LAND_2", 1);SetTileTag(58,46,"LAND_2", 1);SetTileTag(59,46,"LAND_2", 1);
-		SetTileTag(3,45,"LAND_2", 1);SetTileTag(4,45,"LAND_2", 1);SetTileTag(6,45,"LAND_2", 1);SetTileTag(7,45,"LAND_2", 1);SetTileTag(8,45,"LAND_2", 1);SetTileTag(9,45,"LAND_2", 1);SetTileTag(10,45,"LAND_2", 1);SetTileTag(11,45,"LAND_2", 1);SetTileTag(13,45,"LAND_2", 1);SetTileTag(14,45,"LAND_2", 1);SetTileTag(15,45,"LAND_2", 1);SetTileTag(20,45,"WATER_1", 1);SetTileTag(21,45,"WATER_1", 1);SetTileTag(22,45,"WATER_1", 1);SetTileTag(23,45,"WATER_1", 1);SetTileTag(24,45,"WATER_1", 1);SetTileTag(26,45,"LAND_2", 1);SetTileTag(27,45,"LAND_2", 1);SetTileTag(28,45,"LAND_2", 1);SetTileTag(30,45,"WATER_1", 1);SetTileTag(31,45,"WATER_1", 1);SetTileTag(32,45,"WATER_1", 1);SetTileTag(33,45,"WATER_1", 1);SetTileTag(34,45,"WATER_1", 1);SetTileTag(35,45,"WATER_1", 1);SetTileTag(36,45,"WATER_1", 1);SetTileTag(37,45,"WATER_1", 1);SetTileTag(40,45,"LAND_2", 1);SetTileTag(41,45,"LAND_2", 1);SetTileTag(43,45,"LAND_2", 1);SetTileTag(44,45,"LAND_2", 1);SetTileTag(45,45,"LAND_2", 1);SetTileTag(46,45,"LAND_2", 1);SetTileTag(47,45,"LAND_2", 1);SetTileTag(48,45,"LAND_2", 1);SetTileTag(49,45,"LAND_2", 1);SetTileTag(50,45,"LAND_2", 1);SetTileTag(51,45,"LAND_2", 1);SetTileTag(52,45,"LAND_2", 1);SetTileTag(53,45,"LAND_2", 1);SetTileTag(54,45,"LAND_2", 1);SetTileTag(56,45,"LAND_2", 1);SetTileTag(57,45,"LAND_2", 1);SetTileTag(58,45,"LAND_2", 1);SetTileTag(59,45,"LAND_2", 1);
-		SetTileTag(3,44,"LAND_2", 1);SetTileTag(4,44,"LAND_2", 1);SetTileTag(6,44,"LAND_2", 1);SetTileTag(7,44,"LAND_2", 1);SetTileTag(8,44,"LAND_2", 1);SetTileTag(9,44,"LAND_2", 1);SetTileTag(10,44,"LAND_2", 1);SetTileTag(11,44,"LAND_2", 1);SetTileTag(12,44,"LAND_2", 1);SetTileTag(13,44,"LAND_2", 1);SetTileTag(14,44,"LAND_2", 1);SetTileTag(15,44,"LAND_2", 1);SetTileTag(22,44,"WATER_1", 1);SetTileTag(23,44,"WATER_1", 1);SetTileTag(24,44,"WATER_1", 1);SetTileTag(26,44,"LAND_2", 1);SetTileTag(27,44,"LAND_2", 1);SetTileTag(29,44,"WATER_1", 1);SetTileTag(30,44,"WATER_1", 1);SetTileTag(31,44,"WATER_1", 1);SetTileTag(34,44,"WATER_1", 1);SetTileTag(35,44,"WATER_1", 1);SetTileTag(36,44,"WATER_1", 1);SetTileTag(40,44,"LAND_2", 1);SetTileTag(41,44,"LAND_2", 1);SetTileTag(43,44,"LAND_2", 1);SetTileTag(44,44,"LAND_2", 1);SetTileTag(45,44,"LAND_2", 1);SetTileTag(46,44,"LAND_2", 1);SetTileTag(47,44,"LAND_2", 1);SetTileTag(48,44,"LAND_2", 1);SetTileTag(49,44,"LAND_2", 1);SetTileTag(50,44,"LAND_2", 1);SetTileTag(51,44,"LAND_2", 1);SetTileTag(52,44,"LAND_2", 1);SetTileTag(53,44,"LAND_2", 1);SetTileTag(54,44,"LAND_2", 1);
-		SetTileTag(3,43,"LAND_2", 1);SetTileTag(4,43,"LAND_2", 1);SetTileTag(6,43,"LAND_2", 1);SetTileTag(7,43,"LAND_2", 1);SetTileTag(8,43,"LAND_2", 1);SetTileTag(9,43,"LAND_2", 1);SetTileTag(10,43,"LAND_2", 1);SetTileTag(11,43,"LAND_2", 1);SetTileTag(13,43,"LAND_2", 1);SetTileTag(14,43,"LAND_2", 1);SetTileTag(15,43,"LAND_2", 1);SetTileTag(22,43,"WATER_1", 1);SetTileTag(23,43,"WATER_1", 1);SetTileTag(24,43,"WATER_1", 1);SetTileTag(25,43,"WATER_1", 1);SetTileTag(27,43,"WATER_1", 1);SetTileTag(28,43,"WATER_1", 1);SetTileTag(29,43,"WATER_1", 1);SetTileTag(30,43,"WATER_1", 1);SetTileTag(31,43,"WATER_1", 1);SetTileTag(34,43,"WATER_1", 1);SetTileTag(35,43,"WATER_1", 1);SetTileTag(36,43,"WATER_1", 1);SetTileTag(38,43,"LAND_2", 1);SetTileTag(39,43,"LAND_2", 1);SetTileTag(40,43,"LAND_2", 1);SetTileTag(41,43,"LAND_2", 1);SetTileTag(43,43,"LAND_2", 1);SetTileTag(44,43,"LAND_2", 1);SetTileTag(45,43,"LAND_2", 1);SetTileTag(46,43,"LAND_2", 1);SetTileTag(47,43,"LAND_2", 1);SetTileTag(48,43,"LAND_2", 1);SetTileTag(49,43,"LAND_2", 1);SetTileTag(50,43,"LAND_2", 1);SetTileTag(51,43,"LAND_2", 1);SetTileTag(52,43,"LAND_2", 1);SetTileTag(53,43,"LAND_2", 1);SetTileTag(54,43,"LAND_2", 1);
-		SetTileTag(3,42,"LAND_2", 1);SetTileTag(4,42,"LAND_2", 1);SetTileTag(5,42,"LAND_2", 1);SetTileTag(6,42,"LAND_2", 1);SetTileTag(7,42,"LAND_2", 1);SetTileTag(8,42,"LAND_2", 1);SetTileTag(9,42,"LAND_2", 1);SetTileTag(10,42,"LAND_2", 1);SetTileTag(11,42,"LAND_2", 1);SetTileTag(13,42,"LAND_2", 1);SetTileTag(14,42,"LAND_2", 1);SetTileTag(15,42,"LAND_2", 1);SetTileTag(21,42,"WATER_1", 1);SetTileTag(22,42,"WATER_1", 1);SetTileTag(23,42,"WATER_1", 1);SetTileTag(24,42,"WATER_1", 1);SetTileTag(25,42,"WATER_1", 1);SetTileTag(26,42,"WATER_1", 1);SetTileTag(27,42,"WATER_1", 1);SetTileTag(28,42,"WATER_1", 1);SetTileTag(29,42,"WATER_1", 1);SetTileTag(35,42,"WATER_1", 1);SetTileTag(36,42,"WATER_1", 1);SetTileTag(37,42,"WATER_1", 1);SetTileTag(38,42,"LAND_2", 1);SetTileTag(39,42,"LAND_2", 1);SetTileTag(40,42,"LAND_2", 1);SetTileTag(41,42,"LAND_2", 1);SetTileTag(43,42,"LAND_2", 1);SetTileTag(44,42,"LAND_2", 1);SetTileTag(45,42,"LAND_2", 1);SetTileTag(46,42,"LAND_2", 1);SetTileTag(47,42,"LAND_2", 1);SetTileTag(48,42,"LAND_2", 1);SetTileTag(49,42,"LAND_2", 1);SetTileTag(51,42,"LAND_2", 1);SetTileTag(52,42,"LAND_2", 1);SetTileTag(53,42,"LAND_2", 1);SetTileTag(54,42,"LAND_2", 1);
-		SetTileTag(13,41,"LAND_2", 1);SetTileTag(14,41,"LAND_2", 1);SetTileTag(15,41,"LAND_2", 1);SetTileTag(21,41,"WATER_1", 1);SetTileTag(22,41,"WATER_1", 1);SetTileTag(23,41,"WATER_1", 1);SetTileTag(24,41,"WATER_1", 1);SetTileTag(25,41,"WATER_1", 1);SetTileTag(26,41,"WATER_1", 1);SetTileTag(27,41,"WATER_1", 1);SetTileTag(32,41,"WATER_1", 1);SetTileTag(33,41,"WATER_1", 1);SetTileTag(34,41,"WATER_1", 1);SetTileTag(35,41,"WATER_1", 1);SetTileTag(36,41,"WATER_1", 1);SetTileTag(37,41,"WATER_1", 1);SetTileTag(38,41,"WATER_1", 1);SetTileTag(39,41,"WATER_1", 1);SetTileTag(49,41,"LAND_2", 1);SetTileTag(50,41,"LAND_2", 1);SetTileTag(51,41,"LAND_2", 1);SetTileTag(54,41,"LAND_2", 1);
-		SetTileTag(13,40,"LAND_2", 1);SetTileTag(14,40,"LAND_2", 1);SetTileTag(15,40,"LAND_2", 1);SetTileTag(21,40,"WATER_1", 1);SetTileTag(22,40,"WATER_1", 1);SetTileTag(31,40,"WATER_1", 1);SetTileTag(32,40,"WATER_1", 1);SetTileTag(33,40,"WATER_1", 1);SetTileTag(34,40,"WATER_1", 1);SetTileTag(35,40,"WATER_1", 1);SetTileTag(36,40,"WATER_1", 1);SetTileTag(37,40,"WATER_1", 1);SetTileTag(38,40,"WATER_1", 1);SetTileTag(39,40,"WATER_1", 1);SetTileTag(40,40,"WATER_1", 1);SetTileTag(42,40,"WATER_1", 1);SetTileTag(43,40,"WATER_1", 1);SetTileTag(44,40,"WATER_1", 1);SetTileTag(49,40,"LAND_2", 1);SetTileTag(50,40,"LAND_2", 1);SetTileTag(51,40,"LAND_2", 1);SetTileTag(54,40,"LAND_2", 1);
-		SetTileTag(3,39,"LAND_2", 1);SetTileTag(4,39,"LAND_2", 1);SetTileTag(5,39,"LAND_2", 1);SetTileTag(6,39,"LAND_2", 1);SetTileTag(7,39,"LAND_2", 1);SetTileTag(9,39,"LAND_2", 1);SetTileTag(10,39,"LAND_2", 1);SetTileTag(11,39,"LAND_2", 1);SetTileTag(13,39,"LAND_2", 1);SetTileTag(14,39,"LAND_2", 1);SetTileTag(15,39,"LAND_2", 1);SetTileTag(20,39,"WATER_1", 1);SetTileTag(21,39,"WATER_1", 1);SetTileTag(22,39,"WATER_1", 1);SetTileTag(23,39,"WATER_1", 1);SetTileTag(29,39,"WATER_1", 1);SetTileTag(30,39,"WATER_1", 1);SetTileTag(31,39,"WATER_1", 1);SetTileTag(32,39,"WATER_1", 1);SetTileTag(33,39,"WATER_1", 1);SetTileTag(38,39,"WATER_1", 1);SetTileTag(39,39,"WATER_1", 1);SetTileTag(40,39,"WATER_1", 1);SetTileTag(41,39,"WATER_1", 1);SetTileTag(42,39,"WATER_1", 1);SetTileTag(43,39,"WATER_1", 1);SetTileTag(44,39,"WATER_1", 1);SetTileTag(45,39,"WATER_1", 1);SetTileTag(53,39,"LAND_2", 1);SetTileTag(54,39,"LAND_2", 1);SetTileTag(55,39,"LAND_2", 1);
-		SetTileTag(3,38,"LAND_2", 1);SetTileTag(4,38,"LAND_2", 1);SetTileTag(5,38,"LAND_2", 1);SetTileTag(6,38,"LAND_2", 1);SetTileTag(7,38,"LAND_2", 1);SetTileTag(8,38,"LAND_2", 1);SetTileTag(9,38,"LAND_2", 1);SetTileTag(10,38,"LAND_2", 1);SetTileTag(11,38,"LAND_2", 1);SetTileTag(13,38,"LAND_2", 1);SetTileTag(14,38,"LAND_2", 1);SetTileTag(15,38,"LAND_2", 1);SetTileTag(20,38,"WATER_1", 1);SetTileTag(21,38,"WATER_1", 1);SetTileTag(22,38,"WATER_1", 1);SetTileTag(23,38,"WATER_1", 1);SetTileTag(24,38,"WATER_1", 1);SetTileTag(25,38,"WATER_1", 1);SetTileTag(26,38,"WATER_1", 1);SetTileTag(27,38,"WATER_1", 1);SetTileTag(28,38,"WATER_1", 1);SetTileTag(29,38,"WATER_1", 1);SetTileTag(30,38,"WATER_1", 1);SetTileTag(31,38,"WATER_1", 1);SetTileTag(35,38,"LAND_2", 1);SetTileTag(36,38,"LAND_2", 1);SetTileTag(37,38,"LAND_2", 1);SetTileTag(38,38,"LAND_2", 1);SetTileTag(39,38,"LAND_2", 1);SetTileTag(40,38,"LAND_2", 1);SetTileTag(41,38,"LAND_2", 1);SetTileTag(42,38,"WATER_1", 1);SetTileTag(43,38,"WATER_1", 1);SetTileTag(44,38,"WATER_1", 1);SetTileTag(45,38,"WATER_1", 1);SetTileTag(46,38,"LAND_2", 1);SetTileTag(47,38,"LAND_2", 1);SetTileTag(48,38,"LAND_2", 1);SetTileTag(49,38,"LAND_2", 1);SetTileTag(50,38,"LAND_2", 1);SetTileTag(51,38,"LAND_2", 1);SetTileTag(52,38,"LAND_2", 1);SetTileTag(53,38,"LAND_2", 1);SetTileTag(54,38,"LAND_2", 1);SetTileTag(55,38,"LAND_2", 1);SetTileTag(56,38,"LAND_2", 1);SetTileTag(57,38,"LAND_2", 1);SetTileTag(58,38,"LAND_2", 1);SetTileTag(59,38,"LAND_2", 1);SetTileTag(60,38,"LAND_2", 1);SetTileTag(61,38,"LAND_2", 1);
-		SetTileTag(5,37,"LAND_2", 1);SetTileTag(13,37,"LAND_2", 1);SetTileTag(14,37,"LAND_2", 1);SetTileTag(15,37,"LAND_2", 1);SetTileTag(17,37,"LAND_2", 1);SetTileTag(18,37,"LAND_2", 1);SetTileTag(21,37,"WATER_1", 1);SetTileTag(22,37,"WATER_1", 1);SetTileTag(23,37,"WATER_1", 1);SetTileTag(24,37,"WATER_1", 1);SetTileTag(25,37,"WATER_1", 1);SetTileTag(26,37,"WATER_1", 1);SetTileTag(27,37,"WATER_1", 1);SetTileTag(28,37,"WATER_1", 1);SetTileTag(29,37,"WATER_1", 1);SetTileTag(30,37,"WATER_1", 1);SetTileTag(31,37,"WATER_1", 1);SetTileTag(35,37,"LAND_2", 1);SetTileTag(36,37,"LAND_2", 1);SetTileTag(37,37,"LAND_2", 1);SetTileTag(38,37,"LAND_2", 1);SetTileTag(39,37,"LAND_2", 1);SetTileTag(40,37,"LAND_2", 1);SetTileTag(41,37,"LAND_2", 1);SetTileTag(42,37,"WATER_1", 1);SetTileTag(43,37,"WATER_1", 1);SetTileTag(44,37,"WATER_1", 1);SetTileTag(45,37,"WATER_1", 1);SetTileTag(46,37,"LAND_2", 1);SetTileTag(47,37,"LAND_2", 1);SetTileTag(48,37,"LAND_2", 1);SetTileTag(49,37,"LAND_2", 1);SetTileTag(50,37,"LAND_2", 1);SetTileTag(51,37,"LAND_2", 1);SetTileTag(52,37,"LAND_2", 1);SetTileTag(56,37,"LAND_2", 1);SetTileTag(57,37,"LAND_2", 1);SetTileTag(58,37,"LAND_2", 1);SetTileTag(59,37,"LAND_2", 1);SetTileTag(60,37,"LAND_2", 1);SetTileTag(61,37,"LAND_2", 1);
-		SetTileTag(2,36,"LAND_2", 1);SetTileTag(3,36,"LAND_2", 1);SetTileTag(4,36,"LAND_2", 1);SetTileTag(5,36,"LAND_2", 1);SetTileTag(6,36,"LAND_2", 1);SetTileTag(7,36,"LAND_2", 1);SetTileTag(8,36,"LAND_2", 1);SetTileTag(9,36,"LAND_2", 1);SetTileTag(13,36,"LAND_2", 1);SetTileTag(14,36,"LAND_2", 1);SetTileTag(15,36,"LAND_2", 1);SetTileTag(16,36,"LAND_2", 1);SetTileTag(17,36,"LAND_2", 1);SetTileTag(18,36,"LAND_2", 1);SetTileTag(20,36,"LAND_2", 1);SetTileTag(21,36,"WATER_1", 1);SetTileTag(22,36,"LAND_2", 1);SetTileTag(23,36,"WATER_1", 1);SetTileTag(24,36,"WATER_1", 1);SetTileTag(25,36,"WATER_1", 1);SetTileTag(35,36,"LAND_2", 1);SetTileTag(36,36,"LAND_2", 1);SetTileTag(37,36,"LAND_2", 1);SetTileTag(38,36,"LAND_2", 1);SetTileTag(42,36,"WATER_1", 1);SetTileTag(43,36,"WATER_1", 1);SetTileTag(44,36,"WATER_1", 1);SetTileTag(45,36,"WATER_1", 1);SetTileTag(52,36,"LAND_2", 1);SetTileTag(56,36,"LAND_2", 1);
-		SetTileTag(2,35,"LAND_2", 1);SetTileTag(5,35,"LAND_2", 1);SetTileTag(9,35,"LAND_2", 1);SetTileTag(13,35,"LAND_2", 1);SetTileTag(14,35,"LAND_2", 1);SetTileTag(15,35,"LAND_2", 1);SetTileTag(16,35,"LAND_2", 1);SetTileTag(17,35,"LAND_2", 1);SetTileTag(20,35,"LAND_2", 1);SetTileTag(28,35,"LAND_2", 1);SetTileTag(29,35,"LAND_2", 1);SetTileTag(30,35,"LAND_2", 1);SetTileTag(31,35,"LAND_2", 1);SetTileTag(32,35,"LAND_2", 1);SetTileTag(33,35,"LAND_2", 1);SetTileTag(34,35,"LAND_2", 1);SetTileTag(35,35,"LAND_2", 1);SetTileTag(36,35,"LAND_2", 1);SetTileTag(37,35,"LAND_2", 1);SetTileTag(43,35,"WATER_1", 1);SetTileTag(44,35,"WATER_1", 1);SetTileTag(51,35,"LAND_2", 1);SetTileTag(52,35,"LAND_2", 1);SetTileTag(54,35,"LAND_2", 1);SetTileTag(56,35,"LAND_2", 1);SetTileTag(57,35,"LAND_2", 1);
-		SetTileTag(2,34,"LAND_2", 1);SetTileTag(3,34,"LAND_2", 1);SetTileTag(5,34,"LAND_2", 1);SetTileTag(7,34,"LAND_2", 1);SetTileTag(8,34,"LAND_2", 1);SetTileTag(9,34,"LAND_2", 1);SetTileTag(10,34,"LAND_2", 1);SetTileTag(11,34,"LAND_2", 1);SetTileTag(15,34,"LAND_2", 1);SetTileTag(20,34,"LAND_2", 1);SetTileTag(21,34,"LAND_2", 1);SetTileTag(22,34,"LAND_2", 1);SetTileTag(23,34,"LAND_2", 1);SetTileTag(24,34,"LAND_2", 1);SetTileTag(25,34,"LAND_2", 1);SetTileTag(26,34,"LAND_2", 1);SetTileTag(27,34,"LAND_2", 1);SetTileTag(28,34,"LAND_2", 1);SetTileTag(29,34,"LAND_2", 1);SetTileTag(34,34,"LAND_2", 1);SetTileTag(35,34,"LAND_2", 1);SetTileTag(36,34,"LAND_2", 1);SetTileTag(37,34,"LAND_2", 1);SetTileTag(43,34,"WATER_1", 1);SetTileTag(44,34,"WATER_1", 1);SetTileTag(51,34,"LAND_2", 1);SetTileTag(52,34,"LAND_2", 1);SetTileTag(54,34,"LAND_2", 1);SetTileTag(56,34,"LAND_2", 1);SetTileTag(57,34,"LAND_2", 1);
-		SetTileTag(2,33,"LAND_2", 1);SetTileTag(3,33,"LAND_2", 1);SetTileTag(5,33,"LAND_2", 1);SetTileTag(8,33,"LAND_2", 1);SetTileTag(9,33,"LAND_2", 1);SetTileTag(10,33,"LAND_2", 1);SetTileTag(11,33,"LAND_2", 1);SetTileTag(13,33,"LAND_2", 1);SetTileTag(14,33,"LAND_2", 1);SetTileTag(15,33,"LAND_2", 1);SetTileTag(16,33,"LAND_2", 1);SetTileTag(17,33,"LAND_2", 1);SetTileTag(18,33,"LAND_2", 1);SetTileTag(19,33,"LAND_2", 1);SetTileTag(20,33,"LAND_2", 1);SetTileTag(21,33,"LAND_2", 1);SetTileTag(22,33,"LAND_2", 1);SetTileTag(23,33,"LAND_2", 1);SetTileTag(24,33,"LAND_2", 1);SetTileTag(25,33,"LAND_2", 1);SetTileTag(26,33,"LAND_2", 1);SetTileTag(27,33,"LAND_2", 1);SetTileTag(28,33,"LAND_2", 1);SetTileTag(30,33,"LAND_6", 1);SetTileTag(31,33,"LAND_6", 1);SetTileTag(32,33,"LAND_6", 1);SetTileTag(33,33,"LAND_6", 1);SetTileTag(35,33,"LAND_2", 1);SetTileTag(36,33,"LAND_2", 1);SetTileTag(37,33,"LAND_2", 1);SetTileTag(43,33,"WATER_1", 1);SetTileTag(44,33,"WATER_1", 1);SetTileTag(51,33,"LAND_2", 1);SetTileTag(52,33,"LAND_2", 1);SetTileTag(53,33,"LAND_2", 1);SetTileTag(54,33,"LAND_2", 1);SetTileTag(55,33,"LAND_2", 1);SetTileTag(56,33,"LAND_2", 1);SetTileTag(57,33,"LAND_2", 1);
-		SetTileTag(5,32,"LAND_2", 1);SetTileTag(8,32,"LAND_2", 1);SetTileTag(9,32,"LAND_2", 1);SetTileTag(10,32,"LAND_2", 1);SetTileTag(11,32,"LAND_2", 1);SetTileTag(13,32,"LAND_2", 1);SetTileTag(14,32,"LAND_2", 1);SetTileTag(15,32,"LAND_2", 1);SetTileTag(16,32,"LAND_2", 1);SetTileTag(17,32,"LAND_2", 1);SetTileTag(18,32,"LAND_2", 1);SetTileTag(19,32,"LAND_2", 1);SetTileTag(20,32,"LAND_2", 1);SetTileTag(21,32,"LAND_2", 1);SetTileTag(22,32,"LAND_2", 1);SetTileTag(23,32,"LAND_2", 1);SetTileTag(24,32,"LAND_2", 1);SetTileTag(25,32,"LAND_2", 1);SetTileTag(26,32,"LAND_2", 1);SetTileTag(27,32,"LAND_2", 1);SetTileTag(28,32,"LAND_2", 1);SetTileTag(30,32,"LAND_6", 1);SetTileTag(31,32,"LAND_6", 1);SetTileTag(32,32,"LAND_6", 1);SetTileTag(33,32,"LAND_6", 1);SetTileTag(35,32,"LAND_2", 1);SetTileTag(36,32,"LAND_2", 1);SetTileTag(37,32,"LAND_2", 1);SetTileTag(43,32,"WATER_1", 1);SetTileTag(44,32,"WATER_1", 1);SetTileTag(45,32,"WATER_1", 1);SetTileTag(51,32,"LAND_2", 1);SetTileTag(52,32,"LAND_2", 1);SetTileTag(53,32,"LAND_2", 1);SetTileTag(54,32,"LAND_2", 1);SetTileTag(55,32,"LAND_2", 1);SetTileTag(56,32,"LAND_2", 1);SetTileTag(57,32,"LAND_2", 1);
-		SetTileTag(4,31,"LAND_2", 1);SetTileTag(5,31,"LAND_2", 1);SetTileTag(6,31,"LAND_2", 1);SetTileTag(8,31,"LAND_2", 1);SetTileTag(9,31,"LAND_2", 1);SetTileTag(10,31,"LAND_2", 1);SetTileTag(11,31,"LAND_2", 1);SetTileTag(13,31,"LAND_2", 1);SetTileTag(14,31,"LAND_2", 1);SetTileTag(15,31,"LAND_2", 1);SetTileTag(16,31,"LAND_2", 1);SetTileTag(17,31,"LAND_2", 1);SetTileTag(18,31,"LAND_2", 1);SetTileTag(19,31,"LAND_2", 1);SetTileTag(20,31,"LAND_2", 1);SetTileTag(21,31,"LAND_2", 1);SetTileTag(22,31,"LAND_2", 1);SetTileTag(23,31,"LAND_2", 1);SetTileTag(24,31,"LAND_2", 1);SetTileTag(25,31,"LAND_2", 1);SetTileTag(26,31,"LAND_2", 1);SetTileTag(27,31,"LAND_2", 1);SetTileTag(28,31,"LAND_2", 1);SetTileTag(30,31,"LAND_6", 1);SetTileTag(31,31,"LAND_6", 1);SetTileTag(32,31,"LAND_6", 1);SetTileTag(33,31,"LAND_6", 1);SetTileTag(35,31,"LAND_2", 1);SetTileTag(36,31,"LAND_2", 1);SetTileTag(37,31,"LAND_2", 1);SetTileTag(42,31,"WATER_1", 1);SetTileTag(43,31,"WATER_1", 1);SetTileTag(44,31,"WATER_1", 1);SetTileTag(45,31,"WATER_1", 1);SetTileTag(51,31,"LAND_2", 1);SetTileTag(52,31,"LAND_2", 1);SetTileTag(53,31,"LAND_2", 1);SetTileTag(54,31,"LAND_2", 1);SetTileTag(55,31,"LAND_2", 1);SetTileTag(56,31,"LAND_2", 1);SetTileTag(57,31,"LAND_2", 1);
-		SetTileTag(4,30,"LAND_2", 1);SetTileTag(5,30,"LAND_2", 1);SetTileTag(6,30,"LAND_2", 1);SetTileTag(13,30,"LAND_2", 1);SetTileTag(14,30,"LAND_2", 1);SetTileTag(28,30,"LAND_2", 1);SetTileTag(30,30,"LAND_6", 1);SetTileTag(31,30,"LAND_6", 1);SetTileTag(32,30,"LAND_6", 1);SetTileTag(33,30,"LAND_6", 1);SetTileTag(35,30,"LAND_2", 1);SetTileTag(36,30,"LAND_2", 1);SetTileTag(37,30,"LAND_2", 1);SetTileTag(40,30,"WATER_1", 1);SetTileTag(41,30,"WATER_1", 1);SetTileTag(42,30,"WATER_1", 1);SetTileTag(43,30,"WATER_1", 1);SetTileTag(44,30,"WATER_1", 1);SetTileTag(45,30,"WATER_1", 1);SetTileTag(46,30,"WATER_1", 1);SetTileTag(51,30,"LAND_2", 1);SetTileTag(52,30,"LAND_2", 1);SetTileTag(53,30,"LAND_2", 1);SetTileTag(54,30,"LAND_2", 1);SetTileTag(55,30,"LAND_2", 1);SetTileTag(56,30,"LAND_2", 1);SetTileTag(57,30,"LAND_2", 1);
-		SetTileTag(4,29,"LAND_2", 1);SetTileTag(5,29,"LAND_2", 1);SetTileTag(6,29,"LAND_2", 1);SetTileTag(7,29,"LAND_2", 1);SetTileTag(8,29,"LAND_2", 1);SetTileTag(9,29,"LAND_2", 1);SetTileTag(10,29,"LAND_2", 1);SetTileTag(11,29,"LAND_2", 1);SetTileTag(12,29,"LAND_2", 1);SetTileTag(13,29,"LAND_2", 1);SetTileTag(14,29,"LAND_2", 1);SetTileTag(15,29,"LAND_2", 1);SetTileTag(16,29,"LAND_2", 1);SetTileTag(17,29,"LAND_2", 1);SetTileTag(18,29,"LAND_2", 1);SetTileTag(19,29,"LAND_2", 1);SetTileTag(20,29,"LAND_2", 1);SetTileTag(21,29,"LAND_2", 1);SetTileTag(22,29,"LAND_2", 1);SetTileTag(23,29,"LAND_2", 1);SetTileTag(24,29,"LAND_2", 1);SetTileTag(28,29,"LAND_2", 1);SetTileTag(29,29,"LAND_2", 1);SetTileTag(34,29,"LAND_2", 1);SetTileTag(35,29,"LAND_2", 1);SetTileTag(36,29,"LAND_2", 1);SetTileTag(37,29,"LAND_2", 1);SetTileTag(40,29,"WATER_1", 1);SetTileTag(41,29,"WATER_1", 1);SetTileTag(42,29,"WATER_1", 1);SetTileTag(43,29,"WATER_1", 1);SetTileTag(45,29,"WATER_1", 1);SetTileTag(46,29,"WATER_1", 1);SetTileTag(47,29,"WATER_1", 1);SetTileTag(48,29,"WATER_1", 1);SetTileTag(49,29,"WATER_1", 1);SetTileTag(50,29,"WATER_1", 1);
-		SetTileTag(5,28,"LAND_2", 1);SetTileTag(11,28,"LAND_2", 1);SetTileTag(12,28,"LAND_2", 1);SetTileTag(13,28,"LAND_2", 1);SetTileTag(14,28,"LAND_2", 1);SetTileTag(15,28,"LAND_2", 1);SetTileTag(19,28,"LAND_2", 1);SetTileTag(20,28,"LAND_2", 1);SetTileTag(21,28,"LAND_2", 1);SetTileTag(22,28,"LAND_2", 1);SetTileTag(23,28,"LAND_2", 1);SetTileTag(24,28,"LAND_2", 1);SetTileTag(28,28,"LAND_2", 1);SetTileTag(29,28,"LAND_2", 1);SetTileTag(30,28,"LAND_2", 1);SetTileTag(31,28,"LAND_2", 1);SetTileTag(32,28,"LAND_2", 1);SetTileTag(33,28,"LAND_2", 1);SetTileTag(34,28,"LAND_2", 1);SetTileTag(35,28,"LAND_2", 1);SetTileTag(36,28,"LAND_2", 1);SetTileTag(37,28,"LAND_2", 1);SetTileTag(38,28,"LAND_2", 1);SetTileTag(39,28,"LAND_2", 1);SetTileTag(40,28,"WATER_1", 1);SetTileTag(41,28,"WATER_1", 1);SetTileTag(42,28,"WATER_1", 1);SetTileTag(48,28,"WATER_1", 1);SetTileTag(49,28,"WATER_1", 1);SetTileTag(50,28,"WATER_1", 1);SetTileTag(51,28,"WATER_1", 1);SetTileTag(52,28,"WATER_1", 1);
-		SetTileTag(5,27,"LAND_2", 1);SetTileTag(9,27,"WATER_1", 1);SetTileTag(10,27,"WATER_1", 1);SetTileTag(11,27,"WATER_1", 1);SetTileTag(12,27,"WATER_1", 1);SetTileTag(13,27,"WATER_1", 1);SetTileTag(14,27,"WATER_1", 1);SetTileTag(15,27,"WATER_1", 1);SetTileTag(16,27,"WATER_1", 1);SetTileTag(19,27,"LAND_2", 1);SetTileTag(20,27,"LAND_2", 1);SetTileTag(21,27,"LAND_2", 1);SetTileTag(22,27,"LAND_2", 1);SetTileTag(23,27,"LAND_2", 1);SetTileTag(24,27,"LAND_2", 1);SetTileTag(35,27,"LAND_2", 1);SetTileTag(36,27,"LAND_2", 1);SetTileTag(37,27,"LAND_2", 1);SetTileTag(38,27,"LAND_2", 1);SetTileTag(39,27,"LAND_2", 1);SetTileTag(40,27,"WATER_1", 1);SetTileTag(41,27,"WATER_1", 1);SetTileTag(42,27,"WATER_1", 1);SetTileTag(51,27,"WATER_1", 1);SetTileTag(52,27,"WATER_1", 1);SetTileTag(53,27,"WATER_1", 1);
-		SetTileTag(5,26,"LAND_2", 1);SetTileTag(8,26,"WATER_1", 1);SetTileTag(9,26,"WATER_1", 1);SetTileTag(10,26,"WATER_1", 1);SetTileTag(11,26,"WATER_1", 1);SetTileTag(12,26,"WATER_1", 1);SetTileTag(13,26,"WATER_1", 1);SetTileTag(14,26,"WATER_1", 1);SetTileTag(15,26,"WATER_1", 1);SetTileTag(16,26,"WATER_1", 1);SetTileTag(17,26,"WATER_1", 1);SetTileTag(18,26,"WATER_1", 1);SetTileTag(22,26,"LAND_2", 1);SetTileTag(28,26,"LAND_2", 1);SetTileTag(29,26,"LAND_2", 1);SetTileTag(30,26,"LAND_2", 1);SetTileTag(36,26,"LAND_2", 1);SetTileTag(37,26,"LAND_2", 1);SetTileTag(38,26,"LAND_2", 1);SetTileTag(39,26,"WATER_1", 1);SetTileTag(40,26,"WATER_1", 1);SetTileTag(41,26,"WATER_1", 1);SetTileTag(52,26,"WATER_1", 1);SetTileTag(53,26,"WATER_1", 1);
-		SetTileTag(2,25,"LAND_2", 1);SetTileTag(3,25,"LAND_2", 1);SetTileTag(4,25,"LAND_2", 1);SetTileTag(5,25,"LAND_2", 1);SetTileTag(8,25,"WATER_1", 1);SetTileTag(9,25,"WATER_1", 1);SetTileTag(10,25,"LAND_4", 1);SetTileTag(11,25,"LAND_4", 1);SetTileTag(12,25,"LAND_4", 1);SetTileTag(13,25,"LAND_4", 1);SetTileTag(14,25,"WATER_1", 1);SetTileTag(15,25,"WATER_1", 1);SetTileTag(16,25,"WATER_1", 1);SetTileTag(17,25,"WATER_1", 1);SetTileTag(18,25,"WATER_1", 1);SetTileTag(22,25,"LAND_2", 1);SetTileTag(23,25,"LAND_2", 1);SetTileTag(24,25,"LAND_2", 1);SetTileTag(25,25,"LAND_2", 1);SetTileTag(26,25,"LAND_2", 1);SetTileTag(27,25,"LAND_2", 1);SetTileTag(28,25,"LAND_2", 1);SetTileTag(29,25,"LAND_2", 1);SetTileTag(30,25,"LAND_2", 1);SetTileTag(34,25,"WATER_1", 1);SetTileTag(35,25,"WATER_1", 1);SetTileTag(36,25,"WATER_1", 1);SetTileTag(37,25,"WATER_1", 1);SetTileTag(38,25,"WATER_1", 1);SetTileTag(39,25,"WATER_1", 1);SetTileTag(40,25,"WATER_1", 1);SetTileTag(52,25,"WATER_1", 1);SetTileTag(53,25,"WATER_1", 1);
-		SetTileTag(2,24,"LAND_2", 1);SetTileTag(4,24,"LAND_2", 1);SetTileTag(5,24,"LAND_2", 1);SetTileTag(8,24,"WATER_1", 1);SetTileTag(9,24,"WATER_1", 1);SetTileTag(10,24,"LAND_4", 1);SetTileTag(11,24,"LAND_4", 1);SetTileTag(12,24,"LAND_4", 1);SetTileTag(13,24,"LAND_4", 1);SetTileTag(14,24,"WATER_1", 1);SetTileTag(15,24,"WATER_1", 1);SetTileTag(16,24,"WATER_1", 1);SetTileTag(17,24,"WATER_1", 1);SetTileTag(18,24,"WATER_1", 1);SetTileTag(19,24,"WATER_1", 1);SetTileTag(23,24,"WATER_1", 1);SetTileTag(24,24,"WATER_1", 1);SetTileTag(25,24,"WATER_1", 1);SetTileTag(26,24,"WATER_1", 1);SetTileTag(27,24,"WATER_1", 1);SetTileTag(28,24,"WATER_1", 1);SetTileTag(29,24,"WATER_1", 1);SetTileTag(32,24,"WATER_1", 1);SetTileTag(33,24,"WATER_1", 1);SetTileTag(34,24,"WATER_1", 1);SetTileTag(35,24,"WATER_1", 1);SetTileTag(36,24,"WATER_1", 1);SetTileTag(37,24,"WATER_1", 1);SetTileTag(38,24,"WATER_1", 1);SetTileTag(39,24,"WATER_1", 1);SetTileTag(44,24,"LAND_7", 1);SetTileTag(45,24,"LAND_7", 1);SetTileTag(46,24,"LAND_7", 1);SetTileTag(47,24,"LAND_7", 1);SetTileTag(48,24,"LAND_7", 1);SetTileTag(52,24,"WATER_1", 1);SetTileTag(53,24,"WATER_1", 1);
-		SetTileTag(2,23,"LAND_2", 1);SetTileTag(3,23,"LAND_2", 1);SetTileTag(4,23,"LAND_2", 1);SetTileTag(5,23,"LAND_2", 1);SetTileTag(8,23,"WATER_1", 1);SetTileTag(9,23,"WATER_1", 1);SetTileTag(10,23,"WATER_1", 1);SetTileTag(11,23,"WATER_1", 1);SetTileTag(12,23,"WATER_1", 1);SetTileTag(13,23,"WATER_1", 1);SetTileTag(14,23,"WATER_1", 1);SetTileTag(15,23,"WATER_1", 1);SetTileTag(16,23,"WATER_1", 1);SetTileTag(17,23,"WATER_1", 1);SetTileTag(18,23,"WATER_1", 1);SetTileTag(19,23,"WATER_1", 1);SetTileTag(20,23,"WATER_1", 1);SetTileTag(21,23,"WATER_1", 1);SetTileTag(22,23,"WATER_1", 1);SetTileTag(23,23,"WATER_1", 1);SetTileTag(24,23,"WATER_1", 1);SetTileTag(25,23,"WATER_1", 1);SetTileTag(26,23,"WATER_1", 1);SetTileTag(27,23,"WATER_1", 1);SetTileTag(28,23,"WATER_1", 1);SetTileTag(29,23,"WATER_1", 1);SetTileTag(30,23,"WATER_1", 1);SetTileTag(31,23,"WATER_1", 1);SetTileTag(32,23,"WATER_1", 1);SetTileTag(33,23,"WATER_1", 1);SetTileTag(34,23,"WATER_1", 1);SetTileTag(35,23,"WATER_1", 1);SetTileTag(36,23,"LAND_2", 1);SetTileTag(37,23,"LAND_2", 1);SetTileTag(38,23,"LAND_2", 1);SetTileTag(43,23,"LAND_7", 1);SetTileTag(44,23,"LAND_7", 1);SetTileTag(45,23,"LAND_7", 1);SetTileTag(46,23,"LAND_7", 1);SetTileTag(47,23,"LAND_7", 1);SetTileTag(48,23,"LAND_7", 1);SetTileTag(49,23,"LAND_7", 1);SetTileTag(52,23,"WATER_1", 1);SetTileTag(53,23,"WATER_1", 1);SetTileTag(54,23,"WATER_1", 1);
-		SetTileTag(2,22,"LAND_2", 1);SetTileTag(4,22,"LAND_2", 1);SetTileTag(5,22,"LAND_2", 1);SetTileTag(9,22,"WATER_1", 1);SetTileTag(10,22,"WATER_1", 1);SetTileTag(11,22,"WATER_1", 1);SetTileTag(12,22,"WATER_1", 1);SetTileTag(13,22,"WATER_1", 1);SetTileTag(14,22,"WATER_1", 1);SetTileTag(15,22,"WATER_1", 1);SetTileTag(17,22,"WATER_1", 1);SetTileTag(18,22,"WATER_1", 1);SetTileTag(19,22,"WATER_1", 1);SetTileTag(20,22,"WATER_1", 1);SetTileTag(21,22,"WATER_1", 1);SetTileTag(22,22,"WATER_1", 1);SetTileTag(23,22,"WATER_1", 1);SetTileTag(24,22,"WATER_1", 1);SetTileTag(25,22,"WATER_1", 1);SetTileTag(26,22,"LAND_5", 1);SetTileTag(27,22,"LAND_5", 1);SetTileTag(28,22,"WATER_1", 1);SetTileTag(29,22,"WATER_1", 1);SetTileTag(30,22,"WATER_1", 1);SetTileTag(31,22,"WATER_1", 1);SetTileTag(32,22,"WATER_1", 1);SetTileTag(33,22,"WATER_1", 1);SetTileTag(34,22,"WATER_1", 1);SetTileTag(35,22,"WATER_1", 1);SetTileTag(36,22,"LAND_2", 1);SetTileTag(37,22,"LAND_2", 1);SetTileTag(38,22,"LAND_2", 1);SetTileTag(43,22,"LAND_7", 1);SetTileTag(44,22,"LAND_7", 1);SetTileTag(45,22,"LAND_7", 1);SetTileTag(47,22,"LAND_7", 1);SetTileTag(48,22,"LAND_7", 1);SetTileTag(49,22,"LAND_7", 1);SetTileTag(53,22,"WATER_1", 1);SetTileTag(54,22,"WATER_1", 1);SetTileTag(55,22,"WATER_1", 1);
-		SetTileTag(2,21,"LAND_2", 1);SetTileTag(3,21,"LAND_2", 1);SetTileTag(4,21,"LAND_2", 1);SetTileTag(5,21,"LAND_2", 1);SetTileTag(16,21,"WATER_1", 1);SetTileTag(17,21,"WATER_1", 1);SetTileTag(18,21,"WATER_1", 1);SetTileTag(19,21,"WATER_1", 1);SetTileTag(20,21,"WATER_1", 1);SetTileTag(21,21,"WATER_1", 1);SetTileTag(26,21,"LAND_5", 1);SetTileTag(37,21,"LAND_2", 1);SetTileTag(43,21,"LAND_7", 1);SetTileTag(44,21,"LAND_7", 1);SetTileTag(48,21,"LAND_7", 1);SetTileTag(49,21,"LAND_7", 1);SetTileTag(54,21,"WATER_1", 1);SetTileTag(55,21,"WATER_1", 1);SetTileTag(56,21,"WATER_1", 1);SetTileTag(61,21,"WATER_1", 1);
-		SetTileTag(2,20,"LAND_2", 1);SetTileTag(4,20,"LAND_2", 1);SetTileTag(5,20,"LAND_2", 1);SetTileTag(10,20,"LAND_2", 1);SetTileTag(11,20,"LAND_2", 1);SetTileTag(12,20,"LAND_2", 1);SetTileTag(16,20,"WATER_1", 1);SetTileTag(17,20,"WATER_1", 1);SetTileTag(18,20,"WATER_1", 1);SetTileTag(19,20,"WATER_1", 1);SetTileTag(21,20,"LAND_2", 1);SetTileTag(22,20,"LAND_2", 1);SetTileTag(23,20,"LAND_2", 1);SetTileTag(26,20,"LAND_5", 1);SetTileTag(27,20,"LAND_5", 1);SetTileTag(29,20,"LAND_2", 1);SetTileTag(30,20,"LAND_2", 1);SetTileTag(31,20,"LAND_2", 1);SetTileTag(32,20,"LAND_2", 1);SetTileTag(33,20,"LAND_2", 1);SetTileTag(34,20,"LAND_2", 1);SetTileTag(37,20,"LAND_2", 1);SetTileTag(43,20,"LAND_7", 1);SetTileTag(44,20,"LAND_7", 1);SetTileTag(48,20,"LAND_7", 1);SetTileTag(49,20,"LAND_7", 1);SetTileTag(55,20,"WATER_1", 1);SetTileTag(56,20,"WATER_1", 1);SetTileTag(57,20,"WATER_1", 1);SetTileTag(58,20,"WATER_1", 1);SetTileTag(59,20,"WATER_1", 1);SetTileTag(60,20,"WATER_1", 1);SetTileTag(61,20,"WATER_1", 1);
-		SetTileTag(2,19,"LAND_2", 1);SetTileTag(3,19,"LAND_2", 1);SetTileTag(4,19,"LAND_2", 1);SetTileTag(5,19,"LAND_2", 1);SetTileTag(6,19,"LAND_2", 1);SetTileTag(7,19,"LAND_2", 1);SetTileTag(8,19,"LAND_2", 1);SetTileTag(9,19,"LAND_2", 1);SetTileTag(10,19,"LAND_2", 1);SetTileTag(11,19,"LAND_2", 1);SetTileTag(12,19,"LAND_2", 1);SetTileTag(15,19,"WATER_1", 1);SetTileTag(16,19,"WATER_1", 1);SetTileTag(17,19,"WATER_1", 1);SetTileTag(18,19,"WATER_1", 1);SetTileTag(22,19,"LAND_2", 1);SetTileTag(23,19,"LAND_2", 1);SetTileTag(24,19,"LAND_2", 1);SetTileTag(28,19,"LAND_2", 1);SetTileTag(29,19,"LAND_2", 1);SetTileTag(30,19,"LAND_2", 1);SetTileTag(31,19,"WATER_11", 1);SetTileTag(32,19,"WATER_11", 1);SetTileTag(33,19,"LAND_2", 1);SetTileTag(34,19,"LAND_2", 1);SetTileTag(37,19,"LAND_2", 1);SetTileTag(43,19,"LAND_7", 1);SetTileTag(44,19,"LAND_7", 1);SetTileTag(45,19,"LAND_7", 1);SetTileTag(47,19,"LAND_7", 1);SetTileTag(48,19,"LAND_7", 1);SetTileTag(49,19,"LAND_7", 1);SetTileTag(57,19,"WATER_1", 1);SetTileTag(58,19,"WATER_1", 1);SetTileTag(59,19,"WATER_1", 1);SetTileTag(60,19,"WATER_1", 1);SetTileTag(61,19,"WATER_1", 1);
-		SetTileTag(2,18,"LAND_2", 1);SetTileTag(4,18,"LAND_2", 1);SetTileTag(5,18,"LAND_2", 1);SetTileTag(14,18,"WATER_1", 1);SetTileTag(15,18,"WATER_1", 1);SetTileTag(16,18,"WATER_1", 1);SetTileTag(17,18,"WATER_1", 1);SetTileTag(18,18,"WATER_1", 1);SetTileTag(21,18,"LAND_2", 1);SetTileTag(22,18,"LAND_2", 1);SetTileTag(23,18,"LAND_2", 1);SetTileTag(24,18,"LAND_2", 1);SetTileTag(25,18,"LAND_2", 1);SetTileTag(26,18,"LAND_2", 1);SetTileTag(27,18,"LAND_2", 1);SetTileTag(28,18,"LAND_2", 1);SetTileTag(29,18,"LAND_2", 1);SetTileTag(30,18,"LAND_2", 1);SetTileTag(31,18,"WATER_11", 1);SetTileTag(32,18,"WATER_11", 1);SetTileTag(33,18,"LAND_2", 1);SetTileTag(34,18,"LAND_2", 1);SetTileTag(37,18,"LAND_2", 1);SetTileTag(41,18,"LAND_7", 1);SetTileTag(44,18,"LAND_7", 1);SetTileTag(45,18,"LAND_7", 1);SetTileTag(46,18,"LAND_7", 1);SetTileTag(47,18,"LAND_7", 1);SetTileTag(48,18,"LAND_7", 1);SetTileTag(51,18,"LAND_7", 1);SetTileTag(58,18,"LAND_11", 1);
-		SetTileTag(2,17,"LAND_2", 1);SetTileTag(3,17,"LAND_2", 1);SetTileTag(4,17,"LAND_2", 1);SetTileTag(5,17,"LAND_2", 1);SetTileTag(11,17,"WATER_1", 1);SetTileTag(12,17,"WATER_1", 1);SetTileTag(13,17,"WATER_1", 1);SetTileTag(14,17,"WATER_1", 1);SetTileTag(15,17,"WATER_1", 1);SetTileTag(16,17,"WATER_1", 1);SetTileTag(17,17,"WATER_1", 1);SetTileTag(22,17,"LAND_2", 1);SetTileTag(24,17,"LAND_2", 1);SetTileTag(25,17,"LAND_2", 1);SetTileTag(26,17,"LAND_2", 1);SetTileTag(27,17,"LAND_2", 1);SetTileTag(28,17,"LAND_2", 1);SetTileTag(29,17,"LAND_2", 1);SetTileTag(30,17,"LAND_2", 1);SetTileTag(31,17,"LAND_2", 1);SetTileTag(32,17,"LAND_2", 1);SetTileTag(33,17,"LAND_2", 1);SetTileTag(34,17,"LAND_2", 1);SetTileTag(37,17,"LAND_2", 1);SetTileTag(41,17,"LAND_7", 1);SetTileTag(42,17,"LAND_7", 1);SetTileTag(43,17,"LAND_7", 1);SetTileTag(44,17,"LAND_7", 1);SetTileTag(45,17,"LAND_7", 1);SetTileTag(46,17,"LAND_7", 1);SetTileTag(47,17,"LAND_7", 1);SetTileTag(48,17,"LAND_7", 1);SetTileTag(49,17,"LAND_7", 1);SetTileTag(50,17,"LAND_7", 1);SetTileTag(51,17,"LAND_7", 1);SetTileTag(57,17,"LAND_11", 1);SetTileTag(58,17,"LAND_11", 1);SetTileTag(59,17,"LAND_11", 1);
-		SetTileTag(11,16,"WATER_1", 1);SetTileTag(12,16,"WATER_1", 1);SetTileTag(13,16,"WATER_1", 1);SetTileTag(14,16,"WATER_1", 1);SetTileTag(15,16,"WATER_1", 1);SetTileTag(16,16,"LAND_2", 1);SetTileTag(17,16,"LAND_2", 1);SetTileTag(22,16,"LAND_2", 1);SetTileTag(37,16,"LAND_2", 1);SetTileTag(41,16,"LAND_7", 1);SetTileTag(42,16,"LAND_7", 1);SetTileTag(43,16,"LAND_7", 1);SetTileTag(44,16,"LAND_7", 1);SetTileTag(45,16,"LAND_7", 1);SetTileTag(46,16,"LAND_7", 1);SetTileTag(47,16,"LAND_7", 1);SetTileTag(48,16,"LAND_7", 1);SetTileTag(49,16,"LAND_7", 1);SetTileTag(50,16,"LAND_7", 1);SetTileTag(51,16,"LAND_7", 1);SetTileTag(55,16,"LAND_11", 1);SetTileTag(56,16,"LAND_11", 1);SetTileTag(57,16,"LAND_11", 1);SetTileTag(58,16,"LAND_11", 1);SetTileTag(59,16,"LAND_11", 1);
-		SetTileTag(2,15,"LAND_1", 1);SetTileTag(3,15,"LAND_1", 1);SetTileTag(10,15,"WATER_1", 1);SetTileTag(11,15,"WATER_1", 1);SetTileTag(12,15,"WATER_1", 1);SetTileTag(13,15,"WATER_1", 1);SetTileTag(14,15,"WATER_1", 1);SetTileTag(15,15,"LAND_2", 1);SetTileTag(16,15,"LAND_2", 1);SetTileTag(17,15,"LAND_2", 1);SetTileTag(18,15,"LAND_2", 1);SetTileTag(19,15,"LAND_2", 1);SetTileTag(20,15,"LAND_2", 1);SetTileTag(21,15,"LAND_2", 1);SetTileTag(22,15,"LAND_2", 1);SetTileTag(23,15,"LAND_2", 1);SetTileTag(24,15,"LAND_2", 1);SetTileTag(25,15,"LAND_2", 1);SetTileTag(26,15,"LAND_2", 1);SetTileTag(27,15,"LAND_2", 1);SetTileTag(28,15,"LAND_2", 1);SetTileTag(29,15,"LAND_2", 1);SetTileTag(30,15,"LAND_2", 1);SetTileTag(31,15,"LAND_2", 1);SetTileTag(32,15,"LAND_2", 1);SetTileTag(33,15,"LAND_2", 1);SetTileTag(37,15,"LAND_2", 1);SetTileTag(41,15,"LAND_7", 1);SetTileTag(45,15,"LAND_7", 1);SetTileTag(46,15,"LAND_7", 1);SetTileTag(47,15,"LAND_7", 1);SetTileTag(51,15,"LAND_7", 1);SetTileTag(55,15,"LAND_11", 1);
-		SetTileTag(2,14,"LAND_1", 1);SetTileTag(3,14,"LAND_1", 1);SetTileTag(8,14,"WATER_1", 1);SetTileTag(9,14,"WATER_1", 1);SetTileTag(10,14,"WATER_1", 1);SetTileTag(11,14,"WATER_1", 1);SetTileTag(12,14,"WATER_1", 1);SetTileTag(14,14,"LAND_2", 1);SetTileTag(15,14,"LAND_2", 1);SetTileTag(16,14,"LAND_2", 1);SetTileTag(18,14,"LAND_2", 1);SetTileTag(22,14,"LAND_2", 1);SetTileTag(30,14,"LAND_2", 1);SetTileTag(31,14,"LAND_2", 1);SetTileTag(32,14,"LAND_2", 1);SetTileTag(33,14,"LAND_2", 1);SetTileTag(37,14,"LAND_2", 1);SetTileTag(45,14,"LAND_7", 1);SetTileTag(46,14,"LAND_7", 1);SetTileTag(47,14,"LAND_7", 1);SetTileTag(55,14,"LAND_11", 1);SetTileTag(56,14,"LAND_11", 1);SetTileTag(57,14,"LAND_11", 1);SetTileTag(58,14,"LAND_11", 1);SetTileTag(59,14,"LAND_11", 1);
-		SetTileTag(3,13,"LAND_1", 1);SetTileTag(4,13,"WATER_1", 1);SetTileTag(5,13,"WATER_1", 1);SetTileTag(6,13,"WATER_1", 1);SetTileTag(7,13,"WATER_1", 1);SetTileTag(8,13,"WATER_1", 1);SetTileTag(9,13,"WATER_1", 1);SetTileTag(10,13,"WATER_1", 1);SetTileTag(11,13,"WATER_1", 1);SetTileTag(12,13,"WATER_1", 1);SetTileTag(14,13,"LAND_2", 1);SetTileTag(15,13,"LAND_2", 1);SetTileTag(16,13,"LAND_2", 1);SetTileTag(18,13,"LAND_2", 1);SetTileTag(20,13,"LAND_2", 1);SetTileTag(21,13,"LAND_2", 1);SetTileTag(22,13,"LAND_2", 1);SetTileTag(23,13,"LAND_2", 1);SetTileTag(24,13,"LAND_2", 1);SetTileTag(26,13,"LAND_2", 1);SetTileTag(27,13,"LAND_2", 1);SetTileTag(28,13,"LAND_2", 1);SetTileTag(30,13,"LAND_2", 1);SetTileTag(31,13,"LAND_2", 1);SetTileTag(32,13,"LAND_2", 1);SetTileTag(33,13,"LAND_2", 1);SetTileTag(37,13,"LAND_2", 1);SetTileTag(45,13,"LAND_7", 1);SetTileTag(46,13,"LAND_7", 1);SetTileTag(47,13,"LAND_7", 1);SetTileTag(55,13,"LAND_11", 1);SetTileTag(57,13,"LAND_11", 1);SetTileTag(58,13,"LAND_11", 1);SetTileTag(59,13,"LAND_11", 1);
-		SetTileTag(2,12,"WATER_1", 1);SetTileTag(3,12,"WATER_1", 1);SetTileTag(4,12,"WATER_1", 1);SetTileTag(5,12,"WATER_1", 1);SetTileTag(6,12,"WATER_1", 1);SetTileTag(7,12,"WATER_1", 1);SetTileTag(8,12,"WATER_1", 1);SetTileTag(9,12,"LAND_2", 1);SetTileTag(10,12,"LAND_2", 1);SetTileTag(11,12,"LAND_2", 1);SetTileTag(18,12,"LAND_2", 1);SetTileTag(20,12,"LAND_2", 1);SetTileTag(21,12,"LAND_2", 1);SetTileTag(22,12,"LAND_2", 1);SetTileTag(23,12,"LAND_2", 1);SetTileTag(26,12,"LAND_2", 1);SetTileTag(27,12,"LAND_2", 1);SetTileTag(28,12,"LAND_2", 1);SetTileTag(30,12,"LAND_2", 1);SetTileTag(31,12,"LAND_2", 1);SetTileTag(32,12,"LAND_2", 1);SetTileTag(33,12,"LAND_2", 1);SetTileTag(37,12,"LAND_2", 1);SetTileTag(45,12,"LAND_7", 1);SetTileTag(46,12,"LAND_7", 1);SetTileTag(47,12,"LAND_7", 1);SetTileTag(55,12,"LAND_11", 1);SetTileTag(57,12,"LAND_11", 1);SetTileTag(58,12,"LAND_11", 1);SetTileTag(59,12,"LAND_11", 1);
-		SetTileTag(2,11,"WATER_1", 1);SetTileTag(3,11,"WATER_1", 1);SetTileTag(4,11,"WATER_1", 1);SetTileTag(5,11,"WATER_1", 1);SetTileTag(6,11,"WATER_1", 1);SetTileTag(7,11,"WATER_1", 1);SetTileTag(9,11,"LAND_2", 1);SetTileTag(12,11,"LAND_2", 1);SetTileTag(13,11,"LAND_2", 1);SetTileTag(14,11,"LAND_2", 1);SetTileTag(15,11,"LAND_2", 1);SetTileTag(16,11,"LAND_2", 1);SetTileTag(17,11,"LAND_2", 1);SetTileTag(18,11,"LAND_2", 1);SetTileTag(20,11,"LAND_2", 1);SetTileTag(21,11,"LAND_2", 1);SetTileTag(22,11,"LAND_2", 1);SetTileTag(27,11,"LAND_2", 1);SetTileTag(37,11,"LAND_2", 1);SetTileTag(45,11,"LAND_7", 1);SetTileTag(46,11,"LAND_7", 1);SetTileTag(47,11,"LAND_7", 1);SetTileTag(55,11,"LAND_11", 1);
-		SetTileTag(2,10,"WATER_1", 1);SetTileTag(3,10,"WATER_1", 1);SetTileTag(4,10,"WATER_1", 1);SetTileTag(5,10,"WATER_1", 1);SetTileTag(9,10,"LAND_2", 1);SetTileTag(12,10,"LAND_2", 1);SetTileTag(13,10,"LAND_2", 1);SetTileTag(14,10,"LAND_2", 1);SetTileTag(17,10,"LAND_2", 1);SetTileTag(18,10,"LAND_2", 1);SetTileTag(20,10,"WATER_9", 1);SetTileTag(21,10,"WATER_9", 1);SetTileTag(23,10,"LAND_2", 1);SetTileTag(24,10,"LAND_2", 1);SetTileTag(27,10,"LAND_2", 1);SetTileTag(28,10,"LAND_2", 1);SetTileTag(29,10,"LAND_2", 1);SetTileTag(30,10,"LAND_2", 1);SetTileTag(31,10,"LAND_2", 1);SetTileTag(32,10,"LAND_2", 1);SetTileTag(34,10,"LAND_2", 1);SetTileTag(35,10,"LAND_2", 1);SetTileTag(36,10,"LAND_2", 1);SetTileTag(37,10,"LAND_2", 1);SetTileTag(38,10,"LAND_2", 1);SetTileTag(44,10,"LAND_7", 1);SetTileTag(45,10,"LAND_7", 1);SetTileTag(46,10,"LAND_7", 1);SetTileTag(47,10,"LAND_7", 1);SetTileTag(48,10,"LAND_7", 1);SetTileTag(55,10,"LAND_11", 1);
-		SetTileTag(9,9,"LAND_2", 1);SetTileTag(14,9,"LAND_2", 1);SetTileTag(20,9,"WATER_9", 1);SetTileTag(22,9,"LAND_2", 1);SetTileTag(23,9,"LAND_2", 1);SetTileTag(24,9,"LAND_2", 1);SetTileTag(25,9,"LAND_2", 1);SetTileTag(27,9,"LAND_2", 1);SetTileTag(28,9,"LAND_2", 1);SetTileTag(29,9,"LAND_2", 1);SetTileTag(30,9,"LAND_2", 1);SetTileTag(31,9,"LAND_2", 1);SetTileTag(32,9,"LAND_2", 1);SetTileTag(34,9,"LAND_2", 1);SetTileTag(35,9,"LAND_2", 1);SetTileTag(36,9,"LAND_2", 1);SetTileTag(37,9,"LAND_2", 1);SetTileTag(38,9,"LAND_2", 1);SetTileTag(43,9,"LAND_7", 1);SetTileTag(44,9,"LAND_7", 1);SetTileTag(45,9,"LAND_7", 1);SetTileTag(46,9,"LAND_7", 1);SetTileTag(47,9,"LAND_7", 1);SetTileTag(48,9,"LAND_7", 1);SetTileTag(49,9,"LAND_7", 1);SetTileTag(55,9,"LAND_11", 1);SetTileTag(56,9,"LAND_11", 1);
-		SetTileTag(4,8,"LAND_3", 1);SetTileTag(5,8,"LAND_3", 1);SetTileTag(6,8,"WATER_2", 1);SetTileTag(7,8,"LAND_2", 1);SetTileTag(8,8,"LAND_2", 1);SetTileTag(9,8,"LAND_2", 1);SetTileTag(10,8,"LAND_2", 1);SetTileTag(11,8,"LAND_2", 1);SetTileTag(12,8,"LAND_2", 1);SetTileTag(13,8,"LAND_2", 1);SetTileTag(14,8,"LAND_2", 1);SetTileTag(16,8,"LAND_2", 1);SetTileTag(17,8,"LAND_2", 1);SetTileTag(18,8,"LAND_2", 1);SetTileTag(22,8,"LAND_2", 1);SetTileTag(23,8,"LAND_2", 1);SetTileTag(24,8,"LAND_2", 1);SetTileTag(25,8,"LAND_2", 1);SetTileTag(27,8,"LAND_2", 1);SetTileTag(28,8,"LAND_2", 1);SetTileTag(30,8,"LAND_2", 1);SetTileTag(31,8,"LAND_2", 1);SetTileTag(32,8,"LAND_2", 1);SetTileTag(33,8,"LAND_2", 1);SetTileTag(34,8,"LAND_2", 1);SetTileTag(35,8,"LAND_2", 1);SetTileTag(36,8,"LAND_2", 1);SetTileTag(37,8,"LAND_2", 1);SetTileTag(38,8,"LAND_2", 1);SetTileTag(46,8,"LAND_7", 1);SetTileTag(56,8,"LAND_11", 1);
-		SetTileTag(4,7,"LAND_3", 1);SetTileTag(5,7,"LAND_3", 1);SetTileTag(6,7,"WATER_2", 1);SetTileTag(7,7,"LAND_2", 1);SetTileTag(8,7,"LAND_2", 1);SetTileTag(9,7,"LAND_2", 1);SetTileTag(10,7,"LAND_2", 1);SetTileTag(11,7,"LAND_2", 1);SetTileTag(12,7,"LAND_2", 1);SetTileTag(13,7,"LAND_2", 1);SetTileTag(14,7,"LAND_2", 1);SetTileTag(16,7,"LAND_2", 1);SetTileTag(17,7,"LAND_2", 1);SetTileTag(18,7,"LAND_2", 1);SetTileTag(24,7,"LAND_2", 1);SetTileTag(27,7,"LAND_2", 1);SetTileTag(28,7,"LAND_2", 1);SetTileTag(31,7,"LAND_2", 1);SetTileTag(32,7,"LAND_2", 1);SetTileTag(36,7,"LAND_2", 1);SetTileTag(45,7,"WATER_12", 1);SetTileTag(46,7,"WATER_12", 1);SetTileTag(47,7,"WATER_12", 1);SetTileTag(48,7,"WATER_12", 1);SetTileTag(50,7,"WATER_12", 1);SetTileTag(51,7,"WATER_12", 1);SetTileTag(56,7,"LAND_11", 1);
-		SetTileTag(4,6,"LAND_3", 1);SetTileTag(5,6,"LAND_3", 1);SetTileTag(6,6,"WATER_2", 1);SetTileTag(7,6,"LAND_2", 1);SetTileTag(8,6,"LAND_2", 1);SetTileTag(9,6,"LAND_2", 1);SetTileTag(10,6,"LAND_2", 1);SetTileTag(11,6,"LAND_2", 1);SetTileTag(12,6,"LAND_2", 1);SetTileTag(13,6,"LAND_2", 1);SetTileTag(14,6,"LAND_2", 1);SetTileTag(15,6,"LAND_2", 1);SetTileTag(16,6,"LAND_2", 1);SetTileTag(17,6,"LAND_2", 1);SetTileTag(18,6,"LAND_2", 1);SetTileTag(23,6,"LAND_2", 1);SetTileTag(24,6,"LAND_2", 1);SetTileTag(25,6,"LAND_2", 1);SetTileTag(27,6,"LAND_2", 1);SetTileTag(28,6,"LAND_2", 1);SetTileTag(31,6,"LAND_2", 1);SetTileTag(32,6,"LAND_2", 1);SetTileTag(36,6,"LAND_2", 1);SetTileTag(38,6,"LAND_2", 1);SetTileTag(39,6,"LAND_2", 1);SetTileTag(40,6,"LAND_2", 1);SetTileTag(41,6,"LAND_2", 1);SetTileTag(44,6,"WATER_12", 1);SetTileTag(45,6,"WATER_12", 1);SetTileTag(46,6,"LAND_8", 1);SetTileTag(47,6,"WATER_12", 1);SetTileTag(48,6,"WATER_12", 1);SetTileTag(49,6,"WATER_12", 1);SetTileTag(50,6,"WATER_12", 1);SetTileTag(51,6,"WATER_12", 1);SetTileTag(52,6,"LAND_11", 1);SetTileTag(53,6,"LAND_11", 1);SetTileTag(54,6,"LAND_11", 1);SetTileTag(55,6,"LAND_11", 1);SetTileTag(56,6,"LAND_11", 1);SetTileTag(57,6,"LAND_11", 1);SetTileTag(58,6,"LAND_11", 1);
-		SetTileTag(4,5,"LAND_3", 1);SetTileTag(5,5,"LAND_3", 1);SetTileTag(6,5,"WATER_2", 1);SetTileTag(7,5,"LAND_2", 1);SetTileTag(8,5,"LAND_2", 1);SetTileTag(9,5,"LAND_2", 1);SetTileTag(10,5,"LAND_2", 1);SetTileTag(11,5,"LAND_2", 1);SetTileTag(12,5,"LAND_2", 1);SetTileTag(14,5,"LAND_2", 1);SetTileTag(16,5,"LAND_2", 1);SetTileTag(17,5,"LAND_2", 1);SetTileTag(18,5,"LAND_2", 1);SetTileTag(19,5,"LAND_2", 1);SetTileTag(20,5,"LAND_2", 1);SetTileTag(21,5,"LAND_2", 1);SetTileTag(22,5,"LAND_2", 1);SetTileTag(23,5,"LAND_2", 1);SetTileTag(24,5,"LAND_2", 1);SetTileTag(25,5,"LAND_2", 1);SetTileTag(26,5,"LAND_2", 1);SetTileTag(27,5,"LAND_2", 1);SetTileTag(28,5,"LAND_2", 1);SetTileTag(31,5,"LAND_2", 1);SetTileTag(32,5,"LAND_2", 1);SetTileTag(35,5,"LAND_2", 1);SetTileTag(36,5,"LAND_2", 1);SetTileTag(37,5,"LAND_2", 1);SetTileTag(38,5,"LAND_2", 1);SetTileTag(41,5,"LAND_2", 1);SetTileTag(44,5,"WATER_12", 1);SetTileTag(45,5,"WATER_12", 1);SetTileTag(46,5,"LAND_8", 1);SetTileTag(47,5,"WATER_12", 1);SetTileTag(48,5,"LAND_9", 1);SetTileTag(49,5,"LAND_9", 1);SetTileTag(50,5,"WATER_12", 1);SetTileTag(51,5,"WATER_12", 1);SetTileTag(52,5,"LAND_11", 1);SetTileTag(53,5,"LAND_11", 1);SetTileTag(55,5,"LAND_11", 1);SetTileTag(56,5,"LAND_11", 1);SetTileTag(58,5,"LAND_11", 1);
-		SetTileTag(4,4,"WATER_2", 1);SetTileTag(5,4,"WATER_2", 1);SetTileTag(6,4,"WATER_2", 1);SetTileTag(7,4,"LAND_2", 1);SetTileTag(8,4,"LAND_2", 1);SetTileTag(9,4,"LAND_2", 1);SetTileTag(10,4,"LAND_2", 1);SetTileTag(11,4,"LAND_2", 1);SetTileTag(12,4,"LAND_2", 1);SetTileTag(14,4,"LAND_2", 1);SetTileTag(16,4,"LAND_2", 1);SetTileTag(17,4,"LAND_2", 1);SetTileTag(18,4,"LAND_2", 1);SetTileTag(23,4,"LAND_2", 1);SetTileTag(25,4,"LAND_2", 1);SetTileTag(26,4,"LAND_2", 1);SetTileTag(27,4,"LAND_2", 1);SetTileTag(28,4,"LAND_2", 1);SetTileTag(31,4,"LAND_2", 1);SetTileTag(32,4,"LAND_2", 1);SetTileTag(35,4,"LAND_2", 1);SetTileTag(36,4,"LAND_2", 1);SetTileTag(37,4,"LAND_2", 1);SetTileTag(38,4,"LAND_2", 1);SetTileTag(41,4,"LAND_2", 1);SetTileTag(44,4,"WATER_12", 1);SetTileTag(45,4,"WATER_12", 1);SetTileTag(46,4,"WATER_12", 1);SetTileTag(47,4,"WATER_12", 1);SetTileTag(48,4,"WATER_12", 1);SetTileTag(49,4,"WATER_12", 1);SetTileTag(50,4,"WATER_12", 1);SetTileTag(51,4,"WATER_12", 1);SetTileTag(52,4,"WATER_12", 1);SetTileTag(53,4,"WATER_12", 1);SetTileTag(54,4,"LAND_11", 1);SetTileTag(55,4,"LAND_11", 1);SetTileTag(56,4,"LAND_11", 1);SetTileTag(57,4,"LAND_11", 1);SetTileTag(58,4,"LAND_11", 1);
-		SetTileTag(4,3,"LAND_2", 1);SetTileTag(5,3,"LAND_2", 1);SetTileTag(6,3,"LAND_2", 1);SetTileTag(7,3,"LAND_2", 1);SetTileTag(8,3,"LAND_2", 1);SetTileTag(9,3,"LAND_2", 1);SetTileTag(10,3,"LAND_2", 1);SetTileTag(11,3,"LAND_2", 1);SetTileTag(12,3,"LAND_2", 1);SetTileTag(14,3,"LAND_2", 1);SetTileTag(18,3,"LAND_2", 1);SetTileTag(23,3,"LAND_2", 1);SetTileTag(24,3,"LAND_2", 1);SetTileTag(25,3,"LAND_2", 1);SetTileTag(26,3,"LAND_2", 1);SetTileTag(30,3,"LAND_2", 1);SetTileTag(31,3,"LAND_2", 1);SetTileTag(32,3,"LAND_2", 1);SetTileTag(33,3,"LAND_2", 1);SetTileTag(35,3,"LAND_2", 1);SetTileTag(36,3,"LAND_2", 1);SetTileTag(37,3,"LAND_2", 1);SetTileTag(38,3,"LAND_2", 1);SetTileTag(41,3,"LAND_2", 1);SetTileTag(42,3,"LAND_2", 1);SetTileTag(43,3,"LAND_2", 1);SetTileTag(44,3,"LAND_2", 1);SetTileTag(45,3,"LAND_2", 1);SetTileTag(46,3,"LAND_2", 1);SetTileTag(47,3,"WATER_12", 1);SetTileTag(48,3,"WATER_12", 1);SetTileTag(49,3,"WATER_12", 1);SetTileTag(50,3,"WATER_12", 1);SetTileTag(51,3,"WATER_12", 1);SetTileTag(52,3,"WATER_12", 1);SetTileTag(53,3,"WATER_12", 1);SetTileTag(58,3,"LAND_11", 1);
-		SetTileTag(4,2,"LAND_2", 1);SetTileTag(5,2,"LAND_2", 1);SetTileTag(6,2,"LAND_2", 1);SetTileTag(7,2,"LAND_2", 1);SetTileTag(8,2,"LAND_2", 1);SetTileTag(9,2,"LAND_2", 1);SetTileTag(10,2,"LAND_2", 1);SetTileTag(11,2,"LAND_2", 1);SetTileTag(12,2,"LAND_2", 1);SetTileTag(13,2,"LAND_2", 1);SetTileTag(14,2,"LAND_2", 1);SetTileTag(30,2,"LAND_2", 1);SetTileTag(31,2,"LAND_2", 1);SetTileTag(32,2,"LAND_2", 1);SetTileTag(33,2,"LAND_2", 1);SetTileTag(35,2,"LAND_2", 1);SetTileTag(36,2,"LAND_2", 1);SetTileTag(37,2,"LAND_2", 1);SetTileTag(47,2,"WATER_12", 1);SetTileTag(48,2,"WATER_12", 1);SetTileTag(49,2,"LAND_10", 1);SetTileTag(50,2,"LAND_10", 1);SetTileTag(51,2,"WATER_12", 1);SetTileTag(52,2,"WATER_12", 1);SetTileTag(53,2,"WATER_12", 1);SetTileTag(54,2,"LAND_11", 1);SetTileTag(55,2,"LAND_11", 1);SetTileTag(56,2,"LAND_11", 1);SetTileTag(57,2,"LAND_11", 1);SetTileTag(58,2,"LAND_11", 1);
-		SetTileTag(30,1,"LAND_2", 1);SetTileTag(31,1,"LAND_2", 1);SetTileTag(32,1,"LAND_2", 1);SetTileTag(33,1,"LAND_2", 1);
-		SetObjectTag("BRIDGE_21_36", "LAND_2");
+		SetTileTag(24,62,"SOLIDWALL",1);SetTileTag(25,62,"SOLIDWALL",1);SetTileTag(26,62,"SOLIDWALL",1);SetTileTag(29,62,"SOLIDWALL",1);SetTileTag(30,62,"SOLIDWALL",1);SetTileTag(31,62,"SOLIDWALL",1);SetTileTag(33,62,"SOLIDWALL",1);SetTileTag(34,62,"SOLIDWALL",1);SetTileTag(35,62,"SOLIDWALL",1);SetTileTag(37,62,"SOLIDWALL",1);SetTileTag(38,62,"SOLIDWALL",1);SetTileTag(39,62,"SOLIDWALL",1);
+		SetTileTag(5,61,"SOLIDWALL",1);SetTileTag(6,61,"SOLIDWALL",1);SetTileTag(7,61,"SOLIDWALL",1);SetTileTag(8,61,"SOLIDWALL",1);SetTileTag(9,61,"SOLIDWALL",1);SetTileTag(10,61,"SOLIDWALL",1);SetTileTag(11,61,"SOLIDWALL",1);SetTileTag(12,61,"SOLIDWALL",1);SetTileTag(13,61,"SOLIDWALL",1);SetTileTag(14,61,"SOLIDWALL",1);SetTileTag(15,61,"SOLIDWALL",1);SetTileTag(23,61,"SOLIDWALL",1);SetTileTag(24,61,"WATER_1", 1);SetTileTag(25,61,"WATER_1", 1);SetTileTag(26,61,"WATER_1", 1);SetTileTag(27,61,"SOLIDWALL",1);SetTileTag(28,61,"SOLIDWALL",1);SetTileTag(29,61,"WATER_10", 1);SetTileTag(30,61,"WATER_10", 1);SetTileTag(31,61,"WATER_10", 1);SetTileTag(32,61,"SOLIDWALL",1);SetTileTag(33,61,"LAND_2", 1);SetTileTag(34,61,"LAND_2", 1);SetTileTag(35,61,"LAND_2", 1);SetTileTag(36,61,"SOLIDWALL",1);SetTileTag(37,61,"LAND_2", 1);SetTileTag(38,61,"LAND_2", 1);SetTileTag(39,61,"LAND_2", 1);SetTileTag(40,61,"SOLIDWALL",1);SetTileTag(43,61,"SOLIDWALL",1);SetTileTag(44,61,"SOLIDWALL",1);SetTileTag(45,61,"SOLIDWALL",1);SetTileTag(46,61,"SOLIDWALL",1);SetTileTag(47,61,"SOLIDWALL",1);SetTileTag(48,61,"SOLIDWALL",1);SetTileTag(56,61,"SOLIDWALL",1);SetTileTag(57,61,"SOLIDWALL",1);
+		SetTileTag(4,60,"SOLIDWALL",1);SetTileTag(5,60,"LAND_2", 1);SetTileTag(6,60,"LAND_2", 1);SetTileTag(7,60,"LAND_2", 1);SetTileTag(8,60,"LAND_2", 1);SetTileTag(9,60,"LAND_2", 1);SetTileTag(10,60,"LAND_2", 1);SetTileTag(11,60,"LAND_2", 1);SetTileTag(12,60,"LAND_2", 1);SetTileTag(13,60,"LAND_2", 1);SetTileTag(14,60,"LAND_2", 1);SetTileTag(15,60,"LAND_2", 1);SetTileTag(16,60,"SOLIDWALL",1);SetTileTag(23,60,"SOLIDWALL",1);SetTileTag(24,60,"WATER_1", 1);SetTileTag(25,60,"WATER_1", 1);SetTileTag(26,60,"WATER_1", 1);SetTileTag(27,60,"SOLIDWALL",1);SetTileTag(28,60,"SOLIDWALL",1);SetTileTag(29,60,"LAND_2", 1);SetTileTag(30,60,"LAND_2", 1);SetTileTag(31,60,"LAND_2", 1);SetTileTag(32,60,"SOLIDWALL",1);SetTileTag(33,60,"LAND_2", 1);SetTileTag(34,60,"SOLIDWALL",1);SetTileTag(35,60,"LAND_2", 1);SetTileTag(36,60,"SOLIDWALL",1);SetTileTag(37,60,"LAND_2", 1);SetTileTag(38,60,"LAND_2", 1);SetTileTag(39,60,"LAND_2", 1);SetTileTag(40,60,"SOLIDWALL",1);SetTileTag(42,60,"SOLIDWALL",1);SetTileTag(43,60,"LAND_2", 1);SetTileTag(44,60,"LAND_2", 1);SetTileTag(45,60,"LAND_2", 1);SetTileTag(46,60,"LAND_2", 1);SetTileTag(47,60,"LAND_2", 1);SetTileTag(48,60,"LAND_2", 1);SetTileTag(49,60,"SOLIDWALL",1);SetTileTag(50,60,"SOLIDWALL",1);SetTileTag(51,60,"SOLIDWALL",1);SetTileTag(52,60,"SOLIDWALL",1);SetTileTag(53,60,"SOLIDWALL",1);SetTileTag(54,60,"SOLIDWALL",1);SetTileTag(55,60,"SOLIDWALL",1);SetTileTag(56,60,"LAND_2", 1);SetTileTag(57,60,"LAND_2", 1);SetTileTag(58,60,"SOLIDWALL",1);
+		SetTileTag(2,59,"SOLIDWALL",1);SetTileTag(3,59,"SOLIDWALL",1);SetTileTag(4,59,"LAND_2", 1);SetTileTag(5,59,"LAND_2", 1);SetTileTag(6,59,"LAND_2", 1);SetTileTag(7,59,"LAND_2", 1);SetTileTag(8,59,"WATER_5", 1);SetTileTag(9,59,"WATER_5", 1);SetTileTag(10,59,"LAND_2", 1);SetTileTag(11,59,"LAND_2", 1);SetTileTag(12,59,"WATER_8", 1);SetTileTag(13,59,"WATER_8", 1);SetTileTag(14,59,"LAND_2", 1);SetTileTag(15,59,"LAND_2", 1);SetTileTag(16,59,"SOLIDWALL",1);SetTileTag(22,59,"SOLIDWALL",1);SetTileTag(23,59,"WATER_1", 1);SetTileTag(24,59,"WATER_1", 1);SetTileTag(25,59,"WATER_1", 1);SetTileTag(26,59,"LAND_2", 1);SetTileTag(27,59,"LAND_2", 1);SetTileTag(28,59,"LAND_2", 1);SetTileTag(29,59,"LAND_2", 1);SetTileTag(30,59,"LAND_2", 1);SetTileTag(31,59,"LAND_2", 1);SetTileTag(32,59,"LAND_2", 1);SetTileTag(33,59,"LAND_2", 1);SetTileTag(34,59,"SOLIDWALL",1);SetTileTag(35,59,"LAND_2", 1);SetTileTag(36,59,"SOLIDWALL",1);SetTileTag(37,59,"LAND_2", 1);SetTileTag(38,59,"LAND_2", 1);SetTileTag(39,59,"LAND_2", 1);SetTileTag(40,59,"SOLIDWALL",1);SetTileTag(42,59,"SOLIDWALL",1);SetTileTag(43,59,"LAND_2", 1);SetTileTag(44,59,"LAND_2", 1);SetTileTag(45,59,"LAND_2", 1);SetTileTag(46,59,"LAND_2", 1);SetTileTag(47,59,"LAND_2", 1);SetTileTag(48,59,"LAND_2", 1);SetTileTag(49,59,"LAND_2", 1);SetTileTag(50,59,"LAND_2", 1);SetTileTag(51,59,"LAND_2", 1);SetTileTag(52,59,"LAND_2", 1);SetTileTag(53,59,"LAND_2", 1);SetTileTag(54,59,"LAND_2", 1);SetTileTag(55,59,"LAND_2", 1);SetTileTag(56,59,"LAND_2", 1);SetTileTag(57,59,"LAND_2", 1);SetTileTag(58,59,"SOLIDWALL",1);
+		SetTileTag(1,58,"SOLIDWALL",1);SetTileTag(2,58,"LAND_2", 1);SetTileTag(3,58,"LAND_2", 1);SetTileTag(4,58,"LAND_2", 1);SetTileTag(5,58,"LAND_2", 1);SetTileTag(6,58,"LAND_2", 1);SetTileTag(7,58,"LAND_2", 1);SetTileTag(8,58,"WATER_5", 1);SetTileTag(9,58,"LAND_2", 1);SetTileTag(10,58,"LAND_2", 1);SetTileTag(11,58,"LAND_2", 1);SetTileTag(12,58,"LAND_2", 1);SetTileTag(13,58,"WATER_8", 1);SetTileTag(14,58,"LAND_2", 1);SetTileTag(15,58,"LAND_2", 1);SetTileTag(16,58,"SOLIDWALL",1);SetTileTag(20,58,"SOLIDWALL",1);SetTileTag(21,58,"SOLIDWALL",1);SetTileTag(22,58,"WATER_1", 1);SetTileTag(23,58,"WATER_1", 1);SetTileTag(24,58,"WATER_1", 1);SetTileTag(25,58,"WATER_1", 1);SetTileTag(26,58,"SOLIDWALL",1);SetTileTag(27,58,"SOLIDWALL",1);SetTileTag(28,58,"SOLIDWALL",1);SetTileTag(29,58,"SOLIDWALL",1);SetTileTag(30,58,"SOLIDWALL",1);SetTileTag(31,58,"SOLIDWALL",1);SetTileTag(32,58,"SOLIDWALL",1);SetTileTag(33,58,"SOLIDWALL",1);SetTileTag(34,58,"SOLIDWALL",1);SetTileTag(35,58,"LAND_2", 1);SetTileTag(36,58,"SOLIDWALL",1);SetTileTag(37,58,"LAND_2", 1);SetTileTag(38,58,"LAND_2", 1);SetTileTag(39,58,"LAND_2", 1);SetTileTag(40,58,"SOLIDWALL",1);SetTileTag(41,58,"SOLIDWALL",1);SetTileTag(42,58,"SOLIDWALL",1);SetTileTag(43,58,"LAND_2", 1);SetTileTag(44,58,"LAND_2", 1);SetTileTag(45,58,"SOLIDWALL",1);SetTileTag(46,58,"SOLIDWALL",1);SetTileTag(47,58,"SOLIDWALL",1);SetTileTag(48,58,"SOLIDWALL",1);SetTileTag(49,58,"LAND_2", 1);SetTileTag(50,58,"LAND_2", 1);SetTileTag(51,58,"LAND_2", 1);SetTileTag(52,58,"LAND_2", 1);SetTileTag(53,58,"LAND_2", 1);SetTileTag(54,58,"LAND_2", 1);SetTileTag(55,58,"SOLIDWALL",1);SetTileTag(56,58,"LAND_2", 1);SetTileTag(57,58,"LAND_2", 1);SetTileTag(58,58,"SOLIDWALL",1);
+		SetTileTag(1,57,"SOLIDWALL",1);SetTileTag(2,57,"LAND_2", 1);SetTileTag(3,57,"LAND_2", 1);SetTileTag(4,57,"LAND_2", 1);SetTileTag(5,57,"LAND_2", 1);SetTileTag(6,57,"LAND_2", 1);SetTileTag(7,57,"LAND_2", 1);SetTileTag(8,57,"LAND_2", 1);SetTileTag(9,57,"LAND_2", 1);SetTileTag(10,57,"LAND_2", 1);SetTileTag(11,57,"LAND_2", 1);SetTileTag(12,57,"LAND_2", 1);SetTileTag(13,57,"LAND_2", 1);SetTileTag(14,57,"LAND_2", 1);SetTileTag(15,57,"LAND_2", 1);SetTileTag(16,57,"SOLIDWALL",1);SetTileTag(19,57,"SOLIDWALL",1);SetTileTag(20,57,"LAND_2", 1);SetTileTag(21,57,"SOLIDWALL",1);SetTileTag(22,57,"WATER_1", 1);SetTileTag(23,57,"WATER_1", 1);SetTileTag(24,57,"WATER_1", 1);SetTileTag(25,57,"SOLIDWALL",1);SetTileTag(26,57,"SOLIDWALL",1);SetTileTag(28,57,"SOLIDWALL",1);SetTileTag(29,57,"LAND_2", 1);SetTileTag(30,57,"LAND_2", 1);SetTileTag(31,57,"LAND_2", 1);SetTileTag(32,57,"LAND_2", 1);SetTileTag(33,57,"LAND_2", 1);SetTileTag(34,57,"LAND_2", 1);SetTileTag(35,57,"LAND_2", 1);SetTileTag(36,57,"LAND_2", 1);SetTileTag(37,57,"LAND_2", 1);SetTileTag(38,57,"LAND_2", 1);SetTileTag(39,57,"LAND_2", 1);SetTileTag(40,57,"LAND_2", 1);SetTileTag(41,57,"LAND_2", 1);SetTileTag(42,57,"SOLIDWALL",1);SetTileTag(43,57,"LAND_2", 1);SetTileTag(44,57,"LAND_2", 1);SetTileTag(45,57,"LAND_2", 1);SetTileTag(46,57,"LAND_2", 1);SetTileTag(47,57,"LAND_2", 1);SetTileTag(48,57,"SOLIDWALL",1);SetTileTag(49,57,"LAND_2", 1);SetTileTag(50,57,"LAND_2", 1);SetTileTag(51,57,"LAND_2", 1);SetTileTag(52,57,"LAND_2", 1);SetTileTag(53,57,"LAND_2", 1);SetTileTag(54,57,"LAND_2", 1);SetTileTag(55,57,"SOLIDWALL",1);SetTileTag(56,57,"SOLIDWALL",1);SetTileTag(57,57,"SOLIDWALL",1);SetTileTag(58,57,"SOLIDWALL",1);
+		SetTileTag(1,56,"SOLIDWALL",1);SetTileTag(2,56,"LAND_2", 1);SetTileTag(3,56,"LAND_2", 1);SetTileTag(4,56,"LAND_2", 1);SetTileTag(5,56,"LAND_2", 1);SetTileTag(6,56,"LAND_2", 1);SetTileTag(7,56,"LAND_2", 1);SetTileTag(8,56,"WATER_4", 1);SetTileTag(9,56,"LAND_2", 1);SetTileTag(10,56,"LAND_2", 1);SetTileTag(11,56,"LAND_2", 1);SetTileTag(12,56,"LAND_2", 1);SetTileTag(13,56,"WATER_7", 1);SetTileTag(14,56,"LAND_2", 1);SetTileTag(15,56,"LAND_2", 1);SetTileTag(16,56,"SOLIDWALL",1);SetTileTag(18,56,"SOLIDWALL",1);SetTileTag(19,56,"LAND_2", 1);SetTileTag(20,56,"LAND_2", 1);SetTileTag(21,56,"SOLIDWALL",1);SetTileTag(22,56,"WATER_1", 1);SetTileTag(23,56,"WATER_1", 1);SetTileTag(24,56,"WATER_1", 1);SetTileTag(25,56,"WATER_1", 1);SetTileTag(26,56,"WATER_1", 1);SetTileTag(27,56,"SOLIDWALL",1);SetTileTag(28,56,"SOLIDWALL",1);SetTileTag(29,56,"LAND_2", 1);SetTileTag(30,56,"LAND_2", 1);SetTileTag(31,56,"LAND_2", 1);SetTileTag(32,56,"SOLIDWALL",1);SetTileTag(33,56,"SOLIDWALL",1);SetTileTag(34,56,"SOLIDWALL",1);SetTileTag(35,56,"SOLIDWALL",1);SetTileTag(36,56,"SOLIDWALL",1);SetTileTag(37,56,"SOLIDWALL",1);SetTileTag(38,56,"LAND_2", 1);SetTileTag(39,56,"LAND_2", 1);SetTileTag(40,56,"LAND_2", 1);SetTileTag(41,56,"LAND_2", 1);SetTileTag(42,56,"SOLIDWALL",1);SetTileTag(43,56,"LAND_2", 1);SetTileTag(44,56,"LAND_2", 1);SetTileTag(45,56,"LAND_2", 1);SetTileTag(46,56,"LAND_2", 1);SetTileTag(47,56,"LAND_2", 1);SetTileTag(48,56,"SOLIDWALL",1);SetTileTag(49,56,"LAND_2", 1);SetTileTag(50,56,"LAND_2", 1);SetTileTag(51,56,"WATER_14", 1);SetTileTag(52,56,"WATER_14", 1);SetTileTag(53,56,"LAND_2", 1);SetTileTag(54,56,"LAND_2", 1);SetTileTag(55,56,"LAND_2", 1);SetTileTag(56,56,"LAND_2", 1);SetTileTag(57,56,"LAND_2", 1);SetTileTag(58,56,"LAND_2", 1);SetTileTag(59,56,"SOLIDWALL",1);
+		SetTileTag(2,55,"SOLIDWALL",1);SetTileTag(3,55,"SOLIDWALL",1);SetTileTag(4,55,"LAND_2", 1);SetTileTag(5,55,"LAND_2", 1);SetTileTag(6,55,"LAND_2", 1);SetTileTag(7,55,"LAND_2", 1);SetTileTag(8,55,"WATER_4", 1);SetTileTag(9,55,"WATER_4", 1);SetTileTag(10,55,"LAND_2", 1);SetTileTag(11,55,"LAND_2", 1);SetTileTag(12,55,"WATER_7", 1);SetTileTag(13,55,"WATER_7", 1);SetTileTag(14,55,"LAND_2", 1);SetTileTag(15,55,"LAND_2", 1);SetTileTag(16,55,"SOLIDWALL",1);SetTileTag(17,55,"SOLIDWALL",1);SetTileTag(18,55,"LAND_2", 1);SetTileTag(19,55,"LAND_2", 1);SetTileTag(20,55,"LAND_2", 1);SetTileTag(21,55,"SOLIDWALL",1);SetTileTag(22,55,"SOLIDWALL",1);SetTileTag(23,55,"SOLIDWALL",1);SetTileTag(24,55,"WATER_1", 1);SetTileTag(25,55,"WATER_1", 1);SetTileTag(26,55,"WATER_1", 1);SetTileTag(27,55,"WATER_1", 1);SetTileTag(28,55,"SOLIDWALL",1);SetTileTag(29,55,"SOLIDWALL",1);SetTileTag(30,55,"SOLIDWALL",1);SetTileTag(31,55,"LAND_2", 1);SetTileTag(32,55,"SOLIDWALL",1);SetTileTag(35,55,"SOLIDWALL",1);SetTileTag(36,55,"SOLIDWALL",1);SetTileTag(37,55,"SOLIDWALL",1);SetTileTag(38,55,"SOLIDWALL",1);SetTileTag(39,55,"SOLIDWALL",1);SetTileTag(40,55,"LAND_2", 1);SetTileTag(41,55,"LAND_2", 1);SetTileTag(42,55,"SOLIDWALL",1);SetTileTag(43,55,"LAND_2", 1);SetTileTag(44,55,"LAND_2", 1);SetTileTag(45,55,"LAND_2", 1);SetTileTag(46,55,"LAND_2", 1);SetTileTag(47,55,"LAND_2", 1);SetTileTag(48,55,"SOLIDWALL",1);SetTileTag(49,55,"LAND_2", 1);SetTileTag(50,55,"LAND_2", 1);SetTileTag(51,55,"WATER_14", 1);SetTileTag(52,55,"WATER_14", 1);SetTileTag(53,55,"LAND_2", 1);SetTileTag(54,55,"LAND_2", 1);SetTileTag(55,55,"LAND_2", 1);SetTileTag(56,55,"LAND_2", 1);SetTileTag(57,55,"LAND_2", 1);SetTileTag(58,55,"LAND_2", 1);SetTileTag(59,55,"SOLIDWALL",1);
+		SetTileTag(4,54,"SOLIDWALL",1);SetTileTag(5,54,"LAND_2", 1);SetTileTag(6,54,"LAND_2", 1);SetTileTag(7,54,"LAND_2", 1);SetTileTag(8,54,"LAND_2", 1);SetTileTag(9,54,"LAND_2", 1);SetTileTag(10,54,"LAND_2", 1);SetTileTag(11,54,"LAND_2", 1);SetTileTag(12,54,"LAND_2", 1);SetTileTag(13,54,"LAND_2", 1);SetTileTag(14,54,"LAND_2", 1);SetTileTag(15,54,"LAND_2", 1);SetTileTag(16,54,"SOLIDWALL",1);SetTileTag(17,54,"SOLIDWALL",1);SetTileTag(18,54,"LAND_2", 1);SetTileTag(19,54,"LAND_2", 1);SetTileTag(20,54,"LAND_2", 1);SetTileTag(21,54,"LAND_2", 1);SetTileTag(22,54,"LAND_2", 1);SetTileTag(23,54,"SOLIDWALL",1);SetTileTag(24,54,"SOLIDWALL",1);SetTileTag(25,54,"WATER_1", 1);SetTileTag(26,54,"WATER_1", 1);SetTileTag(27,54,"WATER_1", 1);SetTileTag(28,54,"SOLIDWALL",1);SetTileTag(30,54,"SOLIDWALL",1);SetTileTag(31,54,"LAND_2", 1);SetTileTag(32,54,"LAND_2", 1);SetTileTag(33,54,"SOLIDWALL",1);SetTileTag(34,54,"SOLIDWALL",1);SetTileTag(35,54,"LAND_2", 1);SetTileTag(36,54,"LAND_2", 1);SetTileTag(37,54,"LAND_2", 1);SetTileTag(38,54,"LAND_2", 1);SetTileTag(39,54,"SOLIDWALL",1);SetTileTag(40,54,"LAND_2", 1);SetTileTag(41,54,"LAND_2", 1);SetTileTag(42,54,"SOLIDWALL",1);SetTileTag(43,54,"SOLIDWALL",1);SetTileTag(44,54,"SOLIDWALL",1);SetTileTag(45,54,"SOLIDWALL",1);SetTileTag(46,54,"SOLIDWALL",1);SetTileTag(47,54,"LAND_2", 1);SetTileTag(48,54,"SOLIDWALL",1);SetTileTag(49,54,"LAND_2", 1);SetTileTag(50,54,"LAND_2", 1);SetTileTag(51,54,"WATER_14", 1);SetTileTag(52,54,"WATER_14", 1);SetTileTag(53,54,"LAND_2", 1);SetTileTag(54,54,"LAND_2", 1);SetTileTag(55,54,"LAND_2", 1);SetTileTag(56,54,"LAND_2", 1);SetTileTag(57,54,"LAND_2", 1);SetTileTag(58,54,"LAND_2", 1);SetTileTag(59,54,"SOLIDWALL",1);
+		SetTileTag(4,53,"SOLIDWALL",1);SetTileTag(5,53,"LAND_2", 1);SetTileTag(6,53,"LAND_2", 1);SetTileTag(7,53,"LAND_2", 1);SetTileTag(8,53,"LAND_2", 1);SetTileTag(9,53,"LAND_2", 1);SetTileTag(10,53,"LAND_2", 1);SetTileTag(11,53,"LAND_2", 1);SetTileTag(12,53,"LAND_2", 1);SetTileTag(13,53,"LAND_2", 1);SetTileTag(14,53,"LAND_2", 1);SetTileTag(15,53,"LAND_2", 1);SetTileTag(16,53,"SOLIDWALL",1);SetTileTag(17,53,"SOLIDWALL",1);SetTileTag(18,53,"LAND_2", 1);SetTileTag(19,53,"LAND_2", 1);SetTileTag(20,53,"LAND_2", 1);SetTileTag(21,53,"LAND_2", 1);SetTileTag(22,53,"LAND_2", 1);SetTileTag(23,53,"LAND_2", 1);SetTileTag(24,53,"SOLIDWALL",1);SetTileTag(25,53,"SOLIDWALL",1);SetTileTag(26,53,"WATER_1", 1);SetTileTag(27,53,"WATER_1", 1);SetTileTag(28,53,"WATER_1", 1);SetTileTag(29,53,"SOLIDWALL",1);SetTileTag(30,53,"LAND_2", 1);SetTileTag(31,53,"LAND_2", 1);SetTileTag(32,53,"LAND_2", 1);SetTileTag(33,53,"SOLIDWALL",1);SetTileTag(34,53,"LAND_2", 1);SetTileTag(35,53,"LAND_2", 1);SetTileTag(36,53,"LAND_2", 1);SetTileTag(37,53,"LAND_2", 1);SetTileTag(38,53,"LAND_2", 1);SetTileTag(39,53,"SOLIDWALL",1);SetTileTag(40,53,"LAND_2", 1);SetTileTag(41,53,"LAND_2", 1);SetTileTag(42,53,"SOLIDWALL",1);SetTileTag(43,53,"LAND_2", 1);SetTileTag(44,53,"LAND_2", 1);SetTileTag(45,53,"LAND_2", 1);SetTileTag(46,53,"SOLIDWALL",1);SetTileTag(47,53,"WATER_13", 1);SetTileTag(48,53,"SOLIDWALL",1);SetTileTag(49,53,"LAND_2", 1);SetTileTag(50,53,"LAND_2", 1);SetTileTag(51,53,"LAND_2", 1);SetTileTag(52,53,"LAND_2", 1);SetTileTag(53,53,"LAND_2", 1);SetTileTag(54,53,"LAND_2", 1);SetTileTag(55,53,"SOLIDWALL",1);SetTileTag(56,53,"SOLIDWALL",1);SetTileTag(57,53,"LAND_2", 1);SetTileTag(58,53,"SOLIDWALL",1);SetTileTag(59,53,"SOLIDWALL",1);SetTileTag(60,53,"SOLIDWALL",1);
+		SetTileTag(3,52,"SOLIDWALL",1);SetTileTag(4,52,"SOLIDWALL",1);SetTileTag(5,52,"SOLIDWALL",1);SetTileTag(6,52,"SOLIDWALL",1);SetTileTag(7,52,"SOLIDWALL",1);SetTileTag(8,52,"LAND_2", 1);SetTileTag(9,52,"SOLIDWALL",1);SetTileTag(10,52,"SOLIDWALL",1);SetTileTag(11,52,"SOLIDWALL",1);SetTileTag(12,52,"SOLIDWALL",1);SetTileTag(13,52,"LAND_2", 1);SetTileTag(14,52,"LAND_2", 1);SetTileTag(15,52,"LAND_2", 1);SetTileTag(16,52,"SOLIDWALL",1);SetTileTag(18,52,"SOLIDWALL",1);SetTileTag(19,52,"LAND_2", 1);SetTileTag(20,52,"LAND_2", 1);SetTileTag(21,52,"LAND_2", 1);SetTileTag(22,52,"LAND_2", 1);SetTileTag(23,52,"LAND_2", 1);SetTileTag(24,52,"SOLIDWALL",1);SetTileTag(25,52,"SOLIDWALL",1);SetTileTag(26,52,"SOLIDWALL",1);SetTileTag(27,52,"WATER_1", 1);SetTileTag(28,52,"WATER_1", 1);SetTileTag(29,52,"SOLIDWALL",1);SetTileTag(30,52,"SOLIDWALL",1);SetTileTag(31,52,"LAND_2", 1);SetTileTag(32,52,"SOLIDWALL",1);SetTileTag(33,52,"SOLIDWALL",1);SetTileTag(34,52,"LAND_2", 1);SetTileTag(35,52,"LAND_2", 1);SetTileTag(36,52,"SOLIDWALL",1);SetTileTag(37,52,"SOLIDWALL",1);SetTileTag(38,52,"SOLIDWALL",1);SetTileTag(39,52,"SOLIDWALL",1);SetTileTag(40,52,"LAND_2", 1);SetTileTag(41,52,"LAND_2", 1);SetTileTag(42,52,"SOLIDWALL",1);SetTileTag(43,52,"LAND_2", 1);SetTileTag(44,52,"LAND_2", 1);SetTileTag(45,52,"LAND_2", 1);SetTileTag(46,52,"SOLIDWALL",1);SetTileTag(47,52,"SOLIDWALL",1);SetTileTag(48,52,"LAND_2", 1);SetTileTag(49,52,"LAND_2", 1);SetTileTag(50,52,"LAND_2", 1);SetTileTag(51,52,"LAND_2", 1);SetTileTag(52,52,"LAND_2", 1);SetTileTag(53,52,"LAND_2", 1);SetTileTag(54,52,"LAND_2", 1);SetTileTag(55,52,"SOLIDWALL",1);SetTileTag(56,52,"LAND_2", 1);SetTileTag(57,52,"LAND_2", 1);SetTileTag(58,52,"LAND_2", 1);SetTileTag(59,52,"LAND_2", 1);SetTileTag(60,52,"LAND_2", 1);SetTileTag(61,52,"SOLIDWALL",1);
+		SetTileTag(2,51,"SOLIDWALL",1);SetTileTag(3,51,"LAND_2", 1);SetTileTag(4,51,"LAND_2", 1);SetTileTag(5,51,"SOLIDWALL",1);SetTileTag(6,51,"LAND_2", 1);SetTileTag(7,51,"LAND_2", 1);SetTileTag(8,51,"LAND_2", 1);SetTileTag(9,51,"LAND_2", 1);SetTileTag(10,51,"LAND_2", 1);SetTileTag(11,51,"LAND_2", 1);SetTileTag(12,51,"SOLIDWALL",1);SetTileTag(13,51,"LAND_2", 1);SetTileTag(14,51,"LAND_2", 1);SetTileTag(15,51,"LAND_2", 1);SetTileTag(16,51,"SOLIDWALL",1);SetTileTag(19,51,"SOLIDWALL",1);SetTileTag(20,51,"SOLIDWALL",1);SetTileTag(21,51,"SOLIDWALL",1);SetTileTag(22,51,"SOLIDWALL",1);SetTileTag(23,51,"LAND_2", 1);SetTileTag(24,51,"LAND_2", 1);SetTileTag(25,51,"LAND_2", 1);SetTileTag(26,51,"WATER_1", 1);SetTileTag(27,51,"WATER_1", 1);SetTileTag(28,51,"WATER_1", 1);SetTileTag(29,51,"SOLIDWALL",1);SetTileTag(30,51,"LAND_2", 1);SetTileTag(31,51,"LAND_2", 1);SetTileTag(32,51,"SOLIDWALL",1);SetTileTag(33,51,"SOLIDWALL",1);SetTileTag(34,51,"LAND_2", 1);SetTileTag(35,51,"LAND_2", 1);SetTileTag(36,51,"LAND_2", 1);SetTileTag(37,51,"SOLIDWALL",1);SetTileTag(39,51,"SOLIDWALL",1);SetTileTag(40,51,"LAND_2", 1);SetTileTag(41,51,"LAND_2", 1);SetTileTag(42,51,"LAND_2", 1);SetTileTag(43,51,"LAND_2", 1);SetTileTag(44,51,"LAND_2", 1);SetTileTag(45,51,"LAND_2", 1);SetTileTag(46,51,"LAND_2", 1);SetTileTag(47,51,"LAND_2", 1);SetTileTag(48,51,"LAND_2", 1);SetTileTag(49,51,"LAND_2", 1);SetTileTag(50,51,"LAND_2", 1);SetTileTag(51,51,"LAND_2", 1);SetTileTag(52,51,"LAND_2", 1);SetTileTag(53,51,"LAND_2", 1);SetTileTag(54,51,"LAND_2", 1);SetTileTag(55,51,"SOLIDWALL",1);SetTileTag(56,51,"LAND_2", 1);SetTileTag(57,51,"LAND_2", 1);SetTileTag(58,51,"LAND_2", 1);SetTileTag(59,51,"LAND_2", 1);SetTileTag(60,51,"LAND_2", 1);SetTileTag(61,51,"SOLIDWALL",1);
+		SetTileTag(2,50,"SOLIDWALL",1);SetTileTag(3,50,"LAND_2", 1);SetTileTag(4,50,"LAND_2", 1);SetTileTag(5,50,"SOLIDWALL",1);SetTileTag(6,50,"LAND_2", 1);SetTileTag(7,50,"LAND_2", 1);SetTileTag(8,50,"LAND_2", 1);SetTileTag(9,50,"LAND_2", 1);SetTileTag(10,50,"LAND_2", 1);SetTileTag(11,50,"LAND_2", 1);SetTileTag(12,50,"SOLIDWALL",1);SetTileTag(13,50,"LAND_2", 1);SetTileTag(14,50,"LAND_2", 1);SetTileTag(15,50,"LAND_2", 1);SetTileTag(16,50,"SOLIDWALL",1);SetTileTag(20,50,"SOLIDWALL",1);SetTileTag(21,50,"SOLIDWALL",1);SetTileTag(22,50,"WATER_1", 1);SetTileTag(23,50,"WATER_1", 1);SetTileTag(24,50,"WATER_1", 1);SetTileTag(25,50,"WATER_1", 1);SetTileTag(26,50,"WATER_1", 1);SetTileTag(27,50,"WATER_1", 1);SetTileTag(28,50,"SOLIDWALL",1);SetTileTag(29,50,"SOLIDWALL",1);SetTileTag(30,50,"LAND_2", 1);SetTileTag(31,50,"LAND_2", 1);SetTileTag(32,50,"LAND_2", 1);SetTileTag(33,50,"SOLIDWALL",1);SetTileTag(34,50,"LAND_2", 1);SetTileTag(35,50,"LAND_2", 1);SetTileTag(36,50,"LAND_2", 1);SetTileTag(37,50,"SOLIDWALL",1);SetTileTag(39,50,"SOLIDWALL",1);SetTileTag(40,50,"LAND_2", 1);SetTileTag(41,50,"LAND_2", 1);SetTileTag(42,50,"SOLIDWALL",1);SetTileTag(43,50,"SOLIDWALL",1);SetTileTag(44,50,"SOLIDWALL",1);SetTileTag(45,50,"SOLIDWALL",1);SetTileTag(46,50,"SOLIDWALL",1);SetTileTag(47,50,"SOLIDWALL",1);SetTileTag(48,50,"SOLIDWALL",1);SetTileTag(49,50,"SOLIDWALL",1);SetTileTag(50,50,"SOLIDWALL",1);SetTileTag(51,50,"SOLIDWALL",1);SetTileTag(52,50,"SOLIDWALL",1);SetTileTag(53,50,"LAND_2", 1);SetTileTag(54,50,"LAND_2", 1);SetTileTag(55,50,"SOLIDWALL",1);SetTileTag(56,50,"SOLIDWALL",1);SetTileTag(57,50,"SOLIDWALL",1);SetTileTag(58,50,"SOLIDWALL",1);SetTileTag(59,50,"SOLIDWALL",1);SetTileTag(60,50,"LAND_2", 1);SetTileTag(61,50,"SOLIDWALL",1);
+		SetTileTag(3,49,"SOLIDWALL",1);SetTileTag(4,49,"LAND_2", 1);SetTileTag(5,49,"SOLIDWALL",1);SetTileTag(6,49,"LAND_2", 1);SetTileTag(7,49,"LAND_2", 1);SetTileTag(8,49,"LAND_2", 1);SetTileTag(9,49,"LAND_2", 1);SetTileTag(10,49,"SOLIDWALL",1);SetTileTag(11,49,"LAND_2", 1);SetTileTag(12,49,"SOLIDWALL",1);SetTileTag(13,49,"LAND_2", 1);SetTileTag(14,49,"LAND_2", 1);SetTileTag(15,49,"LAND_2", 1);SetTileTag(16,49,"SOLIDWALL",1);SetTileTag(19,49,"SOLIDWALL",1);SetTileTag(20,49,"WATER_1", 1);SetTileTag(21,49,"WATER_1", 1);SetTileTag(22,49,"WATER_1", 1);SetTileTag(23,49,"WATER_1", 1);SetTileTag(24,49,"WATER_1", 1);SetTileTag(25,49,"WATER_1", 1);SetTileTag(26,49,"WATER_1", 1);SetTileTag(27,49,"WATER_1", 1);SetTileTag(28,49,"SOLIDWALL",1);SetTileTag(29,49,"LAND_2", 1);SetTileTag(30,49,"LAND_2", 1);SetTileTag(31,49,"LAND_2", 1);SetTileTag(32,49,"LAND_2", 1);SetTileTag(33,49,"LAND_2", 1);SetTileTag(34,49,"LAND_2", 1);SetTileTag(35,49,"LAND_2", 1);SetTileTag(36,49,"LAND_2", 1);SetTileTag(37,49,"LAND_2", 1);SetTileTag(38,49,"SOLIDWALL",1);SetTileTag(39,49,"SOLIDWALL",1);SetTileTag(40,49,"LAND_2", 1);SetTileTag(41,49,"LAND_2", 1);SetTileTag(42,49,"SOLIDWALL",1);SetTileTag(43,49,"LAND_2", 1);SetTileTag(44,49,"LAND_2", 1);SetTileTag(45,49,"LAND_2", 1);SetTileTag(46,49,"LAND_2", 1);SetTileTag(47,49,"LAND_2", 1);SetTileTag(48,49,"LAND_2", 1);SetTileTag(49,49,"LAND_2", 1);SetTileTag(50,49,"LAND_2", 1);SetTileTag(51,49,"LAND_2", 1);SetTileTag(52,49,"LAND_2", 1);SetTileTag(53,49,"SOLIDWALL",1);SetTileTag(54,49,"LAND_2", 1);SetTileTag(55,49,"LAND_2", 1);SetTileTag(56,49,"LAND_2", 1);SetTileTag(57,49,"LAND_2", 1);SetTileTag(58,49,"LAND_2", 1);SetTileTag(59,49,"SOLIDWALL",1);SetTileTag(60,49,"WATER_15", 1);SetTileTag(61,49,"SOLIDWALL",1);
+		SetTileTag(2,48,"SOLIDWALL",1);SetTileTag(3,48,"LAND_2", 1);SetTileTag(4,48,"LAND_2", 1);SetTileTag(5,48,"LAND_2", 1);SetTileTag(6,48,"LAND_2", 1);SetTileTag(7,48,"LAND_2", 1);SetTileTag(8,48,"LAND_2", 1);SetTileTag(9,48,"LAND_2", 1);SetTileTag(10,48,"SOLIDWALL",1);SetTileTag(11,48,"WATER_6", 1);SetTileTag(12,48,"SOLIDWALL",1);SetTileTag(13,48,"LAND_2", 1);SetTileTag(14,48,"LAND_2", 1);SetTileTag(15,48,"LAND_2", 1);SetTileTag(16,48,"SOLIDWALL",1);SetTileTag(19,48,"SOLIDWALL",1);SetTileTag(20,48,"WATER_1", 1);SetTileTag(21,48,"WATER_1", 1);SetTileTag(22,48,"WATER_1", 1);SetTileTag(23,48,"LAND_2", 1);SetTileTag(24,48,"LAND_2", 1);SetTileTag(25,48,"SOLIDWALL",1);SetTileTag(26,48,"SOLIDWALL",1);SetTileTag(27,48,"LAND_2", 1);SetTileTag(28,48,"LAND_2", 1);SetTileTag(29,48,"LAND_2", 1);SetTileTag(30,48,"LAND_2", 1);SetTileTag(31,48,"SOLIDWALL",1);SetTileTag(32,48,"SOLIDWALL",1);SetTileTag(33,48,"LAND_2", 1);SetTileTag(34,48,"LAND_2", 1);SetTileTag(35,48,"SOLIDWALL",1);SetTileTag(36,48,"LAND_2", 1);SetTileTag(37,48,"LAND_2", 1);SetTileTag(38,48,"SOLIDWALL",1);SetTileTag(39,48,"SOLIDWALL",1);SetTileTag(40,48,"LAND_2", 1);SetTileTag(41,48,"LAND_2", 1);SetTileTag(42,48,"SOLIDWALL",1);SetTileTag(43,48,"LAND_2", 1);SetTileTag(44,48,"SOLIDWALL",1);SetTileTag(45,48,"SOLIDWALL",1);SetTileTag(46,48,"SOLIDWALL",1);SetTileTag(47,48,"SOLIDWALL",1);SetTileTag(48,48,"SOLIDWALL",1);SetTileTag(49,48,"SOLIDWALL",1);SetTileTag(50,48,"SOLIDWALL",1);SetTileTag(51,48,"SOLIDWALL",1);SetTileTag(52,48,"LAND_2", 1);SetTileTag(53,48,"SOLIDWALL",1);SetTileTag(54,48,"LAND_2", 1);SetTileTag(55,48,"SOLIDWALL",1);SetTileTag(56,48,"SOLIDWALL",1);SetTileTag(57,48,"LAND_2", 1);SetTileTag(58,48,"LAND_2", 1);SetTileTag(59,48,"SOLIDWALL",1);SetTileTag(60,48,"SOLIDWALL",1);
+		SetTileTag(2,47,"SOLIDWALL",1);SetTileTag(3,47,"LAND_2", 1);SetTileTag(4,47,"LAND_2", 1);SetTileTag(5,47,"SOLIDWALL",1);SetTileTag(6,47,"SOLIDWALL",1);SetTileTag(7,47,"SOLIDWALL",1);SetTileTag(8,47,"SOLIDWALL",1);SetTileTag(9,47,"SOLIDWALL",1);SetTileTag(11,47,"SOLIDWALL",1);SetTileTag(12,47,"SOLIDWALL",1);SetTileTag(13,47,"LAND_2", 1);SetTileTag(14,47,"LAND_2", 1);SetTileTag(15,47,"LAND_2", 1);SetTileTag(16,47,"SOLIDWALL",1);SetTileTag(19,47,"SOLIDWALL",1);SetTileTag(20,47,"WATER_1", 1);SetTileTag(21,47,"WATER_1", 1);SetTileTag(22,47,"SOLIDWALL",1);SetTileTag(23,47,"LAND_2", 1);SetTileTag(24,47,"LAND_2", 1);SetTileTag(25,47,"LAND_2", 1);SetTileTag(26,47,"LAND_2", 1);SetTileTag(27,47,"LAND_2", 1);SetTileTag(28,47,"LAND_2", 1);SetTileTag(29,47,"LAND_2", 1);SetTileTag(30,47,"SOLIDWALL",1);SetTileTag(31,47,"SOLIDWALL",1);SetTileTag(32,47,"WATER_1", 1);SetTileTag(33,47,"WATER_1", 1);SetTileTag(34,47,"SOLIDWALL",1);SetTileTag(35,47,"SOLIDWALL",1);SetTileTag(36,47,"LAND_2", 1);SetTileTag(37,47,"LAND_2", 1);SetTileTag(38,47,"SOLIDWALL",1);SetTileTag(39,47,"SOLIDWALL",1);SetTileTag(40,47,"LAND_2", 1);SetTileTag(41,47,"LAND_2", 1);SetTileTag(42,47,"SOLIDWALL",1);SetTileTag(43,47,"LAND_2", 1);SetTileTag(44,47,"LAND_2", 1);SetTileTag(45,47,"LAND_2", 1);SetTileTag(46,47,"LAND_2", 1);SetTileTag(47,47,"LAND_2", 1);SetTileTag(48,47,"LAND_2", 1);SetTileTag(49,47,"LAND_2", 1);SetTileTag(50,47,"LAND_2", 1);SetTileTag(51,47,"LAND_2", 1);SetTileTag(52,47,"LAND_2", 1);SetTileTag(53,47,"SOLIDWALL",1);SetTileTag(54,47,"LAND_2", 1);SetTileTag(55,47,"SOLIDWALL",1);SetTileTag(56,47,"SOLIDWALL",1);SetTileTag(57,47,"SOLIDWALL",1);SetTileTag(58,47,"SOLIDWALL",1);SetTileTag(59,47,"SOLIDWALL",1);
+		SetTileTag(2,46,"SOLIDWALL",1);SetTileTag(3,46,"LAND_2", 1);SetTileTag(4,46,"LAND_2", 1);SetTileTag(5,46,"SOLIDWALL",1);SetTileTag(6,46,"WATER_3", 1);SetTileTag(7,46,"SOLIDWALL",1);SetTileTag(8,46,"SOLIDWALL",1);SetTileTag(9,46,"SOLIDWALL",1);SetTileTag(10,46,"SOLIDWALL",1);SetTileTag(11,46,"SOLIDWALL",1);SetTileTag(12,46,"SOLIDWALL",1);SetTileTag(13,46,"LAND_2", 1);SetTileTag(14,46,"LAND_2", 1);SetTileTag(15,46,"LAND_2", 1);SetTileTag(16,46,"SOLIDWALL",1);SetTileTag(19,46,"SOLIDWALL",1);SetTileTag(20,46,"WATER_1", 1);SetTileTag(21,46,"WATER_1", 1);SetTileTag(22,46,"WATER_1", 1);SetTileTag(23,46,"SOLIDWALL",1);SetTileTag(24,46,"SOLIDWALL",1);SetTileTag(25,46,"SOLIDWALL",1);SetTileTag(26,46,"LAND_2", 1);SetTileTag(27,46,"LAND_2", 1);SetTileTag(28,46,"LAND_2", 1);SetTileTag(29,46,"LAND_2", 1);SetTileTag(30,46,"WATER_1", 1);SetTileTag(31,46,"WATER_1", 1);SetTileTag(32,46,"WATER_1", 1);SetTileTag(33,46,"WATER_1", 1);SetTileTag(34,46,"WATER_1", 1);SetTileTag(35,46,"WATER_1", 1);SetTileTag(36,46,"SOLIDWALL",1);SetTileTag(37,46,"SOLIDWALL",1);SetTileTag(39,46,"SOLIDWALL",1);SetTileTag(40,46,"LAND_2", 1);SetTileTag(41,46,"LAND_2", 1);SetTileTag(42,46,"SOLIDWALL",1);SetTileTag(43,46,"LAND_2", 1);SetTileTag(44,46,"LAND_2", 1);SetTileTag(45,46,"LAND_2", 1);SetTileTag(46,46,"LAND_2", 1);SetTileTag(47,46,"LAND_2", 1);SetTileTag(48,46,"LAND_2", 1);SetTileTag(49,46,"LAND_2", 1);SetTileTag(50,46,"LAND_2", 1);SetTileTag(51,46,"LAND_2", 1);SetTileTag(52,46,"LAND_2", 1);SetTileTag(53,46,"LAND_2", 1);SetTileTag(54,46,"LAND_2", 1);SetTileTag(55,46,"LAND_2", 1);SetTileTag(56,46,"LAND_2", 1);SetTileTag(57,46,"LAND_2", 1);SetTileTag(58,46,"LAND_2", 1);SetTileTag(59,46,"LAND_2", 1);SetTileTag(60,46,"SOLIDWALL",1);
+		SetTileTag(2,45,"SOLIDWALL",1);SetTileTag(3,45,"LAND_2", 1);SetTileTag(4,45,"LAND_2", 1);SetTileTag(5,45,"SOLIDWALL",1);SetTileTag(6,45,"LAND_2", 1);SetTileTag(7,45,"LAND_2", 1);SetTileTag(8,45,"LAND_2", 1);SetTileTag(9,45,"LAND_2", 1);SetTileTag(10,45,"LAND_2", 1);SetTileTag(11,45,"LAND_2", 1);SetTileTag(12,45,"SOLIDWALL",1);SetTileTag(13,45,"LAND_2", 1);SetTileTag(14,45,"LAND_2", 1);SetTileTag(15,45,"LAND_2", 1);SetTileTag(16,45,"SOLIDWALL",1);SetTileTag(19,45,"SOLIDWALL",1);SetTileTag(20,45,"WATER_1", 1);SetTileTag(21,45,"WATER_1", 1);SetTileTag(22,45,"WATER_1", 1);SetTileTag(23,45,"WATER_1", 1);SetTileTag(24,45,"WATER_1", 1);SetTileTag(25,45,"SOLIDWALL",1);SetTileTag(26,45,"LAND_2", 1);SetTileTag(27,45,"LAND_2", 1);SetTileTag(28,45,"LAND_2", 1);SetTileTag(29,45,"SOLIDWALL",1);SetTileTag(30,45,"WATER_1", 1);SetTileTag(31,45,"WATER_1", 1);SetTileTag(32,45,"WATER_1", 1);SetTileTag(33,45,"WATER_1", 1);SetTileTag(34,45,"WATER_1", 1);SetTileTag(35,45,"WATER_1", 1);SetTileTag(36,45,"WATER_1", 1);SetTileTag(37,45,"WATER_1", 1);SetTileTag(38,45,"SOLIDWALL",1);SetTileTag(39,45,"SOLIDWALL",1);SetTileTag(40,45,"LAND_2", 1);SetTileTag(41,45,"LAND_2", 1);SetTileTag(42,45,"SOLIDWALL",1);SetTileTag(43,45,"LAND_2", 1);SetTileTag(44,45,"LAND_2", 1);SetTileTag(45,45,"LAND_2", 1);SetTileTag(46,45,"LAND_2", 1);SetTileTag(47,45,"LAND_2", 1);SetTileTag(48,45,"LAND_2", 1);SetTileTag(49,45,"LAND_2", 1);SetTileTag(50,45,"LAND_2", 1);SetTileTag(51,45,"LAND_2", 1);SetTileTag(52,45,"LAND_2", 1);SetTileTag(53,45,"LAND_2", 1);SetTileTag(54,45,"LAND_2", 1);SetTileTag(55,45,"SOLIDWALL",1);SetTileTag(56,45,"LAND_2", 1);SetTileTag(57,45,"LAND_2", 1);SetTileTag(58,45,"LAND_2", 1);SetTileTag(59,45,"LAND_2", 1);SetTileTag(60,45,"SOLIDWALL",1);
+		SetTileTag(2,44,"SOLIDWALL",1);SetTileTag(3,44,"LAND_2", 1);SetTileTag(4,44,"LAND_2", 1);SetTileTag(5,44,"SOLIDWALL",1);SetTileTag(6,44,"LAND_2", 1);SetTileTag(7,44,"LAND_2", 1);SetTileTag(8,44,"LAND_2", 1);SetTileTag(9,44,"LAND_2", 1);SetTileTag(10,44,"LAND_2", 1);SetTileTag(11,44,"LAND_2", 1);SetTileTag(12,44,"LAND_2", 1);SetTileTag(13,44,"LAND_2", 1);SetTileTag(14,44,"LAND_2", 1);SetTileTag(15,44,"LAND_2", 1);SetTileTag(16,44,"SOLIDWALL",1);SetTileTag(20,44,"SOLIDWALL",1);SetTileTag(21,44,"SOLIDWALL",1);SetTileTag(22,44,"WATER_1", 1);SetTileTag(23,44,"WATER_1", 1);SetTileTag(24,44,"WATER_1", 1);SetTileTag(25,44,"SOLIDWALL",1);SetTileTag(26,44,"LAND_2", 1);SetTileTag(27,44,"LAND_2", 1);SetTileTag(28,44,"SOLIDWALL",1);SetTileTag(29,44,"WATER_1", 1);SetTileTag(30,44,"WATER_1", 1);SetTileTag(31,44,"WATER_1", 1);SetTileTag(32,44,"SOLIDWALL",1);SetTileTag(33,44,"SOLIDWALL",1);SetTileTag(34,44,"WATER_1", 1);SetTileTag(35,44,"WATER_1", 1);SetTileTag(36,44,"WATER_1", 1);SetTileTag(37,44,"SOLIDWALL",1);SetTileTag(38,44,"SOLIDWALL",1);SetTileTag(39,44,"SOLIDWALL",1);SetTileTag(40,44,"LAND_2", 1);SetTileTag(41,44,"LAND_2", 1);SetTileTag(42,44,"SOLIDWALL",1);SetTileTag(43,44,"LAND_2", 1);SetTileTag(44,44,"LAND_2", 1);SetTileTag(45,44,"LAND_2", 1);SetTileTag(46,44,"LAND_2", 1);SetTileTag(47,44,"LAND_2", 1);SetTileTag(48,44,"LAND_2", 1);SetTileTag(49,44,"LAND_2", 1);SetTileTag(50,44,"LAND_2", 1);SetTileTag(51,44,"LAND_2", 1);SetTileTag(52,44,"LAND_2", 1);SetTileTag(53,44,"LAND_2", 1);SetTileTag(54,44,"LAND_2", 1);SetTileTag(55,44,"SOLIDWALL",1);SetTileTag(56,44,"SOLIDWALL",1);SetTileTag(57,44,"SOLIDWALL",1);SetTileTag(58,44,"SOLIDWALL",1);SetTileTag(59,44,"SOLIDWALL",1);
+		SetTileTag(2,43,"SOLIDWALL",1);SetTileTag(3,43,"LAND_2", 1);SetTileTag(4,43,"LAND_2", 1);SetTileTag(5,43,"SOLIDWALL",1);SetTileTag(6,43,"LAND_2", 1);SetTileTag(7,43,"LAND_2", 1);SetTileTag(8,43,"LAND_2", 1);SetTileTag(9,43,"LAND_2", 1);SetTileTag(10,43,"LAND_2", 1);SetTileTag(11,43,"LAND_2", 1);SetTileTag(12,43,"SOLIDWALL",1);SetTileTag(13,43,"LAND_2", 1);SetTileTag(14,43,"LAND_2", 1);SetTileTag(15,43,"LAND_2", 1);SetTileTag(16,43,"SOLIDWALL",1);SetTileTag(21,43,"SOLIDWALL",1);SetTileTag(22,43,"WATER_1", 1);SetTileTag(23,43,"WATER_1", 1);SetTileTag(24,43,"WATER_1", 1);SetTileTag(25,43,"WATER_1", 1);SetTileTag(26,43,"SOLIDWALL",1);SetTileTag(27,43,"WATER_1", 1);SetTileTag(28,43,"WATER_1", 1);SetTileTag(29,43,"WATER_1", 1);SetTileTag(30,43,"WATER_1", 1);SetTileTag(31,43,"WATER_1", 1);SetTileTag(32,43,"SOLIDWALL",1);SetTileTag(33,43,"SOLIDWALL",1);SetTileTag(34,43,"WATER_1", 1);SetTileTag(35,43,"WATER_1", 1);SetTileTag(36,43,"WATER_1", 1);SetTileTag(37,43,"SOLIDWALL",1);SetTileTag(38,43,"LAND_2", 1);SetTileTag(39,43,"LAND_2", 1);SetTileTag(40,43,"LAND_2", 1);SetTileTag(41,43,"LAND_2", 1);SetTileTag(42,43,"SOLIDWALL",1);SetTileTag(43,43,"LAND_2", 1);SetTileTag(44,43,"LAND_2", 1);SetTileTag(45,43,"LAND_2", 1);SetTileTag(46,43,"LAND_2", 1);SetTileTag(47,43,"LAND_2", 1);SetTileTag(48,43,"LAND_2", 1);SetTileTag(49,43,"LAND_2", 1);SetTileTag(50,43,"LAND_2", 1);SetTileTag(51,43,"LAND_2", 1);SetTileTag(52,43,"LAND_2", 1);SetTileTag(53,43,"LAND_2", 1);SetTileTag(54,43,"LAND_2", 1);SetTileTag(55,43,"SOLIDWALL",1);
+		SetTileTag(2,42,"SOLIDWALL",1);SetTileTag(3,42,"LAND_2", 1);SetTileTag(4,42,"LAND_2", 1);SetTileTag(5,42,"LAND_2", 1);SetTileTag(6,42,"LAND_2", 1);SetTileTag(7,42,"LAND_2", 1);SetTileTag(8,42,"LAND_2", 1);SetTileTag(9,42,"LAND_2", 1);SetTileTag(10,42,"LAND_2", 1);SetTileTag(11,42,"LAND_2", 1);SetTileTag(12,42,"SOLIDWALL",1);SetTileTag(13,42,"LAND_2", 1);SetTileTag(14,42,"LAND_2", 1);SetTileTag(15,42,"LAND_2", 1);SetTileTag(16,42,"SOLIDWALL",1);SetTileTag(20,42,"SOLIDWALL",1);SetTileTag(21,42,"WATER_1", 1);SetTileTag(22,42,"WATER_1", 1);SetTileTag(23,42,"WATER_1", 1);SetTileTag(24,42,"WATER_1", 1);SetTileTag(25,42,"WATER_1", 1);SetTileTag(26,42,"WATER_1", 1);SetTileTag(27,42,"WATER_1", 1);SetTileTag(28,42,"WATER_1", 1);SetTileTag(29,42,"WATER_1", 1);SetTileTag(30,42,"SOLIDWALL",1);SetTileTag(31,42,"SOLIDWALL",1);SetTileTag(32,42,"SOLIDWALL",1);SetTileTag(33,42,"SOLIDWALL",1);SetTileTag(34,42,"SOLIDWALL",1);SetTileTag(35,42,"WATER_1", 1);SetTileTag(36,42,"WATER_1", 1);SetTileTag(37,42,"WATER_1", 1);SetTileTag(38,42,"LAND_2", 1);SetTileTag(39,42,"LAND_2", 1);SetTileTag(40,42,"LAND_2", 1);SetTileTag(41,42,"LAND_2", 1);SetTileTag(42,42,"SOLIDWALL",1);SetTileTag(43,42,"LAND_2", 1);SetTileTag(44,42,"LAND_2", 1);SetTileTag(45,42,"LAND_2", 1);SetTileTag(46,42,"LAND_2", 1);SetTileTag(47,42,"LAND_2", 1);SetTileTag(48,42,"LAND_2", 1);SetTileTag(49,42,"LAND_2", 1);SetTileTag(50,42,"SOLIDWALL",1);SetTileTag(51,42,"LAND_2", 1);SetTileTag(52,42,"LAND_2", 1);SetTileTag(53,42,"LAND_2", 1);SetTileTag(54,42,"LAND_2", 1);SetTileTag(55,42,"SOLIDWALL",1);
+		SetTileTag(3,41,"SOLIDWALL",1);SetTileTag(4,41,"SOLIDWALL",1);SetTileTag(5,41,"SOLIDWALL",1);SetTileTag(6,41,"SOLIDWALL",1);SetTileTag(7,41,"SOLIDWALL",1);SetTileTag(8,41,"SOLIDWALL",1);SetTileTag(9,41,"SOLIDWALL",1);SetTileTag(10,41,"SOLIDWALL",1);SetTileTag(11,41,"SOLIDWALL",1);SetTileTag(12,41,"SOLIDWALL",1);SetTileTag(13,41,"LAND_2", 1);SetTileTag(14,41,"LAND_2", 1);SetTileTag(15,41,"LAND_2", 1);SetTileTag(16,41,"SOLIDWALL",1);SetTileTag(20,41,"SOLIDWALL",1);SetTileTag(21,41,"WATER_1", 1);SetTileTag(22,41,"WATER_1", 1);SetTileTag(23,41,"WATER_1", 1);SetTileTag(24,41,"WATER_1", 1);SetTileTag(25,41,"WATER_1", 1);SetTileTag(26,41,"WATER_1", 1);SetTileTag(27,41,"WATER_1", 1);SetTileTag(28,41,"SOLIDWALL",1);SetTileTag(29,41,"SOLIDWALL",1);SetTileTag(31,41,"SOLIDWALL",1);SetTileTag(32,41,"WATER_1", 1);SetTileTag(33,41,"WATER_1", 1);SetTileTag(34,41,"WATER_1", 1);SetTileTag(35,41,"WATER_1", 1);SetTileTag(36,41,"WATER_1", 1);SetTileTag(37,41,"WATER_1", 1);SetTileTag(38,41,"WATER_1", 1);SetTileTag(39,41,"WATER_1", 1);SetTileTag(40,41,"SOLIDWALL",1);SetTileTag(41,41,"SOLIDWALL",1);SetTileTag(42,41,"SOLIDWALL",1);SetTileTag(43,41,"SOLIDWALL",1);SetTileTag(44,41,"SOLIDWALL",1);SetTileTag(45,41,"SOLIDWALL",1);SetTileTag(46,41,"SOLIDWALL",1);SetTileTag(47,41,"SOLIDWALL",1);SetTileTag(48,41,"SOLIDWALL",1);SetTileTag(49,41,"LAND_2", 1);SetTileTag(50,41,"LAND_2", 1);SetTileTag(51,41,"LAND_2", 1);SetTileTag(52,41,"SOLIDWALL",1);SetTileTag(53,41,"SOLIDWALL",1);SetTileTag(54,41,"LAND_2", 1);SetTileTag(55,41,"SOLIDWALL",1);
+		SetTileTag(3,40,"SOLIDWALL",1);SetTileTag(4,40,"SOLIDWALL",1);SetTileTag(5,40,"SOLIDWALL",1);SetTileTag(6,40,"SOLIDWALL",1);SetTileTag(7,40,"SOLIDWALL",1);SetTileTag(9,40,"SOLIDWALL",1);SetTileTag(10,40,"SOLIDWALL",1);SetTileTag(11,40,"SOLIDWALL",1);SetTileTag(12,40,"SOLIDWALL",1);SetTileTag(13,40,"LAND_2", 1);SetTileTag(14,40,"LAND_2", 1);SetTileTag(15,40,"LAND_2", 1);SetTileTag(16,40,"SOLIDWALL",1);SetTileTag(20,40,"SOLIDWALL",1);SetTileTag(21,40,"WATER_1", 1);SetTileTag(22,40,"WATER_1", 1);SetTileTag(23,40,"SOLIDWALL",1);SetTileTag(24,40,"SOLIDWALL",1);SetTileTag(25,40,"SOLIDWALL",1);SetTileTag(26,40,"SOLIDWALL",1);SetTileTag(27,40,"SOLIDWALL",1);SetTileTag(29,40,"SOLIDWALL",1);SetTileTag(30,40,"SOLIDWALL",1);SetTileTag(31,40,"WATER_1", 1);SetTileTag(32,40,"WATER_1", 1);SetTileTag(33,40,"WATER_1", 1);SetTileTag(34,40,"WATER_1", 1);SetTileTag(35,40,"WATER_1", 1);SetTileTag(36,40,"WATER_1", 1);SetTileTag(37,40,"WATER_1", 1);SetTileTag(38,40,"WATER_1", 1);SetTileTag(39,40,"WATER_1", 1);SetTileTag(40,40,"WATER_1", 1);SetTileTag(41,40,"SOLIDWALL",1);SetTileTag(42,40,"WATER_1", 1);SetTileTag(43,40,"WATER_1", 1);SetTileTag(44,40,"WATER_1", 1);SetTileTag(45,40,"SOLIDWALL",1);SetTileTag(48,40,"SOLIDWALL",1);SetTileTag(49,40,"LAND_2", 1);SetTileTag(50,40,"LAND_2", 1);SetTileTag(51,40,"LAND_2", 1);SetTileTag(52,40,"SOLIDWALL",1);SetTileTag(53,40,"SOLIDWALL",1);SetTileTag(54,40,"LAND_2", 1);SetTileTag(55,40,"SOLIDWALL",1);
+		SetTileTag(2,39,"SOLIDWALL",1);SetTileTag(3,39,"LAND_2", 1);SetTileTag(4,39,"LAND_2", 1);SetTileTag(5,39,"LAND_2", 1);SetTileTag(6,39,"LAND_2", 1);SetTileTag(7,39,"LAND_2", 1);SetTileTag(8,39,"SOLIDWALL",1);SetTileTag(9,39,"LAND_2", 1);SetTileTag(10,39,"LAND_2", 1);SetTileTag(11,39,"LAND_2", 1);SetTileTag(12,39,"SOLIDWALL",1);SetTileTag(13,39,"LAND_2", 1);SetTileTag(14,39,"LAND_2", 1);SetTileTag(15,39,"LAND_2", 1);SetTileTag(16,39,"SOLIDWALL",1);SetTileTag(19,39,"SOLIDWALL",1);SetTileTag(20,39,"WATER_1", 1);SetTileTag(21,39,"WATER_1", 1);SetTileTag(22,39,"WATER_1", 1);SetTileTag(23,39,"WATER_1", 1);SetTileTag(24,39,"SOLIDWALL",1);SetTileTag(25,39,"SOLIDWALL",1);SetTileTag(26,39,"SOLIDWALL",1);SetTileTag(27,39,"SOLIDWALL",1);SetTileTag(28,39,"SOLIDWALL",1);SetTileTag(29,39,"WATER_1", 1);SetTileTag(30,39,"WATER_1", 1);SetTileTag(31,39,"WATER_1", 1);SetTileTag(32,39,"WATER_1", 1);SetTileTag(33,39,"WATER_1", 1);SetTileTag(34,39,"SOLIDWALL",1);SetTileTag(35,39,"SOLIDWALL",1);SetTileTag(36,39,"SOLIDWALL",1);SetTileTag(37,39,"SOLIDWALL",1);SetTileTag(38,39,"WATER_1", 1);SetTileTag(39,39,"WATER_1", 1);SetTileTag(40,39,"WATER_1", 1);SetTileTag(41,39,"WATER_1", 1);SetTileTag(42,39,"WATER_1", 1);SetTileTag(43,39,"WATER_1", 1);SetTileTag(44,39,"WATER_1", 1);SetTileTag(45,39,"WATER_1", 1);SetTileTag(46,39,"SOLIDWALL",1);SetTileTag(47,39,"SOLIDWALL",1);SetTileTag(48,39,"SOLIDWALL",1);SetTileTag(49,39,"SOLIDWALL",1);SetTileTag(50,39,"SOLIDWALL",1);SetTileTag(51,39,"SOLIDWALL",1);SetTileTag(52,39,"SOLIDWALL",1);SetTileTag(53,39,"LAND_2", 1);SetTileTag(54,39,"LAND_2", 1);SetTileTag(55,39,"LAND_2", 1);SetTileTag(56,39,"SOLIDWALL",1);SetTileTag(57,39,"SOLIDWALL",1);SetTileTag(58,39,"SOLIDWALL",1);SetTileTag(59,39,"SOLIDWALL",1);SetTileTag(60,39,"SOLIDWALL",1);SetTileTag(61,39,"SOLIDWALL",1);
+		SetTileTag(2,38,"SOLIDWALL",1);SetTileTag(3,38,"LAND_2", 1);SetTileTag(4,38,"LAND_2", 1);SetTileTag(5,38,"LAND_2", 1);SetTileTag(6,38,"LAND_2", 1);SetTileTag(7,38,"LAND_2", 1);SetTileTag(8,38,"LAND_2", 1);SetTileTag(9,38,"LAND_2", 1);SetTileTag(10,38,"LAND_2", 1);SetTileTag(11,38,"LAND_2", 1);SetTileTag(12,38,"SOLIDWALL",1);SetTileTag(13,38,"LAND_2", 1);SetTileTag(14,38,"LAND_2", 1);SetTileTag(15,38,"LAND_2", 1);SetTileTag(16,38,"SOLIDWALL",1);SetTileTag(17,38,"SOLIDWALL",1);SetTileTag(18,38,"SOLIDWALL",1);SetTileTag(19,38,"SOLIDWALL",1);SetTileTag(20,38,"WATER_1", 1);SetTileTag(21,38,"WATER_1", 1);SetTileTag(22,38,"WATER_1", 1);SetTileTag(23,38,"WATER_1", 1);SetTileTag(24,38,"WATER_1", 1);SetTileTag(25,38,"WATER_1", 1);SetTileTag(26,38,"WATER_1", 1);SetTileTag(27,38,"WATER_1", 1);SetTileTag(28,38,"WATER_1", 1);SetTileTag(29,38,"WATER_1", 1);SetTileTag(30,38,"WATER_1", 1);SetTileTag(31,38,"WATER_1", 1);SetTileTag(32,38,"SOLIDWALL",1);SetTileTag(33,38,"SOLIDWALL",1);SetTileTag(34,38,"SOLIDWALL",1);SetTileTag(35,38,"LAND_2", 1);SetTileTag(36,38,"LAND_2", 1);SetTileTag(37,38,"LAND_2", 1);SetTileTag(38,38,"LAND_2", 1);SetTileTag(39,38,"LAND_2", 1);SetTileTag(40,38,"LAND_2", 1);SetTileTag(41,38,"LAND_2", 1);SetTileTag(42,38,"WATER_1", 1);SetTileTag(43,38,"WATER_1", 1);SetTileTag(44,38,"WATER_1", 1);SetTileTag(45,38,"WATER_1", 1);SetTileTag(46,38,"LAND_2", 1);SetTileTag(47,38,"LAND_2", 1);SetTileTag(48,38,"LAND_2", 1);SetTileTag(49,38,"LAND_2", 1);SetTileTag(50,38,"LAND_2", 1);SetTileTag(51,38,"LAND_2", 1);SetTileTag(52,38,"LAND_2", 1);SetTileTag(53,38,"LAND_2", 1);SetTileTag(54,38,"LAND_2", 1);SetTileTag(55,38,"LAND_2", 1);SetTileTag(56,38,"LAND_2", 1);SetTileTag(57,38,"LAND_2", 1);SetTileTag(58,38,"LAND_2", 1);SetTileTag(59,38,"LAND_2", 1);SetTileTag(60,38,"LAND_2", 1);SetTileTag(61,38,"LAND_2", 1);SetTileTag(62,38,"SOLIDWALL",1);
+		SetTileTag(2,37,"SOLIDWALL",1);SetTileTag(3,37,"SOLIDWALL",1);SetTileTag(4,37,"SOLIDWALL",1);SetTileTag(5,37,"LAND_2", 1);SetTileTag(6,37,"SOLIDWALL",1);SetTileTag(7,37,"SOLIDWALL",1);SetTileTag(8,37,"SOLIDWALL",1);SetTileTag(9,37,"SOLIDWALL",1);SetTileTag(10,37,"SOLIDWALL",1);SetTileTag(11,37,"SOLIDWALL",1);SetTileTag(12,37,"SOLIDWALL",1);SetTileTag(13,37,"LAND_2", 1);SetTileTag(14,37,"LAND_2", 1);SetTileTag(15,37,"LAND_2", 1);SetTileTag(16,37,"SOLIDWALL",1);SetTileTag(17,37,"LAND_2", 1);SetTileTag(18,37,"LAND_2", 1);SetTileTag(19,37,"SOLIDWALL",1);SetTileTag(20,37,"SOLIDWALL",1);SetTileTag(21,37,"WATER_1", 1);SetTileTag(22,37,"WATER_1", 1);SetTileTag(23,37,"WATER_1", 1);SetTileTag(24,37,"WATER_1", 1);SetTileTag(25,37,"WATER_1", 1);SetTileTag(26,37,"WATER_1", 1);SetTileTag(27,37,"WATER_1", 1);SetTileTag(28,37,"WATER_1", 1);SetTileTag(29,37,"WATER_1", 1);SetTileTag(30,37,"WATER_1", 1);SetTileTag(31,37,"WATER_1", 1);SetTileTag(32,37,"SOLIDWALL",1);SetTileTag(34,37,"SOLIDWALL",1);SetTileTag(35,37,"LAND_2", 1);SetTileTag(36,37,"LAND_2", 1);SetTileTag(37,37,"LAND_2", 1);SetTileTag(38,37,"LAND_2", 1);SetTileTag(39,37,"LAND_2", 1);SetTileTag(40,37,"LAND_2", 1);SetTileTag(41,37,"LAND_2", 1);SetTileTag(42,37,"WATER_1", 1);SetTileTag(43,37,"WATER_1", 1);SetTileTag(44,37,"WATER_1", 1);SetTileTag(45,37,"WATER_1", 1);SetTileTag(46,37,"LAND_2", 1);SetTileTag(47,37,"LAND_2", 1);SetTileTag(48,37,"LAND_2", 1);SetTileTag(49,37,"LAND_2", 1);SetTileTag(50,37,"LAND_2", 1);SetTileTag(51,37,"LAND_2", 1);SetTileTag(52,37,"LAND_2", 1);SetTileTag(53,37,"SOLIDWALL",1);SetTileTag(54,37,"SOLIDWALL",1);SetTileTag(55,37,"SOLIDWALL",1);SetTileTag(56,37,"LAND_2", 1);SetTileTag(57,37,"LAND_2", 1);SetTileTag(58,37,"LAND_2", 1);SetTileTag(59,37,"LAND_2", 1);SetTileTag(60,37,"LAND_2", 1);SetTileTag(61,37,"LAND_2", 1);SetTileTag(62,37,"SOLIDWALL",1);
+		SetTileTag(1,36,"SOLIDWALL",1);SetTileTag(2,36,"LAND_2", 1);SetTileTag(3,36,"LAND_2", 1);SetTileTag(4,36,"LAND_2", 1);SetTileTag(5,36,"LAND_2", 1);SetTileTag(6,36,"LAND_2", 1);SetTileTag(7,36,"LAND_2", 1);SetTileTag(8,36,"LAND_2", 1);SetTileTag(9,36,"LAND_2", 1);SetTileTag(10,36,"SOLIDWALL",1);SetTileTag(12,36,"SOLIDWALL",1);SetTileTag(13,36,"LAND_2", 1);SetTileTag(14,36,"LAND_2", 1);SetTileTag(15,36,"LAND_2", 1);SetTileTag(16,36,"LAND_2", 1);SetTileTag(17,36,"LAND_2", 1);SetTileTag(18,36,"LAND_2", 1);SetTileTag(19,36,"SOLIDWALL",1);SetTileTag(20,36,"LAND_2", 1);SetTileTag(21,36,"WATER_1", 1);SetTileTag(22,36,"LAND_2", 1);SetTileTag(23,36,"WATER_1", 1);SetTileTag(24,36,"WATER_1", 1);SetTileTag(25,36,"WATER_1", 1);SetTileTag(26,36,"SOLIDWALL",1);SetTileTag(27,36,"SOLIDWALL",1);SetTileTag(28,36,"SOLIDWALL",1);SetTileTag(29,36,"SOLIDWALL",1);SetTileTag(30,36,"SOLIDWALL",1);SetTileTag(31,36,"SOLIDWALL",1);SetTileTag(32,36,"SOLIDWALL",1);SetTileTag(33,36,"SOLIDWALL",1);SetTileTag(34,36,"SOLIDWALL",1);SetTileTag(35,36,"LAND_2", 1);SetTileTag(36,36,"LAND_2", 1);SetTileTag(37,36,"LAND_2", 1);SetTileTag(38,36,"LAND_2", 1);SetTileTag(39,36,"SOLIDWALL",1);SetTileTag(40,36,"SOLIDWALL",1);SetTileTag(41,36,"SOLIDWALL",1);SetTileTag(42,36,"WATER_1", 1);SetTileTag(43,36,"WATER_1", 1);SetTileTag(44,36,"WATER_1", 1);SetTileTag(45,36,"WATER_1", 1);SetTileTag(46,36,"SOLIDWALL",1);SetTileTag(47,36,"SOLIDWALL",1);SetTileTag(48,36,"SOLIDWALL",1);SetTileTag(49,36,"SOLIDWALL",1);SetTileTag(50,36,"SOLIDWALL",1);SetTileTag(51,36,"SOLIDWALL",1);SetTileTag(52,36,"LAND_2", 1);SetTileTag(53,36,"SOLIDWALL",1);SetTileTag(54,36,"SOLIDWALL",1);SetTileTag(55,36,"SOLIDWALL",1);SetTileTag(56,36,"LAND_2", 1);SetTileTag(57,36,"SOLIDWALL",1);SetTileTag(58,36,"SOLIDWALL",1);SetTileTag(59,36,"SOLIDWALL",1);SetTileTag(60,36,"SOLIDWALL",1);SetTileTag(61,36,"SOLIDWALL",1);
+		SetTileTag(1,35,"SOLIDWALL",1);SetTileTag(2,35,"LAND_2", 1);SetTileTag(3,35,"SOLIDWALL",1);SetTileTag(4,35,"SOLIDWALL",1);SetTileTag(5,35,"LAND_2", 1);SetTileTag(6,35,"SOLIDWALL",1);SetTileTag(7,35,"SOLIDWALL",1);SetTileTag(8,35,"SOLIDWALL",1);SetTileTag(9,35,"LAND_2", 1);SetTileTag(10,35,"SOLIDWALL",1);SetTileTag(11,35,"SOLIDWALL",1);SetTileTag(12,35,"SOLIDWALL",1);SetTileTag(13,35,"LAND_2", 1);SetTileTag(14,35,"LAND_2", 1);SetTileTag(15,35,"LAND_2", 1);SetTileTag(16,35,"LAND_2", 1);SetTileTag(17,35,"LAND_2", 1);SetTileTag(18,35,"SOLIDWALL",1);SetTileTag(19,35,"SOLIDWALL",1);SetTileTag(20,35,"LAND_2", 1);SetTileTag(21,35,"SOLIDWALL",1);SetTileTag(22,35,"SOLIDWALL",1);SetTileTag(23,35,"SOLIDWALL",1);SetTileTag(24,35,"SOLIDWALL",1);SetTileTag(25,35,"SOLIDWALL",1);SetTileTag(26,35,"SOLIDWALL",1);SetTileTag(27,35,"SOLIDWALL",1);SetTileTag(28,35,"LAND_2", 1);SetTileTag(29,35,"LAND_2", 1);SetTileTag(30,35,"LAND_2", 1);SetTileTag(31,35,"LAND_2", 1);SetTileTag(32,35,"LAND_2", 1);SetTileTag(33,35,"LAND_2", 1);SetTileTag(34,35,"LAND_2", 1);SetTileTag(35,35,"LAND_2", 1);SetTileTag(36,35,"LAND_2", 1);SetTileTag(37,35,"LAND_2", 1);SetTileTag(38,35,"SOLIDWALL",1);SetTileTag(42,35,"SOLIDWALL",1);SetTileTag(43,35,"WATER_1", 1);SetTileTag(44,35,"WATER_1", 1);SetTileTag(45,35,"SOLIDWALL",1);SetTileTag(50,35,"SOLIDWALL",1);SetTileTag(51,35,"LAND_2", 1);SetTileTag(52,35,"LAND_2", 1);SetTileTag(53,35,"SOLIDWALL",1);SetTileTag(54,35,"LAND_2", 1);SetTileTag(55,35,"SOLIDWALL",1);SetTileTag(56,35,"LAND_2", 1);SetTileTag(57,35,"LAND_2", 1);SetTileTag(58,35,"SOLIDWALL",1);
+		SetTileTag(1,34,"SOLIDWALL",1);SetTileTag(2,34,"LAND_2", 1);SetTileTag(3,34,"LAND_2", 1);SetTileTag(4,34,"SOLIDWALL",1);SetTileTag(5,34,"LAND_2", 1);SetTileTag(6,34,"SOLIDWALL",1);SetTileTag(7,34,"LAND_2", 1);SetTileTag(8,34,"LAND_2", 1);SetTileTag(9,34,"LAND_2", 1);SetTileTag(10,34,"LAND_2", 1);SetTileTag(11,34,"LAND_2", 1);SetTileTag(12,34,"SOLIDWALL",1);SetTileTag(13,34,"SOLIDWALL",1);SetTileTag(14,34,"SOLIDWALL",1);SetTileTag(15,34,"LAND_2", 1);SetTileTag(16,34,"SOLIDWALL",1);SetTileTag(17,34,"SOLIDWALL",1);SetTileTag(18,34,"SOLIDWALL",1);SetTileTag(19,34,"SOLIDWALL",1);SetTileTag(20,34,"LAND_2", 1);SetTileTag(21,34,"LAND_2", 1);SetTileTag(22,34,"LAND_2", 1);SetTileTag(23,34,"LAND_2", 1);SetTileTag(24,34,"LAND_2", 1);SetTileTag(25,34,"LAND_2", 1);SetTileTag(26,34,"LAND_2", 1);SetTileTag(27,34,"LAND_2", 1);SetTileTag(28,34,"LAND_2", 1);SetTileTag(29,34,"LAND_2", 1);SetTileTag(30,34,"SOLIDWALL",1);SetTileTag(31,34,"SOLIDWALL",1);SetTileTag(32,34,"SOLIDWALL",1);SetTileTag(33,34,"SOLIDWALL",1);SetTileTag(34,34,"LAND_2", 1);SetTileTag(35,34,"LAND_2", 1);SetTileTag(36,34,"LAND_2", 1);SetTileTag(37,34,"LAND_2", 1);SetTileTag(38,34,"SOLIDWALL",1);SetTileTag(42,34,"SOLIDWALL",1);SetTileTag(43,34,"WATER_1", 1);SetTileTag(44,34,"WATER_1", 1);SetTileTag(45,34,"SOLIDWALL",1);SetTileTag(50,34,"SOLIDWALL",1);SetTileTag(51,34,"LAND_2", 1);SetTileTag(52,34,"LAND_2", 1);SetTileTag(53,34,"SOLIDWALL",1);SetTileTag(54,34,"LAND_2", 1);SetTileTag(55,34,"SOLIDWALL",1);SetTileTag(56,34,"LAND_2", 1);SetTileTag(57,34,"LAND_2", 1);SetTileTag(58,34,"SOLIDWALL",1);
+		SetTileTag(1,33,"SOLIDWALL",1);SetTileTag(2,33,"LAND_2", 1);SetTileTag(3,33,"LAND_2", 1);SetTileTag(4,33,"SOLIDWALL",1);SetTileTag(5,33,"LAND_2", 1);SetTileTag(6,33,"SOLIDWALL",1);SetTileTag(7,33,"SOLIDWALL",1);SetTileTag(8,33,"LAND_2", 1);SetTileTag(9,33,"LAND_2", 1);SetTileTag(10,33,"LAND_2", 1);SetTileTag(11,33,"LAND_2", 1);SetTileTag(12,33,"SOLIDWALL",1);SetTileTag(13,33,"LAND_2", 1);SetTileTag(14,33,"LAND_2", 1);SetTileTag(15,33,"LAND_2", 1);SetTileTag(16,33,"LAND_2", 1);SetTileTag(17,33,"LAND_2", 1);SetTileTag(18,33,"LAND_2", 1);SetTileTag(19,33,"LAND_2", 1);SetTileTag(20,33,"LAND_2", 1);SetTileTag(21,33,"LAND_2", 1);SetTileTag(22,33,"LAND_2", 1);SetTileTag(23,33,"LAND_2", 1);SetTileTag(24,33,"LAND_2", 1);SetTileTag(25,33,"LAND_2", 1);SetTileTag(26,33,"LAND_2", 1);SetTileTag(27,33,"LAND_2", 1);SetTileTag(28,33,"LAND_2", 1);SetTileTag(29,33,"SOLIDWALL",1);SetTileTag(30,33,"LAND_6", 1);SetTileTag(31,33,"LAND_6", 1);SetTileTag(32,33,"LAND_6", 1);SetTileTag(33,33,"LAND_6", 1);SetTileTag(34,33,"SOLIDWALL",1);SetTileTag(35,33,"LAND_2", 1);SetTileTag(36,33,"LAND_2", 1);SetTileTag(37,33,"LAND_2", 1);SetTileTag(38,33,"SOLIDWALL",1);SetTileTag(42,33,"SOLIDWALL",1);SetTileTag(43,33,"WATER_1", 1);SetTileTag(44,33,"WATER_1", 1);SetTileTag(45,33,"SOLIDWALL",1);SetTileTag(50,33,"SOLIDWALL",1);SetTileTag(51,33,"LAND_2", 1);SetTileTag(52,33,"LAND_2", 1);SetTileTag(53,33,"LAND_2", 1);SetTileTag(54,33,"LAND_2", 1);SetTileTag(55,33,"LAND_2", 1);SetTileTag(56,33,"LAND_2", 1);SetTileTag(57,33,"LAND_2", 1);SetTileTag(58,33,"SOLIDWALL",1);
+		SetTileTag(2,32,"SOLIDWALL",1);SetTileTag(3,32,"SOLIDWALL",1);SetTileTag(4,32,"SOLIDWALL",1);SetTileTag(5,32,"LAND_2", 1);SetTileTag(6,32,"SOLIDWALL",1);SetTileTag(7,32,"SOLIDWALL",1);SetTileTag(8,32,"LAND_2", 1);SetTileTag(9,32,"LAND_2", 1);SetTileTag(10,32,"LAND_2", 1);SetTileTag(11,32,"LAND_2", 1);SetTileTag(12,32,"SOLIDWALL",1);SetTileTag(13,32,"LAND_2", 1);SetTileTag(14,32,"LAND_2", 1);SetTileTag(15,32,"LAND_2", 1);SetTileTag(16,32,"LAND_2", 1);SetTileTag(17,32,"LAND_2", 1);SetTileTag(18,32,"LAND_2", 1);SetTileTag(19,32,"LAND_2", 1);SetTileTag(20,32,"LAND_2", 1);SetTileTag(21,32,"LAND_2", 1);SetTileTag(22,32,"LAND_2", 1);SetTileTag(23,32,"LAND_2", 1);SetTileTag(24,32,"LAND_2", 1);SetTileTag(25,32,"LAND_2", 1);SetTileTag(26,32,"LAND_2", 1);SetTileTag(27,32,"LAND_2", 1);SetTileTag(28,32,"LAND_2", 1);SetTileTag(29,32,"SOLIDWALL",1);SetTileTag(30,32,"LAND_6", 1);SetTileTag(31,32,"LAND_6", 1);SetTileTag(32,32,"LAND_6", 1);SetTileTag(33,32,"LAND_6", 1);SetTileTag(34,32,"SOLIDWALL",1);SetTileTag(35,32,"LAND_2", 1);SetTileTag(36,32,"LAND_2", 1);SetTileTag(37,32,"LAND_2", 1);SetTileTag(38,32,"SOLIDWALL",1);SetTileTag(42,32,"SOLIDWALL",1);SetTileTag(43,32,"WATER_1", 1);SetTileTag(44,32,"WATER_1", 1);SetTileTag(45,32,"WATER_1", 1);SetTileTag(46,32,"SOLIDWALL",1);SetTileTag(50,32,"SOLIDWALL",1);SetTileTag(51,32,"LAND_2", 1);SetTileTag(52,32,"LAND_2", 1);SetTileTag(53,32,"LAND_2", 1);SetTileTag(54,32,"LAND_2", 1);SetTileTag(55,32,"LAND_2", 1);SetTileTag(56,32,"LAND_2", 1);SetTileTag(57,32,"LAND_2", 1);SetTileTag(58,32,"SOLIDWALL",1);
+		SetTileTag(3,31,"SOLIDWALL",1);SetTileTag(4,31,"LAND_2", 1);SetTileTag(5,31,"LAND_2", 1);SetTileTag(6,31,"LAND_2", 1);SetTileTag(7,31,"SOLIDWALL",1);SetTileTag(8,31,"LAND_2", 1);SetTileTag(9,31,"LAND_2", 1);SetTileTag(10,31,"LAND_2", 1);SetTileTag(11,31,"LAND_2", 1);SetTileTag(12,31,"SOLIDWALL",1);SetTileTag(13,31,"LAND_2", 1);SetTileTag(14,31,"LAND_2", 1);SetTileTag(15,31,"LAND_2", 1);SetTileTag(16,31,"LAND_2", 1);SetTileTag(17,31,"LAND_2", 1);SetTileTag(18,31,"LAND_2", 1);SetTileTag(19,31,"LAND_2", 1);SetTileTag(20,31,"LAND_2", 1);SetTileTag(21,31,"LAND_2", 1);SetTileTag(22,31,"LAND_2", 1);SetTileTag(23,31,"LAND_2", 1);SetTileTag(24,31,"LAND_2", 1);SetTileTag(25,31,"LAND_2", 1);SetTileTag(26,31,"LAND_2", 1);SetTileTag(27,31,"LAND_2", 1);SetTileTag(28,31,"LAND_2", 1);SetTileTag(29,31,"SOLIDWALL",1);SetTileTag(30,31,"LAND_6", 1);SetTileTag(31,31,"LAND_6", 1);SetTileTag(32,31,"LAND_6", 1);SetTileTag(33,31,"LAND_6", 1);SetTileTag(34,31,"SOLIDWALL",1);SetTileTag(35,31,"LAND_2", 1);SetTileTag(36,31,"LAND_2", 1);SetTileTag(37,31,"LAND_2", 1);SetTileTag(38,31,"SOLIDWALL",1);SetTileTag(40,31,"SOLIDWALL",1);SetTileTag(41,31,"SOLIDWALL",1);SetTileTag(42,31,"WATER_1", 1);SetTileTag(43,31,"WATER_1", 1);SetTileTag(44,31,"WATER_1", 1);SetTileTag(45,31,"WATER_1", 1);SetTileTag(46,31,"SOLIDWALL",1);SetTileTag(50,31,"SOLIDWALL",1);SetTileTag(51,31,"LAND_2", 1);SetTileTag(52,31,"LAND_2", 1);SetTileTag(53,31,"LAND_2", 1);SetTileTag(54,31,"LAND_2", 1);SetTileTag(55,31,"LAND_2", 1);SetTileTag(56,31,"LAND_2", 1);SetTileTag(57,31,"LAND_2", 1);SetTileTag(58,31,"SOLIDWALL",1);
+		SetTileTag(3,30,"SOLIDWALL",1);SetTileTag(4,30,"LAND_2", 1);SetTileTag(5,30,"LAND_2", 1);SetTileTag(6,30,"LAND_2", 1);SetTileTag(7,30,"SOLIDWALL",1);SetTileTag(8,30,"SOLIDWALL",1);SetTileTag(9,30,"SOLIDWALL",1);SetTileTag(10,30,"SOLIDWALL",1);SetTileTag(11,30,"SOLIDWALL",1);SetTileTag(12,30,"SOLIDWALL",1);SetTileTag(13,30,"LAND_2", 1);SetTileTag(14,30,"LAND_2", 1);SetTileTag(15,30,"SOLIDWALL",1);SetTileTag(16,30,"SOLIDWALL",1);SetTileTag(17,30,"SOLIDWALL",1);SetTileTag(18,30,"SOLIDWALL",1);SetTileTag(19,30,"SOLIDWALL",1);SetTileTag(20,30,"SOLIDWALL",1);SetTileTag(21,30,"SOLIDWALL",1);SetTileTag(22,30,"SOLIDWALL",1);SetTileTag(23,30,"SOLIDWALL",1);SetTileTag(24,30,"SOLIDWALL",1);SetTileTag(25,30,"SOLIDWALL",1);SetTileTag(26,30,"SOLIDWALL",1);SetTileTag(27,30,"SOLIDWALL",1);SetTileTag(28,30,"LAND_2", 1);SetTileTag(29,30,"SOLIDWALL",1);SetTileTag(30,30,"LAND_6", 1);SetTileTag(31,30,"LAND_6", 1);SetTileTag(32,30,"LAND_6", 1);SetTileTag(33,30,"LAND_6", 1);SetTileTag(34,30,"SOLIDWALL",1);SetTileTag(35,30,"LAND_2", 1);SetTileTag(36,30,"LAND_2", 1);SetTileTag(37,30,"LAND_2", 1);SetTileTag(38,30,"SOLIDWALL",1);SetTileTag(39,30,"SOLIDWALL",1);SetTileTag(40,30,"WATER_1", 1);SetTileTag(41,30,"WATER_1", 1);SetTileTag(42,30,"WATER_1", 1);SetTileTag(43,30,"WATER_1", 1);SetTileTag(44,30,"WATER_1", 1);SetTileTag(45,30,"WATER_1", 1);SetTileTag(46,30,"WATER_1", 1);SetTileTag(47,30,"SOLIDWALL",1);SetTileTag(48,30,"SOLIDWALL",1);SetTileTag(49,30,"SOLIDWALL",1);SetTileTag(50,30,"SOLIDWALL",1);SetTileTag(51,30,"LAND_2", 1);SetTileTag(52,30,"LAND_2", 1);SetTileTag(53,30,"LAND_2", 1);SetTileTag(54,30,"LAND_2", 1);SetTileTag(55,30,"LAND_2", 1);SetTileTag(56,30,"LAND_2", 1);SetTileTag(57,30,"LAND_2", 1);SetTileTag(58,30,"SOLIDWALL",1);
+		SetTileTag(3,29,"SOLIDWALL",1);SetTileTag(4,29,"LAND_2", 1);SetTileTag(5,29,"LAND_2", 1);SetTileTag(6,29,"LAND_2", 1);SetTileTag(7,29,"LAND_2", 1);SetTileTag(8,29,"LAND_2", 1);SetTileTag(9,29,"LAND_2", 1);SetTileTag(10,29,"LAND_2", 1);SetTileTag(11,29,"LAND_2", 1);SetTileTag(12,29,"LAND_2", 1);SetTileTag(13,29,"LAND_2", 1);SetTileTag(14,29,"LAND_2", 1);SetTileTag(15,29,"LAND_2", 1);SetTileTag(16,29,"LAND_2", 1);SetTileTag(17,29,"LAND_2", 1);SetTileTag(18,29,"LAND_2", 1);SetTileTag(19,29,"LAND_2", 1);SetTileTag(20,29,"LAND_2", 1);SetTileTag(21,29,"LAND_2", 1);SetTileTag(22,29,"LAND_2", 1);SetTileTag(23,29,"LAND_2", 1);SetTileTag(24,29,"LAND_2", 1);SetTileTag(25,29,"SOLIDWALL",1);SetTileTag(27,29,"SOLIDWALL",1);SetTileTag(28,29,"LAND_2", 1);SetTileTag(29,29,"LAND_2", 1);SetTileTag(30,29,"SOLIDWALL",1);SetTileTag(31,29,"SOLIDWALL",1);SetTileTag(32,29,"SOLIDWALL",1);SetTileTag(33,29,"SOLIDWALL",1);SetTileTag(34,29,"LAND_2", 1);SetTileTag(35,29,"LAND_2", 1);SetTileTag(36,29,"LAND_2", 1);SetTileTag(37,29,"LAND_2", 1);SetTileTag(38,29,"SOLIDWALL",1);SetTileTag(39,29,"SOLIDWALL",1);SetTileTag(40,29,"WATER_1", 1);SetTileTag(41,29,"WATER_1", 1);SetTileTag(42,29,"WATER_1", 1);SetTileTag(43,29,"WATER_1", 1);SetTileTag(44,29,"SOLIDWALL",1);SetTileTag(45,29,"WATER_1", 1);SetTileTag(46,29,"WATER_1", 1);SetTileTag(47,29,"WATER_1", 1);SetTileTag(48,29,"WATER_1", 1);SetTileTag(49,29,"WATER_1", 1);SetTileTag(50,29,"WATER_1", 1);SetTileTag(51,29,"SOLIDWALL",1);SetTileTag(52,29,"SOLIDWALL",1);SetTileTag(53,29,"SOLIDWALL",1);SetTileTag(54,29,"SOLIDWALL",1);SetTileTag(55,29,"SOLIDWALL",1);SetTileTag(56,29,"SOLIDWALL",1);SetTileTag(57,29,"SOLIDWALL",1);
+		SetTileTag(4,28,"SOLIDWALL",1);SetTileTag(5,28,"LAND_2", 1);SetTileTag(6,28,"SOLIDWALL",1);SetTileTag(7,28,"SOLIDWALL",1);SetTileTag(8,28,"SOLIDWALL",1);SetTileTag(9,28,"SOLIDWALL",1);SetTileTag(10,28,"SOLIDWALL",1);SetTileTag(11,28,"LAND_2", 1);SetTileTag(12,28,"LAND_2", 1);SetTileTag(13,28,"LAND_2", 1);SetTileTag(14,28,"LAND_2", 1);SetTileTag(15,28,"LAND_2", 1);SetTileTag(16,28,"SOLIDWALL",1);SetTileTag(17,28,"SOLIDWALL",1);SetTileTag(18,28,"SOLIDWALL",1);SetTileTag(19,28,"LAND_2", 1);SetTileTag(20,28,"LAND_2", 1);SetTileTag(21,28,"LAND_2", 1);SetTileTag(22,28,"LAND_2", 1);SetTileTag(23,28,"LAND_2", 1);SetTileTag(24,28,"LAND_2", 1);SetTileTag(25,28,"SOLIDWALL",1);SetTileTag(27,28,"SOLIDWALL",1);SetTileTag(28,28,"LAND_2", 1);SetTileTag(29,28,"LAND_2", 1);SetTileTag(30,28,"LAND_2", 1);SetTileTag(31,28,"LAND_2", 1);SetTileTag(32,28,"LAND_2", 1);SetTileTag(33,28,"LAND_2", 1);SetTileTag(34,28,"LAND_2", 1);SetTileTag(35,28,"LAND_2", 1);SetTileTag(36,28,"LAND_2", 1);SetTileTag(37,28,"LAND_2", 1);SetTileTag(38,28,"LAND_2", 1);SetTileTag(39,28,"LAND_2", 1);SetTileTag(40,28,"WATER_1", 1);SetTileTag(41,28,"WATER_1", 1);SetTileTag(42,28,"WATER_1", 1);SetTileTag(43,28,"SOLIDWALL",1);SetTileTag(45,28,"SOLIDWALL",1);SetTileTag(46,28,"SOLIDWALL",1);SetTileTag(47,28,"SOLIDWALL",1);SetTileTag(48,28,"WATER_1", 1);SetTileTag(49,28,"WATER_1", 1);SetTileTag(50,28,"WATER_1", 1);SetTileTag(51,28,"WATER_1", 1);SetTileTag(52,28,"WATER_1", 1);SetTileTag(53,28,"SOLIDWALL",1);
+		SetTileTag(4,27,"SOLIDWALL",1);SetTileTag(5,27,"LAND_2", 1);SetTileTag(6,27,"SOLIDWALL",1);SetTileTag(8,27,"SOLIDWALL",1);SetTileTag(9,27,"WATER_1", 1);SetTileTag(10,27,"WATER_1", 1);SetTileTag(11,27,"WATER_1", 1);SetTileTag(12,27,"WATER_1", 1);SetTileTag(13,27,"WATER_1", 1);SetTileTag(14,27,"WATER_1", 1);SetTileTag(15,27,"WATER_1", 1);SetTileTag(16,27,"WATER_1", 1);SetTileTag(17,27,"SOLIDWALL",1);SetTileTag(18,27,"SOLIDWALL",1);SetTileTag(19,27,"LAND_2", 1);SetTileTag(20,27,"LAND_2", 1);SetTileTag(21,27,"LAND_2", 1);SetTileTag(22,27,"LAND_2", 1);SetTileTag(23,27,"LAND_2", 1);SetTileTag(24,27,"LAND_2", 1);SetTileTag(25,27,"SOLIDWALL",1);SetTileTag(28,27,"SOLIDWALL",1);SetTileTag(29,27,"SOLIDWALL",1);SetTileTag(30,27,"SOLIDWALL",1);SetTileTag(31,27,"SOLIDWALL",1);SetTileTag(32,27,"SOLIDWALL",1);SetTileTag(33,27,"SOLIDWALL",1);SetTileTag(34,27,"SOLIDWALL",1);SetTileTag(35,27,"LAND_2", 1);SetTileTag(36,27,"LAND_2", 1);SetTileTag(37,27,"LAND_2", 1);SetTileTag(38,27,"LAND_2", 1);SetTileTag(39,27,"LAND_2", 1);SetTileTag(40,27,"WATER_1", 1);SetTileTag(41,27,"WATER_1", 1);SetTileTag(42,27,"WATER_1", 1);SetTileTag(43,27,"SOLIDWALL",1);SetTileTag(48,27,"SOLIDWALL",1);SetTileTag(49,27,"SOLIDWALL",1);SetTileTag(50,27,"SOLIDWALL",1);SetTileTag(51,27,"WATER_1", 1);SetTileTag(52,27,"WATER_1", 1);SetTileTag(53,27,"WATER_1", 1);SetTileTag(54,27,"SOLIDWALL",1);
+		SetTileTag(2,26,"SOLIDWALL",1);SetTileTag(3,26,"SOLIDWALL",1);SetTileTag(4,26,"SOLIDWALL",1);SetTileTag(5,26,"LAND_2", 1);SetTileTag(6,26,"SOLIDWALL",1);SetTileTag(7,26,"SOLIDWALL",1);SetTileTag(8,26,"WATER_1", 1);SetTileTag(9,26,"WATER_1", 1);SetTileTag(10,26,"WATER_1", 1);SetTileTag(11,26,"WATER_1", 1);SetTileTag(12,26,"WATER_1", 1);SetTileTag(13,26,"WATER_1", 1);SetTileTag(14,26,"WATER_1", 1);SetTileTag(15,26,"WATER_1", 1);SetTileTag(16,26,"WATER_1", 1);SetTileTag(17,26,"WATER_1", 1);SetTileTag(18,26,"WATER_1", 1);SetTileTag(19,26,"SOLIDWALL",1);SetTileTag(20,26,"SOLIDWALL",1);SetTileTag(21,26,"SOLIDWALL",1);SetTileTag(22,26,"LAND_2", 1);SetTileTag(23,26,"SOLIDWALL",1);SetTileTag(24,26,"SOLIDWALL",1);SetTileTag(25,26,"SOLIDWALL",1);SetTileTag(26,26,"SOLIDWALL",1);SetTileTag(27,26,"SOLIDWALL",1);SetTileTag(28,26,"LAND_2", 1);SetTileTag(29,26,"LAND_2", 1);SetTileTag(30,26,"LAND_2", 1);SetTileTag(31,26,"SOLIDWALL",1);SetTileTag(34,26,"SOLIDWALL",1);SetTileTag(35,26,"SOLIDWALL",1);SetTileTag(36,26,"LAND_2", 1);SetTileTag(37,26,"LAND_2", 1);SetTileTag(38,26,"LAND_2", 1);SetTileTag(39,26,"WATER_1", 1);SetTileTag(40,26,"WATER_1", 1);SetTileTag(41,26,"WATER_1", 1);SetTileTag(42,26,"SOLIDWALL",1);SetTileTag(51,26,"SOLIDWALL",1);SetTileTag(52,26,"WATER_1", 1);SetTileTag(53,26,"WATER_1", 1);SetTileTag(54,26,"SOLIDWALL",1);
+		SetTileTag(1,25,"SOLIDWALL",1);SetTileTag(2,25,"LAND_2", 1);SetTileTag(3,25,"LAND_2", 1);SetTileTag(4,25,"LAND_2", 1);SetTileTag(5,25,"LAND_2", 1);SetTileTag(6,25,"SOLIDWALL",1);SetTileTag(7,25,"SOLIDWALL",1);SetTileTag(8,25,"WATER_1", 1);SetTileTag(9,25,"WATER_1", 1);SetTileTag(10,25,"LAND_4", 1);SetTileTag(11,25,"LAND_4", 1);SetTileTag(12,25,"LAND_4", 1);SetTileTag(13,25,"LAND_4", 1);SetTileTag(14,25,"WATER_1", 1);SetTileTag(15,25,"WATER_1", 1);SetTileTag(16,25,"WATER_1", 1);SetTileTag(17,25,"WATER_1", 1);SetTileTag(18,25,"WATER_1", 1);SetTileTag(19,25,"SOLIDWALL",1);SetTileTag(21,25,"SOLIDWALL",1);SetTileTag(22,25,"LAND_2", 1);SetTileTag(23,25,"LAND_2", 1);SetTileTag(24,25,"LAND_2", 1);SetTileTag(25,25,"LAND_2", 1);SetTileTag(26,25,"LAND_2", 1);SetTileTag(27,25,"LAND_2", 1);SetTileTag(28,25,"LAND_2", 1);SetTileTag(29,25,"LAND_2", 1);SetTileTag(30,25,"LAND_2", 1);SetTileTag(31,25,"SOLIDWALL",1);SetTileTag(32,25,"SOLIDWALL",1);SetTileTag(33,25,"SOLIDWALL",1);SetTileTag(34,25,"WATER_1", 1);SetTileTag(35,25,"WATER_1", 1);SetTileTag(36,25,"WATER_1", 1);SetTileTag(37,25,"WATER_1", 1);SetTileTag(38,25,"WATER_1", 1);SetTileTag(39,25,"WATER_1", 1);SetTileTag(40,25,"WATER_1", 1);SetTileTag(41,25,"SOLIDWALL",1);SetTileTag(44,25,"SOLIDWALL",1);SetTileTag(45,25,"SOLIDWALL",1);SetTileTag(46,25,"SOLIDWALL",1);SetTileTag(47,25,"SOLIDWALL",1);SetTileTag(48,25,"SOLIDWALL",1);SetTileTag(51,25,"SOLIDWALL",1);SetTileTag(52,25,"WATER_1", 1);SetTileTag(53,25,"WATER_1", 1);SetTileTag(54,25,"SOLIDWALL",1);
+		SetTileTag(1,24,"SOLIDWALL",1);SetTileTag(2,24,"LAND_2", 1);SetTileTag(3,24,"SOLIDWALL",1);SetTileTag(4,24,"LAND_2", 1);SetTileTag(5,24,"LAND_2", 1);SetTileTag(6,24,"SOLIDWALL",1);SetTileTag(7,24,"SOLIDWALL",1);SetTileTag(8,24,"WATER_1", 1);SetTileTag(9,24,"WATER_1", 1);SetTileTag(10,24,"LAND_4", 1);SetTileTag(11,24,"LAND_4", 1);SetTileTag(12,24,"LAND_4", 1);SetTileTag(13,24,"LAND_4", 1);SetTileTag(14,24,"WATER_1", 1);SetTileTag(15,24,"WATER_1", 1);SetTileTag(16,24,"WATER_1", 1);SetTileTag(17,24,"WATER_1", 1);SetTileTag(18,24,"WATER_1", 1);SetTileTag(19,24,"WATER_1", 1);SetTileTag(20,24,"SOLIDWALL",1);SetTileTag(21,24,"SOLIDWALL",1);SetTileTag(22,24,"SOLIDWALL",1);SetTileTag(23,24,"WATER_1", 1);SetTileTag(24,24,"WATER_1", 1);SetTileTag(25,24,"WATER_1", 1);SetTileTag(26,24,"WATER_1", 1);SetTileTag(27,24,"WATER_1", 1);SetTileTag(28,24,"WATER_1", 1);SetTileTag(29,24,"WATER_1", 1);SetTileTag(30,24,"SOLIDWALL",1);SetTileTag(31,24,"SOLIDWALL",1);SetTileTag(32,24,"WATER_1", 1);SetTileTag(33,24,"WATER_1", 1);SetTileTag(34,24,"WATER_1", 1);SetTileTag(35,24,"WATER_1", 1);SetTileTag(36,24,"WATER_1", 1);SetTileTag(37,24,"WATER_1", 1);SetTileTag(38,24,"WATER_1", 1);SetTileTag(39,24,"WATER_1", 1);SetTileTag(40,24,"SOLIDWALL",1);SetTileTag(43,24,"SOLIDWALL",1);SetTileTag(44,24,"LAND_7", 1);SetTileTag(45,24,"LAND_7", 1);SetTileTag(46,24,"LAND_7", 1);SetTileTag(47,24,"LAND_7", 1);SetTileTag(48,24,"LAND_7", 1);SetTileTag(49,24,"SOLIDWALL",1);SetTileTag(51,24,"SOLIDWALL",1);SetTileTag(52,24,"WATER_1", 1);SetTileTag(53,24,"WATER_1", 1);SetTileTag(54,24,"SOLIDWALL",1);
+		SetTileTag(1,23,"SOLIDWALL",1);SetTileTag(2,23,"LAND_2", 1);SetTileTag(3,23,"LAND_2", 1);SetTileTag(4,23,"LAND_2", 1);SetTileTag(5,23,"LAND_2", 1);SetTileTag(6,23,"SOLIDWALL",1);SetTileTag(7,23,"SOLIDWALL",1);SetTileTag(8,23,"WATER_1", 1);SetTileTag(9,23,"WATER_1", 1);SetTileTag(10,23,"WATER_1", 1);SetTileTag(11,23,"WATER_1", 1);SetTileTag(12,23,"WATER_1", 1);SetTileTag(13,23,"WATER_1", 1);SetTileTag(14,23,"WATER_1", 1);SetTileTag(15,23,"WATER_1", 1);SetTileTag(16,23,"WATER_1", 1);SetTileTag(17,23,"WATER_1", 1);SetTileTag(18,23,"WATER_1", 1);SetTileTag(19,23,"WATER_1", 1);SetTileTag(20,23,"WATER_1", 1);SetTileTag(21,23,"WATER_1", 1);SetTileTag(22,23,"WATER_1", 1);SetTileTag(23,23,"WATER_1", 1);SetTileTag(24,23,"WATER_1", 1);SetTileTag(25,23,"WATER_1", 1);SetTileTag(26,23,"WATER_1", 1);SetTileTag(27,23,"WATER_1", 1);SetTileTag(28,23,"WATER_1", 1);SetTileTag(29,23,"WATER_1", 1);SetTileTag(30,23,"WATER_1", 1);SetTileTag(31,23,"WATER_1", 1);SetTileTag(32,23,"WATER_1", 1);SetTileTag(33,23,"WATER_1", 1);SetTileTag(34,23,"WATER_1", 1);SetTileTag(35,23,"WATER_1", 1);SetTileTag(36,23,"LAND_2", 1);SetTileTag(37,23,"LAND_2", 1);SetTileTag(38,23,"LAND_2", 1);SetTileTag(39,23,"SOLIDWALL",1);SetTileTag(42,23,"SOLIDWALL",1);SetTileTag(43,23,"LAND_7", 1);SetTileTag(44,23,"LAND_7", 1);SetTileTag(45,23,"LAND_7", 1);SetTileTag(46,23,"LAND_7", 1);SetTileTag(47,23,"LAND_7", 1);SetTileTag(48,23,"LAND_7", 1);SetTileTag(49,23,"LAND_7", 1);SetTileTag(50,23,"SOLIDWALL",1);SetTileTag(51,23,"SOLIDWALL",1);SetTileTag(52,23,"WATER_1", 1);SetTileTag(53,23,"WATER_1", 1);SetTileTag(54,23,"WATER_1", 1);SetTileTag(55,23,"SOLIDWALL",1);
+		SetTileTag(1,22,"SOLIDWALL",1);SetTileTag(2,22,"LAND_2", 1);SetTileTag(3,22,"SOLIDWALL",1);SetTileTag(4,22,"LAND_2", 1);SetTileTag(5,22,"LAND_2", 1);SetTileTag(6,22,"SOLIDWALL",1);SetTileTag(8,22,"SOLIDWALL",1);SetTileTag(9,22,"WATER_1", 1);SetTileTag(10,22,"WATER_1", 1);SetTileTag(11,22,"WATER_1", 1);SetTileTag(12,22,"WATER_1", 1);SetTileTag(13,22,"WATER_1", 1);SetTileTag(14,22,"WATER_1", 1);SetTileTag(15,22,"WATER_1", 1);SetTileTag(16,22,"SOLIDWALL",1);SetTileTag(17,22,"WATER_1", 1);SetTileTag(18,22,"WATER_1", 1);SetTileTag(19,22,"WATER_1", 1);SetTileTag(20,22,"WATER_1", 1);SetTileTag(21,22,"WATER_1", 1);SetTileTag(22,22,"WATER_1", 1);SetTileTag(23,22,"WATER_1", 1);SetTileTag(24,22,"WATER_1", 1);SetTileTag(25,22,"WATER_1", 1);SetTileTag(26,22,"LAND_5", 1);SetTileTag(27,22,"LAND_5", 1);SetTileTag(28,22,"WATER_1", 1);SetTileTag(29,22,"WATER_1", 1);SetTileTag(30,22,"WATER_1", 1);SetTileTag(31,22,"WATER_1", 1);SetTileTag(32,22,"WATER_1", 1);SetTileTag(33,22,"WATER_1", 1);SetTileTag(34,22,"WATER_1", 1);SetTileTag(35,22,"WATER_1", 1);SetTileTag(36,22,"LAND_2", 1);SetTileTag(37,22,"LAND_2", 1);SetTileTag(38,22,"LAND_2", 1);SetTileTag(39,22,"SOLIDWALL",1);SetTileTag(42,22,"SOLIDWALL",1);SetTileTag(43,22,"LAND_7", 1);SetTileTag(44,22,"LAND_7", 1);SetTileTag(45,22,"LAND_7", 1);SetTileTag(46,22,"SOLIDWALL",1);SetTileTag(47,22,"LAND_7", 1);SetTileTag(48,22,"LAND_7", 1);SetTileTag(49,22,"LAND_7", 1);SetTileTag(50,22,"SOLIDWALL",1);SetTileTag(52,22,"SOLIDWALL",1);SetTileTag(53,22,"WATER_1", 1);SetTileTag(54,22,"WATER_1", 1);SetTileTag(55,22,"WATER_1", 1);SetTileTag(56,22,"SOLIDWALL",1);SetTileTag(61,22,"SOLIDWALL",1);
+		SetTileTag(1,21,"SOLIDWALL",1);SetTileTag(2,21,"LAND_2", 1);SetTileTag(3,21,"LAND_2", 1);SetTileTag(4,21,"LAND_2", 1);SetTileTag(5,21,"LAND_2", 1);SetTileTag(6,21,"SOLIDWALL",1);SetTileTag(9,21,"SOLIDWALL",1);SetTileTag(10,21,"SOLIDWALL",1);SetTileTag(11,21,"SOLIDWALL",1);SetTileTag(12,21,"SOLIDWALL",1);SetTileTag(13,21,"SOLIDWALL",1);SetTileTag(14,21,"SOLIDWALL",1);SetTileTag(15,21,"SOLIDWALL",1);SetTileTag(16,21,"WATER_1", 1);SetTileTag(17,21,"WATER_1", 1);SetTileTag(18,21,"WATER_1", 1);SetTileTag(19,21,"WATER_1", 1);SetTileTag(20,21,"WATER_1", 1);SetTileTag(21,21,"WATER_1", 1);SetTileTag(22,21,"SOLIDWALL",1);SetTileTag(23,21,"SOLIDWALL",1);SetTileTag(24,21,"SOLIDWALL",1);SetTileTag(25,21,"SOLIDWALL",1);SetTileTag(26,21,"LAND_5", 1);SetTileTag(27,21,"SOLIDWALL",1);SetTileTag(28,21,"SOLIDWALL",1);SetTileTag(29,21,"SOLIDWALL",1);SetTileTag(30,21,"SOLIDWALL",1);SetTileTag(31,21,"SOLIDWALL",1);SetTileTag(32,21,"SOLIDWALL",1);SetTileTag(33,21,"SOLIDWALL",1);SetTileTag(34,21,"SOLIDWALL",1);SetTileTag(35,21,"SOLIDWALL",1);SetTileTag(36,21,"SOLIDWALL",1);SetTileTag(37,21,"LAND_2", 1);SetTileTag(38,21,"SOLIDWALL",1);SetTileTag(42,21,"SOLIDWALL",1);SetTileTag(43,21,"LAND_7", 1);SetTileTag(44,21,"LAND_7", 1);SetTileTag(45,21,"SOLIDWALL",1);SetTileTag(47,21,"SOLIDWALL",1);SetTileTag(48,21,"LAND_7", 1);SetTileTag(49,21,"LAND_7", 1);SetTileTag(50,21,"SOLIDWALL",1);SetTileTag(53,21,"SOLIDWALL",1);SetTileTag(54,21,"WATER_1", 1);SetTileTag(55,21,"WATER_1", 1);SetTileTag(56,21,"WATER_1", 1);SetTileTag(57,21,"SOLIDWALL",1);SetTileTag(58,21,"SOLIDWALL",1);SetTileTag(59,21,"SOLIDWALL",1);SetTileTag(60,21,"SOLIDWALL",1);SetTileTag(61,21,"WATER_1", 1);SetTileTag(62,21,"SOLIDWALL",1);
+		SetTileTag(1,20,"SOLIDWALL",1);SetTileTag(2,20,"LAND_2", 1);SetTileTag(3,20,"SOLIDWALL",1);SetTileTag(4,20,"LAND_2", 1);SetTileTag(5,20,"LAND_2", 1);SetTileTag(6,20,"SOLIDWALL",1);SetTileTag(7,20,"SOLIDWALL",1);SetTileTag(8,20,"SOLIDWALL",1);SetTileTag(9,20,"SOLIDWALL",1);SetTileTag(10,20,"LAND_2", 1);SetTileTag(11,20,"LAND_2", 1);SetTileTag(12,20,"LAND_2", 1);SetTileTag(13,20,"SOLIDWALL",1);SetTileTag(15,20,"SOLIDWALL",1);SetTileTag(16,20,"WATER_1", 1);SetTileTag(17,20,"WATER_1", 1);SetTileTag(18,20,"WATER_1", 1);SetTileTag(19,20,"WATER_1", 1);SetTileTag(20,20,"SOLIDWALL",1);SetTileTag(21,20,"LAND_2", 1);SetTileTag(22,20,"LAND_2", 1);SetTileTag(23,20,"LAND_2", 1);SetTileTag(24,20,"SOLIDWALL",1);SetTileTag(25,20,"SOLIDWALL",1);SetTileTag(26,20,"LAND_5", 1);SetTileTag(27,20,"LAND_5", 1);SetTileTag(28,20,"SOLIDWALL",1);SetTileTag(29,20,"LAND_2", 1);SetTileTag(30,20,"LAND_2", 1);SetTileTag(31,20,"LAND_2", 1);SetTileTag(32,20,"LAND_2", 1);SetTileTag(33,20,"LAND_2", 1);SetTileTag(34,20,"LAND_2", 1);SetTileTag(35,20,"SOLIDWALL",1);SetTileTag(36,20,"SOLIDWALL",1);SetTileTag(37,20,"LAND_2", 1);SetTileTag(38,20,"SOLIDWALL",1);SetTileTag(42,20,"SOLIDWALL",1);SetTileTag(43,20,"LAND_7", 1);SetTileTag(44,20,"LAND_7", 1);SetTileTag(45,20,"SOLIDWALL",1);SetTileTag(47,20,"SOLIDWALL",1);SetTileTag(48,20,"LAND_7", 1);SetTileTag(49,20,"LAND_7", 1);SetTileTag(50,20,"SOLIDWALL",1);SetTileTag(54,20,"SOLIDWALL",1);SetTileTag(55,20,"WATER_1", 1);SetTileTag(56,20,"WATER_1", 1);SetTileTag(57,20,"WATER_1", 1);SetTileTag(58,20,"WATER_1", 1);SetTileTag(59,20,"WATER_1", 1);SetTileTag(60,20,"WATER_1", 1);SetTileTag(61,20,"WATER_1", 1);SetTileTag(62,20,"SOLIDWALL",1);
+		SetTileTag(1,19,"SOLIDWALL",1);SetTileTag(2,19,"LAND_2", 1);SetTileTag(3,19,"LAND_2", 1);SetTileTag(4,19,"LAND_2", 1);SetTileTag(5,19,"LAND_2", 1);SetTileTag(6,19,"LAND_2", 1);SetTileTag(7,19,"LAND_2", 1);SetTileTag(8,19,"LAND_2", 1);SetTileTag(9,19,"LAND_2", 1);SetTileTag(10,19,"LAND_2", 1);SetTileTag(11,19,"LAND_2", 1);SetTileTag(12,19,"LAND_2", 1);SetTileTag(13,19,"SOLIDWALL",1);SetTileTag(14,19,"SOLIDWALL",1);SetTileTag(15,19,"WATER_1", 1);SetTileTag(16,19,"WATER_1", 1);SetTileTag(17,19,"WATER_1", 1);SetTileTag(18,19,"WATER_1", 1);SetTileTag(19,19,"SOLIDWALL",1);SetTileTag(21,19,"SOLIDWALL",1);SetTileTag(22,19,"LAND_2", 1);SetTileTag(23,19,"LAND_2", 1);SetTileTag(24,19,"LAND_2", 1);SetTileTag(25,19,"SOLIDWALL",1);SetTileTag(26,19,"SOLIDWALL",1);SetTileTag(27,19,"SOLIDWALL",1);SetTileTag(28,19,"LAND_2", 1);SetTileTag(29,19,"LAND_2", 1);SetTileTag(30,19,"LAND_2", 1);SetTileTag(31,19,"WATER_11", 1);SetTileTag(32,19,"WATER_11", 1);SetTileTag(33,19,"LAND_2", 1);SetTileTag(34,19,"LAND_2", 1);SetTileTag(35,19,"SOLIDWALL",1);SetTileTag(36,19,"SOLIDWALL",1);SetTileTag(37,19,"LAND_2", 1);SetTileTag(38,19,"SOLIDWALL",1);SetTileTag(41,19,"SOLIDWALL",1);SetTileTag(42,19,"SOLIDWALL",1);SetTileTag(43,19,"LAND_7", 1);SetTileTag(44,19,"LAND_7", 1);SetTileTag(45,19,"LAND_7", 1);SetTileTag(46,19,"SOLIDWALL",1);SetTileTag(47,19,"LAND_7", 1);SetTileTag(48,19,"LAND_7", 1);SetTileTag(49,19,"LAND_7", 1);SetTileTag(50,19,"SOLIDWALL",1);SetTileTag(51,19,"SOLIDWALL",1);SetTileTag(55,19,"SOLIDWALL",1);SetTileTag(56,19,"SOLIDWALL",1);SetTileTag(57,19,"WATER_1", 1);SetTileTag(58,19,"WATER_1", 1);SetTileTag(59,19,"WATER_1", 1);SetTileTag(60,19,"WATER_1", 1);SetTileTag(61,19,"WATER_1", 1);SetTileTag(62,19,"SOLIDWALL",1);
+		SetTileTag(1,18,"SOLIDWALL",1);SetTileTag(2,18,"LAND_2", 1);SetTileTag(3,18,"SOLIDWALL",1);SetTileTag(4,18,"LAND_2", 1);SetTileTag(5,18,"LAND_2", 1);SetTileTag(6,18,"SOLIDWALL",1);SetTileTag(7,18,"SOLIDWALL",1);SetTileTag(8,18,"SOLIDWALL",1);SetTileTag(9,18,"SOLIDWALL",1);SetTileTag(10,18,"SOLIDWALL",1);SetTileTag(11,18,"SOLIDWALL",1);SetTileTag(12,18,"SOLIDWALL",1);SetTileTag(13,18,"SOLIDWALL",1);SetTileTag(14,18,"WATER_1", 1);SetTileTag(15,18,"WATER_1", 1);SetTileTag(16,18,"WATER_1", 1);SetTileTag(17,18,"WATER_1", 1);SetTileTag(18,18,"WATER_1", 1);SetTileTag(19,18,"SOLIDWALL",1);SetTileTag(20,18,"SOLIDWALL",1);SetTileTag(21,18,"LAND_2", 1);SetTileTag(22,18,"LAND_2", 1);SetTileTag(23,18,"LAND_2", 1);SetTileTag(24,18,"LAND_2", 1);SetTileTag(25,18,"LAND_2", 1);SetTileTag(26,18,"LAND_2", 1);SetTileTag(27,18,"LAND_2", 1);SetTileTag(28,18,"LAND_2", 1);SetTileTag(29,18,"LAND_2", 1);SetTileTag(30,18,"LAND_2", 1);SetTileTag(31,18,"WATER_11", 1);SetTileTag(32,18,"WATER_11", 1);SetTileTag(33,18,"LAND_2", 1);SetTileTag(34,18,"LAND_2", 1);SetTileTag(35,18,"SOLIDWALL",1);SetTileTag(36,18,"SOLIDWALL",1);SetTileTag(37,18,"LAND_2", 1);SetTileTag(38,18,"SOLIDWALL",1);SetTileTag(40,18,"SOLIDWALL",1);SetTileTag(41,18,"LAND_7", 1);SetTileTag(42,18,"SOLIDWALL",1);SetTileTag(43,18,"SOLIDWALL",1);SetTileTag(44,18,"LAND_7", 1);SetTileTag(45,18,"LAND_7", 1);SetTileTag(46,18,"LAND_7", 1);SetTileTag(47,18,"LAND_7", 1);SetTileTag(48,18,"LAND_7", 1);SetTileTag(49,18,"SOLIDWALL",1);SetTileTag(50,18,"SOLIDWALL",1);SetTileTag(51,18,"LAND_7", 1);SetTileTag(52,18,"SOLIDWALL",1);SetTileTag(57,18,"SOLIDWALL",1);SetTileTag(58,18,"LAND_11", 1);SetTileTag(59,18,"SOLIDWALL",1);SetTileTag(60,18,"SOLIDWALL",1);SetTileTag(61,18,"SOLIDWALL",1);
+		SetTileTag(1,17,"SOLIDWALL",1);SetTileTag(2,17,"LAND_2", 1);SetTileTag(3,17,"LAND_2", 1);SetTileTag(4,17,"LAND_2", 1);SetTileTag(5,17,"LAND_2", 1);SetTileTag(6,17,"SOLIDWALL",1);SetTileTag(10,17,"SOLIDWALL",1);SetTileTag(11,17,"WATER_1", 1);SetTileTag(12,17,"WATER_1", 1);SetTileTag(13,17,"WATER_1", 1);SetTileTag(14,17,"WATER_1", 1);SetTileTag(15,17,"WATER_1", 1);SetTileTag(16,17,"WATER_1", 1);SetTileTag(17,17,"WATER_1", 1);SetTileTag(18,17,"SOLIDWALL",1);SetTileTag(21,17,"SOLIDWALL",1);SetTileTag(22,17,"LAND_2", 1);SetTileTag(23,17,"SOLIDWALL",1);SetTileTag(24,17,"LAND_2", 1);SetTileTag(25,17,"LAND_2", 1);SetTileTag(26,17,"LAND_2", 1);SetTileTag(27,17,"LAND_2", 1);SetTileTag(28,17,"LAND_2", 1);SetTileTag(29,17,"LAND_2", 1);SetTileTag(30,17,"LAND_2", 1);SetTileTag(31,17,"LAND_2", 1);SetTileTag(32,17,"LAND_2", 1);SetTileTag(33,17,"LAND_2", 1);SetTileTag(34,17,"LAND_2", 1);SetTileTag(35,17,"SOLIDWALL",1);SetTileTag(36,17,"SOLIDWALL",1);SetTileTag(37,17,"LAND_2", 1);SetTileTag(38,17,"SOLIDWALL",1);SetTileTag(40,17,"SOLIDWALL",1);SetTileTag(41,17,"LAND_7", 1);SetTileTag(42,17,"LAND_7", 1);SetTileTag(43,17,"LAND_7", 1);SetTileTag(44,17,"LAND_7", 1);SetTileTag(45,17,"LAND_7", 1);SetTileTag(46,17,"LAND_7", 1);SetTileTag(47,17,"LAND_7", 1);SetTileTag(48,17,"LAND_7", 1);SetTileTag(49,17,"LAND_7", 1);SetTileTag(50,17,"LAND_7", 1);SetTileTag(51,17,"LAND_7", 1);SetTileTag(52,17,"SOLIDWALL",1);SetTileTag(55,17,"SOLIDWALL",1);SetTileTag(56,17,"SOLIDWALL",1);SetTileTag(57,17,"LAND_11", 1);SetTileTag(58,17,"LAND_11", 1);SetTileTag(59,17,"LAND_11", 1);SetTileTag(60,17,"SOLIDWALL",1);
+		SetTileTag(2,16,"SOLIDWALL",1);SetTileTag(3,16,"SOLIDWALL",1);SetTileTag(4,16,"SOLIDWALL",1);SetTileTag(5,16,"SOLIDWALL",1);SetTileTag(10,16,"SOLIDWALL",1);SetTileTag(11,16,"WATER_1", 1);SetTileTag(12,16,"WATER_1", 1);SetTileTag(13,16,"WATER_1", 1);SetTileTag(14,16,"WATER_1", 1);SetTileTag(15,16,"WATER_1", 1);SetTileTag(16,16,"LAND_2", 1);SetTileTag(17,16,"LAND_2", 1);SetTileTag(18,16,"SOLIDWALL",1);SetTileTag(19,16,"SOLIDWALL",1);SetTileTag(20,16,"SOLIDWALL",1);SetTileTag(21,16,"SOLIDWALL",1);SetTileTag(22,16,"LAND_2", 1);SetTileTag(23,16,"SOLIDWALL",1);SetTileTag(24,16,"SOLIDWALL",1);SetTileTag(25,16,"SOLIDWALL",1);SetTileTag(26,16,"SOLIDWALL",1);SetTileTag(27,16,"SOLIDWALL",1);SetTileTag(28,16,"SOLIDWALL",1);SetTileTag(29,16,"SOLIDWALL",1);SetTileTag(30,16,"SOLIDWALL",1);SetTileTag(31,16,"SOLIDWALL",1);SetTileTag(32,16,"SOLIDWALL",1);SetTileTag(33,16,"SOLIDWALL",1);SetTileTag(34,16,"SOLIDWALL",1);SetTileTag(36,16,"SOLIDWALL",1);SetTileTag(37,16,"LAND_2", 1);SetTileTag(38,16,"SOLIDWALL",1);SetTileTag(40,16,"SOLIDWALL",1);SetTileTag(41,16,"LAND_7", 1);SetTileTag(42,16,"LAND_7", 1);SetTileTag(43,16,"LAND_7", 1);SetTileTag(44,16,"LAND_7", 1);SetTileTag(45,16,"LAND_7", 1);SetTileTag(46,16,"LAND_7", 1);SetTileTag(47,16,"LAND_7", 1);SetTileTag(48,16,"LAND_7", 1);SetTileTag(49,16,"LAND_7", 1);SetTileTag(50,16,"LAND_7", 1);SetTileTag(51,16,"LAND_7", 1);SetTileTag(52,16,"SOLIDWALL",1);SetTileTag(54,16,"SOLIDWALL",1);SetTileTag(55,16,"LAND_11", 1);SetTileTag(56,16,"LAND_11", 1);SetTileTag(57,16,"LAND_11", 1);SetTileTag(58,16,"LAND_11", 1);SetTileTag(59,16,"LAND_11", 1);SetTileTag(60,16,"SOLIDWALL",1);
+		SetTileTag(1,15,"SOLIDWALL",1);SetTileTag(2,15,"LAND_1", 1);SetTileTag(3,15,"LAND_1", 1);SetTileTag(4,15,"SOLIDWALL",1);SetTileTag(8,15,"SOLIDWALL",1);SetTileTag(9,15,"SOLIDWALL",1);SetTileTag(10,15,"WATER_1", 1);SetTileTag(11,15,"WATER_1", 1);SetTileTag(12,15,"WATER_1", 1);SetTileTag(13,15,"WATER_1", 1);SetTileTag(14,15,"WATER_1", 1);SetTileTag(15,15,"LAND_2", 1);SetTileTag(16,15,"LAND_2", 1);SetTileTag(17,15,"LAND_2", 1);SetTileTag(18,15,"LAND_2", 1);SetTileTag(19,15,"LAND_2", 1);SetTileTag(20,15,"LAND_2", 1);SetTileTag(21,15,"LAND_2", 1);SetTileTag(22,15,"LAND_2", 1);SetTileTag(23,15,"LAND_2", 1);SetTileTag(24,15,"LAND_2", 1);SetTileTag(25,15,"LAND_2", 1);SetTileTag(26,15,"LAND_2", 1);SetTileTag(27,15,"LAND_2", 1);SetTileTag(28,15,"LAND_2", 1);SetTileTag(29,15,"LAND_2", 1);SetTileTag(30,15,"LAND_2", 1);SetTileTag(31,15,"LAND_2", 1);SetTileTag(32,15,"LAND_2", 1);SetTileTag(33,15,"LAND_2", 1);SetTileTag(34,15,"SOLIDWALL",1);SetTileTag(36,15,"SOLIDWALL",1);SetTileTag(37,15,"LAND_2", 1);SetTileTag(38,15,"SOLIDWALL",1);SetTileTag(40,15,"SOLIDWALL",1);SetTileTag(41,15,"LAND_7", 1);SetTileTag(42,15,"SOLIDWALL",1);SetTileTag(43,15,"SOLIDWALL",1);SetTileTag(44,15,"SOLIDWALL",1);SetTileTag(45,15,"LAND_7", 1);SetTileTag(46,15,"LAND_7", 1);SetTileTag(47,15,"LAND_7", 1);SetTileTag(48,15,"SOLIDWALL",1);SetTileTag(49,15,"SOLIDWALL",1);SetTileTag(50,15,"SOLIDWALL",1);SetTileTag(51,15,"LAND_7", 1);SetTileTag(52,15,"SOLIDWALL",1);SetTileTag(54,15,"SOLIDWALL",1);SetTileTag(55,15,"LAND_11", 1);SetTileTag(56,15,"SOLIDWALL",1);SetTileTag(57,15,"SOLIDWALL",1);SetTileTag(58,15,"SOLIDWALL",1);SetTileTag(59,15,"SOLIDWALL",1);
+		SetTileTag(1,14,"SOLIDWALL",1);SetTileTag(2,14,"LAND_1", 1);SetTileTag(3,14,"LAND_1", 1);SetTileTag(4,14,"SOLIDWALL",1);SetTileTag(5,14,"SOLIDWALL",1);SetTileTag(6,14,"SOLIDWALL",1);SetTileTag(7,14,"SOLIDWALL",1);SetTileTag(8,14,"WATER_1", 1);SetTileTag(9,14,"WATER_1", 1);SetTileTag(10,14,"WATER_1", 1);SetTileTag(11,14,"WATER_1", 1);SetTileTag(12,14,"WATER_1", 1);SetTileTag(13,14,"SOLIDWALL",1);SetTileTag(14,14,"LAND_2", 1);SetTileTag(15,14,"LAND_2", 1);SetTileTag(16,14,"LAND_2", 1);SetTileTag(17,14,"SOLIDWALL",1);SetTileTag(18,14,"LAND_2", 1);SetTileTag(19,14,"SOLIDWALL",1);SetTileTag(20,14,"SOLIDWALL",1);SetTileTag(21,14,"SOLIDWALL",1);SetTileTag(22,14,"LAND_2", 1);SetTileTag(23,14,"SOLIDWALL",1);SetTileTag(24,14,"SOLIDWALL",1);SetTileTag(25,14,"SOLIDWALL",1);SetTileTag(26,14,"SOLIDWALL",1);SetTileTag(27,14,"SOLIDWALL",1);SetTileTag(28,14,"SOLIDWALL",1);SetTileTag(29,14,"SOLIDWALL",1);SetTileTag(30,14,"LAND_2", 1);SetTileTag(31,14,"LAND_2", 1);SetTileTag(32,14,"LAND_2", 1);SetTileTag(33,14,"LAND_2", 1);SetTileTag(34,14,"SOLIDWALL",1);SetTileTag(36,14,"SOLIDWALL",1);SetTileTag(37,14,"LAND_2", 1);SetTileTag(38,14,"SOLIDWALL",1);SetTileTag(41,14,"SOLIDWALL",1);SetTileTag(44,14,"SOLIDWALL",1);SetTileTag(45,14,"LAND_7", 1);SetTileTag(46,14,"LAND_7", 1);SetTileTag(47,14,"LAND_7", 1);SetTileTag(48,14,"SOLIDWALL",1);SetTileTag(51,14,"SOLIDWALL",1);SetTileTag(54,14,"SOLIDWALL",1);SetTileTag(55,14,"LAND_11", 1);SetTileTag(56,14,"LAND_11", 1);SetTileTag(57,14,"LAND_11", 1);SetTileTag(58,14,"LAND_11", 1);SetTileTag(59,14,"LAND_11", 1);SetTileTag(60,14,"SOLIDWALL",1);
+		SetTileTag(2,13,"SOLIDWALL",1);SetTileTag(3,13,"LAND_1", 1);SetTileTag(4,13,"WATER_1", 1);SetTileTag(5,13,"WATER_1", 1);SetTileTag(6,13,"WATER_1", 1);SetTileTag(7,13,"WATER_1", 1);SetTileTag(8,13,"WATER_1", 1);SetTileTag(9,13,"WATER_1", 1);SetTileTag(10,13,"WATER_1", 1);SetTileTag(11,13,"WATER_1", 1);SetTileTag(12,13,"WATER_1", 1);SetTileTag(13,13,"SOLIDWALL",1);SetTileTag(14,13,"LAND_2", 1);SetTileTag(15,13,"LAND_2", 1);SetTileTag(16,13,"LAND_2", 1);SetTileTag(17,13,"SOLIDWALL",1);SetTileTag(18,13,"LAND_2", 1);SetTileTag(19,13,"SOLIDWALL",1);SetTileTag(20,13,"LAND_2", 1);SetTileTag(21,13,"LAND_2", 1);SetTileTag(22,13,"LAND_2", 1);SetTileTag(23,13,"LAND_2", 1);SetTileTag(24,13,"LAND_2", 1);SetTileTag(25,13,"SOLIDWALL",1);SetTileTag(26,13,"LAND_2", 1);SetTileTag(27,13,"LAND_2", 1);SetTileTag(28,13,"LAND_2", 1);SetTileTag(29,13,"SOLIDWALL",1);SetTileTag(30,13,"LAND_2", 1);SetTileTag(31,13,"LAND_2", 1);SetTileTag(32,13,"LAND_2", 1);SetTileTag(33,13,"LAND_2", 1);SetTileTag(34,13,"SOLIDWALL",1);SetTileTag(36,13,"SOLIDWALL",1);SetTileTag(37,13,"LAND_2", 1);SetTileTag(38,13,"SOLIDWALL",1);SetTileTag(44,13,"SOLIDWALL",1);SetTileTag(45,13,"LAND_7", 1);SetTileTag(46,13,"LAND_7", 1);SetTileTag(47,13,"LAND_7", 1);SetTileTag(48,13,"SOLIDWALL",1);SetTileTag(54,13,"SOLIDWALL",1);SetTileTag(55,13,"LAND_11", 1);SetTileTag(56,13,"SOLIDWALL",1);SetTileTag(57,13,"LAND_11", 1);SetTileTag(58,13,"LAND_11", 1);SetTileTag(59,13,"LAND_11", 1);SetTileTag(60,13,"SOLIDWALL",1);
+		SetTileTag(1,12,"SOLIDWALL",1);SetTileTag(2,12,"WATER_1", 1);SetTileTag(3,12,"WATER_1", 1);SetTileTag(4,12,"WATER_1", 1);SetTileTag(5,12,"WATER_1", 1);SetTileTag(6,12,"WATER_1", 1);SetTileTag(7,12,"WATER_1", 1);SetTileTag(8,12,"WATER_1", 1);SetTileTag(9,12,"LAND_2", 1);SetTileTag(10,12,"LAND_2", 1);SetTileTag(11,12,"LAND_2", 1);SetTileTag(12,12,"SOLIDWALL",1);SetTileTag(13,12,"SOLIDWALL",1);SetTileTag(14,12,"SOLIDWALL",1);SetTileTag(15,12,"SOLIDWALL",1);SetTileTag(16,12,"SOLIDWALL",1);SetTileTag(17,12,"SOLIDWALL",1);SetTileTag(18,12,"LAND_2", 1);SetTileTag(19,12,"SOLIDWALL",1);SetTileTag(20,12,"LAND_2", 1);SetTileTag(21,12,"LAND_2", 1);SetTileTag(22,12,"LAND_2", 1);SetTileTag(23,12,"LAND_2", 1);SetTileTag(24,12,"SOLIDWALL",1);SetTileTag(25,12,"SOLIDWALL",1);SetTileTag(26,12,"LAND_2", 1);SetTileTag(27,12,"LAND_2", 1);SetTileTag(28,12,"LAND_2", 1);SetTileTag(29,12,"SOLIDWALL",1);SetTileTag(30,12,"LAND_2", 1);SetTileTag(31,12,"LAND_2", 1);SetTileTag(32,12,"LAND_2", 1);SetTileTag(33,12,"LAND_2", 1);SetTileTag(34,12,"SOLIDWALL",1);SetTileTag(36,12,"SOLIDWALL",1);SetTileTag(37,12,"LAND_2", 1);SetTileTag(38,12,"SOLIDWALL",1);SetTileTag(44,12,"SOLIDWALL",1);SetTileTag(45,12,"LAND_7", 1);SetTileTag(46,12,"LAND_7", 1);SetTileTag(47,12,"LAND_7", 1);SetTileTag(48,12,"SOLIDWALL",1);SetTileTag(54,12,"SOLIDWALL",1);SetTileTag(55,12,"LAND_11", 1);SetTileTag(56,12,"SOLIDWALL",1);SetTileTag(57,12,"LAND_11", 1);SetTileTag(58,12,"LAND_11", 1);SetTileTag(59,12,"LAND_11", 1);SetTileTag(60,12,"SOLIDWALL",1);
+		SetTileTag(1,11,"SOLIDWALL",1);SetTileTag(2,11,"WATER_1", 1);SetTileTag(3,11,"WATER_1", 1);SetTileTag(4,11,"WATER_1", 1);SetTileTag(5,11,"WATER_1", 1);SetTileTag(6,11,"WATER_1", 1);SetTileTag(7,11,"WATER_1", 1);SetTileTag(8,11,"SOLIDWALL",1);SetTileTag(9,11,"LAND_2", 1);SetTileTag(10,11,"SOLIDWALL",1);SetTileTag(11,11,"SOLIDWALL",1);SetTileTag(12,11,"LAND_2", 1);SetTileTag(13,11,"LAND_2", 1);SetTileTag(14,11,"LAND_2", 1);SetTileTag(15,11,"LAND_2", 1);SetTileTag(16,11,"LAND_2", 1);SetTileTag(17,11,"LAND_2", 1);SetTileTag(18,11,"LAND_2", 1);SetTileTag(19,11,"SOLIDWALL",1);SetTileTag(20,11,"LAND_2", 1);SetTileTag(21,11,"LAND_2", 1);SetTileTag(22,11,"LAND_2", 1);SetTileTag(23,11,"SOLIDWALL",1);SetTileTag(24,11,"SOLIDWALL",1);SetTileTag(26,11,"SOLIDWALL",1);SetTileTag(27,11,"LAND_2", 1);SetTileTag(28,11,"SOLIDWALL",1);SetTileTag(29,11,"SOLIDWALL",1);SetTileTag(30,11,"SOLIDWALL",1);SetTileTag(31,11,"SOLIDWALL",1);SetTileTag(32,11,"SOLIDWALL",1);SetTileTag(33,11,"SOLIDWALL",1);SetTileTag(34,11,"SOLIDWALL",1);SetTileTag(35,11,"SOLIDWALL",1);SetTileTag(36,11,"SOLIDWALL",1);SetTileTag(37,11,"LAND_2", 1);SetTileTag(38,11,"SOLIDWALL",1);SetTileTag(44,11,"SOLIDWALL",1);SetTileTag(45,11,"LAND_7", 1);SetTileTag(46,11,"LAND_7", 1);SetTileTag(47,11,"LAND_7", 1);SetTileTag(48,11,"SOLIDWALL",1);SetTileTag(54,11,"SOLIDWALL",1);SetTileTag(55,11,"LAND_11", 1);SetTileTag(56,11,"SOLIDWALL",1);SetTileTag(57,11,"SOLIDWALL",1);SetTileTag(58,11,"SOLIDWALL",1);SetTileTag(59,11,"SOLIDWALL",1);
+		SetTileTag(1,10,"SOLIDWALL",1);SetTileTag(2,10,"WATER_1", 1);SetTileTag(3,10,"WATER_1", 1);SetTileTag(4,10,"WATER_1", 1);SetTileTag(5,10,"WATER_1", 1);SetTileTag(6,10,"SOLIDWALL",1);SetTileTag(7,10,"SOLIDWALL",1);SetTileTag(8,10,"SOLIDWALL",1);SetTileTag(9,10,"LAND_2", 1);SetTileTag(10,10,"SOLIDWALL",1);SetTileTag(11,10,"SOLIDWALL",1);SetTileTag(12,10,"LAND_2", 1);SetTileTag(13,10,"LAND_2", 1);SetTileTag(14,10,"LAND_2", 1);SetTileTag(15,10,"SOLIDWALL",1);SetTileTag(16,10,"SOLIDWALL",1);SetTileTag(17,10,"LAND_2", 1);SetTileTag(18,10,"LAND_2", 1);SetTileTag(19,10,"SOLIDWALL",1);SetTileTag(20,10,"WATER_9", 1);SetTileTag(21,10,"WATER_9", 1);SetTileTag(22,10,"SOLIDWALL",1);SetTileTag(23,10,"LAND_2", 1);SetTileTag(24,10,"LAND_2", 1);SetTileTag(25,10,"SOLIDWALL",1);SetTileTag(26,10,"SOLIDWALL",1);SetTileTag(27,10,"LAND_2", 1);SetTileTag(28,10,"LAND_2", 1);SetTileTag(29,10,"LAND_2", 1);SetTileTag(30,10,"LAND_2", 1);SetTileTag(31,10,"LAND_2", 1);SetTileTag(32,10,"LAND_2", 1);SetTileTag(33,10,"SOLIDWALL",1);SetTileTag(34,10,"LAND_2", 1);SetTileTag(35,10,"LAND_2", 1);SetTileTag(36,10,"LAND_2", 1);SetTileTag(37,10,"LAND_2", 1);SetTileTag(38,10,"LAND_2", 1);SetTileTag(39,10,"SOLIDWALL",1);SetTileTag(43,10,"SOLIDWALL",1);SetTileTag(44,10,"LAND_7", 1);SetTileTag(45,10,"LAND_7", 1);SetTileTag(46,10,"LAND_7", 1);SetTileTag(47,10,"LAND_7", 1);SetTileTag(48,10,"LAND_7", 1);SetTileTag(49,10,"SOLIDWALL",1);SetTileTag(54,10,"SOLIDWALL",1);SetTileTag(55,10,"LAND_11", 1);SetTileTag(56,10,"SOLIDWALL",1);
+		SetTileTag(2,9,"SOLIDWALL",1);SetTileTag(3,9,"SOLIDWALL",1);SetTileTag(4,9,"SOLIDWALL",1);SetTileTag(5,9,"SOLIDWALL",1);SetTileTag(6,9,"SOLIDWALL",1);SetTileTag(7,9,"SOLIDWALL",1);SetTileTag(8,9,"SOLIDWALL",1);SetTileTag(9,9,"LAND_2", 1);SetTileTag(10,9,"SOLIDWALL",1);SetTileTag(11,9,"SOLIDWALL",1);SetTileTag(12,9,"SOLIDWALL",1);SetTileTag(13,9,"SOLIDWALL",1);SetTileTag(14,9,"LAND_2", 1);SetTileTag(15,9,"SOLIDWALL",1);SetTileTag(16,9,"SOLIDWALL",1);SetTileTag(17,9,"SOLIDWALL",1);SetTileTag(18,9,"SOLIDWALL",1);SetTileTag(19,9,"SOLIDWALL",1);SetTileTag(20,9,"WATER_9", 1);SetTileTag(21,9,"SOLIDWALL",1);SetTileTag(22,9,"LAND_2", 1);SetTileTag(23,9,"LAND_2", 1);SetTileTag(24,9,"LAND_2", 1);SetTileTag(25,9,"LAND_2", 1);SetTileTag(26,9,"SOLIDWALL",1);SetTileTag(27,9,"LAND_2", 1);SetTileTag(28,9,"LAND_2", 1);SetTileTag(29,9,"LAND_2", 1);SetTileTag(30,9,"LAND_2", 1);SetTileTag(31,9,"LAND_2", 1);SetTileTag(32,9,"LAND_2", 1);SetTileTag(33,9,"SOLIDWALL",1);SetTileTag(34,9,"LAND_2", 1);SetTileTag(35,9,"LAND_2", 1);SetTileTag(36,9,"LAND_2", 1);SetTileTag(37,9,"LAND_2", 1);SetTileTag(38,9,"LAND_2", 1);SetTileTag(39,9,"SOLIDWALL",1);SetTileTag(42,9,"SOLIDWALL",1);SetTileTag(43,9,"LAND_7", 1);SetTileTag(44,9,"LAND_7", 1);SetTileTag(45,9,"LAND_7", 1);SetTileTag(46,9,"LAND_7", 1);SetTileTag(47,9,"LAND_7", 1);SetTileTag(48,9,"LAND_7", 1);SetTileTag(49,9,"LAND_7", 1);SetTileTag(50,9,"SOLIDWALL",1);SetTileTag(54,9,"SOLIDWALL",1);SetTileTag(55,9,"LAND_11", 1);SetTileTag(56,9,"LAND_11", 1);SetTileTag(57,9,"SOLIDWALL",1);
+		SetTileTag(3,8,"SOLIDWALL",1);SetTileTag(4,8,"LAND_3", 1);SetTileTag(5,8,"LAND_3", 1);SetTileTag(6,8,"WATER_2", 1);SetTileTag(7,8,"LAND_2", 1);SetTileTag(8,8,"LAND_2", 1);SetTileTag(9,8,"LAND_2", 1);SetTileTag(10,8,"LAND_2", 1);SetTileTag(11,8,"LAND_2", 1);SetTileTag(12,8,"LAND_2", 1);SetTileTag(13,8,"LAND_2", 1);SetTileTag(14,8,"LAND_2", 1);SetTileTag(15,8,"SOLIDWALL",1);SetTileTag(16,8,"LAND_2", 1);SetTileTag(17,8,"LAND_2", 1);SetTileTag(18,8,"LAND_2", 1);SetTileTag(19,8,"SOLIDWALL",1);SetTileTag(20,8,"SOLIDWALL",1);SetTileTag(21,8,"SOLIDWALL",1);SetTileTag(22,8,"LAND_2", 1);SetTileTag(23,8,"LAND_2", 1);SetTileTag(24,8,"LAND_2", 1);SetTileTag(25,8,"LAND_2", 1);SetTileTag(26,8,"SOLIDWALL",1);SetTileTag(27,8,"LAND_2", 1);SetTileTag(28,8,"LAND_2", 1);SetTileTag(29,8,"SOLIDWALL",1);SetTileTag(30,8,"LAND_2", 1);SetTileTag(31,8,"LAND_2", 1);SetTileTag(32,8,"LAND_2", 1);SetTileTag(33,8,"LAND_2", 1);SetTileTag(34,8,"LAND_2", 1);SetTileTag(35,8,"LAND_2", 1);SetTileTag(36,8,"LAND_2", 1);SetTileTag(37,8,"LAND_2", 1);SetTileTag(38,8,"LAND_2", 1);SetTileTag(39,8,"SOLIDWALL",1);SetTileTag(43,8,"SOLIDWALL",1);SetTileTag(44,8,"SOLIDWALL",1);SetTileTag(45,8,"SOLIDWALL",1);SetTileTag(46,8,"LAND_7", 1);SetTileTag(47,8,"SOLIDWALL",1);SetTileTag(48,8,"SOLIDWALL",1);SetTileTag(49,8,"SOLIDWALL",1);SetTileTag(50,8,"SOLIDWALL",1);SetTileTag(51,8,"SOLIDWALL",1);SetTileTag(55,8,"SOLIDWALL",1);SetTileTag(56,8,"LAND_11", 1);SetTileTag(57,8,"SOLIDWALL",1);
+		SetTileTag(3,7,"SOLIDWALL",1);SetTileTag(4,7,"LAND_3", 1);SetTileTag(5,7,"LAND_3", 1);SetTileTag(6,7,"WATER_2", 1);SetTileTag(7,7,"LAND_2", 1);SetTileTag(8,7,"LAND_2", 1);SetTileTag(9,7,"LAND_2", 1);SetTileTag(10,7,"LAND_2", 1);SetTileTag(11,7,"LAND_2", 1);SetTileTag(12,7,"LAND_2", 1);SetTileTag(13,7,"LAND_2", 1);SetTileTag(14,7,"LAND_2", 1);SetTileTag(15,7,"SOLIDWALL",1);SetTileTag(16,7,"LAND_2", 1);SetTileTag(17,7,"LAND_2", 1);SetTileTag(18,7,"LAND_2", 1);SetTileTag(19,7,"SOLIDWALL",1);SetTileTag(22,7,"SOLIDWALL",1);SetTileTag(23,7,"SOLIDWALL",1);SetTileTag(24,7,"LAND_2", 1);SetTileTag(25,7,"SOLIDWALL",1);SetTileTag(26,7,"SOLIDWALL",1);SetTileTag(27,7,"LAND_2", 1);SetTileTag(28,7,"LAND_2", 1);SetTileTag(29,7,"SOLIDWALL",1);SetTileTag(30,7,"SOLIDWALL",1);SetTileTag(31,7,"LAND_2", 1);SetTileTag(32,7,"LAND_2", 1);SetTileTag(33,7,"SOLIDWALL",1);SetTileTag(34,7,"SOLIDWALL",1);SetTileTag(35,7,"SOLIDWALL",1);SetTileTag(36,7,"LAND_2", 1);SetTileTag(37,7,"SOLIDWALL",1);SetTileTag(38,7,"SOLIDWALL",1);SetTileTag(39,7,"SOLIDWALL",1);SetTileTag(40,7,"SOLIDWALL",1);SetTileTag(41,7,"SOLIDWALL",1);SetTileTag(44,7,"SOLIDWALL",1);SetTileTag(45,7,"WATER_12", 1);SetTileTag(46,7,"WATER_12", 1);SetTileTag(47,7,"WATER_12", 1);SetTileTag(48,7,"WATER_12", 1);SetTileTag(49,7,"SOLIDWALL",1);SetTileTag(50,7,"WATER_12", 1);SetTileTag(51,7,"WATER_12", 1);SetTileTag(52,7,"SOLIDWALL",1);SetTileTag(53,7,"SOLIDWALL",1);SetTileTag(54,7,"SOLIDWALL",1);SetTileTag(55,7,"SOLIDWALL",1);SetTileTag(56,7,"LAND_11", 1);SetTileTag(57,7,"SOLIDWALL",1);SetTileTag(58,7,"SOLIDWALL",1);
+		SetTileTag(3,6,"SOLIDWALL",1);SetTileTag(4,6,"LAND_3", 1);SetTileTag(5,6,"LAND_3", 1);SetTileTag(6,6,"WATER_2", 1);SetTileTag(7,6,"LAND_2", 1);SetTileTag(8,6,"LAND_2", 1);SetTileTag(9,6,"LAND_2", 1);SetTileTag(10,6,"LAND_2", 1);SetTileTag(11,6,"LAND_2", 1);SetTileTag(12,6,"LAND_2", 1);SetTileTag(13,6,"LAND_2", 1);SetTileTag(14,6,"LAND_2", 1);SetTileTag(15,6,"LAND_2", 1);SetTileTag(16,6,"LAND_2", 1);SetTileTag(17,6,"LAND_2", 1);SetTileTag(18,6,"LAND_2", 1);SetTileTag(19,6,"SOLIDWALL",1);SetTileTag(20,6,"SOLIDWALL",1);SetTileTag(21,6,"SOLIDWALL",1);SetTileTag(22,6,"SOLIDWALL",1);SetTileTag(23,6,"LAND_2", 1);SetTileTag(24,6,"LAND_2", 1);SetTileTag(25,6,"LAND_2", 1);SetTileTag(26,6,"SOLIDWALL",1);SetTileTag(27,6,"LAND_2", 1);SetTileTag(28,6,"LAND_2", 1);SetTileTag(29,6,"SOLIDWALL",1);SetTileTag(30,6,"SOLIDWALL",1);SetTileTag(31,6,"LAND_2", 1);SetTileTag(32,6,"LAND_2", 1);SetTileTag(33,6,"SOLIDWALL",1);SetTileTag(35,6,"SOLIDWALL",1);SetTileTag(36,6,"LAND_2", 1);SetTileTag(37,6,"SOLIDWALL",1);SetTileTag(38,6,"LAND_2", 1);SetTileTag(39,6,"LAND_2", 1);SetTileTag(40,6,"LAND_2", 1);SetTileTag(41,6,"LAND_2", 1);SetTileTag(42,6,"SOLIDWALL",1);SetTileTag(43,6,"SOLIDWALL",1);SetTileTag(44,6,"WATER_12", 1);SetTileTag(45,6,"WATER_12", 1);SetTileTag(46,6,"LAND_8", 1);SetTileTag(47,6,"WATER_12", 1);SetTileTag(48,6,"WATER_12", 1);SetTileTag(49,6,"WATER_12", 1);SetTileTag(50,6,"WATER_12", 1);SetTileTag(51,6,"WATER_12", 1);SetTileTag(52,6,"LAND_11", 1);SetTileTag(53,6,"LAND_11", 1);SetTileTag(54,6,"LAND_11", 1);SetTileTag(55,6,"LAND_11", 1);SetTileTag(56,6,"LAND_11", 1);SetTileTag(57,6,"LAND_11", 1);SetTileTag(58,6,"LAND_11", 1);SetTileTag(59,6,"SOLIDWALL",1);
+		SetTileTag(3,5,"SOLIDWALL",1);SetTileTag(4,5,"LAND_3", 1);SetTileTag(5,5,"LAND_3", 1);SetTileTag(6,5,"WATER_2", 1);SetTileTag(7,5,"LAND_2", 1);SetTileTag(8,5,"LAND_2", 1);SetTileTag(9,5,"LAND_2", 1);SetTileTag(10,5,"LAND_2", 1);SetTileTag(11,5,"LAND_2", 1);SetTileTag(12,5,"LAND_2", 1);SetTileTag(13,5,"SOLIDWALL",1);SetTileTag(14,5,"LAND_2", 1);SetTileTag(15,5,"SOLIDWALL",1);SetTileTag(16,5,"LAND_2", 1);SetTileTag(17,5,"LAND_2", 1);SetTileTag(18,5,"LAND_2", 1);SetTileTag(19,5,"LAND_2", 1);SetTileTag(20,5,"LAND_2", 1);SetTileTag(21,5,"LAND_2", 1);SetTileTag(22,5,"LAND_2", 1);SetTileTag(23,5,"LAND_2", 1);SetTileTag(24,5,"LAND_2", 1);SetTileTag(25,5,"LAND_2", 1);SetTileTag(26,5,"LAND_2", 1);SetTileTag(27,5,"LAND_2", 1);SetTileTag(28,5,"LAND_2", 1);SetTileTag(29,5,"SOLIDWALL",1);SetTileTag(30,5,"SOLIDWALL",1);SetTileTag(31,5,"LAND_2", 1);SetTileTag(32,5,"LAND_2", 1);SetTileTag(33,5,"SOLIDWALL",1);SetTileTag(34,5,"SOLIDWALL",1);SetTileTag(35,5,"LAND_2", 1);SetTileTag(36,5,"LAND_2", 1);SetTileTag(37,5,"LAND_2", 1);SetTileTag(38,5,"LAND_2", 1);SetTileTag(39,5,"SOLIDWALL",1);SetTileTag(40,5,"SOLIDWALL",1);SetTileTag(41,5,"LAND_2", 1);SetTileTag(42,5,"SOLIDWALL",1);SetTileTag(43,5,"SOLIDWALL",1);SetTileTag(44,5,"WATER_12", 1);SetTileTag(45,5,"WATER_12", 1);SetTileTag(46,5,"LAND_8", 1);SetTileTag(47,5,"WATER_12", 1);SetTileTag(48,5,"LAND_9", 1);SetTileTag(49,5,"LAND_9", 1);SetTileTag(50,5,"WATER_12", 1);SetTileTag(51,5,"WATER_12", 1);SetTileTag(52,5,"LAND_11", 1);SetTileTag(53,5,"LAND_11", 1);SetTileTag(54,5,"SOLIDWALL",1);SetTileTag(55,5,"LAND_11", 1);SetTileTag(56,5,"LAND_11", 1);SetTileTag(57,5,"SOLIDWALL",1);SetTileTag(58,5,"LAND_11", 1);SetTileTag(59,5,"SOLIDWALL",1);
+		SetTileTag(3,4,"SOLIDWALL",1);SetTileTag(4,4,"WATER_2", 1);SetTileTag(5,4,"WATER_2", 1);SetTileTag(6,4,"WATER_2", 1);SetTileTag(7,4,"LAND_2", 1);SetTileTag(8,4,"LAND_2", 1);SetTileTag(9,4,"LAND_2", 1);SetTileTag(10,4,"LAND_2", 1);SetTileTag(11,4,"LAND_2", 1);SetTileTag(12,4,"LAND_2", 1);SetTileTag(13,4,"SOLIDWALL",1);SetTileTag(14,4,"LAND_2", 1);SetTileTag(15,4,"SOLIDWALL",1);SetTileTag(16,4,"LAND_2", 1);SetTileTag(17,4,"LAND_2", 1);SetTileTag(18,4,"LAND_2", 1);SetTileTag(19,4,"SOLIDWALL",1);SetTileTag(20,4,"SOLIDWALL",1);SetTileTag(21,4,"SOLIDWALL",1);SetTileTag(22,4,"SOLIDWALL",1);SetTileTag(23,4,"LAND_2", 1);SetTileTag(24,4,"SOLIDWALL",1);SetTileTag(25,4,"LAND_2", 1);SetTileTag(26,4,"LAND_2", 1);SetTileTag(27,4,"LAND_2", 1);SetTileTag(28,4,"LAND_2", 1);SetTileTag(29,4,"SOLIDWALL",1);SetTileTag(30,4,"SOLIDWALL",1);SetTileTag(31,4,"LAND_2", 1);SetTileTag(32,4,"LAND_2", 1);SetTileTag(33,4,"SOLIDWALL",1);SetTileTag(34,4,"SOLIDWALL",1);SetTileTag(35,4,"LAND_2", 1);SetTileTag(36,4,"LAND_2", 1);SetTileTag(37,4,"LAND_2", 1);SetTileTag(38,4,"LAND_2", 1);SetTileTag(39,4,"SOLIDWALL",1);SetTileTag(40,4,"SOLIDWALL",1);SetTileTag(41,4,"LAND_2", 1);SetTileTag(42,4,"SOLIDWALL",1);SetTileTag(43,4,"SOLIDWALL",1);SetTileTag(44,4,"WATER_12", 1);SetTileTag(45,4,"WATER_12", 1);SetTileTag(46,4,"WATER_12", 1);SetTileTag(47,4,"WATER_12", 1);SetTileTag(48,4,"WATER_12", 1);SetTileTag(49,4,"WATER_12", 1);SetTileTag(50,4,"WATER_12", 1);SetTileTag(51,4,"WATER_12", 1);SetTileTag(52,4,"WATER_12", 1);SetTileTag(53,4,"WATER_12", 1);SetTileTag(54,4,"LAND_11", 1);SetTileTag(55,4,"LAND_11", 1);SetTileTag(56,4,"LAND_11", 1);SetTileTag(57,4,"LAND_11", 1);SetTileTag(58,4,"LAND_11", 1);SetTileTag(59,4,"SOLIDWALL",1);
+		SetTileTag(3,3,"SOLIDWALL",1);SetTileTag(4,3,"LAND_2", 1);SetTileTag(5,3,"LAND_2", 1);SetTileTag(6,3,"LAND_2", 1);SetTileTag(7,3,"LAND_2", 1);SetTileTag(8,3,"LAND_2", 1);SetTileTag(9,3,"LAND_2", 1);SetTileTag(10,3,"LAND_2", 1);SetTileTag(11,3,"LAND_2", 1);SetTileTag(12,3,"LAND_2", 1);SetTileTag(13,3,"SOLIDWALL",1);SetTileTag(14,3,"LAND_2", 1);SetTileTag(15,3,"SOLIDWALL",1);SetTileTag(16,3,"SOLIDWALL",1);SetTileTag(17,3,"SOLIDWALL",1);SetTileTag(18,3,"LAND_2", 1);SetTileTag(19,3,"SOLIDWALL",1);SetTileTag(22,3,"SOLIDWALL",1);SetTileTag(23,3,"LAND_2", 1);SetTileTag(24,3,"LAND_2", 1);SetTileTag(25,3,"LAND_2", 1);SetTileTag(26,3,"LAND_2", 1);SetTileTag(27,3,"SOLIDWALL",1);SetTileTag(28,3,"SOLIDWALL",1);SetTileTag(29,3,"SOLIDWALL",1);SetTileTag(30,3,"LAND_2", 1);SetTileTag(31,3,"LAND_2", 1);SetTileTag(32,3,"LAND_2", 1);SetTileTag(33,3,"LAND_2", 1);SetTileTag(34,3,"SOLIDWALL",1);SetTileTag(35,3,"LAND_2", 1);SetTileTag(36,3,"LAND_2", 1);SetTileTag(37,3,"LAND_2", 1);SetTileTag(38,3,"LAND_2", 1);SetTileTag(39,3,"SOLIDWALL",1);SetTileTag(40,3,"SOLIDWALL",1);SetTileTag(41,3,"LAND_2", 1);SetTileTag(42,3,"LAND_2", 1);SetTileTag(43,3,"LAND_2", 1);SetTileTag(44,3,"LAND_2", 1);SetTileTag(45,3,"LAND_2", 1);SetTileTag(46,3,"LAND_2", 1);SetTileTag(47,3,"WATER_12", 1);SetTileTag(48,3,"WATER_12", 1);SetTileTag(49,3,"WATER_12", 1);SetTileTag(50,3,"WATER_12", 1);SetTileTag(51,3,"WATER_12", 1);SetTileTag(52,3,"WATER_12", 1);SetTileTag(53,3,"WATER_12", 1);SetTileTag(54,3,"SOLIDWALL",1);SetTileTag(55,3,"SOLIDWALL",1);SetTileTag(56,3,"SOLIDWALL",1);SetTileTag(57,3,"SOLIDWALL",1);SetTileTag(58,3,"LAND_11", 1);SetTileTag(59,3,"SOLIDWALL",1);
+		SetTileTag(3,2,"SOLIDWALL",1);SetTileTag(4,2,"LAND_2", 1);SetTileTag(5,2,"LAND_2", 1);SetTileTag(6,2,"LAND_2", 1);SetTileTag(7,2,"LAND_2", 1);SetTileTag(8,2,"LAND_2", 1);SetTileTag(9,2,"LAND_2", 1);SetTileTag(10,2,"LAND_2", 1);SetTileTag(11,2,"LAND_2", 1);SetTileTag(12,2,"LAND_2", 1);SetTileTag(13,2,"LAND_2", 1);SetTileTag(14,2,"LAND_2", 1);SetTileTag(15,2,"SOLIDWALL",1);SetTileTag(18,2,"SOLIDWALL",1);SetTileTag(23,2,"SOLIDWALL",1);SetTileTag(24,2,"SOLIDWALL",1);SetTileTag(25,2,"SOLIDWALL",1);SetTileTag(26,2,"SOLIDWALL",1);SetTileTag(29,2,"SOLIDWALL",1);SetTileTag(30,2,"LAND_2", 1);SetTileTag(31,2,"LAND_2", 1);SetTileTag(32,2,"LAND_2", 1);SetTileTag(33,2,"LAND_2", 1);SetTileTag(34,2,"SOLIDWALL",1);SetTileTag(35,2,"LAND_2", 1);SetTileTag(36,2,"LAND_2", 1);SetTileTag(37,2,"LAND_2", 1);SetTileTag(38,2,"SOLIDWALL",1);SetTileTag(41,2,"SOLIDWALL",1);SetTileTag(42,2,"SOLIDWALL",1);SetTileTag(43,2,"SOLIDWALL",1);SetTileTag(44,2,"SOLIDWALL",1);SetTileTag(45,2,"SOLIDWALL",1);SetTileTag(46,2,"SOLIDWALL",1);SetTileTag(47,2,"WATER_12", 1);SetTileTag(48,2,"WATER_12", 1);SetTileTag(49,2,"LAND_10", 1);SetTileTag(50,2,"LAND_10", 1);SetTileTag(51,2,"WATER_12", 1);SetTileTag(52,2,"WATER_12", 1);SetTileTag(53,2,"WATER_12", 1);SetTileTag(54,2,"LAND_11", 1);SetTileTag(55,2,"LAND_11", 1);SetTileTag(56,2,"LAND_11", 1);SetTileTag(57,2,"LAND_11", 1);SetTileTag(58,2,"LAND_11", 1);SetTileTag(59,2,"SOLIDWALL",1);
+		SetTileTag(4,1,"SOLIDWALL",1);SetTileTag(5,1,"SOLIDWALL",1);SetTileTag(6,1,"SOLIDWALL",1);SetTileTag(7,1,"SOLIDWALL",1);SetTileTag(8,1,"SOLIDWALL",1);SetTileTag(9,1,"SOLIDWALL",1);SetTileTag(10,1,"SOLIDWALL",1);SetTileTag(11,1,"SOLIDWALL",1);SetTileTag(12,1,"SOLIDWALL",1);SetTileTag(13,1,"SOLIDWALL",1);SetTileTag(14,1,"SOLIDWALL",1);SetTileTag(29,1,"SOLIDWALL",1);SetTileTag(30,1,"LAND_2", 1);SetTileTag(31,1,"LAND_2", 1);SetTileTag(32,1,"LAND_2", 1);SetTileTag(33,1,"LAND_2", 1);SetTileTag(34,1,"SOLIDWALL",1);SetTileTag(35,1,"SOLIDWALL",1);SetTileTag(36,1,"SOLIDWALL",1);SetTileTag(37,1,"SOLIDWALL",1);SetTileTag(47,1,"SOLIDWALL",1);SetTileTag(48,1,"SOLIDWALL",1);SetTileTag(49,1,"SOLIDWALL",1);SetTileTag(50,1,"SOLIDWALL",1);SetTileTag(51,1,"SOLIDWALL",1);SetTileTag(52,1,"SOLIDWALL",1);SetTileTag(53,1,"SOLIDWALL",1);SetTileTag(54,1,"SOLIDWALL",1);SetTileTag(55,1,"SOLIDWALL",1);SetTileTag(56,1,"SOLIDWALL",1);SetTileTag(57,1,"SOLIDWALL",1);SetTileTag(58,1,"SOLIDWALL",1);
+		SetTileTag(30,0,"SOLIDWALL",1);SetTileTag(31,0,"SOLIDWALL",1);SetTileTag(32,0,"SOLIDWALL",1);SetTileTag(33,0,"SOLIDWALL",1);SetObjectTag("BRIDGE_21_36", "LAND_2");
 		SetObjectTag("BRIDGE_23_50", "LAND_2");
 		SetObjectTag("BRIDGE_23_49", "LAND_2");
 		SetObjectTag("BRIDGE_39_39", "LAND_2");
@@ -5069,6 +5114,8 @@ public class MyTools
 		SetObjectTag("BRIDGE_38_25", "LAND_2");
 		SetObjectTag("BRIDGE_37_24", "LAND_2");
 		SetObjectTag("BRIDGE_38_24", "LAND_2");
+
+
 	}
 
 
@@ -9420,13 +9467,14 @@ public class MyTools
 		//Add a script.
 		ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
 
-		//add a mesh for interaction
-		BoxCollider box= myObj.AddComponent<BoxCollider>();
-		box.size = new Vector3(0.2f,0.2f,0.2f);
-		//box.transform.position = myObj.transform.position;
-		//box.transform.localScale = new Vector3(DimX, DimZ, DimY);
-		box.center= new Vector3(0.0f,0.1f,0.0f);
-		//box.isTrigger=true;
+		BoxCollider box =myObj.GetComponent<BoxCollider>();
+		if (box==null)
+		{
+			//add a mesh for interaction
+			box= myObj.AddComponent<BoxCollider>();
+			box.size = new Vector3(0.2f,0.2f,0.2f);
+			box.center= new Vector3(0.0f,0.1f,0.0f);
+		}
 
 		objInteract.WorldDisplayIndex = int.Parse(WorldString.Substring (WorldString.Length-3,3));
 		objInteract.InvDisplayIndex= int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
@@ -9507,60 +9555,19 @@ public class MyTools
 		//My anims are backwards!!!!!
 		GoblinAI gronk = myObj.AddComponent<GoblinAI>();
 		//Since I have only one animation I change names
-		//NPC_Name="GreenGoblin";
-		//NPC_Name="127";
+
 		gronk.NPC_ID=NPC_ID;
-		//gronk.Idle_Front=NPC_Name + "_idle_front";
-		//gronk.Idle_Rear=NPC_Name+"_idle_rear";
-		//gronk.Idle_Right=NPC_Name+"_idle_right";
-		//gronk.Idle_Left=NPC_Name+"_idle_left";
-		//gronk.Idle_Front_Right=NPC_Name+"_idle_front_right";
-		//gronk.Idle_Front_Left=NPC_Name+"_idle_front_left";
-		//gronk.Idle_Rear_Right=NPC_Name+"_idle_rear_right";
-		//gronk.Idle_Rear_Left=NPC_Name+"_idle_rear_left";
-		
-		//gronk.Walking_Front=NPC_Name + "_walking_front";
-		//gronk.Walking_Rear=NPC_Name+"_walking_rear";
-		//gronk.Walking_Right=NPC_Name+"_walking_right";
-		//gronk.Walking_Left=NPC_Name+"_walking_left";
-		//gronk.Walking_Front_Right=NPC_Name+"_walking_front_right";
-		//gronk.Walking_Front_Left=NPC_Name+"_walking_front_left";
-		//gronk.Walking_Rear_Right=NPC_Name+"_walking_rear_right";
-		//gronk.Walking_Rear_Left=NPC_Name+"_walking_rear_left";
-		
-		
-		//gronk.idle_combat=NPC_Name+"_idle_combat";
-		//gronk.attack_bash=NPC_Name+"_attack_bash";
-		//gronk.attack_slash=NPC_Name+"_attack_slash";
-		//gronk.attack_thrust=NPC_Name+"_attack_thrust";
-		//gronk.attack_secondary=NPC_Name+"_attack_secondary";
-		//gronk.death=NPC_Name+"_death";
-		//gronk.begin_combat=NPC_Name+"_begin_combat";
-		//Add the Nav mesh
-		//NavMeshAgent nav = myObj.AddComponent<NavMeshAgent>();
-		//nav.height=0.8f;
-		//nav.baseOffset=0.0f;
-		//nav.radius=0.3f;
-		
-		//add the animator to the sprite
-		//GameObject spritecontroller=myObj.transform.FindChild (myObj.name +"_sprite").gameObject;
-		//Animator anim =spritecontroller.AddComponent<Animator>();
-		//spritecontroller.GetComponent<Billboard>().enabled=false;
-		//Animator anim =myObj.transform.FindChild (name+"_sprite").gameObject.AddComponent<Animator>();
-		//myObj.transform.FindChild (name+"_sprite").GetComponent<Billboard>().enabled=false ;//turn off billboarding.
-		//Object test = (RuntimeAnimatorController)Resources.Load("animation/AnimatorControl");
-		
+
 		GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
 		newObj.name = myObj.name + "_AI";
 		newObj.transform.parent=myObj.transform;
 		AIRig ai = newObj.GetComponent<AIRig>();
 		ai.AI.Body=myObj;
-
-
 		NPC npc = myObj.AddComponent<NPC>();
-		//Conversation cnv = myObj.AddComponent<Conversation>();
+		Conversation cnv = myObj.AddComponent<Conversation>();
 		Rigidbody rgd = myObj.AddComponent<Rigidbody>();
+		rgd.freezeRotation=true;
 
 		myInstance = Resources.Load("animation/AI_Base_Animator") as GameObject;
 		newObj = (GameObject)GameObject.Instantiate(myInstance);
@@ -9583,102 +9590,48 @@ public class MyTools
 		mybox.isTrigger=false;
 		mybox.center = new Vector3(0.0f, 0.5f, 0.0f);
 		mybox.size= new Vector3(0.5f, 1.0f, 0.3f);
-		//mybox.size=new Vector3(0.3f,0.8f,0.3f);
-		
-		//myInstance.transform.parent=myObj.transform;
-		//RuntimeAnimatorController contr = RuntimeAnimatorController.Instantiate(test);
-		//anim.runtimeAnimatorController=contr;
-		//GameObject myInstance = Resources.Load("animation/AnimatorControl") as GameObject;
-		//spritecontroller.
-
-
-		
 	}
 
 
 	static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
 	{
-		//Add the AI.
-		//My anims are backwards!!!!!
 		GoblinAI gronk = myObj.AddComponent<GoblinAI>();
-		//Since I have only one animation I change names
-		//NPC_Name="GreenGoblin";
-		//NPC_Name="127";
 		gronk.NPC_ID=NPC_ID;
-		//gronk.Idle_Front=NPC_Name + "_idle_front";
-		//gronk.Idle_Rear=NPC_Name+"_idle_rear";
-		//gronk.Idle_Right=NPC_Name+"_idle_right";
-		//gronk.Idle_Left=NPC_Name+"_idle_left";
-		//gronk.Idle_Front_Right=NPC_Name+"_idle_front_right";
-		//gronk.Idle_Front_Left=NPC_Name+"_idle_front_left";
-		//gronk.Idle_Rear_Right=NPC_Name+"_idle_rear_right";
-		//gronk.Idle_Rear_Left=NPC_Name+"_idle_rear_left";
 
-		//gronk.Walking_Front=NPC_Name + "_walking_front";
-		//gronk.Walking_Rear=NPC_Name+"_walking_rear";
-		//gronk.Walking_Right=NPC_Name+"_walking_right";
-		//gronk.Walking_Left=NPC_Name+"_walking_left";
-		//gronk.Walking_Front_Right=NPC_Name+"_walking_front_right";
-		//gronk.Walking_Front_Left=NPC_Name+"_walking_front_left";
-		//gronk.Walking_Rear_Right=NPC_Name+"_walking_rear_right";
-		//gronk.Walking_Rear_Left=NPC_Name+"_walking_rear_left";
-
-
-		//gronk.idle_combat=NPC_Name+"_idle_combat";
-		//gronk.attack_bash=NPC_Name+"_attack_bash";
-		//gronk.attack_slash=NPC_Name+"_attack_slash";
-		//gronk.attack_thrust=NPC_Name+"_attack_thrust";
-		//gronk.attack_secondary=NPC_Name+"_attack_secondary";
-		//gronk.death=NPC_Name+"_death";
-		//gronk.begin_combat=NPC_Name+"_begin_combat";
-		//Add the Nav mesh
-		NavMeshAgent nav = myObj.AddComponent<NavMeshAgent>();
-		nav.height=0.8f;
-		//nav.baseOffset=0.0f;
-		nav.radius=0.3f;
-
-		//add the animator to the sprite
-		//GameObject spritecontroller=myObj.transform.FindChild (myObj.name +"_sprite").gameObject;
-		//Animator anim =spritecontroller.AddComponent<Animator>();
-		//spritecontroller.GetComponent<Billboard>().enabled=false;
-		//Animator anim =myObj.transform.FindChild (name+"_sprite").gameObject.AddComponent<Animator>();
-		//myObj.transform.FindChild (name+"_sprite").GetComponent<Billboard>().enabled=false ;//turn off billboarding.
-		//Object test = (RuntimeAnimatorController)Resources.Load("animation/AnimatorControl");
-
-
-
-		GameObject myInstance = Resources.Load("animation/AI_Base_Animator") as GameObject;
+		GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+		newObj.name = myObj.name + "_AI";
+		newObj.transform.parent=myObj.transform;
+		AIRig ai = newObj.GetComponent<AIRig>();
+		ai.AI.Body=myObj;
+		NPC npc = myObj.AddComponent<NPC>();
+		Conversation cnv = myObj.AddComponent<Conversation>();
+		Rigidbody rgd = myObj.AddComponent<Rigidbody>();
+		//rgd.freezeRotation=true;
+		rgd.constraints = 
+			RigidbodyConstraints.FreezeRotationX 
+				| RigidbodyConstraints.FreezeRotationY 
+				| RigidbodyConstraints.FreezeRotationZ 
+				| RigidbodyConstraints.FreezePositionX 
+				| RigidbodyConstraints.FreezePositionZ;
+		rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
+
+		myInstance = Resources.Load("animation/AI_Base_Animator") as GameObject;
+		newObj = (GameObject)GameObject.Instantiate(myInstance);
 		newObj.name=myObj.name + "_Sprite";
 		newObj.transform.parent=myObj.transform;
 		newObj.transform.position = myObj.transform.position;
 
 		SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
 		Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
-		//Debug.Log (EditorSprite);
-		if (image ==  null)
-		{
-			Debug.Log ("No sprite renderer found.");
-		}
+
 		mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 		mysprite.sprite = image;//Assigns the sprite to the object.
-		//newObj.AddComponent<Billboard>();
 
 		BoxCollider mybox = myObj.AddComponent<BoxCollider>();
-		mybox.isTrigger=true;
-		//mybox.size=new Vector3(0.3f,0.8f,0.3f);
-
-		//myInstance.transform.parent=myObj.transform;
-		//RuntimeAnimatorController contr = RuntimeAnimatorController.Instantiate(test);
-		//anim.runtimeAnimatorController=contr;
-		//GameObject myInstance = Resources.Load("animation/AnimatorControl") as GameObject;
-		//spritecontroller.
-
-		if (npc_whoami>=0)
-		{
-			NPC np = myObj.AddComponent<NPC>();
-			np.WhoAmI=npc_whoami;
-		}
+		mybox.isTrigger=false;
+		mybox.center = new Vector3(0.0f, 0.5f, 0.0f);
+		mybox.size= new Vector3(0.5f, 1.0f, 0.3f);
 	}
 
 	static void RenameBrushes(string BrushName, string TileName)
@@ -10671,8 +10624,36 @@ public class MyTools
 				}
 			}
 		}
+	}
 
-	
+	static void SetNPCProps(GameObject myObj, 
+	                        int npc_whoami, int npc_xhome, int npc_yhome,
+	                        int npc_hunger, int npc_health,
+	                        int npc_hp, int npc_arms, int npc_power ,
+	                        int npc_goal, int npc_attitude, int npc_gtarg,
+	                        int npc_talkedto, int npc_level,int npc_name,
+	                        string NavMeshRegion
+	                        )
+	{
+		NPC npc = myObj.GetComponent<NPC>();
+		if (npc!=null)
+		{
+			npc.npc_whoami= npc_whoami;
+			npc.npc_xhome=npc_xhome;        //  x coord of home tile
+			npc.npc_yhome=npc_yhome;        //  y coord of home tile
+			npc.npc_hunger=npc_hunger;
+			npc.npc_health=npc_health;
+			npc.npc_hp=npc_hp;
+			npc.npc_arms=npc_arms;          // (not used in uw1)
+			npc.npc_power=npc_power;
+			npc.npc_goal=npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+			npc.npc_attitude=npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+			npc.npc_gtarg=npc_gtarg;         //goal target; 1:player
+			npc.npc_talkedto=npc_talkedto;      // is 1 when player already talked to npc
+			npc.npc_level=npc_level;
+			npc.npc_name=npc_name;       //    (not used in uw1)
+			npc.NavMeshRegion=NavMeshRegion;
+		}
 	}
 }
 

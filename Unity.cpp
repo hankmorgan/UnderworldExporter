@@ -184,6 +184,42 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\", %d);", currobj.item_id, objectMasters[currobj.item_id].particle, currobj.npc_whoami);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	/*Set NPC Properties*/
+	if (game == UW1)
+		{
+		fprintf(UNITY_FILE, "\n\tSetNPCProps(myObj, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d," ,
+			currobj.npc_whoami, currobj.npc_xhome, currobj.npc_yhome,
+			currobj.npc_hunger, currobj.npc_health,
+			currobj.npc_hp, currobj.npc_arms, currobj.npc_power,
+			currobj.npc_goal, currobj.npc_attitude, currobj.npc_gtarg,
+			currobj.npc_talkedto, currobj.npc_level, currobj.npc_name
+			);
+		switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
+			{
+			case 66://bat
+			case 73://vampire bat
+				fprintf(UNITY_FILE, "\"SkyMesh1\");");//Fliers can go anywhere. Need to create this mesh.
+				break;
+			case 87://lurker
+			case 116://deep lurker
+				fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+				break;
+			default:
+				fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+				break;
+			}
+		}
+	/*
+	(GameObject myObj,
+	int WhoAmI, int npc_xhome, int npc_yhome,
+	int npc_hunger, int npc_health,
+	int npc_hp, int npc_arms, int npc_power ,
+	int npc_goal, int npc_attitude, int npc_gtarg,
+	int npc_talkedto, int npc_level,int npc_name)
+
+*/
+
+
 	fprintf(UNITY_FILE, "\n\t////Container contents");
 	fprintf(UNITY_FILE, "\n\tParentContainer = CreateContainer(myObj, %d, %d, %d);"
 		, 255

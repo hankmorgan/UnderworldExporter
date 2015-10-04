@@ -967,7 +967,6 @@ public class ObjectInteraction : MonoBehaviour {
 	}
 	*/
 
-
 	public void consumeObject()
 	{
 		Container cn = getCurrentContainer();

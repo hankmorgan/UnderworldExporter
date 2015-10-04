@@ -14,7 +14,7 @@ public class NPC : MonoBehaviour {
 
 	public string NavMeshRegion;
 
-	public int WhoAmI;
+	public int npc_whoami;
 
 	public int npc_xhome;        //  x coord of home tile
 	public int npc_yhome;        //  y coord of home tile
@@ -109,11 +109,11 @@ public class NPC : MonoBehaviour {
 		UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
 		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));
 		
-		if (this.WhoAmI<=28)
+		if (this.npc_whoami<=28)
 		{
 			//head in charhead.gr
 			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (WhoAmI-1).ToString("0000"));
+			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc_whoami-1).ToString("0000"));
 			
 		}	
 		else
@@ -131,7 +131,7 @@ public class NPC : MonoBehaviour {
 
 
 		Conversation x = (Conversation)this.GetComponent("Conversation_67");
-		Conversation.CurrentConversation=WhoAmI;
+		Conversation.CurrentConversation=npc_whoami;
 		Conversation.InConversation=true;
 		Conversation.maincam=Camera.main;
 

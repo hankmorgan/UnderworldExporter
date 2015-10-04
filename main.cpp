@@ -1265,6 +1265,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 		{
 			case ASCII_MODE:		//ascii + other data maps
 				{
+				CleanUp(LevelInfo, game);
 				DumpAscii(game, LevelInfo, objList, LevelNo, 0);	//1 for maps only. 0 for extra printouts like objects, textures + heightmaps.
 
 				break;

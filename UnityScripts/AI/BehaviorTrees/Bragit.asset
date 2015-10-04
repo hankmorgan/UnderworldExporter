@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1227330239, guid: 9fa2ecd1ff2ad394281dd3bf72c5b76e, type: 3}
+  m_Name: Bragit
+  m_EditorClassIdentifier: 
+  _dataSerializer:
+    _serializedData: <scriptableobject version="1.3" type="RAIN.BehaviorTrees.BTAsset"><fields><field
+      value="&lt;behaviortree version=&quot;1.1&quot; repeatuntil=&quot;&quot; name=&quot;Bragit&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;selector usepriorities=&quot;False&quot;
+      repeatuntil=&quot;&quot; name=&quot;parallel&quot; debugbreak=&quot;False&quot;&gt;&lt;constraint
+      repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;RandomPeaceful&quot;
+      debugbreak=&quot;False&quot; constraint=&quot;state==0&quot;&gt;&lt;parallel
+      tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;running&quot;
+      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;random
+      repeatuntil=&quot;success&quot; name=&quot;RandomIdleOrWalk&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer
+      weight=&quot;1&quot; usepriorities=&quot;False&quot; repeatuntil=&quot;failure&quot;
+      name=&quot;IdleStand&quot; debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot;
+      priority=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;&quot;
+      name=&quot;Idle Animation&quot; debugbreak=&quot;False&quot; classname=&quot;AI_IDLE&quot;
+      /&gt;&lt;timer waitforsec=&quot;2&quot; returnvalue=&quot;failure&quot; priority=&quot;&quot;
+      name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;/sequencer&gt;&lt;parallel
+      weight=&quot;1&quot; tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
+      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;sequencer
+      usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; name=&quot;sequencer&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;sequencer usepriorities=&quot;False&quot;
+      repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;WalkingToRandom&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot;
+      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;&quot;
+      name=&quot;RandomMoveDecide&quot; debugbreak=&quot;False&quot; classname=&quot;AI_RANDOM_MOVE&quot;
+      /&gt;&lt;move turnspeed=&quot;100&quot; repeatuntil=&quot;&quot; priority=&quot;&quot;
+      name=&quot;Rotate&quot; movetarget=&quot;&quot; movespeed=&quot;&quot; facetarget=&quot;MoveTarget&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;&quot; closeenoughangle=&quot;0&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;WalkingAnimation&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_MOVE&quot; /&gt;&lt;move turnspeed=&quot;10000&quot;
+      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;MovetoTarget&quot;
+      movetarget=&quot;MoveTarget&quot; movespeed=&quot;1&quot; facetarget=&quot;MoveTarget&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.9&quot; closeenoughangle=&quot;0&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;Idle on arrival&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_IDLE&quot; /&gt;&lt;/sequencer&gt;&lt;/sequencer&gt;&lt;constraint
+      repeatuntil=&quot;failure&quot; name=&quot;CancelRandomMovement&quot; debugbreak=&quot;False&quot;
+      constraint=&quot;isMovingRandom&quot;&gt;&lt;timer waitforsec=&quot;15&quot;
+      returnvalue=&quot;success&quot; name=&quot;timer&quot; debugbreak=&quot;False&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;Cancel Random Move&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_STOP_MOVE&quot; /&gt;&lt;move turnspeed=&quot;100&quot; repeatuntil=&quot;&quot;
+      name=&quot;Set Move Target&quot; movetarget=&quot;MoveTarget&quot; movespeed=&quot;1&quot;
+      facetarget=&quot;MoveTarget&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot;
+      closeenoughangle=&quot;0.5&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;Idle Animation&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;/parallel&gt;&lt;/random&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;constraint
+      repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;CombatLoop&quot;
+      debugbreak=&quot;False&quot; constraint=&quot;state==1&quot;&gt;&lt;timer waitforsec=&quot;0.5&quot;
+      returnvalue=&quot;success&quot; name=&quot;timer&quot; debugbreak=&quot;False&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;&quot; name=&quot;StopMovement&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_STOP_MOVE&quot; /&gt;&lt;action repeatuntil=&quot;success&quot;
+      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
+      name=&quot;Move Animation&quot; debugbreak=&quot;False&quot; classname=&quot;AI_MOVE&quot;
+      /&gt;&lt;action repeatuntil=&quot;success&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;TargetPlayer&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_MoveToPlayer&quot; /&gt;&lt;move
+      turnspeed=&quot;10&quot; repeatuntil=&quot;&quot; name=&quot;Move to Player&quot;
+      movetarget=&quot;playerUW&quot; movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot; closeenoughangle=&quot;0&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;Pick A Random Attack Animation&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
+      waitforsec=&quot;0.8&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
+      debugbreak=&quot;False&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Execute Attack&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_EXECUTE&quot; /&gt;&lt;action
+      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;Combat Idle&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_COMBAT_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;constraint
+      repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;Death&quot;
+      debugbreak=&quot;False&quot; constraint=&quot;state==2&quot;&gt;&lt;action repeatuntil=&quot;&quot;
+      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
+      name=&quot;End Combat&quot; debugbreak=&quot;False&quot; classname=&quot;AI_COMBAT_END&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;playDeathAnim&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_DEATH&quot; /&gt;&lt;timer waitforsec=&quot;3&quot; returnvalue=&quot;success&quot;
+      name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;action repeatuntil=&quot;&quot;
+      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
+      name=&quot;DestroyAI&quot; debugbreak=&quot;False&quot; classname=&quot;AI_Destroy&quot;
+      /&gt;&lt;/constraint&gt;&lt;constraint repeatuntil=&quot;failure&quot; priority=&quot;&quot;
+      name=&quot;IdleStanding&quot; debugbreak=&quot;False&quot; constraint=&quot;state==3&quot;&gt;&lt;action
+      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;&quot; name=&quot;Idle Animation&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_IDLE&quot; /&gt;&lt;timer waitforsec=&quot;4&quot; returnvalue=&quot;success&quot;
+      name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;/constraint&gt;&lt;constraint
+      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;AlwaysWalking&quot;
+      debugbreak=&quot;False&quot; constraint=&quot;state==4&quot;&gt;&lt;parallel
+      tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;&quot;
+      name=&quot;parallel&quot; fail=&quot;any&quot; debugbreak=&quot;False&quot;&gt;&lt;constraint
+      repeatuntil=&quot;running&quot; name=&quot;CancelRandomMovement&quot; debugbreak=&quot;False&quot;
+      constraint=&quot;isMovingRandom&quot;&gt;&lt;timer waitforsec=&quot;5&quot;
+      returnvalue=&quot;success&quot; name=&quot;timer&quot; debugbreak=&quot;False&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;CancelMove&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_STOP_MOVE&quot; /&gt;&lt;move turnspeed=&quot;100&quot; repeatuntil=&quot;&quot;
+      name=&quot;Set Move target&quot; movetarget=&quot;MoveTarget&quot; movespeed=&quot;1&quot;
+      facetarget=&quot;MoveTarget&quot; debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot;
+      closeenoughangle=&quot;0.5&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;Idle Animation&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;sequencer
+      usepriorities=&quot;False&quot; repeatuntil=&quot;failure&quot; name=&quot;WalkingToRandom&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot;
+      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
+      name=&quot;WalkingAnimation&quot; debugbreak=&quot;False&quot; classname=&quot;AI_MOVE&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;Pick dest&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_RANDOM_MOVE&quot; /&gt;&lt;move turnspeed=&quot;10&quot;
+      repeatuntil=&quot;success&quot; priority=&quot;&quot; name=&quot;Move to target&quot;
+      movetarget=&quot;MoveTarget&quot; movespeed=&quot;1&quot; facetarget=&quot;MoveTarget&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot; closeenoughangle=&quot;0.3&quot;
+      /&gt;&lt;/sequencer&gt;&lt;/parallel&gt;&lt;/constraint&gt;&lt;/selector&gt;&lt;/behaviortree&gt;"
+      type="System.String" id="treeData" /><field type="System.Array" id="treeBindings"
+      elementtype="System.String" /></fields><references /></scriptableobject>
+    _serializedGameObjects: []
+    _serializedCustomData: []

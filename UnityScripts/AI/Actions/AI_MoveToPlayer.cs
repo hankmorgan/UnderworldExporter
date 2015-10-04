@@ -16,10 +16,11 @@ public class AI_MoveToPlayer : RAINAction
     {
 		//GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
 		//gob.AnimRange=GoblinAI.AI_RANGE_MOVE;
-		if (ai.Navigator.CurrentGraph==null)
-		{
-			ai.Navigator.CurrentGraph = RAIN.Navigation.NavigationManager.Instance.GetNavigationGraph ("GroundMesh2");
-		}
+		//if (ai.Navigator.CurrentGraph==null)
+	//	{
+			string navmesh= ai.Body.gameObject.GetComponent<NPC>().NavMeshRegion;
+			ai.Navigator.CurrentGraph = RAIN.Navigation.NavigationManager.Instance.GetNavigationGraph (navmesh);
+		//}
 
 	//	Debug.Log (RAIN.Navigation.NavigationManager.Instance.NavigationGraphs.Count);
 	

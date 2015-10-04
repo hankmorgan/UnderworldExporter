@@ -757,32 +757,27 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 		fprintf(LOGFILE,"\n");
 		for (x = 0; x <= 63; x++)
 			{
-			if (LevelInfo[x][y].tileType == TILE_SOLID)
-				{
-				//fprintf(LOGFILE,"S%03d-", LevelInfo[x][y].roomRegion);
-				//fprintf(LOGFILE, "S%03d-", LevelInfo[x][y].roomRegion);
+			if (LevelInfo[x][y].Render == 1)
+				{//TODO:Support other tile types
+				if (LevelInfo[x][y].tileType == TILE_SOLID)
+					{
+					if (LevelInfo[x][y].Render == 1)
+						{
+						fprintf(LOGFILE, "SetTileTag(%d,%d,\"SOLIDWALL\",%d);", x, y, LevelInfo[x][y].Render);
+						}
+					}
+				else if (LevelInfo[x][y].isWater == 1)
+					{
+					fprintf(LOGFILE, "SetTileTag(%d,%d,\"WATER_%d\", %d);", x, y, LevelInfo[x][y].waterRegion, LevelInfo[x][y].Render);
+					}
+
+				else
+					{
+					fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, LevelInfo[x][y].landRegion, LevelInfo[x][y].Render);
+					}
 				}
 
-			else if (LevelInfo[x][y].isWater == 1)
-				{
-				//fprintf(LOGFILE,"W%03d-", LevelInfo[x][y].roomRegion);
-				fprintf(LOGFILE, "SetTileTag(%d,%d,\"WATER_%d\", %d);", x, y, LevelInfo[x][y].waterRegion, LevelInfo[x][y].Render);
-				//fprintf(LOGFILE, "SetTileTag(%d,%d,\"WATER\", %d);", x, y, LevelInfo[x][y].Render);
-				}
-			//else if (LevelInfo[x][y].isCorridor == 1)
-			//	{
-			//	fprintf(LOGFILE,"C%03d-", LevelInfo[x][y].roomRegion);
-			//	}
-			//else if (LevelInfo[x][y].isDoor == 1)
-			//	{
-			//	fprintf(LOGFILE,"D%03d-", LevelInfo[x][y].roomRegion);
-			//	}
-			else
-				{
-				//fprintf(LOGFILE,"R%03d-", LevelInfo[x][y].roomRegion);
-				fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, LevelInfo[x][y].landRegion, LevelInfo[x][y].Render);
-				//fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND\", %d);", x, y, LevelInfo[x][y].Render);
-				}
+
 			}
 		}
 	for (int z = 0; z < 1024; z++)

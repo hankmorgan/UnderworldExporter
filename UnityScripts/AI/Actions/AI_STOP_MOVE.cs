@@ -16,6 +16,7 @@ public class AI_STOP_MOVE : RAINAction
     {
 		//ai.WorkingMemory.GetItem<Vector3>("moveStartPoint");
 		ai.WorkingMemory.SetItem<Vector3>("MoveTarget",ai.WorkingMemory.GetItem<Vector3>("moveStartPoint"));
+		//ai.WorkingMemory.SetItem<bool>("isMovingRandom",false);
         return ActionResult.SUCCESS;
     }
 

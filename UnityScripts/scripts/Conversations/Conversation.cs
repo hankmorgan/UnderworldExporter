@@ -76,7 +76,7 @@ public class Conversation : MonoBehaviour {
 	void Start () {
 
 		npc = this.GetComponent<NPC>();
-		WhoAmI = npc.WhoAmI;
+		WhoAmI = npc.npc_whoami;
 		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		//tl.textLabel.lineWidth=480;
 	}

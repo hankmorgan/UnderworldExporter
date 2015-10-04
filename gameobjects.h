@@ -325,6 +325,11 @@ struct ObjectItem
     short npc_hunger; //(?)
    //001a   0012   Int8          
     int npc_whoami;
+
+	short npc_health=0;
+	short npc_arms=0;
+	short npc_power = 0;
+	short npc_name = 0;
    
    //Some stuff I need for attaching objects to joints.
    int objectOwner;	//index to the npc carrying the object

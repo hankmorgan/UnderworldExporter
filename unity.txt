@@ -74,6 +74,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 58, 2, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 5, 0, 0, 8, 0, 0, 0, 0, 0,"GroundMesh11");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -196,6 +197,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 55, 4, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 6, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh11");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -233,6 +235,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 5, 6, 0, 0, 1);
+	SetNPCProps(myObj, 0, 49, 32, 1, 0, 3, 0, 0, 4, 0, 1, 0, 4, 0,"GroundMesh3");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,180,0);
@@ -333,6 +336,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 45, 6, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 8, 0, 8, 0, 0, 8, 1, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -342,6 +346,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 50, 6, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 8, 0, 8, 0, 0, 8, 1, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -367,6 +372,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 67);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 17, 7, 0, 0, 1);
+	SetNPCProps(myObj, 67, 0, 8, 0, 0, 43, 0, 0, 8, 2, 1, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -411,6 +417,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 22, 8, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 0, 0, 4, 0, 0, 4, 1, 1, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,225,0);
@@ -584,6 +591,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 18, 12, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 12, 0, 6, 0, 0, 4, 1, 1, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -659,6 +667,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 12, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 0, 0, 22, 0, 0, 8, 2, 1, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -743,6 +752,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 59, 14, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 0, 0, 6, 0, 0, 4, 1, 0, 0, 0, 0,"GroundMesh11");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -752,6 +762,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"73","Sprites/OBJECTS_073", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 2, 15, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 13, 0, 0, 4, 0, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -759,7 +770,7 @@
 	myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 2772160, 2772160);
+	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3741400, 3741400);
 
 	myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -779,6 +790,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 15, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 0, 0, 36, 0, 0, 8, 2, 1, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,90,0);
@@ -788,6 +800,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 12, 16, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 4, 0, 8, 0, 0, 8, 2, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -826,6 +839,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 17, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 9, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -879,6 +893,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 19, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 8, 0, 7, 0, 0, 4, 1, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -896,6 +911,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 20);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 22, 19, 0, 0, 1);
+	SetNPCProps(myObj, 20, 0, 8, 0, 0, 34, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -930,6 +946,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"75","Sprites/OBJECTS_075", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", 0, 75, 0, 12, 20, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 8, 0, 15, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,270,0);
@@ -947,6 +964,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"90","Sprites/OBJECTS_090", 19);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", "Sprites/OBJECTS_090", 0, 90, 0, 33, 20, 0, 0, 1);
+	SetNPCProps(myObj, 19, 0, 4, 12, 0, 50, 0, 0, 8, 1, 1, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,270,0);
@@ -974,6 +992,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"67","Sprites/OBJECTS_067", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", "Sprites/OBJECTS_067", 0, 67, 0, 2, 22, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 12, 0, 7, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -988,6 +1007,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 14, 23, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 20, 0, 0, 4, 0, 0, 0, 0, 0,"WaterMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -997,6 +1017,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 31, 23, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 4, 0, 6, 0, 0, 8, 2, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1043,6 +1064,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 29, 26, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 21, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,180,0);
@@ -1069,6 +1091,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 36, 28, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 9, 0, 0, 8, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1124,6 +1147,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 26, 33, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 4, 0, 5, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,270,0);
@@ -1149,7 +1173,7 @@
 	myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 2772160, 2772160);
+	CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3741400, 3741400);
 
 
 	myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1197,6 +1221,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"71","Sprites/OBJECTS_071", 66);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 537, 15, 35, 0, 0, 1);
+	SetNPCProps(myObj, 66, 0, 8, 12, 0, 21, 0, 0, 7, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,180,0);
@@ -1219,6 +1244,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 54, 35, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 12, 0, 11, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,180,0);
@@ -1321,6 +1347,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 3, 38, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 0, 0, 16, 0, 0, 2, 1, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,45,0);
@@ -1330,6 +1357,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"77","Sprites/OBJECTS_077", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", "Sprites/OBJECTS_077", 0, 77, 0, 11, 38, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 22, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,270,0);
@@ -1344,6 +1372,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 26, 38, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 24, 0, 0, 4, 0, 0, 0, 0, 0,"WaterMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1371,6 +1400,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 54, 38, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 28, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1459,7 +1489,7 @@
 	myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 30, 0, 1, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 2771384, 2771384);
+	CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3740616, 3740616);
 	myObj.transform.position = invMarker.transform.position;
 	AddObjectToContainer(myObj, ParentContainer, 4);
 	FreezeMovement(myObj);
@@ -1518,6 +1548,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"70","Sprites/OBJECTS_070", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 8, 43, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 8, 0, 19, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1527,6 +1558,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"70","Sprites/OBJECTS_070", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 0, 10, 43, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 0, 0, 15, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1536,6 +1568,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 23, 43, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1545,6 +1578,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 24, 43, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 8, 0, 5, 0, 0, 8, 1, 0, 0, 0, 0,"SkyMesh1");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1629,6 +1663,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 27, 46, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 4, 0, 16, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1656,6 +1691,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"71","Sprites/OBJECTS_071", 255);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 0, 4, 47, 0, 0, 1);
+	SetNPCProps(myObj, 255, 0, 4, 0, 0, 71, 0, 0, 12, 1, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1883,6 +1919,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"80","Sprites/OBJECTS_080", 7);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 60, 51, 0, 0, 1);
+	SetNPCProps(myObj, 7, 0, 8, 0, 0, 32, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1906,6 +1943,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 65);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 52, 0, 0, 1);
+	SetNPCProps(myObj, 65, 0, 8, 8, 0, 26, 0, 0, 7, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,270,0);
@@ -1916,6 +1954,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 52, 52, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 12, 0, 18, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -1973,6 +2012,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"83","Sprites/OBJECTS_083", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", "Sprites/OBJECTS_083", 0, 83, 0, 19, 54, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 0, 0, 24, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,135,0);
@@ -1988,6 +2028,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"68","Sprites/OBJECTS_068", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", "Sprites/OBJECTS_068", 0, 68, 0, 37, 54, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 8, 0, 16, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,180,0);
@@ -2040,6 +2081,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 46, 55, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 12, 0, 24, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -2049,6 +2091,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"87","Sprites/OBJECTS_087", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", "Sprites/OBJECTS_087", 0, 87, 0, 51, 55, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 4, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0,"WaterMesh14");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -2058,6 +2101,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"80","Sprites/OBJECTS_080", 8);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 538, 57, 55, 0, 0, 1);
+	SetNPCProps(myObj, 8, 0, 8, 8, 0, 53, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,270,0);
@@ -2076,6 +2120,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"70","Sprites/OBJECTS_070", 10);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", "Sprites/OBJECTS_070", 0, 70, 810, 4, 56, 0, 0, 1);
+	SetNPCProps(myObj, 10, 0, 8, 4, 0, 15, 0, 0, 7, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,90,0);
@@ -2106,6 +2151,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 64);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 45, 56, 0, 0, 1);
+	SetNPCProps(myObj, 64, 0, 8, 12, 0, 18, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -2115,6 +2161,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 47, 56, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 4, 0, 19, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -2124,6 +2171,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"71","Sprites/OBJECTS_071", 9);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", "Sprites/OBJECTS_071", 0, 71, 534, 2, 57, 0, 0, 1);
+	SetNPCProps(myObj, 9, 0, 8, 0, 0, 55, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,90,0);
@@ -2192,6 +2240,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"76","Sprites/OBJECTS_076", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", "Sprites/OBJECTS_076", 0, 76, 0, 51, 58, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 8, 0, 0, 28, 0, 0, 8, 2, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,180,0);
@@ -2299,6 +2348,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"80","Sprites/OBJECTS_080", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", "Sprites/OBJECTS_080", 0, 80, 0, 52, 59, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 4, 0, 0, 54, 0, 0, 12, 1, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,90,0);
@@ -2316,6 +2366,7 @@
 	myObj.transform.position = pos;
 	CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 37, 60, 0, 0, 1);
+	SetNPCProps(myObj, 0, 0, 0, 4, 0, 7, 0, 0, 4, 0, 0, 0, 0, 0,"GroundMesh2");
 	////Container contents
 	ParentContainer = CreateContainer(myObj, 255, 255, 255);
 	SetRotation(myObj,0,0,0);
@@ -2585,12 +2636,12 @@
 	myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,2772440);
+	Create_a_do_trap(myObj,3,3741680);
 
 	myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,2772440);
+	Create_a_do_trap(myObj,3,3741680);
 
 	myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2605,12 +2656,12 @@
 	myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,2772440);
+	Create_a_do_trap(myObj,3,3741680);
 
 	myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-	Create_a_do_trap(myObj,3,2772440);
+	Create_a_do_trap(myObj,3,3741680);
 
 	myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
