@@ -9276,7 +9276,11 @@ public class MyTools
 
 		SpriteRenderer sprt = myAI.GetComponent<SpriteRenderer>();
 		AnimationClip animClip = new AnimationClip();
+#if UNITY_5
+		//do nothing
+#else
 		AnimationUtility.SetAnimationType (animClip, ModelImporterAnimationType.Generic);
+#endif
 		EditorCurveBinding curveBinding = new EditorCurveBinding();
 		animClip.wrapMode = WrapMode.Loop;
 		animClip.name=AnimationName;
@@ -9320,7 +9324,11 @@ public class MyTools
 //		Animator Anim = myAI.GetComponent<Animator>();
 		SpriteRenderer sprt = myAI.GetComponent<SpriteRenderer>();
 		AnimationClip animClip = new AnimationClip();
+#if UNITY_5
+		//do nothing
+#else
 		AnimationUtility.SetAnimationType (animClip, ModelImporterAnimationType.Generic);
+#endif
 		EditorCurveBinding curveBinding = new EditorCurveBinding();
 
 		animClip.name="GreenGoblin_Facing_Towards";
@@ -9601,7 +9609,9 @@ public class MyTools
 		GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
 		newObj.name = myObj.name + "_AI";
+		newObj.transform.position=new Vector3(0,0,0);
 		newObj.transform.parent=myObj.transform;
+		newObj.transform.localPosition=new Vector3(0,0,0);
 		AIRig ai = newObj.GetComponent<AIRig>();
 		ai.AI.Body=myObj;
 		NPC npc = myObj.AddComponent<NPC>();
@@ -9901,9 +9911,10 @@ public class MyTools
 		newObj.name=myObj.name + "_Model";
 		newObj.transform.parent=myObj.transform;
 		newObj.transform.position = myObj.transform.position;
-		newObj.renderer.material.mainTexture= Resources.Load <Texture2D> (DoorTexturePath);
+		newObj.GetComponent<Renderer>().material.mainTexture= Resources.Load <Texture2D> (DoorTexturePath);
 		newObj.GetComponent<MeshCollider>().enabled=false;
 		MeshCollider mc = myObj.AddComponent<MeshCollider>();
+		mc.convex=true;//unity 5
 		mc.isTrigger=true;
 		mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
 		mc = myObj.AddComponent<MeshCollider>();
@@ -9928,7 +9939,7 @@ public class MyTools
 		MeshCollider mc = newObj.AddComponent<MeshCollider>();//was myobj
 		mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
 
-		Material[] myMat = newObj.renderer.materials;
+		Material[] myMat = newObj.GetComponent<Renderer>().materials;
 		//Debug.Log ("Upperbound is " + myMat.GetUpperBound(0));
 		for (int i = 0; i<=myMat.GetUpperBound(0);i++)
 		{

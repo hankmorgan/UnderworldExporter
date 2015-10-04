@@ -171,7 +171,7 @@ void ThrowObjectInHand()
 					Vector3 ThrowDir = ray.GetPoint(dropRange) - pInv.transform.position;
 					//Debug.Log ("throw dir is " + ThrowDir);
 					//Apply the force along the direction.
-					droppedItem.rigidbody.AddForce(ThrowDir*force);
+					droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 					//Clear the object and reset the cursor
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
 					//playerUW.CurrObjectSprite = "";

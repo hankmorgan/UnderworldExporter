@@ -25,7 +25,7 @@ public class RemoteCamera : MonoBehaviour {
 			}
 		}
 
-		myMat = ScreenToDisplayOn.renderer.materials;
+		myMat = ScreenToDisplayOn.GetComponent<Renderer>().materials;
 		player=GameObject.Find ("Gronk");
 	}
 	

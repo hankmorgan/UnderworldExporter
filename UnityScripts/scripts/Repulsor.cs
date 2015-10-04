@@ -17,7 +17,7 @@ public class Repulsor : MonoBehaviour {
 	void Start () {
 		TargetPos = this.transform.position;
 		CalcTargetZ();
-		play = GameObject.Find ("Gronk").collider;
+		play = GameObject.Find ("Gronk").GetComponent<Collider>();
 	}
 	
 	// Update is called once per frame

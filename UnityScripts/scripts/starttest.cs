@@ -28,7 +28,7 @@ public class starttest : MonoBehaviour {
 
 
 		GameObject theWallBrotha = GameObject.Find ("Wall_30_03");
-		Material[] myMat = theWallBrotha.renderer.materials;
+		Material[] myMat = theWallBrotha.GetComponent<Renderer>().materials;
 		for (int i = 0; i<myMat.GetUpperBound(0);i++)
 		{
 			//Debug.Log (myMat[i].name);

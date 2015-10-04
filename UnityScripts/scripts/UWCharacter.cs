@@ -289,7 +289,7 @@ public class UWCharacter : MonoBehaviour {
 							//CurrObjectSprite=objPicked.InventoryString;
 							pInv.ObjectInHand=hit.transform.name;
 							pInv.JustPickedup=true;//To stop me throwing it away immediately.
-							if (objPicked.rigidbody !=null)
+							if (objPicked.GetComponent<Rigidbody>() !=null)
 								{								
 								//objPicked.rigidbody.useGravity=false;
 								WindowDetect.FreezeMovement(objPicked.gameObject);

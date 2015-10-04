@@ -20,7 +20,7 @@ public class GameWorldController : MonoBehaviour {
 
 		foreach(Transform child in transform)
 		{
-			foreach(Material matt in child.gameObject.renderer.sharedMaterials)
+			foreach(Material matt in child.gameObject.GetComponent<Renderer>().sharedMaterials)
 			{
 				string mattName= matt.name.Substring(0,7);
 				if (AnimatedTextures.Contains(mattName ))

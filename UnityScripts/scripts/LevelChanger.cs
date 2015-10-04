@@ -20,6 +20,6 @@ public class LevelChanger : MonoBehaviour {
 		{
 			//RoomManager.SaveCurrentRoom();
 		}
-		RoomManager.LoadRoom(LevelName);
+		//RoomManager.LoadRoom(LevelName); TODO Replace this UNITY5
 	}
 }

@@ -22,7 +22,7 @@ public class ComputerScreen : MonoBehaviour {
 		//sc=this.GetComponentInChildren<SpriteRenderer>();
 		NextFrame=animationFrameTime;
 		//ScreenToDisplayOn= GameObject.Find (this.name+"_quad");
-		myMat = ScreenToDisplayOn.renderer.materials;
+		myMat = ScreenToDisplayOn.GetComponent<Renderer>().materials;
 		setSprite(0);
 	}
 	

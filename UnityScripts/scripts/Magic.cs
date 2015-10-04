@@ -350,7 +350,7 @@ public class Magic : MonoBehaviour {
 				rgd.useGravity=false;
 				projectile.transform.position=ray.GetPoint(dropRange);
 				Vector3 ThrowDir = ray.GetPoint(dropRange) - playerUW.transform.position;
-				projectile.rigidbody.AddForce(ThrowDir*force);
+				projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 
 				Debug.Log ("Ort jux has been cast");
 			}
