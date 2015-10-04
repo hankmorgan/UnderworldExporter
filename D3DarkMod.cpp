@@ -222,7 +222,7 @@ void RenderDarkModLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int ga
 		{//Loop through until we find a matching region that is both water and of this id.
 		for (y = 0; y<64; y++)
 			{
-			if ((LevelInfo[x][y].roomRegion == currRegion) && (LevelInfo[x][y].isWater == 1))
+			if ((LevelInfo[x][y].waterRegion == currRegion) && (LevelInfo[x][y].isWater == 1))
 				{//Found a water region.
 				fprintf(MAPFILE, "\n");
 				PrimitiveCount = 0;	//resets for each entity.
@@ -235,7 +235,7 @@ void RenderDarkModLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int ga
 					{//We've found a match so lets now render all the members of that region. we search again. Sigh.
 					for (int j = 0; j < 64; j++)
 						{
-						if ((LevelInfo[i][j].isWater == 1) && (LevelInfo[i][j].roomRegion == currRegion))
+						if ((LevelInfo[i][j].isWater == 1) && (LevelInfo[i][j].waterRegion == currRegion))
 							{
 							RenderWaterTiles(game, LevelInfo, i, j);
 							}

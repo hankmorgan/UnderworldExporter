@@ -485,6 +485,7 @@ void setElevatorProperties(tile LevelInfo[64][64], unsigned char *sub_ark, int a
 void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 
 void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
+void setBridgeBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
 void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
 void SetDeathWatch(ObjectItem objList[1600]);
 void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);

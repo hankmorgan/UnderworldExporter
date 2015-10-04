@@ -819,6 +819,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		for (x = 0; x <= 63; x++)
 			{
 			RenderFBXTile(gScene,game, x, y, LevelInfo[x][y], 0, 0, 0, skipCeil);
+			RenderFBXTile(gScene, game, x, y, LevelInfo[x][y], 1, 0, 0, skipCeil);
 			}
 
 		}
@@ -4944,7 +4945,9 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							FbxVector4 lControlPointl5(x1, y0, z0);
 							FbxVector4 lControlPointl6(x1, y1, z0);
 							FbxVector4 lControlPointl7(x0, y1, z0);
-							RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
+							char BridgeName[20];
+							sprintf_s(BridgeName, "BRIDGE_%02d_%02d", x, y);
+							RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, BridgeName,
 								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 								lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 								0, 1,

@@ -75,9 +75,15 @@ int Diagonal;
 int Top; int Bottom;	//Textures in each face
 short noOfNeighbours;	//Non solid neighbour tile count.
 short isWater;		//Set when it has a water texture.
+short hasBridge;
 //short waterRegion;	//Index to the water contigous area.
 short isCorridor;  //Part of a group of 4 or more tiles with only 2 non solid neighbours
-short roomRegion;	//Index to the contigous room that the tile is part of.
+//short roomRegion;	//Index to the contigous room that the tile is part of.
+//short upperRegion; //Special case to store multiple values when the tile is part of a bridge.
+short waterRegion; //Mask on water tiles for nav mesh generation.
+short lavaRegion;// Mask on lave tiles for nav mesh generation.
+short landRegion;// mask on land tiles for nave mesh generation
+short bridgeRegion;//Mask for bridges.
 short tileTested;  //for recursive region tests
 short tileX;
 short tileY;

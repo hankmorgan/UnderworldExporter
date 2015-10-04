@@ -328,6 +328,8 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 
 	printRoomRegions(LevelInfo, LevelNo);
 
+	printRoomRegionsForNavmeshTagging(LevelInfo,objList, LevelNo);
+
 	if (game == SHOCK)
 		{
 		printCeilingHeights(LevelInfo, LevelNo);
@@ -715,7 +717,7 @@ void printWaterRegions(tile LevelInfo[64][64], int LevelNo)
 			{
 			if (LevelInfo[x][y].isWater == 1)
 				{
-				fprintf(LOGFILE,"%02d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE,"%02d-", LevelInfo[x][y].waterRegion);
 				}
 			else
 				{
@@ -744,11 +746,11 @@ void printNeighbourCounts(tile LevelInfo[64][64], int LevelNo)
 	}
 
 
-void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
+void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo)
 	{
 	//Prints a tilemap that shows the various room regions that we have generated.
 	//Room regions can be rooms, corridors, water and doors.
-	int x; int y;
+	int x; int y; int z;
 	fprintf(LOGFILE,"\nNow Printing Room  regions for level :%d.", LevelNo);
 	for (y = 63; y >= 0; y--) //invert for ascii
 		{
@@ -757,28 +759,81 @@ void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
 			{
 			if (LevelInfo[x][y].tileType == TILE_SOLID)
 				{
-				fprintf(LOGFILE,"S%03d-", LevelInfo[x][y].roomRegion);
+				//fprintf(LOGFILE,"S%03d-", LevelInfo[x][y].roomRegion);
+				//fprintf(LOGFILE, "S%03d-", LevelInfo[x][y].roomRegion);
 				}
 
 			else if (LevelInfo[x][y].isWater == 1)
 				{
-				fprintf(LOGFILE,"W%03d-", LevelInfo[x][y].roomRegion);
+				//fprintf(LOGFILE,"W%03d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE, "SetTileTag(%d,%d,\"WATER_%d\", %d);", x, y, LevelInfo[x][y].waterRegion, LevelInfo[x][y].Render);
+				//fprintf(LOGFILE, "SetTileTag(%d,%d,\"WATER\", %d);", x, y, LevelInfo[x][y].Render);
+				}
+			//else if (LevelInfo[x][y].isCorridor == 1)
+			//	{
+			//	fprintf(LOGFILE,"C%03d-", LevelInfo[x][y].roomRegion);
+			//	}
+			//else if (LevelInfo[x][y].isDoor == 1)
+			//	{
+			//	fprintf(LOGFILE,"D%03d-", LevelInfo[x][y].roomRegion);
+			//	}
+			else
+				{
+				//fprintf(LOGFILE,"R%03d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, LevelInfo[x][y].landRegion, LevelInfo[x][y].Render);
+				//fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND\", %d);", x, y, LevelInfo[x][y].Render);
+				}
+			}
+		}
+	for (int z = 0; z < 1024; z++)
+		{
+		if (objectMasters[objList[z].item_id].type== BRIDGE)
+			{
+			x = objList[z].tileX; y = objList[z].tileY;
+			fprintf(LOGFILE, "SetObjectTag(\"BRIDGE_%02d_%02d\", \"LAND_%d\");\n", x, y, LevelInfo[x][y].bridgeRegion);
+			}
+		}
+	}
+
+void printRoomRegions(tile LevelInfo[64][64], int LevelNo)
+	{
+	//Prints a tilemap that shows the various room regions that we have generated.
+	//Room regions can be rooms, corridors, water and doors.
+	int x; int y;
+	fprintf(LOGFILE, "\nNow Printing Room  regions for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+		{
+		fprintf(LOGFILE, "\n");
+		for (x = 0; x <= 63; x++)
+			{
+			if (LevelInfo[x][y].tileType == TILE_SOLID)
+				{
+				//fprintf(LOGFILE,"S%03d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE, "S%03d-", LevelInfo[x][y].landRegion);
+				}
+
+			else if (LevelInfo[x][y].isWater == 1)
+				{
+				fprintf(LOGFILE, "W%03d-", LevelInfo[x][y].waterRegion);
 				}
 			else if (LevelInfo[x][y].isCorridor == 1)
 				{
-				fprintf(LOGFILE,"C%03d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE, "C%03d-", LevelInfo[x][y].landRegion);
 				}
 			else if (LevelInfo[x][y].isDoor == 1)
 				{
-				fprintf(LOGFILE,"D%03d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE, "D%03d-", LevelInfo[x][y].landRegion);
 				}
 			else
 				{
-				fprintf(LOGFILE,"R%03d-", LevelInfo[x][y].roomRegion);
+				fprintf(LOGFILE, "R%03d-", LevelInfo[x][y].landRegion);
 				}
 			}
 		}
 	}
+
+
+
 
 void printFloorOrientations(tile LevelInfo[64][64], int LevelNo)
 	{

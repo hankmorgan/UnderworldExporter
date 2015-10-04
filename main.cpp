@@ -1210,7 +1210,8 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setObjectTileXY(game, LevelInfo, objList);
 				setDoorBits(LevelInfo, objList);
-				setCorridors(LevelInfo, &roomIndex);
+				setBridgeBits(LevelInfo, objList);
+				//setCorridors(LevelInfo, &roomIndex);
 				setRooms(LevelInfo, &roomIndex);
 				setPatchBits(LevelInfo, objList);
 				setElevatorBits(LevelInfo, objList);
