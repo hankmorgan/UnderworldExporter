@@ -32,6 +32,10 @@ return Byte4 << 24 | Byte3 << 16 | Byte2 << 8 | Byte1 ;		//24 was 32
 
 long getValAtAddress(unsigned char *buffer, long Address, int size)
 	{//Gets contents of bytes the the specific integer address. int(8), int(16), int(32) per uw-formats.txt
+	if (Address < 0)
+		{
+		printf("Invalid Address Error\n");
+		}
 		switch (size)
 		{
 		case 8:
@@ -940,6 +944,12 @@ unsigned char *terraindat;
 	FILE *file = NULL;      // File pointer
 	switch (game)
 		{
+			case UWDEMO:
+			case SHOCK:
+				{
+				return;
+				break;
+				}
 		case UW1:
 			{
 			if ((file = fopen(UW1_TERRAIN_PROPS, "rb")) == NULL)

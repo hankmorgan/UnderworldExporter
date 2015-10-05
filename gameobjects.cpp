@@ -506,10 +506,14 @@ switch (game)
 	{
 	case UWDEMO:	//Underworld Demo
 		{
-		if ((file = fopen(filePath, "rb")) == NULL)
-			fprintf(LOGFILE,"Could not open specified file\n");
-		else
-			printf ("");
+		char UWdemoFileToOpen[255];
+		sprintf_s(UWdemoFileToOpen, 255, "%s\\data\\level13.st", filePath);
+		if ((file = fopen(UWdemoFileToOpen, "rb")) == NULL)
+			{
+			fprintf(LOGFILE, "Could not open specified file\n");
+			return;
+			}
+
 		// Get the size of the file in bytes
 		fileSize = getFileSize(file);
 		// Allocate space in the buffer for the whole file
@@ -526,9 +530,9 @@ switch (game)
 	case UW1:	//Underworld 1
 		{
 		if ((file = fopen(filePath, "rb")) == NULL)
-			fprintf(LOGFILE,"Could not open specified file\n");
-		else
-			printf ("");
+			{
+			fprintf(LOGFILE, "Could not open specified file\n");
+			}
 		// Get the size of the file in bytes
 		fileSize = getFileSize(file);
 		// Allocate space in the buffer for the whole file
@@ -546,9 +550,10 @@ switch (game)
 	case UW2:	//Underworld 2
 		{
 		if ((file = fopen(filePath, "rb")) == NULL)
-			fprintf(LOGFILE,"Could not open specified file\n");
-		else
-			printf ("");
+			{
+			fprintf(LOGFILE, "Could not open specified file\n");
+			return;
+			}
 		fileSize = getFileSize(file);
 		tmp_ark = new unsigned char[fileSize];
 		fread(tmp_ark, fileSize, 1,file);
@@ -610,7 +615,7 @@ switch (game)
 			
 			//Object header.
 			objList[x].item_id = (getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
-			if ((objList[x].item_id >= 464) && (game == UW1))//Fixed for bugged out of range items
+			if ((objList[x].item_id >= 464) && ((game == UW1) || (game== UWDEMO)))//Fixed for bugged out of range items
 				{
 				objList[x].item_id=464;
 				}
@@ -634,7 +639,6 @@ switch (game)
 			//+6
 
 			objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
-
 				if ((objectMasters[objList[x].item_id].type == TMAP_SOLID) || (objectMasters[objList[x].item_id].type == TMAP_CLIP))
 					{
 					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.

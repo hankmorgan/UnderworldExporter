@@ -109,9 +109,56 @@ int main()
 	shock_game_files[8] = "res\\Data\\SAVGAM07.dat";
 
 
-
+	const char *uw0_graphics_file[44];
 	const char *uw1_graphics_file[45];
 	const char *uw2_graphics_file[45];
+
+	uw0_graphics_file[0] = "Data\\DF16.tr";// - Floor textures 16x16");
+	uw0_graphics_file[1] = "Data\\DF32.tr";// - Floor textures 32x32\n");
+	uw0_graphics_file[2] = "Data\\DW16.tr";// - Wall textures 16x16");
+	uw0_graphics_file[3] = "Data\\DW64.tr";// - Wall textures 64x64\n");
+	uw0_graphics_file[4] = "Data\\3DWIN.GR";
+	uw0_graphics_file[5] = "Data\\ANIMO.GR";
+	uw0_graphics_file[6] = "Data\\ARMOR_F.GR";
+	uw0_graphics_file[7] = "Data\\ARMOR_M.GR";
+	uw0_graphics_file[8] = "Data\\BODIES.GR";
+	uw0_graphics_file[9] = "Data\\BUTTONS.GR";
+	uw0_graphics_file[10] = "Data\\CHAINS.GR";
+	uw0_graphics_file[11] = "Data\\CHARHEAD.GR";
+	uw0_graphics_file[12] = "Data\\CHRBTNS.GR";
+	uw0_graphics_file[13] = "Data\\COMPASS.GR";
+	uw0_graphics_file[14] = "Data\\CONVERSE.GR";
+	uw0_graphics_file[15] = "Data\\CURSORS.GR";
+	uw0_graphics_file[16] = "Data\\DOORS.GR";
+	uw0_graphics_file[17] = "Data\\DRAGONS.GR";
+	uw0_graphics_file[18] = "Data\\EYES.GR";
+	uw0_graphics_file[19] = "Data\\FLASKS.GR";
+	uw0_graphics_file[20] = "Data\\GENHEAD.GR";
+	uw0_graphics_file[21] = "Data\\HEADS.GR";
+	uw0_graphics_file[22] = "Data\\INV.GR";
+	uw0_graphics_file[23] = "Data\\LFTI.GR";
+	uw0_graphics_file[24] = "Data\\OBJECTS.GR";
+	uw0_graphics_file[25] = "Data\\OPTBN.GR";
+	uw0_graphics_file[26] = "Data\\OPTB.GR";
+	uw0_graphics_file[27] = "Data\\OPTBTNS.GR";
+	uw0_graphics_file[28] = "Data\\PANELS.GR";
+	uw0_graphics_file[29] = "Data\\POWER.GR";
+	uw0_graphics_file[30] = "Data\\QUEST.GR";
+	uw0_graphics_file[31] = "Data\\SCRLEDGE.GR";
+	uw0_graphics_file[32] = "Data\\SPELLS.GR";
+	uw0_graphics_file[33] = "Data\\TMFLAT.GR";
+	uw0_graphics_file[34] = "Data\\TMOBJ.GR";
+	uw0_graphics_file[35] = "Data\\WEAPONS.GR";
+	uw0_graphics_file[36] = "Data\\BLNKMAP.BYT";
+	uw0_graphics_file[37] = "Data\\CHARGEN.BYT";
+	uw0_graphics_file[38] = "Data\\CONV.BYT";
+	uw0_graphics_file[39] = "Data\\DMAIN.BYT";
+	uw0_graphics_file[40] = "Data\\OPSCR.BYT";
+	uw0_graphics_file[41] = "Data\\PRESD.BYT";
+	uw0_graphics_file[42] = "Data\\WIN1.BYT";
+	uw0_graphics_file[43] = "Data\\WIN2.BYT";
+
+
 	uw1_graphics_file[0] = "Data\\F16.tr";// - Floor textures 16x16");
 	uw1_graphics_file[1] = "Data\\F32.tr";// - Floor textures 32x32\n");
 	uw1_graphics_file[2] = "Data\\W16.tr";// - Wall textures 16x16");
@@ -310,7 +357,7 @@ int main()
 					switch (game)
 						{
 							case UWDEMO:
-								sprintf_s(GameFilePath, 255, "%s\\level13.st", path_uw0);
+								sprintf_s(GameFilePath, 255, "%s", path_uw0);
 								break;
 							case UW1:
 							case UW2:
@@ -471,8 +518,55 @@ int main()
 					switch (game)
 						{
 							case UWDEMO:
-								printf("\nCome back later...\n");
-								return 0;
+								for (int i = 0; i < 44; i++)
+									{
+									printf("%d) %s", i, uw0_graphics_file[i]);
+									if (i % 2 == 0)
+										{
+										printf("\t\t");
+										}
+									else
+										{
+										printf("\n");
+										}
+									}
+								printf("\nPick a file\n>");
+								scanf("%d", &graphics_file_no);
+								if ((graphics_file_no < 0) || (graphics_file_no > 43))
+									{
+									printf("Invalid input. Bye.");
+									return 0;
+									}
+								sprintf_s(Graphics_File, 255, "%s\\%s", path_uw0, uw0_graphics_file[graphics_file_no]);
+								sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw0);
+								sprintf_s(auxPalPath, 255, "%s\\%s", path_uw0, AUXILARY_PAL_FILE);
+								if (graphics_file_no <= 3)
+									{
+									graphics_mode = UW_GRAPHICS_TEXTURES;
+									switch (graphics_file_no)
+										{
+											case 0:
+												BitMapSize = 16; break;
+											case 1:
+												BitMapSize = 32; break;
+											case 2:
+												BitMapSize = 16; break;
+											case 3:
+												BitMapSize = 64; break;
+										}
+									}
+								else if (graphics_file_no <= 35)
+									{
+									if (graphics_file_no == 28)//Panels
+										{
+										panels = 1;
+										}
+									graphics_mode = UW_GRAPHICS_GR;
+									}
+								else
+									{
+									graphics_mode = UW_GRAPHICS_BITMAPS;
+									}
 								break;
 							case UW1:
 								for (int i = 0; i < 45; i++)
@@ -652,8 +746,9 @@ int main()
 						{
 							case UWDEMO:
 								sprintf_s(fileCrit, 255, "%s\\crit\\%s", path_uw0, TempOutFileName);
-								sprintf_s(fileAssoc, 255, "%s\\%s", path_uw0, UW1_CRITTER_ASSOC);
-								sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw0);
+								sprintf_s(fileCrit, 255, "%s\\crit\\", path_uw0);
+								sprintf_s(fileAssoc, 255, "%s\\%s", path_uw0, UW0_CRITTER_ASSOC);
+								sprintf_s(Graphics_Pal, 255, "%s\\data\\pals.dat", path_uw1);
 								sprintf_s(auxPalPath, 255, "%s\\%s", path_uw0, AUXILARY_PAL_FILE);
 								break;
 							case UW1:
@@ -838,6 +933,7 @@ int main()
 			case CRITTER_EXTRACT_MODE:
 				switch (game)
 					{
+					case UWDEMO:
 						case UW1:extractAllCrittersUW1(fileAssoc, fileCrit, Graphics_Pal, game, useTGA); break;
 						case UW2:extractAllCrittersUW2(fileAssoc, fileCrit, Graphics_Pal, game, useTGA); break;
 					}

@@ -330,11 +330,14 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	{
 	case UWDEMO:	//UW Demo
 		{
+		char UWdemoFileToOpen[255];
+		sprintf_s(UWdemoFileToOpen, 255, "%s\\data\\level13.st", filePath);
 		textureMapSize=0x7a;
-		if ((file = fopen(filePath, "rb")) == NULL)
-			fprintf(LOGFILE,"Could not open specified file\n");
-		else
-			fprintf(LOGFILE,"");
+		if ((file = fopen(UWdemoFileToOpen, "rb")) == NULL)
+			{
+			fprintf(LOGFILE, "Could not open specified file\n");
+			return 0;
+			}
 		long fileSize = getFileSize(file);
 		lev_ark = new unsigned char[fileSize];
 		fread(lev_ark, fileSize, 1,file);
@@ -348,11 +351,12 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		address_pointer =0;
 		//read in the textures
 		FILE *fileT = NULL; 
-		filePath = UW0_TEXTUREW_PATH;	
-		if ((fileT = fopen(filePath, "rb")) == NULL)
-			fprintf(LOGFILE,"Could not open specified file\n");
-		else
-			fprintf(LOGFILE,"");
+		//filePath = UW0_TEXTUREW_PATH;	
+		sprintf_s(UWdemoFileToOpen, 255, "%s\\DATA\\level13.txm", filePath);
+		if ((fileT = fopen(UWdemoFileToOpen, "rb")) == NULL)
+			{
+			fprintf(LOGFILE, "Could not open specified file\n");
+			}
 		fileSize = getFileSize(fileT);
 		tex_ark = new unsigned char[fileSize];
 		fread(tex_ark, fileSize, 1,fileT);
@@ -572,6 +576,8 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 					case UWDEMO:	//special case for demo since textures mappings are in a seperate file
 						LevelInfo[x][y].floorTexture = getFloorTex(tex_ark, textureAddress, FirstTileInt);
 						LevelInfo[x][y].shockCeilingTexture = LevelInfo[x][y].floorTexture;
+						LevelInfo[x][y].wallTexture = getWallTex(tex_ark, textureAddress, SecondTileInt);//?
+						LevelInfo[x][y].wallTexture = texture_map[SecondTileInt & 0x3F];
 						break;
 					case UW1:	//uw1
 						LevelInfo[x][y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);

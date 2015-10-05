@@ -50,12 +50,12 @@ int DecodeUWFont()
 */
 	palette *pal;
 	pal = new palette[256];
-	getPalette("c:\\games\\uw1\\data\\pals.dat", pal,0);
+	getPalette("c:\\games\\uwdemo\\data\\pals.dat", pal,0);
 
 
 
 	_finddata_t find;
-	long hnd = _findfirst("c:\\games\\uw1\\data\\font*.sys", &find);
+	long hnd = _findfirst("c:\\games\\uwdemo\\data\\font*.sys", &find);
 
 	if (hnd == -1)
 		{
@@ -76,7 +76,7 @@ int DecodeUWFont()
 
 
 		// construct name
-		sprintf(fname, "c:\\games\\uw1\\data\\%s.sys", basename);
+		sprintf(fname, "c:\\games\\uwdemo\\data\\%s.sys", basename);
 
 		FILE *fd = fopen(fname, "rb");
 

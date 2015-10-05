@@ -6,7 +6,8 @@
 /*Game paths*/
 
 //#define UW0_LEVEL_PATH  "C:\\Games\\Ultima\\UWDemo\\DATA\\level13.st"
-#define UW0_TEXTUREW_PATH "DATA\\level13.txm"
+//#define UW0_TEXTUREW_PATH "DATA\\level13.txm"
+#define UW0_CRITTER_ASSOC "crit\\dassoc.anm"
 
 //#define UW1_LEVEL_PATH  "C:\\Games\\UW1\\Data\\lev.ark"
 #define UW1_TEXTURE_CONFIG_FILE "uw1_retro_config.txt"

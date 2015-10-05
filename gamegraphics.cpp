@@ -184,7 +184,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
 				if (useTGA==1)
 					{
-					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i+210, pal, OutFileName,0);
+					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i+48, pal, OutFileName,0);
 					}
 				else
 					{
