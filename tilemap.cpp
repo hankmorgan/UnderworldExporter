@@ -463,7 +463,16 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 		switch (game)
 			{
 			case UWDEMO:
-				{texture_map[i] = getValAtAddress(tex_ark,textureAddress+(i*2),16);break;}//tex_ark[textureAddress+i];break;}
+				{
+				texture_map[i] = getValAtAddress(tex_ark, textureAddress + (i * 2), 16);
+				printf("%d = %d\n",i, texture_map[i]);
+				if (i == 57)
+					{
+					CeilingTexture = texture_map[i]+210;
+					}
+
+				break; 
+				}//tex_ark[textureAddress+i];break;}
 			case UW1:
 				{
 				if (i<48)	//Wall and floor textures are int 16s
@@ -532,6 +541,13 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 	switch (game)
 	{
 		case UWDEMO:
+			objectMasters[320].extraInfo = texture_map[48];
+			objectMasters[321].extraInfo = texture_map[49];
+			objectMasters[322].extraInfo = texture_map[50];
+			objectMasters[323].extraInfo = texture_map[51];
+			objectMasters[324].extraInfo = texture_map[52];
+			objectMasters[325].extraInfo = texture_map[53];
+			break;
 		case UW1:
 			objectMasters[320].extraInfo = texture_map[58];
 			objectMasters[321].extraInfo = texture_map[59];

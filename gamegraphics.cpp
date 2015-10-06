@@ -143,7 +143,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	getPalette(PaletteFile, pal, PaletteNo);    
+	getPaletteIndex(PaletteFile, pal, PaletteNo);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
@@ -184,7 +184,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
 				if (useTGA==1)
 					{
-					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i+48, pal, OutFileName,0);
+					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i+210, pal, OutFileName,0);
 					}
 				else
 					{
@@ -2373,7 +2373,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 
 void PrintAnimName(int game, int animNo)
 	{
-	if (game == UW1)
+	if ((game == UW1) || (game == UWDEMO))
 		{
 		switch (animNo)
 			{

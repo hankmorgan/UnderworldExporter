@@ -185,7 +185,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\", %d);", currobj.item_id, objectMasters[currobj.item_id].particle, currobj.npc_whoami);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	/*Set NPC Properties*/
-	if (game == UW1)
+	if ((game == UW1) || (game == UWDEMO))
 		{
 		fprintf(UNITY_FILE, "\n\tSetNPCProps(myObj, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d," ,
 			currobj.npc_whoami, currobj.npc_xhome, currobj.npc_yhome,
@@ -1482,7 +1482,7 @@ void RenderUnityEntityLeggings(int game, float x, float y, float z, ObjectItem &
 void RenderUnityEntityLight(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	int itemid_off; int itemid_on; int brightness; int duration;
-	if (game != UW1)
+	if ((game != UW1) && (game !=UWDEMO))
 		{
 		return;
 		}
