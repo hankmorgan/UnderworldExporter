@@ -128,7 +128,7 @@ public class NPC : MonoBehaviour {
 			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
 
-
+		//TODO:Make sure you add the conversation object to the npc!
 
 		Conversation x = (Conversation)this.GetComponent("Conversation_67");
 		Conversation.CurrentConversation=npc_whoami;

@@ -337,7 +337,7 @@ public class Magic : MonoBehaviour {
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
-				float force = 200.0f;
+				float force = 2.0f;
 				playerUW.ReadiedSpell= "";
 				GameObject projectile = new GameObject();
 				CreateObjectGraphics(projectile,"Sprites/objects_023",true);
@@ -349,7 +349,7 @@ public class Magic : MonoBehaviour {
 				rgd.freezeRotation =true;
 				rgd.useGravity=false;
 				projectile.transform.position=ray.GetPoint(dropRange);
-				Vector3 ThrowDir = ray.GetPoint(dropRange) - playerUW.transform.position;
+				Vector3 ThrowDir = ray.GetPoint(dropRange)  + (playerUW.transform.position+Camera.main.transform.position);//- playerUW.transform.position;
 				projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 
 				Debug.Log ("Ort jux has been cast");

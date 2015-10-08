@@ -25,6 +25,48 @@ public class WindowDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		switch (UWCharacter.InteractionMode)
+		{
+		case UWCharacter.InteractionModeAttack:
+			{
+			if (MouseHeldDown==true)
+				{
+					if(playerUW.AttackCharging==false)
+					{//Begin the attack
+						playerUW.MeleeBegin();
+					}
+					if ((playerUW.AttackCharging==true) && (playerUW.Charge<100))
+					{//While still charging increase the charge by the charge rate.
+						playerUW.MeleeCharging ();
+					}
+				return;
+				}
+			else if (playerUW.AttackCharging==true)
+				{
+				//Player has been building an attack up and has released it.
+				playerUW.MeleeExecute();
+				}
+			break;
+			}
+		default:
+			{//TODO:Fix this drag object behaviour.
+			/*if ((MouseHeldDown) && (pInv.ObjectInHand==""))
+				{
+				OnClick();
+				}
+			else if ((playerUW.CursorInMainWindow) && (pInv.ObjectInHand!="") && (MouseHeldDown==false) && (UWCharacter.InteractionMode==UWCharacter.InteractionModePickup))
+				{//Drop the object in hand.
+				ThrowObjectInHand();
+				}*/
+			break;
+			}
+		}
+
+
+	
+
+		return;
 		if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack) && (MouseHeldDown==true))
 		{
 			if(playerUW.AttackCharging==false)
@@ -35,6 +77,7 @@ public class WindowDetect : MonoBehaviour {
 			{//While still charging increase the charge by the charge rate.
 				playerUW.MeleeCharging ();
 			}
+			return;
 		}
 		if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack) && (MouseHeldDown==false) && (playerUW.AttackCharging==true))
 		{//Player has been building an attack up and has released it.
@@ -63,7 +106,7 @@ public class WindowDetect : MonoBehaviour {
 		//Debug.Log (UICamera.currentTouchID);
 		/*
 		 * Cursor Click on main view area
-		 */
+		// */
 		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
 		switch (UWCharacter.InteractionMode)
 		{
@@ -109,7 +152,7 @@ void OnPress(bool isDown)
 	}
 
 void UseObjectInHand()
-	{
+	{//TODO:Investigate Camera.Main.Viewport to Ray
 		if (pInv.ObjectInHand!="")
 		{//The player is holding something
 			//Determine what is directly in front of the player via a raycast
@@ -145,13 +188,17 @@ void ThrowObjectInHand()
 				//Determine what is directly in front of the player via a raycast
 				//If something is in the way then cancel the drop
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				//Debug.Log (Input.mousePosition);
+				//Ray ray = Camera.main.ViewportPointToRay(Input.mousePosition);
 
 				RaycastHit hit = new RaycastHit(); 
 				float dropRange=0.5f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the drop
 					//Calculate the force based on how high the mouse is
-					float force = Input.mousePosition.x/Camera.main.pixelHeight *200;
+					float force = Input.mousePosition.y/Camera.main.pixelHeight *200;
+					//float force = Camera.main.ViewportToWorldPoint(Input.mousePosition).y/Camera.main.pixelHeight *200;
+
 //					Debug.Log ("throw force is " + force);
 					//Get the object being dropped and moved towards the end of the ray
 					GameObject droppedItem = GameObject.Find(pInv.ObjectInHand);
@@ -216,4 +263,5 @@ void ThrowObjectInHand()
 
 		}
 	}
+
 }

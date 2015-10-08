@@ -60,8 +60,8 @@ public class UWCharacter : MonoBehaviour {
 	private int cursorSizeY =64;
 
 	//For controlling switching between mouse look and interaction
-	private MouseLook XAxis;
-	private MouseLook YAxis;
+	private MouseLook XYAxis;
+	//private MouseLook YAxis;
 	private bool MouseLookEnabled;
 	private GameObject MainCam;
 	public bool CursorInMainWindow;
@@ -139,8 +139,9 @@ public class UWCharacter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Cursor.visible = false;
 		StringControl=new StringController();
-		StringControl.InitStringController("c:\\uw1_strings.txt");
+	//	StringControl.InitStringController("c:\\uw1_strings.txt");
 		//Initialise some basic references on other objects.
 		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
 		ObjectInteraction.SC=StringControl;
@@ -164,9 +165,10 @@ public class UWCharacter : MonoBehaviour {
 		NPC.playerUW=this.GetComponent<UWCharacter>();
 		GoblinAI.player=this.gameObject;
 
-		XAxis = GetComponent<MouseLook>();
-		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
-		Screen.lockCursor=true;
+		XYAxis = GetComponent<MouseLook>();
+		//YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
+		//Screen.lockCursor=true;
+		Cursor.lockState=CursorLockMode.Locked;
 
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 
@@ -188,6 +190,7 @@ public class UWCharacter : MonoBehaviour {
 			{
 			InteractionMode=UWCharacter.DefaultInteractionMode;
 			}
+		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");
 	}
 
 	// Update is called once per frame
@@ -439,18 +442,23 @@ public class UWCharacter : MonoBehaviour {
 			if (MouseLookEnabled==false)
 			{
 				//Debug.Log("Turning on mouselook");
-				Screen.lockCursor = true;
-				XAxis.enabled=true;
-				YAxis.enabled=true;
+				//Screen.lockCursor = true;
+				//TODO:Position cursor to middle of screen.
+				XYAxis.enabled=true;
+				//YAxis.enabled=true;
 				MouseLookEnabled=true;
+				Cursor.lockState = CursorLockMode.Locked;
+				//Cursor.visible=false;
 			}
 			else
 			{
 				//Debug.Log("Turning off mouselook");
-				Screen.lockCursor = false;
-				XAxis.enabled=false;
-				YAxis.enabled=false;
+				//Screen.lockCursor = false;
+				XYAxis.enabled=false;
+				//YAxis.enabled=false;
 				MouseLookEnabled=false;
+				Cursor.lockState = CursorLockMode.None;
+				//Cursor.visible=false;
 			}
 		}
 		//Cursor.SetCursor (CursorIcon,Vector2.zero, CursorMode.ForceSoftware);

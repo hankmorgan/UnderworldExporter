@@ -47,9 +47,9 @@ public class UWFonts : MonoBehaviour {
 		int BitMapWidth = 328; //strIn.Length*font5x6pWidth;
 		int BitMapHeight= 328; // 2*font5x6pHeight;
 		//Debug.Log("Converting " + strIn);
-		Texture2D bgNew = new Texture2D(BitMapWidth,BitMapHeight,TextureFormat.ARGB32,false);
+		Texture2D bgNew = new Texture2D(BitMapWidth,BitMapHeight,TextureFormat.Alpha8,false);
 		Texture2D bg = Resources.Load <Texture2D> ("HUD/Textbox_alpha");
-		bgNew.alphaIsTransparency=true;
+		//bgNew.alphaIsTransparency=true;
 		bgNew.SetPixels(0,0, BitMapWidth, BitMapHeight,bg.GetPixels());
 		bgNew.filterMode=FilterMode.Point;
 		//strIn = strIn.ToUpper();

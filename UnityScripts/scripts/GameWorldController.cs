@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections;
 using System.Collections.Generic;
 
@@ -44,7 +46,9 @@ public class GameWorldController : MonoBehaviour {
 		//Debug.Log ("no of materials " + AnimMaterials.Count);
 		if (EnableTextureAnimation==true)
 		{
+#if UNITY_EDITOR
 			Undo.RegisterUndo(AnimMaterials.ToArray(), "Fix Shared Material");
+#endif
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
 	}
