@@ -98,7 +98,7 @@ int main()
 	uw_game_files[6] = "data\\byt.ark";	//UW2 ark files.
 
 	const char *shock_game_files[9];
-	shock_game_files[0] = "res\\Data\\archive.dat";
+	shock_game_files[0] = "Data\\archive.dat";
 	shock_game_files[1] = "res\\Data\\SAVGAM00.dat";
 	shock_game_files[2] = "res\\Data\\SAVGAM01.dat";
 	shock_game_files[3] = "res\\Data\\SAVGAM02.dat";
@@ -252,7 +252,7 @@ int main()
 	uw2_graphics_file[44] = "Cuts\\LBACK007.BYT";
 
 	const char *shock_graphics_file[18];
-	shock_graphics_file[0] = "RES\\DATA\\OBJART.RES";
+	shock_graphics_file[0] = "res\\DATA\\OBJART.RES";
 	shock_graphics_file[1] = "RES\\DATA\\OBJART2.RES";
 	shock_graphics_file[2] = "RES\\DATA\\OBJART3.RES";
 	shock_graphics_file[3] = "RES\\DATA\\CITMAT.RES";
@@ -272,7 +272,7 @@ int main()
 	shock_graphics_file[17] = "RES\\DATA\\WIN1.RES";
 
 	const char *shock_pal_file[3];
-	shock_pal_file[0] = "RES\\DATA\\gamepal.res";
+	shock_pal_file[0] = "res\\DATA\\gamepal.res";
 	shock_pal_file[1] = "RES\\DATA\\cutspal.res";
 	shock_pal_file[2] = "RES\\DATA\\splshpal.res";
 

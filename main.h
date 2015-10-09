@@ -38,11 +38,11 @@
 
 
 //#define SHOCK_LEVEL_PATH  "C:\\Games\\SystemShock\\Res\\DATA\\ARCHIVE.dat"
-#define SHOCK_STRINGS_FILE "\\Res\\DATA\\CYBSTRNG.RES"
+#define SHOCK_STRINGS_FILE "RES\\DATA\\CYBSTRNG.RES"
 #define SHOCK_TEXTURE_CONFIG_FILE "shock_texture_config.txt"
 #define SHOCK_TEXTURE_CONFIG_FILE_SOURCE "shock_texture_config_source.txt"
 #define SHOCK_OBJECT_CONFIG_FILE "shock_object_config.txt"
-#define SHOCK_COMMONOBJ_FILE  "C:\\Games\\SystemShock\\Res\\DATA\\objprop.dat"
+#define SHOCK_COMMONOBJ_FILE  "C:\\Games\\SystemShock\\DATA\\objprop.dat"
 #define SHOCK_MODEL_FILE  "Res\\DATA\\obj3d.res"
 //#define SHOCK_OUT_PATH "C:\\Games\\SystemShock\\Res\\DATA\\Repacked.dat"
 

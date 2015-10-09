@@ -143,7 +143,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	getPaletteIndex(PaletteFile, pal, PaletteNo);    
+	getPalette(PaletteFile, pal, PaletteNo);    
  
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
@@ -933,30 +933,146 @@ void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFil
 	//fprintf(LOGFILE,"\nNo of Frames Offsets %d", NoOfFrames);
 	//fprintf(LOGFILE,"\nCompression Type %d", getValAtAddress(critterFile, AddressPointer+1, 8));
 	AddressPointer = AddressPointer + 2;
-	for (int i = 0; i < NoOfFrames; i++)
-		{
-		int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
-		//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
-		int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
-		int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
-		int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
-		int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
-		int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
-		int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
-		//unsigned char *imgNibbles;
-		unsigned char *outputImg;
+	int AddressPointerStart = AddressPointer;
+int MaxWidth=0;
+int MaxHeight=0;
 
-		outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-		ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-		if (SkipFileOutput == 1)
-			{
-			if (useTGA == 1)
+int MaxHotSpotX=0;
+int MaxHotSpotY=0;
+	for (int pass = 0; pass <= 1; pass++)
+		{
+		AddressPointer=AddressPointerStart;
+		if (pass == 0)
+			{//get the max width and height
+			for (int i = 0; i < NoOfFrames; i++)
 				{
-				writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName, 1);
+				int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
+				//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
+				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+				int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+				if (hotspotx>BitMapWidth) 
+					{
+					hotspotx = BitMapWidth;
+					}
+				if (hotspoty>BitMapHeight)
+					{
+					hotspoty = BitMapHeight;
+					}
+
+				if (BitMapWidth > MaxWidth)
+					{
+					MaxWidth = BitMapWidth;
+					}
+				if (BitMapHeight > MaxHeight)
+					{
+					MaxHeight = BitMapHeight;
+					}
+
+				if (hotspotx > MaxHotSpotX)
+					{
+					MaxHotSpotX = hotspotx;
+					}
+				if (hotspoty > MaxHotSpotY)
+					{
+					MaxHotSpotY = hotspoty;
+					}
 				}
-			else
+			}
+		else
+			{//Extract
+			unsigned char *outputImg;
+			outputImg = new unsigned char[MaxWidth*MaxHeight*2];
+			for (int i = 0; i < NoOfFrames; i++)
 				{
-				writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+				int frameOffset = getValAtAddress(critterFile, AddressPointer + (i * 2), 16);
+				//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
+				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+				int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+				int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
+				int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
+				//unsigned char *imgNibbles;
+				
+				//Adjust the hotspots from the biggest point back to the image corners
+				int cornerX; int cornerY;
+				cornerX= MaxHotSpotX-hotspotx;
+				cornerY = MaxHotSpotY - hotspoty;
+				if (cornerX<0)
+					{
+					cornerX = 0;
+					}
+				if (cornerY<0)
+					{
+					cornerY = 0;
+					}
+
+				//if (((MaxWidth > BitMapWidth) || (MaxHeight > BitMapWidth)))
+				if (0)///Experimental code for keeping animation frames pinned to one spot.
+					{//Merge the image into a new big image at the hotspot coordinates.;
+					unsigned char *srcImg;
+					//fprintf(LOGFILE, "%s = Hotspot (%d,%d)\n", critterFile,hotspotx,hotspoty);
+//Offset the hotspot from the top left corner
+//hotspoty=MaxHeight-hotspoty;
+
+					srcImg = new unsigned char[BitMapWidth*BitMapHeight*2];
+					ua_image_decode_rle(critterFile,srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+					cornerY = MaxHeight-cornerY;//y is from the top left corner
+					printf("%d, %d\n",cornerX, cornerY);
+					if ((cornerX == 5) && (cornerY == 15))
+						{
+						printf("HERE");
+						}
+					//srcImg[hotspotx + hotspoty*BitMapWidth]=200;
+					
+					int ColCounter = 0; int RowCounter = 0;
+					bool ImgStarted = false;
+					for (int y = 0; y < MaxHeight; y++)
+						{
+						for (int x = 0; x < MaxWidth; x++)
+							{
+							if ((cornerX + ColCounter == x) && (MaxHeight-cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+								{//the pixel from the source image is here 
+								ImgStarted=true;
+								outputImg[x + (y*MaxWidth)] = srcImg[ColCounter+(RowCounter*BitMapWidth)];
+								//outputImg[x + (y*MaxWidth)] = 0;
+								ColCounter++;
+								}
+							else
+								{
+								outputImg[x + (y*MaxWidth)]=200;
+								}
+							}
+						if (ImgStarted == true)
+							{//New Row on the src image
+							RowCounter++;
+							ColCounter=0;
+							}
+						}
+					//Set the heights for output
+					BitMapWidth=MaxWidth;
+					BitMapHeight = MaxHeight;
+					}
+				else
+					{//No need to resize. Just output the image.
+					outputImg = new unsigned char[BitMapWidth*BitMapHeight*2];
+					ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+					outputImg[hotspotx + hotspoty*BitMapWidth] = 200;
+					}
+
+				if (SkipFileOutput == 1)
+					{
+					if (useTGA == 1)
+						{
+						writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName, 1);
+						}
+					else
+						{
+						writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+						}
+					}
 				}
 			}
 		}
@@ -2777,3 +2893,9 @@ for (int k = 0; k< NoOfChunks; k++)
 			}
 		}
 	}
+
+
+	void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255], char auxPalPath[255], char animFile[255], int useTGA)
+		{
+//todo tomorrow
+		}
