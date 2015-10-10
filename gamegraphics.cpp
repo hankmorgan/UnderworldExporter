@@ -126,9 +126,6 @@ void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,
 
 void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255],char auxPalPath[255],int useTGA)
 {
-    //const char *filePathIn = GRAPHICS_FILE ; //"C:\\Games\\Ultima\\UW1\\DATA\\W64.tr"; 
-//    int indexNo;
-    //unsigned char *BigEndBuf;          // Pointer to our buffered data (big endian format)
 	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
 	int i;
 	long NoOfTextures;
@@ -982,6 +979,10 @@ int MaxHotSpotY=0;
 			}
 		else
 			{//Extract
+			if (MaxHotSpotX * 2 > MaxWidth)
+				{//Try and center the hot spot in the image.
+				MaxWidth = MaxHotSpotX * 2;
+				}
 			unsigned char *outputImg;
 			outputImg = new unsigned char[MaxWidth*MaxHeight*2];
 			for (int i = 0; i < NoOfFrames; i++)
@@ -1000,17 +1001,21 @@ int MaxHotSpotY=0;
 				int cornerX; int cornerY;
 				cornerX= MaxHotSpotX-hotspotx;
 				cornerY = MaxHotSpotY - hotspoty;
-				if (cornerX<0)
+				if (cornerX<=0)
 					{
 					cornerX = 0;
 					}
-				if (cornerY<0)
+				else
+					{
+					cornerX = cornerX - 1;
+					}
+				if (cornerY<=0)
 					{
 					cornerY = 0;
 					}
 
 				//if (((MaxWidth > BitMapWidth) || (MaxHeight > BitMapWidth)))
-				if (0)///Experimental code for keeping animation frames pinned to one spot.
+				if (1)///Experimental code for keeping animation frames pinned to one spot.
 					{//Merge the image into a new big image at the hotspot coordinates.;
 					unsigned char *srcImg;
 					//fprintf(LOGFILE, "%s = Hotspot (%d,%d)\n", critterFile,hotspotx,hotspoty);
@@ -1020,11 +1025,7 @@ int MaxHotSpotY=0;
 					srcImg = new unsigned char[BitMapWidth*BitMapHeight*2];
 					ua_image_decode_rle(critterFile,srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
 					cornerY = MaxHeight-cornerY;//y is from the top left corner
-					printf("%d, %d\n",cornerX, cornerY);
-					if ((cornerX == 5) && (cornerY == 15))
-						{
-						printf("HERE");
-						}
+					//printf("%d, %d\n",cornerX, cornerY);
 					//srcImg[hotspotx + hotspoty*BitMapWidth]=200;
 					
 					int ColCounter = 0; int RowCounter = 0;
@@ -1042,7 +1043,7 @@ int MaxHotSpotY=0;
 								}
 							else
 								{
-								outputImg[x + (y*MaxWidth)]=200;
+								outputImg[x + (y*MaxWidth)]=0;//alpha
 								}
 							}
 						if (ImgStarted == true)
@@ -2895,7 +2896,126 @@ for (int k = 0; k< NoOfChunks; k++)
 	}
 
 
-	void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255], char auxPalPath[255], char animFile[255], int useTGA)
-		{
+void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255], char auxPalPath[255], char animFile[255], int useTGA)
+	{
 //todo tomorrow
+	unsigned char *AnimData;
+	unsigned char *textureFile;         
+	int i;
+	long NoOfTextures;
+
+	FILE *file = NULL;      // File pointer
+
+	if ((file = fopen(filePathIn, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "Could not open specified file\n"); return;
 		}
+
+	// Get the size of the file in bytes
+	long fileSize = getFileSize(file);
+
+	palette *pal;
+	pal = new palette[256];
+	getPalette(PaletteFile, pal, PaletteNo);
+	textureFile = new unsigned char[fileSize];
+	fread(textureFile, fileSize, 1, file);
+	fclose(file);
+
+	if ((file = fopen(animFile, "rb")) == NULL)
+		{
+		fprintf(LOGFILE, "Could not open specified file\n"); return;
+		}
+	fileSize = getFileSize(file);
+	AnimData = new unsigned char[fileSize];
+	fread(AnimData, fileSize, 1, file);
+	int AnimX[224];
+	int AnimY[224];
+int offset=0;
+int add_ptr=0;
+	for (int i =0; i<8 ; i++)
+		{
+		for (int j=0; j<28;j++)
+			{
+			AnimX[j + offset]= getValAtAddress(AnimData,add_ptr++,8);
+			}
+		for (int j = 0; j<28; j++)
+			{
+			AnimY[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
+			}
+		offset = offset + 28;
+		}
+
+		fprintf(LOGFILE, "File Type (should be %d):%d\n", FileType, textureFile[0]);
+		fprintf(LOGFILE, "No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
+		if (ImageCount == -1)	//All the images.
+			{
+			NoOfTextures = textureFile[2] << 8 | textureFile[1];
+			}
+		else
+			{
+			NoOfTextures = ImageCount;
+			}
+		for (i = 0; i < NoOfTextures; i++)
+			{
+			int MaxHeight = 112;
+			int MaxWidth = 172;
+			long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
+			int BitMapWidth = getValAtAddress(textureFile, textureOffset + 1, 8);
+			int BitMapHeight = getValAtAddress(textureFile, textureOffset + 2, 8);
+			int datalen;
+			palette auxpal[16];
+			int auxPalIndex;
+			unsigned char *imgNibbles;
+			unsigned char *outputImg;
+			unsigned char *srcImg;
+		fprintf(LOGFILE, "4 bit run-length\n");
+		//auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
+		auxPalIndex = 0;
+		datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
+		imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
+		textureOffset = textureOffset + 6;	//Start of raw data.
+		copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
+		LoadAuxilaryPal(auxPalPath, auxpal, pal, auxPalIndex);
+		srcImg = new unsigned char[BitMapWidth*BitMapHeight];
+		outputImg = new unsigned char[MaxWidth*MaxHeight];
+		DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, srcImg, 4);
+
+//Paste source image into output image.
+		int ColCounter = 0; int RowCounter = 0;
+		int cornerX = AnimX[i];
+		int cornerY = AnimY[i];
+
+		bool ImgStarted = false;
+		for (int y = 0; y < MaxHeight; y++)
+			{
+			for (int x = 0; x < MaxWidth; x++)
+				{
+				if ((cornerX + ColCounter == x) && (MaxHeight - cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+					{//the pixel from the source image is here 
+					ImgStarted = true;
+					outputImg[x + (y*MaxWidth)] = srcImg[ColCounter + (RowCounter*BitMapWidth)];
+					ColCounter++;
+					}
+				else
+					{
+					outputImg[x + (y*MaxWidth)] = 0;//alpha
+					}
+				}
+			if (ImgStarted == true)
+				{//New Row on the src image
+				RowCounter++;
+				ColCounter = 0;
+				}
+			}
+		char ImageName[255];
+		sprintf(ImageName, "%s_%d",OutFileName,auxPalIndex);
+		if (useTGA == 1)
+			{
+			writeTGA(outputImg, 0, MaxWidth, MaxHeight, i, auxpal, ImageName, ALPHA);
+			}
+		else
+			{
+			writeBMP(outputImg, 0, MaxWidth, MaxHeight, i, auxpal, ImageName);
+			}
+		}
+}

@@ -5,7 +5,8 @@ public class InteractionModeControlItem : MonoBehaviour {
 
 
 	public int InteractionMode;
-	private bool isOn;
+	public bool isOn;
+	public InteractionModeControl imc;
 
 	// Use this for initialization
 	void Start () {
@@ -24,12 +25,12 @@ public class InteractionModeControlItem : MonoBehaviour {
 		{
 			isOn=false;
 			InteractionModeControl.UpdateNow=true;
-			//UWCharacter.InteractionMode=UWCharacter.DefaultInteractionMode;
-			//UWCharacter.InteractionMode=-1;
+			UWCharacter.InteractionMode=UWCharacter.DefaultInteractionMode;
 		}
 		else
 		{
 			isOn=true;
+			imc.TurnOffOthers(InteractionMode);
 			InteractionModeControl.UpdateNow=true;
 			UWCharacter.InteractionMode=InteractionMode;
 		}

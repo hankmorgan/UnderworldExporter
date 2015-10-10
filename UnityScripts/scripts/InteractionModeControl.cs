@@ -31,4 +31,15 @@ public class InteractionModeControl : MonoBehaviour {
 			}
 		}
 	}
+	public void TurnOffOthers(int LeaveOn)
+	{
+		for (int i = 0; i<=5;i++)
+		{
+			if (i!=LeaveOn)
+			{
+				Controls[i].gameObject.GetComponent<InteractionModeControlItem>().isOn=false;
+			}
+		}
+
+	}
 }

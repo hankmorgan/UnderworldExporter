@@ -20,6 +20,7 @@ public class WindowDetect : MonoBehaviour {
 		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		playerUW=GameObject.Find ("Gronk").GetComponent <UWCharacter>();
 		pInv=GameObject.Find ("Gronk").GetComponent <PlayerInventory>();
+
 	}
 
 	
@@ -30,6 +31,10 @@ public class WindowDetect : MonoBehaviour {
 		{
 		case UWCharacter.InteractionModeAttack:
 			{
+			if (playerUW.AttackExecuting==true)
+			{//No attacks can be started will executing the last one.
+				return;
+			}
 			if (MouseHeldDown==true)
 				{
 					if(playerUW.AttackCharging==false)
@@ -97,6 +102,14 @@ public class WindowDetect : MonoBehaviour {
 			playerUW.AttackCharging=false;
 			playerUW.Charge=0;
 			playerUW.CursorInMainWindow=false;
+			if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
+			{
+				playerUW.wpa.SetAnimation= playerUW.GetWeapon () +"_Ready_" + playerUW.GetRace () + "_" + playerUW.GetHand();
+			}
+			else
+			{
+				playerUW.wpa.SetAnimation= "WeaponPutAway";
+			}
 			//MessageLog.text="unHover window";
 		}
 	}

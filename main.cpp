@@ -908,7 +908,18 @@ int main()
 							//	{
 							//	sprintf(OutFileName, "%d",f);
 							//extractTextureBitmap(-1, Graphics_File, Graphics_Pal, f, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
-							extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
+							if (graphics_file_no == 35)//Weapons
+								{
+								char WeaponAnims[255];
+								sprintf_s(auxPalPath, 255, "%s\\data\\Weapons.cm", path_uw1);
+								sprintf_s(WeaponAnims, 255, "%s\\data\\Weapons.dat", path_uw1);//TODO:Support other games properly!
+								ExtractWeaponAnimations(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, WeaponAnims, useTGA);
+								}
+							else
+								{
+								extractTextureBitmap(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
+								}
+							
 							//	}
 
 							}

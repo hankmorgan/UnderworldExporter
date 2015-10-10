@@ -72,6 +72,7 @@ public class UWCharacter : MonoBehaviour {
 
 	//Combat variables
 	public bool AttackCharging;
+	public bool AttackExecuting;
 	public float Charge;
 	public float chargeRate=33.0f;
 
@@ -137,9 +138,11 @@ public class UWCharacter : MonoBehaviour {
 
 	private int[] CompassHeadings={0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
 
+	public WeaponAnimation wpa;
+
 	// Use this for initialization
 	void Start () {
-		Cursor.visible = false;
+		//Cursor.visible = false;
 		StringControl=new StringController();
 	//	StringControl.InitStringController("c:\\uw1_strings.txt");
 		//Initialise some basic references on other objects.
@@ -164,6 +167,8 @@ public class UWCharacter : MonoBehaviour {
 		Conversation.SC=ObjectInteraction.SC;
 		NPC.playerUW=this.GetComponent<UWCharacter>();
 		GoblinAI.player=this.gameObject;
+
+
 
 		XYAxis = GetComponent<MouseLook>();
 		//YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
@@ -191,6 +196,8 @@ public class UWCharacter : MonoBehaviour {
 			InteractionMode=UWCharacter.DefaultInteractionMode;
 			}
 		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");
+
+		wpa = GameObject.Find ("HudAnimations").GetComponentInChildren<WeaponAnimation>();
 	}
 
 	// Update is called once per frame
@@ -204,7 +211,19 @@ public class UWCharacter : MonoBehaviour {
 		{//Player has a spell thats about to be cast. All other activity is ignored.
 			SpellMode ();
 		}
-
+		if ((AttackCharging==false) && (AttackExecuting==false))
+		{
+			if ((InteractionMode==UWCharacter.InteractionModeAttack))
+			{
+				wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
+			}
+			else
+			{
+			//	Debug.Log ("setting ready");
+				wpa.SetAnimation= "WeaponPutAway";
+			}
+		}
+	
 		//Get the current compass heading
 		currentHeading = CompassHeadings[ (int)Mathf.Round((  (this.gameObject.transform.eulerAngles.y % 360) / 22.5f)) ];
 	}
@@ -365,6 +384,10 @@ public class UWCharacter : MonoBehaviour {
 
 	public void MeleeBegin()
 	{//Begins to charge and attack. 
+
+		//wpa.SetAnimation= "Mace_Slash_White_Right_Charge";
+		//Debug.Log (GetWeapon () +"_Slash_" + GetRace () + "_" + GetHand() + "_Charge");
+		wpa.SetAnimation= GetWeapon () +"_Slash_" + GetRace () + "_" + GetHand() + "_Charge";
 		AttackCharging=true;
 		Charge=0;
 		//Debug.Log ("attack charging begun");
@@ -380,10 +403,14 @@ public class UWCharacter : MonoBehaviour {
 		}
 	}
 
-
-	public void MeleeExecute()
+	IEnumerator ExecuteMelee()
 	{
-		Debug.Log ("Attack released");//with charge of " + Charge +"%");
+
+		float localCharge=Charge;
+		Charge=0.0f;
+		AttackCharging=false;
+
+		yield return new WaitForSeconds(0.6f);
 
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit = new RaycastHit(); 
@@ -409,8 +436,19 @@ public class UWCharacter : MonoBehaviour {
 		{
 			Debug.Log ("MISS");
 		}
-		AttackCharging=false;
-		Charge=0.0f;
+
+		AttackExecuting=false;
+
+	}
+
+	public void MeleeExecute()
+	{
+		//Debug.Log ("Attack released");//with charge of " + Charge +"%");
+		//wpa.SetAnimation= "Mace_Slash_White_Right_Execute";
+//TODO:Figure out how to have the attack actually hit in time with the animation.
+		wpa.SetAnimation= GetWeapon () + "_Slash_" + GetRace () + "_" + GetHand() + "_Execute";
+		AttackExecuting=true;
+		StartCoroutine(ExecuteMelee());
 	}
 
 	public void AttackModeMelee()
@@ -517,5 +555,77 @@ public class UWCharacter : MonoBehaviour {
 	{
 		//Debug.Log ("applying damage");
 		CurVIT=CurVIT-5;
+	}
+
+	public string GetWeapon()
+	{
+		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
+		string ObjInWeaponHand;
+		if (isLefty)
+		{
+			ObjInWeaponHand= pInv.sLeftHand;
+		}
+		else
+		{
+			ObjInWeaponHand= pInv.sRightHand;
+		}
+
+
+		if (ObjInWeaponHand=="")
+		{
+			return "Fist";
+		}
+		else
+		{
+			GameObject handobj = GameObject.Find (ObjInWeaponHand);
+			Weapon weap = handobj.GetComponent<Weapon>();
+			if(weap!=null)
+			{
+			switch (weap.Skill)
+				{
+				case 3:
+					return "Sword";break;
+				case 4:
+					return "Axe";break;
+				case 5:
+					return "Mace";break;
+				default:
+					return "Fist";break;
+				}
+			}
+			else
+			{
+				return "Fist";
+			}
+		}
+	}
+
+	public string GetRace()
+	{
+		//It does'nt matter if you're black or white.
+
+		//Except here where I need to the right skin tone for weapon animations
+	 switch (Body)
+		{
+		case 1:
+		case 3:
+		case 4:
+		case 5:
+			return "White";break;
+		default:
+			return "Black";break;
+		}
+	}
+
+	public string GetHand()
+	{
+		if (isLefty)
+		{
+			return "Left";
+		}
+		else
+		{
+			return "Right";
+		}
 	}
 }
