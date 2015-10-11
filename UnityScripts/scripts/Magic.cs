@@ -184,7 +184,8 @@ public class Magic : MonoBehaviour {
 		}//EY
 		case "An Nox"://Cure Poison
 		{
-			Debug.Log(MagicWords+ " Cure Poison Cast");
+			Cast_AnNox(caster);
+			//Debug.Log(MagicWords+ " Cure Poison Cast");
 			break;
 		}//AN
 		case "An Corp Mani"://Smite Undead
@@ -327,34 +328,53 @@ public class Magic : MonoBehaviour {
 		{//Ready the spell to be cast.
 			Debug.Log ("Ort jux is ready to cast");
 			playerUW.ReadiedSpell= "Ort Jux";
+			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
 		}
 		else
 		{
-
-
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
-				float force = 2.0f;
+				float force = 200.0f;
 				playerUW.ReadiedSpell= "";
-				GameObject projectile = new GameObject();
-				CreateObjectGraphics(projectile,"Sprites/objects_023",true);
-				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
-				BoxCollider box = projectile.AddComponent<BoxCollider>();
-				box.size = new Vector3(0.2f,0.2f,0.2f);
-				box.center= new Vector3(0.0f,0.1f,0.0f);
-				Rigidbody rgd =projectile.AddComponent<Rigidbody>();
-				rgd.freezeRotation =true;
-				rgd.useGravity=false;
-				projectile.transform.position=ray.GetPoint(dropRange);
-				Vector3 ThrowDir = ray.GetPoint(dropRange)  + (playerUW.transform.position+Camera.main.transform.position);//- playerUW.transform.position;
-				projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
-
+				GameObject projectile = CreateMagicProjectile("Sprites/objects_023","",ray.GetPoint(dropRange/2.0f));
+				LaunchProjectile(projectile,ray,dropRange,force);
 				Debug.Log ("Ort jux has been cast");
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
 			}
 		}
+	}
+
+
+	static void Cast_AnNox(GameObject caster)
+	{//Cure Poison
+		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		playerUW.Poisoned=false;
+		Debug.Log ("AN Nox Cast");
+	}
+
+	static void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
+	{
+		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
+		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+	}
+
+
+	static GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location)
+	{
+		GameObject projectile = new GameObject();
+		CreateObjectGraphics(projectile,ProjectileImage,true);
+		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
+		BoxCollider box = projectile.AddComponent<BoxCollider>();
+		box.size = new Vector3(0.2f,0.2f,0.2f);
+		box.center= new Vector3(0.0f,0.1f,0.0f);
+		Rigidbody rgd =projectile.AddComponent<Rigidbody>();
+		rgd.freezeRotation =true;
+		rgd.useGravity=false;
+		projectile.transform.position=Location;
+		return projectile;
 	}
 
 

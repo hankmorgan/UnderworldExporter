@@ -56,8 +56,8 @@ public class UWCharacter : MonoBehaviour {
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;
 	//public string CurrObjectSprite;
-	private int cursorSizeX =64;
-	private int cursorSizeY =64;
+	private int cursorSizeX =32;
+	private int cursorSizeY =32;
 
 	//For controlling switching between mouse look and interaction
 	private MouseLook XYAxis;
@@ -142,6 +142,7 @@ public class UWCharacter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		//Cursor.visible = false;
 		StringControl=new StringController();
 	//	StringControl.InitStringController("c:\\uw1_strings.txt");
@@ -173,7 +174,7 @@ public class UWCharacter : MonoBehaviour {
 		XYAxis = GetComponent<MouseLook>();
 		//YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		//Screen.lockCursor=true;
-		Cursor.lockState=CursorLockMode.Locked;
+		Cursor.lockState=CursorLockMode.None;
 
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 

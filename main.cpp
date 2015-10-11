@@ -251,6 +251,149 @@ int main()
 	uw2_graphics_file[43] = "Cuts\\LBACK006.BYT";
 	uw2_graphics_file[44] = "Cuts\\LBACK007.BYT";
 
+	 char *uw1_cuts_file[45];
+	uw1_cuts_file[0] = "cuts\\cs000.n01";//   black screen
+	uw1_cuts_file[1] = "cuts\\cs000.n02";// * garamon in swirling air
+	uw1_cuts_file[2] = "cuts\\cs000.n03";//   garamon talking
+	uw1_cuts_file[3] = "cuts\\cs000.n04";// * garamon talking
+	uw1_cuts_file[4] = "cuts\\cs000.n05";// * garamon talking
+	uw1_cuts_file[5] = "cuts\\cs000.n06";// * garamon in swirling air
+	uw1_cuts_file[6] = "cuts\\cs000.n07";//   garamon appearing
+	uw1_cuts_file[7] = "cuts\\cs000.n10";//   intro w / tyball stealing princess, troll and guards etc.
+	uw1_cuts_file[8] = "cuts\\cs000.n11";//   almric talking, on throne
+	uw1_cuts_file[9] = "cuts\\cs000.n12";//   almric talking, closeup
+	uw1_cuts_file[10] = "cuts\\cs000.n15";//   guard talking
+	uw1_cuts_file[11] = "cuts\\cs000.n16";// * guard talking
+	uw1_cuts_file[12] = "cuts\\cs000.n17";// * guard talking
+	uw1_cuts_file[13] = "cuts\\cs000.n20";//   mountain scene, avatar taken to the abyss
+	uw1_cuts_file[14] = "cuts\\cs000.n21";// * mountain scene
+	uw1_cuts_file[15] = "cuts\\cs000.n22";//   abyss doors closed, from outside
+	uw1_cuts_file[16] = "cuts\\cs000.n23";//   doors closed, from inside, w / avatar
+	uw1_cuts_file[17] = "cuts\\cs000.n24";//   guard talking, with purple background
+	uw1_cuts_file[18] = "cuts\\cs000.n25";// * guard talking, with purple background
+	uw1_cuts_file[19] = "cuts\\cs001.n01";//   ship approaching, abyss collapsing
+	uw1_cuts_file[20] = "cuts\\cs001.n02";//   ship taking avatar on board
+	uw1_cuts_file[21] = "cuts\\cs001.n03";//  almric talking, on ship
+	uw1_cuts_file[22] = "cuts\\cs001.n04";//   almric talking, on ship
+	uw1_cuts_file[23] = "cuts\\cs001.n05";// * almric talking, on ship, birds in background
+	uw1_cuts_file[24] = "cuts\\cs001.n06";//   arial talking
+	uw1_cuts_file[25] = "cuts\\cs001.n07";//   arial talking
+	uw1_cuts_file[26] = "cuts\\cs001.n10";//   abyss collapsing, ship sails away
+	uw1_cuts_file[27] = "cuts\\cs002.n01";//   dying tyball talking
+	uw1_cuts_file[28] = "cuts\\cs002.n02";// * dying tyball talking
+	uw1_cuts_file[29] = "cuts\\cs002.n03";// * dying tyball talking
+	uw1_cuts_file[30] = "cuts\\cs002.n04";// * dying tyball, dying
+	uw1_cuts_file[31] = "cuts\\cs003.n01";//   arial talking
+	uw1_cuts_file[32] = "cuts\\cs003.n02";// * arial talking
+	uw1_cuts_file[33] = "cuts\\cs011.n01";//   "ultima underworld the stygian abyss" splash screen anim
+	uw1_cuts_file[34] = "cuts\\cs012.n01";//   acknowledgements
+	uw1_cuts_file[35] = "cuts\\cs013.n01";//   goblet with letters "in"
+	uw1_cuts_file[36] = "cuts\\cs014.n01";//   goblet with letters "sa"
+	uw1_cuts_file[37] = "cuts\\cs015.n01";//   goblet with letters "hn"
+	uw1_cuts_file[38] = "cuts\\cs400.n01";//   "look" graphics for windows to abyss volcano core
+	uw1_cuts_file[39] = "cuts\\cs401.n01";//   grave stones
+	uw1_cuts_file[40] = "cuts\\cs402.n01";//   death skulls w / silver sapling
+	uw1_cuts_file[41] = "cuts\\cs403.n01";//   death skulls animation
+	uw1_cuts_file[42] = "cuts\\cs403.n02";//   death skull end anim
+	uw1_cuts_file[43] = "cuts\\cs404.n01";//   anvil graphics
+	uw1_cuts_file[44] = "cuts\\cs410.n01";//   map piece showing some traps
+
+	char *uw1_cuts_out_file[45];
+	uw1_cuts_out_file[0] = "cs000_n01";//   black screen
+	uw1_cuts_out_file[1] = "cs000_n02";// * garamon in swirling air
+	uw1_cuts_out_file[2] = "cs000_n03";//   garamon talking
+	uw1_cuts_out_file[3] = "cs000_n04";// * garamon talking
+	uw1_cuts_out_file[4] = "cs000_n05";// * garamon talking
+	uw1_cuts_out_file[5] = "cs000_n06";// * garamon in swirling air
+	uw1_cuts_out_file[6] = "cs000_n07";//   garamon appearing
+	uw1_cuts_out_file[7] = "cs000_n10";//   intro w / tyball stealing princess, troll and guards etc_
+	uw1_cuts_out_file[8] = "cs000_n11";//   almric talking, on throne
+	uw1_cuts_out_file[9] = "cs000_n12";//   almric talking, closeup
+	uw1_cuts_out_file[10] = "cs000_n15";//   guard talking
+	uw1_cuts_out_file[11] = "cs000_n16";// * guard talking
+	uw1_cuts_out_file[12] = "cs000_n17";// * guard talking
+	uw1_cuts_out_file[13] = "cs000_n20";//   mountain scene, avatar taken to the abyss
+	uw1_cuts_out_file[14] = "cs000_n21";// * mountain scene
+	uw1_cuts_out_file[15] = "cs000_n22";//   abyss doors closed, from outside
+	uw1_cuts_out_file[16] = "cs000_n23";//   doors closed, from inside, w / avatar
+	uw1_cuts_out_file[17] = "cs000_n24";//   guard talking, with purple background
+	uw1_cuts_out_file[18] = "cs000_n25";// * guard talking, with purple background
+	uw1_cuts_out_file[19] = "cs001_n01";//   ship approaching, abyss collapsing
+	uw1_cuts_out_file[20] = "cs001_n02";//   ship taking avatar on board
+	uw1_cuts_out_file[21] = "cs001_n03";//  almric talking, on ship
+	uw1_cuts_out_file[22] = "cs001_n04";//   almric talking, on ship
+	uw1_cuts_out_file[23] = "cs001_n05";// * almric talking, on ship, birds in background
+	uw1_cuts_out_file[24] = "cs001_n06";//   arial talking
+	uw1_cuts_out_file[25] = "cs001_n07";//   arial talking
+	uw1_cuts_out_file[26] = "cs001_n10";//   abyss collapsing, ship sails away
+	uw1_cuts_out_file[27] = "cs002_n01";//   dying tyball talking
+	uw1_cuts_out_file[28] = "cs002_n02";// * dying tyball talking
+	uw1_cuts_out_file[29] = "cs002_n03";// * dying tyball talking
+	uw1_cuts_out_file[30] = "cs002_n04";// * dying tyball, dying
+	uw1_cuts_out_file[31] = "cs003_n01";//   arial talking
+	uw1_cuts_out_file[32] = "cs003_n02";// * arial talking
+	uw1_cuts_out_file[33] = "cs011_n01";//   "ultima underworld the stygian abyss" splash screen anim
+	uw1_cuts_out_file[34] = "cs012_n01";//   acknowledgements
+	uw1_cuts_out_file[35] = "cs013_n01";//   goblet with letters "in"
+	uw1_cuts_out_file[36] = "cs014_n01";//   goblet with letters "sa"
+	uw1_cuts_out_file[37] = "cs015_n01";//   goblet with letters "hn"
+	uw1_cuts_out_file[38] = "cs400_n01";//   "look" graphics for windows to abyss volcano core
+	uw1_cuts_out_file[39] = "cs401_n01";//   grave stones
+	uw1_cuts_out_file[40] = "cs402_n01";//   death skulls w / silver sapling
+	uw1_cuts_out_file[41] = "cs403_n01";//   death skulls animation
+	uw1_cuts_out_file[42] = "cs403_n02";//   death skull end anim
+	uw1_cuts_out_file[43] = "cs404_n01";//   anvil graphics
+	uw1_cuts_out_file[44] = "cs410_n01";//   map piece showing some traps
+
+	int uw1_cuts_alpha[45];
+	uw1_cuts_alpha[0] = 0;
+	uw1_cuts_alpha[1] = 0;
+	uw1_cuts_alpha[2] = 0;
+	uw1_cuts_alpha[3] = 0;
+	uw1_cuts_alpha[4] = 0;
+	uw1_cuts_alpha[5] = 0;
+	uw1_cuts_alpha[6] = 0;
+	uw1_cuts_alpha[7] = 0;
+	uw1_cuts_alpha[8] = 0;
+	uw1_cuts_alpha[9] = 0;
+	uw1_cuts_alpha[10] = 0;
+	uw1_cuts_alpha[11] = 0;
+	uw1_cuts_alpha[12] = 0;
+	uw1_cuts_alpha[13] = 0;
+	uw1_cuts_alpha[14] = 0;
+	uw1_cuts_alpha[15] = 0;
+	uw1_cuts_alpha[16] = 0;
+	uw1_cuts_alpha[17] = 0;
+	uw1_cuts_alpha[18] = 0;
+	uw1_cuts_alpha[19] = 0;
+	uw1_cuts_alpha[20] = 0;
+	uw1_cuts_alpha[21] = 0;
+	uw1_cuts_alpha[22] = 0;
+	uw1_cuts_alpha[23] = 0;
+	uw1_cuts_alpha[24] = 0;
+	uw1_cuts_alpha[25] = 0;
+	uw1_cuts_alpha[26] = 0;
+	uw1_cuts_alpha[27] = 0;
+	uw1_cuts_alpha[28] = 0;
+	uw1_cuts_alpha[29] = 0;
+	uw1_cuts_alpha[30] = 0;
+	uw1_cuts_alpha[31] = 0;
+	uw1_cuts_alpha[32] = 0;
+	uw1_cuts_alpha[33] = 0;
+	uw1_cuts_alpha[34] = 0;
+	uw1_cuts_alpha[35] = 0;
+	uw1_cuts_alpha[36] = 0;
+	uw1_cuts_alpha[37] = 0;
+	uw1_cuts_alpha[38] = 0;
+	uw1_cuts_alpha[39] = 1;
+	uw1_cuts_alpha[40] = 1;
+	uw1_cuts_alpha[41] = 1;
+	uw1_cuts_alpha[42] = 1;
+	uw1_cuts_alpha[43] = 1;
+	uw1_cuts_alpha[44] = 1;
+
+
+
 	const char *shock_graphics_file[18];
 	shock_graphics_file[0] = "res\\DATA\\OBJART.RES";
 	shock_graphics_file[1] = "RES\\DATA\\OBJART2.RES";
@@ -818,6 +961,7 @@ int main()
 						}
 					else
 						{
+						/*
 						printf("\nType a cutscene filename for extraction from. gamedata\\cuts\\[filename]\n");
 						scanf("%s", TempOutFileName);
 						switch (game)
@@ -832,6 +976,7 @@ int main()
 									sprintf_s(Graphics_File, 255, "%s\\cuts\\%s", path_uw2, TempOutFileName);
 									break;
 							}
+							*/
 						}
 					//printf("\nEnter a file format to use.\n0) BMP\n1) TGA\n>");
 					//scanf("%d", &useTGA);
@@ -951,15 +1096,31 @@ int main()
 				//extractCritters(fileAssoc, fileCrit, Graphics_Pal, critPal, 64, UW_GRAPHICS_GR,game, 0, OutFileName,useTGA,1);
 				break;
 			case CUTSCENE_EXTRACT_MODE:
-				if (game == SHOCK)
+				switch (game)
 					{
-					ExtractShockCutscenes(Graphics_File, Graphics_Pal, critPal, OutFileName, 0);//Bitmap only so far
+					case UW1:
+						for (int i = 17; i < 45; i++)
+							{
+							char inFile[255];
+							sprintf(inFile, "%s\\%s",path_uw1, uw1_cuts_file[i] ,1);
+							if (i == 17)
+								{
+								load_cuts_anim(inFile, uw1_cuts_out_file[i], useTGA,true,uw1_cuts_alpha[i]);
+								}
+							else
+								{
+								load_cuts_anim(inFile, uw1_cuts_out_file[i], useTGA, false, uw1_cuts_alpha[i]);
+								}							
+							}						
+						break;
+					case SHOCK:
+						ExtractShockCutscenes(Graphics_File, Graphics_Pal, critPal, OutFileName, 0);//Bitmap only so far
+						break;
+					default:
+						load_cuts_anim(Graphics_File, OutFileName, useTGA,false,0);
+						break;
 					}
-				else
-					{
-					load_cuts_anim(Graphics_File, OutFileName, useTGA);
-					}
-				break;
+							break;
 			case MATERIALS_BUILD_MODE:
 				//BuildSHOCKMtrFiles(0);
 				//BuildXDataFile(game);

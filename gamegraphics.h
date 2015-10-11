@@ -61,7 +61,7 @@ void DecodeRLEBitmap(unsigned char *imageData, int datalen, int imageWidth, int 
 //void writeBMP4(unsigned char *bits, long Start, long SizeH, long SizeV, int index, palette auxpal[16], char OutFileName[255]);
 int getNibble(unsigned char *nibbles, int *addr_ptr);
 
-bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA);
+bool load_cuts_anim(char filePathIn[255], char filePathOut[255], int useTGA, bool ErrorHandling, int isAlpha);
 
 void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr, unsigned char *auxpal);
 void extractUW2Bitmaps(char filePathIn[255],char PaletteFile[255],int PaletteNo,char OutFileName[255], int useTGA);

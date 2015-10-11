@@ -21,7 +21,8 @@ public class ActiveRuneSlot : MonoBehaviour {
 			if (playerUW.ActiveRunes[SlotNumber]!=-1)
 			{
 				//label.spriteName= "rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2");
-				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
+				Debug.Log ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
+				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2"));
 			}
 			else
 			{

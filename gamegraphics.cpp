@@ -141,7 +141,12 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	palette *pal;
 	pal = new palette[256];
 	getPalette(PaletteFile, pal, PaletteNo);    
- 
+	unsigned char palettefile[256];
+	for (int i = 0; i < 256; i++)
+		{
+		palettefile[i]=i;
+		}
+	writeTGA(palettefile, 0, 256,1, 0, pal, "palette",1);
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
 	textureFile = new unsigned char[fileSize];
@@ -1342,9 +1347,10 @@ void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned 
 	}
 }
 
-bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA)
+bool load_cuts_anim(char filePathIn[255], char filePathOut[255],int useTGA, bool ErrorHandling, int isAlpha)
 	{
 useTGA=1;
+printf("%s\n", filePathIn);
 //This is lifted wholesale from the Underworld Adventures implementation 
 	lpfileheader lpheader;
 	lp_descriptor lparray[256];
@@ -1405,10 +1411,14 @@ useTGA=1;
 	fclose(fd);
 
 	// alloc memory for the outbuffer
-	outbuffer = new Uint8[lpheader.width*lpheader.height + 1000];
+	outbuffer = new Uint8[lpheader.width*lpheader.height + 4000];
 	for (int framenumber = 0; framenumber < lpheader.nFrames; framenumber++)
 		{
-		
+		if ((ErrorHandling == true) && (framenumber == 10))
+			{//Special case crashes on a particular cutscene. (doors closing on avatar)
+			return 0;
+			}
+
 		//draw_screen();
 		int i = 0;
 		for (; i<lpheader.nLps; i++)
@@ -1417,7 +1427,7 @@ useTGA=1;
 
 		// calculate large page descriptor pointer and large page pointer
 		curlp = reinterpret_cast<lp_descriptor*>(pages + 0x10000 * i);
-		thepage = reinterpret_cast<Uint8*>(curlp)+sizeof(lp_descriptor)+2;
+		thepage = reinterpret_cast<Uint8*>(curlp)+sizeof(lp_descriptor)+2 ;
 		// page length: curlp.nBytes+(curlp.nRecords*2)
 		int destframe = framenumber - curlp->baseRecord;
 
@@ -1442,7 +1452,7 @@ useTGA=1;
 		fprintf(LOGFILE,"Writing frame %d of %d to file\n", framenumber, lpheader.nFrames);
 		if (useTGA==1)
 			{
-			writeTGA(outbuffer, 0, lpheader.width, lpheader.height, framenumber,pal,filePathOut,0);//No alpha on cutscenes.
+			writeTGA(outbuffer, 0, lpheader.width, lpheader.height, framenumber,pal,filePathOut,isAlpha);//No alpha on cutscenes.
 			}
 		else
 			{
