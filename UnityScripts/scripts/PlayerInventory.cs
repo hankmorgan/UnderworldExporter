@@ -125,7 +125,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 
 		ls = null;
-		int MaxBrightness=0;
+		int MaxBrightness=LightSource.MagicBrightness;//Start with magically generated light.
 		for (int i = 5; i<=8; i++)
 		{
 			ls = null;

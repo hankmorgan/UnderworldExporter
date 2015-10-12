@@ -121,6 +121,8 @@ public class WindowDetect : MonoBehaviour {
 		 * Cursor Click on main view area
 		// */
 		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
+
+
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModeOptions://Options mode

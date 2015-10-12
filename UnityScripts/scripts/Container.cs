@@ -432,10 +432,10 @@ public class Container : MonoBehaviour {
 					{
 						Container.SetItemsPosition(item.GetComponent<Container>(),Position);
 					}
-				else
-					{
-						Debug.Log (">" + ItemName + "< is null!");
-					}
+				//else
+				//	{
+						//Debug.Log (">" + ItemName + "< is null!");
+				//	}
 				}
 			}
 		}

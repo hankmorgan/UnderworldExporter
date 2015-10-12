@@ -233,7 +233,7 @@ public class UWCharacter : MonoBehaviour {
 	{//Casts a spell on right click.
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		{
-			Debug.Log(ReadiedSpell + " is cast in main wind");
+			//Debug.Log(ReadiedSpell + " is cast in main wind");
 			Magic.castSpell(this.gameObject, ReadiedSpell,false);
 			//ReadiedSpell="";
 		}

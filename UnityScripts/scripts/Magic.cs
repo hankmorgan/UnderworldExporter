@@ -8,6 +8,9 @@ public class Magic : MonoBehaviour {
 								"Mani","Nox","Ort","Por",
 								"Quas","Rel","Sanct","Tym",
 								"Uus","Vas","Wis","Ylem"};
+
+	static long SummonCount=0;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -25,22 +28,24 @@ public class Magic : MonoBehaviour {
 			//1st Circle
 		case "In Mani Ylem"://Create Food
 		{
-			Debug.Log(MagicWords+ " Create Food Cast");
+			//Debug.Log(MagicWords+ " Create Food Cast");
+			Cast_InManiYlem(caster);
 			break;
 		}//imy
 		case "In Lor":	//Light
 		{
-			Debug.Log(MagicWords+ " Light Cast");
+			//Debug.Log(MagicWords+ " Light Cast");
+			Cast_InLor(caster);
 			break;
 		}	//il
 		case "Bet Wis Ex"://Locate
-		{
+		{//UW2 spell?
 			Debug.Log(MagicWords+ " Locate Cast");
 			break;
 		}//bwe
 		case "Ort Jux"://Magic Arrow
 		{
-			Debug.Log(MagicWords+ " Magic Arrow Cast Readied=" + ready);
+			//Debug.Log(MagicWords+ " Magic Arrow Cast Readied=" + ready);
 			Cast_OrtJux(caster, ready);
 			break;
 		}//OJ
@@ -73,7 +78,8 @@ public class Magic : MonoBehaviour {
 		}//up
 		case "In Bet Mani"://Lesser Heal
 		{
-			Debug.Log(MagicWords+ " Lesser Heal Cast");
+			//Debug.Log(MagicWords+ " Lesser Heal Cast");
+			Cast_InBetMani(caster);
 			break;
 		}//IBM
 		case "Rel Des Por"://Slow Fall
@@ -142,7 +148,8 @@ public class Magic : MonoBehaviour {
 		}//SF
 		case "In Mani"://Heal
 		{
-			Debug.Log(MagicWords+ " Heal Cast");
+			//Debug.Log(MagicWords+ " Heal Cast");
+			Cast_InMani (caster);
 			break;
 		}//IM
 		case "Hur Por"://Levitate
@@ -179,7 +186,8 @@ public class Magic : MonoBehaviour {
 		}//OWY
 		case "Ex Ylem"://Open
 		{
-			Debug.Log(MagicWords+ " Open Cast");
+			Cast_ExYlem(caster, ready);
+			//Debug.Log(MagicWords+ " Open Cast");
 			break;
 		}//EY
 		case "An Nox"://Cure Poison
@@ -198,6 +206,7 @@ public class Magic : MonoBehaviour {
 		case "Vas In Lor"://Daylight
 		{
 			Debug.Log(MagicWords+ " Daylight Cast");
+			Cast_VasInLor(caster);
 			break;
 		}//VIL
 		case "Vas Rel Por"://Gate Travel
@@ -207,7 +216,8 @@ public class Magic : MonoBehaviour {
 		}//VRP
 		case "Vas In Mani"://Greater Heal
 		{
-			Debug.Log(MagicWords+ " Greater Heal Cast");
+			//Debug.Log(MagicWords+ " Greater Heal Cast");
+			Cast_VasInMani (caster);
 			break;
 		}//VIM
 		case "An Ex Por"://Paralyze
@@ -223,6 +233,7 @@ public class Magic : MonoBehaviour {
 		case "Ort Por Ylem"://Telekinesis
 		{
 			Debug.Log(MagicWords+ " Telekinesis Cast");
+			Cast_OrtPorYlem(caster);
 			break;
 		}//OPY
 			
@@ -261,6 +272,7 @@ public class Magic : MonoBehaviour {
 		case "Vas Kal Corp"://Armageddon
 		{
 			Debug.Log(MagicWords+ " Armageddon Cast");
+			Cast_VasKalCorp(caster);
 			break;
 		}//vkc
 		case "Flam Hur"://Flame Wind
@@ -347,6 +359,34 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
+	static void Cast_ExYlem(GameObject caster, bool Ready)
+	{//Open
+		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		if (Ready==true)
+		{//Ready the spell to be cast.
+			Debug.Log ("ExYlem is ready to cast");
+			playerUW.ReadiedSpell= "Ex Ylem";
+			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
+		}
+		else
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit = new RaycastHit(); 
+			float dropRange=playerUW.useRange;
+			if (Physics.Raycast(ray,out hit,dropRange))
+			{//The spell has hit something
+				DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
+				if (dc!=null)
+				{
+					dc.UnlockDoor();
+					Debug.Log ("Ex Ylem has been cast");
+					playerUW.CursorIcon=playerUW.CursorIconDefault;
+				}
+			}
+		}
+	}
+
+
 
 	static void Cast_AnNox(GameObject caster)
 	{//Cure Poison
@@ -355,11 +395,111 @@ public class Magic : MonoBehaviour {
 		Debug.Log ("AN Nox Cast");
 	}
 
-	static void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
-	{
-		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
-		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+	static void Cast_InLor(GameObject caster)
+	{//Light
+		Cast_Light (caster, 3);//TODO:Standardise light levels.
 	}
+
+	static void Cast_VasInLor(GameObject caster)
+	{//Daylight
+		Cast_Light (caster, 8);//TODO:Standardise light levels.
+	}
+
+
+
+	static void Cast_InManiYlem(GameObject caster)
+	{//Create food
+		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		//Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit = new RaycastHit(); 
+		float dropRange=1.2f;
+		if (!Physics.Raycast(ray,out hit,dropRange))
+			{//No object interferes with the spellcast
+			int ObjectNo = 176 + Random.Range(0,7);
+			GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
+			myObj.transform.position = ray.GetPoint(dropRange);
+			CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
+			CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_"+ObjectNo, "Sprites/OBJECTS_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 0, 40, 0, 1, 0, 1);
+			Food fd = myObj.AddComponent<Food>();
+			fd.Nutrition=5;//TODO:determine values to use here.
+			WindowDetect.UnFreezeMovement(myObj);
+			}
+	}
+
+	static void Cast_InBetMani(GameObject caster)
+	{//Lesser Heal;
+		Heal (caster, Random.Range (1,10));
+	}
+
+	static void Cast_InMani(GameObject caster)
+	{//Heal;
+		Heal (caster, Random.Range (10,20));
+	}
+
+	static void Cast_VasInMani(GameObject caster)
+	{//Greater Heal;
+		Heal (caster, Random.Range (20,60));
+	}
+
+	static void Cast_VasKalCorp(GameObject caster)
+	{//Armageddon//Destroys almost everything!
+		GameObject[] allGameObj =GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
+		for (int i=0; i<= allGameObj.GetUpperBound(0);i++)
+		{
+			if ((allGameObj[i].name!="fbx_output") 
+			    && (allGameObj[i].name!="UW_HUD") 
+			    && (allGameObj[i].name!="HudAnimations") 
+			    && (allGameObj[i].name!="Automap") 
+			    && (allGameObj[i].name!="AI_Base_Animator") 
+			    && (allGameObj[i]!=caster)
+
+			    )
+			{
+				if (allGameObj[i].transform.parent==null)
+				{//Only deactivate top level items
+					allGameObj[i].SetActive(false);				
+				}
+				//Debug.Log ("Destroying " + allGameObj[i].name) ;
+
+			}
+
+		}
+
+	}
+
+	/*Common spell effects that are used multiple times*/
+
+	static void Heal(GameObject caster,int HP)
+	{
+		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+		{
+			playerUW.CurVIT=playerUW.CurVIT+HP;
+			if (playerUW.CurVIT > playerUW.MaxVIT)
+			{
+				playerUW.CurVIT=playerUW.MaxVIT;
+			}
+		}
+	}
+
+
+	
+	static void Cast_Light(GameObject Caster, int LightLevel)
+		{
+		LightSource.MagicBrightness=LightLevel;
+		}
+	
+	static void Cast_OrtPorYlem(GameObject Caster)
+		{
+		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+			{
+			playerUW.useRange=20;
+			playerUW.pickupRange=20;
+			}
+		}
+
+/* Utility code for Spells*/
 
 
 	static GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location)
@@ -375,6 +515,12 @@ public class Magic : MonoBehaviour {
 		rgd.useGravity=false;
 		projectile.transform.position=Location;
 		return projectile;
+	}
+
+	static void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
+	{
+		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
+		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
 
 
@@ -400,4 +546,69 @@ public class Magic : MonoBehaviour {
 		
 	}
 
+	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite,string ChildName)
+	{
+		GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
+		
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
+		CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable, isAnimated, useSprite);
+	}
+	
+	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
+	{
+		CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable, isAnimated, useSprite);
+	}
+	
+	static void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
+	{
+		//Debug.Log (myObj.name);
+		//Add a script.
+		ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
+		
+		BoxCollider box =myObj.GetComponent<BoxCollider>();
+		if (box==null)
+		{
+			//add a mesh for interaction
+			box= myObj.AddComponent<BoxCollider>();
+			box.size = new Vector3(0.2f,0.2f,0.2f);
+			box.center= new Vector3(0.0f,0.1f,0.0f);
+		}
+		
+		objInteract.WorldDisplayIndex = int.Parse(WorldString.Substring (WorldString.Length-3,3));
+		objInteract.InvDisplayIndex= int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
+		
+		
+		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
+		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
+		objInteract.WorldString=WorldString;
+		objInteract.InventoryString=InventoryString;
+		objInteract.EquipString=EquipString;
+		objInteract.ItemType=ItemType;//UWexporter id type
+		objInteract.item_id=ItemId;//Internal ItemID
+		objInteract.Link=link;
+		objInteract.Quality=Quality;
+		objInteract.Owner=Owner;
+		if (isMoveable==1)
+		{
+			objInteract.CanBePickedUp=true;
+			Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
+			WindowDetect.FreezeMovement(myObj);
+		}
+		
+		if (isAnimated==1)
+		{
+			objInteract.isAnimated=true;
+		}
+		
+		if (useSprite==1)
+		{
+			objInteract.ignoreSprite=false;
+		}
+		else
+		{
+			objInteract.ignoreSprite=true;
+		}
+		
+	}
 }

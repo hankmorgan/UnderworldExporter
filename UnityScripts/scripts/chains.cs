@@ -39,12 +39,13 @@ public class chains : MonoBehaviour {
 		//Debug.Log (ControlParent.name);
 		foreach(Transform child in ControlParent.transform)
 		{
-			if (child.name == ControlName)
+			if (child.name.ToUpper() == ControlName.ToUpper())
 			{
 				child.gameObject.SetActive(targetState);
 				return child.gameObject;
 			}
 		}
+		Debug.Log ("MODE " + setControl+ "Unable to find " + ControlName);
 		return null;
 	}
 
@@ -116,10 +117,10 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("LeftRing_Slot",true);
 			EnableDisableControl("RightRing_Slot",true);
 			EnableDisableControl("Helm_f_Slot",true);
-			EnableDisableControl("chest_f_Slot",true);
-			EnableDisableControl("legs_f_Slot",true);
-			EnableDisableControl("boots_f_Slot",true);
-			EnableDisableControl("gloves_f_Slot",true);
+			EnableDisableControl("Chest_f_Slot",true);
+			EnableDisableControl("Legs_f_Slot",true);
+			EnableDisableControl("Boots_f_Slot",true);
+			EnableDisableControl("Gloves_f_Slot",true);
 			EnableDisableControl("ContainerOpened",true);
 			
 			//Turn off conversation
@@ -269,27 +270,27 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("StatsDisplayUp",false);
 			EnableDisableControl("StatsDisplayDown",false);
 			
-			//Turn on inventory
-			EnableDisableControl("Backpack_Slot_00",true);
-			EnableDisableControl("Backpack_Slot_01",true);
-			EnableDisableControl("Backpack_Slot_02",true);
-			EnableDisableControl("Backpack_Slot_03",true);
-			EnableDisableControl("Backpack_Slot_04",true);
-			EnableDisableControl("Backpack_Slot_05",true);
-			EnableDisableControl("Backpack_Slot_06",true);
-			EnableDisableControl("Backpack_Slot_07",true);
-			EnableDisableControl("LeftShoulder_Slot",true);
-			EnableDisableControl("RightShoulder_Slot",true);
-			EnableDisableControl("LeftHand_Slot",true);
-			EnableDisableControl("RightHand_Slot",true);
-			EnableDisableControl("LeftRing_Slot",true);
-			EnableDisableControl("RightRing_Slot",true);
-			EnableDisableControl("Helm_f_Slot",true);
-			EnableDisableControl("chest_f_Slot",true);
-			EnableDisableControl("legs_f_Slot",true);
-			EnableDisableControl("boots_f_Slot",true);
-			EnableDisableControl("gloves_f_Slot",true);
-			EnableDisableControl("ContainerOpened",true);
+			//Turn off inventory
+			EnableDisableControl("Backpack_Slot_00",false);
+			EnableDisableControl("Backpack_Slot_01",false);
+			EnableDisableControl("Backpack_Slot_02",false);
+			EnableDisableControl("Backpack_Slot_03",false);
+			EnableDisableControl("Backpack_Slot_04",false);
+			EnableDisableControl("Backpack_Slot_05",false);
+			EnableDisableControl("Backpack_Slot_06",false);
+			EnableDisableControl("Backpack_Slot_07",false);
+			EnableDisableControl("LeftShoulder_Slot",false);
+			EnableDisableControl("RightShoulder_Slot",false);
+			EnableDisableControl("LeftHand_Slot",false);
+			EnableDisableControl("RightHand_Slot",false);
+			EnableDisableControl("LeftRing_Slot",false);
+			EnableDisableControl("RightRing_Slot",false);
+			EnableDisableControl("Helm_f_Slot",false);
+			EnableDisableControl("Chest_f_Slot",false);
+			EnableDisableControl("Legs_f_Slot",false);
+			EnableDisableControl("Boots_f_Slot",false);
+			EnableDisableControl("Gloves_f_Slot",false);
+			EnableDisableControl("ContainerOpened",false);
 			
 			//Turn off conversation
 			EnableDisableControl("Conversation_Portrait_Frame_Left",false);
@@ -368,10 +369,10 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("LeftRing_Slot",false);
 			EnableDisableControl("RightRing_Slot",false);
 			EnableDisableControl("Helm_f_Slot",false);
-			EnableDisableControl("chest_f_Slot",false);
-			EnableDisableControl("legs_f_Slot",false);
-			EnableDisableControl("boots_f_Slot",false);
-			EnableDisableControl("gloves_f_Slot",false);
+			EnableDisableControl("Chest_f_Slot",false);
+			EnableDisableControl("Legs_f_Slot",false);
+			EnableDisableControl("Boots_f_Slot",false);
+			EnableDisableControl("Gloves_f_Slot",false);
 			EnableDisableControl("ContainerOpened",false);
 			
 			//Turn on conversation
