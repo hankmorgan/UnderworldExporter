@@ -82,6 +82,8 @@ public class UWCharacter : MonoBehaviour {
 	public bool[] Runes=new bool[24];
 	public int[] ActiveRunes=new int[3];
 
+	public int[] ActiveSpell=new int[3]; //What magic spells are currently active on the player. (max 3)
+
 	public int Body;//Which body/portrait this character has
 
 	//The storage location for container items.
@@ -156,6 +158,7 @@ public class UWCharacter : MonoBehaviour {
 		InventorySlot.player=this.gameObject;
 		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 		TileMap.gronk=this.gameObject;

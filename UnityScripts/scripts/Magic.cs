@@ -106,7 +106,8 @@ public class Magic : MonoBehaviour {
 		}//BSL
 		case "Ort Grav"://Lightning
 		{
-			Debug.Log(MagicWords+ " Lightning Cast");
+			//Debug.Log(MagicWords+ " Lightning Cast");
+			Cast_OrtGrav(caster, ready);
 			break;
 		}//OG
 		case "Quas Lor"://Night Vision
@@ -338,7 +339,6 @@ public class Magic : MonoBehaviour {
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
-			Debug.Log ("Ort jux is ready to cast");
 			playerUW.ReadiedSpell= "Ort Jux";
 			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
 		}
@@ -351,13 +351,38 @@ public class Magic : MonoBehaviour {
 			{//No object interferes with the spellcast
 				float force = 200.0f;
 				playerUW.ReadiedSpell= "";
-				GameObject projectile = CreateMagicProjectile("Sprites/objects_023","",ray.GetPoint(dropRange/2.0f));
+				GameObject projectile = CreateMagicProjectile("Sprites/objects_023","",ray.GetPoint(dropRange/2.0f), 5);
 				LaunchProjectile(projectile,ray,dropRange,force);
-				Debug.Log ("Ort jux has been cast");
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
 			}
 		}
 	}
+
+	static void Cast_OrtGrav(GameObject caster, bool Ready)
+	{//Lightning Bolt
+		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		if (Ready==true)
+		{//Ready the spell to be cast.
+			playerUW.ReadiedSpell= "Ort Grav";
+			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
+		}
+		else
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit = new RaycastHit(); 
+			float dropRange=0.5f;
+			if (!Physics.Raycast(ray,out hit,dropRange))
+			{//No object interferes with the spellcast
+				float force = 200.0f;
+				playerUW.ReadiedSpell= "";
+				GameObject projectile = CreateMagicProjectile("Sprites/objects_021","",ray.GetPoint(dropRange/2.0f), 5);
+				LaunchProjectile(projectile,ray,dropRange,force);
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
+			}
+		}
+	}
+
+
 
 	static void Cast_ExYlem(GameObject caster, bool Ready)
 	{//Open
@@ -397,12 +422,30 @@ public class Magic : MonoBehaviour {
 
 	static void Cast_InLor(GameObject caster)
 	{//Light
-		Cast_Light (caster, 3);//TODO:Standardise light levels.
+		int SpellEffectSlot = CheckSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Light (caster, 3);//TODO:Standardise light levels.
+			SetSpellEffect(caster,SpellEffectSlot,17);
+		}
+		else
+		{
+			Debug.Log ("Your incantation failed");
+		}
 	}
 
 	static void Cast_VasInLor(GameObject caster)
 	{//Daylight
-		Cast_Light (caster, 8);//TODO:Standardise light levels.
+		int SpellEffectSlot = CheckSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Light (caster, 8);//TODO:Standardise light levels.
+			SetSpellEffect(caster,SpellEffectSlot,20);
+		}
+		else
+		{
+			Debug.Log ("Your incantation failed");
+		}
 	}
 
 
@@ -501,12 +544,41 @@ public class Magic : MonoBehaviour {
 
 /* Utility code for Spells*/
 
+	static void SetSpellEffect(GameObject caster, int index, int SpellEffectNo)
+	{
+		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+		{
+			playerUW.ActiveSpell[index]=SpellEffectNo;
+		}
+	}
 
-	static GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location)
+	static int CheckSpellEffect(GameObject caster)
+	{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
+		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+		{
+			for (int i =0;i<3;i++)
+			{
+				if (playerUW.ActiveSpell[i]==-1)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	static GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
 	{
 		GameObject projectile = new GameObject();
 		CreateObjectGraphics(projectile,ProjectileImage,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
+		mgp.damage=Damage;
 		BoxCollider box = projectile.AddComponent<BoxCollider>();
 		box.size = new Vector3(0.2f,0.2f,0.2f);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
@@ -514,6 +586,7 @@ public class Magic : MonoBehaviour {
 		rgd.freezeRotation =true;
 		rgd.useGravity=false;
 		projectile.transform.position=Location;
+
 		return projectile;
 	}
 

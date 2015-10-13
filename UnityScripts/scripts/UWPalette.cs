@@ -12,6 +12,7 @@ public class UWPalette : MonoBehaviour {
 	float[] Defblue = new float[256];
 	float[] Defgreen = new float[256];
 
+	public Texture test;
 	public bool PaletteReady;
 	//public Texture2D SrcImage;
 	//public Texture2D DstImage;
@@ -306,8 +307,6 @@ public class UWPalette : MonoBehaviour {
 
 	}
 
-
-
 	void CyclePalette(int start, int end)
 	{
 
@@ -339,6 +338,8 @@ public class UWPalette : MonoBehaviour {
 		CyclePalette(48,51);//water?
 		CyclePalette(190,200);//fountain?
 		CyclePalette(100,105);//Silver tree
+
+
 
 		//CyclePalette(1,100);//Spell effects somewhere in here.
 		//UITexture uit =GameObject.Find ("animation_test").GetComponent<UITexture>();
