@@ -2,14 +2,14 @@
 using System.Collections;
 
 public class Magic : MonoBehaviour {
-	static string[] Runes=new string[]{"An","Bet","Corp","Des",
+	 string[] Runes=new string[]{"An","Bet","Corp","Des",
 								"Ex","Flam","Grav","Hur",
 								"In","Jux","Kal","Lor",
 								"Mani","Nox","Ort","Por",
 								"Quas","Rel","Sanct","Tym",
 								"Uus","Vas","Wis","Ylem"};
 
-	static long SummonCount=0;
+	 long SummonCount=0;
 
 	// Use this for initialization
 	void Start () {
@@ -21,10 +21,25 @@ public class Magic : MonoBehaviour {
 	
 	}
 
-	static public void castSpell(GameObject caster, string MagicWords, bool ready)
+	public void TestSpell(GameObject caster)
+	{//Test spell for testing spell effects
+		SpellEffectPoison sep = caster.AddComponent<SpellEffectPoison>();
+		sep.Value=100;//Poison will damage the player for 100 hp over it's duration
+		sep.counter=10; //It will run for 10 ticks. Ie 10 hp damage per tick
+		sep.ApplyEffect();
+		StartCoroutine(sep.timer()) ;
+	}
+
+	 public void castSpell(GameObject caster, string MagicWords, bool ready)
 	{
 		switch (MagicWords)
 		{
+		case "An An An":
+		{
+			TestSpell (caster);
+			break;
+		}
+
 			//1st Circle
 		case "In Mani Ylem"://Create Food
 		{
@@ -310,7 +325,7 @@ public class Magic : MonoBehaviour {
 	}
 
 
-	static public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
+	 public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
 	{
 		//Casts a magic spell based on the constructed magic rune string
 
@@ -334,7 +349,7 @@ public class Magic : MonoBehaviour {
 	}
 
 
-	static void Cast_OrtJux(GameObject caster, bool Ready)
+	 void Cast_OrtJux(GameObject caster, bool Ready)
 	{//Magic Missile Spell
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
@@ -358,7 +373,7 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	static void Cast_OrtGrav(GameObject caster, bool Ready)
+	 void Cast_OrtGrav(GameObject caster, bool Ready)
 	{//Lightning Bolt
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
@@ -384,7 +399,7 @@ public class Magic : MonoBehaviour {
 
 
 
-	static void Cast_ExYlem(GameObject caster, bool Ready)
+	 void Cast_ExYlem(GameObject caster, bool Ready)
 	{//Open
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
@@ -413,20 +428,19 @@ public class Magic : MonoBehaviour {
 
 
 
-	static void Cast_AnNox(GameObject caster)
+	 void Cast_AnNox(GameObject caster)
 	{//Cure Poison
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		playerUW.Poisoned=false;
 		Debug.Log ("AN Nox Cast");
 	}
 
-	static void Cast_InLor(GameObject caster)
+	 void Cast_InLor(GameObject caster)
 	{//Light
 		int SpellEffectSlot = CheckSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Light (caster, 3);//TODO:Standardise light levels.
-			SetSpellEffect(caster,SpellEffectSlot,17);
+			Cast_Light (caster, 3,SpellEffect.SpellEffect_InLor,SpellEffectSlot, 5);//TODO:Standardise light levels.
 		}
 		else
 		{
@@ -434,13 +448,13 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	static void Cast_VasInLor(GameObject caster)
+	 void Cast_VasInLor(GameObject caster)
 	{//Daylight
 		int SpellEffectSlot = CheckSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Light (caster, 8);//TODO:Standardise light levels.
-			SetSpellEffect(caster,SpellEffectSlot,20);
+			Cast_Light (caster, 8, SpellEffect.SpellEffect_VasInLor, SpellEffectSlot, 10);//TODO:Standardise light levels.
+			//SetSpellEffect(caster,SpellEffectSlot,20);
 		}
 		else
 		{
@@ -450,7 +464,7 @@ public class Magic : MonoBehaviour {
 
 
 
-	static void Cast_InManiYlem(GameObject caster)
+	 void Cast_InManiYlem(GameObject caster)
 	{//Create food
 		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		//Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -469,22 +483,22 @@ public class Magic : MonoBehaviour {
 			}
 	}
 
-	static void Cast_InBetMani(GameObject caster)
+	 void Cast_InBetMani(GameObject caster)
 	{//Lesser Heal;
 		Heal (caster, Random.Range (1,10));
 	}
 
-	static void Cast_InMani(GameObject caster)
+	 void Cast_InMani(GameObject caster)
 	{//Heal;
 		Heal (caster, Random.Range (10,20));
 	}
 
-	static void Cast_VasInMani(GameObject caster)
+	 void Cast_VasInMani(GameObject caster)
 	{//Greater Heal;
 		Heal (caster, Random.Range (20,60));
 	}
 
-	static void Cast_VasKalCorp(GameObject caster)
+	 void Cast_VasKalCorp(GameObject caster)
 	{//Armageddon//Destroys almost everything!
 		GameObject[] allGameObj =GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
 		for (int i=0; i<= allGameObj.GetUpperBound(0);i++)
@@ -512,7 +526,7 @@ public class Magic : MonoBehaviour {
 
 	/*Common spell effects that are used multiple times*/
 
-	static void Heal(GameObject caster,int HP)
+	 void Heal(GameObject caster,int HP)
 	{
 		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
@@ -527,12 +541,17 @@ public class Magic : MonoBehaviour {
 
 
 	
-	static void Cast_Light(GameObject Caster, int LightLevel)
+	void Cast_Light(GameObject caster, int LightLevel, int EffectId, int EffectSlot, int counter)
 		{
 		LightSource.MagicBrightness=LightLevel;
+		SpellEffectLight sel= (SpellEffectLight)SetSpellEffect(caster, EffectSlot, EffectId);
+		sel.Value = LightLevel;
+		sel.counter= counter;
+		sel.ApplyEffect();
+		StartCoroutine(sel.timer());
 		}
 	
-	static void Cast_OrtPorYlem(GameObject Caster)
+	 void Cast_OrtPorYlem(GameObject Caster)
 		{
 		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
@@ -544,23 +563,42 @@ public class Magic : MonoBehaviour {
 
 /* Utility code for Spells*/
 
-	static void SetSpellEffect(GameObject caster, int index, int SpellEffectNo)
+	 SpellEffect SetSpellEffect(GameObject caster, int index, int EffectId)
 	{
+
 		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-		if (playerUW!=null)
+
+		switch (EffectId)
 		{
-			playerUW.ActiveSpell[index]=SpellEffectNo;
+		case SpellEffect.SpellEffect_InLor:
+		case SpellEffect.SpellEffect_VasInLor:
+		{
+			playerUW.ActiveSpell[index]=(SpellEffect)caster.AddComponent<SpellEffectLight>();
+			break;
 		}
+		default:
+		{
+			playerUW.ActiveSpell[index]=caster.AddComponent<SpellEffect>();
+			break;
+		}
+
+		}
+		//if (playerUW!=null)
+		//{
+		//	playerUW.ActiveSpell[index]=SpellEffectNo;
+		//}
+		playerUW.ActiveSpell[index].EffectId=EffectId;
+		return playerUW.ActiveSpell[index];
 	}
 
-	static int CheckSpellEffect(GameObject caster)
+	 int CheckSpellEffect(GameObject caster)
 	{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
 		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
 			for (int i =0;i<3;i++)
 			{
-				if (playerUW.ActiveSpell[i]==-1)
+				if (playerUW.ActiveSpell[i] == null)
 				{
 					return i;
 				}
@@ -573,7 +611,7 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	static GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
+	 GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
 	{
 		GameObject projectile = new GameObject();
 		CreateObjectGraphics(projectile,ProjectileImage,true);
@@ -590,14 +628,14 @@ public class Magic : MonoBehaviour {
 		return projectile;
 	}
 
-	static void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
+	 void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
 	{
 		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
 		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
 
 
-	static private void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
+	 private void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
 	{	
 		//Create a sprite.
 		GameObject SpriteController = new GameObject(myObj.name + "_sprite");
@@ -619,7 +657,7 @@ public class Magic : MonoBehaviour {
 		
 	}
 
-	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite,string ChildName)
+	 void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite,string ChildName)
 	{
 		GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
 		
@@ -628,12 +666,12 @@ public class Magic : MonoBehaviour {
 		CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable, isAnimated, useSprite);
 	}
 	
-	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
+	 void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
 	{
 		CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable, isAnimated, useSprite);
 	}
 	
-	static void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
+	 void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
 	{
 		//Debug.Log (myObj.name);
 		//Add a script.

@@ -4,7 +4,7 @@ using System.Collections;
 public class SpellEffectsDisplay : MonoBehaviour {
 	public int SlotNumber;
 	public static UWCharacter playerUW;
-	private int setSpell=-2;
+	private int setSpell=-1;
 	private UITexture thisSpell;
 
 	void Start () {
@@ -14,17 +14,24 @@ public class SpellEffectsDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerUW.ActiveSpell[SlotNumber] != setSpell)
+		if (playerUW.ActiveSpell[SlotNumber] != null)
 		{
-			setSpell= playerUW.ActiveSpell[SlotNumber];
-
-			if (playerUW.ActiveSpell[SlotNumber]!=-1)
+			if (playerUW.ActiveSpell[SlotNumber].EffectId!=setSpell)
 			{
-				thisSpell.mainTexture= Resources.Load <Texture2D> ("HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].ToString("D4"));
+				setSpell= playerUW.ActiveSpell[SlotNumber].EffectId;
+				thisSpell.mainTexture= Resources.Load <Texture2D> ("HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].EffectId.ToString("D4"));
 			}
-			else
+		//	else
+		//	{
+		//		thisSpell.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+		//	}
+		}
+		else
+		{
+			if (setSpell>=-1)
 			{
 				thisSpell.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+				setSpell=-2;
 			}
 		}
 	}
@@ -36,7 +43,7 @@ public class SpellEffectsDisplay : MonoBehaviour {
 		case -1://Left click
 		{
 			//TODO: actually cancel the effect!
-			playerUW.ActiveSpell[SlotNumber]=-1;
+			playerUW.ActiveSpell[SlotNumber].CancelEffect();
 			break;
 		}
 		case -2://right click

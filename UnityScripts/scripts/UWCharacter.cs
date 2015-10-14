@@ -82,7 +82,7 @@ public class UWCharacter : MonoBehaviour {
 	public bool[] Runes=new bool[24];
 	public int[] ActiveRunes=new int[3];
 
-	public int[] ActiveSpell=new int[3]; //What magic spells are currently active on the player. (max 3)
+	public SpellEffect[] ActiveSpell=new SpellEffect[3]; //What magic spells are currently active on the player. (max 3)
 
 	public int Body;//Which body/portrait this character has
 
@@ -237,7 +237,8 @@ public class UWCharacter : MonoBehaviour {
 		if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		{
 			//Debug.Log(ReadiedSpell + " is cast in main wind");
-			Magic.castSpell(this.gameObject, ReadiedSpell,false);
+
+			this.GetComponent<Magic>().castSpell(this.gameObject, ReadiedSpell,false);
 			//ReadiedSpell="";
 		}
 	}
