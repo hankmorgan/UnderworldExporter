@@ -120,8 +120,12 @@ public class WindowDetect : MonoBehaviour {
 		/*
 		 * Cursor Click on main view area
 		// */
-		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
-
+		Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
+		if (playerUW.ReadiedSpell!="" )
+		{
+			Debug.Log("player has a spell to cast");
+			return;
+		}
 
 		switch (UWCharacter.InteractionMode)
 		{

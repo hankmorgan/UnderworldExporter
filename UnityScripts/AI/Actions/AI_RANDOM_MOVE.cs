@@ -18,7 +18,10 @@ public class AI_RANDOM_MOVE : RAINAction
 		//{
 			string navmesh= ai.Body.gameObject.GetComponent<NPC>().NavMeshRegion;
 			ai.Navigator.CurrentGraph = RAIN.Navigation.NavigationManager.Instance.GetNavigationGraph (navmesh);
-		//}
+		if (ai.Navigator.CurrentGraph==null)
+		{
+			return ActionResult.FAILURE;
+		}
 		//Get a random spot.
 		Vector3 curPos = ai.Body.transform.position;
 		Vector3 dest =curPos;//= new Vector3(curPos.x+RndSphere.x, curPos.y, curPos.z+RndSphere.z);
@@ -27,7 +30,7 @@ public class AI_RANDOM_MOVE : RAINAction
 
 		//while ((flag==false) && (counter<1))
 		//{
-			Vector3 RndSphere = Random.insideUnitSphere *((float)Random.Range(0,20));
+			Vector3 RndSphere = Random.insideUnitSphere *((float)Random.Range(0,5));
 			dest = new Vector3(curPos.x+RndSphere.x, curPos.y, curPos.z+RndSphere.z);
 
 

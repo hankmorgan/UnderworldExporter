@@ -140,17 +140,17 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	for (int p = 0; p < 16; p++)
-		{
-		getPalette("c:\\games\\uw1\\data\\light.dat", pal, p);
-		//getPalette(PaletteFile, pal, PaletteNo);
-		unsigned char palettefile[256];
-		for (int i = 0; i < 256; i++)
-			{
-			palettefile[i] = i;
-			}
-		writeTGA(palettefile, 0, 256, 1, p, pal, "light", 1);
-		}
+	//for (int p = 0; p < 16; p++)
+	//	{
+	//	getPalette("c:\\games\\uw1\\data\\light.dat", pal, p);
+		getPalette(PaletteFile, pal, PaletteNo);
+	//	unsigned char palettefile[256];
+	//	for (int i = 0; i < 256; i++)
+	//		{
+	///		palettefile[i] = i;
+	//		}
+	//	writeTGA(palettefile, 0, 256, 1, p, pal, "light", 1);
+	//	}
 
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];

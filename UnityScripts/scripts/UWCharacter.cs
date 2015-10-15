@@ -214,6 +214,7 @@ public class UWCharacter : MonoBehaviour {
 		if (ReadiedSpell!="")
 		{//Player has a spell thats about to be cast. All other activity is ignored.
 			SpellMode ();
+			return;
 		}
 		if ((AttackCharging==false) && (AttackExecuting==false))
 		{
@@ -428,10 +429,28 @@ public class UWCharacter : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log ("you've hit " + hit.transform.name);
-				if (hit.transform.gameObject.GetComponent<ObjectInteraction>())
+				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
+				//Debug.Log ("you've hit " + hit.transform.name);
+				if (objInt!=null)
 				{
 					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(5);
+					//Create a blood splatter at this point
+					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
+					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
+					Impact imp= hitimpact.AddComponent<Impact>();
+					imp.FrameNo=objInt.GetHitFrameStart();
+					imp.EndFrame=objInt.GetHitFrameEnd();
+					StartCoroutine(imp.Animate());				
+				}
+				else
+				{
+					//do a miss impact 
+					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
+					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
+					Impact imp= hitimpact.AddComponent<Impact>();
+					imp.FrameNo=46;
+					imp.EndFrame=50;
+					StartCoroutine( imp.Animate());
 				}
 				//hit.transform.SendMessage("ApplyDamage");
 				//Destroy(hit.collider.gameObject);

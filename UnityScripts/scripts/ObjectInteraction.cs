@@ -978,4 +978,29 @@ public class ObjectInteraction : MonoBehaviour {
 		pInv.Refresh();
 		Destroy (this.gameObject);
 	}
+
+	public int GetHitFrameStart()
+	{//What image frames does an weapon hit on this object create.
+
+		if (this.GetComponent<NPC>()==null)
+		{
+			return 45;//Standard explosion
+		}
+		else
+		{
+			return 0;//Blood spatter.
+		}
+	}
+
+	public int GetHitFrameEnd()
+	{
+		if (this.GetComponent<NPC>()==null)
+		{
+			return 49;//End of explosion
+		}
+		else
+		{
+			return 5;//end of blood splatter
+		}
+	}
 }

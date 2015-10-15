@@ -620,6 +620,7 @@ public class Magic : MonoBehaviour {
 		BoxCollider box = projectile.AddComponent<BoxCollider>();
 		box.size = new Vector3(0.2f,0.2f,0.2f);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
+		//box.isTrigger=true;
 		Rigidbody rgd =projectile.AddComponent<Rigidbody>();
 		rgd.freezeRotation =true;
 		rgd.useGravity=false;
