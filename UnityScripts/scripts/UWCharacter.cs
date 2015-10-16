@@ -263,6 +263,17 @@ public class UWCharacter : MonoBehaviour {
 					//ObjectInteraction.Activate (objPicked);
 					//MessageLog.text = "You use a " + hit.transform.name;
 				}
+				else
+				{//Special case for portcullises
+				if (hit.transform.GetComponent<PortcullisInteraction>())
+					{
+					objPicked = hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction();
+					if (objPicked!=null)
+						{
+						objPicked.Use ();
+						}
+					}
+				}
 		//		//Activates switches.
 		//		ButtonHandler objButton = hit.transform.GetComponent<ButtonHandler>();
 		//		if (objButton!=null)

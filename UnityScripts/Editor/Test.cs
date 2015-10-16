@@ -49,6 +49,7 @@ public class MyTools
 		////pos = new Vector3(37.885715f, 3.853347f, 1.200000f);
 		///myObj.transform.position = pos;
 		////CreateObjectGraphics(myObj,"Sprites/objects_366.tga",true);
+
 		
 		GameObject myObj;
 		Vector3 pos;
@@ -822,7 +823,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3150856, 3150856);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 2823356, 2823356);
 		
 		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -1225,7 +1226,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3150856, 3150856);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 2823356, 2823356);
 		
 		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1250,8 +1251,7 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 563, 63, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_-12851", 4, 1);
-		SetPortcullis(myObj,true);
+		CreatePortcullis(myObj, 4, 1);
 		SetRotation(myObj,-90,-180,0);
 		
 		
@@ -1264,8 +1264,7 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 743, 40, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_-12851", 0, 1);
-		SetPortcullis(myObj,true);
+		CreatePortcullis(myObj, 0, 1);
 		SetRotation(myObj,-90,-180,0);
 		
 		myObj = new GameObject("a_goblin_15_35_00_0220");
@@ -1541,7 +1540,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 30, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3150072, 3150072);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 2822572, 2822572);
 		myObj.transform.position = invMarker.transform.position;
 		AddObjectToContainer(myObj, ParentContainer, 4);
 		FreezeMovement(myObj);
@@ -1862,8 +1861,7 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 716, 63, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
-		SetPortcullis(myObj,true);
+		CreatePortcullis(myObj, 3, 1);
 		SetRotation(myObj,-90,90,0);
 		
 		myObj= CreateGameObject("a_chest_03_50_00_0758",3.942857f,3.600000f,60.342857f);
@@ -1951,8 +1949,7 @@ public class MyTools
 		myObj.transform.position = pos;
 		CreateObjectGraphics(myObj,"Sprites/objects_326",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 844, 40, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_-12851", 3, 1);
-		SetPortcullis(myObj,true);
+		CreatePortcullis(myObj, 3, 1);
 		SetRotation(myObj,-90,90,0);
 		
 		myObj= CreateGameObject("a_button_48_51_00_0840",58.114288f,4.200000f,61.220001f);
@@ -2693,12 +2690,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3151136);
+		Create_a_do_trap(myObj,3,2823636);
 		
 		myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3151136);
+		Create_a_do_trap(myObj,3,2823636);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2713,12 +2710,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3151136);
+		Create_a_do_trap(myObj,3,2823636);
 		
 		myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3151136);
+		Create_a_do_trap(myObj,3,2823636);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2872,6 +2869,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
+
 
 
 		}
@@ -9641,26 +9639,7 @@ public class MyTools
 
 		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
 		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
-		//if (objSprite==null)
-		//{
-		//	Debug.Log (parentObj.name + ": can't find spriterenderer");
-		//}
-		//else
-		//{
-			//Texture2D TexWorld = Resources.Load <Texture2D> ("Sprites/OBJECTS_"+ objInteract.WorldDisplayIndex.ToString("000"));
-			//Texture2D TexInv = Resources.Load <Texture2D> ("Sprites/OBJECTS_"+ objInteract.InvDisplayIndex.ToString("000"));
 
-			//Sprite sr = Sprite.Create(TexWorld,new Rect(0,0,TexWorld.width,TexWorld.height),new Vector2(0.5f,0.0f));
-			//objInteract.WorldDisplay=sr;
-
-			//sr = Sprite.Create(TexInv,new Rect(0,0,TexInv.width,TexInv.height),new Vector2(0.5f,0.0f));
-			//objInteract.InventoryDisplay=sr;
-
-
-
-			//objInteract.InventoryDisplay = objSprite.sprite;
-			//objInteract.EquipDisplay=objSprite.sprite;
-		//}
 		objInteract.WorldString=WorldString;
 		objInteract.InventoryString=InventoryString;
 		objInteract.EquipString=EquipString;
@@ -10081,6 +10060,39 @@ public class MyTools
 		dc.KeyIndex=DoorKey;
 		dc.locked = (Locked==1);
 	}
+
+	static void CreatePortcullis(GameObject myObj, int DoorKey, int Locked)
+	{
+		//GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
+
+		//GameObject myInstance = (GameObject)Instantiate(Resources.Load("Models/Portcullis")); ;
+		GameObject newObj = (GameObject)GameObject.Instantiate((GameObject)Resources.Load("Models/Portcullis"));
+		ObjectInteraction doorInteract = myObj.GetComponent<ObjectInteraction>();
+		//doorInteract.isDoor=true;
+		//doorInteract.ItemType=4;
+		//doorInteract.item_id=-1;//ugh
+		doorInteract.Link = DoorKey;
+		newObj.name=myObj.name + "_Model";
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.position = myObj.transform.position;
+	
+		BoxCollider box  =myObj.GetComponent<BoxCollider>();
+		box.enabled=false;
+		//newObj.GetComponent<Renderer>().material.mainTexture= Resources.Load <Texture2D> (DoorTexturePath);
+		//newObj.GetComponent<MeshCollider>().enabled=false;
+		//MeshCollider mc = myObj.AddComponent<MeshCollider>();
+		//mc.convex=true;//unity 5
+		//mc.isTrigger=true;
+		//mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
+		//mc = myObj.AddComponent<MeshCollider>();
+		//mc.isTrigger=false;
+		//mc.sharedMesh=newObj.GetComponent<MeshFilter>().sharedMesh;
+		DoorControl dc = myObj.AddComponent<DoorControl>();
+		dc.KeyIndex=DoorKey;
+		dc.locked = (Locked==1);
+		dc.isPortcullis=true;
+	}
+
 
 
 	static void CreateShockBridge(GameObject myObj, string TopTexturePath, string SideTexturePath, int Height, int xSize, int ySize)
