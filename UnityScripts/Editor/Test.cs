@@ -111,7 +111,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_silver_tree_36_02_00_0967",43.714287f,3.600000f,3.257143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_458",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_458", "Sprites/OBJECTS_458", "Sprites/OBJECTS_458", 69, 458, 1, 40, 13, 1, 1, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_458", "Sprites/OBJECTS_458", "Sprites/OBJECTS_458", 80, 458, 1, 40, 13, 1, 13, 4);
+		AddAnimationOverlay(myObj,13,4);
 		
 		myObj= CreateGameObject("a_button_49_02_00_0817",59.314285f,3.300000f,2.420000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
@@ -821,7 +822,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3741400, 3741400);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3150856, 3150856);
 		
 		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -1224,7 +1225,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3741400, 3741400);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3150856, 3150856);
 		
 		
 		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -1540,7 +1541,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_49_40_00_0680",59.314285f,3.000000f,48.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 30, 0, 1, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3740616, 3740616);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3150072, 3150072);
 		myObj.transform.position = invMarker.transform.position;
 		AddObjectToContainer(myObj, ParentContainer, 4);
 		FreezeMovement(myObj);
@@ -2099,7 +2100,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_fountain_08_55_00_0764",10.114285f,1.837500f,66.514290f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 69, 457, 1, 40, 5, 1, 1, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 5, 1, 5, 4);
+		AddAnimationOverlay(myObj,5,4);
 		
 		myObj= CreateGameObject("a_fountain_13_55_00_0835",16.114286f,1.800000f,66.514290f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
@@ -2108,7 +2110,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_fountain_13_55_00_0765",16.114286f,1.837500f,66.514290f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 69, 457, 1, 40, 5, 1, 1, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 5, 1, 5, 4);
+		AddAnimationOverlay(myObj,5,4);
 		
 		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_18_55_00_0833",22.457144f,2.700000f,66.171432f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
@@ -2368,7 +2371,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_fountain_08_59_00_0766",10.114285f,1.837500f,71.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 69, 457, 1, 40, 8, 1, 1, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 8, 1, 5, 4);
+		AddAnimationOverlay(myObj,5,4);
 		
 		myObj= CreateGameObject("a_fountain_13_59_00_0925",16.114286f,1.800000f,71.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
@@ -2377,7 +2381,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_fountain_13_59_00_0834",16.114286f,1.837500f,71.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 69, 457, 1, 40, 6, 1, 1, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 6, 1, 5, 4);
+		AddAnimationOverlay(myObj,5,4);
 		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_26_59_00_0660",32.228573f,1.200000f,71.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
@@ -2483,7 +2488,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_fountain_30_61_00_0666",36.685715f,1.537500f,73.885712f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 69, 457, 1, 40, 5, 1, 1, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 5, 1, 5, 4);
+		AddAnimationOverlay(myObj,5,4);
 		
 		myObj= CreateGameObject("a_fountain_30_61_00_0667",36.685715f,1.500000f,73.885712f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
@@ -2687,12 +2693,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_49_44_00_0622",58.799999f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3741680);
+		Create_a_do_trap(myObj,3,3151136);
 		
 		myObj= CreateGameObject("a_do_trap_45_44_00_0624",54.000000f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3741680);
+		Create_a_do_trap(myObj,3,3151136);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0625",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2707,12 +2713,12 @@ public class MyTools
 		myObj= CreateGameObject("a_do_trap_43_44_00_0627",51.599998f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3741680);
+		Create_a_do_trap(myObj,3,3151136);
 		
 		myObj= CreateGameObject("a_do_trap_47_44_00_0628",56.400002f,0.600000f,52.799999f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 3, 0, 0, 0, 1);
-		Create_a_do_trap(myObj,3,3741680);
+		Create_a_do_trap(myObj,3,3151136);
 		
 		myObj= CreateGameObject("a_use_trigger_99_99_00_0629",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
@@ -2866,7 +2872,6 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 7, 38, 0, 0, 1);
 		Create_a_teleport_trap(myObj,(float)9.000000,(float)46.200000,(float)3.600000,true);
-
 
 
 		}
@@ -9675,20 +9680,26 @@ public class MyTools
 			FreezeMovement(myObj);
 		}
 
-		if (isAnimated==1)
+		if (ItemType !=ObjectInteraction.ANIMATION)
+		{
+			if (isAnimated==1)
 			{
-			objInteract.isAnimated=true;
+				objInteract.isAnimated=true;
 			}
-
-		if (useSprite==1)
+			
+			if (useSprite==1)
 			{
-			objInteract.ignoreSprite=false;
+				objInteract.ignoreSprite=false;
 			}
+			else
+			{
+				objInteract.ignoreSprite=true;
+			}
+		}
 		else
 		{
 			objInteract.ignoreSprite=true;
 		}
-
 	}
 
 	static void CreateTrigger(GameObject myObj,int triggerX, int triggerY, string target)
@@ -10812,6 +10823,16 @@ public class MyTools
 			npc.NavMeshRegion=NavMeshRegion;
 		}
 	}
+
+
+	static void AddAnimationOverlay(GameObject myObj, int Start, int NoOfFrames)
+		{
+		AnimationOverlay anim =myObj.AddComponent<AnimationOverlay>();
+		anim.StartFrame=Start;
+		anim.FrameNo=Start;
+		anim.NoOfFrames=NoOfFrames;
+	}
+
 }
 
 

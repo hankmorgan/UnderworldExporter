@@ -84,7 +84,12 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
 
-	public const int LOCKPICK =78;
+	public const int SHIELD =78;
+
+	public const int LOCKPICK =79;
+
+
+	public const int ANIMATION = 80;
 
 	private UILabel MessageLog;
 

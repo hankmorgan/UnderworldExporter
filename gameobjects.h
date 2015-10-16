@@ -85,6 +85,7 @@
 #define LEGGINGS 77
 #define SHIELD 78
 #define LOCKPICK 79
+#define ANIMATION 80
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

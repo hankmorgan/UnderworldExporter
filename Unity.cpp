@@ -44,6 +44,12 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 		ChildName);
 	}
 
+void RenderUnityEntityAnimationOverlay(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{//Is animated is treated as the start frame
+	//useSprite is treated as the length of the animation
+	fprintf(UNITY_FILE, "\n\tAddAnimationOverlay(myObj,%d,%d);", objectMasters[currobj.item_id].isAnimated, objectMasters[currobj.item_id].useSprite);
+	}
+
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	//A trigger that fires when you step in it.
@@ -1887,6 +1893,12 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityWeapon(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case ANIMATION:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityAnimationOverlay(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
