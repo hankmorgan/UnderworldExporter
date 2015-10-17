@@ -390,10 +390,10 @@ int hasLock=0;
 						hasLock);
 					break;
 				case PORTCULLIS:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
-						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
+					fprintf(UNITY_FILE, "\n\tCreatePortcullis(myObj, %d, %d);",
+						objList[currobj.link].link & 0x3F,
 						hasLock);
-					fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
+					//fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
 					break;
 			}
 		UnityRotation(game, -90, currobj.heading - 180, 0);

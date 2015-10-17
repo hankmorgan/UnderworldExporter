@@ -47,10 +47,13 @@ public class ContainerOpened : MonoBehaviour {
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		if (pInv.currentContainer=="Gronk")
 		{//Don't do anything on the top level
+			pInv.ContainerOffset=0;
 			return;
 		}
 		if (pInv.ObjectInHand=="")
 		{//Player has no object in their hand. We close up the container.
+			ScrollButtonInventory.ScrollValue=0;
+			pInv.ContainerOffset=0;
 			Container currentContainerObj = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			pInv.currentContainer = currentContainerObj.ContainerParent;
 			currentContainerObj.isOpenOnPanel=false;

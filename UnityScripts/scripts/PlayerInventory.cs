@@ -79,6 +79,8 @@ public class PlayerInventory : MonoBehaviour {
 	private LightSource ls;
 
 	private Container playerContainer;
+	public int ContainerOffset=0;//For scrolling the inventory.
+
 	// Use this for initialization
 	void Start () {
 		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
@@ -542,7 +544,7 @@ public class PlayerInventory : MonoBehaviour {
 				sBackPack[slotIndex-11]=sObject;
 				bBackPack[slotIndex-11]=true;
 				Container cn = GameObject.Find (currentContainer).GetComponent<Container>();
-				cn.items[slotIndex-11]=sObject;
+				cn.items[ContainerOffset + slotIndex-11]=sObject;
 			}
 			break;
 		}
@@ -623,7 +625,7 @@ public class PlayerInventory : MonoBehaviour {
 		bLeftRing=true;
 		for (int i = 11; i<=18; i++)
 			{
-				sBackPack[i-11] = cn.GetItemAt(i-11);
+				sBackPack[i-11] = cn.GetItemAt(ContainerOffset + i-11);
 				bBackPack[i-11]=true;
 			}
 	}
@@ -638,7 +640,7 @@ public class PlayerInventory : MonoBehaviour {
 		SetObjectAtSlot(slotIndex,cObjectInHand);
 		if (slotIndex>=11)
 			{
-			cn.AddItemToContainer(cObjectInHand,slotIndex-11);
+			cn.AddItemToContainer(cObjectInHand,ContainerOffset + slotIndex-11);
 			}
 		ObjectInHand= ObjInSlot.name;
 		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;

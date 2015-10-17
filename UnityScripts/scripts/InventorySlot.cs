@@ -340,7 +340,7 @@ public class InventorySlot : MonoBehaviour {
 						if (this.slotIndex>=11)
 							{
 							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(this.slotIndex-11);
+							cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 							}
 						pInv.ClearSlot(this.slotIndex);
 					}
@@ -377,7 +377,7 @@ public class InventorySlot : MonoBehaviour {
 						if (this.slotIndex>=11)
 						{
 							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(this.slotIndex-11);
+							cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 						}
 						pInv.ClearSlot(this.slotIndex);
 						return;
@@ -429,7 +429,7 @@ public class InventorySlot : MonoBehaviour {
 						if (this.slotIndex>=11)
 						{
 							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(this.slotIndex-11);
+							cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 						}
 						pInv.ClearSlot(this.slotIndex);
 						}						

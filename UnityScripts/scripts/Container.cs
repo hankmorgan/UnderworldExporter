@@ -309,7 +309,10 @@ public class Container : MonoBehaviour {
 */
 	public void OpenContainer()
 	{
+
 		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		pInv.ContainerOffset=0;
+		ScrollButtonStatsDisplay.ScrollValue=0;
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
 			{//The requested container is open in the game world. This can cause problems!
@@ -317,6 +320,8 @@ public class Container : MonoBehaviour {
 			SpillContents();
 			return;
 			}
+		//Sort the container
+		Container.SortContainer(this);
 		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
 		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
 		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
@@ -457,12 +462,49 @@ public class Container : MonoBehaviour {
 						Container.SetItemsParent(item.GetComponent<Container>(),Parent);
 					}
 				}
-				else
-				{
-					Debug.Log(ItemName + " is null!");
-				}
+			//	else
+				//{
+				//	Debug.Log(ItemName + " is null!");
+				//}
 			}
 		}
 	}
 
+
+	public static void SortContainer(Container cn)
+	{
+		//Debug.Log ("Sorting container");
+		//Flattens the contents of a container so that they occupy the first slots 
+		int currFreeSlot=-1;
+		string ItemName;
+		bool GetNextSlot=true;
+		for (int i=0;i<40;i++)
+		{
+			//Find the first free slot
+			if (GetNextSlot==true)
+			{
+				for (int j=0;j<40;j++)
+				{
+					ItemName=cn.GetItemAt(j);
+					if (ItemName=="")
+					{
+						currFreeSlot=j;
+						GetNextSlot=false;
+						break;
+					}
+				}
+			}
+			if ((i>currFreeSlot) &&(currFreeSlot!=-1))
+			{
+				ItemName=cn.GetItemAt(i);
+				if (ItemName!="")
+				{//Move this item to the free slot
+					cn.RemoveItemFromContainer(i);
+					cn.AddItemToContainer(ItemName,currFreeSlot);
+					GetNextSlot=true;
+					currFreeSlot=-1;
+				}
+			}
+		}
+	}
 }

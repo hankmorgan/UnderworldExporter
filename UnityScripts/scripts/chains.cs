@@ -122,6 +122,8 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Boots_f_Slot",true);
 			EnableDisableControl("Gloves_f_Slot",true);
 			EnableDisableControl("ContainerOpened",true);
+			EnableDisableControl("InventoryDown",true);
+			EnableDisableControl("InventoryUp",true);
 			
 			//Turn off conversation
 			EnableDisableControl("Conversation_Portrait_Frame_Left",false);
@@ -207,6 +209,8 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("boots_f_Slot",false);
 			EnableDisableControl("gloves_f_Slot",false);
 			EnableDisableControl("ContainerOpened",false);
+			EnableDisableControl("InventoryDown",false);
+			EnableDisableControl("InventoryUp",false);
 			
 			//Turn off conversation
 			EnableDisableControl("Conversation_Portrait_Frame_Left",false);
@@ -291,6 +295,8 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Boots_f_Slot",false);
 			EnableDisableControl("Gloves_f_Slot",false);
 			EnableDisableControl("ContainerOpened",false);
+			EnableDisableControl("InventoryDown",false);
+			EnableDisableControl("InventoryUp",false);
 			
 			//Turn off conversation
 			EnableDisableControl("Conversation_Portrait_Frame_Left",false);
@@ -374,6 +380,8 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Boots_f_Slot",false);
 			EnableDisableControl("Gloves_f_Slot",false);
 			EnableDisableControl("ContainerOpened",false);
+			EnableDisableControl("InventoryDown",false);
+			EnableDisableControl("InventoryUp",false);
 			
 			//Turn on conversation
 			EnableDisableControl("Conversation_Portrait_Frame_Left",true);
