@@ -144,7 +144,7 @@ public class UWCharacter : MonoBehaviour {
 
 	private ObjectInteraction QuantityObj=null;
 
-	long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
+	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
 
 
 	// Use this for initialization
@@ -329,6 +329,7 @@ public class UWCharacter : MonoBehaviour {
 								{
 								Debug.Log("attempting to pick up a quantity");
 								UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+								inputctrl.eventReceiver=this.gameObject;
 								inputctrl.selected=true;
 								QuantityObj=objPicked;	
 								}		
@@ -385,7 +386,7 @@ public class UWCharacter : MonoBehaviour {
 				//split the obj.
 				GameObject Split = Instantiate(QuantityObj.gameObject);//What we are picking up.
 				Split.GetComponent<ObjectInteraction>().Link =quant;
-				Split.name = Split.name+summonCount;
+				Split.name = Split.name+"_"+summonCount++;
 				QuantityObj.Link=QuantityObj.Link-quant;
 				Pickup (Split.GetComponent<ObjectInteraction>(), pInv);
 				QuantityObj=null;//Clear out to avoid weirdness.

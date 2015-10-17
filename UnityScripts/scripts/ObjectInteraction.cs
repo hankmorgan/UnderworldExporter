@@ -556,7 +556,9 @@ public class ObjectInteraction : MonoBehaviour {
 				{//A key just becomes the object in hand
 				playerUW.CursorIcon= InventoryDisplay.texture;
 				pInv.ObjectInHand=this.name;
-				return false;
+				UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
+				InteractionModeControl.UpdateNow=true;
+				return true;
 				break;
 				}
 				//nothing/use
@@ -564,7 +566,9 @@ public class ObjectInteraction : MonoBehaviour {
 				{
 					playerUW.CursorIcon= InventoryDisplay.texture;
 					pInv.ObjectInHand=this.name;
-					return false;
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
+					InteractionModeControl.UpdateNow=true;
+					return true;
 					break;
 				}
 			case RUNE://	RUNE 6
@@ -636,14 +640,18 @@ public class ObjectInteraction : MonoBehaviour {
 
 				if (Valid)
 					{
-					cn.AddItemToContainer(pInv.ObjectInHand);
+					if (ObjectInHand.GetComponent<ObjectInteraction>().isQuant==false)
+					    {
+						cn.AddItemToContainer(pInv.ObjectInHand);
+						}
+					else
+						{
+						cn.AddItemMergedItemToContainer(ObjectInHand.gameObject);
+						}
+
 					if (cn.isOpenOnPanel == true)
 					{//Container is open for display force a refresh.
 						cn.OpenContainer();
-						//for (int i = 11; i<18;i++)
-						//	{
-						//	pInv.bBackPack[i-11]=true;
-						//	}
 					}
 					pInv.ObjectInHand= "";
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
@@ -975,14 +983,23 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public void consumeObject()
 	{
-		Container cn = getCurrentContainer();
-		//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
-		if (!cn.RemoveItemFromContainer(this.name))
-		{//Try and remove from the paperdoll if not found in the current container.
-			pInv.RemoveItemFromEquipment(this.name);
-		}
-		pInv.Refresh();
-		Destroy (this.gameObject);
+		if((isQuant ==false) || ((isQuant) && (Link==1)))
+		  {//the last of the item or is not a quantity;
+			Container cn = getCurrentContainer();
+			//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
+			if (!cn.RemoveItemFromContainer(this.name))
+				{//Try and remove from the paperdoll if not found in the current container.
+				pInv.RemoveItemFromEquipment(this.name);
+				}
+				pInv.Refresh();
+				Destroy (this.gameObject);
+			}
+			else
+			{//just decrement the quantity value;
+				Link--;
+
+			}
+
 	}
 
 	public int GetHitFrameStart()

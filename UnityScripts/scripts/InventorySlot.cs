@@ -24,6 +24,9 @@ public class InventorySlot : MonoBehaviour {
 	public const int BOOT =75;
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
+
+
+	private GameObject QuantityObj=null;
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -303,6 +306,23 @@ public class InventorySlot : MonoBehaviour {
 					Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
 					DoNotPickup=true;
 				}
+				
+				if (objInt.isQuant==true)
+					{
+					ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+					if (ObjectUsedOn !=null)
+						{
+						if (objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id)
+							{
+								//merge the items
+								ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
+								playerUW.CursorIcon= playerUW.CursorIconDefault;
+								pInv.ObjectInHand="";
+								Destroy(objInt.gameObject);
+								return;
+							}
+						}
+					}
 			}
 
 		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
@@ -311,7 +331,6 @@ public class InventorySlot : MonoBehaviour {
 				{
 				pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				//playerUW.CurrObjectSprite = "";
 				pInv.ObjectInHand="";
 				}
 			//PickupFromSlot();
@@ -362,6 +381,22 @@ public class InventorySlot : MonoBehaviour {
 				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
 				DoNotPickup=true;
 			}
+			if (objInt.isQuant==true)
+			{
+				ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+				if (ObjectUsedOn !=null)
+				{
+					if (objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id)
+					{
+						//merge the items
+						ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
+						playerUW.CursorIcon= playerUW.CursorIconDefault;
+						pInv.ObjectInHand="";
+						Destroy(objInt.gameObject);
+						return;
+					}
+				}
+			}
 		}
 		//Code for when I right click in pickup mode.
 		if (pInv.GetObjectAtSlot(slotIndex) !="")
@@ -387,12 +422,10 @@ public class InventorySlot : MonoBehaviour {
 
 		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
-			//PickupFromSlot();
 			if (DoNotPickup==false)
 				{
 				pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				//playerUW.CurrObjectSprite = "";
 				pInv.ObjectInHand="";
 				}
 			}
@@ -419,24 +452,76 @@ public class InventorySlot : MonoBehaviour {
 							}
 					}
 					else
-				{//Pick up the item at that slot.
+					{//Pick up the item at that slot.
 					//TODO: Make this work with Equipment slots
 					if (DoNotPickup==false)
 						{
-						pInv.ObjectInHand= ObjectUsedOn.name;
-						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-						//playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
-						if (this.slotIndex>=11)
-						{
-							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
-						}
-						pInv.ClearSlot(this.slotIndex);
+						if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant)&&(ObjectUsedOn.GetComponent<ObjectInteraction>().Link==1)))
+							{//Is either not a quant or is a quantity of 1
+							pInv.ObjectInHand= ObjectUsedOn.name;
+							playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+							if (this.slotIndex>=11)
+							{
+								Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+								cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+							}
+							pInv.ClearSlot(this.slotIndex);
+							}
+						else
+							{
+							Debug.Log("attempting to pick up a quantity");
+							UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+							inputctrl.eventReceiver=this.gameObject;
+							inputctrl.selected=true;
+							QuantityObj=ObjectUsedOn;
+							}
 						}						
 					}
 				}
 			}
 	}
+
+
+	public void OnSubmitPickup()
+	{
+		
+		Debug.Log ("Value summited to slot");
+		PlayerInventory pInv = player.GetComponent<PlayerInventory>();
+		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+		Debug.Log (inputctrl.text);
+		int quant= int.Parse(inputctrl.text);
+		if (quant==0)
+		{//cancel
+			QuantityObj=null;
+		}
+		if (QuantityObj!=null)
+		{//Just do a normal pickup.
+			if (quant >= QuantityObj.GetComponent<ObjectInteraction>().Link)
+			{
+				pInv.ObjectInHand= QuantityObj.name;
+				playerUW.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				if (this.slotIndex>=11)
+				{
+					Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+					cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+				}
+				pInv.ClearSlot(this.slotIndex);
+			}
+			else
+			{
+				//split the obj. Do nothing to the inventory.
+				GameObject Split = Instantiate(QuantityObj);//What we are picking up.
+				Split.GetComponent<ObjectInteraction>().Link =quant;
+				Split.name = Split.name+"_"+playerUW.summonCount++;
+				Split.transform.parent=this.transform.parent;
+				QuantityObj.GetComponent<ObjectInteraction>().Link=QuantityObj.GetComponent<ObjectInteraction>().Link-quant;
+				pInv.ObjectInHand= Split.name;
+				playerUW.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				QuantityObj=null;//Clear out to avoid weirdness.
+			}
+		}
+	}
+
 
 	void OpenRuneBag()
 	{

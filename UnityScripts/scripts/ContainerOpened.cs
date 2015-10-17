@@ -83,13 +83,24 @@ public class ContainerOpened : MonoBehaviour {
 			//Debug.Log ("Moving contents out of bag");
 			Container CurrentContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
 			Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
-			if (DestinationContainer.AddItemToContainer(pInv.ObjectInHand))
-			{//Object has moved
-				//UWCharacter playerUW = player.GetComponent<UWCharacter>();
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				//playerUW.CurrObjectSprite = "";
-				pInv.ObjectInHand="";
+			ObjectInteraction item = GameObject.Find (pInv.ObjectInHand).GetComponent<ObjectInteraction>();
+			if (item.isQuant==false)
+			{
+				if (DestinationContainer.AddItemToContainer(pInv.ObjectInHand))
+				{//Object has moved
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					pInv.ObjectInHand="";
+				}
 			}
+			else
+			{
+				if (DestinationContainer.AddItemMergedItemToContainer(item.gameObject))
+				{//Object has moved
+					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					pInv.ObjectInHand="";
+				}
+			}
+
 		}
 	}
 }

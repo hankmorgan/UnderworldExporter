@@ -36,6 +36,30 @@ public class Container : MonoBehaviour {
 		}
 	}
 
+	public bool AddItemMergedItemToContainer(GameObject item)
+	{
+		//int i =0;
+
+		for (int i=0; i< 40; i++)
+		{
+			if (items[i]!="")
+			{
+				GameObject founditem = GameObject.Find (items[i]);
+				if (founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id)
+				{
+					//merge
+					Debug.Log ("Merging");
+					founditem.GetComponent<ObjectInteraction>().Link =founditem.GetComponent<ObjectInteraction>().Link+ item.GetComponent<ObjectInteraction>().Link;
+					GameObject.Destroy (item);
+					return true;
+				}
+			}
+		}
+		//otherwise just add in the usual way.
+		return AddItemToContainer(item.name);
+	}
+
+
 	public bool AddItemToContainer(string item)
 		{
 		int i =0;
@@ -90,8 +114,7 @@ public class Container : MonoBehaviour {
 			return false;
 		}
 	}
-	
-	
+
 	public bool RemoveItemFromContainer(int index)
 		{
 		if (items[index] != "")

@@ -94,12 +94,28 @@ public class LightSource : MonoBehaviour {
 		}
 		if (invSlot != null)
 		{
-			pInv.RemoveItem(this.name);
-			pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
+			if   ((objInt.isQuant==false) || ((objInt.isQuant) && (objInt.Link==1)))
+			{//Is a quantity of one or not a quantity/
+				pInv.RemoveItem(this.name);
+				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
+				IsOn=true;
+				objInt.item_id=ItemIdOn;
+				objInt.InvDisplayIndex=ItemIdOn;
+			}
+			else
+			{//Clone the item and move it's clone to the inventory slot
+				GameObject split = Instantiate(this.gameObject);
+				UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+				split.name= split.name+"_"+ playerUW.summonCount++;
+				split.GetComponent<ObjectInteraction>().Link=1;//Increment and decrement the object count as appropiate;
+				objInt.Link--;
+				split.transform.parent=this.transform.parent;
+				//Activate the split instead
+				split.GetComponent<ObjectInteraction>().Use();
+				split.GetComponent<ObjectInteraction>().isQuant=false;
+			}
+
 			//lt.range=LightSource.BaseLight+this.Brightness;
-			IsOn=true;
-			objInt.item_id=ItemIdOn;
-			objInt.InvDisplayIndex=ItemIdOn;
 		}
 		else
 		{
@@ -123,6 +139,7 @@ public class LightSource : MonoBehaviour {
 		IsOn=false;
 		objInt.item_id=ItemIdOff;
 		objInt.InvDisplayIndex=ItemIdOff;
+		objInt.isQuant=true;
 		objInt.RefreshAnim();
 	}
 
