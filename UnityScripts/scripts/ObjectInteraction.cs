@@ -134,8 +134,9 @@ public class ObjectInteraction : MonoBehaviour {
 
 	//UW specific info.
 	public int Owner;	//Used for keys
-	public int Link;
+	public int Link;	//Also quantity
 	public int Quality;
+	public bool isQuant;
 
 	//Display controls
 	public static TextureController tc;

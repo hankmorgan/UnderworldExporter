@@ -336,8 +336,8 @@ public class UWPalette : MonoBehaviour {
 		//TODO: Seperate palettes for each type of effect depending on source object.
 		CyclePalette(16,22);//fire
 		CyclePalette(48,51);//water?
-		CyclePalette(190,200);//fountain?
-		CyclePalette(100,105);//Silver tree
+		//CyclePalette(190,200);//fountain?
+		//CyclePalette(100,105);//Silver tree
 
 
 

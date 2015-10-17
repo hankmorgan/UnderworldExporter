@@ -142,6 +142,11 @@ public class UWCharacter : MonoBehaviour {
 
 	public WeaponAnimation wpa;
 
+	private ObjectInteraction QuantityObj=null;
+
+	long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
+
+
 	// Use this for initialization
 	void Start () {
 
@@ -315,32 +320,79 @@ public class UWCharacter : MonoBehaviour {
 					if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 					{
 						if (objPicked.CanBePickedUp==true)
-							{
-							objPicked.PickedUp=true;
-							if (objPicked.GetComponent<Container>()!=null)
+							{//Pickup if either not a quantity or is a quantity of one.
+							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)))
 								{
-								Container.SetPickedUpFlag(objPicked.GetComponent<Container>(),true);
-								Container.SetItemsParent(objPicked.GetComponent<Container>(),InvMarker.transform);
-								Container.SetItemsPosition (objPicked.GetComponent<Container>(),InvMarker.transform.position);
+								Pickup(objPicked,pInv);
 								}
-							//MessageLog.text = "You pick up a " + hit.transform.name;
-							CursorIcon=objPicked.GetInventoryDisplay().texture;
-							//CurrObjectSprite=objPicked.InventoryString;
-							pInv.ObjectInHand=hit.transform.name;
-							pInv.JustPickedup=true;//To stop me throwing it away immediately.
-							if (objPicked.GetComponent<Rigidbody>() !=null)
-								{								
-								//objPicked.rigidbody.useGravity=false;
-								WindowDetect.FreezeMovement(objPicked.gameObject);
-								}
-							objPicked.transform.position = InvMarker.transform.position;
-							objPicked.transform.parent=InvMarker.transform;
+							else
+								{
+								Debug.Log("attempting to pick up a quantity");
+								UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+								inputctrl.selected=true;
+								QuantityObj=objPicked;	
+								}		
 							}
 					}
 				}
 			}
 		//}
 	}
+
+	public void Pickup(ObjectInteraction objPicked, PlayerInventory  pInv)
+	{//completes the pickup.
+		objPicked.PickedUp=true;
+		if (objPicked.GetComponent<Container>()!=null)
+		{
+			Container.SetPickedUpFlag(objPicked.GetComponent<Container>(),true);
+			Container.SetItemsParent(objPicked.GetComponent<Container>(),InvMarker.transform);
+			Container.SetItemsPosition (objPicked.GetComponent<Container>(),InvMarker.transform.position);
+		}
+		//MessageLog.text = "You pick up a " + hit.transform.name;
+		CursorIcon=objPicked.GetInventoryDisplay().texture;
+		//CurrObjectSprite=objPicked.InventoryString;
+		pInv.ObjectInHand=objPicked.transform.name;
+		pInv.JustPickedup=true;//To stop me throwing it away immediately.
+		if (objPicked.GetComponent<Rigidbody>() !=null)
+		{								
+			//objPicked.rigidbody.useGravity=false;
+			WindowDetect.FreezeMovement(objPicked.gameObject);
+		}
+		objPicked.transform.position = InvMarker.transform.position;
+		objPicked.transform.parent=InvMarker.transform;
+	}
+
+	public void OnSubmitPickup()
+	{
+
+		Debug.Log ("Value summited");
+		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
+		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+		Debug.Log (inputctrl.text);
+		int quant= int.Parse(inputctrl.text);
+		if (quant==0)
+		{//cancel
+			QuantityObj=null;
+		}
+		if (QuantityObj!=null)
+			{
+			if (quant >= QuantityObj.Link)
+				{
+				Pickup(QuantityObj,pInv);
+				}
+			else
+				{
+				//split the obj.
+				GameObject Split = Instantiate(QuantityObj.gameObject);//What we are picking up.
+				Split.GetComponent<ObjectInteraction>().Link =quant;
+				Split.name = Split.name+summonCount;
+				QuantityObj.Link=QuantityObj.Link-quant;
+				Pickup (Split.GetComponent<ObjectInteraction>(), pInv);
+				QuantityObj=null;//Clear out to avoid weirdness.
+				}
+			}
+	}
+
 
 	public void LookMode()
 	{//Look at the clicked item.

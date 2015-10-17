@@ -19,7 +19,7 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d);",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d);",
 		    objectMasters[currobj.item_id].particle,
 			objectMasters[currobj.item_id].InvIcon,
 			objectMasters[currobj.item_id].EquippedIconFemaleLowest,
@@ -27,12 +27,14 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 			currobj.link, currobj.quality, currobj.owner,
 			objectMasters[currobj.item_id].isMoveable,
 			objectMasters[currobj.item_id].isAnimated,
-			objectMasters[currobj.item_id].useSprite);
+			objectMasters[currobj.item_id].useSprite,
+			currobj.is_quant
+			);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d \"%s\");",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, \"%s\");",
 		objectMasters[currobj.item_id].particle,
 		objectMasters[currobj.item_id].InvIcon,
 		objectMasters[currobj.item_id].EquippedIconFemaleLowest,
@@ -41,6 +43,7 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 		objectMasters[currobj.item_id].isMoveable,
 		objectMasters[currobj.item_id].isAnimated, 
 		objectMasters[currobj.item_id].useSprite,
+		currobj.is_quant,
 		ChildName);
 	}
 
