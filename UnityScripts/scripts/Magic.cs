@@ -431,8 +431,14 @@ public class Magic : MonoBehaviour {
 	 void Cast_AnNox(GameObject caster)
 	{//Cure Poison
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		//Get all instances of poison effect on the character and destroy them.
+		SpellEffectPoison[] seps= caster.GetComponents<SpellEffectPoison>();
+		for (int i =0; i<= seps.GetUpperBound(0);i++)
+		    {
+			seps[i].CancelEffect();
+			}
 		playerUW.Poisoned=false;
-		Debug.Log ("AN Nox Cast");
+		Debug.Log ("An Nox Cast");
 	}
 
 	 void Cast_InLor(GameObject caster)

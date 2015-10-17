@@ -39,6 +39,9 @@ public class SpellEffect : MonoBehaviour {
 	public virtual void CancelEffect()
 	{//End the effect. By default it will destroy the object.
 		//Debug.Log ("Cancelling Effect");
+		Active=false;
+		//this.StopCoroutine(timer ());
+		//this.StopAllCoroutines();
 		Destroy (this);
 	}
 
@@ -49,13 +52,17 @@ public class SpellEffect : MonoBehaviour {
 		{
 			yield return new WaitForSeconds(10);
 			counter--;
+			Debug.Log (counter);
 			if (counter<=0)
 			{
 				Active=false;
 			}
 			else
 			{
-				EffectOverTime ();
+				if (Active)
+				{
+					EffectOverTime ();
+				}
 			}
 		}
 		CancelEffect();
