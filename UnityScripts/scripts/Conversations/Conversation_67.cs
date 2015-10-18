@@ -21,22 +21,23 @@ public class Conversation_67 : Conversation {
 	
 
 	public override IEnumerator main() {
-		StringNo = 3651;
-		tl.Clear();
-		ConversationOpen=true;
-		InConversation=true;
-		this.GetComponent<NPC>().state= NPC.AI_STATE_STANDING;
+		SetupConversation (3651);
+		//StringNo = 3651;
+		//tl.Clear();
+		//ConversationOpen=true;
+		//InConversation=true;
+		//this.GetComponent<NPC>().state= NPC.AI_STATE_STANDING;
 		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		//tl.textLabel.lineWidth=480;
 		privateVariables[1] = 0;
 		yield return StartCoroutine(func_029d());
 		func_0012();
-		this.GetComponent<NPC>().state= NPC.AI_STATE_IDLERANDOM;
+		//this.GetComponent<NPC>().state= NPC.AI_STATE_IDLERANDOM;
 		yield return 0;
 	} // end func
 	
 	void func_0012() {
-		InConversation=false;
+		EndConversation();
 		privateVariables[0] = 1;
 	} // end func
 	/*
@@ -267,7 +268,8 @@ public class Conversation_67 : Conversation {
 			case 2:
 				
 				locals[70] = 2;
-				yield return new WaitForSeconds(5.0f);
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,70 );
 				yield break;
 				break;
@@ -392,7 +394,8 @@ public class Conversation_67 : Conversation {
 			
 			yield return StartCoroutine(say( "Good luck in thy travels." ));
 			locals[181] = 3;
-			yield return new WaitForSeconds(5.0f);
+			Time.timeScale =SlomoTime;
+			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,181 );
 			yield break;
 		} // end if
@@ -416,7 +419,8 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				locals[204] = 1;
-				yield return new WaitForSeconds(5.0f);
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,204 );
 				yield break;
 				break;
@@ -525,14 +529,16 @@ public class Conversation_67 : Conversation {
 			
 			yield return StartCoroutine(say( "Well, 'tis thy decision.  I am sure they would welcome thee." ));
 			locals[227] = 2;
-			yield return new WaitForSeconds(5.0f);
+			Time.timeScale =SlomoTime;
+			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,227 );
 			yield break;
 		label_05c8:;
 			
 			yield return StartCoroutine(say( "Go west from the entrance chamber, past a door, and then north over a chasm. Remember, the Banner of Cabirus -- with the mark of the ankh on it -- is the mark of civilization in the Abyss." ));
 			locals[228] = 2;
-			yield return new WaitForSeconds(5.0f);
+			Time.timeScale =SlomoTime;
+			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,228 );
 			yield break;
 		label_05d6:;
@@ -549,7 +555,8 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				locals[251] = 3;
-				yield return new WaitForSeconds(5.0f);
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,251 );
 				yield break;
 				break;
@@ -557,7 +564,8 @@ public class Conversation_67 : Conversation {
 			case 2:
 				
 				locals[252] = 2;
-				yield return new WaitForSeconds(5.0f);
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,252 );
 				yield break;
 				break;
@@ -579,7 +587,8 @@ public class Conversation_67 : Conversation {
 		case 1:
 			
 			locals[275] = 2;
-			yield return new WaitForSeconds(5.0f);
+			Time.timeScale =SlomoTime;
+			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,275 );
 			yield break;
 			break;
@@ -587,7 +596,8 @@ public class Conversation_67 : Conversation {
 		case 2:
 			
 			locals[276] = 2;
-			yield return new WaitForSeconds(5.0f);
+			Time.timeScale =SlomoTime;
+			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,276 );
 			yield break;
 			break;
@@ -595,14 +605,16 @@ public class Conversation_67 : Conversation {
 		case 3:
 			
 			locals[277] = 3;
-			yield return new WaitForSeconds(5.0f);
+			Time.timeScale =SlomoTime;
+			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,277 );
 			yield break;
 			break;
 			
 		} // end switch
 
-		yield return new WaitForSeconds(5.0f);
+		Time.timeScale =SlomoTime;
+		yield return new WaitForSeconds(WaitTime);
 		yield break;	
 
 	} // end func

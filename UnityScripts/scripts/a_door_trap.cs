@@ -32,16 +32,17 @@ public class a_door_trap : MonoBehaviour {
 			switch (quality)
 			{
 			case 1://try open
-				MessageLog.text=MessageLog.text + door.name + " opened\n";
+				//MessageLog.text=MessageLog.text + door.name + " opened\n";
 				DC.UnlockDoor();
 				DC.OpenDoor();
 				break;
 			case 2://try close
-				MessageLog.text=MessageLog.text + door.name + " closed\n";
+				//MessageLog.text=MessageLog.text + door.name + " closed\n";
 				DC.CloseDoor();
+				DC.LockDoor ();
 				break;
 			case 3://try toggle
-				MessageLog.text=MessageLog.text + door.name + " toggled\n";
+				//MessageLog.text=MessageLog.text + door.name + " toggled\n";
 				DC.ToggleDoor();
 				break;
 			}

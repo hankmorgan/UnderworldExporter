@@ -473,6 +473,8 @@ public class InventorySlot : MonoBehaviour {
 							UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
 							inputctrl.eventReceiver=this.gameObject;
 							inputctrl.selected=true;
+							WindowDetect.WaitingForInput=true;
+							Time.timeScale=0.0f;
 							QuantityObj=ObjectUsedOn;
 							}
 						}						
@@ -484,7 +486,9 @@ public class InventorySlot : MonoBehaviour {
 
 	public void OnSubmitPickup()
 	{
-		
+		WindowDetect.WaitingForInput=false;
+		Time.timeScale=1.0f;
+
 		Debug.Log ("Value summited to slot");
 		PlayerInventory pInv = player.GetComponent<PlayerInventory>();
 		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();

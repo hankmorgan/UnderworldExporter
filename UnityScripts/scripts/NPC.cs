@@ -64,7 +64,7 @@ public class NPC : MonoBehaviour {
 		}
 		else
 		{
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<10;
+			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<4;
 			if (ai.AI.IsActive==false)
 			{
 				return;
@@ -130,13 +130,18 @@ public class NPC : MonoBehaviour {
 
 		//TODO:Make sure you add the conversation object to the npc!
 
-		Conversation x = (Conversation)this.GetComponent("Conversation_67");
-		Conversation.CurrentConversation=npc_whoami;
-		Conversation.InConversation=true;
-		Conversation.maincam=Camera.main;
+		Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
+		if (x!=null)
+		{
 
-		Camera.main.enabled = false;
-		StartCoroutine(x.main ());
+			Conversation.CurrentConversation=npc_whoami;
+			Conversation.InConversation=true;
+			Conversation.maincam=Camera.main;
+			
+			Camera.main.enabled = false;
+			StartCoroutine(x.main ());
+		}
+
 		//Debug.Log (x.val);
 	}
 }

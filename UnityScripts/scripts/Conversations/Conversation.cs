@@ -1,6 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+Basic rules for converting conversations.
+
+Create Subclass of Conversation called Conversation_[whoami]
+Set up the main() as in the _67.
+Add EndConversation(); to ending function func_0012 (typically)
+Remove startup and void functions.
+Comment out unreachable code.
+rename the instances of array private to privateVariables.
+Change the declaration of locals
+Remove the & from usages of locals.
+Change usages of say to a yield coroutine
+Change usages of babl_menu to match function call babl_menu(unk,array, indexto first entry);
+then set	locals[x] to playeranswer
+Find all end of conversations and add yield for time and yield break
+add npc. to all npc variables.
+Comment out play_hunger syntax error
+Make sure Random is correctly set up 
+Implement intrinsic conversations in this class.
+
+*/
+
 public class Conversation : MonoBehaviour {
 
 	public static UWCharacter playerUW;
@@ -69,9 +91,31 @@ public class Conversation : MonoBehaviour {
 	public UWFonts FontController;
 	public static Camera maincam;
 
+	public const float WaitTime=0.3f;//Is affected by the slomotime!
+	public const float SlomoTime=0.1f;//To keep corountines running when ending convos and waiting out the WaitTime
+
 	int LineWidth = 28 ;
 
 	public NPC npc;
+
+	public void SetupConversation(int stringno)
+	{
+		//pause the world
+		StringNo =stringno;// 3650;
+		tl.Clear();
+		Time.timeScale=0.0f;
+		ConversationOpen=true;
+		InConversation=true;
+	}
+
+	public void EndConversation()
+	{
+		//Debug.Log ("End convo");
+		Time.timeScale=1.0f;
+		InConversation=false;
+		npc.npc_talkedto=1;
+	}
+
 	// Use this for initialization
 	void Start () {
 
@@ -85,6 +129,7 @@ public class Conversation : MonoBehaviour {
 	void Update () {
 	if ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true))
 		{
+			Time.timeScale=1.0f;//start the clock 
 			ConversationOpen=false;
 			tl.Clear ();
 			tl_input.Clear ();
@@ -299,4 +344,167 @@ public class Conversation : MonoBehaviour {
 		{yield return null;}
 		//Ready=true;
 	}
+
+	public void gronk_door(int unk, int Action, int tileY, int tileX)
+	{
+		/*
+		id=0025 name="gronk_door" ret_type=int
+		parameters:   arg1: x tile coordinate with door to open
+		arg2: y tile coordinate
+		arg3: close/open flag (0 means open)
+		description:  opens/closes door or portcullis
+		return value: unknown
+		*/
+
+		GameObject dr = GameObject.Find ("door_" +tileX .ToString ("D3") + "_" + tileY.ToString ("D3"));
+		if (dr!=null)
+		{
+			DoorControl DC = dr.GetComponent<DoorControl>();
+			if (DC!=null)
+			{
+				if (Action==0)
+				{
+					DC.UnlockDoor();
+					DC.OpenDoor();
+				}
+				else
+				{
+					DC.CloseDoor();
+					DC.LockDoor ();
+				}
+			}
+			else
+			{
+				Debug.Log ("Unable to find doorcontrol to gronk " + " at " + tileX + " " + tileY);
+			}
+
+		}
+		else
+		{
+			Debug.Log ("Unable to find door to gronk " + " at " + tileX + " " + tileY);
+		}
+
+		//GameObject door = Var.findDoor(Var.triggerX,Var.triggerY);
+	}
+
+
+	public int show_inv(int unk, int arg1, int arg2)
+	{
+	/*
+   id=0012 name="show_inv" ret_type=int
+   parameters:   arg1: list with inventory item positions
+                 arg2: list with object id's shown in player's barter area
+   description:  the function copies the item positions and object id's of
+                 all visible items in the barter area to the array in arg1
+                 and arg2 (which needs at most 4 array values each)
+   return value: returns number of items stored in the arrays		 * 
+	*/
+		return 1;
+	}
+
+
+	public int give_to_npc(int unk, int arg1, int arg2)
+	{
+		Debug.Log ("Give to NPC");
+		/*
+   id=0013 name="give_to_npc" ret_type=int
+   parameters:   arg1: list of item inventory positions to give to npc
+                 arg2: number of items in list in arg1
+   description:  transfers a number of items from the player inventory to the npc's inventory
+   return value: returns 0 if there were no items to give, and 1 if there were some items
+		 */
+		return Random.Range (0,2);
+	}
+
+	public int take_from_npc(int arg1, int arg2)
+	{
+		Debug.Log ("Take from NPC");
+		/*
+   id=0015 name="take_from_npc" ret_type=int
+   parameters:   arg1: item id (can also be an item category value, > 1000)
+   description:  transfers an item from npc inventory to player inventory,
+                 based on an item id. when the value is > 1000, all items of
+                 a category are copied. category item start = (arg1-1000)*16
+   return value: 1: ok, 2: player has no space left
+	*/
+		return Random.Range (1,3);
+	}
+
+	public void setup_to_barter(int unk)
+	{
+		/*
+   id=001f name="setup_to_barter" ret_type=void
+   parameters:   none
+   description:  starts bartering; shows npc items in npc bartering area
+		 */
+		Debug.Log ("Setup to barter");
+		return;
+	}
+
+	public void do_judgement(int unk)
+	{
+		/*
+	id=0021 name="do_judgement" ret_type=void
+   parameters:   none
+   description:  judges current trade (using the "appraise" skill) and prints result
+		 */
+		Debug.Log ("Do Judgment");
+		return;
+	}
+
+	public void do_decline(int unk)
+	{
+		/*
+   id=0022 name="do_decline" ret_type=void
+   parameters:   none
+   description:  declines trade offer (?)
+		*/
+		Debug.Log ("Do Decline");
+		return;
+	}
+
+	public int do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
+	{
+		/*
+   id=0018 name="do_offer" ret_type=int
+   parameters:   arg1 ... arg5: unknown
+                 [arg6, arg7]: unknown
+   description:  checks if the deal is acceptable for the npc, based on the
+                 selected items in both bartering areas. the values in arg1
+                 to arg5 are probably values of the items that are
+                 acceptable for the npc.
+                 the function is sometimes called with 7 args, but arg6 and
+                 arg7 are always set to -1.
+   return value: 1 if the deal is acceptable, 0 if not
+		 */
+		Debug.Log ("Do Offer");
+		return Random.Range (0,2);
+	}
+
+	public int do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
+	{
+		return do_offer (unk,arg1,arg2,arg3,arg4,arg5,arg6,-1);
+	}
+
+	public int do_demand(int unk, int arg1, int arg2)
+	{
+		/*
+   id=0019 name="do_demand" ret_type=int
+   parameters:   arg1: string id with text to print if NPC is not willing
+                       to give the item
+                 arg2: string id with text if NPC gives the player the item
+   description:  decides if the player can "persuade" the NPC to give away
+                 the items in barter area, e.g. using karma.
+   return value: returns 1 when player persuaded the NPC, 0 else
+		 */
+
+		return Random.Range (0,2);
+	}
+
+	public int random(int unk, int High)
+	{
+		return Random.Range(1,High+1);
+	}
 }
+
+

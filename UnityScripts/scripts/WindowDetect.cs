@@ -13,6 +13,9 @@ public class WindowDetect : MonoBehaviour {
 	public static UWCharacter playerUW;
 	PlayerInventory pInv;
 	private bool MouseHeldDown=false;
+
+	public static bool WaitingForInput=false;
+	public GameObject BlockingCollider;
 	//public bool ThrowArea;
 
 	// Use this for initialization
@@ -26,7 +29,7 @@ public class WindowDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		BlockingCollider.SetActive(WaitingForInput);
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModeAttack:
@@ -120,7 +123,7 @@ public class WindowDetect : MonoBehaviour {
 		/*
 		 * Cursor Click on main view area
 		// */
-		Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
+		//Debug.Log("WindowDetect : interaction is " + UWCharacter.InteractionMode);
 		if (playerUW.ReadiedSpell!="" )
 		{
 			Debug.Log("player has a spell to cast");

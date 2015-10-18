@@ -144,6 +144,7 @@ public class UWCharacter : MonoBehaviour {
 
 	private ObjectInteraction QuantityObj=null;
 
+
 	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
 
 
@@ -180,9 +181,11 @@ public class UWCharacter : MonoBehaviour {
 
 
 		XYAxis = GetComponent<MouseLook>();
+		XYAxis.enabled=false;
+		MouseLookEnabled=false;
 		//YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		//Screen.lockCursor=true;
-		Cursor.lockState=CursorLockMode.None;
+		//Cursor.lockState=CursorLockMode.None;
 
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 
@@ -211,6 +214,10 @@ public class UWCharacter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		if (WindowDetect.WaitingForInput==true)
+		{
+			MessageLog.gameObject.GetComponent<UIInput>().selected=true;
+		}
 		if (CurVIT<=0)
 		{
 			//Debug.Log ("You have died!. Queue the laughing skulls.");
@@ -301,7 +308,7 @@ public class UWCharacter : MonoBehaviour {
 
 	public void PickupMode()
 	{//Picks up the clicked object in the view.
-		//Debug.Log (Input.GetMouseButtonDown(1))
+		Debug.Log ("input is " + UICamera.currentTouchID);
 		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		//	{
 			PlayerInventory pInv = this.GetComponent<PlayerInventory>();
@@ -320,19 +327,31 @@ public class UWCharacter : MonoBehaviour {
 					if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
 					{
 						if (objPicked.CanBePickedUp==true)
-							{//Pickup if either not a quantity or is a quantity of one.
-							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)))
+							{
+							if (UICamera.currentTouchID==-2)
 								{
-								Pickup(objPicked,pInv);
+									//right click check for quant.
+									//Pickup if either not a quantity or is a quantity of one.
+									if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)))
+									{
+										Pickup(objPicked,pInv);
+									}
+									else
+									{
+										Debug.Log("attempting to pick up a quantity");
+										UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+										inputctrl.eventReceiver=this.gameObject;
+										inputctrl.selected=true;
+										QuantityObj=objPicked;	
+										Time.timeScale=0.0f;
+										WindowDetect.WaitingForInput=true;
+									}		
 								}
 							else
-								{
-								Debug.Log("attempting to pick up a quantity");
-								UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
-								inputctrl.eventReceiver=this.gameObject;
-								inputctrl.selected=true;
-								QuantityObj=objPicked;	
-								}		
+								{//Left click. Pick them all up.
+								Pickup(objPicked,pInv);	
+								}
+
 							}
 					}
 				}
@@ -365,7 +384,8 @@ public class UWCharacter : MonoBehaviour {
 
 	public void OnSubmitPickup()
 	{
-
+		Time.timeScale=1.0f;
+		WindowDetect.WaitingForInput=false;
 		Debug.Log ("Value summited");
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
 		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
