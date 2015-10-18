@@ -78,11 +78,14 @@ public class Conversation : MonoBehaviour {
 
 	//bool Ready=false;
 
-	private int WhoAmI;
+	public int WhoAmI;
 
 	public bool inputRecieved;
 	public bool WaitingForInput;
 	public bool WaitingForMore;
+
+	int[] bablf_array = new int[10];
+	private bool usingBablF=false;
 
 	public UITextList tl;//Text output.
 	public UITextList tl_input;//player choices
@@ -110,7 +113,7 @@ public class Conversation : MonoBehaviour {
 
 	public void EndConversation()
 	{
-		//Debug.Log ("End convo");
+		Debug.Log ("End convo");
 		Time.timeScale=1.0f;
 		InConversation=false;
 		npc.npc_talkedto=1;
@@ -178,11 +181,24 @@ public class Conversation : MonoBehaviour {
 
 	private void CheckAnswer(int AnswerNo)
 	{
-		if (AnswerNo<=MaxAnswer)
+		if (usingBablF ==false)
 		{
-			WaitingForInput =true;
-			PlayerAnswer=AnswerNo;
-			WaitingForInput=false;
+			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
+			{
+				WaitingForInput =true;
+				PlayerAnswer=AnswerNo;
+				WaitingForInput=false;
+			}
+		}
+		else
+		{
+			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
+			{
+				WaitingForInput =true;
+				PlayerAnswer=bablf_array[AnswerNo-1];
+				//Debug.Log ("Player answers is " + AnswerNo + " = " + bablf_array[AnswerNo]);
+				WaitingForInput=false;
+			}
 		}
 	}
 
@@ -259,11 +275,7 @@ public class Conversation : MonoBehaviour {
 
 	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
 	{
-
-		//If an offset is 0, the conversation slot is empty and no conversation is
-		//	available. The name of the conversation partner is stored in string block
-		//		0007, string number = (conversation slot number - 0x0e00 + 16).
-
+		usingBablF=false;
 		string tmp="";
 		MaxAnswer=0;
 		int j=1;
@@ -280,42 +292,48 @@ public class Conversation : MonoBehaviour {
 			}
 		}
 
-		//Debug.Log(tmp);
-
-		//StartCoroutine (PrintBablMenu(tmp));
-		//tl.Add(tmp);
 		tl_input.maxEntries=1;
 		tl_input.Add (tmp);
-		//Ready=false;
-		//PlayerAnswer=1;
-		//PlayerAnswer= Random.Range (1,NoOfAnswers+1);
-		//StartCoroutine(Wait(1.0f));
-
 		yield return StartCoroutine(WaitForInput());
-
-	//	while(!Ready){
-	//		yield return null;
-	//	}
 
 		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
 		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
-		//Debug.Log (tmp); 
-		//Debug.Log (PlayerAnswer + " out of " + NoOfAnswers + " " + tmp);
+		yield return 0;
+	}
 
-		/*if (tmp.Length>=LineWidth)
-		{
-			tl.Add("@@@ " + tmp.Substring(0,LineWidth) + " @@@ ");
-			tl.Add (tmp.Substring(LineWidth,tmp.Length-LineWidth) + " @@@ ");
+	public IEnumerator babl_fmenu(int unknown, int[] localsArray, int Start, int flagIndex)
+	{
+		usingBablF=true;
+		for (int i =0; i<bablf_array.GetUpperBound (0);i++)
+		{//Reset the answers array
+			bablf_array[i]=0;
 		}
-		else 
+		string tmp="";
+		int j=1;
+		MaxAnswer=0;
+		for (int i = Start; i <=localsArray.GetUpperBound(0) ; i++)
 		{
-			tl.Add ("@@@ " + tmp + " @@@ ");	
+			if (localsArray[i]!=0)
+			{
+				if (localsArray[flagIndex++] !=0)
+				{
+					bablf_array[j-1] = localsArray[i];
+					tmp = tmp + j++ + "." + SC.GetString(StringNo,localsArray[i]) + "\n";
+					MaxAnswer++;
+				}
+			}
+			else
+			{
+				break;
+			}
 		}
-
-		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
-		*/
-		//return null;
-		//return playerAnswer;
+		
+		tl_input.maxEntries=1;
+		tl_input.Add (tmp);
+		yield return StartCoroutine(WaitForInput());
+		
+		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
+		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
 		yield return 0;
 	}
 

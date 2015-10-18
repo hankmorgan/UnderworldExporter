@@ -47,7 +47,6 @@ public class NPC : MonoBehaviour {
 
 			ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
 			//ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<10;
-
 	}
 	
 	// Update is called once per frame
@@ -109,7 +108,7 @@ public class NPC : MonoBehaviour {
 		UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
 		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));
 		
-		if (this.npc_whoami<=28)
+		if ((this.npc_whoami!=0) && (this.npc_whoami<=28))
 		{
 			//head in charhead.gr
 			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
@@ -129,18 +128,31 @@ public class NPC : MonoBehaviour {
 		}
 
 		//TODO:Make sure you add the conversation object to the npc!
-
-		Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
-		if (x!=null)
+		if (npc_whoami == 255)
 		{
-
-			Conversation.CurrentConversation=npc_whoami;
-			Conversation.InConversation=true;
-			Conversation.maincam=Camera.main;
-			
-			Camera.main.enabled = false;
-			StartCoroutine(x.main ());
+			Debug.Log ("No response");
 		}
+		else
+		{
+			if (npc_whoami==0)
+			{
+				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
+				npc_whoami=256+(objInt.item_id -64);
+				Debug.Log ("npc who am i is now " + npc_whoami);
+			}
+			Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
+			if (x!=null)
+			{				
+				Conversation.CurrentConversation=npc_whoami;
+				Conversation.InConversation=true;
+				x.WhoAmI=npc_whoami;
+				Conversation.maincam=Camera.main;
+				
+				Camera.main.enabled = false;
+				StartCoroutine(x.main ());
+			}
+		}
+
 
 		//Debug.Log (x.val);
 	}
