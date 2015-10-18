@@ -550,6 +550,8 @@ public class Conversation_9 : Conversation {
 	IEnumerator func_06bc() {
 		
 		yield return StartCoroutine(say( "Well, bless you, you're such a charming conversationalist.  Please do visit again." ));
+		Time.timeScale =SlomoTime;
+		yield return new WaitForSeconds(WaitTime);
 		func_00e0();
 		yield break;
 	} // end func

@@ -445,8 +445,8 @@ public class Conversation_10 : Conversation {
 		//int locals[25];
 		int[] locals=new int[26];
 		yield return StartCoroutine(say( "Aye, me modder used ta make it.  Tha takes a rotworm, chops it up fine, and marinates it in port wiv mushrooms." ));
-		locals[1] = take_from_npc( 1, locals[2] );
 		locals[2] = 1019;
+		locals[1] = take_from_npc( 1, locals[2] );
 		locals[3] = locals[1];
 		if ( 2 == locals[3] ) {
 			

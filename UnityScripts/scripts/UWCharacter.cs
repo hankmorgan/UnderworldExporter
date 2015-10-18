@@ -9,13 +9,14 @@ public class UWCharacter : MonoBehaviour {
 	//What mode are we in and various ranges
 	public static int InteractionMode;
 
-
+	public const int InteractionModeWalk=6;
 	public const int InteractionModeOptions=0;
 	public const int InteractionModeTalk=1;
 	public const int InteractionModePickup=2;
 	public const int InteractionModeLook=3;
 	public const int InteractionModeAttack=4;
 	public const int InteractionModeUse=5;
+	public const int InteractionModeInConversation=7; //For trading purposes.
 	public static int DefaultInteractionMode=UWCharacter.InteractionModeUse;
 
 	public const int SkillAttack =0;

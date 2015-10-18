@@ -36,7 +36,7 @@ public class Conversation : MonoBehaviour {
 
 	public int[] privateVariables=new int[31] ;
 	public int[] param1=new int[31];//TODO:is this correct
-	public int[] param2=new int[31];//TODO:is this correct
+	//public int[] param2=new int[31];//TODO:is this correct
 
 	public int play_hunger;
 	public int play_health;

@@ -156,7 +156,7 @@ public class Conversation_67 : Conversation {
 		
 	} // end func
 	*/
-	void func_0243() {
+	/*void func_0243() {
 		
 		param1[1] = game_days - param2[1];
 		param1[2] = game_mins - param2[2];
@@ -166,7 +166,7 @@ public class Conversation_67 : Conversation {
 			param1[1] = param1[1] - 1;
 		} // end if
 		
-	} // end func
+	} // end func*/
 	
 	IEnumerator func_029d() {
 		
