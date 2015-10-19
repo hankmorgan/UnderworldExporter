@@ -86,6 +86,7 @@ public class Conversation : MonoBehaviour {
 
 	int[] bablf_array = new int[10];
 	private bool usingBablF=false;
+	private int bablf_ans=0;
 
 	public UITextList tl;//Text output.
 	public UITextList tl_input;//player choices
@@ -113,7 +114,7 @@ public class Conversation : MonoBehaviour {
 
 	public void EndConversation()
 	{
-		Debug.Log ("End convo");
+		//Debug.Log ("End convo");
 		Time.timeScale=1.0f;
 		InConversation=false;
 		npc.npc_talkedto=1;
@@ -195,6 +196,7 @@ public class Conversation : MonoBehaviour {
 			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
 			{
 				WaitingForInput =true;
+				bablf_ans=AnswerNo;
 				PlayerAnswer=bablf_array[AnswerNo-1];
 				//Debug.Log ("Player answers is " + AnswerNo + " = " + bablf_array[AnswerNo]);
 				WaitingForInput=false;
@@ -304,7 +306,7 @@ public class Conversation : MonoBehaviour {
 	public IEnumerator babl_fmenu(int unknown, int[] localsArray, int Start, int flagIndex)
 	{
 		usingBablF=true;
-		for (int i =0; i<bablf_array.GetUpperBound (0);i++)
+		for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
 		{//Reset the answers array
 			bablf_array[i]=0;
 		}
@@ -318,6 +320,7 @@ public class Conversation : MonoBehaviour {
 				if (localsArray[flagIndex++] !=0)
 				{
 					bablf_array[j-1] = localsArray[i];
+					//Debug.Log ("Valid answer " + localsArray[i]);
 					tmp = tmp + j++ + "." + SC.GetString(StringNo,localsArray[i]) + "\n";
 					MaxAnswer++;
 				}
@@ -331,8 +334,9 @@ public class Conversation : MonoBehaviour {
 		tl_input.maxEntries=1;
 		tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
-		
-		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
+		//Debug.Log ("bablfanswer=" +bablf_ans);
+		//tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
+		tmp= SC.GetString (StringNo,bablf_array[bablf_ans]);
 		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
 		yield return 0;
 	}
@@ -356,7 +360,7 @@ public class Conversation : MonoBehaviour {
 
 	IEnumerator WaitForMore()
 	{
-		Debug.Log ("waitformore");
+		//Debug.Log ("waitformore");
 		WaitingForMore=true;
 		while (WaitingForMore)
 		{yield return null;}
@@ -522,6 +526,16 @@ public class Conversation : MonoBehaviour {
 	public int random(int unk, int High)
 	{
 		return Random.Range(1,High+1);
+	}
+
+	public int get_quest(int unk, int QuestNo)
+	{
+		return playerUW.quest ().QuestVariables[QuestNo];
+	}
+
+	public void set_quest(int unk,int value, int QuestNo)
+	{
+		playerUW.quest ().QuestVariables[QuestNo]=value;
 	}
 }
 

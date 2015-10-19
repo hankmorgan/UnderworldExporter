@@ -737,4 +737,9 @@ public class UWCharacter : MonoBehaviour {
 			return "Right";
 		}
 	}
+
+	public Quest quest()
+	{
+		return this.GetComponent<Quest>();
+	}
 }
