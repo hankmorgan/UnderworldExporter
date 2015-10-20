@@ -35,8 +35,9 @@ public class Conversation : MonoBehaviour {
 	public int StringNo;
 
 	public int[] privateVariables=new int[31] ;
-	public int[] param1=new int[31];//TODO:is this correct
+	public int[] param1=new int[31];//TODO:is this correct. I think this only refers to params in functions calls. Eg void func_00b1. 
 	//public int[] param2=new int[31];//TODO:is this correct
+
 
 	public int play_hunger;
 	public int play_health;
@@ -66,15 +67,16 @@ public class Conversation : MonoBehaviour {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 */
-	public int dungeon_level;    //  (not used in uw1)
-	public int riddlecounter;     // (not used in uw1)
-	public int game_time;
-	public int game_days;
-	public int game_mins;
+	public static int dungeon_level;    //  (not used in uw1)
+	public static int riddlecounter;     // (not used in uw1)
+	public static int game_time;
+	public static int game_days;
+	public static int game_mins;
 
 	public int PlayerAnswer;
 	private int MinAnswer=1;
 	private int MaxAnswer=1;
+
 
 	//bool Ready=false;
 
@@ -336,7 +338,7 @@ public class Conversation : MonoBehaviour {
 		yield return StartCoroutine(WaitForInput());
 		//Debug.Log ("bablfanswer=" +bablf_ans);
 		//tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
-		tmp= SC.GetString (StringNo,bablf_array[bablf_ans]);
+		tmp= SC.GetString (StringNo,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
 		yield return 0;
 	}

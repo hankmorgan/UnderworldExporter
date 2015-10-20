@@ -31,7 +31,10 @@ public class NPC : MonoBehaviour {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 
+
+	//TODO: The state should be replaces with a combination of the above variables.
 	public int state=0; //Set state when not in combat or dying.
+
 	public static UWCharacter playerUW;
 	private static bool playerUWReady;
 	private GoblinAI Gob;
