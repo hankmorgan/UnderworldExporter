@@ -102,10 +102,21 @@ public class Conversation : MonoBehaviour {
 
 	int LineWidth = 28 ;
 
+	private string[] NPCTradeItems=new string[4];
+
 	public NPC npc;
 
 	public void SetupConversation(int stringno)
 	{
+
+		//Clear the trade slots for the npcs
+		for (int i=0; i<4;i++)
+		{
+			TradeSlot ts = GameObject.Find ("Trade_NPC_Slot_" + i++).GetComponent<TradeSlot>();
+			ts.clear ();
+		}
+
+
 		//pause the world
 		StringNo =stringno;// 3650;
 		tl.Clear();
@@ -116,10 +127,37 @@ public class Conversation : MonoBehaviour {
 
 	public void EndConversation()
 	{
+		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		//Return any items in the trade area.
+		for (int i =0; i <=3; i++)
+		{
+			TradeSlot npcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			if (npcSlot.objectInSlot!="")
+			{//Move the object to the players container or to the ground
+				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+				{
+					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+					cn.AddItemToContainer(npcSlot.objectInSlot);
+					npcSlot.clear ();
+					playerUW.GetComponent<PlayerInventory>().Refresh ();
+				}
+				else
+				{
+					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+					demanded.transform.parent=null;
+					demanded.transform.position=npc.transform.position;
+					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+					npcSlot.clear();
+				}
+			}
+		}
+
+
 		//Debug.Log ("End convo");
 		Time.timeScale=1.0f;
 		InConversation=false;
 		npc.npc_talkedto=1;
+		UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
 	}
 
 	// Use this for initialization
@@ -260,9 +298,10 @@ public class Conversation : MonoBehaviour {
 		//Debug.Log(WhatToSay);
 	}
 
-	public void say(int WhatToSay)
+	IEnumerator say(int WhatToSay)
 	{
-
+		string tmp = SC.GetString (StringNo,WhatToSay);
+		yield return StartCoroutine(say (tmp));
 	}
 
 	public int sex(int unknown, int ParamFemale, int ParamMale)
@@ -461,19 +500,61 @@ public class Conversation : MonoBehaviour {
    parameters:   none
    description:  starts bartering; shows npc items in npc bartering area
 		 */
-		Debug.Log ("Setup to barter");
+		//TODO: Figure out where generic NPCs get their inventory for trading from???? Is there a loot list somewhere?
+		Container cn = npc.gameObject.GetComponent<Container>();
+		int itemCount=0;
+		for (int i= 0;i<4;i++)
+		{NPCTradeItems[i]="";}
+
+		Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
+		for (int i =0 ; i< 40; i++)
+		{
+			if (cn.GetItemAt(i)!="")
+			{
+				if (itemCount <=3)
+				{//Just take the first four items
+					ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
+					NPCTradeItems[itemCount]=itemToTrade.gameObject.name;
+					TradeSlot ts = GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+					ts.objectInSlot=itemToTrade.gameObject.name;
+					ts.SlotImage.mainTexture=itemToTrade.GetInventoryDisplay().texture;
+				}
+			}
+		}
+
 		return;
 	}
 
-	public void do_judgement(int unk)
+	public IEnumerator do_judgement(int unk)
 	{
 		/*
 	id=0021 name="do_judgement" ret_type=void
    parameters:   none
    description:  judges current trade (using the "appraise" skill) and prints result
 		 */
-		Debug.Log ("Do Judgment");
-		return;
+		//Debug.Log ("Do Judgment");
+		//TODO: figure out how this works. for the moment just base it out quantity of objects selected
+		int playerObjectCount=0; int npcObjectCount=0;
+		for (int i = 0; i<4; i++)
+		{
+			TradeSlot npcSlot = GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			if (npcSlot.isSelected()){npcObjectCount++;}
+			if (pcSlot.isSelected()){playerObjectCount++;}
+		}
+		if (playerObjectCount<npcObjectCount)
+		{
+			yield return  StartCoroutine ( say ("Player has the better deal"));
+		}
+		else if (playerObjectCount==npcObjectCount)
+		{
+			yield return  StartCoroutine (say("It is an even deal"));
+		}
+		else
+		{
+			yield return  StartCoroutine (say ("NPC has the better deal"));
+		}
+		//return;
 	}
 
 	public void do_decline(int unk)
@@ -483,11 +564,41 @@ public class Conversation : MonoBehaviour {
    parameters:   none
    description:  declines trade offer (?)
 		*/
+
+		//returns all items back to the players inventory or onto the ground
+
+
+		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		for (int i =0; i <=3; i++)
+		{
+			TradeSlot npcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			if (npcSlot.objectInSlot!="")
+			{//Move the object to the players container or to the ground
+				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+				{
+					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+					cn.AddItemToContainer(npcSlot.objectInSlot);
+					npcSlot.clear ();
+					playerUW.GetComponent<PlayerInventory>().Refresh ();
+				}
+				else
+				{
+					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+					demanded.transform.parent=null;
+					demanded.transform.position=npc.transform.position;
+					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+					npcSlot.clear();
+				}
+			}
+		}
+
+
+
 		Debug.Log ("Do Decline");
 		return;
 	}
 
-	public int do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
+	public IEnumerator  do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
 	{
 		/*
    id=0018 name="do_offer" ret_type=int
@@ -499,18 +610,92 @@ public class Conversation : MonoBehaviour {
                  acceptable for the npc.
                  the function is sometimes called with 7 args, but arg6 and
                  arg7 are always set to -1.
-   return value: 1 if the deal is acceptable, 0 if not
-		 */
-		Debug.Log ("Do Offer");
-		return Random.Range (0,2);
+   return value: 1 if the deal is acceptable, 0 if not*/
+
+/*I think the values passed are actually the strings for how the npc reacts to the offer. The value judgment is done elsewhere*/
+
+		//In the prototype I randomise the decision. And then randomise a response based on that decision.
+		//Arg5 is the yes answer
+		PlayerAnswer = Random.Range (0,2);
+
+		if (PlayerAnswer==1)
+		{
+			Debug.Log ("offer accepted");
+			yield return StartCoroutine (say (arg5));
+			//for the moment move to the player's backpack or if no room there drop them on the ground
+			Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+			for (int i =0; i <=3; i++)
+			{
+				TradeSlot npcSlot = GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				if (npcSlot.isSelected())
+				{//Move the object to the container or to the ground
+					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+					{
+						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+						cn.AddItemToContainer(npcSlot.objectInSlot);
+						npcSlot.clear ();
+						playerUW.GetComponent<PlayerInventory>().Refresh ();
+					}
+					else
+					{
+						GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+						demanded.transform.parent=null;
+						demanded.transform.position=npc.transform.position;
+						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+						npcSlot.clear();
+					}
+				}
+			}
+
+
+			//Now give the item to the NPC.
+			cn =npc.gameObject.GetComponent<Container>();
+			for (int i =0; i <=3; i++)
+			{
+				TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+				if (pcSlot.isSelected())
+				{//Move the object to the container or to the ground
+					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+					{
+						cn.AddItemToContainer(pcSlot.objectInSlot);
+						pcSlot.clear ();
+					}
+					else
+					{
+						GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+						demanded.transform.parent=null;
+						demanded.transform.position=npc.transform.position;
+						pcSlot.clear();
+					}
+				}
+			}
+		}
+		else
+		{
+			Debug.Log ("offer declined");
+			switch ( Random.Range(1,5))
+			{
+			case 1:
+				yield return StartCoroutine (say (arg1));break;
+			case 2:
+				yield return StartCoroutine (say (arg2));break;
+			case 3:
+				yield return StartCoroutine (say (arg3));break;
+			case 4:
+				yield return StartCoroutine (say (arg4));break;
+			}
+		}
+	
+		//Debug.Log ("Do Offer");
+		//return Random.Range (0,2);
 	}
 
-	public int do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
+	public IEnumerator do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
 	{
-		return do_offer (unk,arg1,arg2,arg3,arg4,arg5,arg6,-1);
+		yield return StartCoroutine( do_offer (unk,arg1,arg2,arg3,arg4,arg5,arg6,-1) );
 	}
 
-	public int do_demand(int unk, int arg1, int arg2)
+	public IEnumerator do_demand(int unk, int arg1, int arg2)
 	{
 		/*
    id=0019 name="do_demand" ret_type=int
@@ -521,8 +706,71 @@ public class Conversation : MonoBehaviour {
                  the items in barter area, e.g. using karma.
    return value: returns 1 when player persuaded the NPC, 0 else
 		 */
+		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		int DemandResult = Random.Range (0,2);
+		if (DemandResult==1)
+		{		
+			Debug.Log ("Demand sucessfull");
+			for (int i =0; i <=3; i++)
+			{
+				TradeSlot npcSlot = GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				if (npcSlot.isSelected())
+				{//Move the object to the container or to the ground
+					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+					{
+						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+						cn.AddItemToContainer(npcSlot.objectInSlot);
+						npcSlot.clear ();
+						playerUW.GetComponent<PlayerInventory>().Refresh ();
+					}
+					else
+					{
+						GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+						demanded.transform.parent=null;
+						demanded.transform.position=npc.transform.position;
+						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+						npcSlot.clear();
+					}
+				}
+			}
+			yield return StartCoroutine ( say (arg2) );
 
-		return Random.Range (0,2);
+		}
+		else
+		{
+			Debug.Log ("Demand unsucessfull");
+			yield return StartCoroutine ( say (arg1) );
+		}
+		//Move the players items back to his inventory;
+
+		//cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		for (int i =0; i <=3; i++)
+		{
+			TradeSlot npcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			if (npcSlot.objectInSlot!="")
+			{//Move the object to the players container or to the ground
+				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+				{
+					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+					cn.AddItemToContainer(npcSlot.objectInSlot);
+					npcSlot.clear ();
+					playerUW.GetComponent<PlayerInventory>().Refresh ();
+				}
+				else
+				{
+					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+					demanded.transform.parent=null;
+					demanded.transform.position=npc.transform.position;
+					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
+					npcSlot.clear();
+				}
+			}
+		}
+
+	
+
+
+		PlayerAnswer=DemandResult;
 	}
 
 	public int random(int unk, int High)

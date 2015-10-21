@@ -145,7 +145,8 @@ public class NPC : MonoBehaviour {
 			}
 			Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
 			if (x!=null)
-			{				
+			{	
+				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
 				x.WhoAmI=npc_whoami;

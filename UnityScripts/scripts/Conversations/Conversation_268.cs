@@ -305,7 +305,7 @@ public class Conversation_268 : Conversation {
 			yield return StartCoroutine(say( "Okay, what you have?" ));
 		} // end if
 		
-		func_040c();
+		yield return StartCoroutine(func_040c());
 		yield return StartCoroutine(say( "Goodbye then." ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -333,12 +333,12 @@ public class Conversation_268 : Conversation {
 				
 			case 1:
 				
-				func_04bd();
+				yield return StartCoroutine(func_04bd());
 				break;
 				
 			case 2:
 				
-				func_0517();
+				yield return StartCoroutine(func_0517());
 				break;
 				
 			case 3:
@@ -381,8 +381,9 @@ public class Conversation_268 : Conversation {
 		locals[13] = 27;
 		locals[14] = 28;
 		locals[15] = 29;
-		if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) == 1 ) {
-			
+		yield return StartCoroutine (do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ));
+		//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) == 1 ) {
+		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} // end if
 		yield return null;
@@ -398,7 +399,7 @@ public class Conversation_268 : Conversation {
 		locals[2] = 32;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
-		yield return StartCoroutine(babl_menu (0,locals,21));
+		yield return StartCoroutine(babl_menu (0,locals,1));
 		locals[22] = PlayerAnswer;
 
 		switch ( locals[22] ) {
@@ -417,8 +418,9 @@ public class Conversation_268 : Conversation {
 		
 		locals[23] = 33;
 		locals[24] = 34;
-		if ( do_demand( 2, locals[24], locals[23] ) == 1 ) {
-			
+		yield return StartCoroutine (do_demand( 2, locals[24], locals[23] ));
+		//if ( do_demand( 2, locals[24], locals[23] ) == 1 ) {
+		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} else {
 			Time.timeScale =SlomoTime;

@@ -508,7 +508,7 @@ public class Conversation_10 : Conversation {
 				
 			case 1:
 				
-				func_06ff();
+				yield return StartCoroutine(func_06ff());
 				break;
 				
 			case 2:
@@ -543,7 +543,7 @@ public class Conversation_10 : Conversation {
 		
 	} // end func
 	
-	void func_06ff() {
+	IEnumerator func_06ff() {
 		
 		//int locals[15];
 		int[] locals=new int[16];
@@ -554,8 +554,9 @@ public class Conversation_10 : Conversation {
 		locals[13] = 46;
 		locals[14] = 47;
 		locals[15] = 48;
-		if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) == 1) {
-			
+		yield return StartCoroutine (do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ));
+		//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) == 1) {
+		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} // end if
 		
@@ -588,8 +589,9 @@ public class Conversation_10 : Conversation {
 		
 		locals[23] = 52;
 		locals[24] = 53;
-		if ( do_demand( 2, locals[24], locals[23] )==1 ) {
-			
+		yield return StartCoroutine (do_demand( 2, locals[24], locals[23] ));
+	//	if ( do_demand( 2, locals[24], locals[23] )==1 ) {
+		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} else {
 

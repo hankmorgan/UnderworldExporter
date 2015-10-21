@@ -493,6 +493,19 @@ public class Container : MonoBehaviour {
 		}
 	}
 
+	public static int GetFreeSlot(Container cn)
+	{
+		for (int i=0;i<40;i++)
+		{
+			if (cn.GetItemAt (i)=="")
+			{
+				return i;
+			}
+		}
+
+		return -1;
+	}
+
 
 	public static void SortContainer(Container cn)
 	{

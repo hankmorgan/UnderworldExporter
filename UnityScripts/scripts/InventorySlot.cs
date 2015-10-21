@@ -286,10 +286,94 @@ public class InventorySlot : MonoBehaviour {
 		case UWCharacter.InteractionModeUse://use
 			UseFromSlot ();
 			break;
+		case UWCharacter.InteractionModeInConversation:
+			ConversationPickup(leftClick);
+			break;
 		}
 	
 
 	}
+
+
+
+	void ConversationPickup(bool isLeftClick)
+	{
+
+		Debug.Log("conversationpickup");
+		pInv = player.GetComponent<PlayerInventory>();
+		string objectInSlot = pInv.GetObjectAtSlot(slotIndex);
+		//Check if the slot has a container first.
+		if (objectInSlot!="")
+		{
+			GameObject objInSlot=GameObject.Find (objectInSlot)	;
+			if (objInSlot.GetComponent<Container>()!=null)
+			{
+				objInSlot.GetComponent<Container>().OpenContainer ();
+				return;
+			}
+		}
+		//Check slot rules
+
+
+
+		if (pInv.ObjectInHand != "")
+		{
+			ObjectInteraction objInt = GameObject.Find (pInv.ObjectInHand).GetComponent<ObjectInteraction>();
+			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
+			{//Slot is not a general use on andThis item type does not go in this slot.
+				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
+				return;
+			}
+
+
+			//put the object in hand in this slot.
+			if (objectInSlot=="")
+			{//Empty slot
+				//objectInSlot=pInv.ObjectInHand;
+				pInv.SetObjectAtSlot(slotIndex, pInv.ObjectInHand);
+				pInv.ObjectInHand="";
+				//SlotImage.mainTexture=playerUW.CursorIcon;
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
+			}
+			else
+			{//Swap the objects
+				GameObject objInSlot=GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+				pInv.SwapObjects (objInSlot,slotIndex,pInv.ObjectInHand);
+				//string tmp;
+				//tmp = objectInSlot;
+				//objectInSlot=pInv.ObjectInHand;
+				//pInv.ObjectInHand=tmp;
+				//playerUW.CursorIcon= GameObject.Find(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				
+			}
+			
+		}
+		else
+		{
+			if (objectInSlot=="")
+			{
+				//Do nothing
+			}
+			else
+			{
+				//Pickup the object in the slot
+				pInv.ObjectInHand=objectInSlot;
+				playerUW.CursorIcon= GameObject.Find(pInv.ObjectInHand).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				//objectInSlot="";
+				if (this.slotIndex>=11)
+				{
+					Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+					cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+				}
+				pInv.ClearSlot(this.slotIndex);
+				//SlotImage.mainTexture=Blank;
+			}
+			
+		}
+
+		pInv.Refresh ();
+	}
+
 
 
 	void LeftClickPickup()

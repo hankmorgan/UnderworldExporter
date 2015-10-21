@@ -141,7 +141,23 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
 			EnableDisableControl("Conversation_Alpha",false);
-			
+			EnableDisableControl("Trade_Player_Slot_0",false);
+			EnableDisableControl("Trade_Player_Slot_1",false);
+			EnableDisableControl("Trade_Player_Slot_2",false);
+			EnableDisableControl("Trade_Player_Slot_3",false);
+			EnableDisableControl("Trade_NPC_Slot_0",false);
+			EnableDisableControl("Trade_NPC_Slot_1",false);
+			EnableDisableControl("Trade_NPC_Slot_2",false);
+			EnableDisableControl("Trade_NPC_Slot_3",false);
+			EnableDisableControl("Trade_Player_indicator_0",false);
+			EnableDisableControl("Trade_Player_indicator_1",false);
+			EnableDisableControl("Trade_Player_indicator_2",false);
+			EnableDisableControl("Trade_Player_indicator_3",false);
+			EnableDisableControl("Trade_NPC_indicator_0",false);
+			EnableDisableControl("Trade_NPC_indicator_1",false);
+			EnableDisableControl("Trade_NPC_indicator_2",false);
+			EnableDisableControl("Trade_NPC_indicator_3",false);
+
 			break;
 		case 1://Stats Display
 			//Turn on Stats
@@ -227,7 +243,24 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
-			EnableDisableControl("Conversation_Alpha",false);			
+			EnableDisableControl("Conversation_Alpha",false);		
+			EnableDisableControl("Trade_Player_Slot_0",false);
+			EnableDisableControl("Trade_Player_Slot_1",false);
+			EnableDisableControl("Trade_Player_Slot_2",false);
+			EnableDisableControl("Trade_Player_Slot_3",false);
+			EnableDisableControl("Trade_NPC_Slot_0",false);
+			EnableDisableControl("Trade_NPC_Slot_1",false);
+			EnableDisableControl("Trade_NPC_Slot_2",false);
+			EnableDisableControl("Trade_NPC_Slot_3",false);
+			EnableDisableControl("Trade_Player_indicator_0",false);
+			EnableDisableControl("Trade_Player_indicator_1",false);
+			EnableDisableControl("Trade_Player_indicator_2",false);
+			EnableDisableControl("Trade_Player_indicator_3",false);
+			EnableDisableControl("Trade_NPC_indicator_0",false);
+			EnableDisableControl("Trade_NPC_indicator_1",false);
+			EnableDisableControl("Trade_NPC_indicator_2",false);
+			EnableDisableControl("Trade_NPC_indicator_3",false);
+
 			
 			break;
 		case 2:	//Rune bag
@@ -314,6 +347,23 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
 			EnableDisableControl("Conversation_Alpha",false);
+			EnableDisableControl("Trade_Player_Slot_0",false);
+			EnableDisableControl("Trade_Player_Slot_1",false);
+			EnableDisableControl("Trade_Player_Slot_2",false);
+			EnableDisableControl("Trade_Player_Slot_3",false);
+			EnableDisableControl("Trade_NPC_Slot_0",false);
+			EnableDisableControl("Trade_NPC_Slot_1",false);
+			EnableDisableControl("Trade_NPC_Slot_2",false);
+			EnableDisableControl("Trade_NPC_Slot_3",false);
+			EnableDisableControl("Trade_Player_indicator_0",false);
+			EnableDisableControl("Trade_Player_indicator_1",false);
+			EnableDisableControl("Trade_Player_indicator_2",false);
+			EnableDisableControl("Trade_Player_indicator_3",false);
+			EnableDisableControl("Trade_NPC_indicator_0",false);
+			EnableDisableControl("Trade_NPC_indicator_1",false);
+			EnableDisableControl("Trade_NPC_indicator_2",false);
+			EnableDisableControl("Trade_NPC_indicator_3",false);
+
 			break;
 			
 		case 3://Conversation.
@@ -342,7 +392,7 @@ public class chains : MonoBehaviour {
 			EnableDisableControl ("RuneSlot21",false);
 			EnableDisableControl ("RuneSlot22",false);
 			EnableDisableControl ("RuneSlot23",false);
-			EnableDisableControl ("ClearRunes",true);
+			EnableDisableControl ("ClearRunes",false);
 			//Turn off Stats
 			EnableDisableControl("StatsDisplay",false);
 			EnableDisableControl("StatsCharname",false);
@@ -359,29 +409,29 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("StatsDisplayUp",false);
 			EnableDisableControl("StatsDisplayDown",false);
 			
-			//Turn off inventory
-			EnableDisableControl("Backpack_Slot_00",false);
-			EnableDisableControl("Backpack_Slot_01",false);
-			EnableDisableControl("Backpack_Slot_02",false);
-			EnableDisableControl("Backpack_Slot_03",false);
-			EnableDisableControl("Backpack_Slot_04",false);
-			EnableDisableControl("Backpack_Slot_05",false);
-			EnableDisableControl("Backpack_Slot_06",false);
-			EnableDisableControl("Backpack_Slot_07",false);
-			EnableDisableControl("LeftShoulder_Slot",false);
-			EnableDisableControl("RightShoulder_Slot",false);
-			EnableDisableControl("LeftHand_Slot",false);
-			EnableDisableControl("RightHand_Slot",false);
-			EnableDisableControl("LeftRing_Slot",false);
-			EnableDisableControl("RightRing_Slot",false);
-			EnableDisableControl("Helm_f_Slot",false);
-			EnableDisableControl("Chest_f_Slot",false);
-			EnableDisableControl("Legs_f_Slot",false);
-			EnableDisableControl("Boots_f_Slot",false);
-			EnableDisableControl("Gloves_f_Slot",false);
-			EnableDisableControl("ContainerOpened",false);
-			EnableDisableControl("InventoryDown",false);
-			EnableDisableControl("InventoryUp",false);
+			//Turn on inventory
+			EnableDisableControl("Backpack_Slot_00",true);
+			EnableDisableControl("Backpack_Slot_01",true);
+			EnableDisableControl("Backpack_Slot_02",true);
+			EnableDisableControl("Backpack_Slot_03",true);
+			EnableDisableControl("Backpack_Slot_04",true);
+			EnableDisableControl("Backpack_Slot_05",true);
+			EnableDisableControl("Backpack_Slot_06",true);
+			EnableDisableControl("Backpack_Slot_07",true);
+			EnableDisableControl("LeftShoulder_Slot",true);
+			EnableDisableControl("RightShoulder_Slot",true);
+			EnableDisableControl("LeftHand_Slot",true);
+			EnableDisableControl("RightHand_Slot",true);
+			EnableDisableControl("LeftRing_Slot",true);
+			EnableDisableControl("RightRing_Slot",true);
+			EnableDisableControl("Helm_f_Slot",true);
+			EnableDisableControl("Chest_f_Slot",true);
+			EnableDisableControl("Legs_f_Slot",true);
+			EnableDisableControl("Boots_f_Slot",true);
+			EnableDisableControl("Gloves_f_Slot",true);
+			EnableDisableControl("ContainerOpened",true);
+			EnableDisableControl("InventoryDown",true);
+			EnableDisableControl("InventoryUp",true);
 			
 			//Turn on conversation
 			EnableDisableControl("Conversation_Portrait_Frame_Left",true);
@@ -409,6 +459,23 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Conversation_Scroll_Edge_Left",true);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",true);
 			EnableDisableControl("Conversation_Alpha",true);
+			EnableDisableControl("Trade_Player_Slot_0",true);
+			EnableDisableControl("Trade_Player_Slot_1",true);
+			EnableDisableControl("Trade_Player_Slot_2",true);
+			EnableDisableControl("Trade_Player_Slot_3",true);
+			EnableDisableControl("Trade_NPC_Slot_0",true);
+			EnableDisableControl("Trade_NPC_Slot_1",true);
+			EnableDisableControl("Trade_NPC_Slot_2",true);
+			EnableDisableControl("Trade_NPC_Slot_3",true);
+			EnableDisableControl("Trade_Player_indicator_0",true);
+			EnableDisableControl("Trade_Player_indicator_1",true);
+			EnableDisableControl("Trade_Player_indicator_2",true);
+			EnableDisableControl("Trade_Player_indicator_3",true);
+			EnableDisableControl("Trade_NPC_indicator_0",true);
+			EnableDisableControl("Trade_NPC_indicator_1",true);
+			EnableDisableControl("Trade_NPC_indicator_2",true);
+			EnableDisableControl("Trade_NPC_indicator_3",true);
+
 			
 			break;
 		}

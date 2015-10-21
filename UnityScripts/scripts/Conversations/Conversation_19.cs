@@ -668,8 +668,9 @@ public class Conversation_19 : Conversation {
 		locals[13] = 57;
 		locals[14] = 58;
 		locals[15] = 59;
-		if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) == 1) {
-			
+		yield return StartCoroutine( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ));
+		//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) == 1) {
+		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} // end if
 		yield break;
@@ -703,8 +704,9 @@ public class Conversation_19 : Conversation {
 		
 		locals[23] = 63;
 		locals[24] = 64;
-		if ( do_demand( 2, locals[24], locals[23] ) == 1 ) {
-			
+		yield return StartCoroutine (do_demand( 2, locals[24], locals[23] ));
+		//if ( do_demand( 2, locals[24], locals[23] ) == 1 ) {
+		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} else {
 						Time.timeScale =SlomoTime;
