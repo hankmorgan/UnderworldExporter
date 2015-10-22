@@ -45,6 +45,8 @@ public class UWCharacter : MonoBehaviour {
 		"CHARM","PICKLOCK","ACROBAT","APPRAISE","SWIMMING"};
 
 
+	public UITexture MouseLookCursor;
+
 	public float weaponRange=1.0f;
 	public float pickupRange=3.0f;
 	public float useRange=3.0f;
@@ -309,7 +311,7 @@ public class UWCharacter : MonoBehaviour {
 
 	public void PickupMode()
 	{//Picks up the clicked object in the view.
-		Debug.Log ("input is " + UICamera.currentTouchID);
+		//Debug.Log ("input is " + UICamera.currentTouchID);
 		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		//	{
 			PlayerInventory pInv = this.GetComponent<PlayerInventory>();
@@ -612,15 +614,28 @@ public class UWCharacter : MonoBehaviour {
 		//Debug.Log ("ongui");
 		if (MouseLookEnabled == true)
 		{
-			Rect Position = new Rect((Screen.width/2) - (cursorSizeX/2),(Screen.height/2) - (cursorSizeY/2),cursorSizeX,cursorSizeY);
-			//GUI.DrawTexture (Rect(Event.current.mousePosition.x-cursorSizeX/2, Event.current.mousePosition.y-cursorSizeY/2, cursorSizeX, cursorSizeY), CursorIcon);
-			GUI.DrawTexture (Position,CursorIcon);
+			//Debug.Log (Event.current.mousePosition);
+
+			//Vector3 pos=Camera.main.ScreenToViewportPoint();
+			//Vector3 pos= Camera.main.WorldToViewportPoint(Camera.main.ScreenToViewportPoint(new Vector3(0.5f, 0.5f, 0f)));
+			//Rect Position = new Rect(Mathf.Abs( pos.x),Mathf.Abs(pos.y),cursorSizeX,cursorSizeY);
+			//Debug.Log (pos);
+
+
+
+		//	Rect Position = new Rect((Screen.width/2) - (cursorSizeX/2),(Screen.height/2) - (cursorSizeY/2),cursorSizeX,cursorSizeY);
+			//GUI.DrawTexture (Position,CursorIcon);
+
+			MouseLookCursor.mainTexture=CursorIcon;
+
 		}
 		else
 		{
-			Rect Position = new Rect(Event.current.mousePosition.x-cursorSizeX/2,Event.current.mousePosition.y-cursorSizeY/2,cursorSizeX,cursorSizeY);
+			//Debug.Log (Event.current.mousePosition);
+			Rect Position = new Rect(Event.current.mousePosition.x-cursorSizeX,Event.current.mousePosition.y-cursorSizeY,cursorSizeX,cursorSizeY);
 			//GUI.DrawTexture (Rect(Event.current.mousePosition.x-cursorSizeX/2, Event.current.mousePosition.y-cursorSizeY/2, cursorSizeX, cursorSizeY), CursorIcon);
 			GUI.DrawTexture (Position,CursorIcon);
+			MouseLookCursor.mainTexture= CursorIconBlank;
 		}
 		
 	}

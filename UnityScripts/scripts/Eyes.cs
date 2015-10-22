@@ -22,14 +22,10 @@ public class Eyes : MonoBehaviour {
 
 	void Cycle()
 	{
-		if (EyeIndex >10)
+		EyeIndex++;
+		if (EyeIndex >=10)
 		{
 			EyeIndex=0;
 		}
-		else
-		{
-			EyeIndex++;
-		}
-
 	}
 }

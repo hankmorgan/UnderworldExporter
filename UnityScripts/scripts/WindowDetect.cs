@@ -29,6 +29,7 @@ public class WindowDetect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		BlockingCollider.SetActive(WaitingForInput);
 		switch (UWCharacter.InteractionMode)
 		{
@@ -210,8 +211,6 @@ void ThrowObjectInHand()
 				//Determine what is directly in front of the player via a raycast
 				//If something is in the way then cancel the drop
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				//Debug.Log (Input.mousePosition);
-				//Ray ray = Camera.main.ViewportPointToRay(Input.mousePosition);
 
 				RaycastHit hit = new RaycastHit(); 
 				float dropRange=0.5f;
@@ -221,7 +220,6 @@ void ThrowObjectInHand()
 					float force = Input.mousePosition.y/Camera.main.pixelHeight *200;
 					//float force = Camera.main.ViewportToWorldPoint(Input.mousePosition).y/Camera.main.pixelHeight *200;
 
-//					Debug.Log ("throw force is " + force);
 					//Get the object being dropped and moved towards the end of the ray
 					GameObject droppedItem = GameObject.Find(pInv.ObjectInHand);
 					droppedItem.transform.parent=null;
@@ -233,19 +231,21 @@ void ThrowObjectInHand()
 						Container.SetItemsParent(droppedItem.GetComponent<Container>(),null);
 						Container.SetItemsPosition (droppedItem.GetComponent<Container>(),InvMarker.transform.position);
 						}
-					//Debug.Log ("drop point is " + ray.GetPoint(dropRange-0.1f));
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
-					//droppedItem.rigidbody.useGravity=true;
 					WindowDetect.UnFreezeMovement(droppedItem);
-					Vector3 ThrowDir = ray.GetPoint(dropRange) - pInv.transform.position;
-					//Debug.Log ("throw dir is " + ThrowDir);
-					//Apply the force along the direction.
-					droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+					if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.4f)
+					{//throw if above a certain point in the view port.
+						Vector3 ThrowDir = ray.GetPoint(dropRange) - pInv.transform.position;
+						//Apply the force along the direction.
+						droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+					}
+
 					//Clear the object and reset the cursor
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
 					//playerUW.CurrObjectSprite = "";
 					pInv.ObjectInHand="";
 				}
+
 			}
 			else
 			{
