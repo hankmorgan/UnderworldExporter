@@ -120,6 +120,24 @@ public class TradeSlot : MonoBehaviour {
 		objectInSlot="";
 		SlotImage.mainTexture=Blank;
 	}
+
+
+	public int GetObjectID()
+	{
+		if (isSelected())
+		{
+			GameObject obj = GameObject.Find (objectInSlot);
+			if (obj!=null)
+			{
+				ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+				if (objInt!=null)
+				{
+					return objInt.item_id;
+				}
+			}
+		}
+		return 0;
+	}
 	//void OnDoubleClick () 
 	//{
 	//	Debug.Log ("Doubleclick");

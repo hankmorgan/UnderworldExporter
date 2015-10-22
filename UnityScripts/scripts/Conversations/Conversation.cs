@@ -100,7 +100,7 @@ public class Conversation : MonoBehaviour {
 	public const float WaitTime=0.3f;//Is affected by the slomotime!
 	public const float SlomoTime=0.1f;//To keep corountines running when ending convos and waiting out the WaitTime
 
-	int LineWidth = 28 ;
+	int LineWidth = 40 ;
 
 	private string[] NPCTradeItems=new string[4];
 
@@ -261,14 +261,14 @@ public class Conversation : MonoBehaviour {
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 			{
 			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
-			int colCounter=1;
+			int colCounter=0;
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
 			{
 				char[] strChars =  StrWords[j].ToCharArray();
 				if (StrWords[j].Length+colCounter>=LineWidth)
 				{
-					colCounter=2; 
+					colCounter=0; 
 					//Debug.Log ("Adding newline " + Output);
 					tl.Add (Output + " @@@ ");
 					Output=StrWords[j] + " ";
@@ -282,7 +282,7 @@ public class Conversation : MonoBehaviour {
 			}
 
 			//Debug.Log ("Adding op " + Output);
-			tl.Add(Output);
+			tl.Add(Output );
 			if (i < Paragraphs.GetUpperBound(0))
 				{//Pause for more when not the last paragraph.
 				tl.Add("@@@ [MORE] " + " @@@ ");
@@ -290,7 +290,7 @@ public class Conversation : MonoBehaviour {
 				yield return StartCoroutine(WaitForMore());
 				}
 			}
-
+		tl.Add ( " @@@ ");
 		//tl.Add(WhatToSay);
 		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
@@ -340,7 +340,7 @@ public class Conversation : MonoBehaviour {
 		yield return StartCoroutine(WaitForInput());
 
 		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
-		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
+		yield return StartCoroutine(say (tmp + " @@@ "));
 		yield return 0;
 	}
 
@@ -451,8 +451,8 @@ public class Conversation : MonoBehaviour {
 	}
 
 
-	public int show_inv(int unk, int arg1, int arg2)
-	{
+//	public int show_inv(int unk, int arg1, int arg2)
+//	{
 	/*
    id=0012 name="show_inv" ret_type=int
    parameters:   arg1: list with inventory item positions
@@ -462,13 +462,31 @@ public class Conversation : MonoBehaviour {
                  and arg2 (which needs at most 4 array values each)
    return value: returns number of items stored in the arrays		 * 
 	*/
-		return 1;
+//		return 1;
+//	}
+
+
+	//Rewritten version of show_inv
+	public int show_inv(int unk, int[] locals , int startObjectIDs,  int startObjectPos )
+	{
+		int j=0;
+		for (int i=0; i<4;i++)
+		{
+			TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			if (pcSlot.isSelected())
+			{
+				locals[startObjectPos+j]= i;
+				locals[startObjectIDs+j]= pcSlot.GetObjectID();
+				j++;
+			}
+		}
+
+		return j;
 	}
 
-
-	public int give_to_npc(int unk, int arg1, int arg2)
-	{
-		Debug.Log ("Give to NPC");
+//	public int give_to_npc(int unk, int arg1, int arg2)
+//	{
+//		Debug.Log ("Give to NPC");
 		/*
    id=0013 name="give_to_npc" ret_type=int
    parameters:   arg1: list of item inventory positions to give to npc
@@ -476,12 +494,37 @@ public class Conversation : MonoBehaviour {
    description:  transfers a number of items from the player inventory to the npc's inventory
    return value: returns 0 if there were no items to give, and 1 if there were some items
 		 */
-		return Random.Range (0,2);
-	}
+//		return Random.Range (0,2);
+//	}
 
-	public int take_from_npc(int arg1, int arg2)
+	public void give_to_npc(int unk, int[] locals, int NoOfItems, int start)
 	{
-		Debug.Log ("Take from NPC");
+		Container cn =npc.gameObject.GetComponent<Container>();
+		for (int i=0; i<NoOfItems; i++)
+		{
+			int slotNo = locals[start+i] ;
+			TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
+			//Give the item to the npc
+				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+				{
+					cn.AddItemToContainer(pcSlot.objectInSlot);
+					pcSlot.clear ();
+				}
+				else
+				{
+					GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+					demanded.transform.parent=null;
+					demanded.transform.position=npc.transform.position;
+					pcSlot.clear();
+				}
+		}
+
+	
+	}
+	
+	public int take_from_npc(int unk, int arg1)
+	{
+		///Debug.Log ("Take from NPC");
 		/*
    id=0015 name="take_from_npc" ret_type=int
    parameters:   arg1: item id (can also be an item category value, > 1000)
@@ -490,7 +533,46 @@ public class Conversation : MonoBehaviour {
                  a category are copied. category item start = (arg1-1000)*16
    return value: 1: ok, 2: player has no space left
 	*/
-		return Random.Range (1,3);
+		/*My currenty example is lanugo (10) who is passing a value greater than 1000*/
+		/*Until It get more examples I'm doing the following*/
+		/*Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
+		//Debug.Log ("Item Category is " + (arg1-1000)*16);
+		int playerHasSpace=1;
+		int rangeS = (arg1-1000)*16;
+		int rangeE = rangeS+16;
+		Container cn = npc.gameObject.GetComponent<Container>();
+		Container cnpc = playerUW.gameObject.GetComponent<Container>();
+		for (int i = 0; i< cn.MaxCapacity ();i++)
+		{
+			string itemName=cn.GetItemAt (i);
+			if (itemName!="")
+			{
+				ObjectInteraction objInt = GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+				if ((objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
+				{
+					//Give to PC
+
+					if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
+					{
+						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
+						cnpc.AddItemToContainer(itemName);
+						playerUW.GetComponent<PlayerInventory>().Refresh ();
+					}
+					else
+					{
+						GameObject demanded = GameObject.Find (itemName);
+						demanded.transform.parent=null;
+						demanded.transform.position=npc.transform.position;
+						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
+					}
+
+
+
+				}
+			}
+		}
+
+		return playerHasSpace;
 	}
 
 	public void setup_to_barter(int unk)

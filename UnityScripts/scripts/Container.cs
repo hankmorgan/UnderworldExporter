@@ -24,6 +24,11 @@ public class Container : MonoBehaviour {
 	
 	}
 
+	public int MaxCapacity()
+	{
+		return items.GetUpperBound (0);
+	}
+
 	public string GetItemAt(int index)
 	{
 		if ((index >=0) || (index<40))

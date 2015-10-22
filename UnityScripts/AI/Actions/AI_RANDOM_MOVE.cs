@@ -25,31 +25,12 @@ public class AI_RANDOM_MOVE : RAINAction
 		//Get a random spot.
 		Vector3 curPos = ai.Body.transform.position;
 		Vector3 dest =curPos;//= new Vector3(curPos.x+RndSphere.x, curPos.y, curPos.z+RndSphere.z);
-	//	bool flag=false; int counter=0;
-		//TODO Make curPos.y the floor of the destination.
 
-		//while ((flag==false) && (counter<1))
-		//{
-			Vector3 RndSphere = Random.insideUnitSphere *((float)Random.Range(0,5));
-			dest = new Vector3(curPos.x+RndSphere.x, curPos.y, curPos.z+RndSphere.z);
+		Vector3 RndSphere = Random.insideUnitSphere *((float)Random.Range(0,5));
+		dest = new Vector3(curPos.x+RndSphere.x, curPos.y, curPos.z+RndSphere.z);
 
-
-		//dest = new Vector3(RndSphere.x, curPos.y, RndSphere.z);
-
-
-		//ai.WorkingMemory.SetItem<Vector3>("originalDest",ai.Body.transform.position);
-			
 		dest =  ai.Navigator.CurrentGraph.ClosestPointOnGraph(dest,1000f);
 
-		//flag = (GoblinAI.tm.ValidTile(dest));
-		//	counter++;
-		//}
-
-	//if (flag==false)
-	//	{
-			//Debug.Log ("unable to get a valid dest");
-			//dest=curPos;//Stay where you are.
-	//	}
 
 
 		ai.WorkingMemory.SetItem<bool>("isMovingRandom",true);

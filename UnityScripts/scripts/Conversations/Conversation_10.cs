@@ -275,17 +275,21 @@ public class Conversation_10 : Conversation {
 		//int locals[62];
 		int[] locals=new int[63];
 		//Rewrite this
-		//What I think should be happening is show_inv is getting the list of objects,
+		//What I think should be happening is show_inv is getting the list of objects and their slots.
 		//I then search that list for the matching objects In this case a gold coin or gold coins.
 		//I flag locals[18] if they are there.
 		//I will need to change the call for show inv as well.
-		locals[16] = show_inv( 2, locals[6], locals[1] );
+		//locals[16] = show_inv( 2, locals[6], locals[1] );
+		locals[16] = show_inv (2,locals, 6, 1);
 		locals[18] = 0;
+		int j=0;
 		for (int i = 0; i<locals[16];i++)
 		{
 			if ((locals[6+i] == 160) || (locals[6+i]==161))
 			{//If the object is gold
 				locals[18]++;//number of matches
+				locals[11+j]= locals[1+i];
+				j++;
 			}
 		}
 		/*
@@ -307,7 +311,8 @@ public class Conversation_10 : Conversation {
 		*/
 		if ( locals[18] > 0 ) {
 			
-			give_to_npc( 2, locals[11], locals[18] );
+			//give_to_npc( 2, locals[11], locals[18] );
+			give_to_npc(2,locals,locals[18],11);
 			privateVariables[2] = 0;
 			yield return StartCoroutine(say( "Tanks!  Th'art right enough, fer a yuman.  Tell tha what -- if tha talks to da boss, be real, like complimennary.  He likes dat." ));
 			locals[19] = 18;
@@ -329,7 +334,8 @@ public class Conversation_10 : Conversation {
 				break;
 			} // end if
 			
-		} //else {
+		} 
+		else {
 			
 			//break;
 			
@@ -362,7 +368,7 @@ public class Conversation_10 : Conversation {
 			break;
 			
 		} // end switch
-		
+		}//Added end bracket for else
 	} // end func
 	
 	IEnumerator  func_0504() {

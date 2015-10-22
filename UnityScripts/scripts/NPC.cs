@@ -71,6 +71,15 @@ public class NPC : MonoBehaviour {
 			{
 				return;
 			}
+			//if (state== NPC.AI_STATE_WALKING)
+			//{//Sets the AI to always be turned towards their next waypoint
+				if (ai.AI.Navigator.CurrentPath!=null)
+				{
+					ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint));
+				}
+			//}
+
+
 			if (npc_hp<0)
 			{
 				ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
@@ -141,7 +150,7 @@ public class NPC : MonoBehaviour {
 			{
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npc_whoami=256+(objInt.item_id -64);
-				Debug.Log ("npc who am i is now " + npc_whoami);
+				//Debug.Log ("npc who am i is now " + npc_whoami);
 			}
 			Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
 			if (x!=null)
