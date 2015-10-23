@@ -41,6 +41,11 @@ public class Map : MonoBehaviour {
 				child.gameObject.SetActive(false);
 			}
 		}
+		GameObject mus = GameObject.Find ("MusicController");
+		if  (mus!=null)
+		{
+			mus.GetComponent<MusicController>().InMap=true;
+		}
 		return true;
 	}
 

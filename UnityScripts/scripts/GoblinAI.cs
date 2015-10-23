@@ -132,7 +132,8 @@ public class GoblinAI : MonoBehaviour {
 	{
 		float weaponRange=2.0f;
 		//Ray ray = new Ray(this.transform.position+Vector3.up*1.0f,Vector3.forward); 
-		Ray ray = new Ray(this.transform.position+Vector3.up*0.5f,this.transform.TransformDirection(Vector3.forward)); 
+		//Ray ray = new Ray(this.transform.position+Vector3.up*0.5f,this.transform.TransformDirection(Vector3.forward)); 
+		Ray ray= new Ray(this.transform.position,player.transform.position-this.transform.position);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
@@ -146,6 +147,7 @@ public class GoblinAI : MonoBehaviour {
 				Debug.Log (this.name + "has hit " + hit.transform.name);
 				if (hit.transform.name == "Gronk")
 				{
+					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
 					UWCharacter playerUW =hit.transform.GetComponent<UWCharacter>();
 					playerUW.ApplyDamage(5);
 				}

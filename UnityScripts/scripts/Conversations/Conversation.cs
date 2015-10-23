@@ -116,7 +116,11 @@ public class Conversation : MonoBehaviour {
 			ts.clear ();
 		}
 
-
+		GameObject mus = GameObject.Find ("MusicController");
+		if  (mus!=null)
+		{
+			mus.GetComponent<MusicController>().InMap=true;
+		}
 		//pause the world
 		StringNo =stringno;// 3650;
 		tl.Clear();
@@ -158,6 +162,11 @@ public class Conversation : MonoBehaviour {
 		InConversation=false;
 		npc.npc_talkedto=1;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+		GameObject mus = GameObject.Find ("MusicController");
+		if  (mus!=null)
+		{
+			mus.GetComponent<MusicController>().InMap=false;
+		}
 	}
 
 	// Use this for initialization

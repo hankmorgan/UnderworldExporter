@@ -16,6 +16,13 @@ public class AI_DEATH : RAINAction
     {
 		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
 		gob.AnimRange=GoblinAI.AI_RANGE_DEATH;
+		GameObject mus = GameObject.Find ("MusicController");
+		if (mus!=null)
+		{
+			MusicController.LastAttackCounter=0.0f;
+			mus.GetComponent<MusicController>().PlaySpecialClip(mus.GetComponent<MusicController>().VictoryTracks);
+
+		}
         return ActionResult.SUCCESS;
     }
 

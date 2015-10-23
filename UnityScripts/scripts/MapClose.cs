@@ -33,5 +33,10 @@ public class MapClose : MonoBehaviour {
 				child.gameObject.SetActive(true);
 			}
 		}
+		GameObject mus = GameObject.Find ("MusicController");
+		if  (mus!=null)
+		{
+			mus.GetComponent<MusicController>().InMap=false;
+		}
 	}
 }

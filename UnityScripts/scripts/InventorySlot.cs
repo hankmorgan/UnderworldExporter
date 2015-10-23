@@ -232,7 +232,7 @@ public class InventorySlot : MonoBehaviour {
 
 	void OnClick()
 	{
-		//Debug.Log(this.name + " clicked");
+		Debug.Log(this.name + " clicked");
 		bool leftClick=true;
 		//Debug.Log (UICamera.currentTouchID);
 		if (UICamera.currentTouchID == -2)

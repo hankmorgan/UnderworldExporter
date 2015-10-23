@@ -180,7 +180,19 @@ void UseObjectInHand()
 		{//The player is holding something
 			//Determine what is directly in front of the player via a raycast
 			//If something is in the way then cancel the drop
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray ;
+			if (playerUW.MouseLookEnabled==true)
+			{
+				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			}
+			else
+			{
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+				//ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+			}
+
 			RaycastHit hit = new RaycastHit(); 
 
 			if (Physics.Raycast(ray,out hit,playerUW.useRange))
@@ -210,7 +222,20 @@ void ThrowObjectInHand()
 			{
 				//Determine what is directly in front of the player via a raycast
 				//If something is in the way then cancel the drop
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+				Ray ray ;
+				if (playerUW.MouseLookEnabled==true)
+				{
+					ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				}
+				else
+				{
+					ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+					//ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+				}
+
 
 				RaycastHit hit = new RaycastHit(); 
 				float dropRange=0.5f;

@@ -65,7 +65,7 @@ public class UWCharacter : MonoBehaviour {
 	//For controlling switching between mouse look and interaction
 	private MouseLook XYAxis;
 	//private MouseLook YAxis;
-	private bool MouseLookEnabled;
+	public bool MouseLookEnabled;
 	private GameObject MainCam;
 	public bool CursorInMainWindow;
 
@@ -150,6 +150,7 @@ public class UWCharacter : MonoBehaviour {
 
 	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
 
+	public MusicController mus;
 
 	// Use this for initialization
 	void Start () {
@@ -224,8 +225,10 @@ public class UWCharacter : MonoBehaviour {
 		if (CurVIT<=0)
 		{
 			//Debug.Log ("You have died!. Queue the laughing skulls.");
+			mus.Death=true;
 			return;
 		}
+		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
 		if (ReadiedSpell!="")
 		{//Player has a spell thats about to be cast. All other activity is ignored.
 			SpellMode ();
@@ -235,11 +238,13 @@ public class UWCharacter : MonoBehaviour {
 		{
 			if ((InteractionMode==UWCharacter.InteractionModeAttack))
 			{
+				//mus.WeaponDrawn=true;//Tell the music system I have my weapon drawn
 				wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
 			}
 			else
 			{
 			//	Debug.Log ("setting ready");
+				//mus.WeaponDrawn=false;
 				wpa.SetAnimation= "WeaponPutAway";
 			}
 		}
@@ -264,7 +269,21 @@ public class UWCharacter : MonoBehaviour {
 		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 			//{
 		//Debug.Log("USERMODE " + hit.transform.name);
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			///Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		Ray ray ;
+		if (MouseLookEnabled==true)
+		{
+			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		}
+		else
+		{
+			ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+			//ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
+
+
+
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,useRange))
 			{
@@ -321,7 +340,18 @@ public class UWCharacter : MonoBehaviour {
 				}
 			if (pInv.ObjectInHand=="")//Player is not holding anything.
 			{//Find the object within the pickup range.
-				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Ray ray ;
+			if (MouseLookEnabled==true)
+				{
+				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+				}
+			else
+			{
+				//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+				ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+			}
+
+				//= Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hit = new RaycastHit(); 
 				if (Physics.Raycast(ray,out hit,pickupRange))
 				{
@@ -423,7 +453,20 @@ public class UWCharacter : MonoBehaviour {
 		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		//{
 		//Debug.Log ("Look");
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		Ray ray ;
+		if (MouseLookEnabled==true)
+		{
+			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		}
+		else
+		{
+			ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+			//ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
+
+
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,lookRange))
 			{
@@ -455,7 +498,19 @@ public class UWCharacter : MonoBehaviour {
 	{//Talk to the object clicked on.
 		//if(Input.GetMouseButtonDown(1) && (CursorInMainWindow==true))
 		//{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray ;
+		if (MouseLookEnabled==true)
+		{
+			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		}
+		else
+		{
+			ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+			//ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
+
+
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,talkRange))
 			{
@@ -480,7 +535,8 @@ public class UWCharacter : MonoBehaviour {
 
 		//wpa.SetAnimation= "Mace_Slash_White_Right_Charge";
 		//Debug.Log (GetWeapon () +"_Slash_" + GetRace () + "_" + GetHand() + "_Charge");
-		wpa.SetAnimation= GetWeapon () +"_Slash_" + GetRace () + "_" + GetHand() + "_Charge";
+		//wpa.SetAnimation= GetWeapon () +"_Slash_" + GetRace () + "_" + GetHand() + "_Charge";
+		wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
 		AttackCharging=true;
 		Charge=0;
 		//Debug.Log ("attack charging begun");
@@ -505,7 +561,18 @@ public class UWCharacter : MonoBehaviour {
 
 		yield return new WaitForSeconds(0.6f);
 
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray ;
+		if (MouseLookEnabled==true)
+		{
+			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		}
+		else
+		{
+			//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+			ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
+
+		//Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
@@ -557,7 +624,7 @@ public class UWCharacter : MonoBehaviour {
 		//Debug.Log ("Attack released");//with charge of " + Charge +"%");
 		//wpa.SetAnimation= "Mace_Slash_White_Right_Execute";
 //TODO:Figure out how to have the attack actually hit in time with the animation.
-		wpa.SetAnimation= GetWeapon () + "_Slash_" + GetRace () + "_" + GetHand() + "_Execute";
+		wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
 		AttackExecuting=true;
 		StartCoroutine(ExecuteMelee());
 	}
@@ -756,5 +823,21 @@ public class UWCharacter : MonoBehaviour {
 	public Quest quest()
 	{
 		return this.GetComponent<Quest>();
+	}
+
+	public string GetStrikeType()
+	{
+		if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.666f)
+		{
+			return "Bash";
+		}
+		else if(Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.333f)
+		{
+			return "Slash";
+		}
+		else
+		{
+			return "Stab";
+		}
 	}
 }

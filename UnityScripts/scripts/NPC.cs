@@ -31,7 +31,6 @@ public class NPC : MonoBehaviour {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 
-
 	//TODO: The state should be replaces with a combination of the above variables.
 	public int state=0; //Set state when not in combat or dying.
 
@@ -159,6 +158,7 @@ public class NPC : MonoBehaviour {
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
 				x.WhoAmI=npc_whoami;
+
 				Conversation.maincam=Camera.main;
 				
 				Camera.main.enabled = false;
