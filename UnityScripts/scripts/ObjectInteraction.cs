@@ -121,6 +121,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public bool PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
 
+	private AudioSource audio;
 
 	//TODO: remove these!
 	//public bool isContainer;
@@ -146,6 +147,7 @@ public class ObjectInteraction : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
+
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 
 		if (player!=null)
@@ -947,7 +949,7 @@ public class ObjectInteraction : MonoBehaviour {
 					playerUW.CursorIcon= InventoryIcon.texture;
 					playerUW.CurrObjectSprite = InventoryString;
 					pInv.ObjectInHand=name;
-					pInv.JustPickedup=true;//To stop me throwing it away immediately.
+					pInv.JustPickedup=true;//To stop me throwing it away immediately.  at st
 					//Move the selected gameobject to the box.
 					this.transform.position = InvMarker.transform.position;
 					this.transform.parent=InvMarker.transform;//Adds to the marker so it will persist.
@@ -1024,6 +1026,25 @@ public class ObjectInteraction : MonoBehaviour {
 		else
 		{
 			return 5;//end of blood splatter
+		}
+	}
+
+
+	
+	void OnCollisionEnter(Collision collision)
+		
+	{
+
+	//	Debug.Log (this.gameObject.name);
+		//AudioSource audio= this.GetComponent<AudioSource>();
+		if (audio!=null)
+		{
+			Debug.Log (collision.gameObject.name);
+			audio.Play();
+		}
+		else
+		{
+			audio= this.GetComponent<AudioSource>();
 		}
 	}
 }

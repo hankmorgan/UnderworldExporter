@@ -130,7 +130,7 @@ public class GoblinAI : MonoBehaviour {
 
 	public void ExecuteAttack()
 	{
-		float weaponRange=2.0f;
+		float weaponRange=1.2f;
 		//Ray ray = new Ray(this.transform.position+Vector3.up*1.0f,Vector3.forward); 
 		//Ray ray = new Ray(this.transform.position+Vector3.up*0.5f,this.transform.TransformDirection(Vector3.forward)); 
 		Ray ray= new Ray(this.transform.position,player.transform.position-this.transform.position);

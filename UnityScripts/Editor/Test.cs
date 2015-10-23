@@ -261,6 +261,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/objects_321",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 995, 40, 0, 0, 0, 1, 0);
 		CreateDoor(myObj,"textures/doors/doors_03", 1, 1);
+		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		SetRotation(myObj,-90,90,0);
 		
 		myObj= CreateGameObject("an_Ort_stone_28_05_00_0586",34.285717f,3.000000f,6.171429f);
@@ -9511,6 +9512,7 @@ public class MyTools
 		GameObject myObj = new GameObject(ObjectName);
 		Vector3 pos = new Vector3(x, y, z);
 		myObj.transform.position = pos;
+		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		return myObj;
 	}
 
@@ -9704,7 +9706,9 @@ public class MyTools
 	static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite)
 	{
 		//Add the AI.
-		//My anims are backwards!!!!!
+		myObj.layer=LayerMask.NameToLayer("NPCs");
+
+
 		GoblinAI gronk = myObj.AddComponent<GoblinAI>();
 		//Since I have only one animation I change names
 

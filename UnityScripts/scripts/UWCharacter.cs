@@ -63,10 +63,10 @@ public class UWCharacter : MonoBehaviour {
 	private int cursorSizeY =32;
 
 	//For controlling switching between mouse look and interaction
-	private MouseLook XYAxis;
-	//private MouseLook YAxis;
+	public MouseLook XAxis;
+	public MouseLook YAxis;
 	public bool MouseLookEnabled;
-	private GameObject MainCam;
+	//private GameObject MainCam;
 	public bool CursorInMainWindow;
 
 	public StringController StringControl;
@@ -184,8 +184,12 @@ public class UWCharacter : MonoBehaviour {
 
 
 
-		XYAxis = GetComponent<MouseLook>();
-		XYAxis.enabled=false;
+		//XAxis = GetComponent<MouseLook>();
+		//YAxis = GetComponentInChildren<MouseLook>();
+		XAxis.enabled=false;
+		YAxis.enabled=false;
+		//Debug.Log (YAxis.gameObject.name);
+
 		MouseLookEnabled=false;
 		//YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
 		//Screen.lockCursor=true;
@@ -278,8 +282,8 @@ public class UWCharacter : MonoBehaviour {
 		}
 		else
 		{
-			ray= Camera.main.ViewportPointToRay(Input.mousePosition);
-			//ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+			//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
+			ray= Camera.main.ScreenPointToRay(Input.mousePosition);
 		}
 
 
@@ -660,7 +664,8 @@ public class UWCharacter : MonoBehaviour {
 				//Debug.Log("Turning on mouselook");
 				//Screen.lockCursor = true;
 				//TODO:Position cursor to middle of screen.
-				XYAxis.enabled=true;
+				YAxis.enabled=true;
+				XAxis.enabled=true;
 				//YAxis.enabled=true;
 				MouseLookEnabled=true;
 				Cursor.lockState = CursorLockMode.Locked;
@@ -670,7 +675,8 @@ public class UWCharacter : MonoBehaviour {
 			{
 				//Debug.Log("Turning off mouselook");
 				//Screen.lockCursor = false;
-				XYAxis.enabled=false;
+				XAxis.enabled=false;
+				YAxis.enabled=false;
 				//YAxis.enabled=false;
 				MouseLookEnabled=false;
 				Cursor.lockState = CursorLockMode.None;
