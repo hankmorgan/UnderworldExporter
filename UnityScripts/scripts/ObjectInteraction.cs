@@ -195,9 +195,14 @@ public class ObjectInteraction : MonoBehaviour {
 		//}
 		//else
 		//{
+		if (sr !=null)
+		{
 			sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
-		  //tc.RequestSprite(sr.sprite, WorldDisplayIndex,isAnimated);
 			InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
+		}
+			
+		  //tc.RequestSprite(sr.sprite, WorldDisplayIndex,isAnimated);
+			
 			//tc.RequestSprite(InventoryDisplay,InvDisplayIndex,isAnimated);
 		//}
 	}

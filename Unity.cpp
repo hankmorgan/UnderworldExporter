@@ -139,6 +139,19 @@ void RenderUnityEntityBase(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(UNITY_FILE, "\n\tAddObj_base(myObj);");
 	}
 
+void RenderUnityEntityPotion(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddPotion(myObj);");
+	}
+
+void RenderUnityEntityLockpick(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddLockpick(myObj);");
+	}
+
+
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Runestone
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -348,7 +361,7 @@ int hasLock=0;
 		}
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
+	//fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (game != SHOCK)
 		{//bit 0-6 of the lock objects link is the keyid for opening it in uw
@@ -1017,7 +1030,7 @@ void RenderUnityEntityA_TELEPORT_TRAP(int game, float x, float y, float z, Objec
 
 	//RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
-	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	
 	//only show if it points to this level.
 
@@ -1909,8 +1922,20 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityAnimationOverlay(game, x, y, z, currobj, objList, LevelInfo);
 							break;
-						case LOCKPICK://TODO
+						case LOCKPICK:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityLockpick(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case POTIONS:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityPotion(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 
+//SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);

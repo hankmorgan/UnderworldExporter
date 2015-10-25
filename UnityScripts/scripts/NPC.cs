@@ -33,8 +33,15 @@ public class NPC : object_base {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 
+	//Added by myself
+	public bool Poisoned;
+
 	//TODO: The state should be replaces with a combination of the above variables.
 	public int state=0; //Set state when not in combat or dying.
+
+
+	//For applying spell effects to NPCs
+	public SpellEffect[] NPCStatusEffects=new SpellEffect[3];
 
 	//public static UWCharacter playerUW;
 	private static bool playerUWReady;

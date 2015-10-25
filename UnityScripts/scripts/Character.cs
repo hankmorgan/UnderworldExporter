@@ -63,6 +63,15 @@ public class Character : MonoBehaviour {
 
 	protected ObjectInteraction QuantityObj=null;
 
+	public UILabel GetMessageLog()
+	{
+		if (MessageLog==null)
+		{
+			MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+		}
+		return MessageLog;
+	}
+
 
 	public void ApplyDamage(int damage)
 	{

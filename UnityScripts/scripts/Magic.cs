@@ -2,40 +2,41 @@
 using System.Collections;
 
 public class Magic : MonoBehaviour {
-
+	
 	//Magic spell to be cast on next click in window
 	public string ReadiedSpell;
 	//Runes that the character has picked up and is currently using
 	public bool[] PlayerRunes=new bool[24];
 	public int[] ActiveRunes=new int[3];
-
-
+	
+	
 	public int MaxMana;
 	public int CurMana;
-
-
-	 string[] Runes=new string[]{"An","Bet","Corp","Des",
-								"Ex","Flam","Grav","Hur",
-								"In","Jux","Kal","Lor",
-								"Mani","Nox","Ort","Por",
-								"Quas","Rel","Sanct","Tym",
-								"Uus","Vas","Wis","Ylem"};
-
-	 long SummonCount=0;
-
-
-
-
+	
+	
+	string[] Runes=new string[]{"An","Bet","Corp","Des",
+		"Ex","Flam","Grav","Hur",
+		"In","Jux","Kal","Lor",
+		"Mani","Nox","Ort","Por",
+		"Quas","Rel","Sanct","Tym",
+		"Uus","Vas","Wis","Ylem"};
+	
+	long SummonCount=0;
+	
+	
+	
+	
 	public void TestSpell(GameObject caster)
 	{//Test spell for testing spell effects
 		SpellEffectPoison sep = caster.AddComponent<SpellEffectPoison>();
 		sep.Value=100;//Poison will damage the player for 100 hp over it's duration
 		sep.counter=10; //It will run for 10 ticks. Ie 10 hp damage per tick
-		sep.ApplyEffect();
-		StartCoroutine(sep.timer()) ;
+		sep.Go ();
+		//sep.ApplyEffect();
+		//StartCoroutine(sep.timer()) ;
 	}
-
-	 public void castSpell(GameObject caster, string MagicWords, bool ready)
+	
+	public void castSpell(GameObject caster, string MagicWords, bool ready)
 	{
 		switch (MagicWords)
 		{
@@ -44,7 +45,7 @@ public class Magic : MonoBehaviour {
 			TestSpell (caster);
 			break;
 		}
-
+			
 			//1st Circle
 		case "In Mani Ylem"://Create Food
 		{
@@ -93,7 +94,8 @@ public class Magic : MonoBehaviour {
 		}//wm
 		case "Uus Por"://Jump
 		{
-			Debug.Log(MagicWords+ " Jump Cast");
+			Cast_UusPor(caster);
+			//Debug.Log(MagicWords+ " Jump Cast");
 			break;
 		}//up
 		case "In Bet Mani"://Lesser Heal
@@ -328,12 +330,12 @@ public class Magic : MonoBehaviour {
 		}
 		}//magicwords
 	}
-
-
-	 public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
+	
+	
+	public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
 	{
 		//Casts a magic spell based on the constructed magic rune string
-
+		
 		string MagicWords="";
 		//Construct the spell words based on selected runes
 		if ((Rune1>=0) && (Rune1<=23))
@@ -348,13 +350,13 @@ public class Magic : MonoBehaviour {
 		{
 			MagicWords=MagicWords + " " + Runes[Rune3];
 		}
-
+		
 		castSpell (caster, MagicWords,ready);
-
+		
 	}
-
-
-	 void Cast_OrtJux(GameObject caster, bool Ready)
+	
+	
+	void Cast_OrtJux(GameObject caster, bool Ready)
 	{//Magic Missile Spell
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
@@ -365,8 +367,8 @@ public class Magic : MonoBehaviour {
 		else
 		{
 			Ray ray = getRay (caster);
-
-
+			
+			
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
@@ -379,8 +381,8 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-
-	 void Cast_OrtGrav(GameObject caster, bool Ready)
+	
+	void Cast_OrtGrav(GameObject caster, bool Ready)
 	{//Lightning Bolt
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
@@ -403,10 +405,10 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-	 void Cast_ExYlem(GameObject caster, bool Ready)
+	
+	
+	
+	void Cast_ExYlem(GameObject caster, bool Ready)
 	{//Open
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
@@ -432,59 +434,62 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-	 void Cast_AnNox(GameObject caster)
+	
+	
+	
+	void Cast_AnNox(GameObject caster)
 	{//Cure Poison
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		//Get all instances of poison effect on the character and destroy them.
 		SpellEffectPoison[] seps= caster.GetComponents<SpellEffectPoison>();
 		for (int i =0; i<= seps.GetUpperBound(0);i++)
-		    {
+		{
 			seps[i].CancelEffect();
-			}
+		}
 		playerUW.Poisoned=false;
 		Debug.Log ("An Nox Cast");
 	}
-
-	 void Cast_InLor(GameObject caster)
+	
+	void Cast_InLor(GameObject caster)
 	{//Light
-		int SpellEffectSlot = CheckSpellEffect(caster);
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Light (caster, 3,SpellEffect.SpellEffect_InLor,SpellEffectSlot, 5);//TODO:Standardise light levels.
+			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Light,SpellEffectSlot, 3, 5);//TODO:Standardise light levels.
 		}
 		else
 		{
-			Debug.Log ("Your incantation failed");
+			//Debug.Log ("Your incantation failed");
+			caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
 		}
 	}
-
-	 void Cast_VasInLor(GameObject caster)
+	
+	void Cast_VasInLor(GameObject caster)
 	{//Daylight
-		int SpellEffectSlot = CheckSpellEffect(caster);
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Light (caster, 8, SpellEffect.SpellEffect_VasInLor, SpellEffectSlot, 10);//TODO:Standardise light levels.
+			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Daylight, SpellEffectSlot, 8, 10);//TODO:Standardise light levels.
 			//SetSpellEffect(caster,SpellEffectSlot,20);
 		}
 		else
 		{
-			Debug.Log ("Your incantation failed");
+			//Debug.Log ("Your incantation failed");
+			caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
 		}
 	}
-
-
-
-	 void Cast_InManiYlem(GameObject caster)
+	
+	
+	
+	void Cast_InManiYlem(GameObject caster)
 	{//Create food
 		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 		//Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit = new RaycastHit(); 
 		float dropRange=1.2f;
 		if (!Physics.Raycast(ray,out hit,dropRange))
-			{//No object interferes with the spellcast
+		{//No object interferes with the spellcast
 			int ObjectNo = 176 + Random.Range(0,7);
 			GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 			myObj.transform.position = ray.GetPoint(dropRange);
@@ -493,25 +498,25 @@ public class Magic : MonoBehaviour {
 			Food fd = myObj.AddComponent<Food>();
 			fd.Nutrition=5;//TODO:determine values to use here.
 			WindowDetect.UnFreezeMovement(myObj);
-			}
+		}
 	}
-
-	 void Cast_InBetMani(GameObject caster)
+	
+	void Cast_InBetMani(GameObject caster)
 	{//Lesser Heal;
 		Heal (caster, Random.Range (1,10));
 	}
-
-	 void Cast_InMani(GameObject caster)
+	
+	void Cast_InMani(GameObject caster)
 	{//Heal;
 		Heal (caster, Random.Range (10,20));
 	}
-
-	 void Cast_VasInMani(GameObject caster)
+	
+	void Cast_VasInMani(GameObject caster)
 	{//Greater Heal;
 		Heal (caster, Random.Range (20,60));
 	}
-
-	 void Cast_VasKalCorp(GameObject caster)
+	
+	void Cast_VasKalCorp(GameObject caster)
 	{//Armageddon//Destroys almost everything!
 		GameObject[] allGameObj =GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
 		for (int i=0; i<= allGameObj.GetUpperBound(0);i++)
@@ -522,7 +527,7 @@ public class Magic : MonoBehaviour {
 			    && (allGameObj[i].name!="Automap") 
 			    && (allGameObj[i].name!="AI_Base_Animator") 
 			    && (allGameObj[i]!=caster)
-
+			    
 			    )
 			{
 				if (allGameObj[i].transform.parent==null)
@@ -530,16 +535,35 @@ public class Magic : MonoBehaviour {
 					allGameObj[i].SetActive(false);				
 				}
 				//Debug.Log ("Destroying " + allGameObj[i].name) ;
-
+				
 			}
-
+			
 		}
-
+		
 	}
 
-	/*Common spell effects that are used multiple times*/
 
-	 void Heal(GameObject caster,int HP)
+
+	void Cast_UusPor(GameObject caster)
+	{//Leap/junp
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Leap (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Leap,SpellEffectSlot,5);
+		}
+		else
+		{
+			caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
+//			Debug.Log ("Your incantation failed");
+		}
+	}
+
+
+	
+	/*Common spell effects that are used multiple times*/
+	
+	void Heal(GameObject caster,int HP)
 	{
 		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
@@ -551,60 +575,240 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-
-
 	
-	void Cast_Light(GameObject caster, int LightLevel, int EffectId, int EffectSlot, int counter)
-		{
+	
+	
+	void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int LightLevel)
+	{
 		LightSource.MagicBrightness=LightLevel;
-		SpellEffectLight sel= (SpellEffectLight)SetSpellEffect(caster, EffectSlot, EffectId);
+		SpellEffect sel= (SpellEffectLight)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectId);
 		sel.Value = LightLevel;
 		sel.counter= counter;
-		sel.ApplyEffect();
-		StartCoroutine(sel.timer());
-		}
-	
-	 void Cast_OrtPorYlem(GameObject Caster)
-		{
-		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
-		if (playerUW!=null)
-			{
-			playerUW.useRange=20;
-			playerUW.pickupRange=20;
-			}
-		}
-
-/* Utility code for Spells*/
-
-	 SpellEffect SetSpellEffect(GameObject caster, int index, int EffectId)
-	{
-
-		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-
-		switch (EffectId)
-		{
-		case SpellEffect.SpellEffect_InLor:
-		case SpellEffect.SpellEffect_VasInLor:
-		{
-			playerUW.ActiveSpell[index]=(SpellEffect)caster.AddComponent<SpellEffectLight>();
-			break;
-		}
-		default:
-		{
-			playerUW.ActiveSpell[index]=caster.AddComponent<SpellEffect>();
-			break;
-		}
-
-		}
-		//if (playerUW!=null)
-		//{
-		//	playerUW.ActiveSpell[index]=SpellEffectNo;
-		//}
-		playerUW.ActiveSpell[index].EffectId=EffectId;
-		return playerUW.ActiveSpell[index];
+		//sel.ApplyEffect();//Apply the effect.
+		sel.Go ();// Apply the effect and Start the timer.
+		//StartCoroutine(sel.timer());
 	}
 
-	 int CheckSpellEffect(GameObject caster)
+	void Cast_Leap(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{
+		SpellEffect lep = (SpellEffectLeap)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		lep.counter=counter;
+		lep.Go ();
+	}
+	
+	void Cast_OrtPorYlem(GameObject Caster)
+	{
+		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+		{
+			playerUW.useRange=20;
+			playerUW.pickupRange=20;
+		}
+	}
+	
+	/* Utility code for Spells*/
+	
+	SpellEffect SetSpellEffect(GameObject caster, SpellEffect[] ActiveSpellArray, int index, int EffectId)
+	{
+		//Adds an effect to the player from a spell.
+
+		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+		
+		switch (EffectId)
+		{
+		case SpellEffect.UW1_Spell_Effect_Darkness:
+		case SpellEffect.UW1_Spell_Effect_BurningMatch:
+		case SpellEffect.UW1_Spell_Effect_Candlelight:
+		case SpellEffect.UW1_Spell_Effect_Light:
+		case SpellEffect.UW1_Spell_Effect_MagicLantern:
+		case SpellEffect.UW1_Spell_Effect_Daylight:
+		case SpellEffect.UW1_Spell_Effect_Sunlight:
+		case SpellEffect.UW1_Spell_Effect_Light_alt01:
+		case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
+		case SpellEffect.UW1_Spell_Effect_Light_alt02:
+		case SpellEffect.UW1_Spell_Effect_Daylight_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectLight>();
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_Leap:
+		case SpellEffect.UW1_Spell_Effect_Leap_alt01:
+		case SpellEffect.UW1_Spell_Effect_Leap_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectLeap>();
+			//To implement
+			break;
+		case SpellEffect.UW1_Spell_Effect_SlowFall:
+		case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
+		case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Levitate:
+		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
+		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_WaterWalk:
+		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
+		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Fly:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectFly>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_ResistBlows:
+		case SpellEffect.UW1_Spell_Effect_ThickSkin:
+		case SpellEffect.UW1_Spell_Effect_IronFlesh:
+		case SpellEffect.UW1_Spell_Effect_ResistBlows_alt01:
+		case SpellEffect.UW1_Spell_Effect_ThickSkin_alt01:
+		case SpellEffect.UW1_Spell_Effect_IronFlesh_alt01:
+		case SpellEffect.UW1_Spell_Effect_ResistBlows_alt02:
+		case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
+		case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistance>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Stealth:
+		case SpellEffect.UW1_Spell_Effect_Conceal:
+		case SpellEffect.UW1_Spell_Effect_Stealth_alt01:
+		case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
+		case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
+		case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Invisibilty:
+		case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
+		case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectInvisibility>();
+			//Todo
+			break;
+			//Missiles
+		case SpellEffect.UW1_Spell_Effect_MissileProtection:
+		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
+		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
+			//Flames
+		case SpellEffect.UW1_Spell_Effect_Flameproof:
+		case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
+		case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
+			//Magic
+		case SpellEffect.UW1_Spell_Effect_MagicProtection:
+		case SpellEffect.UW1_Spell_Effect_GreaterMagicProtection:
+
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistanceAgainstType>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_PoisonResistance:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectImmunityPoison>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Speed:
+		case SpellEffect.UW1_Spell_Effect_Haste:
+
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Telekinesis:
+		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
+		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_FreezeTime:
+		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
+		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectFreezeTime>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_Regeneration:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationHealth>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationMana>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_MazeNavigation:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectMazeNavigation>();
+			break;			
+		case SpellEffect.UW1_Spell_Effect_Hallucination:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectHallucination>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_NightVision:
+		case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
+		case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectNightVision>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_Poison:
+		case SpellEffect.UW1_Spell_Effect_Poison_alt01:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_Paralyze:
+		case SpellEffect.UW1_Spell_Effect_Paralyze_alt01:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectParalyze>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_Ally:
+		case SpellEffect.UW1_Spell_Effect_Ally_alt01:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectAlly>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_Confusion:
+		case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
+		case SpellEffect.UW1_Spell_Effect_Accuracy:
+		case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
+		case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
+		case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
+		case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectAccuracy>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorDamage:
+		case SpellEffect.UW1_Spell_Effect_Damage:
+		case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
+		case SpellEffect.UW1_Spell_Effect_MajorDamage:
+		case SpellEffect.UW1_Spell_Effect_GreatDamage:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
+		case SpellEffect.UW1_Spell_Effect_TremendousDamage:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectDamage>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorProtection:
+		case SpellEffect.UW1_Spell_Effect_Protection:
+		case SpellEffect.UW1_Spell_Effect_AdditionalProtection:
+		case SpellEffect.UW1_Spell_Effect_MajorProtection:
+		case SpellEffect.UW1_Spell_Effect_GreatProtection:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
+		case SpellEffect.UW1_Spell_Effect_TremendousProtection:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectProtection>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorToughness:
+		case SpellEffect.UW1_Spell_Effect_Toughness:
+		case SpellEffect.UW1_Spell_Effect_AdditionalToughness:
+		case SpellEffect.UW1_Spell_Effect_MajorToughness:
+		case SpellEffect.UW1_Spell_Effect_GreatToughness:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
+		case SpellEffect.UW1_Spell_Effect_TremendousToughness:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
+			break;
+			
+		default:
+			Debug.Log ("effect Id is " + EffectId);
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
+			break;
+
+		}
+
+		ActiveSpellArray[index].EffectId=EffectId;
+		return ActiveSpellArray[index];
+	}
+	
+	int CheckActiveSpellEffect(GameObject caster)
 	{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
 		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
@@ -623,8 +827,8 @@ public class Magic : MonoBehaviour {
 			return -1;
 		}
 	}
-
-	 GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
+	
+	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
 	{
 		GameObject projectile = new GameObject();
 		CreateObjectGraphics(projectile,ProjectileImage,true);
@@ -638,18 +842,18 @@ public class Magic : MonoBehaviour {
 		rgd.freezeRotation =true;
 		rgd.useGravity=false;
 		projectile.transform.position=Location;
-
+		
 		return projectile;
 	}
-
-	 void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
+	
+	void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
 	{
 		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
 		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
-
-
-	 private void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
+	
+	
+	private void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
 	{	
 		//Create a sprite.
 		GameObject SpriteController = new GameObject(myObj.name + "_sprite");
@@ -670,8 +874,8 @@ public class Magic : MonoBehaviour {
 		}
 		
 	}
-
-	 void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite,string ChildName)
+	
+	void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite,string ChildName)
 	{
 		GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
 		
@@ -680,12 +884,12 @@ public class Magic : MonoBehaviour {
 		CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable, isAnimated, useSprite);
 	}
 	
-	 void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
+	void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
 	{
 		CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable, isAnimated, useSprite);
 	}
 	
-	 void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
+	void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isAnimated, int useSprite)
 	{
 		//Debug.Log (myObj.name);
 		//Add a script.
@@ -705,7 +909,7 @@ public class Magic : MonoBehaviour {
 		
 		
 		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
-//		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
+		//		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
 		objInteract.WorldString=WorldString;
 		objInteract.InventoryString=InventoryString;
 		objInteract.EquipString=EquipString;
@@ -736,7 +940,7 @@ public class Magic : MonoBehaviour {
 		}
 		
 	}
-
+	
 	void OnGUI()
 	{
 		if (Event.current.Equals(Event.KeyboardEvent("q")))
@@ -747,7 +951,7 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	Ray getRay(GameObject caster)
 	{
 		Ray ray ;
@@ -762,5 +966,4 @@ public class Magic : MonoBehaviour {
 		return ray;
 	}
 }
-
 

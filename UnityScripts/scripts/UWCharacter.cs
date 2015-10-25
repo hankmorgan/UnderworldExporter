@@ -6,8 +6,12 @@ The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
 
+	//What magic spells are currently active on (and cast by) the player. (max 3)
+	//These are the ones that the player can see on the hud.
+	public SpellEffect[] ActiveSpell=new SpellEffect[3]; 
 
-	public SpellEffect[] ActiveSpell=new SpellEffect[3]; //What magic spells are currently active on the player. (max 3)
+	//What effects and enchantments (eg from items are equipped on the player)
+	public SpellEffect[] PassiveSpell=new SpellEffect[10];
 
 	public int Body;//Which body/portrait this character has 
 
@@ -59,6 +63,7 @@ public class UWCharacter : Character {
 		ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
 		a_text_string_trap.SC=StringControl;
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		

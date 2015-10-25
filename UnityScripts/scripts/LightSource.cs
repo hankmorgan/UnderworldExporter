@@ -30,19 +30,15 @@ public class LightSource : object_base {
 			}
 		}
 	}
-
-	public void Use()
+	public override bool use ()
 	{
-
-
-
 		if (objInt.PickedUp==false)
 		{
 			if (IsOn==true)
 			{
 				SetOff ();
 			}
-			return;
+			return true;
 		}
 
 		if (IsOn == true)
@@ -53,7 +49,7 @@ public class LightSource : object_base {
 		{
 			SetOn ();
 		}
-
+		return true;
 	}
 
 	public void SetOn()

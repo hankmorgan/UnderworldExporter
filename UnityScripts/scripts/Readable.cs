@@ -3,6 +3,11 @@ using System.Collections;
 
 public class Readable : object_base {
 
+	public override bool use ()
+	{
+		return Activate ();
+	}
+
 
 	public override bool Activate()
 	{//Returns the text of this readable.

@@ -18,6 +18,7 @@ public class SpellEffectLight : SpellEffect {
 		base.CancelEffect();
 	}
 
+
 	void Update()
 	{
 		//To make sure the brightness is always correct.
