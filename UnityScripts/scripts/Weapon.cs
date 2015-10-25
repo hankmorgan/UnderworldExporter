@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : object_base {
 	public int Skill;
 	public int Durability;
 	public int Slash;

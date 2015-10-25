@@ -32,17 +32,12 @@ public class MagicProjectile : MonoBehaviour {
 			BoxCollider box =this.GetComponent<BoxCollider>();
 			box.enabled=false;
 			WindowDetect.FreezeMovement(this.gameObject);
-			//Debug.Log ("Projectile hits " + collision.gameObject.name + " via collision");
-			if (collision.gameObject.GetComponent<NPC>())
-			{
-				collision.gameObject.GetComponent<NPC>().ApplyAttack(damage);
-			}
-			//collision.gameObject.transform.SendMessage("ApplyDamage");
-			
+
 			ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction>();
-			//Debug.Log ("you've hit " + hit.transform.name);
+
 			if (objInt!=null)
 			{
+				objInt.Attack(damage);
 				//Create a blood splatter at this point
 				//GameObject hitimpact = new GameObject(collision.gameObject.name + "_impact");
 				//hitimpact.transform.position=this.gameObject.transform.position;//ray.GetPoint(weaponRange/0.7f);

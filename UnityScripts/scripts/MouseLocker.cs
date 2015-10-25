@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class MouseLocker : MonoBehaviour {
-	private MouseLook XAxis;
+	//Not in use?
+/*	private MouseLook XAxis;
 	private MouseLook YAxis;
 	private bool MouseLookEnabled;
 	private GameObject MainCam;
@@ -37,5 +38,5 @@ public class MouseLocker : MonoBehaviour {
 
 		}
 			
-	}
+	}*/
 }

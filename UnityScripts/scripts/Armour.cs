@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Armour : MonoBehaviour {
+public class Armour : object_base {
 	public int Durability;
 	public int Protection;
 	public string EquipFemaleLowest; 
@@ -15,14 +15,16 @@ public class Armour : MonoBehaviour {
 	public string EquipMaleBest;
 	
 	public Texture2D EquipDisplay;
-	private ObjectInteraction objInt;
+	//private ObjectInteraction objInt;
 	private int previousQuality;
 	// Use this for initialization
-	void Start () {
+
+	protected override void Start () {
+		base.Start ();
 		previousQuality=-1;
-		objInt=this.gameObject.GetComponent<ObjectInteraction>();
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		if (previousQuality!=objInt.Quality)

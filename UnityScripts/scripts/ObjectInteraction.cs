@@ -91,7 +91,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public const int ANIMATION = 80;
 
-	private UILabel MessageLog;
+	public static UILabel MessageLog;
 
 	public Sprite InventoryDisplay;
 	public Sprite EquipDisplay;
@@ -109,19 +109,20 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public int item_id;
 
-	public static GameObject player;
+	//public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
 	public static StringController SC;	//String controller reference
 
-	private UWCharacter playerUW;
-	private PlayerInventory pInv;
+	//public static Character player;
+	public static UWCharacter playerUW;
+
 	public bool CanBePickedUp;
 	public bool CanBeUsed;//unimplemented
 	//public bool CanBeMoved;//unimplemented
 
 	public bool PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
 
-	private AudioSource audio;
+	private AudioSource audSource;
 
 	//TODO: remove these!
 	//public bool isContainer;
@@ -147,13 +148,9 @@ public class ObjectInteraction : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-
-		if (player!=null)
+		if (MessageLog==null)
 		{
-			playerUW=player.GetComponent<UWCharacter>();
-			pInv=player.GetComponent<PlayerInventory>();
+			MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		}
 
 		if (InvMarker==null)
@@ -259,17 +256,6 @@ public class ObjectInteraction : MonoBehaviour {
 		return SC;
 	}
 
-	public Container getCurrentContainer()
-	{
-		Container cn = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
-		return cn;
-	}
-
-	public PlayerInventory getPlayerInventory()
-		{
-		return pInv;
-		}
-
 	public UILabel getMessageLog()
 	{
 		return MessageLog;
@@ -285,6 +271,13 @@ public class ObjectInteraction : MonoBehaviour {
 					npc.ApplyAttack(damage);
 					break;
 				}
+			case DOOR:
+			case HIDDENDOOR:
+				{
+				DoorControl dc= this.GetComponent<DoorControl>();
+				dc.ApplyAttack(damage);
+				break;
+				}
 		}
 		return true;
 	}
@@ -292,122 +285,148 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public bool LookDescription()
 	{//Returns the description of this object.
-		//Debug.Log ("LookDescription");
+		object_base item;
+		item= this.GetComponent<object_base>();
+
 		switch (ItemType)
 		{
+//First the Implemented types that derive from obj_base. Cast these to objbase.
 		case NPC_TYPE:// 0
-			//nothing to do
-		case WEAPON://	WEAPON 1
-			//repair with hammer
-		case ARMOUR://	ARMOUR 2
-		case HELM ://=73;
-		case RING ://=74;
-		case BOOT ://=75;
-		case GLOVES ://=76;
-		case LEGGINGS: //=77;
-			//repair with hammer
-		case AMMO://	AMMO 3
-			//nothing
+			item =(NPC)this.GetComponent<NPC>();
 			break;
-		case DOOR://	DOOR 4
-		case KEY://	KEY 5
-			//nothing/use
-		case RUNE://	RUNE 6
-			//nothing
-		case BRIDGE://	BRIDGE 7
-			//nothing
-		case BUTTON://	BUTTON 8	
-			//nothing
-		case LIGHT://	LIGHT 9
-			//?
-			{
-			MessageLog.text = SC.GetString("004",item_id.ToString ("000"));
-			return false;
+		case WEAPON:
+			item = (Weapon)this.GetComponent<Weapon>();
 			break;
-			}
-
-		case SIGN://	SIGN 10
-		case BOOK://	BOOK 11
-		case SCROLL://	SCROLL 13	//The reading kind
-		{
+		case ARMOUR:
+			item = (Armour)this.GetComponent<Armour>();
+			break;
+		case HELM :
+			item = (Helm)this.GetComponent<Helm>();
+			break;
+		case RING :
+			item = (Ring)this.GetComponent<Ring>();
+			break;
+		case BOOT :
+			item = (Boots)this.GetComponent<Boots>();
+			break;
+		case GLOVES :
+			item = (Gloves)this.GetComponent<Gloves>();
+			break;
+		case LEGGINGS: 
+			item = (Leggings)this.GetComponent<Leggings>();
+			break;
+		case DOOR:
+			item= (DoorControl)this.GetComponent<DoorControl>();
+			break;
+		case KEY:
+			item=(DoorKey)this.GetComponent<DoorKey>();
+			break;
+		case RUNE:
+			item=(RuneStone)this.GetComponent<RuneStone>();
+			break;
+		case TORCH:
+		case LIGHT:
+			item =(LightSource)this.GetComponent<LightSource>();
+			break;
+		case BOOK:
+		case SIGN:
+		case SCROLL:	//The reading kinds are a special case. Looking at them is it's activation.
 			Readable rd =this.gameObject.GetComponent<Readable>();
 			rd.Activate();
 			return true;
 			break;
-		}
-		case WAND://	WAND 12	
-			//Nothing/use
-
-		case POTIONS://	POTIONS 14	
-			//Nothing/use
-		case INSERTABLE://INSERTABLE 15	//Shock style put the circuit board in the slot.
-			//?
-		case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
-			//Nothing
+		case BUTTON:
 		case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
-			//Nothing
-			{
-				ButtonHandler bn = this.gameObject.GetComponent<ButtonHandler>();
-				bn.LookAt();
-				return true;
-			}
-		case TREASURE://TREASURE 18
-			//Nothing
-			break;
-		case CONTAINER:// CONTAINER 19
-		//case TRAP:// TRAP 20	//not implemented
-		case LOCK://LOCK 21
-			//Nothing
-			break;
-		case TORCH://TORCH 22
-			{
-			LightSource torch=this.gameObject.GetComponent<LightSource>();
-			torch.LookAt();
-			return true;
-			}
-		case CLUTTER://CLUTTER 23
-			//Nothing
+			item = (ButtonHandler)this.gameObject.GetComponent<ButtonHandler>();
 			break;
 		case FOOD://FOOD 24
-			{
-			Food fd = this.GetComponent<Food>();
-			fd.LookAt();
+			item= (Food)this.GetComponent<Food>();
 			break;
-			}
+		case MAP:// MAP 28 Another special case where looking at it is activation
+			return (this.GetComponent<Map>().LookAt());
+			break;
+		case TMAP_SOLID://Decal Objects
+		case TMAP_CLIP:
+			item = (TMAP)this.GetComponent<TMAP>();
+			break;
+		case RUNEBAG://RUNEBAG 70. Another special case.
+			RuneBag rb= this.gameObject.GetComponent<RuneBag>();
+			return rb.LookAt();
+			break;
+		case CONTAINER:
+			item =(Container)this.gameObject.GetComponent<Container>();
+			break;
+	//Secondly the Unimplemented or not applicable/generic types that just use obj_base
+		default:
+			item= this.GetComponent<object_base>();
+			break;
+		}
+
+		if(item!=null)
+		{
+			return (item.LookAt());
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+		//nothing/use
+//THirdly commented out is the stuff that may need sorting or implementation
+	//	case AMMO://	AMMO 3
+	//	case BRIDGE://	BRIDGE 7
+
+		
+	//	case WAND://	WAND 12	
 			//Nothing/use
-		case SCENERY://SCENERY 25
-			//Nothing
-		case INSTRUMENT://INSTRUMENT 26
+
+///		case POTIONS://	POTIONS 14	
 			//Nothing/use
-		case FIRE://FIRE 27
-			//Nothing
-			break;
-		case MAP:// MAP 28
-			//Nothing//use
-			{
-			Map mp = this.GetComponent<Map>();
-			mp.LookAt();
-			return true;
-			break;
-			}
-		case HIDDENDOOR://HIDDENDOOR 29
+//		case INSERTABLE://INSERTABLE 15	//Shock style put the circuit board in the slot.
 			//?
-		case PORTCULLIS://PORTCULLIS 30
-			//?
-		case PILLAR://PILLAR 31
-			//nothing
-		case SOUND://SOUND 32
-			//nothing
-		case CORPSE://CORPSE 33
+//		case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
 			//Nothing
-			break;
-		case TMAP_SOLID://TMAP_SOLID 34
-		case TMAP_CLIP://TMAP_CLIP 35
-			{
-			TMAP tm = this.GetComponent<TMAP>();
-			tm.LookAt();
-			return true;
-			}
+
+//		case TREASURE://TREASURE 18
+			//Nothing
+//			break;
+//		
+		//case TRAP:// TRAP 20	//not implemented
+//		case LOCK://LOCK 21
+			//Nothing
+//			break;
+//		case TORCH://TORCH 22
+//			{
+//			LightSource torch=this.gameObject.GetComponent<LightSource>();
+	//		torch.LookAt();
+	//		return true;
+	//		}
+	//	case CLUTTER://CLUTTER 23
+			//Nothing
+	//		break;
+
+			//Nothing/use
+//		case SCENERY://SCENERY 25
+			//Nothing
+//		case INSTRUMENT://INSTRUMENT 26
+			//Nothing/use
+//		case FIRE://FIRE 27
+			//Nothing
+	//		break;
+
+//		case HIDDENDOOR://HIDDENDOOR 29
+			//?
+//		case PORTCULLIS://PORTCULLIS 30
+			//?
+//		case PILLAR://PILLAR 31
+			//nothing
+//		case SOUND://SOUND 32
+			//nothing
+//		case CORPSE://CORPSE 33
+			//Nothing
+		//	break;
+			/*
 		case MAGICSCROLL://MAGICSCROLL 36
 		case A_DAMAGE_TRAP: //A_DAMAGE_TRAP 37
 		case A_TELEPORT_TRAP://A_TELEPORT_TRAP 38
@@ -444,14 +463,7 @@ public class ObjectInteraction : MonoBehaviour {
 		case UW_PAINTING://UW_PAINTING	68
 		case PARTICLE://PARTICLE 69
 			break;
-		case RUNEBAG://RUNEBAG 70
-			{
 
-			RuneBag rg= this.gameObject.GetComponent<RuneBag>();
-			rg.LookAt();
-			return true;
-			break;
-			}
 		case SHOCK_BRIDGE://SHOCK_BRIDGE 71
 		case FORCE_DOOR://FORCE_DOOR 72
 		case HIDDENPLACEHOLDER://HIDDENPLACEHOLDER 999
@@ -462,271 +474,176 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 		}
 
-		MessageLog.text =  SC.GetString("004",item_id.ToString ("000"));
-		return false;//SC.GetString("004",item_id.ToString ("000"));
+		*/
+		
+
+		//MessageLog.text =  SC.GetString("004",item_id.ToString ("000"));
+		//return false;//SC.GetString("004",item_id.ToString ("000"));
 
 
-	}
 
-/*	public string LookDescription(ObjectInteraction objInt)
-	{//Executes the description of this object.
-		//Debug.Log ("LookDescription (objint)");
 
-		return "";//false;
 
-		switch (objInt.ItemType)
-		{
-		case 10://signs
-			{
-				return objInt.MessageLog.text = SC.GetString (8,objInt.Link - 0x200);
-				break;
-			}
-		default:
-			{
-				return SC.GetString("004",item_id.ToString ("000"));
-			}
-		}
-	}
-*/
 	public bool Use()
-	{//Code to activate specific objects
-		//Returns a reference to the object in hand at the end of the action.
-		//Get a reference to the object currently in hand
-		//list each object type in the game.
-		//depending on the combination of object in hand/object activate perform all my various actions.
-		//Debug.Log ("ObjectInteraction.Activate (" + ItemType + ")");
-		GameObject ObjectInHand =null;// = new GameObject();
-		ObjectInteraction objInt = this.GetComponent<ObjectInteraction>();
-		if (player!=null)
-		{
-			playerUW=player.GetComponent<UWCharacter>();
-			pInv=player.GetComponent<PlayerInventory>();
-		}
+	{//Code to activate objects by type.
 
-		if (this.pInv.ObjectInHand !="")
+		GameObject ObjectInHand =null;// = new GameObject();
+		object_base item=null;//Base object class
+
+		ObjectInHand=playerUW.playerInventory.GetGameObjectInHand();
+		if (ObjectInHand != null)
 		{
-			ObjectInHand =GameObject.Find (this.pInv.ObjectInHand);
 			//First do a combineobject test. This will implement object combinatiosn defined by UW1/2
 		    if (CombineObject(this.gameObject,ObjectInHand))
 			{
 				return true;
-			}
-	
+			}	
 		}
 
 		switch (ItemType)
 		{
-		case NPC_TYPE://	NPC 0
-				//nothing to do
-			case WEAPON://	WEAPON 1
-				//repair with hammer
-			case ARMOUR://	ARMOUR 2
-				//repair with hammer
-			case HELM ://=73;
-			case RING ://=74;
-			case BOOT ://=75;
-			case GLOVES ://=76;
-			case LEGGINGS: //=77;
-			case AMMO://	AMMO 3
-				//nothing
+
+	//As with the lookdescription order by implemented and unimplemented
+		case DOOR://	DOOR 4
+		case HIDDENDOOR://HIDDENDOOR 29
+		case PORTCULLIS://PORTCULLIS 30
+			item  = (DoorControl)this.GetComponent<DoorControl>();
 			break;
-			case DOOR://	DOOR 4
-			case HIDDENDOOR://HIDDENDOOR 29
-			case PORTCULLIS://PORTCULLIS 30
-					{
-						DoorControl objDoor = this.GetComponent<DoorControl>();
-						if (objDoor!=null) //This is a door with a control
-						{
-						if (this.pInv.ObjectInHand !="")
-								{
-								objDoor.ActivateByObject(ObjectInHand);
-								//Clear the object in hand
-								playerUW.CursorIcon= playerUW.CursorIconDefault;
-								//playerUW.CurrObjectSprite = "";
-								pInv.ObjectInHand="";
-								return true;	
-								}
-							else
-								{//Normal Usage
-								objDoor.Activate();
-								return true;
-								}
-						}
-						break;
-					}
-			case KEY://	KEY 5
-				{//A key just becomes the object in hand
-				playerUW.CursorIcon= InventoryDisplay.texture;
-				pInv.ObjectInHand=this.name;
-				UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
-				InteractionModeControl.UpdateNow=true;
-				return true;
-				break;
-				}
-				//nothing/use
-			case LOCKPICK:
-				{
-					playerUW.CursorIcon= InventoryDisplay.texture;
-					pInv.ObjectInHand=this.name;
-					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
-					InteractionModeControl.UpdateNow=true;
-					return true;
-					break;
-				}
-			case RUNE://	RUNE 6
-				//nothing
-			case BRIDGE://	BRIDGE 7
-				//nothing
-			case BUTTON://	BUTTON 8	
-				//nothing
-				{
-					ButtonHandler objButton = this.gameObject.GetComponent<ButtonHandler>();
-					if (objButton!=null)
-					{
-						objButton.Activate();
-						return true;
-					}
-				break;
-				}
-			case LIGHT://	LIGHT 9
-				//?
+		case KEY://A key just becomes the object in hand
+			item  = (DoorKey)this.GetComponent<DoorKey>();
 			break;
-			case WAND://	WAND 12	
-				//Nothing/use
-				case 10://	SIGN 10
-				case 11://	BOOK 11
-				case 13://	SCROLL 13	//The reading kind
-				{
-					Readable rd =this.gameObject.GetComponent<Readable>();
-					rd.Activate();
-					return true;
-					break;
-				}
-			case POTIONS://	POTIONS 14	
-				//Nothing/use
-			case INSERTABLE://INSERTABLE 15	//Shock style put the circuit board in the slot.
-				//?
-			case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
-				//Nothing
-				break;
-			case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
-				//Nothing
-				{
-				ButtonHandler bn = this.gameObject.GetComponent<ButtonHandler>();
-				bn.Activate();
-				return true;
-				}
-			case TREASURE://TREASURE 18
-				//Nothing
-				break;
-			case CONTAINER:// CONTAINER 19
-				{
-				//TODO:add object to container or open container.
-				Container cn = this.gameObject.GetComponent<Container>();
-				if (pInv.ObjectInHand=="")
-					{//Open the container
-					cn.OpenContainer();
-					return true;
-					}
-				else
-					{//Put the item in the container.
-					bool Valid=true;
-					if (ObjectInHand.GetComponent<Container>() != null)
-						{
-						if (cn.name == ObjectInHand.GetComponent<Container>().name)
-							{
-							Valid=false;
-							Debug.Log ("Attempt to add a container to itself");
-							}
-						}
-
-				if (Valid)
-					{
-					if (ObjectInHand.GetComponent<ObjectInteraction>().isQuant==false)
-					    {
-						cn.AddItemToContainer(pInv.ObjectInHand);
-						}
-					else
-						{
-						cn.AddItemMergedItemToContainer(ObjectInHand.gameObject);
-						}
-
-					if (cn.isOpenOnPanel == true)
-					{//Container is open for display force a refresh.
-						cn.OpenContainer();
-					}
-					pInv.ObjectInHand= "";
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					//playerUW.CurrObjectSprite = "";
-					
-					return true;
-					}
-				else
-					{
-					return false;
-					}
-
-					}
-				break;
-				}
-			//case TRAP:// TRAP 20	//not implemented
-			case LOCK://LOCK 21
-				//Nothing
-			case TORCH://TORCH 22
-				{
-					LightSource torch=this.gameObject.GetComponent<LightSource>();
-					torch.Use();
-					return true;
-				}
-			case CLUTTER://CLUTTER 23
-				//Nothing
-				break;
-			case FOOD://FOOD 24
-				{
-				if (pInv.ObjectInHand=="")
-					{
-					Food fd = this.gameObject.GetComponent<Food>();
-					fd.Activate();
-					return true;
-					}
-				else
-					{
-					return false;
-					}
-				break;
-				}
-				//Nothing/use
-			case SCENERY://SCENERY 25
-				//Nothing
-			case INSTRUMENT://INSTRUMENT 26
-			//Nothing/use
-			case FIRE://FIRE 27
-				//Nothing
-			case MAP:// MAP 28
-				{
-				Map mp = this.GetComponent<Map>();
-				mp.OpenMap();
-				return true;
-				break;
-				}
-				//Nothing//use
-
-			//?
-		case PILLAR://PILLAR 31
-			//nothing
-		case SOUND://SOUND 32
-			//nothing
-		case CORPSE://CORPSE 33
-			//Nothing
+		case LOCKPICK://Special case until Lockpick component is created.
+			item =(LockPick)this.GetComponent<object_base>();
+			break;
+		case BUTTON://	BUTTON 8
+		case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+			item = (ButtonHandler)this.gameObject.GetComponent<ButtonHandler>();
+			break;
+		case SIGN://	SIGN 10
+		case BOOK://	BOOK 11
+		case SCROLL://	SCROLL 13	//The reading kind
+			item =(Readable)this.gameObject.GetComponent<Readable>();
+			break;
+		case CONTAINER:// CONTAINER 19
+			item = (Container)this.gameObject.GetComponent<Container>();
+			break;
+		case TORCH://TORCH 22
+			item=(LightSource)this.gameObject.GetComponent<LightSource>();
+			break;
+		case FOOD://FOOD 24
+			item = (Food)this.gameObject.GetComponent<Food>();
+			break;
+		case MAP:// MAP 28
+			item = (Map)this.gameObject.GetComponent<Map>();
 			break;
 		case TMAP_SOLID://TMAP_SOLID 34
 		case TMAP_CLIP://TMAP_CLIP 35
-			{
-			TMAP tm = this.GetComponent<TMAP>();
-			tm.Use();
+			item = (TMAP)this.GetComponent<TMAP>();
+			break;
+
+		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
+		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
+		case A_USE_TRIGGER://A_USE_TRIGGER 56
+		case A_LOOK_TRIGGER://A_LOOK_TRIGGER 57
+		case A_STEP_ON_TRIGGER://A_STEP_ON_TRIGGER 58
+		case AN_OPEN_TRIGGER://AN_OPEN_TRIGGER 59
+		case AN_UNLOCK_TRIGGER://AN_UNLOCK_TRIGGER 60
+			//Special case triggers. NOt currently derived from obj_base
+			TriggerHandler th = this.GetComponent<TriggerHandler>();
+			th.Activate();
 			return true;
-			}
-		case MAGICSCROLL://MAGICSCROLL 36
+			break;
+
+		case RUNEBAG://RUNEBAG 70
+			item = (RuneBag)this.GetComponent<RuneBag>();
+			break;
+
+		default:
+			item = this.GetComponent<object_base>();
+			break;
+		}
+
+		if (item!=null)
+		{
+			return item.use ();
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+		//Unimplemented
+		//case NPC_TYPE://	NPC 0
+				//nothing to do
+			//case WEAPON://	WEAPON 1
+				//repair with hammer
+			//case ARMOUR://	ARMOUR ddd2
+				//repair with hammer
+			//case HELM ://=73;
+			//case RING ://=74;
+			//case BOOT ://=75;
+		//	case GLOVES ://=76;
+		//	case LEGGINGS: //=77;
+			//case AMMO://	AMMO 3
+				//nothing
+			//break;
+
+
+				//nothing/use
+
+			//case RUNE://	RUNE 6
+				//nothing
+			//case BRIDGE://	BRIDGE 7
+				//nothing
+
+			//case LIGHT://	LIGHT 9
+				//?
+			//break;
+			//case WAND://	WAND 12	
+				//Nothing/use
+
+			//case POTIONS://	POTIONS 14	
+				//Nothing/use
+			//case INSERTABLE://INSERTABLE 15	//Shock style put the circuit board in the slot.
+				//?
+			//case INVENTORY://	INVENTORY 16	//Quest items and the like with no special properties
+				//Nothing
+			//	break;
+			//case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
+
+			//case TREASURE://TREASURE 18
+				//Nothing
+				//break;
+
+			//case TRAP:// TRAP 20	//not implemented
+			//case LOCK://LOCK 21
+				//Nothing
+
+			//case CLUTTER://CLUTTER 23
+				//Nothing
+			//	break;
+
+				//Nothing/use
+			//case SCENERY://SCENERY 25
+				//Nothing
+			//case INSTRUMENT://INSTRUMENT 26
+			//Nothing/use
+			//case FIRE://FIRE 27
+				//Nothing
+
+				//Nothing//use
+
+			//?
+		//case PILLAR://PILLAR 31
+			//nothing
+		//case SOUND://SOUND 32
+			//nothing
+		//case CORPSE://CORPSE 33
+			//Nothing
+			//break;
+
+	/*	case MAGICSCROLL://MAGICSCROLL 36
 		case A_DAMAGE_TRAP: //A_DAMAGE_TRAP 37
 		case A_TELEPORT_TRAP://A_TELEPORT_TRAP 38
 		case A_ARROW_TRAP://A_ARROW_TRAP 39
@@ -745,19 +662,8 @@ public class ObjectInteraction : MonoBehaviour {
 		case A_COMBINATION_TRAP://A_COMBINATION_TRAP 52
 		case A_TEXT_STRING_TRAP://A_TEXT_STRING_TRAP 53
 			break;
-		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
-		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
-		case A_USE_TRIGGER://A_USE_TRIGGER 56
-		case A_LOOK_TRIGGER://A_LOOK_TRIGGER 57
-		case A_STEP_ON_TRIGGER://A_STEP_ON_TRIGGER 58
-		case AN_OPEN_TRIGGER://AN_OPEN_TRIGGER 59
-		case AN_UNLOCK_TRIGGER://AN_UNLOCK_TRIGGER 60
-		{
-			Debug.Log ("Activating trigger in use");
-			TriggerHandler th = this.GetComponent<TriggerHandler>();
-			th.Activate();
-			return true;
-		}
+
+
 		case A_FOUNTAIN://A_FOUNTAIN	61
 		case SHOCK_DECAL://SHOCK_DECAL 62
 		case COMPUTER_SCREEN://COMPUTER_SCREEN 63
@@ -768,33 +674,20 @@ public class ObjectInteraction : MonoBehaviour {
 		case UW_PAINTING://UW_PAINTING	68
 		case PARTICLE://PARTICLE 69
 			break;
-		case RUNEBAG://RUNEBAG 70
-			{
-				if (ObjectInHand != null)
-				{
-					//Try and see if I can add the object to the rune bag.
-					return this.GetComponent<RuneBag>().ActivateByObject(ObjectInHand);
-				}
-				else
-				{
-					//open the rune bag if nothing in hand
-					this.GetComponent<RuneBag>().Activate();
-					return true;
-				}
-				
-				break;
-			}
+
+
 		case SHOCK_BRIDGE://SHOCK_BRIDGE 71
 		case FORCE_DOOR://FORCE_DOOR 72
 		case HIDDENPLACEHOLDER://HIDDENPLACEHOLDER 999
 			break;
+			
 		}
 
 		//If I haven't returned just swap the two objects if one of them is in the inventory.
 
 		return false;
 	}
-
+*/
 
 
 	public void TalkTo()
@@ -890,110 +783,17 @@ public class ObjectInteraction : MonoBehaviour {
 	}
 
 
-//default:
-//			{
-//				objInt.MessageLog.text = "Default: Type=" + objInt.ItemType + ", You use a " + objInt.gameObject.name;
-//				break;
-//			}
-//		}
-//	}
-/*
-	// Update is called once per frame
-	void Update () {
-		return;
-		if ((player!=null) && (playerUW==null))
-			{
-			playerUW=player.GetComponent<UWCharacter>();
-			}
-		if ((player!=null) && (pInv==null))
-		{
-			pInv=player.GetComponent<PlayerInventory>();
-		}
-		if (InvMarker==null)
-			{
-			InvMarker=GameObject.Find ("InventoryMarker");
-			}
-	}
-
-	void OnMouseDown()
-	{
-		return;
-		float distance;
-		if (playerUW.CursorInMainWindow==false)
-		{//Stop items outside the viewport from being triggered.
-			return;
-		}
-
-
-		switch (UWCharacter.InteractionMode)
-		{
-		case 0://Options
-			MessageLog.text = "Nothing will happen in options mode " + name;
-			break;
-		case 1://Talk
-			MessageLog.text = "You can't talk to " + name;
-			break;
-		case 2://Pickup
-			if (playerUW==null)
-			{
-				player.GetComponent<UWCharacter>();
-			}
-
-			if (pInv.ObjectInHand=="")
-			{
-				//distance =Vector3.Distance(transform.position,player.transform.position);
-				//if (distance<=playerUW.InteractionDistance)
-				//{
-					MessageLog.text = "You pick up a " + name;
-					//Cursor.SetCursor (InventoryIcon.texture,Vector2.zero, CursorMode.ForceSoftware);
-					playerUW.CursorIcon= InventoryIcon.texture;
-					playerUW.CurrObjectSprite = InventoryString;
-					pInv.ObjectInHand=name;
-					pInv.JustPickedup=true;//To stop me throwing it away immediately.  at st
-					//Move the selected gameobject to the box.
-					this.transform.position = InvMarker.transform.position;
-					this.transform.parent=InvMarker.transform;//Adds to the marker so it will persist.
-
-				//}
-				//else
-				//{
-				//	MessageLog.text = "That is too far away to take";
-				//}
-			}
-
-			break;
-		case 4://Look
-			MessageLog.text = "You see a " + name;
-			break;
-		case 8://Attack
-			MessageLog.text = "You attack a " + name;
-			break;
-		case 16://Use
-			//distance =Vector3.Distance(transform.position,player.transform.position);
-			//if (distance<=playerUW.InteractionDistance)
-			//{
-			MessageLog.text = "You use a " + name + "ObjectInteraction.OnMouseDown";
-			//}
-			//else
-			//{
-			//	MessageLog.text = "That is too far away to use";
-			//}
-			break;
-		}
-	}
-	*/
-
 	public void consumeObject()
 	{
 		if((isQuant ==false) || ((isQuant) && (Link==1)))
 		  {//the last of the item or is not a quantity;
-			Container cn = getCurrentContainer();
+			Container cn = playerUW.playerInventory.GetCurrentContainer();
 			//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
 			if (!cn.RemoveItemFromContainer(this.name))
 				{//Try and remove from the paperdoll if not found in the current container.
-				pInv.RemoveItemFromEquipment(this.name);
+				playerUW.playerInventory.RemoveItemFromEquipment(this.name);
 				}
-				pInv.Refresh();
+				playerUW.playerInventory.Refresh();
 				Destroy (this.gameObject);
 			}
 			else
@@ -1037,14 +837,14 @@ public class ObjectInteraction : MonoBehaviour {
 
 	//	Debug.Log (this.gameObject.name);
 		//AudioSource audio= this.GetComponent<AudioSource>();
-		if (audio!=null)
+		if (audSource!=null)
 		{
 			Debug.Log (collision.gameObject.name);
-			audio.Play();
+			audSource.Play();
 		}
 		else
 		{
-			audio= this.GetComponent<AudioSource>();
+			audSource= this.GetComponent<AudioSource>();
 		}
 	}
 }

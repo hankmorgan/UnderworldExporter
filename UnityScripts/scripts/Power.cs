@@ -10,11 +10,7 @@ public class Power : MonoBehaviour {
 	//float PowerLevel;
 	private UWCharacter playerUW;
 	private UITexture uiText;
-	// Use this for initialization
-	void Start () {
-		//InvokeRepeating("UpdateUW",0.0f,0.2f);
-	}
-	
+
 
 	void Update () {
 	if (playerUW==null)
@@ -27,11 +23,11 @@ public class Power : MonoBehaviour {
 			uiText= this.gameObject.GetComponent<UITexture>();
 		}
 
-	if ((PreviousCharge!=playerUW.Charge)||(playerUW.AttackCharging==true))
+		if ((PreviousCharge!=playerUW.PlayerCombat.Charge)||(playerUW.PlayerCombat.AttackCharging==true))
 		{
-			PreviousCharge=playerUW.Charge;
+			PreviousCharge=playerUW.PlayerCombat.Charge;
 			 
-			int index= (int)playerUW.Charge/10;
+			int index= (int)playerUW.PlayerCombat.Charge/10;
 	
 			if (index==10)
 			{

@@ -8,7 +8,6 @@ public class RuneSlot : MonoBehaviour {
 	private UITexture thisRune;
 	private bool isSet;
 
-	//private int setRune=-1;
 	static string[] Runes=new string[]{"An","Bet","Corp","Des",
 		"Ex","Flam","Grav","Hur",
 		"In","Jux","Kal","Lor",
@@ -23,15 +22,10 @@ public class RuneSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-			if ((playerUW.Runes[SlotNumber] != false) && (isSet == false))
+			if ((playerUW.PlayerMagic.PlayerRunes[SlotNumber] != false) && (isSet == false))
 			{
-				//label.spriteName= "rune_" + SlotNumber.ToString("D2");
 				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
 			}
-			//else
-			//{
-				//label.spriteName= "rune_blank";
-			//}
 
 	}
 
@@ -43,7 +37,7 @@ public class RuneSlot : MonoBehaviour {
 
 	void OnClick()
 	{
-		if (playerUW.Runes[SlotNumber] == false)
+		if (playerUW.PlayerMagic.PlayerRunes[SlotNumber] == false)
 		{
 			return;//Slot is unfilled
 		}
@@ -51,23 +45,23 @@ public class RuneSlot : MonoBehaviour {
 		{
 			//add the rune to the first available active slot.
 			//If all the slots are in use then push the stack down.
-			if (playerUW.ActiveRunes[0]==-1)
+			if (playerUW.PlayerMagic.ActiveRunes[0]==-1)
 			{
-				playerUW.ActiveRunes[0]=SlotNumber;
+				playerUW.PlayerMagic.ActiveRunes[0]=SlotNumber;
 			}
-			else if(playerUW.ActiveRunes[1]==-1)
+			else if(playerUW.PlayerMagic.ActiveRunes[1]==-1)
 			{
-				playerUW.ActiveRunes[1]=SlotNumber;
+				playerUW.PlayerMagic.ActiveRunes[1]=SlotNumber;
 			}
-			else if(playerUW.ActiveRunes[2]==-1)
+			else if(playerUW.PlayerMagic.ActiveRunes[2]==-1)
 			{
-				playerUW.ActiveRunes[2]=SlotNumber;
+				playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
 			}
 			else
 			{//No free slot. Push everything down.
-				playerUW.ActiveRunes[0]=playerUW.ActiveRunes[1];
-				playerUW.ActiveRunes[1]=playerUW.ActiveRunes[2];
-				playerUW.ActiveRunes[2]=SlotNumber;
+				playerUW.PlayerMagic.ActiveRunes[0]=playerUW.PlayerMagic.ActiveRunes[1];
+				playerUW.PlayerMagic.ActiveRunes[1]=playerUW.PlayerMagic.ActiveRunes[2];
+				playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
 			}
 		}
 	}

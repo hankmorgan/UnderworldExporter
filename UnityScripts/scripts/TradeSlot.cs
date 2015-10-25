@@ -6,7 +6,7 @@ public class TradeSlot : MonoBehaviour {
 	public bool PlayerSlot=false;
 	public int SlotNo;
 	static UWCharacter playerUW;
-	static PlayerInventory pInv;
+	//static PlayerInventory pInv;
 	public bool pressedDown=false;
 	public string objectInSlot;
 	public bool Hovering=false;
@@ -17,7 +17,7 @@ public class TradeSlot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		pInv=GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		//pInv=GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		SlotImage=this.GetComponent<UITexture>();
 		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
 
@@ -37,47 +37,40 @@ public class TradeSlot : MonoBehaviour {
 
 	void PlayerSlotLeftClick()
 	{
-		if (playerUW!=null)
+		if (playerUW.playerInventory.ObjectInHand != "")
 		{
-			if (pInv.ObjectInHand != "")
-			{
-				//put the object in hand in this slot.
-				if (objectInSlot=="")
-				{//Empty slot
-					objectInSlot=pInv.ObjectInHand;
-					pInv.ObjectInHand="";
-					SlotImage.mainTexture=playerUW.CursorIcon;
-					playerUW.CursorIcon=playerUW.CursorIconDefault;
-				}
-				else
-				{//Swap the objects
-					string tmp;
-					tmp = objectInSlot;
-					objectInSlot=pInv.ObjectInHand;
-					pInv.ObjectInHand=tmp;
-					playerUW.CursorIcon= GameObject.Find(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-					
-				}
-				
+			//put the object in hand in this slot.
+			if (objectInSlot=="")
+			{//Empty slot
+				objectInSlot=playerUW.playerInventory.ObjectInHand;
+				playerUW.playerInventory.ObjectInHand="";
+				SlotImage.mainTexture=playerUW.CursorIcon;
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
 			}
 			else
-			{
-				if (objectInSlot=="")
-				{
-					//Do nothing
-				}
-				else
-				{
-					//Pickup the object in the slot
-					pInv.ObjectInHand=objectInSlot;
-					playerUW.CursorIcon= GameObject.Find(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-					objectInSlot="";
-					SlotImage.mainTexture=Blank;
-				}
+			{//Swap the objects
+				string tmp;
+				tmp = objectInSlot;
+				objectInSlot=playerUW.playerInventory.ObjectInHand;
+				playerUW.playerInventory.ObjectInHand=tmp;
+				playerUW.CursorIcon= playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				
 			}
+			
 		}
-		//Debug.Log ("Slot " + PlayerSlot + " " + SlotNo);
+		else
+		{
+			if (objectInSlot!="")
+			{
+				//Pickup the object in the slot
+				playerUW.playerInventory.SetObjectInHand(objectInSlot);
+				playerUW.CursorIcon= playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				objectInSlot="";
+				SlotImage.mainTexture=Blank;
+			}
+			
+		}
+
 	}
 
 

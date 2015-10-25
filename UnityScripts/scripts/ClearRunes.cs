@@ -20,9 +20,9 @@ public class ClearRunes : MonoBehaviour {
 		if (playerUW!=null)
 		{
 			//Debug.Log("Clearing Runes");
-			playerUW.ActiveRunes[0]=-1;
-			playerUW.ActiveRunes[1]=-1;
-			playerUW.ActiveRunes[2]=-1;
+			playerUW.PlayerMagic.ActiveRunes[0]=-1;
+			playerUW.PlayerMagic.ActiveRunes[1]=-1;
+			playerUW.PlayerMagic.ActiveRunes[2]=-1;
 		}
 	}
 }

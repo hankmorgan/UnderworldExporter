@@ -436,10 +436,10 @@ public class GoblinAI : MonoBehaviour {
 		}
 	}
 
-	void OnMouseDown()
-	{
-		return;
-		switch (UWCharacter.InteractionMode)
+/*	void OnMouseDown()
+	{*/
+		//return;
+/*		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModeOptions://Options
 			MessageLog.text = "Nothing will happen in options mode " + name;
@@ -464,6 +464,6 @@ public class GoblinAI : MonoBehaviour {
 			MessageLog.text = "You use a " + name;
 			AnimRange=10;
 			break;
-		}
-	}
+		}*/
+/*	}*/
 }

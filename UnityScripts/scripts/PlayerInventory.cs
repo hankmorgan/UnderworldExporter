@@ -4,19 +4,9 @@ using System.Collections;
 public class PlayerInventory : MonoBehaviour {
 
 	//The game objects at the various slots. (not in use?)
-	//private GameObject Helm;
-	//private GameObject Chest;
-	//private GameObject Legs;
-	//private GameObject Boots;
-	//private GameObject Gloves;
-	//private GameObject LeftHand;
-	//private GameObject RightHand;
-	//private GameObject LeftRing;
-	//private GameObject RightRing;
-	//private GameObject LeftShoulder;
-	//private GameObject RightShoulder;
-	//private GameObject[] BackPack= new GameObject[8];
+
 	public int game;
+	//TODO:make object in hand private so I can update code usages to use api instead.
 	public string ObjectInHand; //What is the current active object held by the player
 	public bool JustPickedup; //Has the player just picked something up.
 	//The game object name of the item.
@@ -85,8 +75,8 @@ public class PlayerInventory : MonoBehaviour {
 	void Start () {
 		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
 		atTopLevel=true;
-		playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		playerContainer = GameObject.Find ("Gronk").GetComponent<Container>();
+		playerUW=this.GetComponent<UWCharacter>();
+		playerContainer =this.GetComponent<Container>();
 		for (int i =0;i<8;i++)
 		{
 			bBackPack[i]=true;
@@ -133,7 +123,7 @@ public class PlayerInventory : MonoBehaviour {
 			ls = null;
 			if (GetObjectAtSlot(i) != "")
 			{
-				GameObject objAtSlot = GameObject.Find (GetObjectAtSlot(i));
+				GameObject objAtSlot = GetGameObjectAtSlot(i); //GameObject.Find (GetObjectAtSlot(i));
 				if (objAtSlot != null)
 				{
 					ls =objAtSlot.GetComponent<LightSource>();
@@ -257,179 +247,6 @@ public class PlayerInventory : MonoBehaviour {
 		}
 		
 	}
-	/*
-	 * 
-	public string ObjectPickedUp(int slotIndex, string sObjectInHand)
-	{//Returns the game object of the object already in the slot
-		string ExistingObject="";
-		//Debug.Log ("looking for object " + sObjectInHand);
-		//GameObject ObjectInHand = GameObject.Find (sObjectInHand);
-		//if(ObjectInHand!=null)
-		//{Debug.Log (ObjectInHand.name);
-			//Debug.Log ("Object found");
-		Debug.Log("ObjectPickedUP");
-			switch (slotIndex)
-			{
-		case 0://Helm
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sHelm,slotIndex) == false)
-			{
-				bHelm=true;
-				ExistingObject=sHelm;
-				sHelm=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 1://Chest
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sChest,slotIndex) == false)
-			{
-				bChest=true;
-				ExistingObject=sChest;
-				sChest=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 2://Leggings
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLegs,slotIndex) == false)
-			{
-				bLegs=true;
-				ExistingObject=sLegs;
-				sLegs=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 3://Boots
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sBoots,slotIndex) == false)
-			{
-				bBoots=true;
-				ExistingObject=sBoots;
-				sBoots=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 4://Gloves
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sGloves,slotIndex) == false)
-			{
-				bGloves=true;
-				ExistingObject=sGloves;
-				sGloves=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 5://ShoulderRight
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sRightShoulder,slotIndex) == false)
-			{
-				bRightShoulder=true;
-				ExistingObject=sRightShoulder;
-				sRightShoulder=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 6://ShoulderLeft
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLeftShoulder,slotIndex) == false)
-			{
-				bLeftShoulder=true;
-				ExistingObject=sLeftShoulder;
-				sLeftShoulder=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 7://HandRight
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sRightHand,slotIndex) == false)
-			{
-				bRightHand=true;
-				ExistingObject=sRightHand;
-				sRightHand=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 8://HandLeft
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLeftHand,slotIndex) == false)
-			{
-				bLeftHand=true;
-				ExistingObject=sLeftHand;
-				sLeftHand=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 9://RingRight
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sRightRing,slotIndex) == false)
-			{
-				bRightRing=true;
-				ExistingObject=sRightRing;
-				sRightRing=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 10://RingLeft
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,sLeftRing,slotIndex) == false)
-			{
-				bLeftRing=true;
-				ExistingObject=sLeftRing;
-				sLeftRing=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-			default://Inventory Slots 0-7		
-				if ((slotIndex>=11)&&(slotIndex<=18))
-				{
-				if (InventorySlot.InteractTwoObjects (sObjectInHand,sBackPack[slotIndex-11],slotIndex) == false)
-				{
-					bBackPack[slotIndex-11]=true;
-					ExistingObject=sBackPack[slotIndex-11];
-					sBackPack[slotIndex-11]=sObjectInHand;
-					playerContainer.RemoveItemFromContainer (slotIndex-11);
-					playerContainer.AddItemToContainer (sObjectInHand,slotIndex-11);
-				}
-
-				else
-				{
-					ExistingObject="";
-				}
-
-					
-				}
-				break;
-			}
-	//	}
-
-		return ExistingObject;
-
-	}
-
-*/
 
 	public bool GetObjectDescAtSlot(int SlotIndex)
 	{
@@ -450,6 +267,12 @@ public class PlayerInventory : MonoBehaviour {
 		{
 			return false; //"DESC NOT FOUND!!";
 		}
+	}
+
+	public GameObject GetGameObjectAtSlot(int slotIndex)
+	{
+		string objname = GetObjectAtSlot (slotIndex);
+		return GameObject.Find (objname);
 	}
 
 	public string GetObjectAtSlot(int slotIndex)
@@ -820,91 +643,43 @@ public class PlayerInventory : MonoBehaviour {
 		return false;
 	}
 
-	/*
-	public bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
-	{//How two objects affect each other. eventually I will implement a table for object combining.
-		Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
-		//returns true if they have an effect on each other.
-		if ((sObjectInHand !="") && (sObjectUsedOn !=""))
-		{//Object is being used on something.
-			GameObject objInHand= GameObject.Find (sObjectInHand);
-			GameObject objUseOn = GameObject.Find (sObjectUsedOn);
-			if(objUseOn.GetComponent<ObjectInteraction>() ==null)
-			{//Object has no interaction component.
-				ObjectInHand="";
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
-				return false;
-			}
-			//Add item to container
-			if (objUseOn.GetComponent<ObjectInteraction>().isContainer)
-			{
-				if(Container.AddObjectToContainer(objInHand,objUseOn))
-				{
-					ObjectInHand="";
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					playerUW.CurrObjectSprite = "";
-					//ObjectInHand="";
-				}
-			}
-			
-			if(objUseOn.GetComponent<ObjectInteraction>().isRuneBag)
-			{//Add a runestone to the rune bag.
-				if(objInHand.GetComponent<ObjectInteraction>().isRuneStone)
-				{
-					UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-					playerUW.Runes[objInHand.GetComponent<ObjectInteraction>().item_id-232]=true;
-					//Add rune to rune bag.
-					GameObject.Destroy(objInHand);
-					ObjectInHand="";
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					playerUW.CurrObjectSprite = "";
-				}
-				return true;
-			}
 
-			if ((objUseOn.GetComponent<ObjectInteraction>().isDoor) && (objInHand.GetComponent<ObjectInteraction>().isKey) )
-				{
-				//Try and use a key on a door.
-				Debug.Log ("A key is used on a door");
-				if(objUseOn.GetComponent<ObjectInteraction>().Link==objInHand.GetComponent<ObjectInteraction>().Owner)
-					{
-					Debug.Log ("A key is used to unlock a door");
-					DoorControl DC=objUseOn.GetComponent<DoorControl>();
-					DC.ToggleLock();
-					}
-				ObjectInHand="";
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";				
-				}
-			return true;
+	public string GetObjectInHand()
+	{
+		return ObjectInHand;
+	}
+
+	public GameObject GetGameObjectInHand()
+	{
+	if (ObjectInHand !="")
+		{
+			return GameObject.Find (ObjectInHand);
 		}
 		else
-		{//Object is just being placed in a slot. 
-			if (ObjectInHand!="")
-			{
-				GameObject objInHand= GameObject.Find (sObjectInHand);
-				//Container subContainer = objUseOn.GetComponent<Container>();
-				if (objInHand.GetComponent<ObjectInteraction>().isContainer)
-				{
-					//PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-					Container subContainer=objInHand.GetComponent<Container>();
-					if (slotIndex >=11)
-					{//Object is being added to a bag container
-						subContainer.ContainerParent=currentContainer;
-					}
-					else
-					{//object is being added to an equipment slot
-						subContainer.ContainerParent="Gronk";
-					}
-					
-				}
-			}
-			return false;
+		{
+			return null;
 		}
 
-*/
+	}
 
+	public void SetObjectInHand(GameObject obj)
+	{
+		ObjectInHand=obj.name;
+	}
 
-		
+	public void SetObjectInHand(string obj)
+	{
+		ObjectInHand=obj;
+	}
+
+	public Container GetCurrentContainer()
+	{
+		return GameObject.Find (currentContainer).GetComponent<Container>();
+	}
+
+	public GameObject GetGameObject(string name)
+	{
+		return GameObject.Find (name);
+	}
+
 }

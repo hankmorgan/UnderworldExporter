@@ -37,19 +37,133 @@ public class StringController : MonoBehaviour {
 	}
 
 
+	public string GetObjectNounUW(ObjectInteraction objInt)
+	{//The the single noun
+	
+		string output = GetString (4,objInt.item_id);
+		if (output.Contains("&"))
+		{
+			output= output.Split ('&')[0];
+		}			
+		//Remove the article
+		output =output.Replace("a_","");
+		output =output.Replace("an_","");
+		return output;
+	}
+
+
 	public string GetFormattedObjectNameUW(ObjectInteraction objInt)
 	{//Eventually this will return things like proper quants etc.
-		return (GetString (4,objInt.item_id));
+		string output = GetString (4,objInt.item_id);
+
+		if ((objInt.isQuant ==true) && (output.Contains("&")))
+		{
+			if (objInt.Link>1)
+			{//Plural description
+				output= objInt.Link + " " + output.Split ('&')[1];		
+			}
+			else
+			{
+				output= output.Split ('&')[0];
+			}
+		}
+		else
+			{
+			if (output.Contains("&"))
+			    {
+				output= output.Split ('&')[0];
+				}
+				
+			}
+		output =output.Replace("_"," ");
+		return GetString(1,260) + output;
 	}
 
 	public string GetFormattedObjectNameUW(ObjectInteraction objInt,int Quantity)
 	{//Eventually this will return things like proper quants etc.
-		return (GetString (4,objInt.item_id));
+
+		string output = GetString (4,objInt.item_id);
+		
+		if ((objInt.isQuant ==true) && (output.Contains("&")))
+		{
+			if ((objInt.Link>1) && (Quantity>1))
+			{//Plural description
+				output= objInt.Link + " " + output.Split ('&')[1];		
+			}
+			else
+			{
+				output= output.Split ('&')[0];
+			}
+		}
+		else
+		{
+			if (output.Contains("&"))
+			{
+				output= output.Split ('&')[0];
+			}
+			
+		}		
+		
+		output =output.Replace("_"," ");
+		return GetString(1,260) + output;
+
 	}
+
+	public string GetFormattedObjectNameUW(ObjectInteraction objInt, string QualityString)
+	{//Eventually this will return things like proper quants etc.
+		string output = GetString (4,objInt.item_id);
+		
+		if ((objInt.isQuant ==true) && (output.Contains("&")))
+		{
+			if (objInt.Link>1)
+			{//Plural description
+				output= objInt.Link + " " + output.Split ('&')[1];		
+			}
+			else
+			{
+				output= output.Split ('&')[0];
+			}
+		}
+		else
+		{
+			if (output.Contains("&"))
+			{
+				output= output.Split ('&')[0];
+			}
+		}
+
+		string isThisAVowel=QualityString.Substring(0,1).ToUpper();
+		if (
+			(isThisAVowel == "A")
+			||
+			(isThisAVowel == "E")
+			||
+			(isThisAVowel == "I")			
+			||
+			(isThisAVowel == "O")			
+			||
+			(isThisAVowel == "U")
+			)
+		{
+			output = output.Replace("a_","an_");
+		}
+		else
+		{
+			output = output.Replace("an_","a_");
+		}
+		output =output.Replace("_", " " + QualityString + " ");
+		return GetString(1,260) + output;
+	}
+
 
 	public string GetSimpleObjectNameUW(ObjectInteraction objInt)
 	{//Eventually this will return things like proper quants etc.
 		return (GetString (4,objInt.item_id));
+	}
+
+	public string TextureDescription(int index)
+	{//TODO:fix floor and wall naming
+		return (GetString(1,260) + " " + GetString (10,index));
 	}
 
 	private bool Load(string fileName)

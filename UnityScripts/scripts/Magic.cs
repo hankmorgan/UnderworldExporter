@@ -2,6 +2,18 @@
 using System.Collections;
 
 public class Magic : MonoBehaviour {
+
+	//Magic spell to be cast on next click in window
+	public string ReadiedSpell;
+	//Runes that the character has picked up and is currently using
+	public bool[] PlayerRunes=new bool[24];
+	public int[] ActiveRunes=new int[3];
+
+
+	public int MaxMana;
+	public int CurMana;
+
+
 	 string[] Runes=new string[]{"An","Bet","Corp","Des",
 								"Ex","Flam","Grav","Hur",
 								"In","Jux","Kal","Lor",
@@ -11,15 +23,8 @@ public class Magic : MonoBehaviour {
 
 	 long SummonCount=0;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+
 
 	public void TestSpell(GameObject caster)
 	{//Test spell for testing spell effects
@@ -354,18 +359,20 @@ public class Magic : MonoBehaviour {
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
-			playerUW.ReadiedSpell= "Ort Jux";
+			ReadiedSpell= "Ort Jux";
 			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
 		}
 		else
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = getRay (caster);
+
+
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
 				float force = 200.0f;
-				playerUW.ReadiedSpell= "";
+				ReadiedSpell= "";
 				GameObject projectile = CreateMagicProjectile("Sprites/objects_023","",ray.GetPoint(dropRange/2.0f), 5);
 				LaunchProjectile(projectile,ray,dropRange,force);
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
@@ -378,18 +385,18 @@ public class Magic : MonoBehaviour {
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
-			playerUW.ReadiedSpell= "Ort Grav";
+			ReadiedSpell= "Ort Grav";
 			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
 		}
 		else
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = getRay (caster);
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
 				float force = 200.0f;
-				playerUW.ReadiedSpell= "";
+				ReadiedSpell= "";
 				GameObject projectile = CreateMagicProjectile("Sprites/objects_021","",ray.GetPoint(dropRange/2.0f), 5);
 				LaunchProjectile(projectile,ray,dropRange,force);
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
@@ -405,12 +412,12 @@ public class Magic : MonoBehaviour {
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			Debug.Log ("ExYlem is ready to cast");
-			playerUW.ReadiedSpell= "Ex Ylem";
+			playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
 			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
 		}
 		else
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			Ray ray = getRay (caster);
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=playerUW.useRange;
 			if (Physics.Raycast(ray,out hit,dropRange))
@@ -698,7 +705,7 @@ public class Magic : MonoBehaviour {
 		
 		
 		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
-		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
+//		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
 		objInteract.WorldString=WorldString;
 		objInteract.InventoryString=InventoryString;
 		objInteract.EquipString=EquipString;
@@ -710,7 +717,7 @@ public class Magic : MonoBehaviour {
 		if (isMoveable==1)
 		{
 			objInteract.CanBePickedUp=true;
-			Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
+			parentObj.AddComponent<Rigidbody>();
 			WindowDetect.FreezeMovement(myObj);
 		}
 		
@@ -729,4 +736,31 @@ public class Magic : MonoBehaviour {
 		}
 		
 	}
+
+	void OnGUI()
+	{
+		if (Event.current.Equals(Event.KeyboardEvent("q")))
+		{//Cast a spell or readies it.
+			if (ReadiedSpell=="")
+			{
+				castSpell(this.gameObject,ActiveRunes[0],ActiveRunes[1],ActiveRunes[2],true);
+			}
+		}
+	}
+
+	Ray getRay(GameObject caster)
+	{
+		Ray ray ;
+		if (caster.GetComponent<UWCharacter>().MouseLookEnabled==true)
+		{
+			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+		}
+		else
+		{
+			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		}
+		return ray;
+	}
 }
+
+

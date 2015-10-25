@@ -119,7 +119,9 @@ public class MusicController : MonoBehaviour {
 
 	void PlayRandom(int[] tracklist)
 	{//Pick a random track to play from the selecte list.
-		int rnd = Random.Range (0,tracklist.GetUpperBound(0));
+
+		int rnd = Random.Range (0,tracklist.GetUpperBound(0)+1);
+		//Debug.Log (rnd);
 	//	Debug.Log ("Picking + " + "Music//" + MainTrackList[rnd]);
 		//Debug.Log ("playing " + MainTrackList[tracklist[rnd]].name);
 		Aud.clip=MainTrackList[tracklist[rnd]];

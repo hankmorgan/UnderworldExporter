@@ -1,18 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ContainerOpened : MonoBehaviour {
+public class ContainerOpened : object_base {
 
 	//public string ContainerTarget; //What container those this widget point back to. blank for player inventory. only matters for the slots
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void CloseChildContainer(Container ClosingParent)
 	{//Recursively closes open child containers
@@ -43,28 +35,28 @@ public class ContainerOpened : MonoBehaviour {
 
 	void OnClick()
 	{
-		UWCharacter playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-		if (pInv.currentContainer=="Gronk")
+		//UWCharacter playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		//PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		if (playerUW.playerInventory.currentContainer==playerUW.name)
 		{//Don't do anything on the top level
-			pInv.ContainerOffset=0;
+			playerUW.playerInventory.ContainerOffset=0;
 			return;
 		}
-		if (pInv.ObjectInHand=="")
+		if (playerUW.playerInventory.ObjectInHand=="")
 		{//Player has no object in their hand. We close up the container.
 			ScrollButtonInventory.ScrollValue=0;
-			pInv.ContainerOffset=0;
-			Container currentContainerObj = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
-			pInv.currentContainer = currentContainerObj.ContainerParent;
+			playerUW.playerInventory.ContainerOffset=0;
+			Container currentContainerObj = playerUW.playerInventory.GetCurrentContainer();//GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			playerUW.playerInventory.currentContainer = currentContainerObj.ContainerParent;
 			currentContainerObj.isOpenOnPanel=false;
 			//Close child containers as well
 			CloseChildContainer (currentContainerObj);
 			//Debug.Log("Current Container is " + pInv.currentContainer);
-			Container DestinationContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
-			if (pInv.currentContainer == "Gronk")
+			Container DestinationContainer = playerUW.playerInventory.GetCurrentContainer();// GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			if (playerUW.playerInventory.currentContainer == "Gronk")
 			{
 				//GetComponent<UISprite>().spriteName="object_blank";
-				GetComponent<UITexture>().mainTexture=pInv.Blank;
+				GetComponent<UITexture>().mainTexture=playerUW.playerInventory.Blank;
 			}
 			else
 			{
@@ -74,22 +66,22 @@ public class ContainerOpened : MonoBehaviour {
 			for (int i = 0; i<8; i++)
 			{
 				string sItem = DestinationContainer.GetItemAt(i);
-				pInv.SetObjectAtSlot(i+11,sItem);
+				playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
 			}
 		}
 		else
 		{
 			//Move the contents out of the container into the parent.
 			//Debug.Log ("Moving contents out of bag");
-			Container CurrentContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
+			Container CurrentContainer = GameObject.Find (playerUW.playerInventory.currentContainer).GetComponent<Container>();
 			Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
-			ObjectInteraction item = GameObject.Find (pInv.ObjectInHand).GetComponent<ObjectInteraction>();
+			ObjectInteraction item = GameObject.Find (playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>();
 			if (item.isQuant==false)
 			{
-				if (DestinationContainer.AddItemToContainer(pInv.ObjectInHand))
+				if (DestinationContainer.AddItemToContainer(playerUW.playerInventory.ObjectInHand))
 				{//Object has moved
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					pInv.ObjectInHand="";
+					playerUW.playerInventory.ObjectInHand="";
 				}
 			}
 			else
@@ -97,10 +89,9 @@ public class ContainerOpened : MonoBehaviour {
 				if (DestinationContainer.AddItemMergedItemToContainer(item.gameObject))
 				{//Object has moved
 					playerUW.CursorIcon= playerUW.CursorIconDefault;
-					pInv.ObjectInHand="";
+					playerUW.playerInventory.ObjectInHand="";
 				}
 			}
-
 		}
 	}
 }

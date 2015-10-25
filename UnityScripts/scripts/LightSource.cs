@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightSource : MonoBehaviour {
+public class LightSource : object_base {
 
 	public int Brightness;
 	public int Duration;
@@ -13,12 +13,8 @@ public class LightSource : MonoBehaviour {
 
 	public const int BaseBrightness = 8;
 	public static int MagicBrightness=0;
-	private ObjectInteraction objInt;
-	private UILabel ml;
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -37,10 +33,9 @@ public class LightSource : MonoBehaviour {
 
 	public void Use()
 	{
-		if (objInt==null)
-		{
-			objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		}
+
+
+
 		if (objInt.PickedUp==false)
 		{
 			if (IsOn==true)
@@ -74,7 +69,7 @@ public class LightSource : MonoBehaviour {
 
 		//Turn on the torch
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
-		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		PlayerInventory pInv = playerUW.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		InventorySlot invSlot = null;
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
 		{
@@ -105,7 +100,6 @@ public class LightSource : MonoBehaviour {
 			else
 			{//Clone the item and move it's clone to the inventory slot
 				GameObject split = Instantiate(this.gameObject);
-				UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 				split.name= split.name+"_"+ playerUW.summonCount++;
 				split.GetComponent<ObjectInteraction>().Link=1;//Increment and decrement the object count as appropiate;
 				objInt.Link--;
@@ -119,23 +113,14 @@ public class LightSource : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log ("No free hand");
+			//Debug.Log ("No free hand");
+			ml.text=playerUW.StringControl.GetString(1,258);
 		}
 		objInt.RefreshAnim();
 	}
 	
 	public void SetOff()
 	{
-		if (objInt==null)
-		{
-			objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		}
-		if(ml==null)
-		{
-			ml =objInt.getMessageLog();
-		}
-		//Turn off the torch
-		//lt.range=LightSource.BaseLight;
 		IsOn=false;
 		objInt.item_id=ItemIdOff;
 		objInt.InvDisplayIndex=ItemIdOff;
@@ -145,17 +130,11 @@ public class LightSource : MonoBehaviour {
 
 
 
-	public void LookAt()
+	public override bool LookAt()
 	{
-		if (objInt==null)
-		{
-			objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		}
-		if(ml==null)
-		{
-			ml =objInt.getMessageLog();
-		}
-		StringController Sc = objInt.getStringController();
-		ml.text = Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
+		//StringController Sc = objInt.getStringController();
+		ml.text =playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+		return true;
 	}
+
 }

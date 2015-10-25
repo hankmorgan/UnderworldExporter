@@ -35,11 +35,11 @@ public class StatsDisplay : MonoBehaviour {
 		CharName.text=playerUW.CharName;
 		CharClass.text=playerUW.CharClass;
 		CharClassLevel.text =playerUW.CharLevel.ToString();
-		CharStr.text=playerUW.STR.ToString();
-		CharDex.text=playerUW.DEX.ToString();
-		CharInt.text=playerUW.INT.ToString();
+		CharStr.text=playerUW.PlayerSkills.STR.ToString();
+		CharDex.text=playerUW.PlayerSkills.DEX.ToString();
+		CharInt.text=playerUW.PlayerSkills.INT.ToString();
 		CharVIT.text = playerUW.CurVIT +"/"+playerUW.MaxVIT;
-		CharMana.text = playerUW.CurMana +"/"+playerUW.MaxMana;
+		CharMana.text = playerUW.PlayerMagic.CurMana +"/"+playerUW.PlayerMagic.MaxMana;
 		CharEXP.text=playerUW.EXP.ToString ();
 		tmpSkillNames="";
 		tmpSkillValues="";
@@ -54,7 +54,7 @@ public class StatsDisplay : MonoBehaviour {
 		for (int i = 0; i<=5;i++)
 		{
 			tmpSkillNames = tmpSkillNames + Skillnames[i+Offset];
-			tmpSkillValues=tmpSkillValues+playerUW.GetSkill(i+Offset);
+			tmpSkillValues=tmpSkillValues+playerUW.PlayerSkills.GetSkill(i+Offset);
 		    if (i!=5)
 			{
 				tmpSkillNames = tmpSkillNames +"\n";

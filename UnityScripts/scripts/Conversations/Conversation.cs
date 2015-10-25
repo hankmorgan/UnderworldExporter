@@ -21,6 +21,10 @@ Comment out play_hunger syntax error
 Make sure Random is correctly set up 
 Implement intrinsic conversations in this class.
 
+
+//Things to do.
+
+Fix the Param arrays being passed into local functions. Especially ones that set the npcs attitude.
 */
 
 public class Conversation : MonoBehaviour {
@@ -274,7 +278,7 @@ public class Conversation : MonoBehaviour {
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
 			{
-				char[] strChars =  StrWords[j].ToCharArray();
+				//char[] strChars =  StrWords[j].ToCharArray();
 				if (StrWords[j].Length+colCounter>=LineWidth)
 				{
 					colCounter=0; 

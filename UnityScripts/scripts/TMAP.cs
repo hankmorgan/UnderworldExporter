@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TMAP : MonoBehaviour {
+public class TMAP : object_base {
 
 
 	public static TextureController tc;
@@ -13,6 +13,7 @@ public class TMAP : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		base.Start ();
 		//isAnimated=true;
 		InitAnimation();
 	}
@@ -72,35 +73,33 @@ public class TMAP : MonoBehaviour {
 		}
 	}
 
- 	public bool LookAt()
+	public override bool LookAt()
 	{
 		if (trigger != "")
 		{
 			ObjectInteraction objIntTrigger = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
-			if (objIntTrigger.ItemType==ObjectInteraction.A_LOOK_TRIGGER)
+			if ( (objIntTrigger.ItemType==ObjectInteraction.A_LOOK_TRIGGER)
+			    || 
+			    (objIntTrigger.ItemType==ObjectInteraction.A_USE_TRIGGER)
+			    )
 				{
 				objIntTrigger.Use ();
 				return true;
 				}
-			else
-			{
-				ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-				UILabel ml =objInt.getMessageLog();
-				StringController Sc = objInt.getStringController();
-				ml.text = Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
-				return true;
-			}
+
 		}
+		ml.text= playerUW.StringControl.TextureDescription(TextureIndex);
 		return true;
+
 	}
 
-	public void Use()
+	public override bool use()
 	{
-//		Debug.Log ("Activating " + trigger);
 		if (trigger != "")
 		{
-			ObjectInteraction objInt = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
-			objInt.Use();
+			ObjectInteraction triggerInt = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
+			triggerInt.Use();
 		}
+		return true;
 	}
 }

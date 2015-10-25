@@ -133,6 +133,12 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 	//////createScriptCall(currobj, x, y, z);
 	}
 
+void RenderUnityEntityBase(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddObj_base(myObj);");
+	}
+
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Runestone
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -1729,7 +1735,7 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 			case -1:	//ignore
 				{return; break; }
 			case 0:	//Model
-				{
+				{//No interactions
 				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 				RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 				break;
@@ -1903,10 +1909,13 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityAnimationOverlay(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case LOCKPICK://TODO
+
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
+							RenderUnityEntityBase(game,x,y,z,currobj,objList,LevelInfo);
 							//EntityCount++;
 							break;
 					}

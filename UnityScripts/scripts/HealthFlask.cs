@@ -28,8 +28,8 @@ public class HealthFlask : MonoBehaviour {
 		}
 		else
 		{//mana flask
-			Level=playerUW.CurMana;
-			MaxLevel=playerUW.MaxMana;
+			Level=playerUW.PlayerMagic.CurMana;
+			MaxLevel=playerUW.PlayerMagic.MaxMana;
 		}
 
 		if ((isHealthDisplay) && (playerUW.Poisoned!=Poisoned))
@@ -86,7 +86,7 @@ public class HealthFlask : MonoBehaviour {
 		}
 		else
 		{//your current mana points are 
-			output= output + "Your current mana points are " +playerUW.CurMana + " out of " + playerUW.MaxMana;
+			output= output + "Your current mana points are " +playerUW.PlayerMagic.CurMana + " out of " + playerUW.PlayerMagic.MaxMana;
 		}
 
 		MessageLog.text =output;

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonHandler : MonoBehaviour {
+public class ButtonHandler : object_base {
 	public string trigger;
 	public int triggerX;
 	public int triggerY;
 	public int state;
 	public int maxstate;
-	public static GameObject player;
+	//public static GameObject player;
 
 	public bool isOn;
 	public string spriteOn;
@@ -17,25 +17,23 @@ public class ButtonHandler : MonoBehaviour {
 	public string[] RotarySprites=new string[8];
 
 	private GameObject triggerObj;
-	private UILabel MessageLog;
+	//private UILabel MessageLog;
 	private ObjectVariables Var;
-	private UWCharacter playerUW;
+	//private UWCharacter playerUW;
 	private SpriteRenderer ButtonSprite;
 
 	public bool SpriteSet;
-	public int item_id;
+	//public int item_id;
 
-	public static StringController SC;	//String controller reference
+	//public static StringController SC;	//String controller reference
 
 	// Use this for initialization
-	void Start () {
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+	protected override void Start () {
+		base.Start();
+
+		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		triggerObj=GameObject.Find (trigger);
 		Var=GetComponent<ObjectVariables>();
-		if (player!=null)
-		{
-			playerUW=player.GetComponent<UWCharacter>();
-		}
 
 		ButtonSprite=this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		if (isRotarySwitch==false)
@@ -54,7 +52,14 @@ public class ButtonHandler : MonoBehaviour {
 			setRotarySprite(state);
 		}
 	}
-	
+
+
+	public override bool use ()
+	{
+		return Activate ();
+	}
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -99,10 +104,6 @@ public class ButtonHandler : MonoBehaviour {
 		//MessageLog.text=name +"exited";
 	}
 
-	//public string LookDescription()
-	//{//Returns the description of this object.
-	//	return SC.GetString("004",item_id.ToString ("000"));
-	//}
 
 	public void LookAt()
 	{
@@ -118,16 +119,16 @@ public class ButtonHandler : MonoBehaviour {
 			}
 	}
 
-	public void Activate()
+	public bool Activate()
 	{
 		if (triggerObj == null)
 		{
 			triggerObj=GameObject.Find (trigger);
 		}
-		if ((player!=null) && (playerUW==null))
-		{
-			playerUW=player.GetComponent<UWCharacter>();
-		}
+		//if ((player!=null) && (playerUW==null))
+		//{
+		//	playerUW=player.GetComponent<UWCharacter>();
+		//}
 
 		//float distance;
 		//distance =Vector3.Distance(transform.position,player.transform.position);
@@ -138,7 +139,7 @@ public class ButtonHandler : MonoBehaviour {
 		targetvars.triggerX=triggerX;
 		targetvars.triggerY=triggerY;
 		targetvars.state=Var.state;
-		triggerObj.SendMessage ("Activate");
+		triggerObj.SendMessage ("Activate");//TODO:Test using a direct call to objectinteracion here?
 		if (Var.state == maxstate)
 		{
 			Var.state=0;
@@ -165,15 +166,7 @@ public class ButtonHandler : MonoBehaviour {
 		{
 			setRotarySprite(state);
 		}
-
-
-
-
-		//}
-		//else
-		//{
-		//	MessageLog.text = "That is too far away to use";
-		//}
+		return true;
 	}
 
 
@@ -194,55 +187,5 @@ public class ButtonHandler : MonoBehaviour {
 		setSprite (RotarySprites[index]);
 	}
 
-/*	void OnMouseDown()
-		{
-		//THIS IS NOT IN USE!!!!!!!!!
-		return;
-		float distance;
-		switch (UWCharacter.InteractionMode)
-			{
-			case 0://Options
-				MessageLog.text = "Nothing will happen in options mode " + name;
-				break;
-			case 1://Talk
-				MessageLog.text = "You can't talk to " + name;
-				break;
-			case 2://Pickup
-				MessageLog.text = "You pick up a " + name;
-				break;
-			case 4://Look
-				MessageLog.text = "You see a " + name;
-				break;
-			case 8://Attack
-				MessageLog.text = "You attack a " + name;
-				break;
-			case 16://Use
-			//distance =Vector3.Distance(transform.position,player.transform.position);
-			//if (distance<=playerUW.InteractionDistance)
-				//{
-				MessageLog.text = "You use a " + name;
-				ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
-				targetvars.triggerX=triggerX;
-				targetvars.triggerY=triggerY;
-				targetvars.state=Var.state;
-				MessageLog.text=name +"_clicked";
-				triggerObj.SendMessage ("Activate");
-				if (Var.state == 8)
-					{
-						Var.state=0;
-					}
-				else
-					{
-						Var.state++;
-					}
-				
-				//}
-			//else
-			//{
-			//	MessageLog.text = "That is too far away to use";
-			//}
-			break;
-		}
-	}*/	
 }
 

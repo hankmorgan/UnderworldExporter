@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DoorControl : MonoBehaviour {
+public class DoorControl : object_base {
 	public bool locked;
 	public int KeyIndex;
 	private bool state;
@@ -9,18 +9,28 @@ public class DoorControl : MonoBehaviour {
 	public bool DoorBusy;
 	public bool Pickable;
 
-	static public UWCharacter playerUW;
+
+	//static public UWCharacter playerUW;
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public override bool use ()
+	{
+		if (playerUW.playerInventory.ObjectInHand !="")
+		{
+			ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			//Clear the object in hand
+			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.playerInventory.ObjectInHand="";
+			return true;	
+		}
+		else
+		{//Normal Usage
+			Activate();
+			return true;
+		}
 	}
 
-	public bool ActivateByObject(GameObject ObjectUsed)
+	public override bool ActivateByObject(GameObject ObjectUsed)
 	{//Code for handling otherobjects used on this object
 	//Doors can be used by keys, picks and spikes.
 		//ObjectInteraction objIntThis = this.GetComponent<ObjectInteraction>();
@@ -33,12 +43,35 @@ public class DoorControl : MonoBehaviour {
 				DoorKey dk = ObjectUsed.GetComponent<DoorKey>();
 				if (dk !=null)
 					{
-						//if(objIntThis.Link==objIntUsed.Owner)//This is a valid key for the door.
+					if (state==true)
+					{
+						//Door is already open
+						ml.text=playerUW.StringControl.GetString (1,6);
+						return true;
+					}
+						
 						if(KeyIndex==dk.KeyId)//This is a valid key for the door.
 						{
-//							Debug.Log ("A key is used to unlock a door");
-							//DoorControl DC=objUseOn.GetComponent<DoorControl>();
 							ToggleLock();
+							if (locked==true)
+								{//Locked message
+								ml.text=playerUW.StringControl.GetString (1,4);
+								}
+							else
+								{//Unlockedmessage
+								ml.text=playerUW.StringControl.GetString (1,5);
+								}
+						}
+					else
+						{
+						if (KeyIndex==53)
+							{//There is no lock
+							ml.text=playerUW.StringControl.GetString (1,3);
+							}
+						else
+							{//That is the wrong key.
+							ml.text=playerUW.StringControl.GetString (1,2);
+							}
 						}
 
 					}					
@@ -47,7 +80,7 @@ public class DoorControl : MonoBehaviour {
 					{
 					if (Pickable==true)
 						{
-						if (playerUW.TrySkill(UWCharacter.SkillPicklock, objIntUsed.Quality))
+						if (playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
 							{
 							UnlockDoor();
 							}
@@ -72,7 +105,7 @@ public class DoorControl : MonoBehaviour {
 	}
 
 
-	public void Activate()
+	public override bool Activate()
 	{
 		//		Debug.Log (this.name + " touched");
 		if (locked==false)
@@ -92,6 +125,7 @@ public class DoorControl : MonoBehaviour {
 		{
 //			Debug.Log(this.name + " is locked");
 		}
+		return true;
 	}
 
 	public void OpenDoor()
@@ -202,6 +236,65 @@ public class DoorControl : MonoBehaviour {
 		DoorBusy=false;
 		door.position = EndPos;
 	}
+
+	public override bool ApplyAttack(int damage)
+	{//TODO:Find out how massive door resist damage
+		objInt.Quality=objInt.Quality-damage;
+		if ((objInt.Quality<=0))
+		{
+			locked=false;
+			OpenDoor();
+		}
+		return true;
+	}
+
+
+
+	public override bool LookAt()
+	{
+		if (isPortcullis==false)
+		{
+			ml.text = playerUW.StringControl.GetFormattedObjectNameUW(objInt,DoorQuality());
+		}
+		else
+		{
+			ml.text = playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+		}
+
+		return true;
+	}
+
+
+
+	private string DoorQuality()
+	{//TODO:The figures here are based on food quality levels!
+		
+		if (objInt.Quality == 0)
+		{
+			return playerUW.StringControl.GetString (5,0);//brken
+		}
+		if ((objInt.Quality >=1) && (objInt.Quality <15))
+		{
+			return playerUW.StringControl.GetString (5,1);//badly damaged
+		}
+		if ((objInt.Quality >=15) && (objInt.Quality <32))
+		{
+			return playerUW.StringControl.GetString (5,2);//damaged
+		}
+		if ((objInt.Quality >=32) && (objInt.Quality <=40))
+		{
+			return playerUW.StringControl.GetString (5,3);//sturdy
+		}
+		
+		if ((objInt.Quality >40) && (objInt.Quality <48))
+		{
+			return playerUW.StringControl.GetString (5,4);//massive?
+		}
+		else
+		{
+			return playerUW.StringControl.GetString (5,5);//massive?
+		}
+	} 
 
 
 }

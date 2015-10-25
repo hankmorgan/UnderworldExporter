@@ -49,8 +49,8 @@ public class ObjectMasters : MonoBehaviour {
 		int i=0;
 		string line;
 		StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
-		string PreviousKey="";
-		string PreviousValue="";
+		//string PreviousKey="";
+		//string PreviousValue="";
 		using (fileReader)
 		{
 			// While there's lines left in the text file, do this:

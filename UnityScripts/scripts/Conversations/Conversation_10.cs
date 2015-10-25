@@ -589,7 +589,7 @@ public class Conversation_10 : Conversation {
 			
 			yield break;
 			
-			break;
+			//break;
 			
 		} // end switch
 		

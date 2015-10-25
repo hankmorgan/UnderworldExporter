@@ -1,16 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Map : MonoBehaviour {
-
+public class Map : object_base {
+	//The inventory item
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public override bool use ()
+	{
+		return OpenMap();
 	}
 
 	public bool OpenMap()
@@ -49,21 +46,33 @@ public class Map : MonoBehaviour {
 		return true;
 	}
 
-	public bool LookAt()
+	public override bool LookAt()
 	{//Generic description of the map
-		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		UILabel ml =objInt.getMessageLog();
-		StringController Sc = objInt.getStringController();
-		//TODO:Figure out the source for you see a..
-		if (objInt.PickedUp==true)
-		{
-			ml.text =  Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt) + "\n" + Sc.GetString(1,151);
-		}
-		else
-		{
-			ml.text =  Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
-		}
-
+		objInt.isQuant=false; //quick bug fix
+			if (objInt.PickedUp==true)
+			{
+				ml.text =  playerUW.StringControl.GetFormattedObjectNameUW(objInt) + "\n" + playerUW.StringControl.GetString(1,151);
+			}
+			else
+			{
+				ml.text =  playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+			}
 		return true;
 	}
+
+		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
+		//UILabel ml =objInt.getMessageLog();
+		//StringController Sc = objInt.getStringController();
+	///	//TODO:Figure out the source for you see a..
+	//	if (objInt.PickedUp==true)
+	//	{
+	//		ml.text =  Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt) + "\n" + Sc.GetString(1,151);
+	//	}
+	//	else
+	//	{
+	//		ml.text =  Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
+	//	}
+
+	//	return true;
+	//}
 }

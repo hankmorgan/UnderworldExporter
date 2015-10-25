@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Container : MonoBehaviour {
+public class Container : object_base {
 
 	//public int NoOfSlots=40;
 	public string[] items=new string[40];
@@ -11,18 +11,12 @@ public class Container : MonoBehaviour {
 	public int NoOfSlots;
 	public int ObjectsAccepted;
 
+//	public static UWCharacter playerUW;
+
 	public bool isOpenOnPanel;
 	//public int itemCount=0;
 	public string ContainerParent;
-	// Use this for initialization
-	void Start () {
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public int MaxCapacity()
 	{
@@ -104,7 +98,7 @@ public class Container : MonoBehaviour {
 	{
 		if (item =="")
 		{
-			Debug.Log(name + ": invalid item for adding");
+			//Debug.Log(name + ": invalid item for adding");
 			return false;
 		}
 		if (index<=39)
@@ -115,7 +109,7 @@ public class Container : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log (name + " is set to an invalid index " + index);
+			//Debug.Log (name + " is set to an invalid index " + index);
 			return false;
 		}
 	}
@@ -141,7 +135,7 @@ public class Container : MonoBehaviour {
 			if (items[i] == objectName)
 				{
 				items[i]="";
-				Debug.Log ("removed " + objectName + " at (" + i + ")");
+				//Debug.Log ("removed " + objectName + " at (" + i + ")");
 				return true;
 				}
 			}
@@ -150,7 +144,7 @@ public class Container : MonoBehaviour {
 
    static public bool AddObjectToContainer(GameObject objInHand, GameObject objUseOn)
 	{
-		Debug.Log ("Adding " + objInHand + " to " + objUseOn);
+		//Debug.Log ("Adding " + objInHand + " to " + objUseOn);
 		Container subContainer = objUseOn.GetComponent<Container>();
 		if (subContainer.AddItemToContainer(objInHand.name))
 		{
@@ -168,178 +162,9 @@ public class Container : MonoBehaviour {
 		}
 	}
 
-	/*
-
-	public string ObjectPickedUp(int slotIndex, string sObjectInHand)
-	{//Returns the game object of the object already in the slot
-		PlayerInventory pInv =GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-		string ExistingObject="";
-
-		switch (slotIndex)
-		{
-		case 0://Helm
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sHelm,slotIndex) == false)
-			{
-				pInv.bHelm=true;
-				ExistingObject=pInv.sHelm;
-				pInv.sHelm=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 1://Chest
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sChest,slotIndex) == false)
-			{
-				pInv.bChest=true;
-				ExistingObject=pInv.sChest;
-				pInv.sChest=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 2://Leggings
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLegs,slotIndex) == false)
-			{
-				pInv.bLegs=true;
-				ExistingObject=pInv.sLegs;
-				pInv.sLegs=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 3://Boots
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sBoots,slotIndex) == false)
-			{
-				pInv.bBoots=true;
-				ExistingObject=pInv.sBoots;
-				pInv.sBoots=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 4://Gloves
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sGloves,slotIndex) == false)
-			{
-				pInv.bGloves=true;
-				ExistingObject=pInv.sGloves;
-				pInv.sGloves=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 5://ShoulderRight
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sRightShoulder,slotIndex) == false)
-			{
-				pInv.bRightShoulder=true;
-				ExistingObject=pInv.sRightShoulder;
-				pInv.sRightShoulder=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 6://ShoulderLeft
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLeftShoulder,slotIndex) == false)
-			{
-				pInv.bLeftShoulder=true;
-				ExistingObject=pInv.sLeftShoulder;
-				pInv.sLeftShoulder=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 7://HandRight
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sRightHand,slotIndex) == false)
-			{
-				pInv.bRightHand=true;
-				ExistingObject=pInv.sRightHand;
-				pInv.sRightHand=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 8://HandLeft
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLeftHand,slotIndex) == false)
-			{
-				pInv.bLeftHand=true;
-				ExistingObject=pInv.sLeftHand;
-				pInv.sLeftHand=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 9://RingRight
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sRightRing,slotIndex) == false)
-			{
-				pInv.bRightRing=true;
-				ExistingObject=pInv.sRightRing;
-				pInv.sRightRing=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		case 10://RingLeft
-			if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sLeftRing,slotIndex) == false)
-			{
-				pInv.bLeftRing=true;
-				ExistingObject=pInv.sLeftRing;
-				pInv.sLeftRing=sObjectInHand;
-			}
-			else
-			{
-				ExistingObject="";
-			}
-			break;
-		default://Inventory Slots 0-7	
-			if ((slotIndex>=11)&&(slotIndex<=18))
-			{
-				if (InventorySlot.InteractTwoObjects (sObjectInHand,pInv.sBackPack[slotIndex-11],slotIndex)==false)
-				{
-					pInv.bBackPack[slotIndex-11]=true;
-					ExistingObject=pInv.sBackPack[slotIndex-11];
-					pInv.sBackPack[slotIndex-11]=sObjectInHand;
-					RemoveItemFromContainer (slotIndex-11);
-					AddItemToContainer (sObjectInHand,slotIndex-11);
-				}
-				else
-				{
-					ExistingObject="";
-				}
-
-		
-			}
-			break;
-		}
-		//	}
-		
-		return ExistingObject;
-		
-	}
-*/
 	public void OpenContainer()
 	{
-
-		PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-		pInv.ContainerOffset=0;
+		playerUW.playerInventory.ContainerOffset=0;
 		ScrollButtonStatsDisplay.ScrollValue=0;
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
@@ -350,27 +175,22 @@ public class Container : MonoBehaviour {
 			}
 		//Sort the container
 		Container.SortContainer(this);
-		//GameObject.Find("ContainerOpened").GetComponent<UISprite>().spriteName=currObjInt.InventoryString;
 		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
-		//transform.parent.FindChild("ContainerOpened").GetComponent<ContainerOpened>().ContainerTarget = pInv.currentContainer;
-		//display the container contents.
-		//Container currObjCont = currObj.GetComponent<Container>();
 		if (this.isOpenOnPanel==false)
 		{
 			this.isOpenOnPanel=true;
-			ContainerParent=pInv.currentContainer;
+			ContainerParent=playerUW.playerInventory.currentContainer;
 		}
-		//pInv.atTopLevel=false;
-		pInv.currentContainer=this.name;
-		if (pInv.currentContainer=="")
+		playerUW.playerInventory.currentContainer=this.name;
+		if (playerUW.playerInventory.currentContainer=="")
 		{
-			pInv.currentContainer="Gronk";
-			this.ContainerParent="Gronk";
+			playerUW.playerInventory.currentContainer=playerUW.name;
+			this.ContainerParent=playerUW.name;
 		}
 		for (int i = 0; i<8; i++)
 		{
 			string sItem = this.GetItemAt(i);
-			pInv.SetObjectAtSlot(i+11,sItem);
+			playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
 		}
 	}
 
@@ -379,7 +199,7 @@ public class Container : MonoBehaviour {
 		int counter;
 		TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
 		WindowDetect.FreezeMovement(this.gameObject);
-		BoxCollider bx = this.gameObject.GetComponent<BoxCollider>();
+		//BoxCollider bx = this.gameObject.GetComponent<BoxCollider>();
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		//objInt.SetWorldDisplay(objInt.GetEquipDisplay());
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
@@ -548,4 +368,58 @@ public class Container : MonoBehaviour {
 			}
 		}
 	}
+
+
+	public override bool use ()
+	{
+		GameObject ObjectInHand=playerUW.playerInventory.GetGameObjectInHand();
+		//TODO:add object to container or open container.
+		//Container cn = this.gameObject.GetComponent<Container>();
+		if (ObjectInHand == null)
+		{//Open the container
+			OpenContainer();
+			return true;
+		}
+		else
+		{//Put the item in the container.
+			bool Valid=true;
+			if (ObjectInHand.GetComponent<Container>() != null)
+			{
+				if (this.gameObject.name == ObjectInHand.GetComponent<Container>().name)
+				{
+					Valid=false;
+					Debug.Log ("Attempt to add a container to itself");
+				}
+			}
+			
+			if (Valid)
+			{
+				if (ObjectInHand.GetComponent<ObjectInteraction>().isQuant==false)
+				{
+					AddItemToContainer(playerUW.playerInventory.ObjectInHand);
+				}
+				else
+				{
+					AddItemMergedItemToContainer(ObjectInHand.gameObject);
+				}
+				
+				if (isOpenOnPanel == true)
+				{//Container is open for display force a refresh.
+					OpenContainer();
+				}
+				playerUW.playerInventory.ObjectInHand= "";
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+	}
+
+
+
 }

@@ -85,7 +85,7 @@ public class Conversation_67 : Conversation {
 	
 	void func_00b1(int[] paramArray, int Start) {
 		
-		npc.npc_attitude = param1[0];//play_hunger;
+		npc.npc_attitude =paramArray[Start];//play_hunger;
 		func_0012();
 	} // end func
 	

@@ -54,17 +54,19 @@ public class ShockCharacter : MonoBehaviour {
 		StringControl=new StringController();
 		StringControl.InitStringController("c:\\uw1_strings.txt");
 		//Initialise some basic references on other objects.
-		ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
+		//ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
 		ObjectInteraction.SC=StringControl;
 		a_text_string_trap.SC=StringControl;
-		ButtonHandler.SC=StringControl;
+	//	ButtonHandler.SC=StringControl;
 		//ObjectInteraction.SC = GameObject.Find ("StringController").GetComponent<StringController>();
-		ButtonHandler.player=this.gameObject;
-		InventorySlot.player=this.gameObject;
+		//ButtonHandler.player=this.gameObject;
+		//InventorySlot.player=this.gameObject;
 		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		WindowDetect.playerUW=this.GetComponent<UWCharacter>();
+	
+	//TODO:Shock character
+		//WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 		
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();

@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RuneBag : MonoBehaviour {
+public class RuneBag : object_base {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public override bool use ()
+	{
+		GameObject ObjectInHand = playerUW.playerInventory.GetGameObjectInHand ();
+		if (ObjectInHand  != null)
+		{
+			//Try and see if I can add the object to the rune bag.
+			return ActivateByObject(ObjectInHand);
+		}
+		else
+		{
+			//open the rune bag if nothing in hand
+			Activate();
+			return true;
+		}
 	}
 
 	void OpenRuneBag()
@@ -24,36 +31,27 @@ public class RuneBag : MonoBehaviour {
 		//}
 	}
 
-	public void Activate()
+	public override bool Activate()
 	{
 		//Open the rune bag in the UI
 		OpenRuneBag();
-
-	}
-
-	public bool LookAt()
-	{
-		//Code for when looking at food. Should one day return quantity and smell properly
-		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		UILabel ml =objInt.getMessageLog();
-		StringController Sc = objInt.getStringController();
-		ml.text = Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
 		return true;
+
 	}
 
-	public bool ActivateByObject(GameObject ObjectUsed)
+
+	public override bool ActivateByObject(GameObject ObjectUsed)
 	{
 		//Test for a valid rune being used on the bag and if so add the rune to the players inventory.
 		if(ObjectUsed.GetComponent<RuneStone>() !=null)
 		{
-			UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-			PlayerInventory pInv =GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-			playerUW.Runes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
+			//UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+			//PlayerInventory pInv =GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+			playerUW.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
 			//Add rune to rune bag.
 			GameObject.Destroy(ObjectUsed);
-			pInv.ObjectInHand="";
+			playerUW.playerInventory.ObjectInHand="";
 			playerUW.CursorIcon= playerUW.CursorIconDefault;
-			//playerUW.CurrObjectSprite = "";
 			return true;
 		}
 		else

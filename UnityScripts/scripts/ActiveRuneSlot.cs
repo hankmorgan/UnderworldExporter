@@ -14,15 +14,12 @@ public class ActiveRuneSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerUW.ActiveRunes[SlotNumber] != setRune)
+		if (playerUW.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
 		{
-			setRune= playerUW.ActiveRunes[SlotNumber];
-			//Debug.Log ("setting sprite to " +"rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2" ));
-			if (playerUW.ActiveRunes[SlotNumber]!=-1)
+			setRune= playerUW.PlayerMagic.ActiveRunes[SlotNumber];
+			if (playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
 			{
-				//label.spriteName= "rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2");
-//				Debug.Log ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
-				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + playerUW.ActiveRunes[SlotNumber].ToString("D2"));
+				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + playerUW.PlayerMagic.ActiveRunes[SlotNumber].ToString("D2"));
 			}
 			else
 			{
@@ -35,9 +32,9 @@ public class ActiveRuneSlot : MonoBehaviour {
 	void OnClick()
 	{
 	//cast spell. Readies it if possible.
-		if (playerUW.ReadiedSpell=="")
+		if (playerUW.PlayerMagic.ReadiedSpell=="")
 		{
-			playerUW.gameObject.GetComponent<Magic>().castSpell(playerUW.gameObject,playerUW.ActiveRunes[0],playerUW.ActiveRunes[1],playerUW.ActiveRunes[2],true);
+			playerUW.gameObject.GetComponent<Magic>().castSpell(playerUW.gameObject,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2],true);
 		}
 	}
 }

@@ -4,8 +4,10 @@ using RAIN.BehaviorTrees;
 using RAIN.Core;
 using RAIN.Minds;
 
-public class NPC : MonoBehaviour {
+public class NPC : object_base {
 
+	//TODO: these need to match the UW npc_goals
+	//The behaviour trees need to be updated too.
 	public const int AI_STATE_IDLERANDOM = 0;
 	public const int AI_STATE_COMBAT = 1;
 	public const int AI_STATE_DYING = 2;
@@ -34,21 +36,21 @@ public class NPC : MonoBehaviour {
 	//TODO: The state should be replaces with a combination of the above variables.
 	public int state=0; //Set state when not in combat or dying.
 
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 	private static bool playerUWReady;
 	private GoblinAI Gob;
 	private AIRig ai;
 
 	// Use this for initialization
 	void Start () {
+		base.Start();
+
 		Gob = this.GetComponent<GoblinAI>();
 		ai = this.GetComponentInChildren<AIRig>();
 		ai.AI.Body=this.gameObject;
 
-			playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-
-			ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
-			//ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<10;
+		//playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
 	}
 	
 	// Update is called once per frame
@@ -100,7 +102,7 @@ public class NPC : MonoBehaviour {
 
 
 
-	public bool ApplyAttack(int damage)
+	public override bool ApplyAttack(int damage)
 	{
 		//npc_attitude=0;
 		npc_attitude=0;
@@ -165,8 +167,40 @@ public class NPC : MonoBehaviour {
 				StartCoroutine(x.main ());
 			}
 		}
-
-
-		//Debug.Log (x.val);
 	}
+
+	public override bool LookAt ()
+	{
+		string output = playerUW.StringControl.GetFormattedObjectNameUW(objInt,NPCMoodDesc());
+		if ((npc_whoami >=1) && (npc_whoami<255)) 
+		{
+			output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
+		}
+		ml.text=output;
+		return true;
+	}
+
+
+
+	private string NPCMoodDesc()
+	{
+		//Gives a mood string for NPCs
+		//004€005€096€hostile
+			//004€005€097€upset
+				//004€005€098€mellow
+				//004€005€099€friendly
+		switch (npc_attitude)
+		{
+		case 0:
+			return playerUW.StringControl.GetString (5,96);break;
+		case 1:
+			return playerUW.StringControl.GetString (5,97);break;
+		case 2:
+			return playerUW.StringControl.GetString (5,98);break;
+		default:
+			return playerUW.StringControl.GetString (5,99);break;
+
+		}
+	}
+
 }

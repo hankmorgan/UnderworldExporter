@@ -6,13 +6,13 @@ public class InventorySlot : MonoBehaviour {
 	private UILabel MessageLog;
 	private UISprite slot;
 	//public int InteractionMode;
-	public static GameObject player;
+	//public static GameObject player;
 	public static UWCharacter playerUW;
 	//public static GameObject currInventorySlot;
 	//public GameObject ObjectInSlot;
 	public string ObjectSpriteString;
 	public Texture2D ObjectSprite;
-	private PlayerInventory pInv;
+	//private PlayerInventory pInv;
 	public GameObject GronkSlot;
 	public int slotIndex;//What index of inventory slot is this
 	public int SlotCategory; //What type of item is in the slot. Eg armour, rings, boots and general etc.
@@ -34,213 +34,41 @@ public class InventorySlot : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	//void Update () {
-		//if (playerUW==null)
-		//{
-		//	playerUW=player.GetComponent<UWCharacter>();
-		//}
-	//}
-
-
-
-	//void OnMouseEnter()
-	//{
-	//	MessageLog.text=name +"entered";
-	//}
-	
-	//void OnTriggerEnter()
-	//{
-	//	//counter++;
-	//	MessageLog.text=name +"triggered";
-	//}
-	
-//	void OnHover( bool isOver )
-//	{
-//		if( isOver )
-//		{
-//			InventorySlot.currInventorySlot=this.gameObject;
-//		//	playerUW.currInventorySlot=this.gameObject;
-//			//MessageLog.text=name + "Hovered over";
-//		}
-//		else
-//		{
-//			InventorySlot.currInventorySlot=null;
-//			//playerUW.currInventorySlot=null;
-//			//MessageLog.text=name + "Hovered out";
-//		}
-//	}
-
-	/*
-	void PickupFromSlot()
-	{
-		//Debug.Log ("PickupfromSlot");
-		pInv = player.GetComponent<PlayerInventory>();
-		Container SubContainer;
-		string sNewObj;
-		
-		if (pInv.currentContainer=="Gronk")
-		{
-			sNewObj= pInv.ObjectPickedUp(slotIndex,pInv.ObjectInHand);
-		}
-		else
-		{
-			string slotToTest= pInv.GetObjectAtSlot(slotIndex) ;
-			if (slotToTest!="")
-			{
-				Debug.Log ("Testing slot (" + slotIndex + ")" + slotToTest );
-				
-				if (GameObject.Find (slotToTest).GetComponent<ObjectInteraction>().isContainer==true)
-				{
-					//test if object is already open in inventory;
-					if (GameObject.Find (slotToTest).GetComponent<Container>().isOpenOnPanel==true)
-					{
-						Debug.Log ("Attempt to to pick up an already open container at " + slotToTest);
-						return;
-					}
-				}
-			}
-
-			SubContainer = GameObject.Find (pInv.currentContainer).GetComponent<Container>();
-
-			if (slotIndex >=11)
-			{
-			Container TestContainer = GameObject.Find (pInv.ObjectInHand).GetComponent<Container>();
-				if (TestContainer != null)
-				{
-					if (TestContainer.name == pInv.currentContainer)
-					{
-						Debug.Log ("Cannot add a container to itself");
-						return;
-					}
-				}
-			}
-
-			sNewObj = SubContainer.ObjectPickedUp (slotIndex,pInv.ObjectInHand);
-		}
-		
-		if (sNewObj=="")
-		{
-			playerUW.CursorIcon= playerUW.CursorIconDefault;
-			playerUW.CurrObjectSprite = "";
-			pInv.ObjectInHand="";
-		}
-		else
-		{
-			GameObject NewObj ;
-			NewObj = GameObject.Find (sNewObj);
-			if (NewObj != null)
-			{
-				playerUW.CursorIcon= NewObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-				playerUW.CurrObjectSprite = NewObj.GetComponent<ObjectInteraction>().InventoryString;
-				pInv.ObjectInHand=sNewObj;
-			}
-			else
-			{
-				Debug.Log ("unable to find " + sNewObj);
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
-				pInv.ObjectInHand="";
-			}
-			
-		}
-	}
-
-
-
-*/
-
-
-
-
 	void UseFromSlot()
 	{
-		//Debug.Log ("UseFromSlot");
-		pInv = player.GetComponent<PlayerInventory>();
-		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		string ObjectName=playerUW.playerInventory.GetObjectAtSlot(slotIndex); //pInv.GetObjectAtSlot(slotIndex);
 		if (ObjectName !="")
 		{
 			GameObject currObj = GameObject.Find (ObjectName);
 			//Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
-			//TODO move this code to objinteract.activate()
-			/*if (currObjInt.isContainer)
-			{//Use a container
-				if (pInv.ObjectInHand == "")
-				{
-					OpenContainer (currObj, currObjInt);
-				}
-				else
-				{
-					currObjInt.Activate();
-					//pInv.InteractTwoObjects(pInv.ObjectInHand,ObjectName,slotIndex);
-				}
-				return;
-			}*/
-
-			/*
-			if (currObjInt.isRuneBag)
-			{//Use a rune bag
-				if (pInv.ObjectInHand == "")
-				{
-					OpenRuneBag();
-				}
-				else
-				{
-					PickupFromSlot();
-				}
-				return;
-			}
-			*/
-
-
 			currObjInt.Use();
-			//use an object. change the cursor
-			///if (currObjInt.Use()==false)
-			//{
-			//	playerUW.CursorIcon= currObj.GetComponent<ObjectInteraction>().InventoryIcon.texture;
-			//	playerUW.CurrObjectSprite = currObj.GetComponent<ObjectInteraction>().InventoryString;
-			//	pInv.ObjectInHand=ObjectName;
-			//}
 		}
 	}
 
 
 	void LookFromSlot()
 	{
-		Debug.Log ("LookFromSlot");
-		pInv = player.GetComponent<PlayerInventory>();
-		string ObjectName= pInv.GetObjectAtSlot(slotIndex);
+		string ObjectName= playerUW.playerInventory.GetObjectAtSlot(slotIndex);
 		GameObject objLookedAt = GameObject.Find (ObjectName);
-		//if (ObjectName !="")
-		//{
-		//If object has a readable component then activate(and read) otherwise give a generic description.
+
 		if(objLookedAt.GetComponent<Readable>()!= null)
 			{
 			objLookedAt.GetComponent<ObjectInteraction>().Use();
 			}
 		else
 			{
-			//MessageLog.text="You see a " + pInv.GetObjectDescAtSlot(slotIndex);
 			objLookedAt.GetComponent<ObjectInteraction>().LookDescription();
 			}
-
-			//MessageLog.text="You see a " + ObjectName;
-		//}
-		//	return;
 	}
 
 	void OnClick()
 	{
-		Debug.Log(this.name + " clicked");
 		bool leftClick=true;
-		//Debug.Log (UICamera.currentTouchID);
 		if (UICamera.currentTouchID == -2)
 		{
 			leftClick=false;
 		}
-		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
-		//Container SubContainer;
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModeTalk://talk
@@ -299,9 +127,9 @@ public class InventorySlot : MonoBehaviour {
 	void ConversationPickup(bool isLeftClick)
 	{
 
-		Debug.Log("conversationpickup");
-		pInv = player.GetComponent<PlayerInventory>();
-		string objectInSlot = pInv.GetObjectAtSlot(slotIndex);
+		//Debug.Log("conversationpickup");
+		//pInv = player.GetComponent<PlayerInventory>();
+		string objectInSlot = playerUW.playerInventory.GetObjectAtSlot(slotIndex);
 		//Check if the slot has a container first.
 		if (objectInSlot!="")
 		{
@@ -316,9 +144,9 @@ public class InventorySlot : MonoBehaviour {
 
 
 
-		if (pInv.ObjectInHand != "")
+		if (playerUW.playerInventory.ObjectInHand != "")
 		{
-			ObjectInteraction objInt = GameObject.Find (pInv.ObjectInHand).GetComponent<ObjectInteraction>();
+			ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
 			{//Slot is not a general use on andThis item type does not go in this slot.
 				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
@@ -329,22 +157,14 @@ public class InventorySlot : MonoBehaviour {
 			//put the object in hand in this slot.
 			if (objectInSlot=="")
 			{//Empty slot
-				//objectInSlot=pInv.ObjectInHand;
-				pInv.SetObjectAtSlot(slotIndex, pInv.ObjectInHand);
-				pInv.ObjectInHand="";
-				//SlotImage.mainTexture=playerUW.CursorIcon;
+				playerUW.playerInventory.SetObjectAtSlot(slotIndex,  playerUW.playerInventory.ObjectInHand);
+				playerUW.playerInventory.ObjectInHand="";
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
 			}
 			else
 			{//Swap the objects
-				GameObject objInSlot=GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
-				pInv.SwapObjects (objInSlot,slotIndex,pInv.ObjectInHand);
-				//string tmp;
-				//tmp = objectInSlot;
-				//objectInSlot=pInv.ObjectInHand;
-				//pInv.ObjectInHand=tmp;
-				//playerUW.CursorIcon= GameObject.Find(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-				
+				GameObject objInSlot=GameObject.Find (playerUW.playerInventory.GetObjectAtSlot(slotIndex));
+				playerUW.playerInventory.SwapObjects (objInSlot,slotIndex, playerUW.playerInventory.ObjectInHand);
 			}
 			
 		}
@@ -357,21 +177,20 @@ public class InventorySlot : MonoBehaviour {
 			else
 			{
 				//Pickup the object in the slot
-				pInv.ObjectInHand=objectInSlot;
-				playerUW.CursorIcon= GameObject.Find(pInv.ObjectInHand).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				playerUW.playerInventory.ObjectInHand=objectInSlot;
+				playerUW.CursorIcon= GameObject.Find( playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				//objectInSlot="";
 				if (this.slotIndex>=11)
 				{
-					Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-					cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+					Container cn = GameObject.Find( playerUW.playerInventory.currentContainer).GetComponent<Container>();
+					cn.RemoveItemFromContainer( playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
 				}
-				pInv.ClearSlot(this.slotIndex);
-				//SlotImage.mainTexture=Blank;
+				playerUW.playerInventory.ClearSlot(this.slotIndex);
 			}
 			
 		}
 
-		pInv.Refresh ();
+		playerUW.playerInventory.Refresh ();
 	}
 
 
@@ -379,12 +198,12 @@ public class InventorySlot : MonoBehaviour {
 	void LeftClickPickup()
 	{//Code for when I left click in pickup mode
 
-		pInv = player.GetComponent<PlayerInventory>();
+		//pInv = player.GetComponent<PlayerInventory>();
 		GameObject ObjectUsedOn=null;
 		bool DoNotPickup=false;
-		if (pInv.ObjectInHand !="")
-			{
-			ObjectInteraction objInt = GameObject.Find (pInv.ObjectInHand).GetComponent<ObjectInteraction>();
+		if ( playerUW.playerInventory.ObjectInHand !="")
+			{ 
+			ObjectInteraction objInt =playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
 				{//Slot is not a general use on andThis item type does not go in this slot.
 					Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
@@ -393,7 +212,7 @@ public class InventorySlot : MonoBehaviour {
 				
 				if (objInt.isQuant==true)
 					{
-					ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+					ObjectUsedOn = GameObject.Find (playerUW.playerInventory.GetObjectAtSlot(slotIndex));
 					if (ObjectUsedOn !=null)
 						{
 						if (objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id)
@@ -401,7 +220,7 @@ public class InventorySlot : MonoBehaviour {
 								//merge the items
 								ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
 								playerUW.CursorIcon= playerUW.CursorIconDefault;
-								pInv.ObjectInHand="";
+								playerUW.playerInventory.ObjectInHand="";
 								Destroy(objInt.gameObject);
 								return;
 							}
@@ -409,43 +228,43 @@ public class InventorySlot : MonoBehaviour {
 					}
 			}
 
-		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
+		if (playerUW.playerInventory.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
 			if (DoNotPickup==false)	
 				{
-				pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
+				playerUW.playerInventory.SetObjectAtSlot(slotIndex,playerUW.playerInventory.ObjectInHand);
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				pInv.ObjectInHand="";
+				playerUW.playerInventory.ObjectInHand="";
 				}
 			//PickupFromSlot();
 			}
 		else
 			{
 			//Get the object at the slot and test it's activation.
-			ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			ObjectUsedOn = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 			if (ObjectUsedOn.GetComponent<ObjectInteraction>().Use()==false)
 				{//if nothing happened when I clicked on the object at the slot.
-					if (pInv.ObjectInHand != "")
+				if (playerUW.playerInventory.ObjectInHand != "")
 						{
 						//TODO: Make sure this works with Equipment slots
 						//No effect occurred. Swap the two objects.
 					if (DoNotPickup==false)
 						{
-						pInv.SwapObjects(ObjectUsedOn,slotIndex,pInv.ObjectInHand);
+						playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,playerUW.playerInventory.ObjectInHand);
 						}
 					}
 					else
 						{//Pick up the item at that slot.
 						//TODO: Make this work with Equipment slots
-						pInv.ObjectInHand= ObjectUsedOn.name;
+						playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
 						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						//playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 							{
-							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+							Container cn = GameObject.Find(playerUW.playerInventory.currentContainer).GetComponent<Container>();
+							cn.RemoveItemFromContainer(playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
 							}
-						pInv.ClearSlot(this.slotIndex);
+						playerUW.playerInventory.ClearSlot(this.slotIndex);
 					}
 				}
 			}
@@ -454,12 +273,12 @@ public class InventorySlot : MonoBehaviour {
 
 	void RightClickPickup()
 	{	
-		pInv = player.GetComponent<PlayerInventory>();
+		//pInv = player.GetComponent<PlayerInventory>();
 		GameObject ObjectUsedOn=null;//The object at the clicked slot
 		bool DoNotPickup=false;
-		if (pInv.ObjectInHand !="")
+		if (playerUW.playerInventory.ObjectInHand !="")
 		{
-			ObjectInteraction objInt = GameObject.Find (pInv.ObjectInHand).GetComponent<ObjectInteraction>();
+			ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand ().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
 			{//Slot is not a general use on andThis item type does not go in this slot.
 				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
@@ -467,7 +286,7 @@ public class InventorySlot : MonoBehaviour {
 			}
 			if (objInt.isQuant==true)
 			{
-				ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+				ObjectUsedOn = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 				if (ObjectUsedOn !=null)
 				{
 					if (objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id)
@@ -475,7 +294,7 @@ public class InventorySlot : MonoBehaviour {
 						//merge the items
 						ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
 						playerUW.CursorIcon= playerUW.CursorIconDefault;
-						pInv.ObjectInHand="";
+						playerUW.playerInventory.ObjectInHand="";
 						Destroy(objInt.gameObject);
 						return;
 					}
@@ -483,56 +302,55 @@ public class InventorySlot : MonoBehaviour {
 			}
 		}
 		//Code for when I right click in pickup mode.
-		if (pInv.GetObjectAtSlot(slotIndex) !="")
+		if (playerUW.playerInventory.GetObjectAtSlot(slotIndex) !="")
 			{//Special case for opening containers in pickup mode.
-				ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
-				if ((pInv.ObjectInHand==""))
+				ObjectUsedOn = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
+				if ((playerUW.playerInventory.ObjectInHand==""))
 				{
 					if (ObjectUsedOn.GetComponent<Container>() !=null)
 					{
-						pInv.ObjectInHand= ObjectUsedOn.name;
+						playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
 						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-						//playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 						{
-							Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-							cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+						//Container cn = //;GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+						playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
 						}
-						pInv.ClearSlot(this.slotIndex);
+						playerUW.playerInventory.ClearSlot(this.slotIndex);
 						return;
 					}
 				}
 			}
 
-		if (pInv.GetObjectAtSlot(slotIndex)=="")//No object in slot
+		if (playerUW.playerInventory.GetObjectAtSlot(slotIndex)=="")//No object in slot
 			{
 			if (DoNotPickup==false)
 				{
-				pInv.SetObjectAtSlot(slotIndex,pInv.ObjectInHand);
+				playerUW.playerInventory.SetObjectAtSlot(slotIndex,playerUW.playerInventory.ObjectInHand);
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				pInv.ObjectInHand="";
+				playerUW.playerInventory.SetObjectInHand("");// .ObjectInHand="";
 				}
 			}
 		else
 			{
 			bool ObjectActivated =false;
 			//Get the object at the slot and test it's activation.
-			ObjectUsedOn = GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
+			ObjectUsedOn = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 			//When right clicking only try to activate when an object in in the hand
-			if (pInv.ObjectInHand !="")
+			if (playerUW.playerInventory.GetObjectInHand() !="")
 				{
 				ObjectActivated = ObjectUsedOn.GetComponent<ObjectInteraction>().Use();
 				}
 			if (ObjectActivated==false)
 				{//if nothing happened when I clicked on the object at the slot with something in hand.
-					if (pInv.ObjectInHand != "")
+				if (playerUW.playerInventory.GetObjectInHand() != "")
 					{
 						if (DoNotPickup==false)
 							{
 							//TODO: Make sure this works with Equipment slots
 							//No effect occurred. Swap the two objects.
-							pInv.SwapObjects(ObjectUsedOn,slotIndex,pInv.ObjectInHand);
-							pInv.Refresh();
+							playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,playerUW.playerInventory.ObjectInHand);
+							playerUW.playerInventory.Refresh();
 							}
 					}
 					else
@@ -542,14 +360,16 @@ public class InventorySlot : MonoBehaviour {
 						{
 						if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant)&&(ObjectUsedOn.GetComponent<ObjectInteraction>().Link==1)))
 							{//Is either not a quant or is a quantity of 1
-							pInv.ObjectInHand= ObjectUsedOn.name;
+							playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
 							playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 							if (this.slotIndex>=11)
 							{
-								Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-								cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+
+								playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
+								//Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+								//cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 							}
-							pInv.ClearSlot(this.slotIndex);
+							playerUW.playerInventory.ClearSlot(this.slotIndex);
 							}
 						else
 							{
@@ -574,7 +394,7 @@ public class InventorySlot : MonoBehaviour {
 		Time.timeScale=1.0f;
 
 		Debug.Log ("Value summited to slot");
-		PlayerInventory pInv = player.GetComponent<PlayerInventory>();
+		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
 		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
 		Debug.Log (inputctrl.text);
 		int quant= int.Parse(inputctrl.text);
@@ -586,14 +406,15 @@ public class InventorySlot : MonoBehaviour {
 		{//Just do a normal pickup.
 			if (quant >= QuantityObj.GetComponent<ObjectInteraction>().Link)
 			{
-				pInv.ObjectInHand= QuantityObj.name;
+				playerUW.playerInventory.ObjectInHand= QuantityObj.name;
 				playerUW.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				if (this.slotIndex>=11)
 				{
-					Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-					cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
+					playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
+					//Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
+					//cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 				}
-				pInv.ClearSlot(this.slotIndex);
+				playerUW.playerInventory.ClearSlot(this.slotIndex);
 			}
 			else
 			{
@@ -603,7 +424,7 @@ public class InventorySlot : MonoBehaviour {
 				Split.name = Split.name+"_"+playerUW.summonCount++;
 				Split.transform.parent=this.transform.parent;
 				QuantityObj.GetComponent<ObjectInteraction>().Link=QuantityObj.GetComponent<ObjectInteraction>().Link-quant;
-				pInv.ObjectInHand= Split.name;
+				playerUW.playerInventory.ObjectInHand= Split.name;
 				playerUW.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				QuantityObj=null;//Clear out to avoid weirdness.
 			}
@@ -611,88 +432,13 @@ public class InventorySlot : MonoBehaviour {
 	}
 
 
-	void OpenRuneBag()
-	{
+//	void OpenRuneBag()
+//	{
 		//chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
 		//if (chainControl!=null)
 		//{
-		chains.ActiveControl=2;
+//		chains.ActiveControl=2;
 			//chainControl.ActiveControl=2;
 		//}
-	}
-
-//	void OnClick()
-//	{
-	
-		//MessageLog.text=  name + "clicked1";
-//		if (playerUW.CurrObjectSprite!="")
-//		{//Player is holding something.
-//			if (ObjectInSlot ==null)
-//			{
-				//There is nothing in the slot
-//				slot.spriteName=playerUW.CurrObjectSprite;
-//				ObjectInSlot=playerUW.ObjectInHand;
-//				playerUW.currInventorySlot=null;
-//				playerUW.CurrObjectSprite=null;
-//				playerUW.CursorIcon=playerUW.CursorIconDefault;
-//			}
-//			else
-//			{
-				//There is something in the slot ->swap it 
-//			}
-
-//		}
-
-
-//		MessageLog.text=  name + "clicked";
 //	}
-
-	/**
-	public static bool InteractTwoObjects(string sObjectInHand, string sObjectUsedOn,int slotIndex)
-	{//How slots act when objects are used on them.
-		PlayerInventory pinv = playerUW.gameObject.GetComponent<PlayerInventory>();
-		//Debug.Log ("Interacting " + sObjectInHand + " and " + sObjectUsedOn);
-		//returns true if they have an effect on each other.
-		if ((sObjectInHand !="") && (sObjectUsedOn !=""))
-		{//Object is being used on something.
-			GameObject objInHand= GameObject.Find (sObjectInHand);
-			GameObject objUseOn = GameObject.Find (sObjectUsedOn);
-			if(objUseOn.GetComponent<ObjectInteraction>() ==null)
-			{//Object has no interaction component.
-				pinv.ObjectInHand="";
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.CurrObjectSprite = "";
-				return false;
-			}
-			else
-			{//Object has an interaction. activate it.
-				return objUseOn.GetComponent<ObjectInteraction>().Activate();
-
-			}
-		}
-		else
-		{//Object is just being placed in a slot. 
-			if (sObjectInHand!="")
-			{
-				GameObject objInHand= GameObject.Find (sObjectInHand);
-				//Container subContainer = objUseOn.GetComponent<Container>();
-				if (objInHand.GetComponent<ObjectInteraction>().isContainer)
-				{
-					//PlayerInventory pInv = GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
-					Container subContainer=objInHand.GetComponent<Container>();
-					if (slotIndex >=11)
-					{//Object is being added to a bag container
-						subContainer.ContainerParent=pinv.currentContainer;
-					}
-					else
-					{//object is being added to an equipment slot
-						subContainer.ContainerParent="Gronk";
-					}
-					
-				}
-			}
-			return false;
-		}
-	}
-	*/
 }
