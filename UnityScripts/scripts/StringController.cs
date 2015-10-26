@@ -40,7 +40,13 @@ public class StringController : MonoBehaviour {
 	public string GetObjectNounUW(ObjectInteraction objInt)
 	{//The the single noun
 	
-		string output = GetString (4,objInt.item_id);
+		return GetObjectNounUW(objInt.item_id);
+	}
+
+	public string GetObjectNounUW(int item_id)
+	{//The the single noun
+		
+		string output = GetString (4,item_id);
 		if (output.Contains("&"))
 		{
 			output= output.Split ('&')[0];
@@ -155,10 +161,23 @@ public class StringController : MonoBehaviour {
 		return GetString(1,260) + output;
 	}
 
+	public string GetSimpleObjectNameUW(int item_id)
+	{//Without quants.
+		string output = GetString (4,item_id);
+		if (output.Contains("&"))
+		{
+			output= output.Split ('&')[0];
+		}
+
+		return (output.Replace ("_"," "));
+	}
+
+
 
 	public string GetSimpleObjectNameUW(ObjectInteraction objInt)
-	{//Eventually this will return things like proper quants etc.
-		return (GetString (4,objInt.item_id));
+	{//Without quants.
+
+		return GetSimpleObjectNameUW(objInt.item_id);
 	}
 
 	public string TextureDescription(int index)

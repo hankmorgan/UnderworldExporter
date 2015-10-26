@@ -30,39 +30,48 @@ public class RuneSlot : MonoBehaviour {
 	}
 
 
-	public static string GetRuneName(int index)
-	{
-		return Runes[index];
-	}
+	//public static string GetRuneName(int index)
+	//{
+	//	return Runes[index];
+	//}
 
 	void OnClick()
 	{
+
 		if (playerUW.PlayerMagic.PlayerRunes[SlotNumber] == false)
 		{
 			return;//Slot is unfilled
 		}
 		else
 		{
-			//add the rune to the first available active slot.
-			//If all the slots are in use then push the stack down.
-			if (playerUW.PlayerMagic.ActiveRunes[0]==-1)
-			{
-				playerUW.PlayerMagic.ActiveRunes[0]=SlotNumber;
+			if (UICamera.currentTouchID==-1)
+			{//left click select the rune.
+				//add the rune to the first available active slot.
+				//If all the slots are in use then push the stack down.
+				if (playerUW.PlayerMagic.ActiveRunes[0]==-1)
+				{
+					playerUW.PlayerMagic.ActiveRunes[0]=SlotNumber;
+				}
+				else if(playerUW.PlayerMagic.ActiveRunes[1]==-1)
+				{
+					playerUW.PlayerMagic.ActiveRunes[1]=SlotNumber;
+				}
+				else if(playerUW.PlayerMagic.ActiveRunes[2]==-1)
+				{
+					playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
+				}
+				else
+				{//No free slot. Push everything down.
+					playerUW.PlayerMagic.ActiveRunes[0]=playerUW.PlayerMagic.ActiveRunes[1];
+					playerUW.PlayerMagic.ActiveRunes[1]=playerUW.PlayerMagic.ActiveRunes[2];
+					playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
+				}
 			}
-			else if(playerUW.PlayerMagic.ActiveRunes[1]==-1)
-			{
-				playerUW.PlayerMagic.ActiveRunes[1]=SlotNumber;
-			}
-			else if(playerUW.PlayerMagic.ActiveRunes[2]==-1)
-			{
-				playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
-			}
-			else
-			{//No free slot. Push everything down.
-				playerUW.PlayerMagic.ActiveRunes[0]=playerUW.PlayerMagic.ActiveRunes[1];
-				playerUW.PlayerMagic.ActiveRunes[1]=playerUW.PlayerMagic.ActiveRunes[2];
-				playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
+		else
+			{//right click id the rune.
+				playerUW.GetMessageLog ().text = "You see " + playerUW.StringControl.GetSimpleObjectNameUW(232+SlotNumber);
 			}
 		}
+
 	}
 }

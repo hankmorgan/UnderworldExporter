@@ -107,7 +107,8 @@ public class Magic : MonoBehaviour {
 		}//IBM
 		case "Rel Des Por"://Slow Fall
 		{
-			Debug.Log(MagicWords+ " Slow Fall Cast");
+			//Debug.Log(MagicWords+ " Slow Fall Cast");
+			cast_RelDesPor(caster);
 			break;
 		}//RDP
 		case "In Sanct"://Thick Skin
@@ -440,7 +441,7 @@ public class Magic : MonoBehaviour {
 		else
 		{
 			//Debug.Log ("Your incantation failed");
-			caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
+			SpellIncantationFailed(caster);
 		}
 	}
 	
@@ -454,8 +455,7 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			//Debug.Log ("Your incantation failed");
-			caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
+			SpellIncantationFailed(caster);
 		}
 	}
 	
@@ -533,10 +533,26 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
+			SpellIncantationFailed(caster);
 //			Debug.Log ("Your incantation failed");
 		}
 	}
+
+
+	void cast_RelDesPor(GameObject caster)
+	{//SLowfall
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		
+		if (SpellEffectSlot != -1)
+		{
+			Cast_SlowFall (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_SlowFall,SpellEffectSlot,3);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
+
 
 	void Cast_NoxYlem(GameObject caster)
 	{//poison other.
@@ -601,7 +617,14 @@ public class Magic : MonoBehaviour {
 		lep.counter=counter;
 		lep.Go ();
 	}
-	
+
+	void Cast_SlowFall(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{
+		SpellEffect slf = (SpellEffectSlowFall)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		slf.counter=counter;
+		slf.Go ();
+	}
+
 	void Cast_OrtPorYlem(GameObject Caster)
 	{
 		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
@@ -613,6 +636,12 @@ public class Magic : MonoBehaviour {
 	}
 	
 	/* Utility code for Spells*/
+
+	void SpellIncantationFailed(GameObject caster)
+	{
+		caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
+	}
+
 
 	bool GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
 	{
