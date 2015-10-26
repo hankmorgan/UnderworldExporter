@@ -55,7 +55,7 @@ public class SpellEffectPoison : SpellEffect {
 		{
 			if (npc.Poisoned==true)
 			{
-				npc.npc_health=npc.npc_health-DOT;
+				npc.npc_hp=npc.npc_hp-DOT;
 				//playerUW.CurVIT=playerUW.CurVIT-10;
 			}
 		}
@@ -65,9 +65,19 @@ public class SpellEffectPoison : SpellEffect {
 
 	void Update()
 	{
-		if ((playerUW.Poisoned==false) && (Active==true))
+		if (isNPC==true)
 		{
-			CancelEffect();
+			if ((npc.Poisoned==false) && (Active==true))
+			{
+				CancelEffect();
+			}
+		}
+		else
+		{
+			if ((playerUW.Poisoned==false) && (Active==true))
+			{
+				CancelEffect();
+			}
 		}
 	}
 }

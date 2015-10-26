@@ -88,7 +88,7 @@ public class NPC : object_base {
 			//}
 
 
-			if (npc_hp<0)
+			if (npc_hp<=0)
 			{
 				ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			//	Debug.Log("NPC Dead");

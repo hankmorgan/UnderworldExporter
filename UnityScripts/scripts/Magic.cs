@@ -31,6 +31,7 @@ public class Magic : MonoBehaviour {
 		SpellEffectPoison sep = caster.AddComponent<SpellEffectPoison>();
 		sep.Value=100;//Poison will damage the player for 100 hp over it's duration
 		sep.counter=10; //It will run for 10 ticks. Ie 10 hp damage per tick
+	//	sep.isNPC=true;
 		sep.Go ();
 		//sep.ApplyEffect();
 		//StartCoroutine(sep.timer()) ;
@@ -182,7 +183,8 @@ public class Magic : MonoBehaviour {
 		}//HP
 		case "Nox Ylem"://Poison
 		{
-			Debug.Log(MagicWords+ " Poison Cast");
+			//Debug.Log(MagicWords+ " Poison Cast");
+			Cast_NoxYlem(caster);
 			break;
 		}//NY
 		case "An Jux"://Remove Trap
@@ -366,19 +368,7 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			Ray ray = getRay (caster);
-			
-			
-			RaycastHit hit = new RaycastHit(); 
-			float dropRange=0.5f;
-			if (!Physics.Raycast(ray,out hit,dropRange))
-			{//No object interferes with the spellcast
-				float force = 200.0f;
-				ReadiedSpell= "";
-				GameObject projectile = CreateMagicProjectile("Sprites/objects_023","",ray.GetPoint(dropRange/2.0f), 5);
-				LaunchProjectile(projectile,ray,dropRange,force);
-				playerUW.CursorIcon=playerUW.CursorIconDefault;
-			}
+			CastProjectile(caster,"Sprites/objects_023");
 		}
 	}
 	
@@ -392,22 +382,11 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			Ray ray = getRay (caster);
-			RaycastHit hit = new RaycastHit(); 
-			float dropRange=0.5f;
-			if (!Physics.Raycast(ray,out hit,dropRange))
-			{//No object interferes with the spellcast
-				float force = 200.0f;
-				ReadiedSpell= "";
-				GameObject projectile = CreateMagicProjectile("Sprites/objects_021","",ray.GetPoint(dropRange/2.0f), 5);
-				LaunchProjectile(projectile,ray,dropRange,force);
-				playerUW.CursorIcon=playerUW.CursorIconDefault;
-			}
+			CastProjectile(caster,"Sprites/objects_021");
 		}
 	}
 	
-	
-	
+
 	void Cast_ExYlem(GameObject caster, bool Ready)
 	{//Open
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
@@ -447,7 +426,7 @@ public class Magic : MonoBehaviour {
 			seps[i].CancelEffect();
 		}
 		playerUW.Poisoned=false;
-		Debug.Log ("An Nox Cast");
+		//Debug.Log ("An Nox Cast");
 	}
 	
 	void Cast_InLor(GameObject caster)
@@ -559,6 +538,33 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
+	void Cast_NoxYlem(GameObject caster)
+	{//poison other.
+		RaycastHit hit= new RaycastHit();
+		if (GetNPCTargetRandom(caster, ref hit))
+		{
+			//Apply a impact effect to the npc
+			GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
+			hitimpact.transform.position=hit.point;
+			Impact imp= hitimpact.AddComponent<Impact>();
+			imp.FrameNo=40;
+			imp.EndFrame=44;
+			StartCoroutine(imp.Animate());	
+
+			NPC npc = hit.transform.gameObject.GetComponent<NPC>();
+			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+		 	if (EffectSlot!=-1)
+			{
+				SpellEffect sep= (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Poison);
+				sep.Value=10;
+				sep.counter=5;
+				sep.isNPC=true;
+				sep.Go ();
+			}
+		}
+	}
+
+
 
 	
 	/*Common spell effects that are used multiple times*/
@@ -607,7 +613,40 @@ public class Magic : MonoBehaviour {
 	}
 	
 	/* Utility code for Spells*/
-	
+
+	bool GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
+	{
+		//Targets a random NPC in the area of the npc and returns a raycast hit on the line of site
+		Camera cam = caster.GetComponentInChildren<Camera>();//Camera.main;
+		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
+		//Collider[] objectsInArea = Physics.OverlapSphere(caster.transform.position,10.0f);
+		foreach (Collider Col in Physics.OverlapSphere(caster.transform.position,5.0f))
+		{
+			if (Col.gameObject.GetComponent<NPC>()!=null)
+			{
+				//Check if the NPC is in front of the camera.
+				if (GeometryUtility.TestPlanesAABB(planes, Col.bounds))
+				{
+					//CHeck line of sight to npc.
+					//Debug.Log ("NPC found " + Col.gameObject.name);
+					//RaycastHit hit = new RaycastHit(); 
+					Vector3 campos= Camera.main.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+					Vector3 dirtonpc = campos-Col.gameObject.transform.position;
+
+					if (Physics.Linecast(campos,Col.gameObject.transform.position,out hit))
+					{
+					Debug.Log ("hit is " + hit.collider.gameObject.name);
+						return true;//hit;//Col.gameObject.GetComponent<NPC>();
+					}
+				}
+			}
+		}
+
+		return false;
+	}
+
+
+
 	SpellEffect SetSpellEffect(GameObject caster, SpellEffect[] ActiveSpellArray, int index, int EffectId)
 	{
 		//Adds an effect to the player from a spell.
@@ -827,9 +866,71 @@ public class Magic : MonoBehaviour {
 			return -1;
 		}
 	}
-	
+
+	int CheckPassiveSpellEffectPC(GameObject caster)
+	{//Finds the first free passive spell effect slot for the caster. If unable to find it returns -1
+		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+
+		if (playerUW!=null)
+		{
+			for (int i =0;i<10;i++)
+			{
+				if (playerUW.PassiveSpell[i] == null)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+	int CheckPassiveSpellEffectNPC(GameObject caster)
+	{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
+		NPC npc= caster.GetComponent<NPC>();
+		
+		if (npc!=null)
+		{
+			for (int i =0;i<3;i++)
+			{
+				if (npc.NPCStatusEffects[i] == null)
+				{
+					return i;
+				}
+			}
+			return -1;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
+
+	bool CastProjectile(GameObject caster, string SpriteName)
+	{//Fires off the projectile
+		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		Ray ray = getRay (caster);
+		RaycastHit hit = new RaycastHit(); 
+		float dropRange=0.5f;
+		if (!Physics.Raycast(ray,out hit,dropRange))
+		{//No object interferes with the spellcast
+			float force = 200.0f;
+			ReadiedSpell= "";
+			GameObject projectile = CreateMagicProjectile(SpriteName,"",ray.GetPoint(dropRange/2.0f), 5);
+			LaunchProjectile(projectile,ray,dropRange,force);
+			playerUW.CursorIcon=playerUW.CursorIconDefault;
+			return true;
+		}
+		return false;
+	}	
+
+
 	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
-	{
+	{//Creates the projectile.
 		GameObject projectile = new GameObject();
 		CreateObjectGraphics(projectile,ProjectileImage,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
@@ -845,12 +946,14 @@ public class Magic : MonoBehaviour {
 		
 		return projectile;
 	}
-	
+
 	void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
 	{
 		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
 		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
+
+
 	
 	
 	private void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)

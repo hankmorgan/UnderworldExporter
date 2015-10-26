@@ -18,7 +18,11 @@ public class GameWorldController : MonoBehaviour {
 	//private Material mattToChange;
 	private bool Test;
 	// Use this for initialization
+
+	public MeshRenderer ceil;
+
 	void Start () {
+		ceil.enabled=true;
 		if (EnableTextureAnimation==true)
 		{
 			//#if UNITY_EDITOR

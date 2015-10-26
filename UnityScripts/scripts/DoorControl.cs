@@ -9,6 +9,7 @@ public class DoorControl : object_base {
 	public bool DoorBusy;
 	public bool Pickable;
 
+	private bool PlayerUse=false;
 
 	//static public UWCharacter playerUW;
 	// Use this for initialization
@@ -25,7 +26,9 @@ public class DoorControl : object_base {
 		}
 		else
 		{//Normal Usage
+			PlayerUse=true;
 			Activate();
+			PlayerUse=false;
 			return true;
 		}
 	}
@@ -82,14 +85,19 @@ public class DoorControl : object_base {
 						{
 						if (playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
 							{
+							ml.text=playerUW.StringControl.GetString (1,121);
 							UnlockDoor();
 							}
-					else
+						else
 							{
-							Debug.Log ("Picklock failed!");
-							objIntUsed.getMessageLog().text = "Your lockpick broke";
+							//Debug.Log ("Picklock failed!");
+							ml.text=playerUW.StringControl.GetString (1,120);
 							objIntUsed.consumeObject();
 							}
+						}
+					else
+						{
+						ml.text=playerUW.StringControl.GetString (1,120);
 						}
 					break;
 					}
@@ -123,6 +131,10 @@ public class DoorControl : object_base {
 		}
 		else
 		{
+			if (PlayerUse==true)
+			{
+				ml.text="The " + playerUW.StringControl.GetObjectNounUW(objInt) + " is locked.";
+			}
 //			Debug.Log(this.name + " is locked");
 		}
 		return true;
