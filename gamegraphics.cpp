@@ -140,17 +140,44 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
     
 	palette *pal;
 	pal = new palette[256];
-	//for (int p = 0; p < 16; p++)
-	//	{
-	//	getPalette("c:\\games\\uw1\\data\\light.dat", pal, p);
+
+
+//Extract all palettes
+	unsigned char Allpalettefile[256*16];
+
+	for (int j = 0; j < 16; j++)
+		{
+		for (int i = 0; i < 256; i++)
+			{//create a blank image with incremental values
+			Allpalettefile[i+j*256] = i;
+			}
+		}
+
+
+	for (int p = 0; p < 1; p++)
+		{//Get the 8 palettes
+		getPalette(PaletteFile, pal, p);
+
+//Not to cycle the palettes. To keep them synced I need 28 cycles? (4 water * 7 fire frames?)
+		for (int paletteFrame = 0; paletteFrame < 28; paletteFrame++)
+			{
+			//	CyclePalette(16, 22);//fire
+			//CyclePalette(48, 51);//water
+			cyclePalette(pal, 48, 4);
+			cyclePalette(pal, 16, 7);
+			char paletteOutname[256];
+			sprintf(paletteOutname, "Palette_%d_frame", p);
+			writeTGA(Allpalettefile, 0, 256,16, paletteFrame, pal, paletteOutname, 1);
+			}
+
+		}
+return;
+
+	//	getPalette(PaletteFile, pal, p);
 		getPalette(PaletteFile, pal, PaletteNo);
-	//	unsigned char palettefile[256];
-	//	for (int i = 0; i < 256; i++)
-	//		{
-	///		palettefile[i] = i;
-	//		}
-	//	writeTGA(palettefile, 0, 256, 1, p, pal, "light", 1);
-	//	}
+	
+
+
 
     // Allocate space in the buffer for the whole file
     //BigEndBuf = new unsigned char[fileSize];
