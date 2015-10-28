@@ -10,7 +10,7 @@ public class HudAnimation : MonoBehaviour {
 	public string PreviousAnimation;
 	private Animator anim;
 	// Use this for initialization
-	void Start () {
+	protected virtual void Start () {
 		sprt=this.GetComponent<SpriteRenderer>();
 		anim=this.GetComponent<Animator>();
 		anim.Play (SetAnimation);
@@ -18,17 +18,26 @@ public class HudAnimation : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if (SetAnimation !=PreviousAnimation)
 		{
-			//Debug.Log ("trying to play");
 			anim.Play (SetAnimation);
-			//Debug.Log ("played");
 			PreviousAnimation=SetAnimation;
-			}
+		}
 		if (sprt.sprite!=null)
 		{
 			TargetControl.mainTexture =sprt.sprite.texture;
 		}
 	}
+
+	/*Have to declare these in derived classes due to unity editor bug*/
+//	public virtual void PreAnimPlay()
+//	{//Called by events in certain animations
+//		return;
+//	}
+
+//	public virtual void PostAnimPlay()
+//	{//Called by events in certain animations
+//		return;
+//	}
 }

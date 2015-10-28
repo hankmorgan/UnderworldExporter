@@ -1369,7 +1369,7 @@ switch (TriggerType)
 		break;
 		}
 	case ACTION_CHANGE_STATE:
-		{//Used a lot in switches. Needs more research.
+		{//Used a lot in switches. Needs more research. (changes the image?)
 		if (PrintDebug==1)
 			{
 			fprintf(LOGFILE,"\tACTION_CHANGE_STATE for %s\n",UniqueObjectName(objList[objIndex]));
