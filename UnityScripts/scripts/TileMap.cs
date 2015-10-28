@@ -43,9 +43,17 @@ public class TileMap : MonoBehaviour {
 	const int SOUTHEAST=7;
 
 	RaycastHit hit = new RaycastHit(); 
+	int visitTileX; int visitTileY;
 
 	void PositionDetect()
 	{
+
+		visitTileX =(int)(gronk.transform.position.x/1.2f);
+		visitTileY =(int)(gronk.transform.position.z/1.2f);
+		SetTileVisited(visitTileX,visitTileY);
+		gronk.GetComponent<UWCharacter>().isSwimming=GetIsWater(visitTileX,visitTileY);//TODO: make water a physics layer and detect via collision
+
+		return;
 		//Checks the tile name we are standing on and if it gets a match it will flag as visited
 		//RaycastHit hit = new RaycastHit(); 
 		if(Physics.Raycast(gronk.transform.position, Vector3.down,out hit,1.0f))
@@ -75,11 +83,6 @@ public class TileMap : MonoBehaviour {
 		//hit=null;
 	}
 
-
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	public bool ValidTile(Vector3 location)
 	{

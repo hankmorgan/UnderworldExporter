@@ -13,13 +13,13 @@ public class Map : object_base {
 	public bool OpenMap()
 	{
 		//Use a map
-		GameObject map = GameObject.Find ("Automap");//The UI
+		GameObject map = GameObject.Find ("MapAnchor");//The UI
 		GameObject TileMapInfo = GameObject.Find ("Tilemap");//The stored data.
 
 		//Turn on the camera
 		foreach(Transform child in map.transform)
 		{
-			if (child.name == "MapCamera")
+			if (child.name == "MapPanel")
 			{
 				child.gameObject.SetActive(true);
 			}
@@ -29,20 +29,28 @@ public class Map : object_base {
 			UITexture MapDisplay=GameObject.Find ("MapDisplay").GetComponent<UITexture>();
 			MapDisplay.mainTexture= TileMapInfo.GetComponent<TileMap>().TileMapImage();
 		}
+		WindowDetect.InMap=true;//turns on blocking collider.
 		//Turn off the main hud
-		GameObject UWHud =GameObject.Find ("UW_HUD");
-		foreach(Transform child in UWHud.transform)
-		{
-			if ((child.name == "Anchor")||(child.name == "Camera"))
-			{
-				child.gameObject.SetActive(false);
-			}
-		}
+		//GameObject UWHud =GameObject.Find ("UW_HUD");
+		//foreach(Transform child in UWHud.transform)
+		//{
+		//	if ((child.name == "Anchor")||(child.name == "Camera"))
+		//	{
+		//		child.gameObject.SetActive(false);
+		//	}
+		//}
 		GameObject mus = GameObject.Find ("MusicController");
 		if  (mus!=null)
 		{
 			mus.GetComponent<MusicController>().InMap=true;
 		}
+
+		UILabel ml = GameObject.Find ("scroll").GetComponent<UILabel>();
+		if (ml!=null)
+		{
+			ml.text="";
+		}
+
 		return true;
 	}
 

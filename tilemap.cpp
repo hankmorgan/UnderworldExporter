@@ -181,7 +181,7 @@ void CleanUp(tile LevelInfo[64][64], int game)
 			}
 		}
 	}
-	return;
+	//return;
 //if (game == SHOCK) {return;}
 	int j=1 ;
 	//Now lets combine the solids along particular axis
@@ -264,13 +264,17 @@ for (y=0;y<64;y++){
 		}
 	}
 
+
+printf("%d",LevelInfo[3][5].Render);
+
 }
 
 
 
 int DoTilesMatch(tile &t1, tile &t2)
 {//TODO:Tiles have a lot more properties now.
-	if ((t1.tileType >1) || (t1.hasElevator==1) || (t1.TerrainChange ==1) ||  (t2.hasElevator==1) || (t2.TerrainChange ==1) || (t1.isWater ==1) || (t2.isWater ==1)){	//autofail no none solid/open/special.
+	//if ((t1.tileType >1) || (t1.hasElevator==1) || (t1.TerrainChange ==1) ||  (t2.hasElevator==1) || (t2.TerrainChange ==1) || (t1.isWater ==1) || (t2.isWater ==1)){	//autofail no none solid/open/special.
+		if ((t1.tileType >1) || (t1.hasElevator == 1) || (t1.TerrainChange == 1) || (t2.hasElevator == 1) || (t2.TerrainChange == 1)){	//autofail no none solid/open/special.
 		return 0;
 	}
 	else

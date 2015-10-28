@@ -818,8 +818,8 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		{
 		for (x = 0; x <= 63; x++)
 			{
-			RenderFBXTile(gScene,game, x, y, LevelInfo[x][y], 0, 0, 0, skipCeil);
-			RenderFBXTile(gScene, game, x, y, LevelInfo[x][y], 1, 0, 0, skipCeil);
+				RenderFBXTile(gScene, game, x, y, LevelInfo[x][y], 0, 0, 0, skipCeil);
+				RenderFBXTile(gScene, game, x, y, LevelInfo[x][y], 1, 0, 0, skipCeil);
 			}
 
 		}
@@ -845,7 +845,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		tmp.shockWestCeilHeight = 0;
 		tmp.shockNorthCeilHeight = 0;
 		tmp.shockSouthCeilHeight = 0;
-		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
+		//RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
 		}
 
 	//Now render a room to store objects
@@ -866,7 +866,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 				{
 				tmp.tileType = 1;
 				}
-			RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 0);
+			//RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 0);
 
 			}
 		}
@@ -899,7 +899,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 	//CreateDoorModel(gScene);
 	//CreateShockBridgeModel(gScene);
-	SaveScene(gSdkManager, gScene, "fbx_output.fbx", 1, false);
+	SaveScene(gSdkManager, gScene, "level.fbx", 1, false);
 	}
 
 void RenderFBXTile(FbxScene*& gScene,int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
@@ -1494,28 +1494,29 @@ FbxGeometryElementUV* lUVDiffuseElement = lMesh->CreateElementUV("DiffuseUV");
 FBX_ASSERT(lUVDiffuseElement != NULL);
 lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
-
+//Iamhere
+printf("Not tested yet!");
 float PolySize= Top-Bottom;
 float offset=0;//-0.125;
 offset = CalcCeilOffset(iGame, fNORTH, t);
 FbxVector2 lVectorsNorth0(0, Bottom*0.125 - offset);//bottom left corner
-FbxVector2 lVectorsNorth1(1, Bottom*0.125 - offset);//bottom right corner
-FbxVector2 lVectorsNorth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsNorth1(t.DimX , Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsNorth2(t.DimX , (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
 FbxVector2 lVectorsNorth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 offset = CalcCeilOffset(iGame, fSOUTH, t);
 FbxVector2 lVectorsSouth0(0, Bottom*0.125 - offset);//bottom left corner
-FbxVector2 lVectorsSouth1(1, Bottom*0.125 - offset);//bottom right corner
-FbxVector2 lVectorsSouth2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsSouth1(t.DimX , Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsSouth2(t.DimX, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
 FbxVector2 lVectorsSouth3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 offset = CalcCeilOffset(iGame, fEAST, t);
 FbxVector2 lVectorsEast0(0, Bottom*0.125 - offset);//bottom left corner
-FbxVector2 lVectorsEast1(1, Bottom*0.125 - offset);//bottom right corner
-FbxVector2 lVectorsEast2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsEast1(t.DimY , Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsEast2(t.DimY, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
 FbxVector2 lVectorsEast3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 offset = CalcCeilOffset(iGame, fWEST, t);
 FbxVector2 lVectorsWest0(0, Bottom*0.125 - offset);//bottom left corner
-FbxVector2 lVectorsWest1(1, Bottom*0.125 - offset);//bottom right corner
-FbxVector2 lVectorsWest2(1, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
+FbxVector2 lVectorsWest1(t.DimY, Bottom*0.125 - offset);//bottom right corner
+FbxVector2 lVectorsWest2(t.DimY, (PolySize / 8) + (Bottom*0.125) - offset);//top right corner
 FbxVector2 lVectorsWest3(0, (PolySize / 8) + (Bottom*0.125) - offset);//top left corner.
 
 //bottom vectors
@@ -2069,26 +2070,26 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	FBX_ASSERT(lUVDiffuseElement != NULL);
 	lUVDiffuseElement->SetMappingMode(FbxGeometryElement::eByPolygonVertex);
 	lUVDiffuseElement->SetReferenceMode(FbxGeometryElement::eIndexToDirect);
-
+	printf("NOT TESTED YET!!!!");
 
 	FbxVector2 lVectorsNorth0(0, VertOffsetPos);//bottom left corner
-	FbxVector2 lVectorsNorth1(1, VertOffsetPos);//bottom right corner
-	FbxVector2 lVectorsNorth2(1, VertOffsetScale);//top right corner
+	FbxVector2 lVectorsNorth1(1*t.DimY, VertOffsetPos);//bottom right corner
+	FbxVector2 lVectorsNorth2(1 * t.DimY, VertOffsetScale);//top right corner
 	FbxVector2 lVectorsNorth3(0, VertOffsetScale);//top left corner.
 
 	FbxVector2 lVectorsSouth0(0, VertOffsetPos);//bottom left corner
-	FbxVector2 lVectorsSouth1(-1, VertOffsetPos);//bottom right corner
-	FbxVector2 lVectorsSouth2(-1, VertOffsetScale);//top right corner
+	FbxVector2 lVectorsSouth1(-1 * t.DimY, VertOffsetPos);//bottom right corner
+	FbxVector2 lVectorsSouth2(-1 * t.DimY, VertOffsetScale);//top right corner
 	FbxVector2 lVectorsSouth3(0, VertOffsetScale);//top left corner.
 
 	FbxVector2 lVectorsEast0(0, VertOffsetPos);//bottom left corner
-	FbxVector2 lVectorsEast1(1, VertOffsetPos);//bottom right corner
-	FbxVector2 lVectorsEast2(1, VertOffsetScale);//top right corner
+	FbxVector2 lVectorsEast1(1 * t.DimX, VertOffsetPos);//bottom right corner
+	FbxVector2 lVectorsEast2(1 * t.DimX, VertOffsetScale);//top right corner
 	FbxVector2 lVectorsEast3(0, VertOffsetScale);//top left corner.
 
 	FbxVector2 lVectorsWest0(0, VertOffsetPos);//bottom left corner
-	FbxVector2 lVectorsWest1(1, VertOffsetPos);//bottom right corner
-	FbxVector2 lVectorsWest2(1, VertOffsetScale);//top right corner
+	FbxVector2 lVectorsWest1(1 * t.DimX, VertOffsetPos);//bottom right corner
+	FbxVector2 lVectorsWest2(1 * t.DimX, VertOffsetScale);//top right corner
 	FbxVector2 lVectorsWest3(0, VertOffsetScale);//top left corner.
 
 	//bottom vectors

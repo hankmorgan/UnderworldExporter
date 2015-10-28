@@ -16,20 +16,20 @@ public class WindowDetect : MonoBehaviour {
 	protected bool MouseHeldDown=false;
 
 	public static bool WaitingForInput=false;
+	public static bool InMap=false;
 	public GameObject BlockingCollider;
 
 	static public bool CursorInMainWindow;
 
-	// Use this for initialization
-	public virtual void Start () {
+	public virtual void Start()
+	{
 
 	}
-
 	
 	// Update is called once per frame
 	protected virtual void Update () {
 
-		BlockingCollider.SetActive(WaitingForInput);
+		BlockingCollider.SetActive(WaitingForInput || InMap  );
 
 	}
 

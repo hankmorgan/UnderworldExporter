@@ -104,9 +104,9 @@ public class ButtonHandler : object_base {
 		//MessageLog.text=name +"exited";
 	}
 
-
-	public void LookAt()
+	public override bool LookAt ()
 	{
+	//public void LookAt()
 		//Generally gives the object description but depending on the trigger target type it may activate (lookat trigger)
 		ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
@@ -117,6 +117,7 @@ public class ButtonHandler : object_base {
 			{
 			this.Activate();
 			}
+		return true;
 	}
 
 	public bool Activate()
