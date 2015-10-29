@@ -46,6 +46,9 @@ public class UWCharacter : Character {
 
 	public long summonCount=0;//How many stacks I have split so far. To keep them uniquely named.
 
+	public int ResurrectLevel;
+	public Vector3 ResurrectPosition=Vector3.zero;
+
 
 	public override void Start ()
 	{
@@ -83,6 +86,33 @@ public class UWCharacter : Character {
 
 	}
 
+	void PlayerDeath()
+	{//CHeck if the player has planted the seed and if so send them to that position.
+		mus.Death=true;
+		CutsceneAnimation cuts= GameObject.Find ("CutsceneWindowed").GetComponent<CutsceneAnimation>();
+		if (cuts!=null)
+		{
+			if (ResurrectPosition!=Vector3.zero)
+			{
+				cuts.SetAnimation="Death_With_Sapling";
+			}
+			else
+			{
+				cuts.SetAnimation="Death";
+			}
+		}
+
+		if (ResurrectPosition!=Vector3.zero)
+		{
+			this.transform.position=ResurrectPosition;
+		}
+		//Cancel the spell
+		if (PlayerMagic.ReadiedSpell!="")
+		{
+			PlayerMagic.ReadiedSpell="";
+			CursorIcon=CursorIconDefault;
+		}
+	}
 
 
 
@@ -94,15 +124,15 @@ public class UWCharacter : Character {
 		{//TODO: This should be in window detect
 			MessageLog.gameObject.GetComponent<UIInput>().selected=true;
 		}
-		if (CurVIT<=0)
+		if ((CurVIT<=0) && (mus.Death==false))
 		{
-			mus.Death=true;
-			//Cancel the spell
-			if (PlayerMagic.ReadiedSpell!="")
-			{
-				PlayerMagic.ReadiedSpell="";
-				CursorIcon=CursorIconDefault;
-			}
+
+			PlayerDeath();
+			return;
+		}
+		if(mus.Death==true)
+		{
+			//Still processing death.
 			return;
 		}
 		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);

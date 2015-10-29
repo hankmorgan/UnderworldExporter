@@ -77,4 +77,9 @@ public class object_base : MonoBehaviour {
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
 	}
+
+	public virtual bool PickupEvent()
+	{//For special events when an object is picked up. Eg silver seed.
+		return false;
+	}
 }

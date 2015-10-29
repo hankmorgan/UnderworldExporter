@@ -198,7 +198,7 @@ public class Character : MonoBehaviour {
 						}
 						else
 						{//Left click. Pick them all up.
-							Pickup(objPicked,pInv);	
+								Pickup(objPicked,pInv);	
 						}
 						
 					}
@@ -212,6 +212,7 @@ public class Character : MonoBehaviour {
 
 	public virtual void Pickup(ObjectInteraction objPicked, PlayerInventory  pInv)
 	{//completes the pickup.
+
 		objPicked.PickedUp=true;
 		if (objPicked.GetComponent<Container>()!=null)
 		{
@@ -228,6 +229,8 @@ public class Character : MonoBehaviour {
 		}
 		objPicked.transform.position = InvMarker.transform.position;
 		objPicked.transform.parent=InvMarker.transform;
+
+		objPicked.Pickup();//Call pickup event for this object.
 	}
 
 

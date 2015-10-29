@@ -77,19 +77,15 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int SHOCK_BRIDGE =71 ;
 	public const int FORCE_DOOR= 72 ;
 	public const int HIDDENPLACEHOLDER =999 ;
-
 	public const int HELM =73;
 	public const int RING =74;
 	public const int BOOT =75;
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
-
 	public const int SHIELD =78;
-
 	public const int LOCKPICK =79;
-
-
 	public const int ANIMATION = 80;
+	public const int SILVERSEED = 81;
 
 	public static UILabel MessageLog;
 
@@ -97,9 +93,9 @@ public class ObjectInteraction : MonoBehaviour {
 	public Sprite EquipDisplay;
 	private Sprite WorldDisplay;
 
-	public string InventoryString;
+	//public string InventoryString;
 	public string EquipString;
-	public string WorldString;
+	//public string WorldString;
 
 	public int WorldDisplayIndex;
 	public int InvDisplayIndex;
@@ -182,7 +178,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	}
 
-	void UpdateAnimation()
+	public void UpdateAnimation()
 	{
 		if (sr== null)
 		{
@@ -562,7 +558,9 @@ public class ObjectInteraction : MonoBehaviour {
 		case RUNEBAG://RUNEBAG 70
 			item = (RuneBag)this.GetComponent<RuneBag>();
 			break;
-
+		case SILVERSEED:
+			item=(SilverSeed)this.GetComponent<SilverSeed>();
+			break;
 		default:
 			item = this.GetComponent<object_base>();
 			break;
@@ -693,6 +691,28 @@ public class ObjectInteraction : MonoBehaviour {
 		return false;
 	}
 */
+
+	public bool Pickup()
+	{
+		//TODO  Do I have to put a pickup trigger test here?
+		//To call events when an object is picked up.
+		object_base item=null;
+
+		switch(ItemType)
+		{
+			case  SILVERSEED:
+				item = (SilverSeed)this.GetComponent<SilverSeed>();
+				break;
+		}
+		if (item!=null)
+		{
+			return(item.PickupEvent());
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 
 	public void TalkTo()

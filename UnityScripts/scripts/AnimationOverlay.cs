@@ -13,9 +13,19 @@ public class AnimationOverlay : MonoBehaviour {
 	void Start () {
 		image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		//LoadAnimo(FrameNo);
+		Go ();
+	}
+
+	public void Go()
+	{
 		StartCoroutine (Animate());
 	}
-	
+
+	public void Stop()
+	{
+		Active=false;
+	}
+
 	void LoadAnimo(int index)
 	{
 		if (image==null)
@@ -33,6 +43,10 @@ public class AnimationOverlay : MonoBehaviour {
 		while (Active==true)
 		{
 			yield return new WaitForSeconds(0.2f);
+			if (Active==false)
+			{
+				yield break;
+			}
 			FrameNo++;
 			if (FrameNo>=StartFrame+NoOfFrames)
 			{

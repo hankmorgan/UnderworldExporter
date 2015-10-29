@@ -153,7 +153,7 @@ public class DoorControl : object_base {
 				}
 				else
 				{
-					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.0f,0f),1.0f));
+					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),1.0f));
 				}
 				state=true;
 			}
@@ -173,7 +173,7 @@ public class DoorControl : object_base {
 				}
 				else
 				{
-					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.0f,0f),1.0f));
+					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),1.0f));
 				}
 				state=false;
 			}

@@ -176,7 +176,7 @@ public class PlayerInventory : MonoBehaviour {
 
 
 
-	void DisplayGameObject(string objName, UISprite Label, bool isEquipped, ref bool hasChanged)
+	/*	void DisplayGameObject(string objName, UISprite Label, bool isEquipped, ref bool hasChanged)
 	{
 		if (hasChanged==true)
 		{
@@ -207,7 +207,7 @@ public class PlayerInventory : MonoBehaviour {
 			}
 		}
 
-	}
+	}*/
 
 	void DisplayGameObject(string objName, UITexture Label, bool isEquipped, ref bool hasChanged)
 	{

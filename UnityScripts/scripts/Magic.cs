@@ -1042,8 +1042,8 @@ public class Magic : MonoBehaviour {
 		
 		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
 		//		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
-		objInteract.WorldString=WorldString;
-		objInteract.InventoryString=InventoryString;
+//		objInteract.WorldString=WorldString;
+	//	objInteract.InventoryString=InventoryString;
 		objInteract.EquipString=EquipString;
 		objInteract.ItemType=ItemType;//UWexporter id type
 		objInteract.item_id=ItemId;//Internal ItemID
