@@ -199,9 +199,9 @@ public class StringController : MonoBehaviour {
 				line = fileReader.ReadLine();
 				if (line != null)
 				{
-					if (line.IndexOf("€")>=0)
+					if (line.IndexOf("~")>=0)
 					{
-						string[] entries = line.Split('€');
+						string[] entries = line.Split('~');
 						if (entries.Length > 0)
 						{
 							GameStrings[entries[1] + "_" + entries[2]] = entries[3];
