@@ -19,7 +19,7 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d);",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d);",
 		    objectMasters[currobj.item_id].particle,
 			objectMasters[currobj.item_id].InvIcon,
 			objectMasters[currobj.item_id].EquippedIconFemaleLowest,
@@ -28,13 +28,14 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 			objectMasters[currobj.item_id].isMoveable,
 			objectMasters[currobj.item_id].isAnimated,
 			objectMasters[currobj.item_id].useSprite,
-			currobj.is_quant
+			currobj.is_quant,
+			currobj.enchantment
 			);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, \"%s\");",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, \"%s\");",
 		objectMasters[currobj.item_id].particle,
 		objectMasters[currobj.item_id].InvIcon,
 		objectMasters[currobj.item_id].EquippedIconFemaleLowest,
@@ -44,6 +45,7 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 		objectMasters[currobj.item_id].isAnimated, 
 		objectMasters[currobj.item_id].useSprite,
 		currobj.is_quant,
+		currobj.enchantment,
 		ChildName);
 	}
 
@@ -51,6 +53,12 @@ void RenderUnityEntityAnimationOverlay(int game, float x, float y, float z, Obje
 	{//Is animated is treated as the start frame
 	//useSprite is treated as the length of the animation
 	fprintf(UNITY_FILE, "\n\tAddAnimationOverlay(myObj,%d,%d);", objectMasters[currobj.item_id].isAnimated, objectMasters[currobj.item_id].useSprite);
+	}
+
+void RenderUnityEntitySilverSeed(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{//Is animated is treated as the start frame
+	//useSprite is treated as the length of the animation
+	fprintf(UNITY_FILE, "\n\tAddSilverSeed(myObj);");
 	}
 
 void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -143,6 +151,12 @@ void RenderUnityEntityPotion(int game, float x, float y, float z, ObjectItem &cu
 	{
 	//Adds an obj_base to the object.
 	fprintf(UNITY_FILE, "\n\tAddPotion(myObj);");
+	}
+
+void RenderUnityEntityFountain(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddFountain(myObj);");
 	}
 
 void RenderUnityEntityLockpick(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1934,7 +1948,18 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityPotion(game, x, y, z, currobj, objList, LevelInfo);
 							break;
-//TODO:Add silver seed . it needs a silver seed object and an animation overlay.
+						case SILVERSEED:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntitySilverSeed(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityAnimationOverlay(game, x, y, z, currobj, objList, LevelInfo);
+						case FOUNTAIN:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityFountain(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);

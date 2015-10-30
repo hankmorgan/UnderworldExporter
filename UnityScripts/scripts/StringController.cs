@@ -62,7 +62,7 @@ public class StringController : MonoBehaviour {
 	{//Eventually this will return things like proper quants etc.
 		string output = GetString (4,objInt.item_id);
 
-		if ((objInt.isQuant ==true) && (output.Contains("&")))
+		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false))
 		{
 			if (objInt.Link>1)
 			{//Plural description
@@ -90,7 +90,7 @@ public class StringController : MonoBehaviour {
 
 		string output = GetString (4,objInt.item_id);
 		
-		if ((objInt.isQuant ==true) && (output.Contains("&")))
+		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false))
 		{
 			if ((objInt.Link>1) && (Quantity>1))
 			{//Plural description
@@ -119,7 +119,7 @@ public class StringController : MonoBehaviour {
 	{//Eventually this will return things like proper quants etc.
 		string output = GetString (4,objInt.item_id);
 		
-		if ((objInt.isQuant ==true) && (output.Contains("&")))
+		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false) )
 		{
 			if (objInt.Link>1)
 			{//Plural description

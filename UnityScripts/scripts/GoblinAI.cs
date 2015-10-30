@@ -131,7 +131,7 @@ public class GoblinAI : MonoBehaviour {
 	public void ExecuteAttack()
 	{
 		float weaponRange=1.0f;
-		BoxCollider bx = this.GetComponent<BoxCollider>();
+		CapsuleCollider bx = this.GetComponent<CapsuleCollider>();
 		bx.enabled=false;
 		//Ray ray = new Ray(this.transform.position+Vector3.up*1.0f,Vector3.forward); 
 		//Ray ray = new Ray(this.transform.position+Vector3.up*0.5f,this.transform.TransformDirection(Vector3.forward)); 

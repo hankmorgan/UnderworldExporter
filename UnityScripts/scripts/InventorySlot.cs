@@ -210,7 +210,7 @@ public class InventorySlot : MonoBehaviour {
 					DoNotPickup=true;
 				}
 				
-				if (objInt.isQuant==true)
+				if ((objInt.isQuant==true) && (objInt.isEnchanted==false))
 					{
 					ObjectUsedOn = GameObject.Find (playerUW.playerInventory.GetObjectAtSlot(slotIndex));
 					if (ObjectUsedOn !=null)
@@ -284,7 +284,7 @@ public class InventorySlot : MonoBehaviour {
 				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
 				DoNotPickup=true;
 			}
-			if (objInt.isQuant==true)
+			if ((objInt.isQuant==true) && (objInt.isEnchanted==false))
 			{
 				ObjectUsedOn = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 				if (ObjectUsedOn !=null)
@@ -358,7 +358,7 @@ public class InventorySlot : MonoBehaviour {
 					//TODO: Make this work with Equipment slots
 					if (DoNotPickup==false)
 						{
-						if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant)&&(ObjectUsedOn.GetComponent<ObjectInteraction>().Link==1)))
+						if ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant ==false) || ((ObjectUsedOn.GetComponent<ObjectInteraction>().isQuant)&&(ObjectUsedOn.GetComponent<ObjectInteraction>().Link==1)) || (ObjectUsedOn.GetComponent<ObjectInteraction>().isEnchanted ==true))
 							{//Is either not a quant or is a quantity of 1
 							playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
 							playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;

@@ -288,7 +288,7 @@
 287 0 0 0 entity 16 a_standard H 1 Sprites/OBJECTS_287 0 L M 1 1 1 Sprites/OBJECTS_287 Sprites/OBJECTS_287 S T U Sprites/OBJECTS_287 W x Y 0 1
 288 0 0 0 entity 16 a_spell H 1 Sprites/OBJECTS_288 0 L M 1 1 1 Sprites/OBJECTS_288 Sprites/OBJECTS_288 S T U Sprites/OBJECTS_288 W x Y 0 1
 289 0 0 0 entity 16 a_bedroll H 1 Sprites/OBJECTS_289 0 L M 1 1 1 Sprites/OBJECTS_289 Sprites/OBJECTS_289 S T U Sprites/OBJECTS_289 W x Y 0 1
-290 0 0 0 entity 16 a_silver_seed H 1 Sprites/OBJECTS_290 0 L M 1 1 1 Sprites/OBJECTS_290 Sprites/OBJECTS_290 S T U Sprites/OBJECTS_290 W x Y 1 1
+290 0 0 0 entity 81 a_silver_seed H 1 Sprites/OBJECTS_290 0 L M 1 1 1 Sprites/OBJECTS_290 Sprites/OBJECTS_290 S T U Sprites/OBJECTS_290 W x Y 1 1
 291 0 0 0 entity 16 a_mandolin H 1 Sprites/OBJECTS_291 0 L M 1 1 1 Sprites/OBJECTS_291 Sprites/OBJECTS_291 S T U Sprites/OBJECTS_291 W x Y 0 1
 292 0 0 0 entity 16 a_flute H 1 Sprites/OBJECTS_292 0 L M 1 1 1 Sprites/OBJECTS_292 Sprites/OBJECTS_292 S T U Sprites/OBJECTS_292 W x Y 0 1
 293 0 0 0 entity 16 some_leeches_bunches_of_leeches H 1 Sprites/OBJECTS_293 0 L M 1 1 1 Sprites/OBJECTS_293 Sprites/OBJECTS_293 S T U Sprites/OBJECTS_293 W x Y 0 1
@@ -456,7 +456,7 @@
 455 0 0 0 entity 80 a_spell_effect H 0 Sprites/OBJECTS_455 0 L M 1 1 1 Sprites/OBJECTS_455 Sprites/OBJECTS_455 S T U Sprites/OBJECTS_455 W x Y 40 4
 456 0 0 0 entity 80 some_smoke H 0 Sprites/OBJECTS_456 0 L M 1 1 1 Sprites/OBJECTS_456 Sprites/OBJECTS_456 S T U Sprites/OBJECTS_456 W x Y 9 4
 457 0 0 0 entity 80 a_fountain H 1 Sprites/OBJECTS_457 1 L M 1 1 1 Sprites/OBJECTS_457 Sprites/OBJECTS_457 S T U Sprites/OBJECTS_457 W x Y 5 4
-458 0 0 0 entity 80 a_silver_tree H 0 Sprites/OBJECTS_458 1 L M 1 1 1 Sprites/OBJECTS_458 Sprites/OBJECTS_458 S T U Sprites/OBJECTS_458 W x Y 13 4
+458 0 0 0 entity 81 a_silver_tree H 0 Sprites/OBJECTS_458 1 L M 1 1 1 Sprites/OBJECTS_458 Sprites/OBJECTS_458 S T U Sprites/OBJECTS_458 W x Y 13 4
 459 0 0 0 ignore 80 some_damage H 0 Sprites/OBJECTS_459 0 L M 1 1 1 Sprites/OBJECTS_459 Sprites/OBJECTS_459 S T U Sprites/OBJECTS_459 W x Y 45 4
 460 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_460 0 L M 1 1 1 Sprites/OBJECTS_460 Sprites/OBJECTS_460 S T U Sprites/OBJECTS_460 W x Y 0 1
 461 0 0 0 model 32 a_sound_source H 0 Sprites/OBJECTS_461 0 L M 1 1 1 Sprites/OBJECTS_461 Sprites/OBJECTS_461 S T U Sprites/OBJECTS_461 W x Y 0 1

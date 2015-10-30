@@ -76,7 +76,7 @@ public class ContainerOpened : object_base {
 			Container CurrentContainer = GameObject.Find (playerUW.playerInventory.currentContainer).GetComponent<Container>();
 			Container DestinationContainer = GameObject.Find (CurrentContainer.ContainerParent).GetComponent<Container>();
 			ObjectInteraction item = GameObject.Find (playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>();
-			if (item.isQuant==false)
+			if ((item.isQuant==false) || (item.isEnchanted))
 			{
 				if (DestinationContainer.AddItemToContainer(playerUW.playerInventory.ObjectInHand))
 				{//Object has moved

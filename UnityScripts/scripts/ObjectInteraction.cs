@@ -86,6 +86,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int LOCKPICK =79;
 	public const int ANIMATION = 80;
 	public const int SILVERSEED = 81;
+	public const int FOUNTAIN = 82;
 
 	public static UILabel MessageLog;
 
@@ -135,6 +136,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public int Link;	//Also quantity
 	public int Quality;
 	public bool isQuant;
+	public bool isEnchanted;
 
 	//Display controls
 	public static TextureController tc;
@@ -561,6 +563,9 @@ public class ObjectInteraction : MonoBehaviour {
 		case SILVERSEED:
 			item=(SilverSeed)this.GetComponent<SilverSeed>();
 			break;
+		case FOUNTAIN:
+			item=(Fountain)this.GetComponent<Fountain>();
+			break;
 		default:
 			item = this.GetComponent<object_base>();
 			break;
@@ -810,7 +815,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public void consumeObject()
 	{
-		if((isQuant ==false) || ((isQuant) && (Link==1)))
+		if((isQuant ==false) || ((isQuant) && (Link==1)) || (isEnchanted==true))
 		  {//the last of the item or is not a quantity;
 			Container cn = playerUW.playerInventory.GetCurrentContainer();
 			//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc

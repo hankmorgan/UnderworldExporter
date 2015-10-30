@@ -181,7 +181,7 @@ public class Character : MonoBehaviour {
 						{
 							//right click check for quant.
 							//Pickup if either not a quantity or is a quantity of one.
-							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)))
+							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)) || (objPicked.isEnchanted))
 							{
 								Pickup(objPicked,pInv);
 							}

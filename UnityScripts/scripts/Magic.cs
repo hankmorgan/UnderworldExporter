@@ -328,7 +328,8 @@ public class Magic : MonoBehaviour {
 		}//vpy
 		default:
 		{
-			Debug.Log("Unknown spell:" + MagicWords);
+
+			//Debug.Log("Unknown spell:" + MagicWords);
 			break;
 		}
 		}//magicwords
@@ -482,17 +483,17 @@ public class Magic : MonoBehaviour {
 	
 	void Cast_InBetMani(GameObject caster)
 	{//Lesser Heal;
-		Heal (caster, Random.Range (1,10));
+		Cast_Heal (caster, Random.Range (1,10));
 	}
 	
 	void Cast_InMani(GameObject caster)
 	{//Heal;
-		Heal (caster, Random.Range (10,20));
+		Cast_Heal (caster, Random.Range (10,20));
 	}
 	
 	void Cast_VasInMani(GameObject caster)
 	{//Greater Heal;
-		Heal (caster, Random.Range (20,60));
+		Cast_Heal (caster, Random.Range (20,60));
 	}
 	
 	void Cast_VasKalCorp(GameObject caster)
@@ -585,7 +586,7 @@ public class Magic : MonoBehaviour {
 	
 	/*Common spell effects that are used multiple times*/
 	
-	void Heal(GameObject caster,int HP)
+	void Cast_Heal(GameObject caster,int HP)
 	{
 		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
@@ -597,8 +598,20 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-	
-	
+
+	void Cast_Mana(GameObject caster,int MP)
+	{//Increase (or decrease) the casters mana
+		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+		{
+			playerUW.PlayerMagic.CurMana=playerUW.PlayerMagic.CurMana+MP;
+			if (playerUW.PlayerMagic.CurMana > playerUW.PlayerMagic.MaxMana)
+			{
+				playerUW.PlayerMagic.CurMana=playerUW.PlayerMagic.MaxMana;
+			}
+		}
+	}
+
 	
 	void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int LightLevel)
 	{
@@ -1097,5 +1110,290 @@ public class Magic : MonoBehaviour {
 		}
 		return ray;
 	}
+
+
+
+	public bool CastEnchantment(GameObject caster, int EffectId)
+	{//Eventually casts spells from things like fountains, potions, enchanted weapons.
+		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+		//Returns true if the effect was applied. 
+		//TODO: The switch statement may need to be further divided because of passive/active effects.
+		//TODO: this list is incomplete. I need to include things from my spreadsheet that are not status effects.
+		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		int ActiveArrayIndex=-1;
+		int PassiveArrayIndex=-1;
+		if (playerUW!=null)
+		{
+			ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
+			PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
+		}
+
+		switch (EffectId)
+		{
+
+		case SpellEffect.UW1_Spell_Effect_LesserHeal:
+		case SpellEffect.UW1_Spell_Effect_LesserHeal_alt01:
+		case SpellEffect.UW1_Spell_Effect_LesserHeal_alt02:
+		case SpellEffect.UW1_Spell_Effect_LesserHeal_alt03:
+		case SpellEffect.UW1_Spell_Effect_Heal:
+		case SpellEffect.UW1_Spell_Effect_Heal_alt01:
+		case SpellEffect.UW1_Spell_Effect_Heal_alt02:
+		case SpellEffect.UW1_Spell_Effect_Heal_alt03:
+		case SpellEffect.UW1_Spell_Effect_EnhancedHeal:
+		case SpellEffect.UW1_Spell_Effect_EnhancedHeal_alt01:
+		case SpellEffect.UW1_Spell_Effect_EnhancedHeal_alt02:
+		case SpellEffect.UW1_Spell_Effect_EnhancedHeal_alt03:
+		case SpellEffect.UW1_Spell_Effect_GreaterHeal:
+		case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt01:
+		case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt02:
+		case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt03:
+		case SpellEffect.UW1_Spell_Effect_LesserHeal_alt04:
+		case SpellEffect.UW1_Spell_Effect_Heal_alt04:
+		case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt04:
+			Cast_Heal (caster,10);//Get seperate values;
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_ManaBoost:
+		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt01:
+		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt02:
+		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt03:
+		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt04:
+			Cast_Mana(caster,10);
+			break;
+
+
+		case SpellEffect.UW1_Spell_Effect_Darkness:
+		case SpellEffect.UW1_Spell_Effect_BurningMatch:
+		case SpellEffect.UW1_Spell_Effect_Candlelight:
+		case SpellEffect.UW1_Spell_Effect_Light:
+		case SpellEffect.UW1_Spell_Effect_MagicLantern:
+		case SpellEffect.UW1_Spell_Effect_Daylight:
+		case SpellEffect.UW1_Spell_Effect_Sunlight:
+		case SpellEffect.UW1_Spell_Effect_Light_alt01:
+		case SpellEffect.UW1_Spell_Effect_Daylight_alt01:
+		case SpellEffect.UW1_Spell_Effect_Light_alt02:
+		case SpellEffect.UW1_Spell_Effect_Daylight_alt02:
+			//These need to have different values. Create a system of unique values array(?)
+			if (PassiveArrayIndex!=-1)
+			{
+				Cast_Light(caster,playerUW.PassiveSpell,EffectId,ActiveArrayIndex,5,10);
+			}
+			else
+			{
+				return false;
+			}
+
+			break;
+			
+		case SpellEffect.UW1_Spell_Effect_Leap:
+		case SpellEffect.UW1_Spell_Effect_Leap_alt01:
+		case SpellEffect.UW1_Spell_Effect_Leap_alt02:
+			//TODO: Find out which one of these is a magic ring effect!
+			Cast_Leap(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5);
+			//To implement
+			break;
+		case SpellEffect.UW1_Spell_Effect_SlowFall:
+		case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
+		case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
+			cast_RelDesPor(caster);
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Levitate:
+		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
+		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
+			Debug.Log ("levitate enchantment");
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_WaterWalk:
+		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
+		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
+			Debug.Log ("Waterwalk enchantment");
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Fly:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectFly>();
+			Debug.Log ("Fly enchantment");
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_ResistBlows:
+		case SpellEffect.UW1_Spell_Effect_ThickSkin:
+		case SpellEffect.UW1_Spell_Effect_IronFlesh:
+		case SpellEffect.UW1_Spell_Effect_ResistBlows_alt01:
+		case SpellEffect.UW1_Spell_Effect_ThickSkin_alt01:
+		case SpellEffect.UW1_Spell_Effect_IronFlesh_alt01:
+		case SpellEffect.UW1_Spell_Effect_ResistBlows_alt02:
+		case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
+		case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
+		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistance>();
+			Debug.Log ("Resist damage enchantment");
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Stealth:
+		case SpellEffect.UW1_Spell_Effect_Conceal:
+		case SpellEffect.UW1_Spell_Effect_Stealth_alt01:
+		case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
+		case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
+		case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
+			Debug.Log ("stealth enchantment");
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Invisibilty:
+		case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
+		case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectInvisibility>();
+			Debug.Log ("Invisibilty enchantment");
+			//Todo
+			break;
+			//Missiles
+		case SpellEffect.UW1_Spell_Effect_MissileProtection:
+		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
+		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
+			Debug.Log ("Missile protection enchantment");
+			break;
+			//Flames
+		case SpellEffect.UW1_Spell_Effect_Flameproof:
+		case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
+		case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
+			Debug.Log ("Flameproof Enchantment");
+			break;
+			//Magic
+		case SpellEffect.UW1_Spell_Effect_MagicProtection:
+		case SpellEffect.UW1_Spell_Effect_GreaterMagicProtection:
+			Debug.Log ("Magic protection enchantment");
+			
+		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistanceAgainstType>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_PoisonResistance:
+			Debug.Log ("Poison Resistance enchantment");
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectImmunityPoison>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Speed:
+		case SpellEffect.UW1_Spell_Effect_Haste:
+			Debug.Log ("Speed enchantment");
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_Telekinesis:
+		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
+		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
+			Debug.Log ("telekinesis enchantment");
+			//Todo
+			break;
+		case SpellEffect.UW1_Spell_Effect_FreezeTime:
+		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
+		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectFreezeTime>();
+			Debug.Log ("Freeze time enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_Regeneration:
+		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationHealth>();
+			Debug.Log ("Regen enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationMana>();
+			Debug.Log ("mana regen enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_MazeNavigation:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectMazeNavigation>();
+			Debug.Log ("Maze Navigation enchantment");
+			break;			
+		case SpellEffect.UW1_Spell_Effect_Hallucination:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectHallucination>();
+			Debug.Log ("Hallucination");
+			break;
+		case SpellEffect.UW1_Spell_Effect_NightVision:
+		case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
+		case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectNightVision>();
+			Debug.Log ("Nightvision enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_Poison:
+		case SpellEffect.UW1_Spell_Effect_Poison_alt01:
+			Debug.Log ("Poison enchantment");
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_Paralyze:
+		case SpellEffect.UW1_Spell_Effect_Paralyze_alt01:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectParalyze>();
+			Debug.Log ("paralyse enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_Ally:
+		case SpellEffect.UW1_Spell_Effect_Ally_alt01:
+		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectAlly>();
+			Debug.Log ("ally enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_Confusion:
+		case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
+			Debug.Log ("Confusion enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
+		case SpellEffect.UW1_Spell_Effect_Accuracy:
+		case SpellEffect.UW1_Spell_Effect_AdditionalAccuracy:
+		case SpellEffect.UW1_Spell_Effect_MajorAccuracy:
+		case SpellEffect.UW1_Spell_Effect_GreatAccuracy:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
+		case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectAccuracy>();
+			Debug.Log ("accuracy enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorDamage:
+		case SpellEffect.UW1_Spell_Effect_Damage:
+		case SpellEffect.UW1_Spell_Effect_AdditionalDamage:
+		case SpellEffect.UW1_Spell_Effect_MajorDamage:
+		case SpellEffect.UW1_Spell_Effect_GreatDamage:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
+		case SpellEffect.UW1_Spell_Effect_TremendousDamage:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectDamage>();
+			Debug.Log ("damage enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorProtection:
+		case SpellEffect.UW1_Spell_Effect_Protection:
+		case SpellEffect.UW1_Spell_Effect_AdditionalProtection:
+		case SpellEffect.UW1_Spell_Effect_MajorProtection:
+		case SpellEffect.UW1_Spell_Effect_GreatProtection:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
+		case SpellEffect.UW1_Spell_Effect_TremendousProtection:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectProtection>();
+			Debug.Log ("protection enchantment");
+			break;
+		case SpellEffect.UW1_Spell_Effect_MinorToughness:
+		case SpellEffect.UW1_Spell_Effect_Toughness:
+		case SpellEffect.UW1_Spell_Effect_AdditionalToughness:
+		case SpellEffect.UW1_Spell_Effect_MajorToughness:
+		case SpellEffect.UW1_Spell_Effect_GreatToughness:
+		case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
+		case SpellEffect.UW1_Spell_Effect_TremendousToughness:
+		case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
+			Debug.Log ("toughness enchantment");
+			break;
+			
+		default:
+			Debug.Log ("effect Id is " + EffectId);
+			//ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
+			break;
+			
+		}
+		
+		//ActiveSpellArray[index].EffectId=EffectId;
+		//return ActiveSpellArray[index];
+		return false;
+	}
+
+
+
 }
 

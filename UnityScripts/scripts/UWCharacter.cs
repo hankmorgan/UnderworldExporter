@@ -119,7 +119,14 @@ public class UWCharacter : Character {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
-
+		if (isSwimming==true)
+		{
+//			Camera.main.transform.position=new Vector3(Camera.main.transform.position.x,-1.0f,Camera.main.transform.position.z);
+		}
+		else
+		{
+//			Camera.main.transform.position=new Vector3(Camera.main.transform.position.x,0.9198418f,Camera.main.transform.position.z);
+		}
 		if (WindowDetectUW.WaitingForInput==true)
 		{//TODO: This should be in window detect
 			MessageLog.gameObject.GetComponent<UIInput>().selected=true;

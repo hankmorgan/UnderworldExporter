@@ -85,7 +85,7 @@ public class LightSource : object_base {
 		}
 		if (invSlot != null)
 		{
-			if   ((objInt.isQuant==false) || ((objInt.isQuant) && (objInt.Link==1)))
+			if   ((objInt.isQuant==false) || ((objInt.isQuant) && (objInt.Link==1)) || (objInt.isEnchanted==true))
 			{//Is a quantity of one or not a quantity/
 				pInv.RemoveItem(this.name);
 				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
