@@ -94,4 +94,36 @@ public class Skills : MonoBehaviour {
 		}
 	}
 
+
+	public void AdvanceSkill(int SkillNo, int SkillPoints)
+	{//Increase a players skill by the specificed skill let
+		switch (SkillNo)
+		{
+		case SkillAttack : Attack +=SkillPoints;break;
+		case SkillDefense : Defense +=SkillPoints;break;
+		case SkillUnarmed : Unarmed+=SkillPoints;break;
+		case SkillSword :  Sword+=SkillPoints;break;
+		case SkillAxe : Axe+=SkillPoints;break;
+		case SkillMace :  Mace+=SkillPoints;break;
+		case SkillMissile : Missile+=SkillPoints;break;
+		case SkillMana : ManaSkill+=SkillPoints;break;
+		case SkillLore : Lore+=SkillPoints;break;
+		case SkillCasting : Casting+=SkillPoints;break;
+		case SkillTraps : Traps+=SkillPoints;break;
+		case SkillSearch : Search+=SkillPoints;break;
+		case SkillTrack : Track+=SkillPoints;break;
+		case SkillSneak : Sneak+=SkillPoints;break;
+		case SkillRepair : Repair+=SkillPoints;break;
+		case SkillCharm : Charm+=SkillPoints;break;
+		case SkillPicklock : PickLock+=SkillPoints;break;
+		case SkillAcrobat : Acrobat+=SkillPoints;break;
+		case SkillAppraise : Appraise+=SkillPoints;break;
+		case SkillSwimming : Swimming+=SkillPoints;break;
+		}
+	}
+
+	public string GetSkillName(int skillNo)
+	{
+		return Skillnames[skillNo];
+	}
 }

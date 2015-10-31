@@ -899,7 +899,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 	//CreateDoorModel(gScene);
 	//CreateShockBridgeModel(gScene);
-	SaveScene(gSdkManager, gScene, "level.fbx", 1, false);
+	SaveScene(gSdkManager, gScene, "level.fbx", 1, true);
 	}
 
 void RenderFBXTile(FbxScene*& gScene,int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)

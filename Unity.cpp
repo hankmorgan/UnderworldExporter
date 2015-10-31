@@ -159,6 +159,12 @@ void RenderUnityEntityFountain(int game, float x, float y, float z, ObjectItem &
 	fprintf(UNITY_FILE, "\n\tAddFountain(myObj);");
 	}
 
+void RenderUnityEntityShrine(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddShrine(myObj);");
+	}
+
 void RenderUnityEntityLockpick(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	//Adds an obj_base to the object.
@@ -1959,6 +1965,12 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityFountain(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case SHRINE:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityShrine(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:

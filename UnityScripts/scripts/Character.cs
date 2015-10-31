@@ -190,6 +190,7 @@ public class Character : MonoBehaviour {
 								Debug.Log("attempting to pick up a quantity");
 								UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
 								inputctrl.eventReceiver=this.gameObject;
+								inputctrl.type=UIInput.KeyboardType.NumberPad;
 								inputctrl.selected=true;
 								QuantityObj=objPicked;	
 								Time.timeScale=0.0f;

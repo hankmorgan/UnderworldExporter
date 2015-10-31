@@ -92,4 +92,10 @@ public class object_base : MonoBehaviour {
 	{
 		return false;
 	}
+
+	public virtual void FailMessage()
+	{
+		//Message to display when this object is used on a another object that has no use for it. Eg a key on a sign.
+		ml.text="You cannot use this. (Failmessage default)";
+	}
 }

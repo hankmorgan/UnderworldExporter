@@ -376,6 +376,7 @@ public class InventorySlot : MonoBehaviour {
 							Debug.Log("attempting to pick up a quantity");
 							UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
 							inputctrl.eventReceiver=this.gameObject;
+							inputctrl.type=UIInput.KeyboardType.NumberPad;
 							inputctrl.selected=true;
 							WindowDetect.WaitingForInput=true;
 							Time.timeScale=0.0f;

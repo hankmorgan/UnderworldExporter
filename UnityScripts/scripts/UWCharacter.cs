@@ -172,7 +172,7 @@ public class UWCharacter : Character {
 		Debug.Log ("Value summited");
 
 		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
-		Debug.Log (inputctrl.text);
+		//Debug.Log (inputctrl.text);
 		int quant= int.Parse(inputctrl.text);
 		if (quant==0)
 		{//cancel

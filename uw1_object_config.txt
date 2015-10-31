@@ -341,7 +341,7 @@
 340 0 0 0 model 23 a_large_boulder H 0 Sprites/OBJECTS_340 0 L M 1 1 1 Sprites/OBJECTS_340 Sprites/OBJECTS_340 S T U Sprites/OBJECTS_340 W x Y 0 1
 341 0 0 0 model 23 a_boulder H 0 Sprites/OBJECTS_341 0 L M 1 1 1 Sprites/OBJECTS_341 Sprites/OBJECTS_341 S T U Sprites/OBJECTS_341 W x Y 0 1
 342 0 0 0 model 23 a_small_boulder H 0 Sprites/OBJECTS_342 0 L M 1 1 1 Sprites/OBJECTS_342 Sprites/OBJECTS_342 S T U Sprites/OBJECTS_342 W x Y 0 1
-343 0 0 0 model 17 a_shrine H 0 Sprites/OBJECTS_343 1 L M 1 1 1 Sprites/OBJECTS_343 Sprites/OBJECTS_343 S T U Sprites/OBJECTS_343 W x Y 0 1
+343 0 0 0 entity 83 a_shrine H 0 Sprites/OBJECTS_343 1 L M 1 1 1 Sprites/OBJECTS_343 Sprites/OBJECTS_343 S T U Sprites/OBJECTS_343 W x Y 0 1
 344 0 0 0 model 23 a_table H 0 Sprites/OBJECTS_344 0 L M 1 1 1 Sprites/OBJECTS_344 Sprites/OBJECTS_344 S T U Sprites/OBJECTS_344 W x Y 0 1
 345 0 0 0 model 23 a_beam H 0 Sprites/OBJECTS_345 0 L M 1 1 1 Sprites/OBJECTS_345 Sprites/OBJECTS_345 S T U Sprites/OBJECTS_345 W x Y 0 1
 346 0 0 0 model 23 a_moongate H 0 Sprites/OBJECTS_346 0 L M 1 1 1 Sprites/OBJECTS_346 Sprites/OBJECTS_346 S T U Sprites/OBJECTS_346 W x Y 0 1

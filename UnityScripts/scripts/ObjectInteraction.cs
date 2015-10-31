@@ -87,6 +87,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int ANIMATION = 80;
 	public const int SILVERSEED = 81;
 	public const int FOUNTAIN = 82;
+	public const int SHRINE =83;
 
 	public static UILabel MessageLog;
 
@@ -489,7 +490,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public bool Use()
 	{//Code to activate objects by type.
-		Debug.Log("USE");
+	//	Debug.Log("USE");
 		GameObject ObjectInHand =null;// = new GameObject();
 		object_base item=null;//Base object class
 
@@ -537,7 +538,10 @@ public class ObjectInteraction : MonoBehaviour {
 			}
 			break;
 		case CONTAINER:// CONTAINER 19
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item = (Container)this.gameObject.GetComponent<Container>();
+			}
 			break;
 		case TORCH://TORCH 22
 			if (playerUW.playerInventory.ObjectInHand=="")
@@ -585,10 +589,28 @@ public class ObjectInteraction : MonoBehaviour {
 			}
 			break;
 		case FOUNTAIN:
-			item=(Fountain)this.GetComponent<Fountain>();
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
+				item=(Fountain)this.GetComponent<Fountain>();
+			}
+			break;
+		case SHRINE:
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
+				item=(Shrine)this.GetComponent<Shrine>();
+			}
 			break;
 		default:
-			item = this.GetComponent<object_base>();
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{
+				item = this.GetComponent<object_base>();
+			}
+			else
+			{
+				FailMessage();
+				return true;
+			}
+
 			break;
 		}
 
@@ -598,6 +620,10 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 		else
 		{
+			if (playerUW.playerInventory.ObjectInHand!="")
+			{
+				FailMessage();
+			}
 			return false;
 		}
 	}
@@ -761,6 +787,16 @@ public class ObjectInteraction : MonoBehaviour {
 			NPCCharacter.TalkTo();
 		}
 
+	}
+
+	public void FailMessage()
+	{
+		GameObject obj = playerUW.playerInventory.GetGameObjectInHand();
+		if (obj!=null)
+		{
+			object_base objbase= this.GetComponent<object_base>();
+			objbase.FailMessage();
+		}
 	}
 
 	public bool CombineObject(GameObject InputObject1, GameObject InputObject2)

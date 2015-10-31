@@ -65,7 +65,7 @@ public class PlayerInventory : MonoBehaviour {
 	public Texture2D Blank;
 
 	//For calculating light levels
-	private Light lt;
+	public Light lt;
 	private LightSource ls;
 
 	private Container playerContainer;
@@ -113,7 +113,7 @@ public class PlayerInventory : MonoBehaviour {
 		//Check for lights
 		if (lt==null)
 		{
-			lt = this.gameObject.GetComponent<Light>();
+			lt = this.gameObject.GetComponentInChildren<Light>();
 		}
 
 		ls = null;

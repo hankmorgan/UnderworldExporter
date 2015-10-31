@@ -71,6 +71,10 @@ public class ContainerOpened : object_base {
 		}
 		else
 		{
+			if (UWCharacter.InteractionMode!=UWCharacter.InteractionModePickup)
+			{//Only allow this to happen when in pickup mode.
+				return;
+			}
 			//Move the contents out of the container into the parent.
 			//Debug.Log ("Moving contents out of bag");
 			Container CurrentContainer = GameObject.Find (playerUW.playerInventory.currentContainer).GetComponent<Container>();
