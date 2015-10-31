@@ -489,7 +489,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	public bool Use()
 	{//Code to activate objects by type.
-
+		Debug.Log("USE");
 		GameObject ObjectInHand =null;// = new GameObject();
 		object_base item=null;//Base object class
 
@@ -513,10 +513,16 @@ public class ObjectInteraction : MonoBehaviour {
 			item  = (DoorControl)this.GetComponent<DoorControl>();
 			break;
 		case KEY://A key just becomes the object in hand
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item  = (DoorKey)this.GetComponent<DoorKey>();
+			}
 			break;
 		case LOCKPICK://Special case until Lockpick component is created.
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item =(LockPick)this.GetComponent<object_base>();
+			}
 			break;
 		case BUTTON://	BUTTON 8
 		case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
@@ -525,19 +531,31 @@ public class ObjectInteraction : MonoBehaviour {
 		case SIGN://	SIGN 10
 		case BOOK://	BOOK 11
 		case SCROLL://	SCROLL 13	//The reading kind
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item =(Readable)this.gameObject.GetComponent<Readable>();
+			}
 			break;
 		case CONTAINER:// CONTAINER 19
 			item = (Container)this.gameObject.GetComponent<Container>();
 			break;
 		case TORCH://TORCH 22
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item=(LightSource)this.gameObject.GetComponent<LightSource>();
+			}
 			break;
 		case FOOD://FOOD 24
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item = (Food)this.gameObject.GetComponent<Food>();
+			}
 			break;
 		case MAP:// MAP 28
-			item = (Map)this.gameObject.GetComponent<Map>();
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
+				item = (Map)this.gameObject.GetComponent<Map>();
+			}
 			break;
 		case TMAP_SOLID://TMAP_SOLID 34
 		case TMAP_CLIP://TMAP_CLIP 35
@@ -561,7 +579,10 @@ public class ObjectInteraction : MonoBehaviour {
 			item = (RuneBag)this.GetComponent<RuneBag>();
 			break;
 		case SILVERSEED:
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
 			item=(SilverSeed)this.GetComponent<SilverSeed>();
+			}
 			break;
 		case FOUNTAIN:
 			item=(Fountain)this.GetComponent<Fountain>();
@@ -719,6 +740,18 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 	}
 
+
+	public bool Equip(int SlotNo)
+	{//To handle what happens when an item (typically armour is equipped
+		Debug.Log ("Equip Event on " + this.gameObject.name);
+		return true;
+	}
+
+	public bool UnEquip(int SlotNo)
+	{//To handle what happens when an item (typically armour is unequipped
+		Debug.Log ("Unequip Event on " + this.gameObject.name);
+		return true;
+	}
 
 	public void TalkTo()
 	{

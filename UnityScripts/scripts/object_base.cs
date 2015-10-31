@@ -82,4 +82,14 @@ public class object_base : MonoBehaviour {
 	{//For special events when an object is picked up. Eg silver seed.
 		return false;
 	}
+
+	public virtual bool EquipEvent(int slotNo)
+	{
+		return false;
+	}
+
+	public virtual bool UnEquipEvent(int slotNo)
+	{
+		return false;
+	}
 }

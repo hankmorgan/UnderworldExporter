@@ -320,22 +320,27 @@ public class PlayerInventory : MonoBehaviour {
 		case 0://Helm
 			 sHelm=sObject;
 	         bHelm=true;
+			 EquipItemEvent(slotIndex);
 			break;
 		case 1://Chest
 			sChest=sObject;
 			bChest=true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 2://Leggings
 			sLegs=sObject;
 			bLegs=true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 3://Boots
 			sBoots=sObject;
 			bBoots=true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 4://Gloves
 			sGloves=sObject;
 			bGloves=true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 5://ShoulderRight
 			sRightShoulder=sObject;
@@ -348,18 +353,22 @@ public class PlayerInventory : MonoBehaviour {
 		case 7://HandRight
 			sRightHand=sObject;
 			bRightHand =true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 8://HandLeft
 			sLeftHand=sObject;
 			bLeftHand=true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 9://RingRight
 			sRightRing=sObject;
 			bRightRing=true;
+			EquipItemEvent(slotIndex);
 			break;
 		case 10://RingLeft
 			sLeftRing=sObject;
 			bLeftRing=true;
+			EquipItemEvent(slotIndex);
 			break;
 		default://Inventory Slots 0-7		
 			if ((slotIndex>=11)&&(slotIndex<=18))
@@ -378,22 +387,27 @@ public class PlayerInventory : MonoBehaviour {
 		switch (slotIndex)
 		{
 		case 0://Helm
+			UnEquipItemEvent(slotIndex);
 			sHelm="";
 			bHelm=true;
 			break;
 		case 1://Chest
+			UnEquipItemEvent(slotIndex);
 			sChest="";
 			bChest=true;
 			break;
 		case 2://Leggings
+			UnEquipItemEvent(slotIndex);
 			sLegs="";
 			bLegs=true;
 			break;
 		case 3://Boots
+			UnEquipItemEvent(slotIndex);
 			sBoots="";
 			bBoots=true;
 			break;
 		case 4://Gloves
+			UnEquipItemEvent(slotIndex);
 			sGloves="";
 			bGloves=true;
 			break;
@@ -406,18 +420,22 @@ public class PlayerInventory : MonoBehaviour {
 			bLeftShoulder=true;
 			break;
 		case 7://HandRight
+			UnEquipItemEvent(slotIndex);
 			sRightHand="";
 			bRightHand=true;
 			break;
 		case 8://HandLeft
+			UnEquipItemEvent(slotIndex);
 			sLeftHand="";
 			bLeftHand=true;
 			break;
 		case 9://RingRight
+			UnEquipItemEvent(slotIndex);
 			sRightRing="";
 			bRightRing=true;
 			break;
 		case 10://RingLeft
+			UnEquipItemEvent(slotIndex);
 			sLeftRing="";
 			bLeftRing=true;
 			break;
@@ -456,10 +474,11 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void SwapObjects(GameObject ObjInSlot, int slotIndex, string cObjectInHand)
 	{//Swaps specified game object as the slot wth the passed object
-		//Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
+		Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
 		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
 		//cn.RemoveItemFromContainer(cObjectInHand);
-		cn.RemoveItemFromContainer(ObjInSlot.name);
+		//cn.RemoveItemFromContainer(ObjInSlot.name);//removed this when adding equip events.
+		RemoveItem(ObjInSlot.name);
 		SetObjectAtSlot(slotIndex,cObjectInHand);
 		if (slotIndex>=11)
 			{
@@ -476,12 +495,14 @@ public class PlayerInventory : MonoBehaviour {
 	{//Removes the item from the paperdoll and the current container.
 		if (sHelm==ObjectName)
 		{
+			UnEquipItemEvent(0);
 			sHelm="";
 			bHelm=true;
 			return true;
 		}
 		if (sChest==ObjectName)
 		{
+			UnEquipItemEvent(1);
 			sChest="";
 			bChest=true;
 			return true;
@@ -489,6 +510,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sLegs==ObjectName)
 		{
+			UnEquipItemEvent(2);
 			sLegs="";
 			bLegs=true;
 			return true;
@@ -496,6 +518,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sBoots==ObjectName)
 		{
+			UnEquipItemEvent(3);
 			sBoots="";
 			bBoots=true;
 			return true;
@@ -503,6 +526,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sGloves==ObjectName)
 		{
+			UnEquipItemEvent(4);
 			sGloves="";
 			bGloves=true;
 			return true;
@@ -510,6 +534,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sRightShoulder==ObjectName)
 		{
+			//UnEquipItemEvent(5);
 			sRightShoulder="";
 			bRightShoulder=true;
 			return true;
@@ -517,6 +542,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sLeftShoulder==ObjectName)
 		{
+			//UnEquipItemEvent(6);
 			sLeftShoulder="";
 			bLeftShoulder=true;
 			return true;
@@ -524,6 +550,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sRightHand==ObjectName)
 		{
+			UnEquipItemEvent(7);
 			sRightHand="";
 			bRightHand=true;
 			return true;
@@ -531,6 +558,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sLeftHand==ObjectName)
 		{
+			UnEquipItemEvent(8);
 			sLeftHand="";
 			bLeftHand=true;
 			return true;
@@ -538,6 +566,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sRightRing==ObjectName)
 		{
+			UnEquipItemEvent(9);
 			sRightRing="";
 			bRightRing=true;
 			return true;
@@ -545,6 +574,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sLeftRing==ObjectName)
 		{
+			UnEquipItemEvent(10);
 			sLeftRing="";
 			bLeftRing=true;
 			return true;
@@ -567,12 +597,14 @@ public class PlayerInventory : MonoBehaviour {
 	{//Remove the object from wherever it is on the characters paperdoll.
 		if (sHelm==ObjectName)
 		{
+			UnEquipItemEvent(0);
 			sHelm="";
 			bHelm=true;
 			return true;
 		}
 		if (sChest==ObjectName)
 		{
+			UnEquipItemEvent(1);
 			sChest="";
 			bChest=true;
 			return true;
@@ -580,6 +612,7 @@ public class PlayerInventory : MonoBehaviour {
 
 		if (sLegs==ObjectName)
 		{
+			UnEquipItemEvent(2);
 			sLegs="";
 			bLegs=true;
 			return true;
@@ -587,6 +620,7 @@ public class PlayerInventory : MonoBehaviour {
 
 		if (sBoots==ObjectName)
 		{
+			UnEquipItemEvent(3);
 			sBoots="";
 			bBoots=true;
 			return true;
@@ -594,6 +628,7 @@ public class PlayerInventory : MonoBehaviour {
 
 		if (sGloves==ObjectName)
 		{
+			UnEquipItemEvent(4);
 			sGloves="";
 			bGloves=true;
 			return true;
@@ -615,6 +650,7 @@ public class PlayerInventory : MonoBehaviour {
 
 		if (sRightHand==ObjectName)
 		{
+			UnEquipItemEvent(7);
 			sRightHand="";
 			bRightHand=true;
 			return true;
@@ -622,6 +658,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sLeftHand==ObjectName)
 		{
+			UnEquipItemEvent(8);
 			sLeftHand="";
 			bLeftHand=true;
 			return true;
@@ -629,6 +666,7 @@ public class PlayerInventory : MonoBehaviour {
 
 		if (sRightRing==ObjectName)
 		{
+			UnEquipItemEvent(9);
 			sRightRing="";
 			bRightRing=true;
 			return true;
@@ -636,6 +674,7 @@ public class PlayerInventory : MonoBehaviour {
 		
 		if (sLeftRing==ObjectName)
 		{
+			UnEquipItemEvent(10);
 			sLeftRing="";
 			bLeftRing=true;
 			return true;
@@ -680,6 +719,32 @@ public class PlayerInventory : MonoBehaviour {
 	public GameObject GetGameObject(string name)
 	{
 		return GameObject.Find (name);
+	}
+
+	public void EquipItemEvent(int slotNo)
+	{//This must be called after the item is finally set.
+		GameObject obj = GetGameObjectAtSlot(slotNo);
+		if (obj !=null)
+		{
+			ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+			if (objInt!=null)
+			{
+				objInt.Equip(slotNo);
+			}
+		}
+	}
+
+	public void UnEquipItemEvent(int slotNo)
+	{//This must be called before the item is finally removed.
+		GameObject obj = GetGameObjectAtSlot(slotNo);
+		if (obj !=null)
+		{
+			ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+			if (objInt!=null)
+			{
+				objInt.UnEquip(slotNo);
+			}
+		}
 	}
 
 }

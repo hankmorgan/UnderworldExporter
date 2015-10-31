@@ -4,6 +4,11 @@ using System.Collections;
 public class Map : object_base {
 	//The inventory item
 	// Use this for initialization
+	protected override void Start ()
+	{
+		base.Start();
+		objInt.isQuant=false; 
+	}
 
 	public override bool use ()
 	{
