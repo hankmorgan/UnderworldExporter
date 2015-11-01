@@ -15,16 +15,13 @@ public class a_damage_trap : MonoBehaviour {
 		triggerObj=GameObject.Find (Var.trigger);
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public void Activate()
+	{
 		if ((triggerObj == null) && (Var.trigger != "") && (Var.trigger != null))
 		{//For when objects are added at run time.
 			triggerObj=GameObject.Find (Var.trigger);
 		}
-	}
-	
-	public void Activate()
-	{
+
 		//Do what it needs to do.
 		Debug.Log(name + " activated." + Var.trigger) ;
 		if (triggerObj !=null )

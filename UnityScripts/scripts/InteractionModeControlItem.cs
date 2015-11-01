@@ -8,16 +8,6 @@ public class InteractionModeControlItem : MonoBehaviour {
 	public bool isOn;
 	public InteractionModeControl imc;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	void OnClick()
 	{

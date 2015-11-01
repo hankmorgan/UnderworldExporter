@@ -3,13 +3,14 @@ using System.Collections;
 
 public class ScrollButtonStatsDisplay : Scrollbutton {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
+	private int PreviousValue=-1;
 	// Update is called once per frame
 	void Update () {
-		StatsDisplay.Offset=ScrollValue;
+		if (PreviousValue!=ScrollValue)
+		{
+			PreviousValue=ScrollValue;
+			StatsDisplay.Offset=ScrollValue;
+			StatsDisplay.UpdateNow=true;
+		}
 	}
 }

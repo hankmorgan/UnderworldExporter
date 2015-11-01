@@ -16,12 +16,7 @@ public class a_teleport_trap : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 		triggerObj=GameObject.Find (Var.trigger);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
+
 	public void Activate()
 	{
 		

@@ -5,15 +5,7 @@ public class Action_Change_State : MonoBehaviour {
 
 	public string ObjectToActivate;
 	public int NewState;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	public void PerformAction()
 	{

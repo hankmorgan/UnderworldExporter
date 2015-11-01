@@ -7,15 +7,6 @@ public class Scrollbutton : MonoBehaviour {
 	public static int ScrollValue=0;
 	public int MaxScrollValue;
 	public int MinScrollValue;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnClick()
 	{

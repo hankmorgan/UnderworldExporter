@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Feet : MonoBehaviour {
 
+	public TileMap tm;
+/*
 	// Use this for initialization
 	void Start () {
 		//Physics.IgnoreCollision(this.collider, this.transform.parent.collider);
@@ -23,5 +25,19 @@ public class Feet : MonoBehaviour {
 			}
 		}
 	}
+*/
 
+	//void OnTriggerEnter(Collider other) {
+//	//	Debug.Log (other.gameObject.name);
+	//	if (other.gameObject.)
+	//}
+
+	void OnTriggerStay(Collider other) {
+		TileMap.OnGround=true;  
+	}
+
+	void OnTriggerExit(Collider other) {
+		// Destroy everything that leaves the trigger
+		tm.PositionDetect();
+	}
 }

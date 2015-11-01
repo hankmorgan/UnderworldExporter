@@ -6,11 +6,11 @@ public class TextureController : MonoBehaviour {
 	public int NoOfObjects=500;
 	public int NoOfTextures=500;
 	private bool[] ObjectInUse=new bool[500];
-	private bool[] TextureInUse=new bool[500];
+	//private bool[] TextureInUse=new bool[500];
 	private Texture2D[]ObjectSrcImage=new Texture2D[500];
 	private Texture2D[]ObjectDstImage=new Texture2D[500];
-	private Texture2D[]TextureSrcImage=new Texture2D[500];
-	private Texture2D[]TextureDstImage=new Texture2D[500];
+	//private Texture2D[]TextureSrcImage=new Texture2D[500];
+	//private Texture2D[]TextureDstImage=new Texture2D[500];
 
 	private bool[] TextureReady=new bool[500];
 	private bool[] ObjectReady=new bool[500];
@@ -27,16 +27,16 @@ public class TextureController : MonoBehaviour {
 		pal = this.GetComponent<UWPalette>();
 
 		ObjectInUse=new bool[NoOfObjects];
-		TextureInUse=new bool[NoOfTextures];
+		//TextureInUse=new bool[NoOfTextures];
 		//isAnimated=new bool[NoOfObjects];
 
 		ObjectSrcImage = new Texture2D[NoOfObjects];
 		ObjectDstImage = new Texture2D[NoOfObjects];
 		ObjectDstSprite = new Sprite[NoOfObjects];
 
-		TextureSrcImage = new Texture2D[NoOfTextures];
-		TextureDstImage = new Texture2D[NoOfTextures];
-		TextureReady = new bool[NoOfTextures];
+		//TextureSrcImage = new Texture2D[NoOfTextures];
+		//TextureDstImage = new Texture2D[NoOfTextures];
+		//TextureReady = new bool[NoOfTextures];
 
 
 
@@ -97,7 +97,7 @@ public class TextureController : MonoBehaviour {
 		return spr;
 	}
 
-	public Texture2D RequestTexture(int index, bool isAnimated)
+	/*public Texture2D RequestTexture(int index, bool isAnimated)
 	{
 		if(TextureReady[index]==false)
 		{
@@ -131,20 +131,15 @@ public class TextureController : MonoBehaviour {
 		//TextureDstSprite[index]=Sprite.Create(ObjectDstImage[index] ,new Rect(0,0,ObjectDstImage[index].width,ObjectDstImage[index].height), new Vector2(0.5f, 0.0f));
 
 		return TextureDstImage[index];
-	}
+	}*/
 
-
-	// Update is called once per frame
-	void Update () {
-
-	}
 
 	void LateUpdate()
 	{
-		for (int i=0; i<NoOfTextures;i++)
-		{
-			TextureReady[i]=false;
-		}
+		//for (int i=0; i<NoOfTextures;i++)
+		//{
+		//	TextureReady[i]=false;
+		//}
 		for (int i=0; i <NoOfObjects;i++)
 		{
 			ObjectReady[i]=false;

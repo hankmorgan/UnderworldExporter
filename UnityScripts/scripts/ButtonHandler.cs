@@ -84,26 +84,6 @@ public class ButtonHandler : object_base {
 		}
 	}
 
-	void OnGui(){
-		//MessageLog.text=name;
-	}
-
-	void OnTriggerEnter()
-	{
-		//counter++;
-		//MessageLog.text=name +"triggered";// + counter;
-	}
-
-	void OnMouseEnter()
-	{
-		//MessageLog.text=name +"entered";
-	}
-
-	void OnMouseExit()
-	{
-		//MessageLog.text=name +"exited";
-	}
-
 	public override bool LookAt ()
 	{
 	//public void LookAt()

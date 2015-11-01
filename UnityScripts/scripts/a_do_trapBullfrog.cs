@@ -14,11 +14,7 @@ public class a_do_trapBullfrog : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 	}
 	
-	// Update is called once per frame
-	//void Update () {
-	
-	//}
-	
+
 	public void Activate()
 	{
 		//Do what it needs to do.

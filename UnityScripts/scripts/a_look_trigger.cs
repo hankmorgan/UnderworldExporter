@@ -13,11 +13,7 @@ public class a_look_trigger : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 	}
 	
-	// Update is called once per frame
-	//void Update () {
-	
-	//}
-	
+
 	public void Activate()
 	{
 		//Do what it needs to do.

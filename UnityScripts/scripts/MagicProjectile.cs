@@ -6,15 +6,6 @@ public class MagicProjectile : MonoBehaviour {
 	public int damage;
 	//public string HitImage;
 	public bool HasHit;
-	// Use this for initialization
-	void Start () {
-			
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnCollisionEnter(Collision collision)
 	{

@@ -22,7 +22,7 @@ public class object_base : MonoBehaviour {
 
 	public virtual bool Activate()
 	{//Unimplemented items 
-		Debug.Log ("default activate for " + this.gameObject.name);
+		//Debug.Log ("default activate for " + this.gameObject.name);
 		CheckReferences();
 		return false;
 	}
@@ -30,14 +30,14 @@ public class object_base : MonoBehaviour {
 
 	public virtual bool ApplyAttack(int damage)
 	{
-		Debug.Log ("default apply attack for " + this.gameObject.name);
+	//	Debug.Log ("default apply attack for " + this.gameObject.name);
 		return false;
 	}
 
 
 	public virtual bool LookAt()
 	{
-		Debug.Log ("default lookat for " + this.gameObject.name);
+		//Debug.Log ("default lookat for " + this.gameObject.name);
 		CheckReferences();
 		ml.text=playerUW.StringControl.GetFormattedObjectNameUW(objInt);
 		return true;
@@ -46,14 +46,14 @@ public class object_base : MonoBehaviour {
 
 	public virtual bool ActivateByObject(GameObject ObjectUsed)
 	{
-		Debug.Log ("default activatebyobj for " + this.gameObject.name);
+		//Debug.Log ("default activatebyobj for " + this.gameObject.name);
 		CheckReferences();
 		return false;
 	}
 
 	public virtual bool use()
 	{
-		Debug.Log ("default use for " + this.gameObject.name);
+		//Debug.Log ("default use for " + this.gameObject.name);
 		CheckReferences();
 		return false;
 	}

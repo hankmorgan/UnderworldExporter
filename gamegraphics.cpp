@@ -171,10 +171,19 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			}
 
 		}
-return;
+
 
 	//	getPalette(PaletteFile, pal, p);
+
+	if (GREYSCALE == 1)
+		{
+		getPaletteIndex(PaletteFile,pal,PaletteNo);
+		}
+	else
+		{
 		getPalette(PaletteFile, pal, PaletteNo);
+		}
+
 	
 
 
@@ -218,7 +227,7 @@ return;
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 4, 32);
 				if (useTGA==1)
 					{
-					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i+210, pal, OutFileName,0);
+					writeTGA(textureFile, textureOffset, BitmapSize, BitmapSize, i, pal, OutFileName,0);
 					}
 				else
 					{
@@ -1590,7 +1599,7 @@ void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 	FILE *fptr;
 	char outFile[255];
 
-	sprintf_s(outFile, 255, "%s_%04d.tga", OutFileName, index);
+	sprintf_s(outFile, 255, "%s_%03d.tga", OutFileName, index);
 	//stbi_write_tga(outFile, SizeH, SizeH, Alpha, bits + Start);
 	//return;
 	/* Write the result as a uncompressed TGA */

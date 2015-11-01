@@ -30,8 +30,10 @@ public class LightSource : object_base {
 			}
 		}
 	}
+
 	public override bool use ()
 	{
+		base.use();
 		if (objInt.PickedUp==false)
 		{
 			if (IsOn==true)

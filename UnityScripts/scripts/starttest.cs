@@ -56,11 +56,5 @@ public class starttest : MonoBehaviour {
 		//}
 		//CreateObj();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 }

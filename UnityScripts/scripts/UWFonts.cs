@@ -35,13 +35,6 @@ public class UWFonts : MonoBehaviour {
 */
 
 
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-
 	public void ConvertString(int font, string strIn, UITexture TargetControl)
 	{
 		int BitMapWidth = 328; //strIn.Length*font5x6pWidth;

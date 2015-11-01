@@ -14,17 +14,15 @@ public class a_door_trap : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	public void Activate()
+	{
+
+		GameObject door = Var.findDoor(Var.triggerX,Var.triggerY);
+
 		if ((triggerObj = null) && (Var.trigger != "") && (Var.trigger != null))
 		{//For when objects are added at run time.
 			triggerObj=GameObject.Find (Var.trigger);
 		}
-	}
-	
-	public void Activate()
-	{
-		GameObject door = Var.findDoor(Var.triggerX,Var.triggerY);
 
 		if (door!=null)
 		{

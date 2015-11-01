@@ -14,11 +14,6 @@ public class Action_Choice : MonoBehaviour {
 		ActivateObjectFalse=GameObject.Find (ActivateFalse);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void PerformAction()
 	{
 		Debug.Log (this.name + " Action Choice");

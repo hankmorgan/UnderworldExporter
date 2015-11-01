@@ -57,6 +57,8 @@ public class PlayerInventory : MonoBehaviour {
 	public UITexture RightShoulder_Slot;
 	public UITexture[] BackPack_Slot=new UITexture[8];
 
+	private GameObject[] LightGameObjects=new GameObject[4];
+
 	public bool atTopLevel;
 	public string currentContainer;
 
@@ -121,12 +123,28 @@ public class PlayerInventory : MonoBehaviour {
 		for (int i = 5; i<=8; i++)
 		{
 			ls = null;
+			//Update the gameobject at the slot if needed
+			if (LightGameObjects[i-5]!=null)
+			{
+				if (GetObjectAtSlot(i)!=LightGameObjects[i-5].name)
+				{
+					LightGameObjects[i-5]= GetGameObjectAtSlot(i);
+				}
+			}
+			else
+			{//No object
+				if(GetObjectAtSlot (i)!="")
+				{
+					LightGameObjects[i-5] = GetGameObjectAtSlot(i);
+				}
+			}
+
 			if (GetObjectAtSlot(i) != "")
 			{
-				GameObject objAtSlot = GetGameObjectAtSlot(i); //GameObject.Find (GetObjectAtSlot(i));
-				if (objAtSlot != null)
+				//GameObject objAtSlot = GetGameObjectAtSlot(i); //GameObject.Find (GetObjectAtSlot(i));
+				if (LightGameObjects[i-5] != null)
 				{
-					ls =objAtSlot.GetComponent<LightSource>();
+					ls =LightGameObjects[i-5].GetComponent<LightSource>();
 					if (ls != null)
 					{
 						if (ls.IsOn==true)

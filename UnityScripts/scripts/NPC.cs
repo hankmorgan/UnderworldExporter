@@ -81,10 +81,10 @@ public class NPC : object_base {
 			}
 			//if (state== NPC.AI_STATE_WALKING)
 			//{//Sets the AI to always be turned towards their next waypoint
-				if (ai.AI.Navigator.CurrentPath!=null)
-				{
-					ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint));
-				}
+			if (ai.AI.Navigator.CurrentPath!=null)
+			{
+				ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint));
+			}
 			//}
 
 

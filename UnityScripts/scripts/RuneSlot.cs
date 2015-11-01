@@ -29,12 +29,6 @@ public class RuneSlot : MonoBehaviour {
 
 	}
 
-
-	//public static string GetRuneName(int index)
-	//{
-	//	return Runes[index];
-	//}
-
 	void OnClick()
 	{
 

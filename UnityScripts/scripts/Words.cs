@@ -23,12 +23,6 @@ public class Words : MonoBehaviour {
 		CreateString ();
 	}
 
-
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void CreateString()
 	{
 		char[] WordString = sc.GetString(BlockNo,StringNo).ToCharArray();

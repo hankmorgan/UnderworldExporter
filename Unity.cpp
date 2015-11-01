@@ -879,11 +879,13 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	if (isTrigger(objList[currobj.link]) != 0)
 		{
-		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"%s\", %d, false);", textureMasters[currobj.texture].path, UniqueObjectName(objList[currobj.link]), currobj.texture);
+		//fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"%s\", %d, false);", textureMasters[currobj.texture].path, UniqueObjectName(objList[currobj.link]), currobj.texture);
+		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"%s\", \"%s\", %d, false);", textureMasters[currobj.texture].path, UniqueObjectName(objList[currobj.link]), currobj.texture);
 		}
 	else
 		{
-		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"\" , %d, false);", textureMasters[currobj.texture].path, currobj.texture);
+		//fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\"textures/tmap/%s\", \"\" , %d, false);", textureMasters[currobj.texture].path, currobj.texture);
+		fprintf(UNITY_FILE, "\n\tCreateTMAP(myObj,\t\"%s\", \"\" , %d, false);", textureMasters[currobj.texture].path, currobj.texture);
 		}
 
 	//textureMasters[currobj.texture].path

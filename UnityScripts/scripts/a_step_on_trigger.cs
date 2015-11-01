@@ -14,12 +14,7 @@ public class a_step_on_trigger : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 		triggerObj=GameObject.Find (Var.trigger);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
+
 	public void Activate()
 	{
 		

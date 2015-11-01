@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ScrollButtonInventory : Scrollbutton {
 
+	private int previousScrollValue=-1;
 	public PlayerInventory pInv;
 	// Use this for initialization
 	void Start () {
@@ -11,7 +12,11 @@ public class ScrollButtonInventory : Scrollbutton {
 	
 	// Update is called once per frame
 	void Update () {
-		pInv.ContainerOffset=ScrollValue;
-		pInv.Refresh ();
+		if (ScrollValue!=previousScrollValue)
+		{
+			previousScrollValue=ScrollValue;
+			pInv.ContainerOffset=ScrollValue;
+			pInv.Refresh ();
+		}
 	}
 }

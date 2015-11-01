@@ -379,11 +379,6 @@ public class UWPalette : MonoBehaviour {
 		return DstImage;
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
-
 	void SetPal(int index, float Red, float Green, float Blue)
 	{
 		red[index]=(float)Red/255.0f;

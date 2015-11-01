@@ -257,12 +257,13 @@ public class WindowDetectUW : WindowDetect {
 		}
 		else
 		{
-			Rect Position = new Rect(
-				Event.current.mousePosition.x-cursorSizeX/2,
-				Event.current.mousePosition.y-cursorSizeY/2,
-				cursorSizeX,
-				cursorSizeY);
-			GUI.DrawTexture (Position,playerUW.CursorIcon);
+			CursorPosition.center = Event.current.mousePosition;
+			//Rect Position = new Rect(
+			//	Event.current.mousePosition.x-cursorSizeX/2,
+			//	Event.current.mousePosition.y-cursorSizeY/2,
+			//	cursorSizeX,
+			//	cursorSizeY);
+			GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
 			playerUW.MouseLookCursor.mainTexture= playerUW.CursorIconBlank;
 		}		
 	}

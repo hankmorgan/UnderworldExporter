@@ -120,6 +120,7 @@ public class Skills : MonoBehaviour {
 		case SkillAppraise : Appraise+=SkillPoints;break;
 		case SkillSwimming : Swimming+=SkillPoints;break;
 		}
+		StatsDisplay.UpdateNow=true;
 	}
 
 	public string GetSkillName(int skillNo)

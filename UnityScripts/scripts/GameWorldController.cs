@@ -33,6 +33,7 @@ public class GameWorldController : MonoBehaviour {
 
 
 		return;
+		/*
 		//TODO:Figure out how to import animated textures!
 		AnimatedTextures.Add ("uw1_226");
 		//Texture2D test = Resources.Load<Texture2D> ("Textures/Palette/UW1_BASE_0226");
@@ -80,6 +81,8 @@ public class GameWorldController : MonoBehaviour {
 			mattToChange.mainTexture=tc.RequestTexture(5);
 		}
 */
+
+	
 	}
 
 	void UpdateAnimation()
@@ -97,6 +100,7 @@ public class GameWorldController : MonoBehaviour {
 
 
 		return;
+		/*
 		for (int i = 0; i<AnimMaterials.Count;i++)
 			{
 			//matt.SetTexture("_MainTex",test);
@@ -112,6 +116,6 @@ public class GameWorldController : MonoBehaviour {
 		{
 			paletteIndex=0;
 		}
-
+*/
 	}
 }

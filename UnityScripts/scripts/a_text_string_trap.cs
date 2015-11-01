@@ -17,17 +17,14 @@ public class a_text_string_trap : MonoBehaviour {
 		triggerObj=GameObject.Find (Var.trigger);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if ((triggerObj == null) && (Var.trigger != "") && (Var.trigger != null))
-			{//For when objects are added at run time.
-				triggerObj=GameObject.Find (Var.trigger);
-			}
-	}
-
 	public void Activate()
 	{
-		
+
+		if ((triggerObj == null) && (Var.trigger != "") && (Var.trigger != null))
+		{//For when objects are added at run time.
+			triggerObj=GameObject.Find (Var.trigger);
+		}
+
 		//Do what it needs to do.
 		//MessageLog.text=MessageLog.text + name + " activated";
 		MessageLog.text= SC.GetString(StringBlock,StringNo);

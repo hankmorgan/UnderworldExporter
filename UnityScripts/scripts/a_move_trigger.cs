@@ -14,13 +14,6 @@ public class a_move_trigger : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 	}
 	
-	// Update is callede once per frame
-	//void Update () {
-	
-	//}
-
-
-	
 	public void Activate()
 	{
 		//Do what it needs to do.

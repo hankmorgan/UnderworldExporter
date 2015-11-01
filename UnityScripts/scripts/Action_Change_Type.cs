@@ -7,15 +7,7 @@ public class Action_Change_Type : MonoBehaviour {
 	public int ObjectClass;
 	public int SubClass;
 	public int SubClassIndex;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 
 	public void PerformAction()
 	{

@@ -10,8 +10,4 @@ public class PersistObject : MonoBehaviour {
 		Debug.Log ("Set don't destroy on " + name);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

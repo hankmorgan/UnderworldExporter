@@ -7,15 +7,6 @@ public class Entry_Trigger : MonoBehaviour {
 	public bool TriggerOnce;
 	public bool AlreadyTriggered;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnTriggerEnter(Collider other)
 	{

@@ -21,9 +21,16 @@ public class WindowDetect : MonoBehaviour {
 
 	static public bool CursorInMainWindow;
 
+
+	protected Rect CursorPosition;
+
 	public virtual void Start()
 	{
-
+		CursorPosition = new Rect(
+			0.0f,
+			0.0f,
+			cursorSizeX,
+			cursorSizeY);
 	}
 	
 	// Update is called once per frame

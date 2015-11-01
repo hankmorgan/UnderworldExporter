@@ -15,11 +15,6 @@ public class a_spelltrap : MonoBehaviour {
 		triggerObj=GameObject.Find (Var.trigger);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
 	public void Activate()
 	{
 		

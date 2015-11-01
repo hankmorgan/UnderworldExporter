@@ -10,15 +10,6 @@ public class Action_Moving_Platform : MonoBehaviour {
 	public int Flag;
 	private GameObject level;
 	public static TileMap tm;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void PerformAction()
 	{

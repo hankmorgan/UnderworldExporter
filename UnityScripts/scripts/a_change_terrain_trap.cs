@@ -18,12 +18,7 @@ public class a_change_terrain_trap : MonoBehaviour {
 		triggerObj=GameObject.Find (Var.trigger);
 		//Get the tiles the change_terr
 	}
-	
-	// Update is called once per frame
-	void Update () {
 
-	}
-	
 	public void Activate()
 	{
 		if ((triggerObj == null) && (Var.trigger != ""))

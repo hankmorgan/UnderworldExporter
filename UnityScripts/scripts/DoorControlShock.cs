@@ -35,11 +35,6 @@ public class DoorControlShock : MonoBehaviour {
 		sc.sprite=Image;
 	}
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void Activate()
 	{
 		//Debug.Log (this.name + " touched");

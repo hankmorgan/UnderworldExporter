@@ -119,14 +119,6 @@ public class UWCharacter : Character {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
-		if (isSwimming==true)
-		{
-//			Camera.main.transform.position=new Vector3(Camera.main.transform.position.x,-1.0f,Camera.main.transform.position.z);
-		}
-		else
-		{
-//			Camera.main.transform.position=new Vector3(Camera.main.transform.position.x,0.9198418f,Camera.main.transform.position.z);
-		}
 		if (WindowDetectUW.WaitingForInput==true)
 		{//TODO: This should be in window detect
 			MessageLog.gameObject.GetComponent<UIInput>().selected=true;
@@ -142,6 +134,16 @@ public class UWCharacter : Character {
 			//Still processing death.
 			return;
 		}
+
+		if (isSwimming==true)
+		{
+			Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,-1.0f,Camera.main.transform.localPosition.z);
+		}
+		else
+		{
+			Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
+		}
+
 		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);
 
 		if (PlayerMagic.ReadiedSpell!="")
@@ -234,6 +236,4 @@ public class UWCharacter : Character {
 	{
 		return this.GetComponent<Quest>();
 	}
-
-
 }

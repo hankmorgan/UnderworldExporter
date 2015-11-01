@@ -21,11 +21,6 @@ public class RemoteCameraCapture : MonoBehaviour {
 		cam.depth=-10;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	void OnPostRender()
 	{

@@ -7,17 +7,6 @@ public class StringController : MonoBehaviour {
 	public int game; //Which game is this. 0=uwdemo, 1=uw1, 2=uw2, 3=shock
 	private Hashtable GameStrings;
 	private string StringFilePath;
-	// Use this for initialization
-	void Start () {
-
-		//Load up the strings from the file and add to the hashtable
-		//Load(StringFilePath);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public bool InitStringController(string newStringFilePath)
 	{

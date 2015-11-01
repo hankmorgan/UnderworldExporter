@@ -37,12 +37,6 @@ public class ObjectMasters : MonoBehaviour {
 	void Start () {
 		Load(PathToConfig);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	private bool Load(string fileName)
 	{

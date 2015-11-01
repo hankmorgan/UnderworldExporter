@@ -20,10 +20,6 @@ public class ObjectVariables : MonoBehaviour {
 		level=GameObject.Find("level");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 	public GameObject findDoor(int x, int y)
 	{//Finds a door in the tile pointed to by two coordinates.
 //		Debug.Log ("trying to find door called door_" +x .ToString ("D3") + "_" + y.ToString ("D3"));

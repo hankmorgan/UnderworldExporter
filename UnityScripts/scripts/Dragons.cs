@@ -9,10 +9,10 @@ public class Dragons : MonoBehaviour {
 	public UITexture[] Base=new UITexture[5];
 	public UITexture[] Head=new UITexture[4];
 
-	public int SetBase=0;
-	public int SetTail=0;
-	public int SetArm=0;
-	public int SetHead=0;
+	public int SetBase=0; int PrevBase=-1;
+	public int SetTail=0; int PrevTail=-1;
+	public int SetArm=0;  int PrevArm=-1;
+	public int SetHead=0; int PrevHead=-1;
 
 	// Use this for initialization
 	void Start () {
@@ -24,10 +24,28 @@ public class Dragons : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		UpdateDragons(Base,SetBase);
-		UpdateDragons(Tail,SetTail);
-		UpdateDragons(Arm,SetArm);
-		UpdateDragons(Head,SetHead);
+		if (PrevBase!=SetBase)
+		{
+			UpdateDragons(Base,SetBase);
+			PrevBase=SetBase;
+		}
+
+		if (PrevTail!=SetTail)
+		{
+			UpdateDragons(Tail,SetTail);
+			PrevTail=SetTail;
+		}
+	
+		if (PrevArm!=SetArm)
+		{
+			UpdateDragons(Arm,SetArm);
+			PrevArm=SetArm;
+		}
+		if (PrevHead!=SetHead)
+		{
+			UpdateDragons(Head,SetHead);
+			PrevHead=SetHead;
+		}
 	}
 
 

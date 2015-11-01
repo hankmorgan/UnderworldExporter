@@ -8,16 +8,16 @@ public class TMAP : object_base {
 	public string trigger;
 	public int TextureIndex;
 	private SpriteRenderer sr;
-	public bool isAnimated;
-	private bool HasUpdated;
+	//public bool isAnimated;
+	//private bool HasUpdated;
 
 	// Use this for initialization
 	void Start () {
 		base.Start ();
 		//isAnimated=true;
-		InitAnimation();
+		//InitAnimation();
 	}
-
+	/*
 	void InitAnimation()
 	{
 		sr=this.GetComponentInChildren<SpriteRenderer>();
@@ -26,15 +26,16 @@ public class TMAP : object_base {
 			sr.gameObject.transform.localScale=new Vector3(1.875f,1.875f,1.0f);
 			if (isAnimated)
 			{
-				InvokeRepeating ("UpdateAnimation",0.0f,0.2f);
+				//InvokeRepeating ("UpdateAnimation",0.0f,0.2f);
 			}
 			else
 			{
-				UpdateAnimation();
+				//UpdateAnimation();
 			}
 		}
-	}
+	}*/
 
+	/*
 	void UpdateAnimation()
 	{
 
@@ -53,25 +54,25 @@ public class TMAP : object_base {
 
 		sr.sprite = Sprite.Create(tx,new Rect(0.0f,0.0f,tx.width ,tx.height), new Vector2(0.5f, 0.0f));
 
-	}
+	}*/
 
 
 
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		if ((HasUpdated==false) && (IsInvoking("UpdateAnimation")==false))
 		{
 			if (isAnimated==true)
 			{
-				InvokeRepeating ("UpdateAnimation",0.0f,0.2f);
+				//InvokeRepeating ("UpdateAnimation",0.0f,0.2f);
 			}
 			else
 			{
-				UpdateAnimation();
+				//UpdateAnimation();
 			}
 
 		}
-	}
+	}*/
 
 	public override bool LookAt()
 	{

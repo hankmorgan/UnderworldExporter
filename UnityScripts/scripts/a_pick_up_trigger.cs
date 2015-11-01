@@ -14,11 +14,7 @@ public class a_pick_up_trigger : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 	}
 	
-	// Update is called once per frame
-	//void Update () {
-	
-	//}
-	
+
 	public void Activate()
 	{
 		//Do what it needs to do.

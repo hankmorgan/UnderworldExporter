@@ -27,9 +27,15 @@ public class Compass : MonoBehaviour {
 	private UITexture comp;
 	public UITexture[] NorthIndicators=new UITexture[16];
 
+	private Texture2D[] CompassPoles=new Texture2D[4];
+
 	// Use this for initialization
 	void Start () {
 		comp=this.GetComponent<UITexture>();
+		for (int i=0;i<4;i++)
+		{
+			CompassPoles[i]=Resources.Load <Texture2D> ("HUD/Compass/Compass_000"+i.ToString());
+		}
 	}
 
 
@@ -48,7 +54,7 @@ public class Compass : MonoBehaviour {
 				case WEST:
 				case EAST:
 					{
-					comp.mainTexture=Resources.Load <Texture2D> ("HUD/Compass/Compass_0000");
+					comp.mainTexture=CompassPoles[0];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0000");
 					break;
 					}
 				case NORTHWEST:
@@ -56,7 +62,7 @@ public class Compass : MonoBehaviour {
 				case SOUTHEAST:
 				case SOUTHWEST:
 					{
-						comp.mainTexture=Resources.Load <Texture2D> ("HUD/Compass/Compass_0002");
+						comp.mainTexture=CompassPoles[2];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0002");
 						break;
 					}
 				case NORTHNORTHWEST:
@@ -64,12 +70,12 @@ public class Compass : MonoBehaviour {
 				case SOUTHSOUTHEAST:
 				case WESTSOUTHWEST:
 					{
-						comp.mainTexture=Resources.Load <Texture2D> ("HUD/Compass/Compass_0001");
+						comp.mainTexture=CompassPoles[1];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0001");
 						break;
 					}
 				default:
 					{
-					comp.mainTexture=Resources.Load <Texture2D> ("HUD/Compass/Compass_0003");
+					comp.mainTexture=CompassPoles[3];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0003");
 					break;
 					}
 		

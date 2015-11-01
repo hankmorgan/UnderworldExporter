@@ -31,6 +31,7 @@ public class InteractionModeControl : MonoBehaviour {
 			}
 		}
 	}
+
 	public void TurnOffOthers(int LeaveOn)
 	{
 		for (int i = 0; i<=5;i++)

@@ -5,15 +5,6 @@ public class Action_Activate : MonoBehaviour {
 
 	public string[] ObjectsToActivate=new string[4];
 	public int[] ActivationDelay=new int[4];
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void PerformAction()
 	{

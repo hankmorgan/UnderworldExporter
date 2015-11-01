@@ -6,15 +6,6 @@ public class Null_Trigger : MonoBehaviour {
 	public int[] conditions = new int[4];
 	public bool TriggerOnce;
 	public bool AlreadyTriggered;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void Activate()
 	{

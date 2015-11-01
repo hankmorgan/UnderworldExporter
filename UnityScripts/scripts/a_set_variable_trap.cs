@@ -14,11 +14,6 @@ public class a_set_variable_trap : MonoBehaviour {
 		triggerObj=GameObject.Find (Var.trigger);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
 	public void Activate()
 	{
 		

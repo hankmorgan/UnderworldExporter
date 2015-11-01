@@ -19,11 +19,6 @@ public class a_use_trigger : MonoBehaviour {
 			}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-	}
-	
 	public void Activate()
 	{
 		if (triggerObj == null)

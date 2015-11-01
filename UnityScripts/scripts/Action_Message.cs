@@ -6,15 +6,6 @@ public class Action_Message : MonoBehaviour {
 	public int SuccessMessage;
 	public int FailMessage;
 	public bool state=false;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void PerformAction()
 	{

@@ -7,7 +7,8 @@ public class trap_base : MonoBehaviour {
 	private ObjectVariables Var;
 	private UILabel MessageLog;
 	
-	
+	//TODO:Update traps to base themselves off of this..
+	//TODO:Add this to obj_base.
 	// Use this for initialization
 	void Start () {
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -15,11 +16,7 @@ public class trap_base : MonoBehaviour {
 		triggerObj=GameObject.Find (Var.trigger);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
+
 	public void Activate()
 	{
 		

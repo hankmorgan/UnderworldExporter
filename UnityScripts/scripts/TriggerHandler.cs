@@ -27,11 +27,6 @@ public class TriggerHandler : MonoBehaviour {
 		triggerObj=GameObject.Find (trigger);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	public void Activate()
 	{
 		ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
