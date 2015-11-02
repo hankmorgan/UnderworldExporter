@@ -638,8 +638,21 @@ public class Magic : MonoBehaviour {
 		slf.Go ();
 	}
 
+
+	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
+	{//Test spell for testing spell effects
+		SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+			//caster.AddComponent<SpellEffectPoison>();
+		sep.Value=value;//Poison will damage the player for 100 hp over it's duration
+		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
+		//	sep.isNPC=true;
+		sep.Go ();
+
+	}
+
 	void Cast_OrtPorYlem(GameObject Caster)
-	{
+	{//Telekinesis
+		//TODO:Update this into a spell effect.
 		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
@@ -1176,7 +1189,7 @@ public class Magic : MonoBehaviour {
 			//These need to have different values. Create a system of unique values array(?)
 			if (PassiveArrayIndex!=-1)
 			{
-				Cast_Light(caster,playerUW.PassiveSpell,EffectId,ActiveArrayIndex,5,10);
+				Cast_Light(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5,10);
 			}
 			else
 			{
@@ -1318,7 +1331,8 @@ public class Magic : MonoBehaviour {
 			break;
 		case SpellEffect.UW1_Spell_Effect_Poison:
 		case SpellEffect.UW1_Spell_Effect_Poison_alt01:
-			Debug.Log ("Poison enchantment");
+			//Debug.Log ("Poison enchantment");
+			Cast_Poison (caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10,100);
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
 			break;
 		case SpellEffect.UW1_Spell_Effect_Paralyze:
