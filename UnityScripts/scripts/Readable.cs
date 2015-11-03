@@ -8,6 +8,10 @@ public class Readable : object_base {
 		return Activate ();
 	}
 
+	public override bool LookAt ()
+	{
+		return Activate ();
+	}
 
 	public override bool Activate()
 	{//Returns the text of this readable.

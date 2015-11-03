@@ -928,6 +928,7 @@ void RenderUnityEntityBOOK(int game, float x, float y, float z, short message, O
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+
 	setReadable();
 
 	switch (game)

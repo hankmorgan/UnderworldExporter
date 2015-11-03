@@ -80,9 +80,45 @@ public class WindowDetectUW : WindowDetect {
 		}
 	}
 
+	protected override void OnPress (bool isPressed)
+	{
+		if(CursorInMainWindow==false)
+		{
+			return;
+		}
+		base.OnPress(isPressed);
+		if (isPressed==false)
+		{
+			Debug.Log ("HERE");
+		}
+		//if(isPressed==true)
+		//{
+			switch (UWCharacter.InteractionMode)
+			{
+			case UWCharacter.InteractionModeAttack:
+				break;
+			default:
+				ClickEvent();
+				break;
+			}
+		//}
+	}
 
 
 	void OnClick()
+	{
+		switch (UWCharacter.InteractionMode)
+		{
+		case UWCharacter.InteractionModeAttack:
+			ClickEvent();
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	void ClickEvent()
 	{
 		if (playerUW.PlayerMagic.ReadiedSpell!="" )
 		{

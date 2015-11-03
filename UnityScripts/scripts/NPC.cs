@@ -170,7 +170,7 @@ public class NPC : object_base {
 
 				Conversation.maincam=Camera.main;
 				
-				Camera.main.enabled = false;
+				//Camera.main.enabled = false;
 				StartCoroutine(x.main ());
 			}
 		}

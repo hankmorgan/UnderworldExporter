@@ -223,7 +223,7 @@ public class Character : MonoBehaviour {
 		}
 		CursorIcon=objPicked.GetInventoryDisplay().texture;
 		pInv.ObjectInHand=objPicked.transform.name;
-		pInv.JustPickedup=true;//To stop me throwing it away immediately.
+		//////pInv.JustPickedup=true;//To stop me throwing it away immediately.
 		if (objPicked.GetComponent<Rigidbody>() !=null)
 		{								
 			WindowDetect.FreezeMovement(objPicked.gameObject);

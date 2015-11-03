@@ -13,7 +13,7 @@ public class WindowDetect : MonoBehaviour {
 	protected  int cursorSizeY =64;
 
 	//public static UWCharacter playerUW;
-	protected bool MouseHeldDown=false;
+	public bool MouseHeldDown=false;
 
 	public static bool WaitingForInput=false;
 	public static bool InMap=false;
@@ -47,8 +47,9 @@ public class WindowDetect : MonoBehaviour {
 
 
 
-	void OnPress(bool isDown)
+	protected virtual void OnPress(bool isDown)
 		{
+	
 			MouseHeldDown=isDown;
 		}
 

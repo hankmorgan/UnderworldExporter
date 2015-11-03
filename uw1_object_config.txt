@@ -314,10 +314,10 @@
 313 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_313 0 L M 1 1 1 Sprites/OBJECTS_313 Sprites/OBJECTS_313 S T U Sprites/OBJECTS_313 W x Y 0 1
 314 0 0 0 entity 13 a_scroll H 1 Sprites/OBJECTS_314 0 L M 1 1 1 Sprites/OBJECTS_314 Sprites/OBJECTS_314 S T U Sprites/OBJECTS_314 W x Y 0 1
 315 0 0 0 entity 28 a_map H 1 Sprites/OBJECTS_315 0 L M 1 1 1 Sprites/OBJECTS_315 Sprites/OBJECTS_315 S T U Sprites/OBJECTS_315 W x Y 0 1
-316 0 0 0 entity 14 a_scroll H 1 Sprites/OBJECTS_316 0 L M 1 1 1 Sprites/OBJECTS_316 Sprites/OBJECTS_316 S T U Sprites/OBJECTS_316 W x Y 0 1
-317 0 0 0 entity 14 a_scroll H 1 Sprites/OBJECTS_317 0 L M 1 1 1 Sprites/OBJECTS_317 Sprites/OBJECTS_317 S T U Sprites/OBJECTS_317 W x Y 0 1
-318 0 0 0 entity 14 a_scroll H 1 Sprites/OBJECTS_318 0 L M 1 1 1 Sprites/OBJECTS_318 Sprites/OBJECTS_318 S T U Sprites/OBJECTS_318 W x Y 0 1
-319 0 0 0 entity 14 a_scroll H 1 Sprites/OBJECTS_319 0 L M 1 1 1 Sprites/OBJECTS_319 Sprites/OBJECTS_319 S T U Sprites/OBJECTS_319 W x Y 0 1
+316 0 0 0 entity 11 a_scroll H 1 Sprites/OBJECTS_316 0 L M 1 1 1 Sprites/OBJECTS_316 Sprites/OBJECTS_316 S T U Sprites/OBJECTS_316 W x Y 0 1
+317 0 0 0 entity 11 a_scroll H 1 Sprites/OBJECTS_317 0 L M 1 1 1 Sprites/OBJECTS_317 Sprites/OBJECTS_317 S T U Sprites/OBJECTS_317 W x Y 0 1
+318 0 0 0 entity 11 a_scroll H 1 Sprites/OBJECTS_318 0 L M 1 1 1 Sprites/OBJECTS_318 Sprites/OBJECTS_318 S T U Sprites/OBJECTS_318 W x Y 0 1
+319 0 0 0 entity 11 a_scroll H 1 Sprites/OBJECTS_319 0 L M 1 1 1 Sprites/OBJECTS_319 Sprites/OBJECTS_319 S T U Sprites/OBJECTS_319 W x Y 0 1
 320 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_320 0 L M 1 0 0 Sprites/OBJECTS_320 Sprites/OBJECTS_320 S T U Sprites/OBJECTS_320 W x Y 0 1
 321 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_321 0 L M 1 0 0 Sprites/OBJECTS_321 Sprites/OBJECTS_321 S T U Sprites/OBJECTS_321 W x Y 0 1
 322 0 0 0 entity 4 a_door H 0 Sprites/OBJECTS_322 0 L M 1 0 0 Sprites/OBJECTS_322 Sprites/OBJECTS_322 S T U Sprites/OBJECTS_322 W x Y 0 1

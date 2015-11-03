@@ -9,7 +9,7 @@ public class CutsceneAnimation : HudAnimation {
 	public void PreAnimPlay()
 	{//Called by events in certain animations
 		//Debug.Log("Preanim");
-		maincam.enabled=false;
+		//maincam.enabled=false;
 		return;
 	}
 	

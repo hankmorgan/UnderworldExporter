@@ -335,10 +335,14 @@ public class ObjectInteraction : MonoBehaviour {
 		case BOOK:
 		case SIGN:
 		case SCROLL:	//The reading kinds are a special case. Looking at them is it's activation.
-			Readable rd =this.gameObject.GetComponent<Readable>();
-			rd.Activate();
-			return true;
+			//	Readable rd =this.gameObject.GetComponent<Readable>();
+				item = (Readable)this.GetComponent<Readable>();
+				//rd.Activate();
+				//return true;
+				//break;
+
 			break;
+
 		case BUTTON:
 		case ACTIVATOR:// ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
 			item = (ButtonHandler)this.gameObject.GetComponent<ButtonHandler>();
@@ -608,7 +612,7 @@ public class ObjectInteraction : MonoBehaviour {
 			else
 			{
 				FailMessage();
-				return true;
+				return false;
 			}
 
 			break;

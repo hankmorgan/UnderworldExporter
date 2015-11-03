@@ -71,7 +71,20 @@ public class InventorySlot : MonoBehaviour {
 		}
 	}
 
+	//void OnPress (bool isPressed)
+	//{
+		//..if (isPressed==true)
+	//{
+	//		ClickEvent ();
+	//	}
+	//}
+
 	void OnClick()
+	{
+		ClickEvent();
+	}
+
+	void ClickEvent()
 	{
 		bool leftClick=true;
 		if (UICamera.currentTouchID == -2)

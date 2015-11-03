@@ -37,7 +37,8 @@ public class Feet : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-		// Destroy everything that leaves the trigger
+		Debug.Log ("Exit");
+		TileMap.OnGround=false;
 		tm.PositionDetect();
 	}
 }
