@@ -171,6 +171,11 @@ void RenderUnityEntityLockpick(int game, float x, float y, float z, ObjectItem &
 	fprintf(UNITY_FILE, "\n\tAddLockpick(myObj);");
 	}
 
+void RenderUnityEntityGrave(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddGrave(myObj, %d,%d);",currobj.texture,currobj.DeathWatched);
+	}
 
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Runestone
@@ -1973,6 +1978,12 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityShrine(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case GRAVE:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityGrave(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:

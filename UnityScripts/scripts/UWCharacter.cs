@@ -49,6 +49,7 @@ public class UWCharacter : Character {
 	public int ResurrectLevel;
 	public Vector3 ResurrectPosition=Vector3.zero;
 
+	public CutsceneAnimation CutScenesSmall;
 
 	public override void Start ()
 	{
@@ -89,16 +90,16 @@ public class UWCharacter : Character {
 	void PlayerDeath()
 	{//CHeck if the player has planted the seed and if so send them to that position.
 		mus.Death=true;
-		CutsceneAnimation cuts= GameObject.Find ("CutsceneWindowed").GetComponent<CutsceneAnimation>();
-		if (cuts!=null)
+
+		if (CutScenesSmall!=null)
 		{
 			if (ResurrectPosition!=Vector3.zero)
 			{
-				cuts.SetAnimation="Death_With_Sapling";
+				CutScenesSmall.SetAnimation="Death_With_Sapling";
 			}
 			else
 			{
-				cuts.SetAnimation="Death";
+				CutScenesSmall.SetAnimation="Death";
 			}
 		}
 

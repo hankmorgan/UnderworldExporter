@@ -36,10 +36,13 @@ public class InventorySlot : MonoBehaviour {
 	
 	void UseFromSlot()
 	{
-		string ObjectName=playerUW.playerInventory.GetObjectAtSlot(slotIndex); //pInv.GetObjectAtSlot(slotIndex);
-		if (ObjectName !="")
+		//string ObjectName=playerUW.playerInventory.GetObjectAtSlot(slotIndex); //pInv.GetObjectAtSlot(slotIndex);
+
+		GameObject currObj=playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
+
+		if (currObj !=null)
 		{
-			GameObject currObj = GameObject.Find (ObjectName);
+			//GameObject currObj = GameObject.Find (ObjectName);
 			//Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
 			currObjInt.Use();
@@ -49,17 +52,23 @@ public class InventorySlot : MonoBehaviour {
 
 	void LookFromSlot()
 	{
-		string ObjectName= playerUW.playerInventory.GetObjectAtSlot(slotIndex);
-		GameObject objLookedAt = GameObject.Find (ObjectName);
+		//string ObjectName= playerUW.playerInventory.GetObjectAtSlot(slotIndex);
+		GameObject objLookedAt = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
 
-		if(objLookedAt.GetComponent<Readable>()!= null)
+			//GameObject.Find (ObjectName);
+
+
+		if (objLookedAt!=null)
+		{
+			if(objLookedAt.GetComponent<Readable>()!= null)
 			{
-			objLookedAt.GetComponent<ObjectInteraction>().Use();
+				objLookedAt.GetComponent<ObjectInteraction>().Use();
 			}
-		else
+			else
 			{
-			objLookedAt.GetComponent<ObjectInteraction>().LookDescription();
+				objLookedAt.GetComponent<ObjectInteraction>().LookDescription();
 			}
+		}
 	}
 
 	void OnClick()

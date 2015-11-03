@@ -58,7 +58,7 @@ public class object_base : MonoBehaviour {
 		return false;
 	}
 
-	private void CheckReferences()
+	protected void CheckReferences()
 	{
 		if (objInt==null)
 		{

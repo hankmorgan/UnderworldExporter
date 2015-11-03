@@ -89,6 +89,7 @@
 #define SILVERSEED 81
 #define FOUNTAIN 82  //For fountain enchantments & related responses.
 #define SHRINE 83
+#define GRAVE 84
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
@@ -502,4 +503,5 @@ extern objectMaster *objectMasters;
 //extern shockObjectMaster *shockObjectMasters;
 void DumpObjectCombinations(char *filePath, int game);
 void UWCommonObj(int game);
+void UW1_Graves(char *filePath);
 #endif /*gameobjects_h*/

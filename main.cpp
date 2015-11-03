@@ -1473,9 +1473,10 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 			case UW1:		//Underworld 1
 				{
 				//filePath = UW1_LEVEL_PATH ;	// "C:\\Games\\Ultima\\UW1\\DATA\\lev.ark";
-
-				UWCommonObj(game);
-
+				char GravePath[255];
+				sprintf_s(GravePath, 255, "%s\\%s", path_uw1, UW1_GRAVES);
+				UWCommonObj(game);				
+				UW1_Graves(GravePath);
 				BuildTileMapUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setTileNeighbourCount(LevelInfo);
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);

@@ -14,14 +14,17 @@
 void getWallTextureName(tile t, int face, short waterWall);
 void getFloorTextureName(tile t, int face);
 //void RenderPatch(int game, float x, float y, float z,long PatchIndex, ObjectItem objList[1600] );
+
  
 //void CalcObjectXYZ(int game, float *offX,  float *offY, float *offZ, tile LevelInfo[64][64], ObjectItem objList[1600], long nextObj,int x,int y);
 
 //void AddEmails(int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 
-
 extern long SHOCK_CEILING_HEIGHT;
 extern FILE *MAPFILE;
+
+unsigned char *graves;
+
 int GAME;
 
 int keycount[256];	//For tracking key usage
@@ -639,6 +642,9 @@ switch (game)
 			//+6
 
 			objList[x].owner = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) & 0x3F) ;//bits 0-5
+
+			objList[x].link = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 6, 16) >> 6 & 0x3FF); //bits 6-15
+
 				if ((objectMasters[objList[x].item_id].type == TMAP_SOLID) || (objectMasters[objList[x].item_id].type == TMAP_CLIP))
 					{
 					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
@@ -663,9 +669,18 @@ switch (game)
 					objList[x].texture = objList[x].flags;
 					}
 
+				if (objectMasters[objList[x].item_id].type == GRAVE)
+					{
+					objList[x].texture = objList[x].flags+28;
+					if (objList[x].link >= 512)
+						{
+						objList[x].DeathWatched = getValAtAddress(graves, objList[x].link - 512, 8);
+						}
+					}
+
 			//objList[x].special = objList[x].owner;
 			
-			objList[x].link  = (getValAtAddress(lev_ark,objectsAddress+address_pointer+6,16) >> 6 & 0x3FF) ; //bits 6-15
+			
 			//objList[x].link = objList[x].quantity;
 			
 			////fprintf(LOGFILE,"\n\tNext Object ID to this object is  %d", objList[x].next  );
@@ -2373,3 +2388,21 @@ void UWCommonObj(int game)
 	return;
 	}
 
+	void UW1_Graves(char *filePath)
+		{
+		FILE *file = NULL;
+		long fileSize;
+		if ((file = fopen(filePath, "rb")) == NULL)
+			{
+			fprintf(LOGFILE, "Could not open specified file\n");
+			return;
+			}
+		// Get the size of the file in bytes
+		fileSize = getFileSize(file);
+		// Allocate space in the buffer for the whole file
+		graves = new unsigned char[fileSize];
+		// Read the file in to the buffer
+		fread(graves, fileSize, 1, file);
+		fclose(file);
+		return;
+		}

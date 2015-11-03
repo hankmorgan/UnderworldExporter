@@ -355,7 +355,7 @@
 354 0 0 0 model 8 a_switch_switches H 0 Sprites/OBJECTS_354 0 L M 1 0 1 Sprites/OBJECTS_354 Sprites/OBJECTS_354 S T U Sprites/OBJECTS_354 W x Y 0 1
 355 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_355 0 L M 1 1 1 Sprites/OBJECTS_355 Sprites/OBJECTS_355 S T U Sprites/OBJECTS_355 W x Y 0 1
 356 0 0 0 entity 7 a_bridge H 0 Sprites/OBJECTS_356 1 L M 1 1 1 Sprites/OBJECTS_356 Sprites/OBJECTS_356 S T U Sprites/OBJECTS_356 W x Y 0 1
-357 0 0 0 model 23 a_gravestone H 0 Sprites/OBJECTS_357 0 L M 1 1 1 Sprites/OBJECTS_357 Sprites/OBJECTS_357 S T U Sprites/OBJECTS_357 W x Y 0 1
+357 0 0 0 entity 84 a_gravestone H 0 Sprites/OBJECTS_357 0 L M 1 0 1 Sprites/OBJECTS_357 Sprites/OBJECTS_357 S T U Sprites/OBJECTS_357 W x Y 0 1
 358 0 0 0 entity 10 some_writing H 0 Sprites/OBJECTS_358 0 L M 0 0 0 Sprites/OBJECTS_358 Sprites/OBJECTS_358 S T U Sprites/OBJECTS_358 W x Y 0 0
 359 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_359 0 L M 1 1 1 Sprites/OBJECTS_359 Sprites/OBJECTS_359 S T U Sprites/OBJECTS_359 W x Y 0 1
 360 0 0 0 entity 25 unknown H 0 Sprites/OBJECTS_360 0 L M 1 1 1 Sprites/OBJECTS_360 Sprites/OBJECTS_360 S T U Sprites/OBJECTS_360 W x Y 0 1

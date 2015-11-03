@@ -19,6 +19,7 @@
 #define UW1_CONVERSATION "C:\\Games\\UW1\\data\\cnv.ark"
 #define UW1_CRITTER_ASSOC "crit\\assoc.anm"
 #define UW1_WEAPON_PAL "data\\WEAPONS.CM"	//Palette file for weapon skin colours.
+#define UW1_GRAVES "data\\grave.dat"
 //#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
 
 //#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
