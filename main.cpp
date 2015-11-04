@@ -1229,7 +1229,7 @@ int main()
 		int objType;
 		int hasPart;
 		int hasSound;
-		int isSolid;
+		int isSolid; //or useable
 		int isMoveable;
 		int isInventory;
 		int isAnimated;

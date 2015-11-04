@@ -848,12 +848,12 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
 		}
 //Tmp code for generating all materials into unity
-	for (int j = 0; j < 261; j++)
-		{
-		tmp.DimX=1;tmp.DimY=1;
-		tmp.North = j;
-		RenderFBXTile(gScene, game, 0, j, tmp, 0, 0, 1, 0);
-		}
+//	for (int j = 0; j < 261; j++)
+//		{
+//		tmp.DimX=1;tmp.DimY=1;
+//		tmp.North = j;
+//		RenderFBXTile(gScene, game, 0, j, tmp, 0, 0, 1, 0);
+//		}
 	//Now render a room to store objects
 	tmp.DimX = 1;
 	tmp.DimY = 1;
@@ -899,7 +899,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		{
 		RenderFBXBridges(gScene, game, LevelInfo, objList);
 		RenderFBXPillars(gScene,game,LevelInfo,objList);
-		
+		RenderTerrainChangeTiles(gScene,game,LevelInfo,objList);
 		}
 	
 
