@@ -56,7 +56,15 @@ public class ButtonHandler : object_base {
 
 	public override bool use ()
 	{
-		return Activate ();
+		if (playerUW.playerInventory.ObjectInHand=="")
+		{
+			return Activate ();
+		}
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
+
 	}
 
 

@@ -16,7 +16,16 @@ public class Grave : object_base {
 	public override bool use ()
 	{
 		//return base.use ();
-		return LookAt ();
+		if (playerUW.playerInventory.ObjectInHand=="")
+		{
+			return LookAt ();
+		}
+		else
+		{
+			//TODO: if garamons bones activate something special.
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
+
 	}
 
 }

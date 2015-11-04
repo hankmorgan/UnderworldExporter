@@ -96,11 +96,18 @@ public class TMAP : object_base {
 
 	public override bool use()
 	{
-		if (trigger != "")
+		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-			ObjectInteraction triggerInt = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
-			triggerInt.Use();
+			if (trigger != "")
+			{
+				ObjectInteraction triggerInt = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
+				triggerInt.Use();
+			}
+			return true;
 		}
-		return true;
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
 	}
 }

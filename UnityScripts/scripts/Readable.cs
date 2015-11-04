@@ -5,15 +5,22 @@ public class Readable : object_base {
 
 	public override bool use ()
 	{
-		return Activate ();
+		if (playerUW.playerInventory.ObjectInHand == "")
+		{
+			return Read ();
+		}
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
 	}
 
 	public override bool LookAt ()
 	{
-		return Activate ();
+		return Read ();
 	}
 
-	public override bool Activate()
+	public bool Read()
 	{//Returns the text of this readable.
 		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		//StringController SC = objInt.getStringController();

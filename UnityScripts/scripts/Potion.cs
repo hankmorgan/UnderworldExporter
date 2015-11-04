@@ -46,43 +46,51 @@ public class Potion : object_base {
 
 	public override bool use ()
 	{
-		int index=0; //= GetActualSpellIndex();
-		int UseString=-1;
-		switch (objInt.item_id)
+		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-		//case 316 :// a_scroll
-		//.case 317 :
-		//case 318 :
-		//case 319 :
-
-		case 184 :// a_mushroom
-			UseString=232;
-			index=SpellEffect.UW1_Spell_Effect_Hallucination;//Tripping
-			break;
-		case 185 :// a_toadstool
-			UseString=231;
-			index=SpellEffect.UW1_Spell_Effect_Poison;//Poisoning
-			break;
-		case 186 :// a_bottle_of_ale_bottles_of_ale
-			UseString=239;
-			index=GetActualSpellIndex();
-			break;
-		case 187 :// a_red_potion
-		case 188 :// a_green_potion
-			UseString=240;
-			index=GetActualSpellIndex();
-			break;
+			int index=0; //= GetActualSpellIndex();
+			int UseString=-1;
+			switch (objInt.item_id)
+			{
+				//case 316 :// a_scroll
+				//.case 317 :
+				//case 318 :
+				//case 319 :
+				
+			case 184 :// a_mushroom
+				UseString=232;
+				index=SpellEffect.UW1_Spell_Effect_Hallucination;//Tripping
+				break;
+			case 185 :// a_toadstool
+				UseString=231;
+				index=SpellEffect.UW1_Spell_Effect_Poison;//Poisoning
+				break;
+			case 186 :// a_bottle_of_ale_bottles_of_ale
+				UseString=239;
+				index=GetActualSpellIndex();
+				break;
+			case 187 :// a_red_potion
+			case 188 :// a_green_potion
+				UseString=240;
+				index=GetActualSpellIndex();
+				break;
+			}
+			
+			
+			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,index );
+			
+			if (UseString !=-1)
+			{
+				ml.text=playerUW.StringControl.GetString (1,UseString);
+			}
+			objInt.consumeObject();
+			return true;
+		}
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
 
-
-		playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,index );
-
-		if (UseString !=-1)
-		{
-			ml.text=playerUW.StringControl.GetString (1,UseString);
-		}
-		objInt.consumeObject();
-		return true;
 	}
 
 	public override bool LookAt ()

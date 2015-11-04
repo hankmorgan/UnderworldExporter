@@ -56,7 +56,7 @@ public class RuneBag : object_base {
 		}
 		else
 		{
-			return false;
+			return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
 		}
 	}
 }

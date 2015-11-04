@@ -53,9 +53,18 @@ public class object_base : MonoBehaviour {
 
 	public virtual bool use()
 	{
+
 		//Debug.Log ("default use for " + this.gameObject.name);
 		CheckReferences();
-		return false;
+		if (playerUW.playerInventory.ObjectInHand!="")
+		{
+			return false;
+		}
+		else
+		{
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+		}
+
 	}
 
 	protected void CheckReferences()
@@ -93,9 +102,10 @@ public class object_base : MonoBehaviour {
 		return false;
 	}
 
-	public virtual void FailMessage()
+	public virtual bool FailMessage()
 	{
 		//Message to display when this object is used on a another object that has no use for it. Eg a key on a sign.
 		ml.text="You cannot use this. (Failmessage default)";
+		return false;
 	}
 }

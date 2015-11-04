@@ -26,7 +26,12 @@ public class WindowDetectUW : WindowDetect {
 				{//No attacks can be started will executing the last one.
 					return;
 				}
-				if (MouseHeldDown==true)
+				if  ((WindowDetectUW.CursorInMainWindow==false))
+					{
+					MouseHeldDown=false;
+					playerUW.PlayerCombat.AttackCharging=false;
+					}
+				if ((MouseHeldDown==true)  )
 				{
 					if(playerUW.PlayerCombat.AttackCharging==false)
 					{//Begin the attack

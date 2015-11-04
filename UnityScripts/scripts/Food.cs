@@ -8,7 +8,7 @@ public class Food : object_base {
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-			return Activate();
+			return Eat();
 		}
 		else
 		{
@@ -17,7 +17,7 @@ public class Food : object_base {
 	}
 
 
-	public override bool Activate()
+	public bool Eat()
 	{//TODO:Implement drag and drop feeding.
 		//Food gets eaten
 		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();

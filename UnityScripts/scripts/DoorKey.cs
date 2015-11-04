@@ -8,9 +8,17 @@ public class DoorKey : object_base {
 
 	public override bool use ()
 	{
-		BecomeObjectInHand();
-		ml.text = playerUW.StringControl.GetString(1,7);
-		return true;
+		if (playerUW.playerInventory.ObjectInHand=="")
+		{
+			BecomeObjectInHand();
+			ml.text = playerUW.StringControl.GetString(1,7);
+			return true;
+		}
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
+
 	}
 
 	public override bool LookAt ()

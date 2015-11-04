@@ -609,11 +609,12 @@ public class ObjectInteraction : MonoBehaviour {
 			{
 				item = this.GetComponent<object_base>();
 			}
-			else
-			{
-				FailMessage();
-				return false;
-			}
+			//else
+			//{
+				//FailMessage();
+				//return false;//Tell the calling code to swap objects if possible
+			
+			//}
 
 			break;
 		}
@@ -624,10 +625,6 @@ public class ObjectInteraction : MonoBehaviour {
 		}
 		else
 		{
-			if (playerUW.playerInventory.ObjectInHand!="")
-			{
-				FailMessage();
-			}
 			return false;
 		}
 	}
@@ -793,13 +790,17 @@ public class ObjectInteraction : MonoBehaviour {
 
 	}
 
-	public void FailMessage()
+	public bool FailMessage()
 	{
 		GameObject obj = playerUW.playerInventory.GetGameObjectInHand();
 		if (obj!=null)
 		{
 			object_base objbase= this.GetComponent<object_base>();
-			objbase.FailMessage();
+			return objbase.FailMessage();
+		}
+		else
+		{
+			return false;
 		}
 	}
 

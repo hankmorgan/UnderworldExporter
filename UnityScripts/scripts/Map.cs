@@ -12,7 +12,14 @@ public class Map : object_base {
 
 	public override bool use ()
 	{
-		return OpenMap();
+		if (playerUW.playerInventory.ObjectInHand=="")
+		{
+			return OpenMap();
+		}
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
 	}
 
 	public bool OpenMap()

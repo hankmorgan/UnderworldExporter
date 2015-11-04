@@ -62,24 +62,31 @@ public class Shrine : object_base {
 
 	public override bool use ()
 	{
-		if (WaitingForInput==false)
+		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-			WaitingForInput=true;
-			if (inputctrl==null)
+			if (WaitingForInput==false)
 			{
-				inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+				WaitingForInput=true;
+				if (inputctrl==null)
+				{
+					inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+				}
+				ml.text="Chant the mantra";
+				inputctrl.text=ml.text;
+				inputctrl.eventReceiver=this.gameObject;
+				inputctrl.selected=true;
+				inputctrl.useLabelTextAtStart=true;
+				//Debug.Log ("Input ctrl type is" + inputctrl.type);
+				inputctrl.type=UIInput.KeyboardType.Default;
+				Time.timeScale=0.0f;
+				WindowDetect.WaitingForInput=true;
 			}
-			ml.text="Chant the mantra";
-			inputctrl.text=ml.text;
-			inputctrl.eventReceiver=this.gameObject;
-			inputctrl.selected=true;
-			inputctrl.useLabelTextAtStart=true;
-			//Debug.Log ("Input ctrl type is" + inputctrl.type);
-			inputctrl.type=UIInput.KeyboardType.Default;
-			Time.timeScale=0.0f;
-			WindowDetect.WaitingForInput=true;
+			return true;
 		}
-		return true;
+		else
+		{
+			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+		}
 	}
 
 	public void OnSubmitPickup()
