@@ -83,8 +83,9 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	if (game != SHOCK)
 		{
-		fprintf(UNITY_FILE, "\n\tCreateTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
+		fprintf(UNITY_FILE, "\n\tCreateMoveTrigger(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
 		fprintf(UNITY_FILE, "\n\tCreateCollider(myObj,1.20f,1.20f,1.20f);");
+		RenderUnityObjectInteraction(game, x, y, z,currobj, objList, LevelInfo);
 		}
 	else
 		{
@@ -106,39 +107,6 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 				//fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.tileX*BrushSizeX, currobj.tileY*BrushSizeY, 0);
 				break;
 		}
-
-	//////tile t;	//temp tile for rendering trigger
-	//////t.floorTexture = TRIGGER_MULTI;
-	//////t.wallTexture = TRIGGER_MULTI;
-	//////t.East = TRIGGER_MULTI;
-	//////t.West = TRIGGER_MULTI;
-	//////t.North = TRIGGER_MULTI;
-	//////t.South = TRIGGER_MULTI;
-	//////t.DimX = 1; t.DimY = 1;
-	//////t.tileType = 1;
-	//////t.Render = 1;
-	//////t.floorHeight = 0;
-	//////t.ceilingHeight = CEILING_HEIGHT;
-	//////t.isWater = 0;
-	//////t.hasElevator = 0;
-	//////t.BullFrog = 0;
-	//////switch (game)
-	//////	{
-	//////		case UWDEMO:
-	//////		case UW1:
-	//////			RenderGenericTile(0, 0, t, 1, 0);
-	//////			break;
-	//////		case UW2:
-	//////			RenderGenericTileAroundOrigin(currobj.tileX, currobj.tileY, t, LevelInfo[currobj.tileX][currobj.tileY].floorHeight + 1, LevelInfo[currobj.tileX][currobj.tileY].floorHeight, BrushSizeZ);
-	//////			break;
-	//////		case SHOCK:
-	//////			//enter any part of tile
-	//////			RenderGenericTile(0, 0, t, CEILING_HEIGHT, 0);
-	//////			break;
-	//////	}
-
-	//////fprintf(MAPFILE, "\n}");
-	//////createScriptCall(currobj, x, y, z);
 	}
 
 void RenderUnityEntityBase(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -657,15 +625,15 @@ void RenderUnityEntityButton(int game, float x, float y, float z, ObjectItem &cu
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	if (game != SHOCK)
 		{
-		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler");
 		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ButtonHandler");
 		UnityRotation(game, 0, currobj.heading, 0);
 		}
 	else
 		{
+		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 		CreateUnityScriptCall(game, x, y, z, currobj, objList, LevelInfo, "ShockButtonHandler");
 		AddShockTriggerActions(game, x, y, z, currobj, objList, LevelInfo);
-		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
 
 		}
@@ -2101,10 +2069,6 @@ float offX; float offY; float offZ;
 								{
 								fprintf(UNITY_FILE, "////Bugged object!");
 								}
-							//fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");",UniqueObjectName(objList[nextObj]));//Create the object
-							//fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);",offX,offZ,offY);//Create the object x,z,y
-							//fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-							//fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Assets/Sprites/objects_%03d.tga\");", objList[nextObj].item_id);
 							}
 						objList[nextObj].AlreadyRendered = 1;//Prevent possible duplication of0 objects due to system shock supporting objects that take occupy multiple tiles
 						}
@@ -2122,9 +2086,16 @@ float offX; float offY; float offZ;
 					{
 					if (isTrigger(objList[i]))
 						{
+
 						offX = 0.0; offY = 0.0; offZ = 0.0;
 						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
 						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
+						
+						//Do the basics first						
+						//RenderUnityModel(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+						//RenderUnitySprite(game, offX, offY, offZ, objList[i], objList, LevelInfo, 1);
+						//RenderUnityObjectInteraction(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+
 						switch (objectMasters[objList[i].item_id].type)
 							{
 							case A_MOVE_TRIGGER:

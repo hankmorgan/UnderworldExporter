@@ -49,8 +49,8 @@ public class TriggerHandler : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 		{
+		Debug.Log ("move");
 		if (other.name=="Gronk")
-		//Debug.Log ("TriggerEntered");
 			{
 			Activate ();
 			}

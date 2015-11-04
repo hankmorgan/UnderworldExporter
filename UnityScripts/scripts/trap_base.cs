@@ -1,30 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class trap_base : MonoBehaviour {
+public class trap_base : object_base {
 
-	private GameObject triggerObj;
-	private ObjectVariables Var;
-	private UILabel MessageLog;
-	
-	//TODO:Update traps to base themselves off of this..
-	//TODO:Add this to obj_base.
-	// Use this for initialization
-	void Start () {
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		Var=GetComponent<ObjectVariables>();
-		triggerObj=GameObject.Find (Var.trigger);
+
+	public string TriggerObject;//Next in the chain
+
+	public virtual void ExecuteTrap(int triggerX, int triggerY, int State)
+	{
+		//Do whatever
+		Debug.Log ("ExecuteTrap " + this.name);
 	}
-	
 
-	public void Activate()
+
+
+	public virtual bool Activate(int triggerX, int triggerY, int State)
 	{
 		
 		//Do what it needs to do.
-		MessageLog.text=MessageLog.text + name + " activated";
-		if (Var.trigger !="")
+		ExecuteTrap(triggerX,triggerY, State);
+
+		//Trigger the next in the chain
+		GameObject triggerObj= GameObject.Find (TriggerObject);
+		if (triggerObj!=null)
 		{
-			triggerObj.SendMessage ("Activate");
+			triggerObj.GetComponent<trigger_base>().Activate ();
 		}
+
+		return true;
 	}
 }

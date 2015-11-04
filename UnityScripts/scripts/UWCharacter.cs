@@ -65,7 +65,7 @@ public class UWCharacter : Character {
 		WindowDetectUW.playerUW=this.GetComponent<UWCharacter>();
 		Container.playerUW=this.GetComponent<UWCharacter>();
 		ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
-		a_text_string_trap.SC=StringControl;
+		//a_text_string_trap.SC=StringControl;
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();

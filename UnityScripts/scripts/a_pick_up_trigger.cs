@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_pick_up_trigger : MonoBehaviour {
-	
+public class a_pick_up_trigger : trigger_base {
+	/*
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
@@ -24,4 +24,5 @@ public class a_pick_up_trigger : MonoBehaviour {
 			triggerObj.SendMessage ("Activate");
 		}
 	}
+	*/
 }

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_set_variable_trap : MonoBehaviour {
-	private GameObject triggerObj;
+public class a_set_variable_trap : trigger_base {
+
+	/*private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
 	
@@ -23,5 +24,5 @@ public class a_set_variable_trap : MonoBehaviour {
 		{
 			triggerObj.SendMessage ("Activate");
 		}
-	}
+	}*/
 }

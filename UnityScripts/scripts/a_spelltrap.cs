@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_spelltrap : MonoBehaviour {
-	
+public class a_spelltrap : trap_base {
+	/*
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
@@ -24,5 +24,5 @@ public class a_spelltrap : MonoBehaviour {
 		{
 			triggerObj.SendMessage ("Activate");
 		}
-	}
+	}*/
 }

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_lock : MonoBehaviour {
-	
+public class a_lock : trap_base {
+/*	
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
@@ -22,5 +22,5 @@ public class a_lock : MonoBehaviour {
 		{//Trigger the next object in it's chain
 			triggerObj.SendMessage ("Activate");
 		}
-	}
+	}*/
 }

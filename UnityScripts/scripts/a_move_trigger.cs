@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_move_trigger : MonoBehaviour {
-	
+public class a_move_trigger : trigger_base {
+/*	
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
@@ -21,6 +21,25 @@ public class a_move_trigger : MonoBehaviour {
 		if (Var.trigger !="")
 		{//Trigger the next object in it's chain
 			triggerObj.SendMessage ("Activate");
+		}
+	}
+	*/
+
+	///void OnCollisionEnter(Collision collision)
+	//{
+		//if (other.name=="Gronk")
+			//Debug.Log ("TriggerEntered");
+		//{
+		//	Activate ();
+		//}
+//	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.name=="Gronk")
+			//Debug.Log ("TriggerEntered");
+		{
+			Activate ();
 		}
 	}
 }

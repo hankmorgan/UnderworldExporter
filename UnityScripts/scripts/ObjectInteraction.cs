@@ -571,6 +571,7 @@ public class ObjectInteraction : MonoBehaviour {
 			break;
 
 		case A_MOVE_TRIGGER://A_MOVE_TRIGGER 54
+			break;
 		case A_PICK_UP_TRIGGER:// A_PICK_UP_TRIGGER 55
 		case A_USE_TRIGGER://A_USE_TRIGGER 56
 		case A_LOOK_TRIGGER://A_LOOK_TRIGGER 57
@@ -578,9 +579,9 @@ public class ObjectInteraction : MonoBehaviour {
 		case AN_OPEN_TRIGGER://AN_OPEN_TRIGGER 59
 		case AN_UNLOCK_TRIGGER://AN_UNLOCK_TRIGGER 60
 			//Special case triggers. NOt currently derived from obj_base
-			TriggerHandler th = this.GetComponent<TriggerHandler>();
-			th.Activate();
-			return true;
+			//TriggerHandler th = this.GetComponent<TriggerHandler>();
+			//th.Activate();
+			//return true;
 			break;
 
 		case RUNEBAG://RUNEBAG 70

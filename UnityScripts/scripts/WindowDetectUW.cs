@@ -92,18 +92,18 @@ public class WindowDetectUW : WindowDetect {
 			return;
 		}
 		base.OnPress(isPressed);
-		if (isPressed==false)
-		{
-			Debug.Log ("HERE");
-		}
+		//if (isPressed==false)
+		//{
+		//	Debug.Log ("HERE");
+		//}
 		//if(isPressed==true)
 		//{
 			switch (UWCharacter.InteractionMode)
 			{
-			case UWCharacter.InteractionModeAttack:
+		case UWCharacter.InteractionModePickup:
+				ClickEvent();
 				break;
 			default:
-				ClickEvent();
 				break;
 			}
 		//}
@@ -114,10 +114,10 @@ public class WindowDetectUW : WindowDetect {
 	{
 		switch (UWCharacter.InteractionMode)
 		{
-		case UWCharacter.InteractionModeAttack:
-			ClickEvent();
+		case UWCharacter.InteractionModePickup:
 			break;
 		default:
+			ClickEvent();
 			break;
 		}
 

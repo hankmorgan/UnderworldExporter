@@ -1,25 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_use_trigger : MonoBehaviour {
+public class a_use_trigger : trigger_base {
 	
-	private GameObject triggerObj;
-	private ObjectVariables Var;
-	private UILabel MessageLog;
+	//private GameObject triggerObj;
+	//private ObjectVariables Var;
+	//private UILabel MessageLog;
 	
-	public int state;
+	//public int state;
 	// Use this for initialization
-	void Start () {
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		Var=GetComponent<ObjectVariables>();
-		triggerObj=GameObject.Find (Var.trigger);
-		if (triggerObj != null)
-			{
-			triggerObj.GetComponent<ObjectVariables>().state=state;
-			}
-	}
+	//void Start () {
+		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+		//Var=GetComponent<ObjectVariables>();
+		//triggerObj=GameObject.Find (Var.trigger);
+		//if (triggerObj != null)
+		//	{
+		//	triggerObj.GetComponent<ObjectVariables>().state=state;
+		//	}
+	//}
 	
-	public void Activate()
+	/*public void Activate()
 	{
 		if (triggerObj == null)
 		{
@@ -44,5 +44,5 @@ public class a_use_trigger : MonoBehaviour {
 		{
 			triggerObj.SendMessage ("Activate");
 		}
-	}
+	}*/
 }

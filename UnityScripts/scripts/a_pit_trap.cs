@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_pit_trap : MonoBehaviour {
-
+public class a_pit_trap : trigger_base {
+	/*
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
@@ -22,5 +22,5 @@ public class a_pit_trap : MonoBehaviour {
 		{//Trigger the next object in it's chain
 			triggerObj.SendMessage ("Activate");
 		}
-	}
+	}*/
 }

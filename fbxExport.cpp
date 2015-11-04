@@ -1365,7 +1365,7 @@ void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, sh
 				else
 					{
 					sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);
-					RenderFBXCuboid(gScene, x, y, t, Water, -8, t.floorHeight, TileName);
+					RenderFBXCuboid(gScene, x, y, t, Water, -CEILING_HEIGHT, t.floorHeight, TileName);
 					}
 				}
 			else
@@ -4940,10 +4940,10 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							//Bottom 2 bits give the index of the pillar texture
 							x1 = offX + BrushSizeX / 2;
 							y1 = offY + BrushSizeY / 2;
-							z1 = offZ + 5;
+							z1 = offZ + 7.5;
 							x0 = offX - BrushSizeX / 2;
 							y0 = offY - BrushSizeY / 2;
-							z0 = offZ - 5;
+							z0 = offZ - 7.5;
 							FbxVector4 lControlPointl0(x0, y0, z1);
 							FbxVector4 lControlPointl1(x1, y0, z1);
 							FbxVector4 lControlPointl2(x1, y1, z1);

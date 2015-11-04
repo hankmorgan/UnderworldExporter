@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_step_on_trigger : MonoBehaviour {
-	
+public class a_step_on_trigger : trigger_base {
+	/*
 	private GameObject triggerObj;
 	private ObjectVariables Var;
 	private UILabel MessageLog;
@@ -25,4 +25,5 @@ public class a_step_on_trigger : MonoBehaviour {
 			triggerObj.SendMessage ("Activate");
 		}
 	}
+	*/
 }
