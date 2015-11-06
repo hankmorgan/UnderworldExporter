@@ -1035,23 +1035,24 @@ void RenderUnityEntityA_TELEPORT_TRAP(int game, float x, float y, float z, Objec
 	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	
 	//only show if it points to this level.
+	float BrushX = BrushSizeX; float BrushY = BrushSizeY; float BrushZ = BrushSizeZ;
 
-	if (currobj.zpos == 0)
-		{
-		fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj,(float)%f,(float)%f,(float)%f,false);"
-			, (currobj.quality * BrushSizeX + (BrushSizeX / 2))/100.0, (currobj.owner * BrushSizeY + (BrushSizeY / 2))/100.0, (LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ)/100.0);
+	//if (currobj.zpos == 0)
+	//	{
+		fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj,(float)%f,(float)%f,(float)%f,%d);"
+			, (currobj.quality * BrushX + (BrushX / 2)) / 100.0, (currobj.owner * BrushY + (BrushY / 2)) / 100.0, (LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushZ) / 100.0, currobj.zpos);
 		
 		////fprintf(MAPFILE, "\n// entity %d\n{\n", EntityCount);
 		////fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
 		////fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
 		////fprintf(MAPFILE, "\"origin\" \"%d %d %d\"\n", currobj.quality * BrushSizeX + (BrushSizeX / 2), currobj.owner * BrushSizeY + (BrushSizeY / 2), LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ);
 		////fprintf(MAPFILE, "\n}");
-		}
-	else
-		{
-		fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj,(float)%f,(float)%f,(float)%f,true);"
-			, (currobj.quality * BrushSizeX + (BrushSizeX / 2)) / 100.0, (currobj.owner * BrushSizeY + (BrushSizeY / 2)) / 100.0, (LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushSizeZ) / 100.0);
-		}
+		//}
+//	else
+//		{
+//		fprintf(UNITY_FILE, "\n\tCreate_a_teleport_trap(myObj,(float)%f,(float)%f,(float)%f,true);"
+//			, (currobj.quality * BrushX + (BrushX / 2)) / 100.0, (currobj.owner * BrushY + (BrushY / 2)) / 100.0, (LevelInfo[currobj.quality][currobj.owner].floorHeight * BrushZ) / 100.0);
+//		}
 	return;
 	}
 
