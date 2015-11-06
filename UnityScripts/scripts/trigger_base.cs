@@ -9,6 +9,7 @@ public class trigger_base : object_base {
 
 	public override bool Activate ()
 	{
+		Debug.Log (this.name);
 	//public overrideal bool Activate()
 		//Do what it needs to do.
 		//state=state;
@@ -26,8 +27,20 @@ public class trigger_base : object_base {
 				state++;
 			}
 		}
-		
+
+		PostActivate();
 		return true;
+	}
+
+	public virtual void PostActivate()
+	{
+		int TriggerRepeat = (objInt.flags>>1) & 0x1;
+		//Debug.Log(TriggerRepeat);
+		if (TriggerRepeat==0)
+		{
+			Destroy (this.gameObject);
+		}
+
 	}
 
 }

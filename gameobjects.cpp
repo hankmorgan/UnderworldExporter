@@ -617,6 +617,12 @@ switch (game)
 			objList[x].invis = 0;
 			
 			//Object header.
+			if (x == 1015)
+				{
+				int val = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0, 16);
+				printf("%d",val);
+				}
+			
 			objList[x].item_id = (getValAtAddress(lev_ark,objectsAddress+address_pointer+0,16)) & 0x1FF;
 			if ((objList[x].item_id >= 464) && ((game == UW1) || (game== UWDEMO)))//Fixed for bugged out of range items
 				{

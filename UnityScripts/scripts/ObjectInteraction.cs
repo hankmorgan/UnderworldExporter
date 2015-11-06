@@ -106,6 +106,8 @@ public class ObjectInteraction : MonoBehaviour {
 	public bool ignoreSprite;//For button handlers that do their own sprite work.
 
 	public int item_id;
+	public int flags;
+	public bool InUse;
 
 	//public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");

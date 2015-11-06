@@ -873,9 +873,27 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 				tmp.tileType = 1;
 				}
 			RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 0);
-
 			}
 		}
+//And at 99,99 for special stuff.
+	for (x = 98; x < 101; x++)
+		{
+		for (y = 98; y < 101; y++)
+			{
+			tmp.tileX = x;
+			tmp.tileY = y;
+			if ((x != 99) || (y != 99))
+				{
+				tmp.tileType = 0;
+				}
+			else
+				{
+				tmp.tileType = 1;
+				}
+			RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 0, 0);
+			}
+		}
+
 //Render doors
 	if (game != SHOCK)
 		{

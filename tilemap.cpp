@@ -1267,12 +1267,12 @@ for (int x=0; x<64;x++)
 				objList[nextObj].tileX=x;
 				objList[nextObj].tileY=y;
 				objList[nextObj].InUseFlag = 1;
-				if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC))
+				if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC) || (isTrap(objList[nextObj])) || (isTrigger(objList[nextObj])))
 					{//Include the containers contents as having this tilex/y
 					if (objList[nextObj].link != 0)
 						{
 						ObjectItem tmpobj = objList[objList[nextObj].link];
-						while (tmpobj.next != 0)
+						while ((tmpobj.next != 0) && (tmpobj.tileX == 99))//If 99 already down and I'm need to break a loop.
 							{
 								objList[tmpobj.index].tileX = x;
 								objList[tmpobj.index].tileY = y;

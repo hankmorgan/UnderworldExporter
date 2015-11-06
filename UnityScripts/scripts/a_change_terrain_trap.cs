@@ -8,17 +8,17 @@ public class a_change_terrain_trap : trap_base {
 	//private UILabel MessageLog;
 	public int TileX;//The tile from which the change terrain trap begins.
 	public int TileY;
-	//public int X;//The range of tiles to be changed.
-	//public int Y;
+	public int X;//The range of tiles to be changed.
+	public int Y;
 
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 		Vector3 Dist = new Vector3(-64*1.2f,0,0);
-		playerUW.GetMessageLog ().text= name + " activated\n";
-		for (int i = 0; i<=triggerX;i++)
+		//playerUW.GetMessageLog ().text= name + " activated\n";
+		for (int i = 0; i<=X;i++)
 		{
-			for (int j=0; j<=triggerY;j++)
+			for (int j=0; j<=Y;j++)
 			{
 				//Find the tile at the location.
 				GameObject ExistingTile = GameWorldController.FindTile(TileX+i,TileY+j,1);

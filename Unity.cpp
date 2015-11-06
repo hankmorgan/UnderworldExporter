@@ -19,7 +19,7 @@ int LevelNo;
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d);",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, \"%s\", \"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d);",
 		    objectMasters[currobj.item_id].particle,
 			objectMasters[currobj.item_id].InvIcon,
 			objectMasters[currobj.item_id].EquippedIconFemaleLowest,
@@ -30,13 +30,15 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 			objectMasters[currobj.item_id].isAnimated,
 			objectMasters[currobj.item_id].useSprite,
 			currobj.is_quant,
-			currobj.enchantment
+			currobj.enchantment,
+			currobj.flags,
+			currobj.InUseFlag
 			);
 	}
 
 void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64],char *ChildName)
 	{
-	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d, \"%s\");",
+	fprintf(UNITY_FILE, "\n\tCreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,\"%s\",\"%s\", \"%s\", %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d \"%s\");",
 		objectMasters[currobj.item_id].particle,
 		objectMasters[currobj.item_id].InvIcon,
 		objectMasters[currobj.item_id].EquippedIconFemaleLowest,
@@ -48,6 +50,8 @@ void RenderUnityObjectInteraction(int game, float x, float y, float z, ObjectIte
 		objectMasters[currobj.item_id].useSprite,
 		currobj.is_quant,
 		currobj.enchantment,
+		currobj.flags,
+		currobj.InUseFlag,
 		ChildName);
 	}
 
@@ -1628,6 +1632,7 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 	//TriggerTargetX = currobj.quality;
 	//TriggerTargetY = currobj.owner;
 	//target = objList[nextObj].link
+int target;
 	if (x < -1){ x = -1; }
 	if (y < -1){ y = -1; }
 	if (z < -1){ z = -1; }
@@ -1652,7 +1657,9 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				RenderUnityEntityA_TELEPORT_TRAP(game, x, y, z, currobj, objList, LevelInfo);
 				break;
 			case  A_ARROW_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_arrow_trap(myObj);");
+				target = (currobj.quality << 5) | currobj.owner;
+				fprintf(UNITY_FILE, "\n\tCreate_a_arrow_trap(myObj, %d, %d);",target, objectMasters[target].type);
+
 				break;
 			case  A_DO_TRAP:
 				{
@@ -1687,6 +1694,11 @@ void RenderUnityTrap(int game, float x, float y, float z, ObjectItem &currobj, O
 				break;
 			case  A_CREATE_OBJECT_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_create_object_trap(myObj);");
+				//Flag the linked object as in use. To make sure it is created later.
+				objList[currobj.link].InUseFlag=1;
+				objList[currobj.link].tileX=currobj.tileX;
+				objList[currobj.link].tileY = currobj.tileX;//For nav mesh generation.
+				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 				break;
 			case  A_DOOR_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_door_trap(myObj,%d);",currobj.quality);
@@ -1747,12 +1759,14 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 				{return; break; }
 			case 0:	//Model
 				{//No interactions
+				currobj.AlreadyRendered=1;
 				RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 				RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 				break;
 				}
 			case 1:	//entity
 				{
+				currobj.AlreadyRendered = 1;
 				switch (objectMasters[currobj.item_id].type)
 					{
 						case NPC:
@@ -2086,9 +2100,10 @@ float offX; float offY; float offZ;
 			{
 			if (objList[i].AlreadyRendered!=1)
 					{
+					
 					if (isTrigger(objList[i]))
 						{
-
+						objList[i].AlreadyRendered = 1;
 						offX = 0.0; offY = 0.0; offZ = 0.0;
 						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
 						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
@@ -2097,7 +2112,6 @@ float offX; float offY; float offZ;
 						//RenderUnityModel(game, offX, offY, offZ, objList[i], objList, LevelInfo);
 						//RenderUnitySprite(game, offX, offY, offZ, objList[i], objList, LevelInfo, 1);
 						//RenderUnityObjectInteraction(game, offX, offY, offZ, objList[i], objList, LevelInfo);
-
 						switch (objectMasters[objList[i].item_id].type)
 							{
 							case A_MOVE_TRIGGER:
@@ -2112,6 +2126,7 @@ float offX; float offY; float offZ;
 
 					if (isTrap(objList[i]))
 						{
+						objList[i].AlreadyRendered = 1;
 						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, objList[i].tileX, objList[i].tileY);//Figures out where the object should be.
 						offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
 						RenderUnityTrap(game, offX, offY, offZ, objList[i], objList, LevelInfo);
@@ -2121,6 +2136,22 @@ float offX; float offY; float offZ;
 				}
 			}
 		
+//Render remaining items which are in use but not rendered (for the create object trap)
+	for (int i = 0; i < 1024; i++)
+		{
+		if ((objList[i].AlreadyRendered != 1) && (objList[i].InUseFlag == 1))
+			{
+			fprintf(UNITY_FILE,"\n//Supplementary object %d",i);
+			objList[i].AlreadyRendered = 1;
+			CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, 99, 99);//Figures out where the object should be.
+			offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
+			//objList[i].tileX = 0; objList[i].tileY = 0;
+			if (objectMasters[objList[i].item_id].isSet == 1)
+				{
+				RenderUnityEntity(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+				}
+			}
+		}
 	fclose(UNITY_FILE);
 	}
 

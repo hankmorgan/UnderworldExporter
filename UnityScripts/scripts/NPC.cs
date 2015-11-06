@@ -74,7 +74,7 @@ public class NPC : object_base {
 		}
 		else
 		{
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=8;
+			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=4;
 			if (ai.AI.IsActive==false)
 			{
 				return;
