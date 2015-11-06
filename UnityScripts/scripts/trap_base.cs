@@ -16,6 +16,7 @@ public class trap_base : object_base {
 
 	public virtual bool Activate(int triggerX, int triggerY, int State)
 	{	
+		CheckReferences();
 		//Do what it needs to do.
 		ExecuteTrap(triggerX,triggerY, State);
 
@@ -49,10 +50,11 @@ public class trap_base : object_base {
 
 	public virtual void PostActivate()
 	{
-		int TriggerRepeat = (objInt.flags>>1) & 0x1;
-		if (TriggerRepeat==0)
-		{
-			Destroy (this.gameObject);
-		}
+		//Destruction of traps is probably controlled by the trigger.
+		//int TriggerRepeat = (objInt.flags>>1) & 0x1;
+	//	if (TriggerRepeat==0)
+		//{
+		//	Destroy (this.gameObject);
+		//}
 	}
 }

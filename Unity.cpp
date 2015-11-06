@@ -1639,6 +1639,14 @@ int target;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	RenderUnityObjectInteraction(game,x,y,z,currobj,objList,LevelInfo);
+	if (game != SHOCK)
+		{
+		UnityRotation(game, 0, currobj.heading, 0);
+		}
+	else
+		{
+		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
+		}
 	switch (objectMasters[currobj.item_id].type)
 		{
 			case  A_DAMAGE_TRAP:

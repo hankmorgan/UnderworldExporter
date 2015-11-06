@@ -136,13 +136,16 @@ public class UWCharacter : Character {
 			return;
 		}
 
-		if (isSwimming==true)
+		if (playerCam.enabled==true)
 		{
-			Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,-1.0f,Camera.main.transform.localPosition.z);
-		}
-		else
-		{
-			Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
+			if (isSwimming==true)
+			{
+				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,-1.0f,Camera.main.transform.localPosition.z);
+			}
+			else
+			{
+				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
+			}
 		}
 
 		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);

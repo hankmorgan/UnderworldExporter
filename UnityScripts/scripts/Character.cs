@@ -5,7 +5,7 @@ public class Character : MonoBehaviour {
 	public int game;
 	//What mode are we in and various ranges
 	public static int InteractionMode;
-	
+
 	public const int InteractionModeWalk=6;
 	public const int InteractionModeOptions=0;
 	public const int InteractionModeTalk=1;
@@ -51,7 +51,7 @@ public class Character : MonoBehaviour {
 	public int currentHeading;
 	protected int[] CompassHeadings={0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
 
-
+	public Camera playerCam;
 
 
 	public StringController StringControl;
