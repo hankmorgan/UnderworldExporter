@@ -524,7 +524,7 @@ public class Conversation_10 : Conversation {
 				
 			case 3:
 				
-				do_judgement( 0 );
+				yield return StartCoroutine(do_judgement( 0 ));
 				break;
 				
 			case 4:

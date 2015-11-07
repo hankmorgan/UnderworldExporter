@@ -12,7 +12,7 @@ public class GameWorldController : MonoBehaviour {
 	public bool EnableTextureAnimation;
 	public GameObject WorldModel;
 	public static TextureController tc;
-
+	public bool hideCeil;
 	public static GameWorldController instance;
 
 	public Texture2D[] paletteArray= new Texture2D[8];
@@ -25,7 +25,7 @@ public class GameWorldController : MonoBehaviour {
 
 	void Start () {
 		instance=this;
-		ceil.enabled=true;
+		ceil.enabled=!hideCeil;
 		if (EnableTextureAnimation==true)
 		{
 			//#if UNITY_EDITOR

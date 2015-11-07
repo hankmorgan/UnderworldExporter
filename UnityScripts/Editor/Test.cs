@@ -10375,6 +10375,7 @@ public class MyTools
 		newObj.transform.localPosition=new Vector3(0,0,0);
 		AIRig ai = newObj.GetComponent<AIRig>();
 		ai.AI.Body=myObj;
+
 		NPC npc = myObj.AddComponent<NPC>();
 		Conversation cnv ;//= myObj.AddComponent<Conversation>();
 		cnv=null;
@@ -10386,7 +10387,6 @@ public class MyTools
 		switch (npc_whoami)
 		{
 		case 255://No conversation
-
 			break;
 		case 7:
 			cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
@@ -10408,6 +10408,8 @@ public class MyTools
 			cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
 		case 67:
 			cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
+		case 88:
+			cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
 		case 262:
 			cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
 		case 263:
@@ -10440,7 +10442,7 @@ public class MyTools
 			cnv.param1[0]=1;//To stop them attacking me! Until I fix what params is
 		}
 	
-
+		/*
 		Rigidbody rgd = myObj.AddComponent<Rigidbody>();
 		//rgd.freezeRotation=true;
 		rgd.constraints = 
@@ -10450,6 +10452,8 @@ public class MyTools
 				| RigidbodyConstraints.FreezePositionX 
 				| RigidbodyConstraints.FreezePositionZ;
 		rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
+*/
+
 
 		myInstance = Resources.Load("animation/AI_Base_Animator") as GameObject;
 		newObj = (GameObject)GameObject.Instantiate(myInstance);
@@ -10462,7 +10466,10 @@ public class MyTools
 
 		mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
 		mysprite.sprite = image;//Assigns the sprite to the object.
-		CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
+		//CapsuleCollider cap = myObj.AddComponent<CapsuleCollider>();
+
+		CharacterController cap  = myObj.AddComponent<CharacterController>();
+
 		switch (int.Parse(NPC_ID))
 		{
 
