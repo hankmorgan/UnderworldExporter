@@ -26,6 +26,9 @@ public class UWCharacter : Character {
 	public bool isFemale;
 	public bool isLefty;
 	public bool isSwimming;
+	public bool isFlying;
+	public bool isFloating;
+	public bool onGround;//Not currently used.
 
 	//Character Status
 	public int FoodLevel;
@@ -145,6 +148,22 @@ public class UWCharacter : Character {
 			else
 			{
 				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
+			}
+		}
+
+		if (isFlying)
+		{
+			playerMotor.movement.maxFallSpeed=0.0f;
+		}
+		else
+		{
+			if (isFloating)
+			{
+				playerMotor.movement.maxFallSpeed=0.1f;//Default
+			}
+			else
+			{
+				playerMotor.movement.maxFallSpeed=20.0f;//Default
 			}
 		}
 

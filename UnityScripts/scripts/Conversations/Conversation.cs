@@ -43,18 +43,18 @@ public class Conversation : MonoBehaviour {
 	//public int[] param2=new int[31];//TODO:is this correct
 
 
-	public int play_hunger;
-	public int play_health;
-	public int play_arms;
-	public int play_power;
-	public int play_hp;
-	public int play_mana;
-	public int play_level;
-	public int new_player_exp;   //  (not used in uw1)
-	public int play_name;       //   player name
-	public int play_poison;      //  (not used in uw1)
-	public int play_drawn;       //  is 1 when player has drawn his weapon (?)
-	public int play_sex;         // (not used in uw1)
+	static int play_hunger;
+	static int play_health;
+	static int play_arms;
+	static int play_power;
+	static int play_hp;
+	static int play_mana;
+	static int play_level;
+	static int new_player_exp;   //  (not used in uw1)
+	static int play_name;       //   player name
+	static int play_poison;      //  (not used in uw1)
+	static int play_drawn;       //  is 1 when player has drawn his weapon (?)
+	static int play_sex;         // (not used in uw1)
 /*
 	public int npc_xhome;        //  x coord of home tile
 	public int npc_yhome;        //  y coord of home tile
@@ -511,29 +511,45 @@ public class Conversation : MonoBehaviour {
 //		return Random.Range (0,2);
 //	}
 
-	public void give_to_npc(int unk, int[] locals, int NoOfItems, int start)
+	public int give_to_npc(int unk, int[] locals, int NoOfItems, int start)
 	{
 		Container cn =npc.gameObject.GetComponent<Container>();
+		bool SomethingGiven=false;
 		for (int i=0; i<NoOfItems; i++)
 		{
 			int slotNo = locals[start+i] ;
-			TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
-			//Give the item to the npc
+			if (slotNo<=3)
+			{
+				TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
+				//Give the item to the npc
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 				{
 					cn.AddItemToContainer(pcSlot.objectInSlot);
 					pcSlot.clear ();
+					SomethingGiven=true;
 				}
 				else
 				{
 					GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-					demanded.transform.parent=null;
-					demanded.transform.position=npc.transform.position;
+					if (demanded!=null)
+					{
+						demanded.transform.parent=null;
+						demanded.transform.position=npc.transform.position;
+						SomethingGiven=true;
+					}
+
 					pcSlot.clear();
 				}
+			}
 		}
-
-	
+		if (SomethingGiven==true)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	public int take_from_npc(int unk, int arg1)
@@ -551,41 +567,43 @@ public class Conversation : MonoBehaviour {
 		/*Until It get more examples I'm doing the following*/
 		/*Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
 		//Debug.Log ("Item Category is " + (arg1-1000)*16);
+		//Another example goldthirst who specifically has an item id to pass.
 		int playerHasSpace=1;
-		int rangeS = (arg1-1000)*16;
-		int rangeE = rangeS+16;
 		Container cn = npc.gameObject.GetComponent<Container>();
 		Container cnpc = playerUW.gameObject.GetComponent<Container>();
-		for (int i = 0; i< cn.MaxCapacity ();i++)
-		{
-			string itemName=cn.GetItemAt (i);
-			if (itemName!="")
+
+			int rangeS = (arg1-1000)*16;
+			int rangeE = rangeS+16;
+			
+			for (int i = 0; i< cn.MaxCapacity ();i++)
 			{
-				ObjectInteraction objInt = GameObject.Find (itemName).GetComponent<ObjectInteraction>();
-				if ((objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
+				string itemName=cn.GetItemAt (i);
+				if (itemName!="")
 				{
-					//Give to PC
-
-					if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
+					ObjectInteraction objInt = GameObject.Find (itemName).GetComponent<ObjectInteraction>();
+					if (
+						((arg1>=1000) && (objInt.item_id >= rangeS ) && (objInt.item_id<=rangeE))
+					||
+					((arg1<1000) && (objInt.item_id == arg1 ))
+					)
 					{
-						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
-						cnpc.AddItemToContainer(itemName);
-						playerUW.GetComponent<PlayerInventory>().Refresh ();
+						//Give to PC
+						if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
+						{
+							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
+							cnpc.AddItemToContainer(itemName);
+							playerUW.GetComponent<PlayerInventory>().Refresh ();
+						}
+						else
+						{
+							GameObject demanded = GameObject.Find (itemName);
+							demanded.transform.parent=null;
+							demanded.transform.position=npc.transform.position;
+							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
+						}
 					}
-					else
-					{
-						GameObject demanded = GameObject.Find (itemName);
-						demanded.transform.parent=null;
-						demanded.transform.position=npc.transform.position;
-						npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
-					}
-
-
-
 				}
 			}
-		}
-
 		return playerHasSpace;
 	}
 
@@ -882,6 +900,101 @@ public class Conversation : MonoBehaviour {
 	public void set_quest(int unk,int value, int QuestNo)
 	{
 		playerUW.quest ().QuestVariables[QuestNo]=value;
+	}
+
+	public IEnumerator print(int unk1, int StringNo)
+	{
+		yield return StartCoroutine(say (StringNo));
+	}
+
+
+	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int unk5)
+	{
+		//id=0017 name="identify_inv" ret_type=int
+		//	parameters:   arg1:
+		//arg2:
+		//arg3:
+		//arg4: inventory item position
+		//description:  unknown TODO
+		//return value: unknown
+
+		//My guess that it is identifying the gold value of the items given.
+		Debug.Log ("Identify_inv");
+		return 1;
+	}
+
+	public void x_obj_stuff( int unk1, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9)
+	{
+		Debug.Log("x_obj_stuff");		
+		//id=002f name="x_obj_stuff" ret_type=void
+		//	parameters:   arg1: not used in uw1
+		//		arg2: not used in uw1
+		//		arg3: 0, (upper bit of quality field?)
+		//		arg4: quantity/special field, 115
+		//		arg5: not used in uw1
+		//		arg6: not used in uw1
+		//		arg7: quality?
+		//		arg8: identified flag?
+		//		arg9: position in inventory object list
+		//		description:  sets object properties for object in inventory object list.
+		//			if a property shouldn't be set, -1 is passed for the
+        //         property value.
+
+	}
+
+
+	public int find_inv( int unk1, int arg1, int arg2 )
+	{
+		//id=0030 name="find_inv" ret_type=int
+		//	parameters:   arg1: 0: npc inventory; 1: player inventory
+		//	arg2: item id
+		//		description:  searches item in npc or player inventory
+		//		return value: position in master object list, or 0 if not found
+		Debug.Log("find_inv");
+		return 0;
+	}
+
+
+	public int GetItemAtSlotProperty_Quality(int SlotNo)
+	{
+		TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		if(pcSlot!=null)
+		{
+			if (pcSlot.objectInSlot!="")
+			{
+				GameObject objectAtSlot=GameObject.Find (pcSlot.objectInSlot);
+				if (objectAtSlot!=null)
+				{
+					ObjectInteraction objInt = objectAtSlot.GetComponent<ObjectInteraction>();
+					if (objInt!=null)
+					{
+						return objInt.Quality;
+					}
+				}
+			}
+		}
+		return 0;
+	}
+
+	public int GetItemAtSlotProperty_Link(int SlotNo)
+	{
+		TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		if(pcSlot!=null)
+		{
+			if (pcSlot.objectInSlot!="")
+			{
+				GameObject objectAtSlot=GameObject.Find (pcSlot.objectInSlot);
+				if (objectAtSlot!=null)
+				{
+					ObjectInteraction objInt = objectAtSlot.GetComponent<ObjectInteraction>();
+					if (objInt!=null)
+					{
+						return objInt.Link;
+					}
+				}
+			}
+		}
+		return 0;
 	}
 }
 

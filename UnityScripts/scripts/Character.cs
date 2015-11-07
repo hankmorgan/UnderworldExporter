@@ -26,7 +26,7 @@ public class Character : MonoBehaviour {
 	public Texture2D CursorIconBlank;
 	//public string CurrObjectSprite;
 
-
+	public CharacterMotorC playerMotor;
 
 	//Character Stats
 	public int MaxVIT;

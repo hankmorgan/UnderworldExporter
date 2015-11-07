@@ -217,6 +217,11 @@ public class SpellEffect : MonoBehaviour {
 	public const int UW1_Spell_Effect_TremendousToughness = 478;
 	public const int UW1_Spell_Effect_UnsurpassedToughness = 479;
 
+	//Spells observed in the wild that have no string.
+	//Eg the poison potion in Ironwit's maze
+	public const int UW1_Spell_Effect_PoisonHidden = 491;
+
+
 	//Managed by a spreadsheet!
 	public static int[] UW1_Spell_Icons=
 	{-1,
@@ -698,7 +703,20 @@ public class SpellEffect : MonoBehaviour {
 		-1,
 		-1,
 		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
+		-1,
 		-1};
+
 
 
 	//Constants for spell effects icons

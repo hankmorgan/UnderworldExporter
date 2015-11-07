@@ -640,14 +640,13 @@ public class Magic : MonoBehaviour {
 
 
 	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
-	{//Test spell for testing spell effects
+	{//Poison
 		SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
 			//caster.AddComponent<SpellEffectPoison>();
 		sep.Value=value;//Poison will damage the player for 100 hp over it's duration
 		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
 		//	sep.isNPC=true;
 		sep.Go ();
-
 	}
 
 	void Cast_OrtPorYlem(GameObject Caster)
@@ -659,6 +658,14 @@ public class Magic : MonoBehaviour {
 			playerUW.useRange=20;
 			playerUW.pickupRange=20;
 		}
+	}
+
+	public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{//Levitate
+		SpellEffectLevitate sep = (SpellEffectLevitate)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		//caster.AddComponent<SpellEffectPoison>();
+		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
+		sep.Go ();
 	}
 	
 	/* Utility code for Spells*/
@@ -836,6 +843,7 @@ public class Magic : MonoBehaviour {
 			break;
 		case SpellEffect.UW1_Spell_Effect_Poison:
 		case SpellEffect.UW1_Spell_Effect_Poison_alt01:
+		case SpellEffect.UW1_Spell_Effect_PoisonHidden:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
 			break;
 		case SpellEffect.UW1_Spell_Effect_Paralyze:
@@ -1216,7 +1224,8 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
-			Debug.Log ("levitate enchantment");
+			//Debug.Log ("levitate enchantment");
+			Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_WaterWalk:
@@ -1231,6 +1240,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectFly>();
 			Debug.Log ("Fly enchantment");
+			Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_ResistBlows:
@@ -1331,6 +1341,7 @@ public class Magic : MonoBehaviour {
 			break;
 		case SpellEffect.UW1_Spell_Effect_Poison:
 		case SpellEffect.UW1_Spell_Effect_Poison_alt01:
+		case SpellEffect.UW1_Spell_Effect_PoisonHidden:
 			//Debug.Log ("Poison enchantment");
 			Cast_Poison (caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10,100);
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();

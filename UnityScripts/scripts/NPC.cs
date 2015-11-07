@@ -158,7 +158,7 @@ public class NPC : object_base {
 			{
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npc_whoami=256+(objInt.item_id -64);
-				//Debug.Log ("npc who am i is now " + npc_whoami);
+				Debug.Log ("npc who am i is now " + npc_whoami);
 			}
 			Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
 			if (x!=null)

@@ -615,7 +615,7 @@ switch (game)
 			objList[x].joint =0 ;
 			objList[x].objectConversion = 0;
 			objList[x].invis = 0;
-			
+			objList[x].AlreadyRendered=0;
 			//Object header.
 			if (x == 1015)
 				{

@@ -51,16 +51,29 @@ public class StringController : MonoBehaviour {
 	{//Eventually this will return things like proper quants etc.
 		string output = GetString (4,objInt.item_id);
 
-		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false))
+		if ((objInt.isQuant ==true) && (objInt.isEnchanted==false))
 		{
-			if (objInt.Link>1)
-			{//Plural description
-				output= objInt.Link + " " + output.Split ('&')[1];		
-			}
-			else
+
+			if (output.Contains("&"))
 			{
-				output= output.Split ('&')[0];
+				if (objInt.Link>1)
+				{//Plural description
+					output= objInt.Link + " " + output.Split ('&')[1];		
+				}
+				else
+				{
+					output= output.Split ('&')[0];
+				}
 			}
+		else
+			{
+				if (objInt.Link>1)
+				{
+					output = output.Replace("a_",objInt.Link + "_");
+					output = output.Replace("an_",objInt.Link + "_");
+					output =output + "s";
+				}
+			}		
 		}
 		else
 			{
@@ -79,16 +92,25 @@ public class StringController : MonoBehaviour {
 
 		string output = GetString (4,objInt.item_id);
 		
-		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false))
+		if ((objInt.isQuant ==true) && (objInt.isEnchanted==false))
 		{
-			if ((objInt.Link>1) && (Quantity>1))
-			{//Plural description
-				output= objInt.Link + " " + output.Split ('&')[1];		
+			if (output.Contains("&"))
+			{//string is split into a singular and plural
+				if ((objInt.Link>1) && (Quantity>1))
+				{//Plural description
+					output= objInt.Link + " " + output.Split ('&')[1];		
+				}
+				else
+				{
+					output= output.Split ('&')[0];
+				}
 			}
 			else
 			{
-				output= output.Split ('&')[0];
+				output = output.Replace("a_",Quantity + "_");
+				output = output.Replace("an_",Quantity + "_");
 			}
+
 		}
 		else
 		{

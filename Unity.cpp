@@ -245,16 +245,6 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	int npc_talkedto, int npc_level,int npc_name)
 
 */
-
-
-	fprintf(UNITY_FILE, "\n\t////Container contents");
-	fprintf(UNITY_FILE, "\n\tParentContainer = CreateContainer(myObj, %d, %d, %d);"
-		, 255
-		, 255
-		, 255
-		);
-	//fprintf(UNITY_FILE, "\n\tmyObj.GetComponent<ObjectInteraction>().isContainer = true;");
-
 	if (game != SHOCK)
 		{
 		UnityRotation(game, 0, currobj.heading, 0);
@@ -265,21 +255,47 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 		}
 
 
-	switch (currobj.npc_attitude)
-		{
-			case 0:	//hostile
-				{
-				//fprintf(MAPFILE, "\"team\" \"5\"\n");	//Criminals team
-				break;
-				}
-			default:
-				{
-				//fprintf(MAPFILE, "\"team\" \"5\"\n");	//Beggars team
-				break;
-				}
-		}
 
-	if (currobj.link != 0)//Npc has an inventory	I need to set up joints for the entities.
+	fprintf(UNITY_FILE, "\n\t////Container contents");
+	fprintf(UNITY_FILE, "\n\tParentContainer = CreateContainer(myObj, %d, %d, %d);"
+		, 255
+		, 255
+		, 255
+		);
+
+	//now recursively get it's contents.
+	if (currobj.link != 0)	//Container has objects
+		{
+		fprintf(UNITY_FILE, "\n\t////NPC container with items\n");
+		ObjectItem tmpobj = objList[currobj.link];
+		int count = 0;
+		while (tmpobj.next != 0)
+			{
+			if (objectMasters[objList[currobj.link].item_id].type != LOCK)
+				{
+				RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
+				fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+				fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
+				if (objectMasters[currobj.item_id].isMoveable == 1)
+					{
+					fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+					}
+				}
+			tmpobj = objList[tmpobj.next];
+			}
+		RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
+		fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
+		fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
+		if (objectMasters[currobj.item_id].isMoveable == 1)
+			{
+			fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+			}
+		}
+	fprintf(UNITY_FILE, "\n\t////Container contents complete\n");
+
+
+
+	/*if (currobj.link != 0)//Npc has an inventory	I need to set up joints for the entities.
 		{
 		int JointCount = 1;	//For a future joint enumeration
 		//TODO:Clean this up,
@@ -319,7 +335,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 			}
 
 		}
-
+*/
 	return;
 	}
 
@@ -1761,7 +1777,13 @@ int target;
 void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	//Picks what type of object to generate.
+	if (currobj.AlreadyRendered == 1)
+		{
+return;
+		}
+	objList[currobj.index].AlreadyRendered=1;
 	printf("Rendering:%s\n", UniqueObjectName(currobj));
+
 	switch (objectMasters[currobj.item_id].isEntity)
 		{
 			case -1:	//ignore
@@ -2148,10 +2170,10 @@ float offX; float offY; float offZ;
 //Render remaining items which are in use but not rendered (for the create object trap)
 	for (int i = 0; i < 1024; i++)
 		{
-		if ((objList[i].AlreadyRendered != 1) && (objList[i].InUseFlag == 1))
+		if ((objList[i].AlreadyRendered == 0) && (objList[i].InUseFlag == 1))
 			{
 			fprintf(UNITY_FILE,"\n//Supplementary object %d",i);
-			objList[i].AlreadyRendered = 1;
+			//objList[i].AlreadyRendered = 1;
 			CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, i, 99, 99);//Figures out where the object should be.
 			offX = offX / 100.0; offY = offY / 100.0; offZ = (offZ / 100.0);
 			//objList[i].tileX = 0; objList[i].tileY = 0;
