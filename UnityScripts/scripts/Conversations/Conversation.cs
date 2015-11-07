@@ -112,7 +112,7 @@ public class Conversation : MonoBehaviour {
 
 	public void SetupConversation(int stringno)
 	{
-
+		playerUW.MouseLookEnabled=false;
 		//Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
 		{
@@ -268,7 +268,8 @@ public class Conversation : MonoBehaviour {
 	{
 		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		tl.textLabel.lineWidth=480;
-
+		//Replace instances of @GS8 with player name
+		WhatToSay = WhatToSay.Replace("@GS8" , playerUW.CharName);
 		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
 
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
