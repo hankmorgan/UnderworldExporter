@@ -667,7 +667,7 @@ void PrintUWObjects(ObjectItem objList[1600])
 			fprintf(LOGFILE, "\n\tNPC Heading : %d ", objList[x].npc_heading);
 			fprintf(LOGFILE, "\n\tNPC Hunger : %d ", objList[x].npc_hunger);
 			fprintf(LOGFILE,"\n\tNPC Who Am I : %d ", objList[x].npc_whoami);
-			//fprintf(LOGFILE,"\n\tNPC Attitude : %d ", objList[x].npc_attitude);
+			fprintf(LOGFILE,"\n\tNPC Death Quest variable : %d ", objList[x].npc_deathVariable);
 
 
 			/*

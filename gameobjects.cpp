@@ -710,9 +710,11 @@ switch (game)
 
 			objList[x].npc_talkedto = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 13 & 0x1);
 			objList[x].npc_attitude = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) >> 14 & 0x3);
+			
+			objList[x].npc_deathVariable=getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x14,16) & 0xF;
 
-			objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 16) >> 4 & 0x3F);
-			objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xe, 16) >> 10 & 0x3F);
+			objList[x].npc_yhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 4 & 0x3F);
+			objList[x].npc_xhome = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x16, 16) >> 10 & 0x3F);
 
 			objList[x].npc_heading = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x18, 16) >> 4 & 0xF);
 			objList[x].npc_hunger = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x19, 16) & 0x3F);

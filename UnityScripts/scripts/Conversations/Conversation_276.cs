@@ -151,9 +151,9 @@ public class Conversation_276 : Conversation {
 		
 		//int locals[195];
 		int[] locals=new int[196];
-		
-		privateVariables[5] = get_quest( 1, locals[1] );
 		locals[1] = 4;
+		privateVariables[5] = get_quest( 1, locals[1] );
+
 		privateVariables[2] = 1;
 		privateVariables[3] = 1;
 		privateVariables[4] = 1;

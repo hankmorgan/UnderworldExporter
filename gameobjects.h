@@ -335,6 +335,8 @@ struct ObjectItem
 	short npc_arms=0;
 	short npc_power = 0;
 	short npc_name = 0;
+
+	short npc_deathVariable;//Offset 0x14 in mobile object info. Quest variable to set when killed
    
    //Some stuff I need for attaching objects to joints.
    int objectOwner;	//index to the npc carrying the object
