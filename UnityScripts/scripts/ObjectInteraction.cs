@@ -544,10 +544,10 @@ public class ObjectInteraction : MonoBehaviour {
 			}
 			break;
 		case CONTAINER:// CONTAINER 19
-			if (playerUW.playerInventory.ObjectInHand=="")
-			{//Only activate if nothing in hand.
+			//if (playerUW.playerInventory.ObjectInHand=="")
+			//{//Only activate if nothing in hand.
 			item = (Container)this.gameObject.GetComponent<Container>();
-			}
+			//}
 			break;
 		case TORCH://TORCH 22
 			if (playerUW.playerInventory.ObjectInHand=="")

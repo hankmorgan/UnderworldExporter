@@ -38,7 +38,7 @@ public class UWFonts : MonoBehaviour {
 	public void ConvertString(int font, string strIn, UITexture TargetControl)
 	{
 		int BitMapWidth = 328; //strIn.Length*font5x6pWidth;
-		int BitMapHeight= 328; // 2*font5x6pHeight;
+		int BitMapHeight= 162; // 2*font5x6pHeight;
 		//Debug.Log("Converting " + strIn);
 		Texture2D bgNew = new Texture2D(BitMapWidth,BitMapHeight,TextureFormat.Alpha8,false);
 		Texture2D bg = Resources.Load <Texture2D> ("HUD/Textbox_alpha");
