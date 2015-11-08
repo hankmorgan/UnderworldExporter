@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StatsDisplay : MonoBehaviour {
+public class StatsDisplay : GuiBase {
 	public UILabel CharName;
 	public UILabel CharClass;
 	public UILabel CharClassLevel;
@@ -16,7 +16,7 @@ public class StatsDisplay : MonoBehaviour {
 
 	public static int Offset;
 
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 
 	private string[] Skillnames = {"ATTACK","DEFENSE","UNARMED","SWORD","AXE","MACE","MISSILE",
 									"MANA","LORE","CASTING","TRAPS","SEARCH","TRACK","SNEAK","REPAIR",

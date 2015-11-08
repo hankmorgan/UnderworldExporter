@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthFlask : MonoBehaviour {
+public class HealthFlask : GuiBase {
 
 	public UITexture[] LevelImages=new UITexture[13];
 	public float Level;
@@ -13,12 +13,9 @@ public class HealthFlask : MonoBehaviour {
 
 	public bool isHealthDisplay;
 	private bool Poisoned;
-	public static UWCharacter playerUW;
+//	public static UWCharacter playerUW;
 	// Use this for initialization
-	void Start () {
-				
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (isHealthDisplay==true)
@@ -73,7 +70,7 @@ public class HealthFlask : MonoBehaviour {
 
 	void OnClick()
 	{
-		UILabel MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+		//UILabel MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		string output=""; 
 		if (isHealthDisplay == true)
 		{
@@ -89,6 +86,6 @@ public class HealthFlask : MonoBehaviour {
 			output= output + "Your current mana points are " +playerUW.PlayerMagic.CurMana + " out of " + playerUW.PlayerMagic.MaxMana;
 		}
 
-		MessageLog.text =output;
+		playerUW.GetMessageLog().text =output;
 	}
 }

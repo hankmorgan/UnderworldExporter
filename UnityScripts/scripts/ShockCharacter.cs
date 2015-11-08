@@ -55,7 +55,7 @@ public class ShockCharacter : MonoBehaviour {
 		StringControl.InitStringController("c:\\uw1_strings.txt");
 		//Initialise some basic references on other objects.
 		//ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
-		ObjectInteraction.SC=StringControl;
+		//ObjectInteraction.SC=StringControl;
 		//a_text_string_trap.SC=StringControl;
 	//	ButtonHandler.SC=StringControl;
 		//ObjectInteraction.SC = GameObject.Find ("StringController").GetComponent<StringController>();

@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TradeSlot : MonoBehaviour {
+public class TradeSlot : GuiBase {
 
 	public bool PlayerSlot=false;
 	public int SlotNo;
-	static UWCharacter playerUW;
+	//static UWCharacter playerUW;
 	//static PlayerInventory pInv;
 	public bool pressedDown=false;
 	public string objectInSlot;
@@ -16,7 +16,7 @@ public class TradeSlot : MonoBehaviour {
 	public GameObject Indicator;
 	// Use this for initialization
 	void Start () {
-		playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		//pInv=GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		SlotImage=this.GetComponent<UITexture>();
 		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");

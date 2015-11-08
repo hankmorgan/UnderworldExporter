@@ -71,15 +71,15 @@ public class UWCharacter : Character {
 		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		
-		HealthFlask.playerUW=this.gameObject.GetComponent<UWCharacter>();
+		Eyes.playerUW=this.GetComponent<UWCharacter>();
+		//HealthFlask.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		//Compass.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		StatsDisplay.playerUW=this.gameObject.GetComponent<UWCharacter>();
+		//StatsDisplay.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		
 		NPC.playerUW=this.GetComponent<UWCharacter>();
 		GoblinAI.player=this.gameObject;
-		
-		Conversation.SC=ObjectInteraction.SC;
+		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
+		//Conversation.SC=this.StringControl; //ObjectInteraction.SC;
 		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 
 		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");

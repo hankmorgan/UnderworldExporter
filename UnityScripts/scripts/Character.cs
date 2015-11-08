@@ -85,7 +85,7 @@ public class Character : MonoBehaviour {
 
 		//Common stuff
 		//ObjectInteraction.player=this.gameObject;
-		ObjectInteraction.SC=StringControl;
+		//ObjectInteraction.SC=StringControl;
 		//WindowDetect.playerUW=this.GetComponent<UWCharacter>();
 		//ButtonHandler.SC=StringControl;
 		//ButtonHandler.player=this.gameObject;

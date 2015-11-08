@@ -111,7 +111,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	//public static GameObject player;
 	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
-	public static StringController SC;	//String controller reference
+	//public static StringController SC;	//String controller reference
 
 	//public static Character player;
 	public static UWCharacter playerUW;
@@ -257,14 +257,14 @@ public class ObjectInteraction : MonoBehaviour {
 		return playerUW;
 		}
 
-	public StringController getStringController()
-	{//Quickly get the string controller for other components.
-		return SC;
-	}
+//	public StringController getStringController()
+	//{//Quickly get the string controller for other components.
+	//	return SC;
+	//}
 
 	public UILabel getMessageLog()
 	{
-		return MessageLog;
+		return playerUW.GetMessageLog();//MessageLog;
 	}
 
 	public bool Attack(int damage)

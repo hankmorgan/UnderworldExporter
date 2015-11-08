@@ -27,10 +27,10 @@ Implement intrinsic conversations in this class.
 Fix the Param arrays being passed into local functions. Especially ones that set the npcs attitude.
 */
 
-public class Conversation : MonoBehaviour {
+public class Conversation : GuiBase {
 
-	public static UWCharacter playerUW;
-	public static StringController SC;
+	//public static UWCharacter playerUW;
+	//public static StringController SC;
 
 	public static int CurrentConversation;
 	public static bool InConversation = false;
@@ -314,7 +314,7 @@ public class Conversation : MonoBehaviour {
 
 	IEnumerator say(int WhatToSay)
 	{
-		string tmp = SC.GetString (StringNo,WhatToSay);
+		string tmp = playerUW.StringControl.GetString (StringNo,WhatToSay);
 		yield return StartCoroutine(say (tmp));
 	}
 
@@ -340,7 +340,7 @@ public class Conversation : MonoBehaviour {
 		{
 			if (localsArray[i]!=0)
 			{
-				tmp = tmp + j++ + "." + SC.GetString(StringNo,localsArray[i]) + "\n";
+				tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
 				MaxAnswer++;
 			}
 			else
@@ -353,7 +353,7 @@ public class Conversation : MonoBehaviour {
 		tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
 
-		tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
+		tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
 		yield return StartCoroutine(say (tmp + " @@@ "));
 		yield return 0;
 	}
@@ -376,7 +376,7 @@ public class Conversation : MonoBehaviour {
 				{
 					bablf_array[j-1] = localsArray[i];
 					//Debug.Log ("Valid answer " + localsArray[i]);
-					tmp = tmp + j++ + "." + SC.GetString(StringNo,localsArray[i]) + "\n";
+					tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
 					MaxAnswer++;
 				}
 			}
@@ -390,8 +390,8 @@ public class Conversation : MonoBehaviour {
 		tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
 		//Debug.Log ("bablfanswer=" +bablf_ans);
-		//tmp= SC.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
-		tmp= SC.GetString (StringNo,bablf_array[bablf_ans-1]);
+		//tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
+		tmp= playerUW.StringControl.GetString (StringNo,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
 		yield return 0;
 	}

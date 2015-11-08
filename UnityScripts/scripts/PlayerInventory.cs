@@ -57,6 +57,7 @@ public class PlayerInventory : MonoBehaviour {
 	public UITexture RightShoulder_Slot;
 	public UITexture[] BackPack_Slot=new UITexture[8];
 
+	public GameObject InventoryMarker;
 	private GameObject[] LightGameObjects=new GameObject[4];
 
 	public bool atTopLevel;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dragons : MonoBehaviour {
+public class Dragons : GuiBase {
 
 
 	public UITexture[] Tail=new UITexture[4];
