@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Compass : MonoBehaviour {
+public class Compass : GuiBase {
 
 	private int PreviousHeading=-1;
 
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 
 	public const int NORTH = 0;
 	public const int NORTHNORTHEAST = 1;

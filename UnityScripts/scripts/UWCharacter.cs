@@ -15,7 +15,7 @@ public class UWCharacter : Character {
 
 	public int Body;//Which body/portrait this character has 
 
-
+	public UWHUD playerHud;
 
 	//Character related info
 	//Character Details
@@ -52,8 +52,6 @@ public class UWCharacter : Character {
 	public int ResurrectLevel;
 	public Vector3 ResurrectPosition=Vector3.zero;
 
-	public CutsceneAnimation CutScenesSmall;
-
 	public override void Start ()
 	{
 		base.Start ();
@@ -62,10 +60,10 @@ public class UWCharacter : Character {
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
 		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
-
+		GuiBase.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		InteractionMode=UWCharacter.DefaultInteractionMode;
 
-		WindowDetectUW.playerUW=this.GetComponent<UWCharacter>();
+		//WindowDetectUW.playerUW=this.GetComponent<UWCharacter>();
 		Container.playerUW=this.GetComponent<UWCharacter>();
 		ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
 		//a_text_string_trap.SC=StringControl;
@@ -75,7 +73,7 @@ public class UWCharacter : Character {
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		
 		HealthFlask.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		Compass.playerUW=this.gameObject.GetComponent<UWCharacter>();
+		//Compass.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		StatsDisplay.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		
 		NPC.playerUW=this.GetComponent<UWCharacter>();
@@ -93,16 +91,15 @@ public class UWCharacter : Character {
 	void PlayerDeath()
 	{//CHeck if the player has planted the seed and if so send them to that position.
 		mus.Death=true;
-
-		if (CutScenesSmall!=null)
+		if ( playerHud.CutScenesSmall!=null)
 		{
 			if (ResurrectPosition!=Vector3.zero)
 			{
-				CutScenesSmall.SetAnimation="Death_With_Sapling";
+				 playerHud.CutScenesSmall.SetAnimation="Death_With_Sapling";
 			}
 			else
 			{
-				CutScenesSmall.SetAnimation="Death";
+				playerHud.CutScenesSmall.SetAnimation="Death";
 			}
 		}
 

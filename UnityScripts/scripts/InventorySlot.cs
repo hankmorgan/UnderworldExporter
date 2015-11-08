@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InventorySlot : MonoBehaviour {
+public class InventorySlot : GuiBase {
 
-	private UILabel MessageLog;
+	//private UILabel MessageLog;
 	private UISprite slot;
 	//public int InteractionMode;
 	//public static GameObject player;
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 	//public static GameObject currInventorySlot;
 	//public GameObject ObjectInSlot;
-	public string ObjectSpriteString;
-	public Texture2D ObjectSprite;
+	//public string ObjectSpriteString;
+	//public Texture2D ObjectSprite;
 	//private PlayerInventory pInv;
-	public GameObject GronkSlot;
+	//public GameObject GronkSlot;
 	public int slotIndex;//What index of inventory slot is this
 	public int SlotCategory; //What type of item is in the slot. Eg armour, rings, boots and general etc.
 	//Possible values for the below. Should tally with UWexporter defines
@@ -29,23 +29,27 @@ public class InventorySlot : MonoBehaviour {
 	private GameObject QuantityObj=null;
 	// Use this for initialization
 	void Start () {
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 //		slot = GetComponent<UISprite>();
 
 	}
 	
 	void UseFromSlot()
 	{
-		//string ObjectName=playerUW.playerInventory.GetObjectAtSlot(slotIndex); //pInv.GetObjectAtSlot(slotIndex);
-
 		GameObject currObj=playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
 
 		if (currObj !=null)
 		{
-			//GameObject currObj = GameObject.Find (ObjectName);
-			//Debug.Log("you use this " + currObj.name + " InventorySlot.UseFromSlot");
 			ObjectInteraction currObjInt = currObj.GetComponent<ObjectInteraction>();
 			currObjInt.Use();
+		}
+		else
+		{
+			if (playerUW.playerInventory.ObjectInHand!="")
+			{
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerInventory.ObjectInHand="";
+			}
 		}
 	}
 
@@ -396,7 +400,7 @@ public class InventorySlot : MonoBehaviour {
 						else
 							{
 							Debug.Log("attempting to pick up a quantity");
-							UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+							UIInput inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
 							inputctrl.eventReceiver=this.gameObject;
 							inputctrl.type=UIInput.KeyboardType.NumberPad;
 							inputctrl.selected=true;
@@ -418,7 +422,7 @@ public class InventorySlot : MonoBehaviour {
 
 		Debug.Log ("Value summited to slot");
 		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
-		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
+		UIInput inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
 		Debug.Log (inputctrl.text);
 		int quant= int.Parse(inputctrl.text);
 		if (quant==0)

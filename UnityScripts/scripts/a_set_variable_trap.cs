@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_set_variable_trap : trigger_base {
+public class a_set_variable_trap : trap_base {
 
 	/*private GameObject triggerObj;
 	private ObjectVariables Var;

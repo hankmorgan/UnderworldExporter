@@ -214,12 +214,12 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	/*Set NPC Properties*/
 	if ((game == UW1) || (game == UWDEMO))
 		{
-		fprintf(UNITY_FILE, "\n\tSetNPCProps(myObj, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, " ,
+		fprintf(UNITY_FILE, "\n\tSetNPCProps(myObj, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, " ,
 			currobj.npc_whoami, currobj.npc_xhome, currobj.npc_yhome,
 			currobj.npc_hunger, currobj.npc_health,
 			currobj.npc_hp, currobj.npc_arms, currobj.npc_power,
 			currobj.npc_goal, currobj.npc_attitude, currobj.npc_gtarg,
-			currobj.npc_talkedto, currobj.npc_level, currobj.npc_name, currobj.npc_deathVariable
+			currobj.npc_talkedto, currobj.npc_level, currobj.npc_name
 			);
 		switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
 			{

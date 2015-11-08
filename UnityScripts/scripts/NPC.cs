@@ -33,7 +33,7 @@ public class NPC : object_base {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 
-	public int npc_deathvariable;	//Quest variable to set when the character is killed
+	//public int npc_deathvariable;	//Quest variable to set when the character is killed
 
 	//Added by myself
 	public bool Poisoned;
@@ -92,10 +92,10 @@ public class NPC : object_base {
 
 			if (npc_hp<=0)
 			{
-				if ((npc_deathvariable>0) && (npc_deathvariable<32))
-				{
-					playerUW.quest().QuestVariables[npc_deathvariable]=1;
-				}
+				//if ((npc_deathvariable>0) && (npc_deathvariable<32))
+			//	{
+				//	playerUW.quest().QuestVariables[npc_deathvariable]=1;
+			//	}
 				ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			//	Debug.Log("NPC Dead");
 			}

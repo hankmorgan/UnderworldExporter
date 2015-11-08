@@ -201,6 +201,11 @@ public class WindowDetectUW : WindowDetect {
 					playerUW.playerInventory.ObjectInHand="";
 				}
 			}
+			else
+			{
+				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerInventory.ObjectInHand="";
+			}
 		}
 	}
 
