@@ -1569,7 +1569,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				}
 			case FBX_MODE:
 				CleanUp(LevelInfo, game); //Get rid of unneeded tiles.
-				printf("%d", LevelInfo[3][5].Render);
+				//printf("%d", LevelInfo[3][5].Render);
 				RenderFBXLevel(LevelInfo, objList, game);
 				break;
 			case UNITY_MODE:

@@ -4874,8 +4874,8 @@ void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64
 					t.floorHeight = (objList[k].zpos >> 2);	//heights in uw are shifted
 					t.ceilingHeight = 0;
 					if (game != UW2)
-						{
-						t.floorTexture = (objList[k].quality >> 1) + 210;
+						{//Texture is supposed to be an index into the texture list!
+						t.floorTexture = objList[k].texture ;  //(objList[k].quality >> 1) + 210;
 						}
 					else
 						{

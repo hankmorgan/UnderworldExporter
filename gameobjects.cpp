@@ -683,12 +683,21 @@ switch (game)
 						objList[x].DeathWatched = getValAtAddress(graves, objList[x].link - 512, 8);
 						}
 					}
+				if (objectMasters[objList[x].item_id].type == A_CHANGE_TERRAIN_TRAP)
+					{
+					//bits 1-5 of the quality field is the floor texture.
+					if (game == UW1)
+						{
+						if (x == 772)
+							{
+							printf("Quality %d >> %d or mask %d", objList[x].quality, objList[x].quality>>1, objList[x].quality>>1 & 0x7);
+							}
+						objList[x].texture = texture_map[48 + (objList[x].quality >> 1)];
+						}					
+					}
 
 			//objList[x].special = objList[x].owner;
-			
-			
 			//objList[x].link = objList[x].quantity;
-			
 			////fprintf(LOGFILE,"\n\tNext Object ID to this object is  %d", objList[x].next  );
 			////fprintf(LOGFILE,"\n%d free object. Value 4=%d",x,getValAtAddress(lev_ark,AddressOfBlockStart+address_pointer+6,16));
 			

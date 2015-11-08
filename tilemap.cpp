@@ -469,7 +469,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			case UWDEMO:
 				{
 				texture_map[i] = getValAtAddress(tex_ark, textureAddress + (i * 2), 16);
-				printf("%d = %d\n",i, texture_map[i]);
+				//printf("%d = %d\n",i, texture_map[i]);
 				if (i == 57)
 					{
 					CeilingTexture = texture_map[i]+210;
@@ -1236,7 +1236,7 @@ for (int x=0; x<64;x++)
 							LevelInfo[j][k].TerrainChange = 1;
 							LevelInfo[j][k].TerrainChangeIndices[LevelInfo[j][k].TerrainChangeCount]=currObj.index;
 							LevelInfo[j][k].TerrainChangeCount++;
-							LevelInfo[j][k].isWater  = 0;// turn off water in terrain change tiles
+							//LevelInfo[j][k].isWater  = 0;// turn off water in terrain change tiles
 							}						
 						}
 					currObj.tileX=x;
