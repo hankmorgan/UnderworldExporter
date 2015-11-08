@@ -654,6 +654,10 @@ void PrintUWObjects(ObjectItem objList[1600])
 			fprintf(LOGFILE,"\n\tSpecial Link : %d", objList[x].link);
 			}
 
+		if (objList[x].texture > -1)
+			{
+			printf("\n\tTexture: %d" , objList[x].texture );
+			}
 		if (objList[x].npc_whoami >0)
 			{
 			fprintf(LOGFILE, "\n\tNPC HP : %d ", objList[x].npc_hp);

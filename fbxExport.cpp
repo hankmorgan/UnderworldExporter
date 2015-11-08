@@ -4856,7 +4856,7 @@ void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64
 
 	for (int k = 0; k < 1024; k++)
 		{
-		if (objectMasters[objList[k].item_id].type == A_CHANGE_TERRAIN_TRAP)
+		if ((objectMasters[objList[k].item_id].type == A_CHANGE_TERRAIN_TRAP) && (objList[k].tileX!=99))
 			{
 
 			for (int i = 0; i <= objList[k].x; i++)

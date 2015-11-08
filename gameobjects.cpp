@@ -688,11 +688,19 @@ switch (game)
 					//bits 1-5 of the quality field is the floor texture.
 					if (game == UW1)
 						{
-						if (x == 772)
+//TODO:Test this further
+						int textureIndex;
+						if (objList[x].quality > 15)
 							{
-							printf("Quality %d >> %d or mask %d", objList[x].quality, objList[x].quality>>1, objList[x].quality>>1 & 0x7);
+							textureIndex= 48 + (objList[x].quality >> 2);
 							}
-						objList[x].texture = texture_map[48 + (objList[x].quality >> 1)];
+						else
+							{
+							textureIndex = 48 + (objList[x].quality >> 1);
+							}
+
+
+						objList[x].texture = texture_map[textureIndex];
 						}					
 					}
 
