@@ -91,9 +91,9 @@ public class Conversation : GuiBase {
 	public static bool WaitingForMore;
 	public static bool WaitingForTyping;
 
-	int[] bablf_array = new int[10];
-	private bool usingBablF=false;
-	private int bablf_ans=0;
+	public static int[] bablf_array = new int[10];
+	public static bool usingBablF;
+	public static int bablf_ans=0;
 
 	public static UITextList tl;//Text output.
 	public static UITextList tl_input;//player choices
@@ -118,8 +118,10 @@ public class Conversation : GuiBase {
 		//Setup the UI elements
 		tl=playerUW.playerHud.Conversation_tl;
 		tl_input=playerUW.playerHud.Conversation_tl_input;
+		tl.Clear();
 		OutPutControl=playerUW.playerHud.Conversation_OutPutControl;
 		FontController=playerUW.playerHud.Conversation_FontController;
+		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
 		//Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
@@ -135,7 +137,7 @@ public class Conversation : GuiBase {
 		}
 		//pause the world
 		StringNo =stringno;// 3650;
-		tl.Clear();
+
 		Time.timeScale=0.0f;
 		ConversationOpen=true;
 		InConversation=true;
@@ -190,22 +192,12 @@ public class Conversation : GuiBase {
 		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
 		//tl.textLabel.lineWidth=480;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	if ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true))
+
+	void OnGUI()
+	{
+		if ( ! ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true)) )
 		{
-			Time.timeScale=1.0f;//start the clock 
-			ConversationOpen=false;
-			tl.Clear ();
-			tl_input.Clear ();
-			tl_input.maxEntries=3;
-			maincam.enabled=true;
-			chains.ActiveControl=0;
-		}
-		else
-		{
-		if (WaitingForInput)
+			if (WaitingForInput)
 			{
 				if (Input.GetKeyDown (KeyCode.Alpha1))
 				{
@@ -243,6 +235,21 @@ public class Conversation : GuiBase {
 			{
 				tl_input.gameObject.GetComponent<UIInput>().selected=true;
 			}
+
+		}
+	}
+
+	// Update is called once per frame
+	void Update () {
+	if ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true))
+		{
+			Time.timeScale=1.0f;//start the clock 
+			ConversationOpen=false;
+			tl.Clear ();
+			tl_input.Clear ();
+			tl_input.maxEntries=5;
+			maincam.enabled=true;
+			chains.ActiveControl=0;
 		}
 	}
 
@@ -250,9 +257,10 @@ public class Conversation : GuiBase {
 	{
 		if (usingBablF ==false)
 		{
+		
 			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
 			{
-				WaitingForInput =true;
+				//WaitingForInput =true;
 				PlayerAnswer=AnswerNo;
 				WaitingForInput=false;
 			}
@@ -261,11 +269,10 @@ public class Conversation : GuiBase {
 		{
 			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
 			{
-				WaitingForInput =true;
 				bablf_ans=AnswerNo;
 				PlayerAnswer=bablf_array[AnswerNo-1];
-				//Debug.Log ("Player answers is " + AnswerNo + " = " + bablf_array[AnswerNo]);
 				WaitingForInput=false;
+				usingBablF=false;
 			}
 		}
 	}
@@ -350,7 +357,6 @@ public class Conversation : GuiBase {
 
 	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
 	{
-		usingBablF=false;
 		string tmp="";
 		MaxAnswer=0;
 		int j=1;
@@ -366,9 +372,10 @@ public class Conversation : GuiBase {
 				break;
 			}
 		}
-
+		tmp= tmp.Replace("@GS8" , playerUW.CharName);
 		tl_input.maxEntries=1;
 		tl_input.Add (tmp);
+
 		yield return StartCoroutine(WaitForInput());
 
 		tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
@@ -393,7 +400,6 @@ public class Conversation : GuiBase {
 				if (localsArray[flagIndex++] !=0)
 				{
 					bablf_array[j-1] = localsArray[i];
-					//Debug.Log ("Valid answer " + localsArray[i]);
 					tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
 					MaxAnswer++;
 				}
@@ -407,8 +413,6 @@ public class Conversation : GuiBase {
 		tl_input.maxEntries=1;
 		tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
-		//Debug.Log ("bablfanswer=" +bablf_ans);
-		//tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
 		tmp= playerUW.StringControl.GetString (StringNo,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
 		yield return 0;
@@ -448,16 +452,13 @@ public class Conversation : GuiBase {
 		WaitingForInput=true;
 		while (WaitingForInput)
 			{yield return null;}
-		//Ready=true;
 	}
 
 	IEnumerator WaitForMore()
 	{
-		//Debug.Log ("waitformore");
 		WaitingForMore=true;
 		while (WaitingForMore)
 		{yield return null;}
-		//Ready=true;
 	}
 
 	IEnumerator WaitForTypedInput()
@@ -465,7 +466,6 @@ public class Conversation : GuiBase {
 		WaitingForTyping=true;
 		while (WaitingForTyping)
 		{yield return null;}
-		//Ready=true;
 	}
 
 	public void gronk_door(int unk, int Action, int tileY, int tileX)
