@@ -63,9 +63,9 @@ public class Conversation_19 : Conversation {
 		npc.npc_attitude = 6;
 	} // end func*/
 	
-	void func_00b1(int unk) {
+	void func_00b1(int param1) {
 		
-		npc.npc_attitude = param1[0];//global[0];
+		npc.npc_attitude = param1;//[0];//global[0];
 		func_0012();
 	} // end func
 	

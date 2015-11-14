@@ -39,7 +39,7 @@ public class Conversation : GuiBase {
 	public int StringNo;
 
 	public int[] privateVariables=new int[31] ;
-	public int[] param1=new int[31];//TODO:is this correct. I think this only refers to params in functions calls. Eg void func_00b1. 
+//	public int[] param1=new int[31];//TODO:is this correct. I think this only refers to params in functions calls. Eg void func_00b1. 
 	//public int[] param2=new int[31];//TODO:is this correct
 
 
@@ -77,28 +77,29 @@ public class Conversation : GuiBase {
 	public static int game_days;
 	public static int game_mins;
 
-	public int PlayerAnswer;
+	public static int PlayerAnswer;
+	public static string PlayerTypedAnswer;
 	private int MinAnswer=1;
 	private int MaxAnswer=1;
 
-
-	//bool Ready=false;
-
 	public int WhoAmI;
 
-	public bool inputRecieved;
-	public bool WaitingForInput;
-	public bool WaitingForMore;
+	public static bool inputRecieved;
+
+	//Conversation waiting modes
+	public static bool WaitingForInput;
+	public static bool WaitingForMore;
+	public static bool WaitingForTyping;
 
 	int[] bablf_array = new int[10];
 	private bool usingBablF=false;
 	private int bablf_ans=0;
 
-	public UITextList tl;//Text output.
-	public UITextList tl_input;//player choices
-	public UITexture OutPutControl;
+	public static UITextList tl;//Text output.
+	public static UITextList tl_input;//player choices
+	public static UITexture OutPutControl;//Where the conversation is printed out
+	public static UWFonts FontController;
 
-	public UWFonts FontController;
 	public static Camera maincam;
 
 	public const float WaitTime=0.3f;//Is affected by the slomotime!
@@ -112,7 +113,14 @@ public class Conversation : GuiBase {
 
 	public void SetupConversation(int stringno)
 	{
-		playerUW.MouseLookEnabled=false;
+		playerUW.playerMotor.enabled=false;
+
+		//Setup the UI elements
+		tl=playerUW.playerHud.Conversation_tl;
+		tl_input=playerUW.playerHud.Conversation_tl_input;
+		OutPutControl=playerUW.playerHud.Conversation_OutPutControl;
+		FontController=playerUW.playerHud.Conversation_FontController;
+
 		//Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
 		{
@@ -135,6 +143,7 @@ public class Conversation : GuiBase {
 
 	public void EndConversation()
 	{
+		playerUW.playerMotor.enabled=true;
 		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		//Return any items in the trade area.
 		for (int i =0; i <=3; i++)
@@ -229,6 +238,10 @@ public class Conversation : GuiBase {
 				{
 					WaitingForMore=false;
 				}
+			}
+			else if (WaitingForTyping)
+			{
+				tl_input.gameObject.GetComponent<UIInput>().selected=true;
 			}
 		}
 	}
@@ -330,6 +343,11 @@ public class Conversation : GuiBase {
 		}
 	}
 
+	public string GetString(int index)
+	{
+		return playerUW.StringControl.GetString(StringNo,index);
+	}
+
 	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
 	{
 		usingBablF=false;
@@ -397,6 +415,26 @@ public class Conversation : GuiBase {
 	}
 
 
+	public IEnumerator babl_ask(int unknown)
+	{
+		PlayerTypedAnswer="";
+		//WaitingForTyping=true;
+		UIInput inputctrl = tl_input.gameObject.GetComponent<UIInput>();
+		inputctrl.eventReceiver=this.gameObject;
+		inputctrl.type=UIInput.KeyboardType.Default;
+		inputctrl.text="";
+		inputctrl.selected=true;
+		yield return StartCoroutine(WaitForTypedInput());
+	}
+
+	public void OnSubmitPickup()
+	{//Event receiver for input ctrl.
+		WaitingForTyping=false;
+		PlayerTypedAnswer= playerUW.GetMessageLog().gameObject.GetComponent<UIInput>().text;
+		//Debug.Log (inputctrl.text);
+
+	}
+
 	public IEnumerator Wait(float waitTime)
 	{
 		//print( " s " + Time.time);
@@ -418,6 +456,14 @@ public class Conversation : GuiBase {
 		//Debug.Log ("waitformore");
 		WaitingForMore=true;
 		while (WaitingForMore)
+		{yield return null;}
+		//Ready=true;
+	}
+
+	IEnumerator WaitForTypedInput()
+	{
+		WaitingForTyping=true;
+		while (WaitingForTyping)
 		{yield return null;}
 		//Ready=true;
 	}
@@ -995,6 +1041,25 @@ public class Conversation : GuiBase {
 			}
 		}
 		return 0;
+	}
+
+
+	public int contains(int unk1, string String1, string String2)
+	{
+		//id=0007 name="contains" ret_type=int
+		//parameters:   arg1: pointer to first string id
+		//arg2: pointer to second string id
+		//description:  checks if the first string contains the second string,
+		//case-independent.
+		//return value: returns 1 when the string was found, 0 when not
+		if (String1.ToUpper().Contains(String2.ToUpper()))
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 }
 

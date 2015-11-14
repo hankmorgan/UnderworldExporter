@@ -278,41 +278,49 @@ public class WindowDetectUW : WindowDetect {
 
 	void OnGUI()
 	{//Controls switching between Mouselook and interaction and sets the cursor icon
-		if (Event.current.Equals(Event.KeyboardEvent("e")))
-		{			
-			if (playerUW.MouseLookEnabled==false)
-			{
-				playerUW.YAxis.enabled=true;
-				playerUW.XAxis.enabled=true;
-				//YAxis.enabled=true;
-				playerUW.MouseLookEnabled=true;
-				Cursor.lockState = CursorLockMode.Locked;
-			}
-			else
-			{
-				playerUW.XAxis.enabled=false;
-				playerUW.YAxis.enabled=false;
-				playerUW.MouseLookEnabled=false;
-				Cursor.lockState = CursorLockMode.None;
-			}
-		}
-		
-		if (playerUW.MouseLookEnabled == true)
+		if (Conversation.InConversation==true)
 		{
-			playerUW.MouseLookCursor.mainTexture=playerUW.CursorIcon;	
+			playerUW.XAxis.enabled=false;
+			playerUW.YAxis.enabled=false;
+			playerUW.MouseLookEnabled=false;
+			Cursor.lockState = CursorLockMode.None;
+			CursorPosition.center = Event.current.mousePosition;
+			GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
+			playerUW.MouseLookCursor.mainTexture= playerUW.CursorIconBlank;
 		}
 		else
 		{
-			CursorPosition.center = Event.current.mousePosition;
-			//Rect Position = new Rect(
-			//	Event.current.mousePosition.x-cursorSizeX/2,
-			//	Event.current.mousePosition.y-cursorSizeY/2,
-			//	cursorSizeX,
-			//	cursorSizeY);
-			GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
-			playerUW.MouseLookCursor.mainTexture= playerUW.CursorIconBlank;
-		}		
+			if (Event.current.Equals(Event.KeyboardEvent("e")))
+			{			
+				if (playerUW.MouseLookEnabled==false)
+				{
+					playerUW.YAxis.enabled=true;
+					playerUW.XAxis.enabled=true;
+					playerUW.MouseLookEnabled=true;
+					Cursor.lockState = CursorLockMode.Locked;
+				}
+				else
+				{
+					playerUW.XAxis.enabled=false;
+					playerUW.YAxis.enabled=false;
+					playerUW.MouseLookEnabled=false;
+					Cursor.lockState = CursorLockMode.None;
+				}
+			}
+			
+			if (playerUW.MouseLookEnabled == true)
+			{
+				playerUW.MouseLookCursor.mainTexture=playerUW.CursorIcon;	
+			}
+			else
+			{
+				CursorPosition.center = Event.current.mousePosition;
+				GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
+				playerUW.MouseLookCursor.mainTexture= playerUW.CursorIconBlank;
+			}		
+		}
 	}
+
 
 
 }

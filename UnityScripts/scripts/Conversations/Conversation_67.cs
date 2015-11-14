@@ -106,11 +106,11 @@ public class Conversation_67 : Conversation {
 		func_0012();
 	} // end func
 	
-	void func_00ea() {
+	/*void func_00ea() {
 		
 		param1[1] = game_days;
 		param1[2] = game_mins;
-	} // end func
+	} // end func*/
 	/*
 	void func_0106() {
 		

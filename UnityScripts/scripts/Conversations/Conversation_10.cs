@@ -64,9 +64,9 @@ public class Conversation_10 : Conversation {
 		npc.npc_attitude = 6;
 	} // end func*/
 	
-	IEnumerator func_00b1(int unk) {
+	IEnumerator func_00b1(int param1) {
 		
-		npc.npc_attitude = param1[0];//play_hunger;
+		npc.npc_attitude = param1;//[0];//play_hunger;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_0012();

@@ -69,9 +69,9 @@ public class Conversation_66 : Conversation {
 		npc.npc_attitude = 6;
 	} // end func
 	
-	void func_00b1(int unk) {
+	void func_00b1(int param1) {
 		
-		npc.npc_attitude = param1[0];//play_hunger;
+		npc.npc_attitude = param1;//[0];//play_hunger;
 		func_0012();
 	} // end func
 	
@@ -92,11 +92,11 @@ public class Conversation_66 : Conversation {
 		func_0012();
 	} // end func
 	
-	void func_00ea() {
+	/*void func_00ea() {
 		
 		param1[1] = game_days;
 		param1[2] = game_mins;
-	} // end func
+	} // end func*/
 	
 /*	void func_0106() {
 		

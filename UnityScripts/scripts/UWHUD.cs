@@ -15,5 +15,9 @@ public class UWHUD : MonoBehaviour {
 	public TradeSlot[] npcTrade ;//= new TradeSlot[4];
 	public UITexture[] ConversationPortraits;
 
- 
+	//Conversation Controls
+	public UITextList Conversation_tl;//Text output.
+	public UITextList Conversation_tl_input;//player choices
+	public UITexture Conversation_OutPutControl;//Where the conversation is printed out
+	public UWFonts Conversation_FontController;
 }

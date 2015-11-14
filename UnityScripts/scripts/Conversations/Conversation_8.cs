@@ -62,9 +62,9 @@ public class Conversation_8 : Conversation {
 		npc.npc_attitude = 6;
 	} // end func*/
 	
-	void func_00b1(int unk) {
+	void func_00b1(int param1) {
 		
-		npc.npc_attitude = param1[0];//play_hunger;
+		npc.npc_attitude = param1;//[0];//play_hunger;
 		func_0012();
 	} // end func
 	
