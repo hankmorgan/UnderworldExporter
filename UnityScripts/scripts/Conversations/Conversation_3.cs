@@ -438,7 +438,7 @@ public class Conversation_3 : Conversation {
 			} // while
 			
 			//give_to_npc( 2, locals[6], locals[11] );
-			give_to_npc(2,locals,6,locals[11]);
+			give_to_npc(2,locals,locals[6],locals[11]);
 			if ( locals[12] > 5 ) {
 				
 				yield return StartCoroutine(func_062c());

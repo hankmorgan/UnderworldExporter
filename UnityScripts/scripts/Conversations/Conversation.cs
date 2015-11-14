@@ -527,7 +527,7 @@ public class Conversation : GuiBase {
 
 
 	//Rewritten version of show_inv
-	public int show_inv(int unk, int[] locals , int startObjectIDs,  int startObjectPos )
+	public int show_inv(int unk, int[] locals , int startObjectPos, int startObjectIDs)
 	{
 		int j=0;
 		for (int i=0; i<4;i++)
@@ -557,7 +557,7 @@ public class Conversation : GuiBase {
 //		return Random.Range (0,2);
 //	}
 
-	public int give_to_npc(int unk, int[] locals, int NoOfItems, int start)
+	public int give_to_npc(int unk, int[] locals, int start, int NoOfItems)
 	{
 		Container cn =npc.gameObject.GetComponent<Container>();
 		bool SomethingGiven=false;
@@ -642,6 +642,7 @@ public class Conversation : GuiBase {
 						}
 						else
 						{
+							playerHasSpace=0;
 							GameObject demanded = GameObject.Find (itemName);
 							demanded.transform.parent=null;
 							demanded.transform.position=npc.transform.position;
@@ -1061,6 +1062,145 @@ public class Conversation : GuiBase {
 			return 0;
 		}
 	}
+
+	public int x_skills(int unk1, int unk2, int unk3)
+	{
+		//id=002c name="x_skills" ret_type=int
+		//parameters:   unknown
+		//description:  unknown
+		//return value: unknown
+		return Random.Range(0,2);
+	}
+
+	public int check_inv_quality(int unk1, int itemPos)
+	{
+		//id=001c name="check_inv_quality" ret_type=int
+		//parameters:   arg1: inventory item position
+		//description:  returns "quality" field of npc? inventory item
+		//return value: "quality" field
+		GameObject objInslot = GameObject.Find(playerUW.playerHud.playerTrade[itemPos].objectInSlot);
+		if (objInslot!=null)
+		{
+			return objInslot.GetComponent<ObjectInteraction>().Quality;
+		}
+		else
+		{
+			return 0;
+		}
+
+	}
+
+
+	public void set_inv_quality(int unk1, int NewQuality, int itemPos)
+	{
+		//id=001d name="set_inv_quality" ret_type=int
+		//parameters:   arg1: quality value
+		//arg2: inventory object list position
+		//description:  sets quality for an item in inventory
+		//return value: none
+		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[itemPos].objectInSlot);
+		if (objInslot!=null)
+		{
+			objInslot.GetComponent<ObjectInteraction>().Quality= NewQuality;
+		}
+	}
+
+
+	public int take_id_from_npc(int unk1, int ItemPos)
+	{
+		//id=0016 name="take_id_from_npc" ret_type=int
+		//parameters:   arg1: inventory object list pos (from take_from_npc_inv)
+		//description:  transfers item to player, per id (?)
+		//return value: 1: ok, 2: player has no space left
+		int playerHasSpace=1;
+		Container cn = npc.gameObject.GetComponent<Container>();
+		Container cnpc = playerUW.gameObject.GetComponent<Container>();
+
+		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
+		if (objInslot!=null)
+		{
+			//Give to PC
+			if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
+			{
+				npc.GetComponent<Container>().RemoveItemFromContainer(objInslot.name);
+				cnpc.AddItemToContainer(objInslot.name);
+				playerUW.GetComponent<PlayerInventory>().Refresh ();
+			}
+			else
+			{
+				playerHasSpace=0;
+			//	GameObject demanded = GameObject.Find (objInslot.anem);
+				objInslot.transform.parent=null;
+				objInslot.transform.position=npc.transform.position;
+				npc.GetComponent<Container>().RemoveItemFromContainer(objInslot.name);
+			}
+
+		}
+		else
+		{
+			playerHasSpace=0;
+		}
+
+		return playerHasSpace;
+	}
+
+	public void do_inv_delete(int unk1, int item_id)
+	{
+		//id=001b name="do_inv_delete" ret_type=int
+		//	parameters:   arg1: item id
+		//		description:  deletes item from npc inventory
+		//		return value: none
+
+		Debug.Log ("do_inv_delete(" + item_id + ")");
+	}
+
+
+	public int do_inv_create(int unk1, int item_id)
+	{
+		//id=001a name="do_inv_create" ret_type=int
+		//parameters:   arg1: item id
+		//description:  creates item in npc inventory
+		//return value: inventory object list position
+		Debug.Log ("do_inv_delete(" + item_id + ")");
+		return 0;
+	}
+
+	public int count_inv(int unk1, int ItemPos)
+	{
+		
+		//id=001e name="count_inv" ret_type=int
+		//parameters:   unknown
+		//description:  counts number of items in inventory
+		//return value: item number
+		int total =0;
+		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
+		if (objInslot!=null)
+		{
+			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
+			if ((objInt.isQuant) && (objInt.isEnchanted==false))
+			    {
+				total= objInt.Link;
+				}
+			else
+				{
+				total= 1;
+				}
+		}
+
+		return total;
+	}
+
+
+	public void set_likes_dislikes(int unk1, int unk2, int unk3)
+	{
+		//id=0024 name="set_likes_dislikes" ret_type=void
+		//parameters:   arg1: pointer to list of things the npc likes to trade
+		//arg2: pointer to list of things the npc dislikes to trade
+		//description:  sets list of items that a npc likes or dislikes to trade;
+		//the list is terminated with a -1 (0xffff) entry
+		Debug.Log ("Set_Likes_Dislikes(" + unk2 + "," + unk3 +")");
+	}
+
 }
 
 

@@ -12,7 +12,6 @@ public class Conversation_10 : Conversation {
 		privateVariables[1] = 0;
 		yield return StartCoroutine(func_029d());
 		func_0012();
-		//this.GetComponent<NPC>().state= NPC.AI_STATE_IDLERANDOM;
 		yield return 0;
 	} // end func
 	
@@ -312,7 +311,7 @@ public class Conversation_10 : Conversation {
 		if ( locals[18] > 0 ) {
 			
 			//give_to_npc( 2, locals[11], locals[18] );
-			give_to_npc(2,locals,locals[18],11);
+			give_to_npc(2,locals,11,locals[18]);
 			privateVariables[2] = 0;
 			yield return StartCoroutine(say( "Tanks!  Th'art right enough, fer a yuman.  Tell tha what -- if tha talks to da boss, be real, like complimennary.  He likes dat." ));
 			locals[19] = 18;
