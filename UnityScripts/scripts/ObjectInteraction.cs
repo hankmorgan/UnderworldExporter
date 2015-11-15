@@ -76,18 +76,20 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int RUNEBAG =70 ;
 	public const int SHOCK_BRIDGE =71 ;
 	public const int FORCE_DOOR= 72 ;
-	public const int HIDDENPLACEHOLDER =999 ;
-	public const int HELM =73;
-	public const int RING =74;
-	public const int BOOT =75;
-	public const int GLOVES =76;
-	public const int LEGGINGS =77;
-	public const int SHIELD =78;
-	public const int LOCKPICK =79;
+	public const int HIDDENPLACEHOLDER = 999 ;
+	public const int HELM = 73;
+	public const int RING = 74;
+	public const int BOOT = 75;
+	public const int GLOVES = 76;
+	public const int LEGGINGS = 77;
+	public const int SHIELD = 78;
+	public const int LOCKPICK = 79;
 	public const int ANIMATION = 80;
 	public const int SILVERSEED = 81;
 	public const int FOUNTAIN = 82;
-	public const int SHRINE =83;
+	public const int GRAVE = 83;
+	public const int SHRINE = 84;
+	public const int ANVIL = 85;
 
 	public static UILabel MessageLog;
 
@@ -606,6 +608,30 @@ public class ObjectInteraction : MonoBehaviour {
 			{//Only activate if nothing in hand.
 				item=(Shrine)this.GetComponent<Shrine>();
 			}
+			break;
+		case ANVIL://An Anvil just becomes the object in hand
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{//Only activate if nothing in hand.
+				item  = (Anvil)this.GetComponent<Anvil>();
+			}
+			break;
+		case ARMOUR:
+			item  = (Armour)this.GetComponent<Armour>();
+			break;
+		case BOOT:
+			item  = (Boots)this.GetComponent<Boots>();
+			break;
+		case LEGGINGS:
+			item  = (Leggings)this.GetComponent<Leggings>();
+			break;
+		case GLOVES:
+			item  = (Gloves)this.GetComponent<Gloves>();
+			break;
+		case WEAPON:
+			item  = (Weapon)this.GetComponent<Weapon>();
+			break;
+		case SHIELD:
+			item  = (Shield)this.GetComponent<Shield>();
 			break;
 		default:
 			if (playerUW.playerInventory.ObjectInHand=="")

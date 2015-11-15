@@ -8403,6 +8403,17 @@ public class MyTools
 		objInt.isQuant=false;
 	}
 
+	static void AddAnvil(GameObject myObj)
+	{
+		myObj.AddComponent<Anvil>();
+	}
+
+	static void AddShield(GameObject myObj)
+	{
+		myObj.AddComponent<Shield>();
+	}
+
+
 	static void AddGrave(GameObject myObj, int tmObj_index, int GraveID)
 	{
 		Grave gv = myObj.AddComponent<Grave>();

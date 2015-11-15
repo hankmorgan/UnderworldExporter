@@ -90,6 +90,7 @@
 #define FOUNTAIN 82  //For fountain enchantments & related responses.
 #define SHRINE 83
 #define GRAVE 84
+#define ANVIL 85
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

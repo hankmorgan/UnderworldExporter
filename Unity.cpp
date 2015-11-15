@@ -151,6 +151,18 @@ void RenderUnityEntityGrave(int game, float x, float y, float z, ObjectItem &cur
 	fprintf(UNITY_FILE, "\n\tAddGrave(myObj, %d,%d);",currobj.texture,currobj.DeathWatched);
 	}
 
+void RenderUnityEntityAnvil(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddAnvil(myObj);");
+	}
+
+void RenderUnityEntityShield(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddShield(myObj, %d,%d);", currobj.texture, currobj.DeathWatched);
+	}
+
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Runestone
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -1947,6 +1959,12 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityLeggings(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case SHIELD:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityShield(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 						case TORCH:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -2000,6 +2018,12 @@ return;
 							//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityGrave(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case ANVIL:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityAnvil(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:

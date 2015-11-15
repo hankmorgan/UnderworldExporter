@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Armour : object_base {
-	public int Durability;
+public class Armour : Equipment {
+	//public int Durability;
 	public int Protection;
 	public string EquipFemaleLowest; 
 	public string EquipFemaleLow;
@@ -36,7 +36,7 @@ public class Armour : object_base {
 	}*/
 
 
-	public void UpdateQuality()
+	public override void UpdateQuality()
 	{//Refreshes the quality of armour when damage.
 		//Needs to be called when damaged.
 		if ((objInt.Quality>0) && (objInt.Quality<=15))
