@@ -293,6 +293,108 @@ public class UWCharacter : Character {
 		}
 	}
 
+	public override void LookMode ()
+		{//Look at the clicked item.
+			Ray ray ;
+			if (MouseLookEnabled==true)
+			{
+				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			}
+			else
+			{
+				ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+			}
+			
+			RaycastHit hit = new RaycastHit(); 
+			if (Physics.Raycast(ray,out hit,lookRange))
+			{
+				//Debug.Log ("Hit made" + hit.transform.name);
+				ObjectInteraction objInt = hit.transform.GetComponent<ObjectInteraction>();
+				if (objInt != null)
+				{
+					objInt.LookDescription();
+					return;
+				}
+				else
+				{
+				int len = hit.transform.name.Length;
+				if (len >4){len=4;}
+					switch(hit.transform.name.Substring(0,len).ToUpper())
+					{
+					case "CEIL":
+						GetMessageLog().text = "You see the ceiling";
+						break;	
+					case "PILL":
+						GetMessageLog().text = "You see a pillar";
+						break;	
+					case "BRID":
+						//000~001~171~You see a bridge.
+						GetMessageLog().text= StringControl.GetString(1,171);
+						break;
+					case "WALL":
+					case "TILE":
+					default:
+						if (hit.transform.GetComponent<PortcullisInteraction>()!=null)
+							{
+								ObjectInteraction objPicked = hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction();
+								if (objPicked!=null)
+								{
+									objPicked.LookDescription ();
+								}
+								return;
+							}
+					//Taken from
+					//http://forum.unity3d.com/threads/get-material-from-raycast.53123/
+					Renderer rend = hit.collider.GetComponent<Renderer>();
+					if (rend ==null)
+					{
+						return;
+					}
+					MeshCollider meshCollider = (MeshCollider)hit.collider;
+					int materialIndex = -1;
+					Mesh mesh = meshCollider.sharedMesh;
+					int triangleIdx = hit.triangleIndex;
+					int lookupIdx1 = mesh.triangles[triangleIdx*3];
+					int lookupIdx2 = mesh.triangles[triangleIdx*3+1];
+					int lookupIdx3 = mesh.triangles[triangleIdx*3+2];
+					int submeshNr = mesh.subMeshCount;
+
+					for (int i = 0; i< submeshNr; i++)
+					{
+						int[] tr = mesh.GetTriangles(i);
+						for (int j = 0; j<tr.Length; j+=3)
+						{
+							if ((tr[j] == lookupIdx1) && (tr[j+1]== lookupIdx2) && (tr[j+2])== lookupIdx3)
+							{
+								materialIndex=i;
+								break;
+							}
+						}
+						if (materialIndex!=-1)
+						{
+							break;
+						}
+					}
+					if (materialIndex!=-1)
+					{
+						if (rend.materials[materialIndex].name.Length>=7)
+						{
+							int textureIndex =0;
+							if (int.TryParse(rend.materials[materialIndex].name.Substring(4,3),out textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
+							{
+								GetMessageLog ().text ="You see " + StringControl.GetTextureName(textureIndex);
+							}
+						}
+					//	GetMessageLog().text=rend.materials[materialIndex].name;
+
+						//Debug.Log (rend.materials[materialIndex].name.Substring(4,3));
+					}
+					break;
+
+					}
+				}
+			}
+		}
 
 
 	public Quest quest()

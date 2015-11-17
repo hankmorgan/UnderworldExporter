@@ -134,7 +134,7 @@ public class Character : MonoBehaviour {
 			}
 			else
 			{//Special case for portcullises
-				if (hit.transform.GetComponent<PortcullisInteraction>())
+				if (hit.transform.GetComponent<PortcullisInteraction>()!=null)
 				{
 					objPicked = hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction();
 					if (objPicked!=null)
@@ -253,7 +253,6 @@ public class Character : MonoBehaviour {
 		}
 		else
 		{
-			//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
 			ray= Camera.main.ScreenPointToRay(Input.mousePosition);
 		}
 
@@ -269,7 +268,4 @@ public class Character : MonoBehaviour {
 			}
 		}
 	}
-
 }
-
-
