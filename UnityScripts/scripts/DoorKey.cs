@@ -16,7 +16,8 @@ public class DoorKey : object_base {
 		}
 		else
 		{
-			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 		}
 
 	}

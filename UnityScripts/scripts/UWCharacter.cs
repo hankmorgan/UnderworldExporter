@@ -29,6 +29,7 @@ public class UWCharacter : Character {
 	public bool isFlying;
 	public bool isFloating;
 	public bool onGround;//Not currently used.
+	public bool isTelekinetic;
 
 	//Character Status
 	public int FoodLevel;
@@ -115,6 +116,48 @@ public class UWCharacter : Character {
 		}
 	}
 
+	public override float GetUseRange ()
+	{
+		if (isTelekinetic==true)
+		{
+			return useRange*8.0f;
+		}
+		else
+		{
+
+			if (playerInventory.GetObjectInHand() =="")
+			{
+				return useRange;
+			}
+			else
+			{//Test if this is a pole. If so extend the use range by a small amount.
+				ObjectInteraction objIntInHand = playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
+				if (objIntInHand!=null)
+				{
+					switch (objIntInHand.ItemType)
+					{
+						case ObjectInteraction.POLE:
+							return useRange *2;
+							break;
+					}
+				}
+				return useRange;
+			}
+		}
+	}
+
+
+	public override float GetPickupRange ()
+	{
+		if (isTelekinetic==true)
+		{
+			return pickupRange*8.0f;
+		}
+		else
+		{
+			return pickupRange;
+		}
+	}
 
 
 	// Update is called once per frame
@@ -235,13 +278,13 @@ public class UWCharacter : Character {
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,talkRange))
 		{
-			MessageLog.text = "Talking to " + hit.transform.name;
+			//MessageLog.text = "Talking to " + hit.transform.name;
 			if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{
-				if (hit.transform.gameObject.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.NPC_TYPE)
-					{
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().TalkTo();
-					}
+				//if (hit.transform.gameObject.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.NPC_TYPE)
+					//{
+				hit.transform.gameObject.GetComponent<ObjectInteraction>().TalkTo();
+					//}
 				}
 		}
 		else

@@ -157,6 +157,12 @@ void RenderUnityEntityAnvil(int game, float x, float y, float z, ObjectItem &cur
 	fprintf(UNITY_FILE, "\n\tAddAnvil(myObj);");
 	}
 
+void RenderUnityEntityPole(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddPole(myObj);");
+	}
+
 void RenderUnityEntityShield(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	//Adds an obj_base to the object.
@@ -2015,15 +2021,20 @@ return;
 							break;
 						case GRAVE:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-							//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityGrave(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case ANVIL:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-							//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityAnvil(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case POLE:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityPole(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:

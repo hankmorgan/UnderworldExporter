@@ -20,10 +20,10 @@ public class LightSource : object_base {
 	void Update () {
 		if (IsOn==true)
 		{
-			if (objInt==null)
-			{
-				objInt = this.gameObject.GetComponent<ObjectInteraction>();
-			}
+			//if (objInt==null)
+			//{
+			//	objInt = this.gameObject.GetComponent<ObjectInteraction>();
+			//}
 			if (objInt.PickedUp==false)
 			{
 				SetOff ();
@@ -33,25 +33,32 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
-		base.use();
-		if (objInt.PickedUp==false)
+		//base.use();
+		if (playerUW.playerInventory.ObjectInHand == "")
 		{
-			if (IsOn==true)
+			if (objInt.PickedUp==false)
+			{
+				if (IsOn==true)
+				{
+					SetOff ();
+				}
+				return true;
+			}
+			
+			if (IsOn == true)
 			{
 				SetOff ();
 			}
+			else
+			{
+				SetOn ();
+			}
 			return true;
-		}
-
-		if (IsOn == true)
-		{
-			SetOff ();
 		}
 		else
 		{
-			SetOn ();
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 		}
-		return true;
 	}
 
 	public void SetOn()

@@ -48,7 +48,15 @@ public class object_base : MonoBehaviour {
 	{
 		//Debug.Log ("default activatebyobj for " + this.gameObject.name);
 		CheckReferences();
-		return false;
+		if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
+		{
+			FailMessage();
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	public virtual bool use()
@@ -85,6 +93,13 @@ public class object_base : MonoBehaviour {
 		playerUW.playerInventory.ObjectInHand=this.name;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
+	}
+
+	public virtual bool TalkTo()
+	{
+		//000~001~156~You cannot talk to that.
+		playerUW.GetMessageLog ().text=playerUW.StringControl.GetString (1,156);
+		return true;
 	}
 
 	public virtual bool PickupEvent()

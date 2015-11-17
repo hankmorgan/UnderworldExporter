@@ -280,8 +280,14 @@ public class Conversation : GuiBase {
 
 	public virtual IEnumerator main()
 	{
-		Debug.Log ("Start Conversation");
-		return null;
+		//Debug.Log ("Start Conversation");
+		yield return StartCoroutine("I have yet to implement this conversation");
+		Time.timeScale =SlomoTime;
+		yield return new WaitForSeconds(WaitTime);
+		EndConversation();
+		yield break;
+		//return null;
+
 	}
 
 	public IEnumerator say(string WhatToSay)

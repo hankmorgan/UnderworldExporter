@@ -189,7 +189,7 @@ public class WindowDetectUW : WindowDetect {
 			
 			RaycastHit hit = new RaycastHit(); 
 			
-			if (Physics.Raycast(ray,out hit,playerUW.useRange))
+			if (Physics.Raycast(ray,out hit,playerUW.GetUseRange()))
 			{
 				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{

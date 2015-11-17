@@ -402,7 +402,7 @@ public class Magic : MonoBehaviour {
 		{
 			Ray ray = getRay (caster);
 			RaycastHit hit = new RaycastHit(); 
-			float dropRange=playerUW.useRange;
+			float dropRange=playerUW.GetUseRange();
 			if (Physics.Raycast(ray,out hit,dropRange))
 			{//The spell has hit something
 				DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
@@ -441,7 +441,6 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			//Debug.Log ("Your incantation failed");
 			SpellIncantationFailed(caster);
 		}
 	}
@@ -581,6 +580,20 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
+	
+	void Cast_OrtPorYlem(GameObject caster)
+	{//Telekinesis
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Telekinesis (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Telekinesis,SpellEffectSlot, 2);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
+
 
 
 	
@@ -649,16 +662,13 @@ public class Magic : MonoBehaviour {
 		sep.Go ();
 	}
 
-	void Cast_OrtPorYlem(GameObject Caster)
-	{//Telekinesis
-		//TODO:Update this into a spell effect.
-		UWCharacter playerUW = Caster.GetComponent<UWCharacter>();
-		if (playerUW!=null)
-		{
-			playerUW.useRange=20;
-			playerUW.pickupRange=20;
-		}
+	public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{//Levitate
+		SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		setk.counter=counter; //It will run for x ticks. 
+		setk.Go ();
 	}
+
 
 	public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
 	{//Levitate
@@ -817,7 +827,6 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
-			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_FreezeTime:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
@@ -1308,7 +1317,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
-			Debug.Log ("telekinesis enchantment");
+			Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,2);
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_FreezeTime:

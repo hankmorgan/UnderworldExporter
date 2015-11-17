@@ -13,7 +13,7 @@ public class LockPick : object_base {
 		}
 		else
 		{
-			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 }

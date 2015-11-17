@@ -12,7 +12,7 @@ public class Food : object_base {
 		}
 		else
 		{
-			return false;
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 

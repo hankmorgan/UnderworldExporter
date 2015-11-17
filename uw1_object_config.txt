@@ -214,7 +214,7 @@
 213 0 0 0 entity 25 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_213 0 L M 1 1 0 Sprites/OBJECTS_213 Sprites/OBJECTS_213 S T U Sprites/OBJECTS_213 W x Y 0 1
 214 0 0 0 entity 25 a_pile_of_debris_piles_of_debris H 1 Sprites/OBJECTS_214 0 L M 1 1 0 Sprites/OBJECTS_214 Sprites/OBJECTS_214 S T U Sprites/OBJECTS_214 W x Y 0 1
 215 0 0 0 entity 85 an_anvil H 1 Sprites/OBJECTS_215 0 L M 1 0 1 Sprites/OBJECTS_215 Sprites/OBJECTS_215 S T U Sprites/OBJECTS_215 W x Y 0 1
-216 0 0 0 entity 16 a_pole H 1 Sprites/OBJECTS_216 0 L M 1 1 1 Sprites/OBJECTS_216 Sprites/OBJECTS_216 S T U Sprites/OBJECTS_216 W x Y 0 1
+216 0 0 0 entity 86 a_pole H 1 Sprites/OBJECTS_216 0 L M 1 1 1 Sprites/OBJECTS_216 Sprites/OBJECTS_216 S T U Sprites/OBJECTS_216 W x Y 0 1
 217 0 0 0 entity 16 a_dead_rotworm H 1 Sprites/OBJECTS_217 0 L M 1 1 1 Sprites/OBJECTS_217 Sprites/OBJECTS_217 S T U Sprites/OBJECTS_217 W x Y 0 1
 218 0 0 0 entity 69 some_rubble_piles_of_rubble H 1 Sprites/OBJECTS_218 0 L M 1 0 0 Sprites/OBJECTS_218 Sprites/OBJECTS_218 S T U Sprites/OBJECTS_218 W x Y 0 1
 219 0 0 0 entity 69 a_pile_of_wood_chips_piles_of_wood_chips H 1 Sprites/OBJECTS_219 0 L M 1 0 0 Sprites/OBJECTS_219 Sprites/OBJECTS_219 S T U Sprites/OBJECTS_219 W x Y 0 1

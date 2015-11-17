@@ -56,7 +56,8 @@ public class ButtonHandler : object_base {
 		}
 		else
 		{
-			return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
 
 	}
@@ -181,5 +182,29 @@ public class ButtonHandler : object_base {
 		setSprite (RotarySprites[index]);
 	}
 
+
+	public override bool ActivateByObject (GameObject ObjectUsed)
+	{
+		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (objIntUsed!=null)
+		{
+			switch (objIntUsed.ItemType)
+			{
+			case ObjectInteraction.POLE:
+				playerUW.playerInventory.ObjectInHand="";
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				playerUW.GetMessageLog ().text = playerUW.StringControl.GetString(1,157);
+				return Activate();
+				break;
+			default:
+				playerUW.playerInventory.ObjectInHand="";
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				objIntUsed.FailMessage();
+				return false;
+				break;
+			}
+		}
+		return false;
+	}
 }
 

@@ -127,9 +127,13 @@ public class NPC : object_base {
 		return true;
 	}
 
-	public void TalkTo()
+	public override bool TalkTo()
 	{
-
+		if (npc_attitude==0)
+		{//Hostile
+			playerUW.GetMessageLog ().text=playerUW.StringControl.GetString (7,1);
+			return false;
+		}
 		//Debug.Log("Talking to " + WhoAmI) ;
 		chains.ActiveControl=3;//Enable UI Elements
 		chains.Refresh();
@@ -157,9 +161,10 @@ public class NPC : object_base {
 		}
 
 		//TODO:Make sure you add the conversation object to the npc!
-		if (npc_whoami == 255)
+		if ((npc_whoami == 255))
 		{
-			Debug.Log ("No response");
+			//006~007~001~You get no response.
+			playerUW.GetMessageLog ().text=playerUW.StringControl.GetString (7,1);
 		}
 		else
 		{
@@ -183,6 +188,7 @@ public class NPC : object_base {
 				StartCoroutine(x.main ());
 			}
 		}
+		return true;
 	}
 
 	public override bool LookAt ()

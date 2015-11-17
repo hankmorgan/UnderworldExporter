@@ -32,8 +32,8 @@ public class Character : MonoBehaviour {
 	public int MaxVIT;
 	public int CurVIT;
 
-	public float pickupRange=3.0f;
-	public float useRange=3.0f;
+	public float pickupRange=2.5f;
+	public float useRange=2.0f;
 	public float talkRange=20.0f;
 	public float lookRange=25.0f;
 
@@ -123,7 +123,7 @@ public class Character : MonoBehaviour {
 			ray= Camera.main.ScreenPointToRay(Input.mousePosition);
 		}
 		RaycastHit hit = new RaycastHit(); 
-		if (Physics.Raycast(ray,out hit,useRange))
+		if (Physics.Raycast(ray,out hit,GetUseRange()))
 		{
 			ObjectInteraction objPicked;
 			objPicked=hit.transform.GetComponent<ObjectInteraction>();
@@ -146,6 +146,15 @@ public class Character : MonoBehaviour {
 		}
 	}
 
+	public virtual float GetUseRange()
+	{//Returns the use range of the character
+		return useRange;
+	}
+
+	public virtual float GetPickupRange()
+	{
+		return pickupRange;
+	}
 
 	public void PickupMode()
 	{//Picks up the clicked object in the view.
@@ -169,7 +178,7 @@ public class Character : MonoBehaviour {
 			
 			//= Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
-			if (Physics.Raycast(ray,out hit,pickupRange))
+			if (Physics.Raycast(ray,out hit,GetPickupRange()))
 			{
 				ObjectInteraction objPicked;
 				objPicked=hit.transform.GetComponent<ObjectInteraction>();

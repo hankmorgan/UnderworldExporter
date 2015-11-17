@@ -11,7 +11,8 @@ using System.Collections;
 Functions for activating the next trigger in the chain.
  */
 public class TriggerHandler : MonoBehaviour {
-	public int triggerX;
+	//NO Longer in use!
+/*	public int triggerX;
 	public int triggerY;
 	//public int state;
 	public string trigger;//what is set off
@@ -26,7 +27,7 @@ public class TriggerHandler : MonoBehaviour {
 		Var=GetComponent<ObjectVariables>();
 		triggerObj=GameObject.Find (trigger);
 	}
-	
+
 	public void Activate()
 	{
 		ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
@@ -54,5 +55,5 @@ public class TriggerHandler : MonoBehaviour {
 			{
 			Activate ();
 			}
-		}
+		}*/
 }

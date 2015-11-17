@@ -14,8 +14,15 @@ public class MyTools
 	static void Create()
 	{
 		
+		GameObject myObj;
+		Vector3 pos;
+		GameObject invMarker = GameObject.Find("InventoryMarker");
+		Container ParentContainer;
 
-
+		myObj= CreateGameObject("a_pole_23_13_00_0612",28.114285f,3.000000f,16.114286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_216",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_216", "Sprites/OBJECTS_216", "Sprites/OBJECTS_216", 86, 216, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPole(myObj);
 
 	}
 
@@ -6988,7 +6995,7 @@ public class MyTools
 		trigobj.TrapObject=target;
 		myObj.layer=LayerMask.NameToLayer("Ignore Raycast");
 	}
-	static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite)
+	/*static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite)
 	{
 		//Add the AI.
 		myObj.layer=LayerMask.NameToLayer("NPCs");
@@ -7006,7 +7013,6 @@ public class MyTools
 		AIRig ai = newObj.GetComponent<AIRig>();
 		ai.AI.Body=myObj;
 		myObj.AddComponent<NPC>();
-		//Conversation cnv = myObj.AddComponent<Conversation>();
 		Rigidbody rgd = myObj.AddComponent<Rigidbody>();
 		rgd.freezeRotation=true;
 
@@ -7031,7 +7037,7 @@ public class MyTools
 		mybox.isTrigger=false;
 		mybox.center = new Vector3(0.0f, 0.5f, 0.0f);
 		mybox.size= new Vector3(0.5f, 1.0f, 0.3f);
-	}
+	}*/
 
 
 	static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
@@ -7049,86 +7055,11 @@ public class MyTools
 		ai.AI.Body=myObj;
 
 		NPC npc = myObj.AddComponent<NPC>();
-		Conversation cnv ;//= myObj.AddComponent<Conversation>();
-		cnv=null;
 		if (npc_whoami == 0)
 		{
-			//ObjectInteraction objInt=myObj.GetComponent<ObjectInteraction>();
 			npc_whoami=256+(int.Parse (NPC_ID) -64);
 		}
-		//TODO:Make sure all conversations are added here as implemented.
-		switch (npc_whoami)
-		{
-		case 255://No conversation
-			break;
-		case 1:
-			cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
-		case 2:
-			cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
-		case 3:
-			cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
-		case 7:
-			cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
-		case 8:
-			cnv=(Conversation)myObj.AddComponent<Conversation_8>();break;
-		case 9:
-			cnv=(Conversation)myObj.AddComponent<Conversation_9>();break;
-		case 10:
-			cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
-		case 19:
-			cnv=(Conversation)myObj.AddComponent<Conversation_19>();break;
-		case 20:
-			cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
-		case 21:
-			cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
-		case 64:
-			cnv=(Conversation)myObj.AddComponent<Conversation_64>();break;
-		case 65:
-			cnv=(Conversation)myObj.AddComponent<Conversation_65>();break;
-		case 66:
-			cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
-		case 67:
-			cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
-		case 88:
-			cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
-		case 89:
-			cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
-		case 90:
-			cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
-		case 262:
-			cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
-		case 263:
-			cnv=(Conversation)myObj.AddComponent<Conversation_263>();break;
-		case 268:
-			cnv=(Conversation)myObj.AddComponent<Conversation_268>();break;
-		case 272:
-			cnv=(Conversation)myObj.AddComponent<Conversation_272>();break;
-		case 276:
-			cnv=(Conversation)myObj.AddComponent<Conversation_276>();break;
-		case 282:
-			cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
-			 // "Conversation_" + npc_whoami);
-			//myObj.AddComponent<Conversation>();
-		//	cnv=myObj.AddComponent<Conversation+"_"+npc_whoami> ;
 
-
-			//cnv=myObj.AddComponent<Conversation_10>();
-
-		default:
-			cnv=myObj.AddComponent<Conversation>();
-			break;
-		}
-
-		if (cnv!=null)
-		{
-			cnv.npc= npc;
-			//cnv.OutPutControl=GameObject.Find ("Conversation_Alpha").GetComponent<UITexture>();
-			////cnv.tl_input=GameObject.Find ("scroll").GetComponent<UITextList>();
-			//cnv.tl= GameObject.Find ("Conversation_Scroll").GetComponent<UITextList>();
-			//cnv.FontController = GameObject.Find ("TextureController").GetComponent<UWFonts>();
-			//cnv.param1[0]=1;//To stop them attacking me! Until I fix what params is
-		}
-	
 		/*
 		Rigidbody rgd = myObj.AddComponent<Rigidbody>();
 		//rgd.freezeRotation=true;
@@ -8348,6 +8279,78 @@ public class MyTools
 			npc.npc_name=npc_name;       //    (not used in uw1)
 			//npc.npc_deathvariable=npc_deathVariable;
 			npc.NavMeshRegion=NavMeshRegion;
+
+			if (npc_attitude!=0)
+			{
+					
+				Conversation cnv ;//= myObj.AddComponent<Conversation>();
+				cnv=null;
+				//if (npc_whoami == 0)
+				//{
+				//	npc_whoami=256+(int.Parse (NPC_ID) -64);
+				//}
+				//TODO:Make sure all conversations are added here as implemented.
+				switch (myObj.GetComponent<NPC>().npc_whoami)
+				{
+				case 0:
+				case 255://No conversation
+					break;
+				case 1:
+					cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
+				case 2:
+					cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
+				case 3:
+					cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
+				case 7:
+					cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
+				case 8:
+					cnv=(Conversation)myObj.AddComponent<Conversation_8>();break;
+				case 9:
+					cnv=(Conversation)myObj.AddComponent<Conversation_9>();break;
+				case 10:
+					cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
+				case 19:
+					cnv=(Conversation)myObj.AddComponent<Conversation_19>();break;
+				case 20:
+					cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
+				case 21:
+					cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
+				case 64:
+					cnv=(Conversation)myObj.AddComponent<Conversation_64>();break;
+				case 65:
+					cnv=(Conversation)myObj.AddComponent<Conversation_65>();break;
+				case 66:
+					cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
+				case 67:
+					cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
+				case 88:
+					cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
+				case 89:
+					cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
+				case 90:
+					cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
+				case 262:
+					cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
+				case 263:
+					cnv=(Conversation)myObj.AddComponent<Conversation_263>();break;
+				case 268:
+					cnv=(Conversation)myObj.AddComponent<Conversation_268>();break;
+				case 272:
+					cnv=(Conversation)myObj.AddComponent<Conversation_272>();break;
+				case 276:
+					cnv=(Conversation)myObj.AddComponent<Conversation_276>();break;
+				case 282:
+					cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
+				default:
+					cnv=myObj.AddComponent<Conversation>();
+					break;
+				}			
+				if (cnv!=null)
+				{
+					cnv.npc= npc;
+				}
+
+			}
 		}
 	}
 
@@ -8413,6 +8416,10 @@ public class MyTools
 		myObj.AddComponent<Shield>();
 	}
 
+	static void AddPole(GameObject myObj)
+	{
+		myObj.AddComponent<Pole>();
+	}
 
 	static void AddGrave(GameObject myObj, int tmObj_index, int GraveID)
 	{
