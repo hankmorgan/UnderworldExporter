@@ -120,6 +120,7 @@ public class TileMap : MonoBehaviour {
 	public Texture2D TileMapImage()
 	{//Generates an image of the tilemap for display
 		int TileSize = 4;
+		Texture2D playerPosIcon = (Texture2D)Resources.Load ("HUD/CURSORS/CURSORS_0018");
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
 		//Init the tile map as blank first
 		for (int i = 0; i<63; i++)
@@ -138,16 +139,6 @@ public class TileMap : MonoBehaviour {
 				{
 					fillTile(output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red);
 				}
-
-				//Init the tilemap
-				//if (GetIsWater(i,j)==true)
-				//{
-				//	DrawSolidTile(output,i,j,TileSize,TileSize,Color.blue);
-				//}
-				//else
-				//{
-				//	DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
-				//}	
 			}
 		}
 		for (int i = 0; i<63; i++)
@@ -211,7 +202,11 @@ public class TileMap : MonoBehaviour {
 				}
 			}
 		}
-		
+		Color[] defaultColour= playerPosIcon.GetPixels();
+		float ratioX = gronk.transform.position.x / (64.0f*1.2f);
+		float ratioY = gronk.transform.position.z / (64.0f*1.2f);
+		output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);
+
 		// Apply all SetPixel calls
 		output.Apply();
 		return  output;
