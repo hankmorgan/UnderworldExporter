@@ -91,6 +91,9 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int SHRINE = 84;
 	public const int ANVIL = 85;
 	public const int POLE = 86;
+	public const int SPIKE = 87;
+	public const int REFILLABLE_LANTERN =88;
+	public const int OIL =89;
 
 	public static UILabel MessageLog;
 

@@ -92,6 +92,9 @@
 #define GRAVE 84
 #define ANVIL 85
 #define POLE 86
+#define SPIKE 87
+#define REFILLABLE_LANTERN 88
+#define OIL 89
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

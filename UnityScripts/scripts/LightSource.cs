@@ -4,7 +4,7 @@ using System.Collections;
 public class LightSource : object_base {
 
 	public int Brightness;
-	public int Duration;
+//	public int Duration;// Use the quality to decide the duration.
 
 	public int ItemIdOn;
 	public int ItemIdOff;

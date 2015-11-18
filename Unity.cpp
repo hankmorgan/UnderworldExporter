@@ -166,7 +166,25 @@ void RenderUnityEntityPole(int game, float x, float y, float z, ObjectItem &curr
 void RenderUnityEntityShield(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	//Adds an obj_base to the object.
-	fprintf(UNITY_FILE, "\n\tAddShield(myObj, %d,%d);", currobj.texture, currobj.DeathWatched);
+	fprintf(UNITY_FILE, "\n\tAddShield(myObj);");
+	}
+
+void RenderUnityEntitySpike(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddSpike(myObj);");
+	}
+
+void RenderUnityEntityOil(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddOil(myObj);");
+	}
+
+void RenderUnityEntityRefillableLantern(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	//Adds an obj_base to the object.
+	fprintf(UNITY_FILE, "\n\tAddRefillableLantern(myObj);");
 	}
 
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -1563,11 +1581,21 @@ void RenderUnityEntityLight(int game, float x, float y, float z, ObjectItem &cur
 		}
 	brightness = objectMasters[itemid_on].uwProperties[UW_PROP_LIGHT_BRIGHTNESS];
 	duration = objectMasters[itemid_on].uwProperties[UW_PROP_LIGHT_DURATION];
+	if (objectMasters[currobj.item_id].type == REFILLABLE_LANTERN)
+		{
+		fprintf(UNITY_FILE, "\n\tCreateLantern(myObj, %d, %d, %d, %d);",
+			brightness,
+			duration,
+			itemid_on, itemid_off);
+		}
+	else
+		{
+		fprintf(UNITY_FILE, "\n\tCreateLight(myObj, %d, %d, %d, %d);",
+			brightness,
+			duration,
+			itemid_on, itemid_off);
 
-	fprintf(UNITY_FILE, "\n\tCreateLight(myObj, %d, %d, %d, %d);",
-		brightness, 
-		duration, 
-		itemid_on, itemid_off);
+		}
 	}
 
 void RenderUnityEntityWeapon(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -2036,6 +2064,26 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityPole(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case SPIKE:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntitySpike(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case OIL:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityOil(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case REFILLABLE_LANTERN:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityRefillableLantern(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+//#define REFILLABLE_LANTERN 88
+//#define OIL 89
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);

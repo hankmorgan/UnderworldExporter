@@ -142,7 +142,7 @@
 141 0 0 0 entity 19 a_quiver H 1 Sprites/OBJECTS_141 0 L M 1 1 1 Sprites/OBJECTS_141 Sprites/OBJECTS_141 S T U Sprites/OBJECTS_141 W x Y 0 1
 142 0 0 0 entity 19 a_bowl H 1 Sprites/OBJECTS_142 0 L M 1 1 1 Sprites/OBJECTS_142 Sprites/OBJECTS_142 S T U Sprites/OBJECTS_142 W x Y 0 1
 143 0 0 0 entity 70 a_rune_bag H 1 Sprites/OBJECTS_143 0 L M 1 1 1 Sprites/OBJECTS_143 Sprites/OBJECTS_143 S T U Sprites/OBJECTS_143 W x Y 0 1
-144 0 0 0 entity 9 a_lantern H 1 Sprites/OBJECTS_144 0 L M 1 1 1 Sprites/OBJECTS_144 Sprites/OBJECTS_144 S T U Sprites/OBJECTS_144 W x Y 1 1
+144 0 0 0 entity 88 a_lantern H 1 Sprites/OBJECTS_144 0 L M 1 1 1 Sprites/OBJECTS_144 Sprites/OBJECTS_144 S T U Sprites/OBJECTS_144 W x Y 1 1
 145 0 0 0 entity 22 a_torch_torches H 1 Sprites/OBJECTS_145 0 L M 1 1 1 Sprites/OBJECTS_145 Sprites/OBJECTS_145 S T U Sprites/OBJECTS_145 W x Y 1 1
 146 0 0 0 entity 22 a_candle H 1 Sprites/OBJECTS_146 0 L M 1 1 1 Sprites/OBJECTS_146 Sprites/OBJECTS_146 S T U Sprites/OBJECTS_146 W x Y 1 1
 147 0 0 0 entity 22 a_taper H 1 Sprites/OBJECTS_147 0 L M 1 1 1 Sprites/OBJECTS_147 Sprites/OBJECTS_147 S T U Sprites/OBJECTS_147 W x Y 1 1
@@ -293,13 +293,13 @@
 292 0 0 0 entity 16 a_flute H 1 Sprites/OBJECTS_292 0 L M 1 1 1 Sprites/OBJECTS_292 Sprites/OBJECTS_292 S T U Sprites/OBJECTS_292 W x Y 0 1
 293 0 0 0 entity 16 some_leeches_bunches_of_leeches H 1 Sprites/OBJECTS_293 0 L M 1 1 1 Sprites/OBJECTS_293 Sprites/OBJECTS_293 S T U Sprites/OBJECTS_293 W x Y 0 1
 294 0 0 0 entity 16 a_moonstone H 1 Sprites/OBJECTS_294 0 L M 1 1 1 Sprites/OBJECTS_294 Sprites/OBJECTS_294 S T U Sprites/OBJECTS_294 W x Y 0 1
-295 0 0 0 entity 16 a_spike H 1 Sprites/OBJECTS_295 0 L M 1 1 1 Sprites/OBJECTS_295 Sprites/OBJECTS_295 S T U Sprites/OBJECTS_295 W x Y 0 1
+295 0 0 0 entity 87 a_spike H 1 Sprites/OBJECTS_295 0 L M 1 1 1 Sprites/OBJECTS_295 Sprites/OBJECTS_295 S T U Sprites/OBJECTS_295 W x Y 0 1
 296 0 0 0 entity 16 a_rock_hammer H 1 Sprites/OBJECTS_296 0 L M 1 1 1 Sprites/OBJECTS_296 Sprites/OBJECTS_296 S T U Sprites/OBJECTS_296 W x Y 0 1
 297 0 0 0 entity 16 a_glowing_rock H 1 Sprites/OBJECTS_297 0 L M 1 1 1 Sprites/OBJECTS_297 Sprites/OBJECTS_297 S T U Sprites/OBJECTS_297 W x Y 1 1
 298 0 0 0 entity 16 a_campfire H 1 Sprites/OBJECTS_298 1 L M 0 0 0 Sprites/OBJECTS_298 Sprites/OBJECTS_298 S T U Sprites/OBJECTS_298 W x Y 1 1
 299 0 0 0 entity 16 a_fishing_pole H 1 Sprites/OBJECTS_299 0 L M 1 1 1 Sprites/OBJECTS_299 Sprites/OBJECTS_299 S T U Sprites/OBJECTS_299 W x Y 0 1
 300 0 0 0 entity 16 a_medallion H 1 Sprites/OBJECTS_300 0 L M 1 1 1 Sprites/OBJECTS_300 Sprites/OBJECTS_300 S T U Sprites/OBJECTS_300 W x Y 0 1
-301 0 0 0 entity 16 an_oil_flask H 1 Sprites/OBJECTS_301 0 L M 1 1 1 Sprites/OBJECTS_301 Sprites/OBJECTS_301 S T U Sprites/OBJECTS_301 W x Y 0 1
+301 0 0 0 entity 89 an_oil_flask H 1 Sprites/OBJECTS_301 0 L M 1 1 1 Sprites/OBJECTS_301 Sprites/OBJECTS_301 S T U Sprites/OBJECTS_301 W x Y 0 1
 302 0 0 0 entity 82 a_fountain H 1 Sprites/OBJECTS_302 0 L M 1 0 0 Sprites/OBJECTS_302 Sprites/OBJECTS_302 S T U Sprites/OBJECTS_302 W x Y 0 0
 303 0 0 0 entity 25 a_cauldron H 1 Sprites/OBJECTS_303 0 L M 1 0 0 Sprites/OBJECTS_303 Sprites/OBJECTS_303 S T U Sprites/OBJECTS_303 W x Y 0 1
 304 0 0 0 entity 11 a_book H 1 Sprites/OBJECTS_304 0 L M 1 1 1 Sprites/OBJECTS_304 Sprites/OBJECTS_304 S T U Sprites/OBJECTS_304 W x Y 0 1

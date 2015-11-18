@@ -51,6 +51,8 @@ public class object_base : MonoBehaviour {
 		if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
 		{
 			FailMessage();
+			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.playerInventory.ObjectInHand="";
 			return true;
 		}
 		else

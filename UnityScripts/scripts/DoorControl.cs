@@ -8,7 +8,7 @@ public class DoorControl : object_base {
 	public bool isPortcullis;
 	public bool DoorBusy;
 	public bool Pickable;
-
+	public bool Spiked;
 	private bool PlayerUse=false;
 
 	//static public UWCharacter playerUW;
@@ -100,6 +100,31 @@ public class DoorControl : object_base {
 						ml.text=playerUW.StringControl.GetString (1,120);
 						}
 					break;
+					}
+				case ObjectInteraction.SPIKE:
+					{
+					if (Spiked==false)
+						{
+					//000~001~128~You can only spike closed doors.
+					//000~001~129~The door is now spiked closed.
+					//000~001~130~Please select door to spike...
+					//000~001~131~The door is spiked.
+						if (state==false)
+							{//Closed door
+							ml.text= playerUW.StringControl.GetString(1,129);
+							Spiked=true;
+							objIntUsed.consumeObject();							
+							}
+						else
+							{
+							ml.text= playerUW.StringControl.GetString(1,128);
+							}						
+						}
+					else
+						{
+						ml.text= playerUW.StringControl.GetString(1,131);
+						}
+					return true;
 					}
 				default:
 					return false;
