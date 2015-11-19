@@ -1,7 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MagicScroll : Potion {
+public class MagicScroll : enchantment_base {
 
 
+	public override bool use ()
+	{
+		if (playerUW.playerInventory.ObjectInHand=="")
+		{
+			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,GetActualSpellIndex() );
+			objInt.consumeObject();
+			return true;
+		}
+		else
+		{
+			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+		}		
+	}
 }

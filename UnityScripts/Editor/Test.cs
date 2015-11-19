@@ -59,7 +59,7 @@ public class MyTools
 		myObj= CreateGameObject("a_wand_36_02_01_0589",43.714287f,3.600000f,2.914286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_154",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_154", "Sprites/OBJECTS_154", "Sprites/OBJECTS_154", 12, 154, 588, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
+		AddWand(myObj, 514, 22);
 		
 		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_36_02_01_0590",44.380001f,3.600000f,3.085714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
@@ -221,28 +221,28 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_spike_21_05_01_0632",26.228571f,3.600000f,7.028571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_295",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", 16, 295, 3, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", 87, 295, 3, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddSpike(myObj);
 		
 		myObj= CreateGameObject("a_lantern_21_05_01_0754",25.714285f,3.600000f,7.028571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_144",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_144", "Sprites/OBJECTS_144", "Sprites/OBJECTS_144", 9, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_144", "Sprites/OBJECTS_144", "Sprites/OBJECTS_144", 88, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddRefillableLantern(myObj);
 		
 		myObj= CreateGameObject("an_oil_flask_21_05_01_0755",25.885715f,3.600000f,6.171429f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		myObj= CreateGameObject("an_oil_flask_21_05_01_0756",26.057144f,3.600000f,6.685714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		myObj= CreateGameObject("an_oil_flask_21_05_01_0757",25.714285f,3.600000f,6.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_23_05_01_0631",28.457144f,3.600000f,6.685714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
@@ -450,18 +450,18 @@ public class MyTools
 		
 		myObj= CreateGameObject("an_oil_flask_36_08_01_0687",43.542858f,1.500000f,9.942857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		myObj= CreateGameObject("an_oil_flask_36_08_01_0686",44.057144f,1.500000f,9.942857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		myObj= CreateGameObject("an_oil_flask_36_08_01_0685",43.885712f,1.500000f,10.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		
 		myObj= CreateGameObject("a_coin_09_09_01_0613",11.314286f,2.400000f,11.314286f);
@@ -561,7 +561,7 @@ public class MyTools
 		myObj= CreateGameObject("a_crown_28_10_01_0630",33.771427f,3.600000f,13.028572f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_048",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_048", "Sprites/OBJECTS_048", "Sprites/armour/armor_f_0061", 73, 48, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 1053584, 1053584);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 3807044, 3807044);
 		
 		myObj= CreateGameObject("a_blood_stain_41_10_01_0672",49.714287f,3.112500f,12.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
@@ -593,7 +593,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_27_11_01_0635",32.914284f,3.600000f,13.714286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 29, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 1053584, 1053584);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3807044, 3807044);
 		
 		myObj= CreateGameObject("a_bridge_51_11_01_0946",61.714287f,2.925000f,13.885715f);
 		
@@ -658,7 +658,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_09_14_01_0979",11.314286f,1.800000f,17.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 54, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 1052788, 1052788);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3806248, 3806248);
 		myObj.transform.position = invMarker.transform.position;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		myObj= CreateGameObject("a_hand_axe_09_14_01_0849",11.314286f,1.800000f,17.314285f);
@@ -802,8 +802,7 @@ public class MyTools
 		myObj= CreateGameObject("a_scroll_11_18_01_0570",13.714286f,3.000000f,22.114285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_317",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", 11, 317, 546, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		SetReadable(myObj);
-		SetLink(myObj,546);
+		AddMagicScroll(myObj);
 		
 		myObj= CreateGameObject("a_bridge_57_18_01_0944",68.914284f,2.925000f,22.114285f);
 		
@@ -1238,8 +1237,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("an_oil_flask_09_29_01_0738",11.828571f,3.600000f,35.828571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		
 		myObj= CreateGameObject("a_lever_12_29_01_0854",15.428572f,4.200000f,35.980000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
@@ -1295,8 +1294,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("an_oil_flask_16_29_01_0607",19.714287f,3.600000f,35.485714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 16, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
 		myObj.transform.position = invMarker.transform.position;
 		AddObjectToContainer(myObj, ParentContainer, 1);
 		FreezeMovement(myObj);
@@ -1565,8 +1564,7 @@ public class MyTools
 		myObj= CreateGameObject("a_scroll_10_35_01_0560",12.685714f,3.600000f,42.342857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_319",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", 11, 319, 544, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		SetReadable(myObj);
-		SetLink(myObj,544);
+		AddMagicScroll(myObj);
 		
 		myObj= CreateGameObject("a_gold_coffer_23_35_01_0862",28.114285f,3.600000f,42.514286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_138",true);
@@ -1670,8 +1668,8 @@ public class MyTools
 		ParentContainer = CreateContainer(myObj, 200, 255, 255);
 		myObj= CreateGameObject("a_spike_24_36_01_0863",29.314285f,3.600000f,43.714287f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_295",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", 16, 295, 6, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", 87, 295, 6, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddSpike(myObj);
 		myObj.transform.position = invMarker.transform.position;
 		AddObjectToContainer(myObj, ParentContainer, 0);
 		FreezeMovement(myObj);
@@ -1734,7 +1732,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_58_37_01_0703",69.942856f,3.600000f,45.257145f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 18, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 1053584, 1053584);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3807044, 3807044);
 		
 		
 		myObj= CreateGameObject("special_tmap_obj_08_38_01_1009",10.780000f,3.600000f,46.200001f);
@@ -1787,7 +1785,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_36_38_01_0748",43.220001f,3.600000f,46.457142f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 29, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 1053584, 1053584);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3807044, 3807044);
 		
 		myObj= CreateGameObject("a_scroll_36_38_01_0767",43.714287f,3.600000f,46.114288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_319",true);
@@ -1802,8 +1800,8 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_spike_36_39_01_0715",44.228569f,3.600000f,47.828568f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_295",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", 16, 295, 4, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", "Sprites/OBJECTS_295", 87, 295, 4, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddSpike(myObj);
 		
 		myObj= CreateGameObject("a_bridge_54_39_01_0940",65.314285f,3.525000f,47.314285f);
 		
@@ -1927,7 +1925,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_23_46_01_0698",27.771429f,0.000000f,55.371429f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 1053584, 1053584);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3807044, 3807044);
 		
 		
 		
@@ -11644,6 +11642,22 @@ public class MyTools
 		myObj.AddComponent<Oil>();
 	}
 
+	static void AddRefillableLantern(GameObject myObj)
+	{
+		myObj.AddComponent<Lantern>();
+	}
+
+	static void AddMagicScroll(GameObject myObj)
+	{
+		myObj.AddComponent<MagicScroll>();
+	}
+
+	static void AddWand(GameObject myObj, int SpellObjectLink, int SpellObjectQuantity)
+	{
+		Wand w= myObj.AddComponent<Wand>();
+		w.SpellObjectLink = SpellObjectLink;
+		w.SpellObjectQuantity=SpellObjectQuantity;
+	}
 
 	static void AddGrave(GameObject myObj, int tmObj_index, int GraveID)
 	{

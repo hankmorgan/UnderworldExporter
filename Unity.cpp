@@ -171,20 +171,24 @@ void RenderUnityEntityShield(int game, float x, float y, float z, ObjectItem &cu
 
 void RenderUnityEntitySpike(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	//Adds an obj_base to the object.
 	fprintf(UNITY_FILE, "\n\tAddSpike(myObj);");
 	}
 
 void RenderUnityEntityOil(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	//Adds an obj_base to the object.
 	fprintf(UNITY_FILE, "\n\tAddOil(myObj);");
 	}
 
 void RenderUnityEntityRefillableLantern(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	//Adds an obj_base to the object.
 	fprintf(UNITY_FILE, "\n\tAddRefillableLantern(myObj);");
+	}
+
+void RenderUnityEntityWand(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	int WandSpellIndex= objList[currobj.link].link;
+	int WandSpellCharges = objList[currobj.link].quality;
+	fprintf(UNITY_FILE, "\n\tAddWand(myObj, %d, %d);", WandSpellIndex, WandSpellCharges);
 	}
 
 void RenderUnityEntityRuneStone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -950,80 +954,33 @@ void RenderUnityEntityBOOK(int game, float x, float y, float z, short message, O
 	//Index
 	//currobj.link -200 = pointer to the readable string block in UW
 	//heading
+
+
 	int ReadableIndex;
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 
-	setReadable();
-
-	switch (game)
-		{
-			case SHOCK:
-				ReadableIndex = currobj.shockProperties[SOFT_PROPERTY_LOG];	//currobj.Property1;	//The chunk that the text comes from.
-				fprintf(UNITY_FILE, "\n\tCreateEmail(myObj,%d);", ReadableIndex);
-				break;
-			default:
-				//ReadableIndex = currobj.link - 0x200;
-				setLink(currobj);
-				break;
-		}
-
-		
-
-	if (message == 1)//atdm:readable_mobile_scroll01
-		{//This is a hidden email OR MESSAGE
-		//fprintf(MAPFILE, "\"classname\" \"%s\"\n", "atdm:readable_mobile_scroll01");
-		//fprintf(MAPFILE, "\"name\" \"%s_email\"\n", UniqueObjectName(currobj));
-		//fprintf(MAPFILE, "\"hide\" \"1\"\n");
+	if (currobj.enchantment == 1)
+		{//Magic variety
+		fprintf(UNITY_FILE, "\n\tAddMagicScroll(myObj);");
 		}
 	else
 		{
-		//fprintf(MAPFILE, "\"classname\" \"%s\"\n", objectMasters[currobj.item_id].path);
-		//fprintf(MAPFILE, "\"name\" \"%s\"\n", UniqueObjectName(currobj));
-		}
-	//fprintf(MAPFILE, "\"inv_name\" \"Readable_%d\"\n", ReadableIndex);	//Need a better name than this!
-	//fprintf(MAPFILE, "\"inv_icon\" \"%s\"\n", objectMasters[currobj.item_id].InvIcon);
-	////////switch (game)
-	////////	{
-	////////		case UWDEMO:
-	////////		case UW1:
-	////////			{fprintf(MAPFILE, "\"xdata_contents\" \"readables/uw1/scroll_%03d\"\n", ReadableIndex); break; }
-	////////		case UW2:
-	////////			{fprintf(MAPFILE, "\"xdata_contents\" \"readables/uw2/scroll_%03d\"\n", ReadableIndex); break; }
-	////////		case SHOCK:
-	////////			{
-	////////			fprintf(MAPFILE, "\"xdata_contents\" \"readables/shock/log_%03d\"\n", ReadableIndex);
-	////////			if (message == 0)
-	////////				{//plays the audio of this log
-	////////				fprintf(MAPFILE, "\"trigger_on_open\" \"runscript_%s\"\n", UniqueObjectName(currobj));
-	////////				}
-	////////			else
-	////////				{
-	////////				fprintf(MAPFILE, "\"trigger_on_open\" \"runscript_%s_email\"\n", UniqueObjectName(currobj));
-	////////				}
-	////////			break;
-	////////			}
-	////////	}
-	////////fprintf(MAPFILE, "\"origin\" \"%f %f %f\"\n", x, y, z);
-	////////EntityRotation(currobj.heading);
-	////////AttachToJoint(currobj);		//for npc items
-	////////fprintf(MAPFILE, "}");
-	////////EntityCount++;
-	if (game == SHOCK)
-		{
-		if (message == 0)
+		setReadable();
+		switch (game)
 			{
-			////createScriptCall(currobj, x, y, z);
+				case SHOCK:
+					ReadableIndex = currobj.shockProperties[SOFT_PROPERTY_LOG];	//currobj.Property1;	//The chunk that the text comes from.
+					fprintf(UNITY_FILE, "\n\tCreateEmail(myObj,%d);", ReadableIndex);
+					break;
+				default:
+					//ReadableIndex = currobj.link - 0x200;
+					setLink(currobj);
+					break;
 			}
-		else
-			{
-			//char str[80]; 
-			//sprintf_s(str, "runscript_%s_email", UniqueObjectName(currobj));
-			///createScriptCall(currobj, x, y, z, "email");
-			}
+		return;
 		}
-	return;
 	}
 
 void RenderUnityEntitySIGN(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -2081,6 +2038,12 @@ return;
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityRefillableLantern(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case WAND:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityWand(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 //#define REFILLABLE_LANTERN 88
 //#define OIL 89

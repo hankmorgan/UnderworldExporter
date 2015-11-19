@@ -1225,7 +1225,8 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_SlowFall:
 		case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
 		case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
-			cast_RelDesPor(caster);
+			//cast_RelDesPor(caster);
+			Cast_SlowFall(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5);
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
 			//Todo
 			break;
