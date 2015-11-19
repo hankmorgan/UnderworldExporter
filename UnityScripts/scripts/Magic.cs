@@ -1415,7 +1415,127 @@ public class Magic : MonoBehaviour {
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
 			Debug.Log ("toughness enchantment");
 			break;
-			
+		
+		case SpellEffect.UW1_Spell_Effect_MagicArrow:
+		case SpellEffect.UW1_Spell_Effect_MagicArrow_alt01:
+			Cast_OrtJux(caster,true);
+			break;
+			/*No status spells*/
+		
+		case SpellEffect.UW1_Spell_Effect_Open:
+		case SpellEffect.UW1_Spell_Effect_Open_alt01:
+			Cast_ExYlem(caster,true);
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_CreateFood:
+		case SpellEffect.UW1_Spell_Effect_CreateFood_alt01:
+			Cast_InManiYlem(caster);
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_CurePoison:
+		case SpellEffect.UW1_Spell_Effect_CurePoison_alt01:
+			Cast_AnNox(caster);
+			Debug.Log ("");
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_SheetLightning:
+			Cast_OrtGrav(caster, true);
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_Armageddon:
+		case SpellEffect.UW1_Spell_Effect_Armageddon_alt01:
+			Cast_VasKalCorp(caster);
+			break;
+
+		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
+		case SpellEffect.UW1_Spell_Effect_Fireball:
+
+		case SpellEffect.UW1_Spell_Effect_FlameWind:
+		case SpellEffect.UW1_Spell_Effect_CauseFear:
+		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
+		
+		case SpellEffect.UW1_Spell_Effect_RuneofWarding:
+		case SpellEffect.UW1_Spell_Effect_SummonMonster:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt01:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt02:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt03:
+		case SpellEffect.UW1_Spell_Effect_RegainMana:
+		case SpellEffect.UW1_Spell_Effect_RegainMana_alt01:
+		case SpellEffect.UW1_Spell_Effect_RegainMana_alt02:
+		case SpellEffect.UW1_Spell_Effect_RegainMana_alt03:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt01:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
+		case SpellEffect.UW1_Spell_Effect_DetectMonster:
+		case SpellEffect.UW1_Spell_Effect_StrengthenDoor:
+		case SpellEffect.UW1_Spell_Effect_RemoveTrap:
+		case SpellEffect.UW1_Spell_Effect_NameEnchantment:
+		
+		
+		case SpellEffect.UW1_Spell_Effect_Tremor:
+		case SpellEffect.UW1_Spell_Effect_GateTravel:
+		
+		
+		
+		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:
+		case SpellEffect.UW1_Spell_Effect_RuneofWarding_alt01:
+		case SpellEffect.UW1_Spell_Effect_ElectricalBolt_alt01:
+		case SpellEffect.UW1_Spell_Effect_StrengthenDoor_alt01:
+		case SpellEffect.UW1_Spell_Effect_RemoveTrap_alt01:
+		case SpellEffect.UW1_Spell_Effect_Fireball_alt01:
+		case SpellEffect.UW1_Spell_Effect_SmiteUndead_alt01:
+		case SpellEffect.UW1_Spell_Effect_NameEnchantment_alt01:
+		
+		
+		case SpellEffect.UW1_Spell_Effect_SheetLightning_alt01:
+		case SpellEffect.UW1_Spell_Effect_GateTravel_alt01:
+		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:
+
+
+			/*?*/
+		case SpellEffect.UW1_Spell_Effect_Curse:
+		case SpellEffect.UW1_Spell_Effect_SetGuard:
+		case SpellEffect.UW1_Spell_Effect_Cursed:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt01:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt02:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt03:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt04:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt05:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt06:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt07:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt09:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt10:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt11:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt12:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt13:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt14:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt15:
+		case SpellEffect.UW1_Spell_Effect_Cursed_alt16:
+		case SpellEffect.UW1_Spell_Effect_RoamingSight:
+		case SpellEffect.UW1_Spell_Effect_theFrog:
+		case SpellEffect.UW1_Spell_Effect_Curse_alt01:
+		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:
+		case SpellEffect.UW1_Spell_Effect_Reveal_alt01:
+		case SpellEffect.UW1_Spell_Effect_Curse_alt02:
+		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
+
+		/*test*/
+		case SpellEffect.UW1_Spell_Effect_Reveal:
+
+	/*Blank*/
+		case SpellEffect.UW1_Spell_Effect_Tremor_alt01:
+		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
+		case SpellEffect.UW1_Spell_Effect_FlameWind_alt01:
+		
+		case SpellEffect.UW1_Spell_Effect_MassParalyze:
+		case SpellEffect.UW1_Spell_Effect_Acid_alt01:
+		case SpellEffect.UW1_Spell_Effect_LocalTeleport_alt01:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt04:
+
+
+
 		default:
 			Debug.Log ("effect Id is " + EffectId);
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
