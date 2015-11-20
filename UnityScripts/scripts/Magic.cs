@@ -1,4 +1,4 @@
-﻿fusing UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Magic : MonoBehaviour {
@@ -337,7 +337,8 @@ public class Magic : MonoBehaviour {
 		case "Hur Por"://Levitate
 		{	
 			SetSpellCost(4);
-			Debug.Log(MagicWords+ " Cast");
+			Cast_HurPor(caster);
+			//Debug.Log(MagicWords+ " Cast");
 			break;
 		}//HP
 		case "Nox Ylem"://Poison
@@ -457,6 +458,7 @@ public class Magic : MonoBehaviour {
 		case "Vas Hur Por"://Fly
 		{
 			SetSpellCost(7);
+			Cast_VasHurPor(caster);
 			Debug.Log(MagicWords+ " Fly Cast");
 			break;
 		}//VHP
@@ -826,6 +828,8 @@ public class Magic : MonoBehaviour {
 			if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo)
 			{//Teleport to level
 				Debug.Log ("moonstone is on another level. (or I forgot to update levelno)");
+				//000~001~273~The moonstone is not available.
+				playerUW.GetMessageLog ().text= playerUW.StringControl.GetString(1,273);
 			}
 			else
 			{
@@ -833,10 +837,39 @@ public class Magic : MonoBehaviour {
 				{
 					caster.transform.position = playerUW.MoonGatePosition;
 				}
+				else
+				{
+					playerUW.GetMessageLog ().text= playerUW.StringControl.GetString(1,273);
+				}
 			}
 		}
 	}
 
+	void Cast_HurPor(GameObject caster)
+	{//Levitate
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Levitate,SpellEffectSlot, 5);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
+
+	void Cast_VasHurPor(GameObject caster)
+	{//Fly
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Fly,SpellEffectSlot, 5);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
 	
 	/*Common spell effects that are used multiple times*/
 	
