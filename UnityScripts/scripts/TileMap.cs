@@ -46,9 +46,14 @@ public class TileMap : MonoBehaviour {
 	int visitTileX; int visitTileY;
 	public static bool OnGround=false;
 	public GameObject feet;//For detecting the ground.
+	UWCharacter playerUW;
+
 	public void PositionDetect()
 	{
-
+		if (playerUW==null)
+		{
+			playerUW=gronk.GetComponent<UWCharacter>();
+		}
 		visitTileX =(int)(gronk.transform.position.x/1.2f);
 		visitTileY =(int)(gronk.transform.position.z/1.2f);
 		SetTileVisited(visitTileX,visitTileY);
@@ -57,11 +62,11 @@ public class TileMap : MonoBehaviour {
 		if (GetIsWater (visitTileX,visitTileY)== true)
 		{//check if gronk is on the ground.
 			feet.SetActive(true);
-			gronk.GetComponent<UWCharacter>().isSwimming=OnGround;
+			playerUW.isSwimming=((OnGround) && (!playerUW.isWaterWalking)) ;
 		}
 		else
 		{
-			gronk.GetComponent<UWCharacter>().isSwimming=false;
+			playerUW.isSwimming=false;
 			OnGround=false;
 			feet.SetActive(false);
 		}

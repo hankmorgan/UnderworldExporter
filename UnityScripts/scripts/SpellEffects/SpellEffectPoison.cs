@@ -5,6 +5,10 @@ public class SpellEffectPoison : SpellEffect {
 
 	private int DOT; //The amount of damage per counter tick.
 
+	public bool isNPC;//The effect is applied to an npc
+	public NPC npc;//THe NPC the spell is applied to.
+
+
 	public override void ApplyEffect ()
 	{
 		if (isNPC==false)

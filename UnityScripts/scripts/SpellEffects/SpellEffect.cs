@@ -731,8 +731,6 @@ public class SpellEffect : MonoBehaviour {
 	public int Value;//The value for the spell effect. Eg light intensity. The Damage over time etc
 	public bool Active;
 	public static UWCharacter playerUW;
-	public bool isNPC;//The effect is applied to an npc
-	public NPC npc;//THe NPC the spell is applied to.
 
 	public int EffectIcon()
 	{

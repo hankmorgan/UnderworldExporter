@@ -304,7 +304,7 @@ public class Magic : MonoBehaviour {
 		case "Ylem Por"://Water Walk
 		{
 			SetSpellCost(3);
-			Debug.Log(MagicWords+ " Water Walk Cast");
+			Cast_YlemPor(caster);
 			break;
 		}//YP
 		case "Sanct Jux"://Strengten Door
@@ -796,7 +796,7 @@ public class Magic : MonoBehaviour {
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 		 	if (EffectSlot!=-1)
 			{
-				SpellEffect sep= (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Poison);
+				SpellEffectPoison sep= (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Poison);
 				sep.Value=10;
 				sep.counter=5;
 				sep.isNPC=true;
@@ -870,6 +870,20 @@ public class Magic : MonoBehaviour {
 			SpellIncantationFailed(caster);
 		}
 	}
+
+	void Cast_YlemPor(GameObject caster)
+	{//Waterwalk
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_WaterWalk (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_WaterWalk,SpellEffectSlot, 5);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
+
 	
 	/*Common spell effects that are used multiple times*/
 	
@@ -951,7 +965,15 @@ public class Magic : MonoBehaviour {
 		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
 		sep.Go ();
 	}
-	
+
+
+	public void Cast_WaterWalk(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{//Levitate
+		SpellEffectWaterWalk seww = (SpellEffectWaterWalk)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		seww.counter=counter; //It will run for x ticks. 
+		seww.Go ();
+	}
+
 	/* Utility code for Spells*/
 
 	void SpellIncantationFailed(GameObject caster)
@@ -1031,19 +1053,16 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
 		case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
-			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_Levitate:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
-			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_WaterWalk:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
-			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_Fly:
 		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
@@ -1526,14 +1545,15 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
-			Debug.Log ("Waterwalk enchantment");
+			//Debug.Log ("Waterwalk enchantment");
+			Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_Fly:
 		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
 		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectFly>();
-			Debug.Log ("Fly enchantment");
+			//Debug.Log ("Fly enchantment");
 			Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
 			//Todo
 			break;

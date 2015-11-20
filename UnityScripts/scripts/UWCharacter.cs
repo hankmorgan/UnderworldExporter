@@ -28,6 +28,7 @@ public class UWCharacter : Character {
 	public bool isSwimming;
 	public bool isFlying;
 	public bool isFloating;
+	public bool isWaterWalking;
 	public bool onGround;//Not currently used.
 	public bool isTelekinetic;
 
