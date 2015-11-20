@@ -14,7 +14,7 @@ public class GameWorldController : MonoBehaviour {
 	public static TextureController tc;
 	public bool hideCeil;
 	public static GameWorldController instance;
-
+	public int LevelNo;
 	public Texture2D[] paletteArray= new Texture2D[8];
 	public int paletteIndex=0;
 	//private Material mattToChange;

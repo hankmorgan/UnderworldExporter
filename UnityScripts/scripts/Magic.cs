@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿fusing UnityEngine;
 using System.Collections;
 
 public class Magic : MonoBehaviour {
@@ -12,7 +12,7 @@ public class Magic : MonoBehaviour {
 	
 	public int MaxMana;
 	public int CurMana;
-	
+	public int SpellCost;
 	
 	string[] Runes=new string[]{"An","Bet","Corp","Des",
 		"Ex","Flam","Grav","Hur",
@@ -22,9 +22,143 @@ public class Magic : MonoBehaviour {
 		"Uus","Vas","Wis","Ylem"};
 	
 	long SummonCount=0;
-	
-	
-	
+
+	public void SetSpellCost(int SpellCircle)
+	{
+		SpellCost= SpellCircle*3;
+	}
+
+	public void ApplySpellCost()
+	{
+		CurMana=CurMana-SpellCost;
+		SpellCost=0;
+	}
+
+	public bool TestSpellCast(UWCharacter casterUW,  int Rune1, int Rune2, int Rune3)
+	{//Checks if the player can cast the spell.
+		int TestSpellLevel=0;
+		string MagicWords=TranslateSpellRune(Rune1,Rune2,Rune3);
+		switch (MagicWords)
+		{
+			//1st Circle
+		case "In Mani Ylem"://Create Food
+		case "In Lor":	//Light
+		case "Bet Wis Ex"://Locate
+		case "Ort Jux"://Magic Arrow
+		case "Bet In Sanct"://Resist Blows
+		case "Sanct Hur"://Stealth
+			TestSpellLevel=1;
+			break;
+
+			//2nd Circle
+		case "Quas Corp"://Cause Fear
+		case "Wis Mani"://Detect Monster
+		case "Uus Por"://Jump
+		case "In Bet Mani"://Lesser Heal
+		case "Rel Des Por"://Slow Fall
+		case "In Sanct"://Thick Skin
+		case "In Jux"://Rune of Warding
+			TestSpellLevel=2;
+			break;
+
+			//3rd Circle
+		case "Bet Sanct Lor"://Conceal
+		case "Ort Grav"://Lightning
+		case "Quas Lor"://Night Vision
+		case "An Kal Corp"://Repel Undead
+		case "Rel Tym Por"://Speed
+		case "Ylem Por"://Water Walk
+		case "Sanct Jux"://Strengten Door
+			TestSpellLevel=3;
+			break;
+
+			//4th Circle
+		case "An Sanct"://Curse
+		case "Sanct Flam":// Flameproof
+		case "In Mani"://Heal
+		case "Hur Por"://Levitate
+		case "Nox Ylem"://Poison
+		case "An Jux"://Remove Trap
+			TestSpellLevel=4;
+			break;
+			
+			//5th Circle
+		case "Por Flam"://Fireball
+		case "Grav Sanct Por"://Missile Protection
+		case "Ort Wis Ylem"://Name Enchantment
+		case "Ex Ylem"://Open
+		case "An Nox"://Cure Poison
+		case "An Corp Mani"://Smite Undead
+			TestSpellLevel=5;
+			break;
+
+			//6th Circle
+		case "Vas In Lor"://Daylight
+		case "Vas Rel Por"://Gate Travel
+		case "Vas In Mani"://Greater Heal
+		case "An Ex Por"://Paralyze
+		case "Vas Ort Grav"://Sheet Lightning
+		case "Ort Por Ylem"://Telekinesis
+			TestSpellLevel=6;
+			break;
+			
+			//7th Circle
+		case "In Mani Rel"://Ally
+		case "Vas An Wis"://Confusion
+		case "Vas Sanct Lor"://Invisibility
+		case "Vas Hur Por"://Fly
+		case "Kal Mani"://Monster Summoning
+		case "Ort An Quas"://Reveal
+			TestSpellLevel=7;
+			break;
+
+			//8th Circle
+		case "Vas Kal Corp"://Armageddon
+		case "Flam Hur"://Flame Wind
+		case "An Tym":// Freeze Time
+		case "In Vas Sanct"://Iron Flesh
+		case "Ort Por Wis"://Roaming sight
+		case "Vas Por Ylem"://Tremor
+			TestSpellLevel=8;
+			break;
+		default:
+			{
+			casterUW.GetMessageLog ().text= "Not a spell.";
+			return false;
+			}
+		}//magicwords
+
+		if (Mathf.Round(casterUW.CharLevel/2)<TestSpellLevel)
+		{//Not experienced enough
+			casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,210);
+			return false;
+		}
+		else if (CurMana< TestSpellLevel*3)
+		{//Mana test
+			casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,211);
+			return false;
+		}
+		else if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
+		{//Skill test. Random chance to backfire
+			if (Random.Range(1,10)<8)
+			{//TODO:decide on the chances
+				//000~001~213~Casting was not successful.
+				casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,213);
+			}
+			else
+			{//000~001~214~The spell backfires.
+				casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,214);
+				casterUW.CurVIT = casterUW.CurVIT-3;
+			}
+			return false;
+		}
+		else
+		{//Casting sucessful. 
+			casterUW.GetMessageLog ().text ="Casting " + MagicWords;
+			return true;
+		}
+	}
+
 	
 	public void TestSpell(GameObject caster)
 	{//Test spell for testing spell effects
@@ -50,34 +184,40 @@ public class Magic : MonoBehaviour {
 			//1st Circle
 		case "In Mani Ylem"://Create Food
 		{
+			SetSpellCost(1);
 			//Debug.Log(MagicWords+ " Create Food Cast");
 			Cast_InManiYlem(caster);
 			break;
 		}//imy
 		case "In Lor":	//Light
 		{
+			SetSpellCost(1);
 			//Debug.Log(MagicWords+ " Light Cast");
 			Cast_InLor(caster);
 			break;
 		}	//il
 		case "Bet Wis Ex"://Locate
 		{//UW2 spell?
+			SetSpellCost(1);
 			Debug.Log(MagicWords+ " Locate Cast");
 			break;
 		}//bwe
 		case "Ort Jux"://Magic Arrow
 		{
+			SetSpellCost(1);
 			//Debug.Log(MagicWords+ " Magic Arrow Cast Readied=" + ready);
 			Cast_OrtJux(caster, ready);
 			break;
 		}//OJ
 		case "Bet In Sanct"://Resist Blows
 		{
+			SetSpellCost(1);
 			Debug.Log(MagicWords+ " Resist Blows Cast");
 			break;
 		}//BIS
 		case "Sanct Hur"://Stealth
 		{
+			SetSpellCost(1);
 			Debug.Log(MagicWords+ " Stealth Cast");
 			break;
 		}//sh
@@ -85,39 +225,46 @@ public class Magic : MonoBehaviour {
 			//2nd Circle
 		case "Quas Corp"://Cause Fear
 		{
+			SetSpellCost(2);
 			Debug.Log(MagicWords+ " Cause Fear Cast");
 			break;
 		}//qc
 		case "Wis Mani"://Detect Monster
 		{
+			SetSpellCost(2);
 			Debug.Log(MagicWords+ " Detect Monster Cast");
 			break;
 		}//wm
 		case "Uus Por"://Jump
 		{
+			SetSpellCost(2);
 			Cast_UusPor(caster);
 			//Debug.Log(MagicWords+ " Jump Cast");
 			break;
 		}//up
 		case "In Bet Mani"://Lesser Heal
 		{
+			SetSpellCost(2);
 			//Debug.Log(MagicWords+ " Lesser Heal Cast");
 			Cast_InBetMani(caster);
 			break;
 		}//IBM
 		case "Rel Des Por"://Slow Fall
 		{
+			SetSpellCost(2);
 			//Debug.Log(MagicWords+ " Slow Fall Cast");
 			cast_RelDesPor(caster);
 			break;
 		}//RDP
 		case "In Sanct"://Thick Skin
 		{
+			SetSpellCost(2);
 			Debug.Log(MagicWords+ " Thick Skin Cast");
 			break;
 		}//IS
 		case "In Jux"://Rune of Warding
 		{
+			SetSpellCost(2);
 			Debug.Log(MagicWords+ " Rune of Warding Cast");
 			break;
 		}//IJ
@@ -125,37 +272,44 @@ public class Magic : MonoBehaviour {
 			//3rd Circle
 		case "Bet Sanct Lor"://Conceal
 		{
+			SetSpellCost(3);
 			Debug.Log(MagicWords+ " Conceal Cast");
 			break;
 		}//BSL
 		case "Ort Grav"://Lightning
 		{
+			SetSpellCost(3);
 			//Debug.Log(MagicWords+ " Lightning Cast");
 			Cast_OrtGrav(caster, ready);
 			break;
 		}//OG
 		case "Quas Lor"://Night Vision
 		{
+			SetSpellCost(3);
 			Debug.Log(MagicWords+ " Night Vision Cast");
 			break;
 		}//QL
 		case "An Kal Corp"://Repel Undead
 		{
+			SetSpellCost(3);
 			Debug.Log(MagicWords+ " Repel Undead Cast");
 			break;
 		}//akc
 		case "Rel Tym Por"://Speed
 		{
+			SetSpellCost(3);
 			Debug.Log(MagicWords+ " Speed Cast");
 			break;
 		}//rtp
 		case "Ylem Por"://Water Walk
 		{
+			SetSpellCost(3);
 			Debug.Log(MagicWords+ " Water Walk Cast");
 			break;
 		}//YP
 		case "Sanct Jux"://Strengten Door
 		{
+			SetSpellCost(3);
 			Debug.Log(MagicWords+ " Strengten Door Cast");
 			break;
 		}//SJ
@@ -163,33 +317,39 @@ public class Magic : MonoBehaviour {
 			//4th Circle
 		case "An Sanct"://Curse
 		{
+			SetSpellCost(4);
 			Debug.Log(MagicWords+ " Curse Cast");
 			break;
 		}//AS
 		case "Sanct Flam":// Flameproof
 		{
+			SetSpellCost(4);
 			Debug.Log(MagicWords+ " Flameproof Cast");
 			break;
 		}//SF
 		case "In Mani"://Heal
 		{
+			SetSpellCost(4);
 			//Debug.Log(MagicWords+ " Heal Cast");
 			Cast_InMani (caster);
 			break;
 		}//IM
 		case "Hur Por"://Levitate
 		{	
+			SetSpellCost(4);
 			Debug.Log(MagicWords+ " Cast");
 			break;
 		}//HP
 		case "Nox Ylem"://Poison
 		{
+			SetSpellCost(4);
 			//Debug.Log(MagicWords+ " Poison Cast");
 			Cast_NoxYlem(caster);
 			break;
 		}//NY
 		case "An Jux"://Remove Trap
 		{
+			SetSpellCost(4);
 			Debug.Log(MagicWords+ " Remove Trap Cast");
 			break;
 		}//AJ
@@ -197,33 +357,39 @@ public class Magic : MonoBehaviour {
 			//5th Circle
 		case "Por Flam"://Fireball
 		{
+			SetSpellCost(5);
 			Debug.Log(MagicWords+ " Fireball Cast");
 			break;
 		}//PF
 		case "Grav Sanct Por"://Missile Protection
 		{
+			SetSpellCost(5);
 			Debug.Log(MagicWords+ " Missile Protection Cast");
 			break;
 		}//GSP
 		case "Ort Wis Ylem"://Name Enchantment
 		{
+			SetSpellCost(5);
 			Debug.Log(MagicWords+ " Name Enchantment Cast");
 			break;
 		}//OWY
 		case "Ex Ylem"://Open
 		{
+			SetSpellCost(5);
 			Cast_ExYlem(caster, ready);
 			//Debug.Log(MagicWords+ " Open Cast");
 			break;
 		}//EY
 		case "An Nox"://Cure Poison
 		{
+			SetSpellCost(5);
 			Cast_AnNox(caster);
 			//Debug.Log(MagicWords+ " Cure Poison Cast");
 			break;
 		}//AN
 		case "An Corp Mani"://Smite Undead
 		{
+			SetSpellCost(5);
 			Debug.Log(MagicWords+ " Smite Undead Cast");
 			break;
 		}//ACM
@@ -231,33 +397,39 @@ public class Magic : MonoBehaviour {
 			//6th Circle
 		case "Vas In Lor"://Daylight
 		{
+			SetSpellCost(6);
 			Debug.Log(MagicWords+ " Daylight Cast");
 			Cast_VasInLor(caster);
 			break;
 		}//VIL
 		case "Vas Rel Por"://Gate Travel
 		{
-			Debug.Log(MagicWords+ " Gate Travel Cast");
+			SetSpellCost(6);
+			Cast_VasRelPor(caster);
 			break;
 		}//VRP
 		case "Vas In Mani"://Greater Heal
 		{
+			SetSpellCost(6);
 			//Debug.Log(MagicWords+ " Greater Heal Cast");
 			Cast_VasInMani (caster);
 			break;
 		}//VIM
 		case "An Ex Por"://Paralyze
 		{
+			SetSpellCost(6);
 			Debug.Log(MagicWords+ " Paralyze Cast");
 			break;
 		}//AEP
 		case "Vas Ort Grav"://Sheet Lightning
 		{
+			SetSpellCost(6);
 			Debug.Log(MagicWords+ " Sheet Lightning Cast");
 			break;
 		}//VOG
 		case "Ort Por Ylem"://Telekinesis
 		{
+			SetSpellCost(6);
 			Debug.Log(MagicWords+ " Telekinesis Cast");
 			Cast_OrtPorYlem(caster);
 			break;
@@ -266,63 +438,75 @@ public class Magic : MonoBehaviour {
 			//7th Circle
 		case "In Mani Rel"://Ally
 		{
+			SetSpellCost(7);
 			Debug.Log(MagicWords+ " Ally Cast");
 			break;
 		}//IMR
 		case "Vas An Wis"://Confusion
 		{
+			SetSpellCost(7);
 			Debug.Log(MagicWords+ " Confusion Cast");
 			break;
 		}//VAW
 		case "Vas Sanct Lor"://Invisibility
 		{
+			SetSpellCost(7);
 			Debug.Log(MagicWords+ " Invisibility Cast");
 			break;
 		}//VSL
 		case "Vas Hur Por"://Fly
 		{
+			SetSpellCost(7);
 			Debug.Log(MagicWords+ " Fly Cast");
 			break;
 		}//VHP
 		case "Kal Mani"://Monster Summoning
 		{
+			SetSpellCost(7);
 			Debug.Log(MagicWords+ " Monster Summoning Cast");
 			break;
 		}//KM
 		case "Ort An Quas"://Reveal
 		{
+			SetSpellCost(7);
 			Debug.Log(MagicWords+ " Reveal Cast");
 			break;
 		}//OAQ
 			//8th Circle
 		case "Vas Kal Corp"://Armageddon
 		{
+			SetSpellCost(8);
 			Debug.Log(MagicWords+ " Armageddon Cast");
 			Cast_VasKalCorp(caster);
 			break;
 		}//vkc
 		case "Flam Hur"://Flame Wind
 		{
+			SetSpellCost(8);
 			Debug.Log(MagicWords+ " Flame Wind Cast");
 			break;
 		}//fh
 		case "An Tym":// Freeze Time
 		{
+			SetSpellCost(8);
 			Debug.Log(MagicWords+ " Freeze Time Cast");
 			break;
 		}//at
 		case "In Vas Sanct"://Iron Flesh
 		{
+			SetSpellCost(8);
 			Debug.Log(MagicWords+ " Iron Flesh Cast");
 			break;
 		}//ivs
 		case "Ort Por Wis"://Roaming sight
 		{
+			SetSpellCost(8);
 			Debug.Log(MagicWords+ " Roaming sight Cast");
 			break;
 		}//opw
 		case "Vas Por Ylem"://Tremor
 		{
+			SetSpellCost(8);
 			Debug.Log(MagicWords+ " Tremor Cast");
 			break;
 		}//vpy
@@ -335,11 +519,9 @@ public class Magic : MonoBehaviour {
 		}//magicwords
 	}
 	
-	
-	public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
-	{
-		//Casts a magic spell based on the constructed magic rune string
-		
+	public string TranslateSpellRune( int Rune1, int Rune2, int Rune3)
+	{ //returns the string meaning of the runes,
+
 		string MagicWords="";
 		//Construct the spell words based on selected runes
 		if ((Rune1>=0) && (Rune1<=23))
@@ -354,6 +536,30 @@ public class Magic : MonoBehaviour {
 		{
 			MagicWords=MagicWords + " " + Runes[Rune3];
 		}
+
+		return MagicWords;
+	}
+
+
+	public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
+	{
+		//Casts a magic spell based on the constructed magic rune string
+		
+		string MagicWords="";
+		//Construct the spell words based on selected runes
+	/*	if ((Rune1>=0) && (Rune1<=23))
+		{
+			MagicWords= Runes[Rune1];
+		}
+		if ((Rune2>=0) && (Rune2<=23))
+		{
+			MagicWords=MagicWords + " " + Runes[Rune2];
+		}
+		if ((Rune3>=0) && (Rune3<=23))
+		{
+			MagicWords=MagicWords + " " + Runes[Rune3];
+		}*/
+		MagicWords=TranslateSpellRune(Rune1,Rune2, Rune3);
 		
 		castSpell (caster, MagicWords,ready);
 		
@@ -394,12 +600,14 @@ public class Magic : MonoBehaviour {
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
-			Debug.Log ("ExYlem is ready to cast");
+			//Debug.Log ("ExYlem is ready to cast");
 			playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
 			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
 		}
 		else
 		{
+			playerUW.PlayerMagic.ReadiedSpell="";
+			playerUW.CursorIcon=playerUW.CursorIconDefault;
 			Ray ray = getRay (caster);
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=playerUW.GetUseRange();
@@ -409,8 +617,11 @@ public class Magic : MonoBehaviour {
 				if (dc!=null)
 				{
 					dc.UnlockDoor();
-					Debug.Log ("Ex Ylem has been cast");
-					playerUW.CursorIcon=playerUW.CursorIconDefault;
+					//Debug.Log ("Ex Ylem has been cast");
+				}
+				else if (hit.transform.GetComponent<PortcullisInteraction>()!=null)
+				{
+					hit.transform.GetComponent<PortcullisInteraction>().getParentObjectInteraction().gameObject.GetComponent<DoorControl>().UnlockDoor();
 				}
 			}
 		}
@@ -557,17 +768,29 @@ public class Magic : MonoBehaviour {
 	void Cast_NoxYlem(GameObject caster)
 	{//poison other.
 		RaycastHit hit= new RaycastHit();
-		if (GetNPCTargetRandom(caster, ref hit))
+		NPC npc = GetNPCTargetRandom(caster, ref hit);
+		if (npc != null)
 		{
 			//Apply a impact effect to the npc
-			GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
+			GameObject hitimpact ; 
+			//if (hit==null)
+			//{
+			//	hitimpact= new GameObject(hit.transform.name + "_impact");
+			//	hitimpact.transform.position=hit.point;
+			//}
+			//else
+			//{
+				hitimpact= new GameObject(npc.transform.name + "_impact");
+				hitimpact.transform.position= npc.transform.position;
+			//}
+			//= new GameObject(hit.transform.name + "_impact");
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
 			imp.FrameNo=40;
 			imp.EndFrame=44;
 			StartCoroutine(imp.Animate());	
 
-			NPC npc = hit.transform.gameObject.GetComponent<NPC>();
+			//NPC npc = hit.transform.gameObject.GetComponent<NPC>();
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 		 	if (EffectSlot!=-1)
 			{
@@ -595,6 +818,24 @@ public class Magic : MonoBehaviour {
 	}
 
 
+	void Cast_VasRelPor(GameObject caster)
+	{
+		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		if (playerUW!=null)
+		{
+			if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo)
+			{//Teleport to level
+				Debug.Log ("moonstone is on another level. (or I forgot to update levelno)");
+			}
+			else
+			{
+				if (playerUW.MoonGatePosition != Vector3.zero)
+				{
+					caster.transform.position = playerUW.MoonGatePosition;
+				}
+			}
+		}
+	}
 
 	
 	/*Common spell effects that are used multiple times*/
@@ -686,7 +927,7 @@ public class Magic : MonoBehaviour {
 	}
 
 
-	bool GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
+	NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
 	{
 		//Targets a random NPC in the area of the npc and returns a raycast hit on the line of site
 		Camera cam = caster.GetComponentInChildren<Camera>();//Camera.main;
@@ -707,14 +948,20 @@ public class Magic : MonoBehaviour {
 
 					if (Physics.Linecast(campos,Col.gameObject.transform.position,out hit))
 					{
-					Debug.Log ("hit is " + hit.collider.gameObject.name);
-						return true;//hit;//Col.gameObject.GetComponent<NPC>();
+						if (hit.collider.gameObject.name==Col.gameObject.name)
+						{
+							return Col.gameObject.GetComponent<NPC>();//hit;//Col.gameObject.GetComponent<NPC>();
+						}
+					}
+					else
+					{//nothing in the line of site.
+						return Col.gameObject.GetComponent<NPC>();
 					}
 				}
 			}
 		}
 
-		return false;
+		return null;
 	}
 
 
@@ -1122,7 +1369,11 @@ public class Magic : MonoBehaviour {
 		{//Cast a spell or readies it.
 			if (ReadiedSpell=="")
 			{
-				castSpell(this.gameObject,ActiveRunes[0],ActiveRunes[1],ActiveRunes[2],true);
+				if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(),ActiveRunes[0],ActiveRunes[1],ActiveRunes[2]))
+				{
+					castSpell(this.gameObject,ActiveRunes[0],ActiveRunes[1],ActiveRunes[2],true);
+					ApplySpellCost();
+				}
 			}
 		}
 	}
@@ -1447,6 +1698,11 @@ public class Magic : MonoBehaviour {
 			Cast_VasKalCorp(caster);
 			break;
 
+		case SpellEffect.UW1_Spell_Effect_GateTravel:
+		case SpellEffect.UW1_Spell_Effect_GateTravel_alt01:
+			Cast_VasRelPor(caster);
+			break;
+
 		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
 		case SpellEffect.UW1_Spell_Effect_Fireball:
 
@@ -1475,7 +1731,7 @@ public class Magic : MonoBehaviour {
 		
 		
 		case SpellEffect.UW1_Spell_Effect_Tremor:
-		case SpellEffect.UW1_Spell_Effect_GateTravel:
+		
 		
 		
 		
@@ -1490,7 +1746,7 @@ public class Magic : MonoBehaviour {
 		
 		
 		case SpellEffect.UW1_Spell_Effect_SheetLightning_alt01:
-		case SpellEffect.UW1_Spell_Effect_GateTravel_alt01:
+		
 		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:
 
 

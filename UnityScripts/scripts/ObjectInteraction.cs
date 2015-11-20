@@ -94,6 +94,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int SPIKE = 87;
 	public const int REFILLABLE_LANTERN =88;
 	public const int OIL =89;
+	public const int MOONSTONE =89;
 
 	public static UILabel MessageLog;
 

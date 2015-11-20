@@ -53,6 +53,9 @@ public class UWCharacter : Character {
 	public int ResurrectLevel;
 	public Vector3 ResurrectPosition=Vector3.zero;
 
+	public Vector3 MoonGatePosition=Vector3.zero;
+	public int MoonGateLevel = 2;//Domain of the mountainmen
+
 	public override void Start ()
 	{
 		base.Start ();
@@ -225,7 +228,8 @@ public class UWCharacter : Character {
 	{//Casts a spell on right click.
 		if(Input.GetMouseButtonDown(1) && (WindowDetectUW.CursorInMainWindow==true))
 		{
-			this.GetComponent<Magic>().castSpell(this.gameObject, PlayerMagic.ReadiedSpell,false);
+			PlayerMagic.castSpell(this.gameObject, PlayerMagic.ReadiedSpell,false);
+			PlayerMagic.SpellCost=0;
 		}
 	}
 

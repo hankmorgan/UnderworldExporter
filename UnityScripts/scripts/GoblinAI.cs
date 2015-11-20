@@ -146,7 +146,7 @@ public class GoblinAI : MonoBehaviour {
 			}
 			else
 			{
-				Debug.Log (this.name + "has hit " + hit.transform.name);
+				//Debug.Log (this.name + "has hit " + hit.transform.name);
 				if (hit.transform.name == "Gronk")
 				{
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music

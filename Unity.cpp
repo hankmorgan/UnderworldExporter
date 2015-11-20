@@ -179,6 +179,11 @@ void RenderUnityEntityOil(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tAddOil(myObj);");
 	}
 
+void RenderUnityEntityMoonstone(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tAddMoonstone(myObj);");
+	}
+
 void RenderUnityEntityRefillableLantern(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	fprintf(UNITY_FILE, "\n\tAddRefillableLantern(myObj);");
@@ -2045,6 +2050,12 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityWand(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case MOONSTONE:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityMoonstone(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 //#define REFILLABLE_LANTERN 88
 //#define OIL 89
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
@@ -2145,8 +2156,9 @@ float offX; float offY; float offZ;
 				long nextObj = LevelInfo[x][y].indexObjectList;
 				while (nextObj != 0)
 					{
-					objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
-					objList[nextObj].tileY = y;
+					if (nextObj == 869)
+					//objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
+					//objList[nextObj].tileY = y;
 					offX = 0.0; offY = 0.0; offZ = 0.0;
 					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y,1);//Figures out where the object should be.
 					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);
@@ -2173,6 +2185,7 @@ float offX; float offY; float offZ;
 		}
 	if (game!=SHOCK)
 		{//Render my uw triggers and traps after the main object lists
+		fprintf(UNITY_FILE, "\n//UW Triggers and Traps");
 		for (int i = 0; i < 1024; i++)
 			{
 			if (objList[i].AlreadyRendered!=1)

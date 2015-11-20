@@ -45,7 +45,11 @@ public class ActiveRuneSlot : MonoBehaviour {
 	//cast spell. Readies it if possible.
 		if (playerUW.PlayerMagic.ReadiedSpell=="")
 		{
-			playerUW.gameObject.GetComponent<Magic>().castSpell(playerUW.gameObject,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2],true);
+			if (playerUW.PlayerMagic.TestSpellCast(playerUW,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2]))
+			{
+				playerUW.PlayerMagic.castSpell(playerUW.gameObject,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2],true);
+				playerUW.PlayerMagic.ApplySpellCost();
+			}
 		}
 	}
 }

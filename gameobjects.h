@@ -95,6 +95,7 @@
 #define SPIKE 87
 #define REFILLABLE_LANTERN 88
 #define OIL 89
+#define MOONSTONE 90
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
