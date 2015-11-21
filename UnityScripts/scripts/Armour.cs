@@ -43,22 +43,50 @@ public class Armour : Equipment {
 		{
 			//Return lowest quality 
 			//setEquipTexture(0)
-			SetEquipTexture(EquipFemaleLowest);
+			if (playerUW.isFemale)
+			{
+				SetEquipTexture(EquipFemaleLowest);
+			}
+			else
+			{
+				SetEquipTexture(EquipMaleLowest);
+			}
 		}
 		else if ((objInt.Quality>15) && (objInt.Quality<=30))
 		{
 			//Low quality
+			if (playerUW.isFemale)
+			{
 			SetEquipTexture(EquipFemaleLow);
+			}
+			else
+			{
+			SetEquipTexture(EquipMaleLow);
+			}
 		}
 		else if ((objInt.Quality>30) && (objInt.Quality<=45))
 		{
 			//Medium
+			if (playerUW.isFemale)
+			{
 			SetEquipTexture(EquipFemaleMedium);
+			}
+			else
+			{
+				SetEquipTexture(EquipMaleMedium);
+			}
 		}
 		else if ((objInt.Quality>45) && (objInt.Quality<=63))
 		{
 			//Best
+			if (playerUW.isFemale)
+			{
 			SetEquipTexture(EquipFemaleBest);
+			}
+			else
+			{
+				SetEquipTexture(EquipMaleBest);
+			}
 		}
 		objInt.SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
 	}

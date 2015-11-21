@@ -1,13 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class chains : MonoBehaviour {
+public class chains : GuiBase {
 	public static int ActiveControl;
 	public static int setControl=-1;
-	// Use this for initialization
-	void Start () {
-	
-	}
 
 	void OnClick()
 	{
@@ -116,11 +112,17 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("RightHand_Slot",true);
 			EnableDisableControl("LeftRing_Slot",true);
 			EnableDisableControl("RightRing_Slot",true);
-			EnableDisableControl("Helm_f_Slot",true);
-			EnableDisableControl("Chest_f_Slot",true);
-			EnableDisableControl("Legs_f_Slot",true);
-			EnableDisableControl("Boots_f_Slot",true);
-			EnableDisableControl("Gloves_f_Slot",true);
+			EnableDisableControl("Helm_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Chest_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Legs_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Boots_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Gloves_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Helm_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Chest_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Legs_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Boots_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Gloves_m_Slot",true && !playerUW.isFemale);
+
 			EnableDisableControl("ContainerOpened",true);
 			EnableDisableControl("InventoryDown",true);
 			EnableDisableControl("InventoryUp",true);
@@ -224,6 +226,11 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("legs_f_Slot",false);
 			EnableDisableControl("boots_f_Slot",false);
 			EnableDisableControl("gloves_f_Slot",false);
+			EnableDisableControl("Helm_m_Slot",false);
+			EnableDisableControl("chest_m_Slot",false);
+			EnableDisableControl("legs_m_Slot",false);
+			EnableDisableControl("boots_m_Slot",false);
+			EnableDisableControl("gloves_m_Slot",false);
 			EnableDisableControl("ContainerOpened",false);
 			EnableDisableControl("InventoryDown",false);
 			EnableDisableControl("InventoryUp",false);
@@ -327,6 +334,11 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("Legs_f_Slot",false);
 			EnableDisableControl("Boots_f_Slot",false);
 			EnableDisableControl("Gloves_f_Slot",false);
+			EnableDisableControl("Helm_m_Slot",false);
+			EnableDisableControl("chest_m_Slot",false);
+			EnableDisableControl("legs_m_Slot",false);
+			EnableDisableControl("boots_m_Slot",false);
+			EnableDisableControl("gloves_m_Slot",false);
 			EnableDisableControl("ContainerOpened",false);
 			EnableDisableControl("InventoryDown",false);
 			EnableDisableControl("InventoryUp",false);
@@ -424,11 +436,16 @@ public class chains : MonoBehaviour {
 			EnableDisableControl("RightHand_Slot",true);
 			EnableDisableControl("LeftRing_Slot",true);
 			EnableDisableControl("RightRing_Slot",true);
-			EnableDisableControl("Helm_f_Slot",true);
-			EnableDisableControl("Chest_f_Slot",true);
-			EnableDisableControl("Legs_f_Slot",true);
-			EnableDisableControl("Boots_f_Slot",true);
-			EnableDisableControl("Gloves_f_Slot",true);
+			EnableDisableControl("Helm_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Chest_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Legs_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Boots_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Gloves_f_Slot",true && playerUW.isFemale);
+			EnableDisableControl("Helm_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Chest_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Legs_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Boots_m_Slot",true && !playerUW.isFemale);
+			EnableDisableControl("Gloves_m_Slot",true && !playerUW.isFemale);
 			EnableDisableControl("ContainerOpened",true);
 			EnableDisableControl("InventoryDown",true);
 			EnableDisableControl("InventoryUp",true);
