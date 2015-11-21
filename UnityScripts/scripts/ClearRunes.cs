@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ClearRunes : MonoBehaviour {
-
+public class ClearRunes : GuiBase {
+	//Removes the runes that the character has selected.
 	void OnClick()
 	{
 		//Debug.Log("Clearing Runes - find player");
-		UWCharacter playerUW= GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		//UWCharacter playerUW= GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
 			//Debug.Log("Clearing Runes");

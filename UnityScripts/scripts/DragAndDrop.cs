@@ -3,6 +3,8 @@ using System.Collections;
 
 public class DragAndDrop : MonoBehaviour
 {  
+	/*
+	 * unused test code
 	private bool _mouseState;
 	//private GameObject target;
 	public Vector3 screenSpace;
@@ -73,4 +75,5 @@ public class DragAndDrop : MonoBehaviour
 		
 		return target;
 	}
+	*/
 }

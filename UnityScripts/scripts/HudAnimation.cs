@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HudAnimation : MonoBehaviour {
-
+public class HudAnimation : GuiBase {
+	//Base Class For playing cutscenes and other animations on the hud.
 
 	public UITexture TargetControl;
 	public string SetAnimation;

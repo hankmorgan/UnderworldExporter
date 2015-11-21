@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class a_lock : trap_base {
+	/*
+Not really used by uwexporter but does exist in UW. Created here for compatabilty.
+	 */
 /*	
 	private GameObject triggerObj;
 	private ObjectVariables Var;

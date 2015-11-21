@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActiveRuneSlot : MonoBehaviour {
+public class ActiveRuneSlot : GuiBase {
+	/*GUI element for displaying the select spell runes and for casting those selected runes.*/
 	public int SlotNumber;
-	public static UWCharacter playerUW;
-	// Use this for initialization
 	private int setRune=-2;
 	private UITexture thisRune;
 
@@ -12,7 +11,7 @@ public class ActiveRuneSlot : MonoBehaviour {
 	private Texture2D blank;
 
 	void Start () {
-		//label = this.GetComponent<UISprite>();
+		base.start();
 		thisRune = this.GetComponent<UITexture>();
 		for (int i =0;i<24;i++)
 		{
@@ -23,18 +22,16 @@ public class ActiveRuneSlot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*Checks the set value on the player and if different display the new rune.*/
 		if (playerUW.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
 		{
 			setRune= playerUW.PlayerMagic.ActiveRunes[SlotNumber];
 			if (playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
 			{
-				//thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + playerUW.PlayerMagic.ActiveRunes[SlotNumber].ToString("D2"));
 				thisRune.mainTexture=runes[playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
 			}
 			else
 			{
-				//label.spriteName= "rune_blank";
-				//thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 				thisRune.mainTexture=blank;
 			}
 		}
@@ -42,7 +39,6 @@ public class ActiveRuneSlot : MonoBehaviour {
 
 	void OnClick()
 	{
-	//cast spell. Readies it if possible.
 		if (playerUW.PlayerMagic.ReadiedSpell=="")
 		{
 			if (playerUW.PlayerMagic.TestSpellCast(playerUW,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2]))

@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Food : object_base {
+	/*Food items*/
+
 	public int Nutrition; //The nutritional value of this food.
 
 	public override bool use ()
@@ -19,11 +21,6 @@ public class Food : object_base {
 
 	public bool Eat()
 	{//TODO:Implement drag and drop feeding.
-		//Food gets eaten
-		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		//UWCharacter playerUW = objInt.getPlayerUW();
-		//StringController Sc = objInt.getStringController();
-		//UILabel ml =objInt.getMessageLog();
 
 		if (Nutrition+playerUW.FoodLevel>=255)
 		{
@@ -43,9 +40,6 @@ public class Food : object_base {
 	public override bool LookAt()
 	{
 		//Code for when looking at food. Should one day return quantity and smell properly
-		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		//UILabel ml =objInt.getMessageLog();
-		//StringController Sc = objInt.getStringController();
 		ml.text = playerUW.StringControl.GetFormattedObjectNameUW(objInt,foodSmellText());
 		return true;
 	}

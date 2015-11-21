@@ -2,17 +2,28 @@
 using System.Collections;
 
 public class AnimationOverlay : MonoBehaviour {
-
-	//private SpriteRenderer image;
+	/*
+Animation overlay for special objects (eg water fountain sprays) that have animated frames.
+	 */
 	public int StartFrame=0;
 	public int FrameNo =0;
 	public int NoOfFrames=5;
 	public bool Active=true;
 	SpriteRenderer image;
+	static Sprite[] sprites=new Sprite[64];
+	static bool spriteSet = false;
 	// Use this for initialization
 	void Start () {
 		image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
-		//LoadAnimo(FrameNo);
+		if (spriteSet==false)
+		{
+			spriteSet=true;
+			for (int i = 0; i<=63;i++)
+			{
+				sprites[i]=Resources.Load<Sprite>("Sprites/Animo/animo_" + i.ToString ("D4"));
+			}
+		}
+
 		Go ();
 	}
 
@@ -32,7 +43,8 @@ public class AnimationOverlay : MonoBehaviour {
 		{
 			image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
-		image.sprite=Resources.Load<Sprite>("Sprites/Animo/animo_" + index.ToString ("D4"));
+	//	image.sprite=Resources.Load<Sprite>("Sprites/Animo/animo_" + index.ToString ("D4"));
+		image.sprite=sprites[index];
 	}
 	
 	public IEnumerator Animate()

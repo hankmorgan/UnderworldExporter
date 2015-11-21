@@ -15,29 +15,15 @@ public class Armour : Equipment {
 	public string EquipMaleBest;
 	
 	public Texture2D EquipDisplay;
-	//private ObjectInteraction objInt;
-	//private int previousQuality;
-	// Use this for initialization
 
 	protected override void Start () {
 		base.Start ();
-		//previousQuality=-1;
 		UpdateQuality();
 	}
 
 
-	// Update is called once per frame
-	/*void Update () {
-		if (previousQuality!=objInt.Quality)
-		{
-			previousQuality =objInt.Quality;
-
-		}
-	}*/
-
-
 	public override void UpdateQuality()
-	{//Refreshes the quality of armour when damage.
+	{//Refreshes the quality of armour when damage is taken
 		//Needs to be called when damaged.
 		if ((objInt.Quality>0) && (objInt.Quality<=15))
 		{

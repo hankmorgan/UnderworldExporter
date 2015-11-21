@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Dragons : GuiBase {
-
+	//Code to change the animation frames of the dragons.
 
 	public UITexture[] Tail=new UITexture[4];
 	public UITexture[] Arm=new UITexture[4];

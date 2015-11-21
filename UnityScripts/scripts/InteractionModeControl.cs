@@ -1,18 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractionModeControl : MonoBehaviour {
+public class InteractionModeControl : GuiBase {
+
+	//The mode selection UI elements master control
 	public UITexture[] Controls=new UITexture[6];
 
 
 	public static bool UpdateNow=true;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 		if (UpdateNow==true)

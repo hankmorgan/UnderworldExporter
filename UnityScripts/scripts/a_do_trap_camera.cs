@@ -2,6 +2,14 @@
 using System.Collections;
 
 public class a_do_trap_camera : trap_base {
+/*
+A variant of the do trap.
+This is mainly used by crystal balls to show a vision of an area on a map.
+
+Usage example
+The vision of the moonstone room on Level2. Activated by the orb in the marble room.
+*/
+
 	public Camera cam;
 	public Light lt;
 
@@ -12,7 +20,6 @@ public class a_do_trap_camera : trap_base {
 
 	IEnumerator ActivateCamera()
 	{
-
 		playerUW.playerCam.tag="Untagged";
 		playerUW.playerCam.enabled=false;
 		cam.enabled=true;
@@ -23,5 +30,4 @@ public class a_do_trap_camera : trap_base {
 		playerUW.playerCam.tag="MainCamera";
 		playerUW.playerCam.enabled=true;
 	}
-
 }

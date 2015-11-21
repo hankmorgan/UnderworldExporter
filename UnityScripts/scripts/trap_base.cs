@@ -21,6 +21,16 @@ public class trap_base : object_base {
 		ExecuteTrap(triggerX,triggerY, State);
 
 		//Trigger the next in the chain
+		TriggerNext (triggerX, triggerY, State);
+
+		//Stuff to happen after the trap has fired.
+		PostActivate();
+		return true;
+	}
+
+	public virtual void TriggerNext(int triggerX, int triggerY, int State)
+	{
+
 		GameObject triggerObj= GameObject.Find (TriggerObject);
 		if (triggerObj!=null)
 		{
@@ -31,21 +41,20 @@ public class trap_base : object_base {
 			}
 			else
 			{
-				//try and find a trap
+				//try and find a trap instead
 				trap_base trap = triggerObj.GetComponent<trap_base>();
 				if (trap!=null)
 				{
 					trap.Activate(triggerX,triggerY,State);
+					//return true;
 				}
 				else
 				{
 					Debug.Log ("no trigger or trap found on this object");
-					return false;
+					//return false;
 				}
 			}
 		}
-		PostActivate();
-		return true;
 	}
 
 	public virtual void PostActivate()

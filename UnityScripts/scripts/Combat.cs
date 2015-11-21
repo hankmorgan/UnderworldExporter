@@ -49,7 +49,6 @@ public class Combat : MonoBehaviour {
 	{
 		return;
 	}
-
 }
 
 

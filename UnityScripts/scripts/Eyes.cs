@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class Eyes : GuiBase {
+	//The glowing gargoyle eyes at the top of the screen.
+	//Intended to match the health of the last attacked enemy.
 
 	public int EyeIndex;
 	private int PreviousEyeIndex=-1;

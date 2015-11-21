@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameWorldController : MonoBehaviour {
+	/*Class for controlling the game world parameters*/
+
 	List<Material> AnimMaterials=new List<Material>();
 	List<int>AnimMaterialsIndex=new List<int>();
 	List<string>AnimatedTextures=new List<string>();
@@ -28,64 +30,11 @@ public class GameWorldController : MonoBehaviour {
 		ceil.enabled=!hideCeil;
 		if (EnableTextureAnimation==true)
 		{
-			//#if UNITY_EDITOR
-			//Undo.RegisterUndo(AnimMaterials.ToArray(), "Fix Shared Material");
-			//#endif
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
 
 
 		return;
-		/*
-		//TODO:Figure out how to import animated textures!
-		AnimatedTextures.Add ("uw1_226");
-		//Texture2D test = Resources.Load<Texture2D> ("Textures/Palette/UW1_BASE_0226");
-
-		foreach(Transform child in WorldModel.gameObject.transform)
-		{
-			foreach(Material matt in child.gameObject.GetComponent<Renderer>().sharedMaterials)
-			{
-				string mattName= matt.name.Substring(0,7);
-				if (AnimatedTextures.Contains(mattName ))
-				{
-
-					 //matt.SetTexture("_MainTex",test);
-					if (!AnimMaterials.Contains(matt))
-					{
-						AnimMaterials.Add(matt);
-						int index = int.Parse(matt.name.Substring (matt.name.Length-3,3));
-						AnimMaterialsIndex.Add (index);
-					}
-					//mattToChange=matt;
-					//Debug.Log (matt.name + " on " + child.name );
-
-					//matt.mainTexture = tc.RequestTexture(5);
-					//break;
-				}
-
-				//do something
-			}
-		}
-		//Debug.Log ("no of materials " + AnimMaterials.Count);
-		if (EnableTextureAnimation==true)
-		{
-#if UNITY_EDITOR
-			Undo.RegisterUndo(AnimMaterials.ToArray(), "Fix Shared Material");
-#endif
-			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
-		}
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	/*	if (Test==false)
-		{
-			Test=true;
-			mattToChange.mainTexture=tc.RequestTexture(5);
-		}
-*/
-
-	
 	}
 
 	void UpdateAnimation()
@@ -103,25 +52,7 @@ public class GameWorldController : MonoBehaviour {
 
 
 		return;
-		/*
-		for (int i = 0; i<AnimMaterials.Count;i++)
-			{
-			//matt.SetTexture("_MainTex",test);
-			AnimMaterials[i].SetTexture("_ColorPalette",paletteArray[paletteIndex]);
-			//AnimMaterials[i].mainTexture=tc.RequestTexture(AnimMaterialsIndex[i],true);
-			}
-
-		if (paletteIndex<7)
-		{
-			paletteIndex++;
-		}
-		else
-		{
-			paletteIndex=0;
-		}
-*/
 	}
-
 
 	public static GameObject findDoor(int x, int y)
 	{//Finds a door in the tile pointed to by two coordinates.

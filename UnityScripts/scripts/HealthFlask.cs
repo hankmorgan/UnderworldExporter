@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class HealthFlask : GuiBase {
-
+	/*The health, mana and poisoned state indicators*/
 	public UITexture[] LevelImages=new UITexture[13];
 	public float Level;
 	public float MaxLevel;
@@ -13,10 +13,7 @@ public class HealthFlask : GuiBase {
 
 	public bool isHealthDisplay;
 	private bool Poisoned;
-//	public static UWCharacter playerUW;
-	// Use this for initialization
 
-	// Update is called once per frame
 	void Update () {
 		if (isHealthDisplay==true)
 		{//Health flask
@@ -70,7 +67,6 @@ public class HealthFlask : GuiBase {
 
 	void OnClick()
 	{
-		//UILabel MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		string output=""; 
 		if (isHealthDisplay == true)
 		{

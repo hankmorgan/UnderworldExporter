@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class LockPick : object_base {
-
+	/*A lock pick is used to pick locks*/
 	public override bool use()
 	{
 		if(playerUW.playerInventory.ObjectInHand=="")

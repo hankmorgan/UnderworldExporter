@@ -2,12 +2,21 @@
 using System.Collections;
 
 public class a_arrow_trap : trap_base {
+	/*
+	An arrow trap is used to fire projectiles (usually at the player).
+	The item type created is controlled by the object quality and owner
+	target = (currobj.quality << 5) | currobj.owner; //This is set in UWexporter
+
+	The vector is simply the heading of the trap.
+
+	Examples of usage
+	The mine collapse on level2
+	The skulls launched at the player on level3 -Troll area.
+	*/
 
 
-	//Quality and owner appears to control what appears.
-
-	public int item_index;
-	public int item_type;
+	public int item_index;//The object id created.
+	public int item_type;//The type of the object created
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{

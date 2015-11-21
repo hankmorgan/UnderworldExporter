@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class DoorKey : object_base {
+	/*Guess*/
 
-	public int KeyId;
-	// Use this for initialization
+	public int KeyId;//This should match the doors it is opening. Also index into look descriptions
 
 	public override bool use ()
 	{
@@ -16,10 +16,8 @@ public class DoorKey : object_base {
 		}
 		else
 		{
-			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 		}
-
 	}
 
 	public override bool LookAt ()

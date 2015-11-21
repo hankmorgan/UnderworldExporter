@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractionModeControlItem : MonoBehaviour {
-
+public class InteractionModeControlItem : GuiBase {
+	//Individual interface modes controls
 
 	public int InteractionMode;
 	public bool isOn;

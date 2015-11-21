@@ -2,8 +2,11 @@
 using System.Collections;
 
 public class Character : MonoBehaviour {
+	/*Base Character Class*/
+
 	public int game;
-	//What mode are we in and various ranges
+
+	//What interaction mode are we in and various ranges
 	public static int InteractionMode;
 
 	public const int InteractionModeWalk=6;
@@ -14,57 +17,61 @@ public class Character : MonoBehaviour {
 	public const int InteractionModeAttack=4;
 	public const int InteractionModeUse=5;
 	public const int InteractionModeInConversation=7; //For trading purposes.
-	public static int DefaultInteractionMode=UWCharacter.InteractionModeUse;
+	public static int DefaultInteractionMode=InteractionModeUse;
 
 	//The storage location for container items.
 	public static GameObject InvMarker;
 
-	public UITexture MouseLookCursor;
+
 	//The cursor to display on the gui
+	public UITexture MouseLookCursor;
 	public Texture2D CursorIcon;
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;
-	//public string CurrObjectSprite;
 
+	//Reference to a C# version of the standard character controller.
 	public CharacterMotorC playerMotor;
 
 	//Character Stats
 	public int MaxVIT;
 	public int CurVIT;
 
-	public float pickupRange=2.5f;
-	public float useRange=2.0f;
-	public float talkRange=20.0f;
-	public float lookRange=25.0f;
+	protected float pickupRange=2.5f;
+	protected float useRange=2.0f;
+	protected float talkRange=20.0f;
+	protected float lookRange=25.0f;
 
 
 	//For controlling switching between mouse look and interaction
 	public MouseLook XAxis;
 	public MouseLook YAxis;
 	public bool MouseLookEnabled;
-	//public bool CursorInMainWindow;
 
-
+	//The player's name
 	public string CharName;
 
-
+	//Heading values for compass displays
 	public int currentHeading;
 	protected int[] CompassHeadings={0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
 
+	//The camera attached to this gameobject
 	public Camera playerCam;
 
-
+	//For requesting strings for the message logs.
 	public StringController StringControl;
+
 	//The message log on the main screen.
 	protected  UILabel MessageLog;
 
-
+	//The music system
 	public MusicController mus;
 
+	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;
 
 	public UILabel GetMessageLog()
 	{
+		/*Returns the message log for various functions*/
 		if (MessageLog==null)
 		{
 			MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
@@ -75,7 +82,8 @@ public class Character : MonoBehaviour {
 
 	public void ApplyDamage(int damage)
 	{
-		CurVIT=CurVIT-5;
+		//Applies damage to the player.
+		CurVIT=CurVIT-damage;
 	}
 
 	// Use this for initialization
@@ -83,19 +91,10 @@ public class Character : MonoBehaviour {
 
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 
-		//Common stuff
-		//ObjectInteraction.player=this.gameObject;
-		//ObjectInteraction.SC=StringControl;
-		//WindowDetect.playerUW=this.GetComponent<UWCharacter>();
-		//ButtonHandler.SC=StringControl;
-		//ButtonHandler.player=this.gameObject;
-		//InventorySlot.player=this.gameObject;
-		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
+		//tell other objects about this object.
 		TileMap.gronk=this.gameObject;
-		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
+		GoblinAI.player=this.gameObject;
 
-
-		
 		if (game==2)
 		{
 			InteractionMode=UWCharacter.InteractionModePickup;
@@ -115,11 +114,10 @@ public class Character : MonoBehaviour {
 		Ray ray ;
 		if (MouseLookEnabled==true)
 		{
-			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));//This is a vector to the center of the window
 		}
 		else
 		{
-			//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
 			ray= Camera.main.ScreenPointToRay(Input.mousePosition);
 		}
 		RaycastHit hit = new RaycastHit(); 
@@ -152,7 +150,7 @@ public class Character : MonoBehaviour {
 	}
 
 	public virtual float GetPickupRange()
-	{
+	{//Returns the pickup range of the character
 		return pickupRange;
 	}
 
@@ -172,11 +170,8 @@ public class Character : MonoBehaviour {
 			}
 			else
 			{
-				//ray= Camera.main.ViewportPointToRay(Input.mousePosition);
 				ray= Camera.main.ScreenPointToRay(Input.mousePosition);
 			}
-			
-			//= Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			if (Physics.Raycast(ray,out hit,GetPickupRange()))
 			{
@@ -196,7 +191,7 @@ public class Character : MonoBehaviour {
 							}
 							else
 							{
-								Debug.Log("attempting to pick up a quantity");
+								//Debug.Log("attempting to pick up a quantity");
 								UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
 								inputctrl.eventReceiver=this.gameObject;
 								inputctrl.type=UIInput.KeyboardType.NumberPad;
@@ -208,17 +203,13 @@ public class Character : MonoBehaviour {
 						}
 						else
 						{//Left click. Pick them all up.
-								Pickup(objPicked,pInv);	
-						}
-						
+							Pickup(objPicked,pInv);	
+						}						
 					}
 				}
 			}
 		}
 	}
-
-
-
 
 	public virtual void Pickup(ObjectInteraction objPicked, PlayerInventory  pInv)
 	{//completes the pickup.

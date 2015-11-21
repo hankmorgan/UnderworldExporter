@@ -20,6 +20,4 @@ public class Fountain : object_base {
 			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());		
 		}
 	}
-
-
 }

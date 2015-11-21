@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Anvil : object_base {
 
-
-
 	public override bool use ()
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")
@@ -16,7 +14,6 @@ public class Anvil : object_base {
 		else
 		{
 			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
-		}
-		
+		}		
 	}
 }

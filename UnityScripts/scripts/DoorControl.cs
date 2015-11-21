@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class DoorControl : object_base {
-	public bool locked;
-	public int KeyIndex;
-	private bool state;
-	public bool isPortcullis;
-	public bool DoorBusy;
-	public bool Pickable;
-	public bool Spiked;
-	private bool PlayerUse=false;
+	/*Class for manipulating doors*/
 
-	//static public UWCharacter playerUW;
-	// Use this for initialization
+	public bool locked;
+	public int KeyIndex;//What keys can open this
+	private bool state;	//True for open, false for closed.
+	public bool isPortcullis;//Special cases. Sets direction of opening
+	public bool DoorBusy;//Is the door opening or closing. Used to keep if flying off it's hinges!
+	public bool Pickable;//Sets if the lock can be picked.
+	public bool Spiked;//Is the door spiked/
+	private bool PlayerUse=false;//Is it the player using the object or a trigger/trap.
+
 
 	public override bool use ()
 	{
@@ -145,12 +145,10 @@ public class DoorControl : object_base {
 		{//Toggle Open and closed
 			if (state==false)
 				{//Door is closed
-				//Debug.Log ("Opening door");
 				OpenDoor ();
 				}
 			else
 				{//Door is open
-				//Debug.Log ("Closing door");
 				CloseDoor ();
 				}
 		}
@@ -160,7 +158,6 @@ public class DoorControl : object_base {
 			{
 				ml.text="The " + playerUW.StringControl.GetObjectNounUW(objInt) + " is locked.";
 			}
-//			Debug.Log(this.name + " is locked");
 		}
 		return true;
 	}
@@ -171,7 +168,6 @@ public class DoorControl : object_base {
 			{
 			if(!DoorBusy)
 			{
-				//Debug.Log ("Move door to open position");
 				if (isPortcullis==false)
 				{
 					StartCoroutine(RotateDoor (this.transform,Vector3.up * 90,1.0f));
@@ -191,7 +187,6 @@ public class DoorControl : object_base {
 		{
 			if(!DoorBusy)
 			{
-				//Debug.Log ("Move door to closed position");
 				if (isPortcullis==false)
 				{
 					StartCoroutine(RotateDoor (this.transform,Vector3.up * -90,1.0f));
@@ -207,13 +202,11 @@ public class DoorControl : object_base {
 
 	public void LockDoor()
 	{
-		//Debug.Log ("Locking door");
 		locked=true;
 	}
 
 	public void UnlockDoor()
 	{
-		//Debug.Log ("Locking door");
 		locked=false;
 	}
 
@@ -275,7 +268,7 @@ public class DoorControl : object_base {
 	}
 
 	public override bool ApplyAttack(int damage)
-	{//TODO:Find out how massive door resist damage
+	{//TODO:Find out how massive doors resist damage
 		objInt.Quality=objInt.Quality-damage;
 		if ((objInt.Quality<=0))
 		{

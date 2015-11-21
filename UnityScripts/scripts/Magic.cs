@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Magic : MonoBehaviour {
-	
+/*A whole lot of code for Casting spells and enchantments*/	
 	//Magic spell to be cast on next click in window
 	public string ReadiedSpell;
 	//Runes that the character has picked up and is currently using

@@ -68,23 +68,21 @@ public class UWCharacter : Character {
 		GuiBase.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		InteractionMode=UWCharacter.DefaultInteractionMode;
 
-		//WindowDetectUW.playerUW=this.GetComponent<UWCharacter>();
+
+		//Tells other objects about this component;
+		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
+
+		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		Container.playerUW=this.GetComponent<UWCharacter>();
 		ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
-		//a_text_string_trap.SC=StringControl;
 		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		Eyes.playerUW=this.GetComponent<UWCharacter>();
-		//HealthFlask.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		//Compass.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		//StatsDisplay.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		
 		NPC.playerUW=this.GetComponent<UWCharacter>();
-		GoblinAI.player=this.gameObject;
+
 		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
-		//Conversation.SC=this.StringControl; //ObjectInteraction.SC;
 		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 
 		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");
@@ -283,13 +281,9 @@ public class UWCharacter : Character {
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,talkRange))
 		{
-			//MessageLog.text = "Talking to " + hit.transform.name;
 			if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
 				{
-				//if (hit.transform.gameObject.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.NPC_TYPE)
-					//{
 				hit.transform.gameObject.GetComponent<ObjectInteraction>().TalkTo();
-					//}
 				}
 		}
 		else

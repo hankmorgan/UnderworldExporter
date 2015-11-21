@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Lantern : LightSource {
+	//A lantern needs oil to work
 
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{

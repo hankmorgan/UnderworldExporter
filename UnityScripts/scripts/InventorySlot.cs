@@ -2,18 +2,9 @@
 using System.Collections;
 
 public class InventorySlot : GuiBase {
+/*The slots containing items on the Inventory display*/
 
-	//private UILabel MessageLog;
 	private UISprite slot;
-	//public int InteractionMode;
-	//public static GameObject player;
-	//public static UWCharacter playerUW;
-	//public static GameObject currInventorySlot;
-	//public GameObject ObjectInSlot;
-	//public string ObjectSpriteString;
-	//public Texture2D ObjectSprite;
-	//private PlayerInventory pInv;
-	//public GameObject GronkSlot;
 	public int slotIndex;//What index of inventory slot is this
 	public int SlotCategory; //What type of item is in the slot. Eg armour, rings, boots and general etc.
 	//Possible values for the below. Should tally with UWexporter defines
@@ -27,13 +18,8 @@ public class InventorySlot : GuiBase {
 
 
 	private GameObject QuantityObj=null;
-	// Use this for initialization
-	void Start () {
-		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-//		slot = GetComponent<UISprite>();
 
-	}
-	
+
 	void UseFromSlot()
 	{
 		GameObject currObj=playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
@@ -74,14 +60,6 @@ public class InventorySlot : GuiBase {
 			}
 		}
 	}
-
-	//void OnPress (bool isPressed)
-	//{
-		//..if (isPressed==true)
-	//{
-	//		ClickEvent ();
-	//	}
-	//}
 
 	void OnClick()
 	{
@@ -153,8 +131,6 @@ public class InventorySlot : GuiBase {
 	void ConversationPickup(bool isLeftClick)
 	{
 
-		//Debug.Log("conversationpickup");
-		//pInv = player.GetComponent<PlayerInventory>();
 		string objectInSlot = playerUW.playerInventory.GetObjectAtSlot(slotIndex);
 		//Check if the slot has a container first.
 		if (objectInSlot!="")
@@ -166,10 +142,9 @@ public class InventorySlot : GuiBase {
 				return;
 			}
 		}
+
+
 		//Check slot rules
-
-
-
 		if (playerUW.playerInventory.ObjectInHand != "")
 		{
 			ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
@@ -390,10 +365,7 @@ public class InventorySlot : GuiBase {
 							playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 							if (this.slotIndex>=11)
 							{
-
 								playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
-								//Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-								//cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 							}
 							playerUW.playerInventory.ClearSlot(this.slotIndex);
 							}
@@ -438,8 +410,6 @@ public class InventorySlot : GuiBase {
 				if (this.slotIndex>=11)
 				{
 					playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
-					//Container cn = GameObject.Find(pInv.currentContainer).GetComponent<Container>();
-					//cn.RemoveItemFromContainer(pInv.ContainerOffset+this.slotIndex-11);
 				}
 				playerUW.playerInventory.ClearSlot(this.slotIndex);
 			}
@@ -457,15 +427,4 @@ public class InventorySlot : GuiBase {
 			}
 		}
 	}
-
-
-//	void OpenRuneBag()
-//	{
-		//chains chainControl = GameObject.Find ("Chain").GetComponent<chains>();
-		//if (chainControl!=null)
-		//{
-//		chains.ActiveControl=2;
-			//chainControl.ActiveControl=2;
-		//}
-//	}
 }

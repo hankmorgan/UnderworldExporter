@@ -20,10 +20,6 @@ public class LightSource : object_base {
 	void Update () {
 		if (IsOn==true)
 		{
-			//if (objInt==null)
-			//{
-			//	objInt = this.gameObject.GetComponent<ObjectInteraction>();
-			//}
 			if (objInt.PickedUp==false)
 			{
 				SetOff ();
@@ -33,7 +29,6 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
-		//base.use();
 		if (playerUW.playerInventory.ObjectInHand == "")
 		{
 			if (objInt.PickedUp==false)
@@ -113,8 +108,6 @@ public class LightSource : object_base {
 				split.GetComponent<ObjectInteraction>().Use();
 				split.GetComponent<ObjectInteraction>().isQuant=false;
 			}
-
-			//lt.range=LightSource.BaseLight+this.Brightness;
 		}
 		else
 		{
@@ -133,11 +126,8 @@ public class LightSource : object_base {
 		objInt.RefreshAnim();
 	}
 
-
-
 	public override bool LookAt()
 	{
-		//StringController Sc = objInt.getStringController();
 		ml.text =playerUW.StringControl.GetFormattedObjectNameUW(objInt);
 		return true;
 	}

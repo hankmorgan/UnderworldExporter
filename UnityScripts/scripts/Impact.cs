@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Impact : MonoBehaviour {
+	//Class for things like blood splatters
 
-	//private SpriteRenderer image;
 	public int FrameNo =0;//How long the image lasts for.
 	public int EndFrame=5;
 	// Use this for initialization
@@ -12,7 +12,6 @@ public class Impact : MonoBehaviour {
 		{
 			this.gameObject.AddComponent<Billboard>();
 		}
-		//LoadAnimo(FrameNo);
 	}
 
 	void LoadAnimo(int index)

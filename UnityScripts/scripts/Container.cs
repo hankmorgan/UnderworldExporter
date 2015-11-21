@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Container : object_base {
 
-	//public int NoOfSlots=40;
 	public string[] items=new string[40];
 	public int start=0;
 
@@ -11,12 +10,8 @@ public class Container : object_base {
 	public int NoOfSlots;
 	public int ObjectsAccepted;
 
-//	public static UWCharacter playerUW;
-
-	public bool isOpenOnPanel;
-	//public int itemCount=0;
-	public string ContainerParent;
-
+	public bool isOpenOnPanel;//Is the container open on the players inventory.
+	public string ContainerParent; //What container is above this one. For passing objects out of the container.
 
 	public int MaxCapacity()
 	{
@@ -37,8 +32,6 @@ public class Container : object_base {
 
 	public bool AddItemMergedItemToContainer(GameObject item)
 	{
-		//int i =0;
-
 		for (int i=0; i< 40; i++)
 		{
 			if (items[i]!="")
@@ -47,7 +40,7 @@ public class Container : object_base {
 				if (founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id)
 				{
 					//merge
-					Debug.Log ("Merging");
+					//Debug.Log ("Merging");
 					founditem.GetComponent<ObjectInteraction>().Link =founditem.GetComponent<ObjectInteraction>().Link+ item.GetComponent<ObjectInteraction>().Link;
 					GameObject.Destroy (item);
 					return true;
@@ -60,56 +53,39 @@ public class Container : object_base {
 
 
 	public bool AddItemToContainer(string item)
-		{
+	{
 		int i =0;
 		while ((items[i] !="") && (i <40))
-		{
-			i++;
-		}
+			{
+				i++;
+			}
 		if (i<=39)
-		{
-			items[i] = item;
-			return true;
-		}
+			{
+				//items[i] = item;
+				return AddItemToContainer(item,i);
+				//return true;
+			}
 		else
-		{
-			//no room
-			Debug.Log (name + " is full");
-			return false;
-		}
-		//if (item =="")
-		//{
-		//	Debug.Log(name + ": invalid item for adding");
-		//	return false;
-		//}
-		//if (itemCount<=39)
-		//	{
-		////		items[itemCount]=item;
-//				itemCount++;
-		//		return true;
-		//	}
-		//else
-		//	{
-		//		Debug.Log (name + " is full");
-		//		return false;
-		//	}
-		}
+			{
+				//no room
+				Debug.Log (name + " is full");
+				return false;
+			}
+	}
+
 	public bool AddItemToContainer(string item,int index)
 	{
 		if (item =="")
 		{
-			//Debug.Log(name + ": invalid item for adding");
 			return false;
 		}
 		if (index<=39)
 		{
 			items[index]=item;
-			//itemCount++;
 			return true;
 		}
 		else
 		{
-			//Debug.Log (name + " is set to an invalid index " + index);
 			return false;
 		}
 	}
@@ -123,7 +99,6 @@ public class Container : object_base {
 			}
 		else
 			{
-		//	Debug.Log (name + "(" +index + ") invalid item for removal");
 			return false;
 			}
 		}
@@ -134,17 +109,15 @@ public class Container : object_base {
 			{
 			if (items[i] == objectName)
 				{
-				items[i]="";
-				//Debug.Log ("removed " + objectName + " at (" + i + ")");
+				RemoveItemFromContainer(i);
 				return true;
 				}
 			}
 		return false;
 	}
 
-   static public bool AddObjectToContainer(GameObject objInHand, GameObject objUseOn)
+   /*static public bool xAddObjectToContainer(GameObject objInHand, GameObject objUseOn)
 	{
-		//Debug.Log ("Adding " + objInHand + " to " + objUseOn);
 		Container subContainer = objUseOn.GetComponent<Container>();
 		if (subContainer.AddItemToContainer(objInHand.name))
 		{
@@ -160,7 +133,7 @@ public class Container : object_base {
 		{
 			return false;
 		}
-	}
+	}*/
 
 	public void OpenContainer()
 	{
@@ -195,16 +168,12 @@ public class Container : object_base {
 	}
 
 	public void SpillContents()
-	{//Removes the contents of a container out it in the real world.
+	{//Removes the contents of a container out in the real world.
 		int counter;
 		TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
 		WindowDetect.FreezeMovement(this.gameObject);
-		//BoxCollider bx = this.gameObject.GetComponent<BoxCollider>();
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		//objInt.SetWorldDisplay(objInt.GetEquipDisplay());
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
-		//objInt.RefreshAnim();
-		//bx.enabled=false;
 		for (int i=0; i<40;i++)
 		{
 			if (GetItemAt (i)!="")
@@ -228,22 +197,19 @@ public class Container : object_base {
 					if (flag==true)
 					{//No object interferes with the spill
 						RemoveItemFromContainer(i);
-						//Debug.Log ("putting " + Spilled.name + " at " + randomPoint);
 						Spilled.transform.position=randomPoint;
 						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
 						WindowDetect.UnFreezeMovement(Spilled);
-						//Spilled.rigidbody.AddForce(Random.insideUnitSphere*0.05f);
 					}									
 				}
 			}
 		}
-		//bx.enabled=true;
 		WindowDetect.UnFreezeMovement(this.gameObject);
 	}
 
 
 	public static void SetPickedUpFlag(Container cn, bool NewValue)
-	{
+	{//Recursivly sets the picked up flag on all items in the container and all sub-container contents.
 		for (int i =0; i<40;i++)
 		{
 			string ItemName=cn.GetItemAt(i);
@@ -256,10 +222,10 @@ public class Container : object_base {
 					{
 						item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
 					}
-					else
-					{
-						Debug.Log (item.name + " has no object interaction!");
-					}
+					//else
+					//{
+					//	Debug.Log (item.name + " has no object interaction!");
+					//}
 					if (item.GetComponent<Container>()!=null)
 					{
 						Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
@@ -285,10 +251,6 @@ public class Container : object_base {
 					{
 						Container.SetItemsPosition(item.GetComponent<Container>(),Position);
 					}
-				//else
-				//	{
-						//Debug.Log (">" + ItemName + "< is null!");
-				//	}
 				}
 			}
 		}
@@ -310,16 +272,12 @@ public class Container : object_base {
 						Container.SetItemsParent(item.GetComponent<Container>(),Parent);
 					}
 				}
-			//	else
-				//{
-				//	Debug.Log(ItemName + " is null!");
-				//}
 			}
 		}
 	}
 
 	public static int GetFreeSlot(Container cn)
-	{
+	{//Returns an available slot on the current container.
 		for (int i=0;i<40;i++)
 		{
 			if (cn.GetItemAt (i)=="")
@@ -327,7 +285,6 @@ public class Container : object_base {
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
@@ -416,10 +373,6 @@ public class Container : object_base {
 			{
 				return false;
 			}
-
 		}
 	}
-
-
-
 }

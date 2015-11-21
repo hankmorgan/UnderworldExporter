@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Hud_Hover : MonoBehaviour {
-	private UILabel MessageLog;
+	//No longer in use
+	/*private UILabel MessageLog;
 	public int InteractionMode;
 	// Use this for initialization
 	void Start () {
@@ -15,4 +16,5 @@ public class Hud_Hover : MonoBehaviour {
 		UWCharacter.InteractionMode=InteractionMode;
 		MessageLog.text="Interaction mode is now " + name + "("+InteractionMode+")";
 	}
+	*/
 }

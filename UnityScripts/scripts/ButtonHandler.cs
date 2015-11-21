@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class ButtonHandler : object_base {
+	/*Code for buttons and switches*/
+
 	public string trigger;
 	public int triggerX;
 	public int triggerY;
@@ -57,9 +59,7 @@ public class ButtonHandler : object_base {
 		else
 		{
 			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
-			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
-
 	}
 
 
@@ -96,9 +96,6 @@ public class ButtonHandler : object_base {
 			triggerObj=GameObject.Find (trigger);
 		}
 		ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
-		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-	//	UILabel ml =objInt.getMessageLog();
-		//StringController Sc = objInt.getStringController();
 		ml.text =playerUW.StringControl.GetFormattedObjectNameUW(objInt);
 		if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
 			{
@@ -113,23 +110,6 @@ public class ButtonHandler : object_base {
 		{
 			triggerObj=GameObject.Find (trigger);
 		}
-		//if ((player!=null) && (playerUW==null))
-		//{
-		//	playerUW=player.GetComponent<UWCharacter>();
-		//}
-
-		//float distance;
-		//distance =Vector3.Distance(transform.position,player.transform.position);
-		//if (distance<=playerUW.useRange)
-		//{
-		//MessageLog.text = "You use a " + name;
-		//ObjectVariables targetvars = triggerObj.GetComponent<ObjectVariables>();
-		//targetvars.triggerX=triggerX;
-		//targetvars.triggerY=triggerY;
-		//targetvars.state=Var.state;
-
-		//triggerObj.SendMessage ("Activate");//TODO:Test using a direct call to objectinteracion here?
-
 
 		triggerObj.GetComponent<trigger_base>().state=state;
 		triggerObj.GetComponent<trigger_base>().Activate();
@@ -142,8 +122,6 @@ public class ButtonHandler : object_base {
 		{
 			state++;
 		}
-
-		//state=Var.state;
 		if (isRotarySwitch ==false)
 		{
 			if (isOn==false)
@@ -170,8 +148,6 @@ public class ButtonHandler : object_base {
 
 		if (SpriteName!="")
 		{
-			//Debug.Log (this.name+ ":setting sprite " + SpriteName);
-			//Sprite image = 
 			ButtonSprite.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
 		}
 

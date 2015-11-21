@@ -2,11 +2,16 @@
 using System.Collections;
 
 public class a_damage_trap : trap_base {
-	//0180  a_damage trap
-	//	player vitality is decreased; number of hit points are in "quality"
-	//	field; if the "owner" field is != 0, the hit points are added
-	//	instead. the trap is only set of when a random value [0..10] is >= 7.
+	/*
+Per uw-formats.txt
+	0180  a_damage trap
+	player vitality is decreased; number of hit points are in "quality"
+	field; if the "owner" field is != 0, the hit points are added
+	instead. the trap is only set of when a random value [0..10] is >= 7.
 
+Examples of usage
+Ironwits maze on Level2 (rotworm area)
+*/
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
@@ -18,7 +23,14 @@ public class a_damage_trap : trap_base {
 			}
 			else
 			{
-				playerUW.CurVIT= playerUW.CurVIT+objInt.Quality;
+				if (playerUW.CurVIT+objInt.Quality > playerUW.MaxVIT)
+				{
+					playerUW.CurVIT=playerUW.MaxVIT;
+				}
+				else
+				{
+					playerUW.CurVIT= playerUW.CurVIT+objInt.Quality;
+				}
 			}
 		}
 	}

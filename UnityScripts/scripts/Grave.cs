@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Grave : object_base {
+	/*Code for gravestones*/
 	public int GraveID;
 
 

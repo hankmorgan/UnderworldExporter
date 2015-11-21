@@ -43,35 +43,8 @@ public class GoblinAI : MonoBehaviour {
 	public int AnimRange=1;//Multiple of 10 for dividing animations
 	public string NPC_ID;
 	public string CurrentAnim;
-	//public bool isDead=false;
-	//public bool isHostile=false;
-	//public int HP;
 
 	public static TileMap tm;
-//	private AIRig ai;
-	//public string Idle_Front;
-	//public string Idle_Rear;
-	//public string Idle_Right;
-	//public string Idle_Left;
-	//public string Idle_Front_Right;
-	//public string Idle_Front_Left;
-	//public string Idle_Rear_Right;
-	//public string Idle_Rear_Left;
-	//public string Walking_Front;
-	//public string Walking_Rear;
-	//public string Walking_Right;
-	//public string Walking_Left;
-	//public string Walking_Front_Right;
-	//public string Walking_Front_Left;
-	//public string Walking_Rear_Right;
-	//public string Walking_Rear_Left;
-	//public string idle_combat;
-	//public string attack_bash;
-	//public string attack_slash;
-	//public string attack_thrust;
-	//public string attack_secondary;
-	//public string death;
-	//public string begin_combat;//?
 
 	private UILabel MessageLog;
 	private NavMeshAgent agent;
@@ -87,7 +60,6 @@ public class GoblinAI : MonoBehaviour {
 	private int CalcedFacing;
 
 	private int currentHeading;//Integer representation of the current facing of the character. To match with animation angles
-	//public int OriginalCalcedFacing;
 
 	private Vector3 direction;	//vector between the player and the ai.
 	float angle;// The angle to the character from the player.
@@ -98,47 +70,16 @@ public class GoblinAI : MonoBehaviour {
 	void Awake () {
 		oldNPC_ID=NPC_ID;
 		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		//MessageLog.text="StartUp";
-		//GameObject targetPoint = GameObject.Find ("a_goblin_52_59_00_0202");
 		agent = GetComponent<NavMeshAgent>();
-		//player = GameObject.Find ("Gronk");
-		//var agent: NavMeshAgent GetComponent.<NavMeshAgent>();
-		//anim = GameObject.Find (name + "_Animation").GetComponent<Animator>();
-		//anim = (Animator)transform.FindChild (name + "_Sprite").GetComponent<Animator>();
-		//anim = GameObject.Find (name + "_sprite").GetComponent<Animator>();
-		//anim = GetComponentInChildren<Animator>();
 		anim=GetComponentInChildren<Animator>();
-	//	ai = GetComponentInChildren<AIRig>();
-	//	if (ai != null)
-	//	{
-			//Debug.Log ("init ai");
-	//		ai.AI.Body=this.gameObject;
-	//		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",player);
-			//ai.AI.WorkingMemory.SetItem<Vector3>("moveStartPoint",player.transform.position);
-	//	}
-
 	}
-
-
-
-	//void ApplyDamage()
-	//{
-
-	//	playAnimation(NPC_ID+"_death",100);
-		//isDead=true;
-	//}
 
 	public void ExecuteAttack()
 	{
 		float weaponRange=1.0f;
-		//CapsuleCollider bx = this.GetComponent<CapsuleCollider>();
-		//bx.enabled=false;
-		//Ray ray = new Ray(this.transform.position+Vector3.up*1.0f,Vector3.forward); 
-		//Ray ray = new Ray(this.transform.position+Vector3.up*0.5f,this.transform.TransformDirection(Vector3.forward)); 
 		Ray ray= new Ray(this.transform.position,player.transform.position-this.transform.position);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
-			//if (Physics.Raycast (transform.position,transform.TransformDirection(Vector3.forward),out hit))
 		{
 			if (hit.transform.Equals(this.transform))
 			{
@@ -146,69 +87,32 @@ public class GoblinAI : MonoBehaviour {
 			}
 			else
 			{
-				//Debug.Log (this.name + "has hit " + hit.transform.name);
 				if (hit.transform.name == "Gronk")
 				{
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
 					UWCharacter playerUW =hit.transform.GetComponent<UWCharacter>();
 					playerUW.ApplyDamage(5);
 				}
-				//hit.transform.SendMessage("ApplyDamage");
-				//Destroy(hit.collider.gameObject);
 			}
-			
 		}
-		else
-		{
-			Debug.Log ("MISS");
-		}
-		//bx.enabled=true;
+		//else
+		//{
+		//	Debug.Log ("MISS");
+		//}
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		//if (ai == null)
-		//{
-		//	ai = GetComponentInChildren<AIRig>();
-		//}
-		//else
-		//{
-			//ai.AI.IsActive= Vector3.Distance(this.transform.position, player.transform.position)<10;
-			//if (ai.AI.IsActive)
-			//{
-				//ai.AI.WorkingMemory.SetItem<bool>("isHostile",isHostile);
-				//ai.AI.WorkingMemory.SetItem<int>("HP",HP);
-			//}
-		//}
-
 		if (anim == null)
 		{
 			anim = GetComponentInChildren<Animator>();
 		}
-
-	//if (isDead==true)
-	//	{
-	//		return;
-	//	}
-		//float angle = Quaternion.Angle(transform.rotation, player.transform.rotation);
-		//if (followPlayer==true)
-		//{
-		//	//Vector3 target = player.transform.position;
-		//	agent.SetDestination(player.transform.position);
-		//}
 		if (NPC_ID!=oldNPC_ID)
 		{
 			currentState=-1;
 			oldNPC_ID=NPC_ID;
 		}
-		//if (executeAttack==true)
-		//{
-		//	AnimRange=1000;
-		//	ExecuteAttack();
-		//	executeAttack=false;
-		//}
-
 		direction = player.transform.position - this.gameObject.transform.position;
 		angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
 
@@ -217,13 +121,11 @@ public class GoblinAI : MonoBehaviour {
 		facingIndex = facing(angle);
 		if ((PreviousFacing!=facingIndex) && (AnimRange!=PreviousAnimRange))
 		{
-			//Debug.Log (facingIndex-1);
 			PreviousFacing=facingIndex;
 			PreviousAnimRange=AnimRange;
 		}
 
 		CalcedFacing=facingIndex + currentHeading;
-		//OriginalCalcedFacing=CalcedFacing;
 		if (CalcedFacing>=8)
 		{
 			CalcedFacing=CalcedFacing-8;
@@ -234,19 +136,16 @@ public class GoblinAI : MonoBehaviour {
 		}
 		if (CalcedFacing<0)
 		{
-			//Debug.Log ("less than zero");
 			CalcedFacing=8+CalcedFacing;
 		}
 		else if (CalcedFacing>7)
 		{
-			//Debug.Log ("more than zero");
 			CalcedFacing=8-CalcedFacing;
 		}
 
-		//Debug.Log (facingIndex);
-		//print (angle);
+
 		CalcedFacing=(CalcedFacing+1)*AnimRange;
-		//Debug.Log (CalcedFacing);
+
 		switch (CalcedFacing)
 		{
 		case AI_ANIM_IDLE_FRONT:
@@ -332,26 +231,18 @@ public class GoblinAI : MonoBehaviour {
 		default://special non angled states
 			{
 			switch(AnimRange)
-			{
-			case AI_ANIM_DEATH:
-				{playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;}
-			case AI_ANIM_ATTACK_BASH:
-				{playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;}
-			case AI_ANIM_ATTACK_SLASH:
-				playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);break;
-			case AI_ANIM_ATTACK_THRUST:
-				playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);break;
-			case AI_ANIM_COMBAT_IDLE:
-				playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
-			}
-		/*	if (AnimRange==  AI_ANIM_DEATH)//Dying
-				{playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);}
-			if (AnimRange==  AI_ANIM_ATTACK_BASH)//combat
-				{playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);}
-			if (AnimRange==  AI_ANIM_ATTACK_SLASH)//combat
-				{playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);}
-			if (AnimRange==  AI_ANIM_ATTACK_THRUST)//combat
-				{playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);}*/
+				{
+				case AI_ANIM_DEATH:
+					{playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;}
+				case AI_ANIM_ATTACK_BASH:
+					{playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;}
+				case AI_ANIM_ATTACK_SLASH:
+					playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);break;
+				case AI_ANIM_ATTACK_THRUST:
+					playAnimation (NPC_ID +"_attack_thrust",AI_ANIM_ATTACK_THRUST);break;
+				case AI_ANIM_COMBAT_IDLE:
+					playAnimation (NPC_ID +"_combat_idle",AI_ANIM_COMBAT_IDLE);break;
+				}
 			}
 			break;
 		}
@@ -361,18 +252,10 @@ public class GoblinAI : MonoBehaviour {
 	{
 		if (newState!=currentState)
 		{
-			//MessageLog.text= name + "Playing anim:" + pAnim;
 			currentState=newState;
-			//MessageLog.text= name + "Playing anim:" + anim.animation.isPlaying;
-			//Debug.Log (pAnim);
 			CurrentAnim=pAnim;
 			anim.Play(pAnim);
-
-
-
-			//print(pAnim);
 		}
-		//currentState=newState;
 	}
 
 
@@ -437,35 +320,4 @@ public class GoblinAI : MonoBehaviour {
 			}
 		}
 	}
-
-/*	void OnMouseDown()
-	{*/
-		//return;
-/*		switch (UWCharacter.InteractionMode)
-		{
-		case UWCharacter.InteractionModeOptions://Options
-			MessageLog.text = "Nothing will happen in options mode " + name;
-			break;
-		case UWCharacter.InteractionModeTalk://Talk
-			MessageLog.text = "You can't talk to " + name;
-			AnimRange=1000;
-			break;
-		case UWCharacter.InteractionModePickup://Pickup
-			MessageLog.text = "You pick up a " + name;
-			break;
-		case UWCharacter.InteractionModeLook://Look
-			MessageLog.text = "You see a " + name;
-			AnimRange=1;
-			break;
-		case UWCharacter.InteractionModeAttack://Attack
-			MessageLog.text = "You attack a " + name;
-			//followPlayer=true;
-			AnimRange=100;
-			break;
-		case UWCharacter.InteractionModeUse://Use
-			MessageLog.text = "You use a " + name;
-			AnimRange=10;
-			break;
-		}*/
-/*	}*/
 }

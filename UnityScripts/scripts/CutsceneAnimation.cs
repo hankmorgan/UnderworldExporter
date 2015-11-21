@@ -2,19 +2,19 @@
 using System.Collections;
 
 public class CutsceneAnimation : HudAnimation {
+	/*Gui element for the small window animations*/
 
+	/*Is also responsible for calling the resurrection sequence in UW1*/
 
 	public Camera maincam;
 
 	public void PreAnimPlay()
-	{//Called by events in certain animations
-		//Debug.Log("Preanim");
-		//maincam.enabled=false;
+	{//Called by events in certain animations when starting playing
 		return;
-	}
+	} 
 	
 	public void PostAnimPlay()
-	{//Called by events in certain animations
+	{//Called by events in certain animations when finished playing
 
 		switch (SetAnimation)
 		{
@@ -22,7 +22,6 @@ public class CutsceneAnimation : HudAnimation {
 			MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
 			if (mus!=null)
 			{
-				UWCharacter playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 				playerUW.CurVIT=playerUW.MaxVIT;
 				mus.Death=false;
 				mus.Combat=false;
@@ -35,16 +34,9 @@ public class CutsceneAnimation : HudAnimation {
 
 		case "Death"://Forever
 			SetAnimation= "Death_Final";
-			//maincam.enabled=true;
-			//TODO:Switch animation to repeating final skull
-			//SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 		case "Death_Final"://Forever
-			//maincam.enabled=true;
-			//TODO:Switch animation to repeating final skull
-			//SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
-
 		default:
 			maincam.enabled=true;
 			SetAnimation= "Anim_Base";//Clears out the animation.

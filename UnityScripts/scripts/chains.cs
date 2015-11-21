@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class chains : GuiBase {
+	/*GUI Element for switching panel displays but also controls which other GUI elements are displayed.*/
 	public static int ActiveControl;
 	public static int setControl=-1;
 

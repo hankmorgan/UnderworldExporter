@@ -2,12 +2,19 @@
 using System.Collections;
 
 public class a_create_object_trap : trap_base {
-	//0187  a_create object trap
-	//	creates a new object using the object referenced by the "quantity"
-	//		field as a template. the object is created only when a random number
-	//		between 0 and 3f is greater than the "quality" field value.
+/*
+Per uw-formats.txt
+	0187  a_create object trap
+	creates a new object using the object referenced by the "quantity"
+	field as a template. the object is created only when a random number
+	between 0 and 3f is greater than the "quality" field value.
+	
+Typically the object is stored off map in the room at 99,99 and cloned from there
+Examples of usage
+Level 1 at the north end of the level near the staircase. Two goblins will spawn when the player steps on the move triggers in that area
+*/
 
-	private bool TrapFired=false;
+	//private bool TrapFired=false;
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
@@ -18,7 +25,7 @@ public class a_create_object_trap : trap_base {
 			{
 				GameObject cloneObj = Instantiate(objToClone);
 				cloneObj.transform.position = this.gameObject.transform.position;
-				TrapFired=true;
+				//TrapFired=true;
 			}
 		}
 	}
@@ -28,10 +35,8 @@ public class a_create_object_trap : trap_base {
 		//Do what it needs to do.
 		ExecuteTrap(triggerX,triggerY, State);
 
-		//It's link is the object it is creating so no activation.
+		//It's link is the object it is creating so no activation of more traps/triggers
 		PostActivate();
 		return true;
-
 	}
-
 }

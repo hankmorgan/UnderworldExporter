@@ -3,10 +3,9 @@ using System.Collections;
 
 public class Compass : GuiBase {
 
+	//Updates the compass display based on the characters heading.
+
 	private int PreviousHeading=-1;
-
-	//public static UWCharacter playerUW;
-
 	public const int NORTH = 0;
 	public const int NORTHNORTHEAST = 1;
 	public const int NORTHEAST = 2;
@@ -42,7 +41,6 @@ public class Compass : GuiBase {
 	
 	// Update is called once per frame
 	void Update () {
-	//TODO:Stop reloading the textures each time!
 		if (PreviousHeading!=playerUW.currentHeading)
 		{
 			UpdateNorthIndicator();

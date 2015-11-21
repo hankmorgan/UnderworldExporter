@@ -2,18 +2,10 @@
 using System.Collections;
 
 public class a_door_trap : trap_base {
-	
-	//private GameObject triggerObj;
-	//private ObjectVariables Var;
-	//private UILabel MessageLog;
-	//public int quality;
+/*
+Opens the door that is in the targeted tile.
+ */
 
-	// Use this for initialization
-	//void Start () {
-	//	MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-	//	Var=GetComponent<ObjectVariables>();
-	//}
-	//
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
@@ -43,13 +35,4 @@ public class a_door_trap : trap_base {
 		}
 
 	}
-
-//	public override bool Activate (int triggerX, int triggerY)
-	//{
-
-
-	//	GameObject triggerObj=GameObject.Find (TriggerObject);
-
-
-	//}
 }
