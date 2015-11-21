@@ -1744,6 +1744,7 @@ int target;
 				break;
 			case  A_DELETE_OBJECT_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_delete_object_trap(myObj);");
+				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 				break;
 			case  AN_INVENTORY_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_an_inventory_trap(myObj);");
@@ -1773,9 +1774,10 @@ int target;
 		{
 		switch (objectMasters[objList[currobj.link].item_id].type)
 			{
-				case A_DELETE_OBJECT_TRAP:	//Need to stop on this due to infinite loops if the trigger object is being deleted.
+				
 				case LOCK://A lock uses it's link to set the key needed. stop here.
-					break;
+				//	break;
+				case A_DELETE_OBJECT_TRAP:	//Need to stop on this due to infinite loops if the trigger object is being deleted.
 				default:
 					fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 			}

@@ -1599,7 +1599,7 @@ void writeTGA(unsigned char *bits, long Start, long SizeH, long SizeV, int index
 	FILE *fptr;
 	char outFile[255];
 
-	sprintf_s(outFile, 255, "%s_%03d.tga", OutFileName, index);
+	sprintf_s(outFile, 255, "%s_%04d.tga", OutFileName, index);
 	//stbi_write_tga(outFile, SizeH, SizeH, Alpha, bits + Start);
 	//return;
 	/* Write the result as a uncompressed TGA */
@@ -2362,7 +2362,7 @@ void extractAllCrittersUW1(char fileAssoc[255], char CritPath[255], char Palette
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(fileAssoc, "rb")) == NULL)
 		{
-		fprintf(LOGFILE, "\n//Archive not found!\n");
+		fprintf(LOGFILE, "\n//ExtractAllCrittersUW1 : Archive not found!\n");
 		return;
 		}
 	fileSize = getFileSize(file);
@@ -2409,7 +2409,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(fileAssoc, "rb")) == NULL)
 		{
-		fprintf(LOGFILE, "\nArchive not found!\n");
+		fprintf(LOGFILE, "\nExtractAllCrittersUW2 : Archive not found!\n");
 		return;
 		}
 	fileSize = getFileSize(file);

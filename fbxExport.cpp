@@ -4879,7 +4879,8 @@ void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64
 						}
 					else
 						{
-						t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+						//t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+						t.floorTexture = objList[k].texture;
 						}
 					t.shockCeilingTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].shockCeilingTexture;
 					t.wallTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].wallTexture;

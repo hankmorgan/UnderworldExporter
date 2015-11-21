@@ -11,27 +11,29 @@ Per uw-formats.txt
 
 Examples of usage
 Ironwits maze on Level2 (rotworm area)
+
+//UPDATE
+It appears the above may be wrong?
+owner = 0 damage trap
+owner != 0 poison trap
 */
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		if (Random.Range(0,11) >= 7)
+
+		if (objInt.Owner ==0)
 		{
-			if (objInt.Owner ==0)
+			if (Random.Range(0,11) >= 7)
 			{
 				playerUW.CurVIT= playerUW.CurVIT- objInt.Quality;
 			}
-			else
+		}
+		else//poison version
+		{
+			if (playerUW.Poisoned==false)
 			{
-				if (playerUW.CurVIT+objInt.Quality > playerUW.MaxVIT)
-				{
-					playerUW.CurVIT=playerUW.MaxVIT;
-				}
-				else
-				{
-					playerUW.CurVIT= playerUW.CurVIT+objInt.Quality;
-				}
-			}
+				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,SpellEffect.UW1_Spell_Effect_Poison);
+			}		
 		}
 	}
 }

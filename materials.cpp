@@ -738,7 +738,7 @@ void ExportModelFormat()
 
 	if ((file = fopen(SHOCK_MODEL_FILE, "rb")) == NULL)
 	{
-		printf("\nArchive not found!\n");
+		printf("\nExport Model Format - Archive not found!\n");
 		return;
 	}
 	long fileSize = getFileSize(file);

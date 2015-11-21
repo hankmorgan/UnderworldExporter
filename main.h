@@ -60,7 +60,7 @@
 #define ENABLE_LIGHTING 1
 #define ENABLE_WATER 1
 
-#define GREYSCALE 1
+#define GREYSCALE 0
 
 /*Globals*/
 extern int BrushSizeX;

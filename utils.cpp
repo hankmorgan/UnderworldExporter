@@ -722,7 +722,7 @@ void RepackShock(char InputFile[255], char OutputFile[255])
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(InputFile, "rb")) == NULL)
 	{
-		printf("\nArchive not found!\n");
+		printf("\nRepackShock - Archive not found!\n");
 		return;
 	}
 	long fileSize = getFileSize(file);
@@ -900,7 +900,7 @@ void RepackShock(char InputFile[255], char OutputFile[255])
 	//*file = NULL;      // File pointer
 	if ((file = fopen(OutputFile, "rb")) == NULL)
 	{
-		printf("\nArchive not found!\n");
+		printf("\nRepackShock - Archive not found!\n");
 		return;
 	}
 	fileSize = getFileSize(file);
@@ -954,7 +954,7 @@ unsigned char *terraindat;
 			{
 			if ((file = fopen(UW1_TERRAIN_PROPS, "rb")) == NULL)
 				{
-				printf("\nArchive not found!\n");
+				printf("\nParseTerrainProperties UW1 - Archive not found!\n");
 				return;
 				}
 			break;
@@ -963,7 +963,7 @@ unsigned char *terraindat;
 			{
 			if ((file = fopen(UW2_TERRAIN_PROPS, "rb")) == NULL)
 				{
-					printf("\nArchive not found!\n");
+					printf("\nParseTerrainProperties UW2 - Archive not found!\n");
 					return;
 				}
 			break;

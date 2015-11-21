@@ -84,7 +84,7 @@ public class TMAP : object_base {
 			    (objIntTrigger.ItemType==ObjectInteraction.A_USE_TRIGGER)
 			    )
 				{
-				objIntTrigger.Use ();
+				objIntTrigger.GetComponent<trigger_base> ().Activate();
 				return true;
 				}
 

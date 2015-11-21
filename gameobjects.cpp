@@ -259,7 +259,7 @@ int ObjectSubClassIndex;
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(filePath, "rb")) == NULL)
 		{
-		fprintf(LOGFILE,"\nArchive not found!\n");
+		fprintf(LOGFILE,"\nBuildObjectListShock - Archive not found!\n");
 		return;
 		}
 	long fileSize = getFileSize(file);
@@ -501,9 +501,6 @@ void BuildObjectListUW(tile LevelInfo[64][64], ObjectItem objList[1600],long tex
 	long AddressOfBlockStart;
 	long objectsAddress;
 	long address_pointer;
-	//int x;	
-
-
 
 switch (game)
 	{
@@ -689,7 +686,7 @@ switch (game)
 					if (game == UW1)
 						{
 //TODO:Test this further
-						int textureIndex;
+						/*int textureIndex;
 						if (objList[x].quality > 15)
 							{
 							textureIndex= 48 + (objList[x].quality >> 2);
@@ -697,10 +694,19 @@ switch (game)
 						else
 							{
 							textureIndex = 48 + (objList[x].quality >> 1);
+							
 							}
+		
+						objList[x].texture = textureIndex;// texture_map[textureIndex];
+*/
 
+						int textureQuality = (objList[x].quality >>1) & 0xf;
+						if (textureQuality >= 10)
+							{
+							textureQuality=textureQuality-10;
+							}
+						objList[x].texture = texture_map[(textureQuality)+48];
 
-						objList[x].texture = texture_map[textureIndex];
 						}					
 					}
 

@@ -187,6 +187,11 @@ public class NPC : object_base {
 				//Camera.main.enabled = false;
 				StartCoroutine(x.main ());
 			}
+			else
+			{
+				chains.ActiveControl=0;//Enable UI Elements
+				chains.Refresh();
+			}
 		}
 		return true;
 	}

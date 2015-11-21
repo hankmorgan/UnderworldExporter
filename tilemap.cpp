@@ -738,7 +738,7 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 	FILE *file = NULL;      // File pointer
 	if ((file = fopen(filePath, "rb")) == NULL)
 		{
-		fprintf(LOGFILE,"\nArchive not found!\n");
+		fprintf(LOGFILE,"\nBuildTileMapSHock - Archive not found!\n");
 		return -1;
 		}
 	long fileSize = getFileSize(file);

@@ -30,4 +30,13 @@ public class a_set_variable_trap : trap_base {
 	largest variable index in uw1 is 0x33, the only bit modified in uw1
 	is bit 7 of the bit field
 */
+	public int zpos;
+
+
+	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	{
+
+		return;
+	
+	}
 }

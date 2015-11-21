@@ -19,9 +19,8 @@ public class GameWorldController : MonoBehaviour {
 	public int LevelNo;
 	public Texture2D[] paletteArray= new Texture2D[8];
 	public int paletteIndex=0;
-	//private Material mattToChange;
+	public int[] variables = new int[32];//Variables for the check/set variable traps
 	private bool Test;
-	// Use this for initialization
 
 	public MeshRenderer ceil;
 
