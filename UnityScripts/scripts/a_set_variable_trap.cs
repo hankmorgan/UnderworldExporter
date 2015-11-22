@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_set_variable_trap : trap_base {
+public class a_set_variable_trap : a_variable_trap {
 	/*
 018d  a_set variable trap
 	sets a game variable; fields "quality", "owner" and "ypos" are
@@ -30,13 +30,71 @@ public class a_set_variable_trap : trap_base {
 	largest variable index in uw1 is 0x33, the only bit modified in uw1
 	is bit 7 of the bit field
 */
-	public int zpos;
+
 
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		if (VariableIndex!=0)
+		{//Variable Operations
+			//Debug.Log ("Variable " + VariableIndex + " op(" + heading + ") = " + GameWorldController.instance.variables[VariableIndex] );
+			switch(heading)
+			{
+			case 0://Add
+				GameWorldController.instance.variables[VariableIndex] += VariableValue;
+				break;
+			case 1://Sub
+				GameWorldController.instance.variables[VariableIndex] -= VariableValue;
+				break;
+			case 2://Set
+				GameWorldController.instance.variables[VariableIndex] = VariableValue;
+				break;
+			case 3://AND
+				GameWorldController.instance.variables[VariableIndex] &= VariableValue;
+				break;
+			case 4://OR
+				GameWorldController.instance.variables[VariableIndex] |= VariableValue;
+				break;
+			case 5://XOR
+				GameWorldController.instance.variables[VariableIndex] ^= VariableValue;
+				break;
+			case 6://Shift left
+				//	fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);
+				//GameWorldController.instance.variables[VariableIndex] = GameWorldController.instance.variables[VariableIndex]<<VariableValue);
+				GameWorldController.instance.variables[VariableIndex] =	GameWorldController.instance.variables[VariableIndex] * (2*VariableValue) & 63;
 
-		return;
-	
+				break;
+
+			}
+			Debug.Log ("Variable " + VariableIndex + " now =" + GameWorldController.instance.variables[VariableIndex] );
+		}
+		else
+		{//Bitwise operations on bitfield
+			Debug.Log("Bitwise set variable");
+			switch(heading)
+			{
+			case 0://Set
+				
+				break;
+			case 1://Clear
+				
+				break;
+			case 2://Set
+				
+				break;
+			case 3://Set
+				
+				break;
+			case 4://Set
+				
+				break;
+			case 5://Flip
+				
+				break;
+			case 6://Set
+				
+				break;
+			}
+		}	
 	}
 }

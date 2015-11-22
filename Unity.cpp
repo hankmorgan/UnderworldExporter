@@ -184,10 +184,10 @@ void RenderUnityEntityMoonstone(int game, float x, float y, float z, ObjectItem 
 	fprintf(UNITY_FILE, "\n\tAddMoonstone(myObj);");
 	}
 
-void RenderUnityEntityRefillableLantern(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-	{
-	fprintf(UNITY_FILE, "\n\tAddRefillableLantern(myObj);");
-	}
+//void RenderUnityEntityRefillableLantern(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+//	{
+//	fprintf(UNITY_FILE, "\n\tAddRefillableLantern(myObj);");
+//	}
 
 void RenderUnityEntityWand(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
@@ -1750,10 +1750,10 @@ int target;
 				fprintf(UNITY_FILE, "\n\tCreate_an_inventory_trap(myObj);");
 				break;
 			case  A_SET_VARIABLE_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_set_variable_trap(myObj);");
+				fprintf(UNITY_FILE, "\n\tCreate_a_set_variable_trap(myObj,%d,%d,%d);", currobj.zpos, (((currobj.owner & 0x7) << 3) | (currobj.y)), currobj.heading/45);
 				break;
 			case  A_CHECK_VARIABLE_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_check_variable_trap(myObj);");
+				fprintf(UNITY_FILE, "\n\tCreate_a_check_variable_trap(myObj,%d,%d,%d,%d);", currobj.zpos, currobj.x, (((currobj.owner & 0x7) << 3) | (currobj.y)),currobj.heading/45);
 				break;
 			case  A_COMBINATION_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_combination_trap(myObj);");
@@ -1964,6 +1964,7 @@ return;
 							RenderUnityEntityShield(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case TORCH:
+						case REFILLABLE_LANTERN:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
@@ -2039,12 +2040,6 @@ return;
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityOil(game, x, y, z, currobj, objList, LevelInfo);
-							break;
-						case REFILLABLE_LANTERN:
-							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
-							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-							RenderUnityEntityRefillableLantern(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case WAND:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);

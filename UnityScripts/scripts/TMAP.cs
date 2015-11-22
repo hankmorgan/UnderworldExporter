@@ -78,16 +78,19 @@ public class TMAP : object_base {
 	{
 		if (trigger != "")
 		{
-			ObjectInteraction objIntTrigger = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
-			if ( (objIntTrigger.ItemType==ObjectInteraction.A_LOOK_TRIGGER)
-			    || 
-			    (objIntTrigger.ItemType==ObjectInteraction.A_USE_TRIGGER)
-			    )
+			GameObject triggerObj = GameObject.Find (trigger);
+			if (triggerObj!=null)
 				{
-				objIntTrigger.GetComponent<trigger_base> ().Activate();
-				return true;
+				ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
+				if ( (objIntTrigger.ItemType==ObjectInteraction.A_LOOK_TRIGGER)
+				    || 
+				    (objIntTrigger.ItemType==ObjectInteraction.A_USE_TRIGGER)
+				    )
+					{
+						objIntTrigger.GetComponent<trigger_base> ().Activate();
+						return true;
+					}
 				}
-
 		}
 		ml.text= playerUW.StringControl.TextureDescription(TextureIndex);
 		return true;
@@ -100,8 +103,12 @@ public class TMAP : object_base {
 		{
 			if (trigger != "")
 			{
-				ObjectInteraction triggerInt = GameObject.Find (trigger).GetComponent<ObjectInteraction>();
-				triggerInt.Use();
+				GameObject triggerObj = GameObject.Find (trigger);
+				if (triggerObj!=null)
+				{
+					ObjectInteraction triggerInt = triggerObj.GetComponent<ObjectInteraction>();
+					triggerInt.Use();
+				}
 			}
 			return true;
 		}

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class a_check_variable_trap :trap_base {
+public class a_check_variable_trap :a_variable_trap {
+	public int xpos;
 	/*
 	 * Per uw-formats.txt
   018e  a_check variable trap
@@ -37,4 +38,49 @@ the left, right, center button combination on Level3.
 
 */
 
+	public override void ExecuteTrap (int triggerX, int triggerY, int State)
+	{
+		if (check_variable_trap())
+		{
+			TriggerNext(triggerX,triggerY,State);
+		}
+	}
+
+	public override bool Activate (int triggerX, int triggerY, int State)
+	{
+		CheckReferences();
+		//Do what it needs to do.
+		ExecuteTrap(triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
+
+		//Stuff to happen after the trap has fired.
+		PostActivate();
+		return true;
+	}
+
+
+	bool check_variable_trap()
+	{//TODO: this is a guess
+
+		if (heading!=0)
+			{
+				int cmp = 0;
+				for(int i=VariableIndex; i<VariableIndex+heading; i++)
+				{
+					if (xpos != 0)
+						cmp += GameWorldController.instance.variables[i];
+					else
+					{
+						cmp <<= 3;
+						cmp |= GameWorldController.instance.variables[VariableIndex]  & 7;
+					}
+				}
+				
+				return cmp == VariableValue;
+				
+			}
+		else
+			{//Is this right?
+				return VariableValue==GameWorldController.instance.variables[VariableIndex];
+			}
+		}
 }

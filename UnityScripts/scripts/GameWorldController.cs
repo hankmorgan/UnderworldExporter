@@ -19,7 +19,7 @@ public class GameWorldController : MonoBehaviour {
 	public int LevelNo;
 	public Texture2D[] paletteArray= new Texture2D[8];
 	public int paletteIndex=0;
-	public int[] variables = new int[32];//Variables for the check/set variable traps
+	public int[] variables = new int[127];//Variables for the check/set variable traps
 	private bool Test;
 
 	public MeshRenderer ceil;
