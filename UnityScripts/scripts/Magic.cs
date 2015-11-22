@@ -1491,6 +1491,19 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt02:
 		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt03:
 		case SpellEffect.UW1_Spell_Effect_ManaBoost_alt04:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt04:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt01:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt02:
+		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt03:
+		case SpellEffect.UW1_Spell_Effect_RegainMana:
+		case SpellEffect.UW1_Spell_Effect_RegainMana_alt01:
+		case SpellEffect.UW1_Spell_Effect_RegainMana_alt02:
+		case SpellEffect.UW1_Spell_Effect_RegainMana_alt03:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt01:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
+		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
 			Cast_Mana(caster,10);
 			break;
 
@@ -1765,18 +1778,7 @@ public class Magic : MonoBehaviour {
 		
 		case SpellEffect.UW1_Spell_Effect_RuneofWarding:
 		case SpellEffect.UW1_Spell_Effect_SummonMonster:
-		case SpellEffect.UW1_Spell_Effect_IncreaseMana:
-		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt01:
-		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt02:
-		case SpellEffect.UW1_Spell_Effect_IncreaseMana_alt03:
-		case SpellEffect.UW1_Spell_Effect_RegainMana:
-		case SpellEffect.UW1_Spell_Effect_RegainMana_alt01:
-		case SpellEffect.UW1_Spell_Effect_RegainMana_alt02:
-		case SpellEffect.UW1_Spell_Effect_RegainMana_alt03:
-		case SpellEffect.UW1_Spell_Effect_RestoreMana:
-		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt01:
-		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
-		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
+
 		case SpellEffect.UW1_Spell_Effect_DetectMonster:
 		case SpellEffect.UW1_Spell_Effect_StrengthenDoor:
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap:
@@ -1841,7 +1843,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_MassParalyze:
 		case SpellEffect.UW1_Spell_Effect_Acid_alt01:
 		case SpellEffect.UW1_Spell_Effect_LocalTeleport_alt01:
-		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt04:
+		
 
 
 
