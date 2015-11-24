@@ -730,6 +730,7 @@ public class SpellEffect : MonoBehaviour {
 	//public int EffectIcon;//What image index should be used for the spell effect.
 	public int Value;//The value for the spell effect. Eg light intensity. The Damage over time etc
 	public bool Active;
+	public bool Permanent;
 	public static UWCharacter playerUW;
 
 	public int EffectIcon()
@@ -753,10 +754,7 @@ public class SpellEffect : MonoBehaviour {
 
 	public virtual void CancelEffect()
 	{//End the effect. By default it will destroy the object.
-		//Debug.Log ("Cancelling Effect");
 		Active=false;
-		//this.StopCoroutine(timer ());
-		//this.StopAllCoroutines();
 		Component.Destroy (this);
 	}
 
@@ -766,14 +764,14 @@ public class SpellEffect : MonoBehaviour {
 		StartCoroutine(timer());
 	}
 
-	public virtual IEnumerator timer() {
-		//bool Finished=false;
-
+	public IEnumerator timer() {
 		while (Active==true)
 		{
 			yield return new WaitForSeconds(10);
-			counter--;
-			//Debug.Log (counter);
+			if (!Permanent)
+			{
+				counter--;
+			}
 			if (counter<=0)
 			{
 				Active=false;
@@ -798,5 +796,10 @@ public class SpellEffect : MonoBehaviour {
 	{//Spell is: stable?
 		//Debug.Log ("getting desc");
 		return playerUW.StringControl.GetString (6,EffectId);
+	}
+
+	public void SetPermanent(bool NewVal)
+	{
+		Permanent=NewVal;
 	}
 }

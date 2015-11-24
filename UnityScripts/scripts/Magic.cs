@@ -1446,7 +1446,7 @@ public class Magic : MonoBehaviour {
 
 
 
-	public bool CastEnchantment(GameObject caster, int EffectId)
+	public SpellEffect CastEnchantment(GameObject caster, int EffectId)
 	{//Eventually casts spells from things like fountains, potions, enchanted weapons.
 		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 		//Returns true if the effect was applied. 
@@ -1455,6 +1455,7 @@ public class Magic : MonoBehaviour {
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		int ActiveArrayIndex=-1;
 		int PassiveArrayIndex=-1;
+		int SpellResultType= 0;//0=no spell effect, 1= passive spell effect, 2= active spell effect.
 		if (playerUW!=null)
 		{
 			ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
@@ -1484,6 +1485,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Heal_alt04:
 		case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt04:
 			Cast_Heal (caster,10);//Get seperate values;
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_ManaBoost:
@@ -1505,6 +1507,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
 		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
 			Cast_Mana(caster,10);
+			SpellResultType=0;
 			break;
 
 
@@ -1523,10 +1526,11 @@ public class Magic : MonoBehaviour {
 			if (PassiveArrayIndex!=-1)
 			{
 				Cast_Light(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5,10);
+				SpellResultType=1;
 			}
 			else
 			{
-				return false;
+				return null;
 			}
 
 			break;
@@ -1536,39 +1540,33 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Leap_alt02:
 			//TODO: Find out which one of these is a magic ring effect!
 			Cast_Leap(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5);
+			SpellResultType=2;
 			//To implement
 			break;
 		case SpellEffect.UW1_Spell_Effect_SlowFall:
 		case SpellEffect.UW1_Spell_Effect_SlowFall_alt01:
 		case SpellEffect.UW1_Spell_Effect_SlowFall_alt02:
-			//cast_RelDesPor(caster);
 			Cast_SlowFall(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5);
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectSlowFall>();
+			SpellResultType=2;
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_Levitate:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
-			//Debug.Log ("levitate enchantment");
 			Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
-			//Todo
+			SpellResultType=2;
 			break;
 		case SpellEffect.UW1_Spell_Effect_WaterWalk:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
-			//Debug.Log ("Waterwalk enchantment");
 			Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
-			//Todo
+			SpellResultType=2;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Fly:
 		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
 		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectFly>();
-			//Debug.Log ("Fly enchantment");
 			Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
-			//Todo
+			SpellResultType=2;
 			break;
 		case SpellEffect.UW1_Spell_Effect_ResistBlows:
 		case SpellEffect.UW1_Spell_Effect_ThickSkin:
@@ -1579,7 +1577,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_ResistBlows_alt02:
 		case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
 		case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
-		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistance>();
+			SpellResultType=0;
 			Debug.Log ("Resist damage enchantment");
 			//Todo
 			break;
@@ -1589,14 +1587,14 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
 		case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
 		case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
+			SpellResultType=0;
 			Debug.Log ("stealth enchantment");
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_Invisibilty:
 		case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
 		case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectInvisibility>();
+			SpellResultType=0;
 			Debug.Log ("Invisibilty enchantment");
 			//Todo
 			break;
@@ -1605,88 +1603,84 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
 		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt02:
 			Debug.Log ("Missile protection enchantment");
+			SpellResultType=0;
 			break;
 			//Flames
 		case SpellEffect.UW1_Spell_Effect_Flameproof:
 		case SpellEffect.UW1_Spell_Effect_Flameproof_alt01:
 		case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
 			Debug.Log ("Flameproof Enchantment");
+			SpellResultType=0;
 			break;
 			//Magic
 		case SpellEffect.UW1_Spell_Effect_MagicProtection:
 		case SpellEffect.UW1_Spell_Effect_GreaterMagicProtection:
 			Debug.Log ("Magic protection enchantment");
-			
-		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectResistanceAgainstType>();
-			//Todo
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_PoisonResistance:
 			Debug.Log ("Poison Resistance enchantment");
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectImmunityPoison>();
-			//Todo
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Speed:
 		case SpellEffect.UW1_Spell_Effect_Haste:
 			Debug.Log ("Speed enchantment");
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
-			//Todo
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Telekinesis:
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectTelekinesis>();
 			Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,2);
-			//Todo
+			SpellResultType=2;
 			break;
 		case SpellEffect.UW1_Spell_Effect_FreezeTime:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectFreezeTime>();
 			Debug.Log ("Freeze time enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Regeneration:
-		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationHealth>();
 			Debug.Log ("Regen enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_ManaRegeneration:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectRegenerationMana>();
 			Debug.Log ("mana regen enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_MazeNavigation:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectMazeNavigation>();
 			Debug.Log ("Maze Navigation enchantment");
+			SpellResultType=0;
 			break;			
 		case SpellEffect.UW1_Spell_Effect_Hallucination:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectHallucination>();
 			Debug.Log ("Hallucination");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_NightVision:
 		case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
 		case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectNightVision>();
 			Debug.Log ("Nightvision enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Poison:
 		case SpellEffect.UW1_Spell_Effect_Poison_alt01:
 		case SpellEffect.UW1_Spell_Effect_PoisonHidden:
-			//Debug.Log ("Poison enchantment");
 			Cast_Poison (caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10,100);
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectPoison>();
+			SpellResultType=1;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Paralyze:
 		case SpellEffect.UW1_Spell_Effect_Paralyze_alt01:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectParalyze>();
 			Debug.Log ("paralyse enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Ally:
 		case SpellEffect.UW1_Spell_Effect_Ally_alt01:
-		//	ActiveSpellArray[index]=caster.AddComponent<SpellEffectAlly>();
 			Debug.Log ("ally enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Confusion:
 		case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
 			Debug.Log ("Confusion enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
 		case SpellEffect.UW1_Spell_Effect_Accuracy:
@@ -1696,8 +1690,8 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_VeryGreatAccuracy:
 		case SpellEffect.UW1_Spell_Effect_TremendousAccuracy:
 		case SpellEffect.UW1_Spell_Effect_UnsurpassedAccuracy:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectAccuracy>();
 			Debug.Log ("accuracy enchantment");
+			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorDamage:
 		case SpellEffect.UW1_Spell_Effect_Damage:
@@ -1707,7 +1701,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_VeryGreatDamage:
 		case SpellEffect.UW1_Spell_Effect_TremendousDamage:
 		case SpellEffect.UW1_Spell_Effect_UnsurpassedDamage:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectDamage>();
+			SpellResultType=0;
 			Debug.Log ("damage enchantment");
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorProtection:
@@ -1718,7 +1712,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_VeryGreatProtection:
 		case SpellEffect.UW1_Spell_Effect_TremendousProtection:
 		case SpellEffect.UW1_Spell_Effect_UnsurpassedProtection:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectProtection>();
+			SpellResultType=0;
 			Debug.Log ("protection enchantment");
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorToughness:
@@ -1729,44 +1723,49 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_VeryGreatToughness:
 		case SpellEffect.UW1_Spell_Effect_TremendousToughness:
 		case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
-			//ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
+			SpellResultType=0;
 			Debug.Log ("toughness enchantment");
 			break;
 		
 		case SpellEffect.UW1_Spell_Effect_MagicArrow:
 		case SpellEffect.UW1_Spell_Effect_MagicArrow_alt01:
 			Cast_OrtJux(caster,true);
+			SpellResultType=0;
 			break;
-			/*No status spells*/
-		
+	
 		case SpellEffect.UW1_Spell_Effect_Open:
 		case SpellEffect.UW1_Spell_Effect_Open_alt01:
 			Cast_ExYlem(caster,true);
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_CreateFood:
 		case SpellEffect.UW1_Spell_Effect_CreateFood_alt01:
 			Cast_InManiYlem(caster);
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_CurePoison:
 		case SpellEffect.UW1_Spell_Effect_CurePoison_alt01:
 			Cast_AnNox(caster);
-			Debug.Log ("");
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_SheetLightning:
 			Cast_OrtGrav(caster, true);
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_Armageddon:
 		case SpellEffect.UW1_Spell_Effect_Armageddon_alt01:
 			Cast_VasKalCorp(caster);
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_GateTravel:
 		case SpellEffect.UW1_Spell_Effect_GateTravel_alt01:
 			Cast_VasRelPor(caster);
+			SpellResultType=0;
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
@@ -1843,20 +1842,37 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_MassParalyze:
 		case SpellEffect.UW1_Spell_Effect_Acid_alt01:
 		case SpellEffect.UW1_Spell_Effect_LocalTeleport_alt01:
-		
-
+			SpellResultType=0;
+			break;
 
 
 		default:
 			Debug.Log ("effect Id is " + EffectId);
+			SpellResultType=0;
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
 			break;
 			
 		}
+		//Return a reference to the spell effect. If any.
+		switch (SpellResultType)
+		{
+		case 0://No spell effect or unimplemented spell
+			return null;
+			break;
+		case 1://Passive spell effect
+			return playerUW.PassiveSpell[PassiveArrayIndex];
+			break;
+		case 2://Active spell effect
+			return playerUW.ActiveSpell[ActiveArrayIndex];
+			break;
+		default:
+			return null;
+			break;
+		}
 		
 		//ActiveSpellArray[index].EffectId=EffectId;
 		//return ActiveSpellArray[index];
-		return false;
+		//return null;
 	}
 
 

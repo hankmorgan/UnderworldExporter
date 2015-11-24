@@ -3,6 +3,11 @@ using System.Collections;
 
 public class Potion : enchantment_base {
 
+	public override bool Eat ()
+	{
+		return use();
+	}
+
 	public override bool use ()
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")

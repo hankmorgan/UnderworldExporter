@@ -104,6 +104,12 @@ public class object_base : MonoBehaviour {
 		return true;
 	}
 
+	public virtual bool Eat()
+	{
+		//For when the player tries to eat certain objects by dragging them on top of the paper doll face. For future use?
+		return false;
+	}
+
 	public virtual bool PickupEvent()
 	{//For special events when an object is picked up. Eg silver seed.
 		return false;

@@ -19,7 +19,7 @@ public class Food : object_base {
 	}
 
 
-	public bool Eat()
+	public override bool Eat()
 	{//TODO:Implement drag and drop feeding.
 
 		if (Nutrition+playerUW.FoodLevel>=255)

@@ -34,14 +34,21 @@ public class enchantment_base : object_base {
 	protected virtual int GetActualSpellIndex()
 	{
 		int index=objInt.Link-512;
-		if (index<63)
+		if ( objInt.ItemType != ObjectInteraction.RING)
 		{
-			return index+256;
+			if (index<63)
+			{
+				return index+256;
+			}
+			else
+			{
+				return index+144;
+			}		
 		}
 		else
 		{
-			return index+144;
-		}		
+			return index;
+		}
 	}
 
 
