@@ -115,6 +115,14 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 		}
 	}
 
+void RenderUnityEntityA_PICK_UP_TRIGGER(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
+	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\tCreate_A_PICK_UP_TRIGGER(myObj,%d,%d,\"%s\");", currobj.quality, currobj.owner, UniqueObjectName(objList[currobj.link]));//set the trigger here
+	}
+
 void RenderUnityEntityBase(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 //Adds an obj_base to the object.
@@ -184,6 +192,16 @@ void RenderUnityEntityMoonstone(int game, float x, float y, float z, ObjectItem 
 	fprintf(UNITY_FILE, "\n\tAddMoonstone(myObj);");
 	}
 
+void RenderUnityEntityLeech(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tAddLeech(myObj);");
+	}
+
+void RenderUnityEntityRing(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tAddRing(myObj);");
+	}
+
 //void RenderUnityEntityRefillableLantern(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 //	{
 //	fprintf(UNITY_FILE, "\n\tAddRefillableLantern(myObj);");
@@ -232,6 +250,11 @@ void CreateUnityScriptCall(int game, float x, float y, float z, ObjectItem &curr
 		if (currobj.link != 0)
 			{//Need to update max state on this
 			fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"%s\",%d,%d,%d,%d,%d);", UniqueObjectName(objList[currobj.link]), currobj.quality, currobj.owner, currobj.flags, 7, currobj.item_id);
+			}
+		else
+			{
+			fprintf(UNITY_FILE, "\n\tCreateUWActivators(myObj,\"ButtonHandler\",\"\",%d,%d,%d,%d,%d);", currobj.quality, currobj.owner, currobj.flags, 7, currobj.item_id);
+
 			}
 		}
 	else
@@ -1855,6 +1878,9 @@ return;
 						case A_MOVE_TRIGGER:
 							RenderUnityEntityA_MOVE_TRIGGER(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case A_PICK_UP_TRIGGER:
+							RenderUnityEntityA_PICK_UP_TRIGGER(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 						case A_TELEPORT_TRAP:	//a destination for a teleport.
 							RenderUnityEntityA_TELEPORT_TRAP(game, x, y, z, currobj, objList, LevelInfo);
 							break;
@@ -1976,6 +2002,12 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityWeapon(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case RING:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityRing(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 						case ANIMATION:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -2053,8 +2085,13 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityMoonstone(game, x, y, z, currobj, objList, LevelInfo);
 							break;
-//#define REFILLABLE_LANTERN 88
-//#define OIL 89
+						case LEECH:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityLeech(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);

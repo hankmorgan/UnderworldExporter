@@ -1274,14 +1274,20 @@ for (int x=0; x<64;x++)
 						ObjectItem tmpobj = objList[objList[nextObj].link];
 						while ((tmpobj.next != 0) && (tmpobj.tileX == 99))//If 99 already down and I'm need to break a loop.
 							{
+							if (objList[tmpobj.index].InUseFlag != 1)
+								{
 								objList[tmpobj.index].tileX = x;
 								objList[tmpobj.index].tileY = y;
 								objList[tmpobj.index].InUseFlag = 1;
+								}
 								tmpobj = objList[tmpobj.next];
 							}
-						objList[tmpobj.index].tileX = x;
-						objList[tmpobj.index].tileY = y;
-						objList[tmpobj.index].InUseFlag = 1;
+						if (objList[tmpobj.index].InUseFlag != 1)
+							{//Not already set
+							objList[tmpobj.index].tileX = x;
+							objList[tmpobj.index].tileY = y;
+							objList[tmpobj.index].InUseFlag = 1;
+							}
 						}
 					}
 				nextObj=objList[nextObj].next;

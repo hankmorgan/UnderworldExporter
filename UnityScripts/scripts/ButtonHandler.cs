@@ -106,6 +106,10 @@ public class ButtonHandler : object_base {
 
 	public bool Activate()
 	{
+		if (trigger=="")
+		{
+			return false;
+		}
 		if (triggerObj == null)
 		{
 			triggerObj=GameObject.Find (trigger);

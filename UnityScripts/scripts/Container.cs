@@ -221,11 +221,11 @@ public class Container : object_base {
 					if (item.GetComponent<ObjectInteraction>()!=null)
 					{
 						item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
+						if (item.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.A_PICK_UP_TRIGGER)
+						{//Special case
+							item.GetComponent<a_pick_up_trigger>().Activate();
+						}
 					}
-					//else
-					//{
-					//	Debug.Log (item.name + " has no object interaction!");
-					//}
 					if (item.GetComponent<Container>()!=null)
 					{
 						Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
