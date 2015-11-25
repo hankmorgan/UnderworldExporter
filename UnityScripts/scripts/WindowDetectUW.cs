@@ -290,6 +290,32 @@ public class WindowDetectUW : WindowDetect {
 		}
 		else
 		{
+
+			if (Event.current.Equals(Event.KeyboardEvent("f")))
+			{//Toggle full screen.
+				if (FullScreen==true)
+				{
+					FullScreen=false;
+					//chains.EnableDisableControl("main_window",true);
+					anchor.side= UIAnchor.Side.Left;
+					anchor.relativeOffset=new Vector2(0.43f,0.13f);
+					stretch.relativeSize=new Vector2 (0.55f,0.57f);
+					playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
+					playerUW.playerHud.main_window.enabled=true;
+				}
+				else
+				{
+					FullScreen=true;
+					//chains.EnableDisableControl("main_window",false);
+					anchor.side= UIAnchor.Side.Center;
+					anchor.relativeOffset=new Vector2(0.0f,0.0f);
+					stretch.relativeSize=new Vector2 (1.0f,1.0f);
+					playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
+
+					playerUW.playerHud.main_window.enabled=false;
+				}
+			}
+
 			if (Event.current.Equals(Event.KeyboardEvent("e")))
 			{			
 				if (playerUW.MouseLookEnabled==false)
@@ -308,30 +334,6 @@ public class WindowDetectUW : WindowDetect {
 				}
 			}
 
-			if (Event.current.Equals(Event.KeyboardEvent("f")))
-			{//Toggle full screen.
-				if (FullScreen==false)
-				{
-					FullScreen=true;
-					//chains.EnableDisableControl("main_window",true);
-					anchor.side= UIAnchor.Side.Left;
-					anchor.relativeOffset=new Vector2(0.43f,0.13f);
-					stretch.relativeSize=new Vector2 (0.55f,0.57f);
-					playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
-					playerUW.playerHud.main_window.enabled=false;
-				}
-				else
-				{
-					FullScreen=false;
-					//chains.EnableDisableControl("main_window",false);
-					anchor.side= UIAnchor.Side.Center;
-					anchor.relativeOffset=new Vector2(0.5f,0.5f);
-					stretch.relativeSize=new Vector2 (1.0f,1.0f);
-					playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
-					playerUW.playerHud.main_window.enabled=true;
-				}
-
-			}
 			
 			if (playerUW.MouseLookEnabled == true)
 			{
