@@ -24,6 +24,7 @@ Opens the door that is in the targeted tile.
 				DC.LockDoor ();
 				break;
 			case 3://try toggle
+				//TODO:check if toggle respects unlocked status. (door trap 1001 on level 3)
 				DC.ToggleDoor();
 				break;
 			}

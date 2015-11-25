@@ -20,4 +20,6 @@ public class UWHUD : MonoBehaviour {
 	public UITextList Conversation_tl_input;//player choices
 	public UITexture Conversation_OutPutControl;//Where the conversation is printed out
 	public UWFonts Conversation_FontController;
+
+	public UITexture main_window;
 }

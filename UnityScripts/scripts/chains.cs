@@ -30,7 +30,7 @@ public class chains : GuiBase {
 		}
 	}
 
-	static GameObject EnableDisableControl(string ControlName, bool targetState)
+	public static GameObject EnableDisableControl(string ControlName, bool targetState)
 	{
 		GameObject ControlParent= GameObject.Find ("UI_MAIN_PANEL");
 		//Debug.Log (ControlParent.name);

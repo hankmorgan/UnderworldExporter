@@ -14,18 +14,22 @@ public class WindowDetect : MonoBehaviour {
 
 	//public static UWCharacter playerUW;
 	public bool MouseHeldDown=false;
+	public bool FullScreen;
 
 	public static bool WaitingForInput=false;
 	public static bool InMap=false;
 	public GameObject BlockingCollider;
 
 	static public bool CursorInMainWindow;
-
+	protected UIAnchor anchor;
+	protected UIStretch stretch;
 
 	protected Rect CursorPosition;
 
 	public virtual void Start()
 	{
+		anchor=this.GetComponent<UIAnchor>();
+		stretch=this.GetComponent<UIStretch>();
 		CursorPosition = new Rect(
 			0.0f,
 			0.0f,

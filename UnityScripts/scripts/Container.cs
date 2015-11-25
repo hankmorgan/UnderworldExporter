@@ -224,13 +224,16 @@ public class Container : object_base {
 						if (item.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.A_PICK_UP_TRIGGER)
 						{//Special case
 							item.GetComponent<a_pick_up_trigger>().Activate();
+							if (item==null)
+							{//Use trigger is no more.
+								cn.RemoveItemFromContainer(i);
+							}
+						}
+						else if (item.GetComponent<Container>()!=null)
+						{
+							Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
 						}
 					}
-					if (item.GetComponent<Container>()!=null)
-					{
-						Container.SetPickedUpFlag(item.GetComponent<Container>(),NewValue);
-					}
-
 				}
 			}
 		}
