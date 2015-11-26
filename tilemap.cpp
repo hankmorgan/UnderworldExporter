@@ -655,11 +655,30 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].DimX=1;			
 				LevelInfo[x][y].DimY=1;			
 				LevelInfo[x][y].Grouped=0;	
-				LevelInfo[x][y].VisibleFaces = 63;
+				//LevelInfo[x][y].VisibleFaces = 63;
+				for (int v = 0; v < 6; v++)
+					{
+					LevelInfo[x][y].VisibleFaces[v]=1;
+					}
 				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0) && (ENABLE_WATER==1));
 				LevelInfo[x][y].waterRegion= 0;
 				LevelInfo[x][y].landRegion = 0;//including connected bridges.
 				LevelInfo[x][y].lavaRegion = 0;
+
+				//Set some easy tile visible settings
+				switch (LevelInfo[x][y].tileType)
+					{
+					case TILE_SOLID:
+						//Bottom and top are invisible
+						LevelInfo[x][y].VisibleFaces[0] = 0;
+						LevelInfo[x][y].VisibleFaces[2] = 0;
+						break;
+					default:
+						//Bottom is invisible
+						LevelInfo[x][y].VisibleFaces[2] = 0;
+						break;
+					}
+
 				//Force off water to save on compile time during testing.
 				//LevelInfo[x][y].isWater=0;
 				//LevelInfo[x][y].TerrainChange=0;
@@ -819,7 +838,10 @@ int BuildTileMapShock(tile LevelInfo[64][64], ObjectItem objList[1600],long text
 			LevelInfo[x][y].DimY = 1;
 			LevelInfo[x][y].Grouped = 0;
 			LevelInfo[x][y].BullFrog=0;
-
+			for (int v = 0; v < 6; v++)
+				{
+				LevelInfo[x][y].VisibleFaces[v] = 1;
+				}
 			/* word 6 contains
 				0-5	Wall texture (index into texture list)
 				6-10	Ceiling texture

@@ -64,7 +64,7 @@ short Render;		//If set then we output this tile. Is off when it is a subpart of
 short DimX;			//The dimensions (in tilesize) of this tile. 1 for a regular tile. 
 short DimY;			//>1 for when it is a group in which case we do not render it but only render it parent til
 short Grouped;		//textures/darkmod/stone/cobblestones/blocks_uneven06_grey off but when I group a set of tiles this indicates the tile is a child of a group.
-int VisibleFaces;	//Which faces are visible for caulking textures on solidblocks. 0-63 Binary combo. north,south,east,west,top,bottom.
+short VisibleFaces[6];	//Which faces are visible on a block. top,east,bottom,west,north,south (these might be wrong. Test more!)
 int North; int South;
 int East; int West;
 int UpperNorth; int UpperSouth;
