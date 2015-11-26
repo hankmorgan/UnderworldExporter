@@ -518,7 +518,7 @@ int hasLock=0;
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
 		{	
 		//if it has a lock it needs a lock object for scripting purposes
-
+		RenderUnityEntity(game, x, y, z, objList[currobj.link],objList,LevelInfo);
 		}
 	return;
 	}
@@ -1758,6 +1758,10 @@ int target;
 				break;
 			case  A_DOOR_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_door_trap(myObj,%d);",currobj.quality);
+				if (currobj.link != 0)
+					{
+					objList[currobj.link].InUseFlag = 1;
+					}
 				break;
 			case  A_WARD_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_ward_trap(myObj);");
@@ -1853,9 +1857,9 @@ return;
 						case BUTTON:
 							RenderUnityEntityButton(game, x, y, z, currobj, objList, LevelInfo);
 							break;
-						case LOCK:
+						//case LOCK:
 						case A_DOOR_TRAP:
-							printf("no longer in use???");
+							//printf("no longer in use???");
 							//RenderUnityEntityA_DOOR_TRAP(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case A_DO_TRAP:
