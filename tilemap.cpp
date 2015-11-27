@@ -181,12 +181,18 @@ void CleanUp(tile LevelInfo[64][64], int game)
 			}
 		}
 	}
+
+
+
+
+
+
 	//return;
 //if (game == SHOCK) {return;}
 	int j=1 ;
 	//Now lets combine the solids along particular axis
 	for (x=0;x<64;x++){
-		for (y=0;y<63;y++){
+		for (y=0;y<64;y++){
 			if  ((LevelInfo[x][y].Grouped ==0))
 			{
 			j=1;
@@ -238,7 +244,7 @@ void CleanUp(tile LevelInfo[64][64], int game)
 
 	////Now lets combine solids along the other axis
 for (y=0;y<64;y++){
-		for (x=0;x<63;x++){
+		for (x=0;x<64;x++){
 			if  ((LevelInfo[x][y].Grouped ==0))
 			{
 			j=1;
@@ -264,8 +270,49 @@ for (y=0;y<64;y++){
 		}
 	}
 
+//Clear invisible faces on solid tiles. 
+//TODO:Support all 64x64 tiles
+for (y = 0; y<=63; y++){
+	for (x = 0; x<=63; x++){
+		if ((LevelInfo[x][y].tileType == TILE_SOLID))
+			{
+			int dimx = LevelInfo[x][y].DimX;
+			int dimy = LevelInfo[x][y].DimY;
 
-printf("%d",LevelInfo[3][5].Render);
+			if (x == 0)
+				{
+				LevelInfo[x][y].VisibleFaces[vWEST]=0;
+				}
+			if (x == 63)
+				{
+				LevelInfo[x][y].VisibleFaces[vEAST] = 0;
+				}
+			if (y == 0 )
+				{
+				LevelInfo[x][y].VisibleFaces[vSOUTH] = 0;
+				}
+
+			if (y == 63)
+				{
+				LevelInfo[x][y].VisibleFaces[vNORTH] = 0;
+				}
+			if ((x != 63) || (y != 63))
+				{
+				if ((LevelInfo[x + dimx][y].tileType == TILE_SOLID) && (LevelInfo[x + dimx][y].TerrainChange == 0) && (LevelInfo[x][y].TerrainChange == 0))//Tile to the east is a solid
+					{
+					LevelInfo[x][y].VisibleFaces[vEAST] = 0;
+					LevelInfo[x + dimx][y].VisibleFaces[vWEST] = 0;
+					}
+				if ((LevelInfo[x][y + dimy].tileType == TILE_SOLID) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y + dimy].TerrainChange == 0))//TIle to the north is a solid
+					{
+					LevelInfo[x][y].VisibleFaces[vNORTH] = 0;
+					LevelInfo[x][y + dimy].VisibleFaces[vSOUTH] = 0;
+					}
+				}
+			}
+		}
+	}
+
 
 }
 

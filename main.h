@@ -80,6 +80,14 @@ extern int CEILING_HEIGHT;
 #define fTOP 2
 #define fBOTTOM 1
 
+//top0, east1, bottom2, west3, north4, south5
+//Tile visibility constants (fbx compatible)
+#define vTOP 0
+#define vEAST 1
+#define vBOTTOM 2
+#define vWEST 3
+#define vNORTH 4
+#define vSOUTH 5
 //Game IDs
 #define UWDEMO 0
 #define UW1 1

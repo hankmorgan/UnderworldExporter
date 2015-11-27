@@ -845,12 +845,12 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		tmp.shockWestCeilHeight = 0;
 		tmp.shockNorthCeilHeight = 0;
 		tmp.shockSouthCeilHeight = 0;
-		tmp.VisibleFaces[0] = 0;
-		tmp.VisibleFaces[1] = 0;
-		tmp.VisibleFaces[2] = 1;
-		tmp.VisibleFaces[3] = 0;
-		tmp.VisibleFaces[4] = 0;
-		tmp.VisibleFaces[5] = 0;
+		tmp.VisibleFaces[vTOP] = 0;
+		tmp.VisibleFaces[vEAST] = 0;
+		tmp.VisibleFaces[vBOTTOM] = 1;
+		tmp.VisibleFaces[vWEST] = 0;
+		tmp.VisibleFaces[vNORTH] = 0;
+		tmp.VisibleFaces[vSOUTH] = 0;
 // top,east,bottom,west,north,south
 		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
 		}
