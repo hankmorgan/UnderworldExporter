@@ -313,7 +313,105 @@ for (y = 0; y<=63; y++){
 		}
 	}
 
+//Clear invisible faces on diagonals
+for (y = 1; y < 63; y++){
+	for (x = 1; x < 63; x++){
+		switch (LevelInfo[x][y].tileType)
+			{
+				case TILE_DIAG_NW:
+					{
+					if ((LevelInfo[x][y - 1].tileType == TILE_SOLID) && (LevelInfo[x][y-1].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vSOUTH]=0;
+						LevelInfo[x][y - 1].VisibleFaces[vNORTH]=0;
+						}
+					if ((LevelInfo[x + 1][y].tileType == TILE_SOLID) && (LevelInfo[x + 1][y].TerrainChange==0))
+						{
+						LevelInfo[x][y].VisibleFaces[vEAST] = 0;
+						LevelInfo[x + 1][y].VisibleFaces[vWEST]=0;
+						}
+					}
 
+				case TILE_DIAG_NE:
+					{
+					if ((LevelInfo[x][y - 1].tileType == TILE_SOLID) && (LevelInfo[x][y - 1].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vSOUTH] = 0;
+						LevelInfo[x][y - 1].VisibleFaces[vNORTH] = 0;
+						}
+					if ((LevelInfo[x - 1][y].tileType == TILE_SOLID) && (LevelInfo[x - 1][y].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vWEST] = 0;
+						LevelInfo[x - 1][y].VisibleFaces[vEAST] = 0;
+						}
+					}
+
+				case TILE_DIAG_SE:
+					{
+					if ((LevelInfo[x][y + 1].tileType == TILE_SOLID) && (LevelInfo[x][y + 1].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vNORTH] = 0;
+						LevelInfo[x][y - 1].VisibleFaces[vSOUTH] = 0;
+						}
+					if ((LevelInfo[x - 1][y].tileType == TILE_SOLID) && (LevelInfo[x - 1][y].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vWEST] = 0;
+						LevelInfo[x - 1][y].VisibleFaces[vEAST] = 0;
+						}
+					}
+
+				case TILE_DIAG_SW:
+					{
+					if ((LevelInfo[x][y + 1].tileType == TILE_SOLID) && (LevelInfo[x][y + 1].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vNORTH] = 0;
+						LevelInfo[x][y + 1].VisibleFaces[vSOUTH] = 0;
+						}
+					if ((LevelInfo[x + 1][y].tileType == TILE_SOLID) && (LevelInfo[x + 1][y].TerrainChange == 0))
+						{
+						LevelInfo[x][y].VisibleFaces[vEAST] = 0;
+						LevelInfo[x + 1][y].VisibleFaces[vWEST] = 0;
+						}
+					}
+			}
+
+		}
+
+	}
+
+//Make sure solids are still consistently visible.
+	for (y = 1; y < 63; y++){
+		for (x = 1; x < 63; x++){
+			if (LevelInfo[x][y].tileType == TILE_SOLID)
+				{
+				//Check along each axis
+				for (int i = 0; i < LevelInfo[x][y].DimX; i++)
+					{
+					if (LevelInfo[x + i][y].VisibleFaces[vNORTH] == 1)
+						{
+						LevelInfo[x][y].VisibleFaces[vNORTH]=1;
+						}
+					if (LevelInfo[x + i][y].VisibleFaces[vSOUTH] == 1)
+						{
+						LevelInfo[x][y].VisibleFaces[vSOUTH] = 1;
+						}
+					}
+
+				for (int i = 0; i < LevelInfo[x][y].DimY; i++)
+					{
+					if (LevelInfo[x][y+i].VisibleFaces[vEAST] == 1)
+						{
+						LevelInfo[x][y].VisibleFaces[vEAST] = 1;
+						}
+					if (LevelInfo[x][y+i].VisibleFaces[vWEST] == 1)
+						{
+						LevelInfo[x][y].VisibleFaces[vWEST] = 1;
+						}
+					}
+
+				}
+			}
+		}
 }
 
 

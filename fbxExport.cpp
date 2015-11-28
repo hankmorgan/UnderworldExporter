@@ -19,7 +19,7 @@ void RenderFBXTile(FbxScene*& gScene, int game, int x, int y, tile &t, short Wat
 void RenderFBXSolidTile(FbxScene*& gScene, int x, int y, tile &t, short Water);
 void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, short invert);
 void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName);
-void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
 	FbxVector4 lControlPoint0,
 	FbxVector4 lControlPoint1,
 	FbxVector4 lControlPoint2,
@@ -34,7 +34,7 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	float HorzOffsetSouthPos, float HorzOffsetSouthScale
 	);
 
-void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
 	FbxVector4 lControlPoint0,
 	FbxVector4 lControlPoint1,
 	FbxVector4 lControlPoint2,
@@ -865,6 +865,10 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 	tmp.DimX = 1;
 	tmp.DimY = 1;
 	tmp.floorHeight = 0;
+	for (int i = 0; i < 6; i++)
+		{
+		tmp.VisibleFaces[i]=1;
+		}
 	for (x = 65; x < 68; x++)
 		{
 		for (y = 65; y < 68; y++)
@@ -930,7 +934,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 	//CreateDoorModel(gScene);
 	//CreateShockBridgeModel(gScene);
-	SaveScene(gSdkManager, gScene, "level.fbx", 1, true);
+	SaveScene(gSdkManager, gScene, "level2.fbx", 1, true);
 	}
 
 void RenderFBXTile(FbxScene*& gScene, int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
@@ -1405,6 +1409,7 @@ void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, sh
 
 void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName)
 	{
+	/* This is main version of this function*/
 	FbxVector4 lNormalXPos(1, 0, 0);
 	FbxVector4 lNormalXNeg(-1, 0, 0);
 	FbxVector4 lNormalYPos(0, 1, 0);
@@ -1710,7 +1715,7 @@ int removeCount=0;
 
 	}
 
-void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
 	FbxVector4 lControlPoint0,
 	FbxVector4 lControlPoint1,
 	FbxVector4 lControlPoint2,
@@ -1998,7 +2003,7 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	}
 
 
-void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+	void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
 	FbxVector4 lControlPoint0,
 	FbxVector4 lControlPoint1,
 	FbxVector4 lControlPoint2,
@@ -2425,7 +2430,13 @@ void RenderFBXDiagSETile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 				{
 				//it's floor
 				//RenderFBXDiagNWPortion(gScene, -2, t.floorHeight, t,"DiagNW1");
+				int PreviousNorth = t.VisibleFaces[vNORTH];
+				int PreviousWest = t.VisibleFaces[vWEST];
+				t.VisibleFaces[vNORTH] = 0;
+				t.VisibleFaces[vWEST] = 0;
 				RenderFBXOpenTile(gScene, x, y, t, Water, 0);
+				t.VisibleFaces[vNORTH] = PreviousNorth;
+				t.VisibleFaces[vWEST] = PreviousWest;
 				}
 			}
 		else
@@ -2456,7 +2467,13 @@ void RenderFBXDiagNWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 				{
 				//it's floor
 				//RenderFBXDiagSEPortion(gScene, -2, t.floorHeight, t, "DiagSE2");
+				int PreviousSouth = t.VisibleFaces[vSOUTH];
+				int PreviousEast = t.VisibleFaces[vEAST];
+				t.VisibleFaces[vSOUTH] = 0;
+				t.VisibleFaces[vEAST] = 0;
 				RenderFBXOpenTile(gScene, x, y, t, Water, 0);
+				t.VisibleFaces[vSOUTH]= PreviousSouth;
+				t.VisibleFaces[vEAST]=PreviousEast;
 				}
 			}
 		else
@@ -2485,7 +2502,13 @@ void RenderFBXDiagSWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 				{
 				//it's floor
 				//RenderFBXDiagNEPortion(gScene, -2, t.floorHeight, t,"TileNe1");
+				int PreviousNorth = t.VisibleFaces[vNORTH];
+				int PreviousEast = t.VisibleFaces[vEAST];
+				t.VisibleFaces[vNORTH] = 0;
+				t.VisibleFaces[vEAST] = 0;
 				RenderFBXOpenTile(gScene, x, y, t, Water, 0);
+				t.VisibleFaces[vNORTH] = PreviousNorth;
+				t.VisibleFaces[vEAST] = PreviousEast;
 				}
 			}
 		else
@@ -2514,7 +2537,13 @@ void RenderFBXDiagNETile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 				{
 				//it's floor
 				//RenderFBXDiagSWPortion(gScene, -2, t.floorHeight, t, "DiagSW2");
+				int PreviousSouth = t.VisibleFaces[vSOUTH];
+				int PreviousWest = t.VisibleFaces[vWEST];
+				t.VisibleFaces[vSOUTH] = 0;
+				t.VisibleFaces[vWEST] = 0;
 				RenderFBXOpenTile(gScene, x, y, t, Water, 0);
+				t.VisibleFaces[vSOUTH] = PreviousSouth;
+				t.VisibleFaces[vWEST] = PreviousWest;
 				}
 			}
 		else
@@ -2811,6 +2840,16 @@ void RenderFBXDiagSEPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char
 			}
 		}
 
+	int removeCount = 0;
+	for (int v = 0; v < 6; v++)
+		{
+		if ((t.VisibleFaces[v] == 0) || (v == vTOP))
+			{
+			lMesh->RemovePolygon(v - removeCount);
+			removeCount++;
+			}
+		}
+
 	gScene->GetRootNode()->AddChild(lNode);
 
 
@@ -3101,7 +3140,15 @@ void RenderFBXDiagSWPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char
 			lMaterialElement->GetIndexArray().SetAt(i - 1, TextureArray[i]);
 			}
 		}
-
+	int removeCount = 0;
+	for (int v = 0; v < 6; v++)
+		{
+		if ((t.VisibleFaces[v] == 0) || (v == vTOP))
+			{
+			lMesh->RemovePolygon(v - removeCount);
+			removeCount++;
+			}
+		}
 	gScene->GetRootNode()->AddChild(lNode);
 
 
@@ -3392,6 +3439,16 @@ void RenderFBXDiagNWPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char
 			}
 		}
 
+	int removeCount = 0;
+	for (int v = 0; v < 6; v++)
+		{
+		if ((t.VisibleFaces[v] == 0) || (v==vTOP) )
+			{
+			lMesh->RemovePolygon(v - removeCount);
+			removeCount++;
+			}
+		}
+	
 	gScene->GetRootNode()->AddChild(lNode);
 
 
@@ -3681,7 +3738,15 @@ void RenderFBXDiagNEPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char
 			lMaterialElement->GetIndexArray().SetAt(i - 1, TextureArray[i]);
 			}
 		}
-
+	int removeCount = 0;
+	for (int v = 0; v < 6; v++)
+		{
+		if ((t.VisibleFaces[v] == 0) || (v == vTOP))
+			{
+			lMesh->RemovePolygon(v - removeCount);
+			removeCount++;
+			}
+		}
 	gScene->GetRootNode()->AddChild(lNode);
 
 	}
@@ -4605,7 +4670,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointl5(x1, y0, z0);
 				FbxVector4 lControlPointl6(x1, y1, z0);
 				FbxVector4 lControlPointl7(x0, y1, z0);
-				RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "lefthand",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "lefthand",
 					lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 					lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 					-FrameSideY / BrushY, (((BrushY - DOORWIDTH) / 2) / BrushY) - (FrameSideY / BrushY),
@@ -4637,7 +4702,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointr5(x1, y0, z0);
 				FbxVector4 lControlPointr6(x1, y1, z0);
 				FbxVector4 lControlPointr7(x0, y1, z0);
-				RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "rightdoor",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "rightdoor",
 					lControlPointr0, lControlPointr1, lControlPointr2, lControlPointr3,
 					lControlPointr4, lControlPointr5, lControlPointr6, lControlPointr7,
 					0, ((BrushY - DOORWIDTH) / 2) / BrushY,
@@ -4664,7 +4729,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointo5(x1, y0, z0);
 				FbxVector4 lControlPointo6(x1, y1, z0);
 				FbxVector4 lControlPointo7(x0, y1, z0);
-				RenderFBXCuboid(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "over",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "over",
 					lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
 					lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0, 1, 0, 1);
 
@@ -4722,7 +4787,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointl5(x1, y0, z0);
 				FbxVector4 lControlPointl6(x1, y1, z0);
 				FbxVector4 lControlPointl7(x0, y1, z0);
-				RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "lefthand_ns",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "lefthand_ns",
 					lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 					lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 					0, 1,
@@ -4762,7 +4827,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointr5(x1, y0, z0);
 				FbxVector4 lControlPointr6(x1, y1, z0);
 				FbxVector4 lControlPointr7(x0, y1, z0);
-				RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "rightdoorns",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "rightdoorns",
 					lControlPointr0, lControlPointr1, lControlPointr2, lControlPointr3,
 					lControlPointr4, lControlPointr5, lControlPointr6, lControlPointr7,
 					0, 1,
@@ -4794,7 +4859,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointo5(x1, y0, z0);
 				FbxVector4 lControlPointo6(x1, y1, z0);
 				FbxVector4 lControlPointo7(x0, y1, z0);
-				RenderFBXCuboid(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "overns",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "overns",
 					lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
 					lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0, 1, 0, 1);
 				break;
@@ -4855,7 +4920,7 @@ void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 						FbxVector4 lControlPointl5(x1, y0, z0);
 						FbxVector4 lControlPointl6(x1, y1, z0);
 						FbxVector4 lControlPointl7(x0, y1, z0);
-						RenderFBXCuboid(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "Pillar",
+						RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, -2, CEILING_HEIGHT + 1, "Pillar",
 							lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 							lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 							0, 1,
@@ -4996,7 +5061,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							FbxVector4 lControlPointl7(x0, y1, z0);
 							char BridgeName[20];
 							sprintf_s(BridgeName, "BRIDGE_%02d_%02d", x, y);
-							RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, BridgeName,
+							RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, z0, z1, BridgeName,
 								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 								lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 								0, 1,
@@ -5082,7 +5147,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							FbxVector4 lControlPointl5(x1, y0, z0);
 							FbxVector4 lControlPointl6(x1, y1, z0);
 							FbxVector4 lControlPointl7(x0, y1, z0);
-							RenderFBXCuboid(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
+							RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, z0, z1, "Bridge",
 								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 								lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 								0, 1,
@@ -5137,7 +5202,7 @@ void CreateDoorModel(FbxScene*& gScene)
 	tmpt.tileY = 0;
 
 
-	RenderFBXCuboid(gScene, 0, 0, tmpt, 0, z0, z1, "Door",
+	RenderFBXCuboidByPoints(gScene, 0, 0, tmpt, 0, z0, z1, "Door",
 		lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 		lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 		0, 54.0 / 64.0);
@@ -5186,7 +5251,7 @@ void CreateShockBridgeModel(FbxScene*& gScene)
 	tmpt.tileY = 0;
 
 
-	RenderFBXCuboid(gScene, 0, 0, tmpt, 0, z0, z1, "Bridge",
+	RenderFBXCuboidByPoints(gScene, 0, 0, tmpt, 0, z0, z1, "Bridge",
 		lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 		lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,
 		0, 54.0 / 64.0);
