@@ -934,6 +934,8 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 
 	//CreateDoorModel(gScene);
 	//CreateShockBridgeModel(gScene);
+	gScene->Compact();
+
 	SaveScene(gSdkManager, gScene, "level2.fbx", 1, true);
 	}
 
