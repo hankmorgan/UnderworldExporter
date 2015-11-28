@@ -1702,7 +1702,9 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 	//lMesh->RemovePolygon(4);//Will remove the north poly
 	//lMesh->RemovePolygon(5);//Will remove the south poly
 	//Removing a poly will update the indices.
+
 int removeCount=0;
+
 	for (int v = 0; v < 6; v++)
 		{
 		if (t.VisibleFaces[v] == 0)
@@ -1711,7 +1713,6 @@ int removeCount=0;
 			removeCount++;
 			}
 		}
-
 	gScene->GetRootNode()->AddChild(lNode);
 
 

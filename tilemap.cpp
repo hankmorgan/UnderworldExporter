@@ -429,6 +429,17 @@ for (y = 1; y < 63; y++){
 		for (x = 1; x < 63; x++){
 			if ((LevelInfo[x][y].tileType == TILE_SOLID) || (LevelInfo[x][y].tileType == TILE_OPEN))
 				{
+				int dimx = LevelInfo[x][y].DimX;
+				int dimy = LevelInfo[x][y].DimY;
+				if (dimx>1)
+					{//Make sure the ends are set properly
+					LevelInfo[x][y].VisibleFaces[vEAST] = LevelInfo[x + dimx - 1][y].VisibleFaces[vEAST];
+					}
+				if (dimy>1)
+					{
+					LevelInfo[x][y].VisibleFaces[vNORTH] = LevelInfo[x][y + dimy - 1].VisibleFaces[vNORTH];
+					}
+
 				//Check along each axis
 				for (int i = 0; i < LevelInfo[x][y].DimX; i++)
 					{
