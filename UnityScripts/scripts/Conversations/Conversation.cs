@@ -51,7 +51,7 @@ public class Conversation : GuiBase {
 	static int play_mana;
 	static int play_level;
 	static int new_player_exp;   //  (not used in uw1)
-	static int play_name;       //   player name
+	protected static int play_name;       //   player name
 	static int play_poison;      //  (not used in uw1)
 	static int play_drawn;       //  is 1 when player has drawn his weapon (?)
 	static int play_sex;         // (not used in uw1)
