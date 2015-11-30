@@ -13,4 +13,14 @@ public class GuiBase : MonoBehaviour {
 		}
 	}
 
+	public void MoveControlOffset(float offX, float offY)
+	{//Moves a control by the specified distance on the gui
+		UIAnchor uia = this.GetComponent<UIAnchor>();
+		if (uia !=null)
+		{
+			uia.relativeOffset =  uia.relativeOffset+ new Vector2(offX,offY);
+		}
+	}
+
+
 }
