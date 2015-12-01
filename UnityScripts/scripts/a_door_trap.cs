@@ -6,13 +6,16 @@ public class a_door_trap : trap_base {
 Opens the door that is in the targeted tile.
  */
 
-
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+
 		GameObject door = GameWorldController.findDoor(triggerX,triggerY);
+
 		if (door!=null)
 		{
+
 			DoorControl DC = door.GetComponent<DoorControl>();
+
 			switch (objInt.Quality)
 			{
 			case 1://try open
@@ -28,12 +31,11 @@ Opens the door that is in the targeted tile.
 				DC.ToggleDoor();
 				break;
 			}
-			
+
 		}
 		else
 		{
 			Debug.Log ("Door not found!");
 		}
-
 	}
 }

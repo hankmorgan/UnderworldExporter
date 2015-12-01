@@ -60,10 +60,10 @@ public class trap_base : object_base {
 	public virtual void PostActivate()
 	{
 		//Destruction of traps is probably controlled by the trigger.
-		//int TriggerRepeat = (objInt.flags>>1) & 0x1;
-	//	if (TriggerRepeat==0)
-		//{
-		//	Destroy (this.gameObject);
-		//}
+		int TriggerRepeat = (objInt.flags>>1) & 0x1;
+		if (TriggerRepeat==0)
+		{
+			Destroy (this.gameObject);
+		}
 	}
 }

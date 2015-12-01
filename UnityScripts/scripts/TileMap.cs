@@ -61,14 +61,14 @@ public class TileMap : MonoBehaviour {
 		//gronk.GetComponent<UWCharacter>().isSwimming=GetIsWater(visitTileX,visitTileY);//TODO: make water a physics layer and detect via collision
 		if (GetIsWater (visitTileX,visitTileY)== true)
 		{//check if gronk is on the ground.
-			feet.SetActive(true);
+			//feet.SetActive(true);
 			playerUW.isSwimming=((OnGround) && (!playerUW.isWaterWalking)) ;
 		}
 		else
 		{
 			playerUW.isSwimming=false;
 			OnGround=false;
-			feet.SetActive(false);
+			//feet.SetActive(false);
 		}
 
 		return;

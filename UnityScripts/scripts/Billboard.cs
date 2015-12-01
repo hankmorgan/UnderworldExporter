@@ -3,6 +3,7 @@
 public class Billboard : MonoBehaviour
 {
 	public float adjustment=0.0f;//0.8f;
+
 	//private Quaternion dir;
 	void Update()
 	{

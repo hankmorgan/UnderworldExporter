@@ -56,13 +56,14 @@ public class NPC : object_base {
 
 		Gob = this.GetComponent<GoblinAI>();
 		ai = this.GetComponentInChildren<AIRig>();
-		ai.AI.Body=this.gameObject;
+
 		if (playerUW==null)
 		{
 			playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		}
 		//playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
+		ai.AI.Body=this.gameObject;
 	}
 	
 	// Update is called once per frame

@@ -302,6 +302,15 @@ public class WindowDetectUW : WindowDetect {
 					stretch.relativeSize=new Vector2 (0.55f,0.57f);
 					playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
 					playerUW.playerHud.main_window.enabled=true;
+					playerUW.playerHud.compass.MoveControlOffset(+0.1f,0.0f);
+					for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
+					{
+						GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
+						if (cn!=null)
+						{
+							cn.MoveControlOffset(+0.1f,0.0f);
+						}
+					}
 				}
 				else
 				{
@@ -313,6 +322,15 @@ public class WindowDetectUW : WindowDetect {
 					playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 
 					playerUW.playerHud.main_window.enabled=false;
+					playerUW.playerHud.compass.MoveControlOffset(-0.1f,0.0f);
+					for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
+					{
+						GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
+						if (cn!=null)
+						{
+							cn.MoveControlOffset(-0.1f,0.0f);
+						}
+					}
 				}
 			}
 
