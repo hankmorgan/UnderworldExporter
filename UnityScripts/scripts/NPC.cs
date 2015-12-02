@@ -80,7 +80,7 @@ public class NPC : object_base {
 		}
 		else
 		{
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=4;
+			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=8;
 			if (ai.AI.IsActive==false)
 			{
 				return;
@@ -89,7 +89,10 @@ public class NPC : object_base {
 			//{//Sets the AI to always be turned towards their next waypoint
 			if (ai.AI.Navigator.CurrentPath!=null)
 			{
-				ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint));
+				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
+				NextPosition.y= this.transform.position.y;
+				//ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint));
+				ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",NextPosition);
 			}
 			//}
 

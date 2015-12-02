@@ -38,14 +38,14 @@ MonoBehaviour:
       /&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;&quot;
       parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;WalkingAnimation&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_MOVE&quot; /&gt;&lt;move turnspeed=&quot;100&quot;
-      repeatuntil=&quot;success&quot; priority=&quot;&quot; name=&quot;MovetoTarget&quot;
+      repeatuntil=&quot;&quot; priority=&quot;&quot; name=&quot;MovetoTarget&quot;
       movetarget=&quot;MoveTarget&quot; movespeed=&quot;1&quot; facetarget=&quot;RotateTowards&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot; closeenoughangle=&quot;0&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;1&quot; closeenoughangle=&quot;30&quot;
       /&gt;&lt;action repeatuntil=&quot;&quot; priority=&quot;&quot; parametervalues=&quot;&quot;
       parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;Idle on arrival&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_IDLE&quot; /&gt;&lt;/sequencer&gt;&lt;/sequencer&gt;&lt;constraint
       repeatuntil=&quot;failure&quot; name=&quot;CancelRandomMovement&quot; debugbreak=&quot;False&quot;
-      constraint=&quot;isMovingRandom&quot;&gt;&lt;timer waitforsec=&quot;15&quot;
+      constraint=&quot;isMovingRandom&quot;&gt;&lt;timer waitforsec=&quot;60&quot;
       returnvalue=&quot;success&quot; name=&quot;timer&quot; debugbreak=&quot;False&quot;
       /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Cancel Random Move&quot; debugbreak=&quot;False&quot;
@@ -66,9 +66,9 @@ MonoBehaviour:
       /&gt;&lt;action repeatuntil=&quot;success&quot; parametervalues=&quot;&quot;
       parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;TargetPlayer&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_MoveToPlayer&quot; /&gt;&lt;move
-      turnspeed=&quot;10&quot; repeatuntil=&quot;&quot; name=&quot;Move to Player&quot;
-      movetarget=&quot;playerUW&quot; movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.8&quot; closeenoughangle=&quot;0&quot;
+      turnspeed=&quot;500&quot; repeatuntil=&quot;success&quot; name=&quot;Move to
+      Player&quot; movetarget=&quot;playerUW&quot; movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.9&quot; closeenoughangle=&quot;0&quot;
       /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Pick A Random Attack Animation&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
@@ -85,7 +85,7 @@ MonoBehaviour:
       name=&quot;End Combat&quot; debugbreak=&quot;False&quot; classname=&quot;AI_COMBAT_END&quot;
       /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;playDeathAnim&quot; debugbreak=&quot;False&quot;
-      classname=&quot;AI_DEATH&quot; /&gt;&lt;timer waitforsec=&quot;3&quot; returnvalue=&quot;success&quot;
+      classname=&quot;AI_DEATH&quot; /&gt;&lt;timer waitforsec=&quot;1.2&quot; returnvalue=&quot;success&quot;
       name=&quot;timer&quot; debugbreak=&quot;False&quot; /&gt;&lt;action repeatuntil=&quot;&quot;
       parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;
       name=&quot;DestroyAI&quot; debugbreak=&quot;False&quot; classname=&quot;AI_Destroy&quot;

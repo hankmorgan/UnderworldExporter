@@ -14,6 +14,7 @@ public class AI_RANDOM_MOVE : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
+		//TODO:replace target selection with something based off of the tilemap.
 		//if (ai.Navigator.CurrentGraph==null)
 		//{
 			string navmesh= ai.Body.gameObject.GetComponent<NPC>().NavMeshRegion;
