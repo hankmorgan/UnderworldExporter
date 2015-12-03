@@ -435,12 +435,14 @@ public class Conversation : GuiBase {
 		inputctrl.text="";
 		inputctrl.selected=true;
 		yield return StartCoroutine(WaitForTypedInput());
+		print (PlayerTypedAnswer);
 	}
 
 	public void OnSubmitPickup()
 	{//Event receiver for input ctrl.
 		WaitingForTyping=false;
 		PlayerTypedAnswer= playerUW.GetMessageLog().gameObject.GetComponent<UIInput>().text;
+
 		//Debug.Log (inputctrl.text);
 
 	}
@@ -1207,6 +1209,41 @@ public class Conversation : GuiBase {
 		Debug.Log ("Set_Likes_Dislikes(" + unk2 + "," + unk3 +")");
 	}
 
+	public void set_attitude(int unk1, int Attitude, int NPC_WHO_AM_I)
+	{
+
+		//Occurs in Murgo's conversation but I need to see more examples since that will make characters hostile?
+		Debug.Log ("Setting attitude for whoami " + NPC_WHO_AM_I + " to " + Attitude);
+	}
+
+	public int compare(int unk1, int StringIndex,  string StringIn)
+	{
+		//id=0004 name="compare" ret_type=int
+		//	parameters:   arg1: string id
+		//	arg2: string id
+		//	description:  compares strings for equality, case independent
+		//	return value: returns 1 when strings are equal, 0 when not
+
+		//In this implemention I get the string at stringindex and compaire with  StringIn
+		if (GetString(StringIndex).ToUpper() == StringIn.ToUpper())
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+
+	}
+
+
+	public void remove_talker(int unk1)
+	{
+		//   id=002a name="remove_talker" ret_type=void
+	//parameters:   none
+	//		description:  removes npc the player is talking to (?)
+		this.gameObject.transform.position = new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+	}
 }
 
 
