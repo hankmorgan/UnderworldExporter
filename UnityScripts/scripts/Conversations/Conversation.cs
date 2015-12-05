@@ -1075,6 +1075,19 @@ public class Conversation : GuiBase {
 		}
 	}
 
+	public int contains(int unk1, string String1, int StringNo)
+	{
+		//id=0007 name="contains" ret_type=int
+		//parameters:   arg1: pointer to first string id
+		//arg2: pointer to second string id
+		//description:  checks if the first string contains the second string,
+		//case-independent.
+		//return value: returns 1 when the string was found, 0 when not
+
+
+		return contains (unk1,String1, GetString (StringNo));
+	}
+
 	public int x_skills(int unk1, int unk2, int unk3)
 	{
 		//id=002c name="x_skills" ret_type=int
@@ -1185,7 +1198,7 @@ public class Conversation : GuiBase {
 		//description:  counts number of items in inventory
 		//return value: item number
 		int total =0;
-		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(playerUW.playerHud.playerTrade[ItemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
@@ -1247,6 +1260,15 @@ public class Conversation : GuiBase {
 	//parameters:   none
 	//		description:  removes npc the player is talking to (?)
 		this.gameObject.transform.position = new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+	}
+
+
+	public void set_race_attitude(int unk1, int attitude)
+	{
+		//id=0026 name="set_race_attitude" ret_type=void
+		//parameters:   unknown
+		//description:  sets attitude for a whole race (?)
+		Debug.Log ("set_race_attitude " + attitude);
 	}
 }
 
