@@ -458,16 +458,17 @@ public class chains : GuiBase {
 			EnableDisableControl("Conversation_Portrait_Frame_Right",true);
 			EnableDisableControl("Conversation_Portrait_Right",true);
 			EnableDisableControl("Conversation_Trade_Right",true);
-			GameObject scroll = EnableDisableControl("Conversation_Scroll",true);
-			if (scroll !=null)
-			{
-				UITextList tl = scroll.GetComponent<UITextList>();//TODO:Get rid of this!
-				if (tl !=null)
-				{
-					tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-					tl.textLabel.lineWidth=420;
-				}
-			}
+			EnableDisableControl("Conversation_Scroll",true);
+			//GameObject scroll = EnableDisableControl("Conversation_Scroll",true);
+			//if (scroll !=null)
+			//{
+			//	UITextList tl = scroll.GetComponent<UITextList>();//TODO:Get rid of this!
+			//	if (tl !=null)
+			//	{
+					//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
+					//tl.textLabel.lineWidth=420;
+			//	}
+			//}
 			
 			EnableDisableControl("Conversation_Name_Left",true);
 			EnableDisableControl("Conversation_Name_Right",true);

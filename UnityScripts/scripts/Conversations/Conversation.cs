@@ -105,7 +105,7 @@ public class Conversation : GuiBase {
 	public const float WaitTime=0.3f;//Is affected by the slomotime!
 	public const float SlomoTime=0.1f;//To keep corountines running when ending convos and waiting out the WaitTime
 
-	int LineWidth = 40 ;
+	static int LineWidth = 200 ;
 
 	private string[] NPCTradeItems=new string[4];
 
@@ -292,8 +292,8 @@ public class Conversation : GuiBase {
 
 	public IEnumerator say(string WhatToSay)
 	{
-		tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-		tl.textLabel.lineWidth=480;
+		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
+		//tl.textLabel.lineWidth=480;
 		//Replace instances of @GS8 with player name
 		WhatToSay = WhatToSay.Replace("@GS8" , playerUW.CharName);
 		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
@@ -310,7 +310,7 @@ public class Conversation : GuiBase {
 				{
 					colCounter=0; 
 					//Debug.Log ("Adding newline " + Output);
-					tl.Add (Output + " @@@ ");
+					tl.Add (Output);
 					Output=StrWords[j] + " ";
 					colCounter= StrWords[j].Length+1;
 				}	
@@ -325,14 +325,14 @@ public class Conversation : GuiBase {
 			tl.Add(Output );
 			if (i < Paragraphs.GetUpperBound(0))
 				{//Pause for more when not the last paragraph.
-				tl.Add("@@@ [MORE] " + " @@@ ");
-				FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
+				tl.Add("[MORE]");
+				//FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 				yield return StartCoroutine(WaitForMore());
 				}
 			}
-		tl.Add ( " @@@ ");
+		//tl.Add ( " @@@ ");
 		//tl.Add(WhatToSay);
-		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
+		//FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
 		yield return 0;
 		//Debug.Log(WhatToSay);
@@ -385,7 +385,7 @@ public class Conversation : GuiBase {
 		yield return StartCoroutine(WaitForInput());
 
 		tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
-		yield return StartCoroutine(say (tmp + " @@@ "));
+		yield return StartCoroutine(say (tmp));
 		yield return 0;
 	}
 
@@ -420,7 +420,7 @@ public class Conversation : GuiBase {
 		tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
 		tmp= playerUW.StringControl.GetString (StringNo,bablf_array[bablf_ans-1]);
-		yield return StartCoroutine(say (" @@@ " + tmp + " @@@ "));
+		yield return StartCoroutine(say (tmp));
 		yield return 0;
 	}
 
