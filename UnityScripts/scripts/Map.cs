@@ -71,11 +71,11 @@ public class Map : object_base {
 		objInt.isQuant=false; //quick bug fix
 			if (objInt.PickedUp==true)
 			{
-				ml.text =  playerUW.StringControl.GetFormattedObjectNameUW(objInt) + "\n" + playerUW.StringControl.GetString(1,151);
+				ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + "\n" + playerUW.StringControl.GetString(1,151));
 			}
 			else
 			{
-				ml.text =  playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+				ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 			}
 		return true;
 	}
