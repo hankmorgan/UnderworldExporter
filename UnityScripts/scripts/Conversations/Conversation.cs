@@ -96,7 +96,7 @@ public class Conversation : GuiBase {
 	public static int bablf_ans=0;
 
 	public static UITextList tl;//Text output.
-	public static UITextList tl_input;//player choices
+	public static ScrollController tl_input;//player choices
 	public static UITexture OutPutControl;//Where the conversation is printed out
 	public static UWFonts FontController;
 
@@ -105,7 +105,7 @@ public class Conversation : GuiBase {
 	public const float WaitTime=0.3f;//Is affected by the slomotime!
 	public const float SlomoTime=0.1f;//To keep corountines running when ending convos and waiting out the WaitTime
 
-	static int LineWidth = 200 ;
+	static int LineWidth = 37 ;
 
 	private string[] NPCTradeItems=new string[4];
 
@@ -117,17 +117,19 @@ public class Conversation : GuiBase {
 
 		//Setup the UI elements
 		tl=playerUW.playerHud.Conversation_tl;
-		tl_input=playerUW.playerHud.Conversation_tl_input;
+		//tl_input=playerUW.playerHud.Conversation_tl_input;
+		tl_input=playerUW.playerHud.MessageScroll;
 		tl.Clear();
-		OutPutControl=playerUW.playerHud.Conversation_OutPutControl;
-		FontController=playerUW.playerHud.Conversation_FontController;
-		FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
+		//OutPutControl=playerUW.playerHud.Conversation_OutPutControl;
+		//FontController=playerUW.playerHud.Conversation_FontController;
+		//FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
 		//Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
 		{
-			TradeSlot ts = GameObject.Find ("Trade_NPC_Slot_" + i++).GetComponent<TradeSlot>();
-			ts.clear ();
+			//TradeSlot ts =
+				playerUW.playerHud.npcTrade[i++].clear ();// GameObject.Find ("Trade_NPC_Slot_" + i++).GetComponent<TradeSlot>();
+			//ts.clear ();
 		}
 
 		GameObject mus = GameObject.Find ("MusicController");
@@ -135,9 +137,10 @@ public class Conversation : GuiBase {
 		{
 			mus.GetComponent<MusicController>().InMap=true;
 		}
-		//pause the world
-		StringNo =stringno;// 3650;
 
+		StringNo =stringno;
+
+		//pause the world
 		Time.timeScale=0.0f;
 		ConversationOpen=true;
 		InConversation=true;
@@ -150,7 +153,7 @@ public class Conversation : GuiBase {
 		//Return any items in the trade area.
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -233,7 +236,8 @@ public class Conversation : GuiBase {
 			}
 			else if (WaitingForTyping)
 			{
-				tl_input.gameObject.GetComponent<UIInput>().selected=true;
+				//tl_input.gameObject.GetComponent<UIInput>().selected=true;
+				playerUW.playerHud.InputControl.selected=true;
 			}
 
 		}
@@ -247,7 +251,7 @@ public class Conversation : GuiBase {
 			ConversationOpen=false;
 			tl.Clear ();
 			tl_input.Clear ();
-			tl_input.maxEntries=5;
+			//tl_input.maxEntries=5;
 			maincam.enabled=true;
 			chains.ActiveControl=0;
 		}
@@ -292,8 +296,6 @@ public class Conversation : GuiBase {
 
 	public IEnumerator say(string WhatToSay)
 	{
-		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-		//tl.textLabel.lineWidth=480;
 		//Replace instances of @GS8 with player name
 		WhatToSay = WhatToSay.Replace("@GS8" , playerUW.CharName);
 		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
@@ -305,11 +307,9 @@ public class Conversation : GuiBase {
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
 			{
-				//char[] strChars =  StrWords[j].ToCharArray();
 				if (StrWords[j].Length+colCounter>=LineWidth)
 				{
 					colCounter=0; 
-					//Debug.Log ("Adding newline " + Output);
 					tl.Add (Output);
 					Output=StrWords[j] + " ";
 					colCounter= StrWords[j].Length+1;
@@ -321,21 +321,14 @@ public class Conversation : GuiBase {
 				}
 			}
 
-			//Debug.Log ("Adding op " + Output);
 			tl.Add(Output );
 			if (i < Paragraphs.GetUpperBound(0))
 				{//Pause for more when not the last paragraph.
 				tl.Add("[MORE]");
-				//FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 				yield return StartCoroutine(WaitForMore());
 				}
 			}
-		//tl.Add ( " @@@ ");
-		//tl.Add(WhatToSay);
-		//FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
-
 		yield return 0;
-		//Debug.Log(WhatToSay);
 	}
 
 	IEnumerator say(int WhatToSay)
@@ -363,6 +356,7 @@ public class Conversation : GuiBase {
 
 	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
 	{
+		tl_input.Clear();
 		string tmp="";
 		MaxAnswer=0;
 		int j=1;
@@ -370,7 +364,8 @@ public class Conversation : GuiBase {
 		{
 			if (localsArray[i]!=0)
 			{
-				tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
+				//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
+				tl_input.Add(j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]).Replace("@GS8",playerUW.CharName));
 				MaxAnswer++;
 			}
 			else
@@ -378,9 +373,9 @@ public class Conversation : GuiBase {
 				break;
 			}
 		}
-		tmp= tmp.Replace("@GS8" , playerUW.CharName);
-		tl_input.maxEntries=1;
-		tl_input.Add (tmp);
+		//tmp= tmp.Replace("@GS8" , playerUW.CharName);
+		//tl_input.maxEntries=1;
+		//tl_input.Add (tmp);
 
 		yield return StartCoroutine(WaitForInput());
 
@@ -391,6 +386,7 @@ public class Conversation : GuiBase {
 
 	public IEnumerator babl_fmenu(int unknown, int[] localsArray, int Start, int flagIndex)
 	{
+		tl_input.Clear();
 		usingBablF=true;
 		for (int i =0; i<=bablf_array.GetUpperBound (0);i++)
 		{//Reset the answers array
@@ -406,7 +402,8 @@ public class Conversation : GuiBase {
 				if (localsArray[flagIndex++] !=0)
 				{
 					bablf_array[j-1] = localsArray[i];
-					tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
+					//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
+					tl_input.Add (j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]));
 					MaxAnswer++;
 				}
 			}
@@ -416,8 +413,8 @@ public class Conversation : GuiBase {
 			}
 		}
 		
-		tl_input.maxEntries=1;
-		tl_input.Add (tmp);
+		//tl_input.maxEntries=1;
+		//tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
 		tmp= playerUW.StringControl.GetString (StringNo,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (tmp));
@@ -429,19 +426,26 @@ public class Conversation : GuiBase {
 	{
 		PlayerTypedAnswer="";
 		//WaitingForTyping=true;
-		UIInput inputctrl = tl_input.gameObject.GetComponent<UIInput>();
+		tl_input.Set(">");
+
+		UIInput inputctrl = playerUW.playerHud.InputControl; //tl_input.gameObject.GetComponent<UIInput>();
+		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 		inputctrl.eventReceiver=this.gameObject;
 		inputctrl.type=UIInput.KeyboardType.Default;
 		inputctrl.text="";
+		inputctrl.label.text="";
 		inputctrl.selected=true;
 		yield return StartCoroutine(WaitForTypedInput());
-		print (PlayerTypedAnswer);
+		yield return StartCoroutine(say (PlayerTypedAnswer));
+		inputctrl.text="";
+		inputctrl.label.text="";
+		playerUW.playerHud.MessageScroll.Clear ();
 	}
 
 	public void OnSubmitPickup()
 	{//Event receiver for input ctrl.
 		WaitingForTyping=false;
-		PlayerTypedAnswer= playerUW.GetMessageLog().gameObject.GetComponent<UIInput>().text;
+		PlayerTypedAnswer= playerUW.playerHud.InputControl.text;//playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>().text;
 
 		//Debug.Log (inputctrl.text);
 
@@ -574,7 +578,7 @@ public class Conversation : GuiBase {
 			int slotNo = locals[start+i] ;
 			if (slotNo<=3)
 			{
-				TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
+				TradeSlot pcSlot = playerUW.playerHud.playerTrade[slotNo];//GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
 				//Give the item to the npc
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 				{
@@ -684,7 +688,7 @@ public class Conversation : GuiBase {
 				{//Just take the first four items
 					ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
 					NPCTradeItems[itemCount]=itemToTrade.gameObject.name;
-					TradeSlot ts = GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+					TradeSlot ts = playerUW.playerHud.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 					ts.objectInSlot=itemToTrade.gameObject.name;
 					ts.SlotImage.mainTexture=itemToTrade.GetInventoryDisplay().texture;
 				}
@@ -706,8 +710,8 @@ public class Conversation : GuiBase {
 		int playerObjectCount=0; int npcObjectCount=0;
 		for (int i = 0; i<4; i++)
 		{
-			TradeSlot npcSlot = GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
-			TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot =  playerUW.playerHud.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.isSelected()){npcObjectCount++;}
 			if (pcSlot.isSelected()){playerObjectCount++;}
 		}
@@ -740,30 +744,30 @@ public class Conversation : GuiBase {
 		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
-			if (npcSlot.objectInSlot!="")
+			TradeSlot pcSlot =  playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			if (pcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 				{
-					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-					cn.AddItemToContainer(npcSlot.objectInSlot);
-					npcSlot.clear ();
+					//playerUW.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
+					cn.AddItemToContainer(pcSlot.objectInSlot);
+					pcSlot.clear ();
 					playerUW.GetComponent<PlayerInventory>().Refresh ();
 				}
 				else
 				{
-					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+					GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 					demanded.transform.parent=null;
 					demanded.transform.position=npc.transform.position;
-					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-					npcSlot.clear();
+					//npc.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
+					pcSlot.clear();
 				}
 			}
 		}
 
 
 
-		Debug.Log ("Do Decline");
+		//Debug.Log ("Do Decline");
 		return;
 	}
 
@@ -789,13 +793,13 @@ public class Conversation : GuiBase {
 
 		if (PlayerAnswer==1)
 		{
-			Debug.Log ("offer accepted");
+			//Debug.Log ("offer accepted");
 			yield return StartCoroutine (say (arg5));
 			//for the moment move to the player's backpack or if no room there drop them on the ground
 			Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot = GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot npcSlot = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -821,7 +825,7 @@ public class Conversation : GuiBase {
 			cn =npc.gameObject.GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot pcSlot =playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 				if (pcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -841,7 +845,7 @@ public class Conversation : GuiBase {
 		}
 		else
 		{
-			Debug.Log ("offer declined");
+			//Debug.Log ("offer declined");
 			switch ( Random.Range(1,5))
 			{
 			case 1:
@@ -879,10 +883,10 @@ public class Conversation : GuiBase {
 		int DemandResult = Random.Range (0,2);
 		if (DemandResult==1)
 		{		
-			Debug.Log ("Demand sucessfull");
+			//Debug.Log ("Demand sucessfull");
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot = GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot npcSlot =playerUW.playerHud.npcTrade[i] ;//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -907,7 +911,7 @@ public class Conversation : GuiBase {
 		}
 		else
 		{
-			Debug.Log ("Demand unsucessfull");
+			//Debug.Log ("Demand unsucessfull");
 			yield return StartCoroutine ( say (arg1) );
 		}
 		//Move the players items back to his inventory;
@@ -915,7 +919,7 @@ public class Conversation : GuiBase {
 		//cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1012,7 +1016,7 @@ public class Conversation : GuiBase {
 
 	public int GetItemAtSlotProperty_Quality(int SlotNo)
 	{
-		TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		TradeSlot pcSlot = playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
 		if(pcSlot!=null)
 		{
 			if (pcSlot.objectInSlot!="")
@@ -1033,7 +1037,7 @@ public class Conversation : GuiBase {
 
 	public int GetItemAtSlotProperty_Link(int SlotNo)
 	{
-		TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		TradeSlot pcSlot = playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
 		if(pcSlot!=null)
 		{
 			if (pcSlot.objectInSlot!="")

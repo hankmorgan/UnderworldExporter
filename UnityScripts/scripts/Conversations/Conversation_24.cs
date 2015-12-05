@@ -286,6 +286,8 @@ public class Conversation_24 : Conversation {
 			
 			//privateVariables[3] = babl_ask( 0 );
 			yield return StartCoroutine( babl_ask( 0 ));
+			//cHANGE
+			//PlayerTypedAnswer="Murgo";
 			yield return StartCoroutine( func_05d2());
 			break;
 			
@@ -465,8 +467,9 @@ public class Conversation_24 : Conversation {
 		
 		locals[2] = 27;
 		yield return StartCoroutine( print( 1, locals[2] ));
-		locals[1] = get_quest( 1, locals[3] );
 		locals[3] = 2;
+		locals[1] = get_quest( 1, locals[3] );
+
 		if ( locals[1] == 1) {
 			
 			locals[4] = 28;
@@ -485,7 +488,7 @@ public class Conversation_24 : Conversation {
 		locals[8] = 32;
 		locals[9] = 0;
 		//locals[48] = babl_fmenu( 0, locals[6], locals[27] );
-		yield return StartCoroutine(babl_menu (0,locals,27));
+		yield return StartCoroutine(babl_fmenu (0,locals,6,27));
 		locals[48] = PlayerAnswer;
 		switch ( locals[48] ) {
 			
@@ -863,9 +866,9 @@ public class Conversation_24 : Conversation {
 		
 		//int locals[50];
 		int[] locals=new int[51];
-		
-		locals[1] = get_quest( 1, locals[2] );
 		locals[2] = 2;
+		locals[1] = get_quest( 1, locals[2] );
+
 		locals[3] = 93;
 		yield return StartCoroutine( print( 1, locals[3] ));
 		locals[25] = locals[1];

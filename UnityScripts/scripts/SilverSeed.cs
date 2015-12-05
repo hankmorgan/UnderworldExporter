@@ -22,7 +22,8 @@ public class SilverSeed : object_base {
 			playerUW.CursorIcon = objInt.GetInventoryDisplay().texture;
 			playerUW.ResurrectPosition=Vector3.zero;
 			objInt.SetWorldDisplay(objInt.GetInventoryDisplay());
-			objInt.getMessageLog ().text= playerUW.StringControl.GetString (1,9);
+			ml.Add (playerUW.StringControl.GetString (1,9));
+
 			return true;
 		}
 		else
@@ -49,7 +50,7 @@ public class SilverSeed : object_base {
 				}
 				objInt.UpdateAnimation();//Update the inventory display
 				objInt.SetWorldDisplay(objInt.GetInventoryDisplay());
-				objInt.getMessageLog ().text=  playerUW.StringControl.GetString (1,12);
+				ml.Add(playerUW.StringControl.GetString (1,12));
 
 
 				playerUW.CursorIcon = playerUW.CursorIconDefault;

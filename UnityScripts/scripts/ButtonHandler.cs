@@ -96,7 +96,7 @@ public class ButtonHandler : object_base {
 			triggerObj=GameObject.Find (trigger);
 		}
 		ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
-		ml.text =playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+		ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
 			{
 			this.Activate();
@@ -173,7 +173,7 @@ public class ButtonHandler : object_base {
 			case ObjectInteraction.POLE:
 				playerUW.playerInventory.ObjectInHand="";
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
-				playerUW.GetMessageLog ().text = playerUW.StringControl.GetString(1,157);
+				ml.Set (playerUW.StringControl.GetString(1,157));
 				return Activate();
 				break;
 			default:

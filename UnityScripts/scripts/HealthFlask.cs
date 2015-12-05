@@ -82,6 +82,6 @@ public class HealthFlask : GuiBase {
 			output= output + "Your current mana points are " +playerUW.PlayerMagic.CurMana + " out of " + playerUW.PlayerMagic.MaxMana;
 		}
 
-		playerUW.GetMessageLog().text =output;
+		playerUW.playerHud.MessageScroll.Add(output);
 	}
 }

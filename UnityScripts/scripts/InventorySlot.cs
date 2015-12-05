@@ -371,8 +371,13 @@ public class InventorySlot : GuiBase {
 							}
 						else
 							{
-							Debug.Log("attempting to pick up a quantity");
-							UIInput inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+							//Debug.Log("attempting to pick up a quantity");
+							playerUW.playerHud.MessageScroll.Set ("Move how many?");
+							UIInput inputctrl =playerUW.playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
+							inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+						//	UIInput inputctrl =playerUW.playerHud.InputControl;
+							inputctrl.text="1";
+							inputctrl.label.text="1";
 							inputctrl.eventReceiver=this.gameObject;
 							inputctrl.type=UIInput.KeyboardType.NumberPad;
 							inputctrl.selected=true;
@@ -389,14 +394,23 @@ public class InventorySlot : GuiBase {
 
 	public void OnSubmitPickup()
 	{
-		WindowDetect.WaitingForInput=false;
-		Time.timeScale=1.0f;
+
 
 		Debug.Log ("Value summited to slot");
 		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
-		UIInput inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+		UIInput inputctrl =playerUW.playerHud.InputControl;
 		Debug.Log (inputctrl.text);
-		int quant= int.Parse(inputctrl.text);
+		int quant=0;
+		if (int.TryParse(inputctrl.text,out quant)==false)
+		{
+			quant=0;
+		}
+		inputctrl.text="";
+		inputctrl.label.text="";
+		playerUW.playerHud.MessageScroll.Clear ();
+		WindowDetect.WaitingForInput=false;
+		Time.timeScale=1.0f;
+
 		if (quant==0)
 		{//cancel
 			QuantityObj=null;

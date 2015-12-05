@@ -15,7 +15,7 @@ public class a_text_string_trap : trap_base {
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 		CheckReferences();
-		playerUW.GetMessageLog ().text = playerUW.StringControl.GetString(StringBlock,StringNo);
+		ml.Add(playerUW.StringControl.GetString(StringBlock,StringNo));
 	}
 
 }

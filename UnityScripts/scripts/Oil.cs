@@ -5,22 +5,31 @@ public class Oil : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (objInt.PickedUp==true)
 		{
-			BecomeObjectInHand();
-			ml.text = "Use oil on?";
-			return true;
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{
+				BecomeObjectInHand();
+				ml.Set ("Use oil on?");
+				return true;
+			}
+			else
+			{
+				return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			}
 		}
 		else
+
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			objInt.FailMessage();
+			return false;
 		}
 	}
 
 
 	public override bool FailMessage ()
 	{
-		ml.text=playerUW.StringControl.GetString(1,177);
+		ml.Add (playerUW.StringControl.GetString(1,177));
 		return false;
 	}
 }

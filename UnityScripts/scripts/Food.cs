@@ -25,13 +25,13 @@ public class Food : object_base {
 		if (Nutrition+playerUW.FoodLevel>=255)
 		{
 			playerUW.FoodLevel=255;
-			ml.text= ObjectInteraction.playerUW.StringControl.GetString(1,126);
+			ml.Add (ObjectInteraction.playerUW.StringControl.GetString(1,126));
 			return false;
 		}
 		else
 		{
 			playerUW.FoodLevel = Nutrition+playerUW.FoodLevel;
-			ml.text= "That " + playerUW.StringControl.GetObjectNounUW(objInt) + foodFlavourText();
+			ml.Add ("That " + playerUW.StringControl.GetObjectNounUW(objInt) + foodFlavourText());
 			objInt.consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.
 		}
@@ -40,7 +40,7 @@ public class Food : object_base {
 	public override bool LookAt()
 	{
 		//Code for when looking at food. Should one day return quantity and smell properly
-		ml.text = playerUW.StringControl.GetFormattedObjectNameUW(objInt,foodSmellText());
+		ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt,foodSmellText()));
 		return true;
 	}
 

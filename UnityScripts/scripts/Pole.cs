@@ -7,13 +7,21 @@ public class Pole : object_base {
 
 	public override bool use ()
 	{
-		BecomeObjectInHand();
-		return true;
+		if (objInt.PickedUp==true)
+		{
+			BecomeObjectInHand();
+			return true;
+		}
+		else
+		{
+			objInt.FailMessage ();
+			return false;
+		}
 	}
 
 	public override bool FailMessage ()
 	{
-		playerUW.GetMessageLog().text=playerUW.StringControl.GetString(1,158);
+		ml.Add (playerUW.StringControl.GetString(1,158));
 		return false;
 	}
 

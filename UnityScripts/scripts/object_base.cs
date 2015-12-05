@@ -5,7 +5,8 @@ public class object_base : MonoBehaviour {
 //Base class for objects.
 	//Will probably put some code here eventually for common things like piping messages to the message log.
 	public static UWCharacter playerUW;
-	public static UILabel ml;
+	public static ScrollController ml;
+	//public static UIInput mi;
 	protected ObjectInteraction objInt;
 
 
@@ -15,7 +16,14 @@ public class object_base : MonoBehaviour {
 		{
 			playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		}
-
+		if (ml==null)
+		{
+			ml=playerUW.playerHud.MessageScroll;
+		}
+		//if (mi==null)
+		//{
+		//	mi = playerUW.playerHud.InputControl;
+		//}
 		CheckReferences();
 
 	}
@@ -39,7 +47,7 @@ public class object_base : MonoBehaviour {
 	{
 		//Debug.Log ("default lookat for " + this.gameObject.name);
 		CheckReferences();
-		ml.text=playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+		ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		return true;
 	}
 
@@ -85,7 +93,9 @@ public class object_base : MonoBehaviour {
 		}
 		if ((objInt!=null) && (ml==null))
 		{
-			ml=objInt.getMessageLog ();
+			//ml=objInt.getMessageLog ();
+			ml=playerUW.playerHud.MessageScroll;
+			//mi =ml.gameObject.GetComponent<UIInput>();
 		}
 	}
 
@@ -100,7 +110,7 @@ public class object_base : MonoBehaviour {
 	public virtual bool TalkTo()
 	{
 		//000~001~156~You cannot talk to that.
-		playerUW.GetMessageLog ().text=playerUW.StringControl.GetString (1,156);
+		ml.Add(playerUW.StringControl.GetString (1,156));
 		return true;
 	}
 
@@ -128,7 +138,7 @@ public class object_base : MonoBehaviour {
 	public virtual bool FailMessage()
 	{
 		//Message to display when this object is used on a another object that has no use for it. Eg a key on a sign.
-		ml.text="You cannot use this. (Failmessage default)";
+		ml.Add("You cannot use this. (Failmessage default)");
 		return false;
 	}
 }

@@ -88,7 +88,9 @@ public class UWCharacter : Character {
 		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");
 
 		ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();
-
+		playerHud.InputControl.text="";
+		playerHud.InputControl.label.text="";
+		playerHud.MessageScroll.Clear ();
 	}
 
 	void PlayerDeath()
@@ -167,7 +169,9 @@ public class UWCharacter : Character {
 		base.Update ();
 		if (WindowDetectUW.WaitingForInput==true)
 		{//TODO: This should be in window detect
-			MessageLog.gameObject.GetComponent<UIInput>().selected=true;
+			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
+			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
+			playerHud.InputControl.selected=true;
 		}
 		if ((CurVIT<=0) && (mus.Death==false))
 		{
@@ -235,13 +239,22 @@ public class UWCharacter : Character {
 
 	public void OnSubmitPickup()
 	{
+
+		//Debug.Log ("Value summited");
+
+		UIInput inputctrl =playerHud.InputControl;//playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
+		//Debug.Log (inputctrl.text);
+		int quant=0;
+		if (int.TryParse(inputctrl.text,out quant)==false)
+		{
+			quant=0;
+		}
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		Debug.Log ("Value summited");
-
-		UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
-		//Debug.Log (inputctrl.text);
-		int quant= int.Parse(inputctrl.text);
+		inputctrl.text="";
+		inputctrl.label.text="";
+		playerHud.MessageScroll.Clear ();
+		//int quant= int.Parse(inputctrl.text);
 		if (quant==0)
 		{//cancel
 			QuantityObj=null;
@@ -288,7 +301,7 @@ public class UWCharacter : Character {
 		}
 		else
 		{
-			MessageLog.text = "Talking to yourself?";
+			playerHud.MessageScroll.Add ("Talking to yourself?");
 		}
 	}
 
@@ -321,14 +334,17 @@ public class UWCharacter : Character {
 					switch(hit.transform.name.Substring(0,len).ToUpper())
 					{
 					case "CEIL":
-						GetMessageLog().text = "You see the ceiling";
+						playerHud.MessageScroll.Add ("You see the ceiling");
+						//GetMessageLog().text = "You see the ceiling";
 						break;	
 					case "PILL":
-						GetMessageLog().text = "You see a pillar";
+						//GetMessageLog().text = 
+						playerHud.MessageScroll.Add("You see a pillar");
 						break;	
 					case "BRID":
 						//000~001~171~You see a bridge.
-						GetMessageLog().text= StringControl.GetString(1,171);
+						//GetMessageLog().text= 
+						playerHud.MessageScroll.Add(StringControl.GetString(1,171));
 						break;
 					case "WALL":
 					case "TILE":
@@ -381,7 +397,8 @@ public class UWCharacter : Character {
 							int textureIndex =0;
 							if (int.TryParse(rend.materials[materialIndex].name.Substring(4,3),out textureIndex))//int.Parse(rend.materials[materialIndex].name.Substring(4,3));
 							{
-								GetMessageLog ().text ="You see " + StringControl.GetTextureName(textureIndex);
+								//GetMessageLog ().text =
+								playerHud.MessageScroll.Add("You see " + StringControl.GetTextureName(textureIndex));
 							}
 						}
 					//	GetMessageLog().text=rend.materials[materialIndex].name;
@@ -395,6 +412,69 @@ public class UWCharacter : Character {
 			}
 		}
 
+
+	public override void PickupMode ()
+	{
+		//Picks up the clicked object in the view.
+		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
+		if (InvMarker==null)
+		{
+			InvMarker=GameObject.Find ("InventoryMarker");
+		}
+		if (pInv.ObjectInHand=="")//Player is not holding anything.
+		{//Find the object within the pickup range.
+			Ray ray ;
+			if (MouseLookEnabled==true)
+			{
+				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			}
+			else
+			{
+				ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+			}
+			RaycastHit hit = new RaycastHit(); 
+			if (Physics.Raycast(ray,out hit,GetPickupRange()))
+			{
+				ObjectInteraction objPicked;
+				objPicked=hit.transform.GetComponent<ObjectInteraction>();
+				if (objPicked!=null)//Only objects with ObjectInteraction can be picked.
+				{
+					if (objPicked.CanBePickedUp==true)
+					{
+						if (UICamera.currentTouchID==-2)
+						{
+							//right click check for quant.
+							//Pickup if either not a quantity or is a quantity of one.
+							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)) || (objPicked.isEnchanted))
+							{
+								Pickup(objPicked,pInv);
+							}
+							else
+							{
+								//Debug.Log("attempting to pick up a quantity");
+
+								playerHud.MessageScroll.Set ("Move how many?");
+								UIInput inputctrl =playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
+								inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+								inputctrl.eventReceiver=this.gameObject;
+								inputctrl.type=UIInput.KeyboardType.NumberPad;
+								inputctrl.text="1";
+								inputctrl.label.text="1";
+								inputctrl.selected=true;
+								QuantityObj=objPicked;	
+								Time.timeScale=0.0f;
+								WindowDetect.WaitingForInput=true;
+							}		
+						}
+						else
+						{//Left click. Pick them all up.
+							Pickup(objPicked,pInv);	
+						}						
+					}
+				}
+			}
+		}
+	}
 
 	public Quest quest()
 	{

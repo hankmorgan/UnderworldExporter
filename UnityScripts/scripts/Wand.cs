@@ -40,16 +40,16 @@ public class Wand : enchantment_base {
 	{
 		if (SpellObjectQuantity>0)
 		{
-			ml.text=playerUW.StringControl.GetFormattedObjectNameUW(objInt) 
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) 
 				+ " of " 
 				+ playerUW.StringControl.GetString(6,GetActualSpellIndex())
 				+ " with "
 				+ SpellObjectQuantity 
-				+ " charges remaining.";
+				+ " charges remaining.");
 		}
 		else
 		{
-			ml.text=playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		}
 		return true;
 	}

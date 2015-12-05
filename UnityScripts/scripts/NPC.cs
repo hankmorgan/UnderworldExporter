@@ -135,7 +135,7 @@ public class NPC : object_base {
 	{
 		if (npc_attitude==0)
 		{//Hostile
-			playerUW.GetMessageLog ().text=playerUW.StringControl.GetString (7,1);
+			ml.Add (playerUW.StringControl.GetString (7,1));
 			return false;
 		}
 		//Debug.Log("Talking to " + WhoAmI) ;
@@ -168,7 +168,7 @@ public class NPC : object_base {
 		if ((npc_whoami == 255))
 		{
 			//006~007~001~You get no response.
-			playerUW.GetMessageLog ().text=playerUW.StringControl.GetString (7,1);
+			ml.Add (playerUW.StringControl.GetString (7,1));
 		}
 		else
 		{
@@ -207,7 +207,7 @@ public class NPC : object_base {
 		{
 			output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
 		}
-		ml.text=output;
+		ml.Add (output);
 		return true;
 	}
 

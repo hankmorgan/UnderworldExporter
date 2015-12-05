@@ -12,7 +12,7 @@ public class Fountain : object_base {
 			{
 				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,objInt.Link-512);
 			}
-			ml.text= playerUW.StringControl.GetString (1,237);
+			ml.Add (playerUW.StringControl.GetString (1,237));
 			return true;
 		}
 		else

@@ -5,15 +5,23 @@ public class Spike : object_base {
 
 public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (objInt.PickedUp==true)
 		{
-			BecomeObjectInHand();
-			ml.text=playerUW.StringControl.GetString(1,130);
-			return true;
+			if (playerUW.playerInventory.ObjectInHand=="")
+			{
+				BecomeObjectInHand();
+				ml.Set (playerUW.StringControl.GetString(1,130));
+				return true;
+			}
+			else
+			{
+				return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			}
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			objInt.FailMessage ();
+			return false;
 		}
 	}
 }

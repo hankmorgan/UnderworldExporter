@@ -92,7 +92,7 @@ public class TMAP : object_base {
 					}
 				}
 		}
-		ml.text= playerUW.StringControl.TextureDescription(TextureIndex);
+		ml.Add (playerUW.StringControl.TextureDescription(TextureIndex));
 		return true;
 
 	}

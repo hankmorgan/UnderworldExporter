@@ -256,9 +256,9 @@ public class ObjectInteraction : MonoBehaviour {
 	//	return SC;
 	//}
 
-	public UILabel getMessageLog()
+	public ScrollController getMessageLog()
 	{
-		return playerUW.GetMessageLog();//MessageLog;
+		return playerUW.playerHud.MessageScroll;//MessageLog;
 	}
 
 	public bool Attack(int damage)

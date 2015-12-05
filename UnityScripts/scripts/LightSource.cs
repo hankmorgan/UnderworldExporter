@@ -112,7 +112,7 @@ public class LightSource : object_base {
 		else
 		{
 			//Debug.Log ("No free hand");
-			ml.text=playerUW.StringControl.GetString(1,258);
+			ml.Add (playerUW.StringControl.GetString(1,258));
 		}
 		objInt.RefreshAnim();
 	}
@@ -128,7 +128,7 @@ public class LightSource : object_base {
 
 	public override bool LookAt()
 	{
-		ml.text =playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+		ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		return true;
 	}
 

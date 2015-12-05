@@ -4,6 +4,9 @@ using System.Collections;
 public class UWHUD : MonoBehaviour {
 //Class for referencing other hud elements without having to search for them all the time.
 
+	public ScrollController MessageScroll;
+	public UIInput InputControl;
+
 	public CutsceneAnimation CutScenesSmall;
 	public HealthFlask HealthFlask;
 	public HealthFlask ManaFlask;
@@ -16,10 +19,14 @@ public class UWHUD : MonoBehaviour {
 	public UITexture[] ConversationPortraits;
 
 	//Conversation Controls
+
+	//public ScrollController Conversation_Scroll;
 	public UITextList Conversation_tl;//Text output.
-	public UITextList Conversation_tl_input;//player choices
-	public UITexture Conversation_OutPutControl;//Where the conversation is printed out
+	//public UITextList Conversation_tl_input;//player choices
+	//public UITexture Conversation_OutPutControl;//Where the conversation is printed out
 	public UWFonts Conversation_FontController;
 
 	public UITexture main_window;
 }
+
+

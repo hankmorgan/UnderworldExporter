@@ -8,7 +8,7 @@ public class Anvil : object_base {
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
 			BecomeObjectInHand();
-			ml.text = "Use Anvil on what?";
+			ml.Set("Use Anvil on what?");
 			return true;
 		}
 		else

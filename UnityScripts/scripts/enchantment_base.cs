@@ -62,7 +62,7 @@ public class enchantment_base : object_base {
 		case 185 :// a_toadstool
 		case 186 :// a_bottle_of_ale_bottles_of_ale
 			//No enchantment revealed
-			ml.text=playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 			break;
 		case 316 :// a_scroll
 		case 317 :
@@ -71,7 +71,7 @@ public class enchantment_base : object_base {
 		case 187 :// a_red_potion
 		case 188 :// a_green_potion
 		default:
-			ml.text=playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex());
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
 			break;			
 		}
 		return true;

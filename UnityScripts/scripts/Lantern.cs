@@ -14,17 +14,17 @@ public class Lantern : LightSource {
 			case ObjectInteraction.OIL:
 				if (IsOn==true)
 				{
-					ml.text=playerUW.StringControl.GetString(1,178);
+					ml.Add(playerUW.StringControl.GetString(1,178));
 				}
 				else
 				{
 					if (objInt.Quality==64)
 					{
-						ml.text=playerUW.StringControl.GetString(1,180);
+						ml.Add(playerUW.StringControl.GetString(1,180));
 					}
 					else
 					{
-						ml.text=playerUW.StringControl.GetString(1,179);
+						ml.Add(playerUW.StringControl.GetString(1,179));
 						objInt.Quality = 64;
 						objIntUsed.consumeObject();
 					}

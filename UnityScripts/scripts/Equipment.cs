@@ -29,8 +29,8 @@ public class Equipment : object_base {
 			case ObjectInteraction.ANVIL: //ANVIL
 				{
 				//Do a difficulty check and prompt for approval.
-				playerUW.GetMessageLog ().text = "[placeholder]You think it will be hard/easy to repair this item";
-				UIInput inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+				ml.Set ("[placeholder]You think it will be hard/easy to repair this item");
+				UIInput inputctrl =playerUW.playerHud.InputControl;
 				inputctrl.eventReceiver=this.gameObject;
 				inputctrl.type=UIInput.KeyboardType.Default;
 				inputctrl.useLabelTextAtStart=true;
@@ -55,10 +55,10 @@ public class Equipment : object_base {
 	{//Event handler for processing the repair question y/n
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		UIInput inputctrl =playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+		UIInput inputctrl =playerUW.playerHud.InputControl;//playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
 
 		string ans = inputctrl.text;
-		playerUW.GetMessageLog ().text="";
+		ml.Clear();//="";
 		if (ans.Substring(0,1).ToUpper() == "Y")
 		{
 			//do the repair 
@@ -70,19 +70,16 @@ public class Equipment : object_base {
 			{
 				objInt.Quality = objInt.Quality+5;
 				if (objInt.Quality >63){objInt.Quality=63;}
-				playerUW.GetMessageLog ().text="You repair the item";
+				ml.Add("You repair the item");
 			}		
 			else
 			{
-				playerUW.GetMessageLog ().text="You fail to repair the item";
+				ml.Add ("You fail to repair the item");
 			}
 			UpdateQuality();
 		}
 		//cancel the repair 
 		playerUW.playerInventory.ObjectInHand="";
 		playerUW.CursorIcon=playerUW.CursorIconDefault;
-
-
 	}
-
 }

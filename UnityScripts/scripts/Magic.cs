@@ -23,6 +23,8 @@ public class Magic : MonoBehaviour {
 	
 	long SummonCount=0;
 
+	public ScrollController ml;
+
 	public void SetSpellCost(int SpellCircle)
 	{
 		SpellCost= SpellCircle*3;
@@ -123,19 +125,19 @@ public class Magic : MonoBehaviour {
 			break;
 		default:
 			{
-			casterUW.GetMessageLog ().text= "Not a spell.";
+			ml.Add ("Not a spell.");
 			return false;
 			}
 		}//magicwords
 
 		if (Mathf.Round(casterUW.CharLevel/2)<TestSpellLevel)
 		{//Not experienced enough
-			casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,210);
+			ml.Add (casterUW.StringControl.GetString (1,210));
 			return false;
 		}
 		else if (CurMana< TestSpellLevel*3)
 		{//Mana test
-			casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,211);
+			ml.Add (casterUW.StringControl.GetString (1,211));
 			return false;
 		}
 		else if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
@@ -143,18 +145,18 @@ public class Magic : MonoBehaviour {
 			if (Random.Range(1,10)<8)
 			{//TODO:decide on the chances
 				//000~001~213~Casting was not successful.
-				casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,213);
+				ml.Add (casterUW.StringControl.GetString (1,213));
 			}
 			else
 			{//000~001~214~The spell backfires.
-				casterUW.GetMessageLog ().text =casterUW.GetMessageLog ().text=casterUW.StringControl.GetString (1,214);
+				ml.Add (casterUW.StringControl.GetString (1,214));
 				casterUW.CurVIT = casterUW.CurVIT-3;
 			}
 			return false;
 		}
 		else
 		{//Casting sucessful. 
-			casterUW.GetMessageLog ().text ="Casting " + MagicWords;
+			ml.Add ("Casting " + MagicWords);
 			return true;
 		}
 	}
@@ -829,7 +831,7 @@ public class Magic : MonoBehaviour {
 			{//Teleport to level
 				Debug.Log ("moonstone is on another level. (or I forgot to update levelno)");
 				//000~001~273~The moonstone is not available.
-				playerUW.GetMessageLog ().text= playerUW.StringControl.GetString(1,273);
+				ml.Add (playerUW.StringControl.GetString(1,273));
 			}
 			else
 			{
@@ -839,7 +841,7 @@ public class Magic : MonoBehaviour {
 				}
 				else
 				{
-					playerUW.GetMessageLog ().text= playerUW.StringControl.GetString(1,273);
+					ml.Add (playerUW.StringControl.GetString(1,273));
 				}
 			}
 		}
@@ -978,7 +980,7 @@ public class Magic : MonoBehaviour {
 
 	void SpellIncantationFailed(GameObject caster)
 	{
-		caster.GetComponent<UWCharacter>().GetMessageLog().text = caster.GetComponent<UWCharacter>().StringControl.GetString(1,212);
+		ml.Add (caster.GetComponent<UWCharacter>().StringControl.GetString(1,212));
 	}
 
 

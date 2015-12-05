@@ -22,5 +22,21 @@ public class GuiBase : MonoBehaviour {
 		}
 	}
 
+	public void SetAnchorX(float offX)
+	{
+		UIAnchor uia = this.GetComponent<UIAnchor>();
+		if (uia !=null)
+		{
+			uia.relativeOffset = new Vector2(offX, uia.relativeOffset.y);
+		}
+	}
 
+	public void SetAnchorY(float offY)
+	{
+		UIAnchor uia = this.GetComponent<UIAnchor>();
+		if (uia !=null)
+		{
+			uia.relativeOffset = new Vector2(uia.relativeOffset.x, offY);
+		}
+	}
 }

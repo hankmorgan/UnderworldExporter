@@ -40,7 +40,7 @@ public class Potion : enchantment_base {
 			
 			if (UseString !=-1)
 			{
-				ml.text=playerUW.StringControl.GetString (1,UseString);
+				ml.Add (playerUW.StringControl.GetString (1,UseString));
 			}
 			objInt.consumeObject();
 			return true;

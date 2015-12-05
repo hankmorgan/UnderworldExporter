@@ -61,7 +61,7 @@ public class Character : MonoBehaviour {
 	public StringController StringControl;
 
 	//The message log on the main screen.
-	protected  UILabel MessageLog;
+	//protected  UILabel MessageLog;
 
 	//The music system
 	public MusicController mus;
@@ -69,15 +69,16 @@ public class Character : MonoBehaviour {
 	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;
 
-	public UILabel GetMessageLog()
-	{
+	//public UILabel GetMessageLog()
+	//{
 		/*Returns the message log for various functions*/
-		if (MessageLog==null)
-		{
-			MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		}
-		return MessageLog;
-	}
+	//	if (MessageLog==null)
+	//	{
+	//		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+	//	}
+	//	return MessageLog;
+	//}
+
 
 
 	public void ApplyDamage(int damage)
@@ -89,7 +90,7 @@ public class Character : MonoBehaviour {
 	// Use this for initialization
 	public virtual void Start () {
 
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+	//	MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 
 		//tell other objects about this object.
 		TileMap.gronk=this.gameObject;
@@ -154,7 +155,7 @@ public class Character : MonoBehaviour {
 		return pickupRange;
 	}
 
-	public void PickupMode()
+	public virtual void PickupMode()
 	{//Picks up the clicked object in the view.
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
 		if (InvMarker==null)
@@ -183,28 +184,8 @@ public class Character : MonoBehaviour {
 					{
 						if (UICamera.currentTouchID==-2)
 						{
-							//right click check for quant.
-							//Pickup if either not a quantity or is a quantity of one.
-							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)) || (objPicked.isEnchanted))
-							{
-								Pickup(objPicked,pInv);
-							}
-							else
-							{
-								//Debug.Log("attempting to pick up a quantity");
-								UIInput inputctrl =MessageLog.gameObject.GetComponent<UIInput>();
-								inputctrl.eventReceiver=this.gameObject;
-								inputctrl.type=UIInput.KeyboardType.NumberPad;
-								inputctrl.selected=true;
-								QuantityObj=objPicked;	
-								Time.timeScale=0.0f;
-								WindowDetect.WaitingForInput=true;
-							}		
+						Pickup(objPicked,pInv);
 						}
-						else
-						{//Left click. Pick them all up.
-							Pickup(objPicked,pInv);	
-						}						
 					}
 				}
 			}

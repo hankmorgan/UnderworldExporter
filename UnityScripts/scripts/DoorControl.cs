@@ -49,7 +49,7 @@ public class DoorControl : object_base {
 					if (state==true)
 					{
 						//Door is already open
-						ml.text=playerUW.StringControl.GetString (1,6);
+						ml.Add(playerUW.StringControl.GetString (1,6));
 						return true;
 					}
 						
@@ -58,22 +58,22 @@ public class DoorControl : object_base {
 							ToggleLock();
 							if (locked==true)
 								{//Locked message
-								ml.text=playerUW.StringControl.GetString (1,4);
+								ml.Add(playerUW.StringControl.GetString (1,4));
 								}
 							else
 								{//Unlockedmessage
-								ml.text=playerUW.StringControl.GetString (1,5);
+								ml.Add (playerUW.StringControl.GetString (1,5));
 								}
 						}
 					else
 						{
 						if (KeyIndex==53)
 							{//There is no lock
-							ml.text=playerUW.StringControl.GetString (1,3);
+							ml.Add (playerUW.StringControl.GetString (1,3));
 							}
 						else
 							{//That is the wrong key.
-							ml.text=playerUW.StringControl.GetString (1,2);
+							ml.Add(playerUW.StringControl.GetString (1,2));
 							}
 						}
 
@@ -85,19 +85,19 @@ public class DoorControl : object_base {
 						{
 						if (playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
 							{
-							ml.text=playerUW.StringControl.GetString (1,121);
+							ml.Add (playerUW.StringControl.GetString (1,121));
 							UnlockDoor();
 							}
 						else
 							{
 							//Debug.Log ("Picklock failed!");
-							ml.text=playerUW.StringControl.GetString (1,120);
+							ml.Add (playerUW.StringControl.GetString (1,120));
 							objIntUsed.consumeObject();
 							}
 						}
 					else
 						{
-						ml.text=playerUW.StringControl.GetString (1,120);
+						ml.Add (playerUW.StringControl.GetString (1,120));
 						}
 					break;
 					}
@@ -111,18 +111,18 @@ public class DoorControl : object_base {
 					//000~001~131~The door is spiked.
 						if (state==false)
 							{//Closed door
-							ml.text= playerUW.StringControl.GetString(1,129);
+							ml.Add (playerUW.StringControl.GetString(1,129));
 							Spiked=true;
 							objIntUsed.consumeObject();							
 							}
 						else
 							{
-							ml.text= playerUW.StringControl.GetString(1,128);
+							ml.Add (playerUW.StringControl.GetString(1,128));
 							}						
 						}
 					else
 						{
-						ml.text= playerUW.StringControl.GetString(1,131);
+						ml.Add (playerUW.StringControl.GetString(1,131));
 						}
 					return true;
 					}
@@ -156,7 +156,7 @@ public class DoorControl : object_base {
 		{
 			if (PlayerUse==true)
 			{
-				ml.text="The " + playerUW.StringControl.GetObjectNounUW(objInt) + " is locked.";
+				ml.Add ("The " + playerUW.StringControl.GetObjectNounUW(objInt) + " is locked.");
 			}
 		}
 		return true;
@@ -284,11 +284,11 @@ public class DoorControl : object_base {
 	{
 		if (isPortcullis==false)
 		{
-			ml.text = playerUW.StringControl.GetFormattedObjectNameUW(objInt,DoorQuality());
+			ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt,DoorQuality()));
 		}
 		else
 		{
-			ml.text = playerUW.StringControl.GetFormattedObjectNameUW(objInt);
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		}
 
 		return true;

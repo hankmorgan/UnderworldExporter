@@ -63,7 +63,7 @@ public class RuneSlot : MonoBehaviour {
 			}
 		else
 			{//right click id the rune.
-				playerUW.GetMessageLog ().text = "You see " + playerUW.StringControl.GetSimpleObjectNameUW(232+SlotNumber);
+				playerUW.playerHud.MessageScroll.Add ("You see " + playerUW.StringControl.GetSimpleObjectNameUW(232+SlotNumber));
 			}
 		}
 

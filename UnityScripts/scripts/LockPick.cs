@@ -5,15 +5,23 @@ public class LockPick : object_base {
 	/*A lock pick is used to pick locks*/
 	public override bool use()
 	{
-		if(playerUW.playerInventory.ObjectInHand=="")
+		if (objInt.PickedUp==true)
 		{
-			BecomeObjectInHand();
-			ml.text = playerUW.StringControl.GetString(1,8);
-			return true;
+			if(playerUW.playerInventory.ObjectInHand=="")
+			{
+				BecomeObjectInHand();
+				ml.Set ( playerUW.StringControl.GetString(1,8));
+				return true;
+			}
+			else
+			{
+				return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			}
 		}
-		else
+	else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			objInt.FailMessage ();
+			return false;
 		}
 	}
 }
