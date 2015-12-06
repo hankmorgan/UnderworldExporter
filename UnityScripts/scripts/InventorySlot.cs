@@ -15,7 +15,7 @@ public class InventorySlot : GuiBase {
 	public const int BOOT =75;
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
-
+	public static bool LookingAt;
 
 	private GameObject QuantityObj=null;
 
@@ -44,9 +44,6 @@ public class InventorySlot : GuiBase {
 	{
 		//string ObjectName= playerUW.playerInventory.GetObjectAtSlot(slotIndex);
 		GameObject objLookedAt = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
-
-			//GameObject.Find (ObjectName);
-
 
 		if (objLookedAt!=null)
 		{
@@ -119,7 +116,7 @@ public class InventorySlot : GuiBase {
 			UseFromSlot ();
 			break;
 		case UWCharacter.InteractionModeInConversation:
-			ConversationPickup(leftClick);
+			ConversationClick(leftClick);
 			break;
 		}
 	
@@ -128,9 +125,19 @@ public class InventorySlot : GuiBase {
 
 
 
-	void ConversationPickup(bool isLeftClick)
+	void ConversationClick(bool isLeftClick)
 	{
+		if (isLeftClick==false)
+		{//Looking at object
+			TemporaryLookAt();
+			return;
+		}
+		else
+		{
+			RightClickPickup();
+		}
 
+		return;
 		string objectInSlot = playerUW.playerInventory.GetObjectAtSlot(slotIndex);
 		//Check if the slot has a container first.
 		if (objectInSlot!="")
@@ -372,7 +379,18 @@ public class InventorySlot : GuiBase {
 						else
 							{
 							//Debug.Log("attempting to pick up a quantity");
-							playerUW.playerHud.MessageScroll.Set ("Move how many?");
+							if (Conversation.InConversation==true)
+							{
+								playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
+								playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+								playerUW.playerHud.MessageScrollTemp.Set ("Move how many?");
+								Conversation.EnteringQty=true;
+							}
+							else
+							{
+								playerUW.playerHud.MessageScroll.Set ("Move how many?");
+							}
+							//playerUW.playerHud.MessageScroll.Set ("Move how many?");
 							UIInput inputctrl =playerUW.playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
 							inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
 						//	UIInput inputctrl =playerUW.playerHud.InputControl;
@@ -394,8 +412,6 @@ public class InventorySlot : GuiBase {
 
 	public void OnSubmitPickup()
 	{
-
-
 		Debug.Log ("Value summited to slot");
 		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
 		UIInput inputctrl =playerUW.playerHud.InputControl;
@@ -407,9 +423,18 @@ public class InventorySlot : GuiBase {
 		}
 		inputctrl.text="";
 		inputctrl.label.text="";
-		playerUW.playerHud.MessageScroll.Clear ();
 		WindowDetect.WaitingForInput=false;
-		Time.timeScale=1.0f;
+		Conversation.EnteringQty=false;
+		if (Conversation.InConversation==false)
+		{
+			playerUW.playerHud.MessageScroll.Clear ();
+			Time.timeScale=1.0f;
+		}
+		else
+		{
+			playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
+			playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
+		}
 
 		if (quant==0)
 		{//cancel
@@ -441,4 +466,58 @@ public class InventorySlot : GuiBase {
 			}
 		}
 	}
+
+	public ObjectInteraction GetGameObjectInteration()
+	{
+		GameObject obj = playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
+		if (obj!=null)
+		{
+			return obj.GetComponent<ObjectInteraction>();
+		}
+		else
+		{
+			return null;
+		}
+	}
+
+
+	void TemporaryLookAt()
+	{/*For looking at items temporarily in conversations where I need to restore the original log text*/
+		if (LookingAt==true)
+		{return;}//Only look at one thing at a time.
+		
+		ObjectInteraction objInt= GetGameObjectInteration();
+		if (objInt!=null)
+		{
+			LookingAt=true;
+			playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
+			playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+			StartCoroutine(ClearTempLookAt());
+			playerUW.playerHud.MessageScrollTemp.Set (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+		}
+	}
+	
+	IEnumerator ClearTempLookAt()
+	{
+
+		Time.timeScale=0.1f;
+		yield return new WaitForSeconds(0.1f);
+		
+		LookingAt=false;
+		if (Conversation.InConversation==true)
+		{
+			Time.timeScale=0.00f;
+		}
+		else
+		{
+			Time.timeScale=1.0f;//just in case a conversation is ended while looking.
+		}
+		
+		playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
+		playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
+		playerUW.playerHud.MessageScrollTemp.Set("");
+	}
+
+
+
 }

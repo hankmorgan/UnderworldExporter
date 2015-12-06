@@ -13,27 +13,74 @@ public class TradeSlot : GuiBase {
 	public UITexture SlotImage;
 	public bool Selected=false;
 	private Texture2D Blank;
-	public GameObject Indicator;
+	private Texture2D IndicatorSelected;
+	public UITexture Indicator;
+	public UILabel Quantity;
+	public static bool LookingAt;
 	// Use this for initialization
 	void Start () {
 		//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		//pInv=GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		SlotImage=this.GetComponent<UITexture>();
 		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
-
+		IndicatorSelected = Resources.Load<Texture2D>("HUD/Cursors/cursors_0018");
 		SlotImage.mainTexture=Blank;
+		Quantity.text="";
 	}
 	
 	// Update is called once per frame
 	void Update () {
-			Indicator.SetActive(isSelected ());
+		//Indicator.SetActive(isSelected ());
+		if (isSelected())
+		{
+			Indicator.mainTexture=IndicatorSelected;
+		}
+		else
+		{
+			Indicator.mainTexture=Blank;
+		}
+		if (objectInSlot=="")
+		{
+			Quantity.text="";
+		}
 	}
-
+	
 	void PlayerSlotRightClick()
 	{//Toggle selected state
-		Selected = !Selected;
+		//Make this look description
+		//Selected = !Selected;
+		if (LookingAt==true)
+		{return;}//Only look at one thing at a time.
+
+		ObjectInteraction objInt= GetGameObjectInteraction();
+		if (objInt!=null)
+		{
+			LookingAt=true;
+			playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
+			playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+			StartCoroutine(ClearTempLookAt());
+			playerUW.playerHud.MessageScrollTemp.Set (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+		}
 	}
 
+	IEnumerator ClearTempLookAt()
+	{
+		Time.timeScale=0.1f;
+		yield return new WaitForSeconds(0.1f);
+		LookingAt=false;
+		if (Conversation.InConversation==true)
+		{
+			Time.timeScale=0.00f;
+		}
+		else
+		{
+			Time.timeScale=1.0f;//just in case a conversations is ended while looking.
+		}
+
+		playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
+		playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
+		playerUW.playerHud.MessageScrollTemp.Set("");
+	}
 
 	void PlayerSlotLeftClick()
 	{
@@ -54,9 +101,7 @@ public class TradeSlot : GuiBase {
 				objectInSlot=playerUW.playerInventory.ObjectInHand;
 				playerUW.playerInventory.ObjectInHand=tmp;
 				playerUW.CursorIcon= playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-				
 			}
-			
 		}
 		else
 		{
@@ -70,7 +115,22 @@ public class TradeSlot : GuiBase {
 			}
 			
 		}
-
+		if (objectInSlot=="")
+		{
+			Quantity.text="";
+		}
+		else
+		{
+			int qty= GetGameObjectInteraction().GetQty();
+			if (qty<=1)
+			{
+				Quantity.text="";
+			}
+			else
+			{
+				Quantity.text=qty.ToString();
+			}
+		}
 	}
 
 
@@ -98,7 +158,14 @@ public class TradeSlot : GuiBase {
 		}
 		else
 		{
-			NPCSlotClick ();
+			if (UICamera.currentTouchID == -2)//right click
+			{
+				PlayerSlotRightClick ();
+			}
+			else
+			{
+				NPCSlotClick();
+			}
 		}
 
 	}
@@ -130,6 +197,19 @@ public class TradeSlot : GuiBase {
 			}
 		}
 		return 0;
+	}
+
+	public ObjectInteraction GetGameObjectInteraction()
+	{
+		GameObject obj = GameObject.Find (objectInSlot);
+		if (obj!=null)
+		{
+			return obj.GetComponent<ObjectInteraction>();
+		}
+		else
+		{
+			return null;
+		}
 	}
 	//void OnDoubleClick () 
 	//{

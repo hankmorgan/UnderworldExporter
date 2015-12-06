@@ -35,6 +35,7 @@ public class Conversation : GuiBase {
 	public static int CurrentConversation;
 	public static bool InConversation = false;
 	public static bool ConversationOpen=false;
+	public static bool EnteringQty;
 
 	public int StringNo;
 
@@ -140,8 +141,8 @@ public class Conversation : GuiBase {
 
 		StringNo =stringno;
 
-		//pause the world
-		Time.timeScale=0.0f;
+		//slow the world
+		Time.timeScale=0.00f;
 		ConversationOpen=true;
 		InConversation=true;
 	}
@@ -198,6 +199,10 @@ public class Conversation : GuiBase {
 
 	void OnGUI()
 	{
+		if (EnteringQty==true)
+		{
+			return;
+		}
 		if ( ! ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true)) )
 		{
 			if (WaitingForInput)
@@ -691,6 +696,15 @@ public class Conversation : GuiBase {
 					TradeSlot ts = playerUW.playerHud.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 					ts.objectInSlot=itemToTrade.gameObject.name;
 					ts.SlotImage.mainTexture=itemToTrade.GetInventoryDisplay().texture;
+					int qty= itemToTrade.GetQty();
+					if (qty<=1)
+					{
+						ts.Quantity.text="";
+					}
+					else
+					{
+						ts.Quantity.text=qty.ToString();
+					}
 				}
 			}
 		}

@@ -49,6 +49,7 @@ public class chains : GuiBase {
 
 	public static void Refresh()
 	{
+		//TODO:Make this cleaner!!!
 //		Debug.Log ("Refresh");
 		setControl=ActiveControl;
 		switch (ActiveControl)
@@ -107,10 +108,22 @@ public class chains : GuiBase {
 			EnableDisableControl("Backpack_Slot_05",true);
 			EnableDisableControl("Backpack_Slot_06",true);
 			EnableDisableControl("Backpack_Slot_07",true);
+			EnableDisableControl("Backpack_Count_00",true);
+			EnableDisableControl("Backpack_Count_01",true);
+			EnableDisableControl("Backpack_Count_02",true);
+			EnableDisableControl("Backpack_Count_03",true);
+			EnableDisableControl("Backpack_Count_04",true);
+			EnableDisableControl("Backpack_Count_05",true);
+			EnableDisableControl("Backpack_Count_06",true);
+			EnableDisableControl("Backpack_Count_07",true);
 			EnableDisableControl("LeftShoulder_Slot",true);
 			EnableDisableControl("RightShoulder_Slot",true);
 			EnableDisableControl("LeftHand_Slot",true);
 			EnableDisableControl("RightHand_Slot",true);
+			EnableDisableControl("LeftShoulder_Count",true);
+			EnableDisableControl("RightShoulder_Count",true);
+			EnableDisableControl("LeftHand_Count",true);
+			EnableDisableControl("RightHand_Count",true);
 			EnableDisableControl("LeftRing_Slot",true);
 			EnableDisableControl("RightRing_Slot",true);
 			EnableDisableControl("Helm_f_Slot",true && playerUW.isFemale);
@@ -143,7 +156,7 @@ public class chains : GuiBase {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
-			EnableDisableControl("Conversation_Alpha",false);
+			//EnableDisableControl("Conversation_Alpha",false);
 			EnableDisableControl("Trade_Player_Slot_0",false);
 			EnableDisableControl("Trade_Player_Slot_1",false);
 			EnableDisableControl("Trade_Player_Slot_2",false);
@@ -160,6 +173,14 @@ public class chains : GuiBase {
 			EnableDisableControl("Trade_NPC_indicator_1",false);
 			EnableDisableControl("Trade_NPC_indicator_2",false);
 			EnableDisableControl("Trade_NPC_indicator_3",false);
+			EnableDisableControl("Trade_Player_Count_0",false);
+			EnableDisableControl("Trade_Player_Count_1",false);
+			EnableDisableControl("Trade_Player_Count_2",false);
+			EnableDisableControl("Trade_Player_Count_3",false);
+			EnableDisableControl("Trade_NPC_Count_0",false);
+			EnableDisableControl("Trade_NPC_Count_1",false);
+			EnableDisableControl("Trade_NPC_Count_2",false);
+			EnableDisableControl("Trade_NPC_Count_3",false);
 
 			break;
 		case 1://Stats Display
@@ -216,10 +237,22 @@ public class chains : GuiBase {
 			EnableDisableControl("Backpack_Slot_05",false);
 			EnableDisableControl("Backpack_Slot_06",false);
 			EnableDisableControl("Backpack_Slot_07",false);
+			EnableDisableControl("Backpack_Count_00",false);
+			EnableDisableControl("Backpack_Count_01",false);
+			EnableDisableControl("Backpack_Count_02",false);
+			EnableDisableControl("Backpack_Count_03",false);
+			EnableDisableControl("Backpack_Count_04",false);
+			EnableDisableControl("Backpack_Count_05",false);
+			EnableDisableControl("Backpack_Count_06",false);
+			EnableDisableControl("Backpack_Count_07",false);
 			EnableDisableControl("LeftShoulder_Slot",false);
 			EnableDisableControl("RightShoulder_Slot",false);
 			EnableDisableControl("LeftHand_Slot",false);
 			EnableDisableControl("RightHand_Slot",false);
+			EnableDisableControl("LeftShoulder_Count",false);
+			EnableDisableControl("RightShoulder_Count",false);
+			EnableDisableControl("LeftHand_Count",false);
+			EnableDisableControl("RightHand_Count",false);
 			EnableDisableControl("LeftRing_Slot",false);
 			EnableDisableControl("RightRing_Slot",false);
 			EnableDisableControl("Helm_f_Slot",false);
@@ -251,7 +284,7 @@ public class chains : GuiBase {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
-			EnableDisableControl("Conversation_Alpha",false);		
+			//EnableDisableControl("Conversation_Alpha",false);		
 			EnableDisableControl("Trade_Player_Slot_0",false);
 			EnableDisableControl("Trade_Player_Slot_1",false);
 			EnableDisableControl("Trade_Player_Slot_2",false);
@@ -324,10 +357,22 @@ public class chains : GuiBase {
 			EnableDisableControl("Backpack_Slot_05",false);
 			EnableDisableControl("Backpack_Slot_06",false);
 			EnableDisableControl("Backpack_Slot_07",false);
+			EnableDisableControl("Backpack_Count_00",false);
+			EnableDisableControl("Backpack_Count_01",false);
+			EnableDisableControl("Backpack_Count_02",false);
+			EnableDisableControl("Backpack_Count_03",false);
+			EnableDisableControl("Backpack_Count_04",false);
+			EnableDisableControl("Backpack_Count_05",false);
+			EnableDisableControl("Backpack_Count_06",false);
+			EnableDisableControl("Backpack_Count_07",false);
 			EnableDisableControl("LeftShoulder_Slot",false);
 			EnableDisableControl("RightShoulder_Slot",false);
 			EnableDisableControl("LeftHand_Slot",false);
 			EnableDisableControl("RightHand_Slot",false);
+			EnableDisableControl("LeftShoulder_Count",false);
+			EnableDisableControl("RightShoulder_Count",false);
+			EnableDisableControl("LeftHand_Count",false);
+			EnableDisableControl("RightHand_Count",false);
 			EnableDisableControl("LeftRing_Slot",false);
 			EnableDisableControl("RightRing_Slot",false);
 			EnableDisableControl("Helm_f_Slot",false);
@@ -359,7 +404,7 @@ public class chains : GuiBase {
 			EnableDisableControl("Conversation_Scroll_Upper",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",false);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",false);
-			EnableDisableControl("Conversation_Alpha",false);
+			//EnableDisableControl("Conversation_Alpha",false);
 			EnableDisableControl("Trade_Player_Slot_0",false);
 			EnableDisableControl("Trade_Player_Slot_1",false);
 			EnableDisableControl("Trade_Player_Slot_2",false);
@@ -376,6 +421,14 @@ public class chains : GuiBase {
 			EnableDisableControl("Trade_NPC_indicator_1",false);
 			EnableDisableControl("Trade_NPC_indicator_2",false);
 			EnableDisableControl("Trade_NPC_indicator_3",false);
+			EnableDisableControl("Trade_Player_Count_0",false);
+			EnableDisableControl("Trade_Player_Count_1",false);
+			EnableDisableControl("Trade_Player_Count_2",false);
+			EnableDisableControl("Trade_Player_Count_3",false);
+			EnableDisableControl("Trade_NPC_Count_0",false);
+			EnableDisableControl("Trade_NPC_Count_1",false);
+			EnableDisableControl("Trade_NPC_Count_2",false);
+			EnableDisableControl("Trade_NPC_Count_3",false);
 
 			break;
 			
@@ -431,10 +484,22 @@ public class chains : GuiBase {
 			EnableDisableControl("Backpack_Slot_05",true);
 			EnableDisableControl("Backpack_Slot_06",true);
 			EnableDisableControl("Backpack_Slot_07",true);
+			EnableDisableControl("Backpack_Count_00",true);
+			EnableDisableControl("Backpack_Count_01",true);
+			EnableDisableControl("Backpack_Count_02",true);
+			EnableDisableControl("Backpack_Count_03",true);
+			EnableDisableControl("Backpack_Count_04",true);
+			EnableDisableControl("Backpack_Count_05",true);
+			EnableDisableControl("Backpack_Count_06",true);
+			EnableDisableControl("Backpack_Count_07",true);
 			EnableDisableControl("LeftShoulder_Slot",true);
 			EnableDisableControl("RightShoulder_Slot",true);
 			EnableDisableControl("LeftHand_Slot",true);
 			EnableDisableControl("RightHand_Slot",true);
+			EnableDisableControl("LeftShoulder_Count",true);
+			EnableDisableControl("RightShoulder_Count",true);
+			EnableDisableControl("LeftHand_Count",true);
+			EnableDisableControl("RightHand_Count",true);
 			EnableDisableControl("LeftRing_Slot",true);
 			EnableDisableControl("RightRing_Slot",true);
 			EnableDisableControl("Helm_f_Slot",true && playerUW.isFemale);
@@ -459,17 +524,6 @@ public class chains : GuiBase {
 			EnableDisableControl("Conversation_Portrait_Right",true);
 			EnableDisableControl("Conversation_Trade_Right",true);
 			EnableDisableControl("Conversation_Scroll",true);
-			//GameObject scroll = EnableDisableControl("Conversation_Scroll",true);
-			//if (scroll !=null)
-			//{
-			//	UITextList tl = scroll.GetComponent<UITextList>();//TODO:Get rid of this!
-			//	if (tl !=null)
-			//	{
-					//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-					//tl.textLabel.lineWidth=420;
-			//	}
-			//}
-			
 			EnableDisableControl("Conversation_Name_Left",true);
 			EnableDisableControl("Conversation_Name_Right",true);
 			EnableDisableControl("Conversation_BG",true);
@@ -477,7 +531,7 @@ public class chains : GuiBase {
 			EnableDisableControl("Conversation_Scroll_Upper",true);
 			EnableDisableControl("Conversation_Scroll_Edge_Left",true);
 			EnableDisableControl("Conversation_Scroll_Edge_Right",true);
-			EnableDisableControl("Conversation_Alpha",true);
+			//EnableDisableControl("Conversation_Alpha",true);
 			EnableDisableControl("Trade_Player_Slot_0",true);
 			EnableDisableControl("Trade_Player_Slot_1",true);
 			EnableDisableControl("Trade_Player_Slot_2",true);
@@ -494,6 +548,14 @@ public class chains : GuiBase {
 			EnableDisableControl("Trade_NPC_indicator_1",true);
 			EnableDisableControl("Trade_NPC_indicator_2",true);
 			EnableDisableControl("Trade_NPC_indicator_3",true);
+			EnableDisableControl("Trade_Player_Count_0",true);
+			EnableDisableControl("Trade_Player_Count_1",true);
+			EnableDisableControl("Trade_Player_Count_2",true);
+			EnableDisableControl("Trade_Player_Count_3",true);
+			EnableDisableControl("Trade_NPC_Count_0",true);
+			EnableDisableControl("Trade_NPC_Count_1",true);
+			EnableDisableControl("Trade_NPC_Count_2",true);
+			EnableDisableControl("Trade_NPC_Count_3",true);
 
 			
 			break;

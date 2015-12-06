@@ -5,6 +5,7 @@ public class UWHUD : MonoBehaviour {
 //Class for referencing other hud elements without having to search for them all the time.
 
 	public ScrollController MessageScroll;
+	public ScrollController MessageScrollTemp;
 	public UIInput InputControl;
 
 	public CutsceneAnimation CutScenesSmall;

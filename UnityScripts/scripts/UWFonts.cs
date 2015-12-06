@@ -10,6 +10,8 @@ public class UWFonts : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		return;//No longer in use!
 		for (int i = 0; i<127; i++)
 		{
 			font5x6p[i]= Resources.Load <Texture2D> ("HUD/Fonts/Font5x6p/Font5x6p_" + i.ToString("0000"));
@@ -37,6 +39,7 @@ public class UWFonts : MonoBehaviour {
 
 	public void ConvertString(int font, string strIn, UITexture TargetControl)
 	{
+		return;
 		int BitMapWidth = 328; //strIn.Length*font5x6pWidth;
 		int BitMapHeight= 162; // 2*font5x6pHeight;
 		//Debug.Log("Converting " + strIn);

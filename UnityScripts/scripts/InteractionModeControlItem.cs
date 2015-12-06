@@ -11,6 +11,10 @@ public class InteractionModeControlItem : GuiBase {
 
 	void OnClick()
 	{
+		if ((playerUW.playerInventory.ObjectInHand!="") || (Conversation.InConversation) || (WindowDetect.WaitingForInput))
+		{
+			return;
+		}
 		if (isOn==true)
 		{
 			isOn=false;
