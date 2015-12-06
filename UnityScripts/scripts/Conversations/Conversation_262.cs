@@ -17,7 +17,7 @@ public class Conversation_262 : Conversation {
 		yield return 0;
 	} // end func
 	
-	void func_0012() {
+	protected void func_0012() {
 		EndConversation();
 		privateVariables[0] = 1;
 	} // end func
@@ -154,7 +154,7 @@ public class Conversation_262 : Conversation {
 		
 	} // end func*/
 	
-	IEnumerator func_029d() {
+	protected IEnumerator func_029d() {
 		
 		//int locals[108];
 		int[] locals=new int[109];
