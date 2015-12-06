@@ -779,6 +779,10 @@ public class Conversation : GuiBase {
 			}
 		}
 
+		for (int i=0; i<=3; i++)
+		{//Clear out the trade slots.
+			playerUW.playerHud.npcTrade[i].clear();
+		}
 
 
 		//Debug.Log ("Do Decline");
@@ -1102,6 +1106,7 @@ public class Conversation : GuiBase {
 		return contains (unk1,String1, GetString (StringNo));
 	}
 
+
 	public int x_skills(int unk1, int unk2, int unk3)
 	{
 		//id=002c name="x_skills" ret_type=int
@@ -1244,6 +1249,8 @@ public class Conversation : GuiBase {
 	{
 
 		//Occurs in Murgo's conversation but I need to see more examples since that will make characters hostile?
+		//Occurs in bandit and head bandit conversation as well.
+		//Seems to update all npcs of that item type.
 		Debug.Log ("Setting attitude for whoami " + NPC_WHO_AM_I + " to " + Attitude);
 	}
 
@@ -1278,12 +1285,23 @@ public class Conversation : GuiBase {
 
 
 	public void set_race_attitude(int unk1, int attitude)
-	{
+	{//Used in Setharee Conversation Level 3
 		//id=0026 name="set_race_attitude" ret_type=void
 		//parameters:   unknown
 		//description:  sets attitude for a whole race (?)
 		Debug.Log ("set_race_attitude " + attitude);
 	}
+
+
+	public void set_race_attitude(int unk1, int attitude, int unk2, int unk3)
+	{
+		//Used in Bandit chief conversation Level3
+		//id=0026 name="set_race_attitude" ret_type=void
+		//parameters:   unknown
+		//description:  sets attitude for a whole race (?)
+		Debug.Log ("set_race_attitude " + attitude);
+	}
+
 
 	public void give_ptr_npc(int unk1, int Quantity, int slotNo)
 	{
