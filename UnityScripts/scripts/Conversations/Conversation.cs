@@ -1270,6 +1270,56 @@ public class Conversation : GuiBase {
 		//description:  sets attitude for a whole race (?)
 		Debug.Log ("set_race_attitude " + attitude);
 	}
+
+	public void give_ptr_npc(int unk1, int Quantity, int slotNo)
+	{
+		/*
+		id=0014 name="give_ptr_npc" ret_type=int
+		parameters:   arg1: quantity (?), or -1 for ignore
+		arg2: inventory object list pos
+		description:  copies item from player inventory to npc inventory
+		return value: none
+   		*/
+		//Debug.Log ("give_ptr_npc");
+		Container cn =npc.gameObject.GetComponent<Container>();
+		if (playerUW.playerHud.playerTrade[slotNo].objectInSlot !="")
+		{
+			if ((Quantity==-1))
+			{
+				cn.AddItemToContainer(playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+				playerUW.playerHud.playerTrade[slotNo].clear ();
+				playerUW.playerInventory.Refresh();
+			}
+			else
+			{//Clone the object and give the clone to the npc
+				GameObject objGiven = GameObject.Find (playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+				if (objGiven!=null)
+				{
+					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant==true)
+					     && 
+					     (objGiven.GetComponent<ObjectInteraction>().Link>1)
+					     &&
+					     (objGiven.GetComponent<ObjectInteraction>().isEnchanted==false)
+					     &&
+					     (objGiven.GetComponent<ObjectInteraction>().Link!=Quantity)
+					     )
+					{//Object is a quantity or is a quantity less than the number already there.
+						GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
+						Split.GetComponent<ObjectInteraction>().Link =Quantity;
+						Split.name = Split.name+"_"+playerUW.summonCount++;
+						objGiven.GetComponent<ObjectInteraction>().Link=objGiven.GetComponent<ObjectInteraction>().Link-Quantity;
+						cn.AddItemToContainer(objGiven.name);
+					}
+					else
+					{//Object is not a quantity or is the full amount.
+						cn.AddItemToContainer(playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+						playerUW.playerHud.playerTrade[slotNo].clear ();
+						playerUW.playerInventory.Refresh();
+					}
+				}
+			}
+		}
+	}
 }
 
 

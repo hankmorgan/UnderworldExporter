@@ -1490,7 +1490,8 @@ for (int x=0; x<64;x++)
 				objList[nextObj].tileX=x;
 				objList[nextObj].tileY=y;
 				objList[nextObj].InUseFlag = 1;
-				if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC) || (isTrap(objList[nextObj])) || (isTrigger(objList[nextObj])))
+				//if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC) || (isTrap(objList[nextObj])) || (isTrigger(objList[nextObj])))
+				if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC))
 					{//Include the containers contents as having this tilex/y
 					if (objList[nextObj].link != 0)
 						{
