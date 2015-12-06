@@ -546,4 +546,23 @@ public class ObjectInteraction : MonoBehaviour {
 			audSource= this.GetComponent<AudioSource>();
 		}
 	}
+
+	public int GetQty()
+	{//Gets the true quantity of this object
+		if (isEnchanted==true)
+		{
+			return 1;
+		}
+		else
+		{
+			if (isQuant==true)
+			{
+				return Link;
+			}
+			else
+			{
+				return 1;
+			}
+		}
+	}
 }

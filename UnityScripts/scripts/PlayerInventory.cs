@@ -57,6 +57,12 @@ public class PlayerInventory : MonoBehaviour {
 	public UITexture RightShoulder_Slot;
 	public UITexture[] BackPack_Slot=new UITexture[8];
 
+	public UILabel LeftHand_Qty;
+	public UILabel RightHand_Qty;
+	public UILabel LeftShoulder_Qty;
+	public UILabel RightShoulder_Qty;
+	public UILabel[] Backpack_Slot_Qty= new UILabel[8];
+
 	public GameObject InventoryMarker;
 	private GameObject[] LightGameObjects=new GameObject[4];
 
@@ -163,36 +169,35 @@ public class PlayerInventory : MonoBehaviour {
 
 		if (playerUW.isFemale==true)
 		{//female
-			DisplayGameObject (sHelm,Helm_f_Slot,true,ref bHelm);
-			DisplayGameObject (sChest,Chest_f_Slot,true,ref bChest);
-			DisplayGameObject (sLegs,Legs_f_Slot,true,ref bLegs);
-			DisplayGameObject (sBoots,Boots_f_Slot,true,ref bBoots);
-			DisplayGameObject (sGloves,Gloves_f_Slot,true,ref bGloves);
+			DisplayGameObject (sHelm,Helm_f_Slot,null,true,ref bHelm);
+			DisplayGameObject (sChest,Chest_f_Slot,null,true,ref bChest);
+			DisplayGameObject (sLegs,Legs_f_Slot,null,true,ref bLegs);
+			DisplayGameObject (sBoots,Boots_f_Slot,null,true,ref bBoots);
+			DisplayGameObject (sGloves,Gloves_f_Slot,null,true,ref bGloves);
 		}
 		else
 		{//male
-			DisplayGameObject (sHelm,Helm_m_Slot,true,ref bHelm);
-			DisplayGameObject (sChest,Chest_m_Slot,true,ref bChest);
-			DisplayGameObject (sLegs,Legs_m_Slot,true,ref bLegs);
-			DisplayGameObject (sBoots,Boots_m_Slot,true,ref bBoots);
-			DisplayGameObject (sGloves,Gloves_m_Slot,true,ref bGloves);
+			DisplayGameObject (sHelm,Helm_m_Slot,null,true,ref bHelm);
+			DisplayGameObject (sChest,Chest_m_Slot,null,true,ref bChest);
+			DisplayGameObject (sLegs,Legs_m_Slot,null,true,ref bLegs);
+			DisplayGameObject (sBoots,Boots_m_Slot,null,true,ref bBoots);
+			DisplayGameObject (sGloves,Gloves_m_Slot,null,true,ref bGloves);
 		}
 		
-		DisplayGameObject(sLeftShoulder,LeftShoulder_Slot,false,ref bLeftShoulder);
-		DisplayGameObject(sRightShoulder,RightShoulder_Slot,false,ref bRightShoulder);
-		DisplayGameObject(sLeftRing,LeftRing_Slot,false,ref bLeftRing);
-		DisplayGameObject(sRightRing,RightRing_Slot,false,ref bRightRing);
+		DisplayGameObject(sLeftShoulder,LeftShoulder_Slot,LeftShoulder_Qty,false,ref bLeftShoulder);
+		DisplayGameObject(sRightShoulder,RightShoulder_Slot,RightShoulder_Qty,false,ref bRightShoulder);
+		DisplayGameObject(sLeftRing,LeftRing_Slot,null,false,ref bLeftRing);
+		DisplayGameObject(sRightRing,RightRing_Slot,null,false,ref bRightRing);
 		
-		DisplayGameObject(sLeftHand,LeftHand_Slot,false,ref bLeftHand);
-		DisplayGameObject(sRightHand,RightHand_Slot,false,ref bRightHand);
+		DisplayGameObject(sLeftHand,LeftHand_Slot,LeftHand_Qty,false,ref bLeftHand);
+		DisplayGameObject(sRightHand,RightHand_Slot,RightHand_Qty,false,ref bRightHand);
 		
 		for (int i = 0 ; i < 8; i++)
 		{
-			DisplayGameObject (sBackPack[i],BackPack_Slot[i],false,ref bBackPack[i]);
+			DisplayGameObject (sBackPack[i],BackPack_Slot[i],Backpack_Slot_Qty[i],false,ref bBackPack[i]);
 		}
 		return;
 	}
-
 
 
 	/*	void DisplayGameObject(string objName, UISprite Label, bool isEquipped, ref bool hasChanged)
@@ -228,7 +233,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	}*/
 
-	void DisplayGameObject(string objName, UITexture Label, bool isEquipped, ref bool hasChanged)
+	void DisplayGameObject(string objName, UITexture Label, UILabel qtyDisplay, bool isEquipped, ref bool hasChanged)
 	{
 		hasChanged=true;
 		if (hasChanged==true)
@@ -236,7 +241,10 @@ public class PlayerInventory : MonoBehaviour {
 			if (objName =="")
 			{
 				Label.mainTexture=Blank;
-
+				if (qtyDisplay!=null)
+				{
+					qtyDisplay.text="";
+				}
 				//Label.spriteName="object_blank";
 				hasChanged=false;
 				return;
@@ -255,12 +263,28 @@ public class PlayerInventory : MonoBehaviour {
 					//Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
 					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+					if (qtyDisplay!=null)
+					{
+						int qty = objToDisplay.GetComponent<ObjectInteraction>().GetQty();
+						if (qty<=1)
+						{
+							qtyDisplay.text="";
+						}
+						else
+						{
+							qtyDisplay.text=qty.ToString();
+						}
+					}
 				}
 			}
 			else
 			{
 				//Debug.Log ("Displaying blank");
 				Label.mainTexture=Blank;
+				if (qtyDisplay!=null)
+				{
+					qtyDisplay.text="";
+				}
 				//Label.spriteName="object_blank";
 			}
 		}
@@ -493,7 +517,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void SwapObjects(GameObject ObjInSlot, int slotIndex, string cObjectInHand)
 	{//Swaps specified game object as the slot wth the passed object
-		Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
+		//Debug.Log ("Swapping " + ObjInSlot.name + " with " + cObjectInHand + " at slot " +slotIndex);
 		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();
 		//cn.RemoveItemFromContainer(cObjectInHand);
 		//cn.RemoveItemFromContainer(ObjInSlot.name);//removed this when adding equip events.
