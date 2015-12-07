@@ -1475,6 +1475,38 @@ for (int x=0; x<64;x++)
 	
 }
 
+void SetContainerInUse(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int index)
+	{
+	//Take a container/npc and set inuseflag for it contents. 
+	ObjectItem currobj = objList[index];
+	//currobj.InUseFlag == 1;
+	objList[index].InUseFlag=1;
+	if (currobj.link != 0)
+		{//Object has contents.
+		ObjectItem tmpObj = objList[currobj.link];//Get the first item in the contents.
+		objList[tmpObj.index].InUseFlag=1;
+		if ((isContainer(tmpObj)) || (objectMasters[tmpObj.item_id].type == NPC))
+			{//If the first item is a container recursively set it's flag
+			SetContainerInUse(game, LevelInfo, objList, tmpObj.index);
+			}
+		//Now loop through the linked list.
+		if (tmpObj.next > 0)
+			{
+			while (tmpObj.next > 0)
+				{
+				tmpObj = objList[tmpObj.next];
+				objList[tmpObj.index].InUseFlag = 1;
+				//if the next object is a countainer loop through it.
+				if ((isContainer(tmpObj)) || (objectMasters[tmpObj.item_id].type == NPC))
+					{//If the first item is a container recursively set it's flag
+					SetContainerInUse(game, LevelInfo, objList, tmpObj.index);
+					}
+				}
+			}
+		tmpObj.InUseFlag = 1;
+		}
+	}
+
 void setObjectTileXY(int game, tile LevelInfo[64][64], ObjectItem objList[1600])
 {//Justs some useful info to know.
 //ObjectItem currObj;
@@ -1490,37 +1522,19 @@ for (int x=0; x<64;x++)
 				objList[nextObj].tileX=x;
 				objList[nextObj].tileY=y;
 				objList[nextObj].InUseFlag = 1;
-				//if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC) || (isTrap(objList[nextObj])) || (isTrigger(objList[nextObj])))
 				if ((isContainer(objList[nextObj])) || (objectMasters[objList[nextObj].item_id].type == NPC))
-					{//Include the containers contents as having this tilex/y
-					if (objList[nextObj].link != 0)
-						{
-						ObjectItem tmpobj = objList[objList[nextObj].link];
-						while ((tmpobj.next != 0) && (tmpobj.tileX == 99))//If 99 already down and I'm need to break a loop.
-							{
-							if (objList[tmpobj.index].InUseFlag != 1)
-								{
-								objList[tmpobj.index].tileX = x;
-								objList[tmpobj.index].tileY = y;
-								objList[tmpobj.index].InUseFlag = 1;
-								}
-								tmpobj = objList[tmpobj.next];
-							}
-						if (objList[tmpobj.index].InUseFlag != 1)
-							{//Not already set
-							objList[tmpobj.index].tileX = x;
-							objList[tmpobj.index].tileY = y;
-							objList[tmpobj.index].InUseFlag = 1;
-							}
-						}
+					{
+					SetContainerInUse(game, LevelInfo,objList, objList[nextObj].index);
 					}
 				nextObj=objList[nextObj].next;
 				}
-
 			}
 		}	
 	}
 }
+
+
+
 
 void MergeWaterRegions(tile LevelInfo[64][64])
 {

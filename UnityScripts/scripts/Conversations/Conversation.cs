@@ -31,6 +31,11 @@ public class Conversation : GuiBase {
 
 	//public static UWCharacter playerUW;
 	//public static StringController SC;
+	//To flag the differnent ways to colour text
+	private const int NPC_SAY=0;
+	private const int PC_SAY=1;
+	private const int PRINT_SAY=2;
+
 
 	public static int CurrentConversation;
 	public static bool InConversation = false;
@@ -299,12 +304,21 @@ public class Conversation : GuiBase {
 
 	}
 
-	public IEnumerator say(string WhatToSay)
+	public IEnumerator say(string WhatToSay,int PrintType)
 	{
 		//Replace instances of @GS8 with player name
 		WhatToSay = WhatToSay.Replace("@GS8" , playerUW.CharName);
 		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
-
+		string Markup;
+		switch (PrintType)
+		{
+		case PC_SAY:
+			Markup="[FF0000]";break;
+		case PRINT_SAY:
+			Markup="[000000]";break;
+		default:
+			Markup="[00FF00]";break;
+		}
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 			{
 			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
@@ -315,7 +329,7 @@ public class Conversation : GuiBase {
 				if (StrWords[j].Length+colCounter>=LineWidth)
 				{
 					colCounter=0; 
-					tl.Add (Output);
+					tl.Add (Markup + Output +"[-]");
 					Output=StrWords[j] + " ";
 					colCounter= StrWords[j].Length+1;
 				}	
@@ -326,20 +340,31 @@ public class Conversation : GuiBase {
 				}
 			}
 
-			tl.Add(Output );
+			tl.Add (Markup + Output +"[-]");
 			if (i < Paragraphs.GetUpperBound(0))
 				{//Pause for more when not the last paragraph.
-				tl.Add("[MORE]");
+				tl.Add("[0000FF][MORE][-]");
 				yield return StartCoroutine(WaitForMore());
 				}
 			}
 		yield return 0;
 	}
 
+	public IEnumerator say(string WhatToSay)
+	{
+		yield return StartCoroutine (say(WhatToSay, NPC_SAY));
+	}
+
 	IEnumerator say(int WhatToSay)
 	{
 		string tmp = playerUW.StringControl.GetString (StringNo,WhatToSay);
-		yield return StartCoroutine(say (tmp));
+		yield return StartCoroutine(say (tmp,NPC_SAY));
+	}
+
+	IEnumerator say(int WhatToSay,int SayType)
+	{
+		string tmp = playerUW.StringControl.GetString (StringNo,WhatToSay);
+		yield return StartCoroutine(say (tmp,SayType));
 	}
 
 	public int sex(int unknown, int ParamFemale, int ParamMale)
@@ -385,7 +410,7 @@ public class Conversation : GuiBase {
 		yield return StartCoroutine(WaitForInput());
 
 		tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
-		yield return StartCoroutine(say (tmp));
+		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
 
@@ -422,7 +447,7 @@ public class Conversation : GuiBase {
 		//tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
 		tmp= playerUW.StringControl.GetString (StringNo,bablf_array[bablf_ans-1]);
-		yield return StartCoroutine(say (tmp));
+		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
 
@@ -441,7 +466,7 @@ public class Conversation : GuiBase {
 		inputctrl.label.text="";
 		inputctrl.selected=true;
 		yield return StartCoroutine(WaitForTypedInput());
-		yield return StartCoroutine(say (PlayerTypedAnswer));
+		yield return StartCoroutine(say (PlayerTypedAnswer,PC_SAY));
 		inputctrl.text="";
 		inputctrl.label.text="";
 		playerUW.playerHud.MessageScroll.Clear ();
@@ -731,15 +756,15 @@ public class Conversation : GuiBase {
 		}
 		if (playerObjectCount<npcObjectCount)
 		{
-			yield return  StartCoroutine ( say ("Player has the better deal"));
+			yield return  StartCoroutine ( say("Player has the better deal",PRINT_SAY));
 		}
 		else if (playerObjectCount==npcObjectCount)
 		{
-			yield return  StartCoroutine (say("It is an even deal"));
+			yield return  StartCoroutine (say("It is an even deal",PRINT_SAY));
 		}
 		else
 		{
-			yield return  StartCoroutine (say ("NPC has the better deal"));
+			yield return  StartCoroutine (say ("NPC has the better deal",PRINT_SAY));
 		}
 		//return;
 	}
@@ -981,9 +1006,8 @@ public class Conversation : GuiBase {
 
 	public IEnumerator print(int unk1, int StringNo)
 	{
-		yield return StartCoroutine(say (StringNo));
+		yield return StartCoroutine(say (StringNo,PRINT_SAY));
 	}
-
 
 	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int unk5)
 	{

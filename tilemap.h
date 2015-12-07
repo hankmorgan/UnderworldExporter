@@ -166,7 +166,6 @@ void ResetCleanup(tile LevelInfo[64][64], int game);
 void CleanUpHiddenTiles(tile LevelInfo[64][64], int game);
 int DoTilesMatch(tile &t1, tile &t2, int Surface);
 void CaulkHiddenWalls(tile LevelInfo[64][64], int game, int surface);
-
 extern tile LevelInfo[64][64];
 
 void LaunchEditor(tile LevelInfo[64][64]);

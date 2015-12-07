@@ -330,80 +330,22 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 		, 255
 		, 255
 		);
-
+	
 	//now recursively get it's contents.
-	if (currobj.link != 0)	//Container has objects
-		{
-		fprintf(UNITY_FILE, "\n\t////NPC container with items\n");
-		ObjectItem tmpobj = objList[currobj.link];
-		int count = 0;
-		while (tmpobj.next != 0)
+		if (currobj.link != 0)	//Container has objects
 			{
-			if (objectMasters[objList[currobj.link].item_id].type != LOCK)
+			fprintf(UNITY_FILE, "\n\t////NPC container with items\n");
+			ObjectItem tmpobj = objList[currobj.link];
+			int count = 0;
+			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);",UniqueObjectName(tmpobj), count++);
+			while (tmpobj.next != 0)
 				{
-				RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
-				fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-				fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
-				if (objectMasters[currobj.item_id].isMoveable == 1)
-					{
-					fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
-					}
-				}
-			tmpobj = objList[tmpobj.next];
+				tmpobj = objList[tmpobj.next];
+				fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);		
 			}
-		RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
-		fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-		fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
-		if (objectMasters[currobj.item_id].isMoveable == 1)
-			{
-			fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
-			}
+			fprintf(UNITY_FILE, "\n\t////Container contents complete\n");
 		}
-	fprintf(UNITY_FILE, "\n\t////Container contents complete\n");
 
-
-
-	/*if (currobj.link != 0)//Npc has an inventory	I need to set up joints for the entities.
-		{
-		int JointCount = 1;	//For a future joint enumeration
-		//TODO:Clean this up,
-		ObjectItem tmpobj = objList[currobj.link];
-		tmpobj.objectOwner = currobj.index;
-		currobj.objectOwner = currobj.index;
-		tmpobj.objectOwnerName = currobj.npc_whoami;
-		currobj.objectOwnerName = currobj.npc_whoami;
-		if (currobj.objectOwnerEntity == 0){ currobj.objectOwnerEntity = EntityCount - 1; } //assumes the previous entity is the npc with the inventory.
-		tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
-		tmpobj.joint = JointCount++;
-		while (tmpobj.next != 0)
-			{
-			tmpobj = objList[tmpobj.next];
-			//I pass the owner info down the line
-			//tmpobj.objectOwner = currobj.objectOwner;
-			//tmpobj.objectOwnerName = currobj.objectOwnerName;
-			//tmpobj.objectOwnerEntity = currobj.objectOwnerEntity;
-			//tmpobj.joint = JointCount++;
-			
-			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);	//Need to fix up the x y z to a better spot.
-			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-			//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
-			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
-			if (objectMasters[currobj.item_id].isMoveable == 1)
-				{
-				fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
-				}
-			}
-		RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo); //NPC's inventory.
-		fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-		//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
-		fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
-		if (objectMasters[currobj.item_id].isMoveable == 1)
-			{
-			fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
-			}
-
-		}
-*/
 	return;
 	}
 
@@ -631,28 +573,15 @@ void RenderUnityEntityContainer(int game, float x, float y, float z, ObjectItem 
 			{
 			ObjectItem tmpobj = objList[currobj.link];
 			int count = 0;
+			if (objectMasters[tmpobj.item_id].type != LOCK)
+				{
+				fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);
+				}
 			while (tmpobj.next != 0)
 				{
-				if (objectMasters[objList[currobj.link].item_id].type != LOCK)
-					{
-					RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
-					fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-					//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
-					fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
-					if (objectMasters[currobj.item_id].isMoveable == 1)
-						{
-						fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
-						}
-					}
 				tmpobj = objList[tmpobj.next];
-				}
-			RenderUnityEntity(game, x, y, z, tmpobj, objList, LevelInfo);
-			fprintf(UNITY_FILE, "\n\tmyObj.transform.position = invMarker.transform.position;");//Move the inventory contents to a inventory room
-			//fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = invMarker.transform;");//Attach to the persistent marker.
-			fprintf(UNITY_FILE, "\n\tAddObjectToContainer(myObj, ParentContainer, %d);", count++);//Move the inventory contents to a container script
-			if (objectMasters[currobj.item_id].isMoveable == 1)
-				{
-				fprintf(UNITY_FILE, "\n\tFreezeMovement(myObj);\n");
+				fprintf(UNITY_FILE, "\n\tAddObjectToContainer(\"%s\", ParentContainer, %d);", UniqueObjectName(tmpobj), count++);
+				//tmpobj = objList[tmpobj.next];
 				}
 			}
 		fprintf(UNITY_FILE, "\n\t////Container contents complete\n");
@@ -2181,7 +2110,8 @@ float offX; float offY; float offZ;
 	//Some quick declarations
 	fprintf(UNITY_FILE, "\n\tGameObject myObj;\n\tVector3 pos;");
 	fprintf(UNITY_FILE, "\n\tGameObject invMarker = GameObject.Find(\"InventoryMarker\");");
-	fprintf(UNITY_FILE, "\n\tContainer ParentContainer;");
+	fprintf(UNITY_FILE, "\n\tContainer ParentContainer;//For containers");
+
 	/*Parses the object list and sets up their x,y,z position.
 	Object lists in-game are linked lists. The index into the list is stored on the tilemap*/
 
