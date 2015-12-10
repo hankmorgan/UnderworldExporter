@@ -21,6 +21,7 @@ public class GameWorldController : MonoBehaviour {
 	public int paletteIndex=0;
 	public int[] variables = new int[127];//Variables for the check/set variable traps
 	private bool Test;
+	public TileMap Tilemap;
 
 	public MeshRenderer ceil;
 

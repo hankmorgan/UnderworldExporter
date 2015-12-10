@@ -235,7 +235,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	void DisplayGameObject(string objName, UITexture Label, UILabel qtyDisplay, bool isEquipped, ref bool hasChanged)
 	{
-		hasChanged=true;
+		//hasChanged=true;
 		if (hasChanged==true)
 		{
 			if (objName =="")

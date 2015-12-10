@@ -119,7 +119,7 @@ public class InventorySlot : GuiBase {
 			ConversationClick(leftClick);
 			break;
 		}
-	
+		playerUW.playerInventory.Refresh ();
 
 	}
 

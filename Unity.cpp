@@ -197,6 +197,11 @@ void RenderUnityEntityLeech(int game, float x, float y, float z, ObjectItem &cur
 	fprintf(UNITY_FILE, "\n\tAddLeech(myObj);");
 	}
 
+void RenderUnityEntityFishingPole(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tAddFishingPole(myObj);");
+	}
+
 void RenderUnityEntityRing(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	fprintf(UNITY_FILE, "\n\tAddRing(myObj);");
@@ -2024,7 +2029,12 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityLeech(game, x, y, z, currobj, objList, LevelInfo);
 							break;
-
+						case FISHING_POLE:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityFishingPole(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
