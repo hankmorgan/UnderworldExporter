@@ -141,4 +141,16 @@ public class object_base : MonoBehaviour {
 		ml.Add("You cannot use this. (Failmessage default)");
 		return false;
 	}
+
+	public virtual float GetWeight()
+	{//Return the weight of the object stack
+		if (objInt==null)
+		{
+			return 0.0f;
+		}
+		else
+		{
+			return (float)(objInt.GetQty())*ObjectInteraction.Weight[objInt.item_id]*0.1f;
+		}
+	}
 }

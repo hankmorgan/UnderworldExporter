@@ -90,6 +90,7 @@ public class PlayerInventory : MonoBehaviour {
 		{
 			bBackPack[i]=true;
 		}
+		playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 	}
 	
 	// Update is called once per frame
@@ -512,6 +513,7 @@ public class PlayerInventory : MonoBehaviour {
 				sBackPack[i-11] = cn.GetItemAt(ContainerOffset + i-11);
 				bBackPack[i-11]=true;
 			}
+		playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 	}
 
 
@@ -790,4 +792,40 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public float getInventoryWeight()
+	{
+		float answer=0.0f;
+		//Get the weight of all the equipment slots
+		for (int i=0;i<=10;i++)
+		{
+			GameObject objItem = GetGameObjectAtSlot(i);
+			if (objItem!=null)
+			{
+				answer+=objItem.GetComponent<ObjectInteraction>().GetWeight();
+			}
+		}
+
+		//Get the weight of the gronk container as that is alway the top level of the inventory
+		for (int i = 0; i<playerContainer.NoOfSlots;i++)
+		{
+			if (playerContainer.GetItemAt(i)!="")
+			{
+				GameObject objItem =GameObject.Find (playerContainer.GetItemAt(i));
+				answer+=objItem.GetComponent<ObjectInteraction>().GetWeight();
+			}
+		}
+		return answer;
+	}
+
+
+
+	public float getEncumberance()
+	{//What remaining weight the player can carry.
+
+		float InventoryWeight=getInventoryWeight();
+		float CarryWeight = playerUW.PlayerSkills.STR*2.0f;
+		//Debug.Log ("carry weight = " + CarryWeight);
+		//Debug.Log ("inventory weight = " + InventoryWeight);
+		return CarryWeight-InventoryWeight;
+	}
 }

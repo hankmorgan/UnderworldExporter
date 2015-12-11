@@ -40,19 +40,26 @@ public override bool use ()
 					if (Random.Range (0,10)>=7)
 					{//catch something or test for encumerance
 						//000~001~099~You catch a lovely fish.
-						//000~001~102~You feel a nibble, but the fish gets away.
-						ml.Add (playerUW.StringControl.GetString (1,99));
-						GameObject fishy = CreateFish();
-						playerUW.playerInventory.ObjectInHand=fishy.name;
-						ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
-						if (FishobjInt!=null)
+						if ((ObjectInteraction.Weight[182]*0.1f) <= playerUW.playerInventory.getEncumberance())
 						{
-							FishobjInt.UpdateAnimation();
-							playerUW.CursorIcon= FishobjInt.InventoryDisplay.texture;
+							ml.Add (playerUW.StringControl.GetString (1,99));
+							GameObject fishy = CreateFish();
+							playerUW.playerInventory.ObjectInHand=fishy.name;
+							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
+							if (FishobjInt!=null)
+							{
+								FishobjInt.UpdateAnimation();
+								playerUW.CursorIcon= FishobjInt.InventoryDisplay.texture;
+							}
+
+							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+							InteractionModeControl.UpdateNow=true;
+						}
+						else
+						{//000~001~102~You feel a nibble, but the fish gets away.
+							ml.Add (playerUW.StringControl.GetString (1,102));
 						}
 
-						UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
-						InteractionModeControl.UpdateNow=true;
 					}
 					else
 					{//000~001~100~No luck this time.

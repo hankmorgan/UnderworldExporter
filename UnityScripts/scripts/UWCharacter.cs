@@ -441,6 +441,12 @@ public class UWCharacter : Character {
 				{
 					if (objPicked.CanBePickedUp==true)
 					{
+						//check for weight
+						if (objPicked.GetWeight() > playerInventory.getEncumberance())
+						{//000~001~095~That is too heavy for you to pick up.
+							playerHud.MessageScroll.Add(StringControl.GetString(1,95));
+							return;
+						}
 						if (UICamera.currentTouchID==-2)
 						{
 							//right click check for quant.
@@ -470,6 +476,10 @@ public class UWCharacter : Character {
 						{//Left click. Pick them all up.
 							Pickup(objPicked,pInv);	
 						}						
+					}
+					else
+					{//000~001~096~You cannot pick that up.
+						playerHud.MessageScroll.Add(StringControl.GetString(1,96));
 					}
 				}
 			}

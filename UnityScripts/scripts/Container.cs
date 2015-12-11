@@ -378,4 +378,18 @@ public class Container : object_base {
 			}
 		}
 	}
+
+	public override float GetWeight ()
+	{//Get the weight of all items in the container
+		float answer=base.GetWeight();//The container has it's own weight as well.
+		for (int i=0; i<NoOfSlots;i++)
+		{
+			if (GetItemAt(i)!="")
+			{
+				ObjectInteraction objContainerItem = GameObject.Find (GetItemAt(i)).GetComponent<ObjectInteraction>();
+				answer+=objContainerItem.GetWeight();
+			}
+		}
+		return answer;
+	}
 }

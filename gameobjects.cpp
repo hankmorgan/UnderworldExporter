@@ -2184,32 +2184,32 @@ void UWCommonObj(int game)
 		{
 		if (j <= 463)
 			{
-			//printf("%s\n", objectMasters[j].desc);
-			//printf("\tHeight = %d\n", getValAtAddress(comobj_dat, addressPtr, 8));
+			fprintf(LOGFILE, "%s\n", objectMasters[j].desc);
+			fprintf(LOGFILE, "\tHeight = %d\n", getValAtAddress(comobj_dat, addressPtr, 8));
 			objectMasters[j].uwProperties[UW_PROP_HEIGHT] = getValAtAddress(comobj_dat, addressPtr, 8);
-			//printf("\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
+			fprintf(LOGFILE, "\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
 			objectMasters[j].uwProperties[UW_PROP_RADIUS] = getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7;
-			//printf("\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
-			//printf("\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
+			fprintf(LOGFILE, "\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
+			fprintf(LOGFILE, "\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
 			objectMasters[j].uwProperties[UW_PROP_MASS] = (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4);
-			/*printf("\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);
-			printf("\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
-			printf("\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
-			printf("\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
-			printf("\tFlags (Decal) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);
-			printf("\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
-			printf("\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
-			printf("\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
-			*/
-			//printf("\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16));
+			fprintf(LOGFILE, "\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);
+			fprintf(LOGFILE, "\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
+			fprintf(LOGFILE, "\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
+			fprintf(LOGFILE, "\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
+			fprintf(LOGFILE, "\tFlags (Decal) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);
+			fprintf(LOGFILE, "\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
+			fprintf(LOGFILE, "\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
+			fprintf(LOGFILE, "\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
+			
+			fprintf(LOGFILE, "\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16));
 			objectMasters[j].uwProperties[UW_PROP_VALUE] = getValAtAddress(comobj_dat, addressPtr + 4, 16);
-			//printf("\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);
+			fprintf(LOGFILE, "\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);
 			objectMasters[j].uwProperties[UW_PROP_QUALITY] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
-			//printf("\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);
+			fprintf(LOGFILE, "\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);
 			objectMasters[j].uwProperties[UW_PROP_OWNER] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
-			//printf("\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
+			fprintf(LOGFILE, "\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
 			objectMasters[j].uwProperties[UW_PROP_QUALITY] = getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
-			//printf("\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);
+			fprintf(LOGFILE, "\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);
 
 			}
 

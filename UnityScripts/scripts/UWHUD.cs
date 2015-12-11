@@ -18,6 +18,7 @@ public class UWHUD : MonoBehaviour {
 	public TradeSlot[] playerTrade ;//= new TradeSlot[4];
 	public TradeSlot[] npcTrade ;//= new TradeSlot[4];
 	public UITexture[] ConversationPortraits;
+	public UILabel Encumberance;
 
 	//Conversation Controls
 
