@@ -20,7 +20,7 @@ public class Container : object_base {
 
 	public string GetItemAt(int index)
 	{
-		if ((index >=0) || (index<40))
+		if ((index >=0) && (index<=MaxCapacity()))
 		{
 			return items[index];
 		}
@@ -351,7 +351,9 @@ public class Container : object_base {
 					Debug.Log ("Attempt to add a container to itself");
 				}
 			}
-			
+			//TODO:Do a test for Container capacity  here.
+
+
 			if (Valid)
 			{
 				if ((ObjectInHand.GetComponent<ObjectInteraction>().isQuant==false) || (ObjectInHand.GetComponent<ObjectInteraction>().isEnchanted))
@@ -382,7 +384,7 @@ public class Container : object_base {
 	public override float GetWeight ()
 	{//Get the weight of all items in the container
 		float answer=base.GetWeight();//The container has it's own weight as well.
-		for (int i=0; i<NoOfSlots;i++)
+		for (int i=0; i<MaxCapacity();i++)
 		{
 			if (GetItemAt(i)!="")
 			{
