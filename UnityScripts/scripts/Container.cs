@@ -352,6 +352,12 @@ public class Container : object_base {
 				}
 			}
 			//TODO:Do a test for Container capacity  here.
+			//TODO:Do a test for item types accepted.
+			if (Container.TestContainerRules(this,11)==false)
+			{
+				Valid=false;
+				return true;
+			}
 
 
 			if (Valid)
@@ -394,4 +400,79 @@ public class Container : object_base {
 		}
 		return answer;
 	}
+
+	public float GetBaseWeight()
+	{//What weight is the container itself.
+		return base.GetWeight();
+	}
+
+	public float GetCapacity()
+	{
+		return (float)(Capacity * 0.1f);
+	}
+
+	public float GetFreeCapacity()
+	{
+		if (this.gameObject.name=="Gronk")
+		{
+			return 999;
+		}
+		return GetCapacity() - GetWeight() - GetBaseWeight();
+	}
+
+	public static bool TestContainerRules(Container cn, int SlotIndex)
+	{
+		if (SlotIndex<11)
+		{
+			return true;
+		}
+		//Test the various rules for this slot
+		ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
+		//If in a non player container check that the object in hand can be added to it.
+		bool TypeTest=false;
+		//If in a non player container check that the container has the weight capacity to accept it.
+		bool WeightTest=false;
+//		Container curContainer = this;
+		switch (cn.ObjectsAccepted)
+		{//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
+		case 0://runes
+			TypeTest=(objInt.ItemType==ObjectInteraction.RUNE);break;
+		case 1://Arrows
+			TypeTest=(objInt.ItemType==ObjectInteraction.AMMO);break;
+		case 2://Scrolls
+			TypeTest=(
+				(objInt.ItemType==ObjectInteraction.SCROLL)
+				||
+				(objInt.ItemType==ObjectInteraction.MAGICSCROLL)
+				||
+				(objInt.ItemType==ObjectInteraction.MAP)
+				);
+			break;
+		case 3: //Edibles
+			TypeTest=(objInt.ItemType==ObjectInteraction.FOOD);break;
+		default:
+			TypeTest=true;break;
+		}
+		
+		
+		
+		if (TypeTest==true)
+		{
+			if (objInt.GetWeight() >= cn.GetFreeCapacity())
+			{
+				WeightTest=false;
+				playerUW.playerHud.MessageScroll.Add ("The " + playerUW.StringControl.GetSimpleObjectNameUW(cn.objInt) + " is too full.");
+			}
+			else
+			{
+				WeightTest=true;
+			}
+		}
+		else
+		{//000~001~248~That item does not fit.
+			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,248));
+		}
+		return (TypeTest && WeightTest);
+	}
+
 }

@@ -138,67 +138,6 @@ public class InventorySlot : GuiBase {
 		}
 
 		return;
-		string objectInSlot = playerUW.playerInventory.GetObjectAtSlot(slotIndex);
-		//Check if the slot has a container first.
-		if (objectInSlot!="")
-		{
-			GameObject objInSlot=GameObject.Find (objectInSlot)	;
-			if (objInSlot.GetComponent<Container>()!=null)
-			{
-				objInSlot.GetComponent<Container>().OpenContainer ();
-				return;
-			}
-		}
-
-
-		//Check slot rules
-		if (playerUW.playerInventory.ObjectInHand != "")
-		{
-			ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
-			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
-			{//Slot is not a general use on andThis item type does not go in this slot.
-				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
-				return;
-			}
-
-
-			//put the object in hand in this slot.
-			if (objectInSlot=="")
-			{//Empty slot
-				playerUW.playerInventory.SetObjectAtSlot(slotIndex,  playerUW.playerInventory.ObjectInHand);
-				playerUW.playerInventory.ObjectInHand="";
-				playerUW.CursorIcon=playerUW.CursorIconDefault;
-			}
-			else
-			{//Swap the objects
-				GameObject objInSlot=GameObject.Find (playerUW.playerInventory.GetObjectAtSlot(slotIndex));
-				playerUW.playerInventory.SwapObjects (objInSlot,slotIndex, playerUW.playerInventory.ObjectInHand);
-			}
-			
-		}
-		else
-		{
-			if (objectInSlot=="")
-			{
-				//Do nothing
-			}
-			else
-			{
-				//Pickup the object in the slot
-				playerUW.playerInventory.ObjectInHand=objectInSlot;
-				playerUW.CursorIcon= GameObject.Find( playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-				//objectInSlot="";
-				if (this.slotIndex>=11)
-				{
-					Container cn = GameObject.Find( playerUW.playerInventory.currentContainer).GetComponent<Container>();
-					cn.RemoveItemFromContainer( playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
-				}
-				playerUW.playerInventory.ClearSlot(this.slotIndex);
-			}
-			
-		}
-
-		playerUW.playerInventory.Refresh ();
 	}
 
 
@@ -240,9 +179,12 @@ public class InventorySlot : GuiBase {
 			{
 			if (DoNotPickup==false)	
 				{
-				playerUW.playerInventory.SetObjectAtSlot(slotIndex,playerUW.playerInventory.ObjectInHand);
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.playerInventory.ObjectInHand="";
+				if (Container.TestContainerRules(playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+					{
+						playerUW.playerInventory.SetObjectAtSlot(slotIndex,playerUW.playerInventory.ObjectInHand);
+						playerUW.CursorIcon= playerUW.CursorIconDefault;
+						playerUW.playerInventory.SetObjectInHand("");
+					}
 				}
 			//PickupFromSlot();
 			}
@@ -258,7 +200,10 @@ public class InventorySlot : GuiBase {
 						//No effect occurred. Swap the two objects.
 					if (DoNotPickup==false)
 						{
-						playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,playerUW.playerInventory.ObjectInHand);
+						if (Container.TestContainerRules(playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+							{
+								playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,playerUW.playerInventory.ObjectInHand);
+							}
 						}
 					}
 					else
@@ -289,7 +234,7 @@ public class InventorySlot : GuiBase {
 			ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand ().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
 			{//Slot is not a general use on andThis item type does not go in this slot.
-				Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
+			//	Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
 				DoNotPickup=true;
 			}
 			if ((objInt.isQuant==true) && (objInt.isEnchanted==false))
@@ -334,9 +279,12 @@ public class InventorySlot : GuiBase {
 			{
 			if (DoNotPickup==false)
 				{
-				playerUW.playerInventory.SetObjectAtSlot(slotIndex,playerUW.playerInventory.ObjectInHand);
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
-				playerUW.playerInventory.SetObjectInHand("");// .ObjectInHand="";
+				if (Container.TestContainerRules(playerUW.playerInventory.GetCurrentContainer(),slotIndex))
+					{
+						playerUW.playerInventory.SetObjectAtSlot(slotIndex,playerUW.playerInventory.ObjectInHand);
+						playerUW.CursorIcon= playerUW.CursorIconDefault;
+						playerUW.playerInventory.SetObjectInHand("");// .ObjectInHand="";
+					}
 				}
 			}
 		else
@@ -353,13 +301,16 @@ public class InventorySlot : GuiBase {
 				{//if nothing happened when I clicked on the object at the slot with something in hand.
 				if (playerUW.playerInventory.GetObjectInHand() != "")
 					{
-						if (DoNotPickup==false)
+					if (DoNotPickup==false)
+						{
+						//TODO: Make sure this works with Equipment slots
+						//No effect occurred. Swap the two objects.
+						if (Container.TestContainerRules(playerUW.playerInventory.GetCurrentContainer(),slotIndex))
 							{
-							//TODO: Make sure this works with Equipment slots
-							//No effect occurred. Swap the two objects.
-							playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,playerUW.playerInventory.ObjectInHand);
-							playerUW.playerInventory.Refresh();
+								playerUW.playerInventory.SwapObjects(ObjectUsedOn,slotIndex,playerUW.playerInventory.ObjectInHand);
+								playerUW.playerInventory.Refresh();
 							}
+						}
 					}
 					else
 					{//Pick up the item at that slot.
@@ -517,7 +468,6 @@ public class InventorySlot : GuiBase {
 		playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
 		playerUW.playerHud.MessageScrollTemp.Set("");
 	}
-
 
 
 }
