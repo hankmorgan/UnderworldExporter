@@ -31,7 +31,7 @@ The platform puzzle on Level 1 leading to the grave of Korianus.
 	}
 
 
-	IEnumerator MoveTile(Transform platform, Vector3 dist, float traveltime)
+	protected IEnumerator MoveTile(Transform platform, Vector3 dist, float traveltime)
 		{
 		//Co-routine to move the tile to it's target position.
 		float rate = 1.0f/traveltime;

@@ -330,10 +330,6 @@ for (y = 0; y<=63; y++){
 //Clear invisible faces on diagonals
 for (y = 1; y < 63; y++){
 	for (x = 1; x < 63; x++){
-		if ((x >= 22) && (x<=22) && (y >= 53) && (y<=53))
-			{
-			printf("# %d,%d  %d\n", x, y, LevelInfo[22][52].VisibleFaces[vSOUTH]);
-			}
 		switch (LevelInfo[x][y].tileType)
 			{
 				case TILE_DIAG_NW:
@@ -400,16 +396,12 @@ for (y = 1; y < 63; y++){
 
 for (y = 1; y < 63; y++){
 	for (x = 1; x < 63; x++){
-		if ((x >= 21) && (x <= 23) && (y >= 51) && (y <= 53))
-			{
-			printf("@ %d,%d  %d\n", x, y, LevelInfo[22][52].VisibleFaces[vSOUTH]);
-			}
-		if ((LevelInfo[x][y].tileType == TILE_OPEN) && (LevelInfo[x][y].TerrainChange==0))
+		if ((LevelInfo[x][y].tileType == TILE_OPEN) && (LevelInfo[x][y].TerrainChange == 0) && (LevelInfo[x][y].BullFrog == 0))
 			{
 			if (
-				((LevelInfo[x + 1][y].tileType == TILE_OPEN) && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x + 1][y].floorHeight >= LevelInfo[x][y].floorHeight))
+				((LevelInfo[x + 1][y].tileType == TILE_OPEN) && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x + 1][y].BullFrog == 0) && (LevelInfo[x + 1][y].floorHeight >= LevelInfo[x][y].floorHeight))
 				||
-				(LevelInfo[x + 1][y].tileType == TILE_SOLID) && (LevelInfo[x + 1][y].TerrainChange==0)
+				(LevelInfo[x + 1][y].tileType == TILE_SOLID) && (LevelInfo[x + 1][y].TerrainChange == 0) && (LevelInfo[x + 1][y].BullFrog == 0)
 				)
 				{
 				LevelInfo[x][y].VisibleFaces[vEAST]=0;
@@ -417,9 +409,9 @@ for (y = 1; y < 63; y++){
 			
 
 			if (
-				((LevelInfo[x - 1][y].tileType == TILE_OPEN) && (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x - 1][y].floorHeight >= LevelInfo[x][y].floorHeight))
+				((LevelInfo[x - 1][y].tileType == TILE_OPEN) && (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x - 1][y].BullFrog == 0) && (LevelInfo[x - 1][y].floorHeight >= LevelInfo[x][y].floorHeight))
 				||
-				(LevelInfo[x - 1][y].tileType == TILE_SOLID) && (LevelInfo[x - 1][y].TerrainChange == 0)
+				(LevelInfo[x - 1][y].tileType == TILE_SOLID) && (LevelInfo[x - 1][y].TerrainChange == 0) && (LevelInfo[x - 1][y].BullFrog == 0)
 				)
 				{
 				LevelInfo[x][y].VisibleFaces[vWEST] = 0;
@@ -427,18 +419,18 @@ for (y = 1; y < 63; y++){
 
 
 			if (
-				((LevelInfo[x][y + 1].tileType == TILE_OPEN) && (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x][y + 1].floorHeight >= LevelInfo[x][y].floorHeight))
+				((LevelInfo[x][y + 1].tileType == TILE_OPEN) && (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x][y + 1].BullFrog == 0) && (LevelInfo[x][y + 1].floorHeight >= LevelInfo[x][y].floorHeight))
 				||
-				(LevelInfo[x][y + 1].tileType == TILE_SOLID) && (LevelInfo[x][y + 1].TerrainChange == 0)
+				(LevelInfo[x][y + 1].tileType == TILE_SOLID) && (LevelInfo[x][y + 1].TerrainChange == 0) && (LevelInfo[x][y + 1].BullFrog == 0)
 				)
 				{
 				LevelInfo[x][y].VisibleFaces[vNORTH] = 0;
 				}
 
 			if (
-				((LevelInfo[x][y - 1].tileType == TILE_OPEN) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x][y - 1].floorHeight >= LevelInfo[x][y].floorHeight))
+				((LevelInfo[x][y - 1].tileType == TILE_OPEN) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x][y - 1].BullFrog == 0) && (LevelInfo[x][y - 1].floorHeight >= LevelInfo[x][y].floorHeight))
 				||
-				(LevelInfo[x][y - 1].tileType == TILE_SOLID) && (LevelInfo[x][y - 1].TerrainChange == 0)
+				(LevelInfo[x][y - 1].tileType == TILE_SOLID) && (LevelInfo[x][y - 1].TerrainChange == 0) && (LevelInfo[x][y - 1].BullFrog == 0)
 				)
 				{
 				LevelInfo[x][y].VisibleFaces[vSOUTH] = 0;
@@ -804,6 +796,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				// FirstTileInt = getValAtCoordinate(x,y,AddressOfBlockStart,lev_ark,16);
 				//long SecondTileInt = (getValAtCoordinate(x,y,AddressOfBlockStart,lev_ark,32) >> 16);
 				long SecondTileInt = getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
+
 				address_pointer=address_pointer+4;
 
 				LevelInfo[x][y].tileType = getTile(FirstTileInt) ;
@@ -875,7 +868,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].Diagonal = LevelInfo[x][y].wallTexture;
 				//First index of the linked list of objects.
 				LevelInfo[x][y].indexObjectList = getObject(SecondTileInt);
-				
+
 				LevelInfo[x][y].Render=1;		
 				LevelInfo[x][y].DimX=1;			
 				LevelInfo[x][y].DimY=1;			
