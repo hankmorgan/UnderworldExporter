@@ -95,7 +95,8 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int REFILLABLE_LANTERN =88;
 	public const int OIL =89;
 	public const int MOONSTONE =89;
-
+	public const int LEECH= 91;
+	public const int FISHING_POLE= 92;
 	public static UILabel MessageLog;
 
 	public Sprite InventoryDisplay;
@@ -455,8 +456,10 @@ public class ObjectInteraction : MonoBehaviour {
 		int[] lstOutput= new int[8];
 		int[] lstDestroy1= new int[8];
 		int[] lstDestroy2= new int[8];
-		int ItemID1 = this.GetComponent<ObjectInteraction>().item_id;
+		int ItemID1 = InputObject1.GetComponent<ObjectInteraction>().item_id;
 		int ItemID2 = InputObject2.GetComponent<ObjectInteraction>().item_id;
+		bool Destroyed1=false;
+		bool Destroyed2=false;
 		//UW1 List
 		// a_lit_torch(149)(d:0) + a_block_of_incense_blocks_of_incense(278)(d:1) = a_block_of_burning_incense_blocks_of_burning_incense(277)
 		// the_Key_of_Truth(225)(d:1) + the_Key_of_Love(226)(d:1) = a_two_part_key(230)
@@ -507,22 +510,67 @@ public class ObjectInteraction : MonoBehaviour {
 				)
 				{//Matching combination.
 					Debug.Log ("Creating a " + lstOutput[i]);
-					if((lstInput1[i] == ItemID1) && (lstDestroy1[i]==1) )
+					if((lstInput1[i] == ItemID1) && (lstDestroy1[i]==1) && (Destroyed1==false) )
 						{
 						Debug.Log("Destroying " + InputObject1.name);
+						Destroyed1=true;
 						}
-					if((lstInput1[i] == ItemID2) && (lstDestroy1[i]==1) )
+					if((lstInput1[i] == ItemID2) && (lstDestroy1[i]==1)&& (Destroyed2==false) )
 						{
 						Debug.Log("Destroying " + InputObject2.name);
+						Destroyed2=true;
 						}
-					if((lstInput2[i] == ItemID1) && (lstDestroy2[i]==1) )
+					if((lstInput2[i] == ItemID1) && (lstDestroy2[i]==1) && (Destroyed1==false))
 						{
 						Debug.Log("Destroying " + InputObject1.name);
+						Destroyed1=true;
 						}
-					if((lstInput2[i] == ItemID2) && (lstDestroy2[i]==1) )
+					if((lstInput2[i] == ItemID2) && (lstDestroy2[i]==1)&& (Destroyed2==false) )
 						{
 						Debug.Log("Destroying " + InputObject2.name);
+						Destroyed2=true;
 						}
+
+					if (Destroyed1==true)
+						{
+						InputObject1.GetComponent<ObjectInteraction>().consumeObject();
+						}
+					if (Destroyed2==true)
+						{
+						InputObject2.GetComponent<ObjectInteraction>().consumeObject();
+						}
+
+				//Create the new object
+				GameObject myObj=  new GameObject("SummonedObject_" + playerUW.PlayerMagic.SummonCount++);
+				myObj.layer=LayerMask.NameToLayer("UWObjects");
+				myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
+				myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
+				ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_" + lstOutput[i],true);
+
+				switch (lstOutput[i])
+				{
+				case 299://Fishing pole
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					myObj.AddComponent<FishingPole>();break;
+				case 183://Popcorn
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					Food fd = myObj.AddComponent<Food>();
+					fd.Nutrition=5;
+					break;
+				default:
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					myObj.AddComponent<object_base>();break;
+				}
+				playerUW.playerInventory.ObjectInHand=myObj.name;
+				ObjectInteraction CreatedObjectInt = myObj.GetComponent<ObjectInteraction>();
+				if (CreatedObjectInt!=null)
+					{
+					CreatedObjectInt.UpdateAnimation();
+					playerUW.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
+					}
+				
+				UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+				InteractionModeControl.UpdateNow=true;
 					return true;
 				}
 			}
@@ -621,5 +669,131 @@ public class ObjectInteraction : MonoBehaviour {
 		return this.GetComponent<object_base>().GetWeight();
 		//return (float)(GetQty())*Weight[item_id]*0.1f;
 	}
+
+
+
+	public static void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
+	{	
+		//Create a sprite.
+		GameObject SpriteController = new GameObject(myObj.name + "_sprite");
+		SpriteController.transform.position = myObj.transform.position;
+		
+		SpriteRenderer mysprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
+		//mysprite.transform.position = new Vector3 (0f, 0f, 0f);
+		//Sprite image = Resources.LoadAssetAtPath <Sprite> (AssetPath);//Loads the sprite.
+		Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
+		mysprite.sprite = image;//Assigns the sprite to the object.
+		SpriteController.transform.parent = myObj.transform;
+		SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+		mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
+		//Create a billboard script for display
+		// Billboard ScriptController = 
+		if (BillBoard)
+		{
+			SpriteController.AddComponent<Billboard> ();
+		}
+	}
+	
+	public static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
+	{
+		GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
+		
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
+		CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+	}
+	
+	public static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
+	{
+		CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+	}
+	
+	public static void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
+	{
+		//Debug.Log (myObj.name);
+		//Add a script.
+		ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
+		
+		BoxCollider box =myObj.GetComponent<BoxCollider>();
+		if ((box==null) && (myObj.GetComponent<NPC>()==null) && (isUsable==1))
+		{
+			//add a mesh for interaction
+			box= myObj.AddComponent<BoxCollider>();
+			box.size = new Vector3(0.2f,0.2f,0.2f);
+			box.center= new Vector3(0.0f,0.1f,0.0f);
+			if (isMoveable==1)
+			{
+				box.material= Resources.Load<PhysicMaterial>("Materials/objects_bounce");
+			}
+		}
+		
+		objInteract.WorldDisplayIndex = int.Parse(WorldString.Substring (WorldString.Length-3,3));
+		objInteract.InvDisplayIndex= int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
+		
+		if (isUsable==1)
+		{
+			objInteract.CanBeUsed=true;
+		}
+		
+		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
+		//		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
+		
+		//		objInteract.WorldString=WorldString;
+		//		objInteract.InventoryString=InventoryString;
+		objInteract.EquipString=EquipString;
+		//objInteract.InventoryDisplay=InventoryString;
+		objInteract.ItemType=ItemType;//UWexporter id type
+		objInteract.item_id=ItemId;//Internal ItemID
+		objInteract.Link=link;
+		objInteract.Quality=Quality;
+		objInteract.Owner=Owner;
+		objInteract.flags=flags;
+		if (inUseFlag==1)
+		{
+			objInteract.InUse=true;
+		}
+		
+		
+		
+		if (isMoveable==1)
+		{
+			objInteract.CanBePickedUp=true;
+			Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
+			rgd.angularDrag=0.0f;
+			WindowDetectUW.FreezeMovement(myObj);
+		}
+		
+		if (ItemType !=ObjectInteraction.ANIMATION)
+		{
+			if (isAnimated==1)
+			{
+				objInteract.isAnimated=true;
+			}
+			
+			if (useSprite==1)
+			{
+				objInteract.ignoreSprite=false;
+			}
+			else
+			{
+				objInteract.ignoreSprite=true;
+			}
+		}
+		else
+		{
+			objInteract.ignoreSprite=true;
+		}
+		if (isQuant==1)
+		{
+			objInteract.isQuant=true;
+		}
+		if (isEnchanted==1)
+		{
+			objInteract.isEnchanted=true;
+			Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
+		}
+	}
+
+
 
 }

@@ -17,7 +17,7 @@ public class InventorySlot : GuiBase {
 	public const int LEGGINGS =77;
 	public static bool LookingAt;
 
-	private GameObject QuantityObj=null;
+	private GameObject QuantityObj=null;//Reference to quantity object being picked up
 
 
 	void UseFromSlot()
@@ -145,14 +145,13 @@ public class InventorySlot : GuiBase {
 	void LeftClickPickup()
 	{//Code for when I left click in pickup mode
 
-		//pInv = player.GetComponent<PlayerInventory>();
 		GameObject ObjectUsedOn=null;
 		bool DoNotPickup=false;
 		if ( playerUW.playerInventory.ObjectInHand !="")
 			{ 
 			ObjectInteraction objInt =playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
-				{//Slot is not a general use on andThis item type does not go in this slot.
+				{//Slot is not a general use one andThis item type does not go in this slot.
 					Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
 					DoNotPickup=true;
 				}
