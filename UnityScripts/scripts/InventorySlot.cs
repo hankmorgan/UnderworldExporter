@@ -262,6 +262,10 @@ public class InventorySlot : GuiBase {
 				{
 					if (ObjectUsedOn.GetComponent<Container>() !=null)
 					{
+						if (ObjectUsedOn.GetComponent<Container>().isOpenOnPanel==true)
+							{
+								return ;
+							}
 						playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
 						playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						if (this.slotIndex>=11)

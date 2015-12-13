@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class WindowDetectUW : WindowDetect {
-
+	public	bool JustClicked;
 
 	public static UWCharacter playerUW;
 	public override void Start ()
@@ -91,7 +91,13 @@ public class WindowDetectUW : WindowDetect {
 		{
 			return;
 		}
+		if (JustClicked==true)
+		{
+			return;
+		}
 		base.OnPress(isPressed);
+		JustClicked=true;
+		Invoke("ResetClick",0.2f);
 		//if (isPressed==false)
 		//{
 		//	Debug.Log ("HERE");
@@ -106,12 +112,17 @@ public class WindowDetectUW : WindowDetect {
 			default:
 				break;
 			}
+		Invoke("ResetClick",0.5f);
 		//}
 	}
 
 
 	void OnClick()
 	{
+		if (JustClicked==true)
+		{
+			return;
+		}
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModePickup:
@@ -121,6 +132,13 @@ public class WindowDetectUW : WindowDetect {
 			break;
 		}
 
+		JustClicked=true;
+		Invoke("ResetClick",0.5f);
+	}
+
+	void ResetClick()
+	{
+		JustClicked=false;
 	}
 
 	void ClickEvent()
