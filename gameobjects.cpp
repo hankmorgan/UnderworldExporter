@@ -655,16 +655,21 @@ switch (game)
 					}
 				if (objectMasters[objList[x].item_id].type == BRIDGE)
 					{
+					
 					if (objList[x].flags >= 2)
-						{
+						{//267 + textureIndex;
 						if (game == UW2)
 							{
 							objList[x].texture = texture_map[objList[x].flags - 2];	//Sets the texture for bridge
 							}
 						else
 							{
-							objList[x].texture = texture_map[objList[x].flags - 2 + 48];	//Sets the texture for bridge
+							objList[x].texture =texture_map[objList[x].flags - 2 + 48];	//Sets the texture for bridge
 							}
+						}
+					else
+						{
+						objList[x].texture = 267 + objList[x].flags & 0x3F;//267 is an offset into my own textures config file.
 						}
 					}
 
@@ -701,12 +706,26 @@ switch (game)
 						objList[x].texture = textureIndex;// texture_map[textureIndex];
 */
 
-						int textureQuality = (objList[x].quality >>1) & 0xf;
-						if (textureQuality >= 10)
+						int textureQuality = (objList[x].quality >> 1) & 0xf;
+						if (textureQuality == 10)
 							{
-							textureQuality=textureQuality-10;
+							//Weird glitch texture
+							//textureQuality=-1;
+							//textureQuality = textureQuality - 10;
+							objList[x].texture = -1;
 							}
-						objList[x].texture = texture_map[(textureQuality)+48];
+						else if (textureQuality > 10)
+							{
+							//textureQuality=8;//Always seems to be this texture.
+							//textureQuality = -1;//use the texture already there?
+							objList[x].texture = -1;//texture_map[(textureQuality)+48];//-1 to reuse the existing texture
+							}
+						else
+							{
+							objList[x].texture = texture_map[(textureQuality)+48];
+							}
+						
+						
 
 						}					
 					}

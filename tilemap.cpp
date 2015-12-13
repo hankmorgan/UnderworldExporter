@@ -80,6 +80,8 @@ int getWallTexUw2(unsigned char *buffer, long textureOffset, long tileData)
 void CleanUp(tile LevelInfo[64][64], int game)
 {
 	int x; int y;
+	
+
 //Reduces tile complexity. Hides hidden solids and merges matching tiles along axis.
 	////if (game != SHOCK)
 	////{
@@ -114,6 +116,10 @@ void CleanUp(tile LevelInfo[64][64], int game)
 		for (y=0;y<64;y++){
 	//lets test this tile for visibility
 	//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
+			if ((x == 22) && (y == 52))
+				{
+				printf("%d\n", LevelInfo[22][52].VisibleFaces[vSOUTH]);
+				}
 		if ((LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y].indexObjectList == 0)  && (LevelInfo[x][y].TerrainChange == 0)){
 				switch (y)
 				{
@@ -193,10 +199,14 @@ void CleanUp(tile LevelInfo[64][64], int game)
 	//Now lets combine the solids along particular axis
 	for (x=0;x<64;x++){
 		for (y=0;y<64;y++){
+			if ((x == 22) && (y == 52))
+				{
+				printf("%d\n", LevelInfo[22][52].VisibleFaces[vSOUTH]);
+				}
 			if  ((LevelInfo[x][y].Grouped ==0))
 			{
 			j=1;
-			while ((LevelInfo[x][y].Render ==1) && (LevelInfo[x][y+j].Render==1) && (LevelInfo[x][y+j].Grouped==0) )		//&& (LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y+j].tileType ==0)
+			while ((LevelInfo[x][y].Render == 1) && (LevelInfo[x][y + j].Render == 1) && (LevelInfo[x][y + j].Grouped == 0) && (LevelInfo[x][y + j].BullFrog == 0))		//&& (LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y+j].tileType ==0)
 			{
 			//combine these two if they match and they are not already part of a group
 				if (DoTilesMatch(LevelInfo[x][y],LevelInfo[x][y+j])){
@@ -245,12 +255,16 @@ void CleanUp(tile LevelInfo[64][64], int game)
 	////Now lets combine solids along the other axis
 for (y=0;y<64;y++){
 		for (x=0;x<64;x++){
+			if ((x == 22) && (y == 52))
+				{
+				printf("%d\n", LevelInfo[22][52].VisibleFaces[vSOUTH]);
+				}
 			if  ((LevelInfo[x][y].Grouped ==0))
 			{
 			j=1;
-			while ((LevelInfo[x][y].Render ==1) && (LevelInfo[x+j][y].Render==1) && (LevelInfo[x+j][y].Grouped==0) )		//&& (LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y+j].tileType ==0)
+			while ((LevelInfo[x][y].Render == 1) && (LevelInfo[x + j][y].Render == 1) && (LevelInfo[x + j][y].Grouped == 0) && (LevelInfo[x + j][y].BullFrog == 0))		//&& (LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y+j].tileType ==0)
 			{
-			//combine these two if they match and they are not already part of a group
+			//combine these two if they  match and they are not already part of a group
 				if (DoTilesMatch(LevelInfo[x][y],LevelInfo[x+j][y])){
 					LevelInfo[x+j][y].Render =0;
 					LevelInfo[x+j][y].Grouped =1;
@@ -316,6 +330,10 @@ for (y = 0; y<=63; y++){
 //Clear invisible faces on diagonals
 for (y = 1; y < 63; y++){
 	for (x = 1; x < 63; x++){
+		if ((x >= 22) && (x<=22) && (y >= 53) && (y<=53))
+			{
+			printf("# %d,%d  %d\n", x, y, LevelInfo[22][52].VisibleFaces[vSOUTH]);
+			}
 		switch (LevelInfo[x][y].tileType)
 			{
 				case TILE_DIAG_NW:
@@ -331,7 +349,7 @@ for (y = 1; y < 63; y++){
 						LevelInfo[x + 1][y].VisibleFaces[vWEST]=0;
 						}
 					}
-
+					break;
 				case TILE_DIAG_NE:
 					{
 					if ((LevelInfo[x][y - 1].tileType == TILE_SOLID) && (LevelInfo[x][y - 1].TerrainChange == 0))
@@ -345,13 +363,13 @@ for (y = 1; y < 63; y++){
 						LevelInfo[x - 1][y].VisibleFaces[vEAST] = 0;
 						}
 					}
-
+					break;
 				case TILE_DIAG_SE:
 					{
 					if ((LevelInfo[x][y + 1].tileType == TILE_SOLID) && (LevelInfo[x][y + 1].TerrainChange == 0))
 						{
 						LevelInfo[x][y].VisibleFaces[vNORTH] = 0;
-						LevelInfo[x][y - 1].VisibleFaces[vSOUTH] = 0;
+						LevelInfo[x][y + 1].VisibleFaces[vSOUTH] = 0;
 						}
 					if ((LevelInfo[x - 1][y].tileType == TILE_SOLID) && (LevelInfo[x - 1][y].TerrainChange == 0))
 						{
@@ -359,7 +377,7 @@ for (y = 1; y < 63; y++){
 						LevelInfo[x - 1][y].VisibleFaces[vEAST] = 0;
 						}
 					}
-
+					break;
 				case TILE_DIAG_SW:
 					{
 					if ((LevelInfo[x][y + 1].tileType == TILE_SOLID) && (LevelInfo[x][y + 1].TerrainChange == 0))
@@ -373,6 +391,7 @@ for (y = 1; y < 63; y++){
 						LevelInfo[x + 1][y].VisibleFaces[vWEST] = 0;
 						}
 					}
+					break;
 			}
 
 		}
@@ -381,6 +400,10 @@ for (y = 1; y < 63; y++){
 
 for (y = 1; y < 63; y++){
 	for (x = 1; x < 63; x++){
+		if ((x >= 21) && (x <= 23) && (y >= 51) && (y <= 53))
+			{
+			printf("@ %d,%d  %d\n", x, y, LevelInfo[22][52].VisibleFaces[vSOUTH]);
+			}
 		if ((LevelInfo[x][y].tileType == TILE_OPEN) && (LevelInfo[x][y].TerrainChange==0))
 			{
 			if (
@@ -792,6 +815,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].noOfNeighbours=0;
 				LevelInfo[x][y].tileTested = 0;
 				LevelInfo[x][y].TerrainChangeCount=0;
+				LevelInfo[x][y].BullFrog = 0;
 				switch (game)
 					{
 					case UWDEMO:	//special case for demo since textures mappings are in a seperate file

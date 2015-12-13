@@ -98,6 +98,7 @@ public class Shrine : object_base {
 		SubmitMantra (inputctrl.text);
 		WaitingForInput=false;
 		Time.timeScale=1.0f;
+		inputctrl.text="";
 		WindowDetectUW.WaitingForInput=false;
 
 		//Debug.Log ("Value summited");
@@ -250,6 +251,11 @@ public class Shrine : object_base {
 	{//TODO:Find out what happens when I have the cup of wonder.
 		ml.Add ("The cup of wonder is somewhere...");
 		//inputctrl.text=ml.text;
+	}
+
+	public override bool TalkTo ()
+	{
+		return use ();
 	}
 }
 

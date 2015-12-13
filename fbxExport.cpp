@@ -1384,7 +1384,8 @@ void RenderFBXOpenTile(FbxScene*& gScene, int x, int y, tile &t, short Water, sh
 					{
 					if (t.BullFrog >0)
 						{
-						sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Bullfrog", x, y);
+						//sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Bullfrog", x, y);
+						sprintf_s(TileName, 80, "%s_%02d_%02d\0", "Tile", x, y);//Floor_%02d_%02d
 						RenderFBXCuboid(gScene, x, y, t, Water, -16, t.floorHeight, TileName);
 						}
 					else
@@ -4964,15 +4965,30 @@ void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64
 					t.floorHeight = ((objList[k].zpos >> 3) >> 2) * 8;	//heights in uw are shifted
 					t.floorHeight = (objList[k].zpos >> 2);	//heights in uw are shifted
 					t.ceilingHeight = 0;
-					if (game != UW2)
-						{//Texture is supposed to be an index into the texture list!
-						t.floorTexture = objList[k].texture;  //(objList[k].quality >> 1) + 210;
+					//if (game != UW2)
+					//	{//Texture is supposed to be an index into the texture list!
+					//	t.floorTexture = objList[k].texture;  //(objList[k].quality >> 1) + 210;
+					if (objList[k].texture == -1)
+						{
+						t.floorTexture = LevelInfo[objList[k].tileX+i][objList[k].tileY+j].floorTexture;//?
 						}
 					else
 						{
-						//t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
 						t.floorTexture = objList[k].texture;
 						}
+					//}
+				//	else
+						//{
+						////t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+						//if (objList[k].texture == -1)
+						//	{
+						//	t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+						//	}
+						//else
+						//	{
+						//	t.floorTexture = objList[k].texture;
+						//	}						
+						//}
 					t.shockCeilingTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].shockCeilingTexture;
 					t.wallTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].wallTexture;
 					t.West = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].West;
@@ -5024,11 +5040,13 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 						{
 						if (objectMasters[objList[nextObj].item_id].type == BRIDGE)
 							{
-							int textureIndex = objList[nextObj].flags & 0x3F;
+							
 							tile tmpt;
 							tmpt.tileType = TILE_OPEN;//t.tileType;
 							tmpt.DimX = 1;
 							tmpt.DimY = 1;
+
+							/*int textureIndex = objList[nextObj].flags & 0x3F;
 							tmpt.wallTexture = 267 + textureIndex;
 							tmpt.floorTexture = 267 + textureIndex;
 							tmpt.shockCeilingTexture = 267 + textureIndex;
@@ -5036,12 +5054,20 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							tmpt.West = 267 + textureIndex;// LevelInfo[x][y].wallTexture;
 							tmpt.South = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
 							tmpt.North = 267 + textureIndex;//LevelInfo[x][y].wallTexture;
+							*/
+							tmpt.wallTexture = objList[nextObj].texture;
+							tmpt.floorTexture = objList[nextObj].texture;
+							tmpt.shockCeilingTexture = objList[nextObj].texture;
+							tmpt.East = objList[nextObj].texture;// LevelInfo[x][y].wallTexture;
+							tmpt.West = objList[nextObj].texture;// LevelInfo[x][y].wallTexture;
+							tmpt.South = objList[nextObj].texture;//LevelInfo[x][y].wallTexture;
+							tmpt.North = objList[nextObj].texture;//LevelInfo[x][y].wallTexture;
 							tmpt.floorHeight = LevelInfo[x][y].ceilingHeight;//this is deliberate
 							tmpt.ceilingHeight = LevelInfo[x][y].ceilingHeight;
 							tmpt.tileX = LevelInfo[x][y].tileX;
 							tmpt.tileY = LevelInfo[x][y].tileY;
 
-							int objType = objectMasters[objList[nextObj].item_id].type;
+						//	int objType = objectMasters[objList[nextObj].item_id].type;
 							CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
 							//Move it's xy to the center of the tile
 							offX = x*BrushSizeX + BrushSizeX / 2;

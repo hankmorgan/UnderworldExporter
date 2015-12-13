@@ -35,38 +35,47 @@ public class a_set_variable_trap : a_variable_trap {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		string operation="";
+		int OrigValue=0;
 		if (VariableIndex!=0)
 		{//Variable Operations
+			OrigValue=GameWorldController.instance.variables[VariableIndex];
 			//Debug.Log ("Variable " + VariableIndex + " op(" + heading + ") = " + GameWorldController.instance.variables[VariableIndex] );
 			switch(heading)
 			{
 			case 0://Add
 				GameWorldController.instance.variables[VariableIndex] += VariableValue;
+				operation = "add";
 				break;
 			case 1://Sub
 				GameWorldController.instance.variables[VariableIndex] -= VariableValue;
+				operation = "Sub";
 				break;
 			case 2://Set
 				GameWorldController.instance.variables[VariableIndex] = VariableValue;
+				operation = "Set";
 				break;
 			case 3://AND
 				GameWorldController.instance.variables[VariableIndex] &= VariableValue;
+				operation = "And";
 				break;
 			case 4://OR
 				GameWorldController.instance.variables[VariableIndex] |= VariableValue;
+				operation = "or";
 				break;
 			case 5://XOR
 				GameWorldController.instance.variables[VariableIndex] ^= VariableValue;
+				operation = "xor";
 				break;
 			case 6://Shift left
 				//	fprintf(fBODY,"\tglobal_var_%d = (global_var_%d * %d ) & 63 ;\n",variable,variable,2*value);
 				//GameWorldController.instance.variables[VariableIndex] = GameWorldController.instance.variables[VariableIndex]<<VariableValue);
 				GameWorldController.instance.variables[VariableIndex] =	GameWorldController.instance.variables[VariableIndex] * (2*VariableValue) & 63;
-
+				operation = "shl";
 				break;
 
 			}
-			Debug.Log ("Variable " + VariableIndex + " now =" + GameWorldController.instance.variables[VariableIndex] );
+			Debug.Log ("Operation + " + operation + "Variable " + VariableIndex + " was " + OrigValue + " now =" + GameWorldController.instance.variables[VariableIndex] );
 		}
 		else
 		{//Bitwise operations on bitfield

@@ -1660,7 +1660,7 @@ int target;
 						case 0x03://Platform
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality); break; }
 						case 0x18:	//bullfrog
-							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						default:
 							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj);"); break; }
 					}

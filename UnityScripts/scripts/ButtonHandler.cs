@@ -115,6 +115,10 @@ public class ButtonHandler : object_base {
 			triggerObj=GameObject.Find (trigger);
 		}
 
+		if (triggerObj==null)
+		{
+			return true;//Cannot activate.
+		}
 		triggerObj.GetComponent<trigger_base>().state=state;
 		triggerObj.GetComponent<trigger_base>().Activate();
 

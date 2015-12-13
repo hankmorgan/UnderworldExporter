@@ -746,7 +746,7 @@ public class Magic : MonoBehaviour {
 		
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Leap (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Leap,SpellEffectSlot,5);
+			Cast_Leap (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Leap_alt01,SpellEffectSlot,5);
 		}
 		else
 		{
@@ -1574,6 +1574,9 @@ public class Magic : MonoBehaviour {
 			break;
 			
 		case SpellEffect.UW1_Spell_Effect_Leap:
+			Cast_Leap(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5);
+			SpellResultType=1;
+			break;
 		case SpellEffect.UW1_Spell_Effect_Leap_alt01:
 		case SpellEffect.UW1_Spell_Effect_Leap_alt02:
 			//TODO: Find out which one of these is a magic ring effect!
