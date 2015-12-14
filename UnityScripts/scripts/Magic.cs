@@ -888,7 +888,20 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	
+
+	void CastTheFrog(GameObject caster)
+	{
+		a_do_trapBullfrog frog= (a_do_trapBullfrog)FindObjectOfType(typeof(a_do_trapBullfrog));
+		if (frog !=null)
+		{
+			frog.ResetBullFrog();
+		}
+		else
+		{//000~001~191~There is a pained whining sound.
+			ml.Add( caster.GetComponent<UWCharacter>().StringControl.GetString (1,191));
+		}
+	}
+
 	/*Common spell effects that are used multiple times*/
 	
 	void Cast_Heal(GameObject caster,int HP)
@@ -1865,7 +1878,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Cursed_alt15:
 		case SpellEffect.UW1_Spell_Effect_Cursed_alt16:
 		case SpellEffect.UW1_Spell_Effect_RoamingSight:
-		case SpellEffect.UW1_Spell_Effect_theFrog:
+		
 		case SpellEffect.UW1_Spell_Effect_Curse_alt01:
 		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:
 		case SpellEffect.UW1_Spell_Effect_Reveal_alt01:
@@ -1885,7 +1898,12 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_LocalTeleport_alt01:
 			SpellResultType=0;
 			break;
-
+		
+		case SpellEffect.UW1_Spell_Effect_theFrog:
+			//Debug.Log ("The frog");
+			CastTheFrog(caster);
+			SpellResultType=0;
+			break;
 
 		default:
 			Debug.Log ("effect Id is " + EffectId);

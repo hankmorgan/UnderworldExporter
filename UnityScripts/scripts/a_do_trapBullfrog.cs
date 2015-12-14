@@ -52,13 +52,16 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 
 	public void ResetBullFrog()
 	{//TODO:Move player and all objects within area to a safe spot when resetting.
+		//000~001~193~A voice utters the words "Reset Activated."
+		ml.Add(playerUW.StringControl.GetString (1,193));
 		for (int x=0; x<8; x++)
 		{
 			for (int y=0; y<8 ; y++)
 			{
 				GameObject platformTile=GameWorldController.FindTile ((BaseX+x),(BaseY+y),1);
 				heights[x,y]=0;
-				platformTile.transform.position = Vector3.zero;
+				StartCoroutine(MoveTile (platformTile.transform, -platformTile.transform.position,0.1f));
+				//platformTile.transform.position = Vector3.zero;
 			}
 		}
 	}
@@ -73,7 +76,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 				if ((x==0) && (y==0))
 					{
 						//raise or lower by 2
-					if (((heights[targetX+x,targetY+y]<8) && (dir==+1)) || ((heights[targetX+x,targetY+y]>-8) && (dir==-1)))
+					if (((heights[targetX+x,targetY+y]<8) && (dir==+1)) || ((heights[targetX+x,targetY+y]>-4) && (dir==-1)))
 						{
 						GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),1);
 						StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,(float)(2*dir) * (0.3f),0f) ,0.1f));
@@ -89,7 +92,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 							(targetY+y >= 0) && (targetY+y<+8)
 							)
 						{
-						if (((heights[targetX+x,targetY+y]<8) && (dir==+1)) || ((heights[targetX+x,targetY+y]>-8) && (dir==-1)))
+						if (((heights[targetX+x,targetY+y]<8) && (dir==+1)) || ((heights[targetX+x,targetY+y]>-4) && (dir==-1)))
 							{
 							//Raise or lower by 1
 							GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),1);
