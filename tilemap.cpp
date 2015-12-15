@@ -1548,6 +1548,36 @@ for (int x=0; x<64;x++)
 			}
 		}	
 	}
+
+//Set traps to create at the point where they are first linked.
+for (int i = 0; i < 1024; i++)
+	{
+	int nextLink =0; 
+	if ((isTrap(objList[i])) && (objList[i].InUseFlag == 1))
+		{
+		int nextLink =objList[i].link;
+		int x = objList[i].tileX;
+		int y = objList[i].tileY;
+		while ((isTrap(objList[nextLink])) && (nextLink != 0))
+			{
+			if (objList[nextLink].InUseFlag != 1)
+				{
+				objList[nextLink].tileX = x;
+				objList[nextLink].tileY = y;
+				objList[nextLink].InUseFlag = 1;
+				nextLink = objList[nextLink].link;
+				if (objectMasters[objList[nextLink].item_id].type == A_DELETE_OBJECT_TRAP)
+					{
+					nextLink = 0;
+					}
+				}
+			else
+				{
+				nextLink=0;
+				}
+			}
+		}
+	}
 }
 
 

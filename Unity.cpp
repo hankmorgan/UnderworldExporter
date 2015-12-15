@@ -1705,7 +1705,7 @@ int target;
 				break;
 			case  A_DELETE_OBJECT_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_delete_object_trap(myObj);");
-				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
+				//fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 				break;
 			case  AN_INVENTORY_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_an_inventory_trap(myObj);");

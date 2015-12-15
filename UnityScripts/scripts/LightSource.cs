@@ -29,6 +29,7 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
+		CheckReferences();
 		if (playerUW.playerInventory.ObjectInHand == "")
 		{
 			if (objInt.PickedUp==false)
@@ -93,6 +94,7 @@ public class LightSource : object_base {
 			{//Is a quantity of one or not a quantity/
 				pInv.RemoveItem(this.name);
 				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
+				objInt.inventorySlot=invSlot.slotIndex;
 				IsOn=true;
 				objInt.item_id=ItemIdOn;
 				objInt.InvDisplayIndex=ItemIdOn;

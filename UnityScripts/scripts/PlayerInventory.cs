@@ -493,6 +493,52 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public void Refresh(int slotIndex)
+	{//Force a refresh of a specific slot
+		switch (slotIndex)
+		{
+		case 0://Helm
+			bHelm=true;
+			break;
+		case 1://Chest
+			bChest=true;
+			break;
+		case 2://Leggings
+			bLegs=true;
+			break;
+		case 3://Boots
+			bBoots=true;
+			break;
+		case 4://Gloves
+			bGloves=true;
+			break;
+		case 5://ShoulderRight
+			bRightShoulder=true;
+			break;
+		case 6://ShoulderLeft
+			bLeftShoulder=true;
+			break;
+		case 7://HandRight
+			bRightHand=true;
+			break;
+		case 8://HandLeft
+			bLeftHand=true;
+			break;
+		case 9://RingRight
+			bRightRing=true;
+			break;
+		case 10://RingLeft
+			bLeftRing=true;
+			break;
+		default://Inventory Slots 0-7		
+			if ((slotIndex>=11)&&(slotIndex<=18))
+			{
+				bBackPack[slotIndex-11]=true;
+			}
+			break;
+		}
+	}
+
 	public void Refresh()
 	{//Force a full refresh of inventory display
 		Container cn = GameObject.Find(currentContainer).GetComponent<Container>();

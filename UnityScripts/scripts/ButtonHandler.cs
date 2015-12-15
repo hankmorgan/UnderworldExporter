@@ -95,12 +95,15 @@ public class ButtonHandler : object_base {
 		{
 			triggerObj=GameObject.Find (trigger);
 		}
-		ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
-		ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
-		if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
+		if (triggerObj!=null)
+		{
+			ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
+			ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
 			{
-			this.Activate();
+				this.Activate();
 			}
+		}
 		return true;
 	}
 

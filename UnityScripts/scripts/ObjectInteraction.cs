@@ -126,6 +126,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 	private AudioSource audSource;
 
+	public int inventorySlot=-1;
 
 	public int ItemType; //UWexporter item type id
 
@@ -244,6 +245,10 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
 			InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
+			if (inventorySlot!=-1)
+			{
+				playerUW.playerInventory.Refresh(inventorySlot);
+			}
 		}
 			
 		  //tc.RequestSprite(sr.sprite, WorldDisplayIndex,isAnimated);
@@ -404,6 +409,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public bool Equip(int SlotNo)
 	{//To handle what happens when an item (typically armour is equipped
 		Debug.Log ("Equip Event on " + this.gameObject.name);
+		inventorySlot=SlotNo;
 		object_base item=null;
 		item=this.GetComponent<object_base>();
 		if( item !=null)
@@ -419,6 +425,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public bool UnEquip(int SlotNo)
 	{//To handle what happens when an item (typically armour is unequipped
 		Debug.Log ("Unequip Event on " + this.gameObject.name);
+		inventorySlot=-1;
 		object_base item=null;
 		item=this.GetComponent<object_base>();
 		if( item !=null)
