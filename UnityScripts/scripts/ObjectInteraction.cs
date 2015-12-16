@@ -633,7 +633,7 @@ public class ObjectInteraction : MonoBehaviour {
 	}
 
 
-	
+	/*
 	void OnCollisionEnter(Collision collision)
 		
 	{
@@ -649,7 +649,7 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 			audSource= this.GetComponent<AudioSource>();
 		}
-	}
+	}*/
 
 	public int GetQty()
 	{//Gets the true quantity of this object
@@ -800,7 +800,15 @@ public class ObjectInteraction : MonoBehaviour {
 			Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
 		}
 	}
-
-
+	/*
+	void OnCollisionEnter(Collision info) {
+		
+		if(info.relativeVelocity.magnitude > 3.0f)
+		{ 
+			Debug.Log ("bounce");
+		}
+		
+	}
+*/
 
 }

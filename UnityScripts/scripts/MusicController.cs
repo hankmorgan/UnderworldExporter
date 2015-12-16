@@ -44,6 +44,7 @@ public class MusicController : MonoBehaviour {
 	public int[] FleeingTracks={10};
 	public int[] MapTracks={11};
 	private bool StopProcessing;
+
 	private AudioSource Aud;
 
 	public UWCharacter playerUW;
@@ -89,7 +90,7 @@ public class MusicController : MonoBehaviour {
 			}
 			return; //don#t interupt a special clip. Eg fanfare in combate
 		}
-		if (Aud.isPlaying==false)
+		if ((Aud.isPlaying==false) && (StopProcessing==false))
 		{
 			playing=-1; //Force next track;
 		}
@@ -131,7 +132,14 @@ public class MusicController : MonoBehaviour {
 
 	public void Stop()
 	{
+		StopProcessing=true;
 		Aud.Stop ();
+	}
+
+	public void Resume()
+	{
+		StopProcessing=false;
+		PlayRandom (IdleTracks);
 	}
 
 	private int GetMaxPriority()

@@ -167,7 +167,7 @@ public class UWCharacter : Character {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
-		if (WindowDetectUW.WaitingForInput==true)
+		if ((WindowDetectUW.WaitingForInput==true) && (Instrument.PlayingInstrument==false))//TODO:Make this cleaner!!
 		{//TODO: This should be in window detect
 			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
 			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;

@@ -48,7 +48,7 @@ public class ScrollController : GuiBase {
 	public void Set(string text)
 	{//Clears all text and sets the only text on the control
 		Clear();
-		uiIn.Add(text);
+		Add(text);
 	}
 
 	public void Clear()

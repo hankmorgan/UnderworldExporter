@@ -289,8 +289,8 @@
 288 0 0 0 entity 16 a_spell H 1 Sprites/OBJECTS_288 0 L M 1 1 1 Sprites/OBJECTS_288 Sprites/OBJECTS_288 S T U Sprites/OBJECTS_288 W x Y 0 1
 289 0 0 0 entity 16 a_bedroll H 1 Sprites/OBJECTS_289 0 L M 1 1 1 Sprites/OBJECTS_289 Sprites/OBJECTS_289 S T U Sprites/OBJECTS_289 W x Y 0 1
 290 0 0 0 entity 81 a_silver_seed H 1 Sprites/OBJECTS_290 0 L M 1 1 1 Sprites/OBJECTS_290 Sprites/OBJECTS_290 S T U Sprites/OBJECTS_290 W x Y 1 1
-291 0 0 0 entity 16 a_mandolin H 1 Sprites/OBJECTS_291 0 L M 1 1 1 Sprites/OBJECTS_291 Sprites/OBJECTS_291 S T U Sprites/OBJECTS_291 W x Y 0 1
-292 0 0 0 entity 16 a_flute H 1 Sprites/OBJECTS_292 0 L M 1 1 1 Sprites/OBJECTS_292 Sprites/OBJECTS_292 S T U Sprites/OBJECTS_292 W x Y 0 1
+291 0 0 0 entity 26 a_mandolin H 1 Sprites/OBJECTS_291 0 L M 1 1 1 Sprites/OBJECTS_291 Sprites/OBJECTS_291 S T U Sprites/OBJECTS_291 W x Y 0 1
+292 0 0 0 entity 26 a_flute H 1 Sprites/OBJECTS_292 0 L M 1 1 1 Sprites/OBJECTS_292 Sprites/OBJECTS_292 S T U Sprites/OBJECTS_292 W x Y 0 1
 293 0 0 0 entity 16 some_leeches_bunches_of_leeches H 1 Sprites/OBJECTS_293 0 L M 1 1 1 Sprites/OBJECTS_293 Sprites/OBJECTS_293 S T U Sprites/OBJECTS_293 W x Y 0 1
 294 0 0 0 entity 90 a_moonstone H 1 Sprites/OBJECTS_294 0 L M 1 1 1 Sprites/OBJECTS_294 Sprites/OBJECTS_294 S T U Sprites/OBJECTS_294 W x Y 0 1
 295 0 0 0 entity 87 a_spike H 1 Sprites/OBJECTS_295 0 L M 1 1 1 Sprites/OBJECTS_295 Sprites/OBJECTS_295 S T U Sprites/OBJECTS_295 W x Y 0 1
