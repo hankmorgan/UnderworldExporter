@@ -3,6 +3,6 @@ using System.Collections;
 
 public class Quest : MonoBehaviour {
 
-	public int[] QuestVariables=new int[32];
+	public int[] QuestVariables=new int[33];
 
 }

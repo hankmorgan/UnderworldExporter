@@ -31,6 +31,7 @@ public class UWCharacter : Character {
 	public bool isWaterWalking;
 	public bool onGround;//Not currently used.
 	public bool isTelekinetic;
+	public bool isLeaping;
 
 	//Character Status
 	public int FoodLevel;
@@ -198,7 +199,7 @@ public class UWCharacter : Character {
 		}
 
 		if (isFlying)
-		{
+		{//Flying spell
 			playerMotor.movement.maxFallSpeed=0.0f;
 		}
 		else
@@ -211,6 +212,15 @@ public class UWCharacter : Character {
 			{
 				playerMotor.movement.maxFallSpeed=20.0f;//Default
 			}
+		}
+
+		if (isLeaping)
+		{//Jump spell
+			playerMotor.jumping.baseHeight=1.2f;
+		}
+		else
+		{
+			playerMotor.jumping.baseHeight=0.6f;
 		}
 
 		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);

@@ -49,7 +49,7 @@ public class Conversation : GuiBase {
 	//public int[] param2=new int[31];//TODO:is this correct
 
 
-	static int play_hunger;
+	protected static int play_hunger;
 	static int play_health;
 	static int play_arms;
 	static int play_power;
