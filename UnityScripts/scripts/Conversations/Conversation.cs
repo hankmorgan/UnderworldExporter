@@ -50,17 +50,17 @@ public class Conversation : GuiBase {
 
 
 	protected static int play_hunger;
-	static int play_health;
-	static int play_arms;
-	static int play_power;
-	static int play_hp;
-	static int play_mana;
-	static int play_level;
-	static int new_player_exp;   //  (not used in uw1)
+	protected static int play_health;
+	protected static int play_arms;
+	protected static int play_power;
+	protected static int play_hp;
+	protected static int play_mana;
+	protected static int play_level;
+	protected static int new_player_exp;   //  (not used in uw1)
 	protected static int play_name;       //   player name
-	static int play_poison;      //  (not used in uw1)
-	static int play_drawn;       //  is 1 when player has drawn his weapon (?)
-	static int play_sex;         // (not used in uw1)
+	protected static int play_poison;      //  (not used in uw1)
+	protected static int play_drawn;       //  is 1 when player has drawn his weapon (?)
+	protected static int play_sex;         // (not used in uw1)
 /*
 	public int npc_xhome;        //  x coord of home tile
 	public int npc_yhome;        //  y coord of home tile
