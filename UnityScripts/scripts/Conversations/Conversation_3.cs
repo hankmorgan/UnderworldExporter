@@ -438,7 +438,7 @@ public class Conversation_3 : Conversation {
 			} // while
 			
 			//give_to_npc( 2, locals[6], locals[11] );
-			give_to_npc(2,locals,locals[6],locals[11]);
+			give_to_npc(2,locals,6,locals[11]);
 			if ( locals[12] > 5 ) {
 				
 				yield return StartCoroutine(func_062c());
@@ -1101,7 +1101,7 @@ public class Conversation_3 : Conversation {
 					locals[16] = locals[5];
 					locals[18] = 1;
 					//give_to_npc( 2, locals[16], locals[18] );
-					give_to_npc(2,locals,locals[16],18);
+					give_to_npc(2,locals,16,locals[18]);
 					yield return StartCoroutine( func_0d84());
 				} // end if
 				
@@ -1112,7 +1112,7 @@ public class Conversation_3 : Conversation {
 			} // while
 			
 			//give_to_npc( 2, locals[6], locals[11] );
-			give_to_npc(2,locals,locals[6],11);
+			give_to_npc(2,locals,6,locals[11]);
 			if ( locals[12] > 5 ) {
 				
 				yield return StartCoroutine(func_0d2a());

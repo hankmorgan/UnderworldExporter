@@ -406,7 +406,7 @@ public class Conversation_90 : Conversation {
 				
 				//locals[176] = 1;
 				//give_to_npc( 2, locals[11], locals[176] );
-				give_to_npc(2,locals,locals[11],176);//Just give 1 item at 1 specific slot set above
+				give_to_npc(2,locals,11,locals[176]);//Just give 1 item at 1 specific slot set above
 				privateVariables[2] = 1;
 			} else {
 				

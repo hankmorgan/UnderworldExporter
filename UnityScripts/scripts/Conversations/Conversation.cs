@@ -1051,7 +1051,30 @@ public class Conversation : GuiBase {
 		//	arg2: item id
 		//		description:  searches item in npc or player inventory
 		//		return value: position in master object list, or 0 if not found
-		Debug.Log("find_inv");
+		//Debug.Log("find_inv");
+		switch (arg1)
+		{
+		case 0://NPC inventory
+			Container npcCont = npc.gameObject.GetComponent<Container>();
+
+			for ( int i=0; i<npcCont.Capacity; i++)
+			{
+				GameObject obj = npcCont.GetGameObjectAt(i);
+				if (obj!=null)
+				{
+					if (obj.GetComponent<ObjectInteraction>().item_id==arg2)
+					{
+						return 1;//FOund object
+					}
+				}
+			}
+			break;
+		case 1://PC Search
+			Debug.Log ("find_Inv player");
+			break;
+
+		}
+
 		return 0;
 	}
 

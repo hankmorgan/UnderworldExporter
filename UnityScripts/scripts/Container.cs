@@ -30,6 +30,18 @@ public class Container : object_base {
 		}
 	}
 
+	public GameObject GetGameObjectAt(int index)
+	{
+		if (GetItemAt(index)!="")
+		{
+			return GameObject.Find (GetItemAt (index));
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 	public bool AddItemMergedItemToContainer(GameObject item)
 	{
 		for (int i=0; i< 40; i++)

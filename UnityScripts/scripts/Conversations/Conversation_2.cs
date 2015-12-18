@@ -1529,7 +1529,7 @@ if ( locals[3] > 0 ) {
 			if ( locals[16] >= global[0,0] ) {
 			
 			//give_to_npc( 2, locals[18], locals[17] );
-			give_to_npc(2,locals,locals[18],locals[17]);
+			give_to_npc(2,locals,18,locals[17]);
 			//if ( locals[16] > param2[0]global[0] ) {
 			if ( locals[16] >param2 ) {				
 					yield return StartCoroutine(say( "Ah! Thank ye for the tip. I can see ye appreciate fine work when ye see it! Come again!" ));
