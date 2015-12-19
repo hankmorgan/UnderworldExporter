@@ -93,6 +93,7 @@ public class TradeSlot : GuiBase {
 				playerUW.playerInventory.ObjectInHand="";
 				SlotImage.mainTexture=playerUW.CursorIcon;
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				Selected=true;
 			}
 			else
 			{//Swap the objects
@@ -101,6 +102,7 @@ public class TradeSlot : GuiBase {
 				objectInSlot=playerUW.playerInventory.ObjectInHand;
 				playerUW.playerInventory.ObjectInHand=tmp;
 				playerUW.CursorIcon= playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				Selected=true;
 			}
 		}
 		else
@@ -112,6 +114,7 @@ public class TradeSlot : GuiBase {
 				playerUW.CursorIcon= playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				objectInSlot="";
 				SlotImage.mainTexture=Blank;
+				Selected=false;
 			}
 			
 		}

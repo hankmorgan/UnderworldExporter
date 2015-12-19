@@ -511,7 +511,7 @@ public class Conversation : GuiBase {
 		{yield return null;}
 	}
 
-	public void gronk_door(int unk, int Action, int tileY, int tileX)
+	public int gronk_door(int unk, int Action, int tileY, int tileX)
 	{
 		/*
 		id=0025 name="gronk_door" ret_type=int
@@ -520,6 +520,7 @@ public class Conversation : GuiBase {
 		arg3: close/open flag (0 means open)
 		description:  opens/closes door or portcullis
 		return value: unknown
+		return value appears to have something to do with if the door is broken or not.
 		*/
 
 		GameObject dr = GameObject.Find ("door_" +tileX .ToString ("D3") + "_" + tileY.ToString ("D3"));
@@ -538,16 +539,26 @@ public class Conversation : GuiBase {
 					DC.CloseDoor();
 					DC.LockDoor ();
 				}
+				if (DC.getObjectInteraction ().Quality == 0)
+				{
+					return 0;
+				}
+				else
+				{
+					return 1;
+				}
 			}
 			else
 			{
 				Debug.Log ("Unable to find doorcontrol to gronk " + " at " + tileX + " " + tileY);
+				return 0;
 			}
 
 		}
 		else
 		{
 			Debug.Log ("Unable to find door to gronk " + " at " + tileX + " " + tileY);
+			return 0;
 		}
 
 		//GameObject door = Var.findDoor(Var.triggerX,Var.triggerY);
@@ -1322,6 +1333,16 @@ public class Conversation : GuiBase {
 
 	}
 
+	public int compare(int unk1, string StringIn,  int  StringIndex)
+	{
+		//id=0004 name="compare" ret_type=int
+		//	parameters:   arg1: string id
+		//	arg2: string id
+		//	description:  compares strings for equality, case independent
+		//	return value: returns 1 when strings are equal, 0 when not
+		return compare(unk1, StringIndex,StringIn);		
+	}
+
 
 	public void remove_talker(int unk1)
 	{
@@ -1361,6 +1382,10 @@ public class Conversation : GuiBase {
 		return value: none
    		*/
 		//Debug.Log ("give_ptr_npc");
+		if  ( (slotNo<0) || (slotNo >3))
+		{
+			return;
+		}
 		Container cn =npc.gameObject.GetComponent<Container>();
 		if (playerUW.playerHud.playerTrade[slotNo].objectInSlot !="")
 		{
@@ -1409,6 +1434,28 @@ public class Conversation : GuiBase {
 		//	return value: length of string
 		return str.Length;
 	}
+
+
+	public int find_barter(int unk1, int arg1)
+	{
+		//id=0031 name="find_barter" ret_type=int
+		//	parameters:   arg1: item id to find
+		//	description:  searches for item in barter area
+		//	return value: returns pos in inventory object list, or 0 if not found
+		for (int i = 0; i<4; i++)
+		{
+			ObjectInteraction objInt = playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+			if (objInt!=null)
+			{
+				if (objInt.item_id== arg1)
+				{
+					return i+1;
+				}
+			}
+		}
+		return 0;
+	}
+
 
 }
 

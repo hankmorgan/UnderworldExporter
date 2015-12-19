@@ -10,6 +10,12 @@ public class object_base : MonoBehaviour {
 	protected ObjectInteraction objInt;
 
 
+	public ObjectInteraction getObjectInteraction()
+	{
+		CheckReferences();
+		return objInt;
+	}
+
 	protected virtual void Start()
 	{
 		if (playerUW==null)
