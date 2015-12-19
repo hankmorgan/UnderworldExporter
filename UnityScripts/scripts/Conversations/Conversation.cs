@@ -178,8 +178,8 @@ public class Conversation : GuiBase {
 					npcSlot.clear();
 				}
 			}
-		}
 
+		}
 
 		//Debug.Log ("End convo");
 		Time.timeScale=1.0f;
@@ -191,6 +191,7 @@ public class Conversation : GuiBase {
 		{
 			mus.GetComponent<MusicController>().InMap=false;
 		}
+		StopAllCoroutines();
 	}
 
 	// Use this for initialization
@@ -1399,6 +1400,16 @@ public class Conversation : GuiBase {
 			}
 		}
 	}
+
+	public int length(int unk1, string str)
+	{
+		//id=000b name="length" ret_type=int
+		//	parameters:   arg1: string id
+		//	description:  calculates length of string
+		//	return value: length of string
+		return str.Length;
+	}
+
 }
 
 
