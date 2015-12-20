@@ -212,7 +212,14 @@ public class Container : object_base {
 						Spilled.transform.position=randomPoint;
 						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
 						WindowDetect.UnFreezeMovement(Spilled);
-					}									
+					}
+					else
+					{//No where to put the item. Put it at the containers position.
+						RemoveItemFromContainer(i);
+						Spilled.transform.position=this.transform.position;
+						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
+						WindowDetect.UnFreezeMovement(Spilled);
+					}
 				}
 			}
 		}

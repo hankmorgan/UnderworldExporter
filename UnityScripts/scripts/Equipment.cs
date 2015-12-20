@@ -5,6 +5,11 @@ public class Equipment : object_base {
 //Base class for weapons and armour
 	public int Durability;	//Not sure if this is needed.
 
+	public virtual int GetActualSpellIndex()
+	{
+		return objInt.Link-256;
+	}
+
 
 	public override bool use ()
 	{
@@ -82,4 +87,18 @@ public class Equipment : object_base {
 		playerUW.playerInventory.ObjectInHand="";
 		playerUW.CursorIcon=playerUW.CursorIconDefault;
 	}
+
+	public override bool LookAt ()
+	{
+		if (objInt.isEnchanted==true)
+		{
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+			return true;
+		}
+		else
+		{
+			return base.LookAt();
+		}
+	}
+
 }

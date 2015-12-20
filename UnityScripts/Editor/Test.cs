@@ -11824,100 +11824,138 @@ public class MyTools
 			//npc.npc_deathvariable=npc_deathVariable;
 			npc.NavMeshRegion=NavMeshRegion;
 
-			if (npc_attitude!=0)
+			//if (npc_attitude!=0)
+			//{
+			Conversation cnv ;//= myObj.AddComponent<Conversation>();
+			cnv=null;
+			//if (npc_whoami == 0)
+			//{
+			//	npc_whoami=256+(int.Parse (NPC_ID) -64);
+			//}
+			//TODO:Make sure all conversations are added here as implemented.
+			switch (myObj.GetComponent<NPC>().npc_whoami)
 			{
-					
-				Conversation cnv ;//= myObj.AddComponent<Conversation>();
-				cnv=null;
-				//if (npc_whoami == 0)
-				//{
-				//	npc_whoami=256+(int.Parse (NPC_ID) -64);
-				//}
-				//TODO:Make sure all conversations are added here as implemented.
-				switch (myObj.GetComponent<NPC>().npc_whoami)
-				{
-				case 0:
-				case 255://No conversation
-					break;
-				case 1:
-					cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
-				case 2:
-					cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
-				case 3:
-					cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
-				case 7:
-					cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
-				case 8:
-					cnv=(Conversation)myObj.AddComponent<Conversation_8>();break;
-				case 9:
-					cnv=(Conversation)myObj.AddComponent<Conversation_9>();break;
-				case 10:
-					cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
-				case 15:
-					cnv=(Conversation)myObj.AddComponent<Conversation_15>();break;
-				case 16:
-					cnv=(Conversation)myObj.AddComponent<Conversation_16>();break;
-				case 19:
-					cnv=(Conversation)myObj.AddComponent<Conversation_19>();break;
-				case 20:
-					cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
-				case 21:
-					cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
-				case 24:
-					cnv=(Conversation)myObj.AddComponent<Conversation_24>();break;
-				case 28:
-					cnv=(Conversation)myObj.AddComponent<Conversation_28>();break;
-				case 64:
-					cnv=(Conversation)myObj.AddComponent<Conversation_64>();break;
-				case 65:
-					cnv=(Conversation)myObj.AddComponent<Conversation_65>();break;
-				case 66:
-					cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
-				case 67:
-					cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
-				case 88:
-					cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
-				case 89:
-					cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
-				case 90:
-					cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
-				case 112:
-					cnv=(Conversation)myObj.AddComponent<Conversation_112>();break;
-				case 113:
-					cnv=(Conversation)myObj.AddComponent<Conversation_113>();break;
-				case 114:
-					cnv=(Conversation)myObj.AddComponent<Conversation_114>();break;
-				case 137:
-					cnv=(Conversation)myObj.AddComponent<Conversation_114>();break;
-				case 262:
-					cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
-				case 263:
-					cnv=(Conversation)myObj.AddComponent<Conversation_263>();break;
-				case 268:
-					cnv=(Conversation)myObj.AddComponent<Conversation_268>();break;
-				case 272:
-					cnv=(Conversation)myObj.AddComponent<Conversation_272>();break;
-				case 276:
-					cnv=(Conversation)myObj.AddComponent<Conversation_276>();break;
-				case 277:
-					cnv=(Conversation)myObj.AddComponent<Conversation_277>();break;
-				case 280:
-					cnv=(Conversation)myObj.AddComponent<Conversation_280>();break;
-				case 281:
-					cnv=(Conversation)myObj.AddComponent<Conversation_281>();break;
-				case 282:
-					cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
-				default:
-					cnv=myObj.AddComponent<Conversation>();
-					Debug.Log ("Conversation "  + myObj.GetComponent<NPC>().npc_whoami + " is not implemented for " + myObj.name );
-					break;
-				}			
-				if (cnv!=null)
-				{
-					cnv.npc= npc;
-				}
+			case 0:
+			case 255://No conversation/monsters
+			case 258:
+			case 259:
+			case 261:
+			case 264:
+			case 265:
+			case 266:
+			case 273:
+			case 274:
+			case 275:
+			case 279:
+			case 284:
+			case 283:
+			case 294:
+			case 298:
+			case 303:
+			case 308:
+				break;
+			case 1://Corby
+				cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
+			case 2://Shak
+				cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
+			case 3://Goldthirst
+				cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
+			case 7://Ketchaval
+				cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
+			case 8://Retichall
+				cnv=(Conversation)myObj.AddComponent<Conversation_8>();break;
+			case 9://Vernix
+				cnv=(Conversation)myObj.AddComponent<Conversation_9>();break;
+			case 10://Lanugo
+				cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
+			case 12:// Dorna Ironfist
+				cnv=(Conversation)myObj.AddComponent<Conversation_12>();break;
+			case 15://Sseetharee
+				cnv=(Conversation)myObj.AddComponent<Conversation_15>();break;
+			case 16://Ishtass
+				cnv=(Conversation)myObj.AddComponent<Conversation_16>();break;
+			case 17://Sethar Strongarm
+				cnv=(Conversation)myObj.AddComponent<Conversation_17>();break;
+			case 18://Lakshi Longtooth
+				cnv=(Conversation)myObj.AddComponent<Conversation_18>();break;
+			case 19://Hagbard
+				cnv=(Conversation)myObj.AddComponent<Conversation_19>();break;
+			case 20://Gulik
+				cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
+			case 21://Steeltoe
+				cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
+			case 24://prisoner
+				cnv=(Conversation)myObj.AddComponent<Conversation_24>();break;
+			case 28://Zak
+				cnv=(Conversation)myObj.AddComponent<Conversation_28>();break;
+			case 64://Jaacar
+				cnv=(Conversation)myObj.AddComponent<Conversation_64>();break;
+			case 65://Eb
+				cnv=(Conversation)myObj.AddComponent<Conversation_65>();break;
+			case 66://Drog
+				cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
+			case 67://Bragit
+				cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
+			case 88://Brawnclan
+				cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
+			case 89://Hewstone
+				cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
+			case 90://Ironwit
+				cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
+			case 112://bandit
+				cnv=(Conversation)myObj.AddComponent<Conversation_112>();break;
+			case 113://bandit
+				cnv=(Conversation)myObj.AddComponent<Conversation_113>();break;
+			case 114://Iss'leek
+				cnv=(Conversation)myObj.AddComponent<Conversation_114>();break;
+			case 136://Oradinar
+				cnv=(Conversation)myObj.AddComponent<Conversation_136>();break;
+			case 137://Linnet
+				cnv=(Conversation)myObj.AddComponent<Conversation_137>();break;
+			case 142://Rodrick
+				cnv=(Conversation)myObj.AddComponent<Conversation_142>();break;
+			case 144://Rawstag
+				cnv=(Conversation)myObj.AddComponent<Conversation_144>();break;
+			case 146://Doris
+				cnv=(Conversation)myObj.AddComponent<Conversation_146>();break;
+			case 147://Kyle
+				cnv=(Conversation)myObj.AddComponent<Conversation_147>();break;
+			case 148://Cecil
+				cnv=(Conversation)myObj.AddComponent<Conversation_148>();break;
+			case 149://Meredith
+				cnv=(Conversation)myObj.AddComponent<Conversation_149>();break;
+			case 262://Generic Green Goblin
+				cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
+			case 263://Generic Green Goblin
+				cnv=(Conversation)myObj.AddComponent<Conversation_263>();break;
+			case 268://Generic Gray Goblin
+				cnv=(Conversation)myObj.AddComponent<Conversation_268>();break;
+			case 272://Generic Gray Goblin
+				cnv=(Conversation)myObj.AddComponent<Conversation_272>();break;
+			case 276://Generic Mountainman
+				cnv=(Conversation)myObj.AddComponent<Conversation_276>();break;
+			case 277://Generic Lizardman
+				cnv=(Conversation)myObj.AddComponent<Conversation_277>();break;
+			case 280://Generic Lizardman
+				cnv=(Conversation)myObj.AddComponent<Conversation_280>();break;
+			case 281://Generic Gray Lizardman
+				cnv=(Conversation)myObj.AddComponent<Conversation_281>();break;
+			case 282://Generic Outcast
+				cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
+			case 288://Generic Troll
+				cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
+			default:
+				cnv=myObj.AddComponent<Conversation>();
+				Debug.Log ("Conversation "  + myObj.GetComponent<NPC>().npc_whoami + " is not implemented for " + myObj.name );
+				break;
+			}			
+			if (cnv!=null)
+			{
+				cnv.npc= npc;
+			}					
 
-			}
+
+		//	}
 		}
 	}
 

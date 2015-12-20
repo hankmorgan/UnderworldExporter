@@ -19,12 +19,18 @@ Find all end of conversations and add yield for time and yield break
 add npc. to all npc variables.
 Comment out play_hunger syntax error
 Make sure Random is correctly set up 
-Implement intrinsic conversations in this class.
+Implement intrinsic conversation functions in this class.
+When using babl_ask replace usages of the local variable used with playertypedanswer.
+Make sure you don't confuse babl_menu with babl_fmenu
+Check any code involving items before running as infinite loops are possible.
+usages of switch statements in if-else blocks are sometimes borked.
+}
 
 
 //Things to do.
 
 Fix the Param arrays being passed into local functions. Especially ones that set the npcs attitude.
+Fix up gender strings and other @SSx text replacements.
 */
 
 public class Conversation : GuiBase {
@@ -119,6 +125,38 @@ public class Conversation : GuiBase {
 
 	public void SetupConversation(int stringno)
 	{
+
+		/*Setup UI Elements - code formerly in NPC*/
+		chains.ActiveControl=3;//Enable UI Elements
+		chains.Refresh();
+		
+		UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
+		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));
+		
+		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
+		{
+			//head in charhead.gr
+			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
+			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));
+			
+		}	
+		else
+		{
+			//head in charhead.gr
+			int HeadToUse = this.GetComponent<ObjectInteraction>().item_id-64;
+			if (HeadToUse >59)
+			{
+				HeadToUse=0;
+			}
+			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
+			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+		}
+		playerUW.playerHud.MessageScroll.Clear ();
+		/*End UI Setup*/
+
+
+
+
 		playerUW.playerMotor.enabled=false;
 
 		//Setup the UI elements
@@ -126,9 +164,6 @@ public class Conversation : GuiBase {
 		//tl_input=playerUW.playerHud.Conversation_tl_input;
 		tl_input=playerUW.playerHud.MessageScroll;
 		tl.Clear();
-		//OutPutControl=playerUW.playerHud.Conversation_OutPutControl;
-		//FontController=playerUW.playerHud.Conversation_FontController;
-		//FontController.ConvertString(1,tl.textLabel.text,OutPutControl);
 
 		//Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
@@ -192,6 +227,12 @@ public class Conversation : GuiBase {
 			mus.GetComponent<MusicController>().InMap=false;
 		}
 		StopAllCoroutines();
+	}
+
+	public virtual void OnDeath()
+	{//Code to be called upon the death of this character.
+		//Mainly used for cases where specific character deaths set quest flags.
+		return;
 	}
 
 	// Use this for initialization
@@ -296,13 +337,14 @@ public class Conversation : GuiBase {
 	public virtual IEnumerator main()
 	{
 		//Debug.Log ("Start Conversation");
-		yield return StartCoroutine("I have yet to implement this conversation");
-		Time.timeScale =SlomoTime;
-		yield return new WaitForSeconds(WaitTime);
-		EndConversation();
-		yield break;
+		//yield return StartCoroutine("I have yet to implement this conversation");
+		//Time.timeScale =SlomoTime;
+		//yield return new WaitForSeconds(WaitTime);
+		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (7,1));
+		//EndConversation();
+		//yield break;
 		//return null;
-
+		yield break;
 	}
 
 	public IEnumerator say(string WhatToSay,int PrintType)

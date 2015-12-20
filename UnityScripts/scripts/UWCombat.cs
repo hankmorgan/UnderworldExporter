@@ -74,7 +74,7 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(30);
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(300);
 					//Create a blood splatter at this point
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);

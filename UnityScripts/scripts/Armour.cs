@@ -16,6 +16,13 @@ public class Armour : Equipment {
 	
 	public Texture2D EquipDisplay;
 
+	public SpellEffect SpellEffectApplied;
+
+	public override int GetActualSpellIndex ()
+	{
+		return objInt.Link-256+16;
+	}
+
 	protected override void Start () {
 		base.Start ();
 		UpdateQuality();
@@ -80,12 +87,42 @@ public class Armour : Equipment {
 	void SetEquipTexture(string EquipTexture)
 	{
 		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
-		
 	}
+
 
 	public override bool EquipEvent (int slotNo)
 	{
-		UpdateQuality();
+
+		if ((slotNo >=0) && (slotNo <=4))
+		{
+			UpdateQuality();
+			if (objInt.isEnchanted==true)
+			{
+				//cast enchantment.
+				SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,GetActualSpellIndex());
+				if (SpellEffectApplied!=null)
+				{
+					SpellEffectApplied.SetPermanent(true);
+				}
+			}
+		}
 		return true;
 	}
+	
+	public override bool UnEquipEvent (int slotNo)
+	{
+		if ((slotNo >=0) && (slotNo <=4))
+		{
+			if (SpellEffectApplied!=null)
+			{
+				SpellEffectApplied.CancelEffect();
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+
+
 }

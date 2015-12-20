@@ -22,7 +22,7 @@ public class GameWorldController : MonoBehaviour {
 	public int[] variables = new int[127];//Variables for the check/set variable traps
 	private bool Test;
 	public TileMap Tilemap;
-
+	public UWCharacter playerUW;
 	public MeshRenderer ceil;
 
 	void Start () {

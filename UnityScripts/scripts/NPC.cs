@@ -34,6 +34,7 @@ public class NPC : object_base {
 	public int npc_name;       //    (not used in uw1)
 
 	//public int npc_deathvariable;	//Quest variable to set when the character is killed
+	public bool NPC_DEAD;
 
 	//Added by myself
 	public bool Poisoned;
@@ -65,11 +66,39 @@ public class NPC : object_base {
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
 		ai.AI.Body=this.gameObject;
 	}
-	
+
+	void OnDeath()
+	{
+
+		NPC_DEAD=true;
+		Conversation cnv = this.GetComponent<Conversation>();
+		if (cnv!=null)
+		{
+			cnv.OnDeath();
+		}
+		//Dump items on the floor.
+		//
+		Container cnt = this.GetComponent<Container>();
+		if (cnt!=null)
+		{
+			Debug.Log ("Spilling " + this.name);
+			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
+		}
+		else
+		{
+			Debug.Log ("no container to spill");
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		//Gob.isHostile=((npc_attitude==0) && (npc_hp>0));
 		//Gob.HP=npc_hp;
+		if (NPC_DEAD==true)
+		{
+			ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
+			return;
+		}
 		if ( playerUWReady==false)
 		{
 			if(playerUW!=null)
@@ -97,13 +126,14 @@ public class NPC : object_base {
 			//}
 
 
-			if (npc_hp<=0)
+			if ((npc_hp<=0))
 			{
 				//if ((npc_deathvariable>0) && (npc_deathvariable<32))
 			//	{
 				//	playerUW.quest().QuestVariables[npc_deathvariable]=1;
 			//	}
-				ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
+
+				OnDeath();
 			//	Debug.Log("NPC Dead");
 			}
 			else
@@ -133,36 +163,13 @@ public class NPC : object_base {
 
 	public override bool TalkTo()
 	{
-		if (npc_attitude==0)
-		{//Hostile
-			ml.Add (playerUW.StringControl.GetString (7,1));
-			return false;
-		}
+		//if (npc_attitude==0)
+		//{//Hostile
+		//	ml.Add (playerUW.StringControl.GetString (7,1));
+		//	return false;
+		//}
 		//Debug.Log("Talking to " + WhoAmI) ;
-		chains.ActiveControl=3;//Enable UI Elements
-		chains.Refresh();
 
-		UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
-		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));
-		
-		if ((this.npc_whoami!=0) && (this.npc_whoami<=28))
-		{
-			//head in charhead.gr
-			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc_whoami-1).ToString("0000"));
-			
-		}	
-		else
-		{
-			//head in charhead.gr
-			int HeadToUse = this.GetComponent<ObjectInteraction>().item_id-64;
-			if (HeadToUse >59)
-			{
-				HeadToUse=0;
-			}
-			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
-		}
 
 		//TODO:Make sure you add the conversation object to the npc!
 		if ((npc_whoami == 255))
@@ -176,7 +183,7 @@ public class NPC : object_base {
 			{
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npc_whoami=256+(objInt.item_id -64);
-				Debug.Log ("npc who am i is now " + npc_whoami);
+				//Debug.Log ("npc who am i is now " + npc_whoami);
 			}
 			Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
 			if (x!=null)
@@ -193,8 +200,9 @@ public class NPC : object_base {
 			}
 			else
 			{
-				chains.ActiveControl=0;//Enable UI Elements
-				chains.Refresh();
+				ml.Add (playerUW.StringControl.GetString (7,1));
+				//chains.ActiveControl=0;//Enable UI Elements
+				//chains.Refresh();
 			}
 		}
 		return true;
