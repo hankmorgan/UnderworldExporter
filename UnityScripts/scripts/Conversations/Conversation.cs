@@ -1078,7 +1078,7 @@ public class Conversation : GuiBase {
 		return 1;
 	}
 
-	public void x_obj_stuff( int unk1, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9)
+	private void x_obj_stuff( int unk1, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9)
 	{
 		Debug.Log("x_obj_stuff");		
 		//id=002f name="x_obj_stuff" ret_type=void
@@ -1094,9 +1094,64 @@ public class Conversation : GuiBase {
 		//		description:  sets object properties for object in inventory object list.
 		//			if a property shouldn't be set, -1 is passed for the
         //         property value.
+		//If -1 then it sets the value in the array?
 
 	}
 
+
+	public void x_obj_stuff( int unk1, int[] locals, int arg1, int arg2, int arg3, int link, int arg5, int arg6, int quality, int id, int pos)
+	{
+		//Debug.Log("x_obj_stuff");		
+		//id=002f name="x_obj_stuff" ret_type=void
+		//	parameters:   arg1: not used in uw1
+		//		arg2: not used in uw1
+		//		arg3: 0, (upper bit of quality field?)
+		//		arg4: quantity/special field, 115
+		//		arg5: not used in uw1
+		//		arg6: not used in uw1
+		//		arg7: quality?
+		//		arg8: identified flag?
+		//		arg9: position in inventory object list
+		//		description:  sets object properties for object in inventory object list.
+		//			if a property shouldn't be set, -1 is passed for the
+		//         property value.
+		//If -1 then it sets the value in the array?
+		ObjectInteraction obj;
+		if (locals[pos]<4)
+		{//Item is in players trade area.
+			obj= playerUW.playerHud.playerTrade[locals[pos]].GetGameObjectInteraction();
+		}
+		else if (pos <=7)
+		{//item in npc trade area
+			obj= playerUW.playerHud.npcTrade[locals[pos]-4].GetGameObjectInteraction();
+		}
+		else
+		{
+			return;
+		}
+		if (obj==null)
+		{
+			return;
+		}
+
+		if (locals[link]==-1)
+			{
+			locals[link]=obj.Link; 
+			}
+		else
+			{
+			obj.Link=locals[link]+512;
+			}
+
+		if (locals[quality]==-1)
+		{
+			locals[quality]=obj.Quality; 
+		}
+		else
+		{
+			obj.Quality=locals[quality];
+		}
+	}
 
 	public int find_inv( int unk1, int arg1, int arg2 )
 	{
@@ -1306,8 +1361,44 @@ public class Conversation : GuiBase {
 		//parameters:   arg1: item id
 		//description:  creates item in npc inventory
 		//return value: inventory object list position
-		Debug.Log ("do_inv_delete(" + item_id + ")");
-		return 0;
+		//Debug.Log ("do_inv_create(" + item_id + ")");
+
+		GameObject myObj=new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
+		myObj.layer=LayerMask.NameToLayer("UWObjects");
+		myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
+		ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_" + item_id,true);
+
+		switch (item_id)
+		{//Some know cases
+		case 314:
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id, "Sprites/OBJECTS_" + item_id, "Sprites/OBJECTS_" + item_id, ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			myObj.AddComponent<Readable>();//Scroll given by Biden
+			break;
+
+		default:
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id, "Sprites/OBJECTS_" + item_id, "Sprites/OBJECTS_" + item_id, ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			myObj.AddComponent<object_base>();
+			break;
+		}
+
+		Container npccont = npc.GetComponent<Container>();
+		if(npccont!=null)
+			{
+				npccont.AddItemToContainer (myObj.name);
+			for (int i =0; i<4;i++)
+				{
+				if (playerUW.playerHud.npcTrade[i].objectInSlot=="")
+					{
+						//NPCTradeItems[i]=myObj.name;
+						TradeSlot ts = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+						ts.objectInSlot=myObj.name;
+						ts.SlotImage.mainTexture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						return i;
+					}
+					//ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
+				}
+			}
+		return -1;
 	}
 
 	public int count_inv(int unk1, int ItemPos)

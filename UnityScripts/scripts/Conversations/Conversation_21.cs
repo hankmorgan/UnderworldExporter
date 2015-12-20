@@ -295,10 +295,10 @@ public class Conversation_21 : Conversation {
 		
 		//int locals[7];
 		int[] locals = new int[8];
-		
-		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 19;
-		locals[3] = 20;
+		locals[3] = 20;		
+		locals[1] = sex( 2, locals[3], locals[2] );
+
 		locals[4] = 11;
 		locals[5] = 13;
 		locals[6] = 0;

@@ -229,12 +229,12 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[7];
 		int[] locals=new int[8];
-		locals[1] = sex( 2, locals[4], locals[3] );
 		locals[3] = 9;
 		locals[4] = 10;
-		locals[2] = sex( 2, locals[6], locals[5] );
+		locals[1] = sex( 2, locals[4], locals[3] );
 		locals[5] = 11;
 		locals[6] = 12;
+		locals[2] = sex( 2, locals[6], locals[5] );
 		yield return StartCoroutine(say( "Oh, a smart one, eh?  One a' dem Sages.  Thinks @SS1 too smart for me, eh?  Maybe too smart for @SS2, more like.  Fine - I'm busy making dinner.  This stew takes work, you know." ));
 		locals[7] = 1;
 		yield return StartCoroutine(func_00b1( locals[7] ));

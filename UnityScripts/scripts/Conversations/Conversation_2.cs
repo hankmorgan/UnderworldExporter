@@ -346,10 +346,10 @@ public class Conversation_2 : Conversation {
 				
 				locals[17] = locals[17] + 1;
 			} // while
-			
-			locals[1] = sex( 2, locals[23], locals[22] );
 			locals[22] = 16;
 			locals[23] = 17;
+			locals[1] = sex( 2, locals[23], locals[22] );
+
 			if ( (locals[19]==1) && (locals[18]==1)) {
 				
 				yield return StartCoroutine(say( "Aye, 'tis a fine sword there, @SS1.  I'm afraid it's  seen better days, though.  Dinna fear, I'll make it whole for ye again. But I must charge ye 20 gold pieces for such fine work, paid when you pick it up." ));
@@ -470,10 +470,10 @@ public class Conversation_2 : Conversation {
 		
 		//int locals[25];
 		int[] locals=new int[26];
-		
-		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 31;
 		locals[3] = 32;
+		locals[1] = sex( 2, locals[3], locals[2] );
+
 		yield return StartCoroutine(say( "Well, I'm sorry.  Ye seem like a nice enough @SS1.  Why don't ye go out and kill something and take its hoard?" ));
 		locals[4] = 34;
 		locals[5] = 35;
@@ -530,10 +530,10 @@ public class Conversation_2 : Conversation {
 		
 		//int locals[29];
 		int [] locals =new int[30];
-		
-		locals[1] = sex( 2, locals[7], locals[6] );
 		locals[6] = 39;
-		locals[7] = 40;
+		locals[7] = 40;		
+		locals[1] = sex( 2, locals[7], locals[6] );
+
 		if ( global[2,0] > 0 ) {
 			
 			if ( func_0106( 3, 6 ) !=1) {
@@ -1341,7 +1341,8 @@ public class Conversation_2 : Conversation {
 			locals[12] = -1;
 			locals[13] = -1;
 			locals[14] = -1;
-			x_obj_stuff( 9, locals[14], locals[13], locals[12], locals[11], locals[10], locals[9], locals[8], locals[7], locals[1] );
+			//x_obj_stuff( 9, locals[14], locals[13], locals[12], locals[11], locals[10], locals[9], locals[8], locals[7], locals[1] );
+			x_obj_stuff( 10,locals, 14, 13,12,11, 10, 9, 8, 7, 1 );
 		} // end if
 		
 		locals[15] = 1;

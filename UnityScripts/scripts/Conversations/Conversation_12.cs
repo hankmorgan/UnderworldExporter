@@ -326,10 +326,9 @@ public class Conversation_12 : Conversation {
 		
 		//int locals[29];
 		int [] locals = new int[30];
-		
-		locals[1] = sex( 2, locals[4], locals[3] );
 		locals[3] = 15;
 		locals[4] = 16;
+		locals[1] = sex( 2, locals[4], locals[3] );
 		locals[5] = 32;
 		locals[2] = get_quest( 1, locals[5] );
 
@@ -567,13 +566,13 @@ public class Conversation_12 : Conversation {
 		
 		//int locals[30];
 		int [] locals = new int[31];
-		
-		locals[1] = sex( 2, locals[5], locals[4] );
 		locals[4] = 43;
 		locals[5] = 44;
-		locals[2] = sex( 2, locals[7], locals[6] );
+		locals[1] = sex( 2, locals[5], locals[4] );
 		locals[6] = 45;
 		locals[7] = 46;
+		locals[2] = sex( 2, locals[7], locals[6] );
+
 		locals[8] = 47;
 		yield return StartCoroutine(print( 1, locals[8] ));
 		yield return StartCoroutine(say( "@SS1 who drank from the cup is now dead.  In @SS2 place stands @GS8, Esquire of the Order of the Crux Ansata.  Tell me, wert thou afraid?" ));
@@ -651,9 +650,10 @@ public class Conversation_12 : Conversation {
 		{
 			locals[1]=1;
 		}
-		locals[2] = sex( 2, locals[4], locals[3] );
 		locals[3] = 55;
 		locals[4] = 56;
+		locals[2] = sex( 2, locals[4], locals[3] );
+
 		yield return StartCoroutine(say( "Precious little.  They numbered eight, and Cabirus did intend them to go each to one of the Leaders of the eight groups who settled the Abyss.  Alas, he perished, and all eight were lost.\n"
 		   + " 'Tis said they were a Book, bottle of Wine, a Shield, a Sword, a Taper, a Standard, a Cup, and a Ring.  Each was imbued with the potent power of a single Virtue, and 'tis said they confer Virtue both in the seeking and the finding./m" ));
 		if ( privateVariables[7] == 1) {
@@ -797,10 +797,10 @@ public class Conversation_12 : Conversation {
 		
 		//int locals[25];
 		int [] locals = new int[26];
-		
-		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 72;
 		locals[3] = 73;
+		locals[1] = sex( 2, locals[3], locals[2] );
+
 		yield return StartCoroutine(say( "Hail, @SS1 @GS8!  How fares thy quest?" ));
 		locals[4] = 75;
 		locals[5] = 76;
@@ -828,10 +828,10 @@ public class Conversation_12 : Conversation {
 		
 		//int locals[26];
 		int[] locals = new int[27];
-		
-		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 77;
 		locals[3] = 78;
+		locals[1] = sex( 2, locals[3], locals[2] );
+
 		yield return StartCoroutine(say( "Now thou art @SS1 @GS8, Knight of the Order of the Crux Ansata. Take thou this helm of plate, worthy of a Knight.  Would that we had a horse to give thee as well, for 'tis proper for a Knight." ));
 		locals[4] = 46;
 		if ( take_from_npc( 1, locals[4] ) == 2 ) {
@@ -895,7 +895,8 @@ public class Conversation_12 : Conversation {
 			locals[22] = -1;
 			locals[23] = -1;
 			locals[24] = -1;
-			x_obj_stuff( 9, locals[24], locals[23], locals[22], locals[18], locals[21], locals[17], locals[20], locals[19], locals[12] );
+			//x_obj_stuff( 9, locals[24], locals[23], locals[22], locals[18], locals[21], locals[17], locals[20], locals[19], locals[12] );
+			x_obj_stuff( 10,locals, 24, 23, 22, 18, 21, 17, 20, 19, 12 );
 			//if ( param2[0]play_hunger != -1 && param2[0]play_hunger != locals[17] ) {
 			//locals[18]=101;//Writ
 			//local[17]=31;//Plate
@@ -1166,7 +1167,8 @@ public class Conversation_12 : Conversation {
 			locals[10] = -1;
 			locals[11] = -1;
 			locals[12] = -1;
-			x_obj_stuff( 9, locals[12], locals[11], locals[10], locals[9], locals[8], locals[7], locals[6], locals[5], locals[1] );
+			//x_obj_stuff( 9, locals[12], locals[11], locals[10], locals[9], locals[8], locals[7], locals[6], locals[5], locals[1] );
+			x_obj_stuff( 10,locals, 12, 11, 10, 9, 8, 7, 6, 5, 1 );
 			locals[13] = 287;
 			if ( take_from_npc( 1, locals[13] ) == 2 ) {
 				

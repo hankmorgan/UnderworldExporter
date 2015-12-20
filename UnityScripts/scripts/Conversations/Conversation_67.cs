@@ -171,10 +171,10 @@ public class Conversation_67 : Conversation {
 	IEnumerator func_029d() {
 		
 		int[] locals=new int[278];
-		
-		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 1;
-		locals[3] = 2;
+		locals[3] = 2;		
+		locals[1] = sex( 2, locals[3], locals[2] );
+
 		if ( privateVariables[0] == 1) {
 			
 		} else {

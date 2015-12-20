@@ -13,6 +13,10 @@ public class ScrollController : GuiBase {
 	
 	public void Add(string WhatToSay)
 	{
+		if (WhatToSay==null)
+		{
+			WhatToSay="";
+		}
 		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
 		
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)

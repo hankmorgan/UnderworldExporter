@@ -370,10 +370,10 @@ public class Conversation_149 : Conversation {
 		
 		//int locals[25];
 		int[]locals=new int[26];
-		
-		locals[1] = sex( 2, locals[3], locals[2] );
 		locals[2] = 19;
 		locals[3] = 20;
+		locals[1] = sex( 2, locals[3], locals[2] );
+
 		yield return StartCoroutine(say( "Hail, @SS1 @GS8.  Thy many accomplishments have surely proven thee to be a true Knight of the Order of the Crux Ansata." ));
 		locals[4] = 22;
 		locals[5] = 23;

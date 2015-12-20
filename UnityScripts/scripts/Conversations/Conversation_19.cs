@@ -157,9 +157,10 @@ public class Conversation_19 : Conversation {
 		} else {
 			
 			global[0] = 0;
-			locals[1] = sex( 2, locals[3], locals[2] );
 			locals[2] = 1;
 			locals[3] = 2;
+			locals[1] = sex( 2, locals[3], locals[2] );
+
 			locals[4] = 1;
 			locals[5] = 1;
 			set_quest( 2, locals[5], locals[4] );

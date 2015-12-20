@@ -274,10 +274,10 @@ public class Conversation_90 : Conversation {
 			
 			
 		label_0346:;
-			
-			locals[18] = sex( 2, locals[64], locals[63] );
 			locals[63] = 8;
-			locals[64] = 9;
+			locals[64] = 9;			
+			locals[18] = sex( 2, locals[64], locals[63] );
+
 			yield return StartCoroutine(say( "Find me blueprints?  Ach, that would be a good deed indeed!  Somewhere about they are - in the storeroom most likely.  The southeast of my complex, methinks - or is that where the storeroom is?  Here, I'll give ye a set of blueprints of the area so that ye can find your way about.../p Ach!  My blueprints!  Where'd they go?  Ye seem to be a fine @SS18 - perhaps ye can find them for me?" ));
 			locals[65] = 11;
 			locals[66] = 12;
@@ -460,7 +460,8 @@ public class Conversation_90 : Conversation {
 				locals[207] = -1;
 				locals[208] = -1;
 				locals[209] = -1;
-				x_obj_stuff( 9, locals[209], locals[208], locals[207], locals[206], locals[205], locals[204], locals[203], locals[202], locals[17] );
+				//x_obj_stuff( 9, locals[209], locals[208], locals[207], locals[206], locals[205], locals[204], locals[203], locals[202], locals[17] );
+				x_obj_stuff( 10, locals,209, 208, 207, 206,205, 204, 203, 202, 17 );
 			} // end if
 			locals[210] = 188;
 			locals[16] = take_from_npc( 1, locals[210] );
@@ -515,7 +516,8 @@ public class Conversation_90 : Conversation {
 		locals[7] = -1;
 		locals[8] = -1;
 		locals[9] = -1;
-		x_obj_stuff( 9,locals[9], locals[8], locals[7], locals[2], locals[6], locals[5], locals[4], locals[3], param2 );
+		//x_obj_stuff( 9,locals[9], locals[8], locals[7], locals[2], locals[6], locals[5], locals[4], locals[3], param2 );
+		x_obj_stuff( 10,locals,9, 8, 7, 2, 6, 5, 4, 3, param2 );
 		if ( locals[2] == param1){//[0]){ //play_hunger ) {
 			
 			locals[1] = 1;
