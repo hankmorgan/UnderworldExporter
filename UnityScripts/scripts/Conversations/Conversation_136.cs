@@ -323,7 +323,7 @@ public class Conversation_136 : Conversation {
 		//int locals[23];
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "By the bright and glittering stars of heaven, which I have not seen these many years, I wish I had food to give thee.  Yet, I do not.\n"
+		yield return StartCoroutine(say( "By the bright and glittering stars of heaven, which I have not seen these many years, I wish I had food to give thee.  Yet, I do not. \n"
 		    + " I can, however, tell thee something which, as the ancient proverb  states, may feed thee for life.  Mind thee, many have been cast into the Abyss with the empty promises of the hypocrite Almric, and met with a far more grisly demise than mere starvation./m" ));
 		yield return StartCoroutine(say( "Still, my words are as useless as shouting upwind in a hurricane. More to the point, thou mayest find a pond but a little north of here, where fish will leap from the water  and onto thy pole, more numerous than vultures upon a carcass the  jackals have forsaken." ));
 		if ( privateVariables[3] == 1 ) {

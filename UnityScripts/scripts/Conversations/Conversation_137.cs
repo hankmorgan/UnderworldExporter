@@ -313,7 +313,7 @@ public class Conversation_137 : Conversation {
 			
 			if ( privateVariables[2] == 1 ) {
 				
-				yield return StartCoroutine(say( "In their search for some new advantage over the trolls, the  Knights explore more widely than I.  Mayhap they can tell thee more.\n"
+				yield return StartCoroutine(say( "In their search for some new advantage over the trolls, the  Knights explore more widely than I.  Mayhap they can tell thee more. \n"
 				    +" Still, be careful, lest thou become the next casualty in their senseless battle with the trolls." ));
 				yield return StartCoroutine(func_0657());
 			} else {
@@ -351,7 +351,7 @@ public class Conversation_137 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "There is much tension on this level of the Abyss.  The Knights inhabit the western area, and a pack of Trolls live in the eastern reaches.\n"
+		yield return StartCoroutine(say( "There is much tension on this level of the Abyss.  The Knights inhabit the western area, and a pack of Trolls live in the eastern reaches. \n"
 		   + " Even while Sir Cabirus was alive, there was an uneasy peace between them.  After Cabirus' death, there was some strife, as each group attempted to gain power over the other, but these days there is relative peace./m" ));
 		yield return StartCoroutine(say( "Perhaps the greatest danger in this area now is Rodrick, known as the Chaos Knight.  He lives by the old banquet hall to the north.  He is the foe of both the Knights and the Trolls, but neither has been able to defeat him yet. I hear that Dorna Ironfist has put a price upon his head." ));
 		privateVariables[2] = 1;

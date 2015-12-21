@@ -203,7 +203,7 @@ public class Conversation_88 : Conversation {
 			
 		label_0316:;
 			
-		yield return StartCoroutine(say( "Is that so?  Well, the Abyss is nae a place to be searching for fortune. Just a shadow of itself, it is nowadays.  Yet of all the Abyss, we be the ones who still know what fortune is and what to do with it.  Goldthirst, our king, has a hoard to rival any in all of Britannia.\n"
+		yield return StartCoroutine(say( "Is that so?  Well, the Abyss is nae a place to be searching for fortune. Just a shadow of itself, it is nowadays.  Yet of all the Abyss, we be the ones who still know what fortune is and what to do with it.  Goldthirst, our king, has a hoard to rival any in all of Britannia. \n"
 			    + " Now, is there anything I can do for ye?" ));
 
 		label_0319:;

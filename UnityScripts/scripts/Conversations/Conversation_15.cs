@@ -350,7 +350,7 @@ public class Conversation_15 : Conversation {
 		//int locals[25];
 		int [] locals =new int[26];
 		
-		yield return StartCoroutine(say( "Tosa thit sstresh.  Tosa eppa Urgo.\n"
+		yield return StartCoroutine(say( "Tosa thit sstresh.  Tosa eppa Urgo. \n"
 		    +"" ));
 		locals[1] = 21;
 		yield return StartCoroutine(print( 1, locals[1] ));
@@ -888,9 +888,9 @@ public class Conversation_15 : Conversation {
 		
 		//int locals[5];
 		int [] locals =new int[6];
-		
-		locals[1] = get_quest( 1, locals[2] );
 		locals[2] = 6;
+		locals[1] = get_quest( 1, locals[2] );
+
 		if ( locals[1] == 1 ) {
 			
 			locals[3] = 3;

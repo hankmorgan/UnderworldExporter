@@ -11912,8 +11912,18 @@ public class MyTools
 				cnv=(Conversation)myObj.AddComponent<Conversation_136>();break;
 			case 137://Linnet
 				cnv=(Conversation)myObj.AddComponent<Conversation_137>();break;
+			case 138://Derek
+				cnv=(Conversation)myObj.AddComponent<Conversation_138>();break;
+			case 139://Trisch
+				cnv=(Conversation)myObj.AddComponent<Conversation_139>();break;
+			case 140://Ree
+				cnv=(Conversation)myObj.AddComponent<Conversation_140>();break;
+			case 141://Feznor
+				cnv=(Conversation)myObj.AddComponent<Conversation_141>();break;
 			case 142://Rodrick
 				cnv=(Conversation)myObj.AddComponent<Conversation_142>();break;
+			case 143://Biden
+				cnv=(Conversation)myObj.AddComponent<Conversation_143>();break;
 			case 144://Rawstag
 				cnv=(Conversation)myObj.AddComponent<Conversation_144>();break;
 			case 146://Doris
@@ -11943,6 +11953,8 @@ public class MyTools
 			case 282://Generic Outcast
 				cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
 			case 288://Generic Troll
+				cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
+			case 314://Wisp
 				cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
 			default:
 				cnv=myObj.AddComponent<Conversation>();

@@ -481,7 +481,7 @@ public class Conversation_143 : Conversation {
 		
 		if ( privateVariables[6] == 0 ) {
 			
-			yield return StartCoroutine (say( "@GS8!  I am pleased beyond measure to see thee again.  I have told all here of thy exploits and they are as thankful as I am.\n"
+			yield return StartCoroutine (say( "@GS8!  I am pleased beyond measure to see thee again.  I have told all here of thy exploits and they are as thankful as I am. \n"
 			   + " Ah, by the way, as I made my way home, I happened across this scroll, and thought it might be useful to thee in thy travels.  Please take it as a token of my thanks." ));
 			locals[2] = 314;
 			locals[1] = do_inv_create( 1, locals[2] )+4 ; //Plus 4 for for x_obj

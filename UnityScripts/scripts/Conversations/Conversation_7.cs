@@ -460,9 +460,9 @@ public class Conversation_7 : Conversation {
 		//int locals[43];
 		int[] locals=new int[44];
 		
-		yield return StartCoroutine(say( "I be Ketchaval, the mighty leader of the last holding of the noble Goblins, the Gray tribe.\n"
+		yield return StartCoroutine(say( "I be Ketchaval, the mighty leader of the last holding of the noble Goblins, the Gray tribe. \n"
 		    +" Years ago, when we were lured here by that sweet-talking fool, Cabirus, we noble Grays brought with us our servants, the lowly and ignorant Green Goblins, to care for us in our new homes./m" ));
-		yield return StartCoroutine(say( "We later granted them their freedom, and equal citizenship, though all knew we did them more honor than they were worth.  And see how they rewarded us!  They split off when Cabirus' ''civilization'' fell, and have opposed us ever since.\n"
+		yield return StartCoroutine(say( "We later granted them their freedom, and equal citizenship, though all knew we did them more honor than they were worth.  And see how they rewarded us!  They split off when Cabirus' ''civilization'' fell, and have opposed us ever since. \n"
 		   + " Only my leadership has kept us together in the face of such opposition." ));
 		locals[22] = privateVariables[5];
 		locals[1] = 35;

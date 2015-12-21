@@ -469,7 +469,7 @@ public class Conversation_144 : Conversation {
 		locals[14] = show_inv (2,locals,6,1);
 		if ( locals[14] == 0 ) {
 			
-			yield return StartCoroutine(say( "You no show me nothing.  I no impressed....\n" ));//was \p
+			yield return StartCoroutine(say( "You no show me nothing.  I no impressed.... \n" ));//was \p
 			yield return StartCoroutine(say( "You try fool me, Rodriguez?  No luck, I too smart." ));
 		} else {
 			locals[15] = 162;

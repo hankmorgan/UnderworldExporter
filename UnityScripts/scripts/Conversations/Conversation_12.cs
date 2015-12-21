@@ -291,7 +291,7 @@ public class Conversation_12 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Although I am the leader of this order, it is not my duty to select the candidates for membership.  Thou must be invited by a current member of the order if thou dost wish to become a member.\n"
+		yield return StartCoroutine(say( "Although I am the leader of this order, it is not my duty to select the candidates for membership.  Thou must be invited by a current member of the order if thou dost wish to become a member. \n"
 		   + " Go, speak to them and return to me when it is appropriate." ));
 		locals[1] = 13;
 		locals[2] = 14;
@@ -367,7 +367,7 @@ public class Conversation_12 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "That is admirable.  However, I am not  sure we currently have a spot...\n"
+			yield return StartCoroutine(say( "That is admirable.  However, I am not  sure we currently have a spot... \n"
 			   + "/m No, we do not.  Perhaps another time." ));//\m was \p
 			npc.npc_attitude = 2;
 			break;
@@ -605,8 +605,8 @@ public class Conversation_12 : Conversation {
 		
 		privateVariables[3] = 0;
 		yield return StartCoroutine(say( "Good!  To know fear is the first step to knowing Valor.  Thou art now a Squire of this Order./m" ));
-		yield return StartCoroutine(say( "Thy quest is to find the writ of Lorne, a document written by one of the the first Knights who settled this order in the Abyss.\n"
-		   + "  The document was written during the early years of the Colony, and it contains much knowledge of that time.  However, it is now gone, though many suspect it is in the troll homeland.\n"
+		yield return StartCoroutine(say( "Thy quest is to find the writ of Lorne, a document written by one of the the first Knights who settled this order in the Abyss. \n"
+		   + "  The document was written during the early years of the Colony, and it contains much knowledge of that time.  However, it is now gone, though many suspect it is in the troll homeland. \n"
 		   + " Seek it, and when thou returns here with it, a knight of our order thou wilt become." ));
 		locals[1] = 32;
 		locals[2] = 2;
@@ -654,7 +654,7 @@ public class Conversation_12 : Conversation {
 		locals[4] = 56;
 		locals[2] = sex( 2, locals[4], locals[3] );
 
-		yield return StartCoroutine(say( "Precious little.  They numbered eight, and Cabirus did intend them to go each to one of the Leaders of the eight groups who settled the Abyss.  Alas, he perished, and all eight were lost.\n"
+		yield return StartCoroutine(say( "Precious little.  They numbered eight, and Cabirus did intend them to go each to one of the Leaders of the eight groups who settled the Abyss.  Alas, he perished, and all eight were lost. \n"
 		   + " 'Tis said they were a Book, bottle of Wine, a Shield, a Sword, a Taper, a Standard, a Cup, and a Ring.  Each was imbued with the potent power of a single Virtue, and 'tis said they confer Virtue both in the seeking and the finding./m" ));
 		if ( privateVariables[7] == 1) {
 			
@@ -1076,7 +1076,7 @@ public class Conversation_12 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Thou hast killed the bastard knight who held the north of our home to be his.  I thank thee for bringing honor back to our order and clearing the villain from our homes.\n"
+		yield return StartCoroutine(say( "Thou hast killed the bastard knight who held the north of our home to be his.  I thank thee for bringing honor back to our order and clearing the villain from our homes. \n"
 		    + " The action thou hast taken has proven that thou art most worthy.  To reward thee for thy deeds, I offer thee the Standard of Honor, one of the Talismans fashioned by Cabirus." ));
 		privateVariables[5] = 1;
 		locals[1] = 99;
@@ -1226,7 +1226,7 @@ public class Conversation_12 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "The order once owned a golden plate.  Years ago it was stolen by a thief who I will not even describe, for he is not worth the time it would take.  He fled into the maze and was not seen again.\n"
+		yield return StartCoroutine(say( "The order once owned a golden plate.  Years ago it was stolen by a thief who I will not even describe, for he is not worth the time it would take.  He fled into the maze and was not seen again. \n"
 		    + " Since then, it was rumored to have been found several times.  The last rumor placed it at the grave of Sir Ingvar.  Find it and thou wilt rise even further as a Knight." ));
 		locals[1] = 116;
 		locals[2] = 117;

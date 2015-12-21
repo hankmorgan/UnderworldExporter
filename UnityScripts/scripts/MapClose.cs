@@ -30,5 +30,7 @@ public class MapClose : MonoBehaviour {
 		{
 			mus.GetComponent<MusicController>().InMap=false;
 		}
+		chains.ActiveControl=0;
+		chains.Refresh();
 	}
 }

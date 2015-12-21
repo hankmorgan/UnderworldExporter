@@ -280,8 +280,8 @@ public class Conversation_282 : Conversation {
 			
 /*		label_03d1:;
 			
-			yield return StartCoroutine(say( "Well, thou shouldst know that most of the inhabitants of the Abyss are unfriendly.  It's not so much a question of what areas to avoid as of which areas are relatively safe.\n"
-			    +" Look for the Banner of Cabirus -- a tapestry with an ankh, such as we have -- as a sign of civilization.  Any people or creatures thou dost find past the Banner are more likely to talk with thee than eat thee.\n"
+			yield return StartCoroutine(say( "Well, thou shouldst know that most of the inhabitants of the Abyss are unfriendly.  It's not so much a question of what areas to avoid as of which areas are relatively safe. \n"
+			    +" Look for the Banner of Cabirus -- a tapestry with an ankh, such as we have -- as a sign of civilization.  Any people or creatures thou dost find past the Banner are more likely to talk with thee than eat thee. \n"
 			   + " Speaking of ankhs, thou wouldst do well to search out the other thing they represent: the shrines." ));
 			locals[89] = 16;
 			locals[90] = 17;
@@ -307,8 +307,8 @@ public class Conversation_282 : Conversation {
 			
 /*		label_0411:;
 			
-			yield return StartCoroutine(say( "When thou dost see a large, plain ankh standing on the ground, thou hast found a shrine to Virtue.\n"
-			    +" It is said that if thou hast been virtuous, and dedicated to increasing thy abilities, praying at a shrine with the correct mantra will allow thee to enhance thy abilities.\n"
+			yield return StartCoroutine(say( "When thou dost see a large, plain ankh standing on the ground, thou hast found a shrine to Virtue. \n"
+			    +" It is said that if thou hast been virtuous, and dedicated to increasing thy abilities, praying at a shrine with the correct mantra will allow thee to enhance thy abilities. \n"
 			    +" It is said that there is one in the southeast area of these upper caves, but I have not seen it myself." ));
 			locals[111] = 19;
 			locals[112] = 20;
@@ -387,7 +387,7 @@ public class Conversation_282 : Conversation {
 			yield break;
 		label_04b8:;
 			
-			yield return StartCoroutine(say( "Thrown here against thy will I will believe, but wrongfully is a different matter.  No need to pretend amoungst us, though.  Not a one of us believes in Almric's petty justice.\n"
+			yield return StartCoroutine(say( "Thrown here against thy will I will believe, but wrongfully is a different matter.  No need to pretend amoungst us, though.  Not a one of us believes in Almric's petty justice. \n"
 			    +"  Now that thou'rt here, thou shouldst stay with us.  The creatures beyond are far worse than anything Almric could do to thee.  Right here near the door is safest.  Trust me." ));
 			locals[156] = 28;
 			locals[157] = 29;
@@ -417,7 +417,7 @@ public class Conversation_282 : Conversation {
 			
 /*		label_04f8:;
 			
-			yield return StartCoroutine(say( "'Tis unbelievable. Once, it is said, all the races here lived in harmony.  Not now, that's for certain.  The Gobs on this level are constantly at war, with each other as well as everyone else.  And below are things I dare not speak of.\n"
+			yield return StartCoroutine(say( "'Tis unbelievable. Once, it is said, all the races here lived in harmony.  Not now, that's for certain.  The Gobs on this level are constantly at war, with each other as well as everyone else.  And below are things I dare not speak of. \n"
 			    +" 'Tis rumored that some remnants of civilization remain in most colonized areas of the Abyss, but I have never had the courage or interest to find out." ));
 			locals[178] = 31;
 			locals[179] = 32;
@@ -556,7 +556,7 @@ public class Conversation_282 : Conversation {
 
 	label_04f8:;
 		
-		yield return StartCoroutine(say( "'Tis unbelievable. Once, it is said, all the races here lived in harmony.  Not now, that's for certain.  The Gobs on this level are constantly at war, with each other as well as everyone else.  And below are things I dare not speak of.\n"
+		yield return StartCoroutine(say( "'Tis unbelievable. Once, it is said, all the races here lived in harmony.  Not now, that's for certain.  The Gobs on this level are constantly at war, with each other as well as everyone else.  And below are things I dare not speak of. \n"
 		                                +" 'Tis rumored that some remnants of civilization remain in most colonized areas of the Abyss, but I have never had the courage or interest to find out." ));
 		locals[178] = 31;
 		locals[179] = 32;
@@ -612,8 +612,8 @@ public class Conversation_282 : Conversation {
 
 	label_03d1:;
 		
-		yield return StartCoroutine(say( "Well, thou shouldst know that most of the inhabitants of the Abyss are unfriendly.  It's not so much a question of what areas to avoid as of which areas are relatively safe.\n"
-		                                +" Look for the Banner of Cabirus -- a tapestry with an ankh, such as we have -- as a sign of civilization.  Any people or creatures thou dost find past the Banner are more likely to talk with thee than eat thee.\n"
+		yield return StartCoroutine(say( "Well, thou shouldst know that most of the inhabitants of the Abyss are unfriendly.  It's not so much a question of what areas to avoid as of which areas are relatively safe. \n"
+		                                +" Look for the Banner of Cabirus -- a tapestry with an ankh, such as we have -- as a sign of civilization.  Any people or creatures thou dost find past the Banner are more likely to talk with thee than eat thee. \n"
 		                                + " Speaking of ankhs, thou wouldst do well to search out the other thing they represent: the shrines." ));
 		locals[89] = 16;
 		locals[90] = 17;
@@ -667,8 +667,8 @@ public class Conversation_282 : Conversation {
 
 	label_0411:;
 		
-		yield return StartCoroutine(say( "When thou dost see a large, plain ankh standing on the ground, thou hast found a shrine to Virtue.\n"
-		                                +" It is said that if thou hast been virtuous, and dedicated to increasing thy abilities, praying at a shrine with the correct mantra will allow thee to enhance thy abilities.\n"
+		yield return StartCoroutine(say( "When thou dost see a large, plain ankh standing on the ground, thou hast found a shrine to Virtue. \n"
+		                                +" It is said that if thou hast been virtuous, and dedicated to increasing thy abilities, praying at a shrine with the correct mantra will allow thee to enhance thy abilities. \n"
 		                                +" It is said that there is one in the southeast area of these upper caves, but I have not seen it myself." ));
 		locals[111] = 19;
 		locals[112] = 20;

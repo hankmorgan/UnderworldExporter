@@ -559,7 +559,11 @@ public class PlayerInventory : MonoBehaviour {
 				sBackPack[i-11] = cn.GetItemAt(ContainerOffset + i-11);
 				bBackPack[i-11]=true;
 			}
-		playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
+		if (playerUW.playerHud.Encumberance.enabled==true)
+		{
+			playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
+		}
+
 	}
 
 
@@ -857,7 +861,15 @@ public class PlayerInventory : MonoBehaviour {
 			if (playerContainer.GetItemAt(i)!="")
 			{
 				GameObject objItem =GameObject.Find (playerContainer.GetItemAt(i));
-				answer+=objItem.GetComponent<ObjectInteraction>().GetWeight();
+				if (objItem!=null)
+				{
+					answer+=objItem.GetComponent<ObjectInteraction>().GetWeight();
+				}
+				else
+				{
+					answer+=0;
+				}
+
 			}
 		}
 		return answer;

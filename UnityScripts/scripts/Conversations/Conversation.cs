@@ -226,6 +226,10 @@ public class Conversation : GuiBase {
 		{
 			mus.GetComponent<MusicController>().InMap=false;
 		}
+		if (playerUW.playerInventory.ObjectInHand!="")
+		{
+			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+		}
 		StopAllCoroutines();
 	}
 
@@ -369,17 +373,26 @@ public class Conversation : GuiBase {
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
 			{
-				if (StrWords[j].Length+colCounter>=LineWidth)
+				if (StrWords[j]=="\n")
 				{
-					colCounter=0; 
 					tl.Add (Markup + Output +"[-]");
-					Output=StrWords[j] + " ";
-					colCounter= StrWords[j].Length+1;
-				}	
+					colCounter=0;
+					Output="";
+				}
 				else
 				{
-					Output = Output + StrWords[j] + " ";
-					colCounter= colCounter+StrWords[j].Length + 1;
+					if (StrWords[j].Length+colCounter+1>=LineWidth)
+					{
+						colCounter=0; 
+						tl.Add (Markup + Output +"[-]");
+						Output=StrWords[j] + " ";
+						colCounter= StrWords[j].Length+1;
+					}	
+					else
+					{
+						Output = Output + StrWords[j] + " ";
+						colCounter= colCounter+StrWords[j].Length + 1;
+					}
 				}
 			}
 

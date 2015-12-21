@@ -81,6 +81,12 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=true;
 				break;	
+			case 4://Map
+				InventoryEnabled=false;
+				RuneBagEnabled=false;
+				StatsEnabled=false;
+				ConversationEnabled=false;
+				break;
 		}
 
 		EnableDisableControl("RuneBagDisplay",RuneBagEnabled);

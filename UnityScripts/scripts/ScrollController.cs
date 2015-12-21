@@ -26,7 +26,7 @@ public class ScrollController : GuiBase {
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
 			{
-				if (StrWords[j].Length+colCounter>=LineWidth)
+				if (StrWords[j].Length+colCounter+1>LineWidth)
 				{
 					colCounter=0; 
 					uiIn.Add (Output);

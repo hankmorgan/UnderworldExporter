@@ -390,8 +390,8 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-				yield return StartCoroutine(say( "It does suit me, doesn't it?  I had it made especially for me.  One simply doesn't find work like this underground.\n"
-		    +" Well, perhaps the Mountain-folk do make a few nice things, but they tend toward metals rather than clothes.\n"
+				yield return StartCoroutine(say( "It does suit me, doesn't it?  I had it made especially for me.  One simply doesn't find work like this underground. \n"
+		    +" Well, perhaps the Mountain-folk do make a few nice things, but they tend toward metals rather than clothes. \n"
 		    +" And of course the Seers -- the Ancient Illuminated Seers of the Moonstone, they call themselves -- they do nice work, too.  But they generally tend more toward the literary than the sartorial arts." ));
 		locals[1] = 27;
 		locals[2] = 28;
@@ -431,7 +431,7 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Well, one does what one can.  Of course those awful Gray Goblins took all the really nice things with them when they stole away in the night -- this was just after Sir Cabirus died, you know, when things were falling apart -- and we've had to make do since then.\n"
+		yield return StartCoroutine(say( "Well, one does what one can.  Of course those awful Gray Goblins took all the really nice things with them when they stole away in the night -- this was just after Sir Cabirus died, you know, when things were falling apart -- and we've had to make do since then. \n"
 		    +" One of these days I'm going to get some poison into Ketchaval or his ugly wife (which amounts to the same thing -- he's terribly henpecked, you know), and then we'll see what's what.  King of the Gray Goblins, indeed./m" ));
 		yield return StartCoroutine(say( "Why he's an upstart!  His father was a horse-thief! But enough of this ... You wanted to know something?  How can I help you?" ));
 		locals[1] = 33;
@@ -513,11 +513,11 @@ public class Conversation_9 : Conversation {
 		
 		// int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Oh, indeed it is!  Sometimes I wonder how I even manage.  It wasn't always like this, you know.\n"
-		    +" When Sir Cabirus was alive, things were ever so much better.  He had all of us working together so well.  A born leader was that man.\n"
-		    +" When he founded this colony you could have made a wager anywhere in Britannia that it wouldn't work, but he made it so.\n"
+		yield return StartCoroutine(say( "Oh, indeed it is!  Sometimes I wonder how I even manage.  It wasn't always like this, you know. \n"
+		    +" When Sir Cabirus was alive, things were ever so much better.  He had all of us working together so well.  A born leader was that man. \n"
+		    +" When he founded this colony you could have made a wager anywhere in Britannia that it wouldn't work, but he made it so. \n"
 		    +" I still think one of those bastard Grays must have done him in. There were certain items, too.../m" ));
-		yield return StartCoroutine(say( "Well, I suppose it will do no harm to tell thee.  Sir Cabirus collected eight great Talismans, each embodying a certain Virtue -- he was a great one for Virtue, was our Cabirus -- and it was well known that he intended them to come to the leaders of the various groups here in the Abyss.  Well, WE never saw them.  If they still exist, they must be lost.\n"
+		yield return StartCoroutine(say( "Well, I suppose it will do no harm to tell thee.  Sir Cabirus collected eight great Talismans, each embodying a certain Virtue -- he was a great one for Virtue, was our Cabirus -- and it was well known that he intended them to come to the leaders of the various groups here in the Abyss.  Well, WE never saw them.  If they still exist, they must be lost. \n"
 		    +" But I must be boring thee." ));
 		locals[1] = 45;
 		locals[2] = 46;
@@ -591,7 +591,7 @@ public class Conversation_9 : Conversation {
 		
 		// int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Oh, thou'rt just saying that.  I'm sure there's much more for thee to do than listen me me natter on.\n"
+		yield return StartCoroutine(say( "Oh, thou'rt just saying that.  I'm sure there's much more for thee to do than listen me me natter on. \n"
 		    +" And if you should happen to meet \"King\" Ketchaval or \"Queen\" Retichall of the Gray Goblins, be a dear and stick a knife in them, would you?" ));
 		locals[1] = 53;
 		locals[2] = 54;

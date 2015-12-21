@@ -646,7 +646,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "It was not always such.  Once, a leader name Sir Cabirus (curst be his name!) had the foolish notion that this place could be colonized.\n"
+		yield return StartCoroutine(say( "It was not always such.  Once, a leader name Sir Cabirus (curst be his name!) had the foolish notion that this place could be colonized. \n"
 		    +" When his folly caught up with him, the 'civilization'' of the under-earth fell, and we now scrabble to survive in its ruins. \n"
 		    +" He died, and so escaped the punishment for his crime.  Dreamers!  They will be the death of us all!" ));
 		locals[1] = 55;

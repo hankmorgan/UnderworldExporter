@@ -281,14 +281,14 @@ public class Conversation_89 : Conversation {
 			label_03b0:;
 
 				privateVariables[3] = 0;
-				yield return StartCoroutine(say( "Ach, ye've come to the right place.  There is no treasure better than gold, and gold there is in abundance in these mines.  In the north parts of these mines especially, ye shall find a beautiful sight. Be careful of the monster that's been seen around those parts, though.\n"
+				yield return StartCoroutine(say( "Ach, ye've come to the right place.  There is no treasure better than gold, and gold there is in abundance in these mines.  In the north parts of these mines especially, ye shall find a beautiful sight. Be careful of the monster that's been seen around those parts, though. \n"
 				    +" Now, what else might ye want to know?" ));
 				goto label_03c4;
 				
 			label_03ba:;
 
 				privateVariables[4] = 0;
-				yield return StartCoroutine(say( "The monster of the mines?  A great boon it would be if ye did defeat it, but I don't know that it can be done.  A fearsome thing it is.  Caught it once out of the corner of me eye, and I don't care to see it again.  It lurks in the north part of these mines.  Ye be careful, if ye truly mean to destroy it.\n"
+				yield return StartCoroutine(say( "The monster of the mines?  A great boon it would be if ye did defeat it, but I don't know that it can be done.  A fearsome thing it is.  Caught it once out of the corner of me eye, and I don't care to see it again.  It lurks in the north part of these mines.  Ye be careful, if ye truly mean to destroy it. \n"
 				   + " We caused a cave-in to block its area from ours, so ye'll have to break your way through it.  Is there anything I can help ye with before ye go off after it?" ));
 			//} // end if
 			

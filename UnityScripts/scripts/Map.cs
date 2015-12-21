@@ -62,7 +62,8 @@ public class Map : object_base {
 		{
 			ml.text="";
 		}
-
+		chains.ActiveControl=4;
+		chains.Refresh ();
 		return true;
 	}
 

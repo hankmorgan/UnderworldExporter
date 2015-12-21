@@ -250,8 +250,8 @@ public class Conversation_1 : Conversation {
 		int [] locals = new int[23];
 		
 		global[0] = 1;
-		yield return StartCoroutine(say( "I shared the great dream of Sir Cabirus, that the Avatar's way could be pursued by all folk.  We sought to gather all intelligent species here in the Abyss and teach them to live in harmony.  Alas, it was not to be.\n"
-		   + " The constant bickering proved too much for kindly Sir Cabirus, and he perished in his sleep.  Some said he was poisoned, but I know he died of a broken spirit.\n"
+		yield return StartCoroutine(say( "I shared the great dream of Sir Cabirus, that the Avatar's way could be pursued by all folk.  We sought to gather all intelligent species here in the Abyss and teach them to live in harmony.  Alas, it was not to be. \n"
+		   + " The constant bickering proved too much for kindly Sir Cabirus, and he perished in his sleep.  Some said he was poisoned, but I know he died of a broken spirit. \n"
 		   + " His life's work was in this place, and as he watched it crumble, his heart broke as well." ));
 		locals[1] = 12;
 		locals[2] = 13;
