@@ -856,7 +856,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 
 		//Get the weight of the gronk container as that is alway the top level of the inventory
-		for (int i = 0; i<playerContainer.NoOfSlots;i++)
+		for (int i = 0; i<playerContainer.MaxCapacity();i++)
 		{
 			if (playerContainer.GetItemAt(i)!="")
 			{

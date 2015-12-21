@@ -7,7 +7,7 @@ public class Container : object_base {
 	public int start=0;
 
 	public int Capacity;
-	public int NoOfSlots;
+	//public int NoOfSlots;
 	public int ObjectsAccepted;
 
 	public bool isOpenOnPanel;//Is the container open on the players inventory.
@@ -492,6 +492,36 @@ public class Container : object_base {
 			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,248));
 		}
 		return (TypeTest && WeightTest);
+	}
+
+	public string findItemOfType(int itemid)
+	{
+		for (int i =0; i<MaxCapacity(); i++ )
+		{
+			GameObject obj = GetGameObjectAt(i);
+			if (obj!=null)
+			{
+				if (obj.GetComponent<ObjectInteraction>()!=null)
+				{
+					if (obj.GetComponent<ObjectInteraction>().item_id==itemid)
+					{
+						return obj.name;
+					}
+					else
+					{
+						if (obj.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.CONTAINER)
+						{
+							string ans= obj.GetComponent<Container>().findItemOfType(itemid);
+							if (ans!="")
+							{
+								return ans;
+							}
+						}
+					}
+				}
+			}
+		}
+		return "";
 	}
 
 }

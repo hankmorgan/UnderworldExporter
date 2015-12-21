@@ -1186,13 +1186,21 @@ public class Conversation : GuiBase {
 				{
 					if (obj.GetComponent<ObjectInteraction>().item_id==arg2)
 					{
-						return 1;//FOund object
+						return 1;//Found object
 					}
 				}
 			}
 			break;
 		case 1://PC Search
-			Debug.Log ("find_Inv player");
+			//Debug.Log ("find_Inv player");
+			if (playerUW.GetComponent<Container>().findItemOfType(arg2) !="")
+			{
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
 			break;
 
 		}
@@ -1602,7 +1610,34 @@ public class Conversation : GuiBase {
 		return 0;
 	}
 
+	public void place_object( int unk1, int tileY, int tileX, int invSlot )
+	{
+	/*
+   id=0027 name="place_object" ret_type=void
+   parameters:   arg1: x tile pos
+                 arg2: y tile pos
+                 arg3: inventory item slot number (from do_inv_create)
+   description:  places a generated object in underworld
+                 used in Judy's conversation, #23
 
+*/
+		Debug.Log ("placeobject");
+		string objName = playerUW.playerHud.npcTrade[invSlot].objectInSlot;
+		GameObject obj = GameObject.Find (objName);
+		if (obj!=null)
+		{
+			obj.transform.position = new Vector3( 
+			                                     (((float)tileX) *1.2f), 
+			                                     (float)GameWorldController.instance.Tilemap.GetFloorHeight(tileX,tileY),
+			                                     (((float)tileY) *1.2f) 
+			                                     );
+			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
+			playerUW.playerHud.npcTrade[invSlot].clear();
+		}
+
+
+		return;
+	}
 }
 
 
