@@ -49,7 +49,7 @@ public class Container : object_base {
 			if (items[i]!="")
 			{
 				GameObject founditem = GameObject.Find (items[i]);
-				if (founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id)
+				if ((founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id) && (founditem.GetComponent<ObjectInteraction>().Quality==item.GetComponent<ObjectInteraction>().Quality))
 				{
 					//merge
 					//Debug.Log ("Merging");

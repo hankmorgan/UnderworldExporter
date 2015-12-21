@@ -80,9 +80,18 @@ public class object_base : MonoBehaviour {
 
 		//Debug.Log ("default use for " + this.gameObject.name);
 		CheckReferences();
-		if (playerUW.playerInventory.ObjectInHand!="")
+		if (playerUW.playerInventory.ObjectInHand =="")
 		{
-			return false;
+			if ((objInt.CanBeUsed==true) && (objInt.PickedUp==true))
+			{
+				BecomeObjectInHand();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
 		}
 		else
 		{

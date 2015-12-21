@@ -299,20 +299,28 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 			currobj.npc_goal, currobj.npc_attitude, currobj.npc_gtarg,
 			currobj.npc_talkedto, currobj.npc_level, currobj.npc_name
 			);
-		switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
+		if ((currobj.tileX != 99) && (currobj.tileY != 99))
 			{
-			case 66://bat
-			case 73://vampire bat
-				fprintf(UNITY_FILE, "\"SkyMesh1\");");//Fliers can go anywhere. Need to create this mesh.
-				break;
-			case 87://lurker
-			case 116://deep lurker
-				fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
-				break;
-			default:
-				fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
-				break;
+			switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
+				{
+					case 66://bat
+					case 73://vampire bat
+						fprintf(UNITY_FILE, "\"SkyMesh1\");");//Fliers can go anywhere. Need to create this mesh.
+						break;
+					case 87://lurker
+					case 116://deep lurker
+						fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+						break;
+					default:
+						fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+						break;
+				}
 			}
+		else
+			{
+			fprintf(UNITY_FILE, "\"GroundMesh%d\");", 1);
+			}
+
 		}
 	/*
 	(GameObject myObj,

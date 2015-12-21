@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellEffectsDisplay : MonoBehaviour {
+public class SpellEffectsDisplay : GuiBase {
 	public int SlotNumber;
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 	private int setSpell=-1;
 	private UITexture thisSpell;
 	private static Texture2D SpellBlank;
@@ -59,7 +59,7 @@ public class SpellEffectsDisplay : MonoBehaviour {
 		}
 		case -2://right click
 		{
-			playerUW.GetMessageLog().text = playerUW.ActiveSpell[SlotNumber].getSpellDescription();
+			playerUW.playerHud.MessageScroll.Add (playerUW.ActiveSpell[SlotNumber].getSpellDescription());
 			//Debug.Log (setSpell);
 			break;
 		}

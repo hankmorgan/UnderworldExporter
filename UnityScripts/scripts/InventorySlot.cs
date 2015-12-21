@@ -161,7 +161,7 @@ public class InventorySlot : GuiBase {
 					ObjectUsedOn = GameObject.Find (playerUW.playerInventory.GetObjectAtSlot(slotIndex));
 					if (ObjectUsedOn !=null)
 						{
-						if (objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id)
+					if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
 							{
 								//merge the items
 								ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
@@ -241,7 +241,7 @@ public class InventorySlot : GuiBase {
 				ObjectUsedOn = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);//GameObject.Find (pInv.GetObjectAtSlot(slotIndex));
 				if (ObjectUsedOn !=null)
 				{
-					if (objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id)
+					if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
 					{
 						//merge the items
 						ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
