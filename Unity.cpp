@@ -1710,7 +1710,7 @@ int target;
 				break;
 			case  A_DELETE_OBJECT_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_delete_object_trap(myObj);");
-				//fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
+				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 				break;
 			case  AN_INVENTORY_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_an_inventory_trap(myObj);");
@@ -1742,8 +1742,9 @@ int target;
 			{
 				
 				case LOCK://A lock uses it's link to set the key needed. stop here.
-				//	break;
-				case A_DELETE_OBJECT_TRAP:	//Need to stop on this due to infinite loops if the trigger object is being deleted.
+					break;
+				case A_DELETE_OBJECT_TRAP:	//May Need to stop on this due to infinite loops if the trigger object is being deleted.
+					
 				default:
 					fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 			}
@@ -1989,6 +1990,7 @@ return;
 							break;
 						case GRAVE:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							UnityRotation(game, 0, currobj.heading, 0);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityGrave(game, x, y, z, currobj, objList, LevelInfo);
 							break;

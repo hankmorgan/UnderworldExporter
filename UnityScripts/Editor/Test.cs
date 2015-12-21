@@ -14,3416 +14,3441 @@ public class MyTools
 	static void Create()
 	{
 		
-
-	GameObject myObj;
-	Vector3 pos;
-	GameObject invMarker = GameObject.Find("InventoryMarker");
-	Container ParentContainer;//For containers
-	myObj= CreateGameObject("a_glowing_rock_02_02_04_0719",2.914286f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_02_04_0720",5.314286f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_02_04_0721",7.714286f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_02_04_0722",10.114285f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_ghost_09_02_04_0223");
-	pos = new Vector3(11.314286f, 3.000000f, 2.914286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"101","Sprites/OBJECTS_101", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", 0, 101, 0, 9, 2, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 9, 2, 0, 0, 5, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_glowing_rock_10_02_04_0723",12.514286f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_02_04_0739",14.914286f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_02_04_0740",17.314285f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_02_04_0741",19.714287f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_18_02_04_0742",22.114285f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_02_04_0743",24.514284f,2.700000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_rock_hammer_41_02_04_0566",50.057144f,2.400000f,2.571429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_296",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_296", "Sprites/OBJECTS_296", "Sprites/OBJECTS_296", 16, 296, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_41_02_04_0568",49.885712f,2.400000f,3.085714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_41_02_04_0569",49.714287f,2.400000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_42_02_04_0567",50.571430f,2.400000f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("an_oil_flask_49_02_04_0565",59.657143f,2.400000f,2.742857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddOil(myObj);
-
-
-
-	myObj= CreateGameObject("some_writing_57_02_04_0481",69.257141f,3.412500f,2.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 749, 63, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,270,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,749);
-
-	myObj = new GameObject("door_057_002");
-	pos = new Vector3(69.085716f, 3.300000f, 2.600000f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_334", "Sprites/OBJECTS_334", "Sprites/OBJECTS_334", 30, 334, 675, 63, 0, 1, 1, 0, 1, 0, 1, 12, 1);
-	CreatePortcullis(myObj, 15, 1);
-	SetRotation(myObj,-90,90,0);
-
-	myObj= CreateGameObject("chain_gauntlets_pairs_of_chain_gauntlets_41_03_04_0522",49.714287f,2.400000f,4.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_039",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_039", "Sprites/OBJECTS_039", "Sprites/armour/armor_f_0007", 76, 39, 706, 32, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-	CreateGloves(myObj, "Sprites/armour/armor_f_0007", "Sprites/armour/armor_m_0007", "Sprites/armour/armor_f_0022", "Sprites/armour/armor_m_0022", "Sprites/armour/armor_f_0037", "Sprites/armour/armor_m_0037", "Sprites/armour/armor_f_0052", "Sprites/armour/armor_m_0052", 3, 9);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_41_03_04_0570",49.714287f,2.400000f,4.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_dire_ghost_42_03_04_0219");
-	pos = new Vector3(50.914288f, 3.000000f, 4.114285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"113","Sprites/OBJECTS_113", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", 0, 113, 0, 42, 3, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 42, 3, 0, 0, 67, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_scroll_43_03_04_0613",52.457142f,2.400000f,4.628572f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 547, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddMagicScroll(myObj);
-
-
-
-	myObj= CreateGameObject("a_lever_58_03_04_0679",69.620003f,3.000000f,3.771429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 673, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0673",40,0,0,7,381);
-	SetRotation(myObj,0,270,0);
-	SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
-
-	myObj= CreateGameObject("a_glowing_rock_02_04_04_0718",2.914286f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_04_04_0729",5.314286f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_04_04_0728",7.714286f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_04_04_0725",10.114285f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_04_04_0724",12.514286f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_04_04_0738",14.914286f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_04_04_0737",17.314285f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_04_04_0711",19.714287f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_18_04_04_0745",22.114285f,2.700000f,5.314286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_04_04_0677",24.020000f,2.400000f,5.485714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_buckler_34_05_04_0524",40.971432f,0.600000f,6.171429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_062",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_062", "Sprites/OBJECTS_062", "Sprites/OBJECTS_062", 78, 62, 708, 27, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-	AddShield(myObj);
-
-	myObj = new GameObject("door_053_005");
-	pos = new Vector3(63.799999f, 2.400000f, 6.171429f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 655, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_09", 15, 1);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj= CreateGameObject("some_writing_53_05_04_0671",64.114288f,3.600000f,6.171429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 726, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,0,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,726);
-
-	myObj= CreateGameObject("a_jeweled_sword_57_05_04_0515",69.085716f,2.400000f,6.857143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_013",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", 1, 13, 705, 41, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-	CreateWeapon(myObj, 14, 7, 11, 3, 255);
-
-	myObj= CreateGameObject("a_glowing_rock_02_06_04_0731",2.914286f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_06_04_0730",5.314286f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_06_04_0727",7.714286f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_06_04_0726",10.114285f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_06_04_0734",12.514286f,2.737500f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_06_04_0733",14.914286f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_06_04_0967",17.314285f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_06_04_0996",19.714287f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_18_06_04_0746",22.114285f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_06_04_0747",24.514284f,2.700000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_sack_50_06_04_0600",60.514286f,2.400000f,7.714286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 572, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 125, 255, 255);
-	AddObjectToContainer("a_pouch_pouches_99_99_04_0572", ParentContainer, 0);
-	////Container contents complete
-
-
-	myObj= CreateGameObject("a_gold_coffer_52_06_04_0620",62.571430f,2.400000f,7.885714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_138",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_138", "Sprites/OBJECTS_138", "Sprites/OBJECTS_139", 19, 138, 618, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 125, 255, 255);
-	AddObjectToContainer("a_wand_99_99_04_0618", ParentContainer, 0);
-	AddObjectToContainer("a_Tym_stone_99_99_04_0619", ParentContainer, 1);
-	AddObjectToContainer("a_Rel_stone_99_99_04_0615", ParentContainer, 2);
-	AddObjectToContainer("a_red_gem_99_99_04_0616", ParentContainer, 3);
-	////Container contents complete
-
-
-	myObj= CreateGameObject("a_gravestone_52_06_04_0950",62.914288f,2.400000f,7.885714f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 727, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,7);
-
-	myObj= CreateGameObject("a_battle_axe_54_06_04_0516",65.828568f,2.400000f,7.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_001",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", 1, 1, 0, 19, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateWeapon(myObj, 14, 7, 2, 4, 34);
-
-	myObj= CreateGameObject("a_broken_mace_44_07_04_0518",53.828568f,2.400000f,8.571429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_02_08_04_0994",2.914286f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_08_04_0971",5.314286f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_08_04_0998",7.714286f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_08_04_0736",10.114285f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_08_04_0735",12.514286f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_08_04_0732",14.914286f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_08_04_0997",17.314285f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_08_04_0750",19.714287f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_ghost_17_08_04_0222");
-	pos = new Vector3(20.914284f, 3.000000f, 10.114285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 17, 8, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 17, 8, 0, 0, 53, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_glowing_rock_18_08_04_0749",22.114285f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_08_04_0748",24.514284f,2.700000f,10.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_mage_34_08_04_0254");
-	pos = new Vector3(40.971432f, 0.600000f, 10.114285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"107","Sprites/OBJECTS_107", 23);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", 0, 107, 0, 34, 8, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 23, 34, 8, 0, 0, 45, 0, 0, 7, 2, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_skull_45_08_04_0521",54.685715f,2.400000f,10.457142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_bone_48_08_04_0519",57.771431f,2.400000f,9.771429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_mandolin_52_08_04_0564",62.742855f,2.400000f,9.942857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", 26, 291, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddInstrument(myObj);
-
-	myObj= CreateGameObject("a_red_potion_58_08_04_0824",69.942856f,2.400000f,10.628572f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 581, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddPotion(myObj);
-
-	myObj = new GameObject("a_ghoul_43_09_04_0236");
-	pos = new Vector3(52.114288f, 2.400000f, 11.314286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 43, 9, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 43, 9, 0, 0, 60, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_skull_44_09_04_0614",53.657143f,2.400000f,11.485714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_44_09_04_0612",53.828568f,2.400000f,10.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_blood_stain_50_09_04_0517",60.685715f,2.400000f,10.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-
-
-	myObj= CreateGameObject("a_glowing_rock_06_10_04_0717",7.714286f,2.700000f,12.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_10_04_0966",10.114285f,2.700000f,12.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("some_writing_09_10_04_0657",11.142858f,3.000000f,13.180000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 731, 40, 0, 0, 1, 0, 0, 1, 1, 8, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,0,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,731);
-
-
-	myObj= CreateGameObject("some_writing_13_10_04_0666",16.285713f,3.000000f,13.180000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 731, 40, 0, 0, 1, 0, 0, 1, 1, 8, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,0,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,731);
-
-	myObj= CreateGameObject("a_glowing_rock_16_10_04_0751",19.714287f,2.700000f,12.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("mail_leggings_pairs_of_mail_leggings_60_10_04_0523",72.857147f,2.400000f,12.685714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_036",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_036", "Sprites/OBJECTS_036", "Sprites/armour/armor_f_0004", 77, 36, 712, 47, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-	CreateLeggings(myObj, "Sprites/armour/armor_f_0004", "Sprites/armour/armor_m_0004", "Sprites/armour/armor_f_0019", "Sprites/armour/armor_m_0019", "Sprites/armour/armor_f_0034", "Sprites/armour/armor_m_0034", "Sprites/armour/armor_f_0049", "Sprites/armour/armor_m_0049", 4, 12);
-
-	myObj = new GameObject("a_ghost_06_11_04_0225");
-	pos = new Vector3(7.714286f, 3.000000f, 13.714286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 6, 11, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 6, 11, 0, 0, 37, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-
-
-
-	myObj= CreateGameObject("a_glowing_rock_06_12_04_0716",7.714286f,2.700000f,14.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_12_04_0752",19.714287f,2.700000f,14.914286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-
-
-	myObj= CreateGameObject("a_chain_cowl_35_12_04_0530",43.028568f,0.600000f,15.257142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 713, 24, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 7017820, 7017820);
-
-	myObj= CreateGameObject("a_green_potion_44_12_04_0857",53.657143f,2.400000f,15.257142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 520, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_plant_55_12_04_0506",66.685715f,2.400000f,15.257142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-
-	myObj= CreateGameObject("a_blood_stain_59_12_04_0608",71.828568f,2.400000f,14.742858f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_plant_59_12_04_0609",70.971428f,2.400000f,14.571428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_broken_mace_59_12_04_0610",71.314285f,2.400000f,14.742858f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_ghost_60_13_04_0221");
-	pos = new Vector3(72.514290f, 3.000000f, 16.114286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 604, 60, 13, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 60, 13, 0, 0, 42, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-	////NPC container with items
-
-	AddObjectToContainer("a_pack_99_99_04_0604", ParentContainer, 0);
-	////Container contents complete
-
-
-	myObj= CreateGameObject("a_glowing_rock_06_14_04_0715",7.714286f,2.700000f,17.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-
-	myObj= CreateGameObject("a_glowing_rock_16_14_04_0753",19.714287f,2.700000f,17.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_skull_42_14_04_0507",50.742855f,2.400000f,17.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_59_14_04_0607",71.314285f,2.400000f,17.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_59_14_04_0606",71.657143f,2.400000f,17.828571f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_59_14_04_0605",71.980003f,2.400000f,17.828571f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_glowing_rock_02_16_04_0712",2.914286f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_16_04_0713",5.314286f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_16_04_0714",7.714286f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_16_04_0754",10.114285f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_16_04_0755",12.514286f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_16_04_0758",14.914286f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_16_04_0759",17.314285f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_16_04_0760",19.714287f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_18_16_04_0761",22.114285f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_16_04_0778",24.514284f,2.700000f,19.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_mace_42_16_04_0575",50.571430f,2.100000f,19.371428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_009",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateWeapon(myObj, 8, 16, 5, 5, 25);
-
-	myObj= CreateGameObject("a_blood_stain_42_16_04_0573",50.742855f,2.100000f,19.542858f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-
-	myObj= CreateGameObject("a_chain_cowl_42_16_04_0574",50.742855f,2.100000f,19.885714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 7017820, 7017820);
-
-	myObj= CreateGameObject("a_plant_59_16_04_0513",71.142853f,0.900000f,20.228571f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-
-	myObj = new GameObject("a_ghoul_43_17_04_0220");
-	pos = new Vector3(52.114288f, 2.100000f, 20.914284f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 43, 17, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 43, 17, 0, 0, 45, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("special_tmap_obj_52_17_04_0611",63.580002f,1.200000f,21.000000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj= CreateGameObject("a_glowing_rock_02_18_04_0768",2.914286f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_18_04_0769",5.314286f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_18_04_0770",7.714286f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_18_04_0771",10.114285f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_18_04_0772",12.514286f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_18_04_0773",14.914286f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_18_04_0774",17.314285f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_ghost_15_18_04_0224");
-	pos = new Vector3(18.514286f, 3.000000f, 22.114285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"101","Sprites/OBJECTS_101", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", 0, 101, 0, 15, 18, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 15, 18, 0, 0, 3, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_glowing_rock_16_18_04_0775",19.714287f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_18_18_04_0776",22.114285f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_18_04_0777",24.514284f,2.700000f,22.114285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_34_19_04_0510",40.820000f,1.500000f,23.400000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-	SetRotation(myObj,0,270,0);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_36_19_04_0525",44.057144f,0.900000f,23.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_02_20_04_0767",2.914286f,2.700000f,24.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_20_04_0766",7.714286f,2.400000f,24.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_20_04_0765",12.514286f,2.400000f,24.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_20_04_0764",14.914286f,2.400000f,24.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_20_04_0763",19.714287f,2.400000f,24.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_20_04_0762",24.514284f,2.700000f,24.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_45_20_04_0511",55.180000f,1.500000f,24.600000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj = new GameObject("a_ghoul_54_20_04_0229");
-	pos = new Vector3(65.314285f, 0.900000f, 24.514284f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"99","Sprites/OBJECTS_099", 5);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 54, 20, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 5, 54, 20, 0, 0, 39, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_blood_stain_50_21_04_0955",60.514286f,0.900000f,25.714285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_glowing_rock_02_22_04_0854",2.914286f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_04_22_04_0827",5.314286f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_06_22_04_0826",7.714286f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_08_22_04_0825",10.114285f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_10_22_04_0842",12.514286f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_12_22_04_0841",14.914286f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_14_22_04_0840",17.314285f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_16_22_04_0846",19.714287f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_18_22_04_0853",22.114285f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_glowing_rock_20_22_04_0852",24.514284f,2.700000f,26.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_ghoul_49_22_04_0255");
-	pos = new Vector3(59.314285f, 0.900000f, 26.914284f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"99","Sprites/OBJECTS_099", 4);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 49, 22, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 4, 49, 22, 0, 0, 51, 0, 0, 8, 2, 1, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,315,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_ghoul_34_23_04_0228");
-	pos = new Vector3(41.314285f, 0.900000f, 28.114285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"99","Sprites/OBJECTS_099", 6);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 482, 34, 23, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 6, 34, 23, 0, 0, 43, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-	////NPC container with items
-
-	AddObjectToContainer("a_leather_vest_99_99_04_0482", ParentContainer, 0);
-	AddObjectToContainer("leather_leggings_pairs_of_leather_leggings_99_99_04_0480", ParentContainer, 1);
-	AddObjectToContainer("leather_gloves_pairs_of_leather_gloves_99_99_04_0479", ParentContainer, 2);
-	AddObjectToContainer("leather_boots_pairs_of_leather_boots_99_99_04_0478", ParentContainer, 3);
-	////Container contents complete
-
-
-	myObj= CreateGameObject("a_broken_sword_43_23_04_0509",52.457142f,0.900000f,27.771429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_23_04_0957",63.257145f,0.900000f,28.780001f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("some_writing_06_24_04_0951",7.220000f,3.000000f,29.485716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 728, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,270,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,728);
-
-	myObj= CreateGameObject("a_scroll_17_24_04_0576",20.914284f,3.000000f,29.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_317",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", 11, 317, 644, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetLink(myObj,644);
-
-	myObj= CreateGameObject("a_blood_stain_50_24_04_0954",60.857143f,0.900000f,29.485716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_skull_50_24_04_0963",60.514286f,0.900000f,29.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_51_24_04_0956",61.885712f,0.900000f,28.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_bone_51_24_04_0961",61.371429f,0.900000f,29.485716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_skull_52_24_04_0960",62.914288f,0.900000f,29.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_24_04_0959",62.571430f,0.900000f,29.485716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_skull_52_24_04_0958",63.257145f,0.900000f,29.485716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("door_006_025");
-	pos = new Vector3(7.400000f, 2.400000f, 30.342857f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", 4, 323, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_07", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_25_04_0529",46.457142f,0.900000f,30.514284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_38_26_04_0512",45.619999f,1.500000f,31.799999f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-	SetRotation(myObj,0,270,0);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_38_26_04_0526",45.942856f,0.900000f,31.885715f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_skull_39_26_04_0527",47.314285f,0.900000f,31.714285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_39_26_04_0528",47.657143f,0.900000f,32.057144f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-
-	myObj= CreateGameObject("special_tmap_obj_40_26_04_0980",49.180000f,0.900000f,31.799999f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-	SetRotation(myObj,0,90,0);
-
-
-
-	myObj = new GameObject("a_ghoul_58_26_04_0226");
-	pos = new Vector3(70.114288f, 0.900000f, 31.714285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"99","Sprites/OBJECTS_099", 162);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 58, 26, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 162, 58, 26, 0, 0, 60, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-
-	myObj= CreateGameObject("a_scroll_02_27_04_0899",3.085714f,2.400000f,32.571426f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 544, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddMagicScroll(myObj);
-
-	myObj = new GameObject("door_003_027");
-	pos = new Vector3(4.628572f, 2.400000f, 32.599998f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 627, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreatePortcullis(myObj, 0, 1);
-	SetRotation(myObj,-90,90,0);
-
-	myObj= CreateGameObject("a_blood_stain_38_27_04_0520",46.457142f,0.900000f,33.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-
-
-	myObj= CreateGameObject("a_lever_04_28_04_0667",4.820000f,3.000000f,34.457142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 654, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0654",40,0,0,7,381);
-	SetRotation(myObj,0,270,0);
-	SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
-
-	myObj= CreateGameObject("some_writing_04_28_04_0649",4.820000f,3.000000f,33.942856f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 730, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,270,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,730);
-
-	myObj= CreateGameObject("some_writing_05_29_04_0652",6.514286f,3.000000f,35.980000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 729, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,0,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,729);
-
-	myObj= CreateGameObject("a_lever_06_29_04_0680",7.220000f,3.000000f,35.980000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 669, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0669",40,0,0,7,353);
-	SetRotation(myObj,0,0,0);
-	SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
-
-	myObj= CreateGameObject("a_lever_06_29_04_0653",7.714286f,3.000000f,35.980000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 668, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0668",40,0,0,7,353);
-	SetRotation(myObj,0,0,0);
-	SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
-
-	myObj= CreateGameObject("a_lever_06_29_04_0681",8.228571f,3.000000f,35.980000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 658, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0658",40,0,0,7,353);
-	SetRotation(myObj,0,0,0);
-	SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
-
-	myObj= CreateGameObject("special_tmap_obj_29_29_04_0982",35.314285f,2.700000f,35.314285f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_142", "" , 142, false);
-	SetRotation(myObj,0,45,0);
-
-
-	myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_45_29_04_0508",54.514286f,0.900000f,35.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-
-
-
-	myObj= CreateGameObject("special_tmap_obj_43_30_04_1022",52.200001f,3.300000f,36.020000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_137", "" , 137, false);
-	SetRotation(myObj,0,180,0);
-
-
-	myObj= CreateGameObject("a_scroll_03_31_04_0823",4.457143f,3.300000f,38.057144f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_313",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", 13, 313, 553, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddMagicScroll(myObj);
-
-	myObj= CreateGameObject("a_broken_axe_09_31_04_0837",11.142858f,3.300000f,37.542858f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_10_31_04_0838",13.180000f,3.300000f,37.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_11_31_04_0687",14.228572f,3.300000f,37.885715f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-
-	myObj= CreateGameObject("a_broken_sword_13_31_04_0699",16.285713f,3.300000f,37.885715f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_15_31_04_0705",18.514286f,3.300000f,37.714283f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_17_31_04_0692",20.914284f,4.500000f,37.714283f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_plant_18_31_04_0693",22.114285f,3.000000f,37.714283f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-
-	myObj= CreateGameObject("a_plant_20_31_04_0701",25.028572f,2.400000f,37.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_20_31_04_0703",24.514284f,2.400000f,37.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-
-	myObj= CreateGameObject("a_skull_21_31_04_0700",25.714285f,2.100000f,37.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_21_31_04_0706",25.714285f,4.500000f,37.714283f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_23_31_04_0708",28.114285f,2.100000f,37.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_46_31_04_0744",56.380001f,3.600000f,37.799999f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_161", "" , 161, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj= CreateGameObject("a_stalactite_08_32_04_0836",10.114285f,4.500000f,38.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_skull_10_32_04_0839",12.514286f,3.300000f,39.257145f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_11_32_04_0688",13.714286f,4.500000f,38.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_skull_13_32_04_0698",16.285713f,3.300000f,39.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_crossbow_bolt_15_32_04_0908",18.171429f,3.300000f,39.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-
-	myObj= CreateGameObject("a_stalactite_15_32_04_0690",18.514286f,4.500000f,38.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_blood_stain_17_32_04_0691",20.571428f,3.300000f,38.742855f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
-
-	myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_18_32_04_0695",22.114285f,3.000000f,39.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_19_32_04_0694",23.485716f,2.700000f,39.085716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_20_32_04_0697",24.171429f,2.400000f,39.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_20_32_04_0696",24.857143f,2.400000f,39.085716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_stalactite_21_32_04_0704",25.714285f,4.500000f,38.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_stalactite_22_32_04_0707",26.914284f,4.500000f,38.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_plant_23_32_04_0710",28.285715f,2.100000f,39.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_24_32_04_0709",29.314285f,2.100000f,39.428574f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("special_tmap_obj_46_32_04_0757",56.380001f,3.600000f,39.000000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_161", "" , 161, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj= CreateGameObject("special_tmap_obj_60_32_04_0983",72.599998f,0.900000f,39.580002f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 987, 40, 13, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,"uw1_049", "a_look_trigger_99_99_04_0987", 49, false);
-	SetRotation(myObj,0,0,0);
-
-
-	myObj= CreateGameObject("a_plant_06_33_04_0848",8.057143f,3.300000f,40.285717f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_plant_08_33_04_0850",9.942857f,3.300000f,39.942856f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj = new GameObject("door_060_033");
-	pos = new Vector3(73.000000f, 0.900000f, 39.619999f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/world/uw1_049", 53, 0);
-	SetRotation(myObj,-90,0,0);
-
-
-	myObj = new GameObject("a_giant_rat_06_34_04_0237");
-	pos = new Vector3(7.885714f, 3.300000f, 40.820000f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 6, 34, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 6, 34, 0, 0, 15, 0, 0, 8, 2, 1, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,90,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_fountain_13_34_04_0686",16.114286f,3.000000f,41.828568f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", 82, 302, 1, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	AddFountain(myObj);
-
-	myObj= CreateGameObject("a_fountain_13_34_04_0685",16.114286f,3.000000f,41.828568f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 5, 0, 0, 5, 4, 1, 0, 0, 1);
-	AddAnimationOverlay(myObj,5,4);
-
-	myObj= CreateGameObject("special_tmap_obj_34_34_04_0977",41.657143f,2.700000f,41.314285f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_142", "" , 142, false);
-	SetRotation(myObj,0,225,0);
-
-	myObj= CreateGameObject("a_plant_05_35_04_0847",6.514286f,4.500000f,42.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_06_35_04_0784",7.542857f,3.300000f,42.342857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_20_35_04_0849",25.180000f,3.600000f,42.599998f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj= CreateGameObject("a_gravestone_43_35_04_0550",52.114288f,0.000000f,42.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 743, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,32);
-
-	myObj= CreateGameObject("a_gravestone_44_35_04_0549",53.314285f,0.000000f,42.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 744, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,17);
-
-	myObj= CreateGameObject("a_gravestone_45_35_04_0548",54.514286f,0.000000f,42.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 745, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,18);
-
-	myObj= CreateGameObject("a_crossbow_bolt_47_35_04_0536",56.742855f,0.037500f,42.171432f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-
-	myObj= CreateGameObject("a_gravestone_47_35_04_0547",56.914288f,0.000000f,42.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 746, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,33);
-
-	myObj= CreateGameObject("a_gravestone_48_35_04_0546",58.114288f,0.000000f,42.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 747, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,19);
-
-	myObj= CreateGameObject("a_gravestone_49_35_04_0545",59.314285f,0.000000f,42.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 748, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,20);
-
-	myObj = new GameObject("a_giant_rat_02_36_04_0238");
-	pos = new Vector3(2.914286f, 3.300000f, 43.714287f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 2, 36, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_ghost_08_36_04_0197");
-	pos = new Vector3(10.628572f, 3.600000f, 44.228569f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 8, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 8, 36, 0, 0, 45, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_ghost_09_36_04_0218");
-	pos = new Vector3(11.980000f, 3.600000f, 44.228569f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 584, 9, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 9, 36, 0, 0, 63, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-	////NPC container with items
-
-	AddObjectToContainer("a_book_99_99_04_0584", ParentContainer, 0);
-	AddObjectToContainer("a_ruby_rubies_99_99_04_0583", ParentContainer, 1);
-	////Container contents complete
-
-
-	myObj = new GameObject("a_mage_17_36_04_0227");
-	pos = new Vector3(20.914284f, 3.300000f, 43.714287f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"106","Sprites/OBJECTS_106", 161);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", 0, 106, 945, 17, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 161, 17, 36, 0, 0, 50, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-	////NPC container with items
-
-	AddObjectToContainer("a_glowing_rock_99_99_04_0945", ParentContainer, 0);
-	AddObjectToContainer("a_mandolin_99_99_04_0944", ParentContainer, 1);
-	AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_04_0943", ParentContainer, 2);
-	////Container contents complete
-
-
-	myObj= CreateGameObject("a_shrine_20_36_04_0843",24.685715f,3.300000f,43.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_343",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", 83, 343, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddShrine(myObj);
-
-	myObj = new GameObject("a_ghost_48_36_04_0205");
-	pos = new Vector3(58.114288f, 0.900000f, 43.714287f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 48, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 48, 36, 0, 0, 23, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_crossbow_49_36_04_0537",59.657143f,0.000000f,44.057144f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_026",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", 1, 26, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_05_37_04_0793",6.171429f,3.300000f,45.085712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("special_tmap_obj_20_37_04_0828",25.180000f,3.600000f,45.000000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj = new GameObject("a_bloodworm_26_37_04_0243");
-	pos = new Vector3(31.714285f, 3.600000f, 44.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 26, 37, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 26, 37, 0, 0, 18, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_bloodworm_39_37_04_0241");
-	pos = new Vector3(47.314285f, 3.600000f, 44.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 39, 37, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 39, 37, 0, 0, 19, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,90,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("some_writing_44_37_04_0486",52.820000f,0.600000f,44.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 750, 0, 0, 0, 1, 0, 0, 1, 0, 7, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,270,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_27");
-	SetLink(myObj,750);
-
-	myObj= CreateGameObject("some_writing_44_37_04_0903",53.980000f,0.600000f,45.085712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 751, 0, 0, 0, 1, 0, 0, 1, 0, 7, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,90,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_27");
-	SetLink(myObj,751);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_05_38_04_0756",7.028571f,3.300000f,46.114288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_red_potion_10_38_04_0813",12.857142f,3.300000f,46.457142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddPotion(myObj);
-
-	myObj = new GameObject("door_032_038");
-	pos = new Vector3(38.599998f, 2.100000f, 46.628571f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj = new GameObject("door_050_038");
-	pos = new Vector3(61.028568f, 0.000000f, 46.599998f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,-90,0);
-
-	myObj= CreateGameObject("some_writing_57_38_04_0947",68.419998f,0.600000f,46.457142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 720, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,270,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,720);
-
-	myObj = new GameObject("door_057_038");
-	pos = new Vector3(68.599998f, 0.000000f, 45.619999f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj= CreateGameObject("a_stalactite_05_39_04_0794",6.342857f,4.500000f,47.485714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj = new GameObject("door_009_039");
-	pos = new Vector3(11.000000f, 3.300000f, 47.828568f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_00", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj = new GameObject("door_014_039");
-	pos = new Vector3(17.000000f, 3.300000f, 47.828568f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_00", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0805",30.685715f,2.100000f,47.142857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0804",31.028572f,2.100000f,47.142857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0803",30.514284f,2.100000f,47.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_skull_27_39_04_0802",32.914284f,2.100000f,47.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_skull_27_39_04_0801",33.257145f,2.100000f,46.971432f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_30_39_04_0875",36.599998f,3.000000f,46.820000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,180,0);
-
-	myObj = new GameObject("a_headless_headlesses_34_39_04_0247");
-	pos = new Vector3(41.142857f, 2.100000f, 47.142857f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 34, 39, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 34, 39, 4, 0, 60, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,135,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("special_tmap_obj_34_39_04_0910",41.400002f,3.000000f,46.820000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,180,0);
-
-	myObj= CreateGameObject("an_arrow_02_40_04_0860",2.742857f,3.300000f,48.857143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_018",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", 1, 18, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-
-	myObj = new GameObject("a_giant_rat_06_40_04_0239");
-	pos = new Vector3(7.714286f, 3.300000f, 48.514286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 6, 40, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 6, 40, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,90,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("some_writing_14_40_04_0845",17.980000f,3.900000f,48.685715f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 725, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,90,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,725);
-
-	myObj = new GameObject("a_bloodworm_22_40_04_0244");
-	pos = new Vector3(26.914284f, 3.600000f, 48.514286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 22, 40, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 22, 40, 0, 0, 17, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_headless_headlesses_25_40_04_0246");
-	pos = new Vector3(30.514284f, 2.100000f, 48.514286f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 25, 40, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 25, 40, 0, 0, 40, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_38_40_04_0819",46.114288f,2.100000f,48.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_38_40_04_0818",46.628571f,2.100000f,48.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_tower_shield_47_40_04_0544",56.742855f,0.000000f,48.342857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_059",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", 78, 59, 0, 28, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddShield(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_24_41_04_0871",28.820000f,3.300000f,49.799999f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,270,0);
-
-	myObj= CreateGameObject("a_bench_benches_29_41_04_0855",35.657143f,2.100000f,49.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-
-	myObj= CreateGameObject("a_plant_33_41_04_0831",40.114285f,4.500000f,49.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_bench_benches_34_41_04_0856",41.142857f,2.100000f,49.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-
-	myObj= CreateGameObject("a_plant_35_41_04_0829",42.514286f,4.500000f,49.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-
-	myObj= CreateGameObject("special_tmap_obj_39_41_04_0872",47.980000f,3.300000f,49.799999f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj= CreateGameObject("a_gravestone_44_41_04_0560",53.314285f,0.000000f,49.714287f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 733, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,22);
-
-	myObj = new GameObject("a_skeleton_47_41_04_0207");
-	pos = new Vector3(56.914288f, 0.000000f, 49.714287f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 47, 41, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 47, 41, 0, 0, 30, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_gravestone_48_41_04_0559",58.114288f,0.000000f,49.714287f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 734, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,23);
-
-	myObj= CreateGameObject("a_scroll_55_41_04_0577",66.514290f,0.000000f,49.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_316",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", 11, 316, 645, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetLink(myObj,645);
-
-	myObj = new GameObject("a_goblin_03_42_04_0216");
-	pos = new Vector3(4.114285f, 3.600000f, 50.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 3, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 3, 42, 0, 0, 57, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_goblin_04_42_04_0215");
-	pos = new Vector3(5.314286f, 3.600000f, 50.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 4, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 4, 42, 0, 0, 65, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_goblin_05_42_04_0217");
-	pos = new Vector3(6.514286f, 3.600000f, 50.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 5, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 5, 42, 0, 0, 53, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_blood_stain_24_42_04_0807",29.314285f,2.100000f,50.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-
-	myObj= CreateGameObject("a_skull_24_42_04_0806",29.142857f,2.100000f,50.742855f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_30_42_04_0832",37.180000f,2.700000f,51.085712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-
-	myObj= CreateGameObject("a_skull_31_42_04_0835",37.714283f,2.700000f,50.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_31_42_04_0833",38.057144f,2.700000f,50.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_31_42_04_0834",38.057144f,2.700000f,51.085712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_39_42_04_0815",47.314285f,2.100000f,50.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_220",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_220", "Sprites/OBJECTS_220", "Sprites/OBJECTS_220", 23, 220, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_skeleton_53_42_04_0208");
-	pos = new Vector3(64.114288f, 0.000000f, 50.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 53, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 53, 42, 0, 0, 34, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_gravestone_54_42_04_0552",65.314285f,0.000000f,50.914288f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 741, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,30);
-
-	myObj= CreateGameObject("a_gravestone_58_42_04_0551",70.114288f,0.000000f,50.914288f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 742, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,31);
-
-	myObj = new GameObject("a_gazer_04_43_04_0214");
-	pos = new Vector3(5.314286f, 3.900000f, 52.114288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"102","Sprites/OBJECTS_102", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", 0, 102, 0, 4, 43, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 4, 43, 0, 0, 69, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-
-	myObj= CreateGameObject("special_tmap_obj_24_43_04_0870",28.820000f,3.300000f,52.200001f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,270,0);
-
-	myObj= CreateGameObject("a_broken_shield_28_43_04_0821",33.619999f,2.100000f,52.779999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_bench_benches_29_43_04_0859",35.657143f,2.100000f,52.114288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-
-	myObj= CreateGameObject("a_bench_benches_34_43_04_0858",41.142857f,2.100000f,52.114288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-
-	myObj= CreateGameObject("a_plant_38_43_04_0817",46.114288f,4.500000f,52.114288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_43_04_0816",46.114288f,2.100000f,52.114288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_39_43_04_0873",47.980000f,3.300000f,52.200001f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj = new GameObject("a_bloodworm_41_43_04_0242");
-	pos = new Vector3(49.714287f, 3.600000f, 52.114288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 43, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 41, 43, 0, 0, 17, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_jeweled_mace_43_43_04_0538",51.771431f,0.000000f,52.628571f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_014",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", 1, 14, 704, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-	CreateWeapon(myObj, 9, 17, 5, 5, 255);
-
-	myObj= CreateGameObject("special_tmap_obj_08_44_04_0976",10.200000f,3.600000f,52.820000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-	SetRotation(myObj,0,180,0);
-
-
-	myObj = new GameObject("a_reaper_18_44_04_0213");
-	pos = new Vector3(22.114285f, 1.200000f, 53.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"118","Sprites/OBJECTS_118", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", 0, 118, 0, 18, 44, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 18, 44, 0, 0, 71, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh6");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_mushroom_24_44_04_0809",28.971428f,2.100000f,53.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_toadstool_24_44_04_0808",29.142857f,2.100000f,53.828568f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_27_44_04_0822",32.914284f,2.100000f,53.485714f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_skull_32_44_04_0863",38.914284f,2.100000f,53.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_32_44_04_0862",38.914284f,2.100000f,53.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_32_44_04_0861",39.085716f,2.100000f,53.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_headless_headlesses_35_44_04_0233");
-	pos = new Vector3(42.514286f, 2.100000f, 53.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 35, 44, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 35, 44, 0, 0, 45, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_plant_37_44_04_0830",44.914288f,4.500000f,53.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_red_potion_55_44_04_0702",66.857147f,0.000000f,53.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 563, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddPotion(myObj);
-
-
-
-	myObj= CreateGameObject("special_tmap_obj_29_45_04_0874",35.400002f,3.000000f,55.180000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,0,0);
-
-	myObj= CreateGameObject("special_tmap_obj_33_45_04_0909",40.200001f,3.037500f,55.180000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-	SetRotation(myObj,0,0,0);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_34_45_04_0812",41.828568f,2.100000f,55.180000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_34_45_04_0811",41.657143f,2.100000f,55.180000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_plant_34_45_04_0810",41.314285f,2.100000f,55.028568f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_plant_36_45_04_0814",43.714287f,2.100000f,55.028568f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_sack_39_45_04_0589",47.314285f,2.100000f,54.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 588, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 125, 255, 255);
-	AddObjectToContainer("a_book_99_99_04_0588", ParentContainer, 0);
-	AddObjectToContainer("a_lockpick_99_99_04_0587", ParentContainer, 1);
-	AddObjectToContainer("a_flute_99_99_04_0586", ParentContainer, 2);
-	AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_04_0585", ParentContainer, 3);
-	////Container contents complete
-
-
-	myObj = new GameObject("door_050_045");
-	pos = new Vector3(61.028568f, 0.000000f, 55.000000f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,-90,0);
-
-	myObj = new GameObject("a_reaper_14_46_04_0212");
-	pos = new Vector3(17.314285f, 1.200000f, 55.714287f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"118","Sprites/OBJECTS_118", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", 0, 118, 0, 14, 46, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 14, 46, 0, 0, 121, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-
-	myObj = new GameObject("door_031_046");
-	pos = new Vector3(37.400002f, 2.100000f, 56.380001f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj = new GameObject("door_052_046");
-	pos = new Vector3(62.571430f, 0.000000f, 55.400002f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,90,0);
-
-	myObj= CreateGameObject("a_mushroom_27_47_04_0901",32.742855f,3.600000f,57.085712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_mushroom_27_47_04_0902",32.742855f,3.600000f,56.571430f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_skull_28_47_04_0906",34.285717f,3.600000f,56.571430f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_28_47_04_0905",34.114285f,3.600000f,57.428570f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_28_47_04_0904",34.628571f,3.600000f,57.085712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_plant_29_47_04_0907",35.485714f,3.600000f,56.742855f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("special_tmap_obj_29_47_04_1015",35.980000f,3.600000f,57.000000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-	SetRotation(myObj,0,90,0);
-
-
-
-	myObj= CreateGameObject("special_tmap_obj_32_47_04_0869",39.000000f,3.000000f,56.419998f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 32, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_018", "" , 18, false);
-	SetRotation(myObj,0,180,0);
-
-	myObj= CreateGameObject("some_writing_32_47_04_0868",38.742855f,2.700000f,56.419998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 723, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,180,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-	SetLink(myObj,723);
-
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_47_04_0924",41.828568f,3.600000f,56.571430f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_47_04_0923",41.314285f,3.600000f,57.428570f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-
-	myObj= CreateGameObject("special_tmap_obj_34_47_04_1018",40.820000f,3.600000f,57.000000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-	SetRotation(myObj,0,270,0);
-
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_35_47_04_0935",42.342857f,3.600000f,57.580002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_plant_35_47_04_0933",42.514286f,3.600000f,56.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_plant_36_47_04_0928",44.057144f,3.600000f,56.742855f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_36_47_04_0927",43.220001f,3.600000f,56.419998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_mushroom_36_47_04_0930",43.714287f,3.600000f,56.571430f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_toadstool_36_47_04_0931",43.220001f,3.600000f,56.571430f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj = new GameObject("a_bloodworm_41_47_04_0234");
-	pos = new Vector3(49.714287f, 3.600000f, 56.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 47, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 41, 47, 0, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_green_potion_49_47_04_0851",59.657143f,0.000000f,56.742855f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddPotion(myObj);
-
-
-	myObj= CreateGameObject("a_plant_27_48_04_0900",32.571426f,3.600000f,58.457142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_27_48_04_0898",33.428574f,3.600000f,58.457142f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-
-	myObj = new GameObject("a_skeleton_49_48_04_0209");
-	pos = new Vector3(59.314285f, 0.000000f, 58.114288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 49, 48, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 49, 48, 0, 0, 32, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_bloodworm_22_49_04_0245");
-	pos = new Vector3(26.914284f, 3.600000f, 59.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 22, 49, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 22, 49, 0, 0, 16, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_49_04_0926",41.314285f,3.600000f,59.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_37_49_04_0941",45.257145f,3.600000f,58.820000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_broken_mace_37_49_04_0937",44.914288f,3.600000f,59.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_37_49_04_0936",45.257145f,3.600000f,59.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_gravestone_44_49_04_0557",53.314285f,0.000000f,59.314285f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 736, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,25);
-
-	myObj= CreateGameObject("a_gravestone_48_49_04_0558",58.114288f,0.000000f,59.314285f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 735, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,24);
-
-
-	myObj= CreateGameObject("a_broken_hilt_54_49_04_0932",65.314285f,0.000000f,59.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_281",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_281", "Sprites/OBJECTS_281", "Sprites/OBJECTS_281", 16, 281, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_ghost_57_49_04_0206");
-	pos = new Vector3(68.914284f, 1.200000f, 59.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 57, 49, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 57, 49, 0, 0, 47, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-
-	myObj= CreateGameObject("some_writing_26_50_04_0866",31.219999f,4.200000f,60.857143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 724, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,270,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_21");
-	SetLink(myObj,724);
-
-	myObj= CreateGameObject("a_skull_37_50_04_0940",45.085712f,3.600000f,60.020000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_37_50_04_0939",45.257145f,3.600000f,60.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("an_axe_45_50_04_0543",54.857143f,0.000000f,60.857143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_002",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", 1, 2, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateWeapon(myObj, 10, 6, 8, 4, 25);
-
-	myObj= CreateGameObject("a_sack_48_50_04_0582",58.114288f,0.000000f,60.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 579, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 125, 255, 255);
-	AddObjectToContainer("a_book_99_99_04_0579", ParentContainer, 0);
-	AddObjectToContainer("a_large_blue_gem_99_99_04_0581", ParentContainer, 1);
-	AddObjectToContainer("a_fish_fish_99_99_04_0580", ParentContainer, 2);
-	////Container contents complete
-
-
-	myObj= CreateGameObject("a_gravestone_54_50_04_0554",65.314285f,0.000000f,60.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 739, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,28);
-
-	myObj= CreateGameObject("a_gravestone_58_50_04_0553",70.114288f,0.000000f,60.514286f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 740, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,29);
-
-
-	myObj = new GameObject("door_025_051");
-	pos = new Vector3(30.857143f, 3.600000f, 61.400002f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
-	SetRotation(myObj,-90,90,0);
-
-	myObj= CreateGameObject("a_plant_27_51_04_0889",33.580002f,3.600000f,61.371429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_27_51_04_0888",33.428574f,3.600000f,61.885712f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_27_51_04_0887",33.580002f,3.600000f,61.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_skull_28_51_04_0897",34.114285f,3.600000f,61.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_28_51_04_0895",34.457142f,3.600000f,61.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_28_51_04_0896",34.457142f,3.600000f,61.542858f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
-
-	myObj= CreateGameObject("a_broken_mace_28_51_04_0894",33.942856f,3.600000f,61.542858f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0916",42.514286f,3.600000f,61.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0914",43.028568f,3.600000f,62.228569f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0913",43.028568f,3.600000f,61.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj = new GameObject("door_038_051");
-	pos = new Vector3(45.942856f, 3.600000f, 62.200001f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
-	SetRotation(myObj,-90,-90,0);
-
-	myObj= CreateGameObject("special_tmap_obj_19_52_04_0965",22.820000f,3.600000f,63.000000f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 8, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_206", "" , 206, false);
-	SetRotation(myObj,0,270,0);
-
-	myObj= CreateGameObject("a_plant_34_52_04_0921",40.971432f,3.600000f,62.914288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj = new GameObject("a_dread_spider_36_52_04_0253");
-	pos = new Vector3(43.714287f, 3.600000f, 62.914288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 36, 52, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 36, 52, 0, 0, 40, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("some_writing_37_52_04_0864",45.580002f,4.200000f,62.742855f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 724, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,90,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_21");
-	SetLink(myObj,724);
-
-
-	myObj = new GameObject("a_dread_spider_27_53_04_0251");
-	pos = new Vector3(32.914284f, 3.600000f, 64.114288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 27, 53, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 27, 53, 4, 0, 28, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("door_030_053");
-	pos = new Vector3(36.857143f, 3.600000f, 63.799999f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,90,0);
-
-	myObj = new GameObject("door_033_053");
-	pos = new Vector3(39.942856f, 3.600000f, 64.599998f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,-90,0);
-
-	myObj = new GameObject("a_dread_spider_35_53_04_0230");
-	pos = new Vector3(42.514286f, 3.600000f, 64.114288f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 35, 53, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 35, 53, 0, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_gravestone_44_53_04_0556",53.314285f,0.000000f,64.114288f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 737, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,26);
-
-	myObj= CreateGameObject("a_gravestone_48_53_04_0555",58.114288f,0.000000f,64.114288f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 738, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,27);
-
-
-	myObj= CreateGameObject("a_light_mace_55_53_04_0531",66.857147f,0.000000f,63.942856f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_008",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_008", "Sprites/OBJECTS_008", "Sprites/OBJECTS_008", 1, 8, 0, 58, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateWeapon(myObj, 6, 10, 4, 5, 15);
-
-
-	myObj= CreateGameObject("a_skull_59_53_04_0597",71.314285f,0.300000f,64.628571f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_gravestone_59_53_04_0598",71.314285f,0.300000f,64.114288f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 732, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,5);
-
-
-	myObj= CreateGameObject("a_skull_27_54_04_0892",32.419998f,3.600000f,65.980003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_27_54_04_0893",32.419998f,3.600000f,65.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_broken_shield_27_54_04_0891",32.742855f,3.600000f,65.980003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_blood_stain_27_54_04_0890",32.571426f,3.600000f,65.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_plant_34_54_04_0912",41.980000f,3.600000f,65.828568f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_plant_34_54_04_0911",41.828568f,3.600000f,65.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_blood_stain_35_54_04_0920",42.514286f,3.600000f,65.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_35_54_04_0918",42.857143f,3.600000f,65.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_broken_sword_35_54_04_0917",42.171432f,3.600000f,65.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_skull_35_54_04_0919",42.514286f,3.600000f,65.657143f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_dread_spider_37_54_04_0231");
-	pos = new Vector3(44.914288f, 3.600000f, 65.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 37, 54, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 37, 54, 0, 0, 33, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj = new GameObject("a_skeleton_45_54_04_0210");
-	pos = new Vector3(54.514286f, 0.000000f, 65.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 45, 54, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 45, 54, 0, 0, 86, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("plate_boots_pairs_of_plate_boots_49_54_04_0540",59.314285f,0.000000f,65.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_043",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_043", "Sprites/OBJECTS_043", "Sprites/armour/armor_f_0011", 75, 43, 0, 34, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateBoots(myObj, "Sprites/armour/armor_f_0011", "Sprites/armour/armor_m_0011", "Sprites/armour/armor_f_0026", "Sprites/armour/armor_m_0026", "Sprites/armour/armor_f_0041", "Sprites/armour/armor_m_0041", "Sprites/armour/armor_f_0056", "Sprites/armour/armor_m_0056", 5, 17);
-
-	myObj= CreateGameObject("a_gravestone_54_54_04_0599",65.314285f,0.000000f,65.485710f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 545, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-	AddGrave(myObj, 28,6);
-
-
-	myObj= CreateGameObject("a_sceptre_59_54_04_0539",71.485710f,0.300000f,65.980003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_170",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", 18, 170, 878, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_bone_59_54_04_0596",70.971428f,0.300000f,64.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_bone_59_54_04_0595",71.657143f,0.300000f,64.820000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_59_54_04_0594",71.314285f,0.300000f,65.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-
-
-	myObj= CreateGameObject("special_tmap_obj_13_55_04_1004",15.620000f,2.400000f,66.599998f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_137", "" , 137, false);
-	SetRotation(myObj,0,270,0);
-
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0885",32.057144f,3.600000f,66.171432f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0884",32.380001f,3.600000f,66.342857f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0883",32.057144f,3.600000f,66.514290f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj = new GameObject("a_dread_spider_29_55_04_0252");
-	pos = new Vector3(35.314285f, 3.600000f, 66.514290f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 29, 55, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 29, 55, 8, 0, 26, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_plant_29_55_04_0881",35.828571f,4.500000f,66.685715f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj= CreateGameObject("a_plant_29_55_04_0882",35.314285f,4.500000f,66.514290f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-
-	myObj= CreateGameObject("an_arrow_43_55_04_0535",51.942856f,0.000000f,66.857147f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_018",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", 1, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-
-	myObj= CreateGameObject("plate_leggings_pairs_of_plate_leggings_49_55_04_0542",59.314285f,0.000000f,66.514290f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_037",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_037", "Sprites/OBJECTS_037", "Sprites/armour/armor_f_0005", 77, 37, 0, 12, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateLeggings(myObj, "Sprites/armour/armor_f_0005", "Sprites/armour/armor_m_0005", "Sprites/armour/armor_f_0020", "Sprites/armour/armor_m_0020", "Sprites/armour/armor_f_0035", "Sprites/armour/armor_m_0035", "Sprites/armour/armor_f_0050", "Sprites/armour/armor_m_0050", 6, 20);
-
-	myObj = new GameObject("a_dread_spider_26_56_04_0232");
-	pos = new Vector3(31.714285f, 3.600000f, 67.714287f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 26, 56, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 26, 56, 0, 0, 31, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,180,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-
-	myObj= CreateGameObject("a_lever_12_57_04_0663",15.085714f,2.700000f,69.085716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 635, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0635",40,0,0,7,373);
-	SetRotation(myObj,0,225,0);
-	SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
-
-	myObj= CreateGameObject("a_lever_19_57_04_0662",23.485716f,2.700000f,69.085716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 640, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0640",40,0,0,7,373);
-	SetRotation(myObj,0,135,0);
-	SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
-
-
-
-	myObj= CreateGameObject("a_broken_axe_27_57_04_0877",32.419998f,3.600000f,69.428566f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_28_57_04_0880",34.457142f,3.600000f,69.085716f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_28_57_04_0879",33.619999f,3.600000f,69.428566f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-
-	myObj= CreateGameObject("a_broken_shield_30_57_04_0820",36.514286f,3.600000f,68.914284f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("door_050_057");
-	pos = new Vector3(61.028568f, 0.000000f, 69.400002f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,-90,0);
-
-
-
-	myObj = new GameObject("door_026_058");
-	pos = new Vector3(31.400000f, 3.600000f, 69.620003f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 0, 63, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_09", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-	myObj = new GameObject("door_051_058");
-	pos = new Vector3(61.400002f, 0.000000f, 70.285713f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-
-
-
-	myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_33_59_04_0798",40.114285f,3.600000f,70.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_stalactite_35_59_04_0781",42.685715f,4.500000f,70.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_stalactite_35_59_04_0780",42.342857f,4.500000f,71.142853f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_plant_37_59_04_0782",44.914288f,3.600000f,71.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj= CreateGameObject("a_plant_37_59_04_0844",45.085712f,3.600000f,71.142853f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-
-	myObj = new GameObject("a_skeleton_38_59_04_0235");
-	pos = new Vector3(46.114288f, 3.600000f, 71.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 38, 59, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 38, 59, 0, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_plant_40_59_04_0797",48.514286f,3.600000f,70.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_42_59_04_0800",51.428570f,3.600000f,71.142853f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_broken_mace_44_59_04_0786",53.314285f,3.600000f,70.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_plant_44_59_04_0783",53.314285f,4.500000f,71.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-
-	myObj = new GameObject("a_skeleton_46_59_04_0249");
-	pos = new Vector3(55.714287f, 3.600000f, 71.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 46, 59, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 46, 59, 8, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_47_59_04_0788",56.914288f,3.600000f,71.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_47_59_04_0799",56.571430f,3.600000f,71.142853f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_red_potion_48_59_04_0795",58.628571f,3.600000f,70.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("special_tmap_obj_48_59_04_1013",58.779999f,3.600000f,71.400002f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_160", "" , 160, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj= CreateGameObject("special_tmap_obj_55_59_04_1005",67.180000f,0.000000f,71.400002f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-	SetRotation(myObj,0,90,0);
-
-
-
-
-
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0683",38.228573f,3.600000f,72.857147f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0682",38.057144f,3.600000f,72.171432f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0684",37.714283f,3.600000f,72.514290f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-
-	myObj= CreateGameObject("a_mushroom_34_60_04_0789",41.657143f,3.600000f,72.857147f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_mushroom_34_60_04_0785",41.142857f,3.600000f,73.028572f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_toadstool_34_60_04_0779",41.485714f,3.600000f,72.685715f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddPotion(myObj);
-
-	myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_36_60_04_0791",43.885712f,3.600000f,72.857147f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_skull_38_60_04_0787",45.942856f,3.600000f,73.028572f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_38_60_04_0796",46.285713f,3.600000f,73.028572f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_skeleton_39_60_04_0248");
-	pos = new Vector3(47.314285f, 3.600000f, 72.514290f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 39, 60, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 39, 60, 8, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("a_stalactite_42_60_04_0790",50.914288f,4.500000f,72.514290f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-
-	myObj= CreateGameObject("a_skull_45_60_04_0792",54.514286f,3.600000f,73.028572f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-
-	myObj = new GameObject("a_skeleton_47_60_04_0250");
-	pos = new Vector3(56.914288f, 3.600000f, 72.514290f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 47, 60, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 47, 60, 12, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,270,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-
-	myObj= CreateGameObject("special_tmap_obj_48_60_04_1014",58.779999f,3.600000f,72.599998f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,	"uw1_160", "" , 160, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj = new GameObject("door_059_060");
-	pos = new Vector3(71.000000f, 0.000000f, 73.028572f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", 4, 324, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/doors/doors_11", 53, 0);
-	SetRotation(myObj,-90,-180,0);
-
-
-	myObj= CreateGameObject("a_lever_12_61_04_0664",15.085714f,2.700000f,73.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 646, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0646",40,0,0,7,381);
-	SetRotation(myObj,0,315,0);
-	SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
-
-	myObj= CreateGameObject("a_lever_19_61_04_0670",23.314285f,2.700000f,73.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 641, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0641",40,0,0,7,373);
-	SetRotation(myObj,0,45,0);
-	SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
-
-
-
-	myObj= CreateGameObject("special_tmap_obj_53_61_04_1010",64.779999f,0.000000f,73.800003f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 1008, 40, 13, 0, 0, 0, 0, 0, 0, 0, 1);
-	CreateTMAP(myObj,"uw1_049", "a_look_trigger_99_99_04_1008", 49, false);
-	SetRotation(myObj,0,90,0);
-
-	myObj = new GameObject("door_054_061");
-	pos = new Vector3(64.820000f, 0.000000f, 73.400002f);
-	myObj.transform.position = pos;
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-	CreateDoor(myObj,"textures/world/uw1_049", 53, 0);
-	SetRotation(myObj,-90,90,0);
-
-
-	myObj= CreateGameObject("some_writing_58_61_04_0949",70.285713f,0.600000f,73.220001f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 721, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
-	SetReadable(myObj);
-	SetRotation(myObj,0,180,0);
-	SetSprite(myObj, "Sprites/tmobj/tmobj_21");
-	SetLink(myObj,721);
-
-//UW Triggers and Traps
-	myObj= CreateGameObject("a_set_variable_trap_99_99_04_0004",120.000000f,1.387500f,119.142860f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 218, 1, 52, 0, 0, 0, 1, 1, 0, 2, 0);
-	SetRotation(myObj,0,45,0);
-	Create_a_set_variable_trap(myObj,37,418,1);
-
-	myObj= CreateGameObject("a_check_variable_trap_99_99_04_0007",118.800003f,2.737500f,119.142860f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 44, 9, 6, 0, 0, 0, 1, 0, 0, 4, 0);
-	SetRotation(myObj,0,270,0);
-	Create_a_check_variable_trap(myObj,73,0,2354,6);
-
-	myObj= CreateGameObject("a_door_trap_99_99_04_0031",119.485710f,2.512500f,118.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 462, 59, 15, 0, 0, 0, 1, 0, 0, 7, 0);
-	SetRotation(myObj,0,90,0);
-	Create_a_door_trap(myObj,59);
-	AddTrapLink(myObj,"a_button_99_99_04_0462");
-
-	myObj= CreateGameObject("a_delete_object_trap_99_99_04_0032",119.657135f,0.075000f,120.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 58, 37, 57, 0, 0, 0, 1, 0, 0, 3, 0);
-	SetRotation(myObj,0,270,0);
-	Create_a_delete_object_trap(myObj);
-
-	myObj= CreateGameObject("a_set_variable_trap_99_99_04_0036",119.657135f,0.225000f,118.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 1020, 13, 4, 0, 0, 0, 1, 1, 1, 15, 0);
-	SetRotation(myObj,0,270,0);
-	Create_a_set_variable_trap(myObj,6,3361,6);
-
-	myObj= CreateGameObject("a_arrow_trap_99_99_04_0061",118.800003f,4.462500f,118.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 0);
-	SetRotation(myObj,0,0,0);
-	Create_a_arrow_trap(myObj, 293, 16);
-
-	myObj= CreateGameObject("a_arrow_trap_99_99_04_0076",118.800003f,2.362500f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 2, 3, 1, 0, 0, 0, 1, 1, 0, 4, 0);
-	SetRotation(myObj,0,225,0);
-	Create_a_arrow_trap(myObj, 97, 0);
-
-	myObj= CreateGameObject("a_do_trap_99_99_04_0261",119.657135f,3.300000f,119.657135f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 744, 62, 33, 0, 0, 0, 1, 1, 0, 5, 0);
-	SetRotation(myObj,0,45,0);
-	Create_trap_base(myObj);
-
-	myObj= CreateGameObject("a_spelltrap_99_99_04_0283",119.657135f,0.900000f,118.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 90, 25, 7, 0, 0, 0, 1, 0, 0, 3, 0);
-	SetRotation(myObj,0,180,0);
-	Create_a_spelltrap(myObj);
-
-	myObj= CreateGameObject("a_damage_trap_99_99_04_0294",119.828575f,0.225000f,119.657135f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_384",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", 37, 384, 928, 11, 13, 0, 0, 0, 1, 1, 0, 3, 0);
-	SetRotation(myObj,0,270,0);
-	Create_a_damage_trap(myObj);
-
-	myObj= CreateGameObject("a_spelltrap_99_99_04_0329",120.000000f,0.225000f,119.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 112, 46, 14, 0, 0, 0, 1, 1, 0, 4, 0);
-	SetRotation(myObj,0,225,0);
-	Create_a_spelltrap(myObj);
-	AddTrapLink(myObj,"a_switch_99_99_04_0112");
-
-	myObj= CreateGameObject("a_create_object_trap_99_99_04_0342",118.971428f,2.737500f,119.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 122, 18, 59, 0, 0, 0, 1, 0, 1, 9, 0);
-	SetRotation(myObj,0,315,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_broadsword_99_99_04_0122");
-
-	myObj= CreateGameObject("a_delete_object_trap_99_99_04_0347",119.485710f,3.150000f,118.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 840, 51, 51, 0, 0, 0, 1, 1, 1, 15, 0);
-	SetRotation(myObj,0,315,0);
-	Create_a_delete_object_trap(myObj);
-
-	myObj= CreateGameObject("a_step_on_trigger_99_99_04_0353",118.800003f,3.562500f,120.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_420",false);
-	CreateTrigger(myObj,6,11,"a_door_050_057");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_420", "Sprites/OBJECTS_420", "Sprites/OBJECTS_420", 58, 420, 990, 6, 11, 0, 0, 0, 1, 0, 1, 12, 0);
-
-	myObj= CreateGameObject("a_delete_object_trap_99_99_04_0380",118.971428f,0.412500f,120.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 996, 9, 3, 0, 0, 0, 1, 1, 1, 11, 0);
-	SetRotation(myObj,0,225,0);
-	Create_a_delete_object_trap(myObj);
-
-	myObj= CreateGameObject("a_teleport_trap_99_99_04_0381",119.485710f,2.700000f,119.657135f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 996, 61, 43, 0, 0, 0, 1, 1, 1, 15, 0);
-	SetRotation(myObj,0,45,0);
-	Create_a_teleport_trap(myObj,(float)73.800000,(float)52.200000,(float)3.600000,72);
-
-	myObj= CreateGameObject("an_inventory_trap_99_99_04_0403",118.800003f,2.025000f,118.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", 49, 396, 32, 17, 14, 0, 0, 0, 1, 1, 0, 5, 0);
-	SetRotation(myObj,0,90,0);
-	Create_an_inventory_trap(myObj);
-	AddTrapLink(myObj,"a_delete_object_trap_99_99_04_0032");
-
-	myObj= CreateGameObject("a_delete_object_trap_99_99_04_0406",119.142860f,0.150000f,118.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 692, 43, 5, 0, 0, 0, 1, 1, 0, 6, 0);
-	SetRotation(myObj,0,90,0);
-	Create_a_delete_object_trap(myObj);
-
-	myObj= CreateGameObject("an_inventory_trap_99_99_04_0421",120.000000f,0.525000f,120.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", 49, 396, 1008, 22, 54, 0, 0, 0, 1, 1, 0, 5, 0);
-	SetRotation(myObj,0,180,0);
-	Create_an_inventory_trap(myObj);
-	AddTrapLink(myObj,"a_look_trigger_99_99_04_1008");
-
-	myObj= CreateGameObject("a_tell_trap_99_99_04_0459",120.000000f,0.000000f,118.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_394",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_394", "Sprites/OBJECTS_394", "Sprites/OBJECTS_394", 47, 394, 259, 31, 42, 0, 0, 0, 1, 0, 1, 10, 0);
-	SetRotation(myObj,0,225,0);
-	Create_a_tell_trap(myObj);
-
-	myObj= CreateGameObject("a_text_string_trap_99_99_04_0469",118.800003f,4.350000f,119.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_400",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", 53, 400, 650, 32, 16, 0, 0, 0, 1, 0, 0, 0, 0);
-	SetRotation(myObj,0,180,0);
-	Create_a_text_string_trap(myObj,9,272);
-	AddTrapLink(myObj,"a_check_variable_trap_03_28_04_0650");
-
-	myObj= CreateGameObject("a_create_object_trap_36_41_04_0484",43.200001f,2.100000f,49.200001f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 200, 48, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_headless_headlesses_36_36_04_0200");
-
-	myObj= CreateGameObject("a_create_object_trap_25_44_04_0491",30.000000f,2.100000f,52.799999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 199, 59, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_mongbat_25_25_04_0199");
-
-	myObj= CreateGameObject("a_move_trigger_54_52_04_0495",65.400002f,3.600000f,63.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,54,53,"a_create_object_trap_54_53_04_0500");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 500, 54, 53, 0, 0, 0, 1, 1, 0, 4, 1);
-
-	myObj= CreateGameObject("a_set_variable_trap_21_61_04_0496",25.200001f,1.275000f,73.714287f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,180,0);
-	Create_a_set_variable_trap(myObj,34,3,4);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0497",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,21,57,"a_set_variable_trap_21_57_04_0498");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 498, 21, 57, 0, 0, 0, 1, 1, 1, 14, 0);
-
-	myObj= CreateGameObject("a_set_variable_trap_21_57_04_0498",25.200001f,1.275000f,68.571434f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,180,0);
-	Create_a_set_variable_trap(myObj,34,1,4);
-
-	myObj= CreateGameObject("a_create_object_trap_54_53_04_0500",65.314285f,0.000000f,64.114288f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 196, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_ghost_54_54_04_0196");
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0504",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,21,61,"a_set_variable_trap_21_61_04_0496");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 496, 21, 61, 0, 0, 0, 1, 1, 1, 14, 0);
-
-	myObj= CreateGameObject("a_create_object_trap_53_49_04_0505",63.599998f,0.000000f,58.799999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 204, 50, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_ghost_53_53_04_0204");
-
-	myObj= CreateGameObject("a_move_trigger_13_48_04_0532",16.200001f,1.200000f,58.200001f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,19,50,"a_create_object_trap_19_50_04_0533");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 533, 19, 50, 0, 0, 0, 1, 1, 0, 4, 1);
-
-	myObj= CreateGameObject("a_create_object_trap_19_50_04_0533",22.799999f,1.200000f,60.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 211, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_fire_elemental_19_19_04_0211");
-
-	myObj= CreateGameObject("a_move_trigger_19_51_04_0534",23.400000f,2.400000f,61.799999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,19,46,"a_arrow_trap_19_46_04_0563");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 563, 19, 46, 0, 0, 0, 1, 1, 0, 4, 1);
-
-	myObj= CreateGameObject("a_move_trigger_14_45_04_0561",17.400000f,1.200000f,54.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,10,45,"a_spelltrap_10_45_04_0562");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 562, 10, 45, 0, 0, 0, 1, 1, 0, 4, 1);
-
-	myObj= CreateGameObject("a_spelltrap_10_45_04_0562",13.028572f,1.912500f,54.514286f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 0, 5, 3, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,90,0);
-	Create_a_spelltrap(myObj);
-
-	myObj= CreateGameObject("a_arrow_trap_19_46_04_0563",22.799999f,4.500000f,55.200001f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 0, 0, 17, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_arrow_trap(myObj, 17, 1);
-
-	myObj= CreateGameObject("a_move_trigger_01_27_04_0622",1.800000f,2.400000f,33.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,1,28,"a_teleport_trap_01_28_04_0623");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 623, 1, 28, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_teleport_trap_01_28_04_0623",1.200000f,0.000000f,33.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 11, 6, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)13.800000,(float)7.800000,(float)2.400000,0);
-
-	myObj= CreateGameObject("a_create_object_trap_11_14_04_0624",13.200000f,2.400000f,16.799999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 201, 55, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_ghost_11_11_04_0201");
-
-	myObj= CreateGameObject("a_move_trigger_99_99_04_0625",119.400002f,1.800000f,119.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,3,27,"a_door_trap_99_99_04_0626");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 626, 3, 27, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_door_trap_99_99_04_0626",118.800003f,2.400000f,118.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 621, 3, 0, 0, 0, 0, 1, 0, 0, 1, 0);
-	SetRotation(myObj,0,0,0);
-	Create_a_door_trap(myObj,3);
-	AddTrapLink(myObj,"a_lock_99_99_04_0621");
-
-	myObj= CreateGameObject("a_move_trigger_18_59_04_0628",22.200001f,2.100000f,71.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_13_59_04_0629",16.200001f,2.100000f,71.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_17_58_04_0630",21.000000f,2.100000f,70.199997f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_14_58_04_0631",17.400000f,2.100000f,70.199997f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_17_60_04_0632",21.000000f,2.100000f,72.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_14_60_04_0633",17.400000f,2.100000f,72.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_set_variable_trap_21_60_04_0634",25.200001f,1.275000f,73.199997f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 7, 0, 0, 0, 1, 0, 0, 6, 1);
-	SetRotation(myObj,0,180,0);
-	Create_a_set_variable_trap(myObj,34,63,4);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0635",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,10,57,"a_check_variable_trap_10_57_04_0643");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 643, 10, 57, 0, 0, 0, 1, 1, 1, 14, 0);
-
-	myObj= CreateGameObject("a_create_object_trap_16_59_04_0636",19.200001f,2.700000f,70.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 934, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"an_iron_ring_16_16_04_0934");
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0639",119.314285f,1.800000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,16,59,"a_create_object_trap_16_59_04_0636");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 636, 16, 59, 0, 0, 0, 1, 1, 1, 12, 0);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0640",119.314285f,2.700000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,20,57,"a_set_variable_trap_20_57_04_0645");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 645, 20, 57, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0641",119.314285f,2.700000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,20,61,"a_set_variable_trap_20_61_04_0644");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 644, 20, 61, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_create_object_trap_52_09_04_0642",62.400002f,2.400000f,10.800000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 202, 58, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_ghoul_52_52_04_0202");
-
-	myObj= CreateGameObject("a_check_variable_trap_10_57_04_0643",12.171429f,1.275000f,69.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 639, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_check_variable_trap(myObj,34,1,7,0);
-	AddTrapLink(myObj,"a_use_trigger_99_99_04_0639");
-
-	myObj= CreateGameObject("a_set_variable_trap_20_61_04_0644",24.000000f,1.275000f,73.542854f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 504, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,270,0);
-	Create_a_set_variable_trap(myObj,34,2,6);
-	AddTrapLink(myObj,"a_use_trigger_99_99_04_0504");
-
-	myObj= CreateGameObject("a_set_variable_trap_20_57_04_0645",24.000000f,1.275000f,68.742859f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 497, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,270,0);
-	Create_a_set_variable_trap(myObj,34,2,6);
-	AddTrapLink(myObj,"a_use_trigger_99_99_04_0497");
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0646",119.314285f,2.700000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,11,61,"a_set_variable_trap_11_61_04_0647");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 647, 11, 61, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_set_variable_trap_11_61_04_0647",13.200000f,1.275000f,73.542854f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,270,0);
-	Create_a_set_variable_trap(myObj,34,2,6);
-
-	myObj= CreateGameObject("a_move_trigger_54_02_04_0648",65.400002f,2.400000f,3.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,52,3,"a_create_object_trap_52_03_04_0661");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 661, 52, 3, 0, 0, 0, 1, 1, 0, 4, 1);
-
-	myObj= CreateGameObject("a_check_variable_trap_03_28_04_0650",3.600000f,1.162500f,34.628571f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 625, 1, 26, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,90,0);
-	Create_a_check_variable_trap(myObj,31,0,470,2);
-	AddTrapLink(myObj,"a_move_trigger_99_99_04_0625");
-
-	myObj= CreateGameObject("a_move_trigger_55_02_04_0651",66.599998f,2.400000f,3.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,57,3,"a_damage_trap_57_03_04_0876");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 876, 57, 3, 0, 0, 0, 1, 1, 0, 4, 1);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0654",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,3,28,"a_check_variable_trap_03_28_04_0650");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 650, 3, 28, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_move_trigger_11_10_04_0656",13.800000f,2.400000f,12.600000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,11,11,"a_teleport_trap_11_11_04_0659");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 659, 11, 11, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0658",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,7,30,"a_set_variable_trap_07_30_04_0953");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 953, 7, 30, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_teleport_trap_11_11_04_0659",13.200000f,0.000000f,13.200000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 4, 27, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)5.400000,(float)33.000000,(float)2.400000,0);
-
-	myObj= CreateGameObject("a_create_object_trap_52_03_04_0661",62.400002f,2.400000f,3.600000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 240, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_dire_ghost_52_52_04_0240");
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0668",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,6,30,"a_set_variable_trap_06_30_04_0952");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 952, 6, 30, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0669",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,5,30,"a_set_variable_trap_05_30_04_0942");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 942, 5, 30, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_use_trigger_99_99_04_0673",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-	CreateTrigger(myObj,57,2,"a_door_trap_99_99_04_0678");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 678, 57, 2, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_door_trap_99_99_04_0678",118.800003f,2.400000f,118.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 672, 3, 0, 0, 0, 0, 1, 0, 0, 2, 0);
-	SetRotation(myObj,0,0,0);
-	Create_a_door_trap(myObj,3);
-	AddTrapLink(myObj,"a_lock_99_99_04_0672");
-
-	myObj= CreateGameObject("a_create_object_trap_36_55_04_0689",43.200001f,3.600000f,66.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 198, 56, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_create_object_trap(myObj);
-	AddTrapLink(myObj,"a_dread_spider_36_36_04_0198");
-
-	myObj= CreateGameObject("a_damage_trap_57_03_04_0876",68.400002f,2.400000f,3.600000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_384",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", 37, 384, 915, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_damage_trap(myObj);
-	AddTrapLink(myObj,"a_move_trigger_99_99_04_0915");
-
-	myObj= CreateGameObject("a_move_trigger_99_99_04_0915",119.400002f,2.400000f,119.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,57,2,"a_door_trap_99_99_04_0678");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 678, 57, 2, 0, 0, 0, 1, 1, 0, 6, 0);
-
-	myObj= CreateGameObject("a_set_variable_trap_05_30_04_0942",6.000000f,1.162500f,36.171429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_set_variable_trap(myObj,31,1,0);
-
-	myObj= CreateGameObject("a_set_variable_trap_06_30_04_0952",7.200000f,1.200000f,36.171429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_set_variable_trap(myObj,32,1,0);
-
-	myObj= CreateGameObject("a_set_variable_trap_07_30_04_0953",8.400000f,1.237500f,36.171429f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_set_variable_trap(myObj,33,1,0);
-
-	myObj= CreateGameObject("a_teleport_trap_21_12_04_0968",25.200001f,0.000000f,14.400000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 3, 12, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)4.200000,(float)15.000000,(float)2.400000,0);
-
-	myObj= CreateGameObject("a_move_trigger_02_12_04_0969",3.000000f,2.400000f,15.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,1,12,"a_teleport_trap_01_12_04_0995");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 995, 1, 12, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_20_12_04_0970",24.600000f,2.400000f,15.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,21,12,"a_teleport_trap_21_12_04_0968");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 968, 21, 12, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_13_55_04_0972",16.200001f,2.400000f,66.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,12,55,"a_teleport_trap_12_55_04_0973");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 973, 12, 55, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_teleport_trap_12_55_04_0973",14.400000f,0.225000f,66.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 11, 55, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)13.800000,(float)66.600000,(float)3.600000,6);
-
-	myObj= CreateGameObject("a_teleport_trap_56_59_04_0974",67.199997f,0.150000f,70.800003f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 56, 59, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)67.800000,(float)71.400000,(float)3.600000,4);
-
-	myObj= CreateGameObject("a_move_trigger_08_44_04_0975",10.200000f,3.600000f,53.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,8,43,"a_teleport_trap_08_43_04_1000");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1000, 8, 43, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_teleport_trap_41_26_04_0978",49.200001f,0.150000f,31.200001f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 41, 26, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)49.800000,(float)31.800000,(float)0.900000,4);
-
-	myObj= CreateGameObject("a_move_trigger_40_26_04_0979",48.599998f,0.900000f,31.799999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,41,26,"a_teleport_trap_41_26_04_0978");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 978, 41, 26, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_55_59_04_0981",66.599998f,0.000000f,71.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,56,59,"a_teleport_trap_56_59_04_0974");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 974, 56, 59, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_move_trigger_99_99_04_0984",119.400002f,0.000000f,119.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,61,32,"a_delete_object_trap_61_32_04_0986");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 986, 61, 32, 0, 0, 0, 1, 1, 0, 4, 0);
-
-	myObj= CreateGameObject("a_change_terrain_trap_60_33_04_0985",72.000000f,0.900000f,39.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 984, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_change_terrain_trap(myObj,60,33,0,0);
-	AddTrapLink(myObj,"a_move_trigger_99_99_04_0984");
-
-	myObj= CreateGameObject("a_delete_object_trap_61_32_04_0986",73.199997f,0.000000f,38.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 983, 60, 32, 0, 0, 0, 1, 1, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_delete_object_trap(myObj);
-
-	myObj= CreateGameObject("a_look_trigger_99_99_04_0987",119.314285f,0.300000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
-	CreateTrigger(myObj,60,33,"a_change_terrain_trap_60_33_04_0985");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 985, 60, 33, 0, 0, 0, 1, 1, 0, 4, 0);
-
-	myObj= CreateGameObject("a_teleport_trap_01_12_04_0995",1.200000f,0.000000f,14.400000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 19, 12, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)23.400000,(float)15.000000,(float)2.400000,0);
-
-	myObj= CreateGameObject("a_teleport_trap_08_43_04_1000",9.600000f,0.150000f,51.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 8, 43, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)10.200000,(float)52.200000,(float)3.600000,4);
-
-	myObj= CreateGameObject("a_move_trigger_34_47_04_1002",41.400002f,3.600000f,57.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,33,47,"a_teleport_trap_33_47_04_1012");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1012, 33, 47, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_change_terrain_trap_54_61_04_1006",64.800003f,0.000000f,73.199997f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 1007, 3, 13, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_change_terrain_trap(myObj,54,61,0,0);
-	AddTrapLink(myObj,"a_delete_object_trap_54_61_04_1007");
-
-	myObj= CreateGameObject("a_delete_object_trap_54_61_04_1007",64.800003f,0.000000f,73.199997f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 1010, 53, 61, 0, 0, 0, 1, 1, 0, 0, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_delete_object_trap(myObj);
-
-	myObj= CreateGameObject("a_look_trigger_99_99_04_1008",119.314285f,0.000000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
-	CreateTrigger(myObj,54,61,"a_change_terrain_trap_54_61_04_1006");
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 1006, 54, 61, 0, 0, 0, 1, 1, 0, 4, 0);
-
-	myObj= CreateGameObject("a_teleport_trap_30_47_04_1011",36.000000f,0.150000f,56.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 30, 47, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)36.600000,(float)57.000000,(float)2.100000,4);
-
-	myObj= CreateGameObject("a_teleport_trap_33_47_04_1012",39.599998f,0.150000f,56.400002f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 34, 47, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)41.400000,(float)57.000000,(float)3.600000,4);
-
-	myObj= CreateGameObject("a_move_trigger_29_47_04_1019",35.400002f,3.600000f,57.000000f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,30,47,"a_teleport_trap_30_47_04_1011");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1011, 30, 47, 0, 0, 0, 1, 1, 0, 6, 1);
-
-	myObj= CreateGameObject("a_teleport_trap_43_29_04_1021",51.599998f,0.225000f,34.799999f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 43, 27, 0, 0, 0, 1, 0, 0, 1, 1);
-	SetRotation(myObj,0,0,0);
-	Create_a_teleport_trap(myObj,(float)52.200000,(float)33.000000,(float)0.900000,6);
-
-	myObj= CreateGameObject("a_move_trigger_43_30_04_1023",52.200001f,3.300000f,36.599998f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-	CreateMoveTrigger(myObj,43,29,"a_teleport_trap_43_29_04_1021");
-	CreateCollider(myObj,1.20f,1.20f,1.20f);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1021, 43, 29, 0, 0, 0, 1, 1, 0, 6, 1);
-
-//Supplementary object 122
-	myObj= CreateGameObject("a_broadsword_99_99_04_0122",119.828575f,0.375000f,119.485710f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_006",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-	CreateWeapon(myObj, 13, 6, 10, 3, 34);
-//Supplementary object 196
-	myObj = new GameObject("a_ghost_54_54_04_0196");
-	pos = new Vector3(119.314285f, 0.900000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 27);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 54, 53, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 27, 54, 53, 0, 0, 234, 0, 0, 7, 3, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 198
-	myObj = new GameObject("a_dread_spider_36_36_04_0198");
-	pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 36, 55, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 36, 55, 0, 0, 35, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 199
-	myObj = new GameObject("a_mongbat_25_25_04_0199");
-	pos = new Vector3(119.314285f, 3.300000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"81","Sprites/OBJECTS_081", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", 0, 81, 0, 25, 44, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 25, 44, 0, 0, 20, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh5");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 200
-	myObj = new GameObject("a_headless_headlesses_36_36_04_0200");
-	pos = new Vector3(119.314285f, 2.100000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 36, 41, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 36, 41, 0, 0, 59, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 201
-	myObj = new GameObject("a_ghost_11_11_04_0201");
-	pos = new Vector3(119.314285f, 2.700000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 11, 14, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 11, 14, 0, 0, 49, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 202
-	myObj = new GameObject("a_ghoul_52_52_04_0202");
-	pos = new Vector3(119.314285f, 2.400000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 52, 9, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 52, 9, 0, 0, 38, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 204
-	myObj = new GameObject("a_ghost_53_53_04_0204");
-	pos = new Vector3(119.314285f, 0.000000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 53, 49, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 53, 49, 0, 0, 33, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 211
-	myObj = new GameObject("a_fire_elemental_19_19_04_0211");
-	pos = new Vector3(119.314285f, 1.200000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"120","Sprites/OBJECTS_120", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", 0, 120, 0, 19, 50, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 19, 50, 0, 0, 80, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh0");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-//Supplementary object 240
-	myObj = new GameObject("a_dire_ghost_52_52_04_0240");
-	pos = new Vector3(119.314285f, 3.000000f, 119.314285f);
-	myObj.transform.position = pos;
-	CreateNPC(myObj,"113","Sprites/OBJECTS_113", 0);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", 0, 113, 665, 52, 3, 0, 1, 0, 1, 0, 0, 0, 1);
-	SetNPCProps(myObj, 0, 52, 3, 0, 0, 70, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh0");
-	SetRotation(myObj,0,0,0);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 255, 255, 255);
-	////NPC container with items
-
-	AddObjectToContainer("a_key_015_1", ParentContainer, 0);
-	////Container contents complete
-
-//Supplementary object 462
-	myObj= CreateGameObject("a_button_99_99_04_0462",118.800003f,2.625000f,118.971428f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_370",false);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_370", "Sprites/OBJECTS_370", "Sprites/OBJECTS_370", 8, 370, 792, 1, 0, 0, 1, 0, 0, 0, 0, 4, 1);
-	CreateUWActivators(myObj,"ButtonHandler","a_skull_45_60_04_0792",1,0,4,7,370);
-	SetRotation(myObj,0,225,0);
-	SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0002", "Sprites/tmflat/tmflat_0010");
-//Supplementary object 478
-	myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_99_99_04_0478",119.314285f,0.900000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_041", "Sprites/OBJECTS_041", "Sprites/armour/armor_f_0009", 75, 41, 0, 62, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateBoots(myObj, "Sprites/armour/armor_f_0009", "Sprites/armour/armor_m_0009", "Sprites/armour/armor_f_0024", "Sprites/armour/armor_m_0024", "Sprites/armour/armor_f_0039", "Sprites/armour/armor_m_0039", "Sprites/armour/armor_f_0054", "Sprites/armour/armor_m_0054", 1, 3);
-//Supplementary object 479
-	myObj= CreateGameObject("leather_gloves_pairs_of_leather_gloves_99_99_04_0479",119.314285f,0.900000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_038",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_038", "Sprites/OBJECTS_038", "Sprites/armour/armor_f_0006", 76, 38, 0, 47, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateGloves(myObj, "Sprites/armour/armor_f_0006", "Sprites/armour/armor_m_0006", "Sprites/armour/armor_f_0021", "Sprites/armour/armor_m_0021", "Sprites/armour/armor_f_0036", "Sprites/armour/armor_m_0036", "Sprites/armour/armor_f_0051", "Sprites/armour/armor_m_0051", 1, 2);
-//Supplementary object 480
-	myObj= CreateGameObject("leather_leggings_pairs_of_leather_leggings_99_99_04_0480",119.314285f,0.900000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_035",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_035", "Sprites/OBJECTS_035", "Sprites/armour/armor_f_0003", 77, 35, 0, 51, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateLeggings(myObj, "Sprites/armour/armor_f_0003", "Sprites/armour/armor_m_0003", "Sprites/armour/armor_f_0018", "Sprites/armour/armor_m_0018", "Sprites/armour/armor_f_0033", "Sprites/armour/armor_m_0033", "Sprites/armour/armor_f_0048", "Sprites/armour/armor_m_0048", 2, 4);
-//Supplementary object 482
-	myObj= CreateGameObject("a_leather_vest_99_99_04_0482",119.314285f,0.900000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_032",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_032", "Sprites/OBJECTS_032", "Sprites/armour/armor_f_0000", 2, 32, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	CreateArmour(myObj, "Sprites/armour/armor_f_0000", "Sprites/armour/armor_m_0000", "Sprites/armour/armor_f_0015", "Sprites/armour/armor_m_0015", "Sprites/armour/armor_f_0030", "Sprites/armour/armor_m_0030", "Sprites/armour/armor_f_0045", "Sprites/armour/armor_m_0045", 2, 8);
-//Supplementary object 571
-	myObj= CreateGameObject("a_red_gem_99_99_04_0571",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-//Supplementary object 572
-	myObj= CreateGameObject("a_pouch_pouches_99_99_04_0572",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_134",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", "Sprites/OBJECTS_135", 19, 134, 571, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 20, 255, 255);
-	AddObjectToContainer("a_red_gem_99_99_04_0571", ParentContainer, 0);
-	////Container contents complete
-
-//Supplementary object 578
-	myObj= CreateGameObject("a_book_99_99_04_0578",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 643, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetLink(myObj,643);
-//Supplementary object 579
-	myObj= CreateGameObject("a_book_99_99_04_0579",119.314285f,0.000000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 642, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetLink(myObj,642);
-//Supplementary object 580
-	myObj= CreateGameObject("a_fish_fish_99_99_04_0580",119.314285f,0.000000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetFood(myObj);
-//Supplementary object 581
-	myObj= CreateGameObject("a_large_blue_gem_99_99_04_0581",119.314285f,0.000000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_165",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_165", "Sprites/OBJECTS_165", "Sprites/OBJECTS_165", 18, 165, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-//Supplementary object 583
-	myObj= CreateGameObject("a_ruby_rubies_99_99_04_0583",119.314285f,3.300000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-//Supplementary object 584
-	myObj= CreateGameObject("a_book_99_99_04_0584",119.314285f,3.300000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_305",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", 11, 305, 641, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetLink(myObj,641);
-//Supplementary object 585
-	myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_04_0585",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 3, 20, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetFood(myObj);
-//Supplementary object 586
-	myObj= CreateGameObject("a_flute_99_99_04_0586",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_292",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_292", "Sprites/OBJECTS_292", "Sprites/OBJECTS_292", 26, 292, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddInstrument(myObj);
-//Supplementary object 587
-	myObj= CreateGameObject("a_lockpick_99_99_04_0587",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_257",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 79, 257, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddLockpick(myObj);
-//Supplementary object 588
-	myObj= CreateGameObject("a_book_99_99_04_0588",119.314285f,2.100000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_304",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", 11, 304, 640, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetReadable(myObj);
-	SetLink(myObj,640);
-//Supplementary object 601
-	myObj= CreateGameObject("a_Jux_stone_99_99_04_0601",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_241", "Sprites/OBJECTS_241", 6, 241, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetObjectAsRuneStone(myObj);
-//Supplementary object 602
-	myObj= CreateGameObject("a_Nox_stone_99_99_04_0602",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_245", "Sprites/OBJECTS_245", 6, 245, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetObjectAsRuneStone(myObj);
-//Supplementary object 603
-	myObj= CreateGameObject("a_Grav_stone_99_99_04_0603",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_238", "Sprites/OBJECTS_238", 6, 238, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetObjectAsRuneStone(myObj);
-//Supplementary object 604
-	myObj= CreateGameObject("a_pack_99_99_04_0604",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_130",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_130", "Sprites/OBJECTS_130", "Sprites/OBJECTS_131", 19, 130, 578, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	////Container contents
-	ParentContainer = CreateContainer(myObj, 250, 255, 255);
-	AddObjectToContainer("a_book_99_99_04_0578", ParentContainer, 0);
-	AddObjectToContainer("a_Grav_stone_99_99_04_0603", ParentContainer, 1);
-	AddObjectToContainer("a_Nox_stone_99_99_04_0602", ParentContainer, 2);
-	AddObjectToContainer("a_Jux_stone_99_99_04_0601", ParentContainer, 3);
-	////Container contents complete
-
-//Supplementary object 615
-	myObj= CreateGameObject("a_Rel_stone_99_99_04_0615",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_249", "Sprites/OBJECTS_249", 6, 249, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetObjectAsRuneStone(myObj);
-//Supplementary object 616
-	myObj= CreateGameObject("a_red_gem_99_99_04_0616",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
-//Supplementary object 618
-	myObj= CreateGameObject("a_wand_99_99_04_0618",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_155",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_155", "Sprites/OBJECTS_155", "Sprites/OBJECTS_155", 12, 155, 617, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddWand(myObj, 527, 14);
-//Supplementary object 619
-	myObj= CreateGameObject("a_Tym_stone_99_99_04_0619",119.314285f,2.400000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_251", "Sprites/OBJECTS_251", 6, 251, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetObjectAsRuneStone(myObj);
-//Supplementary object 621
-//Supplementary object 672
-//Supplementary object 934
-	myObj= CreateGameObject("an_iron_ring_16_16_04_0934",119.314285f,2.700000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_054",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_054", "Sprites/OBJECTS_054", "Sprites/OBJECTS_054", 74, 54, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-	AddRing(myObj);
-//Supplementary object 943
-	myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_04_0943",119.314285f,3.300000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	SetFood(myObj);
-//Supplementary object 944
-	myObj= CreateGameObject("a_mandolin_99_99_04_0944",119.314285f,3.300000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", 26, 291, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-	AddInstrument(myObj);
-//Supplementary object 945
-	myObj= CreateGameObject("a_glowing_rock_99_99_04_0945",119.314285f,3.300000f,119.314285f);
-	CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-	CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-	AddObj_base(myObj);
+		
+		
+		GameObject myObj;
+		Vector3 pos;
+		GameObject invMarker = GameObject.Find("InventoryMarker");
+		Container ParentContainer;//For containers
+		myObj= CreateGameObject("a_glowing_rock_02_02_04_0719",2.914286f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_02_04_0720",5.314286f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_02_04_0721",7.714286f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_02_04_0722",10.114285f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_ghost_09_02_04_0223");
+		pos = new Vector3(11.314286f, 3.000000f, 2.914286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"101","Sprites/OBJECTS_101", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", 0, 101, 0, 9, 2, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 9, 2, 0, 0, 5, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_02_04_0723",12.514286f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_02_04_0739",14.914286f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_02_04_0740",17.314285f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_02_04_0741",19.714287f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_02_04_0742",22.114285f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_02_04_0743",24.514284f,2.700000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_rock_hammer_41_02_04_0566",50.057144f,2.400000f,2.571429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_296",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_296", "Sprites/OBJECTS_296", "Sprites/OBJECTS_296", 16, 296, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_41_02_04_0568",49.885712f,2.400000f,3.085714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_41_02_04_0569",49.714287f,2.400000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_42_02_04_0567",50.571430f,2.400000f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_oil_flask_49_02_04_0565",59.657143f,2.400000f,2.742857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
+		
+		
+		
+		myObj= CreateGameObject("some_writing_57_02_04_0481",69.257141f,3.412500f,2.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 749, 63, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,749);
+		
+		myObj = new GameObject("door_057_002");
+		pos = new Vector3(69.085716f, 3.300000f, 2.600000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_334", "Sprites/OBJECTS_334", "Sprites/OBJECTS_334", 30, 334, 675, 63, 0, 1, 1, 0, 1, 0, 1, 12, 1);
+		CreatePortcullis(myObj, 15, 1);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj= CreateGameObject("chain_gauntlets_pairs_of_chain_gauntlets_41_03_04_0522",49.714287f,2.400000f,4.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_039",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_039", "Sprites/OBJECTS_039", "Sprites/armour/armor_f_0007", 76, 39, 706, 32, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateGloves(myObj, "Sprites/armour/armor_f_0007", "Sprites/armour/armor_m_0007", "Sprites/armour/armor_f_0022", "Sprites/armour/armor_m_0022", "Sprites/armour/armor_f_0037", "Sprites/armour/armor_m_0037", "Sprites/armour/armor_f_0052", "Sprites/armour/armor_m_0052", 3, 9);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_41_03_04_0570",49.714287f,2.400000f,4.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_dire_ghost_42_03_04_0219");
+		pos = new Vector3(50.914288f, 3.000000f, 4.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"113","Sprites/OBJECTS_113", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", 0, 113, 0, 42, 3, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 42, 3, 0, 0, 67, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_scroll_43_03_04_0613",52.457142f,2.400000f,4.628572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 547, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		
+		
+		myObj= CreateGameObject("a_lever_58_03_04_0679",69.620003f,3.000000f,3.771429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 673, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0673",40,0,0,7,381);
+		SetRotation(myObj,0,270,0);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
+		
+		myObj= CreateGameObject("a_glowing_rock_02_04_04_0718",2.914286f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_04_04_0729",5.314286f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_04_04_0728",7.714286f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_04_04_0725",10.114285f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_04_04_0724",12.514286f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_04_04_0738",14.914286f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_04_04_0737",17.314285f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_04_04_0711",19.714287f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_04_04_0745",22.114285f,2.700000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_04_04_0677",24.020000f,2.400000f,5.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_buckler_34_05_04_0524",40.971432f,0.600000f,6.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_062",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_062", "Sprites/OBJECTS_062", "Sprites/OBJECTS_062", 78, 62, 708, 27, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		AddShield(myObj);
+		
+		myObj = new GameObject("door_053_005");
+		pos = new Vector3(63.799999f, 2.400000f, 6.171429f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 655, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_09", 15, 1);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj= CreateGameObject("some_writing_53_05_04_0671",64.114288f,3.600000f,6.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 726, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,0,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,726);
+		
+		myObj= CreateGameObject("a_jeweled_sword_57_05_04_0515",69.085716f,2.400000f,6.857143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_013",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", 1, 13, 705, 41, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateWeapon(myObj, 14, 7, 11, 3, 255);
+		
+		myObj= CreateGameObject("a_glowing_rock_02_06_04_0731",2.914286f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_06_04_0730",5.314286f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_06_04_0727",7.714286f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_06_04_0726",10.114285f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_06_04_0734",12.514286f,2.737500f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_06_04_0733",14.914286f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_06_04_0967",17.314285f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_06_04_0996",19.714287f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_06_04_0746",22.114285f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_06_04_0747",24.514284f,2.700000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_sack_50_06_04_0600",60.514286f,2.400000f,7.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 572, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_pouch_pouches_99_99_04_0572", ParentContainer, 0);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_gold_coffer_52_06_04_0620",62.571430f,2.400000f,7.885714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_138",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_138", "Sprites/OBJECTS_138", "Sprites/OBJECTS_139", 19, 138, 618, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_wand_99_99_04_0618", ParentContainer, 0);
+		AddObjectToContainer("a_Tym_stone_99_99_04_0619", ParentContainer, 1);
+		AddObjectToContainer("a_Rel_stone_99_99_04_0615", ParentContainer, 2);
+		AddObjectToContainer("a_red_gem_99_99_04_0616", ParentContainer, 3);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_gravestone_52_06_04_0950",62.914288f,2.400000f,7.885714f);
+		SetRotation(myObj,0,90,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 727, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,7);
+		
+		myObj= CreateGameObject("a_battle_axe_54_06_04_0516",65.828568f,2.400000f,7.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_001",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", 1, 1, 0, 19, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 14, 7, 2, 4, 34);
+		
+		myObj= CreateGameObject("a_broken_mace_44_07_04_0518",53.828568f,2.400000f,8.571429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_02_08_04_0994",2.914286f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_08_04_0971",5.314286f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_08_04_0998",7.714286f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_08_04_0736",10.114285f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_08_04_0735",12.514286f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_08_04_0732",14.914286f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_08_04_0997",17.314285f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_08_04_0750",19.714287f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_ghost_17_08_04_0222");
+		pos = new Vector3(20.914284f, 3.000000f, 10.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 17, 8, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 17, 8, 0, 0, 53, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_08_04_0749",22.114285f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_08_04_0748",24.514284f,2.700000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_mage_34_08_04_0254");
+		pos = new Vector3(40.971432f, 0.600000f, 10.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"107","Sprites/OBJECTS_107", 23);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", 0, 107, 0, 34, 8, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 23, 34, 8, 0, 0, 45, 0, 0, 7, 2, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_skull_45_08_04_0521",54.685715f,2.400000f,10.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_bone_48_08_04_0519",57.771431f,2.400000f,9.771429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_mandolin_52_08_04_0564",62.742855f,2.400000f,9.942857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", 26, 291, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddInstrument(myObj);
+		
+		myObj= CreateGameObject("a_red_potion_58_08_04_0824",69.942856f,2.400000f,10.628572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 581, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj = new GameObject("a_ghoul_43_09_04_0236");
+		pos = new Vector3(52.114288f, 2.400000f, 11.314286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 43, 9, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 43, 9, 0, 0, 60, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_skull_44_09_04_0614",53.657143f,2.400000f,11.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_44_09_04_0612",53.828568f,2.400000f,10.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_blood_stain_50_09_04_0517",60.685715f,2.400000f,10.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		
+		myObj= CreateGameObject("a_glowing_rock_06_10_04_0717",7.714286f,2.700000f,12.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_10_04_0966",10.114285f,2.700000f,12.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_writing_09_10_04_0657",11.142858f,3.000000f,13.180000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 731, 40, 0, 0, 1, 0, 0, 1, 1, 8, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,0,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,731);
+		
+		
+		myObj= CreateGameObject("some_writing_13_10_04_0666",16.285713f,3.000000f,13.180000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 731, 40, 0, 0, 1, 0, 0, 1, 1, 8, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,0,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,731);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_10_04_0751",19.714287f,2.700000f,12.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("mail_leggings_pairs_of_mail_leggings_60_10_04_0523",72.857147f,2.400000f,12.685714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_036",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_036", "Sprites/OBJECTS_036", "Sprites/armour/armor_f_0004", 77, 36, 712, 47, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateLeggings(myObj, "Sprites/armour/armor_f_0004", "Sprites/armour/armor_m_0004", "Sprites/armour/armor_f_0019", "Sprites/armour/armor_m_0019", "Sprites/armour/armor_f_0034", "Sprites/armour/armor_m_0034", "Sprites/armour/armor_f_0049", "Sprites/armour/armor_m_0049", 4, 12);
+		
+		myObj = new GameObject("a_ghost_06_11_04_0225");
+		pos = new Vector3(7.714286f, 3.000000f, 13.714286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 6, 11, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 6, 11, 0, 0, 37, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		
+		
+		myObj= CreateGameObject("a_glowing_rock_06_12_04_0716",7.714286f,2.700000f,14.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_12_04_0752",19.714287f,2.700000f,14.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		
+		myObj= CreateGameObject("a_chain_cowl_35_12_04_0530",43.028568f,0.600000f,15.257142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 713, 24, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3217056, 3217056);
+		
+		myObj= CreateGameObject("a_green_potion_44_12_04_0857",53.657143f,2.400000f,15.257142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 520, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_plant_55_12_04_0506",66.685715f,2.400000f,15.257142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		myObj= CreateGameObject("a_blood_stain_59_12_04_0608",71.828568f,2.400000f,14.742858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_plant_59_12_04_0609",70.971428f,2.400000f,14.571428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_broken_mace_59_12_04_0610",71.314285f,2.400000f,14.742858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_ghost_60_13_04_0221");
+		pos = new Vector3(72.514290f, 3.000000f, 16.114286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 604, 60, 13, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 60, 13, 0, 0, 42, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_pack_99_99_04_0604", ParentContainer, 0);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_glowing_rock_06_14_04_0715",7.714286f,2.700000f,17.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		myObj= CreateGameObject("a_glowing_rock_16_14_04_0753",19.714287f,2.700000f,17.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_42_14_04_0507",50.742855f,2.400000f,17.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_59_14_04_0607",71.314285f,2.400000f,17.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_59_14_04_0606",71.657143f,2.400000f,17.828571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_59_14_04_0605",71.980003f,2.400000f,17.828571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_glowing_rock_02_16_04_0712",2.914286f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_16_04_0713",5.314286f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_16_04_0714",7.714286f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_16_04_0754",10.114285f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_16_04_0755",12.514286f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_16_04_0758",14.914286f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_16_04_0759",17.314285f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_16_04_0760",19.714287f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_16_04_0761",22.114285f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_16_04_0778",24.514284f,2.700000f,19.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_mace_42_16_04_0575",50.571430f,2.100000f,19.371428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_009",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 8, 16, 5, 5, 25);
+		
+		myObj= CreateGameObject("a_blood_stain_42_16_04_0573",50.742855f,2.100000f,19.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj= CreateGameObject("a_chain_cowl_42_16_04_0574",50.742855f,2.100000f,19.885714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3217056, 3217056);
+		
+		myObj= CreateGameObject("a_plant_59_16_04_0513",71.142853f,0.900000f,20.228571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		myObj = new GameObject("a_ghoul_43_17_04_0220");
+		pos = new Vector3(52.114288f, 2.100000f, 20.914284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 43, 17, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 43, 17, 0, 0, 45, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("special_tmap_obj_52_17_04_0611",63.580002f,1.200000f,21.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("a_glowing_rock_02_18_04_0768",2.914286f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_18_04_0769",5.314286f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_18_04_0770",7.714286f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_18_04_0771",10.114285f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_18_04_0772",12.514286f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_18_04_0773",14.914286f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_18_04_0774",17.314285f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_ghost_15_18_04_0224");
+		pos = new Vector3(18.514286f, 3.000000f, 22.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"101","Sprites/OBJECTS_101", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", 0, 101, 0, 15, 18, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 15, 18, 0, 0, 3, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_18_04_0775",19.714287f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_18_04_0776",22.114285f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_18_04_0777",24.514284f,2.700000f,22.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_34_19_04_0510",40.820000f,1.500000f,23.400000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_36_19_04_0525",44.057144f,0.900000f,23.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_02_20_04_0767",2.914286f,2.700000f,24.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_20_04_0766",7.714286f,2.400000f,24.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_20_04_0765",12.514286f,2.400000f,24.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_20_04_0764",14.914286f,2.400000f,24.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_20_04_0763",19.714287f,2.400000f,24.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_20_04_0762",24.514284f,2.700000f,24.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_45_20_04_0511",55.180000f,1.500000f,24.600000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj = new GameObject("a_ghoul_54_20_04_0229");
+		pos = new Vector3(65.314285f, 0.900000f, 24.514284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 5);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 54, 20, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 5, 54, 20, 0, 0, 39, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_blood_stain_50_21_04_0955",60.514286f,0.900000f,25.714285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_glowing_rock_02_22_04_0854",2.914286f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_04_22_04_0827",5.314286f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_06_22_04_0826",7.714286f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_08_22_04_0825",10.114285f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_10_22_04_0842",12.514286f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_12_22_04_0841",14.914286f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_14_22_04_0840",17.314285f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_16_22_04_0846",19.714287f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_18_22_04_0853",22.114285f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_glowing_rock_20_22_04_0852",24.514284f,2.700000f,26.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_ghoul_49_22_04_0255");
+		pos = new Vector3(59.314285f, 0.900000f, 26.914284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 4);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 49, 22, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 4, 49, 22, 0, 0, 51, 0, 0, 8, 2, 1, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,315,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_ghoul_34_23_04_0228");
+		pos = new Vector3(41.314285f, 0.900000f, 28.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 6);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 482, 34, 23, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 6, 34, 23, 0, 0, 43, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_leather_vest_99_99_04_0482", ParentContainer, 0);
+		AddObjectToContainer("leather_leggings_pairs_of_leather_leggings_99_99_04_0480", ParentContainer, 1);
+		AddObjectToContainer("leather_gloves_pairs_of_leather_gloves_99_99_04_0479", ParentContainer, 2);
+		AddObjectToContainer("leather_boots_pairs_of_leather_boots_99_99_04_0478", ParentContainer, 3);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_broken_sword_43_23_04_0509",52.457142f,0.900000f,27.771429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_23_04_0957",63.257145f,0.900000f,28.780001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_writing_06_24_04_0951",7.220000f,3.000000f,29.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 728, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,728);
+		
+		myObj= CreateGameObject("a_scroll_17_24_04_0576",20.914284f,3.000000f,29.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_317",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", 11, 317, 644, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,644);
+		
+		myObj= CreateGameObject("a_blood_stain_50_24_04_0954",60.857143f,0.900000f,29.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_skull_50_24_04_0963",60.514286f,0.900000f,29.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_51_24_04_0956",61.885712f,0.900000f,28.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_bone_51_24_04_0961",61.371429f,0.900000f,29.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_52_24_04_0960",62.914288f,0.900000f,29.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_24_04_0959",62.571430f,0.900000f,29.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_52_24_04_0958",63.257145f,0.900000f,29.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("door_006_025");
+		pos = new Vector3(7.400000f, 2.400000f, 30.342857f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", 4, 323, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_07", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_25_04_0529",46.457142f,0.900000f,30.514284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_38_26_04_0512",45.619999f,1.500000f,31.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_38_26_04_0526",45.942856f,0.900000f,31.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_skull_39_26_04_0527",47.314285f,0.900000f,31.714285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_39_26_04_0528",47.657143f,0.900000f,32.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_40_26_04_0980",49.180000f,0.900000f,31.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,90,0);
+		
+		
+		
+		myObj = new GameObject("a_ghoul_58_26_04_0226");
+		pos = new Vector3(70.114288f, 0.900000f, 31.714285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 162);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 58, 26, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 162, 58, 26, 0, 0, 60, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj= CreateGameObject("a_scroll_02_27_04_0899",3.085714f,2.400000f,32.571426f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 544, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj = new GameObject("door_003_027");
+		pos = new Vector3(4.628572f, 2.400000f, 32.599998f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 627, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreatePortcullis(myObj, 0, 1);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj= CreateGameObject("a_blood_stain_38_27_04_0520",46.457142f,0.900000f,33.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		
+		
+		myObj= CreateGameObject("a_lever_04_28_04_0667",4.820000f,3.000000f,34.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 654, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0654",40,0,0,7,381);
+		SetRotation(myObj,0,270,0);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
+		
+		myObj= CreateGameObject("some_writing_04_28_04_0649",4.820000f,3.000000f,33.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 730, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,730);
+		
+		myObj= CreateGameObject("some_writing_05_29_04_0652",6.514286f,3.000000f,35.980000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 729, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,0,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,729);
+		
+		myObj= CreateGameObject("a_lever_06_29_04_0680",7.220000f,3.000000f,35.980000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 669, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0669",40,0,0,7,353);
+		SetRotation(myObj,0,0,0);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
+		
+		myObj= CreateGameObject("a_lever_06_29_04_0653",7.714286f,3.000000f,35.980000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 668, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0668",40,0,0,7,353);
+		SetRotation(myObj,0,0,0);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
+		
+		myObj= CreateGameObject("a_lever_06_29_04_0681",8.228571f,3.000000f,35.980000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 658, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0658",40,0,0,7,353);
+		SetRotation(myObj,0,0,0);
+		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
+		
+		myObj= CreateGameObject("special_tmap_obj_29_29_04_0982",35.314285f,2.700000f,35.314285f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_142", "" , 142, false);
+		SetRotation(myObj,0,45,0);
+		
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_45_29_04_0508",54.514286f,0.900000f,35.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_43_30_04_1022",52.200001f,3.300000f,36.020000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_137", "" , 137, false);
+		SetRotation(myObj,0,180,0);
+		
+		
+		myObj= CreateGameObject("a_scroll_03_31_04_0823",4.457143f,3.300000f,38.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_313",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", 13, 313, 553, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj= CreateGameObject("a_broken_axe_09_31_04_0837",11.142858f,3.300000f,37.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_10_31_04_0838",13.180000f,3.300000f,37.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_11_31_04_0687",14.228572f,3.300000f,37.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_broken_sword_13_31_04_0699",16.285713f,3.300000f,37.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_15_31_04_0705",18.514286f,3.300000f,37.714283f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_17_31_04_0692",20.914284f,4.500000f,37.714283f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_plant_18_31_04_0693",22.114285f,3.000000f,37.714283f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		myObj= CreateGameObject("a_plant_20_31_04_0701",25.028572f,2.400000f,37.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_20_31_04_0703",24.514284f,2.400000f,37.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_skull_21_31_04_0700",25.714285f,2.100000f,37.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_21_31_04_0706",25.714285f,4.500000f,37.714283f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_23_31_04_0708",28.114285f,2.100000f,37.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_46_31_04_0744",56.380001f,3.600000f,37.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_161", "" , 161, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("a_stalactite_08_32_04_0836",10.114285f,4.500000f,38.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_skull_10_32_04_0839",12.514286f,3.300000f,39.257145f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_11_32_04_0688",13.714286f,4.500000f,38.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_skull_13_32_04_0698",16.285713f,3.300000f,39.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_crossbow_bolt_15_32_04_0908",18.171429f,3.300000f,39.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		
+		myObj= CreateGameObject("a_stalactite_15_32_04_0690",18.514286f,4.500000f,38.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_blood_stain_17_32_04_0691",20.571428f,3.300000f,38.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_18_32_04_0695",22.114285f,3.000000f,39.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_19_32_04_0694",23.485716f,2.700000f,39.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_20_32_04_0697",24.171429f,2.400000f,39.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_20_32_04_0696",24.857143f,2.400000f,39.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_stalactite_21_32_04_0704",25.714285f,4.500000f,38.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_stalactite_22_32_04_0707",26.914284f,4.500000f,38.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_plant_23_32_04_0710",28.285715f,2.100000f,39.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_24_32_04_0709",29.314285f,2.100000f,39.428574f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_46_32_04_0757",56.380001f,3.600000f,39.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_161", "" , 161, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("special_tmap_obj_60_32_04_0983",72.599998f,0.900000f,39.580002f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 987, 40, 13, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,"uw1_049", "a_look_trigger_99_99_04_0987", 49, false);
+		SetRotation(myObj,0,0,0);
+		
+		
+		myObj= CreateGameObject("a_plant_06_33_04_0848",8.057143f,3.300000f,40.285717f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_plant_08_33_04_0850",9.942857f,3.300000f,39.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj = new GameObject("door_060_033");
+		pos = new Vector3(73.000000f, 0.900000f, 39.619999f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/world/uw1_049", 53, 0);
+		SetRotation(myObj,-90,0,0);
+		
+		
+		myObj = new GameObject("a_giant_rat_06_34_04_0237");
+		pos = new Vector3(7.885714f, 3.300000f, 40.820000f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 6, 34, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 6, 34, 0, 0, 15, 0, 0, 8, 2, 1, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,90,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_fountain_13_34_04_0686",16.114286f,3.000000f,41.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", 82, 302, 1, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		AddFountain(myObj);
+		
+		myObj= CreateGameObject("a_fountain_13_34_04_0685",16.114286f,3.000000f,41.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 5, 0, 0, 5, 4, 1, 0, 0, 1);
+		AddAnimationOverlay(myObj,5,4);
+		
+		myObj= CreateGameObject("special_tmap_obj_34_34_04_0977",41.657143f,2.700000f,41.314285f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_142", "" , 142, false);
+		SetRotation(myObj,0,225,0);
+		
+		myObj= CreateGameObject("a_plant_05_35_04_0847",6.514286f,4.500000f,42.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_06_35_04_0784",7.542857f,3.300000f,42.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_20_35_04_0849",25.180000f,3.600000f,42.599998f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("a_gravestone_43_35_04_0550",52.114288f,0.000000f,42.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 743, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,32);
+		
+		myObj= CreateGameObject("a_gravestone_44_35_04_0549",53.314285f,0.000000f,42.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 744, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,17);
+		
+		myObj= CreateGameObject("a_gravestone_45_35_04_0548",54.514286f,0.000000f,42.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 745, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,18);
+		
+		myObj= CreateGameObject("a_crossbow_bolt_47_35_04_0536",56.742855f,0.037500f,42.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		
+		myObj= CreateGameObject("a_gravestone_47_35_04_0547",56.914288f,0.000000f,42.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 746, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,33);
+		
+		myObj= CreateGameObject("a_gravestone_48_35_04_0546",58.114288f,0.000000f,42.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 747, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,19);
+		
+		myObj= CreateGameObject("a_gravestone_49_35_04_0545",59.314285f,0.000000f,42.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 748, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,20);
+		
+		myObj = new GameObject("a_giant_rat_02_36_04_0238");
+		pos = new Vector3(2.914286f, 3.300000f, 43.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 36, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 2, 36, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_ghost_08_36_04_0197");
+		pos = new Vector3(10.628572f, 3.600000f, 44.228569f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 8, 36, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 8, 36, 0, 0, 45, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_ghost_09_36_04_0218");
+		pos = new Vector3(11.980000f, 3.600000f, 44.228569f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 584, 9, 36, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 9, 36, 0, 0, 63, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_book_99_99_04_0584", ParentContainer, 0);
+		AddObjectToContainer("a_ruby_rubies_99_99_04_0583", ParentContainer, 1);
+		////Container contents complete
+		
+		
+		myObj = new GameObject("a_mage_17_36_04_0227");
+		pos = new Vector3(20.914284f, 3.300000f, 43.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"106","Sprites/OBJECTS_106", 161);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", 0, 106, 945, 17, 36, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 161, 17, 36, 0, 0, 50, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_glowing_rock_99_99_04_0945", ParentContainer, 0);
+		AddObjectToContainer("a_mandolin_99_99_04_0944", ParentContainer, 1);
+		AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_04_0943", ParentContainer, 2);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_shrine_20_36_04_0843",24.685715f,3.300000f,43.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_343",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", 83, 343, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddShrine(myObj);
+		
+		myObj = new GameObject("a_ghost_48_36_04_0205");
+		pos = new Vector3(58.114288f, 0.900000f, 43.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 48, 36, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 48, 36, 0, 0, 23, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_crossbow_49_36_04_0537",59.657143f,0.000000f,44.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_026",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", 1, 26, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_37_04_0793",6.171429f,3.300000f,45.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_20_37_04_0828",25.180000f,3.600000f,45.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj = new GameObject("a_bloodworm_26_37_04_0243");
+		pos = new Vector3(31.714285f, 3.600000f, 44.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 26, 37, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 26, 37, 0, 0, 18, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_bloodworm_39_37_04_0241");
+		pos = new Vector3(47.314285f, 3.600000f, 44.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 39, 37, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 39, 37, 0, 0, 19, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,90,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("some_writing_44_37_04_0486",52.820000f,0.600000f,44.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 750, 0, 0, 0, 1, 0, 0, 1, 0, 7, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_27");
+		SetLink(myObj,750);
+		
+		myObj= CreateGameObject("some_writing_44_37_04_0903",53.980000f,0.600000f,45.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 751, 0, 0, 0, 1, 0, 0, 1, 0, 7, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,90,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_27");
+		SetLink(myObj,751);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_05_38_04_0756",7.028571f,3.300000f,46.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_red_potion_10_38_04_0813",12.857142f,3.300000f,46.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj = new GameObject("door_032_038");
+		pos = new Vector3(38.599998f, 2.100000f, 46.628571f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj = new GameObject("door_050_038");
+		pos = new Vector3(61.028568f, 0.000000f, 46.599998f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		myObj= CreateGameObject("some_writing_57_38_04_0947",68.419998f,0.600000f,46.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 720, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,720);
+		
+		myObj = new GameObject("door_057_038");
+		pos = new Vector3(68.599998f, 0.000000f, 45.619999f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj= CreateGameObject("a_stalactite_05_39_04_0794",6.342857f,4.500000f,47.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj = new GameObject("door_009_039");
+		pos = new Vector3(11.000000f, 3.300000f, 47.828568f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj = new GameObject("door_014_039");
+		pos = new Vector3(17.000000f, 3.300000f, 47.828568f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_00", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0805",30.685715f,2.100000f,47.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0804",31.028572f,2.100000f,47.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0803",30.514284f,2.100000f,47.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_skull_27_39_04_0802",32.914284f,2.100000f,47.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_27_39_04_0801",33.257145f,2.100000f,46.971432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_30_39_04_0875",36.599998f,3.000000f,46.820000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,180,0);
+		
+		myObj = new GameObject("a_headless_headlesses_34_39_04_0247");
+		pos = new Vector3(41.142857f, 2.100000f, 47.142857f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 34, 39, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 34, 39, 4, 0, 60, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,135,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("special_tmap_obj_34_39_04_0910",41.400002f,3.000000f,46.820000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,180,0);
+		
+		myObj= CreateGameObject("an_arrow_02_40_04_0860",2.742857f,3.300000f,48.857143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_018",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", 1, 18, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		
+		myObj = new GameObject("a_giant_rat_06_40_04_0239");
+		pos = new Vector3(7.714286f, 3.300000f, 48.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 6, 40, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 6, 40, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,90,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("some_writing_14_40_04_0845",17.980000f,3.900000f,48.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 725, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,90,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,725);
+		
+		myObj = new GameObject("a_bloodworm_22_40_04_0244");
+		pos = new Vector3(26.914284f, 3.600000f, 48.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 22, 40, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 22, 40, 0, 0, 17, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_headless_headlesses_25_40_04_0246");
+		pos = new Vector3(30.514284f, 2.100000f, 48.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 25, 40, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 25, 40, 0, 0, 40, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_38_40_04_0819",46.114288f,2.100000f,48.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_38_40_04_0818",46.628571f,2.100000f,48.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_tower_shield_47_40_04_0544",56.742855f,0.000000f,48.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_059",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", 78, 59, 0, 28, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddShield(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_24_41_04_0871",28.820000f,3.300000f,49.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("a_bench_benches_29_41_04_0855",35.657143f,2.100000f,49.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
+		
+		myObj= CreateGameObject("a_plant_33_41_04_0831",40.114285f,4.500000f,49.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_bench_benches_34_41_04_0856",41.142857f,2.100000f,49.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
+		
+		myObj= CreateGameObject("a_plant_35_41_04_0829",42.514286f,4.500000f,49.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_39_41_04_0872",47.980000f,3.300000f,49.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("a_gravestone_44_41_04_0560",53.314285f,0.000000f,49.714287f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 733, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,22);
+		
+		myObj = new GameObject("a_skeleton_47_41_04_0207");
+		pos = new Vector3(56.914288f, 0.000000f, 49.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 47, 41, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 47, 41, 0, 0, 30, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_gravestone_48_41_04_0559",58.114288f,0.000000f,49.714287f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 734, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,23);
+		
+		myObj= CreateGameObject("a_scroll_55_41_04_0577",66.514290f,0.000000f,49.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_316",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", 11, 316, 645, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,645);
+		
+		myObj = new GameObject("a_goblin_03_42_04_0216");
+		pos = new Vector3(4.114285f, 3.600000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 3, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 3, 42, 0, 0, 57, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_goblin_04_42_04_0215");
+		pos = new Vector3(5.314286f, 3.600000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 4, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 4, 42, 0, 0, 65, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_goblin_05_42_04_0217");
+		pos = new Vector3(6.514286f, 3.600000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 5, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 5, 42, 0, 0, 53, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_blood_stain_24_42_04_0807",29.314285f,2.100000f,50.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj= CreateGameObject("a_skull_24_42_04_0806",29.142857f,2.100000f,50.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_30_42_04_0832",37.180000f,2.700000f,51.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj= CreateGameObject("a_skull_31_42_04_0835",37.714283f,2.700000f,50.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_31_42_04_0833",38.057144f,2.700000f,50.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_31_42_04_0834",38.057144f,2.700000f,51.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_39_42_04_0815",47.314285f,2.100000f,50.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_220",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_220", "Sprites/OBJECTS_220", "Sprites/OBJECTS_220", 23, 220, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_skeleton_53_42_04_0208");
+		pos = new Vector3(64.114288f, 0.000000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 53, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 53, 42, 0, 0, 34, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_gravestone_54_42_04_0552",65.314285f,0.000000f,50.914288f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 741, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,30);
+		
+		myObj= CreateGameObject("a_gravestone_58_42_04_0551",70.114288f,0.000000f,50.914288f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 742, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,31);
+		
+		myObj = new GameObject("a_gazer_04_43_04_0214");
+		pos = new Vector3(5.314286f, 3.900000f, 52.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"102","Sprites/OBJECTS_102", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", 0, 102, 0, 4, 43, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 4, 43, 0, 0, 69, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_24_43_04_0870",28.820000f,3.300000f,52.200001f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("a_broken_shield_28_43_04_0821",33.619999f,2.100000f,52.779999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_bench_benches_29_43_04_0859",35.657143f,2.100000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
+		
+		myObj= CreateGameObject("a_bench_benches_34_43_04_0858",41.142857f,2.100000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
+		
+		myObj= CreateGameObject("a_plant_38_43_04_0817",46.114288f,4.500000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_43_04_0816",46.114288f,2.100000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_39_43_04_0873",47.980000f,3.300000f,52.200001f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj = new GameObject("a_bloodworm_41_43_04_0242");
+		pos = new Vector3(49.714287f, 3.600000f, 52.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 43, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 41, 43, 0, 0, 17, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_jeweled_mace_43_43_04_0538",51.771431f,0.000000f,52.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_014",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", 1, 14, 704, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateWeapon(myObj, 9, 17, 5, 5, 255);
+		
+		myObj= CreateGameObject("special_tmap_obj_08_44_04_0976",10.200000f,3.600000f,52.820000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,180,0);
+		
+		
+		myObj = new GameObject("a_reaper_18_44_04_0213");
+		pos = new Vector3(22.114285f, 1.200000f, 53.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"118","Sprites/OBJECTS_118", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", 0, 118, 0, 18, 44, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 44, 0, 0, 71, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh6");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_mushroom_24_44_04_0809",28.971428f,2.100000f,53.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_toadstool_24_44_04_0808",29.142857f,2.100000f,53.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_27_44_04_0822",32.914284f,2.100000f,53.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_skull_32_44_04_0863",38.914284f,2.100000f,53.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_32_44_04_0862",38.914284f,2.100000f,53.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_32_44_04_0861",39.085716f,2.100000f,53.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_headless_headlesses_35_44_04_0233");
+		pos = new Vector3(42.514286f, 2.100000f, 53.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 35, 44, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 35, 44, 0, 0, 45, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_plant_37_44_04_0830",44.914288f,4.500000f,53.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_red_potion_55_44_04_0702",66.857147f,0.000000f,53.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 563, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_29_45_04_0874",35.400002f,3.000000f,55.180000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,0,0);
+		
+		myObj= CreateGameObject("special_tmap_obj_33_45_04_0909",40.200001f,3.037500f,55.180000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
+		SetRotation(myObj,0,0,0);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_34_45_04_0812",41.828568f,2.100000f,55.180000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_34_45_04_0811",41.657143f,2.100000f,55.180000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_plant_34_45_04_0810",41.314285f,2.100000f,55.028568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_36_45_04_0814",43.714287f,2.100000f,55.028568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_sack_39_45_04_0589",47.314285f,2.100000f,54.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 588, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_book_99_99_04_0588", ParentContainer, 0);
+		AddObjectToContainer("a_lockpick_99_99_04_0587", ParentContainer, 1);
+		AddObjectToContainer("a_flute_99_99_04_0586", ParentContainer, 2);
+		AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_04_0585", ParentContainer, 3);
+		////Container contents complete
+		
+		
+		myObj = new GameObject("door_050_045");
+		pos = new Vector3(61.028568f, 0.000000f, 55.000000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		myObj = new GameObject("a_reaper_14_46_04_0212");
+		pos = new Vector3(17.314285f, 1.200000f, 55.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"118","Sprites/OBJECTS_118", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", 0, 118, 0, 14, 46, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 14, 46, 0, 0, 121, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj = new GameObject("door_031_046");
+		pos = new Vector3(37.400002f, 2.100000f, 56.380001f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj = new GameObject("door_052_046");
+		pos = new Vector3(62.571430f, 0.000000f, 55.400002f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj= CreateGameObject("a_mushroom_27_47_04_0901",32.742855f,3.600000f,57.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_mushroom_27_47_04_0902",32.742855f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_skull_28_47_04_0906",34.285717f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_28_47_04_0905",34.114285f,3.600000f,57.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_28_47_04_0904",34.628571f,3.600000f,57.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_plant_29_47_04_0907",35.485714f,3.600000f,56.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_29_47_04_1015",35.980000f,3.600000f,57.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,90,0);
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_32_47_04_0869",39.000000f,3.000000f,56.419998f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 32, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_018", "" , 18, false);
+		SetRotation(myObj,0,180,0);
+		
+		myObj= CreateGameObject("some_writing_32_47_04_0868",38.742855f,2.700000f,56.419998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 723, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,180,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
+		SetLink(myObj,723);
+		
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_47_04_0924",41.828568f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_47_04_0923",41.314285f,3.600000f,57.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_34_47_04_1018",40.820000f,3.600000f,57.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,270,0);
+		
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_35_47_04_0935",42.342857f,3.600000f,57.580002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_plant_35_47_04_0933",42.514286f,3.600000f,56.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_36_47_04_0928",44.057144f,3.600000f,56.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_36_47_04_0927",43.220001f,3.600000f,56.419998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_mushroom_36_47_04_0930",43.714287f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_toadstool_36_47_04_0931",43.220001f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj = new GameObject("a_bloodworm_41_47_04_0234");
+		pos = new Vector3(49.714287f, 3.600000f, 56.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 47, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 41, 47, 0, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_green_potion_49_47_04_0851",59.657143f,0.000000f,56.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		
+		myObj= CreateGameObject("a_plant_27_48_04_0900",32.571426f,3.600000f,58.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_27_48_04_0898",33.428574f,3.600000f,58.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj = new GameObject("a_skeleton_49_48_04_0209");
+		pos = new Vector3(59.314285f, 0.000000f, 58.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 49, 48, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 49, 48, 0, 0, 32, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_bloodworm_22_49_04_0245");
+		pos = new Vector3(26.914284f, 3.600000f, 59.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 22, 49, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 22, 49, 0, 0, 16, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_49_04_0926",41.314285f,3.600000f,59.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_37_49_04_0941",45.257145f,3.600000f,58.820000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_broken_mace_37_49_04_0937",44.914288f,3.600000f,59.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_37_49_04_0936",45.257145f,3.600000f,59.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_gravestone_44_49_04_0557",53.314285f,0.000000f,59.314285f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 736, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,25);
+		
+		myObj= CreateGameObject("a_gravestone_48_49_04_0558",58.114288f,0.000000f,59.314285f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 735, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,24);
+		
+		
+		myObj= CreateGameObject("a_broken_hilt_54_49_04_0932",65.314285f,0.000000f,59.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_281",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_281", "Sprites/OBJECTS_281", "Sprites/OBJECTS_281", 16, 281, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_ghost_57_49_04_0206");
+		pos = new Vector3(68.914284f, 1.200000f, 59.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 57, 49, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 57, 49, 0, 0, 47, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj= CreateGameObject("some_writing_26_50_04_0866",31.219999f,4.200000f,60.857143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 724, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
+		SetLink(myObj,724);
+		
+		myObj= CreateGameObject("a_skull_37_50_04_0940",45.085712f,3.600000f,60.020000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_37_50_04_0939",45.257145f,3.600000f,60.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_axe_45_50_04_0543",54.857143f,0.000000f,60.857143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_002",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", 1, 2, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 10, 6, 8, 4, 25);
+		
+		myObj= CreateGameObject("a_sack_48_50_04_0582",58.114288f,0.000000f,60.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 579, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_book_99_99_04_0579", ParentContainer, 0);
+		AddObjectToContainer("a_large_blue_gem_99_99_04_0581", ParentContainer, 1);
+		AddObjectToContainer("a_fish_fish_99_99_04_0580", ParentContainer, 2);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_gravestone_54_50_04_0554",65.314285f,0.000000f,60.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 739, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,28);
+		
+		myObj= CreateGameObject("a_gravestone_58_50_04_0553",70.114288f,0.000000f,60.514286f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 740, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,29);
+		
+		
+		myObj = new GameObject("door_025_051");
+		pos = new Vector3(30.857143f, 3.600000f, 61.400002f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj= CreateGameObject("a_plant_27_51_04_0889",33.580002f,3.600000f,61.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_27_51_04_0888",33.428574f,3.600000f,61.885712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_27_51_04_0887",33.580002f,3.600000f,61.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_skull_28_51_04_0897",34.114285f,3.600000f,61.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_28_51_04_0895",34.457142f,3.600000f,61.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_28_51_04_0896",34.457142f,3.600000f,61.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("a_broken_mace_28_51_04_0894",33.942856f,3.600000f,61.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0916",42.514286f,3.600000f,61.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0914",43.028568f,3.600000f,62.228569f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0913",43.028568f,3.600000f,61.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("door_038_051");
+		pos = new Vector3(45.942856f, 3.600000f, 62.200001f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_08", 53, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		myObj= CreateGameObject("special_tmap_obj_19_52_04_0965",22.820000f,3.600000f,63.000000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 8, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_206", "" , 206, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("a_plant_34_52_04_0921",40.971432f,3.600000f,62.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj = new GameObject("a_dread_spider_36_52_04_0253");
+		pos = new Vector3(43.714287f, 3.600000f, 62.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 36, 52, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 36, 52, 0, 0, 40, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("some_writing_37_52_04_0864",45.580002f,4.200000f,62.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 724, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,90,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
+		SetLink(myObj,724);
+		
+		
+		myObj = new GameObject("a_dread_spider_27_53_04_0251");
+		pos = new Vector3(32.914284f, 3.600000f, 64.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 27, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 27, 53, 4, 0, 28, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("door_030_053");
+		pos = new Vector3(36.857143f, 3.600000f, 63.799999f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj = new GameObject("door_033_053");
+		pos = new Vector3(39.942856f, 3.600000f, 64.599998f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		myObj = new GameObject("a_dread_spider_35_53_04_0230");
+		pos = new Vector3(42.514286f, 3.600000f, 64.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 35, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 35, 53, 0, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_gravestone_44_53_04_0556",53.314285f,0.000000f,64.114288f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 737, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,26);
+		
+		myObj= CreateGameObject("a_gravestone_48_53_04_0555",58.114288f,0.000000f,64.114288f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 738, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,27);
+		
+		
+		myObj= CreateGameObject("a_light_mace_55_53_04_0531",66.857147f,0.000000f,63.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_008",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_008", "Sprites/OBJECTS_008", "Sprites/OBJECTS_008", 1, 8, 0, 58, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 6, 10, 4, 5, 15);
+		
+		
+		myObj= CreateGameObject("a_skull_59_53_04_0597",71.314285f,0.300000f,64.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_gravestone_59_53_04_0598",71.314285f,0.300000f,64.114288f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 732, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,5);
+		
+		
+		myObj= CreateGameObject("a_skull_27_54_04_0892",32.419998f,3.600000f,65.980003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_27_54_04_0893",32.419998f,3.600000f,65.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_broken_shield_27_54_04_0891",32.742855f,3.600000f,65.980003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_27_54_04_0890",32.571426f,3.600000f,65.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_plant_34_54_04_0912",41.980000f,3.600000f,65.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_34_54_04_0911",41.828568f,3.600000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_blood_stain_35_54_04_0920",42.514286f,3.600000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_35_54_04_0918",42.857143f,3.600000f,65.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_broken_sword_35_54_04_0917",42.171432f,3.600000f,65.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_35_54_04_0919",42.514286f,3.600000f,65.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_dread_spider_37_54_04_0231");
+		pos = new Vector3(44.914288f, 3.600000f, 65.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 37, 54, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 37, 54, 0, 0, 33, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_skeleton_45_54_04_0210");
+		pos = new Vector3(54.514286f, 0.000000f, 65.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 45, 54, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 45, 54, 0, 0, 86, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("plate_boots_pairs_of_plate_boots_49_54_04_0540",59.314285f,0.000000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_043",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_043", "Sprites/OBJECTS_043", "Sprites/armour/armor_f_0011", 75, 43, 0, 34, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateBoots(myObj, "Sprites/armour/armor_f_0011", "Sprites/armour/armor_m_0011", "Sprites/armour/armor_f_0026", "Sprites/armour/armor_m_0026", "Sprites/armour/armor_f_0041", "Sprites/armour/armor_m_0041", "Sprites/armour/armor_f_0056", "Sprites/armour/armor_m_0056", 5, 17);
+		
+		myObj= CreateGameObject("a_gravestone_54_54_04_0599",65.314285f,0.000000f,65.485710f);
+		SetRotation(myObj,0,0,0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 545, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddGrave(myObj, 28,6);
+		
+		
+		myObj= CreateGameObject("a_sceptre_59_54_04_0539",71.485710f,0.300000f,65.980003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_170",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", 18, 170, 878, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_bone_59_54_04_0596",70.971428f,0.300000f,64.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_bone_59_54_04_0595",71.657143f,0.300000f,64.820000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_59_54_04_0594",71.314285f,0.300000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_13_55_04_1004",15.620000f,2.400000f,66.599998f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_137", "" , 137, false);
+		SetRotation(myObj,0,270,0);
+		
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0885",32.057144f,3.600000f,66.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0884",32.380001f,3.600000f,66.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0883",32.057144f,3.600000f,66.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("a_dread_spider_29_55_04_0252");
+		pos = new Vector3(35.314285f, 3.600000f, 66.514290f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 29, 55, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 29, 55, 8, 0, 26, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_plant_29_55_04_0881",35.828571f,4.500000f,66.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_plant_29_55_04_0882",35.314285f,4.500000f,66.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		
+		myObj= CreateGameObject("an_arrow_43_55_04_0535",51.942856f,0.000000f,66.857147f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_018",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", 1, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		
+		myObj= CreateGameObject("plate_leggings_pairs_of_plate_leggings_49_55_04_0542",59.314285f,0.000000f,66.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_037",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_037", "Sprites/OBJECTS_037", "Sprites/armour/armor_f_0005", 77, 37, 0, 12, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateLeggings(myObj, "Sprites/armour/armor_f_0005", "Sprites/armour/armor_m_0005", "Sprites/armour/armor_f_0020", "Sprites/armour/armor_m_0020", "Sprites/armour/armor_f_0035", "Sprites/armour/armor_m_0035", "Sprites/armour/armor_f_0050", "Sprites/armour/armor_m_0050", 6, 20);
+		
+		myObj = new GameObject("a_dread_spider_26_56_04_0232");
+		pos = new Vector3(31.714285f, 3.600000f, 67.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 26, 56, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 26, 56, 0, 0, 31, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj= CreateGameObject("a_lever_12_57_04_0663",15.085714f,2.700000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 635, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0635",40,0,0,7,373);
+		SetRotation(myObj,0,225,0);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
+		
+		myObj= CreateGameObject("a_lever_19_57_04_0662",23.485716f,2.700000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 640, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0640",40,0,0,7,373);
+		SetRotation(myObj,0,135,0);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
+		
+		
+		
+		myObj= CreateGameObject("a_broken_axe_27_57_04_0877",32.419998f,3.600000f,69.428566f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_28_57_04_0880",34.457142f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_28_57_04_0879",33.619999f,3.600000f,69.428566f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_broken_shield_30_57_04_0820",36.514286f,3.600000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("door_050_057");
+		pos = new Vector3(61.028568f, 0.000000f, 69.400002f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		
+		
+		myObj = new GameObject("door_026_058");
+		pos = new Vector3(31.400000f, 3.600000f, 69.620003f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 0, 63, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_09", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj = new GameObject("door_051_058");
+		pos = new Vector3(61.400002f, 0.000000f, 70.285713f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		
+		
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_33_59_04_0798",40.114285f,3.600000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_stalactite_35_59_04_0781",42.685715f,4.500000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_stalactite_35_59_04_0780",42.342857f,4.500000f,71.142853f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_plant_37_59_04_0782",44.914288f,3.600000f,71.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_37_59_04_0844",45.085712f,3.600000f,71.142853f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj = new GameObject("a_skeleton_38_59_04_0235");
+		pos = new Vector3(46.114288f, 3.600000f, 71.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 38, 59, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 38, 59, 0, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_plant_40_59_04_0797",48.514286f,3.600000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_42_59_04_0800",51.428570f,3.600000f,71.142853f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_broken_mace_44_59_04_0786",53.314285f,3.600000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_44_59_04_0783",53.314285f,4.500000f,71.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj = new GameObject("a_skeleton_46_59_04_0249");
+		pos = new Vector3(55.714287f, 3.600000f, 71.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 46, 59, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 46, 59, 8, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_47_59_04_0788",56.914288f,3.600000f,71.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_47_59_04_0799",56.571430f,3.600000f,71.142853f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_red_potion_48_59_04_0795",58.628571f,3.600000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_48_59_04_1013",58.779999f,3.600000f,71.400002f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_160", "" , 160, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("special_tmap_obj_55_59_04_1005",67.180000f,0.000000f,71.400002f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,90,0);
+		
+		
+		
+		
+		
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0683",38.228573f,3.600000f,72.857147f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0682",38.057144f,3.600000f,72.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0684",37.714283f,3.600000f,72.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_mushroom_34_60_04_0789",41.657143f,3.600000f,72.857147f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_mushroom_34_60_04_0785",41.142857f,3.600000f,73.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_toadstool_34_60_04_0779",41.485714f,3.600000f,72.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_36_60_04_0791",43.885712f,3.600000f,72.857147f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_38_60_04_0787",45.942856f,3.600000f,73.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_38_60_04_0796",46.285713f,3.600000f,73.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_skeleton_39_60_04_0248");
+		pos = new Vector3(47.314285f, 3.600000f, 72.514290f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 39, 60, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 39, 60, 8, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_stalactite_42_60_04_0790",50.914288f,4.500000f,72.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		
+		myObj= CreateGameObject("a_skull_45_60_04_0792",54.514286f,3.600000f,73.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_skeleton_47_60_04_0250");
+		pos = new Vector3(56.914288f, 3.600000f, 72.514290f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 47, 60, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 47, 60, 12, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("special_tmap_obj_48_60_04_1014",58.779999f,3.600000f,72.599998f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_160", "" , 160, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj = new GameObject("door_059_060");
+		pos = new Vector3(71.000000f, 0.000000f, 73.028572f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", 4, 324, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_11", 53, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		
+		myObj= CreateGameObject("a_lever_12_61_04_0664",15.085714f,2.700000f,73.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 646, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0646",40,0,0,7,381);
+		SetRotation(myObj,0,315,0);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
+		
+		myObj= CreateGameObject("a_lever_19_61_04_0670",23.314285f,2.700000f,73.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 641, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0641",40,0,0,7,373);
+		SetRotation(myObj,0,45,0);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_53_61_04_1010",64.779999f,0.000000f,73.800003f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 1008, 40, 13, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,"uw1_049", "a_look_trigger_99_99_04_1008", 49, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj = new GameObject("door_054_061");
+		pos = new Vector3(64.820000f, 0.000000f, 73.400002f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/world/uw1_049", 53, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		
+		myObj= CreateGameObject("some_writing_58_61_04_0949",70.285713f,0.600000f,73.220001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 721, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,180,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
+		SetLink(myObj,721);
+		
+		//UW Triggers and Traps
+		myObj= CreateGameObject("a_set_variable_trap_99_99_04_0004",120.000000f,1.387500f,119.142860f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 218, 1, 52, 0, 0, 0, 1, 1, 0, 2, 0);
+		SetRotation(myObj,0,45,0);
+		Create_a_set_variable_trap(myObj,37,418,1);
+		
+		myObj= CreateGameObject("a_check_variable_trap_99_99_04_0007",118.800003f,2.737500f,119.142860f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 44, 9, 6, 0, 0, 0, 1, 0, 0, 4, 0);
+		SetRotation(myObj,0,270,0);
+		Create_a_check_variable_trap(myObj,73,0,2354,6);
+		
+		myObj= CreateGameObject("a_door_trap_99_99_04_0031",119.485710f,2.512500f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 462, 59, 15, 0, 0, 0, 1, 0, 0, 7, 0);
+		SetRotation(myObj,0,90,0);
+		Create_a_door_trap(myObj,59);
+		AddTrapLink(myObj,"a_button_99_99_04_0462");
+		
+		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0032",119.657135f,0.075000f,120.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 58, 37, 57, 0, 0, 0, 1, 0, 0, 3, 0);
+		SetRotation(myObj,0,270,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"a_longsword_99_99_04_0058");
+		
+		myObj= CreateGameObject("a_set_variable_trap_99_99_04_0036",119.657135f,0.225000f,118.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 1020, 13, 4, 0, 0, 0, 1, 1, 1, 15, 0);
+		SetRotation(myObj,0,270,0);
+		Create_a_set_variable_trap(myObj,6,3361,6);
+		
+		myObj= CreateGameObject("a_arrow_trap_99_99_04_0061",118.800003f,4.462500f,118.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 0);
+		SetRotation(myObj,0,0,0);
+		Create_a_arrow_trap(myObj, 293, 16);
+		
+		myObj= CreateGameObject("a_arrow_trap_99_99_04_0076",118.800003f,2.362500f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 2, 3, 1, 0, 0, 0, 1, 1, 0, 4, 0);
+		SetRotation(myObj,0,225,0);
+		Create_a_arrow_trap(myObj, 97, 0);
+		
+		myObj= CreateGameObject("a_do_trap_99_99_04_0261",119.657135f,3.300000f,119.657135f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 744, 62, 33, 0, 0, 0, 1, 1, 0, 5, 0);
+		SetRotation(myObj,0,45,0);
+		Create_trap_base(myObj);
+		
+		myObj= CreateGameObject("a_spelltrap_99_99_04_0283",119.657135f,0.900000f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 90, 25, 7, 0, 0, 0, 1, 0, 0, 3, 0);
+		SetRotation(myObj,0,180,0);
+		Create_a_spelltrap(myObj);
+		
+		myObj= CreateGameObject("a_damage_trap_99_99_04_0294",119.828575f,0.225000f,119.657135f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_384",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", 37, 384, 928, 11, 13, 0, 0, 0, 1, 1, 0, 3, 0);
+		SetRotation(myObj,0,270,0);
+		Create_a_damage_trap(myObj);
+		
+		myObj= CreateGameObject("a_spelltrap_99_99_04_0329",120.000000f,0.225000f,119.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 112, 46, 14, 0, 0, 0, 1, 1, 0, 4, 0);
+		SetRotation(myObj,0,225,0);
+		Create_a_spelltrap(myObj);
+		AddTrapLink(myObj,"a_switch_99_99_04_0112");
+		
+		myObj= CreateGameObject("a_create_object_trap_99_99_04_0342",118.971428f,2.737500f,119.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 122, 18, 59, 0, 0, 0, 1, 0, 1, 9, 0);
+		SetRotation(myObj,0,315,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_broadsword_99_99_04_0122");
+		
+		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0347",119.485710f,3.150000f,118.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 840, 51, 51, 0, 0, 0, 1, 1, 1, 15, 0);
+		SetRotation(myObj,0,315,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"a_glowing_rock_14_22_04_0840");
+		
+		myObj= CreateGameObject("a_step_on_trigger_99_99_04_0353",118.800003f,3.562500f,120.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_420",false);
+		CreateTrigger(myObj,6,11,"a_door_050_057");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_420", "Sprites/OBJECTS_420", "Sprites/OBJECTS_420", 58, 420, 990, 6, 11, 0, 0, 0, 1, 0, 1, 12, 0);
+		
+		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0380",118.971428f,0.412500f,120.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 996, 9, 3, 0, 0, 0, 1, 1, 1, 11, 0);
+		SetRotation(myObj,0,225,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"a_glowing_rock_16_06_04_0996");
+		
+		myObj= CreateGameObject("a_teleport_trap_99_99_04_0381",119.485710f,2.700000f,119.657135f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 996, 61, 43, 0, 0, 0, 1, 1, 1, 15, 0);
+		SetRotation(myObj,0,45,0);
+		Create_a_teleport_trap(myObj,(float)73.800000,(float)52.200000,(float)3.600000,72);
+		
+		myObj= CreateGameObject("an_inventory_trap_99_99_04_0403",118.800003f,2.025000f,118.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", 49, 396, 32, 17, 14, 0, 0, 0, 1, 1, 0, 5, 0);
+		SetRotation(myObj,0,90,0);
+		Create_an_inventory_trap(myObj);
+		AddTrapLink(myObj,"a_delete_object_trap_99_99_04_0032");
+		
+		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0406",119.142860f,0.150000f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 692, 43, 5, 0, 0, 0, 1, 1, 0, 6, 0);
+		SetRotation(myObj,0,90,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"a_plant_17_31_04_0692");
+		
+		myObj= CreateGameObject("an_inventory_trap_99_99_04_0421",120.000000f,0.525000f,120.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", 49, 396, 1008, 22, 54, 0, 0, 0, 1, 1, 0, 5, 0);
+		SetRotation(myObj,0,180,0);
+		Create_an_inventory_trap(myObj);
+		AddTrapLink(myObj,"a_look_trigger_99_99_04_1008");
+		
+		myObj= CreateGameObject("a_tell_trap_99_99_04_0459",120.000000f,0.000000f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_394",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_394", "Sprites/OBJECTS_394", "Sprites/OBJECTS_394", 47, 394, 259, 31, 42, 0, 0, 0, 1, 0, 1, 10, 0);
+		SetRotation(myObj,0,225,0);
+		Create_a_tell_trap(myObj);
+		
+		myObj= CreateGameObject("a_text_string_trap_99_99_04_0469",118.800003f,4.350000f,119.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_400",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", 53, 400, 650, 32, 16, 0, 0, 0, 1, 0, 0, 0, 0);
+		SetRotation(myObj,0,180,0);
+		Create_a_text_string_trap(myObj,9,272);
+		AddTrapLink(myObj,"a_check_variable_trap_03_28_04_0650");
+		
+		myObj= CreateGameObject("a_create_object_trap_36_41_04_0484",43.200001f,2.100000f,49.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 200, 48, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_headless_headlesses_36_36_04_0200");
+		
+		myObj= CreateGameObject("a_create_object_trap_25_44_04_0491",30.000000f,2.100000f,52.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 199, 59, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_mongbat_25_25_04_0199");
+		
+		myObj= CreateGameObject("a_move_trigger_54_52_04_0495",65.400002f,3.600000f,63.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,54,53,"a_create_object_trap_54_53_04_0500");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 500, 54, 53, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_set_variable_trap_21_61_04_0496",25.200001f,1.275000f,73.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,180,0);
+		Create_a_set_variable_trap(myObj,34,3,4);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0497",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,21,57,"a_set_variable_trap_21_57_04_0498");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 498, 21, 57, 0, 0, 0, 1, 1, 1, 14, 0);
+		
+		myObj= CreateGameObject("a_set_variable_trap_21_57_04_0498",25.200001f,1.275000f,68.571434f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,180,0);
+		Create_a_set_variable_trap(myObj,34,1,4);
+		
+		myObj= CreateGameObject("a_create_object_trap_54_53_04_0500",65.314285f,0.000000f,64.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 196, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_ghost_54_54_04_0196");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0504",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,21,61,"a_set_variable_trap_21_61_04_0496");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 496, 21, 61, 0, 0, 0, 1, 1, 1, 14, 0);
+		
+		myObj= CreateGameObject("a_create_object_trap_53_49_04_0505",63.599998f,0.000000f,58.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 204, 50, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_ghost_53_53_04_0204");
+		
+		myObj= CreateGameObject("a_move_trigger_13_48_04_0532",16.200001f,1.200000f,58.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,19,50,"a_create_object_trap_19_50_04_0533");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 533, 19, 50, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_create_object_trap_19_50_04_0533",22.799999f,1.200000f,60.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 211, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_fire_elemental_19_19_04_0211");
+		
+		myObj= CreateGameObject("a_move_trigger_19_51_04_0534",23.400000f,2.400000f,61.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,19,46,"a_arrow_trap_19_46_04_0563");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 563, 19, 46, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_14_45_04_0561",17.400000f,1.200000f,54.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,10,45,"a_spelltrap_10_45_04_0562");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 562, 10, 45, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_spelltrap_10_45_04_0562",13.028572f,1.912500f,54.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 0, 5, 3, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,90,0);
+		Create_a_spelltrap(myObj);
+		
+		myObj= CreateGameObject("a_arrow_trap_19_46_04_0563",22.799999f,4.500000f,55.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 0, 0, 17, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_arrow_trap(myObj, 17, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_01_27_04_0622",1.800000f,2.400000f,33.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,1,28,"a_teleport_trap_01_28_04_0623");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 623, 1, 28, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_01_28_04_0623",1.200000f,0.000000f,33.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 11, 6, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)13.800000,(float)7.800000,(float)2.400000,0);
+		
+		myObj= CreateGameObject("a_create_object_trap_11_14_04_0624",13.200000f,2.400000f,16.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 201, 55, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_ghost_11_11_04_0201");
+		
+		myObj= CreateGameObject("a_move_trigger_99_99_04_0625",119.400002f,1.800000f,119.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,3,27,"a_door_trap_99_99_04_0626");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 626, 3, 27, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_door_trap_99_99_04_0626",118.800003f,2.400000f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 621, 3, 0, 0, 0, 0, 1, 0, 0, 1, 0);
+		SetRotation(myObj,0,0,0);
+		Create_a_door_trap(myObj,3);
+		
+		myObj= CreateGameObject("a_move_trigger_18_59_04_0628",22.200001f,2.100000f,71.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_13_59_04_0629",16.200001f,2.100000f,71.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_17_58_04_0630",21.000000f,2.100000f,70.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_14_58_04_0631",17.400000f,2.100000f,70.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_17_60_04_0632",21.000000f,2.100000f,72.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_14_60_04_0633",17.400000f,2.100000f,72.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_set_variable_trap_21_60_04_0634",25.200001f,1.275000f,73.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 7, 0, 0, 0, 1, 0, 0, 6, 1);
+		SetRotation(myObj,0,180,0);
+		Create_a_set_variable_trap(myObj,34,63,4);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0635",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,10,57,"a_check_variable_trap_10_57_04_0643");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 643, 10, 57, 0, 0, 0, 1, 1, 1, 14, 0);
+		
+		myObj= CreateGameObject("a_create_object_trap_16_59_04_0636",19.200001f,2.700000f,70.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 934, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"an_iron_ring_16_16_04_0934");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0639",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,16,59,"a_create_object_trap_16_59_04_0636");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 636, 16, 59, 0, 0, 0, 1, 1, 1, 12, 0);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0640",119.314285f,2.700000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,20,57,"a_set_variable_trap_20_57_04_0645");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 645, 20, 57, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0641",119.314285f,2.700000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,20,61,"a_set_variable_trap_20_61_04_0644");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 644, 20, 61, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_create_object_trap_52_09_04_0642",62.400002f,2.400000f,10.800000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 202, 58, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_ghoul_52_52_04_0202");
+		
+		myObj= CreateGameObject("a_check_variable_trap_10_57_04_0643",12.171429f,1.275000f,69.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 639, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_check_variable_trap(myObj,34,1,7,0);
+		AddTrapLink(myObj,"a_use_trigger_99_99_04_0639");
+		
+		myObj= CreateGameObject("a_set_variable_trap_20_61_04_0644",24.000000f,1.275000f,73.542854f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 504, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,270,0);
+		Create_a_set_variable_trap(myObj,34,2,6);
+		AddTrapLink(myObj,"a_use_trigger_99_99_04_0504");
+		
+		myObj= CreateGameObject("a_set_variable_trap_20_57_04_0645",24.000000f,1.275000f,68.742859f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 497, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,270,0);
+		Create_a_set_variable_trap(myObj,34,2,6);
+		AddTrapLink(myObj,"a_use_trigger_99_99_04_0497");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0646",119.314285f,2.700000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,11,61,"a_set_variable_trap_11_61_04_0647");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 647, 11, 61, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_set_variable_trap_11_61_04_0647",13.200000f,1.275000f,73.542854f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,270,0);
+		Create_a_set_variable_trap(myObj,34,2,6);
+		
+		myObj= CreateGameObject("a_move_trigger_54_02_04_0648",65.400002f,2.400000f,3.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,52,3,"a_create_object_trap_52_03_04_0661");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 661, 52, 3, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_check_variable_trap_03_28_04_0650",3.600000f,1.162500f,34.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 625, 1, 26, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,90,0);
+		Create_a_check_variable_trap(myObj,31,0,470,2);
+		AddTrapLink(myObj,"a_move_trigger_99_99_04_0625");
+		
+		myObj= CreateGameObject("a_move_trigger_55_02_04_0651",66.599998f,2.400000f,3.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,57,3,"a_damage_trap_57_03_04_0876");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 876, 57, 3, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0654",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,3,28,"a_check_variable_trap_03_28_04_0650");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 650, 3, 28, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_move_trigger_11_10_04_0656",13.800000f,2.400000f,12.600000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,11,11,"a_teleport_trap_11_11_04_0659");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 659, 11, 11, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0658",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,7,30,"a_set_variable_trap_07_30_04_0953");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 953, 7, 30, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_teleport_trap_11_11_04_0659",13.200000f,0.000000f,13.200000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 4, 27, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)5.400000,(float)33.000000,(float)2.400000,0);
+		
+		myObj= CreateGameObject("a_create_object_trap_52_03_04_0661",62.400002f,2.400000f,3.600000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 240, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_dire_ghost_52_52_04_0240");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0668",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,6,30,"a_set_variable_trap_06_30_04_0952");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 952, 6, 30, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0669",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,5,30,"a_set_variable_trap_05_30_04_0942");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 942, 5, 30, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_04_0673",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,57,2,"a_door_trap_99_99_04_0678");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 678, 57, 2, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_door_trap_99_99_04_0678",118.800003f,2.400000f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 672, 3, 0, 0, 0, 0, 1, 0, 0, 2, 0);
+		SetRotation(myObj,0,0,0);
+		Create_a_door_trap(myObj,3);
+		
+		myObj= CreateGameObject("a_create_object_trap_36_55_04_0689",43.200001f,3.600000f,66.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 198, 56, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj);
+		AddTrapLink(myObj,"a_dread_spider_36_36_04_0198");
+		
+		myObj= CreateGameObject("a_damage_trap_57_03_04_0876",68.400002f,2.400000f,3.600000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_384",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", 37, 384, 915, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_damage_trap(myObj);
+		AddTrapLink(myObj,"a_move_trigger_99_99_04_0915");
+		
+		myObj= CreateGameObject("a_move_trigger_99_99_04_0915",119.400002f,2.400000f,119.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,57,2,"a_door_trap_99_99_04_0678");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 678, 57, 2, 0, 0, 0, 1, 1, 0, 6, 0);
+		
+		myObj= CreateGameObject("a_set_variable_trap_05_30_04_0942",6.000000f,1.162500f,36.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_set_variable_trap(myObj,31,1,0);
+		
+		myObj= CreateGameObject("a_set_variable_trap_06_30_04_0952",7.200000f,1.200000f,36.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_set_variable_trap(myObj,32,1,0);
+		
+		myObj= CreateGameObject("a_set_variable_trap_07_30_04_0953",8.400000f,1.237500f,36.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_set_variable_trap(myObj,33,1,0);
+		
+		myObj= CreateGameObject("a_teleport_trap_21_12_04_0968",25.200001f,0.000000f,14.400000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 3, 12, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)4.200000,(float)15.000000,(float)2.400000,0);
+		
+		myObj= CreateGameObject("a_move_trigger_02_12_04_0969",3.000000f,2.400000f,15.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,1,12,"a_teleport_trap_01_12_04_0995");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 995, 1, 12, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_20_12_04_0970",24.600000f,2.400000f,15.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,21,12,"a_teleport_trap_21_12_04_0968");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 968, 21, 12, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_13_55_04_0972",16.200001f,2.400000f,66.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,12,55,"a_teleport_trap_12_55_04_0973");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 973, 12, 55, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_12_55_04_0973",14.400000f,0.225000f,66.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 11, 55, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)13.800000,(float)66.600000,(float)3.600000,6);
+		
+		myObj= CreateGameObject("a_teleport_trap_56_59_04_0974",67.199997f,0.150000f,70.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 56, 59, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)67.800000,(float)71.400000,(float)3.600000,4);
+		
+		myObj= CreateGameObject("a_move_trigger_08_44_04_0975",10.200000f,3.600000f,53.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,8,43,"a_teleport_trap_08_43_04_1000");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1000, 8, 43, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_41_26_04_0978",49.200001f,0.150000f,31.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 41, 26, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)49.800000,(float)31.800000,(float)0.900000,4);
+		
+		myObj= CreateGameObject("a_move_trigger_40_26_04_0979",48.599998f,0.900000f,31.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,41,26,"a_teleport_trap_41_26_04_0978");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 978, 41, 26, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_55_59_04_0981",66.599998f,0.000000f,71.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,56,59,"a_teleport_trap_56_59_04_0974");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 974, 56, 59, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_99_99_04_0984",119.400002f,0.000000f,119.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,61,32,"a_delete_object_trap_61_32_04_0986");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 986, 61, 32, 0, 0, 0, 1, 1, 0, 4, 0);
+		
+		myObj= CreateGameObject("a_change_terrain_trap_60_33_04_0985",72.000000f,0.900000f,39.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 984, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_change_terrain_trap(myObj,60,33,0,0);
+		AddTrapLink(myObj,"a_move_trigger_99_99_04_0984");
+		
+		myObj= CreateGameObject("a_delete_object_trap_61_32_04_0986",73.199997f,0.000000f,38.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 983, 60, 32, 0, 0, 0, 1, 1, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"special_tmap_obj_60_32_04_0983");
+		
+		myObj= CreateGameObject("a_look_trigger_99_99_04_0987",119.314285f,0.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
+		CreateTrigger(myObj,60,33,"a_change_terrain_trap_60_33_04_0985");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 985, 60, 33, 0, 0, 0, 1, 1, 0, 4, 0);
+		
+		myObj= CreateGameObject("a_teleport_trap_01_12_04_0995",1.200000f,0.000000f,14.400000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 19, 12, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)23.400000,(float)15.000000,(float)2.400000,0);
+		
+		myObj= CreateGameObject("a_teleport_trap_08_43_04_1000",9.600000f,0.150000f,51.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 8, 43, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)10.200000,(float)52.200000,(float)3.600000,4);
+		
+		myObj= CreateGameObject("a_move_trigger_34_47_04_1002",41.400002f,3.600000f,57.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,33,47,"a_teleport_trap_33_47_04_1012");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1012, 33, 47, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_change_terrain_trap_54_61_04_1006",64.800003f,0.000000f,73.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 1007, 3, 13, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_change_terrain_trap(myObj,54,61,0,0);
+		AddTrapLink(myObj,"a_delete_object_trap_54_61_04_1007");
+		
+		myObj= CreateGameObject("a_delete_object_trap_54_61_04_1007",64.800003f,0.000000f,73.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 1010, 53, 61, 0, 0, 0, 1, 1, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"special_tmap_obj_53_61_04_1010");
+		
+		myObj= CreateGameObject("a_look_trigger_99_99_04_1008",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
+		CreateTrigger(myObj,54,61,"a_change_terrain_trap_54_61_04_1006");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 1006, 54, 61, 0, 0, 0, 1, 1, 0, 4, 0);
+		
+		myObj= CreateGameObject("a_teleport_trap_30_47_04_1011",36.000000f,0.150000f,56.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 30, 47, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)36.600000,(float)57.000000,(float)2.100000,4);
+		
+		myObj= CreateGameObject("a_teleport_trap_33_47_04_1012",39.599998f,0.150000f,56.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 34, 47, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)41.400000,(float)57.000000,(float)3.600000,4);
+		
+		myObj= CreateGameObject("a_move_trigger_29_47_04_1019",35.400002f,3.600000f,57.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,30,47,"a_teleport_trap_30_47_04_1011");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1011, 30, 47, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_43_29_04_1021",51.599998f,0.225000f,34.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 43, 27, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)52.200000,(float)33.000000,(float)0.900000,6);
+		
+		myObj= CreateGameObject("a_move_trigger_43_30_04_1023",52.200001f,3.300000f,36.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,43,29,"a_teleport_trap_43_29_04_1021");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1021, 43, 29, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		//Supplementary object 122
+		myObj= CreateGameObject("a_broadsword_99_99_04_0122",119.828575f,0.375000f,119.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_006",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
+		CreateWeapon(myObj, 13, 6, 10, 3, 34);
+		//Supplementary object 196
+		myObj = new GameObject("a_ghost_54_54_04_0196");
+		pos = new Vector3(119.314285f, 0.900000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 27);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 54, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 27, 54, 53, 0, 0, 234, 0, 0, 7, 3, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 198
+		myObj = new GameObject("a_dread_spider_36_36_04_0198");
+		pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 36, 55, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 36, 55, 0, 0, 35, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 199
+		myObj = new GameObject("a_mongbat_25_25_04_0199");
+		pos = new Vector3(119.314285f, 3.300000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"81","Sprites/OBJECTS_081", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", 0, 81, 0, 25, 44, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 25, 44, 0, 0, 20, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh5");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 200
+		myObj = new GameObject("a_headless_headlesses_36_36_04_0200");
+		pos = new Vector3(119.314285f, 2.100000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 36, 41, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 36, 41, 0, 0, 59, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 201
+		myObj = new GameObject("a_ghost_11_11_04_0201");
+		pos = new Vector3(119.314285f, 2.700000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 11, 14, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 11, 14, 0, 0, 49, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 202
+		myObj = new GameObject("a_ghoul_52_52_04_0202");
+		pos = new Vector3(119.314285f, 2.400000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 52, 9, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 52, 9, 0, 0, 38, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 204
+		myObj = new GameObject("a_ghost_53_53_04_0204");
+		pos = new Vector3(119.314285f, 0.000000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 53, 49, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 53, 49, 0, 0, 33, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 211
+		myObj = new GameObject("a_fire_elemental_19_19_04_0211");
+		pos = new Vector3(119.314285f, 1.200000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"120","Sprites/OBJECTS_120", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", 0, 120, 0, 19, 50, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 19, 50, 0, 0, 80, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 240
+		myObj = new GameObject("a_dire_ghost_52_52_04_0240");
+		pos = new Vector3(119.314285f, 3.000000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"113","Sprites/OBJECTS_113", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", 0, 113, 665, 52, 3, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 52, 3, 0, 0, 70, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_key_015_1", ParentContainer, 0);
+		////Container contents complete
+		
+		//Supplementary object 462
+		myObj= CreateGameObject("a_button_99_99_04_0462",118.800003f,2.625000f,118.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_370",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_370", "Sprites/OBJECTS_370", "Sprites/OBJECTS_370", 8, 370, 792, 1, 0, 0, 1, 0, 0, 0, 0, 4, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_skull_45_60_04_0792",1,0,4,7,370);
+		SetRotation(myObj,0,225,0);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0002", "Sprites/tmflat/tmflat_0010");
+		//Supplementary object 478
+		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_99_99_04_0478",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_041", "Sprites/OBJECTS_041", "Sprites/armour/armor_f_0009", 75, 41, 0, 62, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateBoots(myObj, "Sprites/armour/armor_f_0009", "Sprites/armour/armor_m_0009", "Sprites/armour/armor_f_0024", "Sprites/armour/armor_m_0024", "Sprites/armour/armor_f_0039", "Sprites/armour/armor_m_0039", "Sprites/armour/armor_f_0054", "Sprites/armour/armor_m_0054", 1, 3);
+		//Supplementary object 479
+		myObj= CreateGameObject("leather_gloves_pairs_of_leather_gloves_99_99_04_0479",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_038",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_038", "Sprites/OBJECTS_038", "Sprites/armour/armor_f_0006", 76, 38, 0, 47, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateGloves(myObj, "Sprites/armour/armor_f_0006", "Sprites/armour/armor_m_0006", "Sprites/armour/armor_f_0021", "Sprites/armour/armor_m_0021", "Sprites/armour/armor_f_0036", "Sprites/armour/armor_m_0036", "Sprites/armour/armor_f_0051", "Sprites/armour/armor_m_0051", 1, 2);
+		//Supplementary object 480
+		myObj= CreateGameObject("leather_leggings_pairs_of_leather_leggings_99_99_04_0480",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_035",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_035", "Sprites/OBJECTS_035", "Sprites/armour/armor_f_0003", 77, 35, 0, 51, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateLeggings(myObj, "Sprites/armour/armor_f_0003", "Sprites/armour/armor_m_0003", "Sprites/armour/armor_f_0018", "Sprites/armour/armor_m_0018", "Sprites/armour/armor_f_0033", "Sprites/armour/armor_m_0033", "Sprites/armour/armor_f_0048", "Sprites/armour/armor_m_0048", 2, 4);
+		//Supplementary object 482
+		myObj= CreateGameObject("a_leather_vest_99_99_04_0482",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_032",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_032", "Sprites/OBJECTS_032", "Sprites/armour/armor_f_0000", 2, 32, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateArmour(myObj, "Sprites/armour/armor_f_0000", "Sprites/armour/armor_m_0000", "Sprites/armour/armor_f_0015", "Sprites/armour/armor_m_0015", "Sprites/armour/armor_f_0030", "Sprites/armour/armor_m_0030", "Sprites/armour/armor_f_0045", "Sprites/armour/armor_m_0045", 2, 8);
+		//Supplementary object 571
+		myObj= CreateGameObject("a_red_gem_99_99_04_0571",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 572
+		myObj= CreateGameObject("a_pouch_pouches_99_99_04_0572",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_134",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", "Sprites/OBJECTS_135", 19, 134, 571, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 20, 255, 255);
+		AddObjectToContainer("a_red_gem_99_99_04_0571", ParentContainer, 0);
+		////Container contents complete
+		
+		//Supplementary object 578
+		myObj= CreateGameObject("a_book_99_99_04_0578",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 643, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,643);
+		//Supplementary object 579
+		myObj= CreateGameObject("a_book_99_99_04_0579",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 642, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,642);
+		//Supplementary object 580
+		myObj= CreateGameObject("a_fish_fish_99_99_04_0580",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 581
+		myObj= CreateGameObject("a_large_blue_gem_99_99_04_0581",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_165",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_165", "Sprites/OBJECTS_165", "Sprites/OBJECTS_165", 18, 165, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 583
+		myObj= CreateGameObject("a_ruby_rubies_99_99_04_0583",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 584
+		myObj= CreateGameObject("a_book_99_99_04_0584",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_305",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", 11, 305, 641, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,641);
+		//Supplementary object 585
+		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_04_0585",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 3, 20, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 586
+		myObj= CreateGameObject("a_flute_99_99_04_0586",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_292",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_292", "Sprites/OBJECTS_292", "Sprites/OBJECTS_292", 26, 292, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddInstrument(myObj);
+		//Supplementary object 587
+		myObj= CreateGameObject("a_lockpick_99_99_04_0587",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_257",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 79, 257, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddLockpick(myObj);
+		//Supplementary object 588
+		myObj= CreateGameObject("a_book_99_99_04_0588",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_304",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", 11, 304, 640, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,640);
+		//Supplementary object 601
+		myObj= CreateGameObject("a_Jux_stone_99_99_04_0601",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_241", "Sprites/OBJECTS_241", 6, 241, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 602
+		myObj= CreateGameObject("a_Nox_stone_99_99_04_0602",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_245", "Sprites/OBJECTS_245", 6, 245, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 603
+		myObj= CreateGameObject("a_Grav_stone_99_99_04_0603",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_238", "Sprites/OBJECTS_238", 6, 238, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 604
+		myObj= CreateGameObject("a_pack_99_99_04_0604",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_130",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_130", "Sprites/OBJECTS_130", "Sprites/OBJECTS_131", 19, 130, 578, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 250, 255, 255);
+		AddObjectToContainer("a_book_99_99_04_0578", ParentContainer, 0);
+		AddObjectToContainer("a_Grav_stone_99_99_04_0603", ParentContainer, 1);
+		AddObjectToContainer("a_Nox_stone_99_99_04_0602", ParentContainer, 2);
+		AddObjectToContainer("a_Jux_stone_99_99_04_0601", ParentContainer, 3);
+		////Container contents complete
+		
+		//Supplementary object 615
+		myObj= CreateGameObject("a_Rel_stone_99_99_04_0615",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_249", "Sprites/OBJECTS_249", 6, 249, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 616
+		myObj= CreateGameObject("a_red_gem_99_99_04_0616",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 618
+		myObj= CreateGameObject("a_wand_99_99_04_0618",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_155",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_155", "Sprites/OBJECTS_155", "Sprites/OBJECTS_155", 12, 155, 617, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddWand(myObj, 527, 14);
+		//Supplementary object 619
+		myObj= CreateGameObject("a_Tym_stone_99_99_04_0619",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_251", "Sprites/OBJECTS_251", 6, 251, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 621
+		//Supplementary object 672
+		//Supplementary object 934
+		myObj= CreateGameObject("an_iron_ring_16_16_04_0934",119.314285f,2.700000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_054",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_054", "Sprites/OBJECTS_054", "Sprites/OBJECTS_054", 74, 54, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddRing(myObj);
+		//Supplementary object 943
+		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_04_0943",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 944
+		myObj= CreateGameObject("a_mandolin_99_99_04_0944",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", 26, 291, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddInstrument(myObj);
+		//Supplementary object 945
+		myObj= CreateGameObject("a_glowing_rock_99_99_04_0945",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);	
+	
 
 
 
@@ -11984,15 +12009,17 @@ public class MyTools
 		GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Cube); // new GameObject(myObj.name + "_quad");
 		SpriteController.name = myObj.name + "_cube";
 		SpriteController.transform.position = myObj.transform.position;
+		SpriteController.transform.rotation=myObj.transform.rotation;
 		SpriteController.transform.parent = myObj.transform;
-		SpriteController.transform.localScale=new Vector3(0.1f,0.5f,0.5f);
+		SpriteController.transform.localScale=new Vector3(0.5f,0.5f,0.1f);
 		SpriteController.transform.localPosition=new Vector3(0.0f,0.25f,0.0f);
+
 		MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
 		mr.material= (Material)Resources.Load ("Materials/tmobj/tmobj_" + tmObj_index);
 
 		BoxCollider bx = myObj.GetComponent<BoxCollider>();
 		bx.center= new Vector3(0.0f,0.25f,0.0f);
-		bx.size=new Vector3(0.1f,0.5f,0.5f);
+		bx.size=new Vector3(0.5f,0.5f,0.1f);
 		bx.isTrigger=false;
 
 		bx=SpriteController.GetComponent<BoxCollider>();
