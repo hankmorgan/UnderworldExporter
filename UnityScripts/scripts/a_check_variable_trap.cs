@@ -64,17 +64,17 @@ the left, right, center button combination on Level3.
 		if (heading!=0)
 			{
 				int cmp = 0;
-				for(int i=VariableIndex; i<VariableIndex+heading; i++)
+				for(int i=VariableIndex; i<=VariableIndex+heading; i++)
 				{
 					if (xpos != 0)
 						cmp += GameWorldController.instance.variables[i];
 					else
 					{
 						cmp <<= 3;
-						cmp |= GameWorldController.instance.variables[VariableIndex]  & 7;
+						cmp |= (GameWorldController.instance.variables[i]  & 0x7);
 					}
 				}
-				
+				Debug.Log ("cmp = " + cmp + " value=" + VariableValue);
 				return cmp == VariableValue;
 				
 			}

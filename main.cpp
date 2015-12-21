@@ -1459,7 +1459,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setObjectTileXY(game, LevelInfo, objList);
 				setDoorBits(LevelInfo, objList);
-				setCorridors(LevelInfo, &roomIndex);
+				//setCorridors(LevelInfo, &roomIndex);
 				setRooms(LevelInfo, &roomIndex);
 				setPatchBits(LevelInfo, objList);
 				setElevatorBits(LevelInfo, objList);
@@ -1503,7 +1503,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setObjectTileXY(game, LevelInfo, objList);
 				setDoorBits(LevelInfo, objList);
-				setCorridors(LevelInfo, &roomIndex);
+				//setCorridors(LevelInfo, &roomIndex);
 				setRooms(LevelInfo, &roomIndex);
 				setPatchBits(LevelInfo, objList);
 				setElevatorBits(LevelInfo, objList);
@@ -1522,7 +1522,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				SetDeathWatch(objList);
 				setTileNeighbourCount(LevelInfo);
 				setDoorBits(LevelInfo, objList);
-				setCorridors(LevelInfo, &roomIndex);
+				//setCorridors(LevelInfo, &roomIndex);
 				setRooms(LevelInfo, &roomIndex);
 				setKeyCount(game, LevelInfo, objList);
 				//CleanUp(LevelInfo,game); //Get rid of unneeded tiles.

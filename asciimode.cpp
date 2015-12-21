@@ -774,7 +774,10 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 					{
 					fprintf(LOGFILE, "SetTileTag(%d,%d,\"WATER_%d\", %d);", x, y, LevelInfo[x][y].waterRegion, LevelInfo[x][y].Render);
 					}
-
+				else if (LevelInfo[x][y].isLava == 1)
+					{
+					fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAVA_%d\", %d);", x, y, LevelInfo[x][y].lavaRegion, LevelInfo[x][y].Render);
+					}
 				else
 					{
 					fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, LevelInfo[x][y].landRegion, LevelInfo[x][y].Render);

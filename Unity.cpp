@@ -1356,7 +1356,7 @@ void RenderUnityEntityGrating(int game, float x, float y, float z, ObjectItem &c
 
 void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//UW2 bridges
-	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	//RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
 	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (currobj.flags < 2)
@@ -1365,7 +1365,7 @@ void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &
 		}
 	else
 		{
-		printf("\nMake sure this skin exists!"); //uw2_bridge_texture_189
+		//printf("\nMake sure this skin exists!"); //uw2_bridge_texture_189
 		//fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_texture_%03d\"\n", game, currobj.texture);
 		}
 	}
@@ -1716,10 +1716,10 @@ int target;
 				fprintf(UNITY_FILE, "\n\tCreate_an_inventory_trap(myObj);");
 				break;
 			case  A_SET_VARIABLE_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_set_variable_trap(myObj,%d,%d,%d);", currobj.zpos, (((currobj.owner & 0x7) << 3) | (currobj.y)), currobj.heading/45);
+				fprintf(UNITY_FILE, "\n\tCreate_a_set_variable_trap(myObj,%d,%d,%d);", currobj.zpos, ((currobj.quality & 0x3f) << 8) | (((currobj.owner & 0x1f) << 3) | (currobj.y)), currobj.heading / 45);
 				break;
 			case  A_CHECK_VARIABLE_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_check_variable_trap(myObj,%d,%d,%d,%d);", currobj.zpos, currobj.x, (((currobj.owner & 0x7) << 3) | (currobj.y)),currobj.heading/45);
+				fprintf(UNITY_FILE, "\n\tCreate_a_check_variable_trap(myObj,%d,%d,%d,%d);", currobj.zpos, currobj.x, ((currobj.quality & 0x3f)<<8) | (((currobj.owner & 0x1f) << 3) | (currobj.y)),currobj.heading/45);
 				break;
 			case  A_COMBINATION_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_combination_trap(myObj);");
@@ -1796,7 +1796,7 @@ return;
 						case BUTTON:
 							RenderUnityEntityButton(game, x, y, z, currobj, objList, LevelInfo);
 							break;
-						//case LOCK:
+						case LOCK:
 						case A_DOOR_TRAP:
 							//printf("no longer in use???");
 							//RenderUnityEntityA_DOOR_TRAP(game, x, y, z, currobj, objList, LevelInfo);
@@ -1858,7 +1858,7 @@ return;
 							RenderUnityEntityPaintingUW(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case BRIDGE:
-							RenderUnityEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
+							//RenderUnityEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case SHOCK_BRIDGE:
 							RenderUnityEntityBridgeSHOCK(game, x, y, z, currobj, objList, LevelInfo);

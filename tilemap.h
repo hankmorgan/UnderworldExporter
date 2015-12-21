@@ -75,6 +75,7 @@ int Diagonal;
 int Top; int Bottom;	//Textures in each face
 short noOfNeighbours;	//Non solid neighbour tile count.
 short isWater;		//Set when it has a water texture.
+short isLava;		//Set when it has a lava texture.
 short hasBridge;
 //short waterRegion;	//Index to the water contigous area.
 short isCorridor;  //Part of a group of 4 or more tiles with only 2 non solid neighbours
@@ -154,6 +155,8 @@ int CalcNeighbourCeilHeight(tile &t1, tile &t2,int Direction);
 void lookUpSubClass(unsigned char *tmp_ark, int BlockNo, int index, int *property1,int *property2,int *property3,int *property4);
 void MergeCurrentWaterRegion(tile LevelInfo[64][64], int currRegion, int x, int y);
 void MergeWaterRegions(tile LevelInfo[64][64]);
+void MergeCurrentLavaRegion(tile LevelInfo[64][64], int currRegion, int x, int y);
+void MergeLavaRegions(tile LevelInfo[64][64]);
 void setTileNeighbourCount(tile LevelInfo[64][64]);
 void setCorridors(tile LevelInfo[64][64], int *RoomIndex);
 void MergeCorridors(tile LevelInfo[64][64], int *currentCorridorCount, int corridorIndex, int x, int y, int SetValue);

@@ -879,6 +879,7 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 					LevelInfo[x][y].VisibleFaces[v]=1;
 					}
 				LevelInfo[x][y].isWater = (textureMasters[LevelInfo[x][y].floorTexture].water == 1) && ((LevelInfo[x][y].tileType !=0) && (ENABLE_WATER==1));
+				LevelInfo[x][y].isLava = (textureMasters[LevelInfo[x][y].floorTexture].lava == 1) && ((LevelInfo[x][y].tileType != 0));
 				LevelInfo[x][y].waterRegion= 0;
 				LevelInfo[x][y].landRegion = 0;//including connected bridges.
 				LevelInfo[x][y].lavaRegion = 0;
@@ -1632,6 +1633,57 @@ void MergeCurrentWaterRegion(tile LevelInfo[64][64], int currRegion, int x, int 
 	}
 }
 
+
+
+void MergeLavaRegions(tile LevelInfo[64][64])
+	{
+	int currRegion;
+	currRegion = 1;
+	for (int x = 0; x<64; x++)
+		{
+		for (int y = 0; y<64; y++)
+			{
+			if (LevelInfo[x][y].hasBridge != 1)
+				{
+				if ((LevelInfo[x][y].isLava == 1) && (LevelInfo[x][y].lavaRegion == 0))//Unset lava region.
+					{
+					LevelInfo[x][y].lavaRegion = currRegion;
+					MergeCurrentLavaRegion(LevelInfo, currRegion, x, y);
+					currRegion++;
+					}
+				}
+			}
+		}
+	}
+
+void MergeCurrentLavaRegion(tile LevelInfo[64][64], int currRegion, int x, int y)
+	{
+	//north
+	if ((LevelInfo[x][y + 1].isLava == 1) && (LevelInfo[x][y + 1].lavaRegion == 0))
+		{
+		LevelInfo[x][y + 1].lavaRegion = currRegion;
+		MergeCurrentLavaRegion(LevelInfo, currRegion, x, y + 1);
+		}
+	//south
+	if ((LevelInfo[x][y - 1].isLava == 1) && (LevelInfo[x][y - 1].lavaRegion == 0))
+		{
+		LevelInfo[x][y - 1].lavaRegion = currRegion;
+		MergeCurrentLavaRegion(LevelInfo, currRegion, x, y - 1);
+		}
+	//east
+	if ((LevelInfo[x + 1][y].isLava == 1) && (LevelInfo[x + 1][y].lavaRegion == 0))
+		{
+		LevelInfo[x + 1][y].lavaRegion = currRegion;
+		MergeCurrentLavaRegion(LevelInfo, currRegion, x + 1, y);
+		}
+	//west
+	if ((LevelInfo[x - 1][y].isLava == 1) && (LevelInfo[x - 1][y].lavaRegion == 0))
+		{
+		LevelInfo[x - 1][y].lavaRegion = currRegion;
+		MergeCurrentLavaRegion(LevelInfo, currRegion, x - 1, y);
+		}
+	}
+
 void setTileNeighbourCount(tile LevelInfo[64][64])
 { 
 
@@ -1833,6 +1885,8 @@ int isMergeableRoom(tile LevelInfo[64][64], int x, int y)
 
 if (
 	(LevelInfo[x][y].isWater == 0)
+	&&
+	(LevelInfo[x][y].isLava == 0)
 	&&
 	(LevelInfo[x][y].tileType != TILE_SOLID)
 	&&
