@@ -8,7 +8,7 @@ public class MagicScroll : enchantment_base {
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,GetActualSpellIndex() );
+			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
 			objInt.consumeObject();
 			return true;
 		}

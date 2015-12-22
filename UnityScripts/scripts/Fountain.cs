@@ -10,7 +10,7 @@ public class Fountain : object_base {
 		{
 			if ((objInt.isEnchanted==true) &&(objInt.Link>=512))
 			{
-				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,objInt.Link-512);
+				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,objInt.Link-512,Magic.SpellRule_TargetSelf);
 			}
 			ml.Add (playerUW.StringControl.GetString (1,237));
 			return true;

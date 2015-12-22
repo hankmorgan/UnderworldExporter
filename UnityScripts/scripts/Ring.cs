@@ -11,7 +11,7 @@ public class Ring : enchantment_base {
 			if (objInt.isEnchanted==true)
 			{
 				//cast enchantment.
-				SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,GetActualSpellIndex());
+				SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
 				if (SpellEffectApplied!=null)
 				{
 					SpellEffectApplied.SetPermanent(true);

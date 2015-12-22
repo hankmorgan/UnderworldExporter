@@ -4,6 +4,7 @@ using System.Collections;
 public class UWCombat : Combat {
 
 	public UWCharacter playerUW;
+	public Weapon currWeapon;
 
 	public override void PlayerCombatUpdate ()
 	{
@@ -74,14 +75,18 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(300);
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(10);
 					//Create a blood splatter at this point
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
 					Impact imp= hitimpact.AddComponent<Impact>();
 					imp.FrameNo=objInt.GetHitFrameStart();
 					imp.EndFrame=objInt.GetHitFrameEnd();
-					StartCoroutine(imp.Animate());				
+					StartCoroutine(imp.Animate());	
+					if (currWeapon!=null)
+					{
+						currWeapon.onHit (hit.transform.gameObject);
+					}
 				}
 				else
 				{
@@ -92,7 +97,18 @@ public class UWCombat : Combat {
 					imp.FrameNo=46;
 					imp.EndFrame=50;
 					StartCoroutine( imp.Animate());
+					if (currWeapon!=null)
+					{
+						currWeapon.onHit (null);
+					}
 				}
+			}
+		}
+		else
+		{
+			if (currWeapon!=null)
+			{
+				currWeapon.onHit (null);
 			}
 		}
 

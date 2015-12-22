@@ -36,7 +36,7 @@ public class Potion : enchantment_base {
 			}
 			
 			
-			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,index );
+			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,index,Magic.SpellRule_TargetSelf );
 			
 			if (UseString !=-1)
 			{

@@ -32,7 +32,7 @@ owner != 0 poison trap
 		{
 			if (playerUW.Poisoned==false)
 			{
-				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,SpellEffect.UW1_Spell_Effect_Poison);
+				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
 			}		
 		}
 	}

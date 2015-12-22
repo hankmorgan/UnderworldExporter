@@ -755,7 +755,7 @@ public class SpellEffect : MonoBehaviour {
 	public virtual void CancelEffect()
 	{//End the effect. By default it will destroy the object.
 		Active=false;
-		Component.Destroy (this);
+		Component.DestroyImmediate (this);
 	}
 
 	public virtual void Go()

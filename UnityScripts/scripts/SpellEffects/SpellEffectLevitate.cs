@@ -23,7 +23,7 @@ public class SpellEffectLevitate : SpellEffect {
 		//TODO:The effect changes to a slow fall
 		base.CancelEffect();
 		playerUW.isFloating=true;
-		playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,SpellEffect.UW1_Spell_Effect_SlowFall);
+		playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_SlowFall,Magic.SpellRule_TargetSelf);
 	}
 	
 	void Update()

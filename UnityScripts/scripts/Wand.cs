@@ -37,7 +37,7 @@ public class Wand : enchantment_base {
 		{
 			if (SpellObjectQuantity >0)
 				{
-					playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,GetActualSpellIndex() );
+					playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf );
 					if (objInt.isEnchanted==false)
 						{
 						SpellObjectQuantity--;
