@@ -134,6 +134,7 @@ public class TradeSlot : GuiBase {
 				Quantity.text=qty.ToString();
 			}
 		}
+
 	}
 
 
@@ -170,7 +171,7 @@ public class TradeSlot : GuiBase {
 				NPCSlotClick();
 			}
 		}
-
+		playerUW.playerInventory.Refresh ();
 	}
 
 	public bool isSelected()

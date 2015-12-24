@@ -1659,6 +1659,71 @@ public class Conversation : GuiBase {
 
 		return;
 	}
+
+
+	public int find_barter_total( int unk1, int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id, int[] variables )
+	{
+		/*
+   id=0032 name="find_barter_total" ret_type=int
+   parameters:   s[0]: ???
+                 s[1]: pointer to number of found items
+                 s[2]: pointer to
+                 s[3]: pointer to
+                 s[4]: pointer to item ID to find
+   description:  searches for item in barter area
+   return value: 1 when found (?)
+	*/
+		/*
+My implementation 
+find the total number of matching items
+keep a list of slots where they are found
+keep a number of found slots.
+		 */
+		variables[ptrCount]=0;
+		int counter=0;
+		for (int i = 0; i<4; i++)
+		{
+			if (playerUW.playerHud.playerTrade[i].isSelected())
+			{
+				ObjectInteraction objInt = playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+				if (objInt!=null)
+				{
+					
+					if (item_id<1000)
+					{
+						if (objInt.item_id== item_id)
+						{
+							variables[ptrCount] += objInt.GetQty();
+							variables[ptrSlot+counter++]+= i;
+							//return 1;
+						}
+					}
+					else
+					{
+						if ((objInt.item_id>= (item_id-1000)*16) && (objInt.item_id< ((item_id+1)-1000)*16))
+						{
+							variables[ptrCount] += objInt.GetQty();
+							//variables[ptrSlot]+= 1;
+							variables[ptrSlot+counter++]+= i;
+							//return 1;
+						}
+					}
+				}
+			}
+			
+		}
+		variables[ptrNoOfSlots]= counter;
+		if (counter>0)
+		{
+			return 1;
+		}
+		else
+		{
+			return 0;
+		}
+
+
+	}
 }
 
 
