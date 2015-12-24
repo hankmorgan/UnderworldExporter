@@ -4720,6 +4720,10 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				*/			
 				tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
 				int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
+				if (currDoor.item_id == 334)
+					{//Open portcullis
+					dooroverheight = t.floorHeight;
+					}
 				tmpt.ceilingHeight = CEILING_HEIGHT - dooroverheight - DOORHEIGHTUNITS;
 			//	tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - DOORHEIGHTUNITS;
 				x1 = ((offX + DOORTHICKNESS + doorOffset));
@@ -4847,6 +4851,10 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 
    int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
 	//			tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - DOORHEIGHTUNITS;
+   if (currDoor.item_id == 334)
+	   {//Open portcullis
+	   dooroverheight = t.floorHeight;
+	   }
    tmpt.ceilingHeight = CEILING_HEIGHT - dooroverheight - DOORHEIGHTUNITS;
 				//top
 				//east face 

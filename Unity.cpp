@@ -368,7 +368,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	}
 
 void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-	{
+	{//TODO:Put in code to handle open and closed door versions. 
 	//Params
 	//item_id
 	//tileX
@@ -1701,6 +1701,7 @@ int target;
 				objList[currobj.link].InUseFlag=1;
 				objList[currobj.link].tileX=currobj.tileX;
 				objList[currobj.link].tileY = currobj.tileX;//For nav mesh generation.
+				//TODO:Make sure the inventory of the linked object is tagged as in use. 
 				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
 				break;
 			case  A_DOOR_TRAP:
