@@ -6,7 +6,7 @@ public class DoorControl : object_base {
 
 	public bool locked;
 	public int KeyIndex;//What keys can open this
-	private bool state;	//True for open, false for closed.
+	public bool state;	//True for open, false for closed.
 	public bool isPortcullis;//Special cases. Sets direction of opening
 	public bool DoorBusy;//Is the door opening or closing. Used to keep if flying off it's hinges!
 	public bool Pickable;//Sets if the lock can be picked.
@@ -176,6 +176,7 @@ public class DoorControl : object_base {
 				{
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,1.1f,0f),1.0f));
 				}
+				objInt.item_id+=8;
 				state=true;
 			}
 		}
@@ -195,6 +196,7 @@ public class DoorControl : object_base {
 				{
 					StartCoroutine(RaiseDoor (this.transform,new Vector3(0f,-1.1f,0f),1.0f));
 				}
+				objInt.item_id-=8;
 				state=false;
 			}
 		}

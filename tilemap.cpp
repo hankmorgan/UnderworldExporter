@@ -1544,6 +1544,24 @@ for (int x=0; x<64;x++)
 					{
 					SetContainerInUse(game, LevelInfo,objList, objList[nextObj].index);
 					}
+				else if (objectMasters[objList[nextObj].item_id].type == A_CREATE_OBJECT_TRAP)
+					{
+					if (objList[nextObj].InUseFlag == 0)
+						{
+						objList[nextObj].tileX = x;
+						objList[nextObj].tileY = y;
+						objList[nextObj].InUseFlag = 1;
+						}
+						if ( 
+							(objectMasters[objList[objList[nextObj].link].item_id].type == NPC)
+								&& 
+								(objList[objList[nextObj].link].InUseFlag==0)
+								)
+							{
+							SetContainerInUse(game, LevelInfo, objList, objList[objList[nextObj].link].index);
+							}
+						}
+					
 				nextObj=objList[nextObj].next;
 				}
 			}

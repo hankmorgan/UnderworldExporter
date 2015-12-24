@@ -15,6 +15,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 */
 
 	//private bool TrapFired=false;
+	public string NavMeshRegion;//Which nav mesh should apply to cloned objects if they are npcs.
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
@@ -25,6 +26,10 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 			{
 				GameObject cloneObj = Instantiate(objToClone);
 				cloneObj.transform.position = this.gameObject.transform.position;
+				if (cloneObj.GetComponent<NPC>()!=null)
+				{
+					cloneObj.GetComponent<NPC>().NavMeshRegion=NavMeshRegion;
+				}
 				//TrapFired=true;
 			}
 		}

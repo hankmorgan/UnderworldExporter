@@ -441,23 +441,28 @@ int hasLock=0;
 		}
 	if (game != SHOCK)
 		{
+		int isOpen=0;
+		if ((currobj.item_id >= 328) || (currobj.item_id <= 335))
+			{//Open doors or portcullis
+			isOpen = 1;
+			}
 		switch (objectMasters[currobj.item_id].type)
 			{
 				case DOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d, %d);",
 						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
-						hasLock);
+						hasLock,isOpen);
 					break;
 				case HIDDENDOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/world/%s\", %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/world/%s\", %d, %d, %d);",
 						textureMasters[LevelInfo[currobj.tileX][currobj.tileY].wallTexture].path, 
 						objList[currobj.link].link & 0x3F,
-						hasLock);
+						hasLock, isOpen);
 					break;
 				case PORTCULLIS:
-					fprintf(UNITY_FILE, "\n\tCreatePortcullis(myObj, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreatePortcullis(myObj, %d, %d, %d);",
 						objList[currobj.link].link & 0x3F,
-						hasLock);
+						hasLock, isOpen);
 					//fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
 					break;
 			}
@@ -1696,13 +1701,48 @@ int target;
 				fprintf(UNITY_FILE, "\n\tCreate_a_spelltrap(myObj);");
 				break;
 			case  A_CREATE_OBJECT_TRAP:
-				fprintf(UNITY_FILE, "\n\tCreate_a_create_object_trap(myObj);");
+				//fprintf(UNITY_FILE, "\n\tCreate_a_create_object_trap(myObj);");
+				fprintf(UNITY_FILE, "\n\tCreate_a_create_object_trap(myObj, ");
 				//Flag the linked object as in use. To make sure it is created later.
 				objList[currobj.link].InUseFlag=1;
-				objList[currobj.link].tileX=currobj.tileX;
-				objList[currobj.link].tileY = currobj.tileX;//For nav mesh generation.
+				//objList[currobj.link].tileX=currobj.tileX;
+				//objList[currobj.link].tileY = currobj.tileX;
+				//For nav mesh association
+				if ((currobj.tileX != 99) && (currobj.tileY != 99))
+					{
+					switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
+						{
+							case 66://bat
+							case 73://vampire bat
+								fprintf(UNITY_FILE, "\"SkyMesh1\");");//Fliers can go anywhere. Need to create this mesh.
+								break;
+							case 87://lurker
+							case 116://deep lurker
+								fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+								break;
+							default:
+								fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+								break;
+						}
+					}
+				else
+					{
+					fprintf(UNITY_FILE, "\"GroundMesh%d\");", 1);
+					}
+
+
+
+
+
+
+
 				//TODO:Make sure the inventory of the linked object is tagged as in use. 
 				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
+
+
+
+
+
 				break;
 			case  A_DOOR_TRAP:
 				fprintf(UNITY_FILE, "\n\tCreate_a_door_trap(myObj,%d);",currobj.quality);
