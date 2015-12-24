@@ -1390,14 +1390,18 @@ public class Conversation : GuiBase {
 		ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_" + item_id,true);
 
 		switch (item_id)
-		{//Some know cases
+		{//Some known cases
+		case 47://Dragonskin boots
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			//myObj.AddComponent<Boots>();
+			Boots.CreateBoots(myObj, "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", 5, 17);
+			break;
 		case 314:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id, "Sprites/OBJECTS_" + item_id, "Sprites/OBJECTS_" + item_id, ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<Readable>();//Scroll given by Biden
 			break;
-
 		default:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id, "Sprites/OBJECTS_" + item_id, "Sprites/OBJECTS_" + item_id, ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<object_base>();
 			break;
 		}
@@ -1591,22 +1595,39 @@ public class Conversation : GuiBase {
 
 
 	public int find_barter(int unk1, int arg1)
-	{
+	{//This returns slot number + 1. Take this into account when retrieving the items in later functions
 		//id=0031 name="find_barter" ret_type=int
 		//	parameters:   arg1: item id to find
 		//	description:  searches for item in barter area
 		//	return value: returns pos in inventory object list, or 0 if not found
+		// if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
 		for (int i = 0; i<4; i++)
 		{
-			ObjectInteraction objInt = playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
-			if (objInt!=null)
-			{
-				if (objInt.item_id== arg1)
+			if (playerUW.playerHud.playerTrade[i].isSelected())
+			    {
+				ObjectInteraction objInt = playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+				if (objInt!=null)
 				{
-					return i+1;
+					
+					if (arg1<1000)
+					{
+						if (objInt.item_id== arg1)
+						{
+							return i+1;
+						}
+					}
+					else
+					{
+						if ((objInt.item_id>= (arg1-1000)*16) && (objInt.item_id< ((arg1+1)-1000)*16))
+						{
+							return i+1;
+						}
+					}
 				}
 			}
+
 		}
+
 		return 0;
 	}
 

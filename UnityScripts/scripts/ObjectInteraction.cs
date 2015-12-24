@@ -557,15 +557,15 @@ public class ObjectInteraction : MonoBehaviour {
 				switch (lstOutput[i])
 				{
 				case 299://Fishing pole
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					myObj.AddComponent<FishingPole>();break;
 				case 183://Popcorn
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					Food fd = myObj.AddComponent<Food>();
 					fd.Nutrition=5;
 					break;
 				default:
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], "Sprites/OBJECTS_" + lstOutput[i], 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					myObj.AddComponent<object_base>();break;
 				}
 				playerUW.playerInventory.ObjectInHand=myObj.name;
