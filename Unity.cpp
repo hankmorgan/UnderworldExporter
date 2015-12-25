@@ -202,6 +202,11 @@ void RenderUnityEntityFishingPole(int game, float x, float y, float z, ObjectIte
 	fprintf(UNITY_FILE, "\n\tAddFishingPole(myObj);");
 	}
 
+void RenderUnityEntityZanium(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tAddZanium(myObj);");
+	}
+
 void RenderUnityEntityInstrument(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	fprintf(UNITY_FILE, "\n\tAddInstrument(myObj);");
@@ -442,7 +447,7 @@ int hasLock=0;
 	if (game != SHOCK)
 		{
 		int isOpen=0;
-		if ((currobj.item_id >= 328) || (currobj.item_id <= 335))
+		if ((currobj.item_id >= 328) && (currobj.item_id <= 335))
 			{//Open doors or portcullis
 			isOpen = 1;
 			}
@@ -452,7 +457,7 @@ int hasLock=0;
 					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d, %d);",
 						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
 						hasLock,isOpen);
-					break;
+					break; 
 				case HIDDENDOOR:
 					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/world/%s\", %d, %d, %d);",
 						textureMasters[LevelInfo[currobj.tileX][currobj.tileY].wallTexture].path, 
@@ -2091,6 +2096,12 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityFishingPole(game, x, y, z, currobj, objList, LevelInfo);
 							break;
+						case ZANIUM:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityZanium(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 						case INSTRUMENT:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -2146,7 +2157,7 @@ void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
 			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d);"
 				, x, y, LevelInfo[x][y].tileType, 
 				LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight, 
-				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, 0);  //TODO:Bridges
+				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, LevelInfo[x][y].isLava);  //TODO:Bridges
 			}
 		}
 	fclose(UNITY_FILE);

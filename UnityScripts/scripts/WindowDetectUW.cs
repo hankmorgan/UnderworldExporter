@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class WindowDetectUW : WindowDetect {
-	//public	bool JustClicked;
+	public	bool JustClicked;
 
 	public static UWCharacter playerUW;
 	public override void Start ()
@@ -91,13 +91,12 @@ public class WindowDetectUW : WindowDetect {
 		{
 			return;
 		}
-		//if (JustClicked==true)
-		//{
-		//	return;
-		//}
+		if (JustClicked==true)
+		{
+			return;
+		}
 		base.OnPress(isPressed);
-		//JustClicked=true;
-		//Invoke("ResetClick",0.2f);
+
 		//if (isPressed==false)
 		//{
 		//	Debug.Log ("HERE");
@@ -136,10 +135,10 @@ public class WindowDetectUW : WindowDetect {
 		//Invoke("ResetClick",0.5f);
 	}
 
-	//void ResetClick()
-	//{
-	//	JustClicked=false;
-	//}
+	void ResetClick()
+	{//Prevent 
+	JustClicked=false;
+	}
 
 	void ClickEvent()
 	{
@@ -160,6 +159,8 @@ public class WindowDetectUW : WindowDetect {
 		case UWCharacter.InteractionModePickup://Pickup
 			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 			{
+				JustClicked=true;//Prevent catching something I have just thrown.
+				Invoke("ResetClick",0.2f);
 				ThrowObjectInHand();
 			}
 			else

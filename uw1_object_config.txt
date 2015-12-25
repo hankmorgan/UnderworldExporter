@@ -295,7 +295,7 @@
 294 0 0 0 entity 90 a_moonstone H 1 Sprites/OBJECTS_294 0 L M 1 1 1 Sprites/OBJECTS_294 Sprites/OBJECTS_294 S T U Sprites/OBJECTS_294 W x Y 0 1
 295 0 0 0 entity 87 a_spike H 1 Sprites/OBJECTS_295 0 L M 1 1 1 Sprites/OBJECTS_295 Sprites/OBJECTS_295 S T U Sprites/OBJECTS_295 W x Y 0 1
 296 0 0 0 entity 16 a_rock_hammer H 1 Sprites/OBJECTS_296 0 L M 1 1 1 Sprites/OBJECTS_296 Sprites/OBJECTS_296 S T U Sprites/OBJECTS_296 W x Y 0 1
-297 0 0 0 entity 16 a_glowing_rock H 1 Sprites/OBJECTS_297 0 L M 1 1 1 Sprites/OBJECTS_297 Sprites/OBJECTS_297 S T U Sprites/OBJECTS_297 W x Y 1 1
+297 0 0 0 entity 93 a_glowing_rock H 1 Sprites/OBJECTS_297 0 L M 1 1 1 Sprites/OBJECTS_297 Sprites/OBJECTS_297 S T U Sprites/OBJECTS_297 W x Y 1 1
 298 0 0 0 entity 16 a_campfire H 1 Sprites/OBJECTS_298 1 L M 0 0 0 Sprites/OBJECTS_298 Sprites/OBJECTS_298 S T U Sprites/OBJECTS_298 W x Y 1 1
 299 0 0 0 entity 92 a_fishing_pole H 1 Sprites/OBJECTS_299 0 L M 1 1 1 Sprites/OBJECTS_299 Sprites/OBJECTS_299 S T U Sprites/OBJECTS_299 W x Y 0 1
 300 0 0 0 entity 16 a_medallion H 1 Sprites/OBJECTS_300 0 L M 1 1 1 Sprites/OBJECTS_300 Sprites/OBJECTS_300 S T U Sprites/OBJECTS_300 W x Y 0 1

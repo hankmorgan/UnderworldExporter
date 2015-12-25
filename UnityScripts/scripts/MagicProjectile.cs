@@ -6,10 +6,14 @@ public class MagicProjectile : MonoBehaviour {
 	public int damage;
 	//public string HitImage;
 	public bool HasHit;
+	public string caster; //who has cast the project. It will ignore them.
 
 	void OnCollisionEnter(Collision collision)
 	{
-
+	if(collision.gameObject.name== caster)
+		{
+			return;
+		}
 		if (HasHit==true)
 		{//Only impact once.
 			return;
@@ -29,9 +33,6 @@ public class MagicProjectile : MonoBehaviour {
 			if (objInt!=null)
 			{
 				objInt.Attack(damage);
-				//Create a blood splatter at this point
-				//GameObject hitimpact = new GameObject(collision.gameObject.name + "_impact");
-				//hitimpact.transform.position=this.gameObject.transform.position;//ray.GetPoint(weaponRange/0.7f);
 				Impact imp= this.gameObject.AddComponent<Impact>();
 				imp.FrameNo=objInt.GetHitFrameStart();
 				imp.EndFrame=objInt.GetHitFrameEnd();
@@ -39,11 +40,20 @@ public class MagicProjectile : MonoBehaviour {
 			}
 			else
 			{
-				//do a miss impact 
-				Impact imp= this.gameObject.AddComponent<Impact>();
-				imp.FrameNo=46;
-				imp.EndFrame=50;
-				StartCoroutine( imp.Animate());
+				//test if this is a player.
+				if (collision.gameObject.GetComponent<UWCharacter>()!=null)
+				{
+					collision.gameObject.GetComponent<UWCharacter>().ApplyDamage(damage);
+				}
+				else
+				{
+					//do a miss impact 
+					Impact imp= this.gameObject.AddComponent<Impact>();
+					imp.FrameNo=46;
+					imp.EndFrame=50;
+					StartCoroutine( imp.Animate());
+				}
+
 			}
 			
 			DestroyObject(this.gameObject,1);
@@ -60,4 +70,5 @@ public class MagicProjectile : MonoBehaviour {
 	//	other.gameObject.transform.SendMessage("ApplyDamage");
 	//	DestroyObject(this.gameObject);
 	//}
+
 }

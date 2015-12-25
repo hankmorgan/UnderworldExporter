@@ -25,4 +25,9 @@ public class a_teleport_trap : trap_base {
 			Debug.Log ("teleporting to level " + levelNo);
 		}
 	}
+
+	public override void PostActivate ()
+	{//Prevent deletion of the trap
+
+	}
 }

@@ -57,7 +57,10 @@ public class enchantment_base : object_base {
 		string desc;
 		
 		switch (objInt.item_id)
-		{			
+		{	
+		case 54: //Ring of humility
+			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			break;
 		case 184 :// a_mushroom
 		case 185 :// a_toadstool
 		case 186 :// a_bottle_of_ale_bottles_of_ale

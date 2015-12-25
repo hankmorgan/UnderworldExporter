@@ -68,7 +68,6 @@ public class PlayerInventory : MonoBehaviour {
 
 	public bool atTopLevel;
 	public string currentContainer;
-
 	private UWCharacter playerUW;
 
 	public Texture2D Blank;
@@ -77,7 +76,7 @@ public class PlayerInventory : MonoBehaviour {
 	public Light lt;
 	private LightSource ls;
 
-	private Container playerContainer;
+	public Container playerContainer;
 	public int ContainerOffset=0;//For scrolling the inventory.
 
 	// Use this for initialization
@@ -885,5 +884,40 @@ public class PlayerInventory : MonoBehaviour {
 		//Debug.Log ("carry weight = " + CarryWeight);
 		//Debug.Log ("inventory weight = " + InventoryWeight);
 		return CarryWeight-InventoryWeight;
+	}
+
+
+	public ObjectInteraction findObjInteractionByID(int item_id)
+	{//Returns the first instance of a particular Item id in the players inventory
+		for( int i=0; i<=10;i++)
+		{
+			GameObject obj = GetGameObjectAtSlot(i);
+			if (obj!=null)
+			{
+				ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+				if (objInt!=null)
+				{
+					if (objInt.item_id== item_id)
+					{
+						return objInt;
+					}
+				}
+			}
+		}
+		//playerUW.GetComponent<Container>();
+		string find=playerContainer.findItemOfType(item_id);
+		if (find!="")
+		{
+			GameObject obj = GameObject.Find (find);
+			ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+			if (objInt!=null)
+			{
+				if (objInt.item_id== item_id)
+				{
+					return objInt;
+				}
+			}
+		}
+		return null;
 	}
 }

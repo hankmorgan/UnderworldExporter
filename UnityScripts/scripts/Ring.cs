@@ -23,7 +23,7 @@ public class Ring : enchantment_base {
 
 	public override bool UnEquipEvent (int slotNo)
 	{
-		if ((slotNo ==9) || (slotNo ==10))
+		if (((slotNo ==9) || (slotNo ==10)) && (objInt.item_id!=54))//Not the ring of humility
 		{
 		if (SpellEffectApplied!=null)
 			{

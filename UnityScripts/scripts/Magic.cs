@@ -6,8 +6,8 @@ public class Magic : MonoBehaviour {
 
 	//Spell effect rules
 	public const int SpellRule_TargetOther=0;//Spell is affecting another character/thing
-	public const int SpellRule_TargetSelf=1;//Spell is affecting player character.
-
+	public const int SpellRule_TargetSelf=1;//Spell is cast by player and/or is affecting player character.
+	public const int SpellRule_TargetVector=2;//Spell is cast by a hostile or a spell trap along a vector
 
 	//Magic spell to be cast on next click in window
 	public string ReadiedSpell;
@@ -1315,28 +1315,40 @@ public class Magic : MonoBehaviour {
 	bool CastProjectile(GameObject caster, string SpriteName)
 	{//Fires off the projectile
 		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
-		Ray ray = getRay (caster);
-		RaycastHit hit = new RaycastHit(); 
-		float dropRange=0.5f;
-		if (!Physics.Raycast(ray,out hit,dropRange))
-		{//No object interferes with the spellcast
+		if (playerUW !=null)
+		{
+			Ray ray = getRay (caster);
+			RaycastHit hit = new RaycastHit(); 
+			float dropRange=0.5f;
+			if (!Physics.Raycast(ray,out hit,dropRange))
+			{//No object interferes with the spellcast
+				float force = 200.0f;
+				ReadiedSpell= "";
+				GameObject projectile = CreateMagicProjectile(SpriteName,"",ray.GetPoint(dropRange/2.0f), 5, caster);
+				LaunchProjectile(projectile,ray,dropRange,force);
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				return true;
+			}
+			return false;
+		}
+		else
+		{//Is being cast by an npc or a spell trap
 			float force = 200.0f;
-			ReadiedSpell= "";
-			GameObject projectile = CreateMagicProjectile(SpriteName,"",ray.GetPoint(dropRange/2.0f), 5);
-			LaunchProjectile(projectile,ray,dropRange,force);
-			playerUW.CursorIcon=playerUW.CursorIconDefault;
+			GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
+			LaunchProjectile(projectile,force);
 			return true;
 		}
-		return false;
 	}	
 
 
-	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage)
+	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage, GameObject Caster)
 	{//Creates the projectile.
 		GameObject projectile = new GameObject();
+		//projectile.transform.position=Location;
 		CreateObjectGraphics(projectile,ProjectileImage,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
 		mgp.damage=Damage;
+		mgp.caster=Caster.name;
 		BoxCollider box = projectile.AddComponent<BoxCollider>();
 		box.size = new Vector3(0.2f,0.2f,0.2f);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
@@ -1344,8 +1356,16 @@ public class Magic : MonoBehaviour {
 		Rigidbody rgd =projectile.AddComponent<Rigidbody>();
 		rgd.freezeRotation =true;
 		rgd.useGravity=false;
-		projectile.transform.position=Location;
-		
+		rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
+		if (Caster.name!="Gronk")
+		{
+			projectile.transform.position=Caster.transform.position;
+			projectile.transform.rotation=Caster.transform.rotation;
+		}	
+		else
+		{
+			projectile.transform.position=Location;
+		}
 		return projectile;
 	}
 
@@ -1355,7 +1375,10 @@ public class Magic : MonoBehaviour {
 		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
 
-
+	void LaunchProjectile(GameObject projectile, float force)
+	{
+		projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward*force);
+	}
 	
 	
 	static void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
@@ -1379,7 +1402,7 @@ public class Magic : MonoBehaviour {
 			SpriteController.AddComponent<Billboard> ();
 		}
 	}
-	
+	//TODO: Use the versions of this code in Objectinteraction itself.
 	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
 	{
 		GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
@@ -1534,6 +1557,11 @@ public class Magic : MonoBehaviour {
 		//if (SpellRule==SpellRule_TargetSelf)
 		//{//Cast on player.
 		//The player array indice
+
+		if (SpellRule!=SpellRule_TargetVector)
+		{
+
+	
 			ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
 			PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
 		//}
@@ -1548,7 +1576,7 @@ public class Magic : MonoBehaviour {
 			}
 		}
 		//}
-
+		}
 
 
 		switch (EffectId)
@@ -1878,12 +1906,7 @@ public class Magic : MonoBehaviour {
 			Debug.Log ("toughness enchantment");
 			break;
 		
-		case SpellEffect.UW1_Spell_Effect_MagicArrow:
-		case SpellEffect.UW1_Spell_Effect_MagicArrow_alt01:
-			//Cast spell/no spell effect
-			Cast_OrtJux(caster,ready);
-			SpellResultType=0;
-			break;
+
 	
 		case SpellEffect.UW1_Spell_Effect_Open:
 		case SpellEffect.UW1_Spell_Effect_Open_alt01:
@@ -1907,9 +1930,17 @@ public class Magic : MonoBehaviour {
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_SheetLightning:
-			//Cast spell/no spell effect
-			Cast_OrtGrav(caster, ready);
+			if (SpellRule!=SpellRule_TargetVector)
+			{
+				Cast_OrtGrav(caster, ready);
+			}
+			else
+			{
+				CastProjectile(caster,"Sprites/objects_021");
+			}
 			SpellResultType=0;
+			break;
+
 			break;
 
 		case SpellEffect.UW1_Spell_Effect_Armageddon:
@@ -1926,9 +1957,45 @@ public class Magic : MonoBehaviour {
 			SpellResultType=0;
 			break;
 
-		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
-		case SpellEffect.UW1_Spell_Effect_Fireball:
+		case SpellEffect.UW1_Spell_Effect_MagicArrow:
+		case SpellEffect.UW1_Spell_Effect_MagicArrow_alt01:
+			if (SpellRule!=SpellRule_TargetVector)
+			{
+				Cast_OrtJux(caster,ready);
+			}
+			else
+			{
+				CastProjectile(caster,"Sprites/objects_023");
+			}
+			SpellResultType=0;
+			break;
 
+		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
+		{
+			if (SpellRule!= SpellRule_TargetVector)
+			{
+				//Do  regular cast of the implemented spell when implemented.
+			}
+			else
+			{
+				CastProjectile(caster,"Sprites/objects_021");
+				SpellResultType=0;
+			}
+			break;
+		}
+		case SpellEffect.UW1_Spell_Effect_Fireball:
+		{
+			if (SpellRule!= SpellRule_TargetVector)
+			{
+				//Do  regular cast of the implemented spell when implemented.
+			}
+			else
+			{
+				CastProjectile(caster,"Sprites/objects_020");
+				SpellResultType=0;
+			}
+			break;
+		}
 		case SpellEffect.UW1_Spell_Effect_FlameWind:
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:

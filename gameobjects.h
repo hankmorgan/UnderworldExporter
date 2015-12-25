@@ -98,6 +98,7 @@
 #define MOONSTONE 90
 #define LEECH 91
 #define FISHING_POLE 92
+#define ZANIUM 93
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/

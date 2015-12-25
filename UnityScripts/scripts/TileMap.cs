@@ -143,7 +143,7 @@ public class TileMap : MonoBehaviour {
 			{
 				if ((GetTileRender(i,j)==1) && (GetTileVisited(i,j)))
 				{
-					fillTile(output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red);
+					fillTile(output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.green);
 				}
 			}
 		}
@@ -220,7 +220,7 @@ public class TileMap : MonoBehaviour {
 	}
 
 
-	private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color BridgeColour )
+	private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
 	{
 		Color TileColorPrimary;
 		Color TileColorSecondary;
@@ -230,6 +230,11 @@ public class TileMap : MonoBehaviour {
 			TileColorPrimary=WaterColour;
 			TileColorSecondary=Color.clear;
 			}
+		else if (GetIsLava(TileX,TileY) == true)
+		{
+			TileColorPrimary=LavaColour;
+			TileColorSecondary=Color.clear;
+		}
 		else
 			{
 			TileColorPrimary=GroundColour;
@@ -643,248 +648,6 @@ public class TileMap : MonoBehaviour {
 	}
 
 
-
-
-
-	/**
-	private string TileAscii(int tileX, int tileY, bool VisitedOnly)
-	{
-		if ((VisitedOnly ==true) && (GetTileVisited(tileX,tileY)==false))
-		{//Don't return tile if not visited.
-			return " ";
-		}
-		switch (GetTileType(tileX,tileY))
-		{
-		case TILE_SOLID:
-			{//solid	
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "#";
-				}
-				else
-				{
-					return "*";
-				}
-			}
-			case TILE_OPEN:
-			{//open
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return " ";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case TILE_DIAG_SE:
-			{//diag se
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "/";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case TILE_DIAG_SW:
-			{//diag sw
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "\\";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 4:
-			{//diag ne
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "\\";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 5:
-			{//diag nw
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "/";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 6:
-			{//slope n
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "n";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 7:
-			{//slope s
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "x";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 8:
-			{//slope e
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "e";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 9:
-			{//slopew
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "w";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-				
-			case 10:
-			{//nw valley
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "a";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 11:
-			{//ne valley
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "b";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 12:
-			{//se valley
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "c";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 13:
-			{//sw valley
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "d";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-				
-			case 14:
-			{//se ridge
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "f";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 15:
-			{//sw ridge
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "g";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 16:
-			{//nw ridge
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "h";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-			case 17:
-			{//ne ridge
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "i";
-				}
-				else
-				{
-					return " ";
-				}
-			}
-				
-				
-			default:
-			{//Unknown tile type.
-				if (GetTileRender(tileX,tileY) == 1)
-				{
-					return "?";
-				}
-				else
-				{
-					return "?";
-				}
-			}
-		}
-	}
-
-	public string TileMapAscii(bool VisitedOnly)
-	{
-		string output="";
-		for (int i = 0; i<63; i++)
-		{
-			for (int j =63 ; j>=0; j--)
-			{
-				output = output + TileAscii(i,j, VisitedOnly);
-			}
-			output = output + "EOL\n";
-		}
-		return output;
-	}
-*/
 	public int GetFloorHeight(int tileX, int tileY)
 	{
 		return FloorHeight[tileX,tileY];
@@ -936,6 +699,11 @@ public class TileMap : MonoBehaviour {
 		return isWater[tileX,tileY];
 	}
 
+	private bool GetIsLava(int tileX, int tileY)
+	{
+		return isLava[tileX,tileY];
+	}
+
 	private void SetIsWater(int tileX, int tileY,int iIsWater)
 	{
 		if (iIsWater==1)
@@ -946,6 +714,18 @@ public class TileMap : MonoBehaviour {
 			{
 			isWater[tileX,tileY]=false;
 			}
+	}
+
+	private void SetIsLava(int tileX, int tileY,int iIsLava)
+	{
+		if (iIsLava==1)
+		{
+			isLava[tileX,tileY]=true;	
+		}
+		else
+		{
+			isLava[tileX,tileY]=false;
+		}
 	}
 
 	private void SetTileType(int tileX, int tileY,int itileType)
@@ -968,7 +748,7 @@ public class TileMap : MonoBehaviour {
 		return Render[tileX,tileY];
 	}
 
-	private void SetTileProp(int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsBridge)
+	private void SetTileProp(int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava)
 	{
 
 
@@ -980,6 +760,7 @@ public class TileMap : MonoBehaviour {
 		SetCeilingHeight (tileX,tileY,CeilingHeight);
 
 		SetIsWater(tileX,tileY,iIsWater);
+		SetIsLava(tileX,tileY,iIsLava);
 		//CeilingHeight[tileX,tileY]=CeilingHeight;
 
 	}
@@ -1656,9 +1437,9 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(10,23,0,1,24,0,0,0,0);
 		SetTileProp(10,24,5,1,16,0,0,0,0);
 		SetTileProp(10,25,1,1,16,0,0,0,0);
-		SetTileProp(10,26,1,1,0,0,0,0,0);
-		SetTileProp(10,27,1,1,0,0,0,0,0);
-		SetTileProp(10,28,1,1,0,0,0,0,0);
+		SetTileProp(10,26,1,1,0,0,0,0,1);
+		SetTileProp(10,27,1,1,0,0,0,0,1);
+		SetTileProp(10,28,1,1,0,0,0,0,1);
 		SetTileProp(10,29,0,1,24,0,0,0,0);
 		SetTileProp(10,30,0,1,22,0,0,0,0);
 		SetTileProp(10,31,1,1,22,0,0,0,0);
@@ -1720,10 +1501,10 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(11,23,0,1,16,0,0,0,0);
 		SetTileProp(11,24,0,1,24,0,0,0,0);
 		SetTileProp(11,25,5,1,16,0,0,0,0);
-		SetTileProp(11,26,1,1,0,0,0,0,0);
-		SetTileProp(11,27,1,1,0,0,0,0,0);
-		SetTileProp(11,28,1,1,0,0,0,0,0);
-		SetTileProp(11,29,1,1,0,0,0,0,0);
+		SetTileProp(11,26,1,1,0,0,0,0,1);
+		SetTileProp(11,27,1,1,0,0,0,0,1);
+		SetTileProp(11,28,1,1,0,0,0,0,1);
+		SetTileProp(11,29,1,1,0,0,0,0,1);
 		SetTileProp(11,30,0,1,22,0,0,0,0);
 		SetTileProp(11,31,1,1,22,0,0,0,0);
 		SetTileProp(11,32,1,1,22,0,0,0,0);
@@ -1784,7 +1565,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(12,23,0,1,24,0,0,0,0);
 		SetTileProp(12,24,0,1,24,0,0,0,0);
 		SetTileProp(12,25,0,1,24,0,0,0,0);
-		SetTileProp(12,26,1,1,0,0,0,0,0);
+		SetTileProp(12,26,1,1,0,0,0,0,1);
 		SetTileProp(12,27,1,1,16,0,0,0,0);
 		SetTileProp(12,28,2,1,16,0,0,0,0);
 		SetTileProp(12,29,0,1,24,0,0,0,0);
@@ -1848,7 +1629,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(13,23,0,1,24,0,0,0,0);
 		SetTileProp(13,24,0,1,24,0,0,0,0);
 		SetTileProp(13,25,0,1,24,0,0,0,0);
-		SetTileProp(13,26,1,1,0,0,0,0,0);
+		SetTileProp(13,26,1,1,0,0,0,0,1);
 		SetTileProp(13,27,5,1,16,0,0,0,0);
 		SetTileProp(13,28,1,1,16,0,0,0,0);
 		SetTileProp(13,29,2,1,16,0,0,0,0);
@@ -1912,7 +1693,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(14,23,0,1,24,0,0,0,0);
 		SetTileProp(14,24,0,1,24,0,0,0,0);
 		SetTileProp(14,25,0,1,24,0,0,0,0);
-		SetTileProp(14,26,1,1,0,0,0,0,0);
+		SetTileProp(14,26,1,1,0,0,0,0,1);
 		SetTileProp(14,27,0,1,24,0,0,0,0);
 		SetTileProp(14,28,5,1,16,0,0,0,0);
 		SetTileProp(14,29,1,1,16,0,0,0,0);
@@ -1976,7 +1757,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(15,23,0,1,24,0,0,0,0);
 		SetTileProp(15,24,0,1,24,0,0,0,0);
 		SetTileProp(15,25,0,1,24,0,0,0,0);
-		SetTileProp(15,26,1,1,0,0,0,0,0);
+		SetTileProp(15,26,1,1,0,0,0,0,1);
 		SetTileProp(15,27,0,1,24,0,0,0,0);
 		SetTileProp(15,28,0,1,24,0,0,0,0);
 		SetTileProp(15,29,1,1,16,0,0,0,0);
@@ -2040,7 +1821,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(16,23,0,1,16,0,0,0,0);
 		SetTileProp(16,24,4,1,20,0,0,0,0);
 		SetTileProp(16,25,7,1,18,0,0,0,0);
-		SetTileProp(16,26,1,1,0,0,0,0,0);
+		SetTileProp(16,26,1,1,0,0,0,0,1);
 		SetTileProp(16,27,2,1,16,0,0,0,0);
 		SetTileProp(16,28,0,1,16,0,0,0,0);
 		SetTileProp(16,29,1,1,16,0,0,0,0);
@@ -2104,7 +1885,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(17,23,0,1,16,0,0,0,0);
 		SetTileProp(17,24,1,1,20,0,0,0,0);
 		SetTileProp(17,25,7,1,18,0,0,0,0);
-		SetTileProp(17,26,1,1,0,0,0,0,0);
+		SetTileProp(17,26,1,1,0,0,0,0,1);
 		SetTileProp(17,27,1,1,16,0,0,0,0);
 		SetTileProp(17,28,0,1,16,0,0,0,0);
 		SetTileProp(17,29,1,1,16,0,0,0,0);
@@ -2168,7 +1949,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(18,23,0,1,16,0,0,0,0);
 		SetTileProp(18,24,5,1,20,0,0,0,0);
 		SetTileProp(18,25,7,1,18,0,0,0,0);
-		SetTileProp(18,26,1,1,0,0,0,0,0);
+		SetTileProp(18,26,1,1,0,0,0,0,1);
 		SetTileProp(18,27,1,1,16,0,0,0,0);
 		SetTileProp(18,28,1,1,16,0,0,0,0);
 		SetTileProp(18,29,1,1,16,0,0,0,0);
@@ -2230,9 +2011,9 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(19,21,0,1,16,0,0,0,0);
 		SetTileProp(19,22,1,1,16,0,0,0,0);
 		SetTileProp(19,23,0,1,16,0,0,0,0);
-		SetTileProp(19,24,4,1,0,0,0,0,0);
-		SetTileProp(19,25,1,1,0,0,0,0,0);
-		SetTileProp(19,26,1,1,0,0,0,0,0);
+		SetTileProp(19,24,4,1,0,0,0,0,1);
+		SetTileProp(19,25,1,1,0,0,0,0,1);
+		SetTileProp(19,26,1,1,0,0,0,0,1);
 		SetTileProp(19,27,0,1,16,0,0,0,0);
 		SetTileProp(19,28,0,1,16,0,0,0,0);
 		SetTileProp(19,29,1,1,16,0,0,0,0);
@@ -2294,8 +2075,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(20,21,1,1,16,0,0,0,0);
 		SetTileProp(20,22,1,1,16,0,0,0,0);
 		SetTileProp(20,23,0,1,16,0,0,0,0);
-		SetTileProp(20,24,1,1,0,0,0,0,0);
-		SetTileProp(20,25,3,1,0,0,0,0,0);
+		SetTileProp(20,24,1,1,0,0,0,0,1);
+		SetTileProp(20,25,3,1,0,0,0,0,1);
 		SetTileProp(20,26,0,1,16,0,0,0,0);
 		SetTileProp(20,27,0,1,16,0,0,0,0);
 		SetTileProp(20,28,4,1,16,0,0,0,0);
@@ -2356,9 +2137,9 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(21,19,0,1,16,0,0,0,0);
 		SetTileProp(21,20,0,1,16,0,0,0,0);
 		SetTileProp(21,21,0,1,16,0,0,0,0);
-		SetTileProp(21,22,4,1,0,0,0,0,0);
-		SetTileProp(21,23,1,1,0,0,0,0,0);
-		SetTileProp(21,24,1,1,0,0,0,0,0);
+		SetTileProp(21,22,4,1,0,0,0,0,1);
+		SetTileProp(21,23,1,1,0,0,0,0,1);
+		SetTileProp(21,24,1,1,0,0,0,0,1);
 		SetTileProp(21,25,0,1,16,0,0,0,0);
 		SetTileProp(21,26,0,1,16,0,0,0,0);
 		SetTileProp(21,27,4,1,16,0,0,0,0);
@@ -2413,16 +2194,16 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(22,12,0,1,16,0,0,0,0);
 		SetTileProp(22,13,0,1,16,0,0,0,0);
 		SetTileProp(22,14,0,1,24,0,0,0,0);
-		SetTileProp(22,15,4,1,0,0,0,0,0);
-		SetTileProp(22,16,1,1,0,0,0,0,0);
-		SetTileProp(22,17,1,1,0,0,0,0,0);
-		SetTileProp(22,18,1,1,0,0,0,0,0);
-		SetTileProp(22,19,1,1,0,0,0,0,0);
-		SetTileProp(22,20,1,1,0,0,0,0,0);
-		SetTileProp(22,21,1,1,0,0,0,0,0);
-		SetTileProp(22,22,1,1,0,0,0,0,0);
-		SetTileProp(22,23,1,1,0,0,0,0,0);
-		SetTileProp(22,24,3,1,0,0,0,0,0);
+		SetTileProp(22,15,4,1,0,0,0,0,1);
+		SetTileProp(22,16,1,1,0,0,0,0,1);
+		SetTileProp(22,17,1,1,0,0,0,0,1);
+		SetTileProp(22,18,1,1,0,0,0,0,1);
+		SetTileProp(22,19,1,1,0,0,0,0,1);
+		SetTileProp(22,20,1,1,0,0,0,0,1);
+		SetTileProp(22,21,1,1,0,0,0,0,1);
+		SetTileProp(22,22,1,1,0,0,0,0,1);
+		SetTileProp(22,23,1,1,0,0,0,0,1);
+		SetTileProp(22,24,3,1,0,0,0,0,1);
 		SetTileProp(22,25,0,1,16,0,0,0,0);
 		SetTileProp(22,26,4,1,16,0,0,0,0);
 		SetTileProp(22,27,1,1,16,0,0,0,0);
@@ -2471,18 +2252,18 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(23,6,0,1,16,0,0,0,0);
 		SetTileProp(23,7,0,1,16,0,0,0,0);
 		SetTileProp(23,8,0,1,16,0,0,0,0);
-		SetTileProp(23,9,4,1,0,0,0,0,0);
-		SetTileProp(23,10,1,1,0,0,0,0,0);
-		SetTileProp(23,11,1,1,0,0,0,0,0);
-		SetTileProp(23,12,1,1,0,0,0,0,0);
-		SetTileProp(23,13,1,1,0,0,0,0,0);
-		SetTileProp(23,14,1,1,0,0,0,0,0);
-		SetTileProp(23,15,1,1,0,0,0,0,0);
-		SetTileProp(23,16,1,1,0,0,0,0,0);
-		SetTileProp(23,17,1,1,0,0,0,0,0);
-		SetTileProp(23,18,1,1,0,0,0,0,0);
-		SetTileProp(23,19,1,1,0,0,0,0,0);
-		SetTileProp(23,20,3,1,0,0,0,0,0);
+		SetTileProp(23,9,4,1,0,0,0,0,1);
+		SetTileProp(23,10,1,1,0,0,0,0,1);
+		SetTileProp(23,11,1,1,0,0,0,0,1);
+		SetTileProp(23,12,1,1,0,0,0,0,1);
+		SetTileProp(23,13,1,1,0,0,0,0,1);
+		SetTileProp(23,14,1,1,0,0,0,0,1);
+		SetTileProp(23,15,1,1,0,0,0,0,1);
+		SetTileProp(23,16,1,1,0,0,0,0,1);
+		SetTileProp(23,17,1,1,0,0,0,0,1);
+		SetTileProp(23,18,1,1,0,0,0,0,1);
+		SetTileProp(23,19,1,1,0,0,0,0,1);
+		SetTileProp(23,20,3,1,0,0,0,0,1);
 		SetTileProp(23,21,0,1,24,0,0,0,0);
 		SetTileProp(23,22,0,1,24,0,0,0,0);
 		SetTileProp(23,23,0,1,24,0,0,0,0);
@@ -2530,16 +2311,16 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(24,1,0,1,22,0,0,0,0);
 		SetTileProp(24,2,0,1,16,0,0,0,0);
 		SetTileProp(24,3,0,1,16,0,0,0,0);
-		SetTileProp(24,4,4,1,0,0,0,0,0);
-		SetTileProp(24,5,1,1,0,0,0,0,0);
-		SetTileProp(24,6,1,1,0,0,0,0,0);
-		SetTileProp(24,7,1,1,0,0,0,0,0);
-		SetTileProp(24,8,1,1,0,0,0,0,0);
-		SetTileProp(24,9,1,1,0,0,0,0,0);
-		SetTileProp(24,10,1,1,0,0,0,0,0);
-		SetTileProp(24,11,1,1,0,0,0,0,0);
-		SetTileProp(24,12,1,1,0,0,0,0,0);
-		SetTileProp(24,13,3,1,0,0,0,0,0);
+		SetTileProp(24,4,4,1,0,0,0,0,1);
+		SetTileProp(24,5,1,1,0,0,0,0,1);
+		SetTileProp(24,6,1,1,0,0,0,0,1);
+		SetTileProp(24,7,1,1,0,0,0,0,1);
+		SetTileProp(24,8,1,1,0,0,0,0,1);
+		SetTileProp(24,9,1,1,0,0,0,0,1);
+		SetTileProp(24,10,1,1,0,0,0,0,1);
+		SetTileProp(24,11,1,1,0,0,0,0,1);
+		SetTileProp(24,12,1,1,0,0,0,0,1);
+		SetTileProp(24,13,3,1,0,0,0,0,1);
 		SetTileProp(24,14,0,1,24,0,0,0,0);
 		SetTileProp(24,15,0,1,24,0,0,0,0);
 		SetTileProp(24,16,0,1,24,0,0,0,0);
@@ -2593,12 +2374,12 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(25,0,0,1,30,0,0,0,0);
 		SetTileProp(25,1,0,1,22,0,0,0,0);
 		SetTileProp(25,2,0,1,16,0,0,0,0);
-		SetTileProp(25,3,4,1,0,0,0,0,0);
-		SetTileProp(25,4,1,1,0,0,0,0,0);
-		SetTileProp(25,5,1,1,0,0,0,0,0);
-		SetTileProp(25,6,1,1,0,0,0,0,0);
-		SetTileProp(25,7,1,1,0,0,0,0,0);
-		SetTileProp(25,8,3,1,0,0,0,0,0);
+		SetTileProp(25,3,4,1,0,0,0,0,1);
+		SetTileProp(25,4,1,1,0,0,0,0,1);
+		SetTileProp(25,5,1,1,0,0,0,0,1);
+		SetTileProp(25,6,1,1,0,0,0,0,1);
+		SetTileProp(25,7,1,1,0,0,0,0,1);
+		SetTileProp(25,8,3,1,0,0,0,0,1);
 		SetTileProp(25,9,0,1,16,0,0,0,0);
 		SetTileProp(25,10,0,1,16,0,0,0,0);
 		SetTileProp(25,11,0,1,16,0,0,0,0);
@@ -2657,10 +2438,10 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(26,0,0,1,30,0,0,0,0);
 		SetTileProp(26,1,0,1,22,0,0,0,0);
 		SetTileProp(26,2,0,1,16,0,0,0,0);
-		SetTileProp(26,3,1,1,0,0,0,0,0);
-		SetTileProp(26,4,1,1,0,0,0,0,0);
-		SetTileProp(26,5,1,1,0,0,0,0,0);
-		SetTileProp(26,6,3,1,0,0,0,0,0);
+		SetTileProp(26,3,1,1,0,0,0,0,1);
+		SetTileProp(26,4,1,1,0,0,0,0,1);
+		SetTileProp(26,5,1,1,0,0,0,0,1);
+		SetTileProp(26,6,3,1,0,0,0,0,1);
 		SetTileProp(26,7,0,1,16,0,0,0,0);
 		SetTileProp(26,8,0,1,16,0,0,0,0);
 		SetTileProp(26,9,0,1,16,0,0,0,0);
@@ -2721,8 +2502,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(27,0,0,1,30,0,0,0,0);
 		SetTileProp(27,1,0,1,22,0,0,0,0);
 		SetTileProp(27,2,0,1,22,0,0,0,0);
-		SetTileProp(27,3,1,1,0,0,0,0,0);
-		SetTileProp(27,4,1,1,0,0,0,0,0);
+		SetTileProp(27,3,1,1,0,0,0,0,1);
+		SetTileProp(27,4,1,1,0,0,0,0,1);
 		SetTileProp(27,5,0,1,22,0,0,0,0);
 		SetTileProp(27,6,0,1,22,0,0,0,0);
 		SetTileProp(27,7,0,1,22,0,0,0,0);
@@ -2785,8 +2566,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(28,0,0,1,30,0,0,0,0);
 		SetTileProp(28,1,0,1,22,0,0,0,0);
 		SetTileProp(28,2,0,1,16,0,0,0,0);
-		SetTileProp(28,3,1,1,0,0,0,0,0);
-		SetTileProp(28,4,1,1,0,0,0,0,0);
+		SetTileProp(28,3,1,1,0,0,0,0,1);
+		SetTileProp(28,4,1,1,0,0,0,0,1);
 		SetTileProp(28,5,0,1,14,0,0,0,0);
 		SetTileProp(28,6,0,1,22,0,0,0,0);
 		SetTileProp(28,7,0,1,22,0,0,0,0);
@@ -2849,10 +2630,10 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(29,0,0,1,30,0,0,0,0);
 		SetTileProp(29,1,0,1,22,0,0,0,0);
 		SetTileProp(29,2,0,1,16,0,0,0,0);
-		SetTileProp(29,3,1,1,0,0,0,0,0);
-		SetTileProp(29,4,1,1,0,0,0,0,0);
+		SetTileProp(29,3,1,1,0,0,0,0,1);
+		SetTileProp(29,4,1,1,0,0,0,0,1);
 		SetTileProp(29,5,0,1,16,0,0,0,0);
-		SetTileProp(29,6,1,1,0,0,0,0,0);
+		SetTileProp(29,6,1,1,0,0,0,0,1);
 		SetTileProp(29,7,1,1,4,0,0,0,0);
 		SetTileProp(29,8,1,1,4,0,0,0,0);
 		SetTileProp(29,9,1,1,4,0,0,0,0);
@@ -2913,11 +2694,11 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(30,0,0,1,30,0,0,0,0);
 		SetTileProp(30,1,0,1,22,0,0,0,0);
 		SetTileProp(30,2,0,1,16,0,0,0,0);
-		SetTileProp(30,3,1,1,0,0,0,0,0);
-		SetTileProp(30,4,1,1,0,0,0,0,0);
-		SetTileProp(30,5,1,1,0,0,0,0,0);
-		SetTileProp(30,6,1,1,0,0,0,0,0);
-		SetTileProp(30,7,1,1,0,0,0,0,0);
+		SetTileProp(30,3,1,1,0,0,0,0,1);
+		SetTileProp(30,4,1,1,0,0,0,0,1);
+		SetTileProp(30,5,1,1,0,0,0,0,1);
+		SetTileProp(30,6,1,1,0,0,0,0,1);
+		SetTileProp(30,7,1,1,0,0,0,0,1);
 		SetTileProp(30,8,1,1,4,0,0,0,0);
 		SetTileProp(30,9,1,1,4,0,0,0,0);
 		SetTileProp(30,10,1,1,4,0,0,0,0);
@@ -2977,12 +2758,12 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(31,0,0,1,30,0,0,0,0);
 		SetTileProp(31,1,0,1,28,0,0,0,0);
 		SetTileProp(31,2,0,1,28,0,0,0,0);
-		SetTileProp(31,3,1,1,0,0,0,0,0);
-		SetTileProp(31,4,1,1,0,0,0,0,0);
-		SetTileProp(31,5,1,1,0,0,0,0,0);
+		SetTileProp(31,3,1,1,0,0,0,0,1);
+		SetTileProp(31,4,1,1,0,0,0,0,1);
+		SetTileProp(31,5,1,1,0,0,0,0,1);
 		SetTileProp(31,6,1,1,16,0,0,0,0);
-		SetTileProp(31,7,1,1,0,0,0,0,0);
-		SetTileProp(31,8,1,1,0,0,0,0,0);
+		SetTileProp(31,7,1,1,0,0,0,0,1);
+		SetTileProp(31,8,1,1,0,0,0,0,1);
 		SetTileProp(31,9,1,1,4,0,0,0,0);
 		SetTileProp(31,10,1,1,4,0,0,0,0);
 		SetTileProp(31,11,1,1,4,0,0,0,0);
@@ -3042,13 +2823,13 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(32,1,0,1,22,0,0,0,0);
 		SetTileProp(32,2,1,1,4,0,0,0,0);
 		SetTileProp(32,3,1,1,4,0,0,0,0);
-		SetTileProp(32,4,1,1,0,0,0,0,0);
-		SetTileProp(32,5,1,1,0,0,0,0,0);
+		SetTileProp(32,4,1,1,0,0,0,0,1);
+		SetTileProp(32,5,1,1,0,0,0,0,1);
 		SetTileProp(32,6,1,1,16,0,0,0,0);
-		SetTileProp(32,7,1,1,0,0,0,0,0);
-		SetTileProp(32,8,1,1,0,0,0,0,0);
-		SetTileProp(32,9,1,1,0,0,0,0,0);
-		SetTileProp(32,10,1,1,0,0,0,0,0);
+		SetTileProp(32,7,1,1,0,0,0,0,1);
+		SetTileProp(32,8,1,1,0,0,0,0,1);
+		SetTileProp(32,9,1,1,0,0,0,0,1);
+		SetTileProp(32,10,1,1,0,0,0,0,1);
 		SetTileProp(32,11,1,1,4,0,0,0,0);
 		SetTileProp(32,12,1,1,16,0,0,0,0);
 		SetTileProp(32,13,1,1,4,0,0,0,0);
@@ -3107,15 +2888,15 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(33,2,1,1,4,0,0,0,0);
 		SetTileProp(33,3,1,1,4,0,0,0,0);
 		SetTileProp(33,4,1,1,4,0,0,0,0);
-		SetTileProp(33,5,1,1,0,0,0,0,0);
+		SetTileProp(33,5,1,1,0,0,0,0,1);
 		SetTileProp(33,6,1,1,4,0,0,0,0);
-		SetTileProp(33,7,1,1,0,0,0,0,0);
-		SetTileProp(33,8,1,1,0,0,0,0,0);
+		SetTileProp(33,7,1,1,0,0,0,0,1);
+		SetTileProp(33,8,1,1,0,0,0,0,1);
 		SetTileProp(33,9,1,1,4,0,0,0,0);
-		SetTileProp(33,10,1,1,0,0,0,0,0);
-		SetTileProp(33,11,1,1,0,0,0,0,0);
-		SetTileProp(33,12,1,1,0,0,0,0,0);
-		SetTileProp(33,13,1,1,0,0,0,0,0);
+		SetTileProp(33,10,1,1,0,0,0,0,1);
+		SetTileProp(33,11,1,1,0,0,0,0,1);
+		SetTileProp(33,12,1,1,0,0,0,0,1);
+		SetTileProp(33,13,1,1,0,0,0,0,1);
 		SetTileProp(33,14,1,1,4,0,0,0,0);
 		SetTileProp(33,15,1,1,4,0,0,0,0);
 		SetTileProp(33,16,0,1,4,0,0,0,0);
@@ -3178,8 +2959,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(34,9,1,1,16,0,0,0,0);
 		SetTileProp(34,10,1,1,4,0,0,0,0);
 		SetTileProp(34,11,3,1,4,0,0,0,0);
-		SetTileProp(34,12,5,1,0,0,0,0,0);
-		SetTileProp(34,13,1,1,0,0,0,0,0);
+		SetTileProp(34,12,5,1,0,0,0,0,1);
+		SetTileProp(34,13,1,1,0,0,0,0,1);
 		SetTileProp(34,14,1,1,4,0,0,0,0);
 		SetTileProp(34,15,1,1,16,0,0,0,0);
 		SetTileProp(34,16,0,1,22,0,0,0,0);
@@ -3243,7 +3024,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(35,10,1,1,4,0,0,0,0);
 		SetTileProp(35,11,2,1,4,0,0,0,0);
 		SetTileProp(35,12,4,1,4,0,0,0,0);
-		SetTileProp(35,13,1,1,0,0,0,0,0);
+		SetTileProp(35,13,1,1,0,0,0,0,1);
 		SetTileProp(35,14,1,1,4,0,0,0,0);
 		SetTileProp(35,15,1,1,16,0,0,0,0);
 		SetTileProp(35,16,0,1,22,0,0,0,0);
@@ -3307,8 +3088,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(36,10,1,1,4,0,0,0,0);
 		SetTileProp(36,11,1,1,4,0,0,0,0);
 		SetTileProp(36,12,1,1,4,0,0,0,0);
-		SetTileProp(36,13,1,1,0,0,0,0,0);
-		SetTileProp(36,14,1,1,0,0,0,0,0);
+		SetTileProp(36,13,1,1,0,0,0,0,1);
+		SetTileProp(36,14,1,1,0,0,0,0,1);
 		SetTileProp(36,15,1,1,4,0,0,0,0);
 		SetTileProp(36,16,1,1,4,0,0,0,0);
 		SetTileProp(36,17,1,1,4,0,0,0,0);
@@ -3372,7 +3153,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(37,11,1,1,4,0,0,0,0);
 		SetTileProp(37,12,1,1,16,0,0,0,0);
 		SetTileProp(37,13,1,1,4,0,0,0,0);
-		SetTileProp(37,14,1,1,0,0,0,0,0);
+		SetTileProp(37,14,1,1,0,0,0,0,1);
 		SetTileProp(37,15,1,1,4,0,0,0,0);
 		SetTileProp(37,16,0,1,4,0,0,0,0);
 		SetTileProp(37,17,0,1,4,0,0,0,0);
@@ -3436,7 +3217,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(38,11,1,1,4,0,0,0,0);
 		SetTileProp(38,12,1,1,16,0,0,0,0);
 		SetTileProp(38,13,1,1,4,0,0,0,0);
-		SetTileProp(38,14,1,1,0,0,0,0,0);
+		SetTileProp(38,14,1,1,0,0,0,0,1);
 		SetTileProp(38,15,1,1,4,0,0,0,0);
 		SetTileProp(38,16,0,1,16,0,0,0,0);
 		SetTileProp(38,17,1,1,6,0,0,0,0);
@@ -3500,8 +3281,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(39,11,1,1,4,0,0,0,0);
 		SetTileProp(39,12,1,1,4,0,0,0,0);
 		SetTileProp(39,13,1,1,4,0,0,0,0);
-		SetTileProp(39,14,1,1,0,0,0,0,0);
-		SetTileProp(39,15,1,1,0,0,0,0,0);
+		SetTileProp(39,14,1,1,0,0,0,0,1);
+		SetTileProp(39,15,1,1,0,0,0,0,1);
 		SetTileProp(39,16,0,1,28,0,0,0,0);
 		SetTileProp(39,17,1,1,6,0,0,0,0);
 		SetTileProp(39,18,0,1,28,0,0,0,0);
@@ -3565,13 +3346,13 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(40,12,1,1,4,0,0,0,0);
 		SetTileProp(40,13,1,1,4,0,0,0,0);
 		SetTileProp(40,14,0,1,28,0,0,0,0);
-		SetTileProp(40,15,1,1,0,0,0,0,0);
-		SetTileProp(40,16,1,1,0,0,0,0,0);
-		SetTileProp(40,17,1,1,0,0,0,0,0);
-		SetTileProp(40,18,1,1,0,0,0,0,0);
-		SetTileProp(40,19,1,1,0,0,0,0,0);
-		SetTileProp(40,20,1,1,0,0,0,0,0);
-		SetTileProp(40,21,1,1,0,0,0,0,0);
+		SetTileProp(40,15,1,1,0,0,0,0,1);
+		SetTileProp(40,16,1,1,0,0,0,0,1);
+		SetTileProp(40,17,1,1,0,0,0,0,1);
+		SetTileProp(40,18,1,1,0,0,0,0,1);
+		SetTileProp(40,19,1,1,0,0,0,0,1);
+		SetTileProp(40,20,1,1,0,0,0,0,1);
+		SetTileProp(40,21,1,1,0,0,0,0,1);
 		SetTileProp(40,22,0,1,24,0,0,0,0);
 		SetTileProp(40,23,1,1,6,0,0,0,0);
 		SetTileProp(40,24,0,1,24,0,0,0,0);
@@ -3635,7 +3416,7 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(41,18,0,1,16,0,0,0,0);
 		SetTileProp(41,19,0,1,16,0,0,0,0);
 		SetTileProp(41,20,1,1,6,0,0,0,0);
-		SetTileProp(41,21,1,1,0,0,0,0,0);
+		SetTileProp(41,21,1,1,0,0,0,0,1);
 		SetTileProp(41,22,0,1,0,0,0,0,0);
 		SetTileProp(41,23,1,1,6,0,0,0,0);
 		SetTileProp(41,24,0,1,6,0,0,0,0);
@@ -5085,7 +4866,8 @@ public class TileMap : MonoBehaviour {
 		SetTileProp(63,60,0,1,30,0,0,0,0);
 		SetTileProp(63,61,0,1,30,0,0,0,0);
 		SetTileProp(63,62,0,1,30,0,0,0,0);
-		SetTileProp(63,63,0,1,30,0,0,0,0);		
+		SetTileProp(63,63,0,1,30,0,0,0,0);	
+			
 
 		InvokeRepeating("PositionDetect",0.0f,0.01f);
 	}
