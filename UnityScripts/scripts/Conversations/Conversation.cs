@@ -743,8 +743,10 @@ public class Conversation : GuiBase {
 					)
 					{
 						//Give to PC
+					GameObject demanded = GameObject.Find (itemName);
 						if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
 						{
+							demanded.transform.parent= playerUW.playerInventory.InventoryMarker.transform;
 							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
 							cnpc.AddItemToContainer(itemName);
 							playerUW.GetComponent<PlayerInventory>().Refresh ();
@@ -752,7 +754,6 @@ public class Conversation : GuiBase {
 						else
 						{
 							playerHasSpace=0;
-							GameObject demanded = GameObject.Find (itemName);
 							demanded.transform.parent=null;
 							demanded.transform.position=npc.transform.position;
 							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
