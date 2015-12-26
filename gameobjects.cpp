@@ -669,7 +669,7 @@ switch (game)
 						}
 					else
 						{
-						objList[x].texture = 267 + objList[x].flags & 0x3F;//267 is an offset into my own textures config file.
+						objList[x].texture = 267 + (objList[x].flags & 0x3F);//267 is an offset into my own textures config file.
 						}
 					}
 

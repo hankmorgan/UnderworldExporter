@@ -1566,6 +1566,18 @@ for (int x=0; x<64;x++)
 				}
 			}
 		}	
+
+	for (int i = 0; i < 1024;i++)
+		{//Make sure triggers and traps are created.
+		if (objList[i].InUseFlag == 0)
+			{
+			if ((isTrigger(objList[i]) )|| (isTrap(objList[i])))
+				{
+				objList[i].InUseFlag=1;
+				}
+			}
+		}
+
 	}
 
 //Set traps to create at the point where they are first linked.

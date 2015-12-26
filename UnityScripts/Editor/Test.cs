@@ -19,3439 +19,2736 @@ public class MyTools
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
 		Container ParentContainer;//For containers
-		myObj= CreateGameObject("a_glowing_rock_02_02_04_0719",2.914286f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		myObj= CreateGameObject("an_Ex_stone_02_02_05_0837",2.571429f,0.900000f,2.571429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_236", "Sprites/OBJECTS_236", 6, 236, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
 		
-		myObj= CreateGameObject("a_glowing_rock_04_02_04_0720",5.314286f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_02_04_0721",7.714286f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_02_04_0722",10.114285f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_ghost_09_02_04_0223");
-		pos = new Vector3(11.314286f, 3.000000f, 2.914286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"101","Sprites/OBJECTS_101", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", 0, 101, 0, 9, 2, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 9, 2, 0, 0, 5, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-		SetRotation(myObj,0,0,0);
+		myObj= CreateGameObject("a_barrel_02_02_05_0628",2.914286f,0.900000f,2.742857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_347",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 625, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+		AddObjectToContainer("an_apple_99_99_05_0625", ParentContainer, 0);
+		AddObjectToContainer("a_flask_of_port_flasks_of_port_99_99_05_0624", ParentContainer, 1);
+		AddObjectToContainer("a_red_potion_99_99_05_0605", ParentContainer, 2);
+		////Container contents complete
 		
-		myObj= CreateGameObject("a_glowing_rock_10_02_04_0723",12.514286f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_glowing_rock_12_02_04_0739",14.914286f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
+		myObj = new GameObject("door_004_002");
+		pos = new Vector3(5.314286f, 0.900000f, 2.600000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 920, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_01", 37, 0, 0);
+		SetRotation(myObj,-90,90,0);
+		AddDoorLink(myObj, "a_use_trigger_99_99_05_0920");
 		
-		myObj= CreateGameObject("a_glowing_rock_14_02_04_0740",17.314285f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_02_04_0741",19.714287f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_02_04_0742",22.114285f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_02_04_0743",24.514284f,2.700000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_rock_hammer_41_02_04_0566",50.057144f,2.400000f,2.571429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_296",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_296", "Sprites/OBJECTS_296", "Sprites/OBJECTS_296", 16, 296, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_41_02_04_0568",49.885712f,2.400000f,3.085714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_41_02_04_0569",49.714287f,2.400000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_42_02_04_0567",50.571430f,2.400000f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("an_oil_flask_49_02_04_0565",59.657143f,2.400000f,2.742857f);
+		myObj= CreateGameObject("an_oil_flask_09_02_05_0729",11.142858f,2.100000f,2.742857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddOil(myObj);
 		
-		
-		
-		myObj= CreateGameObject("some_writing_57_02_04_0481",69.257141f,3.412500f,2.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 749, 63, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,270,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,749);
-		
-		myObj = new GameObject("door_057_002");
-		pos = new Vector3(69.085716f, 3.300000f, 2.600000f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_334", "Sprites/OBJECTS_334", "Sprites/OBJECTS_334", 30, 334, 675, 63, 0, 1, 1, 0, 1, 0, 1, 12, 1);
-		CreatePortcullis(myObj, 15, 1, 1);
-		SetRotation(myObj,-90,90,0);
-		
-		myObj= CreateGameObject("chain_gauntlets_pairs_of_chain_gauntlets_41_03_04_0522",49.714287f,2.400000f,4.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_039",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_039", "Sprites/OBJECTS_039", "Sprites/armour/armor_f_0007", 76, 39, 706, 32, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateGloves(myObj, "Sprites/armour/armor_f_0007", "Sprites/armour/armor_m_0007", "Sprites/armour/armor_f_0022", "Sprites/armour/armor_m_0022", "Sprites/armour/armor_f_0037", "Sprites/armour/armor_m_0037", "Sprites/armour/armor_f_0052", "Sprites/armour/armor_m_0052", 3, 9);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_41_03_04_0570",49.714287f,2.400000f,4.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_dire_ghost_42_03_04_0219");
-		pos = new Vector3(50.914288f, 3.000000f, 4.114285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"113","Sprites/OBJECTS_113", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", 0, 113, 0, 42, 3, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 42, 3, 0, 0, 67, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_scroll_43_03_04_0613",52.457142f,2.400000f,4.628572f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 547, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddMagicScroll(myObj);
-		
-		
-		
-		myObj= CreateGameObject("a_lever_58_03_04_0679",69.620003f,3.000000f,3.771429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 673, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0673",40,0,0,7,381);
-		SetRotation(myObj,0,270,0);
-		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
-		
-		myObj= CreateGameObject("a_glowing_rock_02_04_04_0718",2.914286f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_04_04_04_0729",5.314286f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_04_04_0728",7.714286f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_04_04_0725",10.114285f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_04_04_0724",12.514286f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_04_04_0738",14.914286f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_14_04_04_0737",17.314285f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_04_04_0711",19.714287f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_04_04_0745",22.114285f,2.700000f,5.314286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_04_04_0677",24.020000f,2.400000f,5.485714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_buckler_34_05_04_0524",40.971432f,0.600000f,6.171429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_062",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_062", "Sprites/OBJECTS_062", "Sprites/OBJECTS_062", 78, 62, 708, 27, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		AddShield(myObj);
-		
-		myObj = new GameObject("door_053_005");
-		pos = new Vector3(63.799999f, 2.400000f, 6.171429f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 655, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_09", 15, 1, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj= CreateGameObject("some_writing_53_05_04_0671",64.114288f,3.600000f,6.171429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 726, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,0,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,726);
-		
-		myObj= CreateGameObject("a_jeweled_sword_57_05_04_0515",69.085716f,2.400000f,6.857143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_013",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", 1, 13, 705, 41, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 14, 7, 11, 3, 255);
-		
-		myObj= CreateGameObject("a_glowing_rock_02_06_04_0731",2.914286f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_04_06_04_0730",5.314286f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_06_04_0727",7.714286f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_06_04_0726",10.114285f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_06_04_0734",12.514286f,2.737500f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_06_04_0733",14.914286f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_14_06_04_0967",17.314285f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_06_04_0996",19.714287f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_06_04_0746",22.114285f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_06_04_0747",24.514284f,2.700000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_sack_50_06_04_0600",60.514286f,2.400000f,7.714286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 572, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		AddObjectToContainer("a_pouch_pouches_99_99_04_0572", ParentContainer, 0);
-		////Container contents complete
-		
-		
-		myObj= CreateGameObject("a_gold_coffer_52_06_04_0620",62.571430f,2.400000f,7.885714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_138",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_138", "Sprites/OBJECTS_138", "Sprites/OBJECTS_139", 19, 138, 618, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		AddObjectToContainer("a_wand_99_99_04_0618", ParentContainer, 0);
-		AddObjectToContainer("a_Tym_stone_99_99_04_0619", ParentContainer, 1);
-		AddObjectToContainer("a_Rel_stone_99_99_04_0615", ParentContainer, 2);
-		AddObjectToContainer("a_red_gem_99_99_04_0616", ParentContainer, 3);
-		////Container contents complete
-		
-		
-		myObj= CreateGameObject("a_gravestone_52_06_04_0950",62.914288f,2.400000f,7.885714f);
-		SetRotation(myObj,0,90,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 727, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,7);
-		
-		myObj= CreateGameObject("a_battle_axe_54_06_04_0516",65.828568f,2.400000f,7.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_001",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", 1, 1, 0, 19, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, 14, 7, 2, 4, 34);
-		
-		myObj= CreateGameObject("a_broken_mace_44_07_04_0518",53.828568f,2.400000f,8.571429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_02_08_04_0994",2.914286f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_04_08_04_0971",5.314286f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_08_04_0998",7.714286f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_08_04_0736",10.114285f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_08_04_0735",12.514286f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_08_04_0732",14.914286f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_14_08_04_0997",17.314285f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_08_04_0750",19.714287f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_ghost_17_08_04_0222");
-		pos = new Vector3(20.914284f, 3.000000f, 10.114285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 17, 8, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 17, 8, 0, 0, 53, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_08_04_0749",22.114285f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_08_04_0748",24.514284f,2.700000f,10.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_mage_34_08_04_0254");
-		pos = new Vector3(40.971432f, 0.600000f, 10.114285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"107","Sprites/OBJECTS_107", 23);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", 0, 107, 0, 34, 8, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 23, 34, 8, 0, 0, 45, 0, 0, 7, 2, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_skull_45_08_04_0521",54.685715f,2.400000f,10.457142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_bone_48_08_04_0519",57.771431f,2.400000f,9.771429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_mandolin_52_08_04_0564",62.742855f,2.400000f,9.942857f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", 26, 291, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddInstrument(myObj);
-		
-		myObj= CreateGameObject("a_red_potion_58_08_04_0824",69.942856f,2.400000f,10.628572f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 581, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddPotion(myObj);
-		
-		myObj = new GameObject("a_ghoul_43_09_04_0236");
-		pos = new Vector3(52.114288f, 2.400000f, 11.314286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 43, 9, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 43, 9, 0, 0, 60, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_skull_44_09_04_0614",53.657143f,2.400000f,11.485714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_44_09_04_0612",53.828568f,2.400000f,10.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_blood_stain_50_09_04_0517",60.685715f,2.400000f,10.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-		
-		
-		myObj= CreateGameObject("a_glowing_rock_06_10_04_0717",7.714286f,2.700000f,12.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_10_04_0966",10.114285f,2.700000f,12.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("some_writing_09_10_04_0657",11.142858f,3.000000f,13.180000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 731, 40, 0, 0, 1, 0, 0, 1, 1, 8, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,0,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,731);
-		
-		
-		myObj= CreateGameObject("some_writing_13_10_04_0666",16.285713f,3.000000f,13.180000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 731, 40, 0, 0, 1, 0, 0, 1, 1, 8, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,0,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,731);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_10_04_0751",19.714287f,2.700000f,12.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("mail_leggings_pairs_of_mail_leggings_60_10_04_0523",72.857147f,2.400000f,12.685714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_036",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_036", "Sprites/OBJECTS_036", "Sprites/armour/armor_f_0004", 77, 36, 712, 47, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateLeggings(myObj, "Sprites/armour/armor_f_0004", "Sprites/armour/armor_m_0004", "Sprites/armour/armor_f_0019", "Sprites/armour/armor_m_0019", "Sprites/armour/armor_f_0034", "Sprites/armour/armor_m_0034", "Sprites/armour/armor_f_0049", "Sprites/armour/armor_m_0049", 4, 12);
-		
-		myObj = new GameObject("a_ghost_06_11_04_0225");
-		pos = new Vector3(7.714286f, 3.000000f, 13.714286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 6, 11, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 6, 11, 0, 0, 37, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		
-		
-		
-		myObj= CreateGameObject("a_glowing_rock_06_12_04_0716",7.714286f,2.700000f,14.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_12_04_0752",19.714287f,2.700000f,14.914286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		
-		
-		myObj= CreateGameObject("a_chain_cowl_35_12_04_0530",43.028568f,0.600000f,15.257142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 713, 24, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 6427640, 6427640);
-		
-		myObj= CreateGameObject("a_green_potion_44_12_04_0857",53.657143f,2.400000f,15.257142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 520, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_plant_55_12_04_0506",66.685715f,2.400000f,15.257142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-		
-		myObj= CreateGameObject("a_blood_stain_59_12_04_0608",71.828568f,2.400000f,14.742858f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_plant_59_12_04_0609",70.971428f,2.400000f,14.571428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_broken_mace_59_12_04_0610",71.314285f,2.400000f,14.742858f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_ghost_60_13_04_0221");
-		pos = new Vector3(72.514290f, 3.000000f, 16.114286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 604, 60, 13, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 60, 13, 0, 0, 42, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		////NPC container with items
-		
-		AddObjectToContainer("a_pack_99_99_04_0604", ParentContainer, 0);
-		////Container contents complete
-		
-		
-		myObj= CreateGameObject("a_glowing_rock_06_14_04_0715",7.714286f,2.700000f,17.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		
-		myObj= CreateGameObject("a_glowing_rock_16_14_04_0753",19.714287f,2.700000f,17.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_skull_42_14_04_0507",50.742855f,2.400000f,17.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_59_14_04_0607",71.314285f,2.400000f,17.657143f);
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_02_05_0595",63.257145f,0.300000f,3.085714f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_59_14_04_0606",71.657143f,2.400000f,17.828571f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_59_14_04_0605",71.980003f,2.400000f,17.828571f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_glowing_rock_02_16_04_0712",2.914286f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_04_16_04_0713",5.314286f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_16_04_0714",7.714286f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_16_04_0754",10.114285f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_16_04_0755",12.514286f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_16_04_0758",14.914286f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_14_16_04_0759",17.314285f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_16_04_0760",19.714287f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_16_04_0761",22.114285f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_16_04_0778",24.514284f,2.700000f,19.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_mace_42_16_04_0575",50.571430f,2.100000f,19.371428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_009",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, 8, 16, 5, 5, 25);
-		
-		myObj= CreateGameObject("a_blood_stain_42_16_04_0573",50.742855f,2.100000f,19.542858f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-		
-		myObj= CreateGameObject("a_chain_cowl_42_16_04_0574",50.742855f,2.100000f,19.885714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 6427640, 6427640);
-		
-		myObj= CreateGameObject("a_plant_59_16_04_0513",71.142853f,0.900000f,20.228571f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-		
-		myObj = new GameObject("a_ghoul_43_17_04_0220");
-		pos = new Vector3(52.114288f, 2.100000f, 20.914284f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 43, 17, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 43, 17, 0, 0, 45, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,270,0);
+		myObj= CreateGameObject("a_pouch_pouches_52_02_05_0582",63.085712f,0.300000f,2.571429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_134",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", "Sprites/OBJECTS_135", 19, 134, 581, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("special_tmap_obj_52_17_04_0611",63.580002f,1.200000f,21.000000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj= CreateGameObject("a_glowing_rock_02_18_04_0768",2.914286f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_04_18_04_0769",5.314286f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_18_04_0770",7.714286f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_18_04_0771",10.114285f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_18_04_0772",12.514286f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_18_04_0773",14.914286f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_14_18_04_0774",17.314285f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_ghost_15_18_04_0224");
-		pos = new Vector3(18.514286f, 3.000000f, 22.114285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"101","Sprites/OBJECTS_101", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", "Sprites/OBJECTS_101", 0, 101, 0, 15, 18, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 15, 18, 0, 0, 3, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_18_04_0775",19.714287f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_18_04_0776",22.114285f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_18_04_0777",24.514284f,2.700000f,22.114285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_34_19_04_0510",40.820000f,1.500000f,23.400000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-		SetRotation(myObj,0,270,0);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_36_19_04_0525",44.057144f,0.900000f,23.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_02_20_04_0767",2.914286f,2.700000f,24.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_20_04_0766",7.714286f,2.400000f,24.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_20_04_0765",12.514286f,2.400000f,24.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_20_04_0764",14.914286f,2.400000f,24.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_20_04_0763",19.714287f,2.400000f,24.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_20_04_0762",24.514284f,2.700000f,24.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_45_20_04_0511",55.180000f,1.500000f,24.600000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj = new GameObject("a_ghoul_54_20_04_0229");
-		pos = new Vector3(65.314285f, 0.900000f, 24.514284f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 5);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 54, 20, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 5, 54, 20, 0, 0, 39, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_blood_stain_50_21_04_0955",60.514286f,0.900000f,25.714285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_glowing_rock_02_22_04_0854",2.914286f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_04_22_04_0827",5.314286f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_06_22_04_0826",7.714286f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_08_22_04_0825",10.114285f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_10_22_04_0842",12.514286f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_12_22_04_0841",14.914286f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_14_22_04_0840",17.314285f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_16_22_04_0846",19.714287f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_18_22_04_0853",22.114285f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_glowing_rock_20_22_04_0852",24.514284f,2.700000f,26.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_ghoul_49_22_04_0255");
-		pos = new Vector3(59.314285f, 0.900000f, 26.914284f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 4);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 49, 22, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 4, 49, 22, 0, 0, 51, 0, 0, 8, 2, 1, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,315,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_ghoul_34_23_04_0228");
-		pos = new Vector3(41.314285f, 0.900000f, 28.114285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 6);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 482, 34, 23, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 6, 34, 23, 0, 0, 43, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		////NPC container with items
-		
-		AddObjectToContainer("a_leather_vest_99_99_04_0482", ParentContainer, 0);
-		AddObjectToContainer("leather_leggings_pairs_of_leather_leggings_99_99_04_0480", ParentContainer, 1);
-		AddObjectToContainer("leather_gloves_pairs_of_leather_gloves_99_99_04_0479", ParentContainer, 2);
-		AddObjectToContainer("leather_boots_pairs_of_leather_boots_99_99_04_0478", ParentContainer, 3);
+		ParentContainer = CreateContainer(myObj, 20, 255, 255);
+		AddObjectToContainer("a_red_potion_99_99_05_0581", ParentContainer, 0);
+		AddObjectToContainer("a_Nox_stone_99_99_05_0538", ParentContainer, 1);
+		AddObjectToContainer("a_Flam_stone_99_99_05_0537", ParentContainer, 2);
 		////Container contents complete
 		
 		
-		myObj= CreateGameObject("a_broken_sword_43_23_04_0509",52.457142f,0.900000f,27.771429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_23_04_0957",63.257145f,0.900000f,28.780001f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("some_writing_06_24_04_0951",7.220000f,3.000000f,29.485716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 728, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,270,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,728);
-		
-		myObj= CreateGameObject("a_scroll_17_24_04_0576",20.914284f,3.000000f,29.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_317",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", 11, 317, 644, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetLink(myObj,644);
-		
-		myObj= CreateGameObject("a_blood_stain_50_24_04_0954",60.857143f,0.900000f,29.485716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_skull_50_24_04_0963",60.514286f,0.900000f,29.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_51_24_04_0956",61.885712f,0.900000f,28.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_bone_51_24_04_0961",61.371429f,0.900000f,29.485716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_skull_52_24_04_0960",62.914288f,0.900000f,29.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_52_24_04_0959",62.571430f,0.900000f,29.485716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_skull_52_24_04_0958",63.257145f,0.900000f,29.485716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("door_006_025");
-		pos = new Vector3(7.400000f, 2.400000f, 30.342857f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", 4, 323, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_07", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_25_04_0529",46.457142f,0.900000f,30.514284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_38_26_04_0512",45.619999f,1.500000f,31.799999f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-		SetRotation(myObj,0,270,0);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_38_26_04_0526",45.942856f,0.900000f,31.885715f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_skull_39_26_04_0527",47.314285f,0.900000f,31.714285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_39_26_04_0528",47.657143f,0.900000f,32.057144f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-		
-		myObj= CreateGameObject("special_tmap_obj_40_26_04_0980",49.180000f,0.900000f,31.799999f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-		SetRotation(myObj,0,90,0);
-		
-		
-		
-		myObj = new GameObject("a_ghoul_58_26_04_0226");
-		pos = new Vector3(70.114288f, 0.900000f, 31.714285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"99","Sprites/OBJECTS_099", 162);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", "Sprites/OBJECTS_099", 0, 99, 0, 58, 26, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 162, 58, 26, 0, 0, 60, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
-		SetRotation(myObj,0,0,0);
+		myObj= CreateGameObject("a_map_case_52_02_05_0584",62.571430f,0.300000f,2.571429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_136",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_136", "Sprites/OBJECTS_136", "Sprites/OBJECTS_137", 19, 136, 583, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		ParentContainer = CreateContainer(myObj, 30, 2, 2);
+		AddObjectToContainer("a_scroll_99_99_05_0583", ParentContainer, 0);
+		////Container contents complete
 		
 		
-		myObj= CreateGameObject("a_scroll_02_27_04_0899",3.085714f,2.400000f,32.571426f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 544, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddMagicScroll(myObj);
-		
-		myObj = new GameObject("door_003_027");
-		pos = new Vector3(4.628572f, 2.400000f, 32.599998f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", "Sprites/OBJECTS_326", 30, 326, 627, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreatePortcullis(myObj, 0, 1, 1);
-		SetRotation(myObj,-90,90,0);
-		
-		myObj= CreateGameObject("a_blood_stain_38_27_04_0520",46.457142f,0.900000f,33.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		
-		
-		myObj= CreateGameObject("a_lever_04_28_04_0667",4.820000f,3.000000f,34.457142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 654, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0654",40,0,0,7,381);
-		SetRotation(myObj,0,270,0);
-		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
-		
-		myObj= CreateGameObject("some_writing_04_28_04_0649",4.820000f,3.000000f,33.942856f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 730, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,270,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,730);
-		
-		myObj= CreateGameObject("some_writing_05_29_04_0652",6.514286f,3.000000f,35.980000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 729, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,0,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,729);
-		
-		myObj= CreateGameObject("a_lever_06_29_04_0680",7.220000f,3.000000f,35.980000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 669, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0669",40,0,0,7,353);
-		SetRotation(myObj,0,0,0);
-		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
-		
-		myObj= CreateGameObject("a_lever_06_29_04_0653",7.714286f,3.000000f,35.980000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 668, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0668",40,0,0,7,353);
-		SetRotation(myObj,0,0,0);
-		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
-		
-		myObj= CreateGameObject("a_lever_06_29_04_0681",8.228571f,3.000000f,35.980000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_353",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", "Sprites/OBJECTS_353", 8, 353, 658, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0658",40,0,0,7,353);
-		SetRotation(myObj,0,0,0);
-		SetButtonProperties(myObj,"Sprites/tmobj/tmobj_04","Sprites/tmobj/tmobj_05","Sprites/tmobj/tmobj_06","Sprites/tmobj/tmobj_07","Sprites/tmobj/tmobj_08","Sprites/tmobj/tmobj_09","Sprites/tmobj/tmobj_10","Sprites/tmobj/tmobj_11");
-		
-		myObj= CreateGameObject("special_tmap_obj_29_29_04_0982",35.314285f,2.700000f,35.314285f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_142", "" , 142, false);
-		SetRotation(myObj,0,45,0);
-		
-		
-		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_45_29_04_0508",54.514286f,0.900000f,35.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_43_30_04_1022",52.200001f,3.300000f,36.020000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_137", "" , 137, false);
-		SetRotation(myObj,0,180,0);
-		
-		
-		myObj= CreateGameObject("a_scroll_03_31_04_0823",4.457143f,3.300000f,38.057144f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_313",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", 13, 313, 553, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddMagicScroll(myObj);
-		
-		myObj= CreateGameObject("a_broken_axe_09_31_04_0837",11.142858f,3.300000f,37.542858f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_10_31_04_0838",13.180000f,3.300000f,37.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_11_31_04_0687",14.228572f,3.300000f,37.885715f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-		
-		myObj= CreateGameObject("a_broken_sword_13_31_04_0699",16.285713f,3.300000f,37.885715f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_15_31_04_0705",18.514286f,3.300000f,37.714283f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_17_31_04_0692",20.914284f,4.500000f,37.714283f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_plant_18_31_04_0693",22.114285f,3.000000f,37.714283f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-		
-		myObj= CreateGameObject("a_plant_20_31_04_0701",25.028572f,2.400000f,37.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_20_31_04_0703",24.514284f,2.400000f,37.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-		
-		myObj= CreateGameObject("a_skull_21_31_04_0700",25.714285f,2.100000f,37.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_21_31_04_0706",25.714285f,4.500000f,37.714283f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_23_31_04_0708",28.114285f,2.100000f,37.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_46_31_04_0744",56.380001f,3.600000f,37.799999f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_161", "" , 161, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj= CreateGameObject("a_stalactite_08_32_04_0836",10.114285f,4.500000f,38.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-		
-		myObj= CreateGameObject("a_skull_10_32_04_0839",12.514286f,3.300000f,39.257145f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_11_32_04_0688",13.714286f,4.500000f,38.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_skull_13_32_04_0698",16.285713f,3.300000f,39.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_crossbow_bolt_15_32_04_0908",18.171429f,3.300000f,39.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-		
-		myObj= CreateGameObject("a_stalactite_15_32_04_0690",18.514286f,4.500000f,38.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-		
-		myObj= CreateGameObject("a_blood_stain_17_32_04_0691",20.571428f,3.300000f,38.742855f);
+		myObj= CreateGameObject("a_blood_stain_52_02_05_0590",63.257145f,0.300000f,3.580000f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
 		
-		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_18_32_04_0695",22.114285f,3.000000f,39.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		myObj= CreateGameObject("a_skull_53_02_05_0585",63.771431f,0.300000f,2.571429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_plant_19_32_04_0694",23.485716f,2.700000f,39.085716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		myObj= CreateGameObject("a_torch_torches_53_02_05_0580",64.457146f,0.300000f,3.257143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 1, 2, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		CreateLight(myObj, 2, 3, 149, 145);
 		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_20_32_04_0697",24.171429f,2.400000f,39.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		myObj= CreateGameObject("a_plant_14_03_05_0626",17.485714f,2.100000f,4.285714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
 		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_20_32_04_0696",24.857143f,2.400000f,39.085716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		myObj= CreateGameObject("a_ruby_rubies_14_03_05_0599",17.828571f,2.100000f,3.942857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 598, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_stalactite_21_32_04_0704",25.714285f,4.500000f,38.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		myObj = new GameObject("door_023_003");
+		pos = new Vector3(28.628572f, 3.600000f, 3.800000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_01", 0, 0, 0);
+		SetRotation(myObj,-90,90,0);
 		
-		myObj= CreateGameObject("a_stalactite_22_32_04_0707",26.914284f,4.500000f,38.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
+		myObj= CreateGameObject("a_broken_sword_52_03_05_0596",63.257145f,0.300000f,4.285714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_plant_23_32_04_0710",28.285715f,2.100000f,39.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		myObj= CreateGameObject("a_blood_stain_52_03_05_0589",63.257145f,0.300000f,4.457143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
 		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_24_32_04_0709",29.314285f,2.100000f,39.428574f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		myObj= CreateGameObject("a_blood_stain_52_03_05_0597",62.914288f,0.300000f,3.942857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
 		
-		myObj= CreateGameObject("special_tmap_obj_46_32_04_0757",56.380001f,3.600000f,39.000000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_161", "" , 161, false);
-		SetRotation(myObj,0,90,0);
+		myObj= CreateGameObject("a_broken_wand_53_03_05_0587",64.285713f,0.300000f,3.771429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_157",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_157", "Sprites/OBJECTS_157", "Sprites/OBJECTS_157", 12, 157, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddWand(myObj, 0, 0);
 		
-		myObj= CreateGameObject("special_tmap_obj_60_32_04_0983",72.599998f,0.900000f,39.580002f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 987, 40, 13, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,"uw1_049", "a_look_trigger_99_99_04_0987", 49, false);
+		myObj= CreateGameObject("a_broken_wand_02_04_05_0806",2.742857f,0.900000f,4.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_159",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_159", "Sprites/OBJECTS_159", "Sprites/OBJECTS_159", 12, 159, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddWand(myObj, 0, 0);
+		
+		myObj = new GameObject("a_mage_43_04_05_0217");
+		pos = new Vector3(52.114288f, 3.300000f, 5.314286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"109","Sprites/OBJECTS_109", 191);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_109", "Sprites/OBJECTS_109", "Sprites/OBJECTS_109", 0, 109, 0, 43, 4, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 191, 43, 4, 0, 0, 36, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
 		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
+		myObj= CreateGameObject("a_blood_stain_52_04_05_0591",62.914288f,0.150000f,5.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
 		
-		myObj= CreateGameObject("a_plant_06_33_04_0848",8.057143f,3.300000f,40.285717f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		myObj= CreateGameObject("a_skull_03_05_05_0627",3.942857f,0.900000f,6.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_plant_08_33_04_0850",9.942857f,3.300000f,39.942856f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		myObj = new GameObject("a_ghost_04_05_05_0200");
+		pos = new Vector3(5.314286f, 1.500000f, 6.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 207);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 4, 5, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 207, 4, 5, 0, 0, 52, 0, 0, 8, 1, 0, 0, 0, 0, "GroundMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
-		myObj = new GameObject("door_060_033");
-		pos = new Vector3(73.000000f, 0.900000f, 39.619999f);
+		myObj = new GameObject("door_023_005");
+		pos = new Vector3(28.628572f, 3.600000f, 6.200000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", 4, 324, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_09", 0, 0, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj = new GameObject("door_051_005");
+		pos = new Vector3(61.220001f, 0.000000f, 6.200000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/world/uw1_049", 53, 0, 1);
-		SetRotation(myObj,-90,0,0);
+		CreateDoor(myObj,"textures/world/uw1_201", 0, 0, 0);
+		SetRotation(myObj,-90,90,0);
 		
 		
-		myObj = new GameObject("a_giant_rat_06_34_04_0237");
-		pos = new Vector3(7.885714f, 3.300000f, 40.820000f);
+		myObj = new GameObject("a_fire_elemental_55_06_05_0196");
+		pos = new Vector3(66.514290f, 0.000000f, 7.714286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 6, 34, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 6, 34, 0, 0, 15, 0, 0, 8, 2, 1, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,90,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_fountain_13_34_04_0686",16.114286f,3.000000f,41.828568f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_302",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", "Sprites/OBJECTS_302", 82, 302, 1, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		AddFountain(myObj);
-		
-		myObj= CreateGameObject("a_fountain_13_34_04_0685",16.114286f,3.000000f,41.828568f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_457",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", "Sprites/OBJECTS_457", 80, 457, 1, 40, 5, 0, 0, 5, 4, 1, 0, 0, 1);
-		AddAnimationOverlay(myObj,5,4);
-		
-		myObj= CreateGameObject("special_tmap_obj_34_34_04_0977",41.657143f,2.700000f,41.314285f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_142", "" , 142, false);
-		SetRotation(myObj,0,225,0);
-		
-		myObj= CreateGameObject("a_plant_05_35_04_0847",6.514286f,4.500000f,42.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_06_35_04_0784",7.542857f,3.300000f,42.342857f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_20_35_04_0849",25.180000f,3.600000f,42.599998f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj= CreateGameObject("a_gravestone_43_35_04_0550",52.114288f,0.000000f,42.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 743, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,32);
-		
-		myObj= CreateGameObject("a_gravestone_44_35_04_0549",53.314285f,0.000000f,42.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 744, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,17);
-		
-		myObj= CreateGameObject("a_gravestone_45_35_04_0548",54.514286f,0.000000f,42.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 745, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,18);
-		
-		myObj= CreateGameObject("a_crossbow_bolt_47_35_04_0536",56.742855f,0.037500f,42.171432f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-		
-		myObj= CreateGameObject("a_gravestone_47_35_04_0547",56.914288f,0.000000f,42.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 746, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,33);
-		
-		myObj= CreateGameObject("a_gravestone_48_35_04_0546",58.114288f,0.000000f,42.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 747, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,19);
-		
-		myObj= CreateGameObject("a_gravestone_49_35_04_0545",59.314285f,0.000000f,42.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 748, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,20);
-		
-		myObj = new GameObject("a_giant_rat_02_36_04_0238");
-		pos = new Vector3(2.914286f, 3.300000f, 43.714287f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 2, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 2, 36, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
+		CreateNPC(myObj,"120","Sprites/OBJECTS_120", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", 0, 120, 0, 55, 6, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 55, 6, 0, 0, 42, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh0");
 		SetRotation(myObj,0,0,0);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
-		myObj = new GameObject("a_ghost_08_36_04_0197");
-		pos = new Vector3(10.628572f, 3.600000f, 44.228569f);
+		
+		myObj = new GameObject("door_023_007");
+		pos = new Vector3(28.628572f, 3.600000f, 8.600000f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 8, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 8, 36, 0, 0, 45, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		
+		
+		myObj= CreateGameObject("a_jeweled_sword_14_08_05_0727",17.980000f,2.100000f,10.114285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_013",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", 1, 13, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateWeapon(myObj, 14, 7, 11, 3, 255);
+		
+		
+		myObj = new GameObject("a_mage_21_08_05_0249");
+		pos = new Vector3(25.714285f, 3.300000f, 10.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"115","Sprites/OBJECTS_115", 185);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_115", "Sprites/OBJECTS_115", "Sprites/OBJECTS_115", 0, 115, 0, 21, 8, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 185, 21, 8, 0, 0, 61, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
 		SetRotation(myObj,0,0,0);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
-		myObj = new GameObject("a_ghost_09_36_04_0218");
-		pos = new Vector3(11.980000f, 3.600000f, 44.228569f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 584, 9, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 9, 36, 0, 0, 63, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		////NPC container with items
 		
-		AddObjectToContainer("a_book_99_99_04_0584", ParentContainer, 0);
-		AddObjectToContainer("a_ruby_rubies_99_99_04_0583", ParentContainer, 1);
-		////Container contents complete
+		myObj= CreateGameObject("a_toadstool_07_09_05_0795",8.914286f,0.900000f,11.314286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
 		
+		myObj= CreateGameObject("a_toadstool_07_09_05_0794",8.914286f,0.900000f,11.828571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
 		
-		myObj = new GameObject("a_mage_17_36_04_0227");
-		pos = new Vector3(20.914284f, 3.300000f, 43.714287f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"106","Sprites/OBJECTS_106", 161);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", 0, 106, 945, 17, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 161, 17, 36, 0, 0, 50, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		////NPC container with items
+		myObj= CreateGameObject("a_toadstool_07_09_05_0793",9.428571f,0.900000f,11.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
 		
-		AddObjectToContainer("a_glowing_rock_99_99_04_0945", ParentContainer, 0);
-		AddObjectToContainer("a_mandolin_99_99_04_0944", ParentContainer, 1);
-		AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_04_0943", ParentContainer, 2);
-		////Container contents complete
-		
-		
-		myObj= CreateGameObject("a_shrine_20_36_04_0843",24.685715f,3.300000f,43.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_343",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", 83, 343, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddShrine(myObj);
-		
-		myObj = new GameObject("a_ghost_48_36_04_0205");
-		pos = new Vector3(58.114288f, 0.900000f, 43.714287f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 48, 36, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 48, 36, 0, 0, 23, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_crossbow_49_36_04_0537",59.657143f,0.000000f,44.057144f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_026",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", 1, 26, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_05_37_04_0793",6.171429f,3.300000f,45.085712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("special_tmap_obj_20_37_04_0828",25.180000f,3.600000f,45.000000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 44, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_006", "" , 6, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj = new GameObject("a_bloodworm_26_37_04_0243");
-		pos = new Vector3(31.714285f, 3.600000f, 44.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 26, 37, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 26, 37, 0, 0, 18, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_bloodworm_39_37_04_0241");
-		pos = new Vector3(47.314285f, 3.600000f, 44.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 39, 37, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 39, 37, 0, 0, 19, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,90,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("some_writing_44_37_04_0486",52.820000f,0.600000f,44.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 750, 0, 0, 0, 1, 0, 0, 1, 0, 7, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,270,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_27");
-		SetLink(myObj,750);
-		
-		myObj= CreateGameObject("some_writing_44_37_04_0903",53.980000f,0.600000f,45.085712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 751, 0, 0, 0, 1, 0, 0, 1, 0, 7, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,90,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_27");
-		SetLink(myObj,751);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_05_38_04_0756",7.028571f,3.300000f,46.114288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_red_potion_10_38_04_0813",12.857142f,3.300000f,46.457142f);
+		myObj= CreateGameObject("a_red_potion_12_09_05_0592",14.571428f,3.300000f,10.971428f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
 		AddPotion(myObj);
 		
-		myObj = new GameObject("door_032_038");
-		pos = new Vector3(38.599998f, 2.100000f, 46.628571f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_08", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj = new GameObject("door_050_038");
-		pos = new Vector3(61.028568f, 0.000000f, 46.599998f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,-90,0);
-		
-		myObj= CreateGameObject("some_writing_57_38_04_0947",68.419998f,0.600000f,46.457142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 720, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,270,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,720);
-		
-		myObj = new GameObject("door_057_038");
-		pos = new Vector3(68.599998f, 0.000000f, 45.619999f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_08", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj= CreateGameObject("a_stalactite_05_39_04_0794",6.342857f,4.500000f,47.485714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-		
-		myObj = new GameObject("door_009_039");
-		pos = new Vector3(11.000000f, 3.300000f, 47.828568f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_00", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj = new GameObject("door_014_039");
-		pos = new Vector3(17.000000f, 3.300000f, 47.828568f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_00", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0805",30.685715f,2.100000f,47.142857f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0804",31.028572f,2.100000f,47.142857f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_25_39_04_0803",30.514284f,2.100000f,47.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_skull_27_39_04_0802",32.914284f,2.100000f,47.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_skull_27_39_04_0801",33.257145f,2.100000f,46.971432f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_30_39_04_0875",36.599998f,3.000000f,46.820000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,180,0);
-		
-		myObj = new GameObject("a_headless_headlesses_34_39_04_0247");
-		pos = new Vector3(41.142857f, 2.100000f, 47.142857f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 34, 39, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 34, 39, 4, 0, 60, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,135,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("special_tmap_obj_34_39_04_0910",41.400002f,3.000000f,46.820000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,180,0);
-		
-		myObj= CreateGameObject("an_arrow_02_40_04_0860",2.742857f,3.300000f,48.857143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_018",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", 1, 18, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-		
-		myObj = new GameObject("a_giant_rat_06_40_04_0239");
-		pos = new Vector3(7.714286f, 3.300000f, 48.514286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"72","Sprites/OBJECTS_072", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", "Sprites/OBJECTS_072", 0, 72, 0, 6, 40, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 6, 40, 0, 0, 12, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,90,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("some_writing_14_40_04_0845",17.980000f,3.900000f,48.685715f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 725, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,90,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,725);
-		
-		myObj = new GameObject("a_bloodworm_22_40_04_0244");
-		pos = new Vector3(26.914284f, 3.600000f, 48.514286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 22, 40, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 22, 40, 0, 0, 17, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_headless_headlesses_25_40_04_0246");
-		pos = new Vector3(30.514284f, 2.100000f, 48.514286f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 25, 40, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 25, 40, 0, 0, 40, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_38_40_04_0819",46.114288f,2.100000f,48.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_38_40_04_0818",46.628571f,2.100000f,48.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_tower_shield_47_40_04_0544",56.742855f,0.000000f,48.342857f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_059",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", 78, 59, 0, 28, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddShield(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_24_41_04_0871",28.820000f,3.300000f,49.799999f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,270,0);
-		
-		myObj= CreateGameObject("a_bench_benches_29_41_04_0855",35.657143f,2.100000f,49.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-		
-		myObj= CreateGameObject("a_plant_33_41_04_0831",40.114285f,4.500000f,49.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_bench_benches_34_41_04_0856",41.142857f,2.100000f,49.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-		
-		myObj= CreateGameObject("a_plant_35_41_04_0829",42.514286f,4.500000f,49.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_39_41_04_0872",47.980000f,3.300000f,49.799999f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj= CreateGameObject("a_gravestone_44_41_04_0560",53.314285f,0.000000f,49.714287f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 733, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,22);
-		
-		myObj = new GameObject("a_skeleton_47_41_04_0207");
-		pos = new Vector3(56.914288f, 0.000000f, 49.714287f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 47, 41, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 47, 41, 0, 0, 30, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_gravestone_48_41_04_0559",58.114288f,0.000000f,49.714287f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 734, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,23);
-		
-		myObj= CreateGameObject("a_scroll_55_41_04_0577",66.514290f,0.000000f,49.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_316",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", 11, 316, 645, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetLink(myObj,645);
-		
-		myObj = new GameObject("a_goblin_03_42_04_0216");
-		pos = new Vector3(4.114285f, 3.600000f, 50.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 3, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 3, 42, 0, 0, 57, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_goblin_04_42_04_0215");
-		pos = new Vector3(5.314286f, 3.600000f, 50.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 4, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 4, 42, 0, 0, 65, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_goblin_05_42_04_0217");
-		pos = new Vector3(6.514286f, 3.600000f, 50.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"78","Sprites/OBJECTS_078", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", "Sprites/OBJECTS_078", 0, 78, 0, 5, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 5, 42, 0, 0, 53, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_blood_stain_24_42_04_0807",29.314285f,2.100000f,50.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-		
-		myObj= CreateGameObject("a_skull_24_42_04_0806",29.142857f,2.100000f,50.742855f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_30_42_04_0832",37.180000f,2.700000f,51.085712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
-		
-		myObj= CreateGameObject("a_skull_31_42_04_0835",37.714283f,2.700000f,50.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_31_42_04_0833",38.057144f,2.700000f,50.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_31_42_04_0834",38.057144f,2.700000f,51.085712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_39_42_04_0815",47.314285f,2.100000f,50.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_220",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_220", "Sprites/OBJECTS_220", "Sprites/OBJECTS_220", 23, 220, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_skeleton_53_42_04_0208");
-		pos = new Vector3(64.114288f, 0.000000f, 50.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 53, 42, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 53, 42, 0, 0, 34, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_gravestone_54_42_04_0552",65.314285f,0.000000f,50.914288f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 741, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,30);
-		
-		myObj= CreateGameObject("a_gravestone_58_42_04_0551",70.114288f,0.000000f,50.914288f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 742, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,31);
-		
-		myObj = new GameObject("a_gazer_04_43_04_0214");
-		pos = new Vector3(5.314286f, 3.900000f, 52.114288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"102","Sprites/OBJECTS_102", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", 0, 102, 0, 4, 43, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 4, 43, 0, 0, 69, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_24_43_04_0870",28.820000f,3.300000f,52.200001f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,270,0);
-		
-		myObj= CreateGameObject("a_broken_shield_28_43_04_0821",33.619999f,2.100000f,52.779999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_bench_benches_29_43_04_0859",35.657143f,2.100000f,52.114288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-		
-		myObj= CreateGameObject("a_bench_benches_34_43_04_0858",41.142857f,2.100000f,52.114288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
-		
-		myObj= CreateGameObject("a_plant_38_43_04_0817",46.114288f,4.500000f,52.114288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_43_04_0816",46.114288f,2.100000f,52.114288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_39_43_04_0873",47.980000f,3.300000f,52.200001f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj = new GameObject("a_bloodworm_41_43_04_0242");
-		pos = new Vector3(49.714287f, 3.600000f, 52.114288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 43, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 41, 43, 0, 0, 17, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_jeweled_mace_43_43_04_0538",51.771431f,0.000000f,52.628571f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_014",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", 1, 14, 704, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 9, 17, 5, 5, 255);
-		
-		myObj= CreateGameObject("special_tmap_obj_08_44_04_0976",10.200000f,3.600000f,52.820000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-		SetRotation(myObj,0,180,0);
-		
-		
-		myObj = new GameObject("a_reaper_18_44_04_0213");
-		pos = new Vector3(22.114285f, 1.200000f, 53.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"118","Sprites/OBJECTS_118", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", 0, 118, 0, 18, 44, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 18, 44, 0, 0, 71, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh6");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_mushroom_24_44_04_0809",28.971428f,2.100000f,53.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_toadstool_24_44_04_0808",29.142857f,2.100000f,53.828568f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_27_44_04_0822",32.914284f,2.100000f,53.485714f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_skull_32_44_04_0863",38.914284f,2.100000f,53.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_32_44_04_0862",38.914284f,2.100000f,53.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_32_44_04_0861",39.085716f,2.100000f,53.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_headless_headlesses_35_44_04_0233");
-		pos = new Vector3(42.514286f, 2.100000f, 53.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 35, 44, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 35, 44, 0, 0, 45, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_plant_37_44_04_0830",44.914288f,4.500000f,53.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_red_potion_55_44_04_0702",66.857147f,0.000000f,53.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 563, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddPotion(myObj);
-		
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_29_45_04_0874",35.400002f,3.000000f,55.180000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,0,0);
-		
-		myObj= CreateGameObject("special_tmap_obj_33_45_04_0909",40.200001f,3.037500f,55.180000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 20, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_172", "" , 172, false);
-		SetRotation(myObj,0,0,0);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_34_45_04_0812",41.828568f,2.100000f,55.180000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_34_45_04_0811",41.657143f,2.100000f,55.180000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_plant_34_45_04_0810",41.314285f,2.100000f,55.028568f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_plant_36_45_04_0814",43.714287f,2.100000f,55.028568f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_sack_39_45_04_0589",47.314285f,2.100000f,54.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 588, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		AddObjectToContainer("a_book_99_99_04_0588", ParentContainer, 0);
-		AddObjectToContainer("a_lockpick_99_99_04_0587", ParentContainer, 1);
-		AddObjectToContainer("a_flute_99_99_04_0586", ParentContainer, 2);
-		AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_04_0585", ParentContainer, 3);
-		////Container contents complete
-		
-		
-		myObj = new GameObject("door_050_045");
-		pos = new Vector3(61.028568f, 0.000000f, 55.000000f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,-90,0);
-		
-		myObj = new GameObject("a_reaper_14_46_04_0212");
-		pos = new Vector3(17.314285f, 1.200000f, 55.714287f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"118","Sprites/OBJECTS_118", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", "Sprites/OBJECTS_118", 0, 118, 0, 14, 46, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 14, 46, 0, 0, 121, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh6");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		
-		myObj = new GameObject("door_031_046");
-		pos = new Vector3(37.400002f, 2.100000f, 56.380001f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_08", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj = new GameObject("door_052_046");
-		pos = new Vector3(62.571430f, 0.000000f, 55.400002f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,90,0);
-		
-		myObj= CreateGameObject("a_mushroom_27_47_04_0901",32.742855f,3.600000f,57.085712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_mushroom_27_47_04_0902",32.742855f,3.600000f,56.571430f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_skull_28_47_04_0906",34.285717f,3.600000f,56.571430f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_28_47_04_0905",34.114285f,3.600000f,57.428570f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_28_47_04_0904",34.628571f,3.600000f,57.085712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_plant_29_47_04_0907",35.485714f,3.600000f,56.742855f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("special_tmap_obj_29_47_04_1015",35.980000f,3.600000f,57.000000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-		SetRotation(myObj,0,90,0);
-		
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_32_47_04_0869",39.000000f,3.000000f,56.419998f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 32, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_018", "" , 18, false);
-		SetRotation(myObj,0,180,0);
-		
-		myObj= CreateGameObject("some_writing_32_47_04_0868",38.742855f,2.700000f,56.419998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 723, 40, 0, 0, 1, 0, 0, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,180,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_20");
-		SetLink(myObj,723);
-		
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_47_04_0924",41.828568f,3.600000f,56.571430f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_47_04_0923",41.314285f,3.600000f,57.428570f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-		
-		myObj= CreateGameObject("special_tmap_obj_34_47_04_1018",40.820000f,3.600000f,57.000000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-		SetRotation(myObj,0,270,0);
-		
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_35_47_04_0935",42.342857f,3.600000f,57.580002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_plant_35_47_04_0933",42.514286f,3.600000f,56.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_plant_36_47_04_0928",44.057144f,3.600000f,56.742855f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_36_47_04_0927",43.220001f,3.600000f,56.419998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_mushroom_36_47_04_0930",43.714287f,3.600000f,56.571430f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_toadstool_36_47_04_0931",43.220001f,3.600000f,56.571430f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj = new GameObject("a_bloodworm_41_47_04_0234");
-		pos = new Vector3(49.714287f, 3.600000f, 56.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 47, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 41, 47, 0, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_green_potion_49_47_04_0851",59.657143f,0.000000f,56.742855f);
+		myObj= CreateGameObject("a_green_potion_12_09_05_0588",15.428572f,3.300000f,10.971428f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
 		AddPotion(myObj);
 		
-		
-		myObj= CreateGameObject("a_plant_27_48_04_0900",32.571426f,3.600000f,58.457142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_27_48_04_0898",33.428574f,3.600000f,58.457142f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
-		
-		myObj = new GameObject("a_skeleton_49_48_04_0209");
-		pos = new Vector3(59.314285f, 0.000000f, 58.114288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 49, 48, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 49, 48, 0, 0, 32, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_bloodworm_22_49_04_0245");
-		pos = new Vector3(26.914284f, 3.600000f, 59.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 22, 49, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 22, 49, 0, 0, 16, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_49_04_0926",41.314285f,3.600000f,59.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_37_49_04_0941",45.257145f,3.600000f,58.820000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_broken_mace_37_49_04_0937",44.914288f,3.600000f,59.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_37_49_04_0936",45.257145f,3.600000f,59.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_gravestone_44_49_04_0557",53.314285f,0.000000f,59.314285f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 736, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,25);
-		
-		myObj= CreateGameObject("a_gravestone_48_49_04_0558",58.114288f,0.000000f,59.314285f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 735, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,24);
-		
-		
-		myObj= CreateGameObject("a_broken_hilt_54_49_04_0932",65.314285f,0.000000f,59.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_281",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_281", "Sprites/OBJECTS_281", "Sprites/OBJECTS_281", 16, 281, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_ghost_57_49_04_0206");
-		pos = new Vector3(68.914284f, 1.200000f, 59.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 57, 49, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 57, 49, 0, 0, 47, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		
-		myObj= CreateGameObject("some_writing_26_50_04_0866",31.219999f,4.200000f,60.857143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 724, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,270,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
-		SetLink(myObj,724);
-		
-		myObj= CreateGameObject("a_skull_37_50_04_0940",45.085712f,3.600000f,60.020000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_37_50_04_0939",45.257145f,3.600000f,60.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("an_axe_45_50_04_0543",54.857143f,0.000000f,60.857143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_002",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", 1, 2, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, 10, 6, 8, 4, 25);
-		
-		myObj= CreateGameObject("a_sack_48_50_04_0582",58.114288f,0.000000f,60.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 579, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 125, 255, 255);
-		AddObjectToContainer("a_book_99_99_04_0579", ParentContainer, 0);
-		AddObjectToContainer("a_large_blue_gem_99_99_04_0581", ParentContainer, 1);
-		AddObjectToContainer("a_fish_fish_99_99_04_0580", ParentContainer, 2);
-		////Container contents complete
-		
-		
-		myObj= CreateGameObject("a_gravestone_54_50_04_0554",65.314285f,0.000000f,60.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 739, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,28);
-		
-		myObj= CreateGameObject("a_gravestone_58_50_04_0553",70.114288f,0.000000f,60.514286f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 740, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,29);
-		
-		
-		myObj = new GameObject("door_025_051");
-		pos = new Vector3(30.857143f, 3.600000f, 61.400002f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_08", 53, 0, 1);
-		SetRotation(myObj,-90,90,0);
-		
-		myObj= CreateGameObject("a_plant_27_51_04_0889",33.580002f,3.600000f,61.371429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_27_51_04_0888",33.428574f,3.600000f,61.885712f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_27_51_04_0887",33.580002f,3.600000f,61.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_skull_28_51_04_0897",34.114285f,3.600000f,61.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_28_51_04_0895",34.457142f,3.600000f,61.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_28_51_04_0896",34.457142f,3.600000f,61.542858f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
-		
-		myObj= CreateGameObject("a_broken_mace_28_51_04_0894",33.942856f,3.600000f,61.542858f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0916",42.514286f,3.600000f,61.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0914",43.028568f,3.600000f,62.228569f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_35_51_04_0913",43.028568f,3.600000f,61.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj = new GameObject("door_038_051");
-		pos = new Vector3(45.942856f, 3.600000f, 62.200001f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_08", 53, 0, 1);
-		SetRotation(myObj,-90,-90,0);
-		
-		myObj= CreateGameObject("special_tmap_obj_19_52_04_0965",22.820000f,3.600000f,63.000000f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 8, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_206", "" , 206, false);
-		SetRotation(myObj,0,270,0);
-		
-		myObj= CreateGameObject("a_plant_34_52_04_0921",40.971432f,3.600000f,62.914288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj = new GameObject("a_dread_spider_36_52_04_0253");
-		pos = new Vector3(43.714287f, 3.600000f, 62.914288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 36, 52, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 36, 52, 0, 0, 40, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("some_writing_37_52_04_0864",45.580002f,4.200000f,62.742855f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 724, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
-		SetReadable(myObj);
+		myObj= CreateGameObject("a_button_12_09_05_0804",15.580000f,3.450000f,11.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_369",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_369", "Sprites/OBJECTS_369", "Sprites/OBJECTS_369", 8, 369, 802, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_05_0802",40,0,0,7,369);
 		SetRotation(myObj,0,90,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
-		SetLink(myObj,724);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0001", "Sprites/tmflat/tmflat_0009");
 		
 		
-		myObj = new GameObject("a_dread_spider_27_53_04_0251");
-		pos = new Vector3(32.914284f, 3.600000f, 64.114288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 27, 53, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 27, 53, 4, 0, 28, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("door_030_053");
-		pos = new Vector3(36.857143f, 3.600000f, 63.799999f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,90,0);
-		
-		myObj = new GameObject("door_033_053");
-		pos = new Vector3(39.942856f, 3.600000f, 64.599998f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,-90,0);
-		
-		myObj = new GameObject("a_dread_spider_35_53_04_0230");
-		pos = new Vector3(42.514286f, 3.600000f, 64.114288f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 35, 53, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 35, 53, 0, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_gravestone_44_53_04_0556",53.314285f,0.000000f,64.114288f);
+		myObj= CreateGameObject("special_tmap_obj_12_10_05_0646",15.000000f,3.600000f,13.180000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 29, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_201", "" , 201, false);
 		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 737, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,26);
 		
-		myObj= CreateGameObject("a_gravestone_48_53_04_0555",58.114288f,0.000000f,64.114288f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 738, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,27);
+		myObj= CreateGameObject("a_wand_16_10_05_0725",20.057142f,2.700000f,12.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_152",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_152", "Sprites/OBJECTS_152", "Sprites/OBJECTS_152", 12, 152, 730, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddWand(myObj, 537, 12);
 		
+		myObj= CreateGameObject("a_bench_benches_20_10_05_0968",24.514284f,3.300000f,12.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
 		
-		myObj= CreateGameObject("a_light_mace_55_53_04_0531",66.857147f,0.000000f,63.942856f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_008",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_008", "Sprites/OBJECTS_008", "Sprites/OBJECTS_008", 1, 8, 0, 58, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, 6, 10, 4, 5, 15);
-		
-		
-		myObj= CreateGameObject("a_skull_59_53_04_0597",71.314285f,0.300000f,64.628571f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_gravestone_59_53_04_0598",71.314285f,0.300000f,64.114288f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 732, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,5);
-		
-		
-		myObj= CreateGameObject("a_skull_27_54_04_0892",32.419998f,3.600000f,65.980003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_27_54_04_0893",32.419998f,3.600000f,65.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_broken_shield_27_54_04_0891",32.742855f,3.600000f,65.980003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_blood_stain_27_54_04_0890",32.571426f,3.600000f,65.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_plant_34_54_04_0912",41.980000f,3.600000f,65.828568f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_plant_34_54_04_0911",41.828568f,3.600000f,65.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_blood_stain_35_54_04_0920",42.514286f,3.600000f,65.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_35_54_04_0918",42.857143f,3.600000f,65.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_broken_sword_35_54_04_0917",42.171432f,3.600000f,65.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_skull_35_54_04_0919",42.514286f,3.600000f,65.657143f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_dread_spider_37_54_04_0231");
-		pos = new Vector3(44.914288f, 3.600000f, 65.314285f);
+		myObj = new GameObject("a_mage_21_10_05_0252");
+		pos = new Vector3(25.714285f, 3.300000f, 12.514286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 37, 54, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 37, 54, 0, 0, 33, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj = new GameObject("a_skeleton_45_54_04_0210");
-		pos = new Vector3(54.514286f, 0.000000f, 65.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 45, 54, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 45, 54, 0, 0, 86, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh16");
+		CreateNPC(myObj,"108","Sprites/OBJECTS_108", 187);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_108", "Sprites/OBJECTS_108", "Sprites/OBJECTS_108", 0, 108, 0, 21, 10, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 187, 21, 10, 0, 0, 57, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
 		SetRotation(myObj,0,0,0);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
-		myObj= CreateGameObject("plate_boots_pairs_of_plate_boots_49_54_04_0540",59.314285f,0.000000f,65.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_043",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_043", "Sprites/OBJECTS_043", "Sprites/armour/armor_f_0011", 75, 43, 0, 34, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateBoots(myObj, "Sprites/armour/armor_f_0011", "Sprites/armour/armor_m_0011", "Sprites/armour/armor_f_0026", "Sprites/armour/armor_m_0026", "Sprites/armour/armor_f_0041", "Sprites/armour/armor_m_0041", "Sprites/armour/armor_f_0056", "Sprites/armour/armor_m_0056", 5, 17);
-		
-		myObj= CreateGameObject("a_gravestone_54_54_04_0599",65.314285f,0.000000f,65.485710f);
-		SetRotation(myObj,0,0,0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", "Sprites/OBJECTS_357", 84, 357, 545, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
-		AddGrave(myObj, 28,6);
-		
-		
-		myObj= CreateGameObject("a_sceptre_59_54_04_0539",71.485710f,0.300000f,65.980003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_170",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", "Sprites/OBJECTS_170", 18, 170, 878, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_bone_59_54_04_0596",70.971428f,0.300000f,64.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_bone_59_54_04_0595",71.657143f,0.300000f,64.820000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_59_54_04_0594",71.314285f,0.300000f,65.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_13_55_04_1004",15.620000f,2.400000f,66.599998f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_137", "" , 137, false);
-		SetRotation(myObj,0,270,0);
-		
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0885",32.057144f,3.600000f,66.171432f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0884",32.380001f,3.600000f,66.342857f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_26_55_04_0883",32.057144f,3.600000f,66.514290f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj = new GameObject("a_dread_spider_29_55_04_0252");
-		pos = new Vector3(35.314285f, 3.600000f, 66.514290f);
+		myObj = new GameObject("a_mage_46_10_05_0242");
+		pos = new Vector3(55.714287f, 3.300000f, 12.514286f);
 		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 29, 55, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 29, 55, 8, 0, 26, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_plant_29_55_04_0881",35.828571f,4.500000f,66.685715f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj= CreateGameObject("a_plant_29_55_04_0882",35.314285f,4.500000f,66.514290f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		
-		myObj= CreateGameObject("an_arrow_43_55_04_0535",51.942856f,0.000000f,66.857147f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_018",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", "Sprites/OBJECTS_018", 1, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
-		
-		myObj= CreateGameObject("plate_leggings_pairs_of_plate_leggings_49_55_04_0542",59.314285f,0.000000f,66.514290f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_037",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_037", "Sprites/OBJECTS_037", "Sprites/armour/armor_f_0005", 77, 37, 0, 12, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateLeggings(myObj, "Sprites/armour/armor_f_0005", "Sprites/armour/armor_m_0005", "Sprites/armour/armor_f_0020", "Sprites/armour/armor_m_0020", "Sprites/armour/armor_f_0035", "Sprites/armour/armor_m_0035", "Sprites/armour/armor_f_0050", "Sprites/armour/armor_m_0050", 6, 20);
-		
-		myObj = new GameObject("a_dread_spider_26_56_04_0232");
-		pos = new Vector3(31.714285f, 3.600000f, 67.714287f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 26, 56, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 26, 56, 0, 0, 31, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,180,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		
-		myObj= CreateGameObject("a_lever_12_57_04_0663",15.085714f,2.700000f,69.085716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 635, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0635",40,0,0,7,373);
-		SetRotation(myObj,0,225,0);
-		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
-		
-		myObj= CreateGameObject("a_lever_19_57_04_0662",23.485716f,2.700000f,69.085716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 640, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0640",40,0,0,7,373);
-		SetRotation(myObj,0,135,0);
-		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
-		
-		
-		
-		myObj= CreateGameObject("a_broken_axe_27_57_04_0877",32.419998f,3.600000f,69.428566f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_28_57_04_0880",34.457142f,3.600000f,69.085716f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_28_57_04_0879",33.619999f,3.600000f,69.428566f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
-		
-		myObj= CreateGameObject("a_broken_shield_30_57_04_0820",36.514286f,3.600000f,68.914284f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("door_050_057");
-		pos = new Vector3(61.028568f, 0.000000f, 69.400002f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,-90,0);
-		
-		
-		
-		myObj = new GameObject("door_026_058");
-		pos = new Vector3(31.400000f, 3.600000f, 69.620003f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 0, 63, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_09", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		myObj = new GameObject("door_051_058");
-		pos = new Vector3(61.400002f, 0.000000f, 70.285713f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		
-		
-		
-		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_33_59_04_0798",40.114285f,3.600000f,70.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_stalactite_35_59_04_0781",42.685715f,4.500000f,70.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-		
-		myObj= CreateGameObject("a_stalactite_35_59_04_0780",42.342857f,4.500000f,71.142853f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-		
-		myObj= CreateGameObject("a_plant_37_59_04_0782",44.914288f,3.600000f,71.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj= CreateGameObject("a_plant_37_59_04_0844",45.085712f,3.600000f,71.142853f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
-		
-		myObj = new GameObject("a_skeleton_38_59_04_0235");
-		pos = new Vector3(46.114288f, 3.600000f, 71.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 38, 59, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 38, 59, 0, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_plant_40_59_04_0797",48.514286f,3.600000f,70.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_42_59_04_0800",51.428570f,3.600000f,71.142853f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_broken_mace_44_59_04_0786",53.314285f,3.600000f,70.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_plant_44_59_04_0783",53.314285f,4.500000f,71.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
-		
-		myObj = new GameObject("a_skeleton_46_59_04_0249");
-		pos = new Vector3(55.714287f, 3.600000f, 71.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 46, 59, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 46, 59, 8, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_47_59_04_0788",56.914288f,3.600000f,71.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_47_59_04_0799",56.571430f,3.600000f,71.142853f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_red_potion_48_59_04_0795",58.628571f,3.600000f,70.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("special_tmap_obj_48_59_04_1013",58.779999f,3.600000f,71.400002f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_160", "" , 160, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj= CreateGameObject("special_tmap_obj_55_59_04_1005",67.180000f,0.000000f,71.400002f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
-		SetRotation(myObj,0,90,0);
-		
-		
-		
-		
-		
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0683",38.228573f,3.600000f,72.857147f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0682",38.057144f,3.600000f,72.171432f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("some_grass_bunches_of_grass_31_60_04_0684",37.714283f,3.600000f,72.514290f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
-		
-		myObj= CreateGameObject("a_mushroom_34_60_04_0789",41.657143f,3.600000f,72.857147f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_mushroom_34_60_04_0785",41.142857f,3.600000f,73.028572f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_toadstool_34_60_04_0779",41.485714f,3.600000f,72.685715f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddPotion(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_36_60_04_0791",43.885712f,3.600000f,72.857147f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_skull_38_60_04_0787",45.942856f,3.600000f,73.028572f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_38_60_04_0796",46.285713f,3.600000f,73.028572f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_skeleton_39_60_04_0248");
-		pos = new Vector3(47.314285f, 3.600000f, 72.514290f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 39, 60, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 39, 60, 8, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("a_stalactite_42_60_04_0790",50.914288f,4.500000f,72.514290f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_211",true);
-		
-		myObj= CreateGameObject("a_skull_45_60_04_0792",54.514286f,3.600000f,73.028572f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);
-		
-		myObj = new GameObject("a_skeleton_47_60_04_0250");
-		pos = new Vector3(56.914288f, 3.600000f, 72.514290f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 47, 60, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 47, 60, 12, 0, 30, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh5");
-		SetRotation(myObj,0,270,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		
-		myObj= CreateGameObject("special_tmap_obj_48_60_04_1014",58.779999f,3.600000f,72.599998f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,	"uw1_160", "" , 160, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj = new GameObject("door_059_060");
-		pos = new Vector3(71.000000f, 0.000000f, 73.028572f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", 4, 324, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_11", 53, 0, 1);
-		SetRotation(myObj,-90,-180,0);
-		
-		
-		myObj= CreateGameObject("a_lever_12_61_04_0664",15.085714f,2.700000f,73.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_381",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", "Sprites/OBJECTS_381", 8, 381, 646, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0646",40,0,0,7,381);
-		SetRotation(myObj,0,315,0);
-		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0013", "Sprites/tmflat/tmflat_0005");
-		
-		myObj= CreateGameObject("a_lever_19_61_04_0670",23.314285f,2.700000f,73.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_373",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", "Sprites/OBJECTS_373", 8, 373, 641, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_04_0641",40,0,0,7,373);
-		SetRotation(myObj,0,45,0);
-		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0005", "Sprites/tmflat/tmflat_0013");
-		
-		
-		
-		myObj= CreateGameObject("special_tmap_obj_53_61_04_1010",64.779999f,0.000000f,73.800003f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 1008, 40, 13, 0, 0, 0, 0, 0, 0, 0, 1);
-		CreateTMAP(myObj,"uw1_049", "a_look_trigger_99_99_04_1008", 49, false);
-		SetRotation(myObj,0,90,0);
-		
-		myObj = new GameObject("door_054_061");
-		pos = new Vector3(64.820000f, 0.000000f, 73.400002f);
-		myObj.transform.position = pos;
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/world/uw1_049", 53, 0, 1);
-		SetRotation(myObj,-90,90,0);
-		
-		
-		myObj= CreateGameObject("some_writing_58_61_04_0949",70.285713f,0.600000f,73.220001f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 721, 40, 0, 0, 1, 0, 0, 1, 0, 1, 1);
-		SetReadable(myObj);
-		SetRotation(myObj,0,180,0);
-		SetSprite(myObj, "Sprites/tmobj/tmobj_21");
-		SetLink(myObj,721);
-		
-		//UW Triggers and Traps
-		myObj= CreateGameObject("a_set_variable_trap_99_99_04_0004",120.000000f,1.387500f,119.142860f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 218, 1, 52, 0, 0, 0, 1, 1, 0, 2, 0);
-		SetRotation(myObj,0,45,0);
-		Create_a_set_variable_trap(myObj,37,418,1);
-		
-		myObj= CreateGameObject("a_check_variable_trap_99_99_04_0007",118.800003f,2.737500f,119.142860f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 44, 9, 6, 0, 0, 0, 1, 0, 0, 4, 0);
-		SetRotation(myObj,0,270,0);
-		Create_a_check_variable_trap(myObj,73,0,2354,6);
-		
-		myObj= CreateGameObject("a_door_trap_99_99_04_0031",119.485710f,2.512500f,118.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 462, 59, 15, 0, 0, 0, 1, 0, 0, 7, 0);
-		SetRotation(myObj,0,90,0);
-		Create_a_door_trap(myObj,59);
-		AddTrapLink(myObj,"a_button_99_99_04_0462");
-		
-		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0032",119.657135f,0.075000f,120.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 58, 37, 57, 0, 0, 0, 1, 0, 0, 3, 0);
-		SetRotation(myObj,0,270,0);
-		Create_a_delete_object_trap(myObj);
-		AddTrapLink(myObj,"a_longsword_99_99_04_0058");
-		
-		myObj= CreateGameObject("a_set_variable_trap_99_99_04_0036",119.657135f,0.225000f,118.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 1020, 13, 4, 0, 0, 0, 1, 1, 1, 15, 0);
-		SetRotation(myObj,0,270,0);
-		Create_a_set_variable_trap(myObj,6,3361,6);
-		
-		myObj= CreateGameObject("a_arrow_trap_99_99_04_0061",118.800003f,4.462500f,118.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 0);
-		SetRotation(myObj,0,0,0);
-		Create_a_arrow_trap(myObj, 293, 16);
-		
-		myObj= CreateGameObject("a_arrow_trap_99_99_04_0076",118.800003f,2.362500f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 2, 3, 1, 0, 0, 0, 1, 1, 0, 4, 0);
-		SetRotation(myObj,0,225,0);
-		Create_a_arrow_trap(myObj, 97, 0);
-		
-		myObj= CreateGameObject("a_do_trap_99_99_04_0261",119.657135f,3.300000f,119.657135f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 744, 62, 33, 0, 0, 0, 1, 1, 0, 5, 0);
-		SetRotation(myObj,0,45,0);
-		Create_trap_base(myObj);
-		
-		myObj= CreateGameObject("a_spelltrap_99_99_04_0283",119.657135f,0.900000f,118.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 90, 25, 7, 0, 0, 0, 1, 0, 0, 3, 0);
-		SetRotation(myObj,0,180,0);
-		Create_a_spelltrap(myObj);
-		
-		myObj= CreateGameObject("a_damage_trap_99_99_04_0294",119.828575f,0.225000f,119.657135f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_384",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", 37, 384, 928, 11, 13, 0, 0, 0, 1, 1, 0, 3, 0);
-		SetRotation(myObj,0,270,0);
-		Create_a_damage_trap(myObj);
-		
-		myObj= CreateGameObject("a_spelltrap_99_99_04_0329",120.000000f,0.225000f,119.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 112, 46, 14, 0, 0, 0, 1, 1, 0, 4, 0);
-		SetRotation(myObj,0,225,0);
-		Create_a_spelltrap(myObj);
-		AddTrapLink(myObj,"a_switch_99_99_04_0112");
-		
-		myObj= CreateGameObject("a_create_object_trap_99_99_04_0342",118.971428f,2.737500f,119.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 122, 18, 59, 0, 0, 0, 1, 0, 1, 9, 0);
-		SetRotation(myObj,0,315,0);
-		Create_a_create_object_trap(myObj, "GroundMesh1");
-		AddTrapLink(myObj,"a_broadsword_99_99_04_0122");
-		
-		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0347",119.485710f,3.150000f,118.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 840, 51, 51, 0, 0, 0, 1, 1, 1, 15, 0);
-		SetRotation(myObj,0,315,0);
-		Create_a_delete_object_trap(myObj);
-		AddTrapLink(myObj,"a_glowing_rock_14_22_04_0840");
-		
-		myObj= CreateGameObject("a_step_on_trigger_99_99_04_0353",118.800003f,3.562500f,120.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_420",false);
-		CreateTrigger(myObj,6,11,"a_door_050_057");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_420", "Sprites/OBJECTS_420", "Sprites/OBJECTS_420", 58, 420, 990, 6, 11, 0, 0, 0, 1, 0, 1, 12, 0);
-		
-		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0380",118.971428f,0.412500f,120.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 996, 9, 3, 0, 0, 0, 1, 1, 1, 11, 0);
-		SetRotation(myObj,0,225,0);
-		Create_a_delete_object_trap(myObj);
-		AddTrapLink(myObj,"a_glowing_rock_16_06_04_0996");
-		
-		myObj= CreateGameObject("a_teleport_trap_99_99_04_0381",119.485710f,2.700000f,119.657135f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 996, 61, 43, 0, 0, 0, 1, 1, 1, 15, 0);
-		SetRotation(myObj,0,45,0);
-		Create_a_teleport_trap(myObj,(float)73.800000,(float)52.200000,(float)3.600000,72);
-		
-		myObj= CreateGameObject("an_inventory_trap_99_99_04_0403",118.800003f,2.025000f,118.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", 49, 396, 32, 17, 14, 0, 0, 0, 1, 1, 0, 5, 0);
-		SetRotation(myObj,0,90,0);
-		Create_an_inventory_trap(myObj);
-		AddTrapLink(myObj,"a_delete_object_trap_99_99_04_0032");
-		
-		myObj= CreateGameObject("a_delete_object_trap_99_99_04_0406",119.142860f,0.150000f,118.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 692, 43, 5, 0, 0, 0, 1, 1, 0, 6, 0);
-		SetRotation(myObj,0,90,0);
-		Create_a_delete_object_trap(myObj);
-		AddTrapLink(myObj,"a_plant_17_31_04_0692");
-		
-		myObj= CreateGameObject("an_inventory_trap_99_99_04_0421",120.000000f,0.525000f,120.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_396",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", "Sprites/OBJECTS_396", 49, 396, 1008, 22, 54, 0, 0, 0, 1, 1, 0, 5, 0);
-		SetRotation(myObj,0,180,0);
-		Create_an_inventory_trap(myObj);
-		AddTrapLink(myObj,"a_look_trigger_99_99_04_1008");
-		
-		myObj= CreateGameObject("a_tell_trap_99_99_04_0459",120.000000f,0.000000f,118.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_394",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_394", "Sprites/OBJECTS_394", "Sprites/OBJECTS_394", 47, 394, 259, 31, 42, 0, 0, 0, 1, 0, 1, 10, 0);
-		SetRotation(myObj,0,225,0);
-		Create_a_tell_trap(myObj);
-		
-		myObj= CreateGameObject("a_text_string_trap_99_99_04_0469",118.800003f,4.350000f,119.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_400",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", 53, 400, 650, 32, 16, 0, 0, 0, 1, 0, 0, 0, 0);
-		SetRotation(myObj,0,180,0);
-		Create_a_text_string_trap(myObj,9,272);
-		AddTrapLink(myObj,"a_check_variable_trap_03_28_04_0650");
-		
-		myObj= CreateGameObject("a_create_object_trap_36_41_04_0484",43.200001f,2.100000f,49.200001f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 200, 48, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh5");
-		AddTrapLink(myObj,"a_headless_headlesses_99_99_04_0200");
-		
-		myObj= CreateGameObject("a_create_object_trap_25_44_04_0491",30.000000f,2.100000f,52.799999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 199, 59, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh5");
-		AddTrapLink(myObj,"a_mongbat_99_99_04_0199");
-		
-		myObj= CreateGameObject("a_move_trigger_54_52_04_0495",65.400002f,3.600000f,63.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,54,53,"a_create_object_trap_54_53_04_0500");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 500, 54, 53, 0, 0, 0, 1, 1, 0, 4, 1);
-		
-		myObj= CreateGameObject("a_set_variable_trap_21_61_04_0496",25.200001f,1.275000f,73.714287f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,180,0);
-		Create_a_set_variable_trap(myObj,34,3,4);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0497",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,21,57,"a_set_variable_trap_21_57_04_0498");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 498, 21, 57, 0, 0, 0, 1, 1, 1, 14, 0);
-		
-		myObj= CreateGameObject("a_set_variable_trap_21_57_04_0498",25.200001f,1.275000f,68.571434f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,180,0);
-		Create_a_set_variable_trap(myObj,34,1,4);
-		
-		myObj= CreateGameObject("a_create_object_trap_54_53_04_0500",65.314285f,0.000000f,64.114288f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 196, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh16");
-		AddTrapLink(myObj,"a_ghost_99_99_04_0196");
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0504",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,21,61,"a_set_variable_trap_21_61_04_0496");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 496, 21, 61, 0, 0, 0, 1, 1, 1, 14, 0);
-		
-		myObj= CreateGameObject("a_create_object_trap_53_49_04_0505",63.599998f,0.000000f,58.799999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 204, 50, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh16");
-		AddTrapLink(myObj,"a_ghost_99_99_04_0204");
-		
-		myObj= CreateGameObject("a_move_trigger_13_48_04_0532",16.200001f,1.200000f,58.200001f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,19,50,"a_create_object_trap_19_50_04_0533");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 533, 19, 50, 0, 0, 0, 1, 1, 0, 4, 1);
-		
-		myObj= CreateGameObject("a_create_object_trap_19_50_04_0533",22.799999f,1.200000f,60.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 211, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh6");
-		AddTrapLink(myObj,"a_fire_elemental_99_99_04_0211");
-		
-		myObj= CreateGameObject("a_move_trigger_19_51_04_0534",23.400000f,2.400000f,61.799999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,19,46,"a_arrow_trap_19_46_04_0563");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 563, 19, 46, 0, 0, 0, 1, 1, 0, 4, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_14_45_04_0561",17.400000f,1.200000f,54.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,10,45,"a_spelltrap_10_45_04_0562");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 562, 10, 45, 0, 0, 0, 1, 1, 0, 4, 1);
-		
-		myObj= CreateGameObject("a_spelltrap_10_45_04_0562",13.028572f,1.912500f,54.514286f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_390",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", "Sprites/OBJECTS_390", 43, 390, 0, 5, 3, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,90,0);
-		Create_a_spelltrap(myObj);
-		
-		myObj= CreateGameObject("a_arrow_trap_19_46_04_0563",22.799999f,4.500000f,55.200001f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 0, 0, 17, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_arrow_trap(myObj, 17, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_01_27_04_0622",1.800000f,2.400000f,33.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,1,28,"a_teleport_trap_01_28_04_0623");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 623, 1, 28, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_teleport_trap_01_28_04_0623",1.200000f,0.000000f,33.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 11, 6, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)13.800000,(float)7.800000,(float)2.400000,0);
-		
-		myObj= CreateGameObject("a_create_object_trap_11_14_04_0624",13.200000f,2.400000f,16.799999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 201, 55, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh2");
-		AddTrapLink(myObj,"a_ghost_99_99_04_0201");
-		
-		myObj= CreateGameObject("a_move_trigger_99_99_04_0625",119.400002f,1.800000f,119.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,3,27,"a_door_trap_99_99_04_0626");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 626, 3, 27, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_door_trap_99_99_04_0626",118.800003f,2.400000f,118.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 621, 3, 0, 0, 0, 0, 1, 0, 0, 1, 0);
-		SetRotation(myObj,0,0,0);
-		Create_a_door_trap(myObj,3);
-		
-		myObj= CreateGameObject("a_move_trigger_18_59_04_0628",22.200001f,2.100000f,71.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_13_59_04_0629",16.200001f,2.100000f,71.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_17_58_04_0630",21.000000f,2.100000f,70.199997f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_14_58_04_0631",17.400000f,2.100000f,70.199997f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_17_60_04_0632",21.000000f,2.100000f,72.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_14_60_04_0633",17.400000f,2.100000f,72.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,60,"a_set_variable_trap_21_60_04_0634");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 634, 21, 60, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_set_variable_trap_21_60_04_0634",25.200001f,1.275000f,73.199997f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 7, 0, 0, 0, 1, 0, 0, 6, 1);
-		SetRotation(myObj,0,180,0);
-		Create_a_set_variable_trap(myObj,34,63,4);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0635",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,10,57,"a_check_variable_trap_10_57_04_0643");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 643, 10, 57, 0, 0, 0, 1, 1, 1, 14, 0);
-		
-		myObj= CreateGameObject("a_create_object_trap_16_59_04_0636",19.200001f,2.700000f,70.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 934, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh5");
-		AddTrapLink(myObj,"an_iron_ring_99_99_04_0934");
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0639",119.314285f,1.800000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,16,59,"a_create_object_trap_16_59_04_0636");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 636, 16, 59, 0, 0, 0, 1, 1, 1, 12, 0);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0640",119.314285f,2.700000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,20,57,"a_set_variable_trap_20_57_04_0645");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 645, 20, 57, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0641",119.314285f,2.700000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,20,61,"a_set_variable_trap_20_61_04_0644");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 644, 20, 61, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_create_object_trap_52_09_04_0642",62.400002f,2.400000f,10.800000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 202, 58, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh15");
-		AddTrapLink(myObj,"a_ghoul_99_99_04_0202");
-		
-		myObj= CreateGameObject("a_check_variable_trap_10_57_04_0643",12.171429f,1.275000f,69.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 639, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_check_variable_trap(myObj,34,1,7,0);
-		AddTrapLink(myObj,"a_use_trigger_99_99_04_0639");
-		
-		myObj= CreateGameObject("a_set_variable_trap_20_61_04_0644",24.000000f,1.275000f,73.542854f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 504, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,270,0);
-		Create_a_set_variable_trap(myObj,34,2,6);
-		AddTrapLink(myObj,"a_use_trigger_99_99_04_0504");
-		
-		myObj= CreateGameObject("a_set_variable_trap_20_57_04_0645",24.000000f,1.275000f,68.742859f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 497, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,270,0);
-		Create_a_set_variable_trap(myObj,34,2,6);
-		AddTrapLink(myObj,"a_use_trigger_99_99_04_0497");
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0646",119.314285f,2.700000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,11,61,"a_set_variable_trap_11_61_04_0647");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 647, 11, 61, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_set_variable_trap_11_61_04_0647",13.200000f,1.275000f,73.542854f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,270,0);
-		Create_a_set_variable_trap(myObj,34,2,6);
-		
-		myObj= CreateGameObject("a_move_trigger_54_02_04_0648",65.400002f,2.400000f,3.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,52,3,"a_create_object_trap_52_03_04_0661");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 661, 52, 3, 0, 0, 0, 1, 1, 0, 4, 1);
-		
-		myObj= CreateGameObject("a_check_variable_trap_03_28_04_0650",3.600000f,1.162500f,34.628571f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_398",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", "Sprites/OBJECTS_398", 51, 398, 625, 1, 26, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,90,0);
-		Create_a_check_variable_trap(myObj,31,0,470,2);
-		AddTrapLink(myObj,"a_move_trigger_99_99_04_0625");
-		
-		myObj= CreateGameObject("a_move_trigger_55_02_04_0651",66.599998f,2.400000f,3.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,57,3,"a_damage_trap_57_03_04_0876");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 876, 57, 3, 0, 0, 0, 1, 1, 0, 4, 1);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0654",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,3,28,"a_check_variable_trap_03_28_04_0650");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 650, 3, 28, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_move_trigger_11_10_04_0656",13.800000f,2.400000f,12.600000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,11,11,"a_teleport_trap_11_11_04_0659");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 659, 11, 11, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0658",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,7,30,"a_set_variable_trap_07_30_04_0953");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 953, 7, 30, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_teleport_trap_11_11_04_0659",13.200000f,0.000000f,13.200000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 4, 27, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)5.400000,(float)33.000000,(float)2.400000,0);
-		
-		myObj= CreateGameObject("a_create_object_trap_52_03_04_0661",62.400002f,2.400000f,3.600000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 240, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh15");
-		AddTrapLink(myObj,"a_dire_ghost_99_99_04_0240");
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0668",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,6,30,"a_set_variable_trap_06_30_04_0952");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 952, 6, 30, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0669",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,5,30,"a_set_variable_trap_05_30_04_0942");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 942, 5, 30, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_use_trigger_99_99_04_0673",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
-		CreateTrigger(myObj,57,2,"a_door_trap_99_99_04_0678");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 678, 57, 2, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_door_trap_99_99_04_0678",118.800003f,2.400000f,118.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_392",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", "Sprites/OBJECTS_392", 45, 392, 672, 3, 0, 0, 0, 0, 1, 0, 0, 2, 0);
-		SetRotation(myObj,0,0,0);
-		Create_a_door_trap(myObj,3);
-		
-		myObj= CreateGameObject("a_create_object_trap_36_55_04_0689",43.200001f,3.600000f,66.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 198, 56, 0, 0, 0, 0, 1, 0, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_create_object_trap(myObj, "GroundMesh5");
-		AddTrapLink(myObj,"a_dread_spider_99_99_04_0198");
-		
-		myObj= CreateGameObject("a_damage_trap_57_03_04_0876",68.400002f,2.400000f,3.600000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_384",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", "Sprites/OBJECTS_384", 37, 384, 915, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_damage_trap(myObj);
-		AddTrapLink(myObj,"a_move_trigger_99_99_04_0915");
-		
-		myObj= CreateGameObject("a_move_trigger_99_99_04_0915",119.400002f,2.400000f,119.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,57,2,"a_door_trap_99_99_04_0678");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 678, 57, 2, 0, 0, 0, 1, 1, 0, 6, 0);
-		
-		myObj= CreateGameObject("a_set_variable_trap_05_30_04_0942",6.000000f,1.162500f,36.171429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_set_variable_trap(myObj,31,1,0);
-		
-		myObj= CreateGameObject("a_set_variable_trap_06_30_04_0952",7.200000f,1.200000f,36.171429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_set_variable_trap(myObj,32,1,0);
-		
-		myObj= CreateGameObject("a_set_variable_trap_07_30_04_0953",8.400000f,1.237500f,36.171429f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_397",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", "Sprites/OBJECTS_397", 50, 397, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_set_variable_trap(myObj,33,1,0);
-		
-		myObj= CreateGameObject("a_teleport_trap_21_12_04_0968",25.200001f,0.000000f,14.400000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 3, 12, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)4.200000,(float)15.000000,(float)2.400000,0);
-		
-		myObj= CreateGameObject("a_move_trigger_02_12_04_0969",3.000000f,2.400000f,15.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,1,12,"a_teleport_trap_01_12_04_0995");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 995, 1, 12, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_20_12_04_0970",24.600000f,2.400000f,15.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,21,12,"a_teleport_trap_21_12_04_0968");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 968, 21, 12, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_13_55_04_0972",16.200001f,2.400000f,66.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,12,55,"a_teleport_trap_12_55_04_0973");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 973, 12, 55, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_teleport_trap_12_55_04_0973",14.400000f,0.225000f,66.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 11, 55, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)13.800000,(float)66.600000,(float)3.600000,6);
-		
-		myObj= CreateGameObject("a_teleport_trap_56_59_04_0974",67.199997f,0.150000f,70.800003f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 56, 59, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)67.800000,(float)71.400000,(float)3.600000,4);
-		
-		myObj= CreateGameObject("a_move_trigger_08_44_04_0975",10.200000f,3.600000f,53.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,8,43,"a_teleport_trap_08_43_04_1000");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1000, 8, 43, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_teleport_trap_41_26_04_0978",49.200001f,0.150000f,31.200001f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 41, 26, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)49.800000,(float)31.800000,(float)0.900000,4);
-		
-		myObj= CreateGameObject("a_move_trigger_40_26_04_0979",48.599998f,0.900000f,31.799999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,41,26,"a_teleport_trap_41_26_04_0978");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 978, 41, 26, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_55_59_04_0981",66.599998f,0.000000f,71.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,56,59,"a_teleport_trap_56_59_04_0974");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 974, 56, 59, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_move_trigger_99_99_04_0984",119.400002f,0.000000f,119.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,61,32,"a_delete_object_trap_61_32_04_0986");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 986, 61, 32, 0, 0, 0, 1, 1, 0, 4, 0);
-		
-		myObj= CreateGameObject("a_change_terrain_trap_60_33_04_0985",72.000000f,0.900000f,39.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 984, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_change_terrain_trap(myObj,60,33,0,0);
-		AddTrapLink(myObj,"a_move_trigger_99_99_04_0984");
-		
-		myObj= CreateGameObject("a_delete_object_trap_61_32_04_0986",73.199997f,0.000000f,38.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 983, 60, 32, 0, 0, 0, 1, 1, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_delete_object_trap(myObj);
-		AddTrapLink(myObj,"special_tmap_obj_60_32_04_0983");
-		
-		myObj= CreateGameObject("a_look_trigger_99_99_04_0987",119.314285f,0.300000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
-		CreateTrigger(myObj,60,33,"a_change_terrain_trap_60_33_04_0985");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 985, 60, 33, 0, 0, 0, 1, 1, 0, 4, 0);
-		
-		myObj= CreateGameObject("a_teleport_trap_01_12_04_0995",1.200000f,0.000000f,14.400000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 19, 12, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)23.400000,(float)15.000000,(float)2.400000,0);
-		
-		myObj= CreateGameObject("a_teleport_trap_08_43_04_1000",9.600000f,0.150000f,51.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 8, 43, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)10.200000,(float)52.200000,(float)3.600000,4);
-		
-		myObj= CreateGameObject("a_move_trigger_34_47_04_1002",41.400002f,3.600000f,57.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,33,47,"a_teleport_trap_33_47_04_1012");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1012, 33, 47, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_change_terrain_trap_54_61_04_1006",64.800003f,0.000000f,73.199997f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 1007, 3, 13, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_change_terrain_trap(myObj,54,61,0,0);
-		AddTrapLink(myObj,"a_delete_object_trap_54_61_04_1007");
-		
-		myObj= CreateGameObject("a_delete_object_trap_54_61_04_1007",64.800003f,0.000000f,73.199997f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 1010, 53, 61, 0, 0, 0, 1, 1, 0, 0, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_delete_object_trap(myObj);
-		AddTrapLink(myObj,"special_tmap_obj_53_61_04_1010");
-		
-		myObj= CreateGameObject("a_look_trigger_99_99_04_1008",119.314285f,0.000000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
-		CreateTrigger(myObj,54,61,"a_change_terrain_trap_54_61_04_1006");
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 1006, 54, 61, 0, 0, 0, 1, 1, 0, 4, 0);
-		
-		myObj= CreateGameObject("a_teleport_trap_30_47_04_1011",36.000000f,0.150000f,56.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 30, 47, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)36.600000,(float)57.000000,(float)2.100000,4);
-		
-		myObj= CreateGameObject("a_teleport_trap_33_47_04_1012",39.599998f,0.150000f,56.400002f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 34, 47, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)41.400000,(float)57.000000,(float)3.600000,4);
-		
-		myObj= CreateGameObject("a_move_trigger_29_47_04_1019",35.400002f,3.600000f,57.000000f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,30,47,"a_teleport_trap_30_47_04_1011");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1011, 30, 47, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		myObj= CreateGameObject("a_teleport_trap_43_29_04_1021",51.599998f,0.225000f,34.799999f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 43, 27, 0, 0, 0, 1, 0, 0, 1, 1);
-		SetRotation(myObj,0,0,0);
-		Create_a_teleport_trap(myObj,(float)52.200000,(float)33.000000,(float)0.900000,6);
-		
-		myObj= CreateGameObject("a_move_trigger_43_30_04_1023",52.200001f,3.300000f,36.599998f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
-		CreateMoveTrigger(myObj,43,29,"a_teleport_trap_43_29_04_1021");
-		CreateCollider(myObj,1.20f,1.20f,1.20f);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1021, 43, 29, 0, 0, 0, 1, 1, 0, 6, 1);
-		
-		//Supplementary object 122
-		myObj= CreateGameObject("a_broadsword_99_99_04_0122",119.828575f,0.375000f,119.485710f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_006",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-		CreateWeapon(myObj, 13, 6, 10, 3, 34);
-		//Supplementary object 196
-		myObj = new GameObject("a_ghost_99_99_04_0196");
-		pos = new Vector3(119.314285f, 0.900000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 27);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 54, 53, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 27, 54, 53, 0, 0, 234, 0, 0, 7, 3, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 198
-		myObj = new GameObject("a_dread_spider_99_99_04_0198");
-		pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 36, 55, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 36, 55, 0, 0, 35, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 199
-		myObj = new GameObject("a_mongbat_99_99_04_0199");
-		pos = new Vector3(119.314285f, 3.300000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"81","Sprites/OBJECTS_081", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", 0, 81, 0, 25, 44, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 25, 44, 0, 0, 20, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 200
-		myObj = new GameObject("a_headless_headlesses_99_99_04_0200");
-		pos = new Vector3(119.314285f, 2.100000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 36, 41, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 36, 41, 0, 0, 59, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 201
-		myObj = new GameObject("a_ghost_99_99_04_0201");
-		pos = new Vector3(119.314285f, 2.700000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"100","Sprites/OBJECTS_100", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", "Sprites/OBJECTS_100", 0, 100, 0, 11, 14, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 11, 14, 0, 0, 49, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 202
-		myObj = new GameObject("a_ghoul_99_99_04_0202");
-		pos = new Vector3(119.314285f, 2.400000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"110","Sprites/OBJECTS_110", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", "Sprites/OBJECTS_110", 0, 110, 0, 52, 9, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 52, 9, 0, 0, 38, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 204
-		myObj = new GameObject("a_ghost_99_99_04_0204");
-		pos = new Vector3(119.314285f, 0.000000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"97","Sprites/OBJECTS_097", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", "Sprites/OBJECTS_097", 0, 97, 0, 53, 49, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 53, 49, 0, 0, 33, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 211
-		myObj = new GameObject("a_fire_elemental_99_99_04_0211");
-		pos = new Vector3(119.314285f, 1.200000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"120","Sprites/OBJECTS_120", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", 0, 120, 0, 19, 50, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 19, 50, 0, 0, 80, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh1");
-		SetRotation(myObj,0,0,0);
-		////Container contents
-		ParentContainer = CreateContainer(myObj, 255, 255, 255);
-		//Supplementary object 240
-		myObj = new GameObject("a_dire_ghost_99_99_04_0240");
-		pos = new Vector3(119.314285f, 3.000000f, 119.314285f);
-		myObj.transform.position = pos;
-		CreateNPC(myObj,"113","Sprites/OBJECTS_113", 0);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", "Sprites/OBJECTS_113", 0, 113, 665, 52, 3, 0, 1, 0, 1, 0, 0, 0, 1);
-		SetNPCProps(myObj, 0, 52, 3, 0, 0, 70, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh1");
+		CreateNPC(myObj,"103","Sprites/OBJECTS_103", 190);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_103", "Sprites/OBJECTS_103", "Sprites/OBJECTS_103", 0, 103, 923, 46, 10, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 190, 46, 10, 0, 0, 53, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
 		SetRotation(myObj,0,0,0);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		////NPC container with items
 		
-		AddObjectToContainer("a_key_015_1", ParentContainer, 0);
+		AddObjectToContainer("a_book_99_99_05_0923", ParentContainer, 0);
 		////Container contents complete
 		
-		//Supplementary object 462
-		myObj= CreateGameObject("a_button_99_99_04_0462",118.800003f,2.625000f,118.971428f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_370",false);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_370", "Sprites/OBJECTS_370", "Sprites/OBJECTS_370", 8, 370, 792, 1, 0, 0, 1, 0, 0, 0, 0, 4, 1);
-		CreateUWActivators(myObj,"ButtonHandler","a_skull_45_60_04_0792",1,0,4,7,370);
-		SetRotation(myObj,0,225,0);
-		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0002", "Sprites/tmflat/tmflat_0010");
-		//Supplementary object 478
-		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_99_99_04_0478",119.314285f,0.900000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_041", "Sprites/OBJECTS_041", "Sprites/armour/armor_f_0009", 75, 41, 0, 62, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateBoots(myObj, "Sprites/armour/armor_f_0009", "Sprites/armour/armor_m_0009", "Sprites/armour/armor_f_0024", "Sprites/armour/armor_m_0024", "Sprites/armour/armor_f_0039", "Sprites/armour/armor_m_0039", "Sprites/armour/armor_f_0054", "Sprites/armour/armor_m_0054", 1, 3);
-		//Supplementary object 479
-		myObj= CreateGameObject("leather_gloves_pairs_of_leather_gloves_99_99_04_0479",119.314285f,0.900000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_038",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_038", "Sprites/OBJECTS_038", "Sprites/armour/armor_f_0006", 76, 38, 0, 47, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateGloves(myObj, "Sprites/armour/armor_f_0006", "Sprites/armour/armor_m_0006", "Sprites/armour/armor_f_0021", "Sprites/armour/armor_m_0021", "Sprites/armour/armor_f_0036", "Sprites/armour/armor_m_0036", "Sprites/armour/armor_f_0051", "Sprites/armour/armor_m_0051", 1, 2);
-		//Supplementary object 480
-		myObj= CreateGameObject("leather_leggings_pairs_of_leather_leggings_99_99_04_0480",119.314285f,0.900000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_035",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_035", "Sprites/OBJECTS_035", "Sprites/armour/armor_f_0003", 77, 35, 0, 51, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateLeggings(myObj, "Sprites/armour/armor_f_0003", "Sprites/armour/armor_m_0003", "Sprites/armour/armor_f_0018", "Sprites/armour/armor_m_0018", "Sprites/armour/armor_f_0033", "Sprites/armour/armor_m_0033", "Sprites/armour/armor_f_0048", "Sprites/armour/armor_m_0048", 2, 4);
-		//Supplementary object 482
-		myObj= CreateGameObject("a_leather_vest_99_99_04_0482",119.314285f,0.900000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_032",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_032", "Sprites/OBJECTS_032", "Sprites/armour/armor_f_0000", 2, 32, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateArmour(myObj, "Sprites/armour/armor_f_0000", "Sprites/armour/armor_m_0000", "Sprites/armour/armor_f_0015", "Sprites/armour/armor_m_0015", "Sprites/armour/armor_f_0030", "Sprites/armour/armor_m_0030", "Sprites/armour/armor_f_0045", "Sprites/armour/armor_m_0045", 2, 8);
-		//Supplementary object 571
-		myObj= CreateGameObject("a_red_gem_99_99_04_0571",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_04_11_05_0871",5.142857f,0.300000f,13.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_04_11_05_0872",5.828571f,0.300000f,13.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_piece_of_cheese_pieces_of_cheese_04_11_05_0965",5.485714f,0.300000f,14.380000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_178",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_178", "Sprites/OBJECTS_178", "Sprites/OBJECTS_178", 24, 178, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		SetFood(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_11_05_0873",7.028571f,0.300000f,14.380000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_mushroom_05_11_05_0962",6.857143f,0.300000f,13.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_mushroom_05_11_05_0963",6.514286f,0.300000f,13.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_mushroom_05_11_05_0964",6.857143f,0.300000f,14.057142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_07_11_05_0862",9.580000f,1.500000f,14.228572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
-		//Supplementary object 572
-		myObj= CreateGameObject("a_pouch_pouches_99_99_04_0572",119.314285f,2.400000f,119.314285f);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_07_11_05_0863",9.428571f,1.500000f,13.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_08_11_05_0860",9.942857f,1.500000f,14.228572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_08_11_05_0861",9.771429f,1.500000f,14.380000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_leather_vest_08_11_05_0874",9.942857f,1.500000f,14.057142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_032",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_032", "Sprites/OBJECTS_032", "Sprites/armour/armor_f_0000", 2, 32, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateArmour(myObj, "Sprites/armour/armor_f_0000", "Sprites/armour/armor_m_0000", "Sprites/armour/armor_f_0015", "Sprites/armour/armor_m_0015", "Sprites/armour/armor_f_0030", "Sprites/armour/armor_m_0030", "Sprites/armour/armor_f_0045", "Sprites/armour/armor_m_0045", 2, 8);
+		
+		myObj= CreateGameObject("leather_gloves_pairs_of_leather_gloves_08_11_05_0875",10.457142f,1.500000f,13.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_038",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_038", "Sprites/OBJECTS_038", "Sprites/armour/armor_f_0006", 76, 38, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateGloves(myObj, "Sprites/armour/armor_f_0006", "Sprites/armour/armor_m_0006", "Sprites/armour/armor_f_0021", "Sprites/armour/armor_m_0021", "Sprites/armour/armor_f_0036", "Sprites/armour/armor_m_0036", "Sprites/armour/armor_f_0051", "Sprites/armour/armor_m_0051", 1, 2);
+		
+		myObj= CreateGameObject("leather_leggings_pairs_of_leather_leggings_08_11_05_0876",10.457142f,1.500000f,14.057142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_035",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_035", "Sprites/OBJECTS_035", "Sprites/armour/armor_f_0003", 77, 35, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateLeggings(myObj, "Sprites/armour/armor_f_0003", "Sprites/armour/armor_m_0003", "Sprites/armour/armor_f_0018", "Sprites/armour/armor_m_0018", "Sprites/armour/armor_f_0033", "Sprites/armour/armor_m_0033", "Sprites/armour/armor_f_0048", "Sprites/armour/armor_m_0048", 2, 4);
+		
+		myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_08_11_05_0877",10.114285f,1.500000f,13.714286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_041",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_041", "Sprites/OBJECTS_041", "Sprites/armour/armor_f_0009", 75, 41, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateBoots(myObj, "Sprites/armour/armor_f_0009", "Sprites/armour/armor_m_0009", "Sprites/armour/armor_f_0024", "Sprites/armour/armor_m_0024", "Sprites/armour/armor_f_0039", "Sprites/armour/armor_m_0039", "Sprites/armour/armor_f_0054", "Sprites/armour/armor_m_0054", 1, 3);
+		
+		myObj= CreateGameObject("a_broken_wand_09_11_05_0807",11.828571f,1.500000f,14.057142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_157",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_157", "Sprites/OBJECTS_157", "Sprites/OBJECTS_157", 12, 157, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddWand(myObj, 0, 0);
+		
+		myObj= CreateGameObject("special_tmap_obj_12_11_05_0805",15.000000f,3.600000f,13.220000f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_367", "Sprites/OBJECTS_367", "Sprites/OBJECTS_367", 35, 367, 0, 40, 29, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_201", "" , 201, false);
+		SetRotation(myObj,0,180,0);
+		
+		myObj= CreateGameObject("a_blood_stain_13_11_05_0800",16.457142f,2.700000f,13.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_dagger_13_11_05_0851",15.771428f,2.700000f,14.057142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 4, 2, 5, 3, 5);
+		
+		myObj= CreateGameObject("a_dagger_13_11_05_0852",16.285713f,2.700000f,14.228572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 4, 2, 5, 3, 5);
+		
+		
+		myObj= CreateGameObject("a_skull_15_11_05_0731",18.514286f,2.700000f,13.885715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_scroll_16_11_05_0726",20.057142f,2.700000f,14.057142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_313",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", 13, 313, 544, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_18_11_05_1011",22.114285f,3.600000f,13.714286f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_137", "" , 137, false);
+		SetRotation(myObj,0,0,0);
+		
+		myObj = new GameObject("a_mage_43_11_05_0250");
+		pos = new Vector3(52.114288f, 3.300000f, 13.714286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"107","Sprites/OBJECTS_107", 184);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", 0, 107, 0, 43, 11, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 184, 43, 11, 0, 0, 40, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_03_12_05_0869",4.114285f,0.300000f,15.257142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_03_12_05_0870",4.114285f,0.300000f,14.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_12_05_0966",4.457143f,0.300000f,15.428572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_177",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", 24, 177, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		SetFood(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_07_12_05_0796",8.571429f,1.500000f,15.428572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_rubble_piles_of_rubble_11_12_05_0799",13.714286f,2.700000f,14.914286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_218",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_218", "Sprites/OBJECTS_218", "Sprites/OBJECTS_218", 69, 218, 1, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("a_bedroll_13_12_05_0801",16.285713f,2.700000f,15.085714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_289",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_289", "Sprites/OBJECTS_289", "Sprites/OBJECTS_289", 16, 289, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_dagger_13_12_05_0853",15.942858f,2.700000f,14.571428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 4, 2, 5, 3, 5);
+		
+		
+		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_13_05_0967",4.114285f,0.300000f,16.114286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_177",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", 24, 177, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		SetFood(myObj);
+		
+		myObj = new GameObject("door_015_013");
+		pos = new Vector3(18.514286f, 3.600000f, 15.800000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", 4, 323, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_07", 0, 0, 0);
+		SetRotation(myObj,-90,90,0);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_14_05_0865",6.514286f,0.900000f,17.828571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_09_14_05_0798",11.314286f,2.100000f,17.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pouch_pouches_35_14_05_0811",42.857143f,3.600000f,17.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_134",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", "Sprites/OBJECTS_135", 19, 134, 571, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", "Sprites/OBJECTS_135", 19, 134, 810, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 20, 255, 255);
-		AddObjectToContainer("a_red_gem_99_99_04_0571", ParentContainer, 0);
+		AddObjectToContainer("a_torch_torches_99_99_05_0810", ParentContainer, 0);
+		AddObjectToContainer("some_leeches_bunches_of_leeches_99_99_05_0809", ParentContainer, 1);
+		AddObjectToContainer("an_oil_flask_99_99_05_0808", ParentContainer, 2);
 		////Container contents complete
 		
-		//Supplementary object 578
-		myObj= CreateGameObject("a_book_99_99_04_0578",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 643, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetLink(myObj,643);
-		//Supplementary object 579
-		myObj= CreateGameObject("a_book_99_99_04_0579",119.314285f,0.000000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 642, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetReadable(myObj);
-		SetLink(myObj,642);
-		//Supplementary object 580
-		myObj= CreateGameObject("a_fish_fish_99_99_04_0580",119.314285f,0.000000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", 24, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetFood(myObj);
-		//Supplementary object 581
-		myObj= CreateGameObject("a_large_blue_gem_99_99_04_0581",119.314285f,0.000000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_165",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_165", "Sprites/OBJECTS_165", "Sprites/OBJECTS_165", 18, 165, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_15_05_0864",6.342857f,0.900000f,18.020000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_15_05_0866",6.857143f,0.900000f,18.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_15_05_0867",6.514286f,0.900000f,18.857141f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_05_15_05_0868",6.171429f,0.900000f,18.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_red_potion_05_15_05_0959",6.857143f,0.900000f,18.857141f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 581, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_red_potion_05_15_05_0960",7.180000f,0.900000f,18.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 563, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_red_potion_05_15_05_0961",6.514286f,0.900000f,18.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_bowl_07_15_05_0792",9.257143f,0.900000f,18.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_142",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_142", "Sprites/OBJECTS_142", "Sprites/OBJECTS_142", 19, 142, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 50, 2, 3);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_09_15_05_0934",11.980000f,2.100000f,18.857141f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_278",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", 16, 278, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
-		//Supplementary object 583
-		myObj= CreateGameObject("a_ruby_rubies_99_99_04_0583",119.314285f,3.300000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_09_15_05_0854",11.314286f,2.100000f,18.857141f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_plant_09_15_05_0855",11.485714f,2.100000f,18.857141f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_09_15_05_0856",11.314286f,2.100000f,18.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_09_15_05_0857",11.657143f,2.100000f,18.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_09_15_05_0859",11.828571f,2.100000f,18.171429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
-		//Supplementary object 584
-		myObj= CreateGameObject("a_book_99_99_04_0584",119.314285f,3.300000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_305",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", 11, 305, 641, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_10_15_05_0899",12.685714f,2.100000f,18.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_278",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", 16, 278, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_10_15_05_0907",12.685714f,2.100000f,19.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_278",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", 16, 278, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_10_15_05_0921",12.342857f,2.100000f,18.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_278",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", 16, 278, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_10_15_05_0858",12.020000f,2.100000f,18.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_11_15_05_0797",14.228572f,2.100000f,19.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_mage_44_15_05_0220");
+		pos = new Vector3(53.314285f, 3.300000f, 18.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"109","Sprites/OBJECTS_109", 192);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_109", "Sprites/OBJECTS_109", "Sprites/OBJECTS_109", 0, 109, 0, 44, 15, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 192, 44, 15, 0, 0, 53, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_mage_21_16_05_0211");
+		pos = new Vector3(25.714285f, 3.300000f, 19.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"107","Sprites/OBJECTS_107", 193);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", "Sprites/OBJECTS_107", 0, 107, 0, 21, 16, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 193, 21, 16, 0, 0, 36, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_jeweled_shield_07_17_05_0957",8.914286f,3.000000f,20.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_063",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_063", "Sprites/OBJECTS_063", "Sprites/OBJECTS_063", 78, 63, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddShield(myObj);
+		
+		myObj = new GameObject("door_015_018");
+		pos = new Vector3(18.200001f, 3.600000f, 21.771429f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_02", 0, 0, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		
+		myObj= CreateGameObject("a_button_54_18_05_0946",64.820000f,0.900000f,22.780001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_377",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_377", "Sprites/OBJECTS_377", "Sprites/OBJECTS_377", 8, 377, 947, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_05_0947",40,0,0,7,377);
+		SetRotation(myObj,0,0,0);
+		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_53_19_05_0901",64.285713f,0.000000f,23.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_53_19_05_0903",63.942856f,0.000000f,23.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_emerald_53_19_05_0937",63.771431f,0.000000f,23.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_emerald_53_19_05_0938",64.114288f,0.000000f,23.828571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_emerald_53_19_05_0939",64.285713f,0.000000f,23.485716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_emerald_53_19_05_0943",64.285713f,0.000000f,23.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_emerald_53_19_05_0930",64.457146f,0.000000f,23.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_emerald_53_19_05_0931",63.942856f,0.000000f,23.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_button_53_19_05_0912",63.619999f,0.900000f,22.820000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_368",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_368", "Sprites/OBJECTS_368", "Sprites/OBJECTS_368", 8, 368, 902, 40, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+		CreateUWActivators(myObj,"ButtonHandler","a_use_trigger_99_99_05_0902",40,0,0,7,368);
+		SetRotation(myObj,0,270,0);
+		SetButtonProperties(myObj, 0, "Sprites/tmflat/tmflat_0000", "Sprites/tmflat/tmflat_0008");
+		
+		
+		myObj = new GameObject("a_mage_15_21_05_0240");
+		pos = new Vector3(18.514286f, 3.600000f, 25.714285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"106","Sprites/OBJECTS_106", 14);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", 0, 106, 905, 15, 21, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 14, 15, 21, 0, 0, 39, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_Flam_stone_99_99_05_0905", ParentContainer, 0);
+		////Container contents complete
+		
+		
+		myObj = new GameObject("a_mage_24_21_05_0241");
+		pos = new Vector3(29.314285f, 3.600000f, 25.714285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"108","Sprites/OBJECTS_108", 13);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_108", "Sprites/OBJECTS_108", "Sprites/OBJECTS_108", 0, 108, 0, 24, 21, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 13, 24, 21, 0, 0, 39, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_mage_43_21_05_0247");
+		pos = new Vector3(52.114288f, 3.300000f, 25.714285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"108","Sprites/OBJECTS_108", 188);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_108", "Sprites/OBJECTS_108", "Sprites/OBJECTS_108", 0, 108, 0, 43, 21, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 188, 43, 21, 0, 0, 56, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_stone_golem_06_22_05_0255");
+		pos = new Vector3(7.714286f, 3.000000f, 26.914284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"119","Sprites/OBJECTS_119", 22);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_119", "Sprites/OBJECTS_119", "Sprites/OBJECTS_119", 0, 119, 948, 6, 22, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 22, 6, 22, 0, 0, 125, 0, 0, 10, 2, 1, 0, 0, 0, "GroundMesh3");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_shiny_shield_99_99_05_0948", ParentContainer, 0);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("some_writing_32_22_05_0999",39.085716f,4.087500f,26.420000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 758, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
 		SetReadable(myObj);
-		SetLink(myObj,641);
-		//Supplementary object 585
-		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_04_0585",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 3, 20, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetFood(myObj);
-		//Supplementary object 586
-		myObj= CreateGameObject("a_flute_99_99_04_0586",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_292",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_292", "Sprites/OBJECTS_292", "Sprites/OBJECTS_292", 26, 292, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddInstrument(myObj);
-		//Supplementary object 587
-		myObj= CreateGameObject("a_lockpick_99_99_04_0587",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_257",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 79, 257, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddLockpick(myObj);
-		//Supplementary object 588
-		myObj= CreateGameObject("a_book_99_99_04_0588",119.314285f,2.100000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_304",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", 11, 304, 640, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetRotation(myObj,0,180,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,758);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_22_05_0814",45.771431f,3.300000f,27.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_213",true);
+		
+		myObj= CreateGameObject("a_pouch_pouches_40_22_05_0813",48.857143f,3.300000f,26.571428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_134",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_134", "Sprites/OBJECTS_134", "Sprites/OBJECTS_135", 19, 134, 812, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 20, 255, 255);
+		AddObjectToContainer("a_block_of_incense_blocks_of_incense_99_99_05_0812", ParentContainer, 0);
+		////Container contents complete
+		
+		
+		myObj = new GameObject("a_mage_32_23_05_0251");
+		pos = new Vector3(38.914284f, 3.600000f, 28.114285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"103","Sprites/OBJECTS_103", 189);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_103", "Sprites/OBJECTS_103", "Sprites/OBJECTS_103", 0, 103, 0, 32, 23, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 189, 32, 23, 0, 0, 50, 0, 0, 8, 3, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_23_05_0815",45.942856f,3.300000f,27.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj = new GameObject("a_mage_39_23_05_0205");
+		pos = new Vector3(47.485714f, 3.300000f, 28.285715f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"106","Sprites/OBJECTS_106", 194);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", "Sprites/OBJECTS_106", 0, 106, 0, 39, 23, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 194, 39, 23, 0, 0, 52, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,180,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_40_23_05_0816",48.685715f,3.300000f,28.457144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_plant_32_26_05_0634",39.428574f,3.600000f,31.542856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_43_26_05_0637",51.942856f,3.600000f,31.542856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_45_26_05_0639",54.857143f,3.600000f,31.542856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_45_26_05_0638",54.514286f,3.600000f,32.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_32_28_05_1004",39.000000f,3.600000f,34.779999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_142", "" , 142, false);
+		SetRotation(myObj,0,0,0);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_33_28_05_0897",40.285717f,3.600000f,34.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_43_28_05_0954",52.200001f,3.600000f,34.779999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,0,0);
+		
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_45_28_05_0636",54.857143f,3.600000f,34.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		
+		
+		
+		
+		
+		myObj= CreateGameObject("some_writing_23_31_05_1000",27.620001f,4.087500f,37.714283f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 759, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
 		SetReadable(myObj);
-		SetLink(myObj,640);
-		//Supplementary object 601
-		myObj= CreateGameObject("a_Jux_stone_99_99_04_0601",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_241", "Sprites/OBJECTS_241", 6, 241, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetObjectAsRuneStone(myObj);
-		//Supplementary object 602
-		myObj= CreateGameObject("a_Nox_stone_99_99_04_0602",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_245", "Sprites/OBJECTS_245", 6, 245, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetObjectAsRuneStone(myObj);
-		//Supplementary object 603
-		myObj= CreateGameObject("a_Grav_stone_99_99_04_0603",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_238", "Sprites/OBJECTS_238", 6, 238, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetObjectAsRuneStone(myObj);
-		//Supplementary object 604
-		myObj= CreateGameObject("a_pack_99_99_04_0604",119.314285f,2.400000f,119.314285f);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,759);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_36_31_05_0635",44.057144f,3.600000f,38.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_46_31_05_0640",55.885712f,3.600000f,38.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("special_tmap_obj_52_31_05_0989",63.580002f,3.600000f,37.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 6, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_000", "" , 0, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("special_tmap_obj_53_31_05_0601",64.779999f,3.600000f,37.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 6, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_000", "" , 0, false);
+		SetRotation(myObj,0,90,0);
+		
+		myObj= CreateGameObject("special_tmap_obj_53_31_05_0600",63.619999f,3.600000f,37.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 6, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_000", "" , 0, false);
+		SetRotation(myObj,0,270,0);
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_54_31_05_0988",64.820000f,3.600000f,37.799999f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 6, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_000", "" , 0, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("a_shrine_03_32_05_0908",4.780000f,2.100000f,38.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_343",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", 83, 343, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddShrine(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_33_34_05_0922",39.942856f,3.600000f,41.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_red_potion_60_34_05_0615",72.342857f,0.300000f,41.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 541, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_30_35_05_0641",37.180000f,3.600000f,43.028568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_51_35_05_0760",62.057144f,3.000000f,42.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_scroll_57_35_05_0616",69.257141f,1.200000f,42.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_318",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_318", "Sprites/OBJECTS_318", "Sprites/OBJECTS_318", 11, 318, 558, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj= CreateGameObject("a_scroll_11_36_05_0603",14.057142f,2.700000f,43.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_319",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", 11, 319, 553, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj = new GameObject("an_imp_60_36_05_0203");
+		pos = new Vector3(72.514290f, 3.300000f, 43.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"75","Sprites/OBJECTS_075", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", "Sprites/OBJECTS_075", 0, 75, 0, 60, 36, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 60, 36, 0, 0, 15, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,135,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_book_08_37_05_0918",10.457142f,2.700000f,45.257145f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_310",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_310", "Sprites/OBJECTS_310", "Sprites/OBJECTS_310", 11, 310, 684, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,684);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_32_37_05_0642",39.428574f,3.600000f,45.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("a_dark_ghoul_41_37_05_0215");
+		pos = new Vector3(49.714287f, 1.200000f, 44.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"105","Sprites/OBJECTS_105", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_105", "Sprites/OBJECTS_105", "Sprites/OBJECTS_105", 0, 105, 0, 41, 37, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 41, 37, 0, 0, 76, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_dark_ghoul_44_37_05_0218");
+		pos = new Vector3(53.314285f, 1.200000f, 44.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"105","Sprites/OBJECTS_105", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_105", "Sprites/OBJECTS_105", "Sprites/OBJECTS_105", 0, 105, 0, 44, 37, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 44, 37, 0, 0, 74, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("chain_gauntlets_pairs_of_chain_gauntlets_52_37_05_0753",63.257145f,3.000000f,45.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_039",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_039", "Sprites/OBJECTS_039", "Sprites/armour/armor_f_0007", 76, 39, 0, 14, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateGloves(myObj, "Sprites/armour/armor_f_0007", "Sprites/armour/armor_m_0007", "Sprites/armour/armor_f_0022", "Sprites/armour/armor_m_0022", "Sprites/armour/armor_f_0037", "Sprites/armour/armor_m_0037", "Sprites/armour/armor_f_0052", "Sprites/armour/armor_m_0052", 3, 9);
+		
+		myObj= CreateGameObject("a_blood_stain_52_37_05_0759",62.914288f,3.000000f,45.257145f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_scroll_42_38_05_0935",50.914288f,3.000000f,46.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_317",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", "Sprites/OBJECTS_317", 11, 317, 686, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,686);
+		
+		myObj= CreateGameObject("a_helmet_53_39_05_0754",64.285713f,3.000000f,47.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_046",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_046", "Sprites/OBJECTS_046", "Sprites/armour/armor_f_0014", 73, 46, 0, 8, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 3675656, 3675656);
+		
+		myObj= CreateGameObject("a_blood_stain_53_39_05_0758",63.942856f,3.000000f,47.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_box_boxes_62_39_05_0848",74.914284f,3.600000f,47.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_132",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_132", "Sprites/OBJECTS_132", "Sprites/OBJECTS_133", 19, 132, 846, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_scroll_99_99_05_0846", ParentContainer, 0);
+		AddObjectToContainer("a_Kal_stone_99_99_05_0847", ParentContainer, 1);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_tower_shield_23_40_05_0728",28.114285f,3.600000f,48.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_059",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", "Sprites/OBJECTS_059", 78, 59, 713, 38, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		AddShield(myObj);
+		
+		myObj= CreateGameObject("a_red_potion_49_40_05_0614",59.980000f,0.600000f,48.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		
+		
+		myObj = new GameObject("door_017_041");
+		pos = new Vector3(20.600000f, 3.600000f, 50.380001f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/world/uw1_048", 0, 0, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj= CreateGameObject("some_writing_32_41_05_1017",38.914284f,4.087500f,50.380001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 760, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,0,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,760);
+		
+		myObj= CreateGameObject("a_pack_54_41_05_0751",65.142853f,3.000000f,50.228569f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_130",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_130", "Sprites/OBJECTS_130", "Sprites/OBJECTS_131", 19, 130, 578, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_130", "Sprites/OBJECTS_130", "Sprites/OBJECTS_131", 19, 130, 750, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 250, 255, 255);
-		AddObjectToContainer("a_book_99_99_04_0578", ParentContainer, 0);
-		AddObjectToContainer("a_Grav_stone_99_99_04_0603", ParentContainer, 1);
-		AddObjectToContainer("a_Nox_stone_99_99_04_0602", ParentContainer, 2);
-		AddObjectToContainer("a_Jux_stone_99_99_04_0601", ParentContainer, 3);
+		AddObjectToContainer("a_lantern_99_99_05_0750", ParentContainer, 0);
+		AddObjectToContainer("a_ruby_rubies_99_99_05_0749", ParentContainer, 1);
+		AddObjectToContainer("a_flask_of_port_flasks_of_port_99_99_05_0748", ParentContainer, 2);
+		AddObjectToContainer("a_bottle_of_ale_bottles_of_ale_99_99_05_0747", ParentContainer, 3);
+		AddObjectToContainer("a_loaf_of_bread_loaves_of_bread_99_99_05_0746", ParentContainer, 4);
+		AddObjectToContainer("a_lockpick_99_99_05_0745", ParentContainer, 5);
 		////Container contents complete
 		
-		//Supplementary object 615
-		myObj= CreateGameObject("a_Rel_stone_99_99_04_0615",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_249", "Sprites/OBJECTS_249", 6, 249, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetObjectAsRuneStone(myObj);
-		//Supplementary object 616
-		myObj= CreateGameObject("a_red_gem_99_99_04_0616",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("a_jeweled_axe_54_41_05_0752",65.657143f,3.000000f,50.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_011",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_011", "Sprites/OBJECTS_011", "Sprites/OBJECTS_011", 1, 11, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 13, 8, 5, 4, 255);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_54_41_05_0755",65.142853f,3.000000f,49.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_skull_54_41_05_0756",64.971428f,3.000000f,49.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
-		//Supplementary object 618
-		myObj= CreateGameObject("a_wand_99_99_04_0618",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_155",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_155", "Sprites/OBJECTS_155", "Sprites/OBJECTS_155", 12, 155, 617, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddWand(myObj, 527, 14);
-		//Supplementary object 619
-		myObj= CreateGameObject("a_Tym_stone_99_99_04_0619",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_251", "Sprites/OBJECTS_251", 6, 251, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		SetObjectAsRuneStone(myObj);
-		//Supplementary object 621
-		//Supplementary object 665
-		myObj= CreateGameObject("a_key_015_1",119.314285f,2.400000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_269",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_269", "Sprites/OBJECTS_269", "Sprites/OBJECTS_269", 5, 269, 1, 40, 15, 1, 1, 0, 1, 1, 0, 0, 1);
-		CreateKey(myObj, 15);
-		//Supplementary object 672
-		//Supplementary object 934
-		myObj= CreateGameObject("an_iron_ring_99_99_04_0934",119.314285f,2.700000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_054",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_054", "Sprites/OBJECTS_054", "Sprites/OBJECTS_054", 74, 54, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddRing(myObj);
-		//Supplementary object 943
-		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_04_0943",119.314285f,3.300000f,119.314285f);
+		
+		myObj= CreateGameObject("a_blood_stain_54_41_05_0757",65.314285f,3.000000f,49.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj = new GameObject("a_dread_spider_16_42_05_0235");
+		pos = new Vector3(19.714287f, 3.600000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 16, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 16, 42, 0, 0, 40, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("special_tmap_obj_17_42_05_0917",21.000000f,3.600000f,50.419998f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 915, 40, 3, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,"uw1_048", "a_look_trigger_99_99_05_0915", 48, false);
+		SetRotation(myObj,0,180,0);
+		
+		myObj = new GameObject("a_dread_spider_18_42_05_0234");
+		pos = new Vector3(22.114285f, 3.600000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 18, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 42, 0, 0, 26, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_40_42_05_0655",48.857143f,1.500000f,50.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_broken_mace_41_42_05_0651",50.057144f,3.300000f,50.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_41_42_05_0652",49.371429f,3.300000f,50.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_gold_coin_57_42_05_0775",69.257141f,2.400000f,51.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_57_42_05_0781",68.571434f,2.400000f,51.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_57_42_05_0783",69.257141f,4.500000f,50.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_boulder_57_42_05_0789",68.914284f,2.400000f,50.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_341",true);
+		
+		myObj = new GameObject("a_feral_troll_58_42_05_0219");
+		pos = new Vector3(70.114288f, 2.400000f, 50.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"111","Sprites/OBJECTS_111", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_111", "Sprites/OBJECTS_111", "Sprites/OBJECTS_111", 0, 111, 623, 58, 42, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 58, 42, 0, 0, 49, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh20");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_sack_99_99_05_0623", ParentContainer, 0);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_plant_59_42_05_0786",70.971428f,4.500000f,51.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("special_tmap_obj_03_43_05_0579",3.620000f,3.600000f,52.200001f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_048", "" , 48, false);
+		SetRotation(myObj,0,270,0);
+		
+		
+		
+		myObj= CreateGameObject("a_book_12_43_05_0911",14.914286f,3.600000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_311",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_311", "Sprites/OBJECTS_311", "Sprites/OBJECTS_311", 11, 311, 685, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,685);
+		
+		myObj= CreateGameObject("a_scroll_12_43_05_0602",15.257142f,3.600000f,51.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_319",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", 11, 319, 581, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_31_43_05_0825",37.371429f,3.600000f,52.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_32_43_05_0820",38.742855f,3.600000f,51.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_40_43_05_0656",49.028568f,1.350000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj = new GameObject("a_dread_spider_42_43_05_0202");
+		pos = new Vector3(51.085712f, 3.300000f, 52.285713f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 42, 43, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 42, 43, 0, 0, 20, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_55_43_05_0771",67.028572f,2.400000f,52.285713f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_55_43_05_0772",66.342857f,2.400000f,52.285713f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj= CreateGameObject("a_gold_coin_57_43_05_0779",69.257141f,2.400000f,52.285713f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_gold_coin_57_43_05_0778",69.428566f,2.400000f,51.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_gold_coin_57_43_05_0777",68.742859f,2.400000f,51.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_gold_coin_57_43_05_0776",68.742859f,2.400000f,52.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_57_43_05_0785",68.914284f,4.500000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_plant_57_43_05_0788",68.914284f,4.500000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_58_43_05_0782",69.942856f,2.400000f,52.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_58_43_05_0784",69.942856f,4.500000f,52.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_red_potion_59_43_05_0620",71.828568f,2.400000f,52.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 542, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_gold_coin_59_43_05_0773",70.820000f,2.400000f,52.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_boulder_59_43_05_0790",71.314285f,2.400000f,52.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_341",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_03_44_05_0839",3.942857f,3.600000f,53.485714f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_bench_benches_04_44_05_0629",5.828571f,3.600000f,53.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
+		
+		myObj= CreateGameObject("a_bone_40_44_05_0654",49.028568f,1.200000f,53.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_42_44_05_0650",50.742855f,3.300000f,52.971432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_57_44_05_0780",69.428566f,2.400000f,52.971432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_gold_coin_58_44_05_0774",69.620003f,2.400000f,52.820000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_58_44_05_0787",70.114288f,4.500000f,53.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_212",true);
+		
+		myObj= CreateGameObject("a_boulder_58_44_05_0791",70.114288f,2.400000f,53.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_341",true);
+		
+		
+		
+		myObj = new GameObject("door_011_045");
+		pos = new Vector3(13.400000f, 3.600000f, 55.180000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/world/uw1_048", 0, 0, 0);
+		SetRotation(myObj,-90,-180,0);
+		
+		myObj = new GameObject("a_dread_spider_43_45_05_0201");
+		pos = new Vector3(52.114288f, 3.300000f, 54.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 43, 45, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 43, 45, 0, 0, 37, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,45,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_54_45_05_0770",65.657143f,2.400000f,54.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_54_45_05_0769",65.314285f,2.400000f,54.857143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_book_07_46_05_0969",9.580000f,3.600000f,56.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_305",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", 11, 305, 680, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,680);
+		
+		myObj= CreateGameObject("a_book_07_46_05_0971",8.914286f,3.600000f,55.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_309",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_309", "Sprites/OBJECTS_309", "Sprites/OBJECTS_309", 11, 309, 681, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,681);
+		
+		myObj= CreateGameObject("a_book_08_46_05_0970",10.114285f,3.600000f,55.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_305",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", "Sprites/OBJECTS_305", 11, 305, 679, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,679);
+		
+		myObj= CreateGameObject("special_tmap_obj_11_46_05_0831",13.800000f,3.600000f,55.220001f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 828, 40, 3, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,"uw1_048", "a_look_trigger_99_99_05_0828", 48, false);
+		SetRotation(myObj,0,180,0);
+		
+		myObj= CreateGameObject("a_chair_12_46_05_0632",14.914286f,3.600000f,55.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_348",true);
+		
+		myObj = new GameObject("a_dread_spider_16_46_05_0233");
+		pos = new Vector3(19.714287f, 3.600000f, 55.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 16, 46, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 16, 46, 0, 0, 39, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_dread_spider_18_46_05_0232");
+		pos = new Vector3(22.114285f, 3.600000f, 55.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 18, 46, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 46, 0, 0, 31, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_crown_26_46_05_0679",31.542856f,3.600000f,56.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_048",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_048", "Sprites/OBJECTS_048", "Sprites/armour/armor_f_0061", 73, 48, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 3675656, 3675656);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_46_05_0686",46.457142f,1.200000f,55.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_40_46_05_0653",48.342857f,1.200000f,56.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		myObj= CreateGameObject("a_plant_43_46_05_0710",51.771431f,3.300000f,55.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_plant_43_46_05_0709",52.285713f,3.300000f,56.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_45_46_05_0687",54.171432f,3.000000f,56.228569f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_broken_axe_48_46_05_0717",58.114288f,1.800000f,55.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_49_46_05_0698",59.142857f,1.800000f,55.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_blood_stain_50_46_05_0723",60.514286f,1.800000f,55.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj = new GameObject("a_headless_headlesses_50_46_05_0208");
+		pos = new Vector3(60.514286f, 1.800000f, 55.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 50, 46, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 50, 46, 0, 0, 32, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_59_46_05_0688",71.142853f,1.800000f,55.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pole_59_46_05_0690",71.828568f,1.800000f,55.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_216",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_216", "Sprites/OBJECTS_216", "Sprites/OBJECTS_216", 86, 216, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPole(myObj);
+		
+		myObj= CreateGameObject("a_scroll_07_47_05_0604",8.742857f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_313",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", 13, 313, 555, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj= CreateGameObject("a_chair_07_47_05_0631",8.914286f,3.600000f,57.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_348",true);
+		
+		myObj= CreateGameObject("a_book_12_47_05_0924",15.085714f,3.600000f,56.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_306",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_306", "Sprites/OBJECTS_306", "Sprites/OBJECTS_306", 11, 306, 683, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,683);
+		
+		myObj= CreateGameObject("a_book_12_47_05_0894",15.257142f,3.600000f,57.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 687, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,687);
+		
+		myObj= CreateGameObject("a_book_12_47_05_0973",14.742858f,3.600000f,56.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_309",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_309", "Sprites/OBJECTS_309", "Sprites/OBJECTS_309", 11, 309, 678, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,678);
+		
+		
+		
+		
+		myObj= CreateGameObject("a_pile_of_wood_chips_piles_of_wood_chips_43_47_05_0691",52.457142f,1.200000f,56.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_219",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_219", "Sprites/OBJECTS_219", "Sprites/OBJECTS_219", 69, 219, 1, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("a_plant_49_47_05_0699",59.314285f,1.800000f,56.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		myObj= CreateGameObject("a_blood_stain_49_47_05_0702",59.980000f,1.800000f,57.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("a_bone_50_47_05_0700",60.171432f,1.800000f,57.428570f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_50_47_05_0719",60.514286f,1.800000f,56.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_broken_mace_51_47_05_0718",62.057144f,1.800000f,56.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_scroll_56_47_05_0618",67.542854f,1.500000f,56.914288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_312",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", "Sprites/OBJECTS_312", 13, 312, 547, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj= CreateGameObject("a_plant_56_47_05_0767",68.057144f,1.500000f,57.257145f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_03_48_05_0841",4.285714f,3.600000f,58.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		
+		myObj= CreateGameObject("a_skull_32_48_05_0643",39.257145f,3.600000f,57.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		myObj= CreateGameObject("a_mushroom_33_48_05_0661",39.771427f,1.500000f,58.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_toadstool_33_48_05_0660",40.457142f,1.500000f,58.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_toadstool_33_48_05_0659",39.771427f,1.500000f,58.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_185",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", "Sprites/OBJECTS_185", 14, 185, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_mushroom_33_48_05_0658",40.285717f,1.500000f,57.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_184",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", "Sprites/OBJECTS_184", 14, 184, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_35_48_05_0657",42.685715f,1.200000f,58.457142f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_blood_stain_41_48_05_0649",49.542858f,3.300000f,57.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj = new GameObject("a_cave_bat_41_48_05_0244");
+		pos = new Vector3(49.714287f, 1.800000f, 58.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 41, 48, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 41, 48, 0, 0, 11, 0, 0, 2, 1, 0, 0, 0, 0, "SkyMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj= CreateGameObject("a_broken_axe_44_48_05_0692",53.314285f,1.200000f,57.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_200",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", "Sprites/OBJECTS_200", 23, 200, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_49_48_05_0701",59.314285f,1.800000f,57.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_headless_headlesses_49_48_05_0253");
+		pos = new Vector3(59.314285f, 1.800000f, 58.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 49, 48, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 49, 48, 0, 0, 53, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_headless_headlesses_51_48_05_0207");
+		pos = new Vector3(61.220001f, 1.800000f, 57.771431f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 51, 48, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 51, 48, 0, 0, 57, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_56_48_05_0765",67.714287f,1.500000f,58.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_57_48_05_0768",68.914284f,1.500000f,58.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_rubble_piles_of_rubble_59_48_05_0689",71.314285f,1.800000f,58.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_218",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_218", "Sprites/OBJECTS_218", "Sprites/OBJECTS_218", 69, 218, 1, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_03_49_05_0900",4.457143f,3.600000f,59.142857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("door_008_049");
+		pos = new Vector3(10.600000f, 3.600000f, 59.657143f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_05", 0, 0, 0);
+		SetRotation(myObj,-90,0,0);
+		
+		
+		
+		
+		myObj= CreateGameObject("a_skull_39_49_05_0680",46.971432f,3.000000f,58.971432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_sack_48_49_05_0722",58.628571f,1.800000f,59.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 716, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_candle_99_99_05_0716", ParentContainer, 0);
+		AddObjectToContainer("a_fishing_pole_99_99_05_0713", ParentContainer, 1);
+		AddObjectToContainer("a_red_gem_99_99_05_0715", ParentContainer, 2);
+		AddObjectToContainer("a_loaf_of_bread_loaves_of_bread_99_99_05_0714", ParentContainer, 3);
+		AddObjectToContainer("a_green_potion_99_99_05_0619", ParentContainer, 4);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("a_blood_stain_48_49_05_0721",58.114288f,1.800000f,59.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_skull_48_49_05_0720",58.114288f,1.800000f,59.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_51_49_05_0724",61.714287f,1.800000f,59.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_blood_stain_56_49_05_0766",68.057144f,1.500000f,58.971432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_06_50_05_0842",7.885714f,3.600000f,60.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_07_50_05_0929",8.571429f,3.600000f,60.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_plant_07_50_05_0898",9.085714f,3.600000f,60.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj = new GameObject("door_009_050");
+		pos = new Vector3(10.971428f, 3.600000f, 61.000000f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_05", 0, 0, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		myObj= CreateGameObject("a_chair_12_50_05_0630",15.085714f,3.600000f,60.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_348",true);
+		
+		myObj= CreateGameObject("a_bottle_of_wine_bottles_of_wine_27_50_05_0826",32.914284f,2.100000f,60.514286f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_191",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_191", "Sprites/OBJECTS_191", "Sprites/OBJECTS_191", 24, 191, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		
+		
+		
+		myObj= CreateGameObject("a_bench_benches_33_50_05_0662",40.457142f,3.600000f,61.180000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_336",true);
+		
+		myObj = new GameObject("a_cave_bat_35_50_05_0254");
+		pos = new Vector3(42.514286f, 1.800000f, 60.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 35, 50, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 35, 50, 0, 0, 8, 0, 0, 2, 2, 0, 0, 0, 0, "SkyMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_mongbat_37_50_05_0246");
+		pos = new Vector3(44.914288f, 2.100000f, 60.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"81","Sprites/OBJECTS_081", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", 0, 81, 0, 37, 50, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 37, 50, 0, 0, 23, 0, 0, 2, 1, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_vampire_bat_40_50_05_0238");
+		pos = new Vector3(48.514286f, 1.800000f, 60.514286f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"73","Sprites/OBJECTS_073", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 40, 50, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 40, 50, 0, 0, 11, 0, 0, 2, 2, 0, 0, 0, 0, "SkyMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_broken_mace_52_50_05_0697",62.571430f,1.800000f,61.028568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_202",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", "Sprites/OBJECTS_202", 23, 202, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("chain_boots_pairs_of_chain_boots_56_50_05_0695",68.057144f,1.500000f,60.857143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_042",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_042", "Sprites/OBJECTS_042", "Sprites/armour/armor_f_0010", 75, 42, 0, 24, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateBoots(myObj, "Sprites/armour/armor_f_0010", "Sprites/armour/armor_m_0010", "Sprites/armour/armor_f_0025", "Sprites/armour/armor_m_0025", "Sprites/armour/armor_f_0040", "Sprites/armour/armor_m_0040", "Sprites/armour/armor_f_0055", "Sprites/armour/armor_m_0055", 3, 10);
+		
+		myObj= CreateGameObject("a_skull_02_51_05_0633",3.257143f,3.600000f,61.542858f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_08_51_05_0944",10.457142f,3.600000f,62.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_writing_08_51_05_0834",10.780000f,4.500000f,61.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 765, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,90,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,765);
+		
+		myObj= CreateGameObject("a_book_11_51_05_0978",13.371428f,3.600000f,61.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_306",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_306", "Sprites/OBJECTS_306", "Sprites/OBJECTS_306", 11, 306, 673, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,673);
+		
+		myObj= CreateGameObject("a_book_11_51_05_0977",14.057142f,3.600000f,62.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_306",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_306", "Sprites/OBJECTS_306", "Sprites/OBJECTS_306", 11, 306, 674, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,674);
+		
+		myObj= CreateGameObject("a_book_12_51_05_0976",14.914286f,3.600000f,61.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 675, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,675);
+		
+		myObj= CreateGameObject("a_book_12_51_05_0975",14.571428f,3.600000f,61.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 676, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,676);
+		
+		myObj= CreateGameObject("a_book_12_51_05_0974",15.257142f,3.600000f,62.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_307",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", "Sprites/OBJECTS_307", 11, 307, 677, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,677);
+		
+		myObj = new GameObject("a_flesh_slug_16_51_05_0225");
+		pos = new Vector3(19.714287f, 3.600000f, 61.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 16, 51, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 16, 51, 0, 0, 8, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_bloodworm_17_51_05_0229");
+		pos = new Vector3(20.914284f, 3.600000f, 61.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 17, 51, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 17, 51, 0, 0, 14, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_acid_slug_18_51_05_0223");
+		pos = new Vector3(21.771429f, 3.600000f, 62.057144f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 18, 51, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 51, 0, 0, 8, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_rotworm_18_51_05_0228");
+		pos = new Vector3(22.628572f, 3.600000f, 61.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 18, 51, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 51, 0, 0, 5, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_44_51_05_0648",53.314285f,0.600000f,61.885712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_53_51_05_0712",63.771431f,1.800000f,61.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_dagger_55_51_05_0696",67.028572f,1.500000f,62.228569f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 717, 42, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateWeapon(myObj, 4, 2, 5, 3, 5);
+		
+		myObj= CreateGameObject("a_plant_08_52_05_0840",10.285714f,3.600000f,62.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_207",true);
+		
+		myObj = new GameObject("a_mongbat_36_52_05_0245");
+		pos = new Vector3(43.714287f, 2.400000f, 62.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"81","Sprites/OBJECTS_081", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", "Sprites/OBJECTS_081", 0, 81, 0, 36, 52, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 36, 52, 0, 0, 23, 0, 0, 2, 1, 0, 0, 0, 0, "GroundMesh0");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		
+		myObj = new GameObject("a_vampire_bat_40_52_05_0243");
+		pos = new Vector3(48.514286f, 1.200000f, 62.914288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"73","Sprites/OBJECTS_073", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", "Sprites/OBJECTS_073", 0, 73, 0, 40, 52, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 40, 52, 0, 0, 15, 0, 0, 2, 1, 0, 0, 0, 0, "SkyMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_broken_shield_42_52_05_0711",51.428570f,0.300000f,62.742855f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_writing_42_52_05_0927",51.580002f,1.200000f,63.085712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 761, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,90,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,761);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_54_52_05_0708",65.142853f,1.500000f,62.571430f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_02_53_05_0881",3.085714f,3.600000f,64.457146f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_03_53_05_0878",4.780000f,3.600000f,63.942856f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_03_53_05_0879",4.628572f,3.600000f,63.619999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		
+		myObj = new GameObject("a_acid_slug_17_53_05_0222");
+		pos = new Vector3(20.914284f, 3.600000f, 64.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"69","Sprites/OBJECTS_069", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", "Sprites/OBJECTS_069", 0, 69, 0, 17, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 17, 53, 0, 0, 8, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_bloodworm_18_53_05_0230");
+		pos = new Vector3(22.114285f, 3.600000f, 64.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 18, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 53, 0, 0, 17, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_headless_headlesses_27_53_05_0236");
+		pos = new Vector3(32.914284f, 2.400000f, 64.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 27, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 27, 53, 0, 0, 53, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_31_53_05_0663",37.371429f,3.600000f,63.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_cave_bat_35_53_05_0248");
+		pos = new Vector3(42.514286f, 0.900000f, 64.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"66","Sprites/OBJECTS_066", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", "Sprites/OBJECTS_066", 0, 66, 0, 35, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 35, 53, 0, 0, 11, 0, 0, 2, 2, 0, 0, 0, 0, "SkyMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_41_53_05_0693",49.371429f,0.300000f,64.114288f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_204",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", "Sprites/OBJECTS_204", 23, 204, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_50_53_05_0694",60.514286f,1.800000f,63.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("an_axe_59_53_05_0613",70.971428f,2.100000f,64.457146f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_002",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", "Sprites/OBJECTS_002", 1, 2, 715, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateWeapon(myObj, 10, 6, 8, 4, 25);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_02_54_05_0886",3.580000f,3.600000f,64.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_plant_02_54_05_0887",3.428571f,3.600000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("a_plant_02_54_05_0888",3.257143f,3.600000f,64.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_03_54_05_0882",4.628572f,3.600000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_03_54_05_0883",4.457143f,3.600000f,65.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_plant_03_54_05_0884",3.942857f,3.600000f,65.142853f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_192",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_03_54_05_0885",3.771429f,3.600000f,65.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_dagger_03_54_05_0889",4.628572f,3.600000f,65.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 24, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 4, 2, 5, 3, 5);
+		
+		myObj= CreateGameObject("a_dagger_03_54_05_0890",4.114285f,3.600000f,65.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_003",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", "Sprites/OBJECTS_003", 1, 3, 0, 33, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 4, 2, 5, 3, 5);
+		
+		myObj= CreateGameObject("a_broken_sword_05_54_05_0880",6.857143f,3.600000f,64.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", "Sprites/OBJECTS_201", 23, 201, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("a_rotworm_16_54_05_0227");
+		pos = new Vector3(19.714287f, 3.600000f, 65.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 16, 54, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 16, 54, 0, 0, 4, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_blood_stain_47_54_05_0736",56.914288f,1.200000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj = new GameObject("a_gazer_52_54_05_0204");
+		pos = new Vector3(62.742855f, 3.000000f, 65.142853f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"102","Sprites/OBJECTS_102", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", 0, 102, 611, 52, 54, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 52, 54, 0, 0, 73, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		////NPC container with items
+		
+		AddObjectToContainer("a_gold_coin_99_99_05_0611", ParentContainer, 0);
+		AddObjectToContainer("a_gold_coin_99_99_05_0610", ParentContainer, 1);
+		AddObjectToContainer("a_gold_coin_99_99_05_0609", ParentContainer, 2);
+		AddObjectToContainer("a_gold_coin_99_99_05_0608", ParentContainer, 3);
+		AddObjectToContainer("a_gold_coin_99_99_05_0607", ParentContainer, 4);
+		AddObjectToContainer("a_red_gem_99_99_05_0606", ParentContainer, 5);
+		////Container contents complete
+		
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_52_54_05_0734",62.914288f,1.800000f,65.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_13_55_05_1013",16.780001f,0.000000f,66.599998f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_139", "" , 139, false);
+		SetRotation(myObj,0,90,0);
+		
+		
+		myObj = new GameObject("a_flesh_slug_16_55_05_0224");
+		pos = new Vector3(20.228571f, 3.600000f, 67.028572f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"65","Sprites/OBJECTS_065", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", "Sprites/OBJECTS_065", 0, 65, 0, 16, 55, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 16, 55, 0, 0, 5, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_bloodworm_16_55_05_0231");
+		pos = new Vector3(19.371428f, 3.600000f, 66.171432f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 16, 55, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 16, 55, 0, 0, 19, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_headless_headlesses_26_55_05_0237");
+		pos = new Vector3(31.714285f, 2.400000f, 66.514290f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 26, 55, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 26, 55, 0, 0, 56, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_33_55_05_0664",40.457142f,3.600000f,67.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_46_55_05_0737",56.057144f,1.200000f,67.028572f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_blood_stain_47_55_05_0735",57.257145f,1.200000f,66.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_47_55_05_0739",56.571430f,1.200000f,66.342857f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_53_55_05_0733",64.114288f,1.800000f,66.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("a_rotworm_18_56_05_0226");
+		pos = new Vector3(22.114285f, 3.600000f, 67.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"64","Sprites/OBJECTS_064", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", "Sprites/OBJECTS_064", 0, 64, 0, 18, 56, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 18, 56, 0, 0, 4, 0, 0, 8, 2, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_book_35_56_05_0850",42.514286f,3.300000f,67.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_304",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", "Sprites/OBJECTS_304", 11, 304, 672, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,672);
+		
+		myObj = new GameObject("a_gazer_35_56_05_0216");
+		pos = new Vector3(42.514286f, 3.900000f, 67.714287f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"102","Sprites/OBJECTS_102", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", "Sprites/OBJECTS_102", 0, 102, 0, 35, 56, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 35, 56, 0, 0, 67, 0, 0, 4, 0, 0, 0, 0, 0, "GroundMesh15");
+		SetRotation(myObj,0,90,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("door_038_056");
+		pos = new Vector3(46.285713f, 3.300000f, 68.199997f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		SetRotation(myObj,-90,-90,0);
+		
+		myObj= CreateGameObject("a_blood_stain_41_56_05_0764",50.228569f,3.300000f,68.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("plate_leggings_pairs_of_plate_leggings_41_56_05_0762",50.057144f,3.300000f,67.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_037",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_037", "Sprites/OBJECTS_037", "Sprites/armour/armor_f_0005", 77, 37, 0, 12, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateLeggings(myObj, "Sprites/armour/armor_f_0005", "Sprites/armour/armor_m_0005", "Sprites/armour/armor_f_0020", "Sprites/armour/armor_m_0020", "Sprites/armour/armor_f_0035", "Sprites/armour/armor_m_0035", "Sprites/armour/armor_f_0050", "Sprites/armour/armor_m_0050", 6, 20);
+		
+		myObj= CreateGameObject("a_skull_41_56_05_0763",50.228569f,3.300000f,67.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_leather_vest_45_56_05_0741",54.857143f,1.200000f,67.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_032",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_032", "Sprites/OBJECTS_032", "Sprites/armour/armor_f_0000", 2, 32, 707, 21, 0, 1, 1, 0, 1, 1, 1, 8, 1);
+		CreateArmour(myObj, "Sprites/armour/armor_f_0000", "Sprites/armour/armor_m_0000", "Sprites/armour/armor_f_0015", "Sprites/armour/armor_m_0015", "Sprites/armour/armor_f_0030", "Sprites/armour/armor_m_0030", "Sprites/armour/armor_f_0045", "Sprites/armour/armor_m_0045", 2, 8);
+		
+		myObj= CreateGameObject("a_blood_stain_45_56_05_0743",54.171432f,1.200000f,67.542854f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
+		
+		myObj= CreateGameObject("a_broken_wand_45_56_05_0744",54.685715f,1.200000f,67.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_157",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_157", "Sprites/OBJECTS_157", "Sprites/OBJECTS_157", 12, 157, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddWand(myObj, 0, 0);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_47_56_05_0738",56.571430f,1.200000f,67.542854f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		
+		
+		myObj= CreateGameObject("a_jeweled_axe_56_56_05_0707",68.228569f,1.800000f,67.542854f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_011",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_011", "Sprites/OBJECTS_011", "Sprites/OBJECTS_011", 1, 11, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 13, 8, 5, 4, 255);
+		
+		myObj= CreateGameObject("a_skull_56_56_05_0706",67.714287f,1.800000f,67.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_blood_stain_56_56_05_0705",68.057144f,1.800000f,68.379997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_221",true);
+		
+		
+		myObj= CreateGameObject("a_bone_07_57_05_0909",9.085714f,3.600000f,68.742859f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", "Sprites/OBJECTS_196", 23, 196, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_07_57_05_0895",9.428571f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_skull_07_57_05_0896",9.085714f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_08_57_05_0972",9.771429f,3.600000f,69.580002f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		SetFood(myObj);
-		//Supplementary object 944
-		myObj= CreateGameObject("a_mandolin_99_99_04_0944",119.314285f,3.300000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_291",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", "Sprites/OBJECTS_291", 26, 291, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		AddInstrument(myObj);
-		//Supplementary object 945
-		myObj= CreateGameObject("a_glowing_rock_99_99_04_0945",119.314285f,3.300000f,119.314285f);
-		CreateObjectGraphics(myObj,"Sprites/OBJECTS_297",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", "Sprites/OBJECTS_297", 16, 297, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-		AddObj_base(myObj);	
+		
+		myObj = new GameObject("a_troll_08_57_05_0239");
+		pos = new Vector3(10.114285f, 3.600000f, 68.914284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"96","Sprites/OBJECTS_096", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_096", "Sprites/OBJECTS_096", "Sprites/OBJECTS_096", 0, 96, 0, 8, 57, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 8, 57, 0, 0, 58, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj = new GameObject("a_great_troll_13_57_05_0221");
+		pos = new Vector3(16.114286f, 3.600000f, 68.914284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"112","Sprites/OBJECTS_112", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_112", "Sprites/OBJECTS_112", "Sprites/OBJECTS_112", 0, 112, 0, 13, 57, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 13, 57, 0, 0, 90, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_wand_14_57_05_0586",17.314285f,3.600000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_154",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_154", "Sprites/OBJECTS_154", "Sprites/OBJECTS_154", 12, 154, 594, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddWand(myObj, 533, 17);
+		
+		myObj= CreateGameObject("a_coin_14_57_05_0891",17.314285f,3.600000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_160",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_160", "Sprites/OBJECTS_160", "Sprites/OBJECTS_160", 18, 160, 11, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_14_57_05_0892",17.314285f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_14_57_05_0906",17.142859f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", "Sprites/OBJECTS_210", 23, 210, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_14_57_05_0940",17.485714f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_208",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", "Sprites/OBJECTS_208", 23, 208, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_14_57_05_0941",17.314285f,3.600000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_scroll_21_57_05_0612",25.714285f,3.600000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_319",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", "Sprites/OBJECTS_319", 11, 319, 550, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj = new GameObject("a_skeleton_22_57_05_0209");
+		pos = new Vector3(26.914284f, 3.600000f, 68.914284f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 22, 57, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 22, 57, 0, 0, 26, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_mace_23_57_05_0928",28.457144f,3.600000f,69.085716f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_009",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, 8, 16, 5, 5, 25);
+		
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_23_57_05_0843",28.114285f,3.600000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_23_57_05_0925",27.942856f,3.600000f,68.571434f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_blood_stain_23_57_05_0893",28.457144f,3.600000f,68.742859f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("a_crossbow_41_57_05_0761",49.714287f,3.300000f,68.914284f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_026",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", 1, 26, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		
+		myObj= CreateGameObject("a_skull_45_57_05_0740",54.514286f,1.200000f,68.419998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", "Sprites/OBJECTS_195", 23, 195, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_46_57_05_0742",55.371429f,1.200000f,68.571434f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("a_scroll_46_57_05_0617",55.220001f,1.200000f,68.742859f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_314",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_314", "Sprites/OBJECTS_314", "Sprites/OBJECTS_314", 13, 314, 553, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		
+		myObj = new GameObject("a_skeleton_23_58_05_0210");
+		pos = new Vector3(28.114285f, 3.600000f, 70.114288f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"74","Sprites/OBJECTS_074", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", "Sprites/OBJECTS_074", 0, 74, 0, 23, 58, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 23, 58, 0, 0, 27, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_31_58_05_0666",37.542858f,3.600000f,70.457146f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_205",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", "Sprites/OBJECTS_205", 23, 205, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_54_58_05_0732",65.657143f,1.800000f,69.771431f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_broken_shield_57_58_05_0681",69.580002f,1.200000f,70.628571f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_203",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", "Sprites/OBJECTS_203", 23, 203, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj = new GameObject("door_008_059");
+		pos = new Vector3(10.600000f, 3.600000f, 71.828568f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		SetRotation(myObj,-90,0,0);
+		
+		myObj = new GameObject("door_013_059");
+		pos = new Vector3(16.600000f, 3.600000f, 71.828568f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		SetRotation(myObj,-90,0,0);
+		
+		myObj = new GameObject("door_022_059");
+		pos = new Vector3(27.400000f, 3.600000f, 71.828568f);
+		myObj.transform.position = pos;
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		SetRotation(myObj,-90,0,0);
+		
+		myObj= CreateGameObject("a_broken_wand_29_59_05_0665",35.828571f,3.600000f,71.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_159",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_159", "Sprites/OBJECTS_159", "Sprites/OBJECTS_159", 12, 159, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddWand(myObj, 0, 0);
+		
+		myObj= CreateGameObject("a_blood_stain_31_59_05_0672",38.057144f,3.600000f,71.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_32_59_05_0668",38.571426f,3.600000f,71.657143f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_32_59_05_0667",39.257145f,3.600000f,71.485710f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_blood_stain_33_59_05_0671",39.619999f,3.600000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_223",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_34_59_05_0817",41.828568f,3.600000f,71.142853f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_41_59_05_0677",49.371429f,3.600000f,71.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("a_bloodworm_43_59_05_0198");
+		pos = new Vector3(52.114288f, 3.112500f, 71.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 43, 59, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 43, 59, 0, 0, 14, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_gold_coin_46_59_05_0644",55.371429f,3.187500f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_55_59_05_0684",67.028572f,1.800000f,71.828568f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_57_59_05_0683",69.428566f,1.800000f,70.971428f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("some_writing_09_60_05_0838",10.971428f,4.500000f,72.019997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 762, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,180,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,762);
+		
+		myObj= CreateGameObject("some_writing_14_60_05_0836",16.971428f,4.500000f,72.019997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 763, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,180,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,763);
+		
+		myObj= CreateGameObject("some_writing_23_60_05_0835",27.771429f,4.500000f,72.019997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 764, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,180,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,764);
+		
+		myObj= CreateGameObject("some_writing_31_60_05_1015",37.220001f,4.087500f,72.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 756, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,270,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,756);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_32_60_05_0669",39.428574f,3.600000f,72.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj= CreateGameObject("a_nightstand_32_60_05_0673",38.571426f,3.600000f,72.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_350",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_33_60_05_0670",40.457142f,3.600000f,72.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_writing_33_60_05_1016",40.779999f,4.087500f,72.685715f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_358",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", "Sprites/OBJECTS_358", 10, 358, 757, 40, 0, 0, 1, 0, 0, 1, 0, 5, 1);
+		SetReadable(myObj);
+		SetRotation(myObj,0,90,0);
+		SetSprite(myObj, "Sprites/tmobj/tmobj_25");
+		SetLink(myObj,757);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_35_60_05_0818",42.342857f,3.600000f,72.857147f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_36_60_05_0647",44.228569f,3.600000f,72.514290f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("a_headless_headlesses_46_60_05_0197");
+		pos = new Vector3(55.714287f, 3.600000f, 72.514290f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"91","Sprites/OBJECTS_091", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", "Sprites/OBJECTS_091", 0, 91, 0, 46, 60, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 46, 60, 0, 0, 11, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("a_plant_46_60_05_0645",55.371429f,3.600000f,72.171432f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_206",true);
+		
+		
+		
+		myObj= CreateGameObject("special_tmap_obj_03_61_05_0997",3.620000f,0.000000f,73.800003f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", "Sprites/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
+		CreateTMAP(myObj,	"uw1_137", "" , 137, false);
+		SetRotation(myObj,0,270,0);
+		
+		myObj= CreateGameObject("a_chair_31_61_05_0676",37.371429f,3.600000f,73.885712f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_348",true);
+		
+		myObj= CreateGameObject("a_chair_32_61_05_0675",39.085716f,3.600000f,74.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_348",true);
+		
+		myObj= CreateGameObject("a_chair_33_61_05_0674",40.114285f,3.600000f,73.714287f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_348",true);
+		
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_37_61_05_0819",45.085712f,3.600000f,74.057144f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_209",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		myObj= CreateGameObject("some_grass_bunches_of_grass_38_61_05_0678",46.457142f,3.600000f,73.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
+		
+		myObj = new GameObject("a_bloodworm_41_61_05_0199");
+		pos = new Vector3(49.885712f, 3.450000f, 73.885712f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 61, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 41, 61, 0, 0, 12, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh2");
+		SetRotation(myObj,0,270,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		
+		myObj= CreateGameObject("an_anvil_53_61_05_0685",64.457146f,3.000000f,73.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_215",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_215", "Sprites/OBJECTS_215", "Sprites/OBJECTS_215", 85, 215, 1, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
+		AddAnvil(myObj);
+		
+		myObj= CreateGameObject("a_skull_58_61_05_0682",69.942856f,1.200000f,73.371429f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		
+		//UW Triggers and Traps
+		myObj= CreateGameObject("a_move_trigger_55_56_05_0703",66.599998f,1.800000f,67.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,57,56,"a_create_object_trap_57_56_05_0704");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 704, 57, 56, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_create_object_trap_57_56_05_0704",68.400002f,2.400000f,67.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 206, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj, "GroundMesh15");
+		AddTrapLink(myObj,"a_fire_elemental_99_99_05_0206");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_05_0802",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,14,11,"a_change_terrain_trap_14_11_05_0803");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 803, 14, 11, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_change_terrain_trap_14_11_05_0803",16.799999f,2.700000f,13.200000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 0, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_change_terrain_trap(myObj,14,11,0,0);
+		
+		myObj= CreateGameObject("a_move_trigger_99_99_05_0821",119.400002f,4.500000f,119.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,28,50,"a_delete_object_trap_28_50_05_0824");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 824, 28, 50, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_05_0822",119.314285f,2.100000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,27,49,"a_text_string_trap_27_49_05_0823");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 823, 27, 49, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_text_string_trap_27_49_05_0823",32.400002f,4.500000f,58.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_400",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", "Sprites/OBJECTS_400", 53, 400, 821, 10, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_text_string_trap(myObj,9,320);
+		AddTrapLink(myObj,"a_move_trigger_99_99_05_0821");
+		
+		myObj= CreateGameObject("a_delete_object_trap_28_50_05_0824",33.599998f,0.000000f,60.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 827, 27, 50, 0, 0, 0, 1, 1, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"a_bridge_27_50_05_0827");
+		
+		myObj= CreateGameObject("a_look_trigger_99_99_05_0828",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
+		CreateTrigger(myObj,11,45,"a_change_terrain_trap_11_45_05_0833");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 833, 11, 45, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_99_99_05_0829",119.400002f,3.600000f,119.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,10,45,"a_delete_object_trap_10_45_05_0830");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 830, 10, 45, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_delete_object_trap_10_45_05_0830",12.000000f,0.000000f,54.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 831, 11, 46, 0, 0, 0, 1, 1, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"special_tmap_obj_11_46_05_0831");
+		
+		myObj= CreateGameObject("a_change_terrain_trap_11_45_05_0833",13.200000f,3.600000f,54.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 829, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_change_terrain_trap(myObj,11,45,0,0);
+		AddTrapLink(myObj,"a_move_trigger_99_99_05_0829");
+		
+		myObj= CreateGameObject("a_create_object_trap_04_53_05_0844",4.800000f,3.600000f,63.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 212, 52, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj, "GroundMesh2");
+		AddTrapLink(myObj,"a_dread_spider_99_99_05_0212");
+		
+		myObj= CreateGameObject("a_create_object_trap_45_45_05_0845",54.000000f,3.000000f,54.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 213, 42, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj, "GroundMesh15");
+		AddTrapLink(myObj,"a_dread_spider_99_99_05_0213");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_05_0902",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,53,18,"a_do_trap_53_18_05_0945");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 945, 53, 18, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_54_19_05_0904",64.800003f,0.000000f,22.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 52, 31, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)63.000000,(float)37.800000,(float)3.600000,0);
+		
+		myObj= CreateGameObject("a_move_trigger_99_99_05_0913",119.400002f,3.600000f,119.400002f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,16,41,"a_delete_object_trap_16_41_05_0914");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 914, 16, 41, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_delete_object_trap_16_41_05_0914",19.200001f,1.500000f,49.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_395",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", "Sprites/OBJECTS_395", 48, 395, 917, 17, 42, 0, 0, 0, 1, 1, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_delete_object_trap(myObj);
+		AddTrapLink(myObj,"special_tmap_obj_17_42_05_0917");
+		
+		myObj= CreateGameObject("a_look_trigger_99_99_05_0915",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_419",false);
+		CreateTrigger(myObj,17,41,"a_change_terrain_trap_17_41_05_0916");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", "Sprites/OBJECTS_419", 57, 419, 916, 17, 41, 0, 0, 0, 1, 1, 0, 4, 1);
+		
+		myObj= CreateGameObject("a_change_terrain_trap_17_41_05_0916",20.400000f,3.600000f,49.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_389",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", "Sprites/OBJECTS_389", 42, 389, 913, 11, 63, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_change_terrain_trap(myObj,17,41,0,0);
+		AddTrapLink(myObj,"a_move_trigger_99_99_05_0913");
+		
+		myObj= CreateGameObject("a_create_object_trap_47_56_05_0919",56.400002f,1.200000f,67.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_391",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", "Sprites/OBJECTS_391", 44, 391, 214, 48, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_create_object_trap(myObj, "GroundMesh15");
+		AddTrapLink(myObj,"a_dread_spider_99_99_05_0214");
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_05_0920",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,4,2,"a_do_trap_99_99_05_0933");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 933, 4, 2, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_do_trap_99_99_05_0933",118.800003f,0.900000f,118.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 42, 0, 0, 0, 0, 1, 1, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_do_trap(myObj,42,1);
+		
+		myObj= CreateGameObject("a_do_trap_53_18_05_0945",63.599998f,0.000000f,21.600000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_387",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", "Sprites/OBJECTS_387", 40, 387, 0, 40, 0, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_trap_base(myObj);
+		
+		myObj= CreateGameObject("a_use_trigger_99_99_05_0947",119.314285f,0.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_418",false);
+		CreateTrigger(myObj,54,19,"a_teleport_trap_54_19_05_0904");
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", "Sprites/OBJECTS_418", 56, 418, 904, 54, 19, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_move_trigger_53_31_05_0949",64.199997f,3.600000f,37.799999f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,53,31,"a_teleport_trap_53_31_05_0950");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 950, 53, 31, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_53_31_05_0950",63.599998f,0.000000f,37.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 53, 18, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)64.200000,(float)22.200000,(float)0.000000,0);
+		
+		myObj= CreateGameObject("a_move_trigger_13_55_05_0951",16.200001f,0.000000f,66.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,14,55,"a_teleport_trap_14_55_05_0952");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 952, 14, 55, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_14_55_05_0952",16.799999f,0.187500f,66.000000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 14, 55, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)17.400000,(float)66.600000,(float)4.500000,5);
+		
+		myObj= CreateGameObject("a_move_trigger_43_28_05_0953",52.200001f,3.600000f,34.200001f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,43,28,"a_teleport_trap_43_28_05_0955");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 955, 43, 28, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_43_28_05_0955",51.599998f,0.187500f,33.599998f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 43, 31, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)52.200000,(float)37.800000,(float)3.600000,5);
+		
+		myObj= CreateGameObject("a_move_trigger_18_11_05_1008",22.200001f,3.600000f,13.800000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,18,12,"a_teleport_trap_18_12_05_1010");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1010, 18, 12, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_18_12_05_1010",21.600000f,0.262500f,14.400000f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 19, 13, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,45,0);
+		Create_a_teleport_trap(myObj,(float)23.400000,(float)16.200000,(float)3.600000,7);
+		
+		myObj= CreateGameObject("a_move_trigger_03_61_05_1012",4.200000f,0.000000f,73.800003f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_416",false);
+		CreateMoveTrigger(myObj,2,61,"a_teleport_trap_02_61_05_1014");
+		CreateCollider(myObj,1.20f,1.20f,1.20f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", "Sprites/OBJECTS_416", 54, 416, 1014, 2, 61, 0, 0, 0, 1, 1, 0, 6, 1);
+		
+		myObj= CreateGameObject("a_teleport_trap_02_61_05_1014",2.400000f,0.262500f,73.199997f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_385",false);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", "Sprites/OBJECTS_385", 38, 385, 0, 2, 61, 0, 0, 0, 1, 0, 0, 1, 1);
+		SetRotation(myObj,0,0,0);
+		Create_a_teleport_trap(myObj,(float)3.000000,(float)73.800000,(float)3.600000,7);
+		
+		//Supplementary object 206
+		myObj = new GameObject("a_fire_elemental_99_99_05_0206");
+		pos = new Vector3(119.314285f, 2.400000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"120","Sprites/OBJECTS_120", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", "Sprites/OBJECTS_120", 0, 120, 0, 57, 56, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 57, 56, 0, 0, 54, 0, 0, 8, 0, 0, 0, 0, 0, "GroundMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 212
+		myObj = new GameObject("a_dread_spider_99_99_05_0212");
+		pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 4, 53, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 4, 53, 0, 0, 31, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 213
+		myObj = new GameObject("a_dread_spider_99_99_05_0213");
+		pos = new Vector3(119.314285f, 3.000000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 45, 45, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 45, 45, 0, 0, 32, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 214
+		myObj = new GameObject("a_dread_spider_99_99_05_0214");
+		pos = new Vector3(119.314285f, 1.200000f, 119.314285f);
+		myObj.transform.position = pos;
+		CreateNPC(myObj,"92","Sprites/OBJECTS_092", 0);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", "Sprites/OBJECTS_092", 0, 92, 0, 47, 56, 0, 1, 0, 1, 0, 0, 0, 1);
+		SetNPCProps(myObj, 0, 47, 56, 0, 0, 31, 0, 0, 2, 0, 0, 0, 0, 0, "GroundMesh1");
+		SetRotation(myObj,0,0,0);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 255, 255, 255);
+		//Supplementary object 537
+		myObj= CreateGameObject("a_Flam_stone_99_99_05_0537",119.314285f,0.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_237", "Sprites/OBJECTS_237", 6, 237, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 538
+		myObj= CreateGameObject("a_Nox_stone_99_99_05_0538",119.314285f,0.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_245", "Sprites/OBJECTS_245", 6, 245, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 581
+		myObj= CreateGameObject("a_red_potion_99_99_05_0581",119.314285f,0.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		//Supplementary object 583
+		myObj= CreateGameObject("a_scroll_99_99_05_0583",119.314285f,0.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_313",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", "Sprites/OBJECTS_313", 13, 313, 547, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddMagicScroll(myObj);
+		//Supplementary object 605
+		myObj= CreateGameObject("a_red_potion_99_99_05_0605",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_187",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", "Sprites/OBJECTS_187", 14, 187, 581, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		//Supplementary object 606
+		myObj= CreateGameObject("a_red_gem_99_99_05_0606",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 607
+		myObj= CreateGameObject("a_gold_coin_99_99_05_0607",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 608
+		myObj= CreateGameObject("a_gold_coin_99_99_05_0608",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 609
+		myObj= CreateGameObject("a_gold_coin_99_99_05_0609",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 610
+		myObj= CreateGameObject("a_gold_coin_99_99_05_0610",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 611
+		myObj= CreateGameObject("a_gold_coin_99_99_05_0611",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 619
+		myObj= CreateGameObject("a_green_potion_99_99_05_0619",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 541, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		//Supplementary object 621
+		myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_05_0621",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_176",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", "Sprites/OBJECTS_176", 24, 176, 3, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 622
+		myObj= CreateGameObject("a_green_potion_99_99_05_0622",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_188",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", "Sprites/OBJECTS_188", 14, 188, 564, 40, 0, 1, 1, 0, 1, 1, 1, 12, 1);
+		AddPotion(myObj);
+		//Supplementary object 623
+		myObj= CreateGameObject("a_sack_99_99_05_0623",119.314285f,2.400000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_128",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_128", "Sprites/OBJECTS_128", "Sprites/OBJECTS_129", 19, 128, 622, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		////Container contents
+		ParentContainer = CreateContainer(myObj, 125, 255, 255);
+		AddObjectToContainer("a_green_potion_99_99_05_0622", ParentContainer, 0);
+		AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_05_0621", ParentContainer, 1);
+		////Container contents complete
+		
+		//Supplementary object 624
+		myObj= CreateGameObject("a_flask_of_port_flasks_of_port_99_99_05_0624",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_190",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_190", "Sprites/OBJECTS_190", "Sprites/OBJECTS_190", 24, 190, 7, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 625
+		myObj= CreateGameObject("an_apple_99_99_05_0625",119.314285f,0.900000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_179",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_179", "Sprites/OBJECTS_179", "Sprites/OBJECTS_179", 24, 179, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 713
+		myObj= CreateGameObject("a_fishing_pole_99_99_05_0713",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_299",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_299", "Sprites/OBJECTS_299", "Sprites/OBJECTS_299", 92, 299, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddFishingPole(myObj);
+		//Supplementary object 714
+		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_99_99_05_0714",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_177",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", "Sprites/OBJECTS_177", 24, 177, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 715
+		myObj= CreateGameObject("a_red_gem_99_99_05_0715",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_163",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", "Sprites/OBJECTS_163", 18, 163, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 716
+		myObj= CreateGameObject("a_candle_99_99_05_0716",119.314285f,1.800000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_146",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", "Sprites/OBJECTS_146", 22, 146, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		CreateLight(myObj, 1, 12, 150, 146);
+		//Supplementary object 745
+		myObj= CreateGameObject("a_lockpick_99_99_05_0745",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_257",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", "Sprites/OBJECTS_257", 79, 257, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddLockpick(myObj);
+		//Supplementary object 746
+		myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_99_99_05_0746",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_181",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_181", "Sprites/OBJECTS_181", "Sprites/OBJECTS_181", 24, 181, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 747
+		myObj= CreateGameObject("a_bottle_of_ale_bottles_of_ale_99_99_05_0747",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_186",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_186", "Sprites/OBJECTS_186", "Sprites/OBJECTS_186", 14, 186, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddPotion(myObj);
+		//Supplementary object 748
+		myObj= CreateGameObject("a_flask_of_port_flasks_of_port_99_99_05_0748",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_190",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_190", "Sprites/OBJECTS_190", "Sprites/OBJECTS_190", 24, 190, 3, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetFood(myObj);
+		//Supplementary object 749
+		myObj= CreateGameObject("a_ruby_rubies_99_99_05_0749",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_162",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", "Sprites/OBJECTS_162", 18, 162, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 750
+		myObj= CreateGameObject("a_lantern_99_99_05_0750",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_144",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_144", "Sprites/OBJECTS_144", "Sprites/OBJECTS_144", 88, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		CreateLantern(myObj, 4, 10, 148, 144);
+		//Supplementary object 808
+		myObj= CreateGameObject("an_oil_flask_99_99_05_0808",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_301",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", "Sprites/OBJECTS_301", 89, 301, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddOil(myObj);
+		//Supplementary object 809
+		myObj= CreateGameObject("some_leeches_bunches_of_leeches_99_99_05_0809",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_293",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_293", "Sprites/OBJECTS_293", "Sprites/OBJECTS_293", 16, 293, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 810
+		myObj= CreateGameObject("a_torch_torches_99_99_05_0810",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_145",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", "Sprites/OBJECTS_145", 22, 145, 2, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
+		CreateLight(myObj, 2, 3, 149, 145);
+		//Supplementary object 812
+		myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_99_99_05_0812",119.314285f,3.300000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_278",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", "Sprites/OBJECTS_278", 16, 278, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 846
+		myObj= CreateGameObject("a_scroll_99_99_05_0846",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_316",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", "Sprites/OBJECTS_316", 11, 316, 682, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetReadable(myObj);
+		SetLink(myObj,682);
+		//Supplementary object 847
+		myObj= CreateGameObject("a_Kal_stone_99_99_05_0847",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_242", "Sprites/OBJECTS_242", 6, 242, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 905
+		myObj= CreateGameObject("a_Flam_stone_99_99_05_0905",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_237", "Sprites/OBJECTS_237", 6, 237, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		SetObjectAsRuneStone(myObj);
+		//Supplementary object 923
+		myObj= CreateGameObject("a_book_99_99_05_0923",119.314285f,3.600000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_276",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_276", "Sprites/OBJECTS_276", "Sprites/OBJECTS_276", 16, 276, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddObj_base(myObj);
+		//Supplementary object 948
+		myObj= CreateGameObject("a_shiny_shield_99_99_05_0948",119.314285f,3.000000f,119.314285f);
+		CreateObjectGraphics(myObj,"Sprites/OBJECTS_055",true);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_055", "Sprites/OBJECTS_055", "Sprites/OBJECTS_055", 78, 55, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		AddShield(myObj);
+
 	
 
 
@@ -5619,4208 +4916,96 @@ public class MyTools
 	static void TagTilesByRoom()
 	{
 
-		SetTileTag(12,62,"SOLIDWALL",1);SetTileTag(24,62,"SOLIDWALL",1);SetTileTag(25,62,"SOLIDWALL",1);SetTileTag(26,62,"SOLIDWALL",1);SetTileTag(51,62,"SOLIDWALL",1);
-		SetTileTag(11,61,"SOLIDWALL",1);SetTileTag(12,61,"LAND_5", 1);SetTileTag(19,61,"LAND_5", 1);SetTileTag(20,61,"SOLIDWALL",1);SetTileTag(21,61,"SOLIDWALL",1);SetTileTag(23,61,"SOLIDWALL",1);SetTileTag(24,61,"LAND_5", 1);SetTileTag(25,61,"LAND_5", 1);SetTileTag(26,61,"LAND_5", 1);SetTileTag(31,61,"SOLIDWALL",1);SetTileTag(48,61,"SOLIDWALL",1);SetTileTag(50,61,"SOLIDWALL",1);SetTileTag(52,61,"LAND_16", 1);SetTileTag(54,61,"SOLIDWALL",1);SetTileTag(55,61,"LAND_17", 1);SetTileTag(60,61,"SOLIDWALL",1);
-		SetTileTag(11,60,"LAND_5", 1);SetTileTag(16,60,"LAND_5", 1);SetTileTag(20,60,"LAND_5", 1);SetTileTag(21,60,"SOLIDWALL",1);SetTileTag(23,60,"SOLIDWALL",1);SetTileTag(24,60,"LAND_5", 1);SetTileTag(25,60,"SOLIDWALL",1);SetTileTag(26,60,"LAND_5", 1);SetTileTag(30,60,"SOLIDWALL",1);SetTileTag(31,60,"LAND_5", 1);SetTileTag(50,60,"SOLIDWALL",1);SetTileTag(52,60,"SOLIDWALL",1);SetTileTag(54,60,"SOLIDWALL",1);SetTileTag(55,60,"SOLIDWALL",1);SetTileTag(56,60,"SOLIDWALL",1);SetTileTag(57,60,"SOLIDWALL",1);SetTileTag(58,60,"SOLIDWALL",1);SetTileTag(59,60,"LAND_17", 1);SetTileTag(60,60,"SOLIDWALL",1);SetTileTag(61,60,"SOLIDWALL",1);
-		SetTileTag(11,59,"LAND_5", 1);SetTileTag(16,59,"LAND_5", 1);SetTileTag(20,59,"LAND_5", 1);SetTileTag(23,59,"LAND_5", 1);SetTileTag(24,59,"LAND_5", 1);SetTileTag(25,59,"SOLIDWALL",1);SetTileTag(26,59,"LAND_5", 1);SetTileTag(27,59,"SOLIDWALL",1);SetTileTag(30,59,"SOLIDWALL",1);SetTileTag(33,59,"LAND_5", 1);SetTileTag(34,59,"LAND_5", 1);SetTileTag(35,59,"LAND_5", 1);SetTileTag(36,59,"LAND_5", 1);SetTileTag(37,59,"LAND_5", 1);SetTileTag(38,59,"LAND_5", 1);SetTileTag(39,59,"LAND_5", 1);SetTileTag(40,59,"LAND_5", 1);SetTileTag(41,59,"LAND_5", 1);SetTileTag(42,59,"LAND_5", 1);SetTileTag(43,59,"LAND_5", 1);SetTileTag(44,59,"LAND_5", 1);SetTileTag(45,59,"LAND_5", 1);SetTileTag(46,59,"LAND_5", 1);SetTileTag(47,59,"LAND_5", 1);SetTileTag(48,59,"LAND_5", 1);SetTileTag(49,59,"SOLIDWALL",1);SetTileTag(50,59,"SOLIDWALL",1);SetTileTag(51,59,"LAND_16", 1);SetTileTag(52,59,"LAND_16", 1);SetTileTag(53,59,"LAND_16", 1);SetTileTag(54,59,"LAND_16", 1);SetTileTag(56,59,"SOLIDWALL",1);
-		SetTileTag(10,58,"SOLIDWALL",1);SetTileTag(11,58,"LAND_5", 1);SetTileTag(12,58,"LAND_5", 1);SetTileTag(19,58,"LAND_5", 1);SetTileTag(20,58,"LAND_5", 1);SetTileTag(21,58,"SOLIDWALL",1);SetTileTag(22,58,"SOLIDWALL",1);SetTileTag(23,58,"SOLIDWALL",1);SetTileTag(24,58,"SOLIDWALL",1);SetTileTag(26,58,"LAND_5", 1);SetTileTag(27,58,"SOLIDWALL",1);SetTileTag(28,58,"SOLIDWALL",1);SetTileTag(30,58,"SOLIDWALL",1);SetTileTag(33,58,"SOLIDWALL",1);SetTileTag(34,58,"SOLIDWALL",1);SetTileTag(38,58,"SOLIDWALL",1);SetTileTag(40,58,"SOLIDWALL",1);SetTileTag(44,58,"SOLIDWALL",1);SetTileTag(48,58,"SOLIDWALL",1);SetTileTag(49,58,"SOLIDWALL",1);SetTileTag(50,58,"SOLIDWALL",1);SetTileTag(51,58,"LAND_16", 1);SetTileTag(52,58,"SOLIDWALL",1);SetTileTag(53,58,"LAND_16", 1);SetTileTag(54,58,"SOLIDWALL",1);SetTileTag(55,58,"SOLIDWALL",1);SetTileTag(56,58,"SOLIDWALL",1);
-		SetTileTag(10,57,"SOLIDWALL",1);SetTileTag(11,57,"SOLIDWALL",1);SetTileTag(12,57,"LAND_5", 1);SetTileTag(13,57,"LAND_5", 1);SetTileTag(14,57,"LAND_5", 1);SetTileTag(15,57,"LAND_5", 1);SetTileTag(16,57,"LAND_5", 1);SetTileTag(17,57,"LAND_5", 1);SetTileTag(18,57,"LAND_5", 1);SetTileTag(19,57,"LAND_5", 1);SetTileTag(20,57,"SOLIDWALL",1);SetTileTag(21,57,"SOLIDWALL",1);SetTileTag(25,57,"SOLIDWALL",1);SetTileTag(30,57,"SOLIDWALL",1);SetTileTag(33,57,"SOLIDWALL",1);SetTileTag(38,57,"SOLIDWALL",1);SetTileTag(43,57,"SOLIDWALL",1);SetTileTag(44,57,"LAND_16", 1);SetTileTag(50,57,"LAND_16", 1);
-		SetTileTag(5,56,"SOLIDWALL",1);SetTileTag(10,56,"SOLIDWALL",1);SetTileTag(12,56,"SOLIDWALL",1);SetTileTag(13,56,"SOLIDWALL",1);SetTileTag(15,56,"SOLIDWALL",1);SetTileTag(16,56,"SOLIDWALL",1);SetTileTag(17,56,"SOLIDWALL",1);SetTileTag(30,56,"SOLIDWALL",1);SetTileTag(33,56,"SOLIDWALL",1);SetTileTag(38,56,"SOLIDWALL",1);SetTileTag(43,56,"SOLIDWALL",1);SetTileTag(44,56,"LAND_16", 1);SetTileTag(45,56,"SOLIDWALL",1);SetTileTag(46,56,"SOLIDWALL",1);SetTileTag(47,56,"SOLIDWALL",1);SetTileTag(48,56,"LAND_16", 1);SetTileTag(49,56,"SOLIDWALL",1);SetTileTag(50,56,"SOLIDWALL",1);
-		SetTileTag(5,55,"LAND_6", 1);SetTileTag(6,55,"LAND_6", 1);SetTileTag(7,55,"LAND_6", 1);SetTileTag(8,55,"LAND_6", 1);SetTileTag(9,55,"LAND_6", 1);SetTileTag(11,55,"SOLIDWALL",1);SetTileTag(12,55,"SOLIDWALL",1);SetTileTag(13,55,"LAND_6", 1);SetTileTag(29,55,"LAND_5", 1);SetTileTag(30,55,"SOLIDWALL",1);SetTileTag(33,55,"SOLIDWALL",1);SetTileTag(34,55,"LAND_5", 1);SetTileTag(38,55,"SOLIDWALL",1);SetTileTag(42,55,"SOLIDWALL",1);SetTileTag(46,55,"SOLIDWALL",1);SetTileTag(59,55,"LAND_17", 1);
-		SetTileTag(5,54,"LAND_6", 1);SetTileTag(7,54,"SOLIDWALL",1);SetTileTag(11,54,"SOLIDWALL",1);SetTileTag(13,54,"SOLIDWALL",1);SetTileTag(15,54,"SOLIDWALL",1);SetTileTag(16,54,"SOLIDWALL",1);SetTileTag(17,54,"SOLIDWALL",1);SetTileTag(18,54,"SOLIDWALL",1);SetTileTag(25,54,"SOLIDWALL",1);SetTileTag(29,54,"LAND_5", 1);SetTileTag(30,54,"SOLIDWALL",1);SetTileTag(33,54,"SOLIDWALL",1);SetTileTag(34,54,"LAND_5", 1);SetTileTag(42,54,"SOLIDWALL",1);
-		SetTileTag(5,53,"LAND_6", 1);SetTileTag(11,53,"SOLIDWALL",1);SetTileTag(12,53,"SOLIDWALL",1);SetTileTag(13,53,"SOLIDWALL",1);SetTileTag(16,53,"SOLIDWALL",1);SetTileTag(17,53,"SOLIDWALL",1);SetTileTag(18,53,"SOLIDWALL",1);SetTileTag(20,53,"SOLIDWALL",1);SetTileTag(25,53,"SOLIDWALL",1);SetTileTag(29,53,"LAND_5", 1);SetTileTag(30,53,"LAND_5", 1);SetTileTag(31,53,"LAND_5", 1);SetTileTag(32,53,"LAND_5", 1);SetTileTag(33,53,"LAND_5", 1);SetTileTag(34,53,"LAND_5", 1);SetTileTag(42,53,"SOLIDWALL",1);SetTileTag(52,53,"SOLIDWALL",1);SetTileTag(53,53,"LAND_16", 1);SetTileTag(54,53,"LAND_16", 1);SetTileTag(55,53,"LAND_16", 1);SetTileTag(56,53,"SOLIDWALL",1);SetTileTag(57,53,"LAND_17", 1);SetTileTag(58,53,"LAND_17", 1);SetTileTag(59,53,"LAND_17", 1);SetTileTag(60,53,"LAND_17", 1);SetTileTag(61,53,"LAND_17", 1);SetTileTag(62,53,"SOLIDWALL",1);
-		SetTileTag(5,52,"LAND_6", 1);SetTileTag(11,52,"SOLIDWALL",1);SetTileTag(12,52,"LAND_6", 1);SetTileTag(13,52,"LAND_6", 1);SetTileTag(14,52,"LAND_6", 1);SetTileTag(15,52,"LAND_6", 1);SetTileTag(16,52,"LAND_6", 1);SetTileTag(17,52,"LAND_6", 1);SetTileTag(18,52,"LAND_6", 1);SetTileTag(22,52,"SOLIDWALL",1);SetTileTag(23,52,"SOLIDWALL",1);SetTileTag(25,52,"SOLIDWALL",1);SetTileTag(29,52,"LAND_5", 1);SetTileTag(30,52,"SOLIDWALL",1);SetTileTag(31,52,"LAND_5", 1);SetTileTag(32,52,"LAND_5", 1);SetTileTag(33,52,"SOLIDWALL",1);SetTileTag(34,52,"LAND_5", 1);SetTileTag(38,52,"SOLIDWALL",1);SetTileTag(39,52,"SOLIDWALL",1);SetTileTag(41,52,"SOLIDWALL",1);SetTileTag(42,52,"SOLIDWALL",1);SetTileTag(43,52,"LAND_16", 1);SetTileTag(44,52,"LAND_16", 1);SetTileTag(45,52,"LAND_16", 1);SetTileTag(46,52,"SOLIDWALL",1);SetTileTag(47,52,"LAND_16", 1);SetTileTag(48,52,"LAND_16", 1);SetTileTag(49,52,"LAND_16", 1);SetTileTag(50,52,"SOLIDWALL",1);SetTileTag(52,52,"SOLIDWALL",1);SetTileTag(53,52,"SOLIDWALL",1);SetTileTag(57,52,"SOLIDWALL",1);SetTileTag(61,52,"SOLIDWALL",1);
-		SetTileTag(4,51,"SOLIDWALL",1);SetTileTag(5,51,"LAND_6", 1);SetTileTag(12,51,"LAND_6", 1);SetTileTag(13,51,"SOLIDWALL",1);SetTileTag(14,51,"SOLIDWALL",1);SetTileTag(17,51,"SOLIDWALL",1);SetTileTag(18,51,"SOLIDWALL",1);SetTileTag(19,51,"LAND_6", 1);SetTileTag(20,51,"SOLIDWALL",1);SetTileTag(23,51,"LAND_5", 1);SetTileTag(25,51,"LAND_5", 1);SetTileTag(30,51,"SOLIDWALL",1);SetTileTag(31,51,"LAND_5", 1);SetTileTag(32,51,"LAND_5", 1);SetTileTag(33,51,"SOLIDWALL",1);SetTileTag(38,51,"LAND_5", 1);SetTileTag(39,51,"LAND_5", 1);SetTileTag(42,51,"SOLIDWALL",1);SetTileTag(43,51,"SOLIDWALL",1);SetTileTag(47,51,"SOLIDWALL",1);SetTileTag(50,51,"SOLIDWALL",1);SetTileTag(56,51,"SOLIDWALL",1);SetTileTag(60,51,"SOLIDWALL",1);
-		SetTileTag(3,50,"SOLIDWALL",1);SetTileTag(4,50,"SOLIDWALL",1);SetTileTag(6,50,"SOLIDWALL",1);SetTileTag(7,50,"SOLIDWALL",1);SetTileTag(12,50,"LAND_6", 1);SetTileTag(13,50,"SOLIDWALL",1);SetTileTag(21,50,"SOLIDWALL",1);SetTileTag(22,50,"LAND_5", 1);SetTileTag(23,50,"SOLIDWALL",1);SetTileTag(30,50,"SOLIDWALL",1);SetTileTag(31,50,"LAND_5", 1);SetTileTag(32,50,"LAND_5", 1);SetTileTag(33,50,"SOLIDWALL",1);SetTileTag(38,50,"SOLIDWALL",1);SetTileTag(39,50,"SOLIDWALL",1);SetTileTag(41,50,"LAND_5", 1);SetTileTag(46,50,"SOLIDWALL",1);
-		SetTileTag(4,49,"LAND_6", 1);SetTileTag(5,49,"LAND_6", 1);SetTileTag(6,49,"LAND_6", 1);SetTileTag(12,49,"LAND_6", 1);SetTileTag(13,49,"SOLIDWALL",1);SetTileTag(21,49,"SOLIDWALL",1);SetTileTag(22,49,"LAND_5", 1);SetTileTag(23,49,"SOLIDWALL",1);SetTileTag(25,49,"SOLIDWALL",1);SetTileTag(26,49,"LAND_5", 1);SetTileTag(27,49,"LAND_5", 1);SetTileTag(28,49,"LAND_5", 1);SetTileTag(29,49,"LAND_5", 1);SetTileTag(30,49,"SOLIDWALL",1);SetTileTag(31,49,"LAND_5", 1);SetTileTag(32,49,"LAND_5", 1);SetTileTag(33,49,"SOLIDWALL",1);SetTileTag(34,49,"LAND_5", 1);SetTileTag(35,49,"LAND_5", 1);SetTileTag(36,49,"LAND_5", 1);SetTileTag(37,49,"LAND_5", 1);SetTileTag(38,49,"SOLIDWALL",1);SetTileTag(40,49,"SOLIDWALL",1);SetTileTag(56,49,"SOLIDWALL",1);SetTileTag(60,49,"SOLIDWALL",1);
-		SetTileTag(2,48,"SOLIDWALL",1);SetTileTag(5,48,"LAND_6", 1);SetTileTag(6,48,"SOLIDWALL",1);SetTileTag(12,48,"LAND_6", 1);SetTileTag(23,48,"SOLIDWALL",1);SetTileTag(24,48,"SOLIDWALL",1);SetTileTag(26,48,"SOLIDWALL",1);SetTileTag(27,48,"LAND_5", 1);SetTileTag(28,48,"SOLIDWALL",1);SetTileTag(29,48,"SOLIDWALL",1);SetTileTag(30,48,"SOLIDWALL",1);SetTileTag(31,48,"LAND_5", 1);SetTileTag(32,48,"LAND_5", 1);SetTileTag(33,48,"SOLIDWALL",1);SetTileTag(34,48,"SOLIDWALL",1);SetTileTag(35,48,"SOLIDWALL",1);SetTileTag(36,48,"LAND_5", 1);SetTileTag(37,48,"SOLIDWALL",1);SetTileTag(38,48,"SOLIDWALL",1);SetTileTag(39,48,"SOLIDWALL",1);SetTileTag(40,48,"SOLIDWALL",1);SetTileTag(46,48,"SOLIDWALL",1);SetTileTag(52,48,"SOLIDWALL",1);SetTileTag(53,48,"LAND_16", 1);SetTileTag(54,48,"LAND_16", 1);SetTileTag(55,48,"LAND_16", 1);SetTileTag(56,48,"SOLIDWALL",1);SetTileTag(57,48,"LAND_16", 1);SetTileTag(58,48,"LAND_16", 1);SetTileTag(59,48,"LAND_16", 1);SetTileTag(60,48,"SOLIDWALL",1);
-		SetTileTag(2,47,"SOLIDWALL",1);SetTileTag(11,47,"SOLIDWALL",1);SetTileTag(12,47,"SOLIDWALL",1);SetTileTag(23,47,"LAND_5", 1);SetTileTag(26,47,"SOLIDWALL",1);SetTileTag(27,47,"LAND_5", 1);SetTileTag(30,47,"SOLIDWALL",1);SetTileTag(31,47,"LAND_5", 1);SetTileTag(33,47,"SOLIDWALL",1);SetTileTag(34,47,"LAND_5", 1);SetTileTag(37,47,"SOLIDWALL",1);SetTileTag(39,47,"LAND_5", 1);SetTileTag(42,47,"SOLIDWALL",1);SetTileTag(43,47,"LAND_16", 1);SetTileTag(44,47,"LAND_16", 1);SetTileTag(45,47,"LAND_16", 1);SetTileTag(46,47,"SOLIDWALL",1);SetTileTag(47,47,"LAND_16", 1);SetTileTag(48,47,"LAND_16", 1);SetTileTag(49,47,"LAND_16", 1);SetTileTag(50,47,"SOLIDWALL",1);SetTileTag(52,47,"SOLIDWALL",1);SetTileTag(53,47,"SOLIDWALL",1);SetTileTag(54,47,"LAND_16", 1);SetTileTag(55,47,"SOLIDWALL",1);SetTileTag(56,47,"SOLIDWALL",1);SetTileTag(57,47,"SOLIDWALL",1);SetTileTag(58,47,"LAND_16", 1);SetTileTag(59,47,"SOLIDWALL",1);
-		SetTileTag(2,46,"SOLIDWALL",1);SetTileTag(11,46,"SOLIDWALL",1);SetTileTag(12,46,"SOLIDWALL",1);SetTileTag(23,46,"SOLIDWALL",1);SetTileTag(24,46,"SOLIDWALL",1);SetTileTag(25,46,"LAND_5", 1);SetTileTag(26,46,"SOLIDWALL",1);SetTileTag(27,46,"SOLIDWALL",1);SetTileTag(30,46,"SOLIDWALL",1);SetTileTag(31,46,"LAND_5", 1);SetTileTag(32,46,"SOLIDWALL",1);SetTileTag(33,46,"SOLIDWALL",1);SetTileTag(34,46,"SOLIDWALL",1);SetTileTag(37,46,"SOLIDWALL",1);SetTileTag(38,46,"LAND_5", 1);SetTileTag(39,46,"SOLIDWALL",1);SetTileTag(40,46,"SOLIDWALL",1);SetTileTag(43,46,"SOLIDWALL",1);SetTileTag(44,46,"LAND_16", 1);SetTileTag(45,46,"SOLIDWALL",1);SetTileTag(46,46,"SOLIDWALL",1);SetTileTag(47,46,"SOLIDWALL",1);SetTileTag(48,46,"LAND_16", 1);SetTileTag(49,46,"SOLIDWALL",1);SetTileTag(50,46,"SOLIDWALL",1);SetTileTag(52,46,"LAND_16", 1);SetTileTag(53,46,"LAND_16", 1);SetTileTag(59,46,"SOLIDWALL",1);
-		SetTileTag(10,45,"LAND_6", 1);SetTileTag(11,45,"LAND_6", 1);SetTileTag(23,45,"SOLIDWALL",1);SetTileTag(24,45,"LAND_5", 1);SetTileTag(29,45,"LAND_5", 1);SetTileTag(30,45,"LAND_5", 1);SetTileTag(31,45,"LAND_5", 1);SetTileTag(32,45,"LAND_5", 1);SetTileTag(33,45,"LAND_5", 1);SetTileTag(39,45,"LAND_5", 1);SetTileTag(40,45,"SOLIDWALL",1);SetTileTag(43,45,"SOLIDWALL",1);SetTileTag(44,45,"LAND_16", 1);SetTileTag(50,45,"LAND_16", 1);SetTileTag(52,45,"SOLIDWALL",1);SetTileTag(53,45,"SOLIDWALL",1);SetTileTag(54,45,"LAND_16", 1);SetTileTag(55,45,"SOLIDWALL",1);SetTileTag(56,45,"SOLIDWALL",1);SetTileTag(57,45,"SOLIDWALL",1);SetTileTag(58,45,"LAND_16", 1);SetTileTag(59,45,"SOLIDWALL",1);
-		SetTileTag(7,44,"SOLIDWALL",1);SetTileTag(8,44,"LAND_6", 1);SetTileTag(9,44,"SOLIDWALL",1);SetTileTag(10,44,"SOLIDWALL",1);SetTileTag(11,44,"SOLIDWALL",1);SetTileTag(12,44,"SOLIDWALL",1);SetTileTag(13,44,"SOLIDWALL",1);SetTileTag(23,44,"LAND_5", 1);SetTileTag(24,44,"LAND_5", 1);SetTileTag(27,44,"LAND_5", 1);SetTileTag(30,44,"LAND_5", 1);SetTileTag(36,44,"LAND_5", 1);SetTileTag(39,44,"LAND_5", 1);SetTileTag(40,44,"LAND_5", 1);SetTileTag(42,44,"SOLIDWALL",1);SetTileTag(43,44,"SOLIDWALL",1);SetTileTag(44,44,"LAND_16", 1);SetTileTag(45,44,"SOLIDWALL",1);SetTileTag(46,44,"SOLIDWALL",1);SetTileTag(47,44,"SOLIDWALL",1);SetTileTag(48,44,"LAND_16", 1);SetTileTag(49,44,"SOLIDWALL",1);SetTileTag(50,44,"SOLIDWALL",1);SetTileTag(56,44,"SOLIDWALL",1);
-		SetTileTag(2,43,"SOLIDWALL",1);SetTileTag(6,43,"SOLIDWALL",1);SetTileTag(8,43,"SOLIDWALL",1);SetTileTag(13,43,"SOLIDWALL",1);SetTileTag(14,43,"LAND_6", 1);SetTileTag(15,43,"LAND_6", 1);SetTileTag(16,43,"LAND_6", 1);SetTileTag(17,43,"LAND_6", 1);SetTileTag(18,43,"LAND_6", 1);SetTileTag(19,43,"LAND_6", 1);SetTileTag(20,43,"SOLIDWALL",1);SetTileTag(23,43,"SOLIDWALL",1);SetTileTag(24,43,"LAND_5", 1);SetTileTag(26,43,"LAND_5", 1);SetTileTag(27,43,"LAND_5", 1);SetTileTag(28,43,"LAND_5", 1);SetTileTag(35,43,"LAND_5", 1);SetTileTag(36,43,"LAND_5", 1);SetTileTag(37,43,"LAND_5", 1);SetTileTag(39,43,"LAND_5", 1);SetTileTag(40,43,"SOLIDWALL",1);SetTileTag(46,43,"SOLIDWALL",1);
-		SetTileTag(2,42,"SOLIDWALL",1);SetTileTag(3,42,"LAND_6", 1);SetTileTag(4,42,"LAND_6", 1);SetTileTag(5,42,"LAND_6", 1);SetTileTag(6,42,"SOLIDWALL",1);SetTileTag(14,42,"SOLIDWALL",1);SetTileTag(23,42,"LAND_5", 1);SetTileTag(24,42,"LAND_5", 1);SetTileTag(26,42,"LAND_5", 1);SetTileTag(27,42,"SOLIDWALL",1);SetTileTag(28,42,"LAND_5", 1);SetTileTag(35,42,"LAND_5", 1);SetTileTag(36,42,"SOLIDWALL",1);SetTileTag(37,42,"LAND_5", 1);SetTileTag(39,42,"LAND_5", 1);SetTileTag(40,42,"LAND_5", 1);SetTileTag(56,42,"SOLIDWALL",1);
-		SetTileTag(2,41,"SOLIDWALL",1);SetTileTag(3,41,"SOLIDWALL",1);SetTileTag(9,41,"SOLIDWALL",1);SetTileTag(10,41,"SOLIDWALL",1);SetTileTag(11,41,"SOLIDWALL",1);SetTileTag(23,41,"SOLIDWALL",1);SetTileTag(24,41,"LAND_5", 1);SetTileTag(27,41,"LAND_5", 1);SetTileTag(30,41,"LAND_5", 1);SetTileTag(31,41,"LAND_5", 1);SetTileTag(32,41,"LAND_5", 1);SetTileTag(33,41,"LAND_5", 1);SetTileTag(36,41,"LAND_5", 1);SetTileTag(39,41,"LAND_5", 1);SetTileTag(40,41,"SOLIDWALL",1);SetTileTag(46,41,"SOLIDWALL",1);SetTileTag(52,41,"SOLIDWALL",1);SetTileTag(53,41,"LAND_16", 1);SetTileTag(54,41,"LAND_16", 1);SetTileTag(55,41,"LAND_16", 1);SetTileTag(56,41,"SOLIDWALL",1);SetTileTag(57,41,"LAND_16", 1);SetTileTag(58,41,"LAND_16", 1);SetTileTag(59,41,"LAND_16", 1);SetTileTag(60,41,"SOLIDWALL",1);
-		SetTileTag(1,40,"SOLIDWALL",1);SetTileTag(2,40,"LAND_5", 1);SetTileTag(15,40,"SOLIDWALL",1);SetTileTag(21,40,"SOLIDWALL",1);SetTileTag(23,40,"LAND_5", 1);SetTileTag(24,40,"LAND_5", 1);SetTileTag(26,40,"LAND_5", 1);SetTileTag(29,40,"LAND_5", 1);SetTileTag(30,40,"LAND_5", 1);SetTileTag(34,40,"LAND_5", 1);SetTileTag(37,40,"LAND_5", 1);SetTileTag(39,40,"LAND_5", 1);SetTileTag(40,40,"LAND_5", 1);SetTileTag(42,40,"SOLIDWALL",1);SetTileTag(43,40,"LAND_16", 1);SetTileTag(44,40,"LAND_16", 1);SetTileTag(45,40,"LAND_16", 1);SetTileTag(46,40,"SOLIDWALL",1);SetTileTag(47,40,"LAND_16", 1);SetTileTag(48,40,"LAND_16", 1);SetTileTag(49,40,"LAND_16", 1);SetTileTag(50,40,"SOLIDWALL",1);SetTileTag(52,40,"SOLIDWALL",1);SetTileTag(53,40,"SOLIDWALL",1);SetTileTag(57,40,"SOLIDWALL",1);SetTileTag(60,40,"SOLIDWALL",1);
-		SetTileTag(1,39,"SOLIDWALL",1);SetTileTag(2,39,"LAND_5", 1);SetTileTag(3,39,"LAND_5", 1);SetTileTag(4,39,"SOLIDWALL",1);SetTileTag(6,39,"SOLIDWALL",1);SetTileTag(7,39,"SOLIDWALL",1);SetTileTag(8,39,"SOLIDWALL",1);SetTileTag(9,39,"LAND_5", 1);SetTileTag(10,39,"SOLIDWALL",1);SetTileTag(11,39,"SOLIDWALL",1);SetTileTag(12,39,"SOLIDWALL",1);SetTileTag(13,39,"SOLIDWALL",1);SetTileTag(14,39,"LAND_5", 1);SetTileTag(15,39,"SOLIDWALL",1);SetTileTag(16,39,"SOLIDWALL",1);SetTileTag(21,39,"SOLIDWALL",1);SetTileTag(23,39,"SOLIDWALL",1);SetTileTag(24,39,"LAND_5", 1);SetTileTag(25,39,"LAND_5", 1);SetTileTag(26,39,"LAND_5", 1);SetTileTag(27,39,"LAND_5", 1);SetTileTag(28,39,"LAND_5", 1);SetTileTag(29,39,"LAND_5", 1);SetTileTag(35,39,"LAND_5", 1);SetTileTag(36,39,"LAND_5", 1);SetTileTag(37,39,"LAND_5", 1);SetTileTag(38,39,"LAND_5", 1);SetTileTag(39,39,"LAND_5", 1);SetTileTag(40,39,"SOLIDWALL",1);SetTileTag(42,39,"SOLIDWALL",1);SetTileTag(43,39,"SOLIDWALL",1);SetTileTag(44,39,"SOLIDWALL",1);SetTileTag(50,39,"SOLIDWALL",1);SetTileTag(52,39,"SOLIDWALL",1);SetTileTag(56,39,"SOLIDWALL",1);SetTileTag(57,39,"LAND_16", 1);
-		SetTileTag(3,38,"SOLIDWALL",1);SetTileTag(13,38,"LAND_5", 1);SetTileTag(15,38,"LAND_5", 1);SetTileTag(21,38,"SOLIDWALL",1);SetTileTag(23,38,"SOLIDWALL",1);SetTileTag(24,38,"SOLIDWALL",1);SetTileTag(26,38,"SOLIDWALL",1);SetTileTag(28,38,"SOLIDWALL",1);SetTileTag(29,38,"SOLIDWALL",1);SetTileTag(30,38,"SOLIDWALL",1);SetTileTag(31,38,"SOLIDWALL",1);SetTileTag(32,38,"LAND_5", 1);SetTileTag(33,38,"SOLIDWALL",1);SetTileTag(34,38,"SOLIDWALL",1);SetTileTag(35,38,"SOLIDWALL",1);SetTileTag(37,38,"SOLIDWALL",1);SetTileTag(39,38,"SOLIDWALL",1);SetTileTag(40,38,"SOLIDWALL",1);SetTileTag(42,38,"SOLIDWALL",1);SetTileTag(43,38,"SOLIDWALL",1);SetTileTag(44,38,"LAND_16", 1);SetTileTag(50,38,"LAND_16", 1);SetTileTag(54,38,"SOLIDWALL",1);SetTileTag(57,38,"LAND_16", 1);SetTileTag(59,38,"LAND_16", 1);SetTileTag(60,38,"LAND_16", 1);
-		SetTileTag(6,37,"SOLIDWALL",1);SetTileTag(7,37,"SOLIDWALL",1);SetTileTag(12,37,"LAND_5", 1);SetTileTag(13,37,"LAND_5", 1);SetTileTag(14,37,"LAND_5", 1);SetTileTag(22,37,"LAND_5", 1);SetTileTag(23,37,"LAND_5", 1);SetTileTag(25,37,"LAND_5", 1);SetTileTag(26,37,"LAND_5", 1);SetTileTag(27,37,"LAND_5", 1);SetTileTag(28,37,"SOLIDWALL",1);SetTileTag(29,37,"LAND_5", 1);SetTileTag(31,37,"LAND_5", 1);SetTileTag(32,37,"LAND_5", 1);SetTileTag(33,37,"LAND_5", 1);SetTileTag(34,37,"LAND_5", 1);SetTileTag(35,37,"SOLIDWALL",1);SetTileTag(36,37,"LAND_5", 1);SetTileTag(37,37,"LAND_5", 1);SetTileTag(38,37,"LAND_5", 1);SetTileTag(39,37,"LAND_5", 1);SetTileTag(41,37,"LAND_5", 1);SetTileTag(42,37,"SOLIDWALL",1);SetTileTag(43,37,"SOLIDWALL",1);SetTileTag(44,37,"LAND_16", 1);SetTileTag(45,37,"SOLIDWALL",1);SetTileTag(46,37,"SOLIDWALL",1);SetTileTag(47,37,"SOLIDWALL",1);SetTileTag(48,37,"LAND_16", 1);SetTileTag(49,37,"SOLIDWALL",1);SetTileTag(50,37,"SOLIDWALL",1);SetTileTag(59,37,"LAND_16", 1);SetTileTag(60,37,"LAND_16", 1);
-		SetTileTag(6,36,"SOLIDWALL",1);SetTileTag(7,36,"SOLIDWALL",1);SetTileTag(8,36,"LAND_5", 1);SetTileTag(10,36,"LAND_5", 1);SetTileTag(12,36,"LAND_5", 1);SetTileTag(13,36,"LAND_5", 1);SetTileTag(14,36,"LAND_5", 1);SetTileTag(22,36,"SOLIDWALL",1);SetTileTag(23,36,"SOLIDWALL",1);SetTileTag(24,36,"SOLIDWALL",1);SetTileTag(25,36,"SOLIDWALL",1);SetTileTag(26,36,"SOLIDWALL",1);SetTileTag(28,36,"LAND_5", 1);SetTileTag(30,36,"LAND_5", 1);SetTileTag(31,36,"LAND_5", 1);SetTileTag(33,36,"LAND_5", 1);SetTileTag(35,36,"LAND_5", 1);SetTileTag(36,36,"SOLIDWALL",1);SetTileTag(38,36,"SOLIDWALL",1);SetTileTag(39,36,"SOLIDWALL",1);SetTileTag(40,36,"SOLIDWALL",1);SetTileTag(41,36,"SOLIDWALL",1);SetTileTag(42,36,"SOLIDWALL",1);SetTileTag(46,36,"SOLIDWALL",1);SetTileTag(59,36,"LAND_16", 1);SetTileTag(60,36,"LAND_16", 1);
-		SetTileTag(5,35,"LAND_5", 1);SetTileTag(6,35,"LAND_5", 1);SetTileTag(7,35,"SOLIDWALL",1);SetTileTag(8,35,"LAND_5", 1);SetTileTag(9,35,"LAND_5", 1);SetTileTag(10,35,"LAND_5", 1);SetTileTag(11,35,"SOLIDWALL",1);SetTileTag(26,35,"SOLIDWALL",1);SetTileTag(27,35,"LAND_5", 1);SetTileTag(29,35,"LAND_5", 1);SetTileTag(30,35,"LAND_5", 1);SetTileTag(31,35,"SOLIDWALL",1);SetTileTag(32,35,"SOLIDWALL",1);SetTileTag(33,35,"LAND_5", 1);SetTileTag(34,35,"LAND_5", 1);SetTileTag(36,35,"LAND_5", 1);SetTileTag(37,35,"SOLIDWALL",1);SetTileTag(42,35,"SOLIDWALL",1);SetTileTag(43,35,"LAND_16", 1);SetTileTag(44,35,"LAND_16", 1);SetTileTag(45,35,"LAND_16", 1);SetTileTag(46,35,"SOLIDWALL",1);SetTileTag(47,35,"LAND_16", 1);SetTileTag(48,35,"LAND_16", 1);SetTileTag(49,35,"LAND_16", 1);SetTileTag(50,35,"SOLIDWALL",1);SetTileTag(52,35,"SOLIDWALL",1);SetTileTag(53,35,"SOLIDWALL",1);
-		SetTileTag(3,34,"SOLIDWALL",1);SetTileTag(4,34,"SOLIDWALL",1);SetTileTag(5,34,"LAND_5", 1);SetTileTag(6,34,"LAND_5", 1);SetTileTag(7,34,"LAND_5", 1);SetTileTag(8,34,"SOLIDWALL",1);SetTileTag(9,34,"SOLIDWALL",1);SetTileTag(10,34,"SOLIDWALL",1);SetTileTag(11,34,"SOLIDWALL",1);SetTileTag(12,34,"WATER_1", 1);SetTileTag(13,34,"WATER_1", 1);SetTileTag(14,34,"WATER_1", 1);SetTileTag(15,34,"LAND_5", 1);SetTileTag(16,34,"LAND_5", 1);SetTileTag(17,34,"LAND_5", 1);SetTileTag(18,34,"LAND_5", 1);SetTileTag(19,34,"LAND_5", 1);SetTileTag(20,34,"LAND_5", 1);SetTileTag(21,34,"SOLIDWALL",1);SetTileTag(25,34,"SOLIDWALL",1);SetTileTag(26,34,"LAND_5", 1);SetTileTag(28,34,"LAND_5", 1);SetTileTag(29,34,"LAND_5", 1);SetTileTag(30,34,"SOLIDWALL",1);SetTileTag(33,34,"SOLIDWALL",1);SetTileTag(34,34,"LAND_5", 1);SetTileTag(35,34,"LAND_5", 1);SetTileTag(37,34,"LAND_5", 1);SetTileTag(38,34,"SOLIDWALL",1);SetTileTag(43,34,"SOLIDWALL",1);SetTileTag(44,34,"SOLIDWALL",1);SetTileTag(47,34,"SOLIDWALL",1);SetTileTag(49,34,"SOLIDWALL",1);SetTileTag(50,34,"SOLIDWALL",1);SetTileTag(51,34,"LAND_16", 1);SetTileTag(52,34,"LAND_16", 1);SetTileTag(54,34,"LAND_16", 1);SetTileTag(55,34,"LAND_16", 1);SetTileTag(56,34,"LAND_16", 1);SetTileTag(57,34,"LAND_16", 1);SetTileTag(58,34,"SOLIDWALL",1);SetTileTag(59,34,"LAND_16", 1);SetTileTag(60,34,"LAND_16", 1);
-		SetTileTag(2,33,"LAND_5", 1);SetTileTag(3,33,"LAND_5", 1);SetTileTag(4,33,"SOLIDWALL",1);SetTileTag(5,33,"SOLIDWALL",1);SetTileTag(6,33,"LAND_5", 1);SetTileTag(7,33,"LAND_5", 1);SetTileTag(8,33,"LAND_5", 1);SetTileTag(9,33,"SOLIDWALL",1);SetTileTag(10,33,"SOLIDWALL",1);SetTileTag(11,33,"SOLIDWALL",1);SetTileTag(12,33,"SOLIDWALL",1);SetTileTag(18,33,"SOLIDWALL",1);SetTileTag(19,33,"SOLIDWALL",1);SetTileTag(20,33,"SOLIDWALL",1);SetTileTag(21,33,"SOLIDWALL",1);SetTileTag(22,33,"SOLIDWALL",1);SetTileTag(23,33,"SOLIDWALL",1);SetTileTag(24,33,"SOLIDWALL",1);SetTileTag(25,33,"LAND_5", 1);SetTileTag(27,33,"LAND_5", 1);SetTileTag(28,33,"LAND_5", 1);SetTileTag(29,33,"SOLIDWALL",1);SetTileTag(34,33,"SOLIDWALL",1);SetTileTag(35,33,"LAND_5", 1);SetTileTag(36,33,"LAND_5", 1);SetTileTag(38,33,"LAND_5", 1);SetTileTag(39,33,"SOLIDWALL",1);SetTileTag(40,33,"SOLIDWALL",1);SetTileTag(41,33,"SOLIDWALL",1);SetTileTag(42,33,"SOLIDWALL",1);SetTileTag(43,33,"SOLIDWALL",1);SetTileTag(44,33,"SOLIDWALL",1);SetTileTag(45,33,"SOLIDWALL",1);SetTileTag(48,33,"SOLIDWALL",1);SetTileTag(50,33,"SOLIDWALL",1);SetTileTag(51,33,"SOLIDWALL",1);SetTileTag(57,33,"SOLIDWALL",1);SetTileTag(58,33,"SOLIDWALL",1);SetTileTag(59,33,"SOLIDWALL",1);SetTileTag(60,33,"SOLIDWALL",1);
-		SetTileTag(1,32,"SOLIDWALL",1);SetTileTag(2,32,"LAND_5", 1);SetTileTag(3,32,"LAND_5", 1);SetTileTag(4,32,"LAND_5", 1);SetTileTag(5,32,"SOLIDWALL",1);SetTileTag(6,32,"SOLIDWALL",1);SetTileTag(7,32,"LAND_5", 1);SetTileTag(8,32,"LAND_5", 1);SetTileTag(9,32,"LAND_5", 1);SetTileTag(18,32,"LAND_5", 1);SetTileTag(19,32,"LAND_5", 1);SetTileTag(20,32,"LAND_5", 1);SetTileTag(21,32,"LAND_5", 1);SetTileTag(24,32,"LAND_5", 1);SetTileTag(28,32,"SOLIDWALL",1);SetTileTag(35,32,"SOLIDWALL",1);SetTileTag(39,32,"LAND_5", 1);SetTileTag(40,32,"LAND_5", 1);SetTileTag(41,32,"LAND_5", 1);SetTileTag(42,32,"LAND_5", 1);SetTileTag(46,32,"LAND_5", 1);SetTileTag(47,32,"SOLIDWALL",1);SetTileTag(49,32,"LAND_15", 1);SetTileTag(50,32,"LAND_15", 1);SetTileTag(51,32,"LAND_15", 1);SetTileTag(52,32,"LAND_15", 1);SetTileTag(53,32,"LAND_15", 1);SetTileTag(54,32,"LAND_15", 1);SetTileTag(55,32,"LAND_15", 1);SetTileTag(56,32,"LAND_15", 1);SetTileTag(57,32,"LAND_15", 1);SetTileTag(58,32,"LAND_15", 1);
-		SetTileTag(2,31,"SOLIDWALL",1);SetTileTag(3,31,"LAND_5", 1);SetTileTag(4,31,"LAND_5", 1);SetTileTag(5,31,"SOLIDWALL",1);SetTileTag(7,31,"SOLIDWALL",1);SetTileTag(8,31,"LAND_5", 1);SetTileTag(9,31,"LAND_5", 1);SetTileTag(10,31,"LAND_5", 1);SetTileTag(11,31,"LAND_5", 1);SetTileTag(12,31,"LAND_5", 1);SetTileTag(13,31,"LAND_5", 1);SetTileTag(14,31,"LAND_5", 1);SetTileTag(15,31,"LAND_5", 1);SetTileTag(16,31,"LAND_5", 1);SetTileTag(17,31,"LAND_5", 1);SetTileTag(18,31,"LAND_5", 1);SetTileTag(19,31,"LAND_5", 1);SetTileTag(20,31,"LAND_5", 1);SetTileTag(21,31,"LAND_5", 1);SetTileTag(22,31,"LAND_5", 1);SetTileTag(23,31,"LAND_5", 1);SetTileTag(24,31,"LAND_5", 1);SetTileTag(25,31,"LAND_5", 1);SetTileTag(27,31,"LAND_5", 1);SetTileTag(28,31,"SOLIDWALL",1);SetTileTag(35,31,"SOLIDWALL",1);SetTileTag(36,31,"LAND_5", 1);SetTileTag(38,31,"LAND_5", 1);SetTileTag(39,31,"LAND_5", 1);SetTileTag(40,31,"LAND_5", 1);SetTileTag(41,31,"LAND_5", 1);SetTileTag(42,31,"LAND_5", 1);SetTileTag(44,31,"LAND_5", 1);SetTileTag(45,31,"LAND_5", 1);SetTileTag(46,31,"LAND_5", 1);SetTileTag(47,31,"SOLIDWALL",1);SetTileTag(48,31,"LAND_15", 1);SetTileTag(49,31,"LAND_15", 1);SetTileTag(50,31,"LAND_15", 1);SetTileTag(51,31,"LAND_15", 1);SetTileTag(52,31,"LAND_15", 1);SetTileTag(53,31,"LAND_15", 1);SetTileTag(54,31,"LAND_15", 1);SetTileTag(55,31,"LAND_15", 1);SetTileTag(56,31,"LAND_15", 1);SetTileTag(57,31,"LAND_15", 1);SetTileTag(58,31,"LAND_15", 1);SetTileTag(59,31,"LAND_15", 1);
-		SetTileTag(3,30,"SOLIDWALL",1);SetTileTag(4,30,"SOLIDWALL",1);SetTileTag(5,30,"SOLIDWALL",1);SetTileTag(7,30,"SOLIDWALL",1);SetTileTag(8,30,"SOLIDWALL",1);SetTileTag(9,30,"SOLIDWALL",1);SetTileTag(10,30,"SOLIDWALL",1);SetTileTag(11,30,"SOLIDWALL",1);SetTileTag(12,30,"SOLIDWALL",1);SetTileTag(13,30,"SOLIDWALL",1);SetTileTag(17,30,"SOLIDWALL",1);SetTileTag(18,30,"SOLIDWALL",1);SetTileTag(19,30,"SOLIDWALL",1);SetTileTag(20,30,"SOLIDWALL",1);SetTileTag(21,30,"SOLIDWALL",1);SetTileTag(24,30,"SOLIDWALL",1);SetTileTag(25,30,"LAND_5", 1);SetTileTag(26,30,"LAND_5", 1);SetTileTag(28,30,"LAND_5", 1);SetTileTag(29,30,"SOLIDWALL",1);SetTileTag(34,30,"SOLIDWALL",1);SetTileTag(35,30,"LAND_5", 1);SetTileTag(37,30,"LAND_5", 1);SetTileTag(38,30,"LAND_5", 1);SetTileTag(39,30,"SOLIDWALL",1);SetTileTag(40,30,"SOLIDWALL",1);SetTileTag(41,30,"SOLIDWALL",1);SetTileTag(42,30,"SOLIDWALL",1);SetTileTag(43,30,"LAND_5", 1);SetTileTag(44,30,"SOLIDWALL",1);SetTileTag(45,30,"SOLIDWALL",1);SetTileTag(48,30,"SOLIDWALL",1);SetTileTag(52,30,"SOLIDWALL",1);SetTileTag(53,30,"SOLIDWALL",1);SetTileTag(54,30,"SOLIDWALL",1);SetTileTag(57,30,"SOLIDWALL",1);SetTileTag(58,30,"SOLIDWALL",1);SetTileTag(59,30,"SOLIDWALL",1);
-		SetTileTag(3,29,"SOLIDWALL",1);SetTileTag(4,29,"LAND_1", 1);SetTileTag(8,29,"LAND_1", 1);SetTileTag(9,29,"SOLIDWALL",1);SetTileTag(10,29,"SOLIDWALL",1);SetTileTag(12,29,"SOLIDWALL",1);SetTileTag(13,29,"LAND_5", 1);SetTileTag(14,29,"LAND_5", 1);SetTileTag(19,29,"LAND_5", 1);SetTileTag(21,29,"LAND_5", 1);SetTileTag(22,29,"SOLIDWALL",1);SetTileTag(25,29,"SOLIDWALL",1);SetTileTag(26,29,"LAND_5", 1);SetTileTag(27,29,"LAND_5", 1);SetTileTag(29,29,"LAND_5", 1);SetTileTag(30,29,"SOLIDWALL",1);SetTileTag(33,29,"SOLIDWALL",1);SetTileTag(34,29,"LAND_5", 1);SetTileTag(36,29,"LAND_5", 1);SetTileTag(37,29,"LAND_5", 1);SetTileTag(38,29,"SOLIDWALL",1);SetTileTag(39,29,"SOLIDWALL",1);SetTileTag(40,29,"SOLIDWALL",1);SetTileTag(41,29,"SOLIDWALL",1);SetTileTag(43,29,"SOLIDWALL",1);SetTileTag(44,29,"SOLIDWALL",1);SetTileTag(46,29,"LAND_15", 1);SetTileTag(48,29,"SOLIDWALL",1);SetTileTag(49,29,"SOLIDWALL",1);SetTileTag(53,29,"SOLIDWALL",1);SetTileTag(55,29,"LAND_15", 1);SetTileTag(57,29,"SOLIDWALL",1);SetTileTag(58,29,"SOLIDWALL",1);SetTileTag(59,29,"SOLIDWALL",1);SetTileTag(60,29,"LAND_15", 1);SetTileTag(61,29,"SOLIDWALL",1);
-		SetTileTag(1,28,"SOLIDWALL",1);SetTileTag(3,28,"SOLIDWALL",1);SetTileTag(12,28,"LAND_5", 1);SetTileTag(13,28,"LAND_5", 1);SetTileTag(14,28,"LAND_5", 1);SetTileTag(15,28,"SOLIDWALL",1);SetTileTag(16,28,"SOLIDWALL",1);SetTileTag(17,28,"SOLIDWALL",1);SetTileTag(18,28,"LAND_5", 1);SetTileTag(19,28,"SOLIDWALL",1);SetTileTag(20,28,"LAND_5", 1);SetTileTag(21,28,"LAND_5", 1);SetTileTag(22,28,"LAND_5", 1);SetTileTag(23,28,"SOLIDWALL",1);SetTileTag(26,28,"SOLIDWALL",1);SetTileTag(27,28,"LAND_5", 1);SetTileTag(28,28,"LAND_5", 1);SetTileTag(30,28,"LAND_5", 1);SetTileTag(31,28,"SOLIDWALL",1);SetTileTag(32,28,"SOLIDWALL",1);SetTileTag(33,28,"LAND_5", 1);SetTileTag(35,28,"LAND_5", 1);SetTileTag(36,28,"LAND_5", 1);SetTileTag(37,28,"SOLIDWALL",1);SetTileTag(39,28,"LAND_15", 1);SetTileTag(43,28,"SOLIDWALL",1);SetTileTag(44,28,"SOLIDWALL",1);SetTileTag(46,28,"SOLIDWALL",1);SetTileTag(47,28,"LAND_15", 1);SetTileTag(48,28,"LAND_15", 1);SetTileTag(54,28,"LAND_15", 1);SetTileTag(55,28,"SOLIDWALL",1);SetTileTag(56,28,"LAND_15", 1);SetTileTag(57,28,"LAND_15", 1);SetTileTag(61,28,"SOLIDWALL",1);
-		SetTileTag(0,27,"SOLIDWALL",1);SetTileTag(1,27,"LAND_1", 1);SetTileTag(3,27,"LAND_1", 1);SetTileTag(4,27,"LAND_1", 1);SetTileTag(5,27,"LAND_1", 1);SetTileTag(7,27,"LAND_1", 1);SetTileTag(8,27,"LAND_1", 1);SetTileTag(9,27,"SOLIDWALL",1);SetTileTag(12,27,"LAND_5", 1);SetTileTag(13,27,"LAND_5", 1);SetTileTag(14,27,"SOLIDWALL",1);SetTileTag(15,27,"SOLIDWALL",1);SetTileTag(16,27,"LAND_5", 1);SetTileTag(17,27,"LAND_5", 1);SetTileTag(18,27,"LAND_5", 1);SetTileTag(19,27,"SOLIDWALL",1);SetTileTag(20,27,"SOLIDWALL",1);SetTileTag(21,27,"LAND_5", 1);SetTileTag(22,27,"LAND_5", 1);SetTileTag(23,27,"LAND_5", 1);SetTileTag(24,27,"SOLIDWALL",1);SetTileTag(27,27,"SOLIDWALL",1);SetTileTag(28,27,"LAND_5", 1);SetTileTag(29,27,"LAND_5", 1);SetTileTag(31,27,"LAND_5", 1);SetTileTag(34,27,"LAND_5", 1);SetTileTag(35,27,"LAND_5", 1);SetTileTag(36,27,"SOLIDWALL",1);SetTileTag(37,27,"SOLIDWALL",1);SetTileTag(39,27,"SOLIDWALL",1);SetTileTag(42,27,"LAND_15", 1);SetTileTag(44,27,"SOLIDWALL",1);SetTileTag(46,27,"SOLIDWALL",1);SetTileTag(47,27,"SOLIDWALL",1);SetTileTag(54,27,"SOLIDWALL",1);SetTileTag(55,27,"SOLIDWALL",1);
-		SetTileTag(1,26,"SOLIDWALL",1);SetTileTag(3,26,"SOLIDWALL",1);SetTileTag(4,26,"LAND_1", 1);SetTileTag(5,26,"LAND_1", 1);SetTileTag(6,26,"LAND_1", 1);SetTileTag(7,26,"LAND_1", 1);SetTileTag(8,26,"LAND_1", 1);SetTileTag(9,26,"SOLIDWALL",1);SetTileTag(10,26,"LAVA_0", 1);SetTileTag(11,26,"LAVA_0", 1);SetTileTag(12,26,"LAVA_0", 1);SetTileTag(20,26,"SOLIDWALL",1);SetTileTag(21,26,"SOLIDWALL",1);SetTileTag(22,26,"LAND_5", 1);SetTileTag(23,26,"LAND_5", 1);SetTileTag(24,26,"LAND_5", 1);SetTileTag(25,26,"SOLIDWALL",1);SetTileTag(28,26,"SOLIDWALL",1);SetTileTag(29,26,"LAND_5", 1);SetTileTag(30,26,"LAND_5", 1);SetTileTag(33,26,"LAND_5", 1);SetTileTag(34,26,"LAND_5", 1);SetTileTag(35,26,"SOLIDWALL",1);SetTileTag(36,26,"SOLIDWALL",1);SetTileTag(37,26,"SOLIDWALL",1);SetTileTag(38,26,"LAND_15", 1);SetTileTag(39,26,"LAND_15", 1);SetTileTag(41,26,"SOLIDWALL",1);SetTileTag(42,26,"SOLIDWALL",1);SetTileTag(44,26,"SOLIDWALL",1);SetTileTag(48,26,"LAND_15", 1);SetTileTag(54,26,"LAND_15", 1);SetTileTag(55,26,"LAND_15", 1);
-		SetTileTag(4,25,"SOLIDWALL",1);SetTileTag(5,25,"SOLIDWALL",1);SetTileTag(6,25,"LAND_1", 1);SetTileTag(7,25,"SOLIDWALL",1);SetTileTag(8,25,"SOLIDWALL",1);SetTileTag(9,25,"LAND_1", 1);SetTileTag(10,25,"LAND_1", 1);SetTileTag(11,25,"LAND_1", 1);SetTileTag(12,25,"SOLIDWALL",1);SetTileTag(13,25,"SOLIDWALL",1);SetTileTag(15,25,"SOLIDWALL",1);SetTileTag(16,25,"LAND_11", 1);SetTileTag(17,25,"LAND_11", 1);SetTileTag(18,25,"LAND_11", 1);SetTileTag(19,25,"LAVA_0", 1);SetTileTag(20,25,"LAVA_0", 1);SetTileTag(21,25,"SOLIDWALL",1);SetTileTag(22,25,"SOLIDWALL",1);SetTileTag(23,25,"LAND_5", 1);SetTileTag(24,25,"LAND_5", 1);SetTileTag(25,25,"LAND_5", 1);SetTileTag(29,25,"SOLIDWALL",1);SetTileTag(30,25,"LAND_5", 1);SetTileTag(31,25,"LAND_5", 1);SetTileTag(32,25,"LAND_5", 1);SetTileTag(33,25,"LAND_5", 1);SetTileTag(34,25,"SOLIDWALL",1);SetTileTag(35,25,"SOLIDWALL",1);SetTileTag(37,25,"LAND_15", 1);SetTileTag(39,25,"SOLIDWALL",1);SetTileTag(40,25,"SOLIDWALL",1);SetTileTag(42,25,"SOLIDWALL",1);SetTileTag(43,25,"LAND_15", 1);SetTileTag(44,25,"LAND_15", 1);SetTileTag(45,25,"LAND_15", 1);SetTileTag(46,25,"SOLIDWALL",1);SetTileTag(48,25,"SOLIDWALL",1);SetTileTag(49,25,"SOLIDWALL",1);SetTileTag(53,25,"SOLIDWALL",1);SetTileTag(55,25,"SOLIDWALL",1);SetTileTag(56,25,"LAND_15", 1);SetTileTag(59,25,"LAND_15", 1);SetTileTag(61,25,"SOLIDWALL",1);
-		SetTileTag(5,24,"SOLIDWALL",1);SetTileTag(6,24,"LAND_1", 1);SetTileTag(10,24,"LAND_1", 1);SetTileTag(11,24,"SOLIDWALL",1);SetTileTag(15,24,"SOLIDWALL",1);SetTileTag(16,24,"LAND_11", 1);SetTileTag(17,24,"LAND_11", 1);SetTileTag(18,24,"LAND_11", 1);SetTileTag(19,24,"LAVA_0", 1);SetTileTag(20,24,"LAVA_0", 1);SetTileTag(22,24,"LAVA_0", 1);SetTileTag(24,24,"LAND_5", 1);SetTileTag(25,24,"LAND_5", 1);SetTileTag(30,24,"SOLIDWALL",1);SetTileTag(33,24,"SOLIDWALL",1);SetTileTag(34,24,"SOLIDWALL",1);SetTileTag(35,24,"SOLIDWALL",1);SetTileTag(37,24,"SOLIDWALL",1);SetTileTag(38,24,"SOLIDWALL",1);SetTileTag(39,24,"SOLIDWALL",1);SetTileTag(40,24,"SOLIDWALL",1);SetTileTag(41,24,"SOLIDWALL",1);SetTileTag(42,24,"SOLIDWALL",1);SetTileTag(43,24,"SOLIDWALL",1);SetTileTag(45,24,"SOLIDWALL",1);SetTileTag(46,24,"SOLIDWALL",1);SetTileTag(48,24,"SOLIDWALL",1);SetTileTag(49,24,"LAND_15", 1);SetTileTag(55,24,"SOLIDWALL",1);SetTileTag(56,24,"LAND_15", 1);SetTileTag(57,24,"LAND_15", 1);SetTileTag(59,24,"SOLIDWALL",1);SetTileTag(61,24,"SOLIDWALL",1);
-		SetTileTag(2,23,"SOLIDWALL",1);SetTileTag(5,23,"SOLIDWALL",1);SetTileTag(6,23,"SOLIDWALL",1);SetTileTag(7,23,"SOLIDWALL",1);SetTileTag(8,23,"SOLIDWALL",1);SetTileTag(10,23,"SOLIDWALL",1);SetTileTag(11,23,"SOLIDWALL",1);SetTileTag(12,23,"SOLIDWALL",1);SetTileTag(13,23,"SOLIDWALL",1);SetTileTag(16,23,"SOLIDWALL",1);SetTileTag(19,23,"SOLIDWALL",1);SetTileTag(20,23,"SOLIDWALL",1);SetTileTag(21,23,"LAVA_0", 1);SetTileTag(24,23,"LAND_5", 1);SetTileTag(25,23,"LAND_5", 1);SetTileTag(26,23,"SOLIDWALL",1);SetTileTag(31,23,"LAND_5", 1);SetTileTag(32,23,"LAND_5", 1);SetTileTag(36,23,"LAND_15", 1);SetTileTag(37,23,"SOLIDWALL",1);SetTileTag(39,23,"LAND_15", 1);SetTileTag(41,23,"LAND_15", 1);SetTileTag(42,23,"LAND_15", 1);SetTileTag(45,23,"LAND_15", 1);SetTileTag(46,23,"LAND_15", 1);SetTileTag(52,23,"LAND_15", 1);SetTileTag(57,23,"SOLIDWALL",1);SetTileTag(61,23,"SOLIDWALL",1);
-		SetTileTag(1,22,"SOLIDWALL",1);SetTileTag(3,22,"LAND_2", 1);SetTileTag(7,22,"LAND_2", 1);SetTileTag(11,22,"LAND_2", 1);SetTileTag(13,22,"LAND_2", 1);SetTileTag(17,22,"LAND_2", 1);SetTileTag(21,22,"LAVA_0", 1);SetTileTag(23,22,"SOLIDWALL",1);SetTileTag(24,22,"LAND_5", 1);SetTileTag(25,22,"LAND_5", 1);SetTileTag(26,22,"LAND_5", 1);SetTileTag(27,22,"SOLIDWALL",1);SetTileTag(30,22,"SOLIDWALL",1);SetTileTag(31,22,"LAND_5", 1);SetTileTag(32,22,"LAND_5", 1);SetTileTag(33,22,"SOLIDWALL",1);SetTileTag(34,22,"LAND_15", 1);SetTileTag(36,22,"SOLIDWALL",1);SetTileTag(37,22,"SOLIDWALL",1);SetTileTag(39,22,"SOLIDWALL",1);SetTileTag(40,22,"SOLIDWALL",1);SetTileTag(41,22,"SOLIDWALL",1);SetTileTag(42,22,"SOLIDWALL",1);SetTileTag(43,22,"SOLIDWALL",1);SetTileTag(44,22,"SOLIDWALL",1);SetTileTag(46,22,"SOLIDWALL",1);SetTileTag(52,22,"LAND_15", 1);SetTileTag(53,22,"SOLIDWALL",1);SetTileTag(57,22,"SOLIDWALL",1);
-		SetTileTag(4,21,"SOLIDWALL",1);SetTileTag(8,21,"SOLIDWALL",1);SetTileTag(14,21,"SOLIDWALL",1);SetTileTag(18,21,"SOLIDWALL",1);SetTileTag(23,21,"SOLIDWALL",1);SetTileTag(24,21,"SOLIDWALL",1);SetTileTag(25,21,"LAND_5", 1);SetTileTag(26,21,"LAND_5", 1);SetTileTag(27,21,"LAND_5", 1);SetTileTag(28,21,"SOLIDWALL",1);SetTileTag(29,21,"SOLIDWALL",1);SetTileTag(30,21,"SOLIDWALL",1);SetTileTag(33,21,"SOLIDWALL",1);SetTileTag(34,21,"LAND_15", 1);SetTileTag(35,21,"LAND_15", 1);SetTileTag(36,21,"LAND_15", 1);SetTileTag(38,21,"LAND_15", 1);SetTileTag(39,21,"SOLIDWALL",1);SetTileTag(41,21,"LAVA_0", 1);SetTileTag(42,21,"SOLIDWALL",1);SetTileTag(43,21,"SOLIDWALL",1);SetTileTag(44,21,"SOLIDWALL",1);SetTileTag(52,21,"SOLIDWALL",1);SetTileTag(53,21,"SOLIDWALL",1);SetTileTag(57,21,"SOLIDWALL",1);SetTileTag(61,21,"SOLIDWALL",1);
-		SetTileTag(4,20,"LAND_7", 1);SetTileTag(8,20,"LAND_8", 1);SetTileTag(14,20,"LAND_10", 1);SetTileTag(18,20,"LAND_14", 1);SetTileTag(23,20,"LAVA_0", 1);SetTileTag(24,20,"SOLIDWALL",1);SetTileTag(25,20,"SOLIDWALL",1);SetTileTag(26,20,"LAND_5", 1);SetTileTag(27,20,"LAND_5", 1);SetTileTag(28,20,"LAND_5", 1);SetTileTag(35,20,"SOLIDWALL",1);SetTileTag(36,20,"SOLIDWALL",1);SetTileTag(39,20,"SOLIDWALL",1);SetTileTag(41,20,"LAND_15", 1);SetTileTag(45,20,"LAND_15", 1);SetTileTag(46,20,"SOLIDWALL",1);SetTileTag(47,20,"LAND_15", 1);SetTileTag(48,20,"LAND_15", 1);SetTileTag(49,20,"LAND_15", 1);SetTileTag(50,20,"LAND_15", 1);SetTileTag(51,20,"LAND_15", 1);SetTileTag(52,20,"LAND_15", 1);SetTileTag(54,20,"LAND_15", 1);SetTileTag(55,20,"SOLIDWALL",1);SetTileTag(57,20,"LAND_15", 1);SetTileTag(58,20,"LAND_15", 1);SetTileTag(59,20,"SOLIDWALL",1);SetTileTag(61,20,"SOLIDWALL",1);
-		SetTileTag(1,19,"SOLIDWALL",1);SetTileTag(3,19,"SOLIDWALL",1);SetTileTag(4,19,"SOLIDWALL",1);SetTileTag(5,19,"SOLIDWALL",1);SetTileTag(7,19,"SOLIDWALL",1);SetTileTag(8,19,"SOLIDWALL",1);SetTileTag(9,19,"SOLIDWALL",1);SetTileTag(11,19,"SOLIDWALL",1);SetTileTag(13,19,"SOLIDWALL",1);SetTileTag(14,19,"SOLIDWALL",1);SetTileTag(15,19,"SOLIDWALL",1);SetTileTag(17,19,"SOLIDWALL",1);SetTileTag(18,19,"SOLIDWALL",1);SetTileTag(19,19,"SOLIDWALL",1);SetTileTag(26,19,"SOLIDWALL",1);SetTileTag(27,19,"LAND_5", 1);SetTileTag(28,19,"LAND_5", 1);SetTileTag(29,19,"LAND_5", 1);SetTileTag(30,19,"LAND_5", 1);SetTileTag(31,19,"LAND_5", 1);SetTileTag(32,19,"LAND_5", 1);SetTileTag(33,19,"SOLIDWALL",1);SetTileTag(34,19,"LAND_15", 1);SetTileTag(35,19,"LAND_15", 1);SetTileTag(39,19,"SOLIDWALL",1);SetTileTag(41,19,"SOLIDWALL",1);SetTileTag(42,19,"SOLIDWALL",1);SetTileTag(43,19,"SOLIDWALL",1);SetTileTag(46,19,"SOLIDWALL",1);SetTileTag(47,19,"SOLIDWALL",1);SetTileTag(51,19,"SOLIDWALL",1);SetTileTag(52,19,"SOLIDWALL",1);SetTileTag(55,19,"SOLIDWALL",1);SetTileTag(56,19,"LAND_15", 1);SetTileTag(57,19,"SOLIDWALL",1);SetTileTag(58,19,"SOLIDWALL",1);SetTileTag(59,19,"SOLIDWALL",1);SetTileTag(60,19,"LAND_15", 1);SetTileTag(61,19,"SOLIDWALL",1);
-		SetTileTag(1,18,"SOLIDWALL",1);SetTileTag(3,18,"LAND_2", 1);SetTileTag(7,18,"LAND_2", 1);SetTileTag(9,18,"LAND_2", 1);SetTileTag(10,18,"LAND_2", 1);SetTileTag(11,18,"LAND_2", 1);SetTileTag(12,18,"LAND_2", 1);SetTileTag(13,18,"LAND_2", 1);SetTileTag(15,18,"LAND_2", 1);SetTileTag(17,18,"LAND_2", 1);SetTileTag(27,18,"LAND_5", 1);SetTileTag(28,18,"SOLIDWALL",1);SetTileTag(32,18,"SOLIDWALL",1);SetTileTag(33,18,"SOLIDWALL",1);SetTileTag(34,18,"SOLIDWALL",1);SetTileTag(37,18,"SOLIDWALL",1);SetTileTag(39,18,"SOLIDWALL",1);SetTileTag(41,18,"SOLIDWALL",1);SetTileTag(42,18,"LAND_15", 1);SetTileTag(44,18,"LAND_15", 1);SetTileTag(45,18,"LAND_15", 1);SetTileTag(46,18,"LAND_15", 1);SetTileTag(47,18,"LAND_15", 1);SetTileTag(48,18,"LAND_15", 1);SetTileTag(51,18,"SOLIDWALL",1);SetTileTag(52,18,"LAND_15", 1);SetTileTag(60,18,"LAND_15", 1);SetTileTag(61,18,"SOLIDWALL",1);
-		SetTileTag(1,17,"SOLIDWALL",1);SetTileTag(3,17,"SOLIDWALL",1);SetTileTag(9,17,"SOLIDWALL",1);SetTileTag(12,17,"SOLIDWALL",1);SetTileTag(17,17,"SOLIDWALL",1);SetTileTag(24,17,"SOLIDWALL",1);SetTileTag(26,17,"SOLIDWALL",1);SetTileTag(27,17,"LAND_5", 1);SetTileTag(28,17,"LAND_5", 1);SetTileTag(29,17,"LAND_5", 1);SetTileTag(30,17,"LAND_5", 1);SetTileTag(31,17,"LAND_5", 1);SetTileTag(32,17,"LAND_5", 1);SetTileTag(37,17,"SOLIDWALL",1);SetTileTag(38,17,"LAND_15", 1);SetTileTag(39,17,"LAND_15", 1);SetTileTag(41,17,"SOLIDWALL",1);SetTileTag(42,17,"LAND_15", 1);SetTileTag(43,17,"LAND_15", 1);SetTileTag(44,17,"SOLIDWALL",1);SetTileTag(45,17,"SOLIDWALL",1);SetTileTag(49,17,"SOLIDWALL",1);SetTileTag(50,17,"LAND_15", 1);SetTileTag(51,17,"LAND_15", 1);SetTileTag(52,17,"LAND_15", 1);SetTileTag(53,17,"SOLIDWALL",1);SetTileTag(54,17,"SOLIDWALL",1);SetTileTag(55,17,"SOLIDWALL",1);SetTileTag(59,17,"SOLIDWALL",1);
-		SetTileTag(1,16,"SOLIDWALL",1);SetTileTag(2,16,"LAND_2", 1);SetTileTag(3,16,"LAND_2", 1);SetTileTag(8,16,"LAND_2", 1);SetTileTag(9,16,"LAND_2", 1);SetTileTag(13,16,"LAND_2", 1);SetTileTag(14,16,"LAND_2", 1);SetTileTag(17,16,"LAND_2", 1);SetTileTag(20,16,"LAND_2", 1);SetTileTag(22,16,"LAVA_0", 1);SetTileTag(24,16,"SOLIDWALL",1);SetTileTag(26,16,"SOLIDWALL",1);SetTileTag(27,16,"LAND_5", 1);SetTileTag(28,16,"SOLIDWALL",1);SetTileTag(29,16,"SOLIDWALL",1);SetTileTag(31,16,"SOLIDWALL",1);SetTileTag(32,16,"LAND_5", 1);SetTileTag(33,16,"SOLIDWALL",1);SetTileTag(34,16,"SOLIDWALL",1);SetTileTag(35,16,"SOLIDWALL",1);SetTileTag(36,16,"LAND_5", 1);SetTileTag(37,16,"SOLIDWALL",1);SetTileTag(38,16,"SOLIDWALL",1);SetTileTag(39,16,"SOLIDWALL",1);SetTileTag(41,16,"SOLIDWALL",1);SetTileTag(42,16,"LAND_15", 1);SetTileTag(44,16,"LAND_15", 1);SetTileTag(45,16,"LAND_15", 1);SetTileTag(49,16,"SOLIDWALL",1);SetTileTag(50,16,"SOLIDWALL",1);SetTileTag(51,16,"SOLIDWALL",1);SetTileTag(52,16,"LAND_15", 1);SetTileTag(60,16,"LAND_15", 1);SetTileTag(61,16,"SOLIDWALL",1);
-		SetTileTag(2,15,"SOLIDWALL",1);SetTileTag(3,15,"SOLIDWALL",1);SetTileTag(8,15,"SOLIDWALL",1);SetTileTag(11,15,"SOLIDWALL",1);SetTileTag(13,15,"SOLIDWALL",1);SetTileTag(18,15,"SOLIDWALL",1);SetTileTag(20,15,"SOLIDWALL",1);SetTileTag(22,15,"LAVA_0", 1);SetTileTag(24,15,"SOLIDWALL",1);SetTileTag(26,15,"SOLIDWALL",1);SetTileTag(27,15,"LAND_5", 1);SetTileTag(28,15,"SOLIDWALL",1);SetTileTag(30,15,"SOLIDWALL",1);SetTileTag(31,15,"LAND_5", 1);SetTileTag(33,15,"LAND_5", 1);SetTileTag(34,15,"LAND_5", 1);SetTileTag(35,15,"LAND_5", 1);SetTileTag(36,15,"LAND_5", 1);SetTileTag(37,15,"LAND_5", 1);SetTileTag(38,15,"LAND_5", 1);SetTileTag(40,15,"LAVA_0", 1);SetTileTag(41,15,"SOLIDWALL",1);SetTileTag(42,15,"SOLIDWALL",1);SetTileTag(47,15,"SOLIDWALL",1);SetTileTag(48,15,"LAND_15", 1);SetTileTag(49,15,"LAND_15", 1);SetTileTag(51,15,"SOLIDWALL",1);SetTileTag(52,15,"SOLIDWALL",1);
-		SetTileTag(1,14,"SOLIDWALL",1);SetTileTag(2,14,"LAND_4", 1);SetTileTag(9,14,"LAND_2", 1);SetTileTag(10,14,"LAND_2", 1);SetTileTag(11,14,"LAND_2", 1);SetTileTag(12,14,"LAND_2", 1);SetTileTag(13,14,"LAND_2", 1);SetTileTag(18,14,"LAND_13", 1);SetTileTag(21,14,"SOLIDWALL",1);SetTileTag(24,14,"SOLIDWALL",1);SetTileTag(31,14,"LAND_5", 1);SetTileTag(32,14,"LAND_5", 1);SetTileTag(33,14,"LAND_5", 1);SetTileTag(37,14,"LAVA_0", 1);SetTileTag(39,14,"LAVA_0", 1);SetTileTag(40,14,"SOLIDWALL",1);SetTileTag(41,14,"SOLIDWALL",1);SetTileTag(43,14,"LAND_15", 1);SetTileTag(47,14,"SOLIDWALL",1);SetTileTag(48,14,"SOLIDWALL",1);SetTileTag(49,14,"SOLIDWALL",1);SetTileTag(50,14,"LAND_15", 1);SetTileTag(51,14,"LAND_15", 1);SetTileTag(61,14,"SOLIDWALL",1);
-		SetTileTag(2,13,"SOLIDWALL",1);SetTileTag(3,13,"SOLIDWALL",1);SetTileTag(5,13,"SOLIDWALL",1);SetTileTag(7,13,"SOLIDWALL",1);SetTileTag(10,13,"SOLIDWALL",1);SetTileTag(15,13,"SOLIDWALL",1);SetTileTag(17,13,"SOLIDWALL",1);SetTileTag(18,13,"SOLIDWALL",1);SetTileTag(20,13,"SOLIDWALL",1);SetTileTag(24,13,"LAVA_0", 1);SetTileTag(29,13,"SOLIDWALL",1);SetTileTag(30,13,"LAND_5", 1);SetTileTag(31,13,"LAND_5", 1);SetTileTag(33,13,"LAVA_0", 1);SetTileTag(36,13,"LAVA_0", 1);SetTileTag(37,13,"LAND_15", 1);SetTileTag(39,13,"LAND_15", 1);SetTileTag(43,13,"SOLIDWALL",1);SetTileTag(44,13,"SOLIDWALL",1);SetTileTag(45,13,"SOLIDWALL",1);SetTileTag(46,13,"LAND_15", 1);SetTileTag(47,13,"LAND_15", 1);SetTileTag(49,13,"SOLIDWALL",1);SetTileTag(50,13,"SOLIDWALL",1);SetTileTag(53,13,"SOLIDWALL",1);SetTileTag(54,13,"SOLIDWALL",1);SetTileTag(58,13,"SOLIDWALL",1);SetTileTag(59,13,"LAND_15", 1);SetTileTag(60,13,"LAND_15", 1);SetTileTag(61,13,"SOLIDWALL",1);
-		SetTileTag(1,12,"SOLIDWALL",1);SetTileTag(2,12,"LAND_2", 1);SetTileTag(7,12,"LAND_2", 1);SetTileTag(10,12,"LAND_9", 1);SetTileTag(15,12,"LAND_2", 1);SetTileTag(17,12,"LAND_2", 1);SetTileTag(21,12,"SOLIDWALL",1);SetTileTag(28,12,"SOLIDWALL",1);SetTileTag(30,12,"LAND_5", 1);SetTileTag(31,12,"LAND_5", 1);SetTileTag(33,12,"LAVA_0", 1);SetTileTag(34,12,"LAVA_0", 1);SetTileTag(35,12,"LAND_15", 1);SetTileTag(36,12,"LAND_15", 1);SetTileTag(37,12,"LAND_15", 1);SetTileTag(39,12,"LAND_15", 1);SetTileTag(41,12,"SOLIDWALL",1);SetTileTag(42,12,"LAND_15", 1);SetTileTag(43,12,"LAND_15", 1);SetTileTag(45,12,"SOLIDWALL",1);SetTileTag(46,12,"SOLIDWALL",1);SetTileTag(47,12,"SOLIDWALL",1);SetTileTag(48,12,"LAND_15", 1);SetTileTag(49,12,"LAND_15", 1);SetTileTag(53,12,"SOLIDWALL",1);SetTileTag(55,12,"LAND_15", 1);SetTileTag(58,12,"LAND_15", 1);SetTileTag(61,12,"SOLIDWALL",1);
-		SetTileTag(2,11,"SOLIDWALL",1);SetTileTag(3,11,"SOLIDWALL",1);SetTileTag(9,11,"SOLIDWALL",1);SetTileTag(10,11,"SOLIDWALL",1);SetTileTag(13,11,"SOLIDWALL",1);SetTileTag(18,11,"SOLIDWALL",1);SetTileTag(20,11,"SOLIDWALL",1);SetTileTag(26,11,"SOLIDWALL",1);SetTileTag(27,11,"LAND_5", 1);SetTileTag(28,11,"SOLIDWALL",1);SetTileTag(31,11,"LAND_5", 1);SetTileTag(34,11,"LAND_15", 1);SetTileTag(35,11,"LAND_15", 1);SetTileTag(37,11,"LAND_15", 1);SetTileTag(41,11,"SOLIDWALL",1);SetTileTag(42,11,"SOLIDWALL",1);SetTileTag(43,11,"SOLIDWALL",1);SetTileTag(44,11,"LAND_15", 1);SetTileTag(45,11,"LAND_15", 1);SetTileTag(47,11,"SOLIDWALL",1);SetTileTag(48,11,"SOLIDWALL",1);SetTileTag(51,11,"SOLIDWALL",1);SetTileTag(52,11,"LAND_15", 1);SetTileTag(53,11,"SOLIDWALL",1);SetTileTag(55,11,"SOLIDWALL",1);SetTileTag(56,11,"SOLIDWALL",1);SetTileTag(58,11,"SOLIDWALL",1);SetTileTag(59,11,"SOLIDWALL",1);
-		SetTileTag(1,10,"SOLIDWALL",1);SetTileTag(2,10,"LAND_3", 1);SetTileTag(9,10,"LAND_2", 1);SetTileTag(18,10,"LAND_12", 1);SetTileTag(21,10,"SOLIDWALL",1);SetTileTag(22,10,"SOLIDWALL",1);SetTileTag(23,10,"LAVA_0", 1);SetTileTag(26,10,"SOLIDWALL",1);SetTileTag(27,10,"LAND_5", 1);SetTileTag(28,10,"LAND_5", 1);SetTileTag(33,10,"LAVA_0", 1);SetTileTag(34,10,"LAND_15", 1);SetTileTag(36,10,"LAND_15", 1);SetTileTag(42,10,"LAND_15", 1);SetTileTag(43,10,"SOLIDWALL",1);SetTileTag(44,10,"SOLIDWALL",1);SetTileTag(45,10,"SOLIDWALL",1);SetTileTag(46,10,"LAND_15", 1);SetTileTag(47,10,"LAND_15", 1);SetTileTag(51,10,"SOLIDWALL",1);SetTileTag(52,10,"LAND_15", 1);SetTileTag(53,10,"LAND_15", 1);SetTileTag(54,10,"LAND_15", 1);SetTileTag(55,10,"SOLIDWALL",1);SetTileTag(57,10,"LAND_15", 1);SetTileTag(58,10,"LAND_15", 1);SetTileTag(61,10,"SOLIDWALL",1);
-		SetTileTag(2,9,"SOLIDWALL",1);SetTileTag(3,9,"SOLIDWALL",1);SetTileTag(5,9,"SOLIDWALL",1);SetTileTag(7,9,"SOLIDWALL",1);SetTileTag(9,9,"SOLIDWALL",1);SetTileTag(12,9,"SOLIDWALL",1);SetTileTag(15,9,"SOLIDWALL",1);SetTileTag(17,9,"SOLIDWALL",1);SetTileTag(18,9,"SOLIDWALL",1);SetTileTag(20,9,"SOLIDWALL",1);SetTileTag(22,9,"SOLIDWALL",1);SetTileTag(23,9,"LAVA_0", 1);SetTileTag(25,9,"SOLIDWALL",1);SetTileTag(31,9,"LAND_5", 1);SetTileTag(33,9,"LAND_15", 1);SetTileTag(34,9,"LAND_15", 1);SetTileTag(36,9,"LAND_15", 1);SetTileTag(42,9,"LAND_15", 1);SetTileTag(43,9,"LAND_15", 1);SetTileTag(45,9,"SOLIDWALL",1);SetTileTag(46,9,"SOLIDWALL",1);SetTileTag(47,9,"SOLIDWALL",1);SetTileTag(49,9,"SOLIDWALL",1);SetTileTag(54,9,"SOLIDWALL",1);SetTileTag(55,9,"SOLIDWALL",1);SetTileTag(57,9,"SOLIDWALL",1);SetTileTag(58,9,"SOLIDWALL",1);SetTileTag(59,9,"LAND_15", 1);SetTileTag(60,9,"LAND_15", 1);SetTileTag(61,9,"SOLIDWALL",1);
-		SetTileTag(3,8,"LAND_2", 1);SetTileTag(7,8,"LAND_2", 1);SetTileTag(8,8,"LAND_2", 1);SetTileTag(9,8,"LAND_2", 1);SetTileTag(13,8,"LAND_2", 1);SetTileTag(14,8,"LAND_2", 1);SetTileTag(15,8,"LAND_2", 1);SetTileTag(17,8,"LAND_2", 1);SetTileTag(21,8,"SOLIDWALL",1);SetTileTag(25,8,"LAVA_0", 1);SetTileTag(26,8,"SOLIDWALL",1);SetTileTag(27,8,"LAND_5", 1);SetTileTag(28,8,"LAND_5", 1);SetTileTag(30,8,"LAND_5", 1);SetTileTag(31,8,"LAVA_0", 1);SetTileTag(32,8,"LAVA_0", 1);SetTileTag(34,8,"LAND_15", 1);SetTileTag(37,8,"LAND_15", 1);SetTileTag(38,8,"LAND_15", 1);SetTileTag(41,8,"LAND_15", 1);SetTileTag(42,8,"LAND_15", 1);SetTileTag(43,8,"SOLIDWALL",1);SetTileTag(45,8,"LAND_15", 1);SetTileTag(49,8,"SOLIDWALL",1);SetTileTag(51,8,"SOLIDWALL",1);SetTileTag(52,8,"LAND_15", 1);SetTileTag(53,8,"LAND_15", 1);SetTileTag(54,8,"LAND_15", 1);SetTileTag(56,8,"LAND_15", 1);SetTileTag(57,8,"SOLIDWALL",1);SetTileTag(59,8,"LAND_15", 1);
-		SetTileTag(3,7,"SOLIDWALL",1);SetTileTag(7,7,"SOLIDWALL",1);SetTileTag(11,7,"SOLIDWALL",1);SetTileTag(13,7,"SOLIDWALL",1);SetTileTag(18,7,"SOLIDWALL",1);SetTileTag(26,7,"SOLIDWALL",1);SetTileTag(27,7,"SOLIDWALL",1);SetTileTag(28,7,"SOLIDWALL",1);SetTileTag(29,7,"LAND_5", 1);SetTileTag(30,7,"LAVA_0", 1);SetTileTag(31,7,"LAVA_0", 1);SetTileTag(33,7,"LAVA_0", 1);SetTileTag(34,7,"LAND_15", 1);SetTileTag(36,7,"LAND_15", 1);SetTileTag(37,7,"LAND_15", 1);SetTileTag(39,7,"LAND_15", 1);SetTileTag(41,7,"SOLIDWALL",1);SetTileTag(42,7,"SOLIDWALL",1);SetTileTag(44,7,"LAND_15", 1);SetTileTag(45,7,"LAND_15", 1);SetTileTag(46,7,"LAND_15", 1);SetTileTag(47,7,"SOLIDWALL",1);SetTileTag(48,7,"LAND_15", 1);SetTileTag(49,7,"LAND_15", 1);SetTileTag(51,7,"SOLIDWALL",1);SetTileTag(52,7,"SOLIDWALL",1);SetTileTag(53,7,"SOLIDWALL",1);SetTileTag(54,7,"SOLIDWALL",1);SetTileTag(55,7,"SOLIDWALL",1);SetTileTag(57,7,"SOLIDWALL",1);SetTileTag(59,7,"SOLIDWALL",1);
-		SetTileTag(1,6,"SOLIDWALL",1);SetTileTag(2,6,"LAND_2", 1);SetTileTag(3,6,"LAND_2", 1);SetTileTag(7,6,"LAND_2", 1);SetTileTag(9,6,"LAND_2", 1);SetTileTag(10,6,"LAND_2", 1);SetTileTag(11,6,"LAND_2", 1);SetTileTag(12,6,"LAND_2", 1);SetTileTag(13,6,"LAND_2", 1);SetTileTag(15,6,"LAND_2", 1);SetTileTag(19,6,"LAND_2", 1);SetTileTag(20,6,"LAND_2", 1);SetTileTag(21,6,"SOLIDWALL",1);SetTileTag(26,6,"LAVA_0", 1);SetTileTag(27,6,"SOLIDWALL",1);SetTileTag(28,6,"SOLIDWALL",1);SetTileTag(29,6,"LAVA_0", 1);SetTileTag(30,6,"LAVA_0", 1);SetTileTag(31,6,"LAND_15", 1);SetTileTag(33,6,"LAND_15", 1);SetTileTag(34,6,"LAND_15", 1);SetTileTag(35,6,"LAND_15", 1);SetTileTag(36,6,"LAND_15", 1);SetTileTag(37,6,"LAND_15", 1);SetTileTag(39,6,"LAND_15", 1);SetTileTag(40,6,"LAND_15", 1);SetTileTag(41,6,"SOLIDWALL",1);SetTileTag(42,6,"LAND_15", 1);SetTileTag(43,6,"LAND_15", 1);SetTileTag(44,6,"SOLIDWALL",1);SetTileTag(45,6,"SOLIDWALL",1);SetTileTag(47,6,"SOLIDWALL",1);SetTileTag(48,6,"LAND_15", 1);SetTileTag(49,6,"LAND_15", 1);SetTileTag(50,6,"LAND_15", 1);SetTileTag(51,6,"SOLIDWALL",1);SetTileTag(52,6,"LAND_15", 1);SetTileTag(55,6,"SOLIDWALL",1);SetTileTag(57,6,"SOLIDWALL",1);
-		SetTileTag(2,5,"SOLIDWALL",1);SetTileTag(3,5,"SOLIDWALL",1);SetTileTag(5,5,"SOLIDWALL",1);SetTileTag(9,5,"SOLIDWALL",1);SetTileTag(12,5,"SOLIDWALL",1);SetTileTag(17,5,"SOLIDWALL",1);SetTileTag(19,5,"SOLIDWALL",1);SetTileTag(24,5,"LAVA_0", 1);SetTileTag(27,5,"SOLIDWALL",1);SetTileTag(28,5,"SOLIDWALL",1);SetTileTag(29,5,"SOLIDWALL",1);SetTileTag(31,5,"LAVA_0", 1);SetTileTag(33,5,"LAVA_0", 1);SetTileTag(34,5,"LAND_15", 1);SetTileTag(35,5,"LAND_15", 1);SetTileTag(37,5,"LAND_15", 1);SetTileTag(40,5,"SOLIDWALL",1);SetTileTag(41,5,"SOLIDWALL",1);SetTileTag(42,5,"LAND_15", 1);SetTileTag(43,5,"LAND_15", 1);SetTileTag(44,5,"SOLIDWALL",1);SetTileTag(46,5,"LAND_15", 1);SetTileTag(47,5,"LAND_15", 1);SetTileTag(49,5,"SOLIDWALL",1);SetTileTag(50,5,"SOLIDWALL",1);SetTileTag(51,5,"SOLIDWALL",1);SetTileTag(52,5,"SOLIDWALL",1);SetTileTag(53,5,"LAND_15", 1);SetTileTag(54,5,"SOLIDWALL",1);SetTileTag(55,5,"SOLIDWALL",1);SetTileTag(56,5,"LAND_15", 1);SetTileTag(57,5,"LAND_15", 1);SetTileTag(58,5,"LAND_15", 1);
-		SetTileTag(3,4,"LAND_2", 1);SetTileTag(4,4,"LAND_2", 1);SetTileTag(5,4,"LAND_2", 1);SetTileTag(6,4,"LAND_2", 1);SetTileTag(8,4,"LAND_2", 1);SetTileTag(9,4,"LAND_2", 1);SetTileTag(13,4,"LAND_2", 1);SetTileTag(14,4,"LAND_2", 1);SetTileTag(16,4,"LAND_2", 1);SetTileTag(17,4,"LAND_2", 1);SetTileTag(18,4,"LAND_2", 1);SetTileTag(19,4,"LAND_2", 1);SetTileTag(23,4,"SOLIDWALL",1);SetTileTag(24,4,"LAVA_0", 1);SetTileTag(25,4,"LAVA_0", 1);SetTileTag(32,4,"LAVA_0", 1);SetTileTag(39,4,"LAND_15", 1);SetTileTag(40,4,"SOLIDWALL",1);SetTileTag(41,4,"SOLIDWALL",1);SetTileTag(44,4,"SOLIDWALL",1);SetTileTag(46,4,"SOLIDWALL",1);SetTileTag(47,4,"SOLIDWALL",1);SetTileTag(49,4,"SOLIDWALL",1);SetTileTag(50,4,"SOLIDWALL",1);SetTileTag(52,4,"LAND_15", 1);SetTileTag(55,4,"SOLIDWALL",1);SetTileTag(56,4,"SOLIDWALL",1);SetTileTag(57,4,"SOLIDWALL",1);SetTileTag(58,4,"SOLIDWALL",1);SetTileTag(59,4,"SOLIDWALL",1);
-		SetTileTag(3,3,"SOLIDWALL",1);SetTileTag(7,3,"SOLIDWALL",1);SetTileTag(8,3,"SOLIDWALL",1);SetTileTag(11,3,"SOLIDWALL",1);SetTileTag(13,3,"SOLIDWALL",1);SetTileTag(15,3,"SOLIDWALL",1);SetTileTag(16,3,"SOLIDWALL",1);SetTileTag(21,3,"SOLIDWALL",1);SetTileTag(24,3,"SOLIDWALL",1);SetTileTag(25,3,"LAVA_0", 1);SetTileTag(26,3,"LAVA_0", 1);SetTileTag(27,3,"LAVA_0", 1);SetTileTag(28,3,"LAVA_0", 1);SetTileTag(29,3,"LAVA_0", 1);SetTileTag(30,3,"LAVA_0", 1);SetTileTag(31,3,"LAVA_0", 1);SetTileTag(34,3,"LAND_15", 1);SetTileTag(35,3,"LAND_15", 1);SetTileTag(38,3,"LAND_15", 1);SetTileTag(39,3,"SOLIDWALL",1);SetTileTag(44,3,"SOLIDWALL",1);SetTileTag(46,3,"SOLIDWALL",1);SetTileTag(47,3,"SOLIDWALL",1);SetTileTag(50,3,"SOLIDWALL",1);SetTileTag(52,3,"LAND_15", 1);SetTileTag(53,3,"LAND_15", 1);SetTileTag(55,3,"SOLIDWALL",1);SetTileTag(56,3,"SOLIDWALL",1);SetTileTag(57,3,"SOLIDWALL",1);SetTileTag(59,3,"SOLIDWALL",1);
-		SetTileTag(1,2,"SOLIDWALL",1);SetTileTag(2,2,"LAND_2", 1);SetTileTag(3,2,"LAND_2", 1);SetTileTag(10,2,"LAND_2", 1);SetTileTag(11,2,"LAND_2", 1);SetTileTag(12,2,"LAND_2", 1);SetTileTag(13,2,"LAND_2", 1);SetTileTag(20,2,"LAND_2", 1);SetTileTag(21,2,"SOLIDWALL",1);SetTileTag(25,2,"SOLIDWALL",1);SetTileTag(29,2,"SOLIDWALL",1);SetTileTag(30,2,"SOLIDWALL",1);SetTileTag(31,2,"SOLIDWALL",1);SetTileTag(32,2,"LAND_15", 1);SetTileTag(33,2,"LAND_15", 1);SetTileTag(34,2,"LAND_15", 1);SetTileTag(36,2,"LAND_15", 1);SetTileTag(37,2,"LAND_15", 1);SetTileTag(38,2,"SOLIDWALL",1);SetTileTag(40,2,"SOLIDWALL",1);SetTileTag(41,2,"LAND_15", 1);SetTileTag(42,2,"LAND_15", 1);SetTileTag(43,2,"LAND_15", 1);SetTileTag(44,2,"LAND_15", 1);SetTileTag(45,2,"LAND_15", 1);SetTileTag(46,2,"LAND_15", 1);SetTileTag(48,2,"LAND_15", 1);SetTileTag(49,2,"LAND_15", 1);SetTileTag(50,2,"SOLIDWALL",1);SetTileTag(51,2,"LAND_15", 1);SetTileTag(52,2,"LAND_15", 1);SetTileTag(53,2,"LAND_15", 1);SetTileTag(54,2,"LAND_15", 1);SetTileTag(55,2,"LAND_15", 1);SetTileTag(57,2,"LAND_15", 1);SetTileTag(58,2,"LAND_15", 1);SetTileTag(59,2,"LAND_15", 1);SetTileTag(60,2,"LAND_15", 1);SetTileTag(61,2,"SOLIDWALL",1);
-		SetTileTag(2,1,"SOLIDWALL",1);SetTileTag(32,1,"SOLIDWALL",1);SetTileTag(41,1,"SOLIDWALL",1);SetTileTag(42,1,"SOLIDWALL",1);SetTileTag(43,1,"SOLIDWALL",1);SetTileTag(44,1,"SOLIDWALL",1);SetTileTag(51,1,"SOLIDWALL",1);SetTileTag(52,1,"SOLIDWALL",1);SetTileTag(53,1,"SOLIDWALL",1);
+		SetTileTag(60,63,"SOLIDWALL",1);
+		SetTileTag(3,62,"SOLIDWALL",1);SetTileTag(6,62,"SOLIDWALL",1);SetTileTag(28,62,"SOLIDWALL",1);SetTileTag(29,62,"SOLIDWALL",1);SetTileTag(35,62,"SOLIDWALL",1);SetTileTag(36,62,"SOLIDWALL",1);SetTileTag(37,62,"SOLIDWALL",1);SetTileTag(53,62,"SOLIDWALL",1);SetTileTag(54,62,"SOLIDWALL",1);SetTileTag(57,62,"SOLIDWALL",1);SetTileTag(58,62,"SOLIDWALL",1);SetTileTag(60,62,"LAVA_2", 1);SetTileTag(62,62,"LAVA_2", 1);SetTileTag(63,62,"SOLIDWALL",1);
+		SetTileTag(2,61,"SOLIDWALL",1);SetTileTag(3,61,"LAND_2", 1);SetTileTag(7,61,"SOLIDWALL",1);SetTileTag(8,61,"SOLIDWALL",1);SetTileTag(9,61,"SOLIDWALL",1);SetTileTag(10,61,"SOLIDWALL",1);SetTileTag(11,61,"SOLIDWALL",1);SetTileTag(12,61,"SOLIDWALL",1);SetTileTag(15,61,"SOLIDWALL",1);SetTileTag(16,61,"SOLIDWALL",1);SetTileTag(17,61,"SOLIDWALL",1);SetTileTag(18,61,"SOLIDWALL",1);SetTileTag(19,61,"SOLIDWALL",1);SetTileTag(20,61,"SOLIDWALL",1);SetTileTag(21,61,"SOLIDWALL",1);SetTileTag(22,61,"SOLIDWALL",1);SetTileTag(23,61,"SOLIDWALL",1);SetTileTag(24,61,"SOLIDWALL",1);SetTileTag(25,61,"SOLIDWALL",1);SetTileTag(26,61,"SOLIDWALL",1);SetTileTag(27,61,"SOLIDWALL",1);SetTileTag(28,61,"LAND_2", 1);SetTileTag(30,61,"LAND_2", 1);SetTileTag(33,61,"LAND_2", 1);SetTileTag(41,61,"LAND_2", 1);SetTileTag(42,61,"LAND_2", 1);SetTileTag(43,61,"LAND_2", 1);SetTileTag(44,61,"LAND_2", 1);SetTileTag(45,61,"LAND_2", 1);SetTileTag(46,61,"LAND_2", 1);SetTileTag(51,61,"SOLIDWALL",1);SetTileTag(52,61,"SOLIDWALL",1);SetTileTag(53,61,"LAND_15", 1);SetTileTag(54,61,"LAND_15", 1);SetTileTag(55,61,"SOLIDWALL",1);SetTileTag(56,61,"SOLIDWALL",1);SetTileTag(57,61,"LAND_15", 1);SetTileTag(58,61,"LAND_15", 1);SetTileTag(59,61,"SOLIDWALL",1);
+		SetTileTag(3,60,"SOLIDWALL",1);SetTileTag(7,60,"SOLIDWALL",1);SetTileTag(8,60,"LAND_2", 1);SetTileTag(10,60,"LAND_2", 1);SetTileTag(11,60,"LAND_2", 1);SetTileTag(12,60,"LAND_2", 1);SetTileTag(15,60,"LAND_2", 1);SetTileTag(16,60,"LAND_2", 1);SetTileTag(18,60,"LAND_2", 1);SetTileTag(19,60,"LAND_2", 1);SetTileTag(20,60,"LAND_2", 1);SetTileTag(22,60,"LAND_2", 1);SetTileTag(23,60,"LAND_2", 1);SetTileTag(24,60,"LAND_2", 1);SetTileTag(25,60,"LAND_2", 1);SetTileTag(26,60,"LAND_2", 1);SetTileTag(27,60,"LAND_2", 1);SetTileTag(28,60,"LAND_2", 1);SetTileTag(30,60,"SOLIDWALL",1);SetTileTag(31,60,"LAND_2", 1);SetTileTag(33,60,"LAND_2", 1);SetTileTag(34,60,"SOLIDWALL",1);SetTileTag(42,60,"LAND_2", 1);SetTileTag(43,60,"LAND_2", 1);SetTileTag(44,60,"LAND_2", 1);SetTileTag(45,60,"LAND_2", 1);SetTileTag(46,60,"LAND_2", 1);SetTileTag(47,60,"SOLIDWALL",1);SetTileTag(50,60,"SOLIDWALL",1);SetTileTag(51,60,"LAND_15", 1);SetTileTag(52,60,"LAND_15", 1);SetTileTag(53,60,"LAND_15", 1);SetTileTag(55,60,"LAND_15", 1);SetTileTag(56,60,"LAND_15", 1);SetTileTag(57,60,"LAND_15", 1);SetTileTag(58,60,"LAND_15", 1);SetTileTag(59,60,"LAND_15", 1);SetTileTag(60,60,"LAND_15", 1);
+		SetTileTag(3,59,"LAND_2", 1);SetTileTag(4,59,"LAND_2", 1);SetTileTag(6,59,"LAND_2", 1);SetTileTag(7,59,"SOLIDWALL",1);SetTileTag(8,59,"LAND_2", 1);SetTileTag(9,59,"SOLIDWALL",1);SetTileTag(10,59,"SOLIDWALL",1);SetTileTag(11,59,"SOLIDWALL",1);SetTileTag(12,59,"SOLIDWALL",1);SetTileTag(13,59,"LAND_2", 1);SetTileTag(14,59,"SOLIDWALL",1);SetTileTag(15,59,"SOLIDWALL",1);SetTileTag(16,59,"LAND_2", 1);SetTileTag(17,59,"LAND_2", 1);SetTileTag(18,59,"LAND_2", 1);SetTileTag(19,59,"SOLIDWALL",1);SetTileTag(21,59,"SOLIDWALL",1);SetTileTag(22,59,"LAND_2", 1);SetTileTag(23,59,"SOLIDWALL",1);SetTileTag(24,59,"SOLIDWALL",1);SetTileTag(25,59,"SOLIDWALL",1);SetTileTag(26,59,"SOLIDWALL",1);SetTileTag(27,59,"SOLIDWALL",1);SetTileTag(28,59,"LAND_2", 1);SetTileTag(29,59,"LAND_2", 1);SetTileTag(30,59,"LAND_2", 1);SetTileTag(34,59,"LAND_2", 1);SetTileTag(35,59,"LAND_2", 1);SetTileTag(36,59,"LAND_2", 1);SetTileTag(37,59,"LAND_2", 1);SetTileTag(38,59,"LAND_2", 1);SetTileTag(39,59,"LAND_2", 1);SetTileTag(40,59,"LAND_2", 1);SetTileTag(41,59,"LAND_2", 1);SetTileTag(42,59,"LAND_2", 1);SetTileTag(43,59,"LAND_2", 1);SetTileTag(44,59,"LAND_2", 1);SetTileTag(45,59,"LAND_2", 1);SetTileTag(46,59,"LAND_2", 1);SetTileTag(47,59,"SOLIDWALL",1);SetTileTag(49,59,"SOLIDWALL",1);SetTileTag(50,59,"LAND_15", 1);SetTileTag(51,59,"LAND_15", 1);SetTileTag(52,59,"LAND_15", 1);SetTileTag(54,59,"LAND_15", 1);SetTileTag(55,59,"LAND_15", 1);SetTileTag(57,59,"LAND_15", 1);SetTileTag(58,59,"LAND_15", 1);SetTileTag(59,59,"SOLIDWALL",1);
+		SetTileTag(4,58,"LAND_2", 1);SetTileTag(6,58,"SOLIDWALL",1);SetTileTag(7,58,"LAND_2", 1);SetTileTag(9,58,"LAND_2", 1);SetTileTag(10,58,"SOLIDWALL",1);SetTileTag(11,58,"SOLIDWALL",1);SetTileTag(15,58,"SOLIDWALL",1);SetTileTag(16,58,"SOLIDWALL",1);SetTileTag(17,58,"LAND_2", 1);SetTileTag(18,58,"SOLIDWALL",1);SetTileTag(20,58,"SOLIDWALL",1);SetTileTag(24,58,"SOLIDWALL",1);SetTileTag(28,58,"SOLIDWALL",1);SetTileTag(29,58,"SOLIDWALL",1);SetTileTag(30,58,"SOLIDWALL",1);SetTileTag(34,58,"SOLIDWALL",1);SetTileTag(35,58,"SOLIDWALL",1);SetTileTag(36,58,"SOLIDWALL",1);SetTileTag(37,58,"SOLIDWALL",1);SetTileTag(41,58,"SOLIDWALL",1);SetTileTag(43,58,"SOLIDWALL",1);SetTileTag(46,58,"SOLIDWALL",1);SetTileTag(48,58,"SOLIDWALL",1);SetTileTag(49,58,"LAND_15", 1);SetTileTag(50,58,"LAND_15", 1);SetTileTag(51,58,"LAND_15", 1);SetTileTag(53,58,"LAND_15", 1);SetTileTag(55,58,"LAND_15", 1);SetTileTag(56,58,"SOLIDWALL",1);SetTileTag(57,58,"LAND_15", 1);SetTileTag(58,58,"LAND_15", 1);SetTileTag(59,58,"SOLIDWALL",1);
+		SetTileTag(2,57,"SOLIDWALL",1);SetTileTag(3,57,"LAND_2", 1);SetTileTag(4,57,"LAND_2", 1);SetTileTag(5,57,"SOLIDWALL",1);SetTileTag(6,57,"SOLIDWALL",1);SetTileTag(7,57,"LAND_2", 1);SetTileTag(8,57,"LAND_2", 1);SetTileTag(9,57,"LAND_2", 1);SetTileTag(10,57,"SOLIDWALL",1);SetTileTag(11,57,"SOLIDWALL",1);SetTileTag(12,57,"LAND_2", 1);SetTileTag(13,57,"LAND_2", 1);SetTileTag(14,57,"LAND_2", 1);SetTileTag(15,57,"SOLIDWALL",1);SetTileTag(16,57,"LAND_2", 1);SetTileTag(18,57,"LAND_2", 1);SetTileTag(19,57,"SOLIDWALL",1);SetTileTag(20,57,"SOLIDWALL",1);SetTileTag(21,57,"LAND_2", 1);SetTileTag(22,57,"LAND_2", 1);SetTileTag(23,57,"LAND_2", 1);SetTileTag(24,57,"SOLIDWALL",1);SetTileTag(25,57,"SOLIDWALL",1);SetTileTag(26,57,"SOLIDWALL",1);SetTileTag(27,57,"SOLIDWALL",1);SetTileTag(30,57,"SOLIDWALL",1);SetTileTag(34,57,"SOLIDWALL",1);SetTileTag(35,57,"LAND_15", 1);SetTileTag(36,57,"LAND_15", 1);SetTileTag(37,57,"LAND_15", 1);SetTileTag(38,57,"SOLIDWALL",1);SetTileTag(43,57,"SOLIDWALL",1);SetTileTag(44,57,"SOLIDWALL",1);SetTileTag(45,57,"LAND_15", 1);SetTileTag(46,57,"LAND_15", 1);SetTileTag(47,57,"SOLIDWALL",1);SetTileTag(48,57,"SOLIDWALL",1);SetTileTag(49,57,"SOLIDWALL",1);SetTileTag(50,57,"LAND_15", 1);SetTileTag(51,57,"LAND_15", 1);SetTileTag(52,57,"SOLIDWALL",1);SetTileTag(53,57,"SOLIDWALL",1);SetTileTag(54,57,"LAND_15", 1);SetTileTag(55,57,"LAND_15", 1);SetTileTag(56,57,"LAND_15", 1);SetTileTag(57,57,"SOLIDWALL",1);SetTileTag(58,57,"SOLIDWALL",1);
+		SetTileTag(2,56,"SOLIDWALL",1);SetTileTag(3,56,"LAND_2", 1);SetTileTag(4,56,"LAND_2", 1);SetTileTag(6,56,"LAND_2", 1);SetTileTag(7,56,"SOLIDWALL",1);SetTileTag(9,56,"SOLIDWALL",1);SetTileTag(10,56,"SOLIDWALL",1);SetTileTag(13,56,"SOLIDWALL",1);SetTileTag(14,56,"SOLIDWALL",1);SetTileTag(15,56,"LAND_2", 1);SetTileTag(16,56,"LAND_2", 1);SetTileTag(17,56,"LAND_2", 1);SetTileTag(18,56,"LAND_2", 1);SetTileTag(19,56,"LAND_2", 1);SetTileTag(20,56,"SOLIDWALL",1);SetTileTag(21,56,"SOLIDWALL",1);SetTileTag(24,56,"SOLIDWALL",1);SetTileTag(25,56,"LAND_2", 1);SetTileTag(26,56,"LAND_2", 1);SetTileTag(27,56,"LAND_2", 1);SetTileTag(28,56,"SOLIDWALL",1);SetTileTag(30,56,"SOLIDWALL",1);SetTileTag(34,56,"SOLIDWALL",1);SetTileTag(35,56,"LAND_15", 1);SetTileTag(36,56,"LAND_15", 1);SetTileTag(38,56,"LAND_15", 1);SetTileTag(39,56,"LAND_15", 1);SetTileTag(40,56,"SOLIDWALL",1);SetTileTag(41,56,"LAND_15", 1);SetTileTag(42,56,"LAND_15", 1);SetTileTag(44,56,"SOLIDWALL",1);SetTileTag(45,56,"LAND_15", 1);SetTileTag(46,56,"LAND_15", 1);SetTileTag(48,56,"LAND_15", 1);SetTileTag(49,56,"SOLIDWALL",1);SetTileTag(50,56,"LAND_15", 1);SetTileTag(51,56,"LAND_15", 1);SetTileTag(52,56,"SOLIDWALL",1);SetTileTag(53,56,"LAND_15", 1);SetTileTag(54,56,"LAND_15", 1);SetTileTag(55,56,"LAND_15", 1);SetTileTag(57,56,"LAND_15", 1);SetTileTag(58,56,"LAND_15", 1);SetTileTag(60,56,"SOLIDWALL",1);SetTileTag(62,56,"SOLIDWALL",1);
+		SetTileTag(2,55,"SOLIDWALL",1);SetTileTag(3,55,"SOLIDWALL",1);SetTileTag(4,55,"SOLIDWALL",1);SetTileTag(5,55,"LAND_2", 1);SetTileTag(6,55,"LAND_2", 1);SetTileTag(14,55,"SOLIDWALL",1);SetTileTag(15,55,"LAND_2", 1);SetTileTag(17,55,"LAND_2", 1);SetTileTag(19,55,"LAND_2", 1);SetTileTag(20,55,"SOLIDWALL",1);SetTileTag(22,55,"SOLIDWALL",1);SetTileTag(24,55,"SOLIDWALL",1);SetTileTag(25,55,"LAND_2", 1);SetTileTag(26,55,"LAND_2", 1);SetTileTag(27,55,"LAND_2", 1);SetTileTag(28,55,"SOLIDWALL",1);SetTileTag(35,55,"SOLIDWALL",1);SetTileTag(36,55,"SOLIDWALL",1);SetTileTag(39,55,"LAND_15", 1);SetTileTag(41,55,"SOLIDWALL",1);SetTileTag(42,55,"SOLIDWALL",1);SetTileTag(44,55,"SOLIDWALL",1);SetTileTag(45,55,"SOLIDWALL",1);SetTileTag(46,55,"LAND_15", 1);SetTileTag(48,55,"LAND_15", 1);SetTileTag(49,55,"SOLIDWALL",1);SetTileTag(50,55,"SOLIDWALL",1);SetTileTag(51,55,"SOLIDWALL",1);SetTileTag(52,55,"LAND_15", 1);SetTileTag(53,55,"LAND_15", 1);SetTileTag(54,55,"LAND_15", 1);SetTileTag(55,55,"SOLIDWALL",1);SetTileTag(56,55,"LAND_15", 1);SetTileTag(58,55,"LAND_15", 1);SetTileTag(59,55,"SOLIDWALL",1);SetTileTag(60,55,"LAVA_2", 1);
+		SetTileTag(2,54,"LAND_2", 1);SetTileTag(3,54,"LAND_2", 1);SetTileTag(4,54,"LAND_2", 1);SetTileTag(5,54,"LAND_2", 1);SetTileTag(6,54,"SOLIDWALL",1);SetTileTag(7,54,"SOLIDWALL",1);SetTileTag(8,54,"SOLIDWALL",1);SetTileTag(9,54,"SOLIDWALL",1);SetTileTag(10,54,"SOLIDWALL",1);SetTileTag(11,54,"SOLIDWALL",1);SetTileTag(12,54,"SOLIDWALL",1);SetTileTag(13,54,"SOLIDWALL",1);SetTileTag(14,54,"SOLIDWALL",1);SetTileTag(15,54,"LAND_2", 1);SetTileTag(17,54,"LAND_2", 1);SetTileTag(19,54,"LAND_2", 1);SetTileTag(20,54,"SOLIDWALL",1);SetTileTag(21,54,"SOLIDWALL",1);SetTileTag(22,54,"LAND_2", 1);SetTileTag(23,54,"SOLIDWALL",1);SetTileTag(24,54,"SOLIDWALL",1);SetTileTag(25,54,"LAND_2", 1);SetTileTag(26,54,"LAND_2", 1);SetTileTag(27,54,"LAND_2", 1);SetTileTag(28,54,"SOLIDWALL",1);SetTileTag(30,54,"SOLIDWALL",1);SetTileTag(35,54,"LAVA_2", 1);SetTileTag(38,54,"LAVA_2", 1);SetTileTag(40,54,"SOLIDWALL",1);SetTileTag(41,54,"SOLIDWALL",1);SetTileTag(42,54,"SOLIDWALL",1);SetTileTag(43,54,"LAND_15", 1);SetTileTag(44,54,"LAND_15", 1);SetTileTag(48,54,"SOLIDWALL",1);SetTileTag(49,54,"SOLIDWALL",1);SetTileTag(50,54,"LAND_15", 1);SetTileTag(51,54,"LAND_15", 1);SetTileTag(52,54,"LAND_15", 1);SetTileTag(53,54,"LAND_15", 1);SetTileTag(54,54,"SOLIDWALL",1);SetTileTag(55,54,"SOLIDWALL",1);SetTileTag(56,54,"LAND_15", 1);SetTileTag(57,54,"LAND_15", 1);SetTileTag(58,54,"SOLIDWALL",1);SetTileTag(59,54,"SOLIDWALL",1);SetTileTag(61,54,"LAVA_2", 1);
+		SetTileTag(1,53,"SOLIDWALL",1);SetTileTag(2,53,"LAND_2", 1);SetTileTag(3,53,"LAND_2", 1);SetTileTag(5,53,"LAND_2", 1);SetTileTag(6,53,"SOLIDWALL",1);SetTileTag(7,53,"LAND_2", 1);SetTileTag(8,53,"LAND_2", 1);SetTileTag(9,53,"LAND_2", 1);SetTileTag(11,53,"LAND_2", 1);SetTileTag(13,53,"LAND_2", 1);SetTileTag(14,53,"LAND_2", 1);SetTileTag(15,53,"LAND_2", 1);SetTileTag(19,53,"LAND_2", 1);SetTileTag(20,53,"LAND_2", 1);SetTileTag(21,53,"LAND_2", 1);SetTileTag(22,53,"LAND_2", 1);SetTileTag(23,53,"LAND_2", 1);SetTileTag(24,53,"LAND_2", 1);SetTileTag(25,53,"LAND_2", 1);SetTileTag(26,53,"LAND_2", 1);SetTileTag(27,53,"LAND_2", 1);SetTileTag(28,53,"SOLIDWALL",1);SetTileTag(30,53,"SOLIDWALL",1);SetTileTag(39,53,"LAND_15", 1);SetTileTag(40,53,"LAND_15", 1);SetTileTag(43,53,"LAND_15", 1);SetTileTag(44,53,"LAND_15", 1);SetTileTag(45,53,"LAND_15", 1);SetTileTag(46,53,"LAND_15", 1);SetTileTag(47,53,"LAND_15", 1);SetTileTag(48,53,"LAND_15", 1);SetTileTag(49,53,"LAND_15", 1);SetTileTag(50,53,"LAND_15", 1);SetTileTag(51,53,"LAND_15", 1);SetTileTag(52,53,"LAND_15", 1);SetTileTag(53,53,"LAND_15", 1);SetTileTag(54,53,"SOLIDWALL",1);SetTileTag(55,53,"LAND_15", 1);SetTileTag(57,53,"LAND_15", 1);SetTileTag(61,53,"LAVA_2", 1);SetTileTag(62,53,"SOLIDWALL",1);
+		SetTileTag(2,52,"LAND_2", 1);SetTileTag(3,52,"LAND_2", 1);SetTileTag(4,52,"LAND_2", 1);SetTileTag(5,52,"LAND_2", 1);SetTileTag(6,52,"LAND_2", 1);SetTileTag(7,52,"LAND_2", 1);SetTileTag(9,52,"SOLIDWALL",1);SetTileTag(10,52,"SOLIDWALL",1);SetTileTag(11,52,"SOLIDWALL",1);SetTileTag(12,52,"SOLIDWALL",1);SetTileTag(13,52,"SOLIDWALL",1);SetTileTag(14,52,"SOLIDWALL",1);SetTileTag(15,52,"LAND_2", 1);SetTileTag(17,52,"LAND_2", 1);SetTileTag(19,52,"LAND_2", 1);SetTileTag(20,52,"SOLIDWALL",1);SetTileTag(21,52,"SOLIDWALL",1);SetTileTag(22,52,"LAND_2", 1);SetTileTag(23,52,"SOLIDWALL",1);SetTileTag(24,52,"SOLIDWALL",1);SetTileTag(25,52,"LAND_2", 1);SetTileTag(26,52,"LAND_2", 1);SetTileTag(27,52,"LAND_2", 1);SetTileTag(28,52,"SOLIDWALL",1);SetTileTag(33,52,"LAND_2", 1);SetTileTag(34,52,"SOLIDWALL",1);SetTileTag(39,52,"LAVA_2", 1);SetTileTag(41,52,"LAND_15", 1);SetTileTag(43,52,"SOLIDWALL",1);SetTileTag(44,52,"SOLIDWALL",1);SetTileTag(45,52,"SOLIDWALL",1);SetTileTag(46,52,"LAND_15", 1);SetTileTag(48,52,"SOLIDWALL",1);SetTileTag(49,52,"LAND_15", 1);SetTileTag(51,52,"LAND_15", 1);SetTileTag(52,52,"LAND_15", 1);SetTileTag(54,52,"LAND_15", 1);SetTileTag(55,52,"LAND_15", 1);SetTileTag(57,52,"LAND_15", 1);SetTileTag(58,52,"SOLIDWALL",1);SetTileTag(59,52,"LAND_21", 1);
+		SetTileTag(1,51,"SOLIDWALL",1);SetTileTag(2,51,"LAND_2", 1);SetTileTag(3,51,"LAND_2", 1);SetTileTag(4,51,"LAND_2", 1);SetTileTag(6,51,"LAND_2", 1);SetTileTag(9,51,"SOLIDWALL",1);SetTileTag(10,51,"SOLIDWALL",1);SetTileTag(11,51,"LAND_2", 1);SetTileTag(13,51,"SOLIDWALL",1);SetTileTag(14,51,"SOLIDWALL",1);SetTileTag(15,51,"LAND_2", 1);SetTileTag(16,51,"LAND_2", 1);SetTileTag(17,51,"LAND_2", 1);SetTileTag(18,51,"LAND_2", 1);SetTileTag(19,51,"LAND_2", 1);SetTileTag(20,51,"SOLIDWALL",1);SetTileTag(22,51,"SOLIDWALL",1);SetTileTag(24,51,"SOLIDWALL",1);SetTileTag(25,51,"LAND_2", 1);SetTileTag(26,51,"LAND_2", 1);SetTileTag(27,51,"LAND_2", 1);SetTileTag(28,51,"SOLIDWALL",1);SetTileTag(30,51,"SOLIDWALL",1);SetTileTag(31,51,"LAND_2", 1);SetTileTag(33,51,"LAND_2", 1);SetTileTag(34,51,"LAVA_2", 1);SetTileTag(39,51,"LAND_15", 1);SetTileTag(42,51,"LAND_15", 1);SetTileTag(43,51,"LAND_15", 1);SetTileTag(44,51,"LAND_15", 1);SetTileTag(46,51,"SOLIDWALL",1);SetTileTag(47,51,"LAND_15", 1);SetTileTag(48,51,"LAND_15", 1);SetTileTag(50,51,"LAND_15", 1);SetTileTag(51,51,"SOLIDWALL",1);SetTileTag(52,51,"LAND_15", 1);SetTileTag(53,51,"LAND_15", 1);SetTileTag(54,51,"LAND_15", 1);SetTileTag(55,51,"LAND_15", 1);SetTileTag(56,51,"LAND_15", 1);SetTileTag(57,51,"SOLIDWALL",1);SetTileTag(58,51,"SOLIDWALL",1);SetTileTag(59,51,"LAVA_2", 1);
+		SetTileTag(3,50,"SOLIDWALL",1);SetTileTag(4,50,"LAND_2", 1);SetTileTag(5,50,"LAND_2", 1);SetTileTag(6,50,"LAND_2", 1);SetTileTag(8,50,"LAND_2", 1);SetTileTag(9,50,"LAND_2", 1);SetTileTag(10,50,"LAND_2", 1);SetTileTag(11,50,"LAND_2", 1);SetTileTag(12,50,"LAND_2", 1);SetTileTag(13,50,"SOLIDWALL",1);SetTileTag(14,50,"SOLIDWALL",1);SetTileTag(15,50,"LAND_2", 1);SetTileTag(16,50,"LAND_2", 1);SetTileTag(17,50,"LAND_2", 1);SetTileTag(18,50,"LAND_2", 1);SetTileTag(19,50,"LAND_2", 1);SetTileTag(20,50,"SOLIDWALL",1);SetTileTag(24,50,"SOLIDWALL",1);SetTileTag(25,50,"LAND_2", 1);SetTileTag(26,50,"LAND_2", 1);SetTileTag(27,50,"LAND_2", 1);SetTileTag(28,50,"SOLIDWALL",1);SetTileTag(30,50,"SOLIDWALL",1);SetTileTag(31,50,"LAND_2", 1);SetTileTag(32,50,"LAND_2", 1);SetTileTag(33,50,"LAND_2", 1);SetTileTag(39,50,"LAND_15", 1);SetTileTag(40,50,"LAVA_2", 1);SetTileTag(41,50,"LAVA_2", 1);SetTileTag(44,50,"LAND_15", 1);SetTileTag(48,50,"SOLIDWALL",1);SetTileTag(49,50,"SOLIDWALL",1);SetTileTag(51,50,"LAND_15", 1);SetTileTag(52,50,"LAND_15", 1);SetTileTag(53,50,"LAND_15", 1);SetTileTag(54,50,"LAND_15", 1);SetTileTag(55,50,"LAND_15", 1);SetTileTag(56,50,"LAND_15", 1);SetTileTag(57,50,"SOLIDWALL",1);SetTileTag(58,50,"LAVA_2", 1);SetTileTag(60,50,"LAVA_2", 1);
+		SetTileTag(2,49,"SOLIDWALL",1);SetTileTag(3,49,"LAND_2", 1);SetTileTag(5,49,"LAND_2", 1);SetTileTag(6,49,"SOLIDWALL",1);SetTileTag(7,49,"SOLIDWALL",1);SetTileTag(8,49,"LAND_2", 1);SetTileTag(9,49,"SOLIDWALL",1);SetTileTag(10,49,"SOLIDWALL",1);SetTileTag(12,49,"SOLIDWALL",1);SetTileTag(15,49,"SOLIDWALL",1);SetTileTag(16,49,"SOLIDWALL",1);SetTileTag(17,49,"LAND_2", 1);SetTileTag(18,49,"SOLIDWALL",1);SetTileTag(19,49,"SOLIDWALL",1);SetTileTag(25,49,"SOLIDWALL",1);SetTileTag(26,49,"SOLIDWALL",1);SetTileTag(27,49,"SOLIDWALL",1);SetTileTag(29,49,"SOLIDWALL",1);SetTileTag(30,49,"LAVA_2", 1);SetTileTag(33,49,"LAVA_2", 1);SetTileTag(34,49,"LAVA_2", 1);SetTileTag(35,49,"LAVA_2", 1);SetTileTag(39,49,"LAND_15", 1);SetTileTag(40,49,"LAND_15", 1);SetTileTag(41,49,"LAND_15", 1);SetTileTag(43,49,"LAVA_2", 1);SetTileTag(44,49,"LAND_15", 1);SetTileTag(46,49,"SOLIDWALL",1);SetTileTag(48,49,"LAND_15", 1);SetTileTag(50,49,"LAND_15", 1);SetTileTag(52,49,"LAND_15", 1);SetTileTag(53,49,"SOLIDWALL",1);SetTileTag(54,49,"SOLIDWALL",1);SetTileTag(56,49,"LAND_15", 1);SetTileTag(59,49,"LAVA_2", 1);SetTileTag(60,49,"LAVA_2", 1);
+		SetTileTag(2,48,"SOLIDWALL",1);SetTileTag(3,48,"LAND_2", 1);SetTileTag(5,48,"SOLIDWALL",1);SetTileTag(7,48,"SOLIDWALL",1);SetTileTag(8,48,"LAND_2", 1);SetTileTag(9,48,"SOLIDWALL",1);SetTileTag(10,48,"SOLIDWALL",1);SetTileTag(12,48,"SOLIDWALL",1);SetTileTag(16,48,"SOLIDWALL",1);SetTileTag(18,48,"SOLIDWALL",1);SetTileTag(29,48,"SOLIDWALL",1);SetTileTag(33,48,"LAND_2", 1);SetTileTag(34,48,"LAND_2", 1);SetTileTag(36,48,"LAVA_2", 1);SetTileTag(38,48,"LAVA_2", 1);SetTileTag(42,48,"LAVA_2", 1);SetTileTag(44,48,"LAND_15", 1);SetTileTag(45,48,"SOLIDWALL",1);SetTileTag(46,48,"SOLIDWALL",1);SetTileTag(48,48,"LAND_15", 1);SetTileTag(51,48,"LAND_15", 1);SetTileTag(52,48,"SOLIDWALL",1);SetTileTag(54,48,"LAND_15", 1);SetTileTag(55,48,"LAND_15", 1);SetTileTag(56,48,"LAND_15", 1);SetTileTag(57,48,"LAND_15", 1);SetTileTag(59,48,"LAND_17", 1);SetTileTag(60,48,"SOLIDWALL",1);
+		SetTileTag(2,47,"SOLIDWALL",1);SetTileTag(3,47,"LAND_2", 1);SetTileTag(5,47,"SOLIDWALL",1);SetTileTag(6,47,"SOLIDWALL",1);SetTileTag(8,47,"LAND_2", 1);SetTileTag(9,47,"LAND_2", 1);SetTileTag(10,47,"LAND_2", 1);SetTileTag(13,47,"SOLIDWALL",1);SetTileTag(15,47,"SOLIDWALL",1);SetTileTag(16,47,"SOLIDWALL",1);SetTileTag(17,47,"LAND_2", 1);SetTileTag(18,47,"SOLIDWALL",1);SetTileTag(19,47,"SOLIDWALL",1);SetTileTag(26,47,"SOLIDWALL",1);SetTileTag(28,47,"SOLIDWALL",1);SetTileTag(29,47,"LAVA_2", 1);SetTileTag(31,47,"LAVA_2", 1);SetTileTag(32,47,"LAVA_2", 1);SetTileTag(33,47,"LAND_2", 1);SetTileTag(34,47,"SOLIDWALL",1);SetTileTag(35,47,"LAND_2", 1);SetTileTag(36,47,"LAND_2", 1);SetTileTag(39,47,"LAVA_2", 1);SetTileTag(40,47,"LAVA_2", 1);SetTileTag(41,47,"LAVA_2", 1);SetTileTag(43,47,"LAND_15", 1);SetTileTag(44,47,"SOLIDWALL",1);SetTileTag(45,47,"SOLIDWALL",1);SetTileTag(46,47,"LAND_15", 1);SetTileTag(48,47,"LAND_15", 1);SetTileTag(49,47,"LAND_15", 1);SetTileTag(51,47,"LAND_15", 1);SetTileTag(52,47,"SOLIDWALL",1);SetTileTag(53,47,"SOLIDWALL",1);SetTileTag(54,47,"LAND_15", 1);SetTileTag(55,47,"SOLIDWALL",1);SetTileTag(56,47,"LAND_15", 1);SetTileTag(58,47,"LAVA_2", 1);SetTileTag(59,47,"LAND_17", 1);SetTileTag(60,47,"LAND_17", 1);SetTileTag(61,47,"LAND_17", 1);SetTileTag(62,47,"SOLIDWALL",1);
+		SetTileTag(2,46,"SOLIDWALL",1);SetTileTag(4,46,"LAND_2", 1);SetTileTag(5,46,"SOLIDWALL",1);SetTileTag(6,46,"SOLIDWALL",1);SetTileTag(7,46,"LAND_2", 1);SetTileTag(8,46,"LAND_2", 1);SetTileTag(9,46,"SOLIDWALL",1);SetTileTag(10,46,"SOLIDWALL",1);SetTileTag(11,46,"LAND_2", 1);SetTileTag(12,46,"LAND_2", 1);SetTileTag(13,46,"SOLIDWALL",1);SetTileTag(14,46,"SOLIDWALL",1);SetTileTag(15,46,"LAND_2", 1);SetTileTag(16,46,"LAND_2", 1);SetTileTag(19,46,"LAND_2", 1);SetTileTag(20,46,"SOLIDWALL",1);SetTileTag(27,46,"LAND_14", 1);SetTileTag(28,46,"LAND_14", 1);SetTileTag(33,46,"LAND_2", 1);SetTileTag(35,46,"SOLIDWALL",1);SetTileTag(38,46,"LAND_15", 1);SetTileTag(39,46,"LAND_15", 1);SetTileTag(41,46,"LAND_15", 1);SetTileTag(42,46,"LAND_15", 1);SetTileTag(46,46,"LAND_15", 1);SetTileTag(48,46,"LAND_15", 1);SetTileTag(50,46,"LAND_15", 1);SetTileTag(51,46,"LAND_15", 1);SetTileTag(52,46,"SOLIDWALL",1);SetTileTag(53,46,"SOLIDWALL",1);SetTileTag(55,46,"LAVA_2", 1);SetTileTag(57,46,"LAVA_2", 1);SetTileTag(58,46,"LAND_17", 1);SetTileTag(60,46,"SOLIDWALL",1);SetTileTag(61,46,"LAND_17", 1);SetTileTag(62,46,"SOLIDWALL",1);
+		SetTileTag(2,45,"SOLIDWALL",1);SetTileTag(4,45,"LAND_2", 1);SetTileTag(5,45,"SOLIDWALL",1);SetTileTag(6,45,"SOLIDWALL",1);SetTileTag(7,45,"SOLIDWALL",1);SetTileTag(8,45,"SOLIDWALL",1);SetTileTag(10,45,"SOLIDWALL",1);SetTileTag(11,45,"SOLIDWALL",1);SetTileTag(12,45,"SOLIDWALL",1);SetTileTag(15,45,"SOLIDWALL",1);SetTileTag(16,45,"LAND_2", 1);SetTileTag(17,45,"LAND_2", 1);SetTileTag(18,45,"LAND_2", 1);SetTileTag(19,45,"SOLIDWALL",1);SetTileTag(23,45,"SOLIDWALL",1);SetTileTag(25,45,"SOLIDWALL",1);SetTileTag(26,45,"LAND_14", 1);SetTileTag(27,45,"LAND_14", 1);SetTileTag(30,45,"LAVA_2", 1);SetTileTag(33,45,"LAND_2", 1);SetTileTag(39,45,"LAND_15", 1);SetTileTag(44,45,"SOLIDWALL",1);SetTileTag(45,45,"LAND_15", 1);SetTileTag(46,45,"LAND_15", 1);SetTileTag(48,45,"SOLIDWALL",1);SetTileTag(49,45,"LAND_15", 1);SetTileTag(51,45,"LAND_15", 1);SetTileTag(53,45,"LAND_15", 1);SetTileTag(54,45,"LAND_15", 1);SetTileTag(56,45,"LAVA_2", 1);SetTileTag(57,45,"LAVA_2", 1);SetTileTag(58,45,"SOLIDWALL",1);SetTileTag(60,45,"SOLIDWALL",1);SetTileTag(61,45,"LAND_17", 1);SetTileTag(62,45,"SOLIDWALL",1);
+		SetTileTag(2,44,"SOLIDWALL",1);SetTileTag(3,44,"LAND_2", 1);SetTileTag(4,44,"LAND_2", 1);SetTileTag(7,44,"LAVA_2", 1);SetTileTag(8,44,"SOLIDWALL",1);SetTileTag(10,44,"SOLIDWALL",1);SetTileTag(13,44,"SOLIDWALL",1);SetTileTag(16,44,"SOLIDWALL",1);SetTileTag(17,44,"LAND_2", 1);SetTileTag(18,44,"SOLIDWALL",1);SetTileTag(22,44,"SOLIDWALL",1);SetTileTag(23,44,"LAVA_2", 1);SetTileTag(24,44,"LAND_12", 1);SetTileTag(28,44,"LAVA_2", 1);SetTileTag(29,44,"LAVA_2", 1);SetTileTag(30,44,"LAVA_2", 1);SetTileTag(33,44,"LAND_2", 1);SetTileTag(38,44,"SOLIDWALL",1);SetTileTag(40,44,"LAND_15", 1);SetTileTag(45,44,"SOLIDWALL",1);SetTileTag(46,44,"LAND_15", 1);SetTileTag(48,44,"LAND_15", 1);SetTileTag(51,44,"SOLIDWALL",1);SetTileTag(52,44,"SOLIDWALL",1);SetTileTag(53,44,"LAVA_2", 1);SetTileTag(55,44,"LAVA_2", 1);SetTileTag(56,44,"LAVA_2", 1);SetTileTag(57,44,"LAND_20", 1);SetTileTag(59,44,"SOLIDWALL",1);SetTileTag(60,44,"SOLIDWALL",1);SetTileTag(61,44,"LAND_17", 1);SetTileTag(62,44,"SOLIDWALL",1);
+		SetTileTag(2,43,"SOLIDWALL",1);SetTileTag(3,43,"LAVA_2", 1);SetTileTag(5,43,"LAVA_2", 1);SetTileTag(6,43,"LAVA_2", 1);SetTileTag(7,43,"LAVA_2", 1);SetTileTag(9,43,"LAVA_2", 1);SetTileTag(10,43,"SOLIDWALL",1);SetTileTag(11,43,"LAND_7", 1);SetTileTag(12,43,"LAND_7", 1);SetTileTag(13,43,"SOLIDWALL",1);SetTileTag(15,43,"SOLIDWALL",1);SetTileTag(16,43,"LAND_2", 1);SetTileTag(17,43,"LAND_2", 1);SetTileTag(18,43,"LAND_2", 1);SetTileTag(19,43,"SOLIDWALL",1);SetTileTag(21,43,"SOLIDWALL",1);SetTileTag(22,43,"LAVA_2", 1);SetTileTag(26,43,"LAVA_2", 1);SetTileTag(27,43,"LAVA_2", 1);SetTileTag(28,43,"LAVA_2", 1);SetTileTag(29,43,"SOLIDWALL",1);SetTileTag(30,43,"SOLIDWALL",1);SetTileTag(32,43,"LAND_2", 1);SetTileTag(33,43,"LAND_2", 1);SetTileTag(34,43,"SOLIDWALL",1);SetTileTag(36,43,"SOLIDWALL",1);SetTileTag(37,43,"LAVA_2", 1);SetTileTag(38,43,"LAVA_2", 1);SetTileTag(39,43,"SOLIDWALL",1);SetTileTag(40,43,"LAND_15", 1);SetTileTag(43,43,"LAND_15", 1);SetTileTag(44,43,"SOLIDWALL",1);SetTileTag(45,43,"SOLIDWALL",1);SetTileTag(47,43,"LAND_15", 1);SetTileTag(48,43,"SOLIDWALL",1);SetTileTag(49,43,"LAND_15", 1);SetTileTag(50,43,"LAND_15", 1);SetTileTag(51,43,"LAVA_2", 1);SetTileTag(53,43,"LAVA_2", 1);SetTileTag(54,43,"LAVA_2", 1);SetTileTag(55,43,"LAND_20", 1);SetTileTag(59,43,"LAND_20", 1);SetTileTag(60,43,"SOLIDWALL",1);SetTileTag(61,43,"LAND_17", 1);SetTileTag(62,43,"SOLIDWALL",1);
+		SetTileTag(2,42,"SOLIDWALL",1);SetTileTag(5,42,"SOLIDWALL",1);SetTileTag(6,42,"SOLIDWALL",1);SetTileTag(7,42,"LAVA_2", 1);SetTileTag(8,42,"LAVA_2", 1);SetTileTag(10,42,"LAVA_2", 1);SetTileTag(11,42,"SOLIDWALL",1);SetTileTag(12,42,"SOLIDWALL",1);SetTileTag(15,42,"LAND_2", 1);SetTileTag(16,42,"LAND_2", 1);SetTileTag(19,42,"LAND_2", 1);SetTileTag(20,42,"SOLIDWALL",1);SetTileTag(21,42,"LAVA_2", 1);SetTileTag(24,42,"LAVA_2", 1);SetTileTag(25,42,"LAVA_2", 1);SetTileTag(26,42,"LAND_13", 1);SetTileTag(28,42,"SOLIDWALL",1);SetTileTag(30,42,"SOLIDWALL",1);SetTileTag(32,42,"SOLIDWALL",1);SetTileTag(33,42,"LAND_2", 1);SetTileTag(34,42,"SOLIDWALL",1);SetTileTag(36,42,"SOLIDWALL",1);SetTileTag(37,42,"LAVA_2", 1);SetTileTag(39,42,"LAVA_2", 1);SetTileTag(40,42,"LAND_15", 1);SetTileTag(41,42,"LAND_15", 1);SetTileTag(42,42,"LAND_15", 1);SetTileTag(43,42,"LAND_15", 1);SetTileTag(45,42,"LAND_15", 1);SetTileTag(47,42,"LAND_15", 1);SetTileTag(48,42,"SOLIDWALL",1);SetTileTag(49,42,"LAVA_2", 1);SetTileTag(51,42,"LAVA_2", 1);SetTileTag(52,42,"LAVA_2", 1);SetTileTag(53,42,"LAVA_2", 1);SetTileTag(54,42,"SOLIDWALL",1);SetTileTag(55,42,"SOLIDWALL",1);SetTileTag(56,42,"LAND_20", 1);SetTileTag(57,42,"LAND_20", 1);SetTileTag(58,42,"LAND_20", 1);SetTileTag(59,42,"LAND_20", 1);SetTileTag(60,42,"SOLIDWALL",1);SetTileTag(61,42,"LAND_17", 1);SetTileTag(62,42,"SOLIDWALL",1);
+		SetTileTag(3,41,"LAND_2", 1);SetTileTag(4,41,"LAND_2", 1);SetTileTag(6,41,"SOLIDWALL",1);SetTileTag(7,41,"SOLIDWALL",1);SetTileTag(8,41,"LAVA_2", 1);SetTileTag(9,41,"LAVA_2", 1);SetTileTag(12,41,"LAVA_2", 1);SetTileTag(13,41,"SOLIDWALL",1);SetTileTag(14,41,"SOLIDWALL",1);SetTileTag(15,41,"SOLIDWALL",1);SetTileTag(16,41,"SOLIDWALL",1);SetTileTag(17,41,"SOLIDWALL",1);SetTileTag(18,41,"SOLIDWALL",1);SetTileTag(19,41,"SOLIDWALL",1);SetTileTag(20,41,"LAVA_2", 1);SetTileTag(23,41,"LAVA_2", 1);SetTileTag(24,41,"LAVA_2", 1);SetTileTag(25,41,"SOLIDWALL",1);SetTileTag(26,41,"SOLIDWALL",1);SetTileTag(27,41,"SOLIDWALL",1);SetTileTag(29,41,"SOLIDWALL",1);SetTileTag(32,41,"LAND_2", 1);SetTileTag(33,41,"LAND_2", 1);SetTileTag(35,41,"SOLIDWALL",1);SetTileTag(36,41,"SOLIDWALL",1);SetTileTag(37,41,"SOLIDWALL",1);SetTileTag(38,41,"LAVA_2", 1);SetTileTag(40,41,"LAND_15", 1);SetTileTag(41,41,"LAND_15", 1);SetTileTag(42,41,"LAND_15", 1);SetTileTag(43,41,"LAND_15", 1);SetTileTag(44,41,"SOLIDWALL",1);SetTileTag(45,41,"LAND_15", 1);SetTileTag(46,41,"LAND_15", 1);SetTileTag(47,41,"LAVA_2", 1);SetTileTag(49,41,"LAVA_2", 1);SetTileTag(50,41,"LAVA_2", 1);SetTileTag(51,41,"LAND_17", 1);SetTileTag(52,41,"SOLIDWALL",1);SetTileTag(53,41,"LAND_17", 1);SetTileTag(55,41,"SOLIDWALL",1);SetTileTag(56,41,"SOLIDWALL",1);SetTileTag(58,41,"SOLIDWALL",1);SetTileTag(59,41,"SOLIDWALL",1);SetTileTag(61,41,"LAND_17", 1);
+		SetTileTag(6,40,"SOLIDWALL",1);SetTileTag(8,40,"SOLIDWALL",1);SetTileTag(9,40,"LAVA_2", 1);SetTileTag(10,40,"LAVA_2", 1);SetTileTag(11,40,"LAVA_2", 1);SetTileTag(13,40,"LAND_9", 1);SetTileTag(14,40,"LAND_9", 1);SetTileTag(15,40,"LAND_9", 1);SetTileTag(16,40,"LAND_9", 1);SetTileTag(17,40,"LAND_9", 1);SetTileTag(18,40,"SOLIDWALL",1);SetTileTag(19,40,"LAVA_2", 1);SetTileTag(22,40,"LAVA_2", 1);SetTileTag(23,40,"LAND_11", 1);SetTileTag(24,40,"SOLIDWALL",1);SetTileTag(29,40,"SOLIDWALL",1);SetTileTag(33,40,"LAND_2", 1);SetTileTag(37,40,"SOLIDWALL",1);SetTileTag(38,40,"LAVA_2", 1);SetTileTag(39,40,"LAVA_2", 1);SetTileTag(40,40,"LAVA_2", 1);SetTileTag(49,40,"LAND_17", 1);SetTileTag(51,40,"LAND_17", 1);SetTileTag(52,40,"LAND_17", 1);SetTileTag(53,40,"LAND_17", 1);SetTileTag(54,40,"LAND_17", 1);SetTileTag(55,40,"LAND_17", 1);SetTileTag(56,40,"LAND_17", 1);SetTileTag(57,40,"LAND_17", 1);SetTileTag(58,40,"LAND_17", 1);SetTileTag(59,40,"LAND_17", 1);SetTileTag(61,40,"LAVA_12", 1);
+		SetTileTag(7,39,"SOLIDWALL",1);SetTileTag(10,39,"SOLIDWALL",1);SetTileTag(11,39,"LAVA_2", 1);SetTileTag(12,39,"LAVA_2", 1);SetTileTag(14,39,"LAVA_2", 1);SetTileTag(15,39,"SOLIDWALL",1);SetTileTag(16,39,"SOLIDWALL",1);SetTileTag(18,39,"SOLIDWALL",1);SetTileTag(21,39,"LAVA_2", 1);SetTileTag(22,39,"LAVA_2", 1);SetTileTag(23,39,"SOLIDWALL",1);SetTileTag(33,39,"LAND_2", 1);SetTileTag(38,39,"LAND_2", 1);SetTileTag(39,39,"SOLIDWALL",1);SetTileTag(40,39,"SOLIDWALL",1);SetTileTag(41,39,"SOLIDWALL",1);SetTileTag(44,39,"SOLIDWALL",1);SetTileTag(45,39,"LAND_2", 1);SetTileTag(47,39,"LAND_2", 1);SetTileTag(48,39,"LAVA_2", 1);SetTileTag(50,39,"LAND_17", 1);SetTileTag(51,39,"LAND_17", 1);SetTileTag(52,39,"LAND_17", 1);SetTileTag(54,39,"SOLIDWALL",1);SetTileTag(55,39,"SOLIDWALL",1);SetTileTag(56,39,"SOLIDWALL",1);SetTileTag(57,39,"SOLIDWALL",1);SetTileTag(58,39,"SOLIDWALL",1);SetTileTag(59,39,"SOLIDWALL",1);SetTileTag(60,39,"LAND_17", 1);SetTileTag(61,39,"LAND_17", 1);SetTileTag(62,39,"LAND_17", 1);SetTileTag(63,39,"SOLIDWALL",1);
+		SetTileTag(7,38,"LAND_5", 1);SetTileTag(9,38,"LAND_5", 1);SetTileTag(10,38,"SOLIDWALL",1);SetTileTag(11,38,"SOLIDWALL",1);SetTileTag(12,38,"LAVA_2", 1);SetTileTag(13,38,"LAVA_2", 1);SetTileTag(15,38,"LAVA_2", 1);SetTileTag(16,38,"SOLIDWALL",1);SetTileTag(18,38,"LAVA_2", 1);SetTileTag(20,38,"LAVA_2", 1);SetTileTag(21,38,"LAVA_2", 1);SetTileTag(22,38,"SOLIDWALL",1);SetTileTag(29,38,"SOLIDWALL",1);SetTileTag(35,38,"SOLIDWALL",1);SetTileTag(36,38,"LAND_2", 1);SetTileTag(37,38,"LAND_2", 1);SetTileTag(38,38,"LAND_2", 1);SetTileTag(44,38,"LAND_2", 1);SetTileTag(45,38,"LAND_2", 1);SetTileTag(46,38,"LAND_2", 1);SetTileTag(47,38,"LAND_2", 1);SetTileTag(48,38,"LAVA_2", 1);SetTileTag(49,38,"LAVA_2", 1);SetTileTag(50,38,"LAVA_2", 1);SetTileTag(55,38,"LAND_19", 1);SetTileTag(57,38,"SOLIDWALL",1);SetTileTag(58,38,"SOLIDWALL",1);SetTileTag(60,38,"SOLIDWALL",1);SetTileTag(62,38,"SOLIDWALL",1);
+		SetTileTag(7,37,"LAND_5", 1);SetTileTag(9,37,"LAND_5", 1);SetTileTag(12,37,"LAND_5", 1);SetTileTag(14,37,"LAVA_2", 1);SetTileTag(19,37,"LAVA_2", 1);SetTileTag(20,37,"LAVA_2", 1);SetTileTag(21,37,"SOLIDWALL",1);SetTileTag(27,37,"SOLIDWALL",1);SetTileTag(29,37,"SOLIDWALL",1);SetTileTag(30,37,"LAVA_8", 1);SetTileTag(31,37,"LAND_2", 1);SetTileTag(32,37,"LAND_2", 1);SetTileTag(33,37,"LAND_2", 1);SetTileTag(34,37,"LAVA_11", 1);SetTileTag(35,37,"SOLIDWALL",1);SetTileTag(36,37,"SOLIDWALL",1);SetTileTag(37,37,"SOLIDWALL",1);SetTileTag(38,37,"SOLIDWALL",1);SetTileTag(40,37,"LAND_2", 1);SetTileTag(42,37,"LAND_2", 1);SetTileTag(44,37,"LAND_2", 1);SetTileTag(48,37,"LAND_2", 1);SetTileTag(49,37,"SOLIDWALL",1);SetTileTag(51,37,"LAND_2", 1);SetTileTag(53,37,"LAVA_2", 1);SetTileTag(54,37,"LAVA_2", 1);SetTileTag(55,37,"LAVA_2", 1);SetTileTag(60,37,"LAND_17", 1);SetTileTag(61,37,"LAND_17", 1);SetTileTag(62,37,"SOLIDWALL",1);
+		SetTileTag(6,36,"SOLIDWALL",1);SetTileTag(7,36,"LAND_5", 1);SetTileTag(8,36,"LAND_5", 1);SetTileTag(9,36,"LAND_5", 1);SetTileTag(10,36,"SOLIDWALL",1);SetTileTag(11,36,"LAND_5", 1);SetTileTag(12,36,"SOLIDWALL",1);SetTileTag(13,36,"LAND_5", 1);SetTileTag(14,36,"LAVA_2", 1);SetTileTag(15,36,"LAVA_2", 1);SetTileTag(16,36,"LAVA_2", 1);SetTileTag(17,36,"LAVA_2", 1);SetTileTag(18,36,"LAVA_2", 1);SetTileTag(19,36,"LAVA_2", 1);SetTileTag(20,36,"SOLIDWALL",1);SetTileTag(28,36,"LAVA_8", 1);SetTileTag(34,36,"LAVA_11", 1);SetTileTag(38,36,"SOLIDWALL",1);SetTileTag(40,36,"SOLIDWALL",1);SetTileTag(41,36,"LAND_2", 1);SetTileTag(42,36,"LAND_2", 1);SetTileTag(43,36,"LAND_2", 1);SetTileTag(44,36,"SOLIDWALL",1);SetTileTag(45,36,"LAND_2", 1);SetTileTag(47,36,"LAND_2", 1);SetTileTag(48,36,"LAND_2", 1);SetTileTag(50,36,"LAND_2", 1);SetTileTag(51,36,"LAND_2", 1);SetTileTag(55,36,"LAND_2", 1);SetTileTag(56,36,"SOLIDWALL",1);SetTileTag(57,36,"SOLIDWALL",1);SetTileTag(58,36,"LAVA_2", 1);SetTileTag(59,36,"LAVA_2", 1);SetTileTag(60,36,"LAVA_2", 1);SetTileTag(63,36,"SOLIDWALL",1);
+		SetTileTag(6,35,"SOLIDWALL",1);SetTileTag(7,35,"SOLIDWALL",1);SetTileTag(11,35,"SOLIDWALL",1);SetTileTag(13,35,"SOLIDWALL",1);SetTileTag(14,35,"SOLIDWALL",1);SetTileTag(15,35,"SOLIDWALL",1);SetTileTag(16,35,"SOLIDWALL",1);SetTileTag(17,35,"LAVA_2", 1);SetTileTag(18,35,"LAVA_2", 1);SetTileTag(19,35,"SOLIDWALL",1);SetTileTag(26,35,"SOLIDWALL",1);SetTileTag(28,35,"LAND_2", 1);SetTileTag(29,35,"LAND_2", 1);SetTileTag(30,35,"LAND_2", 1);SetTileTag(31,35,"LAND_2", 1);SetTileTag(32,35,"LAND_2", 1);SetTileTag(33,35,"LAND_2", 1);SetTileTag(34,35,"LAND_2", 1);SetTileTag(35,35,"LAND_2", 1);SetTileTag(36,35,"LAND_2", 1);SetTileTag(38,35,"SOLIDWALL",1);SetTileTag(39,35,"LAND_2", 1);SetTileTag(40,35,"LAND_2", 1);SetTileTag(47,35,"SOLIDWALL",1);SetTileTag(48,35,"SOLIDWALL",1);SetTileTag(50,35,"LAND_2", 1);SetTileTag(52,35,"SOLIDWALL",1);SetTileTag(53,35,"SOLIDWALL",1);SetTileTag(54,35,"LAND_2", 1);SetTileTag(55,35,"LAND_2", 1);SetTileTag(58,35,"SOLIDWALL",1);SetTileTag(59,35,"SOLIDWALL",1);SetTileTag(60,35,"LAVA_2", 1);SetTileTag(61,35,"LAVA_2", 1);SetTileTag(63,35,"SOLIDWALL",1);
+		SetTileTag(6,34,"SOLIDWALL",1);SetTileTag(7,34,"SOLIDWALL",1);SetTileTag(17,34,"LAVA_2", 1);SetTileTag(18,34,"LAVA_2", 1);SetTileTag(25,34,"SOLIDWALL",1);SetTileTag(26,34,"SOLIDWALL",1);SetTileTag(28,34,"LAND_2", 1);SetTileTag(30,34,"LAND_2", 1);SetTileTag(31,34,"LAND_2", 1);SetTileTag(32,34,"LAND_2", 1);SetTileTag(33,34,"LAND_2", 1);SetTileTag(36,34,"LAND_2", 1);SetTileTag(38,34,"SOLIDWALL",1);SetTileTag(39,34,"SOLIDWALL",1);SetTileTag(40,34,"SOLIDWALL",1);SetTileTag(41,34,"SOLIDWALL",1);SetTileTag(42,34,"SOLIDWALL",1);SetTileTag(43,34,"SOLIDWALL",1);SetTileTag(44,34,"LAND_2", 1);SetTileTag(45,34,"LAND_2", 1);SetTileTag(46,34,"LAND_2", 1);SetTileTag(47,34,"LAND_2", 1);SetTileTag(49,34,"LAND_2", 1);SetTileTag(50,34,"SOLIDWALL",1);SetTileTag(51,34,"SOLIDWALL",1);SetTileTag(52,34,"LAND_2", 1);SetTileTag(53,34,"LAND_2", 1);SetTileTag(54,34,"LAND_2", 1);SetTileTag(55,34,"SOLIDWALL",1);SetTileTag(59,34,"SOLIDWALL",1);SetTileTag(60,34,"LAND_22", 1);SetTileTag(62,34,"LAVA_2", 1);SetTileTag(63,34,"SOLIDWALL",1);
+		SetTileTag(3,33,"LAVA_3", 1);SetTileTag(4,33,"LAVA_3", 1);SetTileTag(6,33,"SOLIDWALL",1);SetTileTag(7,33,"LAND_2", 1);SetTileTag(8,33,"LAND_2", 1);SetTileTag(13,33,"LAND_2", 1);SetTileTag(14,33,"SOLIDWALL",1);SetTileTag(16,33,"SOLIDWALL",1);SetTileTag(17,33,"LAVA_2", 1);SetTileTag(18,33,"LAVA_2", 1);SetTileTag(20,33,"SOLIDWALL",1);SetTileTag(22,33,"SOLIDWALL",1);SetTileTag(23,33,"SOLIDWALL",1);SetTileTag(24,33,"SOLIDWALL",1);SetTileTag(25,33,"LAVA_8", 1);SetTileTag(27,33,"LAVA_8", 1);SetTileTag(30,33,"LAND_2", 1);SetTileTag(31,33,"SOLIDWALL",1);SetTileTag(32,33,"SOLIDWALL",1);SetTileTag(33,33,"SOLIDWALL",1);SetTileTag(34,33,"LAND_2", 1);SetTileTag(37,33,"LAVA_11", 1);SetTileTag(38,33,"LAVA_11", 1);SetTileTag(43,33,"SOLIDWALL",1);SetTileTag(44,33,"SOLIDWALL",1);SetTileTag(49,33,"SOLIDWALL",1);SetTileTag(52,33,"LAND_2", 1);SetTileTag(53,33,"LAND_2", 1);SetTileTag(54,33,"LAND_2", 1);SetTileTag(60,33,"SOLIDWALL",1);
+		SetTileTag(5,32,"LAND_2", 1);SetTileTag(6,32,"SOLIDWALL",1);SetTileTag(7,32,"LAND_2", 1);SetTileTag(8,32,"LAVA_4", 1);SetTileTag(14,32,"SOLIDWALL",1);SetTileTag(15,32,"SOLIDWALL",1);SetTileTag(16,32,"SOLIDWALL",1);SetTileTag(17,32,"LAVA_2", 1);SetTileTag(18,32,"LAVA_2", 1);SetTileTag(19,32,"SOLIDWALL",1);SetTileTag(20,32,"LAND_2", 1);SetTileTag(22,32,"LAND_2", 1);SetTileTag(29,32,"LAND_2", 1);SetTileTag(30,32,"SOLIDWALL",1);SetTileTag(34,32,"SOLIDWALL",1);SetTileTag(35,32,"LAND_2", 1);SetTileTag(39,32,"LAND_2", 1);SetTileTag(43,32,"LAND_2", 1);SetTileTag(46,32,"LAND_2", 1);SetTileTag(49,32,"LAND_2", 1);SetTileTag(50,32,"SOLIDWALL",1);SetTileTag(52,32,"LAND_2", 1);SetTileTag(53,32,"SOLIDWALL",1);SetTileTag(54,32,"LAND_2", 1);SetTileTag(59,32,"SOLIDWALL",1);
+		SetTileTag(3,31,"LAND_2", 1);SetTileTag(4,31,"LAND_2", 1);SetTileTag(5,31,"LAND_2", 1);SetTileTag(8,31,"LAND_2", 1);SetTileTag(9,31,"LAND_2", 1);SetTileTag(10,31,"LAND_2", 1);SetTileTag(11,31,"LAND_2", 1);SetTileTag(12,31,"LAND_2", 1);SetTileTag(14,31,"LAND_2", 1);SetTileTag(17,31,"LAVA_2", 1);SetTileTag(18,31,"LAVA_2", 1);SetTileTag(19,31,"LAND_2", 1);SetTileTag(22,31,"SOLIDWALL",1);SetTileTag(23,31,"LAND_2", 1);SetTileTag(25,31,"LAND_2", 1);SetTileTag(29,31,"LAND_2", 1);SetTileTag(30,31,"SOLIDWALL",1);SetTileTag(34,31,"SOLIDWALL",1);SetTileTag(35,31,"LAND_2", 1);SetTileTag(39,31,"LAND_2", 1);SetTileTag(43,31,"LAND_2", 1);SetTileTag(46,31,"LAND_2", 1);SetTileTag(47,31,"SOLIDWALL",1);SetTileTag(49,31,"LAND_2", 1);SetTileTag(50,31,"LAND_2", 1);SetTileTag(52,31,"LAND_2", 1);SetTileTag(53,31,"LAND_2", 1);SetTileTag(54,31,"LAND_2", 1);SetTileTag(59,31,"LAND_2", 1);
+		SetTileTag(1,30,"SOLIDWALL",1);SetTileTag(2,30,"LAND_2", 1);SetTileTag(3,30,"LAND_2", 1);SetTileTag(6,30,"SOLIDWALL",1);SetTileTag(7,30,"LAND_2", 1);SetTileTag(8,30,"LAVA_2", 1);SetTileTag(12,30,"LAVA_2", 1);SetTileTag(13,30,"LAND_2", 1);SetTileTag(14,30,"SOLIDWALL",1);SetTileTag(15,30,"SOLIDWALL",1);SetTileTag(16,30,"LAVA_2", 1);SetTileTag(17,30,"LAVA_2", 1);SetTileTag(18,30,"LAVA_2", 1);SetTileTag(20,30,"LAND_2", 1);SetTileTag(21,30,"LAND_2", 1);SetTileTag(22,30,"LAND_2", 1);SetTileTag(24,30,"LAND_2", 1);SetTileTag(25,30,"LAND_2", 1);SetTileTag(26,30,"LAND_2", 1);SetTileTag(27,30,"LAND_2", 1);SetTileTag(29,30,"LAND_2", 1);SetTileTag(30,30,"SOLIDWALL",1);SetTileTag(34,30,"SOLIDWALL",1);SetTileTag(36,30,"LAND_2", 1);SetTileTag(37,30,"LAND_2", 1);SetTileTag(38,30,"LAND_2", 1);SetTileTag(39,30,"LAND_2", 1);SetTileTag(40,30,"LAND_2", 1);SetTileTag(41,30,"LAND_2", 1);SetTileTag(42,30,"LAND_2", 1);SetTileTag(43,30,"LAND_2", 1);SetTileTag(44,30,"LAND_2", 1);SetTileTag(46,30,"LAND_2", 1);SetTileTag(48,30,"LAND_2", 1);SetTileTag(49,30,"LAND_2", 1);SetTileTag(52,30,"LAND_2", 1);SetTileTag(53,30,"SOLIDWALL",1);SetTileTag(54,30,"LAND_2", 1);SetTileTag(60,30,"LAND_2", 1);SetTileTag(61,30,"LAND_2", 1);SetTileTag(62,30,"SOLIDWALL",1);
+		SetTileTag(2,29,"SOLIDWALL",1);SetTileTag(3,29,"SOLIDWALL",1);SetTileTag(4,29,"LAND_2", 1);SetTileTag(5,29,"LAND_2", 1);SetTileTag(6,29,"SOLIDWALL",1);SetTileTag(7,29,"LAND_2", 1);SetTileTag(8,29,"LAND_2", 1);SetTileTag(11,29,"LAVA_2", 1);SetTileTag(12,29,"LAND_2", 1);SetTileTag(13,29,"LAND_2", 1);SetTileTag(14,29,"SOLIDWALL",1);SetTileTag(15,29,"LAVA_2", 1);SetTileTag(18,29,"LAVA_2", 1);SetTileTag(20,29,"SOLIDWALL",1);SetTileTag(21,29,"SOLIDWALL",1);SetTileTag(22,29,"LAVA_7", 1);SetTileTag(28,29,"LAND_2", 1);SetTileTag(29,29,"LAND_2", 1);SetTileTag(30,29,"LAND_2", 1);SetTileTag(31,29,"SOLIDWALL",1);SetTileTag(34,29,"LAND_2", 1);SetTileTag(36,29,"LAND_2", 1);SetTileTag(38,29,"LAVA_10", 1);SetTileTag(43,29,"SOLIDWALL",1);SetTileTag(46,29,"SOLIDWALL",1);SetTileTag(47,29,"SOLIDWALL",1);SetTileTag(48,29,"SOLIDWALL",1);SetTileTag(49,29,"SOLIDWALL",1);SetTileTag(50,29,"SOLIDWALL",1);SetTileTag(51,29,"LAND_2", 1);SetTileTag(52,29,"LAND_2", 1);SetTileTag(53,29,"LAND_2", 1);SetTileTag(54,29,"LAND_2", 1);SetTileTag(55,29,"LAND_2", 1);SetTileTag(56,29,"LAND_2", 1);SetTileTag(57,29,"LAND_2", 1);SetTileTag(58,29,"LAND_2", 1);SetTileTag(59,29,"SOLIDWALL",1);SetTileTag(60,29,"SOLIDWALL",1);
+		SetTileTag(3,28,"SOLIDWALL",1);SetTileTag(4,28,"LAND_2", 1);SetTileTag(5,28,"LAND_2", 1);SetTileTag(6,28,"SOLIDWALL",1);SetTileTag(7,28,"SOLIDWALL",1);SetTileTag(8,28,"SOLIDWALL",1);SetTileTag(9,28,"SOLIDWALL",1);SetTileTag(10,28,"SOLIDWALL",1);SetTileTag(12,28,"SOLIDWALL",1);SetTileTag(14,28,"LAVA_2", 1);SetTileTag(17,28,"LAVA_2", 1);SetTileTag(18,28,"LAVA_2", 1);SetTileTag(19,28,"SOLIDWALL",1);SetTileTag(22,28,"SOLIDWALL",1);SetTileTag(23,28,"SOLIDWALL",1);SetTileTag(26,28,"SOLIDWALL",1);SetTileTag(28,28,"LAND_2", 1);SetTileTag(29,28,"LAND_2", 1);SetTileTag(35,28,"LAND_2", 1);SetTileTag(36,28,"LAND_2", 1);SetTileTag(38,28,"SOLIDWALL",1);SetTileTag(39,28,"SOLIDWALL",1);SetTileTag(40,28,"SOLIDWALL",1);SetTileTag(41,28,"SOLIDWALL",1);SetTileTag(42,28,"SOLIDWALL",1);SetTileTag(46,28,"SOLIDWALL",1);SetTileTag(51,28,"SOLIDWALL",1);SetTileTag(52,28,"LAND_2", 1);SetTileTag(53,28,"LAND_2", 1);SetTileTag(54,28,"LAND_2", 1);SetTileTag(55,28,"SOLIDWALL",1);
+		SetTileTag(2,27,"SOLIDWALL",1);SetTileTag(3,27,"LAND_2", 1);SetTileTag(4,27,"LAND_2", 1);SetTileTag(6,27,"LAND_2", 1);SetTileTag(7,27,"SOLIDWALL",1);SetTileTag(8,27,"SOLIDWALL",1);SetTileTag(9,27,"SOLIDWALL",1);SetTileTag(10,27,"SOLIDWALL",1);SetTileTag(12,27,"LAVA_2", 1);SetTileTag(15,27,"LAVA_2", 1);SetTileTag(16,27,"LAVA_2", 1);SetTileTag(17,27,"LAVA_2", 1);SetTileTag(18,27,"SOLIDWALL",1);SetTileTag(26,27,"SOLIDWALL",1);SetTileTag(28,27,"LAND_2", 1);SetTileTag(29,27,"LAND_2", 1);SetTileTag(30,27,"LAND_2", 1);SetTileTag(32,27,"LAND_2", 1);SetTileTag(34,27,"LAND_2", 1);SetTileTag(35,27,"LAND_2", 1);SetTileTag(36,27,"LAND_2", 1);SetTileTag(38,27,"SOLIDWALL",1);SetTileTag(42,27,"SOLIDWALL",1);SetTileTag(44,27,"SOLIDWALL",1);SetTileTag(46,27,"SOLIDWALL",1);SetTileTag(52,27,"SOLIDWALL",1);
+		SetTileTag(2,26,"LAVA_2", 1);SetTileTag(9,26,"LAVA_2", 1);SetTileTag(10,26,"SOLIDWALL",1);SetTileTag(14,26,"LAVA_2", 1);SetTileTag(15,26,"LAVA_2", 1);SetTileTag(16,26,"SOLIDWALL",1);SetTileTag(26,26,"SOLIDWALL",1);SetTileTag(27,26,"LAVA_7", 1);SetTileTag(28,26,"LAVA_7", 1);SetTileTag(31,26,"LAND_2", 1);SetTileTag(32,26,"LAND_2", 1);SetTileTag(33,26,"LAND_2", 1);SetTileTag(34,26,"LAVA_10", 1);SetTileTag(37,26,"LAVA_10", 1);SetTileTag(38,26,"SOLIDWALL",1);SetTileTag(42,26,"SOLIDWALL",1);SetTileTag(43,26,"LAND_2", 1);SetTileTag(44,26,"LAND_2", 1);SetTileTag(45,26,"LAND_2", 1);SetTileTag(46,26,"SOLIDWALL",1);
+		SetTileTag(4,25,"LAVA_2", 1);SetTileTag(5,25,"LAVA_2", 1);SetTileTag(6,25,"LAVA_2", 1);SetTileTag(7,25,"LAVA_2", 1);SetTileTag(12,25,"LAVA_2", 1);SetTileTag(13,25,"LAVA_2", 1);SetTileTag(14,25,"LAVA_2", 1);SetTileTag(15,25,"SOLIDWALL",1);SetTileTag(27,25,"SOLIDWALL",1);SetTileTag(32,25,"LAND_2", 1);SetTileTag(35,25,"SOLIDWALL",1);SetTileTag(36,25,"SOLIDWALL",1);SetTileTag(37,25,"SOLIDWALL",1);SetTileTag(43,25,"SOLIDWALL",1);SetTileTag(45,25,"SOLIDWALL",1);SetTileTag(47,25,"SOLIDWALL",1);SetTileTag(50,25,"SOLIDWALL",1);SetTileTag(51,25,"SOLIDWALL",1);SetTileTag(52,25,"SOLIDWALL",1);SetTileTag(57,25,"SOLIDWALL",1);SetTileTag(58,25,"SOLIDWALL",1);SetTileTag(59,25,"SOLIDWALL",1);
+		SetTileTag(11,24,"LAVA_2", 1);SetTileTag(12,24,"LAVA_2", 1);SetTileTag(13,24,"SOLIDWALL",1);SetTileTag(21,24,"SOLIDWALL",1);SetTileTag(22,24,"SOLIDWALL",1);SetTileTag(23,24,"SOLIDWALL",1);SetTileTag(24,24,"SOLIDWALL",1);SetTileTag(25,24,"SOLIDWALL",1);SetTileTag(32,24,"LAND_2", 1);SetTileTag(35,24,"SOLIDWALL",1);SetTileTag(38,24,"SOLIDWALL",1);SetTileTag(39,24,"SOLIDWALL",1);SetTileTag(46,24,"SOLIDWALL",1);SetTileTag(47,24,"LAND_16", 1);SetTileTag(48,24,"LAND_16", 1);SetTileTag(49,24,"LAND_16", 1);SetTileTag(50,24,"LAND_16", 1);SetTileTag(51,24,"LAND_16", 1);SetTileTag(56,24,"LAND_16", 1);SetTileTag(57,24,"LAND_16", 1);SetTileTag(58,24,"LAND_16", 1);SetTileTag(59,24,"LAND_16", 1);SetTileTag(60,24,"SOLIDWALL",1);
+		SetTileTag(10,23,"LAVA_2", 1);SetTileTag(11,23,"LAVA_2", 1);SetTileTag(12,23,"SOLIDWALL",1);SetTileTag(14,23,"SOLIDWALL",1);SetTileTag(20,23,"SOLIDWALL",1);SetTileTag(21,23,"LAND_2", 1);SetTileTag(23,23,"LAND_2", 1);SetTileTag(25,23,"LAND_2", 1);SetTileTag(26,23,"SOLIDWALL",1);SetTileTag(32,23,"LAND_2", 1);SetTileTag(35,23,"SOLIDWALL",1);SetTileTag(37,23,"SOLIDWALL",1);SetTileTag(39,23,"LAND_2", 1);SetTileTag(41,23,"SOLIDWALL",1);SetTileTag(46,23,"SOLIDWALL",1);SetTileTag(47,23,"LAND_16", 1);SetTileTag(48,23,"LAND_16", 1);SetTileTag(49,23,"LAND_16", 1);SetTileTag(50,23,"SOLIDWALL",1);SetTileTag(51,23,"LAND_16", 1);SetTileTag(52,23,"LAND_16", 1);SetTileTag(55,23,"LAND_16", 1);SetTileTag(56,23,"SOLIDWALL",1);SetTileTag(57,23,"LAND_16", 1);SetTileTag(58,23,"LAND_16", 1);SetTileTag(59,23,"LAND_16", 1);SetTileTag(60,23,"SOLIDWALL",1);
+		SetTileTag(10,22,"LAVA_2", 1);SetTileTag(11,22,"SOLIDWALL",1);SetTileTag(13,22,"SOLIDWALL",1);SetTileTag(14,22,"LAND_2", 1);SetTileTag(16,22,"LAND_2", 1);SetTileTag(17,22,"SOLIDWALL",1);SetTileTag(21,22,"SOLIDWALL",1);SetTileTag(25,22,"SOLIDWALL",1);SetTileTag(26,22,"SOLIDWALL",1);SetTileTag(31,22,"LAND_2", 1);SetTileTag(32,22,"LAND_2", 1);SetTileTag(33,22,"LAND_2", 1);SetTileTag(35,22,"SOLIDWALL",1);SetTileTag(37,22,"SOLIDWALL",1);SetTileTag(38,22,"LAND_2", 1);SetTileTag(39,22,"LAND_2", 1);SetTileTag(40,22,"LAND_2", 1);SetTileTag(41,22,"SOLIDWALL",1);SetTileTag(42,22,"SOLIDWALL",1);SetTileTag(46,22,"SOLIDWALL",1);SetTileTag(47,22,"LAND_16", 1);SetTileTag(48,22,"LAND_16", 1);SetTileTag(49,22,"LAND_16", 1);SetTileTag(50,22,"SOLIDWALL",1);SetTileTag(51,22,"LAND_16", 1);SetTileTag(52,22,"LAND_16", 1);SetTileTag(53,22,"LAND_16", 1);SetTileTag(54,22,"LAND_16", 1);SetTileTag(55,22,"LAND_16", 1);SetTileTag(56,22,"SOLIDWALL",1);SetTileTag(57,22,"LAND_16", 1);SetTileTag(58,22,"LAND_16", 1);SetTileTag(59,22,"LAND_16", 1);
+		SetTileTag(4,21,"LAND_3", 1);SetTileTag(5,21,"LAND_3", 1);SetTileTag(6,21,"LAND_3", 1);SetTileTag(7,21,"LAND_3", 1);SetTileTag(10,21,"SOLIDWALL",1);SetTileTag(13,21,"LAND_2", 1);SetTileTag(15,21,"LAND_2", 1);SetTileTag(17,21,"LAND_2", 1);SetTileTag(21,21,"LAND_2", 1);SetTileTag(22,21,"LAND_2", 1);SetTileTag(23,21,"LAND_2", 1);SetTileTag(26,21,"LAND_2", 1);SetTileTag(27,21,"SOLIDWALL",1);SetTileTag(29,21,"SOLIDWALL",1);SetTileTag(30,21,"LAVA_7", 1);SetTileTag(31,21,"LAND_2", 1);SetTileTag(32,21,"SOLIDWALL",1);SetTileTag(33,21,"LAND_2", 1);SetTileTag(34,21,"LAVA_10", 1);SetTileTag(35,21,"SOLIDWALL",1);SetTileTag(38,21,"SOLIDWALL",1);SetTileTag(40,21,"SOLIDWALL",1);SetTileTag(43,21,"LAND_2", 1);SetTileTag(47,21,"LAND_16", 1);SetTileTag(48,21,"SOLIDWALL",1);SetTileTag(49,21,"SOLIDWALL",1);SetTileTag(50,21,"SOLIDWALL",1);SetTileTag(51,21,"LAND_16", 1);SetTileTag(52,21,"LAND_16", 1);SetTileTag(53,21,"LAND_16", 1);SetTileTag(54,21,"LAND_16", 1);SetTileTag(55,21,"LAND_16", 1);SetTileTag(56,21,"SOLIDWALL",1);SetTileTag(57,21,"SOLIDWALL",1);SetTileTag(58,21,"SOLIDWALL",1);SetTileTag(59,21,"LAND_16", 1);
+		SetTileTag(2,20,"LAVA_2", 1);SetTileTag(9,20,"LAVA_2", 1);SetTileTag(10,20,"SOLIDWALL",1);SetTileTag(12,20,"SOLIDWALL",1);SetTileTag(13,20,"LAND_2", 1);SetTileTag(14,20,"LAND_2", 1);SetTileTag(15,20,"LAVA_6", 1);SetTileTag(16,20,"LAND_2", 1);SetTileTag(17,20,"LAND_2", 1);SetTileTag(18,20,"SOLIDWALL",1);SetTileTag(21,20,"LAND_2", 1);SetTileTag(22,20,"LAND_2", 1);SetTileTag(23,20,"LAND_2", 1);SetTileTag(26,20,"LAND_2", 1);SetTileTag(27,20,"LAND_2", 1);SetTileTag(28,20,"SOLIDWALL",1);SetTileTag(30,20,"LAND_2", 1);SetTileTag(31,20,"LAND_2", 1);SetTileTag(33,20,"LAND_2", 1);SetTileTag(34,20,"LAND_2", 1);SetTileTag(35,20,"SOLIDWALL",1);SetTileTag(38,20,"SOLIDWALL",1);SetTileTag(40,20,"SOLIDWALL",1);SetTileTag(41,20,"SOLIDWALL",1);SetTileTag(42,20,"LAND_2", 1);SetTileTag(43,20,"LAND_2", 1);SetTileTag(44,20,"LAND_2", 1);SetTileTag(45,20,"SOLIDWALL",1);SetTileTag(48,20,"LAND_16", 1);SetTileTag(49,20,"LAND_16", 1);SetTileTag(50,20,"LAND_16", 1);SetTileTag(51,20,"LAND_16", 1);SetTileTag(52,20,"LAND_16", 1);SetTileTag(53,20,"LAND_16", 1);SetTileTag(54,20,"LAND_16", 1);SetTileTag(55,20,"LAND_16", 1);SetTileTag(56,20,"LAND_16", 1);SetTileTag(57,20,"LAND_16", 1);SetTileTag(58,20,"LAND_16", 1);
+		SetTileTag(1,19,"SOLIDWALL",1);SetTileTag(2,19,"LAVA_2", 1);SetTileTag(3,19,"LAVA_2", 1);SetTileTag(4,19,"LAVA_2", 1);SetTileTag(5,19,"LAVA_2", 1);SetTileTag(6,19,"LAVA_2", 1);SetTileTag(7,19,"LAVA_2", 1);SetTileTag(8,19,"LAVA_2", 1);SetTileTag(9,19,"LAVA_2", 1);SetTileTag(10,19,"SOLIDWALL",1);SetTileTag(13,19,"SOLIDWALL",1);SetTileTag(14,19,"LAND_2", 1);SetTileTag(15,19,"LAND_2", 1);SetTileTag(16,19,"LAND_2", 1);SetTileTag(17,19,"SOLIDWALL",1);SetTileTag(20,19,"SOLIDWALL",1);SetTileTag(21,19,"LAND_2", 1);SetTileTag(22,19,"LAND_2", 1);SetTileTag(23,19,"LAND_2", 1);SetTileTag(26,19,"LAND_2", 1);SetTileTag(27,19,"LAND_2", 1);SetTileTag(28,19,"LAND_2", 1);SetTileTag(29,19,"LAND_2", 1);SetTileTag(30,19,"LAND_2", 1);SetTileTag(31,19,"LAND_2", 1);SetTileTag(33,19,"LAND_2", 1);SetTileTag(34,19,"LAND_2", 1);SetTileTag(35,19,"LAND_2", 1);SetTileTag(36,19,"SOLIDWALL",1);SetTileTag(38,19,"SOLIDWALL",1);SetTileTag(40,19,"SOLIDWALL",1);SetTileTag(41,19,"SOLIDWALL",1);SetTileTag(42,19,"SOLIDWALL",1);SetTileTag(44,19,"SOLIDWALL",1);SetTileTag(49,19,"LAND_16", 1);SetTileTag(50,19,"LAND_16", 1);SetTileTag(51,19,"LAND_16", 1);SetTileTag(52,19,"LAND_16", 1);SetTileTag(53,19,"LAND_16", 1);SetTileTag(54,19,"LAND_16", 1);SetTileTag(55,19,"LAND_16", 1);SetTileTag(56,19,"LAND_16", 1);SetTileTag(57,19,"LAND_16", 1);SetTileTag(60,19,"SOLIDWALL",1);
+		SetTileTag(2,18,"SOLIDWALL",1);SetTileTag(3,18,"SOLIDWALL",1);SetTileTag(4,18,"SOLIDWALL",1);SetTileTag(5,18,"LAND_4", 1);SetTileTag(8,18,"LAND_4", 1);SetTileTag(9,18,"SOLIDWALL",1);SetTileTag(15,18,"LAND_2", 1);SetTileTag(22,18,"LAND_2", 1);SetTileTag(23,18,"LAND_2", 1);SetTileTag(24,18,"LAND_2", 1);SetTileTag(25,18,"LAND_2", 1);SetTileTag(27,18,"LAND_2", 1);SetTileTag(29,18,"LAND_2", 1);SetTileTag(30,18,"LAND_2", 1);SetTileTag(34,18,"LAND_2", 1);SetTileTag(35,18,"LAND_2", 1);SetTileTag(36,18,"LAND_2", 1);SetTileTag(37,18,"SOLIDWALL",1);SetTileTag(38,18,"LAND_2", 1);SetTileTag(39,18,"LAND_2", 1);SetTileTag(40,18,"LAND_2", 1);SetTileTag(44,18,"SOLIDWALL",1);SetTileTag(49,18,"LAND_16", 1);SetTileTag(50,18,"LAND_16", 1);SetTileTag(51,18,"LAND_16", 1);SetTileTag(52,18,"LAND_16", 1);SetTileTag(53,18,"LAND_16", 1);SetTileTag(54,18,"LAND_16", 1);SetTileTag(55,18,"LAND_16", 1);SetTileTag(56,18,"LAND_16", 1);SetTileTag(57,18,"LAND_16", 1);
+		SetTileTag(5,17,"SOLIDWALL",1);SetTileTag(6,17,"LAND_4", 1);SetTileTag(7,17,"LAND_4", 1);SetTileTag(8,17,"SOLIDWALL",1);SetTileTag(16,17,"SOLIDWALL",1);SetTileTag(20,17,"SOLIDWALL",1);SetTileTag(21,17,"SOLIDWALL",1);SetTileTag(22,17,"SOLIDWALL",1);SetTileTag(24,17,"SOLIDWALL",1);SetTileTag(26,17,"SOLIDWALL",1);SetTileTag(27,17,"LAND_2", 1);SetTileTag(29,17,"LAND_2", 1);SetTileTag(30,17,"SOLIDWALL",1);SetTileTag(32,17,"LAND_2", 1);SetTileTag(34,17,"SOLIDWALL",1);SetTileTag(35,17,"LAND_2", 1);SetTileTag(39,17,"LAND_2", 1);SetTileTag(40,17,"SOLIDWALL",1);SetTileTag(41,17,"SOLIDWALL",1);SetTileTag(42,17,"SOLIDWALL",1);SetTileTag(43,17,"LAND_2", 1);SetTileTag(44,17,"SOLIDWALL",1);SetTileTag(46,17,"SOLIDWALL",1);SetTileTag(48,17,"LAND_16", 1);SetTileTag(49,17,"LAND_16", 1);SetTileTag(50,17,"LAND_16", 1);SetTileTag(51,17,"LAND_16", 1);SetTileTag(52,17,"LAND_16", 1);SetTileTag(53,17,"LAND_16", 1);SetTileTag(54,17,"LAND_16", 1);SetTileTag(55,17,"LAND_16", 1);SetTileTag(56,17,"LAND_16", 1);SetTileTag(57,17,"LAND_16", 1);SetTileTag(58,17,"LAND_16", 1);
+		SetTileTag(5,16,"SOLIDWALL",1);SetTileTag(9,16,"SOLIDWALL",1);SetTileTag(11,16,"SOLIDWALL",1);SetTileTag(15,16,"LAND_2", 1);SetTileTag(16,16,"LAND_2", 1);SetTileTag(17,16,"SOLIDWALL",1);SetTileTag(21,16,"LAND_2", 1);SetTileTag(25,16,"SOLIDWALL",1);SetTileTag(26,16,"LAND_2", 1);SetTileTag(29,16,"SOLIDWALL",1);SetTileTag(32,16,"LAND_2", 1);SetTileTag(35,16,"SOLIDWALL",1);SetTileTag(39,16,"SOLIDWALL",1);SetTileTag(41,16,"SOLIDWALL",1);SetTileTag(43,16,"LAND_2", 1);SetTileTag(45,16,"SOLIDWALL",1);SetTileTag(46,16,"SOLIDWALL",1);SetTileTag(47,16,"LAND_16", 1);SetTileTag(48,16,"LAND_16", 1);SetTileTag(49,16,"LAND_16", 1);SetTileTag(50,16,"LAND_16", 1);SetTileTag(51,16,"LAND_16", 1);SetTileTag(52,16,"LAND_16", 1);SetTileTag(53,16,"LAND_16", 1);SetTileTag(54,16,"LAND_16", 1);SetTileTag(55,16,"LAND_16", 1);SetTileTag(56,16,"LAND_16", 1);SetTileTag(57,16,"LAND_16", 1);SetTileTag(58,16,"LAND_16", 1);SetTileTag(59,16,"LAND_16", 1);
+		SetTileTag(15,15,"LAND_2", 1);SetTileTag(16,15,"LAND_2", 1);SetTileTag(17,15,"LAND_2", 1);SetTileTag(18,15,"SOLIDWALL",1);SetTileTag(20,15,"LAND_2", 1);SetTileTag(21,15,"LAND_2", 1);SetTileTag(22,15,"LAND_2", 1);SetTileTag(24,15,"SOLIDWALL",1);SetTileTag(25,15,"LAND_2", 1);SetTileTag(26,15,"LAND_2", 1);SetTileTag(27,15,"LAND_2", 1);SetTileTag(28,15,"LAND_2", 1);SetTileTag(29,15,"LAND_2", 1);SetTileTag(32,15,"LAND_2", 1);SetTileTag(35,15,"LAND_2", 1);SetTileTag(36,15,"LAND_2", 1);SetTileTag(37,15,"LAND_2", 1);SetTileTag(38,15,"LAND_2", 1);SetTileTag(39,15,"LAND_2", 1);SetTileTag(40,15,"SOLIDWALL",1);SetTileTag(42,15,"LAND_2", 1);SetTileTag(43,15,"LAND_2", 1);SetTileTag(44,15,"LAND_2", 1);SetTileTag(45,15,"SOLIDWALL",1);SetTileTag(47,15,"LAND_16", 1);SetTileTag(48,15,"SOLIDWALL",1);SetTileTag(49,15,"SOLIDWALL",1);SetTileTag(50,15,"SOLIDWALL",1);SetTileTag(51,15,"LAND_16", 1);SetTileTag(52,15,"LAND_16", 1);SetTileTag(53,15,"LAND_16", 1);SetTileTag(54,15,"LAND_16", 1);SetTileTag(55,15,"LAND_16", 1);SetTileTag(56,15,"SOLIDWALL",1);SetTileTag(57,15,"SOLIDWALL",1);SetTileTag(58,15,"SOLIDWALL",1);SetTileTag(59,15,"LAND_16", 1);
+		SetTileTag(3,14,"SOLIDWALL",1);SetTileTag(4,14,"SOLIDWALL",1);SetTileTag(5,14,"LAND_2", 1);SetTileTag(6,14,"LAND_2", 1);SetTileTag(7,14,"LAND_2", 1);SetTileTag(8,14,"SOLIDWALL",1);SetTileTag(9,14,"LAND_2", 1);SetTileTag(10,14,"LAND_2", 1);SetTileTag(11,14,"LAND_2", 1);SetTileTag(12,14,"SOLIDWALL",1);SetTileTag(13,14,"SOLIDWALL",1);SetTileTag(14,14,"SOLIDWALL",1);SetTileTag(15,14,"SOLIDWALL",1);SetTileTag(16,14,"LAND_2", 1);SetTileTag(18,14,"LAND_2", 1);SetTileTag(19,14,"SOLIDWALL",1);SetTileTag(20,14,"SOLIDWALL",1);SetTileTag(22,14,"SOLIDWALL",1);SetTileTag(23,14,"SOLIDWALL",1);SetTileTag(24,14,"LAND_2", 1);SetTileTag(25,14,"LAND_2", 1);SetTileTag(26,14,"LAND_2", 1);SetTileTag(27,14,"SOLIDWALL",1);SetTileTag(28,14,"LAND_2", 1);SetTileTag(29,14,"LAND_2", 1);SetTileTag(30,14,"SOLIDWALL",1);SetTileTag(32,14,"LAND_2", 1);SetTileTag(34,14,"SOLIDWALL",1);SetTileTag(35,14,"LAND_2", 1);SetTileTag(36,14,"LAND_2", 1);SetTileTag(37,14,"SOLIDWALL",1);SetTileTag(38,14,"LAND_2", 1);SetTileTag(39,14,"LAND_2", 1);SetTileTag(40,14,"LAND_2", 1);SetTileTag(44,14,"SOLIDWALL",1);SetTileTag(47,14,"LAND_16", 1);SetTileTag(48,14,"LAND_16", 1);SetTileTag(49,14,"LAND_16", 1);SetTileTag(50,14,"SOLIDWALL",1);SetTileTag(51,14,"LAND_16", 1);SetTileTag(52,14,"LAND_16", 1);SetTileTag(53,14,"LAND_16", 1);SetTileTag(54,14,"LAND_16", 1);SetTileTag(55,14,"LAND_16", 1);SetTileTag(56,14,"SOLIDWALL",1);SetTileTag(57,14,"LAND_16", 1);SetTileTag(58,14,"LAND_16", 1);SetTileTag(59,14,"LAND_16", 1);SetTileTag(60,14,"SOLIDWALL",1);
+		SetTileTag(2,13,"SOLIDWALL",1);SetTileTag(4,13,"LAND_2", 1);SetTileTag(5,13,"LAND_2", 1);SetTileTag(6,13,"LAND_2", 1);SetTileTag(7,13,"LAND_2", 1);SetTileTag(8,13,"LAND_2", 1);SetTileTag(9,13,"LAND_2", 1);SetTileTag(10,13,"LAND_2", 1);SetTileTag(11,13,"LAND_2", 1);SetTileTag(12,13,"LAND_2", 1);SetTileTag(13,13,"LAND_2", 1);SetTileTag(14,13,"LAND_2", 1);SetTileTag(15,13,"LAND_2", 1);SetTileTag(16,13,"LAND_2", 1);SetTileTag(17,13,"LAND_2", 1);SetTileTag(18,13,"LAND_2", 1);SetTileTag(22,13,"LAND_2", 1);SetTileTag(25,13,"LAND_2", 1);SetTileTag(26,13,"SOLIDWALL",1);SetTileTag(28,13,"SOLIDWALL",1);SetTileTag(32,13,"LAND_2", 1);SetTileTag(36,13,"SOLIDWALL",1);SetTileTag(38,13,"SOLIDWALL",1);SetTileTag(39,13,"LAND_2", 1);SetTileTag(42,13,"SOLIDWALL",1);SetTileTag(43,13,"SOLIDWALL",1);SetTileTag(47,13,"LAND_16", 1);SetTileTag(48,13,"LAND_16", 1);SetTileTag(49,13,"LAND_16", 1);SetTileTag(50,13,"SOLIDWALL",1);SetTileTag(51,13,"LAND_16", 1);SetTileTag(52,13,"LAND_16", 1);SetTileTag(55,13,"LAND_16", 1);SetTileTag(56,13,"SOLIDWALL",1);SetTileTag(57,13,"LAND_16", 1);SetTileTag(58,13,"LAND_16", 1);SetTileTag(59,13,"LAND_16", 1);SetTileTag(60,13,"SOLIDWALL",1);
+		SetTileTag(2,12,"SOLIDWALL",1);SetTileTag(14,12,"SOLIDWALL",1);SetTileTag(17,12,"SOLIDWALL",1);SetTileTag(20,12,"SOLIDWALL",1);SetTileTag(21,12,"LAND_2", 1);SetTileTag(22,12,"SOLIDWALL",1);SetTileTag(23,12,"LAND_2", 1);SetTileTag(29,12,"SOLIDWALL",1);SetTileTag(30,12,"SOLIDWALL",1);SetTileTag(31,12,"SOLIDWALL",1);SetTileTag(32,12,"LAND_2", 1);SetTileTag(33,12,"SOLIDWALL",1);SetTileTag(34,12,"SOLIDWALL",1);SetTileTag(35,12,"SOLIDWALL",1);SetTileTag(41,12,"SOLIDWALL",1);SetTileTag(42,12,"LAND_2", 1);SetTileTag(46,12,"SOLIDWALL",1);SetTileTag(47,12,"LAND_16", 1);SetTileTag(48,12,"LAND_16", 1);SetTileTag(49,12,"LAND_16", 1);SetTileTag(50,12,"LAND_16", 1);SetTileTag(51,12,"LAND_16", 1);SetTileTag(56,12,"LAND_16", 1);SetTileTag(57,12,"LAND_16", 1);SetTileTag(58,12,"LAND_16", 1);SetTileTag(59,12,"LAND_16", 1);SetTileTag(60,12,"SOLIDWALL",1);
+		SetTileTag(2,11,"SOLIDWALL",1);SetTileTag(3,11,"LAND_2", 1);SetTileTag(4,11,"LAND_2", 1);SetTileTag(5,11,"LAND_2", 1);SetTileTag(7,11,"LAND_2", 1);SetTileTag(8,11,"LAND_2", 1);SetTileTag(9,11,"LAND_2", 1);SetTileTag(11,11,"LAND_2", 1);SetTileTag(12,11,"LAND_2", 1);SetTileTag(13,11,"LAND_2", 1);SetTileTag(14,11,"SOLIDWALL",1);SetTileTag(21,11,"LAND_2", 1);SetTileTag(41,11,"LAND_2", 1);SetTileTag(42,11,"LAND_2", 1);SetTileTag(45,11,"SOLIDWALL",1);SetTileTag(46,11,"SOLIDWALL",1);SetTileTag(47,11,"SOLIDWALL",1);SetTileTag(48,11,"SOLIDWALL",1);
+		SetTileTag(2,10,"SOLIDWALL",1);SetTileTag(3,10,"SOLIDWALL",1);SetTileTag(5,10,"SOLIDWALL",1);SetTileTag(7,10,"SOLIDWALL",1);SetTileTag(14,10,"SOLIDWALL",1);SetTileTag(16,10,"LAND_10", 1);SetTileTag(17,10,"SOLIDWALL",1);SetTileTag(20,10,"LAND_2", 1);SetTileTag(21,10,"LAND_2", 1);SetTileTag(22,10,"LAND_2", 1);SetTileTag(25,10,"SOLIDWALL",1);SetTileTag(26,10,"SOLIDWALL",1);SetTileTag(28,10,"SOLIDWALL",1);SetTileTag(29,10,"LAVA_9", 1);SetTileTag(31,10,"LAND_2", 1);SetTileTag(32,10,"LAND_2", 1);SetTileTag(33,10,"LAND_2", 1);SetTileTag(35,10,"LAVA_9", 1);SetTileTag(36,10,"SOLIDWALL",1);SetTileTag(37,10,"SOLIDWALL",1);SetTileTag(39,10,"SOLIDWALL",1);SetTileTag(42,10,"LAND_2", 1);SetTileTag(43,10,"LAND_2", 1);SetTileTag(46,10,"LAND_2", 1);SetTileTag(51,10,"SOLIDWALL",1);
+		SetTileTag(3,9,"SOLIDWALL",1);SetTileTag(4,9,"SOLIDWALL",1);SetTileTag(11,9,"SOLIDWALL",1);SetTileTag(12,9,"LAND_2", 1);SetTileTag(13,9,"SOLIDWALL",1);SetTileTag(14,9,"SOLIDWALL",1);SetTileTag(16,9,"SOLIDWALL",1);SetTileTag(18,9,"LAND_2", 1);SetTileTag(20,9,"SOLIDWALL",1);SetTileTag(25,9,"LAND_2", 1);SetTileTag(26,9,"LAND_2", 1);SetTileTag(27,9,"LAND_2", 1);SetTileTag(28,9,"LAND_2", 1);SetTileTag(29,9,"LAND_2", 1);SetTileTag(35,9,"LAND_2", 1);SetTileTag(36,9,"LAND_2", 1);SetTileTag(37,9,"LAND_2", 1);SetTileTag(38,9,"LAND_2", 1);SetTileTag(39,9,"LAND_2", 1);SetTileTag(45,9,"LAND_2", 1);SetTileTag(46,9,"LAND_2", 1);SetTileTag(47,9,"LAND_2", 1);SetTileTag(48,9,"SOLIDWALL",1);SetTileTag(50,9,"SOLIDWALL",1);SetTileTag(55,9,"SOLIDWALL",1);
+		SetTileTag(1,8,"SOLIDWALL",1);SetTileTag(2,8,"LAVA_1", 1);SetTileTag(4,8,"LAND_2", 1);SetTileTag(12,8,"SOLIDWALL",1);SetTileTag(13,8,"SOLIDWALL",1);SetTileTag(14,8,"LAVA_5", 1);SetTileTag(15,8,"LAND_10", 1);SetTileTag(16,8,"SOLIDWALL",1);SetTileTag(17,8,"SOLIDWALL",1);SetTileTag(22,8,"LAND_2", 1);SetTileTag(23,8,"SOLIDWALL",1);SetTileTag(29,8,"LAND_2", 1);SetTileTag(30,8,"LAVA_9", 1);SetTileTag(31,8,"LAVA_9", 1);SetTileTag(33,8,"LAVA_9", 1);SetTileTag(34,8,"LAVA_9", 1);SetTileTag(35,8,"LAND_2", 1);SetTileTag(41,8,"SOLIDWALL",1);SetTileTag(42,8,"SOLIDWALL",1);SetTileTag(43,8,"SOLIDWALL",1);SetTileTag(44,8,"SOLIDWALL",1);SetTileTag(45,8,"SOLIDWALL",1);SetTileTag(47,8,"SOLIDWALL",1);SetTileTag(50,8,"SOLIDWALL",1);SetTileTag(55,8,"SOLIDWALL",1);
+		SetTileTag(3,7,"LAVA_1", 1);SetTileTag(5,7,"LAND_2", 1);SetTileTag(6,7,"LAND_2", 1);SetTileTag(14,7,"SOLIDWALL",1);SetTileTag(16,7,"SOLIDWALL",1);SetTileTag(18,7,"LAVA_1", 1);SetTileTag(20,7,"LAND_2", 1);SetTileTag(21,7,"LAND_2", 1);SetTileTag(22,7,"LAND_2", 1);SetTileTag(23,7,"LAND_2", 1);SetTileTag(25,7,"SOLIDWALL",1);SetTileTag(26,7,"SOLIDWALL",1);SetTileTag(27,7,"SOLIDWALL",1);SetTileTag(28,7,"SOLIDWALL",1);SetTileTag(29,7,"LAND_2", 1);SetTileTag(30,7,"LAND_2", 1);SetTileTag(33,7,"LAND_2", 1);SetTileTag(35,7,"LAND_2", 1);SetTileTag(36,7,"SOLIDWALL",1);SetTileTag(37,7,"SOLIDWALL",1);SetTileTag(38,7,"SOLIDWALL",1);SetTileTag(39,7,"SOLIDWALL",1);SetTileTag(41,7,"LAND_2", 1);SetTileTag(44,7,"LAND_2", 1);SetTileTag(46,7,"LAND_2", 1);SetTileTag(47,7,"SOLIDWALL",1);SetTileTag(49,7,"SOLIDWALL",1);SetTileTag(50,7,"LAVA_9", 1);SetTileTag(51,7,"LAVA_9", 1);SetTileTag(52,7,"LAVA_9", 1);SetTileTag(53,7,"LAVA_9", 1);SetTileTag(56,7,"SOLIDWALL",1);
+		SetTileTag(2,6,"SOLIDWALL",1);SetTileTag(4,6,"LAVA_1", 1);SetTileTag(5,6,"LAVA_1", 1);SetTileTag(7,6,"LAND_2", 1);SetTileTag(9,6,"SOLIDWALL",1);SetTileTag(11,6,"SOLIDWALL",1);SetTileTag(12,6,"SOLIDWALL",1);SetTileTag(17,6,"LAVA_1", 1);SetTileTag(19,6,"SOLIDWALL",1);SetTileTag(20,6,"SOLIDWALL",1);SetTileTag(25,6,"LAND_2", 1);SetTileTag(26,6,"LAND_2", 1);SetTileTag(27,6,"LAND_2", 1);SetTileTag(28,6,"LAND_2", 1);SetTileTag(29,6,"LAND_2", 1);SetTileTag(30,6,"LAND_2", 1);SetTileTag(31,6,"LAND_2", 1);SetTileTag(33,6,"LAND_2", 1);SetTileTag(34,6,"LAND_2", 1);SetTileTag(35,6,"LAND_2", 1);SetTileTag(36,6,"LAND_2", 1);SetTileTag(37,6,"LAND_2", 1);SetTileTag(38,6,"LAND_2", 1);SetTileTag(39,6,"LAND_2", 1);SetTileTag(40,6,"LAND_2", 1);SetTileTag(42,6,"SOLIDWALL",1);SetTileTag(43,6,"LAND_2", 1);SetTileTag(44,6,"SOLIDWALL",1);SetTileTag(47,6,"SOLIDWALL",1);SetTileTag(49,6,"LAVA_9", 1);SetTileTag(51,6,"LAVA_9", 1);SetTileTag(52,6,"SOLIDWALL",1);SetTileTag(54,6,"LAVA_9", 1);SetTileTag(55,6,"LAVA_9", 1);SetTileTag(56,6,"SOLIDWALL",1);
+		SetTileTag(2,5,"SOLIDWALL",1);SetTileTag(3,5,"LAND_1", 1);SetTileTag(6,5,"LAVA_1", 1);SetTileTag(8,5,"SOLIDWALL",1);SetTileTag(13,5,"LAND_2", 1);SetTileTag(15,5,"LAVA_1", 1);SetTileTag(16,5,"LAVA_1", 1);SetTileTag(17,5,"SOLIDWALL",1);SetTileTag(18,5,"LAND_2", 1);SetTileTag(19,5,"LAND_2", 1);SetTileTag(23,5,"LAND_2", 1);SetTileTag(26,5,"SOLIDWALL",1);SetTileTag(33,5,"LAVA_9", 1);SetTileTag(34,5,"SOLIDWALL",1);SetTileTag(38,5,"SOLIDWALL",1);SetTileTag(43,5,"LAND_2", 1);SetTileTag(46,5,"SOLIDWALL",1);SetTileTag(47,5,"LAVA_9", 1);SetTileTag(50,5,"LAVA_9", 1);SetTileTag(51,5,"LAVA_9", 1);SetTileTag(52,5,"LAVA_9", 1);SetTileTag(54,5,"SOLIDWALL",1);
+		SetTileTag(2,4,"LAND_1", 1);SetTileTag(3,4,"LAND_1", 1);SetTileTag(4,4,"LAND_1", 1);SetTileTag(5,4,"LAND_1", 1);SetTileTag(6,4,"LAND_1", 1);SetTileTag(7,4,"LAVA_1", 1);SetTileTag(9,4,"LAND_2", 1);SetTileTag(10,4,"LAND_2", 1);SetTileTag(11,4,"LAND_2", 1);SetTileTag(12,4,"LAND_2", 1);SetTileTag(14,4,"LAVA_1", 1);SetTileTag(16,4,"SOLIDWALL",1);SetTileTag(18,4,"SOLIDWALL",1);SetTileTag(20,4,"SOLIDWALL",1);SetTileTag(32,4,"LAVA_9", 1);SetTileTag(34,4,"LAVA_9", 1);SetTileTag(35,4,"SOLIDWALL",1);SetTileTag(36,4,"SOLIDWALL",1);SetTileTag(37,4,"SOLIDWALL",1);SetTileTag(42,4,"LAND_2", 1);SetTileTag(43,4,"LAND_2", 1);SetTileTag(44,4,"LAND_2", 1);SetTileTag(45,4,"SOLIDWALL",1);SetTileTag(46,4,"LAVA_9", 1);SetTileTag(47,4,"LAVA_9", 1);SetTileTag(48,4,"LAVA_9", 1);SetTileTag(49,4,"LAVA_9", 1);SetTileTag(50,4,"LAVA_9", 1);SetTileTag(52,4,"LAND_18", 1);SetTileTag(53,4,"SOLIDWALL",1);
+		SetTileTag(1,3,"SOLIDWALL",1);SetTileTag(3,3,"LAND_1", 1);SetTileTag(4,3,"SOLIDWALL",1);SetTileTag(6,3,"SOLIDWALL",1);SetTileTag(7,3,"SOLIDWALL",1);SetTileTag(8,3,"LAVA_1", 1);SetTileTag(9,3,"LAVA_1", 1);SetTileTag(13,3,"LAVA_1", 1);SetTileTag(15,3,"SOLIDWALL",1);SetTileTag(19,3,"SOLIDWALL",1);SetTileTag(22,3,"LAND_2", 1);SetTileTag(23,3,"LAND_2", 1);SetTileTag(24,3,"LAND_2", 1);SetTileTag(25,3,"SOLIDWALL",1);SetTileTag(31,3,"SOLIDWALL",1);SetTileTag(32,3,"LAVA_9", 1);SetTileTag(33,3,"LAVA_9", 1);SetTileTag(34,3,"LAVA_9", 1);SetTileTag(37,3,"LAVA_9", 1);SetTileTag(38,3,"SOLIDWALL",1);SetTileTag(41,3,"SOLIDWALL",1);SetTileTag(42,3,"SOLIDWALL",1);SetTileTag(45,3,"LAVA_9", 1);SetTileTag(46,3,"LAVA_9", 1);SetTileTag(47,3,"LAVA_9", 1);SetTileTag(48,3,"SOLIDWALL",1);
+		SetTileTag(1,2,"SOLIDWALL",1);SetTileTag(2,2,"LAND_1", 1);SetTileTag(3,2,"LAND_1", 1);SetTileTag(4,2,"LAND_1", 1);SetTileTag(5,2,"LAND_1", 1);SetTileTag(6,2,"SOLIDWALL",1);SetTileTag(8,2,"SOLIDWALL",1);SetTileTag(9,2,"LAND_6", 1);SetTileTag(11,2,"LAVA_1", 1);SetTileTag(12,2,"LAVA_1", 1);SetTileTag(13,2,"LAND_8", 1);SetTileTag(14,2,"LAND_8", 1);SetTileTag(15,2,"SOLIDWALL",1);SetTileTag(19,2,"SOLIDWALL",1);SetTileTag(20,2,"LAND_2", 1);SetTileTag(21,2,"LAND_2", 1);SetTileTag(22,2,"LAND_2", 1);SetTileTag(23,2,"SOLIDWALL",1);SetTileTag(32,2,"SOLIDWALL",1);SetTileTag(36,2,"LAVA_9", 1);SetTileTag(37,2,"LAVA_9", 1);SetTileTag(46,2,"LAVA_9", 1);SetTileTag(47,2,"SOLIDWALL",1);SetTileTag(51,2,"SOLIDWALL",1);SetTileTag(52,2,"LAND_18", 1);SetTileTag(53,2,"LAND_18", 1);SetTileTag(54,2,"SOLIDWALL",1);
+		SetTileTag(2,1,"SOLIDWALL",1);SetTileTag(9,1,"SOLIDWALL",1);SetTileTag(10,1,"SOLIDWALL",1);SetTileTag(20,1,"SOLIDWALL",1);SetTileTag(36,1,"SOLIDWALL",1);SetTileTag(52,1,"SOLIDWALL",1);
+		SetObjectTag("a_bridge_27_50_05_0827", "LAND_2");
+		SetObjectTag("a_bridge_32_07_05_0910", "LAND_2");
+		SetObjectTag("a_bridge_32_09_05_0926", "LAND_2");
+		SetObjectTag("a_bridge_32_07_05_0932", "LAND_2");
+		SetObjectTag("a_bridge_32_06_05_0936", "LAND_2");
+		SetObjectTag("a_bridge_32_08_05_0942", "LAND_2");
+		SetObjectTag("a_bridge_39_52_05_0983", "LAND_15");
+		SetObjectTag("a_bridge_41_48_05_0984", "LAND_15");
+		SetObjectTag("a_bridge_41_47_05_0985", "LAND_15");
+		SetObjectTag("a_bridge_41_46_05_0986", "LAND_15");
+		SetObjectTag("a_bridge_11_29_05_0987", "LAND_2");
+		SetObjectTag("a_bridge_04_43_05_0990", "LAND_2");
+		SetObjectTag("a_bridge_03_43_05_0991", "LAND_2");
+		SetObjectTag("a_bridge_17_31_05_1001", "LAND_2");
+		SetObjectTag("a_bridge_18_07_05_1002", "LAND_2");
+		SetObjectTag("a_bridge_18_08_05_1003", "LAND_2");
+		SetObjectTag("a_bridge_31_47_05_1005", "LAND_2");
+		SetObjectTag("a_bridge_07_31_05_1006", "LAND_2");
+		SetObjectTag("a_bridge_06_31_05_1007", "LAND_2");
+		SetObjectTag("a_bridge_05_31_05_1009", "LAND_2");
+		SetObjectTag("a_bridge_31_48_05_1018", "LAND_2");
+		SetObjectTag("a_bridge_18_31_05_1019", "LAND_2");
+		SetObjectTag("a_bridge_32_49_05_1020", "LAND_2");
+		SetObjectTag("a_bridge_32_47_05_1021", "LAND_2");
+		SetObjectTag("a_bridge_32_48_05_1022", "LAND_2");
+		SetObjectTag("a_bridge_31_49_05_1023", "LAND_2");	}
 
-	}
-
-
-
-	[MenuItem("MyTools/TagTiles(Invalid)")]
-	static void TagTiles()
-	{
-		/*
-		SetTileTag(0,0,0,1,30,0,0,0,0);
-		SetTileTag(0,1,0,1,30,0,0,0,0);
-		SetTileTag(0,2,0,1,30,0,0,0,0);
-		SetTileTag(0,3,0,1,30,0,0,0,0);
-		SetTileTag(0,4,0,1,30,0,0,0,0);
-		SetTileTag(0,5,0,1,30,0,0,0,0);
-		SetTileTag(0,6,0,1,30,0,0,0,0);
-		SetTileTag(0,7,0,1,30,0,0,0,0);
-		SetTileTag(0,8,0,1,30,0,0,0,0);
-		SetTileTag(0,9,0,1,30,0,0,0,0);
-		SetTileTag(0,10,0,1,30,0,0,0,0);
-		SetTileTag(0,11,0,1,30,0,0,0,0);
-		SetTileTag(0,12,0,1,30,0,0,0,0);
-		SetTileTag(0,13,0,1,30,0,0,0,0);
-		SetTileTag(0,14,0,1,30,0,0,0,0);
-		SetTileTag(0,15,0,1,30,0,0,0,0);
-		SetTileTag(0,16,0,1,30,0,0,0,0);
-		SetTileTag(0,17,0,1,30,0,0,0,0);
-		SetTileTag(0,18,0,1,30,0,0,0,0);
-		SetTileTag(0,19,0,1,30,0,0,0,0);
-		SetTileTag(0,20,0,1,30,0,0,0,0);
-		SetTileTag(0,21,0,1,30,0,0,0,0);
-		SetTileTag(0,22,0,1,30,0,0,0,0);
-		SetTileTag(0,23,0,1,30,0,0,0,0);
-		SetTileTag(0,24,0,1,30,0,0,0,0);
-		SetTileTag(0,25,0,1,30,0,0,0,0);
-		SetTileTag(0,26,0,1,30,0,0,0,0);
-		SetTileTag(0,27,0,1,30,0,0,0,0);
-		SetTileTag(0,28,0,1,30,0,0,0,0);
-		SetTileTag(0,29,0,1,30,0,0,0,0);
-		SetTileTag(0,30,0,1,30,0,0,0,0);
-		SetTileTag(0,31,0,1,30,0,0,0,0);
-		SetTileTag(0,32,0,1,30,0,0,0,0);
-		SetTileTag(0,33,0,1,30,0,0,0,0);
-		SetTileTag(0,34,0,1,30,0,0,0,0);
-		SetTileTag(0,35,0,1,30,0,0,0,0);
-		SetTileTag(0,36,0,1,30,0,0,0,0);
-		SetTileTag(0,37,0,1,30,0,0,0,0);
-		SetTileTag(0,38,0,1,30,0,0,0,0);
-		SetTileTag(0,39,0,1,30,0,0,0,0);
-		SetTileTag(0,40,0,1,30,0,0,0,0);
-		SetTileTag(0,41,0,1,30,0,0,0,0);
-		SetTileTag(0,42,0,1,30,0,0,0,0);
-		SetTileTag(0,43,0,1,30,0,0,0,0);
-		SetTileTag(0,44,0,1,30,0,0,0,0);
-		SetTileTag(0,45,0,1,30,0,0,0,0);
-		SetTileTag(0,46,0,1,30,0,0,0,0);
-		SetTileTag(0,47,0,1,30,0,0,0,0);
-		SetTileTag(0,48,0,1,30,0,0,0,0);
-		SetTileTag(0,49,0,1,30,0,0,0,0);
-		SetTileTag(0,50,0,1,30,0,0,0,0);
-		SetTileTag(0,51,0,1,30,0,0,0,0);
-		SetTileTag(0,52,0,1,30,0,0,0,0);
-		SetTileTag(0,53,0,1,30,0,0,0,0);
-		SetTileTag(0,54,0,1,30,0,0,0,0);
-		SetTileTag(0,55,0,1,30,0,0,0,0);
-		SetTileTag(0,56,0,1,30,0,0,0,0);
-		SetTileTag(0,57,0,1,30,0,0,0,0);
-		SetTileTag(0,58,0,1,30,0,0,0,0);
-		SetTileTag(0,59,0,1,30,0,0,0,0);
-		SetTileTag(0,60,0,1,30,0,0,0,0);
-		SetTileTag(0,61,0,1,30,0,0,0,0);
-		SetTileTag(0,62,0,1,30,0,0,0,0);
-		SetTileTag(0,63,0,1,30,0,0,0,0);
-		SetTileTag(1,0,0,1,30,0,0,0,0);
-		SetTileTag(1,1,0,1,30,0,0,0,0);
-		SetTileTag(1,2,0,1,30,0,0,0,0);
-		SetTileTag(1,3,0,1,30,0,0,0,0);
-		SetTileTag(1,4,0,1,30,0,0,0,0);
-		SetTileTag(1,5,0,1,8,0,0,0,0);
-		SetTileTag(1,6,0,1,8,0,0,0,0);
-		SetTileTag(1,7,0,1,8,0,0,0,0);
-		SetTileTag(1,8,0,1,8,0,0,0,0);
-		SetTileTag(1,9,0,1,8,0,0,0,0);
-		SetTileTag(1,10,0,1,30,0,0,0,0);
-		SetTileTag(1,11,0,1,30,0,0,0,0);
-		SetTileTag(1,12,0,1,30,0,0,0,0);
-		SetTileTag(1,13,0,1,30,0,0,0,0);
-		SetTileTag(1,14,0,1,30,0,0,0,0);
-		SetTileTag(1,15,0,1,30,0,0,0,0);
-		SetTileTag(1,16,0,1,30,0,0,0,0);
-		SetTileTag(1,17,0,1,30,0,0,0,0);
-		SetTileTag(1,18,0,1,30,0,0,0,0);
-		SetTileTag(1,19,0,1,30,0,0,0,0);
-		SetTileTag(1,20,0,1,30,0,0,0,0);
-		SetTileTag(1,21,0,1,30,0,0,0,0);
-		SetTileTag(1,22,0,1,30,0,0,0,0);
-		SetTileTag(1,23,0,1,30,0,0,0,0);
-		SetTileTag(1,24,0,1,30,0,0,0,0);
-		SetTileTag(1,25,0,1,30,0,0,0,0);
-		SetTileTag(1,26,0,1,30,0,0,0,0);
-		SetTileTag(1,27,0,1,30,0,0,0,0);
-		SetTileTag(1,28,0,1,30,0,0,0,0);
-		SetTileTag(1,29,0,1,30,0,0,0,0);
-		SetTileTag(1,30,0,1,30,0,0,0,0);
-		SetTileTag(1,31,0,1,30,0,0,0,0);
-		SetTileTag(1,32,0,1,30,0,0,0,0);
-		SetTileTag(1,33,0,1,30,0,0,0,0);
-		SetTileTag(1,34,0,1,30,0,0,0,0);
-		SetTileTag(1,35,0,1,30,0,0,0,0);
-		SetTileTag(1,36,0,1,24,0,0,0,0);
-		SetTileTag(1,37,0,1,30,0,0,0,0);
-		SetTileTag(1,38,0,1,30,0,0,0,0);
-		SetTileTag(1,39,0,1,30,0,0,0,0);
-		SetTileTag(1,40,0,1,30,0,0,0,0);
-		SetTileTag(1,41,0,1,30,0,0,0,0);
-		SetTileTag(1,42,0,1,30,0,0,0,0);
-		SetTileTag(1,43,0,1,30,0,0,0,0);
-		SetTileTag(1,44,0,1,30,0,0,0,0);
-		SetTileTag(1,45,0,1,30,0,0,0,0);
-		SetTileTag(1,46,0,1,30,0,0,0,0);
-		SetTileTag(1,47,0,1,30,0,0,0,0);
-		SetTileTag(1,48,0,1,30,0,0,0,0);
-		SetTileTag(1,49,0,1,30,0,0,0,0);
-		SetTileTag(1,50,0,1,30,0,0,0,0);
-		SetTileTag(1,51,0,1,30,0,0,0,0);
-		SetTileTag(1,52,0,1,30,0,0,0,0);
-		SetTileTag(1,53,0,1,30,0,0,0,0);
-		SetTileTag(1,54,0,1,30,0,0,0,0);
-		SetTileTag(1,55,0,1,30,0,0,0,0);
-		SetTileTag(1,56,0,1,30,0,0,0,0);
-		SetTileTag(1,57,0,1,30,0,0,0,0);
-		SetTileTag(1,58,0,1,30,0,0,0,0);
-		SetTileTag(1,59,0,1,30,0,0,0,0);
-		SetTileTag(1,60,0,1,30,0,0,0,0);
-		SetTileTag(1,61,0,1,30,0,0,0,0);
-		SetTileTag(1,62,0,1,30,0,0,0,0);
-		SetTileTag(1,63,0,1,30,0,0,0,0);
-		SetTileTag(2,0,0,1,30,0,0,0,0);
-		SetTileTag(2,1,0,1,30,0,0,0,0);
-		SetTileTag(2,2,0,1,30,0,0,0,0);
-		SetTileTag(2,3,0,1,30,0,0,0,0);
-		SetTileTag(2,4,0,1,30,0,0,0,0);
-		SetTileTag(2,5,0,1,8,0,0,0,0);
-		SetTileTag(2,6,0,1,8,0,0,0,0);
-		SetTileTag(2,7,0,1,8,0,0,0,0);
-		SetTileTag(2,8,0,1,8,0,0,0,0);
-		SetTileTag(2,9,0,1,0,0,0,0,0);
-		SetTileTag(2,10,1,1,0,0,1,0,0);
-		SetTileTag(2,11,1,1,0,0,1,0,0);
-		SetTileTag(2,12,1,1,0,0,1,0,0);
-		SetTileTag(2,13,0,1,0,0,0,0,0);
-		SetTileTag(2,14,1,1,2,0,0,0,0);
-		SetTileTag(2,15,1,1,2,0,0,0,0);
-		SetTileTag(2,16,0,1,0,0,0,0,0);
-		SetTileTag(2,17,1,1,18,0,0,0,0);
-		SetTileTag(2,18,1,1,18,0,0,0,0);
-		SetTileTag(2,19,1,1,18,0,0,0,0);
-		SetTileTag(2,20,1,1,18,0,0,0,0);
-		SetTileTag(2,21,1,1,18,0,0,0,0);
-		SetTileTag(2,22,1,1,18,0,0,0,0);
-		SetTileTag(2,23,1,1,18,0,0,0,0);
-		SetTileTag(2,24,1,1,18,0,0,0,0);
-		SetTileTag(2,25,1,1,18,0,0,0,0);
-		SetTileTag(2,26,0,1,30,0,0,0,0);
-		SetTileTag(2,27,0,1,30,0,0,0,0);
-		SetTileTag(2,28,0,1,30,0,0,0,0);
-		SetTileTag(2,29,0,1,30,0,0,0,0);
-		SetTileTag(2,30,0,1,30,0,0,0,0);
-		SetTileTag(2,31,0,1,30,0,0,0,0);
-		SetTileTag(2,32,0,1,30,0,0,0,0);
-		SetTileTag(2,33,1,1,24,0,0,0,0);
-		SetTileTag(2,34,1,1,24,0,0,0,0);
-		SetTileTag(2,35,1,1,24,0,0,0,0);
-		SetTileTag(2,36,1,1,24,0,0,0,0);
-		SetTileTag(2,37,0,1,18,0,0,0,0);
-		SetTileTag(2,38,0,1,18,0,0,0,0);
-		SetTileTag(2,39,0,1,18,0,0,0,0);
-		SetTileTag(2,40,0,1,18,0,0,0,0);
-		SetTileTag(2,41,0,1,30,0,0,0,0);
-		SetTileTag(2,42,0,1,30,0,0,0,0);
-		SetTileTag(2,43,0,1,30,0,0,0,0);
-		SetTileTag(2,44,0,1,30,0,0,0,0);
-		SetTileTag(2,45,0,1,30,0,0,0,0);
-		SetTileTag(2,46,0,1,30,0,0,0,0);
-		SetTileTag(2,47,0,1,30,0,0,0,0);
-		SetTileTag(2,48,0,1,30,0,0,0,0);
-		SetTileTag(2,49,0,1,30,0,0,0,0);
-		SetTileTag(2,50,0,1,30,0,0,0,0);
-		SetTileTag(2,51,0,1,30,0,0,0,0);
-		SetTileTag(2,52,0,1,24,0,0,0,0);
-		SetTileTag(2,53,0,1,24,0,0,0,0);
-		SetTileTag(2,54,0,1,24,0,0,0,0);
-		SetTileTag(2,55,0,1,30,0,0,0,0);
-		SetTileTag(2,56,1,1,24,0,0,0,0);
-		SetTileTag(2,57,1,1,24,0,0,0,0);
-		SetTileTag(2,58,1,1,24,0,0,0,0);
-		SetTileTag(2,59,0,1,30,0,0,0,0);
-		SetTileTag(2,60,0,1,30,0,0,0,0);
-		SetTileTag(2,61,0,1,30,0,0,0,0);
-		SetTileTag(2,62,0,1,30,0,0,0,0);
-		SetTileTag(2,63,0,1,30,0,0,0,0);
-		SetTileTag(3,0,0,1,30,0,0,0,0);
-		SetTileTag(3,1,0,1,30,0,0,0,0);
-		SetTileTag(3,2,0,1,30,0,0,0,0);
-		SetTileTag(3,3,0,1,2,0,0,0,0);
-		SetTileTag(3,4,0,1,2,0,0,0,0);
-		SetTileTag(3,5,0,1,2,0,0,0,0);
-		SetTileTag(3,6,0,1,2,0,0,0,0);
-		SetTileTag(3,7,0,1,2,0,0,0,0);
-		SetTileTag(3,8,0,1,2,0,0,0,0);
-		SetTileTag(3,9,0,1,2,0,0,0,0);
-		SetTileTag(3,10,1,1,0,0,1,0,0);
-		SetTileTag(3,11,1,1,0,0,1,0,0);
-		SetTileTag(3,12,1,1,0,0,1,0,0);
-		SetTileTag(3,13,6,1,0,0,0,0,0);
-		SetTileTag(3,14,1,1,2,0,0,0,0);
-		SetTileTag(3,15,1,1,2,0,0,0,0);
-		SetTileTag(3,16,0,1,0,0,0,0,0);
-		SetTileTag(3,17,1,1,18,0,0,0,0);
-		SetTileTag(3,18,0,1,18,0,0,0,0);
-		SetTileTag(3,19,1,1,18,0,0,0,0);
-		SetTileTag(3,20,0,1,18,0,0,0,0);
-		SetTileTag(3,21,1,1,18,0,0,0,0);
-		SetTileTag(3,22,0,1,18,0,0,0,0);
-		SetTileTag(3,23,1,1,18,0,0,0,0);
-		SetTileTag(3,24,0,1,18,0,0,0,0);
-		SetTileTag(3,25,1,1,18,0,0,0,0);
-		SetTileTag(3,26,0,1,30,0,0,0,0);
-		SetTileTag(3,27,0,1,30,0,0,0,0);
-		SetTileTag(3,28,0,1,30,0,0,0,0);
-		SetTileTag(3,29,0,1,30,0,0,0,0);
-		SetTileTag(3,30,0,1,30,0,0,0,0);
-		SetTileTag(3,31,0,1,30,0,0,0,0);
-		SetTileTag(3,32,0,1,24,0,0,0,0);
-		SetTileTag(3,33,1,1,24,0,0,0,0);
-		SetTileTag(3,34,1,1,24,0,0,0,0);
-		SetTileTag(3,35,0,1,0,0,0,0,0);
-		SetTileTag(3,36,1,1,24,0,0,0,0);
-		SetTileTag(3,37,0,1,24,0,0,0,0);
-		SetTileTag(3,38,1,1,24,0,0,0,0);
-		SetTileTag(3,39,1,1,22,0,0,0,0);
-		SetTileTag(3,40,0,1,18,0,0,0,0);
-		SetTileTag(3,41,0,1,30,0,0,0,0);
-		SetTileTag(3,42,1,1,24,0,0,0,0);
-		SetTileTag(3,43,1,1,24,0,0,0,0);
-		SetTileTag(3,44,1,1,24,0,0,0,0);
-		SetTileTag(3,45,1,1,24,0,0,0,0);
-		SetTileTag(3,46,1,1,24,0,0,0,0);
-		SetTileTag(3,47,1,1,24,0,0,0,0);
-		SetTileTag(3,48,1,1,24,0,0,0,0);
-		SetTileTag(3,49,0,1,30,0,0,0,0);
-		SetTileTag(3,50,1,1,24,0,0,0,0);
-		SetTileTag(3,51,1,1,24,0,0,0,0);
-		SetTileTag(3,52,0,1,24,0,0,0,0);
-		SetTileTag(3,53,0,1,24,0,0,0,0);
-		SetTileTag(3,54,0,1,24,0,0,0,0);
-		SetTileTag(3,55,0,1,30,0,0,0,0);
-		SetTileTag(3,56,1,1,24,0,0,0,0);
-		SetTileTag(3,57,1,1,24,0,0,0,0);
-		SetTileTag(3,58,1,1,24,0,0,0,0);
-		SetTileTag(3,59,0,1,30,0,0,0,0);
-		SetTileTag(3,60,0,1,30,0,0,0,0);
-		SetTileTag(3,61,0,1,30,0,0,0,0);
-		SetTileTag(3,62,0,1,30,0,0,0,0);
-		SetTileTag(3,63,0,1,30,0,0,0,0);
-		SetTileTag(4,0,0,1,30,0,0,0,0);
-		SetTileTag(4,1,0,1,30,0,0,0,0);
-		SetTileTag(4,2,1,1,2,0,0,0,0);
-		SetTileTag(4,3,1,1,2,0,0,0,0);
-		SetTileTag(4,4,1,1,0,0,1,0,0);
-		SetTileTag(4,5,1,1,2,0,0,0,0);
-		SetTileTag(4,6,1,1,2,0,0,0,0);
-		SetTileTag(4,7,1,1,2,0,0,0,0);
-		SetTileTag(4,8,1,1,2,0,0,0,0);
-		SetTileTag(4,9,0,1,2,0,0,0,0);
-		SetTileTag(4,10,1,1,0,0,1,0,0);
-		SetTileTag(4,11,1,1,0,0,1,0,0);
-		SetTileTag(4,12,1,1,0,0,1,0,0);
-		SetTileTag(4,13,2,1,0,0,1,0,0);
-		SetTileTag(4,14,0,1,0,0,0,0,0);
-		SetTileTag(4,15,0,1,0,0,0,0,0);
-		SetTileTag(4,16,0,1,0,0,0,0,0);
-		SetTileTag(4,17,1,1,18,0,0,0,0);
-		SetTileTag(4,18,1,1,18,0,0,0,0);
-		SetTileTag(4,19,1,1,18,0,0,0,0);
-		SetTileTag(4,20,1,1,18,0,0,0,0);
-		SetTileTag(4,21,1,1,18,0,0,0,0);
-		SetTileTag(4,22,1,1,18,0,0,0,0);
-		SetTileTag(4,23,1,1,18,0,0,0,0);
-		SetTileTag(4,24,1,1,18,0,0,0,0);
-		SetTileTag(4,25,1,1,18,0,0,0,0);
-		SetTileTag(4,26,0,1,30,0,0,0,0);
-		SetTileTag(4,27,0,1,30,0,0,0,0);
-		SetTileTag(4,28,0,1,30,0,0,0,0);
-		SetTileTag(4,29,8,1,16,0,0,0,0);
-		SetTileTag(4,30,8,1,16,0,0,0,0);
-		SetTileTag(4,31,8,1,16,0,0,0,0);
-		SetTileTag(4,32,0,1,30,0,0,0,0);
-		SetTileTag(4,33,0,1,30,0,0,0,0);
-		SetTileTag(4,34,0,1,30,0,0,0,0);
-		SetTileTag(4,35,0,1,0,0,0,0,0);
-		SetTileTag(4,36,1,1,24,0,0,0,0);
-		SetTileTag(4,37,0,1,8,0,0,0,0);
-		SetTileTag(4,38,1,1,24,0,0,0,0);
-		SetTileTag(4,39,1,1,24,0,0,0,0);
-		SetTileTag(4,40,0,1,18,0,0,0,0);
-		SetTileTag(4,41,0,1,18,0,0,0,0);
-		SetTileTag(4,42,1,1,24,0,0,0,0);
-		SetTileTag(4,43,1,1,24,0,0,0,0);
-		SetTileTag(4,44,1,1,24,0,0,0,0);
-		SetTileTag(4,45,1,1,24,0,0,0,0);
-		SetTileTag(4,46,1,1,24,0,0,0,0);
-		SetTileTag(4,47,1,1,24,0,0,0,0);
-		SetTileTag(4,48,1,1,24,0,0,0,0);
-		SetTileTag(4,49,1,1,24,0,0,1,0);
-		SetTileTag(4,50,1,1,24,0,0,0,0);
-		SetTileTag(4,51,1,1,24,0,0,0,0);
-		SetTileTag(4,52,0,1,24,0,0,0,0);
-		SetTileTag(4,53,0,1,24,0,0,0,0);
-		SetTileTag(4,54,0,1,30,0,0,0,0);
-		SetTileTag(4,55,4,1,24,0,0,0,0);
-		SetTileTag(4,56,1,1,24,0,0,0,0);
-		SetTileTag(4,57,1,1,24,0,0,0,0);
-		SetTileTag(4,58,1,1,24,0,0,0,0);
-		SetTileTag(4,59,2,1,24,0,0,0,0);
-		SetTileTag(4,60,0,1,30,0,0,0,0);
-		SetTileTag(4,61,0,1,30,0,0,0,0);
-		SetTileTag(4,62,0,1,30,0,0,0,0);
-		SetTileTag(4,63,0,1,30,0,0,0,0);
-		SetTileTag(5,0,0,1,30,0,0,0,0);
-		SetTileTag(5,1,0,1,30,0,0,0,0);
-		SetTileTag(5,2,1,1,2,0,0,0,0);
-		SetTileTag(5,3,1,1,2,0,0,0,0);
-		SetTileTag(5,4,1,1,0,0,1,0,0);
-		SetTileTag(5,5,1,1,2,0,0,0,0);
-		SetTileTag(5,6,1,1,2,0,0,0,0);
-		SetTileTag(5,7,1,1,2,0,0,0,0);
-		SetTileTag(5,8,1,1,2,0,0,0,0);
-		SetTileTag(5,9,0,1,2,0,0,0,0);
-		SetTileTag(5,10,5,1,0,0,1,0,0);
-		SetTileTag(5,11,1,1,0,0,1,0,0);
-		SetTileTag(5,12,1,1,0,0,1,0,0);
-		SetTileTag(5,13,1,1,0,0,1,0,0);
-		SetTileTag(5,14,0,1,0,0,0,0,0);
-		SetTileTag(5,15,0,1,0,0,0,0,0);
-		SetTileTag(5,16,0,1,0,0,0,0,0);
-		SetTileTag(5,17,1,1,18,0,0,0,0);
-		SetTileTag(5,18,1,1,18,0,0,0,0);
-		SetTileTag(5,19,8,1,18,0,0,0,0);
-		SetTileTag(5,20,1,1,18,0,0,0,0);
-		SetTileTag(5,21,1,1,18,0,0,0,0);
-		SetTileTag(5,22,1,1,18,0,0,0,0);
-		SetTileTag(5,23,1,1,18,0,0,0,0);
-		SetTileTag(5,24,1,1,18,0,0,0,0);
-		SetTileTag(5,25,1,1,18,0,0,0,0);
-		SetTileTag(5,26,1,1,18,0,0,0,0);
-		SetTileTag(5,27,1,1,18,0,0,0,0);
-		SetTileTag(5,28,1,1,18,0,0,0,0);
-		SetTileTag(5,29,1,1,18,0,0,0,0);
-		SetTileTag(5,30,1,1,18,0,0,0,0);
-		SetTileTag(5,31,1,1,18,0,0,0,0);
-		SetTileTag(5,32,1,1,18,0,0,1,0);
-		SetTileTag(5,33,1,1,18,0,0,0,0);
-		SetTileTag(5,34,1,1,20,0,0,0,0);
-		SetTileTag(5,35,1,1,22,0,0,0,0);
-		SetTileTag(5,36,1,1,24,0,0,0,0);
-		SetTileTag(5,37,1,1,24,0,0,0,0);
-		SetTileTag(5,38,1,1,24,0,0,0,0);
-		SetTileTag(5,39,1,1,24,0,0,0,0);
-		SetTileTag(5,40,0,1,18,0,0,0,0);
-		SetTileTag(5,41,0,1,30,0,0,0,0);
-		SetTileTag(5,42,1,1,24,0,0,0,0);
-		SetTileTag(5,43,0,1,30,0,0,0,0);
-		SetTileTag(5,44,0,1,30,0,0,0,0);
-		SetTileTag(5,45,0,1,30,0,0,0,0);
-		SetTileTag(5,46,0,1,30,0,0,0,0);
-		SetTileTag(5,47,0,1,30,0,0,0,0);
-		SetTileTag(5,48,1,1,24,0,0,1,0);
-		SetTileTag(5,49,0,1,24,0,0,0,0);
-		SetTileTag(5,50,0,1,24,0,0,0,0);
-		SetTileTag(5,51,0,1,24,0,0,0,0);
-		SetTileTag(5,52,0,1,24,0,0,0,0);
-		SetTileTag(5,53,1,1,24,0,0,0,0);
-		SetTileTag(5,54,1,1,24,0,0,0,0);
-		SetTileTag(5,55,1,1,24,0,0,0,0);
-		SetTileTag(5,56,1,1,24,0,0,0,0);
-		SetTileTag(5,57,1,1,24,0,0,0,0);
-		SetTileTag(5,58,1,1,24,0,0,0,0);
-		SetTileTag(5,59,1,1,24,0,0,0,0);
-		SetTileTag(5,60,1,1,24,0,0,0,0);
-		SetTileTag(5,61,0,1,24,0,0,0,0);
-		SetTileTag(5,62,0,1,30,0,0,0,0);
-		SetTileTag(5,63,0,1,30,0,0,0,0);
-		SetTileTag(6,0,0,1,30,0,0,0,0);
-		SetTileTag(6,1,0,1,30,0,0,0,0);
-		SetTileTag(6,2,8,1,2,0,0,0,0);
-		SetTileTag(6,3,1,1,2,0,0,0,0);
-		SetTileTag(6,4,1,1,0,0,1,0,0);
-		SetTileTag(6,5,1,1,0,0,1,0,0);
-		SetTileTag(6,6,1,1,0,0,1,0,0);
-		SetTileTag(6,7,1,1,0,0,1,0,0);
-		SetTileTag(6,8,1,1,0,0,1,0,0);
-		SetTileTag(6,9,0,1,2,0,0,0,0);
-		SetTileTag(6,10,0,1,0,0,0,0,0);
-		SetTileTag(6,11,1,1,0,0,1,0,0);
-		SetTileTag(6,12,1,1,0,0,1,0,0);
-		SetTileTag(6,13,1,1,0,0,1,0,0);
-		SetTileTag(6,14,0,1,0,0,0,0,0);
-		SetTileTag(6,15,0,1,0,0,0,0,0);
-		SetTileTag(6,16,0,1,0,0,0,0,0);
-		SetTileTag(6,17,0,1,0,0,0,0,0);
-		SetTileTag(6,18,0,1,0,0,0,0,0);
-		SetTileTag(6,19,8,1,20,0,0,0,0);
-		SetTileTag(6,20,0,1,30,0,0,0,0);
-		SetTileTag(6,21,0,1,30,0,0,0,0);
-		SetTileTag(6,22,0,1,30,0,0,0,0);
-		SetTileTag(6,23,0,1,30,0,0,0,0);
-		SetTileTag(6,24,0,1,30,0,0,0,0);
-		SetTileTag(6,25,0,1,30,0,0,0,0);
-		SetTileTag(6,26,0,1,30,0,0,0,0);
-		SetTileTag(6,27,0,1,30,0,0,0,0);
-		SetTileTag(6,28,0,1,30,0,0,0,0);
-		SetTileTag(6,29,1,1,18,0,0,0,0);
-		SetTileTag(6,30,1,1,18,0,0,0,0);
-		SetTileTag(6,31,1,1,18,0,0,0,0);
-		SetTileTag(6,32,0,1,30,0,0,0,0);
-		SetTileTag(6,33,0,1,0,0,0,0,0);
-		SetTileTag(6,34,0,1,0,0,0,0,0);
-		SetTileTag(6,35,0,1,0,0,0,0,0);
-		SetTileTag(6,36,1,1,24,0,0,0,0);
-		SetTileTag(6,37,0,1,8,0,0,0,0);
-		SetTileTag(6,38,1,1,24,0,0,0,0);
-		SetTileTag(6,39,1,1,24,0,0,0,0);
-		SetTileTag(6,40,0,1,18,0,0,0,0);
-		SetTileTag(6,41,0,1,30,0,0,0,0);
-		SetTileTag(6,42,1,1,24,0,0,0,0);
-		SetTileTag(6,43,1,1,24,0,0,0,0);
-		SetTileTag(6,44,1,1,24,0,0,0,0);
-		SetTileTag(6,45,1,1,24,0,0,0,0);
-		SetTileTag(6,46,1,1,22,0,1,0,0);
-		SetTileTag(6,47,0,1,30,0,0,0,0);
-		SetTileTag(6,48,1,1,24,0,0,0,0);
-		SetTileTag(6,49,1,1,24,0,0,0,0);
-		SetTileTag(6,50,1,1,24,0,0,0,0);
-		SetTileTag(6,51,1,1,24,0,0,0,0);
-		SetTileTag(6,52,0,1,30,0,0,0,0);
-		SetTileTag(6,53,1,1,24,0,0,0,0);
-		SetTileTag(6,54,1,1,14,0,0,0,0);
-		SetTileTag(6,55,1,1,14,0,0,0,0);
-		SetTileTag(6,56,1,1,14,0,0,0,0);
-		SetTileTag(6,57,1,1,14,0,0,0,0);
-		SetTileTag(6,58,1,1,14,0,0,0,0);
-		SetTileTag(6,59,1,1,14,0,0,0,0);
-		SetTileTag(6,60,1,1,14,0,0,0,0);
-		SetTileTag(6,61,0,1,24,0,0,0,0);
-		SetTileTag(6,62,0,1,30,0,0,0,0);
-		SetTileTag(6,63,0,1,30,0,0,0,0);
-		SetTileTag(7,0,0,1,30,0,0,0,0);
-		SetTileTag(7,1,0,1,30,0,0,0,0);
-		SetTileTag(7,2,8,1,4,0,0,0,0);
-		SetTileTag(7,3,1,1,2,0,0,0,0);
-		SetTileTag(7,4,1,1,2,0,0,0,0);
-		SetTileTag(7,5,1,1,2,0,0,0,0);
-		SetTileTag(7,6,1,1,2,0,0,0,0);
-		SetTileTag(7,7,1,1,2,0,0,0,0);
-		SetTileTag(7,8,1,1,2,0,0,0,0);
-		SetTileTag(7,9,0,1,2,0,0,0,0);
-		SetTileTag(7,10,0,1,0,0,0,0,0);
-		SetTileTag(7,11,5,1,0,0,1,0,0);
-		SetTileTag(7,12,1,1,0,0,1,0,0);
-		SetTileTag(7,13,1,1,0,0,1,0,0);
-		SetTileTag(7,14,0,1,0,0,0,0,0);
-		SetTileTag(7,15,0,1,0,0,0,0,0);
-		SetTileTag(7,16,0,1,0,0,0,0,0);
-		SetTileTag(7,17,0,1,0,0,0,0,0);
-		SetTileTag(7,18,0,1,0,0,0,0,0);
-		SetTileTag(7,19,8,1,22,0,0,0,0);
-		SetTileTag(7,20,0,1,30,0,0,0,0);
-		SetTileTag(7,21,0,1,30,0,0,0,0);
-		SetTileTag(7,22,0,1,30,0,0,0,0);
-		SetTileTag(7,23,0,1,30,0,0,0,0);
-		SetTileTag(7,24,0,1,30,0,0,0,0);
-		SetTileTag(7,25,0,1,30,0,0,0,0);
-		SetTileTag(7,26,0,1,30,0,0,0,0);
-		SetTileTag(7,27,0,1,30,0,0,0,0);
-		SetTileTag(7,28,0,1,30,0,0,0,0);
-		SetTileTag(7,29,1,1,18,0,0,0,0);
-		SetTileTag(7,30,0,1,30,0,0,0,0);
-		SetTileTag(7,31,0,1,30,0,0,0,0);
-		SetTileTag(7,32,0,1,0,0,0,0,0);
-		SetTileTag(7,33,0,1,0,0,0,0,0);
-		SetTileTag(7,34,1,1,0,0,0,0,0);
-		SetTileTag(7,35,0,1,0,0,0,0,0);
-		SetTileTag(7,36,1,1,24,0,0,0,0);
-		SetTileTag(7,37,0,1,8,0,0,0,0);
-		SetTileTag(7,38,1,1,24,0,0,0,0);
-		SetTileTag(7,39,1,1,24,0,0,0,0);
-		SetTileTag(7,40,0,1,18,0,0,0,0);
-		SetTileTag(7,41,0,1,30,0,0,0,0);
-		SetTileTag(7,42,1,1,24,0,0,0,0);
-		SetTileTag(7,43,1,1,24,0,0,0,0);
-		SetTileTag(7,44,1,1,24,0,0,0,0);
-		SetTileTag(7,45,1,1,26,0,0,0,0);
-		SetTileTag(7,46,0,1,24,0,0,0,0);
-		SetTileTag(7,47,0,1,30,0,0,0,0);
-		SetTileTag(7,48,1,1,24,0,0,0,0);
-		SetTileTag(7,49,1,1,24,0,0,0,0);
-		SetTileTag(7,50,1,1,24,0,0,0,0);
-		SetTileTag(7,51,1,1,24,0,0,0,0);
-		SetTileTag(7,52,0,1,30,0,0,0,0);
-		SetTileTag(7,53,1,1,24,0,0,0,0);
-		SetTileTag(7,54,1,1,14,0,0,0,0);
-		SetTileTag(7,55,1,1,14,0,0,0,0);
-		SetTileTag(7,56,1,1,14,0,0,0,0);
-		SetTileTag(7,57,1,1,14,0,0,0,0);
-		SetTileTag(7,58,1,1,14,0,0,0,0);
-		SetTileTag(7,59,1,1,14,0,0,0,0);
-		SetTileTag(7,60,1,1,14,0,0,0,0);
-		SetTileTag(7,61,0,1,24,0,0,0,0);
-		SetTileTag(7,62,0,1,30,0,0,0,0);
-		SetTileTag(7,63,0,1,30,0,0,0,0);
-		SetTileTag(8,0,0,1,30,0,0,0,0);
-		SetTileTag(8,1,0,1,30,0,0,0,0);
-		SetTileTag(8,2,8,1,6,0,0,0,0);
-		SetTileTag(8,3,1,1,2,0,0,0,0);
-		SetTileTag(8,4,1,1,2,0,0,0,0);
-		SetTileTag(8,5,1,1,2,0,0,0,0);
-		SetTileTag(8,6,1,1,2,0,0,0,0);
-		SetTileTag(8,7,1,1,2,0,0,0,0);
-		SetTileTag(8,8,1,1,2,0,0,0,0);
-		SetTileTag(8,9,0,1,2,0,0,0,0);
-		SetTileTag(8,10,0,1,2,0,0,0,0);
-		SetTileTag(8,11,0,1,0,0,0,0,0);
-		SetTileTag(8,12,1,1,0,0,1,0,0);
-		SetTileTag(8,13,1,1,0,0,1,0,0);
-		SetTileTag(8,14,2,1,0,0,1,0,0);
-		SetTileTag(8,15,0,1,0,0,0,0,0);
-		SetTileTag(8,16,0,1,0,0,0,0,0);
-		SetTileTag(8,17,0,1,0,0,0,0,0);
-		SetTileTag(8,18,0,1,0,0,0,0,0);
-		SetTileTag(8,19,1,1,24,0,0,0,0);
-		SetTileTag(8,20,0,1,30,0,0,0,0);
-		SetTileTag(8,21,0,1,2,0,0,0,0);
-		SetTileTag(8,22,0,1,2,0,0,0,0);
-		SetTileTag(8,23,4,1,2,0,1,0,0);
-		SetTileTag(8,24,1,1,2,0,1,0,0);
-		SetTileTag(8,25,1,1,2,0,1,0,0);
-		SetTileTag(8,26,1,1,2,0,1,0,0);
-		SetTileTag(8,27,0,1,2,0,0,0,0);
-		SetTileTag(8,28,0,1,2,0,0,0,0);
-		SetTileTag(8,29,9,1,16,0,0,0,0);
-		SetTileTag(8,30,0,1,30,0,0,0,0);
-		SetTileTag(8,31,1,1,8,0,0,0,0);
-		SetTileTag(8,32,1,1,6,0,0,0,0);
-		SetTileTag(8,33,1,1,4,0,0,0,0);
-		SetTileTag(8,34,1,1,2,0,0,0,0);
-		SetTileTag(8,35,0,1,24,0,0,0,0);
-		SetTileTag(8,36,1,1,24,0,0,0,0);
-		SetTileTag(8,37,0,1,24,0,0,0,0);
-		SetTileTag(8,38,1,1,24,0,0,0,0);
-		SetTileTag(8,39,0,1,30,0,0,0,0);
-		SetTileTag(8,40,0,1,18,0,0,0,0);
-		SetTileTag(8,41,0,1,30,0,0,0,0);
-		SetTileTag(8,42,1,1,22,0,0,0,0);
-		SetTileTag(8,43,1,1,24,0,0,0,0);
-		SetTileTag(8,44,1,1,24,0,0,0,0);
-		SetTileTag(8,45,1,1,24,0,0,0,0);
-		SetTileTag(8,46,0,1,24,0,0,0,0);
-		SetTileTag(8,47,0,1,30,0,0,0,0);
-		SetTileTag(8,48,1,1,24,0,0,0,0);
-		SetTileTag(8,49,1,1,24,0,0,0,0);
-		SetTileTag(8,50,1,1,24,0,0,0,0);
-		SetTileTag(8,51,1,1,24,0,0,0,0);
-		SetTileTag(8,52,1,1,24,0,0,1,0);
-		SetTileTag(8,53,1,1,24,0,0,0,0);
-		SetTileTag(8,54,1,1,14,0,0,0,0);
-		SetTileTag(8,55,1,1,12,0,1,0,0);
-		SetTileTag(8,56,1,1,12,0,1,0,0);
-		SetTileTag(8,57,1,1,14,0,0,0,0);
-		SetTileTag(8,58,1,1,12,0,1,0,0);
-		SetTileTag(8,59,1,1,12,0,1,0,0);
-		SetTileTag(8,60,1,1,14,0,0,0,0);
-		SetTileTag(8,61,0,1,24,0,0,0,0);
-		SetTileTag(8,62,0,1,30,0,0,0,0);
-		SetTileTag(8,63,0,1,30,0,0,0,0);
-		SetTileTag(9,0,0,1,30,0,0,0,0);
-		SetTileTag(9,1,0,1,30,0,0,0,0);
-		SetTileTag(9,2,1,1,2,0,0,0,0);
-		SetTileTag(9,3,1,1,2,0,0,0,0);
-		SetTileTag(9,4,1,1,2,0,0,0,0);
-		SetTileTag(9,5,1,1,22,0,0,0,0);
-		SetTileTag(9,6,1,1,22,0,0,0,0);
-		SetTileTag(9,7,1,1,2,0,0,0,0);
-		SetTileTag(9,8,1,1,2,0,0,0,0);
-		SetTileTag(9,9,1,1,2,0,0,0,0);
-		SetTileTag(9,10,1,1,2,0,0,1,0);
-		SetTileTag(9,11,1,1,2,0,0,0,0);
-		SetTileTag(9,12,1,1,2,0,0,0,0);
-		SetTileTag(9,13,1,1,0,0,1,0,0);
-		SetTileTag(9,14,1,1,0,0,1,0,0);
-		SetTileTag(9,15,0,1,0,0,0,0,0);
-		SetTileTag(9,16,0,1,0,0,0,0,0);
-		SetTileTag(9,17,0,1,0,0,0,0,0);
-		SetTileTag(9,18,0,1,0,0,0,0,0);
-		SetTileTag(9,19,1,1,24,0,0,1,0);
-		SetTileTag(9,20,0,1,30,0,0,0,0);
-		SetTileTag(9,21,0,1,2,0,0,0,0);
-		SetTileTag(9,22,4,1,2,0,1,0,0);
-		SetTileTag(9,23,1,1,2,0,1,0,0);
-		SetTileTag(9,24,1,1,2,0,1,0,0);
-		SetTileTag(9,25,1,1,2,0,1,0,0);
-		SetTileTag(9,26,1,1,2,0,1,0,0);
-		SetTileTag(9,27,2,1,2,0,1,0,0);
-		SetTileTag(9,28,0,1,2,0,0,0,0);
-		SetTileTag(9,29,9,1,14,0,0,0,0);
-		SetTileTag(9,30,0,1,30,0,0,0,0);
-		SetTileTag(9,31,1,1,10,0,0,0,0);
-		SetTileTag(9,32,1,1,2,0,0,0,0);
-		SetTileTag(9,33,1,1,2,0,0,0,0);
-		SetTileTag(9,34,1,1,24,0,0,0,0);
-		SetTileTag(9,35,1,1,24,0,0,1,0);
-		SetTileTag(9,36,1,1,24,0,0,0,0);
-		SetTileTag(9,37,0,1,8,0,0,0,0);
-		SetTileTag(9,38,1,1,24,0,0,0,0);
-		SetTileTag(9,39,1,1,24,0,0,0,0);
-		SetTileTag(9,40,0,1,18,0,0,0,0);
-		SetTileTag(9,41,0,1,30,0,0,0,0);
-		SetTileTag(9,42,1,1,24,0,0,0,0);
-		SetTileTag(9,43,1,1,24,0,0,0,0);
-		SetTileTag(9,44,1,1,24,0,0,0,0);
-		SetTileTag(9,45,1,1,26,0,0,0,0);
-		SetTileTag(9,46,0,1,24,0,0,0,0);
-		SetTileTag(9,47,0,1,30,0,0,0,0);
-		SetTileTag(9,48,1,1,26,0,0,0,0);
-		SetTileTag(9,49,1,1,24,0,0,0,0);
-		SetTileTag(9,50,1,1,24,0,0,0,0);
-		SetTileTag(9,51,1,1,24,0,0,0,0);
-		SetTileTag(9,52,0,1,30,0,0,0,0);
-		SetTileTag(9,53,1,1,24,0,0,0,0);
-		SetTileTag(9,54,1,1,14,0,0,0,0);
-		SetTileTag(9,55,1,1,12,0,1,0,0);
-		SetTileTag(9,56,1,1,14,0,0,0,0);
-		SetTileTag(9,57,1,1,14,0,0,0,0);
-		SetTileTag(9,58,1,1,14,0,0,0,0);
-		SetTileTag(9,59,1,1,12,0,1,0,0);
-		SetTileTag(9,60,1,1,14,0,0,0,0);
-		SetTileTag(9,61,0,1,24,0,0,0,0);
-		SetTileTag(9,62,0,1,30,0,0,0,0);
-		SetTileTag(9,63,0,1,30,0,0,0,0);
-		SetTileTag(10,0,0,1,30,0,0,0,0);
-		SetTileTag(10,1,0,1,30,0,0,0,0);
-		SetTileTag(10,2,8,1,10,0,0,0,0);
-		SetTileTag(10,3,1,1,2,0,0,0,0);
-		SetTileTag(10,4,1,1,2,0,0,0,0);
-		SetTileTag(10,5,1,1,22,0,0,0,0);
-		SetTileTag(10,6,8,1,22,0,0,0,0);
-		SetTileTag(10,7,1,1,2,0,0,0,0);
-		SetTileTag(10,8,1,1,2,0,0,0,0);
-		SetTileTag(10,9,0,1,0,0,0,0,0);
-		SetTileTag(10,10,0,1,0,0,0,0,0);
-		SetTileTag(10,11,0,1,0,0,0,0,0);
-		SetTileTag(10,12,1,1,2,0,0,0,0);
-		SetTileTag(10,13,1,1,0,0,1,0,0);
-		SetTileTag(10,14,1,1,0,0,1,0,0);
-		SetTileTag(10,15,2,1,0,0,1,0,0);
-		SetTileTag(10,16,0,1,0,0,0,0,0);
-		SetTileTag(10,17,0,1,0,0,0,0,0);
-		SetTileTag(10,18,0,1,18,0,0,0,0);
-		SetTileTag(10,19,1,1,24,0,0,0,0);
-		SetTileTag(10,20,1,1,24,0,0,0,0);
-		SetTileTag(10,21,0,1,2,0,0,0,0);
-		SetTileTag(10,22,1,1,2,0,1,0,0);
-		SetTileTag(10,23,1,1,2,0,1,0,0);
-		SetTileTag(10,24,1,1,4,0,0,0,0);
-		SetTileTag(10,25,1,1,4,0,0,0,0);
-		SetTileTag(10,26,1,1,2,0,1,0,0);
-		SetTileTag(10,27,1,1,2,0,1,0,0);
-		SetTileTag(10,28,0,1,2,0,0,0,0);
-		SetTileTag(10,29,1,1,14,0,0,0,0);
-		SetTileTag(10,30,0,1,30,0,0,0,0);
-		SetTileTag(10,31,1,1,12,0,0,0,0);
-		SetTileTag(10,32,1,1,2,0,0,0,0);
-		SetTileTag(10,33,1,1,2,0,0,0,0);
-		SetTileTag(10,34,1,1,22,0,0,0,0);
-		SetTileTag(10,35,0,1,30,0,0,0,0);
-		SetTileTag(10,36,0,1,30,0,0,0,0);
-		SetTileTag(10,37,0,1,30,0,0,0,0);
-		SetTileTag(10,38,1,1,24,0,0,0,0);
-		SetTileTag(10,39,1,1,24,0,0,0,0);
-		SetTileTag(10,40,0,1,18,0,0,0,0);
-		SetTileTag(10,41,0,1,30,0,0,0,0);
-		SetTileTag(10,42,1,1,24,0,0,0,0);
-		SetTileTag(10,43,1,1,24,0,0,0,0);
-		SetTileTag(10,44,1,1,24,0,0,0,0);
-		SetTileTag(10,45,1,1,24,0,0,0,0);
-		SetTileTag(10,46,0,1,24,0,0,0,0);
-		SetTileTag(10,47,0,1,30,0,0,0,0);
-		SetTileTag(10,48,0,1,24,0,0,0,0);
-		SetTileTag(10,49,0,1,24,0,0,0,0);
-		SetTileTag(10,50,1,1,24,0,0,0,0);
-		SetTileTag(10,51,1,1,24,0,0,0,0);
-		SetTileTag(10,52,0,1,30,0,0,0,0);
-		SetTileTag(10,53,1,1,24,0,0,0,0);
-		SetTileTag(10,54,1,1,14,0,0,0,0);
-		SetTileTag(10,55,1,1,14,0,0,0,0);
-		SetTileTag(10,56,1,1,14,0,0,0,0);
-		SetTileTag(10,57,1,1,14,0,0,0,0);
-		SetTileTag(10,58,1,1,14,0,0,0,0);
-		SetTileTag(10,59,1,1,14,0,0,0,0);
-		SetTileTag(10,60,1,1,14,0,0,0,0);
-		SetTileTag(10,61,0,1,24,0,0,0,0);
-		SetTileTag(10,62,0,1,30,0,0,0,0);
-		SetTileTag(10,63,0,1,30,0,0,0,0);
-		SetTileTag(11,0,0,1,30,0,0,0,0);
-		SetTileTag(11,1,0,1,30,0,0,0,0);
-		SetTileTag(11,2,8,1,12,0,0,0,0);
-		SetTileTag(11,3,1,1,2,0,0,0,0);
-		SetTileTag(11,4,1,1,2,0,0,0,0);
-		SetTileTag(11,5,1,1,2,0,0,0,0);
-		SetTileTag(11,6,1,1,24,0,0,0,0);
-		SetTileTag(11,7,1,1,2,0,0,0,0);
-		SetTileTag(11,8,1,1,2,0,0,0,0);
-		SetTileTag(11,9,0,1,0,0,0,0,0);
-		SetTileTag(11,10,0,1,0,0,0,0,0);
-		SetTileTag(11,11,0,1,0,0,0,0,0);
-		SetTileTag(11,12,5,1,2,0,0,0,0);
-		SetTileTag(11,13,1,1,0,0,1,0,0);
-		SetTileTag(11,14,1,1,0,0,1,0,0);
-		SetTileTag(11,15,1,1,0,0,1,0,0);
-		SetTileTag(11,16,1,1,0,0,1,0,0);
-		SetTileTag(11,17,2,1,0,0,1,0,0);
-		SetTileTag(11,18,0,1,18,0,0,0,0);
-		SetTileTag(11,19,1,1,24,0,0,0,0);
-		SetTileTag(11,20,1,1,24,0,0,0,0);
-		SetTileTag(11,21,0,1,2,0,0,0,0);
-		SetTileTag(11,22,1,1,2,0,1,0,0);
-		SetTileTag(11,23,1,1,2,0,1,0,0);
-		SetTileTag(11,24,1,1,4,0,0,0,0);
-		SetTileTag(11,25,1,1,4,0,0,0,0);
-		SetTileTag(11,26,1,1,2,0,1,0,0);
-		SetTileTag(11,27,1,1,2,0,1,0,0);
-		SetTileTag(11,28,1,1,10,0,0,0,0);
-		SetTileTag(11,29,1,1,14,0,0,0,0);
-		SetTileTag(11,30,0,1,30,0,0,0,0);
-		SetTileTag(11,31,1,1,14,0,0,0,0);
-		SetTileTag(11,32,1,1,16,0,0,0,0);
-		SetTileTag(11,33,1,1,18,0,0,0,0);
-		SetTileTag(11,34,1,1,20,0,0,0,0);
-		SetTileTag(11,35,0,1,30,0,0,0,0);
-		SetTileTag(11,36,0,1,30,0,0,0,0);
-		SetTileTag(11,37,0,1,30,0,0,0,0);
-		SetTileTag(11,38,1,1,24,0,0,0,0);
-		SetTileTag(11,39,1,1,24,0,0,0,0);
-		SetTileTag(11,40,0,1,18,0,0,0,0);
-		SetTileTag(11,41,0,1,30,0,0,0,0);
-		SetTileTag(11,42,1,1,24,0,0,0,0);
-		SetTileTag(11,43,1,1,24,0,0,0,0);
-		SetTileTag(11,44,1,1,24,0,0,0,0);
-		SetTileTag(11,45,1,1,26,0,0,0,0);
-		SetTileTag(11,46,0,1,24,0,0,0,0);
-		SetTileTag(11,47,0,1,30,0,0,0,0);
-		SetTileTag(11,48,1,1,24,0,1,0,0);
-		SetTileTag(11,49,1,1,24,0,0,0,0);
-		SetTileTag(11,50,1,1,24,0,0,0,0);
-		SetTileTag(11,51,1,1,24,0,0,0,0);
-		SetTileTag(11,52,0,1,30,0,0,0,0);
-		SetTileTag(11,53,1,1,24,0,0,0,0);
-		SetTileTag(11,54,1,1,14,0,0,0,0);
-		SetTileTag(11,55,1,1,14,0,0,0,0);
-		SetTileTag(11,56,1,1,14,0,0,0,0);
-		SetTileTag(11,57,1,1,14,0,0,0,0);
-		SetTileTag(11,58,1,1,14,0,0,0,0);
-		SetTileTag(11,59,1,1,14,0,0,0,0);
-		SetTileTag(11,60,1,1,14,0,0,0,0);
-		SetTileTag(11,61,0,1,24,0,0,0,0);
-		SetTileTag(11,62,0,1,30,0,0,0,0);
-		SetTileTag(11,63,0,1,30,0,0,0,0);
-		SetTileTag(12,0,0,1,30,0,0,0,0);
-		SetTileTag(12,1,0,1,30,0,0,0,0);
-		SetTileTag(12,2,8,1,14,0,0,0,0);
-		SetTileTag(12,3,1,1,2,0,0,0,0);
-		SetTileTag(12,4,1,1,2,0,0,0,0);
-		SetTileTag(12,5,1,1,2,0,0,0,0);
-		SetTileTag(12,6,1,1,24,0,0,0,0);
-		SetTileTag(12,7,1,1,2,0,0,0,0);
-		SetTileTag(12,8,8,1,10,0,0,0,0);
-		SetTileTag(12,9,0,1,0,0,0,0,0);
-		SetTileTag(12,10,1,1,18,0,0,0,0);
-		SetTileTag(12,11,1,1,18,0,0,0,0);
-		SetTileTag(12,12,0,1,0,0,0,0,0);
-		SetTileTag(12,13,5,1,0,0,1,0,0);
-		SetTileTag(12,14,1,1,0,0,1,0,0);
-		SetTileTag(12,15,1,1,0,0,1,0,0);
-		SetTileTag(12,16,1,1,0,0,1,0,0);
-		SetTileTag(12,17,1,1,0,0,1,0,0);
-		SetTileTag(12,18,0,1,18,0,0,0,0);
-		SetTileTag(12,19,1,1,24,0,0,0,0);
-		SetTileTag(12,20,1,1,24,0,0,0,0);
-		SetTileTag(12,21,0,1,2,0,0,0,0);
-		SetTileTag(12,22,1,1,2,0,1,0,0);
-		SetTileTag(12,23,1,1,2,0,1,0,0);
-		SetTileTag(12,24,1,1,4,0,0,0,0);
-		SetTileTag(12,25,1,1,4,0,0,0,0);
-		SetTileTag(12,26,1,1,2,0,1,0,0);
-		SetTileTag(12,27,1,1,2,0,1,0,0);
-		SetTileTag(12,28,8,1,10,0,0,0,0);
-		SetTileTag(12,29,1,1,14,0,0,0,0);
-		SetTileTag(12,30,0,1,30,0,0,0,0);
-		SetTileTag(12,31,0,1,30,0,0,0,0);
-		SetTileTag(12,32,0,1,30,0,0,0,0);
-		SetTileTag(12,33,0,1,30,0,0,0,0);
-		SetTileTag(12,34,0,1,30,0,0,0,0);
-		SetTileTag(12,35,0,1,30,0,0,0,0);
-		SetTileTag(12,36,0,1,30,0,0,0,0);
-		SetTileTag(12,37,0,1,30,0,0,0,0);
-		SetTileTag(12,38,0,1,30,0,0,0,0);
-		SetTileTag(12,39,0,1,30,0,0,0,0);
-		SetTileTag(12,40,0,1,18,0,0,0,0);
-		SetTileTag(12,41,0,1,30,0,0,0,0);
-		SetTileTag(12,42,0,1,24,0,0,0,0);
-		SetTileTag(12,43,0,1,24,0,0,0,0);
-		SetTileTag(12,44,1,1,24,0,0,1,0);
-		SetTileTag(12,45,0,1,30,0,0,0,0);
-		SetTileTag(12,46,0,1,24,0,0,0,0);
-		SetTileTag(12,47,0,1,30,0,0,0,0);
-		SetTileTag(12,48,0,1,30,0,0,0,0);
-		SetTileTag(12,49,0,1,30,0,0,0,0);
-		SetTileTag(12,50,0,1,30,0,0,0,0);
-		SetTileTag(12,51,0,1,30,0,0,0,0);
-		SetTileTag(12,52,0,1,30,0,0,0,0);
-		SetTileTag(12,53,1,1,24,0,0,0,0);
-		SetTileTag(12,54,1,1,14,0,0,0,0);
-		SetTileTag(12,55,1,1,12,0,1,0,0);
-		SetTileTag(12,56,1,1,14,0,0,0,0);
-		SetTileTag(12,57,1,1,14,0,0,0,0);
-		SetTileTag(12,58,1,1,14,0,0,0,0);
-		SetTileTag(12,59,1,1,12,0,1,0,0);
-		SetTileTag(12,60,1,1,14,0,0,0,0);
-		SetTileTag(12,61,0,1,24,0,0,0,0);
-		SetTileTag(12,62,0,1,30,0,0,0,0);
-		SetTileTag(12,63,0,1,30,0,0,0,0);
-		SetTileTag(13,0,0,1,30,0,0,0,0);
-		SetTileTag(13,1,0,1,30,0,0,0,0);
-		SetTileTag(13,2,8,1,16,0,0,0,0);
-		SetTileTag(13,3,0,1,24,0,0,0,0);
-		SetTileTag(13,4,0,1,24,0,0,0,0);
-		SetTileTag(13,5,0,1,2,0,0,0,0);
-		SetTileTag(13,6,1,1,24,0,0,0,0);
-		SetTileTag(13,7,1,1,2,0,0,0,0);
-		SetTileTag(13,8,8,1,12,0,0,0,0);
-		SetTileTag(13,9,0,1,30,0,0,0,0);
-		SetTileTag(13,10,9,1,16,0,0,0,0);
-		SetTileTag(13,11,8,1,18,0,0,0,0);
-		SetTileTag(13,12,0,1,30,0,0,0,0);
-		SetTileTag(13,13,0,1,30,0,0,0,0);
-		SetTileTag(13,14,0,1,2,0,0,0,0);
-		SetTileTag(13,15,8,1,0,0,1,0,0);
-		SetTileTag(13,16,8,1,0,0,1,0,0);
-		SetTileTag(13,17,8,1,0,0,1,0,0);
-		SetTileTag(13,18,0,1,18,0,0,0,0);
-		SetTileTag(13,19,0,1,2,0,0,0,0);
-		SetTileTag(13,20,0,1,2,0,0,0,0);
-		SetTileTag(13,21,0,1,2,0,0,0,0);
-		SetTileTag(13,22,1,1,2,0,1,0,0);
-		SetTileTag(13,23,1,1,2,0,1,0,0);
-		SetTileTag(13,24,1,1,4,0,0,0,0);
-		SetTileTag(13,25,1,1,4,0,0,0,0);
-		SetTileTag(13,26,1,1,2,0,1,0,0);
-		SetTileTag(13,27,1,1,2,0,1,0,0);
-		SetTileTag(13,28,8,1,12,0,0,0,0);
-		SetTileTag(13,29,1,1,14,0,0,0,0);
-		SetTileTag(13,30,1,1,14,0,0,0,0);
-		SetTileTag(13,31,1,1,14,0,0,0,0);
-		SetTileTag(13,32,1,1,14,0,0,0,0);
-		SetTileTag(13,33,1,1,14,0,0,0,0);
-		SetTileTag(13,34,0,1,14,0,0,0,0);
-		SetTileTag(13,35,1,1,14,0,0,0,0);
-		SetTileTag(13,36,6,1,14,0,0,0,0);
-		SetTileTag(13,37,6,1,16,0,0,0,0);
-		SetTileTag(13,38,6,1,18,0,0,0,0);
-		SetTileTag(13,39,6,1,20,0,0,0,0);
-		SetTileTag(13,40,6,1,22,0,0,0,0);
-		SetTileTag(13,41,1,1,24,0,0,0,0);
-		SetTileTag(13,42,1,1,24,0,0,0,0);
-		SetTileTag(13,43,1,1,24,0,0,0,0);
-		SetTileTag(13,44,1,1,24,0,0,0,0);
-		SetTileTag(13,45,1,1,24,0,0,0,0);
-		SetTileTag(13,46,1,1,24,0,0,0,0);
-		SetTileTag(13,47,1,1,24,0,0,0,0);
-		SetTileTag(13,48,1,1,24,0,0,0,0);
-		SetTileTag(13,49,1,1,24,0,0,0,0);
-		SetTileTag(13,50,1,1,24,0,0,0,0);
-		SetTileTag(13,51,1,1,24,0,0,0,0);
-		SetTileTag(13,52,1,1,24,0,0,0,0);
-		SetTileTag(13,53,1,1,24,0,0,0,0);
-		SetTileTag(13,54,1,1,14,0,0,0,0);
-		SetTileTag(13,55,1,1,12,0,1,0,0);
-		SetTileTag(13,56,1,1,12,0,1,0,0);
-		SetTileTag(13,57,1,1,14,0,0,0,0);
-		SetTileTag(13,58,1,1,12,0,1,0,0);
-		SetTileTag(13,59,1,1,12,0,1,0,0);
-		SetTileTag(13,60,1,1,14,0,0,0,0);
-		SetTileTag(13,61,0,1,24,0,0,0,0);
-		SetTileTag(13,62,0,1,30,0,0,0,0);
-		SetTileTag(13,63,0,1,30,0,0,0,0);
-		SetTileTag(14,0,0,1,30,0,0,0,0);
-		SetTileTag(14,1,0,1,30,0,0,0,0);
-		SetTileTag(14,2,1,1,18,0,0,0,0);
-		SetTileTag(14,3,6,1,18,0,0,0,0);
-		SetTileTag(14,4,6,1,20,0,0,0,0);
-		SetTileTag(14,5,6,1,22,0,0,0,0);
-		SetTileTag(14,6,1,1,24,0,0,0,0);
-		SetTileTag(14,7,1,1,2,0,0,0,0);
-		SetTileTag(14,8,1,1,14,0,0,0,0);
-		SetTileTag(14,9,6,1,14,0,0,0,0);
-		SetTileTag(14,10,1,1,16,0,0,0,0);
-		SetTileTag(14,11,8,1,20,0,0,0,0);
-		SetTileTag(14,12,0,1,30,0,0,0,0);
-		SetTileTag(14,13,1,1,24,0,0,0,0);
-		SetTileTag(14,14,2,1,24,0,0,0,0);
-		SetTileTag(14,15,5,1,2,0,1,0,0);
-		SetTileTag(14,16,1,1,2,0,1,0,0);
-		SetTileTag(14,17,1,1,2,0,1,0,0);
-		SetTileTag(14,18,2,1,2,0,1,0,0);
-		SetTileTag(14,19,0,1,2,0,0,0,0);
-		SetTileTag(14,20,0,1,2,0,0,0,0);
-		SetTileTag(14,21,0,1,2,0,0,0,0);
-		SetTileTag(14,22,1,1,2,0,1,0,0);
-		SetTileTag(14,23,1,1,2,0,1,0,0);
-		SetTileTag(14,24,1,1,2,0,1,0,0);
-		SetTileTag(14,25,1,1,2,0,1,0,0);
-		SetTileTag(14,26,1,1,2,0,1,0,0);
-		SetTileTag(14,27,1,1,2,0,1,0,0);
-		SetTileTag(14,28,1,1,14,0,0,0,0);
-		SetTileTag(14,29,1,1,14,0,0,0,0);
-		SetTileTag(14,30,1,1,14,0,0,0,0);
-		SetTileTag(14,31,1,1,14,0,0,0,0);
-		SetTileTag(14,32,1,1,14,0,0,0,0);
-		SetTileTag(14,33,1,1,14,0,0,0,0);
-		SetTileTag(14,34,0,1,14,0,0,0,0);
-		SetTileTag(14,35,1,1,14,0,0,0,0);
-		SetTileTag(14,36,1,1,14,0,0,0,0);
-		SetTileTag(14,37,1,1,14,0,0,0,0);
-		SetTileTag(14,38,1,1,14,0,0,0,0);
-		SetTileTag(14,39,1,1,14,0,0,0,0);
-		SetTileTag(14,40,1,1,14,0,0,0,0);
-		SetTileTag(14,41,1,1,14,0,0,0,0);
-		SetTileTag(14,42,1,1,14,0,0,0,0);
-		SetTileTag(14,43,1,1,14,0,0,0,0);
-		SetTileTag(14,44,1,1,14,0,0,0,0);
-		SetTileTag(14,45,1,1,14,0,0,0,0);
-		SetTileTag(14,46,1,1,14,0,0,0,0);
-		SetTileTag(14,47,1,1,14,0,0,0,0);
-		SetTileTag(14,48,1,1,14,0,0,0,0);
-		SetTileTag(14,49,1,1,14,0,0,0,0);
-		SetTileTag(14,50,1,1,14,0,0,0,0);
-		SetTileTag(14,51,1,1,14,0,0,0,0);
-		SetTileTag(14,52,1,1,14,0,0,0,0);
-		SetTileTag(14,53,1,1,14,0,0,0,0);
-		SetTileTag(14,54,1,1,14,0,0,0,0);
-		SetTileTag(14,55,1,1,14,0,0,0,0);
-		SetTileTag(14,56,1,1,14,0,0,0,0);
-		SetTileTag(14,57,1,1,14,0,0,0,0);
-		SetTileTag(14,58,1,1,14,0,0,0,0);
-		SetTileTag(14,59,1,1,14,0,0,0,0);
-		SetTileTag(14,60,1,1,14,0,0,0,0);
-		SetTileTag(14,61,0,1,24,0,0,0,0);
-		SetTileTag(14,62,0,1,30,0,0,0,0);
-		SetTileTag(14,63,0,1,30,0,0,0,0);
-		SetTileTag(15,0,0,1,30,0,0,0,0);
-		SetTileTag(15,1,0,1,30,0,0,0,0);
-		SetTileTag(15,2,0,1,30,0,0,0,0);
-		SetTileTag(15,3,0,1,30,0,0,0,0);
-		SetTileTag(15,4,0,1,30,0,0,0,0);
-		SetTileTag(15,5,0,1,24,0,0,0,0);
-		SetTileTag(15,6,1,1,24,0,0,0,0);
-		SetTileTag(15,7,0,1,30,0,0,0,0);
-		SetTileTag(15,8,0,1,30,0,0,0,0);
-		SetTileTag(15,9,0,1,30,0,0,0,0);
-		SetTileTag(15,10,0,1,30,0,0,0,0);
-		SetTileTag(15,11,8,1,22,0,0,0,0);
-		SetTileTag(15,12,0,1,30,0,0,0,0);
-		SetTileTag(15,13,1,1,24,0,0,0,0);
-		SetTileTag(15,14,1,1,24,0,0,0,0);
-		SetTileTag(15,15,2,1,24,0,0,0,0);
-		SetTileTag(15,16,5,1,2,0,1,0,0);
-		SetTileTag(15,17,1,1,2,0,1,0,0);
-		SetTileTag(15,18,1,1,2,0,1,0,0);
-		SetTileTag(15,19,2,1,2,0,1,0,0);
-		SetTileTag(15,20,0,1,2,0,0,0,0);
-		SetTileTag(15,21,0,1,2,0,0,0,0);
-		SetTileTag(15,22,5,1,2,0,1,0,0);
-		SetTileTag(15,23,1,1,2,0,1,0,0);
-		SetTileTag(15,24,1,1,2,0,1,0,0);
-		SetTileTag(15,25,1,1,2,0,1,0,0);
-		SetTileTag(15,26,1,1,2,0,1,0,0);
-		SetTileTag(15,27,1,1,2,0,1,0,0);
-		SetTileTag(15,28,1,1,14,0,0,0,0);
-		SetTileTag(15,29,1,1,14,0,0,0,0);
-		SetTileTag(15,30,0,1,2,0,0,0,0);
-		SetTileTag(15,31,1,1,14,0,0,0,0);
-		SetTileTag(15,32,1,1,14,0,0,0,0);
-		SetTileTag(15,33,1,1,14,0,0,0,0);
-		SetTileTag(15,34,1,1,14,0,0,1,0);
-		SetTileTag(15,35,1,1,14,0,0,0,0);
-		SetTileTag(15,36,1,1,14,0,0,0,0);
-		SetTileTag(15,37,1,1,14,0,0,0,0);
-		SetTileTag(15,38,1,1,14,0,0,0,0);
-		SetTileTag(15,39,1,1,14,0,0,0,0);
-		SetTileTag(15,40,1,1,14,0,0,0,0);
-		SetTileTag(15,41,1,1,14,0,0,0,0);
-		SetTileTag(15,42,1,1,14,0,0,0,0);
-		SetTileTag(15,43,1,1,14,0,0,0,0);
-		SetTileTag(15,44,1,1,14,0,0,0,0);
-		SetTileTag(15,45,1,1,14,0,0,0,0);
-		SetTileTag(15,46,1,1,14,0,0,0,0);
-		SetTileTag(15,47,1,1,14,0,0,0,0);
-		SetTileTag(15,48,1,1,14,0,0,0,0);
-		SetTileTag(15,49,1,1,14,0,0,0,0);
-		SetTileTag(15,50,1,1,14,0,0,0,0);
-		SetTileTag(15,51,1,1,14,0,0,0,0);
-		SetTileTag(15,52,1,1,14,0,0,0,0);
-		SetTileTag(15,53,1,1,14,0,0,0,0);
-		SetTileTag(15,54,1,1,14,0,0,0,0);
-		SetTileTag(15,55,1,1,14,0,0,0,0);
-		SetTileTag(15,56,1,1,14,0,0,0,0);
-		SetTileTag(15,57,1,1,14,0,0,0,0);
-		SetTileTag(15,58,1,1,14,0,0,0,0);
-		SetTileTag(15,59,1,1,14,0,0,0,0);
-		SetTileTag(15,60,1,1,14,0,0,0,0);
-		SetTileTag(15,61,0,1,24,0,0,0,0);
-		SetTileTag(15,62,0,1,30,0,0,0,0);
-		SetTileTag(15,63,0,1,30,0,0,0,0);
-		SetTileTag(16,0,0,1,30,0,0,0,0);
-		SetTileTag(16,1,0,1,30,0,0,0,0);
-		SetTileTag(16,2,0,1,30,0,0,0,0);
-		SetTileTag(16,3,0,1,30,0,0,0,0);
-		SetTileTag(16,4,1,1,24,0,0,0,0);
-		SetTileTag(16,5,1,1,24,0,0,0,0);
-		SetTileTag(16,6,1,1,24,0,0,0,0);
-		SetTileTag(16,7,1,1,24,0,0,0,0);
-		SetTileTag(16,8,1,1,24,0,0,0,0);
-		SetTileTag(16,9,0,1,30,0,0,0,0);
-		SetTileTag(16,10,0,1,30,0,0,0,0);
-		SetTileTag(16,11,1,1,24,0,0,0,0);
-		SetTileTag(16,12,0,1,30,0,0,0,0);
-		SetTileTag(16,13,1,1,24,0,0,0,0);
-		SetTileTag(16,14,1,1,24,0,0,0,0);
-		SetTileTag(16,15,1,1,24,0,0,0,0);
-		SetTileTag(16,16,2,1,24,0,0,0,0);
-		SetTileTag(16,17,1,1,2,0,1,0,0);
-		SetTileTag(16,18,1,1,2,0,1,0,0);
-		SetTileTag(16,19,1,1,2,0,1,0,0);
-		SetTileTag(16,20,1,1,2,0,1,0,0);
-		SetTileTag(16,21,2,1,2,0,1,0,0);
-		SetTileTag(16,22,0,1,2,0,0,0,0);
-		SetTileTag(16,23,1,1,2,0,1,0,0);
-		SetTileTag(16,24,1,1,2,0,1,0,0);
-		SetTileTag(16,25,1,1,2,0,1,0,0);
-		SetTileTag(16,26,1,1,2,0,1,0,0);
-		SetTileTag(16,27,3,1,2,0,1,0,0);
-		SetTileTag(16,28,0,1,2,0,0,0,0);
-		SetTileTag(16,29,8,1,14,0,0,0,0);
-		SetTileTag(16,30,0,1,2,0,0,0,0);
-		SetTileTag(16,31,1,1,14,0,0,0,0);
-		SetTileTag(16,32,1,1,14,0,0,0,0);
-		SetTileTag(16,33,1,1,14,0,0,0,0);
-		SetTileTag(16,34,0,1,14,0,0,0,0);
-		SetTileTag(16,35,1,1,14,0,0,0,0);
-		SetTileTag(16,36,1,1,14,0,0,0,0);
-		SetTileTag(16,37,0,1,24,0,0,0,0);
-		SetTileTag(16,38,0,1,30,0,0,0,0);
-		SetTileTag(16,39,0,1,30,0,0,0,0);
-		SetTileTag(16,40,0,1,30,0,0,0,0);
-		SetTileTag(16,41,0,1,30,0,0,0,0);
-		SetTileTag(16,42,0,1,30,0,0,0,0);
-		SetTileTag(16,43,0,1,30,0,0,0,0);
-		SetTileTag(16,44,0,1,30,0,0,0,0);
-		SetTileTag(16,45,0,1,30,0,0,0,0);
-		SetTileTag(16,46,0,1,30,0,0,0,0);
-		SetTileTag(16,47,0,1,30,0,0,0,0);
-		SetTileTag(16,48,0,1,30,0,0,0,0);
-		SetTileTag(16,49,0,1,30,0,0,0,0);
-		SetTileTag(16,50,0,1,30,0,0,0,0);
-		SetTileTag(16,51,0,1,30,0,0,0,0);
-		SetTileTag(16,52,0,1,30,0,0,0,0);
-		SetTileTag(16,53,0,1,30,0,0,0,0);
-		SetTileTag(16,54,0,1,30,0,0,0,0);
-		SetTileTag(16,55,0,1,30,0,0,0,0);
-		SetTileTag(16,56,0,1,30,0,0,0,0);
-		SetTileTag(16,57,0,1,30,0,0,0,0);
-		SetTileTag(16,58,0,1,30,0,0,0,0);
-		SetTileTag(16,59,0,1,30,0,0,0,0);
-		SetTileTag(16,60,0,1,30,0,0,0,0);
-		SetTileTag(16,61,0,1,24,0,0,0,0);
-		SetTileTag(16,62,0,1,30,0,0,0,0);
-		SetTileTag(16,63,0,1,30,0,0,0,0);
-		SetTileTag(17,0,0,1,30,0,0,0,0);
-		SetTileTag(17,1,0,1,30,0,0,0,0);
-		SetTileTag(17,2,0,1,30,0,0,0,0);
-		SetTileTag(17,3,0,1,30,0,0,0,0);
-		SetTileTag(17,4,1,1,24,0,0,0,0);
-		SetTileTag(17,5,1,1,24,0,0,0,0);
-		SetTileTag(17,6,1,1,24,0,0,0,0);
-		SetTileTag(17,7,1,1,24,0,0,0,0);
-		SetTileTag(17,8,1,1,24,0,0,0,0);
-		SetTileTag(17,9,0,1,30,0,0,0,0);
-		SetTileTag(17,10,1,1,24,0,0,0,0);
-		SetTileTag(17,11,1,1,24,0,0,0,0);
-		SetTileTag(17,12,0,1,30,0,0,0,0);
-		SetTileTag(17,13,0,1,30,0,0,0,0);
-		SetTileTag(17,14,0,1,24,0,0,0,0);
-		SetTileTag(17,15,1,1,24,0,0,0,0);
-		SetTileTag(17,16,1,1,24,0,0,0,0);
-		SetTileTag(17,17,1,1,2,0,1,0,0);
-		SetTileTag(17,18,1,1,2,0,1,0,0);
-		SetTileTag(17,19,1,1,2,0,1,0,0);
-		SetTileTag(17,20,1,1,2,0,1,0,0);
-		SetTileTag(17,21,1,1,2,0,1,0,0);
-		SetTileTag(17,22,1,1,2,0,1,0,0);
-		SetTileTag(17,23,1,1,2,0,1,0,0);
-		SetTileTag(17,24,1,1,2,0,1,0,0);
-		SetTileTag(17,25,1,1,2,0,1,0,0);
-		SetTileTag(17,26,1,1,2,0,1,0,0);
-		SetTileTag(17,27,0,1,2,0,0,0,0);
-		SetTileTag(17,28,0,1,2,0,0,0,0);
-		SetTileTag(17,29,8,1,16,0,0,0,0);
-		SetTileTag(17,30,0,1,30,0,0,0,0);
-		SetTileTag(17,31,1,1,14,0,0,0,0);
-		SetTileTag(17,32,1,1,14,0,0,0,0);
-		SetTileTag(17,33,1,1,14,0,0,0,0);
-		SetTileTag(17,34,0,1,14,0,0,0,0);
-		SetTileTag(17,35,5,1,14,0,0,0,0);
-		SetTileTag(17,36,1,1,14,0,0,0,0);
-		SetTileTag(17,37,1,1,14,0,0,0,0);
-		SetTileTag(17,38,0,1,30,0,0,0,0);
-		SetTileTag(17,39,0,1,30,0,0,0,0);
-		SetTileTag(17,40,0,1,30,0,0,0,0);
-		SetTileTag(17,41,0,1,30,0,0,0,0);
-		SetTileTag(17,42,0,1,30,0,0,0,0);
-		SetTileTag(17,43,0,1,30,0,0,0,0);
-		SetTileTag(17,44,0,1,30,0,0,0,0);
-		SetTileTag(17,45,0,1,30,0,0,0,0);
-		SetTileTag(17,46,0,1,30,0,0,0,0);
-		SetTileTag(17,47,0,1,30,0,0,0,0);
-		SetTileTag(17,48,0,1,30,0,0,0,0);
-		SetTileTag(17,49,0,1,30,0,0,0,0);
-		SetTileTag(17,50,0,1,30,0,0,0,0);
-		SetTileTag(17,51,0,1,30,0,0,0,0);
-		SetTileTag(17,52,0,1,30,0,0,0,0);
-		SetTileTag(17,53,0,1,30,0,0,0,0);
-		SetTileTag(17,54,0,1,30,0,0,0,0);
-		SetTileTag(17,55,0,1,30,0,0,0,0);
-		SetTileTag(17,56,0,1,30,0,0,0,0);
-		SetTileTag(17,57,0,1,30,0,0,0,0);
-		SetTileTag(17,58,0,1,30,0,0,0,0);
-		SetTileTag(17,59,0,1,30,0,0,0,0);
-		SetTileTag(17,60,0,1,24,0,0,0,0);
-		SetTileTag(17,61,0,1,24,0,0,0,0);
-		SetTileTag(17,62,0,1,24,0,0,0,0);
-		SetTileTag(17,63,0,1,30,0,0,0,0);
-		SetTileTag(18,0,0,1,30,0,0,0,0);
-		SetTileTag(18,1,0,1,30,0,0,0,0);
-		SetTileTag(18,2,0,1,22,0,0,0,0);
-		SetTileTag(18,3,1,1,24,0,0,0,0);
-		SetTileTag(18,4,1,1,24,0,0,0,0);
-		SetTileTag(18,5,1,1,24,0,0,0,0);
-		SetTileTag(18,6,1,1,24,0,0,0,0);
-		SetTileTag(18,7,1,1,24,0,0,0,0);
-		SetTileTag(18,8,1,1,24,0,0,0,0);
-		SetTileTag(18,9,0,1,30,0,0,0,0);
-		SetTileTag(18,10,1,1,24,0,0,0,0);
-		SetTileTag(18,11,1,1,24,0,0,0,0);
-		SetTileTag(18,12,1,1,24,0,0,0,0);
-		SetTileTag(18,13,1,1,24,0,0,0,0);
-		SetTileTag(18,14,1,1,24,0,0,0,0);
-		SetTileTag(18,15,1,1,24,0,0,0,0);
-		SetTileTag(18,16,0,1,2,0,0,0,0);
-		SetTileTag(18,17,0,1,2,0,0,0,0);
-		SetTileTag(18,18,5,1,2,0,1,0,0);
-		SetTileTag(18,19,1,1,2,0,1,0,0);
-		SetTileTag(18,20,1,1,2,0,1,0,0);
-		SetTileTag(18,21,1,1,2,0,1,0,0);
-		SetTileTag(18,22,1,1,2,0,1,0,0);
-		SetTileTag(18,23,1,1,2,0,1,0,0);
-		SetTileTag(18,24,1,1,2,0,1,0,0);
-		SetTileTag(18,25,1,1,2,0,1,0,0);
-		SetTileTag(18,26,3,1,2,0,1,0,0);
-		SetTileTag(18,27,0,1,2,0,0,0,0);
-		SetTileTag(18,28,0,1,2,0,0,0,0);
-		SetTileTag(18,29,8,1,18,0,0,0,0);
-		SetTileTag(18,30,0,1,30,0,0,0,0);
-		SetTileTag(18,31,1,1,14,0,0,0,0);
-		SetTileTag(18,32,1,1,14,0,0,0,0);
-		SetTileTag(18,33,1,1,14,0,0,0,0);
-		SetTileTag(18,34,0,1,30,0,0,0,0);
-		SetTileTag(18,35,0,1,30,0,0,0,0);
-		SetTileTag(18,36,1,1,14,0,0,0,0);
-		SetTileTag(18,37,1,1,14,0,0,0,0);
-		SetTileTag(18,38,0,1,24,0,0,0,0);
-		SetTileTag(18,39,0,1,24,0,0,0,0);
-		SetTileTag(18,40,0,1,24,0,0,0,0);
-		SetTileTag(18,41,0,1,24,0,0,0,0);
-		SetTileTag(18,42,0,1,24,0,0,0,0);
-		SetTileTag(18,43,0,1,24,0,0,0,0);
-		SetTileTag(18,44,0,1,24,0,0,0,0);
-		SetTileTag(18,45,0,1,24,0,0,0,0);
-		SetTileTag(18,46,0,1,30,0,0,0,0);
-		SetTileTag(18,47,0,1,30,0,0,0,0);
-		SetTileTag(18,48,0,1,30,0,0,0,0);
-		SetTileTag(18,49,0,1,30,0,0,0,0);
-		SetTileTag(18,50,0,1,30,0,0,0,0);
-		SetTileTag(18,51,0,1,30,0,0,0,0);
-		SetTileTag(18,52,0,1,30,0,0,0,0);
-		SetTileTag(18,53,4,1,18,0,0,0,0);
-		SetTileTag(18,54,1,1,18,0,0,0,0);
-		SetTileTag(18,55,2,1,18,0,0,0,0);
-		SetTileTag(18,56,0,1,30,0,0,0,0);
-		SetTileTag(18,57,0,1,30,0,0,0,0);
-		SetTileTag(18,58,0,1,30,0,0,0,0);
-		SetTileTag(18,59,0,1,24,0,0,0,0);
-		SetTileTag(18,60,0,1,24,0,0,0,0);
-		SetTileTag(18,61,0,1,24,0,0,0,0);
-		SetTileTag(18,62,0,1,24,0,0,0,0);
-		SetTileTag(18,63,0,1,30,0,0,0,0);
-		SetTileTag(19,0,0,1,30,0,0,0,0);
-		SetTileTag(19,1,0,1,30,0,0,0,0);
-		SetTileTag(19,2,0,1,22,0,0,0,0);
-		SetTileTag(19,3,0,1,30,0,0,0,0);
-		SetTileTag(19,4,0,1,30,0,0,0,0);
-		SetTileTag(19,5,9,1,22,0,0,0,0);
-		SetTileTag(19,6,0,1,30,0,0,0,0);
-		SetTileTag(19,7,0,1,30,0,0,0,0);
-		SetTileTag(19,8,0,1,30,0,0,0,0);
-		SetTileTag(19,9,0,1,30,0,0,0,0);
-		SetTileTag(19,10,0,1,30,0,0,0,0);
-		SetTileTag(19,11,0,1,30,0,0,0,0);
-		SetTileTag(19,12,0,1,30,0,0,0,0);
-		SetTileTag(19,13,0,1,30,0,0,0,0);
-		SetTileTag(19,14,0,1,2,0,0,0,0);
-		SetTileTag(19,15,1,1,24,0,0,0,0);
-		SetTileTag(19,16,0,1,2,0,0,0,0);
-		SetTileTag(19,17,0,1,2,0,0,0,0);
-		SetTileTag(19,18,0,1,2,0,0,0,0);
-		SetTileTag(19,19,0,1,2,0,0,0,0);
-		SetTileTag(19,20,5,1,2,0,1,0,0);
-		SetTileTag(19,21,1,1,2,0,1,0,0);
-		SetTileTag(19,22,1,1,2,0,1,0,0);
-		SetTileTag(19,23,1,1,2,0,1,0,0);
-		SetTileTag(19,24,3,1,2,0,1,0,0);
-		SetTileTag(19,25,0,1,2,0,0,0,0);
-		SetTileTag(19,26,0,1,2,0,0,0,0);
-		SetTileTag(19,27,1,1,24,0,0,0,0);
-		SetTileTag(19,28,1,1,24,0,0,0,0);
-		SetTileTag(19,29,8,1,20,0,0,0,0);
-		SetTileTag(19,30,0,1,30,0,0,0,0);
-		SetTileTag(19,31,1,1,14,0,0,0,0);
-		SetTileTag(19,32,1,1,14,0,0,0,0);
-		SetTileTag(19,33,1,1,14,0,0,0,0);
-		SetTileTag(19,34,0,1,30,0,0,0,0);
-		SetTileTag(19,35,0,1,30,0,0,0,0);
-		SetTileTag(19,36,0,1,24,0,0,0,0);
-		SetTileTag(19,37,0,1,24,0,0,0,0);
-		SetTileTag(19,38,0,1,24,0,0,0,0);
-		SetTileTag(19,39,0,1,24,0,0,0,0);
-		SetTileTag(19,40,0,1,24,0,0,0,0);
-		SetTileTag(19,41,0,1,24,0,0,0,0);
-		SetTileTag(19,42,0,1,24,0,0,0,0);
-		SetTileTag(19,43,0,1,24,0,0,0,0);
-		SetTileTag(19,44,0,1,24,0,0,0,0);
-		SetTileTag(19,45,0,1,24,0,0,0,0);
-		SetTileTag(19,46,0,1,8,0,0,0,0);
-		SetTileTag(19,47,0,1,8,0,0,0,0);
-		SetTileTag(19,48,0,1,8,0,0,0,0);
-		SetTileTag(19,49,0,1,8,0,0,0,0);
-		SetTileTag(19,50,0,1,8,0,0,0,0);
-		SetTileTag(19,51,0,1,8,0,0,0,0);
-		SetTileTag(19,52,4,1,18,0,0,0,0);
-		SetTileTag(19,53,1,1,18,0,0,0,0);
-		SetTileTag(19,54,1,1,18,0,0,0,0);
-		SetTileTag(19,55,1,1,18,0,0,0,0);
-		SetTileTag(19,56,1,1,18,0,0,0,0);
-		SetTileTag(19,57,0,1,24,0,0,0,0);
-		SetTileTag(19,58,0,1,24,0,0,0,0);
-		SetTileTag(19,59,0,1,24,0,0,0,0);
-		SetTileTag(19,60,0,1,24,0,0,0,0);
-		SetTileTag(19,61,0,1,30,0,0,0,0);
-		SetTileTag(19,62,0,1,30,0,0,0,0);
-		SetTileTag(19,63,0,1,30,0,0,0,0);
-		SetTileTag(20,0,0,1,30,0,0,0,0);
-		SetTileTag(20,1,0,1,30,0,0,0,0);
-		SetTileTag(20,2,0,1,22,0,0,0,0);
-		SetTileTag(20,3,0,1,22,0,0,0,0);
-		SetTileTag(20,4,0,1,24,0,0,0,0);
-		SetTileTag(20,5,9,1,20,0,0,0,0);
-		SetTileTag(20,6,0,1,24,0,0,0,0);
-		SetTileTag(20,7,0,1,24,0,0,0,0);
-		SetTileTag(20,8,0,1,24,0,0,0,0);
-		SetTileTag(20,9,5,1,18,0,1,0,0);
-		SetTileTag(20,10,1,1,18,0,1,0,0);
-		SetTileTag(20,11,1,1,20,0,0,0,0);
-		SetTileTag(20,12,1,1,20,0,0,0,0);
-		SetTileTag(20,13,1,1,20,0,0,0,0);
-		SetTileTag(20,14,0,1,2,0,0,0,0);
-		SetTileTag(20,15,1,1,24,0,0,0,0);
-		SetTileTag(20,16,0,1,2,0,0,0,0);
-		SetTileTag(20,17,0,1,2,0,0,0,0);
-		SetTileTag(20,18,0,1,2,0,0,0,0);
-		SetTileTag(20,19,0,1,2,0,0,0,0);
-		SetTileTag(20,20,0,1,2,0,0,0,0);
-		SetTileTag(20,21,1,1,2,0,1,0,0);
-		SetTileTag(20,22,1,1,2,0,1,0,0);
-		SetTileTag(20,23,1,1,2,0,1,0,0);
-		SetTileTag(20,24,0,1,2,0,0,0,0);
-		SetTileTag(20,25,0,1,24,0,0,0,0);
-		SetTileTag(20,26,0,1,2,0,0,0,0);
-		SetTileTag(20,27,1,1,24,0,0,0,0);
-		SetTileTag(20,28,1,1,24,0,0,0,0);
-		SetTileTag(20,29,8,1,22,0,0,0,0);
-		SetTileTag(20,30,0,1,30,0,0,0,0);
-		SetTileTag(20,31,1,1,14,0,0,0,0);
-		SetTileTag(20,32,1,1,14,0,0,0,0);
-		SetTileTag(20,33,1,1,14,0,0,0,0);
-		SetTileTag(20,34,1,1,8,0,0,0,0);
-		SetTileTag(20,35,1,1,8,0,0,0,0);
-		SetTileTag(20,36,1,1,8,0,0,0,0);
-		SetTileTag(20,37,0,1,24,0,0,0,0);
-		SetTileTag(20,38,4,1,6,0,1,0,0);
-		SetTileTag(20,39,2,1,6,0,1,0,0);
-		SetTileTag(20,40,0,1,24,0,0,0,0);
-		SetTileTag(20,41,0,1,24,0,0,0,0);
-		SetTileTag(20,42,0,1,24,0,0,0,0);
-		SetTileTag(20,43,0,1,24,0,0,0,0);
-		SetTileTag(20,44,0,1,24,0,0,0,0);
-		SetTileTag(20,45,4,1,8,0,1,0,0);
-		SetTileTag(20,46,1,1,8,0,1,0,0);
-		SetTileTag(20,47,1,1,8,0,1,0,0);
-		SetTileTag(20,48,1,1,8,0,1,0,0);
-		SetTileTag(20,49,2,1,8,0,1,0,0);
-		SetTileTag(20,50,0,1,8,0,0,0,0);
-		SetTileTag(20,51,0,1,8,0,0,0,0);
-		SetTileTag(20,52,1,1,18,0,0,0,0);
-		SetTileTag(20,53,1,1,18,0,0,0,0);
-		SetTileTag(20,54,1,1,18,0,0,0,0);
-		SetTileTag(20,55,3,1,18,0,0,0,0);
-		SetTileTag(20,56,5,1,18,0,0,0,0);
-		SetTileTag(20,57,2,1,18,0,0,0,0);
-		SetTileTag(20,58,0,1,24,0,0,0,0);
-		SetTileTag(20,59,0,1,24,0,0,0,0);
-		SetTileTag(20,60,0,1,30,0,0,0,0);
-		SetTileTag(20,61,0,1,30,0,0,0,0);
-		SetTileTag(20,62,0,1,30,0,0,0,0);
-		SetTileTag(20,63,0,1,30,0,0,0,0);
-		SetTileTag(21,0,0,1,30,0,0,0,0);
-		SetTileTag(21,1,0,1,30,0,0,0,0);
-		SetTileTag(21,2,0,1,22,0,0,0,0);
-		SetTileTag(21,3,0,1,22,0,0,0,0);
-		SetTileTag(21,4,0,1,20,0,0,0,0);
-		SetTileTag(21,5,1,1,20,0,0,0,0);
-		SetTileTag(21,6,0,1,30,0,0,0,0);
-		SetTileTag(21,7,0,1,24,0,0,0,0);
-		SetTileTag(21,8,0,1,30,0,0,0,0);
-		SetTileTag(21,9,0,1,24,0,0,0,0);
-		SetTileTag(21,10,5,1,18,0,1,0,0);
-		SetTileTag(21,11,1,1,20,0,0,0,0);
-		SetTileTag(21,12,1,1,20,0,0,0,0);
-		SetTileTag(21,13,8,1,20,0,0,0,0);
-		SetTileTag(21,14,0,1,2,0,0,0,0);
-		SetTileTag(21,15,1,1,24,0,0,1,0);
-		SetTileTag(21,16,0,1,2,0,0,0,0);
-		SetTileTag(21,17,0,1,2,0,0,0,0);
-		SetTileTag(21,18,4,1,26,0,0,0,0);
-		SetTileTag(21,19,0,1,26,0,0,0,0);
-		SetTileTag(21,20,2,1,26,0,0,0,0);
-		SetTileTag(21,21,5,1,2,0,1,0,0);
-		SetTileTag(21,22,1,1,2,0,1,0,0);
-		SetTileTag(21,23,1,1,2,0,1,0,0);
-		SetTileTag(21,24,0,1,2,0,0,0,0);
-		SetTileTag(21,25,0,1,24,0,0,0,0);
-		SetTileTag(21,26,0,1,2,0,0,0,0);
-		SetTileTag(21,27,1,1,24,0,0,0,0);
-		SetTileTag(21,28,1,1,24,0,0,0,0);
-		SetTileTag(21,29,1,1,24,0,0,0,0);
-		SetTileTag(21,30,0,1,30,0,0,0,0);
-		SetTileTag(21,31,1,1,14,0,0,0,0);
-		SetTileTag(21,32,1,1,14,0,0,0,0);
-		SetTileTag(21,33,1,1,14,0,0,0,0);
-		SetTileTag(21,34,1,1,8,0,0,0,0);
-		SetTileTag(21,35,0,1,30,0,0,0,0);
-		SetTileTag(21,36,1,1,6,0,1,0,0);
-		SetTileTag(21,37,1,1,6,0,1,0,0);
-		SetTileTag(21,38,1,1,6,0,1,0,0);
-		SetTileTag(21,39,1,1,6,0,1,0,0);
-		SetTileTag(21,40,6,1,6,0,1,0,0);
-		SetTileTag(21,41,1,1,8,0,1,0,0);
-		SetTileTag(21,42,2,1,8,0,1,0,0);
-		SetTileTag(21,43,0,1,24,0,0,0,0);
-		SetTileTag(21,44,0,1,8,0,0,0,0);
-		SetTileTag(21,45,1,1,8,0,1,0,0);
-		SetTileTag(21,46,1,1,8,0,1,0,0);
-		SetTileTag(21,47,1,1,8,0,1,0,0);
-		SetTileTag(21,48,1,1,8,0,1,0,0);
-		SetTileTag(21,49,1,1,8,0,1,0,0);
-		SetTileTag(21,50,0,1,8,0,0,0,0);
-		SetTileTag(21,51,0,1,8,0,0,0,0);
-		SetTileTag(21,52,5,1,18,0,0,0,0);
-		SetTileTag(21,53,1,1,18,0,0,0,0);
-		SetTileTag(21,54,2,1,18,0,0,0,0);
-		SetTileTag(21,55,0,1,30,0,0,0,0);
-		SetTileTag(21,56,0,1,30,0,0,0,0);
-		SetTileTag(21,57,0,1,24,0,0,0,0);
-		SetTileTag(21,58,0,1,30,0,0,0,0);
-		SetTileTag(21,59,0,1,30,0,0,0,0);
-		SetTileTag(21,60,0,1,30,0,0,0,0);
-		SetTileTag(21,61,0,1,30,0,0,0,0);
-		SetTileTag(21,62,0,1,30,0,0,0,0);
-		SetTileTag(21,63,0,1,30,0,0,0,0);
-		SetTileTag(22,0,0,1,30,0,0,0,0);
-		SetTileTag(22,1,0,1,24,0,0,0,0);
-		SetTileTag(22,2,0,1,22,0,0,0,0);
-		SetTileTag(22,3,0,1,30,0,0,0,0);
-		SetTileTag(22,4,0,1,30,0,0,0,0);
-		SetTileTag(22,5,1,1,20,0,0,1,0);
-		SetTileTag(22,6,0,1,30,0,0,0,0);
-		SetTileTag(22,7,0,1,30,0,0,0,0);
-		SetTileTag(22,8,1,1,20,0,0,0,0);
-		SetTileTag(22,9,2,1,20,0,0,0,0);
-		SetTileTag(22,10,0,1,30,0,0,0,0);
-		SetTileTag(22,11,5,1,20,0,0,0,0);
-		SetTileTag(22,12,1,1,20,0,0,0,0);
-		SetTileTag(22,13,1,1,22,0,0,0,0);
-		SetTileTag(22,14,6,1,22,0,0,0,0);
-		SetTileTag(22,15,1,1,24,0,0,0,0);
-		SetTileTag(22,16,1,1,24,0,0,0,0);
-		SetTileTag(22,17,1,1,24,0,0,1,0);
-		SetTileTag(22,18,1,1,24,0,0,0,0);
-		SetTileTag(22,19,1,1,24,0,0,0,0);
-		SetTileTag(22,20,1,1,24,0,0,0,0);
-		SetTileTag(22,21,0,1,4,0,0,0,0);
-		SetTileTag(22,22,8,1,2,0,1,0,0);
-		SetTileTag(22,23,8,1,2,0,1,0,0);
-		SetTileTag(22,24,0,1,4,0,0,0,0);
-		SetTileTag(22,25,1,1,24,0,0,0,0);
-		SetTileTag(22,26,1,1,24,0,0,1,0);
-		SetTileTag(22,27,1,1,24,0,0,0,0);
-		SetTileTag(22,28,1,1,24,0,0,0,0);
-		SetTileTag(22,29,1,1,24,0,0,0,0);
-		SetTileTag(22,30,0,1,30,0,0,0,0);
-		SetTileTag(22,31,1,1,14,0,0,0,0);
-		SetTileTag(22,32,1,1,14,0,0,0,0);
-		SetTileTag(22,33,1,1,14,0,0,0,0);
-		SetTileTag(22,34,1,1,8,0,0,0,0);
-		SetTileTag(22,35,0,1,30,0,0,0,0);
-		SetTileTag(22,36,1,1,8,0,0,0,0);
-		SetTileTag(22,37,1,1,6,0,1,0,0);
-		SetTileTag(22,38,1,1,6,0,1,0,0);
-		SetTileTag(22,39,1,1,6,0,1,0,0);
-		SetTileTag(22,40,6,1,6,0,1,0,0);
-		SetTileTag(22,41,1,1,8,0,1,0,0);
-		SetTileTag(22,42,1,1,8,0,1,0,0);
-		SetTileTag(22,43,2,1,8,0,1,0,0);
-		SetTileTag(22,44,4,1,8,0,1,0,0);
-		SetTileTag(22,45,1,1,8,0,1,0,0);
-		SetTileTag(22,46,3,1,8,0,1,0,0);
-		SetTileTag(22,47,0,1,8,0,0,0,0);
-		SetTileTag(22,48,5,1,8,0,1,0,0);
-		SetTileTag(22,49,1,1,8,0,1,0,0);
-		SetTileTag(22,50,2,1,8,0,1,0,0);
-		SetTileTag(22,51,0,1,8,0,0,0,0);
-		SetTileTag(22,52,4,1,18,0,0,0,0);
-		SetTileTag(22,53,1,1,18,0,0,0,0);
-		SetTileTag(22,54,3,1,18,0,0,0,0);
-		SetTileTag(22,55,0,1,30,0,0,0,0);
-		SetTileTag(22,56,4,1,8,0,1,0,0);
-		SetTileTag(22,57,1,1,8,0,1,0,0);
-		SetTileTag(22,58,2,1,8,0,1,0,0);
-		SetTileTag(22,59,0,1,30,0,0,0,0);
-		SetTileTag(22,60,0,1,30,0,0,0,0);
-		SetTileTag(22,61,0,1,30,0,0,0,0);
-		SetTileTag(22,62,0,1,30,0,0,0,0);
-		SetTileTag(22,63,0,1,30,0,0,0,0);
-		SetTileTag(23,0,0,1,30,0,0,0,0);
-		SetTileTag(23,1,0,1,30,0,0,0,0);
-		SetTileTag(23,2,0,1,24,0,0,0,0);
-		SetTileTag(23,3,1,1,20,0,0,0,0);
-		SetTileTag(23,4,1,1,20,0,0,0,0);
-		SetTileTag(23,5,1,1,20,0,0,0,0);
-		SetTileTag(23,6,1,1,20,0,0,0,0);
-		SetTileTag(23,7,0,1,30,0,0,0,0);
-		SetTileTag(23,8,1,1,20,0,0,0,0);
-		SetTileTag(23,9,1,1,20,0,0,0,0);
-		SetTileTag(23,10,2,1,20,0,0,0,0);
-		SetTileTag(23,11,0,1,20,0,0,0,0);
-		SetTileTag(23,12,5,1,20,0,0,0,0);
-		SetTileTag(23,13,1,1,20,0,0,0,0);
-		SetTileTag(23,14,0,1,30,0,0,0,0);
-		SetTileTag(23,15,1,1,24,0,0,0,0);
-		SetTileTag(23,16,0,1,30,0,0,0,0);
-		SetTileTag(23,17,0,1,30,0,0,0,0);
-		SetTileTag(23,18,1,1,24,0,0,0,0);
-		SetTileTag(23,19,1,1,24,0,0,0,0);
-		SetTileTag(23,20,1,1,24,0,0,0,0);
-		SetTileTag(23,21,0,1,4,0,0,0,0);
-		SetTileTag(23,22,1,1,4,0,1,0,0);
-		SetTileTag(23,23,1,1,4,0,1,0,0);
-		SetTileTag(23,24,2,1,4,0,1,0,0);
-		SetTileTag(23,25,1,1,24,0,0,0,0);
-		SetTileTag(23,26,0,1,24,0,0,0,0);
-		SetTileTag(23,27,1,1,24,0,0,0,0);
-		SetTileTag(23,28,1,1,24,0,0,0,0);
-		SetTileTag(23,29,1,1,24,0,0,0,0);
-		SetTileTag(23,30,0,1,0,0,0,0,0);
-		SetTileTag(23,31,8,1,14,0,0,0,0);
-		SetTileTag(23,32,8,1,14,0,0,0,0);
-		SetTileTag(23,33,1,1,14,0,0,0,0);
-		SetTileTag(23,34,1,1,8,0,0,0,0);
-		SetTileTag(23,35,0,1,8,0,0,0,0);
-		SetTileTag(23,36,1,1,6,0,1,0,0);
-		SetTileTag(23,37,1,1,6,0,1,0,0);
-		SetTileTag(23,38,1,1,6,0,1,0,0);
-		SetTileTag(23,39,3,1,6,0,1,0,0);
-		SetTileTag(23,40,0,1,8,0,0,0,0);
-		SetTileTag(23,41,5,1,8,0,1,0,0);
-		SetTileTag(23,42,1,1,8,0,1,0,0);
-		SetTileTag(23,43,1,1,8,0,1,0,0);
-		SetTileTag(23,44,1,1,8,0,1,0,0);
-		SetTileTag(23,45,1,1,8,0,1,0,0);
-		SetTileTag(23,46,0,1,8,0,0,0,0);
-		SetTileTag(23,47,4,1,16,0,0,0,0);
-		SetTileTag(23,48,1,1,16,0,0,0,0);
-		SetTileTag(23,49,1,1,8,0,1,0,0);
-		SetTileTag(23,50,1,1,8,0,1,0,0);
-		SetTileTag(23,51,1,1,16,0,0,0,0);
-		SetTileTag(23,52,6,1,16,0,0,0,0);
-		SetTileTag(23,53,7,1,16,0,0,0,0);
-		SetTileTag(23,54,0,1,30,0,0,0,0);
-		SetTileTag(23,55,0,1,30,0,0,0,0);
-		SetTileTag(23,56,1,1,8,0,1,0,0);
-		SetTileTag(23,57,1,1,8,0,1,0,0);
-		SetTileTag(23,58,1,1,8,0,1,0,0);
-		SetTileTag(23,59,2,1,8,0,1,0,0);
-		SetTileTag(23,60,0,1,30,0,0,0,0);
-		SetTileTag(23,61,0,1,30,0,0,0,0);
-		SetTileTag(23,62,0,1,30,0,0,0,0);
-		SetTileTag(23,63,0,1,30,0,0,0,0);
-		SetTileTag(24,0,0,1,30,0,0,0,0);
-		SetTileTag(24,1,0,1,30,0,0,0,0);
-		SetTileTag(24,2,0,1,24,0,0,0,0);
-		SetTileTag(24,3,1,1,20,0,0,0,0);
-		SetTileTag(24,4,0,1,20,0,0,0,0);
-		SetTileTag(24,5,1,1,20,0,0,0,0);
-		SetTileTag(24,6,1,1,20,0,0,0,0);
-		SetTileTag(24,7,1,1,20,0,0,1,0);
-		SetTileTag(24,8,1,1,20,0,0,0,0);
-		SetTileTag(24,9,1,1,20,0,0,0,0);
-		SetTileTag(24,10,3,1,20,0,0,0,0);
-		SetTileTag(24,11,0,1,20,0,0,0,0);
-		SetTileTag(24,12,0,1,20,0,0,0,0);
-		SetTileTag(24,13,5,1,20,0,0,0,0);
-		SetTileTag(24,14,0,1,24,0,0,0,0);
-		SetTileTag(24,15,1,1,24,0,0,0,0);
-		SetTileTag(24,16,0,1,24,0,0,0,0);
-		SetTileTag(24,17,4,1,24,0,0,0,0);
-		SetTileTag(24,18,1,1,24,0,0,0,0);
-		SetTileTag(24,19,3,1,24,0,0,0,0);
-		SetTileTag(24,20,0,1,24,0,0,0,0);
-		SetTileTag(24,21,0,1,4,0,0,0,0);
-		SetTileTag(24,22,1,1,4,0,1,0,0);
-		SetTileTag(24,23,1,1,4,0,1,0,0);
-		SetTileTag(24,24,1,1,4,0,1,0,0);
-		SetTileTag(24,25,9,1,22,0,0,0,0);
-		SetTileTag(24,26,0,1,30,0,0,0,0);
-		SetTileTag(24,27,1,1,24,0,0,0,0);
-		SetTileTag(24,28,1,1,24,0,0,0,0);
-		SetTileTag(24,29,1,1,24,0,0,0,0);
-		SetTileTag(24,30,0,1,30,0,0,0,0);
-		SetTileTag(24,31,8,1,16,0,0,0,0);
-		SetTileTag(24,32,8,1,16,0,0,0,0);
-		SetTileTag(24,33,1,1,14,0,0,0,0);
-		SetTileTag(24,34,8,1,8,0,0,0,0);
-		SetTileTag(24,35,0,1,30,0,0,0,0);
-		SetTileTag(24,36,1,1,6,0,1,0,0);
-		SetTileTag(24,37,1,1,6,0,1,0,0);
-		SetTileTag(24,38,3,1,6,0,1,0,0);
-		SetTileTag(24,39,0,1,30,0,0,0,0);
-		SetTileTag(24,40,0,1,8,0,0,0,0);
-		SetTileTag(24,41,4,1,8,0,1,0,0);
-		SetTileTag(24,42,1,1,8,0,1,0,0);
-		SetTileTag(24,43,1,1,8,0,1,0,0);
-		SetTileTag(24,44,1,1,8,0,1,0,0);
-		SetTileTag(24,45,3,1,8,0,1,0,0);
-		SetTileTag(24,46,0,1,18,0,0,0,0);
-		SetTileTag(24,47,1,1,16,0,0,0,0);
-		SetTileTag(24,48,3,1,16,0,0,0,0);
-		SetTileTag(24,49,1,1,8,0,1,0,0);
-		SetTileTag(24,50,1,1,8,0,1,0,0);
-		SetTileTag(24,51,2,1,10,0,0,0,0);
-		SetTileTag(24,52,0,1,30,0,0,0,0);
-		SetTileTag(24,53,0,1,30,0,0,0,0);
-		SetTileTag(24,54,0,1,30,0,0,0,0);
-		SetTileTag(24,55,4,1,8,0,1,0,0);
-		SetTileTag(24,56,1,1,8,0,1,0,0);
-		SetTileTag(24,57,1,1,8,0,1,0,0);
-		SetTileTag(24,58,1,1,8,0,1,0,0);
-		SetTileTag(24,59,1,1,8,0,1,0,0);
-		SetTileTag(24,60,1,1,8,0,1,0,0);
-		SetTileTag(24,61,1,1,8,0,1,0,0);
-		SetTileTag(24,62,0,1,30,0,0,0,0);
-		SetTileTag(24,63,0,1,30,0,0,0,0);
-		SetTileTag(25,0,0,1,30,0,0,0,0);
-		SetTileTag(25,1,0,1,30,0,0,0,0);
-		SetTileTag(25,2,0,1,24,0,0,0,0);
-		SetTileTag(25,3,1,1,20,0,0,0,0);
-		SetTileTag(25,4,1,1,20,0,0,0,0);
-		SetTileTag(25,5,1,1,20,0,0,0,0);
-		SetTileTag(25,6,1,1,20,0,0,0,0);
-		SetTileTag(25,7,0,1,24,0,0,0,0);
-		SetTileTag(25,8,1,1,20,0,0,0,0);
-		SetTileTag(25,9,3,1,20,0,0,0,0);
-		SetTileTag(25,10,0,1,20,0,0,0,0);
-		SetTileTag(25,11,0,1,10,0,0,0,0);
-		SetTileTag(25,12,0,1,24,0,0,0,0);
-		SetTileTag(25,13,0,1,20,0,0,0,0);
-		SetTileTag(25,14,0,1,24,0,0,0,0);
-		SetTileTag(25,15,9,1,22,0,0,0,0);
-		SetTileTag(25,16,0,1,24,0,0,0,0);
-		SetTileTag(25,17,1,1,24,0,0,0,0);
-		SetTileTag(25,18,1,1,24,0,0,0,0);
-		SetTileTag(25,19,0,1,24,0,0,0,0);
-		SetTileTag(25,20,0,1,26,0,0,0,0);
-		SetTileTag(25,21,0,1,4,0,0,0,0);
-		SetTileTag(25,22,5,1,4,0,1,0,0);
-		SetTileTag(25,23,1,1,4,0,1,0,0);
-		SetTileTag(25,24,1,1,4,0,1,0,0);
-		SetTileTag(25,25,9,1,20,0,0,0,0);
-		SetTileTag(25,26,0,1,30,0,0,0,0);
-		SetTileTag(25,27,0,1,30,0,0,0,0);
-		SetTileTag(25,28,0,1,30,0,0,0,0);
-		SetTileTag(25,29,0,1,30,0,0,0,0);
-		SetTileTag(25,30,0,1,30,0,0,0,0);
-		SetTileTag(25,31,8,1,18,0,0,0,0);
-		SetTileTag(25,32,8,1,18,0,0,0,0);
-		SetTileTag(25,33,1,1,14,0,0,0,0);
-		SetTileTag(25,34,8,1,10,0,0,0,0);
-		SetTileTag(25,35,0,1,30,0,0,0,0);
-		SetTileTag(25,36,5,1,6,0,1,0,0);
-		SetTileTag(25,37,1,1,6,0,1,0,0);
-		SetTileTag(25,38,2,1,6,0,1,0,0);
-		SetTileTag(25,39,0,1,30,0,0,0,0);
-		SetTileTag(25,40,0,1,8,0,0,0,0);
-		SetTileTag(25,41,1,1,8,0,1,0,0);
-		SetTileTag(25,42,1,1,8,0,1,0,0);
-		SetTileTag(25,43,3,1,8,0,1,0,0);
-		SetTileTag(25,44,0,1,8,0,0,0,0);
-		SetTileTag(25,45,0,1,8,0,0,0,0);
-		SetTileTag(25,46,0,1,8,0,0,0,0);
-		SetTileTag(25,47,8,1,16,0,0,0,0);
-		SetTileTag(25,48,0,1,10,0,0,0,0);
-		SetTileTag(25,49,1,1,8,0,1,0,0);
-		SetTileTag(25,50,1,1,8,0,1,0,0);
-		SetTileTag(25,51,3,1,10,0,0,0,0);
-		SetTileTag(25,52,0,1,30,0,0,0,0);
-		SetTileTag(25,53,0,1,30,0,0,0,0);
-		SetTileTag(25,54,4,1,8,0,1,0,0);
-		SetTileTag(25,55,1,1,8,0,1,0,0);
-		SetTileTag(25,56,1,1,8,0,1,0,0);
-		SetTileTag(25,57,0,1,22,0,0,0,0);
-		SetTileTag(25,58,5,1,8,0,1,0,0);
-		SetTileTag(25,59,1,1,8,0,1,0,0);
-		SetTileTag(25,60,1,1,8,0,1,0,0);
-		SetTileTag(25,61,1,1,8,0,1,0,0);
-		SetTileTag(25,62,0,1,30,0,0,0,0);
-		SetTileTag(25,63,0,1,30,0,0,0,0);
-		SetTileTag(26,0,0,1,30,0,0,0,0);
-		SetTileTag(26,1,0,1,30,0,0,0,0);
-		SetTileTag(26,2,0,1,24,0,0,0,0);
-		SetTileTag(26,3,5,1,20,0,0,0,0);
-		SetTileTag(26,4,1,1,20,0,0,0,0);
-		SetTileTag(26,5,3,1,20,0,0,0,0);
-		SetTileTag(26,6,0,1,24,0,0,0,0);
-		SetTileTag(26,7,0,1,24,0,0,0,0);
-		SetTileTag(26,8,0,1,24,0,0,0,0);
-		SetTileTag(26,9,0,1,24,0,0,0,0);
-		SetTileTag(26,10,0,1,24,0,0,0,0);
-		SetTileTag(26,11,0,1,10,0,0,0,0);
-		SetTileTag(26,12,1,1,20,0,0,0,0);
-		SetTileTag(26,13,2,1,20,0,0,0,0);
-		SetTileTag(26,14,0,1,24,0,0,0,0);
-		SetTileTag(26,15,9,1,20,0,0,0,0);
-		SetTileTag(26,16,0,1,24,0,0,0,0);
-		SetTileTag(26,17,1,1,24,0,0,0,0);
-		SetTileTag(26,18,1,1,24,0,0,0,0);
-		SetTileTag(26,19,0,1,24,0,0,0,0);
-		SetTileTag(26,20,1,1,20,0,0,0,0);
-		SetTileTag(26,21,1,1,20,0,0,1,0);
-		SetTileTag(26,22,1,1,20,0,0,0,0);
-		SetTileTag(26,23,1,1,4,0,1,0,0);
-		SetTileTag(26,24,1,1,4,0,1,0,0);
-		SetTileTag(26,25,8,1,20,0,0,0,0);
-		SetTileTag(26,26,0,1,30,0,0,0,0);
-		SetTileTag(26,27,0,1,30,0,0,0,0);
-		SetTileTag(26,28,0,1,30,0,0,0,0);
-		SetTileTag(26,29,0,1,30,0,0,0,0);
-		SetTileTag(26,30,0,1,30,0,0,0,0);
-		SetTileTag(26,31,8,1,20,0,0,0,0);
-		SetTileTag(26,32,8,1,20,0,0,0,0);
-		SetTileTag(26,33,1,1,14,0,0,0,0);
-		SetTileTag(26,34,8,1,12,0,0,0,0);
-		SetTileTag(26,35,0,1,30,0,0,0,0);
-		SetTileTag(26,36,0,1,30,0,0,0,0);
-		SetTileTag(26,37,1,1,6,0,1,0,0);
-		SetTileTag(26,38,1,1,6,0,1,0,0);
-		SetTileTag(26,39,0,1,30,0,0,0,0);
-		SetTileTag(26,40,0,1,8,0,0,0,0);
-		SetTileTag(26,41,9,1,6,0,1,0,0);
-		SetTileTag(26,42,9,1,6,0,1,0,0);
-		SetTileTag(26,43,0,1,8,0,0,0,0);
-		SetTileTag(26,44,4,1,16,0,0,0,0);
-		SetTileTag(26,45,1,1,16,0,0,0,0);
-		SetTileTag(26,46,2,1,16,0,0,0,0);
-		SetTileTag(26,47,9,1,16,0,0,0,0);
-		SetTileTag(26,48,0,1,8,0,0,0,0);
-		SetTileTag(26,49,1,1,8,0,1,0,0);
-		SetTileTag(26,50,1,1,8,0,1,0,0);
-		SetTileTag(26,51,2,1,8,0,1,0,0);
-		SetTileTag(26,52,0,1,30,0,0,0,0);
-		SetTileTag(26,53,4,1,8,0,1,0,0);
-		SetTileTag(26,54,1,1,8,0,1,0,0);
-		SetTileTag(26,55,1,1,8,0,1,0,0);
-		SetTileTag(26,56,3,1,8,0,1,0,0);
-		SetTileTag(26,57,0,1,22,0,0,0,0);
-		SetTileTag(26,58,0,1,30,0,0,0,0);
-		SetTileTag(26,59,8,1,8,0,0,0,0);
-		SetTileTag(26,60,5,1,8,0,1,0,0);
-		SetTileTag(26,61,3,1,8,0,1,0,0);
-		SetTileTag(26,62,0,1,30,0,0,0,0);
-		SetTileTag(26,63,0,1,30,0,0,0,0);
-		SetTileTag(27,0,0,1,30,0,0,0,0);
-		SetTileTag(27,1,0,1,30,0,0,0,0);
-		SetTileTag(27,2,0,1,24,0,0,0,0);
-		SetTileTag(27,3,0,1,24,0,0,0,0);
-		SetTileTag(27,4,1,1,20,0,0,0,0);
-		SetTileTag(27,5,1,1,20,0,0,0,0);
-		SetTileTag(27,6,1,1,20,0,0,0,0);
-		SetTileTag(27,7,1,1,20,0,0,0,0);
-		SetTileTag(27,8,1,1,20,0,0,0,0);
-		SetTileTag(27,9,1,1,20,0,0,0,0);
-		SetTileTag(27,10,1,1,20,0,0,0,0);
-		SetTileTag(27,11,1,1,20,0,0,0,0);
-		SetTileTag(27,12,1,1,20,0,0,0,0);
-		SetTileTag(27,13,9,1,18,0,0,0,0);
-		SetTileTag(27,14,0,1,24,0,0,0,0);
-		SetTileTag(27,15,9,1,18,0,0,0,0);
-		SetTileTag(27,16,0,1,24,0,0,0,0);
-		SetTileTag(27,17,1,1,24,0,0,0,0);
-		SetTileTag(27,18,1,1,24,0,0,0,0);
-		SetTileTag(27,19,0,1,26,0,0,0,0);
-		SetTileTag(27,20,1,1,20,0,0,0,0);
-		SetTileTag(27,21,0,1,4,0,0,0,0);
-		SetTileTag(27,22,5,1,20,0,0,0,0);
-		SetTileTag(27,23,1,1,4,0,1,0,0);
-		SetTileTag(27,24,1,1,4,0,1,0,0);
-		SetTileTag(27,25,8,1,22,0,0,0,0);
-		SetTileTag(27,26,0,1,30,0,0,0,0);
-		SetTileTag(27,27,0,1,30,0,0,0,0);
-		SetTileTag(27,28,0,1,30,0,0,0,0);
-		SetTileTag(27,29,0,1,30,0,0,0,0);
-		SetTileTag(27,30,0,1,30,0,0,0,0);
-		SetTileTag(27,31,8,1,22,0,0,0,0);
-		SetTileTag(27,32,8,1,22,0,0,0,0);
-		SetTileTag(27,33,1,1,14,0,0,0,0);
-		SetTileTag(27,34,1,1,14,0,0,0,0);
-		SetTileTag(27,35,0,1,30,0,0,0,0);
-		SetTileTag(27,36,0,1,30,0,0,0,0);
-		SetTileTag(27,37,1,1,6,0,1,0,0);
-		SetTileTag(27,38,1,1,6,0,1,0,0);
-		SetTileTag(27,39,0,1,6,0,0,0,0);
-		SetTileTag(27,40,0,1,6,0,0,0,0);
-		SetTileTag(27,41,5,1,6,0,1,0,0);
-		SetTileTag(27,42,1,1,6,0,1,0,0);
-		SetTileTag(27,43,2,1,6,0,1,0,0);
-		SetTileTag(27,44,5,1,16,0,0,0,0);
-		SetTileTag(27,45,1,1,16,0,0,0,0);
-		SetTileTag(27,46,1,1,16,0,0,0,0);
-		SetTileTag(27,47,1,1,16,0,0,0,0);
-		SetTileTag(27,48,2,1,16,0,0,0,0);
-		SetTileTag(27,49,5,1,8,0,1,0,0);
-		SetTileTag(27,50,1,1,8,0,1,0,0);
-		SetTileTag(27,51,1,1,8,0,1,0,0);
-		SetTileTag(27,52,1,1,8,0,1,0,0);
-		SetTileTag(27,53,1,1,8,0,1,0,0);
-		SetTileTag(27,54,1,1,8,0,1,0,0);
-		SetTileTag(27,55,3,1,8,0,1,0,0);
-		SetTileTag(27,56,0,1,22,0,0,0,0);
-		SetTileTag(27,57,0,1,22,0,0,0,0);
-		SetTileTag(27,58,0,1,30,0,0,0,0);
-		SetTileTag(27,59,1,1,10,0,0,0,0);
-		SetTileTag(27,60,0,1,30,0,0,0,0);
-		SetTileTag(27,61,0,1,30,0,0,0,0);
-		SetTileTag(27,62,0,1,30,0,0,0,0);
-		SetTileTag(27,63,0,1,30,0,0,0,0);
-		SetTileTag(28,0,0,1,30,0,0,0,0);
-		SetTileTag(28,1,0,1,30,0,0,0,0);
-		SetTileTag(28,2,0,1,24,0,0,0,0);
-		SetTileTag(28,3,0,1,24,0,0,0,0);
-		SetTileTag(28,4,1,1,20,0,0,0,0);
-		SetTileTag(28,5,1,1,20,0,0,0,0);
-		SetTileTag(28,6,1,1,20,0,0,0,0);
-		SetTileTag(28,7,1,1,20,0,0,0,0);
-		SetTileTag(28,8,1,1,20,0,0,0,0);
-		SetTileTag(28,9,1,1,20,0,0,0,0);
-		SetTileTag(28,10,1,1,20,0,0,0,0);
-		SetTileTag(28,11,0,1,24,0,0,0,0);
-		SetTileTag(28,12,7,1,18,0,0,0,0);
-		SetTileTag(28,13,1,1,18,0,0,0,0);
-		SetTileTag(28,14,0,1,24,0,0,0,0);
-		SetTileTag(28,15,9,1,16,0,0,0,0);
-		SetTileTag(28,16,0,1,24,0,0,0,0);
-		SetTileTag(28,17,1,1,24,0,0,0,0);
-		SetTileTag(28,18,1,1,24,0,0,0,0);
-		SetTileTag(28,19,2,1,24,0,0,0,0);
-		SetTileTag(28,20,0,1,24,0,0,0,0);
-		SetTileTag(28,21,0,1,4,0,0,0,0);
-		SetTileTag(28,22,4,1,4,0,1,0,0);
-		SetTileTag(28,23,1,1,4,0,1,0,0);
-		SetTileTag(28,24,1,1,4,0,1,0,0);
-		SetTileTag(28,25,1,1,24,0,0,0,0);
-		SetTileTag(28,26,2,1,24,0,0,0,0);
-		SetTileTag(28,27,0,1,30,0,0,0,0);
-		SetTileTag(28,28,1,1,24,0,0,0,0);
-		SetTileTag(28,29,1,1,24,0,0,0,0);
-		SetTileTag(28,30,1,1,24,0,0,0,0);
-		SetTileTag(28,31,1,1,24,0,0,0,0);
-		SetTileTag(28,32,1,1,24,0,0,0,0);
-		SetTileTag(28,33,1,1,24,0,0,0,0);
-		SetTileTag(28,34,1,1,24,0,0,0,0);
-		SetTileTag(28,35,1,1,24,0,0,0,0);
-		SetTileTag(28,36,0,1,30,0,0,0,0);
-		SetTileTag(28,37,1,1,6,0,1,0,0);
-		SetTileTag(28,38,1,1,6,0,1,0,0);
-		SetTileTag(28,39,0,1,6,0,0,0,0);
-		SetTileTag(28,40,0,1,6,0,0,0,0);
-		SetTileTag(28,41,0,1,6,0,0,0,0);
-		SetTileTag(28,42,1,1,6,0,1,0,0);
-		SetTileTag(28,43,1,1,6,0,1,0,0);
-		SetTileTag(28,44,0,1,6,0,0,0,0);
-		SetTileTag(28,45,7,1,16,0,0,0,0);
-		SetTileTag(28,46,1,1,16,0,0,0,0);
-		SetTileTag(28,47,1,1,16,0,0,0,0);
-		SetTileTag(28,48,8,1,16,0,0,0,0);
-		SetTileTag(28,49,0,1,30,0,0,0,0);
-		SetTileTag(28,50,0,1,30,0,0,0,0);
-		SetTileTag(28,51,5,1,8,0,1,0,0);
-		SetTileTag(28,52,1,1,8,0,1,0,0);
-		SetTileTag(28,53,3,1,8,0,1,0,0);
-		SetTileTag(28,54,0,1,30,0,0,0,0);
-		SetTileTag(28,55,0,1,30,0,0,0,0);
-		SetTileTag(28,56,0,1,22,0,0,0,0);
-		SetTileTag(28,57,0,1,24,0,0,0,0);
-		SetTileTag(28,58,0,1,22,0,0,0,0);
-		SetTileTag(28,59,8,1,10,0,0,0,0);
-		SetTileTag(28,60,0,1,30,0,0,0,0);
-		SetTileTag(28,61,0,1,30,0,0,0,0);
-		SetTileTag(28,62,0,1,8,0,0,0,0);
-		SetTileTag(28,63,0,1,30,0,0,0,0);
-		SetTileTag(29,0,0,1,30,0,0,0,0);
-		SetTileTag(29,1,0,1,30,0,0,0,0);
-		SetTileTag(29,2,0,1,30,0,0,0,0);
-		SetTileTag(29,3,0,1,30,0,0,0,0);
-		SetTileTag(29,4,0,1,30,0,0,0,0);
-		SetTileTag(29,5,0,1,24,0,0,0,0);
-		SetTileTag(29,6,0,1,20,0,0,0,0);
-		SetTileTag(29,7,0,1,20,0,0,0,0);
-		SetTileTag(29,8,0,1,26,0,0,0,0);
-		SetTileTag(29,9,1,1,20,0,0,0,0);
-		SetTileTag(29,10,1,1,20,0,0,0,0);
-		SetTileTag(29,11,0,1,24,0,0,0,0);
-		SetTileTag(29,12,0,1,24,0,0,0,0);
-		SetTileTag(29,13,0,1,24,0,0,0,0);
-		SetTileTag(29,14,0,1,24,0,0,0,0);
-		SetTileTag(29,15,9,1,14,0,0,0,0);
-		SetTileTag(29,16,0,1,24,0,0,0,0);
-		SetTileTag(29,17,1,1,24,0,0,0,0);
-		SetTileTag(29,18,1,1,24,0,0,0,0);
-		SetTileTag(29,19,1,1,24,0,0,0,0);
-		SetTileTag(29,20,1,1,24,0,0,0,0);
-		SetTileTag(29,21,0,1,4,0,0,0,0);
-		SetTileTag(29,22,1,1,4,0,1,0,0);
-		SetTileTag(29,23,1,1,4,0,1,0,0);
-		SetTileTag(29,24,3,1,4,0,1,0,0);
-		SetTileTag(29,25,1,1,24,0,0,0,0);
-		SetTileTag(29,26,1,1,24,0,0,0,0);
-		SetTileTag(29,27,0,1,30,0,0,0,0);
-		SetTileTag(29,28,1,1,24,0,0,0,0);
-		SetTileTag(29,29,3,1,24,0,0,0,0);
-		SetTileTag(29,30,0,1,30,0,0,0,0);
-		SetTileTag(29,31,0,1,0,0,0,0,0);
-		SetTileTag(29,32,0,1,0,0,0,0,0);
-		SetTileTag(29,33,0,1,30,0,0,0,0);
-		SetTileTag(29,34,5,1,24,0,0,0,0);
-		SetTileTag(29,35,1,1,24,0,0,0,0);
-		SetTileTag(29,36,0,1,30,0,0,0,0);
-		SetTileTag(29,37,1,1,6,0,1,0,0);
-		SetTileTag(29,38,1,1,6,0,1,0,0);
-		SetTileTag(29,39,2,1,6,0,1,0,0);
-		SetTileTag(29,40,0,1,6,0,0,0,0);
-		SetTileTag(29,41,0,1,6,0,0,0,0);
-		SetTileTag(29,42,5,1,6,0,1,0,0);
-		SetTileTag(29,43,1,1,6,0,1,0,0);
-		SetTileTag(29,44,2,1,6,0,1,0,0);
-		SetTileTag(29,45,0,1,6,0,0,0,0);
-		SetTileTag(29,46,5,1,16,0,0,0,0);
-		SetTileTag(29,47,3,1,16,0,0,0,0);
-		SetTileTag(29,48,1,1,18,0,0,0,0);
-		SetTileTag(29,49,2,1,18,0,0,0,0);
-		SetTileTag(29,50,0,1,8,0,0,0,0);
-		SetTileTag(29,51,0,1,8,0,0,0,0);
-		SetTileTag(29,52,0,1,30,0,0,0,0);
-		SetTileTag(29,53,0,1,30,0,0,0,0);
-		SetTileTag(29,54,0,1,30,0,0,0,0);
-		SetTileTag(29,55,0,1,30,0,0,0,0);
-		SetTileTag(29,56,1,1,24,0,0,0,0);
-		SetTileTag(29,57,1,1,24,0,0,0,0);
-		SetTileTag(29,58,0,1,18,0,0,0,0);
-		SetTileTag(29,59,1,1,12,0,0,0,0);
-		SetTileTag(29,60,7,1,10,0,0,0,0);
-		SetTileTag(29,61,2,1,10,0,1,0,0);
-		SetTileTag(29,62,0,1,18,0,0,0,0);
-		SetTileTag(29,63,0,1,30,0,0,0,0);
-		SetTileTag(30,0,0,1,30,0,0,0,0);
-		SetTileTag(30,1,4,1,24,0,0,0,0);
-		SetTileTag(30,2,1,1,24,0,0,0,0);
-		SetTileTag(30,3,2,1,24,0,0,0,0);
-		SetTileTag(30,4,0,1,24,0,0,0,0);
-		SetTileTag(30,5,0,1,24,0,0,0,0);
-		SetTileTag(30,6,0,1,24,0,0,0,0);
-		SetTileTag(30,7,0,1,24,0,0,0,0);
-		SetTileTag(30,8,4,1,24,0,0,0,0);
-		SetTileTag(30,9,1,1,20,0,0,0,0);
-		SetTileTag(30,10,1,1,20,0,0,0,0);
-		SetTileTag(30,11,0,1,24,0,0,0,0);
-		SetTileTag(30,12,1,1,12,0,0,0,0);
-		SetTileTag(30,13,1,1,14,0,0,0,0);
-		SetTileTag(30,14,1,1,14,0,0,0,0);
-		SetTileTag(30,15,1,1,14,0,0,0,0);
-		SetTileTag(30,16,0,1,24,0,0,0,0);
-		SetTileTag(30,17,1,1,24,0,0,0,0);
-		SetTileTag(30,18,1,1,22,0,0,0,0);
-		SetTileTag(30,19,1,1,22,0,0,0,0);
-		SetTileTag(30,20,1,1,24,0,0,0,0);
-		SetTileTag(30,21,0,1,4,0,0,0,0);
-		SetTileTag(30,22,1,1,4,0,1,0,0);
-		SetTileTag(30,23,1,1,4,0,1,0,0);
-		SetTileTag(30,24,0,1,4,0,0,0,0);
-		SetTileTag(30,25,8,1,24,0,0,0,0);
-		SetTileTag(30,26,3,1,24,0,0,0,0);
-		SetTileTag(30,27,0,1,30,0,0,0,0);
-		SetTileTag(30,28,1,1,24,0,0,0,0);
-		SetTileTag(30,29,0,1,30,0,0,0,0);
-		SetTileTag(30,30,4,1,8,0,0,0,0);
-		SetTileTag(30,31,1,1,8,0,0,0,0);
-		SetTileTag(30,32,1,1,8,0,0,0,0);
-		SetTileTag(30,33,2,1,8,0,0,0,0);
-		SetTileTag(30,34,0,1,30,0,0,0,0);
-		SetTileTag(30,35,1,1,24,0,0,0,0);
-		SetTileTag(30,36,0,1,30,0,0,0,0);
-		SetTileTag(30,37,1,1,6,0,1,0,0);
-		SetTileTag(30,38,1,1,6,0,1,0,0);
-		SetTileTag(30,39,1,1,6,0,1,0,0);
-		SetTileTag(30,40,0,1,6,0,0,0,0);
-		SetTileTag(30,41,0,1,6,0,0,0,0);
-		SetTileTag(30,42,0,1,6,0,0,0,0);
-		SetTileTag(30,43,1,1,6,0,1,0,0);
-		SetTileTag(30,44,1,1,6,0,1,0,0);
-		SetTileTag(30,45,1,1,6,0,1,0,0);
-		SetTileTag(30,46,2,1,6,0,1,0,0);
-		SetTileTag(30,47,0,1,6,0,0,0,0);
-		SetTileTag(30,48,5,1,18,0,0,0,0);
-		SetTileTag(30,49,8,1,18,0,0,0,0);
-		SetTileTag(30,50,4,1,20,0,0,0,0);
-		SetTileTag(30,51,2,1,20,0,0,0,0);
-		SetTileTag(30,52,0,1,8,0,0,0,0);
-		SetTileTag(30,53,2,1,24,0,0,0,0);
-		SetTileTag(30,54,0,1,30,0,0,0,0);
-		SetTileTag(30,55,0,1,30,0,0,0,0);
-		SetTileTag(30,56,1,1,24,0,0,0,0);
-		SetTileTag(30,57,1,1,24,0,0,0,0);
-		SetTileTag(30,58,0,1,18,0,0,0,0);
-		SetTileTag(30,59,1,1,12,0,0,0,0);
-		SetTileTag(30,60,7,1,10,0,0,0,0);
-		SetTileTag(30,61,1,1,10,0,1,0,0);
-		SetTileTag(30,62,0,1,8,0,0,0,0);
-		SetTileTag(30,63,0,1,30,0,0,0,0);
-		SetTileTag(31,0,0,1,30,0,0,0,0);
-		SetTileTag(31,1,1,1,24,0,0,0,0);
-		SetTileTag(31,2,1,1,24,0,0,0,0);
-		SetTileTag(31,3,7,1,22,0,0,0,0);
-		SetTileTag(31,4,7,1,20,0,0,0,0);
-		SetTileTag(31,5,1,1,20,0,0,0,0);
-		SetTileTag(31,6,1,1,20,0,0,0,0);
-		SetTileTag(31,7,1,1,20,0,0,0,0);
-		SetTileTag(31,8,1,1,20,0,0,0,0);
-		SetTileTag(31,9,1,1,20,0,0,0,0);
-		SetTileTag(31,10,1,1,20,0,0,0,0);
-		SetTileTag(31,11,0,1,24,0,0,0,0);
-		SetTileTag(31,12,1,1,14,0,0,0,0);
-		SetTileTag(31,13,1,1,14,0,0,0,0);
-		SetTileTag(31,14,1,1,14,0,0,0,0);
-		SetTileTag(31,15,1,1,14,0,0,0,0);
-		SetTileTag(31,16,0,1,24,0,0,0,0);
-		SetTileTag(31,17,1,1,24,0,0,0,0);
-		SetTileTag(31,18,1,1,20,0,1,0,0);
-		SetTileTag(31,19,1,1,20,0,1,0,0);
-		SetTileTag(31,20,1,1,24,0,0,0,0);
-		SetTileTag(31,21,0,1,4,0,0,0,0);
-		SetTileTag(31,22,1,1,4,0,1,0,0);
-		SetTileTag(31,23,1,1,4,0,1,0,0);
-		SetTileTag(31,24,0,1,4,0,0,0,0);
-		SetTileTag(31,25,0,1,24,0,0,0,0);
-		SetTileTag(31,26,0,1,24,0,0,0,0);
-		SetTileTag(31,27,0,1,30,0,0,0,0);
-		SetTileTag(31,28,1,1,24,0,0,0,0);
-		SetTileTag(31,29,0,1,24,0,0,0,0);
-		SetTileTag(31,30,1,1,8,0,0,0,0);
-		SetTileTag(31,31,1,1,0,0,0,0,0);
-		SetTileTag(31,32,1,1,0,0,0,0,0);
-		SetTileTag(31,33,1,1,8,0,0,0,0);
-		SetTileTag(31,34,0,1,0,0,0,0,0);
-		SetTileTag(31,35,1,1,24,0,0,0,0);
-		SetTileTag(31,36,0,1,30,0,0,0,0);
-		SetTileTag(31,37,5,1,6,0,1,0,0);
-		SetTileTag(31,38,1,1,6,0,1,0,0);
-		SetTileTag(31,39,1,1,6,0,1,0,0);
-		SetTileTag(31,40,1,1,6,0,1,0,0);
-		SetTileTag(31,41,0,1,6,0,0,0,0);
-		SetTileTag(31,42,0,1,6,0,0,0,0);
-		SetTileTag(31,43,5,1,6,0,1,0,0);
-		SetTileTag(31,44,1,1,6,0,1,0,0);
-		SetTileTag(31,45,1,1,6,0,1,0,0);
-		SetTileTag(31,46,1,1,6,0,1,0,0);
-		SetTileTag(31,47,0,1,6,0,0,0,0);
-		SetTileTag(31,48,0,1,30,0,0,0,0);
-		SetTileTag(31,49,1,1,20,0,0,0,0);
-		SetTileTag(31,50,1,1,20,0,0,0,0);
-		SetTileTag(31,51,1,1,20,0,0,0,0);
-		SetTileTag(31,52,6,1,20,0,0,0,0);
-		SetTileTag(31,53,6,1,22,0,0,0,0);
-		SetTileTag(31,54,1,1,24,0,0,0,0);
-		SetTileTag(31,55,1,1,24,0,0,1,0);
-		SetTileTag(31,56,1,1,24,0,0,0,0);
-		SetTileTag(31,57,1,1,24,0,0,0,0);
-		SetTileTag(31,58,0,1,8,0,0,0,0);
-		SetTileTag(31,59,8,1,12,0,0,0,0);
-		SetTileTag(31,60,7,1,10,0,0,0,0);
-		SetTileTag(31,61,3,1,10,0,1,0,0);
-		SetTileTag(31,62,0,1,8,0,0,0,0);
-		SetTileTag(31,63,0,1,30,0,0,0,0);
-		SetTileTag(32,0,0,1,30,0,0,0,0);
-		SetTileTag(32,1,1,1,24,0,0,0,0);
-		SetTileTag(32,2,1,1,24,0,0,0,0);
-		SetTileTag(32,3,7,1,22,0,0,0,0);
-		SetTileTag(32,4,7,1,20,0,0,0,0);
-		SetTileTag(32,5,1,1,20,0,0,0,0);
-		SetTileTag(32,6,1,1,20,0,0,0,0);
-		SetTileTag(32,7,1,1,20,0,0,0,0);
-		SetTileTag(32,8,1,1,20,0,0,0,0);
-		SetTileTag(32,9,1,1,20,0,0,0,0);
-		SetTileTag(32,10,1,1,20,0,0,0,0);
-		SetTileTag(32,11,0,1,24,0,0,0,0);
-		SetTileTag(32,12,1,1,14,0,0,0,0);
-		SetTileTag(32,13,1,1,14,0,0,0,0);
-		SetTileTag(32,14,1,1,14,0,0,0,0);
-		SetTileTag(32,15,1,1,14,0,0,0,0);
-		SetTileTag(32,16,0,1,24,0,0,0,0);
-		SetTileTag(32,17,1,1,24,0,0,0,0);
-		SetTileTag(32,18,1,1,20,0,1,0,0);
-		SetTileTag(32,19,1,1,20,0,1,0,0);
-		SetTileTag(32,20,1,1,24,0,0,0,0);
-		SetTileTag(32,21,0,1,4,0,0,0,0);
-		SetTileTag(32,22,1,1,4,0,1,0,0);
-		SetTileTag(32,23,1,1,4,0,1,0,0);
-		SetTileTag(32,24,2,1,4,0,1,0,0);
-		SetTileTag(32,25,0,1,4,0,0,0,0);
-		SetTileTag(32,26,0,1,24,0,0,0,0);
-		SetTileTag(32,27,0,1,30,0,0,0,0);
-		SetTileTag(32,28,1,1,24,0,0,0,0);
-		SetTileTag(32,29,0,1,0,0,0,0,0);
-		SetTileTag(32,30,1,1,8,0,0,0,0);
-		SetTileTag(32,31,1,1,0,0,0,0,0);
-		SetTileTag(32,32,1,1,0,0,0,0,0);
-		SetTileTag(32,33,1,1,8,0,0,0,0);
-		SetTileTag(32,34,0,1,0,0,0,0,0);
-		SetTileTag(32,35,1,1,24,0,0,0,0);
-		SetTileTag(32,36,0,1,24,0,0,0,0);
-		SetTileTag(32,37,0,1,24,0,0,0,0);
-		SetTileTag(32,38,0,1,30,0,0,0,0);
-		SetTileTag(32,39,1,1,6,0,1,0,0);
-		SetTileTag(32,40,1,1,6,0,1,0,0);
-		SetTileTag(32,41,2,1,6,0,1,0,0);
-		SetTileTag(32,42,0,1,6,0,0,0,0);
-		SetTileTag(32,43,0,1,6,0,0,0,0);
-		SetTileTag(32,44,0,1,6,0,0,0,0);
-		SetTileTag(32,45,5,1,6,0,1,0,0);
-		SetTileTag(32,46,1,1,6,0,1,0,0);
-		SetTileTag(32,47,2,1,6,0,1,0,0);
-		SetTileTag(32,48,0,1,30,0,0,0,0);
-		SetTileTag(32,49,1,1,20,0,0,0,0);
-		SetTileTag(32,50,3,1,20,0,0,0,0);
-		SetTileTag(32,51,0,1,30,0,0,0,0);
-		SetTileTag(32,52,0,1,30,0,0,0,0);
-		SetTileTag(32,53,5,1,24,0,0,0,0);
-		SetTileTag(32,54,3,1,24,0,0,0,0);
-		SetTileTag(32,55,0,1,24,0,0,0,0);
-		SetTileTag(32,56,0,1,18,0,0,0,0);
-		SetTileTag(32,57,1,1,24,0,0,0,0);
-		SetTileTag(32,58,0,1,8,0,0,0,0);
-		SetTileTag(32,59,8,1,14,0,0,0,0);
-		SetTileTag(32,60,0,1,24,0,0,0,0);
-		SetTileTag(32,61,0,1,8,0,0,0,0);
-		SetTileTag(32,62,0,1,8,0,0,0,0);
-		SetTileTag(32,63,0,1,30,0,0,0,0);
-		SetTileTag(33,0,0,1,30,0,0,0,0);
-		SetTileTag(33,1,5,1,24,0,0,0,0);
-		SetTileTag(33,2,1,1,24,0,0,0,0);
-		SetTileTag(33,3,3,1,24,0,0,0,0);
-		SetTileTag(33,4,0,1,24,0,0,0,0);
-		SetTileTag(33,5,0,1,24,0,0,0,0);
-		SetTileTag(33,6,0,1,24,0,0,0,0);
-		SetTileTag(33,7,0,1,24,0,0,0,0);
-		SetTileTag(33,8,1,1,20,0,0,1,0);
-		SetTileTag(33,9,0,1,24,0,0,0,0);
-		SetTileTag(33,10,0,1,24,0,0,0,0);
-		SetTileTag(33,11,0,1,24,0,0,0,0);
-		SetTileTag(33,12,1,1,14,0,0,0,0);
-		SetTileTag(33,13,1,1,14,0,0,0,0);
-		SetTileTag(33,14,1,1,14,0,0,0,0);
-		SetTileTag(33,15,1,1,14,0,0,0,0);
-		SetTileTag(33,16,0,1,24,0,0,0,0);
-		SetTileTag(33,17,1,1,24,0,0,0,0);
-		SetTileTag(33,18,1,1,22,0,0,0,0);
-		SetTileTag(33,19,1,1,22,0,0,0,0);
-		SetTileTag(33,20,1,1,24,0,0,0,0);
-		SetTileTag(33,21,0,1,4,0,0,0,0);
-		SetTileTag(33,22,1,1,4,0,1,0,0);
-		SetTileTag(33,23,1,1,4,0,1,0,0);
-		SetTileTag(33,24,1,1,4,0,1,0,0);
-		SetTileTag(33,25,0,1,4,0,0,0,0);
-		SetTileTag(33,26,0,1,30,0,0,0,0);
-		SetTileTag(33,27,0,1,30,0,0,0,0);
-		SetTileTag(33,28,1,1,24,0,0,0,0);
-		SetTileTag(33,29,0,1,30,0,0,0,0);
-		SetTileTag(33,30,5,1,8,0,0,0,0);
-		SetTileTag(33,31,1,1,8,0,0,0,0);
-		SetTileTag(33,32,1,1,8,0,0,0,0);
-		SetTileTag(33,33,3,1,8,0,0,0,0);
-		SetTileTag(33,34,0,1,30,0,0,0,0);
-		SetTileTag(33,35,1,1,24,0,0,0,0);
-		SetTileTag(33,36,0,1,24,0,0,0,0);
-		SetTileTag(33,37,0,1,24,0,0,0,0);
-		SetTileTag(33,38,0,1,30,0,0,0,0);
-		SetTileTag(33,39,5,1,6,0,1,0,0);
-		SetTileTag(33,40,1,1,6,0,1,0,0);
-		SetTileTag(33,41,1,1,6,0,1,0,0);
-		SetTileTag(33,42,0,1,6,0,0,0,0);
-		SetTileTag(33,43,0,1,6,0,0,0,0);
-		SetTileTag(33,44,0,1,6,0,0,0,0);
-		SetTileTag(33,45,4,1,6,0,1,0,0);
-		SetTileTag(33,46,1,1,6,0,1,0,0);
-		SetTileTag(33,47,3,1,6,0,1,0,0);
-		SetTileTag(33,48,4,1,18,0,0,0,0);
-		SetTileTag(33,49,9,1,18,0,0,0,0);
-		SetTileTag(33,50,0,1,30,0,0,0,0);
-		SetTileTag(33,51,0,1,30,0,0,0,0);
-		SetTileTag(33,52,0,1,30,0,0,0,0);
-		SetTileTag(33,53,0,1,30,0,0,0,0);
-		SetTileTag(33,54,0,1,8,0,0,0,0);
-		SetTileTag(33,55,0,1,8,0,0,0,0);
-		SetTileTag(33,56,0,1,18,0,0,0,0);
-		SetTileTag(33,57,1,1,24,0,0,0,0);
-		SetTileTag(33,58,0,1,8,0,0,0,0);
-		SetTileTag(33,59,1,1,16,0,0,0,0);
-		SetTileTag(33,60,6,1,16,0,0,0,0);
-		SetTileTag(33,61,1,1,18,0,0,0,0);
-		SetTileTag(33,62,0,1,8,0,0,0,0);
-		SetTileTag(33,63,0,1,30,0,0,0,0);
-		SetTileTag(34,0,0,1,30,0,0,0,0);
-		SetTileTag(34,1,0,1,30,0,0,0,0);
-		SetTileTag(34,2,0,1,30,0,0,0,0);
-		SetTileTag(34,3,0,1,24,0,0,0,0);
-		SetTileTag(34,4,0,1,24,0,0,0,0);
-		SetTileTag(34,5,0,1,24,0,0,0,0);
-		SetTileTag(34,6,0,1,18,0,0,0,0);
-		SetTileTag(34,7,0,1,24,0,0,0,0);
-		SetTileTag(34,8,1,1,20,0,0,0,0);
-		SetTileTag(34,9,1,1,20,0,0,0,0);
-		SetTileTag(34,10,1,1,20,0,0,0,0);
-		SetTileTag(34,11,0,1,24,0,0,0,0);
-		SetTileTag(34,12,0,1,24,0,0,0,0);
-		SetTileTag(34,13,0,1,24,0,0,0,0);
-		SetTileTag(34,14,0,1,24,0,0,0,0);
-		SetTileTag(34,15,0,1,24,0,0,0,0);
-		SetTileTag(34,16,0,1,24,0,0,0,0);
-		SetTileTag(34,17,1,1,24,0,0,0,0);
-		SetTileTag(34,18,1,1,24,0,0,0,0);
-		SetTileTag(34,19,1,1,24,0,0,0,0);
-		SetTileTag(34,20,1,1,24,0,0,0,0);
-		SetTileTag(34,21,0,1,4,0,0,0,0);
-		SetTileTag(34,22,1,1,4,0,1,0,0);
-		SetTileTag(34,23,1,1,4,0,1,0,0);
-		SetTileTag(34,24,1,1,4,0,1,0,0);
-		SetTileTag(34,25,2,1,4,0,1,0,0);
-		SetTileTag(34,26,0,1,30,0,0,0,0);
-		SetTileTag(34,27,0,1,30,0,0,0,0);
-		SetTileTag(34,28,1,1,24,0,0,0,0);
-		SetTileTag(34,29,2,1,24,0,0,0,0);
-		SetTileTag(34,30,0,1,30,0,0,0,0);
-		SetTileTag(34,31,0,1,0,0,0,0,0);
-		SetTileTag(34,32,0,1,0,0,0,0,0);
-		SetTileTag(34,33,0,1,30,0,0,0,0);
-		SetTileTag(34,34,4,1,24,0,0,0,0);
-		SetTileTag(34,35,1,1,24,0,0,0,0);
-		SetTileTag(34,36,0,1,24,0,0,0,0);
-		SetTileTag(34,37,0,1,30,0,0,0,0);
-		SetTileTag(34,38,0,1,30,0,0,0,0);
-		SetTileTag(34,39,0,1,30,0,0,0,0);
-		SetTileTag(34,40,1,1,6,0,1,0,0);
-		SetTileTag(34,41,1,1,6,0,1,0,0);
-		SetTileTag(34,42,0,1,6,0,0,0,0);
-		SetTileTag(34,43,4,1,6,0,1,0,0);
-		SetTileTag(34,44,1,1,6,0,1,0,0);
-		SetTileTag(34,45,1,1,6,0,1,0,0);
-		SetTileTag(34,46,1,1,6,0,1,0,0);
-		SetTileTag(34,47,0,1,6,0,0,0,0);
-		SetTileTag(34,48,5,1,18,0,0,0,0);
-		SetTileTag(34,49,1,1,18,0,0,0,0);
-		SetTileTag(34,50,2,1,18,0,0,0,0);
-		SetTileTag(34,51,4,1,20,0,0,0,0);
-		SetTileTag(34,52,2,1,20,0,0,0,0);
-		SetTileTag(34,53,4,1,20,0,0,0,0);
-		SetTileTag(34,54,0,1,8,0,0,0,0);
-		SetTileTag(34,55,0,1,8,0,0,0,0);
-		SetTileTag(34,56,0,1,18,0,0,0,0);
-		SetTileTag(34,57,1,1,24,0,0,0,0);
-		SetTileTag(34,58,0,1,24,0,0,0,0);
-		SetTileTag(34,59,0,1,18,0,0,0,0);
-		SetTileTag(34,60,0,1,24,0,0,0,0);
-		SetTileTag(34,61,8,1,18,0,0,0,0);
-		SetTileTag(34,62,0,1,8,0,0,0,0);
-		SetTileTag(34,63,0,1,30,0,0,0,0);
-		SetTileTag(35,0,0,1,30,0,0,0,0);
-		SetTileTag(35,1,0,1,30,0,0,0,0);
-		SetTileTag(35,2,4,1,24,0,0,0,0);
-		SetTileTag(35,3,8,1,20,0,0,0,0);
-		SetTileTag(35,4,1,1,24,0,0,0,0);
-		SetTileTag(35,5,2,1,24,0,0,0,0);
-		SetTileTag(35,6,0,1,20,0,0,0,0);
-		SetTileTag(35,7,0,1,24,0,0,0,0);
-		SetTileTag(35,8,5,1,20,0,0,0,0);
-		SetTileTag(35,9,1,1,20,0,0,0,0);
-		SetTileTag(35,10,1,1,20,0,0,0,0);
-		SetTileTag(35,11,0,1,24,0,0,0,0);
-		SetTileTag(35,12,0,1,24,0,0,0,0);
-		SetTileTag(35,13,0,1,24,0,0,0,0);
-		SetTileTag(35,14,0,1,24,0,0,0,0);
-		SetTileTag(35,15,0,1,24,0,0,0,0);
-		SetTileTag(35,16,0,1,24,0,0,0,0);
-		SetTileTag(35,17,0,1,20,0,0,0,0);
-		SetTileTag(35,18,0,1,20,0,0,0,0);
-		SetTileTag(35,19,0,1,20,0,0,0,0);
-		SetTileTag(35,20,0,1,20,0,0,0,0);
-		SetTileTag(35,21,0,1,4,0,0,0,0);
-		SetTileTag(35,22,5,1,4,0,1,0,0);
-		SetTileTag(35,23,1,1,4,0,1,0,0);
-		SetTileTag(35,24,1,1,4,0,1,0,0);
-		SetTileTag(35,25,1,1,4,0,1,0,0);
-		SetTileTag(35,26,0,1,24,0,0,0,0);
-		SetTileTag(35,27,4,1,24,0,0,0,0);
-		SetTileTag(35,28,1,1,24,0,0,0,0);
-		SetTileTag(35,29,1,1,24,0,0,0,0);
-		SetTileTag(35,30,1,1,24,0,0,0,0);
-		SetTileTag(35,31,1,1,24,0,0,0,0);
-		SetTileTag(35,32,1,1,24,0,0,0,0);
-		SetTileTag(35,33,1,1,24,0,0,0,0);
-		SetTileTag(35,34,1,1,24,0,0,0,0);
-		SetTileTag(35,35,1,1,24,0,0,0,0);
-		SetTileTag(35,36,1,1,24,0,0,0,0);
-		SetTileTag(35,37,1,1,24,0,0,0,0);
-		SetTileTag(35,38,2,1,24,0,0,0,0);
-		SetTileTag(35,39,0,1,24,0,0,0,0);
-		SetTileTag(35,40,1,1,6,0,1,0,0);
-		SetTileTag(35,41,1,1,6,0,1,0,0);
-		SetTileTag(35,42,1,1,6,0,1,0,0);
-		SetTileTag(35,43,1,1,6,0,1,0,0);
-		SetTileTag(35,44,1,1,6,0,1,0,0);
-		SetTileTag(35,45,1,1,6,0,1,0,0);
-		SetTileTag(35,46,3,1,6,0,1,0,0);
-		SetTileTag(35,47,0,1,6,0,0,0,0);
-		SetTileTag(35,48,0,1,6,0,0,0,0);
-		SetTileTag(35,49,8,1,18,0,0,0,0);
-		SetTileTag(35,50,1,1,18,0,0,0,0);
-		SetTileTag(35,51,6,1,18,0,0,0,0);
-		SetTileTag(35,52,1,1,20,0,0,0,0);
-		SetTileTag(35,53,6,1,20,0,0,0,0);
-		SetTileTag(35,54,2,1,22,0,0,0,0);
-		SetTileTag(35,55,0,1,8,0,0,0,0);
-		SetTileTag(35,56,0,1,18,0,0,0,0);
-		SetTileTag(35,57,1,1,24,0,0,0,0);
-		SetTileTag(35,58,1,1,24,0,0,1,0);
-		SetTileTag(35,59,7,1,22,0,0,0,0);
-		SetTileTag(35,60,7,1,20,0,0,0,0);
-		SetTileTag(35,61,1,1,20,0,0,0,0);
-		SetTileTag(35,62,0,1,8,0,0,0,0);
-		SetTileTag(35,63,0,1,30,0,0,0,0);
-		SetTileTag(36,0,0,1,30,0,0,0,0);
-		SetTileTag(36,1,0,1,30,0,0,0,0);
-		SetTileTag(36,2,1,1,24,0,0,0,0);
-		SetTileTag(36,3,1,1,22,0,0,0,0);
-		SetTileTag(36,4,6,1,22,0,0,0,0);
-		SetTileTag(36,5,7,1,22,0,0,0,0);
-		SetTileTag(36,6,7,1,20,0,0,0,0);
-		SetTileTag(36,7,1,1,20,0,0,0,0);
-		SetTileTag(36,8,1,1,20,0,0,1,0);
-		SetTileTag(36,9,1,1,20,0,0,0,0);
-		SetTileTag(36,10,1,1,20,0,0,0,0);
-		SetTileTag(36,11,0,1,24,0,0,0,0);
-		SetTileTag(36,12,0,1,24,0,0,0,0);
-		SetTileTag(36,13,0,1,24,0,0,0,0);
-		SetTileTag(36,14,0,1,24,0,0,0,0);
-		SetTileTag(36,15,0,1,24,0,0,0,0);
-		SetTileTag(36,16,0,1,24,0,0,0,0);
-		SetTileTag(36,17,0,1,20,0,0,0,0);
-		SetTileTag(36,18,0,1,20,0,0,0,0);
-		SetTileTag(36,19,0,1,20,0,0,0,0);
-		SetTileTag(36,20,0,1,20,0,0,0,0);
-		SetTileTag(36,21,0,1,4,0,0,0,0);
-		SetTileTag(36,22,4,1,24,0,0,0,0);
-		SetTileTag(36,23,1,1,24,0,0,0,0);
-		SetTileTag(36,24,1,1,4,0,1,0,0);
-		SetTileTag(36,25,1,1,4,0,1,0,0);
-		SetTileTag(36,26,1,1,24,0,0,0,0);
-		SetTileTag(36,27,1,1,24,0,0,0,0);
-		SetTileTag(36,28,1,1,24,0,0,0,0);
-		SetTileTag(36,29,7,1,22,0,0,0,0);
-		SetTileTag(36,30,7,1,20,0,0,0,0);
-		SetTileTag(36,31,1,1,20,0,0,0,0);
-		SetTileTag(36,32,1,1,20,0,0,0,0);
-		SetTileTag(36,33,6,1,20,0,0,0,0);
-		SetTileTag(36,34,6,1,22,0,0,0,0);
-		SetTileTag(36,35,1,1,24,0,0,0,0);
-		SetTileTag(36,36,1,1,24,0,0,0,0);
-		SetTileTag(36,37,1,1,24,0,0,0,0);
-		SetTileTag(36,38,1,1,24,0,0,0,0);
-		SetTileTag(36,39,0,1,24,0,0,0,0);
-		SetTileTag(36,40,5,1,6,0,1,0,0);
-		SetTileTag(36,41,1,1,6,0,1,0,0);
-		SetTileTag(36,42,1,1,6,0,1,0,0);
-		SetTileTag(36,43,3,1,6,0,1,0,0);
-		SetTileTag(36,44,5,1,6,0,1,0,0);
-		SetTileTag(36,45,1,1,6,0,1,0,0);
-		SetTileTag(36,46,0,1,6,0,0,0,0);
-		SetTileTag(36,47,4,1,18,0,0,0,0);
-		SetTileTag(36,48,6,1,18,0,0,0,0);
-		SetTileTag(36,49,1,1,20,0,0,0,0);
-		SetTileTag(36,50,5,1,18,0,0,0,0);
-		SetTileTag(36,51,3,1,18,0,0,0,0);
-		SetTileTag(36,52,0,1,8,0,0,0,0);
-		SetTileTag(36,53,1,1,22,0,0,0,0);
-		SetTileTag(36,54,1,1,22,0,0,0,0);
-		SetTileTag(36,55,0,1,8,0,0,0,0);
-		SetTileTag(36,56,0,1,18,0,0,0,0);
-		SetTileTag(36,57,1,1,24,0,0,0,0);
-		SetTileTag(36,58,0,1,8,0,0,0,0);
-		SetTileTag(36,59,0,1,24,0,0,0,0);
-		SetTileTag(36,60,0,1,8,0,0,0,0);
-		SetTileTag(36,61,0,1,8,0,0,0,0);
-		SetTileTag(36,62,0,1,8,0,0,0,0);
-		SetTileTag(36,63,0,1,30,0,0,0,0);
-		SetTileTag(37,0,0,1,30,0,0,0,0);
-		SetTileTag(37,1,0,1,30,0,0,0,0);
-		SetTileTag(37,2,5,1,24,0,0,0,0);
-		SetTileTag(37,3,9,1,20,0,0,0,0);
-		SetTileTag(37,4,1,1,24,0,0,0,0);
-		SetTileTag(37,5,3,1,24,0,0,0,0);
-		SetTileTag(37,6,0,1,20,0,0,0,0);
-		SetTileTag(37,7,0,1,24,0,0,0,0);
-		SetTileTag(37,8,4,1,20,0,0,0,0);
-		SetTileTag(37,9,1,1,20,0,0,0,0);
-		SetTileTag(37,10,1,1,20,0,0,0,0);
-		SetTileTag(37,11,1,1,20,0,0,0,0);
-		SetTileTag(37,12,1,1,20,0,0,1,0);
-		SetTileTag(37,13,1,1,20,0,0,0,0);
-		SetTileTag(37,14,1,1,20,0,0,0,0);
-		SetTileTag(37,15,1,1,20,0,0,0,0);
-		SetTileTag(37,16,1,1,20,0,0,0,0);
-		SetTileTag(37,17,1,1,20,0,0,0,0);
-		SetTileTag(37,18,1,1,20,0,0,0,0);
-		SetTileTag(37,19,6,1,20,0,0,0,0);
-		SetTileTag(37,20,6,1,22,0,0,0,0);
-		SetTileTag(37,21,1,1,24,0,0,0,0);
-		SetTileTag(37,22,1,1,24,0,0,0,0);
-		SetTileTag(37,23,1,1,24,0,0,0,0);
-		SetTileTag(37,24,8,1,4,0,1,0,0);
-		SetTileTag(37,25,8,1,4,0,1,0,0);
-		SetTileTag(37,26,1,1,24,0,0,0,0);
-		SetTileTag(37,27,1,1,24,0,0,0,0);
-		SetTileTag(37,28,1,1,24,0,0,0,0);
-		SetTileTag(37,29,1,1,24,0,0,0,0);
-		SetTileTag(37,30,1,1,24,0,0,0,0);
-		SetTileTag(37,31,1,1,24,0,0,0,0);
-		SetTileTag(37,32,1,1,24,0,0,0,0);
-		SetTileTag(37,33,1,1,24,0,0,0,0);
-		SetTileTag(37,34,1,1,24,0,0,0,0);
-		SetTileTag(37,35,1,1,24,0,0,0,0);
-		SetTileTag(37,36,1,1,24,0,0,0,0);
-		SetTileTag(37,37,1,1,24,0,0,0,0);
-		SetTileTag(37,38,1,1,24,0,0,0,0);
-		SetTileTag(37,39,0,1,6,0,0,0,0);
-		SetTileTag(37,40,4,1,6,0,1,0,0);
-		SetTileTag(37,41,1,1,6,0,1,0,0);
-		SetTileTag(37,42,3,1,6,0,1,0,0);
-		SetTileTag(37,43,0,1,6,0,0,0,0);
-		SetTileTag(37,44,0,1,6,0,0,0,0);
-		SetTileTag(37,45,3,1,6,0,1,0,0);
-		SetTileTag(37,46,0,1,6,0,0,0,0);
-		SetTileTag(37,47,5,1,18,0,0,0,0);
-		SetTileTag(37,48,6,1,18,0,0,0,0);
-		SetTileTag(37,49,3,1,20,0,0,0,0);
-		SetTileTag(37,50,0,1,6,0,0,0,0);
-		SetTileTag(37,51,0,1,8,0,0,0,0);
-		SetTileTag(37,52,0,1,22,0,0,0,0);
-		SetTileTag(37,53,1,1,22,0,0,0,0);
-		SetTileTag(37,54,1,1,22,0,0,0,0);
-		SetTileTag(37,55,0,1,8,0,0,0,0);
-		SetTileTag(37,56,0,1,18,0,0,0,0);
-		SetTileTag(37,57,1,1,24,0,0,0,0);
-		SetTileTag(37,58,7,1,22,0,0,0,0);
-		SetTileTag(37,59,7,1,20,0,0,0,0);
-		SetTileTag(37,60,7,1,18,0,0,0,0);
-		SetTileTag(37,61,2,1,18,0,0,0,0);
-		SetTileTag(37,62,0,1,8,0,0,0,0);
-		SetTileTag(37,63,0,1,30,0,0,0,0);
-		SetTileTag(38,0,0,1,30,0,0,0,0);
-		SetTileTag(38,1,0,1,30,0,0,0,0);
-		SetTileTag(38,2,0,1,30,0,0,0,0);
-		SetTileTag(38,3,1,1,20,0,0,0,0);
-		SetTileTag(38,4,1,1,20,0,0,0,0);
-		SetTileTag(38,5,1,1,20,0,0,1,0);
-		SetTileTag(38,6,1,1,20,0,0,0,0);
-		SetTileTag(38,7,0,1,30,0,0,0,0);
-		SetTileTag(38,8,1,1,20,0,0,0,0);
-		SetTileTag(38,9,1,1,20,0,0,0,0);
-		SetTileTag(38,10,1,1,20,0,0,0,0);
-		SetTileTag(38,11,0,1,30,0,0,0,0);
-		SetTileTag(38,12,0,1,30,0,0,0,0);
-		SetTileTag(38,13,0,1,30,0,0,0,0);
-		SetTileTag(38,14,0,1,30,0,0,0,0);
-		SetTileTag(38,15,0,1,30,0,0,0,0);
-		SetTileTag(38,16,0,1,30,0,0,0,0);
-		SetTileTag(38,17,0,1,30,0,0,0,0);
-		SetTileTag(38,18,0,1,30,0,0,0,0);
-		SetTileTag(38,19,0,1,20,0,0,0,0);
-		SetTileTag(38,20,0,1,20,0,0,0,0);
-		SetTileTag(38,21,0,1,20,0,0,0,0);
-		SetTileTag(38,22,5,1,24,0,0,0,0);
-		SetTileTag(38,23,1,1,24,0,0,0,0);
-		SetTileTag(38,24,1,1,6,0,1,0,0);
-		SetTileTag(38,25,1,1,6,0,1,0,0);
-		SetTileTag(38,26,1,1,24,0,0,0,0);
-		SetTileTag(38,27,1,1,24,0,0,0,0);
-		SetTileTag(38,28,3,1,24,0,0,0,0);
-		SetTileTag(38,29,0,1,6,0,0,0,0);
-		SetTileTag(38,30,0,1,6,0,0,0,0);
-		SetTileTag(38,31,0,1,30,0,0,0,0);
-		SetTileTag(38,32,0,1,30,0,0,0,0);
-		SetTileTag(38,33,0,1,30,0,0,0,0);
-		SetTileTag(38,34,0,1,30,0,0,0,0);
-		SetTileTag(38,35,0,1,30,0,0,0,0);
-		SetTileTag(38,36,5,1,24,0,0,0,0);
-		SetTileTag(38,37,1,1,24,0,0,0,0);
-		SetTileTag(38,38,1,1,24,0,0,0,0);
-		SetTileTag(38,39,1,1,6,0,1,0,0);
-		SetTileTag(38,40,1,1,6,0,1,0,0);
-		SetTileTag(38,41,1,1,6,0,1,0,0);
-		SetTileTag(38,42,1,1,24,0,0,0,0);
-		SetTileTag(38,43,1,1,24,0,0,0,0);
-		SetTileTag(38,44,0,1,6,0,0,0,0);
-		SetTileTag(38,45,0,1,6,0,0,0,0);
-		SetTileTag(38,46,0,1,6,0,0,0,0);
-		SetTileTag(38,47,0,1,6,0,0,0,0);
-		SetTileTag(38,48,0,1,6,0,0,0,0);
-		SetTileTag(38,49,0,1,6,0,0,0,0);
-		SetTileTag(38,50,0,1,6,0,0,0,0);
-		SetTileTag(38,51,0,1,8,0,0,0,0);
-		SetTileTag(38,52,0,1,8,0,0,0,0);
-		SetTileTag(38,53,5,1,22,0,0,0,0);
-		SetTileTag(38,54,3,1,22,0,0,0,0);
-		SetTileTag(38,55,0,1,8,0,0,0,0);
-		SetTileTag(38,56,1,1,24,0,0,0,0);
-		SetTileTag(38,57,1,1,24,0,0,0,0);
-		SetTileTag(38,58,7,1,22,0,0,0,0);
-		SetTileTag(38,59,7,1,20,0,0,0,0);
-		SetTileTag(38,60,7,1,18,0,0,0,0);
-		SetTileTag(38,61,7,1,16,0,0,0,0);
-		SetTileTag(38,62,0,1,8,0,0,0,0);
-		SetTileTag(38,63,0,1,30,0,0,0,0);
-		SetTileTag(39,0,0,1,30,0,0,0,0);
-		SetTileTag(39,1,0,1,30,0,0,0,0);
-		SetTileTag(39,2,0,1,30,0,0,0,0);
-		SetTileTag(39,3,0,1,24,0,0,0,0);
-		SetTileTag(39,4,0,1,24,0,0,0,0);
-		SetTileTag(39,5,0,1,30,0,0,0,0);
-		SetTileTag(39,6,9,1,18,0,0,0,0);
-		SetTileTag(39,7,0,1,30,0,0,0,0);
-		SetTileTag(39,8,0,1,30,0,0,0,0);
-		SetTileTag(39,9,0,1,30,0,0,0,0);
-		SetTileTag(39,10,0,1,24,0,0,0,0);
-		SetTileTag(39,11,0,1,30,0,0,0,0);
-		SetTileTag(39,12,0,1,30,0,0,0,0);
-		SetTileTag(39,13,0,1,30,0,0,0,0);
-		SetTileTag(39,14,0,1,30,0,0,0,0);
-		SetTileTag(39,15,0,1,30,0,0,0,0);
-		SetTileTag(39,16,0,1,30,0,0,0,0);
-		SetTileTag(39,17,0,1,30,0,0,0,0);
-		SetTileTag(39,18,0,1,30,0,0,0,0);
-		SetTileTag(39,19,0,1,30,0,0,0,0);
-		SetTileTag(39,20,0,1,30,0,0,0,0);
-		SetTileTag(39,21,0,1,30,0,0,0,0);
-		SetTileTag(39,22,0,1,30,0,0,0,0);
-		SetTileTag(39,23,0,1,30,0,0,0,0);
-		SetTileTag(39,24,5,1,6,0,1,0,0);
-		SetTileTag(39,25,1,1,6,0,1,0,0);
-		SetTileTag(39,26,1,1,6,0,1,0,0);
-		SetTileTag(39,27,1,1,20,0,0,0,0);
-		SetTileTag(39,28,2,1,20,0,0,0,0);
-		SetTileTag(39,29,0,1,6,0,0,0,0);
-		SetTileTag(39,30,0,1,6,0,0,0,0);
-		SetTileTag(39,31,0,1,30,0,0,0,0);
-		SetTileTag(39,32,0,1,30,0,0,0,0);
-		SetTileTag(39,33,0,1,30,0,0,0,0);
-		SetTileTag(39,34,0,1,30,0,0,0,0);
-		SetTileTag(39,35,0,1,30,0,0,0,0);
-		SetTileTag(39,36,0,1,30,0,0,0,0);
-		SetTileTag(39,37,1,1,24,0,0,0,0);
-		SetTileTag(39,38,1,1,24,0,0,0,0);
-		SetTileTag(39,39,1,1,6,0,1,0,0);
-		SetTileTag(39,40,1,1,6,0,1,0,0);
-		SetTileTag(39,41,1,1,6,0,1,0,0);
-		SetTileTag(39,42,1,1,24,0,0,0,0);
-		SetTileTag(39,43,1,1,24,0,0,0,0);
-		SetTileTag(39,44,0,1,6,0,0,0,0);
-		SetTileTag(39,45,0,1,6,0,0,0,0);
-		SetTileTag(39,46,0,1,30,0,0,0,0);
-		SetTileTag(39,47,0,1,8,0,0,0,0);
-		SetTileTag(39,48,0,1,8,0,0,0,0);
-		SetTileTag(39,49,0,1,8,0,0,0,0);
-		SetTileTag(39,50,0,1,30,0,0,0,0);
-		SetTileTag(39,51,0,1,8,0,0,0,0);
-		SetTileTag(39,52,0,1,8,0,0,0,0);
-		SetTileTag(39,53,0,1,30,0,0,0,0);
-		SetTileTag(39,54,0,1,30,0,0,0,0);
-		SetTileTag(39,55,0,1,8,0,0,0,0);
-		SetTileTag(39,56,1,1,24,0,0,0,0);
-		SetTileTag(39,57,1,1,24,0,0,0,0);
-		SetTileTag(39,58,7,1,22,0,0,0,0);
-		SetTileTag(39,59,7,1,20,0,0,0,0);
-		SetTileTag(39,60,7,1,18,0,0,0,0);
-		SetTileTag(39,61,3,1,18,0,0,0,0);
-		SetTileTag(39,62,0,1,8,0,0,0,0);
-		SetTileTag(39,63,0,1,30,0,0,0,0);
-		SetTileTag(40,0,0,1,30,0,0,0,0);
-		SetTileTag(40,1,0,1,30,0,0,0,0);
-		SetTileTag(40,2,0,1,26,0,0,0,0);
-		SetTileTag(40,3,0,1,26,0,0,0,0);
-		SetTileTag(40,4,0,1,26,0,0,0,0);
-		SetTileTag(40,5,0,1,26,0,0,0,0);
-		SetTileTag(40,6,9,1,16,0,0,0,0);
-		SetTileTag(40,7,0,1,0,0,0,0,0);
-		SetTileTag(40,8,0,1,0,0,0,0,0);
-		SetTileTag(40,9,0,1,0,0,0,0,0);
-		SetTileTag(40,10,0,1,0,0,0,0,0);
-		SetTileTag(40,11,0,1,0,0,0,0,0);
-		SetTileTag(40,12,0,1,0,0,0,0,0);
-		SetTileTag(40,13,0,1,0,0,0,0,0);
-		SetTileTag(40,14,0,1,0,0,0,0,0);
-		SetTileTag(40,15,0,1,0,0,0,0,0);
-		SetTileTag(40,16,0,1,0,0,0,0,0);
-		SetTileTag(40,17,0,1,0,0,0,0,0);
-		SetTileTag(40,18,0,1,0,0,0,0,0);
-		SetTileTag(40,19,0,1,0,0,0,0,0);
-		SetTileTag(40,20,0,1,0,0,0,0,0);
-		SetTileTag(40,21,0,1,0,0,0,0,0);
-		SetTileTag(40,22,0,1,0,0,0,0,0);
-		SetTileTag(40,23,0,1,30,0,0,0,0);
-		SetTileTag(40,24,0,1,6,0,0,0,0);
-		SetTileTag(40,25,5,1,6,0,1,0,0);
-		SetTileTag(40,26,1,1,6,0,1,0,0);
-		SetTileTag(40,27,1,1,6,0,1,0,0);
-		SetTileTag(40,28,1,1,6,0,1,0,0);
-		SetTileTag(40,29,1,1,6,0,1,0,0);
-		SetTileTag(40,30,2,1,6,0,1,0,0);
-		SetTileTag(40,31,0,1,6,0,0,0,0);
-		SetTileTag(40,32,0,1,6,0,0,0,0);
-		SetTileTag(40,33,0,1,6,0,0,0,0);
-		SetTileTag(40,34,0,1,30,0,0,0,0);
-		SetTileTag(40,35,0,1,30,0,0,0,0);
-		SetTileTag(40,36,0,1,30,0,0,0,0);
-		SetTileTag(40,37,1,1,24,0,0,0,0);
-		SetTileTag(40,38,1,1,24,0,0,0,0);
-		SetTileTag(40,39,1,1,6,0,1,0,0);
-		SetTileTag(40,40,3,1,6,0,1,0,0);
-		SetTileTag(40,41,0,1,6,0,0,0,0);
-		SetTileTag(40,42,1,1,24,0,0,0,0);
-		SetTileTag(40,43,1,1,24,0,0,0,0);
-		SetTileTag(40,44,1,1,24,0,0,0,0);
-		SetTileTag(40,45,1,1,24,0,0,0,0);
-		SetTileTag(40,46,1,1,24,0,0,0,0);
-		SetTileTag(40,47,1,1,24,0,0,0,0);
-		SetTileTag(40,48,1,1,24,0,0,0,0);
-		SetTileTag(40,49,1,1,24,0,0,0,0);
-		SetTileTag(40,50,1,1,24,0,0,0,0);
-		SetTileTag(40,51,1,1,24,0,0,0,0);
-		SetTileTag(40,52,1,1,24,0,0,0,0);
-		SetTileTag(40,53,1,1,24,0,0,0,0);
-		SetTileTag(40,54,1,1,24,0,0,0,0);
-		SetTileTag(40,55,1,1,24,0,0,0,0);
-		SetTileTag(40,56,1,1,24,0,0,0,0);
-		SetTileTag(40,57,1,1,24,0,0,0,0);
-		SetTileTag(40,58,0,1,8,0,0,0,0);
-		SetTileTag(40,59,0,1,8,0,0,0,0);
-		SetTileTag(40,60,0,1,8,0,0,0,0);
-		SetTileTag(40,61,0,1,8,0,0,0,0);
-		SetTileTag(40,62,0,1,8,0,0,0,0);
-		SetTileTag(40,63,0,1,30,0,0,0,0);
-		SetTileTag(41,0,0,1,30,0,0,0,0);
-		SetTileTag(41,1,0,1,30,0,0,0,0);
-		SetTileTag(41,2,0,1,30,0,0,0,0);
-		SetTileTag(41,3,1,1,16,0,0,0,0);
-		SetTileTag(41,4,1,1,16,0,0,0,0);
-		SetTileTag(41,5,1,1,16,0,0,0,0);
-		SetTileTag(41,6,1,1,16,0,0,0,0);
-		SetTileTag(41,7,0,1,0,0,0,0,0);
-		SetTileTag(41,8,0,1,0,0,0,0,0);
-		SetTileTag(41,9,0,1,24,0,0,0,0);
-		SetTileTag(41,10,0,1,30,0,0,0,0);
-		SetTileTag(41,11,0,1,30,0,0,0,0);
-		SetTileTag(41,12,0,1,24,0,0,0,0);
-		SetTileTag(41,13,0,1,30,0,0,0,0);
-		SetTileTag(41,14,0,1,24,0,0,0,0);
-		SetTileTag(41,15,5,1,24,0,0,0,0);
-		SetTileTag(41,16,1,1,24,0,0,0,0);
-		SetTileTag(41,17,1,1,24,0,0,0,0);
-		SetTileTag(41,18,3,1,24,0,0,0,0);
-		SetTileTag(41,19,0,1,30,0,0,0,0);
-		SetTileTag(41,20,0,1,30,0,0,0,0);
-		SetTileTag(41,21,0,1,30,0,0,0,0);
-		SetTileTag(41,22,0,1,30,0,0,0,0);
-		SetTileTag(41,23,0,1,30,0,0,0,0);
-		SetTileTag(41,24,0,1,30,0,0,0,0);
-		SetTileTag(41,25,0,1,6,0,0,0,0);
-		SetTileTag(41,26,5,1,6,0,1,0,0);
-		SetTileTag(41,27,1,1,6,0,1,0,0);
-		SetTileTag(41,28,1,1,6,0,1,0,0);
-		SetTileTag(41,29,1,1,6,0,1,0,0);
-		SetTileTag(41,30,1,1,6,0,1,0,0);
-		SetTileTag(41,31,0,1,6,0,0,0,0);
-		SetTileTag(41,32,0,1,6,0,0,0,0);
-		SetTileTag(41,33,0,1,6,0,0,0,0);
-		SetTileTag(41,34,0,1,6,0,0,0,0);
-		SetTileTag(41,35,0,1,6,0,0,0,0);
-		SetTileTag(41,36,0,1,6,0,0,0,0);
-		SetTileTag(41,37,1,1,24,0,0,0,0);
-		SetTileTag(41,38,1,1,24,0,0,0,0);
-		SetTileTag(41,39,1,1,6,0,1,0,0);
-		SetTileTag(41,40,0,1,6,0,0,0,0);
-		SetTileTag(41,41,0,1,6,0,0,0,0);
-		SetTileTag(41,42,1,1,24,0,0,0,0);
-		SetTileTag(41,43,1,1,24,0,0,0,0);
-		SetTileTag(41,44,1,1,24,0,0,0,0);
-		SetTileTag(41,45,1,1,24,0,0,0,0);
-		SetTileTag(41,46,1,1,24,0,0,0,0);
-		SetTileTag(41,47,1,1,24,0,0,0,0);
-		SetTileTag(41,48,1,1,24,0,0,0,0);
-		SetTileTag(41,49,1,1,24,0,0,0,0);
-		SetTileTag(41,50,1,1,24,0,0,0,0);
-		SetTileTag(41,51,1,1,24,0,0,0,0);
-		SetTileTag(41,52,1,1,24,0,0,0,0);
-		SetTileTag(41,53,1,1,24,0,0,0,0);
-		SetTileTag(41,54,1,1,24,0,0,0,0);
-		SetTileTag(41,55,1,1,24,0,0,0,0);
-		SetTileTag(41,56,1,1,24,0,0,0,0);
-		SetTileTag(41,57,1,1,24,0,0,0,0);
-		SetTileTag(41,58,0,1,18,0,0,0,0);
-		SetTileTag(41,59,0,1,18,0,0,0,0);
-		SetTileTag(41,60,0,1,18,0,0,0,0);
-		SetTileTag(41,61,0,1,18,0,0,0,0);
-		SetTileTag(41,62,0,1,8,0,0,0,0);
-		SetTileTag(41,63,0,1,30,0,0,0,0);
-		SetTileTag(42,0,0,1,30,0,0,0,0);
-		SetTileTag(42,1,0,1,30,0,0,0,0);
-		SetTileTag(42,2,0,1,30,0,0,0,0);
-		SetTileTag(42,3,1,1,16,0,0,0,0);
-		SetTileTag(42,4,0,1,24,0,0,0,0);
-		SetTileTag(42,5,0,1,30,0,0,0,0);
-		SetTileTag(42,6,0,1,30,0,0,0,0);
-		SetTileTag(42,7,0,1,0,0,0,0,0);
-		SetTileTag(42,8,0,1,0,0,0,0,0);
-		SetTileTag(42,9,0,1,30,0,0,0,0);
-		SetTileTag(42,10,0,1,30,0,0,0,0);
-		SetTileTag(42,11,0,1,30,0,0,0,0);
-		SetTileTag(42,12,0,1,24,0,0,0,0);
-		SetTileTag(42,13,0,1,30,0,0,0,0);
-		SetTileTag(42,14,0,1,30,0,0,0,0);
-		SetTileTag(42,15,0,1,24,0,0,0,0);
-		SetTileTag(42,16,1,1,24,0,0,0,0);
-		SetTileTag(42,17,1,1,24,0,0,0,0);
-		SetTileTag(42,18,0,1,30,0,0,0,0);
-		SetTileTag(42,19,0,1,30,0,0,0,0);
-		SetTileTag(42,20,0,1,30,0,0,0,0);
-		SetTileTag(42,21,0,1,30,0,0,0,0);
-		SetTileTag(42,22,0,1,30,0,0,0,0);
-		SetTileTag(42,23,0,1,30,0,0,0,0);
-		SetTileTag(42,24,0,1,30,0,0,0,0);
-		SetTileTag(42,25,0,1,30,0,0,0,0);
-		SetTileTag(42,26,0,1,6,0,0,0,0);
-		SetTileTag(42,27,5,1,6,0,1,0,0);
-		SetTileTag(42,28,1,1,6,0,1,0,0);
-		SetTileTag(42,29,1,1,6,0,1,0,0);
-		SetTileTag(42,30,1,1,6,0,1,0,0);
-		SetTileTag(42,31,2,1,6,0,1,0,0);
-		SetTileTag(42,32,0,1,6,0,0,0,0);
-		SetTileTag(42,33,0,1,6,0,0,0,0);
-		SetTileTag(42,34,0,1,6,0,0,0,0);
-		SetTileTag(42,35,0,1,6,0,0,0,0);
-		SetTileTag(42,36,4,1,6,0,1,0,0);
-		SetTileTag(42,37,1,1,6,0,1,0,0);
-		SetTileTag(42,38,1,1,6,0,1,0,0);
-		SetTileTag(42,39,1,1,6,0,1,0,0);
-		SetTileTag(42,40,2,1,6,0,1,0,0);
-		SetTileTag(42,41,0,1,6,0,0,0,0);
-		SetTileTag(42,42,0,1,30,0,0,0,0);
-		SetTileTag(42,43,0,1,30,0,0,0,0);
-		SetTileTag(42,44,0,1,30,0,0,0,0);
-		SetTileTag(42,45,0,1,20,0,0,0,0);
-		SetTileTag(42,46,0,1,30,0,0,0,0);
-		SetTileTag(42,47,0,1,30,0,0,0,0);
-		SetTileTag(42,48,0,1,30,0,0,0,0);
-		SetTileTag(42,49,0,1,8,0,0,0,0);
-		SetTileTag(42,50,0,1,8,0,0,0,0);
-		SetTileTag(42,51,1,1,24,0,0,1,0);
-		SetTileTag(42,52,0,1,18,0,0,0,0);
-		SetTileTag(42,53,0,1,24,0,0,0,0);
-		SetTileTag(42,54,0,1,18,0,0,0,0);
-		SetTileTag(42,55,0,1,18,0,0,0,0);
-		SetTileTag(42,56,0,1,18,0,0,0,0);
-		SetTileTag(42,57,0,1,18,0,0,0,0);
-		SetTileTag(42,58,0,1,18,0,0,0,0);
-		SetTileTag(42,59,0,1,24,0,0,0,0);
-		SetTileTag(42,60,0,1,18,0,0,0,0);
-		SetTileTag(42,61,0,1,18,0,0,0,0);
-		SetTileTag(42,62,0,1,8,0,0,0,0);
-		SetTileTag(42,63,0,1,30,0,0,0,0);
-		SetTileTag(43,0,0,1,30,0,0,0,0);
-		SetTileTag(43,1,0,1,30,0,0,0,0);
-		SetTileTag(43,2,0,1,30,0,0,0,0);
-		SetTileTag(43,3,8,1,16,0,0,0,0);
-		SetTileTag(43,4,0,1,24,0,0,0,0);
-		SetTileTag(43,5,0,1,30,0,0,0,0);
-		SetTileTag(43,6,0,1,30,0,0,0,0);
-		SetTileTag(43,7,0,1,0,0,0,0,0);
-		SetTileTag(43,8,0,1,0,0,0,0,0);
-		SetTileTag(43,9,2,1,24,0,0,0,0);
-		SetTileTag(43,10,0,1,30,0,0,0,0);
-		SetTileTag(43,11,0,1,30,0,0,0,0);
-		SetTileTag(43,12,0,1,24,0,0,0,0);
-		SetTileTag(43,13,0,1,30,0,0,0,0);
-		SetTileTag(43,14,0,1,24,0,0,0,0);
-		SetTileTag(43,15,0,1,24,0,0,0,0);
-		SetTileTag(43,16,1,1,24,0,0,0,0);
-		SetTileTag(43,17,1,1,24,0,0,0,0);
-		SetTileTag(43,18,0,1,24,0,0,0,0);
-		SetTileTag(43,19,4,1,24,0,0,0,0);
-		SetTileTag(43,20,1,1,24,0,0,0,0);
-		SetTileTag(43,21,1,1,24,0,0,0,0);
-		SetTileTag(43,22,1,1,24,0,0,0,0);
-		SetTileTag(43,23,2,1,24,0,0,0,0);
-		SetTileTag(43,24,0,1,30,0,0,0,0);
-		SetTileTag(43,25,0,1,30,0,0,0,0);
-		SetTileTag(43,26,0,1,6,0,0,0,0);
-		SetTileTag(43,27,0,1,6,0,0,0,0);
-		SetTileTag(43,28,0,1,6,0,0,0,0);
-		SetTileTag(43,29,5,1,6,0,1,0,0);
-		SetTileTag(43,30,1,1,6,0,1,0,0);
-		SetTileTag(43,31,1,1,6,0,1,0,0);
-		SetTileTag(43,32,1,1,6,0,1,0,0);
-		SetTileTag(43,33,1,1,6,0,1,0,0);
-		SetTileTag(43,34,1,1,6,0,1,0,0);
-		SetTileTag(43,35,1,1,6,0,1,0,0);
-		SetTileTag(43,36,1,1,6,0,1,0,0);
-		SetTileTag(43,37,1,1,6,0,1,0,0);
-		SetTileTag(43,38,1,1,6,0,1,0,0);
-		SetTileTag(43,39,1,1,6,0,1,0,0);
-		SetTileTag(43,40,1,1,6,0,1,0,0);
-		SetTileTag(43,41,0,1,6,0,0,0,0);
-		SetTileTag(43,42,1,1,14,0,0,0,0);
-		SetTileTag(43,43,1,1,0,0,0,0,0);
-		SetTileTag(43,44,1,1,4,0,0,0,0);
-		SetTileTag(43,45,1,1,0,0,0,0,0);
-		SetTileTag(43,46,1,1,0,0,0,0,0);
-		SetTileTag(43,47,1,1,0,0,0,0,0);
-		SetTileTag(43,48,1,1,0,0,0,0,0);
-		SetTileTag(43,49,1,1,2,0,0,0,0);
-		SetTileTag(43,50,0,1,30,0,0,0,0);
-		SetTileTag(43,51,1,1,24,0,0,0,0);
-		SetTileTag(43,52,1,1,24,0,0,0,0);
-		SetTileTag(43,53,2,1,24,0,0,0,0);
-		SetTileTag(43,54,0,1,18,0,0,0,0);
-		SetTileTag(43,55,4,1,24,0,0,0,0);
-		SetTileTag(43,56,1,1,24,0,0,0,0);
-		SetTileTag(43,57,1,1,24,0,0,0,0);
-		SetTileTag(43,58,1,1,24,0,0,0,0);
-		SetTileTag(43,59,1,1,24,0,0,0,0);
-		SetTileTag(43,60,2,1,24,0,0,0,0);
-		SetTileTag(43,61,0,1,18,0,0,0,0);
-		SetTileTag(43,62,0,1,8,0,0,0,0);
-		SetTileTag(43,63,0,1,30,0,0,0,0);
-		SetTileTag(44,0,0,1,30,0,0,0,0);
-		SetTileTag(44,1,0,1,30,0,0,0,0);
-		SetTileTag(44,2,0,1,30,0,0,0,0);
-		SetTileTag(44,3,1,1,18,0,0,0,0);
-		SetTileTag(44,4,4,1,2,0,1,0,0);
-		SetTileTag(44,5,1,1,2,0,1,0,0);
-		SetTileTag(44,6,2,1,2,0,1,0,0);
-		SetTileTag(44,7,0,1,0,0,0,0,0);
-		SetTileTag(44,8,0,1,0,0,0,0,0);
-		SetTileTag(44,9,1,1,24,0,0,0,0);
-		SetTileTag(44,10,2,1,24,0,0,0,0);
-		SetTileTag(44,11,0,1,30,0,0,0,0);
-		SetTileTag(44,12,0,1,24,0,0,0,0);
-		SetTileTag(44,13,0,1,30,0,0,0,0);
-		SetTileTag(44,14,0,1,30,0,0,0,0);
-		SetTileTag(44,15,0,1,24,0,0,0,0);
-		SetTileTag(44,16,1,1,24,0,0,0,0);
-		SetTileTag(44,17,1,1,24,0,0,0,0);
-		SetTileTag(44,18,4,1,24,0,0,0,0);
-		SetTileTag(44,19,1,1,24,0,0,0,0);
-		SetTileTag(44,20,1,1,24,0,0,0,0);
-		SetTileTag(44,21,1,1,24,0,0,0,0);
-		SetTileTag(44,22,1,1,24,0,0,0,0);
-		SetTileTag(44,23,1,1,24,0,0,0,0);
-		SetTileTag(44,24,2,1,24,0,0,0,0);
-		SetTileTag(44,25,0,1,30,0,0,0,0);
-		SetTileTag(44,26,0,1,6,0,0,0,0);
-		SetTileTag(44,27,0,1,6,0,0,0,0);
-		SetTileTag(44,28,0,1,6,0,0,0,0);
-		SetTileTag(44,29,0,1,6,0,0,0,0);
-		SetTileTag(44,30,1,1,6,0,1,0,0);
-		SetTileTag(44,31,1,1,6,0,1,0,0);
-		SetTileTag(44,32,1,1,6,0,1,0,0);
-		SetTileTag(44,33,1,1,6,0,1,0,0);
-		SetTileTag(44,34,1,1,6,0,1,0,0);
-		SetTileTag(44,35,1,1,6,0,1,0,0);
-		SetTileTag(44,36,1,1,6,0,1,0,0);
-		SetTileTag(44,37,1,1,6,0,1,0,0);
-		SetTileTag(44,38,1,1,6,0,1,0,0);
-		SetTileTag(44,39,1,1,6,0,1,0,0);
-		SetTileTag(44,40,1,1,6,0,1,0,0);
-		SetTileTag(44,41,0,1,6,0,0,0,0);
-		SetTileTag(44,42,1,1,0,0,0,0,0);
-		SetTileTag(44,43,1,1,0,0,0,0,0);
-		SetTileTag(44,44,1,1,0,0,0,0,0);
-		SetTileTag(44,45,1,1,0,0,0,0,0);
-		SetTileTag(44,46,1,1,0,0,0,0,0);
-		SetTileTag(44,47,1,1,0,0,0,0,0);
-		SetTileTag(44,48,0,1,8,0,0,0,0);
-		SetTileTag(44,49,1,1,4,0,0,0,0);
-		SetTileTag(44,50,0,1,30,0,0,0,0);
-		SetTileTag(44,51,1,1,24,0,0,0,0);
-		SetTileTag(44,52,1,1,24,0,0,0,0);
-		SetTileTag(44,53,1,1,24,0,0,0,0);
-		SetTileTag(44,54,0,1,18,0,0,0,0);
-		SetTileTag(44,55,1,1,24,0,0,0,0);
-		SetTileTag(44,56,1,1,24,0,0,0,0);
-		SetTileTag(44,57,1,1,24,0,0,0,0);
-		SetTileTag(44,58,1,1,24,0,0,0,0);
-		SetTileTag(44,59,1,1,24,0,0,0,0);
-		SetTileTag(44,60,1,1,24,0,0,0,0);
-		SetTileTag(44,61,0,1,18,0,0,0,0);
-		SetTileTag(44,62,0,1,8,0,0,0,0);
-		SetTileTag(44,63,0,1,30,0,0,0,0);
-		SetTileTag(45,0,0,1,30,0,0,0,0);
-		SetTileTag(45,1,0,1,30,0,0,0,0);
-		SetTileTag(45,2,0,1,30,0,0,0,0);
-		SetTileTag(45,3,1,1,18,0,0,0,0);
-		SetTileTag(45,4,1,1,2,0,1,0,0);
-		SetTileTag(45,5,1,1,2,0,1,0,0);
-		SetTileTag(45,6,1,1,2,0,1,0,0);
-		SetTileTag(45,7,2,1,2,0,1,0,0);
-		SetTileTag(45,8,0,1,0,0,0,0,0);
-		SetTileTag(45,9,1,1,24,0,0,0,0);
-		SetTileTag(45,10,1,1,24,0,0,0,0);
-		SetTileTag(45,11,1,1,24,0,0,0,0);
-		SetTileTag(45,12,1,1,24,0,0,0,0);
-		SetTileTag(45,13,1,1,24,0,0,0,0);
-		SetTileTag(45,14,1,1,24,0,0,0,0);
-		SetTileTag(45,15,1,1,24,0,0,0,0);
-		SetTileTag(45,16,1,1,24,0,0,0,0);
-		SetTileTag(45,17,1,1,24,0,0,0,0);
-		SetTileTag(45,18,1,1,24,0,0,0,0);
-		SetTileTag(45,19,3,1,24,0,0,0,0);
-		SetTileTag(45,20,0,1,30,0,0,0,0);
-		SetTileTag(45,21,0,1,30,0,0,0,0);
-		SetTileTag(45,22,5,1,24,0,0,0,0);
-		SetTileTag(45,23,1,1,24,0,0,0,0);
-		SetTileTag(45,24,1,1,24,0,0,0,0);
-		SetTileTag(45,25,0,1,24,0,0,0,0);
-		SetTileTag(45,26,0,1,24,0,0,0,0);
-		SetTileTag(45,27,0,1,6,0,0,0,0);
-		SetTileTag(45,28,0,1,6,0,0,0,0);
-		SetTileTag(45,29,4,1,6,0,1,0,0);
-		SetTileTag(45,30,1,1,6,0,1,0,0);
-		SetTileTag(45,31,1,1,6,0,1,0,0);
-		SetTileTag(45,32,3,1,6,0,1,0,0);
-		SetTileTag(45,33,0,1,6,0,0,0,0);
-		SetTileTag(45,34,0,1,6,0,0,0,0);
-		SetTileTag(45,35,0,1,6,0,0,0,0);
-		SetTileTag(45,36,5,1,6,0,1,0,0);
-		SetTileTag(45,37,1,1,6,0,1,0,0);
-		SetTileTag(45,38,1,1,6,0,1,0,0);
-		SetTileTag(45,39,3,1,6,0,1,0,0);
-		SetTileTag(45,40,0,1,6,0,0,0,0);
-		SetTileTag(45,41,0,1,6,0,0,0,0);
-		SetTileTag(45,42,1,1,16,0,0,0,0);
-		SetTileTag(45,43,1,1,0,0,0,0,0);
-		SetTileTag(45,44,1,1,6,0,0,0,0);
-		SetTileTag(45,45,1,1,0,0,0,0,0);
-		SetTileTag(45,46,1,1,0,0,0,0,0);
-		SetTileTag(45,47,1,1,0,0,0,0,0);
-		SetTileTag(45,48,0,1,8,0,0,0,0);
-		SetTileTag(45,49,1,1,6,0,0,0,0);
-		SetTileTag(45,50,0,1,30,0,0,0,0);
-		SetTileTag(45,51,1,1,24,0,0,0,0);
-		SetTileTag(45,52,1,1,24,0,0,0,0);
-		SetTileTag(45,53,3,1,24,0,0,0,0);
-		SetTileTag(45,54,0,1,24,0,0,0,0);
-		SetTileTag(45,55,1,1,24,0,0,0,0);
-		SetTileTag(45,56,1,1,24,0,0,0,0);
-		SetTileTag(45,57,1,1,24,0,0,0,0);
-		SetTileTag(45,58,0,1,18,0,0,0,0);
-		SetTileTag(45,59,1,1,24,0,0,0,0);
-		SetTileTag(45,60,1,1,24,0,0,0,0);
-		SetTileTag(45,61,0,1,18,0,0,0,0);
-		SetTileTag(45,62,0,1,8,0,0,0,0);
-		SetTileTag(45,63,0,1,30,0,0,0,0);
-		SetTileTag(46,0,0,1,30,0,0,0,0);
-		SetTileTag(46,1,0,1,30,0,0,0,0);
-		SetTileTag(46,2,0,1,30,0,0,0,0);
-		SetTileTag(46,3,1,1,18,0,0,0,0);
-		SetTileTag(46,4,1,1,2,0,1,0,0);
-		SetTileTag(46,5,1,1,18,0,0,0,0);
-		SetTileTag(46,6,1,1,18,0,0,0,0);
-		SetTileTag(46,7,1,1,2,0,1,0,0);
-		SetTileTag(46,8,1,1,18,0,0,1,0);
-		SetTileTag(46,9,1,1,18,0,0,0,0);
-		SetTileTag(46,10,6,1,18,0,0,0,0);
-		SetTileTag(46,11,6,1,20,0,0,0,0);
-		SetTileTag(46,12,6,1,22,0,0,0,0);
-		SetTileTag(46,13,1,1,24,0,0,0,0);
-		SetTileTag(46,14,1,1,24,0,0,0,0);
-		SetTileTag(46,15,1,1,24,0,0,0,0);
-		SetTileTag(46,16,1,1,24,0,0,0,0);
-		SetTileTag(46,17,1,1,24,0,0,0,0);
-		SetTileTag(46,18,1,1,24,0,0,0,0);
-		SetTileTag(46,19,0,1,30,0,0,0,0);
-		SetTileTag(46,20,0,1,30,0,0,0,0);
-		SetTileTag(46,21,0,1,30,0,0,0,0);
-		SetTileTag(46,22,0,1,30,0,0,0,0);
-		SetTileTag(46,23,1,1,24,0,0,0,0);
-		SetTileTag(46,24,1,1,24,0,0,0,0);
-		SetTileTag(46,25,0,1,24,0,0,0,0);
-		SetTileTag(46,26,0,1,30,0,0,0,0);
-		SetTileTag(46,27,0,1,30,0,0,0,0);
-		SetTileTag(46,28,0,1,6,0,0,0,0);
-		SetTileTag(46,29,1,1,6,0,1,0,0);
-		SetTileTag(46,30,3,1,6,0,1,0,0);
-		SetTileTag(46,31,0,1,8,0,0,0,0);
-		SetTileTag(46,32,0,1,8,0,0,0,0);
-		SetTileTag(46,33,0,1,6,0,0,0,0);
-		SetTileTag(46,34,0,1,6,0,0,0,0);
-		SetTileTag(46,35,0,1,6,0,0,0,0);
-		SetTileTag(46,36,0,1,6,0,0,0,0);
-		SetTileTag(46,37,1,1,24,0,0,0,0);
-		SetTileTag(46,38,1,1,24,0,0,0,0);
-		SetTileTag(46,39,0,1,6,0,0,0,0);
-		SetTileTag(46,40,0,1,24,0,0,0,0);
-		SetTileTag(46,41,0,1,24,0,0,0,0);
-		SetTileTag(46,42,1,1,0,0,0,0,0);
-		SetTileTag(46,43,1,1,0,0,0,0,0);
-		SetTileTag(46,44,1,1,0,0,0,0,0);
-		SetTileTag(46,45,1,1,0,0,0,0,0);
-		SetTileTag(46,46,1,1,0,0,0,0,0);
-		SetTileTag(46,47,1,1,0,0,0,0,0);
-		SetTileTag(46,48,0,1,8,0,0,0,0);
-		SetTileTag(46,49,1,1,8,0,0,0,0);
-		SetTileTag(46,50,0,1,8,0,0,0,0);
-		SetTileTag(46,51,1,1,24,0,0,0,0);
-		SetTileTag(46,52,0,1,18,0,0,0,0);
-		SetTileTag(46,53,0,1,18,0,0,0,0);
-		SetTileTag(46,54,0,1,24,0,0,0,0);
-		SetTileTag(46,55,1,1,24,0,0,0,0);
-		SetTileTag(46,56,1,1,24,0,0,0,0);
-		SetTileTag(46,57,1,1,24,0,0,0,0);
-		SetTileTag(46,58,0,1,18,0,0,0,0);
-		SetTileTag(46,59,1,1,24,0,0,0,0);
-		SetTileTag(46,60,1,1,24,0,0,0,0);
-		SetTileTag(46,61,0,1,24,0,0,0,0);
-		SetTileTag(46,62,0,1,8,0,0,0,0);
-		SetTileTag(46,63,0,1,8,0,0,0,0);
-		SetTileTag(47,0,0,1,30,0,0,0,0);
-		SetTileTag(47,1,0,1,30,0,0,0,0);
-		SetTileTag(47,2,4,1,2,0,1,0,0);
-		SetTileTag(47,3,1,1,2,0,1,0,0);
-		SetTileTag(47,4,1,1,2,0,1,0,0);
-		SetTileTag(47,5,1,1,2,0,1,0,0);
-		SetTileTag(47,6,1,1,2,0,1,0,0);
-		SetTileTag(47,7,1,1,2,0,1,0,0);
-		SetTileTag(47,8,0,1,0,0,0,0,0);
-		SetTileTag(47,9,1,1,24,0,0,0,0);
-		SetTileTag(47,10,1,1,24,0,0,0,0);
-		SetTileTag(47,11,1,1,24,0,0,0,0);
-		SetTileTag(47,12,1,1,24,0,0,0,0);
-		SetTileTag(47,13,1,1,24,0,0,0,0);
-		SetTileTag(47,14,1,1,24,0,0,0,0);
-		SetTileTag(47,15,1,1,24,0,0,0,0);
-		SetTileTag(47,16,1,1,24,0,0,0,0);
-		SetTileTag(47,17,1,1,24,0,0,0,0);
-		SetTileTag(47,18,1,1,24,0,0,0,0);
-		SetTileTag(47,19,2,1,24,0,0,0,0);
-		SetTileTag(47,20,0,1,30,0,0,0,0);
-		SetTileTag(47,21,0,1,30,0,0,0,0);
-		SetTileTag(47,22,4,1,24,0,0,0,0);
-		SetTileTag(47,23,1,1,24,0,0,0,0);
-		SetTileTag(47,24,1,1,24,0,0,0,0);
-		SetTileTag(47,25,0,1,24,0,0,0,0);
-		SetTileTag(47,26,0,1,30,0,0,0,0);
-		SetTileTag(47,27,0,1,30,0,0,0,0);
-		SetTileTag(47,28,0,1,6,0,0,0,0);
-		SetTileTag(47,29,8,1,6,0,1,0,0);
-		SetTileTag(47,30,0,1,6,0,0,0,0);
-		SetTileTag(47,31,0,1,8,0,0,0,0);
-		SetTileTag(47,32,0,1,8,0,0,0,0);
-		SetTileTag(47,33,0,1,30,0,0,0,0);
-		SetTileTag(47,34,0,1,30,0,0,0,0);
-		SetTileTag(47,35,0,1,30,0,0,0,0);
-		SetTileTag(47,36,0,1,30,0,0,0,0);
-		SetTileTag(47,37,1,1,24,0,0,0,0);
-		SetTileTag(47,38,1,1,24,0,0,0,0);
-		SetTileTag(47,39,0,1,30,0,0,0,0);
-		SetTileTag(47,40,0,1,24,0,0,0,0);
-		SetTileTag(47,41,0,1,8,0,0,0,0);
-		SetTileTag(47,42,1,1,18,0,0,0,0);
-		SetTileTag(47,43,1,1,0,0,0,0,0);
-		SetTileTag(47,44,1,1,8,0,0,0,0);
-		SetTileTag(47,45,1,1,0,0,0,0,0);
-		SetTileTag(47,46,1,1,0,0,0,0,0);
-		SetTileTag(47,47,1,1,0,0,0,0,0);
-		SetTileTag(47,48,0,1,8,0,0,0,0);
-		SetTileTag(47,49,1,1,10,0,0,0,0);
-		SetTileTag(47,50,0,1,8,0,0,0,0);
-		SetTileTag(47,51,1,1,24,0,0,1,0);
-		SetTileTag(47,52,0,1,18,0,0,0,0);
-		SetTileTag(47,53,1,1,0,0,1,0,0);
-		SetTileTag(47,54,1,1,26,0,0,0,0);
-		SetTileTag(47,55,1,1,24,0,0,0,0);
-		SetTileTag(47,56,1,1,24,0,0,0,0);
-		SetTileTag(47,57,1,1,22,0,0,0,0);
-		SetTileTag(47,58,0,1,18,0,0,0,0);
-		SetTileTag(47,59,1,1,24,0,0,0,0);
-		SetTileTag(47,60,1,1,24,0,0,0,0);
-		SetTileTag(47,61,0,1,18,0,0,0,0);
-		SetTileTag(47,62,0,1,8,0,0,0,0);
-		SetTileTag(47,63,0,1,8,0,0,0,0);
-		SetTileTag(48,0,0,1,30,0,0,0,0);
-		SetTileTag(48,1,0,1,30,0,0,0,0);
-		SetTileTag(48,2,5,1,2,0,1,0,0);
-		SetTileTag(48,3,1,1,2,0,1,0,0);
-		SetTileTag(48,4,1,1,2,0,1,0,0);
-		SetTileTag(48,5,1,1,18,0,0,0,0);
-		SetTileTag(48,6,1,1,2,0,1,0,0);
-		SetTileTag(48,7,3,1,2,0,1,0,0);
-		SetTileTag(48,8,0,1,0,0,0,0,0);
-		SetTileTag(48,9,1,1,24,0,0,0,0);
-		SetTileTag(48,10,3,1,24,0,0,0,0);
-		SetTileTag(48,11,0,1,30,0,0,0,0);
-		SetTileTag(48,12,0,1,24,0,0,0,0);
-		SetTileTag(48,13,0,1,24,0,0,0,0);
-		SetTileTag(48,14,0,1,30,0,0,0,0);
-		SetTileTag(48,15,0,1,30,0,0,0,0);
-		SetTileTag(48,16,1,1,24,0,0,0,0);
-		SetTileTag(48,17,1,1,24,0,0,0,0);
-		SetTileTag(48,18,5,1,24,0,0,0,0);
-		SetTileTag(48,19,1,1,24,0,0,0,0);
-		SetTileTag(48,20,1,1,24,0,0,0,0);
-		SetTileTag(48,21,1,1,24,0,0,0,0);
-		SetTileTag(48,22,1,1,24,0,0,0,0);
-		SetTileTag(48,23,1,1,24,0,0,0,0);
-		SetTileTag(48,24,3,1,24,0,0,0,0);
-		SetTileTag(48,25,0,1,30,0,0,0,0);
-		SetTileTag(48,26,0,1,30,0,0,0,0);
-		SetTileTag(48,27,0,1,30,0,0,0,0);
-		SetTileTag(48,28,4,1,8,0,1,0,0);
-		SetTileTag(48,29,1,1,8,0,1,0,0);
-		SetTileTag(48,30,0,1,30,0,0,0,0);
-		SetTileTag(48,31,0,1,8,0,0,0,0);
-		SetTileTag(48,32,0,1,8,0,0,0,0);
-		SetTileTag(48,33,0,1,30,0,0,0,0);
-		SetTileTag(48,34,0,1,30,0,0,0,0);
-		SetTileTag(48,35,0,1,30,0,0,0,0);
-		SetTileTag(48,36,0,1,30,0,0,0,0);
-		SetTileTag(48,37,9,1,22,0,0,0,0);
-		SetTileTag(48,38,1,1,24,0,0,0,0);
-		SetTileTag(48,39,0,1,30,0,0,0,0);
-		SetTileTag(48,40,0,1,20,0,0,0,0);
-		SetTileTag(48,41,0,1,8,0,0,0,0);
-		SetTileTag(48,42,1,1,0,0,0,0,0);
-		SetTileTag(48,43,1,1,0,0,0,0,0);
-		SetTileTag(48,44,1,1,0,0,0,0,0);
-		SetTileTag(48,45,1,1,0,0,0,0,0);
-		SetTileTag(48,46,1,1,0,0,0,0,0);
-		SetTileTag(48,47,1,1,0,0,0,0,0);
-		SetTileTag(48,48,0,1,8,0,0,0,0);
-		SetTileTag(48,49,1,1,12,0,0,0,0);
-		SetTileTag(48,50,0,1,8,0,0,0,0);
-		SetTileTag(48,51,1,1,24,0,0,0,0);
-		SetTileTag(48,52,2,1,24,0,0,0,0);
-		SetTileTag(48,53,0,1,18,0,0,0,0);
-		SetTileTag(48,54,0,1,18,0,0,0,0);
-		SetTileTag(48,55,0,1,18,0,0,0,0);
-		SetTileTag(48,56,0,1,18,0,0,0,0);
-		SetTileTag(48,57,0,1,18,0,0,0,0);
-		SetTileTag(48,58,0,1,18,0,0,0,0);
-		SetTileTag(48,59,1,1,24,0,0,0,0);
-		SetTileTag(48,60,3,1,24,0,0,0,0);
-		SetTileTag(48,61,0,1,18,0,0,0,0);
-		SetTileTag(48,62,0,1,8,0,0,0,0);
-		SetTileTag(48,63,0,1,8,0,0,0,0);
-		SetTileTag(49,0,0,1,30,0,0,0,0);
-		SetTileTag(49,1,0,1,30,0,0,0,0);
-		SetTileTag(49,2,1,1,18,0,0,0,0);
-		SetTileTag(49,3,1,1,2,0,1,0,0);
-		SetTileTag(49,4,1,1,2,0,1,0,0);
-		SetTileTag(49,5,1,1,18,0,0,0,0);
-		SetTileTag(49,6,1,1,2,0,1,0,0);
-		SetTileTag(49,7,0,1,18,0,0,0,0);
-		SetTileTag(49,8,0,1,0,0,0,0,0);
-		SetTileTag(49,9,3,1,24,0,0,0,0);
-		SetTileTag(49,10,0,1,30,0,0,0,0);
-		SetTileTag(49,11,0,1,30,0,0,0,0);
-		SetTileTag(49,12,0,1,24,0,0,0,0);
-		SetTileTag(49,13,0,1,24,0,0,0,0);
-		SetTileTag(49,14,0,1,30,0,0,0,0);
-		SetTileTag(49,15,0,1,30,0,0,0,0);
-		SetTileTag(49,16,1,1,24,0,0,0,0);
-		SetTileTag(49,17,1,1,24,0,0,0,0);
-		SetTileTag(49,18,0,1,30,0,0,0,0);
-		SetTileTag(49,19,5,1,24,0,0,0,0);
-		SetTileTag(49,20,1,1,24,0,0,0,0);
-		SetTileTag(49,21,1,1,24,0,0,0,0);
-		SetTileTag(49,22,1,1,24,0,0,0,0);
-		SetTileTag(49,23,3,1,24,0,0,0,0);
-		SetTileTag(49,24,0,1,30,0,0,0,0);
-		SetTileTag(49,25,0,1,30,0,0,0,0);
-		SetTileTag(49,26,0,1,30,0,0,0,0);
-		SetTileTag(49,27,0,1,30,0,0,0,0);
-		SetTileTag(49,28,1,1,8,0,1,0,0);
-		SetTileTag(49,29,1,1,8,0,1,0,0);
-		SetTileTag(49,30,0,1,30,0,0,0,0);
-		SetTileTag(49,31,0,1,8,0,0,0,0);
-		SetTileTag(49,32,0,1,8,0,0,0,0);
-		SetTileTag(49,33,0,1,30,0,0,0,0);
-		SetTileTag(49,34,0,1,30,0,0,0,0);
-		SetTileTag(49,35,0,1,30,0,0,0,0);
-		SetTileTag(49,36,0,1,30,0,0,0,0);
-		SetTileTag(49,37,9,1,20,0,0,0,0);
-		SetTileTag(49,38,1,1,24,0,0,0,0);
-		SetTileTag(49,39,0,1,24,0,0,0,0);
-		SetTileTag(49,40,1,1,20,0,0,0,0);
-		SetTileTag(49,41,1,1,20,0,0,0,0);
-		SetTileTag(49,42,1,1,20,0,0,0,0);
-		SetTileTag(49,43,1,1,0,0,0,0,0);
-		SetTileTag(49,44,1,1,10,0,0,0,0);
-		SetTileTag(49,45,1,1,0,0,0,0,0);
-		SetTileTag(49,46,1,1,0,0,0,0,0);
-		SetTileTag(49,47,1,1,0,0,0,0,0);
-		SetTileTag(49,48,0,1,8,0,0,0,0);
-		SetTileTag(49,49,1,1,14,0,0,0,0);
-		SetTileTag(49,50,0,1,8,0,0,0,0);
-		SetTileTag(49,51,1,1,24,0,0,0,0);
-		SetTileTag(49,52,1,1,24,0,0,0,0);
-		SetTileTag(49,53,1,1,24,0,0,0,0);
-		SetTileTag(49,54,1,1,24,0,0,0,0);
-		SetTileTag(49,55,1,1,24,0,0,0,0);
-		SetTileTag(49,56,1,1,24,0,0,0,0);
-		SetTileTag(49,57,1,1,24,0,0,0,0);
-		SetTileTag(49,58,1,1,24,0,0,0,0);
-		SetTileTag(49,59,1,1,24,0,0,0,0);
-		SetTileTag(49,60,0,1,18,0,0,0,0);
-		SetTileTag(49,61,0,1,18,0,0,0,0);
-		SetTileTag(49,62,0,1,8,0,0,0,0);
-		SetTileTag(49,63,0,1,8,0,0,0,0);
-		SetTileTag(50,0,0,1,30,0,0,0,0);
-		SetTileTag(50,1,0,1,30,0,0,0,0);
-		SetTileTag(50,2,1,1,18,0,0,0,0);
-		SetTileTag(50,3,1,1,2,0,1,0,0);
-		SetTileTag(50,4,1,1,2,0,1,0,0);
-		SetTileTag(50,5,1,1,2,0,1,0,0);
-		SetTileTag(50,6,1,1,2,0,1,0,0);
-		SetTileTag(50,7,2,1,2,0,1,0,0);
-		SetTileTag(50,8,0,1,0,0,0,0,0);
-		SetTileTag(50,9,0,1,30,0,0,0,0);
-		SetTileTag(50,10,0,1,30,0,0,0,0);
-		SetTileTag(50,11,0,1,30,0,0,0,0);
-		SetTileTag(50,12,0,1,24,0,0,0,0);
-		SetTileTag(50,13,0,1,24,0,0,0,0);
-		SetTileTag(50,14,0,1,30,0,0,0,0);
-		SetTileTag(50,15,0,1,24,0,0,0,0);
-		SetTileTag(50,16,1,1,24,0,0,0,0);
-		SetTileTag(50,17,1,1,24,0,0,0,0);
-		SetTileTag(50,18,0,1,24,0,0,0,0);
-		SetTileTag(50,19,0,1,30,0,0,0,0);
-		SetTileTag(50,20,0,1,30,0,0,0,0);
-		SetTileTag(50,21,0,1,30,0,0,0,0);
-		SetTileTag(50,22,0,1,30,0,0,0,0);
-		SetTileTag(50,23,0,1,30,0,0,0,0);
-		SetTileTag(50,24,0,1,30,0,0,0,0);
-		SetTileTag(50,25,0,1,10,0,0,0,0);
-		SetTileTag(50,26,0,1,10,0,0,0,0);
-		SetTileTag(50,27,0,1,30,0,0,0,0);
-		SetTileTag(50,28,1,1,8,0,1,0,0);
-		SetTileTag(50,29,3,1,8,0,1,0,0);
-		SetTileTag(50,30,0,1,16,0,0,0,0);
-		SetTileTag(50,31,0,1,16,0,0,0,0);
-		SetTileTag(50,32,0,1,16,0,0,0,0);
-		SetTileTag(50,33,0,1,16,0,0,0,0);
-		SetTileTag(50,34,0,1,16,0,0,0,0);
-		SetTileTag(50,35,0,1,30,0,0,0,0);
-		SetTileTag(50,36,0,1,30,0,0,0,0);
-		SetTileTag(50,37,9,1,18,0,0,0,0);
-		SetTileTag(50,38,1,1,24,0,0,0,0);
-		SetTileTag(50,39,0,1,30,0,0,0,0);
-		SetTileTag(50,40,1,1,20,0,0,0,0);
-		SetTileTag(50,41,1,1,20,0,0,0,0);
-		SetTileTag(50,42,0,1,18,0,0,0,0);
-		SetTileTag(50,43,1,1,0,0,0,0,0);
-		SetTileTag(50,44,1,1,0,0,0,0,0);
-		SetTileTag(50,45,1,1,0,0,0,0,0);
-		SetTileTag(50,46,1,1,0,0,0,0,0);
-		SetTileTag(50,47,1,1,0,0,0,0,0);
-		SetTileTag(50,48,0,1,8,0,0,0,0);
-		SetTileTag(50,49,1,1,16,0,0,0,0);
-		SetTileTag(50,50,0,1,8,0,0,0,0);
-		SetTileTag(50,51,1,1,24,0,0,0,0);
-		SetTileTag(50,52,7,1,22,0,0,0,0);
-		SetTileTag(50,53,7,1,20,0,0,0,0);
-		SetTileTag(50,54,1,1,20,0,0,0,0);
-		SetTileTag(50,55,1,1,20,0,0,0,0);
-		SetTileTag(50,56,1,1,20,0,0,0,0);
-		SetTileTag(50,57,1,1,20,0,0,0,0);
-		SetTileTag(50,58,1,1,20,0,0,0,0);
-		SetTileTag(50,59,1,1,24,0,0,0,0);
-		SetTileTag(50,60,0,1,18,0,0,0,0);
-		SetTileTag(50,61,0,1,18,0,0,0,0);
-		SetTileTag(50,62,0,1,8,0,0,0,0);
-		SetTileTag(50,63,0,1,8,0,0,0,0);
-		SetTileTag(51,0,0,1,30,0,0,0,0);
-		SetTileTag(51,1,0,1,30,0,0,0,0);
-		SetTileTag(51,2,4,1,2,0,1,0,0);
-		SetTileTag(51,3,1,1,2,0,1,0,0);
-		SetTileTag(51,4,1,1,2,0,1,0,0);
-		SetTileTag(51,5,1,1,2,0,1,0,0);
-		SetTileTag(51,6,1,1,2,0,1,0,0);
-		SetTileTag(51,7,3,1,2,0,1,0,0);
-		SetTileTag(51,8,0,1,18,0,0,0,0);
-		SetTileTag(51,9,0,1,30,0,0,0,0);
-		SetTileTag(51,10,0,1,30,0,0,0,0);
-		SetTileTag(51,11,0,1,30,0,0,0,0);
-		SetTileTag(51,12,0,1,24,0,0,0,0);
-		SetTileTag(51,13,0,1,24,0,0,0,0);
-		SetTileTag(51,14,0,1,30,0,0,0,0);
-		SetTileTag(51,15,4,1,24,0,0,0,0);
-		SetTileTag(51,16,1,1,24,0,0,0,0);
-		SetTileTag(51,17,1,1,24,0,0,0,0);
-		SetTileTag(51,18,2,1,24,0,0,0,0);
-		SetTileTag(51,19,0,1,30,0,0,0,0);
-		SetTileTag(51,20,0,1,30,0,0,0,0);
-		SetTileTag(51,21,0,1,30,0,0,0,0);
-		SetTileTag(51,22,0,1,30,0,0,0,0);
-		SetTileTag(51,23,0,1,30,0,0,0,0);
-		SetTileTag(51,24,0,1,30,0,0,0,0);
-		SetTileTag(51,25,0,1,10,0,0,0,0);
-		SetTileTag(51,26,0,1,10,0,0,0,0);
-		SetTileTag(51,27,4,1,8,0,1,0,0);
-		SetTileTag(51,28,1,1,8,0,1,0,0);
-		SetTileTag(51,29,0,1,8,0,0,0,0);
-		SetTileTag(51,30,1,1,20,0,0,0,0);
-		SetTileTag(51,31,7,1,18,0,0,0,0);
-		SetTileTag(51,32,7,1,16,0,0,0,0);
-		SetTileTag(51,33,7,1,14,0,0,0,0);
-		SetTileTag(51,34,6,1,14,0,0,0,0);
-		SetTileTag(51,35,2,1,16,0,0,0,0);
-		SetTileTag(51,36,0,1,30,0,0,0,0);
-		SetTileTag(51,37,9,1,16,0,0,0,0);
-		SetTileTag(51,38,1,1,24,0,0,0,0);
-		SetTileTag(51,39,0,1,30,0,0,0,0);
-		SetTileTag(51,40,5,1,20,0,0,0,0);
-		SetTileTag(51,41,3,1,20,0,0,0,0);
-		SetTileTag(51,42,4,1,0,0,0,0,0);
-		SetTileTag(51,43,1,1,0,0,0,0,0);
-		SetTileTag(51,44,1,1,0,0,0,0,0);
-		SetTileTag(51,45,1,1,0,0,0,0,0);
-		SetTileTag(51,46,1,1,0,0,0,0,0);
-		SetTileTag(51,47,1,1,0,0,0,0,0);
-		SetTileTag(51,48,0,1,0,0,0,0,0);
-		SetTileTag(51,49,1,1,18,0,0,0,0);
-		SetTileTag(51,50,0,1,8,0,0,0,0);
-		SetTileTag(51,51,1,1,24,0,0,0,0);
-		SetTileTag(51,52,1,1,20,0,0,0,0);
-		SetTileTag(51,53,1,1,20,0,0,0,0);
-		SetTileTag(51,54,1,1,18,0,1,0,0);
-		SetTileTag(51,55,1,1,18,0,1,0,0);
-		SetTileTag(51,56,1,1,18,0,1,0,0);
-		SetTileTag(51,57,1,1,20,0,0,0,0);
-		SetTileTag(51,58,1,1,20,0,0,0,0);
-		SetTileTag(51,59,1,1,24,0,0,0,0);
-		SetTileTag(51,60,0,1,18,0,0,0,0);
-		SetTileTag(51,61,0,1,18,0,0,0,0);
-		SetTileTag(51,62,0,1,8,0,0,0,0);
-		SetTileTag(51,63,0,1,8,0,0,0,0);
-		SetTileTag(52,0,0,1,30,0,0,0,0);
-		SetTileTag(52,1,0,1,30,0,0,0,0);
-		SetTileTag(52,2,1,1,2,0,1,0,0);
-		SetTileTag(52,3,1,1,2,0,1,0,0);
-		SetTileTag(52,4,1,1,2,0,1,0,0);
-		SetTileTag(52,5,1,1,18,0,0,0,0);
-		SetTileTag(52,6,1,1,18,0,0,0,0);
-		SetTileTag(52,7,0,1,30,0,0,0,0);
-		SetTileTag(52,8,0,1,30,0,0,0,0);
-		SetTileTag(52,9,0,1,30,0,0,0,0);
-		SetTileTag(52,10,0,1,30,0,0,0,0);
-		SetTileTag(52,11,0,1,30,0,0,0,0);
-		SetTileTag(52,12,0,1,30,0,0,0,0);
-		SetTileTag(52,13,0,1,30,0,0,0,0);
-		SetTileTag(52,14,0,1,30,0,0,0,0);
-		SetTileTag(52,15,0,1,30,0,0,0,0);
-		SetTileTag(52,16,0,1,30,0,0,0,0);
-		SetTileTag(52,17,0,1,30,0,0,0,0);
-		SetTileTag(52,18,0,1,10,0,0,0,0);
-		SetTileTag(52,19,0,1,10,0,0,0,0);
-		SetTileTag(52,20,0,1,10,0,0,0,0);
-		SetTileTag(52,21,0,1,10,0,0,0,0);
-		SetTileTag(52,22,0,1,10,0,0,0,0);
-		SetTileTag(52,23,4,1,10,0,1,0,0);
-		SetTileTag(52,24,1,1,10,0,1,0,0);
-		SetTileTag(52,25,1,1,10,0,1,0,0);
-		SetTileTag(52,26,7,1,8,0,1,0,0);
-		SetTileTag(52,27,1,1,8,0,1,0,0);
-		SetTileTag(52,28,1,1,8,0,1,0,0);
-		SetTileTag(52,29,0,1,8,0,0,0,0);
-		SetTileTag(52,30,8,1,20,0,0,0,0);
-		SetTileTag(52,31,1,1,24,0,0,0,0);
-		SetTileTag(52,32,1,1,24,0,0,0,0);
-		SetTileTag(52,33,1,1,24,0,0,0,0);
-		SetTileTag(52,34,6,1,14,0,0,0,0);
-		SetTileTag(52,35,1,1,16,0,0,0,0);
-		SetTileTag(52,36,1,1,16,0,0,1,0);
-		SetTileTag(52,37,1,1,16,0,0,0,0);
-		SetTileTag(52,38,1,1,24,0,0,0,0);
-		SetTileTag(52,39,0,1,30,0,0,0,0);
-		SetTileTag(52,40,0,1,8,0,0,0,0);
-		SetTileTag(52,41,0,1,0,0,0,0,0);
-		SetTileTag(52,42,1,1,0,0,0,0,0);
-		SetTileTag(52,43,1,1,0,0,0,0,0);
-		SetTileTag(52,44,1,1,0,0,0,0,0);
-		SetTileTag(52,45,1,1,0,0,0,0,0);
-		SetTileTag(52,46,1,1,24,0,0,0,0);
-		SetTileTag(52,47,1,1,22,0,0,0,0);
-		SetTileTag(52,48,1,1,20,0,0,0,0);
-		SetTileTag(52,49,1,1,18,0,0,0,0);
-		SetTileTag(52,50,0,1,8,0,0,0,0);
-		SetTileTag(52,51,1,1,24,0,0,0,0);
-		SetTileTag(52,52,1,1,20,0,0,0,0);
-		SetTileTag(52,53,1,1,20,0,0,0,0);
-		SetTileTag(52,54,1,1,18,0,1,0,0);
-		SetTileTag(52,55,1,1,18,0,1,0,0);
-		SetTileTag(52,56,1,1,18,0,1,0,0);
-		SetTileTag(52,57,1,1,20,0,0,0,0);
-		SetTileTag(52,58,1,1,20,0,0,0,0);
-		SetTileTag(52,59,1,1,24,0,0,0,0);
-		SetTileTag(52,60,0,1,18,0,0,0,0);
-		SetTileTag(52,61,0,1,18,0,0,0,0);
-		SetTileTag(52,62,0,1,8,0,0,0,0);
-		SetTileTag(52,63,0,1,8,0,0,0,0);
-		SetTileTag(53,0,0,1,30,0,0,0,0);
-		SetTileTag(53,1,0,1,30,0,0,0,0);
-		SetTileTag(53,2,1,1,2,0,1,0,0);
-		SetTileTag(53,3,1,1,2,0,1,0,0);
-		SetTileTag(53,4,3,1,2,0,1,0,0);
-		SetTileTag(53,5,5,1,18,0,0,0,0);
-		SetTileTag(53,6,1,1,18,0,0,0,0);
-		SetTileTag(53,7,0,1,30,0,0,0,0);
-		SetTileTag(53,8,0,1,30,0,0,0,0);
-		SetTileTag(53,9,0,1,30,0,0,0,0);
-		SetTileTag(53,10,0,1,30,0,0,0,0);
-		SetTileTag(53,11,0,1,30,0,0,0,0);
-		SetTileTag(53,12,0,1,30,0,0,0,0);
-		SetTileTag(53,13,0,1,30,0,0,0,0);
-		SetTileTag(53,14,0,1,30,0,0,0,0);
-		SetTileTag(53,15,0,1,30,0,0,0,0);
-		SetTileTag(53,16,0,1,30,0,0,0,0);
-		SetTileTag(53,17,0,1,30,0,0,0,0);
-		SetTileTag(53,18,0,1,10,0,0,0,0);
-		SetTileTag(53,19,0,1,10,0,0,0,0);
-		SetTileTag(53,20,0,1,10,0,0,0,0);
-		SetTileTag(53,21,0,1,10,0,0,0,0);
-		SetTileTag(53,22,7,1,10,0,1,0,0);
-		SetTileTag(53,23,1,1,10,0,1,0,0);
-		SetTileTag(53,24,1,1,10,0,1,0,0);
-		SetTileTag(53,25,1,1,10,0,1,0,0);
-		SetTileTag(53,26,7,1,8,0,1,0,0);
-		SetTileTag(53,27,3,1,8,0,1,0,0);
-		SetTileTag(53,28,0,1,8,0,0,0,0);
-		SetTileTag(53,29,0,1,8,0,0,0,0);
-		SetTileTag(53,30,8,1,22,0,0,0,0);
-		SetTileTag(53,31,1,1,24,0,0,0,0);
-		SetTileTag(53,32,1,1,24,0,0,0,0);
-		SetTileTag(53,33,1,1,24,0,0,0,0);
-		SetTileTag(53,34,0,1,20,0,0,0,0);
-		SetTileTag(53,35,0,1,20,0,0,0,0);
-		SetTileTag(53,36,0,1,20,0,0,0,0);
-		SetTileTag(53,37,0,1,14,0,0,0,0);
-		SetTileTag(53,38,1,1,24,0,0,0,0);
-		SetTileTag(53,39,2,1,24,0,0,0,0);
-		SetTileTag(53,40,0,1,8,0,0,0,0);
-		SetTileTag(53,41,0,1,0,0,0,0,0);
-		SetTileTag(53,42,1,1,0,0,0,0,0);
-		SetTileTag(53,43,1,1,0,0,0,0,0);
-		SetTileTag(53,44,1,1,0,0,0,0,0);
-		SetTileTag(53,45,1,1,0,0,0,0,0);
-		SetTileTag(53,46,1,1,24,0,0,0,0);
-		SetTileTag(53,47,0,1,18,0,0,0,0);
-		SetTileTag(53,48,0,1,18,0,0,0,0);
-		SetTileTag(53,49,0,1,18,0,0,0,0);
-		SetTileTag(53,50,4,1,24,0,0,0,0);
-		SetTileTag(53,51,1,1,24,0,0,0,0);
-		SetTileTag(53,52,7,1,22,0,0,0,0);
-		SetTileTag(53,53,7,1,20,0,0,0,0);
-		SetTileTag(53,54,1,1,20,0,0,0,0);
-		SetTileTag(53,55,1,1,20,0,0,0,0);
-		SetTileTag(53,56,1,1,20,0,0,0,0);
-		SetTileTag(53,57,1,1,20,0,0,0,0);
-		SetTileTag(53,58,1,1,20,0,0,0,0);
-		SetTileTag(53,59,1,1,24,0,0,0,0);
-		SetTileTag(53,60,0,1,18,0,0,0,0);
-		SetTileTag(53,61,0,1,18,0,0,0,0);
-		SetTileTag(53,62,0,1,8,0,0,0,0);
-		SetTileTag(53,63,0,1,8,0,0,0,0);
-		SetTileTag(54,0,0,1,30,0,0,0,0);
-		SetTileTag(54,1,0,1,30,0,0,0,0);
-		SetTileTag(54,2,1,1,4,0,0,0,0);
-		SetTileTag(54,3,0,1,16,0,0,0,0);
-		SetTileTag(54,4,2,1,20,0,0,0,0);
-		SetTileTag(54,5,0,1,16,0,0,0,0);
-		SetTileTag(54,6,9,1,16,0,0,0,0);
-		SetTileTag(54,7,0,1,30,0,0,0,0);
-		SetTileTag(54,8,0,1,30,0,0,0,0);
-		SetTileTag(54,9,0,1,30,0,0,0,0);
-		SetTileTag(54,10,0,1,30,0,0,0,0);
-		SetTileTag(54,11,0,1,30,0,0,0,0);
-		SetTileTag(54,12,0,1,30,0,0,0,0);
-		SetTileTag(54,13,0,1,30,0,0,0,0);
-		SetTileTag(54,14,0,1,30,0,0,0,0);
-		SetTileTag(54,15,0,1,30,0,0,0,0);
-		SetTileTag(54,16,0,1,30,0,0,0,0);
-		SetTileTag(54,17,0,1,30,0,0,0,0);
-		SetTileTag(54,18,0,1,10,0,0,0,0);
-		SetTileTag(54,19,0,1,12,0,0,0,0);
-		SetTileTag(54,20,0,1,12,0,0,0,0);
-		SetTileTag(54,21,4,1,12,0,1,0,0);
-		SetTileTag(54,22,7,1,10,0,1,0,0);
-		SetTileTag(54,23,3,1,10,0,1,0,0);
-		SetTileTag(54,24,0,1,10,0,0,0,0);
-		SetTileTag(54,25,0,1,10,0,0,0,0);
-		SetTileTag(54,26,0,1,10,0,0,0,0);
-		SetTileTag(54,27,0,1,8,0,0,0,0);
-		SetTileTag(54,28,0,1,0,0,0,0,0);
-		SetTileTag(54,29,0,1,0,0,0,0,0);
-		SetTileTag(54,30,1,1,24,0,0,0,0);
-		SetTileTag(54,31,1,1,24,0,0,0,0);
-		SetTileTag(54,32,7,1,22,0,0,0,0);
-		SetTileTag(54,33,7,1,20,0,0,0,0);
-		SetTileTag(54,34,7,1,18,0,0,0,0);
-		SetTileTag(54,35,7,1,16,0,0,0,0);
-		SetTileTag(54,36,0,1,24,0,0,0,0);
-		SetTileTag(54,37,0,1,20,0,0,0,0);
-		SetTileTag(54,38,1,1,24,0,0,0,0);
-		SetTileTag(54,39,1,1,24,0,0,0,0);
-		SetTileTag(54,40,1,1,24,0,0,1,0);
-		SetTileTag(54,41,1,1,24,0,0,0,0);
-		SetTileTag(54,42,1,1,24,0,0,0,0);
-		SetTileTag(54,43,1,1,24,0,0,0,0);
-		SetTileTag(54,44,1,1,24,0,0,0,0);
-		SetTileTag(54,45,1,1,24,0,0,0,0);
-		SetTileTag(54,46,1,1,24,0,0,0,0);
-		SetTileTag(54,47,1,1,24,0,0,1,0);
-		SetTileTag(54,48,1,1,24,0,0,0,0);
-		SetTileTag(54,49,1,1,24,0,0,0,0);
-		SetTileTag(54,50,1,1,24,0,0,0,0);
-		SetTileTag(54,51,1,1,24,0,0,0,0);
-		SetTileTag(54,52,1,1,24,0,0,0,0);
-		SetTileTag(54,53,1,1,24,0,0,0,0);
-		SetTileTag(54,54,1,1,24,0,0,0,0);
-		SetTileTag(54,55,1,1,24,0,0,0,0);
-		SetTileTag(54,56,1,1,24,0,0,0,0);
-		SetTileTag(54,57,1,1,24,0,0,0,0);
-		SetTileTag(54,58,1,1,24,0,0,0,0);
-		SetTileTag(54,59,1,1,24,0,0,0,0);
-		SetTileTag(54,60,0,1,18,0,0,0,0);
-		SetTileTag(54,61,0,1,18,0,0,0,0);
-		SetTileTag(54,62,0,1,30,0,0,0,0);
-		SetTileTag(54,63,0,1,30,0,0,0,0);
-		SetTileTag(55,0,0,1,30,0,0,0,0);
-		SetTileTag(55,1,0,1,30,0,0,0,0);
-		SetTileTag(55,2,8,1,4,0,0,0,0);
-		SetTileTag(55,3,0,1,16,0,0,0,0);
-		SetTileTag(55,4,1,1,16,0,0,0,0);
-		SetTileTag(55,5,1,1,16,0,0,0,0);
-		SetTileTag(55,6,1,1,16,0,0,0,0);
-		SetTileTag(55,7,0,1,30,0,0,0,0);
-		SetTileTag(55,8,0,1,30,0,0,0,0);
-		SetTileTag(55,9,1,1,16,0,0,0,0);
-		SetTileTag(55,10,1,1,16,0,0,0,0);
-		SetTileTag(55,11,1,1,16,0,0,0,0);
-		SetTileTag(55,12,1,1,18,0,0,0,0);
-		SetTileTag(55,13,1,1,20,0,0,0,0);
-		SetTileTag(55,14,1,1,20,0,0,0,0);
-		SetTileTag(55,15,1,1,20,0,0,0,0);
-		SetTileTag(55,16,1,1,18,0,0,0,0);
-		SetTileTag(55,17,0,1,30,0,0,0,0);
-		SetTileTag(55,18,0,1,10,0,0,0,0);
-		SetTileTag(55,19,0,1,12,0,0,0,0);
-		SetTileTag(55,20,1,1,12,0,1,0,0);
-		SetTileTag(55,21,1,1,12,0,1,0,0);
-		SetTileTag(55,22,7,1,10,0,1,0,0);
-		SetTileTag(55,23,0,1,10,0,0,0,0);
-		SetTileTag(55,24,0,1,10,0,0,0,0);
-		SetTileTag(55,25,0,1,10,0,0,0,0);
-		SetTileTag(55,26,0,1,8,0,0,0,0);
-		SetTileTag(55,27,0,1,8,0,0,0,0);
-		SetTileTag(55,28,0,1,8,0,0,0,0);
-		SetTileTag(55,29,0,1,8,0,0,0,0);
-		SetTileTag(55,30,9,1,22,0,0,0,0);
-		SetTileTag(55,31,1,1,24,0,0,0,0);
-		SetTileTag(55,32,1,1,24,0,0,0,0);
-		SetTileTag(55,33,1,1,24,0,0,0,0);
-		SetTileTag(55,34,0,1,14,0,0,0,0);
-		SetTileTag(55,35,0,1,20,0,0,0,0);
-		SetTileTag(55,36,0,1,20,0,0,0,0);
-		SetTileTag(55,37,0,1,14,0,0,0,0);
-		SetTileTag(55,38,1,1,24,0,0,0,0);
-		SetTileTag(55,39,3,1,24,0,0,0,0);
-		SetTileTag(55,40,0,1,30,0,0,0,0);
-		SetTileTag(55,41,0,1,30,0,0,0,0);
-		SetTileTag(55,42,0,1,30,0,0,0,0);
-		SetTileTag(55,43,0,1,18,0,0,0,0);
-		SetTileTag(55,44,0,1,18,0,0,0,0);
-		SetTileTag(55,45,0,1,18,0,0,0,0);
-		SetTileTag(55,46,1,1,24,0,0,1,0);
-		SetTileTag(55,47,0,1,18,0,0,0,0);
-		SetTileTag(55,48,0,1,24,0,0,0,0);
-		SetTileTag(55,49,1,1,24,0,0,0,0);
-		SetTileTag(55,50,0,1,18,0,0,0,0);
-		SetTileTag(55,51,0,1,18,0,0,0,0);
-		SetTileTag(55,52,0,1,18,0,0,0,0);
-		SetTileTag(55,53,0,1,18,0,0,0,0);
-		SetTileTag(55,54,1,1,24,0,0,0,0);
-		SetTileTag(55,55,1,1,24,0,0,0,0);
-		SetTileTag(55,56,1,1,24,0,0,0,0);
-		SetTileTag(55,57,0,1,18,0,0,0,0);
-		SetTileTag(55,58,0,1,18,0,0,0,0);
-		SetTileTag(55,59,1,1,24,0,0,1,0);
-		SetTileTag(55,60,0,1,18,0,0,0,0);
-		SetTileTag(55,61,0,1,18,0,0,0,0);
-		SetTileTag(55,62,0,1,30,0,0,0,0);
-		SetTileTag(55,63,0,1,30,0,0,0,0);
-		SetTileTag(56,0,0,1,30,0,0,0,0);
-		SetTileTag(56,1,0,1,30,0,0,0,0);
-		SetTileTag(56,2,8,1,6,0,0,0,0);
-		SetTileTag(56,3,0,1,30,0,0,0,0);
-		SetTileTag(56,4,1,1,16,0,0,0,0);
-		SetTileTag(56,5,1,1,16,0,0,0,0);
-		SetTileTag(56,6,1,1,16,0,0,0,0);
-		SetTileTag(56,7,1,1,16,0,0,0,0);
-		SetTileTag(56,8,1,1,16,0,0,0,0);
-		SetTileTag(56,9,1,1,16,0,0,0,0);
-		SetTileTag(56,10,0,1,30,0,0,0,0);
-		SetTileTag(56,11,0,1,22,0,0,0,0);
-		SetTileTag(56,12,0,1,30,0,0,0,0);
-		SetTileTag(56,13,0,1,30,0,0,0,0);
-		SetTileTag(56,14,8,1,20,0,0,0,0);
-		SetTileTag(56,15,0,1,30,0,0,0,0);
-		SetTileTag(56,16,1,1,16,0,0,0,0);
-		SetTileTag(56,17,0,1,30,0,0,0,0);
-		SetTileTag(56,18,0,1,10,0,0,0,0);
-		SetTileTag(56,19,0,1,12,0,0,0,0);
-		SetTileTag(56,20,1,1,12,0,1,0,0);
-		SetTileTag(56,21,3,1,12,0,1,0,0);
-		SetTileTag(56,22,0,1,10,0,0,0,0);
-		SetTileTag(56,23,0,1,10,0,0,0,0);
-		SetTileTag(56,24,0,1,10,0,0,0,0);
-		SetTileTag(56,25,0,1,10,0,0,0,0);
-		SetTileTag(56,26,0,1,8,0,0,0,0);
-		SetTileTag(56,27,0,1,24,0,0,0,0);
-		SetTileTag(56,28,0,1,24,0,0,0,0);
-		SetTileTag(56,29,0,1,24,0,0,0,0);
-		SetTileTag(56,30,9,1,20,0,0,0,0);
-		SetTileTag(56,31,1,1,24,0,0,0,0);
-		SetTileTag(56,32,1,1,24,0,0,0,0);
-		SetTileTag(56,33,1,1,24,0,0,0,0);
-		SetTileTag(56,34,6,1,14,0,0,0,0);
-		SetTileTag(56,35,1,1,16,0,0,0,0);
-		SetTileTag(56,36,1,1,16,0,0,1,0);
-		SetTileTag(56,37,1,1,16,0,0,0,0);
-		SetTileTag(56,38,1,1,24,0,0,0,0);
-		SetTileTag(56,39,0,1,30,0,0,0,0);
-		SetTileTag(56,40,0,1,30,0,0,0,0);
-		SetTileTag(56,41,0,1,30,0,0,0,0);
-		SetTileTag(56,42,0,1,30,0,0,0,0);
-		SetTileTag(56,43,0,1,18,0,0,0,0);
-		SetTileTag(56,44,0,1,18,0,0,0,0);
-		SetTileTag(56,45,1,1,24,0,0,0,0);
-		SetTileTag(56,46,1,1,24,0,0,0,0);
-		SetTileTag(56,47,0,1,18,0,0,0,0);
-		SetTileTag(56,48,0,1,18,0,0,0,0);
-		SetTileTag(56,49,1,1,24,0,0,1,0);
-		SetTileTag(56,50,0,1,18,0,0,0,0);
-		SetTileTag(56,51,1,1,26,0,0,0,0);
-		SetTileTag(56,52,1,1,24,0,0,0,0);
-		SetTileTag(56,53,0,1,18,0,0,0,0);
-		SetTileTag(56,54,1,1,24,0,0,0,0);
-		SetTileTag(56,55,1,1,24,0,0,0,0);
-		SetTileTag(56,56,1,1,24,0,0,0,0);
-		SetTileTag(56,57,0,1,18,0,0,0,0);
-		SetTileTag(56,58,1,1,24,0,0,0,0);
-		SetTileTag(56,59,1,1,24,0,0,0,0);
-		SetTileTag(56,60,1,1,24,0,0,0,0);
-		SetTileTag(56,61,0,1,18,0,0,0,0);
-		SetTileTag(56,62,0,1,30,0,0,0,0);
-		SetTileTag(56,63,0,1,30,0,0,0,0);
-		SetTileTag(57,0,0,1,30,0,0,0,0);
-		SetTileTag(57,1,0,1,30,0,0,0,0);
-		SetTileTag(57,2,8,1,8,0,0,0,0);
-		SetTileTag(57,3,0,1,30,0,0,0,0);
-		SetTileTag(57,4,3,1,20,0,0,0,0);
-		SetTileTag(57,5,0,1,30,0,0,0,0);
-		SetTileTag(57,6,1,1,16,0,0,1,0);
-		SetTileTag(57,7,0,1,30,0,0,0,0);
-		SetTileTag(57,8,0,1,30,0,0,0,0);
-		SetTileTag(57,9,0,1,30,0,0,0,0);
-		SetTileTag(57,10,0,1,30,0,0,0,0);
-		SetTileTag(57,11,0,1,22,0,0,0,0);
-		SetTileTag(57,12,1,1,22,0,0,0,0);
-		SetTileTag(57,13,1,1,22,0,0,0,0);
-		SetTileTag(57,14,1,1,22,0,0,0,0);
-		SetTileTag(57,15,0,1,30,0,0,0,0);
-		SetTileTag(57,16,1,1,14,0,0,0,0);
-		SetTileTag(57,17,1,1,14,0,0,0,0);
-		SetTileTag(57,18,0,1,10,0,0,0,0);
-		SetTileTag(57,19,4,1,12,0,1,0,0);
-		SetTileTag(57,20,1,1,12,0,1,0,0);
-		SetTileTag(57,21,0,1,12,0,0,0,0);
-		SetTileTag(57,22,0,1,10,0,0,0,0);
-		SetTileTag(57,23,0,1,10,0,0,0,0);
-		SetTileTag(57,24,0,1,10,0,0,0,0);
-		SetTileTag(57,25,0,1,10,0,0,0,0);
-		SetTileTag(57,26,0,1,8,0,0,0,0);
-		SetTileTag(57,27,0,1,24,0,0,0,0);
-		SetTileTag(57,28,0,1,24,0,0,0,0);
-		SetTileTag(57,29,0,1,24,0,0,0,0);
-		SetTileTag(57,30,1,1,20,0,0,0,0);
-		SetTileTag(57,31,7,1,18,0,0,0,0);
-		SetTileTag(57,32,7,1,16,0,0,0,0);
-		SetTileTag(57,33,7,1,14,0,0,0,0);
-		SetTileTag(57,34,6,1,14,0,0,0,0);
-		SetTileTag(57,35,3,1,16,0,0,0,0);
-		SetTileTag(57,36,0,1,30,0,0,0,0);
-		SetTileTag(57,37,8,1,16,0,0,0,0);
-		SetTileTag(57,38,1,1,24,0,0,0,0);
-		SetTileTag(57,39,0,1,30,0,0,0,0);
-		SetTileTag(57,40,0,1,30,0,0,0,0);
-		SetTileTag(57,41,0,1,30,0,0,0,0);
-		SetTileTag(57,42,0,1,30,0,0,0,0);
-		SetTileTag(57,43,0,1,18,0,0,0,0);
-		SetTileTag(57,44,0,1,18,0,0,0,0);
-		SetTileTag(57,45,1,1,24,0,0,0,0);
-		SetTileTag(57,46,1,1,24,0,0,0,0);
-		SetTileTag(57,47,0,1,18,0,0,0,0);
-		SetTileTag(57,48,1,1,24,0,0,0,0);
-		SetTileTag(57,49,1,1,24,0,0,0,0);
-		SetTileTag(57,50,0,1,18,0,0,0,0);
-		SetTileTag(57,51,1,1,24,0,0,0,0);
-		SetTileTag(57,52,1,1,24,0,0,0,0);
-		SetTileTag(57,53,1,1,24,0,0,1,0);
-		SetTileTag(57,54,1,1,24,0,0,0,0);
-		SetTileTag(57,55,1,1,24,0,0,0,0);
-		SetTileTag(57,56,1,1,24,0,0,0,0);
-		SetTileTag(57,57,0,1,24,0,0,0,0);
-		SetTileTag(57,58,1,1,24,0,0,0,0);
-		SetTileTag(57,59,1,1,24,0,0,0,0);
-		SetTileTag(57,60,1,1,24,0,0,0,0);
-		SetTileTag(57,61,0,1,18,0,0,0,0);
-		SetTileTag(57,62,0,1,30,0,0,0,0);
-		SetTileTag(57,63,0,1,30,0,0,0,0);
-		SetTileTag(58,0,0,1,30,0,0,0,0);
-		SetTileTag(58,1,0,1,30,0,0,0,0);
-		SetTileTag(58,2,1,1,10,0,0,0,0);
-		SetTileTag(58,3,6,1,10,0,0,0,0);
-		SetTileTag(58,4,6,1,12,0,0,0,0);
-		SetTileTag(58,5,6,1,14,0,0,0,0);
-		SetTileTag(58,6,1,1,16,0,0,0,0);
-		SetTileTag(58,7,0,1,30,0,0,0,0);
-		SetTileTag(58,8,0,1,30,0,0,0,0);
-		SetTileTag(58,9,0,1,30,0,0,0,0);
-		SetTileTag(58,10,0,1,30,0,0,0,0);
-		SetTileTag(58,11,0,1,22,0,0,0,0);
-		SetTileTag(58,12,1,1,22,0,0,0,0);
-		SetTileTag(58,13,1,1,26,0,0,0,0);
-		SetTileTag(58,14,1,1,22,0,0,0,0);
-		SetTileTag(58,15,0,1,30,0,0,0,0);
-		SetTileTag(58,16,1,1,14,0,0,0,0);
-		SetTileTag(58,17,1,1,14,0,0,0,0);
-		SetTileTag(58,18,7,1,12,0,0,0,0);
-		SetTileTag(58,19,1,1,12,0,1,0,0);
-		SetTileTag(58,20,1,1,12,0,1,0,0);
-		SetTileTag(58,21,0,1,12,0,0,0,0);
-		SetTileTag(58,22,0,1,12,0,0,0,0);
-		SetTileTag(58,23,0,1,12,0,0,0,0);
-		SetTileTag(58,24,0,1,12,0,0,0,0);
-		SetTileTag(58,25,0,1,8,0,0,0,0);
-		SetTileTag(58,26,0,1,8,0,0,0,0);
-		SetTileTag(58,27,0,1,24,0,0,0,0);
-		SetTileTag(58,28,0,1,24,0,0,0,0);
-		SetTileTag(58,29,0,1,24,0,0,0,0);
-		SetTileTag(58,30,0,1,24,0,0,0,0);
-		SetTileTag(58,31,0,1,24,0,0,0,0);
-		SetTileTag(58,32,0,1,24,0,0,0,0);
-		SetTileTag(58,33,0,1,24,0,0,0,0);
-		SetTileTag(58,34,0,1,30,0,0,0,0);
-		SetTileTag(58,35,0,1,30,0,0,0,0);
-		SetTileTag(58,36,0,1,30,0,0,0,0);
-		SetTileTag(58,37,8,1,18,0,0,0,0);
-		SetTileTag(58,38,1,1,24,0,0,0,0);
-		SetTileTag(58,39,0,1,30,0,0,0,0);
-		SetTileTag(58,40,0,1,30,0,0,0,0);
-		SetTileTag(58,41,0,1,30,0,0,0,0);
-		SetTileTag(58,42,0,1,30,0,0,0,0);
-		SetTileTag(58,43,0,1,18,0,0,0,0);
-		SetTileTag(58,44,0,1,18,0,0,0,0);
-		SetTileTag(58,45,1,1,24,0,0,0,0);
-		SetTileTag(58,46,1,1,24,0,0,0,0);
-		SetTileTag(58,47,0,1,18,0,0,0,0);
-		SetTileTag(58,48,1,1,24,0,0,0,0);
-		SetTileTag(58,49,1,1,24,0,0,0,0);
-		SetTileTag(58,50,0,1,18,0,0,0,0);
-		SetTileTag(58,51,1,1,24,0,0,0,0);
-		SetTileTag(58,52,1,1,24,0,0,0,0);
-		SetTileTag(58,53,0,1,18,0,0,0,0);
-		SetTileTag(58,54,5,1,24,0,0,0,0);
-		SetTileTag(58,55,1,1,24,0,0,0,0);
-		SetTileTag(58,56,3,1,24,0,0,0,0);
-		SetTileTag(58,57,0,1,18,0,0,0,0);
-		SetTileTag(58,58,0,1,18,0,0,0,0);
-		SetTileTag(58,59,0,1,18,0,0,0,0);
-		SetTileTag(58,60,0,1,18,0,0,0,0);
-		SetTileTag(58,61,0,1,18,0,0,0,0);
-		SetTileTag(58,62,0,1,30,0,0,0,0);
-		SetTileTag(58,63,0,1,30,0,0,0,0);
-		SetTileTag(59,0,0,1,30,0,0,0,0);
-		SetTileTag(59,1,0,1,30,0,0,0,0);
-		SetTileTag(59,2,0,1,30,0,0,0,0);
-		SetTileTag(59,3,0,1,30,0,0,0,0);
-		SetTileTag(59,4,0,1,30,0,0,0,0);
-		SetTileTag(59,5,0,1,30,0,0,0,0);
-		SetTileTag(59,6,0,1,30,0,0,0,0);
-		SetTileTag(59,7,0,1,30,0,0,0,0);
-		SetTileTag(59,8,0,1,30,0,0,0,0);
-		SetTileTag(59,9,0,1,30,0,0,0,0);
-		SetTileTag(59,10,0,1,30,0,0,0,0);
-		SetTileTag(59,11,0,1,22,0,0,0,0);
-		SetTileTag(59,12,1,1,22,0,0,0,0);
-		SetTileTag(59,13,1,1,22,0,0,0,0);
-		SetTileTag(59,14,1,1,22,0,0,0,0);
-		SetTileTag(59,15,0,1,0,0,0,0,0);
-		SetTileTag(59,16,1,1,14,0,0,0,0);
-		SetTileTag(59,17,1,1,14,0,0,0,0);
-		SetTileTag(59,18,0,1,14,0,0,0,0);
-		SetTileTag(59,19,8,1,12,0,1,0,0);
-		SetTileTag(59,20,8,1,12,0,1,0,0);
-		SetTileTag(59,21,0,1,14,0,0,0,0);
-		SetTileTag(59,22,0,1,14,0,0,0,0);
-		SetTileTag(59,23,0,1,14,0,0,0,0);
-		SetTileTag(59,24,0,1,12,0,0,0,0);
-		SetTileTag(59,25,0,1,8,0,0,0,0);
-		SetTileTag(59,26,0,1,8,0,0,0,0);
-		SetTileTag(59,27,0,1,24,0,0,0,0);
-		SetTileTag(59,28,0,1,24,0,0,0,0);
-		SetTileTag(59,29,0,1,24,0,0,0,0);
-		SetTileTag(59,30,0,1,24,0,0,0,0);
-		SetTileTag(59,31,0,1,24,0,0,0,0);
-		SetTileTag(59,32,0,1,24,0,0,0,0);
-		SetTileTag(59,33,0,1,24,0,0,0,0);
-		SetTileTag(59,34,0,1,30,0,0,0,0);
-		SetTileTag(59,35,0,1,30,0,0,0,0);
-		SetTileTag(59,36,0,1,30,0,0,0,0);
-		SetTileTag(59,37,8,1,20,0,0,0,0);
-		SetTileTag(59,38,1,1,24,0,0,0,0);
-		SetTileTag(59,39,0,1,30,0,0,0,0);
-		SetTileTag(59,40,0,1,30,0,0,0,0);
-		SetTileTag(59,41,0,1,30,0,0,0,0);
-		SetTileTag(59,42,0,1,30,0,0,0,0);
-		SetTileTag(59,43,0,1,18,0,0,0,0);
-		SetTileTag(59,44,0,1,18,0,0,0,0);
-		SetTileTag(59,45,1,1,24,0,0,0,0);
-		SetTileTag(59,46,1,1,24,0,0,0,0);
-		SetTileTag(59,47,0,1,18,0,0,0,0);
-		SetTileTag(59,48,0,1,18,0,0,0,0);
-		SetTileTag(59,49,0,1,30,0,0,0,0);
-		SetTileTag(59,50,0,1,30,0,0,0,0);
-		SetTileTag(59,51,1,1,24,0,0,0,0);
-		SetTileTag(59,52,1,1,24,0,0,0,0);
-		SetTileTag(59,53,0,1,18,0,0,0,0);
-		SetTileTag(59,54,0,1,18,0,0,0,0);
-		SetTileTag(59,55,0,1,18,0,0,0,0);
-		SetTileTag(59,56,0,1,18,0,0,0,0);
-		SetTileTag(59,57,0,1,18,0,0,0,0);
-		SetTileTag(59,58,0,1,18,0,0,0,0);
-		SetTileTag(59,59,0,1,18,0,0,0,0);
-		SetTileTag(59,60,0,1,18,0,0,0,0);
-		SetTileTag(59,61,0,1,18,0,0,0,0);
-		SetTileTag(59,62,0,1,30,0,0,0,0);
-		SetTileTag(59,63,0,1,30,0,0,0,0);
-		SetTileTag(60,0,0,1,30,0,0,0,0);
-		SetTileTag(60,1,0,1,30,0,0,0,0);
-		SetTileTag(60,2,0,1,30,0,0,0,0);
-		SetTileTag(60,3,0,1,30,0,0,0,0);
-		SetTileTag(60,4,0,1,30,0,0,0,0);
-		SetTileTag(60,5,0,1,30,0,0,0,0);
-		SetTileTag(60,6,0,1,30,0,0,0,0);
-		SetTileTag(60,7,0,1,30,0,0,0,0);
-		SetTileTag(60,8,0,1,30,0,0,0,0);
-		SetTileTag(60,9,0,1,30,0,0,0,0);
-		SetTileTag(60,10,0,1,30,0,0,0,0);
-		SetTileTag(60,11,0,1,30,0,0,0,0);
-		SetTileTag(60,12,0,1,30,0,0,0,0);
-		SetTileTag(60,13,0,1,30,0,0,0,0);
-		SetTileTag(60,14,0,1,30,0,0,0,0);
-		SetTileTag(60,15,0,1,30,0,0,0,0);
-		SetTileTag(60,16,0,1,30,0,0,0,0);
-		SetTileTag(60,17,0,1,14,0,0,0,0);
-		SetTileTag(60,18,0,1,14,0,0,0,0);
-		SetTileTag(60,19,1,1,14,0,1,0,0);
-		SetTileTag(60,20,1,1,14,0,1,0,0);
-		SetTileTag(60,21,0,1,14,0,0,0,0);
-		SetTileTag(60,22,0,1,14,0,0,0,0);
-		SetTileTag(60,23,0,1,14,0,0,0,0);
-		SetTileTag(60,24,0,1,12,0,0,0,0);
-		SetTileTag(60,25,0,1,8,0,0,0,0);
-		SetTileTag(60,26,0,1,8,0,0,0,0);
-		SetTileTag(60,27,0,1,20,0,0,0,0);
-		SetTileTag(60,28,0,1,8,0,0,0,0);
-		SetTileTag(60,29,0,1,8,0,0,0,0);
-		SetTileTag(60,30,0,1,8,0,0,0,0);
-		SetTileTag(60,31,0,1,24,0,0,0,0);
-		SetTileTag(60,32,0,1,24,0,0,0,0);
-		SetTileTag(60,33,0,1,24,0,0,0,0);
-		SetTileTag(60,34,0,1,30,0,0,0,0);
-		SetTileTag(60,35,0,1,30,0,0,0,0);
-		SetTileTag(60,36,0,1,30,0,0,0,0);
-		SetTileTag(60,37,8,1,22,0,0,0,0);
-		SetTileTag(60,38,1,1,24,0,0,0,0);
-		SetTileTag(60,39,0,1,30,0,0,0,0);
-		SetTileTag(60,40,0,1,30,0,0,0,0);
-		SetTileTag(60,41,0,1,30,0,0,0,0);
-		SetTileTag(60,42,0,1,30,0,0,0,0);
-		SetTileTag(60,43,0,1,18,0,0,0,0);
-		SetTileTag(60,44,0,1,18,0,0,0,0);
-		SetTileTag(60,45,0,1,18,0,0,0,0);
-		SetTileTag(60,46,0,1,18,0,0,0,0);
-		SetTileTag(60,47,0,1,18,0,0,0,0);
-		SetTileTag(60,48,0,1,18,0,0,0,0);
-		SetTileTag(60,49,1,1,24,0,1,0,0);
-		SetTileTag(60,50,1,1,26,0,0,0,0);
-		SetTileTag(60,51,1,1,24,0,0,0,0);
-		SetTileTag(60,52,1,1,24,0,0,0,0);
-		SetTileTag(60,53,0,1,18,0,0,0,0);
-		SetTileTag(60,54,0,1,18,0,0,0,0);
-		SetTileTag(60,55,0,1,18,0,0,0,0);
-		SetTileTag(60,56,0,1,18,0,0,0,0);
-		SetTileTag(60,57,0,1,18,0,0,0,0);
-		SetTileTag(60,58,0,1,18,0,0,0,0);
-		SetTileTag(60,59,0,1,30,0,0,0,0);
-		SetTileTag(60,60,0,1,30,0,0,0,0);
-		SetTileTag(60,61,0,1,30,0,0,0,0);
-		SetTileTag(60,62,0,1,30,0,0,0,0);
-		SetTileTag(60,63,0,1,30,0,0,0,0);
-		SetTileTag(61,0,0,1,30,0,0,0,0);
-		SetTileTag(61,1,0,1,30,0,0,0,0);
-		SetTileTag(61,2,0,1,30,0,0,0,0);
-		SetTileTag(61,3,0,1,30,0,0,0,0);
-		SetTileTag(61,4,0,1,30,0,0,0,0);
-		SetTileTag(61,5,0,1,30,0,0,0,0);
-		SetTileTag(61,6,0,1,30,0,0,0,0);
-		SetTileTag(61,7,0,1,30,0,0,0,0);
-		SetTileTag(61,8,0,1,30,0,0,0,0);
-		SetTileTag(61,9,0,1,30,0,0,0,0);
-		SetTileTag(61,10,0,1,30,0,0,0,0);
-		SetTileTag(61,11,0,1,30,0,0,0,0);
-		SetTileTag(61,12,0,1,30,0,0,0,0);
-		SetTileTag(61,13,0,1,30,0,0,0,0);
-		SetTileTag(61,14,0,1,30,0,0,0,0);
-		SetTileTag(61,15,0,1,30,0,0,0,0);
-		SetTileTag(61,16,0,1,30,0,0,0,0);
-		SetTileTag(61,17,0,1,14,0,0,0,0);
-		SetTileTag(61,18,0,1,14,0,0,0,0);
-		SetTileTag(61,19,5,1,14,0,1,0,0);
-		SetTileTag(61,20,1,1,14,0,1,0,0);
-		SetTileTag(61,21,2,1,14,0,1,0,0);
-		SetTileTag(61,22,0,1,14,0,0,0,0);
-		SetTileTag(61,23,0,1,14,0,0,0,0);
-		SetTileTag(61,24,0,1,12,0,0,0,0);
-		SetTileTag(61,25,0,1,8,0,0,0,0);
-		SetTileTag(61,26,0,1,8,0,0,0,0);
-		SetTileTag(61,27,0,1,8,0,0,0,0);
-		SetTileTag(61,28,0,1,8,0,0,0,0);
-		SetTileTag(61,29,0,1,8,0,0,0,0);
-		SetTileTag(61,30,0,1,8,0,0,0,0);
-		SetTileTag(61,31,0,1,8,0,0,0,0);
-		SetTileTag(61,32,0,1,8,0,0,0,0);
-		SetTileTag(61,33,0,1,30,0,0,0,0);
-		SetTileTag(61,34,0,1,30,0,0,0,0);
-		SetTileTag(61,35,0,1,30,0,0,0,0);
-		SetTileTag(61,36,0,1,30,0,0,0,0);
-		SetTileTag(61,37,1,1,24,0,0,0,0);
-		SetTileTag(61,38,1,1,24,0,0,0,0);
-		SetTileTag(61,39,0,1,30,0,0,0,0);
-		SetTileTag(61,40,0,1,30,0,0,0,0);
-		SetTileTag(61,41,0,1,30,0,0,0,0);
-		SetTileTag(61,42,0,1,30,0,0,0,0);
-		SetTileTag(61,43,0,1,30,0,0,0,0);
-		SetTileTag(61,44,0,1,30,0,0,0,0);
-		SetTileTag(61,45,0,1,30,0,0,0,0);
-		SetTileTag(61,46,0,1,30,0,0,0,0);
-		SetTileTag(61,47,0,1,30,0,0,0,0);
-		SetTileTag(61,48,0,1,30,0,0,0,0);
-		SetTileTag(61,49,0,1,30,0,0,0,0);
-		SetTileTag(61,50,0,1,30,0,0,0,0);
-		SetTileTag(61,51,0,1,30,0,0,0,0);
-		SetTileTag(61,52,0,1,30,0,0,0,0);
-		SetTileTag(61,53,0,1,30,0,0,0,0);
-		SetTileTag(61,54,0,1,30,0,0,0,0);
-		SetTileTag(61,55,0,1,30,0,0,0,0);
-		SetTileTag(61,56,0,1,30,0,0,0,0);
-		SetTileTag(61,57,0,1,30,0,0,0,0);
-		SetTileTag(61,58,0,1,30,0,0,0,0);
-		SetTileTag(61,59,0,1,30,0,0,0,0);
-		SetTileTag(61,60,0,1,30,0,0,0,0);
-		SetTileTag(61,61,0,1,30,0,0,0,0);
-		SetTileTag(61,62,0,1,30,0,0,0,0);
-		SetTileTag(61,63,0,1,30,0,0,0,0);
-		SetTileTag(62,0,0,1,30,0,0,0,0);
-		SetTileTag(62,1,0,1,30,0,0,0,0);
-		SetTileTag(62,2,0,1,30,0,0,0,0);
-		SetTileTag(62,3,0,1,30,0,0,0,0);
-		SetTileTag(62,4,0,1,30,0,0,0,0);
-		SetTileTag(62,5,0,1,30,0,0,0,0);
-		SetTileTag(62,6,0,1,30,0,0,0,0);
-		SetTileTag(62,7,0,1,30,0,0,0,0);
-		SetTileTag(62,8,0,1,30,0,0,0,0);
-		SetTileTag(62,9,0,1,30,0,0,0,0);
-		SetTileTag(62,10,0,1,30,0,0,0,0);
-		SetTileTag(62,11,0,1,30,0,0,0,0);
-		SetTileTag(62,12,0,1,30,0,0,0,0);
-		SetTileTag(62,13,0,1,30,0,0,0,0);
-		SetTileTag(62,14,0,1,30,0,0,0,0);
-		SetTileTag(62,15,0,1,30,0,0,0,0);
-		SetTileTag(62,16,0,1,30,0,0,0,0);
-		SetTileTag(62,17,0,1,30,0,0,0,0);
-		SetTileTag(62,18,0,1,30,0,0,0,0);
-		SetTileTag(62,19,0,1,30,0,0,0,0);
-		SetTileTag(62,20,0,1,30,0,0,0,0);
-		SetTileTag(62,21,0,1,30,0,0,0,0);
-		SetTileTag(62,22,0,1,30,0,0,0,0);
-		SetTileTag(62,23,0,1,30,0,0,0,0);
-		SetTileTag(62,24,0,1,8,0,0,0,0);
-		SetTileTag(62,25,0,1,8,0,0,0,0);
-		SetTileTag(62,26,0,1,8,0,0,0,0);
-		SetTileTag(62,27,0,1,8,0,0,0,0);
-		SetTileTag(62,28,0,1,8,0,0,0,0);
-		SetTileTag(62,29,0,1,8,0,0,0,0);
-		SetTileTag(62,30,0,1,8,0,0,0,0);
-		SetTileTag(62,31,0,1,8,0,0,0,0);
-		SetTileTag(62,32,0,1,8,0,0,0,0);
-		SetTileTag(62,33,0,1,30,0,0,0,0);
-		SetTileTag(62,34,0,1,30,0,0,0,0);
-		SetTileTag(62,35,0,1,30,0,0,0,0);
-		SetTileTag(62,36,0,1,24,0,0,0,0);
-		SetTileTag(62,37,0,1,30,0,0,0,0);
-		SetTileTag(62,38,0,1,30,0,0,0,0);
-		SetTileTag(62,39,0,1,30,0,0,0,0);
-		SetTileTag(62,40,0,1,30,0,0,0,0);
-		SetTileTag(62,41,0,1,30,0,0,0,0);
-		SetTileTag(62,42,0,1,30,0,0,0,0);
-		SetTileTag(62,43,0,1,30,0,0,0,0);
-		SetTileTag(62,44,0,1,30,0,0,0,0);
-		SetTileTag(62,45,0,1,30,0,0,0,0);
-		SetTileTag(62,46,0,1,30,0,0,0,0);
-		SetTileTag(62,47,0,1,30,0,0,0,0);
-		SetTileTag(62,48,0,1,30,0,0,0,0);
-		SetTileTag(62,49,0,1,30,0,0,0,0);
-		SetTileTag(62,50,0,1,30,0,0,0,0);
-		SetTileTag(62,51,0,1,30,0,0,0,0);
-		SetTileTag(62,52,0,1,30,0,0,0,0);
-		SetTileTag(62,53,0,1,30,0,0,0,0);
-		SetTileTag(62,54,0,1,30,0,0,0,0);
-		SetTileTag(62,55,0,1,30,0,0,0,0);
-		SetTileTag(62,56,0,1,30,0,0,0,0);
-		SetTileTag(62,57,0,1,30,0,0,0,0);
-		SetTileTag(62,58,0,1,30,0,0,0,0);
-		SetTileTag(62,59,0,1,30,0,0,0,0);
-		SetTileTag(62,60,0,1,30,0,0,0,0);
-		SetTileTag(62,61,0,1,30,0,0,0,0);
-		SetTileTag(62,62,0,1,30,0,0,0,0);
-		SetTileTag(62,63,0,1,30,0,0,0,0);
-		SetTileTag(63,0,0,1,30,0,0,0,0);
-		SetTileTag(63,1,0,1,30,0,0,0,0);
-		SetTileTag(63,2,0,1,30,0,0,0,0);
-		SetTileTag(63,3,0,1,30,0,0,0,0);
-		SetTileTag(63,4,0,1,30,0,0,0,0);
-		SetTileTag(63,5,0,1,30,0,0,0,0);
-		SetTileTag(63,6,0,1,30,0,0,0,0);
-		SetTileTag(63,7,0,1,30,0,0,0,0);
-		SetTileTag(63,8,0,1,30,0,0,0,0);
-		SetTileTag(63,9,0,1,30,0,0,0,0);
-		SetTileTag(63,10,0,1,30,0,0,0,0);
-		SetTileTag(63,11,0,1,30,0,0,0,0);
-		SetTileTag(63,12,0,1,30,0,0,0,0);
-		SetTileTag(63,13,0,1,30,0,0,0,0);
-		SetTileTag(63,14,0,1,30,0,0,0,0);
-		SetTileTag(63,15,0,1,30,0,0,0,0);
-		SetTileTag(63,16,0,1,30,0,0,0,0);
-		SetTileTag(63,17,0,1,30,0,0,0,0);
-		SetTileTag(63,18,0,1,30,0,0,0,0);
-		SetTileTag(63,19,0,1,30,0,0,0,0);
-		SetTileTag(63,20,0,1,30,0,0,0,0);
-		SetTileTag(63,21,0,1,30,0,0,0,0);
-		SetTileTag(63,22,0,1,30,0,0,0,0);
-		SetTileTag(63,23,0,1,30,0,0,0,0);
-		SetTileTag(63,24,0,1,30,0,0,0,0);
-		SetTileTag(63,25,0,1,30,0,0,0,0);
-		SetTileTag(63,26,0,1,30,0,0,0,0);
-		SetTileTag(63,27,0,1,30,0,0,0,0);
-		SetTileTag(63,28,0,1,30,0,0,0,0);
-		SetTileTag(63,29,0,1,30,0,0,0,0);
-		SetTileTag(63,30,0,1,30,0,0,0,0);
-		SetTileTag(63,31,0,1,30,0,0,0,0);
-		SetTileTag(63,32,0,1,30,0,0,0,0);
-		SetTileTag(63,33,0,1,30,0,0,0,0);
-		SetTileTag(63,34,0,1,30,0,0,0,0);
-		SetTileTag(63,35,0,1,30,0,0,0,0);
-		SetTileTag(63,36,0,1,30,0,0,0,0);
-		SetTileTag(63,37,0,1,30,0,0,0,0);
-		SetTileTag(63,38,0,1,30,0,0,0,0);
-		SetTileTag(63,39,0,1,30,0,0,0,0);
-		SetTileTag(63,40,0,1,30,0,0,0,0);
-		SetTileTag(63,41,0,1,30,0,0,0,0);
-		SetTileTag(63,42,0,1,30,0,0,0,0);
-		SetTileTag(63,43,0,1,30,0,0,0,0);
-		SetTileTag(63,44,0,1,30,0,0,0,0);
-		SetTileTag(63,45,0,1,30,0,0,0,0);
-		SetTileTag(63,46,0,1,30,0,0,0,0);
-		SetTileTag(63,47,0,1,30,0,0,0,0);
-		SetTileTag(63,48,0,1,30,0,0,0,0);
-		SetTileTag(63,49,0,1,30,0,0,0,0);
-		SetTileTag(63,50,0,1,30,0,0,0,0);
-		SetTileTag(63,51,0,1,30,0,0,0,0);
-		SetTileTag(63,52,0,1,30,0,0,0,0);
-		SetTileTag(63,53,0,1,30,0,0,0,0);
-		SetTileTag(63,54,0,1,30,0,0,0,0);
-		SetTileTag(63,55,0,1,30,0,0,0,0);
-		SetTileTag(63,56,0,1,30,0,0,0,0);
-		SetTileTag(63,57,0,1,30,0,0,0,0);
-		SetTileTag(63,58,0,1,30,0,0,0,0);
-		SetTileTag(63,59,0,1,30,0,0,0,0);
-		SetTileTag(63,60,0,1,30,0,0,0,0);
-		SetTileTag(63,61,0,1,30,0,0,0,0);
-		SetTileTag(63,62,0,1,30,0,0,0,0);
-		SetTileTag(63,63,0,1,30,0,0,0,0);*/
-	}
-
-
-	[MenuItem("MyTools/CreateNavMeshes")]
-	static void CreateNavMeshObjects()
-	{
-		//THIS DOES NOT WORK ~!!!!
-		return;
-	/*	
-		for (int x=0; x< 15; x++)
-		{
-		GameObject myObj = new GameObject();
-			myObj.name="Navmesh_" + x;
-
-		myObj.transform.position=new Vector3(38.36103f, 0.0f, 38.44547f);
-		myObj.transform.localScale=new Vector3(8.117478f, 0.8f, 7.982839f);
-
-		RAIN.Navigation.NavMesh.NavMeshRig nav=myObj.AddComponent<RAIN.Navigation.NavMesh.NavMeshRig>(); 
-		//nav	=GameObject.Find ("GroundMesh").GetComponent<RAIN.Navigation.NavMesh>();
-		//	nav.NavMesh.GraphTags.IsReadOnly=false;
-		//	nav.NavMesh.GraphTags.Add("LAND");
-		//nav.NavMesh.Graph.Tags.Add("LAND");
-
-
-			for (int y =0; y< 15;y++)
-			{
-				nav.NavMesh.UnwalkableTags.Add("WATER_" + y);
-				if ( y != x)
-				{
-					nav.NavMesh.UnwalkableTags.Add("ROOM_" + y);
-				}					
-			}
-		}
-		*/
-	}
 
 	[MenuItem("MyTools/CreateWeaponAnims")]
 	static void CreateWeaponAnims()
@@ -10231,7 +5416,7 @@ public class MyTools
 		}
 	}
 
-
+/*
 	static void CreateUWScriptObjects(GameObject myObj, int triggerX, int triggerY, string target,string ScriptType, int state)
 	{
 
@@ -10249,7 +5434,7 @@ public class MyTools
 				break;
 				}
 			}	
-	}
+	}*/
 
 	static void CreateUWActivators(GameObject Button,string activatortype, string target, int triggerX, int triggerY, int state, int maxstate, int item_id)
 	{
@@ -10705,6 +5890,13 @@ public class MyTools
 			}
 		case 0x18:	//bullfrog
 			{myObj.AddComponent<a_do_trapBullfrog>();break;}
+		case 0x2a://Gronk conversation
+		{
+			myObj.AddComponent<a_do_trap_conversation>();
+			NPC_Door np =myObj.AddComponent<NPC_Door>();
+			np.npc_whoami=25;
+			myObj.AddComponent<Conversation_25>();
+			break;}
 		default:
 			{myObj.AddComponent<trap_base>();break;}
 		}
@@ -10903,9 +6095,6 @@ public class MyTools
 		GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
 		ObjectInteraction doorInteract = myObj.GetComponent<ObjectInteraction>();
-		//doorInteract.isDoor=true;
-		//doorInteract.ItemType=4;
-		//doorInteract.item_id=-1;//ugh
 		doorInteract.Link = DoorKey;
 		newObj.name=myObj.name + "_Model";
 		newObj.transform.parent=myObj.transform;
@@ -10922,7 +6111,7 @@ public class MyTools
 		DoorControl dc = myObj.AddComponent<DoorControl>();
 		dc.KeyIndex=DoorKey;
 		dc.locked = (Locked==1);
-		dc.state=(isOpen!=1);
+		dc.state=(isOpen==1);
 	}
 
 	static void CreatePortcullis(GameObject myObj, int DoorKey, int Locked, int isOpen)
@@ -11758,12 +6947,15 @@ public class MyTools
 			{
 			case 0:
 			case 255://No conversation/monsters
+			case 256:
+			case 257:
 			case 258:
 			case 259:
 			case 261:
 			case 264:
 			case 265:
 			case 266:
+			case 267:
 			case 270:
 			case 273:
 			case 274:
@@ -11775,9 +6967,11 @@ public class MyTools
 			case 292:
 			case 293:
 			case 294:
+			case 297:
 			case 298:
 			case 302:
 			case 303:
+			case 304:
 			case 305:
 			case 308:
 			case 310:
@@ -11793,6 +6987,8 @@ public class MyTools
 				cnv=(Conversation)myObj.AddComponent<Conversation_4>();break;
 			case 5://Eyesnack
 				cnv=(Conversation)myObj.AddComponent<Conversation_5>();break;
+			case 6://Marrowsuck
+				cnv=(Conversation)myObj.AddComponent<Conversation_6>();break;
 			case 7://Ketchaval
 				cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
 			case 8://Retichall
@@ -11869,6 +7065,10 @@ public class MyTools
 				cnv=(Conversation)myObj.AddComponent<Conversation_147>();break;
 			case 148://Cecil
 				cnv=(Conversation)myObj.AddComponent<Conversation_148>();break;
+			case 161://Anjor
+				cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
+			case 162://Kneeknibble
+				cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
 			case 149://Meredith
 				cnv=(Conversation)myObj.AddComponent<Conversation_149>();break;
 			case 262://Generic Green Goblin
@@ -12050,6 +7250,21 @@ public class MyTools
 		myObj.AddComponent<FishingPole>();
 	}
 
+	static void AddZanium(GameObject myObj)
+	{
+		myObj.AddComponent<Zanium>();
+		myObj.layer=LayerMask.NameToLayer("Zanium");//TO allow collision with the player.
+		myObj.GetComponent<BoxCollider>().isTrigger=true;
+		GameObject newObj = new GameObject(myObj.name+"_child");
+
+		newObj.transform.parent=myObj.transform;
+		newObj.transform.localPosition=Vector3.zero;
+		BoxCollider bx = newObj.AddComponent<BoxCollider>();
+		bx.center=new Vector3(0.0f,0.1f,0.0f);
+		bx.size=new Vector3(0.15f,0.15f,0.15f);
+		newObj.layer=LayerMask.NameToLayer("UWObjects");
+	}
+
 	static void AddInstrument(GameObject myObj)
 	{
 		myObj.AddComponent<Instrument>();
@@ -12059,6 +7274,12 @@ public class MyTools
 		audio.clip=Resources.Load <AudioClip>("SFX/instrument");
 	}
 
+
+	static void AddDoorLink(GameObject myObj, string link)
+	{
+		DoorControl dc = myObj.GetComponent<DoorControl>();
+		dc.UseLink=link;
+	}
 
 }
 

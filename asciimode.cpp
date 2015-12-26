@@ -792,7 +792,8 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 		if (objectMasters[objList[z].item_id].type== BRIDGE)
 			{
 			x = objList[z].tileX; y = objList[z].tileY;
-			fprintf(LOGFILE, "SetObjectTag(\"BRIDGE_%02d_%02d\", \"LAND_%d\");\n", x, y, LevelInfo[x][y].bridgeRegion);
+			//fprintf(LOGFILE, "SetObjectTag(\"BRIDGE_%02d_%02d\", \"LAND_%d\");\n", x, y, LevelInfo[x][y].bridgeRegion);
+			fprintf(LOGFILE, "SetObjectTag(\"%s\", \"LAND_%d\");\n", UniqueObjectName(objList[z]), LevelInfo[x][y].bridgeRegion);
 			}
 		}
 	}

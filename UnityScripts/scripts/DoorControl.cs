@@ -12,7 +12,7 @@ public class DoorControl : object_base {
 	public bool Pickable;//Sets if the lock can be picked.
 	public bool Spiked;//Is the door spiked/
 	private bool PlayerUse=false;//Is it the player using the object or a trigger/trap.
-
+	public string UseLink;//A trigger to activate when opened.
 
 	public override bool use ()
 	{
@@ -178,6 +178,15 @@ public class DoorControl : object_base {
 				}
 				objInt.item_id+=8;
 				state=true;
+				if (UseLink!="")
+				{
+					GameObject trigObj = GameObject.Find (UseLink);
+					if (trigObj!=null)
+					{
+						trigger_base tb = trigObj.GetComponent<trigger_base>();
+						tb.Activate();
+					}
+				}
 			}
 		}
 	}

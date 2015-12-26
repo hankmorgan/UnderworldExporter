@@ -14,7 +14,7 @@ public class GameWorldController : MonoBehaviour {
 	public bool EnableTextureAnimation;
 	public GameObject WorldModel;
 	public static TextureController tc;
-	public bool hideCeil;
+	//public bool hideCeil;
 	public static GameWorldController instance;
 	public int LevelNo;
 	public Texture2D[] paletteArray= new Texture2D[8];
@@ -23,11 +23,11 @@ public class GameWorldController : MonoBehaviour {
 	private bool Test;
 	public TileMap Tilemap;
 	public UWCharacter playerUW;
-	public MeshRenderer ceil;
+	//public MeshRenderer ceil;
 
 	void Start () {
 		instance=this;
-		ceil.enabled=!hideCeil;
+		//ceil.enabled=!hideCeil;
 		if (EnableTextureAnimation==true)
 		{
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);

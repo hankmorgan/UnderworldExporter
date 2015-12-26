@@ -5102,8 +5102,10 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							FbxVector4 lControlPointl5(x1, y0, z0);
 							FbxVector4 lControlPointl6(x1, y1, z0);
 							FbxVector4 lControlPointl7(x0, y1, z0);
-							char BridgeName[20];
-							sprintf_s(BridgeName, "BRIDGE_%02d_%02d", x, y);
+							char BridgeName[80];
+							//sprintf_s(BridgeName, "BRIDGE_%02d_%02d", x, y);
+						//	sprintf_s(BridgeName, "%s", UniqueObjectName(objList[nextObj]));
+							sprintf_s(BridgeName, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[objList[nextObj].item_id].desc, objList[nextObj].tileX, objList[nextObj].tileY, objList[nextObj].levelno, objList[nextObj].index);
 							RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, z0, z1, BridgeName,
 								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,
 								lControlPointl4, lControlPointl5, lControlPointl6, lControlPointl7,

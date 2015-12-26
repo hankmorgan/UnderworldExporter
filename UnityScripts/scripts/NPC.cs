@@ -213,7 +213,15 @@ public class NPC : object_base {
 		string output = playerUW.StringControl.GetFormattedObjectNameUW(objInt,NPCMoodDesc());
 		if ((npc_whoami >=1) && (npc_whoami<255)) 
 		{
-			output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
+			if (npc_whoami==207)
+			{
+				output= "You see an " + NPCMoodDesc() + " " + playerUW.StringControl.GetString (7,npc_whoami+16);
+			}
+			else
+			{
+				output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
+			}
+
 		}
 		ml.Add (output);
 		return true;

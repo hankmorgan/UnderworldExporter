@@ -373,24 +373,14 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	}
 
 void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
-	{//TODO:Put in code to handle open and closed door versions. 
+	{
 	//Params
 	//item_id
 	//tileX
 	//tileY
 	//Link for a lock
-int hasLock=0;
+	int hasLock = 0;
 
-	//float BrushX = BrushSizeX;
-	//float BrushY = BrushSizeY;
-	//float zpos = z;
-
-	//zpos = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ;//Force the door to stay on the ground.
-	//z = zpos;
-
-	//for a door I need to point it's used_by property at the key object's name. This is accessed through a lock object
-
-	//RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"door_%03d_%03d\");",currobj.tileX, currobj.tileY);//Create the object
 	switch (currobj.heading)
 		{//Move the object position so it can pivot properly.
@@ -409,41 +399,19 @@ int hasLock=0;
 		}
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
-	//fprintf(UNITY_FILE, "\n\tCreateObjectGraphics(myObj,\"Sprites/objects_%03d\",true);", currobj.item_id);
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (game != SHOCK)
 		{//bit 0-6 of the lock objects link is the keyid for opening it in uw
 		// The flags control the lock state
 		if (currobj.link != 0)
 			{
-			hasLock=1;
-			}
-		}
-	
-//	RenderUnityObjectInteraction(game, x, y, z, currobj-, objList, LevelInfo);
-
-	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))	//door has a lock. bit 0-6 of the lock objects link is the keyid for opening it in uw
-		{
-		if (game != SHOCK)
-			{
-			//The door is locked and needs a key
-			}
-		else
-			{
-			//And the same in shock
-			//fprintf(MAPFILE, "\"locked\" \"%d\"\n", 1);
-			if ((currobj.link > 0) && (currobj.link <= 11))	//Only this many keycards
+			if (objectMasters[objList[currobj.link].item_id].type == LOCK)
 				{
-				//char *strKeyName = getObjectNameByClass(GETTABLES_OTHER, 4, currobj.link);
-				//fprintf(MAPFILE, "\"used_by\" \"%s_0\"\n", strKeyName);
-				//fprintf(MAPFILE, "\"used_by1\" \"%s_1\"\n", strKeyName);
-				//fprintf(MAPFILE, "\"used_by2\" \"%s_2\"\n", strKeyName);
-				//fprintf(MAPFILE, "\"used_by3\" \"%s_3\"\n", strKeyName);
-				//fprintf(MAPFILE, "\"used_by4\" \"%s_4\"\n", strKeyName);
-				//fprintf(MAPFILE, "\"used_by5\" \"%s_5\"\n", strKeyName);
-				}
+				hasLock = 1;
+				}			
 			}
 		}
+
 	if (game != SHOCK)
 		{
 		int isOpen=0;
@@ -468,7 +436,6 @@ int hasLock=0;
 					fprintf(UNITY_FILE, "\n\tCreatePortcullis(myObj, %d, %d, %d);",
 						objList[currobj.link].link & 0x3F,
 						hasLock, isOpen);
-					//fprintf(UNITY_FILE, "\n\tSetPortcullis(myObj,true);");
 					break;
 			}
 		UnityRotation(game, -90, currobj.heading - 180, 0);
@@ -477,19 +444,19 @@ int hasLock=0;
 		{
 		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
 		}
-	//if (objectMasters[currobj.item_id].type == PORTCULLIS)
-	//	{
-	//	//The door is a portcullis and must translate up.
-	//	//fprintf(MAPFILE, "\"rotate\" \"0 0 0\"\n");
-	//	//fprintf(MAPFILE, "\"translate\" \"0 0 80\"\n");
-	//	
-	//	}
+	if ((currobj.link != 0) && (hasLock==0))
+		{//Object has a link but not to a lock object. Therefore this is probably a use trigger.
+		objList[currobj.link].InUseFlag=1;//Make sure the link is rendered
+		fprintf(UNITY_FILE,"\n\tAddDoorLink(myObj, \"%s\");",UniqueObjectName(objList[currobj.link]));
+		}
 
+	/*
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
 		{	
 		//if it has a lock it needs a lock object for scripting purposes
 		RenderUnityEntity(game, x, y, z, objList[currobj.link],objList,LevelInfo);
 		}
+		*/
 	return;
 	}
 
@@ -1681,8 +1648,10 @@ int target;
 						case 0x02://Camera
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);",currobj.quality,currobj.flags); break;}
 						case 0x03://Platform
-							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality); break; }
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality,currobj.flags); break; }
 						case 0x18:	//bullfrog
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
+						case 0x2a://Talking door
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						default:
 							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj);"); break; }
