@@ -10,7 +10,17 @@ public class Food : object_base {
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-			return Eat();
+			if (objInt.item_id!=191)
+			{
+				return Eat();
+			}
+			else
+			{//The wine of compassion.
+				//000~001~127~You are unable to open the wine bottle.
+				ml.Add(playerUW.StringControl.GetString(1,127));
+				return true;
+			}
+
 		}
 		else
 		{
@@ -40,7 +50,14 @@ public class Food : object_base {
 	public override bool LookAt()
 	{
 		//Code for when looking at food. Should one day return quantity and smell properly
+		if (objInt.item_id!=191)
+		{
 		ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt,foodSmellText()));
+		}
+		else
+		{//The wine of compassion.
+			ml.Add ("You see " + playerUW.StringControl.GetString(1,264));
+		}
 		return true;
 	}
 

@@ -26,7 +26,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_barrel_02_02_05_0628",2.914286f,0.900000f,2.742857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_347",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 625, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", "Sprites/OBJECTS_347", 19, 347, 625, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 		////Container contents
 		ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
 		AddObjectToContainer("an_apple_99_99_05_0625", ParentContainer, 0);
@@ -804,7 +804,7 @@ public class MyTools
 		
 		myObj= CreateGameObject("a_shrine_03_32_05_0908",4.780000f,2.100000f,38.914284f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_343",true);
-		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", 83, 343, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", "Sprites/OBJECTS_343", 83, 343, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 		AddShrine(myObj);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_33_34_05_0922",39.942856f,3.600000f,41.142857f);
@@ -891,7 +891,7 @@ public class MyTools
 		myObj= CreateGameObject("a_helmet_53_39_05_0754",64.285713f,3.000000f,47.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_046",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_046", "Sprites/OBJECTS_046", "Sprites/armour/armor_f_0014", 73, 46, 0, 8, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 3675656, 3675656);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 2955168, 2955168);
 		
 		myObj= CreateGameObject("a_blood_stain_53_39_05_0758",63.942856f,3.000000f,47.142857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
@@ -1240,7 +1240,7 @@ public class MyTools
 		myObj= CreateGameObject("a_crown_26_46_05_0679",31.542856f,3.600000f,56.057144f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_048",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_048", "Sprites/OBJECTS_048", "Sprites/armour/armor_f_0061", 73, 48, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 3675656, 3675656);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 2955168, 2955168);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_46_05_0686",46.457142f,1.200000f,55.542858f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
@@ -1517,6 +1517,9 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_191", "Sprites/OBJECTS_191", "Sprites/OBJECTS_191", 24, 191, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		SetFood(myObj);
 		
+		myObj= CreateGameObject("a_bridge_27_50_05_0827",33.000000f,2.325000f,60.600002f);
+		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_356", "Sprites/OBJECTS_356", "Sprites/OBJECTS_356", 7, 356, 822, 40, 0, 0, 1, 0, 1, 0, 0, 2, 1);
+		AddBridgeLink(myObj,"Materials/tmap/uw1_222", "a_use_trigger_99_99_05_0822", 222);
 		
 		
 		myObj= CreateGameObject("a_bench_benches_33_50_05_0662",40.457142f,3.600000f,61.180000f);
@@ -2748,8 +2751,6 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_055",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_055", "Sprites/OBJECTS_055", "Sprites/OBJECTS_055", 78, 55, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddShield(myObj);
-
-	
 
 
 
@@ -7275,10 +7276,38 @@ public class MyTools
 	}
 
 
-	static void AddDoorLink(GameObject myObj, string link)
+	static void AddDoorLink(GameObject myObj, string uselink)
 	{
 		DoorControl dc = myObj.GetComponent<DoorControl>();
-		dc.UseLink=link;
+		dc.UseLink=uselink;
+	}
+
+	static void AddBridgeLink(GameObject myObj, string BridgeTexture, string uselink, int TextureIndex)
+	{
+		Bridge br = myObj.AddComponent<Bridge>();
+		br.TextureIndex=TextureIndex;
+		br.UseLink=uselink;
+		myObj.layer=LayerMask.NameToLayer("MapMesh");
+		
+		GameObject SpriteController = GameObject.CreatePrimitive(PrimitiveType.Cube); // new GameObject(myObj.name + "_quad");
+		SpriteController.name = myObj.name + "_cube";
+		SpriteController.transform.position = myObj.transform.position;
+		SpriteController.transform.rotation=myObj.transform.rotation;
+		SpriteController.transform.parent = myObj.transform;
+		SpriteController.transform.localScale=new Vector3(1.2f,0.15f,1.2f);
+		SpriteController.transform.localPosition=Vector3.zero;//new Vector3(0.0f,0.25f,0.0f);
+		
+		MeshRenderer mr = SpriteController.GetComponent<MeshRenderer>();
+		//mr.material= (Material)Resources.Load ("Materials/tmobj/tmobj_" + tmObj_index);
+		mr.material= (Material)Resources.Load (BridgeTexture);
+		BoxCollider bx = myObj.GetComponent<BoxCollider>();
+		bx.center=Vector3.zero; //new Vector3(0.0f,0.25f,0.0f);
+		bx.size=new Vector3(1.2f,0.15f,1.2f);
+		bx.isTrigger=false;
+		
+		bx=SpriteController.GetComponent<BoxCollider>();
+		bx.enabled=false;
+		Component.DestroyImmediate (bx);
 	}
 
 }

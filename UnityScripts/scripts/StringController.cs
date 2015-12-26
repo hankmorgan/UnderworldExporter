@@ -458,7 +458,7 @@ public class StringController : MonoBehaviour {
 
 	public string TextureDescription(int index)
 	{//TODO:fix floor and wall naming
-		return (GetString(1,260) + " " + GetString (10,index));
+		return (GetString(1,260)  + GetString (10,index));
 	}
 
 	private bool Load(string fileName)

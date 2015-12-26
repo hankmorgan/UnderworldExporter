@@ -1341,9 +1341,29 @@ void RenderUnityEntityGrating(int game, float x, float y, float z, ObjectItem &c
 
 void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//UW2 bridges
-	//RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	if (currobj.link != 0)
+		{
+//MOVE THE BRIDGE TO THE CENTER OF THE TILE
+		x = ((float)(currobj.tileX)*1.2f) + 0.6f;
+		y = ((float)(currobj.tileY)*1.2f) + 0.6f;
+
+
+
+		RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+		if (currobj.flags >=2)
+			{
+			fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj,\"Materials/tmap/uw%d_%03d\", \"%s\", %d);",game,currobj.texture, UniqueObjectName(objList[currobj.link]),currobj.texture);
+			}
+		else
+			{
+			fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj,\"Materials/tmobj/tmobj_%02d\", \"%s\", %d);", 28+currobj.flags, UniqueObjectName(objList[currobj.link]),0);
+			}
+		
+		}
+	
 	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	//RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+	
 	if (currobj.flags < 2)
 		{
 		//fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_%02d\"\n", game, currobj.flags & 0x7);
@@ -1882,7 +1902,7 @@ return;
 							RenderUnityEntityPaintingUW(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case BRIDGE:
-							//RenderUnityEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityBridgeUW(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case SHOCK_BRIDGE:
 							RenderUnityEntityBridgeSHOCK(game, x, y, z, currobj, objList, LevelInfo);

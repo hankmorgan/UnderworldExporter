@@ -5052,7 +5052,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 					long nextObj = LevelInfo[x][y].indexObjectList;
 					while (nextObj != 0)
 						{
-						if (objectMasters[objList[nextObj].item_id].type == BRIDGE)
+						if ((objectMasters[objList[nextObj].item_id].type == BRIDGE) && (objList[nextObj].link == 0))//Only render if not linked to a use trigger
 							{
 							
 							tile tmpt;
