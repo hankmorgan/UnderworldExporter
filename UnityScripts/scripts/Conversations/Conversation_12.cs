@@ -896,7 +896,7 @@ public class Conversation_12 : Conversation {
 			locals[23] = -1;
 			locals[24] = -1;
 			//x_obj_stuff( 9, locals[24], locals[23], locals[22], locals[18], locals[21], locals[17], locals[20], locals[19], locals[12] );
-			x_obj_stuff( 10,locals, 24, 23, 22, 18, 21, 17, 20, 19, 12 );
+			x_obj_stuff( 10,locals, 24, 23, 22, 18, 21, 17, 20, 19, locals[12] );
 			//if ( param2[0]play_hunger != -1 && param2[0]play_hunger != locals[17] ) {
 			//locals[18]=101;//Writ
 			//local[17]=31;//Plate
@@ -1168,7 +1168,7 @@ public class Conversation_12 : Conversation {
 			locals[11] = -1;
 			locals[12] = -1;
 			//x_obj_stuff( 9, locals[12], locals[11], locals[10], locals[9], locals[8], locals[7], locals[6], locals[5], locals[1] );
-			x_obj_stuff( 10,locals, 12, 11, 10, 9, 8, 7, 6, 5, 1 );
+			x_obj_stuff( 10,locals, 12, 11, 10, 9, 8, 7, 6, 5,locals[1] );
 			locals[13] = 287;
 			if ( take_from_npc( 1, locals[13] ) == 2 ) {
 				

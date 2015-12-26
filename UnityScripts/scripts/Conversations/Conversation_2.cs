@@ -97,7 +97,7 @@ public class Conversation_2 : Conversation {
 	} // end func
 	
 	int func_0106(int param1, int param2) {
-
+		return 1;
 		//int locals[4];
 		int[]locals =new int[5];
 		
@@ -556,10 +556,10 @@ public class Conversation_2 : Conversation {
 			
 			if ( global[2,0] == 10 ) {
 				
-				func_1064();
+				yield return StartCoroutine(func_1064());
 			} else {
 				
-				func_0d65();
+				yield return StartCoroutine(func_0d65());
 			} // end if
 			
 		} else {
@@ -1078,7 +1078,7 @@ public class Conversation_2 : Conversation {
 		locals[1] = 10;
 		set_inv_quality( 2, locals[2], 2 );
 		locals[3] = 1;
-		func_11f7( locals[3], 1 ) ;
+		yield return StartCoroutine(func_11f7( locals[3], 1 ) );
 		//if ( func_11f7( locals[3], 1 ) ) {
 		if ( func_11f7_result==1) {
 			if ( take_id_from_npc( 1, 2 ) == 2 ) {
@@ -1342,11 +1342,11 @@ public class Conversation_2 : Conversation {
 			locals[13] = -1;
 			locals[14] = -1;
 			//x_obj_stuff( 9, locals[14], locals[13], locals[12], locals[11], locals[10], locals[9], locals[8], locals[7], locals[1] );
-			x_obj_stuff( 10,locals, 14, 13,12,11, 10, 9, 8, 7, 1 );
+			x_obj_stuff( 10,locals, 14, 13,12,11, 10, 9, 8, 7, locals[1]-1 );//Minus 1 for find_inv
 		} // end if
 		
 		locals[15] = 1;
-		func_11f7( locals[15], 1 );
+		 func_11f7( locals[15], 1 );
 		//if ( func_11f7( locals[15], 1 ) ) {
 		if (func_11f7_result ==1){
 			locals[16] = 10;

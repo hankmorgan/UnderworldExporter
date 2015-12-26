@@ -1131,13 +1131,13 @@ public class Conversation : GuiBase {
 		//         property value.
 		//If -1 then it sets the value in the array?
 		ObjectInteraction obj;
-		if (locals[pos]<4)
+		if (pos<4)
 		{//Item is in players trade area.
-			obj= playerUW.playerHud.playerTrade[locals[pos]].GetGameObjectInteraction();
+			obj= playerUW.playerHud.playerTrade[pos].GetGameObjectInteraction();
 		}
 		else if (pos <=7)
 		{//item in npc trade area
-			obj= playerUW.playerHud.npcTrade[locals[pos]-4].GetGameObjectInteraction();
+			obj= playerUW.playerHud.npcTrade[pos-4].GetGameObjectInteraction();
 		}
 		else
 		{
@@ -1291,7 +1291,8 @@ public class Conversation : GuiBase {
 		//parameters:   unknown
 		//description:  unknown
 		//return value: unknown
-		return Random.Range(0,2);
+		Debug.Log ("X_skill");
+		return 1;
 	}
 
 	public int check_inv_quality(int unk1, int itemPos)

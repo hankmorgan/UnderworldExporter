@@ -466,7 +466,7 @@ public class Conversation_139 : Conversation {
 		locals[37] = -1;
 		locals[38] = -1;
 		//x_obj_stuff( 9, locals[38], locals[37], locals[36], locals[35], locals[34], locals[33], locals[32], locals[31], locals[1] );
-		x_obj_stuff(10,locals,38,37,36,35,34,33,32,31,1);
+		x_obj_stuff(10,locals,38,37,36,35,34,33,32,31,locals[1]-1);
 		locals[39] = locals[2];
 		if ( 0 == locals[39] ) {
 			

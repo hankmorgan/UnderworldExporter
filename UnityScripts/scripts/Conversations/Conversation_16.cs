@@ -675,7 +675,7 @@ public class Conversation_16 : Conversation {
 			locals[41] = -1;
 			locals[42] = -1;
 			//x_obj_stuff( 9, locals[42], locals[41], locals[40], locals[12], locals[39], locals[38], locals[37], locals[36], locals[5] );
-			x_obj_stuff( 10,locals, 42, 41, 40, 12, 39, 38, 37,36,5);
+			x_obj_stuff( 10,locals, 42, 41, 40, 12, 39, 38, 37,36,locals[5]);
 			if ( locals[12] == 67 ) {
 				
 				locals[43] = -1;

@@ -495,7 +495,7 @@ public class Conversation_143 : Conversation {
 			locals[9] = -1;
 			locals[10] = -1;
 			//x_obj_stuff( 9, locals[10], locals[9], locals[8], locals[7], locals[6], locals[5], locals[4], locals[3], locals[1] );
-			x_obj_stuff( 10,locals, 10, 9, 8, 7, 6, 5, 4, 3, 1 );
+			x_obj_stuff( 10,locals, 10, 9, 8, 7, 6, 5, 4, 3, locals[1] );
 			locals[11] = 314;
 			if ( take_from_npc( 1, locals[11] ) == 2 ) {
 				

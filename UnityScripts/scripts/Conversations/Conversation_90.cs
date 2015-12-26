@@ -461,7 +461,7 @@ public class Conversation_90 : Conversation {
 				locals[208] = -1;
 				locals[209] = -1;
 				//x_obj_stuff( 9, locals[209], locals[208], locals[207], locals[206], locals[205], locals[204], locals[203], locals[202], locals[17] );
-				x_obj_stuff( 10, locals,209, 208, 207, 206,205, 204, 203, 202, 17 );
+				x_obj_stuff( 10, locals,209, 208, 207, 206,205, 204, 203, 202, locals[17]-1 );//Minus 1 for find_inv
 			} // end if
 			locals[210] = 188;
 			locals[16] = take_from_npc( 1, locals[210] );
