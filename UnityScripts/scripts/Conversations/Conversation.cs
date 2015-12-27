@@ -31,6 +31,7 @@ usages of switch statements in if-else blocks are sometimes borked.
 
 Fix the Param arrays being passed into local functions. Especially ones that set the npcs attitude.
 Fix up gender strings and other @SSx text replacements.
+Replace strings with string numbers from strings file.
 */
 
 public class Conversation : GuiBase {
@@ -48,7 +49,7 @@ public class Conversation : GuiBase {
 	public static bool ConversationOpen=false;
 	public static bool EnteringQty;
 
-	public int StringNo;
+	private int StringBlock;
 
 	public int[] privateVariables=new int[31] ;
 //	public int[] param1=new int[31];//TODO:is this correct. I think this only refers to params in functions calls. Eg void func_00b1. 
@@ -179,7 +180,7 @@ public class Conversation : GuiBase {
 			mus.GetComponent<MusicController>().InMap=true;
 		}
 
-		StringNo =stringno;
+		StringBlock =stringno;
 
 		//slow the world
 		Time.timeScale=0.00f;
@@ -233,10 +234,12 @@ public class Conversation : GuiBase {
 		StopAllCoroutines();
 	}
 
-	public virtual void OnDeath()
+	public virtual bool OnDeath()
 	{//Code to be called upon the death of this character.
 		//Mainly used for cases where specific character deaths set quest flags.
-		return;
+		//return true to stop further death event processing. (ie spilling inventory)
+		//
+		return false;
 	}
 
 	// Use this for initialization
@@ -413,13 +416,13 @@ public class Conversation : GuiBase {
 
 	IEnumerator say(int WhatToSay)
 	{
-		string tmp = playerUW.StringControl.GetString (StringNo,WhatToSay);
+		string tmp = playerUW.StringControl.GetString (StringBlock,WhatToSay);
 		yield return StartCoroutine(say (tmp,NPC_SAY));
 	}
 
 	IEnumerator say(int WhatToSay,int SayType)
 	{
-		string tmp = playerUW.StringControl.GetString (StringNo,WhatToSay);
+		string tmp = playerUW.StringControl.GetString (StringBlock,WhatToSay);
 		yield return StartCoroutine(say (tmp,SayType));
 	}
 
@@ -437,7 +440,7 @@ public class Conversation : GuiBase {
 
 	public string GetString(int index)
 	{
-		return playerUW.StringControl.GetString(StringNo,index);
+		return playerUW.StringControl.GetString(StringBlock,index);
 	}
 
 	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
@@ -450,8 +453,8 @@ public class Conversation : GuiBase {
 		{
 			if (localsArray[i]!=0)
 			{
-				//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
-				tl_input.Add(j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]).Replace("@GS8",playerUW.CharName));
+				//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]) + "\n";
+				tl_input.Add(j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]).Replace("@GS8",playerUW.CharName));
 				MaxAnswer++;
 			}
 			else
@@ -465,7 +468,7 @@ public class Conversation : GuiBase {
 
 		yield return StartCoroutine(WaitForInput());
 
-		tmp= playerUW.StringControl.GetString(StringNo,localsArray[Start+PlayerAnswer-1]);
+		tmp= playerUW.StringControl.GetString(StringBlock,localsArray[Start+PlayerAnswer-1]);
 		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
@@ -488,8 +491,8 @@ public class Conversation : GuiBase {
 				if (localsArray[flagIndex++] !=0)
 				{
 					bablf_array[j-1] = localsArray[i];
-					//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]) + "\n";
-					tl_input.Add (j++ + "." + playerUW.StringControl.GetString(StringNo,localsArray[i]));
+					//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]) + "\n";
+					tl_input.Add (j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]));
 					MaxAnswer++;
 				}
 			}
@@ -502,7 +505,7 @@ public class Conversation : GuiBase {
 		//tl_input.maxEntries=1;
 		//tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
-		tmp= playerUW.StringControl.GetString (StringNo,bablf_array[bablf_ans-1]);
+		tmp= playerUW.StringControl.GetString (StringBlock,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
@@ -1072,9 +1075,9 @@ public class Conversation : GuiBase {
 		playerUW.quest ().QuestVariables[QuestNo]=value;
 	}
 
-	public IEnumerator print(int unk1, int StringNo)
+	public IEnumerator print(int unk1, int StringBlock)
 	{
-		yield return StartCoroutine(say (StringNo,PRINT_SAY));
+		yield return StartCoroutine(say (StringBlock,PRINT_SAY));
 	}
 
 	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int unk5)
@@ -1271,7 +1274,7 @@ public class Conversation : GuiBase {
 		}
 	}
 
-	public int contains(int unk1, string String1, int StringNo)
+	public int contains(int unk1, string String1, int StringBlock)
 	{
 		//id=0007 name="contains" ret_type=int
 		//parameters:   arg1: pointer to first string id
@@ -1281,7 +1284,7 @@ public class Conversation : GuiBase {
 		//return value: returns 1 when the string was found, 0 when not
 
 
-		return contains (unk1,String1, GetString (StringNo));
+		return contains (unk1,String1, GetString (StringBlock));
 	}
 
 
@@ -1393,6 +1396,10 @@ public class Conversation : GuiBase {
 
 		switch (item_id)
 		{//Some known cases
+		case 276://Exploding book
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			myObj.AddComponent<ReadableTrap>();
+			break;
 		case 47://Dragonskin boots
 			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			//myObj.AddComponent<Boots>();

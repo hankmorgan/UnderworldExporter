@@ -14,7 +14,6 @@ public class MyTools
 	static void Create()
 	{
 		
-		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
@@ -39,7 +38,7 @@ public class MyTools
 		pos = new Vector3(5.314286f, 0.900000f, 2.600000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 920, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_01", 37, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_01_material", 37, 0, 0);
 		SetRotation(myObj,-90,90,0);
 		AddDoorLink(myObj, "a_use_trigger_99_99_05_0920");
 		
@@ -98,7 +97,7 @@ public class MyTools
 		pos = new Vector3(28.628572f, 3.600000f, 3.800000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", "Sprites/OBJECTS_325", 4, 325, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_01", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_01_material", 0, 0, 0);
 		SetRotation(myObj,-90,90,0);
 		
 		myObj= CreateGameObject("a_broken_sword_52_03_05_0596",63.257145f,0.300000f,4.285714f);
@@ -132,7 +131,7 @@ public class MyTools
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
-		myObj= CreateGameObject("a_blood_stain_52_04_05_0591",62.914288f,0.150000f,5.314286f);
+		myObj= CreateGameObject("a_blood_stain_52_04_05_0591",62.914288f,0.483333f,5.314286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
 		
 		myObj= CreateGameObject("a_skull_03_05_05_0627",3.942857f,0.900000f,6.171429f);
@@ -154,14 +153,14 @@ public class MyTools
 		pos = new Vector3(28.628572f, 3.600000f, 6.200000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", "Sprites/OBJECTS_324", 4, 324, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_09", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_09_material", 0, 0, 0);
 		SetRotation(myObj,-90,90,0);
 		
 		myObj = new GameObject("door_051_005");
 		pos = new Vector3(61.220001f, 0.000000f, 6.200000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/world/uw1_201", 0, 0, 0);
+		CreateDoor(myObj,"materials/tmap/uw1_201", 0, 0, 0);
 		SetRotation(myObj,-90,90,0);
 		
 		
@@ -180,7 +179,7 @@ public class MyTools
 		pos = new Vector3(28.628572f, 3.600000f, 8.600000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_03_material", 0, 0, 0);
 		SetRotation(myObj,-90,90,0);
 		
 		
@@ -432,7 +431,7 @@ public class MyTools
 		pos = new Vector3(18.514286f, 3.600000f, 15.800000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", "Sprites/OBJECTS_323", 4, 323, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_07", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_07_material", 0, 0, 0);
 		SetRotation(myObj,-90,90,0);
 		
 		myObj= CreateGameObject("some_grass_bunches_of_grass_05_14_05_0865",6.514286f,0.900000f,17.828571f);
@@ -565,7 +564,7 @@ public class MyTools
 		pos = new Vector3(18.200001f, 3.600000f, 21.771429f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", "Sprites/OBJECTS_321", 4, 321, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_02", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_02_material", 0, 0, 0);
 		SetRotation(myObj,-90,-180,0);
 		
 		
@@ -576,42 +575,42 @@ public class MyTools
 		SetRotation(myObj,0,0,0);
 		SetButtonProperties(myObj, 1, "Sprites/tmflat/tmflat_0009", "Sprites/tmflat/tmflat_0001");
 		
-		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_53_19_05_0901",64.285713f,0.000000f,23.142857f);
+		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_53_19_05_0901",64.285713f,0.133333f,23.142857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", "Sprites/OBJECTS_198", 23, 198, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_skull_53_19_05_0903",63.942856f,0.000000f,23.485716f);
+		myObj= CreateGameObject("a_skull_53_19_05_0903",63.942856f,0.266667f,23.485716f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", "Sprites/OBJECTS_194", 23, 194, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("an_emerald_53_19_05_0937",63.771431f,0.000000f,23.657143f);
+		myObj= CreateGameObject("an_emerald_53_19_05_0937",63.771431f,0.333333f,23.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("an_emerald_53_19_05_0938",64.114288f,0.000000f,23.828571f);
+		myObj= CreateGameObject("an_emerald_53_19_05_0938",64.114288f,0.400000f,23.828571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("an_emerald_53_19_05_0939",64.285713f,0.000000f,23.485716f);
+		myObj= CreateGameObject("an_emerald_53_19_05_0939",64.285713f,0.266667f,23.485716f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("an_emerald_53_19_05_0943",64.285713f,0.000000f,23.314285f);
+		myObj= CreateGameObject("an_emerald_53_19_05_0943",64.285713f,0.200000f,23.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("an_emerald_53_19_05_0930",64.457146f,0.000000f,23.142857f);
+		myObj= CreateGameObject("an_emerald_53_19_05_0930",64.457146f,0.133333f,23.142857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("an_emerald_53_19_05_0931",63.942856f,0.000000f,23.142857f);
+		myObj= CreateGameObject("an_emerald_53_19_05_0931",63.942856f,0.133333f,23.142857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_167",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", "Sprites/OBJECTS_167", 18, 167, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 		AddObj_base(myObj);
@@ -891,7 +890,7 @@ public class MyTools
 		myObj= CreateGameObject("a_helmet_53_39_05_0754",64.285713f,3.000000f,47.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_046",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_046", "Sprites/OBJECTS_046", "Sprites/armour/armor_f_0014", 73, 46, 0, 8, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 2955168, 2955168);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 3018912, 3018912);
 		
 		myObj= CreateGameObject("a_blood_stain_53_39_05_0758",63.942856f,3.000000f,47.142857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_222",true);
@@ -922,7 +921,7 @@ public class MyTools
 		pos = new Vector3(20.600000f, 3.600000f, 50.380001f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/world/uw1_048", 0, 0, 0);
+		CreateDoor(myObj,"materials/tmap/uw1_048", 0, 0, 0);
 		SetRotation(myObj,-90,-180,0);
 		
 		myObj= CreateGameObject("some_writing_32_41_05_1017",38.914284f,4.087500f,50.380001f);
@@ -1061,7 +1060,7 @@ public class MyTools
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", "Sprites/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
 		
-		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_40_43_05_0656",49.028568f,1.350000f,52.114288f);
+		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_40_43_05_0656",49.028568f,1.683333f,52.114288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_214",true);
 		
 		myObj = new GameObject("a_dread_spider_42_43_05_0202");
@@ -1169,7 +1168,7 @@ public class MyTools
 		pos = new Vector3(13.400000f, 3.600000f, 55.180000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", "Sprites/OBJECTS_327", 29, 327, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/world/uw1_048", 0, 0, 0);
+		CreateDoor(myObj,"materials/tmap/uw1_048", 0, 0, 0);
 		SetRotation(myObj,-90,-180,0);
 		
 		myObj = new GameObject("a_dread_spider_43_45_05_0201");
@@ -1240,7 +1239,7 @@ public class MyTools
 		myObj= CreateGameObject("a_crown_26_46_05_0679",31.542856f,3.600000f,56.057144f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_048",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_048", "Sprites/OBJECTS_048", "Sprites/armour/armor_f_0061", 73, 48, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 2955168, 2955168);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", "Sprites/armour/armor_f_0061", "Sprites/armour/armor_m_0061", 3018912, 3018912);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_46_05_0686",46.457142f,1.200000f,55.542858f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
@@ -1453,7 +1452,7 @@ public class MyTools
 		pos = new Vector3(10.600000f, 3.600000f, 59.657143f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_05", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_05_material", 0, 0, 0);
 		SetRotation(myObj,-90,0,0);
 		
 		
@@ -1506,7 +1505,7 @@ public class MyTools
 		pos = new Vector3(10.971428f, 3.600000f, 61.000000f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", "Sprites/OBJECTS_322", 4, 322, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_05", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_05_material", 0, 0, 0);
 		SetRotation(myObj,-90,-90,0);
 		
 		myObj= CreateGameObject("a_chair_12_50_05_0630",15.085714f,3.600000f,60.514286f);
@@ -1938,7 +1937,7 @@ public class MyTools
 		pos = new Vector3(46.285713f, 3.300000f, 68.199997f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_03_material", 0, 0, 0);
 		SetRotation(myObj,-90,-90,0);
 		
 		myObj= CreateGameObject("a_blood_stain_41_56_05_0764",50.228569f,3.300000f,68.057144f);
@@ -2132,21 +2131,21 @@ public class MyTools
 		pos = new Vector3(10.600000f, 3.600000f, 71.828568f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_03_material", 0, 0, 0);
 		SetRotation(myObj,-90,0,0);
 		
 		myObj = new GameObject("door_013_059");
 		pos = new Vector3(16.600000f, 3.600000f, 71.828568f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_03_material", 0, 0, 0);
 		SetRotation(myObj,-90,0,0);
 		
 		myObj = new GameObject("door_022_059");
 		pos = new Vector3(27.400000f, 3.600000f, 71.828568f);
 		myObj.transform.position = pos;
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", "Sprites/OBJECTS_320", 4, 320, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
-		CreateDoor(myObj,"textures/doors/doors_03", 0, 0, 0);
+		CreateDoor(myObj,"textures/doors/doors_03_material", 0, 0, 0);
 		SetRotation(myObj,-90,0,0);
 		
 		myObj= CreateGameObject("a_broken_wand_29_59_05_0665",35.828571f,3.600000f,71.828568f);
@@ -2175,7 +2174,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
 		myObj = new GameObject("a_bloodworm_43_59_05_0198");
-		pos = new Vector3(52.114288f, 3.112500f, 71.314285f);
+		pos = new Vector3(52.114288f, 3.312500f, 71.314285f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 43, 59, 0, 1, 0, 1, 0, 0, 0, 1);
@@ -2184,7 +2183,7 @@ public class MyTools
 		////Container contents
 		ParentContainer = CreateContainer(myObj, 255, 255, 255);
 		
-		myObj= CreateGameObject("a_gold_coin_46_59_05_0644",55.371429f,3.187500f,70.971428f);
+		myObj= CreateGameObject("a_gold_coin_46_59_05_0644",55.371429f,3.654166f,70.971428f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_161",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", "Sprites/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		AddObj_base(myObj);
@@ -2292,7 +2291,7 @@ public class MyTools
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_193",true);
 		
 		myObj = new GameObject("a_bloodworm_41_61_05_0199");
-		pos = new Vector3(49.885712f, 3.450000f, 73.885712f);
+		pos = new Vector3(49.885712f, 3.716666f, 73.885712f);
 		myObj.transform.position = pos;
 		CreateNPC(myObj,"82","Sprites/OBJECTS_082", 0);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", "Sprites/OBJECTS_082", 0, 82, 0, 41, 61, 0, 1, 0, 1, 0, 0, 0, 1);
@@ -2750,9 +2749,11 @@ public class MyTools
 		myObj= CreateGameObject("a_shiny_shield_99_99_05_0948",119.314285f,3.000000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_055",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_055", "Sprites/OBJECTS_055", "Sprites/OBJECTS_055", 78, 55, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		AddShield(myObj);
+		AddShield(myObj);		
 
+	
 
+	
 
 
 	}
@@ -5897,7 +5898,11 @@ public class MyTools
 			NPC_Door np =myObj.AddComponent<NPC_Door>();
 			np.npc_whoami=25;
 			myObj.AddComponent<Conversation_25>();
-			break;}
+			break;
+		}
+		case 0x28:
+			myObj.AddComponent<a_do_trap_emeraldpuzzle>();
+			break;
 		default:
 			{myObj.AddComponent<trap_base>();break;}
 		}
@@ -6093,6 +6098,7 @@ public class MyTools
 
 	static void CreateDoor(GameObject myObj, string DoorTexturePath, int DoorKey, int Locked,int isOpen)
 	{
+
 		GameObject myInstance = Resources.Load("Models/uw1_door") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
 		ObjectInteraction doorInteract = myObj.GetComponent<ObjectInteraction>();
@@ -6100,7 +6106,9 @@ public class MyTools
 		newObj.name=myObj.name + "_Model";
 		newObj.transform.parent=myObj.transform;
 		newObj.transform.position = myObj.transform.position;
-		newObj.GetComponent<Renderer>().material.mainTexture= Resources.Load <Texture2D> (DoorTexturePath);
+		//newObj.GetComponent<Renderer>().material.mainTexture= Resources.Load <Texture2D> (DoorTexturePath);
+		newObj.GetComponent<Renderer>().material=(Material)Resources.Load(DoorTexturePath);
+			//mr.material= (Material)Resources.Load ("Materials/tmobj/tmobj_" + tmObj_index);
 		newObj.GetComponent<MeshCollider>().enabled=false;
 		MeshCollider mc = myObj.AddComponent<MeshCollider>();
 	//	mc.convex=true;//unity 5
@@ -6112,7 +6120,10 @@ public class MyTools
 		DoorControl dc = myObj.AddComponent<DoorControl>();
 		dc.KeyIndex=DoorKey;
 		dc.locked = (Locked==1);
-		dc.state=(isOpen==1);
+		dc.state=(isOpen==1);	
+		BoxCollider bx=myObj.GetComponent<BoxCollider>();
+		bx.enabled=false;
+		Component.DestroyImmediate (bx);
 	}
 
 	static void CreatePortcullis(GameObject myObj, int DoorKey, int Locked, int isOpen)
@@ -6688,8 +6699,18 @@ public class MyTools
 
 	static void SetReadable(GameObject myObj)
 	{
-		myObj.AddComponent<Readable>();
+
 		ObjectInteraction objINt = myObj.GetComponent<ObjectInteraction>();
+
+		if (objINt.item_id==276)
+		{
+			myObj.AddComponent<ReadableTrap>();
+		}
+		else
+		{
+			myObj.AddComponent<Readable>();
+		}
+
 		objINt.isQuant=false;//?j
 	}
 
@@ -6947,6 +6968,7 @@ public class MyTools
 			switch (myObj.GetComponent<NPC>().npc_whoami)
 			{
 			case 0:
+			case 207://A worried spectre named warren
 			case 255://No conversation/monsters
 			case 256:
 			case 257:
@@ -6981,7 +7003,7 @@ public class MyTools
 			case 1://Corby
 				cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
 			case 2://Shak
-				cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
+				cnv=(Conversation)myObj.AddComponent<Conversation_2>();break;
 			case 3://Goldthirst
 				cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
 			case 4://Shanlick
@@ -7000,6 +7022,10 @@ public class MyTools
 				cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
 			case 12:// Dorna Ironfist
 				cnv=(Conversation)myObj.AddComponent<Conversation_12>();break;
+			case 13:// Morlock
+				cnv=(Conversation)myObj.AddComponent<Conversation_13>();break;
+			case 14:// Dr Owl
+				cnv=(Conversation)myObj.AddComponent<Conversation_14>();break;
 			case 15://Sseetharee
 				cnv=(Conversation)myObj.AddComponent<Conversation_15>();break;
 			case 16://Ishtass
@@ -7014,10 +7040,14 @@ public class MyTools
 				cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
 			case 21://Steeltoe
 				cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
+			case 22://Golem
+				cnv=(Conversation)myObj.AddComponent<Conversation_22>();break;
 			case 23://Judy
 				cnv=(Conversation)myObj.AddComponent<Conversation_23>();break;
 			case 24://prisoner
 				cnv=(Conversation)myObj.AddComponent<Conversation_24>();break;
+			case 25://Talking door
+				cnv=(Conversation)myObj.AddComponent<Conversation_25>();break;
 			case 27://Garamon
 				cnv=(Conversation)myObj.AddComponent<Conversation_27>();break;
 			case 28://Zak
@@ -7072,6 +7102,22 @@ public class MyTools
 				cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
 			case 149://Meredith
 				cnv=(Conversation)myObj.AddComponent<Conversation_149>();break;
+			case 184://Delanrey
+				cnv=(Conversation)myObj.AddComponent<Conversation_184>();break;
+			case 185://Nilpont
+				cnv=(Conversation)myObj.AddComponent<Conversation_185>();break;
+			case 187://Illomo
+				cnv=(Conversation)myObj.AddComponent<Conversation_187>();break;
+			case 188://Gralwart
+				cnv=(Conversation)myObj.AddComponent<Conversation_188>();break;
+			case 190://Bronus
+				cnv=(Conversation)myObj.AddComponent<Conversation_190>();break;
+			case 191://Ranthru
+				cnv=(Conversation)myObj.AddComponent<Conversation_191>();break;
+			case 192://Fyrgen
+				cnv=(Conversation)myObj.AddComponent<Conversation_192>();break;
+			case 193://Louvon
+				cnv=(Conversation)myObj.AddComponent<Conversation_193>();break;
 			case 262://Generic Green Goblin
 				cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
 			case 263://Generic Green Goblin

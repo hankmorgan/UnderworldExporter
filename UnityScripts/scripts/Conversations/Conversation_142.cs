@@ -6,10 +6,11 @@ public class Conversation_142 : Conversation {
 	//conversation #142
 	//string block 0x0e8e, name Rodrick
 			
-	public override void OnDeath ()
+	public override bool OnDeath ()
 	{//When rodrick dies he will set a quest flag for dorna ironfist
 		base.OnDeath ();
 		set_quest(0,1,11);
+		return false;
 	}
 
 	public override IEnumerator main() {

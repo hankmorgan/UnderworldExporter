@@ -41,13 +41,13 @@ public class GameWorldController : MonoBehaviour {
 	{
 		Shader.SetGlobalTexture ("_ColorPaletteIn",paletteArray[paletteIndex]);
 
-		if (paletteIndex<paletteArray.GetUpperBound(0))
+		if (paletteIndex>0)
 		{
-			paletteIndex++;
+			paletteIndex--;
 		}
 		else
 		{
-			paletteIndex=0;
+			paletteIndex=paletteArray.GetUpperBound(0);
 		}
 
 

@@ -422,12 +422,12 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 		switch (objectMasters[currobj.item_id].type)
 			{
 				case DOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d\", %d, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d_material\", %d, %d, %d);",
 						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
 						hasLock,isOpen);
 					break; 
 				case HIDDENDOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/world/%s\", %d, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"materials/tmap/%s\", %d, %d, %d);",
 						textureMasters[LevelInfo[currobj.tileX][currobj.tileY].wallTexture].path, 
 						objList[currobj.link].link & 0x3F,
 						hasLock, isOpen);

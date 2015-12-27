@@ -72,13 +72,34 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 	float BrushX = BrushSizeX;
 	float BrushY = BrushSizeY;
 	float BrushZ = BrushSizeZ;
-
+	float objX = (float)objList[nextObj].x;
+	float objY = (float)objList[nextObj].y;
 	*offX = (x*BrushX) + ((objList[nextObj].x) * (BrushX / ResolutionXY));
 	*offY = (y*BrushY) + ((objList[nextObj].y) * (BrushY / ResolutionXY));
 
 	float zpos = objList[nextObj].zpos;
 	float ceil = CEILING_HEIGHT;
 	*offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
+
+	if (game !=SHOCK)
+		{//Adjust zpos by a fraction for objects on sloped tiles.
+		switch (LevelInfo[x][y].tileType)
+			{
+				case TILE_SLOPE_N:
+					*offZ += objY * (100.0 / BrushZ);
+					break;
+				case TILE_SLOPE_E:
+					*offX += objX * (100.0 / BrushZ);
+					break;
+				case TILE_SLOPE_S:
+					*offZ += (8.0f-objY) * (100.0 / BrushZ);
+					break;
+				case TILE_SLOPE_W:
+					*offZ += (8.0f - objX) * (100.0 / BrushZ);
+					break;
+			}
+		}
+
 	if (WallAdjust == 1)
 		{//Adjust the object x,y to avoid clipping into walls.
 		switch (game)

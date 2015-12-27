@@ -69,13 +69,16 @@ public class NPC : object_base {
 
 	void OnDeath()
 	{
-
-		NPC_DEAD=true;
 		Conversation cnv = this.GetComponent<Conversation>();
 		if (cnv!=null)
 		{
-			cnv.OnDeath();
+			if(cnv.OnDeath()==true)
+			{
+				return;
+			}			
 		}
+
+		NPC_DEAD=true;
 		//Dump items on the floor.
 		//
 		Container cnt = this.GetComponent<Container>();
@@ -194,9 +197,11 @@ public class NPC : object_base {
 				x.WhoAmI=npc_whoami;
 
 				Conversation.maincam=Camera.main;
-				
+				UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+				InteractionModeControl.UpdateNow=true;				
 				//Camera.main.enabled = false;
 				StartCoroutine(x.main ());
+
 			}
 			else
 			{
