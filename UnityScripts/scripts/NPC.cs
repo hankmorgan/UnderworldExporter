@@ -197,8 +197,8 @@ public class NPC : object_base {
 				x.WhoAmI=npc_whoami;
 
 				Conversation.maincam=Camera.main;
-				UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-				InteractionModeControl.UpdateNow=true;				
+			//	UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+			//	InteractionModeControl.UpdateNow=true;				
 				//Camera.main.enabled = false;
 				StartCoroutine(x.main ());
 
@@ -214,12 +214,20 @@ public class NPC : object_base {
 	}
 
 	public override bool LookAt ()
-	{
-		string output = playerUW.StringControl.GetFormattedObjectNameUW(objInt,NPCMoodDesc());
+	{//TODO:For specific characters that don't follow the standard naming convention use their conversation for the lookat.
+		string output="";
+	if (objInt.item_id!=123)//Tybal
+		{
+			output = playerUW.StringControl.GetFormattedObjectNameUW(objInt,NPCMoodDesc());
+		}
 		if ((npc_whoami >=1) && (npc_whoami<255)) 
 		{
-			if (npc_whoami==207)
+			if (npc_whoami==231)//Tybal
 			{
+				output= "You see Tybal";
+			}
+			else if (npc_whoami==207)
+			{//Warren spectre.
 				output= "You see an " + NPCMoodDesc() + " " + playerUW.StringControl.GetString (7,npc_whoami+16);
 			}
 			else

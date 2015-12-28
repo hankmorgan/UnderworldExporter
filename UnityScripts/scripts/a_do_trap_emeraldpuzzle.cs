@@ -38,7 +38,44 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 
 	private bool CheckPlinths()
 	{
+		if (CheckArea(new Vector3(59.4f,3.9f,27.0f),1.2f,167) ==true)
+		{
+			if (CheckArea(new Vector3(59.4f,3.9f,17.5f),1.2f,167) ==true)
+			{
+				if (CheckArea(new Vector3(69.0f,3.9f,17.5f),1.2f,167) ==true)
+				{
+					if (CheckArea(new Vector3(69.0f,3.9f,27.0f),1.2f,167) ==true)
+					{
+						return true;	
+					}	
+				}	
+			}
+		}
+		return false;
+	}
 
-		return true;
+
+	private bool CheckArea(Vector3 centre, float radius, int item_id) 
+	{
+		Collider[] hitColliders = Physics.OverlapSphere(centre, radius);
+		int i = 0;
+		while (i < hitColliders.Length) {
+			if (hitColliders[i].gameObject.GetComponent<ObjectInteraction>()!=null)
+			{
+			if (hitColliders[i].gameObject.GetComponent<ObjectInteraction>().item_id==item_id)
+			    {
+					Debug.Log("found " + hitColliders[i].gameObject.name);
+				return true;
+				}
+			}
+			i++;
+		}
+	return false;
+	}
+
+	public override void PostActivate ()
+	{
+	//Stop trap from destroying itself.
+
 	}
 }

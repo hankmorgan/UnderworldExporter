@@ -39,15 +39,16 @@ public class GameWorldController : MonoBehaviour {
 
 	void UpdateAnimation()
 	{
+		//TODO:Fire and water effects appear to be in different directions to each other!!
 		Shader.SetGlobalTexture ("_ColorPaletteIn",paletteArray[paletteIndex]);
 
-		if (paletteIndex>0)
+		if (paletteIndex<paletteArray.GetUpperBound(0))
 		{
-			paletteIndex--;
+			paletteIndex++;
 		}
 		else
 		{
-			paletteIndex=paletteArray.GetUpperBound(0);
+			paletteIndex=0;
 		}
 
 

@@ -64,6 +64,7 @@ public class DoorControl : object_base {
 								{//Unlockedmessage
 								ml.Add (playerUW.StringControl.GetString (1,5));
 								}
+						return true;
 						}
 					else
 						{
@@ -75,6 +76,7 @@ public class DoorControl : object_base {
 							{//That is the wrong key.
 							ml.Add(playerUW.StringControl.GetString (1,2));
 							}
+						return true;
 						}
 
 					}					

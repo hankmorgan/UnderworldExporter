@@ -1850,7 +1850,7 @@ char *UniqueObjectName(ObjectItem currObj)
 			return str;
 			break;
 			}
-		case KEY:
+		/*case KEY:
 			if (currObj.keyCount >= 0)
 				{
 				if (GAME != SHOCK)
@@ -1865,7 +1865,7 @@ char *UniqueObjectName(ObjectItem currObj)
 					return str;
 					break;
 					}
-				}
+				}*/
 		default:
 			{
 			if (objectMasters[currObj.item_id].isSet == 1)

@@ -317,7 +317,15 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 						fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
 						break;
 					default:
-						fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+						if (LevelInfo[currobj.tileX][currobj.tileY].landRegion >= 21)
+							{
+							fprintf(UNITY_FILE, "\"GroundMesh%d\");", 20);
+							}
+						else
+							{
+							fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+							}
+					
 						break;
 				}
 			}
@@ -1672,6 +1680,8 @@ int target;
 						case 0x18:	//bullfrog
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						case 0x2a://Talking door
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
+						case 0x28://Emerald puzzle
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						default:
 							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj);"); break; }

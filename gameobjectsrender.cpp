@@ -80,22 +80,21 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 	float zpos = objList[nextObj].zpos;
 	float ceil = CEILING_HEIGHT;
 	*offZ = ((zpos / ResolutionZ) * (ceil)) * BrushZ;
-
 	if (game !=SHOCK)
 		{//Adjust zpos by a fraction for objects on sloped tiles.
 		switch (LevelInfo[x][y].tileType)
 			{
 				case TILE_SLOPE_N:
-					*offZ += objY * (100.0 / BrushZ);
+					*offZ += objY * (48.0 / BrushZ);
 					break;
 				case TILE_SLOPE_E:
-					*offX += objX * (100.0 / BrushZ);
+					*offX += objX * (48.0 / BrushZ);
 					break;
 				case TILE_SLOPE_S:
-					*offZ += (8.0f-objY) * (100.0 / BrushZ);
+					*offZ += (8.0f-objY) * (48.0 / BrushZ);
 					break;
 				case TILE_SLOPE_W:
-					*offZ += (8.0f - objX) * (100.0 / BrushZ);
+					*offZ += (8.0f - objX) * (48.0 / BrushZ);
 					break;
 			}
 		}

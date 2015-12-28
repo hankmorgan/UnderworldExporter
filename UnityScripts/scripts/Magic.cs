@@ -723,6 +723,20 @@ public class Magic : MonoBehaviour {
 		GameObject[] allGameObj =GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
 		for (int i=0; i<= allGameObj.GetUpperBound(0);i++)
 		{
+			if  ( (allGameObj[i].layer== LayerMask.NameToLayer("UWObjects"))
+			     ||
+			     (allGameObj[i].layer== LayerMask.NameToLayer("NPCs"))
+			     ||
+			     (allGameObj[i].layer== LayerMask.NameToLayer("Doors"))
+			     )
+			{
+				if (allGameObj[i].transform.parent==null)
+				{//Only deactivate top level items
+					allGameObj[i].SetActive(false);				
+				}
+			}
+
+			/*
 			if ((allGameObj[i].name!="fbx_output") 
 			    && (allGameObj[i].name!="UW_HUD") 
 			    && (allGameObj[i].name!="HudAnimations") 
@@ -739,7 +753,7 @@ public class Magic : MonoBehaviour {
 				//Debug.Log ("Destroying " + allGameObj[i].name) ;
 				
 			}
-			
+			*/
 		}
 		
 	}

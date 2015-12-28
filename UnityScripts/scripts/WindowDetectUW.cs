@@ -178,7 +178,8 @@ public class WindowDetectUW : WindowDetect {
 		case UWCharacter.InteractionModeUse://Use
 			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 			{
-				UseObjectInHand ();
+				//UseObjectInHand ();
+				playerUW.UseMode();
 			}
 			else
 			{

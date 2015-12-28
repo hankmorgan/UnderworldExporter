@@ -394,7 +394,10 @@ public class StringController : MonoBehaviour {
 	public string GetFormattedObjectNameUW(ObjectInteraction objInt, string QualityString)
 	{//Eventually this will return things like proper quants etc.
 		string output = GetString (4,objInt.item_id);
-		
+		if (output==null)
+		{
+			output="";
+		}
 		if ((objInt.isQuant ==true) && (output.Contains("&")) && (objInt.isEnchanted==false) )
 		{
 			if (objInt.Link>1)

@@ -1132,7 +1132,9 @@ public class Conversation : GuiBase {
 		//		description:  sets object properties for object in inventory object list.
 		//			if a property shouldn't be set, -1 is passed for the
 		//         property value.
-		//If -1 then it sets the value in the array?
+		//If -1 then it returns the value in the array?
+
+		/*This may be implemented wrongly*/
 		ObjectInteraction obj;
 		if (pos<4)
 		{//Item is in players trade area.
@@ -1447,14 +1449,18 @@ public class Conversation : GuiBase {
 		if (objInslot!=null)
 		{
 			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
-			if ((objInt.isQuant) && (objInt.isEnchanted==false))
-			    {
-				total= objInt.Link;
-				}
-			else
-				{
-				total= 1;
-				}
+			//if ((objInt.isQuant) && (objInt.isEnchanted==false))
+			//    {
+			//	total= objInt.Link;
+			//	}
+			//else
+			//	{
+			//	total= 1;
+			//	}
+			if (objInt!=null)
+			{
+				return objInt.GetQty();
+			}
 		}
 
 		return total;
@@ -1535,6 +1541,7 @@ public class Conversation : GuiBase {
 		//id=0026 name="set_race_attitude" ret_type=void
 		//parameters:   unknown
 		//description:  sets attitude for a whole race (?)
+		//Seems to set attitude for all npcs with the whoami of the same value.
 		Debug.Log ("set_race_attitude " + attitude);
 	}
 
