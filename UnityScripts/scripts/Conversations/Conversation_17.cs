@@ -6,7 +6,7 @@ public class Conversation_17 : Conversation {
 	//conversation #17
 	//string block 0x0e11, name Sethar Strongarm
 			
-	int[] global = new int[2];
+	public int[] global = new int[2];
 	
 	public override IEnumerator	main() {
 		SetupConversation (3601);

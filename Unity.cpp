@@ -306,7 +306,26 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 			);
 		if ((currobj.tileX != 99) && (currobj.tileY != 99))
 			{
-			switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
+			if (LevelInfo[currobj.tileX][currobj.tileY].isLava==1)
+				{
+				fprintf(UNITY_FILE, "\"LavaMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].lavaRegion);
+				}
+			else if (LevelInfo[currobj.tileX][currobj.tileY].isWater == 1)
+				{
+				fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+				}
+			else
+				{
+				if (LevelInfo[currobj.tileX][currobj.tileY].landRegion >= 21)
+					{
+					fprintf(UNITY_FILE, "\"GroundMesh%d\");", 20);
+					}
+				else
+					{
+					fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+					}
+				}
+			/*switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
 				{
 					case 66://bat
 					case 73://vampire bat
@@ -327,7 +346,8 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 							}
 					
 						break;
-				}
+				}*/
+				
 			}
 		else
 			{
@@ -391,7 +411,7 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"door_%03d_%03d\");",currobj.tileX, currobj.tileY);//Create the object
 	switch (currobj.heading)
-		{//Move the object position so it can pivot properly.
+		{//Move the object position so it can located in the right position in the centre of the frame.
 		case WEST:
 			y = (currobj.tileY*BrushSizeY + DOORWIDTH + ((BrushSizeY - DOORWIDTH) / 2)) / 100.0;
 			break;
@@ -423,9 +443,14 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 	if (game != SHOCK)
 		{
 		int isOpen=0;
+		int OpenAdju=0;
 		if ((currobj.item_id >= 328) && (currobj.item_id <= 335))
 			{//Open doors or portcullis
 			isOpen = 1;
+			if (currobj.item_id < 334)
+				{//Don't adjust the open portcullis
+				OpenAdju = 90;
+				}
 			}
 		switch (objectMasters[currobj.item_id].type)
 			{
@@ -446,7 +471,7 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 						hasLock, isOpen);
 					break;
 			}
-		UnityRotation(game, -90, currobj.heading - 180, 0);
+		UnityRotation(game, -90, currobj.heading - 180 + OpenAdju, 0);
 		}
 	else
 		{
@@ -845,26 +870,28 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	//tileX
 	//tileY
 	//index
+	
 	if (currobj.y == 0)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2))/100.0;
-		//y=y+0.01;
+		y=y+0.05;
 		}
 	if (currobj.y == 7)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2)) / 100.0;
-		//y = y - 0.01;
+		y = y - 0.05;
 		}
 	if (currobj.x == 0)
 		{
 		y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2)) / 100.0;
-		//x = x + 0.01;
+		x = x + 0.05;
 		}
 	if (currobj.x == 7)
 		{
 		y = (currobj.tileY*BrushSizeX + (BrushSizeY / 2)) / 100.0;
-		//x = x - 0.01;
+		x = x - 0.05;
 		}
+
 	//x=(currobj.tileX*BrushSizeX+(BrushSizeX/2));
 	//y = (currobj.tileX*BrushSizeX + (BrushSizeX / 2));
 //	z = (LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ)/100.0;
@@ -1812,7 +1839,7 @@ void RenderUnityEntity(int game, float x, float y, float z, ObjectItem &currobj,
 return;
 		}
 	objList[currobj.index].AlreadyRendered=1;
-	printf("Rendering:%s\n", UniqueObjectName(currobj));
+	//printf("Rendering:%s\n", UniqueObjectName(currobj));
 
 	switch (objectMasters[currobj.item_id].isEntity)
 		{
@@ -2118,6 +2145,16 @@ return;
 					}
 				}
 		}
+
+		if ((currobj.link != 0) && (currobj.is_quant==0) && (currobj.enchantment==0))
+			{
+			if (objectMasters[objList[currobj.link].item_id].type == A_PICK_UP_TRIGGER)
+				{
+				fprintf(UNITY_FILE,"\n\tAddPickupLink(myObj, \"%s\");", UniqueObjectName(objList[currobj.link]));
+				objList[currobj.link].InUseFlag=1;
+				}
+			}
+
 	if (objectMasters[currobj.item_id].hasParticle == 1)
 		{
 		//RenderEntityParticle(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -2210,7 +2247,7 @@ float offX; float offY; float offZ;
 					//objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					//objList[nextObj].tileY = y;
 					offX = 0.0; offY = 0.0; offZ = 0.0;
-					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y,1);//Figures out where the object should be.
+					CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y,0);//Figures out where the object should be.
 					offX=offX/100.0;offY=offY/100.0;offZ=(offZ/100.0);
 					if ((!isTrigger(objList[nextObj])) && (!isTrap(objList[nextObj])) || (game==SHOCK))
 						{//Everything but traps and triggers (uw)

@@ -653,6 +653,19 @@ switch (game)
 					{
 					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 					}
+				if (objectMasters[objList[x].item_id].type == DOOR)
+					{
+					switch (game)
+						{
+							case UW1:
+								if ((objList[x].item_id >= 328) && (objList[x].item_id <= 333))
+									{//Open doors need to be adjusted down?
+									objList[x].zpos-=24;
+									}
+								break;
+						}
+					}
+
 				if (objectMasters[objList[x].item_id].type == BRIDGE)
 					{
 					
@@ -685,6 +698,11 @@ switch (game)
 						{
 						objList[x].DeathWatched = getValAtAddress(graves, objList[x].link - 512, 8);
 						}
+					}
+				if (objectMasters[objList[x].item_id].type == A_CREATE_OBJECT_TRAP)//Position the trap in the centre of the tile
+					{
+					objList[x].x = 4;
+					objList[x].y = 4;
 					}
 				if (objectMasters[objList[x].item_id].type == A_CHANGE_TERRAIN_TRAP)
 					{

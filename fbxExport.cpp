@@ -851,7 +851,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 		tmp.VisibleFaces[vWEST] = 0;
 		tmp.VisibleFaces[vNORTH] = 0;
 		tmp.VisibleFaces[vSOUTH] = 0;
-// top,east,bottom,west,north,south
+		// top,east,bottom,west,north,south
 		RenderFBXTile(gScene, game, x, y, tmp, 0, 0, 1, 0);
 		}
 	//Tmp code for generating all materials into unity
@@ -867,7 +867,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 	tmp.floorHeight = 0;
 	for (int i = 0; i < 6; i++)
 		{
-		tmp.VisibleFaces[i]=1;
+		tmp.VisibleFaces[i] = 1;
 		}
 	for (x = 65; x < 68; x++)
 		{
@@ -1698,19 +1698,19 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 		}
 	//lMesh->RemovePolygon(0);//will remove the top poly
 	//lMesh->RemovePolygon(1);//Will remove the east poly
-//	lMesh->RemovePolygon(2);//Will remove the bottom poly
+	//	lMesh->RemovePolygon(2);//Will remove the bottom poly
 	//lMesh->RemovePolygon(3);//Will remove the west poly
 	//lMesh->RemovePolygon(4);//Will remove the north poly
 	//lMesh->RemovePolygon(5);//Will remove the south poly
 	//Removing a poly will update the indices.
 
-int removeCount=0;
+	int removeCount = 0;
 
 	for (int v = 0; v < 6; v++)
 		{
 		if (t.VisibleFaces[v] == 0)
 			{
-			lMesh->RemovePolygon(v-removeCount);
+			lMesh->RemovePolygon(v - removeCount);
 			removeCount++;
 			}
 		}
@@ -2007,7 +2007,7 @@ void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Wat
 	}
 
 
-	void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
+void RenderFBXCuboidByPoints(FbxScene*& gScene, int x, int y, tile &t, short Water, int Bottom, int Top, char *TileName,
 	FbxVector4 lControlPoint0,
 	FbxVector4 lControlPoint1,
 	FbxVector4 lControlPoint2,
@@ -2476,8 +2476,8 @@ void RenderFBXDiagNWTile(FbxScene*& gScene, int x, int y, tile &t, short Water, 
 				t.VisibleFaces[vSOUTH] = 0;
 				t.VisibleFaces[vEAST] = 0;
 				RenderFBXOpenTile(gScene, x, y, t, Water, 0);
-				t.VisibleFaces[vSOUTH]= PreviousSouth;
-				t.VisibleFaces[vEAST]=PreviousEast;
+				t.VisibleFaces[vSOUTH] = PreviousSouth;
+				t.VisibleFaces[vEAST] = PreviousEast;
 				}
 			}
 		else
@@ -3446,13 +3446,13 @@ void RenderFBXDiagNWPortion(FbxScene*& gScene, int Bottom, int Top, tile t, char
 	int removeCount = 0;
 	for (int v = 0; v < 6; v++)
 		{
-		if ((t.VisibleFaces[v] == 0) || (v==vTOP) )
+		if ((t.VisibleFaces[v] == 0) || (v == vTOP))
 			{
 			lMesh->RemovePolygon(v - removeCount);
 			removeCount++;
 			}
 		}
-	
+
 	gScene->GetRootNode()->AddChild(lNode);
 
 
@@ -4717,7 +4717,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 
 				/*
 				over the door, east west door
-				*/			
+				*/
 				tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
 				int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
 				if (currDoor.item_id == 334)
@@ -4725,12 +4725,17 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 					dooroverheight = t.floorHeight;
 					}
 				tmpt.ceilingHeight = CEILING_HEIGHT - dooroverheight - DOORHEIGHTUNITS;
-			//	tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - DOORHEIGHTUNITS;
+				//	tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - DOORHEIGHTUNITS;
 				x1 = ((offX + DOORTHICKNESS + doorOffset));
-				y1 = ((y + 1)*BrushY);
+				
+				//y1 = ((y + 1)*BrushY);
+				y1 = (((y + 1)*BrushY)) - ((BrushY - DOORWIDTH) / 2);
+
 				z1 = BrushZ * (CEILING_HEIGHT + 1);
 				x0 = +((offX - DOORTHICKNESS + doorOffset));
-				y0 = +(y * BrushY);
+				//y0 = +(y * BrushY);
+				y0 = +(y*BrushY) + ((BrushY - DOORWIDTH) / 2);
+
 				z0 = (CEILING_HEIGHT - tmpt.ceilingHeight) * BrushZ;
 				FbxVector4 lControlPointo0(x0, y0, z1);
 				FbxVector4 lControlPointo1(x1, y0, z1);
@@ -4740,9 +4745,9 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointo5(x1, y0, z0);
 				FbxVector4 lControlPointo6(x1, y1, z0);
 				FbxVector4 lControlPointo7(x0, y1, z0);
-				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "over",
+				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "overew",
 					lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
-					lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0, 1, 0, 1);
+					lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0.175, 0.8, 0.175, 0.8, 0, 1, 0, 1);
 
 				break;
 				}
@@ -4849,22 +4854,22 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				/*Over the door North South*/
 				tmpt.tileType = TILE_OPEN;//Treat this as a dropped ceiling.
 
-   int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
-	//			tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - DOORHEIGHTUNITS;
-   if (currDoor.item_id == 334)
-	   {//Open portcullis
-	   dooroverheight = t.floorHeight;
-	   }
-   tmpt.ceilingHeight = CEILING_HEIGHT - dooroverheight - DOORHEIGHTUNITS;
+				int dooroverheight = (int)((currDoor.zpos / 128.0f) * (32.0f));
+				//			tmpt.ceilingHeight = CEILING_HEIGHT - t.floorHeight - DOORHEIGHTUNITS;
+				if (currDoor.item_id == 334)
+					{//Open portcullis
+					dooroverheight = t.floorHeight;
+					}
+				tmpt.ceilingHeight = CEILING_HEIGHT - dooroverheight - DOORHEIGHTUNITS;
 				//top
 				//east face 
-				x1 = ((x + 1)*BrushX);
+				x1 = (((x + 1)*BrushX) )- ((BrushX - DOORWIDTH) / 2);
 				//north face 
 				y1 = (offY + DOORTHICKNESS + doorOffset);
 				//top face
 				z1 = BrushZ * (CEILING_HEIGHT + 1);
 				//west face
-				x0 = +(x*BrushX);
+				x0 = +(x*BrushX) + ((BrushX-DOORWIDTH)/2);
 				//south face
 				y0 = +(offY - DOORTHICKNESS + doorOffset);
 				//bottom face
@@ -4879,7 +4884,7 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 				FbxVector4 lControlPointo7(x0, y1, z0);
 				RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, CEILING_HEIGHT - tmpt.ceilingHeight, CEILING_HEIGHT + 1, "overns",
 					lControlPointo0, lControlPointo1, lControlPointo2, lControlPointo3,
-					lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0, 1, 0, 1);
+					lControlPointo4, lControlPointo5, lControlPointo6, lControlPointo7, 0, 1, 0, 1, 0.175, 0.8, 0.175, 0.8);
 				break;
 				}
 		}
@@ -4924,11 +4929,11 @@ void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 						CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
 						//Draw it around this point
 						//Bottom 2 bits give the index of the pillar texture
-						x1 = offX + 5;
-						y1 = offY + 5;
+						x1 = offX + 0;
+						y1 = offY + 10;
 						z1 = BrushSizeZ * (CEILING_HEIGHT + 1); //(offZ*BrushZ + doorHeight);
-						x0 = offX - 5;
-						y0 = offY - 5;
+						x0 = offX - 10;
+						y0 = offY - 10;
 						z0 = -2 * BrushSizeZ;
 						FbxVector4 lControlPointl0(x0, y0, z1);
 						FbxVector4 lControlPointl1(x1, y0, z1);
@@ -4984,25 +4989,25 @@ void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64
 					//	t.floorTexture = objList[k].texture;  //(objList[k].quality >> 1) + 210;
 					if (objList[k].texture == -1)
 						{
-						t.floorTexture = LevelInfo[objList[k].tileX+i][objList[k].tileY+j].floorTexture;//?
+						t.floorTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].floorTexture;//?
 						}
 					else
 						{
 						t.floorTexture = objList[k].texture;
 						}
 					//}
-				//	else
-						//{
-						////t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
-						//if (objList[k].texture == -1)
-						//	{
-						//	t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
-						//	}
-						//else
-						//	{
-						//	t.floorTexture = objList[k].texture;
-						//	}						
-						//}
+					//	else
+					//{
+					////t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+					//if (objList[k].texture == -1)
+					//	{
+					//	t.floorTexture = LevelInfo[objList[k].tileX][objList[k].tileY].floorTexture;//?
+					//	}
+					//else
+					//	{
+					//	t.floorTexture = objList[k].texture;
+					//	}						
+					//}
 					t.shockCeilingTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].shockCeilingTexture;
 					t.wallTexture = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].wallTexture;
 					t.West = LevelInfo[objList[k].tileX + i][objList[k].tileY + j].West;
@@ -5054,7 +5059,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 						{
 						if ((objectMasters[objList[nextObj].item_id].type == BRIDGE) && (objList[nextObj].link == 0))//Only render if not linked to a use trigger
 							{
-							
+
 							tile tmpt;
 							tmpt.tileType = TILE_OPEN;//t.tileType;
 							tmpt.DimX = 1;
@@ -5081,7 +5086,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							tmpt.tileX = LevelInfo[x][y].tileX;
 							tmpt.tileY = LevelInfo[x][y].tileY;
 
-						//	int objType = objectMasters[objList[nextObj].item_id].type;
+							//	int objType = objectMasters[objList[nextObj].item_id].type;
 							CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, nextObj, x, y);	//Gets its position.
 							//Move it's xy to the center of the tile
 							offX = x*BrushSizeX + BrushSizeX / 2;
@@ -5104,7 +5109,7 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 							FbxVector4 lControlPointl7(x0, y1, z0);
 							char BridgeName[80];
 							//sprintf_s(BridgeName, "BRIDGE_%02d_%02d", x, y);
-						//	sprintf_s(BridgeName, "%s", UniqueObjectName(objList[nextObj]));
+							//	sprintf_s(BridgeName, "%s", UniqueObjectName(objList[nextObj]));
 							sprintf_s(BridgeName, 80, "%s_%02d_%02d_%02d_%04d\0", objectMasters[objList[nextObj].item_id].desc, objList[nextObj].tileX, objList[nextObj].tileY, objList[nextObj].levelno, objList[nextObj].index);
 							RenderFBXCuboidByPoints(gScene, x, y, tmpt, 0, z0, z1, BridgeName,
 								lControlPointl0, lControlPointl1, lControlPointl2, lControlPointl3,

@@ -33,7 +33,7 @@ The path to the sword hilt on Level3
 				GameObject ExistingTile = GameWorldController.FindTile(triggerX+i,triggerY+j,1);
 				//string Tilename = GameWorldController.GetTileName(TileX+i,TileY+j,1); //Var.GetTileName (TileX+i,TileY+j,1); //ExistingTile.name;
 				//Find the tile that becomes the tile at that location.
-				GameObject CTTile =GameWorldController.FindTileByName(this.name + "_" + (i).ToString ("D2") + "_" + (j).ToString ("D2"));   //Var.FindTileByName(this.name + "_" + (i).ToString ("D2") + "_" + (j).ToString ("D2"));
+				GameObject CTTile =GameWorldController.FindTileByName(this.name + "_" + (i).ToString ("D2") + "_" + (j).ToString ("D2"));   
 				GameObject ReplacementTile =Instantiate(CTTile,CTTile.transform.position,CTTile.transform.rotation) as GameObject;
 				ReplacementTile.transform.parent=CTTile.transform.parent;
 				ReplacementTile.name = ExistingTile.name;
@@ -50,6 +50,9 @@ The path to the sword hilt on Level3
 					Vector3 EndPos = StartPos + Dist;
 					ReplacementTile.transform.position = Vector3.Lerp (StartPos,EndPos,1.0f);
 				}
+				//Change the tile type for the automap
+				GameWorldController.instance.Tilemap.tileType[triggerX+i,triggerY+j]=objInt.Quality & 0x1;
+				GameWorldController.instance.Tilemap.Render[triggerX+i,triggerY+j]=1;
 			}
 		}
 	}

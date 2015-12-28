@@ -5,7 +5,7 @@ public class Conversation_208 : Conversation {
 
 	//conversation #208
 	//	string block 0x0ed0, name Cardon
-	int[] global= new int[1];	
+	public int[] global= new int[1];	
 	public override IEnumerator main() {
 		SetupConversation (3792);
 		privateVariables[1] = 0;

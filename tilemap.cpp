@@ -116,10 +116,6 @@ void CleanUp(tile LevelInfo[64][64], int game)
 		for (y=0;y<64;y++){
 	//lets test this tile for visibility
 	//A tile is invisible if it only touches other solid tiles and has no objects or does not have a terrain change.
-			if ((x == 22) && (y == 52))
-				{
-				printf("%d\n", LevelInfo[22][52].VisibleFaces[vSOUTH]);
-				}
 		if ((LevelInfo[x][y].tileType ==0) && (LevelInfo[x][y].indexObjectList == 0)  && (LevelInfo[x][y].TerrainChange == 0)){
 				switch (y)
 				{
@@ -442,6 +438,7 @@ for (y = 1; y < 63; y++){
 //Make sure solids & opens are still consistently visible.
 	for (y = 1; y < 63; y++){
 		for (x = 1; x < 63; x++){
+
 			if ((LevelInfo[x][y].tileType == TILE_SOLID) || (LevelInfo[x][y].tileType == TILE_OPEN))
 				{
 				int dimx = LevelInfo[x][y].DimX;
@@ -482,6 +479,14 @@ for (y = 1; y < 63; y++){
 
 				}
 			}
+		}
+	for (int y = 0; y <= 63; y++){
+		LevelInfo[0][y].VisibleFaces[vEAST]=1;
+		LevelInfo[63][y].VisibleFaces[vWEST] = 1;
+		}
+	for (int x = 0; x <= 63; x++){
+		LevelInfo[x][0].VisibleFaces[vNORTH] = 1;
+		LevelInfo[x][63].VisibleFaces[vSOUTH] = 1;
 		}
 }
 
@@ -775,6 +780,13 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 			objectMasters[323].extraInfo = texture_map[61];
 			objectMasters[324].extraInfo = texture_map[62];
 			objectMasters[325].extraInfo = texture_map[63];
+			
+			objectMasters[328].extraInfo = texture_map[58];
+			objectMasters[329].extraInfo = texture_map[59];
+			objectMasters[330].extraInfo = texture_map[60];
+			objectMasters[331].extraInfo = texture_map[61];
+			objectMasters[332].extraInfo = texture_map[62];
+			objectMasters[333].extraInfo = texture_map[63];
 			break;
 		case UW2:
 			objectMasters[320].extraInfo = texture_map[64];

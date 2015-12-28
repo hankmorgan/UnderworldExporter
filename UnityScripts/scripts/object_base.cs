@@ -8,7 +8,7 @@ public class object_base : MonoBehaviour {
 	public static ScrollController ml;
 	//public static UIInput mi;
 	protected ObjectInteraction objInt;
-
+	public string PickupLink;//A trigger to activate when this object is picked up.
 
 	public ObjectInteraction getObjectInteraction()
 	{
@@ -137,6 +137,17 @@ public class object_base : MonoBehaviour {
 
 	public virtual bool PickupEvent()
 	{//For special events when an object is picked up. Eg silver seed.
+		if (PickupLink!="")
+		{
+			GameObject obj = GameObject.Find (PickupLink);
+			if (obj!=null)
+			{
+				if (obj.GetComponent<trigger_base>()!=null)
+				{
+					obj.GetComponent<trigger_base>().Activate();
+				}
+			}
+		}
 		return false;
 	}
 

@@ -5,7 +5,7 @@ public class Conversation_22 : Conversation {
 
 	//conversation #22
 	//string block 0x0e16, name golem
-	int[] global = new int[1];
+	public int[] global = new int[1];
 
 	public override bool OnDeath ()
 	{//The golem is essentially immortal. When "killed" it just talks to the player again.
