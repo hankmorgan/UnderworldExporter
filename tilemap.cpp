@@ -808,11 +808,10 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				// FirstTileInt = getValAtCoordinate(x,y,AddressOfBlockStart,lev_ark,16);
 				//long SecondTileInt = (getValAtCoordinate(x,y,AddressOfBlockStart,lev_ark,32) >> 16);
 				long SecondTileInt = getValAtAddress(lev_ark,AddressOfBlockStart+(address_pointer+2),16);
-
+				//fprintf(LOGFILE, "\n%d X@%d Y@%d = %d + %d,",AddressOfBlockStart+address_pointer,x,y,FirstTileInt,SecondTileInt);
 				address_pointer=address_pointer+4;
 
 				LevelInfo[x][y].tileType = getTile(FirstTileInt) ;
-
 				LevelInfo[x][y].floorHeight = getHeight(FirstTileInt) ;
 				LevelInfo[x][y].floorHeight = ((LevelInfo[x][y].floorHeight <<3) >> 2)*8 >>3;	//Try and copy this shift from shock.
 
@@ -821,6 +820,9 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 				LevelInfo[x][y].tileTested = 0;
 				LevelInfo[x][y].TerrainChangeCount=0;
 				LevelInfo[x][y].BullFrog = 0;
+
+				LevelInfo[x][y].flags = (FirstTileInt>>7) & 0x3;
+				LevelInfo[x][y].noMagic = (FirstTileInt>>13) & 0x1;
 				switch (game)
 					{
 					case UWDEMO:	//special case for demo since textures mappings are in a seperate file
@@ -831,6 +833,14 @@ int BuildTileMapUW(tile LevelInfo[64][64],ObjectItem objList[1600], long texture
 						break;
 					case UW1:	//uw1
 						LevelInfo[x][y].floorTexture = getFloorTex(lev_ark, textureAddress, FirstTileInt);
+						if (LevelNo == 6)
+							{//Tybals lair. Special case for the maze
+							int val = (FirstTileInt >> 10) & 0x0F;
+							if (val == 4)
+								{//Maze floor
+								LevelInfo[x][y].floorTexture = 278;
+								}
+							}
 						LevelInfo[x][y].wallTexture = getWallTex(lev_ark, textureAddress, SecondTileInt);
 						break;
 					case UW2:	//uw2

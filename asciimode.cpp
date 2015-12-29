@@ -312,7 +312,11 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 
 	printTileMap(LevelInfo, LevelNo);
 
+	printNoMagicMap(LevelInfo,LevelNo);
+
+	printFlagsMap(LevelInfo, LevelNo);
 	if (mapOnly == 1) { return; }
+
 
 	printFloorHeights(LevelInfo, LevelNo);
 
@@ -371,7 +375,38 @@ void printTileMap(tile LevelInfo[64][64], int LevelNo)
 			fprintf(LOGFILE,"|");//delimiter.
 			}
 		}
+	}
 
+void printNoMagicMap(tile LevelInfo[64][64], int LevelNo)
+	{
+	//Prints the tilemap 
+	int x; int y;
+	fprintf(LOGFILE, "\nNow Printing No Magic for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+		{
+		fprintf(LOGFILE, "\n");
+		for (x = 0; x <= 63; x++)
+			{
+			fprintf(LOGFILE, "%d", LevelInfo[x][y].noMagic);
+			fprintf(LOGFILE, "\\");//delimiter.
+			}
+		}
+	}
+
+void printFlagsMap(tile LevelInfo[64][64], int LevelNo)
+	{
+	//Prints the tilemap 
+	int x; int y;
+	fprintf(LOGFILE, "\nNow Printing flags for level :%d.", LevelNo);
+	for (y = 63; y >= 0; y--) //invert for ascii
+		{
+		fprintf(LOGFILE, "\n");
+		for (x = 0; x <= 63; x++)
+			{
+			fprintf(LOGFILE, "%02d", LevelInfo[x][y].flags);
+			fprintf(LOGFILE, "\\");//delimiter.
+			}
+		}
 	}
 
 void printFloorHeights(tile LevelInfo[64][64], int LevelNo)
@@ -805,7 +840,11 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 			{
 			x = objList[z].tileX; y = objList[z].tileY;
 			//fprintf(LOGFILE, "SetObjectTag(\"BRIDGE_%02d_%02d\", \"LAND_%d\");\n", x, y, LevelInfo[x][y].bridgeRegion);
-			fprintf(LOGFILE, "SetObjectTag(\"%s\", \"LAND_%d\");\n", UniqueObjectName(objList[z]), LevelInfo[x][y].bridgeRegion);
+			if ((x <= 64) && (y <= 64))
+				{
+				fprintf(LOGFILE, "SetObjectTag(\"%s\", \"LAND_%d\");\n", UniqueObjectName(objList[z]), LevelInfo[x][y].bridgeRegion);
+				}
+			
 			}
 		}
 	}

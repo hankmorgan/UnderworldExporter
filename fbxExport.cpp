@@ -4342,7 +4342,7 @@ void CreateFBXMaterials(FbxScene*& gScene, int game)
 		{
 			case UWDEMO:
 			case UW1:
-				NoOfMaterials = 269;
+				NoOfMaterials = 278;
 				break;
 			case UW2:
 				NoOfMaterials = 255;

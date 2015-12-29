@@ -7,6 +7,8 @@ void RenderAsciiTile(tile &t);
 void DumpAscii(int game,tile LevelInfo[64][64],ObjectItem objList[1600],int LevelNo,int mapOnly);
 void PrintUWObjects(ObjectItem objList[1600]);
 void printTileMap(tile LevelInfo[64][64], int LevelNo);
+void printNoMagicMap(tile LevelInfo[64][64], int LevelNo);
+void printFlagsMap(tile LevelInfo[64][64], int LevelNo);
 void printFloorHeights(tile LevelInfo[64][64], int LevelNo);
 void printFloorTextures(tile LevelInfo[64][64], int LevelNo);
 void printDoorPositions(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);

@@ -88,6 +88,8 @@ short bridgeRegion;//Mask for bridges.
 short tileTested;  //for recursive region tests
 short tileX;
 short tileY;
+short flags;//UW Tile flags
+short noMagic;//Only seems to matter on Level 9 and possibly where there is water?
 
 short BullFrog;	//Tile is a bullfrog tile. UW1/lvl3
 //Shock Specific Stuff
