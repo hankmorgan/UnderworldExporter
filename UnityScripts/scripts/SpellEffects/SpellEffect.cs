@@ -760,6 +760,10 @@ public class SpellEffect : MonoBehaviour {
 
 	public virtual void Go()
 	{
+		if (counter==999)
+		{
+			Permanent=true;
+		}
 		ApplyEffect ();
 		StartCoroutine(timer());
 	}

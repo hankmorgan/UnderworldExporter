@@ -44,7 +44,7 @@ public class Container : object_base {
 
 	public bool AddItemMergedItemToContainer(GameObject item)
 	{
-		for (int i=0; i< 40; i++)
+		for (int i=0; i< MaxCapacity (); i++)
 		{
 			if (items[i]!="")
 			{
@@ -67,11 +67,11 @@ public class Container : object_base {
 	public bool AddItemToContainer(string item)
 	{
 		int i =0;
-		while ((items[i] !="") && (i <40))
+		while ((items[i] !="") && (i <MaxCapacity()))
 			{
 				i++;
 			}
-		if (i<=39)
+		if (i<MaxCapacity())
 			{
 				//items[i] = item;
 				return AddItemToContainer(item,i);
@@ -117,7 +117,7 @@ public class Container : object_base {
 
 	public bool RemoveItemFromContainer(string objectName)
 	{
-		for (int i =0; i<40;i++)
+		for (int i =0; i<MaxCapacity ();i++)
 			{
 			if (items[i] == objectName)
 				{
@@ -186,7 +186,7 @@ public class Container : object_base {
 		WindowDetect.FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
-		for (int i=0; i<40;i++)
+		for (int i=0; i<MaxCapacity ();i++)
 		{
 			if (GetItemAt (i)!="")
 			{
@@ -229,7 +229,7 @@ public class Container : object_base {
 
 	public static void SetPickedUpFlag(Container cn, bool NewValue)
 	{//Recursivly sets the picked up flag on all items in the container and all sub-container contents.
-		for (int i =0; i<40;i++)
+		for (int i =0; i<cn.MaxCapacity();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -260,7 +260,7 @@ public class Container : object_base {
 
 	public static void SetItemsPosition(Container cn, Vector3 Position)
 	{
-		for (int i =0; i<40;i++)
+		for (int i =0; i<cn.MaxCapacity();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -280,7 +280,7 @@ public class Container : object_base {
 
 	public static void SetItemsParent(Container cn, Transform Parent)
 	{
-		for (int i =0; i<40;i++)
+		for (int i =0; i<cn.MaxCapacity ();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -300,7 +300,7 @@ public class Container : object_base {
 
 	public static int GetFreeSlot(Container cn)
 	{//Returns an available slot on the current container.
-		for (int i=0;i<40;i++)
+		for (int i=0;i<cn.MaxCapacity();i++)
 		{
 			if (cn.GetItemAt (i)=="")
 			{
@@ -318,12 +318,12 @@ public class Container : object_base {
 		int currFreeSlot=-1;
 		string ItemName;
 		bool GetNextSlot=true;
-		for (int i=0;i<40;i++)
+		for (int i=0;i<cn.MaxCapacity();i++)
 		{
 			//Find the first free slot
 			if (GetNextSlot==true)
 			{
-				for (int j=0;j<40;j++)
+				for (int j=0;j<cn.MaxCapacity();j++)
 				{
 					ItemName=cn.GetItemAt(j);
 					if (ItemName=="")

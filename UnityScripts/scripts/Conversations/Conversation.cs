@@ -781,7 +781,7 @@ public class Conversation : GuiBase {
 		{NPCTradeItems[i]="";}
 
 		Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
-		for (int i =0 ; i< 40; i++)
+		for (int i =0 ; i< cn.MaxCapacity(); i++)
 		{
 			if (cn.GetItemAt(i)!="")
 			{
@@ -1739,6 +1739,13 @@ keep a number of found slots.
 		}
 
 
+	}
+
+
+	public int x_traps( int unk1, int unk2, int VariableIndex)
+	{//UWformats has no info on this.
+		//Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
+		return GameWorldController.instance.variables[VariableIndex];
 	}
 }
 

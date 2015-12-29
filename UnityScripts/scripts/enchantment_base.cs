@@ -45,7 +45,8 @@ public class enchantment_base : object_base {
 				return index+144;
 			}		
 		}
-		else
+		else 
+
 		{
 			return index;
 		}

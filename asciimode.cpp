@@ -351,7 +351,7 @@ void DumpAscii(int game, tile LevelInfo[64][64], ObjectItem objList[1600], int L
 	else
 		{
 		PrintLevelEntrances(LevelInfo, objList, LevelNo);
-		ParseTerrainProperties(game);
+		//ParseTerrainProperties(game);
 		}
 
 	PrintObjectsByTile(LevelInfo, objList, LevelNo);
@@ -703,6 +703,11 @@ void PrintUWObjects(ObjectItem objList[1600])
 			)
 			{
 			fprintf(LOGFILE, "\n\tTexture: %d", objList[x].texture);
+			}
+		if (objectMasters[objList[x].item_id].type == A_SPELLTRAP)
+			{
+			fprintf(LOGFILE, "\n\tEffectID: %d", ((objList[x].quality & 0xf) << 4) | (objList[x].owner & 0xf));
+//((objInt.Quality & 0xf)<<4) | (objInt.Owner & 0xf)
 			}
 		}
 	//}

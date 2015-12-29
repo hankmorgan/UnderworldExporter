@@ -992,7 +992,7 @@ public class Magic : MonoBehaviour {
 	}
 
 	public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
-	{//Levitate
+	{//Telekenisis
 		SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
 		setk.counter=counter; //It will run for x ticks. 
 		setk.Go ();
@@ -1642,13 +1642,21 @@ public class Magic : MonoBehaviour {
 			Cast_Mana(caster,10);
 			SpellResultType=0;
 			break;
-
+		case SpellEffect.UW1_Spell_Effect_MagicLantern:
+		{
+			if (PassiveArrayIndex!=-1)
+			{
+				Cast_Light(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5,10);
+				SpellResultType=1;
+			}
+			break;
+		}
 
 		case SpellEffect.UW1_Spell_Effect_Darkness:
 		case SpellEffect.UW1_Spell_Effect_BurningMatch:
 		case SpellEffect.UW1_Spell_Effect_Candlelight:
 		case SpellEffect.UW1_Spell_Effect_Light:
-		case SpellEffect.UW1_Spell_Effect_MagicLantern:
+		
 		case SpellEffect.UW1_Spell_Effect_Daylight:
 		case SpellEffect.UW1_Spell_Effect_Sunlight:
 		case SpellEffect.UW1_Spell_Effect_Light_alt01:
@@ -1660,7 +1668,7 @@ public class Magic : MonoBehaviour {
 			if (ActiveArrayIndex!=-1)
 			{
 				Cast_Light(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5,10);
-				SpellResultType=1;
+				SpellResultType=2;
 			}
 			break;
 			
@@ -2091,6 +2099,36 @@ public class Magic : MonoBehaviour {
 			CastTheFrog(caster);
 			SpellResultType=0;
 			break;
+
+		//Some cutscences can be played by a spell trap these are as follows (some known cases)
+		case 224:
+			Debug.Log ("play the intro cutscene");
+			break;
+		case 225:
+			Debug.Log ("play the endgame cutscene");
+			break;
+		case 226:
+			Debug.Log ("play the tybal death cutscene");
+			break;
+		case 227:
+			Debug.Log ("Play the arial rescue cutscene");
+			break;
+		case 233:
+			Debug.Log ("Play the splash screen - Underworld");
+			break;
+		case 234:
+			Debug.Log ("Play the credits");
+			break;
+		case 235:
+			Debug.Log ("Vision - IN");
+			break;
+		case 236:
+			Debug.Log ("Vision - SA");
+			break;
+		case 237:
+			Debug.Log ("Vision - HN");
+			break;
+
 
 		default:
 			Debug.Log ("effect Id is " + EffectId);

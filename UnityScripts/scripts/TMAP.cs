@@ -76,6 +76,7 @@ public class TMAP : object_base {
 
 	public override bool LookAt()
 	{
+		ml.Add (playerUW.StringControl.TextureDescription(TextureIndex));
 		if (trigger != "")
 		{
 			GameObject triggerObj = GameObject.Find (trigger);
@@ -92,7 +93,6 @@ public class TMAP : object_base {
 					}
 				}
 		}
-		ml.Add (playerUW.StringControl.TextureDescription(TextureIndex));
 		return true;
 
 	}

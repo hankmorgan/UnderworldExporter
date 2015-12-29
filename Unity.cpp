@@ -482,6 +482,23 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 		objList[currobj.link].InUseFlag=1;//Make sure the link is rendered
 		fprintf(UNITY_FILE,"\n\tAddDoorLink(myObj, \"%s\");",UniqueObjectName(objList[currobj.link]));
 		}
+	else
+		{
+		if (currobj.link != 0)
+			{
+			if (hasLock == 1)
+				{
+				if (objList[currobj.link].next != 0)
+					{
+					if (isTrigger(objList[objList[currobj.link].next]))
+						{//Try and find a trigger attached to the lock object on this door.
+						fprintf(UNITY_FILE, "\n\tAddDoorLink(myObj, \"%s\");", UniqueObjectName(objList[objList[currobj.link].next]));
+						objList[objList[currobj.link].next].InUseFlag=1;
+						}
+					}
+				}
+			}
+		}
 
 	/*
 	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))

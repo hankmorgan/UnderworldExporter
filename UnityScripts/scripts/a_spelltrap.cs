@@ -3,7 +3,7 @@ using System.Collections;
 
 public class a_spelltrap : trap_base {
 	//0186  a_spelltrap
-	//	fields "quality" and "quantity" determine spell type.
+	//	fields "quality" and "owner" determine spell type.
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 		int spellindex = ((objInt.Quality & 0xf)<<4) | (objInt.Owner & 0xf) ;
