@@ -101,8 +101,17 @@ public class ButtonHandler : object_base {
 			ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 			if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
 			{
+				base.LookAt();
 				this.Activate();
 			}
+			else
+			{
+				base.LookAt();
+			}
+		}
+		else
+		{
+			base.LookAt();
 		}
 		return true;
 	}

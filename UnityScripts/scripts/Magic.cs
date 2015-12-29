@@ -48,6 +48,9 @@ public class Magic : MonoBehaviour {
 		string MagicWords=TranslateSpellRune(Rune1,Rune2,Rune3);
 		switch (MagicWords)
 		{
+		case "An An An":
+			TestSpellLevel=1;
+			break;
 			//1st Circle
 		case "In Mani Ylem"://Create Food
 		case "In Lor":	//Light
@@ -170,13 +173,9 @@ public class Magic : MonoBehaviour {
 	
 	public void TestSpell(GameObject caster)
 	{//Test spell for testing spell effects
-		SpellEffectPoison sep = caster.AddComponent<SpellEffectPoison>();
-		sep.Value=100;//Poison will damage the player for 100 hp over it's duration
-		sep.counter=10; //It will run for 10 ticks. Ie 10 hp damage per tick
-	//	sep.isNPC=true;
+		SpellEffectMazeNavigation sep = caster.AddComponent<SpellEffectMazeNavigation>();
+		sep.counter=2;
 		sep.Go ();
-		//sep.ApplyEffect();
-		//StartCoroutine(sep.timer()) ;
 	}
 	
 	public void castSpell(GameObject caster, string MagicWords, bool ready)
@@ -1015,6 +1014,13 @@ public class Magic : MonoBehaviour {
 		seww.Go ();
 	}
 
+	public void Cast_MazeNavigation(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{
+		SpellEffectMazeNavigation sem = (SpellEffectMazeNavigation)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		sem.counter=10;
+		sem.Go ();
+	}
+
 	/* Utility code for Spells*/
 
 	void SpellIncantationFailed(GameObject caster)
@@ -1825,8 +1831,12 @@ public class Magic : MonoBehaviour {
 			break;
 		case SpellEffect.UW1_Spell_Effect_MazeNavigation:
 			//player only
-			Debug.Log ("Maze Navigation enchantment");
-			SpellResultType=0;
+			//Debug.Log ("Maze Navigation enchantment");
+			if (PassiveArrayIndex!=-1)
+			{
+				Cast_MazeNavigation(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10);
+				SpellResultType=1;
+			}
 			break;			
 		case SpellEffect.UW1_Spell_Effect_Hallucination:
 			//player only
