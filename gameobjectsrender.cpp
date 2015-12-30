@@ -42,7 +42,6 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 
 	*offX = 0;  *offY = 0; *offZ = 0;
 
-
 	float BrushX = BrushSizeX;
 	float BrushY = BrushSizeY;
 	float BrushZ = BrushSizeZ;
@@ -68,7 +67,6 @@ void CalcObjectXYZ(int game, float *offX, float *offY, float *offZ, tile LevelIn
 	if (game == SHOCK){ ResolutionXY = 256.0; ResolutionZ = 256.0; }	//Shock has more "z" in it.
 
 	*offX = 0;  *offY = 0; *offZ = 0;
-
 	float BrushX = BrushSizeX;
 	float BrushY = BrushSizeY;
 	float BrushZ = BrushSizeZ;

@@ -653,6 +653,7 @@ switch (game)
 					{
 					objList[x].texture = texture_map[objList[x].owner];	//Sets the texture for tmap objects. I won't have access to the texture map later on.
 					}
+
 				if (objectMasters[objList[x].item_id].type == DOOR)
 					{
 					switch (game)
@@ -742,7 +743,11 @@ switch (game)
 							{
 							objList[x].texture = texture_map[(textureQuality)+48];
 							}
-						
+						if (objList[x].zpos > 96)
+							{
+							//cap the zpos height at this
+							objList[x].zpos = 96;
+							}
 						
 
 						}					

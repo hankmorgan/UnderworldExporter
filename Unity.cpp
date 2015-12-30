@@ -499,14 +499,6 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 				}
 			}
 		}
-
-	/*
-	if ((currobj.link != 0) || (currobj.SHOCKLocked >0))
-		{	
-		//if it has a lock it needs a lock object for scripting purposes
-		RenderUnityEntity(game, x, y, z, objList[currobj.link],objList,LevelInfo);
-		}
-		*/
 	return;
 	}
 
@@ -2260,7 +2252,7 @@ float offX; float offY; float offZ;
 				long nextObj = LevelInfo[x][y].indexObjectList;
 				while (nextObj != 0)
 					{
-					if (nextObj == 869)
+					
 					//objList[nextObj].tileX = x;//Set the tile X and Y of the object. This is usefull to know.
 					//objList[nextObj].tileY = y;
 					offX = 0.0; offY = 0.0; offZ = 0.0;

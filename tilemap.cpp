@@ -1500,6 +1500,10 @@ for (int x=0; x<64;x++)
 							LevelInfo[j][k].TerrainChangeIndices[LevelInfo[j][k].TerrainChangeCount]=currObj.index;
 							LevelInfo[j][k].TerrainChangeCount++;
 							//LevelInfo[j][k].isWater  = 0;// turn off water in terrain change tiles
+							if (LevelInfo[j][k].isDoor==1)//The tile contains a door. I need to make sure the door is created at the height of the tile.
+								{
+								objList[LevelInfo[j][k].DoorIndex].zpos = objList[currObj.index].zpos;
+								}
 							}						
 						}
 					currObj.tileX=x;
