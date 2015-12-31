@@ -29,6 +29,7 @@ public class UWHUD : MonoBehaviour {
 	public UWFonts Conversation_FontController;
 
 	public UITexture main_window;
+	public WindowDetectUW window;
 }
 
 

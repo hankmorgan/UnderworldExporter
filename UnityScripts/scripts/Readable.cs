@@ -37,10 +37,26 @@ public class Readable : object_base {
 		case ObjectInteraction.BOOK://Book
 		case ObjectInteraction.SCROLL://Scroll
 			{
-			ml.Add (playerUW.StringControl.GetString (3,objInt.Link - 0x200));
-			return true;
-			break;
+			if (objInt.PickedUp==true)
+			{
+				if (objInt.Link==520)
+				{//Special case. Chasm of fire map.
+					playerUW.playerHud.CutScenesSmall.SetAnimation="ChasmMap";
+				}
+				else
+				{
+					ml.Add (playerUW.StringControl.GetString (3,objInt.Link - 0x200));
+				}
+				return true;
+				break;
 			}
+			else
+				{
+					return base.LookAt();
+				}
+
+			}
+
 		default: 
 			{
 			ml.Add ("READABLE TYPE NOT FOUND! (" + objInt.item_id +")");

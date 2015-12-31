@@ -4,6 +4,8 @@ using System.Collections;
 public class Magic : MonoBehaviour {
 /*A whole lot of code for Casting spells and enchantments*/	
 
+	public static UWCharacter playerUW;
+
 	//Spell effect rules
 	public const int SpellRule_TargetOther=0;//Spell is affecting another character/thing
 	public const int SpellRule_TargetSelf=1;//Spell is cast by player and/or is affecting player character.
@@ -577,7 +579,7 @@ public class Magic : MonoBehaviour {
 	
 	void Cast_OrtJux(GameObject caster, bool Ready)
 	{//Magic Missile Spell
-		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		////UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			ReadiedSpell= "Ort Jux";
@@ -591,7 +593,7 @@ public class Magic : MonoBehaviour {
 	
 	void Cast_OrtGrav(GameObject caster, bool Ready)
 	{//Lightning Bolt
-		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			ReadiedSpell= "Ort Grav";
@@ -606,7 +608,7 @@ public class Magic : MonoBehaviour {
 
 	void Cast_ExYlem(GameObject caster, bool Ready)
 	{//Open
-		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			//Debug.Log ("ExYlem is ready to cast");
@@ -640,7 +642,7 @@ public class Magic : MonoBehaviour {
 	
 	void Cast_AnNox(GameObject caster)
 	{//Cure Poison
-		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		//Get all instances of poison effect on the character and destroy them.
 		SpellEffectPoison[] seps= caster.GetComponents<SpellEffectPoison>();
 		for (int i =0; i<= seps.GetUpperBound(0);i++)
@@ -845,7 +847,7 @@ public class Magic : MonoBehaviour {
 
 	void Cast_VasRelPor(GameObject caster)
 	{
-		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
 			if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo)
@@ -925,7 +927,7 @@ public class Magic : MonoBehaviour {
 	
 	void Cast_Heal(GameObject caster,int HP)
 	{
-		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
 			playerUW.CurVIT=playerUW.CurVIT+HP;
@@ -938,7 +940,7 @@ public class Magic : MonoBehaviour {
 
 	void Cast_Mana(GameObject caster,int MP)
 	{//Increase (or decrease) the casters mana
-		UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
 			playerUW.PlayerMagic.CurMana=playerUW.PlayerMagic.CurMana+MP;
@@ -1267,7 +1269,7 @@ public class Magic : MonoBehaviour {
 	
 	int CheckActiveSpellEffect(GameObject caster)
 	{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
-		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 		if (playerUW!=null)
 		{
 			for (int i =0;i<3;i++)
@@ -1287,7 +1289,7 @@ public class Magic : MonoBehaviour {
 
 	int CheckPassiveSpellEffectPC(GameObject caster)
 	{//Finds the first free passive spell effect slot for the caster. If unable to find it returns -1
-		UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 
 		if (playerUW!=null)
 		{
@@ -1334,7 +1336,7 @@ public class Magic : MonoBehaviour {
 
 	bool CastProjectile(GameObject caster, string SpriteName)
 	{//Fires off the projectile
-		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (playerUW !=null)
 		{
 			Ray ray = getRay (caster);
@@ -1342,7 +1344,7 @@ public class Magic : MonoBehaviour {
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
-				float force = 200.0f;
+				float force = 600.0f;
 				ReadiedSpell= "";
 				GameObject projectile = CreateMagicProjectile(SpriteName,"",ray.GetPoint(dropRange/2.0f), 5, caster);
 				LaunchProjectile(projectile,ray,dropRange,force);
@@ -1353,7 +1355,7 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{//Is being cast by an npc or a spell trap
-			float force = 200.0f;
+			float force = 600.0f;
 			GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
 			LaunchProjectile(projectile,force);
 			return true;
@@ -1525,7 +1527,13 @@ public class Magic : MonoBehaviour {
 	
 	void OnGUI()
 	{
-		if (Event.current.Equals(Event.KeyboardEvent("q")))
+		if (
+			(Event.current.Equals(Event.KeyboardEvent("q")))
+			&&
+			(playerUW.playerHud.window.JustClicked==false)
+			&&
+			((playerUW.PlayerCombat.AttackCharging==false) && (playerUW.PlayerCombat.AttackExecuting==false))
+			)
 		{//Cast a spell or readies it.
 			if (ReadiedSpell=="")
 			{
@@ -1568,7 +1576,7 @@ public class Magic : MonoBehaviour {
 		//Returns true if the effect was applied. 
 		//TODO: The switch statement may need to be further divided because of passive/active effects.
 		//TODO: this list is incomplete. I need to include things from my spreadsheet that are not status effects.
-		UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		int ActiveArrayIndex=-1;
 		int PassiveArrayIndex=-1;
 		int OtherArrayIndex=-1;

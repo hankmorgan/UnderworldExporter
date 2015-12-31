@@ -18,6 +18,10 @@ public class CutsceneAnimation : HudAnimation {
 
 		switch (SetAnimation)
 		{
+		case "ChasmMap":
+			maincam.enabled=true;
+			SetAnimation= "Anim_Base";//Clears out the animation.
+			break;
 		case "Death_With_Sapling"://Resurrection
 			MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
 			if (mus!=null)

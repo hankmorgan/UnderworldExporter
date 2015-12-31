@@ -19,7 +19,8 @@ public class ActiveRuneSlot : GuiBase {
 		}
 		blank= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 	}
-	
+
+
 	// Update is called once per frame
 	void Update () {
 		/*Checks the set value on the player and if different display the new rune.*/
@@ -39,6 +40,11 @@ public class ActiveRuneSlot : GuiBase {
 
 	void OnClick()
 	{
+		if (playerUW.playerHud.window.JustClicked==true)
+		{
+			return;
+		}
+
 		if (playerUW.PlayerMagic.ReadiedSpell=="")
 		{
 			if (playerUW.PlayerMagic.TestSpellCast(playerUW,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2]))

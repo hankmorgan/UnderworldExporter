@@ -79,7 +79,7 @@ void RenderFBXPlane(FbxScene*& gScene, int x, int y, tile &t, short Water, int B
 	);
 void insertTexture(int *texArray, int targetIndex, int textureNo, int arraysize);
 float CalcCeilOffset(int game, int face, tile &t);
-void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor);
+void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor, ObjectItem objList[1600]);
 void RenderFBXPillars(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
 void RenderTerrainChangeTiles(FbxScene*& gScene, int game, tile LevelInfo[64][64], ObjectItem objList[1600]);
@@ -916,7 +916,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 					{
 					if (LevelInfo[x][y].isDoor == 1)
 						{//Adds a UW door frame.
-						RenderFBXDoorway(gScene, game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex]);
+						RenderFBXDoorway(gScene, game, x, y, LevelInfo[x][y], objList[LevelInfo[x][y].DoorIndex],objList);
 						}
 					}
 				}
@@ -1566,9 +1566,9 @@ void RenderFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water, int 
 
 	//top vectors
 	FbxVector2 lVectorsTop0(0, 0);
-	FbxVector2 lVectorsTop1(1 * t.DimX, 0);
-	FbxVector2 lVectorsTop2(1 * t.DimX, 1 * t.DimY);
-	FbxVector2 lVectorsTop3(0, 1 * t.DimY);
+	FbxVector2 lVectorsTop1(+1 * t.DimX, 0);
+	FbxVector2 lVectorsTop2(+1 * t.DimX,- 1 * t.DimY);
+	FbxVector2 lVectorsTop3(0, -1 * t.DimY);
 	//Top
 	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop0);
 	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop1);
@@ -4199,8 +4199,8 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 	//top vectors
 	FbxVector2 lVectorsTop0(0, 0);
 	FbxVector2 lVectorsTop1(1, 0);
-	FbxVector2 lVectorsTop2(1, 1);
-	FbxVector2 lVectorsTop3(0, 1);
+	FbxVector2 lVectorsTop2(1, -1);
+	FbxVector2 lVectorsTop3(0, -1);
 	//Top
 	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop0);
 	lUVDiffuseElement->GetDirectArray().Add(lVectorsTop1);
@@ -4584,7 +4584,7 @@ float CalcCeilOffset(int game, int face, tile &t)
 
 	}
 
-void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor)
+void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, ObjectItem currDoor, ObjectItem objList[1600])
 	{//Renders Door frames for UW
 	//TODO:Define door widths in config file. 
 	//int DOORWIDTH = 60;
@@ -4602,11 +4602,13 @@ void RenderFBXDoorway(FbxScene*& gScene, int game, int x, int y, tile &t, Object
 	float x0; float y0; float z0;
 	float x1; float y1; float z1;
 
-	float offX = (x*BrushX) + ((currDoor.x) * (BrushX / resolution));//from obj position code
-	float offY = (y*BrushY) + ((currDoor.y) * (BrushY / resolution));
-	float offZ = (currDoor.zpos) >> 2;//The floor level of the actual door object
-	offZ = t.floorHeight;
+	float offX;// = (x*BrushX) + ((currDoor.x) * (BrushX / resolution));//from obj position code
+	float offY;// = (y*BrushY) + ((currDoor.y) * (BrushY / resolution));
+	float offZ;// = (currDoor.zpos) >> 2;//The floor level of the actual door object
+	//offZ = t.floorHeight;
 	int heading = 0;
+	offX = 0.0; offY = 0.0; offZ = 0.0;
+	CalcObjectXYZ(game, &offX, &offY, &offZ, LevelInfo, objList, currDoor.index, x, y, 1);
 
 	tile tmpt;
 	tmpt.tileType = TILE_SOLID;//t.tileType;

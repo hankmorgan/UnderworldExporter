@@ -164,7 +164,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			//	CyclePalette(16, 22);//fire
 			//CyclePalette(48, 51);//water
 			cyclePalette(pal, 48, 4);
-			cyclePalette(pal, 16, 7);
+			cyclePalette(pal, 16, 7);//Reverse direction.
 			char paletteOutname[256];
 			sprintf(paletteOutname, "Palette_%d_frame", p);
 			writeTGA(Allpalettefile, 0, 256,16, paletteFrame, pal, paletteOutname, 1);
@@ -2323,21 +2323,25 @@ int Height;
 //	}
 //}
 
-void cyclePalette(palette *pal, int Start, int length)
+void cyclePalette(palette *pal, int Start, int length )
 	{
 	/*Shifts the palette values around between the start and start+length. Used for texture animations and special effects*/
-	unsigned char firstRed=pal[Start].red;
-	unsigned char firstGreen = pal[Start].green;
-	unsigned char firstBlue = pal[Start].blue;
-	for (int i = Start; i < Start+length-1; i++)
-		{
-		pal[i].red = pal[i+1].red;
-		pal[i].green = pal[i+1].green;
-		pal[i].blue  = pal[i+1].blue;
-		}
-	pal[Start + length-1].red = firstRed;
-	pal[Start + length-1].green = firstGreen;
-	pal[Start + length-1].blue = firstBlue;
+
+
+		unsigned char firstRed = pal[Start].red;
+		unsigned char firstGreen = pal[Start].green;
+		unsigned char firstBlue = pal[Start].blue;
+		for (int i = Start; i < Start + length - 1; i++)
+			{
+			pal[i].red = pal[i + 1].red;
+			pal[i].green = pal[i + 1].green;
+			pal[i].blue = pal[i + 1].blue;
+			}
+		pal[Start + length - 1].red = firstRed;
+		pal[Start + length - 1].green = firstGreen;
+		pal[Start + length - 1].blue = firstBlue;
+
+
 	}
 
 void copyPalette(palette *inPal, palette *outPal)

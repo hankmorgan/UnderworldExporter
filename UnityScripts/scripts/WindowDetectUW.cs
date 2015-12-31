@@ -3,27 +3,44 @@ using System.Collections;
 
 public class WindowDetectUW : WindowDetect {
 	public	bool JustClicked;
-
+	public int WindowWaitCount=0;
 	public static UWCharacter playerUW;
 	public override void Start ()
 	{
 		base.Start ();
-
+		JustClicked=false;
+		WindowWaitCount=0;
 		playerUW=GameObject.Find ("Gronk").GetComponent <UWCharacter>();
 	}
 
+	public void UWWindowWait(float waitTime)
+	{
+		//Cancel all click input for a few seconds.
+		JustClicked=true;//Prevent catching something I have just thrown.
+		Invoke("ResetClick",waitTime);
+		WindowWaitCount++;
+	}
+
+	void ResetClick()
+	{//All click input again.
+		WindowWaitCount--;
+		JustClicked=(WindowWaitCount>0);
+	}
 
 
 	protected override void Update ()
 	{
 		base.Update ();
-
+		if (JustClicked==true)
+		{
+			return;
+		}
 		switch (UWCharacter.InteractionMode)
 		{
 			case UWCharacter.InteractionModeAttack:
 			{
 				if (playerUW.PlayerCombat.AttackExecuting==true)
-				{//No attacks can be started will executing the last one.
+				{//No attacks can be started while executing the last one.
 					return;
 				}
 				if  ((WindowDetectUW.CursorInMainWindow==false))
@@ -87,6 +104,8 @@ public class WindowDetectUW : WindowDetect {
 
 	protected override void OnPress (bool isPressed)
 	{
+
+		base.OnPress(isPressed);
 		if(CursorInMainWindow==false)
 		{
 			return;
@@ -95,8 +114,6 @@ public class WindowDetectUW : WindowDetect {
 		{
 			return;
 		}
-		base.OnPress(isPressed);
-
 		//if (isPressed==false)
 		//{
 		//	Debug.Log ("HERE");
@@ -118,10 +135,10 @@ public class WindowDetectUW : WindowDetect {
 
 	void OnClick()
 	{
-		//if (JustClicked==true)
-		//{
-		//	return;
-		//}
+		if (JustClicked==true)
+		{
+			return;
+		}
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModePickup:
@@ -135,19 +152,15 @@ public class WindowDetectUW : WindowDetect {
 		//Invoke("ResetClick",0.5f);
 	}
 
-	void ResetClick()
-	{//Prevent 
-	JustClicked=false;
-	}
 
 	void ClickEvent()
 	{
-		if (playerUW.PlayerMagic.ReadiedSpell!="" )
+		if ((playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
 		{
-			Debug.Log("player has a spell to cast");
+			//Debug.Log("player has a spell to cast");
 			return;
 		}
-		
+
 		switch (UWCharacter.InteractionMode)
 		{
 		case UWCharacter.InteractionModeOptions://Options mode
@@ -159,8 +172,8 @@ public class WindowDetectUW : WindowDetect {
 		case UWCharacter.InteractionModePickup://Pickup
 			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
 			{
-				JustClicked=true;//Prevent catching something I have just thrown.
-				Invoke("ResetClick",0.2f);
+				UWWindowWait(1.0f);
+
 				ThrowObjectInHand();
 			}
 			else

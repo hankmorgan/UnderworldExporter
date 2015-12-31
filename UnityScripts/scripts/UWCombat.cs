@@ -48,8 +48,7 @@ public class UWCombat : Combat {
 	
 	public override IEnumerator ExecuteMelee()
 	{
-		Charge=0.0f;
-		AttackCharging=false;
+
 		
 		yield return new WaitForSeconds(0.6f);
 		
@@ -113,16 +112,22 @@ public class UWCombat : Combat {
 		}
 
 		AttackExecuting=false;
+		playerUW.playerHud.window.UWWindowWait(1.0f);
 		
 	}
 	
 	public override void MeleeExecute()
 	{
-		wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
-		AttackExecuting=true;
-		StartCoroutine(ExecuteMelee());
+		if (playerUW.playerHud.window.JustClicked==false)
+		{
+			wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
+			AttackExecuting=true;
+			StartCoroutine(ExecuteMelee());
+			Charge=0.0f;
+			AttackCharging=false;
+		}
 	}
-	
+	/*
 	public override void AttackModeMelee()
 	{//Code to handle melee Combat
 		return;
@@ -141,7 +146,7 @@ public class UWCombat : Combat {
 			MeleeExecute ();
 		}
 		
-	}
+	}*/
 	
 
 	public string GetWeapon()

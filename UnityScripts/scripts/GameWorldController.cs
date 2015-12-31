@@ -19,6 +19,7 @@ public class GameWorldController : MonoBehaviour {
 	public int LevelNo;
 	public Texture2D[] paletteArray= new Texture2D[8];
 	public int paletteIndex=0;
+	public int paletteIndexReverse=0;
 	public int[] variables = new int[127];//Variables for the check/set variable traps
 	private bool Test;
 	public TileMap Tilemap;
@@ -50,6 +51,21 @@ public class GameWorldController : MonoBehaviour {
 		{
 			paletteIndex=0;
 		}
+
+		//In Reverse
+
+		Shader.SetGlobalTexture ("_ColorPaletteInReverse",paletteArray[paletteIndexReverse]);
+		
+		if (paletteIndexReverse>0)
+		{
+			paletteIndexReverse--;
+		}
+		else
+		{
+			paletteIndexReverse=paletteArray.GetUpperBound(0);
+		}
+
+
 
 
 		return;

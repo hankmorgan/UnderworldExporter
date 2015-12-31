@@ -255,12 +255,13 @@ public class DoorControl : object_base {
 		Quaternion StartAngle = door.rotation;
 		Quaternion EndAngle = Quaternion.Euler (door.eulerAngles+turningAngle);
 		DoorBusy=true;
-		for (float t = 0.0f; t<traveltime; t+=Time.deltaTime/traveltime)
+		for (float t = 0.0f; t<=traveltime; t+=Time.deltaTime/traveltime)
 		{
 			door.rotation=Quaternion.Lerp (StartAngle,EndAngle,t);
 			yield return null;
 		}
 		DoorBusy=false;
+		door.rotation = EndAngle;
 	}
 	
 	IEnumerator RaiseDoor(Transform door, Vector3 TransformDir, float traveltime)
@@ -270,7 +271,7 @@ public class DoorControl : object_base {
 		Vector3 StartPos = door.position;
 		Vector3 EndPos = StartPos + TransformDir;
 		DoorBusy=true;
-		while (index <traveltime)
+		while (index <=traveltime)
 		{
 			door.position = Vector3.Lerp (StartPos,EndPos,index);
 			index += rate * Time.deltaTime;

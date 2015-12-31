@@ -82,7 +82,7 @@ public class UWCharacter : Character {
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		Eyes.playerUW=this.GetComponent<UWCharacter>();
 		NPC.playerUW=this.GetComponent<UWCharacter>();
-
+		Magic.playerUW=this.GetComponent<UWCharacter>();
 		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
 		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 
@@ -231,7 +231,11 @@ public class UWCharacter : Character {
 			return;
 		}
 
-		PlayerCombat.PlayerCombatUpdate();
+		if (playerHud.window.JustClicked==false)
+		{
+			PlayerCombat.PlayerCombatUpdate();
+		}
+
 
 
 	
@@ -239,10 +243,16 @@ public class UWCharacter : Character {
 
 	public void SpellMode()
 	{//Casts a spell on right click.
-		if(Input.GetMouseButtonDown(1) && (WindowDetectUW.CursorInMainWindow==true))
+		if(
+			(Input.GetMouseButtonDown(1)) 
+			 && (WindowDetectUW.CursorInMainWindow==true)
+			 && (playerHud.window.JustClicked==false)
+			&& ((PlayerCombat.AttackCharging==false)&&(PlayerCombat.AttackExecuting==false))
+		 )
 		{
 			PlayerMagic.castSpell(this.gameObject, PlayerMagic.ReadiedSpell,false);
 			PlayerMagic.SpellCost=0;
+			playerHud.window.UWWindowWait (1.0f);
 		}
 	}
 

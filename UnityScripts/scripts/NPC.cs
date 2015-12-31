@@ -143,7 +143,7 @@ public class NPC : object_base {
 			{
 				if (npc_attitude==0)
 					{
-					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
+					//ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
 					}
 				else
 				{
