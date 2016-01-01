@@ -9,6 +9,7 @@ public class UWHUD : MonoBehaviour {
 	public UIInput InputControl;
 
 	public CutsceneAnimation CutScenesSmall;
+	public CutsceneAnimationFullscreen CutScenesFull;
 	public HealthFlask HealthFlask;
 	public HealthFlask ManaFlask;
 	public Compass compass;

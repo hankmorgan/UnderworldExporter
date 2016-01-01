@@ -602,6 +602,7 @@ public class ObjectInteraction : MonoBehaviour {
 			else
 			{//just decrement the quantity value;
 				Link--;
+				playerUW.playerInventory.Refresh();
 
 			}
 

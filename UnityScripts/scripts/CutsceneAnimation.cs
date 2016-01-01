@@ -19,6 +19,11 @@ public class CutsceneAnimation : HudAnimation {
 
 		switch (SetAnimation)
 		{
+		case "FadeToBlackSleep":
+			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			SetAnimation= "Anim_Base";//Clears out the animation.
+			Bedroll.WakeUp (playerUW);
+			break;
 		case "ChasmMap":
 			//maincam.enabled=true;
 			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;

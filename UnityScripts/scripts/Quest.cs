@@ -32,4 +32,16 @@ public class Quest : MonoBehaviour {
 	*/
 	public int[] QuestVariables=new int[33];
 
+	public int GaramonDream;//The next dreams to play
+	public int IncenseDream;
+
+
+	public int getIncenseDream()
+	{
+		if (IncenseDream>=3)
+		{//Loop around
+			IncenseDream=0;
+		}
+		return IncenseDream++;
+	}
 }
