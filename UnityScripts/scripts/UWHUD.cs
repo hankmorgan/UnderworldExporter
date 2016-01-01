@@ -30,6 +30,9 @@ public class UWHUD : MonoBehaviour {
 
 	public UITexture main_window;
 	public WindowDetectUW window;
+
+	public Camera hudCam;
+	public GameObject hudAnchor;
 }
 
 

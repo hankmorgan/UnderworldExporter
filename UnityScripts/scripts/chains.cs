@@ -87,6 +87,12 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=false;
 				break;
+			case 5: //Cutscene fullscreen;
+				InventoryEnabled=false;
+				RuneBagEnabled=false;
+				StatsEnabled=false;
+				ConversationEnabled=false;
+				break;
 		}
 
 		EnableDisableControl("RuneBagDisplay",RuneBagEnabled);

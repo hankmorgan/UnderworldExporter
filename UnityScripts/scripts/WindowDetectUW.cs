@@ -308,6 +308,50 @@ public class WindowDetectUW : WindowDetect {
 
 	}
 
+	public void SetFullScreen()
+	{
+		FullScreen=true;
+		//chains.EnableDisableControl("main_window",false);
+		anchor.side= UIAnchor.Side.Center;
+		anchor.relativeOffset=new Vector2(0.0f,0.0f);
+		stretch.relativeSize=new Vector2 (1.0f,1.0f);
+		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
+		
+		playerUW.playerHud.main_window.enabled=false;
+		/*
+		playerUW.playerHud.compass.MoveControlOffset(-0.1f,0.0f);
+		for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
+		{
+			GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
+			if (cn!=null)
+			{
+				cn.MoveControlOffset(-0.1f,0.0f);
+			}
+		}*/
+	}
+
+	public void UnSetFullScreen()
+	{
+		FullScreen=false;
+		//chains.EnableDisableControl("main_window",true);
+		anchor.side= UIAnchor.Side.Left;
+		anchor.relativeOffset=new Vector2(0.43f,0.13f);
+		stretch.relativeSize=new Vector2 (0.55f,0.57f);
+		playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
+		playerUW.playerHud.main_window.enabled=true;
+		/*
+		playerUW.playerHud.compass.MoveControlOffset(+0.1f,0.0f);
+		for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
+		{
+			GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
+			if (cn!=null)
+			{
+				cn.MoveControlOffset(+0.1f,0.0f);
+			}
+		}
+		*/
+	}
+
 
 	void OnGUI()
 	{//Controls switching between Mouselook and interaction and sets the cursor icon
@@ -328,42 +372,11 @@ public class WindowDetectUW : WindowDetect {
 			{//Toggle full screen.
 				if (FullScreen==true)
 				{
-					FullScreen=false;
-					//chains.EnableDisableControl("main_window",true);
-					anchor.side= UIAnchor.Side.Left;
-					anchor.relativeOffset=new Vector2(0.43f,0.13f);
-					stretch.relativeSize=new Vector2 (0.55f,0.57f);
-					playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
-					playerUW.playerHud.main_window.enabled=true;
-					playerUW.playerHud.compass.MoveControlOffset(+0.1f,0.0f);
-					for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
-					{
-						GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
-						if (cn!=null)
-						{
-							cn.MoveControlOffset(+0.1f,0.0f);
-						}
-					}
+					UnSetFullScreen();
 				}
 				else
 				{
-					FullScreen=true;
-					//chains.EnableDisableControl("main_window",false);
-					anchor.side= UIAnchor.Side.Center;
-					anchor.relativeOffset=new Vector2(0.0f,0.0f);
-					stretch.relativeSize=new Vector2 (1.0f,1.0f);
-					playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
-
-					playerUW.playerHud.main_window.enabled=false;
-					playerUW.playerHud.compass.MoveControlOffset(-0.1f,0.0f);
-					for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
-					{
-						GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
-						if (cn!=null)
-						{
-							cn.MoveControlOffset(-0.1f,0.0f);
-						}
-					}
+					SetFullScreen();
 				}
 			}
 
