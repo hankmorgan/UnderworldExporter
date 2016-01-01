@@ -10,6 +10,7 @@ public class CutsceneAnimation : HudAnimation {
 
 	public void PreAnimPlay()
 	{//Called by events in certain animations when starting playing
+		playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 		return;
 	} 
 	
@@ -19,7 +20,8 @@ public class CutsceneAnimation : HudAnimation {
 		switch (SetAnimation)
 		{
 		case "ChasmMap":
-			maincam.enabled=true;
+			//maincam.enabled=true;
+			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 		case "Death_With_Sapling"://Resurrection
@@ -33,6 +35,7 @@ public class CutsceneAnimation : HudAnimation {
 				MusicController.LastAttackCounter=0.0f;
 			}
 			maincam.enabled=true;
+			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 
@@ -42,7 +45,8 @@ public class CutsceneAnimation : HudAnimation {
 		case "Death_Final"://Forever
 			break;
 		default:
-			maincam.enabled=true;
+			//maincam.enabled=true;
+			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 		}

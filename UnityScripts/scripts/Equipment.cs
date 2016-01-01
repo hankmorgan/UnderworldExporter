@@ -68,6 +68,7 @@ public class Equipment : object_base {
 		{
 			//do the repair 
 			//Play the cutscene.
+			playerUW.playerHud.CutScenesSmall.SetAnimation="Anvil";
 			//TODO:At the moment it suceeds but in future implement failures and breakages.
 			//Find out what the story with the sword of justice is?
 			//Do the result at the end of the animation.

@@ -9,12 +9,15 @@ public class HudAnimation : GuiBase {
 	private SpriteRenderer sprt;
 	public string PreviousAnimation;
 	private Animator anim;
+
+	public static int NormalCullingMask;//-33
 	// Use this for initialization
 	protected virtual void Start () {
 		sprt=this.GetComponent<SpriteRenderer>();
 		anim=this.GetComponent<Animator>();
 		anim.Play (SetAnimation);
 		PreviousAnimation=SetAnimation;
+		NormalCullingMask=-33;  //= playerUW.playerCam.cullingMask;
 	}
 	
 	// Update is called once per frame
