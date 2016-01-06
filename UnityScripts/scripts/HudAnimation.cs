@@ -12,7 +12,7 @@ public class HudAnimation : GuiBase {
 
 	public static int NormalCullingMask;//-33
 	// Use this for initialization
-	protected virtual void Start () {
+	public virtual void Start () {
 		sprt=this.GetComponent<SpriteRenderer>();
 		anim=this.GetComponent<Animator>();
 		anim.Play (SetAnimation);

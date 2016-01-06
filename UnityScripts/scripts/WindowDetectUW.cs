@@ -312,9 +312,21 @@ public class WindowDetectUW : WindowDetect {
 	{
 		FullScreen=true;
 		//chains.EnableDisableControl("main_window",false);
+		if (anchor==null)
+		{
+			anchor =this.GetComponent<UIAnchor>();
+		}
+		if (stretch==null)
+		{
+			stretch=this.GetComponent<UIStretch>();
+		}
 		anchor.side= UIAnchor.Side.Center;
 		anchor.relativeOffset=new Vector2(0.0f,0.0f);
 		stretch.relativeSize=new Vector2 (1.0f,1.0f);
+		if (playerUW==null)
+		{
+			playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		}
 		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 		
 		playerUW.playerHud.main_window.enabled=false;
@@ -334,6 +346,7 @@ public class WindowDetectUW : WindowDetect {
 	{
 		FullScreen=false;
 		//chains.EnableDisableControl("main_window",true);
+	
 		anchor.side= UIAnchor.Side.Left;
 		anchor.relativeOffset=new Vector2(0.43f,0.13f);
 		stretch.relativeSize=new Vector2 (0.55f,0.57f);
