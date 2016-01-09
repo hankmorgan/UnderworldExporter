@@ -4,7 +4,9 @@ using System.Collections;
 public class UWCombat : Combat {
 
 	public UWCharacter playerUW;
-	public Weapon currWeapon;
+	public WeaponMelee currWeapon;
+	public WeaponRanged currWeaponRanged;
+	public ObjectInteraction currentAmmo;
 
 	public override void PlayerCombatUpdate ()
 	{
@@ -14,7 +16,6 @@ public class UWCombat : Combat {
 		{
 			if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack))
 			{
-				//mus.WeaponDrawn=true;//Tell the music system I have my weapon drawn
 				wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
 			}
 			else
@@ -22,21 +23,36 @@ public class UWCombat : Combat {
 				wpa.SetAnimation= "WeaponPutAway";
 			}
 		}
-
 	}
 
 
-	/*******************/
-
-
-	public override void MeleeBegin()
+	public override void CombatBegin()
 	{//Begins to charge and attack. 
-		wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
+		if(IsMelee())
+		{
+			wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
+		}
+		else
+		{
+			//Check for ammo
+			currentAmmo=playerUW.playerInventory.findObjInteractionByID(currWeaponRanged.AmmoType);
+			if (currentAmmo==null)
+			{
+				playerUW.playerHud.MessageScroll.Add ("Sorry, you have no " + playerUW.StringControl.GetObjectNounUW(currWeaponRanged.AmmoType));
+				return;
+			}
+			else
+			{
+				//Change the crosshair
+				playerUW.CursorIcon=playerUW.CursorIconTarget;
+			}
+		}
+
 		AttackCharging=true;
 		Charge=0;
 	}
 	
-	public override void MeleeCharging()	
+	public override void CombatCharging()	
 	{//While still charging increase the charge by the charge rate.
 		Charge=(Charge+(chargeRate*Time.deltaTime));
 		//Debug.Log ("Charging up ");
@@ -45,11 +61,9 @@ public class UWCombat : Combat {
 			Charge=100;
 		}
 	}
-	
-	public override IEnumerator ExecuteMelee()
-	{
 
-		
+	public override IEnumerator ExecuteMelee()
+	{		
 		yield return new WaitForSeconds(0.6f);
 		
 		Ray ray ;
@@ -115,74 +129,75 @@ public class UWCombat : Combat {
 		playerUW.playerHud.window.UWWindowWait(1.0f);
 		
 	}
+
+	public override void ExecuteRanged ()
+	{
+		base.ExecuteRanged ();
+
+		//Remove the cursor
+		playerUW.CursorIcon=playerUW.CursorIconDefault;
+		//Use up the ammo.
+		if (currentAmmo!=null)
+		{
+			//currentAmmo.consumeObject ();
+			LaunchAmmo();
+		}
+	}
+
 	
-	public override void MeleeExecute()
+	public override void ExecuteAttack()
 	{
 		if (playerUW.playerHud.window.JustClicked==false)
 		{
-			wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
-			AttackExecuting=true;
-			StartCoroutine(ExecuteMelee());
+			if (IsMelee())
+			{
+				wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
+				AttackExecuting=true;
+				StartCoroutine(ExecuteMelee());
+			}
+			else
+			{//Ranged attack
+				ExecuteRanged();
+			}
 			Charge=0.0f;
 			AttackCharging=false;
 		}
 	}
-	/*
-	public override void AttackModeMelee()
-	{//Code to handle melee Combat
-		return;
-		//Begins to charge and attack. 
-		//As long as the cursor is in the main window the attack will continue to build up.
-		if(Input.GetMouseButton(1) && (WindowDetect.CursorInMainWindow==true) && (AttackCharging==false))
-		{//Begin the attack.
-			MeleeBegin();
+
+	public bool IsMelee()
+	{//Is the player using a melee weapon.
+		if (GetWeapon()=="Ranged")
+		{
+			return false;
 		}
-		if ((AttackCharging==true) && (Charge<100))
-		{//While still charging increase the charge by the charge rate.
-			MeleeCharging ();
+		else
+		{
+			return true;
 		}
-		if (Input.GetMouseButtonUp (1) && (WindowDetect.CursorInMainWindow==true) && (AttackCharging==true))
-		{//On right click find out what is at the mouse cursor and execute the attack along the raycast
-			MeleeExecute ();
-		}
-		
-	}*/
-	
+	}
+
 
 	public string GetWeapon()
 	{
-		string ObjInWeaponHand;
-		if (playerUW.isLefty)
+		if (currWeapon!=null)
 		{
-			ObjInWeaponHand= playerUW.playerInventory.sLeftHand;
-		}
-		else
-		{
-			ObjInWeaponHand= playerUW.playerInventory.sRightHand;
-		}
-		
-		
-		if (ObjInWeaponHand=="")
-		{
-			return "Fist";
-		}
-		else
-		{
-			GameObject handobj = GameObject.Find (ObjInWeaponHand);
-			Weapon weap = handobj.GetComponent<Weapon>();
-			if(weap!=null)
+			switch (currWeapon.Skill)
 			{
-				switch (weap.Skill)
-				{
-				case 3:
-					return "Sword";break;
-				case 4:
-					return "Axe";break;
-				case 5:
-					return "Mace";break;
-				default:
-					return "Fist";break;
-				}
+			case 3:
+				return "Sword";break;
+			case 4:
+				return "Axe";break;
+			case 5:
+				return "Mace";break;
+			default:
+				return "Fist";break;
+			}
+		}
+		else
+		{
+			if (currWeaponRanged!=null)
+			{
+				return "Ranged";
 			}
 			else
 			{
@@ -190,7 +205,8 @@ public class UWCombat : Combat {
 			}
 		}
 	}
-	
+
+
 	public string GetRace()
 	{
 		//It does'nt matter if you're black or white.
@@ -236,6 +252,72 @@ public class UWCombat : Combat {
 			return "Stab";
 		}
 	}
+
+
+
+	bool LaunchAmmo ()
+	{
+		if (currentAmmo!=null)
+		{
+			Ray ray ;
+			if (playerUW.MouseLookEnabled==true)
+			{
+				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			}
+			else
+			{
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			}
+
+			RaycastHit hit = new RaycastHit(); 
+			float dropRange=0.5f;
+			if (!Physics.Raycast(ray,out hit,dropRange))
+			{//No object interferes with the drop
+				float force = 500.0f;
+				//Get the object being dropped and moved towards the end of the ray
+				GameObject launchedItem ;//= playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(playerUW.playerInventory.ObjectInHand);
+
+				if (currentAmmo.GetQty()==1)
+				{//launch the ammo itself.
+					launchedItem = currentAmmo.gameObject;
+					playerUW.playerInventory.RemoveItem(currentAmmo.name);
+				}
+				else
+				{//copy a single instance as the ammo.
+
+					launchedItem = Instantiate(currentAmmo.gameObject);
+					launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
+					currentAmmo.consumeObject();//Reduce by one.
+				}
+				launchedItem.transform.parent=null;
+				launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
+				//GameObject InvMarker = GameObject.Find ("InventoryMarker");
+
+				launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
+				WindowDetect.UnFreezeMovement(launchedItem);
+				//Vector3 ThrowDir = ray.GetPoint(dropRange) - playerUW.playerInventory.transform.position;
+				Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
+				//Apply the force along the direction.
+				launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+				GameObject myObjChild = new GameObject(launchedItem.name + "_damage");
+				myObjChild.transform.position =launchedItem.transform.position;
+				myObjChild.transform.parent =launchedItem.transform;
+				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
+				pd.Damage=10;
+				return true;
+			}
+			else
+			{
+				return false;//unable to launch.
+			}
+
+		}
+		else
+		{//No ammo?? Should not happen
+			return false;
+		}
+	}
+
 
 
 }

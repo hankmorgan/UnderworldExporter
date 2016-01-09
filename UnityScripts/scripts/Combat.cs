@@ -23,13 +23,18 @@ public class Combat : MonoBehaviour {
 	}
 
 
-	public virtual void MeleeBegin()
+	public virtual void CombatBegin()
 	{
 		return;
 	}
 
 
-	public virtual void MeleeCharging()
+	public virtual void CombatCharging()
+	{
+		return;
+	}
+
+	public virtual void ExecuteRanged()
 	{
 		return;
 	}
@@ -40,7 +45,7 @@ public class Combat : MonoBehaviour {
 	}
 
 
-	public virtual void MeleeExecute()
+	public virtual void ExecuteAttack()
 	{
 		return;
 	}

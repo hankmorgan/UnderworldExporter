@@ -52,18 +52,18 @@ public class WindowDetectUW : WindowDetect {
 				{
 					if(playerUW.PlayerCombat.AttackCharging==false)
 					{//Begin the attack
-						playerUW.PlayerCombat.MeleeBegin();
+						playerUW.PlayerCombat.CombatBegin();
 					}
 					if ((playerUW.PlayerCombat.AttackCharging==true) && (playerUW.PlayerCombat.Charge<100))
 					{//While still charging increase the charge by the charge rate.
-						playerUW.PlayerCombat.MeleeCharging ();
+						playerUW.PlayerCombat.CombatCharging ();
 					}
 					return;
 				}
 				else if (playerUW.PlayerCombat.AttackCharging==true)
 				{
 					//Player has been building an attack up and has released it.
-					playerUW.PlayerCombat.MeleeExecute();
+					playerUW.PlayerCombat.ExecuteAttack();
 				}
 				break;
 			}
@@ -276,18 +276,19 @@ public class WindowDetectUW : WindowDetect {
 					GameObject droppedItem = playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(playerUW.playerInventory.ObjectInHand);
 					droppedItem.transform.parent=null;
 					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
-					GameObject InvMarker = GameObject.Find ("InventoryMarker");
+					//GameObject InvMarker = GameObject.Find ("InventoryMarker");
 					if (droppedItem.GetComponent<Container>()!=null)
 					{
 						Container.SetPickedUpFlag(droppedItem.GetComponent<Container>(),false);
 						Container.SetItemsParent(droppedItem.GetComponent<Container>(),null);
-						Container.SetItemsPosition (droppedItem.GetComponent<Container>(),InvMarker.transform.position);
+						Container.SetItemsPosition (droppedItem.GetComponent<Container>(),playerUW.playerInventory.InventoryMarker.transform.position);
 					}
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
 					WindowDetect.UnFreezeMovement(droppedItem);
 					if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.4f)
 					{//throw if above a certain point in the view port.
-						Vector3 ThrowDir = ray.GetPoint(dropRange) - playerUW.playerInventory.transform.position;
+						//Vector3 ThrowDir = ray.GetPoint(dropRange) - playerUW.playerInventory.transform.position;
+						Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
 						//Apply the force along the direction.
 						droppedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 					}
@@ -305,7 +306,6 @@ public class WindowDetectUW : WindowDetect {
 			}
 			//try and drop the item in the world
 		}
-
 	}
 
 	public void SetFullScreen()

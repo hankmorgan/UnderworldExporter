@@ -14,6 +14,7 @@ public class MyTools
 	static void Create()
 	{
 		
+		
 		GameObject myObj;
 		Vector3 pos;
 		GameObject invMarker = GameObject.Find("InventoryMarker");
@@ -96,7 +97,7 @@ public class MyTools
 		myObj= CreateGameObject("a_battle_axe_28_02_07_0587",33.619999f,0.600000f,2.742857f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_001",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", "Sprites/OBJECTS_001", 1, 1, 717, 57, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 14, 7, 2, 4, 34);
+		CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
 		
 		myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_28_02_07_0588",33.771427f,0.600000f,3.428571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_198",true);
@@ -622,7 +623,7 @@ public class MyTools
 		myObj= CreateGameObject("a_helmet_02_13_07_0810",2.914286f,3.600000f,16.628572f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_046",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_046", "Sprites/OBJECTS_046", "Sprites/armour/armor_f_0014", 73, 46, 565, 60, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 6951564, 7146480);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0014", "Sprites/armour/armor_m_0014", "Sprites/armour/armor_f_0029", "Sprites/armour/armor_m_0029", "Sprites/armour/armor_f_0044", "Sprites/armour/armor_m_0044", "Sprites/armour/armor_f_0059", "Sprites/armour/armor_m_0059", 3020456, 3215372);
 		
 		myObj= CreateGameObject("a_skull_02_13_07_0815",2.914286f,3.600000f,16.114286f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_195",true);
@@ -751,7 +752,7 @@ public class MyTools
 		myObj= CreateGameObject("a_mace_38_14_07_0639",46.114288f,0.600000f,17.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_009",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", 1, 9, 710, 59, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 8, 16, 5, 5, 25);
+		CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
 		
 		myObj= CreateGameObject("a_bone_38_14_07_0641",46.114288f,0.600000f,17.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
@@ -1434,7 +1435,7 @@ public class MyTools
 		myObj= CreateGameObject("a_broadsword_44_29_07_0847",53.314285f,3.600000f,35.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_006",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", 1, 6, 709, 50, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 13, 6, 10, 3, 34);
+		CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
 		
 		myObj = new GameObject("a_reaper_46_29_07_0251");
 		pos = new Vector3(55.714287f, 3.600000f, 35.314285f);
@@ -2053,7 +2054,7 @@ public class MyTools
 		myObj= CreateGameObject("a_chain_cowl_40_45_07_0520",48.685715f,3.600000f,55.028568f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_045",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_045", "Sprites/OBJECTS_045", "Sprites/armour/armor_f_0013", 73, 45, 714, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 6951564, 7078040);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0013", "Sprites/armour/armor_m_0013", "Sprites/armour/armor_f_0028", "Sprites/armour/armor_m_0028", "Sprites/armour/armor_f_0043", "Sprites/armour/armor_m_0043", "Sprites/armour/armor_f_0058", "Sprites/armour/armor_m_0058", 3020456, 3146932);
 		
 		myObj = new GameObject("a_dread_spider_58_45_07_0091");
 		pos = new Vector3(70.114288f, 0.000000f, 54.514286f);
@@ -2374,7 +2375,7 @@ public class MyTools
 		myObj= CreateGameObject("a_jeweled_sword_48_49_07_0759",58.628571f,0.000000f,59.657143f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_013",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", "Sprites/OBJECTS_013", 1, 13, 719, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 14, 7, 11, 3, 255);
+		CreateWeaponMelee(myObj, 14, 7, 11, 3, 255);
 		
 		
 		myObj= CreateGameObject("a_gold_coin_55_49_07_0926",67.028572f,0.000000f,59.142857f);
@@ -2586,7 +2587,7 @@ public class MyTools
 		myObj= CreateGameObject("a_leather_cap_36_53_07_0519",43.542858f,3.600000f,64.114288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_044",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_044", "Sprites/OBJECTS_044", "Sprites/armour/armor_f_0012", 73, 44, 719, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 6951564, 7077804);
+		CreateHelm(myObj, "Sprites/armour/armor_f_0012", "Sprites/armour/armor_m_0012", "Sprites/armour/armor_f_0027", "Sprites/armour/armor_m_0027", "Sprites/armour/armor_f_0042", "Sprites/armour/armor_m_0042", "Sprites/armour/armor_f_0057", "Sprites/armour/armor_m_0057", 3020456, 3146696);
 		
 		myObj= CreateGameObject("a_bone_39_53_07_0777",47.142857f,3.600000f,64.628571f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_196",true);
@@ -2798,7 +2799,7 @@ public class MyTools
 		myObj= CreateGameObject("a_longsword_57_56_07_0873",69.257141f,2.700000f,67.220001f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_005",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_005", "Sprites/OBJECTS_005", "Sprites/OBJECTS_005", 1, 5, 0, 50, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, 10, 4, 8, 3, 28);
+		CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
 		
 		myObj= CreateGameObject("a_breastplate_57_56_07_0872",69.428566f,2.700000f,67.542854f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_034",true);
@@ -2962,7 +2963,7 @@ public class MyTools
 		myObj= CreateGameObject("a_crossbow_41_58_07_0765",49.714287f,3.600000f,70.114288f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_026",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", "Sprites/OBJECTS_026", 1, 26, 719, 63, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		CreateWeaponRanged(myObj,17);
 		
 		myObj= CreateGameObject("a_broken_sword_42_58_07_0769",51.428570f,3.600000f,69.771431f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_201",true);
@@ -3107,7 +3108,7 @@ public class MyTools
 		myObj= CreateGameObject("a_jeweled_bow_18_61_07_0515",22.628572f,2.700000f,74.228569f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_031",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_031", "Sprites/OBJECTS_031", "Sprites/OBJECTS_031", 1, 31, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
 		
 		myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_18_61_07_0700",21.771429f,2.700000f,73.542854f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_210",true);
@@ -3156,7 +3157,7 @@ public class MyTools
 		myObj= CreateGameObject("a_jeweled_mace_02_62_07_0518",2.742857f,2.700000f,75.085716f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_014",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", "Sprites/OBJECTS_014", 1, 14, 711, 43, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 9, 17, 5, 5, 255);
+		CreateWeaponMelee(myObj, 9, 17, 5, 5, 255);
 		
 		myObj= CreateGameObject("some_rubble_piles_of_rubble_03_62_07_0713",4.114285f,2.700000f,74.914284f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_218",true);
@@ -3193,7 +3194,7 @@ public class MyTools
 		myObj= CreateGameObject("a_mace_21_62_07_0787",25.714285f,3.600000f,74.914284f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_009",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", "Sprites/OBJECTS_009", 1, 9, 717, 59, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-		CreateWeapon(myObj, 8, 16, 5, 5, 25);
+		CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
 		
 		myObj= CreateGameObject("a_skull_21_62_07_0788",25.714285f,3.600000f,74.419998f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_194",true);
@@ -3737,7 +3738,7 @@ public class MyTools
 		myObj= CreateGameObject("a_crossbow_bolt_99_99_07_0758",119.314285f,3.600000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_017",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", "Sprites/OBJECTS_017", 1, 17, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-		CreateWeapon(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+		CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
 		//Supplementary object 949
 		myObj= CreateGameObject("a_wand_99_99_07_0949",119.314285f,2.400000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_152",true);
@@ -3767,7 +3768,7 @@ public class MyTools
 		myObj= CreateGameObject("a_broadsword_99_99_07_0954",119.314285f,2.400000f,119.314285f);
 		CreateObjectGraphics(myObj,"Sprites/OBJECTS_006",true);
 		CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", "Sprites/OBJECTS_006", 1, 6, 0, 30, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-		CreateWeapon(myObj, 13, 6, 10, 3, 34);
+		CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
 
 	}
 
@@ -7305,7 +7306,17 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			"cs404_n01_0035",
 			"cs404_n01_0036"
 		};
-		CreateAnimationAsset ("Anvil","Cuts", animArrayAnvil,animArrayAnvil.GetUpperBound(0),0.2f,false,true);
+		//CreateAnimationAsset ("Anvil","Cuts", animArrayAnvil,animArrayAnvil.GetUpperBound(0),0.2f,false,true);
+
+		string[] strAnimArray_sleep = {	"cs000_n01_0000",
+			"cs000_n01_0001",		
+			"cs000_n01_0002",		
+			"cs000_n01_0003",		
+			"cs000_n01_0004",		
+			"cs000_n01_0005"};		
+		CreateAnimationAsset ("FadeToBlackSleep" ,"cuts", strAnimArray_sleep,strAnimArray_sleep.GetUpperBound(0),0.2f,false,true);
+
+
 	}
 
 
@@ -8903,7 +8914,15 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 	{
 		Container cn = myObj.AddComponent<Container>();
 		//cn.NoOfSlots = NoOfSlots;
-		cn.Capacity= Capacity;
+		if (Capacity==0)
+		{//Unlimited??
+			Capacity=40;
+		}
+		else
+		{
+			cn.Capacity= Capacity;
+		}
+
 		cn.ObjectsAccepted=ObjectsAccepted;
 
 		return cn;
@@ -8927,14 +8946,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		ls.ItemIdOff=ItemIDOff;
 	}
 
-	static void CreateWeapon(GameObject myObj, int Slash, int Bash, int Stab, int Skill, int Durability)
+	static void CreateWeaponMelee(GameObject myObj, int Slash, int Bash, int Stab, int Skill, int Durability)
 	{
-		Weapon wp = myObj.AddComponent<Weapon>();
+		WeaponMelee wp = myObj.AddComponent<WeaponMelee>();
 		wp.Slash=Slash;
 		wp.Bash=Bash;
 		wp.Stab=Stab;
 		wp.Skill=Skill;
 		wp.Durability=Durability;
+	}
+
+	static void CreateWeaponRanged(GameObject myObj, int ammoType)
+	{
+		WeaponRanged wp = myObj.AddComponent<WeaponRanged>();
+		wp.AmmoType=ammoType;
+
 	}
 
 	static void SetTileTag(int tileX, int tileY, string tag , int iRender)
@@ -9225,6 +9251,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				cnv=(Conversation)myObj.AddComponent<Conversation_222>();break;
 			case 231://Tybal
 				cnv=(Conversation)myObj.AddComponent<Conversation_231>();break;
+			case 232://Caroso
+				cnv=(Conversation)myObj.AddComponent<Conversation_232>();break;
 			case 262://Generic Green Goblin
 				cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
 			case 263://Generic Green Goblin
@@ -9417,6 +9445,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		bx.center=new Vector3(0.0f,0.1f,0.0f);
 		bx.size=new Vector3(0.15f,0.15f,0.15f);
 		newObj.layer=LayerMask.NameToLayer("UWObjects");
+	}
+
+	static void AddBedroll(GameObject myObj)
+	{
+		myObj.AddComponent<Bedroll>();
 	}
 
 	static void AddInstrument(GameObject myObj)

@@ -37,7 +37,11 @@ public class a_arrow_trap : trap_base {
 		//myObj.GetComponent<Rigidbody>().AddForce(ThrowDir* 10.0f);
 		myObj.GetComponent<Rigidbody>().collisionDetectionMode=CollisionDetectionMode.Continuous;
 		myObj.GetComponent<Rigidbody>().AddForce(myObj.transform.forward* 50.0f *((float)(objInt.Owner)));
-
+		GameObject myObjChild = new GameObject(myObj.name + "_damage");
+		myObjChild.transform.position =myObj.transform.position;
+		myObjChild.transform.parent =myObj.transform;
+		ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
+		pd.Damage=10;
 		//myObj.transform.position=ThrowDir;
 
 	}

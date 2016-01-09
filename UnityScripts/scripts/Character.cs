@@ -28,6 +28,7 @@ public class Character : MonoBehaviour {
 	public Texture2D CursorIcon;
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;
+	public Texture2D CursorIconTarget; //Default Cursor for ranged spells and combat.
 
 	//Reference to a C# version of the standard character controller.
 	public CharacterMotorC playerMotor;

@@ -92,6 +92,10 @@ public class UWCharacter : Character {
 		playerHud.InputControl.text="";
 		playerHud.InputControl.label.text="";
 		playerHud.MessageScroll.Clear ();
+
+		//Cutscene_Intro ci = playerHud.gameObject.AddComponent<Cutscene_Intro>();
+		//playerHud.CutScenesFull.cs=ci;
+		//playerHud.CutScenesFull.Begin();
 	}
 
 	void PlayerDeath()

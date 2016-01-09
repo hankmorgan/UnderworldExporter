@@ -3,20 +3,23 @@ using System.Collections;
 
 public class Weapon : Equipment {
 
-	//public SpellEffect SpellEffectApplied;
 	public int AccuracyBonus;
 	public int DamageBonus;
-	public int Skill;
-	//public int Durability;
-	public int Slash;
-	public int Bash;
-	public int Stab;
 
 	public override bool EquipEvent (int slotNo)
 	{
-		playerUW.PlayerCombat.currWeapon= this;
+		//playerUW.PlayerCombat.currWeapon= this;
 		if (((slotNo ==7) && (playerUW.isLefty==false)) || ((slotNo ==8) && (playerUW.isLefty==true)))
 		{
+			if (this.GetComponent<WeaponRanged>()!=null)
+			{
+				playerUW.PlayerCombat.currWeaponRanged=(WeaponRanged)this;
+			}
+			if (this.GetComponent<WeaponMelee>()!=null)
+			{
+				playerUW.PlayerCombat.currWeapon=(WeaponMelee)this;
+			}
+
 			if (objInt.isEnchanted==true)
 			{
 				int EffectId = GetActualSpellIndex ();
@@ -43,16 +46,6 @@ public class Weapon : Equipment {
 					this.DamageBonus = EffectId-455;
 					break;
 				}
-
-
-				/*
-				//cast enchantment.
-				SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,GetActualSpellIndex());
-				if (SpellEffectApplied!=null)
-				{
-					SpellEffectApplied.SetPermanent(true);
-				}
-				*/
 			}
 		}
 		return true;
@@ -62,26 +55,11 @@ public class Weapon : Equipment {
 	{
 		if (((slotNo ==7) && (playerUW.isLefty==false)) || ((slotNo ==8) && (playerUW.isLefty==true)))
 		{
-			//if (SpellEffectApplied!=null)
-			//{
-			//	SpellEffectApplied.CancelEffect();
-			//	return true;
-			//}
-			playerUW.PlayerCombat.currWeapon= null;
+			playerUW.PlayerCombat.currWeapon = null;
+			playerUW.PlayerCombat.currWeaponRanged = null;
 		}
 		return false;
 	}
 
-	public virtual void onHit(GameObject target)
-	{//Apply any posible magic effects when the weapon strikes.
-		if (objInt.isEnchanted==true)
-		{
-			int EffectId = GetActualSpellIndex ();
-			if (EffectId<=447)
-			{//Not a standard effect
-				//Debug.Log ("Casting + "+EffectId + " on " + target.name);
-				playerUW.PlayerMagic.CastEnchantmentImmediate(playerUW.gameObject,target,EffectId,Magic.SpellRule_TargetOther);
-			}
-		}
-	}
+
 }

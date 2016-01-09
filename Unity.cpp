@@ -1578,13 +1578,34 @@ void RenderUnityEntityLight(int game, float x, float y, float z, ObjectItem &cur
 
 void RenderUnityEntityWeapon(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
-	fprintf(UNITY_FILE, "\n\tCreateWeapon(myObj, %d, %d, %d, %d, %d);",
-		objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_SLASH]
-		, objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_BASH]
-		, objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_STAB]
-		, objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_SKILL]
-		, objectMasters[currobj.item_id].uwProperties[UW_PROP_DURABILITY]
-		);
+	switch (game)
+		{
+		case UWDEMO:
+		case UW1:
+			{
+			switch (currobj.item_id)
+				{
+				case 24://A sling
+					fprintf(UNITY_FILE, "\n\tCreateWeaponRanged(myObj,16);");//Slingstone
+					break;
+				case 25://A Bow
+					fprintf(UNITY_FILE, "\n\tCreateWeaponRanged(myObj,18);");//Arrow
+					break;
+				case 26://A Crossbow
+					fprintf(UNITY_FILE, "\n\tCreateWeaponRanged(myObj,17);");//Bolt
+					break;
+				default:
+					fprintf(UNITY_FILE, "\n\tCreateWeaponMelee(myObj, %d, %d, %d, %d, %d);",
+						objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_SLASH]
+						, objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_BASH]
+						, objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_STAB]
+						, objectMasters[currobj.item_id].uwProperties[UW_PROP_WEAP_SKILL]
+						, objectMasters[currobj.item_id].uwProperties[UW_PROP_DURABILITY]
+						);
+						break;
+				}
+			}
+		}
 	}
 
 void RenderUnityEntityParticle(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64], int bind)

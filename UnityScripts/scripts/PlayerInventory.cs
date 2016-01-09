@@ -586,7 +586,7 @@ public class PlayerInventory : MonoBehaviour {
 
 
 	public bool RemoveItem(string ObjectName)
-	{//Removes the item from the paperdoll and the current container.
+	{//Removes the item from the paperdoll and/or the player inventory.
 		if (sHelm==ObjectName)
 		{
 			UnEquipItemEvent(0);
@@ -684,8 +684,13 @@ public class PlayerInventory : MonoBehaviour {
 				return true;
 			}
 		}
-		return false;
+		//Try and find it in the entire inventory
+		return Container.RemoveItemFromSubContainers(playerContainer,ObjectName);
+
+		//return false;
 	}
+
+
 
 	public bool RemoveItemFromEquipment(string ObjectName)
 	{//Remove the object from wherever it is on the characters paperdoll.

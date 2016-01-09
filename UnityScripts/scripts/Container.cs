@@ -128,6 +128,35 @@ public class Container : object_base {
 		return false;
 	}
 
+	public static bool RemoveItemFromSubContainers(Container cn, string objectName)
+	{
+		for (int i =0; i<cn.MaxCapacity ();i++)
+		{
+			if (cn.items[i] == objectName)
+			{
+				cn.RemoveItemFromContainer(i);
+				return true;
+			}
+			else
+			{
+				if (cn.items[i] !="")
+				{
+					GameObject obj = GameObject.Find (cn.items[i]);
+					if (obj!=null)
+					{
+						if (obj.GetComponent<Container>()!=null)
+						{
+							return RemoveItemFromSubContainers(obj.GetComponent<Container>(),objectName);
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+
+
    /*static public bool xAddObjectToContainer(GameObject objInHand, GameObject objUseOn)
 	{
 		Container subContainer = objUseOn.GetComponent<Container>();
@@ -442,6 +471,10 @@ public class Container : object_base {
 	public static bool TestContainerRules(Container cn, int SlotIndex)
 	{
 		if (SlotIndex<11)
+		{
+			return true;
+		}
+		if (playerUW.playerInventory.ObjectInHand=="")
 		{
 			return true;
 		}

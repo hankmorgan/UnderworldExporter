@@ -583,7 +583,8 @@ public class Magic : MonoBehaviour {
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			ReadiedSpell= "Ort Jux";
-			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
+			//playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
+			playerUW.CursorIcon=playerUW.CursorIconTarget;
 		}
 		else
 		{
@@ -597,7 +598,8 @@ public class Magic : MonoBehaviour {
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			ReadiedSpell= "Ort Grav";
-			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
+			//playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
+			playerUW.CursorIcon=playerUW.CursorIconTarget;
 		}
 		else
 		{
@@ -1344,7 +1346,7 @@ public class Magic : MonoBehaviour {
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
-				float force = 600.0f;
+				float force = 200.0f;
 				ReadiedSpell= "";
 				GameObject projectile = CreateMagicProjectile(SpriteName,"",ray.GetPoint(dropRange/2.0f), 5, caster);
 				LaunchProjectile(projectile,ray,dropRange,force);
@@ -1355,7 +1357,7 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{//Is being cast by an npc or a spell trap
-			float force = 600.0f;
+			float force = 200.0f;
 			GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
 			LaunchProjectile(projectile,force);
 			return true;
@@ -1393,7 +1395,8 @@ public class Magic : MonoBehaviour {
 
 	void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
 	{
-		Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
+		//Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
+		Vector3 ThrowDir = ray.GetPoint(dropRange)  - ray.origin;
 		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
 
