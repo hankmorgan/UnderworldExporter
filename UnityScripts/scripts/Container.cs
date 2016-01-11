@@ -49,12 +49,14 @@ public class Container : object_base {
 			if (items[i]!="")
 			{
 				GameObject founditem = GameObject.Find (items[i]);
-				if ((founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id) && (founditem.GetComponent<ObjectInteraction>().Quality==item.GetComponent<ObjectInteraction>().Quality))
+				//if ((founditem.GetComponent<ObjectInteraction>().item_id==item.GetComponent<ObjectInteraction>().item_id) && (founditem.GetComponent<ObjectInteraction>().Quality==item.GetComponent<ObjectInteraction>().Quality))
+				if (ObjectInteraction.CanMerge(founditem.GetComponent<ObjectInteraction>(),item.GetComponent<ObjectInteraction>()))
 				{
 					//merge
 					//Debug.Log ("Merging");
-					founditem.GetComponent<ObjectInteraction>().Link =founditem.GetComponent<ObjectInteraction>().Link+ item.GetComponent<ObjectInteraction>().Link;
-					GameObject.Destroy (item);
+					//founditem.GetComponent<ObjectInteraction>().Link =founditem.GetComponent<ObjectInteraction>().Link+ item.GetComponent<ObjectInteraction>().Link;
+					//GameObject.Destroy (item);
+					ObjectInteraction.Merge(founditem.GetComponent<ObjectInteraction>(),item.GetComponent<ObjectInteraction>());
 					return true;
 				}
 			}

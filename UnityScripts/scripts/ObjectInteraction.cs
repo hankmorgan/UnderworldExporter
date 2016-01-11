@@ -602,6 +602,7 @@ public class ObjectInteraction : MonoBehaviour {
 			else
 			{//just decrement the quantity value;
 				Link--;
+				ObjectInteraction.Split (this);
 				playerUW.playerInventory.Refresh();
 
 			}
@@ -801,6 +802,69 @@ public class ObjectInteraction : MonoBehaviour {
 			Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
 		}
 	}
+
+	public int AliasItemId()
+	{
+		return this.GetComponent<object_base>().AliasItemId();
+	}
+
+	public static int Alias(int id)
+	{
+		switch(id)
+		{
+		case 160:
+			return 161;
+			break;
+		case 161:
+			return 160;
+			break;
+		default:
+			return id;
+			break;
+		}
+	}
+
+	public bool IsStackable()
+	{//An object is stackable if it has the isQuant flag and is not enchanted.
+		return ((isQuant) && (!isEnchanted));
+	}
+
+	public static bool CanMerge(ObjectInteraction mergingInto, ObjectInteraction mergingFrom)
+	{
+		//if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
+		return (
+				(
+				(mergingInto.item_id == mergingFrom.item_id) 
+				||
+				(mergingInto.AliasItemId() == mergingFrom.item_id)
+				||
+				(mergingInto.item_id == mergingFrom.AliasItemId())
+				)
+		        && 
+				(mergingInto.Quality==mergingFrom.Quality)
+			);
+	}
+
+
+	public static void Merge(ObjectInteraction mergingInto, ObjectInteraction mergingFrom)
+	{
+		//ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
+		mergingInto.Link += mergingFrom.Link;
+		mergingInto.GetComponent<object_base>().MergeEvent();
+		Destroy(mergingFrom.gameObject);
+	}
+
+	public static void Split(ObjectInteraction splitFrom, ObjectInteraction splitTo)
+	{
+		splitFrom.GetComponent<object_base>().Split ();
+		splitTo.GetComponent<object_base>().Split();
+	}
+
+	public static void Split(ObjectInteraction splitFrom)
+	{
+		splitFrom.GetComponent<object_base>().Split ();
+	}
+
 	/*
 	void OnCollisionEnter(Collision info) {
 		

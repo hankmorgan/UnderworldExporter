@@ -7,7 +7,7 @@ public class ContainerOpened : object_base {
 	void CloseChildContainer(Container ClosingParent)
 	{//Recursively closes open child containers
 		ClosingParent.isOpenOnPanel=false;
-		for (int i = 0;i<40;i++)
+		for (int i = 0;i<ClosingParent.MaxCapacity();i++)
 		{
 			if (ClosingParent.items[i] !="")
 			{
@@ -69,7 +69,8 @@ public class ContainerOpened : object_base {
 			ObjectInteraction item = GameObject.Find (playerUW.playerInventory.ObjectInHand).GetComponent<ObjectInteraction>();
 			if (Container.TestContainerRules(DestinationContainer,11))
 			{
-				if ((item.isQuant==false) || (item.isEnchanted))
+				//if ((item.isQuant==false) || (item.isEnchanted))
+				if (item.IsStackable())
 				{
 					if (DestinationContainer.AddItemToContainer(playerUW.playerInventory.ObjectInHand))
 					{//Object has moved

@@ -685,9 +685,27 @@ public class PlayerInventory : MonoBehaviour {
 			}
 		}
 		//Try and find it in the entire inventory
-		return Container.RemoveItemFromSubContainers(playerContainer,ObjectName);
+		if (Container.RemoveItemFromSubContainers(playerContainer,ObjectName))
+		{
+			return true;
+		}
+		//Try and find it as a container subitem on the paperdoll slots.
+		for( int i=0; i<=10;i++)
+		{
+			GameObject obj = GetGameObjectAtSlot(i);
+			if (obj!=null)
+			{
+				if (obj.GetComponent<Container>()!=null)
+				{
+					if (Container.RemoveItemFromSubContainers(obj.GetComponent<Container>(),ObjectName))
+					{
+						return true;
+					} 
+				}
+			}
 
-		//return false;
+		}
+		return false;
 	}
 
 
@@ -905,6 +923,25 @@ public class PlayerInventory : MonoBehaviour {
 					if (objInt.item_id== item_id)
 					{
 						return objInt;
+					}
+					else
+					{
+						if (objInt.ItemType==ObjectInteraction.CONTAINER)
+						{
+							string find2=obj.GetComponent<Container>().findItemOfType(item_id);
+							if (find2!="")
+							{
+								GameObject obj2 = GameObject.Find (find2);
+								ObjectInteraction objInt2 = obj2.GetComponent<ObjectInteraction>();
+								if (objInt2!=null)
+								{
+									if (objInt2.item_id== item_id)
+									{
+										return objInt2;
+									}
+								}
+							}
+						}
 					}
 				}
 			}

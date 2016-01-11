@@ -23,7 +23,7 @@
 #define	INSERTABLE 15	//Shock style put the circuit board in the slot.
 #define	INVENTORY 16	//Quest items and the like with no special properties
 #define ACTIVATOR 17	//Crystal balls,magic fountains and surgery machines that have special custom effects when you activate them
-#define TREASURE 18
+#define GOLD 18
 #define CONTAINER 19
 //#define TRAP 20	
 #define LOCK 21

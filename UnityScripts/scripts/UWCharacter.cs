@@ -297,6 +297,7 @@ public class UWCharacter : Character {
 				Split.name = Split.name+"_"+summonCount++;
 				QuantityObj.Link=QuantityObj.Link-quant;
 				Pickup (Split.GetComponent<ObjectInteraction>(), playerInventory);
+				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());
 				QuantityObj=null;//Clear out to avoid weirdness.
 				}
 			}

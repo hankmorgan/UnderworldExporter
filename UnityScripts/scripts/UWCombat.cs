@@ -36,6 +36,10 @@ public class UWCombat : Combat {
 		{
 			//Check for ammo
 			currentAmmo=playerUW.playerInventory.findObjInteractionByID(currWeaponRanged.AmmoType);
+			if ((currentAmmo == null) && (ObjectInteraction.Alias(currWeaponRanged.AmmoType)!=currWeaponRanged.AmmoType))
+			{//Ammo type has an alias. try and find that instead.
+				currentAmmo=playerUW.playerInventory.findObjInteractionByID(ObjectInteraction.Alias(currWeaponRanged.AmmoType));
+			}
 			if (currentAmmo==null)
 			{
 				playerUW.playerHud.MessageScroll.Add ("Sorry, you have no " + playerUW.StringControl.GetObjectNounUW(currWeaponRanged.AmmoType));
@@ -284,9 +288,10 @@ public class UWCombat : Combat {
 				}
 				else
 				{//copy a single instance as the ammo.
-
 					launchedItem = Instantiate(currentAmmo.gameObject);
+					launchedItem.name="launched_missile_" +playerUW.PlayerMagic.SummonCount++;
 					launchedItem.GetComponent<ObjectInteraction>().Link=1;//Only 1
+					ObjectInteraction.Split(launchedItem.GetComponent<ObjectInteraction>());
 					currentAmmo.consumeObject();//Reduce by one.
 				}
 				launchedItem.transform.parent=null;

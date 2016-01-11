@@ -179,4 +179,23 @@ public class object_base : MonoBehaviour {
 			return (float)(objInt.GetQty())*ObjectInteraction.Weight[objInt.item_id]*0.1f;
 		}
 	}
+
+	public virtual void MergeEvent()
+	{
+		//Code to call when merging two objects. To support cases where merging an object means the object becomes something different.
+		//Eg coin into stack of coins
+		return;
+	}
+
+	public virtual int AliasItemId()
+	{
+		//Another item Id this object could have. Eg coin/gold coin. By default it's normal item_id
+		return objInt.item_id;
+	}
+
+
+	public virtual void Split()
+	{//Code to call when spliting an item and the split changes the item fundamentally.
+		return;
+	}
 }

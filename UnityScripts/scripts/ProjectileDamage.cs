@@ -18,7 +18,6 @@ public class ProjectileDamage : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log ("Collision");
 		if (hasHit==false)
 		{
 			hasHit=true;

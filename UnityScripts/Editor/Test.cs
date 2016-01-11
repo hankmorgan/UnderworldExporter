@@ -9452,6 +9452,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		myObj.AddComponent<Bedroll>();
 	}
 
+	static void AddCoin(GameObject myObj)
+	{
+		myObj.AddComponent<Coin>();
+	}
+
 	static void AddInstrument(GameObject myObj)
 	{
 		myObj.AddComponent<Instrument>();
