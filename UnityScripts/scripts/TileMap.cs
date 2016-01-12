@@ -68,7 +68,7 @@ public class TileMap : MonoBehaviour {
 		else
 		{
 			playerUW.isSwimming=false;
-			OnGround=false;
+			//OnGround=false;
 			//feet.SetActive(false);
 		}
 

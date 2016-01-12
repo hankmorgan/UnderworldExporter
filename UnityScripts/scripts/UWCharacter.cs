@@ -8,6 +8,8 @@ public class UWCharacter : Character {
 
 	//What magic spells are currently active on (and cast by) the player. (max 3)
 	//These are the ones that the player can see on the hud.
+	public static UWCharacter Instance;
+
 	public SpellEffect[] ActiveSpell=new SpellEffect[3]; 
 
 	//What effects and enchantments (eg from items are equipped on the player)
@@ -58,8 +60,14 @@ public class UWCharacter : Character {
 	public Vector3 MoonGatePosition=Vector3.zero;
 	public int MoonGateLevel = 2;//Domain of the mountainmen
 
+	public void Awake()
+	{
+		Instance=this;
+	}
+
 	public override void Start ()
 	{
+
 		base.Start ();
 
 		XAxis.enabled=false;
@@ -518,5 +526,17 @@ public class UWCharacter : Character {
 	public Quest quest()
 	{
 		return this.GetComponent<Quest>();
+	}
+
+	public void onLanding(float fallSpeed)
+	{
+		if (isSwimming==false)
+		{
+			//Do stuff with acrobat here. In the mean time a flat skill check.
+			if ( ! PlayerSkills.TrySkill(Skills.SkillAcrobat, (int)fallSpeed))
+			{
+				ApplyDamage(5);//TODO:As a function of the acrobat skill versus fall.
+			}
+		}
 	}
 }

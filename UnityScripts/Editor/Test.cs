@@ -8201,6 +8201,29 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		BoxCollider bx=myObj.GetComponent<BoxCollider>();
 		bx.enabled=false;
 		Component.DestroyImmediate (bx);
+		switch (doorInteract.item_id)
+		{
+		case 320://0
+		case 327:
+			dc.DR=0;
+			break;
+		case 321://1
+		case 328:
+		case 322:
+		case 329:
+			dc.DR=1;
+			break;
+		case 323://2
+		case 330:
+		case 324://2
+		case 331:
+			dc.DR=2;
+			break;
+		case 325://3
+		case 333:
+			dc.DR=3;
+			break;
+		}
 	}
 
 	static void CreatePortcullis(GameObject myObj, int DoorKey, int Locked, int isOpen)

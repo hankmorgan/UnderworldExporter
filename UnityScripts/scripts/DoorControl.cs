@@ -4,6 +4,7 @@ using System.Collections;
 public class DoorControl : object_base {
 	/*Class for manipulating doors*/
 
+	public int DR;//The damage resistance of the door.
 	public bool locked;
 	public int KeyIndex;//What keys can open this
 	public bool state;	//True for open, false for closed.
@@ -283,13 +284,21 @@ public class DoorControl : object_base {
 
 	public override bool ApplyAttack(int damage)
 	{//TODO:Find out how massive doors resist damage
+		if (DR<3)
+		{
+		if (DR!=0)
+			{
+			damage= damage/DR;
+			}
 		objInt.Quality=objInt.Quality-damage;
 		if ((objInt.Quality<=0))
-		{
-			locked=false;
-			OpenDoor();
+			{
+				locked=false;
+				OpenDoor();
+			}
 		}
 		return true;
+		
 	}
 
 
