@@ -15,7 +15,7 @@ MonoBehaviour:
     _serializedData: <scriptableobject version="1.3" type="RAIN.BehaviorTrees.BTAsset"><fields><field
       value="&lt;behaviortree version=&quot;1.1&quot; repeatuntil=&quot;&quot; name=&quot;Bragit&quot;
       debugbreak=&quot;False&quot;&gt;&lt;selector usepriorities=&quot;False&quot;
-      repeatuntil=&quot;&quot; name=&quot;parallel&quot; debugbreak=&quot;False&quot;&gt;&lt;constraint
+      repeatuntil=&quot;&quot; name=&quot;Selector&quot; debugbreak=&quot;False&quot;&gt;&lt;constraint
       repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;RandomPeaceful&quot;
       debugbreak=&quot;False&quot; constraint=&quot;state==0&quot;&gt;&lt;parallel
       tiebreaker=&quot;fail&quot; succeed=&quot;all&quot; repeatuntil=&quot;running&quot;
@@ -65,7 +65,26 @@ MonoBehaviour:
       name=&quot;Move Animation&quot; debugbreak=&quot;False&quot; classname=&quot;AI_MOVE&quot;
       /&gt;&lt;action repeatuntil=&quot;success&quot; parametervalues=&quot;&quot;
       parameters=&quot;&quot; namespace=&quot;&quot; name=&quot;TargetPlayer&quot;
-      debugbreak=&quot;False&quot; classname=&quot;AI_MoveToPlayer&quot; /&gt;&lt;move
+      debugbreak=&quot;False&quot; classname=&quot;AI_MoveToPlayer&quot; /&gt;&lt;selector
+      usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; name=&quot;selector&quot;
+      debugbreak=&quot;False&quot;&gt;&lt;constraint repeatuntil=&quot;failure&quot;
+      priority=&quot;&quot; name=&quot;MagicAttack&quot; debugbreak=&quot;False&quot;
+      constraint=&quot;magicAttack==true&quot;&gt;&lt;move turnspeed=&quot;500&quot;
+      repeatuntil=&quot;success&quot; name=&quot;Move to Player&quot; movetarget=&quot;playerUW&quot;
+      movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot; debugbreak=&quot;False&quot;
+      closeenoughdistance=&quot;4&quot; closeenoughangle=&quot;0&quot; /&gt;&lt;action
+      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;Pick A Random Attack Animation&quot;
+      debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
+      waitforsec=&quot;0.8&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
+      debugbreak=&quot;False&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Execute Magic
+      Attack&quot; debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_MAGIC&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;(global)&quot; name=&quot;Combat Idle&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_COMBAT_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;constraint
+      repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;MeleeAttack&quot;
+      debugbreak=&quot;False&quot; constraint=&quot;magicAttack==false&quot;&gt;&lt;move
       turnspeed=&quot;500&quot; repeatuntil=&quot;success&quot; name=&quot;Move to
       Player&quot; movetarget=&quot;playerUW&quot; movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot;
       debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.9&quot; closeenoughangle=&quot;0&quot;
@@ -74,11 +93,11 @@ MonoBehaviour:
       debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
       waitforsec=&quot;0.8&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
       debugbreak=&quot;False&quot; /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot;
-      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Execute Attack&quot;
-      debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_EXECUTE&quot; /&gt;&lt;action
-      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      parameters=&quot;&quot; namespace=&quot;(global)&quot; name=&quot;Execute Melee
+      Attack&quot; debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_EXECUTE&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Combat Idle&quot; debugbreak=&quot;False&quot;
-      classname=&quot;AI_COMBAT_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;constraint
+      classname=&quot;AI_COMBAT_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;/selector&gt;&lt;/constraint&gt;&lt;constraint
       repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;Death&quot;
       debugbreak=&quot;False&quot; constraint=&quot;state==2&quot;&gt;&lt;action repeatuntil=&quot;&quot;
       parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;(global)&quot;

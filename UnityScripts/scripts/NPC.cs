@@ -51,6 +51,8 @@ public class NPC : object_base {
 	private GoblinAI Gob;
 	private AIRig ai;
 
+	public bool MagicAttack;
+
 	// Use this for initialization
 	void Start () {
 		base.Start();
@@ -64,6 +66,7 @@ public class NPC : object_base {
 		}
 		//playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
+		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
 	}
 
@@ -143,7 +146,7 @@ public class NPC : object_base {
 			{
 				if (npc_attitude==0)
 					{
-					//ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
+					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
 					}
 				else
 				{

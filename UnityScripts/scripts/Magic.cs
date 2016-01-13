@@ -1338,8 +1338,8 @@ public class Magic : MonoBehaviour {
 
 	bool CastProjectile(GameObject caster, string SpriteName)
 	{//Fires off the projectile
-		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
-		if (playerUW !=null)
+		UWCharacter playerUWLocal = caster.GetComponent<UWCharacter>();
+		if (playerUWLocal !=null)
 		{
 			Ray ray = getRay (caster);
 			RaycastHit hit = new RaycastHit(); 
@@ -1368,6 +1368,7 @@ public class Magic : MonoBehaviour {
 	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage, GameObject Caster)
 	{//Creates the projectile.
 		GameObject projectile = new GameObject();
+		projectile.name = "MagicProjectile_" + SummonCount++;
 		//projectile.transform.position=Location;
 		CreateObjectGraphics(projectile,ProjectileImage,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();

@@ -101,6 +101,11 @@ public class GoblinAI : MonoBehaviour {
 		//}
 	}
 
+	public void MagicAttack()
+	{//TODO: Make the launch point be somewhere above the npcs ground point and so that it does'nt collide with them.
+		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(this.gameObject,UWCharacter.Instance.gameObject,SpellEffect.UW1_Spell_Effect_MagicArrow,Magic.SpellRule_TargetVector);
+	}
+
 
 	// Update is called once per frame
 	void Update () {
