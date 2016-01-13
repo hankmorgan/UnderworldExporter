@@ -14,8 +14,8 @@ public class AI_DEATH : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
-		gob.AnimRange=GoblinAI.AI_RANGE_DEATH;
+		NPC npc =  ai.Body.GetComponent<NPC>();
+		npc.AnimRange=NPC.AI_RANGE_DEATH;
 		GameObject mus = GameObject.Find ("MusicController");
 		if (mus!=null)
 		{

@@ -14,8 +14,8 @@ public class AI_MOVE : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
-		gob.AnimRange= GoblinAI.AI_RANGE_MOVE;
+		NPC npc=  ai.Body.GetComponent<NPC>();
+		npc.AnimRange= NPC.AI_RANGE_MOVE;
         return ActionResult.SUCCESS;
     }
 

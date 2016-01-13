@@ -15,8 +15,8 @@ public class AI_IDLE : RAINAction
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
 		ai.WorkingMemory.SetItem<bool>("isMovingRandom",false);
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
-		gob.AnimRange= GoblinAI.AI_RANGE_IDLE;
+		NPC npc=  ai.Body.GetComponent<NPC>();
+		npc.AnimRange= NPC.AI_RANGE_IDLE;
         return ActionResult.SUCCESS;
     }
 

@@ -14,8 +14,8 @@ public class AI_ATTACK_THRUST : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
-		gob.AnimRange=GoblinAI.AI_RANGE_ATTACK_THRUST;
+		NPC npc=  ai.Body.GetComponent<NPC>();
+		npc.AnimRange=NPC.AI_RANGE_ATTACK_THRUST;
         return ActionResult.SUCCESS;
     }
 

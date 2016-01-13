@@ -14,15 +14,15 @@ public class AI_ATTACK_RANDOM : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
+		NPC npc=  ai.Body.GetComponent<NPC>();
 		switch (Random.Range(0,3))
 		{
 		case 0:
-			gob.AnimRange=GoblinAI.AI_RANGE_ATTACK_BASH;break;
+			npc.AnimRange=NPC.AI_RANGE_ATTACK_BASH;break;
 		case 1:
-			gob.AnimRange=GoblinAI.AI_ANIM_ATTACK_SLASH;break;
+			npc.AnimRange=NPC.AI_ANIM_ATTACK_SLASH;break;
 		case 2:
-			gob.AnimRange=GoblinAI.AI_ANIM_ATTACK_THRUST;break;
+			npc.AnimRange=NPC.AI_ANIM_ATTACK_THRUST;break;
 		}
 
         return ActionResult.SUCCESS;

@@ -14,8 +14,8 @@ public class AI_ATTACK_MAGIC : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
-		gob.MagicAttack();
+		NPC npc=  ai.Body.GetComponent<NPC>();
+		npc.ExecuteMagicAttack();
 
         return ActionResult.SUCCESS;
     }

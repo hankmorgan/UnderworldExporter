@@ -14,8 +14,8 @@ public class AI_ATTACK_EXECUTE : RAINAction
 
     public override ActionResult Execute(RAIN.Core.AI ai)
     {
-		GoblinAI gob=  ai.Body.GetComponent<GoblinAI>();
-		gob.ExecuteAttack();
+		NPC npc=  ai.Body.GetComponent<NPC>();
+		npc.ExecuteAttack();
 
         return ActionResult.SUCCESS;
     }

@@ -768,7 +768,7 @@ public class TileMap : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Action_Moving_Platform.tm=this.gameObject.GetComponent<TileMap>();
-		GoblinAI.tm= this.gameObject.GetComponent<TileMap>();
+		//GoblinAI.tm= this.gameObject.GetComponent<TileMap>();
 	
 		
 		SetTileProp(0,0,0,1,30,0,0,0,0);

@@ -7740,8 +7740,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 	static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
 	{
-		GoblinAI gronk = myObj.AddComponent<GoblinAI>();
-		gronk.NPC_ID=NPC_ID;
+		//GoblinAI gronk = myObj.AddComponent<GoblinAI>();
+		//gronk.NPC_ID=NPC_ID;
 		myObj.layer=LayerMask.NameToLayer("NPCs");
 		GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
@@ -7753,6 +7753,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		ai.AI.Body=myObj;
 
 		NPC npc = myObj.AddComponent<NPC>();
+		npc.NPC_ID=NPC_ID;
 		if (npc_whoami == 0)
 		{
 			npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
