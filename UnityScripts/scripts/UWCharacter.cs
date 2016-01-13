@@ -202,7 +202,7 @@ public class UWCharacter : Character {
 		{
 			if (isSwimming==true)
 			{
-				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,-1.0f,Camera.main.transform.localPosition.z);
+				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,-0.8f,Camera.main.transform.localPosition.z);
 			}
 			else
 			{

@@ -7,6 +7,8 @@ public class Feet : MonoBehaviour {
 	public TileMap tm;
 	public float currY;
 	public float fallSpeed;
+	int waterLayer;
+	int landLayer;
 	//Rigidbody playerBody;
 	//public bool onGround;
 	//public float veloY;
@@ -15,14 +17,43 @@ public class Feet : MonoBehaviour {
 	//	playerBody=this.GetComponent<Rigidbody>();
 	//}
 
+	void Start()
+	{
+		waterLayer=LayerMask.NameToLayer("Water");
+		landLayer=LayerMask.NameToLayer("MapMesh");
+	}
+
 	void OnTriggerStay(Collider other) {
-		TileMap.OnGround=true;  
+
+		if (other.gameObject.layer==landLayer)
+		{
+			TileMap.OnGround=true;  
+		}
+		else
+		{
+			if (other.gameObject.layer==waterLayer)
+			{
+				TileMap.OnWater=true;  
+			}
+		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		//Debug.Log ("Exit");
-		TileMap.OnGround=false;
-		tm.PositionDetect();
+	//	TileMap.OnGround=false;
+	  if (other.gameObject.layer==landLayer)
+		{
+			TileMap.OnGround=false;  
+		}
+		else
+		{
+			if (other.gameObject.layer==waterLayer)
+			{
+				TileMap.OnWater=false;  
+			}
+		}
+
+		//tm.PositionDetect();
 	}
 
 	void Update()

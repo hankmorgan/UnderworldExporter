@@ -46,6 +46,7 @@ public class TileMap : MonoBehaviour {
 	RaycastHit hit = new RaycastHit(); 
 	int visitTileX; int visitTileY;
 	public static bool OnGround=false;
+	public static bool OnWater=false;
 	public GameObject feet;//For detecting the ground.
 	UWCharacter playerUW;
 
@@ -58,7 +59,8 @@ public class TileMap : MonoBehaviour {
 		visitTileX =(int)(gronk.transform.position.x/1.2f);
 		visitTileY =(int)(gronk.transform.position.z/1.2f);
 		SetTileVisited(visitTileX,visitTileY);
-
+		playerUW.isSwimming=((OnWater) && (!playerUW.isWaterWalking)) ;
+		/*
 		//gronk.GetComponent<UWCharacter>().isSwimming=GetIsWater(visitTileX,visitTileY);//TODO: make water a physics layer and detect via collision
 		if (GetIsWater (visitTileX,visitTileY)== true)
 		{//check if gronk is on the ground.
@@ -71,7 +73,7 @@ public class TileMap : MonoBehaviour {
 			//OnGround=false;
 			//feet.SetActive(false);
 		}
-
+		*/
 		return;
 		//Checks the tile name we are standing on and if it gets a match it will flag as visited
 		//RaycastHit hit = new RaycastHit(); 
