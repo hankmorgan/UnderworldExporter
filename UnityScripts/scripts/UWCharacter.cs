@@ -34,6 +34,8 @@ public class UWCharacter : Character {
 	public bool onGround;//Not currently used.
 	public bool isTelekinetic;
 	public bool isLeaping;
+	public int Resistance; //DR from spells.
+	public bool FireProof;//Takes no damage from lava
 
 	//Character Status
 	public int FoodLevel;
@@ -59,6 +61,8 @@ public class UWCharacter : Character {
 
 	public Vector3 MoonGatePosition=Vector3.zero;
 	public int MoonGateLevel = 2;//Domain of the mountainmen
+
+	public float lavaDamageTimer;
 
 	public void Awake()
 	{
@@ -249,7 +253,22 @@ public class UWCharacter : Character {
 		}
 
 
-
+		if (TileMap.OnLava==true)
+		{
+			if(!FireProof)
+			{
+				lavaDamageTimer+=Time.deltaTime;
+				if (lavaDamageTimer>=1.0f)//Take Damage every 1 second.
+				{
+					ApplyDamage (10);
+					lavaDamageTimer=0.0f;
+				}
+			}
+		}
+		else
+		{
+			lavaDamageTimer=0;
+		}
 	
 	}
 

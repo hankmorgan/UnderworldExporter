@@ -53,6 +53,7 @@ public class chains : GuiBase {
 		bool RuneBagEnabled=false;
 		bool StatsEnabled=false;
 		bool ConversationEnabled=false;
+		bool CutSceneEnabled=false;
 
 		setControl=ActiveControl;
 		switch (ActiveControl)
@@ -62,40 +63,46 @@ public class chains : GuiBase {
 				RuneBagEnabled=false;
 				StatsEnabled=false;
 				ConversationEnabled=false;
+				CutSceneEnabled=false;
 				break;
 			case 1://Stats display
 				InventoryEnabled=false;
 				RuneBagEnabled=false;
 				StatsEnabled=true;
 				ConversationEnabled=true;
+				CutSceneEnabled=false;
 				break;	
 			case 2://Runebag
 				InventoryEnabled=false;
 				RuneBagEnabled=true;
 				StatsEnabled=false;
 				ConversationEnabled=false;
+				CutSceneEnabled=false;
 				break;	
 			case 3://Conversation
 				InventoryEnabled=true;
 				RuneBagEnabled=false;
 				StatsEnabled=false;
 				ConversationEnabled=true;
+				CutSceneEnabled=false;
 				break;	
 			case 4://Map
 				InventoryEnabled=false;
 				RuneBagEnabled=false;
 				StatsEnabled=false;
 				ConversationEnabled=false;
+				CutSceneEnabled=false;
 				break;
 			case 5: //Cutscene fullscreen;
 				InventoryEnabled=false;
 				RuneBagEnabled=false;
 				StatsEnabled=false;
 				ConversationEnabled=false;
+				CutSceneEnabled=true;
 				break;
 		}
 
-		EnableDisableControl("RuneBagDisplay",RuneBagEnabled);
+		EnableDisableControl ("RuneBagDisplay",RuneBagEnabled);
 		EnableDisableControl ("RuneSlot00",RuneBagEnabled);
 		EnableDisableControl ("RuneSlot01",RuneBagEnabled);
 		EnableDisableControl ("RuneSlot02",RuneBagEnabled);
@@ -221,6 +228,9 @@ public class chains : GuiBase {
 		EnableDisableControl("Trade_NPC_Count_1",ConversationEnabled);
 		EnableDisableControl("Trade_NPC_Count_2",ConversationEnabled);
 		EnableDisableControl("Trade_NPC_Count_3",ConversationEnabled);
+
+		//Cutscene related
+		EnableDisableControl("scroll_cutscene",CutSceneEnabled);
 
 	}
 }

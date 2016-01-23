@@ -47,6 +47,7 @@ public class TileMap : MonoBehaviour {
 	int visitTileX; int visitTileY;
 	public static bool OnGround=false;
 	public static bool OnWater=false;
+	public static bool OnLava=false;
 	public GameObject feet;//For detecting the ground.
 	UWCharacter playerUW;
 
