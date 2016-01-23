@@ -117,6 +117,8 @@ public class NPC : object_base {
 	private AIRig ai;
 
 	public bool MagicAttack;
+	public GameObject NPC_Launcher; //Transform position to launch projectiles from
+	public int SpellIndex; 	//What spell the NPC should cast.
 
 	void Awake () {
 		oldNPC_ID=NPC_ID;
@@ -587,8 +589,8 @@ public class NPC : object_base {
 	}
 	
 	public void ExecuteMagicAttack()
-	{//TODO: Make the launch point be somewhere above the npcs ground point and so that it does'nt collide with them.
-		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(this.gameObject,UWCharacter.Instance.gameObject,SpellEffect.UW1_Spell_Effect_MagicArrow,Magic.SpellRule_TargetVector);
+	{
+		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,UWCharacter.Instance.gameObject,SpellIndex,Magic.SpellRule_TargetVector);
 	}
 
 

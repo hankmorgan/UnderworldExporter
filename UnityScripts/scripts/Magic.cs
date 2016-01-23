@@ -1365,15 +1365,44 @@ public class Magic : MonoBehaviour {
 	}	
 
 
+	bool CastProjectile(GameObject caster, string SpriteName, GameObject target)
+	{//Fires off the projectile at a gameobject.
+		float force = 200.0f;
+		GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
+		Vector3 direction = (target.transform.position-caster.transform.position);
+		direction.Normalize();
+		LaunchProjectile(projectile,force,direction);
+		return true;
+	}	
+
+	bool CastProjectile(GameObject caster, string SpriteName, Vector3 targetV)
+	{//Fires off the projectile at a vector3 position.
+		float force = 200.0f;
+		GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
+		Vector3 direction = (targetV-caster.transform.position);
+		direction.Normalize();
+		LaunchProjectile(projectile,force,direction);
+		return true;
+	}	
+
 	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage, GameObject Caster)
 	{//Creates the projectile.
 		GameObject projectile = new GameObject();
+		projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 		projectile.name = "MagicProjectile_" + SummonCount++;
 		//projectile.transform.position=Location;
 		CreateObjectGraphics(projectile,ProjectileImage,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
 		mgp.damage=Damage;
-		mgp.caster=Caster.name;
+		if (Caster.name=="NPC_Launcher")
+		{
+			mgp.caster=Caster.transform.parent.name;
+		}
+		else
+		{
+			mgp.caster=Caster.name;
+		}
+
 		BoxCollider box = projectile.AddComponent<BoxCollider>();
 		box.size = new Vector3(0.2f,0.2f,0.2f);
 		box.center= new Vector3(0.0f,0.1f,0.0f);
@@ -1402,10 +1431,14 @@ public class Magic : MonoBehaviour {
 	}
 
 	void LaunchProjectile(GameObject projectile, float force)
-	{
+	{//Launch directly forward
 		projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward*force);
 	}
-	
+
+	void LaunchProjectile (GameObject projectile, float force, Vector3 direction)
+	{
+		projectile.GetComponent<Rigidbody>().AddForce (direction*force);
+	}
 	
 	static void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
 	{	
@@ -1980,7 +2013,7 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_021");
+				CastProjectile(caster,"Sprites/objects_021",target);
 			}
 			SpellResultType=0;
 			break;
@@ -2009,7 +2042,7 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_023");
+				CastProjectile(caster,"Sprites/objects_023",target);
 			}
 			SpellResultType=0;
 			break;
@@ -2022,7 +2055,7 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_021");
+				CastProjectile(caster,"Sprites/objects_021",target);
 				SpellResultType=0;
 			}
 			break;
@@ -2035,12 +2068,29 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_020");
+				CastProjectile(caster,"Sprites/objects_020",target);
 				SpellResultType=0;
 			}
 			break;
 		}
 		case SpellEffect.UW1_Spell_Effect_FlameWind:
+		{
+			if (SpellRule!= SpellRule_TargetVector)
+				{
+					//Do  regular cast of the implemented spell when implemented.
+				}
+			else
+			{
+			//Cast 3 projectiles at random points.
+			for (int i = 0; i<3;i++)
+				{
+					Vector3 targetR =  target.transform.position
+						+Random.insideUnitSphere;
+					CastProjectile(caster,"Sprites/objects_020",targetR);
+				}
+			}
+			break;
+		}
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
 		

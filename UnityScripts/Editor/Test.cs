@@ -7746,9 +7746,9 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
 		GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
 		newObj.name = myObj.name + "_AI";
-		newObj.transform.position=new Vector3(0,0,0);
+		newObj.transform.position=Vector3.zero; //new Vector3(0,0,0);
 		newObj.transform.parent=myObj.transform;
-		newObj.transform.localPosition=new Vector3(0,0,0);
+		newObj.transform.localPosition=Vector3.zero; //new Vector3(0,0,0);
 		AIRig ai = newObj.GetComponent<AIRig>();
 		ai.AI.Body=myObj;
 
@@ -7758,6 +7758,15 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		{
 			npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
 		}
+
+
+		//Probably only need to add this when an NPC supports ranged attacks?
+		GameObject NpcLauncher = new GameObject("NPC_Launcher");
+		NpcLauncher.transform.position=Vector3.zero; 
+		//NpcLauncher.transform.rotation=Vector3.zero; 
+		NpcLauncher.transform.parent=myObj.transform;
+		NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
+		npc.NPC_Launcher=NpcLauncher;
 
 		/*
 		Rigidbody rgd = myObj.AddComponent<Rigidbody>();
