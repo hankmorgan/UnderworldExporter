@@ -7569,13 +7569,17 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		newObj.transform.parent=myObj.transform;
 		newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
 		CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+
+		ObjectInteraction.CreateObjectInteraction(newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
 	}
 
 	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
 	{
-		CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-	}
+		//CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
 
+		ObjectInteraction.CreateObjectInteraction(myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
+	}
+	/*
 	static void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
 	{
 		//Debug.Log (myObj.name);
@@ -7660,7 +7664,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			objInteract.isEnchanted=true;
 			//Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
 		}
-	}
+	}*/
 
 	static void CreateTrigger(GameObject myObj,int triggerX, int triggerY, string target)
 	{
@@ -9013,7 +9017,9 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				case "LAND":
 					tile.layer=LayerMask.NameToLayer ("MapMesh");
 					break;
-
+				case "LAVA":
+					tile.layer=LayerMask.NameToLayer ("Lava");
+					break;
 				}
 
 			}
