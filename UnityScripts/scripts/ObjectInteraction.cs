@@ -719,8 +719,6 @@ public class ObjectInteraction : MonoBehaviour {
 	
 	public static void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
 	{
-		//Debug.Log (myObj.name);
-		//Add a script.
 		ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
 		
 		BoxCollider box =myObj.GetComponent<BoxCollider>();

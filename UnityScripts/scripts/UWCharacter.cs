@@ -38,8 +38,8 @@ public class UWCharacter : Character {
 	public bool FireProof;//Takes no damage from lava
 
 	//Character Status
-	public int FoodLevel;
-	public int Fatigue;
+	public int FoodLevel; //0-35 range.
+	public int Fatigue;   //0-29 range
 	public bool Poisoned;
 
 	//Character skills
@@ -558,4 +558,63 @@ public class UWCharacter : Character {
 			}
 		}
 	}
+
+	public void UpdateHungerAndFatigue()
+	{//Called by the gameclock on the hour.
+		Fatigue--;
+		if (Fatigue<0)
+		{
+			Fatigue=0;
+			//Do what everhappens when the player stays awake non-stop. 
+		}
+		FoodLevel--;
+		if (FoodLevel<0)
+		{
+			FoodLevel=0;
+		}
+		if (FoodLevel<3)
+		{
+			ApplyDamage(2);//Starving damage.
+		}
+	}
+
+	
+	public string GetFedStatus()
+	{//Returns the string representing the players hunger.
+		/*
+		000~001~104~starving
+		000~001~105~famished
+		000~001~106~very hungry
+		000~001~107~hungry
+		000~001~108~peckish
+		000~001~109~fed
+		000~001~110~well fed
+		000~001~111~full
+		000~001~112~satiated
+		*/
+		return StringControl.GetString (1,104+((FoodLevel)/4));
+	}
+
+	public string GetFatiqueStatus()
+	{
+		/*
+		000~001~113~fatigued
+		000~001~114~very tired
+		000~001~115~drowsy
+		000~001~116~awake
+		000~001~117~rested
+		000~001~118~wide awake	
+		*/
+		return StringControl.GetString (1,113+((Fatigue)/5));
+	}
+
+	public void RegenMana()
+	{//Natural Regeneration of mana over time;
+		PlayerMagic.CurMana += Random.Range (1,6);
+		if (PlayerMagic.CurMana>PlayerMagic.MaxMana)
+		{
+			PlayerMagic.CurMana=PlayerMagic.MaxMana;
+		}
+	}
+
 }

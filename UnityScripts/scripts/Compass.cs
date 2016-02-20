@@ -88,4 +88,76 @@ public class Compass : GuiBase {
 			NorthIndicators[i].enabled=(i==playerUW.currentHeading);
 		}
 	}
+
+
+
+	void OnClick()
+	{
+		playerUW.playerHud.MessageScroll.Clear ();
+		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,64) 
+		                                      + playerUW.GetFedStatus() 
+		                                      + " and " 
+		                                      + playerUW.GetFatiqueStatus());
+
+		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,65) 
+		                                      + playerUW.StringControl.GetString (1,411+GameWorldController.instance.LevelNo) 
+		                                      + playerUW.StringControl.GetString (1,66));
+		if (GameClock.day<10)
+		{
+			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,67) 
+			                                      + playerUW.StringControl.GetString (1,411+GameClock.day)
+			                                      + playerUW.StringControl.GetString (1,68));
+		}
+		else
+		{//incountable
+			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,69));
+		}
+
+		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,70) 
+		                                      + playerUW.StringControl.GetString (1,71+((GameClock.hour)/2)));
+
+
+		/*
+000~001~064~You are currently 
+000~001~065~You are on the 
+000~001~066~ level of the Abyss.
+000~001~067~It is the 
+000~001~068~ day of your imprisonment.
+000~001~069~It has been an uncountable number of days since you entered the Abyss.
+000~001~070~You guess that it is currently 
+000~001~071~night
+000~001~072~night
+000~001~073~dawn
+000~001~074~early morning
+000~001~075~morning
+000~001~076~late morning
+000~001~077~mid-day
+000~001~078~afternoon
+000~001~079~late afternoon
+000~001~080~early evening
+000~001~081~evening
+000~001~082~night
+
+
+
+000~001~113~fatigued
+000~001~114~very tired
+000~001~115~drowsy
+000~001~116~awake
+000~001~117~rested
+000~001~118~wide awake
+
+
+000~001~411~first
+000~001~412~second
+000~001~413~third
+000~001~414~fourth
+000~001~415~fifth
+000~001~416~sixth
+000~001~417~seventh
+000~001~418~eighth
+000~001~419~ninth
+000~001~420~tenth
+		 */
+	}
 }

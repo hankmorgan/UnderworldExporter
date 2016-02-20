@@ -35,7 +35,7 @@ public class Bedroll : object_base {
 				ObjectInteraction incense =playerUW.playerInventory.findObjInteractionByID(277); 
 				if (incense!=null)
 					{
-					playerUW.playerHud.CutScenesSmall.SetAnimation="FadeToBlackSleep";
+					playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
 					incense.consumeObject ();
 					switch (playerUW.quest().getIncenseDream())
 						{
@@ -51,14 +51,36 @@ public class Bedroll : object_base {
 					{
 					if (IsGaramonTime())
 						{//PLay a garamon dream
-						playerUW.playerHud.CutScenesSmall.SetAnimation="FadeToBlackSleep";
+						playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
 						playerUW.playerHud.CutScenesFull.SetAnimation="cs000_n04";
 						}
 						else
 						{//Regular sleep with a fade to black
-						playerUW.playerHud.CutScenesSmall.SetAnimation="FadeToBlackSleep";
+						playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
 						}
 					}
+				for (int i=playerUW.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
+					{
+					if (playerUW.FoodLevel>=3)
+						{
+						GameClock.Advance();//Move time forward.
+						}
+					else
+						{//Too hungry to sleep.
+						ml.Add(playerUW.StringControl.GetString (1,17));
+						playerUW.Fatigue+=i;
+						return true;
+						}
+					}
+				playerUW.Fatigue=29;//Fully rested
+				if (playerUW.CurVIT<playerUW.MaxVIT)
+					{//Random regen of an amount of health
+					playerUW.CurVIT += Random.Range (1, playerUW.MaxVIT-playerUW.CurVIT+1);
+					}
+				if (playerUW.PlayerMagic.CurMana<playerUW.PlayerMagic.MaxMana)
+				{//Random regen of an amount of mana
+					playerUW.PlayerMagic.CurMana += Random.Range (1, playerUW.PlayerMagic.MaxMana-playerUW.PlayerMagic.CurMana+1);
+				}
 				}
 			else
 			{

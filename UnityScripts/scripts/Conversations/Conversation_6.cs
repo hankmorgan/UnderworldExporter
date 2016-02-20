@@ -8,6 +8,10 @@ public class Conversation_6 : Conversation {
 	//string block 0x0e06, name Marrowsuck
 	
 	int func_0807_result;
+
+	//When Marrowsuck wants us back for the boots
+	public int AppointmentTime;
+
 	public override IEnumerator main() {
 		SetupConversation (3590);
 		privateVariables[1] = 0;
@@ -92,8 +96,25 @@ public class Conversation_6 : Conversation {
 		param1[2] = game_mins;
 		*/
 	} // end func
-	
-	int func_0106( int param1, int param2) {
+
+	int func_0106(int param1, int param2)
+	{//My version of have I made my appointment.
+		
+		int hoursLeft= AppointmentTime - GameClock.ConvertNow ();
+		
+		if (hoursLeft<=0)
+		{
+			//I'm on time or late.
+			return 1;
+		}
+		else
+		{
+			//Not yet. 
+			return 0;
+		}
+	}
+
+	/*int func_0106( int param1, int param2) {
 		return 1;//TODO:figure out
 		/*int[] locals = new int[5];
 		
@@ -114,9 +135,9 @@ public class Conversation_6 : Conversation {
 		} // end if
 		
 		return locals[1];
-		*/
-	} // end func
-	
+
+	} // end func*/
+		
 	void func_018f(int param1, int param2, int param3) {
 		/*
 
@@ -848,6 +869,8 @@ public class Conversation_6 : Conversation {
 			give_ptr_npc( 2, locals[258], locals[5] -1);//Minus 1 to adjust for find_barter
 			//func_00ea( 37 );
 			func_00ea( 0,30 );
+			//Sets the date and time the player is to come back at
+			AppointmentTime = GameClock.AddNow(0,0,30);//Add 1/2 hour to the appointment time.
 			/*TODO: half an hour
 				privateVariables[9][1] = 0;
 				privateVariables[9][2] = 30;

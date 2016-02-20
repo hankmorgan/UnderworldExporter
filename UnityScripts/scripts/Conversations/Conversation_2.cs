@@ -6,7 +6,11 @@ public class Conversation_2 : Conversation {
 	public int[,] global =new int[11,3];
 	//conversation #2
 	//String block 0x0e02, name Shak
-			
+		
+	//When Shak wants us to come back for the sword.
+	public int AppointmentTime;
+	//public int AppointmentMinutesEarly;
+
 	//Enumerator that returns a value
 	int func_11f7_result;
 	public override IEnumerator main() {
@@ -95,8 +99,25 @@ public class Conversation_2 : Conversation {
 		param1[2] = game_mins;
 		*/
 	} // end func
-	
-	int func_0106(int param1, int param2) {
+
+	int func_0106(int param1, int param2)
+	{//My version of have I made my appointment.
+
+		int hoursLeft= AppointmentTime - GameClock.ConvertNow ();
+
+		if (hoursLeft<=0)
+		{
+			//I'm on time or late.
+			return 1;
+		}
+		else
+		{
+			//Not yet. 
+			return 0;
+		}
+	}
+
+	/*int func_0106(int param1, int param2) {
 		return 1;
 		//int locals[4];
 		int[]locals =new int[5];
@@ -120,7 +141,7 @@ public class Conversation_2 : Conversation {
 		
 		return locals[1];
 
-	} // end func
+	} // end func*/
 	
 	void func_018f(int param1, int param2, int param3) {
 		//TODO:Figure out this
@@ -166,7 +187,7 @@ public class Conversation_2 : Conversation {
 		if ( global[0,0] == 0 ) {
 			
 			func_13bb();
-//TODO:Figure this out
+			//TODO:Figure this out
 			global[0,0] = 1;
 			global[3,1] = 0;
 			global[3,2] = 0;
@@ -534,9 +555,9 @@ public class Conversation_2 : Conversation {
 		locals[7] = 40;		
 		locals[1] = sex( 2, locals[7], locals[6] );
 
-		if ( global[2,0] > 0 ) {
+		if ( global[2,0] > 0 ) {//I am repairing something.
 			
-			if ( func_0106( 3, 6 ) !=1) {
+			if ( func_0106( 3, 6 ) !=1) {//I am early.
 				
 				func_018f( locals[3], 3, 6 );
 				if ( locals[4] == 1 ) {
@@ -554,7 +575,7 @@ public class Conversation_2 : Conversation {
 				yield break;
 			} // end if
 			
-			if ( global[2,0] == 10 ) {
+			if ( global[2,0] == 10 ) {//Am I repairing the sword or now.
 				
 				yield return StartCoroutine(func_1064());
 			} else {
@@ -916,11 +937,15 @@ public class Conversation_2 : Conversation {
 		} 
 		
 		yield return StartCoroutine(say( "Aye, a beauty, this Caliburn.  I'll have her right for ye, soon enough.  Come back in an hour, and don't forget the 20 pieces of gold." ));
-		global[2,0] = 10;
+		global[2,0] = 10;//Seems to indicate we are repairing the sword.
 		func_00ea( 6 );
 		global[3,1] = 0;//no days
 		global[3,2] = 60;//60 minutes
 		global[1,0] = 20;//20 gold?
+
+
+		//Sets the date and time the player is to come back at
+		AppointmentTime = GameClock.AddNow(0,1,0);//Add 1 hour to the appointment time.
 
 		locals[25] = 83;
 		locals[26] = 84;
