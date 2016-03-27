@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_15 : Conversation {
-
+	
 	//conversation #15
-		//string block 0x0e0f, name Sseetharee
-			
-
+	//string block 0x0e0f, name Sseetharee
+	
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3599);
@@ -171,7 +171,7 @@ public class Conversation_15 : Conversation {
 			yield return StartCoroutine(func_0429());
 		} else {
 			
-			yield return StartCoroutine(say( "Bica, sor'click." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[2] = 2;
 			locals[3] = 3;
 			locals[4] = 4;
@@ -197,7 +197,7 @@ public class Conversation_15 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -208,7 +208,7 @@ public class Conversation_15 : Conversation {
 		//int locals[23];
 		int [] locals =new int[24];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click?  Tosa sorr?" ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 8;
@@ -252,7 +252,7 @@ public class Conversation_15 : Conversation {
 		//int locals[23];
 		int [] locals =new int[24];
 		
-		yield return StartCoroutine(say( "'click." ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[1] = 11;
 		locals[2] = 12;
 		locals[3] = 13;
@@ -287,13 +287,13 @@ public class Conversation_15 : Conversation {
 	} // end func
 	
 	IEnumerator func_0413() {
-		
-		yield return StartCoroutine(say( "'click." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 010 ));
 	} // end func
 	
 	IEnumerator func_041e() {
-		
-		yield return StartCoroutine(say( "Sseth." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 015 ));
 	} // end func
 	
 	IEnumerator func_0429() {
@@ -311,7 +311,7 @@ public class Conversation_15 : Conversation {
 			yield return StartCoroutine(func_0871());
 		} else {
 			
-			yield return StartCoroutine(say( "Bica." ));
+			yield return StartCoroutine(say( locals, 016 ));
 			locals[1] = 17;
 			locals[2] = 18;
 			locals[3] = 19;
@@ -339,7 +339,7 @@ public class Conversation_15 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -350,8 +350,7 @@ public class Conversation_15 : Conversation {
 		//int locals[25];
 		int [] locals =new int[26];
 		
-		yield return StartCoroutine(say( "Tosa thit sstresh.  Tosa eppa Urgo. \n"
-		    +"" ));
+		yield return StartCoroutine(say( locals, 020 ));
 		locals[1] = 21;
 		yield return StartCoroutine(print( 1, locals[1] ));
 		locals[2] = 22;
@@ -395,7 +394,7 @@ public class Conversation_15 : Conversation {
 		//int locals[22];
 		int [] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Tosa eppa Urgo?  Urgo sstresh tosa?  Urgo sorr.  Tosa sorr?" ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 27;
 		locals[3] = 28;
@@ -437,7 +436,7 @@ public class Conversation_15 : Conversation {
 		//int locals[24];
 		int [] locals =new int[25];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click!  Isili Sseetharee.  Sseetharee yeshor'click.  Isili sstresh tosa, sseth?" ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[1] = 31;
 		locals[2] = 32;
 		locals[3] = 33;
@@ -485,7 +484,7 @@ public class Conversation_15 : Conversation {
 		//int locals[24];
 		int [] locals =new int[25];
 		
-		yield return StartCoroutine(say( "Tosa sorr!  Tosa 'click eppa! Tosa eppa, isili yethe tosa!" ));
+		yield return StartCoroutine(say( locals, 035 ));
 		locals[1] = 36;
 		locals[2] = 37;
 		locals[3] = 0;
@@ -521,7 +520,7 @@ public class Conversation_15 : Conversation {
 		//int locals[23];
 		int [] locals =new int[24];
 		
-		yield return StartCoroutine(say( "Urgo sorr. Urgo sorra zekka, thes'click Thepa.  Thepa yethe Urgo." ));
+		yield return StartCoroutine(say( locals, 038 ));
 		locals[1] = 39;
 		locals[2] = 40;
 		locals[3] = 41;
@@ -559,7 +558,7 @@ public class Conversation_15 : Conversation {
 		//int locals[23];
 		int [] locals =new int[24];
 		
-		yield return StartCoroutine(say( "Tosa sel'a zekka isili - isili sel'a Urgo tosa." ));
+		yield return StartCoroutine(say( locals, 042 ));
 		locals[1] = 43;
 		locals[2] = 44;
 		locals[3] = 45;
@@ -597,7 +596,7 @@ public class Conversation_15 : Conversation {
 		//int locals[22];
 		int [] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Isili thesh tosa.  Tosa thesh yethe Urgo?" ));
+		yield return StartCoroutine(say( locals, 046 ));
 		locals[1] = 47;
 		locals[2] = 48;
 		locals[3] = 0;
@@ -625,7 +624,7 @@ public class Conversation_15 : Conversation {
 		//int locals[25];
 		int [] locals =new int[26];
 		
-		yield return StartCoroutine(say( "Tosa yethe sorr Urgo, tosa eppa Isili." ));
+		yield return StartCoroutine(say( locals, 049 ));
 		privateVariables[3] = 1;
 		locals[1] = 50;
 		locals[2] = 51;
@@ -679,7 +678,7 @@ public class Conversation_15 : Conversation {
 		//int locals[24];
 		int [] locals =new int[25];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click.  Tosa eppa isili, sel'a isili zekka, isili sstresh Urgo." ));
+		yield return StartCoroutine(say( locals, 054 ));
 		privateVariables[2] = 1;
 		privateVariables[3] = 0;
 		locals[1] = 55;
@@ -717,7 +716,7 @@ public class Conversation_15 : Conversation {
 		//int locals[47];
 		int [] locals =new int[48];
 		
-		yield return StartCoroutine(say( "Tosa sel'a zekka?" ));
+		yield return StartCoroutine(say( locals, 057 ));
 		locals[1] = 58;
 		locals[2] = 59;
 		locals[3] = 0;
@@ -777,7 +776,7 @@ public class Conversation_15 : Conversation {
 		//int locals[22];
 		int [] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Tosa yethe Urgo?" ));
+		yield return StartCoroutine(say( locals, 062 ));
 		locals[1] = 63;
 		locals[2] = 64;
 		locals[3] = 0;
@@ -839,7 +838,7 @@ public class Conversation_15 : Conversation {
 			locals[23] = 0;
 			locals[24] = 1;
 			set_quest( 2, locals[24], locals[23] );
-			yield return StartCoroutine(say( "Isili thesh tosa! Tosa yeshor'click! Tosa eppa isili!" ));
+			yield return StartCoroutine(say( locals, 065 ));
 			locals[25] = 66;
 			locals[26] = 0;
 			//locals[46] = babl_menu( 0, locals[25] );
@@ -856,7 +855,7 @@ public class Conversation_15 : Conversation {
 			yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Tosa 'click sel'a ossli. Isili 'click sstresh Urgo." ));
+			yield return StartCoroutine(say( locals, 067 ));
 			locals[48] = 68;
 			locals[49] = 69;
 			locals[50] = 0;
@@ -890,12 +889,12 @@ public class Conversation_15 : Conversation {
 		int [] locals =new int[6];
 		locals[2] = 6;
 		locals[1] = get_quest( 1, locals[2] );
-
+		
 		if ( locals[1] == 1 ) {
 			
 			locals[3] = 3;
 			set_race_attitude( 1, locals[3] );
-			yield return StartCoroutine(say( "Tosa yeshor'click! Tosa thes'click sorr! Tosa eppa isili!" ));
+			yield return StartCoroutine(say( locals, 070 ));
 			locals[4] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -903,7 +902,7 @@ public class Conversation_15 : Conversation {
 			yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Tosa sorr.  Isili 'click sstresh tosa." ));
+			yield return StartCoroutine(say( locals, 071 ));
 			locals[5] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -918,7 +917,7 @@ public class Conversation_15 : Conversation {
 		//int locals[26];
 		int [] locals =new int[27];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click.  Eppa Ishtass sstresh." ));
+		yield return StartCoroutine(say( locals, 072 ));
 		locals[2] = 73;
 		locals[3] = 74;
 		locals[4] = 0;
@@ -946,7 +945,7 @@ public class Conversation_15 : Conversation {
 		//if ( contains( 2, locals[1], locals[24] ) ) {
 		if ( contains( 2, PlayerTypedAnswer, locals[24] ) == 1 ) {
 			
-			yield return StartCoroutine(say( "Sel'a tosa sstresh.  Yisa Toosa." ));
+			yield return StartCoroutine(say( locals, 076 ));
 			locals[25] = 77;
 			yield return StartCoroutine(print( 1, locals[25] ));
 		} else {
@@ -954,10 +953,10 @@ public class Conversation_15 : Conversation {
 			locals[26] = 78;
 			//if ( contains( 2, locals[1], locals[26] ) ) {
 			if ( contains( 2, PlayerTypedAnswer, locals[26] ) == 1 ) {
-				yield return StartCoroutine(say( "Tosa sstresh Urgo." ));
+				yield return StartCoroutine(say( locals, 079 ));
 			} else {
 				
-				yield return StartCoroutine(say( "Isili 'click sstresh." ));
+				yield return StartCoroutine(say( locals, 080 ));
 			} // end if
 			
 		} // end if
@@ -976,7 +975,7 @@ public class Conversation_15 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "Sel'a?" ));
+			yield return StartCoroutine(say( locals, 081 ));
 			locals[1] = 82;
 			locals[2] = 83;
 			locals[3] = 0;
@@ -996,7 +995,7 @@ public class Conversation_15 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -1070,7 +1069,7 @@ public class Conversation_15 : Conversation {
 		//if ( do_offer( 5, locals[5], locals[4], locals[3], locals[2], locals[1] ) ) {
 		yield return StartCoroutine (do_offer( 5, locals[5], locals[4], locals[3], locals[2], locals[1], 0,0) );
 		if (PlayerAnswer==1)	{
-
+			
 			privateVariables[1] = 1;
 		} // end if
 		
@@ -1081,7 +1080,7 @@ public class Conversation_15 : Conversation {
 		//int locals[24];
 		int [] locals =new int[25];
 		
-		yield return StartCoroutine(say( "sorr?" ));
+		yield return StartCoroutine(say( locals, 094 ));
 		locals[1] = 95;
 		locals[2] = 96;
 		locals[3] = 0;
@@ -1117,5 +1116,5 @@ public class Conversation_15 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

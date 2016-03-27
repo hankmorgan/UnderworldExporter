@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_18 : Conversation {
-
+	
 	//conversation #18
 	//	string block 0x0e12, name Lakshi Longtooth
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3602);
@@ -157,15 +157,15 @@ public class Conversation_18 : Conversation {
 		} // end if
 		locals[2] = 32;
 		locals[1] = get_quest( 1, locals[2] );
-
+		
 		if ( privateVariables[0] == 1) {
 			
 			if ( locals[1] > 1 ) {
 				
-				yield return StartCoroutine(say( "Hello again, knight-who-is-friendly." ));
+				yield return StartCoroutine(say( locals, 001 ));
 			} else {
 				
-				yield return StartCoroutine(say( "Hello again, human-who-is-not-a-knight." ));
+				yield return StartCoroutine(say( locals, 002 ));
 			} // end if
 			
 		} else {
@@ -174,16 +174,16 @@ public class Conversation_18 : Conversation {
 				
 				if ( play_drawn == 1 ) {
 					
-					yield return StartCoroutine(say( "Another knight come to slay us all?  You no learn your lesson yet?" ));
+					yield return StartCoroutine(say( locals, 003 ));
 					npc.npc_attitude = 1;
 				} else {
 					
-					yield return StartCoroutine(say( "Knight ventures into our domain without a drawn weapon?  You brave." ));
+					yield return StartCoroutine(say( locals, 004 ));
 				} // end if
 				
 			} else {
 				
-				yield return StartCoroutine(say( "A human enters our domain.  This is rare event.  Why do you come?" ));
+				yield return StartCoroutine(say( locals, 005 ));
 			} // end if
 			
 		} // end if
@@ -219,8 +219,8 @@ public class Conversation_18 : Conversation {
 	} // end func
 	
 	IEnumerator func_034b() {
-		
-		yield return StartCoroutine(say( "Maybe.  You ask question, I answer." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 009 ));
 		yield return StartCoroutine(func_0358());
 	} // end func
 	
@@ -252,20 +252,20 @@ public class Conversation_18 : Conversation {
 			
 			//locals[1] = babl_ask( 0 );
 			yield return StartCoroutine( babl_ask( 0 ));
-			//say( "\1@SS1\0" );
-			yield return StartCoroutine(say( "@SS1" ));
+			//say( locals, 012 );
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[24] = 13;
 			locals[25] = 14; 
 			//;  // expr. has value on stack!
 			if ( (contains( 2, PlayerTypedAnswer, locals[24] ) == 1) || (contains( 2, PlayerTypedAnswer, locals[25] )== 1 ) ) {
 				
-				yield return StartCoroutine(say( "Rawstag still a young troll, not always do what he told.  You give him red gem, maybe he more nice to you." ));
+				yield return StartCoroutine(say( locals, 015 ));
 			} else {
 				
 				locals[26] = 16;
 				if ( contains( 2, PlayerTypedAnswer, locals[26] )== 1 ) {
 					
-					yield return StartCoroutine(say( "Sethar lives in cave just north of here, on the west.  He is fine troll, a great warrior when young.  We all look up to him." ));
+					yield return StartCoroutine(say( locals, 017 ));
 				} else {
 					
 					locals[27] = 18;
@@ -273,13 +273,13 @@ public class Conversation_18 : Conversation {
 					//;  // expr. has value on stack!
 					if ( (contains( 2, PlayerTypedAnswer, locals[27] )== 1) || (contains( 2, PlayerTypedAnswer, locals[28] ) == 1)  ) {
 						
-						yield return StartCoroutine(say( "The knights talk tough, but they usually keep to themselves.  One nasty knight, though.  He lives in banquet hall.  You watch out for him." ));
+						yield return StartCoroutine(say( locals, 020 ));
 					} else {
 						
 						locals[29] = 21;
 						if ( contains( 2, PlayerTypedAnswer, locals[29] )== 1 ) {
 							
-							yield return StartCoroutine(say( "Sethar's pit?  Tricky place maybe, but not deadly.  Look past bones of old victims, you find way out." ));
+							yield return StartCoroutine(say( locals, 022 ));
 						} else {
 							
 							locals[30] = 23;
@@ -287,15 +287,15 @@ public class Conversation_18 : Conversation {
 							//;  // expr. has value on stack!
 							if  ( (contains( 2, PlayerTypedAnswer, locals[30] )== 1 ) || (contains( 2, PlayerTypedAnswer, locals[31] )== 1 ) ) {
 								
-								yield return StartCoroutine(say( "Lorne a knight, from start of colony.  He used to be friend of us, unlike rest.  He often would pray in shrine south of here.  He is gone now, but the shrine is still around.  Rawstag is a bit possesive about that area though." ));
+								yield return StartCoroutine(say( locals, 025 ));
 							} else {
 								
 								if ( length( 1, PlayerTypedAnswer ) == 0 ) {
 									
-									yield return StartCoroutine(say( "Hm?  What you want to know about?" ));
+									yield return StartCoroutine(say( locals, 026 ));
 								} else {
 									
-									yield return StartCoroutine(say( "I don't know about that." ));
+									yield return StartCoroutine(say( locals, 027 ));
 								} // end if
 								
 							} // end if
@@ -313,8 +313,8 @@ public class Conversation_18 : Conversation {
 	} // end func
 	
 	IEnumerator func_0479() {
-		
-		yield return StartCoroutine(say( "Bye, human." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 028 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00e0();//endconvo
@@ -341,7 +341,7 @@ public class Conversation_18 : Conversation {
 		
 		if ( locals[9] == 0 ) {
 			
-			yield return StartCoroutine(say( "I have no new news for you." ));
+			yield return StartCoroutine(say( locals, 029 ));
 			locals[8] = 1;
 		} // end if
 		
@@ -353,7 +353,7 @@ public class Conversation_18 : Conversation {
 			
 		} // end if
 		
-
+		
 		locals[9] = locals[0];
 		locals[8] = random( 1, locals[9] );
 		//privateVariables[2][0] = 1;
@@ -361,32 +361,32 @@ public class Conversation_18 : Conversation {
 		locals[10] = locals[9];
 		if ( 1 == locals[10] ) {
 			
-			yield return StartCoroutine(say( "Me hear one Troll got caught by Wizard, made slave." ));
+			yield return StartCoroutine(say( locals, 030 ));
 		} else {
 			
 			if ( 2 == locals[10] ) {
 				
-				yield return StartCoroutine(say( "Me hear somebody killing Trolls!  Me catch, me eat!" ));
+				yield return StartCoroutine(say( locals, 031 ));
 			} else {
 				
 				if ( 3 == locals[10] ) {
 					
-					yield return StartCoroutine(say( "Sethar and his friend live near the big pit." ));
+					yield return StartCoroutine(say( locals, 032 ));
 				} else {
 					
 					if ( 4 == locals[10] ) {
 						
-						yield return StartCoroutine(say( "Sneak snuck on Sethar, but he tossed him in pit." ));
+						yield return StartCoroutine(say( locals, 033 ));
 					} else {
 						
 						if ( 5 == locals[10] ) {
 							
-							yield return StartCoroutine(say( "One Knight real mean, he live up north." ));
+							yield return StartCoroutine(say( locals, 034 ));
 						} else {
 							
 							if ( 6 == locals[10] ) {
 								
-								yield return StartCoroutine(say( "Ghouls live below us.  They disgusting." ));
+								yield return StartCoroutine(say( locals, 035 ));
 							} // end if
 							
 						} // end if
@@ -406,7 +406,7 @@ public class Conversation_18 : Conversation {
 		//int locals[23];
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "You food, puny human?" ));
+		yield return StartCoroutine(say( locals, 036 ));
 		locals[1] = 37;
 		locals[2] = 38;
 		locals[3] = 39;
@@ -434,7 +434,7 @@ public class Conversation_18 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "You confuse me, first want fight and then not want fight." ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[23] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -467,5 +467,5 @@ public class Conversation_18 : Conversation {
 		func_00b1( locals[1] );//end convo
 		yield break;
 	} // end func
-
+	
 }

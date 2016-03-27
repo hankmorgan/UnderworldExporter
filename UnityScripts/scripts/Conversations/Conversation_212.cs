@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Conversation_212 : Conversation {
-
+	
 	//conversation #212
 	//string block 0x0ed4, name Kallistan
 	public int[] global =new int[3];	
@@ -72,13 +72,13 @@ public class Conversation_212 : Conversation {
 		npc.npc_attitude = 2;
 		func_0012();
 	} // end func
-
+	
 	void func_00d1() {
 		
 		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
-
+	
 	void func_00e0() {
 		
 		func_0012();
@@ -161,7 +161,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Who be ye?" ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 0;
@@ -186,7 +186,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I be Kallistan.  What do ye here, @GS12?" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		global[2] = 1;
 		locals[1] = 5;
 		locals[2] = 6;
@@ -218,7 +218,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Go back the way ye came, then, ye craven!" ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -243,7 +243,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Any friend o' that whoreson be no friend o' mine!" ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 0;
@@ -268,7 +268,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "An' what proof have ye that ye're nae from the very wizard himself?" ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 0;
@@ -293,7 +293,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Well, ye'll be knowin' the password t' his hoard, then, won't ye?" ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[2] = 18;
 		locals[3] = 20;
 		locals[4] = 0;
@@ -329,10 +329,10 @@ public class Conversation_212 : Conversation {
 		
 		if ( global[2] == 1 ) {
 			
-			yield return StartCoroutine(say( "What ye want now, @GS12?" ));
+			yield return StartCoroutine(say( locals, 021 ));
 		} else {
 			
-			yield return StartCoroutine(say( "What ye want now?" ));
+			yield return StartCoroutine(say( locals, 022 ));
 		} // end if
 		
 		locals[1] = 23;
@@ -372,7 +372,7 @@ public class Conversation_212 : Conversation {
 			
 			if ( global[1] == 1 ) {
 				
-				yield return StartCoroutine(say( "I've nothing more to say to ye, ungrateful lout. Begone!" ));
+				yield return StartCoroutine(say( locals, 026 ));
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 				func_00d1();
 				yield break;
@@ -380,10 +380,10 @@ public class Conversation_212 : Conversation {
 				
 				if ( global[2] == 1 ) {
 					
-					yield return StartCoroutine(say( "What can I do for thee now, @GS12?" ));
+					yield return StartCoroutine(say( locals, 027 ));
 				} else {
 					
-					yield return StartCoroutine(say( "And what want ye now?" ));
+					yield return StartCoroutine(say( locals, 028 ));
 				} // end if
 				
 				locals[2] = 29;
@@ -415,7 +415,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Well, then, ye be a hero to th' Clan, an' most welcome here!  What can I do for ye?" ));
+		yield return StartCoroutine(say( locals, 031 ));
 		locals[1] = 32;
 		locals[2] = 33;
 		locals[3] = 0;
@@ -440,7 +440,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Get ye gone from here, ye mangy dog!" ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 36;
 		locals[3] = 0;
@@ -465,7 +465,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Trust ye?  Well, If I must, I must.  But first, ye shall swear to me an oath, that ye mean no weal t' Tyball an' his lackeys." ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 0;
@@ -490,7 +490,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Swear, then!" ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 43;
@@ -521,7 +521,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Very well.  Know then, that if ye be forsworn, all that ye hast sworn upon will turn against ye!" ));
+		yield return StartCoroutine(say( locals, 044 ));
 		locals[1] = 45;
 		locals[2] = 46;
 		locals[3] = 0;
@@ -546,11 +546,11 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Here.  Take ye this splinter of crystal." ));
+		yield return StartCoroutine(say( locals, 047 ));
 		locals[1] = 273;
 		if ( take_from_npc( 1, locals[1] ) == 2 ) {
 			
-			yield return StartCoroutine(say( "Ye seem heavily laden, so I'll leave it here for ye." ));
+			yield return StartCoroutine(say( locals, 048 ));
 		} // end if
 		
 		locals[2] = 49;
@@ -567,7 +567,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I found it three days ago while at my labors in the mines. At night it makes a faint, eerie keening. I've heard rumors of others who've found its like, and before long they're off searching for the tombs from which it came." ));
+		yield return StartCoroutine(say( locals, 050 ));
 		locals[1] = 51;
 		locals[2] = 52;
 		locals[3] = 0;
@@ -592,7 +592,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "It will do thee no harm, and may even help thee.  I believe  it may give thee access to the tombs." ));
+		yield return StartCoroutine(say( locals, 053 ));
 		locals[1] = 54;
 		locals[2] = 55;
 		locals[3] = 0;
@@ -617,7 +617,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I believe the tombs to be of my ancient ancestors, built here long before the colony of the Abyss was formed. I've dreamt of them since finding the crystal." ));
+		yield return StartCoroutine(say( locals, 056 ));
 		locals[1] = 57;
 		locals[2] = 58;
 		locals[3] = 0;
@@ -642,7 +642,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "The way I figure it, the tombs have been defiled by an evil presence. This entity places the crystal where it'll be found, in order  to draw unwary souls to its lair. I ask ye - find these tombs and cleanse them of this evil, so that others do not fall into this trap." ));
+		yield return StartCoroutine(say( locals, 059 ));
 		locals[1] = 60;
 		locals[2] = 61;
 		locals[3] = 0;
@@ -667,7 +667,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "If ye can do this, I'm sure the beast responsible will have collected a sizable hoard from his victims. Ye may find the items useful in your quest against Tyball. But beware - disturb not the tombs  themselves. Search for the entrance to the south of these prisons, where the pit trap spiders prowl.  Carry the crystal with ye in your search - it may prove to be helpful." ));
+		yield return StartCoroutine(say( locals, 062 ));
 		global[0] = 1;
 		locals[1] = 63;
 		locals[2] = 64;
@@ -764,7 +764,7 @@ public class Conversation_212 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 075 ));
 		locals[1] = 76;
 		locals[2] = 77;
 		locals[3] = 0;

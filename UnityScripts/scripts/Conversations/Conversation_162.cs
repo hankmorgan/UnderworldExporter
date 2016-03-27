@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_162 : Conversation {
-
+	
 	//conversation #162
 	//	string block 0x0ea2, name Kneenibble
-			
-
+	
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3746);
@@ -155,13 +155,13 @@ public class Conversation_162 : Conversation {
 			//Has met
 			if ( privateVariables[2]== 1 ) {
 				//Has told you the code
-				yield return StartCoroutine(say( "Thanks for fish again.  Sorry, but me have to go.  So long." ));
+				yield return StartCoroutine(say( locals, 053 ));
 				locals[321] = 3;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[321] );
 				yield break;
-
+				
 			} else {
 				
 				if ( privateVariables[3] == 1) {
@@ -176,21 +176,21 @@ public class Conversation_162 : Conversation {
 			} 
 		}
 		else {
-				
-				privateVariables[2] = 0;
-				privateVariables[3] = 0;
-				privateVariables[4] = 0;
-				goto label_02ca;
+			
+			privateVariables[2] = 0;
+			privateVariables[3] = 0;
+			privateVariables[4] = 0;
+			goto label_02ca;
 		}
-				
+		
 	label_02ca:;
 		
 		if ( (privateVariables[4] == 1) || (privateVariables[0] ==1 ) ) {
 			
-			yield return StartCoroutine(say( "So what you do here again?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Hey, human.  What you do here, far from home?" ));
+			yield return StartCoroutine(say( locals, 002 ));
 		} // end if
 		
 		locals[3] = 3;
@@ -221,10 +221,10 @@ public class Conversation_162 : Conversation {
 			break;
 			
 		} // end switch
-				
+		
 	label_032c:;
 		
-		yield return StartCoroutine(say( "Should no bother exploring Abyss.  Not much to see now - just people try to survive.  Used to be lot going on, before collapse." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[25] = 7;
 		locals[26] = 8;
 		locals[27] = 0;
@@ -246,10 +246,10 @@ public class Conversation_162 : Conversation {
 			break;
 			
 		} // end switch
-				
+		
 	label_036c:;
 		
-		yield return StartCoroutine(say( "No one lived here, but they come to state chamber, tombs, and mines.  Diplomats and visitors use state chamber for talks, funerals here, too.  Important people buried in tombs.  Me used to work in mines." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[47] = 10;
 		locals[48] = 11;
 		locals[49] = 0;
@@ -271,10 +271,10 @@ public class Conversation_162 : Conversation {
 			break;
 			
 		} // end switch
-				
+		
 	label_03ac:;
-
-		yield return StartCoroutine(say( "Me have important job before collapse.  Me operator of mine dispatch chamber.  Only one who know combination for dispatch unit." ));
+		
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[69] = 13;
 		locals[70] = 14;
 		locals[71] = 0;
@@ -298,8 +298,8 @@ public class Conversation_162 : Conversation {
 		} // end switch
 		
 	label_03ec:;
-
-		yield return StartCoroutine(say( "Mines in southwest.  But only way get to them is through mine dispatch chamber." ));
+		
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[91] = 16;
 		locals[92] = 17;
 		locals[93] = 0;
@@ -323,7 +323,7 @@ public class Conversation_162 : Conversation {
 		} // end switch
 		
 	label_042c:;
-		yield return StartCoroutine(say( "Mine dispatch chamber room where miners go be sent to work in mines.  Me send miners to work by sending them to teleport room.  Get put in part of mine from there." ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[113] = 19;
 		locals[114] = 20;
 		locals[115] = 0;
@@ -348,7 +348,7 @@ public class Conversation_162 : Conversation {
 		
 	label_046c:;
 		
-		yield return StartCoroutine(say( "Need combination to use chamber.  Why would me give you combination to chamber?" ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[135] = 22;
 		locals[136] = 23;
 		locals[137] = 0;
@@ -374,7 +374,7 @@ public class Conversation_162 : Conversation {
 	label_04ac:;
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "Me want fish.  Bring me ten fish, me tell you combination." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[157] = 25;
 		locals[158] = 26;
 		locals[159] = 27;
@@ -401,7 +401,7 @@ public class Conversation_162 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "No fish, no combination." ));
+			yield return StartCoroutine(say( locals, 028 ));
 			locals[180] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -410,10 +410,10 @@ public class Conversation_162 : Conversation {
 			break;
 			
 		} // end switch
-				
+		
 	label_051a:;
 		
-		yield return StartCoroutine(say( "Me live here with rest of Ghouls because me no can work any more. Me work before great collapse." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[181] = 30;
 		locals[182] = 31;
 		locals[183] = 0;
@@ -435,10 +435,10 @@ public class Conversation_162 : Conversation {
 			break;
 			
 		} // end switch
-				
+		
 	label_055a:;
 		
-		yield return StartCoroutine(say( "Me used to work in mines.  After collapse, mines no running, so me out of job." ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[203] = 33;
 		locals[204] = 34;
 		locals[205] = 0;
@@ -465,7 +465,7 @@ public class Conversation_162 : Conversation {
 		
 		if ( privateVariables[4]==1 ) {
 			
-			yield return StartCoroutine(say( "Never mind!  Me no talk to you!" ));
+			yield return StartCoroutine(say( locals, 035 ));
 			locals[225] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -473,7 +473,7 @@ public class Conversation_162 : Conversation {
 			yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "You sore human!  Me no talk to you neither!" ));
+			yield return StartCoroutine(say( locals, 036 ));
 		} // end if
 		
 		privateVariables[4] = 1;
@@ -501,137 +501,137 @@ public class Conversation_162 : Conversation {
 			break;
 		} // end if
 		
-
 		
-	//} // end switch
-			
-		label_05fd:;
-
-			yield return StartCoroutine(say( "You got fish for me?" ));
+		
+		//} // end switch
+		
+	label_05fd:;
+		
+		yield return StartCoroutine(say( locals, 039 ));
 		//} // end if
 		
-	//} // end if
-	
-	locals[249] = 40;
-	locals[250] = 41;
-	locals[251] = 0;
-	//locals[270] = babl_menu( 0, locals[249] );
+		//} // end if
+		
+		locals[249] = 40;
+		locals[250] = 41;
+		locals[251] = 0;
+		//locals[270] = babl_menu( 0, locals[249] );
 		yield return StartCoroutine(babl_menu (0,locals,249));
 		locals[270] = PlayerAnswer;
-	switch ( locals[270] ) {
-		
-	case 1:
-		
-		break;
-		
-	case 2:
-		
-		yield return StartCoroutine(say( "Come back with fish!" ));
-		locals[271] = 2;
+		switch ( locals[270] ) {
+			
+		case 1:
+			
+			break;
+			
+		case 2:
+			
+			yield return StartCoroutine(say( locals, 042 ));
+			locals[271] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
-		func_00b1( locals[271] );
+			func_00b1( locals[271] );
 			yield break;
-		break;
+			break;
+			
+		} // end switch
 		
-	} // end switch
-	
-	locals[272] = 182;
+		locals[272] = 182;
 		int[] fishfinder = new int[6];
 		//0,1,2,3 = slots with fish
 		//4 = no of fish found.
 		//5 = no of slots found
- 	//find_barter_total( 4, 37, 38, 36, locals[272] );
+		//find_barter_total( 4, 37, 38, 36, locals[272] );
 		//find_barter_total( 4, 6, 8, 36, locals[272], privateVariables );
 		find_barter_total(5,4,0,5,locals[272],fishfinder);
 		privateVariables[6]= fishfinder[4];
-	if ( privateVariables[6] == 0 ) {
-		
-		yield return StartCoroutine(say( "Me no see any fish there!  You got fish?" ));
-	} else {
-		
-		if ( privateVariables[6] < 10 ) {
+		if ( privateVariables[6] == 0 ) {
 			
-			yield return StartCoroutine(say( "Me only see @GI37 fish!  You got ten?" ));
+			yield return StartCoroutine(say( locals, 043 ));
 		} else {
+			
+			if ( privateVariables[6] < 10 ) {
+				
+				yield return StartCoroutine(say( locals, 044 ));
+			} else {
 				give_to_npc(2,fishfinder,0,fishfinder[5]);
-			//give_to_npc( 2, 38, 36 );
-			//give_to_npc(2,locals,privateVariables[8], privateVariables[6]);
+				//give_to_npc( 2, 38, 36 );
+				//give_to_npc(2,locals,privateVariables[8], privateVariables[6]);
 				//give_to_npc(2,privateVariables,8,1);
-			privateVariables[2] = 1;
-			yield return StartCoroutine(say( "Thanks.  People scarce recently, fish good substitute." ));
-			yield return StartCoroutine(say( "There three dials on wall, each goes from zero to seven.  Zero straight up, increases clockwise.  Set dials to 7-2-6 from left to right.  Then pull lever.  Gate to teleport room then open.  Walk in there, teleport to mine." ));
-			locals[273] = 47;
-			locals[274] = 48;
-			locals[275] = 0;
-			//locals[294] = babl_menu( 0, locals[273] );
+				privateVariables[2] = 1;
+				yield return StartCoroutine(say( locals, 045 ));
+				yield return StartCoroutine(say( locals, 046 ));
+				locals[273] = 47;
+				locals[274] = 48;
+				locals[275] = 0;
+				//locals[294] = babl_menu( 0, locals[273] );
 				yield return StartCoroutine(babl_menu (0,locals,273));
 				locals[294] = PlayerAnswer;
-			switch ( locals[294] ) {
-				
-			case 1:
-				
-				locals[295] = 3;
+				switch ( locals[294] ) {
+					
+				case 1:
+					
+					locals[295] = 3;
 					Time.timeScale =SlomoTime;
 					yield return new WaitForSeconds(WaitTime);
-				func_00b1( locals[295] );
+					func_00b1( locals[295] );
 					yield break;
-				break;
-				
-			case 2:
-				
-				locals[296] = 3;
+					break;
+					
+				case 2:
+					
+					locals[296] = 3;
 					Time.timeScale =SlomoTime;
 					yield return new WaitForSeconds(WaitTime);
-				func_00b1( locals[296] );
+					func_00b1( locals[296] );
 					yield break;
-				break;
-				
-			} // end switch
-		}	
-	}
-		label_06dd:;
-			
-			yield return StartCoroutine(say( "No way.  Me no give you combination for free.  Me want fish.  Give me ten fish and me give you combination." ));
-			locals[297] = 50;
-			locals[298] = 51;
-			locals[299] = 52;
-			locals[300] = 0;
-			//locals[318] = babl_menu( 0, locals[297] );
+					break;
+					
+				} // end switch
+			}	
+		}
+	label_06dd:;
+		
+		yield return StartCoroutine(say( locals, 049 ));
+		locals[297] = 50;
+		locals[298] = 51;
+		locals[299] = 52;
+		locals[300] = 0;
+		//locals[318] = babl_menu( 0, locals[297] );
 		yield return StartCoroutine(babl_menu (0,locals,297));
 		locals[318] = PlayerAnswer;
-			switch ( locals[318] ) {
-				
-			case 1:
-				
-				goto label_05fd;
-				
-				break;
-				
-			case 2:
-				
-				locals[319] = 2;
+		switch ( locals[318] ) {
+			
+		case 1:
+			
+			goto label_05fd;
+			
+			break;
+			
+		case 2:
+			
+			locals[319] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
-				func_00b1( locals[319] );
+			func_00b1( locals[319] );
 			yield break;
-				break;
-				
-			case 3:
-				
-				locals[320] = 2;
+			break;
+			
+		case 3:
+			
+			locals[320] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
-				func_00b1( locals[320] );
+			func_00b1( locals[320] );
 			yield break;
-				break;
-			} // end if
-			
-			
-			
-	//	} // end switch
+			break;
+		} // end if
 		
-
+		
+		
+		//	} // end switch
+		
+		
 	} // end func
-
+	
 }

@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_17 : Conversation {
-
+	
 	//conversation #17
 	//string block 0x0e11, name Sethar Strongarm
-			
+	
 	public int[] global = new int[2];
 	
 	public override IEnumerator	main() {
@@ -172,7 +172,7 @@ public class Conversation_17 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "A human!  When I was younger, I beat up many humans like you. A fine troll I was!" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -192,7 +192,7 @@ public class Conversation_17 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -203,7 +203,7 @@ public class Conversation_17 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Thank you, you nice human.  Ah, those were days.  Lots of glory, nice treasure.  Now I happy with simpler things." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -231,7 +231,7 @@ public class Conversation_17 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "You here again?  You go lots of places.  I like that once, go fight things, do things, take things.  Now I stay here." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[1] = 8;
 		locals[2] = 9;
 		locals[3] = 0;
@@ -260,7 +260,7 @@ public class Conversation_17 : Conversation {
 		int[] locals = new int[23];
 		
 		global[1] = 1;
-		yield return StartCoroutine(say( "Oh, I would love wormy stew.  My mother she made it when I just a little troll.  You have any?" ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[1] = 11;
 		locals[2] = 12;
 		locals[3] = 13;
@@ -296,7 +296,7 @@ public class Conversation_17 : Conversation {
 		//int locals[22];
 		int[] locals= new int[23];
 		
-		yield return StartCoroutine(say( "Hmm... I no remember.  I know you use dead rotworm.  My mother knew, but she dead.  Maybe someone else.  Oh, that stew delicious!" ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 0;
@@ -327,7 +327,7 @@ public class Conversation_17 : Conversation {
 		//int locals[22];
 		int[] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Hmm, let me see... Aha!  I still have dragon scales.  I kill nasty dragon when I was a young troll.  Big and breathed fire.  It could sit on lava forever without burning up.  I kill it and save its scales.  Never use them though.  Now I old troll, I like simple pleasures, I no need them. Maybe if you give me something, I trade for scales." ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[1] = 18;
 		locals[2] = 19;
 		locals[3] = 0;
@@ -343,7 +343,7 @@ public class Conversation_17 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "No, I no need treasure any more.  Just simple nice things like wormy stew." ));
+			yield return StartCoroutine(say( locals, 020 ));
 			yield return StartCoroutine(func_0390());
 			break;
 			
@@ -356,7 +356,7 @@ public class Conversation_17 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Hello, you again!  You bring wormy stew for me?" ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[1] = 22;
 		locals[2] = 23;
 		locals[3] = 24;
@@ -386,8 +386,8 @@ public class Conversation_17 : Conversation {
 	} // end func
 	
 	IEnumerator func_04e0() {
-		
-		yield return StartCoroutine(say( "Oh, please bring it when you done!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 025 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00e0();//Endconvo
@@ -399,7 +399,7 @@ public class Conversation_17 : Conversation {
 		//int locals[1];
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "It human again!  Good luck with what you do.  That stew delicious!" ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -418,7 +418,7 @@ public class Conversation_17 : Conversation {
 		} else {
 			
 			locals[1] = 1;
-			yield return StartCoroutine(say( "You give me stew?" ));
+			yield return StartCoroutine(say( locals, 027 ));
 			while ( locals[1] == 1 ) {
 				
 				locals[2] = 28;
@@ -436,7 +436,7 @@ public class Conversation_17 : Conversation {
 						yield return StartCoroutine(func_05b1());
 					} else {
 						
-						yield return StartCoroutine(say( "I no see stew." ));
+						yield return StartCoroutine(say( locals, 029 ));
 					} // end if
 					
 					break;
@@ -450,7 +450,7 @@ public class Conversation_17 : Conversation {
 				
 			} // while
 			
-			yield return StartCoroutine(say( "You make me sad, pretend to have stew and then not." ));
+			yield return StartCoroutine(say( locals, 031 ));
 			locals[24] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -466,7 +466,7 @@ public class Conversation_17 : Conversation {
 		int[] locals = new int[4];
 		locals[2] = 283;
 		locals[1] = find_barter( 1, locals[2] );
-
+		
 		if ( locals[1] == 0 ) {
 			return 0;
 		} else {
@@ -483,21 +483,21 @@ public class Conversation_17 : Conversation {
 		//int locals[2];
 		int[] locals = new int[3];
 		
-		yield return StartCoroutine(say( "Oh, wormy stew, just what I love.  Here, take dragon scales. Maybe they help you not get hurt when you go hot places, just like dragon." ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[2] = 285;
 		locals[1] = take_from_npc( 1, locals[2] );
-
+		
 		if ( (locals[1] == 1 || locals[1] == 2) ) {
 			
 			if ( locals[1] == 2 ) {
 				
-				yield return StartCoroutine(say( "Your arms full, I leave on floor." ));
+				yield return StartCoroutine(say( locals, 033 ));
 			} // end if
 			
 			global[0] = 1;
 		} else {
 			
-			yield return StartCoroutine(say( "Huh, where they go?  I no find." ));
+			yield return StartCoroutine(say( locals, 034 ));
 		} // end if
 		
 		yield return StartCoroutine(func_05f4());
@@ -522,5 +522,5 @@ public class Conversation_17 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

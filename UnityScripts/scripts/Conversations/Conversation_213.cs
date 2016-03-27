@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_213 : Conversation {
-
-
+	
+	
 	//conversation #213
 	//string block 0x0ed5, name Fintor
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3797);
 		privateVariables[1] = 0;
@@ -150,7 +150,7 @@ public class Conversation_213 : Conversation {
 		
 		int[] locals = new int[155];
 		
-		yield return StartCoroutine(say( "Tyball!  At last we meet!  I have been warned of thee.  After years of imprisonment, I will finally have my revenge!" ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 0;
@@ -173,7 +173,7 @@ public class Conversation_213 : Conversation {
 		
 	label_02e2:;
 		
-		yield return StartCoroutine(say( "We shall see.  Now, prepare to die!" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[23] = 5;
 		locals[24] = 6;
 		locals[25] = 0;
@@ -194,8 +194,8 @@ public class Conversation_213 : Conversation {
 		} // end switch
 		
 	label_0322:;
-
-		yield return StartCoroutine(say( "Not Tyball, eh?  True, thou dost look rather scrawny, not like a powerful mage at all.  Let me see, a test, a test... Aha!  Now answer me truly - what dost thou know of the secret doors in the tombs?" ));
+		
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[45] = 8;
 		locals[46] = 9;
 		locals[47] = 10;
@@ -226,7 +226,7 @@ public class Conversation_213 : Conversation {
 		
 	label_0376:;
 		
-		yield return StartCoroutine(say( "Ah!  So thou art Tyball after all!  Finally, we meet again!" ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[67] = 12;
 		locals[68] = 13;
 		locals[69] = 0;
@@ -249,8 +249,8 @@ public class Conversation_213 : Conversation {
 		
 	label_03b6:;
 		
-
-		yield return StartCoroutine(say( "Secret doors?  Who told thee of these secret doors?  Did he tell thee of the chasm of fire they lead to, as well?  It's becoming  impossible to keep a secret around here these days." ));
+		
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[89] = 15;
 		locals[90] = 16;
 		locals[91] = 0;
@@ -274,8 +274,8 @@ public class Conversation_213 : Conversation {
 		
 	label_03f6:;
 		
-
-		yield return StartCoroutine(say( "Well, don't tell anyone, but I hid some things over there.  But that's not important." ));
+		
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[111] = 18;
 		locals[112] = 19;
 		locals[113] = 0;
@@ -299,7 +299,7 @@ public class Conversation_213 : Conversation {
 		
 	label_0436:;
 		
-		yield return StartCoroutine(say( "I do not remember what they were.  That was years and years ago, or so it seems..." ));
+		yield return StartCoroutine(say( locals, 020 ));
 		locals[133] = 21;
 		locals[134] = 22;
 		locals[135] = 0;
@@ -321,10 +321,10 @@ public class Conversation_213 : Conversation {
 		} // end switch
 		
 	label_0476:;
-
-		yield return StartCoroutine(say( "Tyball!  It is thee again!  Thou hast defeated and imprisoned me already. Now leave me in peace." ));
+		
+		yield return StartCoroutine(say( locals, 023 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
-
-
+	
+	
 }

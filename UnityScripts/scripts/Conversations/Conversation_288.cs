@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_288 : Conversation {
-
+	
 	//conversation #288
 	//	string block 0x0f20, name  Generic troll
-			
-
+	
+	
 	public override IEnumerator main() {
 		SetupConversation (3872);
 		privateVariables[1] = 0;
@@ -154,10 +154,10 @@ public class Conversation_288 : Conversation {
 		
 		if ( privateVariables[0] == 1) {
 			
-			yield return StartCoroutine(say( "You come back?  Why?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 		} else {
 			
-			yield return StartCoroutine(say( "What you doing here?" ));
+			yield return StartCoroutine(say( locals, 002 ));
 		} // end if
 		
 		locals[1] = 3;
@@ -201,7 +201,7 @@ public class Conversation_288 : Conversation {
 		
 		if ( func_0020() == 1 ) {
 			
-			yield return StartCoroutine(say( "We trade?" ));
+			yield return StartCoroutine(say( locals, 006 ));
 			locals[1] = 7;
 			locals[2] = 8;
 			locals[3] = 0;
@@ -225,7 +225,7 @@ public class Conversation_288 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -251,13 +251,13 @@ public class Conversation_288 : Conversation {
 		
 		if ( locals[9] == 0 ) {
 			
-			yield return StartCoroutine(say( "I have no new news for you." ));
+			yield return StartCoroutine(say( locals, 009 ));
 			locals[8] = 1;
 		} // end if
 		
 		if ( locals[8] <= 6 ) {
 			privateVariables[2] = 0;
-		//	privateVariables[2][0] = 0;
+			//	privateVariables[2][0] = 0;
 		} else {
 			
 		} // end if
@@ -269,32 +269,32 @@ public class Conversation_288 : Conversation {
 		//locals[10] = locals[9];
 		if ( 1 == locals[10] ) {
 			
-			yield return StartCoroutine(say( "Me hear one Troll got caught by Wizard, made slave." ));
+			yield return StartCoroutine(say( locals, 010 ));
 		} else {
 			
 			if ( 2 == locals[10] ) {
 				
-				yield return StartCoroutine(say( "Me hear somebody killing Trolls!  Me catch, me eat!" ));
+				yield return StartCoroutine(say( locals, 011 ));
 			} else {
 				
 				if ( 3 == locals[10] ) {
 					
-					yield return StartCoroutine(say( "Sethar and his friend live near the big pit." ));
+					yield return StartCoroutine(say( locals, 012 ));
 				} else {
 					
 					if ( 4 == locals[10] ) {
 						
-						yield return StartCoroutine(say( "Sneak snuck on Sethar, but he tossed him in pit." ));
+						yield return StartCoroutine(say( locals, 013 ));
 					} else {
 						
 						if ( 5 == locals[10] ) {
 							
-							yield return StartCoroutine(say( "One Knight real mean, he live up north." ));
+							yield return StartCoroutine(say( locals, 014 ));
 						} else {
 							
 							if ( 6 == locals[10] ) {
 								
-								yield return StartCoroutine(say( "Ghouls live below us.  They disgusting." ));
+								yield return StartCoroutine(say( locals, 015 ));
 							} // end if
 							
 						} // end if
@@ -314,7 +314,7 @@ public class Conversation_288 : Conversation {
 		//int locals[23];
 		int [] locals = new int[24];
 		
-		yield return StartCoroutine(say( "You food, puny human?" ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 19;
@@ -336,13 +336,13 @@ public class Conversation_288 : Conversation {
 			break;
 			
 		case 3:
-
+			
 			yield return StartCoroutine(func_049e());
 			break;
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "You confuse me, first want fight and then not want fight." ));
+		yield return StartCoroutine(say( locals, 020 ));
 		locals[23] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -378,7 +378,7 @@ public class Conversation_288 : Conversation {
 	
 	IEnumerator func_04d5() {
 		
-	//	int locals[44];
+		//	int locals[44];
 		int[] locals = new int[45];
 		
 		setup_to_barter( 0 );
@@ -457,7 +457,7 @@ public class Conversation_288 : Conversation {
 		//int locals[24];
 		int[] locals= new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 031 ));
 		locals[1] = 32;
 		locals[2] = 33;
 		locals[3] = 0;
@@ -492,5 +492,5 @@ public class Conversation_288 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

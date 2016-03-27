@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_189 : Conversation {
-
+	
 	//conversation #189
 	//	string block 0x0ebd, name Shenilor
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3773);
@@ -155,7 +155,7 @@ public class Conversation_189 : Conversation {
 			yield return StartCoroutine(func_0528());
 		} else {
 			
-			yield return StartCoroutine(say( "Hail, stranger!  Hast thou come to enroll in the Academy?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -179,27 +179,27 @@ public class Conversation_189 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
 	} // end func
 	
 	IEnumerator func_0302() {
-		
-		yield return StartCoroutine(say( "That is too bad, for it has been closed for years now." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 005 ));
 		yield return StartCoroutine(func_0329());
 	} // end func
 	
 	IEnumerator func_030f() {
-		
-		yield return StartCoroutine(say( "'Twould not matter in any case, for the Academy has been closed for many a year." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 006 ));
 		yield return StartCoroutine(func_0329());
 	} // end func
 	
 	IEnumerator func_031c() {
-		
-		yield return StartCoroutine(say( "I am not surprised, for the Academy is now closed, and few remember its days of glory." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 007 ));
 		yield return StartCoroutine(func_0329());
 	} // end func
 	
@@ -207,7 +207,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "'Tis a pity that thou wert not here when Sir Cabirus was still alive.  The Abyss was a thriving settlement, and our Academy was the center of it.  Nobody seems to be interested in the higher arts any longer, though." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -232,7 +232,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "This is so.  Since the Academy was closed, most of us have been content merely to eke out a meager existence in some small corner of the Abyss." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 0;
@@ -257,7 +257,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I am afraid our once proud Academy has been infested by creatures who have no interest in the knowledge and wisdom contained there. To them, its halls offer notihg more than convenient shelter.  It pains my heart to think of the Academy's decline from the days of old." ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 0;
@@ -282,7 +282,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Perhaps one day the Abyss will return to its former glory, but I begin to doubt it more and more.  Ah, what I would not give to see the Academy restored!" ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[1] = 18;
 		locals[2] = 19;
 		locals[3] = 0;
@@ -307,7 +307,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "It may be that thou art right.  All I can do is hope." ));
+		yield return StartCoroutine(say( locals, 020 ));
 		locals[1] = 21;
 		locals[2] = 22;
 		locals[3] = 0;
@@ -336,7 +336,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "It is possible that in the old library of the Academy thou mayst be able to find some useful information.  But be careful - many monsters inhabit the Academy these days." ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 24;
 		locals[2] = 25;
 		locals[3] = 0;
@@ -365,7 +365,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Enter the great hall of the Academy and head west.  The library will be on thy left.  Perhaps some of its books, and the knowledge contained therein, are still intact." ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -384,7 +384,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Greetings again!  Hast thou discovered aught in the area of the Academy?" ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[1] = 29;
 		locals[2] = 30;
 		locals[3] = 31;
@@ -415,7 +415,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "I am sorry to hear that.  I fear that the best days of the Academy are past." ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -427,7 +427,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Perhaps there is hope yet.  When thy quest is done, perhaps thou canst return to see us restore the Academy to its former state of glory." ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -507,7 +507,7 @@ public class Conversation_189 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 044 ));
 		locals[1] = 45;
 		locals[2] = 46;
 		locals[3] = 0;

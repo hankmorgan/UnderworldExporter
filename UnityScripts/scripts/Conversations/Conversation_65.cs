@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Conversation_65 : Conversation {
 	
-
+	
 	//conversation #65
 	//	string block 0x0e41, name Eb
-			
-
+	
+	
 	public override IEnumerator main() {
 		SetupConversation (3649);
 		privateVariables[1] = 0;
@@ -21,7 +21,7 @@ public class Conversation_65 : Conversation {
 		privateVariables[0] = 1;
 	} // end func
 	
-/*	void func_0020() {
+	/*	void func_0020() {
 		
 		int locals[1];
 		
@@ -44,7 +44,7 @@ public class Conversation_65 : Conversation {
 		func_0012();
 	} // end func*/
 	
-/*	void func_007c() {
+	/*	void func_007c() {
 		
 		npc.npc_goal = 1;
 		func_0012();
@@ -63,7 +63,7 @@ public class Conversation_65 : Conversation {
 		npc.npc_attitude = 6;
 	} // end func*/
 	
-  	IEnumerator func_00b1( int param1) {
+	IEnumerator func_00b1( int param1) {
 		
 		npc.npc_attitude = param1;//[0];//play_hunger;
 		Time.timeScale =SlomoTime;
@@ -163,7 +163,7 @@ public class Conversation_65 : Conversation {
 			privateVariables[2] = 0;
 			privateVariables[3] = 0;
 			privateVariables[4] = 0;
-			yield return StartCoroutine(say( "So!  Who go there?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[3] = 2;
 			locals[4] = 3;
 			locals[5] = 4;
@@ -196,18 +196,18 @@ public class Conversation_65 : Conversation {
 		label_030c:;
 			
 			privateVariables[3] = 1;
-			yield return StartCoroutine(say( "Ha!  I thought so!  You get gone from here!" ));
+			yield return StartCoroutine(say( locals, 005 ));
 			locals[25] = 1;
 			yield return StartCoroutine ( func_00b1( locals[25] ));
 			yield break;
-
-/*		label_031f:;
+			
+			/*		label_031f:;
 			if ( privateVariables[2]==1 ) {
 				
-				say( "Speak with King Ketchaval, hm?" );
+				say( locals, 006 );
 			} else {
 				
-				say( "And who you, who wants talk with King Ketchaval?" );
+				say( locals, 007 );
 				locals[26] = 8;
 				locals[27] = 9;
 				locals[28] = 0;
@@ -230,12 +230,12 @@ public class Conversation_65 : Conversation {
 					
 				} // end switch
 			} // end if	//Moved this bracket to here!*/
-
-		
-
-
 			
-
+			
+			
+			
+			
+			
 			
 			//break;
 			
@@ -247,10 +247,10 @@ public class Conversation_65 : Conversation {
 			
 			if ( privateVariables[2] == 1 ) {
 				
-				yield return StartCoroutine(say( "Ho, @GS8!  Why you here again?" ));
+				yield return StartCoroutine(say( locals, 018 ));
 			} else {
 				
-				yield return StartCoroutine(say( "Hey, it you again!  What you want?" ));
+				yield return StartCoroutine(say( locals, 019 ));
 			} // end if
 			if (privateVariables[4]==1)
 			{
@@ -277,7 +277,7 @@ public class Conversation_65 : Conversation {
 				
 			case 20:
 				
-				yield return StartCoroutine(say( "You be careful then.  Not everywhere safe to wander." ));
+				yield return StartCoroutine(say( locals, 021 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
@@ -285,7 +285,7 @@ public class Conversation_65 : Conversation {
 				break;
 				
 			case 22:
-				yield return StartCoroutine(say( "You have nice journey then." ));
+				yield return StartCoroutine(say( locals, 023 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
@@ -304,11 +304,11 @@ public class Conversation_65 : Conversation {
 				break;
 			} // end if
 			
-//			break;
+			//			break;
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Aha!  Green Goblin friend!  You still like them?" ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[143] = 27;
 		locals[144] = 28;
 		locals[145] = 29;
@@ -340,16 +340,16 @@ public class Conversation_65 : Conversation {
 		
 	label_0586:;
 		
-		yield return StartCoroutine(say( "Ha, I think as much!  You not welcome here then!" ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[165] = 1;
 		yield return StartCoroutine ( func_00b1( locals[165] ));
 		yield break;
 	label_0594:;
 		
-	//label_0594:;
+		//label_0594:;
 		
 		privateVariables[3] = 0;
-		yield return StartCoroutine(say( "Yeah?  What you want here then?" ));
+		yield return StartCoroutine(say( locals, 031 ));
 		locals[166] = 32;
 		locals[167] = 33;
 		locals[168] = 0;
@@ -371,11 +371,11 @@ public class Conversation_65 : Conversation {
 			break;
 			
 		} // end switch
-
+		
 	label_0423:;
 		
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "Good idea speak with King Ketchaval. He very wise and strong.  Maybe you best talk to Queen Retichall first, though.  On you go, now." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[75] = 47;
 		locals[76] = 51;
 		locals[77] = 0;
@@ -402,15 +402,15 @@ public class Conversation_65 : Conversation {
 			yield break;
 			break;
 		} // end if
-
-
-
+		
+		
+		
 	label_0377:;
 		
 		//label_0377:;
 		
 		privateVariables[2] = 1;
-		yield return StartCoroutine(say( "@GS8, eh?  I think I heard of you.  You new here, eh?  You come to right place.  Gray Goblins the most powerful group here." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		
 		
 		locals[1] = npc.npc_attitude;
@@ -438,7 +438,7 @@ public class Conversation_65 : Conversation {
 			} // end if
 			
 			privateVariables[4] = 1;
-			yield return StartCoroutine(say( "You be careful, though, you mind your manners.  Not all of us like strange people like you.  You act nice." ));
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[50] = 47;
 			locals[51] = 51;
 			locals[52] = 0;
@@ -469,25 +469,25 @@ public class Conversation_65 : Conversation {
 			//break;
 			
 		} // end switch
-
-
+		
+		
 	label_0369:;
 		
 		//label_0369:;
 		
-		yield return StartCoroutine(say( "Well then!  You not our business neither!" ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[48] = 1;
 		func_00b1( locals[48] );
 		yield break;
-
-
+		
+		
 	label_031f:;//keep
 		if ( privateVariables[2]==1 ) {
 			
-			yield return StartCoroutine(say( "Speak with King Ketchaval, hm?" ));
+			yield return StartCoroutine(say( locals, 006 ));
 		} else {
 			
-			yield return StartCoroutine(say( "And who you, who wants talk with King Ketchaval?" ));
+			yield return StartCoroutine(say( locals, 007 ));
 			locals[26] = 8;
 			locals[27] = 9;
 			locals[28] = 0;
@@ -510,13 +510,13 @@ public class Conversation_65 : Conversation {
 				
 			} // end switch
 		} // end if	//Moved this bracket to here!
-
-
-
-
+		
+		
+		
+		
 	label_05d9:;
 		
-		yield return StartCoroutine(say( "Well, you be careful, mind your manners.  On you go." ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[188] = 47;
 		locals[189] = 51;
 		locals[190] = 0;
@@ -544,21 +544,21 @@ public class Conversation_65 : Conversation {
 			break;
 			
 		} // end switch
-
-
-
-
-
+		
+		
+		
+		
+		
 	} // end func
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

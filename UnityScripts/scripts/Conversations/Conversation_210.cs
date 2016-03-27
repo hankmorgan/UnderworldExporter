@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Conversation_210 : Conversation {
-
+	
 	//conversation #210
 	//string block 0x0ed2, name Naruto
 	public int[] global =new int[3];
@@ -13,7 +13,7 @@ public class Conversation_210 : Conversation {
 		func_0012();
 		yield return 0;
 	} // end func
-
+	
 	
 	void func_0012() {
 		EndConversation();
@@ -158,7 +158,7 @@ public class Conversation_210 : Conversation {
 			global[1] = 1;
 			global[2] = 1;
 			global[0] = 0;
-			yield return StartCoroutine(say( "What brings thee here?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -176,7 +176,7 @@ public class Conversation_210 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -187,7 +187,7 @@ public class Conversation_210 : Conversation {
 		int[] locals = new int[23];
 		
 		global[1] = 0;
-		yield return StartCoroutine(say( "Well, watch thyself.  There are nasty spiders all around. My friend was just killed by one, some distance to the north. He had a key that would allow one to enter a place of some importance. There one might find an item that allows the owner to get through Tyball's maze." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 7;
@@ -218,7 +218,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I said, 'twas a key that allowed one to enter a secret place. There lies an item that permits one to pass through Tyball's maze. Wert thou not listening? The entrance is in the chasm of fire." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 11;
@@ -249,7 +249,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Wait! I have more information that may prove of use." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[1] = 13;
 		locals[2] = 14;
 		locals[3] = 15;
@@ -285,7 +285,7 @@ public class Conversation_210 : Conversation {
 		int[] locals = new int[23];
 		
 		global[2] = 0;
-		yield return StartCoroutine(say( "A mysterious Orb drains the magic from every living creature on this level." ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 0;
@@ -310,7 +310,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Indeed.  The Orb drains thy power and transfers it -- somewhere --  where it is put to some foul purpose." ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -322,8 +322,8 @@ public class Conversation_210 : Conversation {
 	} // end func
 	
 	IEnumerator func_04a3() {
-		
-		yield return StartCoroutine(say( "Farewell." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 021 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
 	
@@ -331,7 +331,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I know only that one mage, Tyball by name, seems immune to its effects." ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[1] = 23;
 		locals[2] = 24;
 		locals[3] = 0;
@@ -356,7 +356,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Indeed.  However, if thou dost wish to break the Orb's grasp on this area, best thou prepare thyself with means other than spells." ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 27;
 		locals[3] = 0;
@@ -381,7 +381,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "All I can think is, if thou canst discover whence came the Orb, and obtain from its place of origin a fragment of its substance, thou mayst be able to destroy it with that." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[1] = 29;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -396,7 +396,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I know not, but I think some friends of mine, who languish in prison, discovered its secret before they were captured by Tyball.  If thou canst talk to them, perhaps they can help thee." ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[1] = 31;
 		locals[2] = 32;
 		locals[3] = 0;
@@ -410,7 +410,7 @@ public class Conversation_210 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Good luck." ));
+			yield return StartCoroutine(say( locals, 033 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 			break;
 			
@@ -422,7 +422,7 @@ public class Conversation_210 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Thou art welcome.  Farewell." ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -439,7 +439,7 @@ public class Conversation_210 : Conversation {
 		
 		if ( global[2]==1 ) {
 			
-			yield return StartCoroutine(say( "Thou hast decided to talk to me after all?" ));
+			yield return StartCoroutine(say( locals, 036 ));
 			locals[1] = 37;
 			locals[2] = 38;
 			locals[3] = 0;
@@ -462,12 +462,12 @@ public class Conversation_210 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
-		yield return StartCoroutine(say( "I am sorry, but I have told thee all I can.  Perhaps my friends in the prisons can tell thee more of the Orb and the rocks made of the same substance." ));
+		yield return StartCoroutine(say( locals, 039 ));
 		locals[24] = 40;
 		locals[25] = 41;
 		locals[26] = 0;
@@ -488,5 +488,5 @@ public class Conversation_210 : Conversation {
 		
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
-
+	
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Conversation_1 : Conversation {
-
+	
 	//conversation #1
 	//	string block 0x0e01, name Corby
 	public int[] global = new int[1];
@@ -157,7 +157,7 @@ public class Conversation_1 : Conversation {
 		} else {
 			
 			global[0] = 0;
-			yield return StartCoroutine(say( "Hast thou come to add to my torment?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -191,7 +191,7 @@ public class Conversation_1 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -202,7 +202,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Why, the torment of lost hopes... Of disillusionment." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[1] = 7;
 		locals[2] = 8;
 		locals[3] = 9;
@@ -248,11 +248,9 @@ public class Conversation_1 : Conversation {
 		
 		//int locals[22];
 		int [] locals = new int[23];
-		
+
 		global[0] = 1;
-		yield return StartCoroutine(say( "I shared the great dream of Sir Cabirus, that the Avatar's way could be pursued by all folk.  We sought to gather all intelligent species here in the Abyss and teach them to live in harmony.  Alas, it was not to be. \n"
-		   + " The constant bickering proved too much for kindly Sir Cabirus, and he perished in his sleep.  Some said he was poisoned, but I know he died of a broken spirit. \n"
-		   + " His life's work was in this place, and as he watched it crumble, his heart broke as well." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 14;
@@ -286,7 +284,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Well, aye, Sir Cabirus did gather a number of artifacts with interesting properties. He thought the use of these artifacts might assist the colonists as they pursued the way of the Avatar. Unfortunately, the objects were misused by the folk he hoped to help." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[1] = 16;
 		locals[2] = 17;
 		locals[3] = 18;
@@ -320,7 +318,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Each of the eight items gathered by Sir Cabirus embodied one of the Virtues. But those who now possess the items keep them merely for their intrinsic value, not their higher purpose." ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 22;
@@ -352,13 +350,13 @@ public class Conversation_1 : Conversation {
 	} // end func
 	
 	IEnumerator func_04b3() {
-		
-		yield return StartCoroutine(say( "Thou dare to profane his memory!  Begone with thee!" ));
+		int [] locals = new int[1];
+		yield return StartCoroutine(say( locals, 023 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00d1();
 		yield break;
-
+		
 	} // end func
 	
 	IEnumerator func_04c0() {
@@ -368,7 +366,7 @@ public class Conversation_1 : Conversation {
 		
 		if ( npc.npc_attitude == 1 ) {
 			
-			yield return StartCoroutine(say( "Hast thou returned to torment me further?" ));
+			yield return StartCoroutine(say( locals, 024 ));
 			locals[1] = 25;
 			locals[2] = 26;
 			locals[3] = 27;
@@ -407,54 +405,54 @@ public class Conversation_1 : Conversation {
 			
 		} else {
 			
-
-	
-		yield return StartCoroutine(say( "Hast thou indeed found a way to help?" ));
-		locals[23] = 30;
-		locals[24] = 31;
-		locals[25] = 32;
-		locals[26] = 0;
-		//locals[44] = babl_menu( 0, locals[23] );
-		yield return StartCoroutine(babl_menu (0,locals,23));
-		locals[44] = PlayerAnswer;
-		switch ( locals[44] ) {
 			
-		case 1:
 			
-			if ( global[0] == 0 ) {
+			yield return StartCoroutine(say( locals, 029 ));
+			locals[23] = 30;
+			locals[24] = 31;
+			locals[25] = 32;
+			locals[26] = 0;
+			//locals[44] = babl_menu( 0, locals[23] );
+			yield return StartCoroutine(babl_menu (0,locals,23));
+			locals[44] = PlayerAnswer;
+			switch ( locals[44] ) {
 				
-				yield return StartCoroutine(func_039a());
-			} else {
+			case 1:
 				
-				yield return StartCoroutine(func_06a6());
-			} // end if
+				if ( global[0] == 0 ) {
+					
+					yield return StartCoroutine(func_039a());
+				} else {
+					
+					yield return StartCoroutine(func_06a6());
+				} // end if
+				
+				break;
+				
+			case 2:
+				
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
+				func_00d1();
+				yield break;
+				break;
+				
+			case 3:
+				
+				yield return StartCoroutine(func_059a());
+				break;
+				
+			} // end switch
 			
-			break;
-			
-		case 2:
-			
-			Time.timeScale =SlomoTime;
-			yield return new WaitForSeconds(WaitTime);
-			func_00d1();
-			yield break;
-			break;
-			
-		case 3:
-			
-			yield return StartCoroutine(func_059a());
-			break;
-			
-		} // end switch
-		
 		} // end if //moved from above
 	} // end func
 	
 	IEnumerator func_059a() {
-
+		
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Is that all thou hast to say?  Get thee gone from here!" ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[1] = 34;
 		locals[2] = 35;
 		locals[3] = 36;
@@ -491,7 +489,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Wait!  My cause is lost, but perhaps I can yet help thee." ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 0;
@@ -526,7 +524,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Well, I am beyond thy help!" ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 43;
@@ -560,7 +558,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Art thou certain thou dost wish to hear my sorry tale again?" ));
+		yield return StartCoroutine(say( locals, 044 ));
 		locals[1] = 45;
 		locals[2] = 46;
 		locals[3] = 0;
@@ -582,7 +580,7 @@ public class Conversation_1 : Conversation {
 		} // end switch
 		
 	} // end func
-
-
-
+	
+	
+	
 }

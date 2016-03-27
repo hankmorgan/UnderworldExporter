@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_10 : Conversation {
-
+	
 	//conversation #10
 	//	string block 0x0e0a, name Lanugo
-			
-
+	
+	
 	public override IEnumerator main() {
 		SetupConversation (3594);
 		privateVariables[1] = 0;
@@ -20,7 +20,7 @@ public class Conversation_10 : Conversation {
 		privateVariables[0] = 1;
 	} // end func
 	
-/*	void func_0020() {
+	/*	void func_0020() {
 		
 		int locals[1];
 		
@@ -156,7 +156,7 @@ public class Conversation_10 : Conversation {
 	
 	IEnumerator  func_029d() {
 		
-	//	int locals[22];
+		//	int locals[22];
 		int[] locals=new int[23];	
 		if ( privateVariables[0] == 1 ) {
 			
@@ -164,7 +164,7 @@ public class Conversation_10 : Conversation {
 		} else {
 			
 			privateVariables[2] = 0;
-			yield return StartCoroutine(say( "Tha be not bodderin' da boss, aye?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -200,7 +200,7 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[23];
 		int[] locals=new int[24];
-		yield return StartCoroutine(say( "Good. It be not healty ta bodder a guy like da boss." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 8;
 		locals[3] = 0;
@@ -211,7 +211,7 @@ public class Conversation_10 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "Dat's okay den.  Hey, I better tend to my stew.  You come back if you want some." ));
+			yield return StartCoroutine(say( locals, 007 ));
 			locals[23] = 2;
 			yield return StartCoroutine(func_00b1( locals[23] ));
 			break;
@@ -235,7 +235,7 @@ public class Conversation_10 : Conversation {
 		locals[5] = 11;
 		locals[6] = 12;
 		locals[2] = sex( 2, locals[6], locals[5] );
-		yield return StartCoroutine(say( "Oh, a smart one, eh?  One a' dem Sages.  Thinks @SS1 too smart for me, eh?  Maybe too smart for @SS2, more like.  Fine - I'm busy making dinner.  This stew takes work, you know." ));
+		yield return StartCoroutine(say( locals, 013 ));
 		locals[7] = 1;
 		yield return StartCoroutine(func_00b1( locals[7] ));
 		yield break;
@@ -245,7 +245,7 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Yeah, well, I could do dat.  But da boss don' like to be boddered wid, like, practical stuff.   His mind is on, uh higher tings." ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 0;
@@ -265,7 +265,7 @@ public class Conversation_10 : Conversation {
 			break;
 			
 		} // end switch
-
+		
 		yield break;
 	} // end func
 	
@@ -313,7 +313,7 @@ public class Conversation_10 : Conversation {
 			//give_to_npc( 2, locals[11], locals[18] );
 			give_to_npc(2,locals,11,locals[18]);
 			privateVariables[2] = 0;
-			yield return StartCoroutine(say( "Tanks!  Th'art right enough, fer a yuman.  Tell tha what -- if tha talks to da boss, be real, like complimennary.  He likes dat." ));
+			yield return StartCoroutine(say( locals, 017 ));
 			locals[19] = 18;
 			locals[20] = 19;
 			locals[21] = 0;
@@ -338,35 +338,35 @@ public class Conversation_10 : Conversation {
 			
 			//break;
 			
-		//} // end switch
-		
-		if ( locals[16] == 0 ) {
+			//} // end switch
 			
-			yield return StartCoroutine(say( "I don' see no gift!" ));
-		} else {
+			if ( locals[16] == 0 ) {
+				
+				yield return StartCoroutine(say( locals, 020 ));
+			} else {
+				
+				yield return StartCoroutine(say( locals, 021 ));
+			} // end if
 			
-			yield return StartCoroutine(say( "Dontcha have any gold or something?" ));
-		} // end if
-		
-		locals[41] = 22;
-		locals[42] = 23;
-		locals[43] = 0;
-		//locals[62] = babl_menu( 0, locals[41] );
-		yield return StartCoroutine( babl_menu( 0,locals,41 ));
-		locals[62] = PlayerAnswer;
-		switch ( locals[62] ) {
-			
-		case 1:
-			
-			yield return StartCoroutine(func_03f2());
-			break;
-			
-		case 2:
-			
-			yield return StartCoroutine(func_0504());
-			break;
-			
-		} // end switch
+			locals[41] = 22;
+			locals[42] = 23;
+			locals[43] = 0;
+			//locals[62] = babl_menu( 0, locals[41] );
+			yield return StartCoroutine( babl_menu( 0,locals,41 ));
+			locals[62] = PlayerAnswer;
+			switch ( locals[62] ) {
+				
+			case 1:
+				
+				yield return StartCoroutine(func_03f2());
+				break;
+				
+			case 2:
+				
+				yield return StartCoroutine(func_0504());
+				break;
+				
+			} // end switch
 		}//Added end bracket for else
 	} // end func
 	
@@ -374,7 +374,7 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[1];
 		int[] locals=new int[2];
-		yield return StartCoroutine(say( "Y'got plenny t'learn in da ways of courtly manners, I'd say.  Okay by me - I got my stew to tend to." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[1] = 1;
 		yield return StartCoroutine(func_00b1( locals[1] ));
 		yield break;
@@ -384,7 +384,7 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Sure ting.  Hey, gotta go.  Time fer me ta start dinner.  Y'wanna stay?  S'worm stew, tonight. Me speciality." ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 27;
 		locals[3] = 0;
@@ -413,10 +413,10 @@ public class Conversation_10 : Conversation {
 		int[] locals=new int[23];
 		if ( privateVariables[2] == 1) {
 			
-			yield return StartCoroutine(say( "Oh, this guy again.  What it be now?" ));
+			yield return StartCoroutine(say( locals, 028 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "Come back for me stew, have tha?  Smell brought tha?  Don't blame tha, 'tis a good stew." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[1] = 30;
 		locals[2] = 31;
 		locals[3] = 32;
@@ -449,23 +449,23 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[25];
 		int[] locals=new int[26];
-		yield return StartCoroutine(say( "Aye, me modder used ta make it.  Tha takes a rotworm, chops it up fine, and marinates it in port wiv mushrooms." ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[2] = 1019;
 		locals[1] = take_from_npc( 1, locals[2] );
 		locals[3] = locals[1];
 		if ( 2 == locals[3] ) {
 			
-			yield return StartCoroutine(say( "I'll leave this recipe on the floor for tha." ));
+			yield return StartCoroutine(say( locals, 034 ));
 		} else {
 			
 			if ( 1 == locals[3] ) {
 				
-				yield return StartCoroutine(say( "Here.  'Tis all writ down on this." ));
+				yield return StartCoroutine(say( locals, 035 ));
 			} else {
 				
 				if ( 0 == locals[3] ) {
 					
-					yield return StartCoroutine(say( "Tha knowest, just like the recipe I gave tha." ));
+					yield return StartCoroutine(say( locals, 036 ));
 				} // end if
 				
 			} // end if
@@ -571,7 +571,7 @@ public class Conversation_10 : Conversation {
 		
 		//int locals[24];
 		int[] locals=new int[25];
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 049 ));
 		locals[1] = 50;
 		locals[2] = 51;
 		locals[3] = 0;
@@ -595,14 +595,14 @@ public class Conversation_10 : Conversation {
 		locals[23] = 52;
 		locals[24] = 53;
 		yield return StartCoroutine (do_demand( 2, locals[24], locals[23] ));
-	//	if ( do_demand( 2, locals[24], locals[23] )==1 ) {
+		//	if ( do_demand( 2, locals[24], locals[23] )==1 ) {
 		if (PlayerAnswer==1){
 			privateVariables[1] = 1;
 		} else {
-
+			
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
-		    yield return StartCoroutine ( func_008b());
+			yield return StartCoroutine ( func_008b());
 			yield break;
 		} // end if
 		

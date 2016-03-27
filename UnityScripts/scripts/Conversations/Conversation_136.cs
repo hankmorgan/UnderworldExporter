@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_136 : Conversation {
-
+	
 	//conversation #136
-		//string block 0x0e88, name Oradinar
-
+	//string block 0x0e88, name Oradinar
+	
 	int func_0920_result;
 	public override IEnumerator main() {
 		SetupConversation (3720);
@@ -171,7 +171,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int[]locals=new int[23];
 		
-		yield return StartCoroutine(say( "Hail Stranger.  What unhappy accident brings thee to the Abyss?" ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 4;
@@ -202,8 +202,8 @@ public class Conversation_136 : Conversation {
 	} // end func
 	
 	IEnumerator func_0325() {
-		
-		yield return StartCoroutine(say( "Survival alone is an ambitious goal in the Abyss.   Thou art a brave soul indeed if thou aspirest to aught beyond that." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 005 ));
 		yield return StartCoroutine(func_0332());
 	} // end func
 	
@@ -312,9 +312,9 @@ public class Conversation_136 : Conversation {
 			
 		} // end switch
 		
-	
 		
-
+		
+		
 		
 	} // end func
 	
@@ -323,16 +323,15 @@ public class Conversation_136 : Conversation {
 		//int locals[23];
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "By the bright and glittering stars of heaven, which I have not seen these many years, I wish I had food to give thee.  Yet, I do not. \n"
-		    + " I can, however, tell thee something which, as the ancient proverb  states, may feed thee for life.  Mind thee, many have been cast into the Abyss with the empty promises of the hypocrite Almric, and met with a far more grisly demise than mere starvation./m" ));
-		yield return StartCoroutine(say( "Still, my words are as useless as shouting upwind in a hurricane. More to the point, thou mayest find a pond but a little north of here, where fish will leap from the water  and onto thy pole, more numerous than vultures upon a carcass the  jackals have forsaken." ));
+		yield return StartCoroutine(say( locals, 017 ));
+		yield return StartCoroutine(say( locals, 018 ));
 		if ( privateVariables[3] == 1 ) {
 			
-			yield return StartCoroutine(say( "If thou dost employ the pole I gave thee, thou shall have all the fish thou may desire." ));
+			yield return StartCoroutine(say( locals, 019 ));
 			yield return StartCoroutine(func_0920());
 		} else {
 			
-			yield return StartCoroutine(say( "I have an extra pole, if thou dost need one." ));
+			yield return StartCoroutine(say( locals, 020 ));
 			locals[1] = 21;
 			locals[2] = 22;
 			locals[3] = 0;
@@ -355,7 +354,7 @@ public class Conversation_136 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -366,7 +365,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I wish thee well.  I once believed in noble causes myself. Now I find that just surviving is a noble enough fight. 'Tis easier to drink water from a sieve than escape from the Abyss alive.  If thou dost seek trouble, it shall  find thee 'ere long." ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 24;
 		locals[2] = 25;
 		locals[3] = 0;
@@ -396,7 +395,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I have little urge to seek trouble.  I have outlived many in the Abyss by having the good sense to keep myself out of harm's way.  Thou wouldst be wise to do the same." ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 0;
@@ -426,10 +425,10 @@ public class Conversation_136 : Conversation {
 		//int locals[45];
 		int [] locals = new int[46];
 		
-		yield return StartCoroutine(say( "'Tis said that against hunger the gods themselves contend in  vain.  Still, Britannia was not built in a day.  I can tell thee this much, at least: To the north but a short way is a pond, as full of fish as the day is long." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		if ( privateVariables[3] == 1 ) {
 			
-			yield return StartCoroutine(say( "If thou but put the pole I gave thee to its proper use, thou shalt have fish aplenty." ));
+			yield return StartCoroutine(say( locals, 030 ));
 			locals[1] = 31;
 			locals[2] = 32;
 			locals[3] = 0;
@@ -451,7 +450,7 @@ public class Conversation_136 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "I have an extra fishing pole.  Dost thou want it?" ));
+			yield return StartCoroutine(say( locals, 033 ));
 			locals[23] = 34;
 			locals[24] = 35;
 			locals[25] = 0;
@@ -477,7 +476,7 @@ public class Conversation_136 : Conversation {
 			
 		} // end switch
 		
-
+		
 		
 	} // end func
 	
@@ -486,7 +485,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I fear I can tell thee little of what lies ahead.  I have found  that those seeking trouble in the nether regions of the Abyss find it eager to make their acquaintance." ));
+		yield return StartCoroutine(say( locals, 036 ));
 		locals[1] = 37;
 		locals[2] = 38;
 		locals[3] = 39;
@@ -520,7 +519,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int[] locals =new int[23];
 		
-		yield return StartCoroutine(say( "I take care to keep myself far from trouble's path, and fish for my food." ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 43;
@@ -554,10 +553,10 @@ public class Conversation_136 : Conversation {
 		//int locals[45];
 		int[] locals = new int[46];
 		
-		yield return StartCoroutine(say( "If thou but venture northward, thou shalt soon come across a pond so thick with fish thou couldst walk across without getting thy boots wet." ));
+		yield return StartCoroutine(say( locals, 044 ));
 		if ( privateVariables[3] == 1 ) {
 			
-			yield return StartCoroutine(say( "Use the pole there, and thou shalt soon have food in abundance." ));
+			yield return StartCoroutine(say( locals, 045 ));
 			locals[1] = 46;
 			locals[2] = 47;
 			locals[3] = 0;
@@ -583,7 +582,7 @@ public class Conversation_136 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "I can give thee my spare fishing pole, if thou dost need it." ));
+			yield return StartCoroutine(say( locals, 048 ));
 			locals[23] = 49;
 			locals[24] = 50;
 			locals[25] = 0;
@@ -609,7 +608,7 @@ public class Conversation_136 : Conversation {
 			
 		} // end switch
 		
-
+		
 		
 	} // end func
 	
@@ -618,7 +617,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "No I haven't.  I think I should go now." ));
+		yield return StartCoroutine(say( locals, 051 ));
 		locals[1] = 52;
 		locals[2] = 53;
 		locals[3] = 54;
@@ -658,7 +657,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "May thy casts be ever fruitful." ));
+		yield return StartCoroutine(say( locals, 055 ));
 		locals[1] = 56;
 		locals[2] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
@@ -680,7 +679,7 @@ public class Conversation_136 : Conversation {
 		
 		if ( privateVariables[2] == 1 ) {
 			
-			yield return StartCoroutine(say( "Art feeling more talkative than when last I saw thee?" ));
+			yield return StartCoroutine(say( locals, 057 ));
 			locals[1] = 58;
 			locals[2] = 59;
 			locals[3] = 0;
@@ -707,7 +706,7 @@ public class Conversation_136 : Conversation {
 			
 			if ( privateVariables[3] == 1 ) {
 				
-				yield return StartCoroutine(say( "Greetings, friend!  Hast thou caught any fish?" ));
+				yield return StartCoroutine(say( locals, 060 ));
 				locals[23] = 61;
 				locals[24] = 63;
 				locals[25] = 64;
@@ -719,7 +718,7 @@ public class Conversation_136 : Conversation {
 					
 				case 1:
 					
-					yield return StartCoroutine(say( "Excellent!" ));
+					yield return StartCoroutine(say( locals, 062 ));
 					yield return StartCoroutine(func_0920());
 					break;
 					
@@ -736,21 +735,21 @@ public class Conversation_136 : Conversation {
 				
 			} else {
 				
-				yield return StartCoroutine(say( "Welcome back!  In sooth, thou art lucky to have survived so long, friend.  The Abyss is a place of fearsome peril." ));
+				yield return StartCoroutine(say( locals, 065 ));
 				yield return StartCoroutine(func_0332());
 				
 			} // end switch
 			
 		} // end switch
 		
-
 		
-
+		
+		
 	} // end func
 	
 	IEnumerator func_08be() {
-		
-		yield return StartCoroutine(say( "I am an outcast, trying to survive amidst the fearsome perils of the Abyss. I am surprised thou hast lived so long in spite of thy surly disposition." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 066 ));
 		yield return StartCoroutine(func_0332());
 	} // end func
 	
@@ -772,7 +771,7 @@ public class Conversation_136 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Wouldst thou be interested in a trade?" ));
+		yield return StartCoroutine(say( locals, 067 ));
 		locals[1] = 68;
 		locals[2] = 69;
 		locals[3] = 0;
@@ -878,7 +877,7 @@ public class Conversation_136 : Conversation {
 		//int locals[24];
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Art thou attempting to intimidate me into surrendering my possessions?" ));
+		yield return StartCoroutine(say( locals, 080 ));
 		locals[1] = 81;
 		locals[2] = 82;
 		locals[3] = 0;
@@ -914,5 +913,5 @@ public class Conversation_136 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class Conversation_231 : Conversation {
-
-		//conversation #231
+	
+	//conversation #231
 	//	string block 0x0ee7, name Tyball
-
+	
 	public override bool OnDeath ()
 	{
 		//Play the tybal death cutscene.
 		//playerUW.playerHud.CutScenesSmall="TybalDeath";
 		return false;
 	}
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3815);
 		privateVariables[1] = 0;
@@ -155,17 +155,17 @@ public class Conversation_231 : Conversation {
 	IEnumerator func_029d() {
 		
 		int[] locals = new int[48];
-
+		
 		locals[2] = 1;
 		locals[3] = 2;
 		locals[1] = sex( 2, locals[3], locals[2] );
-
+		
 		if ( privateVariables[0]==1 ) {
-			yield return StartCoroutine(say( "Dear @GS8, I enjoy thy company greatly, but I am afraid that I have other matters to attend to than our conversation.  If thou wilt do me the favor of expiring quickly, I would be much obliged." ));
+			yield return StartCoroutine(say( locals, 012 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Ah, it is @GS8!  It is good to meet thee again.  It is regrettable that our acquiantance must be such a short one." ));
+			yield return StartCoroutine(say( locals, 003 ));
 			locals[4] = 4;
 			locals[5] = 5;
 			locals[6] = 0;
@@ -190,16 +190,16 @@ public class Conversation_231 : Conversation {
 			
 		label_0304:;
 			
-			yield return StartCoroutine(say( "Oh, I'm afraid that that is quite impossible.  I need the body of an innocent one to act as a vessel, and I am afraid that thine wilt not do.  Besides, after all the trouble I went to, it would be a pity to let her go now, dost thou not think?" ));
+			yield return StartCoroutine(say( locals, 006 ));
 			goto label_030e;
 			
 		label_0309:;
 			
-			yield return StartCoroutine(say( "Oh, thou dost wonder why I abducted poor Arial?  Perhaps I should spare thee so that thou canst see my incantation.  The sight of a demon entering the body of a human is not one to be missed." ));
+			yield return StartCoroutine(say( locals, 007 ));
 			goto label_030e;
 			
 		label_030e:;
-
+			
 			locals[26] = 8;
 			locals[27] = 10;
 			locals[28] = 0;
@@ -210,12 +210,12 @@ public class Conversation_231 : Conversation {
 				
 			case 1:
 				
-				yield return StartCoroutine(say( "Ah, but regardless of my worthiness, I am afraid that I will live, and that thou wilt not." ));
+				yield return StartCoroutine(say( locals, 009 ));
 				break;
 				
 			case 2:
 				
-				yield return StartCoroutine(say( "Hm.  I believe, dear @SS1, that the question is not whether thou must kill me, but whether thou canst.  And the answer, of course, is no." ));
+				yield return StartCoroutine(say( locals, 011 ));
 				break;
 				
 			} // end switch
@@ -223,9 +223,9 @@ public class Conversation_231 : Conversation {
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
 		} // end if
 		
-
+		
 	} // end func
-
-
-
+	
+	
+	
 }

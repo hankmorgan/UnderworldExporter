@@ -168,26 +168,26 @@ public class Conversation_4 : Conversation {
 			locals[4] = 2;
 			privateVariables[15] = sex( 2, locals[4], locals[3] );
 		} else {
-
-
+			
+			
 			/*******start block to move***********/
-
-
-
+			
+			
+			
 			locals[621] = npc.npc_attitude;
 			if ( 3 == locals[621] ) {
 				
-				yield return StartCoroutine(say( "I glad you back!" ));
+				yield return StartCoroutine(say( locals, 101 ));
 			} else {
 				
 				if ( 2 == locals[621] ) {
 					
-					yield return StartCoroutine(say( "Oh, you again." ));
+					yield return StartCoroutine(say( locals, 102 ));
 				} else {
 					
 					if ( 1 == locals[621] ) {
 						
-						yield return StartCoroutine(say( "Why you here again?" ));
+						yield return StartCoroutine(say( locals, 103 ));
 						yield return StartCoroutine(func_10b6());
 						//After apology
 						//goto label_04c2;
@@ -195,7 +195,7 @@ public class Conversation_4 : Conversation {
 						
 						if ( 0 == locals[621] ) {
 							
-							yield return StartCoroutine(say( "Nasty person, you still talk to me?" ));
+							yield return StartCoroutine(say( locals, 104 ));
 							Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
 						} // end if
 						
@@ -216,7 +216,7 @@ public class Conversation_4 : Conversation {
 				if ( 1 == locals[622] ) {
 					goto label_0374;
 				} else {
-				
+					
 					if ( 2 == locals[622] ) {
 						goto label_041c;
 					} else {
@@ -245,7 +245,7 @@ public class Conversation_4 : Conversation {
 												yield return StartCoroutine (ResumeTopic(locals));
 											} else {
 												
-												yield return StartCoroutine(say( "I no feel like talking to you." ));
+												yield return StartCoroutine(say( locals, 105 ));
 												Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 												
 												yield return StartCoroutine(label_0d72(locals));
@@ -262,9 +262,9 @@ public class Conversation_4 : Conversation {
 					}
 				}
 			}
-
-
-
+			
+			
+			
 			locals[511] = privateVariables[9];
 			locals[490] = 92;
 			locals[512] = privateVariables[10];
@@ -300,32 +300,32 @@ public class Conversation_4 : Conversation {
 			yield return StartCoroutine (label_0c01(locals));
 			
 			yield return StartCoroutine (label_0c5e(locals));
-
-
-
-
-
+			
+			
+			
+			
+			
 			/*******end block block to move***********/
-
-
-
-
-
-
-
-
-
-
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		} // end if
-
+		
 	label_whyyouhere:;
-
+		
 		if ( privateVariables[0] == 0 ) {
 			
-			yield return StartCoroutine(say( "Why you here?" ));
+			yield return StartCoroutine(say( locals, 003 ));
 		} else {
 			
-			yield return StartCoroutine(say( "You never tell me why you here." ));
+			yield return StartCoroutine(say( locals, 004 ));
 		} // end if
 		
 		locals[5] = 5;
@@ -375,11 +375,10 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[2] < 1 ) {
 			
 			privateVariables[2] = 1;
-			yield return StartCoroutine(say( "Hmm.  You out exploring?  You not look like Knight of Crux or Seer of Moon.  They go exploring. \n"
-			                                + " Looks like maybe you one of them Outcasts from near great door. But they weak-willed and cowardly, don't go exploring.  Where you from?" ));
+			yield return StartCoroutine(say( locals, 009 ));
 		} else {
 			
-			yield return StartCoroutine(say( "So where you from?" ));
+			yield return StartCoroutine(say( locals, 010 ));
 		} // end if
 		
 		locals[49] = 1;
@@ -434,11 +433,10 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[2] < 2 ) {
 			
 			privateVariables[2] = 2;
-			yield return StartCoroutine(say( "You been unjustly imprisoned, hah?  Sound like one of them Outcasts from above.  Them always complaining that crazy baron from other side send them here as punishment.  Okay with me.  They tasty. \n"
-			                                + " But you not one of them, you down here.  Who lock you up?" ));
+			yield return StartCoroutine(say( locals, 015 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Me ask who lock you up." ));
+			yield return StartCoroutine(say( locals, 016 ));
 		} // end if
 		
 		locals[72] = 17;
@@ -498,10 +496,10 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[2] < 3 ) {
 			
 			privateVariables[2] = 3;
-			yield return StartCoroutine(say( "Almric, hah?  Yeah, me heard that name from Outcasts.  Most of them locked up by that guy for some crime or other.  Why he lock you up?" ));
+			yield return StartCoroutine(say( locals, 021 ));
 		} else {
 			
-			yield return StartCoroutine(say( "So why Almric lock you up?" ));
+			yield return StartCoroutine(say( locals, 022 ));
 		} // end if
 		
 		locals[96] = 23;
@@ -538,10 +536,10 @@ public class Conversation_4 : Conversation {
 		
 		if ( privateVariables[5] == 0) {
 			
-			yield return StartCoroutine(say( "He lock you up just because he no like you?  That no sound like the Almric of Outcasts talk.  He accuse you of something, I bet.  What he accuse you of?" ));
+			yield return StartCoroutine(say( locals, 029 ));
 		} else {
 			
-			yield return StartCoroutine(say( "All right, what they accuse you of?" ));
+			yield return StartCoroutine(say( locals, 030 ));
 		} // end if
 		
 		locals[140] = 31;
@@ -584,7 +582,7 @@ public class Conversation_4 : Conversation {
 		
 	label_0622:;
 		
-		yield return StartCoroutine(say( "Me not know much about outside, but me know that Lord British not lock up prisoners here.  What you trying to pull, tell me that!" ));
+		yield return StartCoroutine(say( locals, 036 ));
 		locals[186] = 37;
 		locals[187] = 38;
 		locals[188] = 40;
@@ -602,7 +600,7 @@ public class Conversation_4 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Me no believe you.  You up to no good, try to hide something. Me no talk to you anymore." ));
+			yield return StartCoroutine(say( locals, 039 ));
 			locals[208] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -612,7 +610,7 @@ public class Conversation_4 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "Get lost!" ));
+			yield return StartCoroutine(say( locals, 041 ));
 			locals[209] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -624,7 +622,7 @@ public class Conversation_4 : Conversation {
 		
 	label_068e:;
 		
-		yield return StartCoroutine(say( "No wanna talk about being locked up, eh?  That okay, me wouldn't wanna talk about being locked up either.  But you look like smart @GS46.  Maybe you help me, eh?" ));
+		yield return StartCoroutine(say( locals, 042 ));
 		locals[210] = 43;
 		locals[211] = 44;
 		locals[212] = 0;
@@ -642,7 +640,7 @@ public class Conversation_4 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Okay.  Maybe you help later." ));
+			yield return StartCoroutine(say( locals, 045 ));
 			locals[232] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -663,10 +661,10 @@ public class Conversation_4 : Conversation {
 			
 			if ( privateVariables[13]==1 ) {
 				
-				yield return StartCoroutine(say( "You no look like Knight of Crux to me.  Not got stuff like them." ));
+				yield return StartCoroutine(say( locals, 046 ));
 			} else {
 				
-				yield return StartCoroutine(say( "First you Seer and now you Knight?" ));
+				yield return StartCoroutine(say( locals, 047 ));
 			} // end if
 			
 			locals[234] = 48;
@@ -721,10 +719,10 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[2] < 6 ) {
 			
 			privateVariables[2] = 6;
-			yield return StartCoroutine(say( "New knight, hah?  You must be on quest.  What kind of quest you on?" ));
+			yield return StartCoroutine(say( locals, 051 ));
 		} else {
 			
-			yield return StartCoroutine(say( "You got quest yet?" ));
+			yield return StartCoroutine(say( locals, 052 ));
 		} // end if
 		
 		locals[258] = 53;
@@ -752,7 +750,7 @@ public class Conversation_4 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "Hmm.  No quest, hah?  What kind of knight you be with no quest?" ));
+			yield return StartCoroutine(say( locals, 056 ));
 			locals[280] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -764,7 +762,7 @@ public class Conversation_4 : Conversation {
 		
 	label_07f6:;
 		
-		yield return StartCoroutine(say( "Gifts Cabirus was going to give out?  That long time ago, before we was even Ghouls.  Me not hear of them talmans since crazy wizard talking 'bout justice come and seal off tombs." ));
+		yield return StartCoroutine(say( locals, 057 ));
 		locals[281] = 58;
 		locals[282] = 59;
 		locals[283] = 0;
@@ -790,7 +788,7 @@ public class Conversation_4 : Conversation {
 		
 	label_0836:;
 		
-		yield return StartCoroutine(say( "Ghouls not always here.  After collapse, some people start to live in tombs, eat buried bodies there.  Many years, now we Ghouls, never worry about find food to eat." ));
+		yield return StartCoroutine(say( locals, 060 ));
 		locals[303] = 61;
 		locals[304] = 62;
 		locals[305] = 0;
@@ -817,14 +815,14 @@ public class Conversation_4 : Conversation {
 	label_0876:;
 		
 		privateVariables[12] = 0;
-		yield return StartCoroutine(say( "Me no think you were knight." ));
+		yield return StartCoroutine(say( locals, 063 ));
 		goto label_0374;
 		
 		//} // end if
 		
 	label_0880:;
 		
-		yield return StartCoroutine(say( "You no look like Seer of Moon to me.  You not wearing robes and talking funny like them." ));
+		yield return StartCoroutine(say( locals, 064 ));
 		locals[325] = 65;
 		locals[326] = 66;
 		locals[327] = 67;
@@ -872,7 +870,7 @@ public class Conversation_4 : Conversation {
 		
 	label_0900:;
 		
-		yield return StartCoroutine(say( "Hey!  Seers a bunch of stuck-up mages, no take new members.  What you think? You think me stupid or something?" ));
+		yield return StartCoroutine(say( locals, 068 ));
 		locals[349] = 69;
 		locals[350] = 70;
 		locals[351] = 72;
@@ -890,7 +888,7 @@ public class Conversation_4 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Yeah, me think you stupid too!  Goodbye!" ));
+			yield return StartCoroutine(say( locals, 071 ));
 			locals[371] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -923,12 +921,12 @@ public class Conversation_4 : Conversation {
 	label_098c:;
 		
 		privateVariables[13] = 0;
-		yield return StartCoroutine(say( "Me no think you were seer." ));
+		yield return StartCoroutine(say( locals, 073 ));
 		goto label_0374;
 		
 	label_0996:;
 		
-		yield return StartCoroutine(say( "Me fiend, hah?  You big tough @GS46, too good to talk to fiend like me?" ));
+		yield return StartCoroutine(say( locals, 074 ));
 		yield return StartCoroutine(func_0f6f());
 		locals[1] = func_0f6f_result;
 		locals[374] = locals[1];
@@ -952,7 +950,7 @@ public class Conversation_4 : Conversation {
 				
 			} // end if
 			
-			yield return StartCoroutine(say( "What, you think you someone important, that you can talk to me like that?  Me no talk to likes of you." ));
+			yield return StartCoroutine(say( locals, 075 ));
 			locals[376] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -968,21 +966,21 @@ public class Conversation_4 : Conversation {
 			yield return StartCoroutine(label_0adb(locals));
 			
 		} // end if
-
-
-
+		
+		
+		
 		//Start of moved block
-
-
+		
+		
 		
 		
 		
 		
 		//} // end switch
-
-//end Block moved from here.
-
-
+		
+		//end Block moved from here.
+		
+		
 		yield return StartCoroutine (label_0e48(locals));	
 		
 		yield return StartCoroutine (label_0e9e(locals));
@@ -1034,8 +1032,8 @@ public class Conversation_4 : Conversation {
 	} // end func
 	
 	IEnumerator func_0fe4() {
-		
-		yield return StartCoroutine(say( "Hmm.  So first you mean @GS46 and now you nice @GS46.  All right, me let you off this time.  No let it happen again." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 126 ));
 	} // end func
 	
 	IEnumerator func_0fef() {
@@ -1045,7 +1043,7 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[5] == 0) {
 			
 			privateVariables[5] = 1;
-			yield return StartCoroutine(say( "Hey, you no can leave in middle of conversation!" ));
+			yield return StartCoroutine(say( locals, 127 ));
 			locals[2] = 128;
 			locals[3] = 129;
 			locals[4] = 0;
@@ -1068,7 +1066,7 @@ public class Conversation_4 : Conversation {
 			
 		} 
 		
-		yield return StartCoroutine(say( "Fine. You be that way. Good riddance!" ));
+		yield return StartCoroutine(say( locals, 130 ));
 		locals[1] = 1;
 		goto label_1058;
 		
@@ -1120,7 +1118,7 @@ public class Conversation_4 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "I no want talk to you. You make me mad." ));
+		yield return StartCoroutine(say( locals, 133 ));
 		locals[1] = 134;
 		locals[2] = 135;
 		locals[3] = 0;
@@ -1137,7 +1135,7 @@ public class Conversation_4 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Fine!" ));
+			yield return StartCoroutine(say( locals, 136 ));
 			locals[23] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -1154,7 +1152,7 @@ public class Conversation_4 : Conversation {
 	
 	IEnumerator label_0a10(int[] locals)
 	{
-		yield return StartCoroutine(say( "Maybe me know where troll went.  Why should me tell you?" ));
+		yield return StartCoroutine(say( locals, 077 ));
 		privateVariables[9] = 1;
 		yield return StartCoroutine(func_1060());
 		locals[1] = func_1060_result;
@@ -1165,20 +1163,20 @@ public class Conversation_4 : Conversation {
 		} else {
 			
 			//if ( 1 == locals[378] ) {
-				
-				//goto label_0a3d;
-				yield return StartCoroutine (label_0a3d(locals));
-				
+			
+			//goto label_0a3d;
+			yield return StartCoroutine (label_0a3d(locals));
+			
 			//} // end if
 			
 		} // end if
-
+		
 	}
 	
 	
 	IEnumerator	label_09e3(int[] locals)
 	{
-		yield return StartCoroutine(say( "Me hear some rumors, maybe me got idea who troll work for.  Why should me tell you?" ));
+		yield return StartCoroutine(say( locals, 076 ));
 		privateVariables[10] = 1;
 		yield return StartCoroutine(func_1060());
 		locals[1] = func_1060_result;
@@ -1188,13 +1186,13 @@ public class Conversation_4 : Conversation {
 		} else {
 			
 			//if ( 1 == locals[377] ) {
-				
+			
 			//} else {
-				//goto label_0a10;
-				//yield return StartCoroutine(label_0a10(locals));
-				//goto label_0a3d;
-				yield return StartCoroutine (label_0a3d(locals));
-				
+			//goto label_0a10;
+			//yield return StartCoroutine(label_0a10(locals));
+			//goto label_0a3d;
+			yield return StartCoroutine (label_0a3d(locals));
+			
 			//} // end if
 			
 			
@@ -1208,14 +1206,10 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[6] == 0) {
 			
 			privateVariables[2] = 5;
-			yield return StartCoroutine(say( "Me leader of Ghouls.  Me got problem, maybe you solve. \n"
-			                                + " One my folk has Laughing Sickness, come from eat bad brain.  Me think someone give him bad brain on purpose. \n"
-			                                +" How me find out who?  Sick one no can talk, only laugh." ));
+			yield return StartCoroutine(say( locals, 081 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Okay, here problem again.  Listen careful this time!\n"
-			                                +" One my folk has Laughing Sickness, come from eat bad brain.  Me think someone give him bad brain on purpose. \n"
-			                                +" How me find out who?  Sick one can't talk, only laugh." ));
+			yield return StartCoroutine(say( locals, 082 ));
 		} // end if
 		
 		privateVariables[6] = 1;
@@ -1249,7 +1243,7 @@ public class Conversation_4 : Conversation {
 	
 	IEnumerator label_0a3d(int[] locals)
 	{
-		yield return StartCoroutine(say( "What me really want is your brain!" ));
+		yield return StartCoroutine(say( locals, 078 ));
 		locals[379] = 79;
 		locals[380] = 80;
 		locals[381] = 0;
@@ -1300,7 +1294,7 @@ public class Conversation_4 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "You real sneaky.  Me like!" ));
+		yield return StartCoroutine(say( locals, 087 ));
 		locals[467] = privateVariables[9];
 		locals[446] = 88;
 		locals[468] = privateVariables[10];
@@ -1327,7 +1321,7 @@ public class Conversation_4 : Conversation {
 			
 		case 90:
 			
-			yield return StartCoroutine(say( "Me try your trick.  Thanks!" ));
+			yield return StartCoroutine(say( locals, 091 ));
 			locals[489] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -1361,7 +1355,7 @@ public class Conversation_4 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "You smart!  That clever AND fair!  Not too often me hear of anyone fair in Abyss.  Last time was when crazy wizard guy was around talking about justice." ));
+		yield return StartCoroutine(say( locals, 108 ));
 		privateVariables[11] = 1;
 		locals[666] = privateVariables[9];
 		locals[645] = 109;
@@ -1411,7 +1405,7 @@ public class Conversation_4 : Conversation {
 	
 	IEnumerator label_0c01(int[] locals)
 	{
-		yield return StartCoroutine(say( "Me follow troll down stairs east of center room.  Hear Seers say lair of weird mage down one more set of stairs.  Me think troll going to weird wizard with girl.  Me not know why." ));
+		yield return StartCoroutine(say( locals, 095 ));
 		locals[554] = privateVariables[11];
 		locals[533] = 96;
 		locals[555] = 1;
@@ -1444,7 +1438,7 @@ public class Conversation_4 : Conversation {
 	
 	IEnumerator label_0c5e(int[] locals)
 	{
-		yield return StartCoroutine(say( "Me think troll work for weird mage who live just below home of Seers.  Me follow troll down eastern stair, hear Seers talk about weird mage.  Troll take girl there. Me not know why." ));
+		yield return StartCoroutine(say( locals, 098 ));
 		locals[598] = privateVariables[11];
 		locals[577] = 99;
 		locals[599] = 1;
@@ -1478,7 +1472,7 @@ public class Conversation_4 : Conversation {
 	{
 		privateVariables[4] = 1;
 		privateVariables[2] = 7;
-		yield return StartCoroutine(say( "Ghouls used to live in tombs, lots of food there. After big collapse, crazy wizard come here,  talking 'bout justice. He throw us out of tombs.  Said ghouls no care about justice so we no could live there anymore. He put part of sword in tombs too, I think." ));
+		yield return StartCoroutine(say( locals, 113 ));
 		locals[689] = 114;
 		locals[690] = 115;
 		locals[691] = 0;
@@ -1496,7 +1490,7 @@ public class Conversation_4 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "G'bye." ));
+			yield return StartCoroutine(say( locals, 116 ));
 			locals[711] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -1511,7 +1505,7 @@ public class Conversation_4 : Conversation {
 	IEnumerator label_0e9e(int[]locals)
 	{
 		privateVariables[2] = 8;
-		yield return StartCoroutine(say( "Tombs north and east from here.  Long time since me there. Entrance used to be left of big eastern corridor, but wizard hid it and we no can find now." ));
+		yield return StartCoroutine(say( locals, 117 ));
 		locals[712] = 118;
 		locals[713] = 0;
 		//locals[733] = babl_menu( 0, locals[712] );
@@ -1528,7 +1522,7 @@ public class Conversation_4 : Conversation {
 		
 		//} // end if
 		
-
+		
 	}
 	
 	IEnumerator label_0514(int[] locals)
@@ -1536,10 +1530,10 @@ public class Conversation_4 : Conversation {
 		if ( privateVariables[2] < 4 ) {
 			
 			privateVariables[2] = 4;
-			yield return StartCoroutine(say( "Hey, me hear something about that.  Big troll was dragging around girl a while ago.  Heard she was baron's daughter." ));
+			yield return StartCoroutine(say( locals, 025 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Me see big troll carrying young girl a while ago.  Heard she daughter of baron who lock up Outcasts." ));
+			yield return StartCoroutine(say( locals, 026 ));
 		} // end if
 		
 		privateVariables[8] = 1;
@@ -1571,7 +1565,7 @@ public class Conversation_4 : Conversation {
 	
 	IEnumerator label_05e2(int[] locals)
 	{
-		yield return StartCoroutine(say( "Me not know for sure. Maybe him want to eat her. Maybe him work for someone else." ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[164] = 34;
 		locals[165] = 35;
 		locals[166] = 0;
@@ -1595,7 +1589,7 @@ public class Conversation_4 : Conversation {
 			
 		} // end switch
 	}
-
+	
 	IEnumerator ResumeTopic(int[] locals)
 	{
 		locals[756] = privateVariables[6];
@@ -1643,5 +1637,5 @@ public class Conversation_4 : Conversation {
 			
 		} // end switch
 	}
-
+	
 }

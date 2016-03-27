@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class Conversation_143 : Conversation {
-
+	
 	//conversation #143
 	//string block 0x0e8f, name Biden
-			
+	
 	int func_04db_result;
 	int func_074a_result;
 	int func_06c9_result;
 	int func_082f_result;
 	int func_07d6_result;
 	int func_078b_result;
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3727);
 		privateVariables[1] = 0;
@@ -161,10 +161,10 @@ public class Conversation_143 : Conversation {
 			
 			npc.npc_goal = 7;
 		} // end if
-
+		
 		locals[1] = 32;
 		privateVariables[3] = get_quest( 1, locals[1] );
-
+		
 		if ( privateVariables[2] == 1) {
 			
 			if ( npc.npc_goal == 1 ) {
@@ -225,7 +225,7 @@ public class Conversation_143 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine (say( "Hast thou managed to defeat the villain Rodrick?" ));
+		yield return StartCoroutine (say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 4;
 		locals[3] = 6;
@@ -237,17 +237,17 @@ public class Conversation_143 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine (say( "He lives in the north part of the banquet hall, in the area with the dark marbled walls  and the sloped halls.  Thou shalt find him there!/m" ));
+			yield return StartCoroutine (say( locals, 003 ));
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine (say( "He is a tough opponent, and quite strong. Find advantageous terrain and move often to keep him from simply overpowering thee.  Watch out for his slash.  Good luck to thee./m" ));
+			yield return StartCoroutine (say( locals, 005 ));
 			break;
 			
 		case 3:
 			
-			yield return StartCoroutine (say( "I thought I heard him in the distance just a moment ago.  Perhaps thou didst mistake someone else for him./m" ));
+			yield return StartCoroutine (say( locals, 007 ));
 			break;
 			
 		} // end switch
@@ -262,13 +262,13 @@ public class Conversation_143 : Conversation {
 		locals[2] = 8;
 		locals[3] = 9;		
 		locals[1] = sex( 2, locals[3], locals[2] );
-
+		
 		if ( privateVariables[3] > 1 ) {
 			
-			yield return StartCoroutine (say( "@SS1, Thou art a member of my order.  Thou too dost strive to uphold the ideals of honor espoused by our order.  Thou dost understand the virtues, and understand the ways of knighthood.  Please listen to my tale." ));
+			yield return StartCoroutine (say( locals, 010 ));
 		} else {
 			
-			yield return StartCoroutine (say( "Good @SS1, thou dost seem valorous and just, well equipped for the grave peril of the Abyss, and ready to brave the dangers of this area.  Please listen to my tale." ));
+			yield return StartCoroutine (say( locals, 011 ));
 		} // end if
 		
 		locals[4] = 12;
@@ -282,7 +282,7 @@ public class Conversation_143 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine (say( "'Tis not a happy story, @SS1, but I shall tell it all the same./m" ));
+			yield return StartCoroutine (say( locals, 013 ));
 			break;
 			
 		case 2:
@@ -297,8 +297,8 @@ public class Conversation_143 : Conversation {
 		} // end switch
 		
 		privateVariables[5] = 1;
-		yield return StartCoroutine (say( "Sir Rodrick was once a member of our order, but abandoned the principles of our order and now calls himself the Chaos Knight, terrorizing the entire northern area.  Since to attack one with many would be dishonorable, our leader Dorna picked me to defeat him in single combat./m" ));
-		yield return StartCoroutine (say( "When I reached the old banquet hall to the north, I was suddenly attacked by Rodrick, who leaped from a ledge above me and took me off guard.  He attacked relentlessly, and although I hit him several times, my own blows did little to slow him or curb his apparent anger.  He taunted me continuously as we fought, and would not listen as I attempted to reason with him./m" ));
+		yield return StartCoroutine (say( locals, 016 ));
+		yield return StartCoroutine (say( locals, 017 ));
 		locals[26] = 18;
 		locals[27] = 19;
 		locals[28] = 0;
@@ -317,8 +317,8 @@ public class Conversation_143 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine (say( "After several minutes I was bleeding from several wounds and thinking my time was up.  In desperation, I flung my sword at him.  He blocked it easily, but the distraction allowed me to run from him./m" ));
-		yield return StartCoroutine (say( "So that is my story.  I can not return to my home until I have eliminated Rodrick and restored our order's honor, but it will be some time now before I am capable of fighting.  So I wait here, far from the Trolls and other pests, gathering my strength before I head off again." ));
+		yield return StartCoroutine (say( locals, 020 ));
+		yield return StartCoroutine (say( locals, 021 ));
 		locals[48] = 22;
 		locals[49] = 23;
 		locals[50] = 25;
@@ -334,12 +334,12 @@ public class Conversation_143 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine (say( "My honor is my life, and he has stolen it by defaming our order and defeating me./m" ));
+			yield return StartCoroutine (say( locals, 024 ));
 			break;
 			
 		case 3:
 			
-			yield return StartCoroutine (say( "I must defeat him to restore my honor and that of my order, it is true, but a true knight approaches battles with strength and wits, and even with my wits it is clear that I am not now ready to fight him./m" ));
+			yield return StartCoroutine (say( locals, 026 ));
 			break;
 			
 		} // end switch
@@ -348,15 +348,16 @@ public class Conversation_143 : Conversation {
 	} // end func
 	
 	IEnumerator func_04a8() {
+		int[] locals = new int[1];
 		yield return StartCoroutine(func_04db());
 		if ( func_04db_result == 0 ) {
 			
 			if ( npc.npc_attitude > 1 ) {
 				
-				yield return StartCoroutine (say( "Please return, and help me." ));
+				yield return StartCoroutine (say( locals, 027 ));
 			} else {
 				
-				yield return StartCoroutine (say( "I am quite disappointed with thy lack of compassion." ));
+				yield return StartCoroutine (say( locals, 028 ));
 			} // end if
 			
 			if ( npc.npc_attitude > 0 ) {
@@ -378,8 +379,8 @@ public class Conversation_143 : Conversation {
 		locals[3] = 29;
 		locals[4] = 30;		
 		locals[2] = sex( 2, locals[4], locals[3] );
-
-		yield return StartCoroutine (say( "Noble @SS2, I implore thee to hear it, for it is of great import, and dire consequences arise from it." ));
+		
+		yield return StartCoroutine (say( locals, 031 ));
 		locals[5] = 32;
 		locals[6] = 33;
 		locals[7] = 0;
@@ -406,7 +407,7 @@ public class Conversation_143 : Conversation {
 		
 	label_0547:;
 		
-	
+		
 		
 		//return locals[1];
 		func_04db_result=locals[1];
@@ -417,7 +418,7 @@ public class Conversation_143 : Conversation {
 		//int locals[45];
 		int[] locals=new int[46];
 		
-		yield return StartCoroutine (say( "I'd give the rest of my right arm for a chance to take that rogue on again.  He'd find out what sort of Knight I am." ));
+		yield return StartCoroutine (say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 37;
 		locals[3] = 39;
@@ -429,22 +430,22 @@ public class Conversation_143 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine (say( "Thou art certainly right." ));
+			yield return StartCoroutine (say( locals, 036 ));
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine (say( "That would be quite honorable of thee." ));
+			yield return StartCoroutine (say( locals, 038 ));
 			break;
 			
 		case 3:
 			
-			yield return StartCoroutine (say( "I should get well first, for I would not wish to be a burden on thee." ));
+			yield return StartCoroutine (say( locals, 040 ));
 			break;
 			
 		} // end switch
 		
-		yield return StartCoroutine (say( "If thou dost meet the rogue and defeat him, it would not only bring great honor to thee but also perhaps save my life." ));
+		yield return StartCoroutine (say( locals, 041 ));
 		locals[23] = 42;
 		locals[24] = 43;
 		locals[25] = 0;
@@ -481,11 +482,10 @@ public class Conversation_143 : Conversation {
 		
 		if ( privateVariables[6] == 0 ) {
 			
-			yield return StartCoroutine (say( "@GS8!  I am pleased beyond measure to see thee again.  I have told all here of thy exploits and they are as thankful as I am. \n"
-			   + " Ah, by the way, as I made my way home, I happened across this scroll, and thought it might be useful to thee in thy travels.  Please take it as a token of my thanks." ));
+			yield return StartCoroutine (say( locals, 044 ));
 			locals[2] = 314;
 			locals[1] = do_inv_create( 1, locals[2] )+4 ; //Plus 4 for for x_obj
-
+			
 			locals[3] = 1;
 			locals[4] = -1;
 			locals[5] = -1;
@@ -499,13 +499,13 @@ public class Conversation_143 : Conversation {
 			locals[11] = 314;
 			if ( take_from_npc( 1, locals[11] ) == 2 ) {
 				
-				yield return StartCoroutine (say( "/mI will leave it here for thee." ));
+				yield return StartCoroutine (say( locals, 045 ));
 			} // end if
 			
 			privateVariables[6] = 1;
 		} else {
 			
-			yield return StartCoroutine (say( "A hearty greeting to thee, @GS8.  It is good to see that thou dost allow precious time to converse with thy old friends.  Still, perhaps it is time for thee to travel on and find new challenges to overcome." ));
+			yield return StartCoroutine (say( locals, 046 ));
 		} // end if
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -513,8 +513,8 @@ public class Conversation_143 : Conversation {
 	} // end func
 	
 	IEnumerator func_0692() {
-		
-		yield return StartCoroutine (say( "A pleasure to meet thee again, @GS8.  I've no time to talk at the moment, as I must return home to rejoin my companions. I would be most pleased to talk with thee once I am there." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine (say( locals, 047 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00e0();//endconvo
@@ -526,7 +526,7 @@ public class Conversation_143 : Conversation {
 		//int locals[1];
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine (say( "Thou hast redeemed my honor by defeating Rodrick!  I thank thee from the depths of my soul.  Thou art surely as valorous as any of our order.  I can now return home to my companions without regret." ));
+		yield return StartCoroutine (say( locals, 048 ));
 		privateVariables[2] = 1;
 		npc.npc_xhome = 3;
 		npc.npc_yhome = 16;
@@ -591,23 +591,23 @@ public class Conversation_143 : Conversation {
 		//int locals[2];
 		int[]locals = new int[3];
 		
-		yield return StartCoroutine (say( "Who art thou?" ));
+		yield return StartCoroutine (say( locals, 049 ));
 		locals[2] = 1;
 		yield return StartCoroutine(func_082f( locals[2] ));
 		if ( func_082f_result==1 ) {
 			
 			//if ( param1[0]play_hunger ) {
 			if ( param1==1 ) {
-				yield return StartCoroutine (say( "I am @GS25, a member of the Order of the Knights of the Crux Ansata." ));
+				yield return StartCoroutine (say( locals, 050 ));
 			} else {
 				
-				yield return StartCoroutine (say( "I belong to the Order of the Crux Ansata." ));
+				yield return StartCoroutine (say( locals, 051 ));
 			} // end if
 			
 			locals[1] = 1;
 		} else {
 			
-			yield return StartCoroutine (say( "My name is mine own as well, but I am proud to share it with others who honor it.  Those who are not willing, well, I prefer that they depart." ));
+			yield return StartCoroutine (say( locals, 052 ));
 			locals[1] = 0;
 		} // end if
 		
@@ -622,13 +622,13 @@ public class Conversation_143 : Conversation {
 		locals[3] = 53;
 		locals[4] = 54;
 		locals[2] = sex( 2, locals[4], locals[3] );
-
-		yield return StartCoroutine (say( "Greetings, @SS2.  What is thy name?" ));
+		
+		yield return StartCoroutine (say( locals, 055 ));
 		locals[5] = 0;
 		func_082f( locals[5] );
 		//if ( privateVariables[4] && param1[0]play_hunger ) {
 		if ( (privateVariables[4] == 1) && (param1 == 1)) {
-			yield return StartCoroutine (say( "I am @GS25, and pleased to make thy acquaintance." ));
+			yield return StartCoroutine (say( locals, 056 ));
 		} // end if
 		
 		locals[1] = 1;
@@ -645,11 +645,11 @@ public class Conversation_143 : Conversation {
 		//int locals[1];
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine (say( "It is a great honor to speak with thee, @GS8." ));
+		yield return StartCoroutine (say( locals, 057 ));
 		privateVariables[4] = 1;
 		//if ( privateVariables[4] && param1[0]play_hunger ) {
 		if ( (privateVariables[4] == 1 )&& (param1==1)) {
-			yield return StartCoroutine (say( "I am @GS25, and pleased to make the acquaintance of one who brings such honor to our order." ));
+			yield return StartCoroutine (say( locals, 058 ));
 		} // end if
 		
 		locals[1] = 1;
@@ -675,21 +675,21 @@ public class Conversation_143 : Conversation {
 		{
 			locals[1]=0;
 		}
-		yield return StartCoroutine (say( "Excuse me, what was thy name again?" ));
+		yield return StartCoroutine (say( locals, 059 ));
 		yield return StartCoroutine( func_082f( locals[1] ));
 		if ( func_082f_result == 1 ) {
 			
 			//if ( param1[0]play_hunger ) {
 			if ( param1==1 ) {
-				yield return StartCoroutine (say( "Ah.  I am @GS25." ));
+				yield return StartCoroutine (say( locals, 060 ));
 			} else {
 				
-				yield return StartCoroutine (say( "I am of the Order of the Crux Ansata." ));
+				yield return StartCoroutine (say( locals, 061 ));
 			} // end if
 			
 		} else {
 			
-			yield return StartCoroutine (say( "Ah, I must not have missed thy name - thou must have witheld it.  Well, privacy must be respected, I suppose,  but it is difficult to bring honor to a name that is secret." ));
+			yield return StartCoroutine (say( locals, 062 ));
 		} // end if
 		
 	} // end func
@@ -734,7 +734,7 @@ public class Conversation_143 : Conversation {
 		
 	label_08b1:;
 		
-
+		
 		
 		//return locals[1];
 		func_082f_result=locals[1];
@@ -747,13 +747,13 @@ public class Conversation_143 : Conversation {
 		locals[2] = 66;
 		locals[3] = 67;
 		locals[1] = sex( 2, locals[3], locals[2] );
-
+		
 		if ( privateVariables[4]==1 ) {
 			
-			yield return StartCoroutine (say( "Can I help thee, @GS8?" ));
+			yield return StartCoroutine (say( locals, 068 ));
 		} else {
 			
-			yield return StartCoroutine (say( "Can I help thee, @SS1?" ));
+			yield return StartCoroutine (say( locals, 069 ));
 		} // end if
 		
 		locals[4] = 70;
@@ -766,12 +766,12 @@ public class Conversation_143 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine (say( "He lives in the south of our domain." ));
+			yield return StartCoroutine (say( locals, 071 ));
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine (say( "Most have reverted to feral behavior, but some few still adhere to the virtues." ));
+			yield return StartCoroutine (say( locals, 073 ));
 			break;
 			
 		} // end switch
@@ -812,5 +812,5 @@ public class Conversation_143 : Conversation {
 		func_00b1( 21 );//endconvo
 		yield break;
 	} // end func
-
+	
 }

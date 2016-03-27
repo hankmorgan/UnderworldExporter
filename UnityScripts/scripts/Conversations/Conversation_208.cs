@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Conversation_208 : Conversation {
-
+	
 	//conversation #208
 	//	string block 0x0ed0, name Cardon
 	public int[] global= new int[1];	
@@ -72,13 +72,13 @@ public class Conversation_208 : Conversation {
 		npc.npc_attitude = 2;
 		func_0012();
 	} // end func
-
+	
 	void func_00d1() {
 		
 		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
-
+	
 	void func_00e0() {
 		
 		func_0012();
@@ -154,7 +154,7 @@ public class Conversation_208 : Conversation {
 			yield return StartCoroutine(func_0566());
 		} // end if
 		
-		yield return StartCoroutine(say( "Who art thou?  What >cough< what dost thou want?" ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 0;
@@ -179,7 +179,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Canst heal my wounds?  Or >cough< hast thou any port?" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -230,11 +230,11 @@ public class Conversation_208 : Conversation {
 			locals[16] = 1;
 			//give_to_npc( 2, locals[11], locals[16] );
 			give_to_npc(2,locals,11,1);
-			yield return StartCoroutine(say( "I thank thee greatly!" ));
+			yield return StartCoroutine(say( locals, 007 ));
 			yield return StartCoroutine(func_03c5());
 		} else {
 			
-			yield return StartCoroutine(say( "What, dost thou mock me?  Begone with ye!" ));
+			yield return StartCoroutine(say( locals, 008 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 			func_00d1();
 			yield break;
@@ -243,8 +243,8 @@ public class Conversation_208 : Conversation {
 	} // end func
 	
 	IEnumerator func_03b8() {
-		
-		yield return StartCoroutine(say( "At least thou seemest in better condition than I." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 009 ));
 		yield return StartCoroutine(func_03c5());
 	} // end func
 	
@@ -252,7 +252,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Here is some advice for thee: Beware, for death is everywhere!" ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[1] = 11;
 		locals[2] = 12;
 		locals[3] = 0;
@@ -277,7 +277,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I'm here to rescue my brother. He's in the prisons." ));
+		yield return StartCoroutine(say( locals, 013 ));
 		locals[1] = 14;
 		locals[2] = 15;
 		locals[3] = 0;
@@ -302,7 +302,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Several cells lie to the north and west of here.  He rots in one of those." ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 0;
@@ -327,7 +327,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "He is in the clutches of the evil wizard who dominates this area.  My brother came to explore this place months ago and I have not heard from him since.  I believe he has run afoul of this vile and violent mage." ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 0;
@@ -352,7 +352,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Rumor has it that he is the reason no one can cast spells on this level. Also, he uses monsters as henchmen to guard the way to his lair.  But I have figured out how to get by these guards!" ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[1] = 23;
 		locals[2] = 24;
 		locals[3] = 0;
@@ -378,7 +378,7 @@ public class Conversation_208 : Conversation {
 		int[] locals = new int[23];
 		
 		global[0] = 1;
-		yield return StartCoroutine(say( "A medallion of passage!  I had one but I lost it while in battle in the haunted mines to the southeast. Now I am too weak to recover it, and just wish to return home. But perhaps thou..." ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -390,10 +390,10 @@ public class Conversation_208 : Conversation {
 	} // end func
 	
 	IEnumerator func_0566() {
-		
+		int[] locals = new int[1];
 		if ( global[0] == 0) {
 			
-			yield return StartCoroutine(say( "Thou dost not wish to hear all I would tell thee?  Well, hear this, for it may prevent thee from ending up like I have.  A medallion of passage is needed to pass by the guards. It lies in the haunted mines in the southeast.  Now go, if thou art determined to brave the perils of these caves! /m" ));
+			yield return StartCoroutine(say( locals, 027));
 			remove_talker( 0 );
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} // end if
@@ -405,7 +405,7 @@ public class Conversation_208 : Conversation {
 		int[] locals = new int[23];
 		
 		remove_talker( 0 );
-		yield return StartCoroutine(say( "Is that so?  Well, farewell, then.  I will rejoin my comrades up above." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[1] = 29;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -488,7 +488,7 @@ public class Conversation_208 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 0;
@@ -520,5 +520,5 @@ public class Conversation_208 : Conversation {
 	} // end func
 
 */
-
+	
 }

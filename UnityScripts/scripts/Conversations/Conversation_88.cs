@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_88 : Conversation {
-
+	
 	//conversation #88
 	//	string block 0x0e58, name Brawnclan
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3672);
@@ -153,12 +153,12 @@ public class Conversation_88 : Conversation {
 		
 		privateVariables[3] = 1;
 		if ( privateVariables[0] == 1) {
-			yield return StartCoroutine(say( "A hearty greetings to ye - it is good to meet again.  What can I do for ye now?" ));
+			yield return StartCoroutine(say( locals, 015 ));
 			goto label_0319;
 		} else {
 			
 			privateVariables[2] = 1;
-			yield return StartCoroutine(say( "It's been a long time since we of the Folk have seen one such as ye.  Be ye an outcast from above, or an outsider?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -187,91 +187,90 @@ public class Conversation_88 : Conversation {
 				break;
 				
 			} // end switch
-
+			
 		} // end if///moved this here
-
-		label_0307:;
+		
+	label_0307:;
+		
+		yield return StartCoroutine(say( locals, 005 ));
+		goto label_0319;
+		
+	label_030c:;
+		
+		privateVariables[2] = 0;
+		yield return StartCoroutine(say( locals, 006 ));
+		goto label_0319;
+		
+	label_0316:;
+		
+		yield return StartCoroutine(say( locals, 007 ));
+		
+	label_0319:;
+		
+		locals[44] = privateVariables[2];
+		locals[23] = 8;
+		locals[45] = 1;
+		locals[24] = 9;
+		locals[46] = privateVariables[3];
+		locals[25] = 10;
+		locals[47] = 1;
+		locals[26] = 11;
+		locals[27] = 0;
+		//locals[65] = babl_fmenu( 0, locals[23], locals[44] );
+		yield return StartCoroutine(babl_fmenu (0,locals,23,44));
+		locals[65] = PlayerAnswer;
+		
+		switch ( locals[65] ) {
 			
-		yield return StartCoroutine(say( "Aye, so all of ye say.  Well, it's not me place to cast judgment upon ye.  Behave yourself properly when dealing with the Mountainfolk, that's all we ask.  What else ye do is your own business.  Now, what is it that ye be wanting?" ));
-			goto label_0319;
+		case 8:
 			
-		label_030c:;
+			goto label_030c;
 			
-			privateVariables[2] = 0;
-		yield return StartCoroutine(say( "Aye, I heard of such a thing.  The Abyss isn't a safe place these days, I tell ye.  Perhaps some other of the Folk might know more about that.  Is there anything else I can help ye with?" ));
-			goto label_0319;
+			break;
 			
-		label_0316:;
+		case 9:
 			
-		yield return StartCoroutine(say( "Is that so?  Well, the Abyss is nae a place to be searching for fortune. Just a shadow of itself, it is nowadays.  Yet of all the Abyss, we be the ones who still know what fortune is and what to do with it.  Goldthirst, our king, has a hoard to rival any in all of Britannia. \n"
-			    + " Now, is there anything I can do for ye?" ));
-
-		label_0319:;
+			goto label_03cd;
 			
-			locals[44] = privateVariables[2];
-			locals[23] = 8;
-			locals[45] = 1;
-			locals[24] = 9;
-			locals[46] = privateVariables[3];
-			locals[25] = 10;
-			locals[47] = 1;
-			locals[26] = 11;
-			locals[27] = 0;
-			//locals[65] = babl_fmenu( 0, locals[23], locals[44] );
-			yield return StartCoroutine(babl_fmenu (0,locals,23,44));
-			locals[65] = PlayerAnswer;
-
-			switch ( locals[65] ) {
-				
-			case 8:
-				
-				goto label_030c;
-				
-				break;
-				
-			case 9:
-				
-				goto label_03cd;
-				
-				break;
-				
-			case 10:
-				
-				goto label_03a3;
-				
-				break;
-				
-			case 11:
-				Time.timeScale =SlomoTime;
-				yield return new WaitForSeconds(WaitTime);
-				func_00e0();
-				yield break;
-				break;
-				
-			} // end switch
+			break;
 			
-		label_03a3:;
+		case 10:
 			
-			privateVariables[3] = 0;
-			locals[66] = 13;
-			locals[67] = 30;
-			locals[68] = 0;
-			gronk_door( 3, locals[68], locals[67], locals[66] );
-		yield return StartCoroutine(say( "Very well, ye seem a reasonable sort.  Just mind your manners and ye'll nae have trouble with the Folk.  Now, before ye meet the rest of the clan, is there anything else ye'll be wanting?" ));
-			goto label_0319;
+			goto label_03a3;
 			
-		label_03cd:;
+			break;
 			
-			yield return StartCoroutine(say( "Very well, let's see what ye've found in your adventures." ));
-			yield return StartCoroutine(func_03df());
-			yield return StartCoroutine(say( "Farewell." ));
+		case 11:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
+			break;
+			
+		} // end switch
+		
+	label_03a3:;
+		
+		privateVariables[3] = 0;
+		locals[66] = 13;
+		locals[67] = 30;
+		locals[68] = 0;
+		gronk_door( 3, locals[68], locals[67], locals[66] );
+		yield return StartCoroutine(say( locals, 012 ));
+		goto label_0319;
+		
+	label_03cd:;
+		
+		yield return StartCoroutine(say( locals, 013 ));
+		yield return StartCoroutine(func_03df());
+		yield return StartCoroutine(say( locals, 014 ));
+		Time.timeScale =SlomoTime;
+		yield return new WaitForSeconds(WaitTime);
+		func_00e0();
+		yield break;
 		//} // end if
 		
-		//say( "A hearty greetings to ye - it is good to meet again.  What can I do for ye now?" );
+		//say( locals, 015 );
 		//goto label_0319;
 		
 	} // end func
@@ -342,10 +341,10 @@ public class Conversation_88 : Conversation {
 		locals[13] = 23;
 		locals[14] = 24;
 		locals[15] = 25;
-
+		
 		yield return StartCoroutine (do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ));
 		if (PlayerAnswer==1){
-		//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) ) {
+			//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) ) {
 			
 			privateVariables[1] = 1;
 		} // end if
@@ -357,7 +356,7 @@ public class Conversation_88 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 0;
@@ -380,7 +379,7 @@ public class Conversation_88 : Conversation {
 		
 		locals[23] = 29;
 		locals[24] = 30;
-//		if ( do_demand( 2, locals[24], locals[23] ) ) {
+		//		if ( do_demand( 2, locals[24], locals[23] ) ) {
 		yield return StartCoroutine (do_demand( 2, locals[24], locals[23] ));
 		if (PlayerAnswer==1){
 			
@@ -393,6 +392,6 @@ public class Conversation_88 : Conversation {
 		} // end if
 		
 	} // end func
-
-
+	
+	
 }

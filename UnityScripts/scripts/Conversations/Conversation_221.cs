@@ -4,7 +4,7 @@ using System.Collections;
 public class Conversation_221 : Conversation {
 	//conversation #221
 	//	string block 0x0edd, name imp
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3805);
 		privateVariables[1] = 0;
@@ -169,10 +169,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Searching for something are we?\n"
-		                              +  " Need to find a path?\n"
-		                              +  " Slip-up and you'll be wormfood. \n"
-		                              +  " Victim of Tyball's wrath." ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 4;
@@ -203,10 +200,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[45];
 		
-		yield return StartCoroutine(say( "A thief I am, a thief I'll be. \n"
-		                               + " With a very great prize. \n"
-		                                +" Have something you want, something you need. \n"
-		                               + " It'll open up your eyes." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		privateVariables[2] = 1;
 		if ( privateVariables[4] == 0 ) {
 			
@@ -240,9 +234,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[23] = 10;
@@ -269,10 +263,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[45];
 		
-		yield return StartCoroutine(say( "The evil one, very bad. \n"
-		                               + " Here to hurt us all. \n"
-		                               + " We'll give you a gift if you're wise enough. \n"
-		                               + " Just to see him fall." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		privateVariables[3] = 1;
 		if ( privateVariables[2] == 0 ) {
 			
@@ -300,9 +291,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[23] = 16;
@@ -329,10 +320,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[67];
 		
-		yield return StartCoroutine(say( "A crown it is, that's what we offer. \n"
-		                               + " The only thing for you in this room. \n"
-		                               + " The rest of the treasure is not yours to have. \n"
-		                               + " To steal it will mean your doom." ));
+		yield return StartCoroutine(say( locals, 018 ));
 		privateVariables[4] = 1;
 		if ( (privateVariables[3] == 0) && (privateVariables[5] == 0) ) {
 			
@@ -366,9 +354,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		if ( privateVariables[3] == 0 ) {
@@ -397,9 +385,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		}// else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[45] = 26;
@@ -428,10 +416,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[67];
 		
-		yield return StartCoroutine(say( "A maze it is, you'll want to get through. \n"
-		                               + " Though many a fool it did swallow. \n"
-		                              +  " What I have will enhance your eyes. \n"
-		                              +  " And show you the yellow to follow." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		privateVariables[5] = 1;
 		if ( privateVariables[4] == 0 ) {
 			
@@ -459,9 +444,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
+		
 		//	break;
-			
+		
 		//} // end switch
 		
 		if ( privateVariables[8] == 0 ) {
@@ -484,9 +469,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[45] = 34;
@@ -515,10 +500,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Our possessions have a magic upon them. \n"
-		                               + " To protect them from those who would take. \n"
-		                               + " Touching the wrong thing could mean instant death. \n"
-		                               + " Or at the least - a headache." ));
+		yield return StartCoroutine(say( locals, 036 ));
 		privateVariables[6] = 1;
 		locals[1] = 37;
 		locals[2] = 38;
@@ -550,10 +532,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "A maze it is, you'll want to get through. \n"
-		                                +" Though many a fool it did swallow. \n"
-		                                +" What I have will enhance your eyes. \n"
-		                                +" And show you the yellow to follow." ));
+		yield return StartCoroutine(say( locals, 040 ));
 		privateVariables[7] = 1;
 		locals[1] = 41;
 		locals[2] = 0;
@@ -569,10 +548,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[45];
 		
-		yield return StartCoroutine(say( "That's the question, is it not?\n"
-		                               + " And one you'll have to figure. \n"
-		                               + " Its one eye to help you is not bloodshot. \n"
-		                               + " And its size is smaller, not bigger." ));
+		yield return StartCoroutine(say( locals, 042 ));
 		privateVariables[9] = 1;
 		if ( privateVariables[10] == 0 ) {
 			
@@ -594,9 +570,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[23] = 45;
@@ -613,10 +589,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[45];
 		
-		yield return StartCoroutine(say( "The evil one, very bad. \n"
-		                               + " Here to hurt us all. \n"
-		                               + " We'll give you a gift if you're wise enough. \n"
-		                               + " Just to see him fall." ));
+		yield return StartCoroutine(say( locals, 046 ));
 		privateVariables[8] = 1;
 		if ( privateVariables[2] == 0 ) {
 			
@@ -638,9 +611,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[23] = 49;
@@ -667,10 +640,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "A thief I told you, is what I am. \n"
-		                               + " And a grand theft it was, I suppose. \n"
-		                               + " Heisted the crown, slick as can be. \n"
-		                               + " Right from under the evil one's nose." ));
+		yield return StartCoroutine(say( locals, 051 ));
 		privateVariables[11] = 1;
 		locals[1] = 52;
 		locals[2] = 53;
@@ -696,10 +666,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[67];
 		
-		yield return StartCoroutine(say( "Take just what you need. \n"
-		                               + " Some items are cursed. \n"
-		                               + " The golems guard others. \n"
-		                               + " So much the worse." ));
+		yield return StartCoroutine(say( locals, 054 ));
 		privateVariables[10] = 1;
 		if ( privateVariables[13] == 1 ) {
 			
@@ -735,9 +702,9 @@ public class Conversation_221 : Conversation {
 			} // end if
 			
 		} //else {
-			
-			//break;
-			
+		
+		//break;
+		
 		//} // end switch
 		
 		locals[45] = 58;
@@ -756,10 +723,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Can't just give it to anyone. \n"
-		                               + " My clues you must heed. \n"
-		                               + " Prove yourself worthy. \n"
-		                               + " And control your greed." ));
+		yield return StartCoroutine(say( locals, 059 ));
 		privateVariables[13] = 1;
 		locals[1] = 60;
 		locals[2] = 0;
@@ -782,10 +746,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "That's all I can tell you. \n"
-		                              +  " It should be enough. \n"
-		                              +  " Its really quite simple. \n"
-		                              +  " If you're too dumb? - That's tough!" ));
+		yield return StartCoroutine(say( locals, 061 ));
 		locals[1] = 62;
 		locals[2] = 63;
 		locals[3] = 64;
@@ -813,19 +774,19 @@ public class Conversation_221 : Conversation {
 	} // end func
 	
 	IEnumerator func_0a07() {
-		
-		yield return StartCoroutine(say( "Heh heh heh... We'll be watching." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 065 ));
 		remove_talker( 0 );
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_0012(); yield break;
-
+		
 	} // end func
 	
 	IEnumerator func_0a17() {
-		
-		yield return StartCoroutine(say( "Heh heh heh... Suit thyself, fool." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 066 ));
 		remove_talker( 0 );
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_0012(); yield break;
-
+		
 	} // end func
 	/*
 	void func_0a27() {
@@ -900,7 +861,7 @@ public class Conversation_221 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 077 ));
 		locals[1] = 78;
 		locals[2] = 79;
 		locals[3] = 0;

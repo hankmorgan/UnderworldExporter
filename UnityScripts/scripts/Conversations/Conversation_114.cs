@@ -168,7 +168,7 @@ public class Conversation_114 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "Bica. Tosa yeshor'click?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -192,7 +192,7 @@ public class Conversation_114 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -203,7 +203,7 @@ public class Conversation_114 : Conversation {
 		//int locals[45];
 		int[] locals =new int[46];
 		
-		yield return StartCoroutine(say( "Bica.  Tosa sorr.  Isili yethe tosa?" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -227,7 +227,7 @@ public class Conversation_114 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Tosa sor'click.  Tosa sstresh isili?" ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[24] = 8;
 		locals[25] = 9;
 		locals[26] = 0;
@@ -257,7 +257,7 @@ public class Conversation_114 : Conversation {
 		//int locals[24];
 		int[] locals =new int[25];
 		
-		yield return StartCoroutine(say( "Isili sel'a tosa sstresh." ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[2] = 11;
 		yield return StartCoroutine(print( 1, locals[2] ));
 		privateVariables[2] = 1;
@@ -296,7 +296,7 @@ public class Conversation_114 : Conversation {
 		//int locals[23];
 		int[] locals =new int[24];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click.  Isili thesh tosa!" ));
+		yield return StartCoroutine(say( locals, 015 ));
 		privateVariables[2] = 2;
 		locals[1] = 16;
 		locals[2] = 0;
@@ -329,7 +329,7 @@ public class Conversation_114 : Conversation {
 			yield return StartCoroutine(func_05c9());
 		} // end if
 		
-		yield return StartCoroutine(say( "Bica, yeshor'click.  Tosa sel'a isila sstresh?" ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[1] = 18;
 		locals[2] = 19;
 		locals[3] = 0;
@@ -368,15 +368,15 @@ public class Conversation_114 : Conversation {
 			if ( locals[6+counter] == 162 ) {
 				locals[0]=locals[1+counter];//Copy the item position of the last found ruby to the locals.
 			}// else {
-
+			
 			//} // while
 			counter++;
 			locals[11] = locals[11] - 1;
 		} // end if
-			
+		
 		if (locals[0] == -1)
 		{
-			yield return StartCoroutine(say( "Tosa 'click sel'a sstresh.  Bica." ));
+			yield return StartCoroutine(say( locals, 020 ));
 			locals[12] = 21;
 			locals[13] = 0;
 			//locals[33] = babl_menu( 0, locals[12] );
@@ -396,7 +396,7 @@ public class Conversation_114 : Conversation {
 		give_ptr_npc( 2, locals[34], locals[0] );
 		locals[35] = 1019;
 		take_from_npc( 1, locals[35] );
-		yield return StartCoroutine(say( "Tosa yeshor'click!" ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[36] = 23;
 		locals[37] = 0;
 		//locals[57] = babl_menu( 0, locals[36] );
@@ -418,7 +418,7 @@ public class Conversation_114 : Conversation {
 		//int locals[22];
 		int[] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Tosa sel'a sstresh?" ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[1] = 25;
 		locals[2] = 26;
 		locals[3] = 0;
@@ -448,7 +448,7 @@ public class Conversation_114 : Conversation {
 		//int locals[44];
 		int[] locals =new int[45];
 		
-		yield return StartCoroutine(say( "Bica.  Tosa Iss'leek yeshor'click.  Isili thesh tosa." ));
+		yield return StartCoroutine(say( locals, 027 ));
 		locals[1] = 28;
 		locals[2] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
@@ -458,7 +458,7 @@ public class Conversation_114 : Conversation {
 			
 		} // end if
 		
-		yield return StartCoroutine(say( "'Click thit sstresh. Bica." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[23] = 30;
 		locals[24] = 0;
 		//locals[44] = babl_menu( 0, locals[23] );

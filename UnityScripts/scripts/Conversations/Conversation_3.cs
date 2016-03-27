@@ -151,7 +151,7 @@ public class Conversation_3 : Conversation {
 		int[] locals=new int[24];
 		locals[1] = 4;
 		privateVariables[6] = get_quest( 1, locals[1] );
-
+		
 		if ( privateVariables[0] == 1 ) {
 			
 			yield return StartCoroutine(func_09f7());
@@ -161,7 +161,7 @@ public class Conversation_3 : Conversation {
 			privateVariables[4] = 0;
 			privateVariables[3] = 0;
 			privateVariables[5] = 0;
-			yield return StartCoroutine(say( "Greetings, Traveller.  I am Goldthirst, leader of the Mountain-folk.  Welcome to our hall." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[2] = 2;
 			locals[3] = 3;
 			locals[4] = 4;
@@ -169,7 +169,7 @@ public class Conversation_3 : Conversation {
 			//locals[23] = babl_menu( 0, locals[2] );
 			yield return StartCoroutine( babl_menu( 0,locals,2 ));
 			locals[23] = PlayerAnswer;
-
+			
 			switch ( locals[23] ) {
 				
 			case 1:
@@ -188,7 +188,7 @@ public class Conversation_3 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -199,14 +199,14 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Majesty, is it?  Well, thou art good at flattery, if nothing else!" ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -228,14 +228,14 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Thou hast a fine tongue, and a sense of courtesy.  Hast thou other Virtues as well?" ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -253,8 +253,8 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_03bb() {
-		
-		yield return StartCoroutine(say( "Call me that again, and thy tongue shall wag without thy head around it!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 011 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00d1();
@@ -266,7 +266,7 @@ public class Conversation_3 : Conversation {
 		//int locals[23];
 		int[] locals=new int[24];
 		
-		yield return StartCoroutine(say( "That is quite enough.  Hast thou some reason for coming here?" ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[2] = 13;
 		locals[3] = 14;
 		locals[4] = 15;
@@ -274,7 +274,7 @@ public class Conversation_3 : Conversation {
 		//locals[23] = babl_menu( 0, locals[2] );
 		yield return StartCoroutine( babl_menu( 0,locals,2 ));
 		locals[23] = PlayerAnswer;
-
+		
 		switch ( locals[23] ) {
 			
 		case 1:
@@ -301,14 +301,14 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Thou shalt see it for thyself!  Take thee to the end of the hall from which thou didst enter and say the words 'Deco Morono' to the guard at the door." ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -332,7 +332,7 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Well!  Thou art aware that it is customary to offer a gift when granted an audience?" ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 22;
@@ -341,7 +341,7 @@ public class Conversation_3 : Conversation {
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -375,7 +375,7 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "That's quite all right.  Nothing fancy is needed, just a token.  A little . . . GOLD will do." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[1] = 25;
 		locals[2] = 26;
 		locals[3] = 27;
@@ -384,7 +384,7 @@ public class Conversation_3 : Conversation {
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -451,21 +451,21 @@ public class Conversation_3 : Conversation {
 			
 			if ( locals[14] > 2 ) {
 				
-				yield return StartCoroutine(say( "Thou canst not toy with me!" ));
+				yield return StartCoroutine(say( locals, 029 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00d1();
 				yield break;
 			} else {
 				
-				yield return StartCoroutine(say( "But thou art empty handed! Dost thou really wish to give me a gift?" ));
+				yield return StartCoroutine(say( locals, 030 ));
 				locals[18] = 31;
 				locals[19] = 32;
 				locals[20] = 0;
 				//locals[39] = babl_menu( 0, locals[18] );
 				yield return StartCoroutine( babl_menu( 0,locals,18 ));
 				locals[39] = PlayerAnswer;
-
+				
 				switch ( locals[39] ) {
 					
 				case 1:
@@ -478,13 +478,13 @@ public class Conversation_3 : Conversation {
 				case 2:
 					
 					yield return StartCoroutine(func_04dc());
-
+					
 					break;
 				} // end if
 				
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -498,7 +498,7 @@ public class Conversation_3 : Conversation {
 		int[] locals=new int[23];
 		
 		privateVariables[2] = 0;
-		yield return StartCoroutine(say( "This is indeed a goodly gift, and I thank thee for it most kindly.  Wouldst care to see the treasure chamber to which it will be added?" ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[1] = 34;
 		locals[2] = 35;
 		locals[3] = 36;
@@ -506,7 +506,7 @@ public class Conversation_3 : Conversation {
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -535,14 +535,14 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "It will do, I suppose.  Thou mayst go now." ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -568,15 +568,14 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Indeed, I suppose thou wouldst.  Many should like to see my treasure . . .  touch it, stroke it, perhaps STEAL it!  That is what thou wouldst like, isn't it? To rob me blind after I was foolist enough to invite thee here!\n"
-		   + " GUARDS!  GUARDS!  ARREST THIS THIEF!" ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -602,7 +601,7 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Well then.  What is the reason for thy visit?" ));
+		yield return StartCoroutine(say( locals, 043 ));
 		locals[1] = 44;
 		locals[2] = 45;
 		locals[3] = 46;
@@ -610,7 +609,7 @@ public class Conversation_3 : Conversation {
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -638,7 +637,7 @@ public class Conversation_3 : Conversation {
 		int[] locals=new int[44];
 		
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "Perhaps we can help each other . . . I have need of such an adventurer as thyself.  Our mines have been invaded by a terrible monster!" ));
+		yield return StartCoroutine(say( locals, 047 ));
 		locals[22] = 1;
 		locals[1] = 48;
 		locals[23] = 1;
@@ -649,7 +648,7 @@ public class Conversation_3 : Conversation {
 		//locals[43] = babl_fmenu( 0, locals[1], locals[22] );
 		yield return StartCoroutine(babl_fmenu (0,locals,1,22));
 		locals[43] = PlayerAnswer;
-
+		
 		switch ( locals[43] ) {
 			
 		case 48:
@@ -679,7 +678,7 @@ public class Conversation_3 : Conversation {
 		int[] locals=new int[44];
 		
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "That is well.  I have need of a paragon, just now.  Art thou aware that my people's mine has been invaded by a monster?" ));
+		yield return StartCoroutine(say( locals, 051 ));
 		locals[22] = 1;
 		locals[1] = 52;
 		locals[23] = 1;
@@ -718,14 +717,14 @@ public class Conversation_3 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Excellent!  A hero at last. My people, at least those not too valuable to lose, are all too afraid of the beast to dare face it!  It is a fearsome beast, covered with tentacles and with many eyes.  If thou art brave enough, and you slay the creature, I shall reward thee handsomely!" ));
+		yield return StartCoroutine(say( locals, 055 ));
 		locals[1] = 56;
 		locals[2] = 57;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -752,14 +751,14 @@ public class Conversation_3 : Conversation {
 		int[] locals=new int[23];
 		
 		privateVariables[5] = 1;
-		yield return StartCoroutine(say( "I knew thou wert a hero!  Was it difficult?" ));
+		yield return StartCoroutine(say( locals, 058 ));
 		locals[1] = 59;
 		locals[2] = 60;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -781,7 +780,7 @@ public class Conversation_3 : Conversation {
 		//int locals[43];
 		int[] locals=new int[44];
 		
-		yield return StartCoroutine(say( "We are then fortunate that thou wert the one to undertake the task. Thou hast our thanks.  Was there anything else?" ));
+		yield return StartCoroutine(say( locals, 061 ));
 		locals[22] = privateVariables[2];
 		locals[1] = 62;
 		locals[23] = 1;
@@ -809,11 +808,11 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_0964() {
-		
-		yield return StartCoroutine(say( "And modest as well!  Truly, thou art worthy of this great reward!  Here!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 064 ));
 		yield return StartCoroutine(func_0971());
 		yield break;
-
+		
 	} // end func
 	
 	IEnumerator func_0971() {
@@ -824,11 +823,11 @@ public class Conversation_3 : Conversation {
 		privateVariables[3] = 1;
 		locals[1] = 65;
 		yield return StartCoroutine(print( 1, locals[1] ));
-		yield return StartCoroutine(say( "This was the favored tool of Great Coulnes, the best gemcutter ever to grace our tribe.  It is traditionally presented to heroes and those who excel in their craft.  Thou art the first not of our folk to bear it.  May it bring thee fortune.  Again, our thanks." ));
+		yield return StartCoroutine(say( locals, 066 ));
 		locals[2] = 275;
 		if ( take_from_npc( 1, locals[2] ) == 2 ) {
 			
-			yield return StartCoroutine(say( "/mI will leave it here for ye." ));
+			yield return StartCoroutine(say( locals, 067 ));
 		} // end if
 		
 		locals[24] = privateVariables[2];
@@ -881,7 +880,7 @@ public class Conversation_3 : Conversation {
 		//int locals[43];
 		int[] locals=new int[44];
 		
-		yield return StartCoroutine(say( "Greetings, bold @GS8.  Hast thou managed to kill the vicious monster infesting our mines?" ));
+		yield return StartCoroutine(say( locals, 070 ));
 		locals[22] = privateVariables[6];
 		locals[1] = 71;
 		locals[23] = 1;
@@ -918,7 +917,7 @@ public class Conversation_3 : Conversation {
 		//int locals[23];
 		int[] locals=new int[24];
 		
-		yield return StartCoroutine(say( "Ah, @GS8!  It is a pleasure to see thee again.  Thy name shall go down in the history of our clan!" ));
+		yield return StartCoroutine(say( locals, 074 ));
 		locals[2] = 75;
 		locals[3] = 76;
 		locals[4] = 77;
@@ -926,7 +925,7 @@ public class Conversation_3 : Conversation {
 		//locals[23] = babl_menu( 0, locals[2] );
 		yield return StartCoroutine( babl_menu( 0,locals,2 ));
 		locals[23] = PlayerAnswer;
-
+		
 		switch ( locals[23] ) {
 			
 		case 1:
@@ -960,7 +959,7 @@ public class Conversation_3 : Conversation {
 		//int locals[1];
 		int[] locals=new int[2];
 		
-		yield return StartCoroutine(say( "Well, we are glad that thou hast visited us.  Do say hello again when thou art in the vicinity.  Thy company is always welcome." ));
+		yield return StartCoroutine(say( locals, 078 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -969,13 +968,13 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_0b06() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[3] == 1 ) {
 			
-			yield return StartCoroutine(say( "Oh, pish.  Thou bearest the amulet of Coulnes, a testament to thy heroics.  As long as this clan lives, we shall remember thee." ));
+			yield return StartCoroutine(say( locals, 079 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Thou art humble as well as brave!  Surely thou deservest a reward." ));
+			yield return StartCoroutine(say( locals, 080 ));
 			yield return StartCoroutine(func_0971());
 		} // end if
 		yield break;
@@ -986,14 +985,14 @@ public class Conversation_3 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "Hm.  Perhaps thou art not so great a warrior as I first suspected." ));
+		yield return StartCoroutine(say( locals, 081 ));
 		locals[1] = 82;
 		locals[2] = 83;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -1034,10 +1033,10 @@ public class Conversation_3 : Conversation {
 		}
 		if ( npc.npc_attitude < 2 ) {
 			
-			yield return StartCoroutine(say( "Oh, 'tis thee again.  Is there a reason for thy visit?" ));
+			yield return StartCoroutine(say( locals, 084 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Greetings, bold @GS8.  What brings thee back to our hall?" ));
+			yield return StartCoroutine(say( locals, 085 ));
 		} // end if
 		
 		locals[24] = privateVariables[2];
@@ -1125,21 +1124,21 @@ public class Conversation_3 : Conversation {
 			
 			if ( locals[14] > 2 ) {
 				
-				yield return StartCoroutine(say( "Thou canst not toy with me!" ));
+				yield return StartCoroutine(say( locals, 029 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00d1();
 				yield break;
 			} else {
 				
-				yield return StartCoroutine(say( "But thou art empty handed! Dost thou really wish to give me a gift?" ));
+				yield return StartCoroutine(say( locals, 030 ));
 				locals[21] = 92;
 				locals[22] = 93;
 				locals[23] = 0;
 				//locals[42] = babl_menu( 0, locals[21] );
 				yield return StartCoroutine( babl_menu( 0,locals,21 ));
 				locals[42] = PlayerAnswer;
-
+				
 				switch ( locals[42] ) {
 					
 				case 1:
@@ -1157,7 +1156,7 @@ public class Conversation_3 : Conversation {
 				
 			} // end if
 			
-		
+			
 			
 		} // end switch
 		
@@ -1168,14 +1167,14 @@ public class Conversation_3 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "'Tis a fine gift.  I thank thee kindly." ));
+		yield return StartCoroutine(say( locals, 094 ));
 		locals[1] = 95;
 		locals[2] = 96;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine( babl_menu( 0,locals,1 ));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -1205,7 +1204,7 @@ public class Conversation_3 : Conversation {
 		//int locals[2];
 		int[] locals=new int[3];
 		
-		yield return StartCoroutine(say( "Zounds!  A larger lump of gold I have never seen!  Surely thou art deserving of this axe, an honored weapon that has been passed down from the time of my ancestors.  Use it well, for there are few weapons better." ));
+		yield return StartCoroutine(say( locals, 097 ));
 		locals[1] = 11;
 		take_from_npc( 1, locals[1] );
 		locals[2] = 3;
@@ -1214,7 +1213,7 @@ public class Conversation_3 : Conversation {
 		func_00b1( locals[2] );
 		yield break;
 	} // end func
-
-
-
+	
+	
+	
 }

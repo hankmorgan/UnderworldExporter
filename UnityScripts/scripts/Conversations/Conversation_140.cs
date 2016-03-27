@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_140 : Conversation {
-
+	
 	//conversation #140
 	//	string block 0x0e8c, name Ree
-			
-
+	
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3724);
@@ -156,7 +156,7 @@ public class Conversation_140 : Conversation {
 			yield return StartCoroutine(func_02ee());
 		} else {
 			
-			yield return StartCoroutine(say( "Lo fair person.  Here we are in the ruins of what was once a great civilization, ruined by greed, despair, and pain." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -174,7 +174,7 @@ public class Conversation_140 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -184,7 +184,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Thou art back, outsider from above.  What dost thou think of our settlement here?" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 7;
@@ -215,8 +215,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "In better times thou wouldst have seen our true glory.  The  splendor of our domain and righteousness of our cause were great indeed. \n"
-		                                +" But alas, the environs have changed and the walls have fallen down, the just have been silenced by the desperate, and not even the strongest among us can hope to rebuild what Cabirus wrought." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -241,7 +240,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "It was wonderful.  We would visit the ceremonial hall every day.  Sometimes we would go below and challenge the Golem to a test of might.  There were marvelous banquets. The Mayors of towns throughout Britannia would come to marvel at our achievements. Now none can survive the dangers of this place long enough to reach us." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 14;
@@ -272,7 +271,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Well, thou art an exception, the first outsider I've seen in this place in years." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[1] = 16;
 		locals[2] = 17;
 		locals[3] = 0;
@@ -297,9 +296,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "A Golem resides on an island surrounded by lava in the land of the Seers. \n"
-		                               + " We would take our swords and shields, leap onto the island, and battle the Golem.  It was indestructable, but honorable and valorious.  Though it could not be destroyed, it would congratulate thee if thou didst fight well. \n"
-		                               + " If thou wert good enough it would sometimes reward thee." ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 21;
 		locals[3] = 0;
@@ -308,7 +305,7 @@ public class Conversation_140 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "Yes.  If the Golem still exists, he would be there." ));
+			yield return StartCoroutine(say( locals, 020 ));
 			break;
 			
 		case 2:
@@ -324,7 +321,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "We have sent Knights on many quests to make certain things better. All met with grave perils.  Some met with success. Some never returned." ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[1] = 23;
 		locals[2] = 24;
 		locals[3] = 0;
@@ -349,7 +346,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "We heard rumors that a powerful mage on the seventh level of the Abyss was kidnapping and killing  people.  We sent a party of our most valorous Knights to investigate. They never returned.  We hope to  mount an expedition to investigate, but our resources are limited." ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 27;
 		locals[3] = 28;
@@ -377,8 +374,8 @@ public class Conversation_140 : Conversation {
 	} // end func
 	
 	IEnumerator func_0523() {
-		
-		yield return StartCoroutine(say( "Be thou most careful!  If our Knights were unable to defeat him, he must be powerful indeed." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 029 ));
 		yield return StartCoroutine(func_05fe());
 	} // end func
 	
@@ -387,7 +384,7 @@ public class Conversation_140 : Conversation {
 		int[] locals = new int[47];
 		locals[3] = 32;
 		locals[1] = get_quest( 1, locals[3] );
-
+		
 		if ( locals[1] < 2 ) {
 			
 			locals[2] = 1;
@@ -396,7 +393,7 @@ public class Conversation_140 : Conversation {
 			locals[2] = 0;
 		} // end if
 		
-		yield return StartCoroutine(say( "Yes, we made great inroads against the trolls at first.  And we nearly succeeded in clearing our own demesne of headlesses and other vermin.  Our recent quests have been disasters, though, and our order is in trouble." ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[25] = 1;
 		locals[4] = 31;
 		locals[26] = locals[2];
@@ -425,7 +422,7 @@ public class Conversation_140 : Conversation {
 		
 		int[] locals = new int[3];
 		
-		yield return StartCoroutine(say( "Seek out Dorna Ironfist, our leader, if thou wishest to join." ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[1] = 32;
 		locals[2] = 1;
 		set_quest( 2, locals[2], locals[1] );
@@ -438,8 +435,8 @@ public class Conversation_140 : Conversation {
 		locals[2] = 34;
 		locals[3] = 35;
 		locals[1] = sex( 2, locals[3], locals[2] );
-
-		yield return StartCoroutine(say( "In the old days, thou wouldst not have said that!  No one  understands  the splendor of Cabirus'  achievements...\n Oh, thou wouldst not understand." ));
+		
+		yield return StartCoroutine(say( locals, 036 ));
 		yield return StartCoroutine(func_05fe());
 	} // end func
 	
@@ -456,5 +453,5 @@ public class Conversation_140 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

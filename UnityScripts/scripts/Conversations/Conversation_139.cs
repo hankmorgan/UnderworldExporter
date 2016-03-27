@@ -153,7 +153,7 @@ public class Conversation_139 : Conversation {
 		if ( privateVariables[0] == 0 ) {
 			
 			privateVariables[2] = 0;
-			yield return StartCoroutine(say( "I welcome thee to the last bastion of civilization in the Abyss, traveller." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -175,7 +175,7 @@ public class Conversation_139 : Conversation {
 		
 		if ( npc.npc_attitude < 2 ) {
 			
-			yield return StartCoroutine(say( "I have nothing to say to thee." ));
+			yield return StartCoroutine(say( locals, 004 ));
 			locals[23] = 5;
 			locals[24] = 6;
 			locals[25] = 0;
@@ -203,7 +203,7 @@ public class Conversation_139 : Conversation {
 			yield return StartCoroutine(func_03b7());
 		} else {
 			
-			yield return StartCoroutine(say( "Thou hast returned.  What dost thou wish to speak of?" ));
+			yield return StartCoroutine(say( locals, 007 ));
 			locals[66] = 1;
 			locals[45] = 8;
 			locals[67] = 1;
@@ -238,8 +238,8 @@ public class Conversation_139 : Conversation {
 	} // end func
 	
 	IEnumerator func_03b7() {
-		
-		yield return StartCoroutine(say( "It is good to see thee again.  Thou wilt go down in the history of our order as the brave soul who found the Taper of Sacrifice that was so long lost.  I thank thee again." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 011 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
 	
@@ -248,7 +248,7 @@ public class Conversation_139 : Conversation {
 		int[] locals = new int[70];
 		locals[3] = 32;
 		locals[1] = get_quest( 1, locals[3] );
-
+		
 		//locals[2] = !privateVariables[2];
 		if (privateVariables[2]==1)
 		{
@@ -260,8 +260,7 @@ public class Conversation_139 : Conversation {
 		}
 		if ( locals[1] >= 2 ) {
 			
-			yield return StartCoroutine(say( "Our order has been here since the founding of the Colony of the Abyss, and has had many virtuous members.  In the chaos that followed Cabirus' death, we attempted to collect the Talismans of virtue.  However, most were already lost, some supposedly destroyed. \n"
-			                                + " We did have the Taper of Sacrifice, briefly, but it was taken by some lunatic.  Supposedly the Standard of Honor is somewhere as well, merely awaiting an honorable deed." ));
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[25] = locals[2];
 			locals[4] = 13;
 			locals[26] = 1;
@@ -274,19 +273,19 @@ public class Conversation_139 : Conversation {
 				
 			case 13:
 				
-				yield return StartCoroutine(say( "We had it, but a while ago a lunatic raided our quarters and stole many things." ));
+				yield return StartCoroutine(say( locals, 014 ));
 				func_07f3();
 				break;
 				
 			case 15:
 				
-				yield return StartCoroutine(say( "It is my pleasure to provide information to a member of the order." ));
+				yield return StartCoroutine(say( locals, 016 ));
 				break;
 			} // end if
 			
 		} 
 		
-		yield return StartCoroutine(say( "The order has been here since the founding of the Colony of the Abyss, and has had many virtuous members.  More I cannot say to one who is not a member, but thou mayst return to me once thou art inducted and I can tell thee more." ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[47] = 18;
 		locals[48] = 19;
 		locals[49] = 0;
@@ -301,7 +300,7 @@ public class Conversation_139 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Well, thy path is thine alone to choose,  but I feel it should lie with ours for a while." ));
+			yield return StartCoroutine(say( locals, 020 ));
 			break;
 			
 		} // end switch
@@ -317,7 +316,7 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[45];
 		
-		yield return StartCoroutine(say( "Hast thou heard tell of it, or even seen it, perhaps?" ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[1] = 22;
 		locals[2] = 24;
 		locals[3] = 25;
@@ -327,7 +326,7 @@ public class Conversation_139 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "That is good news.  Continue to search, and thou mayst find it." ));
+			yield return StartCoroutine(say( locals, 023 ));
 			break;
 			
 		case 2:
@@ -337,7 +336,7 @@ public class Conversation_139 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "The lunatic who took it fled to the levels above, or so it is told.  Perhaps others have heard tell of him, or can otherwise help thee." ));
+			yield return StartCoroutine(say( locals, 026 ));
 			break;
 			
 		} // end switch
@@ -357,7 +356,7 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[63];
 		bool flag=false;
-		yield return StartCoroutine(say( "It is in thy possession e'en now?  Could thou please show it to me?" ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[3] = 0;
 		//} // end if
 		while(flag==false)
@@ -382,18 +381,18 @@ public class Conversation_139 : Conversation {
 					locals[26] = locals[3];
 					if ( 0 == locals[26] ) {
 						
-						yield return StartCoroutine(say( "Please, may I see it?" ));
+						yield return StartCoroutine(say( locals, 031 ));
 					} else {
 						
 						if ( 1 == locals[26] ) {
 							
-							yield return StartCoroutine(say( "Please reconsider." ));
+							yield return StartCoroutine(say( locals, 032 ));
 						} else {
 							
 							if ( 2 == locals[26] ) {
-								yield return StartCoroutine(say( "I beg of thee, let me but look at it." ));
+								yield return StartCoroutine(say( locals, 033 ));
 							} // end if
-
+							
 							
 						} // end if
 						
@@ -403,7 +402,7 @@ public class Conversation_139 : Conversation {
 				}// else {
 				else
 				{
-					yield return StartCoroutine(say( "Thou art indeed cruel, to deny me a glance at the Taper of Sacrifice." ));
+					yield return StartCoroutine(say( locals, 034 ));
 					locals[27] = 1;
 					Time.timeScale =SlomoTime;
 					yield return new WaitForSeconds(WaitTime);
@@ -430,7 +429,7 @@ public class Conversation_139 : Conversation {
 			locals[1] = find_barter( 1, locals[29] );//Lit version
 			if(locals[1]==0)
 			{//lit version not found.
-				yield return StartCoroutine(say( "That is not the Taper.  Return if thou hast truly found it." ));
+				yield return StartCoroutine(say( locals, 035 ));
 				locals[30] = 1;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -450,7 +449,7 @@ public class Conversation_139 : Conversation {
 				
 			case 0:
 				
-				yield return StartCoroutine(say( "That is not the Taper.  Return if thou hast truly found it." ));
+				yield return StartCoroutine(say( locals, 035 ));
 				locals[30] = 1;
 				func_00b1( locals[30] );
 				break;
@@ -470,19 +469,18 @@ public class Conversation_139 : Conversation {
 		locals[39] = locals[2];
 		if ( 0 == locals[39] ) {
 			
-			yield return StartCoroutine(say( "Ah!  To see the taper again, this is good indeed./m" ));
+			yield return StartCoroutine(say( locals, 036 ));
 		} else {
 			
 			if ( 1 == locals[39] ) {
 				
-				yield return StartCoroutine(say( "Ah!  It is good to be bathed in the taper's radiance once more./m" ));
+				yield return StartCoroutine(say( locals, 037 ));
 			} // end if
 			
 		} // end if
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "I thank thee for the chance to see the taper again. Now that thou hast found it, it is right that thou dost keep it.  Thou wilt find that the light it produces is quite steady, for it continually sacrifices of itself to produce light for thee. \n"
-		                                +" Cabirus imbued it with virtue, however, and although it consumes itself constantly to provide light, it is continually replenished as well." ));
+		yield return StartCoroutine(say( locals, 038 ));
 		locals[40] = 39;
 		locals[41] = 41;
 		locals[42] = 0;
@@ -492,12 +490,12 @@ public class Conversation_139 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "Good luck to thee." ));
+			yield return StartCoroutine(say( locals, 040 ));
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "And I thank thee for finding it." ));
+			yield return StartCoroutine(say( locals, 042 ));
 			break;
 			
 		} // end switch
@@ -513,7 +511,7 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "What dost thou want?" ));
+		yield return StartCoroutine(say( locals, 043 ));
 		locals[1] = 44;
 		locals[2] = 45;
 		locals[3] = 0;
@@ -539,7 +537,7 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Thou hast uttered sacrilege.  Recant or face my blade." ));
+		yield return StartCoroutine(say( locals, 046 ));
 		locals[1] = 47;
 		locals[2] = 49;
 		locals[3] = 0;
@@ -548,13 +546,13 @@ public class Conversation_139 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "That is as it must be,  as is my slaying thee in the name of my order." ));
+			yield return StartCoroutine(say( locals, 048 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "That is more appropriate. I trust thou wilt remember this lesson.  Leave now." ));
+			yield return StartCoroutine(say( locals, 050 ));
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00d1();
@@ -569,7 +567,7 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "It has been thy misfortune to travel through the other levels of this wasteland, and I am not surprised thou dost think that.  However, we still abide by the dreams of Cabirus and the eight virtues." ));
+		yield return StartCoroutine(say( locals, 051 ));
 		locals[1] = 52;
 		locals[2] = 53;
 		locals[3] = 0;
@@ -594,10 +592,8 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "No! We work still to bring about a return to the days of the Abyss' glory.  There is hope yet if the races of the colony will  believe again in the virtues and in each other. \n"
-		                                + " Unfortunately, I think there is little hope.  Most of the dwellers in this colony have forgotten what little they may once have known about its purpose./m" ));
-		yield return StartCoroutine(say( "Even the most stalwart believers now doubt.  No one remembers the virtues any more.  It is a sad situation. \n"
-		                                + " Why, several months  ago, someone came from above and stole one of the greatest treasures remaining from Cabirus' days." ));
+		yield return StartCoroutine(say( locals, 054 ));
+		yield return StartCoroutine(say( locals, 055 ));
 		locals[1] = 56;
 		locals[2] = 58;
 		locals[3] = 0;
@@ -606,8 +602,7 @@ public class Conversation_139 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "Indeed it was. \n"
-			                                + "" ));
+			yield return StartCoroutine(say( locals, 057 ));
 			break;
 			
 		case 2:
@@ -623,10 +618,8 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "We lost many small things, mostly from storage.  All of our torches and lanterns were taken.  A few items of food, but mostly light sources, actually.  Quite odd. \n"
-		                                + " The grave loss was that of the Taper of Sacrifice, though. It was created by Sir Cabirus  himself and imbued with virtue. We placed it in our shrine where we kept a vigil over it. There it remained lit for three years./m" ));
-		yield return StartCoroutine(say( "But one day a man arrived at one of our guard posts. He ranted and raved, but we let him in, as common courtesy dictates, of  course.  He started running about and grabbing candles and such. We were all too shocked to respond.  Then he grabbed the Taper itself and ran off. \n"
-		                                + " By the time we were in armor and ready to give chase we had lost him. A tragedy it was." ));
+		yield return StartCoroutine(say( locals, 059 ));
+		yield return StartCoroutine(say( locals, 060 ));
 		privateVariables[2] = 1;
 		locals[1] = 61;
 		locals[2] = 63;
@@ -637,7 +630,7 @@ public class Conversation_139 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "I wish thee good luck.  Seek it above, for that is where we believe the lunatic came from." ));
+			yield return StartCoroutine(say( locals, 062 ));
 			break;
 			
 		case 2:
@@ -647,7 +640,7 @@ public class Conversation_139 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "It is indeed tiresome.  But Knights of the Crux are not defeated, regardless of the difficulty of their task." ));
+			yield return StartCoroutine(say( locals, 065 ));
 			break;
 			
 		} // end switch
@@ -743,7 +736,7 @@ public class Conversation_139 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 077 ));
 		locals[1] = 78;
 		locals[2] = 79;
 		locals[3] = 0;

@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_187 : Conversation {
-
+	
 	//conversation #187
 	//string block 0x0ebb, name Illomo
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3771);
@@ -168,7 +168,7 @@ public class Conversation_187 : Conversation {
 			locals[1] = 9;
 			locals[2] = 1;
 			set_quest( 2, locals[2], locals[1] );
-			yield return StartCoroutine(say( "Hello, adventurer.  Hast thou seen my friend Gurstang?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[3] = 2;
 			locals[4] = 3;
 			locals[5] = 4;
@@ -193,7 +193,7 @@ public class Conversation_187 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -203,7 +203,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I am glad to hear it!  He must have told thee the code word he was searching for, then!" ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 8;
@@ -234,7 +234,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "That seems quite unlikely.  Perhaps thou mistook another mage for my friend Gurstang.  If thou truly findest Gurstang, please   let me know!" ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -246,7 +246,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Yes?  And what was it?" ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[2] = 11;
 		locals[3] = 12;
 		locals[4] = 0;
@@ -271,7 +271,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I may be able to help thee if thou tellst me the word." ));
+		yield return StartCoroutine(say( locals, 013 ));
 		locals[1] = 14;
 		locals[2] = 15;
 		locals[3] = 0;
@@ -296,7 +296,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Hmm.  I begin to think that perhaps thou hast not met Gurstang after all.  I hope that thou wilt tell me the word he gives thee if thou dost see him." ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -325,7 +325,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Hmm... @PS-2, thou sayest.  No, that doesn't seem quite right.  Art thou quite sure that was the word?" ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 20;
 		locals[3] = 21;
@@ -356,7 +356,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "I would suggest that thou dost find Gurstang again and make sure of the code word this time." ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[1] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -369,7 +369,7 @@ public class Conversation_187 : Conversation {
 		int[] locals = new int[24];
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "Hmm... Folanae, thou sayest...\n perhaps...\n Yes, that must be it! The puzzle is becoming clearer!" ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 24;
 		locals[2] = 25;
 		locals[3] = 0;
@@ -398,7 +398,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Gurstang was searching for clues to the Key of Truth, a fabled object which has long been lost.  Apparently, it is no longer in this world, so Gurstang and I looked for possible ways to bring it here from whatever world it is now in.  The word that Gurstang found is an important clue." ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -414,7 +414,7 @@ public class Conversation_187 : Conversation {
 		int[] locals = new int[24];
 		
 		privateVariables[2] = 1;
-		yield return StartCoroutine(say( "We were of the opinion that praying at a shrine might bring it back.  I would guess that the library might contain information regarding which shrine must be used.  I suspect that any tome mentioning Gurstang's word, \"Folanae,\" would hold the final clue to regaining the key." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[1] = 29;
 		locals[2] = 31;
 		locals[3] = 0;
@@ -423,7 +423,7 @@ public class Conversation_187 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "Good luck!" ));
+			yield return StartCoroutine(say( locals, 030 ));
 			locals[23] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -444,7 +444,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "It is located in the old Academy, in the northwest.  Enter the Academy's main hall and head west; it should be on thy left. Good luck!" ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -456,7 +456,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "That's too bad.  I wonder what happened to him.  I hope that he has not been killed, or worse!" ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -468,7 +468,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "My friend Gurstang, a fellow Seer.  He went downstairs a few months ago and I haven't seen him since." ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 36;
 		locals[3] = 37;
@@ -499,7 +499,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "He was on a search for the fabled Key of Truth.  He must have fallen into the hands of Tyball, the wizard below." ));
+		yield return StartCoroutine(say( locals, 038 ));
 		locals[1] = 39;
 		locals[2] = 40;
 		locals[3] = 0;
@@ -513,7 +513,7 @@ public class Conversation_187 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Please do.  I fear for his safety." ));
+			yield return StartCoroutine(say( locals, 041 ));
 			break;
 			
 		} // end switch
@@ -526,7 +526,7 @@ public class Conversation_187 : Conversation {
 		
 		if ( privateVariables[2] == 1) {
 			
-			yield return StartCoroutine(say( "Hello, @GS8!  Hast thou found the Key of Truth?" ));
+			yield return StartCoroutine(say( locals, 042 ));
 			locals[1] = 43;
 			locals[2] = 44;
 			locals[3] = 45;
@@ -554,7 +554,7 @@ public class Conversation_187 : Conversation {
 		
 		if ( privateVariables[3] ==1) {
 			
-			yield return StartCoroutine(say( "Hello, @GS8!  Art thou not interested to learn the significance of the word Gurstang gave thee?" ));
+			yield return StartCoroutine(say( locals, 046 ));
 			locals[23] = 47;
 			locals[24] = 48;
 			locals[25] = 0;
@@ -578,7 +578,7 @@ public class Conversation_187 : Conversation {
 			
 		} 
 		
-		yield return StartCoroutine(say( "Hello, @GS8!  Hast thou found my friend Gurstang?" ));
+		yield return StartCoroutine(say( locals, 049 ));
 		locals[46] = 50;
 		locals[47] = 51;
 		locals[48] = 0;
@@ -605,7 +605,7 @@ public class Conversation_187 : Conversation {
 		int[] locals = new int[2];
 		
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "I knew it could be found!  I hope that the Key aids thee in thy quest." ));
+		yield return StartCoroutine(say( locals, 052 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -617,7 +617,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "I wish thee luck and speed in finding it." ));
+		yield return StartCoroutine(say( locals, 053 ));
 		locals[1] = 54;
 		locals[2] = 55;
 		locals[3] = 0;
@@ -646,7 +646,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "I think that praying at a shrine must have something to do with it.  I would look in the library for a book that contains \"Folanae,\" the word that Gurstang discovered, for a clue." ));
+		yield return StartCoroutine(say( locals, 056 ));
 		locals[1] = 57;
 		locals[2] = 58;
 		locals[3] = 0;
@@ -675,7 +675,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Congratulations on finding the Key of Truth!  I hope that it will prove an aid to thee." ));
+		yield return StartCoroutine(say( locals, 059 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -755,7 +755,7 @@ public class Conversation_187 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 070 ));
 		locals[1] = 71;
 		locals[2] = 72;
 		locals[3] = 0;
@@ -787,7 +787,7 @@ public class Conversation_187 : Conversation {
 	} // end func
 
 */
-
-
-
+	
+	
+	
 }

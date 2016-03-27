@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_281 : Conversation {
-
+	
 	//conversation #281
 	//string block 0x0f19, name  Generic Grey Lizardman
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3865);
@@ -159,10 +159,10 @@ public class Conversation_281 : Conversation {
 		
 		if ( npc.npc_attitude != 3 ) {
 			
-			yield return StartCoroutine (say( "Stranger, greetings." ));
+			yield return StartCoroutine (say( locals, 001 ));
 		} else {
 			
-			yield return StartCoroutine (say( "Friend, greetings!" ));
+			yield return StartCoroutine (say( locals, 002 ));
 		} // end if
 		
 		locals[22] = 1;
@@ -202,7 +202,7 @@ public class Conversation_281 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine (say( "How can you me help?" ));
+		yield return StartCoroutine (say( locals, 007 ));
 		locals[44] = 8;
 		locals[45] = 9;
 		locals[46] = 10;
@@ -261,7 +261,7 @@ public class Conversation_281 : Conversation {
 			yield return StartCoroutine (func_054f());
 		} // end if
 		
-		yield return StartCoroutine (say( "Sorry.  You cannot I help." ));
+		yield return StartCoroutine (say( locals, 015 ));
 		locals[6] = 16;
 		locals[7] = 0;
 		//locals[27] = babl_menu( 0, locals[6] );
@@ -277,8 +277,8 @@ public class Conversation_281 : Conversation {
 	} // end func
 	
 	IEnumerator func_0436() {
-		
-		yield return StartCoroutine (say( "Yes.  Very well not though." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine (say( locals, 017 ));
 		privateVariables[2] = 0;
 	} // end func
 	
@@ -287,7 +287,7 @@ public class Conversation_281 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine (say( "Of Iss'leek you seek.  Look in east of our dwellings." ));
+		yield return StartCoroutine (say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 20;
 		locals[3] = 0;
@@ -317,7 +317,7 @@ public class Conversation_281 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine (say( "Of this I little know.  However, our leader has more knowing on this." ));
+		yield return StartCoroutine (say( locals, 021 ));
 		locals[1] = 22;
 		locals[2] = 23;
 		locals[3] = 24;
@@ -353,7 +353,7 @@ public class Conversation_281 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine (say( "The green ones keep him, I believe. Ask there." ));
+		yield return StartCoroutine (say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 27;
 		locals[3] = 28;
@@ -399,7 +399,7 @@ public class Conversation_281 : Conversation {
 		int [] locals = new int[24];
 		
 		npc.npc_attitude = 3;
-		yield return StartCoroutine (say( "You speak Lizardman tongue.  Very good.  Many Lizardmans will be your friends then!" ));
+		yield return StartCoroutine (say( locals, 029 ));
 		locals[1] = 30;
 		locals[2] = 31;
 		locals[3] = 0;
@@ -434,7 +434,7 @@ public class Conversation_281 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine (say( "Sel'a?" ));
+			yield return StartCoroutine (say( locals, 032 ));
 			locals[1] = 33;
 			locals[2] = 34;
 			locals[3] = 0;
@@ -536,7 +536,7 @@ public class Conversation_281 : Conversation {
 		//int locals[24];
 		int [] locals = new int[25];
 		
-		yield return StartCoroutine (say( "sorr?" ));
+		yield return StartCoroutine (say( locals, 045 ));
 		locals[1] = 46;
 		locals[2] = 47;
 		locals[3] = 0;
@@ -572,6 +572,6 @@ public class Conversation_281 : Conversation {
 		} // end if
 		
 	} // end func
-
-
+	
+	
 }

@@ -156,7 +156,7 @@ public class Conversation_9 : Conversation {
 			yield return StartCoroutine(func_04fd());
 		} else {
 			
-			yield return StartCoroutine(say( "Yes?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -192,7 +192,7 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Clearly, thou art a boor, unfit for the gentle company present here.  Away with thee until thou hast learned to ape the manners of thy betters." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 0;
@@ -221,7 +221,7 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Fair greetings to thee.  For what reason hast thou intruded on our court?" ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -248,7 +248,7 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "True!  I AM rather wise, come to think of it.  What dost thou wish to know?" ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 14;
@@ -287,7 +287,7 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Well... Perhaps thou canst be forgiven.  This place IS full of the most frightfully rude people.  Thou mayst remain.  What is thy need?" ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 19;
@@ -324,26 +324,26 @@ public class Conversation_9 : Conversation {
 		int[] locals=new int[4];
 		locals[2] = 4;
 		locals[1] = random( 1, locals[2] );
-
+		
 		locals[3] = locals[1];
 		if ( 1 == locals[3] ) {
 			
-		yield return StartCoroutine(say( "I've changed my mind about thee!  Thou art indeed a ruffian!  Get thee hence!" ));
+			yield return StartCoroutine(say( locals, 020 ));
 		} else {
 			
 			if ( 2 == locals[3] ) {
 				
-			yield return StartCoroutine(say( "Thou hast the manners of an acid slug!  Get out of here!" ));
+				yield return StartCoroutine(say( locals, 021 ));
 			} else {
 				
 				if ( 3 == locals[3] ) {
 					
-				yield return StartCoroutine(say( "Thou art entirely too generous with thy time!" ));
+					yield return StartCoroutine(say( locals, 022 ));
 				} else {
 					
 					if ( 4 == locals[3] ) {
 						
-					yield return StartCoroutine(say( "Perhaps thou couldst stand a little further downwind?" ));
+						yield return StartCoroutine(say( locals, 023 ));
 					} // end if
 					
 				} // end if
@@ -390,9 +390,7 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-				yield return StartCoroutine(say( "It does suit me, doesn't it?  I had it made especially for me.  One simply doesn't find work like this underground. \n"
-		    +" Well, perhaps the Mountain-folk do make a few nice things, but they tend toward metals rather than clothes. \n"
-		    +" And of course the Seers -- the Ancient Illuminated Seers of the Moonstone, they call themselves -- they do nice work, too.  But they generally tend more toward the literary than the sartorial arts." ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 29;
@@ -431,9 +429,8 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Well, one does what one can.  Of course those awful Gray Goblins took all the really nice things with them when they stole away in the night -- this was just after Sir Cabirus died, you know, when things were falling apart -- and we've had to make do since then. \n"
-		    +" One of these days I'm going to get some poison into Ketchaval or his ugly wife (which amounts to the same thing -- he's terribly henpecked, you know), and then we'll see what's what.  King of the Gray Goblins, indeed./m" ));
-		yield return StartCoroutine(say( "Why he's an upstart!  His father was a horse-thief! But enough of this ... You wanted to know something?  How can I help you?" ));
+		yield return StartCoroutine(say( locals, 031 ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[1] = 33;
 		locals[2] = 34;
 		locals[3] = 35;
@@ -472,9 +469,8 @@ public class Conversation_9 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Oh, mention it not!  It is so seldom that I get a chance to speak to a really intelligent person!\n"
-		    +" I mean, our allies the Lizardmen are nice enough, but the poor fellows can't speak a word of the common tongue. They understand it well enough, but the poor things don't have the mouth to speak it.  And their language is so difficult! I know \"Sseth\" and \"'click\" mean \"yes\" and \"no,\" but I don't know which is which!/m" ));
-		yield return StartCoroutine(say( "Then there are the Knights of the Crux Ansata -- they can talk well enough, but all they ever say is how many Trolls they've killed.  Frightful bore, even if it does help keep the pest population down -- both kinds of pests, Knights AND Trolls, you know." ));
+		yield return StartCoroutine(say( locals, 037 ));
+		yield return StartCoroutine(say( locals, 038 ));
 		locals[1] = 39;
 		locals[2] = 40;
 		locals[3] = 41;
@@ -513,12 +509,8 @@ public class Conversation_9 : Conversation {
 		
 		// int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Oh, indeed it is!  Sometimes I wonder how I even manage.  It wasn't always like this, you know. \n"
-		    +" When Sir Cabirus was alive, things were ever so much better.  He had all of us working together so well.  A born leader was that man. \n"
-		    +" When he founded this colony you could have made a wager anywhere in Britannia that it wouldn't work, but he made it so. \n"
-		    +" I still think one of those bastard Grays must have done him in. There were certain items, too.../m" ));
-		yield return StartCoroutine(say( "Well, I suppose it will do no harm to tell thee.  Sir Cabirus collected eight great Talismans, each embodying a certain Virtue -- he was a great one for Virtue, was our Cabirus -- and it was well known that he intended them to come to the leaders of the various groups here in the Abyss.  Well, WE never saw them.  If they still exist, they must be lost. \n"
-		    +" But I must be boring thee." ));
+		yield return StartCoroutine(say( locals, 043 ));
+		yield return StartCoroutine(say( locals, 044 ));
 		locals[1] = 45;
 		locals[2] = 46;
 		locals[3] = 47;
@@ -548,8 +540,8 @@ public class Conversation_9 : Conversation {
 	} // end func
 	
 	IEnumerator func_06bc() {
-		
-		yield return StartCoroutine(say( "Well, bless you, you're such a charming conversationalist.  Please do visit again." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 048 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00e0();
@@ -560,7 +552,7 @@ public class Conversation_9 : Conversation {
 		
 		// int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Well!  I never!" ));
+		yield return StartCoroutine(say( locals, 049 ));
 		locals[1] = 50;
 		locals[2] = 51;
 		locals[3] = 0;
@@ -591,8 +583,7 @@ public class Conversation_9 : Conversation {
 		
 		// int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Oh, thou'rt just saying that.  I'm sure there's much more for thee to do than listen me me natter on. \n"
-		    +" And if you should happen to meet \"King\" Ketchaval or \"Queen\" Retichall of the Gray Goblins, be a dear and stick a knife in them, would you?" ));
+		yield return StartCoroutine(say( locals, 052 ));
 		locals[1] = 53;
 		locals[2] = 54;
 		locals[3] = 0;
@@ -606,14 +597,14 @@ public class Conversation_9 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-		//	break;
+			//	break;
 			
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-		//	break;
+			//	break;
 			
 		} // end switch
 		

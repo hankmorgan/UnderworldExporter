@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Conversation_194 : Conversation {
-
+	
 	//conversation #194
 	//string block 0x0ec2, name Dominus
 	int func_071c_result;
@@ -149,14 +149,14 @@ public class Conversation_194 : Conversation {
 	IEnumerator func_029d() {
 		
 		int[] locals = new int[217];
-
+		
 		locals[19] = 15;
 		locals[20] = 10001;	//Barter related skill?	
 		privateVariables[2] = x_skills( 2, locals[20], locals[19] );
-
+		
 		if ( privateVariables[0]==1 ) {
 			
-			yield return StartCoroutine(say( "Ah, 'tis thee again.  Hast thou brought any items for me to identify?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[21] = 2;
 			locals[22] = 3;
 			locals[23] = 0;
@@ -172,7 +172,7 @@ public class Conversation_194 : Conversation {
 				
 			case 2:
 				
-				yield return StartCoroutine(say( "Please return when thou hast need of my services." ));
+				yield return StartCoroutine(say( locals, 004 ));
 				locals[43] = 2;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -185,7 +185,7 @@ public class Conversation_194 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Ah, 'tis a new face I see.  I imagine that thou hast managed to find many a strange object on thy journey to these depths." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[44] = 6;
 		locals[45] = 7;
 		locals[46] = 0;
@@ -209,7 +209,7 @@ public class Conversation_194 : Conversation {
 		
 	label_034e:;
 		
-		yield return StartCoroutine(say( "I am surprised to hear that.  Well, if any items thou hast found are beyond thy ability to recognize, I would be happy to identify them for a small fee." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[66] = 9;
 		locals[67] = 10;
 		locals[68] = 11;
@@ -246,7 +246,7 @@ public class Conversation_194 : Conversation {
 		
 	label_03b4:;
 		
-		yield return StartCoroutine(say( "Well, I would be willing to identify some of thy items for a small fee." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[90] = 13;
 		locals[91] = 14;
 		locals[92] = 15;
@@ -282,7 +282,7 @@ public class Conversation_194 : Conversation {
 		} // end switch
 		
 	label_041a:;
-
+		
 		//locals[3] = show_inv( 2, locals[10], locals[5] );
 		locals[3] = show_inv( 2, locals, 10, 5 );
 		switch ( locals[3] ) {
@@ -292,18 +292,18 @@ public class Conversation_194 : Conversation {
 			locals[17] = locals[5];
 			locals[18] = locals[10];
 			locals[4] = 10 - privateVariables[2] / 6;
-			yield return StartCoroutine(say( "I will require @SI4 gold pieces to identify that item for thee." ));
+			yield return StartCoroutine(say( locals, 016 ));
 		label_0452:;
 			yield return StartCoroutine(func_0623 (locals[4]));
 			if ( func_0623_result==1 ) {
-			//if ( func_0623( locals[4] )==1 ) {
+				//if ( func_0623( locals[4] )==1 ) {
 				
 				locals[2] = identify_inv( 4, locals[115], locals[15], locals[114], locals[18] );
 				locals[114] = 1;
 				locals[115] = 3;
 				yield return StartCoroutine(func_071c(locals[18], locals[17]));
 				if ( func_071c_result == 0 ) {
-				//if ( func_071c( locals[18], locals[17] ) == 0 ) {
+					//if ( func_071c( locals[18], locals[17] ) == 0 ) {
 					
 					locals[116] = 1;
 					locals[117] = 7;
@@ -315,7 +315,7 @@ public class Conversation_194 : Conversation {
 					locals[123] = -1;
 					//x_obj_stuff( 9, locals[123], locals[122], locals[121], locals[120], locals[119], locals[118], locals[117], locals[116], locals[18] );
 					x_obj_stuff( 9, locals, 123, 122, 121, 120,119, 118, 117, 116, 18 );
-					yield return StartCoroutine(say( "That is @SS15.  Will there be anything else?" ));
+					yield return StartCoroutine(say( locals, 017 ));
 				} // end if
 				
 				locals[124] = 18;
@@ -342,12 +342,12 @@ public class Conversation_194 : Conversation {
 				} // end if
 				
 			} //else {
-				
-				//break;
-				
+			
+			//break;
+			
 			//} // end switch
 			
-			yield return StartCoroutine(say( "I'm sorry, but I cannot help thee if thou canst not pay an appropriate price." ));
+			yield return StartCoroutine(say( locals, 020 ));
 			locals[147] = 21;
 			locals[148] = 22;
 			locals[149] = 0;
@@ -366,7 +366,7 @@ public class Conversation_194 : Conversation {
 				
 			case 2:
 				
-				yield return StartCoroutine(say( "Well then!  Where are my @SI4 pieces of gold?" ));
+				yield return StartCoroutine(say( locals, 023 ));
 				goto label_0452;
 				
 				break;
@@ -377,7 +377,7 @@ public class Conversation_194 : Conversation {
 			
 		case 0:
 			
-			yield return StartCoroutine(say( "I don't identify invisible items!  Is there something thou dost wish me to identify?" ));
+			yield return StartCoroutine(say( locals, 024 ));
 			locals[170] = 25;
 			locals[171] = 26;
 			locals[172] = 0;
@@ -393,7 +393,7 @@ public class Conversation_194 : Conversation {
 				
 			case 2:
 				
-				yield return StartCoroutine(say( "Well, come back when thou art ready." ));
+				yield return StartCoroutine(say( locals, 027 ));
 				locals[192] = 2;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -403,9 +403,9 @@ public class Conversation_194 : Conversation {
 				
 			} // end switch
 			break;
-
+			
 		default:	
-			yield return StartCoroutine(say( "Please, please, one at a time!" ));
+			yield return StartCoroutine(say( locals, 028 ));
 			locals[193] = 29;
 			locals[194] = 30;
 			locals[195] = 0;
@@ -457,7 +457,7 @@ public class Conversation_194 : Conversation {
 			
 		} // end switch
 		
-//		locals[3] = show_inv( 2, locals[6], locals[11] );
+		//		locals[3] = show_inv( 2, locals[6], locals[11] );
 		locals[3] = show_inv( 2,locals, 6, 11);
 		if ( locals[3] == 0 ) {
 			
@@ -505,47 +505,47 @@ public class Conversation_194 : Conversation {
 		locals[2] = param2;//[0]play_hunger;
 		if ( 10 == locals[2] ) {
 			
-			yield return StartCoroutine(say( "That's the Sword of Justice, one of the Talismans of Virtue created by Cabirus.  Not too many finer weapons wilt thou see." ));
+			yield return StartCoroutine(say( locals, 033 ));
 		} else {
 			
 			if ( 54 == locals[2] ) {
 				
-				yield return StartCoroutine(say( "That is the Ring of Humility.  It has no magic powers, but still the Virtuous energy given it by Cabirus is undeniable." ));
+				yield return StartCoroutine(say( locals, 034 ));
 			} else {
 				
 				if ( 55 == locals[2] ) {
 					
-					yield return StartCoroutine(say( "That is the Shield of Valor, one of Cabirus' Talismans. It will protect your front side admirably, but 'twill not help thee if thou dost turn thy back on an enemy." ));
+					yield return StartCoroutine(say( locals, 035 ));
 				} else {
 					
 					if ( 151 == locals[2] ) {
 						
-						yield return StartCoroutine(say( "That is the Taper of Sacrifice, one of the Talismans of Virtue created by Cabirus.  Its light may not be great, but it will never fail thee." ));
+						yield return StartCoroutine(say( locals, 036 ));
 					} else {
 						
 						if ( 147 == locals[2] ) {
 							
-							yield return StartCoroutine(say( "That is the Taper of Sacrifice, one of the Talismans of Virtue created by Cabirus.  Its light may not be great, but it will never fail thee." ));
+							yield return StartCoroutine(say( locals, 036 ));
 						} else {
 							
 							if ( 174 == locals[2] ) {
 								
-								yield return StartCoroutine(say( "Ah, that is the Cup of Wonder.  'Twas fashioned by Sir Cabirus himself, as one of his Talismans.  Beautiful, is it not?" ));
+								yield return StartCoroutine(say( locals, 038 ));
 							} else {
 								
 								if ( 191 == locals[2] ) {
 									
-									yield return StartCoroutine(say( "The Wine of Compassion that is, one of Cabirus' Talismans. It was of a fine vintage, but perhaps it is past its prime now." ));
+									yield return StartCoroutine(say( locals, 039 ));
 								} else {
 									
 									if ( 310 == locals[2] ) {
 										
-										yield return StartCoroutine(say( "That is the Book of Honesty, one of the Talismans of Cabirus. It is said that the power of truth contained in the tome is such that its pages cannot be torn out." ));
+										yield return StartCoroutine(say( locals, 040 ));
 									} else {
 										
 										if ( 287 == locals[2] ) {
 											
-											yield return StartCoroutine(say( "That is the Standard of Honor, one of Cabirus' Talismans. It was to be a symbol of courage throughout all Britannia." ));
+											yield return StartCoroutine(say( locals, 041 ));
 										} else {
 											
 											locals[1] = 0;
@@ -577,7 +577,7 @@ public class Conversation_194 : Conversation {
 		locals[10] = -1;
 		//x_obj_stuff( 9, locals[10], locals[9], locals[8], locals[7], locals[6], locals[5], locals[4], locals[3], param1 );
 		x_obj_stuff( 9,locals, 10, 9, 8,7,6, 5, 4, 3, param1 );
-		yield return StartCoroutine(say( "Will there be anything else?" ));
+		yield return StartCoroutine(say( locals, 042 ));
 		locals[1] = 1;
 		goto label_081a;
 		
@@ -650,7 +650,7 @@ public class Conversation_194 : Conversation {
 		//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) ) {
 		yield return StartCoroutine (do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6],locals[1]) );
 		if (PlayerAnswer==1)	{
-
+			
 			privateVariables[1] = 1;
 		} // end if
 		
@@ -660,7 +660,7 @@ public class Conversation_194 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 053 ));
 		locals[1] = 54;
 		locals[2] = 55;
 		locals[3] = 0;
@@ -691,7 +691,7 @@ public class Conversation_194 : Conversation {
 		} // end if
 		
 	} // end func
-
-
-
+	
+	
+	
 }

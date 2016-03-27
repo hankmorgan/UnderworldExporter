@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_217 : Conversation {
-
+	
 	//conversation #217
 	//	string block 0x0ed9, name Gurstang
-
+	
 	int[] global = new int[2];
 	public override IEnumerator main() {
 		SetupConversation (3801);
@@ -14,7 +14,7 @@ public class Conversation_217 : Conversation {
 		func_0012();
 		yield return 0;
 	} // end func
-
+	
 	void func_0012() {
 		EndConversation ();
 		privateVariables[0] = 1;
@@ -151,7 +151,7 @@ public class Conversation_217 : Conversation {
 		int[] locals = new int[24];
 		locals[1] = 9;
 		global[1] = get_quest( 1, locals[1] );
-
+		
 		if ( privateVariables[0] == 1 ) {
 			
 			yield return StartCoroutine(func_03f7());
@@ -159,7 +159,7 @@ public class Conversation_217 : Conversation {
 		} else {
 			
 			global[0] = 0;
-			yield return StartCoroutine(say( "Ahh...So thou must be the one who has vanquished Tyball. Good...good...I sensed his passing but feared I would die here, forgotten." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[2] = 2;
 			locals[3] = 3;
 			locals[4] = 0;
@@ -177,7 +177,7 @@ public class Conversation_217 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -187,7 +187,7 @@ public class Conversation_217 : Conversation {
 		
 		int[] locals = new int[44];
 		
-		yield return StartCoroutine(say( "I am Gurstang. I ventured down here searching for the Key of Truth." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[22] = global[1];
 		locals[1] = 5;
 		locals[23] = 1;
@@ -213,9 +213,9 @@ public class Conversation_217 : Conversation {
 	} // end func
 	
 	IEnumerator func_0364() {
-		
+		int[] locals = new int[1];
 		global[0] = 1;
-		yield return StartCoroutine(say( "Illomo! So, Illomo told thee about me. Good, that means I  can trust thee. I think I've discovered the whereabouts of the key. Tell Illomo 'Folanae.' He'll know where to look, and explain what to do. As for myself, I have other matters to attend to down here. Farewell." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		yield return StartCoroutine(func_044c());
 	} // end func
 	
@@ -224,7 +224,7 @@ public class Conversation_217 : Conversation {
 		int[] locals = new int[23];
 		
 		global[0] = 1;
-		yield return StartCoroutine(say( "A noble quest, indeed, and one that should be fulfilled, even though I am no longer the man to do it.  Hmm.  I shall have to take a risk and trust thee. Seek out a man in the area of the Seers of the Moonstone.  His name is Illomo.  When thou dost meet him, tell him I recommend thee to him, and say this word: \"Folanae.\" He will know what to do next." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -249,7 +249,7 @@ public class Conversation_217 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "No thanks are necessary, as long as thou dost succeed in the quest.  Now, go!" ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -266,26 +266,26 @@ public class Conversation_217 : Conversation {
 		
 		if ( global[0]==0 ) {
 			
-			yield return StartCoroutine(say( "Thou art back!" ));
+			yield return StartCoroutine(say( locals, 013 ));
 			yield return StartCoroutine(func_0308());
 		} else {
-
+			
 			locals[2] = 3;
 			locals[1] = random( 1, locals[2] );
 			locals[3] = locals[1];
 			if ( 1 == locals[3] ) {
 				
-				yield return StartCoroutine(say( "I've other business.  Farewell." ));
+				yield return StartCoroutine(say( locals, 014 ));
 			} else {
 				
 				if ( 2 == locals[3] ) {
 					
-					yield return StartCoroutine(say( "Continue thy quest!  I shall be all right." ));
+					yield return StartCoroutine(say( locals, 015 ));
 				} else {
 					
 					if ( 3 == locals[3] ) {
 						
-						yield return StartCoroutine(say( "Farewell!  I'm too busy to talk!" ));
+						yield return StartCoroutine(say( locals, 016 ));
 					} // end if
 					
 				} // end if
@@ -314,7 +314,7 @@ public class Conversation_217 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Gone?  Yes, I imagine he is.  But his malice lingers, does it not?" ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 20;
 		locals[3] = 0;
@@ -339,7 +339,7 @@ public class Conversation_217 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Dost thou seek the Key of Truth?  It may help thee." ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[1] = 22;
 		locals[2] = 23;
 		locals[3] = 0;
@@ -432,7 +432,7 @@ public class Conversation_217 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 36;
 		locals[3] = 0;
@@ -464,5 +464,5 @@ public class Conversation_217 : Conversation {
 	} // end func
 
 */
-
+	
 }

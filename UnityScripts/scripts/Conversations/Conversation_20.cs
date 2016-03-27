@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_20 : Conversation {
-
-
-//	conversation #20
+	
+	
+	//	conversation #20
 	//	string block 0x0e14, name Gulik
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3604);
@@ -153,7 +153,7 @@ public class Conversation_20 : Conversation {
 		int[] locals=new int[27];
 		locals[2] = 1;
 		privateVariables[3] = get_quest( 1, locals[2] );
-
+		
 		if ( privateVariables[0] == 1 ) {
 			
 			yield return StartCoroutine(func_053a());
@@ -165,12 +165,12 @@ public class Conversation_20 : Conversation {
 			locals[4] = locals[1];
 			if ( 1 == locals[4] ) {
 				
-				yield return StartCoroutine(say( "Who art thou?" ));
+				yield return StartCoroutine(say( locals, 001 ));
 			} else {
 				
 				if ( 2 == locals[4] ) {
 					
-					yield return StartCoroutine(say( "What is thy name, stranger?" ));
+					yield return StartCoroutine(say( locals, 002 ));
 				} // end if
 				
 			} // end if
@@ -195,7 +195,7 @@ public class Conversation_20 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00c2();
 				yield break;
-			//	break;
+				//	break;
 				
 			case 3:
 				
@@ -214,7 +214,7 @@ public class Conversation_20 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "I am Gulik, called the Blessed." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[1] = 7;
 		locals[2] = 8;
 		locals[3] = 9;
@@ -247,7 +247,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Our leader is Hagbard.  Hast thou spoken to him?" ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[1] = 11;
 		locals[2] = 12;
 		locals[3] = 13;
@@ -287,7 +287,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "I did not hear thee talk with Hagbard!  Why dost thou lie?  Art thou a spy for Ketchaval?" ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 17;
@@ -320,7 +320,7 @@ public class Conversation_20 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
 			yield break;
-		//	break;
+			//	break;
 			
 		} // end switch
 		
@@ -330,7 +330,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Not even a Gray spy would pretend such ignorance!  Ketchaval is the King of the Gray Goblins.  Therefore, if thou art a spy, thou must be from Vernix of the Greens!" ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 22;
@@ -367,7 +367,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Thou art in the Great Stygian Abyss, where neither thou nor any other may ever hope to leave again.  'Tis worse than any prison, for there is no hope of parole or pardon, and no death so clean as an honest hanging." ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 24;
 		locals[2] = 25;
 		locals[3] = 26;
@@ -384,12 +384,12 @@ public class Conversation_20 : Conversation {
 			
 		case 2:
 			
-    		yield return StartCoroutine(func_07e5());
+			yield return StartCoroutine(func_07e5());
 			break;
 			
 		case 3:
 			
-    		yield return StartCoroutine(func_082d());
+			yield return StartCoroutine(func_082d());
 			break;
 			
 		} // end switch
@@ -402,10 +402,10 @@ public class Conversation_20 : Conversation {
 		int[] locals=new int[23];
 		if ( privateVariables[2] == 1 ) {
 			
-			yield return StartCoroutine(say( "Greetings, @GS8!  Hast thou spoken with Hagbard?" ));
+			yield return StartCoroutine(say( locals, 027 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Hello again, stranger.  Hast spoken to our leader?" ));
+			yield return StartCoroutine(say( locals, 028 ));
 		} // end if
 		
 		locals[1] = 29;
@@ -443,7 +443,7 @@ public class Conversation_20 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "Do so!" ));
+			yield return StartCoroutine(say( locals, 032 ));
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
@@ -458,7 +458,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "I have been called 'the Blessed' since my prison days, when I was considered lucky because I have a taste for cockroaches.  I never went hungry, thou seest." ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[1] = 34;
 		locals[2] = 35;
 		locals[3] = 36;
@@ -495,7 +495,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Then thou shouldst speak with Hagbard.  He is our leader." ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 40;
@@ -534,7 +534,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Greetings!  What may I do for thee?" ));
+		yield return StartCoroutine(say( locals, 041 ));
 		locals[1] = 42;
 		locals[2] = 43;
 		locals[3] = 44;
@@ -576,7 +576,7 @@ public class Conversation_20 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "Ah, I remember.  He was talking to thee earlier!  Well, may I help thee?" ));
+		yield return StartCoroutine(say( locals, 046 ));
 		locals[1] = 47;
 		locals[2] = 48;
 		locals[3] = 49;
@@ -617,7 +617,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Thou needs must speak with Hagbard.  He alone, of all of us, retains his sanity amidst the madness of this place." ));
+		yield return StartCoroutine(say( locals, 051 ));
 		locals[1] = 52;
 		locals[2] = 53;
 		locals[3] = 0;
@@ -646,9 +646,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "It was not always such.  Once, a leader name Sir Cabirus (curst be his name!) had the foolish notion that this place could be colonized. \n"
-		    +" When his folly caught up with him, the 'civilization'' of the under-earth fell, and we now scrabble to survive in its ruins. \n"
-		    +" He died, and so escaped the punishment for his crime.  Dreamers!  They will be the death of us all!" ));
+		yield return StartCoroutine(say( locals, 054 ));
 		locals[1] = 55;
 		locals[2] = 56;
 		locals[3] = 0;
@@ -675,7 +673,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "I killed a man who needed killing.  My crime was being caught." ));
+		yield return StartCoroutine(say( locals, 057 ));
 		locals[1] = 58;
 		locals[2] = 59;
 		locals[3] = 0;
@@ -704,7 +702,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Escape!  Ha!  There be no escape from this place, barring the Final Escape of death. When the colony fell, a mighty spell was laid on the Great Gate.  Now it cannot be opened save from the outside." ));
+		yield return StartCoroutine(say( locals, 060 ));
 		locals[1] = 61;
 		locals[2] = 62;
 		locals[3] = 0;
@@ -731,7 +729,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "And perhaps thou art a fool!  Good day to thee!" ));
+		yield return StartCoroutine(say( locals, 063 ));
 		locals[1] = 64;
 		locals[2] = 65;
 		locals[3] = 0;
@@ -762,7 +760,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Below us now?  Why, the flaming heart of the volcano, I would surmise.  And below that lie the bowels of Britannia.  Think, friend, someday thou wilt be part of that, and not another  body thrashing about in these caverns we call home." ));
+		yield return StartCoroutine(say( locals, 066 ));
 		locals[1] = 67;
 		locals[2] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
@@ -781,8 +779,8 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine(say( "Ah, thou shouldst know that it is often easier to find useful items by bartering than simply by scavenging.  Find thyself someone who is willing to trade, and give him the items thou dost not need in exchange for more useful ones./m" ));
-		yield return StartCoroutine(say( "Keep in mind whom thou art dealing with.  I hear that the Mountainfolk are fond of gold, for example, while Goblins may not be as attached to it." ));
+		yield return StartCoroutine(say( locals, 068 ));
+		yield return StartCoroutine(say( locals, 069 ));
 		locals[1] = 70;
 		locals[2] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
@@ -874,7 +872,7 @@ public class Conversation_20 : Conversation {
 		
 		//int locals[24];
 		int[] locals=new int[25];
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 081 ));
 		locals[1] = 82;
 		locals[2] = 83;
 		locals[3] = 0;
@@ -909,8 +907,8 @@ public class Conversation_20 : Conversation {
 		} // end if
 		
 	} // end func
-
-
-
-
+	
+	
+	
+	
 }

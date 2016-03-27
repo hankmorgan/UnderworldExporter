@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_66 : Conversation {
-
+	
 	/*conversation #66
 		string block 0x0e42, name Drog*/
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3650);
 		//StringNo = 3650;
@@ -19,14 +19,14 @@ public class Conversation_66 : Conversation {
 		//this.GetComponent<NPC>().state=  NPC.AI_STATE_STANDING;
 		yield return 0;
 	} // end func
-
-
+	
+	
 	void func_0012() {
 		EndConversation();
 		privateVariables[0] = 1;
 	} // end func
 	
-/*	void func_0020() {
+	/*	void func_0020() {
 		
 		int locals[1];
 		
@@ -98,7 +98,7 @@ public class Conversation_66 : Conversation {
 		param1[2] = game_mins;
 	} // end func*/
 	
-/*	void func_0106() {
+	/*	void func_0106() {
 		
 		int locals[4];
 		
@@ -161,7 +161,7 @@ public class Conversation_66 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine( say( "Yes?  What your business here?" ));
+			yield return StartCoroutine( say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -193,7 +193,7 @@ public class Conversation_66 : Conversation {
 			
 		label_02fd:;
 			
-			yield return StartCoroutine( say( "Well, intrude you did!  Out now!" ));
+			yield return StartCoroutine( say( locals, 005 ));
 			locals[23] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -201,12 +201,12 @@ public class Conversation_66 : Conversation {
 			yield break;//?
 		label_030b:;
 			
-		//label_030b:;
+			//label_030b:;
 			
-			yield return StartCoroutine( say( "This is best place to see, when you see Abyss.  King Vernix, he the bravest in whole underworld.  You go see him, if he see you." ));
+			yield return StartCoroutine( say( locals, 006 ));
 			if ( npc.npc_attitude < 2 ) {
 				
-				say( "I don't know if he see one beat up like you." );
+				say( locals, 007 );
 			} // end if
 			
 			locals[24] = 15;
@@ -220,7 +220,7 @@ public class Conversation_66 : Conversation {
 			yield break;
 		} // end if
 		
-		yield return StartCoroutine( say( "You again!  What you want now?" ));
+		yield return StartCoroutine( say( locals, 008 ));
 		locals[28] = 9;
 		locals[29] = 10;
 		locals[30] = 0;
@@ -246,7 +246,7 @@ public class Conversation_66 : Conversation {
 		
 	label_0384:;
 		
-		yield return StartCoroutine( say( "Okay.  But you be careful, Green Goblins not like messing with." ));
+		yield return StartCoroutine( say( locals, 011 ));
 		locals[50] = 15;
 		locals[51] = 34;
 		locals[52] = 0;

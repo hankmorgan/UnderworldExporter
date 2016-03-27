@@ -2,17 +2,17 @@
 using System.Collections;
 
 public class Conversation_142 : Conversation {
-
+	
 	//conversation #142
 	//string block 0x0e8e, name Rodrick
-			
+	
 	public override bool OnDeath ()
 	{//When rodrick dies he will set a quest flag for dorna ironfist
 		base.OnDeath ();
 		set_quest(0,1,11);
 		return false;
 	}
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3726);
 		privateVariables[1] = 0;
@@ -25,7 +25,7 @@ public class Conversation_142 : Conversation {
 		EndConversation();
 		privateVariables[0] = 1;
 	} // end func
-/*	
+	/*	
 	void func_0020() {
 		
 		int locals[1];
@@ -62,7 +62,7 @@ public class Conversation_142 : Conversation {
 		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
-
+	
 	/*
 	void func_00a4() {
 		
@@ -171,52 +171,52 @@ public class Conversation_142 : Conversation {
 			locals[1] = privateVariables[2];
 			if ( 0 == locals[1] ) {
 				
-				yield return StartCoroutine(say( "Ha!  Another has come to be defeated by the Chaos Knight! Very well, let us see how quickly I can slay thee." ));
+				yield return StartCoroutine(say( locals, 001 ));
 			} else {
 				
 				if ( 1 == locals[1] ) {
 					
-					yield return StartCoroutine(say( "I am almost tempted to spare thee so that thou canst tell thy companions of my power." ));
+					yield return StartCoroutine(say( locals, 002 ));
 				} else {
 					
 					if ( 2 == locals[1] ) {
 						
-						yield return StartCoroutine(say( "I see that thou art more interested in conversing than in fighting.  A true warrior thou art not." ));
+						yield return StartCoroutine(say( locals, 003 ));
 					} else {
 						
 						if ( 3 == locals[1] ) {
 							
-							yield return StartCoroutine(say( "Have the Knights sent thee?  So much the better, as thy defeat will be a lesson to them all!" ));
+							yield return StartCoroutine(say( locals, 004 ));
 						} else {
 							
 							if ( 4 == locals[1] ) {
 								
-								yield return StartCoroutine(say( "If thou wert as intelligent as thou art talkative, thou wouldst have fled long ago." ));
+								yield return StartCoroutine(say( locals, 005 ));
 							} else {
 								
 								if ( 5 == locals[1] ) {
 									
-									yield return StartCoroutine(say( "Thy bravery is admirable, but thy skill is not." ));
+									yield return StartCoroutine(say( locals, 006 ));
 								} else {
 									
 									if ( 6 == locals[1] ) {
 										
-										yield return StartCoroutine(say( "Perhaps I should have warned thee earlier that I am invincible." ));
+										yield return StartCoroutine(say( locals, 007 ));
 									} else {
 										
 										if ( 7 == locals[1] ) {
 											
-											yield return StartCoroutine(say( "Thou hast not had enough of my sword?  I have certainly had enough of thy tongue." ));
+											yield return StartCoroutine(say( locals, 008 ));
 										} else {
 											
 											if ( 8 == locals[1] ) {
 												
-												yield return StartCoroutine(say( "Perhaps thou art proud that thou hast not been defeated yet. Worry not, thy time will come soon enough." ));
+												yield return StartCoroutine(say( locals, 009 ));
 											} else {
 												
 												if ( 9 == locals[1] ) {
 													
-													yield return StartCoroutine(say( "If thou dost think thou canst tire me by speaking incessantly, thou art quite mistaken." ));
+													yield return StartCoroutine(say( locals, 010 ));
 												} // end if
 												
 											} // end if
@@ -247,12 +247,12 @@ public class Conversation_142 : Conversation {
 	} // end func
 	
 	IEnumerator func_0352() {
-		
-		say( "I am bored with speaking to thee, but I will never tire of fighting!" );
+		int[] locals = new int[1];
+		say( locals, 011 );
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_008b();
 		yield break;
 	} // end func
-
+	
 }

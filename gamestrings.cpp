@@ -119,15 +119,22 @@ short FirstLine=0;
 					}
 
 					// have a new symbol
-					if ((hman[node].symbol !='|') && (hman[node].symbol !=10)){
+					if ((hman[node].symbol !='|')){
 						if (blnFnd==0)
 							//{printf("\nBlock %d String %d at %d:",blocks[i].block_no, j, strAdd);	}
 							{
 							if (FirstLine != 0){ fprintf(LOGFILE, "\n"); }else{ FirstLine = 1; }
 							//printf("\n%03d=",j);	
-							fprintf(LOGFILE, "%03d€%03d€%03d€", i, blocks[i].block_no, j);
+							fprintf(LOGFILE, "%03d~%03d~%03d~", i, blocks[i].block_no, j);
 							}
-						fprintf(LOGFILE, "%c", hman[node].symbol);
+						if ((hman[node].symbol == 10))
+							{
+							fprintf(LOGFILE, " \\n");
+							}
+						else
+							{
+							fprintf(LOGFILE, "%c", hman[node].symbol);
+							}						
 						blnFnd = 1;
 					}
 				} while (hman[node].symbol != '|');		

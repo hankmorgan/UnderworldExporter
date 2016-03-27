@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_314 : Conversation {
-
+	
 	//conversation #314
 	//string block 0x0f3a, wisp
-			
+	
 	public override IEnumerator main() {
 		SetupConversation (3898);
 		privateVariables[1] = 0;
@@ -154,7 +154,7 @@ public class Conversation_314 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "A human it is.  We have been watching you.  A fine race you are, but somewhat unknowledgable.  To divide all your intelligence amongst yourselves as you do - it does not seem correct.  And your bodies must be so hard to maintain.  Still, we are impressed that you do as well as you do." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -179,9 +179,9 @@ public class Conversation_314 : Conversation {
 			
 		label_02e9:;
 			
-	
 			
-			yield return StartCoroutine(say( "Surely it is not so.  Having no bodies to hamper us, we have no worries or cares.  We can devote our whole being to our sole quest - the gathering of information." ));
+			
+			yield return StartCoroutine(say( locals, 004 ));
 			locals[23] = 5;
 			locals[24] = 6;
 			locals[25] = 0;
@@ -206,9 +206,9 @@ public class Conversation_314 : Conversation {
 			
 		label_0329:;
 			
-		
 			
-			yield return StartCoroutine(say( "Indeed, most of the things we know are on such a high plane that it is doubtful a human would be able to understand them." ));
+			
+			yield return StartCoroutine(say( locals, 007 ));
 			locals[45] = 8;
 			locals[46] = 9;
 			locals[47] = 0;
@@ -233,8 +233,8 @@ public class Conversation_314 : Conversation {
 			
 		label_0369:;
 			
-					
-			yield return StartCoroutine(say( "Ah, so you would know information so advanced it is more dangerous than you can imagine?  Very well, here is a piece for you: the spell Vas Kal Corp will bring an end to life as you know it, although higher beings such as we will continue to exist in our own way.  There.  We are eager to see to what use you will put this information." ));
+			
+			yield return StartCoroutine(say( locals, 010 ));
 			locals[67] = 11;
 			locals[68] = 13;
 			locals[69] = 0;
@@ -245,12 +245,12 @@ public class Conversation_314 : Conversation {
 				
 			case 1:
 				
-				yield return StartCoroutine(say( "Perhaps you are not as intelligent as we first thought." ));
+				yield return StartCoroutine(say( locals, 012 ));
 				break;
 				
 			case 2:
 				
-				yield return StartCoroutine(say( "And that itself is something it is good you should know." ));
+				yield return StartCoroutine(say( locals, 014 ));
 				break;
 				
 			} // end switch
@@ -261,7 +261,7 @@ public class Conversation_314 : Conversation {
 			yield break;
 		} // end if
 		
-		yield return StartCoroutine(say( "So you have decided not to use the information we have given you?" ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[89] = 16;
 		locals[90] = 18;
 		locals[91] = 0;
@@ -272,12 +272,12 @@ public class Conversation_314 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(say( "If you have learned that not all information is beneficial, you have indeed learned some beneficial information." ));
+			yield return StartCoroutine(say( locals, 017 ));
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Indeed!  That will be an interesting sight." ));
+			yield return StartCoroutine(say( locals, 019 ));
 			break;
 			
 		} // end switch

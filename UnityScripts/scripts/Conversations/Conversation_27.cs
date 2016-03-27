@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_27 : Conversation {
-
+	
 	//conversation #27
 	//string block 0x0e1b, name Garamon
-			
-
+	
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3611);
@@ -68,7 +68,7 @@ public class Conversation_27 : Conversation {
 		npc.npc_attitude = param1;//param1[0]play_hunger;
 		func_0012();
 	} // end func
-
+	
 	void func_00c2() {
 		
 		npc.npc_attitude = 2;
@@ -158,8 +158,7 @@ public class Conversation_27 : Conversation {
 		
 		privateVariables[2] = 1;
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "Thou hast done well.  And now that my bones are at last at rest I can speak freely to thee.  But my spirit cannot rest while yet this peril remains. \n /m"
-		                               + " We must open a gate, near where the foul creature my brother summoned lies bound. We must return it to the plane from whence it came." ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 0;
@@ -184,7 +183,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "No other power can defeat it.  Even banishing it to another place will do it no harm -- may in fact restore to it its full power, if that place be like to its own -- but it will at least remove the threat to Britannia!" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -201,7 +200,7 @@ public class Conversation_27 : Conversation {
 		
 		locals[1] = get_quest( 1, locals[2] );
 		locals[2] = 5;
-		yield return StartCoroutine(say( "For this I will need a great deal of magical energy. This will be no gentle luring such as brought thee here, but an unimaginable vortex of interplanar energy." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[24] = locals[1];
 		locals[3] = 7;
 		locals[25] = 1;
@@ -230,7 +229,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Tyball's Orb would be perilous to use, even if it were intact.  The power we tap must be carefully chosen...  As thou may have guessed, I am a little out of touch with thy world.  I had hoped thou might provide an answer." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 11;
 		locals[3] = 0;
@@ -255,7 +254,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "It would be best if the source were absolutely pure -- my brother found the danger in tapping powers whose source thou knowest not -- and 'twould be best if Britannia herself were somehow involved." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[1] = 13;
 		locals[2] = 14;
 		locals[3] = 0;
@@ -280,7 +279,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[44];
 		
-		yield return StartCoroutine(say( "'Twould help to invoke one of the Elements.  We work for Britannia's succor, and we must hope she would lend what aid she could." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[22] = privateVariables[2];
 		locals[1] = 16;
 		locals[23] = privateVariables[3];
@@ -313,26 +312,26 @@ public class Conversation_27 : Conversation {
 	} // end func
 	
 	IEnumerator func_04a1() {
-		
+		int[] locals = new int[1];
 		privateVariables[2] = 0;
-		yield return StartCoroutine(say( "The classical four: earth, air, fire, and water." ));
+		yield return StartCoroutine(say( locals, 019 ));
 		//return;
 		yield break;
 		
 	} // end func
 	
 	IEnumerator func_04b3() {
-		
+		int[] locals = new int[1];
 		privateVariables[3] = 0;
-		yield return StartCoroutine(say( "Indeed she is, a green and living entity.  Not conscious as we know it, but perhaps aware that we work to her ends." ));
+		yield return StartCoroutine(say( locals, 020 ));
 		//return;
 		yield break;
 		
 	} // end func
 	
 	IEnumerator func_04c5() {
-		
-		yield return StartCoroutine(say( "Yes, the source, which, if we are fortunate, may even wake Britannia to our aid, should be as pure as possible.  Else we risk ending like my brother." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 021 ));
 		yield return StartCoroutine(func_04d2());
 	} // end func
 	
@@ -359,7 +358,7 @@ public class Conversation_27 : Conversation {
 				
 				//locals[1] = babl_ask( 0 );
 				yield return StartCoroutine( babl_ask((0)));
-
+				
 				locals[24] = 24;
 				locals[25] = 25;
 				//(contains( 2, locals[1], locals[24] ) || contains( 2, locals[1], locals[25] ));  // expr. has value on stack!
@@ -368,7 +367,7 @@ public class Conversation_27 : Conversation {
 					yield return StartCoroutine(func_057c());
 				} else {
 					
-					yield return StartCoroutine(say( "No, that will not do.  Perhaps something else..." ));
+					yield return StartCoroutine(say( locals, 026 ));
 					privateVariables[5] = privateVariables[5] + 1;
 				} // end if
 				
@@ -381,24 +380,24 @@ public class Conversation_27 : Conversation {
 	} // end func
 	
 	IEnumerator func_055b() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[5] < 3 ) {
 			
-			yield return StartCoroutine(say( "Perhaps thou shouldst ponder the problem for a bit longer.  But think carefully and quickly, for the fate of Britannia is at stake!" ));
+			yield return StartCoroutine(say( locals, 027 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} else {
 			
 			privateVariables[5] = 0;
-			yield return StartCoroutine(say( "Perhaps some item or items imbued with Virtue might be of use, if any exist.  Dost thou know of any such items?" ));
+			yield return StartCoroutine(say( locals, 028 ));
 			yield return StartCoroutine(func_04d2());
 		} // end if
 		
 	} // end func
 	
 	IEnumerator func_057c() {
-		
+		int[] locals = new int[1];
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "Yes, of course!  Those would do admirably.  Now, we must find a means to unleash their stored Virtue.  We must find some latent source of power that can be released by applying the energy of the Talismans." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		yield return StartCoroutine(func_058e());
 	} // end func
 	
@@ -432,7 +431,7 @@ public class Conversation_27 : Conversation {
 					yield return StartCoroutine(func_0638());
 				} else {
 					
-					yield return StartCoroutine(say( "No, we need a great source of power that might easily be released." ));
+					yield return StartCoroutine(say( locals, 034 ));
 					privateVariables[7] = privateVariables[7] + 1;
 				} // end if
 				
@@ -445,15 +444,15 @@ public class Conversation_27 : Conversation {
 	} // end func
 	
 	IEnumerator func_0617() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[7] < 3 ) {
 			
-			yield return StartCoroutine(say( "Well, I hope that thou art able to solve the problem quickly, for the fate of Britannia itself hangs in the balance!" ));
+			yield return StartCoroutine(say( locals, 035 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} else {
 			
 			privateVariables[7] = 0;
-			yield return StartCoroutine(say( "Perhaps some natural landmark that contains the ability to release great power will do the trick." ));
+			yield return StartCoroutine(say( locals, 036 ));
 			yield return StartCoroutine(func_058e());
 		} // end if
 		
@@ -463,7 +462,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Yes, of course!  If all eight Talismans be thrust into the volcano's maw, one at a time, I could ride the wave of such power to open the vortex. Ah, thou art wise as well as valorous!  Wilt thou make such a sacrifice?" ));
+		yield return StartCoroutine(say( locals, 037 ));
 		privateVariables[6] = 1;
 		locals[1] = 38;
 		locals[2] = 39;
@@ -489,7 +488,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "But thou must!  Thy sacrifice shall save all of this world!  Surely thou cannot place thine own travails and successes against such a stake as that!" ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 0;
@@ -514,7 +513,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Excellent!  Make haste to the lowest place, where thou must cast all eight into the Abyss -- hold back not one, upon thy peril!  When they are consumed by earth's own fire, I shall leash the torrent to gape wide my gate.  With Fortune's smile, we shall send our foe screeching back to its Hell!" ));
+		yield return StartCoroutine(say( locals, 043 ));
 		locals[1] = 44;
 		locals[2] = 45;
 		locals[3] = 0;
@@ -539,7 +538,7 @@ public class Conversation_27 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "The Chamber of Virtue is located on the lowest level of the Abyss.  It lies at the very center of the volcano, where the energy fields of the Stygian are their strongest.  'Tis said that a special three-part key is needed to enter, but I know not the veracity of this legend." ));
+		yield return StartCoroutine(say( locals, 046 ));
 		locals[1] = 47;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -547,7 +546,7 @@ public class Conversation_27 : Conversation {
 			
 		} // end if
 		
-		yield return StartCoroutine(say( "Hurry!  There is little time to lose!" ));
+		yield return StartCoroutine(say( locals, 048 ));
 		locals[23] = 3;
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 		func_00b1( locals[23] );
@@ -555,20 +554,20 @@ public class Conversation_27 : Conversation {
 	} // end func
 	
 	IEnumerator func_0755() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[6]==1 ) {
 			
-			yield return StartCoroutine(say( "Hurry, @GS8, there is no time to lose!  Thou must cast all eight of Cabirus' Talismans into the volcano on the lowest level of the Abyss.  Do not fail in thy quest!" ));
+			yield return StartCoroutine(say( locals, 049 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} // end if
 		
 		if ( privateVariables[4]==1 ) {
 			
-			yield return StartCoroutine(say( "Yes?  Hast thou discovered a source of energy with which the power of Cabirus' Talismans can be released?" ));
+			yield return StartCoroutine(say( locals, 050 ));
 			yield return StartCoroutine(func_058e());
 		} // end if
 		
-		yield return StartCoroutine(say( "Yes?  Hast thou thought of a pure source of power and virtue which may provide me with the requisite amount of magical energy?" ));
+		yield return StartCoroutine(say( locals, 051 ));
 		yield return StartCoroutine(func_04d2());
 	} // end func
 }

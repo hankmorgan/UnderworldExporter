@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_16 : Conversation {
-
+	
 	//conversation #16
 	//string block 0x0e10, name Ishtass
-			
+	
 	public int[] global=new int[3];
 	public override IEnumerator	main() {
 		SetupConversation (3600);
@@ -164,30 +164,30 @@ public class Conversation_16 : Conversation {
 		} // end if
 		else
 		{
-		yield return StartCoroutine(say( "A greeting to you I give.  Ishtass I am known as.  What thing you are wanting?" ));
-		locals[1] = 2;
-		locals[2] = 3;
-		locals[3] = 0;
-//		locals[22] = babl_menu( 0, locals[1] );
-		yield return StartCoroutine(babl_menu (0,locals,1));
-		locals[22] = PlayerAnswer;
-		switch ( locals[22] ) {
-			
-		case 1:
-			
-			yield return StartCoroutine(func_030d());
-			break;
-			
-		case 2:
-			
-			locals[23] = 3;
-			Time.timeScale =SlomoTime;
-			yield return new WaitForSeconds(WaitTime);
-			func_00b1( locals[23] );
-			yield break;
-			break;
-			
-		} // end switch
+			yield return StartCoroutine(say( locals, 001 ));
+			locals[1] = 2;
+			locals[2] = 3;
+			locals[3] = 0;
+			//		locals[22] = babl_menu( 0, locals[1] );
+			yield return StartCoroutine(babl_menu (0,locals,1));
+			locals[22] = PlayerAnswer;
+			switch ( locals[22] ) {
+				
+			case 1:
+				
+				yield return StartCoroutine(func_030d());
+				break;
+				
+			case 2:
+				
+				locals[23] = 3;
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
+				func_00b1( locals[23] );
+				yield break;
+				break;
+				
+			} // end switch
 		}
 	} // end func
 	
@@ -196,7 +196,7 @@ public class Conversation_16 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Though by other Thepa the Quiet Ones my people are called, this an irony is. We alone of the Thepa your language can speak." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 7;
@@ -238,7 +238,7 @@ public class Conversation_16 : Conversation {
 			npc.npc_attitude = 3;
 		} // end if
 		
-		yield return StartCoroutine(say( "Not easy it is, but we try.  Now, you in some need are?" ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 11;
@@ -274,7 +274,7 @@ public class Conversation_16 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( "The Thepa my folk are.  By you Lizardmen they are called." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[1] = 13;
 		locals[2] = 14;
 		locals[3] = 0;
@@ -302,7 +302,7 @@ public class Conversation_16 : Conversation {
 		//int locals[23];
 		int [] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Nay, against our oaths it goes.  We a humble order are, sworn secrets to keep.  Perhaps one among your people the True Speech knows." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[1] = 16;
 		locals[2] = 17;
 		locals[3] = 18;
@@ -344,7 +344,7 @@ public class Conversation_16 : Conversation {
 		
 		if ( npc.npc_attitude < 2 ) {
 			
-			yield return StartCoroutine(say( "Nay.  A stranger thou art.  We cannot thee help." ));
+			yield return StartCoroutine(say( locals, 019 ));
 			locals[1] = 20;
 			locals[2] = 21;
 			locals[3] = 0;
@@ -370,16 +370,16 @@ public class Conversation_16 : Conversation {
 				func_00b1( locals[24] );
 				yield break;
 				break;
-
+				
 			} // end if
 		} // end switch
 		
 		if ( global[0] == 0 ) {
 			
-			yield return StartCoroutine(say( "Wouldst mad wizard know of?" ));
+			yield return StartCoroutine(say( locals, 022 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Wouldst mad wizard story again hear?" ));
+			yield return StartCoroutine(say( locals, 023 ));
 		} // end if
 		
 		locals[25] = 24;
@@ -412,7 +412,7 @@ public class Conversation_16 : Conversation {
 		int [] locals = new int[92];
 		
 		global[0] = 1;
-		yield return StartCoroutine(say( "After Sir Cabirus death, mumbling wizard began upriver working.  He talked with me after, as your strange tongue we know.  Spoke he, who nameless remains, of a Great Sword, apart he broke." ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 0;
@@ -434,7 +434,7 @@ public class Conversation_16 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "I cannot more much say.  For favor I will more information get." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[23] = 30;
 		locals[24] = 31;
 		locals[25] = 32;
@@ -468,7 +468,7 @@ public class Conversation_16 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Ossikka, leader of ours, upstream travelled, a great many-armed water beast known to Thepa as kri'kla to kill.  He returned never.  Would you him find?" ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[47] = 34;
 		locals[48] = 35;
 		locals[49] = 0;
@@ -490,7 +490,7 @@ public class Conversation_16 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Upstream Ossikka travelled, returning never.  Book of mad wizard had he, perhaps telling more.  Return with news and the Quiet One will reward handsomely you." ));
+		yield return StartCoroutine(say( locals, 036 ));
 		global[1] = 1;
 		locals[69] = 37;
 		locals[70] = 0;
@@ -540,17 +540,17 @@ public class Conversation_16 : Conversation {
 		locals[4] = npc.npc_attitude;
 		if ( 1 == locals[4] ) {
 			
-			yield return StartCoroutine(say( "Not welcome here thou art!" ));
+			yield return StartCoroutine(say( locals, 038 ));
 		} else {
 			
 			if ( 2 == locals[4] ) {
 				
-				yield return StartCoroutine(say( "What you here brings?" ));
+				yield return StartCoroutine(say( locals, 039 ));
 			} else {
 				
 				if ( 3 == locals[4] ) {
 					
-					yield return StartCoroutine(say( "Again, a greeting to you I give." ));
+					yield return StartCoroutine(say( locals, 040 ));
 				} // end if
 				
 			} // end if
@@ -604,7 +604,7 @@ public class Conversation_16 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Of you I worry.  Perhaps I should not help." ));
+		yield return StartCoroutine(say( locals, 046 ));
 		locals[48] = 47;
 		locals[49] = 48;
 		locals[50] = 0;
@@ -622,14 +622,14 @@ public class Conversation_16 : Conversation {
 			
 		case 2:
 			npc.npc_attitude = 2;
-			yield return StartCoroutine(say( "Is good thing Ishtass nice.  Many civilized groups are still found in the Abyss and must be treated with much kindness.  Important it is to know this." ));
+			yield return StartCoroutine(say( locals, 049 ));
 			yield return StartCoroutine(func_048e());
 			yield break;
 			break;
 			
 		} // end switch
 		
-
+		
 	} // end func
 	
 	IEnumerator func_07e1() {
@@ -637,7 +637,7 @@ public class Conversation_16 : Conversation {
 		//int locals[111];
 		int [] locals = new int[112];
 		
-		yield return StartCoroutine(say( "Please, adventurer, what Ossikka news have you?" ));
+		yield return StartCoroutine(say( locals, 050 ));
 		locals[14] = 51;
 		locals[15] = 52;
 		locals[16] = 0;
@@ -690,7 +690,7 @@ public class Conversation_16 : Conversation {
 		
 		if ( locals[12] != 67 ) {
 			
-			yield return StartCoroutine(say( "This nothing me tells.  Please something of Ossikka find?" ));
+			yield return StartCoroutine(say( locals, 053 ));
 			locals[44] = 54;
 			locals[45] = 55;
 			locals[46] = 0;
@@ -713,8 +713,8 @@ public class Conversation_16 : Conversation {
 			} // end if
 			
 		} else {
-
-			yield return StartCoroutine(say( "Why yes, of this Ossikka did have.  Oh, what means this?" ));
+			
+			yield return StartCoroutine(say( locals, 056 ));
 			locals[66] = 57;
 			locals[67] = 0;
 			//locals[87] = babl_menu( 0, locals[66] );
@@ -724,15 +724,15 @@ public class Conversation_16 : Conversation {
 				
 			} // end if
 			
-			yield return StartCoroutine(say( "Sorry day, indeed.  Still, thank you.  Here, a gift for you is." ));
+			yield return StartCoroutine(say( locals, 058 ));
 			locals[88] = 1;
 			locals[13] = take_from_npc( 1, locals[88] );
-
+			
 			if ( locals[13] > 0 ) {
 				
 				if ( take_id_from_npc( 1, locals[13] ) == 2 ) {
 					
-					yield return StartCoroutine(say( "On floor, I leave it for you." ));
+					yield return StartCoroutine(say( locals, 059 ));
 				} // end if
 				
 			} // end if
@@ -769,7 +769,7 @@ public class Conversation_16 : Conversation {
 		//int locals[45];
 		int [] locals = new int[46];
 		
-		yield return StartCoroutine(say( "What you to know want?" ));
+		yield return StartCoroutine(say( locals, 062 ));
 		locals[2] = 63;
 		locals[3] = 64;
 		locals[4] = 0;
@@ -791,7 +791,7 @@ public class Conversation_16 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Sword in two pieces broken is.  Wizard took haft below.  Ossikka clue to blade found, he said.  Blade somewhere in our domain is, I think.  More than that I do not know." ));
+		yield return StartCoroutine(say( locals, 065 ));
 		locals[24] = 66;
 		locals[25] = 67;
 		locals[26] = 0;

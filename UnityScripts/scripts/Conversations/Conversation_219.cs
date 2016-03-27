@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_219 : Conversation {
-
+	
 	//conversation #219
 	//string block 0x0edb, name guard
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3803);
@@ -84,7 +84,7 @@ public class Conversation_219 : Conversation {
 		
 		func_0012();
 	} // end func
-/*	
+	/*	
 	void func_00ea() {
 		
 		param1[1] = game_days;
@@ -174,22 +174,22 @@ public class Conversation_219 : Conversation {
 		locals[3] = locals[1];
 		if ( 1 == locals[3] ) {
 			
-			yield return StartCoroutine(say( "EH! What you do here?  Where you medallion?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 		} else {
 			
 			if ( 2 == locals[3] ) {
 				
-				yield return StartCoroutine(say( "Why you here?  You got medallion, eh?" ));
+				yield return StartCoroutine(say( locals, 002 ));
 			} else {
 				
 				if ( 3 == locals[3] ) {
 					
-					yield return StartCoroutine(say( "You got medallion? Where be medallion?" ));
+					yield return StartCoroutine(say( locals, 003 ));
 				} else {
 					
 					if ( 4 == locals[3] ) {
 						
-						yield return StartCoroutine(say( "Not allowed pass without medallion. Letsee medallion... Letsee!" ));
+						yield return StartCoroutine(say( locals, 004 ));
 					} // end if
 					
 				} // end if
@@ -234,7 +234,7 @@ public class Conversation_219 : Conversation {
 		
 		if ( privateVariables[4] == 1 ) {
 			
-			yield return StartCoroutine(say( "Arrggh! You warned not stay. Die now!" ));
+			yield return StartCoroutine(say( locals, 007 ));
 			locals[1] = 9;
 			locals[2] = 0;
 			locals[3] = 6;
@@ -247,12 +247,12 @@ public class Conversation_219 : Conversation {
 			
 			if ( privateVariables[3] == 1 ) {
 				
-				yield return StartCoroutine(say( "Medallion allow you to pass, go somewhere else, not stay here.  Leave now or you wish you did. Last warning." ));
+				yield return StartCoroutine(say( locals, 008 ));
 				privateVariables[4] = 1;
 				yield return  StartCoroutine(func_0709());
 			} else {
 				
-				yield return StartCoroutine(say( "What you want? Up ramp through north gate is way you want go. Scram!" ));
+				yield return StartCoroutine(say( locals, 009 ));
 				privateVariables[3] = 1;
 				yield return  StartCoroutine(func_0709());
 			} // end if
@@ -266,7 +266,7 @@ public class Conversation_219 : Conversation {
 		int[] locals = new int[101];
 		
 		locals[13] = 0;
-
+		
 	label_0412:;
 		
 		//locals[11] = show_inv( 2, locals[6], locals[1] );
@@ -278,7 +278,7 @@ public class Conversation_219 : Conversation {
 				
 				if ( locals[1+counter] == 300 ) {
 					
-					yield return StartCoroutine(say( "Hmmmm... OK, I open gate. You want head straight north up ramp to north gate. That way you want go. Other areas here off limits." ));
+					yield return StartCoroutine(say( locals, 010 ));
 					locals[14] = 4;
 					locals[15] = 29;
 					locals[16] = 0;
@@ -291,7 +291,7 @@ public class Conversation_219 : Conversation {
 			} // while
 			
 			if ( locals[13] > 2 ) {
-				yield return StartCoroutine(say( "Me tired of this. You die now!" ));
+				yield return StartCoroutine(say( locals, 021 ));
 				locals[93] = 9;
 				locals[94] = 0;
 				locals[95] = 6;
@@ -306,7 +306,7 @@ public class Conversation_219 : Conversation {
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
 			} else {
 				
-				yield return StartCoroutine(say( "That no medallion... show me medallion or die!" ));
+				yield return StartCoroutine(say( locals, 011 ));
 				locals[17] = 12;
 				locals[18] = 13;
 				locals[19] = 15;
@@ -325,7 +325,7 @@ public class Conversation_219 : Conversation {
 					
 				case 2:
 					
-					yield return StartCoroutine(say( "You have medallion now, or never!" ));
+					yield return StartCoroutine(say( locals, 014 ));
 					locals[39] = 9;
 					locals[40] = 0;
 					locals[41] = 6;
@@ -358,85 +358,85 @@ public class Conversation_219 : Conversation {
 				} // end if
 				
 			} //else {
-				
-		}		//break;
-				
-		//	} // end switch
 			
-			if ( locals[13] > 2 ) {
-				yield return StartCoroutine(say( "Me tired of this. You die now!" ));
-				locals[93] = 9;
-				locals[94] = 0;
-				locals[95] = 6;
-				set_race_attitude( 3, locals[95], locals[94], locals[93] );
-				locals[96] = 219;
-				locals[97] = 0;
-				set_attitude( 2, locals[97], locals[96] );
-				locals[98] = 4;
-				locals[99] = 29;
-				locals[100] = 0;
-				gronk_door( 3, locals[100], locals[99], locals[98] );
+		}		//break;
+		
+		//	} // end switch
+		
+		if ( locals[13] > 2 ) {
+			yield return StartCoroutine(say( locals, 021 ));
+			locals[93] = 9;
+			locals[94] = 0;
+			locals[95] = 6;
+			set_race_attitude( 3, locals[95], locals[94], locals[93] );
+			locals[96] = 219;
+			locals[97] = 0;
+			set_attitude( 2, locals[97], locals[96] );
+			locals[98] = 4;
+			locals[99] = 29;
+			locals[100] = 0;
+			gronk_door( 3, locals[100], locals[99], locals[98] );
+			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
+		} else {
+			
+			yield return StartCoroutine(say( locals, 016 ));
+			locals[55] = 17;
+			locals[56] = 18;
+			locals[57] = 20;
+			locals[58] = 0;
+			//locals[76] = babl_menu( 0, locals[55] );
+			yield return StartCoroutine (babl_menu (0,locals,55));
+			locals[76] = PlayerAnswer;
+			switch ( locals[76] ) {
+				
+			case 1:
+				
+				locals[13] = locals[13] + 1;
+				goto label_0412;
+				
+				break;
+				
+			case 2:
+				
+				yield return StartCoroutine(say( locals, 014 ));
+				locals[77] = 9;
+				locals[78] = 0;
+				locals[79] = 6;
+				set_race_attitude( 3, locals[79], locals[78], locals[77] );
+				locals[80] = 219;
+				locals[81] = 0;
+				set_attitude( 2, locals[81], locals[80] );
+				locals[82] = 4;
+				locals[83] = 29;
+				locals[84] = 0;
+				gronk_door( 3, locals[84], locals[83], locals[82] );
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			} else {
+				break;
 				
-				yield return StartCoroutine(say( "What?... you think me stupid. I see no medallion." ));
-				locals[55] = 17;
-				locals[56] = 18;
-				locals[57] = 20;
-				locals[58] = 0;
-				//locals[76] = babl_menu( 0, locals[55] );
-				yield return StartCoroutine (babl_menu (0,locals,55));
-				locals[76] = PlayerAnswer;
-				switch ( locals[76] ) {
-					
-				case 1:
-					
-					locals[13] = locals[13] + 1;
-					goto label_0412;
-					
-					break;
-					
-				case 2:
-					
-					yield return StartCoroutine(say( "You have medallion now, or never!" ));
-					locals[77] = 9;
-					locals[78] = 0;
-					locals[79] = 6;
-					set_race_attitude( 3, locals[79], locals[78], locals[77] );
-					locals[80] = 219;
-					locals[81] = 0;
-					set_attitude( 2, locals[81], locals[80] );
-					locals[82] = 4;
-					locals[83] = 29;
-					locals[84] = 0;
-					gronk_door( 3, locals[84], locals[83], locals[82] );
-					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
-					
-				case 3:
-					
-					locals[85] = 9;
-					locals[86] = 0;
-					locals[87] = 6;
-					set_race_attitude( 3, locals[87], locals[86], locals[85] );
-					locals[88] = 219;
-					locals[89] = 0;
-					set_attitude( 2, locals[89], locals[88] );
-					locals[90] = 4;
-					locals[91] = 29;
-					locals[92] = 0;
-					gronk_door( 3, locals[92], locals[91], locals[90] );
-					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
-				} // end if
+			case 3:
 				
+				locals[85] = 9;
+				locals[86] = 0;
+				locals[87] = 6;
+				set_race_attitude( 3, locals[87], locals[86], locals[85] );
+				locals[88] = 219;
+				locals[89] = 0;
+				set_attitude( 2, locals[89], locals[88] );
+				locals[90] = 4;
+				locals[91] = 29;
+				locals[92] = 0;
+				gronk_door( 3, locals[92], locals[91], locals[90] );
+				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
+				break;
 			} // end if
 			
-
-			
+		} // end if
+		
+		
+		
 		//} // end switch
 		
-
+		
 	} // end func
 	
 	IEnumerator func_0709() {
@@ -475,8 +475,8 @@ public class Conversation_219 : Conversation {
 	} // end func
 	
 	IEnumerator func_07a5() {
-		
-		yield return StartCoroutine(say( "You better be." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 024 ));
 		npc.npc_goal = 7;
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
@@ -509,7 +509,7 @@ public class Conversation_219 : Conversation {
 		
 		int[] locals = new int[9];
 		
-		yield return StartCoroutine(say( "GRRAAARRRGGH!!!" ));
+		yield return StartCoroutine(say( locals, 027 ));
 		locals[1] = 9;
 		locals[2] = 0;
 		locals[3] = 6;
@@ -611,7 +611,7 @@ public class Conversation_219 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 039 ));
 		locals[1] = 40;
 		locals[2] = 41;
 		locals[3] = 0;
@@ -643,6 +643,6 @@ public class Conversation_219 : Conversation {
 	} // end func
 
 */
-
-
+	
+	
 }

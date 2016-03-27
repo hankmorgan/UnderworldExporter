@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_64 : Conversation {
-
+	
 	//conversation #64
 	//	string block 0x0e40, name Jaacar
-
+	
 	
 	public override IEnumerator main() {
 		
@@ -156,7 +156,7 @@ public class Conversation_64 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "Hey!  Who this?  What you do?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -188,7 +188,7 @@ public class Conversation_64 : Conversation {
 			
 		label_02fd:;
 			
-			yield return StartCoroutine(say( "Ha!  Not Green Goblin-friend I hope!" ));
+			yield return StartCoroutine(say( locals, 005 ));
 			locals[23] = 6;
 			locals[24] = 7;
 			locals[25] = 0;
@@ -213,7 +213,7 @@ public class Conversation_64 : Conversation {
 			
 		label_033d:;
 			
-			yield return StartCoroutine(say( "So then!  Maybe you better off with them!" ));
+			yield return StartCoroutine(say( locals, 008 ));
 			locals[45] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -221,7 +221,7 @@ public class Conversation_64 : Conversation {
 			yield break;
 		label_034b:;
 			
-			yield return StartCoroutine(say("Yes yes, a foul race they are.  Jump into their privies on purpose, I bet, harhar!" ));
+			yield return StartCoroutine(say(locals, 009 ));
 			locals[46] = 10;
 			locals[47] = 11;
 			locals[48] = 0;
@@ -246,9 +246,9 @@ public class Conversation_64 : Conversation {
 			
 		label_038b:;
 			
-		//label_038b:;
+			//label_038b:;
 			
-			yield return StartCoroutine(say( "What you say?  You like to explore, walk around? Don't explore too careful, could end up someplace you not want to be.  I seen that happen, heehee!" ));
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[68] = 13;
 			locals[69] = 14;
 			locals[70] = 0;
@@ -273,13 +273,13 @@ public class Conversation_64 : Conversation {
 			
 		label_03cb:;
 			
-		//label_03cb:;
+			//label_03cb:;
 			
-		//label_03cb:;
+			//label_03cb:;
 			
-		//label_03cb:;
+			//label_03cb:;
 			
-			yield return StartCoroutine(say( "Us Grays, we never do it on purpose -- haha -- but in night, I hear sometimes scream and then splash, sometimes splash and then scream.  Then in morning one of us not here.  Dangerous privy it is there.  I watch out if I you.  Heehee." ));
+			yield return StartCoroutine(say( locals, 015 ));
 			locals[90] = 16;
 			locals[91] = 17;
 			locals[92] = 0;
@@ -304,7 +304,7 @@ public class Conversation_64 : Conversation {
 			
 		label_040b:;
 			
-			yield return StartCoroutine(say( "Yes, that good idea.  Don't look out, and Splash!  Aiiieeee!  Gone gone gone.  Hee hee.  Yes, you be careful.  If any still alive from splash, I bet they not be too happy.  You be on your toes." ));
+			yield return StartCoroutine(say( locals, 018 ));
 			locals[112] = 19;
 			locals[113] = 20;
 			locals[114] = 0;
@@ -335,7 +335,7 @@ public class Conversation_64 : Conversation {
 			
 		label_045d:;
 			
-			yield return StartCoroutine(say( "That right.  Heehee.  Splash!  Aiiieeee!  Gone gone gone.  Hee hee.  You be careful, you.  If any still alive from splash, I bet they not be too happy. You be on your toes." ));
+			yield return StartCoroutine(say( locals, 021 ));
 			locals[136] = 22;
 			locals[137] = 23;
 			locals[138] = 0;
@@ -363,11 +363,11 @@ public class Conversation_64 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
-			yield return StartCoroutine(say( "Hey, you still here!  Being careful, yes?  No splash?" ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[160] = 25;
 		locals[161] = 26;
 		locals[162] = 0;
@@ -393,10 +393,10 @@ public class Conversation_64 : Conversation {
 			func_00b1( locals[183] );
 			yield break;
 			break;
-
+			
 			
 		} // end switch
 		
 	} // end func
-
+	
 }

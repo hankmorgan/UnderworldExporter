@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_141 : Conversation {
-
+	
 	//conversation #141
 	//	string block 0x0e8d, name Feznor
-			
+	
 	public override IEnumerator main() {
 		SetupConversation (3725);
 		privateVariables[1] = 0;
@@ -18,7 +18,7 @@ public class Conversation_141 : Conversation {
 		EndConversation ();
 		privateVariables[0] = 1;
 	} // end func
-/*	
+	/*	
 	void func_0020() {
 		
 		int locals[1];
@@ -78,12 +78,12 @@ public class Conversation_141 : Conversation {
 		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
-
+	
 	void func_00e0() {
 		
 		func_0012();
 	} // end func
-/*	
+	/*	
 	void func_00ea() {
 		
 		param1[1] = game_days;
@@ -157,16 +157,16 @@ public class Conversation_141 : Conversation {
 	} // end func
 	
 	IEnumerator func_02b9() {
-		
+		int[] locals = new int[1];
 		while ( privateVariables[2] < 5 ) {
 			
 			if ( privateVariables[3] == 0 ) {
 				
-				yield return StartCoroutine(say( "Welcome, traveller.  How can I help thee?" ));
+				yield return StartCoroutine(say( locals, 001 ));
 				privateVariables[3] = 1;
 			} else {
 				
-				yield return StartCoroutine(say( "/mThat is all I can tell thee of that particular matter.  What else art thou interested in?" ));
+				yield return StartCoroutine(say( locals, 002 ));
 			} // end if
 			
 			yield return StartCoroutine(func_02ef());
@@ -174,7 +174,7 @@ public class Conversation_141 : Conversation {
 		
 		if ( privateVariables[3] == 0 ) {
 			
-			yield return StartCoroutine(say( "I am sorry but I have no more knowledge to impart to thee.  I wish thee good luck in thy quests, whatever they may be and wherever they may take thee." ));
+			yield return StartCoroutine(say( locals, 003 ));
 		} // end if
 		
 		yield return StartCoroutine(func_05b3());
@@ -199,7 +199,7 @@ public class Conversation_141 : Conversation {
 			
 			if ( privateVariables[9] == 1) {
 				
-				yield return StartCoroutine(say( "What wouldst thou know?" ));
+				yield return StartCoroutine(say( locals, 005 ));
 				yield return StartCoroutine(func_03d9());
 			} else {
 				
@@ -220,7 +220,7 @@ public class Conversation_141 : Conversation {
 			
 		case 4:
 			
-			yield return StartCoroutine(say( "My pleasure." ));
+			yield return StartCoroutine(say( locals, 009 ));
 			yield return StartCoroutine(func_05b3());
 			break;
 			
@@ -233,7 +233,7 @@ public class Conversation_141 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Ah, yes, this area is wonderfully designed.  We created much of it ourselves, with some help from the artisans of Minoc and the Mountainfolk.  There are many regions of interest.  Although the Abyssal colony has only existed a short time, it is filled with wonders to match any found in Britannia." ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[1] = 11;
 		locals[2] = 12;
 		locals[3] = 13;
@@ -263,12 +263,9 @@ public class Conversation_141 : Conversation {
 	} // end func
 	
 	IEnumerator func_03c7() {
-		
+		int[] locals = new int[1];
 		privateVariables[9] = 1;
-		yield return StartCoroutine(say( "In the northeast corner of the level is the Puzzle of the Bullfrog, made by a Mountainfolk craftswoman who had a love of frogs. \n"
-		   + " To the northwest is the Maze of Silas, a stoneworker and lover of deceptive walls. \n"
-		   + " Beyond the maze is the door of precious levers, which opens the gateway to the resting place of one of our order. \n"
-		   + " There is a water-filled area to the west of the Abyss' volcanic core. The waterfall is something to see." ));
+		yield return StartCoroutine(say( locals, 104 ));
 		yield return StartCoroutine(func_03d9());
 	} // end func
 	
@@ -312,54 +309,50 @@ public class Conversation_141 : Conversation {
 	} // end func
 	
 	IEnumerator func_0446() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[4] == 1) {
 			
-			yield return StartCoroutine(say( "I thought I had already told thee of that./m" ));
+			yield return StartCoroutine(say( locals, 019 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "Past the puzzle in the northeast there is an entrance to the tombs below.  To reach the entrance, one must traverse an area surrounded by water.  It is said that by using the levers and buttons in the area, one may create a safe path to the other side.  It has been years since the puzzle was created, though, and its solution is now lost.  The only clue I know of is that the wand found there will restore the puzzle to its pristine state." ));
+		yield return StartCoroutine(say( locals, 020 ));
 		privateVariables[4] = 1;
 		yield return StartCoroutine(func_02ef());
 	} // end func
 	
 	IEnumerator func_0460() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[5] == 1) {
 			
-			yield return StartCoroutine(say( "I thought I had already told thee of that./m" ));
+			yield return StartCoroutine(say( locals, 019 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "The Maze of Silas is now infested with pests and littered with debris and bones, but there are said to be other things in the maze as well -- hidden chambers and items of some value. The locations of these chambers and items are unknown now, however, so what they contain I cannot reveal to thee." ));
+		yield return StartCoroutine(say( locals, 022 ));
 		privateVariables[5] = 1;
 		yield return StartCoroutine(func_02ef());
 	} // end func
 	
 	IEnumerator func_047a() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[7] == 1) {
 			
-			yield return StartCoroutine(say( "I thought I had already told thee of that./m" ));
+			yield return StartCoroutine(say( locals, 019 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "Near the volcano's shaft is a set of falls leading to two pools. \n"
-		    + " One pool is very hard to reach, at least from our domain. But 'tis said it is simple to get there from the Lair of the Lizard-Folk. Would that one among us could speak their tongue and learn the easier route. \n"
-		    + " The second pool is in a secluded spot near a fishing run south of the Abyss' central shaft." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		privateVariables[7] = 1;
 		yield return StartCoroutine(func_02ef());
 	} // end func
 	
 	IEnumerator func_0494() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[6]== 1 ) {
 			
-			yield return StartCoroutine(say( "I thought I had already told thee of that./m" ));
+			yield return StartCoroutine(say( locals, 019 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "The puzzle of precious levers is beyond the maze.  Although the members of our knighthood will not be specific, it is believed to be in a concealed area. \n"
-		   + " The puzzle itself was built to guard the stores of the old government of the Abyss.  Now, however, not one of us could tell thee what lies beyond the closed door./m" ));
-		yield return StartCoroutine(say( "The workings of the levers are not understood, but 'tis said that their secrets can be gleaned through careful examination of the artifacts of our order. \n"
-		   + " I have not the patience for such research, but perhaps one who does will solve the mystery." ));
+		yield return StartCoroutine(say( locals, 026 ));
+		yield return StartCoroutine(say( locals, 027 ));
 		privateVariables[6] = 1;
 		yield return StartCoroutine(func_02ef());
 	} // end func
@@ -371,11 +364,10 @@ public class Conversation_141 : Conversation {
 		
 		if ( privateVariables[8] == 1) {
 			
-			yield return StartCoroutine(say( "I thought I had already told thee of that./m" ));
+			yield return StartCoroutine(say( locals, 019 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "They are indeed a vicious and dangerous race.  I would call them indecent, but that was not Cabirus' way, and I strive not to make it mine. \n"
-		    + " They are, truth be told, honorable in their own way.  Only a few of them still cling to any shreds of the Abyss' purpose, though.  Some have reverted to their natural, combative state.  They are monsters, and powerful ones, at that." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		privateVariables[8] = 1;
 		locals[1] = 30;
 		locals[2] = 31;
@@ -393,7 +385,7 @@ public class Conversation_141 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Ready, yes, but not eager." ));
+			yield return StartCoroutine(say( locals, 032 ));
 			func_052a();
 			break;
 			
@@ -407,17 +399,15 @@ public class Conversation_141 : Conversation {
 	} // end func
 	
 	IEnumerator func_051d() {
-		
-		yield return StartCoroutine(say( "Part of a knight's goal is to be a good fighter, it is true.  But a good fighter does not rejoice in a battle for its own sake. \n"
-		   + " Thy blade is an ally only when it is used with honor and justice. When it is used for needless bloodshed, it stains thy honor and the honor of thy order. \n"
-		   + " Do not fight for the sake of killing.  Fight for thy life, the life of those thou art sworn to defend, and to eliminate those that threaten our realm.  Fighting for the sake of blood is a short road to death." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 034 ));
 		yield return StartCoroutine(func_02ef());
 	} // end func
 	
 	IEnumerator func_052a() {
-		
-		yield return StartCoroutine(say( "Thou needst not fight continually to survive their realm. In the south, where the main meeting hall of the Trolls used to be, there are still Trolls who respect Cabirus' purpose.  They can tell thee more of the realm.  Beware the Dark Trolls - they are more powerful even than the normal ones./m" ));
-		yield return StartCoroutine(say( "Also beware the northern parts of their realm, for they have been invaded by spiders, headlesses, and worse.  These monsters will provide enough trouble, so don't attack Trolls unless they attack thee first.  Thou wilt have enough trouble staying alive without picking fights." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 035 ));
+		yield return StartCoroutine(say( locals, 036 ));
 		yield return StartCoroutine(func_02ef());
 	} // end func
 	
@@ -426,7 +416,7 @@ public class Conversation_141 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "We came here from Jhelom.  The fairest town in Britannia, that I can say with certainty.  Been to them all I have, and none compare." ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 40;
@@ -456,15 +446,15 @@ public class Conversation_141 : Conversation {
 	} // end func
 	
 	IEnumerator func_0596() {
-		
-		yield return StartCoroutine(say( "The colony of the Abyss was an achievement unparalleled in recent times.  Eight cultures mixing in one environment, and getting along splendidly./m  We had some banquets that were spectacular, I tell thee.  They rivaled the best of parties that even Jhelom could offer. We would all gather just to the northeast of here in the banquet hall.  We would stay up all night -- though of course it is hard to tell down here -- and recount tales of our homelands, our rituals, and our friends./m" ));
-		yield return StartCoroutine(say( "Now all we do is fight for food and space.  Truly the death of Cabirus was the death of the Colony of the Stygian Abyss.  Still, we try, for it is all we can do to honor his legacy and dream." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 041 ));
+		yield return StartCoroutine(say( locals, 042 ));
 		yield return StartCoroutine(func_02ef());
 	} // end func
 	
 	IEnumerator func_05a6() {
-		
-		yield return StartCoroutine(say( "Perhaps the inhabitants of Jhelom were not perfect, but they were certainly more courteous than thee." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 043 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00d1();
@@ -545,7 +535,7 @@ public class Conversation_141 : Conversation {
 	} // end func
 	
 	IEnumerator func_0695() {
-
+		
 		//int locals[15];
 		int[] locals = new int[16];
 		
@@ -570,7 +560,7 @@ public class Conversation_141 : Conversation {
 		//int locals[24];
 		int[] locals =  new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 055 ));
 		locals[1] = 56;
 		locals[2] = 57;
 		locals[3] = 0;
@@ -606,5 +596,5 @@ public class Conversation_141 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

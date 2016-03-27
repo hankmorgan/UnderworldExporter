@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_188 : Conversation {
-
+	
 	//conversation #188
 	//string block 0x0ebc, name Gralwart
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3772);
@@ -157,7 +157,7 @@ public class Conversation_188 : Conversation {
 			
 			privateVariables[2] = 0;
 			privateVariables[3] = 0;
-			yield return StartCoroutine(say( "A new adventurer in our midst, eh?  Perhaps thou wouldst like to increase thy magical powers?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -175,7 +175,7 @@ public class Conversation_188 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -185,7 +185,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Yes, I now see that thou art not as powerful as I first thought.  I'm sure thou hast not the power to use a Vas runestone anyways." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -203,7 +203,7 @@ public class Conversation_188 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Well then, here's how to obtain one." ));
+			yield return StartCoroutine(say( locals, 007 ));
 			yield return StartCoroutine(func_035d());
 			yield return StartCoroutine(func_036d());
 			break;
@@ -213,16 +213,16 @@ public class Conversation_188 : Conversation {
 	} // end func
 	
 	IEnumerator func_034e() {
-		
-		yield return StartCoroutine(say( "Well, listen carefully, for I shall tell thee how to obtain a Vas runestone, the most powerful runestone there is." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 008 ));
 		yield return StartCoroutine(func_035d());
 		yield return StartCoroutine(func_036d());
 	} // end func
 	
 	IEnumerator func_035d() {
-		
+		int[] locals = new int[1];
 		privateVariables[2] = 1;
-		yield return StartCoroutine(say( "Go to the meeting hall to the east and shoot right between the eyes.  Then put an emerald on each of the four platforms in the corners, walk back to the middle of the room, and press the gray button." ));
+		yield return StartCoroutine(say( locals, 009 ));
 	} // end func
 	
 	IEnumerator func_036d() {
@@ -257,7 +257,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "'Tis true - they are.  'Tis also true that if thou canst not follow them, thou art perhaps not worthy to reap the reward gained by doing so.  Good luck." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -288,7 +288,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Thou hast gained the runestone already.  Thou hast no further need of me. Use thy new powers as thou wilt!" ));
+		yield return StartCoroutine(say( locals, 013 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -300,7 +300,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Hello again, adventurer!  Hast thou decided to seek greater magical power after all?" ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 0;
@@ -314,7 +314,7 @@ public class Conversation_188 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Very well, then." ));
+			yield return StartCoroutine(say( locals, 017 ));
 			locals[23] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -330,7 +330,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Hello again!  Wert thou successful in finding what thou sought?" ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 20;
 		locals[3] = 21;
@@ -350,7 +350,7 @@ public class Conversation_188 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "Good luck!" ));
+			yield return StartCoroutine(say( locals, 022 ));
 			locals[23] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -367,7 +367,7 @@ public class Conversation_188 : Conversation {
 		int[] locals = new int[2];
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "Well done.  I wish thee luck with thy new power." ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -379,7 +379,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Very well, I shall repeat them." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		yield return StartCoroutine(func_035d());
 		locals[1] = 25;
 		locals[2] = 0;
@@ -467,7 +467,7 @@ public class Conversation_188 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 036 ));
 		locals[1] = 37;
 		locals[2] = 38;
 		locals[3] = 0;

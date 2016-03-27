@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_138 : Conversation {
-
+	
 	//conversation #138
 	//	string block 0x0e8a, name Derek
-			
-
+	
+	
 	public override IEnumerator main() {
 		SetupConversation (3722);
 		privateVariables[1] = 0;
@@ -152,7 +152,7 @@ public class Conversation_138 : Conversation {
 		int[] locals = new int[24];
 		locals[1] = 32;
 		privateVariables[2] = get_quest( 1, locals[1] );
-
+		
 		if ( privateVariables[0] == 1) {
 			
 			if ( privateVariables[3] == 1) {
@@ -165,7 +165,7 @@ public class Conversation_138 : Conversation {
 			
 		} // end if
 		
-		yield return StartCoroutine(say( "I am Derek, a knight and a worker.  Who art thou?" ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[2] = 2;
 		locals[3] = 3;
 		locals[4] = 0;
@@ -193,7 +193,7 @@ public class Conversation_138 : Conversation {
 		//int locals[22];
 		int[] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Ah, the adventurous life is not for me.  I am content to remain here and work at my craft." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -221,7 +221,7 @@ public class Conversation_138 : Conversation {
 		//int locals[23];
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Despite thy words, many feel that it is more important to contribute to society by one's work than by one's sword." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[1] = 8;
 		locals[2] = 9;
 		locals[3] = 10;
@@ -259,7 +259,7 @@ public class Conversation_138 : Conversation {
 		//int locals[22];
 		int[] locals  = new int[23];
 		
-		yield return StartCoroutine(say( "I carve gems and work metals.  It is hard and tedious work, especially with poor tools, but I am content with it nonetheless." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 14;
@@ -293,7 +293,7 @@ public class Conversation_138 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Well, if thou hast anything that would help me in my work, I would appreciate it.  Perhaps thou hast collected such an item in thy travels." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		while ( true ) {
 			
 			locals[1] = 16;
@@ -341,8 +341,8 @@ public class Conversation_138 : Conversation {
 				} // end if
 				
 				locals[14] = locals[14] + 1;
-
-
+				
+				
 			} // end if
 			counter++;
 			locals[13]--;			
@@ -350,7 +350,7 @@ public class Conversation_138 : Conversation {
 		
 		if ( locals[15] > 0 ) {
 			
-			yield return StartCoroutine(say( "Ah, that's no ordinary tool, but a true work of art befitting an Avatar!  I can't take it from thee." ));
+			yield return StartCoroutine(say( locals, 018 ));
 			locals[16] = 19;
 			locals[17] = 20;
 			locals[18] = 0;
@@ -375,12 +375,12 @@ public class Conversation_138 : Conversation {
 			give_to_npc(2,locals,11,locals[38]);
 			privateVariables[3] = 1;
 			npc.npc_attitude = 3;
-			yield return StartCoroutine(say( "That is too kind of thee.  I cannot tell thee how much it will help me in my work.  Thou hast demonstrated much humility by giving away this artifact - it is only right that I tell thee of the Ring of Humility./m" ));
-			yield return StartCoroutine(say( "There is a room in the northwest portion of the level below us. There you will find four switches.  Flip them in this order: northwest, southeast, northeast, and southwest.  Be careful to stay out of the middle of the room." ));
+			yield return StartCoroutine(say( locals, 021 ));
+			yield return StartCoroutine(say( locals, 022 ));
 			yield return StartCoroutine(func_05f5());
 		} else {
 			
-			yield return StartCoroutine(say( "Ah, I'm afraid that is of no use to me." ));
+			yield return StartCoroutine(say( locals, 023 ));
 			locals[39] = 24;
 			locals[40] = 25;
 			locals[41] = 0;
@@ -400,7 +400,7 @@ public class Conversation_138 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -411,7 +411,7 @@ public class Conversation_138 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Greetings, @GS8.  How goes it?" ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 0;
@@ -439,7 +439,7 @@ public class Conversation_138 : Conversation {
 		//int locals[22];
 		int[]locals = new int[23];
 		
-		yield return StartCoroutine(say( "Greetings, @GS8.  I am forever indebted to thee for the gem cutter thou hast given me.  It has increased my productivity tenfold." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[1] = 30;
 		locals[2] = 31;
 		locals[3] = 0;
@@ -467,7 +467,7 @@ public class Conversation_138 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Farewell then." ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[1] = 33;
 		locals[2] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
@@ -481,5 +481,5 @@ public class Conversation_138 : Conversation {
 		} // end if
 		
 	} // end func
-
+	
 }

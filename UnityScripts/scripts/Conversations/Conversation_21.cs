@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_21 : Conversation {
-
+	
 	//conversation #21
 	//string block 0x0e15, name Steeltoe
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3605);
 		privateVariables[1] = 0;
@@ -19,7 +19,7 @@ public class Conversation_21 : Conversation {
 		privateVariables[0] = 1;
 	} // end func
 	
-/*	void func_0020() {
+	/*	void func_0020() {
 		
 		int locals[1];
 		
@@ -150,7 +150,7 @@ public class Conversation_21 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Halt! Who goes there?" ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 0;
@@ -178,7 +178,7 @@ public class Conversation_21 : Conversation {
 		//int locals[24];
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "What is thy business here?" ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[2] = 5;
 		locals[3] = 8;
 		locals[4] = 9;
@@ -200,7 +200,7 @@ public class Conversation_21 : Conversation {
 				yield return StartCoroutine(func_041c());
 			} else {
 				
-				yield return StartCoroutine(say( "What is that?  Speak up!" ));
+				yield return StartCoroutine(say( locals, 007 ));
 				yield return StartCoroutine(func_02e5());
 			} // end if
 			
@@ -226,8 +226,8 @@ public class Conversation_21 : Conversation {
 	} // end func
 	
 	IEnumerator func_0379() {
-		
-		yield return StartCoroutine(say( "I ask the questions here!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 011 ));
 		yield return StartCoroutine(func_02e5());
 	} // end func
 	
@@ -236,7 +236,7 @@ public class Conversation_21 : Conversation {
 		//int locals[25];
 		int[] locals = new int[26];
 		
-		yield return StartCoroutine(say( "I doubt your purpose here is legitimate, if ye know not the password!" ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[2] = 13;
 		locals[3] = 14;
 		locals[4] = 15;
@@ -259,7 +259,7 @@ public class Conversation_21 : Conversation {
 			break;
 			
 		case 3:
-
+			
 			//locals[1] = babl_ask( 0 );
 			yield return StartCoroutine(babl_ask(0));
 			locals[24] = 16;
@@ -268,7 +268,7 @@ public class Conversation_21 : Conversation {
 				yield return StartCoroutine(func_041c());
 			} else {
 				
-				yield return StartCoroutine(say( "That's not it!  Begone!" ));
+				yield return StartCoroutine(say( locals, 017 ));
 				locals[25] = 1;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -283,8 +283,8 @@ public class Conversation_21 : Conversation {
 	} // end func
 	
 	IEnumerator func_040f() {
-		
-		yield return StartCoroutine(say( "We'll have no exploring here!  Now, off with ye!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 018 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00c2();
@@ -298,20 +298,20 @@ public class Conversation_21 : Conversation {
 		locals[2] = 19;
 		locals[3] = 20;		
 		locals[1] = sex( 2, locals[3], locals[2] );
-
+		
 		locals[4] = 11;
 		locals[5] = 13;
 		locals[6] = 0;
 		gronk_door( 3, locals[6], locals[5], locals[4] );
-		yield return StartCoroutine(say( "Greetings, noble @SS1!  Enter with honor and look upon the magnificent treasure chamber of Lord Goldthirst.  Dare ye not to do any further." ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[7] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00b1( locals[7] );
 		yield break;
 	} // end func
-
-
-
-
+	
+	
+	
+	
 }

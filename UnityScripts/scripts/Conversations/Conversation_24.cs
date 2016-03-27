@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_24 : Conversation {
-
-
+	
+	
 	//conversation #24
 	//	string block 0x0e18, name prisoner
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3608);
@@ -185,7 +185,7 @@ public class Conversation_24 : Conversation {
 					//locals[27] = babl_menu( 0, locals[6] );
 					yield return StartCoroutine(babl_menu (0,locals,6));
 					locals[27] = PlayerAnswer;
-
+					
 					switch ( locals[27] ) {
 						
 					case 1:
@@ -287,7 +287,7 @@ public class Conversation_24 : Conversation {
 			//privateVariables[3] = babl_ask( 0 );
 			yield return StartCoroutine( babl_ask( 0 ));
 			//cHANGE
-			//PlayerTypedAnswer="Murgo";
+			//PlayerTypedAnswer=locals, 022;
 			yield return StartCoroutine( func_05d2());
 			break;
 			
@@ -469,7 +469,7 @@ public class Conversation_24 : Conversation {
 		yield return StartCoroutine( print( 1, locals[2] ));
 		locals[3] = 2;
 		locals[1] = get_quest( 1, locals[3] );
-
+		
 		if ( locals[1] == 1) {
 			
 			locals[4] = 28;
@@ -868,7 +868,7 @@ public class Conversation_24 : Conversation {
 		int[] locals=new int[51];
 		locals[2] = 2;
 		locals[1] = get_quest( 1, locals[2] );
-
+		
 		locals[3] = 93;
 		yield return StartCoroutine( print( 1, locals[3] ));
 		locals[25] = locals[1];
@@ -909,8 +909,8 @@ public class Conversation_24 : Conversation {
 		func_00b1( locals[50] );//ENDCONVO
 		yield break;
 	} // end func
-
-
-
-
+	
+	
+	
+	
 }

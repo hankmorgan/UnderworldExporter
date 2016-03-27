@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Conversation_215 : Conversation {
-
+	
 	//conversation #215
 	//string block 0x0ed7, name Smonden
 	int[] global = new int[1];
@@ -83,7 +83,7 @@ public class Conversation_215 : Conversation {
 		
 		func_0012();
 	} // end func
-/*
+	/*
 	void func_00ea() {
 		
 		param1[1] = game_days;
@@ -156,7 +156,7 @@ public class Conversation_215 : Conversation {
 		} else {
 			
 			global[0] = 0;
-			yield return StartCoroutine(say( "I shall tell thee nothing, thou minion of Tyball!" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -184,7 +184,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I was captured while on a quest for the Key of Courage." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -209,7 +209,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Indeed?  Then know this: I believe the entrance lies directly north of this very spot." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[1] = 8;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -224,7 +224,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "A locked door blocks the way. But I still have the key hidden here in my cell.  The key to the Key, as it were." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -236,13 +236,13 @@ public class Conversation_215 : Conversation {
 	} // end func
 	
 	IEnumerator func_03a6() {
-	
+		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Yes, for I have been imprisoned too long and have neither heart nor strength left for this quest." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 1016;
 		take_from_npc( 1, locals[1] );
-		yield return StartCoroutine(say( "It is thine." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		global[0] = 1;
 		yield return StartCoroutine(func_03c9());
 	} // end func
@@ -271,21 +271,21 @@ public class Conversation_215 : Conversation {
 		} else {
 			locals[2]=3;
 			locals[1] = random( 1, locals[2] );
-
+			
 			locals[3] = locals[1];
 			if ( 1 == locals[3] ) {
 				
-				yield return StartCoroutine(say( "I am too weary to talk." ));
+				yield return StartCoroutine(say( locals, 014 ));
 			} else {
 				
 				if ( 2 == locals[3] ) {
 					
-					yield return StartCoroutine(say( "Go on, do what thou must." ));
+					yield return StartCoroutine(say( locals, 015 ));
 				} else {
 					
 					if ( 3 == locals[3] ) {
 						
-						yield return StartCoroutine(say( "Farewell, friend!  I shall leave here as soon as I rest a bit." ));
+						yield return StartCoroutine(say( locals, 016 ));
 					} // end if
 					
 				} // end if
@@ -300,7 +300,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Nay, for even as I discovered the location of my objective, I was captured by Tyball.  He seemed to think I had been speaking with his deceased brother, ridiculous as that sounds.  He would not release me.  A pity, since I believed that the recovery of the three keys would help right the wrongs of this place." ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[1] = 18;
 		locals[2] = 19;
 		locals[3] = 0;
@@ -325,7 +325,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "No, I cannot!  I am too weak now.  Would that thou could continue my quest for me!" ));
+		yield return StartCoroutine(say( locals, 020 ));
 		locals[1] = 21;
 		locals[2] = 22;
 		locals[3] = 0;
@@ -350,7 +350,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Of course!  I have not seen thee in the ranks of his lackeys.  How may I help thee?" ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 24;
 		locals[2] = 25;
 		locals[3] = 0;
@@ -375,7 +375,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Nay, thou canst not help me!  My freedom is not restored by unlocking these bars, for I am in ill health and can no longer follow my quest: to find the Key of Courage." ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 0;
@@ -400,7 +400,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Please, thou must undertake to complete my quest.  Seek thou the Key of Courage." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[1] = 30;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -483,7 +483,7 @@ public class Conversation_215 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 041 ));
 		locals[1] = 42;
 		locals[2] = 43;
 		locals[3] = 0;
@@ -515,5 +515,5 @@ public class Conversation_215 : Conversation {
 	} // end func
 
 */
-
+	
 }

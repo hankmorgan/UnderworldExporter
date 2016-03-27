@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_22 : Conversation {
-
+	
 	//conversation #22
 	//string block 0x0e16, name golem
 	public int[] global = new int[1];
-
+	
 	public override bool OnDeath ()
 	{//The golem is essentially immortal. When "killed" it just talks to the player again.
 		base.OnDeath ();
@@ -161,7 +161,7 @@ public class Conversation_22 : Conversation {
 		
 		if ( (privateVariables[0]==1) && (global[0]==1) ) {
 			
-			yield return StartCoroutine(say( "Thou hast bested me and earned the Shield of Valor; thou hast nothing more to prove here." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			yield return StartCoroutine(func_0535());
 		} else {
 			
@@ -181,7 +181,7 @@ public class Conversation_22 : Conversation {
 					} else {
 						
 						global[0] = 0;
-						yield return StartCoroutine(say( "Hold, puny mortal!  I am thy doom!" ));
+						yield return StartCoroutine(say( locals, 002 ));
 						locals[1] = 3;
 						locals[2] = 4;
 						locals[3] = 5;
@@ -211,7 +211,7 @@ public class Conversation_22 : Conversation {
 				
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -221,7 +221,7 @@ public class Conversation_22 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I am what I was made to be - the greatest warrior in Britannia.  If thou be not of mighty valor, turn back now and no shame will come of it. Else, prepare to meet thy doom." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[1] = 7;
 		locals[2] = 8;
 		locals[3] = 0;
@@ -246,7 +246,7 @@ public class Conversation_22 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Thou wagerest thy life against a mighty talisman - the Shield of Valor.  Defeat me and it shall be thine.  Fail and thou shalt surely die." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 11;
 		locals[3] = 0;
@@ -271,7 +271,7 @@ public class Conversation_22 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Hold!  Thou hast fought well, mortal.  Better than any in many a year.  I would give thee a chance to live, that valor such as yours should not die.  Flee now and I grant thee thy life. " ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[1] = 13;
 		locals[2] = 14;
 		locals[3] = 0;
@@ -296,7 +296,7 @@ public class Conversation_22 : Conversation {
 		
 		int[] locals = new int[35];
 		
-		yield return StartCoroutine(say( "Hold, mortal!  Thou hast bested me!  Never have any shown such Valor! Surely thou shouldst be the master of the Shield!" ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[2] = 55;
 		locals[3] = 0;
 		locals[1] = find_inv( 2, locals[3], locals[2] );
@@ -316,7 +316,7 @@ public class Conversation_22 : Conversation {
 		
 		locals[12] = 55;
 		if ( take_from_npc( 1, locals[12] ) == 2 ) {
-			yield return StartCoroutine(say( "I will leave it here for thee.  Use it well!" ));
+			yield return StartCoroutine(say( locals, 016 ));
 		} // end if
 		
 		global[0] = 1;
@@ -347,7 +347,7 @@ public class Conversation_22 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Why dost thou continue to talk to me?  Art thou not eager to continue our battle?" ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 0;
@@ -379,6 +379,6 @@ public class Conversation_22 : Conversation {
 		func_00b1( locals[1] );
 		yield break;
 	} // end func
-
-
+	
+	
 }

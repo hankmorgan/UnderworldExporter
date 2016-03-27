@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_25 : Conversation {
-
-
+	
+	
 	//conversation #25
 	//	string block 0x0e19, name Door
-			
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3609);
@@ -150,13 +150,13 @@ public class Conversation_25 : Conversation {
 	IEnumerator func_029d() {
 		
 		int[] locals = new int[27];
-
+		
 		locals[2] = 4;
 		locals[3] = 2;
 		locals[4] = 1;
 		//I'm not gronking the door because I've already opened it as part of the function call.
 		//locals[1] = gronk_door( 3, locals[4], locals[3], locals[2] );
-
+		
 		if ( privateVariables[0] ==1) {
 			
 			yield return StartCoroutine(func_033a());
@@ -166,7 +166,7 @@ public class Conversation_25 : Conversation {
 			privateVariables[3] = 0;
 			privateVariables[4] = 0;
 			privateVariables[5] = 0;
-			yield return StartCoroutine(say( "So!  Another young fool opens a door thoughtlessly.  Open, close, open, close, that's all that anyone ever has the time for.  Things were not like this when I was thy age, I can assure thee of that!  Well?  Hast thou anything to say for thyself?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[5] = 2;
 			locals[6] = 3;
 			locals[7] = 4;
@@ -192,22 +192,22 @@ public class Conversation_25 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
 	} // end func
 	
 	IEnumerator func_033a() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[2]==1 ) {
 			
-			yield return StartCoroutine(say( "Perhaps if thou wert more civil, thou couldst open more doors!" ));
+			yield return StartCoroutine(say( locals, 005 ));
 			privateVariables[2] = 0;
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Thou again!  What dost thou want this time!" ));
+			yield return StartCoroutine(say( locals, 006 ));
 			if ( privateVariables[4] ==1) {
 				
 				yield return StartCoroutine(func_056c());
@@ -228,15 +228,15 @@ public class Conversation_25 : Conversation {
 	} // end func
 	
 	IEnumerator func_036a() {
-		
-		yield return StartCoroutine(say( "Hmmph!  Perhaps the next time thou wilt show greater civilty to thy elders!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 007 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
 	
 	IEnumerator func_0377() {
-		
+		int[] locals = new int[1];
 		privateVariables[2] = 1;
-		yield return StartCoroutine(say( "Bah!  Such disrepect!  I will open when I wish to open!" ));
+		yield return StartCoroutine(say( locals, 008 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
 	
@@ -244,7 +244,7 @@ public class Conversation_25 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "What do I look like, a drawbridge?" ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 11;
 		locals[3] = 0;
@@ -270,8 +270,7 @@ public class Conversation_25 : Conversation {
 		int[] locals = new int[23];
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "I once was a young human like thyself.  But I grew weary of the regular folk and their immense stupidity.  I was a brilliant mage, and was constantly pestered with silly questions, such as \"How does one cast Sheet Lightning?\" \n "
-		                                +" Tiring of being hounded thus, I turned myself into a door in order to finally enjoy some peace and quiet.  Obviously, it didn't work." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[1] = 13;
 		locals[2] = 14;
 		locals[3] = 0;
@@ -298,8 +297,7 @@ public class Conversation_25 : Conversation {
 		
 		privateVariables[4] = 1;
 		privateVariables[3] = 0;
-		yield return StartCoroutine(say( "Gaaah!  I cannot believe thou wouldst ask that, of all questions!  I should have known better than to mention that accursed spell. \n"
-		                                +" If thou must know, it is cast by using the Vas, Ort and Grav runestones.  There.  I hope that thou blowest thyself up with it." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[1] = 16;
 		locals[2] = 17;
 		locals[3] = 0;
@@ -324,7 +322,7 @@ public class Conversation_25 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Art thou implying that my power is not great enough to turn myself into whatever I want?  If I wanted to, I could turn myself into a nutcracker and thee into a walnut!  Wouldst thou like that?" ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 20;
 		locals[3] = 0;
@@ -349,7 +347,7 @@ public class Conversation_25 : Conversation {
 		
 		int[] locals = new int[44];
 		
-		yield return StartCoroutine(say( "Well then, didst thou attempt to open me for a reason, or simply because my doorknob was a bright shiny object?" ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[22] = privateVariables[3];
 		locals[1] = 22;
 		locals[23] = 1;
@@ -385,14 +383,14 @@ public class Conversation_25 : Conversation {
 		
 		int[] locals = new int[5];
 		
-		yield return StartCoroutine(say( "Very well, if it means that thou wilt not bother me again." ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = gronk_door( 3, locals[4], locals[3], locals[2] );
 		locals[2] = 4;
 		locals[3] = 2;
 		locals[4] = 0;
 		if ( locals[1] == 0 ) {
 			
-			yield return StartCoroutine(say( "Unfortunately, my hinges seem to be somewhat rusty." ));
+			yield return StartCoroutine(say( locals, 026 ));
 		} // end if
 		
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
@@ -489,15 +487,15 @@ public class Conversation_25 : Conversation {
 	} // end func
 	
 	IEnumerator func_0677() {
-		
+		int[] locals = new int[1];
 		if ( privateVariables[5]==1 ) {
 			
-			yield return StartCoroutine(say( "I refuse to help thee with that any more!" ));
+			yield return StartCoroutine(say( locals, 036 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} else {
 			
 			privateVariables[5] = 1;
-			yield return StartCoroutine(say( "Again!?  For the last time, the spell is cast by using the Vas, Ort, and Grav runestones.  I don't know why I'm bothering to tell thee. Thou obviously hast not the intelligence necessary to cast it." ));
+			yield return StartCoroutine(say( locals, 037 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 		} // end if
 		
@@ -577,7 +575,7 @@ public class Conversation_25 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 048 ));
 		locals[1] = 49;
 		locals[2] = 50;
 		locals[3] = 0;

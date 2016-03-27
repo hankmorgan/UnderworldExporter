@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_190 : Conversation {
-
+	
 	//conversation #190
 	//string block 0x0ebe, name Bronus
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3774);
 		privateVariables[1] = 0;
@@ -66,7 +66,7 @@ public class Conversation_190 : Conversation {
 		npc.npc_attitude = param1;//param1[0]play_hunger;
 		func_0012();
 	} // end func
-/*	
+	/*	
 	void func_00c2() {
 		
 		npc.npc_attitude = 2;
@@ -150,7 +150,7 @@ public class Conversation_190 : Conversation {
 		int[] locals = new int[24];
 		locals[1] = 8;
 		privateVariables[4] = get_quest( 1, locals[1] );
-
+		
 		if ( privateVariables[0]==1 ) {
 			
 			yield return StartCoroutine(func_0405());
@@ -158,7 +158,7 @@ public class Conversation_190 : Conversation {
 			
 			privateVariables[2] = 0;
 			privateVariables[3] = 0;
-			yield return StartCoroutine(say( "Hello, adventurer.  I have a book I must deliver to my fellow mage Morlock, but I have not the time to give it to him in person.  Wilt thou take it to him for me?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[2] = 2;
 			locals[3] = 3;
 			locals[4] = 4;
@@ -182,7 +182,7 @@ public class Conversation_190 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -192,7 +192,7 @@ public class Conversation_190 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "I am sorry to hear that." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -204,7 +204,7 @@ public class Conversation_190 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Just the satisfaction of a job well done." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[1] = 7;
 		locals[2] = 8;
 		locals[3] = 0;
@@ -229,7 +229,7 @@ public class Conversation_190 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "This book contains very powerful magic that is meant only for  Morlock.  Thou must promise not to open it." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 11;
 		locals[3] = 0;
@@ -255,14 +255,14 @@ public class Conversation_190 : Conversation {
 		int[] locals = new int[4];
 		locals[2] = 276;
 		locals[1] = take_from_npc( 1, locals[2] );
-
+		
 		if ( (locals[1] == 1 || locals[1] == 2) ) {
 			
 			privateVariables[2] = 1;
-			yield return StartCoroutine(say( "Here is the book.  Please give it to Morlock, and remember not to open it!" ));
+			yield return StartCoroutine(say( locals, 012 ));
 		} else {
 			
-			yield return StartCoroutine(say( "I'm sorry, I seem to have misplaced it." ));
+			yield return StartCoroutine(say( locals, 013 ));
 		} // end if
 		
 		locals[3] = 2;
@@ -279,7 +279,7 @@ public class Conversation_190 : Conversation {
 		locals[1] = privateVariables[3];
 		if ( 2 == locals[1] ) {
 			
-			yield return StartCoroutine(say( "I have no more use for thee." ));
+			yield return StartCoroutine(say( locals, 014 ));
 			locals[2] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -289,7 +289,7 @@ public class Conversation_190 : Conversation {
 			
 			if ( 1 == locals[1] ) {
 				
-				yield return StartCoroutine(say( "It was very kind of thee to run that errand, but I have no more time to talk to thee." ));
+				yield return StartCoroutine(say( locals, 015 ));
 				locals[3] = 2;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -301,7 +301,7 @@ public class Conversation_190 : Conversation {
 					
 					if ( privateVariables[2]==1 ) {
 						
-						yield return StartCoroutine(say( "Hello again.  Didst thou give that book to Morlock?" ));
+						yield return StartCoroutine(say( locals, 016 ));
 						locals[25] = 1;
 						locals[4] = 17;
 						locals[26] = 1;
@@ -331,12 +331,12 @@ public class Conversation_190 : Conversation {
 						} // end if
 						
 					} //else {
-						
-
-						
+					
+					
+					
 					//} // end switch
 					
-					yield return StartCoroutine(say( "Hello again.  Hast thou reconsidered performing that small errand?" ));
+					yield return StartCoroutine(say( locals, 020 ));
 					locals[47] = 21;
 					locals[48] = 22;
 					locals[49] = 0;
@@ -369,7 +369,7 @@ public class Conversation_190 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Then do so, please!" ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -382,7 +382,7 @@ public class Conversation_190 : Conversation {
 		int[] locals = new int[2];
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "I thank thee very much." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -397,7 +397,7 @@ public class Conversation_190 : Conversation {
 		if ( privateVariables[5]==1 ) {
 			
 			privateVariables[3] = 2;
-			yield return StartCoroutine(say( "I should have known better than to trust thee a second time. Perhaps thou shouldst run less dangerous errands in the future." ));
+			yield return StartCoroutine(say( locals, 025 ));
 			locals[2] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -410,7 +410,7 @@ public class Conversation_190 : Conversation {
 		locals[3] = 8;
 		locals[4] = 1;
 		set_quest( 2, locals[4], locals[3] );
-		yield return StartCoroutine(say( "A little curious, wert thou?  I expected as much, to be honest.  It is well that I happened to have a second copy of the book.  Please, be more careful with this one!" ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[5] = 276;
 		locals[6] = 276;
 		locals[1] = do_inv_create( 1, locals[5] );
@@ -494,7 +494,7 @@ public class Conversation_190 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 0;

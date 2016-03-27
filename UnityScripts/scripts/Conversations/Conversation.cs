@@ -354,11 +354,20 @@ public class Conversation : GuiBase {
 		yield break;
 	}
 
+	public IEnumerator say (int[] localsArray, int StringNo)
+	{
+		//Do some string repacement stuff here.
+
+		//Now say the line
+		yield return StartCoroutine (say (StringNo));
+	}
+
 	public IEnumerator say(string WhatToSay,int PrintType)
 	{
 		//Replace instances of @GS8 with player name
+		//TODO:Move this out of here to say(locals[], stringNo)
 		WhatToSay = WhatToSay.Replace("@GS8" , playerUW.CharName);
-		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
+		string[] Paragraphs = WhatToSay.Split(new string [] {"\\m"}, System.StringSplitOptions.None);
 		string Markup;
 		switch (PrintType)
 		{
@@ -376,7 +385,7 @@ public class Conversation : GuiBase {
 			string Output="";
 			for (int j =0; j<=StrWords.GetUpperBound(0);j++)
 			{
-				if (StrWords[j]=="\n")
+				if (StrWords[j]=="\\n")
 				{
 					tl.Add (Markup + Output +"[-]");
 					colCounter=0;
@@ -409,7 +418,7 @@ public class Conversation : GuiBase {
 		yield return 0;
 	}
 
-	public IEnumerator say(string WhatToSay)
+	private IEnumerator say(string WhatToSay)
 	{
 		yield return StartCoroutine (say(WhatToSay, NPC_SAY));
 	}

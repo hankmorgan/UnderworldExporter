@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_218 : Conversation {
-
+	
 	//conversation #218
 	//string block 0x0eda, name Griffle
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3802);
 		privateVariables[1] = 0;
@@ -157,7 +157,7 @@ public class Conversation_218 : Conversation {
 			yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Who art thou?  Art thou here to take me back to the mines?  But no, thou art not one of them... Art thou here to rescue us, then?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 0;
@@ -175,7 +175,7 @@ public class Conversation_218 : Conversation {
 				break;
 			} // end if
 			
-	
+			
 			
 		} // end switch
 		
@@ -185,7 +185,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Ah, then, a prisoner like the rest of us..." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 0;
@@ -210,7 +210,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Tyball keeps us here. To work the mines 'til we die... if we're lucky that is. Less fortunate ones he takes away to work his evil magicks on." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[1] = 8;
 		locals[2] = 9;
 		locals[3] = 0;
@@ -235,7 +235,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "There are caverns to the east, filled with the dead. Victims of his  dark arts, gone awry. 'Tis said not even he dares venture there now.  But the dead things wait, taking their vengeance on any living thing  that enters." ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[1] = 11;
 		locals[2] = 12;
 		locals[3] = 0;
@@ -260,7 +260,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Who knows what we dig for? Mayhap materials he needs for his magic.  But it's been days now since I've worked the mines, after what we found on the lower level... And so few of us remain, left to rot in our cells." ));
+		yield return StartCoroutine(say( locals, 013 ));
 		locals[1] = 14;
 		locals[2] = 15;
 		locals[3] = 0;
@@ -285,8 +285,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "We dug through to the level below this and hit a natural cavern. The walls were veined  with gold, but that's not what we were digging for, I'm sure. It was  here the fell beasts attacked us and killed most of us prisoners. \n"
-		                                +" The remaining few of us have been left here for days, with no food or  water. If thou couldst spare a morsel..." ));
+		yield return StartCoroutine(say( locals, 016));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 0;
@@ -311,7 +310,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Oh, a hero, eh?  Ruddy great!  Won't Tyball have a time with thee!" ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 0;
@@ -336,7 +335,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Farewell, then, and good luck!" ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[1] = 23;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -351,7 +350,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "What I mean is that Tyball eats heroes the way a sailor eats limes!" ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[1] = 25;
 		locals[2] = 26;
 		locals[3] = 0;
@@ -397,7 +396,7 @@ public class Conversation_218 : Conversation {
 		if ( locals[18] > 0 ) {
 			give_to_npc(2,locals,11,locals[19]);
 			//give_to_npc( 2, locals[11], locals[19] );
-			yield return StartCoroutine(say( "Many thanks!  Thou art a hero as far as I am concerned, just for sharing thy food!" ));
+			yield return StartCoroutine(say( locals, 027 ));
 			locals[20] = 28;
 			locals[21] = 0;
 			//locals[41] = babl_menu( 0, locals[20] );
@@ -411,7 +410,7 @@ public class Conversation_218 : Conversation {
 			
 		} // end if
 		
-		yield return StartCoroutine(say( "Hast thou no food for me?" ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[42] = 30;
 		locals[43] = 31;
 		locals[44] = 0;
@@ -437,7 +436,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I am no sorcerer.  Whatever he attempts, though, it can mean no good!" ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[1] = 33;
 		locals[2] = 34;
 		locals[3] = 0;
@@ -463,21 +462,21 @@ public class Conversation_218 : Conversation {
 		int[] locals = new int[4];
 		locals[2]=3;
 		locals[1] = random( 1, locals[2] );
-
+		
 		locals[3] = locals[1];
 		if ( 1 == locals[3] ) {
 			
-			yield return StartCoroutine(say( "I'm too weak to talk." ));
+			yield return StartCoroutine(say( locals, 035 ));
 		} else {
 			
 			if ( 2 == locals[3] ) {
 				
-				yield return StartCoroutine(say( "Get away, before the guards come back!" ));
+				yield return StartCoroutine(say( locals, 036 ));
 			} else {
 				
 				if ( 3 == locals[3] ) {
 					
-					yield return StartCoroutine(say( "Farewell, friend!  I'm too weak to talk!" ));
+					yield return StartCoroutine(say( locals, 037 ));
 				} // end if
 				
 			} // end if
@@ -558,7 +557,7 @@ public class Conversation_218 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 048 ));
 		locals[1] = 49;
 		locals[2] = 50;
 		locals[3] = 0;
@@ -590,5 +589,5 @@ public class Conversation_218 : Conversation {
 	} // end func
 
 */
-
+	
 }

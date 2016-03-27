@@ -155,13 +155,13 @@ public class Conversation_113 : Conversation {
 			
 			if ( privateVariables[0] == 0 ) {
 				
-				yield return StartCoroutine(say( "What art thou doing here?  " ));
+				yield return StartCoroutine(say( locals, 001 ));
 			} else {
 				
-				yield return StartCoroutine(say( "What art thou doing here again?  " ));
+				yield return StartCoroutine(say( locals, 002 ));
 			} // end if
 			
-			yield return StartCoroutine(say( "Leave now before I call the guards." ));
+			yield return StartCoroutine(say( locals, 003 ));
 			locals[2] = 4;
 			locals[3] = 5;
 			locals[4] = 6;
@@ -195,10 +195,10 @@ public class Conversation_113 : Conversation {
 			
 			if ( privateVariables[0] == 0 ) {
 				
-				yield return StartCoroutine(say( "Hullo, @GS8.  I have been told of thee.  What is it thou doth need?" ));
+				yield return StartCoroutine(say( locals, 007 ));
 			} else {
 				
-				yield return StartCoroutine(say( "Hello again, @GS8.  What can I do for thee?" ));
+				yield return StartCoroutine(say( locals, 008 ));
 			} // end if
 			
 			//locals[1] = !privateVariables[0];
@@ -248,7 +248,7 @@ public class Conversation_113 : Conversation {
 				
 			} // end switch
 			
-			yield return StartCoroutine(say( "Which can I do for thee now, @GS8?" ));
+			yield return StartCoroutine(say( locals, 013 ));
 			locals[68] = 14;
 			locals[69] = 15;
 			locals[70] = 0;
@@ -280,7 +280,7 @@ public class Conversation_113 : Conversation {
 		//int locals[44];
 		int[] locals =new int[45];
 		
-		yield return StartCoroutine(say( "I have nothing to discuss.  Please deal with my underlings first before thou dost continue to bother me.  Go now." ));
+		yield return StartCoroutine(say( locals, 016 ));
 		locals[1] = 17;
 		locals[2] = 18;
 		locals[3] = 19;
@@ -308,7 +308,7 @@ public class Conversation_113 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Thou hast bothered me too much already.  Leave!" ));
+		yield return StartCoroutine(say( locals, 020 ));
 		locals[23] = 21;
 		locals[24] = 22;
 		locals[25] = 23;
@@ -342,7 +342,7 @@ public class Conversation_113 : Conversation {
 		//int locals[22];
 		int[] locals =new int[23];
 		
-		yield return StartCoroutine(say( "Do not come here then!  We guard ours to the death!  Leave!" ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[1] = 25;
 		locals[2] = 26;
 		locals[3] = 27;
@@ -378,7 +378,7 @@ public class Conversation_113 : Conversation {
 		//int locals[36];
 		int[] locals =new int[37];
 		
-		yield return StartCoroutine(say( "What information dost thou seek?" ));
+		yield return StartCoroutine(say( locals, 028 ));
 	label_051c:;
 		
 		locals[3] = 29;
@@ -407,7 +407,7 @@ public class Conversation_113 : Conversation {
 		locals[25] = 31;
 		if ( contains( 2, PlayerTypedAnswer, locals[25] ) ==1 ) {
 			
-			yield return StartCoroutine(say( "He is kept prisoner by the Green Lizardmen." ));
+			yield return StartCoroutine(say( locals, 032 ));
 		} else {
 			
 			locals[26] = 33;
@@ -421,7 +421,7 @@ public class Conversation_113 : Conversation {
 			    ) 
 			{
 				
-				yield return StartCoroutine(say( "All I've heard is that the Gray Lizardmen know more." ));
+				yield return StartCoroutine(say( locals, 036 ));
 			} else {
 				
 				locals[29] = 37;
@@ -429,7 +429,7 @@ public class Conversation_113 : Conversation {
 				//;  // expr. has value on stack!
 				if  ((contains( 2, PlayerTypedAnswer, locals[29] ) == 1)|| (contains( 2, PlayerTypedAnswer, locals[30] )==1) ) {
 					
-					yield return StartCoroutine(say( "The crazy one to the north has stolen many types of lights, including our candles!" ));
+					yield return StartCoroutine(say( locals, 039 ));
 				} else {
 					
 					locals[31] = 40;
@@ -440,19 +440,19 @@ public class Conversation_113 : Conversation {
 						|| (contains( 2, PlayerTypedAnswer, locals[32] )==1)
 						) {
 						
-						yield return StartCoroutine(say( "A great one, was Sir Cabirus.  After he died, things all went haywire. The races of the Abyss split off into many small groups like our own.  Dealing with the others can be a touchy task. " ));
+						yield return StartCoroutine(say( locals, 042 ));
 					} else {
 						
 						locals[33] = 43;
 						if ( contains( 2, PlayerTypedAnswer, locals[33] ) ==1) {
 							
-							yield return StartCoroutine(say( "The Eight Talismans?  I do not know much, save the Gray Lizardmen know all about the Sword of Justice." ));
+							yield return StartCoroutine(say( locals, 044 ));
 						} else {
 							
 							locals[34] = 45;
 							if ( contains( 2, PlayerTypedAnswer, locals[34] ) ==1) {
 								
-								yield return StartCoroutine(say( "They are the rulers of this level.  There are Green ones, Red ones, and the mysterious Gray Ones, who are called the Quiet Ones.  They even speak a little of our tongue." ));
+								yield return StartCoroutine(say( locals, 046 ));
 							} else {
 								
 								locals[1] = random( 1, locals[35] );
@@ -460,22 +460,22 @@ public class Conversation_113 : Conversation {
 								locals[36] = locals[1];
 								if ( 1 == locals[36] ) {
 									
-									yield return StartCoroutine(say( "I am sorry I cannot help thee there." ));
+									yield return StartCoroutine(say( locals, 047 ));
 								} else {
 									
 									if ( 2 == locals[36] ) {
 										
-										yield return StartCoroutine(say( "What does this mean, '@SS2'?" ));
+										yield return StartCoroutine(say( locals, 048 ));
 									} else {
 										
 										if ( 3 == locals[36] ) {
 											
-											yield return StartCoroutine(say( "I do not know." ));
+											yield return StartCoroutine(say( locals, 049 ));
 										} else {
 											
 											if ( 4 == locals[36] ) {
 												
-												yield return StartCoroutine(say( "Sorry.  I don't understand." ));
+												yield return StartCoroutine(say( locals, 050 ));
 											} // end if
 											
 										} // end if
@@ -496,7 +496,7 @@ public class Conversation_113 : Conversation {
 			
 		} // end if
 		
-		yield return StartCoroutine(say( "Can I tell thee anything else?" ));
+		yield return StartCoroutine(say( locals, 051 ));
 		goto label_051c;
 		
 	} // end func
@@ -506,7 +506,7 @@ public class Conversation_113 : Conversation {
 		//int locals[3];
 		int[] locals =new int[4];
 		
-		yield return StartCoroutine(say( "Defend thyself!" ));
+		yield return StartCoroutine(say( locals, 052 ));
 		locals[1] = 13;
 		locals[2] = 0;
 		locals[3] = 10;
@@ -598,7 +598,7 @@ public class Conversation_113 : Conversation {
 		//int locals[24];
 		int[] locals =new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 063 ));
 		locals[1] = 64;
 		locals[2] = 65;
 		locals[3] = 0;

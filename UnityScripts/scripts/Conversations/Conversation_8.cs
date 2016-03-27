@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_8 : Conversation {
-
-//	conversation #8
-//		string block 0x0e08, name Retichall
-
-
+	
+	//	conversation #8
+	//		string block 0x0e08, name Retichall
+	
+	
 	public override IEnumerator main() {
 		SetupConversation (3592);
 		privateVariables[1] = 0;
@@ -152,26 +152,26 @@ public class Conversation_8 : Conversation {
 		int[] locals=new int[72];
 		locals[1] = 3;
 		privateVariables[2] = get_quest( 1, locals[1] );
-
+		
 		if ( privateVariables[0] == 1 ) {
 			
 			if ( privateVariables[2] == 1 ) {
 				
-				yield return StartCoroutine(say( "I have given thee permission to talk to my husband, and that is enough of my time for thee to waste.  Speak to me no more!" ));
+				yield return StartCoroutine(say( locals, 001 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
 				yield break;;
 			} else {
 				
-				yield return StartCoroutine(say( "It is thee again.  Thou hast a better reason for speaking to my husband this time, I take it?" ));
+				yield return StartCoroutine(say( locals, 002 ));
 			} 
 		}
 		else {
-			yield return StartCoroutine(say( "Yes?  What dost thou want, human?" ));	
+			yield return StartCoroutine(say( locals, 003 ));	
 			// end if
 			
-
+			
 			locals[2] = 4;
 			locals[3] = 5;
 			locals[4] = 0;
@@ -197,9 +197,9 @@ public class Conversation_8 : Conversation {
 			
 		label_030a:;
 			
-			yield return StartCoroutine(say( "And what reason hast thou for speaking to him?" ));
+			yield return StartCoroutine(say( locals, 006 ));
 		} // end if
-	//} 
+		//} 
 		locals[24] = 7;
 		locals[25] = 8;
 		locals[26] = 9;
@@ -236,11 +236,11 @@ public class Conversation_8 : Conversation {
 			
 		} // end switch
 		
-	//label_0374:;
+		//label_0374:;
 		
 	label_0374:;
 		
-		yield return StartCoroutine(say( "Very well, thou mayst speak to him.  Do not overstay thy welcome.  He is a busy man." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[46] = 3;
 		locals[47] = 1;
 		set_quest( 2, locals[47], locals[46] );
@@ -270,7 +270,7 @@ public class Conversation_8 : Conversation {
 		
 	label_03cb:;
 		
-		yield return StartCoroutine(say( "We have no desire to hear from them!  Get thee gone if thou art a Green Goblin-friend!" ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[70] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -278,16 +278,16 @@ public class Conversation_8 : Conversation {
 		yield break;;
 	label_03d9:;
 		
-		yield return StartCoroutine(say( "Dost thou not know that the time of a king is more precious than that?  Ketchaval has no time for such trifles." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[71] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00b1( locals[71] );
 		yield break;;
 	} // end func
-
-
-
-
-
+	
+	
+	
+	
+	
 }

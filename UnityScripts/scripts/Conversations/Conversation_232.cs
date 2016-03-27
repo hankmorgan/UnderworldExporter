@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_232 : Conversation {
-
-
+	
+	
 	//conversation #232
 	//	string block 0x0ee8, name Carasso
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3816);
 		privateVariables[1] = 0;
@@ -73,7 +73,7 @@ public class Conversation_232 : Conversation {
 		npc.npc_attitude = 2;
 		func_0012();
 	} // end func
-
+	
 	void func_00d1() {
 		
 		npc.npc_attitude = 1;
@@ -155,7 +155,7 @@ public class Conversation_232 : Conversation {
 			yield return StartCoroutine(func_076c());
 		} else {
 			
-			yield return StartCoroutine(say( "What dost thou want here? Art thou here to let the monsters upon me?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -179,7 +179,7 @@ public class Conversation_232 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -189,7 +189,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Why dost thou seek a demon? Art thou in league with it?" ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 0;
@@ -214,7 +214,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "There are many bones down here. I do not intend to allow mine to join them." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -239,7 +239,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "And why art thou here?" ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 0;
@@ -264,7 +264,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Ah, good luck to thee. I am not sure, but there is a large chamber in the center of the lava, guarded by many of the most fearsome creatures I have ever heard tell of.  I stole a key to the door which leads to the chamber's portal, but I fled for my life when I saw what was beyond.  I cannot say if there is a demon there." ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 0;
@@ -289,7 +289,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "It is to the south, down the main hall. It is unmistakable, with devilish devices upon it. If thou dost wish to enter the door, I will give thee the key, as I do not intend to use it again!" ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[1] = 18;
 		locals[2] = 19;
 		locals[3] = 0;
@@ -314,8 +314,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I came to these depths on a quest to find the legendary gold mines. While I was exploring, an evil magic was done, and I became trapped here, my return blocked by a powerful wizard. \n"
-		                             +   " I have been here for weeks now, trying to survive and find another way home. I have had almost no food, as the creatures I have killed are too foul to eat." ));
+		yield return StartCoroutine(say( locals, 020));
 		privateVariables[5] = 1;
 		locals[1] = 21;
 		locals[2] = 22;
@@ -342,11 +341,11 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Here is the key. If thou'rt smarter than brave, thou wilt not use it, but wilt make thy escape with me." ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 1016;
 		if ( take_from_npc( 1, locals[1] ) == 2 ) {
 			
-			yield return StartCoroutine(say( "I will leave it for you here." ));
+			yield return StartCoroutine(say( locals, 024 ));
 		} // end if
 		
 		privateVariables[4] = 1;
@@ -374,7 +373,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "The only way I have seen is across the lava, and if thou dost not burn from the heat, there are fearsome creatures of fire dwelling there!" ));
+		yield return StartCoroutine(say( locals, 027 ));
 		locals[1] = 28;
 		locals[2] = 29;
 		locals[3] = 0;
@@ -399,7 +398,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Hah! I have faced worse threats than thee in these depths. Prepare thyself!" ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[1] = 31;
 		locals[2] = 32;
 		locals[3] = 33;
@@ -431,7 +430,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "I know no such person. I know only that I am trapped here by a wizard." ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 36;
 		locals[3] = 37;
@@ -475,52 +474,52 @@ public class Conversation_232 : Conversation {
 				//if ( locals[1+counter] == 1011 ) {
 				if (( locals[1+counter]>= 176 ) && (locals[1+counter]<= 183)) {
 					locals[14] = 1;
-				//	give_to_npc( 2, locals[5], locals[14] );
+					//	give_to_npc( 2, locals[5], locals[14] );
 					give_to_npc(2,locals,6+counter,1);
 				} // end if
 				counter++;
 				locals[12] = locals[12] + 1;
 			} // while
 			
-		//give_to_npc( 2, locals[6], locals[11] );
+			//give_to_npc( 2, locals[6], locals[11] );
 			if (locals[14]==1)
 			{
 				yield return StartCoroutine(func_06de());
 			}
-
+			
 		} //else {
+		
+		if ( locals[13] > 2 ) {
 			
-			if ( locals[13] > 2 ) {
-				
-				yield return StartCoroutine(say( "Thou art toying with me most cruelly! Leave me!" ));
-				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
-				func_00d1();
-				yield break;
-			} // end if
+			yield return StartCoroutine(say( locals, 038 ));
+			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
+			func_00d1();
+			yield break;
+		} // end if
+		
+		yield return StartCoroutine(say( locals, 039 ));
+		locals[15] = 40;
+		locals[16] = 41;
+		locals[17] = 0;
+		//locals[36] = babl_menu( 0, locals[15] );
+		yield return StartCoroutine(babl_menu (0,locals,15));   locals[36] = PlayerAnswer;
+		switch ( locals[36] ) {
 			
-			yield return StartCoroutine(say( "But thou art empty-handed! Dost thou truly wish to give me some food?" ));
-			locals[15] = 40;
-			locals[16] = 41;
-			locals[17] = 0;
-			//locals[36] = babl_menu( 0, locals[15] );
-			yield return StartCoroutine(babl_menu (0,locals,15));   locals[36] = PlayerAnswer;
-			switch ( locals[36] ) {
-				
-			case 1:
-				
-				locals[13] = locals[13] + 1;
-				goto label_0625;
-				
-				break;
-				
-			case 2:
-				
-				yield return StartCoroutine(func_0738());
-				break;
-			} // end if
+		case 1:
 			
-			//break;
+			locals[13] = locals[13] + 1;
+			goto label_0625;
 			
+			break;
+			
+		case 2:
+			
+			yield return StartCoroutine(func_0738());
+			break;
+		} // end if
+		
+		//break;
+		
 		//} // end switch
 		
 	} // end func
@@ -531,14 +530,14 @@ public class Conversation_232 : Conversation {
 		
 		if ( privateVariables[3] ==1) {
 			
-			yield return StartCoroutine(say( "I thank thee kindly.  May thy quest come to a happier end than mine!" ));
+			yield return StartCoroutine(say( locals, 042 ));
 			locals[1] = 3;
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[1] );
 			yield break;
 		} // end if
 		
-		yield return StartCoroutine(say( "I thank thee most kindly. Here, I found this wand with some bones far to the southwest of here.  I believe that the bones were those of a great wizard. They were near a Knight's remains. There was more, but I had to flee a fearsome stone creature before I could gather it up." ));
+		yield return StartCoroutine(say( locals, 043 ));
 		locals[2] = 152;
 		take_from_npc( 1, locals[2] );
 		privateVariables[3] = 1;
@@ -557,7 +556,7 @@ public class Conversation_232 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "Well, leave me then, as I must rest before I make another attempt at escape." ));
+		yield return StartCoroutine(say( locals, 045 ));
 		locals[1] = 46;
 		locals[2] = 0;
 		yield return StartCoroutine(babl_menu (0,locals,1));   locals[22] = PlayerAnswer;
@@ -569,11 +568,11 @@ public class Conversation_232 : Conversation {
 	} // end func
 	
 	IEnumerator func_076c() {
-
-
+		
+		
 		int[] locals = new int[47];
 		
-		yield return StartCoroutine(say( "Hello again." ));
+		yield return StartCoroutine(say( locals, 047 ));
 		//locals[1] = !privateVariables[5];
 		if (privateVariables[5]==0)
 		{
@@ -638,6 +637,6 @@ public class Conversation_232 : Conversation {
 		} // end switch
 		
 	} // end func
-
-
+	
+	
 }

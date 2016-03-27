@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Conversation_276 : Conversation {
 	//Generic Mountainman
-
+	
 	//conversation #276
 	//	string block 0x0f14, name
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3860);
 		privateVariables[1] = 0;
@@ -147,22 +147,22 @@ public class Conversation_276 : Conversation {
 		
 	} // end func*/
 	
- 	IEnumerator func_029d() {
+	IEnumerator func_029d() {
 		
 		//int locals[195];
 		int[] locals=new int[196];
 		locals[1] = 4;
 		privateVariables[5] = get_quest( 1, locals[1] );
-
+		
 		privateVariables[2] = 1;
 		privateVariables[3] = 1;
 		privateVariables[4] = 1;
 		if ( privateVariables[0] == 1 ) {
 			
-			yield return StartCoroutine(say( "Greetings to ye, @GS8.  What brings ye here?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Ah, ye must be @GS8 of whom I've heard.  What can I do for ye?" ));
+			yield return StartCoroutine(say( locals, 002 ));
 		} // end if
 		
 		locals[2] = 3;
@@ -173,7 +173,7 @@ public class Conversation_276 : Conversation {
 		//locals[23] = babl_menu( 0, locals[2] );
 		yield return StartCoroutine(babl_menu (0,locals,2));
 		locals[23] = PlayerAnswer;
-
+		
 		switch ( locals[23] ) {
 			
 		case 1:
@@ -205,7 +205,7 @@ public class Conversation_276 : Conversation {
 	label_0335:;
 		
 		privateVariables[2] = 0;
-		yield return StartCoroutine(say( "Terrible, ain't it?  I hear a troll carried her below.  I hope all turns out well for ye.  Up here, we have enough problems of our own." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[45] = privateVariables[3];
 		locals[24] = 8;
 		locals[46] = privateVariables[4];
@@ -218,7 +218,7 @@ public class Conversation_276 : Conversation {
 		//locals[66] = babl_fmenu( 0, locals[24], locals[45] );
 		yield return StartCoroutine(babl_fmenu (0,locals,24,45));
 		locals[66] = PlayerAnswer;
-
+		
 		switch ( locals[66] ) {
 			
 		case 8:
@@ -249,13 +249,13 @@ public class Conversation_276 : Conversation {
 		} // end switch
 		
 	label_03c7:;
-
+		
 		privateVariables[3] = 0;
 		if ( privateVariables[5] == 1) {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "Maybe ye can help us.  Our mines in the southeast have been invaded by a fearsome beast, floating in the air with many tentacles.  If ye can defeat it, all Mountainfolk would be eternally grateful." ));
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[88] = 1;
 			locals[67] = 13;
 			locals[89] = privateVariables[2];
@@ -292,16 +292,16 @@ public class Conversation_276 : Conversation {
 			case 16:
 				
 				goto label_0584;
-
+				
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
 		npc.npc_attitude = 3;
-		yield return StartCoroutine(say( "Well, we've one less trouble now that ye've gone and slain that nasty beast.  Quite a valorous act it was.  If ye need our help, ye just let us know." ));
+		yield return StartCoroutine(say( locals, 017 ));
 		locals[131] = privateVariables[2];
 		locals[110] = 18;
 		locals[132] = privateVariables[4];
@@ -347,7 +347,7 @@ public class Conversation_276 : Conversation {
 	label_04f2:;
 		
 		privateVariables[4] = 0;
-		yield return StartCoroutine(say( "Ah, Shak may be the one ye want.  A smith he is, and knowledgable in the ways and workings of his trade and the world.  King Goldthirst ye should seek out too, if ye wish to gain his favor." ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[174] = privateVariables[2];
 		locals[153] = 23;
 		locals[175] = privateVariables[3];
@@ -392,9 +392,9 @@ public class Conversation_276 : Conversation {
 		
 	label_0584:;
 		
-		yield return StartCoroutine(say( "Very well, let's see what ye got." ));
+		yield return StartCoroutine(say( locals, 027 ));
 		yield return StartCoroutine(func_066e());
-		yield return StartCoroutine(say( "Goodbye, and good luck to ye." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00e0();
@@ -430,7 +430,7 @@ public class Conversation_276 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "Would ye like to trade items?" ));
+			yield return StartCoroutine(say( locals, 029 ));
 			locals[1] = 30;
 			locals[2] = 31;
 			locals[3] = 0;
@@ -450,7 +450,7 @@ public class Conversation_276 : Conversation {
 				break;	
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -535,7 +535,7 @@ public class Conversation_276 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "Do ye intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 042 ));
 		locals[1] = 43;
 		locals[2] = 44;
 		locals[3] = 0;
@@ -571,7 +571,7 @@ public class Conversation_276 : Conversation {
 		} // end if
 		
 	} // end func
-
-
-
+	
+	
+	
 }

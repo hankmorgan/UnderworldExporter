@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_144 : Conversation {
-
+	
 	//conversation #144
 	//	string block 0x0e90, name Rawstag
-			
+	
 	public override IEnumerator main() {
 		SetupConversation (3728);
 		privateVariables[1] = 0;
@@ -152,7 +152,7 @@ public class Conversation_144 : Conversation {
 		
 		if ( privateVariables[0] == 0 ) {
 			
-			yield return StartCoroutine(say( "Who are you? I not seen you before." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -176,7 +176,7 @@ public class Conversation_144 : Conversation {
 				
 			} // end switch
 			
-			yield return StartCoroutine(say( "All sounds very confusing.  Mind I call you Rodriguez?" ));
+			yield return StartCoroutine(say( locals, 005 ));
 			locals[23] = 6;
 			locals[24] = 7;
 			locals[25] = 8;
@@ -205,10 +205,10 @@ public class Conversation_144 : Conversation {
 				
 			} // end switch
 			
-			yield return StartCoroutine(say( "Whatever you say, Rodriguez." ));
+			yield return StartCoroutine(say( locals, 009 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Hey, I seen you 'fore.  Hi Rodriguez!" ));
+			yield return StartCoroutine(say( locals, 010 ));
 		} // end if
 		
 		if ( privateVariables[3]  == 1) {
@@ -236,7 +236,7 @@ public class Conversation_144 : Conversation {
 		
 		while ( true ) {
 			
-			yield return StartCoroutine(say( "What I do for you?" ));
+			yield return StartCoroutine(say( locals, 011 ));
 			locals[2] = 12;
 			locals[3] = 13;
 			locals[4] = 14;
@@ -266,8 +266,8 @@ public class Conversation_144 : Conversation {
 			
 			//locals[1] = babl_ask( 0 );
 			yield return  StartCoroutine(babl_ask(0));
-			//say( "\1@SS1\0" );
-			yield return StartCoroutine(say( "@SS1" ));
+			//say( locals, 015 );
+			yield return StartCoroutine(say( locals, 015 ));
 			locals[24] = 16;
 			locals[25] = 17;
 			//;  // expr. has value on stack!
@@ -279,40 +279,40 @@ public class Conversation_144 : Conversation {
 				locals[26] = 18;
 				if ( contains( 2, PlayerTypedAnswer, locals[26] ) == 1) {
 					
-					yield return StartCoroutine(say( "Oh... I help if I can, I think." ));
+					yield return StartCoroutine(say( locals, 019 ));
 				} else {
 					
 					locals[27] = 20;
 					if ( contains( 2, PlayerTypedAnswer, locals[27] ) == 1 ) {
 						
-						yield return StartCoroutine(say( "I would rather stay here by my door. It safer then going out near the knights." ));
+						yield return StartCoroutine(say( locals, 021 ));
 					} else {
 						
 						locals[28] = 22;
 						if ( contains( 2, PlayerTypedAnswer, locals[28] ) == 1 ) {
 							
-							yield return StartCoroutine(say( "Lava real hot.  Me no go near." ));
+							yield return StartCoroutine(say( locals, 023 ));
 						} else {
 							
 							locals[29] = 24;
 							if ( contains( 2, PlayerTypedAnswer, locals[29] ) == 1 ) {
 								
-								yield return StartCoroutine(say( "Oh, I no good with bridge, it collapse and I hurt meself." ));
+								yield return StartCoroutine(say( locals, 025 ));
 							} else {
 								
 								locals[30] = 26;
 								locals[32] = 28;
 								locals[31] = 27;
 								//;  // expr. has value on stack!
-
+								
 								if ( (compare( 2, PlayerTypedAnswer, locals[30] ) == 1 ) || (contains( 2, PlayerTypedAnswer, locals[31] ) == 1 ) || (contains( 2, PlayerTypedAnswer, locals[32] ) == 1 ) )  {
 									
-									yield return StartCoroutine(say( "Goodbye, Rodriguez." ));
+									yield return StartCoroutine(say( locals, 029 ));
 									locals[33] = 2;
 									func_00b1( locals[33] );
 								} // end if
 								
-								yield return StartCoroutine(say( "I no understand you, Rodriguez." ));
+								yield return StartCoroutine(say( locals, 030 ));
 							} // end if
 							
 						} // end if
@@ -332,7 +332,7 @@ public class Conversation_144 : Conversation {
 		//int locals[23];
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "I open door?  Yes, I could.  You want me to?" ));
+		yield return StartCoroutine(say( locals, 031 ));
 		locals[1] = 32;
 		locals[2] = 33;
 		locals[3] = 0;
@@ -354,7 +354,7 @@ public class Conversation_144 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Maybe I open door if you give me something." ));
+		yield return StartCoroutine(say( locals, 034 ));
 		privateVariables[2] = 1;
 		locals[23] = 0;
 		yield return StartCoroutine(func_0521( locals[23] ));
@@ -367,7 +367,7 @@ public class Conversation_144 : Conversation {
 		
 		//if ( param1[0]play_hunger ) {
 		if ( param1 == 1 ) {
-			yield return StartCoroutine(say( "Did you bring me something?  What is it?  I want see!" ));
+			yield return StartCoroutine(say( locals, 035 ));
 		} // end if
 		
 		locals[1] = 0;
@@ -394,7 +394,7 @@ public class Conversation_144 : Conversation {
 				
 			case 3:
 				
-				yield return StartCoroutine(say( "Find something, come back with it.  I may like." ));
+				yield return StartCoroutine(say( locals, 039 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();//Endconvo
@@ -415,19 +415,19 @@ public class Conversation_144 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		//if ( param1[0]play_hunger < 2 ) {
-			if (param1<2){
+		if (param1<2){
 			//TODO:Figure this out
 			//play_hunger = param1[0]play_hunger + 1;
-			yield return StartCoroutine(say( "I no like you demand, Rodriguez." ));
+			yield return StartCoroutine(say( locals, 040 ));
 		} else {
 			
 			if ( npc.npc_attitude > 1 ) {
 				
 				npc.npc_attitude = npc.npc_attitude - 1;
-				yield return StartCoroutine(say( "You be careful, friend Rodriguez." ));
+				yield return StartCoroutine(say( locals, 041 ));
 			} else {
 				
-				yield return StartCoroutine(say( "You no make demand anymore!" ));
+				yield return StartCoroutine(say( locals, 042 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_008b();//endconvo
@@ -457,7 +457,7 @@ public class Conversation_144 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "I get.  I once wait for friend so long, I hurl him off cliff by mistake, I so upset." ));
+		yield return StartCoroutine(say( locals, 045 ));
 	} // end func
 	
 	IEnumerator func_0610() {
@@ -469,8 +469,8 @@ public class Conversation_144 : Conversation {
 		locals[14] = show_inv (2,locals,6,1);
 		if ( locals[14] == 0 ) {
 			
-			yield return StartCoroutine(say( "You no show me nothing.  I no impressed.... \n" ));//was \p
-			yield return StartCoroutine(say( "You try fool me, Rodriguez?  No luck, I too smart." ));
+			yield return StartCoroutine(say( locals, 046 ));//was \p
+			yield return StartCoroutine(say( locals, 047 ));
 		} else {
 			locals[15] = 162;
 			locals[11] = find_barter( 1, locals[15] );
@@ -481,25 +481,25 @@ public class Conversation_144 : Conversation {
 				locals[11] = find_barter( 1, locals[16] );
 				if (locals[11]==0)
 				{//No red gem found
-					yield return StartCoroutine(say( "Nice. But me no want.  Some other?" ));
+					yield return StartCoroutine(say( locals, 048 ));
 					yield break;
 				}
 			}
-
+			
 			locals[17] = -1;
 			give_ptr_npc( 2, locals[17], locals[11]-1);//minus 1 to adjust the positions
-			yield return StartCoroutine(say( "Oh, I like!  Thank you!" ));
+			yield return StartCoroutine(say( locals, 049 ));
 			locals[18] = 61;
 			locals[19] = 5;
 			locals[20] = 0;
 			locals[13] = gronk_door( 3, locals[20], locals[19], locals[18] );
-
+			
 			if ( locals[13] == 1 ) {
 				
-				yield return StartCoroutine(say( "Door open now.  You happy?" ));
+				yield return StartCoroutine(say( locals, 050 ));
 			} else {
 				
-				yield return StartCoroutine(say( "Hey.  Who break door?" ));
+				yield return StartCoroutine(say( locals, 051 ));
 			} // end if
 			
 			privateVariables[3] = 1;
@@ -543,10 +543,10 @@ public class Conversation_144 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Sorry, Rodriguez, I no have time for chitchat.  I have nice red gem I must play with.  You have fun!" ));
+		yield return StartCoroutine(say( locals, 055 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		yield break;
 	} // end func
-
+	
 }

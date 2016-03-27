@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_184 : Conversation {
-
+	
 	//conversation #184
 	//string block 0x0eb8, name Delanrey
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3768);
 		privateVariables[1] = 0;
@@ -150,14 +150,14 @@ public class Conversation_184 : Conversation {
 		int[] locals = new int[46];
 		locals[2] = 10;
 		locals[1] = get_quest( 1, locals[2] );
-
+		
 		if ( privateVariables[0] == 1) {
 			
 			yield return StartCoroutine(func_03d4());
 		} else {
 			
 			privateVariables[2] = 0;
-			yield return StartCoroutine(say( "Ho, adventurer!  I have been looking for one like thee.  Hast thou made the acquaintance of an adventurer known as Zak?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[24] = 1;
 			locals[3] = 2;
 			locals[25] = locals[1];
@@ -186,7 +186,7 @@ public class Conversation_184 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -196,7 +196,7 @@ public class Conversation_184 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "I am sorry to hear it.  I have not been able to find another candelabra like the one he stole from me." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -209,7 +209,7 @@ public class Conversation_184 : Conversation {
 		int[] locals = new int[2];
 		
 		privateVariables[2] = 1;
-		yield return StartCoroutine(say( "I am glad to hear that!  Perhaps I will be able to retrieve my candelabra from him now." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -223,7 +223,7 @@ public class Conversation_184 : Conversation {
 		
 		locals[1] = get_quest( 1, locals[2] );
 		locals[2] = 10;
-		yield return StartCoroutine(say( "I don't know his real name, but he has come to be known simply as Zak.  He was a Knight, I understand, before finding something in his adventures that caused him to lose his sanity.  Recently he wandered by and made off with my candelabra.  I don't expect ever to see it again.  I hear that he also stole from the Knights some candle that they value highly." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[24] = 1;
 		locals[3] = 8;
 		locals[25] = locals[1];
@@ -253,10 +253,10 @@ public class Conversation_184 : Conversation {
 		int[] locals = new int[47];
 		locals[2] = 10;
 		locals[1] = get_quest( 1, locals[2] );
-
+		
 		if ( privateVariables[2] == 1) {
 			
-			yield return StartCoroutine(say( "Hello, @GS8!  I thank thee again for telling me of the whereabouts of Zak." ));
+			yield return StartCoroutine(say( locals, 010 ));
 			locals[3] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -264,7 +264,7 @@ public class Conversation_184 : Conversation {
 			yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Oh, hello again.  Hast thou perhaps found Zak?" ));
+			yield return StartCoroutine(say( locals, 011 ));
 			locals[25] = 1;
 			locals[4] = 12;
 			locals[26] = locals[1];
@@ -293,7 +293,7 @@ public class Conversation_184 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -371,7 +371,7 @@ public class Conversation_184 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[1] = 26;
 		locals[2] = 27;
 		locals[3] = 0;

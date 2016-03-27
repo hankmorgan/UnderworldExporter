@@ -4,7 +4,7 @@ using System.Collections;
 public class Conversation_28 : Conversation {
 	//conversation #28
 	//string block 0x0e1c, name Zak
-
+	
 	public int[] global = new int[1];
 	int func_0836_result;
 	public int PrivateVariable_37;
@@ -173,7 +173,7 @@ public class Conversation_28 : Conversation {
 			func_0405();
 		} // end if
 		
-		yield return StartCoroutine( say( "Hello.  My name is Zak.  What be thine?" ));
+		yield return StartCoroutine( say( locals, 002 ));
 		locals[1] = 10;
 		locals[2] = 1;
 		set_quest( 2, locals[2], locals[1] );
@@ -205,7 +205,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine( say( "Well, come on in and SHUT THE DOOR, won't thou?" ));
+		yield return StartCoroutine( say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 0;
@@ -232,7 +232,7 @@ public class Conversation_28 : Conversation {
 		
 		//int locals[22];
 		int[] locals=new int[23];
-		yield return StartCoroutine( say( "Art thou crazy?  There be no door here!" ));
+		yield return StartCoroutine( say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -260,7 +260,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine( say( "Greetings to thee, adventurer.  Did I tell thee I am Zak?" ));
+		yield return StartCoroutine( say( locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 0;
@@ -300,17 +300,17 @@ public class Conversation_28 : Conversation {
 			
 			if ( 2 == locals[5] ) {
 				
-				yield return StartCoroutine( say( "Do I know thee from somewhere?" ));
+				yield return StartCoroutine( say( locals, 014 ));
 			} else {
 				
 				if ( 3 == locals[5] ) {
 					
 					if ( global[0] ==1) {
 						
-						yield return StartCoroutine( say( "Greetings to thee, Zak!  I am @GS9." ));
+						yield return StartCoroutine( say( locals, 015 ));
 					} else {
 						
-						yield return StartCoroutine( say( "Greetings to thee, Zak!" ));
+						yield return StartCoroutine( say( locals, 016 ));
 					} // end if
 					
 					locals[2] = 1;
@@ -361,7 +361,7 @@ public class Conversation_28 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine( say( "Hale?  How strange a word.  Is it very dark in here?  I try to keep it well lighted, as darkness creeps in." ));
+		yield return StartCoroutine( say( locals, 020 ));
 		locals[50] = 21;
 		locals[51] = 22;
 		locals[52] = 0;
@@ -391,7 +391,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine( say( "Indeed one can combat the darkness! With weapons and armor of light!" ));
+		yield return StartCoroutine( say( locals, 023 ));
 		locals[1] = 24;
 		locals[2] = 25;
 		locals[3] = 0;
@@ -419,7 +419,7 @@ public class Conversation_28 : Conversation {
 		//int locals[23];
 		int [] locals= new int[24];
 		
-		yield return StartCoroutine( say( "Very well, '@GS9.'  Thou canst call me 'Zak' if thou wish." ));
+		yield return StartCoroutine( say( locals, 026 ));
 		locals[1] = 27;
 		locals[2] = 28;
 		locals[3] = 0;
@@ -451,7 +451,7 @@ public class Conversation_28 : Conversation {
 		//int locals[23];
 		int[] locals=new int[24];
 		
-		yield return StartCoroutine( say( "Very good.  Now, what brings thee here, Zak?" ));
+		yield return StartCoroutine( say( locals, 029 ));
 		locals[1] = 30;
 		locals[2] = 31;
 		locals[3] = 0;
@@ -484,7 +484,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int[]locals= new int[23];
 		
-		yield return StartCoroutine( say( "What dost thou fear, @GS70?" ));
+		yield return StartCoroutine( say( locals, 032 ));
 		locals[1] = 33;
 		locals[2] = 34;
 		locals[3] = 0;
@@ -509,10 +509,10 @@ public class Conversation_28 : Conversation {
 	
 	IEnumerator func_0658() {
 		
-	//	int locals[22];
+		//	int locals[22];
 		int[] locals= new int[23];
 		
-		yield return StartCoroutine( say( "Oh, I fear only the darkness." ));
+		yield return StartCoroutine( say( locals, 035 ));
 		locals[1] = 36;
 		locals[2] = 37;
 		locals[3] = 0;
@@ -540,7 +540,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine( say( "Truly?  Then thou art mad.  Some things everyone should fear." ));
+		yield return StartCoroutine( say( locals, 038 ));
 		locals[1] = 39;
 		locals[2] = 40;
 		locals[3] = 0;
@@ -568,7 +568,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine( say( "Darkness!  It is the root and reason of all fear!" ));
+		yield return StartCoroutine( say( locals, 041 ));
 		locals[1] = 42;
 		locals[2] = 43;
 		locals[3] = 0;
@@ -584,7 +584,7 @@ public class Conversation_28 : Conversation {
 			
 		case 2:
 			
-            yield return StartCoroutine(func_0730());
+			yield return StartCoroutine(func_0730());
 			break;
 			
 		} // end switch
@@ -596,7 +596,7 @@ public class Conversation_28 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine( say( "I collect torches, lamps, and tapers.  Wouldst care to see?" ));
+		yield return StartCoroutine( say( locals, 044 ));
 		locals[1] = 45;
 		locals[2] = 46;
 		locals[3] = 0;
@@ -626,7 +626,7 @@ public class Conversation_28 : Conversation {
 		//int locals[23];
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine( say( "Clearly thou art a fool!  Begone, mad one, lest thy madness prove catching." ));
+		yield return StartCoroutine( say( locals, 047 ));
 		locals[1] = 48;
 		locals[2] = 49;
 		locals[3] = 0;
@@ -657,10 +657,10 @@ public class Conversation_28 : Conversation {
 		
 		//int locals[23];
 		int[] locals = new int[24];
-
+		
 		yield return StartCoroutine(func_0836());
 		if (func_0836_result == 0){
-	//	if ( !func_0836() ) {
+			//	if ( !func_0836() ) {
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
@@ -668,7 +668,7 @@ public class Conversation_28 : Conversation {
 		} // end if
 		
 		setup_to_barter( 0 );
-		yield return StartCoroutine( say( "See?  I can even trade some with thee if thou desirest." ));
+		yield return StartCoroutine( say( locals, 050 ));
 		locals[1] = 51;
 		locals[2] = 52;
 		locals[3] = 0;
@@ -692,7 +692,7 @@ public class Conversation_28 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine( say( "Oh good, as hunger gnaws at me and makes me as afraid as the darkness." ));
+		yield return StartCoroutine( say( locals, 053 ));
 		yield return StartCoroutine( func_091b());
 		PrivateVariable_37 = 0;
 		locals[23] = 3;
@@ -733,7 +733,7 @@ public class Conversation_28 : Conversation {
 		locals[3] = 60 * 6;
 		//if ( !PrivateVariable_37 && !func_0106( locals[2], 66 ) ) {
 		if ( (PrivateVariable_37==0) && (func_0106( locals[2], 66 )  == 0)) {
-			yield return StartCoroutine( say( "Hey, dost thou think me crazy?  I have already  traded with thee!  Come back tomorrow or the next day or the day after!" ));
+			yield return StartCoroutine( say( locals, 054 ));
 			locals[1] = 0;
 		} else {
 			
@@ -815,7 +815,7 @@ public class Conversation_28 : Conversation {
 		//if ( do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6], locals[1] ) ) {
 		yield return StartCoroutine (do_offer( 7, locals[15], locals[14], locals[13], locals[12], locals[11], locals[6],locals[1]) );
 		if (PlayerAnswer==1)	{
-
+			
 			
 			privateVariables[1] = 1;
 		} // end if
@@ -827,7 +827,7 @@ public class Conversation_28 : Conversation {
 		//int locals[24];
 		int[] locals =new int[25];
 		
-		yield return StartCoroutine( say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine( say( locals, 065 ));
 		locals[1] = 66;
 		locals[2] = 67;
 		locals[3] = 0;

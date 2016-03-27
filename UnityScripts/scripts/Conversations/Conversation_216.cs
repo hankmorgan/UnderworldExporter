@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_216 : Conversation {
-
-
+	
+	
 	//conversation #216
 	//	string block 0x0ed8, name guard
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3800);
 		privateVariables[1] = 0;
@@ -79,7 +79,7 @@ public class Conversation_216 : Conversation {
 		npc.npc_attitude = 1;
 		func_0012();
 	} // end func
-
+	
 	void func_00e0() {
 		
 		func_0012();
@@ -152,11 +152,11 @@ public class Conversation_216 : Conversation {
 		locals[1] = 50;
 		locals[2] = 10001;		
 		privateVariables[5] = x_traps( 2, locals[2], locals[1] );
-
+		
 		locals[3] = 51;
 		locals[4] = 10001;
 		privateVariables[7] = x_traps( 2, locals[4], locals[3] );
-
+		
 		if ( privateVariables[0] == 0 ) {
 			
 			privateVariables[2] = 0;
@@ -203,7 +203,7 @@ public class Conversation_216 : Conversation {
 		//if ( param1[0]play_hunger ) {
 		if (param1==1){
 			
-			yield return StartCoroutine(say( "Ho ho, just like big rat in trap. What you want?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 		} // end if
 		
 		locals[1] = 2;
@@ -229,13 +229,13 @@ public class Conversation_216 : Conversation {
 		
 	} // end func
 	
- 	IEnumerator func_0384() {
+	IEnumerator func_0384() {
 		
 		int[] locals = new int[25];
 		
 		privateVariables[6] = 1;
 		privateVariables[8] = 1;
-		yield return StartCoroutine(say( "Ho ho, you just like big dumb rat in trap now.  Ho Ho." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[1] = 5;
 		locals[2] = 6;
 		locals[3] = 7;
@@ -258,7 +258,7 @@ public class Conversation_216 : Conversation {
 			
 		case 3:
 			
-			yield return StartCoroutine(say( "Ho ho, I lock you in jail, silly human.  Now what you want." ));
+			yield return StartCoroutine(say( locals, 008 ));
 			locals[24] = 0;
 			func_0328( locals[24] );
 			break;
@@ -272,7 +272,7 @@ public class Conversation_216 : Conversation {
 		int[] locals = new int[23];
 		
 		privateVariables[4] = 1;
-		yield return StartCoroutine(say( "Yeah? Why I do that? What in it for me?" ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 11;
 		locals[3] = 0;
@@ -299,9 +299,9 @@ public class Conversation_216 : Conversation {
 		
 		locals[14] = 0;
 		locals[12] = 0;
-
+		
 	label_045b:;
-
+		
 		locals[11]= show_inv (2,locals,6,1);
 		//locals[11] = show_inv( 2, locals[6], locals[1] );
 		if ( locals[11] > 0 ) {
@@ -315,7 +315,7 @@ public class Conversation_216 : Conversation {
 				locals[17] = 0;
 				locals[13] = locals[13] + 1;
 			} // while
-
+			
 			give_to_npc(2,locals,6,locals[11]);
 			locals[12]=21;
 			//give_to_npc( 2, locals[6], locals[11] );
@@ -324,7 +324,7 @@ public class Conversation_216 : Conversation {
 				yield return StartCoroutine(func_063c());
 			} else {
 				
-				yield return StartCoroutine(say( "Not enough... More!" ));
+				yield return StartCoroutine(say( locals, 012 ));
 				privateVariables[2] = 1;
 				locals[18] = 13;
 				locals[19] = 14;
@@ -346,20 +346,20 @@ public class Conversation_216 : Conversation {
 				} // end if
 				
 			}// else {
-				
+			
 			//} // end if
 			
-
+			
 			
 		} // end switch
 		
 		if ( locals[14] > 5 ) {
 			
-			yield return StartCoroutine(say( "Play games, huh? You rot then." ));
+			yield return StartCoroutine(say( locals, 015 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00d1();yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "What you got, eh? Show me, go on." ));
+			yield return StartCoroutine(say( locals, 016 ));
 			locals[40] = 17;
 			locals[41] = 18;
 			locals[42] = 0;
@@ -380,7 +380,7 @@ public class Conversation_216 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -395,14 +395,14 @@ public class Conversation_216 : Conversation {
 		
 		if ( privateVariables[3] == 1 ) {
 			
-			yield return StartCoroutine(say( "What you want now? I open gate... Inner gate, ho ho." ));
+			yield return StartCoroutine(say( locals, 019 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00d1();yield break;
 		} else {
 			
 			if ( privateVariables[4] ==1) {
 				
 				privateVariables[2] = 1;
-				yield return StartCoroutine(say( "So, you give more stuff, or what?" ));
+				yield return StartCoroutine(say( locals, 020 ));
 				locals[1] = 21;
 				locals[2] = 22;
 				locals[3] = 0;
@@ -421,12 +421,12 @@ public class Conversation_216 : Conversation {
 				} // end if
 				
 			} //else {
-				
+			
 			//	break;
-				
+			
 			//} // end switch
 			
-			yield return StartCoroutine(say( "Ho ho, you want open door now?" ));
+			yield return StartCoroutine(say( locals, 023 ));
 			locals[23] = 24;
 			locals[24] = 25;
 			locals[25] = 26;
@@ -453,15 +453,15 @@ public class Conversation_216 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
 	} // end func
 	
 	IEnumerator func_062f() {
-		
-		yield return StartCoroutine(say( "Hmmph... You stay then." ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 027 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
 	
@@ -469,7 +469,7 @@ public class Conversation_216 : Conversation {
 		
 		int[] locals = new int[4];
 		
-		yield return StartCoroutine(say( "Ho ho...  I open gate, okay." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[1] = 21;
 		locals[2] = 56;
 		locals[3] = 0;
@@ -482,7 +482,7 @@ public class Conversation_216 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "I no want talk to you now, human.  You talk to goblins, maybe they have better reason." ));
+		yield return StartCoroutine(say( locals, 029 ));
 		locals[1] = 1;
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 		func_00b1( locals[1] );
@@ -490,8 +490,8 @@ public class Conversation_216 : Conversation {
 	} // end func
 	
 	IEnumerator func_0684() {
-		
-		yield return StartCoroutine(say( "You!  You escape from prison!  Bad human, bad human!" ));
+		int[] locals = new int[1];
+		yield return StartCoroutine(say( locals, 030 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
 	} // end func
 	/*
@@ -567,7 +567,7 @@ public class Conversation_216 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 041 ));
 		locals[1] = 42;
 		locals[2] = 43;
 		locals[3] = 0;

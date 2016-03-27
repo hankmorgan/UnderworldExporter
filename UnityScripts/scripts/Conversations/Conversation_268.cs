@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_268 : Conversation {
-
+	
 	//conversation #268
 	//	string block 0x0f0c, name  Grey Goblin Generic
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3852);
 		privateVariables[1] = 0;
@@ -152,10 +152,10 @@ public class Conversation_268 : Conversation {
 		int[] locals=new int[89];
 		if ( privateVariables[0] == 1) {
 			
-			yield return StartCoroutine(say( "Hello, is funny-looking person again." ));
+			yield return StartCoroutine(say( locals, 001 ));
 		} else {
 			
-			yield return StartCoroutine(say( "You have business here?" ));
+			yield return StartCoroutine(say( locals, 002 ));
 		} // end if
 		
 		privateVariables[2] = 1;
@@ -168,7 +168,7 @@ public class Conversation_268 : Conversation {
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine(babl_menu (0,locals,1));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -200,14 +200,14 @@ public class Conversation_268 : Conversation {
 		
 	label_031e:;
 		
-		yield return StartCoroutine(say( "GRAY Goblins, GRAY Goblins, not just Goblins.  Say Goblins, maybe you mean Green Goblins too, ugh.  You not want to know about them. Nasty and brutish they are.  Uglier than humans even.  Not related to us, no, not at all." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[23] = 8;
 		locals[24] = 9;
 		locals[25] = 0;
 		//locals[44] = babl_menu( 0, locals[23] );
 		yield return StartCoroutine(babl_menu (0,locals,23));
 		locals[44] = PlayerAnswer;
-
+		
 		switch ( locals[44] ) {
 			
 		case 1:
@@ -227,9 +227,9 @@ public class Conversation_268 : Conversation {
 		
 	label_035e:;
 		
-	//label_035e:;
+		//label_035e:;
 		
-		yield return StartCoroutine(say( "Ah, yes, Gray Goblins, much better.  We the rulers of this area.  All others look up to us, humans, Green Goblins, spiders even.  You look for powerful group, you came to right place." ));
+		yield return StartCoroutine(say( locals, 010 ));
 		locals[45] = 11;
 		locals[46] = 12;
 		locals[47] = 13;
@@ -237,7 +237,7 @@ public class Conversation_268 : Conversation {
 		//locals[66] = babl_menu( 0, locals[45] );
 		yield return StartCoroutine(babl_menu (0,locals,45));
 		locals[66] = PlayerAnswer;
-
+		
 		switch ( locals[66] ) {
 			
 		case 1:
@@ -264,14 +264,14 @@ public class Conversation_268 : Conversation {
 		
 	label_03b2:;
 		
-		yield return StartCoroutine(say( "Oh, no, no, no, you no want Green Goblins. They evil and ugly and dumb.  No, you stick with Gray Goblins. We smart and tough." ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[67] = 15;
 		locals[68] = 16;
 		locals[69] = 0;
 		//locals[88] = babl_menu( 0, locals[67] );
 		yield return StartCoroutine(babl_menu (0,locals,67));
 		locals[88] = PlayerAnswer;
-
+		
 		switch ( locals[88] ) {
 			
 		case 1:
@@ -291,22 +291,22 @@ public class Conversation_268 : Conversation {
 		
 	label_03f2:;
 		
-	//label_03f2:;
+		//label_03f2:;
 		
 		if ( func_0020() != 1 ) {
 			
-			yield return StartCoroutine(say( "No, I not want your stuff." ));
+			yield return StartCoroutine(say( locals, 017 ));
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
 		} else {
 			
-			yield return StartCoroutine(say( "Okay, what you have?" ));
+			yield return StartCoroutine(say( locals, 018 ));
 		} // end if
 		
 		yield return StartCoroutine(func_040c());
-		yield return StartCoroutine(say( "Goodbye then." ));
+		yield return StartCoroutine(say( locals, 019 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00e0();
@@ -328,7 +328,7 @@ public class Conversation_268 : Conversation {
 			//locals[22] = babl_menu( 0, locals[1] );
 			yield return StartCoroutine(babl_menu (0,locals,1));
 			locals[22] = PlayerAnswer;
-
+			
 			switch ( locals[22] ) {
 				
 			case 1:
@@ -361,7 +361,7 @@ public class Conversation_268 : Conversation {
 		//locals[44] = babl_menu( 0, locals[23] );
 		yield return StartCoroutine(babl_menu (0,locals,23));
 		locals[44] = PlayerAnswer;
-
+		
 		if ( locals[44] == 1 ) {
 			
 			privateVariables[1] = 1;
@@ -394,14 +394,14 @@ public class Conversation_268 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "You think you just take this from me?" ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[1] = 31;
 		locals[2] = 32;
 		locals[3] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
 		yield return StartCoroutine(babl_menu (0,locals,1));
 		locals[22] = PlayerAnswer;
-
+		
 		switch ( locals[22] ) {
 			
 		case 1:
@@ -430,8 +430,8 @@ public class Conversation_268 : Conversation {
 		} // end if
 		yield return null;
 	} // end func
-
-
-
-
+	
+	
+	
+	
 }

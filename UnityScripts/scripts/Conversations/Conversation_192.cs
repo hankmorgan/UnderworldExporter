@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Conversation_192 : Conversation {
-
+	
 	//conversation #192
 	//string block 0x0ec0, name Fyrgen
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3776);
 		privateVariables[1] = 0;
@@ -83,7 +83,7 @@ public class Conversation_192 : Conversation {
 		
 		func_0012();
 	} // end func
-/*	
+	/*	
 	void func_00ea() {
 		
 		param1[1] = game_days;
@@ -150,7 +150,7 @@ public class Conversation_192 : Conversation {
 		int[] locals = new int[111];
 		
 		if ( privateVariables[0] ==1) {
-			yield return StartCoroutine(say( "Ah, 'tis thee again." ));
+			yield return StartCoroutine(say( locals, 014 ));
 			locals[89] = 15;
 			locals[90] = 16;
 			locals[91] = 0;
@@ -174,7 +174,7 @@ public class Conversation_192 : Conversation {
 			} // end switch
 		} else {
 			
-			yield return StartCoroutine(say( "Aaah!  What's that?\n...  Oh, thou didst startle me.  I was in the midst of a vivid dream, having just used some incense.  I had a terrible vision of a great demon." ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -203,8 +203,8 @@ public class Conversation_192 : Conversation {
 			} // end switch
 			
 		label_02fd:;
-
-			yield return StartCoroutine(say( "It was horrible!  The demon is more powerful than thou canst imagine.  I do not think he can be defeated by any mortal." ));
+			
+			yield return StartCoroutine(say( locals, 005 ));
 			locals[23] = 6;
 			locals[24] = 7;
 			locals[25] = 0;
@@ -227,10 +227,8 @@ public class Conversation_192 : Conversation {
 			
 		label_033d:;
 			
-
-			yield return StartCoroutine(say( "This was no ordinary dream, but one dreamt after burning incense.   Incense causes one to have vivid dreams, and they are always true in some way. \n "
-			                               + " Simply pass a block of incense over a torch to produce the smoke which, when inhaled, will cause one to dream. \n "
-			                               + " If my dream was of a demon, then some demon truly is threatening us." ));
+			
+			yield return StartCoroutine(say( locals, 008 ));
 			locals[45] = 9;
 			locals[46] = 10;
 			locals[47] = 0;
@@ -254,8 +252,8 @@ public class Conversation_192 : Conversation {
 			} // end switch
 			
 		label_037d:;
-
-			yield return StartCoroutine(say( "According to my dream, the demon is too powerful to be killed by any mortal. It would have to forced into leaving this world by some other means. I hope it can be done!" ));
+			
+			yield return StartCoroutine(say( locals, 011 ));
 			locals[67] = 12;
 			locals[68] = 13;
 			locals[69] = 0;
@@ -275,19 +273,19 @@ public class Conversation_192 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
-
+		
 		
 	label_03fd:;
-
-		yield return StartCoroutine(say( "I have not used incense since the time of our meeting, so I have had no more dreams of demons.  Perhaps I am better off - that dream was truly terrifying." ));
+		
+		yield return StartCoroutine(say( locals, 017 ));
 		Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 	} // end func
-
-
-
-
+	
+	
+	
+	
 }

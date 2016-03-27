@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_282 : Conversation {
-
-
+	
+	
 	//conversation #282
 	//	string block 0x0f1a, name Generic Outcast
-
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3866);
@@ -156,7 +156,7 @@ public class Conversation_282 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "So, another comrade is caught by the Abyss!  What was thy crime, pray-tell?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -186,11 +186,11 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch
 			
-		//label_02fd:;
+			//label_02fd:;
 			
-/*		label_02fd:;
+			/*		label_02fd:;
 			
-			yield return StartCoroutine(say( "Hm, perhaps the same girl that I hear was carried through these upper caves by a Troll." ));
+			yield return StartCoroutine(say( locals, 005 ));
 			locals[23] = 6;
 			locals[24] = 7;
 			locals[25] = 8;
@@ -218,13 +218,13 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch*/
 			
-	/*	label_0351:;
+			/*	label_0351:;
 			
 		//label_0351:;
 			
 		//label_0351:;
 			
-			yield return StartCoroutine(say( "Well, whoever she was, she's here no longer.  I don't know how far the Troll was planning on taking her, but given the strength of a Troll, he'll not likely run out of energy any time soon." ));
+			yield return StartCoroutine(say( locals, 009 ));
 			locals[45] = 10;
 			locals[46] = 11;
 			locals[47] = 0;
@@ -245,11 +245,11 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch*/
 			
-		/*label_0391:;
+			/*label_0391:;
 			
 	//	label_0391:;
 			
-			yield return StartCoroutine(say( "Hold on just a minute.  Surely that girl is in trouble, but if thou dost learn the ways of the Abyss first, thou wilt surely have a better chance of rescuing her." ));
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[67] = 13;
 			locals[68] = 14;
 			locals[69] = 0;
@@ -270,15 +270,15 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch*/
 			
-		//label_03d1:;
+			//label_03d1:;
 			
-		//label_03d1:;
+			//label_03d1:;
 			
-		//label_03d1:;
+			//label_03d1:;
 			
-		//label_03d1:;
+			//label_03d1:;
 			
-/*		label_03d1:;
+			/*		label_03d1:;
 			
 			yield return StartCoroutine(say( "Well, thou shouldst know that most of the inhabitants of the Abyss are unfriendly.  It's not so much a question of what areas to avoid as of which areas are relatively safe. \n"
 			    +" Look for the Banner of Cabirus -- a tapestry with an ankh, such as we have -- as a sign of civilization.  Any people or creatures thou dost find past the Banner are more likely to talk with thee than eat thee. \n"
@@ -305,7 +305,7 @@ public class Conversation_282 : Conversation {
 			
 		//label_0411:;*/
 			
-/*		label_0411:;
+			/*		label_0411:;
 			
 			yield return StartCoroutine(say( "When thou dost see a large, plain ankh standing on the ground, thou hast found a shrine to Virtue. \n"
 			    +" It is said that if thou hast been virtuous, and dedicated to increasing thy abilities, praying at a shrine with the correct mantra will allow thee to enhance thy abilities. \n"
@@ -330,13 +330,13 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch*/
 			
-		//label_0451:;
+			//label_0451:;
 			
-		//label_0451:;
+			//label_0451:;
 			
-		/*label_0451:;
+			/*label_0451:;
 			
-			yield return StartCoroutine(say( "Well, good luck in thy travels.  Thou art always welcome here." ));
+			yield return StartCoroutine(say( locals, 021 ));
 			locals[133] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -344,7 +344,7 @@ public class Conversation_282 : Conversation {
 			yield break;*/
 		label_045f:;
 			
-			yield return StartCoroutine(say( "Oh, thou art an innocent passerby, eh?  Perhaps thou art here on a tour of the Abyss?  Or art thou a census taker? A tax collector?  Eh?" ));
+			yield return StartCoroutine(say( locals, 022 ));
 			locals[134] = 23;
 			locals[135] = 24;
 			locals[136] = 25;
@@ -374,21 +374,20 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch
 			
-		//label_04b3:;
+			//label_04b3:;
 			
-		//label_04b3:;
+			//label_04b3:;
 			
 		label_04b3:;
 			
-			yield return StartCoroutine(say( "Already been driven mad, I see.  'Tis a pity, truly, to see the mind go on one so young.  Ah, well, death is probably thy best hope. Good luck." ));
+			yield return StartCoroutine(say( locals, 026 ));
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
 		label_04b8:;
 			
-			yield return StartCoroutine(say( "Thrown here against thy will I will believe, but wrongfully is a different matter.  No need to pretend amoungst us, though.  Not a one of us believes in Almric's petty justice. \n"
-			    +"  Now that thou'rt here, thou shouldst stay with us.  The creatures beyond are far worse than anything Almric could do to thee.  Right here near the door is safest.  Trust me." ));
+			yield return StartCoroutine(say( locals, 027 ));
 			locals[156] = 28;
 			locals[157] = 29;
 			locals[158] = 0;
@@ -411,11 +410,11 @@ public class Conversation_282 : Conversation {
 				
 			} // end switch
 			
-		//label_04f8:;
+			//label_04f8:;
 			
-		//label_04f8:;
+			//label_04f8:;
 			
-/*		label_04f8:;
+			/*		label_04f8:;
 			
 			yield return StartCoroutine(say( "'Tis unbelievable. Once, it is said, all the races here lived in harmony.  Not now, that's for certain.  The Gobs on this level are constantly at war, with each other as well as everyone else.  And below are things I dare not speak of. \n"
 			    +" 'Tis rumored that some remnants of civilization remain in most colonized areas of the Abyss, but I have never had the courage or interest to find out." ));
@@ -436,12 +435,12 @@ public class Conversation_282 : Conversation {
 				goto label_03d1;
 				break;	
 			} // end if*/
-
-
+			
+			
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "A hearty welcome to thee.  Hast thou decided to stay with us?" ));
+		yield return StartCoroutine(say( locals, 033 ));
 		locals[200] = 34;
 		locals[201] = 35;
 		locals[202] = 37;
@@ -459,7 +458,7 @@ public class Conversation_282 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "I am glad to hear it.  This is by far the safest place in the Abyss." ));
+			yield return StartCoroutine(say( locals, 036 ));
 			locals[222] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -477,7 +476,7 @@ public class Conversation_282 : Conversation {
 		
 	label_0598:;
 		
-		yield return StartCoroutine(say( "What wouldst thou know of?" ));
+		yield return StartCoroutine(say( locals, 038 ));
 		locals[223] = 39;
 		locals[224] = 40;
 		locals[225] = 41;
@@ -506,23 +505,23 @@ public class Conversation_282 : Conversation {
 			break;
 			
 		} // end switch
-
-
-
+		
+		
+		
 		//Moved labels
 	label_0451:;
 		
-		yield return StartCoroutine(say( "Well, good luck in thy travels.  Thou art always welcome here." ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[133] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00b1( locals[133] );
 		yield break;
-
-
+		
+		
 	label_02fd:;
 		
-		yield return StartCoroutine(say( "Hm, perhaps the same girl that I hear was carried through these upper caves by a Troll." ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[23] = 6;
 		locals[24] = 7;
 		locals[25] = 8;
@@ -551,13 +550,12 @@ public class Conversation_282 : Conversation {
 			break;
 			
 		} // end switch
-
-
-
+		
+		
+		
 	label_04f8:;
 		
-		yield return StartCoroutine(say( "'Tis unbelievable. Once, it is said, all the races here lived in harmony.  Not now, that's for certain.  The Gobs on this level are constantly at war, with each other as well as everyone else.  And below are things I dare not speak of. \n"
-		                                +" 'Tis rumored that some remnants of civilization remain in most colonized areas of the Abyss, but I have never had the courage or interest to find out." ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[178] = 31;
 		locals[179] = 32;
 		locals[180] = 0;
@@ -577,16 +575,16 @@ public class Conversation_282 : Conversation {
 			goto label_03d1;
 			break;	
 		} // end if
-
-
-
+		
+		
+		
 	label_0351:;
 		
 		//label_0351:;
 		
 		//label_0351:;
 		
-		yield return StartCoroutine(say( "Well, whoever she was, she's here no longer.  I don't know how far the Troll was planning on taking her, but given the strength of a Troll, he'll not likely run out of energy any time soon." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[45] = 10;
 		locals[46] = 11;
 		locals[47] = 0;
@@ -608,13 +606,11 @@ public class Conversation_282 : Conversation {
 			break;
 			
 		} // end switch
-
-
+		
+		
 	label_03d1:;
 		
-		yield return StartCoroutine(say( "Well, thou shouldst know that most of the inhabitants of the Abyss are unfriendly.  It's not so much a question of what areas to avoid as of which areas are relatively safe. \n"
-		                                +" Look for the Banner of Cabirus -- a tapestry with an ankh, such as we have -- as a sign of civilization.  Any people or creatures thou dost find past the Banner are more likely to talk with thee than eat thee. \n"
-		                                + " Speaking of ankhs, thou wouldst do well to search out the other thing they represent: the shrines." ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[89] = 16;
 		locals[90] = 17;
 		locals[91] = 0;
@@ -636,12 +632,12 @@ public class Conversation_282 : Conversation {
 			break;
 			
 		} // end switch
-
+		
 	label_0391:;
 		
 		//	label_0391:;
 		
-		yield return StartCoroutine(say( "Hold on just a minute.  Surely that girl is in trouble, but if thou dost learn the ways of the Abyss first, thou wilt surely have a better chance of rescuing her." ));
+		yield return StartCoroutine(say( locals, 012 ));
 		locals[67] = 13;
 		locals[68] = 14;
 		locals[69] = 0;
@@ -663,13 +659,11 @@ public class Conversation_282 : Conversation {
 			break;
 			
 		} // end switch
-
-
+		
+		
 	label_0411:;
 		
-		yield return StartCoroutine(say( "When thou dost see a large, plain ankh standing on the ground, thou hast found a shrine to Virtue. \n"
-		                                +" It is said that if thou hast been virtuous, and dedicated to increasing thy abilities, praying at a shrine with the correct mantra will allow thee to enhance thy abilities. \n"
-		                                +" It is said that there is one in the southeast area of these upper caves, but I have not seen it myself." ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[111] = 19;
 		locals[112] = 20;
 		locals[113] = 0;
@@ -691,13 +685,13 @@ public class Conversation_282 : Conversation {
 			break;
 			
 		} // end switch
-
-
-
+		
+		
+		
 	} // end func
-
-
-
-
-
+	
+	
+	
+	
+	
 }

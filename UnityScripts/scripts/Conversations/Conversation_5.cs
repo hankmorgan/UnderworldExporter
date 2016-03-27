@@ -160,12 +160,12 @@ public class Conversation_5 : Conversation {
 				
 				if ( 2 == locals[3] ) {
 					
-					yield return StartCoroutine(say( "Is you again." ));
+					yield return StartCoroutine(say( locals, 001 ));
 				} else {
 					
 					if ( 3 == locals[3] ) {
 						
-						yield return StartCoroutine(say( "I glad to see you." ));
+						yield return StartCoroutine(say( locals, 002 ));
 					} // end if
 					
 				} // end if
@@ -178,11 +178,11 @@ public class Conversation_5 : Conversation {
 			privateVariables[4] = 0;
 		} // end if
 		
-
+		
 		
 		if ( privateVariables[3] == 0) {
 			privateVariables[3]=1;
-			yield return StartCoroutine(say( "Who you?  Me no see live human here in long time." ));
+			yield return StartCoroutine(say( locals, 011 ));
 			locals[47] = 12;
 			locals[48] = 13;
 			locals[49] = 14;
@@ -219,7 +219,7 @@ public class Conversation_5 : Conversation {
 			locals[2] = 3;
 			while ( true ) {
 				
-				yield return StartCoroutine(say( "What@SS2 can me help you with?" ));
+				yield return StartCoroutine(say( locals, 004 ));
 				locals[2] = 5;
 				locals[25] = 1;
 				locals[4] = 6;
@@ -249,7 +249,7 @@ public class Conversation_5 : Conversation {
 					
 				case 8:
 					
-					yield return StartCoroutine(say( "Notes of tune are 3 5 4 2 3 7 8 7 5." ));
+					yield return StartCoroutine(say( locals, 009 ));
 					break;
 					
 				case 10:
@@ -285,7 +285,7 @@ public class Conversation_5 : Conversation {
 	
 	IEnumerator label_056e(int[] locals)
 	{
-		yield return StartCoroutine(say( "Okay, let me see flute." ));
+		yield return StartCoroutine(say( locals, 033 ));
 		//} // end if
 		
 		locals[201] = 34;
@@ -309,13 +309,13 @@ public class Conversation_5 : Conversation {
 		} // end switch
 		locals[223] = 292;
 		locals[1] = find_barter( 1, locals[223] );
-
+		
 		if ( locals[1]==0 ) {
 			
-			yield return StartCoroutine(say( "Hey, me no see flute." ));
+			yield return StartCoroutine(say( locals, 036 ));
 		} else {
 			
-			yield return StartCoroutine(say( "This flute should work fine.  Notes of tune are 3 5 4 2 3 7 8 7 5." ));
+			yield return StartCoroutine(say( locals, 037 ));
 			privateVariables[4] = 1;
 			//privateVariables[3] = 0;
 			locals[224] = 38;
@@ -347,7 +347,7 @@ public class Conversation_5 : Conversation {
 	
 	IEnumerator label_0628(int[]locals)
 	{
-		yield return StartCoroutine(say( "Whole floor of Abyss was used for meetings.  Was state hall, tombs, meeting rooms.  No one lived here, just came for meetings.  After collapse, meetings stop and people no come here." ));
+		yield return StartCoroutine(say( locals, 041 ));
 		locals[248] = 42;
 		locals[249] = 43;
 		locals[250] = 0;
@@ -373,7 +373,7 @@ public class Conversation_5 : Conversation {
 	
 	IEnumerator	label_0668(int[]locals)
 	{
-		yield return StartCoroutine(say( "When collapse happen, food get scarce fast.  Bunch of us who work here before collapse live off bodies in tombs. Start to like them better than other food.  Other humans call us ghouls.  Pretty soon we call selves Ghouls.  Later we kicked out of tombs, move here." ));
+		yield return StartCoroutine(say( locals, 044 ));
 		locals[270] = 45;
 		locals[271] = 46;
 		locals[272] = 0;
@@ -401,7 +401,7 @@ public class Conversation_5 : Conversation {
 	
 	IEnumerator	label_03e4(int[]locals)
 	{
-		yield return StartCoroutine(say( "Me Eyesnack.  What you doing here?" ));
+		yield return StartCoroutine(say( locals, 015 ));
 		locals[69] = 16;
 		locals[70] = 17;
 		locals[71] = 0;
@@ -428,7 +428,7 @@ public class Conversation_5 : Conversation {
 	
 	IEnumerator	label_0424(int[]locals)
 	{
-		yield return StartCoroutine(say( "You strange person, wander around exploring.  Since collapse 'most no one come here." ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[91] = 19;
 		locals[92] = 20;
 		locals[93] = 0;
@@ -454,7 +454,7 @@ public class Conversation_5 : Conversation {
 	/*************/
 	IEnumerator label_0464(int[] locals)
 	{
-		yield return StartCoroutine(say( "This place was catacombs.  People come to state hall for funeral, then march through catacombs and make tomb for dead guy.  Me play flute at funerals.  Long time ago." ));
+		yield return StartCoroutine(say( locals, 021 ));
 		locals[113] = 22;
 		locals[114] = 23;
 		locals[115] = 0;
@@ -481,7 +481,7 @@ public class Conversation_5 : Conversation {
 	
 	IEnumerator label_04a4(int[]locals)
 	{
-		yield return StartCoroutine(say( "Yeah, me musician.  You surprised Ghoul can be musician?  Me musician before me Ghoul.  Me play in state hall for Cabirus all the time." ));
+		yield return StartCoroutine(say( locals, 024 ));
 		locals[135] = 25;
 		locals[136] = 26;
 		locals[137] = 0;
@@ -508,7 +508,7 @@ public class Conversation_5 : Conversation {
 	/************/
 	IEnumerator	label_04e4(int[] locals)
 	{
-		yield return StartCoroutine(say( "It was great.  Me play all kinds stuff.  Me play \"Mardin's Song of Wonder\" lot of times.  Was Cabirus' favorite spiritual.  Said that you play it in the right place, wondrous thing happen.  But no one know place." ));
+		yield return StartCoroutine(say( locals, 027 ));
 		privateVariables[2] = 1;
 		locals[157] = 28;
 		locals[158] = 29;
@@ -535,7 +535,7 @@ public class Conversation_5 : Conversation {
 	IEnumerator label_0529(int[] locals)
 	{
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "You got flute?  Me teach song to you." ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[179] = 31;
 		locals[180] = 32;
 		locals[181] = 0;
@@ -561,7 +561,7 @@ public class Conversation_5 : Conversation {
 	/***************/
 	IEnumerator	label_061a(int[] locals)
 	{
-		yield return StartCoroutine(say( "Okay, get flute and me teach you song." ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[247] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -571,7 +571,7 @@ public class Conversation_5 : Conversation {
 	/***************/
 	IEnumerator label_07b9(int[] locals)
 	{
-		yield return StartCoroutine(say( "You rotten live human.  Me no talk to you." ));
+		yield return StartCoroutine(say( locals, 061 ));
 		locals[382] = 1;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -582,7 +582,7 @@ public class Conversation_5 : Conversation {
 	/***************/
 	IEnumerator label_06a8(int[] locals)
 	{
-		yield return StartCoroutine(say( "Some wizard.  Me no remember for sure.  Shanklick, leader of Ghouls, know about wizard. Ask her." ));
+		yield return StartCoroutine(say( locals, 047 ));
 		locals[292] = 48;
 		locals[293] = 49;
 		locals[294] = 0;
@@ -615,13 +615,13 @@ public class Conversation_5 : Conversation {
 		string ans =GetString(locals[315]);
 		//if ( compare( 2, locals[315], 8 ) ) {
 		if ( ans.ToUpper()==playerUW.CharName.ToUpper()) {
-			yield return StartCoroutine(say( "Hey, you should talk.  Your name same as mine." ));
+			yield return StartCoroutine(say( locals, 051 ));
 		} else {
 			
-			yield return StartCoroutine(say( "Not peculiar as @GS8." ));
+			yield return StartCoroutine(say( locals, 052 ));
 		} // end if
 		
-		yield return StartCoroutine(say( "Get name from favorite food.  Is tradition.  Me like eyes. They small and tasty, easy to carry around, good to eat." ));
+		yield return StartCoroutine(say( locals, 053 ));
 		locals[316] = 54;
 		locals[317] = 55;
 		locals[318] = 0;
@@ -647,23 +647,23 @@ public class Conversation_5 : Conversation {
 	/*********************/
 	IEnumerator label_074d(int[] locals)
 	{
-		yield return StartCoroutine(say( "Hey, you okay for human!  Most complain about Ghouls, say they evil for eating guys.  Me think they just jealous because we no hungry all time like them." ));
+		yield return StartCoroutine(say( locals, 056 ));
 		locals[338] = 57;
 		locals[339] = 0;
 		//locals[359] = babl_menu( 0, locals[338] );
 		yield return StartCoroutine(babl_menu (0,locals,338));
 		locals[359] = PlayerAnswer;
 		//if ( locals[359] == 1 ) {
-			
+		
 		//} else {
-			yield return StartCoroutine( label_0779(locals));
-			
+		yield return StartCoroutine( label_0779(locals));
+		
 		//} // end func
 	}	
 	
 	IEnumerator label_0779(int[] locals)
 	{
-		yield return StartCoroutine(say( "Me see humans here long time ago before collapse.  Before Ghouls even exist.  We all just humans then." ));
+		yield return StartCoroutine(say( locals, 058 ));
 		locals[360] = 59;
 		locals[361] = 60;
 		locals[362] = 0;
@@ -692,7 +692,7 @@ public class Conversation_5 : Conversation {
 		
 		int[] locals = new int[24];
 		
-		yield return StartCoroutine(say( "Me no want to talk to you. You make me mad." ));
+		yield return StartCoroutine(say( locals, 062 ));
 		locals[1] = 63;
 		locals[2] = 64;
 		locals[3] = 0;
@@ -709,7 +709,7 @@ public class Conversation_5 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Good!" ));
+			yield return StartCoroutine(say( locals, 065 ));
 			locals[23] = 1;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);

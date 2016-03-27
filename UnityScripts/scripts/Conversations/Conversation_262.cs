@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class Conversation_262 : Conversation {
-
-
+	
+	
 	//conversation #262
 	//	string block 0x0f06, name Generic goblin item #70
-			
-
+	
+	
 	
 	public override IEnumerator main() {
 		SetupConversation (3846);
@@ -161,10 +161,10 @@ public class Conversation_262 : Conversation {
 		
 		if ( privateVariables[0] == 1 ) {
 			
-			yield return StartCoroutine( say( "You again.  You got nothing better to do?" ) );
+			yield return StartCoroutine( say( locals, 001 ) );
 		} else {
 			
-			yield return StartCoroutine(say( "Hey, you not goblin!  Why you here?" ));
+			yield return StartCoroutine(say( locals, 002 ));
 		} // end if
 		
 		privateVariables[2] = 1;
@@ -206,9 +206,9 @@ public class Conversation_262 : Conversation {
 		
 	label_031e:;
 		
-	//label_031e:;
+		//label_031e:;
 		
-		yield return StartCoroutine(say( "Green Goblins, yes, good.  We are strongest and bravest in Abyss. Gray Goblins, they nasty and weak.  You no want talk to them.  Also watch out for some mean Goblins, not like our settlement.  They wear red.  Good Goblins near banners with funny marks.  Like me." ));
+		yield return StartCoroutine(say( locals, 007 ));
 		privateVariables[2] = 0;
 		locals[44] = privateVariables[3];
 		locals[23] = 8;
@@ -243,10 +243,10 @@ public class Conversation_262 : Conversation {
 		} // end switch
 		
 	label_0393:;
-
-	//label_0393:;
 		
-		yield return StartCoroutine(say( "Yah, Vernix, he king.  Maybe you want talk to bodyguard Lanugo first.  They in northwest, at end of high overhang path." ));
+		//label_0393:;
+		
+		yield return StartCoroutine(say( locals, 011 ));
 		privateVariables[3] = 0;
 		locals[87] = privateVariables[2];
 		locals[66] = 12;
@@ -282,21 +282,21 @@ public class Conversation_262 : Conversation {
 		
 	label_0408:;
 		
-	//label_0408:;
+		//label_0408:;
 		
-	//label_0408:;
+		//label_0408:;
 		
 		if ( func_0020() != 1) {
 			
-			yield return StartCoroutine(say( "No, not now.  Some other Goblin maybe." ));
+			yield return StartCoroutine(say( locals, 015 ));
 			yield return StartCoroutine ( func_00e0() );
 		} else {
 			
-			yield return StartCoroutine(say( "Maybe.  What you got?" ));
+			yield return StartCoroutine(say( locals, 016 ));
 		} // end if
 		
 		yield return StartCoroutine(func_0422());
-		yield return StartCoroutine(say( "Okay, goodbye." ));
+		yield return StartCoroutine(say( locals, 017 ));
 		yield return StartCoroutine ( func_00e0() );
 		yield break;
 	} // end func
@@ -305,7 +305,7 @@ public class Conversation_262 : Conversation {
 		
 		//int locals[44];
 		int[] locals=new int[45];
-
+		
 		setup_to_barter( 0 );
 		while ( privateVariables[1] != 1 ) {
 			
@@ -360,7 +360,7 @@ public class Conversation_262 : Conversation {
 		
 		//int locals[15];
 		int[] locals=new int[16];
-
+		
 		locals[0] = -1;
 		locals[6] = -1;
 		locals[11] = 23;
@@ -381,7 +381,7 @@ public class Conversation_262 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "You think you just take this from me?" ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[1] = 29;
 		locals[2] = 30;
 		locals[3] = 0;
@@ -414,6 +414,6 @@ public class Conversation_262 : Conversation {
 		} // end if
 		
 	} // end func
-
-
+	
+	
 }

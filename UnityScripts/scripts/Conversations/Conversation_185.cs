@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_185 : Conversation {
-
-
+	
+	
 	//conversation #185
 	//	string block 0x0eb9, name Nilpont
-
+	
 	public override IEnumerator main() {
 		SetupConversation (3769);
 		privateVariables[1] = 0;
@@ -157,7 +157,7 @@ public class Conversation_185 : Conversation {
 			
 			privateVariables[2] = 0;
 			privateVariables[3] = 0;
-			yield return StartCoroutine(say( "I see thou art an adventurer.  Art thou here searching for a Golem?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -195,7 +195,7 @@ public class Conversation_185 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Well then, I wish thee luck with whatever else thou searchest for." ));
+		yield return StartCoroutine(say( locals, 006 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -208,7 +208,7 @@ public class Conversation_185 : Conversation {
 		int[] locals = new int[2];
 		
 		privateVariables[2] = 1;
-		yield return StartCoroutine(say( "Thou canst find him by heading west from the central chamber as far as thou canst and then turning left.  He's on the island surrounded by lava.  Be warned - he is quite tough!" ));
+		yield return StartCoroutine(say( locals, 007 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -220,7 +220,7 @@ public class Conversation_185 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "The Golem was created by the Seer Lerin at the Knights' request as a test of valor.  No Knights have come down to test themselves against him for quite a while now, but they used to frequently.  I believe that a suitable prize awaits the one who can defeat him." ));
+		yield return StartCoroutine(say( locals, 008 ));
 		locals[1] = 9;
 		locals[2] = 10;
 		locals[3] = 0;
@@ -246,7 +246,7 @@ public class Conversation_185 : Conversation {
 		int[] locals = new int[2];
 		
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "Congratulations!  Thou art truly as valorous as a Knight." ));
+		yield return StartCoroutine(say( locals, 011 ));
 		locals[1] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -260,7 +260,7 @@ public class Conversation_185 : Conversation {
 		
 		if ( privateVariables[3] ==1) {
 			
-			yield return StartCoroutine(say( "Congratulations again on defeating the Golem.  I hope that thy valor will enable thee to rid the Abyss of whatever foul creatures remain." ));
+			yield return StartCoroutine(say( locals, 012 ));
 			locals[1] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -270,7 +270,7 @@ public class Conversation_185 : Conversation {
 			
 			if ( privateVariables[2] ==1) {
 				
-				yield return StartCoroutine(say( "Greetings!  Hast thou defeated the Golem I told thee of?" ));
+				yield return StartCoroutine(say( locals, 013 ));
 				locals[2] = 14;
 				locals[3] = 15;
 				locals[4] = 0;
@@ -290,7 +290,7 @@ public class Conversation_185 : Conversation {
 				
 			} 
 			
-			yield return StartCoroutine(say( "Greetings!  Hast thou decided to challenge the Golem after all?" ));
+			yield return StartCoroutine(say( locals, 016 ));
 			locals[24] = 17;
 			locals[25] = 18;
 			locals[26] = 0;
@@ -310,7 +310,7 @@ public class Conversation_185 : Conversation {
 				break;
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -320,7 +320,7 @@ public class Conversation_185 : Conversation {
 		
 		int[] locals = new int[23];
 		
-		yield return StartCoroutine(say( "And why not?" ));
+		yield return StartCoroutine(say( locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 22;
@@ -351,7 +351,7 @@ public class Conversation_185 : Conversation {
 		
 		int[] locals = new int[2];
 		
-		yield return StartCoroutine(say( "Do not be ashamed - only the most valorous are capable of defeating the Golem." ));
+		yield return StartCoroutine(say( locals, 023 ));
 		locals[1] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -431,7 +431,7 @@ public class Conversation_185 : Conversation {
 		
 		int[] locals = new int[25];
 		
-		yield return StartCoroutine(say( "Dost thou intend to rob me?" ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[1] = 35;
 		locals[2] = 36;
 		locals[3] = 0;
@@ -463,5 +463,5 @@ public class Conversation_185 : Conversation {
 	} // end func
 
 */
-
+	
 }

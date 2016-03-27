@@ -165,7 +165,7 @@ public class Conversation_161 : Conversation {
 				} else {
 					
 					if ( privateVariables[3] ==1 ) {
-
+						
 						yield return StartCoroutine (GoneToGetZanium(locals));
 					} else {
 						
@@ -207,7 +207,7 @@ public class Conversation_161 : Conversation {
 			
 		label_02ad:;
 			
-			yield return StartCoroutine(say( "Greetings, traveler.  What brings thee to an area of the Abyss as perilous as this?  Art thou upon a quest, as I myself am?" ));
+			yield return StartCoroutine(say( locals, 001 ));
 			locals[9] = 2;
 			locals[10] = 3;
 			locals[11] = 0;
@@ -234,7 +234,7 @@ public class Conversation_161 : Conversation {
 			
 		label_06ae:;
 			
-			yield return StartCoroutine(say( "I see.  Then thou art an intrepid explorer indeed, to brave such depths as this." ));
+			yield return StartCoroutine(say( locals, 040 ));
 			locals[339] = 41;
 			locals[340] = 42;
 			locals[341] = 0;
@@ -252,7 +252,7 @@ public class Conversation_161 : Conversation {
 				
 			case 2:
 				
-				yield return StartCoroutine(say( "Farewell." ));
+				yield return StartCoroutine(say( locals, 033 ));
 				locals[361] = 2;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -270,7 +270,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator FinishedAllBusiness(int[] locals)
 	{
-		yield return StartCoroutine(say( "I must thank thee again for retrieving the zanium.  I am sorry, but I must excuse myself, as I am still busy with experiments." ));
+		yield return StartCoroutine(say( locals, 087 ));
 		locals[574] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -291,7 +291,7 @@ public class Conversation_161 : Conversation {
 				locals[3] = 75;
 			} // end if
 			
-			yield return StartCoroutine(say( "I said it would be an hour.  Come back in @SI6C2 @SS3." ));
+			yield return StartCoroutine(say( locals, 076 ));
 			locals[502] = 3;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -299,7 +299,7 @@ public class Conversation_161 : Conversation {
 			yield break;
 		} // end if
 		
-		yield return StartCoroutine(say( "Here is thy reward.  I thank thee again." ));
+		yield return StartCoroutine(say( locals, 077 ));
 		privateVariables[10] = 1;
 		locals[503] = 175;
 		do_inv_create( 1, locals[503] );
@@ -310,7 +310,7 @@ public class Conversation_161 : Conversation {
 		yield return new WaitForSeconds(WaitTime);
 		func_00b1( locals[505] );
 		yield break;
-		yield return StartCoroutine(say( "Hello again, traveler.  How may I help thee?" ));
+		yield return StartCoroutine(say( locals, 078 ));
 		locals[506] = 79;
 		locals[507] = 80;
 		locals[508] = 0;
@@ -343,7 +343,7 @@ public class Conversation_161 : Conversation {
 		/**********Gave the code private var 8*****/
 		if ( privateVariables[20] ==1) {
 			
-			yield return StartCoroutine(say( "I thank thee for the information.  It was indeed correct, but I was unable to retrieve the zanium because of numerous apparitions in the mine area.  Wouldst thou retrieve it?" ));
+			yield return StartCoroutine(say( locals, 054 ));
 			locals[409] = 55;
 			locals[410] = 56;
 			locals[411] = 0;
@@ -361,7 +361,7 @@ public class Conversation_161 : Conversation {
 			case 2:
 				
 				privateVariables[11] = 1;
-				yield return StartCoroutine(say( "Well, if thou dost reconsider, let me know." ));
+				yield return StartCoroutine(say( locals, 057 ));
 				locals[431] = 2;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -371,7 +371,7 @@ public class Conversation_161 : Conversation {
 			} // end if
 			
 		} else {
-			yield return StartCoroutine(say( "The information thou didst give me was incorrect.  Dost thou wish to correct it?" ));
+			yield return StartCoroutine(say( locals, 058 ));
 			locals[432] = 59;
 			locals[433] = 60;
 			locals[434] = 61;
@@ -412,11 +412,11 @@ public class Conversation_161 : Conversation {
 	{
 		privateVariables[2] = 0;
 		privateVariables[3] = 1;
-		yield return StartCoroutine(say( "Wouldst thou?  Thou art indeed a kind soul!  Take this small sample.  Carry it through the mine, and it shall attract more of its kind." ));
+		yield return StartCoroutine(say( locals, 034 ));
 		locals[292] = 297;
 		if ( take_from_npc( 1, locals[292] ) == 2 ) {
 			
-			yield return StartCoroutine(say( "I will leave it on the floor here for thee." ));
+			yield return StartCoroutine(say( locals, 035 ));
 		} // end if
 		
 		locals[293] = 36;
@@ -439,7 +439,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator GoneToGetCode(int[] locals)
 	{
-		yield return StartCoroutine(say( "Hast thou obtained the information I require?" ));
+		yield return StartCoroutine(say( locals, 044 ));
 		locals[362] = 45;
 		locals[363] = 46;
 		locals[364] = 47;
@@ -486,7 +486,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator GoneToGetZanium(int[] locals)
 	{
-		yield return StartCoroutine(say( "Hast thou found eighty samples of zanium?" ));
+		yield return StartCoroutine(say( locals, 062 ));
 		locals[455] = 63;
 		locals[456] = 64;
 		locals[457] = 0;
@@ -511,7 +511,7 @@ public class Conversation_161 : Conversation {
 		
 	label_0917:;
 		
-		yield return StartCoroutine(say( "Excellent!  May I have them please?" ));
+		yield return StartCoroutine(say( locals, 065 ));
 		locals[477] = 66;
 		locals[478] = 67;
 		locals[479] = 0;
@@ -537,7 +537,7 @@ public class Conversation_161 : Conversation {
 		
 	label_0957:;
 		
-		yield return StartCoroutine(say( "Very well.  Return when thou hast found it." ));
+		yield return StartCoroutine(say( locals, 068 ));
 		locals[499] = 3;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -550,7 +550,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator Reconsidered(int[] locals)
 	{
-		yield return StartCoroutine(say( "Hast thou reconsidered?  Wilt thou help me after all?" ));
+		yield return StartCoroutine(say( locals, 081 ));
 		locals[529] = 82;
 		locals[530] = 83;
 		locals[531] = 0;
@@ -586,7 +586,7 @@ public class Conversation_161 : Conversation {
 		//find_barter_total( 4, 53, 54, 52, locals[500] );
 		if ( privateVariables[22] == 0 ) {
 			
-			yield return StartCoroutine(say( "I see none there!" ));
+			yield return StartCoroutine(say( locals, 069 ));
 		} else {
 			
 			if ( privateVariables[22] < 80 ) {
@@ -599,13 +599,13 @@ public class Conversation_161 : Conversation {
 					locals[2] = 71;
 				} // end if
 				
-				yield return StartCoroutine(say( "I see only @GI53 @SS2 there!" ));
+				yield return StartCoroutine(say( locals, 072 ));
 			} else {
 				
 				//give_to_npc( 2, 54, 52 );
 				give_to_npc(2,fishfinder,0,fishfinder[5]);
 				privateVariables[9] = 1;
-				yield return StartCoroutine(say( "I thank thee kindly.  Return in an hour and I shall give thee a gold nugget the size of which thou canst but imagine." ));
+				yield return StartCoroutine(say( locals, 073 ));
 				func_00ea( 45 );
 				/*
 								privateVariables[17][1] = 0;
@@ -639,7 +639,7 @@ public class Conversation_161 : Conversation {
 			
 		case 2:
 			
-			yield return StartCoroutine(say( "Please do." ));
+			yield return StartCoroutine(say( locals, 090 ));
 			locals[597] = 2;
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
@@ -655,7 +655,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator label_02ed(int[] locals)
 	{
-		yield return StartCoroutine(say( "Many years ago, I began research into methods for turning lower metals into gold.  During the course of my research, I discovered a new and better method that depends on a particular, very rare substance.  I quest to find more of this substance." ));
+		yield return StartCoroutine(say( locals, 004 ));
 		locals[31] = 5;
 		locals[32] = 6;
 		locals[33] = 0;
@@ -693,8 +693,7 @@ public class Conversation_161 : Conversation {
 			locals[1] = 8;
 		} // end if
 		
-		yield return StartCoroutine(say( "When I started, existing methods required a great many reagents to operate, and could produce only a fraction of an ounce of gold for each pound of lower metal. \n"
-		                                + " The new method requires a much smaller quantity of reagents and produces much more gold.  However, @SS1 is rare, and I have been able to locate only trace amounts of it." ));
+		yield return StartCoroutine(say( locals, 009 ));
 		//locals[5] = !privateVariables[5];
 		if (privateVariables[5]==1)
 		{
@@ -752,7 +751,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator label_0798(int[] locals)
 	{
-		yield return StartCoroutine(say( "Excellent!  What are the settings for the controls?" ));
+		yield return StartCoroutine(say( locals, 048 ));
 		locals[384] = 49;
 		locals[385] = 50;
 		locals[386] = 0;
@@ -780,7 +779,7 @@ public class Conversation_161 : Conversation {
 	IEnumerator label_0572(int[] locals)
 	{
 		privateVariables[12] = 0;
-		yield return StartCoroutine(say( "If thou couldst talk to the miner ghoul and discover how to operate the dispatch chamber I would be most grateful.  In addition, if thou wouldst enter the mining area, brave its dangers and collect at least eighty samples of zanium, I would reward thee with a large gold nugget created from lead." ));
+		yield return StartCoroutine(say( locals, 028 ));
 		locals[247] = 29;
 		locals[248] = 30;
 		locals[249] = 0;
@@ -810,7 +809,7 @@ public class Conversation_161 : Conversation {
 	IEnumerator label_05b7(int [] locals)
 	{
 		privateVariables[12] = 1;
-		yield return StartCoroutine(say( "Well, if thou dost change thy mind, speak with me again.  Farewell." ));
+		yield return StartCoroutine(say( locals, 031 ));
 		locals[269] = 32;
 		locals[270] = 33;
 		locals[271] = 0;
@@ -842,7 +841,7 @@ public class Conversation_161 : Conversation {
 	IEnumerator label_03d9(int[] locals)
 	{
 		privateVariables[5] = 1;
-		yield return StartCoroutine(say( "It is a blue rock-like mineral called zanium.  The only samples I have found have been on this floor of the Abyss in tunnels with rough-hewn walls.  I believe there is a mining area in the southwest where there may be larger deposits, but I cannot gain access to it." ));
+		yield return StartCoroutine(say( locals, 014 ));
 		//locals[5] = !privateVariables[4];
 		if (privateVariables[4]==1)
 		{
@@ -892,7 +891,7 @@ public class Conversation_161 : Conversation {
 	IEnumerator label_0455(int[] locals)
 	{
 		privateVariables[6] = 1;
-		yield return StartCoroutine(say( "Zanium has the property of being self-attractive.  Deposits near the surface can be collected merely by walking over them while carrying a sample.  In an underground environment such as this, if there is zanium present, there is likely to be some near the the surface.  Thus, in a sense, it is collected automatically." ));
+		yield return StartCoroutine(say( locals, 018 ));
 		//locals[5] = !privateVariables[7];
 		if (privateVariables[7]==1)
 		{
@@ -941,7 +940,7 @@ public class Conversation_161 : Conversation {
 	IEnumerator label_04d2(int[] locals)
 	{
 		privateVariables[7] = 1;
-		yield return StartCoroutine(say( "I do not know much.  There is a small room in the southwestern region that is labelled \"mine dispatch chamber.\"  There appear to be some controls, but I know not how to operate them." ));
+		yield return StartCoroutine(say( locals, 022 ));
 		//locals[5] = !privateVariables[6];
 		if (privateVariables[6]==1)
 		{
@@ -981,7 +980,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator label_0532(int[] locals)
 	{
-		yield return StartCoroutine(say( "Now that thou dost mention it, yes, there is one who may know something.  One of those frightful ghouls in the catacombs used to be foreman in the mining sector.  No ghoul has spoken to me since I killed one of them in self-defense.  Perhaps thou couldst assist me?" ));
+		yield return StartCoroutine(say( locals, 025 ));
 		locals[225] = 26;
 		locals[226] = 27;
 		locals[227] = 0;
@@ -1022,7 +1021,7 @@ public class Conversation_161 : Conversation {
 			privateVariables[20] = 0;
 		} // end if
 		
-		yield return StartCoroutine(say( "I thank thee very much.  I shall attempt to enter the mine." ));
+		yield return StartCoroutine(say( locals, 053 ));
 		locals[408] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -1032,7 +1031,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator 	label_07d8(int[] locals)
 	{
-		yield return StartCoroutine(say( "'Tis a shame.  Return when thou hast it." ));
+		yield return StartCoroutine(say( locals, 051 ));
 		locals[406] = 2;
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -1044,7 +1043,7 @@ public class Conversation_161 : Conversation {
 	{
 		privateVariables[2] = 1;
 		privateVariables[3] = 0;
-		yield return StartCoroutine(say( "I thank thee kindly.  Speak to me after thou hast obtained the pertinent information.  Farewell." ));
+		yield return StartCoroutine(say( locals, 037 ));
 		locals[316] = 38;
 		locals[317] = 39;
 		locals[318] = 0;
@@ -1074,7 +1073,7 @@ public class Conversation_161 : Conversation {
 	
 	IEnumerator ReconsiderZanium(int[] locals)
 	{
-		yield return StartCoroutine(say( "Hast thou reconsidered?  Wilt thou get the zanium?" ));
+		yield return StartCoroutine(say( locals, 084 ));
 		locals[551] = 85;
 		locals[552] = 86;
 		locals[553] = 0;

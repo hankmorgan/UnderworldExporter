@@ -2,11 +2,11 @@
 using System.Collections;
 
 public class Conversation_277 : Conversation {
-
+	
 	//Generic Green Lizardman
-//	conversation #277 
-//		string block 0x0f15, name 
-			
+	//	conversation #277 
+	//		string block 0x0f15, name 
+	
 	public int[] global =new int[1];
 	
 	public override IEnumerator main() {
@@ -164,7 +164,7 @@ public class Conversation_277 : Conversation {
 			yield return StartCoroutine(func_06a1());
 		} // end if
 		
-		yield return StartCoroutine(say( "Bica, sor'click." ));
+		yield return StartCoroutine(say( locals, 001 ));
 		locals[1] = 2;
 		locals[2] = 3;
 		locals[3] = 4;
@@ -198,7 +198,7 @@ public class Conversation_277 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click Thepa?" ));
+		yield return StartCoroutine(say( locals, 005 ));
 		locals[1] = 6;
 		locals[2] = 7;
 		locals[3] = 8;
@@ -232,7 +232,7 @@ public class Conversation_277 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Tosa 'click yeshor'click.  Tosa sorr?" ));
+		yield return StartCoroutine(say( locals, 009 ));
 		locals[1] = 10;
 		locals[2] = 11;
 		locals[3] = 12;
@@ -272,7 +272,7 @@ public class Conversation_277 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Tosa yeshor'click Sseetharee?" ));
+		yield return StartCoroutine(say( locals, 014 ));
 		locals[1] = 15;
 		locals[2] = 16;
 		locals[3] = 17;
@@ -306,7 +306,7 @@ public class Conversation_277 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Isili yeshor'click Sseetharee!" ));
+		yield return StartCoroutine(say( locals, 018 ));
 		locals[1] = 19;
 		locals[2] = 20;
 		locals[3] = 21;
@@ -348,7 +348,7 @@ public class Conversation_277 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Tosa sorr Sseetharee?" ));
+		yield return StartCoroutine(say( locals, 022 ));
 		locals[1] = 23;
 		locals[2] = 24;
 		locals[3] = 25;
@@ -385,7 +385,7 @@ public class Conversation_277 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "Sorr Thepa!  Isili yethe tosa!" ));
+		yield return StartCoroutine(say( locals, 026 ));
 		locals[1] = 27;
 		yield return StartCoroutine(print( 1, locals[1] ));
 		locals[2] = 28;
@@ -421,7 +421,7 @@ public class Conversation_277 : Conversation {
 		//int locals[22];
 		int[] locals=new int[23];
 		
-		yield return StartCoroutine(say( "Tosa thit eppa Urgo.  Thit eppa Sseetharee." ));
+		yield return StartCoroutine(say( locals, 030 ));
 		locals[1] = 31;
 		locals[2] = 0;
 		//locals[22] = babl_menu( 0, locals[1] );
@@ -441,7 +441,7 @@ public class Conversation_277 : Conversation {
 		//int locals[44];
 		int[] locals=new int[45];
 		
-		yield return StartCoroutine(say( "Tosa yethe Sseetharee?" ));
+		yield return StartCoroutine(say( locals, 032 ));
 		locals[1] = 33;
 		locals[2] = 34;
 		locals[3] = 35;
@@ -467,7 +467,7 @@ public class Conversation_277 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Tosa sstresh Sseetharee?" ));
+		yield return StartCoroutine(say( locals, 036 ));
 		locals[23] = 37;
 		locals[24] = 38;
 		locals[25] = 39;
@@ -503,7 +503,7 @@ public class Conversation_277 : Conversation {
 		//int locals[23];
 		int[] locals=new int[24];
 		
-		yield return StartCoroutine(say( "Tosa 'click sstresh Seetharee?  Tosa 'click yeshor'click.  Bica." ));
+		yield return StartCoroutine(say( locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 0;
@@ -537,7 +537,7 @@ public class Conversation_277 : Conversation {
 		//int locals[44];
 		int[] locals=new int[45];
 		
-		yield return StartCoroutine(say( "Bica, yeshor'click." ));
+		yield return StartCoroutine(say( locals, 043 ));
 		locals[1] = 44;
 		locals[2] = 45;
 		locals[3] = 0;
@@ -559,7 +559,7 @@ public class Conversation_277 : Conversation {
 			
 		} // end switch
 		
-		yield return StartCoroutine(say( "Tosa thit sstresh?" ));
+		yield return StartCoroutine(say( locals, 046 ));
 		locals[23] = 47;
 		locals[24] = 48;
 		locals[25] = 0;
@@ -593,7 +593,7 @@ public class Conversation_277 : Conversation {
 			
 		} else {
 			
-			yield return StartCoroutine(say( "Sel'a?" ));
+			yield return StartCoroutine(say( locals, 049 ));
 			locals[1] = 50;
 			locals[2] = 51;
 			locals[3] = 0;
@@ -611,11 +611,11 @@ public class Conversation_277 : Conversation {
 				yield break;
 				//return;
 				break;
-
+				
 				
 			} // end if
 			
-
+			
 			
 		} // end switch
 		
@@ -700,7 +700,7 @@ public class Conversation_277 : Conversation {
 		//int locals[24];
 		int[] locals=new int[25];
 		
-		yield return StartCoroutine(say( "sorr?" ));
+		yield return StartCoroutine(say( locals, 062 ));
 		locals[1] = 63;
 		locals[2] = 64;
 		locals[3] = 0;
@@ -737,6 +737,6 @@ public class Conversation_277 : Conversation {
 		} // end if
 		
 	} // end func
-
-
+	
+	
 }
