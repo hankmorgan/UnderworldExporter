@@ -771,7 +771,7 @@ public class SpellEffect : MonoBehaviour {
 	public IEnumerator timer() {
 		while (Active==true)
 		{
-			yield return new WaitForSeconds(10);
+			yield return new WaitForSeconds(10); 
 			if (!Permanent)
 			{
 				counter--;

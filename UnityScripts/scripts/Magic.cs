@@ -488,7 +488,7 @@ public class Magic : MonoBehaviour {
 		case "An Tym":// Freeze Time
 		{
 			SetSpellCost(8);
-			Debug.Log(MagicWords+ " Freeze Time Cast");
+			Cast_AnTym(caster);
 			break;
 		}//at
 		case "In Vas Sanct"://Iron Flesh
@@ -638,6 +638,18 @@ public class Magic : MonoBehaviour {
 			seps[i].CancelEffect();
 		}
 		playerUW.Poisoned=false;
+	}
+
+	void Cast_AnTym(GameObject caster)
+	{
+		//pause the animations on all the npcs
+		GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
+		for (int i = 0; i<=npcs.GetUpperBound(0); i++)
+		{
+			int EffectSlot =CheckPassiveSpellEffectNPC(npcs[i]);
+			//SetSpellEffect(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,EffectSlot,SpellEffect.UW1_Spell_Effect_FreezeTime);
+			Cast_FreezeTime(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,SpellEffect.UW1_Spell_Effect_FreezeTime,EffectSlot,3,0);
+		}
 	}
 	
 	void Cast_InLor(GameObject caster)
@@ -1025,7 +1037,15 @@ public class Magic : MonoBehaviour {
 		//	
 		sep.Go ();
 	}
-	
+
+	public void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
+	{//Freeze Time
+		SpellEffectFreezeTime seft = (SpellEffectFreezeTime)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		seft.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
+		seft.Go ();
+	}
+
+
 	public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
 	{//Telekenisis
 		SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
@@ -1898,7 +1918,13 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
 			//player only
-			Debug.Log ("Freeze time enchantment");
+			if (target!=null)
+			{
+				if (PassiveArrayIndex!=-1)
+				{
+					Cast_FreezeTime (target,other,EffectId,PassiveArrayIndex,5,100);SpellResultType=0;
+				}
+			}break;
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Regeneration:

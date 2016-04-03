@@ -49,8 +49,8 @@ public class NPC : object_base {
 	//private UILabel MessageLog;
 	private NavMeshAgent agent;
 	public static GameObject player;
-	private Animator anim;
-	private int currentState=-1;
+	public Animator anim;
+	public int currentState=-1;
 	private bool followPlayer=false;
 	private string oldNPC_ID;
 	
@@ -103,6 +103,8 @@ public class NPC : object_base {
 
 	//Added by myself
 	public bool Poisoned;
+	public bool Frozen;
+	public short FrozenUpdate=0;
 
 	//TODO: The state should be replaces with a combination of the above variables.
 	public int state=0; //Set state when not in combat or dying.
@@ -173,7 +175,18 @@ public class NPC : object_base {
 
 	// Update is called once per frame
 	void Update () {
-
+		if (Frozen)
+		{
+			if (FrozenUpdate==0)
+			{
+				anim.enabled=false;
+			}
+			else
+			{
+				FrozenUpdate--;
+			}
+			state = AI_STATE_STANDING;
+		}
 		UpdateSprite();
 
 		//Gob.isHostile=((npc_attitude==0) && (npc_hp>0));
@@ -344,6 +357,7 @@ public class NPC : object_base {
 
 		}
 	}
+
 
 	void UpdateSprite () {
 		if (anim == null)
@@ -559,6 +573,11 @@ public class NPC : object_base {
 	{
 		if (newState!=currentState)
 		{
+			if (Frozen)
+			{
+				anim.enabled=true;
+				FrozenUpdate=2;
+			}
 			currentState=newState;
 			CurrentAnim=pAnim;
 			anim.Play(pAnim);
