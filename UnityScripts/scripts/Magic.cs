@@ -576,7 +576,10 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			CastProjectile(caster,"Sprites/objects_023");
+			SpellProp_OrtJux spOJ =new SpellProp_OrtJux();
+			spOJ.init ();
+			//CastProjectile(caster,"Sprites/objects_023", new SpellProp());
+			CastProjectile(caster, (SpellProp)spOJ);
 		}
 	}
 	
@@ -591,7 +594,9 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			CastProjectile(caster,"Sprites/objects_021");
+			SpellProp_OrtGrav spOG =new SpellProp_OrtGrav();
+			spOG.init ();
+			CastProjectile(caster, (SpellProp)spOG);
 		}
 	}
 	
@@ -1389,10 +1394,11 @@ public class Magic : MonoBehaviour {
 		{
 			return -1;
 		}
+	
+	
 	}
 	
-	
-	bool CastProjectile(GameObject caster, string SpriteName)
+	bool CastProjectile(GameObject caster, SpellProp spellprop)
 	{//Fires off the projectile
 		UWCharacter playerUWLocal = caster.GetComponent<UWCharacter>();
 		if (playerUWLocal !=null)
@@ -1402,10 +1408,10 @@ public class Magic : MonoBehaviour {
 			float dropRange=0.5f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
 			{//No object interferes with the spellcast
-				float force = 200.0f;
+				//float force = 200.0f;
 				ReadiedSpell= "";
-				GameObject projectile = CreateMagicProjectile(SpriteName,"",ray.GetPoint(dropRange/2.0f), 5, caster);
-				LaunchProjectile(projectile,ray,dropRange,force);
+				GameObject projectile = CreateMagicProjectile(ray.GetPoint(dropRange/2.0f), caster,spellprop);
+				LaunchProjectile(projectile,ray,dropRange,spellprop.Force);
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
 				return true;
 			}
@@ -1413,42 +1419,46 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{//Is being cast by an npc or a spell trap
-			float force = 200.0f;
-			GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
-			LaunchProjectile(projectile,force);
+			//float force = 200.0f;
+			GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
+			LaunchProjectile(projectile,spellprop.Force);
 			return true;
 		}
 	}	
 	
 	
-	bool CastProjectile(GameObject caster, string SpriteName, GameObject target)
+	bool CastProjectile(GameObject caster, GameObject target, SpellProp spellprop)
 	{//Fires off the projectile at a gameobject.
-		float force = 200.0f;
-		GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
+		//float force = 200.0f;
+		GameObject projectile = CreateMagicProjectile(caster.transform.position, caster, spellprop);
 		Vector3 direction = (target.transform.position-caster.transform.position);
 		direction.Normalize();
-		LaunchProjectile(projectile,force,direction);
+		LaunchProjectile(projectile,spellprop.Force,direction);
 		return true;
 	}	
 	
-	bool CastProjectile(GameObject caster, string SpriteName, Vector3 targetV)
+	bool CastProjectile(GameObject caster, string SpriteName, Vector3 targetV, SpellProp spellprop)
 	{//Fires off the projectile at a vector3 position.
-		float force = 200.0f;
-		GameObject projectile = CreateMagicProjectile(SpriteName,"",caster.transform.position, 5, caster);
+		//float force = ;//200.0f;
+		GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
 		Vector3 direction = (targetV-caster.transform.position);
 		direction.Normalize();
-		LaunchProjectile(projectile,force,direction);
+		LaunchProjectile(projectile,spellprop.Force,direction);
 		return true;
 	}	
 	
-	GameObject CreateMagicProjectile(string ProjectileImage, string HitImage, Vector3 Location, int Damage, GameObject Caster)
+	GameObject CreateMagicProjectile(Vector3 Location, GameObject Caster, SpellProp spellprop)
 	{//Creates the projectile.
 		GameObject projectile = new GameObject();
 		projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 		projectile.name = "MagicProjectile_" + SummonCount++;
-		ObjectInteraction.CreateObjectGraphics(projectile,ProjectileImage,true);
+		ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
-		mgp.damage=Damage;
+		mgp.damage=spellprop.BaseDamage;
+		mgp.spelleffect=spellprop.spelleffect;
+		mgp.impactFrameStart=spellprop.impactFrameStart;
+		mgp.impactFrameEnd=spellprop.impactFrameEnd;
+
 		if (Caster.name=="NPC_Launcher")
 		{
 			mgp.caster=Caster.transform.parent.name;
@@ -1918,13 +1928,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
 			//player only
-			if (target!=null)
-			{
-				if (PassiveArrayIndex!=-1)
-				{
-					Cast_FreezeTime (target,other,EffectId,PassiveArrayIndex,5,100);SpellResultType=0;
-				}
-			}break;
+			Cast_AnTym(target);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Regeneration:
@@ -2076,7 +2080,9 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_021",target);
+				SpellProp_OrtGrav spOG =new SpellProp_OrtGrav();
+				spOG.init ();
+				CastProjectile(caster,target,(SpellProp)spOG);
 			}
 			SpellResultType=0;
 			break;
@@ -2105,7 +2111,9 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_023",target);
+				SpellProp_OrtJux spOJ =new SpellProp_OrtJux();
+				spOJ.init ();
+				CastProjectile(caster,target, (SpellProp)spOJ);
 			}
 			SpellResultType=0;
 			break;
@@ -2118,7 +2126,7 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_021",target);
+				CastProjectile(caster,target, new SpellProp());
 				SpellResultType=0;
 			}
 			break;
@@ -2131,7 +2139,7 @@ public class Magic : MonoBehaviour {
 			}
 			else
 			{
-				CastProjectile(caster,"Sprites/objects_020",target);
+				CastProjectile(caster,target, new SpellProp());
 				SpellResultType=0;
 			}
 			break;
@@ -2149,7 +2157,7 @@ public class Magic : MonoBehaviour {
 				{
 					Vector3 targetR =  target.transform.position
 						+Random.insideUnitSphere;
-					CastProjectile(caster,"Sprites/objects_020",targetR);
+					CastProjectile(caster,"Sprites/objects_020",targetR, new SpellProp());
 				}
 			}
 			break;

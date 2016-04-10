@@ -6,7 +6,11 @@ public class MagicProjectile : MonoBehaviour {
 	public int damage;
 	//public string HitImage;
 	public bool HasHit;
+	public SpellEffect spelleffect;//What spell effect the projectile has.
 	public string caster; //who has cast the project. It will ignore them.
+
+	public int impactFrameStart;
+	public int impactFrameEnd;
 
 	void OnCollisionEnter(Collision collision)
 	{
@@ -33,6 +37,12 @@ public class MagicProjectile : MonoBehaviour {
 			if (objInt!=null)
 			{
 				objInt.Attack(damage);
+				if (spelleffect!=null)
+				{
+					//Transfer the Spell effect to the target
+					spelleffect.transform.parent = objInt.transform.parent;
+					spelleffect.Go ();//Start the spell effect.
+				}
 				Impact imp= this.gameObject.AddComponent<Impact>();
 				imp.FrameNo=objInt.GetHitFrameStart();
 				imp.EndFrame=objInt.GetHitFrameEnd();
@@ -49,8 +59,8 @@ public class MagicProjectile : MonoBehaviour {
 				{
 					//do a miss impact 
 					Impact imp= this.gameObject.AddComponent<Impact>();
-					imp.FrameNo=46;
-					imp.EndFrame=50;
+					imp.FrameNo=impactFrameStart;
+					imp.EndFrame=impactFrameEnd;
 					StartCoroutine( imp.Animate());
 				}
 
