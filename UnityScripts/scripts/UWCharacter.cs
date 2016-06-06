@@ -67,6 +67,7 @@ public class UWCharacter : Character {
 	public void Awake()
 	{
 		Instance=this;
+				DontDestroyOnLoad(this);
 	}
 
 	public override void Start ()
@@ -104,6 +105,11 @@ public class UWCharacter : Character {
 		playerHud.InputControl.text="";
 		playerHud.InputControl.label.text="";
 		playerHud.MessageScroll.Clear ();
+		if (Application.loadedLevelName=="0")
+		{//Load the first level
+						//Debug.Log("Loading first level");
+				RoomManager.LoadRoom("1");
+		}
 
 		//Cutscene_Intro ci = playerHud.gameObject.AddComponent<Cutscene_Intro>();
 		//playerHud.CutScenesFull.cs=ci;

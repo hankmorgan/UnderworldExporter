@@ -22,7 +22,8 @@ public class a_teleport_trap : trap_base {
 		}
 		else
 		{
-			Debug.Log ("teleporting to level " + levelNo);
+			//Debug.Log ("teleporting to level " + levelNo);
+			RoomManager.LoadRoom(levelNo.ToString());//TODO:Move the player to the right spot when moving levels
 		}
 	}
 

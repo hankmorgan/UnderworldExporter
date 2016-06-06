@@ -5,7 +5,8 @@ public class starttest : MonoBehaviour {
 
 
 	void Awake () {
-		GameObject player =GameObject.Find ("Gronk");
+				
+	/*	GameObject player =GameObject.Find ("Gronk");
 
 		return;
 		//Debug.Log ("Moving " + player.name);
@@ -55,6 +56,7 @@ public class starttest : MonoBehaviour {
 			//}
 		//}
 		//CreateObj();
+		*/
 	}
 
 }

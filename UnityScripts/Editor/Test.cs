@@ -7470,6 +7470,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		Vector3 pos = new Vector3(x, y, z);
 		myObj.transform.position = pos;
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
+		StoreInformation si=myObj.AddComponent<StoreInformation>();
+		si.Id= myObj.name + "_ID";
 		return myObj;
 	}
 
