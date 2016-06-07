@@ -189,8 +189,7 @@ public class ObjectInteraction : MonoBehaviour {
 	};
 
 
-
-
+		//private bool KillMe;
 	// Use this for initialization
 
 	void Start () {
@@ -204,10 +203,27 @@ public class ObjectInteraction : MonoBehaviour {
 			InvMarker=GameObject.Find ("InventoryMarker");
 		}
 		sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
+				if (this.GetComponent<EmptyObjectIdentifier>()!=null)
+				{
+						//this.gameObject.transform.DestroyChildren();
+						//DestroyImmediate(this.gameObject);
+						//KillMe=true;
+				}
+				//this.ser
+		/*if ( ( (this.gameObject.transform.position==Vector3.zero) || (this.gameObject.transform.position==new Vector3(0,2000,2000)))  && (this.transform.parent==null))
+		{
+				Debug.Log(this.gameObject.name+"item at zero");
+				Destroy(this.gameObject);
+		}*/
 	}
 
 	void Update()
 	{
+				//if (KillMe==true)
+				//{
+				//		this.gameObject.transform.DestroyChildren();
+				//		DestroyImmediate(this.gameObject);
+				//}
 		if (ignoreSprite == false)
 		{
 			if (animationStarted==false)
@@ -873,5 +889,65 @@ public class ObjectInteraction : MonoBehaviour {
 		
 	}
 */
+
+		public ObjectInteraction CopyGameObjectInteraction(GameObject target)
+		{
+				//Copies a uw gameobject and it's properties
+				//copy this object interaction.
+				ObjectInteraction objIntNew = target.AddComponent<ObjectInteraction>();
+				//objIntNew.InventoryDisplay=InventoryDisplay;
+				//objIntNew.EquipDisplay=EquipDisplay;
+				//objIntNew.WorldDisplay=WorldDisplay;
+				objIntNew.EquipString=EquipString;
+				objIntNew.WorldDisplayIndex=WorldDisplayIndex;
+				objIntNew.InvDisplayIndex=InvDisplayIndex;
+				objIntNew.ignoreSprite=ignoreSprite;//For button handlers that do their own sprite work.
+				objIntNew.item_id=item_id;
+				objIntNew.flags=flags;
+				objIntNew.InUse=InUse;
+				//objIntNew.InvMarker=InvMarker;//=GameObject.Find ("InventoryMarker");
+				//objIntNew.playerUW=playerUW;
+				objIntNew.CanBePickedUp=CanBePickedUp;
+				objIntNew.CanBeUsed=CanBeUsed;//unimplemented
+				//public bool CanBeMoved;//unimplemented
+				objIntNew.PickedUp=PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
+				objIntNew.audSource=audSource;
+				objIntNew.inventorySlot=inventorySlot;
+				objIntNew.ItemType=ItemType; //UWexporter item type id
+				//UW specific info.
+				objIntNew.Owner=Owner;	//Used for keys
+				objIntNew.Link=Link;	//Also quantity
+				objIntNew.Quality=Quality;
+				objIntNew.isQuant=isQuant;
+				objIntNew.isEnchanted=isEnchanted;
+				//Display controls
+				//objIntNew.tc=tc;
+				objIntNew.sr =sr;
+				objIntNew.isAnimated=isAnimated;
+				//objIntNew.animationStarted=animationStarted;
+
+				if (objIntNew.CanBePickedUp==true)
+				{
+						Rigidbody rgd = target.AddComponent<Rigidbody>();
+						rgd.angularDrag=0.0f;
+						WindowDetectUW.FreezeMovement(target);
+				}
+
+				BoxCollider box =objIntNew.GetComponent<BoxCollider>();
+				if ((box==null) && (objIntNew.GetComponent<NPC>()==null) && (objIntNew.CanBeUsed==true))
+				{
+						//add a mesh for interaction
+						box=target.AddComponent<BoxCollider>();
+						box.size = new Vector3(0.2f,0.2f,0.2f);
+						box.center= new Vector3(0.0f,0.1f,0.0f);
+						if (objIntNew.CanBePickedUp==true)
+						{
+								box.material= Resources.Load<PhysicMaterial>("Materials/objects_bounce");
+						}
+				}
+
+
+				return objIntNew;
+		}
 
 }

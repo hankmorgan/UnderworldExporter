@@ -198,4 +198,10 @@ public class object_base : MonoBehaviour {
 	{//Code to call when spliting an item and the split changes the item fundamentally.
 		return;
 	}
+
+  public virtual void CopyObject_base(GameObject target)
+	{
+		object_base objBase=target.AddComponent<object_base>();
+		objBase.PickupLink=PickupLink;
+	}
 }

@@ -515,7 +515,7 @@ public class UWCharacter : Character {
 							//Pickup if either not a quantity or is a quantity of one.
 							if ((objPicked.isQuant ==false) || ((objPicked.isQuant)&&(objPicked.Link==1)) || (objPicked.isEnchanted))
 							{
-								Pickup(objPicked,pInv);
+								objPicked=Pickup(objPicked,pInv);
 							}
 							else
 							{
@@ -536,7 +536,7 @@ public class UWCharacter : Character {
 						}
 						else
 						{//Left click. Pick them all up.
-							Pickup(objPicked,pInv);	
+							objPicked=Pickup(objPicked,pInv);	
 						}						
 					}
 					else

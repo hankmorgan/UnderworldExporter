@@ -272,10 +272,47 @@ public class WindowDetectUW : WindowDetect {
 					float force = Input.mousePosition.y/Camera.main.pixelHeight *200;
 					//float force = Camera.main.ViewportToWorldPoint(Input.mousePosition).y/Camera.main.pixelHeight *200;
 					
+
 					//Get the object being dropped and moved towards the end of the ray
+				
 					GameObject droppedItem = playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(playerUW.playerInventory.ObjectInHand);
+					//Clone the object in hand and give it a new uid
+					GameObject objClone = new GameObject();  //Instantiate(droppedItem);
+					objClone.name=droppedItem.name;
+					droppedItem.GetComponent<ObjectInteraction>().CopyGameObjectInteraction(objClone);
+					droppedItem.GetComponent<object_base>().CopyObject_base(objClone);
+					/*for (int i =0; i<droppedItem.transform.childCount;i++)
+					{	
+							Transform trc=droppedItem.transform.GetChild(i).transform;
+							droppedItem.transform.GetChild(i).transform.parent=objClone.transform;
+							trc.position=Vector3.zero;
+							trc.localPosition=Vector3.zero;
+					}*/
+					//Copy the sprite
+					GameObject objCloneChild=new GameObject(objClone.name + "_sprite");
+					objCloneChild.transform.parent=objClone.transform;
+					//objCloneChild.name=objClone.name & "_Sprite";
+					objCloneChild.AddComponent<Billboard>();
+					objCloneChild.AddComponent<SpriteRenderer>();
+					//objCloneChild.GetComponent<SpriteRenderer>().sprite=droppedItem.GetComponentInChildren<SpriteRenderer>().sprite;
+					objCloneChild.GetComponent<SpriteRenderer>().material=Resources.Load<Material>("Materials/SpriteShader");//=droppedItem.GetComponentInChildren<SpriteRenderer>().material;
+					objCloneChild.transform.localScale=new Vector3(2.0f,2.0f,2.0f);
+					objCloneChild.transform.localPosition=Vector3.zero;
+					objClone.AddComponent<StoreInformation>();
+					objCloneChild.AddComponent<StoreInformation>();
+					droppedItem.name=droppedItem.name+ "_destroyed";
+					droppedItem.transform.DestroyChildren();
+					DestroyImmediate(droppedItem.gameObject);
+					//UniqueIdentifier uid=objClone.GetComponent<UniqueIdentifier>();
+					//if (uid!=null)
+					//{
+						//uid.Id=uid.GetInstanceID().ToString();		
+					//}
+
+					droppedItem=objClone;
 					droppedItem.transform.parent=null;
 					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
+					droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
 					//GameObject InvMarker = GameObject.Find ("InventoryMarker");
 					if (droppedItem.GetComponent<Container>()!=null)
 					{
@@ -307,6 +344,8 @@ public class WindowDetectUW : WindowDetect {
 			//try and drop the item in the world
 		}
 	}
+
+
 
 	public void SetFullScreen()
 	{
@@ -424,7 +463,4 @@ public class WindowDetectUW : WindowDetect {
 			}		
 		}
 	}
-
-
-
 }

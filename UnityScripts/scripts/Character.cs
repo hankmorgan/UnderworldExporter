@@ -185,7 +185,7 @@ public class Character : MonoBehaviour {
 					{
 						if (UICamera.currentTouchID==-2)
 						{
-						Pickup(objPicked,pInv);
+						objPicked=Pickup(objPicked,pInv);
 						}
 					}
 				}
@@ -193,7 +193,7 @@ public class Character : MonoBehaviour {
 		}
 	}
 
-	public virtual void Pickup(ObjectInteraction objPicked, PlayerInventory  pInv)
+	public virtual ObjectInteraction Pickup(ObjectInteraction objPicked, PlayerInventory  pInv)
 	{//completes the pickup.
 
 		objPicked.PickedUp=true;
@@ -210,10 +210,28 @@ public class Character : MonoBehaviour {
 		{								
 			WindowDetect.FreezeMovement(objPicked.gameObject);
 		}
-		objPicked.transform.position = InvMarker.transform.position;
-		objPicked.transform.parent=InvMarker.transform;
+		//Clone the object into the inventory
+		
+		GameObject objClone = Instantiate(objPicked.gameObject);
+		objClone.name=objPicked.name;
+		objPicked.name=objPicked.name+ "_destroyed";
+		objPicked.transform.DestroyChildren();
+		DestroyImmediate(objPicked.gameObject);
+		
+		objClone.transform.position = InvMarker.transform.position;
+		objClone.transform.parent=InvMarker.transform;
+		objClone.GetComponent<ObjectInteraction>().Pickup();
+		UniqueIdentifier uid=objClone.GetComponent<UniqueIdentifier>();
+		if (uid!=null)
+		{
+			//uid.Id=uid.GetInstanceID().ToString();		
+		}
+		objClone.GetComponent<ObjectInteraction>().Pickup();
+		return objClone.GetComponent<ObjectInteraction>();
+		//objPicked.transform.position = InvMarker.transform.position;
+		//objPicked.transform.parent=InvMarker.transform;
 
-		objPicked.Pickup();//Call pickup event for this object.
+		//objPicked.Pickup();//Call pickup event for this object.
 	}
 
 
