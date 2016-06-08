@@ -216,17 +216,19 @@ public class Character : MonoBehaviour {
 						GameObject objClone = Instantiate(objPicked.gameObject);
 						objClone.name=objPicked.name;
 						objPicked.name=objPicked.name+ "_destroyed";
-						objPicked.transform.DestroyChildren();
+						//objPicked.transform.DestroyChildren();
 						DestroyImmediate(objPicked.gameObject);
 
 						objClone.transform.position = InvMarker.transform.position;
 						objClone.transform.parent=InvMarker.transform;
 						objClone.GetComponent<ObjectInteraction>().Pickup();
+						/*
 						UniqueIdentifier uid=objClone.GetComponent<UniqueIdentifier>();
 						if (uid!=null)
 						{
 								//uid.Id=uid.GetInstanceID().ToString();		
 						}
+						*/
 						objClone.GetComponent<ObjectInteraction>().Pickup();
 						return objClone.GetComponent<ObjectInteraction>();	
 				}

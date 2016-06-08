@@ -292,10 +292,10 @@ public class WindowDetectUW : WindowDetect {
 							objCloneChild.GetComponent<SpriteRenderer>().material=Resources.Load<Material>("Materials/SpriteShader");//=droppedItem.GetComponentInChildren<SpriteRenderer>().material;
 							objCloneChild.transform.localScale=new Vector3(2.0f,2.0f,2.0f);
 							objCloneChild.transform.localPosition=Vector3.zero;
-							objClone.AddComponent<StoreInformation>();
-							objCloneChild.AddComponent<StoreInformation>();
+							//objClone.AddComponent<StoreInformation>();
+							//objCloneChild.AddComponent<StoreInformation>();
 							droppedItem.name=droppedItem.name+ "_destroyed";
-							droppedItem.transform.DestroyChildren();
+							//droppedItem.transform.DestroyChildren();
 							DestroyImmediate(droppedItem.gameObject);
 							droppedItem=objClone;		
 					}

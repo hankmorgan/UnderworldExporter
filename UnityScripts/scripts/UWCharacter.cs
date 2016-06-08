@@ -108,7 +108,7 @@ public class UWCharacter : Character {
 		if (Application.loadedLevelName=="0")
 		{//Load the first level
 						//Debug.Log("Loading first level");
-				RoomManager.LoadRoom("1");
+				//RoomManager.LoadRoom("1");
 		}
 
 		//Cutscene_Intro ci = playerHud.gameObject.AddComponent<Cutscene_Intro>();

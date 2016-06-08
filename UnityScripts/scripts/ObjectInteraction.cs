@@ -203,12 +203,12 @@ public class ObjectInteraction : MonoBehaviour {
 			InvMarker=GameObject.Find ("InventoryMarker");
 		}
 		sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
-				if (this.GetComponent<EmptyObjectIdentifier>()!=null)
+		/*		if (this.GetComponent<EmptyObjectIdentifier>()!=null)
 				{
 						//this.gameObject.transform.DestroyChildren();
 						//DestroyImmediate(this.gameObject);
 						//KillMe=true;
-				}
+				}*/
 				//this.ser
 		/*if ( ( (this.gameObject.transform.position==Vector3.zero) || (this.gameObject.transform.position==new Vector3(0,2000,2000)))  && (this.transform.parent==null))
 		{

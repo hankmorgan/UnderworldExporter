@@ -397,7 +397,7 @@ public class Magic : MonoBehaviour {
 		case "Vas In Lor"://Daylight
 		{
 			SetSpellCost(6);
-			Debug.Log(MagicWords+ " Daylight Cast");
+			//Debug.Log(MagicWords+ " Daylight Cast");
 			Cast_VasInLor(caster);
 			break;
 		}//VIL
@@ -1410,8 +1410,13 @@ public class Magic : MonoBehaviour {
 			{//No object interferes with the spellcast
 				//float force = 200.0f;
 				ReadiedSpell= "";
-				GameObject projectile = CreateMagicProjectile(ray.GetPoint(dropRange/2.0f), caster,spellprop);
-				LaunchProjectile(projectile,ray,dropRange,spellprop.Force);
+				for (int i=0;i<spellprop.noOfCasts;i++)
+				{
+					GameObject projectile = CreateMagicProjectile(ray.GetPoint(dropRange/2.0f), caster,spellprop);
+					projectile.transform.rotation=Quaternion.LookRotation(ray.direction.normalized);
+					LaunchProjectile(projectile,ray,dropRange,spellprop.Force,spellprop.spread);										
+				}
+
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
 				return true;
 			}
@@ -1420,8 +1425,11 @@ public class Magic : MonoBehaviour {
 		else
 		{//Is being cast by an npc or a spell trap
 			//float force = 200.0f;
+			for (int i=0;i<spellprop.noOfCasts;i++)
+			{
 			GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
 			LaunchProjectile(projectile,spellprop.Force);
+			}
 			return true;
 		}
 	}	
@@ -1430,10 +1438,40 @@ public class Magic : MonoBehaviour {
 	bool CastProjectile(GameObject caster, GameObject target, SpellProp spellprop)
 	{//Fires off the projectile at a gameobject.
 		//float force = 200.0f;
-		GameObject projectile = CreateMagicProjectile(caster.transform.position, caster, spellprop);
-		Vector3 direction = (target.transform.position-caster.transform.position);
-		direction.Normalize();
-		LaunchProjectile(projectile,spellprop.Force,direction);
+				GameObject projectile = CreateMagicProjectile(caster.transform.position, caster, spellprop);
+				Vector3 direction;
+				if (spellprop.spread==0)
+				{
+						direction = (target.transform.position-caster.transform.position);
+						direction.Normalize();
+						//LaunchProjectile(projectile,spellprop.Force,direction);	
+				}
+				else
+				{
+						//From http://answers.unity3d.com/questions/467742/how-can-i-create-raycast-bullet-innaccuracy-as-a-c.html
+						//Start
+
+						//  Try this one first, before using the second one
+						//  The Ray-hits will form a ring
+						float randomRadius = spellprop.spread;            
+						//  The Ray-hits will be in a circular area
+						//float randomRadius = Random.Range( 0, scaleLimit );        
+
+						float randomAngle = Random.Range ( 0, 2 * Mathf.PI );
+
+						//Calculating the raycast direction
+						direction = new Vector3(
+								randomRadius * Mathf.Cos( randomAngle ),
+								randomRadius * Mathf.Sin( randomAngle ),
+								10f
+						);
+
+						//Make the direction match the transform
+						//It is like converting the Vector3.forward to transform.forward
+						direction = projectile.transform.TransformDirection( direction.normalized );
+						//End	
+				}
+				LaunchProjectile(projectile,spellprop.Force,direction);	
 		return true;
 	}	
 	
@@ -1487,11 +1525,40 @@ public class Magic : MonoBehaviour {
 		return projectile;
 	}
 	
-	void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force)
+	void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force,float spread)
 	{
 		//Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
 		Vector3 ThrowDir = ray.GetPoint(dropRange)  - ray.origin;
-		projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
+
+				//From http://answers.unity3d.com/questions/467742/how-can-i-create-raycast-bullet-innaccuracy-as-a-c.html
+				//Start
+
+				//  Try this one first, before using the second one
+				//  The Ray-hits will form a ring
+				float randomRadius = spread;            
+				//  The Ray-hits will be in a circular area
+				//float randomRadius = Random.Range( 0, scaleLimit );        
+
+				float randomAngle = Random.Range ( 0, 2 * Mathf.PI );
+
+				//Calculating the raycast direction
+				Vector3 direction = new Vector3(
+						randomRadius * Mathf.Cos( randomAngle ),
+						randomRadius * Mathf.Sin( randomAngle ),
+						10f
+				);
+				//direction= ray.direction+direction;
+				//Make the direction match the transform
+				//It is like converting the Vector3.forward to transform.forward
+				direction = projectile.transform.TransformDirection( direction.normalized );
+				//End	
+
+				projectile.GetComponent<Rigidbody>().AddForce(direction*force);
+
+
+
+
+	//	projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 	}
 	
 	void LaunchProjectile(GameObject projectile, float force)
@@ -1503,130 +1570,7 @@ public class Magic : MonoBehaviour {
 	{
 		projectile.GetComponent<Rigidbody>().AddForce (direction*force);
 	}
-	/*
-	static void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
-	{	
-		//Create a sprite.
-		GameObject SpriteController = new GameObject(myObj.name + "_sprite");
-		SpriteController.transform.position = myObj.transform.position;
-		
-		SpriteRenderer mysprite = SpriteController.AddComponent<SpriteRenderer>();//Adds the sprite gameobject
-		//mysprite.transform.position = new Vector3 (0f, 0f, 0f);
-		//Sprite image = Resources.LoadAssetAtPath <Sprite> (AssetPath);//Loads the sprite.
-		Sprite image = Resources.Load <Sprite> (AssetPath);//Loads the sprite.
-		mysprite.sprite = image;//Assigns the sprite to the object.
-		SpriteController.transform.parent = myObj.transform;
-		SpriteController.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
-		mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
-		//Create a billboard script for display
-		// Billboard ScriptController = 
-		if (BillBoard)
-		{
-			SpriteController.AddComponent<Billboard> ();
-		}
-	}
-	*/
-	/*
-	//TODO: Use the versions of this code in Objectinteraction itself.
-	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
-	{
-		GameObject newObj = new GameObject(myObj.name+"_"+ChildName);
-		
-		newObj.transform.parent=myObj.transform;
-		newObj.transform.localPosition=new Vector3(0.0f,0.0f,0.0f);
-		CreateObjectInteraction (newObj,DimX,DimY,DimZ,CenterY , WorldString,InventoryString,EquipString,ItemType ,link, Quality, Owner,ItemId,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-	}
 
-	static void CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag)
-	{
-		CreateObjectInteraction (myObj,myObj,DimX,DimY,DimZ,CenterY, WorldString,InventoryString,EquipString,ItemType,ItemId,link,Quality,Owner,isMoveable,isUsable, isAnimated, useSprite,isQuant,isEnchanted, flags,inUseFlag);
-	}
-	
-	static void CreateObjectInteraction(GameObject myObj, GameObject parentObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite, int isQuant, int isEnchanted, int flags, int inUseFlag)
-	{
-		//Add a script.
-		ObjectInteraction objInteract = myObj.AddComponent<ObjectInteraction>();
-		
-		BoxCollider box =myObj.GetComponent<BoxCollider>();
-		if ((box==null) && (myObj.GetComponent<NPC>()==null) && (isUsable==1))
-		{
-			//add a mesh for interaction
-			box= myObj.AddComponent<BoxCollider>();
-			box.size = new Vector3(0.2f,0.2f,0.2f);
-			box.center= new Vector3(0.0f,0.1f,0.0f);
-			if (isMoveable==1)
-			{
-				box.material= Resources.Load<PhysicMaterial>("Materials/objects_bounce");
-			}
-		}
-		
-		objInteract.WorldDisplayIndex = int.Parse(WorldString.Substring (WorldString.Length-3,3));
-		objInteract.InvDisplayIndex= int.Parse (InventoryString.Substring (InventoryString.Length-3,3));
-		
-		if (isUsable==1)
-		{
-			objInteract.CanBeUsed=true;
-		}
-		
-		//SpriteRenderer objSprite =  myObj.transform.FindChild(myObj.name + "_sprite").GetComponent<SpriteRenderer>();
-		//		SpriteRenderer objSprite =  parentObj.GetComponentInChildren<SpriteRenderer>();
-		
-		//		objInteract.WorldString=WorldString;
-		//		objInteract.InventoryString=InventoryString;
-		objInteract.EquipString=EquipString;
-		//objInteract.InventoryDisplay=InventoryString;
-		objInteract.ItemType=ItemType;//UWexporter id type
-		objInteract.item_id=ItemId;//Internal ItemID
-		objInteract.Link=link;
-		objInteract.Quality=Quality;
-		objInteract.Owner=Owner;
-		objInteract.flags=flags;
-		if (inUseFlag==1)
-		{
-			objInteract.InUse=true;
-		}
-		
-		
-		
-		if (isMoveable==1)
-		{
-			objInteract.CanBePickedUp=true;
-			Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
-			rgd.angularDrag=0.0f;
-			WindowDetectUW.FreezeMovement(myObj);
-		}
-		
-		if (ItemType !=ObjectInteraction.ANIMATION)
-		{
-			if (isAnimated==1)
-			{
-				objInteract.isAnimated=true;
-			}
-			
-			if (useSprite==1)
-			{
-				objInteract.ignoreSprite=false;
-			}
-			else
-			{
-				objInteract.ignoreSprite=true;
-			}
-		}
-		else
-		{
-			objInteract.ignoreSprite=true;
-		}
-		if (isQuant==1)
-		{
-			objInteract.isQuant=true;
-		}
-		if (isEnchanted==1)
-		{
-			objInteract.isEnchanted=true;
-			Debug.Log (myObj.name + " is enchanted. Take a look at it please.");
-		}
-	}
-	*/
 	void OnGUI()
 	{
 		if (

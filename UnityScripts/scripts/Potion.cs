@@ -43,7 +43,7 @@ public class Potion : enchantment_base {
 				ml.Add (playerUW.StringControl.GetString (1,UseString));
 			}
 			objInt.consumeObject();
-			RoomManager.LoadRoom(targetScene);
+
 			return true;
 		}
 		else

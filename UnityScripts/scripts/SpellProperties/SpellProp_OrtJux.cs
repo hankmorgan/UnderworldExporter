@@ -15,5 +15,7 @@ public class SpellProp_OrtJux : SpellProp {
 		BaseDamage=3;
 		impactFrameStart=46;
 		impactFrameEnd=50;
+		spread=0;
+		noOfCasts=1;
 	}
 }
