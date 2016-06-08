@@ -8,7 +8,7 @@ public class MagicProjectile : MonoBehaviour {
 	public bool HasHit;
 	public SpellEffect spelleffect;//What spell effect the projectile has.
 	public string caster; //who has cast the project. It will ignore them.
-
+	public SpellProp spellprop; //Spell properties
 	public int impactFrameStart;
 	public int impactFrameEnd;
 
@@ -26,6 +26,7 @@ public class MagicProjectile : MonoBehaviour {
 
 		{
 			HasHit=true;
+			spellprop.onImpact();
 			SpriteRenderer sprt=this.GetComponentInChildren<SpriteRenderer>();
 			sprt.enabled=false;
 			BoxCollider box =this.GetComponent<BoxCollider>();

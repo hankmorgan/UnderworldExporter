@@ -22,4 +22,9 @@ public class SpellProp : MonoBehaviour {
 
 		//Init the spelleffect applied by the spell.
 	}
+
+	public virtual void onImpact()
+	{
+			//Code to run when it hits something. eg for explosions	
+	}
 }

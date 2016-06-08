@@ -256,7 +256,7 @@ public class Magic : MonoBehaviour {
 		case "Rel Des Por"://Slow Fall
 		{
 			SetSpellCost(2);
-			cast_RelDesPor(caster);
+			Cast_RelDesPor(caster);
 			break;
 		}//RDP
 		case "In Sanct"://Thick Skin
@@ -428,7 +428,7 @@ public class Magic : MonoBehaviour {
 		case "Ort Por Ylem"://Telekinesis
 		{
 			SetSpellCost(6);
-			Debug.Log(MagicWords+ " Telekinesis Cast");
+			//Debug.Log(MagicWords+ " Telekinesis Cast");
 			Cast_OrtPorYlem(caster);
 			break;
 		}//OPY
@@ -760,7 +760,7 @@ public class Magic : MonoBehaviour {
 	}
 	
 	
-	void cast_RelDesPor(GameObject caster)
+	void Cast_RelDesPor(GameObject caster)
 	{//SLowfall
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		
@@ -1496,7 +1496,8 @@ public class Magic : MonoBehaviour {
 		mgp.spelleffect=spellprop.spelleffect;
 		mgp.impactFrameStart=spellprop.impactFrameStart;
 		mgp.impactFrameEnd=spellprop.impactFrameEnd;
-
+		mgp.spellprop=spellprop;
+		
 		if (Caster.name=="NPC_Launcher")
 		{
 			mgp.caster=Caster.transform.parent.name;

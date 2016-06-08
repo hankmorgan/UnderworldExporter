@@ -18,4 +18,10 @@ public class SpellProp_OrtJux : SpellProp {
 		spread=0;
 		noOfCasts=1;
 	}
+
+		public override void onImpact ()
+	{
+		base.onImpact ();
+		Debug.Log("Ort Jux Impact");
+	}
 }
