@@ -14,6 +14,12 @@ public class Impact : MonoBehaviour {
 		}
 	}
 
+	public void go()
+	{
+		StartCoroutine(Animate());
+	}
+
+
 	void LoadAnimo(int index)
 	{
 		SpriteRenderer image = this.gameObject.GetComponent<SpriteRenderer>();
@@ -44,4 +50,9 @@ public class Impact : MonoBehaviour {
 		}
 		Destroy (this.gameObject);
 	}
+
+		public void x()
+		{
+				Debug.Log("X");
+		}
 }

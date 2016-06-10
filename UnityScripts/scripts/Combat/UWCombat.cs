@@ -99,7 +99,7 @@ public class UWCombat : Combat {
 					Impact imp= hitimpact.AddComponent<Impact>();
 					imp.FrameNo=objInt.GetHitFrameStart();
 					imp.EndFrame=objInt.GetHitFrameEnd();
-					StartCoroutine(imp.Animate());	
+					imp.go();	
 					if (currWeapon!=null)
 					{
 						currWeapon.onHit (hit.transform.gameObject);

@@ -359,7 +359,8 @@ public class Magic : MonoBehaviour {
 		case "Por Flam"://Fireball
 		{
 			SetSpellCost(5);
-			Debug.Log(MagicWords+ " Fireball Cast");
+			Cast_PorFlam(caster, ready);
+
 			break;
 		}//PF
 		case "Grav Sanct Por"://Missile Protection
@@ -567,29 +568,24 @@ public class Magic : MonoBehaviour {
 	
 	void Cast_OrtJux(GameObject caster, bool Ready)
 	{//Magic Missile Spell
-		////UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			ReadiedSpell= "Ort Jux";
-			//playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
 			playerUW.CursorIcon=playerUW.CursorIconTarget;
 		}
 		else
 		{
 			SpellProp_OrtJux spOJ =new SpellProp_OrtJux();
 			spOJ.init ();
-			//CastProjectile(caster,"Sprites/objects_023", new SpellProp());
 			CastProjectile(caster, (SpellProp)spOJ);
 		}
 	}
 	
 	void Cast_OrtGrav(GameObject caster, bool Ready)
 	{//Lightning Bolt
-		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			ReadiedSpell= "Ort Grav";
-			//playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0009");
 			playerUW.CursorIcon=playerUW.CursorIconTarget;
 		}
 		else
@@ -598,6 +594,21 @@ public class Magic : MonoBehaviour {
 			spOG.init ();
 			CastProjectile(caster, (SpellProp)spOG);
 		}
+	}
+
+	void Cast_PorFlam(GameObject caster, bool Ready)
+	{//Fireball Spell
+			if (Ready==true)
+			{//Ready the spell to be cast.
+				ReadiedSpell= "Por Flam";
+				playerUW.CursorIcon=playerUW.CursorIconTarget;
+			}
+			else
+			{
+				SpellProp_PorFlam spPF =new SpellProp_PorFlam();
+				spPF.init ();
+				CastProjectile(caster, (SpellProp)spPF);
+			}
 	}
 	
 	
@@ -1492,10 +1503,10 @@ public class Magic : MonoBehaviour {
 		projectile.name = "MagicProjectile_" + SummonCount++;
 		ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
 		MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
-		mgp.damage=spellprop.BaseDamage;
-		mgp.spelleffect=spellprop.spelleffect;
-		mgp.impactFrameStart=spellprop.impactFrameStart;
-		mgp.impactFrameEnd=spellprop.impactFrameEnd;
+		//mgp.damage=spellprop.BaseDamage;
+		//mgp.spelleffect=spellprop.spelleffect;
+		//mgp.impactFrameStart=spellprop.impactFrameStart;
+		//mgp.impactFrameEnd=spellprop.impactFrameEnd;
 		mgp.spellprop=spellprop;
 		
 		if (Caster.name=="NPC_Launcher")
@@ -2065,30 +2076,35 @@ public class Magic : MonoBehaviour {
 			
 		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
 		{
-			if (SpellRule!= SpellRule_TargetVector)
+			if (SpellRule!=SpellRule_TargetVector)
 			{
-				//Do  regular cast of the implemented spell when implemented.
+					Cast_OrtGrav(caster,ready);
 			}
 			else
 			{
-				CastProjectile(caster,target, new SpellProp());
-				SpellResultType=0;
+					SpellProp_OrtGrav spOG =new SpellProp_OrtGrav();
+					spOG.init ();
+					CastProjectile(caster,target, (SpellProp)spOG);
 			}
+			SpellResultType=0;
 			break;
 		}
 		case SpellEffect.UW1_Spell_Effect_Fireball:
 		{
-			if (SpellRule!= SpellRule_TargetVector)
+			if (SpellRule!=SpellRule_TargetVector)
 			{
-				//Do  regular cast of the implemented spell when implemented.
+				Cast_PorFlam(caster,ready);
 			}
 			else
 			{
-				CastProjectile(caster,target, new SpellProp());
-				SpellResultType=0;
+				SpellProp_PorFlam spPF =new SpellProp_PorFlam();
+				spPF.init ();
+				CastProjectile(caster,target, (SpellProp)spPF);
 			}
+			SpellResultType=0;
 			break;
 		}
+
 		case SpellEffect.UW1_Spell_Effect_FlameWind:
 		{
 			if (SpellRule!= SpellRule_TargetVector)

@@ -98,7 +98,7 @@ public class UWCharacter : Character {
 		Magic.playerUW=this.GetComponent<UWCharacter>();
 		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
 		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
-
+		SpellProp.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");
 
 		ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();

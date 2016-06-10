@@ -157,30 +157,31 @@ public class LightSource : object_base {
 
 	private string lightStatusText()
 	{//The quality string of the light Eg is it spent or not.
+
 			if (objInt.Quality == 0)
 			{
 				return playerUW.StringControl.GetString (5,60);//burned out
 			}
 			if ((objInt.Quality >=1) && (objInt.Quality <15))
 			{
-					return playerUW.StringControl.GetString (5,61);//nearly spent
+				return playerUW.StringControl.GetString (5,61);//nearly spent
 			}
 			if ((objInt.Quality >=15) && (objInt.Quality <32))
 			{
-					return playerUW.StringControl.GetString (5,62);//half burned
+				return playerUW.StringControl.GetString (5,62);//half burned
 			}
 			if ((objInt.Quality >=32) && (objInt.Quality <49))
 			{
-					return playerUW.StringControl.GetString (5,63);//somewhat used
+				return playerUW.StringControl.GetString (5,63);//somewhat used
 			}
 
 			if ((objInt.Quality >=50) && (objInt.Quality <64))
 			{
-					return playerUW.StringControl.GetString (5,64);//hardly used
+				return playerUW.StringControl.GetString (5,64);//hardly used
 			}
 			else
 			{
-					return playerUW.StringControl.GetString (5,64);//unused
+				return playerUW.StringControl.GetString (5,64);//unused
 			}
 	}
 

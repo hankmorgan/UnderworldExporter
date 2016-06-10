@@ -3,14 +3,14 @@ using System.Collections;
 
 public class MagicProjectile : MonoBehaviour {
 
-	public int damage;
+	//public int damage;
 	//public string HitImage;
 	public bool HasHit;
-	public SpellEffect spelleffect;//What spell effect the projectile has.
+	//public SpellEffect spelleffect;//What spell effect the projectile has.
 	public string caster; //who has cast the project. It will ignore them.
 	public SpellProp spellprop; //Spell properties
-	public int impactFrameStart;
-	public int impactFrameEnd;
+	//public int impactFrameStart;
+	//public int impactFrameEnd;
 
 	void OnCollisionEnter(Collision collision)
 	{
@@ -26,7 +26,7 @@ public class MagicProjectile : MonoBehaviour {
 
 		{
 			HasHit=true;
-			spellprop.onImpact();
+			spellprop.onImpact(this.transform);
 			SpriteRenderer sprt=this.GetComponentInChildren<SpriteRenderer>();
 			sprt.enabled=false;
 			BoxCollider box =this.GetComponent<BoxCollider>();
@@ -37,13 +37,8 @@ public class MagicProjectile : MonoBehaviour {
 
 			if (objInt!=null)
 			{
-				objInt.Attack(damage);
-				if (spelleffect!=null)
-				{
-					//Transfer the Spell effect to the target
-					spelleffect.transform.parent = objInt.transform.parent;
-					spelleffect.Go ();//Start the spell effect.
-				}
+				spellprop.onHit(objInt);//Special code for magic spell hits.
+				objInt.Attack(spellprop.BaseDamage);//Applies damage
 				Impact imp= this.gameObject.AddComponent<Impact>();
 				imp.FrameNo=objInt.GetHitFrameStart();
 				imp.EndFrame=objInt.GetHitFrameEnd();
@@ -54,14 +49,15 @@ public class MagicProjectile : MonoBehaviour {
 				//test if this is a player.
 				if (collision.gameObject.GetComponent<UWCharacter>()!=null)
 				{
-					collision.gameObject.GetComponent<UWCharacter>().ApplyDamage(damage);
+					collision.gameObject.GetComponent<UWCharacter>().ApplyDamage(spellprop.BaseDamage);
+					spellprop.onHitPlayer();
 				}
 				else
 				{
 					//do a miss impact 
 					Impact imp= this.gameObject.AddComponent<Impact>();
-					imp.FrameNo=impactFrameStart;
-					imp.EndFrame=impactFrameEnd;
+					imp.FrameNo=spellprop.impactFrameStart;
+					imp.EndFrame=spellprop.impactFrameEnd;
 					StartCoroutine( imp.Animate());
 				}
 
