@@ -484,7 +484,6 @@ public class Magic : MonoBehaviour {
 		case "Flam Hur"://Flame Wind
 		{
 			SetSpellCost(8);
-			//Debug.Log(MagicWords+ " Flame Wind Cast");
 			Cast_FlamHur(caster);
 			break;
 		}//fh
@@ -503,7 +502,7 @@ public class Magic : MonoBehaviour {
 		case "Ort Por Wis"://Roaming sight
 		{
 			SetSpellCost(8);
-			Debug.Log(MagicWords+ " Roaming sight Cast");
+			Cast_OrtPorWis(caster);
 			break;
 		}//opw
 		case "Vas Por Ylem"://Tremor
@@ -970,6 +969,18 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
+	void Cast_OrtPorWis(GameObject caster)
+	{//Roaming sight
+	int SpellEffectSlot = CheckActiveSpellEffect(caster);
+	if (SpellEffectSlot != -1)
+		{
+			Cast_RoamingSight(caster, caster.GetComponent<UWCharacter>().ActiveSpell,SpellEffect.UW1_Spell_Effect_RoamingSight,SpellEffectSlot,10);
+		}
+	else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
 	
 	void CastTheFrog(GameObject caster)
 	{//The bullfrog trap. Special spell.
@@ -1027,8 +1038,7 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-	
-	
+
 	void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int LightLevel)
 	{
 		LightSource.MagicBrightness=LightLevel;
@@ -1052,8 +1062,14 @@ public class Magic : MonoBehaviour {
 		SpellEffect slf = (SpellEffectSlowFall)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
 		slf.counter=counter;
 		slf.Go ();
-	}
-	
+	}	
+
+	void Cast_RoamingSight(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{
+			SpellEffect srs = (SpellEffectRoamingSight)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+			srs.counter=counter;
+			srs.Go ();
+	}	
 	
 	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
 	{//Poison
@@ -1344,7 +1360,11 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectToughness>();
 			break;
-			
+		case SpellEffect.UW1_Spell_Effect_RoamingSight:
+		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
+		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectRoamingSight>();
+			break;		
 		default:
 			Debug.Log ("effect Id is " + EffectId);
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
@@ -2139,6 +2159,14 @@ public class Magic : MonoBehaviour {
 			SpellResultType=0;
 			break;
 		}
+		case SpellEffect.UW1_Spell_Effect_RoamingSight:						
+		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
+		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
+			{
+			Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
+			break;
+			}
+
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
 			
@@ -2190,20 +2218,19 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Cursed_alt14:
 		case SpellEffect.UW1_Spell_Effect_Cursed_alt15:
 		case SpellEffect.UW1_Spell_Effect_Cursed_alt16:
-		case SpellEffect.UW1_Spell_Effect_RoamingSight:
+		
 			
 		case SpellEffect.UW1_Spell_Effect_Curse_alt01:
 		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:
 		case SpellEffect.UW1_Spell_Effect_Reveal_alt01:
 		case SpellEffect.UW1_Spell_Effect_Curse_alt02:
-		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
+		
 			
 			/*test*/
 		case SpellEffect.UW1_Spell_Effect_Reveal:
 			
 			/*Blank*/
 		case SpellEffect.UW1_Spell_Effect_Tremor_alt01:
-		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
 
 			
 		case SpellEffect.UW1_Spell_Effect_MassParalyze:

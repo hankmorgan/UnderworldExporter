@@ -31,6 +31,10 @@ public class WindowDetectUW : WindowDetect {
 
 	protected override void Update ()
 	{
+		if (playerUW.isRoaming==true)
+		{//No inventory use while using wizard eye.
+				return;
+		}
 		base.Update ();
 		if (JustClicked==true)
 		{
@@ -109,7 +113,10 @@ public class WindowDetectUW : WindowDetect {
 
 	protected override void OnPress (bool isPressed)
 	{
-
+		if (playerUW.isRoaming==true)
+		{//No inventory use while using wizard eye.
+				return;
+		}
 		base.OnPress(isPressed);
 		if(CursorInMainWindow==false)
 		{
@@ -140,6 +147,10 @@ public class WindowDetectUW : WindowDetect {
 
 	void OnClick()
 	{
+		if (playerUW.isRoaming==true)
+		{//No inventory use while using wizard eye.
+				return;
+		}				
 		if (JustClicked==true)
 		{
 			return;

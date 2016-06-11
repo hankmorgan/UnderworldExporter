@@ -29,6 +29,8 @@ public class UWCharacter : Character {
 	public bool isLefty;
 	public bool isSwimming;
 	public bool isFlying;
+	public bool isRoaming;
+	public float flySpeed;
 	public bool isFloating;
 	public bool isWaterWalking;
 	public bool onGround;//Not currently used.
@@ -223,6 +225,15 @@ public class UWCharacter : Character {
 		if (isFlying)
 		{//Flying spell
 			playerMotor.movement.maxFallSpeed=0.0f;
+			playerMotor.movement.maxForwardSpeed=flySpeed;
+			if ((Input.GetKeyDown(KeyCode.R)) || (Input.GetKey(KeyCode.R)))
+			{//Fly up
+				this.GetComponent<CharacterController>().Move(new Vector3(0,0.2f,0));
+			}
+			else if ((Input.GetKeyDown(KeyCode.V)) || (Input.GetKey(KeyCode.V)))
+			{//Fly down
+				this.GetComponent<CharacterController>().Move(new Vector3(0,-0.2f,0));
+			}
 		}
 		else
 		{
@@ -233,6 +244,7 @@ public class UWCharacter : Character {
 			else
 			{
 				playerMotor.movement.maxFallSpeed=20.0f;//Default
+				playerMotor.movement.maxForwardSpeed=3.0f;
 			}
 		}
 
@@ -243,6 +255,11 @@ public class UWCharacter : Character {
 		else
 		{
 			playerMotor.jumping.baseHeight=0.6f;
+		}
+		
+		if (isRoaming)
+		{
+			playerMotor.movement.maxFallSpeed=0.0f;	
 		}
 
 		mus.WeaponDrawn=(InteractionMode==UWCharacter.InteractionModeAttack);

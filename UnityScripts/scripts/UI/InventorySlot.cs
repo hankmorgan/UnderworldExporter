@@ -65,6 +65,10 @@ public class InventorySlot : GuiBase {
 
 	void ClickEvent()
 	{
+		if (playerUW.isRoaming==true)
+		{//No inventory use while using wizard eye.
+				return;
+		}
 		bool leftClick=true;
 		if (UICamera.currentTouchID == -2)
 		{
