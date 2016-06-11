@@ -3,17 +3,17 @@ using System.Collections;
 
 public class SpellProp_PorFlam : SpellProp {
 	//Fireball
-	int splashDamage;//Damage applied to the explosion.
-	float splashDistance;
+	protected int splashDamage;//Damage applied to the explosion.
+	protected float splashDistance;
 	
-		public override void init ()
+	public override void init ()
 	{
 			base.init ();
 			ProjectileSprite = "Sprites/objects_020";
 			Force=200.0f;
 			BaseDamage=16;
-			splashDamage=8;
-			splashDistance=3.0f;
+			splashDamage=4;
+			splashDistance=1.0f;
 			impactFrameStart=21;
 			impactFrameEnd=25;
 	}

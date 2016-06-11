@@ -483,7 +483,8 @@ public class Magic : MonoBehaviour {
 		case "Flam Hur"://Flame Wind
 		{
 			SetSpellCost(8);
-			Debug.Log(MagicWords+ " Flame Wind Cast");
+			//Debug.Log(MagicWords+ " Flame Wind Cast");
+			Cast_FlamHur(caster);
 			break;
 		}//fh
 		case "An Tym":// Freeze Time
@@ -609,6 +610,13 @@ public class Magic : MonoBehaviour {
 				spPF.init ();
 				CastProjectile(caster, (SpellProp)spPF);
 			}
+	}
+
+	void Cast_FlamHur(GameObject caster)
+	{//Flamewind. Casts instantly.
+		SpellProp_FlamHur spFH =new SpellProp_FlamHur();
+		spFH.init ();
+		CastProjectile(caster, (SpellProp)spFH);
 	}
 	
 	
@@ -1464,9 +1472,9 @@ public class Magic : MonoBehaviour {
 
 						//  Try this one first, before using the second one
 						//  The Ray-hits will form a ring
-						float randomRadius = spellprop.spread;            
+						//float randomRadius = spellprop.spread;            
 						//  The Ray-hits will be in a circular area
-						//float randomRadius = Random.Range( 0, scaleLimit );        
+						float randomRadius = Random.Range( 0, spellprop.spread );        
 
 						float randomAngle = Random.Range ( 0, 2 * Mathf.PI );
 
@@ -1547,9 +1555,9 @@ public class Magic : MonoBehaviour {
 
 				//  Try this one first, before using the second one
 				//  The Ray-hits will form a ring
-				float randomRadius = spread;            
+				//float randomRadius = spread;            
 				//  The Ray-hits will be in a circular area
-				//float randomRadius = Random.Range( 0, scaleLimit );        
+				float randomRadius = Random.Range( 0, spread );        
 
 				float randomAngle = Random.Range ( 0, 2 * Mathf.PI );
 
