@@ -423,7 +423,8 @@ public class Magic : MonoBehaviour {
 		case "Vas Ort Grav"://Sheet Lightning
 		{
 			SetSpellCost(6);
-			Debug.Log(MagicWords+ " Sheet Lightning Cast");
+			//Debug.Log(MagicWords+ " Sheet Lightning Cast");
+			Cast_VasOrtGrav(caster);
 			break;
 		}//VOG
 		case "Ort Por Ylem"://Telekinesis
@@ -619,7 +620,13 @@ public class Magic : MonoBehaviour {
 		CastProjectile(caster, (SpellProp)spFH);
 	}
 	
-	
+	void Cast_VasOrtGrav(GameObject caster)
+	{//Sheet lightning
+		SpellProp_VasOrtGrav spVOG =new SpellProp_VasOrtGrav();
+		spVOG.init ();
+		CastProjectile(caster, (SpellProp)spVOG);
+	}
+
 	void Cast_ExYlem(GameObject caster, bool Ready)
 	{//Open
 		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
@@ -2038,15 +2045,16 @@ public class Magic : MonoBehaviour {
 			break;
 			
 		case SpellEffect.UW1_Spell_Effect_SheetLightning:
+		case SpellEffect.UW1_Spell_Effect_SheetLightning_alt01:						
 			if (SpellRule!=SpellRule_TargetVector)
 			{
-				Cast_OrtGrav(caster, ready);
+				Cast_VasOrtGrav(caster);
 			}
 			else
 			{
-				SpellProp_OrtGrav spOG =new SpellProp_OrtGrav();
-				spOG.init ();
-				CastProjectile(caster,target,(SpellProp)spOG);
+				SpellProp_VasOrtGrav spVOG =new SpellProp_VasOrtGrav();
+				spVOG.init ();
+				CastProjectile(caster,target,(SpellProp)spVOG);
 			}
 			SpellResultType=0;
 			break;
@@ -2083,6 +2091,7 @@ public class Magic : MonoBehaviour {
 			break;
 			
 		case SpellEffect.UW1_Spell_Effect_ElectricalBolt:
+		case SpellEffect.UW1_Spell_Effect_ElectricalBolt_alt01:						
 		{
 			if (SpellRule!=SpellRule_TargetVector)
 			{
@@ -2098,6 +2107,7 @@ public class Magic : MonoBehaviour {
 			break;
 		}
 		case SpellEffect.UW1_Spell_Effect_Fireball:
+		case SpellEffect.UW1_Spell_Effect_Fireball_alt01:						
 		{
 			if (SpellRule!=SpellRule_TargetVector)
 			{
@@ -2114,21 +2124,19 @@ public class Magic : MonoBehaviour {
 		}
 
 		case SpellEffect.UW1_Spell_Effect_FlameWind:
+		case SpellEffect.UW1_Spell_Effect_FlameWind_alt01:						
 		{
-			if (SpellRule!= SpellRule_TargetVector)
+			if (SpellRule!=SpellRule_TargetVector)
 			{
-				//Do  regular cast of the implemented spell when implemented.
+				Cast_FlamHur(caster);
 			}
 			else
 			{
-				//Cast 3 projectiles at random points.
-				for (int i = 0; i<3;i++)
-				{
-					Vector3 targetR =  target.transform.position
-						+Random.insideUnitSphere;
-					CastProjectile(caster,"Sprites/objects_020",targetR, new SpellProp());
-				}
+				SpellProp_FlamHur spFH =new SpellProp_FlamHur();
+				spFH.init ();
+				CastProjectile(caster,target, (SpellProp)spFH);
 			}
+			SpellResultType=0;
 			break;
 		}
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
@@ -2150,15 +2158,15 @@ public class Magic : MonoBehaviour {
 			
 		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:
 		case SpellEffect.UW1_Spell_Effect_RuneofWarding_alt01:
-		case SpellEffect.UW1_Spell_Effect_ElectricalBolt_alt01:
+
 		case SpellEffect.UW1_Spell_Effect_StrengthenDoor_alt01:
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap_alt01:
-		case SpellEffect.UW1_Spell_Effect_Fireball_alt01:
+
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead_alt01:
 		case SpellEffect.UW1_Spell_Effect_NameEnchantment_alt01:
 			
 			
-		case SpellEffect.UW1_Spell_Effect_SheetLightning_alt01:
+
 			
 		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:
 			
@@ -2196,7 +2204,7 @@ public class Magic : MonoBehaviour {
 			/*Blank*/
 		case SpellEffect.UW1_Spell_Effect_Tremor_alt01:
 		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
-		case SpellEffect.UW1_Spell_Effect_FlameWind_alt01:
+
 			
 		case SpellEffect.UW1_Spell_Effect_MassParalyze:
 		case SpellEffect.UW1_Spell_Effect_Acid_alt01:

@@ -18,6 +18,8 @@ public class SpellProp_FlamHur : SpellProp_PorFlam {
 				impactFrameEnd=25;
 				spread=5;
 				noOfCasts=Random.Range(2,5);
+				SecondaryFrameNo=31;
+				SecondaryEndFrame=35;
 		}
 
 }

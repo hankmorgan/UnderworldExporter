@@ -5,17 +5,20 @@ public class SpellProp_PorFlam : SpellProp {
 	//Fireball
 	protected int splashDamage;//Damage applied to the explosion.
 	protected float splashDistance;
-	
+	protected int SecondaryFrameNo;
+	protected int SecondaryEndFrame;
 	public override void init ()
 	{
-			base.init ();
-			ProjectileSprite = "Sprites/objects_020";
-			Force=200.0f;
-			BaseDamage=16;
-			splashDamage=4;
-			splashDistance=1.0f;
-			impactFrameStart=21;
-			impactFrameEnd=25;
+		base.init ();
+		ProjectileSprite = "Sprites/objects_020";
+		Force=200.0f;
+		BaseDamage=16;
+		splashDamage=4;
+		splashDistance=1.0f;
+		impactFrameStart=21;
+		impactFrameEnd=25;
+		SecondaryFrameNo=31;
+		SecondaryEndFrame=35;
 	}
 
 
@@ -29,8 +32,8 @@ public class SpellProp_PorFlam : SpellProp {
 						GameObject hitimpact = new GameObject("_impact");
 						hitimpact.transform.position=pos;//ray.GetPoint(weaponRange/0.7f);
 						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.FrameNo=31;
-						imp.EndFrame=35;
+						imp.FrameNo= SecondaryFrameNo;
+						imp.EndFrame=SecondaryEndFrame;
 						imp.go();
 
 				}
