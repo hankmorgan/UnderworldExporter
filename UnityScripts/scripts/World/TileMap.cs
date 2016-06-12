@@ -114,7 +114,10 @@ public class TileMap : MonoBehaviour {
 
 		int tileX = (int)(location.x/1.2f);
 		int tileY = (int)(location.y/1.2f);
-
+		if ((tileX>=64) || (tileX<0) || (tileY>=64) || (tileY<0))
+		{//Location is outside the map
+				return false;
+		}
 		int tileType = GetTileType(tileX,tileY);
 		int isRendered = GetTileRender(tileX,tileY);
 		//Debug.Log ("testing at " +location);

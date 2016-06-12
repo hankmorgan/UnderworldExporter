@@ -16,7 +16,7 @@ public class Magic : MonoBehaviour {
 	//Runes that the character has picked up and is currently using
 	public bool[] PlayerRunes=new bool[24];
 	public int[] ActiveRunes=new int[3];
-	
+	public bool InfiniteMana;
 	
 	public int MaxMana;
 	public int CurMana;
@@ -33,6 +33,14 @@ public class Magic : MonoBehaviour {
 	
 	public ScrollController ml;
 	
+		public void Update()
+		{//Infintite mana.
+			if ( (InfiniteMana) && (CurMana<MaxMana) )
+			{
+				CurMana=MaxMana;
+			}
+		}
+
 	public void SetSpellCost(int SpellCircle)
 	{
 		SpellCost= SpellCircle*3;
@@ -288,7 +296,8 @@ public class Magic : MonoBehaviour {
 		case "Quas Lor"://Night Vision
 		{
 			SetSpellCost(3);
-			Debug.Log(MagicWords+ " Night Vision Cast");
+			/*Debug.Log(MagicWords+ " Night Vision Cast");*/
+			Cast_QuasLor(caster);
 			break;
 		}//QL
 		case "An Kal Corp"://Repel Undead
@@ -508,7 +517,7 @@ public class Magic : MonoBehaviour {
 		case "Vas Por Ylem"://Tremor
 		{
 			SetSpellCost(8);
-			Debug.Log(MagicWords+ " Tremor Cast");
+			Cast_VasPorYlem(caster);
 			break;
 		}//vpy
 		default:
@@ -710,7 +719,19 @@ public class Magic : MonoBehaviour {
 		}
 	}
 	
-	
+	void Cast_QuasLor(GameObject caster)
+	{//Light
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+
+		if (SpellEffectSlot != -1)
+		{
+			Cast_NightVision (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_NightVision,SpellEffectSlot, 4, 20);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
 	
 	void Cast_InManiYlem(GameObject caster)
 	{//Create food
@@ -981,6 +1002,35 @@ public class Magic : MonoBehaviour {
 			SpellIncantationFailed(caster);
 		}
 	}
+
+	void Cast_VasPorYlem(GameObject caster)
+	{//Tremor. Spawn a couple of arrow traps and set them off?
+			TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
+			for (int i =0 ; i <= Random.Range(1,4);i++)			
+			{
+			int boulderTypeOffset=Random.Range(0,4);
+			
+			Vector3 pos = caster.transform.position+(Random.insideUnitSphere * Random.Range(1,3));
+			//Try and keep it in map range
+				Debug.Log(pos);
+			if (tm.ValidTile(pos))
+				{
+					pos.Set(pos.x,4.5f,pos.z); //Put it on the roof.
+
+					GameObject myObj = new GameObject("summoned_launcher_"+ SummonCount++);
+					myObj.layer=LayerMask.NameToLayer("UWObjects");
+					myObj.transform.position=pos;
+					myObj.transform.Rotate(-90,0,0);
+					ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+					a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
+					arrow.item_index=339+boulderTypeOffset;
+					arrow.item_type=23;
+					arrow.ExecuteTrap(0,0,0);
+					Destroy(myObj);
+				}					
+			}
+	}
 	
 	void CastTheFrog(GameObject caster)
 	{//The bullfrog trap. Special spell.
@@ -1050,6 +1100,26 @@ public class Magic : MonoBehaviour {
 		//StartCoroutine(sel.timer());
 	}
 	
+	void Cast_NightVision(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int LightLevel)
+	{
+		LightSource.MagicBrightness=LightLevel;
+		SpellEffect nv= (SpellEffectLight)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectId);
+		nv.Value = LightLevel;
+		nv.counter= counter;
+		//sel.ApplyEffect();//Apply the effect.
+		nv.Go ();// Apply the effect and Start the timer.
+		//StartCoroutine(sel.timer());
+	}
+
+	void Cast_Hallucination(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{
+			SpellEffect hn= (SpellEffectHallucination)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectId);
+			hn.counter= counter;
+			//sel.ApplyEffect();//Apply the effect.
+			hn.Go ();// Apply the effect and Start the timer.
+			//StartCoroutine(sel.timer());
+	}
+
 	void Cast_Leap(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
 	{
 		SpellEffect lep = (SpellEffectLeap)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
@@ -1133,7 +1203,7 @@ public class Magic : MonoBehaviour {
 	
 	
 	NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
-	{
+	{//TODO: is it better to just pick an enemy and just try and launch an invisible projectile at them.
 		//Targets a random NPC in the area of the npc and returns a raycast hit on the line of site
 		Camera cam = caster.GetComponentInChildren<Camera>();//Camera.main;
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
@@ -1943,15 +2013,23 @@ public class Magic : MonoBehaviour {
 			break;			
 		case SpellEffect.UW1_Spell_Effect_Hallucination:
 			//player only
-			Debug.Log ("Hallucination");
-			SpellResultType=0;
+			Cast_Hallucination(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5);
+			SpellResultType=1;
 			break;
 		case SpellEffect.UW1_Spell_Effect_NightVision:
+				if (ActiveArrayIndex!=-1)
+				{
+					Cast_NightVision(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,4,16);
+					SpellResultType=2;
+				}
+				break;
 		case SpellEffect.UW1_Spell_Effect_NightVision_alt01:
 		case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
-			//player only
-			Debug.Log ("Nightvision enchantment");
-			SpellResultType=0;
+				if (PassiveArrayIndex!=-1)
+				{
+					Cast_NightVision(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,4,16);
+					SpellResultType=1;
+				}	
 			break;
 		case SpellEffect.UW1_Spell_Effect_Poison:
 		case SpellEffect.UW1_Spell_Effect_Poison_alt01:

@@ -19,7 +19,7 @@ public class SpellEffectLight : SpellEffect {
 	}
 
 
-	void Update()
+	public virtual void Update()
 	{
 		//To make sure the brightness is always correct.
 		if (Active==true)

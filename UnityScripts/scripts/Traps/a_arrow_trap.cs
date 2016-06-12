@@ -20,6 +20,7 @@ public class a_arrow_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
+		CheckReferences();
 		//Debug.Log ("an arrow trap has gone off. It will spawn a " + item_index + " of type " + item_type + " along vector " + this.gameObject.transform.rotation);
 		GameObject myObj=  new GameObject("SummonedObject_" + playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
