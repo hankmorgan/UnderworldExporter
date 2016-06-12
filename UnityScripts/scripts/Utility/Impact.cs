@@ -2,26 +2,31 @@
 using System.Collections;
 
 public class Impact : MonoBehaviour {
-	//Class for things like blood splatters
+	/*
+	 * Impact.cs
+	 * 
+	 *  Class for things like blood splatters, spell explosion animations
+	 * 
+	 * 
+	 */
 
-	public int FrameNo =0;//How long the image lasts for.
-	public int EndFrame=5;
-	// Use this for initialization
 	void Start () {
-	if (this.gameObject.GetComponent<Billboard>()==null)
+		//Make sure the impact is always facing the player.		
+		if (this.gameObject.GetComponent<Billboard>()==null)
 		{
 			this.gameObject.AddComponent<Billboard>();
 		}
 	}
 
-	public void go()
-	{
-		StartCoroutine(Animate());
+	public void go(int StartFrame, int EndFrame)
+	{//Start the animation.
+		StartCoroutine(Animate(StartFrame, EndFrame));
 	}
-
 
 	void LoadAnimo(int index)
 	{
+		//Load the image into a sprite renderer
+		//Make sure the sprite renderer exists
 		SpriteRenderer image = this.gameObject.GetComponent<SpriteRenderer>();
 		if (image==null)
 		{
@@ -30,29 +35,23 @@ public class Impact : MonoBehaviour {
 		image.sprite=Resources.Load<Sprite>("Sprites/Animo/animo_" + index.ToString ("D4"));
 	}
 
-	public IEnumerator Animate()
-	{
+	public IEnumerator Animate(int StartFrame, int EndFrame)
+	{//Loop throught the animation frames from StartFrame to EndFrame in order one time.
 		bool Active=true;
-		LoadAnimo (FrameNo);
-		//the count down of the sad butterfly like existance of an impact.
+		LoadAnimo (StartFrame);
 		while (Active==true)
 		{
 			yield return new WaitForSeconds(0.2f);
-			FrameNo++;
-			if (FrameNo>=EndFrame)
+			StartFrame++;
+			if (StartFrame>=EndFrame)
 			{
 				Active=false;
+				Destroy (this.gameObject);
 			}
 			else
-			{//Loads the next animation fram;
-				LoadAnimo (FrameNo);
+			{//Loads the next animation frame
+				LoadAnimo (StartFrame);
 			}
-		}
-		Destroy (this.gameObject);
+		}		
 	}
-
-		public void x()
-		{
-				Debug.Log("X");
-		}
 }

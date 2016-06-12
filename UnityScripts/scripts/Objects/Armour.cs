@@ -2,13 +2,13 @@
 using System.Collections;
 
 public class Armour : Equipment {
-	//public int Durability;
 	public int Protection;
+	
+	//Paperdoll graphics
 	public string EquipFemaleLowest; 
 	public string EquipFemaleLow;
 	public string EquipFemaleMedium;
 	public string EquipFemaleBest;
-	
 	public string EquipMaleLowest; 
 	public string EquipMaleLow;
 	public string EquipMaleMedium;
@@ -33,14 +33,14 @@ public class Armour : Equipment {
 
 	public virtual void ArmourSelfDamage()
 	{//Damage caused to the weapon when it hits something with heavy resistance.
-			objInt.Quality-=1;
-			UpdateQuality();
-			if (objInt.Quality<=0)
-			{
-				ChangeType(208,23);//Change to debris.
-				this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-				Destroy(this);//Kill me now.
-			}
+		objInt.Quality-=1;
+		UpdateQuality();
+		if (objInt.Quality<=0)
+		{
+			ChangeType(208,23);//Change to debris.
+			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
+			Destroy(this);//Kill me now.
+		}
 	}
 
 
@@ -101,14 +101,13 @@ public class Armour : Equipment {
 	}
 	
 	void SetEquipTexture(string EquipTexture)
-	{
+	{//Change the paperdoll image
 		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
 	}
 
 
 	public override bool EquipEvent (int slotNo)
 	{
-
 		if ((slotNo >=0) && (slotNo <=4))//Gloves, chest,legging,boots and helm
 		{
 			UpdateQuality();
@@ -164,8 +163,4 @@ public class Armour : Equipment {
 		}
 		return false;
 	}
-
-
-
-
 }

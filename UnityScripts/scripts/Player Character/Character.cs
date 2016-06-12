@@ -97,7 +97,7 @@ public class Character : MonoBehaviour {
 
 		//tell other objects about this object.
 		TileMap.gronk=this.gameObject;
-		NPC.player=this.gameObject;
+		//NPC.player=this.gameObject;
 
 		if (game==2)
 		{

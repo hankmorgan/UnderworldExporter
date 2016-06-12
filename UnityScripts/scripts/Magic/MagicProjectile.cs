@@ -2,20 +2,21 @@
 using System.Collections;
 
 public class MagicProjectile : MonoBehaviour {
-
-	//public int damage;
-	//public string HitImage;
+	/*MagicProjectile.cs
+	 * 
+	 *Magic projectiles that are launched from spells.
+	 *
+	 *Projectiles use properties defined by SpellProp to decide what damage or other special effects should happen.
+	 *
+	 */
 	public bool HasHit;
-	//public SpellEffect spelleffect;//What spell effect the projectile has.
 	public string caster; //who has cast the project. It will ignore them.
-	public SpellProp spellprop; //Spell properties
-	//public int impactFrameStart;
-	//public int impactFrameEnd;
+	public SpellProp spellprop; //Spell properties object
 
 	void OnCollisionEnter(Collision collision)
-	{
+	{//The Projectile hits something.
 	if(collision.gameObject.name== caster)
-		{
+		{//Prevents the caster from hitting themselves
 			return;
 		}
 		if (HasHit==true)
@@ -23,30 +24,34 @@ public class MagicProjectile : MonoBehaviour {
 			return;
 		}
 		else
-
 		{
 			HasHit=true;
+
+			//Code to execute when a projectile hits a spot (for launching AOE effects)
 			spellprop.onImpact(this.transform);
-			SpriteRenderer sprt=this.GetComponentInChildren<SpriteRenderer>();
-			sprt.enabled=false;
-			BoxCollider box =this.GetComponent<BoxCollider>();
-			box.enabled=false;
-			WindowDetect.FreezeMovement(this.gameObject);
 
 			ObjectInteraction objInt = collision.gameObject.GetComponent<ObjectInteraction>();
 
-			if (objInt!=null)
+			if (objInt!=null)//Has the proje
 			{
-				spellprop.onHit(objInt);//Special code for magic spell hits.
-				objInt.Attack(spellprop.BaseDamage);//Applies damage
-				Impact imp= this.gameObject.AddComponent<Impact>();
-				imp.FrameNo=objInt.GetHitFrameStart();
-				imp.EndFrame=objInt.GetHitFrameEnd();
-				StartCoroutine(imp.Animate());			
+				//Special code for magic spell direct hits.
+				spellprop.onHit(objInt);
+
+				//Applies damage
+				objInt.Attack(spellprop.BaseDamage);
+
+				//Create a impact animation to illustrate the collision
+				if(objInt.GetHitFrameStart()>=0)
+				{
+					GameObject myObj = new GameObject();
+					myObj.transform.position=this.transform.position;
+					Impact imp= myObj.gameObject.AddComponent<Impact>();
+					imp.go(objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());													
+				}
 			}
 			else
 			{
-				//test if this is a player.
+				//Test if this is a player.
 				if (collision.gameObject.GetComponent<UWCharacter>()!=null)
 				{
 					collision.gameObject.GetComponent<UWCharacter>().ApplyDamage(spellprop.BaseDamage);
@@ -54,28 +59,14 @@ public class MagicProjectile : MonoBehaviour {
 				}
 				else
 				{
-					//do a miss impact 
-					Impact imp= this.gameObject.AddComponent<Impact>();
-					imp.FrameNo=spellprop.impactFrameStart;
-					imp.EndFrame=spellprop.impactFrameEnd;
-					StartCoroutine( imp.Animate());
+					//Do a miss impact 
+					GameObject myObj = new GameObject();
+					myObj.transform.position=this.transform.position;
+					Impact imp= myObj.gameObject.AddComponent<Impact>();
+					imp.go(spellprop.impactFrameStart, spellprop.impactFrameEnd);					
 				}
-
-			}
-			
-			DestroyObject(this.gameObject,1);
-
-
-
+			}			
+			DestroyObject(this.gameObject);
 		}
-
 	}
-
-	//void OnTriggerEnter(Collider other)
-	//{
-	//	Debug.Log ("Projectile hits " + other.gameObject.name + " via trigger");
-	//	other.gameObject.transform.SendMessage("ApplyDamage");
-	//	DestroyObject(this.gameObject);
-	//}
-
 }

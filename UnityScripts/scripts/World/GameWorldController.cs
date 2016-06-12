@@ -64,10 +64,6 @@ public class GameWorldController : MonoBehaviour {
 		{
 			paletteIndexReverse=paletteArray.GetUpperBound(0);
 		}
-
-
-
-
 		return;
 	}
 

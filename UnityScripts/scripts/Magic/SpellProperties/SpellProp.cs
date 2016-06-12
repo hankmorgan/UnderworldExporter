@@ -2,10 +2,15 @@
 using System.Collections;
 
 public class SpellProp : MonoBehaviour {
-//Properties for spells. Mainly used for projectile spells that have no unique code.
+	/*
+	 * SpellProp.cs 
+	 * 
+	 * Properties for spells. Mainly used for projectile spells.
+	 * 
+	 */
+
 
 	public int BaseDamage;//How much damage the spell applies.
-	//private SpellEffect spelleffect;//What spell effect the spell has.
 	public int counter; //How long the spell effect lasts
 	public int DOT;//What damage over time the spell effect has.
 	public int noOfCasts=1; //How many interations 
@@ -38,4 +43,15 @@ public class SpellProp : MonoBehaviour {
 	{//Special code to fire when the projectile hits the player.
 			
 	}
+
+
+	/* ************Sample enchantment Code *********************
+	public override void onHit (ObjectInteraction objInt)
+	{//Sample enchantment poisons the target.
+	if (objInt.ItemType==ObjectInteraction.NPC_TYPE)
+		{
+			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,objInt.gameObject,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetOther);				
+		}		
+	}
+	*/
 }

@@ -97,9 +97,7 @@ public class UWCombat : Combat {
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
 					Impact imp= hitimpact.AddComponent<Impact>();
-					imp.FrameNo=objInt.GetHitFrameStart();
-					imp.EndFrame=objInt.GetHitFrameEnd();
-					imp.go();	
+					imp.go(objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());	
 					if (currWeapon!=null)
 					{
 						currWeapon.onHit (hit.transform.gameObject);
@@ -111,9 +109,7 @@ public class UWCombat : Combat {
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
 					Impact imp= hitimpact.AddComponent<Impact>();
-					imp.FrameNo=46;
-					imp.EndFrame=50;
-					StartCoroutine( imp.Animate());
+					StartCoroutine( imp.Animate(46,50));
 					if (currWeapon!=null)
 					{
 						currWeapon.onHit (null);

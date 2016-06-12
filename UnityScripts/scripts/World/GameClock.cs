@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class GameClock : GuiBase {
-
+		/*
+		 * The gameclock for the world
+		 */
 
 	public float clockTime;
 	public float clockRate=1.0f; //How long is a minute relative to the clockTime
@@ -33,6 +35,7 @@ public class GameClock : GuiBase {
 			minute=0;
 			hour++;
 			playerUW.UpdateHungerAndFatigue();
+			//TODO:Update torches, lightsources and food					
 			if (hour>=24)
 			{
 				hour =0;

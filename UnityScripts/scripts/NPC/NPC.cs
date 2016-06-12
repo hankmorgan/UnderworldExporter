@@ -5,9 +5,14 @@ using RAIN.Core;
 using RAIN.Minds;
 
 public class NPC : object_base {
-	//From goblinAI
-	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};
+		/*
+		 * Npc.cs Code related the NPC.
+		 * Controls AI status, animation, conversations and general properties.
+		 * 
+		 */
+	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
 
+   //Animations are clasified by number
 	public const int AI_RANGE_IDLE = 1 ;
 	public const int AI_RANGE_MOVE = 10 ;
 	public const int AI_RANGE_DEATH = 100 ;
@@ -43,12 +48,8 @@ public class NPC : object_base {
 	public int AnimRange=1;//Multiple of 10 for dividing animations
 	public string NPC_ID;
 	public string CurrentAnim;
-	
-	//public static TileMap tm;
-	
-	//private UILabel MessageLog;
+
 	private NavMeshAgent agent;
-	public static GameObject player;
 	public Animator anim;
 	public int currentState=-1;
 	private bool followPlayer=false;
@@ -81,8 +82,8 @@ public class NPC : object_base {
 
 	public string NavMeshRegion;
 
+	//NPC Properties from Underworld
 	public int npc_whoami;
-
 	public int npc_xhome;        //  x coord of home tile
 	public int npc_yhome;        //  y coord of home tile
 //	public int npc_whoami;       //  npc conversation slot number
@@ -98,33 +99,28 @@ public class NPC : object_base {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 
-	//public int npc_deathvariable;	//Quest variable to set when the character is killed
 	public bool NPC_DEAD;
 
-	//Added by myself
+	//Added by myself. This are set by spelleffects
 	public bool Poisoned;
 	public bool Frozen;
 	public short FrozenUpdate=0;
 
-	//TODO: The state should be replaces with a combination of the above variables.
+	//TODO: The state should be replaced with a combination of the above variables and match what UW does.
 	public int state=0; //Set state when not in combat or dying.
 
-
-	//For applying spell effects to NPCs
+	//For storing spell effects applied to NPCs
 	public SpellEffect[] NPCStatusEffects=new SpellEffect[3];
 
-	//public static UWCharacter playerUW;
-	private static bool playerUWReady;
-	private GoblinAI Gob;
-	private AIRig ai;
+	private static bool playerUWReady;//To flag initiation of the player into the AI modules
+	private AIRig ai;	//AI module for the character.
 
-	public bool MagicAttack;
+	public bool MagicAttack;	//Can the NPC fire off magic attacks.
 	public GameObject NPC_Launcher; //Transform position to launch projectiles from
 	public int SpellIndex; 	//What spell the NPC should cast.
 
 	void Awake () {
 		oldNPC_ID=NPC_ID;
-		//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		agent = GetComponent<NavMeshAgent>();
 		anim=GetComponentInChildren<Animator>();
 	}
@@ -134,14 +130,9 @@ public class NPC : object_base {
 	void Start () {
 		base.Start();
 
-		Gob = this.GetComponent<GoblinAI>();
+		//Gob = this.GetComponent<GoblinAI>();
 		ai = this.GetComponentInChildren<AIRig>();
 
-		if (playerUW==null)
-		{
-			playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		}
-		//playerUW = GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
 		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
@@ -149,6 +140,7 @@ public class NPC : object_base {
 
 	void OnDeath()
 	{
+		//If the NPC has a conversation module check it to see if it has any special onDeath code. Eg Tybal, the Gazer on lvl2 and the Golem on Level 6
 		Conversation cnv = this.GetComponent<Conversation>();
 		if (cnv!=null)
 		{
@@ -158,25 +150,18 @@ public class NPC : object_base {
 			}			
 		}
 
-		NPC_DEAD=true;
-		//Dump items on the floor.
-		//
+		NPC_DEAD=true;//Tells the update to execute the NPC death animation
+		//Dump npc inventory on the floor.
 		Container cnt = this.GetComponent<Container>();
 		if (cnt!=null)
 		{
-			Debug.Log ("Spilling " + this.name);
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
-		}
-		else
-		{
-			Debug.Log ("no container to spill");
 		}
 	}
 
-	// Update is called once per frame
 	void Update () {
 		if (Frozen)
-		{
+		{//NPC will not move until timer is complete.
 			if (FrozenUpdate==0)
 			{
 				anim.enabled=false;
@@ -187,18 +172,17 @@ public class NPC : object_base {
 			}
 			state = AI_STATE_STANDING;
 		}
+		//Update the appearance of the NPC
 		UpdateSprite();
 
-		//Gob.isHostile=((npc_attitude==0) && (npc_hp>0));
-		//Gob.HP=npc_hp;
 		if (NPC_DEAD==true)
-		{
+		{//Set the AI death state
 			ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			return;
 		}
 
 		if ( playerUWReady==false)
-		{
+		{//Initialise the relationship of the player to the AI module
 			if(playerUW!=null)
 			{
 				ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
@@ -206,44 +190,32 @@ public class NPC : object_base {
 			}
 		}
 		else
-		{
+		{//The AI is only active when the player is within a certain distance to the player.
 			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=8;
 			if (ai.AI.IsActive==false)
 			{
 				return;
 			}
-			//if (state== NPC.AI_STATE_WALKING)
-			//{//Sets the AI to always be turned towards their next waypoint
 			if (ai.AI.Navigator.CurrentPath!=null)
-			{
+			{//Turns the AI around on their route.
 				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
-				NextPosition.y= this.transform.position.y;
-				//ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint));
+				NextPosition.y= this.transform.position.y;//AI is kept level.
 				ai.AI.WorkingMemory.SetItem<Vector3>("RotateTowards",NextPosition);
 			}
-			//}
-
-
 			if ((npc_hp<=0))
-			{
-				//if ((npc_deathvariable>0) && (npc_deathvariable<32))
-			//	{
-				//	playerUW.quest().QuestVariables[npc_deathvariable]=1;
-			//	}
-
+			{//Begin death handling.
 				OnDeath();
-			//	Debug.Log("NPC Dead");
 			}
 			else
 			{
 				if (npc_attitude==0)
-					{
+					{//Combat begin
 					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
 					}
 				else
-				{
-					ai.AI.WorkingMemory.SetItem<int>("state",state);//Set to idle
-				}
+					{//Friendly states
+						ai.AI.WorkingMemory.SetItem<int>("state",state);//Set to idle
+					}
 			}
 		}
 	}
@@ -252,24 +224,13 @@ public class NPC : object_base {
 
 	public override bool ApplyAttack(int damage)
 	{
-		//npc_attitude=0;
-		npc_attitude=0;
+		npc_attitude=0;//NPC becomes hostile.
 		npc_hp=npc_hp-damage;
-
 		return true;
 	}
 
 	public override bool TalkTo()
-	{
-		//if (npc_attitude==0)
-		//{//Hostile
-		//	ml.Add (playerUW.StringControl.GetString (7,1));
-		//	return false;
-		//}
-		//Debug.Log("Talking to " + WhoAmI) ;
-
-
-		//TODO:Make sure you add the conversation object to the npc!
+	{//Begin a conversation.
 		if ((npc_whoami == 255))
 		{
 			//006~007~001~You get no response.
@@ -278,31 +239,24 @@ public class NPC : object_base {
 		else
 		{
 			if (npc_whoami==0)
-			{
+			{//Generic conversation.
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npc_whoami=256+(objInt.item_id -64);
-				//Debug.Log ("npc who am i is now " + npc_whoami);
 			}
-			Conversation x = (Conversation)this.GetComponent("Conversation_"+npc_whoami);
-			if (x!=null)
+			Conversation cnv = (Conversation)this.GetComponent("Conversation_"+npc_whoami);//Get the conversation object
+			if (cnv!=null)
 			{	
-				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;
+				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
-				x.WhoAmI=npc_whoami;
-
-				Conversation.maincam=Camera.main;
-			//	UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-			//	InteractionModeControl.UpdateNow=true;				
-				//Camera.main.enabled = false;
-				StartCoroutine(x.main ());
-
+				cnv.WhoAmI=npc_whoami;
+				Conversation.maincam=Camera.main;//To control the camera from conversation scripts
+				StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction
 			}
 			else
 			{
+				//You get no response
 				ml.Add (playerUW.StringControl.GetString (7,1));
-				//chains.ActiveControl=0;//Enable UI Elements
-				//chains.Refresh();
 			}
 		}
 		return true;
@@ -311,7 +265,7 @@ public class NPC : object_base {
 	public override bool LookAt ()
 	{//TODO:For specific characters that don't follow the standard naming convention use their conversation for the lookat.
 		string output="";
-	if (objInt.item_id!=123)//Tybal
+		if (objInt.item_id!=123)//Tybal
 		{
 			output = playerUW.StringControl.GetFormattedObjectNameUW(objInt,NPCMoodDesc());
 		}
@@ -341,9 +295,9 @@ public class NPC : object_base {
 	{
 		//Gives a mood string for NPCs
 		//004€005€096€hostile
-			//004€005€097€upset
-				//004€005€098€mellow
-				//004€005€099€friendly
+		//004€005€097€upset
+		//004€005€098€mellow
+		//004€005€099€friendly
 		switch (npc_attitude)
 		{
 		case 0:
@@ -360,6 +314,7 @@ public class NPC : object_base {
 
 
 	void UpdateSprite () {
+		//Updates the appearance of the NPC
 		if (anim == null)
 		{
 			anim = GetComponentInChildren<Animator>();
@@ -369,20 +324,26 @@ public class NPC : object_base {
 			currentState=-1;
 			oldNPC_ID=NPC_ID;
 		}
-		direction = player.transform.position - this.gameObject.transform.position;
+		//Get the relative vector between the player and the npc.
+		direction = playerUW.gameObject.transform.position - this.gameObject.transform.position;
+		//Convert the direction into an angle.
 		angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
 		
+		//Get the relative compass heading of the NPC.
 		currentHeading = CompassHeadings[ (int)Mathf.Round((  (this.gameObject.transform.eulerAngles.y % 360) / 45f)) ];
 		
+		//Get an animation index number for the angle
 		facingIndex = facing(angle);
+		
+		//Check the facing index and the animation range to see if they have changed since the last update.
 		if ((PreviousFacing!=facingIndex) && (AnimRange!=PreviousAnimRange))
 		{
 			PreviousFacing=facingIndex;
 			PreviousAnimRange=AnimRange;
 		}
-		
+		//Offset the compass heading by the players relative heading.
 		CalcedFacing=facingIndex + currentHeading;
-		if (CalcedFacing>=8)
+		if (CalcedFacing>=8)//Make sure it wrapps around correcly between 0 and 7 ->The compass headings.
 		{
 			CalcedFacing=CalcedFacing-8;
 		}
@@ -399,9 +360,10 @@ public class NPC : object_base {
 			CalcedFacing=8-CalcedFacing;
 		}
 		
-		
+		//Calculate an animation index from the facing and the animation range.
 		CalcedFacing=(CalcedFacing+1)*AnimRange;
 		
+		//play the calculated animation.
 		switch (CalcedFacing)
 		{
 		case AI_ANIM_IDLE_FRONT:
@@ -489,9 +451,9 @@ public class NPC : object_base {
 			switch(AnimRange)
 			{
 			case AI_ANIM_DEATH:
-			{playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;}
+				playAnimation (NPC_ID +"_death",AI_ANIM_DEATH);break;
 			case AI_ANIM_ATTACK_BASH:
-			{playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;}
+				playAnimation (NPC_ID +"_attack_bash",AI_ANIM_ATTACK_BASH);break;
 			case AI_ANIM_ATTACK_SLASH:
 				playAnimation (NPC_ID +"_attack_slash",AI_ANIM_ATTACK_SLASH);break;
 			case AI_ANIM_ATTACK_THRUST:
@@ -570,7 +532,7 @@ public class NPC : object_base {
 
 
 	void playAnimation(string pAnim, int newState)
-	{
+	{//Checks if a new animation is needed and if so run it.
 		if (newState!=currentState)
 		{
 			if (Frozen)
@@ -585,9 +547,11 @@ public class NPC : object_base {
 	}
 
 	public void ExecuteAttack()
-	{
+	{//NPC tries to hit the player.
 		float weaponRange=1.0f;
-		Ray ray= new Ray(this.transform.position,player.transform.position-this.transform.position);
+
+		//NPC tries to raycast at the player.
+		Ray ray= new Ray(this.transform.position,playerUW.gameObject.transform.position-this.transform.position);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
@@ -600,7 +564,6 @@ public class NPC : object_base {
 				if (hit.transform.name == "Gronk")
 				{
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
-					UWCharacter playerUW =hit.transform.GetComponent<UWCharacter>();
 					playerUW.ApplyDamage(5);
 				}
 			}
@@ -608,9 +571,7 @@ public class NPC : object_base {
 	}
 	
 	public void ExecuteMagicAttack()
-	{
+	{//NPC casts a spell.
 		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,UWCharacter.Instance.gameObject,SpellIndex,Magic.SpellRule_TargetVector);
 	}
-
-
 }

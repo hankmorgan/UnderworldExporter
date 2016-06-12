@@ -2,7 +2,16 @@
 using System.Collections;
 
 public class SpellEffect : MonoBehaviour {
-	/*Base class for status effects that occur over time*/
+	/*
+	 * 
+	 * Magic Spell effects that persist  
+	 * 
+	 * Base class for status effects that occur over time
+	 * 
+	 * 
+	*/
+
+	/*Enchantment Effect Ids as taken from the strings file.*/
 	public const int UW1_Spell_Effect_Darkness = 0;
 	public const int UW1_Spell_Effect_BurningMatch = 1;
 	public const int UW1_Spell_Effect_Candlelight = 2;
@@ -222,7 +231,7 @@ public class SpellEffect : MonoBehaviour {
 	public const int UW1_Spell_Effect_PoisonHidden = 491;
 
 
-	//Managed by a spreadsheet!
+	//From a spreadsheet I created. The Icons that match up with the above effects.
 	public static int[] UW1_Spell_Icons=
 	{-1,
 		17,
@@ -718,19 +727,13 @@ public class SpellEffect : MonoBehaviour {
 		-1};
 
 
-
-	//Constants for spell effects icons
-	//public const int SpellEffect_VasInLor=20;
-	//public const int SpellEffect_InLor=17;
-
-
-
-	public int counter;
-	public int EffectId;
-	//public int EffectIcon;//What image index should be used for the spell effect.
+	public int counter;	//The number of ticks the effect last for.
+	public int TickTime =10; //The length of time of a tick.
+	public int EffectId; //One of the above IDs
 	public int Value;//The value for the spell effect. Eg light intensity. The Damage over time etc
-	public bool Active;
-	public bool Permanent;
+	public bool Active;//Is the effect running.
+	public bool Permanent;//Used when an effect is created by equipment.
+	
 	public static UWCharacter playerUW;
 
 	public int EffectIcon()
@@ -738,28 +741,26 @@ public class SpellEffect : MonoBehaviour {
 		return UW1_Spell_Icons[EffectId];
 	}
 
-
 	public virtual void ApplyEffect()
 	{
 		//Code to apply whatever effect is occuring
-		//Debug.Log ("Applying Effect");
 		Active=true;
 	}
 
 	public virtual void EffectOverTime()
 	{
 		//Debug.Log ("DOT on base");
-		//code to apply the periodic changes to the effect. Eg poison drains health etc.
+		//code to apply the periodic changes to the effect. Eg poison drains health, staged effects.
 	}
 
 	public virtual void CancelEffect()
-	{//End the effect. By default it will destroy the object.
+	{//End the effect. By default it will destroy this spell effect.
 		Active=false;
 		Component.DestroyImmediate (this);
 	}
 
 	public virtual void Go()
-	{
+	{//Start the spell effect
 		if (counter==999)
 		{
 			Permanent=true;
@@ -769,13 +770,15 @@ public class SpellEffect : MonoBehaviour {
 	}
 
 	public IEnumerator timer() {
+		//Timer loop for the effect.
 		while (Active==true)
 		{
-			yield return new WaitForSeconds(10); 
+			yield return new WaitForSeconds(TickTime); 
 			if (!Permanent)
 			{
 				counter--;
 			}
+
 			if (counter<=0)
 			{
 				Active=false;
@@ -792,13 +795,12 @@ public class SpellEffect : MonoBehaviour {
 	}
 
 	public virtual string Status()
-		{//The description of the effect.
+		{//The debug status of the effect.
 			return "The spell effect has "+ counter + " remaining";
 		}
 
 	public string getSpellDescription()
-	{//Spell is: stable?
-		//Debug.Log ("getting desc");
+	{//Describes the spell and how stable the spell is.
 		return playerUW.StringControl.GetString (6,EffectId);
 	}
 

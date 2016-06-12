@@ -2,7 +2,12 @@
 using System.Collections;
 
 public class enchantment_base : object_base {
-
+		/*
+		 * 
+		 * enchantments.cs Base class for enchantments.
+		 * 
+		 * /
+	
 	/*
  4.2.1  Enchantments
 
@@ -33,6 +38,8 @@ public class enchantment_base : object_base {
 
 	protected virtual int GetActualSpellIndex()
 	{
+		//Calculated the effect id of the enchantment. As in the above notes from UWformats.txt
+		
 		int index=objInt.Link-512;
 		if ( objInt.ItemType != ObjectInteraction.RING)
 		{
@@ -54,7 +61,7 @@ public class enchantment_base : object_base {
 
 
 	public override bool LookAt ()
-	{
+	{//Look descriptions for different enchantable objects.
 		string desc;
 		
 		switch (objInt.item_id)
@@ -80,6 +87,4 @@ public class enchantment_base : object_base {
 		}
 		return true;
 	}
-
-
 }

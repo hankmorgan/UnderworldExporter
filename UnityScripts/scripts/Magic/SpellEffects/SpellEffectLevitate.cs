@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class SpellEffectLevitate : SpellEffect {
-	
 
-	
 	public override void ApplyEffect ()
 	{
 		if (playerUW==null)
@@ -19,7 +17,7 @@ public class SpellEffectLevitate : SpellEffect {
 	public override void CancelEffect ()
 	{
 		playerUW.isFlying=false;
-		//TODO:The effect changes to a slow fall
+		//The effect changes to a slow fall
 		base.CancelEffect();
 		playerUW.isFloating=true;
 		playerUW.flySpeed=0;

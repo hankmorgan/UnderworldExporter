@@ -842,9 +842,7 @@ public class Magic : MonoBehaviour {
 			//= new GameObject(hit.transform.name + "_impact");
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
-			imp.FrameNo=40;
-			imp.EndFrame=44;
-			StartCoroutine(imp.Animate());	
+			StartCoroutine(imp.Animate(40,44));	
 			
 			//NPC npc = hit.transform.gameObject.GetComponent<NPC>();
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);

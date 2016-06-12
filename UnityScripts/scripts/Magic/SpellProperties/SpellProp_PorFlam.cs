@@ -5,7 +5,7 @@ public class SpellProp_PorFlam : SpellProp {
 	//Fireball
 	protected int splashDamage;//Damage applied to the explosion.
 	protected float splashDistance;
-	protected int SecondaryFrameNo;
+	protected int SecondaryStartFrame;
 	protected int SecondaryEndFrame;
 	public override void init ()
 	{
@@ -17,7 +17,7 @@ public class SpellProp_PorFlam : SpellProp {
 		splashDistance=1.0f;
 		impactFrameStart=21;
 		impactFrameEnd=25;
-		SecondaryFrameNo=31;
+		SecondaryStartFrame=31;
 		SecondaryEndFrame=35;
 	}
 
@@ -26,17 +26,14 @@ public class SpellProp_PorFlam : SpellProp {
 	{
 		base.onImpact (tf);
 		//A big old explosion
-				for (int i=0;i<3;i++)
-				{//The flames
-						Vector3 pos = tf.position+(Random.insideUnitSphere*0.5f);
-						GameObject hitimpact = new GameObject("_impact");
-						hitimpact.transform.position=pos;//ray.GetPoint(weaponRange/0.7f);
-						Impact imp= hitimpact.AddComponent<Impact>();
-						imp.FrameNo= SecondaryFrameNo;
-						imp.EndFrame=SecondaryEndFrame;
-						imp.go();
-
-				}
+		for (int i=0;i<3;i++)
+		{//The flames
+			Vector3 pos = tf.position+(Random.insideUnitSphere*0.5f);
+			GameObject hitimpact = new GameObject("_impact");
+			hitimpact.transform.position=pos;//ray.GetPoint(weaponRange/0.7f);
+			Impact imp= hitimpact.AddComponent<Impact>();
+			imp.go(SecondaryStartFrame, SecondaryEndFrame);
+		}
 		foreach (Collider Col in Physics.OverlapSphere(tf.position,splashDistance))
 		{
 			if (Col.gameObject!=tf.gameObject)			

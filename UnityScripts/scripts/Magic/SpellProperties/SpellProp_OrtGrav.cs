@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SpellProp_OrtGrav : SpellProp {
-
+	//Electric bolt
 	public override void init ()
 	{
 		base.init ();
