@@ -129,7 +129,7 @@ public class NPC : object_base {
 	// Use this for initialization
 	void Start () {
 		base.Start();
-
+		this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
 		ai = this.GetComponentInChildren<AIRig>();
 

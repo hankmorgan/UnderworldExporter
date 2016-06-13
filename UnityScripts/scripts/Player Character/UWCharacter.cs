@@ -31,11 +31,13 @@ public class UWCharacter : Character {
 	public bool isFlying;
 	public bool isRoaming;
 	public float flySpeed;
+	public float walkSpeed;
 	public bool isFloating;
 	public bool isWaterWalking;
 	public bool onGround;//Not currently used.
 	public bool isTelekinetic;
 	public bool isLeaping;
+	
 	public int Resistance; //DR from spells.
 	public bool FireProof;//Takes no damage from lava
 
@@ -43,6 +45,7 @@ public class UWCharacter : Character {
 	public int FoodLevel; //0-35 range.
 	public int Fatigue;   //0-29 range
 	public bool Poisoned;
+	public bool Paralyzed;
 
 	//Character skills
 	public Skills PlayerSkills;
@@ -221,7 +224,8 @@ public class UWCharacter : Character {
 				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
 			}
 		}
-
+		playerMotor.enabled=!Paralyzed;
+		
 		if (isFlying)
 		{//Flying spell
 			playerMotor.movement.maxFallSpeed=0.0f;
@@ -244,10 +248,11 @@ public class UWCharacter : Character {
 			else
 			{
 				playerMotor.movement.maxFallSpeed=20.0f;//Default
-				playerMotor.movement.maxForwardSpeed=3.0f;
+				playerMotor.movement.maxForwardSpeed=walkSpeed;
 			}
 		}
 
+		
 		if (isLeaping)
 		{//Jump spell
 			playerMotor.jumping.baseHeight=1.2f;
@@ -272,7 +277,10 @@ public class UWCharacter : Character {
 
 		if (playerHud.window.JustClicked==false)
 		{
-			PlayerCombat.PlayerCombatUpdate();
+			if(Paralyzed==false)
+			{
+					PlayerCombat.PlayerCombatUpdate();					
+			}			
 		}
 
 

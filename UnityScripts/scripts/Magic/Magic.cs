@@ -426,7 +426,7 @@ public class Magic : MonoBehaviour {
 		case "An Ex Por"://Paralyze
 		{
 			SetSpellCost(6);
-			Debug.Log(MagicWords+ " Paralyze Cast");
+			Cast_AnExPor(caster);
 			break;
 		}//AEP
 		case "Vas Ort Grav"://Sheet Lightning
@@ -829,22 +829,11 @@ public class Magic : MonoBehaviour {
 		{
 			//Apply a impact effect to the npc
 			GameObject hitimpact ; 
-			//if (hit==null)
-			//{
-			//	hitimpact= new GameObject(hit.transform.name + "_impact");
-			//	hitimpact.transform.position=hit.point;
-			//}
-			//else
-			//{
 			hitimpact= new GameObject(npc.transform.name + "_impact");
 			hitimpact.transform.position= npc.transform.position;
-			//}
-			//= new GameObject(hit.transform.name + "_impact");
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
 			StartCoroutine(imp.Animate(40,44));	
-			
-			//NPC npc = hit.transform.gameObject.GetComponent<NPC>();
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 			if (EffectSlot!=-1)
 			{
@@ -852,6 +841,30 @@ public class Magic : MonoBehaviour {
 				sep.Value=10;
 				sep.counter=5;
 				sep.isNPC=true;
+				sep.Go ();
+			}
+		}
+	}
+
+	void Cast_AnExPor(GameObject caster)
+	{//Paralyze
+		RaycastHit hit= new RaycastHit();
+		NPC npc = GetNPCTargetRandom(caster, ref hit);
+		if (npc != null)
+		{
+			//Apply a impact effect to the npc
+			GameObject hitimpact ; 
+			hitimpact= new GameObject(npc.transform.name + "_impact");
+			hitimpact.transform.position= npc.transform.position;
+			hitimpact.transform.position=hit.point;
+			Impact imp= hitimpact.AddComponent<Impact>();
+			StartCoroutine(imp.Animate(40,44));	
+			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+			if (EffectSlot!=-1)
+			{
+				SpellEffectParalyze sep= (SpellEffectParalyze)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Paralyze);
+				sep.isNPC=true;
+				sep.counter=5;
 				sep.Go ();
 			}
 		}
@@ -1142,7 +1155,6 @@ public class Magic : MonoBehaviour {
 	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
 	{//Poison
 		SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		//caster.AddComponent<SpellEffectPoison>();
 		sep.Value=value;//Poison will damage the player for 100 hp over it's duration
 		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
 		if (caster.name!="Gronk")
@@ -1150,6 +1162,17 @@ public class Magic : MonoBehaviour {
 			sep.isNPC=true;
 		}
 		//	
+		sep.Go ();
+	}
+
+	public void Cast_Paralyze(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	{//Poison
+		SpellEffectParalyze sep = (SpellEffectParalyze)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		sep.counter=counter; //It will run for x ticks. 
+		if (caster.name!="Gronk")
+		{
+			sep.isNPC=true;
+		}
 		sep.Go ();
 	}
 
@@ -2052,9 +2075,26 @@ public class Magic : MonoBehaviour {
 			break;
 		case SpellEffect.UW1_Spell_Effect_Paralyze:
 		case SpellEffect.UW1_Spell_Effect_Paralyze_alt01:
-			//NPC only
-			Debug.Log ("paralyse enchantment");
-			SpellResultType=0;
+			//Can effect player and npc
+			//TODO: does this spell work from wands and the like. If so do I need to figure out targetting.
+			//Enchantment spells come in as target self. Presumably there is one version that is player paralyzes themselves
+			//and another where it is get random target. For now paralyze self :)
+			switch(SpellRule)
+			{
+			case SpellRule_TargetOther:
+					if (target!=null)
+					{
+						if (PassiveArrayIndex!=-1)
+						{
+							Cast_Paralyze (target,other,EffectId,PassiveArrayIndex,10);SpellResultType=0;
+						}
+					}break;
+			case SpellRule_TargetSelf:
+					if (PassiveArrayIndex!=-1)
+					{
+						Cast_Paralyze (caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10);SpellResultType=1;
+					}break;
+			}
 			break;
 		case SpellEffect.UW1_Spell_Effect_Ally:
 		case SpellEffect.UW1_Spell_Effect_Ally_alt01:
