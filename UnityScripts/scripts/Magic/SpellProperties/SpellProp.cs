@@ -22,6 +22,11 @@ public class SpellProp : MonoBehaviour {
 	public int impactFrameEnd;//What impact image is played on a miss.
 	public static UWCharacter playerUW;
 
+	void Start()
+	{
+		init();
+	}
+
 	public virtual void init()
 	{
 		//Set spell variables
