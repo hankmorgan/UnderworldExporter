@@ -49,6 +49,11 @@ public class SpellProp : MonoBehaviour {
 			
 	}
 
+	public virtual void onImpactPlayer()
+	{//Special code for when the player trips this spell. Used in rune traps (UW2)
+			
+	}
+
 
 	/* ************Sample enchantment Code *********************
 	public override void onHit (ObjectInteraction objInt)

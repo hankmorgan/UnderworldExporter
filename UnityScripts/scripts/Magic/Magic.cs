@@ -276,7 +276,7 @@ public class Magic : MonoBehaviour {
 		case "In Jux"://Rune of Warding
 		{
 			SetSpellCost(2);
-			Debug.Log(MagicWords+ " Rune of Warding Cast");
+			Cast_InJux(caster);
 			break;
 		}//IJ
 			
@@ -1042,6 +1042,11 @@ public class Magic : MonoBehaviour {
 				}					
 			}
 	}
+
+	void Cast_InJux(GameObject caster)
+	{
+		Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f));
+	}
 	
 	void CastTheFrog(GameObject caster)
 	{//The bullfrog trap. Special spell.
@@ -1151,6 +1156,29 @@ public class Magic : MonoBehaviour {
 			srs.counter=counter;
 			srs.Go ();
 	}	
+
+	void Cast_RuneOfWarding(Vector3 pos)
+	{
+		GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
+		myObj.layer=LayerMask.NameToLayer("Ward");
+		myObj.transform.position = pos;
+		ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_393",true);
+		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_393", "Sprites/OBJECTS_393", "Sprites/OBJECTS_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
+		a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
+		BoxCollider bx=myObj.GetComponent<BoxCollider>();
+		if (bx==null)
+		{
+			bx=myObj.AddComponent<BoxCollider>();	
+		}
+		bx.size=new Vector3(0.2f,0.2f,0.2f);
+		bx.center=new Vector3(0.0f,0.1f,0.0f);
+		bx.isTrigger=true;
+		SpellProp_InJux spIJ = myObj.AddComponent<SpellProp_InJux>();
+		spIJ.init();
+		awt.spellprop=spIJ;
+		//000~001~276~The Rune of Warding is placed. \n
+		playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,276));
+	}
 	
 	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
 	{//Poison
@@ -2280,13 +2308,19 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
 			{
 			Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
+			SpellResultType=0;
 			break;
 			}
-
+		case SpellEffect.UW1_Spell_Effect_RuneofWarding:
+			{
+			Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f));
+			SpellResultType=0;							
+			break;
+			}
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
 			
-		case SpellEffect.UW1_Spell_Effect_RuneofWarding:
+
 		case SpellEffect.UW1_Spell_Effect_SummonMonster:
 			
 		case SpellEffect.UW1_Spell_Effect_DetectMonster:
