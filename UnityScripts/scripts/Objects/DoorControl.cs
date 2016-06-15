@@ -106,28 +106,11 @@ public class DoorControl : object_base {
 					}
 				case ObjectInteraction.SPIKE:
 					{
-					if (Spiked==false)
+						if(Spike())
 						{
-					//000~001~128~You can only spike closed doors.
-					//000~001~129~The door is now spiked closed.
-					//000~001~130~Please select door to spike...
-					//000~001~131~The door is spiked.
-						if (state==false)
-							{//Closed door
-							ml.Add (playerUW.StringControl.GetString(1,129));
-							Spiked=true;
-							objIntUsed.consumeObject();							
-							}
-						else
-							{
-							ml.Add (playerUW.StringControl.GetString(1,128));
-							}						
+							objIntUsed.consumeObject();
 						}
-					else
-						{
-						ml.Add (playerUW.StringControl.GetString(1,131));
-						}
-					return true;
+						break;
 					}
 				default:
 					return false;
@@ -139,7 +122,33 @@ public class DoorControl : object_base {
 		}
 		return true;
 	}
-
+	
+	public bool Spike()
+	{//returns turn if door becomes spiked
+		if (Spiked==false)
+		{
+			//000~001~128~You can only spike closed doors.
+			//000~001~129~The door is now spiked closed.
+			//000~001~130~Please select door to spike...
+			//000~001~131~The door is spiked.
+			if (state==false)
+			{//Closed door
+					ml.Add (playerUW.StringControl.GetString(1,129));
+					Spiked=true;
+					//objIntUsed.consumeObject();			
+					return true;
+			}
+			else
+			{
+			ml.Add (playerUW.StringControl.GetString(1,128));
+			}						
+		}
+		else
+		{
+			ml.Add (playerUW.StringControl.GetString(1,131));
+		}
+		return false;	
+	}
 
 	public override bool Activate()
 	{

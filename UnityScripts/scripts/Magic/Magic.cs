@@ -321,7 +321,7 @@ public class Magic : MonoBehaviour {
 		case "Sanct Jux"://Strengten Door
 		{
 			SetSpellCost(3);
-			Debug.Log(MagicWords+ " Strengten Door Cast");
+			Cast_SanctJux(caster,ready);
 			break;
 		}//SJ
 			
@@ -664,7 +664,31 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-	
+
+		void Cast_SanctJux(GameObject caster, bool Ready)
+		{//Strengthen DOor
+				if (Ready==true)
+				{//Ready the spell to be cast.
+						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
+						playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
+				}
+				else
+				{
+					playerUW.PlayerMagic.ReadiedSpell="";
+					playerUW.CursorIcon=playerUW.CursorIconDefault;
+					Ray ray = getRay (caster);
+					RaycastHit hit = new RaycastHit(); 
+					float dropRange=playerUW.GetUseRange();
+					if (Physics.Raycast(ray,out hit,dropRange))
+					{//The spell has hit something
+							DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
+							if (dc!=null)
+							{
+								dc.Spike();
+							}
+					}
+				}
+		}
 	
 	
 	void Cast_AnNox(GameObject caster)
@@ -2312,11 +2336,26 @@ public class Magic : MonoBehaviour {
 			break;
 			}
 		case SpellEffect.UW1_Spell_Effect_RuneofWarding:
+		case SpellEffect.UW1_Spell_Effect_RuneofWarding_alt01:						
 			{
 			Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f));
 			SpellResultType=0;							
 			break;
 			}
+		case SpellEffect.UW1_Spell_Effect_StrengthenDoor:
+		case SpellEffect.UW1_Spell_Effect_StrengthenDoor_alt01:						
+			{
+			Cast_SanctJux(caster,ready);
+			SpellResultType=0;	
+			break;
+			}
+		case SpellEffect.UW1_Spell_Effect_Tremor:
+		case SpellEffect.UW1_Spell_Effect_Tremor_alt01:
+			{
+				Cast_VasPorYlem(caster);	
+				SpellResultType=0;	
+				break;
+			}						
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
 			
@@ -2324,20 +2363,20 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_SummonMonster:
 			
 		case SpellEffect.UW1_Spell_Effect_DetectMonster:
-		case SpellEffect.UW1_Spell_Effect_StrengthenDoor:
+	
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap:
 		case SpellEffect.UW1_Spell_Effect_NameEnchantment:
 			
 			
-		case SpellEffect.UW1_Spell_Effect_Tremor:
+		
 			
 			
 			
 			
 		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:
-		case SpellEffect.UW1_Spell_Effect_RuneofWarding_alt01:
+		
 
-		case SpellEffect.UW1_Spell_Effect_StrengthenDoor_alt01:
+		
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap_alt01:
 
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead_alt01:
@@ -2380,7 +2419,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Reveal:
 			
 			/*Blank*/
-		case SpellEffect.UW1_Spell_Effect_Tremor_alt01:
+		
 
 			
 		case SpellEffect.UW1_Spell_Effect_MassParalyze:
