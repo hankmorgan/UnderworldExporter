@@ -240,7 +240,8 @@ public class Magic : MonoBehaviour {
 		case "Quas Corp"://Cause Fear
 		{
 			SetSpellCost(2);
-			Debug.Log(MagicWords+ " Cause Fear Cast");
+			//Debug.Log(MagicWords+ " Cause Fear Cast");
+			Cast_QuasCorp(caster);
 			break;
 		}//qc
 		case "Wis Mani"://Detect Monster
@@ -448,13 +449,15 @@ public class Magic : MonoBehaviour {
 		case "In Mani Rel"://Ally
 		{
 			SetSpellCost(7);
-			Debug.Log(MagicWords+ " Ally Cast");
+			//Debug.Log(MagicWords+ " Ally Cast");
+			Cast_InManiRel(caster);
 			break;
 		}//IMR
 		case "Vas An Wis"://Confusion
 		{
 			SetSpellCost(7);
-			Debug.Log(MagicWords+ " Confusion Cast");
+			//Debug.Log(MagicWords+ " Confusion Cast");
+			Cast_VasAnWis(caster);
 			break;
 		}//VAW
 		case "Vas Sanct Lor"://Invisibility
@@ -906,6 +909,97 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
+
+	void Cast_InManiRel(GameObject caster)
+	{//Ally.
+		RaycastHit hit= new RaycastHit();
+		NPC npc = GetNPCTargetRandom(caster, ref hit);
+		if (npc != null)
+		{
+			//Apply a impact effect to the npc
+			GameObject hitimpact ; 
+			hitimpact= new GameObject(npc.transform.name + "_impact");
+			hitimpact.transform.position= npc.transform.position;
+			hitimpact.transform.position=hit.point;
+			Impact imp= hitimpact.AddComponent<Impact>();
+			StartCoroutine(imp.Animate(40,44));	
+			if (npc.gameObject.GetComponent<SpellEffectAlly>()!=null)
+			{//Npc already has this effect. Only allow one cast.
+					npc.gameObject.GetComponent<SpellEffectAlly>().counter=5;//Restart the counter
+			}
+			else
+			{//A new cast
+				int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+				if (EffectSlot!=-1)
+				{
+					SpellEffectAlly sea= (SpellEffectAlly)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Ally);
+					sea.counter=5;
+					sea.Go ();
+				}	
+			}
+
+		}
+	}
+
+	void Cast_VasAnWis(GameObject caster)
+	{//Confusion.
+		RaycastHit hit= new RaycastHit();
+		NPC npc = GetNPCTargetRandom(caster, ref hit);
+		if (npc != null)
+		{
+			//Apply a impact effect to the npc
+			GameObject hitimpact ; 
+			hitimpact= new GameObject(npc.transform.name + "_impact");
+			hitimpact.transform.position= npc.transform.position;
+			hitimpact.transform.position=hit.point;
+			Impact imp= hitimpact.AddComponent<Impact>();
+			StartCoroutine(imp.Animate(40,44));	
+			if (npc.gameObject.GetComponent<SpellEffectConfusion>()!=null)
+			{//Npc already has this effect. Only allow one cast.
+					npc.gameObject.GetComponent<SpellEffectConfusion>().counter=5;//Restart the counter
+			}
+			else
+			{//A new cast
+					int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+					if (EffectSlot!=-1)
+					{
+						SpellEffectConfusion sec= (SpellEffectConfusion)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Confusion);
+						sec.counter=5;
+						sec.Go ();
+					}	
+			}
+		}
+	}
+
+		void Cast_QuasCorp(GameObject caster)
+		{//Confusion.
+			RaycastHit hit= new RaycastHit();
+			NPC npc = GetNPCTargetRandom(caster, ref hit);
+			if (npc != null)
+			{
+				//Apply a impact effect to the npc
+				GameObject hitimpact ; 
+				hitimpact= new GameObject(npc.transform.name + "_impact");
+				hitimpact.transform.position= npc.transform.position;
+				hitimpact.transform.position=hit.point;
+				Impact imp= hitimpact.AddComponent<Impact>();
+				StartCoroutine(imp.Animate(40,44));	
+				if (npc.gameObject.GetComponent<SpellEffectFear>()!=null)
+				{//Npc already has this effect. Only allow one cast.
+					npc.gameObject.GetComponent<SpellEffectFear>().counter=5;//Restart the counter
+				}
+				else
+				{//A new cast
+					int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+					if (EffectSlot!=-1)
+					{
+						SpellEffectFear sef= (SpellEffectFear)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_CauseFear);
+						sef.counter=5;
+						sef.Go ();
+					}	
+				}
+			}
+		}
 
 	void Cast_AnExPor(GameObject caster)
 	{//Paralyze
@@ -1451,8 +1545,7 @@ public class Magic : MonoBehaviour {
 			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_Speed:
-		case SpellEffect.UW1_Spell_Effect_Haste:
-			
+		case SpellEffect.UW1_Spell_Effect_Haste:			
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectSpeed>();
 			//Todo
 			break;
@@ -1499,6 +1592,10 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Confusion:
 		case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectConfusion>();
+			break;
+		case SpellEffect.UW1_Spell_Effect_CauseFear:
+		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:	
+			ActiveSpellArray[index]=caster.AddComponent<SpellEffectFear>();
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
 		case SpellEffect.UW1_Spell_Effect_Accuracy:
@@ -2188,13 +2285,13 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Ally:
 		case SpellEffect.UW1_Spell_Effect_Ally_alt01:
 			//NPC only
-			Debug.Log ("ally enchantment");
+			Cast_InManiRel(caster);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Confusion:
 		case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
 			//NPC only
-			Debug.Log ("Confusion enchantment");
+			Cast_VasAnWis(caster);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
@@ -2396,11 +2493,17 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_SummonMonster:
 		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:		
 				{
-					Cast_KalMani(caster);
-					SpellResultType=0;
-					break;
+				Cast_KalMani(caster);
+				SpellResultType=0;
+				break;
 				}
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
+		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:						
+				{
+				Cast_QuasCorp(caster);
+				SpellResultType=0;
+				break;
+				}
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
 			
 
@@ -2454,7 +2557,7 @@ public class Magic : MonoBehaviour {
 		
 			
 		case SpellEffect.UW1_Spell_Effect_Curse_alt01:
-		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:
+		
 		case SpellEffect.UW1_Spell_Effect_Reveal_alt01:
 		case SpellEffect.UW1_Spell_Effect_Curse_alt02:
 		

@@ -11,6 +11,11 @@ public class NPC : object_base {
 		 * 
 		 */
 	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
+		//attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+	public const int AI_ATTITUDE_HOSTILE = 0 ;
+	public const int AI_ATTITUDE_UPSET = 1 ;
+	public const int AI_ATTITUDE_MELLOW = 2 ;
+	public const int AI_ATTITUDE_FRIENDLY = 3 ;
 
    //Animations are clasified by number
 	public const int AI_RANGE_IDLE = 1 ;
