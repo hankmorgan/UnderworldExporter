@@ -32,6 +32,7 @@ public class UWCharacter : Character {
 	public bool isRoaming;
 	public float flySpeed;
 	public float walkSpeed;
+	public float speedMultiplier=1.0f;
 	public bool isFloating;
 	public bool isWaterWalking;
 	public bool onGround;//Not currently used.
@@ -230,7 +231,7 @@ public class UWCharacter : Character {
 		if (isFlying)
 		{//Flying spell
 			playerMotor.movement.maxFallSpeed=0.0f;
-			playerMotor.movement.maxForwardSpeed=flySpeed;
+			playerMotor.movement.maxForwardSpeed=flySpeed*speedMultiplier;
 			if ((Input.GetKeyDown(KeyCode.R)) || (Input.GetKey(KeyCode.R)))
 			{//Fly up
 				this.GetComponent<CharacterController>().Move(new Vector3(0,0.2f,0));
@@ -249,7 +250,7 @@ public class UWCharacter : Character {
 			else
 			{
 				playerMotor.movement.maxFallSpeed=20.0f;//Default
-				playerMotor.movement.maxForwardSpeed=walkSpeed;
+				playerMotor.movement.maxForwardSpeed=walkSpeed*speedMultiplier;
 			}
 		}
 

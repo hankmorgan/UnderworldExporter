@@ -310,7 +310,8 @@ public class Magic : MonoBehaviour {
 		case "Rel Tym Por"://Speed
 		{
 			SetSpellCost(3);
-			Debug.Log(MagicWords+ " Speed Cast");
+			//Debug.Log(MagicWords+ " Speed Cast");
+			Cast_RelTymPor(caster);
 			break;
 		}//rtp
 		case "Ylem Por"://Water Walk
@@ -1091,6 +1092,20 @@ public class Magic : MonoBehaviour {
 		}
 	}
 	
+	void Cast_RelTymPor(GameObject caster)
+	{//Speed
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Speed (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Speed,SpellEffectSlot, 5, 1.2f);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}	
+
+
 	void Cast_YlemPor(GameObject caster)
 	{//Waterwalk
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1366,23 +1381,27 @@ public class Magic : MonoBehaviour {
 		seft.Go ();
 	}
 
-
 	public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
 	{//Telekenisis
 		SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
 		setk.counter=counter; //It will run for x ticks. 
 		setk.Go ();
-	}
-	
+	}	
 	
 	public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
 	{//Levitate
 		SpellEffectLevitate sep = (SpellEffectLevitate)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		//caster.AddComponent<SpellEffectPoison>();
-		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
+		sep.counter=counter; 
 		sep.Go ();
 	}
-	
+
+	public void Cast_Speed(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, float multiplier)
+	{//Speed
+		SpellEffectSpeed ses = (SpellEffectSpeed)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
+		ses.counter=counter;
+		ses.speedMultiplier=multiplier;
+		ses.Go ();
+	}	
 	
 	public void Cast_WaterWalk(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
 	{//Levitate
@@ -2179,8 +2198,12 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Speed:
 		case SpellEffect.UW1_Spell_Effect_Haste:
 			//player only
-			Debug.Log ("Speed enchantment");
-			SpellResultType=0;
+			if (ActiveArrayIndex!=-1)
+			{
+					Cast_Speed(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10,1.2f);
+					SpellResultType=2;
+			}
+			break;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Telekinesis:
 		case SpellEffect.UW1_Spell_Effect_Telekinesis_alt01:
