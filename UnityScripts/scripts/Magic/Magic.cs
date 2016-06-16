@@ -473,7 +473,7 @@ public class Magic : MonoBehaviour {
 		case "Kal Mani"://Monster Summoning
 		{
 			SetSpellCost(7);
-			Debug.Log(MagicWords+ " Monster Summoning Cast");
+			Cast_KalMani(caster);
 			break;
 		}//KM
 		case "Ort An Quas"://Reveal
@@ -777,6 +777,43 @@ public class Magic : MonoBehaviour {
 			WindowDetect.UnFreezeMovement(myObj);
 		}
 	}
+
+		void Cast_KalMani(GameObject caster)
+		{//Summon monster
+			Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			//Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit = new RaycastHit(); 
+			float dropRange=1.2f;
+			if (!Physics.Raycast(ray,out hit,dropRange))
+			{//No object interferes with the spellcast
+				int ObjectNo = 176 + Random.Range(0,7);
+				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
+				myObj.layer=LayerMask.NameToLayer("NPCs");
+				myObj.tag="NPCs";
+				myObj.transform.position = ray.GetPoint(dropRange);
+				SpellProp_KalMani spKM = new SpellProp_KalMani();
+				spKM.init();
+				
+				ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),"Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
+				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
+				
+				string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
+				string navMeshName="";
+					switch (Regionarr[0].ToUpper())
+					{//Calcualte the nav mesh this npc should use
+					case "LAND":
+							navMeshName="GroundMesh"+Regionarr[1];break;
+					case "LAVA":
+							navMeshName="LavaMesh"+Regionarr[1];break;
+					case "WATER":
+							navMeshName="WaterMesh"+Regionarr[1];break;
+
+					}
+						//TODO:Set up these properties 
+					ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, 5, 1, 1, 0, 4, 0, navMeshName);
+				WindowDetect.UnFreezeMovement(myObj);
+			}
+		}
 	
 	void Cast_InBetMani(GameObject caster)
 	{//Lesser Heal;
@@ -2355,12 +2392,19 @@ public class Magic : MonoBehaviour {
 				Cast_VasPorYlem(caster);	
 				SpellResultType=0;	
 				break;
-			}						
+			}	
+		case SpellEffect.UW1_Spell_Effect_SummonMonster:
+		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:		
+				{
+					Cast_KalMani(caster);
+					SpellResultType=0;
+					break;
+				}
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
 			
 
-		case SpellEffect.UW1_Spell_Effect_SummonMonster:
+				
 			
 		case SpellEffect.UW1_Spell_Effect_DetectMonster:
 	
@@ -2385,7 +2429,7 @@ public class Magic : MonoBehaviour {
 			
 
 			
-		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:
+		
 			
 			
 			/*?*/

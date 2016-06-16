@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RAIN.BehaviorTrees;
+using RAIN.Core;
+using RAIN.Minds;
+using RAIN.Navigation;
+
 
 public class ObjectInteraction : MonoBehaviour {
 
@@ -962,4 +967,405 @@ public class ObjectInteraction : MonoBehaviour {
 				UpdateAnimation();
 				return true;		
 		}
+
+
+		public static void CreateNPC(GameObject myObj, string NPC_ID, string EditorSprite ,int npc_whoami)
+		{
+			myObj.layer=LayerMask.NameToLayer("NPCs");
+			myObj.tag="NPCs";
+			GameObject myInstance = Resources.Load("AI_PREFABS/AI_LAND") as GameObject;
+			GameObject newObj = (GameObject)GameObject.Instantiate(myInstance);
+			newObj.name = myObj.name + "_AI";
+			newObj.transform.position=Vector3.zero; //new Vector3(0,0,0);
+			newObj.transform.parent=myObj.transform;
+			newObj.transform.localPosition=Vector3.zero; //new Vector3(0,0,0);
+			AIRig ai = newObj.GetComponent<AIRig>();
+			ai.AI.Body=myObj;
+
+			NPC npc = myObj.AddComponent<NPC>();
+			npc.NPC_ID=NPC_ID;
+			if (npc_whoami == 0)
+			{
+					npc.npc_whoami=256+(int.Parse (NPC_ID) -64);
+			}
+
+			//Probably only need to add this when an NPC supports ranged attacks?
+			GameObject NpcLauncher = new GameObject("NPC_Launcher");
+			NpcLauncher.transform.position=Vector3.zero; 
+			NpcLauncher.transform.parent=myObj.transform;
+			NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
+			npc.NPC_Launcher=NpcLauncher;
+
+			myInstance = Resources.Load("animation/AI_Base_Animator") as GameObject;
+			newObj = (GameObject)GameObject.Instantiate(myInstance);
+			newObj.name=myObj.name + "_Sprite";
+			newObj.transform.parent=myObj.transform;
+			newObj.transform.position = myObj.transform.position;
+
+			SpriteRenderer mysprite =  newObj.GetComponent<SpriteRenderer>();
+			Sprite image = Resources.Load <Sprite> (EditorSprite);//Loads the sprite.
+
+			mysprite.material= Resources.Load<Material>("Materials/SpriteShader");
+			mysprite.sprite = image;//Assigns the sprite to the object.
+
+			CharacterController cap  = myObj.GetComponent<CharacterController>();
+			if (cap==null)
+			{
+				cap=myObj.GetComponent<CharacterController>();
+			}
+
+			switch (int.Parse(NPC_ID))
+			{
+			//Big
+			case 70: //a_goblin
+			case 71: //a_goblin
+			case 74: //a_skeleton
+			case 76: //a_goblin
+			case 77: //a_goblin
+			case 78: //a_goblin
+			case 79: //etherealvoidcreatures
+			case 80: //a_goblin
+			case 84: //a_mountainman_mountainmen
+			case 85: //a_green_lizardman_green_lizardmen
+			case 86: //a_mountainman_mountainmen
+			case 88: //a_red_lizardman_red_lizardmen
+			case 89: //a_gray_lizardman_red_lizardmen
+			case 90: //an_outcast
+			case 91: //a_headless_headlesses
+			case 93: //a_fighter
+			case 94: //a_fighter
+			case 95: //a_fighter
+			case 96: //a_troll
+			case 97: //a_ghost
+			case 98: //a_fighter
+			case 99: //a_ghoul
+			case 100: //a_ghost
+			case 101: //a_ghost
+			case 103: //a_mage
+			case 104: //a_fighter
+			case 105: //a_dark_ghoul
+			case 106: //a_mage
+			case 107: //a_mage
+			case 108: //a_mage
+			case 109: //a_mage
+			case 110: //a_ghoul
+			case 111: //a_feral_troll
+			case 112: //a_great_troll
+			case 113: //a_dire_ghost
+			case 114: //an_earth_golem
+			case 115: //a_mage
+			case 116: //a_deep_lurker
+			case 117: //a_shadow_beast
+			case 118: //a_reaper
+			case 119: //a_stone_golem
+			case 120: //a_fire_elemental
+			case 121: //a_metal_golem
+			case 123: //tybal
+			case 124: //slasher_of_veils
+			case 125: //unknown
+			case 126: //unknown
+					cap.isTrigger=false;
+					cap.center = new Vector3(0.0f, 0.4f, 0.0f);
+					cap.radius=0.2f;
+					cap.height=0.8f;
+					break;
+
+					//Medium
+			case 68: //a_giant_spider
+			case 67: //a_giant_rat
+			case 72: //a_giant_rat
+			case 75: //an_imp
+			case 81: //a_mongbat
+			case 83: //a_wolf_spider
+			case 92: //a_dread_spider
+			case 102: //a_gazer
+					cap.isTrigger=false;
+					cap.center = new Vector3(0.0f, 0.5f, 0.0f);
+					cap.radius=0.5f;
+					cap.height=0.5f;
+					break;
+					//Small
+			case 64: //a_rotworm
+			case 65: //a_flesh_slug
+			case 66: //a_cave_bat
+			case 69: //a_acid_slug
+			case 73: //a_vampire_bat
+			case 82: //a_bloodworm
+			case 87: //a_lurker
+			case 122: //a_wisp
+					cap.isTrigger=false;
+					cap.center = new Vector3(0.0f, 0.3f, 0.0f);
+					cap.radius=0.3f;
+					cap.height=0.3f;
+					break;
+			}
+	}
+
+
+		public static void SetNPCProps(GameObject myObj, 
+				int npc_whoami, int npc_xhome, int npc_yhome,
+				int npc_hunger, int npc_health,
+				int npc_hp, int npc_arms, int npc_power ,
+				int npc_goal, int npc_attitude, int npc_gtarg,
+				int npc_talkedto, int npc_level,int npc_name,
+				string NavMeshRegion
+		)
+		{
+				NPC npc = myObj.GetComponent<NPC>();
+				if (npc!=null)
+				{
+
+						if ((npc.npc_whoami==0) && (npc_whoami  != 0))
+						{
+								npc.npc_whoami= npc_whoami;
+						}
+						npc.npc_xhome=npc_xhome;        //  x coord of home tile
+						npc.npc_yhome=npc_yhome;        //  y coord of home tile
+						npc.npc_hunger=npc_hunger;
+						npc.npc_health=npc_health;
+						npc.npc_hp=npc_hp;
+						npc.npc_arms=npc_arms;          // (not used in uw1)
+						npc.npc_power=npc_power;
+						npc.npc_goal=npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
+						npc.npc_attitude=npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+						npc.npc_gtarg=npc_gtarg;         //goal target; 1:player
+						npc.npc_talkedto=npc_talkedto;      // is 1 when player already talked to npc
+						npc.npc_level=npc_level;
+						npc.npc_name=npc_name;       //    (not used in uw1)
+						npc.NavMeshRegion=NavMeshRegion;
+
+						Conversation cnv ;//= myObj.AddComponent<Conversation>();
+						cnv=null;
+						//TODO:Make sure all conversations are added here as implemented.
+						switch (myObj.GetComponent<NPC>().npc_whoami)
+						{
+						case 0:
+						case 207://A worried spectre named warren
+						case 248://Slasher of veils
+						case 255://No conversation/monsters
+						case 256:
+						case 257:
+						case 258:
+						case 259:
+						case 261:
+						case 264:
+						case 265:
+						case 266:
+						case 267:
+						case 270:
+						case 273:
+						case 274:
+						case 275:
+						case 279:
+						case 284:
+						case 283:
+						case 289:
+						case 292:
+						case 293:
+						case 294:
+						case 297:
+						case 298:
+						case 302:
+						case 303:
+						case 304:
+						case 305:
+						case 306:
+						case 308:
+						case 309:
+						case 310:
+						case 311:
+						case 312:
+						case 313:
+								break;
+						case 1://Corby
+								cnv=(Conversation)myObj.AddComponent<Conversation_1>();break;
+						case 2://Shak
+								cnv=(Conversation)myObj.AddComponent<Conversation_2>();break;
+						case 3://Goldthirst
+								cnv=(Conversation)myObj.AddComponent<Conversation_3>();break;
+						case 4://Shanlick
+								cnv=(Conversation)myObj.AddComponent<Conversation_4>();break;
+						case 5://Eyesnack
+								cnv=(Conversation)myObj.AddComponent<Conversation_5>();break;
+						case 6://Marrowsuck
+								cnv=(Conversation)myObj.AddComponent<Conversation_6>();break;
+						case 7://Ketchaval
+								cnv=(Conversation)myObj.AddComponent<Conversation_7>();break;
+						case 8://Retichall
+								cnv=(Conversation)myObj.AddComponent<Conversation_8>();break;
+						case 9://Vernix
+								cnv=(Conversation)myObj.AddComponent<Conversation_9>();break;
+						case 10://Lanugo
+								cnv=(Conversation)myObj.AddComponent<Conversation_10>();break;
+						case 12:// Dorna Ironfist
+								cnv=(Conversation)myObj.AddComponent<Conversation_12>();break;
+						case 13:// Morlock
+								cnv=(Conversation)myObj.AddComponent<Conversation_13>();break;
+						case 14:// Dr Owl
+								cnv=(Conversation)myObj.AddComponent<Conversation_14>();break;
+						case 15://Sseetharee
+								cnv=(Conversation)myObj.AddComponent<Conversation_15>();break;
+						case 16://Ishtass
+								cnv=(Conversation)myObj.AddComponent<Conversation_16>();break;
+						case 17://Sethar Strongarm
+								cnv=(Conversation)myObj.AddComponent<Conversation_17>();break;
+						case 18://Lakshi Longtooth
+								cnv=(Conversation)myObj.AddComponent<Conversation_18>();break;
+						case 19://Hagbard
+								cnv=(Conversation)myObj.AddComponent<Conversation_19>();break;
+						case 20://Gulik
+								cnv=(Conversation)myObj.AddComponent<Conversation_20>();break;
+						case 21://Steeltoe
+								cnv=(Conversation)myObj.AddComponent<Conversation_21>();break;
+						case 22://Golem
+								cnv=(Conversation)myObj.AddComponent<Conversation_22>();break;
+						case 23://Judy
+								cnv=(Conversation)myObj.AddComponent<Conversation_23>();break;
+						case 24://prisoner
+								cnv=(Conversation)myObj.AddComponent<Conversation_24>();break;
+						case 25://Talking door
+								cnv=(Conversation)myObj.AddComponent<Conversation_25>();break;
+						case 27://Garamon
+								cnv=(Conversation)myObj.AddComponent<Conversation_27>();break;
+						case 28://Zak
+								cnv=(Conversation)myObj.AddComponent<Conversation_28>();break;
+						case 64://Jaacar
+								cnv=(Conversation)myObj.AddComponent<Conversation_64>();break;
+						case 65://Eb
+								cnv=(Conversation)myObj.AddComponent<Conversation_65>();break;
+						case 66://Drog
+								cnv=(Conversation)myObj.AddComponent<Conversation_66>();break;
+						case 67://Bragit
+								cnv=(Conversation)myObj.AddComponent<Conversation_67>();break;
+						case 88://Brawnclan
+								cnv=(Conversation)myObj.AddComponent<Conversation_88>();break;
+						case 89://Hewstone
+								cnv=(Conversation)myObj.AddComponent<Conversation_89>();break;
+						case 90://Ironwit
+								cnv=(Conversation)myObj.AddComponent<Conversation_90>();break;
+						case 112://bandit
+								cnv=(Conversation)myObj.AddComponent<Conversation_112>();break;
+						case 113://bandit
+								cnv=(Conversation)myObj.AddComponent<Conversation_113>();break;
+						case 114://Iss'leek
+								cnv=(Conversation)myObj.AddComponent<Conversation_114>();break;
+						case 136://Oradinar
+								cnv=(Conversation)myObj.AddComponent<Conversation_136>();break;
+						case 137://Linnet
+								cnv=(Conversation)myObj.AddComponent<Conversation_137>();break;
+						case 138://Derek
+								cnv=(Conversation)myObj.AddComponent<Conversation_138>();break;
+						case 139://Trisch
+								cnv=(Conversation)myObj.AddComponent<Conversation_139>();break;
+						case 140://Ree
+								cnv=(Conversation)myObj.AddComponent<Conversation_140>();break;
+						case 141://Feznor
+								cnv=(Conversation)myObj.AddComponent<Conversation_141>();break;
+						case 142://Rodrick
+								cnv=(Conversation)myObj.AddComponent<Conversation_142>();break;
+						case 143://Biden
+								cnv=(Conversation)myObj.AddComponent<Conversation_143>();break;
+						case 144://Rawstag
+								cnv=(Conversation)myObj.AddComponent<Conversation_144>();break;
+						case 146://Doris
+								cnv=(Conversation)myObj.AddComponent<Conversation_146>();break;
+						case 147://Kyle
+								cnv=(Conversation)myObj.AddComponent<Conversation_147>();break;
+						case 148://Cecil
+								cnv=(Conversation)myObj.AddComponent<Conversation_148>();break;
+						case 161://Anjor
+								cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
+						case 162://Kneeknibble
+								cnv=(Conversation)myObj.AddComponent<Conversation_162>();break;
+						case 149://Meredith
+								cnv=(Conversation)myObj.AddComponent<Conversation_149>();break;
+						case 184://Delanrey
+								cnv=(Conversation)myObj.AddComponent<Conversation_184>();break;
+						case 185://Nilpont
+								cnv=(Conversation)myObj.AddComponent<Conversation_185>();break;
+						case 187://Illomo
+								cnv=(Conversation)myObj.AddComponent<Conversation_187>();break;
+						case 188://Gralwart
+								cnv=(Conversation)myObj.AddComponent<Conversation_188>();break;
+						case 189://Shenilor
+								cnv=(Conversation)myObj.AddComponent<Conversation_189>();break;
+						case 190://Bronus
+								cnv=(Conversation)myObj.AddComponent<Conversation_190>();break;
+						case 191://Ranthru
+								cnv=(Conversation)myObj.AddComponent<Conversation_191>();break;
+						case 192://Fyrgen
+								cnv=(Conversation)myObj.AddComponent<Conversation_192>();break;
+						case 193://Louvon
+								cnv=(Conversation)myObj.AddComponent<Conversation_193>();break;
+						case 194://Dominus
+								cnv=(Conversation)myObj.AddComponent<Conversation_194>();break;
+						case 208://Cardon
+								cnv=(Conversation)myObj.AddComponent<Conversation_208>();break;
+						case 209://guard (tybals lair checkpoint)
+								cnv=(Conversation)myObj.AddComponent<Conversation_209>();break;
+						case 210://Narutu
+								cnv=(Conversation)myObj.AddComponent<Conversation_210>();break;
+						case 211://Dantes
+								cnv=(Conversation)myObj.AddComponent<Conversation_211>();break;
+						case 212://Kallistan
+								cnv=(Conversation)myObj.AddComponent<Conversation_212>();break;
+						case 213://Fintor
+								cnv=(Conversation)myObj.AddComponent<Conversation_213>();break;
+						case 214://Bolinard
+								cnv=(Conversation)myObj.AddComponent<Conversation_214>();break;
+						case 215://Smonden
+								cnv=(Conversation)myObj.AddComponent<Conversation_215>();break;
+						case 216://guard (tybals prison troll)
+								cnv=(Conversation)myObj.AddComponent<Conversation_216>();break;
+						case 217://Gurstang
+								cnv=(Conversation)myObj.AddComponent<Conversation_217>();break;
+						case 218://guard (tybals lair checkpoint)
+								cnv=(Conversation)myObj.AddComponent<Conversation_218>();break;
+						case 219://guard (tybals lair checkpoint)
+								cnv=(Conversation)myObj.AddComponent<Conversation_219>();break;
+						case 220://guard (tybals prison)
+								cnv=(Conversation)myObj.AddComponent<Conversation_220>();break;
+						case 221://Imp
+								cnv=(Conversation)myObj.AddComponent<Conversation_221>();break;
+						case 222://guard (tybals lair)
+								cnv=(Conversation)myObj.AddComponent<Conversation_222>();break;
+						case 231://Tybal
+								cnv=(Conversation)myObj.AddComponent<Conversation_231>();break;
+						case 232://Caroso
+								cnv=(Conversation)myObj.AddComponent<Conversation_232>();break;
+						case 262://Generic Green Goblin
+								cnv=(Conversation)myObj.AddComponent<Conversation_262>();break;
+						case 263://Generic Green Goblin
+								cnv=(Conversation)myObj.AddComponent<Conversation_263>();break;
+						case 268://Generic Gray Goblin
+								cnv=(Conversation)myObj.AddComponent<Conversation_268>();break;
+						case 272://Generic Gray Goblin
+								cnv=(Conversation)myObj.AddComponent<Conversation_272>();break;
+						case 276://Generic Mountainman
+								cnv=(Conversation)myObj.AddComponent<Conversation_276>();break;
+						case 277://Generic Lizardman
+								cnv=(Conversation)myObj.AddComponent<Conversation_277>();break;
+						case 280://Generic Lizardman
+								cnv=(Conversation)myObj.AddComponent<Conversation_280>();break;
+						case 281://Generic Gray Lizardman
+								cnv=(Conversation)myObj.AddComponent<Conversation_281>();break;
+						case 282://Generic Outcast
+								cnv=(Conversation)myObj.AddComponent<Conversation_282>();break;
+						case 288://Generic Troll
+								cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
+						case 314://Wisp
+								cnv=(Conversation)myObj.AddComponent<Conversation_288>();break;
+						default:
+								cnv=myObj.AddComponent<Conversation>();
+								Debug.Log ("Conversation "  + myObj.GetComponent<NPC>().npc_whoami + " is not implemented for " + myObj.name );
+								break;
+						}			
+						if (cnv!=null)
+						{
+								cnv.npc= npc;
+						}					
+				}
+		}
+
+
 }

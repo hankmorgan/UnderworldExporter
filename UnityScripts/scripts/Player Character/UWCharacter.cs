@@ -68,6 +68,7 @@ public class UWCharacter : Character {
 	public int MoonGateLevel = 2;//Domain of the mountainmen
 
 	public float lavaDamageTimer;
+	public string currRegion;
 
 	public void Awake()
 	{

@@ -26,7 +26,7 @@ public class Feet : MonoBehaviour {
 	}
 
 	void OnTriggerStay(Collider other) {
-
+		UWCharacter.Instance.currRegion=other.gameObject.tag;
 		if (other.gameObject.layer==landLayer)
 		{
 			TileMap.OnGround=true;  
@@ -89,7 +89,7 @@ public class Feet : MonoBehaviour {
 			}
 		}
 		else
-		{
+		{			
 			if (fallSpeed>0.0f)
 			{
 				//Check fall damage.
