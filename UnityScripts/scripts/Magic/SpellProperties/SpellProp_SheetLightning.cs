@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_VasOrtGrav : SpellProp_PorFlam {
+public class SpellProp_SheetLightning : SpellProp_Fireball {
 	//Sheet Lightning
 
-	public override void init ()
+	public override void init(int effectId)
 	{
-		base.init ();
+		base.init (effectId);
 		ProjectileSprite = "Sprites/object_blank";
 		Force=500.0f;
 		BaseDamage=8;

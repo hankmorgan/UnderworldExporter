@@ -202,13 +202,13 @@ public class Magic : MonoBehaviour {
 		case "In Mani Ylem"://Create Food
 		{
 			SetSpellCost(1);
-			Cast_InManiYlem(caster);
+			Cast_InManiYlem(caster,SpellEffect.UW1_Spell_Effect_CreateFood);
 			break;
 		}//imy
 		case "In Lor":	//Light
 		{
 			SetSpellCost(1);
-			Cast_InLor(caster);
+			Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Candlelight);
 			break;
 		}	//il
 		case "Bet Wis Ex"://Locate
@@ -220,13 +220,13 @@ public class Magic : MonoBehaviour {
 		case "Ort Jux"://Magic Arrow
 		{
 			SetSpellCost(1);
-			Cast_OrtJux(caster, ready);
+			Cast_OrtJux(caster, ready,SpellEffect.UW1_Spell_Effect_MagicArrow);
 			break;
 		}//OJ
 		case "Bet In Sanct"://Resist Blows
 		{
 			SetSpellCost(1);
-			Cast_BetInSanct(caster);
+			Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ResistBlows);
 			break;
 		}//BIS
 		case "Sanct Hur"://Stealth
@@ -241,7 +241,7 @@ public class Magic : MonoBehaviour {
 		{
 			SetSpellCost(2);
 			//Debug.Log(MagicWords+ " Cause Fear Cast");
-			Cast_QuasCorp(caster);
+			Cast_QuasCorp(caster,SpellEffect.UW1_Spell_Effect_CauseFear);
 			break;
 		}//qc
 		case "Wis Mani"://Detect Monster
@@ -253,31 +253,31 @@ public class Magic : MonoBehaviour {
 		case "Uus Por"://Jump
 		{
 			SetSpellCost(2);
-			Cast_UusPor(caster);
+			Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap);
 			break;
 		}//up
 		case "In Bet Mani"://Lesser Heal
 		{
 			SetSpellCost(2);
-			Cast_InBetMani(caster);
+			Cast_Heal(caster,SpellEffect.UW1_Spell_Effect_LesserHeal);
 			break;
 		}//IBM
 		case "Rel Des Por"://Slow Fall
 		{
 			SetSpellCost(2);
-			Cast_RelDesPor(caster);
+			Cast_RelDesPor(caster,SpellEffect.UW1_Spell_Effect_SlowFall);
 			break;
 		}//RDP
 		case "In Sanct"://Thick Skin
 		{
 			SetSpellCost(2);
-			Cast_InSanct(caster);
+			Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ThickSkin);
 			break;
 		}//IS
 		case "In Jux"://Rune of Warding
 		{
 			SetSpellCost(2);
-			Cast_InJux(caster);
+			Cast_InJux(caster,SpellEffect.UW1_Spell_Effect_RuneofWarding);
 			break;
 		}//IJ
 			
@@ -291,14 +291,14 @@ public class Magic : MonoBehaviour {
 		case "Ort Grav"://Lightning
 		{
 			SetSpellCost(3);
-			Cast_OrtGrav(caster, ready);
+			Cast_OrtGrav(caster, ready,SpellEffect.UW1_Spell_Effect_ElectricalBolt);
 			break;
 		}//OG
 		case "Quas Lor"://Night Vision
 		{
 			SetSpellCost(3);
 			/*Debug.Log(MagicWords+ " Night Vision Cast");*/
-			Cast_QuasLor(caster);
+			Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_NightVision);
 			break;
 		}//QL
 		case "An Kal Corp"://Repel Undead
@@ -311,19 +311,19 @@ public class Magic : MonoBehaviour {
 		{
 			SetSpellCost(3);
 			//Debug.Log(MagicWords+ " Speed Cast");
-			Cast_RelTymPor(caster);
+			Cast_RelTymPor(caster,SpellEffect.UW1_Spell_Effect_Speed);
 			break;
 		}//rtp
 		case "Ylem Por"://Water Walk
 		{
 			SetSpellCost(3);
-			Cast_YlemPor(caster);
+			Cast_YlemPor(caster,SpellEffect.UW1_Spell_Effect_WaterWalk);
 			break;
 		}//YP
 		case "Sanct Jux"://Strengten Door
 		{
 			SetSpellCost(3);
-			Cast_SanctJux(caster,ready);
+			Cast_SanctJux(caster,ready,SpellEffect.UW1_Spell_Effect_StrengthenDoor);
 			break;
 		}//SJ
 			
@@ -337,26 +337,25 @@ public class Magic : MonoBehaviour {
 		case "Sanct Flam":// Flameproof
 		{
 			SetSpellCost(4);
-			Cast_SanctFlam(caster);
-
+			Cast_SanctFlam(caster,SpellEffect.UW1_Spell_Effect_Flameproof);
 			break;
 		}//SF
 		case "In Mani"://Heal
 		{
 			SetSpellCost(4);
-			Cast_InMani (caster);
+			Cast_Heal (caster,SpellEffect.UW1_Spell_Effect_Heal);
 			break;
 		}//IM
 		case "Hur Por"://Levitate
 		{	
 			SetSpellCost(4);
-			Cast_HurPor(caster);
+			Cast_LevitateSpells(caster,SpellEffect.UW1_Spell_Effect_Levitate);
 			break;
 		}//HP
 		case "Nox Ylem"://Poison
 		{
 			SetSpellCost(4);
-			Cast_NoxYlem(caster);
+			Cast_NoxYlem(caster,SpellEffect.UW1_Spell_Effect_Poison);
 			break;
 		}//NY
 		case "An Jux"://Remove Trap
@@ -370,8 +369,7 @@ public class Magic : MonoBehaviour {
 		case "Por Flam"://Fireball
 		{
 			SetSpellCost(5);
-			Cast_PorFlam(caster, ready);
-
+			Cast_PorFlam(caster, ready,SpellEffect.UW1_Spell_Effect_Fireball);
 			break;
 		}//PF
 		case "Grav Sanct Por"://Missile Protection
@@ -389,13 +387,13 @@ public class Magic : MonoBehaviour {
 		case "Ex Ylem"://Open
 		{
 			SetSpellCost(5);
-			Cast_ExYlem(caster, ready);
+			Cast_ExYlem(caster, ready,SpellEffect.UW1_Spell_Effect_Open);
 			break;
 		}//EY
 		case "An Nox"://Cure Poison
 		{
 			SetSpellCost(5);
-			Cast_AnNox(caster);
+			Cast_AnNox(caster,SpellEffect.UW1_Spell_Effect_CurePoison);
 			break;
 		}//AN
 		case "An Corp Mani"://Smite Undead
@@ -410,39 +408,39 @@ public class Magic : MonoBehaviour {
 		{
 			SetSpellCost(6);
 			//Debug.Log(MagicWords+ " Daylight Cast");
-			Cast_VasInLor(caster);
+			Cast_LightSpells(caster,SpellEffect.UW1_Spell_Effect_Daylight);
 			break;
 		}//VIL
 		case "Vas Rel Por"://Gate Travel
 		{
 			SetSpellCost(6);
-			Cast_VasRelPor(caster);
+			Cast_VasRelPor(caster,SpellEffect.UW1_Spell_Effect_GateTravel);
 			break;
 		}//VRP
 		case "Vas In Mani"://Greater Heal
 		{
 			SetSpellCost(6);
-			Cast_VasInMani (caster);
+			Cast_Heal (caster,SpellEffect.UW1_Spell_Effect_GreaterHeal);
 			break;
 		}//VIM
 		case "An Ex Por"://Paralyze
 		{
 			SetSpellCost(6);
-			Cast_AnExPor(caster);
+			Cast_AnExPor(caster,SpellEffect.UW1_Spell_Effect_Paralyze);
 			break;
 		}//AEP
 		case "Vas Ort Grav"://Sheet Lightning
 		{
 			SetSpellCost(6);
 			//Debug.Log(MagicWords+ " Sheet Lightning Cast");
-			Cast_VasOrtGrav(caster);
+			Cast_VasOrtGrav(caster,SpellEffect.UW1_Spell_Effect_SheetLightning);
 			break;
 		}//VOG
 		case "Ort Por Ylem"://Telekinesis
 		{
 			SetSpellCost(6);
 			//Debug.Log(MagicWords+ " Telekinesis Cast");
-			Cast_OrtPorYlem(caster);
+			Cast_OrtPorYlem(caster,SpellEffect.UW1_Spell_Effect_Telekinesis);
 			break;
 		}//OPY
 			
@@ -451,33 +449,33 @@ public class Magic : MonoBehaviour {
 		{
 			SetSpellCost(7);
 			//Debug.Log(MagicWords+ " Ally Cast");
-			Cast_InManiRel(caster);
+			Cast_InManiRel(caster,SpellEffect.UW1_Spell_Effect_Ally);
 			break;
 		}//IMR
 		case "Vas An Wis"://Confusion
 		{
 			SetSpellCost(7);
 			//Debug.Log(MagicWords+ " Confusion Cast");
-			Cast_VasAnWis(caster);
+			Cast_VasAnWis(caster,SpellEffect.UW1_Spell_Effect_Confusion);
 			break;
 		}//VAW
 		case "Vas Sanct Lor"://Invisibility
 		{
 			SetSpellCost(7);
-			Debug.Log(MagicWords+ " Invisibility Cast");
+			//Debug.Log(MagicWords+ " Invisibility Cast");
 			break;
 		}//VSL
 		case "Vas Hur Por"://Fly
 		{
 			SetSpellCost(7);
-			Cast_VasHurPor(caster);
-			Debug.Log(MagicWords+ " Fly Cast");
+			Cast_LevitateSpells	(caster,SpellEffect.UW1_Spell_Effect_Fly);
+			//Debug.Log(MagicWords+ " Fly Cast");
 			break;
 		}//VHP
 		case "Kal Mani"://Monster Summoning
 		{
 			SetSpellCost(7);
-			Cast_KalMani(caster);
+			Cast_KalMani(caster,SpellEffect.UW1_Spell_Effect_SummonMonster);
 			break;
 		}//KM
 		case "Ort An Quas"://Reveal
@@ -490,38 +488,38 @@ public class Magic : MonoBehaviour {
 		case "Vas Kal Corp"://Armageddon
 		{
 			SetSpellCost(8);
-			Debug.Log(MagicWords+ " Armageddon Cast");
-			Cast_VasKalCorp(caster);
+			//Debug.Log(MagicWords+ " Armageddon Cast");
+			Cast_VasKalCorp(caster,SpellEffect.UW1_Spell_Effect_Armageddon);
 			break;
 		}//vkc
 		case "Flam Hur"://Flame Wind
 		{
 			SetSpellCost(8);
-			Cast_FlamHur(caster);
+			Cast_FlamHur(caster,SpellEffect.UW1_Spell_Effect_FlameWind);
 			break;
 		}//fh
 		case "An Tym":// Freeze Time
 		{
 			SetSpellCost(8);
-			Cast_AnTym(caster);
+			Cast_AnTym(caster,SpellEffect.UW1_Spell_Effect_FreezeTime);
 			break;
 		}//at
 		case "In Vas Sanct"://Iron Flesh
 		{
 			SetSpellCost(8);
-			Cast_InVasSanct(caster);
+			Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_IronFlesh);
 			break;
 		}//ivs
 		case "Ort Por Wis"://Roaming sight
 		{
 			SetSpellCost(8);
-			Cast_OrtPorWis(caster);
+			Cast_OrtPorWis(caster,SpellEffect.UW1_Spell_Effect_RoamingSight);
 			break;
 		}//opw
 		case "Vas Por Ylem"://Tremor
 		{
 			SetSpellCost(8);
-			Cast_VasPorYlem(caster);
+			Cast_VasPorYlem(caster,SpellEffect.UW1_Spell_Effect_Tremor);
 			break;
 		}//vpy
 		default:
@@ -558,29 +556,15 @@ public class Magic : MonoBehaviour {
 	public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
 	{
 		//Casts a magic spell based on the constructed magic rune string
-		
 		string MagicWords="";
 		//Construct the spell words based on selected runes
-		/*	if ((Rune1>=0) && (Rune1<=23))
-		{
-			MagicWords= Runes[Rune1];
-		}
-		if ((Rune2>=0) && (Rune2<=23))
-		{
-			MagicWords=MagicWords + " " + Runes[Rune2];
-		}
-		if ((Rune3>=0) && (Rune3<=23))
-		{
-			MagicWords=MagicWords + " " + Runes[Rune3];
-		}*/
 		MagicWords=TranslateSpellRune(Rune1,Rune2, Rune3);
 		
-		castSpell (caster, MagicWords,ready);
-		
+		castSpell (caster, MagicWords,ready);		
 	}
 	
 	
-	void Cast_OrtJux(GameObject caster, bool Ready)
+	void Cast_OrtJux(GameObject caster, bool Ready, int EffectID)
 	{//Magic Missile Spell
 		if (Ready==true)
 		{//Ready the spell to be cast.
@@ -589,13 +573,13 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			SpellProp_OrtJux spOJ =new SpellProp_OrtJux();
-			spOJ.init ();
+			SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
+			spOJ.init (EffectID);
 			CastProjectile(caster, (SpellProp)spOJ);
 		}
 	}
 	
-	void Cast_OrtGrav(GameObject caster, bool Ready)
+	void Cast_OrtGrav(GameObject caster, bool Ready, int EffectID)
 	{//Lightning Bolt
 		if (Ready==true)
 		{//Ready the spell to be cast.
@@ -604,44 +588,43 @@ public class Magic : MonoBehaviour {
 		}
 		else
 		{
-			SpellProp_OrtGrav spOG =new SpellProp_OrtGrav();
-			spOG.init ();
+			SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
+			spOG.init (EffectID);
 			CastProjectile(caster, (SpellProp)spOG);
 		}
 	}
 
-	void Cast_PorFlam(GameObject caster, bool Ready)
+	void Cast_PorFlam(GameObject caster, bool Ready, int EffectID)
 	{//Fireball Spell
-			if (Ready==true)
-			{//Ready the spell to be cast.
-				ReadiedSpell= "Por Flam";
-				playerUW.CursorIcon=playerUW.CursorIconTarget;
-			}
-			else
-			{
-				SpellProp_PorFlam spPF =new SpellProp_PorFlam();
-				spPF.init ();
-				CastProjectile(caster, (SpellProp)spPF);
-			}
+		if (Ready==true)
+		{//Ready the spell to be cast.
+			ReadiedSpell= "Por Flam";
+			playerUW.CursorIcon=playerUW.CursorIconTarget;
+		}
+		else
+		{
+			SpellProp_Fireball spPF =new SpellProp_Fireball();
+			spPF.init (EffectID);
+			CastProjectile(caster, (SpellProp)spPF);
+		}
 	}
 
-	void Cast_FlamHur(GameObject caster)
+	void Cast_FlamHur(GameObject caster, int EffectID)
 	{//Flamewind. Casts instantly.
-		SpellProp_FlamHur spFH =new SpellProp_FlamHur();
-		spFH.init ();
+		SpellProp_FlameWind spFH =new SpellProp_FlameWind();
+		spFH.init (EffectID);
 		CastProjectile(caster, (SpellProp)spFH);
 	}
 	
-	void Cast_VasOrtGrav(GameObject caster)
+	void Cast_VasOrtGrav(GameObject caster, int EffectID)
 	{//Sheet lightning
-		SpellProp_VasOrtGrav spVOG =new SpellProp_VasOrtGrav();
-		spVOG.init ();
+		SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
+		spVOG.init (EffectID);
 		CastProjectile(caster, (SpellProp)spVOG);
 	}
 
-	void Cast_ExYlem(GameObject caster, bool Ready)
+	void Cast_ExYlem(GameObject caster, bool Ready, int EffectID)
 	{//Open
-		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		if (Ready==true)
 		{//Ready the spell to be cast.
 			playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
@@ -669,33 +652,33 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-		void Cast_SanctJux(GameObject caster, bool Ready)
-		{//Strengthen DOor
-				if (Ready==true)
-				{//Ready the spell to be cast.
-						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
-				}
-				else
-				{
-					playerUW.PlayerMagic.ReadiedSpell="";
-					playerUW.CursorIcon=playerUW.CursorIconDefault;
-					Ray ray = getRay (caster);
-					RaycastHit hit = new RaycastHit(); 
-					float dropRange=playerUW.GetUseRange();
-					if (Physics.Raycast(ray,out hit,dropRange))
-					{//The spell has hit something
-							DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
-							if (dc!=null)
-							{
-								dc.Spike();
-							}
-					}
-				}
+	void Cast_SanctJux(GameObject caster, bool Ready, int EffectID)
+	{//Strengthen DOor
+		if (Ready==true)
+		{//Ready the spell to be cast.
+			playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
+			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
 		}
+		else
+		{
+			playerUW.PlayerMagic.ReadiedSpell="";
+			playerUW.CursorIcon=playerUW.CursorIconDefault;
+			Ray ray = getRay (caster);
+			RaycastHit hit = new RaycastHit(); 
+			float dropRange=playerUW.GetUseRange();
+			if (Physics.Raycast(ray,out hit,dropRange))
+			{//The spell has hit something
+					DoorControl dc =hit.transform.gameObject.GetComponent<DoorControl>();
+					if (dc!=null)
+					{
+						dc.Spike();
+					}
+			}
+		}
+	}
 	
 	
-	void Cast_AnNox(GameObject caster)
+	void Cast_AnNox(GameObject caster, int EffectID)
 	{//Cure Poison
 		//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 		//Get all instances of poison effect on the character and destroy them.
@@ -707,38 +690,36 @@ public class Magic : MonoBehaviour {
 		playerUW.Poisoned=false;
 	}
 
-	void Cast_AnTym(GameObject caster)
+	void Cast_AnTym(GameObject caster, int EffectID)
 	{
 		//pause the animations on all the npcs
 		GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
 		for (int i = 0; i<=npcs.GetUpperBound(0); i++)
 		{
 			int EffectSlot =CheckPassiveSpellEffectNPC(npcs[i]);
-			//SetSpellEffect(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,EffectSlot,SpellEffect.UW1_Spell_Effect_FreezeTime);
-			Cast_FreezeTime(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,SpellEffect.UW1_Spell_Effect_FreezeTime,EffectSlot,3,0);
+			Cast_FreezeTime(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,EffectID,EffectSlot);
 		}
 	}
-	
-	void Cast_InLor(GameObject caster)
+
+	void Cast_LightSpells(GameObject caster, int EffectID)
 	{//Light
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Light,SpellEffectSlot, 3, 5);//TODO:Standardise light levels.
+			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
 			SpellIncantationFailed(caster);
 		}
 	}
-	
-	void Cast_VasInLor(GameObject caster)
+	/*
+	void Cast_VasInLor(GameObject caster, int EffectID)
 	{//Daylight
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Daylight, SpellEffectSlot, 8, 10);//TODO:Standardise light levels.
+			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID, SpellEffectSlot, 8, 10);//TODO:Standardise light levels.
 			//SetSpellEffect(caster,SpellEffectSlot,20);
 		}
 		else
@@ -747,24 +728,23 @@ public class Magic : MonoBehaviour {
 		}
 	}
 	
-	void Cast_QuasLor(GameObject caster)
+	void Cast_QuasLor(GameObject caster, int EffectID)
 	{//Light
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 
 		if (SpellEffectSlot != -1)
 		{
-			Cast_NightVision (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_NightVision,SpellEffectSlot, 4, 20);
+			Cast_NightVision (caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot, 4, 20);
 		}
 		else
 		{
 			SpellIncantationFailed(caster);
 		}
-	}
+	}*/
 	
-	void Cast_InManiYlem(GameObject caster)
+	void Cast_InManiYlem(GameObject caster, int EffectID)
 	{//Create food
 		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-		//Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit = new RaycastHit(); 
 		float dropRange=1.2f;
 		if (!Physics.Raycast(ray,out hit,dropRange))
@@ -774,7 +754,6 @@ public class Magic : MonoBehaviour {
 			myObj.layer=LayerMask.NameToLayer("UWObjects");
 			myObj.transform.position = ray.GetPoint(dropRange);
 			ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
-			//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_"+ObjectNo, "Sprites/OBJECTS_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
 			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 			Food fd = myObj.AddComponent<Food>();
 			fd.Nutrition=5;//TODO:determine values to use here.
@@ -782,10 +761,9 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-		void Cast_KalMani(GameObject caster)
+		void Cast_KalMani(GameObject caster, int EffectID)
 		{//Summon monster
 			Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-			//Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit = new RaycastHit(); 
 			float dropRange=1.2f;
 			if (!Physics.Raycast(ray,out hit,dropRange))
@@ -795,8 +773,8 @@ public class Magic : MonoBehaviour {
 				myObj.layer=LayerMask.NameToLayer("NPCs");
 				myObj.tag="NPCs";
 				myObj.transform.position = ray.GetPoint(dropRange);
-				SpellProp_KalMani spKM = new SpellProp_KalMani();
-				spKM.init();
+				SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
+				spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster);
 				
 				ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),"Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
 				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
@@ -813,28 +791,35 @@ public class Magic : MonoBehaviour {
 							navMeshName="WaterMesh"+Regionarr[1];break;
 
 					}
-						//TODO:Set up these properties 
-					ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, 5, 1, 1, 0, 4, 0, navMeshName);
+				//TODO:Set up these properties 
+				ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, 5, 1, 1, 0, 4, 0, navMeshName);
 				WindowDetect.UnFreezeMovement(myObj);
 			}
 		}
-	
-	void Cast_InBetMani(GameObject caster)
+
+	/*void Cast_HealSpells(GameObject caster, int EffectID)
+	{
+		SpellProp_Heal healprop=new SpellProp_Heal();
+		healprop.init(EffectID);
+		Cast_Heal(caster,healprop.BaseDamage);
+	}*/
+	/*
+	void Cast_InBetMani(GameObject caster, int EffectID)
 	{//Lesser Heal;
 		Cast_Heal (caster, Random.Range (1,10));
 	}
 	
-	void Cast_InMani(GameObject caster)
+	void Cast_InMani(GameObject caster, int EffectID)
 	{//Heal;
 		Cast_Heal (caster, Random.Range (10,20));
 	}
 	
-	void Cast_VasInMani(GameObject caster)
+	void Cast_VasInMani(GameObject caster, int EffectID)
 	{//Greater Heal;
 		Cast_Heal (caster, Random.Range (20,60));
-	}
+	}*/
 
-	void Cast_VasKalCorp(GameObject caster)
+	void Cast_VasKalCorp(GameObject caster, int EffectID)
 	{//Armageddon//Destroys almost everything!
 		GameObject[] allGameObj =GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
 		for (int i=0; i<= allGameObj.GetUpperBound(0);i++)
@@ -856,13 +841,12 @@ public class Magic : MonoBehaviour {
 	
 	
 	
-	void Cast_UusPor(GameObject caster)
+	void Cast_UusPor(GameObject caster, int EffectID)
 	{//Leap/junp
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Leap (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Leap_alt01,SpellEffectSlot,5);
+			Cast_Leap (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
@@ -871,13 +855,12 @@ public class Magic : MonoBehaviour {
 	}
 	
 	
-	void Cast_RelDesPor(GameObject caster)
+	void Cast_RelDesPor(GameObject caster, int EffectID)
 	{//SLowfall
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		
 		if (SpellEffectSlot != -1)
 		{
-			Cast_SlowFall (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_SlowFall,SpellEffectSlot,3);
+			Cast_SlowFall (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
@@ -886,55 +869,59 @@ public class Magic : MonoBehaviour {
 	}
 	
 	
-	void Cast_NoxYlem(GameObject caster)
+	void Cast_NoxYlem(GameObject caster, int EffectID)
 	{//poison other.
 		RaycastHit hit= new RaycastHit();
 		NPC npc = GetNPCTargetRandom(caster, ref hit);
 		if (npc != null)
 		{
+			SpellProp_Poison poison = new SpellProp_Poison();
+			poison.init(EffectID);						
 			//Apply a impact effect to the npc
 			GameObject hitimpact ; 
 			hitimpact= new GameObject(npc.transform.name + "_impact");
 			hitimpact.transform.position= npc.transform.position;
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
-			StartCoroutine(imp.Animate(40,44));	
+			imp.go(poison.impactFrameStart,poison.impactFrameEnd);	
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 			if (EffectSlot!=-1)
 			{
-				SpellEffectPoison sep= (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Poison);
-				sep.Value=10;
-				sep.counter=5;
+				SpellEffectPoison sep= (SpellEffectPoison)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, EffectID);
+				sep.Value=poison.BaseDamage;
+				sep.counter=poison.counter;
 				sep.isNPC=true;
 				sep.Go ();
 			}
 		}
 	}
 
-	void Cast_InManiRel(GameObject caster)
+	void Cast_InManiRel(GameObject caster, int EffectID)
 	{//Ally.
 		RaycastHit hit= new RaycastHit();
 		NPC npc = GetNPCTargetRandom(caster, ref hit);
 		if (npc != null)
 		{
+			SpellProp_Mind mindspell = new SpellProp_Mind();
+			mindspell.init(EffectID);
 			//Apply a impact effect to the npc
 			GameObject hitimpact ; 
 			hitimpact= new GameObject(npc.transform.name + "_impact");
 			hitimpact.transform.position= npc.transform.position;
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
-			StartCoroutine(imp.Animate(40,44));	
+			imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 			if (npc.gameObject.GetComponent<SpellEffectAlly>()!=null)
 			{//Npc already has this effect. Only allow one cast.
-					npc.gameObject.GetComponent<SpellEffectAlly>().counter=5;//Restart the counter
+				npc.gameObject.GetComponent<SpellEffectAlly>().counter=mindspell.counter;//Restart the counter
 			}
 			else
 			{//A new cast
 				int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 				if (EffectSlot!=-1)
 				{
-					SpellEffectAlly sea= (SpellEffectAlly)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Ally);
-					sea.counter=5;
+					SpellEffectAlly sea= (SpellEffectAlly)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, EffectID);
+					sea.counter=mindspell.counter;
 					sea.Go ();
 				}	
 			}
@@ -942,49 +929,53 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	void Cast_VasAnWis(GameObject caster)
+	void Cast_VasAnWis(GameObject caster, int EffectID)
 	{//Confusion.
 		RaycastHit hit= new RaycastHit();
 		NPC npc = GetNPCTargetRandom(caster, ref hit);
 		if (npc != null)
 		{
+			SpellProp_Mind mindspell = new SpellProp_Mind();
+			mindspell.init(EffectID);						
 			//Apply a impact effect to the npc
-			GameObject hitimpact ; 
+			GameObject hitimpact ;
 			hitimpact= new GameObject(npc.transform.name + "_impact");
 			hitimpact.transform.position= npc.transform.position;
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
-			StartCoroutine(imp.Animate(40,44));	
+			imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 			if (npc.gameObject.GetComponent<SpellEffectConfusion>()!=null)
 			{//Npc already has this effect. Only allow one cast.
 					npc.gameObject.GetComponent<SpellEffectConfusion>().counter=5;//Restart the counter
 			}
 			else
 			{//A new cast
-					int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
-					if (EffectSlot!=-1)
-					{
-						SpellEffectConfusion sec= (SpellEffectConfusion)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Confusion);
-						sec.counter=5;
-						sec.Go ();
-					}	
+				int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
+				if (EffectSlot!=-1)
+				{
+					SpellEffectConfusion sec= (SpellEffectConfusion)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, EffectID);
+					sec.counter=mindspell.counter;
+					sec.Go ();
+				}	
 			}
 		}
 	}
 
-		void Cast_QuasCorp(GameObject caster)
+		void Cast_QuasCorp(GameObject caster, int EffectID)
 		{//Confusion.
 			RaycastHit hit= new RaycastHit();
 			NPC npc = GetNPCTargetRandom(caster, ref hit);
 			if (npc != null)
 			{
+				SpellProp_Mind mindspell = new SpellProp_Mind();
+				mindspell.init(EffectID);							
 				//Apply a impact effect to the npc
 				GameObject hitimpact ; 
 				hitimpact= new GameObject(npc.transform.name + "_impact");
 				hitimpact.transform.position= npc.transform.position;
 				hitimpact.transform.position=hit.point;
 				Impact imp= hitimpact.AddComponent<Impact>();
-				StartCoroutine(imp.Animate(40,44));	
+				imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);		
 				if (npc.gameObject.GetComponent<SpellEffectFear>()!=null)
 				{//Npc already has this effect. Only allow one cast.
 					npc.gameObject.GetComponent<SpellEffectFear>().counter=5;//Restart the counter
@@ -995,55 +986,56 @@ public class Magic : MonoBehaviour {
 					if (EffectSlot!=-1)
 					{
 						SpellEffectFear sef= (SpellEffectFear)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_CauseFear);
-						sef.counter=5;
+						sef.counter=mindspell.counter;
 						sef.Go ();
 					}	
 				}
 			}
 		}
 
-	void Cast_AnExPor(GameObject caster)
+
+	void Cast_AnExPor(GameObject caster,int EffectID)
 	{//Paralyze
 		RaycastHit hit= new RaycastHit();
 		NPC npc = GetNPCTargetRandom(caster, ref hit);
 		if (npc != null)
 		{
+			SpellProp_Mind mindspell = new SpellProp_Mind();
+			mindspell.init(EffectID);						
 			//Apply a impact effect to the npc
 			GameObject hitimpact ; 
 			hitimpact= new GameObject(npc.transform.name + "_impact");
 			hitimpact.transform.position= npc.transform.position;
 			hitimpact.transform.position=hit.point;
 			Impact imp= hitimpact.AddComponent<Impact>();
-			StartCoroutine(imp.Animate(40,44));	
+			imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
 			if (EffectSlot!=-1)
 			{
-				SpellEffectParalyze sep= (SpellEffectParalyze)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, SpellEffect.UW1_Spell_Effect_Paralyze);
+				SpellEffectParalyze sep= (SpellEffectParalyze)SetSpellEffect(npc.gameObject, npc.NPCStatusEffects, EffectSlot, EffectID);
 				sep.isNPC=true;
-				sep.counter=5;
+				sep.counter=mindspell.counter;
 				sep.Go ();
 			}
 		}
 	}
-	
-	
-	void Cast_OrtPorYlem(GameObject caster)
+
+	void Cast_OrtPorYlem(GameObject caster, int EffectID)
 	{//Telekinesis
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Telekinesis (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Telekinesis,SpellEffectSlot, 2);
+			Cast_Telekinesis (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID, SpellEffectSlot);
 		}
 		else
 		{
 			SpellIncantationFailed(caster);
 		}
-	}
+	}	
 	
-	
-	void Cast_VasRelPor(GameObject caster)
-	{
-		//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+	void Cast_VasRelPor(GameObject caster, int EffectID)
+	{//Gate Travel
 		if (playerUW!=null)
 		{
 			if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo)
@@ -1065,39 +1057,46 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
-	
-	void Cast_HurPor(GameObject caster)
-	{//Levitate
+
+	void Cast_LevitateSpells(GameObject caster, int EffectID)
+	{
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Levitate,SpellEffectSlot, 5);
+			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
 			SpellIncantationFailed(caster);
-		}
+		}		
 	}
-	
-	void Cast_VasHurPor(GameObject caster)
+
+	/*void Cast_HurPor(GameObject caster, int EffectID)
+	{//Levitate
+
+	}
+
+	void Cast_VasHurPor(GameObject caster,int EffectID)
 	{//Fly
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		//TODO:SpellProperties and merge HurPor and VasHurPor using same.
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Fly,SpellEffectSlot, 5);
+			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot, 5);
 		}
 		else
 		{
 			SpellIncantationFailed(caster);
 		}
-	}
-	
-	void Cast_RelTymPor(GameObject caster)
+	}*/
+
+	void Cast_RelTymPor(GameObject caster, int EffectID)
 	{//Speed
+		//TODO:SpellProperties
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Speed (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_Speed,SpellEffectSlot, 5, 1.2f);
+			Cast_Speed (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
@@ -1105,13 +1104,13 @@ public class Magic : MonoBehaviour {
 		}
 	}	
 
-
-	void Cast_YlemPor(GameObject caster)
+	void Cast_YlemPor(GameObject caster, int EffectID)
 	{//Waterwalk
+		//TODO:SpellProperties
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_WaterWalk (caster, caster.GetComponent<UWCharacter>().ActiveSpell, SpellEffect.UW1_Spell_Effect_WaterWalk,SpellEffectSlot, 5);
+			Cast_WaterWalk (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
@@ -1119,38 +1118,26 @@ public class Magic : MonoBehaviour {
 		}
 	}
 	
-	void Cast_BetInSanct(GameObject caster)
+	void Cast_ResistanceSpells(GameObject caster, int EffectID)
+		{
+			int SpellEffectSlot = CheckActiveSpellEffect(caster);
+			if (SpellEffectSlot != -1)
+			{
+				Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot);
+			}
+			else
+			{
+				SpellIncantationFailed(caster);
+			}	
+		}
+		/*
+	void Cast_BetInSanct(GameObject caster,int EffectID)
 	{ //Resist blows
+		//TODO:SpellProperties				
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,SpellEffect.UW1_Spell_Effect_ResistBlows,SpellEffectSlot,10,1);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}
-	
-	void Cast_InSanct(GameObject caster)
-	{ //Thick skin
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,SpellEffect.UW1_Spell_Effect_ThickSkin,SpellEffectSlot,10,2);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}
-	
-	void Cast_InVasSanct(GameObject caster)
-	{ //Thick skin
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,SpellEffect.UW1_Spell_Effect_IronFlesh,SpellEffectSlot,10,3);
+			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot,10,1);
 		}
 		else
 		{
@@ -1158,12 +1145,39 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	void Cast_SanctFlam(GameObject caster)
+	void Cast_InSanct(GameObject caster,int EffectID)
+	{ //Thick skin
+		//TODO:SpellProperties	
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot,10,2);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
+
+	void Cast_InVasSanct(GameObject caster, int EffectID)
+	{ //Thick skin
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot,10,3);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}*/
+
+	void Cast_SanctFlam(GameObject caster, int EffectID)
 	{
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
-			Cast_Flameproof(caster, caster.GetComponent<UWCharacter>().ActiveSpell,SpellEffect.UW1_Spell_Effect_Flameproof,SpellEffectSlot,10);
+			Cast_Flameproof(caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
 		}
 		else
 		{
@@ -1171,12 +1185,12 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	void Cast_OrtPorWis(GameObject caster)
+	void Cast_OrtPorWis(GameObject caster, int EffectID)
 	{//Roaming sight
 	int SpellEffectSlot = CheckActiveSpellEffect(caster);
 	if (SpellEffectSlot != -1)
 		{
-			Cast_RoamingSight(caster, caster.GetComponent<UWCharacter>().ActiveSpell,SpellEffect.UW1_Spell_Effect_RoamingSight,SpellEffectSlot,10);
+			Cast_RoamingSight(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot);
 		}
 	else
 		{
@@ -1184,7 +1198,7 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	void Cast_VasPorYlem(GameObject caster)
+	void Cast_VasPorYlem(GameObject caster, int EffectID)
 	{//Tremor. Spawn a couple of arrow traps and set them off?
 			TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
 			for (int i =0 ; i <= Random.Range(1,4);i++)			
@@ -1193,7 +1207,7 @@ public class Magic : MonoBehaviour {
 			
 			Vector3 pos = caster.transform.position+(Random.insideUnitSphere * Random.Range(1,3));
 			//Try and keep it in map range
-				Debug.Log(pos);
+				//Debug.Log(pos);
 			if (tm.ValidTile(pos))
 				{
 					pos.Set(pos.x,4.5f,pos.z); //Put it on the roof.
@@ -1213,12 +1227,12 @@ public class Magic : MonoBehaviour {
 			}
 	}
 
-	void Cast_InJux(GameObject caster)
+	void Cast_InJux(GameObject caster, int EffectID)
 	{
-		Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f));
+		Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f), EffectID);
 	}
 	
-	void CastTheFrog(GameObject caster)
+	void CastTheFrog(GameObject caster, int EffectID)
 	{//The bullfrog trap. Special spell.
 		a_do_trapBullfrog frog= (a_do_trapBullfrog)FindObjectOfType(typeof(a_do_trapBullfrog));
 		if (frog !=null)
@@ -1234,9 +1248,11 @@ public class Magic : MonoBehaviour {
 	
 	/*Common spell effects that are used multiple times*/
 	
-	void Cast_Heal(GameObject caster,int HP)
+	void Cast_Heal(GameObject caster,int EffectID)
 	{
-		//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		SpellProp_Heal healing= new SpellProp_Heal();
+		healing.init(EffectID);
+		int HP = healing.BaseDamage;
 		if (playerUW!=null)
 		{
 			playerUW.CurVIT=playerUW.CurVIT+HP;
@@ -1247,24 +1263,32 @@ public class Magic : MonoBehaviour {
 		}
 	}
 	
-	void Cast_Resistance(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int ResistanceLevel)
+	void Cast_Resistance(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Eg resist blows, thick skin etc
-		SpellEffectResistance sea = (SpellEffectResistance)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectId);
-		sea.Value = ResistanceLevel;
-		sea.counter= counter;
+		SpellProp_Resistance resist = new SpellProp_Resistance();
+		resist.init(EffectID);				
+		SpellEffectResistance sea = (SpellEffectResistance)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectID);
+		sea.Value = resist.BaseDamage;
+		sea.counter= resist.counter;
 		sea.Go ();
 	}
 
 	
-	void Cast_Flameproof(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	void Cast_Flameproof(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Eg resist blows, thick skin etc
-		SpellEffectFlameproof sef = (SpellEffectFlameproof)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectId);
+		SpellProp_ResistanceAgainstType resist = new SpellProp_ResistanceAgainstType();
+		resist.init(EffectID);
+		SpellEffectFlameproof sef = (SpellEffectFlameproof)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectID);
+		sef.counter=resist.counter;
 		sef.Go ();
 	}
 	
-	void Cast_Mana(GameObject caster,int MP)
+	void Cast_Mana(GameObject caster,int EffectID)
 	{//Increase (or decrease) the casters mana
 		//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
+		SpellProp_Mana mn = new SpellProp_Mana();
+		mn.init(EffectID);
+		int MP=mn.BaseDamage;
 		if (playerUW!=null)
 		{
 			playerUW.PlayerMagic.CurMana=playerUW.PlayerMagic.CurMana+MP;
@@ -1275,59 +1299,69 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
-	void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int LightLevel)
+	void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-		LightSource.MagicBrightness=LightLevel;
-		SpellEffect sel= (SpellEffectLight)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectId);
-		sel.Value = LightLevel;
-		sel.counter= counter;
-		//sel.ApplyEffect();//Apply the effect.
+		SpellProp_Light spl = new SpellProp_Light();
+		spl.init(EffectID);		
+		LightSource.MagicBrightness=spl.BaseDamage;
+		SpellEffect sel= (SpellEffectLight)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
+		sel.Value = spl.BaseDamage;
+		sel.counter= spl.counter;
 		sel.Go ();// Apply the effect and Start the timer.
-		//StartCoroutine(sel.timer());
 	}
 	
-	void Cast_NightVision(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int LightLevel)
+	void Cast_NightVision(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-		LightSource.MagicBrightness=LightLevel;
-		SpellEffect nv= (SpellEffectLight)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectId);
-		nv.Value = LightLevel;
-		nv.counter= counter;
+		SpellProp_Light spl = new SpellProp_Light();
+		spl.init(EffectID);						
+		LightSource.MagicBrightness=spl.BaseDamage;
+		SpellEffect nv= (SpellEffectNightVision)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
+		nv.Value = spl.BaseDamage;
+		nv.counter= spl.counter;
 		//sel.ApplyEffect();//Apply the effect.
 		nv.Go ();// Apply the effect and Start the timer.
 		//StartCoroutine(sel.timer());
 	}
 
-	void Cast_Hallucination(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	void Cast_Hallucination(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-			SpellEffect hn= (SpellEffectHallucination)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectId);
-			hn.counter= counter;
-			//sel.ApplyEffect();//Apply the effect.
-			hn.Go ();// Apply the effect and Start the timer.
-			//StartCoroutine(sel.timer());
+		SpellProp_Mind mindspell = new SpellProp_Mind();
+		mindspell.init(EffectID);				
+		SpellEffect hn= (SpellEffectHallucination)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
+		hn.counter= mindspell.counter;
+		//sel.ApplyEffect();//Apply the effect.
+		hn.Go ();// Apply the effect and Start the timer.
+		//StartCoroutine(sel.timer());
 	}
 
-	void Cast_Leap(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	void Cast_Leap(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-		SpellEffect lep = (SpellEffectLeap)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		lep.counter=counter;
+		SpellProp_Movement movement = new SpellProp_Movement();
+		movement.init(EffectID);				
+		SpellEffect lep = (SpellEffectLeap)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		lep.counter=movement.counter;
 		lep.Go ();
 	}
 	
-	void Cast_SlowFall(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	void Cast_SlowFall(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-		SpellEffect slf = (SpellEffectSlowFall)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		slf.counter=counter;
+		SpellProp_Movement movement = new SpellProp_Movement();
+		movement.init(EffectID);				
+		SpellEffect slf = (SpellEffectSlowFall)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		slf.counter=movement.counter;
 		slf.Go ();
 	}	
 
-	void Cast_RoamingSight(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	void Cast_RoamingSight(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-			SpellEffect srs = (SpellEffectRoamingSight)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-			srs.counter=counter;
-			srs.Go ();
+		SpellProp_Mind mindspell = new SpellProp_Mind();
+		mindspell.init(EffectID);				
+		SpellEffect srs = (SpellEffectRoamingSight)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		srs.counter=mindspell.counter;
+		srs.Go ();
 	}	
 
-	void Cast_RuneOfWarding(Vector3 pos)
+	void Cast_RuneOfWarding(Vector3 pos, int EffectID)
 	{
 		GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("Ward");
@@ -1343,18 +1377,20 @@ public class Magic : MonoBehaviour {
 		bx.size=new Vector3(0.2f,0.2f,0.2f);
 		bx.center=new Vector3(0.0f,0.1f,0.0f);
 		bx.isTrigger=true;
-		SpellProp_InJux spIJ = myObj.AddComponent<SpellProp_InJux>();
-		spIJ.init();
+		SpellProp_RuneOfWarding spIJ = myObj.AddComponent<SpellProp_RuneOfWarding>();
+		spIJ.init(EffectID);
 		awt.spellprop=spIJ;
 		//000~001~276~The Rune of Warding is placed. \n
 		playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,276));
 	}
 	
-	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
+	public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Poison
-		SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		sep.Value=value;//Poison will damage the player for 100 hp over it's duration
-		sep.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
+		SpellProp_Poison spp = new SpellProp_Poison();
+		spp.init(EffectID);
+		SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		sep.Value=spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
+		sep.counter=spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
 		if (caster.name!="Gronk")
 		{
 			sep.isNPC=true;
@@ -1363,10 +1399,12 @@ public class Magic : MonoBehaviour {
 		sep.Go ();
 	}
 
-	public void Cast_Paralyze(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
-	{//Poison
-		SpellEffectParalyze sep = (SpellEffectParalyze)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		sep.counter=counter; //It will run for x ticks. 
+	public void Cast_Paralyze(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+	{//Paralyze
+		SpellProp_Mind mindspell = new SpellProp_Mind();
+		mindspell.init(EffectID);	
+		SpellEffectParalyze sep = (SpellEffectParalyze)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		sep.counter=mindspell.counter; //It will run for x ticks. 
 		if (caster.name!="Gronk")
 		{
 			sep.isNPC=true;
@@ -1374,46 +1412,58 @@ public class Magic : MonoBehaviour {
 		sep.Go ();
 	}
 
-	public void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, int value)
+	public void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Freeze Time
-		SpellEffectFreezeTime seft = (SpellEffectFreezeTime)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		seft.counter=counter; //It will run for x ticks. Ie 10 hp damage per tick
+		SpellProp_Mind mindspell = new SpellProp_Mind();
+		mindspell.init(EffectID);				
+		SpellEffectFreezeTime seft = (SpellEffectFreezeTime)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		seft.counter=mindspell.counter; //It will run for x ticks. Ie 10 hp damage per tick
 		seft.Go ();
 	}
 
-	public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Telekenisis
-		SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		setk.counter=counter; //It will run for x ticks. 
+		SpellProp_Mind mindspell = new SpellProp_Mind();
+		mindspell.init(EffectID);					
+		SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		setk.counter=mindspell.counter; //It will run for x ticks. 
 		setk.Go ();
 	}	
 	
-	public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Levitate
-		SpellEffectLevitate sep = (SpellEffectLevitate)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		sep.counter=counter; 
+		SpellProp_Movement flight = new SpellProp_Movement();
+		flight.init(EffectID);
+		SpellEffectLevitate sep = (SpellEffectLevitate)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		sep.counter=flight.counter; 
 		sep.Go ();
 	}
 
-	public void Cast_Speed(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter, float multiplier)
+	public void Cast_Speed(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Speed
-		SpellEffectSpeed ses = (SpellEffectSpeed)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		ses.counter=counter;
-		ses.speedMultiplier=multiplier;
+		SpellProp_Movement movement = new SpellProp_Movement();
+		movement.init(EffectID);
+		SpellEffectSpeed ses = (SpellEffectSpeed)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		ses.counter=movement.counter;
+		ses.speedMultiplier=movement.Speed;
 		ses.Go ();
 	}	
 	
-	public void Cast_WaterWalk(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	public void Cast_WaterWalk(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{//Levitate
-		SpellEffectWaterWalk seww = (SpellEffectWaterWalk)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		seww.counter=counter; //It will run for x ticks. 
+		SpellProp_Movement movement = new SpellProp_Movement();
+		movement.init(EffectID);				
+		SpellEffectWaterWalk seww = (SpellEffectWaterWalk)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		seww.counter=movement.counter; //It will run for x ticks. 
 		seww.Go ();
 	}
 	
-	public void Cast_MazeNavigation(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectId, int EffectSlot, int counter)
+	public void Cast_MazeNavigation(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 	{
-		SpellEffectMazeNavigation sem = (SpellEffectMazeNavigation)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectId);
-		sem.counter=10;
+		SpellProp_Mind mindspell = new SpellProp_Mind();
+		mindspell.init(EffectID);				
+		SpellEffectMazeNavigation sem = (SpellEffectMazeNavigation)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+		sem.counter=mindspell.counter;
 		sem.Go ();
 	}
 	
@@ -1464,13 +1514,13 @@ public class Magic : MonoBehaviour {
 	
 	
 	
-	SpellEffect SetSpellEffect(GameObject caster, SpellEffect[] ActiveSpellArray, int index, int EffectId)
+	SpellEffect SetSpellEffect(GameObject caster, SpellEffect[] ActiveSpellArray, int index, int EffectID)
 	{
 		//Adds an effect to the player from a spell.
 		
 		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 		
-		switch (EffectId)
+		switch (EffectID)
 		{
 		case SpellEffect.UW1_Spell_Effect_Darkness:
 		case SpellEffect.UW1_Spell_Effect_BurningMatch:
@@ -1500,18 +1550,15 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Levitate:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
+		case SpellEffect.UW1_Spell_Effect_Fly:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt02:						
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectLevitate>();
 			break;
 		case SpellEffect.UW1_Spell_Effect_WaterWalk:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt01:
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectWaterWalk>();
-			break;
-		case SpellEffect.UW1_Spell_Effect_Fly:
-		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
-		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
-			ActiveSpellArray[index]=caster.AddComponent<SpellEffectFly>();
-			//Todo
 			break;
 		case SpellEffect.UW1_Spell_Effect_ResistBlows:
 		case SpellEffect.UW1_Spell_Effect_ThickSkin:
@@ -1662,13 +1709,13 @@ public class Magic : MonoBehaviour {
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectRoamingSight>();
 			break;		
 		default:
-			Debug.Log ("effect Id is " + EffectId);
+			Debug.Log ("effect Id is " + EffectID);
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
 			break;
 			
 		}
 		
-		ActiveSpellArray[index].EffectId=EffectId;
+		ActiveSpellArray[index].EffectID=EffectID;
 		return ActiveSpellArray[index];
 	}
 	
@@ -1949,17 +1996,17 @@ public class Magic : MonoBehaviour {
 		return ray;
 	}
 	
-	public SpellEffect CastEnchantmentImmediate(GameObject caster, GameObject target, int EffectId, int SpellRule)
+	public SpellEffect CastEnchantmentImmediate(GameObject caster, GameObject target, int EffectID, int SpellRule)
 	{//Either cast enchantment now or skip straight to fire off a readied spell.
-		return CastEnchantment (caster,target,EffectId,false,SpellRule);
+		return CastEnchantment (caster,target,EffectID,false,SpellRule);
 	}
 	
-	public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectId, int SpellRule)
+	public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, int SpellRule)
 	{//Either cast enchantment now or ready it for casting.
-		return CastEnchantment (caster,target,EffectId,true,SpellRule);
+		return CastEnchantment (caster,target,EffectID,true,SpellRule);
 	}
 	
-	public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectId, bool ready, int SpellRule)
+	public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
 	{//Eventually casts spells from things like fountains, potions, enchanted weapons.
 		//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
 		//Returns true if the effect was applied. 
@@ -1989,7 +2036,7 @@ public class Magic : MonoBehaviour {
 		}
 		
 		
-		switch (EffectId)
+		switch (EffectID)
 		{
 			
 		case SpellEffect.UW1_Spell_Effect_LesserHeal:
@@ -2012,7 +2059,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Heal_alt04:
 		case SpellEffect.UW1_Spell_Effect_GreaterHeal_alt04:
 			//Only ever heal the player
-			Cast_Heal (caster,10);//Get seperate values;
+			Cast_Heal (caster,EffectID);//Get seperate values;
 			SpellResultType=0;
 			break;
 			
@@ -2035,14 +2082,14 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt02:
 		case SpellEffect.UW1_Spell_Effect_RestoreMana_alt03:
 			//Only ever regen the player
-			Cast_Mana(caster,10);
+			Cast_Mana(caster,EffectID);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_MagicLantern:
 		{
 			if (PassiveArrayIndex!=-1)
 			{
-				Cast_Light(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5,10);
+				Cast_Light(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 				SpellResultType=1;
 			}
 			break;
@@ -2063,7 +2110,7 @@ public class Magic : MonoBehaviour {
 			//Only the player needs light.
 			if (ActiveArrayIndex!=-1)
 			{
-				Cast_Light(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5,10);
+				Cast_Light(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 				SpellResultType=2;
 			}
 			break;
@@ -2072,7 +2119,7 @@ public class Magic : MonoBehaviour {
 			//Player only
 			if (PassiveArrayIndex!=-1)
 			{
-				Cast_Leap(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5);
+				Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 			}
 			SpellResultType=1;
 			break;
@@ -2081,7 +2128,7 @@ public class Magic : MonoBehaviour {
 			//TODO: Find out which one of these is a magic ring effect!
 			if (ActiveArrayIndex!=-1)
 			{
-				Cast_Leap(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5);
+				Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 				SpellResultType=2;
 			}
 			//To implement
@@ -2092,7 +2139,7 @@ public class Magic : MonoBehaviour {
 			//Player only
 			if (ActiveArrayIndex!=-1)
 			{
-				Cast_SlowFall(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,5);
+				Cast_SlowFall(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 				SpellResultType=2;
 			}
 			//Todo
@@ -2100,9 +2147,12 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Levitate:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
 		case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
+		case SpellEffect.UW1_Spell_Effect_Fly:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+		case SpellEffect.UW1_Spell_Effect_Fly_alt02:						
 			if (ActiveArrayIndex!=-1)
 			{
-				Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
+				Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 				SpellResultType=2;
 			}
 			break;
@@ -2111,20 +2161,12 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_WaterWalk_alt02:
 			if (ActiveArrayIndex!=-1)
 			{
-				Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
+				Cast_WaterWalk(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 				SpellResultType=2;
 			}
 			break;
-		case SpellEffect.UW1_Spell_Effect_Fly:
-		case SpellEffect.UW1_Spell_Effect_Fly_alt01:
-		case SpellEffect.UW1_Spell_Effect_Fly_alt02:
-			//Will only ever cast on player
-			if (ActiveArrayIndex!=-1)
-			{
-				Cast_Levitate(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
-				SpellResultType=2;
-			}
-			break;
+
+
 		case SpellEffect.UW1_Spell_Effect_ResistBlows:
 		case SpellEffect.UW1_Spell_Effect_ThickSkin:
 		case SpellEffect.UW1_Spell_Effect_IronFlesh:
@@ -2171,7 +2213,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Flameproof:
 			if (ActiveArrayIndex!=-1)
 			{
-			Cast_Flameproof(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
+			Cast_Flameproof(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 			SpellResultType=2;
 			}
 			break;
@@ -2179,7 +2221,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Flameproof_alt02:
 			if (PassiveArrayIndex!=-1)
 			{
-			Cast_Flameproof(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10);
+			Cast_Flameproof(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 			SpellResultType=1;
 			}
 			break;
@@ -2200,8 +2242,8 @@ public class Magic : MonoBehaviour {
 			//player only
 			if (ActiveArrayIndex!=-1)
 			{
-					Cast_Speed(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10,1.2f);
-					SpellResultType=2;
+				Cast_Speed(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+				SpellResultType=2;
 			}
 			break;
 			break;
@@ -2211,7 +2253,7 @@ public class Magic : MonoBehaviour {
 			//player only
 			if (ActiveArrayIndex!=-1)
 			{
-				Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,2);
+				Cast_Telekinesis(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 				SpellResultType=2;
 			}
 			break;
@@ -2219,7 +2261,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
 			//player only
-			Cast_AnTym(target);
+			Cast_AnTym(target,EffectID);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Regeneration:
@@ -2237,19 +2279,19 @@ public class Magic : MonoBehaviour {
 			//Debug.Log ("Maze Navigation enchantment");
 			if (PassiveArrayIndex!=-1)
 			{
-				Cast_MazeNavigation(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10);
+				Cast_MazeNavigation(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 				SpellResultType=1;
 			}
 			break;			
 		case SpellEffect.UW1_Spell_Effect_Hallucination:
 			//player only
-			Cast_Hallucination(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,5);
+			Cast_Hallucination(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 			SpellResultType=1;
 			break;
 		case SpellEffect.UW1_Spell_Effect_NightVision:
 				if (ActiveArrayIndex!=-1)
 				{
-					Cast_NightVision(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,4,16);
+					Cast_NightVision(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 					SpellResultType=2;
 				}
 				break;
@@ -2257,7 +2299,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_NightVision_alt02:
 				if (PassiveArrayIndex!=-1)
 				{
-					Cast_NightVision(caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,4,16);
+					Cast_NightVision(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 					SpellResultType=1;
 				}	
 			break;
@@ -2272,13 +2314,13 @@ public class Magic : MonoBehaviour {
 				{
 					if (PassiveArrayIndex!=-1)
 					{
-						Cast_Poison (target,other,EffectId,PassiveArrayIndex,10,100);SpellResultType=0;
+						Cast_Poison (target,other,EffectID,PassiveArrayIndex);SpellResultType=0;
 					}
 				}break;
 			case SpellRule_TargetSelf:
 				if (PassiveArrayIndex!=-1)
 				{
-					Cast_Poison (caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10,100);SpellResultType=1;
+					Cast_Poison (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=1;
 				}break;
 			}
 			break;
@@ -2295,26 +2337,27 @@ public class Magic : MonoBehaviour {
 					{
 						if (PassiveArrayIndex!=-1)
 						{
-							Cast_Paralyze (target,other,EffectId,PassiveArrayIndex,10);SpellResultType=0;
+							Cast_Paralyze (target,other,EffectID,PassiveArrayIndex);SpellResultType=0;
 						}
 					}break;
 			case SpellRule_TargetSelf:
 					if (PassiveArrayIndex!=-1)
 					{
-						Cast_Paralyze (caster,playerUW.PassiveSpell,EffectId,PassiveArrayIndex,10);SpellResultType=1;
-					}break;
+						Cast_Paralyze (caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);SpellResultType=1;
+					}
+					break;
 			}
 			break;
 		case SpellEffect.UW1_Spell_Effect_Ally:
 		case SpellEffect.UW1_Spell_Effect_Ally_alt01:
 			//NPC only
-			Cast_InManiRel(caster);
+			Cast_InManiRel(caster,EffectID);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_Confusion:
 		case SpellEffect.UW1_Spell_Effect_Confusion_alt01:
 			//NPC only
-			Cast_VasAnWis(caster);
+			Cast_VasAnWis(caster,EffectID);
 			SpellResultType=0;
 			break;
 		case SpellEffect.UW1_Spell_Effect_MinorAccuracy:
@@ -2371,21 +2414,21 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Open:
 		case SpellEffect.UW1_Spell_Effect_Open_alt01:
 			//Cast spell/no spell effect
-			Cast_ExYlem(caster,ready);
+			Cast_ExYlem(caster,ready,EffectID);
 			SpellResultType=0;
 			break;
 			
 		case SpellEffect.UW1_Spell_Effect_CreateFood:
 		case SpellEffect.UW1_Spell_Effect_CreateFood_alt01:
 			//Cast spell/no spell effect
-			Cast_InManiYlem(caster);
+			Cast_InManiYlem(caster,EffectID);
 			SpellResultType=0;
 			break;
 			
 		case SpellEffect.UW1_Spell_Effect_CurePoison:
 		case SpellEffect.UW1_Spell_Effect_CurePoison_alt01:
 			//Cast spell/no spell effect
-			Cast_AnNox(caster);
+			Cast_AnNox(caster,EffectID);
 			SpellResultType=0;
 			break;
 			
@@ -2393,12 +2436,12 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_SheetLightning_alt01:						
 			if (SpellRule!=SpellRule_TargetVector)
 			{
-				Cast_VasOrtGrav(caster);
+				Cast_VasOrtGrav(caster,EffectID);
 			}
 			else
 			{
-				SpellProp_VasOrtGrav spVOG =new SpellProp_VasOrtGrav();
-				spVOG.init ();
+				SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
+				spVOG.init (EffectID);
 				CastProjectile(caster,target,(SpellProp)spVOG);
 			}
 			SpellResultType=0;
@@ -2409,14 +2452,14 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Armageddon:
 		case SpellEffect.UW1_Spell_Effect_Armageddon_alt01:
 			//Cast spell/no spell effect
-			Cast_VasKalCorp(caster);
+			Cast_VasKalCorp(caster,EffectID);
 			SpellResultType=0;
 			break;
 			
 		case SpellEffect.UW1_Spell_Effect_GateTravel:
 		case SpellEffect.UW1_Spell_Effect_GateTravel_alt01:
 			//Cast spell/no spell effect
-			Cast_VasRelPor(caster);
+			Cast_VasRelPor(caster,EffectID);
 			SpellResultType=0;
 			break;
 			
@@ -2424,12 +2467,12 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_MagicArrow_alt01:
 			if (SpellRule!=SpellRule_TargetVector)
 			{
-				Cast_OrtJux(caster,ready);
+				Cast_OrtJux(caster,ready,EffectID);
 			}
 			else
 			{
-				SpellProp_OrtJux spOJ =new SpellProp_OrtJux();
-				spOJ.init ();
+				SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
+				spOJ.init (EffectID);
 				CastProjectile(caster,target, (SpellProp)spOJ);
 			}
 			SpellResultType=0;
@@ -2440,13 +2483,13 @@ public class Magic : MonoBehaviour {
 		{
 			if (SpellRule!=SpellRule_TargetVector)
 			{
-					Cast_OrtGrav(caster,ready);
+				Cast_OrtGrav(caster,ready,EffectID);
 			}
 			else
 			{
-					SpellProp_OrtGrav spOG =new SpellProp_OrtGrav();
-					spOG.init ();
-					CastProjectile(caster,target, (SpellProp)spOG);
+				SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
+				spOG.init (EffectID);
+				CastProjectile(caster,target, (SpellProp)spOG);
 			}
 			SpellResultType=0;
 			break;
@@ -2456,12 +2499,12 @@ public class Magic : MonoBehaviour {
 		{
 			if (SpellRule!=SpellRule_TargetVector)
 			{
-				Cast_PorFlam(caster,ready);
+				Cast_PorFlam(caster,ready,EffectID);
 			}
 			else
 			{
-				SpellProp_PorFlam spPF =new SpellProp_PorFlam();
-				spPF.init ();
+				SpellProp_Fireball spPF =new SpellProp_Fireball();
+				spPF.init (EffectID);
 				CastProjectile(caster,target, (SpellProp)spPF);
 			}
 			SpellResultType=0;
@@ -2473,12 +2516,12 @@ public class Magic : MonoBehaviour {
 		{
 			if (SpellRule!=SpellRule_TargetVector)
 			{
-				Cast_FlamHur(caster);
+				Cast_FlamHur(caster,EffectID);
 			}
 			else
 			{
-				SpellProp_FlamHur spFH =new SpellProp_FlamHur();
-				spFH.init ();
+				SpellProp_FlameWind spFH =new SpellProp_FlameWind();
+				spFH.init (EffectID);
 				CastProjectile(caster,target, (SpellProp)spFH);
 			}
 			SpellResultType=0;
@@ -2488,42 +2531,42 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt01:
 		case SpellEffect.UW1_Spell_Effect_RoamingSight_alt02:
 			{
-			Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectId,ActiveArrayIndex,10);
+			Cast_RoamingSight(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 			SpellResultType=0;
 			break;
 			}
 		case SpellEffect.UW1_Spell_Effect_RuneofWarding:
 		case SpellEffect.UW1_Spell_Effect_RuneofWarding_alt01:						
 			{
-			Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f));
+			Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f),EffectID);
 			SpellResultType=0;							
 			break;
 			}
 		case SpellEffect.UW1_Spell_Effect_StrengthenDoor:
 		case SpellEffect.UW1_Spell_Effect_StrengthenDoor_alt01:						
 			{
-			Cast_SanctJux(caster,ready);
+			Cast_SanctJux(caster,ready,EffectID);
 			SpellResultType=0;	
 			break;
 			}
 		case SpellEffect.UW1_Spell_Effect_Tremor:
 		case SpellEffect.UW1_Spell_Effect_Tremor_alt01:
 			{
-				Cast_VasPorYlem(caster);	
+				Cast_VasPorYlem(caster,EffectID);	
 				SpellResultType=0;	
 				break;
 			}	
 		case SpellEffect.UW1_Spell_Effect_SummonMonster:
 		case SpellEffect.UW1_Spell_Effect_SummonMonster_alt01:		
 				{
-				Cast_KalMani(caster);
+				Cast_KalMani(caster,EffectID);
 				SpellResultType=0;
 				break;
 				}
 		case SpellEffect.UW1_Spell_Effect_CauseFear:
 		case SpellEffect.UW1_Spell_Effect_CauseFear_alt01:						
 				{
-				Cast_QuasCorp(caster);
+				Cast_QuasCorp(caster,EffectID);
 				SpellResultType=0;
 				break;
 				}
@@ -2602,7 +2645,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_theFrog:
 			//Debug.Log ("The frog");
 			//PC only
-			CastTheFrog(caster);
+			CastTheFrog(caster,EffectID);
 			SpellResultType=0;
 			break;
 			
@@ -2637,7 +2680,7 @@ public class Magic : MonoBehaviour {
 			break;
 			
 		default:
-			Debug.Log ("effect Id is " + EffectId);
+			Debug.Log ("effect Id is " + EffectID);
 			SpellResultType=0;
 			//ActiveSpellArray[index]=caster.AddComponent<SpellEffect>();
 			break;

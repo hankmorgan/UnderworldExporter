@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_OrtGrav : SpellProp {
+public class SpellProp_ElectricBolt : SpellProp {
 	//Electric bolt
-	public override void init ()
+	public override void init(int effectId)
 	{
-		base.init ();
+		base.init (effectId);
 		ProjectileSprite = "Sprites/objects_021";
 		Force=200.0f;
 		BaseDamage=8;

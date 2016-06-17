@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class SpellEffectLevitate : SpellEffect {
-
+	public float flySpeed=1.0f;
 	public override void ApplyEffect ()
 	{
 		if (playerUW==null)
@@ -28,9 +28,9 @@ public class SpellEffectLevitate : SpellEffect {
 	{
 		if (Active)
 		{
-			if (playerUW.flySpeed <= 1)
+			if (playerUW.flySpeed <= flySpeed)
 			{
-				playerUW.flySpeed=1;
+				playerUW.flySpeed=flySpeed;
 			}
 			playerUW.isFlying=true;
 		}

@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_FlamHur : SpellProp_PorFlam {
+public class SpellProp_FlameWind : SpellProp_Fireball {
 	//Flame wind. Aka DOOM.
 
-	public override void init ()
+	public override void init(int effectId)
 	{
-		base.init ();
+
+		base.init (effectId);
 		ProjectileSprite = "Sprites/object_blank";
 		Force=500.0f;
 		BaseDamage=16;

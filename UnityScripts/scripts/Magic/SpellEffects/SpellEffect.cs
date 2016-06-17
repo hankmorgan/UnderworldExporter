@@ -729,7 +729,7 @@ public class SpellEffect : MonoBehaviour {
 
 	public int counter;	//The number of ticks the effect last for.
 	public int TickTime =10; //The length of time of a tick.
-	public int EffectId; //One of the above IDs
+	public int EffectID; //One of the above IDs
 	public int Value;//The value for the spell effect. Eg light intensity. The Damage over time etc
 	public bool Active;//Is the effect running.
 	public bool Permanent;//Used when an effect is created by equipment.
@@ -738,7 +738,7 @@ public class SpellEffect : MonoBehaviour {
 
 	public int EffectIcon()
 	{
-		return UW1_Spell_Icons[EffectId];
+		return UW1_Spell_Icons[EffectID];
 	}
 
 	public virtual void ApplyEffect()
@@ -801,7 +801,7 @@ public class SpellEffect : MonoBehaviour {
 
 	public string getSpellDescription()
 	{//Describes the spell and how stable the spell is.
-		return playerUW.StringControl.GetString (6,EffectId);
+		return playerUW.StringControl.GetString (6,EffectID);
 	}
 
 	public void SetPermanent(bool NewVal)

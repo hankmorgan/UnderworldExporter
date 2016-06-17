@@ -23,14 +23,14 @@ public class a_ward_trap : trap_base {
 
 			if (npc!=null)//Has the collision hit an npc
 			{
-					spellprop.init();
-					if(spellprop.BaseDamage!=0)
-					{
-							npc.ApplyAttack(spellprop.BaseDamage);
-					}
-					spellprop.onImpact(npc.transform);
-					spellprop.onHit(npc.gameObject.GetComponent<ObjectInteraction>());
-					Destroy (this.gameObject);
+				spellprop.init(SpellEffect.UW1_Spell_Effect_RuneofWarding);
+				if(spellprop.BaseDamage!=0)
+				{
+						npc.ApplyAttack(spellprop.BaseDamage);
+				}
+				spellprop.onImpact(npc.transform);
+				spellprop.onHit(npc.gameObject.GetComponent<ObjectInteraction>());
+				Destroy (this.gameObject);
 			}
 			else
 			{

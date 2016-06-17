@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_OrtJux : SpellProp {
+public class SpellProp_MagicArrow : SpellProp {
 	//Properties for the Ort Jux spell.
 
-	public override void init ()
+	public override void init(int effectId)
 	{
-		base.init ();
+		base.init (effectId);
 		ProjectileSprite = "Sprites/objects_023";
 		Force=200.0f;
 		BaseDamage=3;

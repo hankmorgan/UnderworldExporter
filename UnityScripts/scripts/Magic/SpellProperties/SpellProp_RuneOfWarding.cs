@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_InJux : SpellProp {
+public class SpellProp_RuneOfWarding : SpellProp {
 	//Rune of Warding
-	public override void init ()
+		public override void init(int effectId)
 	{
-		base.init ();
+		base.init (effectId);
 		//ProjectileSprite = "Sprites/objects_020";
 		//Force=200.0f;
 		BaseDamage=0;

@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_PorFlam : SpellProp {
+public class SpellProp_Fireball : SpellProp {
 	//Fireball
 	protected int splashDamage;//Damage applied to the explosion.
 	protected float splashDistance;
 	protected int SecondaryStartFrame;
 	protected int SecondaryEndFrame;
-	public override void init ()
+	
+	public override void init(int effectId)
 	{
-		base.init ();
+		base.init (effectId);
 		ProjectileSprite = "Sprites/objects_020";
 		Force=200.0f;
 		BaseDamage=16;

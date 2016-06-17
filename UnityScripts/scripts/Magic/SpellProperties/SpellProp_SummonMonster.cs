@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp_KalMani : SpellProp {
+public class SpellProp_SummonMonster : SpellProp {
 		/*
 		 * NPC properties for SummonMonster.
 		 * TODO: Include more advanced monster properties.
@@ -69,9 +69,9 @@ public class SpellProp_KalMani : SpellProp {
 
 	public int RndNPC;
 
-	public override void init ()
+	public override void init(int effectId)
 	{
-		base.init ();
+		base.init (effectId);
 		
 		//Pick a random npc from the list of npcs
 		RndNPC=NPCs[Random.Range(0,NPCs.GetUpperBound(0))];
