@@ -111,6 +111,9 @@ public class NPC : object_base {
 	public bool Frozen;
 	public short FrozenUpdate=0;
 
+	//Enemy types.
+	public bool isUndead; 
+
 	//TODO: The state should be replaced with a combination of the above variables and match what UW does.
 	public int state=0; //Set state when not in combat or dying.
 

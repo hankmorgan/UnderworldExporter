@@ -1013,6 +1013,19 @@ public class ObjectInteraction : MonoBehaviour {
 			{
 				cap=myObj.GetComponent<CharacterController>();
 			}
+			
+			switch(int.Parse(NPC_ID))
+			{
+			case 97: //a_ghost
+			case 99: //a_ghoul
+			case 100: //a_ghost
+			case 101: //a_ghost
+			case 105: //a_dark_ghoul
+			case 110: //a_ghoul	
+			case 113: //a_dire_ghost
+					npc.isUndead=true;
+					break;
+			}
 
 			switch (int.Parse(NPC_ID))
 			{

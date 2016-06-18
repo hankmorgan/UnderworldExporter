@@ -232,7 +232,8 @@ public class Magic : MonoBehaviour {
 		case "Sanct Hur"://Stealth
 		{
 			SetSpellCost(1);
-			Debug.Log(MagicWords+ " Stealth Cast");
+			//Debug.Log(MagicWords+ " Stealth Cast");
+			Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Stealth);
 			break;
 		}//sh
 			
@@ -285,7 +286,8 @@ public class Magic : MonoBehaviour {
 		case "Bet Sanct Lor"://Conceal
 		{
 			SetSpellCost(3);
-			Debug.Log(MagicWords+ " Conceal Cast");
+			//Debug.Log(MagicWords+ " Conceal Cast");
+			Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Conceal);
 			break;
 		}//BSL
 		case "Ort Grav"://Lightning
@@ -399,7 +401,8 @@ public class Magic : MonoBehaviour {
 		case "An Corp Mani"://Smite Undead
 		{
 			SetSpellCost(5);
-			Debug.Log(MagicWords+ " Smite Undead Cast");
+			//Debug.Log(MagicWords+ " Smite Undead Cast");
+			Cast_AnCorpMani(caster,SpellEffect.UW1_Spell_Effect_SmiteUndead);
 			break;
 		}//ACM
 			
@@ -463,6 +466,7 @@ public class Magic : MonoBehaviour {
 		{
 			SetSpellCost(7);
 			//Debug.Log(MagicWords+ " Invisibility Cast");
+			Cast_StealthSpells(caster,SpellEffect.UW1_Spell_Effect_Invisibilty);
 			break;
 		}//VSL
 		case "Vas Hur Por"://Fly
@@ -1006,7 +1010,7 @@ public class Magic : MonoBehaviour {
 			GameObject hitimpact ; 
 			hitimpact= new GameObject(npc.transform.name + "_impact");
 			hitimpact.transform.position= npc.transform.position;
-			hitimpact.transform.position=hit.point;
+			hitimpact.transform.position=hit.point;//TODO: the impact needs to be closer to the player
 			Impact imp= hitimpact.AddComponent<Impact>();
 			imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 			int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
@@ -1019,6 +1023,27 @@ public class Magic : MonoBehaviour {
 			}
 		}
 	}
+
+		void Cast_AnCorpMani(GameObject caster, int EffectID)
+		{
+		RaycastHit hit= new RaycastHit();
+		NPC npc = GetNPCTargetRandom(caster, ref hit, 1);
+		if (npc != null)
+			{
+				SpellProp_Mind mindspell = new SpellProp_Mind();
+				mindspell.init(EffectID);						
+				//Apply a impact effect to the npc
+				GameObject hitimpact ; 
+				hitimpact= new GameObject(npc.transform.name + "_impact");
+				hitimpact.transform.position= npc.transform.position;
+				hitimpact.transform.position=hit.point;//TODO: the impact needs to be closer to the player
+				Impact imp= hitimpact.AddComponent<Impact>();
+				imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);
+				SpellProp_DirectDamage damage = new SpellProp_DirectDamage();
+				damage.init(EffectID);
+				npc.ApplyAttack(damage.BaseDamage);			
+			}
+		}
 
 	void Cast_OrtPorYlem(GameObject caster, int EffectID)
 	{//Telekinesis
@@ -1198,6 +1223,19 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
+	void Cast_StealthSpells(GameObject caster, int EffectID)
+	{//Stealth/invisibility/conceal
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+			Cast_Stealth(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot);
+		}
+		else
+		{
+			SpellIncantationFailed(caster);
+		}
+	}
+
 	void Cast_VasPorYlem(GameObject caster, int EffectID)
 	{//Tremor. Spawn a couple of arrow traps and set them off?
 			TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
@@ -1361,6 +1399,16 @@ public class Magic : MonoBehaviour {
 		srs.Go ();
 	}	
 
+	void Cast_Stealth(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
+		{		
+			SpellProp_Stealth stealth = new SpellProp_Stealth();
+			stealth.init(EffectID);				
+			SpellEffectStealth st = (SpellEffectStealth)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
+			st.counter=stealth.counter;
+			st.StealthLevel=stealth.StealthLevel;
+			st.Go ();			
+	}
+
 	void Cast_RuneOfWarding(Vector3 pos, int EffectID)
 	{
 		GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
@@ -1474,38 +1522,60 @@ public class Magic : MonoBehaviour {
 		ml.Add (caster.GetComponent<UWCharacter>().StringControl.GetString(1,212));
 	}
 	
-	
 	NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
+	{
+		return GetNPCTargetRandom(caster,ref hit,0)	;
+	}
+	
+	NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit, int isUndead)
 	{//TODO: is it better to just pick an enemy and just try and launch an invisible projectile at them.
+//isUndead param
+				//0 = any npc
+				//1 = just undead
+				//2 = except undead?
 		//Targets a random NPC in the area of the npc and returns a raycast hit on the line of site
 		Camera cam = caster.GetComponentInChildren<Camera>();//Camera.main;
 		Plane[] planes = GeometryUtility.CalculateFrustumPlanes(cam);
 		//Collider[] objectsInArea = Physics.OverlapSphere(caster.transform.position,10.0f);
 		foreach (Collider Col in Physics.OverlapSphere(caster.transform.position,5.0f))
 		{
+			bool ValidNPCtype=false;
 			if (Col.gameObject.GetComponent<NPC>()!=null)
 			{
-				//Check if the NPC is in front of the camera.
-				if (GeometryUtility.TestPlanesAABB(planes, Col.bounds))
-				{
-					//Check line of sight to npc.
-					//Debug.Log ("NPC found " + Col.gameObject.name);
-					//RaycastHit hit = new RaycastHit(); 
-					Vector3 campos= Camera.main.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
-					Vector3 dirtonpc = campos-Col.gameObject.transform.position;
-					
-					if (Physics.Linecast(campos,Col.gameObject.transform.position,out hit))
+				switch (isUndead)				
 					{
-						if (hit.collider.gameObject.name==Col.gameObject.name)
+					case 0:
+						ValidNPCtype=true;break;
+					case 1:
+						if(Col.gameObject.GetComponent<NPC>().isUndead==true)
+							{ValidNPCtype=true;}
+							break;
+					case 2:
+						if(Col.gameObject.GetComponent<NPC>().isUndead==false)
+							{ValidNPCtype=true;}	
+							break;
+					}
+				if (ValidNPCtype)
+					{
+					//Check if the NPC is in front of the camera.
+					if (GeometryUtility.TestPlanesAABB(planes, Col.bounds))
 						{
-							return Col.gameObject.GetComponent<NPC>();//hit;//Col.gameObject.GetComponent<NPC>();
-						}
+							Vector3 campos= Camera.main.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
+							Vector3 dirtonpc = campos-Col.gameObject.transform.position;
+
+							if (Physics.Linecast(campos,Col.gameObject.transform.position,out hit))
+							{
+									if (hit.collider.gameObject.name==Col.gameObject.name)
+									{
+											return Col.gameObject.GetComponent<NPC>();//hit;//Col.gameObject.GetComponent<NPC>();
+									}
+							}
+							else
+							{//nothing in the line of site.
+									return Col.gameObject.GetComponent<NPC>();
+							}
+						}		
 					}
-					else
-					{//nothing in the line of site.
-						return Col.gameObject.GetComponent<NPC>();
-					}
-				}
 			}
 		}
 		
@@ -1578,15 +1648,13 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
 		case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
 		case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
+		case SpellEffect.UW1_Spell_Effect_Invisibilty:
+		case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
+		case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:						
 			ActiveSpellArray[index]=caster.AddComponent<SpellEffectStealth>();
 			//Todo
 			break;
-		case SpellEffect.UW1_Spell_Effect_Invisibilty:
-		case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
-		case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
-			ActiveSpellArray[index]=caster.AddComponent<SpellEffectInvisibility>();
-			//Todo
-			break;
+
 			//Missiles
 		case SpellEffect.UW1_Spell_Effect_MissileProtection:
 		case SpellEffect.UW1_Spell_Effect_MissileProtection_alt01:
@@ -2187,18 +2255,15 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
 		case SpellEffect.UW1_Spell_Effect_Stealth_alt02:
 		case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
-			//PLayer only
-			SpellResultType=0;
-			Debug.Log ("stealth enchantment");
-			//Todo
-			break;
 		case SpellEffect.UW1_Spell_Effect_Invisibilty:
 		case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
 		case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
 			//PLayer only
-			SpellResultType=0;
-			Debug.Log ("Invisibilty enchantment");
-			//Todo
+			if (ActiveArrayIndex!=-1)
+			{
+			Cast_Stealth(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+			SpellResultType=2;
+			}
 			break;
 			//Missiles
 		case SpellEffect.UW1_Spell_Effect_MissileProtection:
@@ -2571,7 +2636,12 @@ public class Magic : MonoBehaviour {
 				break;
 				}
 		case SpellEffect.UW1_Spell_Effect_SmiteUndead:
-			
+		case SpellEffect.UW1_Spell_Effect_SmiteUndead_alt01:						
+				{
+				Cast_AnCorpMani(caster,EffectID);
+				SpellResultType=0;
+				break;
+				}
 
 				
 			
@@ -2592,7 +2662,7 @@ public class Magic : MonoBehaviour {
 		
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap_alt01:
 
-		case SpellEffect.UW1_Spell_Effect_SmiteUndead_alt01:
+		
 		case SpellEffect.UW1_Spell_Effect_NameEnchantment_alt01:
 			
 			
