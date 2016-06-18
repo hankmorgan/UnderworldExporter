@@ -41,7 +41,13 @@ public class SpellProp_Mind : SpellProp {
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 		case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
 			counter=4; break;						
+		case SpellEffect.UW1_Spell_Effect_DetectMonster:
+		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:
+				BaseDamage=5;//range of the detection
+				break;
 		}
+
+		
 		impactFrameStart=40;
 		impactFrameEnd=44;
 

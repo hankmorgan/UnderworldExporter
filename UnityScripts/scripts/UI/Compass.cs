@@ -37,6 +37,87 @@ public class Compass : GuiBase {
 		}
 	}
 
+	public static int getCompassHeadingOffset(GameObject src, GameObject dst)
+	{
+		//Get the relative heading in words of the dst from the source.
+		int Offset=0;
+		Vector3 dstPosition = new Vector3(dst.transform.position.x,0,dst.transform.position.z);
+		Vector3 srcPosition = new Vector3(src.transform.position.x,0,src.transform.position.z);
+
+		float angle = Mathf.Atan2(dstPosition.z-srcPosition.z, dstPosition.x-srcPosition.x)*180 / Mathf.PI;
+
+		if  ( (angle>-22.5) && (angle<=+22.5))
+		{
+				//East";	
+				Offset=2;
+		}
+		else 
+				if  ( (angle>22.5) && (angle<=+67.5))
+				{
+						//return "NorthEast";	
+						Offset=1;
+				}		
+				else 
+						if  ( (angle>67.5) && (angle<=+112.5))
+						{
+								//return "North";
+								Offset=0;
+						}	
+						else 
+								if  ( (angle>112.5) && (angle<=+157.5))
+								{
+										//return "NorthWest";		
+										Offset=7;
+								}		
+								else 
+										if  ( (angle>157.5) && (angle<=+180.0))
+										{
+												//return "West";	
+												Offset=6;
+										}	
+										else 
+												if  ( (angle>-180.0) && (angle<=-157.5))
+												{
+														//return "West";	
+														Offset=5;
+												}		
+												else 
+														if  ( (angle>-157.5) && (angle<=-112.5))
+														{
+																//return "southwest";	
+																Offset=5;
+														}		
+														else 
+																if  ( (angle>-112.5) && (angle<=-67.5))
+																{
+																		//return "south";		
+																		Offset=4;
+																}
+																else if  ( (angle>-67.5) && (angle<=-22.5))
+																{
+																		//return "southeast";		
+																		Offset=3;
+																}
+							/*
+				000~001~036~to the North	0
+				000~001~037~to the Northeast 	1
+				000~001~038~to the East	2
+				000~001~039~to the Southeast 3
+				000~001~040~to the South 4
+				000~001~041~to the Southwest 5
+				000~001~042~to the West	6
+				000~001~043~to the Northwest 7
+				*/
+		return Offset;
+	}
+
+	public static string getCompassHeading(GameObject src, GameObject dst)
+	{//String representation of the above.
+		int Offset= Compass.getCompassHeadingOffset(src,dst);
+
+		return playerUW.StringControl.GetString(1, 36 + Offset);		
+	}
+
 
 	
 	// Update is called once per frame

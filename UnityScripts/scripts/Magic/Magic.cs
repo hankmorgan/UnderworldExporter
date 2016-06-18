@@ -248,7 +248,8 @@ public class Magic : MonoBehaviour {
 		case "Wis Mani"://Detect Monster
 		{
 			SetSpellCost(2);
-			Debug.Log(MagicWords+ " Detect Monster Cast");
+			//Debug.Log(MagicWords+ " Detect Monster Cast");
+			Cast_DetectMonster(caster,SpellEffect.UW1_Spell_Effect_DetectMonster);
 			break;
 		}//wm
 		case "Uus Por"://Jump
@@ -1233,6 +1234,69 @@ public class Magic : MonoBehaviour {
 		else
 		{
 			SpellIncantationFailed(caster);
+		}
+	}
+
+	void Cast_DetectMonster(GameObject caster, int EffectID)
+	{//TODO: Implement this as a tracking skill.
+		SpellProp_Mind mind = new SpellProp_Mind();
+		mind.init(EffectID);
+		int[] NoOfMonsters = new int[8];
+		for (int i =0; i <= NoOfMonsters.GetUpperBound(0);i++)
+		{
+			NoOfMonsters[i]=0;
+		}
+		bool NPCFound=false;
+		foreach (Collider Col in Physics.OverlapSphere(caster.transform.position,(float)mind.BaseDamage))
+		{
+			if (Col.gameObject.GetComponent<NPC>()!=null)
+			{
+					Debug.Log(Col.gameObject.name);
+				NoOfMonsters[Compass.getCompassHeadingOffset(caster.gameObject, Col.gameObject)]++;		
+				NPCFound=true;
+			}
+		}
+		if (NPCFound)
+		{
+			int MaxNoOfMonsters=0;
+			int MaxOffsetIndex=0;
+
+			//Detect the max amount of creatures in a direction
+			//000~001~059~You detect a creature 
+			//000~001~060~You detect a few creatures
+			//000~001~061~You detect the activity of many creatures
+			for (int i =0; i <= NoOfMonsters.GetUpperBound(0);i++)
+			{
+				if(NoOfMonsters[i] > MaxNoOfMonsters)
+				{
+					MaxNoOfMonsters=NoOfMonsters[i];
+					MaxOffsetIndex=i;
+				}
+			}
+			string Heading = playerUW.StringControl.GetString(1, 36 + MaxOffsetIndex);
+				switch (MaxNoOfMonsters)
+				{//TODO: What is a few?
+					case 0://Should not happen
+						//000~001~062~You detect no monster activity. \n	
+						playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,62)+Heading);break;							
+					case 1://Single creature.
+						//000-001-059 //You detect a creature
+						playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,59)+Heading);break;		
+					case 2:
+					case 3:
+						//000-001-060 //You detect a few creatures
+						playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,60)+Heading);break;										
+			
+					default:
+						//000~001~061~You detect the activity of many creatures 
+						playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,61)+Heading);break;	
+								 
+				}
+		}
+		else
+		{
+			//000~001~062~You detect no monster activity. \n	
+			playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,62));
 		}
 	}
 
@@ -2646,6 +2710,12 @@ public class Magic : MonoBehaviour {
 				
 			
 		case SpellEffect.UW1_Spell_Effect_DetectMonster:
+		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:						
+				{
+					Cast_DetectMonster(caster,EffectID);
+					SpellResultType=0;
+					break;
+				}
 	
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap:
 		case SpellEffect.UW1_Spell_Effect_NameEnchantment:
@@ -2656,7 +2726,7 @@ public class Magic : MonoBehaviour {
 			
 			
 			
-		case SpellEffect.UW1_Spell_Effect_DetectMonster_alt01:
+		
 		
 
 		
