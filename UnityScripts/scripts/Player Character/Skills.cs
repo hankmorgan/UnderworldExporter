@@ -60,7 +60,7 @@ public class Skills : MonoBehaviour {
 
 	public bool TrySkill(int SkillToUse, int CheckValue)
 	{//Prototype skill check code
-		Debug.Log ("Skill check Skill :" + Skillnames[SkillToUse] + " (" +GetSkill(SkillToUse) +") vs " + CheckValue);
+		//Debug.Log ("Skill check Skill :" + Skillnames[SkillToUse] + " (" +GetSkill(SkillToUse) +") vs " + CheckValue);
 		return (CheckValue<GetSkill(SkillToUse));
 	}
 
