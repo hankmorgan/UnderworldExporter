@@ -10,7 +10,7 @@ public class Entry_Trigger : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.name=="Gronk")
+	if (other.name==GameWorldController.instance.playerUW.name)
 		{
 			Activate ();
 		}

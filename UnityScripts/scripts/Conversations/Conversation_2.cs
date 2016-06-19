@@ -1160,7 +1160,9 @@ public class Conversation_2 : Conversation {
 			if ( locals[1] > 2 ) {
 				
 				yield return StartCoroutine(say( locals, 102 ));
-				func_00c2();
+						yield return new WaitForSeconds(WaitTime);
+						func_00c2();
+						yield break;
 			} // end if
 			
 			yield return StartCoroutine(say( locals, 103 ));
@@ -1218,10 +1220,11 @@ public class Conversation_2 : Conversation {
 			break;
 			
 		} // end switch
-		
-		locals[2] = identify_inv( 4, locals[64], locals[15], locals[63], locals[10] );
+
 		locals[63] = 1;
 		locals[64] = 0;
+		locals[2] = identify_inv( 4, locals[64], locals[15], locals[63], locals[10] );
+
 		if ( locals[2] / 5 < 3 ) {
 			
 			locals[18] = 1;

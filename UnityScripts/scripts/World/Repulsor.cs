@@ -101,7 +101,7 @@ public class Repulsor : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.name=="Gronk")
+		if (other.name==GameWorldController.instance.playerUW.name)
 		{
 			PlayerInside=true;
 			//play=other;
@@ -111,7 +111,7 @@ public class Repulsor : MonoBehaviour {
 
 	void OnTriggerExit(Collider other)
 	{
-			if (other.name=="Gronk")
+			if (other.name==GameWorldController.instance.playerUW.name)
 			{
 				play=other;
 				PlayerInside=false;

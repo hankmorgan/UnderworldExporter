@@ -21,7 +21,7 @@ public class Zanium : object_base {
 
 	void OnTriggerEnter(Collider other)
 	{		
-		if ((other.name=="Gronk"))
+		if ((other.name==GameWorldController.instance.playerUW.name))
 		{
 			SuckUpZanium();
 		}

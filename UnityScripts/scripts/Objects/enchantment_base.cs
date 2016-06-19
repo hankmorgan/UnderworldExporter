@@ -82,9 +82,28 @@ public class enchantment_base : object_base {
 		case 187 :// a_red_potion
 		case 188 :// a_green_potion
 		default:
-			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+			if (objInt.isIdentified==true)
+				{
+					ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+				}
+			else
+				{
+					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+					{
+						objInt.isIdentified=true;
+						ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+					}
+					else
+					{
+						ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));		
+					}					
+				}
+				
 			break;			
 		}
 		return true;
 	}
+
+
+	
 }

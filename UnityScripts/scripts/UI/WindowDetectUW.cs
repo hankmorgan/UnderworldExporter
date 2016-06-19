@@ -44,10 +44,10 @@ public class WindowDetectUW : WindowDetect {
 		{
 			case UWCharacter.InteractionModeAttack:
 			{
-								if (playerUW.PlayerMagic.ReadiedSpell!="")								
-								{//Player has spell to fire off first
-										return;
-								}
+				if (playerUW.PlayerMagic.ReadiedSpell!="")								
+				{//Player has spell to fire off first
+						return;
+				}
 				if (playerUW.PlayerCombat.AttackExecuting==true)
 				{//No attacks can be started while executing the last one.
 					return;

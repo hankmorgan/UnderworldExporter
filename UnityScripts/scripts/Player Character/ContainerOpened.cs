@@ -43,7 +43,7 @@ public class ContainerOpened : object_base {
 			//Close child containers as well
 			CloseChildContainer (currentContainerObj);
 			Container DestinationContainer = playerUW.playerInventory.GetCurrentContainer();
-			if (playerUW.playerInventory.currentContainer == "Gronk")
+			if (playerUW.playerInventory.currentContainer == GameWorldController.instance.playerUW.name)
 			{
 				GetComponent<UITexture>().mainTexture=playerUW.playerInventory.Blank;
 			}

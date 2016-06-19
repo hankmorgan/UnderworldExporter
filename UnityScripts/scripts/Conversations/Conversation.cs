@@ -130,17 +130,17 @@ public class Conversation : GuiBase {
 		/*Setup UI Elements - code formerly in NPC*/
 		chains.ActiveControl=3;//Enable UI Elements
 		chains.Refresh();
-
+		
 		//UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
 		UITexture portrait = playerUW.playerHud.ConversationPortraits[0];
-		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));
+		UITexture npcPortrait = playerUW.playerHud.ConversationPortraits[1];
+		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));//TODO:playerbody
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
 			//head in charhead.gr
-			portrait = playerUW.playerHud.ConversationPortraits[1];//GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));
-			
+			//GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
+			npcPortrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 		}	
 		else
 		{
@@ -149,9 +149,8 @@ public class Conversation : GuiBase {
 			if (HeadToUse >59)
 			{
 				HeadToUse=0;
-			}
-			portrait = playerUW.playerHud.ConversationPortraits[1];// GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+			}			
+			npcPortrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
 		playerUW.playerHud.MessageScroll.Clear ();
 		/*End UI Setup*/
@@ -1088,7 +1087,7 @@ public class Conversation : GuiBase {
 		yield return StartCoroutine(say (StringBlock,PRINT_SAY));
 	}
 
-	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int unk5)
+	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int inventorySlotIndex)
 	{
 		//id=0017 name="identify_inv" ret_type=int
 		//	parameters:   arg1:
@@ -1097,9 +1096,12 @@ public class Conversation : GuiBase {
 		//arg4: inventory item position
 		//description:  unknown TODO
 		//return value: unknown
-
+		if (playerUW.playerHud.playerTrade[inventorySlotIndex].GetGameObjectInteraction() != null)
+			{
+				playerUW.playerHud.playerTrade[inventorySlotIndex].GetGameObjectInteraction().isIdentified=true;	
+			}
 		//My guess that it is identifying the gold value of the items given.
-		Debug.Log ("Identify_inv");
+		//Debug.Log ("Identify_inv");
 		return 1;
 	}
 

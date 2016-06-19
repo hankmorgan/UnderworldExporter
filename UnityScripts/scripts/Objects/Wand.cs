@@ -61,19 +61,36 @@ public class Wand : enchantment_base {
 
 	public override bool LookAt ()
 	{
+	string FormattedName="";
 	
-		if ((SpellObjectQuantity>0) && (objInt.isEnchanted==false))
+		if (objInt.isIdentified==true)
+			{
+				FormattedName=playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex());
+			}
+		else
+			{
+				if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+				{
+					objInt.isIdentified=true;
+					FormattedName=playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex());
+				}
+				else
+				{
+					FormattedName=playerUW.StringControl.GetFormattedObjectNameUW(objInt);		
+				}					
+			}
+	
+		if ((SpellObjectQuantity>0) && (objInt.isEnchanted==false) && (objInt.isIdentified))
 		{
-			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) 
-				+ " of " 
-				+ playerUW.StringControl.GetString(6,GetActualSpellIndex())
+			ml.Add (FormattedName
 				+ " with "
 				+ SpellObjectQuantity 
 				+ " charges remaining.");
 		}
 		else
 		{
-			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			//ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			ml.Add(FormattedName);
 		}
 		return true;
 	}

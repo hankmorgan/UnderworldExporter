@@ -26,6 +26,7 @@ public class TradeSlot : GuiBase {
 		IndicatorSelected = Resources.Load<Texture2D>("HUD/Cursors/cursors_0018");
 		SlotImage.mainTexture=Blank;
 		Quantity.text="";
+		Indicator.mainTexture=Blank;
 	}
 	
 	// Update is called once per frame

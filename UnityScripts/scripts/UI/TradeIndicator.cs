@@ -8,10 +8,8 @@ public class TradeIndicator : GuiBase {
 
 	void OnClick()
 	{
-		Debug.Log ("Click");
+		//Debug.Log ("Click");
 		ts.Selected=!ts.Selected;
 	}
 
 }
-
-

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpellProp : MonoBehaviour {
+public class SpellProp  {
 	/*
 	 * SpellProp.cs 
 	 * 

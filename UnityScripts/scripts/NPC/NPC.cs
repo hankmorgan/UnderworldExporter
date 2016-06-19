@@ -569,7 +569,7 @@ public class NPC : object_base {
 			}
 			else
 			{
-				if (hit.transform.name == "Gronk")
+			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
 					playerUW.ApplyDamage(5);

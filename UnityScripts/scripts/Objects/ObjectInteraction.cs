@@ -141,6 +141,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public int Quality;
 	public bool isQuant;
 	public bool isEnchanted;
+	public bool isIdentified;
 
 	//Display controls
 	public static TextureController tc;

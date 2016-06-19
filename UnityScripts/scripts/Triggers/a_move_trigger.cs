@@ -9,7 +9,7 @@ A trigger that fires when the player character enters it
 	void OnTriggerEnter(Collider other)
 	{
 
-		if ((other.name=="Gronk") || (other.name=="Feet"))
+	if ((other.name==GameWorldController.instance.playerUW.name) || (other.name=="Feet"))
 		{
 			Activate ();
 		}

@@ -320,21 +320,21 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 			{
 			if (LevelInfo[currobj.tileX][currobj.tileY].isLava==1)
 				{
-				fprintf(UNITY_FILE, "\"LavaMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].lavaRegion);
+				fprintf(UNITY_FILE, "\"_LavaMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].lavaRegion);
 				}
 			else if (LevelInfo[currobj.tileX][currobj.tileY].isWater == 1)
 				{
-				fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+				fprintf(UNITY_FILE, "\"_WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
 				}
 			else
 				{
 				if (LevelInfo[currobj.tileX][currobj.tileY].landRegion >= 21)
 					{
-					fprintf(UNITY_FILE, "\"GroundMesh%d\");", 20);
+					fprintf(UNITY_FILE, "\"_GroundMesh%d\");", 20);
 					}
 				else
 					{
-					fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+					fprintf(UNITY_FILE, "\"_GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
 					}
 				}
 			/*switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
@@ -363,7 +363,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 			}
 		else
 			{
-			fprintf(UNITY_FILE, "\"GroundMesh%d\");", 1);
+			fprintf(UNITY_FILE, "\"_GroundMesh%d\");", 1);
 			}
 
 		}

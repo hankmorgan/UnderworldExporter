@@ -22,6 +22,9 @@ public class Magic : MonoBehaviour {
 	public int CurMana;
 	public int SpellCost;
 	
+	public GameObject ObjectInSlot;//For spells cast on objects in slots
+	public bool InventorySpell;//Flags a spell as castable on inventory.
+	
 	string[] Runes=new string[]{"An","Bet","Corp","Des",
 		"Ex","Flam","Grav","Hur",
 		"In","Jux","Kal","Lor",
@@ -384,7 +387,8 @@ public class Magic : MonoBehaviour {
 		case "Ort Wis Ylem"://Name Enchantment
 		{
 			SetSpellCost(5);
-			Debug.Log(MagicWords+ " Name Enchantment Cast");
+			//Debug.Log(MagicWords+ " Name Enchantment Cast");
+			Cast_NameEnchantment(caster,ready,SpellEffect.UW1_Spell_Effect_NameEnchantment);
 			break;
 		}//OWY
 		case "Ex Ylem"://Open
@@ -1300,6 +1304,50 @@ public class Magic : MonoBehaviour {
 		}
 	}
 
+	void Cast_NameEnchantment(GameObject caster, bool Ready, int EffectID)
+	{
+		if (Ready==true)
+		{//Ready the spell to be cast.
+			InventorySpell=true;
+			playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
+			playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
+		}
+		else
+		{
+			InventorySpell=false;
+			//Is this an inventory slot click or in the window
+			if (WindowDetect.CursorInMainWindow)
+			{
+				playerUW.PlayerMagic.ReadiedSpell="";		
+				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				Ray ray = getRay (caster);
+				RaycastHit hit = new RaycastHit(); 
+				float dropRange=playerUW.GetUseRange();
+				if (Physics.Raycast(ray,out hit,dropRange))	
+					{//The spell has hit something
+						ObjectInteraction objInt =hit.transform.gameObject.GetComponent<ObjectInteraction>();
+						if (objInt!=null)
+							{
+								objInt.isIdentified=true;
+							}
+					}										
+			}
+			else
+			{
+				if (ObjectInSlot!=null)	
+					{
+						ReadiedSpell= "";
+						playerUW.CursorIcon=playerUW.CursorIconDefault;
+						ObjectInteraction objInt =ObjectInSlot.GetComponent<ObjectInteraction>();
+						if (objInt!=null)
+						{
+								objInt.isIdentified=true;
+						}		
+					}
+			}
+		}
+	}
+
 	void Cast_VasPorYlem(GameObject caster, int EffectID)
 	{//Tremor. Spawn a couple of arrow traps and set them off?
 			TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
@@ -1489,7 +1537,7 @@ public class Magic : MonoBehaviour {
 		bx.size=new Vector3(0.2f,0.2f,0.2f);
 		bx.center=new Vector3(0.0f,0.1f,0.0f);
 		bx.isTrigger=true;
-		SpellProp_RuneOfWarding spIJ = myObj.AddComponent<SpellProp_RuneOfWarding>();
+		SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
 		spIJ.init(EffectID);
 		awt.spellprop=spIJ;
 		//000~001~276~The Rune of Warding is placed. \n
@@ -1503,7 +1551,7 @@ public class Magic : MonoBehaviour {
 		SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 		sep.Value=spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
 		sep.counter=spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
-		if (caster.name!="Gronk")
+		if (caster.name!=GameWorldController.instance.playerUW.name)
 		{
 			sep.isNPC=true;
 		}
@@ -1517,7 +1565,7 @@ public class Magic : MonoBehaviour {
 		mindspell.init(EffectID);	
 		SpellEffectParalyze sep = (SpellEffectParalyze)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 		sep.counter=mindspell.counter; //It will run for x ticks. 
-		if (caster.name!="Gronk")
+		if (caster.name!=GameWorldController.instance.playerUW.name)
 		{
 			sep.isNPC=true;
 		}
@@ -2035,7 +2083,7 @@ public class Magic : MonoBehaviour {
 		rgd.freezeRotation =true;
 		rgd.useGravity=false;
 		rgd.collisionDetectionMode=CollisionDetectionMode.Continuous;
-		if (Caster.name!="Gronk")
+		if (Caster.name!=GameWorldController.instance.playerUW.name)
 		{
 			projectile.transform.position=Caster.transform.position;
 			projectile.transform.rotation=Caster.transform.rotation;
@@ -2717,9 +2765,17 @@ public class Magic : MonoBehaviour {
 					break;
 				}
 	
-		case SpellEffect.UW1_Spell_Effect_RemoveTrap:
 		case SpellEffect.UW1_Spell_Effect_NameEnchantment:
-			
+		case SpellEffect.UW1_Spell_Effect_NameEnchantment_alt01:						
+				{
+					Cast_NameEnchantment(caster,ready,EffectID);
+					SpellResultType=0;
+					break;
+				}
+
+		case SpellEffect.UW1_Spell_Effect_RemoveTrap:
+
+
 			
 		
 			
@@ -2733,7 +2789,7 @@ public class Magic : MonoBehaviour {
 		case SpellEffect.UW1_Spell_Effect_RemoveTrap_alt01:
 
 		
-		case SpellEffect.UW1_Spell_Effect_NameEnchantment_alt01:
+		
 			
 			
 

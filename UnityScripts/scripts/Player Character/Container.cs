@@ -463,7 +463,7 @@ public class Container : object_base {
 
 	public float GetFreeCapacity()
 	{
-		if (this.gameObject.name=="Gronk")
+		if (this.gameObject.name==GameWorldController.instance.playerUW.name)
 		{
 			return 999;
 		}

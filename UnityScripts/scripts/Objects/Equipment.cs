@@ -93,7 +93,22 @@ public class Equipment : object_base {
 	{
 		if (objInt.isEnchanted==true)
 		{
-			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+			if (objInt.isIdentified==true)
+			{
+					ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+			}
+			else
+			{
+					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+					{
+							objInt.isIdentified=true;
+							ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+					}
+					else
+					{
+							ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));		
+					}					
+			}
 			return true;
 		}
 		else

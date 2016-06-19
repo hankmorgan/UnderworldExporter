@@ -74,55 +74,69 @@ public class InventorySlot : GuiBase {
 		{
 			leftClick=false;
 		}
-		switch (UWCharacter.InteractionMode)
-		{
-		case UWCharacter.InteractionModeTalk://talk
-			if (leftClick)
-				{//Left Click
-					UseFromSlot();
+		if (playerUW.PlayerMagic.ReadiedSpell=="")
+			{				
+				switch (UWCharacter.InteractionMode)
+				{
+				case UWCharacter.InteractionModeTalk://talk
+					if (leftClick)
+						{//Left Click
+							UseFromSlot();
+						}
+					else 
+						{//right click
+							LookFromSlot();
+						}
+					break;
+				case UWCharacter.InteractionModePickup://pickup
+					if (leftClick)
+					{
+						LeftClickPickup();
+					}
+					else
+					{
+						RightClickPickup();
+					}
+					break;
+				case UWCharacter.InteractionModeLook://look
+					if (leftClick)
+						{//Left Click
+							UseFromSlot();
+						}
+					else 
+						{//right click
+							LookFromSlot();
+						}
+					break;
+				case UWCharacter.InteractionModeAttack://attack
+					if (leftClick)
+						{//Left Click
+							UseFromSlot();
+						}
+					else 
+						{//right click
+							LookFromSlot();
+						}
+					break;
+				case UWCharacter.InteractionModeUse://use
+					UseFromSlot ();
+					break;
+				case UWCharacter.InteractionModeInConversation:
+					ConversationClick(leftClick);
+					break;
 				}
-			else 
-				{//right click
-					LookFromSlot();
-				}
-			break;
-		case UWCharacter.InteractionModePickup://pickup
-			if (leftClick)
-			{
-				LeftClickPickup();
 			}
-			else
+		else
 			{
-				RightClickPickup();
+			playerUW.PlayerMagic.ObjectInSlot=null;
+			if (playerUW.PlayerMagic.InventorySpell==true)
+				{
+					playerUW.PlayerMagic.ObjectInSlot = playerUW.playerInventory.GetGameObjectAtSlot(slotIndex);
+					playerUW.PlayerMagic.castSpell(this.gameObject, playerUW.PlayerMagic.ReadiedSpell,false);
+					playerUW.PlayerMagic.SpellCost=0;
+					playerUW.playerHud.window.UWWindowWait (1.0f);		
+				}
 			}
-			break;
-		case UWCharacter.InteractionModeLook://look
-			if (leftClick)
-				{//Left Click
-					UseFromSlot();
-				}
-			else 
-				{//right click
-					LookFromSlot();
-				}
-			break;
-		case UWCharacter.InteractionModeAttack://attack
-			if (leftClick)
-				{//Left Click
-					UseFromSlot();
-				}
-			else 
-				{//right click
-					LookFromSlot();
-				}
-			break;
-		case UWCharacter.InteractionModeUse://use
-			UseFromSlot ();
-			break;
-		case UWCharacter.InteractionModeInConversation:
-			ConversationClick(leftClick);
-			break;
-		}
 		playerUW.playerInventory.Refresh ();
 
 	}
