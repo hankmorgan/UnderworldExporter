@@ -508,7 +508,7 @@ public class UWCharacter : Character {
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
 		if (InvMarker==null)
 		{
-			InvMarker=GameObject.Find ("InventoryMarker");
+			InvMarker=GameWorldController.instance.InventoryMarker;//InvMarker=GameObject.Find ("InventoryMarker");
 		}
 		if (pInv.ObjectInHand=="")//Player is not holding anything.
 		{//Find the object within the pickup range.

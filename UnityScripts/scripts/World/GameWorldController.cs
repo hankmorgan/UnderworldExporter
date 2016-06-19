@@ -24,7 +24,14 @@ public class GameWorldController : MonoBehaviour {
 	private bool Test;
 	public TileMap Tilemap;
 	public UWCharacter playerUW;
+	public MusicController mus;
+	public GameObject InventoryMarker;
 	//public MeshRenderer ceil;
+		void Awake()
+		{
+				instance=this;
+
+		}
 
 	void Start () {
 		instance=this;

@@ -130,14 +130,15 @@ public class Conversation : GuiBase {
 		/*Setup UI Elements - code formerly in NPC*/
 		chains.ActiveControl=3;//Enable UI Elements
 		chains.Refresh();
-		
-		UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
+
+		//UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
+		UITexture portrait = playerUW.playerHud.ConversationPortraits[0];
 		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
 			//head in charhead.gr
-			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
+			portrait = playerUW.playerHud.ConversationPortraits[1];//GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
 			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));
 			
 		}	
@@ -149,7 +150,7 @@ public class Conversation : GuiBase {
 			{
 				HeadToUse=0;
 			}
-			portrait = GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
+			portrait = playerUW.playerHud.ConversationPortraits[1];// GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
 			portrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
 		playerUW.playerHud.MessageScroll.Clear ();
@@ -169,15 +170,13 @@ public class Conversation : GuiBase {
 		//Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
 		{
-			//TradeSlot ts =
-				playerUW.playerHud.npcTrade[i++].clear ();// GameObject.Find ("Trade_NPC_Slot_" + i++).GetComponent<TradeSlot>();
-			//ts.clear ();
+			playerUW.playerHud.npcTrade[i++].clear ();// GameObject.Find ("Trade_NPC_Slot_" + i++).GetComponent<TradeSlot>();
 		}
 
-		GameObject mus = GameObject.Find ("MusicController");
-		if  (mus!=null)
+		//GameObject mus = GameObject.Find ("MusicController");
+		if  (GameWorldController.instance.mus!=null)
 		{
-			mus.GetComponent<MusicController>().InMap=true;
+			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
 		}
 
 		StringBlock =stringno;
@@ -222,10 +221,10 @@ public class Conversation : GuiBase {
 		InConversation=false;
 		npc.npc_talkedto=1;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-		GameObject mus = GameObject.Find ("MusicController");
-		if  (mus!=null)
+		//GameObject mus = GameObject.Find ("MusicController");
+		if  (GameWorldController.instance.mus!=null)
 		{
-			mus.GetComponent<MusicController>().InMap=false;
+			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=false;
 		}
 		if (playerUW.playerInventory.ObjectInHand!="")
 		{
@@ -653,7 +652,7 @@ public class Conversation : GuiBase {
 		int j=0;
 		for (int i=0; i<4;i++)
 		{
-			TradeSlot pcSlot = GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot = playerUW.playerHud.playerTrade[i]; //GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (pcSlot.isSelected())
 			{
 				locals[startObjectPos+j]= i;

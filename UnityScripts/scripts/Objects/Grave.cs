@@ -31,7 +31,7 @@ public class Grave : object_base {
 
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
-		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+	ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 	if (GraveID==6)
 			{//Garamon's grave
 			//Activates a trigger a_move_trigger_54_52_04_0495 (selected by unknown means)

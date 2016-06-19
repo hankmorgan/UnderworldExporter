@@ -94,7 +94,7 @@ public class LightSource : object_base {
 		PlayerInventory pInv = playerUW.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		InventorySlot invSlot = null;
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
-		{
+		{						
 			invSlot=GameObject.Find ("RightShoulder_Slot").GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftShoulder=="") || (pInv.sLeftShoulder==this.name))

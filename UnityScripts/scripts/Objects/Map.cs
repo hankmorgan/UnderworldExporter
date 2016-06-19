@@ -51,17 +51,18 @@ public class Map : object_base {
 		//		child.gameObject.SetActive(false);
 		//	}
 		//}
-		GameObject mus = GameObject.Find ("MusicController");
-		if  (mus!=null)
-		{
-			mus.GetComponent<MusicController>().InMap=true;
-		}
 
-		UILabel ml = GameObject.Find ("scroll").GetComponent<UILabel>();
-		if (ml!=null)
+		//GameObject mus = //GameObject.Find ("MusicController");
+		if  (GameWorldController.instance.mus!=null)
 		{
-			ml.text="";
+			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
 		}
+		playerUW.playerHud.MessageScroll.Clear();
+		//UILabel ml = GameObject.Find ("scroll").GetComponent<UILabel>();
+		//if (ml!=null)
+		//{
+		//	ml.text="";
+		//}
 		chains.ActiveControl=4;
 		chains.Refresh ();
 		return true;

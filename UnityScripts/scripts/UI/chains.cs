@@ -69,7 +69,7 @@ public class chains : GuiBase {
 				InventoryEnabled=false;
 				RuneBagEnabled=false;
 				StatsEnabled=true;
-				ConversationEnabled=true;
+				ConversationEnabled=false;
 				CutSceneEnabled=false;
 				break;	
 			case 2://Runebag

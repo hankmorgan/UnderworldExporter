@@ -25,7 +25,8 @@ public class object_base : MonoBehaviour {
 	{
 		if (playerUW==null)
 		{
-			playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+			//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+			playerUW=GameWorldController.instance.playerUW;
 		}
 		if (ml==null)
 		{

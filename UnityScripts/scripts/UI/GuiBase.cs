@@ -9,7 +9,8 @@ public class GuiBase : MonoBehaviour {
 	{
 		if (playerUW==null)
 		{
-			playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+			//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+			playerUW=GameWorldController.instance.playerUW;
 		}
 	}
 

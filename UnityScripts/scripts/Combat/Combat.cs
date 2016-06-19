@@ -14,7 +14,7 @@ public class Combat : MonoBehaviour {
 
 	void Start()
 	{
-		wpa = GameObject.Find ("HudAnimations").GetComponentInChildren<WeaponAnimation>();
+		//wpa = GameObject.Find ("HudAnimations").GetComponentInChildren<WeaponAnimation>();
 	}
 
 	public virtual void PlayerCombatUpdate()

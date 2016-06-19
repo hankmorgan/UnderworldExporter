@@ -25,10 +25,11 @@ public class MapClose : MonoBehaviour {
 		//		child.gameObject.SetActive(true);
 		//	}
 		//}
-		GameObject mus = GameObject.Find ("MusicController");
-		if  (mus!=null)
+		//GameObject mus = GameObject.Find ("MusicController");
+
+		if  (GameWorldController.instance.mus!=null)
 		{
-			mus.GetComponent<MusicController>().InMap=false;
+			GameWorldController.instance.mus.InMap=false;
 		}
 		chains.ActiveControl=0;
 		chains.Refresh();

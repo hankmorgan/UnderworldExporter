@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Scrollbutton : MonoBehaviour {
-
+		/*
 	public int stepSize;
 	public static int ScrollValue=0;
 	public int MaxScrollValue;
@@ -21,5 +21,5 @@ public class Scrollbutton : MonoBehaviour {
 			ScrollValue=MinScrollValue;
 		}
 		//Debug.Log("Scrolling" + ScrollValue);
-	}
+	}*/
 }

@@ -11,7 +11,7 @@ public class WindowDetectUW : WindowDetect {
 		base.Start ();
 		JustClicked=false;
 		WindowWaitCount=0;
-		playerUW=GameObject.Find ("Gronk").GetComponent <UWCharacter>();
+		playerUW=GameWorldController.instance.playerUW;
 	}
 
 	public void UWWindowWait(float waitTime)
@@ -369,7 +369,7 @@ public class WindowDetectUW : WindowDetect {
 		stretch.relativeSize=new Vector2 (1.0f,1.0f);
 		if (playerUW==null)
 		{
-			playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+			playerUW=GameWorldController.instance.playerUW;//GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 		}
 		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 		

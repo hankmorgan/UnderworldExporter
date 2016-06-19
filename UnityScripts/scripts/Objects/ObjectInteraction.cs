@@ -205,7 +205,7 @@ public class ObjectInteraction : MonoBehaviour {
 
 		if (InvMarker==null)
 		{
-			InvMarker=GameObject.Find ("InventoryMarker");
+		InvMarker=GameWorldController.instance.InventoryMarker;//GameObject.Find ("InventoryMarker");
 		}
 		sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		/*		if (this.GetComponent<EmptyObjectIdentifier>()!=null)
