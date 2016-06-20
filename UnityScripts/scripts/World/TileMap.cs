@@ -44,7 +44,7 @@ public class TileMap : MonoBehaviour {
 	const int SOUTHEAST=7;
 
 	RaycastHit hit = new RaycastHit(); 
-	int visitTileX; int visitTileY;
+	public int visitTileX; public int visitTileY;
 	public static bool OnGround=false;
 	public static bool OnWater=false;
 	public static bool OnLava=false;

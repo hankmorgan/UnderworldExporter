@@ -130,7 +130,7 @@ public class Conversation : GuiBase {
 		/*Setup UI Elements - code formerly in NPC*/
 		chains.ActiveControl=3;//Enable UI Elements
 		chains.Refresh();
-		
+		npc.getObjectInteraction().isIdentified=true;
 		//UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
 		UITexture portrait = playerUW.playerHud.ConversationPortraits[0];
 		UITexture npcPortrait = playerUW.playerHud.ConversationPortraits[1];

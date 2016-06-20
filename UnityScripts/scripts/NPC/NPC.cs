@@ -292,7 +292,10 @@ public class NPC : object_base {
 			}
 			else
 			{
-				output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
+				if(objInt.isIdentified==true)
+				{
+						output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
+				}				
 			}
 
 		}

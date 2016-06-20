@@ -2,8 +2,8 @@
 
 public class Billboard : MonoBehaviour
 {
-	public float adjustment=0.0f;//0.8f;
-
+	//public float adjustment=0.0f;//0.8f;
+		//public Vector3 adj;
 	//private Quaternion dir;
 	void Update()
 	{
@@ -11,6 +11,7 @@ public class Billboard : MonoBehaviour
 		{
 
 			transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+			//transform.rotation = Quaternion.LookRotation(GameWorldController.instance.playerUW.transform.forward-adj);
 			//dir =Quaternion.LookRotation(transform.position - (Camera.main.transform.position - (Vector3.up*adjustment)));
 			////////transform.rotation=Quaternion.LookRotation(transform.position - (Camera.main.transform.position - (Vector3.up*adjustment)));
 				//dir;

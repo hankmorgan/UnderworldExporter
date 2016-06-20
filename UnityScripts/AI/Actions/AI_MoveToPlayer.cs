@@ -28,19 +28,27 @@ public class AI_MoveToPlayer : RAINAction
 		if (graph!=null)
 		{
 			/*Debug.Log (graph.GraphName);*/
-			GameObject player = NPC.playerUW.gameObject;//ai.WorkingMemory.GetItem<GameObject>("playerUW");
+			//GameObject player = NPC.playerUW.gameObject;//ai.WorkingMemory.GetItem<GameObject>("playerUW");
 			//NPC.playerUW.gameObject
 			//Vector3 point = player.transform.position;
 			/*Vector3 ClosestPoint;
 			ClosestPoint=graph.ClosestPointOnGraph(point,1000f);
 			Debug.Log (point + " goes to " + ClosestPoint + " on graph " + graph.GraphName);
 			ai.WorkingMemory.SetItem<Vector3>("MoveTarget",ClosestPoint);*/
-			ai.WorkingMemory.SetItem<Vector3>("MoveTarget",player.transform.position);
+
+			//AB between player and npc
+			Vector3 AB = GameWorldController.instance.playerUW.transform.position-ai.Body.gameObject.transform.position;
+
+			Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
+			//Debug.Log("Movepos=" + Movepos);
+
+			//ai.WorkingMemory.SetItem<Vector3>("MoveTarget",GameWorldController.instance.playerUW.transform.position);
+			ai.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
 			return ActionResult.SUCCESS;
 		}
 		else
 		{
-			Debug.Log ("Unable to find Graph");
+			Debug.Log ("Unable to find Graph " + navmesh + " for  " + ai.Body.gameObject.name);
 			return ActionResult.FAILURE;
 		}
 

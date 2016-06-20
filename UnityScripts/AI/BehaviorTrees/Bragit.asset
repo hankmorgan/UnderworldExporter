@@ -69,11 +69,13 @@ MonoBehaviour:
       usepriorities=&quot;False&quot; repeatuntil=&quot;&quot; name=&quot;selector&quot;
       debugbreak=&quot;False&quot;&gt;&lt;constraint repeatuntil=&quot;failure&quot;
       priority=&quot;&quot; name=&quot;MagicAttack&quot; debugbreak=&quot;False&quot;
-      constraint=&quot;magicAttack==true&quot;&gt;&lt;move turnspeed=&quot;500&quot;
-      repeatuntil=&quot;success&quot; name=&quot;Move to Player&quot; movetarget=&quot;playerUW&quot;
-      movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot; debugbreak=&quot;False&quot;
-      closeenoughdistance=&quot;4&quot; closeenoughangle=&quot;0&quot; /&gt;&lt;action
-      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      constraint=&quot;magicAttack==true&quot;&gt;&lt;action repeatuntil=&quot;success&quot;
+      parametervalues=&quot;&quot; parameters=&quot;&quot; namespace=&quot;&quot;
+      name=&quot;TargetPlayer&quot; debugbreak=&quot;False&quot; classname=&quot;AI_MoveToPlayer&quot;
+      /&gt;&lt;move turnspeed=&quot;100&quot; repeatuntil=&quot;success&quot; name=&quot;MoveToPlayer&quot;
+      movetarget=&quot;MoveTarget&quot; movespeed=&quot;1&quot; facetarget=&quot;MoveTarget&quot;
+      debugbreak=&quot;False&quot; closeenoughdistance=&quot;4&quot; closeenoughangle=&quot;30&quot;
+      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Pick A Random Attack Animation&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
       waitforsec=&quot;0.8&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
@@ -83,12 +85,15 @@ MonoBehaviour:
       /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Combat Idle&quot; debugbreak=&quot;False&quot;
       classname=&quot;AI_COMBAT_IDLE&quot; /&gt;&lt;/constraint&gt;&lt;constraint
-      repeatuntil=&quot;failure&quot; priority=&quot;&quot; name=&quot;MeleeAttack&quot;
-      debugbreak=&quot;False&quot; constraint=&quot;magicAttack==false&quot;&gt;&lt;move
-      turnspeed=&quot;500&quot; repeatuntil=&quot;success&quot; name=&quot;Move to
-      Player&quot; movetarget=&quot;playerUW&quot; movespeed=&quot;1&quot; facetarget=&quot;playerUW&quot;
-      debugbreak=&quot;False&quot; closeenoughdistance=&quot;0.9&quot; closeenoughangle=&quot;0&quot;
-      /&gt;&lt;action repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      repeatuntil=&quot;running&quot; priority=&quot;&quot; name=&quot;MeleeAttack&quot;
+      debugbreak=&quot;False&quot; constraint=&quot;magicAttack==false&quot;&gt;&lt;action
+      repeatuntil=&quot;success&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
+      namespace=&quot;&quot; name=&quot;TargetPlayer&quot; debugbreak=&quot;False&quot;
+      classname=&quot;AI_MoveToPlayer&quot; /&gt;&lt;move turnspeed=&quot;100&quot;
+      repeatuntil=&quot;success&quot; name=&quot;MoveToPlayer&quot; movetarget=&quot;MoveTarget&quot;
+      movespeed=&quot;1&quot; facetarget=&quot;MoveTarget&quot; debugbreak=&quot;False&quot;
+      closeenoughdistance=&quot;0.5&quot; closeenoughangle=&quot;30&quot; /&gt;&lt;action
+      repeatuntil=&quot;&quot; parametervalues=&quot;&quot; parameters=&quot;&quot;
       namespace=&quot;(global)&quot; name=&quot;Pick A Random Attack Animation&quot;
       debugbreak=&quot;False&quot; classname=&quot;AI_ATTACK_RANDOM&quot; /&gt;&lt;timer
       waitforsec=&quot;0.8&quot; returnvalue=&quot;success&quot; name=&quot;timer&quot;
