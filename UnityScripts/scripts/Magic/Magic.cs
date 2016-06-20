@@ -710,10 +710,62 @@ public class Magic : MonoBehaviour {
 				{
 					Cast_ResistanceAgainstType(caster,playerUW.ActiveSpell,EffectID,effectSlot);		
 				}
+				else
+				{
+						SpellIncantationFailed(caster);
+				}	
+		}
+		void Cast_AnTym(GameObject caster, int EffectID)
+		{//TODO:active incantation?
+		int SpellEffectSlot = CheckActiveSpellEffect(caster);
+		if (SpellEffectSlot != -1)
+		{
+				Cast_FreezeTime (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot);
+		}
+		else
+		{
+				SpellIncantationFailed(caster);
+		}
 		}
 
-		void Cast_AnTym(GameObject caster, int EffectID)
+		void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
+				SpellProp_Mind mind = new SpellProp_Mind();
+				mind.init(EffectID);		
+				//Apply to the player
+				SpellEffectFreezeTime timeFreezePlayer= (SpellEffectFreezeTime)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
+				timeFreezePlayer.counter= mind.counter;
+				long Key = Random.Range(1,200000);
+				timeFreezePlayer.Key=Key;
+				timeFreezePlayer.Go();
+				GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
+				for (int i = 0; i<=npcs.GetUpperBound(0); i++)
+				{
+						if (npcs[i].GetComponent<SpellEffectFreezeTime>()==null)//Don't apply if they already have it
+						{	
+							int NPCEffectSlot =CheckPassiveSpellEffectNPC(npcs[i]);
+							//Cast_FreezeTime(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,EffectID,EffectSlot);
+							if (NPCEffectSlot!=-1)
+							{//Check if the NPC has a freeze time already.
+									SpellEffectFreezeTime timeFreezeNPC=(SpellEffectFreezeTime)SetSpellEffect(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,NPCEffectSlot,EffectID);
+									timeFreezeNPC.Key=Key;
+									timeFreezeNPC.isNPC=true;
+									timeFreezeNPC.counter=mind.counter;
+									timeFreezeNPC.Go();
+							}
+						}
+						else
+							{//Restart the effect timer and match the key
+										npcs[i].GetComponent<SpellEffectFreezeTime>().Key=Key;		
+										npcs[i].GetComponent<SpellEffectFreezeTime>().counter=mind.counter;
+							}
+
+				}
+
+		}
+		/*
+		void Cast_AnTym(GameObject caster, int EffectID)
+		{//TODO:active incantation?
 				//pause the animations on all the npcs
 				GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
 				for (int i = 0; i<=npcs.GetUpperBound(0); i++)
@@ -722,6 +774,7 @@ public class Magic : MonoBehaviour {
 						Cast_FreezeTime(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,EffectID,EffectSlot);
 				}
 		}
+		*/
 
 		void Cast_LightSpells(GameObject caster, int EffectID)
 		{//Light
@@ -1622,7 +1675,7 @@ public class Magic : MonoBehaviour {
 				}
 				sep.Go ();
 		}
-
+		/*
 		public void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Freeze Time
 				SpellProp_Mind mindspell = new SpellProp_Mind();
@@ -1630,7 +1683,7 @@ public class Magic : MonoBehaviour {
 				SpellEffectFreezeTime seft = (SpellEffectFreezeTime)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				seft.counter=mindspell.counter; //It will run for x ticks. Ie 10 hp damage per tick
 				seft.Go ();
-		}
+		}*/
 
 		public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Telekenisis
@@ -2573,11 +2626,24 @@ public class Magic : MonoBehaviour {
 						break;
 
 				case SpellEffect.UW1_Spell_Effect_FreezeTime:
+						//Active variation.
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_FreezeTime(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
+						}
+						break;
 				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt01:
 				case SpellEffect.UW1_Spell_Effect_FreezeTime_alt02:
 						//player only
-						Cast_AnTym(target,EffectID);
-						SpellResultType=SpellResultNone;
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_FreezeTime(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+								SpellResultType=SpellResultPassive;
+						}
+						//Cast_AnTym(target,EffectID);
+					//	SpellResultType=SpellResultNone;
+
 						break;
 				case SpellEffect.UW1_Spell_Effect_Regeneration:
 						//player only

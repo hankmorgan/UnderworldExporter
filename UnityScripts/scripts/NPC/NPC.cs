@@ -232,7 +232,10 @@ public class NPC : object_base {
 
 	public override bool ApplyAttack(int damage)
 	{
-		npc_attitude=0;//NPC becomes hostile.
+		if(Frozen==false)
+		{
+			npc_attitude=0;//NPC becomes hostile.
+		}	
 		npc_hp=npc_hp-damage;
 		return true;
 	}
