@@ -95,19 +95,23 @@ public class LightSource : object_base {
 		InventorySlot invSlot = null;
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
 		{						
-			invSlot=GameObject.Find ("RightShoulder_Slot").GetComponent<InventorySlot>();
+			//invSlot=GameObject.Find ("RightShoulder_Slot").GetComponent<InventorySlot>();
+			invSlot=playerUW.playerInventory.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftShoulder=="") || (pInv.sLeftShoulder==this.name))
 		{
-			invSlot=GameObject.Find ("LeftShoulder_Slot").GetComponent<InventorySlot>();
+			//invSlot=GameObject.Find ("LeftShoulder_Slot").GetComponent<InventorySlot>();
+			invSlot=playerUW.playerInventory.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sRightHand=="") || (pInv.sRightHand==this.name))
 		{
-			invSlot=GameObject.Find ("RightHand_Slot").GetComponent<InventorySlot>();
+			//invSlot=GameObject.Find ("RightHand_Slot").GetComponent<InventorySlot>();
+		invSlot=playerUW.playerInventory.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftHand=="") || (pInv.sLeftHand==this.name))
 		{
-			invSlot=GameObject.Find ("LeftHand_Slot").GetComponent<InventorySlot>();
+			//invSlot=GameObject.Find ("LeftHand_Slot").GetComponent<InventorySlot>();
+				invSlot=playerUW.playerInventory.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		if (invSlot != null)
 			{

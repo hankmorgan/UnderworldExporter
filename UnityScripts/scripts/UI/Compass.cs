@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Compass : GuiBase {
 
 	//Updates the compass display based on the characters heading.
@@ -23,14 +23,14 @@ public class Compass : GuiBase {
 	public const int NORTHWEST = 14 ;
 	public const int NORTHNORTHWEST = 15 ;
 
-	private UITexture comp;
-	public UITexture[] NorthIndicators=new UITexture[16];
+	private RawImage comp;
+	public RawImage[] NorthIndicators=new RawImage[16];
 
 	private Texture2D[] CompassPoles=new Texture2D[4];
 
 	// Use this for initialization
 	void Start () {
-		comp=this.GetComponent<UITexture>();
+		comp=this.GetComponent<RawImage>();
 		for (int i=0;i<4;i++)
 		{
 			CompassPoles[i]=Resources.Load <Texture2D> ("HUD/Compass/Compass_000"+i.ToString());
@@ -133,7 +133,7 @@ public class Compass : GuiBase {
 				case WEST:
 				case EAST:
 					{
-					comp.mainTexture=CompassPoles[0];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0000");
+					comp.texture=CompassPoles[0];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0000");
 					break;
 					}
 				case NORTHWEST:
@@ -141,7 +141,7 @@ public class Compass : GuiBase {
 				case SOUTHEAST:
 				case SOUTHWEST:
 					{
-						comp.mainTexture=CompassPoles[2];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0002");
+						comp.texture=CompassPoles[2];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0002");
 						break;
 					}
 				case NORTHNORTHWEST:
@@ -149,12 +149,12 @@ public class Compass : GuiBase {
 				case SOUTHSOUTHEAST:
 				case WESTSOUTHWEST:
 					{
-						comp.mainTexture=CompassPoles[1];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0001");
+						comp.texture=CompassPoles[1];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0001");
 						break;
 					}
 				default:
 					{
-					comp.mainTexture=CompassPoles[3];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0003");
+					comp.texture=CompassPoles[3];//Resources.Load <Texture2D> ("HUD/Compass/Compass_0003");
 					break;
 					}
 		

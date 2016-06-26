@@ -9,7 +9,7 @@ public class InteractionModeControlItem : GuiBase {
 	public InteractionModeControl imc;
 
 
-	void OnClick()
+	public void OnClick()
 	{
 		if ((playerUW.playerInventory.ObjectInHand!="") || (Conversation.InConversation) || (WindowDetect.WaitingForInput))
 		{

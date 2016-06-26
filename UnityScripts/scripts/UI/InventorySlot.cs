@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class InventorySlot : GuiBase {
 /*The slots containing items on the Inventory display*/
 
-	private UISprite slot;
+	//private UISprite slot;
+	//private RawImage slot;
 	public int slotIndex;//What index of inventory slot is this
 	public int SlotCategory; //What type of item is in the slot. Eg armour, rings, boots and general etc.
 	//Possible values for the below. Should tally with UWexporter defines
@@ -58,19 +60,21 @@ public class InventorySlot : GuiBase {
 		}
 	}
 
-	void OnClick()
+	public void OnClick(BaseEventData evnt)
 	{
-		ClickEvent();
+		PointerEventData pntr = (PointerEventData)evnt;
+				//Debug.Log (pnt.pointerId);
+		ClickEvent(pntr.pointerId);
 	}
 
-	void ClickEvent()
+		void ClickEvent(int pointerID)
 	{
 		if (playerUW.isRoaming==true)
 		{//No inventory use while using wizard eye.
 				return;
 		}
 		bool leftClick=true;
-		if (UICamera.currentTouchID == -2)
+		if (pointerID == -2)
 		{
 			leftClick=false;
 		}
@@ -377,14 +381,21 @@ public class InventorySlot : GuiBase {
 								playerUW.playerHud.MessageScroll.Set ("Move how many?");
 							}
 							//playerUW.playerHud.MessageScroll.Set ("Move how many?");
-							UIInput inputctrl =playerUW.playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
+							InputField inputctrl =playerUW.playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
 							inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
 						//	UIInput inputctrl =playerUW.playerHud.InputControl;
 							inputctrl.text="1";
-							inputctrl.label.text="1";
-							inputctrl.eventReceiver=this.gameObject;
-							inputctrl.type=UIInput.KeyboardType.NumberPad;
-							inputctrl.selected=true;
+														//TODO: Fix me inputctrl.label.text="1";
+														//TODO: Fix me inputctrl.eventReceiver=this.gameObject;
+							inputctrl.onEndEdit.RemoveAllListeners();
+							inputctrl.onEndEdit.AddListener(delegate {
+									this.OnSubmitPickup();	
+							} );
+							inputctrl.contentType= InputField.ContentType.IntegerNumber;
+
+														//TODO: Fix me inputctrl.type=UIInput.KeyboardType.NumberPad;
+														//TODO: Fix me inputctrl.selected=true;
+							inputctrl.Select();
 							WindowDetect.WaitingForInput=true;
 							Time.timeScale=0.0f;
 							QuantityObj=ObjectUsedOn;
@@ -398,17 +409,17 @@ public class InventorySlot : GuiBase {
 
 	public void OnSubmitPickup()
 	{
-		Debug.Log ("Value summited to slot");
+		//Debug.Log ("Value summited to slot");
 		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
-		UIInput inputctrl =playerUW.playerHud.InputControl;
-		Debug.Log (inputctrl.text);
+		InputField inputctrl =playerUW.playerHud.InputControl;
+		//Debug.Log (inputctrl.text);
 		int quant=0;
 		if (int.TryParse(inputctrl.text,out quant)==false)
 		{
 			quant=0;
 		}
 		inputctrl.text="";
-		inputctrl.label.text="";
+		inputctrl.text="";
 		WindowDetect.WaitingForInput=false;
 		Conversation.EnteringQty=false;
 		if (Conversation.InConversation==false)

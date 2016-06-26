@@ -91,6 +91,89 @@ public class WindowDetectUW : WindowDetect {
 		}
 	}
 
+		public void OnMouseEnter()
+		{				
+				//Debug.Log("ENTER");
+			CursorInMainWindow=true;
+		}
+
+		public void OnMouseExit()
+		{				
+			CursorInMainWindow=false;
+		}
+
+
+		public void OnMouseDown()
+		{
+				
+				if (playerUW.isRoaming==true)
+				{//No inventory use while using wizard eye.
+						return;
+				}
+				MouseHeldDown=true;
+				if(CursorInMainWindow==false)
+				{
+						return;
+				}
+				if (JustClicked==true)
+				{
+						return;
+				}
+
+				switch (UWCharacter.InteractionMode)
+				{
+				case UWCharacter.InteractionModePickup:
+						ClickEvent();
+						break;
+				default:
+						break;
+				}
+		}
+
+		public void OnMouseUp()
+		{
+				if (playerUW.isRoaming==true)
+				{//No inventory use while using wizard eye.
+						return;
+				}
+				MouseHeldDown=false;
+				if(CursorInMainWindow==false)
+				{
+						return;
+				}
+				if (JustClicked==true)
+				{
+						return;
+				}
+
+				switch (UWCharacter.InteractionMode)
+				{
+				case UWCharacter.InteractionModePickup:
+						ClickEvent();
+						break;
+				default:
+						break;
+				}
+		}
+
+		public void OnHover ()
+		{
+				//base.OnHover (isOver);
+
+				if(! CursorInMainWindow )
+				{
+						playerUW.PlayerCombat.AttackCharging=false;
+						playerUW.PlayerCombat.Charge=0;
+						if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
+						{
+								playerUW.PlayerCombat.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
+						}
+						else
+						{
+								playerUW.PlayerCombat.wpa.SetAnimation= "WeaponPutAway";
+						}
+				}
+		}
 
 	protected override void OnHover (bool isOver)
 	{
@@ -145,7 +228,7 @@ public class WindowDetectUW : WindowDetect {
 	}
 
 
-	void OnClick()
+	public void OnClick()
 	{
 		if (playerUW.isRoaming==true)
 		{//No inventory use while using wizard eye.
@@ -420,7 +503,7 @@ public class WindowDetectUW : WindowDetect {
 			Cursor.lockState = CursorLockMode.None;
 			CursorPosition.center = Event.current.mousePosition;
 			GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
-			playerUW.MouseLookCursor.mainTexture= playerUW.CursorIconBlank;
+			playerUW.MouseLookCursor.texture= playerUW.CursorIconBlank;
 		}
 		else
 		{
@@ -458,13 +541,14 @@ public class WindowDetectUW : WindowDetect {
 			
 			if (playerUW.MouseLookEnabled == true)
 			{
-				playerUW.MouseLookCursor.mainTexture=playerUW.CursorIcon;	
+				playerUW.MouseLookCursor.texture=playerUW.CursorIcon;	
+								//TODO:draw the cursor in the middle
 			}
 			else
 			{
 				CursorPosition.center = Event.current.mousePosition;
 				GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
-				playerUW.MouseLookCursor.mainTexture= playerUW.CursorIconBlank;
+				playerUW.MouseLookCursor.texture= playerUW.CursorIconBlank;
 			}		
 		}
 	}

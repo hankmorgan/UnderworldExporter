@@ -38,7 +38,7 @@ public class Magic : MonoBehaviour {
 
 		public long SummonCount=0;
 
-		public ScrollController ml;
+		//public ScrollController ml;
 
 		public void Update()
 		{//Infintite mana.
@@ -149,19 +149,19 @@ public class Magic : MonoBehaviour {
 						break;
 				default:
 						{
-								ml.Add ("Not a spell.");
+								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Not a spell.");
 								return false;
 						}
 				}//magicwords
 
 				if (Mathf.Round(casterUW.CharLevel/2)<TestSpellLevel)
 				{//Not experienced enough
-						ml.Add (casterUW.StringControl.GetString (1,210));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,210));
 						return false;
 				}
 				else if (CurMana< TestSpellLevel*3)
 				{//Mana test
-						ml.Add (casterUW.StringControl.GetString (1,211));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,211));
 						return false;
 				}
 				else if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
@@ -169,18 +169,18 @@ public class Magic : MonoBehaviour {
 						if (Random.Range(1,10)<8)
 						{//TODO:decide on the chances
 								//000~001~213~Casting was not successful.
-								ml.Add (casterUW.StringControl.GetString (1,213));
+								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,213));
 						}
 						else
 						{//000~001~214~The spell backfires.
-								ml.Add (casterUW.StringControl.GetString (1,214));
+								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,214));
 								casterUW.CurVIT = casterUW.CurVIT-3;
 						}
 						return false;
 				}
 				else
 				{//Casting sucessful. 
-						ml.Add ("Casting " + MagicWords);
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Casting " + MagicWords);
 						return true;
 				}
 		}
@@ -1164,7 +1164,7 @@ public class Magic : MonoBehaviour {
 						{//Teleport to level
 								Debug.Log ("moonstone is on another level. (or I forgot to update levelno)");
 								//000~001~273~The moonstone is not available.
-								ml.Add (playerUW.StringControl.GetString(1,273));
+								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,273));
 						}
 						else
 						{
@@ -1174,7 +1174,7 @@ public class Magic : MonoBehaviour {
 								}
 								else
 								{
-										ml.Add (playerUW.StringControl.GetString(1,273));
+										GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,273));
 								}
 						}
 				}
@@ -1483,7 +1483,7 @@ public class Magic : MonoBehaviour {
 				}
 				else
 				{//000~001~191~There is a pained whining sound.
-						ml.Add( caster.GetComponent<UWCharacter>().StringControl.GetString (1,191));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add( caster.GetComponent<UWCharacter>().StringControl.GetString (1,191));
 				}
 		}
 
@@ -1748,7 +1748,7 @@ public class Magic : MonoBehaviour {
 
 		void SpellIncantationFailed(GameObject caster)
 		{
-				ml.Add (caster.GetComponent<UWCharacter>().StringControl.GetString(1,212));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (caster.GetComponent<UWCharacter>().StringControl.GetString(1,212));
 		}
 
 		NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)

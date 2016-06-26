@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 /*
 The basic character. Stats and interaction.
  */ 
@@ -110,7 +110,7 @@ public class UWCharacter : Character {
 
 		ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();
 		playerHud.InputControl.text="";
-		playerHud.InputControl.label.text="";
+		//playerHud.InputControl.text="";
 		playerHud.MessageScroll.Clear ();
 		if (Application.loadedLevelName=="0")
 		{//Load the first level
@@ -201,7 +201,8 @@ public class UWCharacter : Character {
 		{//TODO: This should be in window detect
 			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
 			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
-			playerHud.InputControl.selected=true;
+			//playerHud.InputControl.selected=true;
+			playerHud.InputControl.Select();
 		}
 		if ((CurVIT<=0) && (mus.Death==false))
 		{
@@ -326,7 +327,7 @@ public class UWCharacter : Character {
 
 		//Debug.Log ("Value summited");
 
-		UIInput inputctrl =playerHud.InputControl;//playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
+		InputField inputctrl =playerHud.InputControl;//playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
 		//Debug.Log (inputctrl.text);
 		int quant=0;
 		if (int.TryParse(inputctrl.text,out quant)==false)
@@ -336,7 +337,7 @@ public class UWCharacter : Character {
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
 		inputctrl.text="";
-		inputctrl.label.text="";
+		inputctrl.text="";
 		playerHud.MessageScroll.Clear ();
 		//int quant= int.Parse(inputctrl.text);
 		if (quant==0)
@@ -549,13 +550,14 @@ public class UWCharacter : Character {
 								//Debug.Log("attempting to pick up a quantity");
 
 								playerHud.MessageScroll.Set ("Move how many?");
-								UIInput inputctrl =playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
+								InputField inputctrl =playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
 								inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
-								inputctrl.eventReceiver=this.gameObject;
-								inputctrl.type=UIInput.KeyboardType.NumberPad;
+								//TODO: Fix me inputctrl.eventReceiver=this.gameObject;
+																//TODO: Fix me inputctrl.type=UIInput.KeyboardType.NumberPad;
 								inputctrl.text="1";
-								inputctrl.label.text="1";
-								inputctrl.selected=true;
+																//TODO: Fix me inputctrl.label.text="1";
+																//TODO: Fix me inputctrl.selected=true;
+								inputctrl.Select();
 								QuantityObj=objPicked;	
 								Time.timeScale=0.0f;
 								WindowDetect.WaitingForInput=true;

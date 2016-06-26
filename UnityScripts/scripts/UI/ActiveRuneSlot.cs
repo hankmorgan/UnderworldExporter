@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ActiveRuneSlot : GuiBase {
 	/*GUI element for displaying the select spell runes and for casting those selected runes.*/
 	public int SlotNumber;
 	private int setRune=-2;
-	private UITexture thisRune;
+	private RawImage thisRune;
 
 	private Texture2D[] runes=new Texture2D[24];
 	private Texture2D blank;
 
 	void Start () {
 		base.start();
-		thisRune = this.GetComponent<UITexture>();
+		thisRune = this.GetComponent<RawImage>();
 		for (int i =0;i<24;i++)
 		{
 			runes[i]=Resources.Load <Texture2D> ("HUD/Runes/rune_" + i.ToString("D2"));
@@ -29,16 +30,16 @@ public class ActiveRuneSlot : GuiBase {
 			setRune= playerUW.PlayerMagic.ActiveRunes[SlotNumber];
 			if (playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
 			{
-				thisRune.mainTexture=runes[playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
+				thisRune.texture=runes[playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
 			}
 			else
 			{
-				thisRune.mainTexture=blank;
+				thisRune.texture=blank;
 			}
 		}
 	}
 
-	void OnClick()
+	public void OnClick()
 	{
 		if (playerUW.playerHud.window.JustClicked==true)
 		{

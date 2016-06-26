@@ -6,7 +6,7 @@ public class chains : GuiBase {
 	public static int ActiveControl;
 	public static int setControl=-1;
 
-	void OnClick()
+	public void OnClick()
 	{
 	 switch (ActiveControl)
 		{
@@ -32,7 +32,7 @@ public class chains : GuiBase {
 
 	public static GameObject EnableDisableControl(string ControlName, bool targetState)
 	{
-		GameObject ControlParent= GameObject.Find ("UI_MAIN_PANEL");
+		GameObject ControlParent= GameObject.Find ("_UI");
 		//Debug.Log (ControlParent.name);
 		foreach(Transform child in ControlParent.transform)
 		{
@@ -101,7 +101,9 @@ public class chains : GuiBase {
 				CutSceneEnabled=true;
 				break;
 		}
+		EnableDisableControl ("MagicRuneBag",RuneBagEnabled);
 
+				/*
 		EnableDisableControl ("RuneBagDisplay",RuneBagEnabled);
 		EnableDisableControl ("RuneSlot00",RuneBagEnabled);
 		EnableDisableControl ("RuneSlot01",RuneBagEnabled);
@@ -128,7 +130,10 @@ public class chains : GuiBase {
 		EnableDisableControl ("RuneSlot22",RuneBagEnabled);
 		EnableDisableControl ("RuneSlot23",RuneBagEnabled);
 		EnableDisableControl ("ClearRunes",RuneBagEnabled);
+		*/
 		//Turn off Stats
+		EnableDisableControl("Stats",StatsEnabled);
+				/*
 		EnableDisableControl("StatsDisplay",StatsEnabled);
 		EnableDisableControl("StatsCharname",StatsEnabled);
 		EnableDisableControl("StatsCharClass",StatsEnabled);
@@ -143,9 +148,12 @@ public class chains : GuiBase {
 		EnableDisableControl("StatsCharSkillValues",StatsEnabled);
 		EnableDisableControl("StatsDisplayUp",StatsEnabled);
 		EnableDisableControl("StatsDisplayDown",StatsEnabled);
+		*/
 		
-		
+		EnableDisableControl("Inventory", InventoryEnabled);
+		EnableDisableControl("PaperDollFemale", InventoryEnabled && playerUW.isFemale);
 		//Turn on inventory
+				/*
 		EnableDisableControl("Backpack_Slot_00",InventoryEnabled);
 		EnableDisableControl("Backpack_Slot_01",InventoryEnabled);
 		EnableDisableControl("Backpack_Slot_02",InventoryEnabled);
@@ -187,8 +195,11 @@ public class chains : GuiBase {
 		EnableDisableControl("InventoryDown",InventoryEnabled);
 		EnableDisableControl("InventoryUp",InventoryEnabled);
 		EnableDisableControl("PlayerWeight",InventoryEnabled);
+		*/
 		
 		//Turn off conversation
+		EnableDisableControl("Conversation",ConversationEnabled);
+				/*
 		EnableDisableControl("Conversation_Portrait_Frame_Left",ConversationEnabled);
 		EnableDisableControl("Conversation_Portrait_Left",ConversationEnabled);
 		EnableDisableControl("Conversation_Trade_Left",ConversationEnabled);
@@ -228,9 +239,9 @@ public class chains : GuiBase {
 		EnableDisableControl("Trade_NPC_Count_1",ConversationEnabled);
 		EnableDisableControl("Trade_NPC_Count_2",ConversationEnabled);
 		EnableDisableControl("Trade_NPC_Count_3",ConversationEnabled);
-
+*/
 		//Cutscene related
-		EnableDisableControl("scroll_cutscene",CutSceneEnabled);
+		//TODO: RESTORE ME! EnableDisableControl("scroll_cutscene",CutSceneEnabled);
 
 	}
 }

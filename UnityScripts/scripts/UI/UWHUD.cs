@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class UWHUD : MonoBehaviour {
 //Class for referencing other hud elements without having to search for them all the time.
 
 	public ScrollController MessageScroll;
 	public ScrollController MessageScrollTemp;
-	public UIInput InputControl;
+	public InputField InputControl;
 
 	public CutsceneAnimation CutScenesSmall;
 	public CutsceneAnimationFullscreen CutScenesFull;

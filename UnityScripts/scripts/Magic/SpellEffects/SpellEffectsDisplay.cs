@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class SpellEffectsDisplay : GuiBase {
 	public int SlotNumber;
 	//public static UWCharacter playerUW;
 	private int setSpell=-1;
-	private UITexture thisSpell;
+	private RawImage thisSpell;
 	private static Texture2D SpellBlank;
 	void Start () {
 
-		thisSpell = this.GetComponent<UITexture>();
+		thisSpell = this.GetComponent<RawImage>();
 		if (SpellBlank==null)
 		{
 			SpellBlank=	(Texture2D)Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
@@ -25,11 +26,11 @@ public class SpellEffectsDisplay : GuiBase {
 				setSpell= playerUW.ActiveSpell[SlotNumber].EffectIcon();
 				if (setSpell > -1)
 				{
-					thisSpell.mainTexture= Resources.Load <Texture2D> ("HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
+					thisSpell.texture= Resources.Load <Texture2D> ("HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
 				}
 				else
 				{
-					thisSpell.mainTexture= SpellBlank;//Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+					thisSpell.texture= SpellBlank;//Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 				}
 			}
 		}
@@ -37,7 +38,7 @@ public class SpellEffectsDisplay : GuiBase {
 		{
 			if (setSpell>=-1)
 			{
-				thisSpell.mainTexture= SpellBlank;//Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+				thisSpell.texture= SpellBlank;//Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 				setSpell=-2;
 			}
 		}

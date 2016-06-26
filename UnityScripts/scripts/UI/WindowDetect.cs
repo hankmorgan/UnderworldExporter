@@ -40,7 +40,7 @@ public class WindowDetect : MonoBehaviour {
 	// Update is called once per frame
 	protected virtual void Update () {
 
-		BlockingCollider.SetActive(WaitingForInput || InMap  );
+				//	BlockingCollider.SetActive(WaitingForInput || InMap  );
 
 	}
 

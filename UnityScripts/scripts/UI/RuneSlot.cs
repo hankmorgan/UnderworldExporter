@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class RuneSlot : MonoBehaviour {
 
 	public static UWCharacter playerUW;
 	public int SlotNumber;
-	private UITexture thisRune;
+	private RawImage thisRune;
 	private bool isSet;
 
 	static string[] Runes=new string[]{"An","Bet","Corp","Des",
@@ -16,20 +17,20 @@ public class RuneSlot : MonoBehaviour {
 		"Uus","Vas","Wis","Ylem"};
 	// Use this for initialization
 	void Start () {
-		thisRune = this.GetComponent<UITexture>();
-		thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+		thisRune = this.GetComponent<RawImage>();
+		thisRune.texture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 			if ((playerUW.PlayerMagic.PlayerRunes[SlotNumber] != false) && (isSet == false))
 			{
-				thisRune.mainTexture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
+				thisRune.texture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
 			}
 
 	}
 
-	void OnClick()
+	public void OnClick()
 	{
 
 		if (playerUW.PlayerMagic.PlayerRunes[SlotNumber] == false)

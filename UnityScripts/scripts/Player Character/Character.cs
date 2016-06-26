@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Character : MonoBehaviour {
 	/*Base Character Class*/
 
@@ -24,7 +24,7 @@ public class Character : MonoBehaviour {
 
 
 	//The cursor to display on the gui
-	public UITexture MouseLookCursor;
+	public RawImage MouseLookCursor;
 	public Texture2D CursorIcon;
 	public Texture2D CursorIconDefault;
 	public Texture2D CursorIconBlank;

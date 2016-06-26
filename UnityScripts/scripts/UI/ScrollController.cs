@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class ScrollController : GuiBase {
 /*
  * API for controlling how text is displayed on the ui scroll
@@ -10,7 +10,8 @@ public class ScrollController : GuiBase {
 	public int LineWidth = 65;//No of characters in a line
 
 	public UITextList uiIn;
-	
+	public Text NewUIOUt;
+
 	public void Add(string WhatToSay)
 	{
 		if (WhatToSay==null)
@@ -47,6 +48,7 @@ public class ScrollController : GuiBase {
 				//yield return StartCoroutine(WaitForMore());
 			}
 		}
+	NewUIOUt.text=uiIn.textLabel.text;
 	}
 
 	public void Set(string text)

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Equipment : object_base {
 //Base class for weapons and armour
@@ -35,11 +36,17 @@ public class Equipment : object_base {
 				{
 				//Do a difficulty check and prompt for approval.
 				ml.Set ("[placeholder]You think it will be hard/easy to repair this item");
-				UIInput inputctrl =playerUW.playerHud.InputControl;
-				inputctrl.eventReceiver=this.gameObject;
-				inputctrl.type=UIInput.KeyboardType.Default;
-				inputctrl.useLabelTextAtStart=true;
-				inputctrl.selected=true;
+				InputField inputctrl =playerUW.playerHud.InputControl;
+				//TODO:Fix me inputctrl.eventReceiver=this.gameObject;
+										//TODO:Fix me inputctrl.type=UIInput.KeyboardType.Default;
+										//TODO:Fix me inputctrl.useLabelTextAtStart=true;
+										//TODO:Fix me 				inputctrl.selected=true;
+				inputctrl.onEndEdit.RemoveAllListeners();
+				inputctrl.onEndEdit.AddListener(delegate {
+						this.OnSubmitPickup();	
+				} );
+				inputctrl.contentType= InputField.ContentType.Alphanumeric;
+				inputctrl.Select();
 				WindowDetect.WaitingForInput=true;
 				Time.timeScale=0.0f;
 				return true;
@@ -60,7 +67,7 @@ public class Equipment : object_base {
 	{//Event handler for processing the repair question y/n
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		UIInput inputctrl =playerUW.playerHud.InputControl;//playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+		InputField inputctrl =playerUW.playerHud.InputControl;//playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
 
 		string ans = inputctrl.text;
 		ml.Clear();//="";

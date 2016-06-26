@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class GuiBase : MonoBehaviour {
 //Base class for UI components.
 	public static UWCharacter playerUW;

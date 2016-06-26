@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Shrine : object_base {
 
 	public const string Mantra_FAL  ="FAL"; //Acrobat 
@@ -58,7 +58,7 @@ public class Shrine : object_base {
 	};
 
 	private bool WaitingForInput=false;
-	private UIInput inputctrl;
+	private InputField inputctrl;
 
 	public override bool use ()
 	{
@@ -73,11 +73,18 @@ public class Shrine : object_base {
 				}
 				ml.Set("Chant the mantra");
 				//inputctrl.text=ml.text;
-				inputctrl.eventReceiver=this.gameObject;
-				inputctrl.selected=true;
-				inputctrl.useLabelTextAtStart=true;
+				//TODO:Fix me inputctrl.eventReceiver=this.gameObject;
+								inputctrl.onEndEdit.RemoveAllListeners();
+								inputctrl.onEndEdit.AddListener(delegate {
+										this.OnSubmitPickup();	
+								} );
+								//inputctrl.inputType=InputField.InputType.Standard;
+								inputctrl.contentType= InputField.ContentType.Alphanumeric;
+								//TODO:Fix me inputctrl.selected=true;
+								inputctrl.Select();
+								//TODO:Fix me inputctrl.useLabelTextAtStart=true;
 				//Debug.Log ("Input ctrl type is" + inputctrl.type);
-				inputctrl.type=UIInput.KeyboardType.Default;
+								//TODO:Fix me inputctrl.type=UIInput.KeyboardType.Default;
 				Time.timeScale=0.0f;
 				WindowDetect.WaitingForInput=true;
 			}

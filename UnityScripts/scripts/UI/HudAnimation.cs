@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HudAnimation : GuiBase {
 	//Base Class For playing cutscenes and other animations on the hud.
 
-	public UITexture TargetControl;
+	//public UITexture TargetControl;
+	public RawImage TargetControl;
 	public string SetAnimation;
 	private SpriteRenderer sprt;
 	public string PreviousAnimation;
@@ -29,7 +31,7 @@ public class HudAnimation : GuiBase {
 		}
 		if (sprt.sprite!=null)
 		{
-			TargetControl.mainTexture =sprt.sprite.texture;
+			TargetControl.texture =sprt.sprite.texture;
 		}
 	}
 

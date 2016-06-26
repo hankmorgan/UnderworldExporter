@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class PlayerInventory : MonoBehaviour {
 
 	//The game objects at the various slots. (not in use?)
@@ -39,29 +39,29 @@ public class PlayerInventory : MonoBehaviour {
 	public bool[] bBackPack= new bool[8];
 
 	//Links to the slots where the object will be displayed
-	public UITexture Helm_f_Slot;
-	public UITexture Chest_f_Slot;
-	public UITexture Legs_f_Slot;
-	public UITexture Boots_f_Slot;
-	public UITexture Gloves_f_Slot;
-	public UITexture Helm_m_Slot;
-	public UITexture Chest_m_Slot;
-	public UITexture Legs_m_Slot;
-	public UITexture Boots_m_Slot;
-	public UITexture Gloves_m_Slot;
-	public UITexture LeftHand_Slot;
-	public UITexture RightHand_Slot;
-	public UITexture LeftRing_Slot;
-	public UITexture RightRing_Slot;
-	public UITexture LeftShoulder_Slot;
-	public UITexture RightShoulder_Slot;
-	public UITexture[] BackPack_Slot=new UITexture[8];
+	public RawImage Helm_f_Slot;
+	public RawImage Chest_f_Slot;
+	public RawImage Legs_f_Slot;
+	public RawImage Boots_f_Slot;
+	public RawImage Gloves_f_Slot;
+	public RawImage Helm_m_Slot;
+	public RawImage Chest_m_Slot;
+	public RawImage Legs_m_Slot;
+	public RawImage Boots_m_Slot;
+	public RawImage Gloves_m_Slot;
+	public RawImage LeftHand_Slot;
+	public RawImage RightHand_Slot;
+	public RawImage LeftRing_Slot;
+	public RawImage RightRing_Slot;
+	public RawImage LeftShoulder_Slot;
+	public RawImage RightShoulder_Slot;
+	public RawImage[] BackPack_Slot=new RawImage[8];
 
-	public UILabel LeftHand_Qty;
-	public UILabel RightHand_Qty;
-	public UILabel LeftShoulder_Qty;
-	public UILabel RightShoulder_Qty;
-	public UILabel[] Backpack_Slot_Qty= new UILabel[8];
+	public Text LeftHand_Qty;
+	public Text RightHand_Qty;
+	public Text LeftShoulder_Qty;
+	public Text RightShoulder_Qty;
+	public Text[] Backpack_Slot_Qty= new Text[8];
 
 	public GameObject InventoryMarker;
 	private GameObject[] LightGameObjects=new GameObject[4];
@@ -90,6 +90,7 @@ public class PlayerInventory : MonoBehaviour {
 			bBackPack[i]=true;
 		}
 		playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
+		Refresh();
 	}
 	
 	// Update is called once per frame
@@ -233,14 +234,14 @@ public class PlayerInventory : MonoBehaviour {
 
 	}*/
 
-	void DisplayGameObject(string objName, UITexture Label, UILabel qtyDisplay, bool isEquipped, ref bool hasChanged)
+		void DisplayGameObject(string objName, RawImage Label, Text qtyDisplay, bool isEquipped, ref bool hasChanged)
 	{
 		//hasChanged=true;
 		if (hasChanged==true)
 		{
 			if (objName =="")
-			{
-				Label.mainTexture=Blank;
+						{
+				Label.texture=Blank;
 				if (qtyDisplay!=null)
 				{
 					qtyDisplay.text="";
@@ -256,13 +257,13 @@ public class PlayerInventory : MonoBehaviour {
 				if (isEquipped==true)
 				{
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryIconEquipString;
-					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().GetEquipDisplay().texture;
+					Label.texture=objToDisplay.GetComponent<ObjectInteraction>().GetEquipDisplay().texture;
 				}
 				else
 				{
 					//Debug.Log ("Displaying " + objToDisplay.GetComponent<ObjectInteraction>().InventoryString);
 					//Label.spriteName= objToDisplay.GetComponent<ObjectInteraction>().InventoryString;
-					Label.mainTexture=objToDisplay.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+					Label.texture=objToDisplay.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 					if (qtyDisplay!=null)
 					{
 						int qty = objToDisplay.GetComponent<ObjectInteraction>().GetQty();
@@ -280,7 +281,7 @@ public class PlayerInventory : MonoBehaviour {
 			else
 			{
 				//Debug.Log ("Displaying blank");
-				Label.mainTexture=Blank;
+				Label.texture=Blank;
 				if (qtyDisplay!=null)
 				{
 					qtyDisplay.text="";

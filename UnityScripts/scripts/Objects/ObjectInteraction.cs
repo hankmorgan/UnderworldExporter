@@ -201,7 +201,7 @@ public class ObjectInteraction : MonoBehaviour {
 	void Start () {
 		if (MessageLog==null)
 		{
-			MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+			//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		}
 
 		if (InvMarker==null)

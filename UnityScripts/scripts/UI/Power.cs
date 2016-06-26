@@ -1,33 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class Power : MonoBehaviour {
+public class Power : GuiBase {
 
 	public string CurrentPower;
 	private float PreviousCharge=-1.0f;
 	private int RepeatCounter=0;
 	private int PreviousIndex=-1;
 	//float PowerLevel;
-	private UWCharacter playerUW;
-	private UITexture uiText;
+	//private UWCharacter playerUW;
+	private RawImage uiText;
+
+		void Start()
+		{
+			if (uiText==null)
+			{
+				uiText= this.gameObject.GetComponent<RawImage>();
+			}
+		}
+
 
 
 	void Update () {
-	if (playerUW==null)
-		{
-			playerUW= GameWorldController.instance.playerUW;
-		}
 
-		if (uiText==null)
-		{
-			uiText= this.gameObject.GetComponent<UITexture>();
-		}
 
-		if ((PreviousCharge!=playerUW.PlayerCombat.Charge)||(playerUW.PlayerCombat.AttackCharging==true))
+		if ((PreviousCharge!=GameWorldController.instance.playerUW.PlayerCombat.Charge)||(GameWorldController.instance.playerUW.PlayerCombat.AttackCharging==true))
 		{
-			PreviousCharge=playerUW.PlayerCombat.Charge;
+				PreviousCharge=GameWorldController.instance.playerUW.PlayerCombat.Charge;
 			 
-			int index= (int)playerUW.PlayerCombat.Charge/10;
+			int index= (int)GameWorldController.instance.playerUW.PlayerCombat.Charge/10;
 	
 			if (index==10)
 			{
@@ -41,7 +43,7 @@ public class Power : MonoBehaviour {
 				if (index!=PreviousIndex)
 				{
 					RepeatCounter=0;
-					uiText.mainTexture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ index.ToString("0000"));
+					uiText.texture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ index.ToString("0000"));
 					CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
 				}
 			}
@@ -51,7 +53,7 @@ public class Power : MonoBehaviour {
 			if (IsInvoking("UpdateMaxCharge"))
 			{
 				CancelInvoke("UpdateMaxCharge");
-				uiText.mainTexture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ 0.ToString("0000"));
+				uiText.texture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ 0.ToString("0000"));
 			}
 			RepeatCounter=0;
 		}
@@ -59,7 +61,7 @@ public class Power : MonoBehaviour {
 
 	void UpdateMaxCharge()
 	{
-		uiText.mainTexture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
+		uiText.texture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
 		CurrentPower="HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)

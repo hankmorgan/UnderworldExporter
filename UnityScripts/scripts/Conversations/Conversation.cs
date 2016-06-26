@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 /*
 Basic rules for converting conversations.
@@ -294,7 +295,8 @@ public class Conversation : GuiBase {
 			else if (WaitingForTyping)
 			{
 				//tl_input.gameObject.GetComponent<UIInput>().selected=true;
-				playerUW.playerHud.InputControl.selected=true;
+				//playerUW.playerHud.InputControl.selected=true;
+				playerUW.playerHud.InputControl.Select();
 			}
 
 		}
@@ -524,17 +526,25 @@ public class Conversation : GuiBase {
 		//WaitingForTyping=true;
 		tl_input.Set(">");
 
-		UIInput inputctrl = playerUW.playerHud.InputControl; //tl_input.gameObject.GetComponent<UIInput>();
+		//UIInput inputctrl = playerUW.playerHud.InputControl; //tl_input.gameObject.GetComponent<UIInput>();
+		InputField inputctrl=playerUW.playerHud.InputControl;
 		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
-		inputctrl.eventReceiver=this.gameObject;
-		inputctrl.type=UIInput.KeyboardType.Default;
+		//TODO: fix this inputctrl.eventReceiver=this.gameObject;
+		inputctrl.onEndEdit.RemoveAllListeners();
+		inputctrl.onEndEdit.AddListener(delegate {
+				this.OnSubmitPickup();	
+		} );
+		inputctrl.contentType= InputField.ContentType.Alphanumeric;
+
+				//TODO: inputctrl.type=UIInput.KeyboardType.Default;
 		inputctrl.text="";
-		inputctrl.label.text="";
-		inputctrl.selected=true;
+				//TODO: inputctrl.label.text="";
+				//TODO: inputctrl.selected=true;
+		inputctrl.Select();
 		yield return StartCoroutine(WaitForTypedInput());
 		yield return StartCoroutine(say (PlayerTypedAnswer,PC_SAY));
 		inputctrl.text="";
-		inputctrl.label.text="";
+				//TODO: inputctrl.label.text="";
 		playerUW.playerHud.MessageScroll.Clear ();
 	}
 
