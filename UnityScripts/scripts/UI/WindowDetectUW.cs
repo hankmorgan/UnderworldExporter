@@ -4,7 +4,7 @@ using System.Collections;
 public class WindowDetectUW : WindowDetect {
 	public	bool JustClicked;
 	public static bool UsingRoomManager =false;
-	public int WindowWaitCount=0;
+	public float WindowWaitCount=0;
 	public static UWCharacter playerUW;
 	public override void Start ()
 	{
@@ -18,15 +18,15 @@ public class WindowDetectUW : WindowDetect {
 	{
 		//Cancel all click input for a few seconds.
 		JustClicked=true;//Prevent catching something I have just thrown.
-		Invoke("ResetClick",waitTime);
-		WindowWaitCount++;
+		//Invoke("ResetClick",waitTime);
+		WindowWaitCount=waitTime;
 	}
 
-	void ResetClick()
-	{//All click input again.
-		WindowWaitCount--;
-		JustClicked=(WindowWaitCount>0);
-	}
+	//void ResetClick()
+	//{//All click input again.
+		//WindowWaitCount--;
+		//JustClicked=(WindowWaitCount>0);
+	//}
 
 
 	protected override void Update ()
@@ -38,6 +38,11 @@ public class WindowDetectUW : WindowDetect {
 		base.Update ();
 		if (JustClicked==true)
 		{
+			WindowWaitCount=WindowWaitCount-Time.deltaTime;
+			if (WindowWaitCount<=0)
+			{
+					JustClicked=false;
+			}
 			return;
 		}
 		switch (UWCharacter.InteractionMode)
@@ -105,55 +110,12 @@ public class WindowDetectUW : WindowDetect {
 
 		public void OnMouseDown()
 		{
-				
-				if (playerUW.isRoaming==true)
-				{//No inventory use while using wizard eye.
-						return;
-				}
-				MouseHeldDown=true;
-				if(CursorInMainWindow==false)
-				{
-						return;
-				}
-				if (JustClicked==true)
-				{
-						return;
-				}
-
-				switch (UWCharacter.InteractionMode)
-				{
-				case UWCharacter.InteractionModePickup:
-						ClickEvent();
-						break;
-				default:
-						break;
-				}
+				OnPress(true);
 		}
 
 		public void OnMouseUp()
 		{
-				if (playerUW.isRoaming==true)
-				{//No inventory use while using wizard eye.
-						return;
-				}
-				MouseHeldDown=false;
-				if(CursorInMainWindow==false)
-				{
-						return;
-				}
-				if (JustClicked==true)
-				{
-						return;
-				}
-
-				switch (UWCharacter.InteractionMode)
-				{
-				case UWCharacter.InteractionModePickup:
-						ClickEvent();
-						break;
-				default:
-						break;
-				}
+				OnPress(false);
 		}
 
 		public void OnHover ()
@@ -438,7 +400,9 @@ public class WindowDetectUW : WindowDetect {
 	public void SetFullScreen()
 	{
 		FullScreen=true;
-		//chains.EnableDisableControl("main_window",false);
+				chains.EnableDisableControl("main_window",false);
+				/*
+		
 		if (anchor==null)
 		{
 			anchor =this.GetComponent<UIAnchor>();
@@ -450,6 +414,7 @@ public class WindowDetectUW : WindowDetect {
 		anchor.side= UIAnchor.Side.Center;
 		anchor.relativeOffset=new Vector2(0.0f,0.0f);
 		stretch.relativeSize=new Vector2 (1.0f,1.0f);
+				*/
 		if (playerUW==null)
 		{
 			playerUW=GameWorldController.instance.playerUW;//GameObject.Find ("Gronk").GetComponent<UWCharacter>();
@@ -472,11 +437,11 @@ public class WindowDetectUW : WindowDetect {
 	public void UnSetFullScreen()
 	{
 		FullScreen=false;
-		//chains.EnableDisableControl("main_window",true);
+		chains.EnableDisableControl("main_window",true);
 	
-		anchor.side= UIAnchor.Side.Left;
-		anchor.relativeOffset=new Vector2(0.43f,0.13f);
-		stretch.relativeSize=new Vector2 (0.55f,0.57f);
+	//	anchor.side= UIAnchor.Side.Left;
+		//anchor.relativeOffset=new Vector2(0.43f,0.13f);
+		//stretch.relativeSize=new Vector2 (0.55f,0.57f);
 		playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
 		playerUW.playerHud.main_window.enabled=true;
 		/*

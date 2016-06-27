@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HealthFlask : GuiBase {
 	/*The health, mana and poisoned state indicators*/
-	public UITexture[] LevelImages=new UITexture[13];
+	public RawImage[] LevelImages=new RawImage[13];
 	public float Level;
 	public float MaxLevel;
 	public float FlaskLevel;
@@ -56,16 +57,16 @@ public class HealthFlask : GuiBase {
 		{
 			if (Poisoned==true)
 			{//Load the poisoned versions of the flask images.
-				LevelImages[i].mainTexture=Resources.Load <Texture2D> ("HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
+				LevelImages[i].texture=Resources.Load <Texture2D> ("HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
 			}
 			else
 			{//Load the healthy versions of the flask images.
-				LevelImages[i].mainTexture=Resources.Load <Texture2D> ("HUD/Flask/Flasks_"+ (i).ToString("0000"));
+				LevelImages[i].texture=Resources.Load <Texture2D> ("HUD/Flask/Flasks_"+ (i).ToString("0000"));
 			}
 		}
 	}
 
-	void OnClick()
+	public void OnClick()
 	{
 		string output=""; 
 		if (isHealthDisplay == true)

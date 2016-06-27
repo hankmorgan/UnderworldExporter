@@ -9,8 +9,12 @@ public class ScrollController : GuiBase {
 
 	public int LineWidth = 65;//No of characters in a line
 
-	public UITextList uiIn;
+	public string[]txtToDisplay = new string[5];
+
+	//public UITextList uiIn;
 	public Text NewUIOUt;
+	public int ptr;
+	public int MaxEntries;
 
 	public void Add(string WhatToSay)
 	{
@@ -30,7 +34,7 @@ public class ScrollController : GuiBase {
 				if (StrWords[j].Length+colCounter+1>LineWidth)
 				{
 					colCounter=0; 
-					uiIn.Add (Output);
+					ListAdd(Output);
 					Output=StrWords[j] + " ";
 					colCounter= StrWords[j].Length+1;
 				}	
@@ -41,25 +45,64 @@ public class ScrollController : GuiBase {
 				}
 			}
 			
-			uiIn.Add(Output );
+			ListAdd(Output );
 			if (i < Paragraphs.GetUpperBound(0))
 			{//TODO:Pause for more when not the last paragraph. 
-				uiIn.Add("[MORE]");
+				ListAdd("[MORE]");
 				//yield return StartCoroutine(WaitForMore());
 			}
 		}
-	NewUIOUt.text=uiIn.textLabel.text;
+	//NewUIOUt.text=uiIn.textLabel.text;
+				PrintList();
 	}
 
 	public void Set(string text)
 	{//Clears all text and sets the only text on the control
 		Clear();
 		Add(text);
+		PrintList();
 	}
 
 	public void Clear()
 	{
-		uiIn.Clear();//Clear the input list control
-		uiIn.textLabel.text="";
+		//uiIn.Clear();//Clear the input list control
+		//uiIn.textLabel.text="";
+		for (int i=0;i<=txtToDisplay.GetUpperBound(0);i++)
+		{
+			txtToDisplay[i] ="";
+		}
+		ptr=0;
+		PrintList();
+			
+	}
+
+
+
+
+	public void ListAdd(string text)
+	{
+		if (ptr==MaxEntries)
+		{			
+			for (int i=0;i<txtToDisplay.GetUpperBound(0);i++)
+			{//push the items up the list.
+					txtToDisplay[i] = txtToDisplay[i+1];
+			}	
+			txtToDisplay[ptr-1] = text;
+		}
+		else
+		{
+			txtToDisplay[ptr++] = text;		
+		}
+		
+	}
+
+	public void PrintList()
+	{
+		string result="";
+		for (int i=0;i<ptr;i++)
+		{
+			result = result+ txtToDisplay[i] + "\n";
+		}
+		NewUIOUt.text=result;
 	}
 }

@@ -274,6 +274,7 @@ public class UWCharacter : Character {
 
 		if (PlayerMagic.ReadiedSpell!="")
 		{//Player has a spell thats about to be cast. All other activity is ignored.
+	
 			SpellMode ();
 			return;
 		}

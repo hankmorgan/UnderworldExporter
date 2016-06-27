@@ -573,7 +573,8 @@ public class Magic : MonoBehaviour {
 				//Construct the spell words based on selected runes
 				MagicWords=TranslateSpellRune(Rune1,Rune2, Rune3);
 
-				castSpell (caster, MagicWords,ready);		
+				castSpell (caster, MagicWords,ready);	
+					
 		}
 
 

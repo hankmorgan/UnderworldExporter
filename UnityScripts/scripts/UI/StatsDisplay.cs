@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class StatsDisplay : GuiBase {
-	public UILabel CharName;
-	public UILabel CharClass;
-	public UILabel CharClassLevel;
-	public UILabel CharStr;
-	public UILabel CharDex;
-	public UILabel CharInt;
-	public UILabel CharVIT;
-	public UILabel CharMana;
-	public UILabel CharEXP;
-	public UILabel CharSkills;
-	public UILabel CharSkillLevels;
+	public Text CharName;
+	public Text CharClass;
+	public Text CharClassLevel;
+	public Text CharStr;
+	public Text CharDex;
+	public Text CharInt;
+	public Text CharVIT;
+	public Text CharMana;
+	public Text CharEXP;
+	public Text CharSkills;
+	public Text CharSkillLevels;
 
 	public static int Offset;
 
