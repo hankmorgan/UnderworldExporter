@@ -50,7 +50,6 @@ public class Equipment : object_base {
 				WindowDetect.WaitingForInput=true;
 				Time.timeScale=0.0f;
 				return true;
-				break;
 				}
 			}
 		}

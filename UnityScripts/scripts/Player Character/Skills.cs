@@ -70,27 +70,27 @@ public class Skills : MonoBehaviour {
 		
 		switch (SkillNo)
 		{
-		case SkillAttack : return Attack;break;
-		case SkillDefense : return Defense;break;
-		case SkillUnarmed :return Unarmed;break;
-		case SkillSword : return Sword;break;
-		case SkillAxe :return Axe;break;
-		case SkillMace : return Mace;break;
-		case SkillMissile :return Missile;break;
-		case SkillMana :return ManaSkill;break;
-		case SkillLore :return Lore;break;
-		case SkillCasting :return Casting;break;
-		case SkillTraps :return Traps;break;
-		case SkillSearch :return Search;break;
-		case SkillTrack :return Track;break;
-		case SkillSneak :return Sneak;break;
-		case SkillRepair :return Repair;break;
-		case SkillCharm :return Charm;break;
-		case SkillPicklock :return PickLock;break;
-		case SkillAcrobat :return Acrobat;break;
-		case SkillAppraise :return Appraise;break;
-		case SkillSwimming : return Swimming;break;
-		default: return -1;break;
+		case SkillAttack : return Attack;
+		case SkillDefense : return Defense;
+		case SkillUnarmed :return Unarmed;
+		case SkillSword : return Sword;
+		case SkillAxe :return Axe;
+		case SkillMace : return Mace;
+		case SkillMissile :return Missile;
+		case SkillMana :return ManaSkill;
+		case SkillLore :return Lore;
+		case SkillCasting :return Casting;
+		case SkillTraps :return Traps;
+		case SkillSearch :return Search;
+		case SkillTrack :return Track;
+		case SkillSneak :return Sneak;
+		case SkillRepair :return Repair;
+		case SkillCharm :return Charm;
+		case SkillPicklock :return PickLock;
+		case SkillAcrobat :return Acrobat;
+		case SkillAppraise :return Appraise;
+		case SkillSwimming : return Swimming;
+		default: return -1;
 		}
 	}
 

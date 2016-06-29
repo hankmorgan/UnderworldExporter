@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Container : object_base {
 
 	public string[] items=new string[40];
@@ -191,7 +191,8 @@ public class Container : object_base {
 			}
 		//Sort the container
 		Container.SortContainer(this);
-		GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
+		//GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
+		playerUW.playerHud.ContainerOpened.GetComponent<RawImage>().texture=currObjInt.GetEquipDisplay().texture;
 		if (this.isOpenOnPanel==false)
 		{
 			this.isOpenOnPanel=true;
@@ -213,7 +214,7 @@ public class Container : object_base {
 	public void SpillContents()
 	{//Removes the contents of a container out in the real world.
 		int counter;
-		TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
+		TileMap tm =GameWorldController.instance.Tilemap; //GameObject.Find("Tilemap").GetComponent<TileMap>();
 		WindowDetect.FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());

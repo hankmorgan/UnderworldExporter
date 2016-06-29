@@ -323,7 +323,7 @@ public class Conversation_2 : Conversation {
 	} // end func
 	
 	IEnumerator func_0443() {
-		
+		//Shak is repairing something. Not working...
 		//int locals[69];
 		int[] locals=new int[70];
 		
@@ -332,7 +332,7 @@ public class Conversation_2 : Conversation {
 		
 		if ( locals[21] > 2 ) {
 			
-			say( locals, 015 );
+			yield return StartCoroutine(say( locals, 015 ));
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
@@ -346,8 +346,27 @@ public class Conversation_2 : Conversation {
 		if ( locals[16] == 0 ) {
 			
 			locals[21] = locals[21] + 1;
+			//goto label_063b;//Ask to try again.
+				yield return StartCoroutine(say( locals, 028 ));
+				locals[48] = 29;
+				locals[49] = 30;
+				locals[50] = 0;
+				//locals[69] = babl_menu( 0, locals[48] );
+				yield return StartCoroutine(babl_menu (0,locals,48));
+				locals[69] = PlayerAnswer;
+				//TODO:Figure this out.
+				//locals[69] == 1;  // expr. has value on stack!
+				if ( locals[69] == 2 ) {
+
+						yield return StartCoroutine(func_13ac());
+				} // end if
+				else
+				{
+						goto label_044d;		
+				}
+
 		} else {
-			
+				locals[2]=locals[3];//Put the first found object into locals2
 			locals[18] = 0;
 			locals[19] = 0;
 			locals[17] = 1;
@@ -465,7 +484,7 @@ public class Conversation_2 : Conversation {
 			//	} // end if
 			yield break;	
 		label_063b:;
-			
+			//Asks to try again
 			
 			yield return StartCoroutine(say( locals, 028 ));
 			locals[48] = 29;

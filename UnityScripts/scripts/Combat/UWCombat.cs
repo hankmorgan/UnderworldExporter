@@ -185,13 +185,13 @@ public class UWCombat : Combat {
 			switch (currWeapon.Skill)
 			{
 			case 3:
-				return "Sword";break;
+				return "Sword";
 			case 4:
-				return "Axe";break;
+				return "Axe";
 			case 5:
-				return "Mace";break;
+				return "Mace";
 			default:
-				return "Fist";break;
+				return "Fist";
 			}
 		}
 		else
@@ -219,9 +219,9 @@ public class UWCombat : Combat {
 		case 3:
 		case 4:
 		case 5:
-			return "White";break;
+			return "White";
 		default:
-			return "Black";break;
+			return "Black";
 		}
 	}
 	

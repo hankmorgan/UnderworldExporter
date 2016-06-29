@@ -32,7 +32,6 @@ public class Readable : object_base {
 			{
 			ml.Add (playerUW.StringControl.GetString (8,objInt.Link - 0x200));
 			return true;
-			break;
 			}
 		case ObjectInteraction.BOOK://Book
 		case ObjectInteraction.SCROLL://Scroll
@@ -48,7 +47,6 @@ public class Readable : object_base {
 					ml.Add (playerUW.StringControl.GetString (3,objInt.Link - 0x200));
 				}
 				return true;
-				break;
 			}
 			else
 				{
@@ -61,7 +59,6 @@ public class Readable : object_base {
 			{
 			ml.Add ("READABLE TYPE NOT FOUND! (" + objInt.item_id +")");
 			return false;
-			break;
 			}
 		}
 	}

@@ -54,10 +54,10 @@ public class NPC : object_base {
 	public string NPC_ID;
 	public string CurrentAnim;
 
-	private NavMeshAgent agent;
+	//private NavMeshAgent agent;
 	public Animator anim;
 	public int currentState=-1;
-	private bool followPlayer=false;
+	//private bool followPlayer=false;
 	private string oldNPC_ID;
 	
 	private int facingIndex;
@@ -129,13 +129,13 @@ public class NPC : object_base {
 
 	void Awake () {
 		oldNPC_ID=NPC_ID;
-		agent = GetComponent<NavMeshAgent>();
+		//agent = GetComponent<NavMeshAgent>();
 		anim=GetComponentInChildren<Animator>();
 	}
 
 
 	// Use this for initialization
-	void Start () {
+	protected override void Start () {
 		base.Start();
 		this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
@@ -315,13 +315,13 @@ public class NPC : object_base {
 		switch (npc_attitude)
 		{
 		case 0:
-			return playerUW.StringControl.GetString (5,96);break;
+			return playerUW.StringControl.GetString (5,96);
 		case 1:
-			return playerUW.StringControl.GetString (5,97);break;
+			return playerUW.StringControl.GetString (5,97);
 		case 2:
-			return playerUW.StringControl.GetString (5,98);break;
+			return playerUW.StringControl.GetString (5,98);
 		default:
-			return playerUW.StringControl.GetString (5,99);break;
+			return playerUW.StringControl.GetString (5,99);
 
 		}
 	}

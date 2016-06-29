@@ -172,7 +172,7 @@ public class Compass : GuiBase {
 
 
 
-	void OnClick()
+	public void OnClick()
 	{
 		playerUW.playerHud.MessageScroll.Clear ();
 		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,64) 

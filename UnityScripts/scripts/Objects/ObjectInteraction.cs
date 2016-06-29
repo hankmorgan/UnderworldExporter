@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using RAIN.BehaviorTrees;
 using RAIN.Core;
 using RAIN.Minds;
@@ -102,7 +103,7 @@ public class ObjectInteraction : MonoBehaviour {
 	public const int MOONSTONE =89;
 	public const int LEECH= 91;
 	public const int FISHING_POLE= 92;
-	public static UILabel MessageLog;
+	//public static Text MessageLog;
 
 	public Sprite InventoryDisplay;
 	public Sprite EquipDisplay;
@@ -199,10 +200,10 @@ public class ObjectInteraction : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-		if (MessageLog==null)
-		{
+		//if (MessageLog==null)
+		//{
 			//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-		}
+		//}
 
 		if (InvMarker==null)
 		{
@@ -836,13 +837,10 @@ public class ObjectInteraction : MonoBehaviour {
 		{
 		case 160:
 			return 161;
-			break;
 		case 161:
 			return 160;
-			break;
 		default:
 			return id;
-			break;
 		}
 	}
 
@@ -961,7 +959,7 @@ public class ObjectInteraction : MonoBehaviour {
 		public virtual bool ChangeType(int newID, int newType)
 		{//Changes the type of the object. Eg when destroyed and it needs to become debris.
 				item_id=newID;
-				ItemType=ItemType;
+				ItemType=newType;
 				WorldDisplayIndex=newID;
 				InvDisplayIndex=newID;
 				Destroy(this.gameObject.GetComponent<object_base>());

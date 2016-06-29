@@ -158,7 +158,7 @@ public class Character : MonoBehaviour {
 		return pickupRange;
 	}
 
-	public virtual void PickupMode()
+	public virtual void PickupMode (int ptrId)
 	{//Picks up the clicked object in the view.
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
 		if (InvMarker==null)
@@ -185,7 +185,7 @@ public class Character : MonoBehaviour {
 				{
 					if (objPicked.CanBePickedUp==true)
 					{
-						if (UICamera.currentTouchID==-2)
+						if (ptrId==-2)
 						{
 						objPicked=Pickup(objPicked,pInv);
 						}

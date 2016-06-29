@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class TileMap : MonoBehaviour {
 	public int[,] tileType = new int[64,64];
@@ -43,7 +44,7 @@ public class TileMap : MonoBehaviour {
 	const int SOUTHWEST=6;
 	const int SOUTHEAST=7;
 
-	RaycastHit hit = new RaycastHit(); 
+	//RaycastHit hit = new RaycastHit(); 
 	public int visitTileX; public int visitTileY;
 	public static bool OnGround=false;
 	public static bool OnWater=false;
@@ -643,12 +644,10 @@ public class TileMap : MonoBehaviour {
 		case TILE_SLOPE_W:
 			{
 				return true;
-				break;
 			}
 		default:
 			{
 			return false;
-			break;
 			}
 		}
 	}

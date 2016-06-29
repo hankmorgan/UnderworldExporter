@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MapClose : MonoBehaviour {
 
-	void OnClick()
+	public void OnClick()
 	{
-		GameObject map = GameObject.Find ("MapAnchor");
+		/*GameObject map = GameObject.Find ("MapAnchor");
 		
 		//Turn on the camera
 		foreach(Transform child in map.transform)
@@ -14,7 +14,8 @@ public class MapClose : MonoBehaviour {
 			{
 				child.gameObject.SetActive(false);
 			}
-		}
+		}*/
+				
 		WindowDetect.InMap=false;
 		//Turn off the main hud
 		//GameObject UWHud =GameObject.Find ("UW_HUD");

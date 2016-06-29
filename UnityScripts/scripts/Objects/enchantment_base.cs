@@ -62,7 +62,7 @@ public class enchantment_base : object_base {
 
 	public override bool LookAt ()
 	{//Look descriptions for different enchantable objects.
-		string desc;
+		//string desc;
 		
 		switch (objInt.item_id)
 		{	

@@ -17,13 +17,13 @@ public class ObjectMasters : MonoBehaviour {
 	string[] path= new string[500]; //to object model
 	string[] particle= new string[500];
 	string[] sound= new string[500];
-	int[] isEntity= new int[500]; // 1 for entity. 0 for model. -1 for ignored entries
-	int[] isSet= new int[500];
+	//int[] isEntity= new int[500]; // 1 for entity. 0 for model. -1 for ignored entries
+	//int[] isSet= new int[500];
 
-	int[] extraInfo= new int[500];	//For stuff like door texture info.
-	int[] renderType= new int[500];
-	int[] frame1= new int[500];	//Frame no
-	int[] DeathWatch= new int[500];
+	//int[] extraInfo= new int[500];	//For stuff like door texture info.
+	//int[] renderType= new int[500];
+	//int[] frame1= new int[500];	//Frame no
+	//int[] DeathWatch= new int[500];
 	int[] hasParticle= new int[500];
 	int[] hasSound= new int[500];
 	string[] baseModel= new string[500];

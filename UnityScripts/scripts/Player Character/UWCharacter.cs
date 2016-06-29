@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 /*
 The basic character. Stats and interaction.
  */ 
@@ -172,7 +173,6 @@ public class UWCharacter : Character {
 					{
 						case ObjectInteraction.POLE:
 							return useRange *2;
-							break;
 					}
 				}
 				return useRange;
@@ -323,18 +323,19 @@ public class UWCharacter : Character {
 	}
 
 
-	public void OnSubmitPickup()
+		public void OnSubmitPickup(int quant)
 	{
 
 		//Debug.Log ("Value summited");
 
 		InputField inputctrl =playerHud.InputControl;//playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
 		//Debug.Log (inputctrl.text);
-		int quant=0;
+				/*
+				int quant=0;
 		if (int.TryParse(inputctrl.text,out quant)==false)
 		{
 			quant=0;
-		}
+		}*/
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
 		inputctrl.text="";
@@ -504,7 +505,7 @@ public class UWCharacter : Character {
 		}
 
 
-	public override void PickupMode ()
+	public override void PickupMode (int ptrId)
 	{
 		//Picks up the clicked object in the view.
 		PlayerInventory pInv = this.GetComponent<PlayerInventory>();
@@ -538,7 +539,7 @@ public class UWCharacter : Character {
 							playerHud.MessageScroll.Add(StringControl.GetString(1,95));
 							return;
 						}
-						if (UICamera.currentTouchID==-2)
+						if (ptrId==-2)
 						{
 							//right click check for quant.
 							//Pickup if either not a quantity or is a quantity of one.
@@ -553,6 +554,10 @@ public class UWCharacter : Character {
 								playerHud.MessageScroll.Set ("Move how many?");
 								InputField inputctrl =playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
 								inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputCharacterQty;
+
+
 								//TODO: Fix me inputctrl.eventReceiver=this.gameObject;
 																//TODO: Fix me inputctrl.type=UIInput.KeyboardType.NumberPad;
 								inputctrl.text="1";

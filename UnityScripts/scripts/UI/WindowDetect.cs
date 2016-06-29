@@ -21,15 +21,15 @@ public class WindowDetect : MonoBehaviour {
 	public GameObject BlockingCollider;
 
 	static public bool CursorInMainWindow;
-	protected UIAnchor anchor;
-	protected UIStretch stretch;
+	//protected UIAnchor anchor;
+	//protected UIStretch stretch;
 
 	protected Rect CursorPosition;
 
 	public virtual void Start()
 	{
-		anchor=this.GetComponent<UIAnchor>();
-		stretch=this.GetComponent<UIStretch>();
+		//anchor=this.GetComponent<UIAnchor>();
+		//stretch=this.GetComponent<UIStretch>();
 		CursorPosition = new Rect(
 			0.0f,
 			0.0f,
@@ -51,7 +51,7 @@ public class WindowDetect : MonoBehaviour {
 
 
 
-	protected virtual void OnPress(bool isDown)
+	protected virtual void OnPress(bool isDown,int ptrID)
 		{
 	
 			MouseHeldDown=isDown;

@@ -844,7 +844,7 @@ public class Magic : MonoBehaviour {
 				float dropRange=1.2f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the spellcast
-						int ObjectNo = 176 + Random.Range(0,7);
+						//int ObjectNo = 176 + Random.Range(0,7);
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("NPCs");
 						myObj.tag="NPCs";
@@ -1791,7 +1791,7 @@ public class Magic : MonoBehaviour {
 										if (GeometryUtility.TestPlanesAABB(planes, Col.bounds))
 										{
 												Vector3 campos= Camera.main.ScreenToWorldPoint(new Vector3(0.5f, 0.5f, 0f));
-												Vector3 dirtonpc = campos-Col.gameObject.transform.position;
+												//Vector3 dirtonpc = campos-Col.gameObject.transform.position;
 
 												if (Physics.Linecast(campos,Col.gameObject.transform.position,out hit))
 												{
@@ -2237,7 +2237,7 @@ public class Magic : MonoBehaviour {
 		void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force,float spread)
 		{
 				//Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
-				Vector3 ThrowDir = ray.GetPoint(dropRange)  - ray.origin;
+			//	Vector3 ThrowDir = ray.GetPoint(dropRange)  - ray.origin;
 
 				//From http://answers.unity3d.com/questions/467742/how-can-i-create-raycast-bullet-innaccuracy-as-a-c.html
 				//Start
@@ -3089,16 +3089,12 @@ public class Magic : MonoBehaviour {
 				{
 				case SpellResultNone://No spell effect or unimplemented spell
 						return null;
-						break;
 				case SpellResultPassive://Passive spell effect
 						return playerUW.PassiveSpell[PassiveArrayIndex];
-						break;
 				case SpellResultActive://Active spell effect
 						return playerUW.ActiveSpell[ActiveArrayIndex];
-						break;
 				default:
 						return null;
-						break;
 				}
 		}
 }

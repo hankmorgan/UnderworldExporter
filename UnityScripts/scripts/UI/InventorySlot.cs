@@ -18,6 +18,7 @@ public class InventorySlot : GuiBase {
 	public const int GLOVES =76;
 	public const int LEGGINGS =77;
 	public static bool LookingAt;
+	public static string TempLookAt;
 
 	private GameObject QuantityObj=null;//Reference to quantity object being picked up
 
@@ -174,7 +175,7 @@ public class InventorySlot : GuiBase {
 			ObjectInteraction objInt =playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
 				{//Slot is not a general use one andThis item type does not go in this slot.
-					Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
+					Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory + " at " + this.name);
 					DoNotPickup=true;
 				}
 				
@@ -371,9 +372,10 @@ public class InventorySlot : GuiBase {
 							//Debug.Log("attempting to pick up a quantity");
 							if (Conversation.InConversation==true)
 							{
-								playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
-								playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
-								playerUW.playerHud.MessageScrollTemp.Set ("Move how many?");
+								//playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
+								//playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+								InventorySlot.TempLookAt=playerUW.playerHud.MessageScroll.NewUIOUt.text;
+								playerUW.playerHud.MessageScroll.Set ("Move how many?");
 								Conversation.EnteringQty=true;
 							}
 							else
@@ -387,10 +389,14 @@ public class InventorySlot : GuiBase {
 							inputctrl.text="1";
 														//TODO: Fix me inputctrl.label.text="1";
 														//TODO: Fix me inputctrl.eventReceiver=this.gameObject;
-							inputctrl.onEndEdit.RemoveAllListeners();
-							inputctrl.onEndEdit.AddListener(delegate {
-									this.OnSubmitPickup();	
-							} );
+							//inputctrl.onEndEdit.RemoveAllListeners();
+							//inputctrl.onEndEdit.AddListener(delegate {
+							//		this.OnSubmitPickup();	
+							//} );
+
+							inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+							inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputInventoryQty;
+
 							inputctrl.contentType= InputField.ContentType.IntegerNumber;
 
 														//TODO: Fix me inputctrl.type=UIInput.KeyboardType.NumberPad;
@@ -407,17 +413,17 @@ public class InventorySlot : GuiBase {
 	}
 
 
-	public void OnSubmitPickup()
+	public void OnSubmitPickup(int quant)
 	{
 		//Debug.Log ("Value summited to slot");
 		//PlayerInventory pInv = player.GetComponent<PlayerInventory>();
 		InputField inputctrl =playerUW.playerHud.InputControl;
 		//Debug.Log (inputctrl.text);
-		int quant=0;
+		/*int quant=0;
 		if (int.TryParse(inputctrl.text,out quant)==false)
 		{
 			quant=0;
-		}
+		}*/
 		inputctrl.text="";
 		inputctrl.text="";
 		WindowDetect.WaitingForInput=false;
@@ -429,8 +435,9 @@ public class InventorySlot : GuiBase {
 		}
 		else
 		{
-			playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
-			playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
+			//playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
+			//playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
+			playerUW.playerHud.MessageScroll.Set(InventorySlot.TempLookAt);
 		}
 
 		if (quant==0)
@@ -482,17 +489,19 @@ public class InventorySlot : GuiBase {
 
 	void TemporaryLookAt()
 	{/*For looking at items temporarily in conversations where I need to restore the original log text*/
-		if (LookingAt==true)
+		if (InventorySlot.LookingAt==true)
 		{return;}//Only look at one thing at a time.
 		
 		ObjectInteraction objInt= GetGameObjectInteration();
 		if (objInt!=null)
 		{
-			LookingAt=true;
-			playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
-			playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+			InventorySlot.LookingAt=true;
+			//playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
+			//playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+			InventorySlot.TempLookAt=playerUW.playerHud.MessageScroll.NewUIOUt.text;
 			StartCoroutine(ClearTempLookAt());
-			playerUW.playerHud.MessageScrollTemp.Set (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			//playerUW.playerHud.MessageScrollTemp.Set (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			playerUW.playerHud.MessageScroll.Set(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		}
 	}
 	
@@ -502,7 +511,7 @@ public class InventorySlot : GuiBase {
 		Time.timeScale=0.1f;
 		yield return new WaitForSeconds(0.1f);
 		
-		LookingAt=false;
+		InventorySlot.LookingAt=false;
 		if (Conversation.InConversation==true)
 		{
 			Time.timeScale=0.00f;
@@ -512,9 +521,9 @@ public class InventorySlot : GuiBase {
 			Time.timeScale=1.0f;//just in case a conversation is ended while looking.
 		}
 		
-		playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
-		playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
-		playerUW.playerHud.MessageScrollTemp.Set("");
+		//playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
+		//playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
+		playerUW.playerHud.MessageScroll.Set(InventorySlot.TempLookAt);
 	}
 
 

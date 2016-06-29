@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Eyes : GuiBase {
 	//The glowing gargoyle eyes at the top of the screen.
@@ -24,7 +25,7 @@ public class Eyes : GuiBase {
 	
 		if (EyeIndex!=PreviousEyeIndex)
 		{
-			this.GetComponent<UITexture>().mainTexture = eyes[EyeIndex];
+			this.GetComponent<RawImage>().texture = eyes[EyeIndex];
 			//this.GetComponent<UITexture>().mainTexture=Resources.Load <Texture2D> ("HUD/Eyes/Eyes_"+ EyeIndex.ToString("0000"));
 		}
 	}

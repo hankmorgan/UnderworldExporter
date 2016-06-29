@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class WindowDetectUW : WindowDetect {
 	public	bool JustClicked;
@@ -108,14 +109,16 @@ public class WindowDetectUW : WindowDetect {
 		}
 
 
-		public void OnMouseDown()
+		public void OnMouseDown(BaseEventData evnt)
 		{
-				OnPress(true);
+				PointerEventData pntr = (PointerEventData)evnt;
+				OnPress(true,pntr.pointerId);
 		}
 
-		public void OnMouseUp()
+		public void OnMouseUp(BaseEventData evnt)
 		{
-				OnPress(false);
+				PointerEventData pntr = (PointerEventData)evnt;
+				OnPress(false,pntr.pointerId);
 		}
 
 		public void OnHover ()
@@ -156,13 +159,13 @@ public class WindowDetectUW : WindowDetect {
 		}
 	}
 
-	protected override void OnPress (bool isPressed)
+	protected override void OnPress (bool isPressed, int PtrID)
 	{
 		if (playerUW.isRoaming==true)
 		{//No inventory use while using wizard eye.
 				return;
 		}
-		base.OnPress(isPressed);
+		base.OnPress(isPressed,PtrID);
 		if(CursorInMainWindow==false)
 		{
 			return;
@@ -180,7 +183,7 @@ public class WindowDetectUW : WindowDetect {
 			switch (UWCharacter.InteractionMode)
 			{
 		case UWCharacter.InteractionModePickup:
-				ClickEvent();
+				ClickEvent(PtrID);
 				break;
 			default:
 				break;
@@ -189,8 +192,15 @@ public class WindowDetectUW : WindowDetect {
 		//}
 	}
 
+		public void OnClick(BaseEventData evnt)
+		{
+				PointerEventData pntr = (PointerEventData)evnt;
+				//Debug.Log (pnt.pointerId);
+				OnClick(pntr.pointerId);
+		}
 
-	public void OnClick()
+
+	public void OnClick(int ptrID)
 	{
 		if (playerUW.isRoaming==true)
 		{//No inventory use while using wizard eye.
@@ -205,7 +215,7 @@ public class WindowDetectUW : WindowDetect {
 		case UWCharacter.InteractionModePickup:
 			break;
 		default:
-			ClickEvent();
+			ClickEvent(ptrID);
 			break;
 		}
 
@@ -214,7 +224,7 @@ public class WindowDetectUW : WindowDetect {
 	}
 
 
-	void ClickEvent()
+	void ClickEvent(int ptrID)
 	{
 		if ((playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
 		{
@@ -226,7 +236,6 @@ public class WindowDetectUW : WindowDetect {
 		{
 		case UWCharacter.InteractionModeOptions://Options mode
 			return;//do nothing
-			break;
 		case UWCharacter.InteractionModeTalk://Talk
 			playerUW.TalkMode();
 			break;
@@ -239,7 +248,7 @@ public class WindowDetectUW : WindowDetect {
 			}
 			else
 			{
-				playerUW.PickupMode();
+				playerUW.PickupMode(ptrID);
 			}
 			
 			break;
@@ -401,6 +410,10 @@ public class WindowDetectUW : WindowDetect {
 	{
 		FullScreen=true;
 				chains.EnableDisableControl("main_window",false);
+				RectTransform pos= this.GetComponent<RectTransform>();
+				pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
+				pos.sizeDelta=new Vector2(800.0f, 600f);
+
 				/*
 		
 		if (anchor==null)
@@ -438,7 +451,10 @@ public class WindowDetectUW : WindowDetect {
 	{
 		FullScreen=false;
 		chains.EnableDisableControl("main_window",true);
-	
+		RectTransform pos= this.GetComponent<RectTransform>();
+		pos.localPosition = new Vector3(-55.5f,73.0f,0.0f);
+		pos.sizeDelta=new Vector2(430.0f, 340f);
+
 	//	anchor.side= UIAnchor.Side.Left;
 		//anchor.relativeOffset=new Vector2(0.43f,0.13f);
 		//stretch.relativeSize=new Vector2 (0.55f,0.57f);

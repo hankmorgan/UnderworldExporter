@@ -66,7 +66,7 @@ public class ButtonHandler : object_base {
 	// Update is called once per frame
 	void Update () {
 		return;
-		if (SpriteSet==false)
+		/*if (SpriteSet==false)
 		{
 			SpriteSet=true;
 			if (isRotarySwitch==false)
@@ -84,7 +84,7 @@ public class ButtonHandler : object_base {
 			{
 				setRotarySprite(state);
 			}
-		}
+		}*/
 	}
 
 	public override bool LookAt ()
@@ -116,7 +116,8 @@ public class ButtonHandler : object_base {
 		return true;
 	}
 
-	public bool Activate()
+
+	public override bool Activate()
 	{
 		if (trigger=="")
 		{
@@ -191,13 +192,11 @@ public class ButtonHandler : object_base {
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
 				ml.Set (playerUW.StringControl.GetString(1,157));
 				return Activate();
-				break;
 			default:
 				playerUW.playerInventory.ObjectInHand="";
 				playerUW.CursorIcon=playerUW.CursorIconDefault;
 				objIntUsed.FailMessage();
 				return false;
-				break;
 			}
 		}
 		return false;

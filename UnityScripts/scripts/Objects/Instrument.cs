@@ -6,11 +6,11 @@ public class Instrument : object_base {
 	public static bool PlayingInstrument;
 	static string CurrentInstrument;
 	static string NoteRecord;//Records the last few notes played for a puzzle.
-	private AudioSource audio;
+	//private AudioSource audio;
 	protected override void Start ()
 	{
 		base.Start ();
-		audio=this.GetComponent<AudioSource>();
+		//audio=this.GetComponent<AudioSource>();
 	}
 
 	public override bool use ()
@@ -116,8 +116,8 @@ public class Instrument : object_base {
 		//From
 		//http://answers.unity3d.com/questions/141771/whats-a-good-way-to-do-dynamically-generated-music.html
 
-		audio.pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
-		audio.Play();
+		this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
+		this.GetComponent<AudioSource>().Play();
 		//Debug.Log (NoteRecord);
 		//NoteRecord[]
 	}

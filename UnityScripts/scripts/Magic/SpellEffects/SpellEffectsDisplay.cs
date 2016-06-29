@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SpellEffectsDisplay : GuiBase {
 	public int SlotNumber;
@@ -43,25 +44,30 @@ public class SpellEffectsDisplay : GuiBase {
 			}
 		}
 	}
+
+		public void OnClick(BaseEventData evnt)
+		{
+				PointerEventData pntr = (PointerEventData)evnt;
+				//Debug.Log (pnt.pointerId);
+				ClickEvent(pntr.pointerId);
+		}
 	
-	void OnClick()
+	void ClickEvent(int ptrID)
 	{
 		if (playerUW.ActiveSpell[SlotNumber]==null)
 		{
 			return;
 		}
-		switch (UICamera.currentTouchID)
+		switch (ptrID)
 		{
 		case -1://Left click
 		{
-			//TODO: actually cancel the effect!
 			playerUW.ActiveSpell[SlotNumber].CancelEffect();
 			break;
 		}
 		case -2://right click
 		{
 			playerUW.playerHud.MessageScroll.Add (playerUW.ActiveSpell[SlotNumber].getSpellDescription());
-			//Debug.Log (setSpell);
 			break;
 		}
 		}

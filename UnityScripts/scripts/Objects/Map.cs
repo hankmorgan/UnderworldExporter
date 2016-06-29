@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Map : object_base {
 	//The inventory item
@@ -25,9 +26,9 @@ public class Map : object_base {
 	public bool OpenMap()
 	{
 		//Use a map
-		GameObject map = GameObject.Find ("MapAnchor");//The UI
-		GameObject TileMapInfo = GameObject.Find ("Tilemap");//The stored data.
-
+		//GameObject map = GameObject.Find ("MapAnchor");//The UI
+		//GameObject TileMapInfo =GameWorldController.instance.Tilemap.gameObject; //GameObject.Find ("Tilemap");//The stored data.
+				/*
 		//Turn on the camera
 		foreach(Transform child in map.transform)
 		{
@@ -41,7 +42,10 @@ public class Map : object_base {
 			UITexture MapDisplay=GameObject.Find ("MapDisplay").GetComponent<UITexture>();
 			MapDisplay.mainTexture= TileMapInfo.GetComponent<TileMap>().TileMapImage();
 		}
+				*/
 		WindowDetect.InMap=true;//turns on blocking collider.
+		//RawImage mapdisplay =playerUW.playerHud.MapDisplay;
+		playerUW.playerHud.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
 		//Turn off the main hud
 		//GameObject UWHud =GameObject.Find ("UW_HUD");
 		//foreach(Transform child in UWHud.transform)

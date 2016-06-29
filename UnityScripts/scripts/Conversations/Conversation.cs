@@ -93,7 +93,7 @@ public class Conversation : GuiBase {
 
 	public static int PlayerAnswer;
 	public static string PlayerTypedAnswer;
-	private int MinAnswer=1;
+	//private int MinAnswer=1;
 	private int MaxAnswer=1;
 
 	public int WhoAmI;
@@ -109,10 +109,10 @@ public class Conversation : GuiBase {
 	public static bool usingBablF;
 	public static int bablf_ans=0;
 
-	public static UITextList tl;//Text output.
+	public static ScrollController tl;//Text output.
 	public static ScrollController tl_input;//player choices
-	public static UITexture OutPutControl;//Where the conversation is printed out
-	public static UWFonts FontController;
+	//public static UITexture OutPutControl;//Where the conversation is printed out
+	//public static UWFonts FontController;
 
 	public static Camera maincam;
 
@@ -133,15 +133,15 @@ public class Conversation : GuiBase {
 		chains.Refresh();
 		npc.getObjectInteraction().isIdentified=true;
 		//UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
-		UITexture portrait = playerUW.playerHud.ConversationPortraits[0];
-		UITexture npcPortrait = playerUW.playerHud.ConversationPortraits[1];
-		portrait.mainTexture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));//TODO:playerbody
+		RawImage portrait = playerUW.playerHud.ConversationPortraits[0];
+		RawImage npcPortrait = playerUW.playerHud.ConversationPortraits[1];
+		portrait.texture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));//TODO:playerbody
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
 			//head in charhead.gr
 			//GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			npcPortrait.mainTexture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+			npcPortrait.texture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 		}	
 		else
 		{
@@ -151,7 +151,7 @@ public class Conversation : GuiBase {
 			{
 				HeadToUse=0;
 			}			
-			npcPortrait.mainTexture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+			npcPortrait.texture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
 		playerUW.playerHud.MessageScroll.Clear ();
 		/*End UI Setup*/
@@ -372,11 +372,11 @@ public class Conversation : GuiBase {
 		switch (PrintType)
 		{
 		case PC_SAY:
-			Markup="[FF0000]";break;
+				Markup="<color=red>";break;//[FF0000]
 		case PRINT_SAY:
-			Markup="[000000]";break;
+				Markup="<color=black>";break;//[000000]
 		default:
-			Markup="[00FF00]";break;
+				Markup="<color=green>";break;//[00FF00]
 		}
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 			{
@@ -387,7 +387,7 @@ public class Conversation : GuiBase {
 			{
 				if (StrWords[j]=="\\n")
 				{
-					tl.Add (Markup + Output +"[-]");
+					tl.Add (Markup + Output +"</color>");
 					colCounter=0;
 					Output="";
 				}
@@ -396,7 +396,7 @@ public class Conversation : GuiBase {
 					if (StrWords[j].Length+colCounter+1>=LineWidth)
 					{
 						colCounter=0; 
-						tl.Add (Markup + Output +"[-]");
+						tl.Add (Markup + Output +"</color>");
 						Output=StrWords[j] + " ";
 						colCounter= StrWords[j].Length+1;
 					}	
@@ -408,10 +408,10 @@ public class Conversation : GuiBase {
 				}
 			}
 
-			tl.Add (Markup + Output +"[-]");
+			tl.Add (Markup + Output +"</color>");
 			if (i < Paragraphs.GetUpperBound(0))
 				{//Pause for more when not the last paragraph.
-				tl.Add("[0000FF][MORE][-]");
+				tl.Add("<color=black>[MORE]</color>");
 				yield return StartCoroutine(WaitForMore());
 				}
 			}
@@ -530,10 +530,12 @@ public class Conversation : GuiBase {
 		InputField inputctrl=playerUW.playerHud.InputControl;
 		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 		//TODO: fix this inputctrl.eventReceiver=this.gameObject;
-		inputctrl.onEndEdit.RemoveAllListeners();
+		/*inputctrl.onEndEdit.RemoveAllListeners();
 		inputctrl.onEndEdit.AddListener(delegate {
 				this.OnSubmitPickup();	
-		} );
+		} );*/
+		inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+		inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
 		inputctrl.contentType= InputField.ContentType.Alphanumeric;
 
 				//TODO: inputctrl.type=UIInput.KeyboardType.Default;
@@ -548,10 +550,10 @@ public class Conversation : GuiBase {
 		playerUW.playerHud.MessageScroll.Clear ();
 	}
 
-	public void OnSubmitPickup()
+	public void OnSubmitPickup(string PlayerTypedAnswerIN)
 	{//Event receiver for input ctrl.
 		WaitingForTyping=false;
-		PlayerTypedAnswer= playerUW.playerHud.InputControl.text;//playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>().text;
+		PlayerTypedAnswer= PlayerTypedAnswerIN; //playerUW.playerHud.InputControl.text;//playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>().text;
 
 		//Debug.Log (inputctrl.text);
 
@@ -808,7 +810,7 @@ public class Conversation : GuiBase {
 					NPCTradeItems[itemCount]=itemToTrade.gameObject.name;
 					TradeSlot ts = playerUW.playerHud.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 					ts.objectInSlot=itemToTrade.gameObject.name;
-					ts.SlotImage.mainTexture=itemToTrade.GetInventoryDisplay().texture;
+					ts.SlotImage.texture=itemToTrade.GetInventoryDisplay().texture;
 					int qty= itemToTrade.GetQty();
 					if (qty<=1)
 					{
@@ -1448,7 +1450,7 @@ public class Conversation : GuiBase {
 						//NPCTradeItems[i]=myObj.name;
 						TradeSlot ts = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 						ts.objectInSlot=myObj.name;
-						ts.SlotImage.mainTexture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						ts.SlotImage.texture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						return i;
 					}
 					//ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();

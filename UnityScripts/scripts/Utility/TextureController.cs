@@ -12,7 +12,7 @@ public class TextureController : MonoBehaviour {
 	//private Texture2D[]TextureSrcImage=new Texture2D[500];
 	//private Texture2D[]TextureDstImage=new Texture2D[500];
 
-	private bool[] TextureReady=new bool[500];
+	//private bool[] TextureReady=new bool[500];
 	private bool[] ObjectReady=new bool[500];
 	private Sprite[]ObjectDstSprite=new Sprite[500];
 	//private Texture2D preview;

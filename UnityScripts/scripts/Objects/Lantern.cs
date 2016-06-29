@@ -32,11 +32,8 @@ public class Lantern : LightSource {
 				playerUW.CursorIcon= playerUW.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return true;
-				break;
 			default:
 				return base.ActivateByObject(ObjectUsed);
-				break;
-
 			}
 		}
 		return false;

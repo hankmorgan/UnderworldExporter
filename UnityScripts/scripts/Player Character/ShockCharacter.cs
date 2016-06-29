@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ShockCharacter : MonoBehaviour {
 	//What mode are we in and various ranges
@@ -47,7 +48,7 @@ public class ShockCharacter : MonoBehaviour {
 	public static GameObject InvMarker;
 	
 	//The message log on the main screen.
-	private UILabel MessageLog;
+	//private Text MessageLog;
 	
 	// Use this for initialization
 	void Start () {
@@ -70,9 +71,9 @@ public class ShockCharacter : MonoBehaviour {
 		
 		XAxis = GetComponent<MouseLook>();
 		YAxis =	transform.FindChild ("Main Camera").GetComponent<MouseLook>();
-		Screen.lockCursor=true;
+		//Screen.lockCursor=true;
 		
-		MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
+			//	MessageLog = (Text)GameObject.FindWithTag("MessageLog").GetComponent<Text>();
 		
 		//Debug.Log ("Setting player to " + this.gameObject);
 		//Cursor.SetCursor (CursorIcon,Vector2.zero, CursorMode.ForceSoftware);
@@ -127,7 +128,7 @@ public class ShockCharacter : MonoBehaviour {
 			if (MouseLookEnabled==false)
 			{
 				//Debug.Log("Turning on mouselook");
-				Screen.lockCursor = true;
+				//Screen.lockCursor = true;
 				XAxis.enabled=true;
 				YAxis.enabled=true;
 				MouseLookEnabled=true;
@@ -135,7 +136,7 @@ public class ShockCharacter : MonoBehaviour {
 			else
 			{
 				//Debug.Log("Turning off mouselook");
-				Screen.lockCursor = false;
+				//Screen.lockCursor = false;
 				XAxis.enabled=false;
 				YAxis.enabled=false;
 				MouseLookEnabled=false;

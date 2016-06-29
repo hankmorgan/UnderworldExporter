@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class ContainerOpened : object_base {
 //The gui element that represents the currently opened container in the inventory.
@@ -26,7 +27,7 @@ public class ContainerOpened : object_base {
 		}
 	}
 
-	void OnClick()
+	public void OnClick()
 	{
 		if (playerUW.playerInventory.currentContainer==playerUW.name)
 		{//Don't do anything on the top level
@@ -45,11 +46,11 @@ public class ContainerOpened : object_base {
 			Container DestinationContainer = playerUW.playerInventory.GetCurrentContainer();
 			if (playerUW.playerInventory.currentContainer == GameWorldController.instance.playerUW.name)
 			{
-				GetComponent<UITexture>().mainTexture=playerUW.playerInventory.Blank;
+				GetComponent<RawImage>().texture=playerUW.playerInventory.Blank;
 			}
 			else
 			{
-				GetComponent<UITexture>().mainTexture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				GetComponent<RawImage>().texture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 			}
 			for (int i = 0; i<8; i++)
 			{

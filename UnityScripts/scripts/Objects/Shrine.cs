@@ -74,11 +74,16 @@ public class Shrine : object_base {
 				ml.Set("Chant the mantra");
 				//inputctrl.text=ml.text;
 				//TODO:Fix me inputctrl.eventReceiver=this.gameObject;
-								inputctrl.onEndEdit.RemoveAllListeners();
-								inputctrl.onEndEdit.AddListener(delegate {
-										this.OnSubmitPickup();	
-								} );
+								//inputctrl.onEndEdit.RemoveAllListeners();
+								//inputctrl.onEndEdit.AddListener(delegate {
+								//		this.OnSubmitPickup();	
+								//} );
 								//inputctrl.inputType=InputField.InputType.Standard;
+
+								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputMantraWords;
+
+
 								inputctrl.contentType= InputField.ContentType.Alphanumeric;
 								//TODO:Fix me inputctrl.selected=true;
 								inputctrl.Select();
@@ -96,13 +101,13 @@ public class Shrine : object_base {
 		}
 	}
 
-	public void OnSubmitPickup()
+	public void OnSubmitPickup(string Mantra)
 	{//TODO: set this name of the event receiver whereever it is called so that this can make more sense.
-		if (inputctrl==null)
+		/*if (inputctrl==null)
 		{
 			inputctrl =playerUW.playerHud.InputControl;//ml.gameObject.GetComponent<UIInput>();
-		}
-		SubmitMantra (inputctrl.text);
+		}*/
+		SubmitMantra (Mantra);
 		WaitingForInput=false;
 		Time.timeScale=1.0f;
 		inputctrl.text="";

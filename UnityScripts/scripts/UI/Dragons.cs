@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class Dragons : GuiBase {
 	//Code to change the animation frames of the dragons.
 
-	public UITexture[] Tail=new UITexture[4];
-	public UITexture[] Arm=new UITexture[4];
-	public UITexture[] Base=new UITexture[5];
-	public UITexture[] Head=new UITexture[4];
+	public RawImage[] Tail=new RawImage[4];
+	public RawImage[] Arm=new RawImage[4];
+	public RawImage[] Base=new RawImage[5];
+	public RawImage[] Head=new RawImage[4];
 
 	public int SetBase=0; int PrevBase=-1;
 	public int SetTail=0; int PrevTail=-1;
@@ -49,7 +49,7 @@ public class Dragons : GuiBase {
 	}
 
 
-	void UpdateDragons(UITexture[]parts, int EnabledIndex)
+	void UpdateDragons(RawImage[]parts, int EnabledIndex)
 	{
 		for (int i = 0; i<= parts.GetUpperBound(0);i++)
 		{

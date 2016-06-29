@@ -10,14 +10,14 @@ public class ObjectVariables : MonoBehaviour {
 	public int state;
 
 	public string trigger;
-	private GameObject level;
+	//private GameObject level;
 
 //public string SpriteNameOpened;
 	//public string triggeringObject;
 
 	// Use this for initialization
 	void Start () {
-		level=GameObject.Find("level");
+		//level=GameObject.Find("level");
 	}
 	
 	public GameObject findDoor(int x, int y)

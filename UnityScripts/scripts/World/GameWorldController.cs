@@ -8,9 +8,9 @@ using System.Collections.Generic;
 public class GameWorldController : MonoBehaviour {
 	/*Class for controlling the game world parameters*/
 
-	List<Material> AnimMaterials=new List<Material>();
-	List<int>AnimMaterialsIndex=new List<int>();
-	List<string>AnimatedTextures=new List<string>();
+	//List<Material> AnimMaterials=new List<Material>();
+	//List<int>AnimMaterialsIndex=new List<int>();
+	//List<string>AnimatedTextures=new List<string>();
 	public bool EnableTextureAnimation;
 	public GameObject WorldModel;
 	public static TextureController tc;

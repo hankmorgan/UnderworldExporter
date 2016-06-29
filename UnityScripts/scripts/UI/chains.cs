@@ -54,6 +54,7 @@ public class chains : GuiBase {
 		bool StatsEnabled=false;
 		bool ConversationEnabled=false;
 		bool CutSceneEnabled=false;
+		bool MapEnabled=true;
 
 		setControl=ActiveControl;
 		switch (ActiveControl)
@@ -64,6 +65,7 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=false;
 				CutSceneEnabled=false;
+				MapEnabled=false;
 				break;
 			case 1://Stats display
 				InventoryEnabled=false;
@@ -71,6 +73,7 @@ public class chains : GuiBase {
 				StatsEnabled=true;
 				ConversationEnabled=false;
 				CutSceneEnabled=false;
+				MapEnabled=false;
 				break;	
 			case 2://Runebag
 				InventoryEnabled=false;
@@ -78,6 +81,7 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=false;
 				CutSceneEnabled=false;
+				MapEnabled=false;
 				break;	
 			case 3://Conversation
 				InventoryEnabled=true;
@@ -85,6 +89,7 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=true;
 				CutSceneEnabled=false;
+				MapEnabled=false;
 				break;	
 			case 4://Map
 				InventoryEnabled=false;
@@ -92,6 +97,7 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=false;
 				CutSceneEnabled=false;
+				MapEnabled=true;
 				break;
 			case 5: //Cutscene fullscreen;
 				InventoryEnabled=false;
@@ -99,6 +105,7 @@ public class chains : GuiBase {
 				StatsEnabled=false;
 				ConversationEnabled=false;
 				CutSceneEnabled=true;
+				MapEnabled=false;
 				break;
 		}
 		EnableDisableControl ("MagicRuneBag",RuneBagEnabled);
@@ -243,5 +250,17 @@ public class chains : GuiBase {
 		//Cutscene related
 		//TODO: RESTORE ME! EnableDisableControl("scroll_cutscene",CutSceneEnabled);
 
+
+		//TUrn on/off map
+		EnableDisableControl("Map",MapEnabled);
+
+
+		//Misc controls
+		EnableDisableControl("DragonLeft",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==true)));
+		EnableDisableControl("DragonRight",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==true)));
+
+		//Cuts
+		EnableDisableControl("CutsceneSmall",CutSceneEnabled);
+		EnableDisableControl("CutsceneFull",CutSceneEnabled);
 	}
 }

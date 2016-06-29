@@ -1259,7 +1259,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[401] );
 			yield break;
-			break;
 			
 		case 2:
 			

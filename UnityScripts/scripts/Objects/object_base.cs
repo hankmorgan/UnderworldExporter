@@ -423,11 +423,9 @@ public class object_base : MonoBehaviour {
 			case SpellEffect.UW1_Spell_Effect_UnsurpassedToughness:
 			case SpellEffect.UW1_Spell_Effect_PoisonHidden:
 						return 10;
-						break;
 			default:
 					Debug.Log("EffectID" + EffectID + " unknownn");
 					return 30;
-						break;
 			}
 			
 	}
