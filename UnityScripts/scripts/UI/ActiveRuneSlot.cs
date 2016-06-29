@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ActiveRuneSlot : GuiBase {
+public class ActiveRuneSlot : GuiBase_Draggable {
 	/*GUI element for displaying the select spell runes and for casting those selected runes.*/
 	public int SlotNumber;
 	private int setRune=-2;
@@ -11,8 +11,9 @@ public class ActiveRuneSlot : GuiBase {
 	private Texture2D[] runes=new Texture2D[24];
 	private Texture2D blank;
 
-	void Start () {
-		base.start();
+	public override void Start()
+	{
+		base.Start();
 		thisRune = this.GetComponent<RawImage>();
 		for (int i =0;i<24;i++)
 		{
@@ -41,7 +42,7 @@ public class ActiveRuneSlot : GuiBase {
 
 	public void OnClick()
 	{
-		if (playerUW.playerHud.window.JustClicked==true)
+		if ((playerUW.playerHud.window.JustClicked==true) || (Dragging==true))
 		{
 			return;
 		}

@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class StatsDisplay : GuiBase {
+public class StatsDisplay : GuiBase_Draggable {
 	public Text CharName;
 	public Text CharClass;
 	public Text CharClassLevel;

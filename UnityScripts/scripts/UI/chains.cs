@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class chains : GuiBase {
+public class chains : GuiBase_Draggable {
 	/*GUI Element for switching panel displays but also controls which other GUI elements are displayed.*/
 	public static int ActiveControl;
 	public static int setControl=-1;
 
 	public void OnClick()
 	{
+	if (Dragging==true){return;}
 	 switch (ActiveControl)
 		{
 		case 0://Inventory -> Stats
@@ -256,8 +257,8 @@ public class chains : GuiBase {
 
 
 		//Misc controls
-		EnableDisableControl("DragonLeft",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==true)));
-		EnableDisableControl("DragonRight",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==true)));
+		EnableDisableControl("DragonLeft",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==false)));
+		EnableDisableControl("DragonRight",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==false)));
 
 		//Cuts
 		EnableDisableControl("CutsceneSmall",CutSceneEnabled);

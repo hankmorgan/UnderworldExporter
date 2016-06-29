@@ -5,7 +5,7 @@ public class GuiBase : MonoBehaviour {
 //Base class for UI components.
 	public static UWCharacter playerUW;
 
-	public virtual void start()
+	public virtual void Start()
 	{
 		if (playerUW==null)
 		{

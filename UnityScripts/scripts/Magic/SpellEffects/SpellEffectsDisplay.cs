@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class SpellEffectsDisplay : GuiBase {
+public class SpellEffectsDisplay : GuiBase_Draggable {
 	public int SlotNumber;
 	//public static UWCharacter playerUW;
 	private int setSpell=-1;
@@ -47,6 +47,7 @@ public class SpellEffectsDisplay : GuiBase {
 
 		public void OnClick(BaseEventData evnt)
 		{
+				if (Dragging){return;}
 				PointerEventData pntr = (PointerEventData)evnt;
 				//Debug.Log (pnt.pointerId);
 				ClickEvent(pntr.pointerId);

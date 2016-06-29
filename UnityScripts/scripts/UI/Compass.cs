@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class Compass : GuiBase {
+public class Compass : GuiBase_Draggable {
 
 	//Updates the compass display based on the characters heading.
 
@@ -174,6 +174,7 @@ public class Compass : GuiBase {
 
 	public void OnClick()
 	{
+		if (Dragging==true){return;}
 		playerUW.playerHud.MessageScroll.Clear ();
 		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,64) 
 		                                      + playerUW.GetFedStatus() 

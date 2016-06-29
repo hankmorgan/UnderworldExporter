@@ -16,6 +16,8 @@ public class InputHandler : GuiBase {
 
 		public void OnSubmit()
 		{
+				if (target==null)
+				{return;}
 				int valueInt=0;
 				string valueStr="";
 				switch (currentInputMode)

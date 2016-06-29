@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class HealthFlask : GuiBase {
+public class HealthFlask : GuiBase_Draggable {
 	/*The health, mana and poisoned state indicators*/
 	public RawImage[] LevelImages=new RawImage[13];
 	public float Level;
@@ -68,6 +68,7 @@ public class HealthFlask : GuiBase {
 
 	public void OnClick()
 	{
+		if (Dragging==true){return;}				
 		string output=""; 
 		if (isHealthDisplay == true)
 		{

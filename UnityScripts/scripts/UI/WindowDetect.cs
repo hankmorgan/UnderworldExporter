@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 /*
 WindowDetect.cs
 Functions dealing with the following
@@ -25,6 +26,12 @@ public class WindowDetect : MonoBehaviour {
 	//protected UIStretch stretch;
 
 	protected Rect CursorPosition;
+	
+		//UI Positioning
+	public RectTransform[] UIsToStore = new RectTransform[1];
+	public Vector3[] UIPositionsWindowed = new Vector3[1];
+	public Vector3[] UIPositionsFullScreen= new Vector3[1];
+
 
 	public virtual void Start()
 	{
@@ -35,6 +42,17 @@ public class WindowDetect : MonoBehaviour {
 			0.0f,
 			cursorSizeX,
 			cursorSizeY);
+			if (this.FullScreen==false)
+			{
+					for (int i = 0; i<=UIsToStore.GetUpperBound(0);i++)
+					{
+						UIPositionsWindowed[i]= UIsToStore[i].position;
+							if (UIPositionsFullScreen[i] == Vector3.zero)
+							{
+								UIPositionsFullScreen[i]= UIsToStore[i].position;
+							}
+					}
+			}
 	}
 	
 	// Update is called once per frame
@@ -43,6 +61,33 @@ public class WindowDetect : MonoBehaviour {
 				//	BlockingCollider.SetActive(WaitingForInput || InMap  );
 
 	}
+
+	public void updatePositions()
+	{//stores the positions of ui elements in fullscreenmode
+		for (int i = 0; i<=UIsToStore.GetUpperBound(0);i++)
+		{
+			UIPositionsFullScreen[i]= UIsToStore[i].position;
+		}
+	}
+
+	public void setPositions()
+	{
+		if (this.FullScreen==true)
+			{//put ui elements in fullscreen positions
+				for (int i = 0; i<=UIsToStore.GetUpperBound(0);i++)
+				{
+					UIsToStore[i].position= UIPositionsFullScreen[i];
+				}
+			}
+		else
+			{//put ui elements in windowed positions.
+				for (int i = 0; i<=UIsToStore.GetUpperBound(0);i++)
+				{
+					UIsToStore[i].position= UIPositionsWindowed[i];
+				}	
+			}
+	}
+
 
 	protected virtual void OnHover( bool isOver )
 	{//Detect if the mouse cursor is in the main window view

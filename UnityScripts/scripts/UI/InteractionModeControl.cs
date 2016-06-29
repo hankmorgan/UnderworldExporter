@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class InteractionModeControl : GuiBase {
+public class InteractionModeControl : GuiBase_Draggable {
 
 	//The mode selection UI elements master control
 	public RawImage[] Controls=new RawImage[6];
