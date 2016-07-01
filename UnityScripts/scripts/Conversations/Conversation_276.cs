@@ -179,27 +179,19 @@ public class Conversation_276 : Conversation {
 		case 1:
 			
 			goto label_0335;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03c7;
 			
-			break;
-			
 		case 3:
 			
 			goto label_04f2;
-			
-			break;
-			
+
 		case 4:
 			
 			goto label_0584;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0335:;
@@ -224,28 +216,21 @@ public class Conversation_276 : Conversation {
 		case 8:
 			
 			goto label_03c7;
-			
-			break;
-			
+
 		case 9:
 			
 			goto label_04f2;
-			
-			break;
-			
+
 		case 10:
 			
 			goto label_0584;
-			
-			break;
-			
+
 		case 11:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_03c7:;
@@ -275,25 +260,19 @@ public class Conversation_276 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
 				yield break;
-				break;
-				
+
 			case 14:
 				
 				goto label_0335;
-				
-				break;
-				
+
 			case 15:
 				
 				goto label_04f2;
-				
-				break;
-				
+
 			case 16:
 				
 				goto label_0584;
-				
-				break;
+
 			} // end if
 			
 			
@@ -319,29 +298,22 @@ public class Conversation_276 : Conversation {
 		case 18:
 			
 			goto label_0335;
-			
-			break;
-			
+
 		case 19:
 			
 			goto label_04f2;
-			
-			break;
-			
+
 		case 20:
 			
 			goto label_0584;
-			
-			break;
-			
+
 		case 21:
 			
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_04f2:;
@@ -365,29 +337,22 @@ public class Conversation_276 : Conversation {
 		case 23:
 			
 			goto label_0335;
-			
-			break;
-			
+
 		case 24:
 			
 			goto label_03c7;
-			
-			break;
-			
+
 		case 25:
 			
 			goto label_0584;
-			
-			break;
-			
+
 		case 26:
 			
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_0584:;
@@ -446,8 +411,6 @@ public class Conversation_276 : Conversation {
 				
 			case 2:
 				yield break;
-				//return;
-				break;	
 			} // end if
 			
 			
@@ -551,8 +514,6 @@ public class Conversation_276 : Conversation {
 		case 2:
 			
 			yield break;
-			
-			break;
 			
 		} // end switch
 		

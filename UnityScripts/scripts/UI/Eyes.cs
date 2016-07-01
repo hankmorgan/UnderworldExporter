@@ -11,8 +11,9 @@ public class Eyes : GuiBase {
 
 	private Texture2D[] eyes =new Texture2D[11];
 
-	// Use this for initialization
-	void Start () {
+	public override void Start()
+	{
+		base.Start();
 		for (int i = 0 ; i <=10; i++)
 		{
 			eyes[i] = Resources.Load <Texture2D> ("HUD/Eyes/Eyes_"+ i.ToString("0000"));

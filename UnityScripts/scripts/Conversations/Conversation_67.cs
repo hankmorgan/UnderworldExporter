@@ -193,21 +193,15 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				goto label_0322;
-				
-				break;
-				
+	
 			case 2:
 				
 				goto label_0327;
-				
-				break;
-				
+	
 			case 3:
 				
 				goto label_032c;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_0322:;
@@ -239,14 +233,10 @@ public class Conversation_67 : Conversation {
 				
 				goto label_03ba;
 				
-				break;
-				
 			case 2:
 				
 				goto label_0371;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_0371:;
@@ -262,9 +252,7 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				goto label_03ba;
-				
-				break;
-				
+
 			case 2:
 				
 				locals[70] = 2;
@@ -272,7 +260,6 @@ public class Conversation_67 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,70 );
 				yield break;
-				break;
 				
 			} // end switch
 			
@@ -291,15 +278,12 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				goto label_0404;
-				
-				break;
+	
 				
 			case 2:
 				
 				goto label_03ff;
-				
-				break;
-				
+	
 			} // end switch
 			
 		label_03ff:;
@@ -356,15 +340,11 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				goto label_04c1;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_04bc;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_04bc:;
@@ -423,14 +403,11 @@ public class Conversation_67 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,204 );
 				yield break;
-				break;
-				
+
 			case 2:
 				
 				goto label_03ba;
-				break;
-				
-				
+		
 				
 			} // end if
 			
@@ -450,15 +427,11 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				goto label_0404;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_03ff;
-				
-				break;
-				
+
 			} // end switch
 			//end test
 			
@@ -508,20 +481,15 @@ public class Conversation_67 : Conversation {
 			case 1:
 				
 				goto label_05ba;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_05c8;
-				
-				break;
-				
+
 			case 3:
 				
 				goto label_05d6;
-				
-				break;
+
 				
 			} // end switch
 			
@@ -559,7 +527,6 @@ public class Conversation_67 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,251 );
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -568,7 +535,6 @@ public class Conversation_67 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals,252 );
 				yield break;
-				break;
 			} // end if
 			
 			//break;
@@ -591,7 +557,6 @@ public class Conversation_67 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,275 );
 			yield break;
-			break;
 			
 		case 2:
 			
@@ -600,7 +565,6 @@ public class Conversation_67 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,276 );
 			yield break;
-			break;
 			
 		case 3:
 			
@@ -609,7 +573,6 @@ public class Conversation_67 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals,277 );
 			yield break;
-			break;
 			
 		} // end switch
 		

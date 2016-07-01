@@ -307,7 +307,6 @@ public class Conversation_25 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-			break;
 			
 		case 2:
 			
@@ -588,9 +587,6 @@ public class Conversation_25 : Conversation {
 			
 		case 2:
 			yield break;
-			//return;
-			
-			break;
 			
 		} // end switch
 		

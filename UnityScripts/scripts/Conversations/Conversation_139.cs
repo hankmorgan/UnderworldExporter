@@ -188,8 +188,7 @@ public class Conversation_139 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00d1();
 				yield break;
-				break;
-				
+
 			case 2:
 				
 				yield return StartCoroutine(func_06c7());
@@ -219,8 +218,7 @@ public class Conversation_139 : Conversation {
 			case 8:
 				
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-				break;
-				
+
 			case 9:
 				
 				yield return StartCoroutine(func_03c4());
@@ -408,7 +406,6 @@ public class Conversation_139 : Conversation {
 					yield return new WaitForSeconds(WaitTime);
 					func_00b1( locals[27] );
 					yield break;
-					break;
 				}
 				locals[3] = locals[3] + 1;
 				//} //else {
@@ -521,7 +518,6 @@ public class Conversation_139 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-			break;
 			
 		case 2:
 			
@@ -530,7 +526,7 @@ public class Conversation_139 : Conversation {
 			
 		} // end switch
 		
-		func_085b();
+			yield return StartCoroutine(func_085b());
 	} // end func
 	
 	IEnumerator func_0711() {
@@ -548,8 +544,7 @@ public class Conversation_139 : Conversation {
 			
 			yield return StartCoroutine(say( locals, 048 ));
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(say( locals, 050 ));
@@ -557,8 +552,7 @@ public class Conversation_139 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00d1();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -751,9 +745,7 @@ public class Conversation_139 : Conversation {
 			
 			//return;
 			yield break;
-			
-			break;
-			
+	
 		} // end switch
 		
 		locals[23] = 80;

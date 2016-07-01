@@ -8,6 +8,7 @@ public class InputHandler : GuiBase {
 		public const int  InputInventoryQty = 1;
 		public const int  InputConversationWords = 2;
 		public const int  InputMantraWords = 3;
+		public const int  InputAnvil = 4;
 
 		//For passing typed input to various objects
 
@@ -28,6 +29,7 @@ public class InputHandler : GuiBase {
 						break;
 				case InputConversationWords:
 				case InputMantraWords:
+				case InputAnvil:
 						valueStr=ParseString();
 						break;
 				}
@@ -45,6 +47,9 @@ public class InputHandler : GuiBase {
 						break;
 				case InputMantraWords:
 						target.gameObject.GetComponent<Shrine>().OnSubmitPickup(valueStr);
+						break;
+				case InputAnvil:
+						target.gameObject.GetComponent<Equipment>().OnSubmitPickup(valueStr);
 						break;
 				}
 
@@ -68,7 +73,8 @@ public class InputHandler : GuiBase {
 
 		public string ParseString()
 		{
-				return "";
+				InputField inputctrl =playerUW.playerHud.InputControl;
+				return inputctrl.text;
 		}
 
 }

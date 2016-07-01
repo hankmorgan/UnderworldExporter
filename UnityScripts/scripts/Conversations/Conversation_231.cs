@@ -177,15 +177,11 @@ public class Conversation_231 : Conversation {
 			case 1:
 				
 				goto label_0304;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_0309;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_0304:;

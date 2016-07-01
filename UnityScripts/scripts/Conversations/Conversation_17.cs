@@ -280,7 +280,6 @@ public class Conversation_17 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();//Endconvo
 			yield break;
-			break;
 			
 		case 3:
 			
@@ -311,7 +310,6 @@ public class Conversation_17 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();//Endconvo
 			yield break;
-			break;
 			
 		case 2:
 			

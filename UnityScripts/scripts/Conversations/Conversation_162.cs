@@ -205,21 +205,15 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_032c;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_051a;
 			
-			break;
-			
 		case 3:
 			
 			goto label_059a;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_032c:;
@@ -236,15 +230,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_036c;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03ac;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_036c:;
@@ -261,15 +251,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_03ac;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03ec;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_03ac:;
@@ -286,14 +272,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_042c;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_046c;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -311,15 +294,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_042c;
-			
-			break;
-			
+	
 		case 2:
 			
 			goto label_046c;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_042c:;
@@ -335,15 +314,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_046c;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_046c;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_046c:;
@@ -361,14 +336,10 @@ public class Conversation_162 : Conversation {
 			
 			goto label_06dd;
 			
-			break;
-			
 		case 2:
 			
 			goto label_04ac;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_04ac:;
@@ -388,8 +359,6 @@ public class Conversation_162 : Conversation {
 			
 			goto label_05fd;
 			
-			break;
-			
 		case 2:
 			
 			locals[179] = 2;
@@ -397,8 +366,7 @@ public class Conversation_162 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[179] );
 			yield break;
-			break;
-			
+
 		case 3:
 			
 			yield return StartCoroutine(say( locals, 028 ));
@@ -407,7 +375,6 @@ public class Conversation_162 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[180] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -425,15 +392,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_03ac;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_055a;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_055a:;
@@ -450,15 +413,11 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_03ac;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03ec;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_059a:;
@@ -488,9 +447,7 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_02ca;
-			
-			break;
-			
+
 		case 2:
 			
 			locals[248] = 1;
@@ -498,7 +455,6 @@ public class Conversation_162 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[248] );
 			yield break;
-			break;
 		} // end if
 		
 		
@@ -532,7 +488,6 @@ public class Conversation_162 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[271] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -576,7 +531,6 @@ public class Conversation_162 : Conversation {
 					yield return new WaitForSeconds(WaitTime);
 					func_00b1( locals[295] );
 					yield break;
-					break;
 					
 				case 2:
 					
@@ -585,7 +539,6 @@ public class Conversation_162 : Conversation {
 					yield return new WaitForSeconds(WaitTime);
 					func_00b1( locals[296] );
 					yield break;
-					break;
 					
 				} // end switch
 			}	
@@ -605,9 +558,7 @@ public class Conversation_162 : Conversation {
 		case 1:
 			
 			goto label_05fd;
-			
-			break;
-			
+
 		case 2:
 			
 			locals[319] = 2;
@@ -615,7 +566,6 @@ public class Conversation_162 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[319] );
 			yield break;
-			break;
 			
 		case 3:
 			
@@ -624,7 +574,6 @@ public class Conversation_162 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[320] );
 			yield break;
-			break;
 		} // end if
 		
 		

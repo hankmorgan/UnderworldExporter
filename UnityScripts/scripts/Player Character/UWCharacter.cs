@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 /*
 The basic character. Stats and interaction.
  */ 
@@ -113,7 +114,8 @@ public class UWCharacter : Character {
 		playerHud.InputControl.text="";
 		//playerHud.InputControl.text="";
 		playerHud.MessageScroll.Clear ();
-		if (Application.loadedLevelName=="0")
+		
+	if (SceneManager.GetActiveScene().name =="0")
 		{//Load the first level
 						//Debug.Log("Loading first level");
 				//RoomManager.LoadRoom("1");
@@ -235,11 +237,11 @@ public class UWCharacter : Character {
 			playerMotor.movement.maxForwardSpeed=flySpeed*speedMultiplier;
 			if ((Input.GetKeyDown(KeyCode.R)) || (Input.GetKey(KeyCode.R)))
 			{//Fly up
-				this.GetComponent<CharacterController>().Move(new Vector3(0,0.2f,0));
+					this.GetComponent<CharacterController>().Move(new Vector3(0,0.2f * Time.deltaTime,0));
 			}
 			else if ((Input.GetKeyDown(KeyCode.V)) || (Input.GetKey(KeyCode.V)))
 			{//Fly down
-				this.GetComponent<CharacterController>().Move(new Vector3(0,-0.2f,0));
+				this.GetComponent<CharacterController>().Move(new Vector3(0,-0.2f * Time.deltaTime,0));
 			}
 		}
 		else

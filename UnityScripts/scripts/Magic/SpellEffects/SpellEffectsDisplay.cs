@@ -9,8 +9,11 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 	private int setSpell=-1;
 	private RawImage thisSpell;
 	private static Texture2D SpellBlank;
-	void Start () {
+	
 
+	public override void Start()
+	{
+		base.Start();
 		thisSpell = this.GetComponent<RawImage>();
 		if (SpellBlank==null)
 		{

@@ -189,7 +189,6 @@ public class Conversation_114 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[23] );
 				yield break;
-				break;
 			} // end if
 			
 			
@@ -219,8 +218,7 @@ public class Conversation_114 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			break;
@@ -246,8 +244,7 @@ public class Conversation_114 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -280,7 +277,6 @@ public class Conversation_114 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
 			
 		case 3:
 			
@@ -347,7 +343,6 @@ public class Conversation_114 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -436,7 +431,6 @@ public class Conversation_114 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
 			
 		} // end switch
 		

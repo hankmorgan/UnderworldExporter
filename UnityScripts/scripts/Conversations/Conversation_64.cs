@@ -169,21 +169,15 @@ public class Conversation_64 : Conversation {
 			case 1:
 				
 				goto label_02fd;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_038b;
-				
-				break;
-				
+
 			case 3:
 				
 				goto label_038b;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_02fd:;
@@ -200,15 +194,11 @@ public class Conversation_64 : Conversation {
 			case 1:
 				
 				goto label_034b;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_033d;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_033d:;
@@ -233,14 +223,10 @@ public class Conversation_64 : Conversation {
 			case 1:
 				
 				goto label_03cb;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_03cb;
-				
-				break;
 				
 			} // end switch
 			
@@ -260,15 +246,11 @@ public class Conversation_64 : Conversation {
 			case 1:
 				
 				goto label_03cb;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_03cb;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_03cb:;
@@ -292,13 +274,9 @@ public class Conversation_64 : Conversation {
 				
 				goto label_040b;
 				
-				break;
-				
 			case 2:
 				
 				goto label_045d;
-				
-				break;
 				
 			} // end switch
 			
@@ -320,7 +298,6 @@ public class Conversation_64 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[134] );
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -329,7 +306,6 @@ public class Conversation_64 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[135] );
 				yield break;
-				break;
 				
 			} // end switch
 			
@@ -351,7 +327,6 @@ public class Conversation_64 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[158] );
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -360,7 +335,7 @@ public class Conversation_64 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[159] );
 				yield break;
-				break;
+
 			} // end if
 			
 			
@@ -383,8 +358,7 @@ public class Conversation_64 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[182] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			locals[183] = 2;
@@ -392,8 +366,6 @@ public class Conversation_64 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[183] );
 			yield break;
-			break;
-			
 			
 		} // end switch
 		

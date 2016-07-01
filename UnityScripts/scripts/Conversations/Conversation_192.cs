@@ -163,14 +163,10 @@ public class Conversation_192 : Conversation {
 				
 				goto label_03fd;
 				
-				break;
-				
 			case 2:
 				
 				goto label_03fd;
-				
-				break;
-				
+	
 			} // end switch
 		} else {
 			
@@ -185,21 +181,15 @@ public class Conversation_192 : Conversation {
 			case 1:
 				
 				goto label_02fd;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_033d;
-				
-				break;
-				
+
 			case 3:
 				
 				goto label_02fd;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_02fd:;
@@ -214,15 +204,11 @@ public class Conversation_192 : Conversation {
 			case 1:
 				
 				goto label_033d;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_033d;
-				
-				break;
-				
+
 			} // end switch
 			
 		label_033d:;
@@ -241,13 +227,10 @@ public class Conversation_192 : Conversation {
 				
 				goto label_037d;
 				
-				break;
-				
 			case 2:
 				
 				goto label_037d;
-				
-				break;
+
 				
 			} // end switch
 			
@@ -265,12 +248,10 @@ public class Conversation_192 : Conversation {
 			case 1:
 				
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-				break;
 				
 			case 2:
 				
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-				break;
 			} // end if
 			
 			

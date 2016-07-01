@@ -394,7 +394,6 @@ public class Conversation_14 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[24] );
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -504,7 +503,6 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -533,8 +531,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -558,8 +555,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			locals[24] = 2;
@@ -567,7 +563,6 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[24] );
 			yield break;
-			break;
 			
 		case 3:
 			
@@ -576,8 +571,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[25] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -601,8 +595,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_0689());
@@ -647,8 +640,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_081d());
@@ -687,8 +679,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -737,8 +728,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_03a5());
@@ -824,8 +814,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[45] );
 			yield break;
-			break;
-			
+
 		case 67:
 			
 			yield return StartCoroutine(func_05d7());
@@ -876,8 +865,7 @@ public class Conversation_14 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func

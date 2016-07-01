@@ -161,14 +161,10 @@ public class Conversation_213 : Conversation {
 			
 			goto label_0322;
 			
-			break;
-			
 		case 2:
 			
 			goto label_02e2;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_02e2:;
@@ -183,14 +179,11 @@ public class Conversation_213 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		case 2:
 			
 			goto label_0322;
-			
-			break;
-			
+	
 		} // end switch
 		
 	label_0322:;
@@ -207,20 +200,15 @@ public class Conversation_213 : Conversation {
 		case 1:
 			
 			goto label_03b6;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03b6;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_0376;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -237,13 +225,11 @@ public class Conversation_213 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		case 2:
 			
 			goto label_03b6;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -261,15 +247,11 @@ public class Conversation_213 : Conversation {
 		case 1:
 			
 			goto label_03f6;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03f6;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_03f6:;
@@ -286,15 +268,11 @@ public class Conversation_213 : Conversation {
 		case 1:
 			
 			goto label_0476;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_0436;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0436:;
@@ -311,13 +289,10 @@ public class Conversation_213 : Conversation {
 			
 			goto label_0476;
 			
-			break;
-			
 		case 2:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_0476:;

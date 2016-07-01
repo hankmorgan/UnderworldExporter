@@ -221,8 +221,7 @@ public class Conversation_209 : Conversation {
 			locals[34] = 0;
 			gronk_door( 3, locals[34], locals[33], locals[32] );
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+		
 		case 2:
 			
 			yield return StartCoroutine(func_0428());
@@ -316,9 +315,7 @@ public class Conversation_209 : Conversation {
 					
 					locals[13] = locals[13] + 1;
 					goto label_0432;
-					
-					break;
-					
+
 				case 2:
 					
 					yield return StartCoroutine(say( locals, 014 ));
@@ -338,7 +335,6 @@ public class Conversation_209 : Conversation {
 					locals[52] = 0;
 					gronk_door( 3, locals[52], locals[51], locals[50] );
 					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
 					
 				case 3:
 					
@@ -358,7 +354,6 @@ public class Conversation_209 : Conversation {
 					locals[63] = 0;
 					gronk_door( 3, locals[63], locals[62], locals[61] );
 					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
 				} // end if
 				
 			} //else {
@@ -403,8 +398,6 @@ public class Conversation_209 : Conversation {
 					locals[13] = locals[13] + 1;
 					goto label_0432;
 					
-					break;
-					
 				case 2:
 					
 					locals[86] = 9;
@@ -423,7 +416,6 @@ public class Conversation_209 : Conversation {
 					locals[96] = 0;
 					gronk_door( 3, locals[96], locals[95], locals[94] );
 					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
 					
 				case 3:
 					
@@ -443,7 +435,6 @@ public class Conversation_209 : Conversation {
 					locals[107] = 0;
 					gronk_door( 3, locals[107], locals[106], locals[105] );
 					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
 				} // end if
 				
 			} // end if
@@ -488,8 +479,7 @@ public class Conversation_209 : Conversation {
 			locals[33] = 0;
 			gronk_door( 3, locals[33], locals[32], locals[31] );
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func

@@ -256,7 +256,6 @@ public class Conversation_22 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
 			
 		case 2:
 			
@@ -286,7 +285,6 @@ public class Conversation_22 : Conversation {
 		case 2:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
 			
 		} // end switch
 		
@@ -337,7 +335,6 @@ public class Conversation_22 : Conversation {
 		case 2:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
 			
 		} // end switch
 		
@@ -357,8 +354,7 @@ public class Conversation_22 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_0535());

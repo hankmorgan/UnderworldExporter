@@ -204,7 +204,6 @@ public class Conversation_112 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_008b();
 				yield break;
-				break;
 			}
 		} // end switch
 	} // end func
@@ -231,7 +230,6 @@ public class Conversation_112 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_008b();
 			yield break;
-			break;
 			
 		case 2:
 			
@@ -262,8 +260,7 @@ public class Conversation_112 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[45] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			break;
@@ -275,7 +272,6 @@ public class Conversation_112 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_008b();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -318,7 +314,6 @@ public class Conversation_112 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_008b();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -367,7 +362,6 @@ public class Conversation_112 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
 			
 		case 3:
 			
@@ -376,7 +370,6 @@ public class Conversation_112 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_008b();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -400,7 +393,6 @@ public class Conversation_112 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[46] );
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -409,7 +401,6 @@ public class Conversation_112 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[47] );
 				yield break;
-				break;
 				
 			case 3:
 				
@@ -421,7 +412,6 @@ public class Conversation_112 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[50] );
 				yield break;
-				break;
 				
 			case 4:
 				
@@ -429,7 +419,6 @@ public class Conversation_112 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_008b();
 				yield break;
-				break;
 			} // end if
 			
 			
@@ -540,10 +529,7 @@ public class Conversation_112 : Conversation {
 			
 		case 2:
 			yield break;
-			//return;
-			
-			break;
-			
+
 		} // end switch
 		
 		locals[23] = 48;

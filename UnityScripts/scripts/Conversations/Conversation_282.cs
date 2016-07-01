@@ -169,21 +169,15 @@ public class Conversation_282 : Conversation {
 			case 1:
 				
 				goto label_045f;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_04b3;
-				
-				break;
-				
+
 			case 3:
 				
 				goto label_02fd;
-				
-				break;
-				
+
 			} // end switch
 			
 			//label_02fd:;
@@ -357,21 +351,15 @@ public class Conversation_282 : Conversation {
 			case 1:
 				
 				goto label_04b8;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_04b3;
-				
-				break;
-				
+
 			case 3:
 				
 				goto label_04b3;
-				
-				break;
-				
+
 			} // end switch
 			
 			//label_04b3:;
@@ -399,14 +387,10 @@ public class Conversation_282 : Conversation {
 			case 1:
 				
 				goto label_04f8;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_04f8;
-				
-				break;
 				
 			} // end switch
 			
@@ -453,9 +437,7 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_0451;
-			
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(say( locals, 036 ));
@@ -464,14 +446,11 @@ public class Conversation_282 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[222] );
 			yield break;
-			break;
-			
+	
 		case 3:
 			
 			goto label_0598;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0598:;
@@ -489,21 +468,15 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_02fd;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_04f8;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_03d1;
-			
-			break;
-			
+
 		} // end switch
 		
 		
@@ -534,21 +507,15 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_0351;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_0351;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_0351;
-			
-			break;
-			
+
 		} // end switch
 		
 		
@@ -567,13 +534,11 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_03d1;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03d1;
-			break;	
+
 		} // end if
 		
 		
@@ -596,15 +561,11 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_0391;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_0391;
-			
-			break;
-			
+
 		} // end switch
 		
 		
@@ -622,14 +583,12 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_0411;
-			
-			break;
+
 			
 		case 2:
 			
 			goto label_0411;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -649,14 +608,11 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_03d1;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03d1;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -675,14 +631,12 @@ public class Conversation_282 : Conversation {
 		case 1:
 			
 			goto label_0451;
-			
-			break;
+
 			
 		case 2:
 			
 			goto label_0451;
-			
-			break;
+
 			
 		} // end switch
 		

@@ -222,7 +222,6 @@ public class Conversation_288 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[23] );
 				yield break;
-				break;
 			} // end if
 			
 			
@@ -329,8 +328,7 @@ public class Conversation_288 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_008b();
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			break;
@@ -473,8 +471,6 @@ public class Conversation_288 : Conversation {
 		case 2:
 			
 			yield break;//return;
-			
-			break;
 			
 		} // end switch
 		

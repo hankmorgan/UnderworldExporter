@@ -174,20 +174,14 @@ public class Conversation_66 : Conversation {
 			case 1:
 				
 				goto label_02fd;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_030b;
-				
-				break;
-				
+	
 			case 3:
 				
 				goto label_030b;
-				
-				break;
 				
 			} // end switch
 			
@@ -234,14 +228,11 @@ public class Conversation_66 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			goto label_0384;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0384:;

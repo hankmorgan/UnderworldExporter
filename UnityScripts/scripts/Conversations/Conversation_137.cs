@@ -6,7 +6,7 @@ public class Conversation_137 : Conversation {
 	//conversation #137
 	//string block 0x0e89, name Linnet
 	
-	int func_0657_result;
+	//int func_0657_result;
 	
 	public override IEnumerator main() {
 		SetupConversation (3721);
@@ -368,8 +368,7 @@ public class Conversation_137 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();//endconvo
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_03bd());
@@ -415,7 +414,6 @@ public class Conversation_137 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();//endconvo
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -450,7 +448,6 @@ public class Conversation_137 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();//endconvo
 				yield break;
-				break;
 				
 			case 3:
 				
@@ -481,7 +478,6 @@ public class Conversation_137 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				//func_00e0();//endconvo
 				yield break;
-				break;
 				
 			} // end switch
 			
@@ -527,13 +523,11 @@ public class Conversation_137 : Conversation {
 		case 2:
 			
 			goto label_069c;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_069c:;
-		func_0657_result= locals[1];
+		//func_0657_result= locals[1];
 		yield break;
 		//return locals[1];
 	} // end func
@@ -631,9 +625,6 @@ public class Conversation_137 : Conversation {
 			
 		case 2:
 			yield break;
-			//return;
-			
-			break;
 			
 		} // end switch
 		

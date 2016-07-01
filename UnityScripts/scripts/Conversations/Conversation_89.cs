@@ -174,7 +174,6 @@ public class Conversation_89 : Conversation {
 					yield return new WaitForSeconds(WaitTime);
 					func_00b1( locals[134] );
 					yield break;
-					break;
 					
 				} // end switch
 				
@@ -213,8 +212,7 @@ public class Conversation_89 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[24] );
 				yield break;
-				break;
-				
+
 			} // end switch
 			
 			yield return StartCoroutine(say( locals, 006 ));
@@ -233,20 +231,13 @@ public class Conversation_89 : Conversation {
 		case 1:
 			
 			goto label_0367;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03b0;
-			
-			break;
-			
 		case 3:
 			
 			goto label_03ba;
-			
-			break;
 			
 		} // end switch
 		
@@ -319,33 +310,28 @@ public class Conversation_89 : Conversation {
 		case 17:
 			
 			goto label_0367;
-			
-			break;
+
 			
 		case 18:
 			
 			goto label_03b0;
-			
-			break;
+
 			
 		case 19:
 			
 			goto label_03ba;
-			
-			break;
+
 			
 		case 20:
 			
 			goto label_04d1;
-			
-			break;
+	
 			
 		case 21:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 		} // end switch
 		
 		
@@ -459,9 +445,7 @@ public class Conversation_89 : Conversation {
 			
 			yield break;
 			//return;
-			
-			break;
-			
+
 		} // end switch
 		
 		locals[23] = 42;

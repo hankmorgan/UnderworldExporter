@@ -198,8 +198,7 @@ public class Conversation_281 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
-			
+		
 		} // end switch
 		
 		yield return StartCoroutine (say( locals, 007 ));
@@ -301,8 +300,7 @@ public class Conversation_281 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine (func_039e());
@@ -332,8 +330,7 @@ public class Conversation_281 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine (func_0446());
@@ -368,8 +365,7 @@ public class Conversation_281 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 21 );
 			yield break ;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine (func_054f());
@@ -419,7 +415,6 @@ public class Conversation_281 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -450,8 +445,7 @@ public class Conversation_281 : Conversation {
 				
 			case 2:
 				yield break;
-				break;
-				
+
 			} // end if
 			
 		} // end switch
@@ -553,7 +547,6 @@ public class Conversation_281 : Conversation {
 			
 			//return;
 			yield break;
-			break;
 			
 		} // end switch
 		

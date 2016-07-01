@@ -21,10 +21,9 @@ public class TradeSlot : GuiBase {
 	public static bool LookingAt;
 	public static string TempLookAt;
 
-	// Use this for initialization
-	void Start () {
-		//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		//pInv=GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+	public override void Start()
+	{
+		base.Start();
 		SlotImage=this.GetComponent<RawImage>();
 		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
 		IndicatorSelected = Resources.Load<Texture2D>("HUD/Cursors/cursors_0018");
@@ -35,7 +34,6 @@ public class TradeSlot : GuiBase {
 	
 	// Update is called once per frame
 	void Update () {
-		//Indicator.SetActive(isSelected ());
 		if (isSelected())
 		{
 			Indicator.texture=IndicatorSelected;

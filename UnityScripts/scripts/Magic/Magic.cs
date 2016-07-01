@@ -2327,35 +2327,35 @@ public class Magic : MonoBehaviour {
 
 		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
 		{//Eventually casts spells from things like fountains, potions, enchanted weapons.
-				//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-				//Returns true if the effect was applied. 
-				//TODO: The switch statement may need to be further divided because of passive/active effects.
-				//TODO: this list may be incomplete. I need to include things from my spreadsheet that are not status effects.
-				//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
-				int ActiveArrayIndex=-1;
-				int PassiveArrayIndex=-1;
-				int OtherArrayIndex=-1;
-				int SpellResultType= SpellResultNone;//0=no spell effect, 1= passive spell effect, 2= active spell effect.
-				SpellEffect[] other=null;
+			//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
+			//Returns true if the effect was applied. 
+			//TODO: The switch statement may need to be further divided because of passive/active effects.
+			//TODO: this list may be incomplete. I need to include things from my spreadsheet that are not status effects.
+			//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
+			int ActiveArrayIndex=-1;
+			int PassiveArrayIndex=-1;
+			//int OtherArrayIndex=-1;
+			int SpellResultType= SpellResultNone;//0=no spell effect, 1= passive spell effect, 2= active spell effect.
+			SpellEffect[] other=null;
 
-				if (SpellRule!=SpellRule_TargetVector)
-				{	
-						ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
-						PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
+			if (SpellRule!=SpellRule_TargetVector)
+			{	
+					ActiveArrayIndex= playerUW.PlayerMagic.CheckActiveSpellEffect(caster);
+					PassiveArrayIndex= playerUW.PlayerMagic.CheckPassiveSpellEffectPC(caster);
 
-						if (target!=null)
-						{
-								OtherArrayIndex=CheckPassiveSpellEffectNPC(target);
-								if (target.GetComponent<NPC>()!=null)
-								{
-										other= target.GetComponent<NPC>().NPCStatusEffects;
-								}
-						}
-				}
+					if (target!=null)
+					{
+							PassiveArrayIndex=CheckPassiveSpellEffectNPC(target);//Was other.
+							if (target.GetComponent<NPC>()!=null)
+							{
+									other= target.GetComponent<NPC>().NPCStatusEffects;
+							}
+					}
+			}
 
 
-				switch (EffectID)
-				{
+			switch (EffectID)
+			{
 
 				case SpellEffect.UW1_Spell_Effect_LesserHeal:
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt01:

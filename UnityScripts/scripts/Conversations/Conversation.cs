@@ -241,9 +241,9 @@ public class Conversation : GuiBase {
 		return false;
 	}
 
-	// Use this for initialization
-	void Start () {
-
+	public override void Start()
+	{
+		base.Start();
 		npc = this.GetComponent<NPC>();
 		WhoAmI = npc.npc_whoami;
 		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
@@ -1229,10 +1229,7 @@ public class Conversation : GuiBase {
 			{
 				return 0;
 			}
-			break;
-
 		}
-
 		return 0;
 	}
 
@@ -1363,7 +1360,7 @@ public class Conversation : GuiBase {
 		//description:  transfers item to player, per id (?)
 		//return value: 1: ok, 2: player has no space left
 		int playerHasSpace=1;
-		Container cn = npc.gameObject.GetComponent<Container>();
+		//Container cn = npc.gameObject.GetComponent<Container>();
 		Container cnpc = playerUW.gameObject.GetComponent<Container>();
 
 		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
@@ -1379,12 +1376,10 @@ public class Conversation : GuiBase {
 			else
 			{
 				playerHasSpace=0;
-			//	GameObject demanded = GameObject.Find (objInslot.anem);
 				objInslot.transform.parent=null;
 				objInslot.transform.position=npc.transform.position;
 				npc.GetComponent<Container>().RemoveItemFromContainer(objInslot.name);
 			}
-
 		}
 		else
 		{

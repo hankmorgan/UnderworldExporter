@@ -260,7 +260,6 @@ public class Conversation_144 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();//Endconvo
 				yield break;
-				break;
 				
 			} // end switch
 			
@@ -350,7 +349,6 @@ public class Conversation_144 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();//Endconvo
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -399,15 +397,15 @@ public class Conversation_144 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();//Endconvo
 				yield break;
-				break;
 				
 			} // end switch
 			
 		} // while
-		Time.timeScale =SlomoTime;
-		yield return new WaitForSeconds(WaitTime);
-		func_00e0();
-		yield break;
+		//Unreachable.
+		//Time.timeScale =SlomoTime;
+		//yield return new WaitForSeconds(WaitTime);
+		//func_00e0();
+		//yield break;
 	} // end func
 	
 	IEnumerator func_0596(int param1) {
@@ -449,8 +447,7 @@ public class Conversation_144 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_008b();//Endconvo
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			break;

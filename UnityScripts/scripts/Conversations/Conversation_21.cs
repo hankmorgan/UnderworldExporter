@@ -251,8 +251,7 @@ public class Conversation_21 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_0379());

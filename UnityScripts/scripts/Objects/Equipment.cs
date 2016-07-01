@@ -41,10 +41,15 @@ public class Equipment : object_base {
 										//TODO:Fix me inputctrl.type=UIInput.KeyboardType.Default;
 										//TODO:Fix me inputctrl.useLabelTextAtStart=true;
 										//TODO:Fix me 				inputctrl.selected=true;
-				inputctrl.onEndEdit.RemoveAllListeners();
-				inputctrl.onEndEdit.AddListener(delegate {
-						this.OnSubmitPickup();	
-				} );
+			//	inputctrl.onEndEdit.RemoveAllListeners();
+			//	inputctrl.onEndEdit.AddListener(delegate {
+			//			this.OnSubmitPickup();	
+			//	} );
+
+				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
+				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputAnvil;
+
+				//TODO:Fix me inputctrl.selected=true;
 				inputctrl.contentType= InputField.ContentType.Alphanumeric;
 				inputctrl.Select();
 				WindowDetect.WaitingForInput=true;
@@ -62,13 +67,13 @@ public class Equipment : object_base {
 	}
 
 
-	public void OnSubmitPickup()
+	public void OnSubmitPickup(string ans)
 	{//Event handler for processing the repair question y/n
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		InputField inputctrl =playerUW.playerHud.InputControl;//playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
+		//InputField inputctrl =playerUW.playerHud.InputControl;//playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
 
-		string ans = inputctrl.text;
+		//string ans = inputctrl.text;
 		ml.Clear();//="";
 		if (ans.Substring(0,1).ToUpper() == "Y")
 		{

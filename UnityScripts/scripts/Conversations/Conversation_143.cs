@@ -393,16 +393,12 @@ public class Conversation_143 : Conversation {
 			
 			locals[1] = 0;
 			goto label_0547;
-			
-			break;
-			
+
 		case 2:
 			
 			locals[1] = 1;
 			goto label_0547;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0547:;
@@ -461,16 +457,14 @@ public class Conversation_143 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[45] );//endconvo
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();//endconvo
 			yield break;
-			break;
-			
+		
 		} // end switch
 		
 	} // end func
@@ -721,8 +715,6 @@ public class Conversation_143 : Conversation {
 			locals[1] = 0;
 			goto label_08b1;
 			
-			break;
-			
 		case 65:
 			
 			break;
@@ -790,7 +782,6 @@ public class Conversation_143 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();//endconvo
 			yield break;
-			break;
 			
 		case 2:
 			

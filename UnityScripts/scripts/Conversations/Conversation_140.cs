@@ -367,8 +367,7 @@ public class Conversation_140 : Conversation {
 		case 3:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func

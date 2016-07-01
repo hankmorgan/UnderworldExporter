@@ -248,7 +248,7 @@ public class Conversation_4 : Conversation {
 												yield return StartCoroutine(say( locals, 105 ));
 												Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
 												
-												yield return StartCoroutine(label_0d72(locals));
+												//removed unreachable yield return StartCoroutine(label_0d72(locals));
 												
 												//break;
 												
@@ -293,7 +293,6 @@ public class Conversation_4 : Conversation {
 			case 94:
 				
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-				break;
 				
 			} // end switch
 			
@@ -341,20 +340,15 @@ public class Conversation_4 : Conversation {
 		case 1:
 			
 			goto label_0374;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_041c;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_0996;
-			
-			break;
+
 			
 		case 4:
 			
@@ -363,7 +357,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[27] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -398,21 +391,15 @@ public class Conversation_4 : Conversation {
 		case 11:
 			
 			goto label_04c2;
-			
-			break;
-			
+
 		case 12:
 			
 			goto label_06da;
-			
-			break;
-			
+
 		case 13:
 			
 			goto label_0880;
-			
-			break;
-			
+
 		case 14:
 			
 			locals[71] = 2;
@@ -420,8 +407,7 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[71] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 		//} // end if
@@ -452,21 +438,15 @@ public class Conversation_4 : Conversation {
 		case 1:
 			
 			goto label_04c2;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_0622;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_068e;
-			
-			break;
-			
+
 		case 4:
 			yield return StartCoroutine(func_0fef());
 			locals[1] = func_0fef_result;
@@ -519,9 +499,7 @@ public class Conversation_4 : Conversation {
 		case 2:
 			
 			goto label_056b;
-			
-			break;
-			
+
 		} // end switch
 		
 		//} // end if
@@ -596,8 +574,6 @@ public class Conversation_4 : Conversation {
 			
 			goto label_04c2;
 			
-			break;
-			
 		case 2:
 			
 			yield return StartCoroutine(say( locals, 039 ));
@@ -606,8 +582,7 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[208] );
 			yield break;
-			break;
-			
+
 		case 3:
 			
 			yield return StartCoroutine(say( locals, 041 ));
@@ -616,8 +591,7 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[209] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_068e:;
@@ -646,8 +620,7 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[232] );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 		//} // end if
@@ -679,14 +652,11 @@ public class Conversation_4 : Conversation {
 			case 1:
 				
 				goto label_077a;
-				
-				break;
-				
+	
 			case 2:
 				
 				goto label_0876;
-				
-				break;
+
 				
 			case 3:
 				yield return StartCoroutine(func_0fef());
@@ -745,9 +715,7 @@ public class Conversation_4 : Conversation {
 			
 			privateVariables[7] = 1;
 			goto label_07f6;
-			
-			break;
-			
+
 		case 3:
 			
 			yield return StartCoroutine(say( locals, 056 ));
@@ -756,7 +724,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[280] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -781,8 +748,7 @@ public class Conversation_4 : Conversation {
 		case 2:
 			
 			goto label_0836;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -807,9 +773,7 @@ public class Conversation_4 : Conversation {
 		case 2:
 			
 			goto label_0996;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0876:;
@@ -835,15 +799,11 @@ public class Conversation_4 : Conversation {
 		case 1:
 			
 			goto label_0900;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_098c;
-			
-			break;
-			
+	
 		case 3:
 			yield return StartCoroutine(func_0fef());
 			locals[1] = func_0fef_result;
@@ -884,8 +844,6 @@ public class Conversation_4 : Conversation {
 			
 			goto label_098c;
 			
-			break;
-			
 		case 2:
 			
 			yield return StartCoroutine(say( locals, 071 ));
@@ -894,7 +852,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[371] );
 			yield break;
-			break;
 			
 		case 3:
 			yield return StartCoroutine(func_0fef());
@@ -957,13 +914,13 @@ public class Conversation_4 : Conversation {
 			func_00b1( locals[376] );
 			yield break;
 			//goto label_09e3;
-			yield return StartCoroutine (label_09e3 (locals));
+	//removed unreachable		yield return StartCoroutine (label_09e3 (locals));
 			
 			//goto label_0a86;
-			yield return StartCoroutine (label_0a86 (locals));
+	//removed unreachable		yield return StartCoroutine (label_0a86 (locals));
 			
 			//goto label_0adb;
-			yield return StartCoroutine(label_0adb(locals));
+	//removed unreachable		yield return StartCoroutine(label_0adb(locals));
 			
 		} // end if
 		
@@ -1005,23 +962,18 @@ public class Conversation_4 : Conversation {
 			
 			locals[1] = 0;
 			goto label_0fdc;
-			
-			break;
-			
+
 		case 2:
 			
 			locals[1] = 1;
 			goto label_0fdc;
-			
-			break;
+
 			
 		case 3:
 			
 			locals[1] = 2;
 			goto label_0fdc;
-			
-			break;
-			
+
 		} // end switch
 		
 		
@@ -1055,13 +1007,10 @@ public class Conversation_4 : Conversation {
 				locals[1] = 0;
 				goto label_1058;
 				
-				break;
-				
 			case 2:
 				
 				locals[1] = 1;
 				goto label_1058;
-				break;
 			} // end if
 			
 		} 
@@ -1092,15 +1041,11 @@ public class Conversation_4 : Conversation {
 			
 			locals[1] = 0;//was 0
 			goto label_10ae;
-			
-			break;
-			
+	
 		case 2:
 			
 			locals[1] = 1;
 			goto label_10ae;
-			
-			break;
 			
 		} // end switch
 		
@@ -1131,8 +1076,6 @@ public class Conversation_4 : Conversation {
 			//return;
 			yield break;
 			
-			break;
-			
 		case 2:
 			
 			yield return StartCoroutine(say( locals, 136 ));
@@ -1141,7 +1084,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -1326,8 +1268,7 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[489] );
 			yield break;
-			break;
-			
+
 		} // end switch
 	}
 	
@@ -1396,7 +1337,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[688] );
 			yield break;
-			break;
 		} // end if
 		
 		
@@ -1429,7 +1369,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[576] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -1462,7 +1401,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[620] );
 			yield break;
-			break;
 		} // end if
 	}
 	
@@ -1495,7 +1433,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[711] );
 			yield break;
-			break;
 			
 		} // end switch
 	}
@@ -1632,7 +1569,6 @@ public class Conversation_4 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[778] );
 			yield break;
-			break;
 			
 		} // end switch
 	}

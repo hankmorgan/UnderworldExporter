@@ -321,8 +321,7 @@ public class Conversation_189 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_049a());
@@ -355,7 +354,6 @@ public class Conversation_189 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
 			
 		} // end switch
 		

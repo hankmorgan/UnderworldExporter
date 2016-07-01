@@ -12,8 +12,9 @@ public class Power : GuiBase {
 	//private UWCharacter playerUW;
 	private RawImage uiText;
 
-		void Start()
+		public override void Start()
 		{
+			base.Start();
 			if (uiText==null)
 			{
 				uiText= this.gameObject.GetComponent<RawImage>();

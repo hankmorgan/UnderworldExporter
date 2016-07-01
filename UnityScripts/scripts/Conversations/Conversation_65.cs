@@ -177,19 +177,15 @@ public class Conversation_65 : Conversation {
 				
 				goto label_030c;
 				
-				break;
-				
 			case 2:
 				
 				goto label_031f;
-				
-				break;
+
 				
 			case 3:
 				
 				goto label_0377;//?
-				
-				break;
+
 				
 			} // end switch
 			
@@ -230,13 +226,7 @@ public class Conversation_65 : Conversation {
 					
 				} // end switch
 			} // end if	//Moved this bracket to here!*/
-			
-			
-			
-			
-			
-			
-			
+		
 			//break;
 			
 		} // end switch(if)
@@ -282,26 +272,23 @@ public class Conversation_65 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
 				yield break;
-				break;
-				
+
 			case 22:
 				yield return StartCoroutine(say( locals, 023 ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
 				yield break;
-				break;
-				
+
 			case 24:
 				
 				goto label_031f;
-				
-				break;
+	
 				
 			case 25:
 				
 				goto label_05d9;
-				break;
+
 			} // end if
 			
 			//			break;
@@ -322,20 +309,14 @@ public class Conversation_65 : Conversation {
 			
 			goto label_0594;
 			
-			break;
-			
 		case 2:
 			
 			goto label_0594;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_0586;
-			
-			break;
-			
+
 		} // end switch
 		
 	label_0586:;
@@ -362,13 +343,10 @@ public class Conversation_65 : Conversation {
 			
 			goto label_031f;
 			
-			break;
-			
 		case 2:
 			
 			goto label_0369;
-			
-			break;
+
 			
 		} // end switch
 		
@@ -393,14 +371,12 @@ public class Conversation_65 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 		} // end if
 		
 		
@@ -456,14 +432,12 @@ public class Conversation_65 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
 				yield break;
-				break;
-				
+					
 			case 2:
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();
 				yield break;
-				break;
 			} // end if
 			
 			//break;
@@ -499,14 +473,11 @@ public class Conversation_65 : Conversation {
 			case 1:
 				
 				goto label_0377;
-				
-				break;
-				
+
 			case 2:
 				
 				goto label_0369;
-				
-				break;
+	
 				
 			} // end switch
 		} // end if	//Moved this bracket to here!
@@ -534,31 +505,16 @@ public class Conversation_65 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
+
 			
 		} // end switch
+					
 		
-		
-		
-		
-		
-	} // end func
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	} // end func	
 }

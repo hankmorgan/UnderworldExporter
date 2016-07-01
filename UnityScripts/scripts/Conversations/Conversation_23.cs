@@ -233,8 +233,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[46] );//endconvo
 			yield break;
-			break;
-			
+		
 		} // end switch
 		
 	} // end func
@@ -290,8 +289,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[45] );//endconvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -354,8 +352,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[45] );//endconvo
 			yield break;
-			break;
-			
+		
 		} // end switch
 		
 	} // end func
@@ -414,7 +411,6 @@ public class Conversation_23 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[26] );//endconvo
 				yield break;
-				break;
 			} // end if
 			
 		} else {
@@ -485,8 +481,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[44] );//endconvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -552,8 +547,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );//endconvo
 			yield break;
-			break;
-			
+	
 		} // end switch
 		
 	} // end func
@@ -592,8 +586,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[44] );//endconvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -632,8 +625,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[44] );//endconvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -656,8 +648,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );//endconvo
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			locals[24] = 3;
@@ -665,8 +656,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[24] );//endconvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -689,8 +679,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );//endconvo
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			locals[24] = 2;
@@ -698,8 +687,7 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[24] );//endconvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -722,7 +710,6 @@ public class Conversation_23 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );//endconvo
 			yield break;
-			break;
 			
 		case 2:
 			
@@ -822,8 +809,6 @@ public class Conversation_23 : Conversation {
 				
 				goto label_09ea;
 				
-				break;
-				
 			case 2:
 				
 				yield return StartCoroutine(say( locals, 067 ));
@@ -832,7 +817,6 @@ public class Conversation_23 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[26] );//endconvo
 				yield break;
-				break;
 			} // end if
 			
 		} else {

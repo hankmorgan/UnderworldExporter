@@ -290,7 +290,6 @@ public class Conversation_6 : Conversation {
 					case 1:
 						
 						Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00e0();yield break;
-						break;
 						
 					case 2:
 						
@@ -300,11 +299,6 @@ public class Conversation_6 : Conversation {
 						
 					} // end switch
 				}
-				
-				
-				
-				
-				
 				
 			} // end if
 		} else {
@@ -340,18 +334,7 @@ public class Conversation_6 : Conversation {
 		} // end if
 		
 		//yield break;	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	} // end func
 	
 	//} // end if
@@ -388,8 +371,6 @@ public class Conversation_6 : Conversation {
 			
 			locals[1] = 0;
 			goto label_0886;
-			
-			break;
 			
 		} // end switch
 		//
@@ -443,8 +424,6 @@ public class Conversation_6 : Conversation {
 				
 			case 2:
 				yield break;
-				//return;
-				break;
 			} // end if		
 			
 			
@@ -539,8 +518,6 @@ public class Conversation_6 : Conversation {
 			
 			//return;
 			yield break;
-			
-			break;
 			
 		} // end switch
 		
@@ -658,7 +635,6 @@ public class Conversation_6 : Conversation {
 		case 1:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00c2();yield break;
-			break;
 			
 		case 2:
 			
@@ -703,9 +679,7 @@ public class Conversation_6 : Conversation {
 		case 1:
 			
 			goto label_04c3;
-			
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine( label_0544(locals));
@@ -818,8 +792,7 @@ public class Conversation_6 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[231] );
 			yield break;
-			break;
-			
+
 		} // end switch
 	}
 	
@@ -849,7 +822,6 @@ public class Conversation_6 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[254] );
 			yield break;
-			break;
 			
 		} // end switch
 		locals[255] = 285;
@@ -891,7 +863,6 @@ public class Conversation_6 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[281] );
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -901,20 +872,11 @@ public class Conversation_6 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[282] );
 				yield break;
-				break;
 			} // end if
 			
 			
 			
 		} // end switch
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -952,8 +914,7 @@ public class Conversation_6 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[312] );
 			yield break;
-			break;
-			
+
 		} // end switch
 	}
 	

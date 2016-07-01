@@ -223,7 +223,6 @@ public class Conversation_216 : Conversation {
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -254,8 +253,7 @@ public class Conversation_216 : Conversation {
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break;
-			break;
-			
+
 		case 3:
 			
 			yield return StartCoroutine(say( locals, 008 ));
@@ -305,7 +303,7 @@ public class Conversation_216 : Conversation {
 		locals[11]= show_inv (2,locals,6,1);
 		//locals[11] = show_inv( 2, locals[6], locals[1] );
 		if ( locals[11] > 0 ) {
-			int counter=0;
+		//	int counter=0;
 			locals[13] = 1;
 			while ( locals[13] <= locals[11] ) {
 				
@@ -336,8 +334,6 @@ public class Conversation_216 : Conversation {
 				case 1:
 					
 					goto label_045b;
-					
-					break;
 					
 				case 2:
 					
@@ -371,8 +367,6 @@ public class Conversation_216 : Conversation {
 				
 				locals[14] = locals[14] + 1;
 				goto label_045b;
-				
-				break;
 				
 			case 2:
 				
@@ -450,7 +444,6 @@ public class Conversation_216 : Conversation {
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);
 				func_00b1( locals[45] );
 				yield break;
-				break;
 			} // end if
 			
 			

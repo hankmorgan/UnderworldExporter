@@ -174,27 +174,20 @@ public class Conversation_268 : Conversation {
 		case 1:
 			
 			goto label_031e;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_03b2;
-			
-			break;
-			
+
 		case 3:
 			
 			goto label_03f2;
-			
-			break;
 			
 		case 4:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -213,16 +206,13 @@ public class Conversation_268 : Conversation {
 		case 1:
 			
 			goto label_035e;
-			
-			break;
-			
+
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_035e:;
@@ -245,20 +235,17 @@ public class Conversation_268 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			goto label_03f2;
-			
-			break;
+
 			
 		case 3:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -278,15 +265,12 @@ public class Conversation_268 : Conversation {
 			
 			goto label_035e;
 			
-			break;
-			
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_03f2:;

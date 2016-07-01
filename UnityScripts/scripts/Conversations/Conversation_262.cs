@@ -182,20 +182,14 @@ public class Conversation_262 : Conversation {
 		case 1:
 			
 			goto label_031e;
-			
-			break;
-			
+
 		case 2:
 			
 			goto label_0393;
 			
-			break;
-			
 		case 3:
 			
 			goto label_0408;
-			
-			break;
 			
 		case 4:
 			
@@ -225,20 +219,15 @@ public class Conversation_262 : Conversation {
 		case 8:
 			
 			goto label_0393;
-			
-			break;
-			
+
 		case 9:
 			
 			goto label_0408;
-			
-			break;
 			
 		case 10:
 			
 			yield return StartCoroutine ( func_00e0() );
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -263,21 +252,16 @@ public class Conversation_262 : Conversation {
 		case 12:
 			
 			goto label_031e;
-			
-			break;
-			
+
 		case 13:
 			
 			goto label_0408;
-			
-			break;
-			
+
 		case 14:
 			
 			yield return StartCoroutine ( func_00e0() );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	label_0408:;

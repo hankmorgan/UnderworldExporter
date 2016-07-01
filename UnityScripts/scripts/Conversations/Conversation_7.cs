@@ -414,7 +414,6 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
 			yield break;
-			break;
 			
 		case 28:
 			
@@ -489,8 +488,7 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -534,7 +532,6 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -564,7 +561,6 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -593,7 +589,6 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		case 48:
 			
@@ -662,7 +657,6 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		case 2:
 			
@@ -699,15 +693,13 @@ public class Conversation_7 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
 			yield break;
-			break;
-			
+
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
 			yield break;
-			break;
-			
+		
 		} // end switch
 		
 	} // end func

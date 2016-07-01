@@ -184,8 +184,7 @@ public class Conversation_222 : Conversation {
 			locals[25] = 6;
 			set_race_attitude( 3, locals[25], locals[24], locals[23] );
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		case 2:
 			
 			yield return StartCoroutine(func_03a6());
@@ -289,8 +288,6 @@ public class Conversation_222 : Conversation {
 					locals[13] = locals[13] + 1;
 					goto label_03b0;
 					
-					break;
-					
 				case 2:
 					
 					yield return StartCoroutine(say( locals, 011 ));
@@ -302,7 +299,6 @@ public class Conversation_222 : Conversation {
 					locals[43] = 0;
 					set_attitude( 2, locals[43], locals[42] );
 					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
 					
 				case 3:
 					
@@ -314,7 +310,6 @@ public class Conversation_222 : Conversation {
 					locals[48] = 0;
 					set_attitude( 2, locals[48], locals[47] );
 					Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-					break;
 				} // end if
 				
 			} //else {
@@ -350,8 +345,6 @@ public class Conversation_222 : Conversation {
 				locals[13] = locals[13] + 1;
 				goto label_03b0;
 				
-				break;
-				
 			case 2:
 				
 				yield return StartCoroutine(say( locals, 011 ));
@@ -363,7 +356,6 @@ public class Conversation_222 : Conversation {
 				locals[75] = 0;
 				set_attitude( 2, locals[75], locals[74] );
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-				break;
 				
 			case 3:
 				
@@ -375,7 +367,6 @@ public class Conversation_222 : Conversation {
 				locals[80] = 0;
 				set_attitude( 2, locals[80], locals[79] );
 				Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-				break;
 			} // end if
 			
 		} // end if
@@ -412,8 +403,7 @@ public class Conversation_222 : Conversation {
 			locals[27] = 0;
 			set_attitude( 2, locals[27], locals[26] );
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_008b();yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func

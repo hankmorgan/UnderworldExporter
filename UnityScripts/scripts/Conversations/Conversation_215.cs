@@ -390,7 +390,6 @@ public class Conversation_215 : Conversation {
 		case 2:
 			
 			Time.timeScale =SlomoTime; yield return new WaitForSeconds(WaitTime);func_00c2();yield break;
-			break;
 			
 		} // end switch
 		

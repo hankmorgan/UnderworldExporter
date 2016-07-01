@@ -14,8 +14,10 @@ public class Dragons : GuiBase {
 	public int SetArm=0;  int PrevArm=-1;
 	public int SetHead=0; int PrevHead=-1;
 
-	// Use this for initialization
-	void Start () {
+	
+	public override void Start()
+	{
+		base.Start();
 		for (int i = 0; i<=  Base.GetUpperBound(0);i++)
 		{
 			Base[i].enabled=false;

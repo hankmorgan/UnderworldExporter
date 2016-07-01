@@ -28,8 +28,9 @@ public class Compass : GuiBase_Draggable {
 
 	private Texture2D[] CompassPoles=new Texture2D[4];
 
-	// Use this for initialization
-	void Start () {
+	public override void Start()
+	{
+		base.Start();
 		comp=this.GetComponent<RawImage>();
 		for (int i=0;i<4;i++)
 		{

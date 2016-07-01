@@ -6,7 +6,7 @@ public class Conversation_136 : Conversation {
 	//conversation #136
 	//string block 0x0e88, name Oradinar
 	
-	int func_0920_result;
+	//int func_0920_result;
 	public override IEnumerator main() {
 		SetupConversation (3720);
 		play_hunger=65;
@@ -379,8 +379,7 @@ public class Conversation_136 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();//Endconvo
 			yield break;
-			break;
-			
+
 		case 2:
 			
 			func_00e0();//End convo
@@ -414,8 +413,7 @@ public class Conversation_136 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00d1();//EndConvo
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -570,13 +568,11 @@ public class Conversation_136 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00e0();//EndConvo
 				yield break;
-				break;
 				
 			case 2:
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_00c2();//EndConvo
-				yield break;
 				break;
 			} // end if
 			
@@ -632,21 +628,18 @@ public class Conversation_136 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();//EndConvo
 			yield break;
-			break;
 			
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00d1();//EndConvo
 			yield break;
-			break;
-			
+
 		case 3:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_0063();//EndConvo
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -693,7 +686,6 @@ public class Conversation_136 : Conversation {
 				yield return new WaitForSeconds(WaitTime);
 				func_00d1();//EndConvo
 				yield break;
-				break;
 				
 			case 2:
 				
@@ -789,12 +781,10 @@ public class Conversation_136 : Conversation {
 			
 			goto label_0965;
 			
-			break;
-			
 		} // end switch
 		
 	label_0965:;
-		func_0920_result=locals[1];
+		//func_0920_result=locals[1];
 		//return locals[1];
 	} // end func
 	
@@ -893,8 +883,6 @@ public class Conversation_136 : Conversation {
 		case 2:
 			
 			yield break;
-			
-			break;
 			
 		} // end switch
 		

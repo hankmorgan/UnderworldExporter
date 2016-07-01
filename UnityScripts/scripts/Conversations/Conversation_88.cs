@@ -171,20 +171,17 @@ public class Conversation_88 : Conversation {
 			case 1:
 				
 				goto label_0307;
-				
-				break;
+
 				
 			case 2:
 				
 				goto label_030c;
-				
-				break;
+
 				
 			case 3:
 				
 				goto label_0316;
-				
-				break;
+
 				
 			} // end switch
 			
@@ -226,26 +223,20 @@ public class Conversation_88 : Conversation {
 			
 			goto label_030c;
 			
-			break;
-			
 		case 9:
 			
 			goto label_03cd;
 			
-			break;
-			
 		case 10:
 			
 			goto label_03a3;
-			
-			break;
+
 			
 		case 11:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00e0();
 			yield break;
-			break;
 			
 		} // end switch
 		
@@ -372,8 +363,6 @@ public class Conversation_88 : Conversation {
 		case 2:
 			yield break;
 			//return;
-			
-			break;
 			
 		} // end switch
 		

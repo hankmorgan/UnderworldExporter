@@ -327,15 +327,13 @@ public class Conversation_277 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 22 );
 			yield break;
-			break;
-			
+
 		case 3:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 22 );
 			yield break;
-			break;
-			
+
 		} // end switch
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
@@ -403,8 +401,7 @@ public class Conversation_277 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[24] );
 			yield break ;
-			break;
-			
+
 		case 2:
 			
 			break;
@@ -492,8 +489,7 @@ public class Conversation_277 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 22 );
 			yield break;
-			break;
-			
+
 		} // end switch
 		
 	} // end func
@@ -519,15 +515,12 @@ public class Conversation_277 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( locals[23] );
 			yield break ;
-			break;
 			
 		case 2:
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 22 );
 			yield break;
-			break;
-			
 		} // end switch
 		
 	} // end func
@@ -555,8 +548,6 @@ public class Conversation_277 : Conversation {
 			yield return new WaitForSeconds(WaitTime);
 			func_00b1( 22 );
 			yield break ;
-			break;
-			
 		} // end switch
 		
 		yield return StartCoroutine(say( locals, 046 ));
@@ -609,13 +600,8 @@ public class Conversation_277 : Conversation {
 				
 			case 2:
 				yield break;
-				//return;
-				break;
 				
-				
-			} // end if
-			
-			
+			} // end if			
 			
 		} // end switch
 		
@@ -717,8 +703,6 @@ public class Conversation_277 : Conversation {
 			
 			//return;
 			yield break;
-			
-			break;
 			
 		} // end switch
 		
