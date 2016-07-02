@@ -19,11 +19,11 @@ public class InteractionModeControl : GuiBase_Draggable {
 			{
 				if (i != UWCharacter.InteractionMode)
 				{//Off version
-					Controls[i].texture=Resources.Load <Texture2D> ("HUD/lfti/lfti_"+ (i*2).ToString("0000"));
+					Controls[i].texture=Resources.Load <Texture2D> ("UW1/HUD/lfti/lfti_"+ (i*2).ToString("0000"));
 				}
 				else
 				{//On Version
-					Controls[i].texture=Resources.Load <Texture2D> ("HUD/lfti/lfti_"+ ((i*2)+1).ToString("0000"));
+					Controls[i].texture=Resources.Load <Texture2D> ("UW1/HUD/lfti/lfti_"+ ((i*2)+1).ToString("0000"));
 				}
 			}
 		}

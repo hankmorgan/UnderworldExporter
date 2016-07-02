@@ -9,7 +9,7 @@ public class Action_Message : MonoBehaviour {
 
 	public void PerformAction()
 	{
-		AudioClip Message =  Resources.Load("sfx/shock_barks/bark" + FailMessage) as AudioClip;
+		AudioClip Message =  Resources.Load("ss1/sfx/shock_barks/bark" + FailMessage) as AudioClip;
 		AudioSource aus = this.GetComponent<AudioSource>();
 		if (aus!=null)
 		{

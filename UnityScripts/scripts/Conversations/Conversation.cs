@@ -135,13 +135,13 @@ public class Conversation : GuiBase {
 		//UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
 		RawImage portrait = playerUW.playerHud.ConversationPortraits[0];
 		RawImage npcPortrait = playerUW.playerHud.ConversationPortraits[1];
-		portrait.texture=Resources.Load <Texture2D> ("HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));//TODO:playerbody
+		portrait.texture=Resources.Load <Texture2D> ("UW1/HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));//TODO:playerbody
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
 			//head in charhead.gr
 			//GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
-			npcPortrait.texture=Resources.Load <Texture2D> ("HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+			npcPortrait.texture=Resources.Load <Texture2D> ("UW1/HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 		}	
 		else
 		{
@@ -151,7 +151,7 @@ public class Conversation : GuiBase {
 			{
 				HeadToUse=0;
 			}			
-			npcPortrait.texture=Resources.Load <Texture2D> ("HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
+			npcPortrait.texture=Resources.Load <Texture2D> ("UW1/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
 		playerUW.playerHud.MessageScroll.Clear ();
 		/*End UI Setup*/

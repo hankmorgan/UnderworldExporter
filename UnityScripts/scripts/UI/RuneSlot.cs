@@ -19,14 +19,14 @@ public class RuneSlot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		thisRune = this.GetComponent<RawImage>();
-		thisRune.texture= Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+		thisRune.texture= Resources.Load <Texture2D> ("UW1/HUD/Runes/rune_blank");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 			if ((playerUW.PlayerMagic.PlayerRunes[SlotNumber] != false) && (isSet == false))
 			{
-				thisRune.texture= Resources.Load <Texture2D> ("HUD/Runes/rune_" + SlotNumber.ToString ("00"));
+				thisRune.texture= Resources.Load <Texture2D> ("UW1/HUD/Runes/rune_" + SlotNumber.ToString ("00"));
 				isSet=true;
 			}
 

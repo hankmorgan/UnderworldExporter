@@ -20,7 +20,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 			spriteSet=true;
 			for (int i = 0; i<=63;i++)
 			{
-				sprites[i]=Resources.Load<Sprite>("Sprites/Animo/animo_" + i.ToString ("D4"));
+				sprites[i]=Resources.Load<Sprite>("UW1/Sprites/Animo/animo_" + i.ToString ("D4"));
 			}
 		}
 

@@ -52,7 +52,7 @@ public class Cutscene_Intro : Cuts {
 
 		noOfAudioClips=1;
 		AudioTimes[0]=2.0f;
-		AudioClipName[0]="sfx/voice/37";
+		AudioClipName[0]="uw1/sfx/voice/37";
 	}
 
 

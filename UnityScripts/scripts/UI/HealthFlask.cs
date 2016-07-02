@@ -57,11 +57,11 @@ public class HealthFlask : GuiBase_Draggable {
 		{
 			if (Poisoned==true)
 			{//Load the poisoned versions of the flask images.
-				LevelImages[i].texture=Resources.Load <Texture2D> ("HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
+				LevelImages[i].texture=Resources.Load <Texture2D> ("UW1/HUD/Flask/Flasks_"+ (i+50).ToString("0000"));
 			}
 			else
 			{//Load the healthy versions of the flask images.
-				LevelImages[i].texture=Resources.Load <Texture2D> ("HUD/Flask/Flasks_"+ (i).ToString("0000"));
+				LevelImages[i].texture=Resources.Load <Texture2D> ("UW1/HUD/Flask/Flasks_"+ (i).ToString("0000"));
 			}
 		}
 	}

@@ -81,7 +81,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Blank = Resources.Load <Texture2D> ("Sprites/Texture_Blank");
+		Blank = Resources.Load <Texture2D> ("UW1/Sprites/Texture_Blank");
 		atTopLevel=true;
 		playerUW=this.GetComponent<UWCharacter>();
 		playerContainer =this.GetComponent<Container>();

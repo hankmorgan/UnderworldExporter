@@ -642,7 +642,7 @@ public class Magic : MonoBehaviour {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
+						playerUW.CursorIcon=Resources.Load<Texture2D>("UW1/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -671,7 +671,7 @@ public class Magic : MonoBehaviour {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
+						playerUW.CursorIcon=Resources.Load<Texture2D>("UW1/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -1403,7 +1403,7 @@ public class Magic : MonoBehaviour {
 				{//Ready the spell to be cast.
 						InventorySpell=true;
 						playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("Hud/Cursors/Cursors_0010");
+						playerUW.CursorIcon=Resources.Load<Texture2D>("UW1/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{

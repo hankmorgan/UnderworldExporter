@@ -32,7 +32,7 @@ public class Impact : MonoBehaviour {
 		{
 			image = this.gameObject.AddComponent<SpriteRenderer>();
 		}
-		image.sprite=Resources.Load<Sprite>("Sprites/Animo/animo_" + index.ToString ("D4"));
+		image.sprite=Resources.Load<Sprite>("UW1/Sprites/Animo/animo_" + index.ToString ("D4"));
 	}
 
 	public IEnumerator Animate(int StartFrame, int EndFrame)

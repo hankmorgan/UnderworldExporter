@@ -17,7 +17,7 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 		thisSpell = this.GetComponent<RawImage>();
 		if (SpellBlank==null)
 		{
-			SpellBlank=	(Texture2D)Resources.Load <Texture2D> ("HUD/Runes/rune_blank");
+			SpellBlank=	(Texture2D)Resources.Load <Texture2D> ("UW1/HUD/Runes/rune_blank");
 		}
 	}
 	
@@ -30,7 +30,7 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 				setSpell= playerUW.ActiveSpell[SlotNumber].EffectIcon();
 				if (setSpell > -1)
 				{
-					thisSpell.texture= Resources.Load <Texture2D> ("HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
+					thisSpell.texture= Resources.Load <Texture2D> ("UW1/HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
 				}
 				else
 				{

@@ -133,7 +133,7 @@ public class TileMap : MonoBehaviour {
 	public Texture2D TileMapImage()
 	{//Generates an image of the tilemap for display
 		int TileSize = 4;
-		Texture2D playerPosIcon = (Texture2D)Resources.Load ("HUD/CURSORS/CURSORS_0018");
+		Texture2D playerPosIcon = (Texture2D)Resources.Load ("UW1/HUD/CURSORS/CURSORS_0018");
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
 		//Init the tile map as blank first
 		for (int i = 0; i<63; i++)

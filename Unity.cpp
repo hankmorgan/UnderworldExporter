@@ -465,14 +465,14 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 				}
 			}
 		switch (objectMasters[currobj.item_id].type)
-			{
+			{//TODO:game versions.
 				case DOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"textures/doors/doors_%02d_material\", %d, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"uw1/textures/doors/doors_%02d_material\", %d, %d, %d);",
 						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
 						hasLock,isOpen);
 					break; 
 				case HIDDENDOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"materials/tmap/%s\", %d, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"uw/materials/tmap/%s\", %d, %d, %d);",
 						textureMasters[LevelInfo[currobj.tileX][currobj.tileY].wallTexture].path, 
 						objList[currobj.link].link & 0x3F,
 						hasLock, isOpen);
@@ -743,7 +743,7 @@ void SetButtonProperties(int game, short on, int SpriteNoOn, int SpriteNoOff)
 		{
 			case UWDEMO:
 			case UW1:
-				fprintf(UNITY_FILE, "\n\tSetButtonProperties(myObj, %d, \"Sprites/tmflat/tmflat_00%02d\", \"Sprites/tmflat/tmflat_00%02d\");", on, SpriteNoOn,SpriteNoOff);
+				fprintf(UNITY_FILE, "\n\tSetButtonProperties(myObj, %d, \"UW1/Sprites/tmflat/tmflat_00%02d\", \"UW1/Sprites/tmflat/tmflat_00%02d\");", on, SpriteNoOn,SpriteNoOff);
 				break;
 			case UW2:
 				break;
@@ -761,7 +761,7 @@ void SetButtonProperties(int game, int SpriteNoBegin)
 			case UW1:
 				for (int i = 0; i < 8; i++)
 					{
-					fprintf(UNITY_FILE, "\"Sprites/tmobj/tmobj_%02d\"",i+SpriteNoBegin);
+					fprintf(UNITY_FILE, "\"UW1/Sprites/tmobj/tmobj_%02d\"",i+SpriteNoBegin);
 					if (i != 7)
 						{
 						fprintf(UNITY_FILE, ",");

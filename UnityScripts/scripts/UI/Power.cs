@@ -2,14 +2,15 @@
 using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Power Gem update
+/// </summary>
 public class Power : GuiBase {
 
 	public string CurrentPower;
 	private float PreviousCharge=-1.0f;
 	private int RepeatCounter=0;
 	private int PreviousIndex=-1;
-	//float PowerLevel;
-	//private UWCharacter playerUW;
 	private RawImage uiText;
 
 		public override void Start()
@@ -44,7 +45,7 @@ public class Power : GuiBase {
 				if (index!=PreviousIndex)
 				{
 					RepeatCounter=0;
-					uiText.texture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ index.ToString("0000"));
+					uiText.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ index.ToString("0000"));
 					CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
 				}
 			}
@@ -54,7 +55,7 @@ public class Power : GuiBase {
 			if (IsInvoking("UpdateMaxCharge"))
 			{
 				CancelInvoke("UpdateMaxCharge");
-				uiText.texture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ 0.ToString("0000"));
+				uiText.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ 0.ToString("0000"));
 			}
 			RepeatCounter=0;
 		}
@@ -62,7 +63,7 @@ public class Power : GuiBase {
 
 	void UpdateMaxCharge()
 	{
-		uiText.texture=Resources.Load <Texture2D> ("HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
+		uiText.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
 		CurrentPower="HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)
