@@ -6,7 +6,7 @@ public class SpellProp_RuneOfWarding : SpellProp {
 		public override void init(int effectId)
 	{
 		base.init (effectId);
-		//ProjectileSprite = "Sprites/objects_020";
+		//ProjectileSprite = "UW1/Sprites/objects_020";
 		//Force=200.0f;
 		BaseDamage=0;
 		//impactFrameStart=21;

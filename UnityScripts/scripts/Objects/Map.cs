@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+/// <summary>
+/// Used to open and close the players map view
+/// </summary>
 public class Map : object_base {
 	//The inventory item
 	// Use this for initialization
@@ -23,50 +25,21 @@ public class Map : object_base {
 		}
 	}
 
+
+		/// <summary>
+		/// Opens the map UI
+		/// </summary>
+		/// <returns><c>true</c>, if map was opened, <c>false</c> otherwise.</returns>
 	public bool OpenMap()
 	{
-		//Use a map
-		//GameObject map = GameObject.Find ("MapAnchor");//The UI
-		//GameObject TileMapInfo =GameWorldController.instance.Tilemap.gameObject; //GameObject.Find ("Tilemap");//The stored data.
-				/*
-		//Turn on the camera
-		foreach(Transform child in map.transform)
-		{
-			if (child.name == "MapPanel")
-			{
-				child.gameObject.SetActive(true);
-			}
-			//UILabel MapDisplay = GameObject.Find ("MapDisplay").GetComponent<UILabel>();
-
-			//MapDisplay.text= TileMapInfo.GetComponent<TileMap>().TileMapAscii(false);
-			UITexture MapDisplay=GameObject.Find ("MapDisplay").GetComponent<UITexture>();
-			MapDisplay.mainTexture= TileMapInfo.GetComponent<TileMap>().TileMapImage();
-		}
-				*/
 		WindowDetect.InMap=true;//turns on blocking collider.
-		//RawImage mapdisplay =playerUW.playerHud.MapDisplay;
 		playerUW.playerHud.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
-		//Turn off the main hud
-		//GameObject UWHud =GameObject.Find ("UW_HUD");
-		//foreach(Transform child in UWHud.transform)
-		//{
-		//	if ((child.name == "Anchor")||(child.name == "Camera"))
-		//	{
-		//		child.gameObject.SetActive(false);
-		//	}
-		//}
-
-		//GameObject mus = //GameObject.Find ("MusicController");
 		if  (GameWorldController.instance.mus!=null)
 		{
 			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
 		}
 		playerUW.playerHud.MessageScroll.Clear();
-		//UILabel ml = GameObject.Find ("scroll").GetComponent<UILabel>();
-		//if (ml!=null)
-		//{
-		//	ml.text="";
-		//}
+
 		chains.ActiveControl=4;
 		chains.Refresh ();
 		return true;
@@ -85,20 +58,4 @@ public class Map : object_base {
 			}
 		return true;
 	}
-
-		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		//UILabel ml =objInt.getMessageLog();
-		//StringController Sc = objInt.getStringController();
-	///	//TODO:Figure out the source for you see a..
-	//	if (objInt.PickedUp==true)
-	//	{
-	//		ml.text =  Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt) + "\n" + Sc.GetString(1,151);
-	//	}
-	//	else
-	//	{
-	//		ml.text =  Sc.GetString(1,260) + " " + Sc.GetFormattedObjectNameUW(objInt);
-	//	}
-
-	//	return true;
-	//}
 }

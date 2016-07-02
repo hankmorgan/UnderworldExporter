@@ -1,22 +1,33 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Light sources the player can carry around and use
+/// </summary>
 public class LightSource : object_base {
-
+	/// How bright the light is. Light radius
 	public int Brightness;
-//	public int Duration;// Use the quality to decide the duration.
 
+	/// Sprite index for the light on image
 	public int ItemIdOn;
+	/// Sprite index for the light off image
 	public int ItemIdOff;
-
+	
+	/// Is the light active
 	public bool IsOn;
 
+		/// Basic brightness around the player.
 	public const int BaseBrightness = 8;
+
+		/// The light level obtained from magic spells
 	public static int MagicBrightness=0;
+		/// Interval of time between light quality drops
 	public float LightTimerMax=30.0f;
+		/// Current time remaining on the light quality interval
 	public float LightTimer;
 
-	// Update is called once per frame
+	/// <summary>
+	/// Ticks down the light source
+	/// </summary>
 	void Update () {
 		if (IsOn==true)
 		{
@@ -70,16 +81,11 @@ public class LightSource : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Turns the light on if there is a free inventory slot to hold it in.
+		/// </summary>
 	public void SetOn()
 	{		
-		/*if (objInt==null)
-		{
-			objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		}
-		if(ml==null)
-		{
-			ml =objInt.getMessageLog();
-		}*/
 		if (objInt.Quality<=0)
 		{//000~001~124~That light is already used up. \n
 			ml.Add(playerUW.StringControl.GetString(1,124));
@@ -144,6 +150,9 @@ public class LightSource : object_base {
 		objInt.RefreshAnim();
 	}
 	
+	/// <summary>
+	/// Turns the light off
+	/// </summary>
 	public void SetOff()
 	{
 		IsOn=false;
@@ -159,6 +168,10 @@ public class LightSource : object_base {
 		return true;
 	}
 
+		/// <summary>
+		/// Returns a string identifying the state of the light source
+		/// </summary>
+		/// <returns>The status text.</returns>
 	private string lightStatusText()
 	{//The quality string of the light Eg is it spent or not.
 
@@ -188,5 +201,4 @@ public class LightSource : object_base {
 				return playerUW.StringControl.GetString (5,64);//unused
 			}
 	}
-
 }

@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Sample Cutscene
+/// </summary>
 public class Cutscene_Intro : Cuts {
-
-	void Awake()
-	{
+	
+	public override void Awake()
+		{
+		base.Awake();
 		//Sample script (of sorts) Plays some clips from the intro.
 		//Prints a couple of subtitles and plays an audio clip.
 		//Define the array values here.

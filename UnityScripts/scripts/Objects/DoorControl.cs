@@ -1,19 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Door controller for manipulating doors
+/// </summary>
 public class DoorControl : object_base {
-	/*Class for manipulating doors*/
-
-	public int DR;//The damage resistance of the door.
+	///The damage resistance of the door.
+	public int DR;
+		///Is the door locked
 	public bool locked;
-	public int KeyIndex;//What keys can open this
-	public bool state;	//True for open, false for closed.
-	public bool isPortcullis;//Special cases. Sets direction of opening
-	public bool DoorBusy;//Is the door opening or closing. Used to keep if flying off it's hinges!
-	public bool Pickable;//Sets if the lock can be picked.
-	public bool Spiked;//Is the door spiked/
-	private bool PlayerUse=false;//Is it the player using the object or a trigger/trap.
-	public string UseLink;//A trigger to activate when opened.
+		///What keys can open this
+	public int KeyIndex;
+		///True for open, false for closed.
+	public bool state;	
+		///Special cases. Sets direction of opening
+	public bool isPortcullis;
+		///Is the door opening or closing. Used to keep if flying off it's hinges!
+	public bool DoorBusy;
+		///Sets if the lock can be picked.
+	public bool Pickable;
+		///Is the door spiked
+	public bool Spiked;
+		///Is it the player using the object or a trigger/trap.
+	private bool PlayerUse=false;
+		///A trigger to activate when opened.
+	public string UseLink;
 
 	public override bool use ()
 	{
@@ -123,8 +133,11 @@ public class DoorControl : object_base {
 		return true;
 	}
 	
+		/// <summary>
+		/// Spike this door. Blocks NPC from opening
+		/// </summary>
 	public bool Spike()
-	{//returns turn if door becomes spiked
+	{//returns true if door becomes spiked
 		if (Spiked==false)
 		{
 			//000~001~128~You can only spike closed doors.
@@ -152,7 +165,6 @@ public class DoorControl : object_base {
 
 	public override bool Activate()
 	{
-		//		Debug.Log (this.name + " touched");
 		if (locked==false)
 		{//Toggle Open and closed
 			if (state==false)
@@ -174,6 +186,9 @@ public class DoorControl : object_base {
 		return true;
 	}
 
+	/// <summary>
+	/// Opens the door.
+	/// </summary>
 	public void OpenDoor()
 	{
 		if (state==false)
@@ -203,6 +218,9 @@ public class DoorControl : object_base {
 		}
 	}
 
+	/// <summary>
+	/// Closes the door.
+	/// </summary>
 	public void CloseDoor()
 	{
 		if (state==true)
@@ -223,16 +241,26 @@ public class DoorControl : object_base {
 		}
 	}
 
+
+		/// <summary>
+		/// Locks the door.
+		/// </summary>
 	public void LockDoor()
 	{
 		locked=true;
 	}
 
+		/// <summary>
+		/// Unlocks the door.
+		/// </summary>
 	public void UnlockDoor()
 	{
 		locked=false;
 	}
 
+		/// <summary>
+		/// Toggles the lock state
+		/// </summary>
 	public void ToggleLock()
 	{
 		if (locked==false)
@@ -245,6 +273,9 @@ public class DoorControl : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Toggles the door open or closed.
+		/// </summary>
 	public void ToggleDoor()
 	{
 		if (state==false)//Closed
@@ -260,6 +291,13 @@ public class DoorControl : object_base {
 	}
 
 
+		/// <summary>
+		/// Rotates the door open or closed
+		/// </summary>
+		/// <returns>The door.</returns>
+		/// <param name="door">Door.</param>
+		/// <param name="turningAngle">What angle to turn to</param>
+		/// <param name="traveltime">How long the door takes to open/close</param>
 	IEnumerator RotateDoor(Transform door, Vector3 turningAngle, float traveltime)
 	{
 		Quaternion StartAngle = door.rotation;
@@ -274,6 +312,13 @@ public class DoorControl : object_base {
 		door.rotation = EndAngle;
 	}
 	
+		/// <summary>
+		/// Raises the portcullis
+		/// </summary>
+		/// <returns>The door.</returns>
+		/// <param name="door">Door.</param>
+		/// <param name="TransformDir">What direction to travel in</param>
+		/// <param name="traveltime">How long the door takes to raise or drop</param>
 	IEnumerator RaiseDoor(Transform door, Vector3 TransformDir, float traveltime)
 	{
 		float rate = 1.0f/traveltime;
@@ -306,8 +351,7 @@ public class DoorControl : object_base {
 				OpenDoor();
 			}
 		}
-		return true;
-		
+		return true;		
 	}
 
 
@@ -322,12 +366,14 @@ public class DoorControl : object_base {
 		{
 			ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
 		}
-
 		return true;
 	}
 
 
-
+	/// <summary>
+	/// Gets the door condition
+	/// </summary>
+	/// <returns>The quality string of the door</returns>
 	private string DoorQuality()
 	{//TODO:The figures here are based on food quality levels!
 		
@@ -357,6 +403,4 @@ public class DoorControl : object_base {
 			return playerUW.StringControl.GetString (5,5);//massive?
 		}
 	} 
-
-
 }

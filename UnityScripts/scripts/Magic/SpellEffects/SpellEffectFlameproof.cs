@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Player becomes fireproof.
+/// </summary>
 public class SpellEffectFlameproof : SpellEffect {
 
 	public override void ApplyEffect ()

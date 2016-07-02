@@ -28,13 +28,13 @@ public class GameClock : GuiBase {
 		minute++;
 		if (minute%5==0)
 		{
-			playerUW.RegenMana();
+			GameWorldController.instance.playerUW.RegenMana();
 		}
 		if (minute>=60)
 		{
 			minute=0;
 			hour++;
-			playerUW.UpdateHungerAndFatigue();
+			GameWorldController.instance.playerUW.UpdateHungerAndFatigue();
 			//TODO:Update torches, lightsources and food					
 			if (hour>=24)
 			{

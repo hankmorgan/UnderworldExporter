@@ -10,7 +10,7 @@ public class CutsceneAnimation : HudAnimation {
 
 	public void PreAnimPlay()
 	{//Called by events in certain animations when starting playing
-		playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+		GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 		return;
 	} 
 	
@@ -20,27 +20,27 @@ public class CutsceneAnimation : HudAnimation {
 		switch (SetAnimation)
 		{
 		case "FadeToBlackSleep":
-			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
-			Bedroll.WakeUp (playerUW);
+			Bedroll.WakeUp (GameWorldController.instance.playerUW);
 			break;
 		case "ChasmMap":
 			//maincam.enabled=true;
-			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 		case "Death_With_Sapling"://Resurrection
 			MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
 			if (mus!=null)
 			{
-				playerUW.CurVIT=playerUW.MaxVIT;
+				GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
 				mus.Death=false;
 				mus.Combat=false;
 				mus.Fleeing=false;
 				MusicController.LastAttackCounter=0.0f;
 			}
 			//maincam.enabled=true;
-			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 
@@ -51,7 +51,7 @@ public class CutsceneAnimation : HudAnimation {
 			break;
 		default:
 			//maincam.enabled=true;
-			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 		}

@@ -2,10 +2,13 @@
 using System.Collections;
 
 public class Grave : object_base {
-	/*Code for gravestones*/
+	///ID of the grave to lookup
 	public int GraveID;
 
-
+	/// <summary>
+	/// Plays cutscene that displays the gravestone.
+	/// </summary>
+	/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public override bool LookAt ()
 	{
 		CheckReferences();
@@ -16,7 +19,6 @@ public class Grave : object_base {
 
 	public override bool use ()
 	{
-		//return base.use ();
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
 			return LookAt ();
@@ -29,6 +31,13 @@ public class Grave : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Activation of this object by another. EG key on door
+		/// </summary>
+		/// <returns>true</returns>
+		/// <c>false</c>
+		/// <param name="ObjectUsed">Object used.</param>
+		/// Special case here for Garamon's grave. Activates a hard coded trigger
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
 	ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
@@ -85,5 +94,4 @@ public class Grave : object_base {
 			}
 		}
 	}
-
 }

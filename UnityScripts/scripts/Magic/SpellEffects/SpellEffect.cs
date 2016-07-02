@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+/// <summary>
+/// Spell effect.
+/// </summary>
+/// Magic spell effects that persist over time on the player or an NPC
 
 public class SpellEffect : MonoBehaviour {
-	/*
-	 * 
-	 * Magic Spell effects that persist  
-	 * 
-	 * Base class for status effects that occur over time
-	 * 
-	 * 
-	*/
 
 	/*Enchantment Effect Ids as taken from the strings file.*/
 	public const int UW1_Spell_Effect_Darkness = 0;
@@ -230,9 +226,11 @@ public class SpellEffect : MonoBehaviour {
 	//Eg the poison potion in Ironwit's maze
 	public const int UW1_Spell_Effect_PoisonHidden = 491;
 
-
-	//From a spreadsheet I created. The Icons that match up with the above effects.
-	public static int[] UW1_Spell_Icons=
+		/// <summary>
+		/// Spell Icons for the spell effect ids
+		/// </summary>
+		/// From a spreadsheet I created. The Icons that match up with the above effects constants
+	private static int[] UW1_Spell_Icons=
 	{-1,
 		17,
 		17,
@@ -726,41 +724,63 @@ public class SpellEffect : MonoBehaviour {
 		-1,
 		-1};
 
-
-	public int counter;	//The number of ticks the effect last for.
-	public int TickTime =10; //The length of time of a tick.
-	public int EffectID; //One of the above IDs
-	public int Value;//The value for the spell effect. Eg light intensity. The Damage over time etc
-	public bool Active;//Is the effect running.
-	public bool Permanent;//Used when an effect is created by equipment.
+	///The number of ticks the effect last for.
+	public int counter;	
+	///The length of time of a tick.
+	public int TickTime =10; 
+	///Effect Id of the current spell effect
+	public int EffectID; 
+	///The value for the spell effect. Eg light intensity. The Damage over time etc
+	public int Value;
+	///Is the effect running.
+	public bool Active;
+	///Used when an effect is created by equipment and needs to last as long as the player has equiped the item
+	public bool Permanent;
 	
 	public static UWCharacter playerUW;
 
+
+	/// <summary>
+	/// Returns the icon index no for this effect
+	/// </summary>
+	/// <returns>The icon.</returns>
 	public int EffectIcon()
 	{
 		return UW1_Spell_Icons[EffectID];
 	}
 
+	/// <summary>
+	/// Applies the effect.
+	/// </summary>
 	public virtual void ApplyEffect()
 	{
 		//Code to apply whatever effect is occuring
 		Active=true;
 	}
-
+	
+	/// <summary>
+	/// Code to apply the periodic changes to the effect. Eg poison drains health, staged effects.
+	/// </summary>
 	public virtual void EffectOverTime()
 	{
-		//Debug.Log ("DOT on base");
-		//code to apply the periodic changes to the effect. Eg poison drains health, staged effects.
+		return;
 	}
 
+	/// <summary>
+	/// End the effect. By default it will destroy this spell effect.
+	/// </summary>
 	public virtual void CancelEffect()
-	{//End the effect. By default it will destroy this spell effect.
+	{
 		Active=false;
 		Component.DestroyImmediate (this);
 	}
 
+	/// <summary>
+	/// Starts the spell effect.
+	/// </summary>
+	/// Applys the effect and starts the timer
 	public virtual void Go()
-	{//Start the spell effect
+	{
 		if (counter==999)
 		{
 			Permanent=true;
@@ -769,8 +789,11 @@ public class SpellEffect : MonoBehaviour {
 		StartCoroutine(timer());
 	}
 
+		/// <summary>
+		/// Timer loop for the effect.
+		/// </summary>
+		/// Periodically applies the effect over time when the counter ticks down.
 	public IEnumerator timer() {
-		//Timer loop for the effect.
 		while (Active==true)
 		{
 			yield return new WaitForSeconds(TickTime); 
@@ -794,16 +817,25 @@ public class SpellEffect : MonoBehaviour {
 		CancelEffect();
 	}
 
+		/*
 	public virtual string Status()
 		{//The debug status of the effect.
 			return "The spell effect has "+ counter + " remaining";
-		}
+		}*/
+
+		/// <summary>
+		/// Describes the spell and how stable the spell is.
+		/// </summary>
+		/// <returns>The spell description.</returns>
 
 	public string getSpellDescription()
-	{//Describes the spell and how stable the spell is.
+	{
 		return playerUW.StringControl.GetString (6,EffectID);
 	}
 
+	/// <summary>
+	/// Makes the spell effect permanent.
+	/// </summary>
 	public void SetPermanent(bool NewVal)
 	{
 		Permanent=NewVal;

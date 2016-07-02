@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class MagicScroll : enchantment_base {
-
-
 	public override bool use ()
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")
@@ -14,7 +12,6 @@ public class MagicScroll : enchantment_base {
 		}
 		else
 		{
-			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 		}		
 	}

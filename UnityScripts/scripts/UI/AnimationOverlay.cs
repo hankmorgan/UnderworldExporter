@@ -43,7 +43,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 		{
 			image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
-	//	image.sprite=Resources.Load<Sprite>("Sprites/Animo/animo_" + index.ToString ("D4"));
+	//	image.sprite=Resources.Load<Sprite>("UW1/Sprites/Animo/animo_" + index.ToString ("D4"));
 		image.sprite=sprites[index];
 	}
 	

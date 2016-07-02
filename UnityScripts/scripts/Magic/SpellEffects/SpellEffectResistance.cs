@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// For iron skin, thick skin and resist blows etc that modify damage resistance. (only the strongest applies)
+/// </summary>
 public class SpellEffectResistance : SpellEffect {
-
-	//For iron skin, thick skin and resist blows etc that modify damage resistance. (only the strongest applies)
 
 	public override void ApplyEffect ()
 	{

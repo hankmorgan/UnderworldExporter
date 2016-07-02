@@ -1,12 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Makes the NPC confused
+/// </summary>
 public class SpellEffectConfusion : SpellEffect {
-		//Makes the npc confused.
+
+		/// Backup the original state of the Npc
 		public int OriginalState;
+		/// Backup the original attitude of the npc
 		public int OriginalAttitude;
 		public NPC npc;
 		public bool WasActive;
+
+		/// <summary>
+		/// Applies the effect.
+		/// </summary>
+		/// Sets the NPC attitude and states
+		/// Does not apply if allied or afraid
 		public override void ApplyEffect ()
 		{
 			if ((this.GetComponent<SpellEffectAlly>()==null) && (this.GetComponent<SpellEffectFear>()==null))

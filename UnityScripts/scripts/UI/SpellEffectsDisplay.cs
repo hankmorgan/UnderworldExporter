@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class SpellEffectsDisplay : GuiBase_Draggable {
 	public int SlotNumber;
-	//public static UWCharacter playerUW;
+	//public static UWCharacter GameWorldController.instance.playerUW;
 	private int setSpell=-1;
 	private RawImage thisSpell;
 	private static Texture2D SpellBlank;
@@ -23,14 +23,14 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 	
 	// Update is called once per frame
 	void Update () {
-		if (playerUW.ActiveSpell[SlotNumber] != null)
+		if (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber] != null)
 		{
-			if (playerUW.ActiveSpell[SlotNumber].EffectIcon()!=setSpell)
+			if (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon()!=setSpell)
 			{
-				setSpell= playerUW.ActiveSpell[SlotNumber].EffectIcon();
+				setSpell= GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon();
 				if (setSpell > -1)
 				{
-					thisSpell.texture= Resources.Load <Texture2D> ("UW1/HUD/Spells/spells_" + playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
+					thisSpell.texture= Resources.Load <Texture2D> ("UW1/HUD/Spells/spells_" + GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].EffectIcon().ToString("D4"));
 				}
 				else
 				{
@@ -58,7 +58,7 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 	
 	void ClickEvent(int ptrID)
 	{
-		if (playerUW.ActiveSpell[SlotNumber]==null)
+		if (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber]==null)
 		{
 			return;
 		}
@@ -66,12 +66,12 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 		{
 		case -1://Left click
 		{
-			playerUW.ActiveSpell[SlotNumber].CancelEffect();
+			GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].CancelEffect();
 			break;
 		}
 		case -2://right click
 		{
-			playerUW.playerHud.MessageScroll.Add (playerUW.ActiveSpell[SlotNumber].getSpellDescription());
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].getSpellDescription());
 			break;
 		}
 		}

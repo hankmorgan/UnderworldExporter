@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+
+/// <summary>
+/// GUI base.
+/// 
+/// Base class for UI components. Allows moving of elements and sets up common references.
+/// </summary>
 public class GuiBase : MonoBehaviour {
-//Base class for UI components.
-	public static UWCharacter playerUW;
+
+	//public static UWCharacter playerUW;///Reference to the player character.
 
 	public virtual void Start()
 	{
-		if (playerUW==null)
+		/*if (playerUW==null)
 		{
 			//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 			playerUW=GameWorldController.instance.playerUW;
-		}
+		}*/
 	}
 
 	public void MoveControlOffset(float offX, float offY)

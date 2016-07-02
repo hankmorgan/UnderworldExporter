@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Interact objects at a distance
+/// </summary>
 public class SpellEffectTelekinesis : SpellEffect {
-
-
+		
 	public override void ApplyEffect ()
 	{
 		base.ApplyEffect();

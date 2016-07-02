@@ -26,12 +26,12 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 	// Update is called once per frame
 	void Update () {
 		/*Checks the set value on the player and if different display the new rune.*/
-		if (playerUW.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
+		if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
 		{
-			setRune= playerUW.PlayerMagic.ActiveRunes[SlotNumber];
-			if (playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
+			setRune= GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber];
+			if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
 			{
-				thisRune.texture=runes[playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
+				thisRune.texture=runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
 			}
 			else
 			{
@@ -42,17 +42,17 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 
 	public void OnClick()
 	{
-		if ((playerUW.playerHud.window.JustClicked==true) || (Dragging==true))
+		if ((GameWorldController.instance.playerUW.playerHud.window.JustClicked==true) || (Dragging==true))
 		{
 			return;
 		}
 
-		if (playerUW.PlayerMagic.ReadiedSpell=="")
+		if (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell=="")
 		{
-			if (playerUW.PlayerMagic.TestSpellCast(playerUW,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2]))
+			if (GameWorldController.instance.playerUW.PlayerMagic.TestSpellCast(GameWorldController.instance.playerUW,GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[0],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[1],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[2]))
 			{
-				playerUW.PlayerMagic.castSpell(playerUW.gameObject,playerUW.PlayerMagic.ActiveRunes[0],playerUW.PlayerMagic.ActiveRunes[1],playerUW.PlayerMagic.ActiveRunes[2],true);
-				playerUW.PlayerMagic.ApplySpellCost();
+				GameWorldController.instance.playerUW.PlayerMagic.castSpell(GameWorldController.instance.playerUW.gameObject,GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[0],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[1],GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[2],true);
+				GameWorldController.instance.playerUW.PlayerMagic.ApplySpellCost();
 			}
 		}
 	}

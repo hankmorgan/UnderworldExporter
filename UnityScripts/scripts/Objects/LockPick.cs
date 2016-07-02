@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Lock pick.
+/// </summary>
+/// Used to pick door locks
 public class LockPick : object_base {
-	/*A lock pick is used to pick locks*/
 	public override bool use()
 	{
 		if (objInt.PickedUp==true)

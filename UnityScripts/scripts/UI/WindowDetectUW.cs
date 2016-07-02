@@ -78,7 +78,7 @@ public class WindowDetectUW : WindowDetect {
 				else if (playerUW.PlayerCombat.AttackCharging==true)
 				{
 					//Player has been building an attack up and has released it.
-					playerUW.PlayerCombat.ExecuteAttack();
+					playerUW.PlayerCombat.ReleaseAttack();
 				}
 				break;
 			}
@@ -256,7 +256,7 @@ public class WindowDetectUW : WindowDetect {
 			playerUW.LookMode();//do nothing
 			break;
 		case UWCharacter.InteractionModeAttack:	//attack
-			playerUW.PlayerCombat.AttackModeMelee() ;//do nothing
+			//playerUW.PlayerCombat.AttackModeMelee() ;//do nothing
 			break;
 		case UWCharacter.InteractionModeUse://Use
 			if (playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")

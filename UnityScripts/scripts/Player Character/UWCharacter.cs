@@ -88,25 +88,25 @@ public class UWCharacter : Character {
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
 		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
-		GuiBase.playerUW = this.gameObject.GetComponent<UWCharacter>();
+		//GuiBase.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		InteractionMode=UWCharacter.DefaultInteractionMode;
 
 
 		//Tells other objects about this component;
-		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
+		//InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 
 		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		Container.playerUW=this.GetComponent<UWCharacter>();
-		ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
-		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		//ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
+		//ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
-		SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
+	//	SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		Eyes.playerUW=this.GetComponent<UWCharacter>();
+		//Eyes.playerUW=this.GetComponent<UWCharacter>();
 		NPC.playerUW=this.GetComponent<UWCharacter>();
 		Magic.playerUW=this.GetComponent<UWCharacter>();
 		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
-		Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
+		//Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		SpellProp.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		StringControl.InitStringController(Application.dataPath + "//..//uw1_strings.txt");
 
@@ -285,7 +285,7 @@ public class UWCharacter : Character {
 		{
 			if(Paralyzed==false)
 			{
-					PlayerCombat.PlayerCombatUpdate();					
+					PlayerCombat.PlayerCombatIdle();					
 			}			
 		}
 

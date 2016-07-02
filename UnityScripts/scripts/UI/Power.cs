@@ -3,30 +3,31 @@ using System.Collections;
 using UnityEngine.UI;
 
 /// <summary>
-/// Power Gem update
+/// Power Gem UI Element
+/// 
+/// Updates the glowing power gem in the UW HUD to reflect the charge level of the current attack.
 /// </summary>
 public class Power : GuiBase {
 
-	public string CurrentPower;
-	private float PreviousCharge=-1.0f;
-	private int RepeatCounter=0;
-	private int PreviousIndex=-1;
-	private RawImage uiText;
+	public float PreviousCharge=-1.0f;	/// The player Combat charge level recorded in the previous frame.
+	public int RepeatCounter=0; 	/// Controls the repetition of the max charge.
+	public int PreviousIndex=-1;	/// Tracks the previous level of the charge.
+	public RawImage uiPowerGem;		/// The UI texture to display
 
-		public override void Start()
+	public override void Start()
+	{
+		base.Start();
+		if (uiPowerGem==null)
 		{
-			base.Start();
-			if (uiText==null)
-			{
-				uiText= this.gameObject.GetComponent<RawImage>();
-			}
+			uiPowerGem= this.gameObject.GetComponent<RawImage>();
 		}
+	}
 
-
-
-	void Update () {
-
-
+	/// <summary>
+	/// Compares the previous charge with the current attack charge. If the charge level has changed it changes the power gem image.
+	/// Once it reaches full charge it will loop the max charge animation.
+	/// </summary>
+	public void Update () {
 		if ((PreviousCharge!=GameWorldController.instance.playerUW.PlayerCombat.Charge)||(GameWorldController.instance.playerUW.PlayerCombat.AttackCharging==true))
 		{
 				PreviousCharge=GameWorldController.instance.playerUW.PlayerCombat.Charge;
@@ -45,8 +46,8 @@ public class Power : GuiBase {
 				if (index!=PreviousIndex)
 				{
 					RepeatCounter=0;
-					uiText.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ index.ToString("0000"));
-					CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
+					uiPowerGem.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ index.ToString("0000"));
+					//CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
 				}
 			}
 		}
@@ -55,16 +56,19 @@ public class Power : GuiBase {
 			if (IsInvoking("UpdateMaxCharge"))
 			{
 				CancelInvoke("UpdateMaxCharge");
-				uiText.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ 0.ToString("0000"));
+				uiPowerGem.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ 0.ToString("0000"));
 			}
 			RepeatCounter=0;
 		}
 	}
 
-	void UpdateMaxCharge()
+	/// <summary>
+	/// Loops the max charge image.
+	/// </summary>
+	public void UpdateMaxCharge()
 	{
-		uiText.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
-		CurrentPower="HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
+		uiPowerGem.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
+		//CurrentPower="UW1/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)
 		{

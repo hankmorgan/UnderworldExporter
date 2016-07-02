@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Creates a light source around the player
+/// </summary>
 public class SpellEffectLight : SpellEffect {
 
 	public override void ApplyEffect ()

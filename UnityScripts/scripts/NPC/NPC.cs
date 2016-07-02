@@ -3,21 +3,19 @@ using System.Collections;
 using RAIN.BehaviorTrees;
 using RAIN.Core;
 using RAIN.Minds;
-
+/// <summary>
+/// NPC Properties and AI
+/// </summary>
+/// Controls AI status, animation, conversations and general properties.
 public class NPC : object_base {
-		/*
-		 * Npc.cs Code related the NPC.
-		 * Controls AI status, animation, conversations and general properties.
-		 * 
-		 */
 	private static int[] CompassHeadings={0,-1,-2,-3,4,3,2,1,0};//What direction the npc is facing. To adjust it's animation
-		//attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
+	//attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
 	public const int AI_ATTITUDE_HOSTILE = 0 ;
 	public const int AI_ATTITUDE_UPSET = 1 ;
 	public const int AI_ATTITUDE_MELLOW = 2 ;
 	public const int AI_ATTITUDE_FRIENDLY = 3 ;
 
-   //Animations are clasified by number
+  	 //Animations are clasified by number
 	public const int AI_RANGE_IDLE = 1 ;
 	public const int AI_RANGE_MOVE = 10 ;
 	public const int AI_RANGE_DEATH = 100 ;
@@ -50,31 +48,41 @@ public class NPC : object_base {
 	public const int AI_ANIM_ATTACK_THRUST =3000;
 	public const int AI_ANIM_COMBAT_IDLE =4000;
 
-	public int AnimRange=1;//Multiple of 10 for dividing animations
+	///Anim range defines which animation set to play.
+	///Multiple of 10 for dividing animations
+	///Angle index * Anim Range give AI_ANIM_X value to pick animation
+	public int AnimRange=1;
+	
+	/// Object ID for the NPC
 	public string NPC_ID;
+	
+	/// The animation that is currently set
 	public string CurrentAnim;
-
-	//private NavMeshAgent agent;
+	
+	/// The animator that the NPC is using for it's animations
 	public Animator anim;
+	
+	/// For tracking the state of the NPC
 	public int currentState=-1;
-	//private bool followPlayer=false;
+
+	/// Thinks this has to do with changing the NPC on the fly
 	private string oldNPC_ID;
 	
+	/// The animation index the NPC is facing
 	private int facingIndex;
+	/// Previous value for tracking changes
 	private int PreviousFacing=-1;
+	/// Previous value for tracking changes
 	private int PreviousAnimRange=-1;
+	/// The compass point (see heading array) the NPC is facing relative to the player
 	private int CalcedFacing;
 	
-	private int currentHeading;//Integer representation of the current facing of the character. To match with animation angles
-	
+	///Integer representation of the current facing of the character. To match with animation angles
+	private int currentHeading;
+	//Direction between the player and the NPC for calculating relative angle
 	private Vector3 direction;	//vector between the player and the ai.
-	float angle;// The angle to the character from the player.
-
-
-
-	//End of from goblin AI
-
-
+	/// The angle to the character from the player.
+	private float angle;
 
 
 	//TODO: these need to match the UW npc_goals
@@ -85,6 +93,7 @@ public class NPC : object_base {
 	public const int AI_STATE_STANDING = 3;
 	public const int AI_STATE_WALKING = 4 ;
 
+	/// The Navmesh region the NPC is in
 	public string NavMeshRegion;
 
 	//NPC Properties from Underworld
@@ -104,48 +113,62 @@ public class NPC : object_base {
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
 
+	///flags the NPC as dead so we can kill them off in the next frame
 	public bool NPC_DEAD;
 
 	//Added by myself. This are set by spelleffects
+	///The NPC is poisoned
 	public bool Poisoned;
+	///The NPC is parlyzed or timestopped
 	public bool Frozen;
+	///Allows periodic updating of the NPC animation when frozen to support moving around them
 	public short FrozenUpdate=0;
 
 	//Enemy types.
+		///Undead Enemy flag
 	public bool isUndead; 
 
-	//TODO: The state should be replaced with a combination of the above variables and match what UW does.
-	public int state=0; //Set state when not in combat or dying.
+	///Set state when not in combat or dying.
+	///TODO: The state should be replaced with a combination of the above variables and match what UW does.
+	public int state=0; 
 
-	//For storing spell effects applied to NPCs
+	///For storing spell effects applied to NPCs
 	public SpellEffect[] NPCStatusEffects=new SpellEffect[3];
 
-	private static bool playerUWReady;//To flag initiation of the player into the AI modules
-	private AIRig ai;	//AI module for the character.
-
-	public bool MagicAttack;	//Can the NPC fire off magic attacks.
-	public GameObject NPC_Launcher; //Transform position to launch projectiles from
-	public int SpellIndex; 	//What spell the NPC should cast.
+	///To flag initiation of the player into the AI modules
+	private static bool playerUWReady;
+	///AI module for the character.
+	private AIRig ai;	
+	
+	///Can the NPC fire off magic attacks.
+	public bool MagicAttack;	
+	///Transform position to launch projectiles from
+	public GameObject NPC_Launcher; 
+	///What spell the NPC should cast if they have magicAttack==true
+	public int SpellIndex; 	
 
 	void Awake () {
 		oldNPC_ID=NPC_ID;
-		//agent = GetComponent<NavMeshAgent>();
 		anim=GetComponentInChildren<Animator>();
 	}
 
 
-	// Use this for initialization
 	protected override void Start () {
 		base.Start();
 		this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
 		ai = this.GetComponentInChildren<AIRig>();
-
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
 		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
 	}
 
+
+		/// <summary>
+		/// Raises the death events for the player.
+		/// </summary>
+		/// Uses the conversation for special npcs like Tybal, the Golem and the Beholder.
+		/// Dumps out their inventory.
 	void OnDeath()
 	{
 		//If the NPC has a conversation module check it to see if it has any special onDeath code. Eg Tybal, the Gazer on lvl2 and the Golem on Level 6
@@ -167,6 +190,10 @@ public class NPC : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Update the NPC state, AI and animations
+		/// </summary>
+		/// AI is only active when the player is close.
 	void Update () {
 		if (Frozen)
 		{//NPC will not move until timer is complete.
@@ -229,7 +256,12 @@ public class NPC : object_base {
 	}
 
 
-
+		/// <summary>
+		/// Applies the attack to the NPC
+		/// </summary>
+		/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
+		/// <param name="damage">Damage.</param>
+		/// NPC becomes hostile on attack. 
 	public override bool ApplyAttack(int damage)
 	{
 		if(Frozen==false)
@@ -239,7 +271,10 @@ public class NPC : object_base {
 		npc_hp=npc_hp-damage;
 		return true;
 	}
-
+		/// <summary>
+		/// Begins a conversation if possible
+		/// </summary>
+		/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
 	public override bool TalkTo()
 	{//Begin a conversation.
 		if ((npc_whoami == 255))
@@ -261,7 +296,7 @@ public class NPC : object_base {
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
 				cnv.WhoAmI=npc_whoami;
-				Conversation.maincam=Camera.main;//To control the camera from conversation scripts
+				//Conversation.maincam=Camera.main;//To control the camera from conversation scripts
 				StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction
 			}
 			else
@@ -273,6 +308,10 @@ public class NPC : object_base {
 		return true;
 	}
 
+		/// <summary>
+		/// Looks at the NPC
+		/// </summary>
+		/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public override bool LookAt ()
 	{//TODO:For specific characters that don't follow the standard naming convention use their conversation for the lookat.
 		string output="";
@@ -304,11 +343,12 @@ public class NPC : object_base {
 	}
 
 
-
+		/// <summary>
+		/// Gives a mood string for NPCs
+		/// </summary>
+		/// <returns>The mood desc.</returns>
 	private string NPCMoodDesc()
-	{
-		//Gives a mood string for NPCs
-		//004€005€096€hostile
+	{	//004€005€096€hostile
 		//004€005€097€upset
 		//004€005€098€mellow
 		//004€005€099€friendly
@@ -327,8 +367,11 @@ public class NPC : object_base {
 	}
 
 
+		/// <summary>
+		///Updates the appearance of the NPC
+		/// </summary>
+		/// Calculates the relative angle to the NPC
 	void UpdateSprite () {
-		//Updates the appearance of the NPC
 		if (anim == null)
 		{
 			anim = GetComponentInChildren<Animator>();
@@ -481,10 +524,12 @@ public class NPC : object_base {
 	}
 
 
-
+		/// <summary>
+		/// Breaks down the angle in the the facing sector. Clockwise from 0)
+		/// </summary>
+		/// <param name="angle">Angle.</param>
 	int facing(float angle)
 	{
-		//Breaks down the angle in the the facing sector. Clockwise from 0)
 		if ((angle >= -22.5) && (angle <= 22.5)) 
 		{
 			return 0;//*AnimRange;//Facing forward
@@ -544,9 +589,13 @@ public class NPC : object_base {
 		}
 	}
 
-
+		/// <summary>
+		/// Checks if a new animation is needed and if so run it.
+		/// </summary>
+		/// <param name="pAnim">P animation.</param>
+		/// <param name="newState">New state.</param>
 	void playAnimation(string pAnim, int newState)
-	{//Checks if a new animation is needed and if so run it.
+	{
 		if (newState!=currentState)
 		{
 			if (Frozen)
@@ -560,8 +609,12 @@ public class NPC : object_base {
 		}
 	}
 
+
+	/// <summary>
+	/// NPC tries to hit the player.
+	/// </summary>
 	public void ExecuteAttack()
-	{//NPC tries to hit the player.
+	{
 		float weaponRange=1.0f;
 
 		//NPC tries to raycast at the player.
@@ -583,9 +636,11 @@ public class NPC : object_base {
 			}
 		}
 	}
-	
+	/// <summary>
+		/// NPC casts a spell.
+	/// </summary>
 	public void ExecuteMagicAttack()
-	{//NPC casts a spell.
+	{
 		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,UWCharacter.Instance.gameObject,SpellIndex,Magic.SpellRule_TargetVector);
 	}
 }

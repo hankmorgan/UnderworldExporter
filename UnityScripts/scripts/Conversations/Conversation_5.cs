@@ -612,7 +612,7 @@ public class Conversation_5 : Conversation {
 		locals[315] = 50;
 		string ans =GetString(locals[315]);
 		//if ( compare( 2, locals[315], 8 ) ) {
-		if ( ans.ToUpper()==playerUW.CharName.ToUpper()) {
+		if ( ans.ToUpper()==GameWorldController.instance.playerUW.CharName.ToUpper()) {
 			yield return StartCoroutine(say( locals, 051 ));
 		} else {
 			

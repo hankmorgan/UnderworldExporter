@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Door key.
+/// </summary>
+/// Guess
 public class DoorKey : object_base {
-	/*Guess*/
-
-	public int KeyId;//This should match the doors it is opening. Also index into look descriptions
+	///This should match the doors it is opening. Also index into look descriptions
+	public int KeyId;
 
 	public override bool use ()
 	{
@@ -41,5 +43,4 @@ public class DoorKey : object_base {
 
 		return true;
 	}
-
 }

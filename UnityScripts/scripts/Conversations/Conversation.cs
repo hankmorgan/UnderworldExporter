@@ -2,9 +2,13 @@
 using System.Collections;
 using UnityEngine.UI;
 
-/*
-Basic rules for converting conversations.
+/// <summary>
+/// Conversation.
+/// BaseClass for npc conversations.
+/// </summary>
 
+/**
+Basic rules for converting conversations.
 Create Subclass of Conversation called Conversation_[whoami]
 Set up the main() as in the _67.
 Add EndConversation(); to ending function func_0012 (typically)
@@ -25,11 +29,8 @@ When using babl_ask replace usages of the local variable used with playertypedan
 Make sure you don't confuse babl_menu with babl_fmenu
 Check any code involving items before running as infinite loops are possible.
 usages of switch statements in if-else blocks are sometimes borked.
-}
 
-
-//Things to do.
-
+Things to do.
 Fix the Param arrays being passed into local functions. Especially ones that set the npcs attitude.
 Fix up gender strings and other @SSx text replacements.
 Replace strings with string numbers from strings file.
@@ -37,110 +38,143 @@ Replace strings with string numbers from strings file.
 
 public class Conversation : GuiBase {
 
-	//public static UWCharacter playerUW;
-	//public static StringController SC;
-	//To flag the differnent ways to colour text
-	private const int NPC_SAY=0;
-	private const int PC_SAY=1;
-	private const int PRINT_SAY=2;
 
+	///The NPC is talking
+	public const int NPC_SAY=0;
+	///The PC is talking
+	public const int PC_SAY=1;
+	///Printed text is displayed
+	public const int PRINT_SAY=2;
 
+	///Reference no to the current conversation
 	public static int CurrentConversation;
+	/// Flags if the player is in a conversation
 	public static bool InConversation = false;
+	/// Is the conversation UI element open
 	public static bool ConversationOpen=false;
+	/// Is the user entering a quantity
 	public static bool EnteringQty;
 
+	/// What string block is the conversation using
 	private int StringBlock;
 
+	/// The private variables for the NPC.
+	/// Used to store data inbetween conversations
 	public int[] privateVariables=new int[31] ;
-//	public int[] param1=new int[31];//TODO:is this correct. I think this only refers to params in functions calls. Eg void func_00b1. 
-	//public int[] param2=new int[31];//TODO:is this correct
 
-
+		/// Player Hunger level
 	protected static int play_hunger;
+		/// Player Health
 	protected static int play_health;
+		/// Player arms?
 	protected static int play_arms;
+		/// PLayer Power?
 	protected static int play_power;
+		/// Player Hit points
 	protected static int play_hp;
+		/// Player Mana
 	protected static int play_mana;
+		/// PLayer Level
 	protected static int play_level;
+		/// PLayer EXP?
 	protected static int new_player_exp;   //  (not used in uw1)
+		/// Player Name. Ptr to it on the stack
 	protected static int play_name;       //   player name
+		/// Player is poisoned
 	protected static int play_poison;      //  (not used in uw1)
+		/// Player has drawn their weapon
 	protected static int play_drawn;       //  is 1 when player has drawn his weapon (?)
+		/// Player gender.
 	protected static int play_sex;         // (not used in uw1)
-/*
-	public int npc_xhome;        //  x coord of home tile
-	public int npc_yhome;        //  y coord of home tile
-	public int npc_whoami;       //  npc conversation slot number
-	public int npc_hunger;
-	public int npc_health;
-	public int npc_hp;
-	public int npc_arms;          // (not used in uw1)
-	public int npc_power;
-	public int npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
-	public int npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
-	public int npc_gtarg;         //goal target; 1:player
-	public int npc_talkedto;      // is 1 when player already talked to npc
-	public int npc_level;
-	public int npc_name;       //    (not used in uw1)
-*/
+	
+		/// The dungeon level
 	public static int dungeon_level;    //  (not used in uw1)
+		/// Riddle counter?
 	public static int riddlecounter;     // (not used in uw1)
+		/// Game time. Should be loaded from GameClock
 	public static int game_time;
+		/// Game days. Should be loaded from GameClock
 	public static int game_days;
+		/// Game minutes. Should be loaded from GameClock
 	public static int game_mins;
 
+		///The number that the player has entered to pick an answer from the menu
 	public static int PlayerAnswer;
+		///The text the player has typed in response to a question
 	public static string PlayerTypedAnswer;
-	//private int MinAnswer=1;
+		/// The maximum value the player can pick from
 	private int MaxAnswer=1;
-
+		///The npc whoami variable for the NPC
 	public int WhoAmI;
 
-	public static bool inputRecieved;
 
-	//Conversation waiting modes
+	//public static bool inputRecieved;
+
+	///Conversation waiting mode. Player has to enter a menu option
 	public static bool WaitingForInput;
+	///Conversation waiting mode. Player has to press any key to continue
 	public static bool WaitingForMore;
+	///Conversation waiting mode. Player has to type an answer.
 	public static bool WaitingForTyping;
 
+	///The array that maps menu options in a bablf_menu to their answer numbers
 	public static int[] bablf_array = new int[10];
+	///Tells if we are using a bablf_menu
 	public static bool usingBablF;
+	/// The answer from the bablf_menu
 	public static int bablf_ans=0;
 
+	///The scroll controller for printing the conversation text
 	public static ScrollController tl;//Text output.
-	public static ScrollController tl_input;//player choices
-	//public static UITexture OutPutControl;//Where the conversation is printed out
-	//public static UWFonts FontController;
+	///The scroll controller for printing the player choices
+	public static ScrollController tl_input;
 
-	public static Camera maincam;
+	//public static Camera maincam;
+	/// The time to wait at the end of the conversation before releasing control
+	public const float WaitTime=0.3f;
+	/// The rate the game timer is set to when waiting 
+	/// To keep coroutines running when ending convos and waiting out the WaitTime
+	public const float SlomoTime=0.1f;
 
-	public const float WaitTime=0.3f;//Is affected by the slomotime!
-	public const float SlomoTime=0.1f;//To keep corountines running when ending convos and waiting out the WaitTime
-
+	/// How many characters max in a line of conversation text
 	static int LineWidth = 37 ;
 
-	private string[] NPCTradeItems=new string[4];
 
+	//private string[] NPCTradeItems=new string[4];
+	
+	/// Reference to the NPC we are talking to
 	public NPC npc;
 
-	public void SetupConversation(int stringno)
-	{
+		/// <summary>
+		/// Setups the conversation.
+		/// </summary>
+		/// <param name="stringno">The String Block No to pull text strings from</param>
 
-		/*Setup UI Elements - code formerly in NPC*/
-		chains.ActiveControl=3;//Enable UI Elements
+	public void SetupConversation(int StringBlockNo)
+	{
+		///Setup UI Elements - code formerly in NPC
+		StringBlock =StringBlockNo;
+		chains.ActiveControl=3;
 		chains.Refresh();
+		tl=GameWorldController.instance.playerUW.playerHud.Conversation_tl;
+		tl_input=GameWorldController.instance.playerUW.playerHud.MessageScroll;
+		tl.Clear();
+		///Clear the trade slots for the npcs
+		for (int i=0; i<4;i++)
+		{
+			GameWorldController.instance.playerUW.playerHud.npcTrade[i++].clear ();
+		}
+
+		///Identifies the NPC for future looking at
 		npc.getObjectInteraction().isIdentified=true;
-		//UITexture portrait = GameObject.Find ("Conversation_Portrait_Right").GetComponent<UITexture>();
-		RawImage portrait = playerUW.playerHud.ConversationPortraits[0];
-		RawImage npcPortrait = playerUW.playerHud.ConversationPortraits[1];
-		portrait.texture=Resources.Load <Texture2D> ("UW1/HUD/PlayerHeads/heads_"+ (playerUW.Body).ToString("0000"));//TODO:playerbody
+
+		///Sets up the portraits for the player and the NPC
+		RawImage portrait = GameWorldController.instance.playerUW.playerHud.ConversationPortraits[0];
+		RawImage npcPortrait = GameWorldController.instance.playerUW.playerHud.ConversationPortraits[1];
+		portrait.texture=Resources.Load <Texture2D> ("UW1/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
-			//head in charhead.gr
-			//GameObject.Find ("Conversation_Portrait_Left").GetComponent<UITexture>();
 			npcPortrait.texture=Resources.Load <Texture2D> ("UW1/HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 		}	
 		else
@@ -153,56 +187,49 @@ public class Conversation : GuiBase {
 			}			
 			npcPortrait.texture=Resources.Load <Texture2D> ("UW1/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
-		playerUW.playerHud.MessageScroll.Clear ();
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear ();
 		/*End UI Setup*/
 
 
 
+		///Cancels player movement
+		GameWorldController.instance.playerUW.playerMotor.enabled=false;
 
-		playerUW.playerMotor.enabled=false;
 
-		//Setup the UI elements
-		tl=playerUW.playerHud.Conversation_tl;
-		//tl_input=playerUW.playerHud.Conversation_tl_input;
-		tl_input=playerUW.playerHud.MessageScroll;
-		tl.Clear();
 
-		//Clear the trade slots for the npcs
-		for (int i=0; i<4;i++)
-		{
-			playerUW.playerHud.npcTrade[i++].clear ();// GameObject.Find ("Trade_NPC_Slot_" + i++).GetComponent<TradeSlot>();
-		}
-
-		//GameObject mus = GameObject.Find ("MusicController");
+		///Sets the music to the conversation theme
 		if  (GameWorldController.instance.mus!=null)
 		{
 			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
 		}
 
-		StringBlock =stringno;
-
-		//slow the world
+		///Slows the world down so no other npc will attack or interupt the conversation
 		Time.timeScale=0.00f;
 		ConversationOpen=true;
 		InConversation=true;
 	}
 
+
+	/// <summary>
+	/// Ends the conversation.
+	/// </summary>
 	public void EndConversation()
 	{
-		playerUW.playerMotor.enabled=true;
-		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
-		//Return any items in the trade area.
+				///Give movement back to the player			
+		GameWorldController.instance.playerUW.playerMotor.enabled=true;
+		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		///Return any items in the trade area to their owner
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.objectInSlot!="")
-			{//Move the object to the players container or to the ground
+			{///Moves the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 				{
 					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 					cn.AddItemToContainer(npcSlot.objectInSlot);
 					npcSlot.clear ();
-					playerUW.GetComponent<PlayerInventory>().Refresh ();
+					GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 				}
 				else
 				{
@@ -216,28 +243,36 @@ public class Conversation : GuiBase {
 
 		}
 
-		//Debug.Log ("End convo");
+		///Puts the time scales back to normal
 		Time.timeScale=1.0f;
 		InConversation=false;
 		npc.npc_talkedto=1;
+		tl.Clear ();
+		tl_input.Clear ();
+
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
-		//GameObject mus = GameObject.Find ("MusicController");
 		if  (GameWorldController.instance.mus!=null)
 		{
 			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=false;
 		}
-		if (playerUW.playerInventory.ObjectInHand!="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
 		{
 			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 		}
 		StopAllCoroutines();
+		
+		///Resets the UI
+		chains.ActiveControl=0;
 	}
 
+	/// <summary>
+	/// Raises the death event for NPC
+	/// </summary>
 	public virtual bool OnDeath()
-	{//Code to be called upon the death of this character.
-		//Mainly used for cases where specific character deaths set quest flags.
-		//return true to stop further death event processing. (ie spilling inventory)
-		//
+	{
+	///Code to be called upon the death of this character.
+	///Mainly used for cases where specific character deaths set quest flags.
+	///return true to stop further death event processing. (ie spilling inventory)
 		return false;
 	}
 
@@ -246,10 +281,11 @@ public class Conversation : GuiBase {
 		base.Start();
 		npc = this.GetComponent<NPC>();
 		WhoAmI = npc.npc_whoami;
-		//tl.textLabel.lineHeight=340;//TODO:Get rid of this!
-		//tl.textLabel.lineWidth=480;
 	}
 
+	/// <summary>
+	/// Processes key presses from the player when waiting for input.
+	/// </summary>
 	void OnGUI()
 	{
 		if (EnteringQty==true)
@@ -295,14 +331,14 @@ public class Conversation : GuiBase {
 			else if (WaitingForTyping)
 			{
 				//tl_input.gameObject.GetComponent<UIInput>().selected=true;
-				//playerUW.playerHud.InputControl.selected=true;
-				playerUW.playerHud.InputControl.Select();
+				//GameWorldController.instance.playerUW.playerHud.InputControl.selected=true;
+				GameWorldController.instance.playerUW.playerHud.InputControl.Select();
 			}
 
 		}
 	}
 
-	// Update is called once per frame
+	/*
 	void Update () {
 	if ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true))
 		{
@@ -310,20 +346,21 @@ public class Conversation : GuiBase {
 			ConversationOpen=false;
 			tl.Clear ();
 			tl_input.Clear ();
-			//tl_input.maxEntries=5;
-			maincam.enabled=true;
 			chains.ActiveControl=0;
 		}
-	}
+	}*/
 
+	/// <summary>
+	/// Checks the answer the player has entered to see if it in within the bounds of the valid options.
+	/// Sets the PlayerAnswer variable for checking within the conversations
+	/// </summary>
+	/// <param name="AnswerNo">The answer number from the menu entered by the player</param>
 	private void CheckAnswer(int AnswerNo)
 	{
 		if (usingBablF ==false)
-		{
-		
+		{		
 			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
 			{
-				//WaitingForInput =true;
 				PlayerAnswer=AnswerNo;
 				WaitingForInput=false;
 			}
@@ -332,6 +369,7 @@ public class Conversation : GuiBase {
 		{
 			if ((AnswerNo>0) && (AnswerNo<=MaxAnswer))
 			{
+				///For babl_fmenus convert the answer using the bablf_array
 				bablf_ans=AnswerNo;
 				PlayerAnswer=bablf_array[AnswerNo-1];
 				WaitingForInput=false;
@@ -340,20 +378,20 @@ public class Conversation : GuiBase {
 		}
 	}
 
-
+	/// <summary>
+	/// Conversation Setup. Implemented in inherited classes
+	/// </summary>
 	public virtual IEnumerator main()
 	{
-		//Debug.Log ("Start Conversation");
-		//yield return StartCoroutine("I have yet to implement this conversation");
-		//Time.timeScale =SlomoTime;
-		//yield return new WaitForSeconds(WaitTime);
-		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (7,1));
-		//EndConversation();
-		//yield break;
-		//return null;
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (7,1));
 		yield break;
 	}
 
+		/// <summary>
+		/// Say the specified string using replacements as set by the locals array. To implement.
+		/// </summary>
+		/// <param name="localsArray">Locals array.</param>
+		/// <param name="StringNo">String no.</param>
 	public IEnumerator say (int[] localsArray, int StringNo)
 	{
 		//Do some string repacement stuff here.
@@ -362,13 +400,20 @@ public class Conversation : GuiBase {
 		yield return StartCoroutine (say (StringNo));
 	}
 
+
+		/// <summary>
+		/// Say the specified string.
+		/// </summary>
+		/// <param name="WhatToSay">The string to print out</param>
+		/// <param name="PrintType">The style of printing. One of NPC_SAY, PC_SAY or PRINT_SAY</param>
 	public IEnumerator say(string WhatToSay,int PrintType)
 	{
-		//Replace instances of @GS8 with player name
-		//TODO:Move this out of here to say(locals[], stringNo)
-		WhatToSay = WhatToSay.Replace("@GS8" , playerUW.CharName);
-		string[] Paragraphs = WhatToSay.Split(new string [] {"\\m"}, System.StringSplitOptions.None);
+		///Temporarily Replaces instances of @GS8 with player name
+		///TODO:Move this out of here to say(locals[], stringNo)
 		string Markup;
+		WhatToSay = WhatToSay.Replace("@GS8" , GameWorldController.instance.playerUW.CharName);
+
+		///Sets the markup to colour the text based on print type.
 		switch (PrintType)
 		{
 		case PC_SAY:
@@ -377,7 +422,18 @@ public class Conversation : GuiBase {
 				Markup="<color=black>";break;//[000000]
 		default:
 				Markup="<color=green>";break;//[00FF00]
-		}
+		}		
+		
+		///Splits the strings into paragraphs based on [more]
+		string[] Paragraphs = WhatToSay.Split(new string [] {"\\m"}, System.StringSplitOptions.None);
+
+		///For each paragraph
+		/// Split each word
+		/// add each word to output
+		/// When newline is met add to the scroll controller.
+		/// when linewidth is reached add to the scroll controller
+		/// at end of each paragraph add to the scroll controller (with [more])
+		/// Reset output and column counter after each add
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 			{
 			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
@@ -418,26 +474,45 @@ public class Conversation : GuiBase {
 		yield return 0;
 	}
 
+		/// <summary>
+		/// The NPC says something.
+		/// </summary>
+		/// <param name="WhatToSay">What to say as a string</param>
 	private IEnumerator say(string WhatToSay)
 	{
 		yield return StartCoroutine (say(WhatToSay, NPC_SAY));
 	}
 
+		/// <summary>
+		/// The NPC says something
+		/// </summary>
+		/// <param name="WhatToSay">What to say as an integer (index into string block)</param>
 	IEnumerator say(int WhatToSay)
 	{
-		string tmp = playerUW.StringControl.GetString (StringBlock,WhatToSay);
+		string tmp = GameWorldController.instance.playerUW.StringControl.GetString (StringBlock,WhatToSay);
 		yield return StartCoroutine(say (tmp,NPC_SAY));
 	}
 
+		/// <summary>
+		/// Say the specified WhatToSay and SayType.
+		/// </summary>
+		/// <param name="WhatToSay">What to say as an integer (index into string block)</param>
+		/// <param name="SayType">Say type. One of PC_Say, NPC_Say or Print_Say</param>
 	IEnumerator say(int WhatToSay,int SayType)
 	{
-		string tmp = playerUW.StringControl.GetString (StringBlock,WhatToSay);
+		string tmp = GameWorldController.instance.playerUW.StringControl.GetString (StringBlock,WhatToSay);
 		yield return StartCoroutine(say (tmp,SayType));
 	}
 
+		/// <summary>
+		/// Gets the string no that identifies this players gender.
+		/// </summary>
+		/// <param name="unknown">Unknown.</param>
+		/// <param name="ParamFemale">female string</param>
+		/// <param name="ParamMale">male string</param>
 	public int sex(int unknown, int ParamFemale, int ParamMale)
 	{
-		if (playerUW.isFemale==true)
+		if (GameWorldController.instance.playerUW.isFemale==true)
 		{
 			return ParamFemale;
 		}
@@ -446,12 +521,24 @@ public class Conversation : GuiBase {
 			return ParamMale;
 		}
 	}
-
+	
+	/// <summary>
+	/// Gets the string. Shorthand for string controller.
+	/// </summary>
+	/// <returns>The string.</returns>
+	/// <param name="index">Index into string block</param>
 	public string GetString(int index)
 	{
-		return playerUW.StringControl.GetString(StringBlock,index);
+		return GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,index);
 	}
 
+	/// <summary>
+	/// Prints a menu of dialog options.
+	/// Takes values from localsarray from start until it finds a zero.
+	/// </summary>
+	/// <param name="unknown">Unknown.</param>
+	/// <param name="localsArray">Array of local variables from the conversation</param>
+	/// <param name="Start">Index to start taking values from the array</param>
 	public IEnumerator babl_menu(int unknown, int[] localsArray,int Start)
 	{
 		tl_input.Clear();
@@ -462,8 +549,7 @@ public class Conversation : GuiBase {
 		{
 			if (localsArray[i]!=0)
 			{
-				//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]) + "\n";
-				tl_input.Add(j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]).Replace("@GS8",playerUW.CharName));
+				tl_input.Add(j++ + "." + GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
 				MaxAnswer++;
 			}
 			else
@@ -471,17 +557,19 @@ public class Conversation : GuiBase {
 				break;
 			}
 		}
-		//tmp= tmp.Replace("@GS8" , playerUW.CharName);
-		//tl_input.maxEntries=1;
-		//tl_input.Add (tmp);
-
 		yield return StartCoroutine(WaitForInput());
-
-		tmp= playerUW.StringControl.GetString(StringBlock,localsArray[Start+PlayerAnswer-1]);
+		tmp= GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[Start+PlayerAnswer-1]);
 		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
 
+	/// <summary>
+	/// Dialog menu with choices that may or may not show based on the flags
+	/// </summary>
+	/// <param name="unknown">Unknown.</param>
+	/// <param name="localsArray">Array of local variables from the conversation</param>
+	/// <param name="Start">Index to start taking values from the array</param>
+	/// <param name="flagIndex">Index to start flagging if a value is allowed from the array</param>
 	public IEnumerator babl_fmenu(int unknown, int[] localsArray, int Start, int flagIndex)
 	{
 		tl_input.Clear();
@@ -500,8 +588,8 @@ public class Conversation : GuiBase {
 				if (localsArray[flagIndex++] !=0)
 				{
 					bablf_array[j-1] = localsArray[i];
-					//tmp = tmp + j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]) + "\n";
-					tl_input.Add (j++ + "." + playerUW.StringControl.GetString(StringBlock,localsArray[i]));
+					//tmp = tmp + j++ + "." + GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[i]) + "\n";
+					tl_input.Add (j++ + "." + GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[i]));
 					MaxAnswer++;
 				}
 			}
@@ -510,63 +598,54 @@ public class Conversation : GuiBase {
 				break;
 			}
 		}
-		
-		//tl_input.maxEntries=1;
-		//tl_input.Add (tmp);
 		yield return StartCoroutine(WaitForInput());
-		tmp= playerUW.StringControl.GetString (StringBlock,bablf_array[bablf_ans-1]);
+		tmp= GameWorldController.instance.playerUW.StringControl.GetString (StringBlock,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
 
-
+	/// <summary>
+	/// Sets up for typed input
+	/// </summary>
+	/// <param name="unknown">Unknown.</param>
 	public IEnumerator babl_ask(int unknown)
 	{
 		PlayerTypedAnswer="";
-		//WaitingForTyping=true;
 		tl_input.Set(">");
-
-		//UIInput inputctrl = playerUW.playerHud.InputControl; //tl_input.gameObject.GetComponent<UIInput>();
-		InputField inputctrl=playerUW.playerHud.InputControl;
+		InputField inputctrl=GameWorldController.instance.playerUW.playerHud.InputControl;
 		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
-		//TODO: fix this inputctrl.eventReceiver=this.gameObject;
-		/*inputctrl.onEndEdit.RemoveAllListeners();
-		inputctrl.onEndEdit.AddListener(delegate {
-				this.OnSubmitPickup();	
-		} );*/
 		inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 		inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
 		inputctrl.contentType= InputField.ContentType.Alphanumeric;
-
-				//TODO: inputctrl.type=UIInput.KeyboardType.Default;
 		inputctrl.text="";
-				//TODO: inputctrl.label.text="";
-				//TODO: inputctrl.selected=true;
 		inputctrl.Select();
 		yield return StartCoroutine(WaitForTypedInput());
 		yield return StartCoroutine(say (PlayerTypedAnswer,PC_SAY));
 		inputctrl.text="";
-				//TODO: inputctrl.label.text="";
-		playerUW.playerHud.MessageScroll.Clear ();
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear ();
 	}
 
+
+	/// <summary>
+	/// Responds to player typed input submission.
+	/// </summary>
+	/// <param name="PlayerTypedAnswerIN">The string the player has typed</param>
 	public void OnSubmitPickup(string PlayerTypedAnswerIN)
-	{//Event receiver for input ctrl.
-		WaitingForTyping=false;
-		PlayerTypedAnswer= PlayerTypedAnswerIN; //playerUW.playerHud.InputControl.text;//playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>().text;
-
-		//Debug.Log (inputctrl.text);
-
-	}
-
-	public IEnumerator Wait(float waitTime)
 	{
-		//print( " s " + Time.time);
-		yield return new WaitForSeconds(waitTime);
-		//Ready=true;
-		//print(" f " + Time.time);
+		WaitingForTyping=false;
+		PlayerTypedAnswer= PlayerTypedAnswerIN; 
 	}
 
+
+
+	/*public IEnumerator Wait(float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
+	}*/
+
+/// <summary>
+/// Waits for input in babl_menu and bablf_menu
+/// </summary>
 	IEnumerator WaitForInput()
 	{
 		WaitingForInput=true;
@@ -574,6 +653,9 @@ public class Conversation : GuiBase {
 			{yield return null;}
 	}
 
+	/// <summary>
+	/// Waits for the player to press any key when printing text
+	/// </summary>
 	IEnumerator WaitForMore()
 	{
 		WaitingForMore=true;
@@ -581,6 +663,9 @@ public class Conversation : GuiBase {
 		{yield return null;}
 	}
 
+	/// <summary>
+	/// Waits for typed input from the player when in babl_ask
+	/// </summary>
 	IEnumerator WaitForTypedInput()
 	{
 		WaitingForTyping=true;
@@ -588,6 +673,15 @@ public class Conversation : GuiBase {
 		{yield return null;}
 	}
 
+
+	/// <summary>
+	/// Gronks the door open
+	/// </summary>
+	/// <returns> appears to have something to do with if the door is broken or not.</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="Action">close/open flag (0 means open)</param>
+	/// <param name="tileY">y tile coordinate with door to open</param>
+	/// <param name="tileX">x tile coordinate</param>
 	public int gronk_door(int unk, int Action, int tileY, int tileX)
 	{
 		/*
@@ -600,6 +694,8 @@ public class Conversation : GuiBase {
 		return value appears to have something to do with if the door is broken or not.
 		*/
 
+		///Finds the door than needs to be opened
+		///Based on the action used the door control functions as appropiate.
 		GameObject dr = GameObject.Find ("door_" +tileX .ToString ("D3") + "_" + tileY.ToString ("D3"));
 		if (dr!=null)
 		{
@@ -657,13 +753,20 @@ public class Conversation : GuiBase {
 //	}
 
 
-	//Rewritten version of show_inv
+/// <summary>
+/// Copies inventory item ids and slot positions into the array indices specified.
+/// </summary>
+/// <returns>The number of items found</returns>
+/// <param name="unk">Unk.</param>
+/// <param name="locals">Locals.</param>
+/// <param name="startObjectPos">Start index of object position.</param>
+/// <param name="startObjectIDs">Start index of object Ids.</param>
 	public int show_inv(int unk, int[] locals , int startObjectPos, int startObjectIDs)
 	{
 		int j=0;
 		for (int i=0; i<4;i++)
 		{
-			TradeSlot pcSlot = playerUW.playerHud.playerTrade[i]; //GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[i]; 
 			if (pcSlot.isSelected())
 			{
 				locals[startObjectPos+j]= i;
@@ -671,7 +774,6 @@ public class Conversation : GuiBase {
 				j++;
 			}
 		}
-
 		return j;
 	}
 
@@ -688,6 +790,14 @@ public class Conversation : GuiBase {
 //		return Random.Range (0,2);
 //	}
 
+	/// <summary>
+	/// Gives the items at the specified positions in the array to the NPC
+	/// </summary>
+	/// <returns>1 if something given</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="locals">Locals array</param>
+	/// <param name="start">Start index of slots to transfer from</param>
+	/// <param name="NoOfItems">No of items to transfer</param>
 	public int give_to_npc(int unk, int[] locals, int start, int NoOfItems)
 	{
 		Container cn =npc.gameObject.GetComponent<Container>();
@@ -697,9 +807,9 @@ public class Conversation : GuiBase {
 			int slotNo = locals[start+i] ;
 			if (slotNo<=3)
 			{
-				TradeSlot pcSlot = playerUW.playerHud.playerTrade[slotNo];//GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
+				TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo];//GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
 				//Give the item to the npc
-				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
+				if (Container.GetFreeSlot(cn)!=-1)
 				{
 					cn.AddItemToContainer(pcSlot.objectInSlot);
 					pcSlot.clear ();
@@ -714,7 +824,6 @@ public class Conversation : GuiBase {
 						demanded.transform.position=npc.transform.position;
 						SomethingGiven=true;
 					}
-
 					pcSlot.clear();
 				}
 			}
@@ -729,9 +838,21 @@ public class Conversation : GuiBase {
 		}
 	}
 	
+	/// <summary>
+	/// transfers an item from npc inventory to player inventory,based on an item id. 
+	/// </summary>
+	/// when the value is > 1000, all items of		
+	/// a category are copied. category item start = (arg1-1000)*16
+	/// My currenty example is lanugo (10) who is passing a value greater than 1000*/
+	/// Until It get more examples I'm doing the following*/
+	/// Get the items in the npcs container. If their ITEM id is between the calculated category value and +16 of that I take that item*/
+	/// Another example goldthirst who specifically has an item id to pass.
+	/// 
+	/// <returns>1: ok, 2: player has no space left</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="arg1">Arg1.</param>
 	public int take_from_npc(int unk, int arg1)
 	{
-		///Debug.Log ("Take from NPC");
 		/*
    id=0015 name="take_from_npc" ret_type=int
    parameters:   arg1: item id (can also be an item category value, > 1000)
@@ -747,7 +868,7 @@ public class Conversation : GuiBase {
 		//Another example goldthirst who specifically has an item id to pass.
 		int playerHasSpace=1;
 		Container cn = npc.gameObject.GetComponent<Container>();
-		Container cnpc = playerUW.gameObject.GetComponent<Container>();
+		Container cnpc = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
 
 			int rangeS = (arg1-1000)*16;
 			int rangeE = rangeS+16;
@@ -768,10 +889,10 @@ public class Conversation : GuiBase {
 					GameObject demanded = GameObject.Find (itemName);
 						if (Container.GetFreeSlot(cnpc)!=-1)//Is there space in the container.
 						{
-							demanded.transform.parent= playerUW.playerInventory.InventoryMarker.transform;
+							demanded.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
 							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
 							cnpc.AddItemToContainer(itemName);
-							playerUW.GetComponent<PlayerInventory>().Refresh ();
+							GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 						}
 						else
 						{
@@ -785,19 +906,22 @@ public class Conversation : GuiBase {
 			}
 		return playerHasSpace;
 	}
-
+	
+		/// <summary>
+		/// Setups the barter windows
+		/// </summary>
+		/// <param name="unk">Unk.</param>
+		/// TODO: Figure out where generic NPCs get their inventory for trading from???? Is there a loot list somewhere?
 	public void setup_to_barter(int unk)
 	{
 		/*
-   id=001f name="setup_to_barter" ret_type=void
-   parameters:   none
-   description:  starts bartering; shows npc items in npc bartering area
+		   id=001f name="setup_to_barter" ret_type=void
+		   parameters:   none
+		   description:  starts bartering; shows npc items in npc bartering area
 		 */
-		//TODO: Figure out where generic NPCs get their inventory for trading from???? Is there a loot list somewhere?
+		
 		Container cn = npc.gameObject.GetComponent<Container>();
 		int itemCount=0;
-		for (int i= 0;i<4;i++)
-		{NPCTradeItems[i]="";}
 
 		Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
 		for (int i =0 ; i< cn.MaxCapacity(); i++)
@@ -807,8 +931,7 @@ public class Conversation : GuiBase {
 				if (itemCount <=3)
 				{//Just take the first four items
 					ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
-					NPCTradeItems[itemCount]=itemToTrade.gameObject.name;
-					TradeSlot ts = playerUW.playerHud.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+					TradeSlot ts = GameWorldController.instance.playerUW.playerHud.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 					ts.objectInSlot=itemToTrade.gameObject.name;
 					ts.SlotImage.texture=itemToTrade.GetInventoryDisplay().texture;
 					int qty= itemToTrade.GetQty();
@@ -827,6 +950,15 @@ public class Conversation : GuiBase {
 		return;
 	}
 
+
+	/// <summary>
+	/// Does the appraisal of the worth of the items in the trade area
+	/// TODO: figure out how this works. for the moment just base it out quantity of objects selected
+	/// Current implemenation is based on qty of objects in the trade area.
+	/// </summary>
+	/// <returns>The judgement.</returns>
+	/// <param name="unk">Unk.</param>
+
 	public IEnumerator do_judgement(int unk)
 	{
 		/*
@@ -835,12 +967,12 @@ public class Conversation : GuiBase {
    description:  judges current trade (using the "appraise" skill) and prints result
 		 */
 		//Debug.Log ("Do Judgment");
-		//TODO: figure out how this works. for the moment just base it out quantity of objects selected
+		
 		int playerObjectCount=0; int npcObjectCount=0;
 		for (int i = 0; i<4; i++)
 		{
-			TradeSlot npcSlot = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
-			TradeSlot pcSlot =  playerUW.playerHud.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot =  GameWorldController.instance.playerUW.playerHud.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.isSelected()){npcObjectCount++;}
 			if (pcSlot.isSelected()){playerObjectCount++;}
 		}
@@ -859,6 +991,11 @@ public class Conversation : GuiBase {
 		//return;
 	}
 
+	/// <summary>
+	/// Declines the trade offer
+	/// Moves items back into respective inventories
+	/// </summary>
+	/// <param name="unk">Unk.</param>
 	public void do_decline(int unk)
 	{
 		/*
@@ -867,28 +1004,24 @@ public class Conversation : GuiBase {
    description:  declines trade offer (?)
 		*/
 
-		//returns all items back to the players inventory or onto the ground
-
-
-		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot pcSlot =  playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot =  GameWorldController.instance.playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (pcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
 				{
-					//playerUW.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
+					//GameWorldController.instance.playerUW.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
 					cn.AddItemToContainer(pcSlot.objectInSlot);
 					pcSlot.clear ();
-					playerUW.GetComponent<PlayerInventory>().Refresh ();
+					GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 				}
 				else
 				{
 					GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
 					demanded.transform.parent=null;
 					demanded.transform.position=npc.transform.position;
-					//npc.GetComponent<Container>().RemoveItemFromContainer(pcSlot.objectInSlot);
 					pcSlot.clear();
 				}
 			}
@@ -896,14 +1029,33 @@ public class Conversation : GuiBase {
 
 		for (int i=0; i<=3; i++)
 		{//Clear out the trade slots.
-			playerUW.playerHud.npcTrade[i].clear();
+			GameWorldController.instance.playerUW.playerHud.npcTrade[i].clear();
 		}
-
-
-		//Debug.Log ("Do Decline");
 		return;
 	}
 
+
+/// <summary>
+/// Checks the offer.
+/// checks if the deal is acceptable for the npc, based on the
+/// selected items in both bartering areas. the values in arg1
+/// to arg5 are probably values of the items that are
+/// acceptable for the npc.
+/// the function is sometimes called with 7 args, but arg6 and
+/// arg7 are always set to -1.
+/// </summary>
+/// <returns>1 if the deal is acceptable, 0 if not</returns>
+/// <param name="unk">Unk.</param>
+/// <param name="arg1">Arg1.</param>
+/// <param name="arg2">Arg2.</param>
+/// <param name="arg3">Arg3.</param>
+/// <param name="arg4">Arg4.</param>
+/// <param name="arg5">Arg5.</param>
+/// <param name="arg6">Arg6.</param>
+/// <param name="arg7">Arg7.</param>
+/// I think the values passed are actually the strings for how the npc reacts to the offer. The value judgment is done elsewhere
+/// In the prototype I randomise the decision. And then randomise a response based on that decision.
+/// Arg5 is the yes answer
 	public IEnumerator  do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7)
 	{
 		/*
@@ -918,21 +1070,17 @@ public class Conversation : GuiBase {
                  arg7 are always set to -1.
    return value: 1 if the deal is acceptable, 0 if not*/
 
-/*I think the values passed are actually the strings for how the npc reacts to the offer. The value judgment is done elsewhere*/
 
-		//In the prototype I randomise the decision. And then randomise a response based on that decision.
-		//Arg5 is the yes answer
 		PlayerAnswer = Random.Range (0,2);
 
 		if (PlayerAnswer==1)
 		{
-			//Debug.Log ("offer accepted");
 			yield return StartCoroutine (say (arg5));
 			//for the moment move to the player's backpack or if no room there drop them on the ground
-			Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+			Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -940,7 +1088,7 @@ public class Conversation : GuiBase {
 						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 						cn.AddItemToContainer(npcSlot.objectInSlot);
 						npcSlot.clear ();
-						playerUW.GetComponent<PlayerInventory>().Refresh ();
+						GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 					}
 					else
 					{
@@ -958,7 +1106,7 @@ public class Conversation : GuiBase {
 			cn =npc.gameObject.GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot pcSlot =playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot pcSlot =GameWorldController.instance.playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 				if (pcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -991,16 +1139,23 @@ public class Conversation : GuiBase {
 				yield return StartCoroutine (say (arg4));break;
 			}
 		}
-	
-		//Debug.Log ("Do Offer");
-		//return Random.Range (0,2);
 	}
 
+	/// <summary>
+	/// Does the offer.
+	/// </summary>
 	public IEnumerator do_offer(int unk, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6)
 	{
 		yield return StartCoroutine( do_offer (unk,arg1,arg2,arg3,arg4,arg5,arg6,-1) );
 	}
 
+	/// <summary>
+	/// Player demands the items from the npc
+	/// </summary>
+	/// <returns>returns 1 when player persuaded the NPC, 0 else</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="arg1">string id with text to print if NPC is not willing to give the item</param>
+	/// <param name="arg2">string id with text if NPC gives the player the item</param>
 	public IEnumerator do_demand(int unk, int arg1, int arg2)
 	{
 		/*
@@ -1012,14 +1167,14 @@ public class Conversation : GuiBase {
                  the items in barter area, e.g. using karma.
    return value: returns 1 when player persuaded the NPC, 0 else
 		 */
-		Container cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		int DemandResult = Random.Range (0,2);
 		if (DemandResult==1)
 		{		
-			//Debug.Log ("Demand sucessfull");
+			//Demand sucessfull
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot =playerUW.playerHud.npcTrade[i] ;//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot npcSlot =GameWorldController.instance.playerUW.playerHud.npcTrade[i] ;//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1027,7 +1182,7 @@ public class Conversation : GuiBase {
 						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 						cn.AddItemToContainer(npcSlot.objectInSlot);
 						npcSlot.clear ();
-						playerUW.GetComponent<PlayerInventory>().Refresh ();
+						GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 					}
 					else
 					{
@@ -1040,19 +1195,17 @@ public class Conversation : GuiBase {
 				}
 			}
 			yield return StartCoroutine ( say (arg2) );
-
 		}
 		else
 		{
-			//Debug.Log ("Demand unsucessfull");
+			//Unsucessful
 			yield return StartCoroutine ( say (arg1) );
 		}
-		//Move the players items back to his inventory;
 
-		//cn = GameObject.Find (playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		//Move the players items back to his inventory;
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1060,7 +1213,7 @@ public class Conversation : GuiBase {
 					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
 					cn.AddItemToContainer(npcSlot.objectInSlot);
 					npcSlot.clear ();
-					playerUW.GetComponent<PlayerInventory>().Refresh ();
+					GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 				}
 				else
 				{
@@ -1072,34 +1225,61 @@ public class Conversation : GuiBase {
 				}
 			}
 		}
-
-	
-
-
 		PlayerAnswer=DemandResult;
 	}
 
+	/// <summary>
+	/// Random value between 1 and High
+	/// </summary>
+	/// <param name="unk">Unk.</param>
+	/// <param name="High">High value</param>
 	public int random(int unk, int High)
 	{
 		return Random.Range(1,High+1);
 	}
 
+	/// <summary>
+	/// Gets the quest variable.
+	/// </summary>
+	/// <returns>The quest.</returns>
+	/// <param name="unk">Unk.</param>
+	/// <param name="QuestNo">Quest no to lookup</param>
 	public int get_quest(int unk, int QuestNo)
 	{
-		return playerUW.quest ().QuestVariables[QuestNo];
+		return GameWorldController.instance.playerUW.quest ().QuestVariables[QuestNo];
 	}
 
+		/// <summary>
+		/// Sets the quest variable
+		/// </summary>
+		/// <param name="unk">Unk.</param>
+		/// <param name="value">Value to change to</param>
+		/// <param name="QuestNo">Quest no to change</param>
 	public void set_quest(int unk,int value, int QuestNo)
 	{
-		playerUW.quest ().QuestVariables[QuestNo]=value;
+		GameWorldController.instance.playerUW.quest ().QuestVariables[QuestNo]=value;
 	}
 
-	public IEnumerator print(int unk1, int StringBlock)
+		/// <summary>
+		/// Print the specified StringNo.
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="StringNo">String no to print</param>
+	public IEnumerator print(int unk1, int StringNo)
 	{
-		yield return StartCoroutine(say (StringBlock,PRINT_SAY));
+		yield return StartCoroutine(say (StringNo,PRINT_SAY));
 	}
 
-	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int inventorySlotIndex)
+
+		/// <summary>
+		/// Identifies the item at the specified trade slot
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="unk2">Unk2.</param>
+		/// <param name="unk3">Unk3.</param>
+		/// <param name="unk4">Unk4.</param>
+		/// <param name="inventorySlotIndex">Trade slot index.</param>
+	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int tradeSlotIndex)
 	{
 		//id=0017 name="identify_inv" ret_type=int
 		//	parameters:   arg1:
@@ -1108,15 +1288,15 @@ public class Conversation : GuiBase {
 		//arg4: inventory item position
 		//description:  unknown TODO
 		//return value: unknown
-		if (playerUW.playerHud.playerTrade[inventorySlotIndex].GetGameObjectInteraction() != null)
+			if (GameWorldController.instance.playerUW.playerHud.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
 			{
-				playerUW.playerHud.playerTrade[inventorySlotIndex].GetGameObjectInteraction().isIdentified=true;	
+				GameWorldController.instance.playerUW.playerHud.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
 			}
-		//My guess that it is identifying the gold value of the items given.
-		//Debug.Log ("Identify_inv");
 		return 1;
 	}
 
+
+		/*
 	private void x_obj_stuff( int unk1, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9)
 	{
 		Debug.Log("x_obj_stuff");		
@@ -1136,7 +1316,22 @@ public class Conversation : GuiBase {
 		//If -1 then it sets the value in the array?
 
 	}
+*/
 
+		/// <summary>
+		/// X object stuff. Does various changes to objects.
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="locals">Locals.</param>
+		/// <param name="arg1">Arg1.</param>
+		/// <param name="arg2">Arg2.</param>
+		/// <param name="arg3">Arg3.</param>
+		/// <param name="link">Link.</param>
+		/// <param name="arg5">Arg5.</param>
+		/// <param name="arg6">Arg6.</param>
+		/// <param name="quality">Quality.</param>
+		/// <param name="id">Identifier.</param>
+		/// <param name="pos">Position.</param>
 
 	public void x_obj_stuff( int unk1, int[] locals, int arg1, int arg2, int arg3, int link, int arg5, int arg6, int quality, int id, int pos)
 	{
@@ -1160,11 +1355,11 @@ public class Conversation : GuiBase {
 		ObjectInteraction obj;
 		if (pos<4)
 		{//Item is in players trade area.
-			obj= playerUW.playerHud.playerTrade[pos].GetGameObjectInteraction();
+			obj= GameWorldController.instance.playerUW.playerHud.playerTrade[pos].GetGameObjectInteraction();
 		}
 		else if (pos <=7)
 		{//item in npc trade area
-			obj= playerUW.playerHud.npcTrade[pos-4].GetGameObjectInteraction();
+			obj= GameWorldController.instance.playerUW.playerHud.npcTrade[pos-4].GetGameObjectInteraction();
 		}
 		else
 		{
@@ -1194,14 +1389,20 @@ public class Conversation : GuiBase {
 		}
 	}
 
-	public int find_inv( int unk1, int arg1, int arg2 )
+	/// <summary>
+	/// Finds item in PC or NPC inventory
+	/// </summary>
+	/// <returns>position in master object list, or 0 if not found</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="arg1">0: npc inventory; 1: player inventory</param>
+	/// <param name="item_id">Item type ID of the object to find.</param>
+	public int find_inv( int unk1, int arg1, int item_id )
 	{
 		//id=0030 name="find_inv" ret_type=int
 		//	parameters:   arg1: 0: npc inventory; 1: player inventory
 		//	arg2: item id
 		//		description:  searches item in npc or player inventory
 		//		return value: position in master object list, or 0 if not found
-		//Debug.Log("find_inv");
 		switch (arg1)
 		{
 		case 0://NPC inventory
@@ -1212,7 +1413,7 @@ public class Conversation : GuiBase {
 				GameObject obj = npcCont.GetGameObjectAt(i);
 				if (obj!=null)
 				{
-					if (obj.GetComponent<ObjectInteraction>().item_id==arg2)
+					if (obj.GetComponent<ObjectInteraction>().item_id==item_id)
 					{
 						return 1;//Found object
 					}
@@ -1220,8 +1421,7 @@ public class Conversation : GuiBase {
 			}
 			break;
 		case 1://PC Search
-			//Debug.Log ("find_Inv player");
-			if (playerUW.GetComponent<Container>().findItemOfType(arg2) !="")
+			if (GameWorldController.instance.playerUW.GetComponent<Container>().findItemOfType(item_id) !="")
 			{
 				return 1;
 			}
@@ -1233,10 +1433,14 @@ public class Conversation : GuiBase {
 		return 0;
 	}
 
-
+	/// <summary>
+	/// Gets the item at slot property quality.
+	/// </summary>
+	/// <returns>The item at slot property quality.</returns>
+	/// <param name="SlotNo">Slot no to look at</param>
 	public int GetItemAtSlotProperty_Quality(int SlotNo)
 	{
-		TradeSlot pcSlot = playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
 		if(pcSlot!=null)
 		{
 			if (pcSlot.objectInSlot!="")
@@ -1255,9 +1459,14 @@ public class Conversation : GuiBase {
 		return 0;
 	}
 
+	/// <summary>
+	/// Gets the item at slot property link.
+	/// </summary>
+	/// <returns>The item at slot property link.</returns>
+	/// <param name="SlotNo">Slot no to look at</param>
 	public int GetItemAtSlotProperty_Link(int SlotNo)
 	{
-		TradeSlot pcSlot = playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
 		if(pcSlot!=null)
 		{
 			if (pcSlot.objectInSlot!="")
@@ -1277,6 +1486,13 @@ public class Conversation : GuiBase {
 	}
 
 
+		/// <summary>
+		/// checks if the first string contains the second string,
+		/// </summary>
+		/// <returns>returns 1 when the string was found, 0 when not</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="String1">String1.</param>
+		/// <param name="String2">String2.</param>
 	public int contains(int unk1, string String1, string String2)
 	{
 		//id=0007 name="contains" ret_type=int
@@ -1295,6 +1511,12 @@ public class Conversation : GuiBase {
 		}
 	}
 
+		/// <summary>
+		/// Checks if the string specified by StringBlock is the in the other string
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="String1">String1.</param>
+		/// <param name="StringBlock">String block.</param>
 	public int contains(int unk1, string String1, int StringBlock)
 	{
 		//id=0007 name="contains" ret_type=int
@@ -1303,12 +1525,16 @@ public class Conversation : GuiBase {
 		//description:  checks if the first string contains the second string,
 		//case-independent.
 		//return value: returns 1 when the string was found, 0 when not
-
-
 		return contains (unk1,String1, GetString (StringBlock));
 	}
 
-
+		/// <summary>
+		/// X_skills.
+		/// </summary>
+		/// <returns>The skills.</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="unk2">Unk2.</param>
+		/// <param name="unk3">Unk3.</param>
 	public int x_skills(int unk1, int unk2, int unk3)
 	{
 		//id=002c name="x_skills" ret_type=int
@@ -1319,13 +1545,19 @@ public class Conversation : GuiBase {
 		return 1;
 	}
 
+		/// <summary>
+		/// Checks the inv quality.
+		/// </summary>
+		/// <returns> returns "quality" field of npc? inventory item</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="itemPos">Item position.</param>
 	public int check_inv_quality(int unk1, int itemPos)
 	{
 		//id=001c name="check_inv_quality" ret_type=int
 		//parameters:   arg1: inventory item position
 		//description:  returns "quality" field of npc? inventory item
 		//return value: "quality" field
-		GameObject objInslot = GameObject.Find(playerUW.playerHud.playerTrade[itemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.playerTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			return objInslot.GetComponent<ObjectInteraction>().Quality;
@@ -1334,10 +1566,14 @@ public class Conversation : GuiBase {
 		{
 			return 0;
 		}
-
 	}
 
-
+		/// <summary>
+		/// Sets the inv quality.
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="NewQuality">New quality.</param>
+		/// <param name="itemPos">Item position.</param>
 	public void set_inv_quality(int unk1, int NewQuality, int itemPos)
 	{
 		//id=001d name="set_inv_quality" ret_type=int
@@ -1345,14 +1581,19 @@ public class Conversation : GuiBase {
 		//arg2: inventory object list position
 		//description:  sets quality for an item in inventory
 		//return value: none
-		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[itemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.npcTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			objInslot.GetComponent<ObjectInteraction>().Quality= NewQuality;
 		}
 	}
 
-
+		/// <summary>
+		/// transfers item to player, per id (?)
+		/// </summary>
+		/// <returns>1: ok, 2: player has no space left</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="ItemPos">Item position.</param>
 	public int take_id_from_npc(int unk1, int ItemPos)
 	{
 		//id=0016 name="take_id_from_npc" ret_type=int
@@ -1360,10 +1601,9 @@ public class Conversation : GuiBase {
 		//description:  transfers item to player, per id (?)
 		//return value: 1: ok, 2: player has no space left
 		int playerHasSpace=1;
-		//Container cn = npc.gameObject.GetComponent<Container>();
-		Container cnpc = playerUW.gameObject.GetComponent<Container>();
+		Container cnpc = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
 
-		GameObject objInslot = GameObject.Find(playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			//Give to PC
@@ -1371,7 +1611,7 @@ public class Conversation : GuiBase {
 			{
 				npc.GetComponent<Container>().RemoveItemFromContainer(objInslot.name);
 				cnpc.AddItemToContainer(objInslot.name);
-				playerUW.GetComponent<PlayerInventory>().Refresh ();
+				GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 			}
 			else
 			{
@@ -1389,6 +1629,11 @@ public class Conversation : GuiBase {
 		return playerHasSpace;
 	}
 
+		/// <summary>
+		// description:  Deletes item from npc inventory
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="item_id">Item identifier.</param>
 	public void do_inv_delete(int unk1, int item_id)
 	{
 		//id=001b name="do_inv_delete" ret_type=int
@@ -1400,36 +1645,41 @@ public class Conversation : GuiBase {
 	}
 
 
+		/// <summary>
+		/// creates item in npc inventory
+		/// </summary>
+		/// <returns>inventory object list position</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="item_id">Item identifier.</param>
 	public int do_inv_create(int unk1, int item_id)
 	{
 		//id=001a name="do_inv_create" ret_type=int
 		//parameters:   arg1: item id
 		//description:  creates item in npc inventory
 		//return value: inventory object list position
-		//Debug.Log ("do_inv_create(" + item_id + ")");
 
 		GameObject myObj=new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
-		myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
-		ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_" + item_id,true);
+		myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
+		ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_" + item_id,true);
 
 		switch (item_id)
 		{//Some known cases
 		case 276://Exploding book
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			myObj.AddComponent<ReadableTrap>();
 			break;
 		case 47://Dragonskin boots
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			//myObj.AddComponent<Boots>();
-			Boots.CreateBoots(myObj, "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", "Sprites/armour/armor_f_0060", "Sprites/armour/armor_m_0060", 5, 17);
+			Boots.CreateBoots(myObj, "UW1/Sprites/armour/armor_f_0060", "UW1/Sprites/armour/armor_m_0060", "UW1/Sprites/armour/armor_f_0060", "UW1/Sprites/armour/armor_m_0060", "UW1/Sprites/armour/armor_f_0060", "UW1/Sprites/armour/armor_m_0060", "UW1/Sprites/armour/armor_f_0060", "UW1/Sprites/armour/armor_m_0060", 5, 17);
 			break;
 		case 314:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<Readable>();//Scroll given by Biden
 			break;
 		default:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), "Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), "UW1/Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<object_base>();
 			break;
 		}
@@ -1440,20 +1690,25 @@ public class Conversation : GuiBase {
 				npccont.AddItemToContainer (myObj.name);
 			for (int i =0; i<4;i++)
 				{
-				if (playerUW.playerHud.npcTrade[i].objectInSlot=="")
+				if (GameWorldController.instance.playerUW.playerHud.npcTrade[i].objectInSlot=="")
 					{
 						//NPCTradeItems[i]=myObj.name;
-						TradeSlot ts = playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+						TradeSlot ts = GameWorldController.instance.playerUW.playerHud.npcTrade[i];
 						ts.objectInSlot=myObj.name;
 						ts.SlotImage.texture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						return i;
 					}
-					//ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
 				}
 			}
 		return -1;
 	}
 
+		/// <summary>
+		/// counts number of items in inventory
+		/// </summary>
+		/// <returns>item number</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="ItemPos">Item position.</param>
 	public int count_inv(int unk1, int ItemPos)
 	{
 		
@@ -1462,28 +1717,24 @@ public class Conversation : GuiBase {
 		//description:  counts number of items in inventory
 		//return value: item number
 		int total =0;
-		GameObject objInslot = GameObject.Find(playerUW.playerHud.playerTrade[ItemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.playerTrade[ItemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
-			//if ((objInt.isQuant) && (objInt.isEnchanted==false))
-			//    {
-			//	total= objInt.Link;
-			//	}
-			//else
-			//	{
-			//	total= 1;
-			//	}
 			if (objInt!=null)
 			{
 				return objInt.GetQty();
 			}
 		}
-
 		return total;
 	}
 
-
+	/// <summary>
+	/// Sets list of items that a npc likes or dislikes to trade;
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="unk2">Unk2.</param>
+	/// <param name="unk3">Unk3.</param>
 	public void set_likes_dislikes(int unk1, int unk2, int unk3)
 	{
 		//id=0024 name="set_likes_dislikes" ret_type=void
@@ -1494,15 +1745,28 @@ public class Conversation : GuiBase {
 		Debug.Log ("Set_Likes_Dislikes(" + unk2 + "," + unk3 +")");
 	}
 
+		/// <summary>
+		/// Sets the attitude.
+		/// Seems to update all npcs of that item type.
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="Attitude">Attitude.</param>
+		/// <param name="NPC_WHO_AM_I">Seems to update all npcs of that item type.</param>
 	public void set_attitude(int unk1, int Attitude, int NPC_WHO_AM_I)
 	{
-
 		//Occurs in Murgo's conversation but I need to see more examples since that will make characters hostile?
 		//Occurs in bandit and head bandit conversation as well.
 		//Seems to update all npcs of that item type.
 		Debug.Log ("Setting attitude for whoami " + NPC_WHO_AM_I + " to " + Attitude);
 	}
 
+	/// <summary>
+	/// compares strings for equality, case independent
+	/// </summary>
+	/// <returns>returns 1 when strings are equal, 0 when not</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="StringIndex">String index.</param>
+	/// <param name="StringIn">String in.</param>
 	public int compare(int unk1, int StringIndex,  string StringIn)
 	{
 		//id=0004 name="compare" ret_type=int
@@ -1520,9 +1784,15 @@ public class Conversation : GuiBase {
 		{
 			return 0;
 		}
-
 	}
 
+		/// <summary>
+		/// compares strings for equality, case independent.
+		/// </summary>
+		/// <returns>returns 1 when strings are equal, 0 when not</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="StringIn">String in.</param>
+		/// <param name="StringIndex">String index.</param>
 	public int compare(int unk1, string StringIn,  int  StringIndex)
 	{
 		//id=0004 name="compare" ret_type=int
@@ -1533,16 +1803,23 @@ public class Conversation : GuiBase {
 		return compare(unk1, StringIndex,StringIn);		
 	}
 
-
+	/// <summary>
+		///  removes npc the player is talking to (?)
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
 	public void remove_talker(int unk1)
 	{
 		//   id=002a name="remove_talker" ret_type=void
 	//parameters:   none
 	//		description:  removes npc the player is talking to (?)
-		this.gameObject.transform.position = new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
+		this.gameObject.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;//new Vector3(99f*1.2f, 3.0f, 99*1.2f);//Move them to the inventory box
 	}
 
-
+		/// <summary>
+		///  sets attitude for a whole race (?)
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="attitude">Attitude.</param>
 	public void set_race_attitude(int unk1, int attitude)
 	{//Used in Setharee Conversation Level 3
 		//id=0026 name="set_race_attitude" ret_type=void
@@ -1552,6 +1829,13 @@ public class Conversation : GuiBase {
 	}
 
 
+		/// <summary>
+		/// Sets the race attitude.
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="attitude">Attitude.</param>
+		/// <param name="unk2">Unk2.</param>
+		/// <param name="unk3">Unk3.</param>
 	public void set_race_attitude(int unk1, int attitude, int unk2, int unk3)
 	{
 		//Used in Bandit chief conversation Level3
@@ -1562,7 +1846,12 @@ public class Conversation : GuiBase {
 		Debug.Log ("set_race_attitude " + attitude);
 	}
 
-
+	/// <summary>
+	/// Copies item from player inventory to npc inventory
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="Quantity">Quantity.</param>
+	/// <param name="slotNo">Slot no.</param>
 	public void give_ptr_npc(int unk1, int Quantity, int slotNo)
 	{
 		/*
@@ -1578,17 +1867,17 @@ public class Conversation : GuiBase {
 			return;
 		}
 		Container cn =npc.gameObject.GetComponent<Container>();
-		if (playerUW.playerHud.playerTrade[slotNo].objectInSlot !="")
+		if (GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot !="")
 		{
 			if ((Quantity==-1))
 			{
-				cn.AddItemToContainer(playerUW.playerHud.playerTrade[slotNo].objectInSlot);
-				playerUW.playerHud.playerTrade[slotNo].clear ();
-				playerUW.playerInventory.Refresh();
+				cn.AddItemToContainer(GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+				GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].clear ();
+				GameWorldController.instance.playerUW.playerInventory.Refresh();
 			}
 			else
 			{//Clone the object and give the clone to the npc
-				GameObject objGiven = GameObject.Find (playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+				GameObject objGiven = GameObject.Find (GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot);
 				if (objGiven!=null)
 				{
 					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant==true)
@@ -1602,21 +1891,26 @@ public class Conversation : GuiBase {
 					{//Object is a quantity or is a quantity less than the number already there.
 						GameObject Split = Instantiate(objGiven.gameObject);//What we are picking up.
 						Split.GetComponent<ObjectInteraction>().Link =Quantity;
-						Split.name = Split.name+"_"+playerUW.summonCount++;
+						Split.name = Split.name+"_"+GameWorldController.instance.playerUW.summonCount++;
 						objGiven.GetComponent<ObjectInteraction>().Link=objGiven.GetComponent<ObjectInteraction>().Link-Quantity;
 						cn.AddItemToContainer(objGiven.name);
 					}
 					else
 					{//Object is not a quantity or is the full amount.
-						cn.AddItemToContainer(playerUW.playerHud.playerTrade[slotNo].objectInSlot);
-						playerUW.playerHud.playerTrade[slotNo].clear ();
-						playerUW.playerInventory.Refresh();
+						cn.AddItemToContainer(GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+						GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].clear ();
+						GameWorldController.instance.playerUW.playerInventory.Refresh();
 					}
 				}
 			}
 		}
 	}
 
+	/// <summary>
+	/// Length of the specified string.
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="str">String.</param>
 	public int length(int unk1, string str)
 	{
 		//id=000b name="length" ret_type=int
@@ -1627,7 +1921,13 @@ public class Conversation : GuiBase {
 	}
 
 
-	public int find_barter(int unk1, int arg1)
+	/// <summary>
+	/// searches for item in barter area
+	/// </summary>
+	/// <returns>This returns slot number + 1. Take this into account when retrieving the items in later functions</returns>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="itemID">item id to find</param>
+	public int find_barter(int unk1, int itemID)
 	{//This returns slot number + 1. Take this into account when retrieving the items in later functions
 		//id=0031 name="find_barter" ret_type=int
 		//	parameters:   arg1: item id to find
@@ -1636,22 +1936,21 @@ public class Conversation : GuiBase {
 		// if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
 		for (int i = 0; i<4; i++)
 		{
-			if (playerUW.playerHud.playerTrade[i].isSelected())
+			if (GameWorldController.instance.playerUW.playerHud.playerTrade[i].isSelected())
 			    {
-				ObjectInteraction objInt = playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+				ObjectInteraction objInt = GameWorldController.instance.playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
 				if (objInt!=null)
-				{
-					
-					if (arg1<1000)
+				{					
+					if (itemID<1000)
 					{
-						if (objInt.item_id== arg1)
+						if (objInt.item_id== itemID)
 						{
 							return i+1;
 						}
 					}
 					else
 					{
-						if ((objInt.item_id>= (arg1-1000)*16) && (objInt.item_id< ((arg1+1)-1000)*16))
+						if ((objInt.item_id>= (itemID-1000)*16) && (objInt.item_id< ((itemID+1)-1000)*16))
 						{
 							return i+1;
 						}
@@ -1664,6 +1963,13 @@ public class Conversation : GuiBase {
 		return 0;
 	}
 
+		/// <summary>
+		///  places a generated object in underworld
+		/// </summary>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="invSlot">inventory item slot number (from do_inv_create)</param>
 	public void place_object( int unk1, int tileY, int tileX, int invSlot )
 	{
 	/*
@@ -1675,8 +1981,7 @@ public class Conversation : GuiBase {
                  used in Judy's conversation, #23
 
 */
-		Debug.Log ("placeobject");
-		string objName = playerUW.playerHud.npcTrade[invSlot].objectInSlot;
+		string objName = GameWorldController.instance.playerUW.playerHud.npcTrade[invSlot].objectInSlot;
 		GameObject obj = GameObject.Find (objName);
 		if (obj!=null)
 		{
@@ -1686,17 +1991,28 @@ public class Conversation : GuiBase {
 			                                     (((float)tileY) *1.2f) 
 			                                     );
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
-			playerUW.playerHud.npcTrade[invSlot].clear();
+			GameWorldController.instance.playerUW.playerHud.npcTrade[invSlot].clear();
 		}
-
-
 		return;
 	}
 
-
+		/// <summary>
+		/// Finds the barter total.
+		/// </summary>
+		/// <returns>The barter total.</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="ptrCount">Ptr count.</param>
+		/// <param name="ptrSlot">Ptr slot.</param>
+		/// <param name="ptrNoOfSlots">Ptr no of slots.</param>
+		/// <param name="item_id">Item identifier.</param>
+		/// <param name="variables">Variables.</param>
+		/// My implementation 
+		/// find the total number of matching items
+		/// keep a list of slots where they are found
+		/// keep a number of found slots.
 	public int find_barter_total( int unk1, int ptrCount, int ptrSlot, int ptrNoOfSlots, int item_id, int[] variables )
 	{
-		/*
+	/*
    id=0032 name="find_barter_total" ret_type=int
    parameters:   s[0]: ???
                  s[1]: pointer to number of found items
@@ -1706,7 +2022,7 @@ public class Conversation : GuiBase {
    description:  searches for item in barter area
    return value: 1 when found (?)
 	*/
-		/*
+/*
 My implementation 
 find the total number of matching items
 keep a list of slots where they are found
@@ -1716,9 +2032,9 @@ keep a number of found slots.
 		int counter=0;
 		for (int i = 0; i<4; i++)
 		{
-			if (playerUW.playerHud.playerTrade[i].isSelected())
+			if (GameWorldController.instance.playerUW.playerHud.playerTrade[i].isSelected())
 			{
-				ObjectInteraction objInt = playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+				ObjectInteraction objInt = GameWorldController.instance.playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
 				if (objInt!=null)
 				{
 					
@@ -1754,10 +2070,16 @@ keep a number of found slots.
 		{
 			return 0;
 		}
-
-
 	}
 
+
+		/// <summary>
+		/// UWformats has no info on this. Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
+		/// </summary>
+		/// <returns>The traps.</returns>
+		/// <param name="unk1">Unk1.</param>
+		/// <param name="unk2">Unk2.</param>
+		/// <param name="VariableIndex">Variable index.</param>
 
 	public int x_traps( int unk1, int unk2, int VariableIndex)
 	{//UWformats has no info on this.
@@ -1765,5 +2087,3 @@ keep a number of found slots.
 		return GameWorldController.instance.variables[VariableIndex];
 	}
 }
-
-

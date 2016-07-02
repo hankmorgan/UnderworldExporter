@@ -58,7 +58,7 @@ public class InputHandler : GuiBase {
 
 		public int ParseInteger()
 		{
-				InputField inputctrl =playerUW.playerHud.InputControl;
+				InputField inputctrl =GameWorldController.instance.playerUW.playerHud.InputControl;
 				//Debug.Log (inputctrl.text);
 				int quant=0;
 				if (int.TryParse(inputctrl.text,out quant)==false)
@@ -73,7 +73,7 @@ public class InputHandler : GuiBase {
 
 		public string ParseString()
 		{
-				InputField inputctrl =playerUW.playerHud.InputControl;
+				InputField inputctrl =GameWorldController.instance.playerUW.playerHud.InputControl;
 				return inputctrl.text;
 		}
 

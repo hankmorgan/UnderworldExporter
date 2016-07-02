@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Leches can be used to cure poison
+/// </summary>
 public class Leech : object_base {
 
 

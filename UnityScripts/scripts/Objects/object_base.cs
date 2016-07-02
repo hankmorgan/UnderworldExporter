@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+/// <summary>
+/// Base class for objects and npcs
+/// Works hand in hand with ObjectInteraction
+/// </summary>
 public class object_base : MonoBehaviour {
-		/*
-		 * object_base.cs
-		 * 
-		 * Base class for objects and npcs
-		 * Works hand in hand with objectinteraction
-		 * 
-		 */
-	
-	public static UWCharacter playerUW;
-	public static ScrollController ml;
-	protected ObjectInteraction objInt;
-	public string PickupLink;//A trigger to activate when this object is picked up.
 
+	public static UWCharacter playerUW;
+	/// Output control to display text on
+	public static ScrollController ml;
+	
+	///The Object interaction that is on this object.
+	protected ObjectInteraction objInt;
+	
+	///A trigger to activate when this object is picked up.
+	public string PickupLink;
+
+		/// <summary>
+		/// Gets the object interaction that this object base works with
+		/// </summary>
+		/// <returns>The object interaction.</returns>
 	public ObjectInteraction getObjectInteraction()
 	{
 		CheckReferences();
@@ -26,7 +31,6 @@ public class object_base : MonoBehaviour {
 	{
 		if (playerUW==null)
 		{
-			//playerUW=GameObject.Find ("Gronk").GetComponent<UWCharacter>();
 			playerUW=GameWorldController.instance.playerUW;
 		}
 		if (ml==null)
@@ -36,18 +40,29 @@ public class object_base : MonoBehaviour {
 		CheckReferences();
 	}
 
+	/// <summary>
+	/// For when this object is activated by code. Eg buttons
+	/// </summary>
 	public virtual bool Activate()
 	{//Unimplemented items 
 		CheckReferences();
 		return false;
 	}
 
+		/// <summary>
+		/// Object is attacked or damaged in some way.
+		/// </summary>
+		/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
+		/// <param name="damage">Damage.</param>
 	public virtual bool ApplyAttack(int damage)
-	{//Object is attacked or damaged in some way.
+	{
 		return false;
 	}
 
-
+		/// <summary>
+		/// Outputs the look description of the object
+		/// </summary>
+		/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public virtual bool LookAt()
 	{
 		CheckReferences();
@@ -55,7 +70,11 @@ public class object_base : MonoBehaviour {
 		return true;
 	}
 
-
+		/// <summary>
+		/// Activation of this object by another. EG key on door
+		/// </summary>
+		/// <returns><c>true</c>, if by object was activated, <c>false</c> otherwise.</returns>
+		/// <param name="ObjectUsed">Object used.</param>
 	public virtual bool ActivateByObject(GameObject ObjectUsed)
 	{
 		CheckReferences();
@@ -72,6 +91,10 @@ public class object_base : MonoBehaviour {
 		}
 	}
 
+		/// <summary>
+		/// The object is used by the player.
+		/// </summary>
+		/// Checks if the player is already holding something or using something else on this object.
 	public virtual bool use()
 	{
 		CheckReferences();
@@ -93,6 +116,9 @@ public class object_base : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Checks the external references for this object
+	/// </summary>
 	protected void CheckReferences()
 	{
 		if (objInt==null)
@@ -105,6 +131,9 @@ public class object_base : MonoBehaviour {
 		}
 	}
 
+		/// <summary>
+		/// This object becomes the object in hand in order to be use
+		/// </summary>
 	public void BecomeObjectInHand()
 	{//In order to use it.
 		playerUW.CursorIcon= objInt.InventoryDisplay.texture;
@@ -113,6 +142,10 @@ public class object_base : MonoBehaviour {
 		InteractionModeControl.UpdateNow=true;
 	}
 
+		/// <summary>
+		/// Player talks to the object.
+		/// </summary>
+		/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
 	public virtual bool TalkTo()
 	{
 		//000~001~156~You cannot talk to that.
@@ -120,14 +153,21 @@ public class object_base : MonoBehaviour {
 		return true;
 	}
 
+	/// <summary>
+	/// Player tries to eat this object.
+	/// </summary>
+	/// For when the player tries to eat certain objects by dragging them on top of the paper doll face. For future use?
 	public virtual bool Eat()
 	{
-		//For when the player tries to eat certain objects by dragging them on top of the paper doll face. For future use?
 		return false;
 	}
 
+		/// <summary>
+		/// For special events when an object is picked up. Eg silver seed or pickup traps
+		/// </summary>
+		/// If object has a pickup link then the object referenced is activated
 	public virtual bool PickupEvent()
-	{//For special events when an object is picked up. Eg silver seed.
+	{
 		if (PickupLink!="")
 		{
 			GameObject obj = GameObject.Find (PickupLink);
@@ -142,25 +182,42 @@ public class object_base : MonoBehaviour {
 		return false;
 	}
 
+		/// <summary>
+		/// PLayer puts the object on in an inventory slot.
+		/// </summary>
+		/// <returns><c>true</c>, if event was equiped, <c>false</c> otherwise.</returns>
+		/// <param name="slotNo">Slot no.</param>
 	public virtual bool EquipEvent(int slotNo)
-	{//PLayer puts the object on in an inventory slot.
+	{
 		return false;
 	}
 
+	/// <summary>
+	/// Player takes an object out of  an inventory slot.
+	/// </summary>
+	/// <returns><c>true</c>, if equip event was uned, <c>false</c> otherwise.</returns>
+	/// <param name="slotNo">Slot no.</param>
 	public virtual bool UnEquipEvent(int slotNo)
-	{//Player takes an object out of  an inventory slot.
+	{
 		return false;
 	}
 
+		/// <summary>
+		/// Failure message to display when this object is used on a another object that has no use for it. Eg a key on a sign.
+		/// </summary>
+		/// <returns><c>true</c>, if message was failed, <c>false</c> otherwise.</returns>
 	public virtual bool FailMessage()
 	{
-		//Message to display when this object is used on a another object that has no use for it. Eg a key on a sign.
 		ml.Add("You cannot use this. (Failmessage default)");
 		return false;
 	}
 
+	/// <summary>
+	/// Return the weight of the object stack
+	/// </summary>
+	/// <returns>The weight.</returns>
 	public virtual float GetWeight()
-	{//Return the weight of the object stack
+	{
 		if (objInt==null)
 		{
 			return 0.0f;
@@ -171,40 +228,67 @@ public class object_base : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// Code to call when merging two objects. 
+	/// To support cases where merging an object means the object becomes something different.
+	/// Eg coin into stack of coins
+	/// </summary>
 	public virtual void MergeEvent()
 	{
-		//Code to call when merging two objects. To support cases where merging an object means the object becomes something different.
-		//Eg coin into stack of coins
+
 		return;
 	}
 
+	/// <summary>
+	/// Another item Id this object could potentially have. Eg coin/gold coin. 
+	/// By default it's normal item_id is returned
+	/// </summary>
+	/// <returns>The item identifier.</returns>
 	public virtual int AliasItemId()
 	{
-		//Another item Id this object could have. Eg coin/gold coin. By default it's normal item_id
 		return objInt.item_id;
 	}
 
-
+	/// <summary>
+	/// Code to call when spliting an item and the split changes the item fundamentally.
+	/// </summary>
 	public virtual void Split()
-	{//Code to call when spliting an item and the split changes the item fundamentally.
+	{
 		return;
 	}
 
+
+		/// <summary>
+		/// Copies the object base.
+		/// </summary>
+		/// <param name="target">Target.</param>
+		/// Possible use in room management when an object is stuck with DontDestroyOnLoan()
   public virtual void CopyObject_base(GameObject target)
 	{
 		object_base objBase=target.AddComponent<object_base>();
 		objBase.PickupLink=PickupLink;
 	}
 
-	public virtual bool ChangeType(int newType, int itemType)
-	{//Changes the type of the object. Eg when destroyed and it needs to become debris.
-		objInt.ChangeType(newType,objInt.ItemType);
+		/// <summary>
+		/// Changes the type of the object. Eg when destroyed and it needs to become debris.
+		/// </summary>
+		/// <returns><c>true</c>, if type was changed, <c>false</c> otherwise.</returns>
+		/// <param name="newID">New ID.</param>
+		/// <param name="itemType">Item type.</param>
+	public virtual bool ChangeType(int newID, int itemType)
+	{
+		objInt.ChangeType(newID,objInt.ItemType);
 		return true;		
 	}
 
 
+		/// <summary>
+		/// Gets the identification Skill levels required for identifying the enchantment..
+		/// </summary>
+		/// <returns>The identification levels.</returns>
+		/// <param name="EffectID">Effect ID to test</param>
 	public int getIdentificationLevels(int EffectID)
-	{//Skill levels required for identifying the enchantment.
+	{
 			//TODO:Decide on what to do about values. More powerful effects are harder to id?
 			switch(EffectID)
 			{
@@ -426,8 +510,6 @@ public class object_base : MonoBehaviour {
 			default:
 					Debug.Log("EffectID" + EffectID + " unknownn");
 					return 30;
-			}
-			
+			}			
 	}
-
 }

@@ -17,13 +17,13 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			return;
 		}
 		//Starts a sequenced cutscene.
-		playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+		GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 		chains.ActiveControl=5;
 		chains.Refresh();
-		isFullScreen= playerUW.playerHud.window.FullScreen;
+		isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
 		if (!isFullScreen)
 		{
-			playerUW.playerHud.window.SetFullScreen();
+			GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
 		}
 
 		PlayingSequence=true;
@@ -73,7 +73,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			yield return new WaitForSeconds(cs.getSubTime(i)-currTime);
 			currTime = cs.getSubTime(i)+cs.getSubDuration (i);//The time the subtitle finishes at.
-			mlCuts.Set("[FFFFFF]" + playerUW.StringControl.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
+			mlCuts.Set("[FFFFFF]" + GameWorldController.instance.playerUW.StringControl.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
 			yield return new WaitForSeconds(cs.getSubDuration (i));
 			mlCuts.Set("");//Clear the control.
 		}
@@ -100,13 +100,13 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	{//Called by events in certain animations when starting playing
 		if (PlayingSequence==false)
 		{
-			playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+			GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 			chains.ActiveControl=5;
 			chains.Refresh();
-			isFullScreen= playerUW.playerHud.window.FullScreen;
+			isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
 			if (!isFullScreen)
 			{
-				playerUW.playerHud.window.SetFullScreen();
+				GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
 			}
 		}		
 		return;
@@ -118,9 +118,9 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			if (!isFullScreen)
 			{
-				playerUW.playerHud.window.UnSetFullScreen();
+				GameWorldController.instance.playerUW.playerHud.window.UnSetFullScreen();
 			}
-			playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
+			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			chains.ActiveControl=0;
 			chains.Refresh();
 			SetAnimation= "Anim_Base";//Clears out the animation.

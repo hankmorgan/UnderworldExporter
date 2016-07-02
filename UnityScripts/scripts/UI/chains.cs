@@ -159,7 +159,7 @@ public class chains : GuiBase_Draggable {
 		*/
 		
 		EnableDisableControl("Inventory", InventoryEnabled);
-		EnableDisableControl("PaperDollFemale", InventoryEnabled && playerUW.isFemale);
+		EnableDisableControl("PaperDollFemale", InventoryEnabled && GameWorldController.instance.playerUW.isFemale);
 		//Turn on inventory
 				/*
 		EnableDisableControl("Backpack_Slot_00",InventoryEnabled);
@@ -257,8 +257,8 @@ public class chains : GuiBase_Draggable {
 
 
 		//Misc controls
-		EnableDisableControl("DragonLeft",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==false)));
-		EnableDisableControl("DragonRight",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (playerUW.playerHud.window.FullScreen==false)));
+		EnableDisableControl("DragonLeft",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (GameWorldController.instance.playerUW.playerHud.window.FullScreen==false)));
+		EnableDisableControl("DragonRight",(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (GameWorldController.instance.playerUW.playerHud.window.FullScreen==false)));
 
 		//Cuts
 		EnableDisableControl("CutsceneSmall",CutSceneEnabled);

@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Makes the npc an ally of the player.
+/// </summary>
 public class SpellEffectAlly : SpellEffect {
-	//Makes the npc an ally of the player.
+		/// Backup the original state of the Npc
 		public int OriginalState;
+		/// Backup the original attitude of the npc
 		public int OriginalAttitude;
 		public NPC npc;
 		public bool WasActive;
+
+		/// <summary>
+		/// Applies the effect.
+		/// </summary>
+		/// Sets the NPC attitude and states
+		/// Does not apply if confused or afraid
 		public override void ApplyEffect ()
 		{
 			if ((this.GetComponent<SpellEffectConfusion>()==null) && (this.GetComponent<SpellEffectFear>()==null))

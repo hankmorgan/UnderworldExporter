@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Makes you jump higher.
+/// </summary>
 public class SpellEffectLeap : SpellEffect {
-	//Makes you jump higher.
 
 	public override void ApplyEffect ()
 	{

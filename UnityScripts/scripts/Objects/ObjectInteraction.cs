@@ -577,20 +577,20 @@ public class ObjectInteraction : MonoBehaviour {
 				myObj.layer=LayerMask.NameToLayer("UWObjects");
 				myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
 				myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
-				ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_" + lstOutput[i],true);
+				ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_" + lstOutput[i],true);
 
 				switch (lstOutput[i])
 				{
 				case 299://Fishing pole
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					myObj.AddComponent<FishingPole>();break;
 				case 183://Popcorn
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					Food fd = myObj.AddComponent<Food>();
 					fd.Nutrition=5;
 					break;
 				default:
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "Sprites/OBJECTS_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), "UW1/Sprites/OBJECTS_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					myObj.AddComponent<object_base>();break;
 				}
 				playerUW.playerInventory.ObjectInHand=myObj.name;

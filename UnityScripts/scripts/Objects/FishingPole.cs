@@ -24,7 +24,9 @@ public override bool use ()
 
 	}
 
-
+	/// <summary>
+	/// Fishing Code.
+	/// </summary>
 	private void GoFish()
 	{
 		int tileX=(int)(playerUW.transform.position.x/1.2f);
@@ -59,7 +61,6 @@ public override bool use ()
 						{//000~001~102~You feel a nibble, but the fish gets away.
 							ml.Add (playerUW.StringControl.GetString (1,102));
 						}
-
 					}
 					else
 					{//000~001~100~No luck this time.
@@ -82,9 +83,9 @@ public override bool use ()
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
 		myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
-		ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
-		//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_"+ObjectNo, "Sprites/OBJECTS_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
-		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", "Sprites/OBJECTS_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_182",true);
+		//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +ObjectNo, "UW1/Sprites/OBJECTS_"+ObjectNo, "UW1/Sprites/OBJECTS_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
+		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_182", "UW1/Sprites/OBJECTS_182", "UW1/Sprites/OBJECTS_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 
 		Food fd = myObj.AddComponent<Food>();
 		fd.Nutrition=5;//TODO:determine values to use here.

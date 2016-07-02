@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Scrollbutton : MonoBehaviour {
+public class Scrollbutton : GuiBase {
 		/*
 	public int stepSize;
 	public static int ScrollValue=0;

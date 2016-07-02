@@ -7,7 +7,7 @@ public class SpellProp_SheetLightning : SpellProp_Fireball {
 	public override void init(int effectId)
 	{
 		base.init (effectId);
-		ProjectileSprite = "Sprites/object_blank";
+				ProjectileSprite = "UW1/Sprites/object_blank";
 		Force=500.0f;
 		BaseDamage=8;
 		splashDamage=3;

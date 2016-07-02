@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Used to navigate typbals maze.
+/// </summary>
+/// Changes materials that contain the words "_maze" to use the color yellow as their tint.
 public class SpellEffectMazeNavigation : SpellEffect {
 
 	//public Material toChange;

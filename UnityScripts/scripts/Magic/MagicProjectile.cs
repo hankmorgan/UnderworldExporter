@@ -1,20 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Magic projectiles that are launched from spells.
+/// </summary>
+/// Projectiles use properties defined by SpellProp to decide what damage or other special effects should happen.
 public class MagicProjectile : MonoBehaviour {
-	/*MagicProjectile.cs
-	 * 
-	 *Magic projectiles that are launched from spells.
-	 *
-	 *Projectiles use properties defined by SpellProp to decide what damage or other special effects should happen.
-	 *
-	 */
-	public bool HasHit;
-	public string caster; //who has cast the project. It will ignore them.
-	public SpellProp spellprop; //Spell properties object
 
+	/// Has the projectile hit something
+	public bool HasHit;
+	///who has cast the project. It will ignore them to avoid self harm
+	public string caster;
+	///Spell properties object to define the behaviour of the projectile
+	public SpellProp spellprop; 
+
+	/// <summary>
+	/// The Projectile hits something.
+	/// </summary>
+	/// <param name="collision">Collision.</param>
+	/// Does not impact the caster
+	/// Calls onImpact
+	/// Calls onHit
+	/// Applys Attack
+	/// Generates an impact effect
 	void OnCollisionEnter(Collision collision)
-	{//The Projectile hits something.
+	{//
 	if(collision.gameObject.name== caster)
 		{//Prevents the caster from hitting themselves
 			return;

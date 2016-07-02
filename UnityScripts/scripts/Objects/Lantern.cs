@@ -1,9 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Lantern.
+/// </summary>
+/// Special variant of light sources that uses fuel to burn rather
 public class Lantern : LightSource {
-	//A lantern needs oil to work
 
+		/// <summary>
+		/// Activation of this object by another. EG key on door
+		/// </summary>
+		/// <returns>true</returns>
+		/// <c>false</c>
+		/// <param name="ObjectUsed">Object used.</param>
+		/// Using oil on the lantern increases it's quality.
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
@@ -38,5 +47,4 @@ public class Lantern : LightSource {
 		}
 		return false;
 	}
-
 }

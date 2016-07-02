@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class RuneSlot : MonoBehaviour {
+public class RuneSlot : GuiBase {
 
 	public static UWCharacter playerUW;
 	public int SlotNumber;
@@ -17,7 +17,8 @@ public class RuneSlot : MonoBehaviour {
 		"Quas","Rel","Sanct","Tym",
 		"Uus","Vas","Wis","Ylem"};*/
 	// Use this for initialization
-	void Start () {
+	public override void Start () {
+		base.Start();
 		thisRune = this.GetComponent<RawImage>();
 		thisRune.texture= Resources.Load <Texture2D> ("UW1/HUD/Runes/rune_blank");
 	}

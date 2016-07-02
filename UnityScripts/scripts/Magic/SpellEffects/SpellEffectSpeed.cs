@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Makes the player move fast.
+/// </summary>
 public class SpellEffectSpeed : SpellEffect {
 
-//Either slows down enemies or makes the player faster?
+	///How much the players motion is increased by
 	public float speedMultiplier;
 
 	public override void ApplyEffect ()
@@ -11,7 +13,6 @@ public class SpellEffectSpeed : SpellEffect {
 			playerUW.speedMultiplier=speedMultiplier;
 			base.ApplyEffect ();
 		}
-
 
 	void Update()
 	{
@@ -26,5 +27,4 @@ public class SpellEffectSpeed : SpellEffect {
 		playerUW.speedMultiplier=1.0f;
 		base.CancelEffect ();		
 	}
-
 }

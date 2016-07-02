@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-
+/// <summary>
+/// Base class for weapons and armour
+/// </summary>
 public class Equipment : object_base {
-//Base class for weapons and armour
-	public int Durability;	//Not sure if this is needed.
+	///Not sure if this is needed.	
+	public int Durability;	
 
 	public virtual int GetActualSpellIndex()
 	{
@@ -24,9 +26,16 @@ public class Equipment : object_base {
 		}
 	}
 
+
+		/// <summary>
+		/// Activation of this object by another. EG key on door
+		/// </summary>
+		/// <returns>true</returns>
+		/// <c>false</c>
+		/// <param name="ObjectUsed">Object used.</param>
+		/// Handles anvil usage
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
-
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
@@ -37,19 +46,8 @@ public class Equipment : object_base {
 				//Do a difficulty check and prompt for approval.
 				ml.Set ("[placeholder]You think it will be hard/easy to repair this item");
 				InputField inputctrl =playerUW.playerHud.InputControl;
-				//TODO:Fix me inputctrl.eventReceiver=this.gameObject;
-										//TODO:Fix me inputctrl.type=UIInput.KeyboardType.Default;
-										//TODO:Fix me inputctrl.useLabelTextAtStart=true;
-										//TODO:Fix me 				inputctrl.selected=true;
-			//	inputctrl.onEndEdit.RemoveAllListeners();
-			//	inputctrl.onEndEdit.AddListener(delegate {
-			//			this.OnSubmitPickup();	
-			//	} );
-
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputAnvil;
-
-				//TODO:Fix me inputctrl.selected=true;
 				inputctrl.contentType= InputField.ContentType.Alphanumeric;
 				inputctrl.Select();
 				WindowDetect.WaitingForInput=true;
@@ -61,19 +59,22 @@ public class Equipment : object_base {
 		return false;
 	}
 
+		/// <summary>
+		/// Refreshes the quality of armour when damage is taken
+		/// </summary>
 	public virtual void UpdateQuality()
 	{//Template for repairing and updating the graphics on equipment. Used by armour mainly.
 		return;
 	}
 
-
+		/// <summary>
+		/// Event handler for processing the repair question y/n
+		/// </summary>
+		/// <param name="ans">Ans.</param>
 	public void OnSubmitPickup(string ans)
-	{//Event handler for processing the repair question y/n
+	{
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		//InputField inputctrl =playerUW.playerHud.InputControl;//playerUW.GetMessageLog().gameObject.GetComponent<UIInput>();
-
-		//string ans = inputctrl.text;
 		ml.Clear();//="";
 		if (ans.Substring(0,1).ToUpper() == "Y")
 		{
@@ -127,5 +128,4 @@ public class Equipment : object_base {
 			return base.LookAt();
 		}
 	}
-
 }

@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Poison effect
+/// </summary>
 public class SpellEffectPoison : SpellEffect {
 
-	private int DOT; //The amount of damage per counter tick.
+	///The amount of damage per counter tick.
+	private int DOT; 
 
-	public bool isNPC;//The effect is applied to an npc
-	public NPC npc;//THe NPC the spell is applied to.
+	///The effect is applied to an npc
+	public bool isNPC;
+	
+	///The NPC the spell is applied to.
+	public NPC npc;
 
 
 	public override void ApplyEffect ()

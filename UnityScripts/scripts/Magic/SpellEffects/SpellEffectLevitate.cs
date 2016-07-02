@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Makes the player fly
+/// </summary>
 public class SpellEffectLevitate : SpellEffect {
 	public float flySpeed=1.0f;
 	public override void ApplyEffect ()

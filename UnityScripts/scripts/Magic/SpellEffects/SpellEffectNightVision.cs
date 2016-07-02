@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.ImageEffects;
-
+/// <summary>
+/// Add a Greyscale effect to the player vision.
+/// Increases the light range
+/// </summary>
 public class SpellEffectNightVision : SpellEffectLight {
 	public static bool inUse;
 	public Grayscale gs;

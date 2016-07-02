@@ -26,8 +26,8 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		//myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
 		//myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
-		ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_224",true);
-		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_224", "Sprites/OBJECTS_"+Item, "Sprites/OBJECTS_" +Item, ObjectInteraction.RUNE, 224, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_224",true);
+		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_224", "UW1/Sprites/OBJECTS_"+Item, "UW1/Sprites/OBJECTS_" +Item, ObjectInteraction.RUNE, 224, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 		
 		myObj.AddComponent<RuneStone>();
 

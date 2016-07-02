@@ -116,18 +116,18 @@ public class Compass : GuiBase_Draggable {
 	{//String representation of the above.
 		int Offset= Compass.getCompassHeadingOffset(src,dst);
 
-		return playerUW.StringControl.GetString(1, 36 + Offset);		
+		return GameWorldController.instance.playerUW.StringControl.GetString(1, 36 + Offset);		
 	}
 
 
 	
 	// Update is called once per frame
 	void Update () {
-		if (PreviousHeading!=playerUW.currentHeading)
+		if (PreviousHeading!=GameWorldController.instance.playerUW.currentHeading)
 		{
 			UpdateNorthIndicator();
-			PreviousHeading=playerUW.currentHeading;
-			switch (playerUW.currentHeading)
+			PreviousHeading=GameWorldController.instance.playerUW.currentHeading;
+			switch (GameWorldController.instance.playerUW.currentHeading)
 			{
 				case NORTH:
 				case SOUTH:
@@ -167,7 +167,7 @@ public class Compass : GuiBase_Draggable {
 	{
 		for (int i =0; i<16;i++)
 		{
-			NorthIndicators[i].enabled=(i==playerUW.currentHeading);
+						NorthIndicators[i].enabled=(i==GameWorldController.instance.playerUW.currentHeading);
 		}
 	}
 
@@ -176,28 +176,28 @@ public class Compass : GuiBase_Draggable {
 	public void OnClick()
 	{
 		if (Dragging==true){return;}
-		playerUW.playerHud.MessageScroll.Clear ();
-		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,64) 
-		                                      + playerUW.GetFedStatus() 
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear ();
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,64) 
+						+ GameWorldController.instance.playerUW.GetFedStatus() 
 		                                      + " and " 
-		                                      + playerUW.GetFatiqueStatus());
+						+ GameWorldController.instance.playerUW.GetFatiqueStatus());
 
-		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,65) 
-		                                      + playerUW.StringControl.GetString (1,411+GameWorldController.instance.LevelNo) 
-		                                      + playerUW.StringControl.GetString (1,66));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,65) 
+						+ GameWorldController.instance.playerUW.StringControl.GetString (1,411+GameWorldController.instance.LevelNo) 
+						+ GameWorldController.instance.playerUW.StringControl.GetString (1,66));
 		if (GameClock.day<10)
 		{
-			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,67) 
-			                                      + playerUW.StringControl.GetString (1,411+GameClock.day)
-			                                      + playerUW.StringControl.GetString (1,68));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,67) 
+								+ GameWorldController.instance.playerUW.StringControl.GetString (1,411+GameClock.day)
+								+ GameWorldController.instance.playerUW.StringControl.GetString (1,68));
 		}
 		else
 		{//incountable
-			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,69));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,69));
 		}
 
-		playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,70) 
-		                                      + playerUW.StringControl.GetString (1,71+((GameClock.hour)/2)));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,70) 
+						+ GameWorldController.instance.playerUW.StringControl.GetString (1,71+((GameClock.hour)/2)));
 
 
 		/*

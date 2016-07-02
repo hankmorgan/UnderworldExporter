@@ -18,18 +18,18 @@ public class HealthFlask : GuiBase_Draggable {
 	void Update () {
 		if (isHealthDisplay==true)
 		{//Health flask
-			Level=playerUW.CurVIT;
-			MaxLevel=playerUW.MaxVIT;
+			Level=GameWorldController.instance.playerUW.CurVIT;
+			MaxLevel=GameWorldController.instance.playerUW.MaxVIT;
 		}
 		else
 		{//mana flask
-			Level=playerUW.PlayerMagic.CurMana;
-			MaxLevel=playerUW.PlayerMagic.MaxMana;
+			Level=GameWorldController.instance.playerUW.PlayerMagic.CurMana;
+			MaxLevel=GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 		}
 
-		if ((isHealthDisplay) && (playerUW.Poisoned!=Poisoned))
+		if ((isHealthDisplay) && (GameWorldController.instance.playerUW.Poisoned!=Poisoned))
 		{
-			Poisoned = playerUW.Poisoned;
+			Poisoned = GameWorldController.instance.playerUW.Poisoned;
 			UpdatePoisonDisplay();
 		}
 
@@ -73,17 +73,17 @@ public class HealthFlask : GuiBase_Draggable {
 		if (isHealthDisplay == true)
 		{
 			//Your current vitality is out of 
-			if (playerUW.Poisoned==true)
+			if (GameWorldController.instance.playerUW.Poisoned==true)
 			{
 				output = "You are [barely/mildly/badly] poisoned\n";
 			}
-			output= output + "Your current vitality is " +playerUW.CurVIT + " out of " + playerUW.MaxVIT;
+			output= output + "Your current vitality is " +GameWorldController.instance.playerUW.CurVIT + " out of " + GameWorldController.instance.playerUW.MaxVIT;
 		}
 		else
 		{//your current mana points are 
-			output= output + "Your current mana points are " +playerUW.PlayerMagic.CurMana + " out of " + playerUW.PlayerMagic.MaxMana;
+			output= output + "Your current mana points are " +GameWorldController.instance.playerUW.PlayerMagic.CurMana + " out of " + GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 		}
 
-		playerUW.playerHud.MessageScroll.Add(output);
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(output);
 	}
 }

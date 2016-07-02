@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Freezes the NPC
+/// </summary>
 public class SpellEffectParalyze : SpellEffect {
 		public bool isNPC;//The effect is applied to an npc
 		public NPC npc;//THe NPC the spell is applied to.
-		public int state;//THe state the npc was in before the spell was cast at them
+		///The state the npc was in before the spell was cast at them
+		public int state;
 		public Animator anim;
 
 		public override void ApplyEffect ()

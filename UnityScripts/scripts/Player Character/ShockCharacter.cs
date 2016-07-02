@@ -62,9 +62,9 @@ public class ShockCharacter : MonoBehaviour {
 		//ObjectInteraction.SC = GameObject.Find ("StringController").GetComponent<StringController>();
 		//ButtonHandler.player=this.gameObject;
 		//InventorySlot.player=this.gameObject;
-		InventorySlot.playerUW=this.GetComponent<UWCharacter>();
-		ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		//InventorySlot.playerUW=this.GetComponent<UWCharacter>();
+		//ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
+		//RuneSlot.playerUW=this.GetComponent<UWCharacter>();
 	
 	//TODO:Shock character
 		//WindowDetect.playerUW=this.GetComponent<UWCharacter>();

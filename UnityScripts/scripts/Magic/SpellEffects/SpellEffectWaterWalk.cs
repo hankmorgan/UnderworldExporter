@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Allows the player to walk on water
+/// </summary>
 public class SpellEffectWaterWalk : SpellEffect {
 
 

@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Musical instruments
+/// </summary>
+/// Tracks the notes the player plays to detect the cup of wonder tune.
 public class Instrument : object_base {
-	/*Musical instruments*/
+		/// Is the player currently playing an instrument		
 	public static bool PlayingInstrument;
+		/// What instrument is currently being played
 	static string CurrentInstrument;
-	static string NoteRecord;//Records the last few notes played for a puzzle.
-	//private AudioSource audio;
+		/// Records the last few notes played for a puzzle.
+	static string NoteRecord;
+
 	protected override void Start ()
 	{
 		base.Start ();
-		//audio=this.GetComponent<AudioSource>();
 	}
 
 	public override bool use ()
@@ -37,6 +41,9 @@ public class Instrument : object_base {
 
 	}
 
+		/// <summary>
+		/// Sets the instrucment play UI and state.
+		/// </summary>
 	public void PlayInstrument()
 	{
 		WindowDetectUW.WaitingForInput=true;
@@ -49,7 +56,9 @@ public class Instrument : object_base {
 		ml.Set (playerUW.StringControl.GetString (1,250));
 	}
 
-
+		/// <summary>
+		/// Plays the notes to match the keys pressed
+		/// </summary>
 	void Update()
 	{
 		if ((PlayingInstrument == true) && (CurrentInstrument==this.name))
@@ -97,6 +106,10 @@ public class Instrument : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Plays a musical note by adjusting the pitch of a note.
+		/// </summary>
+		/// <param name="note">Note to play</param>
 	void PlayNote(int note)
 	{
 	//	Debug.Log (noteNo);
@@ -118,9 +131,5 @@ public class Instrument : object_base {
 
 		this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
 		this.GetComponent<AudioSource>().Play();
-		//Debug.Log (NoteRecord);
-		//NoteRecord[]
 	}
-
-
 }

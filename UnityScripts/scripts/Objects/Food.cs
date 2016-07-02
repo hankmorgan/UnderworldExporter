@@ -61,10 +61,13 @@ public class Food : object_base {
 		return true;
 	}
 
+		/// <summary>
+		/// The quality string of the food. Eg is it disgusting or not etc.
+		/// </summary>
+		/// <returns>The flavour text.</returns>
+		/// TODO:These are the strings for fish. This needs to reflect other food types!
 	private string foodFlavourText()//Literally!
-	{//The quality string of the food. Eg is it disgusting or not etc.
-		//How it tasted?
-		//TODO:These are the strings for fish. This needs to reflect other food types!
+	{
 		if (objInt.Quality == 0)
 			{
 			return playerUW.StringControl.GetString (1,172);//worm
@@ -81,7 +84,6 @@ public class Food : object_base {
 			{
 			return playerUW.StringControl.GetString (1,175);//day old
 			}
-
 		if ((objInt.Quality >=40) && (objInt.Quality <48))
 			{
 			return playerUW.StringControl.GetString (1,176);//fresh
@@ -92,10 +94,13 @@ public class Food : object_base {
 			}
 	}
 
-	private string foodSmellText()//How appetising the food looks and smells
-	{//TODO:Integrate common object settings as appropiate. Currently everything is fish!
-		//int FoodQuality = objInt.Quality;
-		
+		/// <summary>
+		/// How appetising the food looks and smells
+		/// </summary>
+		/// <returns>The smell text.</returns>
+		/// TODO:Integrate common object settings as appropiate. Currently everything is fish!
+	private string foodSmellText()//
+	{
 		if (objInt.Quality == 0)
 		{
 			return playerUW.StringControl.GetString (5,18);//worm

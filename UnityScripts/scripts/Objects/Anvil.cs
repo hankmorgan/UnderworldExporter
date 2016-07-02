@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Anvil : object_base {
 
+	/// <summary>
+	/// The anvil becomes a special object in hand
+	/// </summary>
+	/// Actual anvil repairs handled by Equipment
 	public override bool use ()
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")

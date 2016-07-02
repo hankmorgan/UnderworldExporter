@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Bridge.
+/// </summary>
+/// Bridge Object in maps.
+/// The physical bridge is created as part of the map export but look descriptions are set up here using box colliders
 public class Bridge : object_base {
-	public int TextureIndex;//For description
+	///Texture index for the bridge description
+	public int TextureIndex;
 	public string UseLink;//A trigger to fire when used.
 
+		/// <summary>
+		/// Outputs the look description of the object
+		/// </summary>
+		/// <returns>The <see cref="System.Boolean"/>.</returns>
+		/// If flags less than 2 return a simple description
+		/// If greater than or equal to 2 return a description of the texture of the bridge
+		/// Examples: the tile puzzle in level6 seers and the Goblin shower in the tower in UW2
 	public override bool LookAt ()
 	{
 		if (objInt.flags<2)
@@ -19,6 +31,10 @@ public class Bridge : object_base {
 		}
 	}
 
+		/// <summary>
+		/// Allows using of a bridge to activate traps
+		/// </summary>
+		/// Used in the tile puzzle on the Level 6-seers
 	public override bool use ()
 	{
 		if (UseLink!="")

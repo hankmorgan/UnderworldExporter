@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/// <summary>
+/// Pauses animations and movement for the npc
+/// Effect applies to player and npc.
+/// Player effect is used for controlling the stop time state.
+/// </summary>
 public class SpellEffectFreezeTime : SpellEffect {
-	//Pauses animations and movement for the npc
+	///To pause the npc animations.
 	public Animator anim;
-	public int state;//THe state the npc was in before the spell was cast at them
+	///The state the npc was in before the spell was cast at them
+	public int state;
+	///To associated the spell effect on the NPC with the spell effect on the player
 	public long Key;
 	public bool isNPC;
 	public override void ApplyEffect ()
@@ -19,7 +25,7 @@ public class SpellEffectFreezeTime : SpellEffect {
 							anim.enabled=false;
 					}	
 			}
-				else
+			else
 				{//Player applies the effect to other npcs?
 						
 				}

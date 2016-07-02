@@ -1,34 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
+/// <summary>
+/// Magic spell casting code
+/// </summary>
+/// A whole lot of code for Casting spells and enchantments	
 
 public class Magic : MonoBehaviour {
-		/*A whole lot of code for Casting spells and enchantments*/	
-
+		
 		public static UWCharacter playerUW;
 
 		//Spell effect rules
-		public const int SpellRule_TargetOther=0;//Spell is affecting another character/thing
-		public const int SpellRule_TargetSelf=1;//Spell is cast by player and/or is affecting player character.
-		public const int SpellRule_TargetVector=2;//Spell is cast by a hostile or a spell trap along a vector
+		///Spell is affecting another character/thing
+		public const int SpellRule_TargetOther=0;
+		///Spell is cast by player and/or is affecting player character.
+		public const int SpellRule_TargetSelf=1;
+		///Spell is cast by a hostile or a spell trap along a vector
+		public const int SpellRule_TargetVector=2;
 
+		///Spelleffect is to be stored nowhere or is not a spelleffect
 		public const int SpellResultNone=0;
+		///Spelleffect is to be stored in a passive array or to an npc's array
 		public const int SpellResultPassive=1;
+		///Spell effect is to be stored in the players active spell array
 		public const int SpellResultActive=2;
 
-		//Magic spell to be cast on next click in window
+		///Magic spell to be cast on next click in window
 		public string ReadiedSpell;
-		//Runes that the character has picked up and is currently using
+
+		///Runes that the character has picked up
 		public bool[] PlayerRunes=new bool[24];
+		///Runes that the player has selected
 		public int[] ActiveRunes=new int[3];
+
+		///The player has unlimited mana
 		public bool InfiniteMana;
 
+		///How much mana the player can have
 		public int MaxMana;
+		///How much mana the player currently has
 		public int CurMana;
+		///The mana cost of the next spell the player will cast
 		public int SpellCost;
 
-		public GameObject ObjectInSlot;//For spells cast on objects in slots
-		public bool InventorySpell;//Flags a spell as castable on inventory.
+		///For spells cast on objects in slots
+		public GameObject ObjectInSlot;
+		///Flags a spell as castable on inventory.
+		public bool InventorySpell;
 
+		/// String names for the runes. 
 		string[] Runes=new string[]{"An","Bet","Corp","Des",
 				"Ex","Flam","Grav","Hur",
 				"In","Jux","Kal","Lor",
@@ -36,31 +55,49 @@ public class Magic : MonoBehaviour {
 				"Quas","Rel","Sanct","Tym",
 				"Uus","Vas","Wis","Ylem"};
 
+		///Running count of items, monsters and other random things that are summoned by magic
 		public long SummonCount=0;
 
-		//public ScrollController ml;
 
 		public void Update()
-		{//Infintite mana.
+		{//Infinite mana.
 				if ( (InfiniteMana) && (CurMana<MaxMana) )
 				{
 						CurMana=MaxMana;
 				}
 		}
 
+		/// <summary>
+		/// Sets the spell cost based on the circle of the spell x 3
+		/// </summary>
+		/// <param name="SpellCircle">Spell circle.</param>
 		public void SetSpellCost(int SpellCircle)
 		{
 				SpellCost= SpellCircle*3;
 		}
 
+		/// <summary>
+		/// Deducts the spellcost from the players mana level
+		/// </summary>
 		public void ApplySpellCost()
 		{
 				CurMana=CurMana-SpellCost;
 				SpellCost=0;
 		}
 
+		/// <summary>
+		/// Checks if the player can cast the spell.
+		/// </summary>
+		/// <returns><c>true</c>, if spell cast was tested, <c>false</c> otherwise.</returns>
+		/// <param name="casterUW">The player character casting the spell</param>
+		/// <param name="Rune1">Rune1.</param>
+		/// <param name="Rune2">Rune2.</param>
+		/// <param name="Rune3">Rune3.</param>
+		/// Tests their spell casting level
+		/// Tests their mana level
+		/// Tests their casting level (for failurs and backfires)
 		public bool TestSpellCast(UWCharacter casterUW,  int Rune1, int Rune2, int Rune3)
-		{//Checks if the player can cast the spell.
+		{
 				int TestSpellLevel=0;
 				string MagicWords=TranslateSpellRune(Rune1,Rune2,Rune3);
 				switch (MagicWords)
@@ -149,8 +186,8 @@ public class Magic : MonoBehaviour {
 						break;
 				default:
 						{
-								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Not a spell.");
-								return false;
+							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Not a spell.");
+							return false;
 						}
 				}//magicwords
 
@@ -185,14 +222,24 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
-
+		/// <summary>
+		/// Special spell for testing
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// Cast using An An An as the runes
 		public void TestSpell(GameObject caster)
-		{//Test spell for testing spell effects
-				SpellEffectMazeNavigation sep = caster.AddComponent<SpellEffectMazeNavigation>();
-				sep.counter=2;
-				sep.Go ();
+		{
+			//	SpellEffectMazeNavigation sep = caster.AddComponent<SpellEffectMazeNavigation>();
+			// sep.counter=2;
+			//	sep.Go ();
 		}
 
+		/// <summary>
+		/// Casts the spell from the selected magic runes
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="MagicWords">Magic words.</param>
+		/// <param name="ready">If set to <c>true</c> then the spell is being readied (for targetted spells), false for immediate cast</param>
 		public void castSpell(GameObject caster, string MagicWords, bool ready)
 		{
 				switch (MagicWords)
@@ -544,8 +591,15 @@ public class Magic : MonoBehaviour {
 				}//magicwords
 		}
 
+		/// <summary>
+		/// Translates the spell runes
+		/// </summary>
+		/// <returns>The spell rune.</returns>
+		/// <param name="Rune1">Rune1.</param>
+		/// <param name="Rune2">Rune2.</param>
+		/// <param name="Rune3">Rune3.</param>
 		public string TranslateSpellRune( int Rune1, int Rune2, int Rune3)
-		{ //returns the string meaning of the runes,
+		{
 
 				string MagicWords="";
 				//Construct the spell words based on selected runes
@@ -566,18 +620,27 @@ public class Magic : MonoBehaviour {
 		}
 
 
+		/// <summary>
+		/// Casts a magic spell based on the constructed magic rune string
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Rune1">Rune1.</param>
+		/// <param name="Rune2">Rune2.</param>
+		/// <param name="Rune3">Rune3.</param>
 		public void castSpell(GameObject caster, int Rune1, int Rune2, int Rune3, bool ready)
 		{
-				//Casts a magic spell based on the constructed magic rune string
-				string MagicWords="";
-				//Construct the spell words based on selected runes
-				MagicWords=TranslateSpellRune(Rune1,Rune2, Rune3);
-
-				castSpell (caster, MagicWords,ready);	
-					
+			string MagicWords="";
+			//Construct the spell words based on selected runes
+			MagicWords=TranslateSpellRune(Rune1,Rune2, Rune3);
+			castSpell (caster, MagicWords,ready);						
 		}
 
-
+		/// <summary>
+		/// Casts Magic Arrow/Missile
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_OrtJux(GameObject caster, bool Ready, int EffectID)
 		{//Magic Missile Spell
 				if (Ready==true)
@@ -593,6 +656,12 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts electric/lightning bolt.
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_OrtGrav(GameObject caster, bool Ready, int EffectID)
 		{//Lightning Bolt
 				if (Ready==true)
@@ -608,6 +677,12 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts the fireball spell
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_PorFlam(GameObject caster, bool Ready, int EffectID)
 		{//Fireball Spell
 				if (Ready==true)
@@ -623,6 +698,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts flame wind
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_FlamHur(GameObject caster, int EffectID)
 		{//Flamewind. Casts instantly.
 				SpellProp_FlameWind spFH =new SpellProp_FlameWind();
@@ -630,6 +710,11 @@ public class Magic : MonoBehaviour {
 				CastProjectile(caster, (SpellProp)spFH);
 		}
 
+		/// <summary>
+		/// Casts sheet lightning
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_VasOrtGrav(GameObject caster, int EffectID)
 		{//Sheet lightning
 				SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
@@ -637,6 +722,12 @@ public class Magic : MonoBehaviour {
 				CastProjectile(caster, (SpellProp)spVOG);
 		}
 
+		/// <summary>
+		/// Casts the magic open
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_ExYlem(GameObject caster, bool Ready, int EffectID)
 		{//Open
 				if (Ready==true)
@@ -666,6 +757,12 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Cast Strengthen Door
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_SanctJux(GameObject caster, bool Ready, int EffectID)
 		{//Strengthen DOor
 				if (Ready==true)
@@ -692,6 +789,11 @@ public class Magic : MonoBehaviour {
 		}
 
 
+		/// <summary>
+		/// Casts Cure Poison
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_AnNox(GameObject caster, int EffectID)
 		{//Cure Poison
 				//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
@@ -704,6 +806,11 @@ public class Magic : MonoBehaviour {
 				playerUW.Poisoned=false;
 		}
 
+		/// <summary>
+		/// Casts Missile Protection
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_GravSanctPor(GameObject caster, int EffectID)
 		{
 				int effectSlot = CheckActiveSpellEffect(caster);
@@ -713,11 +820,17 @@ public class Magic : MonoBehaviour {
 				}
 				else
 				{
-						SpellIncantationFailed(caster);
+					SpellIncantationFailed(caster);
 				}	
 		}
+
+		/// <summary>
+		/// Casts Time Stop
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_AnTym(GameObject caster, int EffectID)
-		{//TODO:active incantation?
+		{
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		if (SpellEffectSlot != -1)
 		{
@@ -728,6 +841,14 @@ public class Magic : MonoBehaviour {
 				SpellIncantationFailed(caster);
 		}
 		}
+
+		/// <summary>
+		/// Casts freeze time (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 
 		void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
@@ -764,19 +885,13 @@ public class Magic : MonoBehaviour {
 				}
 
 		}
-		/*
-		void Cast_AnTym(GameObject caster, int EffectID)
-		{//TODO:active incantation?
-				//pause the animations on all the npcs
-				GameObject[] npcs= GameObject.FindGameObjectsWithTag("NPCs");
-				for (int i = 0; i<=npcs.GetUpperBound(0); i++)
-				{
-						int EffectSlot =CheckPassiveSpellEffectNPC(npcs[i]);
-						Cast_FreezeTime(npcs[i],npcs[i].GetComponent<NPC>().NPCStatusEffects,EffectID,EffectSlot);
-				}
-		}
-		*/
 
+
+		/// <summary>
+		/// Casts the light spells (generic).
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_LightSpells(GameObject caster, int EffectID)
 		{//Light
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -789,35 +904,12 @@ public class Magic : MonoBehaviour {
 						SpellIncantationFailed(caster);
 				}
 		}
-		/*
-	void Cast_VasInLor(GameObject caster, int EffectID)
-	{//Daylight
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Light (caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID, SpellEffectSlot, 8, 10);//TODO:Standardise light levels.
-			//SetSpellEffect(caster,SpellEffectSlot,20);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}
-	
-	void Cast_QuasLor(GameObject caster, int EffectID)
-	{//Light
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 
-		if (SpellEffectSlot != -1)
-		{
-			Cast_NightVision (caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot, 4, 20);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}*/
-
+		/// <summary>
+		/// Casts Create Food
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_InManiYlem(GameObject caster, int EffectID)
 		{//Create food
 				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -829,14 +921,19 @@ public class Magic : MonoBehaviour {
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("UWObjects");
 						myObj.transform.position = ray.GetPoint(dropRange);
-						ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_182",true);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_" +ObjectNo, "Sprites/OBJECTS_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+						ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_182",true);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +ObjectNo, "UW1/Sprites/OBJECTS_" +ObjectNo, "UW1/Sprites/OBJECTS_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
 						fd.Nutrition=5;//TODO:determine values to use here.
 						WindowDetect.UnFreezeMovement(myObj);
 				}
 		}
 
+		/// <summary>
+		/// Create Summon Monster
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_KalMani(GameObject caster, int EffectID)
 		{//Summon monster
 				Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -852,8 +949,8 @@ public class Magic : MonoBehaviour {
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster);
 
-						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),"Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
+						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),"UW1/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "UW1/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "UW1/Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
 						string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
 						string navMeshName="";
@@ -873,28 +970,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
-		/*void Cast_HealSpells(GameObject caster, int EffectID)
-	{
-		SpellProp_Heal healprop=new SpellProp_Heal();
-		healprop.init(EffectID);
-		Cast_Heal(caster,healprop.BaseDamage);
-	}*/
-		/*
-		void Cast_InBetMani(GameObject caster, int EffectID)
-		{//Lesser Heal;
-				Cast_Heal (caster, Random.Range (1,10));
-		}
-
-		void Cast_InMani(GameObject caster, int EffectID)
-		{//Heal;
-				Cast_Heal (caster, Random.Range (10,20));
-		}
-
-		void Cast_VasInMani(GameObject caster, int EffectID)
-		{//Greater Heal;
-				Cast_Heal (caster, Random.Range (20,60));
-		}*/
-
+		/// <summary>
+		/// Cast Armageddon
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_VasKalCorp(GameObject caster, int EffectID)
 		{//Armageddon//Destroys almost everything!
 				GameObject[] allGameObj =GameObject.FindObjectsOfType(typeof(GameObject)) as GameObject[];
@@ -916,7 +996,11 @@ public class Magic : MonoBehaviour {
 		}
 
 
-
+		/// <summary>
+		/// Cast Leap/Jump
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_UusPor(GameObject caster, int EffectID)
 		{//Leap/junp
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -931,6 +1015,11 @@ public class Magic : MonoBehaviour {
 		}
 
 
+		/// <summary>
+		/// Casts slowfall
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_RelDesPor(GameObject caster, int EffectID)
 		{//SLowfall
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -945,6 +1034,11 @@ public class Magic : MonoBehaviour {
 		}
 
 
+		/// <summary>
+		/// Casts poison other
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_NoxYlem(GameObject caster, int EffectID)
 		{//poison other.
 				RaycastHit hit= new RaycastHit();
@@ -972,6 +1066,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts curse (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_Curse(GameObject caster, int EffectID)
 		{//Curse other.
 				RaycastHit hit= new RaycastHit();
@@ -998,6 +1097,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts ally
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_InManiRel(GameObject caster, int EffectID)
 		{//Ally.
 				RaycastHit hit= new RaycastHit();
@@ -1031,6 +1135,12 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Cast Confusion
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+
 		void Cast_VasAnWis(GameObject caster, int EffectID)
 		{//Confusion.
 				RaycastHit hit= new RaycastHit();
@@ -1063,8 +1173,13 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts fear
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_QuasCorp(GameObject caster, int EffectID)
-		{//Confusion.
+		{//Fear.
 				RaycastHit hit= new RaycastHit();
 				NPC npc = GetNPCTargetRandom(caster, ref hit);
 				if (npc != null)
@@ -1096,6 +1211,11 @@ public class Magic : MonoBehaviour {
 		}
 
 
+		/// <summary>
+		/// Casts Paralyze
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_AnExPor(GameObject caster,int EffectID)
 		{//Paralyze
 				RaycastHit hit= new RaycastHit();
@@ -1122,8 +1242,15 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Casts smite undead
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// Only affects undead as set by GetNPCTargetRandom
 		void Cast_AnCorpMani(GameObject caster, int EffectID)
-		{
+		{//Smite undead
 				RaycastHit hit= new RaycastHit();
 				NPC npc = GetNPCTargetRandom(caster, ref hit, 1);
 				if (npc != null)
@@ -1143,6 +1270,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts telekinesis
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_OrtPorYlem(GameObject caster, int EffectID)
 		{//Telekinesis
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1157,6 +1289,13 @@ public class Magic : MonoBehaviour {
 				}
 		}	
 
+
+		/// <summary>
+		/// Casts gate travel
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// Needs to know the position of the moonstone.
 		void Cast_VasRelPor(GameObject caster, int EffectID)
 		{//Gate Travel
 				if (playerUW!=null)
@@ -1181,6 +1320,12 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Casts the levitate spells
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_LevitateSpells(GameObject caster, int EffectID)
 		{
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1194,25 +1339,11 @@ public class Magic : MonoBehaviour {
 				}		
 		}
 
-		/*void Cast_HurPor(GameObject caster, int EffectID)
-	{//Levitate
-
-	}
-
-	void Cast_VasHurPor(GameObject caster,int EffectID)
-	{//Fly
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		//TODO:SpellProperties and merge HurPor and VasHurPor using same.
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Levitate (caster, caster.GetComponent<UWCharacter>().ActiveSpell, EffectID,SpellEffectSlot, 5);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}*/
-
+		/// <summary>
+		/// Casts Speed
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_RelTymPor(GameObject caster, int EffectID)
 		{//Speed
 				//TODO:SpellProperties
@@ -1227,6 +1358,11 @@ public class Magic : MonoBehaviour {
 				}
 		}	
 
+		/// <summary>
+		/// Casts waterwalk
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_YlemPor(GameObject caster, int EffectID)
 		{//Waterwalk
 				//TODO:SpellProperties
@@ -1241,6 +1377,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts the resistance spells.
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_ResistanceSpells(GameObject caster, int EffectID)
 		{
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1253,48 +1394,12 @@ public class Magic : MonoBehaviour {
 						SpellIncantationFailed(caster);
 				}	
 		}
-		/*
-	void Cast_BetInSanct(GameObject caster,int EffectID)
-	{ //Resist blows
-		//TODO:SpellProperties				
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot,10,1);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}
-
-	void Cast_InSanct(GameObject caster,int EffectID)
-	{ //Thick skin
-		//TODO:SpellProperties	
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot,10,2);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}
-
-	void Cast_InVasSanct(GameObject caster, int EffectID)
-	{ //Thick skin
-		int SpellEffectSlot = CheckActiveSpellEffect(caster);
-		if (SpellEffectSlot != -1)
-		{
-			Cast_Resistance(caster, caster.GetComponent<UWCharacter>().ActiveSpell,EffectID,SpellEffectSlot,10,3);
-		}
-		else
-		{
-			SpellIncantationFailed(caster);
-		}
-	}*/
-
+	
+		/// <summary>
+		/// Casts flame proof
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect I.</param>
 		void Cast_SanctFlam(GameObject caster, int EffectID)
 		{
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1308,6 +1413,12 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Roaming Sight
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_OrtPorWis(GameObject caster, int EffectID)
 		{//Roaming sight
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1321,6 +1432,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts the stealth spells.
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_StealthSpells(GameObject caster, int EffectID)
 		{//Stealth/invisibility/conceal
 				int SpellEffectSlot = CheckActiveSpellEffect(caster);
@@ -1334,6 +1450,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts detect monster.
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_DetectMonster(GameObject caster, int EffectID)
 		{//TODO: Implement this as a tracking skill.
 				SpellProp_Mind mind = new SpellProp_Mind();
@@ -1397,6 +1518,13 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Casts name enchantment.
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="Ready">If set to <c>true</c> ready.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_NameEnchantment(GameObject caster, bool Ready, int EffectID)
 		{
 				if (Ready==true)
@@ -1441,6 +1569,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Casts tremor
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_VasPorYlem(GameObject caster, int EffectID)
 		{//Tremor. Spawn a couple of arrow traps and set them off?
 				TileMap tm = GameObject.Find("Tilemap").GetComponent<TileMap>();
@@ -1459,8 +1592,8 @@ public class Magic : MonoBehaviour {
 								myObj.layer=LayerMask.NameToLayer("UWObjects");
 								myObj.transform.position=pos;
 								myObj.transform.Rotate(-90,0,0);
-								ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_386",false);
-								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", "Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+								ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_386",false);
+								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_386", "UW1/Sprites/OBJECTS_386", "UW1/Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 								arrow.item_index=339+boulderTypeOffset;
 								arrow.item_type=23;
@@ -1470,11 +1603,24 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Casts rune of warding
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect I.</param>
 		void Cast_InJux(GameObject caster, int EffectID)
 		{
 				Cast_RuneOfWarding(caster.transform.position + (transform.forward * 0.3f), EffectID);
 		}
 
+
+		/// <summary>
+		/// Casts bullfrog spell
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// Special case spell that should only work on one level that has a_do_trapBullfrog
 		void CastTheFrog(GameObject caster, int EffectID)
 		{//The bullfrog trap. Special spell.
 				a_do_trapBullfrog frog= (a_do_trapBullfrog)FindObjectOfType(typeof(a_do_trapBullfrog));
@@ -1488,9 +1634,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
-
-		/*Common spell effects that are used multiple times*/
-
+		/// <summary>
+		/// Casts the heal spell (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_Heal(GameObject caster,int EffectID)
 		{
 				SpellProp_Heal healing= new SpellProp_Heal();
@@ -1506,6 +1654,14 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Casts the resistance spells (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_Resistance(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Eg resist blows, thick skin etc
 				SpellProp_Resistance resist = new SpellProp_Resistance();
@@ -1517,6 +1673,13 @@ public class Magic : MonoBehaviour {
 		}
 
 
+		/// <summary>
+		/// Casts the flameproof. (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_Flameproof(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Eg resist blows, thick skin etc
 				SpellProp_ResistanceAgainstType resist = new SpellProp_ResistanceAgainstType();
@@ -1526,6 +1689,11 @@ public class Magic : MonoBehaviour {
 				sef.Go ();
 		}
 
+		/// <summary>
+		/// Casts the mana spells
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
 		void Cast_Mana(GameObject caster,int EffectID)
 		{//Increase (or decrease) the casters mana
 				//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
@@ -1542,6 +1710,14 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Casts the light spells (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Light spl = new SpellProp_Light();
@@ -1553,6 +1729,13 @@ public class Magic : MonoBehaviour {
 				sel.Go ();// Apply the effect and Start the timer.
 		}
 
+		/// <summary>
+		/// Casts the night vision (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect I.</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_NightVision(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Light spl = new SpellProp_Light();
@@ -1566,6 +1749,13 @@ public class Magic : MonoBehaviour {
 				//StartCoroutine(sel.timer());
 		}
 
+		/// <summary>
+		/// Casts the hallucination effect
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect I.</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_Hallucination(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mindspell = new SpellProp_Mind();
@@ -1577,6 +1767,14 @@ public class Magic : MonoBehaviour {
 				//StartCoroutine(sel.timer());
 		}
 
+
+		/// <summary>
+		/// Casts the leap spell (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_Leap(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Movement movement = new SpellProp_Movement();
@@ -1586,6 +1784,14 @@ public class Magic : MonoBehaviour {
 				lep.Go ();
 		}
 
+
+		/// <summary>
+		/// Casts the slow fall. generic
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_SlowFall(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Movement movement = new SpellProp_Movement();
@@ -1595,6 +1801,14 @@ public class Magic : MonoBehaviour {
 				slf.Go ();
 		}	
 
+
+		/// <summary>
+		/// Casts the roaming sight generic
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_RoamingSight(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mindspell = new SpellProp_Mind();
@@ -1604,6 +1818,14 @@ public class Magic : MonoBehaviour {
 				srs.Go ();
 		}	
 
+
+		/// <summary>
+		/// Casts the stealth spells (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		void Cast_Stealth(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{		
 				SpellProp_Stealth stealth = new SpellProp_Stealth();
@@ -1614,13 +1836,19 @@ public class Magic : MonoBehaviour {
 				st.Go ();			
 		}
 
+		/// <summary>
+		/// Casts the rune of warding (generic)
+		/// </summary>
+		/// <param name="pos">Position.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// 
 		void Cast_RuneOfWarding(Vector3 pos, int EffectID)
 		{
 				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
-				ObjectInteraction.CreateObjectGraphics(myObj,"Sprites/OBJECTS_393",true);
-				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "Sprites/OBJECTS_393", "Sprites/OBJECTS_393", "Sprites/OBJECTS_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
+				ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_393",true);
+				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_393", "UW1/Sprites/OBJECTS_393", "UW1/Sprites/OBJECTS_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
 				a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
 				BoxCollider bx=myObj.GetComponent<BoxCollider>();
 				if (bx==null)
@@ -1637,6 +1865,13 @@ public class Magic : MonoBehaviour {
 				playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,276));
 		}
 
+		/// <summary>
+		/// Casts the poison spells (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Poison
 				SpellProp_Poison spp = new SpellProp_Poison();
@@ -1652,6 +1887,13 @@ public class Magic : MonoBehaviour {
 				sep.Go ();
 		}
 
+		/// <summary>
+		/// Casts the resistance against type spells (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_ResistanceAgainstType(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 			SpellProp_ResistanceAgainstType resistProp = new SpellProp_ResistanceAgainstType();
@@ -1662,8 +1904,13 @@ public class Magic : MonoBehaviour {
 			resistEffect.Go();
 		}
 
-
-
+		/// <summary>
+		/// Casts the paralyze spells (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_Paralyze(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Paralyze
 				SpellProp_Mind mindspell = new SpellProp_Mind();
@@ -1676,16 +1923,14 @@ public class Magic : MonoBehaviour {
 				}
 				sep.Go ();
 		}
-		/*
-		public void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
-		{//Freeze Time
-				SpellProp_Mind mindspell = new SpellProp_Mind();
-				mindspell.init(EffectID);				
-				SpellEffectFreezeTime seft = (SpellEffectFreezeTime)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
-				seft.counter=mindspell.counter; //It will run for x ticks. Ie 10 hp damage per tick
-				seft.Go ();
-		}*/
 
+		/// <summary>
+		/// Casts the telekinesis spell generic
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Telekenisis
 				SpellProp_Mind mindspell = new SpellProp_Mind();
@@ -1695,6 +1940,13 @@ public class Magic : MonoBehaviour {
 				setk.Go ();
 		}	
 
+		/// <summary>
+		/// Casts the levitate spels (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Levitate
 				SpellProp_Movement flight = new SpellProp_Movement();
@@ -1704,6 +1956,13 @@ public class Magic : MonoBehaviour {
 				sep.Go ();
 		}
 
+		/// <summary>
+		/// Casts the speed spells generic 
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_Speed(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Speed
 				SpellProp_Movement movement = new SpellProp_Movement();
@@ -1714,8 +1973,15 @@ public class Magic : MonoBehaviour {
 				ses.Go ();
 		}	
 
+		/// <summary>
+		/// Casts the water walk spell (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_WaterWalk(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
-		{//Levitate
+		{//Waterwalk
 				SpellProp_Movement movement = new SpellProp_Movement();
 				movement.init(EffectID);				
 				SpellEffectWaterWalk seww = (SpellEffectWaterWalk)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
@@ -1723,6 +1989,14 @@ public class Magic : MonoBehaviour {
 				seww.Go ();
 		}
 
+
+		/// <summary>
+		/// Casts the maze navigation spell generic
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_MazeNavigation(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mindspell = new SpellProp_Mind();
@@ -1732,6 +2006,13 @@ public class Magic : MonoBehaviour {
 				sem.Go ();
 		}
 
+		/// <summary>
+		/// Casts the cursed item spell (generic)
+		/// </summary>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="EffectSlot">Effect slot.</param>
 		public void Cast_CursedItem(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Cursed
 				SpellProp_Curse curse = new SpellProp_Curse();
@@ -1747,16 +2028,33 @@ public class Magic : MonoBehaviour {
 
 		/* Utility code for Spells*/
 
+		/// <summary>
+		/// Spells incantation failure
+		/// </summary>
+		/// <param name="caster">Caster.</param>
 		void SpellIncantationFailed(GameObject caster)
 		{
 				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (caster.GetComponent<UWCharacter>().StringControl.GetString(1,212));
 		}
 
+		/// <summary>
+		/// Gets a Random NPC target 
+		/// </summary>
+		/// <returns>The NPC target random.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="hit">RayCast to the found npc for line of sight tests</param>
 		NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit)
 		{
 				return GetNPCTargetRandom(caster,ref hit,0)	;
 		}
 
+		/// <summary>
+		/// Gets a random npc target
+		/// </summary>
+		/// <returns>The NPC target random.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="hit">RayCast to the found npc for line of sight tests</param>
+		/// <param name="isUndead">0=Any NPCs, 1=Just Undead, 2=Except Undead</param>
 		NPC GetNPCTargetRandom(GameObject caster, ref RaycastHit hit, int isUndead)
 		{//TODO: is it better to just pick an enemy and just try and launch an invisible projectile at them.
 				//isUndead param
@@ -1813,7 +2111,14 @@ public class Magic : MonoBehaviour {
 		}
 
 
-
+		/// <summary>
+		/// Creates and sets the spell effect on the array passed
+		/// </summary>
+		/// <returns>The spell effect created</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="ActiveSpellArray">Active spell array.</param>
+		/// <param name="index">Index.</param>
+		/// <param name="EffectID">Effect I.</param>
 		SpellEffect SetSpellEffect(GameObject caster, SpellEffect[] ActiveSpellArray, int index, int EffectID)
 		{
 				//Adds an effect to the player from a spell.
@@ -2038,10 +2343,14 @@ public class Magic : MonoBehaviour {
 				return ActiveSpellArray[index];
 		}
 
+		/// <summary>
+		/// Finds the first free spell effect slot for the caster.
+		/// </summary>
+		/// <returns> If unable to find it returns -1 otherwise the array index.</returns>
+		/// <param name="caster">Caster.</param>
 		int CheckActiveSpellEffect(GameObject caster)
-		{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
-				//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-				if (playerUW!=null)
+		{
+			if (playerUW!=null)
 				{
 						for (int i =0;i<3;i++)
 						{
@@ -2058,11 +2367,14 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Finds the first free passive spell effect slot for the player character.
+		/// </summary>
+		/// <returns>If unable to find it returns -1 otherwise the array index</returns>
+		/// <param name="caster">Caster.</param>
 		int CheckPassiveSpellEffectPC(GameObject caster)
-		{//Finds the first free passive spell effect slot for the caster. If unable to find it returns -1
-				//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-
-				if (playerUW!=null)
+		{				
+			if (playerUW!=null)
 				{
 						for (int i =0;i<10;i++)
 						{
@@ -2079,6 +2391,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Finds the first free passive spell effect slot for an NPC.
+		/// </summary>
+		/// <returns>If unable to find it returns -1 otherwise the array index</returns>
+		/// <param name="caster">Caster.</param>
 		int CheckPassiveSpellEffectNPC(GameObject caster)
 		{//Finds the first free spell effect slot for the caster. If unable to find it returns -1
 				if (caster==null)
@@ -2106,6 +2423,12 @@ public class Magic : MonoBehaviour {
 
 		}
 
+		/// <summary>
+		/// Casts a magic projectile.
+		/// </summary>
+		/// <returns><c>true</c>, if projectile was cast, <c>false</c> otherwise.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="spellprop">Properties for the projectile.</param>
 		bool CastProjectile(GameObject caster, SpellProp spellprop)
 		{//Fires off the projectile
 				UWCharacter playerUWLocal = caster.GetComponent<UWCharacter>();
@@ -2142,10 +2465,15 @@ public class Magic : MonoBehaviour {
 				}
 		}	
 
-
+		/// <summary>
+		/// Casts the projectile at the target
+		/// </summary>
+		/// <returns><c>true</c>, if projectile was cast, <c>false</c> otherwise.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="target">Target.</param>
+		/// <param name="spellprop">Properties for the projectile.</param>
 		bool CastProjectile(GameObject caster, GameObject target, SpellProp spellprop)
 		{//Fires off the projectile at a gameobject.
-				//float force = 200.0f;
 				GameObject projectile = CreateMagicProjectile(caster.transform.position, caster, spellprop);
 				Vector3 direction;
 				if (spellprop.spread==0)
@@ -2183,6 +2511,14 @@ public class Magic : MonoBehaviour {
 				return true;
 		}	
 
+		/// <summary>
+		/// Casts the projectile along a vector
+		/// </summary>
+		/// <returns><c>true</c>, if projectile was cast, <c>false</c> otherwise.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="SpriteName">Sprite name.</param>
+		/// <param name="targetV">Target v.</param>
+		/// <param name="spellprop">Properties for the projectile.</param>
 		bool CastProjectile(GameObject caster, string SpriteName, Vector3 targetV, SpellProp spellprop)
 		{//Fires off the projectile at a vector3 position.
 				//float force = ;//200.0f;
@@ -2193,6 +2529,14 @@ public class Magic : MonoBehaviour {
 				return true;
 		}	
 
+
+		/// <summary>
+		/// Creates the magic projectile.
+		/// </summary>
+		/// <returns>The magic projectile.</returns>
+		/// <param name="Location">Location.</param>
+		/// <param name="Caster">Caster.</param>
+		/// <param name="spellprop">Properties for the projectile.</param>
 		GameObject CreateMagicProjectile(Vector3 Location, GameObject Caster, SpellProp spellprop)
 		{//Creates the projectile.
 				GameObject projectile = new GameObject();
@@ -2200,10 +2544,6 @@ public class Magic : MonoBehaviour {
 				projectile.name = "MagicProjectile_" + SummonCount++;
 				ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
 				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
-				//mgp.damage=spellprop.BaseDamage;
-				//mgp.spelleffect=spellprop.spelleffect;
-				//mgp.impactFrameStart=spellprop.impactFrameStart;
-				//mgp.impactFrameEnd=spellprop.impactFrameEnd;
 				mgp.spellprop=spellprop;
 
 				if (Caster.name=="NPC_Launcher")
@@ -2234,6 +2574,15 @@ public class Magic : MonoBehaviour {
 				return projectile;
 		}
 
+
+		/// <summary>
+		/// Launchs the projectile.
+		/// </summary>
+		/// <param name="projectile">Projectile.</param>
+		/// <param name="ray">Ray.</param>
+		/// <param name="dropRange">How far away from the caster to launch</param>
+		/// <param name="force">Force of the projectile</param>
+		/// <param name="spread">Spread radius</param>
 		void LaunchProjectile(GameObject projectile, Ray ray,float dropRange, float force,float spread)
 		{
 				//Vector3 ThrowDir = ray.GetPoint(dropRange)  - (projectile.transform.position);
@@ -2270,16 +2619,30 @@ public class Magic : MonoBehaviour {
 				//	projectile.GetComponent<Rigidbody>().AddForce(ThrowDir*force);
 		}
 
+		/// <summary>
+		/// Launchs the projectile directly forward
+		/// </summary>
+		/// <param name="projectile">Projectile.</param>
+		/// <param name="force">Force to apply to the projectile</param>
 		void LaunchProjectile(GameObject projectile, float force)
 		{//Launch directly forward
 				projectile.GetComponent<Rigidbody>().AddForce(projectile.transform.forward*force);
 		}
 
+		/// <summary>
+		/// Launchs the projectile along the specified vector
+		/// </summary>
+		/// <param name="projectile">Projectile.</param>
+		/// <param name="force">Force.</param>
+		/// <param name="direction">Direction to launch the projectile in</param>
 		void LaunchProjectile (GameObject projectile, float force, Vector3 direction)
 		{
 				projectile.GetComponent<Rigidbody>().AddForce (direction*force);
 		}
 
+		/// <summary>
+		/// Handles pressing Q to cast the current spell runes
+		/// </summary>
 		void OnGUI()
 		{
 				if (
@@ -2301,6 +2664,11 @@ public class Magic : MonoBehaviour {
 				}
 		}
 
+		/// <summary>
+		/// Gets a raycast from the player
+		/// </summary>
+		/// <returns>The ray</returns>
+		/// <param name="caster">Caster.</param>
 		Ray getRay(GameObject caster)
 		{
 				Ray ray ;
@@ -2315,26 +2683,50 @@ public class Magic : MonoBehaviour {
 				return ray;
 		}
 
+
+		/// <summary>
+		/// Casts the enchantment immediately
+		/// </summary>
+		/// <returns>The enchantment immediate.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="target">Target.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="SpellRule">What spell rule is applicable</param>
 		public SpellEffect CastEnchantmentImmediate(GameObject caster, GameObject target, int EffectID, int SpellRule)
 		{//Either cast enchantment now or skip straight to fire off a readied spell.
 				return CastEnchantment (caster,target,EffectID,false,SpellRule);
 		}
 
+		/// <summary>
+		/// Casts the enchantment that may need readying
+		/// </summary>
+		/// <returns>The enchantment.</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="target">Target.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="SpellRule">What spell rule is applicable</param>
 		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, int SpellRule)
 		{//Either cast enchantment now or ready it for casting.
 				return CastEnchantment (caster,target,EffectID,true,SpellRule);
 		}
 
+		/// <summary>
+		/// Casts the enchantment based on the spell rules, targets and ready state
+		/// </summary>
+		/// <returns>The enchantment applied</returns>
+		/// <param name="caster">Caster.</param>
+		/// <param name="target">Target.</param>
+		/// <param name="EffectID">Effect ID of the spell</param>
+		/// <param name="ready">If set to <c>true</c> ready.</param>
+		/// <param name="SpellRule">Spell rule to apply.</param>
+		/// Spells cast from anything that carries and enchantment.
 		public SpellEffect CastEnchantment(GameObject caster, GameObject target, int EffectID, bool ready, int SpellRule)
 		{//Eventually casts spells from things like fountains, potions, enchanted weapons.
-			//UWCharacter playerUW= caster.GetComponent<UWCharacter>();
-			//Returns true if the effect was applied. 
 			//TODO: The switch statement may need to be further divided because of passive/active effects.
 			//TODO: this list may be incomplete. I need to include things from my spreadsheet that are not status effects.
 			//UWCharacter playerUW = caster.GetComponent<UWCharacter>();
 			int ActiveArrayIndex=-1;
 			int PassiveArrayIndex=-1;
-			//int OtherArrayIndex=-1;
 			int SpellResultType= SpellResultNone;//0=no spell effect, 1= passive spell effect, 2= active spell effect.
 			SpellEffect[] other=null;
 
