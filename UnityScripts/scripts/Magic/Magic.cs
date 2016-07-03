@@ -5,7 +5,7 @@ using System.Collections;
 /// </summary>
 /// A whole lot of code for Casting spells and enchantments	
 
-public class Magic : MonoBehaviour {
+public class Magic : UWEBase {
 		
 		public static UWCharacter playerUW;
 
@@ -733,7 +733,7 @@ public class Magic : MonoBehaviour {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("UW1/Hud/Cursors/Cursors_0010");
+						playerUW.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -768,7 +768,7 @@ public class Magic : MonoBehaviour {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("UW1/Hud/Cursors/Cursors_0010");
+						playerUW.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -921,8 +921,8 @@ public class Magic : MonoBehaviour {
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("UWObjects");
 						myObj.transform.position = ray.GetPoint(dropRange);
-						ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_182",true);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +ObjectNo, "UW1/Sprites/OBJECTS_" +ObjectNo, "UW1/Sprites/OBJECTS_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_182",true);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +ObjectNo, _RES +"/Sprites/OBJECTS_" +ObjectNo, _RES +"/Sprites/OBJECTS_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
 						fd.Nutrition=5;//TODO:determine values to use here.
 						WindowDetect.UnFreezeMovement(myObj);
@@ -949,8 +949,8 @@ public class Magic : MonoBehaviour {
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster);
 
-						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),"UW1/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "UW1/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), "UW1/Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
+						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
 						string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
 						string navMeshName="";
@@ -1531,7 +1531,7 @@ public class Magic : MonoBehaviour {
 				{//Ready the spell to be cast.
 						InventorySpell=true;
 						playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
-						playerUW.CursorIcon=Resources.Load<Texture2D>("UW1/Hud/Cursors/Cursors_0010");
+						playerUW.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -1592,8 +1592,8 @@ public class Magic : MonoBehaviour {
 								myObj.layer=LayerMask.NameToLayer("UWObjects");
 								myObj.transform.position=pos;
 								myObj.transform.Rotate(-90,0,0);
-								ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_386",false);
-								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_386", "UW1/Sprites/OBJECTS_386", "UW1/Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_386",false);
+								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_386", _RES +"/Sprites/OBJECTS_386", _RES +"/Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 								arrow.item_index=339+boulderTypeOffset;
 								arrow.item_type=23;
@@ -1847,8 +1847,8 @@ public class Magic : MonoBehaviour {
 				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
-				ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_393",true);
-				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_393", "UW1/Sprites/OBJECTS_393", "UW1/Sprites/OBJECTS_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
+				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_393",true);
+				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_393", _RES +"/Sprites/OBJECTS_393", _RES +"/Sprites/OBJECTS_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
 				a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
 				BoxCollider bx=myObj.GetComponent<BoxCollider>();
 				if (bx==null)

@@ -27,8 +27,8 @@ public class a_arrow_trap : trap_base {
 		myObj.transform.position = this.transform.position;
 		myObj.transform.rotation = this.transform.rotation;
 		//myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
-		ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_" + item_index,true);
-		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" + item_index.ToString ("000"), "UW1/Sprites/OBJECTS_" + item_index.ToString ("000"), "UW1/Sprites/OBJECTS_" + item_index, item_type, item_index, 0, objInt.Quality, objInt.Owner, 1, 1, 0, 1, 0, 0, 0, 1);
+		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_" + item_index,true);
+		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" + item_index.ToString ("000"), _RES +"/Sprites/OBJECTS_" + item_index.ToString ("000"), _RES +"/Sprites/OBJECTS_" + item_index, item_type, item_index, 0, objInt.Quality, objInt.Owner, 1, 1, 0, 1, 0, 0, 0, 1);
 		myObj.AddComponent<object_base>();
 
 		//Vector3 ThrowDir;// =myObj.transform.position + (myObj.transform.rotation.eulerAngles.normalized);

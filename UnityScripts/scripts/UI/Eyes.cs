@@ -16,7 +16,7 @@ public class Eyes : GuiBase {
 		base.Start();
 		for (int i = 0 ; i <=10; i++)
 		{
-			eyes[i] = Resources.Load <Texture2D> ("UW1/HUD/Eyes/Eyes_"+ i.ToString("0000"));
+			eyes[i] = Resources.Load <Texture2D> (_RES +"/HUD/Eyes/Eyes_"+ i.ToString("0000"));
 		}
 		InvokeRepeating("Cycle",0.0f,1.0f);
 	}

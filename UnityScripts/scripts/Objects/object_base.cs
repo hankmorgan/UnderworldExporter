@@ -5,7 +5,7 @@ using UnityEngine.UI;
 /// Base class for objects and npcs
 /// Works hand in hand with ObjectInteraction
 /// </summary>
-public class object_base : MonoBehaviour {
+public class object_base : UWEBase {
 
 	public static UWCharacter playerUW;
 	/// Output control to display text on

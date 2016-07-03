@@ -13,7 +13,7 @@ public class SpellEffectHallucination : SpellEffect {
 		gs = Camera.main.gameObject.AddComponent<Grayscale>();	
 		gs.shader=Shader.Find ("Hidden/Grayscale Effect");
 		//Pick a random palette to use
-			gs.textureRamp = (Texture)Resources.Load("uw1/Palettes/palette_000" + Random.Range(0,7));
+			gs.textureRamp = (Texture)Resources.Load(_RES +"/Palettes/palette_000" + Random.Range(0,7));
 			base.ApplyEffect ();
 	}
 
@@ -22,7 +22,7 @@ public class SpellEffectHallucination : SpellEffect {
 		/// </summary>
 	public override void EffectOverTime ()
 	{
-		gs.textureRamp = (Texture)Resources.Load("uw1/Palettes/palette_000" + Random.Range(0,7));				
+		gs.textureRamp = (Texture)Resources.Load(_RES +"/Palettes/palette_000" + Random.Range(0,7));				
 		base.EffectOverTime ();
 	}
 

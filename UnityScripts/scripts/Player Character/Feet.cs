@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Feet : MonoBehaviour {
+public class Feet : UWEBase {
 	//For a game object attached to the player. Detects if the player is in contact with the ground.
 
 	public TileMap tm;
@@ -10,13 +10,7 @@ public class Feet : MonoBehaviour {
 	int waterLayer;
 	int landLayer;
 	int lavaLayer;
-	//Rigidbody playerBody;
-	//public bool onGround;
-	//public float veloY;
-	//void Start()
-	//{
-	//	playerBody=this.GetComponent<Rigidbody>();
-	//}
+
 
 	void Start()
 	{
@@ -49,8 +43,6 @@ public class Feet : MonoBehaviour {
 	}
 
 	void OnTriggerExit(Collider other) {
-		//Debug.Log ("Exit");
-	//	TileMap.OnGround=false;
 	  if (other.gameObject.layer==landLayer)
 		{
 			TileMap.OnGround=false;  

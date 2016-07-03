@@ -5,7 +5,7 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameWorldController : MonoBehaviour {
+public class GameWorldController : UWEBase {
 	/*Class for controlling the game world parameters*/
 
 	//List<Material> AnimMaterials=new List<Material>();
@@ -26,11 +26,14 @@ public class GameWorldController : MonoBehaviour {
 	public UWCharacter playerUW;
 	public MusicController mus;
 	public GameObject InventoryMarker;
+	public string game;
+	public string UI_Name;
 	//public MeshRenderer ceil;
 		void Awake()
 		{
-				instance=this;
-
+			instance=this;
+			UWEBase._RES = game;
+			UWEBase._UI=UI_Name;
 		}
 
 	void Start () {

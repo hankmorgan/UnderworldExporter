@@ -18,7 +18,7 @@ public class Combat : MonoBehaviour {
 	/// The rate per second that the attack charge increases by. Needs to be changed to reflect player combat skills.
 	public float chargeRate=33.0f;
 
-	public WeaponAnimation wpa;/// Reference to the weapon animation animator.
+
 
 	/// <summary>
 	/// Processing of the player combat idle state.

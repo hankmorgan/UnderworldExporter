@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AnimationOverlay : MonoBehaviour {
+public class AnimationOverlay : UWEBase {
 	/*
 Animation overlay for special objects (eg water fountain sprays) that have animated frames.
 	 */
@@ -20,7 +20,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 			spriteSet=true;
 			for (int i = 0; i<=63;i++)
 			{
-				sprites[i]=Resources.Load<Sprite>("UW1/Sprites/Animo/animo_" + i.ToString ("D4"));
+				sprites[i]=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + i.ToString ("D4"));
 			}
 		}
 
@@ -43,7 +43,7 @@ Animation overlay for special objects (eg water fountain sprays) that have anima
 		{
 			image = this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
-	//	image.sprite=Resources.Load<Sprite>("UW1/Sprites/Animo/animo_" + index.ToString ("D4"));
+	//	image.sprite=Resources.Load<Sprite>(_RES +"/Sprites/Animo/animo_" + index.ToString ("D4"));
 		image.sprite=sprites[index];
 	}
 	

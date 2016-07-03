@@ -131,11 +131,11 @@ public class WindowDetectUW : WindowDetect {
 						playerUW.PlayerCombat.Charge=0;
 						if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
 						{
-								playerUW.PlayerCombat.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
+								GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
 						}
 						else
 						{
-								playerUW.PlayerCombat.wpa.SetAnimation= "WeaponPutAway";
+								GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= "WeaponPutAway";
 						}
 				}
 		}
@@ -150,11 +150,11 @@ public class WindowDetectUW : WindowDetect {
 			playerUW.PlayerCombat.Charge=0;
 			if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
 			{
-				playerUW.PlayerCombat.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
+				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
 			}
 			else
 			{
-				playerUW.PlayerCombat.wpa.SetAnimation= "WeaponPutAway";
+				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= "WeaponPutAway";
 			}
 		}
 	}

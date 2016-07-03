@@ -8,7 +8,7 @@ public class SpellProp_FlameWind : SpellProp_Fireball {
 	{
 
 		base.init (effectId);
-				ProjectileSprite = "UW1/Sprites/object_blank";
+				ProjectileSprite = UWEBase._RES +"/Sprites/object_blank";
 		Force=500.0f;
 		BaseDamage=16;
 		splashDamage=8;

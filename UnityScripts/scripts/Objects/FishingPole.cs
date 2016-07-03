@@ -83,9 +83,9 @@ public override bool use ()
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
 		myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
-		ObjectInteraction.CreateObjectGraphics(myObj,"UW1/Sprites/OBJECTS_182",true);
-		//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_" +ObjectNo, "UW1/Sprites/OBJECTS_"+ObjectNo, "UW1/Sprites/OBJECTS_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
-		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/OBJECTS_182", "UW1/Sprites/OBJECTS_182", "UW1/Sprites/OBJECTS_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_182",true);
+		//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +ObjectNo, _RES +"/Sprites/OBJECTS_"+ObjectNo, _RES +"/Sprites/OBJECTS_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
+		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_182", _RES +"/Sprites/OBJECTS_182", _RES +"/Sprites/OBJECTS_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 
 		Food fd = myObj.AddComponent<Food>();
 		fd.Nutrition=5;//TODO:determine values to use here.

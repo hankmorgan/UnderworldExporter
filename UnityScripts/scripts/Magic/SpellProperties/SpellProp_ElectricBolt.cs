@@ -6,7 +6,7 @@ public class SpellProp_ElectricBolt : SpellProp {
 	public override void init(int effectId)
 	{
 		base.init (effectId);
-		ProjectileSprite = "UW1/Sprites/objects_021";
+		ProjectileSprite = UWEBase._RES +"/Sprites/objects_021";
 		Force=200.0f;
 		BaseDamage=8;
 		impactFrameStart=46;

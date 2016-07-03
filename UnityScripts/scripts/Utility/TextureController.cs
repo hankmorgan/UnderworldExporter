@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TextureController : MonoBehaviour {
+public class TextureController : UWEBase {
 
 	public int NoOfObjects=500;
 	public int NoOfTextures=500;
@@ -66,7 +66,7 @@ public class TextureController : MonoBehaviour {
 			//Debug.Log(index);
 			if (ObjectInUse[index]==false)
 			{//Sprite not already loaded. Request it.
-				ObjectSrcImage[index] = LoadImage ("UW1/Sprites/Palette/OBJECTS_BASE_",index);
+				ObjectSrcImage[index] = LoadImage (_RES +"/Sprites/Palette/OBJECTS_BASE_",index);
 				ObjectInUse[index]=true;
 			}
 			//Apply the current palette to the dst image

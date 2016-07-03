@@ -8,10 +8,10 @@ public class SpellProp_Fireball : SpellProp {
 	protected int SecondaryStartFrame;
 	protected int SecondaryEndFrame;
 	
-	public override void init(int effectId)
+public override void init(int effectId)
 	{
 		base.init (effectId);
-				ProjectileSprite = "UW1/Sprites/objects_020";
+		ProjectileSprite =UWEBase._RES +"/Sprites/objects_020";
 		Force=200.0f;
 		BaseDamage=16;
 		splashDamage=4;

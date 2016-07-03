@@ -5,7 +5,7 @@ using System.Collections;
 /// </summary>
 /// Magic spell effects that persist over time on the player or an NPC
 
-public class SpellEffect : MonoBehaviour {
+public class SpellEffect : UWEBase {
 
 	/*Enchantment Effect Ids as taken from the strings file.*/
 	public const int UW1_Spell_Effect_Darkness = 0;

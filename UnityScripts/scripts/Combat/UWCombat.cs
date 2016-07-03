@@ -18,11 +18,11 @@ public class UWCombat : Combat {
 		{ ///If not charging an attack and not executing an attack it will check interaction mode.
 			if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack))
 			{///Sets the weapon, race and handedness of the weapon animation.
-				wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
+				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
 			}
 			else
 			{///Or Hides the weapon by animating the player putting it away.
-				wpa.SetAnimation= "WeaponPutAway";
+				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= "WeaponPutAway";
 			}
 		}
 	}
@@ -36,7 +36,7 @@ public class UWCombat : Combat {
 	{ 
 		if(IsMelee())
 		{///If melee sets the proper weapon drawn back animation.
-			wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
+			GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
 		}
 		else
 		{
@@ -173,7 +173,7 @@ public class UWCombat : Combat {
 		{
 			if (IsMelee())
 			{///Sets the weapon, race and handedness animation.
-				wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
+				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
 				AttackExecuting=true;
 				StartCoroutine(ExecuteMelee());
 			}

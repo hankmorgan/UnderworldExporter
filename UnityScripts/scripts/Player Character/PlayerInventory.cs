@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-public class PlayerInventory : MonoBehaviour {
+public class PlayerInventory : UWEBase {
 
 	//The game objects at the various slots. (not in use?)
 
@@ -81,7 +81,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Blank = Resources.Load <Texture2D> ("UW1/Sprites/Texture_Blank");
+		Blank = Resources.Load <Texture2D> (_RES +"/Sprites/Texture_Blank");
 		atTopLevel=true;
 		playerUW=this.GetComponent<UWCharacter>();
 		playerContainer =this.GetComponent<Container>();

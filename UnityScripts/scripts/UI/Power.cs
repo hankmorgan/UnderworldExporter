@@ -46,7 +46,7 @@ public class Power : GuiBase {
 				if (index!=PreviousIndex)
 				{
 					RepeatCounter=0;
-					uiPowerGem.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ index.ToString("0000"));
+					uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ index.ToString("0000"));
 					//CurrentPower="HUD/Power/Power_"+ index.ToString("0000");
 				}
 			}
@@ -56,7 +56,7 @@ public class Power : GuiBase {
 			if (IsInvoking("UpdateMaxCharge"))
 			{
 				CancelInvoke("UpdateMaxCharge");
-				uiPowerGem.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ 0.ToString("0000"));
+				uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ 0.ToString("0000"));
 			}
 			RepeatCounter=0;
 		}
@@ -67,8 +67,8 @@ public class Power : GuiBase {
 	/// </summary>
 	public void UpdateMaxCharge()
 	{
-		uiPowerGem.texture=Resources.Load <Texture2D> ("UW1/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
-		//CurrentPower="UW1/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
+		uiPowerGem.texture=Resources.Load <Texture2D> (_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000"));
+		//CurrentPower=_RES +"/HUD/Power/Power_"+ (10+RepeatCounter).ToString("0000");
 		RepeatCounter++;
 		if (RepeatCounter>3)
 		{

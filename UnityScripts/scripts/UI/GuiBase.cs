@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// 
 /// Base class for UI components. Allows moving of elements and sets up common references.
 /// </summary>
-public class GuiBase : MonoBehaviour {
+public class GuiBase : UWEBase {
 
 	//public static UWCharacter playerUW;///Reference to the player character.
 

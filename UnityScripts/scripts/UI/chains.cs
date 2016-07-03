@@ -5,7 +5,7 @@ public class chains : GuiBase_Draggable {
 	/*GUI Element for switching panel displays but also controls which other GUI elements are displayed.*/
 	public static int ActiveControl;
 	public static int setControl=-1;
-
+	static GameObject ControlParent;
 	public void OnClick()
 	{
 	if (Dragging==true){return;}
@@ -33,7 +33,11 @@ public class chains : GuiBase_Draggable {
 
 	public static GameObject EnableDisableControl(string ControlName, bool targetState)
 	{
-		GameObject ControlParent= GameObject.Find ("_UI");
+		if (ControlParent==null)
+			{
+				ControlParent= GameObject.Find (UWEBase._UI);	
+			}
+		//GameObject ControlParent= GameObject.Find ("_UI");
 		//Debug.Log (ControlParent.name);
 		foreach(Transform child in ControlParent.transform)
 		{

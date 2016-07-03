@@ -34,7 +34,7 @@ public class Compass : GuiBase_Draggable {
 		comp=this.GetComponent<RawImage>();
 		for (int i=0;i<4;i++)
 		{
-			CompassPoles[i]=Resources.Load <Texture2D> ("UW1/HUD/Compass/Compass_000"+i.ToString());
+			CompassPoles[i]=Resources.Load <Texture2D> (_RES +"/HUD/Compass/Compass_000"+i.ToString());
 		}
 	}
 
