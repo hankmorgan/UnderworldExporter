@@ -289,7 +289,8 @@ public class NPC : object_base {
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npc_whoami=256+(objInt.item_id -64);
 			}
-			Conversation cnv = (Conversation)this.GetComponent("Conversation_"+npc_whoami);//Get the conversation object
+			//Conversation cnv = (Conversation)this.GetComponent("Conversation_"+npc_whoami);//Get the conversation object
+			Conversation cnv =this.GetComponent<Conversation>();
 			if (cnv!=null)
 			{	
 				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.

@@ -478,7 +478,7 @@ public class Conversation : GuiBase {
 		/// The NPC says something.
 		/// </summary>
 		/// <param name="WhatToSay">What to say as a string</param>
-	private IEnumerator say(string WhatToSay)
+	public IEnumerator say(string WhatToSay)
 	{
 		yield return StartCoroutine (say(WhatToSay, NPC_SAY));
 	}

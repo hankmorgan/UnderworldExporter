@@ -40,11 +40,11 @@ void ExtractConversations(int game)
 			int convSlot = getValAtAddress(bab,add_ptr,16);
 			add_ptr = add_ptr + 2;
 			int convSlotSize = getValAtAddress(bab, add_ptr, 16);
-			fprintf(LOGFILE,"Slot %d - Size %d\n", convSlot,convSlotSize);
+			//fprintf(LOGFILE,"Slot %d - Size %d\n", convSlot,convSlotSize);
 			for (int k = 0; k < convSlotSize; k++)
 				{
 				add_ptr = add_ptr + 2;
-				fprintf(LOGFILE, "\tGlobal (%d) %d\n",k, getValAtAddress(bab,add_ptr,16));	
+				//fprintf(LOGFILE, "\tGlobal (%d) %d\n",k, getValAtAddress(bab,add_ptr,16));	
 				}
 			add_ptr = add_ptr + 2;
 			}

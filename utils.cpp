@@ -439,11 +439,13 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 
 	//Initial values for the loop for calculating block addresses.
 	BlockAddress[0] = getValAtAddress(lev_ark, 6 , 32);//The first block stays the same
+	int FoundFirst=0;
 	long LastBlockAddress = BlockAddress[0];
+	int firstBlock;//Containing Data.
 	PreviousUsedLength = 0;
-
 	for (int x = 0; x < NoOfBlocks; x++)
 		{
+
 		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
 		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
 		DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
@@ -456,13 +458,40 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 					{
 					unpackUW2(lev_ark, currAddress, &DataLen);		//Unpack and see how much space I need to allow for.
 					mapSize[x]=DataLen;
-					BlockAddress[x] = LastBlockAddress + PreviousUsedLength;  //Size of a map block
+					
+					if (FoundFirst == 0)
+						{//The first block containing data stays the same.
+						if (REPACK_INTO_UW1_HACK == 1)
+							{
+							BlockAddress[x] = 1286;//Conversation start //currAddress;
+							}
+						else
+							{
+							BlockAddress[x]=currAddress;
+							}
+						
+						firstBlock=x;
+						FoundFirst = 1;
+						}
+					else
+						{
+						BlockAddress[x] = LastBlockAddress + PreviousUsedLength;  //Size of a map block
+						}					
 					LastBlockAddress = BlockAddress[x];
 					PreviousUsedLength = mapSize[x];
 					}
 				else
 					{
-					BlockAddress[x] = LastBlockAddress + PreviousUsedLength;
+					if (FoundFirst == 1)
+						{
+						BlockAddress[x] = currAddress;
+						firstBlock = x;
+						FoundFirst = 1;
+						}
+					else
+						{
+						BlockAddress[x] = LastBlockAddress + PreviousUsedLength;
+						}					
 				    LastBlockAddress = BlockAddress[x];
 				    PreviousUsedLength = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 				    //Set mapsize here???
@@ -496,79 +525,89 @@ void RepackUW2(char InputFile[255], char OutputFile[255],int BlocksToUnpack)
 		return;
 		}
 
-
 	//Write the number of blocks
 	WriteInt16(file,NoOfBlocks);
+
 	//write 4x0
+//was wrrite int 32. conversations have 2? maps have 4?
 	WriteInt32(file, 0);
+
 
 	//write my block addresses. increment by the size of the decompressed data.
 	for (int x = 0; x < NoOfBlocks; x++)
 	{
 		//long currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
-		WriteInt32(file, BlockAddress[x]);
+
+		fprintf(LOGFILE, "\nBlock %d at %d",x, BlockAddress[x]);
+
+			WriteInt32(file, BlockAddress[x]);
+	
 	}
 
-	//write my compression flags. each shoudld be 0 0 0
-	for (int x = 0; x < NoOfBlocks; x++)
-	{
-		compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-		DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
-		isCompressed = (compressionFlag >> 1) & 0x01;
-		if (x<BlocksToUnpack)
-			{
-				WriteInt32(file, 0);
-			}
-		else
-		{//copy the existing flags.
-			compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
-			WriteInt32(file,compressionFlag);
-		}
-	}
-	//write the space used
-	for (int x = 0; x < NoOfBlocks; x++)
-	{
-		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
-		if (x <BlocksToUnpack)
+	if (REPACK_INTO_UW1_HACK==0)
 		{
-			if (currAddress != 0)
+		//write my compression flags. each shoudld be 0 0 0
+		for (int x = 0; x < NoOfBlocks; x++)
+		{
+			compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+			DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+			isCompressed = (compressionFlag >> 1) & 0x01;
+			if (x<BlocksToUnpack)
 				{
-				WriteInt32(file, mapSize[x]);
+					WriteInt32(file, 0);
 				}
 			else
-				{
+			{//copy the existing flags.
+				compressionFlag = getValAtAddress(lev_ark, address_pointer + (NoOfBlocks * 4) + (x * 4), 32);
+				WriteInt32(file,compressionFlag);
+			}
+		}
+		//write the space used
+		for (int x = 0; x < NoOfBlocks; x++)
+		{
+			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			if (x <BlocksToUnpack)
+			{
+				if (currAddress != 0)
+					{
+					WriteInt32(file, mapSize[x]);
+					}
+				else
+					{
+					DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+					WriteInt32(file, DataLen);
+					}
+			}
+			else
+			{//copy the existing values
 				DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 				WriteInt32(file, DataLen);
-				}
+			}
 		}
-		else
-		{//copy the existing values
-			DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
-			WriteInt32(file, DataLen);
-		}
-	}
-	//write my available space should not matter for decompression so I'll just put the block size here (?)
-	for (int x = 0; x < NoOfBlocks; x++)
-	{
-		currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
-		if (x <BlocksToUnpack)
+		//write my available space should not matter for decompression so I'll just put the block size here (?)
+		for (int x = 0; x < NoOfBlocks; x++)
 		{
-			if (currAddress != 0)
+			currAddress = getValAtAddress(lev_ark, 6 + (x * 4), 32);
+			if (x <BlocksToUnpack)
 			{
-				WriteInt32(file, mapSize[x]);
+				if (currAddress != 0)
+				{
+					WriteInt32(file, mapSize[x]);
+				}
+				else
+				{
+					int DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
+					WriteInt32(file, DataLen);
+				}
 			}
 			else
-			{
+			{//copy the existing values
 				int DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
 				WriteInt32(file, DataLen);
 			}
 		}
-		else
-		{//copy the existing values
-			int DataLen = getValAtAddress(lev_ark, address_pointer + (UW2_SIZE_BLOCK * (NoOfBlocks * 4)) + (x * 4), 32);
-			WriteInt32(file, DataLen);
-		}
 	}
+
 	//write my uncompressed blocks.
 	for (int x = 0; x < NoOfBlocks; x++)
 		{

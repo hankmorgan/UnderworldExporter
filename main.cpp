@@ -95,7 +95,7 @@ int main()
 	uw_game_files[3] = "Save2\\lev.ark";
 	uw_game_files[4] = "Save3\\lev.ark";
 	uw_game_files[5] = "Save4\\lev.ark";
-	uw_game_files[6] = "data\\byt.ark";	//UW2 ark files.
+	uw_game_files[6] = "data\\cnv.ark";	//UW2 ark files.
 
 	const char *shock_game_files[9];
 	shock_game_files[0] = "Data\\archive.dat";
