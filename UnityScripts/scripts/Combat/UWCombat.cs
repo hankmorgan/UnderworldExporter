@@ -55,7 +55,7 @@ public class UWCombat : Combat {
 			else
 			{
 				//Change the crosshair
-				GameWorldController.instance.playerUW.CursorIcon=GameWorldController.instance.playerUW.CursorIconTarget;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.CursorIconTarget;
 			}
 		}
 		///Starts the counter
@@ -155,7 +155,7 @@ public class UWCombat : Combat {
 		base.ExecuteRanged ();
 
 		///Removes the cursor
-		GameWorldController.instance.playerUW.CursorIcon=GameWorldController.instance.playerUW.CursorIconDefault;
+		GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 		///Launches the ammo using LaunchAmmo
 		if (currentAmmo!=null)
 		{

@@ -81,7 +81,7 @@ public class object_base : UWEBase {
 		if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
 		{
 			FailMessage();
-			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 			playerUW.playerInventory.ObjectInHand="";
 			return true;
 		}
@@ -136,7 +136,7 @@ public class object_base : UWEBase {
 		/// </summary>
 	public void BecomeObjectInHand()
 	{//In order to use it.
-		playerUW.CursorIcon= objInt.InventoryDisplay.texture;
+		playerUW.playerHud.CursorIcon= objInt.InventoryDisplay.texture;
 		playerUW.playerInventory.ObjectInHand=this.name;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;

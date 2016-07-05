@@ -175,7 +175,7 @@ public class Conversation : GuiBase {
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
 		{
-			npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charheads/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
+			npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/Charhead/charhead_"+ (npc.npc_whoami-1).ToString("0000"));			
 		}	
 		else
 		{

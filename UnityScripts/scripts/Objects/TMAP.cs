@@ -87,7 +87,7 @@ public class TMAP : object_base {
 							)
 						{
 							objIntTrigger.GetComponent<trigger_base> ().Activate();
-							playerUW.CursorIcon= playerUW.CursorIconDefault;
+							playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 							playerUW.playerInventory.ObjectInHand="";
 							return true;
 						}

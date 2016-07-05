@@ -38,7 +38,7 @@ public class Lantern : LightSource {
 						objIntUsed.consumeObject();
 					}
 				}
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return true;
 			default:

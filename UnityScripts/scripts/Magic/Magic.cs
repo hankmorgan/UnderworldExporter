@@ -646,7 +646,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						ReadiedSpell= "Ort Jux";
-						playerUW.CursorIcon=playerUW.CursorIconTarget;
+						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconTarget;
 				}
 				else
 				{
@@ -667,7 +667,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						ReadiedSpell= "Ort Grav";
-						playerUW.CursorIcon=playerUW.CursorIconTarget;
+						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconTarget;
 				}
 				else
 				{
@@ -688,7 +688,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						ReadiedSpell= "Por Flam";
-						playerUW.CursorIcon=playerUW.CursorIconTarget;
+						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconTarget;
 				}
 				else
 				{
@@ -733,12 +733,12 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
-						playerUW.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						playerUW.playerHud.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
 						playerUW.PlayerMagic.ReadiedSpell="";
-						playerUW.CursorIcon=playerUW.CursorIconDefault;
+						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 						Ray ray = getRay (caster);
 						RaycastHit hit = new RaycastHit(); 
 						float dropRange=playerUW.GetUseRange();
@@ -768,12 +768,12 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
-						playerUW.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						playerUW.playerHud.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
 						playerUW.PlayerMagic.ReadiedSpell="";
-						playerUW.CursorIcon=playerUW.CursorIconDefault;
+						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 						Ray ray = getRay (caster);
 						RaycastHit hit = new RaycastHit(); 
 						float dropRange=playerUW.GetUseRange();
@@ -1531,7 +1531,7 @@ public class Magic : UWEBase {
 				{//Ready the spell to be cast.
 						InventorySpell=true;
 						playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
-						playerUW.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						playerUW.playerHud.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -1540,7 +1540,7 @@ public class Magic : UWEBase {
 						if (WindowDetect.CursorInMainWindow)
 						{
 								playerUW.PlayerMagic.ReadiedSpell="";		
-								playerUW.CursorIcon=playerUW.CursorIconDefault;
+								playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 								Ray ray = getRay (caster);
 								RaycastHit hit = new RaycastHit(); 
 								float dropRange=playerUW.GetUseRange();
@@ -1558,7 +1558,7 @@ public class Magic : UWEBase {
 								if (ObjectInSlot!=null)	
 								{
 										ReadiedSpell= "";
-										playerUW.CursorIcon=playerUW.CursorIconDefault;
+										playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 										ObjectInteraction objInt =ObjectInSlot.GetComponent<ObjectInteraction>();
 										if (objInt!=null)
 										{
@@ -2448,7 +2448,7 @@ public class Magic : UWEBase {
 										LaunchProjectile(projectile,ray,dropRange,spellprop.Force,spellprop.spread);										
 								}
 
-								playerUW.CursorIcon=playerUW.CursorIconDefault;
+								playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 								return true;
 						}
 						return false;

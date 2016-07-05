@@ -19,7 +19,7 @@ public class UWCharacter : Character {
 
 	public int Body;//Which body/portrait this character has 
 
-	public UWHUD playerHud;
+
 
 	//Character related info
 	//Character Details
@@ -87,7 +87,7 @@ public class UWCharacter : Character {
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
-		Cursor.SetCursor (CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
+		Cursor.SetCursor (playerHud.CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
 		//GuiBase.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		InteractionMode=UWCharacter.DefaultInteractionMode;
 
@@ -149,7 +149,7 @@ public class UWCharacter : Character {
 		if (PlayerMagic.ReadiedSpell!="")
 		{
 			PlayerMagic.ReadiedSpell="";
-			CursorIcon=CursorIconDefault;
+			playerHud.CursorIcon=playerHud.CursorIconDefault;
 		}
 	}
 

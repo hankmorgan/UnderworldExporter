@@ -580,7 +580,7 @@ public class PlayerInventory : UWEBase {
 			cn.AddItemToContainer(cObjectInHand,ContainerOffset + slotIndex-11);
 			}
 		ObjectInHand= ObjInSlot.name;
-		playerUW.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+		playerUW.playerHud.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 		//playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
 		Refresh();
 	}

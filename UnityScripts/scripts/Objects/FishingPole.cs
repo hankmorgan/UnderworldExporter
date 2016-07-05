@@ -51,7 +51,7 @@ public override bool use ()
 							if (FishobjInt!=null)
 							{
 								FishobjInt.UpdateAnimation();
-								playerUW.CursorIcon= FishobjInt.InventoryDisplay.texture;
+								playerUW.playerHud.CursorIcon= FishobjInt.InventoryDisplay.texture;
 							}
 
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

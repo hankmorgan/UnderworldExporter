@@ -95,8 +95,8 @@ public class TradeSlot : GuiBase {
 			{//Empty slot
 				objectInSlot=GameWorldController.instance.playerUW.playerInventory.ObjectInHand;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
-				SlotImage.texture=GameWorldController.instance.playerUW.CursorIcon;
-				GameWorldController.instance.playerUW.CursorIcon=GameWorldController.instance.playerUW.CursorIconDefault;
+				SlotImage.texture=GameWorldController.instance.playerUW.playerHud.CursorIcon;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 				Selected=true;
 			}
 			else
@@ -105,7 +105,7 @@ public class TradeSlot : GuiBase {
 				tmp = objectInSlot;
 				objectInSlot=GameWorldController.instance.playerUW.playerInventory.ObjectInHand;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand=tmp;
-				GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				Selected=true;
 			}
 		}
@@ -115,7 +115,7 @@ public class TradeSlot : GuiBase {
 			{
 				//Pickup the object in the slot
 				GameWorldController.instance.playerUW.playerInventory.SetObjectInHand(objectInSlot);
-				GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				objectInSlot="";
 				SlotImage.texture=Blank;
 				Selected=false;

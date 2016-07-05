@@ -98,7 +98,7 @@ public class Equipment : object_base {
 		}
 		//cancel the repair 
 		playerUW.playerInventory.ObjectInHand="";
-		playerUW.CursorIcon=playerUW.CursorIconDefault;
+		playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 	}
 
 	public override bool LookAt ()

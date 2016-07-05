@@ -36,7 +36,7 @@ public class InventorySlot : GuiBase {
 		{
 			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
 			{
-				GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.CursorIconDefault;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 			}
 		}
@@ -189,13 +189,13 @@ public class InventorySlot : GuiBase {
 					//if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
 							{
 							ObjectInteraction.Merge (ObjectUsedOn.GetComponent<ObjectInteraction>(), objInt);
-							GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.CursorIconDefault;
+							GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 							GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 							GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
 
 								//merge the items
 								/*ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
-								GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.CursorIconDefault;
+								GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 								GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 								Destroy(objInt.gameObject);*/
 								return;
@@ -211,7 +211,7 @@ public class InventorySlot : GuiBase {
 				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex))
 					{
 						GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
-						GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.CursorIconDefault;
+						GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.SetObjectInHand("");
 					}
 				}
@@ -239,7 +239,7 @@ public class InventorySlot : GuiBase {
 						{//Pick up the item at that slot.
 						//TODO: Make this work with Equipment slots
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
-						GameWorldController.instance.playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						GameWorldController.instance.playerUW.playerHud.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						//GameWorldController.instance.playerUW.CurrObjectSprite = ObjectUsedOn.GetComponent<ObjectInteraction>().InventoryString;
 						if (this.slotIndex>=11)
 							{
@@ -278,7 +278,7 @@ public class InventorySlot : GuiBase {
 						//merge the items
 						ObjectInteraction.Merge (ObjectUsedOn.GetComponent<ObjectInteraction>(),objInt);
 						//ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
-						GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.CursorIconDefault;
+						GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 						GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
 						//Destroy(objInt.gameObject);
@@ -300,7 +300,7 @@ public class InventorySlot : GuiBase {
 								return ;
 							}
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
-						GameWorldController.instance.playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+						GameWorldController.instance.playerUW.playerHud.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						if (this.slotIndex>=11)
 						{
 						//Container cn = //;GameObject.Find(pInv.currentContainer).GetComponent<Container>();
@@ -319,7 +319,7 @@ public class InventorySlot : GuiBase {
 				if (Container.TestContainerRules(GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer(),slotIndex))
 					{
 						GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(slotIndex,GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
-						GameWorldController.instance.playerUW.CursorIcon= GameWorldController.instance.playerUW.CursorIconDefault;
+						GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.SetObjectInHand("");// .ObjectInHand="";
 					}
 				}
@@ -359,8 +359,8 @@ public class InventorySlot : GuiBase {
 						if ((!objIntUsedOn.IsStackable()) || ( (objIntUsedOn.IsStackable()) &&  (objIntUsedOn.GetQty()==1)))
 							{//Is either not a quant or is a quantity of 1
 							GameWorldController.instance.playerUW.playerInventory.ObjectInHand= ObjectUsedOn.name;
-							//GameWorldController.instance.playerUW.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
-							GameWorldController.instance.playerUW.CursorIcon= objIntUsedOn.GetInventoryDisplay ().texture;
+							//GameWorldController.instance.playerUW.playerHud.CursorIcon= ObjectUsedOn.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+							GameWorldController.instance.playerUW.playerHud.CursorIcon= objIntUsedOn.GetInventoryDisplay ().texture;
 							if (this.slotIndex>=11)
 							{
 								GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(GameWorldController.instance.playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
@@ -449,7 +449,7 @@ public class InventorySlot : GuiBase {
 			if (quant >= QuantityObj.GetComponent<ObjectInteraction>().Link)
 			{
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= QuantityObj.name;
-				GameWorldController.instance.playerUW.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon= QuantityObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				if (this.slotIndex>=11)
 				{
 					GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(GameWorldController.instance.playerUW.playerInventory.ContainerOffset+this.slotIndex-11);
@@ -465,7 +465,7 @@ public class InventorySlot : GuiBase {
 				Split.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;//this.transform.parent;
 				QuantityObj.GetComponent<ObjectInteraction>().Link=QuantityObj.GetComponent<ObjectInteraction>().Link-quant;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= Split.name;
-				GameWorldController.instance.playerUW.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				GameWorldController.instance.playerUW.playerHud.CursorIcon= Split.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				ObjectInteraction.Split (Split.GetComponent<ObjectInteraction>(),QuantityObj.GetComponent<ObjectInteraction>());
 				GameWorldController.instance.playerUW.playerInventory.Refresh (slotIndex);
 				QuantityObj=null;//Clear out to avoid weirdness.

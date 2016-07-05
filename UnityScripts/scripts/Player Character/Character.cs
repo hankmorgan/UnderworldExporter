@@ -22,13 +22,8 @@ public class Character : UWEBase {
 	//The storage location for container items.
 	public static GameObject InvMarker;
 
-
-	//The cursor to display on the gui
-	public RawImage MouseLookCursor;
-	public Texture2D CursorIcon;
-	public Texture2D CursorIconDefault;
-	public Texture2D CursorIconBlank;
-	public Texture2D CursorIconTarget; //Default Cursor for ranged spells and combat.
+		//Reference to the UW Hud.
+	public UWHUD playerHud;
 
 	//Reference to a C# version of the standard character controller.
 	public CharacterMotorC playerMotor;
@@ -205,7 +200,7 @@ public class Character : UWEBase {
 			Container.SetItemsParent(objPicked.GetComponent<Container>(),InvMarker.transform);
 			Container.SetItemsPosition (objPicked.GetComponent<Container>(),InvMarker.transform.position);
 		}
-		CursorIcon=objPicked.GetInventoryDisplay().texture;
+		playerHud.CursorIcon=objPicked.GetInventoryDisplay().texture;
 		pInv.ObjectInHand=objPicked.transform.name;
 		//////pInv.JustPickedup=true;//To stop me throwing it away immediately.
 		if (objPicked.GetComponent<Rigidbody>() !=null)

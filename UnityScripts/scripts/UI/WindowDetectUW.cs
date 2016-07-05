@@ -88,7 +88,7 @@ public class WindowDetectUW : WindowDetect {
 					{
 					OnClick();
 					}
-				else if ((playerUW.CursorInMainWindow) && (pInv.ObjectInHand!="") && (MouseHeldDown==false) && (UWCharacter.InteractionMode==UWCharacter.InteractionModePickup))
+				else if ((playerUW.playerHud.CursorInMainWindow) && (pInv.ObjectInHand!="") && (MouseHeldDown==false) && (UWCharacter.InteractionMode==UWCharacter.InteractionModePickup))
 					{//Drop the object in hand.
 					ThrowObjectInHand();
 					}*/
@@ -300,13 +300,13 @@ public class WindowDetectUW : WindowDetect {
 				}
 				else
 				{
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 					playerUW.playerInventory.ObjectInHand="";
 				}
 			}
 			else
 			{
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 			}
 		}
@@ -390,7 +390,7 @@ public class WindowDetectUW : WindowDetect {
 					}
 					
 					//Clear the object and reset the cursor
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 					playerUW.playerInventory.SetObjectInHand("");
 				}
 				
@@ -488,8 +488,8 @@ public class WindowDetectUW : WindowDetect {
 			playerUW.MouseLookEnabled=false;
 			Cursor.lockState = CursorLockMode.None;
 			CursorPosition.center = Event.current.mousePosition;
-			GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
-			playerUW.MouseLookCursor.texture= playerUW.CursorIconBlank;
+			GUI.DrawTexture (CursorPosition,playerUW.playerHud.CursorIcon);
+			playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;
 		}
 		else
 		{
@@ -527,14 +527,14 @@ public class WindowDetectUW : WindowDetect {
 			
 			if (playerUW.MouseLookEnabled == true)
 			{
-				playerUW.MouseLookCursor.texture=playerUW.CursorIcon;	
+				playerUW.playerHud.MouseLookCursor.texture=playerUW.playerHud.CursorIcon;	
 								//TODO:draw the cursor in the middle
 			}
 			else
 			{
 				CursorPosition.center = Event.current.mousePosition;
-				GUI.DrawTexture (CursorPosition,playerUW.CursorIcon);
-				playerUW.MouseLookCursor.texture= playerUW.CursorIconBlank;
+				GUI.DrawTexture (CursorPosition,playerUW.playerHud.CursorIcon);
+				playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;
 			}		
 		}
 	}

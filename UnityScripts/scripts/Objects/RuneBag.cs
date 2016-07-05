@@ -38,7 +38,7 @@ public class RuneBag : object_base {
 			//Add rune to rune bag and destroy the original object.
 			GameObject.Destroy(ObjectUsed);
 			playerUW.playerInventory.ObjectInHand="";
-			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 			return true;
 		}
 		else

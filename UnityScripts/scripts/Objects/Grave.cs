@@ -58,7 +58,7 @@ public class Grave : object_base {
 							objIntUsed.consumeObject ();
 							trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
 						}
-						playerUW.CursorIcon= playerUW.CursorIconDefault;
+						playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 						playerUW.playerInventory.ObjectInHand="";						
 						return true;
 					}
@@ -66,7 +66,7 @@ public class Grave : object_base {
 					{//Regular bones
 					//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 					ml.Add(playerUW.StringControl.GetString (1,259));
-					playerUW.CursorIcon= playerUW.CursorIconDefault;
+					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 					playerUW.playerInventory.ObjectInHand="";
 					return true;
 					}
@@ -82,13 +82,13 @@ public class Grave : object_base {
 			{
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 				ml.Add(playerUW.StringControl.GetString (1,259));
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return true;
 			}
 			else
 			{
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
 			}

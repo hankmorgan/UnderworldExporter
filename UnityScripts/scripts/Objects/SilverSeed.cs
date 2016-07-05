@@ -19,7 +19,7 @@ public class SilverSeed : object_base {
 				animo.Stop ();
 			}
 			objInt.UpdateAnimation();//Update the inventory display
-			playerUW.CursorIcon = objInt.GetInventoryDisplay().texture;
+			playerUW.playerHud.CursorIcon = objInt.GetInventoryDisplay().texture;
 			playerUW.ResurrectPosition=Vector3.zero;
 			objInt.SetWorldDisplay(objInt.GetInventoryDisplay());
 			ml.Add (playerUW.StringControl.GetString (1,9));
@@ -53,7 +53,7 @@ public class SilverSeed : object_base {
 				ml.Add(playerUW.StringControl.GetString (1,12));
 
 
-				playerUW.CursorIcon = playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon = playerUW.playerHud.CursorIconDefault;
 				playerUW.ResurrectPosition=playerUW.transform.position;
 				objInt.gameObject.transform.parent=null;
 				objInt.transform.position=playerUW.transform.position;//TODO:Position the tree properly

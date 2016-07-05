@@ -189,12 +189,12 @@ public class ButtonHandler : object_base {
 			{
 			case ObjectInteraction.POLE:
 				playerUW.playerInventory.ObjectInHand="";
-				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 				ml.Set (playerUW.StringControl.GetString(1,157));
 				return Activate();
 			default:
 				playerUW.playerInventory.ObjectInHand="";
-				playerUW.CursorIcon=playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
 				objIntUsed.FailMessage();
 				return false;
 			}

@@ -598,7 +598,7 @@ public class ObjectInteraction : UWEBase {
 				if (CreatedObjectInt!=null)
 					{
 					CreatedObjectInt.UpdateAnimation();
-					playerUW.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
+					playerUW.playerHud.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
 					}
 				
 				UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

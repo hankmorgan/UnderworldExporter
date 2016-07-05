@@ -31,7 +31,7 @@ public class DoorControl : object_base {
 		{
 			ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 			//Clear the object in hand
-			playerUW.CursorIcon= playerUW.CursorIconDefault;
+			playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 			playerUW.playerInventory.ObjectInHand="";
 			return true;	
 		}

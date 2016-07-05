@@ -167,7 +167,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 			cyclePalette(pal, 16, 7);//Reverse direction.
 			char paletteOutname[256];
 			sprintf(paletteOutname, "Palette_%d_frame", p);
-			writeTGA(Allpalettefile, 0, 256,16, paletteFrame, pal, paletteOutname, 1);
+			//writeTGA(Allpalettefile, 0, 256,16, paletteFrame, pal, paletteOutname, 1);
 			}
 
 		}
@@ -2951,7 +2951,7 @@ for (int k = 0; k< NoOfChunks; k++)
 	}
 
 
-void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255], char auxPalPath[255], char animFile[255], int useTGA)
+void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255], char auxPalPath[255], char animFile[255], int useTGA , int game)
 	{
 //todo tomorrow
 	unsigned char *AnimData;
@@ -3014,6 +3014,12 @@ int add_ptr=0;
 			{
 			int MaxHeight = 112;
 			int MaxWidth = 172;
+			if (game == UW2)
+				{//TODO:FIgur out the correct values for this.
+				MaxHeight = 300;
+				MaxWidth = 300;
+				}
+
 			long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
 			int BitMapWidth = getValAtAddress(textureFile, textureOffset + 1, 8);
 			int BitMapHeight = getValAtAddress(textureFile, textureOffset + 2, 8);
@@ -3023,7 +3029,7 @@ int add_ptr=0;
 			unsigned char *imgNibbles;
 			unsigned char *outputImg;
 			unsigned char *srcImg;
-		fprintf(LOGFILE, "4 bit run-length\n");
+		//fprintf(LOGFILE, "4 bit run-length\n");
 		//auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
 		auxPalIndex = 0;
 		datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
@@ -3039,7 +3045,7 @@ int add_ptr=0;
 		int ColCounter = 0; int RowCounter = 0;
 		int cornerX = AnimX[i];
 		int cornerY = AnimY[i];
-
+		fprintf(LOGFILE, "Corner X = %d Corner Y = %d\n",cornerX,cornerY);
 		bool ImgStarted = false;
 		for (int y = 0; y < MaxHeight; y++)
 			{

@@ -203,14 +203,17 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				int[] locals = new int[6];
 
 				locals[1] = 1;
-				print( 1, locals[1] );
+				yield return StartCoroutine(print( 1, locals[1] ));
 				yield return StartCoroutine(say( "Help us! Oh, by the Titan, human, thou must help us! That thing is loose in the tower, it is killing us!" ));
 				locals[2] = 15;
 				locals[3] = 15;
 				locals[4] = 10001;
 				locals[5] = x_clock( 2, locals[4], locals[3] ) + 1;
 				x_clock( 2, locals[5], locals[2] );
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0156();
+				yield break;
 		} // end func
 
 		IEnumerator func_03a5() {
@@ -228,12 +231,12 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 1:
 
-						func_03ed();
+						yield return StartCoroutine(func_03ed());
 						break;
 
 				case 2:
 
-						func_0469();
+						yield return StartCoroutine(func_0469());
 						break;
 
 				} // end switch
@@ -255,13 +258,14 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 1:
 
-						func_0435();
+						yield return StartCoroutine(func_0435());
 						break;
 
 				case 2:
-
+						Time.timeScale =SlomoTime;
+						yield return new WaitForSeconds(WaitTime);
 						func_0110();
-						break;
+						yield break;
 
 				} // end switch
 
@@ -278,8 +282,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				yield return StartCoroutine(babl_menu (0,locals,1));
 				locals[22] = PlayerAnswer;
 				if ( locals[22] == 1 ) {
-
+						Time.timeScale =SlomoTime;
+						yield return new WaitForSeconds(WaitTime);
 						func_0147();
+						yield break;
 				} // end if
 
 		} // end func
@@ -299,12 +305,15 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 1:
 
+						Time.timeScale =SlomoTime;
+						yield return new WaitForSeconds(WaitTime);
 						func_0147();
-						break;
+						yield break;
+						//break;
 
 				case 2:
 
-						func_0435();
+						yield return StartCoroutine(func_0435());
 						break;
 
 				} // end switch
@@ -327,17 +336,17 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 1:
 
-						func_050d();
+						yield return StartCoroutine(func_050d());
 						break;
 
 				case 2:
 
-						func_051a();
+						yield return StartCoroutine(func_051a());
 						break;
 
 				case 3:
 
-						func_056e();
+						yield return StartCoroutine(func_056e());
 						break;
 
 				} // end switch
@@ -347,7 +356,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 		IEnumerator func_050d() {
 
 				yield return StartCoroutine(say( "No offense taken." ));
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0147();
+				yield break;
 		} // end func
 
 		IEnumerator func_051a() {
@@ -363,7 +375,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[5] = 10001;
 				locals[6] = x_clock( 2, locals[5], locals[4] ) + 1;
 				x_clock( 2, locals[6], locals[3] );
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0110();
+				yield break;
 		} // end func
 
 		IEnumerator func_056e() {
@@ -371,7 +386,9 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				int[] locals = new int[2];
 
 				locals[1] = 20;
-				print( 1, locals[1] );
+				yield return StartCoroutine(print( 1, locals[1] ));
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0156();
 				yield break;
 		} // end func
@@ -379,7 +396,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 		IEnumerator func_0586() {
 
 				yield return StartCoroutine(say( "You had better talk to the captain about that." ));
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0165();
+				yield break;
 		} // end func
 
 		int func_0593(int param1) {
@@ -528,18 +548,18 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[5] = 0;
 				if ( get_quest( 1, locals[5] ) == 1 ) {
 
-						func_035a();
+						yield return StartCoroutine(func_035a());
 				} // end if
 
 				locals[6] = 35;
-				print( 1, locals[6] );
+				yield return StartCoroutine(print( 1, locals[6] ));
 				locals[7] = 1;
 				if ( get_quest( 1, locals[7] ) == 0 ) {
 
 						locals[8] = 3;
 						if ( get_quest( 1, locals[8] ) == 1 ) {
 
-								func_03a5();
+								yield return StartCoroutine(func_03a5());
 						} // end if
 
 				} // end if
@@ -585,12 +605,12 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						case 1:
 
-								func_1093();
+								yield return StartCoroutine(func_1093());
 								break;
 
 						case 2:
 
-								func_10ac();
+								yield return StartCoroutine(func_10ac());
 								break;
 
 						} // end switch
@@ -606,17 +626,17 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						case 1:
 
-								func_09b7();
+								yield return StartCoroutine(func_09b7());
 								break;
 
 						case 2:
 
-								func_0a24();
+								yield return StartCoroutine(func_0a24(1));
 								break;
 
 						case 3:
 
-								func_1031();
+								yield return StartCoroutine(func_1031());
 								break;
 						} // end if
 
@@ -644,12 +664,15 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						case 2:
 
+								Time.timeScale =SlomoTime;
+								yield return new WaitForSeconds(WaitTime);
 								func_0165();
-								break;
+								yield break;
+								//break;
 
 						case 3:
 
-								func_10c4();
+								yield return StartCoroutine(func_10c4());
 								break;
 
 						} // end switch
@@ -674,22 +697,22 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						case 1:
 
-								func_0d74();
+								yield return StartCoroutine(func_0d74());
 								break;
 
 						case 2:
 
-								func_09b7();
+								yield return StartCoroutine(func_09b7());
 								break;
 
 						case 3:
 
-								func_0ab1();
+								yield return StartCoroutine(func_0ab1());
 								break;
 
 						case 4:
 
-								func_0a24();
+								yield return StartCoroutine(func_0a24(0));
 								break;
 						} // end if
 
@@ -718,7 +741,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 2:
 
-						func_10b7();
+						yield return StartCoroutine(func_10b7());
 						break;
 
 				} // end switch
@@ -729,19 +752,19 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[24] = func_064d();
 				if ( contains( 2, PlayerTypedAnswer, locals[24] ) ==1 ) {
 
-						func_0cf1();
+						yield return StartCoroutine(func_0cf1());
 				} else {
 
-						func_0a24();
+						yield return StartCoroutine(func_0a24(1));
 				} // end if
 
 		} // end func
 
-		IEnumerator func_0a24() {
-
+		IEnumerator func_0a24(int param1) {
+				//Param1 is whether or not the player tried the password or nto
 				int[] locals = new int[46];
 
-				if ( locals[1] == 1 ) {
+				if ( param1 == 1 ) {
 
 						yield return StartCoroutine(say( "So thou hast entered the prison tower without knowing the password? Thou art a fool!" ));
 						locals[2] = 1;
@@ -765,17 +788,17 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 61:
 
-						func_0dc8();
+						yield return StartCoroutine(func_0dc8());
 						break;
 
 				case 62:
 
-						func_0ab1();
+						yield return StartCoroutine(func_0ab1());
 						break;
 
 				case 63:
 
-						func_0c52();
+						yield return StartCoroutine(func_0c52());
 						break;
 
 				} // end switch
@@ -784,10 +807,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 		IEnumerator func_0ab1() {
 
-				int[] locals = new int[2];
+				//int[] locals = new int[2];
 
 				yield return StartCoroutine(say( "Where is thy delivery voucher?" ));
-				func_0abe();
+				yield return StartCoroutine(func_0abe());
 		} // end func
 
 		IEnumerator func_0abe() {
@@ -804,7 +827,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 1:
 
-						func_0b08();
+						yield return StartCoroutine(func_0b08());
 						break;
 
 				case 2:
@@ -814,7 +837,8 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				} // end switch
 
 				privateVariables[5] = 0;
-				func_0a24();
+				Debug.Log("check this one");
+				yield return StartCoroutine(func_0a24(0));
 		} // end func
 
 		IEnumerator func_0b08() {
@@ -841,12 +865,15 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						case 1:
 
+								Time.timeScale =SlomoTime;
+								yield return new WaitForSeconds(WaitTime);
 								func_0156();
-								break;
+								yield break;
+								//break;
 
 						case 2:
 
-								func_0b08();
+								yield return StartCoroutine(func_0b08());
 								break;
 
 						} // end switch
@@ -871,11 +898,11 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 						if ( locals[1] == 33 + 512 ) {
 
 								yield return StartCoroutine(say( "'Tis a poor likeness, but I find no fault in it." ));
-								func_0cf1();
+								yield return StartCoroutine(func_0cf1());
 						} else {
 
 								yield return StartCoroutine(say( "This? This is no voucher!" ));
-								func_0a24();
+								yield return StartCoroutine(func_0a24(0));
 
 
 						} // end if
@@ -893,12 +920,15 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 								locals[45] = 10001;
 								locals[46] = x_clock( 2, locals[45], locals[44] ) + 1;
 								x_clock( 2, locals[46], locals[43] );
+								Time.timeScale =SlomoTime;
+								yield return new WaitForSeconds(WaitTime);
 								func_0110();
+								yield break;
 						} // end if
 
 						yield return StartCoroutine(say( "Well? Which one is it?" ));
 						privateVariables[6] = privateVariables[6] + 1;
-						func_0abe();
+						yield return StartCoroutine(func_0abe());
 						break;
 
 				} // end switch
@@ -926,14 +956,14 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						goto label_0ca2;
 
-						break;
+						//break;
 
 				} // end switch
 
 				locals[23] = 10;
-				func_0e1c( locals[23] );
-				func_0cf1();
-				label_0ca2:;
+				yield return StartCoroutine(func_0e1c( locals[23] ));
+				yield return StartCoroutine(func_0cf1());
+		label_0ca2:;
 
 				yield return StartCoroutine(say( "We shall see who is in peril! Kill @GS34, comrades!" ));
 				locals[24] = 60;
@@ -944,7 +974,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[28] = 10001;
 				locals[29] = x_clock( 2, locals[28], locals[27] ) + 1;
 				x_clock( 2, locals[29], locals[26] );
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0110();
+				yield break;
 		} // end func
 
 		IEnumerator func_0cf1() {
@@ -970,7 +1003,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[28] = PlayerAnswer;
 				if ( locals[28] == 1 ) {
 
+						Time.timeScale =SlomoTime;
+						yield return new WaitForSeconds(WaitTime);
 						func_0165();
+						yield break;
 				} // end if
 
 		} // end func
@@ -988,7 +1024,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[5] = 10001;
 				locals[6] = x_clock( 2, locals[5], locals[4] ) + 1;
 				x_clock( 2, locals[6], locals[3] );
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0110();
+				yield break;
 		} // end func
 
 		IEnumerator func_0dc8() {
@@ -1004,7 +1043,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[5] = 10001;
 				locals[6] = x_clock( 2, locals[5], locals[4] ) + 1;
 				x_clock( 2, locals[6], locals[3] );
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0110();
+				yield break;
 		} // end func
 
 		IEnumerator func_0e1c(int param1) {
@@ -1089,16 +1131,16 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 										goto label_0e51;
 
-										break;
+										//break;
 
 								case 2:
 
-										func_101b();
+										yield return StartCoroutine(func_101b());
 										break;
 
 								case 3:
 
-										func_0d74();
+										yield return StartCoroutine(func_0d74());
 										break;
 								} // end if
 
@@ -1111,7 +1153,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 						if ( locals[18] > 2 ) {
 
 								yield return StartCoroutine(say( "I am tired of this foolishness." ));
-								func_0d74();
+								yield return StartCoroutine(func_0d74());
 						} else {
 
 								yield return StartCoroutine(say( "Well? Show me what you have, quickly!" ));
@@ -1128,7 +1170,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 										locals[18] = locals[18] + 1;
 										goto label_0e51;
 
-										break;
+										//break;
 
 								case 2:
 										break;
@@ -1140,11 +1182,14 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						if ( param1 == 10 ) {
 
-								func_0a24();
+								yield return StartCoroutine(func_0a24(0));
 						} else {
 
 								yield return StartCoroutine(say( "Good luck to thee, then!" ));
+								Time.timeScale =SlomoTime;
+								yield return new WaitForSeconds(WaitTime);
 								func_0165();
+								yield break;
 						} // end if
 
 				} // end if
@@ -1157,15 +1202,18 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				yield return StartCoroutine(say( "Then thou shalt leave here or die." ));
 				locals[1] = 1;
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0136( locals[1] );
+				yield break;
 		} // end func
 
 		IEnumerator func_1031() {
 
-				int[] locals = new int[7];
+				int[] locals = new int[8];
 
 				locals[1] = 96;
-				print( 1, locals[1] );
+				yield return StartCoroutine(print( 1, locals[1] ));
 				yield return StartCoroutine(say( "Hey! This one's a rebel! Kill @GS34!" ));
 				locals[2] = 60;
 				locals[3] = 1;
@@ -1175,15 +1223,18 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				locals[6] = 10001;
 				locals[7] = x_clock( 2, locals[6], locals[5] ) + 1;
 				x_clock( 2, locals[7], locals[4] );
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0110();
+				yield break;
 		} // end func
 
 		IEnumerator func_1093() {
 
-				int[] locals = new int[1];
+				int[] locals = new int[2];
 
 				locals[1] = 98;
-				print( 1, locals[1] );
+				yield return StartCoroutine(print( 1, locals[1] ));
 				yield return StartCoroutine(say( "Please remain calm, @GS35. I meant only to warn thee of the danger involved in coming here, and asked if thou didst know the password." ));
 		} // end func
 
@@ -1195,7 +1246,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 		IEnumerator func_10b7() {
 
 				yield return StartCoroutine(say( "That is not it." ));
-				func_0a24();
+				yield return StartCoroutine(func_0a24(1));
 		} // end func
 
 		IEnumerator func_10c4() {
@@ -1220,13 +1271,16 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						goto label_110f;
 
-						break;
+						//break;
 
 				} // end switch
 
 				yield return StartCoroutine(say( "Good luck to thee, then!" ));
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0165();
-				label_110f:;
+				yield break;
+		label_110f:;
 
 				yield return StartCoroutine(say( "Let's see what y'got!" ));
 				locals[23] = 15;
@@ -1244,7 +1298,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						goto label_115e;
 
-						break;
+						//break;
 
 				case 2:
 
@@ -1253,9 +1307,12 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				} // end switch
 
 				yield return StartCoroutine(say( "Just remember, only one door opens at a time." ));
-				label_115e:;
+		label_115e:;
 
 				yield return StartCoroutine(say( "Now, thou had best be on thy way!" ));
+				Time.timeScale =SlomoTime;
+				yield return new WaitForSeconds(WaitTime);
 				func_0156();
+				yield break;
 		} // end func
 }

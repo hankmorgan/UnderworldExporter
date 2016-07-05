@@ -138,7 +138,7 @@ int main()
 	uw0_graphics_file[22] = "Data\\INV.GR";
 	uw0_graphics_file[23] = "Data\\LFTI.GR";
 	uw0_graphics_file[24] = "Data\\OBJECTS.GR";
-	uw0_graphics_file[25] = "Data\\OPTBN.GR";
+	uw0_graphics_file[25] = "Data\\OPBTN.GR";
 	uw0_graphics_file[26] = "Data\\OPTB.GR";
 	uw0_graphics_file[27] = "Data\\OPTBTNS.GR";
 	uw0_graphics_file[28] = "Data\\PANELS.GR";
@@ -229,9 +229,9 @@ int main()
 	uw2_graphics_file[21] = "Data\\INV.GR";
 	uw2_graphics_file[22] = "Data\\LFTI.GR";
 	uw2_graphics_file[23] = "Data\\OBJECTS.GR";
-	uw2_graphics_file[24] = "Data\\OPTBN";
-	uw2_graphics_file[25] = "Data\\OPTB";
-	uw2_graphics_file[26] = "Data\\OPTBNS";
+	uw2_graphics_file[24] = "Data\\OPBTN.GR";
+	uw2_graphics_file[25] = "Data\\OPTB.GR";
+	uw2_graphics_file[26] = "Data\\OPTBTNS.GR";
 	uw2_graphics_file[27] = "Data\\PANELS.GR";
 	uw2_graphics_file[28] = "Data\\POWER.GR";
 	uw2_graphics_file[29] = "Data\\QUESTION.GR";
@@ -700,7 +700,11 @@ int main()
 									}
 								else if (graphics_file_no <= 35)
 									{
-									if (graphics_file_no == 28)//Panels
+									if ((game==UW1) && (graphics_file_no == 28))//Panels
+										{
+										panels = 1;
+										}
+									if ((game == UW2) && (graphics_file_no == 27))//Panels
 										{
 										panels = 1;
 										}
@@ -751,7 +755,7 @@ int main()
 									}
 								else if (graphics_file_no <= 35)
 									{
-									if (graphics_file_no == 28)//Panels
+									if ( (game== UW1) && (graphics_file_no == 28))//Panels
 										{
 										panels = 1;
 										}
@@ -802,7 +806,7 @@ int main()
 								else
 									{
 									graphics_mode = UW_GRAPHICS_GR;
-									if (graphics_file_no == 28)//Panels
+									if ((game == UW1) && (graphics_file_no == 28))//Panels
 										{
 										panels = 1;//special case due to file headers
 										}
@@ -1053,12 +1057,22 @@ int main()
 							//	{
 							//	sprintf(OutFileName, "%d",f);
 							//extractTextureBitmap(-1, Graphics_File, Graphics_Pal, f, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
-							if (graphics_file_no == 35)//Weapons
+							if  ((graphics_file_no == 35))//Weapons
 								{
 								char WeaponAnims[255];
-								sprintf_s(auxPalPath, 255, "%s\\data\\Weapons.cm", path_uw1);
-								sprintf_s(WeaponAnims, 255, "%s\\data\\Weapons.dat", path_uw1);//TODO:Support other games properly!
-								ExtractWeaponAnimations(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, WeaponAnims, useTGA);
+								
+								if (game==UW2)
+									{
+									sprintf_s(auxPalPath, 255, "%s\\data\\Weap.cm", path_uw2);
+									sprintf_s(WeaponAnims, 255, "%s\\data\\Weap.dat", path_uw2);//TODO:Support other games properly!
+									}
+								else
+									{
+									sprintf_s(auxPalPath, 255, "%s\\data\\Weapons.cm", path_uw1);
+									sprintf_s(WeaponAnims, 255, "%s\\data\\Weapons.dat", path_uw1);
+									}
+								
+								ExtractWeaponAnimations(-1, Graphics_File, Graphics_Pal, critPal, BitMapSize, graphics_mode, OutFileName, auxPalPath, WeaponAnims, useTGA,game);
 								}
 							else
 								{

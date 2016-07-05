@@ -30,7 +30,7 @@ public class Quest : MonoBehaviour {
 
 
 	*/
-	public int[] QuestVariables=new int[33];
+	public int[] QuestVariables=new int[256];
 
 	public int GaramonDream;//The next dreams to play
 	public int IncenseDream;

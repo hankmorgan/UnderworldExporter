@@ -427,7 +427,7 @@ public class Container : object_base {
 					OpenContainer();
 				}
 				playerUW.playerInventory.ObjectInHand= "";
-				playerUW.CursorIcon= playerUW.CursorIconDefault;
+				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 
 				return true;
 			}
