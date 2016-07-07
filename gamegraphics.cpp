@@ -129,6 +129,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	unsigned char *textureFile;          // Pointer to our buffered data (little endian format)
 	int i;
 	long NoOfTextures;
+	int MaxHeight=0; int MaxWidth=0;
 
 	FILE *file = NULL;      // File pointer
 	
@@ -255,6 +256,13 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 				long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
 				int BitMapWidth = getValAtAddress(textureFile,textureOffset+1, 8);
 				int BitMapHeight = getValAtAddress(textureFile, textureOffset+2, 8);
+				if (MaxHeight < BitMapHeight)
+					{MaxHeight=BitMapHeight;
+					}
+				if (MaxWidth < BitMapWidth)
+					{
+					MaxWidth = BitMapWidth;
+					}
 				int datalen;
 				palette auxpal[16];
 				int auxPalIndex;
@@ -339,8 +347,7 @@ void extractTextureBitmap(int ImageCount, char filePathIn[255], char PaletteFile
 	//NoOfTextures=0;
 	//fprintf(LOGFILE,"Address of first block:%d\n",  (textureFile[7]<<16 | textureFile[6]<<32 | textureFile[5]<<8 | textureFile[4]));
 
- 	
-return;	         
+	printf("Max Width: %d, Max Height: %d", MaxWidth, MaxHeight);
 }
 
 void getPalette(char filePathPal[255], palette *pal, int paletteNo)
@@ -1126,7 +1133,7 @@ int MaxHotSpotY=0;
 	}
 
 void extractCrittersUW2(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput)
-{
+{//TODO:Get the max height and width
 palette *pal;
 unsigned char *critterFile;
 unsigned char auxpalval[32];
@@ -2983,23 +2990,45 @@ void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteF
 	fileSize = getFileSize(file);
 	AnimData = new unsigned char[fileSize];
 	fread(AnimData, fileSize, 1, file);
-	int AnimX[224];
-	int AnimY[224];
+	int AnimX[390];
+	int AnimY[390];
 int offset=0;
 int add_ptr=0;
-	for (int i =0; i<8 ; i++)
+
+
+/*
+for (int i = 0; i < fileSize; i++)
+	{
+	if (i % 2 == 0)
 		{
-		for (int j=0; j<28;j++)
+		AnimX[offset] = getValAtAddress(AnimData, i, 8);
+		}
+	else
+		{
+		AnimY[offset++] = getValAtAddress(AnimData, i, 8);
+		}
+	}
+*/
+offset=0;
+int GroupSize=28; //28 for uw1
+if (game == UW1){GroupSize=28;}
+	for (int i = 0; i<8; i++)
+		{
+		for (int j = 0; j<GroupSize; j++)
 			{
-			AnimX[j + offset]= getValAtAddress(AnimData,add_ptr++,8);
+			AnimX[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
 			}
-		for (int j = 0; j<28; j++)
+		for (int j = 0; j<GroupSize; j++)
 			{
 			AnimY[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
 			}
-		offset = offset + 28;
+		offset = offset + GroupSize;
 		}
-
+add_ptr=0;
+	for (int i = 0; i<fileSize; i++)
+		{
+		fprintf(LOGFILE, "%d\n", getValAtAddress(AnimData, add_ptr++, 8));
+		}
 		fprintf(LOGFILE, "File Type (should be %d):%d\n", FileType, textureFile[0]);
 		fprintf(LOGFILE, "No of textures:%d\n", textureFile[2] << 8 | textureFile[1]);
 		if (ImageCount == -1)	//All the images.
@@ -3010,14 +3039,73 @@ int add_ptr=0;
 			{
 			NoOfTextures = ImageCount;
 			}
+		if (game == UW2)
+			{
+			NoOfTextures=25;
+			}
+		int UW2_X[26] = {
+			41,
+			0,
+			0,
+			0,
+			0,
+			55,
+			129,
+			195,
+			0,
+			158,
+			162,
+			179,
+			240,
+			189,
+			155,
+			117,
+			108,
+			0,
+			0,
+			0,
+			0,
+			0,
+			121,
+			117,
+			114
+			};
+		int UW2_Y[26] = {
+			102,
+			43,
+			7,
+			0,
+			22,
+			47,
+			49,
+			49,
+			0,
+			128,
+			119,
+			127,
+			144,
+			128,
+			128,
+			121,
+			35,
+			0,
+			0,
+			0,
+			0,
+			0,
+			62,
+			65,
+			68
+			};
+
 		for (i = 0; i < NoOfTextures; i++)
 			{
 			int MaxHeight = 112;
 			int MaxWidth = 172;
 			if (game == UW2)
-				{//TODO:FIgur out the correct values for this.
-				MaxHeight = 300;
-				MaxWidth = 300;
+				{//TODO:Figure out the correct values for this.
+				MaxHeight = 128;
+				MaxWidth = 208;
 				}
 
 			long textureOffset = getValAtAddress(textureFile, (i * 4) + 3, 32);
@@ -3029,23 +3117,28 @@ int add_ptr=0;
 			unsigned char *imgNibbles;
 			unsigned char *outputImg;
 			unsigned char *srcImg;
-		//fprintf(LOGFILE, "4 bit run-length\n");
-		//auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
-		auxPalIndex = 0;
-		datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
-		imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
-		textureOffset = textureOffset + 6;	//Start of raw data.
-		copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
-		LoadAuxilaryPal(auxPalPath, auxpal, pal, auxPalIndex);
-		srcImg = new unsigned char[BitMapWidth*BitMapHeight];
-		outputImg = new unsigned char[MaxWidth*MaxHeight];
-		DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, srcImg, 4);
+			//fprintf(LOGFILE, "4 bit run-length\n");
+			//auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
+			auxPalIndex = 0;
+			datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
+			imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
+			textureOffset = textureOffset + 6;	//Start of raw data.
+			copyNibbles(textureFile, imgNibbles, datalen, textureOffset);
+			LoadAuxilaryPal(auxPalPath, auxpal, pal, auxPalIndex);
+			srcImg = new unsigned char[BitMapWidth*BitMapHeight];
+			outputImg = new unsigned char[MaxWidth*MaxHeight];
+			DecodeRLEBitmap(imgNibbles, datalen, BitMapWidth, BitMapHeight, srcImg, 4);
 
-//Paste source image into output image.
-		int ColCounter = 0; int RowCounter = 0;
-		int cornerX = AnimX[i];
-		int cornerY = AnimY[i];
-		fprintf(LOGFILE, "Corner X = %d Corner Y = %d\n",cornerX,cornerY);
+			//Paste source image into output image.
+			int ColCounter = 0; int RowCounter = 0;
+			int cornerX = AnimX[i];
+			int cornerY = AnimY[i];
+			if (game == UW2)
+				{
+				cornerX = UW2_X[i];
+				cornerY = UW2_Y[i];
+				}
+		fprintf(LOGFILE, "Image %d, Corner X = %d Corner Y = %d\n",i,cornerX,cornerY);
 		bool ImgStarted = false;
 		for (int y = 0; y < MaxHeight; y++)
 			{

@@ -1057,7 +1057,7 @@ int main()
 							//	{
 							//	sprintf(OutFileName, "%d",f);
 							//extractTextureBitmap(-1, Graphics_File, Graphics_Pal, f, BitMapSize, graphics_mode, OutFileName, auxPalPath, useTGA);
-							if  ((graphics_file_no == 35))//Weapons
+							if  ((graphics_file_no == 35) && (1))//Weapons
 								{
 								char WeaponAnims[255];
 								
