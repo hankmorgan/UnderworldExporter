@@ -947,14 +947,6 @@ void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFil
 				//fprintf(LOGFILE, "\n\tAnim Frame %d is %d %s_%04d", j, getValAtAddress(critterFile, AddressPointer, 8), fileCrit, getValAtAddress(critterFile, AddressPointer, 8));
 				fprintf(LOGFILE, " \"CR%02oPAGE_N%02d_%d_%04d\" ,", fileXX, fileYY, auxPalNo, getValAtAddress(critterFile, AddressPointer, 8));
 				ValidCount++;
-				//if (useTGA == 1)
-				//	{
-				//	fprintf(LOGFILE, ".tga");
-				//	}
-				//else
-				//	{
-				//	fprintf(LOGFILE, ".bmp");
-				//	}
 				}
 			else
 				{
@@ -1132,89 +1124,208 @@ int MaxHotSpotY=0;
 		}
 	}
 
-void extractCrittersUW2(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput)
-{//TODO:Get the max height and width
-palette *pal;
-unsigned char *critterFile;
-unsigned char auxpalval[32];
-palette auxpal[32];
-int auxPalNo = PaletteNo;
-int AddressPointer;
+	void extractCrittersUW2(char fileAssoc[255], char fileCrit[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, int game, int CritterNo, char OutFileName[255], int useTGA, int SkipFileOutput)
+		{//TODO:Get the max height and width
+		palette *pal;
+		unsigned char *critterFile;
+		unsigned char auxpalval[32];
+		palette auxpal[32];
+		int auxPalNo = PaletteNo;
+		int AddressPointer;
 
-	pal = new palette[256];
-	getPalette(PaletteFile, pal, 0);//always palette 0?
+		pal = new palette[256];
+		getPalette(PaletteFile, pal, 0);//always palette 0?
 
-	
-	long fileSize;
-	unsigned char *assocFile;
-	
-	FILE *file = NULL;      // File pointer
-	if ((file = fopen(fileAssoc, "rb")) == NULL)
-	{
-	    fprintf(LOGFILE, "\nArchive %s not found!\n", fileAssoc);
-		return;
-	}
-	fileSize = getFileSize(file);
-	assocFile = new unsigned char[fileSize];
-	fread(assocFile, fileSize, 1, file);
-	fclose(file);
 
-	if ((file = fopen(fileCrit, "rb")) == NULL)
-	{
-	    fprintf(LOGFILE, "\nArchive %s not found!\n", fileCrit);
-		return;
-	}
-	fileSize = getFileSize(file);
-	critterFile = new unsigned char[fileSize];
-	fread(critterFile, fileSize, 1, file);
-	fclose(file);
-	
-//UW2 uses a different method
-	//Starting at offset 0x80
-	fprintf(LOGFILE, "\n\t%s - palette = %d",fileCrit,auxPalNo);
-	//auxPalNo=2;
-	AddressPointer=auxPalNo*32;
-	int i=0;
-	for (int i = 0; i < 32; i++)
-		{
-		int value = getValAtAddress(critterFile, (AddressPointer), 8);
-		auxpalval[i] = value;
-		auxpal[i].green = pal[value].green;
-		auxpal[i].blue = pal[value].blue;
-		auxpal[i].red = pal[value].red;
-		auxpal[i].reserved = pal[value].reserved;
-		AddressPointer++;
-		}
-	for (int index = 128; index < 640; index=index+2)
-		{
-		int frameOffset = getValAtAddress(critterFile, index, 16);
-		if (frameOffset != 0)
+		long fileSize;
+		unsigned char *assocFile;
+
+		FILE *file = NULL;      // File pointer
+		if ((file = fopen(fileAssoc, "rb")) == NULL)
 			{
-			//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
-			int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
-			int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
-			int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
-			int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
-			int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
-			int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
-			unsigned char *outputImg;
-			outputImg = new unsigned char[BitMapWidth*BitMapHeight];
-			ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
-			if (SkipFileOutput == 1)
-				{
-				if (useTGA==1)
-					{
-					writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName,1);
-					}
-				else
-					{
-					writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
-					}
-				}
-			i++;
+			fprintf(LOGFILE, "\nArchive %s not found!\n", fileAssoc);
+			return;
 			}
+		fileSize = getFileSize(file);
+		assocFile = new unsigned char[fileSize];
+		fread(assocFile, fileSize, 1, file);
+		fclose(file);
+
+		if ((file = fopen(fileCrit, "rb")) == NULL)
+			{
+			fprintf(LOGFILE, "\nArchive %s not found!\n", fileCrit);
+			return;
+			}
+		fileSize = getFileSize(file);
+		critterFile = new unsigned char[fileSize];
+		fread(critterFile, fileSize, 1, file);
+		fclose(file);
+
+		//UW2 uses a different method
+		//Starting at offset 0x80
+		fprintf(LOGFILE, "\n\t%s - palette = %d", fileCrit, auxPalNo);
+		//auxPalNo=2;
+		AddressPointer = auxPalNo * 32;
+		int i = 0;
+		for (i = 0; i < 32; i++)
+			{
+			int value = getValAtAddress(critterFile, (AddressPointer), 8);
+			auxpalval[i] = value;
+			auxpal[i].green = pal[value].green;
+			auxpal[i].blue = pal[value].blue;
+			auxpal[i].red = pal[value].red;
+			auxpal[i].reserved = pal[value].reserved;
+			AddressPointer++;
+			}
+		i=0;
+	int MaxWidth = 0;
+	int MaxHeight = 0;
+	int MaxHotSpotX = 0;
+	int MaxHotSpotY = 0;
+
+		for (int pass = 0; pass <= 1;pass++)
+			{
+			if (pass == 0)
+				{//First pass is getting max image sizes
+				for (int index = 128; index < 640; index = index + 2)
+					{
+					int frameOffset = getValAtAddress(critterFile, index, 16);
+					if (frameOffset != 0)
+						{
+						int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+						int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+						int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+						int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+						if (hotspotx>BitMapWidth)	{hotspotx = BitMapWidth;}
+						if (hotspoty>BitMapHeight)	{hotspoty = BitMapHeight;}
+						if (BitMapWidth > MaxWidth){MaxWidth = BitMapWidth;}
+						if (BitMapHeight > MaxHeight){MaxHeight = BitMapHeight;}
+						if (hotspotx > MaxHotSpotX){MaxHotSpotX = hotspotx;}
+						if (hotspoty > MaxHotSpotY){MaxHotSpotY = hotspoty;}
+						}//End frameoffsetr first pass
+					}//End for loop first pass
+				}//End first pass
+			else
+				{//Extract images
+				if (MaxHotSpotX * 2 > MaxWidth)
+					{//Try and center the hot spot in the image.
+					MaxWidth = MaxHotSpotX * 2;
+					}
+				unsigned char *outputImg;
+				outputImg = new unsigned char[MaxWidth*MaxHeight * 2];
+				for (int index = 128; index < 640; index = index + 2)
+					{
+					int frameOffset = getValAtAddress(critterFile, index, 16);
+					if (frameOffset != 0)
+						{
+						int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+						int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+						int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+						int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+						int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
+						int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
+						//Adjust the hotspots from the biggest point back to the image corners
+						int cornerX; int cornerY;
+						cornerX = MaxHotSpotX - hotspotx;
+						cornerY = MaxHotSpotY - hotspoty;
+						if (cornerX <= 0){cornerX = 0;}
+						else{cornerX = cornerX - 1;}
+						if (cornerY <= 0){cornerY = 0;}
+
+						if (1)
+							{
+							//Merge the image into a new big image at the hotspot coordinates.;
+							unsigned char *srcImg;
+							//fprintf(LOGFILE, "%s = Hotspot (%d,%d)\n", critterFile,hotspotx,hotspoty);
+							//Offset the hotspot from the top left corner
+							//hotspoty=MaxHeight-hotspoty;
+
+							srcImg = new unsigned char[BitMapWidth*BitMapHeight * 2];
+							ua_image_decode_rle(critterFile, srcImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+							cornerY = MaxHeight - cornerY;//y is from the top left corner
+							//printf("%d, %d\n",cornerX, cornerY);
+							//srcImg[hotspotx + hotspoty*BitMapWidth]=200;
+
+							int ColCounter = 0; int RowCounter = 0;
+							bool ImgStarted = false;
+							for (int y = 0; y < MaxHeight; y++)
+								{
+								for (int x = 0; x < MaxWidth; x++)
+									{
+									if ((cornerX + ColCounter == x) && (MaxHeight - cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+										{//the pixel from the source image is here 
+										ImgStarted = true;
+										outputImg[x + (y*MaxWidth)] = srcImg[ColCounter + (RowCounter*BitMapWidth)];
+										//outputImg[x + (y*MaxWidth)] = 0;
+										ColCounter++;
+										}
+									else
+										{
+										outputImg[x + (y*MaxWidth)] = 0;//alpha
+										}
+									}
+								if (ImgStarted == true)
+									{//New Row on the src image
+									RowCounter++;
+									ColCounter = 0;
+									}
+								}
+							//Set the heights for output
+							BitMapWidth = MaxWidth;
+							BitMapHeight = MaxHeight;
+
+							//Ouput files
+							if (SkipFileOutput == 1)
+								{
+								if (useTGA == 1)
+									{
+									writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i++, pal, OutFileName, 1);
+									}
+								else
+									{
+									writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i++, pal, OutFileName);
+									}
+								} //skip
+							}
+						}//end extrac frameoffset
+					}//End for loop extract
+				}//End extract images
+			}
+
+
+		/*
+
+		for (int index = 128; index < 640; index = index + 2)
+			{
+			int frameOffset = getValAtAddress(critterFile, index, 16);
+			if (frameOffset != 0)
+				{
+				//fprintf(LOGFILE,"\n%d @ %d", i, frameOffset);
+				int BitMapWidth = getValAtAddress(critterFile, frameOffset + 0, 8);
+				int BitMapHeight = getValAtAddress(critterFile, frameOffset + 1, 8);
+				int hotspotx = getValAtAddress(critterFile, frameOffset + 2, 8);
+				int hotspoty = getValAtAddress(critterFile, frameOffset + 3, 8);
+				int compression = getValAtAddress(critterFile, frameOffset + 4, 8);
+				int datalen = getValAtAddress(critterFile, frameOffset + 5, 16);
+				unsigned char *outputImg;
+				outputImg = new unsigned char[BitMapWidth*BitMapHeight];
+				ua_image_decode_rle(critterFile, outputImg, compression == 6 ? 5 : 4, datalen, BitMapWidth*BitMapHeight, frameOffset + 7, auxpalval);
+				if (SkipFileOutput == 1)
+					{
+					if (useTGA == 1)
+						{
+						writeTGA(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName, 1);
+						}
+					else
+						{
+						writeBMP(outputImg, 0, BitMapWidth, BitMapHeight, i, pal, OutFileName);
+						}
+					}//End skip file
+				i++;
+				}//Endif Frame offset
+			}//End for loop
+*/
 		}
-}
 
 void ua_image_decode_rle(unsigned char *FileIn, unsigned char *pixels, unsigned int bits, unsigned int datalen, unsigned int maxpix, int addr_ptr,unsigned char *auxpal)
 {
