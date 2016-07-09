@@ -954,7 +954,7 @@ void extractCrittersUW1(char fileAssoc[255], char fileCrit[255], char PaletteFil
 				}
 			AddressPointer++;
 			}
-		fprintf(LOGFILE, "%d);",ValidCount);
+		fprintf(LOGFILE, "%d, _RES + \"/Sprites/Critters\" , 0.2f);",ValidCount);
 		}
 	int NoOfPals = getValAtAddress(critterFile, AddressPointer, 8);
 	AddressPointer++;
@@ -1163,7 +1163,7 @@ int MaxHotSpotY=0;
 
 		//UW2 uses a different method
 		//Starting at offset 0x80
-		fprintf(LOGFILE, "\n\t%s - palette = %d", fileCrit, auxPalNo);
+		//fprintf(LOGFILE, "\n\t//%s - palette = %d", fileCrit, auxPalNo);
 		//auxPalNo=2;
 		AddressPointer = auxPalNo * 32;
 		int i = 0;
@@ -2510,17 +2510,18 @@ void extractAllCrittersUW1(char fileAssoc[255], char CritPath[255], char Palette
 		}
 	}
 
+
 void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA)
-{
+	{
 	/*Extracts all UW2 critters and dumps their animation frames
 	Animations are first looked up in the as.am file with associates the creatures item id-0x40 with the XX portion of a CRXX.YY file.
 	Then a look up of the CR.AN file gives a listing of the animation frames for each anim and angle as detailed in Abysmals uw-formats.txt
 	From there a lookup is made to PG.MP for each frame. PG.MP lists the final frame of each YY file in order. So to get YY for a specific animation
-	you just get which position in PG.MP the animation frame is in. 
+	you just get which position in PG.MP the animation frame is in.
 	Additionally since my tools extract every file in the crxx.yy without frame numbers files I subtract the value in pg.mp from the frame no to match up.
-*/
+	*/
 	char OutFileName[255];
-//	palette auxpal[32];
+	//	palette auxpal[32];
 	int frameIndices[6];
 	int frameFiles[8];
 	long fileSize;
@@ -2539,7 +2540,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 	fread(assocFile, fileSize, 1, file);
 	fclose(file);
 	int NoOfCritters = fileSize / 2;//Two bytes per critter. Each critter corresponds with an item id in the object list.
-	
+
 	//Load the paging file pg.mp
 	char filePGMP[255];
 	sprintf_s(filePGMP, 255, "%s\\%s", path_uw2, "Crit\\PG.MP");
@@ -2553,7 +2554,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 	PGMP = new unsigned char[fileSize];
 	fread(PGMP, fileSize, 1, file);
 	fclose(file);
-		
+
 	//Load the animation frame listings in cr.an
 	char fileCRAN[255];
 	sprintf_s(fileCRAN, 255, "%s\\%s", path_uw2, "Crit\\CR.AN");
@@ -2579,10 +2580,10 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 			{
 			//Extract the graphics in order.
 			//Go through the pg.mp file to get the page files
-			int ExtractPageNo=0;
+			int ExtractPageNo = 0;
 			for (int i = 0; i < 8; i++)
 				{
-				if (getValAtAddress(PGMP, CritterID * 8 + i, 8)!=255)//Checks if a exists at this index in the page file.
+				if (getValAtAddress(PGMP, CritterID * 8 + i, 8) != 255)//Checks if a exists at this index in the page file.
 					{
 					sprintf_s(fileCrit, 255, "%s\\CR%02o.%02d", CritPath, CritterID, ExtractPageNo);//Create a file name to extract from
 					sprintf_s(OutFileName, 255, "CR%02o_%02d_%d", CritterID, ExtractPageNo, auxPalNo);//Get a name to extract to
@@ -2598,25 +2599,58 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 			int cranAdd = (CritterID * 512);//Address when the anim info starts
 			for (int Animation = 0; Animation<8; Animation++)//The the animation slot
 				{
-				fprintf(LOGFILE, "\n\tAnimation is ");
-				PrintAnimName(game,Animation);//Prints out what the animation is.
+				fprintf(LOGFILE, "//Animation #%d ", Animation);
+				bool NoAngle=false;
+				bool PrintFrames=true;
+				if (PrintAnimName(game, Animation))//Prints out what the animation is.
+					{
+					NoAngle = true;
+					}
+				else
+					{
+					//fprintf(LOGFILE, "_");
+					NoAngle = false;					
+					}
 				for (int Angle = 0; Angle<8; Angle++)//Each animation has every possible angle.
 					{
-					fprintf(LOGFILE, "\n\t\tAngle is ", Angle);
-					PrintCritAngle(Angle); //Prints out the cardinal direction (front,left,right,rear etc) for the animation
+					//fprintf(LOGFILE, "\n\t\tAngle is ", Angle);
+							
+					if (NoAngle==false)
+						{
+						fprintf(LOGFILE, "\nCreateAnimationUW(\"%d_",CritterID+64);
+						PrintAnimName(game, Animation);
+						fprintf(LOGFILE, "_");
+						PrintCritAngle(Angle); //Prints out the cardinal direction (front,left,right,rear etc) for the animation
+						fprintf(LOGFILE, "\"");
+						PrintFrames=true;
+						}
+					else
+						{//only print the front version of it
+						if (Angle == 4)
+							{
+							fprintf(LOGFILE, "\nCreateAnimationUW(\"");
+							PrintAnimName(game, Animation);
+							fprintf(LOGFILE, "\"");
+							PrintFrames=true;
+							}
+						else
+							{
+							PrintFrames=false;
+							}
+						}
 					int ValidEntries = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
-					fprintf(LOGFILE, " Valid is %d",ValidEntries);
+					//fprintf(LOGFILE, " Valid is %d", ValidEntries);
 					for (int FrameNo = 0; FrameNo < 6; FrameNo++)//Each animation has up to 6 frames. We keep the last valid one for the page lookup
 						{
-						frameIndices[FrameNo]=255;//reset the value
-						int currFrame = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle*8) + (FrameNo), 8);
+						frameIndices[FrameNo] = 255;//reset the value
+						int currFrame = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle * 8) + (FrameNo), 8);
 						frameIndices[FrameNo] = currFrame;
 						if (FrameNo>ValidEntries)
 							{//I don't store any frames after the valid value.
-							frameIndices[FrameNo]=255;
+							frameIndices[FrameNo] = 255;
 							}
 						}
-						
+
 					//Calculate which page the anim is part of
 					for (int x = 0; x < 6; x++)
 						{
@@ -2629,102 +2663,154 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 									{
 									if (frameIndices[x] <= frameFiles[0])
 										{//Frame is in the CRXX.00 file.
-										PageNo= 0;
+										PageNo = 0;
 										}
 									}
-								else   
+								else
 									{
 									if ((frameIndices[x] > frameFiles[i - 1]) && (frameIndices[x] <= frameFiles[i]))//In between 
 										{//The frame is in the CRXX.i file.
-										PageNo= i;
+										PageNo = i;
 										}
 									}
 								}
-							sprintf_s(fileCrit, 255, "%s\CR%02o_%02d_%d", CritPath, CritterID, PageNo,auxPalNo);
-							fprintf(LOGFILE, "\t%s", fileCrit);
-							if (PageNo == 0)
+							sprintf_s(fileCrit, 255, "CR%02o_%02d_%d", CritterID, PageNo, auxPalNo);
+							if (PrintFrames == true)
 								{
-								fprintf(LOGFILE, "_[%04d]", frameIndices[x]);
+								fprintf(LOGFILE, ",\"%s", fileCrit);
+								if (PageNo == 0)
+									{
+									fprintf(LOGFILE, "_%04d\"", frameIndices[x]);
+									}
+								else
+									{
+									fprintf(LOGFILE, "_%04d\"", frameIndices[x] - frameFiles[PageNo - 1] - 1);//Shift my frame values down to match the extracted graphics files.
+									}
 								}
-							else
-								{
-								fprintf(LOGFILE, "_[%04d]", frameIndices[x]-frameFiles[PageNo-1]-1);//Shift my frame values down to match the extracted graphics files.
-								}
-									
-
-									
 							}
+						else
+							{
+							if (PrintFrames == true)
+								{
+								fprintf(LOGFILE, ",\"\"");
+								}
+							}
+						}
+					if (PrintFrames == true)
+						{
+						fprintf(LOGFILE, ", %d, _RES + \"/Sprites/Critters\" , 0.2f);\n", ValidEntries);
 						}
 					}
 				}
 			}
 		}
-}
+	}
 
-void PrintAnimName(int game, int animNo)
-	{
-	if ((game == UW1) || (game == UWDEMO))
-		{
-		switch (animNo)
+bool PrintAnimName(int game, int animNo)
+	{//Returns true if the anim name is the full name (no angle). For UW2.
+		switch (game)
 			{
-				case 0x0:fprintf(LOGFILE, "idle_combat"); break;
-				case 0x1:fprintf(LOGFILE, "attack_bash"); break;
-				case 0x2:fprintf(LOGFILE, "attack_slash"); break;
-				case 0x3:fprintf(LOGFILE, "attack_thrust"); break;
-				case 0x5:fprintf(LOGFILE, "attack_secondary"); break;
-				case 0x7:fprintf(LOGFILE, "walking_towards"); break;
-				case 0xc:fprintf(LOGFILE, "death"); break;
-				case 0xd:fprintf(LOGFILE, "begin_combat"); break;
-				case 0x20:fprintf(LOGFILE, "idle_rear"); break;
-				case 0x21:fprintf(LOGFILE, "idle_rear_right"); break;
-				case 0x22:fprintf(LOGFILE, "idle_right"); break;
-				case 0x23:fprintf(LOGFILE, "idle_front_right"); break;
-				case 0x24:fprintf(LOGFILE, "idle_front"); break;
-				case 0x25:fprintf(LOGFILE, "idle_front_left"); break;
-				case 0x26:fprintf(LOGFILE, "idle_left"); break;
-				case 0x27:fprintf(LOGFILE, "idle_rear_left"); break;
-				case 0x80:fprintf(LOGFILE, "walking_rear"); break;
-				case 0x81:fprintf(LOGFILE, "walking_rear_right"); break;
-				case 0x82:fprintf(LOGFILE, "walking_right"); break;
-				case 0x83:fprintf(LOGFILE, "walking_front_right"); break;
-				case 0x84:fprintf(LOGFILE, "walking_front"); break;
-				case 0x85:fprintf(LOGFILE, "walking_front_left"); break;
-				case 0x86:fprintf(LOGFILE, "walking_left"); break;
-				case 0x87:fprintf(LOGFILE, "walking_rear_left"); break;
-				default:fprintf(LOGFILE, "unknown_anim"); break;
+			case UWDEMO:
+			case UW1:
+				{
+				switch (animNo)
+					{
+						case 0x0:fprintf(LOGFILE, "idle_combat"); return true; break;
+						case 0x1:fprintf(LOGFILE, "attack_bash"); return true; break;
+						case 0x2:fprintf(LOGFILE, "attack_slash"); return true; break;
+						case 0x3:fprintf(LOGFILE, "attack_thrust"); return true; break;
+						case 0x4:fprintf(LOGFILE, "attack_unk4"); return true; break;
+						case 0x5:fprintf(LOGFILE, "attack_secondary"); return true; break;
+						case 0x6:fprintf(LOGFILE, "attack_unk6"); return true; break;
+						case 0x7:fprintf(LOGFILE, "walking_towards"); return true; break;
+						case 0xc:fprintf(LOGFILE, "death"); return true; break;
+						case 0xd:fprintf(LOGFILE, "begin_combat"); return true; break;
+						case 0x20:fprintf(LOGFILE, "idle_rear"); break;
+						case 0x21:fprintf(LOGFILE, "idle_rear_right"); break;
+						case 0x22:fprintf(LOGFILE, "idle_right"); break;
+						case 0x23:fprintf(LOGFILE, "idle_front_right"); break;
+						case 0x24:fprintf(LOGFILE, "idle_front"); break;
+						case 0x25:fprintf(LOGFILE, "idle_front_left"); break;
+						case 0x26:fprintf(LOGFILE, "idle_left"); break;
+						case 0x27:fprintf(LOGFILE, "idle_rear_left"); break;
+						case 0x80:fprintf(LOGFILE, "walking_rear"); break;
+						case 0x81:fprintf(LOGFILE, "walking_rear_right"); break;
+						case 0x82:fprintf(LOGFILE, "walking_right"); break;
+						case 0x83:fprintf(LOGFILE, "walking_front_right"); break;
+						case 0x84:fprintf(LOGFILE, "walking_front"); break;
+						case 0x85:fprintf(LOGFILE, "walking_front_left"); break;
+						case 0x86:fprintf(LOGFILE, "walking_left"); break;
+						case 0x87:fprintf(LOGFILE, "walking_rear_left"); break;
+						default:fprintf(LOGFILE, "unknown_anim"); break;
+					}
+				break;
+				}
+			case UW2:
+				{
+					switch (animNo)
+						{
+						case 0x0:fprintf(LOGFILE, "idle"); break;
+						case 0x1:fprintf(LOGFILE, "walking"); return true; break;
+						case 0x2:fprintf(LOGFILE, "attack_bash"); return true; break;
+						case 0x3:fprintf(LOGFILE, "attack_slash"); return true; break;
+						case 0x4:fprintf(LOGFILE, "attack_thrust"); return true; break;
+						case 0x5:fprintf(LOGFILE, "attack_secondary"); return true; break;
+						case 0x6:fprintf(LOGFILE, "attack_unk"); return true; break;
+						case 0x7:fprintf(LOGFILE, "death"); return true;break;
+						case 0xd:fprintf(LOGFILE, "begin_combat"); return true; break;
+						case 0x20:fprintf(LOGFILE, "idle"); break;
+						case 0x21:fprintf(LOGFILE, "idle"); break;
+						case 0x22:fprintf(LOGFILE, "idle"); break;
+						case 0x23:fprintf(LOGFILE, "idle"); break;
+						case 0x24:fprintf(LOGFILE, "idle"); break;
+						case 0x25:fprintf(LOGFILE, "idle"); break;
+						case 0x26:fprintf(LOGFILE, "idle"); break;
+						case 0x27:fprintf(LOGFILE, "idle"); break;
+						case 0x80:fprintf(LOGFILE, "walking"); break;
+						case 0x81:fprintf(LOGFILE, "walking"); break;
+						case 0x82:fprintf(LOGFILE, "walking"); break;
+						case 0x83:fprintf(LOGFILE, "walking"); break;
+						case 0x84:fprintf(LOGFILE, "walking"); break;
+						case 0x85:fprintf(LOGFILE, "walking"); break;
+						case 0x86:fprintf(LOGFILE, "walking"); break;
+						case 0x87:fprintf(LOGFILE, "walking"); break;
+						default:fprintf(LOGFILE, "unknown_anim"); break;
+					break;
+					}
+				break;
+				}
+			case SHOCK:
+				{
+				switch (animNo)
+					{
+						case 0: fprintf(LOGFILE, "Standing"); break;
+						case 1: fprintf(LOGFILE, "Walking"); break;
+						case 2: fprintf(LOGFILE, "Combat"); break;
+						case 3: fprintf(LOGFILE, "Attack 1"); break;
+						case 4: fprintf(LOGFILE, "Attack 2"); break;
+						case 5: fprintf(LOGFILE, "Attack 3"); break;
+						case 6: fprintf(LOGFILE, "Attack 4"); break;
+						case 7: fprintf(LOGFILE, "Dying"); break;
+						default: fprintf(LOGFILE, "Unknown"); break;
+					}
+				break;
+				}
 			}
-		}
-	else
-		{
-		switch (animNo)
-			{
-				case 0: fprintf(LOGFILE, "Standing");break;
-				case 1: fprintf(LOGFILE, "Walking"); break;
-				case 2: fprintf(LOGFILE, "Combat"); break;
-				case 3: fprintf(LOGFILE, "Attack 1"); break;
-				case 4: fprintf(LOGFILE, "Attack 2"); break;
-				case 5: fprintf(LOGFILE, "Attack 3"); break;
-				case 6: fprintf(LOGFILE, "Attack 4"); break;
-				case 7: fprintf(LOGFILE, "Dying"); break;
-				default: fprintf(LOGFILE, "Unknown"); break;
-
-			}
-		}
-	
+	return false;
 	}
 
 void PrintCritAngle(int angle)
 	{
 	switch (angle)
 		{
-			case 0: fprintf(LOGFILE, "Rear       "); break;
-			case 1: fprintf(LOGFILE, "Rear  right"); break;
-			case 2: fprintf(LOGFILE, "      right"); break;
-			case 3: fprintf(LOGFILE, "front right"); break;
-			case 4: fprintf(LOGFILE, "front      "); break;
-			case 5: fprintf(LOGFILE, "front left "); break;
-			case 6: fprintf(LOGFILE, "      left "); break;
-			case 7: fprintf(LOGFILE, "Rear  left "); break;
+			case 0: fprintf(LOGFILE, "rear"); break;
+			case 1: fprintf(LOGFILE, "rear_right"); break;
+			case 2: fprintf(LOGFILE, "right"); break;
+			case 3: fprintf(LOGFILE, "front_right"); break;
+			case 4: fprintf(LOGFILE, "front"); break;
+			case 5: fprintf(LOGFILE, "front_left"); break;
+			case 6: fprintf(LOGFILE, "left"); break;
+			case 7: fprintf(LOGFILE, "rear_left"); break;
 		}
 	}
 
@@ -3076,6 +3162,7 @@ void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteF
 	unsigned char *textureFile;         
 	int i;
 	long NoOfTextures;
+	int alpha=0;
 
 	FILE *file = NULL;      // File pointer
 
@@ -3103,6 +3190,7 @@ void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteF
 	fread(AnimData, fileSize, 1, file);
 	int AnimX[390];
 	int AnimY[390];
+	int AnimXY[776];//For UW2
 int offset=0;
 int add_ptr=0;
 
@@ -3122,19 +3210,32 @@ for (int i = 0; i < fileSize; i++)
 */
 offset=0;
 int GroupSize=28; //28 for uw1
-if (game == UW1){GroupSize=28;}
-	for (int i = 0; i<8; i++)
-		{
-		for (int j = 0; j<GroupSize; j++)
+	if (game != UW2)
+	{
+		GroupSize = 28;
+	
+		for (int i = 0; i<8; i++)
 			{
-			AnimX[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
+			for (int j = 0; j<GroupSize; j++)
+				{
+				AnimX[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
+				}
+			for (int j = 0; j<GroupSize; j++)
+				{
+				AnimY[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
+				}
+			offset = offset + GroupSize;
 			}
-		for (int j = 0; j<GroupSize; j++)
+	}
+	else
+		{//In UW2 I just read the values into one array
+		for (int i = 0; i < fileSize; i++)
 			{
-			AnimY[j + offset] = getValAtAddress(AnimData, add_ptr++, 8);
+			AnimXY[i] = getValAtAddress(AnimData, add_ptr++, 8);
 			}
-		offset = offset + GroupSize;
 		}
+
+
 add_ptr=0;
 	for (int i = 0; i<fileSize; i++)
 		{
@@ -3150,71 +3251,18 @@ add_ptr=0;
 			{
 			NoOfTextures = ImageCount;
 			}
-		if (game == UW2)
-			{
-			NoOfTextures=25;
-			}
-		int UW2_X[26] = {
-			41,
-			0,
-			0,
-			0,
-			0,
-			55,
-			129,
-			195,
-			0,
-			158,
-			162,
-			179,
-			240,
-			189,
-			155,
-			117,
-			108,
-			0,
-			0,
-			0,
-			0,
-			0,
-			121,
-			117,
-			114
-			};
-		int UW2_Y[26] = {
-			102,
-			43,
-			7,
-			0,
-			22,
-			47,
-			49,
-			49,
-			0,
-			128,
-			119,
-			127,
-			144,
-			128,
-			128,
-			121,
-			35,
-			0,
-			0,
-			0,
-			0,
-			0,
-			62,
-			65,
-			68
-			};
+
+//Offsets into weap.dat for UW2 for the various weapon frames.
+		int UW2_X[232] = { 35, 36, 37, -1, 39, 40, 41, 42, -1, 44, 45, 46, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 57, 58, 59, -1, -1, 62, 63, 64, -1, 132, 133, 134, -1, 136, 137, 138, 139, -1, 141, 142, 143, -1, 145, 146, 147, 148, -1, -1, -1, -1, -1, 154, 155, 156, -1, -1, 159, 160, 161, -1, 229, 230, 231, -1, 233, 234, 235, 236, -1, 238, 239, 240, -1, 242, 243, 244, 245, -1, -1, -1, -1, -1, 251, 252, 253, -1, -1, 256, 257, 258, -1, -1, -1, -1, -1, 330, 331, 332, -1, -1, 335, -1, 337, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 423, 424, 425, -1, 427, 428, 429, 430, -1, 432, 433, 434, -1, 436, 437, 438, 439, -1, -1, -1, -1, -1, 446, 447, 448, -1, -1, -1, 454, 455, 456, 520, 521, 522, -1, 524, 525, 526, 527, -1, 529, 530, 531, -1, 533, 534, 535, 536, -1, -1, -1, -1, -1, 542, 543, 544, -1, -1, 547, 548, 549, -1, 617, 618, 619, -1, 621, 622, 623, 624, -1, 626, 627, 628, -1, 630, 631, 632, 633, -1, -1, -1, -1, -1, 639, 640, 641, -1, -1, 644, 645, 646, -1, -1, -1, -1, -1, 718, 719, 720, -1, 723, -1, 725, -1, };
+		int UW2_Y[232] = { 66, 67, 68, -1, 70, 71, 72, 73, -1, 75, 76, 77, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 88, 89, 90, -1, -1, 93, 94, 95, -1, 163, 164, 165, -1, 167, 168, 169, 170, -1, 172, 173, 174, -1, 176, 177, 178, 179, -1, -1, -1, -1, -1, 185, 186, 187, -1, -1, 190, 191, 192, -1, 260, 261, 262, -1, 264, 265, 266, 267, -1, 269, 270, 271, -1, 273, 274, 275, 276, -1, -1, -1, -1, -1, 282, 283, 284, -1, -1, 287, 288, 289, -1, -1, -1, -1, -1, 361, 362, 363, -1, -1, 366, -1, 368, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 454, 455, 456, -1, 458, 459, 460, 461, -1, 463, 464, 465, -1, 467, 468, 469, 470, -1, -1, -1, -1, -1, 476, 477, 478, -1, -1, -1, -1, -1, -1, 551, 552, 553, -1, 555, 556, 557, 558, -1, 560, 561, 562, -1, 564, 565, 566, 567, -1, -1, -1, -1, -1, 573, 574, 575, -1, -1, 578, 579, 580, -1, 648, 649, 650, -1, 652, 653, 654, 655, -1, 657, 658, 659, -1, 661, 662, 663, 664, -1, -1, -1, -1, -1, 670, 671, 672, -1, -1, 675, 676, 677, -1, -1, -1, -1, -1, 749, 750, 751, -1, 754, -1, 756, -1, };
+
 
 		for (i = 0; i < NoOfTextures; i++)
 			{
 			int MaxHeight = 112;
 			int MaxWidth = 172;
 			if (game == UW2)
-				{//TODO:Figure out the correct values for this.
+				{
 				MaxHeight = 128;
 				MaxWidth = 208;
 				}
@@ -3242,45 +3290,71 @@ add_ptr=0;
 
 			//Paste source image into output image.
 			int ColCounter = 0; int RowCounter = 0;
-			int cornerX = AnimX[i];
-			int cornerY = AnimY[i];
-			if (game == UW2)
+			int cornerX;// = AnimX[i];
+			int cornerY;// = AnimY[i];
+			if (game != UW2)
 				{
-				cornerX = UW2_X[i];
-				cornerY = UW2_Y[i];
+				cornerX = AnimX[i];
+				cornerY = AnimY[i];
 				}
-		fprintf(LOGFILE, "Image %d, Corner X = %d Corner Y = %d\n",i,cornerX,cornerY);
-		bool ImgStarted = false;
-		for (int y = 0; y < MaxHeight; y++)
-			{
-			for (int x = 0; x < MaxWidth; x++)
-				{
-				if ((cornerX + ColCounter == x) && (MaxHeight - cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
-					{//the pixel from the source image is here 
-					ImgStarted = true;
-					outputImg[x + (y*MaxWidth)] = srcImg[ColCounter + (RowCounter*BitMapWidth)];
-					ColCounter++;
+			else
+				{//Read from XY
+				if (UW2_X[i] != -1)
+					{
+					cornerX = AnimXY[UW2_X[i]];
+					cornerY = AnimXY[UW2_Y[i]];
 					}
 				else
 					{
-					outputImg[x + (y*MaxWidth)] = 0;//alpha
+					cornerX=0;
+					cornerY=BitMapHeight;
 					}
 				}
-			if (ImgStarted == true)
-				{//New Row on the src image
-				RowCounter++;
-				ColCounter = 0;
+
+			if ((game == UW1) || ((game == UW2) && (UW2_X[i] != -1)))//Only create if UW1 image or a valid uw2 one
+			{
+			fprintf(LOGFILE, "Image %d, Corner X = %d Corner Y = %d\n",i,cornerX,cornerY);
+			bool ImgStarted = false;
+			for (int y = 0; y < MaxHeight; y++)
+				{
+				for (int x = 0; x < MaxWidth; x++)
+					{
+					if ((cornerX + ColCounter == x) && (MaxHeight - cornerY + RowCounter == y) && (ColCounter<BitMapWidth) && (RowCounter<BitMapHeight))
+						{//the pixel from the source image is here 
+						ImgStarted = true;
+						outputImg[x + (y*MaxWidth)] = srcImg[ColCounter + (RowCounter*BitMapWidth)];
+						ColCounter++;
+						}
+					else
+						{
+						if ((game == UW2) && (UW2_X[i] == -1))
+							{
+							alpha=50;
+							}
+						else
+							{
+							alpha=200;//0
+							}
+						outputImg[x + (y*MaxWidth)] = alpha;
+						}
+					}
+				if (ImgStarted == true)
+					{//New Row on the src image
+					RowCounter++;
+					ColCounter = 0;
+					}
+				}
+			char ImageName[255];
+
+			sprintf(ImageName, "%s_%d",OutFileName,auxPalIndex);
+			if (useTGA == 1)
+				{
+				writeTGA(outputImg, 0, MaxWidth, MaxHeight, i, auxpal, ImageName, ALPHA);
+				}
+			else
+				{
+				writeBMP(outputImg, 0, MaxWidth, MaxHeight, i, auxpal, ImageName);
 				}
 			}
-		char ImageName[255];
-		sprintf(ImageName, "%s_%d",OutFileName,auxPalIndex);
-		if (useTGA == 1)
-			{
-			writeTGA(outputImg, 0, MaxWidth, MaxHeight, i, auxpal, ImageName, ALPHA);
-			}
-		else
-			{
-			writeBMP(outputImg, 0, MaxWidth, MaxHeight, i, auxpal, ImageName);
-			}
-		}
+	}
 }

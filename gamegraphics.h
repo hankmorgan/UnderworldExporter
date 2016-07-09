@@ -82,7 +82,7 @@ void copyPalette(palette *inPal, palette *outPal);
 
 void extractAllCrittersUW1(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA);
 void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char PaletteFile[255], int game, int useTGA);
-void PrintAnimName(int game, int animNo);
+bool PrintAnimName(int game, int animNo);
 void PrintCritAngle(int angle);
 void ExtractWeaponAnimations(int ImageCount, char filePathIn[255], char PaletteFile[255], int PaletteNo, int BitmapSize, int FileType, char OutFileName[255], char auxPalPath[255], char animFile[255], int useTGA ,int game);
 #endif /*gamegraphics_h*/
