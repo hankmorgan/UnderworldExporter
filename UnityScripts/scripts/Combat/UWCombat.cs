@@ -84,7 +84,7 @@ public class UWCombat : Combat {
 	/// </summary>
 	public override IEnumerator ExecuteMelee()
 	{		
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(0.4f);
 		
 		Ray ray ;
 		if (GameWorldController.instance.playerUW.MouseLookEnabled==true)

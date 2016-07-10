@@ -60,8 +60,6 @@
 #define ENABLE_LIGHTING 1
 #define ENABLE_WATER 1
 
-#define GREYSCALE 0
-
 /*Globals*/
 extern int BrushSizeX;
 extern int BrushSizeY;
@@ -135,11 +133,15 @@ extern int CEILING_HEIGHT;
 #define UW2_SIZE_BLOCK 2
 #define UW2_SPACE_BLOCK 3
 
-//Turn off alpha channels globally.
-#define ALPHA 1
+//Turn on alpha channels globally.
+#define ALPHA 0
+
+//Generate graphics in Greyscale for palette operations
+#define GREYSCALE 0
+
 
 //Should graphics be actually extracted or should I just go through the motions?
-#define ACTUALLY_EXTRACT_FILES 0
+#define ACTUALLY_EXTRACT_FILES 1
 
 //Should Repack_mode repack the .ark into UW1 format for pulling the conversation scripts out for UW2
 #define REPACK_INTO_UW1_HACK 1 

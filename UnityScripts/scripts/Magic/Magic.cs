@@ -921,8 +921,8 @@ public class Magic : UWEBase {
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("UWObjects");
 						myObj.transform.position = ray.GetPoint(dropRange);
-						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_182",true);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +ObjectNo, _RES +"/Sprites/OBJECTS_" +ObjectNo, _RES +"/Sprites/OBJECTS_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
 						fd.Nutrition=5;//TODO:determine values to use here.
 						WindowDetect.UnFreezeMovement(myObj);
@@ -949,8 +949,8 @@ public class Magic : UWEBase {
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster);
 
-						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), 0);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/OBJECTS_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/OBJECTS_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
+						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), 0);
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
 						string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
 						string navMeshName="";
@@ -1592,8 +1592,8 @@ public class Magic : UWEBase {
 								myObj.layer=LayerMask.NameToLayer("UWObjects");
 								myObj.transform.position=pos;
 								myObj.transform.Rotate(-90,0,0);
-								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_386",false);
-								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_386", _RES +"/Sprites/OBJECTS_386", _RES +"/Sprites/OBJECTS_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
+								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
+								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
 								arrow.item_index=339+boulderTypeOffset;
 								arrow.item_type=23;
@@ -1847,8 +1847,8 @@ public class Magic : UWEBase {
 				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
-				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_393",true);
-				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_393", _RES +"/Sprites/OBJECTS_393", _RES +"/Sprites/OBJECTS_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
+				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_393",true);
+				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
 				a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
 				BoxCollider bx=myObj.GetComponent<BoxCollider>();
 				if (bx==null)

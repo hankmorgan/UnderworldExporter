@@ -184,7 +184,7 @@ int main()
 	uw1_graphics_file[22] = "Data\\INV.GR";
 	uw1_graphics_file[23] = "Data\\LFTI.GR";
 	uw1_graphics_file[24] = "Data\\OBJECTS.GR";
-	uw1_graphics_file[25] = "Data\\OPTBN.GR";
+	uw1_graphics_file[25] = "Data\\OPBTN.GR";//Pal #6. alpha off.
 	uw1_graphics_file[26] = "Data\\OPTB.GR";
 	uw1_graphics_file[27] = "Data\\OPTBTNS.GR";
 	uw1_graphics_file[28] = "Data\\PANELS.GR";
@@ -224,7 +224,7 @@ int main()
 	uw2_graphics_file[16] = "Data\\FLASKS.GR";
 	uw2_graphics_file[17] = "Data\\GEMPT.GR";
 	uw2_graphics_file[18] = "Data\\GENHEAD.GR";
-	uw2_graphics_file[19] = "Data\\GHEAD.GR";
+	uw2_graphics_file[19] = "Data\\GHED.GR";
 	uw2_graphics_file[20] = "Data\\HEADS.GR";
 	uw2_graphics_file[21] = "Data\\INV.GR";
 	uw2_graphics_file[22] = "Data\\LFTI.GR";

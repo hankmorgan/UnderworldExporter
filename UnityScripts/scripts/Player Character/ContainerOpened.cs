@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class ContainerOpened : GuiBase {
 //The gui element that represents the currently opened container in the inventory.
+	public GameObject BackpackBg;
+	public GameObject InvUp;
+	public GameObject InvDown;
 
 	void CloseChildContainer(Container ClosingParent)
 	{//Recursively closes open child containers
@@ -47,10 +50,19 @@ public class ContainerOpened : GuiBase {
 			if (GameWorldController.instance.playerUW.playerInventory.currentContainer == GameWorldController.instance.playerUW.name)
 			{
 				GetComponent<RawImage>().texture=GameWorldController.instance.playerUW.playerInventory.Blank;
+				BackpackBg.SetActive(false);
+				InvUp.SetActive(false);
+				InvDown.SetActive(false);
 			}
 			else
 			{
 				GetComponent<RawImage>().texture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				BackpackBg.SetActive(true);
+				if (DestinationContainer.CountItems()>8)
+				{
+						InvUp.SetActive(true);
+						InvDown.SetActive(true);
+				}
 			}
 			for (int i = 0; i<8; i++)
 			{

@@ -66,7 +66,7 @@ public class TextureController : UWEBase {
 			//Debug.Log(index);
 			if (ObjectInUse[index]==false)
 			{//Sprite not already loaded. Request it.
-				ObjectSrcImage[index] = LoadImage (_RES +"/Sprites/Palette/OBJECTS_BASE_",index);
+				ObjectSrcImage[index] = LoadImage (_RES +"/Sprites/Object_Greyscale/OBJECTS_BASE_",index);
 				ObjectInUse[index]=true;
 			}
 			//Apply the current palette to the dst image

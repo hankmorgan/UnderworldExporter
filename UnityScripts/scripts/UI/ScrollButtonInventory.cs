@@ -11,9 +11,9 @@ public class ScrollButtonInventory : Scrollbutton {
 
 
 	private int previousScrollValue=-1;
-	public PlayerInventory pInv;
+	//public PlayerInventory pInv;
 
-	void OnClick()
+	public void OnClick()
 	{
 			ScrollValue = ScrollValue + stepSize;
 			if (ScrollValue >MaxScrollValue)
@@ -32,8 +32,8 @@ public class ScrollButtonInventory : Scrollbutton {
 		if (ScrollValue!=previousScrollValue)
 		{
 			previousScrollValue=ScrollValue;
-			pInv.ContainerOffset=ScrollValue;
-			pInv.Refresh ();
+			GameWorldController.instance.playerUW.playerInventory.ContainerOffset=ScrollValue;
+			GameWorldController.instance.playerUW.playerInventory.Refresh ();
 		}
 	}
 }

@@ -2602,6 +2602,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 				fprintf(LOGFILE, "//Animation #%d ", Animation);
 				bool NoAngle=false;
 				bool PrintFrames=true;
+				int NoOfValid=0;
 				if (PrintAnimName(game, Animation))//Prints out what the animation is.
 					{
 					NoAngle = true;
@@ -2617,7 +2618,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 							
 					if (NoAngle==false)
 						{
-						fprintf(LOGFILE, "\nCreateAnimationUW(\"%d_",CritterID+64);
+						fprintf(LOGFILE, "\nCreateAnimationUW(\"%d_",i+64);
 						PrintAnimName(game, Animation);
 						fprintf(LOGFILE, "_");
 						PrintCritAngle(Angle); //Prints out the cardinal direction (front,left,right,rear etc) for the animation
@@ -2628,7 +2629,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 						{//only print the front version of it
 						if (Angle == 4)
 							{
-							fprintf(LOGFILE, "\nCreateAnimationUW(\"");
+						fprintf(LOGFILE, "\nCreateAnimationUW(\"%d_", i + 64);
 							PrintAnimName(game, Animation);
 							fprintf(LOGFILE, "\"");
 							PrintFrames=true;
@@ -2639,6 +2640,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 							}
 						}
 					int ValidEntries = getValAtAddress(CRAN, cranAdd + (Animation * 64) + (Angle * 8) + (7), 8);//Get how many valid frames are in the animation
+					NoOfValid = 0;
 					//fprintf(LOGFILE, " Valid is %d", ValidEntries);
 					for (int FrameNo = 0; FrameNo < 6; FrameNo++)//Each animation has up to 6 frames. We keep the last valid one for the page lookup
 						{
@@ -2678,6 +2680,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 							if (PrintFrames == true)
 								{
 								fprintf(LOGFILE, ",\"%s", fileCrit);
+								NoOfValid++;
 								if (PageNo == 0)
 									{
 									fprintf(LOGFILE, "_%04d\"", frameIndices[x]);
@@ -2698,7 +2701,7 @@ void extractAllCrittersUW2(char fileAssoc[255], char CritPath[255], char Palette
 						}
 					if (PrintFrames == true)
 						{
-						fprintf(LOGFILE, ", %d, _RES + \"/Sprites/Critters\" , 0.2f);\n", ValidEntries);
+						fprintf(LOGFILE, ", %d, _RES + \"/Sprites/Critters\" , 0.2f);\n", NoOfValid);						
 						}
 					}
 				}
@@ -2750,7 +2753,7 @@ bool PrintAnimName(int game, int animNo)
 					switch (animNo)
 						{
 						case 0x0:fprintf(LOGFILE, "idle"); break;
-						case 0x1:fprintf(LOGFILE, "walking"); return true; break;
+						case 0x1:fprintf(LOGFILE, "walking"); break;
 						case 0x2:fprintf(LOGFILE, "attack_bash"); return true; break;
 						case 0x3:fprintf(LOGFILE, "attack_slash"); return true; break;
 						case 0x4:fprintf(LOGFILE, "attack_thrust"); return true; break;
@@ -3253,9 +3256,8 @@ add_ptr=0;
 			}
 
 //Offsets into weap.dat for UW2 for the various weapon frames.
-		int UW2_X[232] = { 35, 36, 37, -1, 39, 40, 41, 42, -1, 44, 45, 46, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 57, 58, 59, -1, -1, 62, 63, 64, -1, 132, 133, 134, -1, 136, 137, 138, 139, -1, 141, 142, 143, -1, 145, 146, 147, 148, -1, -1, -1, -1, -1, 154, 155, 156, -1, -1, 159, 160, 161, -1, 229, 230, 231, -1, 233, 234, 235, 236, -1, 238, 239, 240, -1, 242, 243, 244, 245, -1, -1, -1, -1, -1, 251, 252, 253, -1, -1, 256, 257, 258, -1, -1, -1, -1, -1, 330, 331, 332, -1, -1, 335, -1, 337, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 423, 424, 425, -1, 427, 428, 429, 430, -1, 432, 433, 434, -1, 436, 437, 438, 439, -1, -1, -1, -1, -1, 446, 447, 448, -1, -1, -1, 454, 455, 456, 520, 521, 522, -1, 524, 525, 526, 527, -1, 529, 530, 531, -1, 533, 534, 535, 536, -1, -1, -1, -1, -1, 542, 543, 544, -1, -1, 547, 548, 549, -1, 617, 618, 619, -1, 621, 622, 623, 624, -1, 626, 627, 628, -1, 630, 631, 632, 633, -1, -1, -1, -1, -1, 639, 640, 641, -1, -1, 644, 645, 646, -1, -1, -1, -1, -1, 718, 719, 720, -1, 723, -1, 725, -1, };
-		int UW2_Y[232] = { 66, 67, 68, -1, 70, 71, 72, 73, -1, 75, 76, 77, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 88, 89, 90, -1, -1, 93, 94, 95, -1, 163, 164, 165, -1, 167, 168, 169, 170, -1, 172, 173, 174, -1, 176, 177, 178, 179, -1, -1, -1, -1, -1, 185, 186, 187, -1, -1, 190, 191, 192, -1, 260, 261, 262, -1, 264, 265, 266, 267, -1, 269, 270, 271, -1, 273, 274, 275, 276, -1, -1, -1, -1, -1, 282, 283, 284, -1, -1, 287, 288, 289, -1, -1, -1, -1, -1, 361, 362, 363, -1, -1, 366, -1, 368, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 454, 455, 456, -1, 458, 459, 460, 461, -1, 463, 464, 465, -1, 467, 468, 469, 470, -1, -1, -1, -1, -1, 476, 477, 478, -1, -1, -1, -1, -1, -1, 551, 552, 553, -1, 555, 556, 557, 558, -1, 560, 561, 562, -1, 564, 565, 566, 567, -1, -1, -1, -1, -1, 573, 574, 575, -1, -1, 578, 579, 580, -1, 648, 649, 650, -1, 652, 653, 654, 655, -1, 657, 658, 659, -1, 661, 662, 663, 664, -1, -1, -1, -1, -1, 670, 671, 672, -1, -1, 675, 676, 677, -1, -1, -1, -1, -1, 749, 750, 751, -1, 754, -1, 756, -1, };
-
+		int UW2_X[232] = { 35, 36, 37, -1, 39, 40, 41, 42, -1, 44, 45, 46, -1, 48, 49, 50, 51, -1, -1, -1, -1, -1, 57, 58, 59, -1, -1, 62, 63, 64, -1, 132, 133, 134, -1, 136, 137, 138, 139, -1, 141, 142, 143, -1, 145, 146, 147, 148, -1, -1, -1, -1, -1, 154, 155, 156, -1, -1, 159, 160, 161, -1, 229, 230, 231, -1, 233, 234, 235, 236, -1, 238, 239, 240, -1, 242, 243, 244, 245, -1, -1, -1, -1, -1, 251, 252, 253, -1, -1, 256, 257, 258, -1, -1, -1, -1, -1, 330, 331, 332, -1, -1, 335, -1, 337, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 423, 424, 425, -1, 427, 428, 429, 430, -1, 432, 433, 434, -1, 436, 437, 438, 439, -1, -1, -1, -1, -1, 446, 447, 448, -1, -1, -1, 450, 451, 452, 520, 521, 522, -1, 524, 525, 526, 527, -1, 529, 530, 531, -1, 533, 534, 535, 536, -1, -1, -1, -1, -1, 542, 543, 544, -1, -1, 547, 548, 549, -1, 617, 618, 619, -1, 621, 622, 623, 624, -1, 626, 627, 628, -1, 630, 631, 632, 633, -1, -1, -1, -1, -1, 639, 640, 641, -1, -1, 644, 645, 646, -1, -1, -1, -1, -1, 718, 719, 720, -1, 723, -1, 725, -1, -1 };
+		int UW2_Y[232] = { 66, 67, 68, -1, 70, 71, 72, 73, -1, 75, 76, 77, -1, 79, 80, 81, 82, -1, -1, -1, -1, -1, 88, 89, 90, -1, -1, 93, 94, 95, -1, 163, 164, 165, -1, 167, 168, 169, 170, -1, 172, 173, 174, -1, 176, 177, 178, 179, -1, -1, -1, -1, -1, 185, 186, 187, -1, -1, 190, 191, 192, -1, 260, 261, 262, -1, 264, 265, 266, 267, -1, 269, 270, 271, -1, 273, 274, 275, 276, -1, -1, -1, -1, -1, 282, 283, 284, -1, -1, 287, 288, 289, -1, -1, -1, -1, -1, 361, 362, 363, -1, -1, 366, -1, 368, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 454, 455, 456, -1, 458, 459, 460, 461, -1, 463, 464, 465, -1, 467, 468, 469, 470, -1, -1, -1, -1, -1, 476, 477, 478, -1, -1, -1, 481, 482, 483, 551, 552, 553, -1, 555, 556, 557, 558, -1, 560, 561, 562, -1, 564, 565, 566, 567, -1, -1, -1, -1, -1, 573, 574, 575, -1, -1, 578, 579, 580, -1, 648, 649, 650, -1, 652, 653, 654, 655, -1, 657, 658, 659, -1, 661, 662, 663, 664, -1, -1, -1, -1, -1, 670, 671, 672, -1, -1, 675, 676, 677, -1, -1, -1, -1, -1, 749, 750, 751, -1, 754, -1, 756, -1, -1 };
 
 		for (i = 0; i < NoOfTextures; i++)
 			{
@@ -3278,7 +3280,7 @@ add_ptr=0;
 			unsigned char *srcImg;
 			//fprintf(LOGFILE, "4 bit run-length\n");
 			//auxPalIndex = getValAtAddress(textureFile, textureOffset + 3, 8);
-			auxPalIndex = 0;
+			auxPalIndex = 1;
 			datalen = getValAtAddress(textureFile, textureOffset + 4, 16);
 			imgNibbles = new unsigned char[BitMapWidth*BitMapHeight * 2];
 			textureOffset = textureOffset + 6;	//Start of raw data.
@@ -3333,7 +3335,7 @@ add_ptr=0;
 							}
 						else
 							{
-							alpha=200;//0
+							alpha=0;//0
 							}
 						outputImg[x + (y*MaxWidth)] = alpha;
 						}

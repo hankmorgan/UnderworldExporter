@@ -1661,25 +1661,25 @@ public class Conversation : GuiBase {
 		GameObject myObj=new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
-		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/OBJECTS_" + item_id,true);
+		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_id,true);
 
 		switch (item_id)
 		{//Some known cases
 		case 276://Exploding book
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			myObj.AddComponent<ReadableTrap>();
 			break;
 		case 47://Dragonskin boots
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			//myObj.AddComponent<Boots>();
 			Boots.CreateBoots(myObj, _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", 5, 17);
 			break;
 		case 314:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<Readable>();//Scroll given by Biden
 			break;
 		default:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), _RES +"/Sprites/OBJECTS_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<object_base>();
 			break;
 		}

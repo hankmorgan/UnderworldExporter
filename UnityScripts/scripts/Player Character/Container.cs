@@ -559,5 +559,21 @@ public class Container : object_base {
 		}
 		return "";
 	}
+		/// <summary>
+		/// Counts the number of items in the container..
+		/// </summary>
+		/// <returns>The items.</returns>
+		public int CountItems()
+		{
+				int count=0;
+				for (int i =0; i<MaxCapacity(); i++ )
+				{
+						if (items[i]!="")
+						{
+							count++;
+						}
+				}
+				return count;
+		}
 
 }
