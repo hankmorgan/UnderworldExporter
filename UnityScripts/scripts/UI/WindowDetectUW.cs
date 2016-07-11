@@ -411,11 +411,11 @@ public class WindowDetectUW : WindowDetect {
 		FullScreen=true;
 		setPositions();
 
-		chains.EnableDisableControl("main_window",false);
+		playerUW.playerHud.ChainsControl.EnableDisableControl("main_window",false);
 		RectTransform pos= this.GetComponent<RectTransform>();
 		pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
 		pos.sizeDelta=new Vector2(800.0f, 600f);
-		chains.Refresh();
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 
 				/*
 		
@@ -454,11 +454,11 @@ public class WindowDetectUW : WindowDetect {
 	{
 		FullScreen=false;
 		setPositions();
-		chains.EnableDisableControl("main_window",true);
+		playerUW.playerHud.ChainsControl.EnableDisableControl("main_window",true);
 		RectTransform pos= this.GetComponent<RectTransform>();
 		pos.localPosition = new Vector3(-55.5f,73.0f,0.0f);
 		pos.sizeDelta=new Vector2(430.0f, 340f);
-		chains.Refresh();
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 
 	//	anchor.side= UIAnchor.Side.Left;
 		//anchor.relativeOffset=new Vector2(0.43f,0.13f);

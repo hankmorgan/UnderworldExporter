@@ -18,7 +18,7 @@ public class UWHUD : HUD {
 	public RawImage[] ConversationPortraits;
 	public Text Encumberance;
 
-	
+	public chains ChainsControl;
 
 	//Conversation Controls
 	public ScrollController Conversation_tl;//Text output.

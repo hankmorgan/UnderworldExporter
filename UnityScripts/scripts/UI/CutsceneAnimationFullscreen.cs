@@ -19,7 +19,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		//Starts a sequenced cutscene.
 		GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 		chains.ActiveControl=5;
-		chains.Refresh();
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 		isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
 		if (!isFullScreen)
 		{
@@ -102,7 +102,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 			chains.ActiveControl=5;
-			chains.Refresh();
+			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 			isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
 			if (!isFullScreen)
 			{
@@ -122,7 +122,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			}
 			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			chains.ActiveControl=0;
-			chains.Refresh();
+			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 			SetAnimation= "Anim_Base";//Clears out the animation.
 		}
 		else

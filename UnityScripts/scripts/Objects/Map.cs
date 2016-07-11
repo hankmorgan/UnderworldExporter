@@ -41,7 +41,7 @@ public class Map : object_base {
 		playerUW.playerHud.MessageScroll.Clear();
 
 		chains.ActiveControl=4;
-		chains.Refresh ();
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh ();
 		return true;
 	}
 

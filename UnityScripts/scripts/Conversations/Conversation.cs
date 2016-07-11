@@ -155,7 +155,7 @@ public class Conversation : GuiBase {
 		///Setup UI Elements - code formerly in NPC
 		StringBlock =StringBlockNo;
 		chains.ActiveControl=3;
-		chains.Refresh();
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 		tl=GameWorldController.instance.playerUW.playerHud.Conversation_tl;
 		tl_input=GameWorldController.instance.playerUW.playerHud.MessageScroll;
 		tl.Clear();

@@ -5,7 +5,7 @@ public class chains : GuiBase_Draggable {
 	/*GUI Element for switching panel displays but also controls which other GUI elements are displayed.*/
 	public static int ActiveControl;
 	public static int setControl=-1;
-	static GameObject ControlParent;
+	public GameObject ControlParent;
 	public void OnClick()
 	{
 	if (Dragging==true){return;}
@@ -31,7 +31,7 @@ public class chains : GuiBase_Draggable {
 		}
 	}
 
-	public static GameObject EnableDisableControl(string ControlName, bool targetState)
+	public GameObject EnableDisableControl(string ControlName, bool targetState)
 	{
 		if (ControlParent==null)
 			{
@@ -52,7 +52,7 @@ public class chains : GuiBase_Draggable {
 	}
 
 
-	public static void Refresh()
+	public void Refresh()
 	{
 		bool InventoryEnabled=false;
 		bool RuneBagEnabled=false;
