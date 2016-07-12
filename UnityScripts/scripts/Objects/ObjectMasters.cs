@@ -3,20 +3,20 @@ using System.Collections;
 using System.Text;
 using System.IO;
 
-public class ObjectMasters : MonoBehaviour {
+public class ObjectMasters {
 	//An implementation of the similar system for the exporter
-	public string PathToConfig;
+	//public string PathToConfig;
 
-	int[] index = new int[500];//no
-	int[] objClass= new int[500];	//For Shock
-	int[] objSubClass= new int[500];
-	int[] objSubClassIndex= new int[500];
-	string[] cat = new string[500];
-	int[] type = new int[500];	//from above
-	string[] desc= new string[500];
-	string[] path= new string[500]; //to object model
-	string[] particle= new string[500];
-	string[] sound= new string[500];
+		public int[] index = new int[500];//no
+		public int[] objClass= new int[500];	//For Shock
+		public int[] objSubClass= new int[500];
+		public int[] objSubClassIndex= new int[500];
+		public string[] cat = new string[500];
+		public int[] type = new int[500];	//from above
+		public string[] desc= new string[500];
+		public string[] path= new string[500]; //to object model
+		public string[] particle= new string[500];
+		public string[] sound= new string[500];
 	//int[] isEntity= new int[500]; // 1 for entity. 0 for model. -1 for ignored entries
 	//int[] isSet= new int[500];
 
@@ -24,21 +24,30 @@ public class ObjectMasters : MonoBehaviour {
 	//int[] renderType= new int[500];
 	//int[] frame1= new int[500];	//Frame no
 	//int[] DeathWatch= new int[500];
-	int[] hasParticle= new int[500];
-	int[] hasSound= new int[500];
-	string[] baseModel= new string[500];
-	int[] isSolid= new int[500];
-	int[] isMoveable= new int[500];
-	int[] isInventory= new int[500];
-	string[] InvIcon= new string[500];
+		public int[] hasParticle= new int[500];
+		public int[] hasSound= new int[500];
+		public string[] baseModel= new string[500];
+		public int[] isSolid= new int[500];
+		public int[] isMoveable= new int[500];
+		public int[] isInventory= new int[500];
+		public string[] InvIcon= new string[500];
+		public string[] EquippedIconFemaleLowestQuality = new string[500];
+		public string[] EquippedIconFemaleLowQuality = new string[500];
+		public string[] EquippedIconFemaleMediumQuality = new string[500];
+		public string[] EquippedIconFemaleBestQuality = new string[500];
+		public string[] EquippedIconMaleLowestQuality	= new string[500];
+		public string[] EquippedIconMaleLowQuality	= new string[500];
+		public string[] EquippedIconMaleMediumQuality	= new string[500];
+		public string[] EquippedIconMaleBestQuality= new string[500];
+	
 
 
 	// Use this for initialization
-	void Start () {
-		Load(PathToConfig);
-	}
+	//void Start () {
+	//	Load(PathToConfig);
+	//}
 
-	private bool Load(string fileName)
+	public bool Load(string fileName)
 	{
 		int i=0;
 		string line;
@@ -76,6 +85,18 @@ public class ObjectMasters : MonoBehaviour {
 						isMoveable[i]= int.Parse(entries[14]);
 						isInventory[i]= int.Parse(entries[15]);
 						InvIcon[i]= entries[16];
+
+						EquippedIconFemaleLowestQuality[i]= entries[17];
+						EquippedIconFemaleLowQuality[i]= entries[18];
+						EquippedIconFemaleMediumQuality[i]= entries[19];
+						EquippedIconFemaleBestQuality[i]= entries[20];
+						EquippedIconMaleLowestQuality[i]= entries[21];
+						EquippedIconMaleLowQuality[i]= entries[22];
+						EquippedIconMaleMediumQuality[i]= entries[23];
+						EquippedIconMaleBestQuality[i]= entries[24];
+
+
+
 						/*extraInfo[i]= int.Parse(entries[11]);
 						renderType[i]= int.Parse(entries[12]);
 						frame1[i]= int.Parse(entries[13]);

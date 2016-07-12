@@ -346,28 +346,6 @@ public class WindowDetectUW : WindowDetect {
 					//Get the object being dropped and moved towards the end of the ray
 				
 					GameObject droppedItem = playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(playerUW.playerInventory.ObjectInHand);
-					//Clone the object in hand and give it a new uid
-					if (UsingRoomManager==true)
-					{
-							GameObject objClone = new GameObject();  //Instantiate(droppedItem);
-							objClone.name=droppedItem.name;
-							droppedItem.GetComponent<ObjectInteraction>().CopyGameObjectInteraction(objClone);
-							droppedItem.GetComponent<object_base>().CopyObject_base(objClone);
-							//Copy the sprite
-							GameObject objCloneChild=new GameObject(objClone.name + "_sprite");
-							objCloneChild.transform.parent=objClone.transform;
-							objCloneChild.AddComponent<Billboard>();
-							objCloneChild.AddComponent<SpriteRenderer>();
-							objCloneChild.GetComponent<SpriteRenderer>().material=Resources.Load<Material>("Materials/SpriteShader");//=droppedItem.GetComponentInChildren<SpriteRenderer>().material;
-							objCloneChild.transform.localScale=new Vector3(2.0f,2.0f,2.0f);
-							objCloneChild.transform.localPosition=Vector3.zero;
-							//objClone.AddComponent<StoreInformation>();
-							//objCloneChild.AddComponent<StoreInformation>();
-							droppedItem.name=droppedItem.name+ "_destroyed";
-							//droppedItem.transform.DestroyChildren();
-							DestroyImmediate(droppedItem.gameObject);
-							droppedItem=objClone;		
-					}
 
 					droppedItem.transform.parent=null;
 					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
@@ -380,6 +358,7 @@ public class WindowDetectUW : WindowDetect {
 						Container.SetItemsPosition (droppedItem.GetComponent<Container>(),playerUW.playerInventory.InventoryMarker.transform.position);
 					}
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//playerUW.transform.position;
+					droppedItem.transform.parent = GameWorldController.instance.LevelMarker;
 					WindowDetect.UnFreezeMovement(droppedItem);
 					if (Camera.main.ScreenToViewportPoint (Input.mousePosition).y>0.4f)
 					{//throw if above a certain point in the view port.

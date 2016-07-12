@@ -26,14 +26,18 @@ public class GameWorldController : UWEBase {
 	public UWCharacter playerUW;
 	public MusicController mus;
 	public GameObject InventoryMarker;
+	public Transform LevelMarker;//Where the gameobjects get stored
 	public string game;
 	public string UI_Name;
+	public ObjectMasters objectMaster; //= new ObjectMasters();
 	//public MeshRenderer ceil;
 		void Awake()
 		{
 			instance=this;
 			UWEBase._RES = game;
 			UWEBase._UI=UI_Name;
+			objectMaster=new ObjectMasters();
+			objectMaster.Load("c:\\underworld exporter\\src\\trunk\\" + game + "_object_config.txt");
 		}
 
 	void Start () {

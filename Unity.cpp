@@ -302,6 +302,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
+	fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = LevelParent;");//Parent the object
 	//fprintf(UNITY_FILE, "\n\tsi = myObj.AddComponent<StoreInformation>();");
 	//fprintf(UNITY_FILE, "\n\tsi.Id = myObj.name + \"_ID\";");
 	fprintf(UNITY_FILE, "\n\tCreateNPC(myObj,\"%d\",\"%s\", %d);", currobj.item_id, objectMasters[currobj.item_id].particle, currobj.npc_whoami);
@@ -439,6 +440,7 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 		}
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
+	fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = LevelParent;");//Parent the object
 	RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 	if (game != SHOCK)
 		{//bit 0-6 of the lock objects link is the keyid for opening it in uw

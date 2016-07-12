@@ -921,6 +921,7 @@ public class Magic : UWEBase {
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("UWObjects");
 						myObj.transform.position = ray.GetPoint(dropRange);
+						myObj.transform.parent=GameWorldController.instance.LevelMarker;
 						ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
 						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
@@ -946,6 +947,7 @@ public class Magic : UWEBase {
 						myObj.layer=LayerMask.NameToLayer("NPCs");
 						myObj.tag="NPCs";
 						myObj.transform.position = ray.GetPoint(dropRange);
+						myObj.transform.parent = GameWorldController.instance.LevelMarker;
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
 						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster);
 
@@ -1052,6 +1054,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(poison.impactFrameStart,poison.impactFrameEnd);	
 						int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
@@ -1085,6 +1088,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(curse.impactFrameStart,curse.impactFrameEnd);	
 						int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
@@ -1115,6 +1119,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 						if (npc.gameObject.GetComponent<SpellEffectAlly>()!=null)
@@ -1154,6 +1159,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 						if (npc.gameObject.GetComponent<SpellEffectConfusion>()!=null)
@@ -1191,6 +1197,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);		
 						if (npc.gameObject.GetComponent<SpellEffectFear>()!=null)
@@ -1229,6 +1236,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;//TODO: the impact needs to be closer to the player
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);	
 						int EffectSlot = CheckPassiveSpellEffectNPC(npc.gameObject);
@@ -1262,6 +1270,7 @@ public class Magic : UWEBase {
 						hitimpact= new GameObject(npc.transform.name + "_impact");
 						hitimpact.transform.position= npc.transform.position;
 						hitimpact.transform.position=hit.point;//TODO: the impact needs to be closer to the player
+						hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);
 						SpellProp_DirectDamage damage = new SpellProp_DirectDamage();
@@ -1592,6 +1601,7 @@ public class Magic : UWEBase {
 								myObj.layer=LayerMask.NameToLayer("UWObjects");
 								myObj.transform.position=pos;
 								myObj.transform.Rotate(-90,0,0);
+								myObj.transform.parent=GameWorldController.instance.LevelMarker;
 								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_386",false);
 								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", _RES +"/Sprites/Objects/Objects_386", 39, 386, 573, 9, 37, 0, 0, 0, 1, 1, 0, 5, 1);
 								a_arrow_trap arrow=	myObj.AddComponent<a_arrow_trap>();
@@ -1847,6 +1857,7 @@ public class Magic : UWEBase {
 				GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 				myObj.layer=LayerMask.NameToLayer("Ward");
 				myObj.transform.position = pos;
+				myObj.transform.parent=GameWorldController.instance.LevelMarker;
 				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_393",true);
 				ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393", _RES +"/Sprites/Objects/Objects_393",ObjectInteraction.A_WARD_TRAP, 393, 1, 40, 0, 0, 0, 0, 1, 0, 1, 0, 1);
 				a_ward_trap awt = myObj.AddComponent<a_ward_trap>();
@@ -2542,6 +2553,7 @@ public class Magic : UWEBase {
 				GameObject projectile = new GameObject();
 				projectile.layer = LayerMask.NameToLayer("MagicProjectile");
 				projectile.name = "MagicProjectile_" + SummonCount++;
+				projectile.transform.parent=GameWorldController.instance.LevelMarker;
 				ObjectInteraction.CreateObjectGraphics(projectile,spellprop.ProjectileSprite,true);
 				MagicProjectile mgp = projectile.AddComponent<MagicProjectile>();
 				mgp.spellprop=spellprop;

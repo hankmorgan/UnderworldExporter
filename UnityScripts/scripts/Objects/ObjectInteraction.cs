@@ -382,7 +382,7 @@ public class ObjectInteraction : UWEBase {
 	public bool Use()
 	{//Code to activate objects by type.
 		//Objects will return true if they have done everything that needs to be done and false if they expect the calling code to do something instead.
-		GameObject ObjectInHand =null;// = new GameObject();
+		GameObject ObjectInHand =null;
 		object_base item=null;//Base object class
 
 		ObjectInHand=playerUW.playerInventory.GetGameObjectInHand();

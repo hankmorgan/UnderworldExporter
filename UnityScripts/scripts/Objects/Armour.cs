@@ -10,14 +10,14 @@ public class Armour : Equipment {
 	
 	//Paperdoll graphics
 	//TODO:Use Object Masters for these
-	public string EquipFemaleLowest; 
-	public string EquipFemaleLow;
-	public string EquipFemaleMedium;
-	public string EquipFemaleBest;
-	public string EquipMaleLowest; 
-	public string EquipMaleLow;
-	public string EquipMaleMedium;
-	public string EquipMaleBest;
+	//public string EquipFemaleLowest; 
+	//public string EquipFemaleLow;
+	//public string EquipFemaleMedium;
+	//public string EquipFemaleBest;
+	//public string EquipMaleLowest; 
+	//public string EquipMaleLow;
+	//public string EquipMaleMedium;
+	//public string EquipMaleBest;
 
 		/// ProtectionBonus of magic armour
 	public int ProtectionBonus;
@@ -66,11 +66,11 @@ public class Armour : Equipment {
 		{
 			if (playerUW.isFemale)
 			{
-				SetEquipTexture(EquipFemaleLowest);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowestQuality[objInt.item_id]);
 			}
 			else
 			{
-				SetEquipTexture(EquipMaleLowest);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowestQuality[objInt.item_id]);
 			}
 		}
 		else if ((objInt.Quality>15) && (objInt.Quality<=30))
@@ -78,11 +78,11 @@ public class Armour : Equipment {
 			//Low quality
 			if (playerUW.isFemale)
 			{
-			SetEquipTexture(EquipFemaleLow);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowQuality[objInt.item_id]);
 			}
 			else
 			{
-			SetEquipTexture(EquipMaleLow);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowQuality[objInt.item_id]);
 			}
 		}
 		else if ((objInt.Quality>30) && (objInt.Quality<=45))
@@ -90,11 +90,11 @@ public class Armour : Equipment {
 			//Medium
 			if (playerUW.isFemale)
 			{
-			SetEquipTexture(EquipFemaleMedium);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleMediumQuality[objInt.item_id]);
 			}
 			else
 			{
-				SetEquipTexture(EquipMaleMedium);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleMediumQuality[objInt.item_id]);
 			}
 		}
 		else if ((objInt.Quality>45) && (objInt.Quality<=63))
@@ -102,11 +102,11 @@ public class Armour : Equipment {
 			//Best
 			if (playerUW.isFemale)
 			{
-			SetEquipTexture(EquipFemaleBest);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleBestQuality[objInt.item_id]);
 			}
 			else
 			{
-				SetEquipTexture(EquipMaleBest);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleBestQuality[objInt.item_id]);
 			}
 		}
 		objInt.SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
