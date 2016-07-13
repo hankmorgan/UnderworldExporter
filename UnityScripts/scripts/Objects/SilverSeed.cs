@@ -10,6 +10,7 @@ public class SilverSeed : object_base {
 		if (objInt.item_id==458)
 		{//The seed is a sapling
 			//Turn it into a seed.
+			//objInt.ChangeType(290,objInt.ItemType);
 			objInt.item_id=290;
 			objInt.WorldDisplayIndex=290;
 			objInt.InvDisplayIndex=290;

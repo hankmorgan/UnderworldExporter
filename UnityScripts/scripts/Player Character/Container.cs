@@ -209,6 +209,18 @@ public class Container : object_base {
 			string sItem = this.GetItemAt(i);
 			playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
 		}
+		playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
+		if (CountItems()>=8)
+		{
+			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(true);
+			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(true);
+		}
+		else
+		{	
+			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
+			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);						
+		}
+
 	}
 
 	public void SpillContents()

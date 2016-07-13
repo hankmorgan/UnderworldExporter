@@ -24,7 +24,7 @@ public class a_do_trap_emeraldpuzzle : trap_base {
 		string Item= ItemID.ToString("000");
 		GameObject myObj=  new GameObject("SummonedObject_" + playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
-		myObj.transform.parent=GameWorldController.instance.LevelMarker;
+		myObj.transform.parent=GameWorldController.instance.LevelMarker();
 		//myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
 		//myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
 		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_224",true);

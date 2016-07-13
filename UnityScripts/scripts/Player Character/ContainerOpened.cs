@@ -35,6 +35,7 @@ public class ContainerOpened : GuiBase {
 		if (GameWorldController.instance.playerUW.playerInventory.currentContainer==GameWorldController.instance.playerUW.name)
 		{//Don't do anything on the top level
 			GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;
+			BackpackBg.SetActive(false);
 			return;
 		}
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
@@ -51,18 +52,32 @@ public class ContainerOpened : GuiBase {
 			{
 				GetComponent<RawImage>().texture=GameWorldController.instance.playerUW.playerInventory.Blank;
 				BackpackBg.SetActive(false);
-				InvUp.SetActive(false);
-				InvDown.SetActive(false);
+				if (DestinationContainer.CountItems()>=8)
+				{
+					InvUp.SetActive(true);
+					InvDown.SetActive(true);
+				}
+				else
+				{	
+					InvUp.SetActive(false);
+					InvDown.SetActive(false);						
+				}
 			}
 			else
 			{
 				GetComponent<RawImage>().texture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				BackpackBg.SetActive(true);
-				if (DestinationContainer.CountItems()>8)
+				if (DestinationContainer.CountItems()>=8)
 				{
 						InvUp.SetActive(true);
 						InvDown.SetActive(true);
 				}
+				else
+				{	
+						InvUp.SetActive(false);
+						InvDown.SetActive(false);						
+				}
+
 			}
 			for (int i = 0; i<8; i++)
 			{

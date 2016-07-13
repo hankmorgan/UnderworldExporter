@@ -299,7 +299,7 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 	//objectOwnerEntity.
 	//RenderUnityModel(game,x,y,z,currobj,objList,LevelInfo);
 	int count=0;
-	fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
+		fprintf(UNITY_FILE, "\n\tmyObj = new GameObject(\"%s\");", UniqueObjectName(currobj));//Create the object
 	fprintf(UNITY_FILE, "\n\tpos = new Vector3(%ff, %ff, %ff);", x, z, y);//Create the object x,z,y
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.position = pos;");//Position the object
 	fprintf(UNITY_FILE, "\n\tmyObj.transform.parent = LevelParent;");//Parent the object
@@ -469,12 +469,12 @@ void RenderUnityEntityDoor(int game, float x, float y, float z, ObjectItem &curr
 		switch (objectMasters[currobj.item_id].type)
 			{//TODO:game versions.
 				case DOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"uw1/textures/doors/doors_%02d_material\", %d, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj, _RES + \"/textures/doors/doors_%02d_material\", %d, %d, %d);",
 						objectMasters[currobj.item_id].extraInfo, objList[currobj.link].link & 0x3F,
 						hasLock,isOpen);
 					break; 
 				case HIDDENDOOR:
-					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj,\"uw/materials/tmap/%s\", %d, %d, %d);",
+					fprintf(UNITY_FILE, "\n\tCreateDoor(myObj, _RES + \"/materials/tmap/%s\", %d, %d, %d);",
 						textureMasters[LevelInfo[currobj.tileX][currobj.tileY].wallTexture].path, 
 						objList[currobj.link].link & 0x3F,
 						hasLock, isOpen);
@@ -1016,7 +1016,7 @@ void RenderUnityEntitySIGN(int game, float x, float y, float z, ObjectItem &curr
 		{
 		UnityRotation(game, currobj.Angle1, currobj.Angle2, currobj.Angle3);
 		}
-	fprintf(UNITY_FILE, "\n\tSetSprite(myObj, \"Sprites/tmobj/tmobj_%02d\");", 20 + (currobj.flags & 0x07));
+	fprintf(UNITY_FILE, "\n\tSetSprite(myObj, _RES + \"/Sprites/tmobj/tmobj_%02d\");", 20 + (currobj.flags & 0x07));
 	setLink(currobj);
 	
 	//fprintf (MAPFILE, "\"xdata_contents\" \"readables/uw1/sign_%03d\"\n", currobj.link - 0x200);
@@ -1401,36 +1401,30 @@ void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &
 	{//UW2 bridges
 	if (currobj.link != 0)
 		{
-//MOVE THE BRIDGE TO THE CENTER OF THE TILE
-		x = ((float)(currobj.tileX)*1.2f) + 0.6f;
-		y = ((float)(currobj.tileY)*1.2f) + 0.6f;
-
-
-
-		RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
-		RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
-		if (currobj.flags >=2)
+		if (isTrigger(objList[currobj.link]))//Only render this bridge if linked to a use trigger.
 			{
-			fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj,\"Materials/tmap/uw%d_%03d\", \"%s\", %d);",game,currobj.texture, UniqueObjectName(objList[currobj.link]),currobj.texture);
+			//MOVE THE BRIDGE TO THE CENTER OF THE TILE
+			x = ((float)(currobj.tileX)*1.2f) + 0.6f;
+			y = ((float)(currobj.tileY)*1.2f) + 0.6f;
+
+
+
+
+			RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+			RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+			if (currobj.flags >= 2)
+				{
+				fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj, _RES + \"Materials/tmap/uw%d_%03d\", \"%s\", %d);", game, currobj.texture, UniqueObjectName(objList[currobj.link]), currobj.texture);
+				}
+			else
+				{
+				fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj, _RES + \"Materials/tmobj/tmobj_%02d\", \"%s\", %d);", 28 + currobj.flags, UniqueObjectName(objList[currobj.link]), 0);
+				}
 			}
-		else
-			{
-			fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj,\"Materials/tmobj/tmobj_%02d\", \"%s\", %d);", 28+currobj.flags, UniqueObjectName(objList[currobj.link]),0);
-			}
+
 		
 		}
-	
-	//RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
-	
-	if (currobj.flags < 2)
-		{
-		//fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_%02d\"\n", game, currobj.flags & 0x7);
-		}
-	else
-		{
-		//printf("\nMake sure this skin exists!"); //uw2_bridge_texture_189
-		//fprintf(MAPFILE, "\"skin\" \"uw%d_bridge_texture_%03d\"\n", game, currobj.texture);
-		}
+
 	}
 
 void RenderUnityEntityForceDoor(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
@@ -2100,6 +2094,7 @@ return;
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntitySilverSeed(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityAnimationOverlay(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 						case FOUNTAIN:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
@@ -2409,12 +2404,12 @@ void setLink(ObjectItem currobj)
 	{
 	fprintf(UNITY_FILE, "\n\tSetLink(myObj,%d);", currobj.link);
 	}
-
+/*
 void setSprite(unsigned char *SpriteName)
 	{
 	fprintf(UNITY_FILE, "\n\tSetSprite(myObj,%s);", SpriteName);
 	}
-
+*/
 void SetScale(float x, float y, float z)
 	{
 	fprintf(UNITY_FILE, "\n\tSetScale(myObj,(float)%f,(float)%f,(float)%f);", x, y, z);

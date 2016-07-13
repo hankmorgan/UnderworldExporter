@@ -10,7 +10,7 @@ public class SpellEffectMazeNavigation : SpellEffect {
 
 	public override void ApplyEffect ()
 	{
-		MeshRenderer[] mr = GameWorldController.instance.WorldModel.GetComponentsInChildren<MeshRenderer>();
+		MeshRenderer[] mr = GameWorldController.instance.getCurrentLevelModel().GetComponentsInChildren<MeshRenderer>();
 		for (int i = 0; i<=mr.GetUpperBound (0);i++)
 		{
 			if (mr[i].sharedMaterial.name.Contains("_maze"))
@@ -25,7 +25,7 @@ public class SpellEffectMazeNavigation : SpellEffect {
 	public override void CancelEffect ()
 	{
 
-		MeshRenderer[] mr = GameWorldController.instance.WorldModel.GetComponentsInChildren<MeshRenderer>();
+		MeshRenderer[] mr = GameWorldController.instance.getCurrentLevelModel().GetComponentsInChildren<MeshRenderer>();
 		for (int i = 0; i<=mr.GetUpperBound (0);i++)
 		{
 		if (mr[i].sharedMaterial.name.Contains("_maze"))

@@ -12,7 +12,8 @@ public class GameWorldController : UWEBase {
 	//List<int>AnimMaterialsIndex=new List<int>();
 	//List<string>AnimatedTextures=new List<string>();
 	public bool EnableTextureAnimation;
-	public GameObject WorldModel;
+	public GameObject[] WorldModel =new GameObject[9];
+	public GameObject[] LevelObjects =new GameObject[9];
 	public static TextureController tc;
 	//public bool hideCeil;
 	public static GameWorldController instance;
@@ -26,7 +27,7 @@ public class GameWorldController : UWEBase {
 	public UWCharacter playerUW;
 	public MusicController mus;
 	public GameObject InventoryMarker;
-	public Transform LevelMarker;//Where the gameobjects get stored
+	//public Transform LevelMarker;//Where the gameobjects get stored
 	public string game;
 	public string UI_Name;
 	public ObjectMasters objectMaster; //= new ObjectMasters();
@@ -51,6 +52,12 @@ public class GameWorldController : UWEBase {
 
 		return;
 	}
+
+		public GameObject getCurrentLevelModel()
+		{
+			return GameWorldController.instance.WorldModel[LevelNo];
+		}
+
 
 	void UpdateAnimation()
 	{
@@ -90,7 +97,7 @@ public class GameWorldController : UWEBase {
 	public static GameObject FindTile(int x, int y, int surface)
 	{//May need to update tile finding to support multiple levels!
 		string tileName = GetTileName (x,y,surface);
-		return instance.WorldModel.transform.FindChild (tileName).gameObject;
+		return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
 	}
 	
 	public static string GetTileName(int x, int y, int surface)
@@ -126,8 +133,12 @@ public class GameWorldController : UWEBase {
 	public static GameObject FindTileByName(string tileName)
 	{//Finds the tile in the level.
 		//Debug.Log("Looking for tile " + tileName);
-		return instance.WorldModel.transform.FindChild (tileName).gameObject;
+		return instance.getCurrentLevelModel().transform.FindChild (tileName).gameObject;
 	}
 
+	public Transform LevelMarker()
+	{
+		return LevelObjects[LevelNo].transform;
+	}
 
 }

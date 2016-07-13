@@ -54,7 +54,7 @@ public class MagicProjectile : MonoBehaviour {
 				{
 					GameObject myObj = new GameObject();
 					myObj.transform.position=this.transform.position;
-					myObj.transform.parent = GameWorldController.instance.LevelMarker;
+					myObj.transform.parent = GameWorldController.instance.LevelMarker();
 					Impact imp= myObj.gameObject.AddComponent<Impact>();
 					imp.go(objInt.GetHitFrameStart(), objInt.GetHitFrameEnd());													
 				}
@@ -72,7 +72,7 @@ public class MagicProjectile : MonoBehaviour {
 					//Do a miss impact 
 					GameObject myObj = new GameObject();
 					myObj.transform.position=this.transform.position;
-					myObj.transform.parent = GameWorldController.instance.LevelMarker;
+					myObj.transform.parent = GameWorldController.instance.LevelMarker();
 					Impact imp= myObj.gameObject.AddComponent<Impact>();
 					imp.go(spellprop.impactFrameStart, spellprop.impactFrameEnd);					
 				}

@@ -32,7 +32,7 @@ public override void init(int effectId)
 			Vector3 pos = tf.position+(Random.insideUnitSphere*0.5f);
 			GameObject hitimpact = new GameObject("_impact");
 			hitimpact.transform.position=pos;//ray.GetPoint(weaponRange/0.7f);
-			hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
+			hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
 			Impact imp= hitimpact.AddComponent<Impact>();
 			imp.go(SecondaryStartFrame, SecondaryEndFrame);
 		}

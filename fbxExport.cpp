@@ -936,7 +936,7 @@ void RenderFBXLevel(tile LevelInfo[64][64], ObjectItem objList[1600], int game)
 	//CreateShockBridgeModel(gScene);
 	gScene->Compact();
 
-	SaveScene(gSdkManager, gScene, "level2.fbx", 1, true);
+	SaveScene(gSdkManager, gScene, "level8.fbx", 1, true);
 	}
 
 void RenderFBXTile(FbxScene*& gScene, int game, int x, int y, tile &t, short Water, short invert, short skipFloor, short skipCeil)
@@ -5059,7 +5059,15 @@ void RenderFBXBridges(FbxScene*& gScene, int game, tile LevelInfo[64][64], Objec
 					long nextObj = LevelInfo[x][y].indexObjectList;
 					while (nextObj != 0)
 						{
-						if ((objectMasters[objList[nextObj].item_id].type == BRIDGE) && (objList[nextObj].link == 0))//Only render if not linked to a use trigger
+						int IsLink=0;
+						if (objList[nextObj].link != 0)
+							{
+							if (isTrigger(objList[objList[nextObj].link]))
+								{
+								IsLink==1;
+								}
+							}
+						if ((objectMasters[objList[nextObj].item_id].type == BRIDGE) && (IsLink == 0))//Only render if not linked to a use trigger
 							{
 
 							tile tmpt;

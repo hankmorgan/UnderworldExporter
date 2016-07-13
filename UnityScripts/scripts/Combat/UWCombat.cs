@@ -112,7 +112,7 @@ public class UWCombat : Combat {
 					///Creates a blood splatter at the point of impact
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;
-					hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
+					hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
 					Impact imp= hitimpact.AddComponent<Impact>();
 					imp.go(objInt.GetHitFrameStart(),objInt.GetHitFrameEnd());	
 					if (currWeapon!=null)
@@ -125,7 +125,7 @@ public class UWCombat : Combat {
 					///If a miss does a miss impact and potentially damages the weapon.
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;//ray.GetPoint(weaponRange/0.7f);
-					hitimpact.transform.parent = GameWorldController.instance.LevelMarker;
+					hitimpact.transform.parent = GameWorldController.instance.LevelMarker();
 					Impact imp= hitimpact.AddComponent<Impact>();
 					StartCoroutine( imp.Animate(46,50));
 					if (currWeapon!=null)
