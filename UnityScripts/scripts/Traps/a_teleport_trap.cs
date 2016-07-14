@@ -22,8 +22,14 @@ public class a_teleport_trap : trap_base {
 		}
 		else
 		{
-			//Debug.Log ("teleporting to level " + levelNo);
-			//RoomManager.LoadRoom(levelNo.ToString());//TODO:Move the player to the right spot when moving levels
+			float TileHeight = (float)GameWorldController.instance.Tilemap.GetFloorHeight(levelNo-1,objInt.Quality,objInt.Owner);
+			float posNewTile =(TileHeight+1) * 0.15f ;
+
+			//playerUW.gameObject.transform.position = new Vector3(targetX,targetZ+0.3f,targetY);
+			playerUW.gameObject.transform.position = new Vector3(targetX,posNewTile,targetY);
+			GameWorldController.instance.SwitchLevel(levelNo-1);
+			//Debug.Log ("teleporting to level " + (levelNo-1));
+			//RoomManager.LoadRoom(levelNo.ToString());
 		}
 	}
 

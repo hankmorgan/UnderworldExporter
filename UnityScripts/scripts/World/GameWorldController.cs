@@ -48,7 +48,7 @@ public class GameWorldController : UWEBase {
 		{
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
-
+		SwitchLevel(LevelNo);
 
 		return;
 	}
@@ -139,6 +139,16 @@ public class GameWorldController : UWEBase {
 	public Transform LevelMarker()
 	{
 		return LevelObjects[LevelNo].transform;
+	}
+
+	public void SwitchLevel(int newLevelNo)
+	{
+		for (int i=0; i <WorldModel.GetUpperBound(0);i++)
+		{
+			WorldModel[i].transform.parent.gameObject.SetActive(i==newLevelNo);
+			LevelObjects[i].SetActive(i==newLevelNo);
+		}	
+		LevelNo=newLevelNo;
 	}
 
 }

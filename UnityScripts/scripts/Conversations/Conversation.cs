@@ -1987,7 +1987,7 @@ public class Conversation : GuiBase {
 		{
 			obj.transform.position = new Vector3( 
 			                                     (((float)tileX) *1.2f), 
-			                                     (float)GameWorldController.instance.Tilemap.GetFloorHeight(tileX,tileY),
+												(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY),
 			                                     (((float)tileY) *1.2f) 
 			                                     );
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);

@@ -51,8 +51,8 @@ The path to the sword hilt on Level3
 					ReplacementTile.transform.position = Vector3.Lerp (StartPos,EndPos,1.0f);
 				}
 				//Change the tile type for the automap
-				GameWorldController.instance.Tilemap.tileType[triggerX+i,triggerY+j]=objInt.Quality & 0x1;
-				GameWorldController.instance.Tilemap.Render[triggerX+i,triggerY+j]=1;
+				GameWorldController.instance.Tilemap.current().tileType[triggerX+i,triggerY+j]=objInt.Quality & 0x1;
+				GameWorldController.instance.Tilemap.current().Render[triggerX+i,triggerY+j]=1;
 			}
 		}
 	}

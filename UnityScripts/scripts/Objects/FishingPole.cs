@@ -37,7 +37,7 @@ public override bool use ()
 		{//test the tile and it's neighbours for water.
 			for (int y=-1; y<=1;y++)
 			{
-				if (GameWorldController.instance.Tilemap.isWater[tileX+x,tileY+y])
+				if (GameWorldController.instance.Tilemap.current().isWater[tileX+x,tileY+y])
 				{
 					if (Random.Range (0,10)>=7)
 					{//catch something or test for encumerance

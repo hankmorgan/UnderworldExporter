@@ -1783,14 +1783,14 @@ int target;
 						{
 							case 66://bat
 							case 73://vampire bat
-								fprintf(UNITY_FILE, "\"SkyMesh1\");");//Fliers can go anywhere. Need to create this mesh.
+								fprintf(UNITY_FILE, "\"_SkyMesh1\");");//Fliers can go anywhere. Need to create this mesh.
 								break;
 							case 87://lurker
 							case 116://deep lurker
-								fprintf(UNITY_FILE, "\"WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+								fprintf(UNITY_FILE, "\"_WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
 								break;
 							default:
-								fprintf(UNITY_FILE, "\"GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+								fprintf(UNITY_FILE, "\"_GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
 								break;
 						}
 					}
@@ -2240,8 +2240,8 @@ void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
 		{
 		for (int y = 0; y <= 63; y++)
 			{
-			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d);"
-				, x, y, LevelInfo[x][y].tileType, 
+			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d);"
+				, Level, x, y, LevelInfo[x][y].tileType, 
 				LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight, 
 				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, LevelInfo[x][y].isLava);  //TODO:Bridges
 			}

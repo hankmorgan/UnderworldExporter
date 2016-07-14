@@ -69,7 +69,7 @@ public class chains : GuiBase_Draggable {
 				RuneBagEnabled=false;
 				StatsEnabled=false;
 				ConversationEnabled=false;
-				CutSceneEnabled=false;
+				CutSceneEnabled=true;
 				MapEnabled=false;
 				break;
 			case 1://Stats display
@@ -77,7 +77,7 @@ public class chains : GuiBase_Draggable {
 				RuneBagEnabled=false;
 				StatsEnabled=true;
 				ConversationEnabled=false;
-				CutSceneEnabled=false;
+				CutSceneEnabled=true;
 				MapEnabled=false;
 				break;	
 			case 2://Runebag
@@ -85,7 +85,7 @@ public class chains : GuiBase_Draggable {
 				RuneBagEnabled=true;
 				StatsEnabled=false;
 				ConversationEnabled=false;
-				CutSceneEnabled=false;
+				CutSceneEnabled=true;
 				MapEnabled=false;
 				break;	
 			case 3://Conversation

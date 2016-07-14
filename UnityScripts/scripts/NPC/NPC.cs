@@ -158,7 +158,7 @@ public class NPC : object_base {
 		this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
 		ai = this.GetComponentInChildren<AIRig>();
-		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
+		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
 		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
 	}
