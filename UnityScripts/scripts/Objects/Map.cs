@@ -33,6 +33,7 @@ public class Map : object_base {
 	public bool OpenMap()
 	{
 		WindowDetect.InMap=true;//turns on blocking collider.
+		MapInteraction.MapNo=GameWorldController.instance.LevelNo;
 		playerUW.playerHud.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
 		if  (GameWorldController.instance.mus!=null)
 		{

@@ -38,4 +38,9 @@ Opens the door that is in the targeted tile.
 			Debug.Log ("Door not found!");
 		}
 	}
+
+	public override void PostActivate ()
+	{//To stop destruction of trap
+
+	}
 }

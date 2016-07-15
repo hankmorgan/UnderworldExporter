@@ -3,7 +3,7 @@ using System.Collections;
 /// <summary>
 /// For Storing Tile Info for each level.
 /// </summary>
-public class TileInfo : MonoBehaviour {
+public class TileInfo {
 	
 
 		public int[,] tileType = new int[64,64];

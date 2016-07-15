@@ -18,6 +18,8 @@ public class UWHUD : HUD {
 	public RawImage[] ConversationPortraits;
 	public Text Encumberance;
 
+		public Text LevelNoDisplay;//Tile map level No
+
 	public chains ChainsControl;
 
 	//Conversation Controls

@@ -45,11 +45,11 @@ public class TileMap : UWEBase {
 	public GameObject feet;//For detecting the ground.
 	UWCharacter playerUW;
 
-	public void PositionDetect()
+		public void PositionDetect()
 	{
 		if (playerUW==null)
 		{
-			playerUW=gronk.GetComponent<UWCharacter>();
+			playerUW=GameWorldController.instance.playerUW;//gronk.GetComponent<UWCharacter>();
 		}
 		visitTileX =(int)(gronk.transform.position.x/1.2f);
 		visitTileY =(int)(gronk.transform.position.z/1.2f);
@@ -84,9 +84,17 @@ public class TileMap : UWEBase {
 		return ((tileType!=TILE_SOLID) && (isRendered==1));
 	}
 
+		public Texture2D TileMapImage()
+		{
+			return  TileMapImage(GameWorldController.instance.LevelNo);
+		}
 
-	public Texture2D TileMapImage()
+		public Texture2D TileMapImage(int LevelNo)
 	{//Generates an image of the tilemap for display
+		if (GameWorldController.instance.playerUW.playerHud.LevelNoDisplay!=null)
+		{
+			GameWorldController.instance.playerUW.playerHud.LevelNoDisplay.text=(LevelNo+1).ToString();
+		}
 		int TileSize = 4;
 		Texture2D playerPosIcon = (Texture2D)Resources.Load (_RES +"/HUD/CURSORS/CURSORS_0018");
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
@@ -103,9 +111,9 @@ public class TileMap : UWEBase {
 		{
 			for (int j = 63; j>0; j--)
 			{
-				if ((GetTileRender(i,j)==1) && (GetTileVisited(i,j)))
+				if ((GetTileRender(LevelNo,i,j)==1) && (GetTileVisited(LevelNo,i,j)))
 				{
-					fillTile(output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.green);
+					fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.green);
 				}
 			}
 		}
@@ -113,9 +121,9 @@ public class TileMap : UWEBase {
 		{
 			for (int j = 63; j>0; j--)
 			{
-				if (GetTileVisited(i,j)==true)
+				if (GetTileVisited(LevelNo, i,j)==true)
 				{
-					switch (GetTileType(i,j))
+					switch (GetTileType(LevelNo, i,j))
 					{
 					case TILE_SOLID://Solid
 					{
@@ -129,30 +137,30 @@ public class TileMap : UWEBase {
 					case TILE_SLOPE_S:
 					case TILE_SLOPE_N:
 					{
-						DrawOpenTile(output,i,j,TileSize,TileSize,Color.black);
+						DrawOpenTile(LevelNo, output,i,j,TileSize,TileSize,Color.black);
 						//output.SetPixel(i, j, Color.white);
 						break;
 					}
 					case TILE_DIAG_NE:
 					{
 						//DrawLine (output,i,j,TileSize,TileSize,Color.black,NORTHEAST);
-						DrawDiagNE(output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagNE(LevelNo, output,i,j,TileSize,TileSize,Color.black);
 						break;
 					}
 					case TILE_DIAG_SE:
 					{
 						//DrawLine (output,i,j,TileSize,TileSize,Color.black,SOUTHEAST);
-						DrawDiagSE(output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagSE(LevelNo, output,i,j,TileSize,TileSize,Color.black);
 						break;
 					}
 					case TILE_DIAG_NW:
 					{
-						DrawDiagNW (output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagNW (LevelNo, output,i,j,TileSize,TileSize,Color.black);
 						break;
 					}
 					case TILE_DIAG_SW:
 					{
-						DrawDiagSW(output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagSW(LevelNo, output,i,j,TileSize,TileSize,Color.black);
 						break;
 					}
 					default:
@@ -170,10 +178,13 @@ public class TileMap : UWEBase {
 				}
 			}
 		}
-		Color[] defaultColour= playerPosIcon.GetPixels();
-		float ratioX = gronk.transform.position.x / (64.0f*1.2f);
-		float ratioY = gronk.transform.position.z / (64.0f*1.2f);
-		output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);
+		if (LevelNo==GameWorldController.instance.LevelNo)
+		{//Only display the player if they are on the same map
+			Color[] defaultColour= playerPosIcon.GetPixels();
+			float ratioX = gronk.transform.position.x / (64.0f*1.2f);
+			float ratioY = gronk.transform.position.z / (64.0f*1.2f);
+			output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);								
+		}
 
 		// Apply all SetPixel calls
 		output.Apply();
@@ -181,18 +192,22 @@ public class TileMap : UWEBase {
 		
 	}
 
+		private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
+		{
+			fillTile(GameWorldController.instance.LevelNo, OutputTile, TileX,TileY,TileWidth,TileHeight,GroundColour,WaterColour,LavaColour,BridgeColour);
+		}
 
-	private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
+	private void fillTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
 	{
 		Color TileColorPrimary;
 		Color TileColorSecondary;
 		//Fills a non square tile.
-		if (GetIsWater(TileX,TileY)==true)
+		if (GetIsWater(LevelNo,TileX,TileY)==true)
 			{
 			TileColorPrimary=WaterColour;
 			TileColorSecondary=Color.clear;
 			}
-		else if (GetIsLava(TileX,TileY) == true)
+		else if (GetIsLava(LevelNo,TileX,TileY) == true)
 		{
 			TileColorPrimary=LavaColour;
 			TileColorSecondary=Color.clear;
@@ -202,7 +217,7 @@ public class TileMap : UWEBase {
 			TileColorPrimary=GroundColour;
 			TileColorSecondary=Color.clear;
 			}
-		switch(GetTileType(TileX,TileY))
+			switch(GetTileType(LevelNo,TileX,TileY))
 		    {
 			case TILE_SOLID:
 				{
@@ -312,12 +327,12 @@ public class TileMap : UWEBase {
 
 	}
 
-	private void DrawOpenTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	private void DrawOpenTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		//Check the tile to the north
 		if (TileY<63)
 			{
-			if ((GetTileType(TileX,TileY+1)==TILE_SOLID) && (GetTileRender(TileX,TileY+1)==1))
+			if ((GetTileType(LevelNo, TileX,TileY+1)==TILE_SOLID) && (GetTileRender(LevelNo, TileX,TileY+1)==1))
 				{//Solid tile to the north.
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,NORTH);
 				}
@@ -325,7 +340,7 @@ public class TileMap : UWEBase {
 		//Check the tile to the south
 		if (TileY>0)
 			{
-			if ((GetTileType(TileX,TileY-1)==TILE_SOLID) && (GetTileRender(TileX,TileY-1)==1))
+			if ((GetTileType(LevelNo, TileX,TileY-1)==TILE_SOLID) && (GetTileRender(LevelNo,TileX,TileY-1)==1))
 				{//Solid tile to the south.
 					DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,SOUTH);
 				}
@@ -333,7 +348,7 @@ public class TileMap : UWEBase {
 		//Check the tile to the east
 		if (TileX <63)
 			{
-			if ((GetTileType(TileX+1,TileY)==TILE_SOLID) && (GetTileRender(TileX+1,TileY)==1))
+			if ((GetTileType(LevelNo, TileX+1,TileY)==TILE_SOLID) && (GetTileRender(LevelNo, TileX+1,TileY)==1))
 				{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,EAST);
 				}
@@ -341,7 +356,7 @@ public class TileMap : UWEBase {
 		//Check the tile to the west
 		if (TileX >0)
 		{
-			if ((GetTileType(TileX-1,TileY)==TILE_SOLID) && (GetTileRender(TileX-1,TileY)==1))
+		if ((GetTileType(LevelNo, TileX-1,TileY)==TILE_SOLID) && (GetTileRender(LevelNo, TileX-1,TileY)==1))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,WEST);
 			}
@@ -419,7 +434,7 @@ public class TileMap : UWEBase {
 		}
 	}
 
-	void DrawDiagSW(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagSW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		//DrawOpenTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.magenta);"
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHWEST);
@@ -427,7 +442,7 @@ public class TileMap : UWEBase {
 		//Check the tiles to the north and east of this tile
 		if (TileY <63)
 			{//north
-			int TileToTest = GetTileType(TileX,TileY+1);
+			int TileToTest = GetTileType(LevelNo,TileX,TileY+1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SW))
 				{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
@@ -435,7 +450,7 @@ public class TileMap : UWEBase {
 			}
 		if (TileX <63)
 			{//east
-			int TileToTest = GetTileType(TileX+1,TileY);
+			int TileToTest = GetTileType(LevelNo,TileX+1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SW))
 				{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
@@ -445,7 +460,7 @@ public class TileMap : UWEBase {
 		//Check South and East for solids.
 		if (TileY>0)
 		{//South
-			if (GetTileType (TileX,TileY-1)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX,TileY-1)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 			}
@@ -453,7 +468,7 @@ public class TileMap : UWEBase {
 		
 		if (TileX>0)
 		{//West
-			if (GetTileType (TileX-1,TileY)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX-1,TileY)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
@@ -462,7 +477,7 @@ public class TileMap : UWEBase {
 	}
 
 
-	void DrawDiagNE(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagNE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		//DrawOpenTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.magenta);
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHEAST);
@@ -470,7 +485,7 @@ public class TileMap : UWEBase {
 		//Check the tiles to the south and west of this tile
 		if (TileY >0)
 		{//South
-			int TileToTest = GetTileType(TileX,TileY-1);
+			int TileToTest = GetTileType(LevelNo,TileX,TileY-1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NE))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
@@ -478,7 +493,7 @@ public class TileMap : UWEBase {
 		}
 		if (TileX >0)
 		{//West
-			int TileToTest = GetTileType(TileX-1,TileY);
+			int TileToTest = GetTileType(LevelNo,TileX-1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NE))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
@@ -488,7 +503,7 @@ public class TileMap : UWEBase {
 		//Check North and East for solids.
 		if (TileY<63)
 		{//North
-			if (GetTileType (TileX,TileY+1)== TILE_SOLID)
+		if (GetTileType (LevelNo,TileX,TileY+1)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 			}
@@ -496,7 +511,7 @@ public class TileMap : UWEBase {
 		
 		if (TileX<63)
 		{//East
-			if (GetTileType (TileX+1,TileY)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX+1,TileY)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 			}
@@ -504,14 +519,14 @@ public class TileMap : UWEBase {
 
 	}
 
-	void DrawDiagNW(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagNW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHWEST);
 		
 		//Check the tiles to the south and east of this tile
 		if (TileY >0)
 		{//South
-			int TileToTest = GetTileType(TileX,TileY-1);
+		int TileToTest = GetTileType(LevelNo,TileX,TileY-1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NW))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
@@ -519,7 +534,7 @@ public class TileMap : UWEBase {
 		}
 		if (TileX <63)
 		{//East
-			int TileToTest = GetTileType(TileX+1,TileY);
+			int TileToTest = GetTileType(LevelNo,TileX+1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_NW))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
@@ -529,7 +544,7 @@ public class TileMap : UWEBase {
 		//Check North and West for solids.
 		if (TileY<63)
 		{//North
-			if (GetTileType (TileX,TileY+1)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX,TileY+1)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 			}
@@ -537,14 +552,14 @@ public class TileMap : UWEBase {
 		
 		if (TileX>0)
 		{//West
-			if (GetTileType (TileX-1,TileY)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX-1,TileY)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 	}
 
-	void DrawDiagSE(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagSE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		//DrawOpenTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.magenta);
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHEAST);
@@ -553,7 +568,7 @@ public class TileMap : UWEBase {
 		//Check the tiles to the north and west of this tile
 		if (TileY <63)
 		{//north
-			int TileToTest = GetTileType(TileX,TileY+1);
+			int TileToTest = GetTileType(LevelNo,TileX,TileY+1);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SE))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
@@ -562,7 +577,7 @@ public class TileMap : UWEBase {
 
 		if (TileX >0)
 		{//West
-			int TileToTest = GetTileType(TileX-1,TileY);
+			int TileToTest = GetTileType(LevelNo,TileX-1,TileY);
 			if ((isTileOpen(TileToTest))||(TileToTest==TILE_DIAG_SE))
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
@@ -572,7 +587,7 @@ public class TileMap : UWEBase {
 		//Check South and East for solids.
 		if (TileY>0)
 			{//South
-			if (GetTileType (TileX,TileY-1)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX,TileY-1)== TILE_SOLID)
 				{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 				}
@@ -580,7 +595,7 @@ public class TileMap : UWEBase {
 
 		if (TileX<63)
 		{//East
-			if (GetTileType (TileX+1,TileY)== TILE_SOLID)
+			if (GetTileType (LevelNo,TileX+1,TileY)== TILE_SOLID)
 			{
 				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 			}
@@ -657,7 +672,6 @@ public class TileMap : UWEBase {
 	private bool GetTileVisited(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].tileVisited[tileX,tileY];
-		//return true;
 	}
 
 	private bool GetIsWater(int tileX, int tileY)
