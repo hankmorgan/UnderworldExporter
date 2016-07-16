@@ -472,37 +472,38 @@ public class WindowDetectUW : WindowDetect {
 		}
 		else
 		{
-
-			if (Event.current.Equals(Event.KeyboardEvent("f")))
-			{//Toggle full screen.
-				if (FullScreen==true)
-				{
-					UnSetFullScreen();
+			if (WindowDetect.InMap==false)
+			{
+				if (Event.current.Equals(Event.KeyboardEvent("f")))
+				{//Toggle full screen.
+					if (FullScreen==true)
+					{
+						UnSetFullScreen();
+					}
+					else
+					{
+						SetFullScreen();
+					}
 				}
-				else
-				{
-					SetFullScreen();
+
+				if (Event.current.Equals(Event.KeyboardEvent("e")))
+				{			
+					if (playerUW.MouseLookEnabled==false)
+					{
+						playerUW.YAxis.enabled=true;
+						playerUW.XAxis.enabled=true;
+						playerUW.MouseLookEnabled=true;
+						Cursor.lockState = CursorLockMode.Locked;
+					}
+					else
+					{
+						playerUW.XAxis.enabled=false;
+						playerUW.YAxis.enabled=false;
+						playerUW.MouseLookEnabled=false;
+						Cursor.lockState = CursorLockMode.None;
+					}
 				}
 			}
-
-			if (Event.current.Equals(Event.KeyboardEvent("e")))
-			{			
-				if (playerUW.MouseLookEnabled==false)
-				{
-					playerUW.YAxis.enabled=true;
-					playerUW.XAxis.enabled=true;
-					playerUW.MouseLookEnabled=true;
-					Cursor.lockState = CursorLockMode.Locked;
-				}
-				else
-				{
-					playerUW.XAxis.enabled=false;
-					playerUW.YAxis.enabled=false;
-					playerUW.MouseLookEnabled=false;
-					Cursor.lockState = CursorLockMode.None;
-				}
-			}
-
 			
 			if (playerUW.MouseLookEnabled == true)
 			{
@@ -511,7 +512,15 @@ public class WindowDetectUW : WindowDetect {
 			}
 			else
 			{
-				CursorPosition.center = Event.current.mousePosition;
+				if ((WindowDetectUW.InMap==true) && (MapInteraction.InteractionMode==2))
+				{
+					CursorPosition.center = MapInteraction.CursorPos+MapInteraction.caretAdjustment;	
+				}
+				else
+				{
+					CursorPosition.center = Event.current.mousePosition;						
+				}
+				
 				GUI.DrawTexture (CursorPosition,playerUW.playerHud.CursorIcon);
 				playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;
 			}		

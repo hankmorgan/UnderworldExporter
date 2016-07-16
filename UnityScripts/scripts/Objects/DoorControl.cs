@@ -211,7 +211,11 @@ public class DoorControl : object_base {
 					if (trigObj!=null)
 					{
 						trigger_base tb = trigObj.GetComponent<trigger_base>();
-						tb.Activate();
+						if (tb!=null)
+						{
+								tb.Activate();
+						}
+						
 					}
 				}
 			}

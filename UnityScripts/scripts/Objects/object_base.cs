@@ -182,6 +182,17 @@ public class object_base : UWEBase {
 		return false;
 	}
 
+
+		/// <summary>
+		/// Event when Item is put into inventory
+		/// </summary>
+		/// <returns><c>true</c>, if item away was put, <c>false</c> otherwise.</returns>
+		/// <param name="slotNo">Slot no.</param>
+		public virtual bool PutItemAwayEvent(int slotNo)
+		{
+				return false;
+		}
+
 		/// <summary>
 		/// PLayer puts the object on in an inventory slot.
 		/// </summary>

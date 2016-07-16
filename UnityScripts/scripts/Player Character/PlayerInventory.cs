@@ -421,6 +421,7 @@ public class PlayerInventory : UWEBase {
 				bBackPack[slotIndex-11]=true;
 				Container cn = GameObject.Find (currentContainer).GetComponent<Container>();
 				cn.items[ContainerOffset + slotIndex-11]=sObject;
+				PutItemAwayEvent(slotIndex);
 			}
 			break;
 		}
@@ -460,6 +461,7 @@ public class PlayerInventory : UWEBase {
 			bRightShoulder=true;
 			break;
 		case 6://ShoulderLeft
+
 			sLeftShoulder="";
 			bLeftShoulder=true;
 			break;
@@ -838,6 +840,19 @@ public class PlayerInventory : UWEBase {
 	{
 		return GameObject.Find (name);
 	}
+
+		public void PutItemAwayEvent(int slotNo)
+		{
+				GameObject obj = GetGameObjectAtSlot(slotNo);
+				if (obj !=null)
+				{
+						ObjectInteraction objInt = obj.GetComponent<ObjectInteraction>();
+						if (objInt!=null)
+						{
+								objInt.PutItemAway(slotNo);
+						}
+				}	
+		}
 
 	public void EquipItemEvent(int slotNo)
 	{//This must be called after the item is finally set.

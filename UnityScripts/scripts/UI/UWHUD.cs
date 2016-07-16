@@ -18,7 +18,7 @@ public class UWHUD : HUD {
 	public RawImage[] ConversationPortraits;
 	public Text Encumberance;
 
-		public Text LevelNoDisplay;//Tile map level No
+	public Text LevelNoDisplay;//Tile map level No
 
 	public chains ChainsControl;
 
@@ -31,6 +31,13 @@ public class UWHUD : HUD {
 	//public Camera hudCam;
 
 	public GameObject ContainerOpened;
+
+		//UW Cursors
+		public Texture2D  MapQuill;
+		public Texture2D  MapQuillWriting;
+		public Texture2D  MapEraser;
+
+		public GameObject MapPanel;
 }
 
 

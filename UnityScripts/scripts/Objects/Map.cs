@@ -34,6 +34,7 @@ public class Map : object_base {
 	{
 		WindowDetect.InMap=true;//turns on blocking collider.
 		MapInteraction.MapNo=GameWorldController.instance.LevelNo;
+		playerUW.playerHud.CursorIcon = playerUW.playerHud.MapQuill;
 		playerUW.playerHud.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
 		if  (GameWorldController.instance.mus!=null)
 		{
@@ -43,6 +44,7 @@ public class Map : object_base {
 
 		chains.ActiveControl=4;
 		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh ();
+
 		return true;
 	}
 

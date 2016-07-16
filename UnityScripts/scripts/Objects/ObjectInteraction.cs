@@ -431,9 +431,25 @@ public class ObjectInteraction : UWEBase {
 	}
 
 
+	public bool PutItemAway(int SlotNo)
+	{//What happens when an item is put into a backpack
+			inventorySlot=SlotNo;
+			object_base item=null;
+			item=this.GetComponent<object_base>();
+			if( item !=null)
+			{
+					return (item.PutItemAwayEvent(SlotNo));
+			}
+			else
+			{
+				return false;
+			}		
+	}
+	
+
 	public bool Equip(int SlotNo)
 	{//To handle what happens when an item (typically armour is equipped
-		Debug.Log ("Equip Event on " + this.gameObject.name);
+		//Debug.Log ("Equip Event on " + this.gameObject.name);
 		inventorySlot=SlotNo;
 		object_base item=null;
 		item=this.GetComponent<object_base>();
@@ -449,7 +465,7 @@ public class ObjectInteraction : UWEBase {
 
 	public bool UnEquip(int SlotNo)
 	{//To handle what happens when an item (typically armour is unequipped
-		Debug.Log ("Unequip Event on " + this.gameObject.name);
+		//Debug.Log ("Unequip Event on " + this.gameObject.name);
 		inventorySlot=-1;
 		object_base item=null;
 		item=this.GetComponent<object_base>();

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class TileMap : UWEBase {
 	public TileInfo[] Tiles=new TileInfo[9];
@@ -8,6 +9,9 @@ public class TileMap : UWEBase {
 	public static GameObject gronk;
 
 	string LevelName;
+
+	public List<MapNote>[] MapNotes = new List<MapNote>[9];
+
 
 	const int TILE_SOLID=0;
 	const int TILE_OPEN= 1;
@@ -45,7 +49,7 @@ public class TileMap : UWEBase {
 	public GameObject feet;//For detecting the ground.
 	UWCharacter playerUW;
 
-		public void PositionDetect()
+	public void PositionDetect()
 	{
 		if (playerUW==null)
 		{
@@ -89,12 +93,13 @@ public class TileMap : UWEBase {
 			return  TileMapImage(GameWorldController.instance.LevelNo);
 		}
 
-		public Texture2D TileMapImage(int LevelNo)
+	public Texture2D TileMapImage(int LevelNo)
 	{//Generates an image of the tilemap for display
 		if (GameWorldController.instance.playerUW.playerHud.LevelNoDisplay!=null)
 		{
 			GameWorldController.instance.playerUW.playerHud.LevelNoDisplay.text=(LevelNo+1).ToString();
 		}
+
 		int TileSize = 4;
 		Texture2D playerPosIcon = (Texture2D)Resources.Load (_RES +"/HUD/CURSORS/CURSORS_0018");
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
@@ -188,6 +193,30 @@ public class TileMap : UWEBase {
 
 		// Apply all SetPixel calls
 		output.Apply();
+
+	//Display the map notes
+				//Delete the map notes in memory
+				foreach(Transform child in playerUW.playerHud.MapPanel.transform)
+				{
+						//Debug.Log(child.name.Substring(0,4) );
+						if (child.name.Substring(0,4) == "_Map")
+						{
+								Destroy(child.transform.gameObject);
+						}
+				}
+
+				for (int i=0 ; i < MapNotes[LevelNo].Count;i++)
+				{
+					GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
+					myObj.transform.parent= playerUW.playerHud.MapPanel.transform;
+					myObj.GetComponent<Text>().text = MapNotes[LevelNo][i].NoteText;
+					myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[LevelNo][i].NotePosition;
+					myObj.GetComponent<MapNoteId>().guid = MapNotes[LevelNo][i].guid;
+					myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
+						//myObj.transform.SetAsLastSibling();
+				}
+			
+
 		return  output;
 		
 	}
@@ -793,6 +822,10 @@ public class TileMap : UWEBase {
 				for (int i=0; i<9;i++)
 				{
 					Tiles[i] =new TileInfo();
+				}
+				for (int i=0; i<MapNotes.GetUpperBound(0); i ++)
+				{
+						MapNotes[i] = new List<MapNote>();
 				}
 				//THIS IS AWFUL!!!!! 
 				InitMap0();

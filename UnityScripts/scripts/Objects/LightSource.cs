@@ -201,4 +201,13 @@ public class LightSource : object_base {
 				return playerUW.StringControl.GetString (5,64);//unused
 			}
 	}
+
+	public override bool PutItemAwayEvent (int slotNo)
+	{
+			if (IsOn)
+			{
+				SetOff();		
+			}
+			return true;
+	}
 }

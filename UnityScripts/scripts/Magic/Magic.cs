@@ -953,17 +953,18 @@ public class Magic : UWEBase {
 
 						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), 0);
 						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
-
+						//Assumes the npc is spawning in the region the player is in
 						string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
 						string navMeshName="";
+						int levelno = GameWorldController.instance.LevelNo;
 						switch (Regionarr[0].ToUpper())
 						{//Calcualte the nav mesh this npc should use
 						case "LAND":
-								navMeshName="GroundMesh"+Regionarr[1];break;
+								navMeshName="_GroundMesh_"   +levelno + "_" + Regionarr[1];break;
 						case "LAVA":
-								navMeshName="LavaMesh"+Regionarr[1];break;
+								navMeshName="_LavaMesh_"   +levelno + "_" + Regionarr[1];break;
 						case "WATER":
-								navMeshName="WaterMesh"+Regionarr[1];break;
+								navMeshName="_WaterMesh_"   +levelno + "_" + Regionarr[1];break;
 
 						}
 						//TODO:Set up these properties 
@@ -2657,6 +2658,7 @@ public class Magic : UWEBase {
 		/// </summary>
 		void OnGUI()
 		{
+				if (WindowDetectUW.InMap==true){return;}
 				if (
 						(Event.current.Equals(Event.KeyboardEvent("q")))
 						&&

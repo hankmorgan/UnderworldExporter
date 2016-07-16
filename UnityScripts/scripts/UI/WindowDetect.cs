@@ -25,7 +25,7 @@ public class WindowDetect : MonoBehaviour {
 	//protected UIAnchor anchor;
 	//protected UIStretch stretch;
 
-	protected Rect CursorPosition;
+	public Rect CursorPosition;
 	
 		//UI Positioning
 	public RectTransform[] UIsToStore = new RectTransform[1];

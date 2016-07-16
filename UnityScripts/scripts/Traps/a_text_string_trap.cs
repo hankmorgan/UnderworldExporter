@@ -18,4 +18,9 @@ public class a_text_string_trap : trap_base {
 		ml.Add(playerUW.StringControl.GetString(StringBlock,StringNo));
 	}
 
+	public override void PostActivate ()
+	{//Do not destroy.
+
+	}
+
 }
