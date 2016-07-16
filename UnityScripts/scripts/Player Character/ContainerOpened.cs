@@ -98,7 +98,7 @@ public class ContainerOpened : GuiBase {
 			if (Container.TestContainerRules(DestinationContainer,11))
 			{
 				//if ((item.isQuant==false) || (item.isEnchanted))
-				if (item.IsStackable())
+				if (! item.IsStackable())
 				{
 					if (DestinationContainer.AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand))
 					{//Object has moved

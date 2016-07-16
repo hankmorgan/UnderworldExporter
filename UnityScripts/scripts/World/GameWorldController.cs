@@ -38,7 +38,8 @@ public class GameWorldController : UWEBase {
 			UWEBase._RES = game;
 			UWEBase._UI=UI_Name;
 			objectMaster=new ObjectMasters();
-			objectMaster.Load("c:\\underworld exporter\\src\\trunk\\" + game + "_object_config.txt");
+			objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
+
 		}
 
 	void Start () {
