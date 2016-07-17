@@ -7,7 +7,7 @@ public class GameClock : GuiBase {
 		 */
 
 	public float clockTime;
-	public float clockRate=1.0f; //How long is a minute relative to the clockTime
+	public float clockRate=60.0f; //How long is a minute relative to the clockTime
 	public static int minute;
 	public static int hour;
 	public static int day;

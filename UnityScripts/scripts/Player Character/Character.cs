@@ -50,6 +50,9 @@ public class Character : UWEBase {
 	public int currentHeading;
 	protected int[] CompassHeadings={0,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0};
 
+		//Camera direction for billboarding
+		public Vector3 dir; 
+
 	//The camera attached to this gameobject
 	public Camera playerCam;
 
@@ -106,6 +109,8 @@ public class Character : UWEBase {
 	{
 		//Get the current compass heading
 		currentHeading = CompassHeadings[ (int)Mathf.Round((  (this.gameObject.transform.eulerAngles.y % 360) / 22.5f)) ];
+				dir = Camera.main.transform.forward;//Billboarding
+				dir.y = 0.0f;
 	}
 
 	public void UseMode()

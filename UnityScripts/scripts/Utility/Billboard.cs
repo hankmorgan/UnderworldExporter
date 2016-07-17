@@ -9,8 +9,13 @@ public class Billboard : MonoBehaviour
 	{
 		if (Camera.main!=null)
 		{
+			//based on http://answers.unity3d.com/questions/524087/tweaking-sprite-billboard.html
+			transform.rotation = Quaternion.LookRotation(GameWorldController.instance.playerUW.dir);
 
-			transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+
+			//transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+
+
 			//transform.rotation = Quaternion.LookRotation(GameWorldController.instance.playerUW.transform.forward-adj);
 			//dir =Quaternion.LookRotation(transform.position - (Camera.main.transform.position - (Vector3.up*adjustment)));
 			////////transform.rotation=Quaternion.LookRotation(transform.position - (Camera.main.transform.position - (Vector3.up*adjustment)));

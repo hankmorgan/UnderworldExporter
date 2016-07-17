@@ -62,7 +62,7 @@ public class ButtonHandler : object_base {
 		}
 	}
 
-
+		/*
 	// Update is called once per frame
 	void Update () {
 		return;
@@ -85,7 +85,7 @@ public class ButtonHandler : object_base {
 				setRotarySprite(state);
 			}
 		}*/
-	}
+	//}
 
 	public override bool LookAt ()
 	{
@@ -170,6 +170,7 @@ public class ButtonHandler : object_base {
 		if (SpriteName!="")
 		{
 			ButtonSprite.sprite = Resources.Load <Sprite> (SpriteName);//Loads the sprite.;//Assigns the sprite to the object.
+			objInt().animationStarted=true;
 		}
 
 	}
