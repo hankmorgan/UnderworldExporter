@@ -84,6 +84,10 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 		{//Center vertically in the tile
 		z= (CEILING_HEIGHT/2)*BrushSizeZ/100.0;
 		}
+	else
+		{
+		z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ / 100.0;
+		}
 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
 	RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 0);
