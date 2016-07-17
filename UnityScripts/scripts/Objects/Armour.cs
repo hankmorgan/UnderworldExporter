@@ -37,7 +37,7 @@ public class Armour : Equipment {
 	/// <returns>The actual spell index.</returns>
 	public override int GetActualSpellIndex ()
 	{
-		return objInt.Link-256+16;
+		return objInt().Link-256+16;
 	}
 
 	protected override void Start () {
@@ -50,9 +50,9 @@ public class Armour : Equipment {
 	/// </summary>
 	public virtual void ArmourSelfDamage()
 	{
-		objInt.Quality-=1;
+		objInt().Quality-=1;
 		UpdateQuality();
-		if (objInt.Quality<=0)
+		if (objInt().Quality<=0)
 		{
 			ChangeType(208,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
@@ -62,54 +62,54 @@ public class Armour : Equipment {
 
 	public override void UpdateQuality()
 	{	//Needs to be called when damaged.
-		if ((objInt.Quality>0) && (objInt.Quality<=15))
+		if ((objInt().Quality>0) && (objInt().Quality<=15))
 		{
-			if (playerUW.isFemale)
+			if (GameWorldController.instance.playerUW.isFemale)
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowestQuality[objInt.item_id]);
+					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowestQuality[objInt().item_id]);
 			}
 			else
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowestQuality[objInt.item_id]);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowestQuality[objInt().item_id]);
 			}
 		}
-		else if ((objInt.Quality>15) && (objInt.Quality<=30))
+		else if ((objInt().Quality>15) && (objInt().Quality<=30))
 		{
 			//Low quality
-			if (playerUW.isFemale)
+			if (GameWorldController.instance.playerUW.isFemale)
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowQuality[objInt.item_id]);
+						SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleLowQuality[objInt()	.item_id]);
 			}
 			else
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowQuality[objInt.item_id]);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleLowQuality[objInt().item_id]);
 			}
 		}
-		else if ((objInt.Quality>30) && (objInt.Quality<=45))
+		else if ((objInt().Quality>30) && (objInt().Quality<=45))
 		{
 			//Medium
-			if (playerUW.isFemale)
+			if (GameWorldController.instance.playerUW.isFemale)
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleMediumQuality[objInt.item_id]);
+					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleMediumQuality[objInt().item_id]);
 			}
 			else
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleMediumQuality[objInt.item_id]);
+					SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleMediumQuality[objInt().item_id]);
 			}
 		}
-		else if ((objInt.Quality>45) && (objInt.Quality<=63))
+		else if ((objInt().Quality>45) && (objInt().Quality<=63))
 		{
 			//Best
-			if (playerUW.isFemale)
+			if (GameWorldController.instance.playerUW.isFemale)
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleBestQuality[objInt.item_id]);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconFemaleBestQuality[objInt().item_id]);
 			}
 			else
 			{
-				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleBestQuality[objInt.item_id]);
+				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleBestQuality[objInt().item_id]);
 			}
 		}
-		objInt.SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
+	objInt().SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
 	}
 	
 	/// <summary>
@@ -126,7 +126,7 @@ public class Armour : Equipment {
 		if ((slotNo >=0) && (slotNo <=4))//Gloves, chest,legging,boots and helm
 		{
 			UpdateQuality();
-			if (objInt.isEnchanted==true)
+			if (objInt().isEnchanted==true)
 			{
 				int EffectId=GetActualSpellIndex ();
 				switch (EffectId)
@@ -154,7 +154,7 @@ public class Armour : Equipment {
 
 				default:
 					//cast enchantment.
-					SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
+					SpellEffectApplied = GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
 					if (SpellEffectApplied!=null)
 					{
 						SpellEffectApplied.SetPermanent(true);

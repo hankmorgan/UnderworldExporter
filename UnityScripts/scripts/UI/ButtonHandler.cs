@@ -98,7 +98,7 @@ public class ButtonHandler : object_base {
 		if (triggerObj!=null)
 		{
 			ObjectInteraction TargetObjInt= triggerObj.GetComponent<ObjectInteraction>();
-			ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
 			if (TargetObjInt.ItemType==ObjectInteraction.A_LOOK_TRIGGER)//A look trigger.
 			{
 				base.LookAt();
@@ -190,7 +190,7 @@ public class ButtonHandler : object_base {
 			case ObjectInteraction.POLE:
 				playerUW.playerInventory.ObjectInHand="";
 				playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
-				ml.Set (playerUW.StringControl.GetString(1,157));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set (playerUW.StringControl.GetString(1,157));
 				return Activate();
 			default:
 				playerUW.playerInventory.ObjectInHand="";

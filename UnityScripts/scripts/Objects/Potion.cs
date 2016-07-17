@@ -14,7 +14,7 @@ public class Potion : enchantment_base {
 		{
 			int index=0; //= GetActualSpellIndex();
 			int UseString=-1;
-			switch (objInt.item_id)
+			switch (objInt().item_id)
 			{
 			case 184 :// a_mushroom
 				UseString=232;
@@ -40,9 +40,9 @@ public class Potion : enchantment_base {
 			
 			if (UseString !=-1)
 			{
-				ml.Add (playerUW.StringControl.GetString (1,UseString));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,UseString));
 			}
-			objInt.consumeObject();
+			objInt().consumeObject();
 
 			return true;
 		}
@@ -57,8 +57,8 @@ public class Potion : enchantment_base {
 
 	public override bool ApplyAttack (int damage)
 	{
-			objInt.Quality-=damage;
-			if (objInt.Quality<=0)
+			objInt().Quality-=damage;
+			if (objInt().Quality<=0)
 			{
 					ChangeType(213,23);//Change to debris.
 					this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour

@@ -8,7 +8,7 @@ public class SpellProp_RuneOfWarding : SpellProp {
 		base.init (effectId);
 		//ProjectileSprite = _RES +"/Sprites/Objects/Objects_020";
 		//Force=200.0f;
-		BaseDamage=0;
+		BaseDamage=15;
 		//impactFrameStart=21;
 		//impactFrameEnd=25;
 	}

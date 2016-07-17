@@ -19,14 +19,14 @@ public class Bridge : object_base {
 		/// Examples: the tile puzzle in level6 seers and the Goblin shower in the tower in UW2
 	public override bool LookAt ()
 	{
-		if (objInt.flags<2)
+		if (objInt().flags<2)
 		{
 			return base.LookAt ();
 		}
 		else
 		{
 			//Return material description
-			ml.Add (playerUW.StringControl.TextureDescription(( 510- (TextureIndex-210)  )));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.TextureDescription(( 510- (TextureIndex-210)  )));
 			return true;
 		}
 	}

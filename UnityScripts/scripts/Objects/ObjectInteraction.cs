@@ -120,7 +120,7 @@ public class ObjectInteraction : UWEBase {
 	public int flags;
 	public bool InUse;
 
-	public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
+	//public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
 
 	public static UWCharacter playerUW;
 
@@ -205,10 +205,10 @@ public class ObjectInteraction : UWEBase {
 			//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 		//}
 
-		if (InvMarker==null)
-		{
-		InvMarker=GameWorldController.instance.InventoryMarker;//GameObject.Find ("InventoryMarker");
-		}
+		//if (InvMarker==null)
+		//{
+		//InvMarker=GameWorldController.instance.InventoryMarker;//GameObject.Find ("InventoryMarker");
+		//}
 		sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		/*		if (this.GetComponent<EmptyObjectIdentifier>()!=null)
 				{
@@ -594,19 +594,21 @@ public class ObjectInteraction : UWEBase {
 				myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
 				myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
 				ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + lstOutput[i],true);
-
+				ObjectMasters objM = GameWorldController.instance.objectMaster;
+				int x = lstOutput[i];
+								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,objM.particle[x],objM.InvIcon[x],objM.InvIcon[x],objM.type[x],x,1,40,0,objM.isMoveable[x],1,0,1,1,0,0,1);
 				switch (lstOutput[i])
 				{
 				case 299://Fishing pole
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0,1, 1, 0, 1, 1, 0, 0, 1);
 					myObj.AddComponent<FishingPole>();break;
 				case 183://Popcorn
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					Food fd = myObj.AddComponent<Food>();
 					fd.Nutrition=5;
 					break;
 				default:
-					ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+					//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 					myObj.AddComponent<object_base>();break;
 				}
 				playerUW.playerInventory.ObjectInHand=myObj.name;
@@ -867,7 +869,7 @@ public class ObjectInteraction : UWEBase {
 
 	public static bool CanMerge(ObjectInteraction mergingInto, ObjectInteraction mergingFrom)
 	{
-		//if ((objInt.item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt.Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
+		//if ((objInt().item_id==ObjectUsedOn.GetComponent<ObjectInteraction>().item_id) && (objInt().Quality==ObjectUsedOn.GetComponent<ObjectInteraction>().Quality))
 		return (
 				(
 				(mergingInto.item_id == mergingFrom.item_id) 
@@ -884,7 +886,7 @@ public class ObjectInteraction : UWEBase {
 
 	public static void Merge(ObjectInteraction mergingInto, ObjectInteraction mergingFrom)
 	{
-		//ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt.Link;
+		//ObjectUsedOn.GetComponent<ObjectInteraction>().Link=ObjectUsedOn.GetComponent<ObjectInteraction>().Link+objInt().Link;
 		mergingInto.Link += mergingFrom.Link;
 		mergingInto.GetComponent<object_base>().MergeEvent();
 		Destroy(mergingFrom.gameObject);

@@ -31,7 +31,7 @@ public class LightSource : object_base {
 	void Update () {
 		if (IsOn==true)
 		{
-			if (objInt.PickedUp==false)
+			if (objInt().PickedUp==false)
 			{
 				SetOff ();
 			}
@@ -40,9 +40,9 @@ public class LightSource : object_base {
 				LightTimer-=Time.deltaTime;
 				if (LightTimer<=0)
 				{
-				objInt.Quality--;
+				objInt().Quality--;
 				LightTimer=LightTimerMax;
-				if (objInt.Quality==0)
+				if (objInt().Quality==0)
 					{
 					SetOff();
 					}
@@ -53,10 +53,10 @@ public class LightSource : object_base {
 
 	public override bool use ()
 	{
-		CheckReferences();
+		//CheckReferences();
 		if (playerUW.playerInventory.ObjectInHand == "")
 		{
-			if (objInt.PickedUp==false)
+			if (objInt().PickedUp==false)
 			{
 				if (IsOn==true)
 				{
@@ -86,15 +86,15 @@ public class LightSource : object_base {
 		/// </summary>
 	public void SetOn()
 	{		
-		if (objInt.Quality<=0)
+		if (objInt().Quality<=0)
 		{//000~001~124~That light is already used up. \n
-			ml.Add(playerUW.StringControl.GetString(1,124));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,124));
 			return;
 		}
 
 		LightTimer=LightTimerMax;		
 
-		CheckReferences();
+		//CheckReferences();
 		//Turn on the torch
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
 		PlayerInventory pInv = playerUW.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
@@ -121,21 +121,21 @@ public class LightSource : object_base {
 		}
 		if (invSlot != null)
 			{
-			if   ((objInt.isQuant==false) || ((objInt.isQuant) && (objInt.Link==1)) || (objInt.isEnchanted==true))
+			if   ((objInt().isQuant==false) || ((objInt().isQuant) && (objInt().Link==1)) || (objInt().isEnchanted==true))
 			{//Is a quantity of one or not a quantity/
 				pInv.RemoveItem(this.name);
 				pInv.SetObjectAtSlot(invSlot.slotIndex,this.name);
-				objInt.inventorySlot=invSlot.slotIndex;
+				objInt().inventorySlot=invSlot.slotIndex;
 				IsOn=true;
-				objInt.item_id=ItemIdOn;
-				objInt.InvDisplayIndex=ItemIdOn;
+				objInt().item_id=ItemIdOn;
+				objInt().InvDisplayIndex=ItemIdOn;
 			}
 			else
 			{//Clone the item and move it's clone to the inventory slot
 				GameObject split = Instantiate(this.gameObject);
 				split.name= split.name+"_"+ playerUW.summonCount++;
 				split.GetComponent<ObjectInteraction>().Link=1;//Increment and decrement the object count as appropiate;
-				objInt.Link--;
+				objInt().Link--;
 				split.transform.parent=this.transform.parent;
 				//Activate the split instead
 				split.GetComponent<ObjectInteraction>().Use();
@@ -145,9 +145,9 @@ public class LightSource : object_base {
 		else
 		{
 			//Debug.Log ("No free hand");
-			ml.Add (playerUW.StringControl.GetString(1,258));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,258));
 		}
-		objInt.RefreshAnim();
+		objInt().RefreshAnim();
 	}
 	
 	/// <summary>
@@ -156,15 +156,15 @@ public class LightSource : object_base {
 	public void SetOff()
 	{
 		IsOn=false;
-		objInt.item_id=ItemIdOff;
-		objInt.InvDisplayIndex=ItemIdOff;
-		objInt.isQuant=true;
-		objInt.RefreshAnim();
+		objInt().item_id=ItemIdOff;
+		objInt().InvDisplayIndex=ItemIdOff;
+		objInt().isQuant=true;
+		objInt().RefreshAnim();
 	}
 
 	public override bool LookAt()
 	{
-		ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt,lightStatusText()));
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt(),lightStatusText()));
 		return true;
 	}
 
@@ -175,24 +175,24 @@ public class LightSource : object_base {
 	private string lightStatusText()
 	{//The quality string of the light Eg is it spent or not.
 
-			if (objInt.Quality == 0)
+			if (objInt().Quality == 0)
 			{
 				return playerUW.StringControl.GetString (5,60);//burned out
 			}
-			if ((objInt.Quality >=1) && (objInt.Quality <15))
+			if ((objInt().Quality >=1) && (objInt().Quality <15))
 			{
 				return playerUW.StringControl.GetString (5,61);//nearly spent
 			}
-			if ((objInt.Quality >=15) && (objInt.Quality <32))
+			if ((objInt().Quality >=15) && (objInt().Quality <32))
 			{
 				return playerUW.StringControl.GetString (5,62);//half burned
 			}
-			if ((objInt.Quality >=32) && (objInt.Quality <49))
+			if ((objInt().Quality >=32) && (objInt().Quality <49))
 			{
 				return playerUW.StringControl.GetString (5,63);//somewhat used
 			}
 
-			if ((objInt.Quality >=50) && (objInt.Quality <64))
+			if ((objInt().Quality >=50) && (objInt().Quality <64))
 			{
 				return playerUW.StringControl.GetString (5,64);//hardly used
 			}

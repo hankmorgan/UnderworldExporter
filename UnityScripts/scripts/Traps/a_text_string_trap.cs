@@ -14,8 +14,8 @@ public class a_text_string_trap : trap_base {
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		CheckReferences();
-		ml.Add(playerUW.StringControl.GetString(StringBlock,StringNo));
+		//CheckReferences();
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(StringBlock,StringNo));
 	}
 
 	public override void PostActivate ()

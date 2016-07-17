@@ -17,7 +17,7 @@ public class MoonStone : object_base {
 		/// TODO: only update when position changes?
 	void Update()
 	{
-		if (objInt.PickedUp==false)
+		if (objInt().PickedUp==false)
 		{
 			playerUW.MoonGatePosition=this.transform.position;
 		}

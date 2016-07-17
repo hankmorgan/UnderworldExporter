@@ -14,7 +14,8 @@ public class SpellEffectNightVision : SpellEffectLight {
 		if (inUse==false)
 		{
 			gs = Camera.main.gameObject.AddComponent<Grayscale>();	
-			gs.shader=Shader.Find ("Hidden/Grayscale Effect");
+			//gs.shader=Shader.Find ("Hidden/Grayscale Effect");
+			gs.shader=GameWorldController.instance.greyScale;
 		}
 		
 		base.ApplyEffect ();

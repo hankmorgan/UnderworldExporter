@@ -329,14 +329,14 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 				}
 			else
 				{
-				if (LevelInfo[currobj.tileX][currobj.tileY].landRegion >= 31)
-					{
-					fprintf(UNITY_FILE, "\"_GroundMesh_%d_%d\");", LevelNo, 30);
-					}
-				else
-					{
+				//if (LevelInfo[currobj.tileX][currobj.tileY].landRegion >= 31)
+				////	{
+				//	fprintf(UNITY_FILE, "\"_GroundMesh_%d_%d\");", LevelNo, 30);
+				//	}
+				//else
+					//{
 					fprintf(UNITY_FILE, "\"_GroundMesh_%d_%d\");", LevelNo, LevelInfo[currobj.tileX][currobj.tileY].landRegion);
-					}
+					//}
 				}
 			/*switch (currobj.item_id)//Split into my known fliers,swimmers and walkers.. TODO: Make this better!
 				{
@@ -1787,16 +1787,16 @@ int target;
 								break;
 							case 87://lurker
 							case 116://deep lurker
-								fprintf(UNITY_FILE, "\"_WaterMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
+								fprintf(UNITY_FILE, "\"_WaterMesh_%d_%d\");", LevelNo, LevelInfo[currobj.tileX][currobj.tileY].waterRegion);
 								break;
 							default:
-								fprintf(UNITY_FILE, "\"_GroundMesh%d\");", LevelInfo[currobj.tileX][currobj.tileY].landRegion);
+								fprintf(UNITY_FILE, "\"_GroundMesh_%d_%d\");",LevelNo, LevelInfo[currobj.tileX][currobj.tileY].landRegion);
 								break;
 						}
 					}
 				else
 					{
-					fprintf(UNITY_FILE, "\"GroundMesh%d\");", 1);
+					fprintf(UNITY_FILE, "\"GroundMesh_%d_%d\");",LevelNo, 1);
 					}
 
 

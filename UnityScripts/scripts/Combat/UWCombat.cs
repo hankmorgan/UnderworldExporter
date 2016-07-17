@@ -108,7 +108,7 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(100);
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(10+ Random.Range(0, GameWorldController.instance.playerUW.PlayerSkills.Attack));
 					///Creates a blood splatter at the point of impact
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;

@@ -272,7 +272,7 @@
 271 0 0 0 entity 21 a_lock H 0 UW1/Sprites/Objects/OBJECTS_271 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_271 UW1/Sprites/Objects/OBJECTS_271 S T U UW1/Sprites/Objects/OBJECTS_271 W x Y 0 1
 272 0 0 0 entity 16 a_picture_of_Tom H 1 UW1/Sprites/Objects/OBJECTS_272 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_272 UW1/Sprites/Objects/OBJECTS_272 S T U UW1/Sprites/Objects/OBJECTS_272 W x Y 0 1
 273 0 0 0 entity 16 a_crystal_splinter H 1 UW1/Sprites/Objects/OBJECTS_273 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_273 UW1/Sprites/Objects/OBJECTS_273 S T U UW1/Sprites/Objects/OBJECTS_273 W x Y 0 1
-274 0 0 0 entity 16 an_orb_rock H 1 UW1/Sprites/Objects/OBJECTS_274 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_274 UW1/Sprites/Objects/OBJECTS_274 S T U UW1/Sprites/Objects/OBJECTS_274 W x Y 0 1
+274 0 0 0 entity 16 an_orb_rock H 1 UW1/Sprites/Objects/OBJECTS_274 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_274 UW1/Sprites/Objects/OBJECTS_274 S T U UW1/Sprites/Objects/OBJECTS_274 W x Y 0 1
 275 0 0 0 entity 16 the_Gem_Cutter_of_Coulnes H 1 UW1/Sprites/Objects/OBJECTS_275 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_275 UW1/Sprites/Objects/OBJECTS_275 S T U UW1/Sprites/Objects/OBJECTS_275 W x Y 0 1
 276 0 0 0 entity 16 a_book H 1 UW1/Sprites/Objects/OBJECTS_276 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_276 UW1/Sprites/Objects/OBJECTS_276 S T U UW1/Sprites/Objects/OBJECTS_276 W x Y 0 1
 277 0 0 0 entity 16 a_block_of_burning_incense_blocks_of_burning_incense H 1 UW1/Sprites/Objects/OBJECTS_277 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_277 UW1/Sprites/Objects/OBJECTS_277 S T U UW1/Sprites/Objects/OBJECTS_277 W x Y 0 1

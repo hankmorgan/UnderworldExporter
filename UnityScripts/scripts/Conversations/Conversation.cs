@@ -166,7 +166,7 @@ public class Conversation : GuiBase {
 		}
 
 		///Identifies the NPC for future looking at
-		npc.getObjectInteraction().isIdentified=true;
+		npc.objInt().isIdentified=true;
 
 		///Sets up the portraits for the player and the NPC
 		RawImage portrait = GameWorldController.instance.playerUW.playerHud.ConversationPortraits[0];
@@ -712,7 +712,7 @@ public class Conversation : GuiBase {
 					DC.CloseDoor();
 					DC.LockDoor ();
 				}
-				if (DC.getObjectInteraction ().Quality == 0)
+				if (DC.objInt ().Quality == 0)
 				{
 					return 0;
 				}

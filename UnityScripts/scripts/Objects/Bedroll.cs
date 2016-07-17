@@ -67,7 +67,7 @@ public class Bedroll : object_base {
 						}
 					else
 						{//Too hungry to sleep.
-						ml.Add(playerUW.StringControl.GetString (1,17));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,17));
 						playerUW.Fatigue+=i;
 						return true;
 						}
@@ -84,7 +84,7 @@ public class Bedroll : object_base {
 				}
 			else
 			{
-				ml.Add(playerUW.StringControl.GetString (1,14));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,14));
 			}	
 			return true;
 		}
@@ -122,7 +122,7 @@ public class Bedroll : object_base {
 	public static void WakeUp(UWCharacter sunshine)
 	{//Todo: Test the quality of the sleep and check for monster interuption.
 		RestoreHealthMana(sunshine);
-		ml.Add(sunshine.StringControl.GetString (1,18));
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(sunshine.StringControl.GetString (1,18));
 	}
 
 

@@ -8,7 +8,7 @@ public class Ring : enchantment_base {
 	{
 		if ((slotNo ==9) || (slotNo ==10))
 		{
-			if (objInt.isEnchanted==true)
+			if (objInt().isEnchanted==true)
 			{
 				//cast enchantment.
 				SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
@@ -23,7 +23,7 @@ public class Ring : enchantment_base {
 
 	public override bool UnEquipEvent (int slotNo)
 	{
-		if (((slotNo ==9) || (slotNo ==10)) && (objInt.item_id!=54))//Not the ring of humility
+		if (((slotNo ==9) || (slotNo ==10)) && (objInt().item_id!=54))//Not the ring of humility
 		{
 		if (SpellEffectApplied!=null)
 			{

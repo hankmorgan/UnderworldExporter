@@ -8,7 +8,7 @@ public class Shield : Equipment {
 
 	public override int GetActualSpellIndex ()
 	{
-		return objInt.Link-512;
+		return objInt().Link-512;
 	}
 
 
@@ -17,7 +17,7 @@ public class Shield : Equipment {
 		if (((slotNo ==7) && (playerUW.isLefty==true)) || ((slotNo ==8) && (playerUW.isLefty==false)))//Only on off hand
 		{
 			UpdateQuality();
-			if (objInt.isEnchanted==true)
+			if (objInt().isEnchanted==true)
 			{
 				int EffectId=GetActualSpellIndex ();
 				switch (EffectId)

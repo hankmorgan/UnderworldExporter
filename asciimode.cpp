@@ -820,14 +820,14 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 					}
 				else
 					{
-					if (LevelInfo[x][y].landRegion >= 21)
-						{//Cap the number of regions.
-						fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, 20, LevelInfo[x][y].Render);
-						}
-					else
-						{
+					//if (LevelInfo[x][y].landRegion >= 30)
+					//	{//Cap the number of regions.
+					//	fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, 30, LevelInfo[x][y].Render);
+						//}
+					//else
+					//	{
 						fprintf(LOGFILE, "SetTileTag(%d,%d,\"LAND_%d\", %d);", x, y, LevelInfo[x][y].landRegion, LevelInfo[x][y].Render);
-						}					
+						//}					
 					}
 				}
 

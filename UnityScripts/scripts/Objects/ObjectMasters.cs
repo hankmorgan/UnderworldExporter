@@ -70,7 +70,7 @@ public class ObjectMasters {
 						objClass[i]= int.Parse(entries[1]);	//For Shock
 						objSubClass[i]= int.Parse(entries[2]);
 						objSubClassIndex[i]= int.Parse(entries[3]);
-						cat[i]=entries[4];
+						cat[i]= entries[4];
 						type[i] =  int.Parse (entries[5]);	
 						desc[i]= entries[6];
 						path[i]= entries[7];

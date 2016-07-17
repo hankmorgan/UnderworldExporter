@@ -19,7 +19,7 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
-		if (objInt.Quality <= Random.Range(0,41)) //100% chance when quality is zero.
+		if (objInt().Quality <= Random.Range(0,41)) //100% chance when quality is zero.
 		{
 			GameObject objToClone = GameObject.Find (TriggerObject);
 			if (objToClone !=null)
@@ -29,10 +29,10 @@ Level 1 at the north end of the level near the staircase. Two goblins will spawn
 				if (this.gameObject.transform.position.x>=100.0f)
 				{//If the object is off map use the triggerX and Y to calculate a suitable spawning point.
 					cloneObj.transform.position = new Vector3( 
-					                                          (((float)triggerX) *1.2f + 0.6f), 
-																(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,triggerX,triggerY)/6.666f,
-					                                          (((float)triggerY) *1.2f  + 0.6f) 
-					                                          );
+		                  (((float)triggerX) *1.2f + 0.6f), 
+										(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,triggerX,triggerY)/6.666f,
+		                  (((float)triggerY) *1.2f  + 0.6f) 
+		                  );
 				}
 				else
 				{

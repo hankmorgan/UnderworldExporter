@@ -91,7 +91,7 @@ public class Character : UWEBase {
 	//	MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
 
 		//tell other objects about this object.
-		TileMap.gronk=this.gameObject;
+		//TileMap.gronk=this.gameObject;
 		//NPC.player=this.gameObject;
 
 		if (game==2)

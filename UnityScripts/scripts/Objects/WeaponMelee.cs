@@ -13,7 +13,7 @@ public class WeaponMelee : Weapon {
 
 	public virtual void onHit(GameObject target)
 	{//Apply any posible magic effects when the weapon strikes.
-		if (objInt.isEnchanted==true)
+		if (objInt().isEnchanted==true)
 		{
 			int EffectId = GetActualSpellIndex ();
 			if (EffectId<=447)

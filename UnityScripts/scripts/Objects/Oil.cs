@@ -5,12 +5,12 @@ public class Oil : object_base {
 
 	public override bool use ()
 	{
-		if (objInt.PickedUp==true)
+		if (objInt().PickedUp==true)
 		{
 			if (playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				ml.Set ("Use oil on?");
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set ("Use oil on?");
 				return true;
 			}
 			else
@@ -21,7 +21,7 @@ public class Oil : object_base {
 		else
 
 		{
-			objInt.FailMessage();
+			objInt().FailMessage();
 			return false;
 		}
 	}
@@ -29,7 +29,7 @@ public class Oil : object_base {
 
 	public override bool FailMessage ()
 	{
-		ml.Add (playerUW.StringControl.GetString(1,177));
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,177));
 		return false;
 	}
 }

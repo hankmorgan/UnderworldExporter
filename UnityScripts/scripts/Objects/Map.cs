@@ -10,7 +10,7 @@ public class Map : object_base {
 	protected override void Start ()
 	{
 		base.Start();
-		objInt.isQuant=false; 
+		objInt().isQuant=false; 
 	}
 
 	public override bool use ()
@@ -50,14 +50,14 @@ public class Map : object_base {
 
 	public override bool LookAt()
 	{//Generic description of the map
-		objInt.isQuant=false; //quick bug fix
-			if (objInt.PickedUp==true)
+		objInt().isQuant=false; //quick bug fix
+			if (objInt().PickedUp==true)
 			{
-				ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + "\n" + playerUW.StringControl.GetString(1,151));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + "\n" + playerUW.StringControl.GetString(1,151));
 			}
 			else
 			{
-				ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
 			}
 		return true;
 	}

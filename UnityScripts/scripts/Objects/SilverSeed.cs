@@ -7,23 +7,23 @@ public class SilverSeed : object_base {
 	public override bool PickupEvent ()
 	{
 		base.PickupEvent ();
-		if (objInt.item_id==458)
+		if (objInt().item_id==458)
 		{//The seed is a sapling
 			//Turn it into a seed.
-			//objInt.ChangeType(290,objInt.ItemType);
-			objInt.item_id=290;
-			objInt.WorldDisplayIndex=290;
-			objInt.InvDisplayIndex=290;
+			//objInt().ChangeType(290,objInt().ItemType);
+			objInt().item_id=290;
+			objInt().WorldDisplayIndex=290;
+			objInt().InvDisplayIndex=290;
 			AnimationOverlay animo =this.GetComponent<AnimationOverlay>();
 			if (animo!=null)
 			{
 				animo.Stop ();
 			}
-			objInt.UpdateAnimation();//Update the inventory display
-			playerUW.playerHud.CursorIcon = objInt.GetInventoryDisplay().texture;
+			objInt().UpdateAnimation();//Update the inventory display
+			playerUW.playerHud.CursorIcon = objInt().GetInventoryDisplay().texture;
 			playerUW.ResurrectPosition=Vector3.zero;
-			objInt.SetWorldDisplay(objInt.GetInventoryDisplay());
-			ml.Add (playerUW.StringControl.GetString (1,9));
+			objInt().SetWorldDisplay(objInt().GetInventoryDisplay());
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,9));
 
 			return true;
 		}
@@ -37,33 +37,33 @@ public class SilverSeed : object_base {
 	{
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
-		if ((objInt.item_id==290) && (objInt.PickedUp==true))
+		if ((objInt().item_id==290) && (objInt().PickedUp==true))
 			{
 				//I'll test positioning later. For now just place it at the players position
 				//Turn it into a sapling.
-				objInt.item_id=458;
-				objInt.WorldDisplayIndex=458;
-				objInt.InvDisplayIndex=458;
+				objInt().item_id=458;
+				objInt().WorldDisplayIndex=458;
+				objInt().InvDisplayIndex=458;
 				AnimationOverlay animo =this.GetComponent<AnimationOverlay>();
 				if (animo!=null)
 				{
 					animo.Stop ();
 				}
-				objInt.UpdateAnimation();//Update the inventory display
-				objInt.SetWorldDisplay(objInt.GetInventoryDisplay());
-				ml.Add(playerUW.StringControl.GetString (1,12));
+				objInt().UpdateAnimation();//Update the inventory display
+				objInt().SetWorldDisplay(objInt().GetInventoryDisplay());
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,12));
 
 
 				playerUW.playerHud.CursorIcon = playerUW.playerHud.CursorIconDefault;
 				playerUW.ResurrectPosition=playerUW.transform.position;
-				objInt.gameObject.transform.parent=null;
-				objInt.transform.position=playerUW.transform.position;//TODO:Position the tree properly
+				objInt().gameObject.transform.parent=null;
+				objInt().transform.position=playerUW.transform.position;//TODO:Position the tree properly
 
-				playerUW.playerInventory.RemoveItemFromEquipment(objInt.gameObject.name);
-				playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(objInt.gameObject.name);
+				playerUW.playerInventory.RemoveItemFromEquipment(objInt().gameObject.name);
+				playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(objInt().gameObject.name);
 				playerUW.playerInventory.Refresh ();
 
-				objInt.PickedUp=false;
+				objInt().PickedUp=false;
 				return true;
 			}
 			else

@@ -21,11 +21,11 @@ owner != 0 poison trap
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
 	{
 
-		if (objInt.Owner ==0)
+		if (objInt().Owner ==0)
 		{
 			if (Random.Range(0,11) >= 7)
 			{
-				playerUW.CurVIT= playerUW.CurVIT- objInt.Quality;
+				playerUW.CurVIT= playerUW.CurVIT- objInt().Quality;
 			}
 		}
 		else//poison version

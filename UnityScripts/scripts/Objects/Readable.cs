@@ -23,28 +23,28 @@ public class Readable : object_base {
 	public bool Read()
 	{//Returns the text of this readable.
 		//ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
-		//StringController SC = objInt.getStringController();
-		//UILabel ml = objInt.getMessageLog();
+		//StringController SC = objInt().getStringController();
+		//UILabel ml = objInt().getMessageLog();
 
-		switch (objInt.ItemType)
+		switch (objInt().ItemType)
 		{
 		case ObjectInteraction.SIGN: //Sign
 			{
-			ml.Add (playerUW.StringControl.GetString (8,objInt.Link - 0x200));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (8,objInt().Link - 0x200));
 			return true;
 			}
 		case ObjectInteraction.BOOK://Book
 		case ObjectInteraction.SCROLL://Scroll
 			{
-			if (objInt.PickedUp==true)
+			if (objInt().PickedUp==true)
 			{
-				if (objInt.Link==520)
+				if (objInt().Link==520)
 				{//Special case. Chasm of fire map.
 					playerUW.playerHud.CutScenesSmall.SetAnimation="ChasmMap";
 				}
 				else
 				{
-					ml.Add (playerUW.StringControl.GetString (3,objInt.Link - 0x200));
+					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (3,objInt().Link - 0x200));
 				}
 				return true;
 			}
@@ -57,7 +57,7 @@ public class Readable : object_base {
 
 		default: 
 			{
-			ml.Add ("READABLE TYPE NOT FOUND! (" + objInt.item_id +")");
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("READABLE TYPE NOT FOUND! (" + objInt().item_id +")");
 			return false;
 			}
 		}

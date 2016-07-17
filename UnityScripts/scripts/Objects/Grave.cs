@@ -11,9 +11,9 @@ public class Grave : object_base {
 	/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public override bool LookAt ()
 	{
-		CheckReferences();
+		//CheckReferences();
 		playerUW.playerHud.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
-		ml.Add (playerUW.StringControl.GetString (8, objInt.Link-512));
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (8, objInt().Link-512));
 		return true;
 	}
 
@@ -50,11 +50,11 @@ public class Grave : object_base {
 					{//Garamons bones
 					//Arise Garamon.
 					//000~001~134~You thoughtfully give the bones a final resting place.
-					ml.Add(playerUW.StringControl.GetString (1,134));
+					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,134));
 					GameObject trig = GameObject.Find ("a_move_trigger_54_52_04_0495");
 						if (trig!=null)
 						{					
-							objInt.Link++;//Update the grave description
+							objInt().Link++;//Update the grave description
 							objIntUsed.consumeObject ();
 							trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
 						}
@@ -65,7 +65,7 @@ public class Grave : object_base {
 					else
 					{//Regular bones
 					//000~001~259~The bones do not seem at rest in the grave, and you take them back.
-					ml.Add(playerUW.StringControl.GetString (1,259));
+					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,259));
 					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 					playerUW.playerInventory.ObjectInHand="";
 					return true;
@@ -81,7 +81,7 @@ public class Grave : object_base {
 			if ((objIntUsed.item_id==198) && (objIntUsed.Quality==63))//Garamons Bones used on the wrong grave
 			{
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
-				ml.Add(playerUW.StringControl.GetString (1,259));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,259));
 				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return true;

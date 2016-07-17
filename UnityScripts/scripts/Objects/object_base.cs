@@ -9,10 +9,10 @@ public class object_base : UWEBase {
 
 	public static UWCharacter playerUW;
 	/// Output control to display text on
-	public static ScrollController ml;
+	//public static ScrollController ml;
 	
-	///The Object interaction that is on this object.
-	protected ObjectInteraction objInt;
+	//The Object interaction that is on this object.
+	//protected ObjectInteraction objInt;
 	
 	///A trigger to activate when this object is picked up.
 	public string PickupLink;
@@ -21,15 +21,16 @@ public class object_base : UWEBase {
 		/// Gets the object interaction that this object base works with
 		/// </summary>
 		/// <returns>The object interaction.</returns>
-	public ObjectInteraction getObjectInteraction()
+	public ObjectInteraction objInt()
 	{
-		CheckReferences();
-		return objInt;
+		//CheckReferences();
+		return this.gameObject.GetComponent<ObjectInteraction>();
 	}
 
 	protected virtual void Start()
 	{
-		if (playerUW==null)
+		//objInt = this.gameObject.GetComponent<ObjectInteraction>();
+	/*	if (playerUW==null)
 		{
 			playerUW=GameWorldController.instance.playerUW;
 		}
@@ -37,7 +38,7 @@ public class object_base : UWEBase {
 		{
 			ml=playerUW.playerHud.MessageScroll;
 		}
-		CheckReferences();
+		CheckReferences();*/
 	}
 
 	/// <summary>
@@ -45,7 +46,7 @@ public class object_base : UWEBase {
 	/// </summary>
 	public virtual bool Activate()
 	{//Unimplemented items 
-		CheckReferences();
+		//CheckReferences();
 		return false;
 	}
 
@@ -65,8 +66,8 @@ public class object_base : UWEBase {
 		/// <returns>The <see cref="System.Boolean"/>.</returns>
 	public virtual bool LookAt()
 	{
-		CheckReferences();
-		ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+		//CheckReferences();
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
 		return true;
 	}
 
@@ -77,7 +78,7 @@ public class object_base : UWEBase {
 		/// <param name="ObjectUsed">Object used.</param>
 	public virtual bool ActivateByObject(GameObject ObjectUsed)
 	{
-		CheckReferences();
+		//CheckReferences();
 		if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
 		{
 			FailMessage();
@@ -97,10 +98,10 @@ public class object_base : UWEBase {
 		/// Checks if the player is already holding something or using something else on this object.
 	public virtual bool use()
 	{
-		CheckReferences();
+		//CheckReferences();
 		if (playerUW.playerInventory.ObjectInHand =="")
 		{
-			if ((objInt.CanBeUsed==true) && (objInt.PickedUp==true))
+			if ((objInt().CanBeUsed==true) && (objInt().PickedUp==true))
 			{
 				BecomeObjectInHand();
 				return true;
@@ -119,7 +120,7 @@ public class object_base : UWEBase {
 	/// <summary>
 	/// Checks the external references for this object
 	/// </summary>
-	protected void CheckReferences()
+	/*protected void CheckReferences()
 	{
 		if (objInt==null)
 		{
@@ -129,14 +130,14 @@ public class object_base : UWEBase {
 		{
 			ml=playerUW.playerHud.MessageScroll;
 		}
-	}
+	}*/
 
 		/// <summary>
 		/// This object becomes the object in hand in order to be use
 		/// </summary>
 	public void BecomeObjectInHand()
 	{//In order to use it.
-		playerUW.playerHud.CursorIcon= objInt.InventoryDisplay.texture;
+		playerUW.playerHud.CursorIcon= objInt().InventoryDisplay.texture;
 		playerUW.playerInventory.ObjectInHand=this.name;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
@@ -149,7 +150,7 @@ public class object_base : UWEBase {
 	public virtual bool TalkTo()
 	{
 		//000~001~156~You cannot talk to that.
-		ml.Add(playerUW.StringControl.GetString (1,156));
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,156));
 		return true;
 	}
 
@@ -219,7 +220,7 @@ public class object_base : UWEBase {
 		/// <returns><c>true</c>, if message was failed, <c>false</c> otherwise.</returns>
 	public virtual bool FailMessage()
 	{
-		ml.Add("You cannot use this. (Failmessage default)");
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add("You cannot use this. (Failmessage default)");
 		return false;
 	}
 
@@ -229,13 +230,13 @@ public class object_base : UWEBase {
 	/// <returns>The weight.</returns>
 	public virtual float GetWeight()
 	{
-		if (objInt==null)
+		if (objInt()==null)
 		{
 			return 0.0f;
 		}
 		else
 		{
-			return (float)(objInt.GetQty())*ObjectInteraction.Weight[objInt.item_id]*0.1f;
+			return (float)(objInt().GetQty())*ObjectInteraction.Weight[objInt().item_id]*0.1f;
 		}
 	}
 
@@ -257,7 +258,7 @@ public class object_base : UWEBase {
 	/// <returns>The item identifier.</returns>
 	public virtual int AliasItemId()
 	{
-		return objInt.item_id;
+		return objInt().item_id;
 	}
 
 	/// <summary>
@@ -288,7 +289,7 @@ public class object_base : UWEBase {
 		/// <param name="itemType">Item type.</param>
 	public virtual bool ChangeType(int newID, int itemType)
 	{
-		objInt.ChangeType(newID,objInt.ItemType);
+		objInt().ChangeType(newID,objInt().ItemType);
 		return true;		
 	}
 

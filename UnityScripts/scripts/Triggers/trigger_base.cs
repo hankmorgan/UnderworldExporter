@@ -17,7 +17,7 @@ public class trigger_base : object_base {
 		GameObject triggerObj= GameObject.Find (TrapObject);
 		if (triggerObj!=null)
 		{
-			triggerObj.GetComponent<trap_base>().Activate (objInt.Quality,objInt.Owner,state);
+			triggerObj.GetComponent<trap_base>().Activate (objInt().Quality,objInt().Owner,state);
 			if (state == 8)
 			{
 				state = 0;
@@ -34,7 +34,7 @@ public class trigger_base : object_base {
 
 	public virtual void PostActivate()
 	{
-		int TriggerRepeat = (objInt.flags>>1) & 0x1;
+		int TriggerRepeat = (objInt().flags>>1) & 0x1;
 		//Debug.Log(TriggerRepeat);
 		if (TriggerRepeat==0)
 		{

@@ -528,7 +528,7 @@ public class Container : object_base {
 			if (objInt.GetWeight() >= cn.GetFreeCapacity())
 			{
 				WeightTest=false;
-				playerUW.playerHud.MessageScroll.Add ("The " + playerUW.StringControl.GetSimpleObjectNameUW(cn.objInt) + " is too full.");
+				playerUW.playerHud.MessageScroll.Add ("The " + playerUW.StringControl.GetSimpleObjectNameUW(cn.objInt()) + " is too full.");
 			}
 			else
 			{

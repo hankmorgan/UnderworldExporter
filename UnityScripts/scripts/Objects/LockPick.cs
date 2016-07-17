@@ -7,12 +7,12 @@ using System.Collections;
 public class LockPick : object_base {
 	public override bool use()
 	{
-		if (objInt.PickedUp==true)
+		if (objInt().PickedUp==true)
 		{
 			if(playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				ml.Set ( playerUW.StringControl.GetString(1,8));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set ( playerUW.StringControl.GetString(1,8));
 				return true;
 			}
 			else
@@ -22,7 +22,7 @@ public class LockPick : object_base {
 		}
 	else
 		{
-			objInt.FailMessage ();
+			objInt().FailMessage ();
 			return false;
 		}
 	}

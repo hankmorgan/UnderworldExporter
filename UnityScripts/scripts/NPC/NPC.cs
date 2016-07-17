@@ -138,7 +138,7 @@ public class NPC : object_base {
 	///To flag initiation of the player into the AI modules
 	private static bool playerUWReady;
 	///AI module for the character.
-	private AIRig ai;	
+	public AIRig ai;	
 	
 	///Can the NPC fire off magic attacks.
 	public bool MagicAttack;	
@@ -157,7 +157,7 @@ public class NPC : object_base {
 		base.Start();
 		this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
-		ai = this.GetComponentInChildren<AIRig>();
+		//ai = this.GetComponentInChildren<AIRig>();
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
 		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
@@ -280,7 +280,7 @@ public class NPC : object_base {
 		if ((npc_whoami == 255))
 		{
 			//006~007~001~You get no response.
-			ml.Add (playerUW.StringControl.GetString (7,1));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (7,1));
 		}
 		else
 		{
@@ -303,7 +303,7 @@ public class NPC : object_base {
 			else
 			{
 				//You get no response
-				ml.Add (playerUW.StringControl.GetString (7,1));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (7,1));
 			}
 		}
 		return true;
@@ -316,9 +316,9 @@ public class NPC : object_base {
 	public override bool LookAt ()
 	{//TODO:For specific characters that don't follow the standard naming convention use their conversation for the lookat.
 		string output="";
-		if (objInt.item_id!=123)//Tybal
+		if (objInt().item_id!=123)//Tybal
 		{
-			output = playerUW.StringControl.GetFormattedObjectNameUW(objInt,NPCMoodDesc());
+			output = playerUW.StringControl.GetFormattedObjectNameUW(objInt(),NPCMoodDesc());
 		}
 		if ((npc_whoami >=1) && (npc_whoami<255)) 
 		{
@@ -332,14 +332,14 @@ public class NPC : object_base {
 			}
 			else
 			{
-				if(objInt.isIdentified==true)
+				if(objInt().isIdentified==true)
 				{
 						output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
 				}				
 			}
 
 		}
-		ml.Add (output);
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (output);
 		return true;
 	}
 

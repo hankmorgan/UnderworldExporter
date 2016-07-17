@@ -48,7 +48,7 @@ the left, right, center button combination on Level3.
 
 	public override bool Activate (int triggerX, int triggerY, int State)
 	{
-		CheckReferences();
+		//CheckReferences();
 		//Do what it needs to do.
 		ExecuteTrap(triggerX,triggerY, State);//The next in the chaing for this trap is handle by the execute action.
 

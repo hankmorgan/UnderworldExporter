@@ -31,6 +31,7 @@ public class GameWorldController : UWEBase {
 	public string game;
 	public string UI_Name;
 	public ObjectMasters objectMaster; //= new ObjectMasters();
+	public Shader greyScale;
 	//public MeshRenderer ceil;
 		void Awake()
 		{
@@ -144,7 +145,7 @@ public class GameWorldController : UWEBase {
 
 	public void SwitchLevel(int newLevelNo)
 	{
-		for (int i=0; i <WorldModel.GetUpperBound(0);i++)
+		for (int i=0; i <=WorldModel.GetUpperBound(0);i++)
 		{
 			WorldModel[i].transform.parent.gameObject.SetActive(i==newLevelNo);
 			LevelObjects[i].SetActive(i==newLevelNo);

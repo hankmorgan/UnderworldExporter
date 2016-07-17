@@ -28,11 +28,11 @@ public class Coin : object_base {
 	public override int AliasItemId ()
 	{
 
-		if (objInt.item_id==160)
+		if (objInt().item_id==160)
 		{
 			return 161;
 		}
-		else if (objInt.item_id==161)
+		else if (objInt().item_id==161)
 		{
 			return 160;
 		}
@@ -47,27 +47,27 @@ public class Coin : object_base {
 		/// </summary>
 	private void ChangeCoinType()
 	{//THis is not vanilla behaviour!
-		CheckReferences ();
-		switch (objInt.item_id)
+		//CheckReferences ();
+	switch (objInt().item_id)
 		{
 		case 161://a Coin
-			if (objInt.GetQty ()>1)
+			if (objInt().GetQty ()>1)
 			{
-				ChangeType(160,objInt.ItemType);
-				//objInt.item_id=160;
-				////objInt.WorldDisplayIndex=160;
-				//objInt.InvDisplayIndex=160;
-				//objInt.UpdateAnimation();
+				ChangeType(160,objInt().ItemType);
+				//objInt().item_id=160;
+				////objInt().WorldDisplayIndex=160;
+				//objInt().InvDisplayIndex=160;
+				//objInt().UpdateAnimation();
 			}
 			break;
 		case 160://A stack of coins.
-			if (objInt.GetQty ()==1)
+			if (objInt().GetQty ()==1)
 			{
-				ChangeType(161,objInt.ItemType);
-				//objInt.item_id=161;
-				//objInt.WorldDisplayIndex=161;
-				//objInt.InvDisplayIndex=161;
-				//objInt.UpdateAnimation();
+				ChangeType(161,objInt().ItemType);
+				//objInt().item_id=161;
+				//objInt().WorldDisplayIndex=161;
+				//objInt().InvDisplayIndex=161;
+				//objInt().UpdateAnimation();
 			}
 			break;
 		}

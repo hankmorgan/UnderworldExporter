@@ -10,7 +10,7 @@ public class Equipment : object_base {
 
 	public virtual int GetActualSpellIndex()
 	{
-		return objInt.Link-256;
+		return objInt().Link-256;
 	}
 
 
@@ -44,7 +44,7 @@ public class Equipment : object_base {
 			case ObjectInteraction.ANVIL: //ANVIL
 				{
 				//Do a difficulty check and prompt for approval.
-				ml.Set ("[placeholder]You think it will be hard/easy to repair this item");
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set ("[placeholder]You think it will be hard/easy to repair this item");
 				InputField inputctrl =playerUW.playerHud.InputControl;
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputAnvil;
@@ -75,7 +75,7 @@ public class Equipment : object_base {
 	{
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		ml.Clear();//="";
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear();//="";
 		if (ans.Substring(0,1).ToUpper() == "Y")
 		{
 			//do the repair 
@@ -86,13 +86,13 @@ public class Equipment : object_base {
 			//Do the result at the end of the animation.
 			if (playerUW.PlayerSkills.TrySkill(Skills.SkillRepair,0))
 			{
-				objInt.Quality = objInt.Quality+5;
-				if (objInt.Quality >63){objInt.Quality=63;}
-				ml.Add("You repair the item");
+				objInt().Quality = objInt().Quality+5;
+				if (objInt().Quality >63){objInt().Quality=63;}
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add("You repair the item");
 			}		
 			else
 			{
-				ml.Add ("You fail to repair the item");
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("You fail to repair the item");
 			}
 			UpdateQuality();
 		}
@@ -103,22 +103,22 @@ public class Equipment : object_base {
 
 	public override bool LookAt ()
 	{
-		if (objInt.isEnchanted==true)
+		if (objInt().isEnchanted==true)
 		{
-			if (objInt.isIdentified==true)
+			if (objInt().isIdentified==true)
 			{
-					ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
 			}
 			else
 			{
 					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
-							objInt.isIdentified=true;
-							ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+							objInt().isIdentified=true;
+							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
 					}
 					else
 					{
-							ml.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt));		
+							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));		
 					}					
 			}
 			return true;

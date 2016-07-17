@@ -10,12 +10,12 @@ public class DoorKey : object_base {
 
 	public override bool use ()
 	{
-		if (objInt.PickedUp==true)
+		if (objInt().PickedUp==true)
 		{
 			if (playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				ml.Set (playerUW.StringControl.GetString(1,7));
+				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set (playerUW.StringControl.GetString(1,7));
 				return true;
 			}
 			else
@@ -25,20 +25,20 @@ public class DoorKey : object_base {
 		}
 		else
 		{
-			objInt.FailMessage();
+			objInt().FailMessage();
 			return false;
 		}
 	}
 
 	public override bool LookAt ()
 	{
-		if (objInt.PickedUp==true)
+		if (objInt().PickedUp==true)
 		{
-			ml.Add(playerUW.StringControl.GetString(5,KeyId+100));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(5,KeyId+100));
 		}
 		else
 		{
-			ml.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
 		}
 
 		return true;

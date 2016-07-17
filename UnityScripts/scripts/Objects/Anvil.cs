@@ -12,7 +12,7 @@ public class Anvil : object_base {
 		if (playerUW.playerInventory.ObjectInHand=="")
 		{
 			BecomeObjectInHand();
-			ml.Set("Use Anvil on what?");
+			GameWorldController.instance.playerUW.playerHud.MessageScroll.Set("Use Anvil on what?");
 			return true;
 		}
 		else

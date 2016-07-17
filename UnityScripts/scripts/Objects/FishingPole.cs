@@ -5,7 +5,7 @@ public class FishingPole : object_base {
 
 public override bool use ()
 	{
-		if (objInt.PickedUp==true)
+		if (objInt().PickedUp==true)
 		{
 			if (playerUW.playerInventory.ObjectInHand=="")
 			{
@@ -44,7 +44,7 @@ public override bool use ()
 						//000~001~099~You catch a lovely fish.
 						if ((ObjectInteraction.Weight[182]*0.1f) <= playerUW.playerInventory.getEncumberance())
 						{
-							ml.Add (playerUW.StringControl.GetString (1,99));
+							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,99));
 							GameObject fishy = CreateFish();
 							playerUW.playerInventory.ObjectInHand=fishy.name;
 							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
@@ -59,19 +59,19 @@ public override bool use ()
 						}
 						else
 						{//000~001~102~You feel a nibble, but the fish gets away.
-							ml.Add (playerUW.StringControl.GetString (1,102));
+							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,102));
 						}
 					}
 					else
 					{//000~001~100~No luck this time.
-						ml.Add (playerUW.StringControl.GetString (1,100));
+						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,100));
 					}
 					return;
 				}
 			}
 		}
 		//000~001~101~You cannot fish there.  Perhaps somewhere else.
-		ml.Add (playerUW.StringControl.GetString (1,101));
+		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,101));
 	}
 
 
