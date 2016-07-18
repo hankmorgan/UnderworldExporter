@@ -14,6 +14,7 @@ public class ClearRunes : GuiBase {
 			GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[0]=-1;
 			GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[1]=-1;
 			GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[2]=-1;
+			ActiveRuneSlot.UpdateRuneSlots();
 		}
 	}
 }

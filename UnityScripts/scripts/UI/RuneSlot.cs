@@ -8,7 +8,7 @@ public class RuneSlot : GuiBase {
 	public static UWCharacter playerUW;
 	public int SlotNumber;
 	private RawImage thisRune;
-	private bool isSet;
+	public bool isSet;
 		/*
 	static string[] Runes=new string[]{"An","Bet","Corp","Des",
 		"Ex","Flam","Grav","Hur",
@@ -20,16 +20,28 @@ public class RuneSlot : GuiBase {
 	public override void Start () {
 		base.Start();
 		thisRune = this.GetComponent<RawImage>();
-		thisRune.texture= Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");
+		//thisRune.texture= Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-			if ((playerUW.PlayerMagic.PlayerRunes[SlotNumber] != false) && (isSet == false))
-			{
-				thisRune.texture= Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + SlotNumber.ToString ("00"));
-				isSet=true;
+	
+	public static void UpdateRuneDisplay () {
+		for  (int i=0; i<24; i++)
+		{
+						if (GameWorldController.instance.playerUW.playerHud.runes[i].thisRune==null)
+						{
+								GameWorldController.instance.playerUW.playerHud.runes[i].thisRune=GameWorldController.instance.playerUW.playerHud.runes[i].gameObject.GetComponent<RawImage>();
+						}
+		if ((playerUW.PlayerMagic.PlayerRunes[i] != false))
+			{					
+				GameWorldController.instance.playerUW.playerHud.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString ("00"));
+				GameWorldController.instance.playerUW.playerHud.runes[i].isSet=true;
 			}
+			else
+			{
+				GameWorldController.instance.playerUW.playerHud.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");
+				GameWorldController.instance.playerUW.playerHud.runes[i].isSet=false;	
+			}
+		}
 
 	}
 
@@ -71,6 +83,7 @@ public class RuneSlot : GuiBase {
 					playerUW.PlayerMagic.ActiveRunes[1]=playerUW.PlayerMagic.ActiveRunes[2];
 					playerUW.PlayerMagic.ActiveRunes[2]=SlotNumber;
 				}
+				ActiveRuneSlot.UpdateRuneSlots();
 			}
 		else
 			{//right click id the rune.

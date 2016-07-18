@@ -207,11 +207,12 @@ public class NPC : object_base {
 			}
 			state = AI_STATE_STANDING;
 		}
-		//Update the appearance of the NPC
-		UpdateSprite();
+
 
 		if (NPC_DEAD==true)
 		{//Set the AI death state
+			//Update the appearance of the NPC
+			UpdateSprite();
 			ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			return;
 		}
@@ -227,10 +228,14 @@ public class NPC : object_base {
 		else
 		{//The AI is only active when the player is within a certain distance to the player.
 			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=8;
+			anim.enabled=ai.AI.IsActive;
 			if (ai.AI.IsActive==false)
 			{
+				
 				return;
 			}
+			//Update the appearance of the NPC
+			UpdateSprite();
 			if (ai.AI.Navigator.CurrentPath!=null)
 			{//Turns the AI around on their route.
 				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);

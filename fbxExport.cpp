@@ -4063,20 +4063,18 @@ void RenderSlopedFBXCuboid(FbxScene*& gScene, int x, int y, tile &t, short Water
 	// Create control points.
 	lMesh->InitControlPoints(24);
 	FbxVector4* lControlPoints = lMesh->GetControlPoints();
-	if ((x == 30) && (y == 48))
-		{
-		printf("");
-		}
+
 	//These directions are wrongly labeled???!!!
 	//Top
 	switch (t.tileType)
 		{
-			case TILE_SLOPE_N:
-				lControlPoints[0] = lControlPoint2;
-				lControlPoints[1] = lControlPoint3;
-				lControlPoints[2] = lControlPoint0;
-				lControlPoints[3] = lControlPoint1;
+			
+				////lControlPoints[0] = lControlPoint2;
+				//lControlPoints[1] = lControlPoint3;
+				//lControlPoints[2] = lControlPoint0;
+				//lControlPoints[3] = lControlPoint1;
 				break;
+			case TILE_SLOPE_N:
 			case TILE_SLOPE_S:
 				lControlPoints[0] = lControlPoint0;
 				lControlPoints[1] = lControlPoint1;

@@ -263,6 +263,7 @@ public class Conversation : GuiBase {
 		
 		///Resets the UI
 		chains.ActiveControl=0;
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 	}
 
 	/// <summary>

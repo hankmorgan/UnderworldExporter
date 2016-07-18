@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class ActiveRuneSlot : GuiBase_Draggable {
 	/*GUI element for displaying the select spell runes and for casting those selected runes.*/
-	public int SlotNumber;
-	private int setRune=-2;
+	//public int SlotNumber;
+	//private int setRune=-2;
 	private RawImage thisRune;
 
-	private Texture2D[] runes=new Texture2D[24];
-	private Texture2D blank;
+	private static Texture2D[] runes=new Texture2D[24];
+	private static Texture2D blank;
 
 	public override void Start()
 	{
@@ -17,27 +17,50 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		thisRune = this.GetComponent<RawImage>();
 		for (int i =0;i<24;i++)
 		{
-			runes[i]=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString("D2"));
+			if (runes[i]==null)
+			{
+					runes[i]=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString("D2"));					
+			}
+			
 		}
-		blank= Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");
+		if (blank==null)
+		{
+				blank= Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");				
+		}		
+		
 	}
 
 
-	// Update is called once per frame
-	void Update () {
+
+	public static void UpdateRuneSlots () {
 		/*Checks the set value on the player and if different display the new rune.*/
+		for (int i=0; i<3;i++)
+		{
+				if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]!=-1)
+				{
+					GameWorldController.instance.playerUW.playerHud.activeRunes[i].thisRune.texture = runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]];				
+				}
+				else
+				{
+						GameWorldController.instance.playerUW.playerHud.activeRunes[i].thisRune.texture=blank;	
+				}
+			
+		}
+
+				/*
 		if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber] != setRune)
 		{
 			setRune= GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber];
 			if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber]!=-1)
 			{
+				
 				thisRune.texture=runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[SlotNumber]];
 			}
 			else
 			{
 				thisRune.texture=blank;
 			}
-		}
+		}*/
 	}
 
 	public void OnClick()

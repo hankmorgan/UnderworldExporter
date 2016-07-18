@@ -291,7 +291,7 @@
 290 0 0 0 entity 81 a_silver_seed H 1 UW1/Sprites/Objects/OBJECTS_290 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_290 UW1/Sprites/Objects/OBJECTS_290 S T U UW1/Sprites/Objects/OBJECTS_290 W x Y 1 1
 291 0 0 0 entity 26 a_mandolin H 1 UW1/Sprites/Objects/OBJECTS_291 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_291 UW1/Sprites/Objects/OBJECTS_291 S T U UW1/Sprites/Objects/OBJECTS_291 W x Y 0 1
 292 0 0 0 entity 26 a_flute H 1 UW1/Sprites/Objects/OBJECTS_292 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_292 UW1/Sprites/Objects/OBJECTS_292 S T U UW1/Sprites/Objects/OBJECTS_292 W x Y 0 1
-293 0 0 0 entity 16 some_leeches_bunches_of_leeches H 1 UW1/Sprites/Objects/OBJECTS_293 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_293 UW1/Sprites/Objects/OBJECTS_293 S T U UW1/Sprites/Objects/OBJECTS_293 W x Y 0 1
+293 0 0 0 entity 91 some_leeches_bunches_of_leeches H 1 UW1/Sprites/Objects/OBJECTS_293 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_293 UW1/Sprites/Objects/OBJECTS_293 S T U UW1/Sprites/Objects/OBJECTS_293 W x Y 0 1
 294 0 0 0 entity 90 a_moonstone H 1 UW1/Sprites/Objects/OBJECTS_294 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_294 UW1/Sprites/Objects/OBJECTS_294 S T U UW1/Sprites/Objects/OBJECTS_294 W x Y 0 1
 295 0 0 0 entity 87 a_spike H 1 UW1/Sprites/Objects/OBJECTS_295 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_295 UW1/Sprites/Objects/OBJECTS_295 S T U UW1/Sprites/Objects/OBJECTS_295 W x Y 0 1
 296 0 0 0 entity 16 a_rock_hammer H 1 UW1/Sprites/Objects/OBJECTS_296 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_296 UW1/Sprites/Objects/OBJECTS_296 S T U UW1/Sprites/Objects/OBJECTS_296 W x Y 0 1

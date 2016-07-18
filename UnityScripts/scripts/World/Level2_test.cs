@@ -11,8 +11,5 @@ public class Level2_test : MonoBehaviour {
 		player.transform.position= transform.position;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }

@@ -50,7 +50,7 @@ public class GameWorldController : UWEBase {
 		{
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
-		SwitchLevel(LevelNo);
+		//SwitchLevel(LevelNo);
 
 		return;
 	}

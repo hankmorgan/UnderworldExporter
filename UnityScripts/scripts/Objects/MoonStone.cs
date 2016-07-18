@@ -9,13 +9,15 @@ public class MoonStone : object_base {
 	{
 		base.Start ();
 		playerUW.MoonGateLevel = GameWorldController.instance.LevelNo;
+		playerUW.MoonGatePosition=this.transform.position;
 	}
 
 		/// <summary>
 		/// Updates the location of the moonstone
 		/// </summary>
 		/// TODO: only update when position changes?
-	void Update()
+		/// Or find when on spell cast or Update when leaving level.
+	void UpdatePosition()
 	{
 		if (objInt().PickedUp==false)
 		{

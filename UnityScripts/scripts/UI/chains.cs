@@ -4,7 +4,7 @@ using System.Collections;
 public class chains : GuiBase_Draggable {
 	/*GUI Element for switching panel displays but also controls which other GUI elements are displayed.*/
 	public static int ActiveControl;
-	public static int setControl=-1;
+	public static int setControl=0;
 	public GameObject ControlParent;
 	public void OnClick()
 	{
@@ -21,15 +21,16 @@ public class chains : GuiBase_Draggable {
 			ActiveControl=0;
 			break;
 		}
+		Refresh();
 	}
-
+		/*
 	// Update is called once per frame
-	void Update () {
+	 Update () {
 		if (setControl!=ActiveControl)
 		{
 			Refresh();
 		}
-	}
+	}*/
 
 	public GameObject EnableDisableControl(string ControlName, bool targetState)
 	{
@@ -267,5 +268,10 @@ public class chains : GuiBase_Draggable {
 		//Cuts
 		EnableDisableControl("CutsceneSmall",CutSceneEnabled);
 		EnableDisableControl("CutsceneFull",CutSceneEnabled);
+
+				if (RuneBagEnabled==true)
+				{
+						RuneSlot.UpdateRuneDisplay();
+				}
 	}
 }

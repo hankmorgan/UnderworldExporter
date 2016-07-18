@@ -38,6 +38,11 @@ public class UWHUD : HUD {
 		public Texture2D  MapEraser;
 
 		public GameObject MapPanel;
+
+
+		public ActiveRuneSlot[] activeRunes;
+
+		public RuneSlot[] runes;
 }
 
 

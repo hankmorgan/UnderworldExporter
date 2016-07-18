@@ -19,6 +19,7 @@ public class RuneBag : object_base {
 	void OpenRuneBag()
 	{
 		chains.ActiveControl=2;
+		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 	}
 
 	public override bool Activate()
