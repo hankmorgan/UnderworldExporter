@@ -267,7 +267,10 @@ public class chains : GuiBase_Draggable {
 
 		//Cuts
 		EnableDisableControl("CutsceneSmall",CutSceneEnabled);
-		EnableDisableControl("CutsceneFull",CutSceneEnabled);
+				if (GameWorldController.instance.AtMainMenu)
+				{
+						EnableDisableControl("CutsceneFull",CutSceneEnabled);//Handled by cutscene scripts also				
+				}
 
 				if (RuneBagEnabled==true)
 				{

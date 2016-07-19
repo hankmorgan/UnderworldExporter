@@ -30,6 +30,7 @@ FILE *MAPFILE;
 
 extern int levelNo;
 extern int GAME;
+void ExtractSkills();
 
 int main()
 	{
@@ -196,10 +197,10 @@ int main()
 	uw1_graphics_file[34] = "Data\\TMOBJ.GR";
 	uw1_graphics_file[35] = "Data\\WEAPONS.GR";
 	uw1_graphics_file[36] = "Data\\BLNKMAP.BYT";
-	uw1_graphics_file[37] = "Data\\CHARGEN.BYT";
+	uw1_graphics_file[37] = "Data\\CHARGEN.BYT";//palette no 9
 	uw1_graphics_file[38] = "Data\\CONV.BYT";
 	uw1_graphics_file[39] = "Data\\MAIN.BYT";
-	uw1_graphics_file[40] = "Data\\OPSCR.BYT";
+	uw1_graphics_file[40] = "Data\\OPSCR.BYT";//palette no 6
 	uw1_graphics_file[41] = "Data\\PRES1.BYT";
 	uw1_graphics_file[42] = "Data\\PRES2.BYT";
 	uw1_graphics_file[43] = "Data\\WIN1.BYT";
@@ -477,10 +478,11 @@ int main()
 		printf("%d) SS1 Font Extraction\n", FONT_EXTRACT_MODE);
 		printf("%d) Show UW Object Combinations\n", COMBINATION_EXTRACT_MODE);
 		printf("%d) Show UW Common Object Properties\n", COMMON_PROPERTIES_EXTRACT_MODE);
-		printf("%d) Decode UW1 Fonts (using UWAdventures code)", FONT_DECODE_UW1_MODE);
-		printf("Please select a mode.\n>");
+		printf("%d) Decode UW1 Fonts (using UWAdventures code)\n", FONT_DECODE_UW1_MODE);
+		printf("%d) Decode UW1 SKILLS File\n", SKILLS_EXTRACT_MODE);
+		printf("Please select a mode.>");
 		scanf("%d", &mode);
-		if ((mode < 0) || (mode > 17))
+		if ((mode < 0) || (mode > 18))
 			{
 			printf("Invalid input. Bye.");
 			return 0;
@@ -996,6 +998,8 @@ int main()
 					break;
 				case CONVERSATION_MODE:
 					break;
+				case SKILLS_EXTRACT_MODE:
+					break;
 			}
 		}
 	else
@@ -1208,6 +1212,10 @@ int main()
 			case FONT_DECODE_UW1_MODE:
 				{
 				DecodeUWFont();
+				}
+			case SKILLS_EXTRACT_MODE:
+				{
+				ExtractSkills();
 				}
 		}
 	fclose(LOGFILE);
@@ -1594,4 +1602,119 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				PrintUnityTileMap(game, LevelNo, LevelInfo);
 				break;
 		}
+}
+
+void PrintCharClass(int classType)
+	{
+	switch (classType)
+		{
+		case 0:
+			fprintf(LOGFILE, "FIGHTER");break;
+		case 1:
+			fprintf(LOGFILE, "MAGE"); break;
+		case 2:
+			fprintf(LOGFILE, "BARD"); break;
+		case 3:
+			fprintf(LOGFILE, "TINKER"); break;
+		case 4:
+			fprintf(LOGFILE, "DRUID"); break;
+		case 5:
+			fprintf(LOGFILE, "PALADIN"); break;
+		case 6:
+			fprintf(LOGFILE, "RANGER"); break;
+		case 7:
+			fprintf(LOGFILE, "SHEPARD"); break;
+		default:
+			fprintf(LOGFILE, "UNKNOWN!"); break;
+		}
+
+	}
+void PrintSkill(int SkillType)
+	{
+	switch (SkillType)
+		{
+		case 0: //Attack
+			fprintf(LOGFILE, "%d //Attack", SkillType); break;
+		case 1: //Defense
+			fprintf(LOGFILE, "%d //Defense", SkillType); break;
+		case 2: //unarmed
+			fprintf(LOGFILE, "%d //Unarmed", SkillType); break;
+		case 3: //Sword
+			fprintf(LOGFILE, "%d //Sword", SkillType); break;
+		case 4: //Axe
+			fprintf(LOGFILE, "%d //Axe", SkillType); break;
+		case 5: //Mace
+			fprintf(LOGFILE, "%d //Mace", SkillType); break;
+		case 6: //Missile
+			fprintf(LOGFILE, "%d //Missile", SkillType); break;
+		case 7: //Mana
+			fprintf(LOGFILE, "%d //Mana", SkillType); break;
+		case 8: //Lore
+			fprintf(LOGFILE, "%d //Lore", SkillType); break;
+		case 9: //Casting
+			fprintf(LOGFILE, "%d //Casting", SkillType); break;
+		case 10: //Traps
+			fprintf(LOGFILE, "%d //Traps", SkillType); break;
+		case 11: //Search
+			fprintf(LOGFILE, "%d //Search", SkillType); break;
+		case 12: //Track
+			fprintf(LOGFILE, "%d //Track", SkillType); break;
+		case 13: //Sneak
+			fprintf(LOGFILE, "%d //Sneak", SkillType); break;
+		case 14: //Repair
+			fprintf(LOGFILE, "%d //Repair", SkillType); break;
+		case 15: //Charm
+			fprintf(LOGFILE, "%d //Charm", SkillType); break;
+		case 16: //Pick Lock
+			fprintf(LOGFILE, "%d //Picklock", SkillType); break;
+		case 17: //Acrobat
+			fprintf(LOGFILE, "%d //Acrobat", SkillType); break;
+		case 18: //Appraise
+			fprintf(LOGFILE, "%d //Appraise", SkillType); break;
+		case 19: //Swimming
+			fprintf(LOGFILE, "%d //Swimming", SkillType); break;
+		default: //Unknown
+			fprintf(LOGFILE, "%d //UNKNOWN!", SkillType); break;
+		}
+	}
+
+	void ExtractSkills()
+		{
+		char filePath[255];
+		unsigned char *Buffer;
+		sprintf_s(filePath, 255, "%s\\%s", path_uw1, UW1_SKILLS);
+		FILE *file = NULL;      // File pointer
+		if (fopen_s(&file, filePath, "rb") != 0)
+			{
+			printf("Could not open specified file\n");
+			return;
+			}
+		else
+			{
+			// Get the size of the file in bytes
+			long fileSize = getFileSize(file);
+			// Allocate space in the buffer for the whole file
+			Buffer = new unsigned char[fileSize];
+			fread(Buffer, fileSize, 1, file);
+			fclose(file);
+			int add_ptr=0x20; //Starts further out the file.
+			for (int CharClass=0; CharClass<8;CharClass++)//For each character type.
+				{//Five sets of skills
+				fprintf(LOGFILE, "\nChar Class ");
+				PrintCharClass(CharClass);
+				fprintf(LOGFILE, "//(%d)\n", CharClass);
+				for (int SkillChoice = 0; SkillChoice<5;SkillChoice++)
+					{
+					fprintf(LOGFILE, "\tSkillChoices %d\n", SkillChoice);
+					int NoOfEntries = getValAtAddress(Buffer,add_ptr++,8);
+					for (int i = 0; i < NoOfEntries; i++)
+						{
+						fprintf(LOGFILE, "\t\tSkill : ");
+						PrintSkill(getValAtAddress(Buffer, add_ptr++, 8));
+						fprintf(LOGFILE, "\n");
+						}
+					}
+				}
+			}
+	
 	}

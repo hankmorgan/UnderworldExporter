@@ -489,11 +489,12 @@ public class WindowDetectUW : WindowDetect {
 				if (Event.current.Equals(Event.KeyboardEvent("e")))
 				{			
 					if (playerUW.MouseLookEnabled==false)
-					{
+					{//Switch to mouse look.
 						playerUW.YAxis.enabled=true;
 						playerUW.XAxis.enabled=true;
 						playerUW.MouseLookEnabled=true;
-						Cursor.lockState = CursorLockMode.Locked;
+						Cursor.lockState = CursorLockMode.Locked;						
+						playerUW.playerHud.MouseLookCursor.texture=playerUW.playerHud.CursorIcon;
 					}
 					else
 					{
@@ -501,16 +502,12 @@ public class WindowDetectUW : WindowDetect {
 						playerUW.YAxis.enabled=false;
 						playerUW.MouseLookEnabled=false;
 						Cursor.lockState = CursorLockMode.None;
+						playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;	
 					}
 				}
 			}
 			
-			if (playerUW.MouseLookEnabled == true)
-			{
-				playerUW.playerHud.MouseLookCursor.texture=playerUW.playerHud.CursorIcon;	
-								//TODO:draw the cursor in the middle
-			}
-			else
+			if (playerUW.MouseLookEnabled == false)
 			{
 				if ((WindowDetectUW.InMap==true) && (MapInteraction.InteractionMode==2))
 				{
@@ -522,7 +519,7 @@ public class WindowDetectUW : WindowDetect {
 				}
 				
 				GUI.DrawTexture (CursorPosition,playerUW.playerHud.CursorIcon);
-				playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;
+
 			}		
 		}
 	}

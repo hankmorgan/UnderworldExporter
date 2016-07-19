@@ -20,6 +20,7 @@
 #define UW1_CRITTER_ASSOC "crit\\assoc.anm"
 #define UW1_WEAPON_PAL "data\\WEAPONS.CM"	//Palette file for weapon skin colours.
 #define UW1_GRAVES "data\\grave.dat"
+#define UW1_SKILLS "data\\skills.dat"
 //#define UW1_CRITTER_FILE "C:\\Games\\UW1\\crit\\CR23PAGE.N00"
 
 //#define UW2_LEVEL_PATH "C:\\Games\\UW2\\data\\lev.ark"
@@ -126,6 +127,7 @@ extern int CEILING_HEIGHT;
 #define COMBINATION_EXTRACT_MODE 15
 #define COMMON_PROPERTIES_EXTRACT_MODE 16
 #define FONT_DECODE_UW1_MODE 17
+#define SKILLS_EXTRACT_MODE 18
 
 //UW2 Ark block numbers
 #define UW2_OFFSET_BLOCK 0

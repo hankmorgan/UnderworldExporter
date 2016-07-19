@@ -19,6 +19,7 @@ public class MusicController : MonoBehaviour {
 	public static float LastAttackCounter=0.0f;//To track the end of combat.
 
 	//What I am currently playing.
+	public bool InIntro;
 	public bool Combat;
 	public bool InMap;
 	public bool WeaponDrawn;
@@ -59,11 +60,12 @@ public class MusicController : MonoBehaviour {
 		if (LastAttackCounter <=0)
 		{
 			Combat=false;
-			//Fleeing=false;
+				//Fleeing=false;
 		}
 		else
 		{
 			LastAttackCounter -=Time.deltaTime;
+			InIntro=false;
 			Combat=true;
 		}
 		if ((playerUW.CurVIT<=10) && (Combat==true))
@@ -99,6 +101,8 @@ public class MusicController : MonoBehaviour {
 		//Get the highest priorty tracklist to play.
 		switch (GetMaxPriority())
 		{
+			case MUS_INTRO:
+				ChangeTracklist(IntroTracks,MUS_DEATH);break;
 			case MUS_DEATH:
 				ChangeTracklist(DeathTracks,MUS_DEATH);break;
 			case MUS_MAP:
@@ -168,6 +172,10 @@ public class MusicController : MonoBehaviour {
 		{
 			return MUS_WEAPON;
 		}
+		else if (InIntro)
+		{
+			return MUS_INTRO;
+		}
 		else
 		{
 			return MUS_IDLE;
@@ -178,6 +186,8 @@ public class MusicController : MonoBehaviour {
 	{
 		if (playing!=playingMode)
 		{
+			if (GameWorldController.instance.AtMainMenu==false)
+			{InIntro=false;}
 			PlayRandom(newTrackList);
 			playing=playingMode;
 		}

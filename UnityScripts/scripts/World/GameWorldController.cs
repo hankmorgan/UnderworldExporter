@@ -32,6 +32,7 @@ public class GameWorldController : UWEBase {
 	public string UI_Name;
 	public ObjectMasters objectMaster; //= new ObjectMasters();
 	public Shader greyScale;
+	public bool AtMainMenu;
 	//public MeshRenderer ceil;
 		void Awake()
 		{
@@ -40,6 +41,7 @@ public class GameWorldController : UWEBase {
 			UWEBase._UI=UI_Name;
 			objectMaster=new ObjectMasters();
 			objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
+			
 
 		}
 
@@ -51,7 +53,14 @@ public class GameWorldController : UWEBase {
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
 		//SwitchLevel(LevelNo);
+		if (AtMainMenu)
+		{
+			SwitchLevel(-1);
+			playerUW.playerController.enabled=false;
+			playerUW.transform.position=Vector3.zero;
+			mus.InIntro=true;
 
+		}
 		return;
 	}
 

@@ -28,6 +28,8 @@ public class Character : UWEBase {
 	//Reference to a C# version of the standard character controller.
 	public CharacterMotorC playerMotor;
 
+	public CharacterController playerController;
+
 	//Character Stats
 	public int MaxVIT;
 	public int CurVIT;

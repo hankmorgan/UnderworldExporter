@@ -25,7 +25,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
 		}
-
+		TargetControl.gameObject.SetActive(true);
 		PlayingSequence=true;
 		//Begin the image seq
 		StartCoroutine(PlayCutsImageSequence());
@@ -48,6 +48,8 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		SetAnimation= "Anim_Base";//End of anim.
 		PlayingSequence=false;
 		PostAnimPlay();
+		TargetControl.gameObject.SetActive(false);
+		Destroy (cs);
 		
 	}
 	

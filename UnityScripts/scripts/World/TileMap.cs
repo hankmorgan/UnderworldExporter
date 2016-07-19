@@ -53,6 +53,10 @@ public class TileMap : UWEBase {
 
 	public void PositionDetect()
 	{
+				if (GameWorldController.instance.AtMainMenu==true)
+				{
+						return;
+				}
 		if (playerUW==null)
 		{
 			playerUW=GameWorldController.instance.playerUW;//gronk.GetComponent<UWCharacter>();
