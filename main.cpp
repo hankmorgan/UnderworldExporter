@@ -1703,6 +1703,10 @@ void PrintSkill(int SkillType)
 				fprintf(LOGFILE, "\nChar Class ");
 				PrintCharClass(CharClass);
 				fprintf(LOGFILE, "//(%d)\n", CharClass);
+				fprintf(LOGFILE, "\t//Base Str %d\n", getValAtAddress(Buffer, CharClass * 4 + 0, 8));
+				fprintf(LOGFILE, "\t//Base Dex %d\n", getValAtAddress(Buffer, CharClass * 4 + 1, 8));
+				fprintf(LOGFILE, "\t//Base Int %d\n", getValAtAddress(Buffer, CharClass * 4 + 2, 8));
+				fprintf(LOGFILE, "\t//Unk (seed?) %d\n", getValAtAddress(Buffer, CharClass * 4 + 3, 8));
 				for (int SkillChoice = 0; SkillChoice<5;SkillChoice++)
 					{
 					fprintf(LOGFILE, "\tSkillChoices %d\n", SkillChoice);
