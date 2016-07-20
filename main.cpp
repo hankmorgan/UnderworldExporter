@@ -201,8 +201,8 @@ int main()
 	uw1_graphics_file[38] = "Data\\CONV.BYT";
 	uw1_graphics_file[39] = "Data\\MAIN.BYT";
 	uw1_graphics_file[40] = "Data\\OPSCR.BYT";//palette no 6
-	uw1_graphics_file[41] = "Data\\PRES1.BYT";
-	uw1_graphics_file[42] = "Data\\PRES2.BYT";
+	uw1_graphics_file[41] = "Data\\PRES1.BYT";//Palette no 15
+	uw1_graphics_file[42] = "Data\\PRES2.BYT";//Palette no 21
 	uw1_graphics_file[43] = "Data\\WIN1.BYT";
 	uw1_graphics_file[44] = "Data\\WIN2.BYT";
 

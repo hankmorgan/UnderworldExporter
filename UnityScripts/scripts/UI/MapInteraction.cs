@@ -66,6 +66,10 @@ public class MapInteraction : GuiBase {
 				}
 		}
 
+		public void OnHover()
+		{
+				
+		}
 
 		public void OnClick(BaseEventData evnt)
 		{
@@ -80,7 +84,7 @@ public class MapInteraction : GuiBase {
 						PointerEventData pntr = (PointerEventData)evnt;		
 						CursorPos=GameWorldController.instance.playerUW.playerHud.window.CursorPosition.center;//pntr.pressPosition;
 						RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,pntr.pressPosition,pntr.pressEventCamera, out pos);
-						pos = pos - new Vector2 (20.0f, 20.0f);
+						pos = pos + new Vector2 (370.0f, -20.0f);
 						GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
 						mapNoteCurrent=myObj.GetComponent<Text>();
 						mapNoteCurrent.transform.parent=this.transform;
@@ -127,7 +131,7 @@ public class MapInteraction : GuiBase {
 
 		public void OnLetterType()
 		{
-			caretAdjustment = new Vector2(MapNoteInput.text.Length* 8.0f,0f);
+			caretAdjustment = new Vector2(MapNoteInput.text.Length* 9f,0f);
 		}
 
 		void Update()
