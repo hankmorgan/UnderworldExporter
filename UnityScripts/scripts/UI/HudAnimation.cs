@@ -10,6 +10,7 @@ public class HudAnimation : GuiBase {
 	public string SetAnimation;
 	private SpriteRenderer sprt;
 	public string PreviousAnimation;
+	private string PreviousSprite="";
 	private Animator anim;
 
 	public static int NormalCullingMask;//-33
@@ -33,7 +34,11 @@ public class HudAnimation : GuiBase {
 		}
 		if (sprt.sprite!=null)
 		{
-			TargetControl.texture =sprt.sprite.texture;
+			if (PreviousSprite!=sprt.sprite.name)
+			{
+					TargetControl.texture =sprt.sprite.texture;
+					PreviousSprite=sprt.sprite.name;
+			}			
 		}
 	}
 

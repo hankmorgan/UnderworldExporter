@@ -387,6 +387,10 @@ public class WindowDetectUW : WindowDetect {
 
 	public void SetFullScreen()
 	{
+		if (playerUW==null)
+		{
+				playerUW=GameWorldController.instance.playerUW;//GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		}
 		FullScreen=true;
 		setPositions();
 
@@ -394,7 +398,7 @@ public class WindowDetectUW : WindowDetect {
 		RectTransform pos= this.GetComponent<RectTransform>();
 		pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
 		pos.sizeDelta=new Vector2(800.0f, 600f);
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
+		playerUW.playerHud.ChainsControl.Refresh();
 
 				/*
 		
@@ -410,10 +414,7 @@ public class WindowDetectUW : WindowDetect {
 		anchor.relativeOffset=new Vector2(0.0f,0.0f);
 		stretch.relativeSize=new Vector2 (1.0f,1.0f);
 				*/
-		if (playerUW==null)
-		{
-			playerUW=GameWorldController.instance.playerUW;//GameObject.Find ("Gronk").GetComponent<UWCharacter>();
-		}
+
 		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 		
 		playerUW.playerHud.main_window.enabled=false;
@@ -431,6 +432,10 @@ public class WindowDetectUW : WindowDetect {
 
 	public void UnSetFullScreen()
 	{
+		if (playerUW==null)
+		{
+				playerUW=GameWorldController.instance.playerUW;//GameObject.Find ("Gronk").GetComponent<UWCharacter>();
+		}
 		FullScreen=false;
 		setPositions();
 		playerUW.playerHud.ChainsControl.EnableDisableControl("main_window",true);

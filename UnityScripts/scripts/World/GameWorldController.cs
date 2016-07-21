@@ -57,6 +57,7 @@ public class GameWorldController : UWEBase {
 		{
 			SwitchLevel(-1);
 			playerUW.playerController.enabled=false;
+			playerUW.playerMotor.enabled=false;
 			playerUW.transform.position=Vector3.zero;
 			mus.InIntro=true;
 

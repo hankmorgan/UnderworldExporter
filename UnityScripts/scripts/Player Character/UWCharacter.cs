@@ -229,7 +229,7 @@ public class UWCharacter : Character {
 				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
 			}
 		}
-		playerMotor.enabled=!Paralyzed;
+			playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu));
 		
 		if (isFlying)
 		{//Flying spell

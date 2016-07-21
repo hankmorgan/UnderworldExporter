@@ -4,8 +4,6 @@ using UnityEngine.UI;
 public class Character : UWEBase {
 	/*Base Character Class*/
 
-	public int game;
-
 	//What interaction mode are we in and various ranges
 	public static int InteractionMode;
 
@@ -99,7 +97,7 @@ public class Character : UWEBase {
 		//TileMap.gronk=this.gameObject;
 		//NPC.player=this.gameObject;
 
-		if (game==2)
+		if (GameWorldController.instance.game=="SS1")
 		{
 			InteractionMode=UWCharacter.InteractionModePickup;
 		}

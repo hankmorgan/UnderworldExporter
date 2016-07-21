@@ -554,9 +554,9 @@ public class ObjectInteraction : UWEBase {
 				//a_nutritious_wafer(191)(d:1) + a_bottle_of_water&bottles_of_water(188)(d:1) = a_bottle_of_ale&bottles_of_ale(187)
 
 				//Debug.Log ("combining" +ItemID1 + " and " + ItemID2 + " in game " + playerUW.game);
-				switch (playerUW.game)
+				switch (GameWorldController.instance.game.ToUpper())
 				{
-				case 1://uw1
+				case "UW1"://uw1
 						{
 								lstInput1= new int[9]{149,225,225,226,225,226,227,149,284};
 								lstDestroy1 =new int[9]{0,1,1,1,1,1,1,0,1};
@@ -565,7 +565,7 @@ public class ObjectInteraction : UWEBase {
 								lstOutput =new int[9]{277,230,228,229,231,231,231,183,299};
 						}
 						break;
-				case 2://uw2
+				case "UW2"://uw2
 						lstInput1= new int[5]{216,300,149,149,191};
 						lstDestroy1=new int[5]{1,1,0,0,1};
 						lstInput2 =new int[5]{300,300,180,186,188};

@@ -9,6 +9,8 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 	public ScrollController mlCuts; //What control will print the subtitles
 	public AudioSource aud; //What control will play the audio.
+	public bool SkipAnim=false;
+	private float CutsceneTime;
 
 	public void Begin()
 	{
@@ -16,17 +18,19 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			return;
 		}
+		CutsceneTime=0f;
 		//Starts a sequenced cutscene.
-		GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+		//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 		chains.ActiveControl=5;
 		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-		isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
-		if (!isFullScreen)
-		{
-			GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
-		}
+		//isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
+		//if (!isFullScreen)
+		//{
+		//	GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
+		//}
 		TargetControl.gameObject.SetActive(true);
 		PlayingSequence=true;
+		SkipAnim=false;
 		//Begin the image seq
 		StartCoroutine(PlayCutsImageSequence());
 		//Begin the subs seq
@@ -43,7 +47,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			yield return new WaitForSeconds(cs.getImageTime(i)-currTime);   //Wait until it is time for the frame
 			currTime = cs.getImageTime(i);                                   //For the next wait.
 			currentFrameLoops = cs.getImageLoops(i);
-			SetAnimation= cs.getImageFrame(i);
+			SetAnimation= cs.getImageFrame(i);		
 		}
 		SetAnimation= "Anim_Base";//End of anim.
 		PlayingSequence=false;
@@ -102,14 +106,14 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	{//Called by events in certain animations when starting playing
 		if (PlayingSequence==false)
 		{
-			GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
+			//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 			chains.ActiveControl=5;
 			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-			isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
-			if (!isFullScreen)
-			{
-				GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
-			}
+			//isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
+			//if (!isFullScreen)
+			//{
+			//	GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
+			//}
 		}		
 		return;
 	} 
@@ -118,19 +122,48 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	{
 		if ((PlayingSequence==false) || (cs==null))
 		{
-			if (!isFullScreen)
-			{
-				GameWorldController.instance.playerUW.playerHud.window.UnSetFullScreen();
-			}
-			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
-			chains.ActiveControl=0;
+			//if (!isFullScreen)
+			//{
+			//	GameWorldController.instance.playerUW.playerHud.window.UnSetFullScreen();
+			//}
+			//GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;//?
+			
+
+			//chains.ActiveControl=0;
 			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 			SetAnimation= "Anim_Base";//Clears out the animation.
+			
 		}
 		else
 		{
 			Loop ();
 		}
 	}
-	
+
+	protected override void Update()
+	{
+		base.Update();
+		if (PlayingSequence)
+		{
+			CutsceneTime+=Time.deltaTime;
+		}
+		if (Input.anyKey)
+		{
+			if (PlayingSequence)
+			{
+				if (CutsceneTime>=3.0f)
+				{//Only end a cutscene if it has been running for longer than 3 seconds
+						SetAnimation= "Anim_Base";//End of anim.
+						PlayingSequence=false;
+						PostAnimPlay();
+						TargetControl.gameObject.SetActive(false);
+						Destroy (cs);	
+				}
+			}
+			else
+			{
+				PostAnimPlay();
+			}
+		}
+	}
 }
