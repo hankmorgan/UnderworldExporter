@@ -66,11 +66,6 @@ public class MapInteraction : GuiBase {
 				}
 		}
 
-		public void OnHover()
-		{
-				
-		}
-
 		public void OnClick(BaseEventData evnt)
 		{
 				switch (InteractionMode)

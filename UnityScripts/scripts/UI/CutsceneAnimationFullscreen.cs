@@ -129,7 +129,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			//GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;//?
 			
 
-			//chains.ActiveControl=0;
+			chains.ActiveControl=0;
 			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			
@@ -146,23 +146,16 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		if (PlayingSequence)
 		{
 			CutsceneTime+=Time.deltaTime;
-		}
-		if (Input.anyKey)
-		{
-			if (PlayingSequence)
+			if (Input.anyKey)
 			{
-				if (CutsceneTime>=3.0f)
-				{//Only end a cutscene if it has been running for longer than 3 seconds
-						SetAnimation= "Anim_Base";//End of anim.
-						PlayingSequence=false;
-						PostAnimPlay();
-						TargetControl.gameObject.SetActive(false);
-						Destroy (cs);	
-				}
-			}
-			else
-			{
-				PostAnimPlay();
+					if (CutsceneTime>=3.0f)
+					{//Only end a cutscene if it has been running for longer than 3 seconds
+							SetAnimation= "Anim_Base";//End of anim.
+							PlayingSequence=false;
+							PostAnimPlay();
+							TargetControl.gameObject.SetActive(false);
+							Destroy (cs);	
+					}
 			}
 		}
 	}
