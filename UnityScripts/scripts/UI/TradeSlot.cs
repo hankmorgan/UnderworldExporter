@@ -59,11 +59,11 @@ public class TradeSlot : GuiBase {
 		if (objInt!=null)
 		{
 			TradeSlot.LookingAt=true;
-			//GameWorldController.instance.playerUW.playerHud.MessageScroll.SetAnchorX(1.0f);//Move off screen.
-			TradeSlot.TempLookAt=GameWorldController.instance.playerUW.playerHud.MessageScroll.NewUIOUt.text;
-			//GameWorldController.instance.playerUW.playerHud.MessageScrollTemp.SetAnchorX(0.06f);
+			//UWHUD.instance.MessageScroll.SetAnchorX(1.0f);//Move off screen.
+			TradeSlot.TempLookAt=UWHUD.instance.MessageScroll.NewUIOUt.text;
+			//UWHUD.instance.MessageScrollTemp.SetAnchorX(0.06f);
 			StartCoroutine(ClearTempLookAt());
-			//GameWorldController.instance.playerUW.playerHud.MessageScrollTemp.Set (GameWorldController.instance.playerUW.StringControl.GetFormattedObjectNameUW(objInt));
+			//UWHUD.instance.MessageScrollTemp.Set (StringController.instance.GetFormattedObjectNameUW(objInt));
 		}
 	}
 
@@ -80,10 +80,10 @@ public class TradeSlot : GuiBase {
 		{
 			Time.timeScale=1.0f;//just in case a conversations is ended while looking.
 		}
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.NewUIOUt.text=TradeSlot.TempLookAt;
-		//GameWorldController.instance.playerUW.playerHud.MessageScroll.SetAnchorX(0.06f);
-		//GameWorldController.instance.playerUW.playerHud.MessageScrollTemp.SetAnchorX(1.00f);
-		//GameWorldController.instance.playerUW.playerHud.MessageScrollTemp.Set("");
+				UWHUD.instance.MessageScroll.NewUIOUt.text=TradeSlot.TempLookAt;
+		//UWHUD.instance.MessageScroll.SetAnchorX(0.06f);
+		//UWHUD.instance.MessageScrollTemp.SetAnchorX(1.00f);
+		//UWHUD.instance.MessageScrollTemp.Set("");
 	}
 
 	public void PlayerSlotLeftClick()
@@ -95,8 +95,8 @@ public class TradeSlot : GuiBase {
 			{//Empty slot
 				objectInSlot=GameWorldController.instance.playerUW.playerInventory.ObjectInHand;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
-				SlotImage.texture=GameWorldController.instance.playerUW.playerHud.CursorIcon;
-				GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
+				SlotImage.texture=UWHUD.instance.CursorIcon;
+				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 				Selected=true;
 			}
 			else
@@ -105,7 +105,7 @@ public class TradeSlot : GuiBase {
 				tmp = objectInSlot;
 				objectInSlot=GameWorldController.instance.playerUW.playerInventory.ObjectInHand;
 				GameWorldController.instance.playerUW.playerInventory.ObjectInHand=tmp;
-				GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				UWHUD.instance.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(tmp).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				Selected=true;
 			}
 		}
@@ -115,7 +115,7 @@ public class TradeSlot : GuiBase {
 			{
 				//Pickup the object in the slot
 				GameWorldController.instance.playerUW.playerInventory.SetObjectInHand(objectInSlot);
-				GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+				UWHUD.instance.CursorIcon= GameWorldController.instance.playerUW.playerInventory.GetGameObject(objectInSlot).GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 				objectInSlot="";
 				SlotImage.texture=Blank;
 				Selected=false;

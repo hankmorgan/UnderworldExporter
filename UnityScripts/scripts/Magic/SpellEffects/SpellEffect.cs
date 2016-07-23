@@ -830,7 +830,7 @@ public class SpellEffect : UWEBase {
 
 	public string getSpellDescription()
 	{
-		return playerUW.StringControl.GetString (6,EffectID);
+		return StringController.instance.GetString (6,EffectID);
 	}
 
 	/// <summary>

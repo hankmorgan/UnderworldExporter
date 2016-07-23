@@ -18,11 +18,11 @@ public class UWCombat : Combat {
 		{ ///If not charging an attack and not executing an attack it will check interaction mode.
 			if ((UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack))
 			{///Sets the weapon, race and handedness of the weapon animation.
-				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
+				UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_Ready_" + GetRace () + "_" + GetHand();
 			}
 			else
 			{///Or Hides the weapon by animating the player putting it away.
-				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= "WeaponPutAway";
+				UWHUD.instance.wpa.SetAnimation= "WeaponPutAway";
 			}
 		}
 	}
@@ -36,7 +36,7 @@ public class UWCombat : Combat {
 	{ 
 		if(IsMelee())
 		{///If melee sets the proper weapon drawn back animation.
-			GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
+			UWHUD.instance.wpa.SetAnimation= GetWeapon () +"_" + GetStrikeType() + "_" + GetRace () + "_" + GetHand() + "_Charge";
 		}
 		else
 		{
@@ -49,13 +49,13 @@ public class UWCombat : Combat {
 			}
 			if (currentAmmo==null)
 			{//No ammo.
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Sorry, you have no " + GameWorldController.instance.playerUW.StringControl.GetObjectNounUW(currWeaponRanged.AmmoType));
+				UWHUD.instance.MessageScroll.Add ("Sorry, you have no " + StringController.instance.GetObjectNounUW(currWeaponRanged.AmmoType));
 				return;
 			}
 			else
 			{
 				//Change the crosshair
-				GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.CursorIconTarget;
+				UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconTarget;
 			}
 		}
 		///Starts the counter
@@ -145,7 +145,7 @@ public class UWCombat : Combat {
 		}
 		///Ends the attack and wait for a period before allowing another action.
 		AttackExecuting=false;
-		GameWorldController.instance.playerUW.playerHud.window.UWWindowWait(1.0f);
+		UWHUD.instance.window.UWWindowWait(1.0f);
 		
 	}
 
@@ -157,7 +157,7 @@ public class UWCombat : Combat {
 		base.ExecuteRanged ();
 
 		///Removes the cursor
-		GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
+		UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 		///Launches the ammo using LaunchAmmo
 		if (currentAmmo!=null)
 		{
@@ -171,11 +171,11 @@ public class UWCombat : Combat {
 	/// </summary>
 	public override void ReleaseAttack()
 	{
-		if (GameWorldController.instance.playerUW.playerHud.window.JustClicked==false)
+		if (UWHUD.instance.window.JustClicked==false)
 		{
 			if (IsMelee())
 			{///Sets the weapon, race and handedness animation.
-				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
+				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
 				AttackExecuting=true;
 				StartCoroutine(ExecuteMelee());
 			}

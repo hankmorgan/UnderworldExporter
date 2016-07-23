@@ -84,6 +84,6 @@ public class HealthFlask : GuiBase_Draggable {
 			output= output + "Your current mana points are " +GameWorldController.instance.playerUW.PlayerMagic.CurMana + " out of " + GameWorldController.instance.playerUW.PlayerMagic.MaxMana;
 		}
 
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(output);
+		UWHUD.instance.MessageScroll.Add(output);
 	}
 }

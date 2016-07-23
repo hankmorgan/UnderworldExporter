@@ -40,7 +40,7 @@ public class Potion : enchantment_base {
 			
 			if (UseString !=-1)
 			{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,UseString));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,UseString));
 			}
 			objInt().consumeObject();
 

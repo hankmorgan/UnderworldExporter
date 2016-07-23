@@ -24,8 +24,8 @@ public class MapInteraction : GuiBase {
 					GameWorldController.instance.mus.InMap=false;
 			}
 			chains.ActiveControl=0;
-			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-			GameWorldController.instance.playerUW.playerHud.CursorIcon = GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
+			UWHUD.instance.ChainsControl.Refresh();
+			UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
 		}
 
 		public void MapUp()
@@ -49,7 +49,7 @@ public class MapInteraction : GuiBase {
 		private void UpdateMap(int LevelNo)
 		{
 			WindowDetect.InMap=true;//turns on blocking collider.
-			GameWorldController.instance.playerUW.playerHud.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage(LevelNo);
+			UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage(LevelNo);
 		}
 
 		public void ClickEraser()
@@ -57,12 +57,12 @@ public class MapInteraction : GuiBase {
 				if (InteractionMode==MapInteractionNormal)	
 				{
 						InteractionMode=MapInteractionDelete;
-						GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.MapEraser;
+						UWHUD.instance.CursorIcon=UWHUD.instance.MapEraser;
 				}
 				else
 				{
 						InteractionMode=MapInteractionNormal;
-						GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.MapQuill;
+						UWHUD.instance.CursorIcon=UWHUD.instance.MapQuill;
 				}
 		}
 
@@ -72,12 +72,12 @@ public class MapInteraction : GuiBase {
 				{
 				case MapInteractionNormal:
 						InteractionMode=MapInteractionWriting;
-						GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.MapQuillWriting;
+						UWHUD.instance.CursorIcon=UWHUD.instance.MapQuillWriting;
 
 						pos = Vector2.zero;
 						RectTransform rect = this.GetComponent<RectTransform>();
 						PointerEventData pntr = (PointerEventData)evnt;		
-						CursorPos=GameWorldController.instance.playerUW.playerHud.window.CursorPosition.center;//pntr.pressPosition;
+						CursorPos=UWHUD.instance.window.CursorPosition.center;//pntr.pressPosition;
 						RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,pntr.pressPosition,pntr.pressEventCamera, out pos);
 						pos = pos + new Vector2 (370.0f, -20.0f);
 						GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
@@ -92,7 +92,7 @@ public class MapInteraction : GuiBase {
 
 				case MapInteractionDelete:
 						InteractionMode=MapInteractionNormal;
-						GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.MapQuill;							
+						UWHUD.instance.CursorIcon=UWHUD.instance.MapQuill;							
 						break;
 				case MapInteractionWriting:
 						OnNoteComplete();
@@ -121,7 +121,7 @@ public class MapInteraction : GuiBase {
 				}
 				InteractionMode=MapInteractionNormal;
 				caretAdjustment= Vector2.zero;
-				GameWorldController.instance.playerUW.playerHud.CursorIcon=GameWorldController.instance.playerUW.playerHud.MapQuill;
+				UWHUD.instance.CursorIcon=UWHUD.instance.MapQuill;
 		}
 
 		public void OnLetterType()

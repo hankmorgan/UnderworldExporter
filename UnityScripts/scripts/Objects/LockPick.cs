@@ -12,7 +12,7 @@ public class LockPick : object_base {
 			if(playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set ( playerUW.StringControl.GetString(1,8));
+				UWHUD.instance.MessageScroll.Set ( StringController.instance.GetString(1,8));
 				return true;
 			}
 			else

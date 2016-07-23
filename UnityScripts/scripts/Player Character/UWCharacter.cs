@@ -76,7 +76,7 @@ public class UWCharacter : Character {
 	public void Awake()
 	{
 		Instance=this;
-				DontDestroyOnLoad(this);
+		DontDestroyOnLoad(this);
 	}
 
 	public override void Start ()
@@ -87,57 +87,45 @@ public class UWCharacter : Character {
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;
-		Cursor.SetCursor (playerHud.CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
-		//GuiBase.playerUW = this.gameObject.GetComponent<UWCharacter>();
+		Cursor.SetCursor (UWHUD.instance.CursorIconBlank,Vector2.zero, CursorMode.ForceSoftware);
 		InteractionMode=UWCharacter.DefaultInteractionMode;
 
 
 		//Tells other objects about this component;
-		//InventorySlot.playerUW=this.GetComponent<UWCharacter>();
 
 		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
 		Container.playerUW=this.GetComponent<UWCharacter>();
-		//ContainerOpened.playerUW =this.GetComponent<UWCharacter>();
-		//ActiveRuneSlot.playerUW=this.GetComponent<UWCharacter>();
 		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
-	//	SpellEffectsDisplay.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		//Eyes.playerUW=this.GetComponent<UWCharacter>();
 		NPC.playerUW=this.GetComponent<UWCharacter>();
 		Magic.playerUW=this.GetComponent<UWCharacter>();
 		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
-		//Conversation.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		SpellProp.playerUW = this.gameObject.GetComponent<UWCharacter>();
-		StringControl.InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
+		
 
 		ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();
-		playerHud.InputControl.text="";
-	//playerHud.InputControl.text="";
-		playerHud.MessageScroll.Clear ();
+		UWHUD.instance.InputControl.text="";
+		UWHUD.instance.MessageScroll.Clear ();
 		
 	if (SceneManager.GetActiveScene().name =="0")
 		{//Load the first level
 						//Debug.Log("Loading first level");
 				//RoomManager.LoadRoom("1");
 		}
-
-		//Cutscene_Intro ci = playerHud.gameObject.AddComponent<Cutscene_Intro>();
-		//playerHud.CutScenesFull.cs=ci;
-		//playerHud.CutScenesFull.Begin();
 	}
 
 	void PlayerDeath()
 	{//CHeck if the player has planted the seed and if so send them to that position.
 		mus.Death=true;
-		if ( playerHud.CutScenesSmall!=null)
+		if ( UWHUD.instance.CutScenesSmall!=null)
 		{
 			if (ResurrectPosition!=Vector3.zero)
 			{
-				 playerHud.CutScenesSmall.SetAnimation="Death_With_Sapling";
+				 UWHUD.instance.CutScenesSmall.SetAnimation="Death_With_Sapling";
 			}
 			else
 			{
-				playerHud.CutScenesSmall.SetAnimation="Death";
+				UWHUD.instance.CutScenesSmall.SetAnimation="Death";
 			}
 		}
 
@@ -149,7 +137,7 @@ public class UWCharacter : Character {
 		if (PlayerMagic.ReadiedSpell!="")
 		{
 			PlayerMagic.ReadiedSpell="";
-			playerHud.CursorIcon=playerHud.CursorIconDefault;
+			UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 		}
 	}
 
@@ -201,10 +189,10 @@ public class UWCharacter : Character {
 		base.Update ();
 		if ((WindowDetectUW.WaitingForInput==true) && (Instrument.PlayingInstrument==false))//TODO:Make this cleaner!!
 		{//TODO: This should be in window detect
-			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
-			//playerHud.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
-			//playerHud.InputControl.selected=true;
-			playerHud.InputControl.Select();
+			//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
+			//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;
+			//UWHUD.instance.InputControl.selected=true;
+			UWHUD.instance.InputControl.Select();
 		}
 		if ((CurVIT<=0) && (mus.Death==false))
 		{
@@ -281,7 +269,7 @@ public class UWCharacter : Character {
 			return;
 		}
 
-		if (playerHud.window.JustClicked==false)
+		if (UWHUD.instance.window.JustClicked==false)
 		{
 			if(Paralyzed==false)
 			{
@@ -314,13 +302,13 @@ public class UWCharacter : Character {
 		if(
 			(Input.GetMouseButtonDown(1)) 
 			 && (WindowDetectUW.CursorInMainWindow==true)
-			 && (playerHud.window.JustClicked==false)
+			 && (UWHUD.instance.window.JustClicked==false)
 			&& ((PlayerCombat.AttackCharging==false)&&(PlayerCombat.AttackExecuting==false))
 		 )
 		{
 			PlayerMagic.castSpell(this.gameObject, PlayerMagic.ReadiedSpell,false);
 			PlayerMagic.SpellCost=0;
-			playerHud.window.UWWindowWait (1.0f);
+			UWHUD.instance.window.UWWindowWait (1.0f);
 		}
 	}
 
@@ -330,7 +318,7 @@ public class UWCharacter : Character {
 
 		//Debug.Log ("Value summited");
 
-		InputField inputctrl =playerHud.InputControl;//playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
+		InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
 		//Debug.Log (inputctrl.text);
 				/*
 				int quant=0;
@@ -342,7 +330,7 @@ public class UWCharacter : Character {
 		WindowDetectUW.WaitingForInput=false;
 		inputctrl.text="";
 		inputctrl.text="";
-		playerHud.MessageScroll.Clear ();
+		UWHUD.instance.MessageScroll.Clear ();
 		//int quant= int.Parse(inputctrl.text);
 		if (quant==0)
 		{//cancel
@@ -391,7 +379,7 @@ public class UWCharacter : Character {
 		}
 		else
 		{
-			playerHud.MessageScroll.Add ("Talking to yourself?");
+			UWHUD.instance.MessageScroll.Add ("Talking to yourself?");
 		}
 	}
 
@@ -424,17 +412,17 @@ public class UWCharacter : Character {
 					switch(hit.transform.name.Substring(0,len).ToUpper())
 					{
 					case "CEIL":
-						playerHud.MessageScroll.Add ("You see the ceiling");
+						UWHUD.instance.MessageScroll.Add ("You see the ceiling");
 						//GetMessageLog().text = "You see the ceiling";
 						break;	
 					case "PILL":
 						//GetMessageLog().text = 
-						playerHud.MessageScroll.Add("You see a pillar");
+						UWHUD.instance.MessageScroll.Add("You see a pillar");
 						break;	
 					case "BRID":
 						//000~001~171~You see a bridge.
 						//GetMessageLog().text= 
-						playerHud.MessageScroll.Add(StringControl.GetString(1,171));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,171));
 						break;
 					case "WALL":
 					case "TILE":
@@ -490,9 +478,9 @@ public class UWCharacter : Character {
 								//GetMessageLog ().text =
 								if (textureIndex==142)
 								{//This is a window into the abyss.
-									playerHud.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
+									UWHUD.instance.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
 								}
-								playerHud.MessageScroll.Add("You see " + StringControl.GetTextureName(textureIndex));
+								UWHUD.instance.MessageScroll.Add("You see " + StringController.instance.GetTextureName(textureIndex));
 							}
 						}
 					//	GetMessageLog().text=rend.materials[materialIndex].name;
@@ -538,7 +526,7 @@ public class UWCharacter : Character {
 						//check for weight
 						if (objPicked.GetWeight() > playerInventory.getEncumberance())
 						{//000~001~095~That is too heavy for you to pick up.
-							playerHud.MessageScroll.Add(StringControl.GetString(1,95));
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,95));
 							return;
 						}
 						if (ptrId==-2)
@@ -553,8 +541,8 @@ public class UWCharacter : Character {
 							{
 								//Debug.Log("attempting to pick up a quantity");
 
-								playerHud.MessageScroll.Set ("Move how many?");
-								InputField inputctrl =playerHud.InputControl;//playerHud.MessageScroll.GetComponent<UIInput>();
+								UWHUD.instance.MessageScroll.Set ("Move how many?");
+								InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.GetComponent<UIInput>();
 								inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
 								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputCharacterQty;
@@ -578,7 +566,7 @@ public class UWCharacter : Character {
 					}
 					else
 					{//000~001~096~You cannot pick that up.
-						playerHud.MessageScroll.Add(StringControl.GetString(1,96));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,96));
 					}
 				}
 			}
@@ -635,7 +623,7 @@ public class UWCharacter : Character {
 		000~001~111~full
 		000~001~112~satiated
 		*/
-		return StringControl.GetString (1,104+((FoodLevel)/4));
+		return StringController.instance.GetString (1,104+((FoodLevel)/4));
 	}
 
 	public string GetFatiqueStatus()
@@ -648,7 +636,7 @@ public class UWCharacter : Character {
 		000~001~117~rested
 		000~001~118~wide awake	
 		*/
-		return StringControl.GetString (1,113+((Fatigue)/5));
+		return StringController.instance.GetString (1,113+((Fatigue)/5));
 	}
 
 	public void RegenMana()

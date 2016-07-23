@@ -65,32 +65,32 @@ public class Wand : enchantment_base {
 	
 		if (objInt().isIdentified==true)
 			{
-				FormattedName=playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex());
+				FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
 			}
 		else
 			{
 				if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 				{
 					objInt().isIdentified=true;
-					FormattedName=playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex());
+					FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex());
 				}
 				else
 				{
-					FormattedName=playerUW.StringControl.GetFormattedObjectNameUW(objInt());		
+					FormattedName=StringController.instance.GetFormattedObjectNameUW(objInt());		
 				}					
 			}
 	
 		if ((SpellObjectQuantity>0) && (objInt().isEnchanted==false) && (objInt().isIdentified))
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (FormattedName
+			UWHUD.instance.MessageScroll.Add (FormattedName
 				+ " with "
 				+ SpellObjectQuantity 
 				+ " charges remaining.");
 		}
 		else
 		{
-			//GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(FormattedName);
+			//UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
+			UWHUD.instance.MessageScroll.Add(FormattedName);
 		}
 		return true;
 	}

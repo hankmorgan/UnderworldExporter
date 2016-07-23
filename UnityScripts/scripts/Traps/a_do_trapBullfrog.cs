@@ -53,7 +53,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 	public void ResetBullFrog()
 	{//TODO:Move player and all objects within area to a safe spot when resetting.
 		//000~001~193~A voice utters the words "Reset Activated."
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,193));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,193));
 		for (int x=0; x<8; x++)
 		{
 			for (int y=0; y<8 ; y++)

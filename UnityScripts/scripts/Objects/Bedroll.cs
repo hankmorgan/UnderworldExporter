@@ -35,28 +35,28 @@ public class Bedroll : object_base {
 				ObjectInteraction incense =playerUW.playerInventory.findObjInteractionByID(277); 
 				if (incense!=null)
 					{
-					playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
+					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
 					incense.consumeObject ();
 					switch (playerUW.quest().getIncenseDream())
 						{
 						case 0:
-						playerUW.playerHud.CutScenesFull.SetAnimation="cs013_n01";break;
+						UWHUD.instance.CutScenesFull.SetAnimation="cs013_n01";break;
 						case 1:
-						playerUW.playerHud.CutScenesFull.SetAnimation="cs014_n01";break;
+						UWHUD.instance.CutScenesFull.SetAnimation="cs014_n01";break;
 						case 2:
-						playerUW.playerHud.CutScenesFull.SetAnimation="cs015_n01";break;
+						UWHUD.instance.CutScenesFull.SetAnimation="cs015_n01";break;
 						}
 					}
 				else
 					{
 					if (IsGaramonTime())
 						{//PLay a garamon dream
-						playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
-						playerUW.playerHud.CutScenesFull.SetAnimation="cs000_n04";
+						UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+						UWHUD.instance.CutScenesFull.SetAnimation="cs000_n04";
 						}
 						else
 						{//Regular sleep with a fade to black
-						playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
+						UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
 						}
 					}
 				for (int i=playerUW.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
@@ -67,7 +67,7 @@ public class Bedroll : object_base {
 						}
 					else
 						{//Too hungry to sleep.
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,17));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,17));
 						playerUW.Fatigue+=i;
 						return true;
 						}
@@ -84,7 +84,7 @@ public class Bedroll : object_base {
 				}
 			else
 			{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,14));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,14));
 			}	
 			return true;
 		}
@@ -122,7 +122,7 @@ public class Bedroll : object_base {
 	public static void WakeUp(UWCharacter sunshine)
 	{//Todo: Test the quality of the sleep and check for monster interuption.
 		RestoreHealthMana(sunshine);
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(sunshine.StringControl.GetString (1,18));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,18));
 	}
 
 

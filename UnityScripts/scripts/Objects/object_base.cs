@@ -36,7 +36,7 @@ public class object_base : UWEBase {
 		}
 		if (ml==null)
 		{
-			ml=playerUW.playerHud.MessageScroll;
+			ml=UWHUD.instance.MessageScroll;
 		}
 		CheckReferences();*/
 	}
@@ -67,7 +67,7 @@ public class object_base : UWEBase {
 	public virtual bool LookAt()
 	{
 		//CheckReferences();
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
 		return true;
 	}
 
@@ -82,7 +82,7 @@ public class object_base : UWEBase {
 		if (UWCharacter.InteractionMode== UWCharacter.InteractionModeUse)
 		{
 			FailMessage();
-			playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			playerUW.playerInventory.ObjectInHand="";
 			return true;
 		}
@@ -128,7 +128,7 @@ public class object_base : UWEBase {
 		}
 		if ((objInt!=null) && (ml==null))
 		{
-			ml=playerUW.playerHud.MessageScroll;
+			ml=UWHUD.instance.MessageScroll;
 		}
 	}*/
 
@@ -137,7 +137,7 @@ public class object_base : UWEBase {
 		/// </summary>
 	public void BecomeObjectInHand()
 	{//In order to use it.
-		playerUW.playerHud.CursorIcon= objInt().InventoryDisplay.texture;
+		UWHUD.instance.CursorIcon= objInt().InventoryDisplay.texture;
 		playerUW.playerInventory.ObjectInHand=this.name;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
@@ -150,7 +150,7 @@ public class object_base : UWEBase {
 	public virtual bool TalkTo()
 	{
 		//000~001~156~You cannot talk to that.
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,156));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,156));
 		return true;
 	}
 
@@ -220,7 +220,7 @@ public class object_base : UWEBase {
 		/// <returns><c>true</c>, if message was failed, <c>false</c> otherwise.</returns>
 	public virtual bool FailMessage()
 	{
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add("You cannot use this. (Failmessage default)");
+		UWHUD.instance.MessageScroll.Add("You cannot use this. (Failmessage default)");
 		return false;
 	}
 

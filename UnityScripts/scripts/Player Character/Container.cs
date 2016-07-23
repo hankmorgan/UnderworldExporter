@@ -192,7 +192,7 @@ public class Container : object_base {
 		//Sort the container
 		Container.SortContainer(this);
 		//GameObject.Find("ContainerOpened").GetComponent<UITexture>().mainTexture=currObjInt.GetEquipDisplay().texture;
-		playerUW.playerHud.ContainerOpened.GetComponent<RawImage>().texture=currObjInt.GetEquipDisplay().texture;
+		UWHUD.instance.ContainerOpened.GetComponent<RawImage>().texture=currObjInt.GetEquipDisplay().texture;
 		if (this.isOpenOnPanel==false)
 		{
 			this.isOpenOnPanel=true;
@@ -209,16 +209,16 @@ public class Container : object_base {
 			string sItem = this.GetItemAt(i);
 			playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
 		}
-		playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
+		UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
 		if (CountItems()>=8)
 		{
-			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(true);
-			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(true);
+			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(true);
+			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(true);
 		}
 		else
 		{	
-			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
-			playerUW.playerHud.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);						
+			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvUp.SetActive(false);
+			UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().InvDown.SetActive(false);						
 		}
 
 	}
@@ -439,7 +439,7 @@ public class Container : object_base {
 					OpenContainer();
 				}
 				playerUW.playerInventory.ObjectInHand= "";
-				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 
 				return true;
 			}
@@ -528,7 +528,7 @@ public class Container : object_base {
 			if (objInt.GetWeight() >= cn.GetFreeCapacity())
 			{
 				WeightTest=false;
-				playerUW.playerHud.MessageScroll.Add ("The " + playerUW.StringControl.GetSimpleObjectNameUW(cn.objInt()) + " is too full.");
+				UWHUD.instance.MessageScroll.Add ("The " + StringController.instance.GetSimpleObjectNameUW(cn.objInt()) + " is too full.");
 			}
 			else
 			{
@@ -537,7 +537,7 @@ public class Container : object_base {
 		}
 		else
 		{//000~001~248~That item does not fit.
-			playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,248));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,248));
 		}
 		return (TypeTest && WeightTest);
 	}

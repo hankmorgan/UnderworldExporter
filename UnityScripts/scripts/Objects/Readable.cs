@@ -30,7 +30,7 @@ public class Readable : object_base {
 		{
 		case ObjectInteraction.SIGN: //Sign
 			{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (8,objInt().Link - 0x200));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8,objInt().Link - 0x200));
 			return true;
 			}
 		case ObjectInteraction.BOOK://Book
@@ -40,11 +40,11 @@ public class Readable : object_base {
 			{
 				if (objInt().Link==520)
 				{//Special case. Chasm of fire map.
-					playerUW.playerHud.CutScenesSmall.SetAnimation="ChasmMap";
+					UWHUD.instance.CutScenesSmall.SetAnimation="ChasmMap";
 				}
 				else
 				{
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (3,objInt().Link - 0x200));
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (3,objInt().Link - 0x200));
 				}
 				return true;
 			}
@@ -57,7 +57,7 @@ public class Readable : object_base {
 
 		default: 
 			{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("READABLE TYPE NOT FOUND! (" + objInt().item_id +")");
+			UWHUD.instance.MessageScroll.Add ("READABLE TYPE NOT FOUND! (" + objInt().item_id +")");
 			return false;
 			}
 		}

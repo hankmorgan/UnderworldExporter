@@ -69,10 +69,10 @@ public class Shrine : object_base {
 				WaitingForInput=true;
 				if (inputctrl==null)
 				{
-					inputctrl =playerUW.playerHud.InputControl;//GameWorldController.instance.playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
+					inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
 				}
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set("Chant the mantra");
-				//inputctrl.text=GameWorldController.instance.playerUW.playerHud.MessageScroll.text;
+				UWHUD.instance.MessageScroll.Set("Chant the mantra");
+				//inputctrl.text=UWHUD.instance.MessageScroll.text;
 				//TODO:Fix me inputctrl.eventReceiver=this.gameObject;
 								//inputctrl.onEndEdit.RemoveAllListeners();
 								//inputctrl.onEndEdit.AddListener(delegate {
@@ -105,7 +105,7 @@ public class Shrine : object_base {
 	{//TODO: set this name of the event receiver whereever it is called so that this can make more sense.
 		/*if (inputctrl==null)
 		{
-			inputctrl =playerUW.playerHud.InputControl;//GameWorldController.instance.playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
+			inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
 		}*/
 		SubmitMantra (Mantra);
 		WaitingForInput=false;
@@ -125,7 +125,7 @@ public class Shrine : object_base {
 		Skills playerSkills= playerUW.PlayerSkills;
 		if (inputctrl==null)
 		{
-			inputctrl =playerUW.playerHud.InputControl;//GameWorldController.instance.playerUW.playerHud.MessageScroll.gameObject.GetComponent<UIInput>();
+			inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
 		}
 		string answer="";
 		switch (Mantra.ToUpper())
@@ -237,14 +237,14 @@ public class Shrine : object_base {
 	if (answer!="")
 		{
 			//Debug.Log (answer);
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add( "You have advanced in " + answer);
+			UWHUD.instance.MessageScroll.Add( "You have advanced in " + answer);
 		}
 		else
 		{
 			//Debug.Log ("not a mantra");
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add("That is not a mantra");
+			UWHUD.instance.MessageScroll.Add("That is not a mantra");
 		}
-		//inputctrl.text=GameWorldController.instance.playerUW.playerHud.MessageScroll.text;
+		//inputctrl.text=UWHUD.instance.MessageScroll.text;
 	}
 
 	public void GiveKeyOfTruth()
@@ -253,16 +253,16 @@ public class Shrine : object_base {
 		{
 			//Code to spawn key of truth in player hand
 			Debug.Log ("You get the key of truth");
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,30));//No skills appear
-			//inputctrl.text=GameWorldController.instance.playerUW.playerHud.MessageScroll.text;
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,30));//No skills appear
+			//inputctrl.text=UWHUD.instance.MessageScroll.text;
 			Shrine.HasGivenKey=true;
 		}
 	}
 
 	public void TrackCupOfWonder()
 	{//TODO:Find out what happens when I have the cup of wonder.
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("The cup of wonder is somewhere...");
-		//inputctrl.text=GameWorldController.instance.playerUW.playerHud.MessageScroll.text;
+		UWHUD.instance.MessageScroll.Add ("The cup of wonder is somewhere...");
+		//inputctrl.text=UWHUD.instance.MessageScroll.text;
 	}
 
 	public override bool TalkTo ()

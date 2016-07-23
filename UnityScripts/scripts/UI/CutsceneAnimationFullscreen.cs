@@ -22,11 +22,11 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		//Starts a sequenced cutscene.
 		//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 		chains.ActiveControl=5;
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-		//isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
+		UWHUD.instance.ChainsControl.Refresh();
+		//isFullScreen= UWHUD.instance.window.FullScreen;
 		//if (!isFullScreen)
 		//{
-		//	GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
+		//	UWHUD.instance.window.SetFullScreen();
 		//}
 		TargetControl.gameObject.SetActive(true);
 		PlayingSequence=true;
@@ -79,7 +79,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			yield return new WaitForSeconds(cs.getSubTime(i)-currTime);
 			currTime = cs.getSubTime(i)+cs.getSubDuration (i);//The time the subtitle finishes at.
-			mlCuts.Set("[FFFFFF]" + GameWorldController.instance.playerUW.StringControl.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
+			mlCuts.Set("[FFFFFF]" + StringController.instance.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
 			yield return new WaitForSeconds(cs.getSubDuration (i));
 			mlCuts.Set("");//Clear the control.
 		}
@@ -108,11 +108,11 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
 			chains.ActiveControl=5;
-			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-			//isFullScreen= GameWorldController.instance.playerUW.playerHud.window.FullScreen;
+			UWHUD.instance.ChainsControl.Refresh();
+			//isFullScreen= UWHUD.instance.window.FullScreen;
 			//if (!isFullScreen)
 			//{
-			//	GameWorldController.instance.playerUW.playerHud.window.SetFullScreen();
+			//	UWHUD.instance.window.SetFullScreen();
 			//}
 		}		
 		return;
@@ -124,13 +124,13 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			//if (!isFullScreen)
 			//{
-			//	GameWorldController.instance.playerUW.playerHud.window.UnSetFullScreen();
+			//	UWHUD.instance.window.UnSetFullScreen();
 			//}
 			//GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;//?
 			
 
 			chains.ActiveControl=0;
-			GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
+			UWHUD.instance.ChainsControl.Refresh();
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			
 		}

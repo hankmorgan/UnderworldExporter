@@ -27,19 +27,19 @@ public class RuneSlot : GuiBase {
 	public static void UpdateRuneDisplay () {
 		for  (int i=0; i<24; i++)
 		{
-						if (GameWorldController.instance.playerUW.playerHud.runes[i].thisRune==null)
+						if (UWHUD.instance.runes[i].thisRune==null)
 						{
-								GameWorldController.instance.playerUW.playerHud.runes[i].thisRune=GameWorldController.instance.playerUW.playerHud.runes[i].gameObject.GetComponent<RawImage>();
+								UWHUD.instance.runes[i].thisRune=UWHUD.instance.runes[i].gameObject.GetComponent<RawImage>();
 						}
 		if ((playerUW.PlayerMagic.PlayerRunes[i] != false))
 			{					
-				GameWorldController.instance.playerUW.playerHud.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString ("00"));
-				GameWorldController.instance.playerUW.playerHud.runes[i].isSet=true;
+				UWHUD.instance.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_" + i.ToString ("00"));
+				UWHUD.instance.runes[i].isSet=true;
 			}
 			else
 			{
-				GameWorldController.instance.playerUW.playerHud.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");
-				GameWorldController.instance.playerUW.playerHud.runes[i].isSet=false;	
+				UWHUD.instance.runes[i].thisRune.texture=Resources.Load <Texture2D> (_RES +"/HUD/Runes/rune_blank");
+				UWHUD.instance.runes[i].isSet=false;	
 			}
 		}
 
@@ -87,7 +87,7 @@ public class RuneSlot : GuiBase {
 			}
 		else
 			{//right click id the rune.
-				playerUW.playerHud.MessageScroll.Add ("You see " + playerUW.StringControl.GetSimpleObjectNameUW(232+SlotNumber));
+				UWHUD.instance.MessageScroll.Add ("You see " + StringController.instance.GetSimpleObjectNameUW(232+SlotNumber));
 			}
 		}
 

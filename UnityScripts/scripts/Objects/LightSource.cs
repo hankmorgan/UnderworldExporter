@@ -88,7 +88,7 @@ public class LightSource : object_base {
 	{		
 		if (objInt().Quality<=0)
 		{//000~001~124~That light is already used up. \n
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,124));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,124));
 			return;
 		}
 
@@ -145,7 +145,7 @@ public class LightSource : object_base {
 		else
 		{
 			//Debug.Log ("No free hand");
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,258));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,258));
 		}
 		objInt().RefreshAnim();
 	}
@@ -164,7 +164,7 @@ public class LightSource : object_base {
 
 	public override bool LookAt()
 	{
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt(),lightStatusText()));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),lightStatusText()));
 		return true;
 	}
 
@@ -177,28 +177,28 @@ public class LightSource : object_base {
 
 			if (objInt().Quality == 0)
 			{
-				return playerUW.StringControl.GetString (5,60);//burned out
+				return StringController.instance.GetString (5,60);//burned out
 			}
 			if ((objInt().Quality >=1) && (objInt().Quality <15))
 			{
-				return playerUW.StringControl.GetString (5,61);//nearly spent
+				return StringController.instance.GetString (5,61);//nearly spent
 			}
 			if ((objInt().Quality >=15) && (objInt().Quality <32))
 			{
-				return playerUW.StringControl.GetString (5,62);//half burned
+				return StringController.instance.GetString (5,62);//half burned
 			}
 			if ((objInt().Quality >=32) && (objInt().Quality <49))
 			{
-				return playerUW.StringControl.GetString (5,63);//somewhat used
+				return StringController.instance.GetString (5,63);//somewhat used
 			}
 
 			if ((objInt().Quality >=50) && (objInt().Quality <64))
 			{
-				return playerUW.StringControl.GetString (5,64);//hardly used
+				return StringController.instance.GetString (5,64);//hardly used
 			}
 			else
 			{
-				return playerUW.StringControl.GetString (5,64);//unused
+				return StringController.instance.GetString (5,64);//unused
 			}
 	}
 

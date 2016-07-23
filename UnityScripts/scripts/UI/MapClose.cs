@@ -13,6 +13,6 @@ public class MapClose : MonoBehaviour {
 			GameWorldController.instance.mus.InMap=false;
 		}
 		chains.ActiveControl=0;
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
+		UWHUD.instance.ChainsControl.Refresh();
 	}
 }

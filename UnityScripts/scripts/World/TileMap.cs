@@ -101,9 +101,9 @@ public class TileMap : UWEBase {
 
 	public Texture2D TileMapImage(int LevelNo)
 	{//Generates an image of the tilemap for display
-		if (GameWorldController.instance.playerUW.playerHud.LevelNoDisplay!=null)
+		if (UWHUD.instance.LevelNoDisplay!=null)
 		{
-			GameWorldController.instance.playerUW.playerHud.LevelNoDisplay.text=(LevelNo+1).ToString();
+			UWHUD.instance.LevelNoDisplay.text=(LevelNo+1).ToString();
 		}
 
 		int TileSize = 4;
@@ -202,7 +202,7 @@ public class TileMap : UWEBase {
 
 	//Display the map notes
 				//Delete the map notes in memory
-				foreach(Transform child in playerUW.playerHud.MapPanel.transform)
+				foreach(Transform child in UWHUD.instance.MapPanel.transform)
 				{
 						//Debug.Log(child.name.Substring(0,4) );
 						if (child.name.Substring(0,4) == "_Map")
@@ -214,7 +214,7 @@ public class TileMap : UWEBase {
 				for (int i=0 ; i < MapNotes[LevelNo].Count;i++)
 				{
 					GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
-					myObj.transform.parent= playerUW.playerHud.MapPanel.transform;
+					myObj.transform.parent= UWHUD.instance.MapPanel.transform;
 					myObj.GetComponent<Text>().text = MapNotes[LevelNo][i].NoteText;
 					myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[LevelNo][i].NotePosition;
 					myObj.GetComponent<MapNoteId>().guid = MapNotes[LevelNo][i].guid;

@@ -71,7 +71,7 @@ public class SpellEffectsDisplay : GuiBase_Draggable {
 		}
 		case -2://right click
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].getSpellDescription());
+			UWHUD.instance.MessageScroll.Add (GameWorldController.instance.playerUW.ActiveSpell[SlotNumber].getSpellDescription());
 			break;
 		}
 		}

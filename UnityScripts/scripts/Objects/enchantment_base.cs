@@ -62,13 +62,13 @@ public class enchantment_base : object_base {
 		switch (objInt().item_id)
 		{	
 		case 54: //Ring of humility
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
 			break;
 		case 184 :// a_mushroom
 		case 185 :// a_toadstool
 		case 186 :// a_bottle_of_ale_bottles_of_ale
 			//No enchantment revealed
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
 			break;
 		case 316 :// a_scroll
 		case 317 :
@@ -79,18 +79,18 @@ public class enchantment_base : object_base {
 		default:
 			if (objInt().isIdentified==true)
 				{
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 				}
 			else
 				{
 					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
 						objInt().isIdentified=true;
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 					}
 					else
 					{
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));		
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));		
 					}					
 				}
 				

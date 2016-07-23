@@ -10,7 +10,7 @@ public override bool use ()
 			if (playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set (playerUW.StringControl.GetString(1,130));
+				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,130));
 				return true;
 			}
 			else

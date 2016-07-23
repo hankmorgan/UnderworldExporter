@@ -53,7 +53,7 @@ public class Instrument : object_base {
 		playerUW.mus.Stop ();
 		NoteRecord="";
 		//000~001~250~You play the instrument.  (Use 0-9 to play, or ESC to return to game)
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Set (playerUW.StringControl.GetString (1,250));
+		UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (1,250));
 	}
 
 		/// <summary>
@@ -91,12 +91,12 @@ public class Instrument : object_base {
 				CurrentInstrument="";
 				WindowDetectUW.WaitingForInput=false;
 				playerUW.playerMotor.enabled=true;
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,251));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
 				playerUW.mus.Resume();
 				//354237875
 				if (NoteRecord=="354237875")
 				{
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Eyesnack would be proud of your playing");
+					UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
 				}
 				else
 				{

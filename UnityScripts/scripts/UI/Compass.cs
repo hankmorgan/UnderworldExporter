@@ -116,7 +116,7 @@ public class Compass : GuiBase_Draggable {
 	{//String representation of the above.
 		int Offset= Compass.getCompassHeadingOffset(src,dst);
 
-		return GameWorldController.instance.playerUW.StringControl.GetString(1, 36 + Offset);		
+		return StringController.instance.GetString(1, 36 + Offset);		
 	}
 
 
@@ -176,28 +176,28 @@ public class Compass : GuiBase_Draggable {
 	public void OnClick()
 	{
 		if (Dragging==true){return;}
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear ();
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,64) 
+				UWHUD.instance.MessageScroll.Clear ();
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,64) 
 						+ GameWorldController.instance.playerUW.GetFedStatus() 
 		                                      + " and " 
 						+ GameWorldController.instance.playerUW.GetFatiqueStatus());
 
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,65) 
-						+ GameWorldController.instance.playerUW.StringControl.GetString (1,411+GameWorldController.instance.LevelNo) 
-						+ GameWorldController.instance.playerUW.StringControl.GetString (1,66));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,65) 
+						+ StringController.instance.GetString (1,411+GameWorldController.instance.LevelNo) 
+						+ StringController.instance.GetString (1,66));
 		if (GameClock.day<10)
 		{
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,67) 
-								+ GameWorldController.instance.playerUW.StringControl.GetString (1,411+GameClock.day)
-								+ GameWorldController.instance.playerUW.StringControl.GetString (1,68));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,67) 
+								+ StringController.instance.GetString (1,411+GameClock.day)
+								+ StringController.instance.GetString (1,68));
 		}
 		else
 		{//incountable
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,69));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,69));
 		}
 
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (1,70) 
-						+ GameWorldController.instance.playerUW.StringControl.GetString (1,71+((GameClock.hour)/2)));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,70) 
+						+ StringController.instance.GetString (1,71+((GameClock.hour)/2)));
 
 
 		/*

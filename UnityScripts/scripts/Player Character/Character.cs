@@ -20,9 +20,6 @@ public class Character : UWEBase {
 	//The storage location for container items.
 	public static GameObject InvMarker;
 
-		//Reference to the UW Hud.
-	public UWHUD playerHud;
-
 	//Reference to a C# version of the standard character controller.
 	public CharacterMotorC playerMotor;
 
@@ -56,11 +53,6 @@ public class Character : UWEBase {
 	//The camera attached to this gameobject
 	public Camera playerCam;
 
-	//For requesting strings for the message logs.
-	public StringController StringControl;
-
-	//The message log on the main screen.
-	//protected  UILabel MessageLog;
 
 	//The music system
 	public MusicController mus;
@@ -205,7 +197,7 @@ public class Character : UWEBase {
 			Container.SetItemsParent(objPicked.GetComponent<Container>(),InvMarker.transform);
 			Container.SetItemsPosition (objPicked.GetComponent<Container>(),InvMarker.transform.position);
 		}
-		playerHud.CursorIcon=objPicked.GetInventoryDisplay().texture;
+		UWHUD.instance.CursorIcon=objPicked.GetInventoryDisplay().texture;
 		pInv.ObjectInHand=objPicked.transform.name;
 		//////pInv.JustPickedup=true;//To stop me throwing it away immediately.
 		if (objPicked.GetComponent<Rigidbody>() !=null)

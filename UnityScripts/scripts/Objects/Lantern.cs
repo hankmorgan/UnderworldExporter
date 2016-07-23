@@ -23,22 +23,22 @@ public class Lantern : LightSource {
 			case ObjectInteraction.OIL:
 				if (IsOn==true)
 				{
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,178));
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,178));
 				}
 				else
 				{
 					if (objInt().Quality==64)
 					{
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,180));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,180));
 					}
 					else
 					{
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,179));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,179));
 						objInt().Quality = 64;
 						objIntUsed.consumeObject();
 					}
 				}
-				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return true;
 			default:

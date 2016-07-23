@@ -47,10 +47,10 @@ public class MainMenuHud : GuiBase {
 							cursorSizeX,
 							cursorSizeY);
 					//Play the splash screens.
-					GameWorldController.instance.playerUW.playerHud.CutScenesFull.SetAnimation="FadeToBlackSleep";
-					Cutscene_Splash ci = GameWorldController.instance.playerUW.playerHud.gameObject.AddComponent<Cutscene_Splash>();
-					GameWorldController.instance.playerUW.playerHud.CutScenesFull.cs=ci;
-					GameWorldController.instance.playerUW.playerHud.CutScenesFull.Begin();
+					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+					Cutscene_Splash ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Splash>();
+					UWHUD.instance.CutScenesFull.cs=ci;
+					UWHUD.instance.CutScenesFull.Begin();
 			}
 		}
 
@@ -69,10 +69,10 @@ public class MainMenuHud : GuiBase {
 					switch (option)	
 					{
 					case 0: //PLay introduction
-							//GameWorldController.instance.playerUW.playerHud.CutScenesFull.SetAnimation="cs013_n01";
-							Cutscene_Intro ci = GameWorldController.instance.playerUW.playerHud.gameObject.AddComponent<Cutscene_Intro>();
-							GameWorldController.instance.playerUW.playerHud.CutScenesFull.cs=ci;
-							GameWorldController.instance.playerUW.playerHud.CutScenesFull.Begin();
+							//UWHUD.instance.CutScenesFull.SetAnimation="cs013_n01";
+							Cutscene_Intro ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Intro>();
+							UWHUD.instance.CutScenesFull.cs=ci;
+							UWHUD.instance.CutScenesFull.Begin();
 							break;
 
 					case 1: // Create Character
@@ -83,14 +83,14 @@ public class MainMenuHud : GuiBase {
 							break;
 
 					case 2:// Acknowledgements
-							Cutscene_Credits cc = GameWorldController.instance.playerUW.playerHud.gameObject.AddComponent<Cutscene_Credits>();
-							GameWorldController.instance.playerUW.playerHud.CutScenesFull.cs=cc;
-							GameWorldController.instance.playerUW.playerHud.CutScenesFull.Begin();
+							Cutscene_Credits cc = UWHUD.instance.gameObject.AddComponent<Cutscene_Credits>();
+							UWHUD.instance.CutScenesFull.cs=cc;
+							UWHUD.instance.CutScenesFull.Begin();
 							break;
 					case 3:// Journey onwards. In the future will be a link to load menu
 							GameWorldController.instance.SwitchLevel(0);
 							GameWorldController.instance.playerUW.transform.position= new Vector3(38f, 4f, 2.7f);
-							GameWorldController.instance.playerUW.playerHud.gameObject.SetActive(true);
+							UWHUD.instance.gameObject.SetActive(true);
 							GameWorldController.instance.playerUW.playerController.enabled=true;
 							GameWorldController.instance.playerUW.playerMotor.enabled=false;
 							GameWorldController.instance.AtMainMenu=false;
@@ -160,7 +160,7 @@ public class MainMenuHud : GuiBase {
 
 		public string getClass(int option)
 		{
-				return GameWorldController.instance.playerUW.StringControl.GetString(2,23+option);
+				return StringController.instance.GetString(2,23+option);
 		}
 
 		public string getQuestion(int option)
@@ -179,19 +179,19 @@ public class MainMenuHud : GuiBase {
 				case 0:
 				case 1:
 				case 2:
-						return GameWorldController.instance.playerUW.StringControl.GetString(2,1+option);
+						return StringController.instance.GetString(2,1+option);
 				case 3:
 				case 4:
 				case 5:
 				case 6:
 				case 7:
-						return GameWorldController.instance.playerUW.StringControl.GetString(2,4);
+						return StringController.instance.GetString(2,4);
 				case 8:
 						return "";//no question about portait.
 				case 9:
 				case 10:
 				case 11:
-						return GameWorldController.instance.playerUW.StringControl.GetString(2,option-3);
+						return StringController.instance.GetString(2,option-3);
 				default:
 						return "UNKNOWN Option!";
 				}

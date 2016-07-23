@@ -31,7 +31,7 @@ public class DoorControl : object_base {
 		{
 			ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
 			//Clear the object in hand
-			playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			playerUW.playerInventory.ObjectInHand="";
 			return true;	
 		}
@@ -60,7 +60,7 @@ public class DoorControl : object_base {
 					if (state==true)
 					{
 						//Door is already open
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,6));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,6));
 						return true;
 					}
 						
@@ -69,11 +69,11 @@ public class DoorControl : object_base {
 							ToggleLock();
 							if (locked==true)
 								{//Locked message
-								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,4));
+								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,4));
 								}
 							else
 								{//Unlockedmessage
-								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,5));
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,5));
 								}
 						return true;
 						}
@@ -81,11 +81,11 @@ public class DoorControl : object_base {
 						{
 						if (KeyIndex==53)
 							{//There is no lock
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,3));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,3));
 							}
 						else
 							{//That is the wrong key.
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,2));
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,2));
 							}
 						return true;
 						}
@@ -98,19 +98,19 @@ public class DoorControl : object_base {
 						{
 						if (playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
 							{
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,121));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,121));
 							UnlockDoor();
 							}
 						else
 							{
 							//Debug.Log ("Picklock failed!");
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,120));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,120));
 							objIntUsed.consumeObject();
 							}
 						}
 					else
 						{
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,120));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,120));
 						}
 					break;
 					}
@@ -146,19 +146,19 @@ public class DoorControl : object_base {
 			//000~001~131~The door is spiked.
 			if (state==false)
 			{//Closed door
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,129));
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,129));
 					Spiked=true;
 					//objIntUsed.consumeObject();			
 					return true;
 			}
 			else
 			{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,128));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,128));
 			}						
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,131));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,131));
 		}
 		return false;	
 	}
@@ -180,7 +180,7 @@ public class DoorControl : object_base {
 		{
 			if (PlayerUse==true)
 			{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("The " + playerUW.StringControl.GetObjectNounUW(objInt()) + " is locked.");
+				UWHUD.instance.MessageScroll.Add ("The " + StringController.instance.GetObjectNounUW(objInt()) + " is locked.");
 			}
 		}
 		return true;
@@ -364,11 +364,11 @@ public class DoorControl : object_base {
 	{
 		if (isPortcullis==false)
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt(),DoorQuality()));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt(),DoorQuality()));
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
 		}
 		return true;
 	}
@@ -383,28 +383,28 @@ public class DoorControl : object_base {
 		
 		if (objInt().Quality == 0)
 		{
-			return playerUW.StringControl.GetString (5,0);//brken
+			return StringController.instance.GetString (5,0);//brken
 		}
 				if ((objInt().Quality >=1) && (objInt().Quality <15))
 		{
-			return playerUW.StringControl.GetString (5,1);//badly damaged
+			return StringController.instance.GetString (5,1);//badly damaged
 		}
 				if ((objInt().Quality >=15) && (objInt().Quality <32))
 		{
-			return playerUW.StringControl.GetString (5,2);//damaged
+			return StringController.instance.GetString (5,2);//damaged
 		}
 				if ((objInt().Quality >=32) && (objInt().Quality <=40))
 		{
-			return playerUW.StringControl.GetString (5,3);//sturdy
+			return StringController.instance.GetString (5,3);//sturdy
 		}
 		
 				if ((objInt().Quality >40) && (objInt().Quality <48))
 		{
-			return playerUW.StringControl.GetString (5,4);//massive?
+			return StringController.instance.GetString (5,4);//massive?
 		}
 		else
 		{
-			return playerUW.StringControl.GetString (5,5);//massive?
+			return StringController.instance.GetString (5,5);//massive?
 		}
 	} 
 }

@@ -363,7 +363,7 @@ public class ObjectInteraction : UWEBase {
 
 		public ScrollController getMessageLog()
 		{
-				return playerUW.playerHud.MessageScroll;//MessageLog;
+				return UWHUD.instance.MessageScroll;//MessageLog;
 		}
 
 		public bool Attack(int damage)
@@ -643,7 +643,7 @@ public class ObjectInteraction : UWEBase {
 								if (CreatedObjectInt!=null)
 								{
 										CreatedObjectInt.UpdateAnimation();
-										playerUW.playerHud.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
+										UWHUD.instance.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
 								}
 
 								UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;

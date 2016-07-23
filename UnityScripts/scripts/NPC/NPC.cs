@@ -285,7 +285,7 @@ public class NPC : object_base {
 		if ((npc_whoami == 255))
 		{
 			//006~007~001~You get no response.
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (7,1));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
 		}
 		else
 		{
@@ -308,7 +308,7 @@ public class NPC : object_base {
 			else
 			{
 				//You get no response
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (7,1));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
 			}
 		}
 		return true;
@@ -323,7 +323,7 @@ public class NPC : object_base {
 		string output="";
 		if (objInt().item_id!=123)//Tybal
 		{
-			output = playerUW.StringControl.GetFormattedObjectNameUW(objInt(),NPCMoodDesc());
+			output = StringController.instance.GetFormattedObjectNameUW(objInt(),NPCMoodDesc());
 		}
 		if ((npc_whoami >=1) && (npc_whoami<255)) 
 		{
@@ -333,18 +333,18 @@ public class NPC : object_base {
 			}
 			else if (npc_whoami==207)
 			{//Warren spectre.
-				output= "You see an " + NPCMoodDesc() + " " + playerUW.StringControl.GetString (7,npc_whoami+16);
+				output= "You see an " + NPCMoodDesc() + " " + StringController.instance.GetString (7,npc_whoami+16);
 			}
 			else
 			{
 				if(objInt().isIdentified==true)
 				{
-						output=output+" named " + playerUW.StringControl.GetString (7,npc_whoami+16);
+						output=output+" named " + StringController.instance.GetString (7,npc_whoami+16);
 				}				
 			}
 
 		}
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (output);
+		UWHUD.instance.MessageScroll.Add (output);
 		return true;
 	}
 
@@ -361,13 +361,13 @@ public class NPC : object_base {
 		switch (npc_attitude)
 		{
 		case 0:
-			return playerUW.StringControl.GetString (5,96);
+			return StringController.instance.GetString (5,96);
 		case 1:
-			return playerUW.StringControl.GetString (5,97);
+			return StringController.instance.GetString (5,97);
 		case 2:
-			return playerUW.StringControl.GetString (5,98);
+			return StringController.instance.GetString (5,98);
 		default:
-			return playerUW.StringControl.GetString (5,99);
+			return StringController.instance.GetString (5,99);
 
 		}
 	}

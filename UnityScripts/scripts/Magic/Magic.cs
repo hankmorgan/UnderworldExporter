@@ -186,19 +186,19 @@ public class Magic : UWEBase {
 						break;
 				default:
 						{
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Not a spell.");
+							UWHUD.instance.MessageScroll.Add ("Not a spell.");
 							return false;
 						}
 				}//magicwords
 
 				if (Mathf.Round(casterUW.CharLevel/2)<TestSpellLevel)
 				{//Not experienced enough
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,210));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,210));
 						return false;
 				}
 				else if (CurMana< TestSpellLevel*3)
 				{//Mana test
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,211));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,211));
 						return false;
 				}
 				else if( ! casterUW.PlayerSkills.TrySkill(Skills.SkillCasting, TestSpellLevel))
@@ -206,18 +206,18 @@ public class Magic : UWEBase {
 						if (Random.Range(1,10)<8)
 						{//TODO:decide on the chances
 								//000~001~213~Casting was not successful.
-								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,213));
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,213));
 						}
 						else
 						{//000~001~214~The spell backfires.
-								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (casterUW.StringControl.GetString (1,214));
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,214));
 								casterUW.CurVIT = casterUW.CurVIT-3;
 						}
 						return false;
 				}
 				else
 				{//Casting sucessful. 
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("Casting " + MagicWords);
+						UWHUD.instance.MessageScroll.Add ("Casting " + MagicWords);
 						return true;
 				}
 		}
@@ -646,7 +646,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						ReadiedSpell= "Ort Jux";
-						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconTarget;
+						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconTarget;
 				}
 				else
 				{
@@ -667,7 +667,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						ReadiedSpell= "Ort Grav";
-						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconTarget;
+						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconTarget;
 				}
 				else
 				{
@@ -688,7 +688,7 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						ReadiedSpell= "Por Flam";
-						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconTarget;
+						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconTarget;
 				}
 				else
 				{
@@ -733,12 +733,12 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Ex Ylem";
-						playerUW.playerHud.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
 						playerUW.PlayerMagic.ReadiedSpell="";
-						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
+						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 						Ray ray = getRay (caster);
 						RaycastHit hit = new RaycastHit(); 
 						float dropRange=playerUW.GetUseRange();
@@ -768,12 +768,12 @@ public class Magic : UWEBase {
 				if (Ready==true)
 				{//Ready the spell to be cast.
 						playerUW.PlayerMagic.ReadiedSpell= "Sanct Jux";
-						playerUW.playerHud.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
 						playerUW.PlayerMagic.ReadiedSpell="";
-						playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
+						UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 						Ray ray = getRay (caster);
 						RaycastHit hit = new RaycastHit(); 
 						float dropRange=playerUW.GetUseRange();
@@ -1314,7 +1314,7 @@ public class Magic : UWEBase {
 						{//Teleport to level
 								Debug.Log ("moonstone is on another level. (or I forgot to update levelno)");
 								//000~001~273~The moonstone is not available.
-								GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,273));
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,273));
 						}
 						else
 						{
@@ -1324,7 +1324,7 @@ public class Magic : UWEBase {
 								}
 								else
 								{
-										GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,273));
+										UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,273));
 								}
 						}
 				}
@@ -1501,30 +1501,30 @@ public class Magic : UWEBase {
 										MaxOffsetIndex=i;
 								}
 						}
-						string Heading = playerUW.StringControl.GetString(1, 36 + MaxOffsetIndex);
+						string Heading = StringController.instance.GetString(1, 36 + MaxOffsetIndex);
 						switch (MaxNoOfMonsters)
 						{//TODO: What is a few?
 						case 0://Should not happen
 								//000~001~062~You detect no monster activity. \n	
-								playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,62)+Heading);break;							
+								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,62)+Heading);break;							
 						case 1://Single creature.
 								//000-001-059 //You detect a creature
-								playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,59)+Heading);break;		
+								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,59)+Heading);break;		
 						case 2:
 						case 3:
 								//000-001-060 //You detect a few creatures
-								playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,60)+Heading);break;										
+								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,60)+Heading);break;										
 
 						default:
 								//000~001~061~You detect the activity of many creatures 
-								playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,61)+Heading);break;	
+								UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,61)+Heading);break;	
 
 						}
 				}
 				else
 				{
 						//000~001~062~You detect no monster activity. \n	
-						playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,62));
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,62));
 				}
 		}
 
@@ -1541,7 +1541,7 @@ public class Magic : UWEBase {
 				{//Ready the spell to be cast.
 						InventorySpell=true;
 						playerUW.PlayerMagic.ReadiedSpell= "Ort Wis Ylem";
-						playerUW.playerHud.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
+						UWHUD.instance.CursorIcon=Resources.Load<Texture2D>(_RES +"/Hud/Cursors/Cursors_0010");
 				}
 				else
 				{
@@ -1550,7 +1550,7 @@ public class Magic : UWEBase {
 						if (WindowDetect.CursorInMainWindow)
 						{
 								playerUW.PlayerMagic.ReadiedSpell="";		
-								playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
+								UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 								Ray ray = getRay (caster);
 								RaycastHit hit = new RaycastHit(); 
 								float dropRange=playerUW.GetUseRange();
@@ -1568,7 +1568,7 @@ public class Magic : UWEBase {
 								if (ObjectInSlot!=null)	
 								{
 										ReadiedSpell= "";
-										playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
+										UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 										ObjectInteraction objInt =ObjectInSlot.GetComponent<ObjectInteraction>();
 										if (objInt!=null)
 										{
@@ -1641,7 +1641,7 @@ public class Magic : UWEBase {
 				}
 				else
 				{//000~001~191~There is a pained whining sound.
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add( caster.GetComponent<UWCharacter>().StringControl.GetString (1,191));
+						UWHUD.instance.MessageScroll.Add( StringController.instance.GetString (1,191));
 				}
 		}
 
@@ -1874,7 +1874,7 @@ public class Magic : UWEBase {
 				spIJ.init(EffectID);
 				awt.spellprop=spIJ;
 				//000~001~276~The Rune of Warding is placed. \n
-				playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,276));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,276));
 		}
 
 		/// <summary>
@@ -2046,7 +2046,7 @@ public class Magic : UWEBase {
 		/// <param name="caster">Caster.</param>
 		void SpellIncantationFailed(GameObject caster)
 		{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (caster.GetComponent<UWCharacter>().StringControl.GetString(1,212));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,212));
 		}
 
 		/// <summary>
@@ -2460,7 +2460,7 @@ public class Magic : UWEBase {
 										LaunchProjectile(projectile,ray,dropRange,spellprop.Force,spellprop.spread);										
 								}
 
-								playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
+								UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 								return true;
 						}
 						return false;
@@ -2662,7 +2662,7 @@ public class Magic : UWEBase {
 				if (
 						(Event.current.Equals(Event.KeyboardEvent("q")))
 						&&
-						(playerUW.playerHud.window.JustClicked==false)
+						(UWHUD.instance.window.JustClicked==false)
 						&&
 						((playerUW.PlayerCombat.AttackCharging==false) && (playerUW.PlayerCombat.AttackExecuting==false))
 				)
@@ -3456,7 +3456,7 @@ public class Magic : UWEBase {
 						//Some cutscences can be played by a spell trap these are as follows (some known cases)
 				case 224:
 						//Debug.Log ("play the intro cutscene");
-						playerUW.playerHud.CutScenesFull.SetAnimation="Cutscene_Intro";
+						UWHUD.instance.CutScenesFull.SetAnimation="Cutscene_Intro";
 						break;
 				case 225:
 						Debug.Log ("play the endgame cutscene");

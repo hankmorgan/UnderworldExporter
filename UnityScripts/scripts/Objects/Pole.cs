@@ -21,7 +21,7 @@ public class Pole : object_base {
 
 	public override bool FailMessage ()
 	{
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,158));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,158));
 		return false;
 	}
 

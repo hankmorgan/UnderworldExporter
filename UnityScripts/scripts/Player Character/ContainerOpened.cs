@@ -102,7 +102,7 @@ public class ContainerOpened : GuiBase {
 				{
 					if (DestinationContainer.AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand))
 					{//Object has moved
-						GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
+						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 					}
 				}
@@ -110,7 +110,7 @@ public class ContainerOpened : GuiBase {
 				{
 					if (DestinationContainer.AddItemMergedItemToContainer(item.gameObject))
 					{//Object has moved
-						GameWorldController.instance.playerUW.playerHud.CursorIcon= GameWorldController.instance.playerUW.playerHud.CursorIconDefault;
+						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 					}
 				}

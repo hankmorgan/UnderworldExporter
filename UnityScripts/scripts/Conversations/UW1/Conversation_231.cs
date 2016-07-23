@@ -9,7 +9,7 @@ public class Conversation_231 : Conversation {
 	public override bool OnDeath ()
 	{
 		//Play the tybal death cutscene.
-		//playerUW.playerHud.CutScenesSmall="TybalDeath";
+		//UWHUD.instance.CutScenesSmall="TybalDeath";
 		return false;
 	}
 	

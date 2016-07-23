@@ -3,10 +3,12 @@ using System.Collections;
 using System.Text;
 using System.IO;
 
-public class StringController : MonoBehaviour {
-	public int game; //Which game is this. 0=uwdemo, 1=uw1, 2=uw2, 3=shock
+public class StringController : UWEBase {
+	//public int game; //Which game is this. 0=uwdemo, 1=uw1, 2=uw2, 3=shock
 	private Hashtable GameStrings;
 	private string StringFilePath;
+
+	public static StringController instance;
 
 	//Temporary array until I'm wide awake
 	private string[] UW1_TextureNames ={"a stone wall",
@@ -272,6 +274,13 @@ public class StringController : MonoBehaviour {
 		"a glowing blue pathway",
 		"a glowing blue pathway"
 	};
+
+		void Awake()
+		{
+			instance=this;
+			InitStringController(Application.dataPath + "//..//" + UWEBase._RES + "_strings.txt");
+		}
+
 
 	public bool InitStringController(string newStringFilePath)
 	{

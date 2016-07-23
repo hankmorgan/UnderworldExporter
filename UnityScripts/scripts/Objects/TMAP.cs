@@ -18,10 +18,10 @@ public class TMAP : object_base {
 
 	public override bool LookAt()
 	{
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.TextureDescription(TextureIndex));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(TextureIndex));
 		if (TextureIndex==142)
 		{//This is a window into the abyss.
-			playerUW.playerHud.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
+			UWHUD.instance.CutScenesSmall.SetAnimation="VolcanoWindow_" + GameWorldController.instance.LevelNo;
 		}
 		if (trigger != "")
 		{
@@ -87,7 +87,7 @@ public class TMAP : object_base {
 							)
 						{
 							objIntTrigger.GetComponent<trigger_base> ().Activate();
-							playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 							playerUW.playerInventory.ObjectInHand="";
 							return true;
 						}

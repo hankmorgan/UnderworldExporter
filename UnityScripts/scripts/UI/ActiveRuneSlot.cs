@@ -38,11 +38,11 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		{
 				if (GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]!=-1)
 				{
-					GameWorldController.instance.playerUW.playerHud.activeRunes[i].thisRune.texture = runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]];				
+					UWHUD.instance.activeRunes[i].thisRune.texture = runes[GameWorldController.instance.playerUW.PlayerMagic.ActiveRunes[i]];				
 				}
 				else
 				{
-						GameWorldController.instance.playerUW.playerHud.activeRunes[i].thisRune.texture=blank;	
+						UWHUD.instance.activeRunes[i].thisRune.texture=blank;	
 				}
 			
 		}
@@ -65,7 +65,7 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 
 	public void OnClick()
 	{
-		if ((GameWorldController.instance.playerUW.playerHud.window.JustClicked==true) || (Dragging==true))
+		if ((UWHUD.instance.window.JustClicked==true) || (Dragging==true))
 		{
 			return;
 		}

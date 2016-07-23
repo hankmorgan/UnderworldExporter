@@ -26,7 +26,7 @@ public class Bridge : object_base {
 		else
 		{
 			//Return material description
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.TextureDescription(( 510- (TextureIndex-210)  )));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.TextureDescription(( 510- (TextureIndex-210)  )));
 			return true;
 		}
 	}

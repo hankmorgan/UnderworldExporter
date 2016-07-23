@@ -18,7 +18,7 @@ public class HUD : UWEBase {
 	public CutsceneAnimationFullscreen CutScenesFull;
 	public ScrollController MessageScroll;
 	public InputField InputControl;
-	public RawImage main_window;
-	public RawImage MapDisplay;
+	public GameObject main_window;//The immersive heads up display
+	public RawImage MapDisplay; //should be in a subclass?
 
 }

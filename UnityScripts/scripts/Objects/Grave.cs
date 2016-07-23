@@ -12,8 +12,8 @@ public class Grave : object_base {
 	public override bool LookAt ()
 	{
 		//CheckReferences();
-		playerUW.playerHud.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (8, objInt().Link-512));
+		UWHUD.instance.CutScenesSmall.SetAnimation= "cs401_n01_00" + (GraveID-1).ToString ("D2");
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (8, objInt().Link-512));
 		return true;
 	}
 
@@ -50,7 +50,7 @@ public class Grave : object_base {
 					{//Garamons bones
 					//Arise Garamon.
 					//000~001~134~You thoughtfully give the bones a final resting place.
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,134));
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,134));
 					GameObject trig = GameObject.Find ("a_move_trigger_54_52_04_0495");
 						if (trig!=null)
 						{					
@@ -58,15 +58,15 @@ public class Grave : object_base {
 							objIntUsed.consumeObject ();
 							trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
 						}
-						playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 						playerUW.playerInventory.ObjectInHand="";						
 						return true;
 					}
 					else
 					{//Regular bones
 					//000~001~259~The bones do not seem at rest in the grave, and you take them back.
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,259));
-					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
+					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 					playerUW.playerInventory.ObjectInHand="";
 					return true;
 					}
@@ -81,14 +81,14 @@ public class Grave : object_base {
 			if ((objIntUsed.item_id==198) && (objIntUsed.Quality==63))//Garamons Bones used on the wrong grave
 			{
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,259));
-				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
+				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return true;
 			}
 			else
 			{
-				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
 			}

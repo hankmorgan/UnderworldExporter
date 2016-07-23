@@ -44,8 +44,8 @@ public class Equipment : object_base {
 			case ObjectInteraction.ANVIL: //ANVIL
 				{
 				//Do a difficulty check and prompt for approval.
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set ("[placeholder]You think it will be hard/easy to repair this item");
-				InputField inputctrl =playerUW.playerHud.InputControl;
+				UWHUD.instance.MessageScroll.Set ("[placeholder]You think it will be hard/easy to repair this item");
+				InputField inputctrl =UWHUD.instance.InputControl;
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputAnvil;
 				inputctrl.contentType= InputField.ContentType.Alphanumeric;
@@ -75,12 +75,12 @@ public class Equipment : object_base {
 	{
 		Time.timeScale=1.0f;
 		WindowDetectUW.WaitingForInput=false;
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear();//="";
+		UWHUD.instance.MessageScroll.Clear();//="";
 		if (ans.Substring(0,1).ToUpper() == "Y")
 		{
 			//do the repair 
 			//Play the cutscene.
-			playerUW.playerHud.CutScenesSmall.SetAnimation="Anvil";
+			UWHUD.instance.CutScenesSmall.SetAnimation="Anvil";
 			//TODO:At the moment it suceeds but in future implement failures and breakages.
 			//Find out what the story with the sword of justice is?
 			//Do the result at the end of the animation.
@@ -88,17 +88,17 @@ public class Equipment : object_base {
 			{
 				objInt().Quality = objInt().Quality+5;
 				if (objInt().Quality >63){objInt().Quality=63;}
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add("You repair the item");
+				UWHUD.instance.MessageScroll.Add("You repair the item");
 			}		
 			else
 			{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("You fail to repair the item");
+				UWHUD.instance.MessageScroll.Add ("You fail to repair the item");
 			}
 			UpdateQuality();
 		}
 		//cancel the repair 
 		playerUW.playerInventory.ObjectInHand="";
-		playerUW.playerHud.CursorIcon=playerUW.playerHud.CursorIconDefault;
+		UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 	}
 
 	public override bool LookAt ()
@@ -107,18 +107,18 @@ public class Equipment : object_base {
 		{
 			if (objInt().isIdentified==true)
 			{
-					GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 			}
 			else
 			{
 					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
 							objInt().isIdentified=true;
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + " of " + playerUW.StringControl.GetString(6,GetActualSpellIndex()));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 					}
 					else
 					{
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));		
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));		
 					}					
 			}
 			return true;

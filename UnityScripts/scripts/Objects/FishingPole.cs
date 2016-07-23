@@ -44,14 +44,14 @@ public override bool use ()
 						//000~001~099~You catch a lovely fish.
 						if ((ObjectInteraction.Weight[182]*0.1f) <= playerUW.playerInventory.getEncumberance())
 						{
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,99));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,99));
 							GameObject fishy = CreateFish();
 							playerUW.playerInventory.ObjectInHand=fishy.name;
 							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
 							if (FishobjInt!=null)
 							{
 								FishobjInt.UpdateAnimation();
-								playerUW.playerHud.CursorIcon= FishobjInt.InventoryDisplay.texture;
+								UWHUD.instance.CursorIcon= FishobjInt.InventoryDisplay.texture;
 							}
 
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
@@ -59,19 +59,19 @@ public override bool use ()
 						}
 						else
 						{//000~001~102~You feel a nibble, but the fish gets away.
-							GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,102));
+							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,102));
 						}
 					}
 					else
 					{//000~001~100~No luck this time.
-						GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,100));
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,100));
 					}
 					return;
 				}
 			}
 		}
 		//000~001~101~You cannot fish there.  Perhaps somewhere else.
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,101));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,101));
 	}
 
 

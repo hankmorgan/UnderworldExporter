@@ -13,10 +13,8 @@ public class Billboard : MonoBehaviour
 			if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.gameObject.transform.position)<=8)
 						{//Only rotate near objects.
 								
-						if (GameWorldController.instance.playerUW.dir!=Vector3.zero)	
-						{
-								transform.rotation = Quaternion.LookRotation(GameWorldController.instance.playerUW.dir);					
-						}
+
+							transform.rotation = Quaternion.LookRotation(GameWorldController.instance.playerUW.dir);					
 			//based on http://answers.unity3d.com/questions/524087/tweaking-sprite-billboard.html
 			
 						}

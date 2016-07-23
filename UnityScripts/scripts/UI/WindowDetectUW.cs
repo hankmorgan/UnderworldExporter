@@ -88,7 +88,7 @@ public class WindowDetectUW : WindowDetect {
 					{
 					OnClick();
 					}
-				else if ((playerUW.playerHud.CursorInMainWindow) && (pInv.ObjectInHand!="") && (MouseHeldDown==false) && (UWCharacter.InteractionMode==UWCharacter.InteractionModePickup))
+				else if ((UWHUD.instance.CursorInMainWindow) && (pInv.ObjectInHand!="") && (MouseHeldDown==false) && (UWCharacter.InteractionMode==UWCharacter.InteractionModePickup))
 					{//Drop the object in hand.
 					ThrowObjectInHand();
 					}*/
@@ -131,11 +131,11 @@ public class WindowDetectUW : WindowDetect {
 						playerUW.PlayerCombat.Charge=0;
 						if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
 						{
-								GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
+								UWHUD.instance.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
 						}
 						else
 						{
-								GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= "WeaponPutAway";
+								UWHUD.instance.wpa.SetAnimation= "WeaponPutAway";
 						}
 				}
 		}
@@ -150,11 +150,11 @@ public class WindowDetectUW : WindowDetect {
 			playerUW.PlayerCombat.Charge=0;
 			if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
 			{
-				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
+				UWHUD.instance.wpa.SetAnimation= playerUW.PlayerCombat.GetWeapon () +"_Ready_" + playerUW.PlayerCombat.GetRace () + "_" + playerUW.PlayerCombat.GetHand();
 			}
 			else
 			{
-				GameWorldController.instance.playerUW.playerHud.wpa.SetAnimation= "WeaponPutAway";
+				UWHUD.instance.wpa.SetAnimation= "WeaponPutAway";
 			}
 		}
 	}
@@ -300,13 +300,13 @@ public class WindowDetectUW : WindowDetect {
 				}
 				else
 				{
-					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 					playerUW.playerInventory.ObjectInHand="";
 				}
 			}
 			else
 			{
-				playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 				playerUW.playerInventory.ObjectInHand="";
 			}
 		}
@@ -369,7 +369,7 @@ public class WindowDetectUW : WindowDetect {
 					}
 					
 					//Clear the object and reset the cursor
-					playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 					playerUW.playerInventory.SetObjectInHand("");
 				}
 				
@@ -394,40 +394,12 @@ public class WindowDetectUW : WindowDetect {
 		FullScreen=true;
 		setPositions();
 
-		playerUW.playerHud.ChainsControl.EnableDisableControl("main_window",false);
+		UWHUD.instance.EnableDisableControl(UWHUD.instance.main_window,false);
 		RectTransform pos= this.GetComponent<RectTransform>();
 		pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
 		pos.sizeDelta=new Vector2(800.0f, 600f);
-		playerUW.playerHud.ChainsControl.Refresh();
-
-				/*
-		
-		if (anchor==null)
-		{
-			anchor =this.GetComponent<UIAnchor>();
-		}
-		if (stretch==null)
-		{
-			stretch=this.GetComponent<UIStretch>();
-		}
-		anchor.side= UIAnchor.Side.Center;
-		anchor.relativeOffset=new Vector2(0.0f,0.0f);
-		stretch.relativeSize=new Vector2 (1.0f,1.0f);
-				*/
-
 		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
-		
-		playerUW.playerHud.main_window.enabled=false;
-		/*
-		playerUW.playerHud.compass.MoveControlOffset(-0.1f,0.0f);
-		for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
-		{
-			GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
-			if (cn!=null)
-			{
-				cn.MoveControlOffset(-0.1f,0.0f);
-			}
-		}*/
+
 	}
 
 	public void UnSetFullScreen()
@@ -438,28 +410,12 @@ public class WindowDetectUW : WindowDetect {
 		}
 		FullScreen=false;
 		setPositions();
-		playerUW.playerHud.ChainsControl.EnableDisableControl("main_window",true);
+		UWHUD.instance.EnableDisableControl(UWHUD.instance.main_window,true);
 		RectTransform pos= this.GetComponent<RectTransform>();
 		pos.localPosition = new Vector3(-55.5f,73.0f,0.0f);
 		pos.sizeDelta=new Vector2(430.0f, 340f);
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-
-	//	anchor.side= UIAnchor.Side.Left;
-		//anchor.relativeOffset=new Vector2(0.43f,0.13f);
-		//stretch.relativeSize=new Vector2 (0.55f,0.57f);
 		playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
-		playerUW.playerHud.main_window.enabled=true;
-		/*
-		playerUW.playerHud.compass.MoveControlOffset(+0.1f,0.0f);
-		for (int i = 0; i<=playerUW.playerHud.compass.NorthIndicators.GetUpperBound(0);i++)
-		{
-			GuiBase cn=  playerUW.playerHud.compass.NorthIndicators[i].GetComponent<GuiBase>();
-			if (cn!=null)
-			{
-				cn.MoveControlOffset(+0.1f,0.0f);
-			}
-		}
-		*/
+	
 	}
 
 
@@ -472,8 +428,8 @@ public class WindowDetectUW : WindowDetect {
 			playerUW.MouseLookEnabled=false;
 			Cursor.lockState = CursorLockMode.None;
 			CursorPosition.center = Event.current.mousePosition;
-			GUI.DrawTexture (CursorPosition,playerUW.playerHud.CursorIcon);
-			playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;
+			GUI.DrawTexture (CursorPosition,UWHUD.instance.CursorIcon);
+			UWHUD.instance.MouseLookCursor.texture= UWHUD.instance.CursorIconBlank;
 		}
 		else
 		{
@@ -499,7 +455,7 @@ public class WindowDetectUW : WindowDetect {
 						playerUW.XAxis.enabled=true;
 						playerUW.MouseLookEnabled=true;
 						Cursor.lockState = CursorLockMode.Locked;						
-						playerUW.playerHud.MouseLookCursor.texture=playerUW.playerHud.CursorIcon;
+						UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
 					}
 					else
 					{
@@ -507,7 +463,7 @@ public class WindowDetectUW : WindowDetect {
 						playerUW.YAxis.enabled=false;
 						playerUW.MouseLookEnabled=false;
 						Cursor.lockState = CursorLockMode.None;
-						playerUW.playerHud.MouseLookCursor.texture= playerUW.playerHud.CursorIconBlank;	
+						UWHUD.instance.MouseLookCursor.texture= UWHUD.instance.CursorIconBlank;	
 					}
 				}
 			}
@@ -523,7 +479,7 @@ public class WindowDetectUW : WindowDetect {
 					CursorPosition.center = Event.current.mousePosition;						
 				}
 				
-				GUI.DrawTexture (CursorPosition,playerUW.playerHud.CursorIcon);
+				GUI.DrawTexture (CursorPosition,UWHUD.instance.CursorIcon);
 
 			}		
 		}

@@ -34,16 +34,16 @@ public class Map : object_base {
 	{
 		WindowDetect.InMap=true;//turns on blocking collider.
 		MapInteraction.MapNo=GameWorldController.instance.LevelNo;
-		playerUW.playerHud.CursorIcon = playerUW.playerHud.MapQuill;
-		playerUW.playerHud.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
+		UWHUD.instance.CursorIcon = UWHUD.instance.MapQuill;
+		UWHUD.instance.MapDisplay.texture=GameWorldController.instance.Tilemap.TileMapImage();
 		if  (GameWorldController.instance.mus!=null)
 		{
 			GameWorldController.instance.mus.GetComponent<MusicController>().InMap=true;
 		}
-		playerUW.playerHud.MessageScroll.Clear();
+		UWHUD.instance.MessageScroll.Clear();
 
 		chains.ActiveControl=4;
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh ();
+		UWHUD.instance.ChainsControl.Refresh ();
 
 		return true;
 	}
@@ -53,11 +53,11 @@ public class Map : object_base {
 		objInt().isQuant=false; //quick bug fix
 			if (objInt().PickedUp==true)
 			{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()) + "\n" + playerUW.StringControl.GetString(1,151));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + "\n" + StringController.instance.GetString(1,151));
 			}
 			else
 			{
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));
 			}
 		return true;
 	}

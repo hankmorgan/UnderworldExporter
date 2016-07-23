@@ -89,7 +89,7 @@ public class PlayerInventory : UWEBase {
 		{
 			bBackPack[i]=true;
 		}
-		playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
+		UWHUD.instance.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 		Refresh();
 	}
 	
@@ -561,9 +561,9 @@ public class PlayerInventory : UWEBase {
 				sBackPack[i-11] = cn.GetItemAt(ContainerOffset + i-11);
 				bBackPack[i-11]=true;
 			}
-		if (playerUW.playerHud.Encumberance.enabled==true)
+		if (UWHUD.instance.Encumberance.enabled==true)
 		{
-			playerUW.playerHud.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
+			UWHUD.instance.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 		}
 
 	}
@@ -582,7 +582,7 @@ public class PlayerInventory : UWEBase {
 			cn.AddItemToContainer(cObjectInHand,ContainerOffset + slotIndex-11);
 			}
 		ObjectInHand= ObjInSlot.name;
-		playerUW.playerHud.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+		UWHUD.instance.CursorIcon= ObjInSlot.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 		//playerUW.CurrObjectSprite = ObjInSlot.GetComponent<ObjectInteraction>().InventoryString;
 		Refresh();
 	}

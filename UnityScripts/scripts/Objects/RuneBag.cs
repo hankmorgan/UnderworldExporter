@@ -19,7 +19,7 @@ public class RuneBag : object_base {
 	void OpenRuneBag()
 	{
 		chains.ActiveControl=2;
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
+		UWHUD.instance.ChainsControl.Refresh();
 	}
 
 	public override bool Activate()
@@ -39,7 +39,7 @@ public class RuneBag : object_base {
 			//Add rune to rune bag and destroy the original object.
 			GameObject.Destroy(ObjectUsed);
 			playerUW.playerInventory.ObjectInHand="";
-			playerUW.playerHud.CursorIcon= playerUW.playerHud.CursorIconDefault;
+			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			return true;
 		}
 		else

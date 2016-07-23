@@ -15,7 +15,7 @@ public class DoorKey : object_base {
 			if (playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set (playerUW.StringControl.GetString(1,7));
+				UWHUD.instance.MessageScroll.Set (StringController.instance.GetString(1,7));
 				return true;
 			}
 			else
@@ -34,11 +34,11 @@ public class DoorKey : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(5,KeyId+100));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(5,KeyId+100));
 		}
 		else
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetFormattedObjectNameUW(objInt()));
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
 		}
 
 		return true;

@@ -53,7 +53,7 @@ public class ShockCharacter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StringControl=new StringController();
-		StringControl.InitStringController("c:\\uw1_strings.txt");
+		StringController.instance.InitStringController("c:\\uw1_strings.txt");
 		//Initialise some basic references on other objects.
 		//ObjectInteraction.player=this.gameObject;//Set the player controller for all interaction scripts.
 		//ObjectInteraction.SC=StringControl;

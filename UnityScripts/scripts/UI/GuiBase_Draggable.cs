@@ -22,7 +22,7 @@ public class GuiBase_Draggable : GuiBase {
 
 	public void DragStart()
 	{
-		if (GameWorldController.instance.playerUW.playerHud.window.FullScreen==true)
+		if (UWHUD.instance.window.FullScreen==true)
 		{
 			Dragging=true;					
 		}			
@@ -30,7 +30,7 @@ public class GuiBase_Draggable : GuiBase {
 
 	public void OnDrag(BaseEventData evnt)
 	{
-		if (GameWorldController.instance.playerUW.playerHud.window.FullScreen==true)
+		if (UWHUD.instance.window.FullScreen==true)
 		{					
 			PointerEventData pntr = (PointerEventData)evnt;
 			for (int i=0; i<=rectT.GetUpperBound(0);i++)
@@ -45,9 +45,9 @@ public class GuiBase_Draggable : GuiBase {
 
 	public void DragEnd()
 	{
-				if (GameWorldController.instance.playerUW.playerHud.window.FullScreen==true)
+				if (UWHUD.instance.window.FullScreen==true)
 				{
-						GameWorldController.instance.playerUW.playerHud.window.updatePositions();	
+						UWHUD.instance.window.updatePositions();	
 				}
 		Dragging=false;		
 	}

@@ -10,7 +10,7 @@ public class Oil : object_base {
 			if (playerUW.playerInventory.ObjectInHand=="")
 			{
 				BecomeObjectInHand();
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Set ("Use oil on?");
+				UWHUD.instance.MessageScroll.Set ("Use oil on?");
 				return true;
 			}
 			else
@@ -29,7 +29,7 @@ public class Oil : object_base {
 
 	public override bool FailMessage ()
 	{
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString(1,177));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,177));
 		return false;
 	}
 }

@@ -17,7 +17,7 @@ public class Food : object_base {
 			else
 			{//The wine of compassion.
 				//000~001~127~You are unable to open the wine bottle.
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString(1,127));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,127));
 				return true;
 			}
 
@@ -35,13 +35,13 @@ public class Food : object_base {
 		if (Nutrition+playerUW.FoodLevel>=255)
 		{
 			playerUW.FoodLevel=255;
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (ObjectInteraction.playerUW.StringControl.GetString(1,126));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,126));
 			return false;
 		}
 		else
 		{
 			playerUW.FoodLevel = Nutrition+playerUW.FoodLevel;
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("That " + playerUW.StringControl.GetObjectNounUW(objInt()) + foodFlavourText());
+			UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
 			objInt().consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.
 		}
@@ -52,11 +52,11 @@ public class Food : object_base {
 		//Code for when looking at food. Should one day return quantity and smell properly
 		if (objInt().item_id!=191)
 		{
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetFormattedObjectNameUW(objInt(),foodSmellText()));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),foodSmellText()));
 		}
 		else
 		{//The wine of compassion.
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add ("You see " + playerUW.StringControl.GetString(1,264));
+			UWHUD.instance.MessageScroll.Add ("You see " + StringController.instance.GetString(1,264));
 		}
 		return true;
 	}
@@ -70,27 +70,27 @@ public class Food : object_base {
 	{
 		if (objInt().Quality == 0)
 			{
-			return playerUW.StringControl.GetString (1,172);//worm
+			return StringController.instance.GetString (1,172);//worm
 			}
 		if ((objInt().Quality >=1) && (objInt().Quality <15))
 			{
-			return playerUW.StringControl.GetString (1,173);//rotten
+			return StringController.instance.GetString (1,173);//rotten
 			}
 		if ((objInt().Quality >=15) && (objInt().Quality <32))
 			{
-			return playerUW.StringControl.GetString (1,174);//smelly
+			return StringController.instance.GetString (1,174);//smelly
 			}
 		if ((objInt().Quality >=32) && (objInt().Quality <40))
 			{
-			return playerUW.StringControl.GetString (1,175);//day old
+			return StringController.instance.GetString (1,175);//day old
 			}
 		if ((objInt().Quality >=40) && (objInt().Quality <48))
 			{
-			return playerUW.StringControl.GetString (1,176);//fresh
+			return StringController.instance.GetString (1,176);//fresh
 			}
 		else
 			{
-			return playerUW.StringControl.GetString (1,176);//fresh
+			return StringController.instance.GetString (1,176);//fresh
 			}
 	}
 
@@ -103,28 +103,28 @@ public class Food : object_base {
 	{
 		if (objInt().Quality == 0)
 		{
-			return playerUW.StringControl.GetString (5,18);//worm
+			return StringController.instance.GetString (5,18);//worm
 		}
 		if ((objInt().Quality >=1) && (objInt().Quality <15))
 		{
-			return playerUW.StringControl.GetString (5,19);//rotten
+			return StringController.instance.GetString (5,19);//rotten
 		}
 		if ((objInt().Quality >=15) && (objInt().Quality <32))
 		{
-			return playerUW.StringControl.GetString (5,20);//smelly
+			return StringController.instance.GetString (5,20);//smelly
 		}
 		if ((objInt().Quality >=32) && (objInt().Quality <40))
 		{
-			return playerUW.StringControl.GetString (5,21);//day old
+			return StringController.instance.GetString (5,21);//day old
 		}
 		
 		if ((objInt().Quality >=40) && (objInt().Quality <48))
 		{
-			return playerUW.StringControl.GetString (5,22);//fresh
+			return StringController.instance.GetString (5,22);//fresh
 		}
 		else
 		{
-			return playerUW.StringControl.GetString (5,23);//fresh
+			return StringController.instance.GetString (5,23);//fresh
 		}
 	}
 

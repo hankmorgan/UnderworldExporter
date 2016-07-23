@@ -155,22 +155,22 @@ public class Conversation : GuiBase {
 		///Setup UI Elements - code formerly in NPC
 		StringBlock =StringBlockNo;
 		chains.ActiveControl=3;
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
-		tl=GameWorldController.instance.playerUW.playerHud.Conversation_tl;
-		tl_input=GameWorldController.instance.playerUW.playerHud.MessageScroll;
+		UWHUD.instance.ChainsControl.Refresh();
+		tl=UWHUD.instance.Conversation_tl;
+		tl_input=UWHUD.instance.MessageScroll;
 		tl.Clear();
 		///Clear the trade slots for the npcs
 		for (int i=0; i<4;i++)
 		{
-			GameWorldController.instance.playerUW.playerHud.npcTrade[i++].clear ();
+			UWHUD.instance.npcTrade[i++].clear ();
 		}
 
 		///Identifies the NPC for future looking at
 		npc.objInt().isIdentified=true;
 
 		///Sets up the portraits for the player and the NPC
-		RawImage portrait = GameWorldController.instance.playerUW.playerHud.ConversationPortraits[0];
-		RawImage npcPortrait = GameWorldController.instance.playerUW.playerHud.ConversationPortraits[1];
+		RawImage portrait = UWHUD.instance.ConversationPortraits[0];
+		RawImage npcPortrait = UWHUD.instance.ConversationPortraits[1];
 		portrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/PlayerHeads/heads_"+ (GameWorldController.instance.playerUW.Body).ToString("0000"));//TODO:playerbody
 		
 		if ((npc.npc_whoami!=0) && (npc.npc_whoami<=28))
@@ -187,7 +187,7 @@ public class Conversation : GuiBase {
 			}			
 			npcPortrait.texture=Resources.Load <Texture2D> (_RES +"/HUD/genhead/genhead_"+ (HeadToUse).ToString("0000"));
 		}
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear ();
+		UWHUD.instance.MessageScroll.Clear ();
 		/*End UI Setup*/
 
 
@@ -221,7 +221,7 @@ public class Conversation : GuiBase {
 		///Return any items in the trade area to their owner
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.objectInSlot!="")
 			{///Moves the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -263,7 +263,7 @@ public class Conversation : GuiBase {
 		
 		///Resets the UI
 		chains.ActiveControl=0;
-		GameWorldController.instance.playerUW.playerHud.ChainsControl.Refresh();
+		UWHUD.instance.ChainsControl.Refresh();
 	}
 
 	/// <summary>
@@ -332,8 +332,8 @@ public class Conversation : GuiBase {
 			else if (WaitingForTyping)
 			{
 				//tl_input.gameObject.GetComponent<UIInput>().selected=true;
-				//GameWorldController.instance.playerUW.playerHud.InputControl.selected=true;
-				GameWorldController.instance.playerUW.playerHud.InputControl.Select();
+				//UWHUD.instance.InputControl.selected=true;
+				UWHUD.instance.InputControl.Select();
 			}
 
 		}
@@ -384,7 +384,7 @@ public class Conversation : GuiBase {
 	/// </summary>
 	public virtual IEnumerator main()
 	{
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (GameWorldController.instance.playerUW.StringControl.GetString (7,1));
+		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
 		yield break;
 	}
 
@@ -490,7 +490,7 @@ public class Conversation : GuiBase {
 		/// <param name="WhatToSay">What to say as an integer (index into string block)</param>
 	IEnumerator say(int WhatToSay)
 	{
-		string tmp = GameWorldController.instance.playerUW.StringControl.GetString (StringBlock,WhatToSay);
+		string tmp = StringController.instance.GetString (StringBlock,WhatToSay);
 		yield return StartCoroutine(say (tmp,NPC_SAY));
 	}
 
@@ -501,7 +501,7 @@ public class Conversation : GuiBase {
 		/// <param name="SayType">Say type. One of PC_Say, NPC_Say or Print_Say</param>
 	IEnumerator say(int WhatToSay,int SayType)
 	{
-		string tmp = GameWorldController.instance.playerUW.StringControl.GetString (StringBlock,WhatToSay);
+		string tmp = StringController.instance.GetString (StringBlock,WhatToSay);
 		yield return StartCoroutine(say (tmp,SayType));
 	}
 
@@ -530,7 +530,7 @@ public class Conversation : GuiBase {
 	/// <param name="index">Index into string block</param>
 	public string GetString(int index)
 	{
-		return GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,index);
+		return StringController.instance.GetString(StringBlock,index);
 	}
 
 	/// <summary>
@@ -550,7 +550,7 @@ public class Conversation : GuiBase {
 		{
 			if (localsArray[i]!=0)
 			{
-				tl_input.Add(j++ + "." + GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
+				tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
 				MaxAnswer++;
 			}
 			else
@@ -559,7 +559,7 @@ public class Conversation : GuiBase {
 			}
 		}
 		yield return StartCoroutine(WaitForInput());
-		tmp= GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[Start+PlayerAnswer-1]);
+		tmp= StringController.instance.GetString(StringBlock,localsArray[Start+PlayerAnswer-1]);
 		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
@@ -589,8 +589,8 @@ public class Conversation : GuiBase {
 				if (localsArray[flagIndex++] !=0)
 				{
 					bablf_array[j-1] = localsArray[i];
-					//tmp = tmp + j++ + "." + GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[i]) + "\n";
-					tl_input.Add (j++ + "." + GameWorldController.instance.playerUW.StringControl.GetString(StringBlock,localsArray[i]));
+					//tmp = tmp + j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]) + "\n";
+					tl_input.Add (j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
 					MaxAnswer++;
 				}
 			}
@@ -600,7 +600,7 @@ public class Conversation : GuiBase {
 			}
 		}
 		yield return StartCoroutine(WaitForInput());
-		tmp= GameWorldController.instance.playerUW.StringControl.GetString (StringBlock,bablf_array[bablf_ans-1]);
+		tmp= StringController.instance.GetString (StringBlock,bablf_array[bablf_ans-1]);
 		yield return StartCoroutine(say (tmp,PC_SAY));
 		yield return 0;
 	}
@@ -613,7 +613,7 @@ public class Conversation : GuiBase {
 	{
 		PlayerTypedAnswer="";
 		tl_input.Set(">");
-		InputField inputctrl=GameWorldController.instance.playerUW.playerHud.InputControl;
+		InputField inputctrl=UWHUD.instance.InputControl;
 		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 		inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 		inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
@@ -623,7 +623,7 @@ public class Conversation : GuiBase {
 		yield return StartCoroutine(WaitForTypedInput());
 		yield return StartCoroutine(say (PlayerTypedAnswer,PC_SAY));
 		inputctrl.text="";
-		GameWorldController.instance.playerUW.playerHud.MessageScroll.Clear ();
+		UWHUD.instance.MessageScroll.Clear ();
 	}
 
 
@@ -767,7 +767,7 @@ public class Conversation : GuiBase {
 		int j=0;
 		for (int i=0; i<4;i++)
 		{
-			TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[i]; 
+			TradeSlot pcSlot = UWHUD.instance.playerTrade[i]; 
 			if (pcSlot.isSelected())
 			{
 				locals[startObjectPos+j]= i;
@@ -808,7 +808,7 @@ public class Conversation : GuiBase {
 			int slotNo = locals[start+i] ;
 			if (slotNo<=3)
 			{
-				TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo];//GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
+				TradeSlot pcSlot = UWHUD.instance.playerTrade[slotNo];//GameObject.Find ("Trade_Player_Slot_" + slotNo).GetComponent<TradeSlot>();
 				//Give the item to the npc
 				if (Container.GetFreeSlot(cn)!=-1)
 				{
@@ -932,7 +932,7 @@ public class Conversation : GuiBase {
 				if (itemCount <=3)
 				{//Just take the first four items
 					ObjectInteraction itemToTrade = GameObject.Find (cn.GetItemAt(i)).GetComponent<ObjectInteraction>();
-					TradeSlot ts = GameWorldController.instance.playerUW.playerHud.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
+					TradeSlot ts = UWHUD.instance.npcTrade[itemCount++];//GameObject.Find ("Trade_NPC_Slot_" + itemCount++).GetComponent<TradeSlot>();
 					ts.objectInSlot=itemToTrade.gameObject.name;
 					ts.SlotImage.texture=itemToTrade.GetInventoryDisplay().texture;
 					int qty= itemToTrade.GetQty();
@@ -972,8 +972,8 @@ public class Conversation : GuiBase {
 		int playerObjectCount=0; int npcObjectCount=0;
 		for (int i = 0; i<4; i++)
 		{
-			TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
-			TradeSlot pcSlot =  GameWorldController.instance.playerUW.playerHud.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = UWHUD.instance.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot =  UWHUD.instance.playerTrade[i];// GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.isSelected()){npcObjectCount++;}
 			if (pcSlot.isSelected()){playerObjectCount++;}
 		}
@@ -1008,7 +1008,7 @@ public class Conversation : GuiBase {
 		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot pcSlot =  GameWorldController.instance.playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot pcSlot =  UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (pcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1030,7 +1030,7 @@ public class Conversation : GuiBase {
 
 		for (int i=0; i<=3; i++)
 		{//Clear out the trade slots.
-			GameWorldController.instance.playerUW.playerHud.npcTrade[i].clear();
+			UWHUD.instance.npcTrade[i].clear();
 		}
 		return;
 	}
@@ -1081,7 +1081,7 @@ public class Conversation : GuiBase {
 			Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot npcSlot = UWHUD.instance.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1107,7 +1107,7 @@ public class Conversation : GuiBase {
 			cn =npc.gameObject.GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot pcSlot =GameWorldController.instance.playerUW.playerHud.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot pcSlot =UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 				if (pcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1175,7 +1175,7 @@ public class Conversation : GuiBase {
 			//Demand sucessfull
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot =GameWorldController.instance.playerUW.playerHud.npcTrade[i] ;//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+				TradeSlot npcSlot =UWHUD.instance.npcTrade[i] ;//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
 				if (npcSlot.isSelected())
 				{//Move the object to the container or to the ground
 					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1206,7 +1206,7 @@ public class Conversation : GuiBase {
 		//Move the players items back to his inventory;
 		for (int i =0; i <=3; i++)
 		{
-			TradeSlot npcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
+			TradeSlot npcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
 			if (npcSlot.objectInSlot!="")
 			{//Move the object to the players container or to the ground
 				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
@@ -1289,9 +1289,9 @@ public class Conversation : GuiBase {
 		//arg4: inventory item position
 		//description:  unknown TODO
 		//return value: unknown
-			if (GameWorldController.instance.playerUW.playerHud.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
+			if (UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
 			{
-				GameWorldController.instance.playerUW.playerHud.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
+				UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
 			}
 		return 1;
 	}
@@ -1356,11 +1356,11 @@ public class Conversation : GuiBase {
 		ObjectInteraction obj;
 		if (pos<4)
 		{//Item is in players trade area.
-			obj= GameWorldController.instance.playerUW.playerHud.playerTrade[pos].GetGameObjectInteraction();
+			obj= UWHUD.instance.playerTrade[pos].GetGameObjectInteraction();
 		}
 		else if (pos <=7)
 		{//item in npc trade area
-			obj= GameWorldController.instance.playerUW.playerHud.npcTrade[pos-4].GetGameObjectInteraction();
+			obj= UWHUD.instance.npcTrade[pos-4].GetGameObjectInteraction();
 		}
 		else
 		{
@@ -1441,7 +1441,7 @@ public class Conversation : GuiBase {
 	/// <param name="SlotNo">Slot no to look at</param>
 	public int GetItemAtSlotProperty_Quality(int SlotNo)
 	{
-		TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		TradeSlot pcSlot = UWHUD.instance.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
 		if(pcSlot!=null)
 		{
 			if (pcSlot.objectInSlot!="")
@@ -1467,7 +1467,7 @@ public class Conversation : GuiBase {
 	/// <param name="SlotNo">Slot no to look at</param>
 	public int GetItemAtSlotProperty_Link(int SlotNo)
 	{
-		TradeSlot pcSlot = GameWorldController.instance.playerUW.playerHud.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
+		TradeSlot pcSlot = UWHUD.instance.playerTrade[SlotNo];//GameObject.Find ("Trade_Player_Slot_" + SlotNo).GetComponent<TradeSlot>();
 		if(pcSlot!=null)
 		{
 			if (pcSlot.objectInSlot!="")
@@ -1558,7 +1558,7 @@ public class Conversation : GuiBase {
 		//parameters:   arg1: inventory item position
 		//description:  returns "quality" field of npc? inventory item
 		//return value: "quality" field
-		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.playerTrade[itemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			return objInslot.GetComponent<ObjectInteraction>().Quality;
@@ -1582,7 +1582,7 @@ public class Conversation : GuiBase {
 		//arg2: inventory object list position
 		//description:  sets quality for an item in inventory
 		//return value: none
-		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.npcTrade[itemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[itemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			objInslot.GetComponent<ObjectInteraction>().Quality= NewQuality;
@@ -1604,7 +1604,7 @@ public class Conversation : GuiBase {
 		int playerHasSpace=1;
 		Container cnpc = GameWorldController.instance.playerUW.gameObject.GetComponent<Container>();
 
-		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.npcTrade[ItemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(UWHUD.instance.npcTrade[ItemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			//Give to PC
@@ -1691,10 +1691,10 @@ public class Conversation : GuiBase {
 				npccont.AddItemToContainer (myObj.name);
 			for (int i =0; i<4;i++)
 				{
-				if (GameWorldController.instance.playerUW.playerHud.npcTrade[i].objectInSlot=="")
+				if (UWHUD.instance.npcTrade[i].objectInSlot=="")
 					{
 						//NPCTradeItems[i]=myObj.name;
-						TradeSlot ts = GameWorldController.instance.playerUW.playerHud.npcTrade[i];
+						TradeSlot ts = UWHUD.instance.npcTrade[i];
 						ts.objectInSlot=myObj.name;
 						ts.SlotImage.texture=myObj.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
 						return i;
@@ -1718,7 +1718,7 @@ public class Conversation : GuiBase {
 		//description:  counts number of items in inventory
 		//return value: item number
 		int total =0;
-		GameObject objInslot = GameObject.Find(GameWorldController.instance.playerUW.playerHud.playerTrade[ItemPos].objectInSlot);
+		GameObject objInslot = GameObject.Find(UWHUD.instance.playerTrade[ItemPos].objectInSlot);
 		if (objInslot!=null)
 		{
 			ObjectInteraction objInt = objInslot.GetComponent<ObjectInteraction>();
@@ -1868,17 +1868,17 @@ public class Conversation : GuiBase {
 			return;
 		}
 		Container cn =npc.gameObject.GetComponent<Container>();
-		if (GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot !="")
+		if (UWHUD.instance.playerTrade[slotNo].objectInSlot !="")
 		{
 			if ((Quantity==-1))
 			{
-				cn.AddItemToContainer(GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot);
-				GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].clear ();
+				cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+				UWHUD.instance.playerTrade[slotNo].clear ();
 				GameWorldController.instance.playerUW.playerInventory.Refresh();
 			}
 			else
 			{//Clone the object and give the clone to the npc
-				GameObject objGiven = GameObject.Find (GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot);
+				GameObject objGiven = GameObject.Find (UWHUD.instance.playerTrade[slotNo].objectInSlot);
 				if (objGiven!=null)
 				{
 					if  ((objGiven.GetComponent<ObjectInteraction>().isQuant==true)
@@ -1898,8 +1898,8 @@ public class Conversation : GuiBase {
 					}
 					else
 					{//Object is not a quantity or is the full amount.
-						cn.AddItemToContainer(GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].objectInSlot);
-						GameWorldController.instance.playerUW.playerHud.playerTrade[slotNo].clear ();
+						cn.AddItemToContainer(UWHUD.instance.playerTrade[slotNo].objectInSlot);
+						UWHUD.instance.playerTrade[slotNo].clear ();
 						GameWorldController.instance.playerUW.playerInventory.Refresh();
 					}
 				}
@@ -1937,9 +1937,9 @@ public class Conversation : GuiBase {
 		// if arg1 > 1000 return Item Category is = + (arg1-1000)*16);
 		for (int i = 0; i<4; i++)
 		{
-			if (GameWorldController.instance.playerUW.playerHud.playerTrade[i].isSelected())
+			if (UWHUD.instance.playerTrade[i].isSelected())
 			    {
-				ObjectInteraction objInt = GameWorldController.instance.playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+				ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
 				if (objInt!=null)
 				{					
 					if (itemID<1000)
@@ -1982,7 +1982,7 @@ public class Conversation : GuiBase {
                  used in Judy's conversation, #23
 
 */
-		string objName = GameWorldController.instance.playerUW.playerHud.npcTrade[invSlot].objectInSlot;
+		string objName = UWHUD.instance.npcTrade[invSlot].objectInSlot;
 		GameObject obj = GameObject.Find (objName);
 		if (obj!=null)
 		{
@@ -1992,7 +1992,7 @@ public class Conversation : GuiBase {
 			                                     (((float)tileY) *1.2f) 
 			                                     );
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
-			GameWorldController.instance.playerUW.playerHud.npcTrade[invSlot].clear();
+			UWHUD.instance.npcTrade[invSlot].clear();
 		}
 		return;
 	}
@@ -2033,9 +2033,9 @@ keep a number of found slots.
 		int counter=0;
 		for (int i = 0; i<4; i++)
 		{
-			if (GameWorldController.instance.playerUW.playerHud.playerTrade[i].isSelected())
+			if (UWHUD.instance.playerTrade[i].isSelected())
 			{
-				ObjectInteraction objInt = GameWorldController.instance.playerUW.playerHud.playerTrade[i].GetGameObjectInteraction();
+				ObjectInteraction objInt = UWHUD.instance.playerTrade[i].GetGameObjectInteraction();
 				if (objInt!=null)
 				{
 					

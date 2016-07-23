@@ -20,10 +20,10 @@ public class SilverSeed : object_base {
 				animo.Stop ();
 			}
 			objInt().UpdateAnimation();//Update the inventory display
-			playerUW.playerHud.CursorIcon = objInt().GetInventoryDisplay().texture;
+			UWHUD.instance.CursorIcon = objInt().GetInventoryDisplay().texture;
 			playerUW.ResurrectPosition=Vector3.zero;
 			objInt().SetWorldDisplay(objInt().GetInventoryDisplay());
-			GameWorldController.instance.playerUW.playerHud.MessageScroll.Add (playerUW.StringControl.GetString (1,9));
+			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,9));
 
 			return true;
 		}
@@ -51,10 +51,10 @@ public class SilverSeed : object_base {
 				}
 				objInt().UpdateAnimation();//Update the inventory display
 				objInt().SetWorldDisplay(objInt().GetInventoryDisplay());
-				GameWorldController.instance.playerUW.playerHud.MessageScroll.Add(playerUW.StringControl.GetString (1,12));
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,12));
 
 
-				playerUW.playerHud.CursorIcon = playerUW.playerHud.CursorIconDefault;
+				UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
 				playerUW.ResurrectPosition=playerUW.transform.position;
 				objInt().gameObject.transform.parent=null;
 				objInt().transform.position=playerUW.transform.position;//TODO:Position the tree properly
