@@ -12,7 +12,7 @@ public class MapClose : MonoBehaviour {
 		{
 			GameWorldController.instance.mus.InMap=false;
 		}
-		chains.ActiveControl=0;
-		UWHUD.instance.ChainsControl.Refresh();
+		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
+
 	}
 }

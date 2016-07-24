@@ -399,7 +399,7 @@ public class WindowDetectUW : WindowDetect {
 		pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
 		pos.sizeDelta=new Vector2(800.0f, 600f);
 		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
-
+		UWHUD.instance.RefreshPanels(-1);//refresh controls
 	}
 
 	public void UnSetFullScreen()
@@ -415,7 +415,7 @@ public class WindowDetectUW : WindowDetect {
 		pos.localPosition = new Vector3(-55.5f,73.0f,0.0f);
 		pos.sizeDelta=new Vector2(430.0f, 340f);
 		playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
-	
+		UWHUD.instance.RefreshPanels(-1);//refresh controls
 	}
 
 

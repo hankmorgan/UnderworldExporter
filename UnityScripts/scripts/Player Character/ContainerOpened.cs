@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class ContainerOpened : GuiBase {
+public class ContainerOpened : GuiBase_Draggable {
 //The gui element that represents the currently opened container in the inventory.
 	public GameObject BackpackBg;
 	public GameObject InvUp;
@@ -32,6 +32,7 @@ public class ContainerOpened : GuiBase {
 
 	public void OnClick()
 	{
+		if (Dragging==true){return;}
 		if (GameWorldController.instance.playerUW.playerInventory.currentContainer==GameWorldController.instance.playerUW.name)
 		{//Don't do anything on the top level
 			GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;

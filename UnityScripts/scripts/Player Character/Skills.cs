@@ -94,6 +94,32 @@ public class Skills : MonoBehaviour {
 		}
 	}
 
+		public void InitSkills()
+		{
+				STR=0;
+				INT=0;
+				DEX=0;
+				Attack =0;
+				Defense =0;
+				Unarmed=0;
+				Sword=0;
+				Axe=0;
+				 Mace=0;
+				Missile=0;
+				ManaSkill=0;
+				Lore=0;
+				Casting=0;
+				Traps=0;
+				Search=0;
+				Track=0;
+				 Sneak=0;
+				Repair=0;
+				Charm=0;
+				PickLock=0;
+				Acrobat=0;
+				Appraise=0;
+				Swimming=0;
+		}
 
 	public void AdvanceSkill(int SkillNo, int SkillPoints)
 	{//Increase a players skill by the specificed skill let

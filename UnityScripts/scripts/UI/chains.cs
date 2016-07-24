@@ -14,10 +14,10 @@ public class chains : GuiBase_Draggable {
 		case UWHUD.HUD_MODE_INVENTORY://Inventory -> Stats
 			ActiveControl=UWHUD.HUD_MODE_STATS;
 			break;
-		case 1://Stats -> Inventory
+		case UWHUD.HUD_MODE_STATS://Stats -> Inventory
 			ActiveControl=UWHUD.HUD_MODE_INVENTORY;
 			break;
-		case 2://Magic -> Inventory
+		case UWHUD.HUD_MODE_RUNES://Magic -> Inventory
 			ActiveControl=UWHUD.HUD_MODE_INVENTORY;
 			break;
 		default://Not a valid state to switch from

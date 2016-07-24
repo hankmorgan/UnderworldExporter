@@ -23,8 +23,7 @@ public class MapInteraction : GuiBase {
 			{
 					GameWorldController.instance.mus.InMap=false;
 			}
-			chains.ActiveControl=0;
-			UWHUD.instance.ChainsControl.Refresh();
+			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
 		}
 
@@ -79,7 +78,7 @@ public class MapInteraction : GuiBase {
 						PointerEventData pntr = (PointerEventData)evnt;		
 						CursorPos=UWHUD.instance.window.CursorPosition.center;//pntr.pressPosition;
 						RectTransformUtility.ScreenPointToLocalPointInRectangle(rect,pntr.pressPosition,pntr.pressEventCamera, out pos);
-						pos = pos + new Vector2 (370.0f, -20.0f);
+						pos = pos + new Vector2 (150.0f, -4.0f);
 						GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
 						mapNoteCurrent=myObj.GetComponent<Text>();
 						mapNoteCurrent.transform.parent=this.transform;

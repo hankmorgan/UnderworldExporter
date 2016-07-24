@@ -18,8 +18,8 @@ public class RuneBag : object_base {
 
 	void OpenRuneBag()
 	{
-		chains.ActiveControl=2;
-		UWHUD.instance.ChainsControl.Refresh();
+		//chains.ActiveControl=2;
+		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_RUNES);
 	}
 
 	public override bool Activate()

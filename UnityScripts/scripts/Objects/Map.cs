@@ -42,8 +42,7 @@ public class Map : object_base {
 		}
 		UWHUD.instance.MessageScroll.Clear();
 
-		chains.ActiveControl=4;
-		UWHUD.instance.ChainsControl.Refresh ();
+		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_MAP);
 
 		return true;
 	}

@@ -154,8 +154,8 @@ public class Conversation : GuiBase {
 	{
 		///Setup UI Elements - code formerly in NPC
 		StringBlock =StringBlockNo;
-		chains.ActiveControl=3;
-		UWHUD.instance.ChainsControl.Refresh();
+
+		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CONV);
 		tl=UWHUD.instance.Conversation_tl;
 		tl_input=UWHUD.instance.MessageScroll;
 		tl.Clear();
@@ -262,8 +262,8 @@ public class Conversation : GuiBase {
 		StopAllCoroutines();
 		
 		///Resets the UI
-		chains.ActiveControl=0;
-		UWHUD.instance.ChainsControl.Refresh();
+		
+		UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 	}
 
 	/// <summary>

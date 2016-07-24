@@ -18,12 +18,12 @@ public class UWHUD : HUD {
 	public MainMenuHud mainmenu;
 	public CutsceneAnimation CutScenesSmall;
 
-	public HealthFlask HealthFlask;
-	public HealthFlask ManaFlask;
-	public Compass compass;
-	public Dragons[] dragons;// new Dragons[2];
-	public Eyes eyes;
-	public StatsDisplay stats;
+	//public HealthFlask HealthFlask;
+	//public HealthFlask ManaFlask;
+	//public Compass compass;
+	//public Dragons[] dragons;// new Dragons[2];
+	//public Eyes eyes;
+	//public StatsDisplay stats;
 	public TradeSlot[] playerTrade ;//= new TradeSlot[4];
 	public TradeSlot[] npcTrade ;//= new TradeSlot[4];
 	public RawImage[] ConversationPortraits;
@@ -58,6 +58,7 @@ public class UWHUD : HUD {
 		public GameObject MapPanel;
 		public GameObject InventoryPanel;
 		public GameObject PaperDollFemalePanel;
+		public GameObject PaperDollMalePanel;
 		public GameObject ConversationPanel;
 		public GameObject DragonLeftPanel;
 		public GameObject DragonRightPanel;
@@ -65,6 +66,15 @@ public class UWHUD : HUD {
 		public GameObject CutsceneFullPanel;
 
 
+
+		//Panel states 
+		bool InventoryEnabled=true;
+		bool RuneBagEnabled=false;
+		bool StatsEnabled=false;
+		bool ConversationEnabled=false;
+		bool CutSceneSmallEnabled=false;
+		bool CutSceneFullEnabled=false;
+		bool MapEnabled=false;
 
 
 		void Awake()
@@ -75,82 +85,62 @@ public class UWHUD : HUD {
 
 		public void RefreshPanels(int ActivePanelMode)
 		{
-				bool InventoryEnabled=false;
-				bool RuneBagEnabled=false;
-				bool StatsEnabled=false;
-				bool ConversationEnabled=false;
-				bool CutSceneSmallEnabled=false;
-				bool CutSceneFullEnabled=false;
-				bool MapEnabled=true;
-
-				switch (ActivePanelMode)
-				{
-				case 0://Inventory
-						InventoryEnabled=true;
-						RuneBagEnabled=false;
-						StatsEnabled=false;
-						ConversationEnabled=false;
-						CutSceneSmallEnabled=true;
-						MapEnabled=false;
-						break;
-				case 1://Stats display
-						InventoryEnabled=false;
-						RuneBagEnabled=false;
-						StatsEnabled=true;
-						ConversationEnabled=false;
-						CutSceneSmallEnabled=true;
-						CutSceneFullEnabled=false;
-						MapEnabled=false;
-						break;	
-				case 2://Runebag
-						InventoryEnabled=false;
-						RuneBagEnabled=true;
-						StatsEnabled=false;
-						ConversationEnabled=false;
-						CutSceneSmallEnabled=true;
-						CutSceneFullEnabled=false;
-						MapEnabled=false;
-						break;	
-				case 3://Conversation
-						InventoryEnabled=true;
-						RuneBagEnabled=false;
-						StatsEnabled=false;
-						ConversationEnabled=true;
-						CutSceneSmallEnabled=false;
-						CutSceneFullEnabled=false;
-						MapEnabled=false;
-						break;	
-				case 4://Map
-						InventoryEnabled=false;
-						RuneBagEnabled=false;
-						StatsEnabled=false;
-						ConversationEnabled=false;
-						CutSceneSmallEnabled=false;
-						CutSceneFullEnabled=false;
-						MapEnabled=true;
-						break;
-				/*
-				 * I don't need to switch controls when in cuts. Too error prone.
-				 * 
-				 * case 5: //Cutscene small;
-						InventoryEnabled=false;
-						RuneBagEnabled=false;
-						StatsEnabled=false;
-						ConversationEnabled=false;
-						CutSceneSmallEnabled=true;
-						CutSceneFullEnabled=true;
-						MapEnabled=false;
-						break;
-				case 5: //Cutscene full;
-						InventoryEnabled=false;
-						RuneBagEnabled=false;
-						StatsEnabled=false;
-						ConversationEnabled=false;
-						CutSceneSmallEnabled=true;
-						CutSceneFullEnabled=true;
-						MapEnabled=false;
-						break;*/
+				
+				if (ActivePanelMode!=-1)
+				{//-1 is just a refresh.
+						switch (ActivePanelMode)
+						{
+						case 0://Inventory
+								InventoryEnabled=true;
+								RuneBagEnabled=false;
+								StatsEnabled=false;
+								ConversationEnabled=false;
+								CutSceneSmallEnabled=true;
+								MapEnabled=false;
+								chains.ActiveControl = ActivePanelMode;
+								break;
+						case 1://Stats display
+								InventoryEnabled=false;
+								RuneBagEnabled=false;
+								StatsEnabled=true;
+								ConversationEnabled=false;
+								CutSceneSmallEnabled=true;
+								CutSceneFullEnabled=false;
+								MapEnabled=false;
+								chains.ActiveControl = ActivePanelMode;
+								break;	
+						case 2://Runebag
+								InventoryEnabled=false;
+								RuneBagEnabled=true;
+								StatsEnabled=false;
+								ConversationEnabled=false;
+								CutSceneSmallEnabled=true;
+								CutSceneFullEnabled=false;
+								MapEnabled=false;
+								chains.ActiveControl = ActivePanelMode;
+								break;	
+						case 3://Conversation
+								InventoryEnabled=true;
+								RuneBagEnabled=false;
+								StatsEnabled=false;
+								ConversationEnabled=true;
+								CutSceneSmallEnabled=false;
+								CutSceneFullEnabled=false;
+								MapEnabled=false;
+								break;	
+						case 4://Map
+								InventoryEnabled=false;
+								RuneBagEnabled=false;
+								StatsEnabled=false;
+								ConversationEnabled=false;
+								CutSceneSmallEnabled=false;
+								CutSceneFullEnabled=false;
+								MapEnabled=true;
+								break;
+						}	
 				}
+
+
 
 				EnableDisableControl (RuneBagPanel,RuneBagEnabled);
 				if (RuneBagEnabled==true)
@@ -160,6 +150,7 @@ public class UWHUD : HUD {
 				EnableDisableControl(StatsDisplayPanel,StatsEnabled);
 				EnableDisableControl(InventoryPanel, InventoryEnabled);
 				EnableDisableControl(PaperDollFemalePanel, InventoryEnabled && GameWorldController.instance.playerUW.isFemale);
+				EnableDisableControl(PaperDollMalePanel, InventoryEnabled && !GameWorldController.instance.playerUW.isFemale);
 				EnableDisableControl(ConversationPanel,ConversationEnabled);
 				EnableDisableControl(MapPanel,MapEnabled);
 				EnableDisableControl(DragonLeftPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));

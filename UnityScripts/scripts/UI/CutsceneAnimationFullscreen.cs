@@ -21,14 +21,15 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		CutsceneTime=0f;
 		//Starts a sequenced cutscene.
 		//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
-		chains.ActiveControl=5;
-		UWHUD.instance.ChainsControl.Refresh();
+		//chains.ActiveControl=5;
+		//UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CUTS_FULL);
 		//isFullScreen= UWHUD.instance.window.FullScreen;
 		//if (!isFullScreen)
 		//{
 		//	UWHUD.instance.window.SetFullScreen();
 		//}
-		TargetControl.gameObject.SetActive(true);
+		//TargetControl.gameObject.SetActive(true);
+		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutScenesFull.gameObject,true);
 		PlayingSequence=true;
 		SkipAnim=false;
 		//Begin the image seq
@@ -104,17 +105,18 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	/*Functions for handling the end of cutscene clip events*/
 	public void PreAnimPlay()
 	{//Called by events in certain animations when starting playing
-		if (PlayingSequence==false)
-		{
+		//if (PlayingSequence==false)
+		//{
 			//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
-			chains.ActiveControl=5;
-			UWHUD.instance.ChainsControl.Refresh();
+			//chains.ActiveControl=5;
+			//UWHUD.instance.RefreshPanels(PANELNAME);
+
 			//isFullScreen= UWHUD.instance.window.FullScreen;
 			//if (!isFullScreen)
 			//{
 			//	UWHUD.instance.window.SetFullScreen();
-			//}
-		}		
+			//}//
+		//}		
 		return;
 	} 
 	
@@ -129,10 +131,10 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			//GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;//?
 			
 
-			chains.ActiveControl=0;
-			UWHUD.instance.ChainsControl.Refresh();
+			//chains.ActiveControl=0;
+			//UWHUD.instance.RefreshPanels(PANELNAME);
 			SetAnimation= "Anim_Base";//Clears out the animation.
-			
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutScenesFull.gameObject,true);			
 		}
 		else
 		{
@@ -153,7 +155,8 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 							SetAnimation= "Anim_Base";//End of anim.
 							PlayingSequence=false;
 							PostAnimPlay();
-							TargetControl.gameObject.SetActive(false);
+							//TargetControl.gameObject.SetActive(false);
+							UWHUD.instance.EnableDisableControl(UWHUD.instance.CutScenesFull.gameObject,true);
 							Destroy (cs);	
 					}
 			}

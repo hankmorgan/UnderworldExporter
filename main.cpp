@@ -1634,45 +1634,45 @@ void PrintSkill(int SkillType)
 	switch (SkillType)
 		{
 		case 0: //Attack
-			fprintf(LOGFILE, "%d //Attack", SkillType); break;
+			fprintf(LOGFILE, "%d //Attack", SkillType+31); break;
 		case 1: //Defense
-			fprintf(LOGFILE, "%d //Defense", SkillType); break;
+			fprintf(LOGFILE, "%d //Defense", SkillType+31); break;
 		case 2: //unarmed
-			fprintf(LOGFILE, "%d //Unarmed", SkillType); break;
+			fprintf(LOGFILE, "%d //Unarmed", SkillType+31); break;
 		case 3: //Sword
-			fprintf(LOGFILE, "%d //Sword", SkillType); break;
+			fprintf(LOGFILE, "%d //Sword", SkillType+31); break;
 		case 4: //Axe
-			fprintf(LOGFILE, "%d //Axe", SkillType); break;
+			fprintf(LOGFILE, "%d //Axe", SkillType+31); break;
 		case 5: //Mace
-			fprintf(LOGFILE, "%d //Mace", SkillType); break;
+			fprintf(LOGFILE, "%d //Mace", SkillType+31); break;
 		case 6: //Missile
-			fprintf(LOGFILE, "%d //Missile", SkillType); break;
+			fprintf(LOGFILE, "%d //Missile", SkillType+31); break;
 		case 7: //Mana
-			fprintf(LOGFILE, "%d //Mana", SkillType); break;
+			fprintf(LOGFILE, "%d //Mana", SkillType+31); break;
 		case 8: //Lore
-			fprintf(LOGFILE, "%d //Lore", SkillType); break;
+			fprintf(LOGFILE, "%d //Lore", SkillType+31); break;
 		case 9: //Casting
-			fprintf(LOGFILE, "%d //Casting", SkillType); break;
+			fprintf(LOGFILE, "%d //Casting", SkillType+31); break;
 		case 10: //Traps
-			fprintf(LOGFILE, "%d //Traps", SkillType); break;
+			fprintf(LOGFILE, "%d //Traps", SkillType+31); break;
 		case 11: //Search
-			fprintf(LOGFILE, "%d //Search", SkillType); break;
+			fprintf(LOGFILE, "%d //Search", SkillType+31); break;
 		case 12: //Track
-			fprintf(LOGFILE, "%d //Track", SkillType); break;
+			fprintf(LOGFILE, "%d //Track", SkillType + 31); break;
 		case 13: //Sneak
-			fprintf(LOGFILE, "%d //Sneak", SkillType); break;
+			fprintf(LOGFILE, "%d //Sneak", SkillType + 31); break;
 		case 14: //Repair
-			fprintf(LOGFILE, "%d //Repair", SkillType); break;
+			fprintf(LOGFILE, "%d //Repair", SkillType + 31); break;
 		case 15: //Charm
-			fprintf(LOGFILE, "%d //Charm", SkillType); break;
+			fprintf(LOGFILE, "%d //Charm", SkillType + 31); break;
 		case 16: //Pick Lock
-			fprintf(LOGFILE, "%d //Picklock", SkillType); break;
+			fprintf(LOGFILE, "%d //Picklock", SkillType + 31); break;
 		case 17: //Acrobat
-			fprintf(LOGFILE, "%d //Acrobat", SkillType); break;
+			fprintf(LOGFILE, "%d //Acrobat", SkillType + 31); break;
 		case 18: //Appraise
-			fprintf(LOGFILE, "%d //Appraise", SkillType); break;
+			fprintf(LOGFILE, "%d //Appraise", SkillType + 31); break;
 		case 19: //Swimming
-			fprintf(LOGFILE, "%d //Swimming", SkillType); break;
+			fprintf(LOGFILE, "%d //Swimming", SkillType + 31); break;
 		default: //Unknown
 			fprintf(LOGFILE, "%d //UNKNOWN!", SkillType); break;
 		}
