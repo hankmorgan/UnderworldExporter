@@ -29,7 +29,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		//	UWHUD.instance.window.SetFullScreen();
 		//}
 		//TargetControl.gameObject.SetActive(true);
-		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutScenesFull.gameObject,true);
+		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,true);
 		PlayingSequence=true;
 		SkipAnim=false;
 		//Begin the image seq
@@ -53,7 +53,8 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		SetAnimation= "Anim_Base";//End of anim.
 		PlayingSequence=false;
 		PostAnimPlay();
-		TargetControl.gameObject.SetActive(false);
+		//TargetControl.gameObject.SetActive(false);
+		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);
 		Destroy (cs);
 		
 	}
@@ -134,7 +135,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			//chains.ActiveControl=0;
 			//UWHUD.instance.RefreshPanels(PANELNAME);
 			SetAnimation= "Anim_Base";//Clears out the animation.
-			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutScenesFull.gameObject,true);			
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,true);			
 		}
 		else
 		{
@@ -156,7 +157,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 							PlayingSequence=false;
 							PostAnimPlay();
 							//TargetControl.gameObject.SetActive(false);
-							UWHUD.instance.EnableDisableControl(UWHUD.instance.CutScenesFull.gameObject,true);
+							UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
 							Destroy (cs);	
 					}
 			}
