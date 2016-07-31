@@ -67,6 +67,8 @@ public class UWHUD : HUD {
 		public GameObject CutsceneSmallPanel;
 		public GameObject CutsceneFullPanel;
 
+		public GameObject currentPanel;
+
 
 
 		//Panel states 
@@ -78,12 +80,20 @@ public class UWHUD : HUD {
 		bool CutSceneFullEnabled=false;
 		bool MapEnabled=false;
 
+		//Hud animation related
+		public bool isRotating;
+
+
 
 		void Awake()
 		{
 			instance=this;
 		}
 
+		void Start()
+		{
+			RefreshPanels(-1);
+		}
 
 		public void RefreshPanels(int ActivePanelMode)
 		{
@@ -92,6 +102,9 @@ public class UWHUD : HUD {
 				{//-1 is just a refresh.
 						switch (ActivePanelMode)
 						{
+						case -1:
+								UpdatePanelStates();
+								break;
 						case 0://Inventory
 								InventoryEnabled=true;
 								RuneBagEnabled=false;
@@ -99,7 +112,17 @@ public class UWHUD : HUD {
 								ConversationEnabled=false;
 								CutSceneSmallEnabled=true;
 								MapEnabled=false;
-								chains.ActiveControl = ActivePanelMode;
+								if (chains.ActiveControl>2)
+								{
+										chains.ActiveControl = ActivePanelMode;
+										UpdatePanelStates();
+								}
+								else
+								{
+										StartCoroutine(RotatePanels(currentPanel,InventoryPanel));
+										chains.ActiveControl = ActivePanelMode;
+								}
+
 								break;
 						case 1://Stats display
 								InventoryEnabled=false;
@@ -109,7 +132,18 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=true;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
-								chains.ActiveControl = ActivePanelMode;
+								if (chains.ActiveControl>2)
+								{
+										chains.ActiveControl = ActivePanelMode;
+										UpdatePanelStates();
+								}
+								else
+								{
+										StartCoroutine(RotatePanels(currentPanel,StatsDisplayPanel));
+										chains.ActiveControl = ActivePanelMode;
+								}
+
+
 								break;	
 						case 2://Runebag
 								InventoryEnabled=false;
@@ -119,7 +153,17 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=true;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
-								chains.ActiveControl = ActivePanelMode;
+								if (chains.ActiveControl>2)
+								{
+										chains.ActiveControl = ActivePanelMode;
+										UpdatePanelStates();
+								}
+								else
+								{
+										StartCoroutine(RotatePanels(currentPanel,RuneBagPanel));
+										chains.ActiveControl = ActivePanelMode;
+								}
+
 								break;	
 						case 3://Conversation
 								InventoryEnabled=true;
@@ -129,6 +173,7 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=false;
 								CutSceneFullEnabled=false;
 								MapEnabled=false;
+								UpdatePanelStates();
 								break;	
 						case 4://Map
 								InventoryEnabled=false;
@@ -138,12 +183,61 @@ public class UWHUD : HUD {
 								CutSceneSmallEnabled=false;
 								CutSceneFullEnabled=false;
 								MapEnabled=true;
+								UpdatePanelStates();
 								break;
 						}	
+						chains.ActiveControl=ActivePanelMode;
 				}
 
 
 
+
+
+
+		}
+
+
+		IEnumerator RotatePanels(GameObject fromPanel, GameObject toPanel)
+		{
+				
+				Quaternion fromQ= fromPanel.GetComponent<RectTransform>().rotation;;
+				Quaternion toQ = toPanel.GetComponent<RectTransform>().rotation; 
+
+				fromPanel.GetComponent<RectTransform>().SetSiblingIndex(4);
+				toPanel.GetComponent<RectTransform>().SetSiblingIndex(5);
+
+				float rate = 1.0f/0.5f;
+				float index = 0.0f;
+
+				isRotating=true;
+				while (index <1.0f)
+				{
+						fromPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (fromQ,toQ,index);
+						toPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (toQ,fromQ,index);
+						if (index>=0.5f)
+						{
+								EnableDisableControl(toPanel,true);
+								EnableDisableControl(fromPanel,false);	
+						}
+						else
+						{
+								EnableDisableControl(toPanel,false);
+								EnableDisableControl(fromPanel,true);		
+						}
+						index += rate * Time.deltaTime;
+						yield return new WaitForSeconds(0.01f);
+				}
+				toPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+				fromPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
+				UpdatePanelStates();
+				isRotating=false;
+				currentPanel=toPanel;
+		}
+
+
+
+		void UpdatePanelStates()
+		{
 				EnableDisableControl (RuneBagPanel,RuneBagEnabled);
 				if (RuneBagEnabled==true)
 				{
@@ -158,11 +252,8 @@ public class UWHUD : HUD {
 				EnableDisableControl(DragonLeftPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));
 				EnableDisableControl(DragonRightPanel,(((InventoryEnabled) || (StatsEnabled) || (RuneBagEnabled) || (ConversationEnabled)) && (UWHUD.instance.window.FullScreen==false)));
 				EnableDisableControl(CutsceneSmallPanel,CutSceneSmallEnabled);
-				EnableDisableControl(CutsceneFullPanel,CutSceneFullEnabled);
-
-
+				EnableDisableControl(CutsceneFullPanel,CutSceneFullEnabled);	
 		}
-
 
 
 		public void EnableDisableControl(GameObject control, bool targetState)

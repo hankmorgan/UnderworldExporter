@@ -12,6 +12,16 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	public bool SkipAnim=false;
 	private float CutsceneTime;
 
+		public void End()
+		{
+				if (cs!=null)
+				{
+						PlayingSequence=false;
+						UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
+						Destroy (cs);	
+				}
+		}
+
 	public void Begin()
 	{
 		if (cs==null)
@@ -49,6 +59,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			currTime = cs.getImageTime(i);                                   //For the next wait.
 			currentFrameLoops = cs.getImageLoops(i);
 			SetAnimation= cs.getImageFrame(i);		
+			Debug.Log(SetAnimation);
 		}
 		SetAnimation= "Anim_Base";//End of anim.
 		PlayingSequence=false;
@@ -81,7 +92,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 			yield return new WaitForSeconds(cs.getSubTime(i)-currTime);
 			currTime = cs.getSubTime(i)+cs.getSubDuration (i);//The time the subtitle finishes at.
-			mlCuts.Set("[FFFFFF]" + StringController.instance.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
+			mlCuts.Set(StringController.instance.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
 			yield return new WaitForSeconds(cs.getSubDuration (i));
 			mlCuts.Set("");//Clear the control.
 		}
@@ -130,7 +141,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			//	UWHUD.instance.window.UnSetFullScreen();
 			//}
 			//GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;//?
-			
+				
 
 			//chains.ActiveControl=0;
 			//UWHUD.instance.RefreshPanels(PANELNAME);
@@ -156,6 +167,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 							SetAnimation= "Anim_Base";//End of anim.
 							PlayingSequence=false;
 							PostAnimPlay();
+							StopAllCoroutines();	
 							//TargetControl.gameObject.SetActive(false);
 							UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
 							Destroy (cs);	

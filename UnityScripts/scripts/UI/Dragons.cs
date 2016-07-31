@@ -2,61 +2,133 @@
 using System.Collections;
 using UnityEngine.UI;
 public class Dragons : GuiBase {
-	//Code to change the animation frames of the dragons.
 
-	public RawImage[] Tail=new RawImage[4];
-	public RawImage[] Arm=new RawImage[4];
-	public RawImage[] Base=new RawImage[5];
-	public RawImage[] Head=new RawImage[4];
+	public static Dragons Instance;
+	public Animator animTailLeft;
+	public Animator animTailRight;
 
-	public int SetBase=0; int PrevBase=-1;
-	public int SetTail=0; int PrevTail=-1;
-	public int SetArm=0;  int PrevArm=-1;
-	public int SetHead=0; int PrevHead=-1;
+	public Animator animMainLeft;
+	public Animator animMainRight;
 
+	public int AnimationCount;//How many actions has the dragon carried out.
+	private int ChangeAfter=5;//Change dragons after this many actions.
+	public bool CurrentSide=false;//False for left. True for Right.
 	
-	public override void Start()
+	//public string CurrentAnimation;
+
+	public override void Start ()
 	{
-		base.Start();
-		for (int i = 0; i<=  Base.GetUpperBound(0);i++)
-		{
-			Base[i].enabled=false;
-		}
-	}
+		base.Start ();
+		Instance=this;
 	
-	// Update is called once per frame
-	void Update () {
-		if (PrevBase!=SetBase)
-		{
-			UpdateDragons(Base,SetBase);
-			PrevBase=SetBase;
-		}
-
-		if (PrevTail!=SetTail)
-		{
-			UpdateDragons(Tail,SetTail);
-			PrevTail=SetTail;
-		}
-	
-		if (PrevArm!=SetArm)
-		{
-			UpdateDragons(Arm,SetArm);
-			PrevArm=SetArm;
-		}
-		if (PrevHead!=SetHead)
-		{
-			UpdateDragons(Head,SetHead);
-			PrevHead=SetHead;
-		}
+		animTailLeft.Play("DragonLeftTailShake");
+		animTailRight.Play("DragonRightTailShake");
+		animMainLeft.Play("DragonLeftIdle");
+		animMainRight.Play("DragonRightIdle");
 	}
 
 
-	void UpdateDragons(RawImage[]parts, int EnabledIndex)
-	{
-		for (int i = 0; i<= parts.GetUpperBound(0);i++)
+		public void IncrementAnimation()
 		{
-			parts[i].enabled= (i==EnabledIndex);
+				AnimationCount++;
+				if (AnimationCount>ChangeAfter)
+				{
+						AnimationCount=0;
+						//CurrentSide=!CurrentSide;
+						if (CurrentSide==true)
+						{
+								animTailRight.Play(GetAnimationName("SHAKE"));
+								CurrentSide=false;
+						}
+						else
+						{
+								animTailLeft.Play(GetAnimationName("SHAKE"));
+								CurrentSide=true;								
+						}
+				}
 		}
-	}
+
+		public static void MoveScroll()
+		{
+				//	Instance.PlayAnimation();
+					if (Instance.CurrentSide)
+					{
+						Instance.animMainRight.Play(Instance.GetAnimationName("HANDS"));
+					}
+					else
+					{
+						Instance.animMainLeft.Play(Instance.GetAnimationName("HANDS"));
+					}
+				Instance.IncrementAnimation();
+		}
+
+
+
+		public string GetAnimationName(string animName)
+		{
+			switch (animName)
+			{
+				case "IDLE":
+						if(CurrentSide)
+						{
+								return "DragonRightIdle";
+						}
+						else
+						{
+								return "DragonLeftIdle";
+						}
+						break;
+
+			case "HANDS":
+						if(CurrentSide)
+						{
+								return "DragonRightHands";
+						}
+						else
+						{
+								return "DragonLeftHands";
+						}
+					break;
+
+			case "SHAKE":
+						if(CurrentSide)
+						{
+								return "DragonRightTailShake";
+						}
+						else
+						{
+								return "DragonLeftTailShake";
+						}
+						break;
+					break;
+
+			case "DUCK":
+						if(CurrentSide)
+						{
+								return "DragonRightDuck";
+						}
+						else
+						{
+								return "DragonLeftDuck";
+						}
+						break;
+					break;
+				default:
+						if(CurrentSide)
+						{
+								return "DragonRightIdle";
+						}
+						else
+						{
+								return "DragonLeftIdle";
+						}
+						break;
+			}
+		}
+
+
+
+
+
 
 }

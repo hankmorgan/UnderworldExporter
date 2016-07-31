@@ -86,7 +86,11 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 		}
 	else
 		{
-		z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ / 100.0;
+		if (currobj.tileX != 99)
+			{
+			z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ / 100.0;
+			}
+		
 		}
 
 	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -1803,18 +1807,8 @@ int target;
 					fprintf(UNITY_FILE, "\"GroundMesh_%d_%d\");",LevelNo, 1);
 					}
 
-
-
-
-
-
-
 				//TODO:Make sure the inventory of the linked object is tagged as in use. 
 				fprintf(UNITY_FILE, "\n\tAddTrapLink(myObj,\"%s\");", UniqueObjectName(objList[currobj.link]));
-
-
-
-
 
 				break;
 			case  A_DOOR_TRAP:
@@ -1855,7 +1849,6 @@ int target;
 				//	{
 					fprintf(UNITY_FILE, "\n\tCreate_a_text_string_trap(myObj,%d,%d);", 9, 64 * (LevelNo)+currobj.owner);//block no and string no
 				//	}
-				break;
 		}
 	
 	if (isTrigger(objList[currobj.link]) || (isButton(objList[currobj.link])) || (isTrap(objList[currobj.link])) || (isLock(objList[currobj.link])))
@@ -2332,7 +2325,7 @@ float offX; float offY; float offZ;
 			{
 			if (objList[i].AlreadyRendered!=1)
 					{
-					
+
 					if (isTrigger(objList[i]))
 						{
 						objList[i].AlreadyRendered = 1;
@@ -2348,6 +2341,9 @@ float offX; float offY; float offZ;
 							{
 							case A_MOVE_TRIGGER:
 								RenderUnityEntityA_MOVE_TRIGGER(game, offX, offY, offZ, objList[i], objList, LevelInfo);
+								break;
+							case A_PICK_UP_TRIGGER:
+								RenderUnityEntityA_PICK_UP_TRIGGER(game, offX, offY, offZ, objList[i], objList, LevelInfo);
 								break;
 							default:
 								RenderUnityTrigger(game, offX, offY, offZ, objList[i], objList, LevelInfo);

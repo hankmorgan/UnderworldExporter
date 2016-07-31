@@ -9,6 +9,8 @@ public class chains : GuiBase_Draggable {
 	public void OnClick()
 	{
 	if (Dragging==true){return;}
+	if (UWHUD.instance.isRotating==true){return;}
+
 	 switch (ActiveControl)
 		{
 		case UWHUD.HUD_MODE_INVENTORY://Inventory -> Stats

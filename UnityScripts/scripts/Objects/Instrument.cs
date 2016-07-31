@@ -56,6 +56,49 @@ public class Instrument : object_base {
 		UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (1,250));
 	}
 
+		private void MusicInstrumentInteaction()
+		{
+				if (Input.GetKeyDown("1"))
+				{PlayNote (1);}
+				if (Input.GetKeyDown("2"))
+				{PlayNote (2);}
+				if (Input.GetKeyDown("3"))
+				{PlayNote (3);}
+				if (Input.GetKeyDown("4"))
+				{PlayNote (4);}
+				if (Input.GetKeyDown("5"))
+				{PlayNote (5);}
+				if (Input.GetKeyDown("6"))
+				{PlayNote (6);}
+				if (Input.GetKeyDown("7"))
+				{PlayNote (7);}
+				if (Input.GetKeyDown("8"))
+				{PlayNote (8);}
+				if (Input.GetKeyDown("9"))
+				{PlayNote (9);}
+				if (Input.GetKeyDown("0"))
+				{PlayNote (10);}
+				if (Input.GetKeyDown(KeyCode.Escape))
+				{
+						//000~001~251~You put the instrument down.
+						PlayingInstrument=false;
+						CurrentInstrument="";
+						WindowDetectUW.WaitingForInput=false;
+						playerUW.playerMotor.enabled=true;
+						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
+						playerUW.mus.Resume();
+						//354237875
+						if (NoteRecord=="354237875")
+						{
+								UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
+						}
+						else
+						{
+								Debug.Log (NoteRecord);
+						}
+				}		
+		}
+
 		/// <summary>
 		/// Plays the notes to match the keys pressed
 		/// </summary>
@@ -63,46 +106,7 @@ public class Instrument : object_base {
 	{
 		if ((PlayingInstrument == true) && (CurrentInstrument==this.name))
 		{
-
-			if (Input.GetKeyDown("1"))
-				{PlayNote (1);}
-			if (Input.GetKeyDown("2"))
-				{PlayNote (2);}
-			if (Input.GetKeyDown("3"))
-				{PlayNote (3);}
-			if (Input.GetKeyDown("4"))
-				{PlayNote (4);}
-			if (Input.GetKeyDown("5"))
-				{PlayNote (5);}
-			if (Input.GetKeyDown("6"))
-				{PlayNote (6);}
-			if (Input.GetKeyDown("7"))
-				{PlayNote (7);}
-			if (Input.GetKeyDown("8"))
-				{PlayNote (8);}
-			if (Input.GetKeyDown("9"))
-				{PlayNote (9);}
-			if (Input.GetKeyDown("0"))
-				{PlayNote (10);}
-			if (Input.GetKeyDown(KeyCode.Escape))
-			{
-				//000~001~251~You put the instrument down.
-				PlayingInstrument=false;
-				CurrentInstrument="";
-				WindowDetectUW.WaitingForInput=false;
-				playerUW.playerMotor.enabled=true;
-				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
-				playerUW.mus.Resume();
-				//354237875
-				if (NoteRecord=="354237875")
-				{
-					UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-				}
-				else
-				{
-					Debug.Log (NoteRecord);
-				}
-			}
+			MusicInstrumentInteaction();			
 		}
 	}
 

@@ -9,6 +9,7 @@ public class MainMenuHud : GuiBase {
 
 		//References to hud elements
 		public GameObject CharGen;//panel
+		public GameObject OpScr;
 		public Text CharName;
 		public Text CharGender;
 		public Text CharClass;
@@ -53,7 +54,7 @@ public class MainMenuHud : GuiBase {
 						CharSkillName[i].text="";
 						CharSkillVal[i].text="";
 				}
-				CharGenBody.texture=Resources.Load <Texture2D> (_RES +"/Sprites/texture_blank");;
+				CharGenBody.texture=Resources.Load <Texture2D> (_RES +"/Sprites/texture_blank");
 		}
 
 		void Start()
@@ -66,7 +67,9 @@ public class MainMenuHud : GuiBase {
 							cursorSizeX,
 							cursorSizeY);
 					//Play the splash screens.
+					CharGen.SetActive(false);
 					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+					UWHUD.instance.CutScenesFull.End();
 					Cutscene_Splash ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Splash>();
 					UWHUD.instance.CutScenesFull.cs=ci;
 					UWHUD.instance.CutScenesFull.Begin();
@@ -98,6 +101,7 @@ public class MainMenuHud : GuiBase {
 					case 1: // Create Character
 							MenuMode=1;
 							CharGen.SetActive(true);
+							OpScr.SetActive(false);
 							CharGenQuestion.text=getQuestion(0);
 							InitChargenScreen();
 							PlaceButtons(Chargen.GetChoices(Chargen.STAGE_GENDER,-1),false);
@@ -287,6 +291,7 @@ public class MainMenuHud : GuiBase {
 				//CharNameAns=EnterCharName.text;
 				CharName.text=EnterCharName.text;
 				GameWorldController.instance.playerUW.CharName=EnterCharName.text;
+				EnterCharName.gameObject.SetActive(false);
 				ChargenClick(0);
 		}
 

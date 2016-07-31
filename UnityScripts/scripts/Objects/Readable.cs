@@ -44,7 +44,7 @@ public class Readable : object_base {
 				}
 				else
 				{
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (3,objInt().Link - 0x200));
+					UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (3,objInt().Link - 0x200));
 				}
 				return true;
 			}

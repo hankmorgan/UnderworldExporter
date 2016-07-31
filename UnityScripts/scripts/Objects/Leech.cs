@@ -8,7 +8,7 @@ public class Leech : object_base {
 
 public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand!="")
+		if (playerUW.playerInventory.ObjectInHand=="")
 		{
 			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,224));

@@ -396,8 +396,10 @@ public class WindowDetectUW : WindowDetect {
 
 		UWHUD.instance.EnableDisableControl(UWHUD.instance.main_window,false);
 		RectTransform pos= this.GetComponent<RectTransform>();
-		pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
-		pos.sizeDelta=new Vector2(800.0f, 600f);
+		//pos.localPosition = new Vector3(0.0f,0.0f,0.0f);
+		//pos.sizeDelta=new Vector2(800.0f, 600f);
+		pos.localPosition = new Vector3(0f,0f,0f);
+		pos.sizeDelta = new Vector3(0f, 0f);
 		playerUW.playerCam.rect= new Rect(0.0f,0.0f,1.0f,1.0f);
 		UWHUD.instance.RefreshPanels(-1);//refresh controls
 	}
@@ -412,8 +414,11 @@ public class WindowDetectUW : WindowDetect {
 		setPositions();
 		UWHUD.instance.EnableDisableControl(UWHUD.instance.main_window,true);
 		RectTransform pos= this.GetComponent<RectTransform>();
-		pos.localPosition = new Vector3(-55.5f,73.0f,0.0f);
-		pos.sizeDelta=new Vector2(430.0f, 340f);
+		//pos.localPosition = new Vector3(-55.5f,73.0f,0.0f);
+
+		pos.localPosition = new Vector3(-22f,25f,0f);
+		pos.sizeDelta = new Vector3(-148f, -88f);
+		//pos.sizeDelta=new Vector2(430.0f, 340f);
 		playerUW.playerCam.rect= new Rect(0.163f,0.335f,0.54f,0.572f);
 		UWHUD.instance.RefreshPanels(-1);//refresh controls
 	}
@@ -478,10 +483,16 @@ public class WindowDetectUW : WindowDetect {
 				{
 					CursorPosition.center = Event.current.mousePosition;						
 				}
-				
 				GUI.DrawTexture (CursorPosition,UWHUD.instance.CursorIcon);
-
-			}		
+			}	
+			else
+				{
+					if (UWHUD.instance.MouseLookCursor.texture.name != UWHUD.instance.CursorIcon.name)	
+					{
+						UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;	
+					}
+				}
+	
 		}
 	}
 }

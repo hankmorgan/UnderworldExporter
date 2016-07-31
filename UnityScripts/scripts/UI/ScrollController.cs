@@ -16,12 +16,15 @@ public class ScrollController : GuiBase {
 	public int ptr;
 	public int MaxEntries;
 
+	public bool useDragon;
+
 	public void Add(string WhatToSay)
 	{
 		if (WhatToSay==null)
 		{
 			WhatToSay="";
 		}
+		WhatToSay=	WhatToSay.Replace("\\n","\n");
 		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
 		
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
@@ -49,7 +52,6 @@ public class ScrollController : GuiBase {
 			if (i < Paragraphs.GetUpperBound(0))
 			{//TODO:Pause for more when not the last paragraph. 
 				ListAdd("[MORE]");
-				//yield return StartCoroutine(WaitForMore());
 			}
 		}
 	//NewUIOUt.text=uiIn.textLabel.text;
@@ -104,5 +106,9 @@ public class ScrollController : GuiBase {
 			result = result+ txtToDisplay[i] + "\n";
 		}
 		NewUIOUt.text=result;
+				if (useDragon)
+				{
+						Dragons.MoveScroll();
+				}
 	}
 }
