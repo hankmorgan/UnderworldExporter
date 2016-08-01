@@ -249,10 +249,10 @@ public class UWCombat : Combat {
 	{
 		switch (GameWorldController.instance.playerUW.Body)
 		{
-		case 1:
+		case 0:
+		case 2 :
 		case 3:
 		case 4:
-		case 5:
 			return "White";
 		default:
 			return "Black";

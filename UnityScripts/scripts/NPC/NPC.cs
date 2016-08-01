@@ -294,7 +294,6 @@ public class NPC : object_base {
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
 				npc_whoami=256+(objInt.item_id -64);
 			}
-			//Conversation cnv = (Conversation)this.GetComponent("Conversation_"+npc_whoami);//Get the conversation object
 			Conversation cnv =this.GetComponent<Conversation>();
 			if (cnv!=null)
 			{	
@@ -302,7 +301,9 @@ public class NPC : object_base {
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
 				cnv.WhoAmI=npc_whoami;
-				//Conversation.maincam=Camera.main;//To control the camera from conversation scripts
+				UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);
+				UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
+				
 				StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction
 			}
 			else

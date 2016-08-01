@@ -76,6 +76,19 @@ public class MainMenuHud : GuiBase {
 			}
 		}
 
+		void Update()
+		{
+				if (MenuMode==1)
+				{
+						if (Input.GetKey(KeyCode.Escape))
+						{
+								MenuMode=0;
+								OpScr.SetActive(true);
+								CharGen.SetActive(false);							
+						}
+				}
+		}
+
 		void OnGUI()
 		{
 				CursorPosition.center = Event.current.mousePosition;
@@ -388,7 +401,7 @@ public class MainMenuHud : GuiBase {
 					myObj.transform.SetParent(CharGen.transform);
 					myObj.GetComponent<ChargenButton>().SubmitTarget=this;
 					myObj.GetComponent<ChargenButton>().Value=i;
-					myObj.GetComponent<RectTransform>().anchoredPosition=new Vector3(70f, 90 - i *35f);
+					myObj.GetComponent<RectTransform>().anchoredPosition=new Vector3(70f, 70 - i *35f);
 					myObj.GetComponent<RectTransform>().localScale=new Vector2(1.0f,1.0f);
 					//Load the protraits					
 					myObj.GetComponent<ChargenButton>().ButtonImage.texture = (Texture2D)Resources.Load(_RES +"/Hud/Chargen/chrbtns_" + (GenderPortraitIndex+i).ToString("0000"));

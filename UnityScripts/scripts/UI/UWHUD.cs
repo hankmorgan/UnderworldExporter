@@ -83,6 +83,8 @@ public class UWHUD : HUD {
 		//Hud animation related
 		public bool isRotating;
 
+		public Text PCName;
+		public Text NPCName;
 
 
 		void Awake()
@@ -98,9 +100,7 @@ public class UWHUD : HUD {
 		public void RefreshPanels(int ActivePanelMode)
 		{
 				
-				if (ActivePanelMode!=-1)
-				{//-1 is just a refresh.
-						switch (ActivePanelMode)
+					switch (ActivePanelMode)
 						{
 						case -1:
 								UpdatePanelStates();
@@ -186,53 +186,58 @@ public class UWHUD : HUD {
 								UpdatePanelStates();
 								break;
 						}	
+				if(ActivePanelMode!=-1)
+				{
 						chains.ActiveControl=ActivePanelMode;
 				}
-
-
-
-
-
-
+						
 		}
 
 
 		IEnumerator RotatePanels(GameObject fromPanel, GameObject toPanel)
 		{
-				
-				Quaternion fromQ= fromPanel.GetComponent<RectTransform>().rotation;;
-				Quaternion toQ = toPanel.GetComponent<RectTransform>().rotation; 
-
-				fromPanel.GetComponent<RectTransform>().SetSiblingIndex(4);
-				toPanel.GetComponent<RectTransform>().SetSiblingIndex(5);
-
-				float rate = 1.0f/0.5f;
-				float index = 0.0f;
-
-				isRotating=true;
-				while (index <1.0f)
+				if (fromPanel==toPanel)
 				{
-						fromPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (fromQ,toQ,index);
-						toPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (toQ,fromQ,index);
-						if (index>=0.5f)
-						{
-								EnableDisableControl(toPanel,true);
-								EnableDisableControl(fromPanel,false);	
-						}
-						else
-						{
-								EnableDisableControl(toPanel,false);
-								EnableDisableControl(fromPanel,true);		
-						}
-						index += rate * Time.deltaTime;
-						yield return new WaitForSeconds(0.01f);
+						UpdatePanelStates();
+						yield break;//Don't bother if the same control.
 				}
-				toPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
-				fromPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
-				UpdatePanelStates();
-				isRotating=false;
-				currentPanel=toPanel;
+				else
+				{
+					Quaternion fromQ= fromPanel.GetComponent<RectTransform>().rotation;;
+					Quaternion toQ = toPanel.GetComponent<RectTransform>().rotation; 
+
+					fromPanel.GetComponent<RectTransform>().SetSiblingIndex(4);
+					toPanel.GetComponent<RectTransform>().SetSiblingIndex(5);
+
+					float rate = 1.0f/0.5f;
+					float index = 0.0f;
+
+					isRotating=true;
+					while (index <1.0f)
+					{
+							fromPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (fromQ,toQ,index);
+							toPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (toQ,fromQ,index);
+							if (index>=0.5f)
+							{
+									EnableDisableControl(toPanel,true);
+									EnableDisableControl(fromPanel,false);	
+							}
+							else
+							{
+									EnableDisableControl(toPanel,false);
+									EnableDisableControl(fromPanel,true);		
+							}
+							index += rate * Time.deltaTime;
+							yield return new WaitForSeconds(0.01f);
+					}
+					fromPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
+					toPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+					UpdatePanelStates();
+					isRotating=false;
+					currentPanel=toPanel;
+				}
 		}
+
 
 
 

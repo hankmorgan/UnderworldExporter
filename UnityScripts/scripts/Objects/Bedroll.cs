@@ -48,16 +48,20 @@ public class Bedroll : object_base {
 						}
 					}
 				else
-					{
-					if (IsGaramonTime())
-						{//PLay a garamon dream
-						UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
-						UWHUD.instance.CutScenesFull.SetAnimation="cs000_n04";
+					{	
+						if (playerUW.FoodLevel>=3)					
+						{
+								if (IsGaramonTime())
+								{//PLay a garamon dream
+										UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+										UWHUD.instance.CutScenesFull.SetAnimation="cs000_n04";
+								}
+								else
+								{//Regular sleep with a fade to black
+										UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+								}	
 						}
-						else
-						{//Regular sleep with a fade to black
-						UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
-						}
+					
 					}
 				for (int i=playerUW.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
 					{
@@ -68,6 +72,7 @@ public class Bedroll : object_base {
 					else
 						{//Too hungry to sleep.
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,17));
+						UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);		
 						playerUW.Fatigue+=i;
 						return true;
 						}

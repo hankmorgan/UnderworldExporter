@@ -87,6 +87,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	
 	IEnumerator PlayCutsSubtitle()
 	{
+		mlCuts.Set("");
 		float currTime=0.0f;
 		for (int i = 0; i<cs.getNoOfSubs(); i++)
 		{
@@ -146,6 +147,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			//chains.ActiveControl=0;
 			//UWHUD.instance.RefreshPanels(PANELNAME);
 			SetAnimation= "Anim_Base";//Clears out the animation.
+			mlCuts.Set("");
 			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,true);			
 		}
 		else

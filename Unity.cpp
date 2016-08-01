@@ -88,7 +88,11 @@ void RenderUnityEntityA_MOVE_TRIGGER(int game, float x, float y, float z, Object
 		{
 		if (currobj.tileX != 99)
 			{
-			z = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ / 100.0;
+			float newZ = LevelInfo[currobj.tileX][currobj.tileY].floorHeight*BrushSizeZ / 100.0;
+			if (z < newZ)
+				{
+				z=newZ;
+				}
 			}
 		
 		}
