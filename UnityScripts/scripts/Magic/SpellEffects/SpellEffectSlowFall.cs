@@ -9,20 +9,20 @@ public class SpellEffectSlowFall : SpellEffect {
 	public override void ApplyEffect ()
 	{
 		base.ApplyEffect ();
-		playerUW.isFloating=true;
+		GameWorldController.instance.playerUW.isFloating=true;
 	}
 
 	void Update()
 	{
 		if (Active==true)
 		{//Make sure the effect is continually applied.
-			playerUW.isFloating=true;
+			GameWorldController.instance.playerUW.isFloating=true;
 		}
 	}
 
 	public override void CancelEffect ()
 	{
-		playerUW.isFloating=false;
+		GameWorldController.instance.playerUW.isFloating=false;
 		base.CancelEffect ();
 	}
 }

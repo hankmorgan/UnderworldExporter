@@ -16,7 +16,7 @@ public class an_inventory_trap : trap_base {
 	{
 		int itemToFind = objInt().Quality <<5 | objInt().Owner;
 		ObjectFound=false;
-		ObjectInteraction foundObjInt = playerUW.playerInventory.findObjInteractionByID(itemToFind);
+		ObjectInteraction foundObjInt = GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(itemToFind);
 		if (foundObjInt!=null)
 		{
 			ObjectFound=true;

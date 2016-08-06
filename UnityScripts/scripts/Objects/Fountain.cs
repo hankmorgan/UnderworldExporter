@@ -6,18 +6,18 @@ public class Fountain : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			if ((objInt().isEnchanted==true) &&(objInt().Link>=512))
 			{
-				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,objInt().Link-512,Magic.SpellRule_TargetSelf);
+				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,objInt().Link-512,Magic.SpellRule_TargetSelf);
 			}
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,237));
 			return true;
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());		
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());		
 		}
 	}
 }

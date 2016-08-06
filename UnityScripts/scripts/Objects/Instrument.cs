@@ -21,7 +21,7 @@ public class Instrument : object_base {
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (playerUW.playerInventory.ObjectInHand=="")
+			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 			{
 				if (PlayingInstrument==false)
 				{
@@ -31,7 +31,7 @@ public class Instrument : object_base {
 			}
 			else
 			{
-				return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+				return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 			}
 		}
 		else
@@ -47,10 +47,10 @@ public class Instrument : object_base {
 	public void PlayInstrument()
 	{
 		WindowDetectUW.WaitingForInput=true;
-		playerUW.playerMotor.enabled=false;
+		GameWorldController.instance.playerUW.playerMotor.enabled=false;
 		PlayingInstrument=true;
 		CurrentInstrument=this.name;
-		playerUW.mus.Stop ();
+		GameWorldController.instance.playerUW.mus.Stop ();
 		NoteRecord="";
 		//000~001~250~You play the instrument.  (Use 0-9 to play, or ESC to return to game)
 		UWHUD.instance.MessageScroll.Set (StringController.instance.GetString (1,250));
@@ -84,9 +84,9 @@ public class Instrument : object_base {
 						PlayingInstrument=false;
 						CurrentInstrument="";
 						WindowDetectUW.WaitingForInput=false;
-						playerUW.playerMotor.enabled=true;
+						GameWorldController.instance.playerUW.playerMotor.enabled=true;
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
-						playerUW.mus.Resume();
+						GameWorldController.instance.playerUW.mus.Resume();
 						//354237875
 						if (NoteRecord=="354237875")
 						{

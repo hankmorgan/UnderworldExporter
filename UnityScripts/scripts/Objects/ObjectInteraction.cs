@@ -6,7 +6,10 @@ using RAIN.Core;
 using RAIN.Minds;
 using RAIN.Navigation;
 
-
+/// <summary>
+/// Object interaction. Does a lot....
+/// Use for common object actions. Weight, qty, type, how to display the object. 
+/// </summary>
 public class ObjectInteraction : UWEBase {
 
 		public const int NPC_TYPE =0;
@@ -103,38 +106,59 @@ public class ObjectInteraction : UWEBase {
 		public const int MOONSTONE =89;
 		public const int LEECH= 91;
 		public const int FISHING_POLE= 92;
-		//public static Text MessageLog;
 
-		public Sprite InventoryDisplay;
-		public Sprite EquipDisplay;
-		private Sprite WorldDisplay;
-
-		public string EquipString;
-
+		/// <summary>
+		/// The sprite index number to use when displaying this object in the game world.
+		/// </summary>
 		public int WorldDisplayIndex;
+
+		/// <summary>
+		/// The Sprite index number to use when displaying this object in the inventory. (Note that armour is handled differently on the paperdoll- Uses equip string from objectmasters)
+		/// </summary>
 		public int InvDisplayIndex;
 
+		/// <summary>
+		/// Ignores the sprite indices and just uses what it is generated with. Usually switches and signs that use tmobj.
+		/// </summary>
 		public bool ignoreSprite;//For button handlers that do their own sprite work.
 
+		/// <summary>
+		/// The item Id. Uses the constants from above.
+		/// </summary>
 		public int item_id;
+
+		/// <summary>
+		/// The flags from UW on this object.
+		/// </summary>
 		public int flags;
-		public bool InUse;
 
-		//public static GameObject InvMarker;//=GameObject.Find ("InventoryMarker");
 
-		public static UWCharacter playerUW;
+		//public bool InUse;
 
+		/// <summary>
+		/// Indicates if the object can be picked up.
+		/// </summary>
 		public bool CanBePickedUp;
+
+		/// <summary>
+		/// Indicates if the object can be used.
+		/// </summary>
 		public bool CanBeUsed;//unimplemented
-		//public bool CanBeMoved;//unimplemented
 
-		public bool PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
+		/// <summary>
+		/// Tells if object is in the inventory or in the open world in case there is different behaviours needed depending on the case.
+		/// </summary>
+		public bool PickedUp;
 
-		private AudioSource audSource;
+		//private AudioSource audSource;
 
+		/// <summary>
+		/// The inventory slot that the object is in.
+		/// </summary>
 		public int inventorySlot=-1;
 
-		public int ItemType; //UWexporter item type id
+
+		//public int ItemType; //UWexporter item type id
 
 		//UW specific info.
 		public int Owner;	//Used for keys
@@ -200,48 +224,17 @@ public class ObjectInteraction : UWEBase {
 		// Use this for initialization
 		//public bool DebugThis;
 		void Start () {
-			/*	if (DebugThis)
-				{
-						Debug.Log("this");
-				}*/
-				isAnimated=false;
-
-				//if (MessageLog==null)
-				//{
-				//MessageLog = (UILabel)GameObject.FindWithTag("MessageLog").GetComponent<UILabel>();
-				//}
-
-				//if (InvMarker==null)
-				//{
-				//InvMarker=GameWorldController.instance.InventoryMarker;//GameObject.Find ("InventoryMarker");
-				//}
-				sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
-
-				/*		if (this.GetComponent<EmptyObjectIdentifier>()!=null)
-				{
-						//this.gameObject.transform.DestroyChildren();
-						//DestroyImmediate(this.gameObject);
-						//KillMe=true;
-				}*/
-				//this.ser
-				/*if ( ( (this.gameObject.transform.position==Vector3.zero) || (this.gameObject.transform.position==new Vector3(0,2000,2000)))  && (this.transform.parent==null))
-		{
-				Debug.Log(this.gameObject.name+"item at zero");
-				Destroy(this.gameObject);
-		}*/
+			isAnimated=false;
+			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
 
 		void Update()
 		{
-			/*	if (DebugThis)
-				{
-						Debug.Log("thisupdate");
-				}*/
-				if ((animationStarted==false) && (ignoreSprite==false))
-				{
-						UpdateAnimation();
+			if ((animationStarted==false) && (ignoreSprite==false))
+			{
+					UpdateAnimation();
 
-				}
+			}
 		}
 
 		/***REmoved for perf 
@@ -293,10 +286,10 @@ public class ObjectInteraction : UWEBase {
 				if (sr !=null)
 				{
 						sr.sprite= tc.RequestSprite(WorldDisplayIndex,isAnimated);
-						InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
+						//InventoryDisplay= tc.RequestSprite(InvDisplayIndex,isAnimated);
 						if (inventorySlot!=-1)
 						{
-								playerUW.playerInventory.Refresh(inventorySlot);
+								GameWorldController.instance.playerUW.playerInventory.Refresh(inventorySlot);
 						}
 						animationStarted=true;
 				}
@@ -309,41 +302,49 @@ public class ObjectInteraction : UWEBase {
 
 		public Sprite GetInventoryDisplay()
 		{
-				if (InventoryDisplay==null)
-				{
-						InventoryDisplay =tc.RequestSprite(InvDisplayIndex,isAnimated);
-				}
-				return InventoryDisplay;
+				//if (InventoryDisplay==null)
+				//{
+				//		InventoryDisplay =tc.RequestSprite(InvDisplayIndex,isAnimated);
+				//}
+				//return InventoryDisplay;
+				return tc.RequestSprite(InvDisplayIndex,isAnimated);
 		}
 
-		public void SetInventoryDisplay(Sprite NewSprite)
-		{
-				InventoryDisplay=NewSprite;
-		}
+		//public void SetInventoryDisplay(Sprite NewSprite)
+		//{
+		//		InventoryDisplay=NewSprite;
+		//}
 
 		public Sprite GetEquipDisplay()
 		{
-				if (EquipDisplay==null)
-				{
-						EquipDisplay= tc.RequestSprite(EquipString);
-				}
-				return EquipDisplay;
+				//if (EquipDisplay==null)
+				//{
+				//		EquipDisplay= tc.RequestSprite(EquipString);
+				//}
+				return  tc.RequestSprite(GetEquipString());
 		}
 
-		public void SetEquipDisplay(Sprite NewSprite)
+		public string GetEquipString()
 		{
-				EquipDisplay=NewSprite;
+			return this.GetComponent<object_base>().getEquipString();
 		}
+
+		//public void SetEquipDisplay(Sprite NewSprite)
+		//{
+		//		EquipDisplay=NewSprite;
+		//}
 
 		public Sprite GetWorldDisplay()
 		{
-				return WorldDisplay;
+				//return WorldDisplay;
+				return sr.sprite;
 		}
 
 		public void SetWorldDisplay(Sprite NewSprite)
 		{
-				WorldDisplay=NewSprite;
-				sr.sprite=WorldDisplay;
+				//WorldDisplay=NewSprite;
+				//sr.sprite=WorldDisplay;
+				sr.sprite=NewSprite;
 		}
 
 		public void RefreshAnim()
@@ -351,15 +352,24 @@ public class ObjectInteraction : UWEBase {
 				animationStarted=false;
 		}
 
-		public UWCharacter getPlayerUW()
+		/*public UWCharacter getPlayerUW()
 		{//Quickly get the player character for other components.
 				return playerUW;
-		}
+		}*/
 
 		//	public StringController getStringController()
 		//{//Quickly get the string controller for other components.
 		//	return SC;
 		//}
+
+		/// <summary>
+		/// Gets the type of the item from object masters. UWE object type codes.
+		/// </summary>
+		/// <returns>The item type.</returns>
+		public int GetItemType()
+		{
+			return GameWorldController.instance.objectMaster.type[item_id];
+		}
 
 		public ScrollController getMessageLog()
 		{
@@ -412,7 +422,7 @@ public class ObjectInteraction : UWEBase {
 				GameObject ObjectInHand =null;
 				object_base item=null;//Base object class
 
-				ObjectInHand=playerUW.playerInventory.GetGameObjectInHand();
+				ObjectInHand=GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand();
 				if (ObjectInHand != null)
 				{
 						//First do a combineobject test. This will implement object combinatiosn defined by UW1/2
@@ -616,10 +626,10 @@ public class ObjectInteraction : UWEBase {
 								}
 
 								//Create the new object
-								GameObject myObj=  new GameObject("SummonedObject_" + playerUW.PlayerMagic.SummonCount++);
+								GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
 								myObj.layer=LayerMask.NameToLayer("UWObjects");
-								myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
-								myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
+								myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
+								myObj.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
 								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + lstOutput[i],true);
 								ObjectMasters objM = GameWorldController.instance.objectMaster;
 								int x = lstOutput[i];
@@ -638,12 +648,13 @@ public class ObjectInteraction : UWEBase {
 										//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 										myObj.AddComponent<object_base>();break;
 								}
-								playerUW.playerInventory.ObjectInHand=myObj.name;
+								GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObj.name;
 								ObjectInteraction CreatedObjectInt = myObj.GetComponent<ObjectInteraction>();
 								if (CreatedObjectInt!=null)
 								{
 										CreatedObjectInt.UpdateAnimation();
-										UWHUD.instance.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
+										//UWHUD.instance.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
+										UWHUD.instance.CursorIcon=CreatedObjectInt.GetInventoryDisplay().texture;
 								}
 
 								UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
@@ -659,20 +670,20 @@ public class ObjectInteraction : UWEBase {
 		{
 				if((isQuant ==false) || ((isQuant) && (Link==1)) || (isEnchanted==true))
 				{//the last of the item or is not a quantity;
-						Container cn = playerUW.playerInventory.GetCurrentContainer();
+						Container cn = GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer();
 						//Code for objects that get destroyed when they are used. Eg food, potion, fuel etc
 						if (!cn.RemoveItemFromContainer(this.name))
 						{//Try and remove from the paperdoll if not found in the current container.
-								playerUW.playerInventory.RemoveItemFromEquipment(this.name);
+								GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(this.name);
 						}
-						playerUW.playerInventory.Refresh();
+						GameWorldController.instance.playerUW.playerInventory.Refresh();
 						Destroy (this.gameObject);
 				}
 				else
 				{//just decrement the quantity value;
 						Link--;
 						ObjectInteraction.Split (this);
-						playerUW.playerInventory.Refresh();
+						GameWorldController.instance.playerUW.playerInventory.Refresh();
 
 				}
 
@@ -816,18 +827,18 @@ public class ObjectInteraction : UWEBase {
 
 				//		objInteract.WorldString=WorldString;
 				//		objInteract.InventoryString=InventoryString;
-				objInteract.EquipString=EquipString;
+				//objInteract.EquipString=EquipString;
 				//objInteract.InventoryDisplay=InventoryString;
-				objInteract.ItemType=ItemType;//UWexporter id type
+				//objInteract.GetItemType()=ItemType;//UWexporter id type
 				objInteract.item_id=ItemId;//Internal ItemID
 				objInteract.Link=link;
 				objInteract.Quality=Quality;
 				objInteract.Owner=Owner;
 				objInteract.flags=flags;
-				if (inUseFlag==1)
-				{
-						objInteract.InUse=true;
-				}
+				//if (inUseFlag==1)
+				//{
+						//objInteract.InUse=true;
+				//}
 
 
 
@@ -836,7 +847,7 @@ public class ObjectInteraction : UWEBase {
 						objInteract.CanBePickedUp=true;
 						Rigidbody rgd = parentObj.AddComponent<Rigidbody>();
 						rgd.angularDrag=0.0f;
-						WindowDetectUW.FreezeMovement(myObj);
+						GameWorldController.FreezeMovement(myObj);
 				}
 
 				if (ItemType !=ObjectInteraction.ANIMATION)
@@ -930,16 +941,6 @@ public class ObjectInteraction : UWEBase {
 				splitFrom.GetComponent<object_base>().Split ();
 		}
 
-		/*
-	void OnCollisionEnter(Collision info) {
-		
-		if(info.relativeVelocity.magnitude > 3.0f)
-		{ 
-			Debug.Log ("bounce");
-		}
-		
-	}
-*/
 
 		public ObjectInteraction CopyGameObjectInteraction(GameObject target)
 		{
@@ -949,22 +950,22 @@ public class ObjectInteraction : UWEBase {
 				//objIntNew.InventoryDisplay=InventoryDisplay;
 				//objIntNew.EquipDisplay=EquipDisplay;
 				//objIntNew.WorldDisplay=WorldDisplay;
-				objIntNew.EquipString=EquipString;
+				//objIntNew.EquipString=EquipString;
 				objIntNew.WorldDisplayIndex=WorldDisplayIndex;
 				objIntNew.InvDisplayIndex=InvDisplayIndex;
 				objIntNew.ignoreSprite=ignoreSprite;//For button handlers that do their own sprite work.
 				objIntNew.item_id=item_id;
 				objIntNew.flags=flags;
-				objIntNew.InUse=InUse;
+				//objIntNew.InUse=InUse;
 				//objIntNew.InvMarker=InvMarker;//=GameObject.Find ("InventoryMarker");
 				//objIntNew.playerUW=playerUW;
 				objIntNew.CanBePickedUp=CanBePickedUp;
 				objIntNew.CanBeUsed=CanBeUsed;//unimplemented
 				//public bool CanBeMoved;//unimplemented
 				objIntNew.PickedUp=PickedUp; //Test if object is in the inventory or in the open world in case there is different behaviours needed
-				objIntNew.audSource=audSource;
+				//objIntNew.audSource=audSource;
 				objIntNew.inventorySlot=inventorySlot;
-				objIntNew.ItemType=ItemType; //UWexporter item type id
+				//objIntNew.GetItemType()=ItemType; //UWexporter item type id
 				//UW specific info.
 				objIntNew.Owner=Owner;	//Used for keys
 				objIntNew.Link=Link;	//Also quantity
@@ -981,7 +982,7 @@ public class ObjectInteraction : UWEBase {
 				{
 						Rigidbody rgd = target.AddComponent<Rigidbody>();
 						rgd.angularDrag=0.0f;
-						WindowDetectUW.FreezeMovement(target);
+						GameWorldController.FreezeMovement(target);
 				}
 
 				BoxCollider box =objIntNew.GetComponent<BoxCollider>();
@@ -1004,10 +1005,10 @@ public class ObjectInteraction : UWEBase {
 		public virtual bool ChangeType(int newID, int newType)
 		{//Changes the type of the object. Eg when destroyed and it needs to become debris.
 				item_id=newID;
-				ItemType=newType;
+				//ItemType=newType;
 				WorldDisplayIndex=newID;
 				InvDisplayIndex=newID;
-				Destroy(this.gameObject.GetComponent<object_base>());
+				//Destroy(this.gameObject.GetComponent<object_base>());
 				UpdateAnimation();
 				return true;		
 		}

@@ -5,13 +5,13 @@ public class Readable : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand == "")
+	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
 			return Read ();
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -26,7 +26,7 @@ public class Readable : object_base {
 		//StringController SC = objInt().getStringController();
 		//UILabel ml = objInt().getMessageLog();
 
-		switch (objInt().ItemType)
+		switch (objInt().GetItemType())
 		{
 		case ObjectInteraction.SIGN: //Sign
 			{

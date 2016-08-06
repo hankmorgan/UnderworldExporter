@@ -14,11 +14,11 @@ public class SpellEffectParalyze : SpellEffect {
 		{
 			if (isNPC==false)
 			{//Apply to player
-					if (playerUW==null)
+					if (GameWorldController.instance.playerUW==null)
 					{
-							playerUW= this.GetComponent<UWCharacter>();
+							GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
 					}
-					playerUW.Paralyzed=true;
+					GameWorldController.instance.playerUW.Paralyzed=true;
 			}
 			else
 			{
@@ -41,8 +41,8 @@ public class SpellEffectParalyze : SpellEffect {
 		{
 			if (isNPC==false)
 			{
-				playerUW.Paralyzed=false;
-				playerUW.walkSpeed=3.0f;
+				GameWorldController.instance.playerUW.Paralyzed=false;
+				GameWorldController.instance.playerUW.walkSpeed=3.0f;
 			}
 			else
 			{
@@ -66,7 +66,7 @@ public class SpellEffectParalyze : SpellEffect {
 			}
 			else
 			{
-					playerUW.Paralyzed=true;
+					GameWorldController.instance.playerUW.Paralyzed=true;
 			}
 		}
 

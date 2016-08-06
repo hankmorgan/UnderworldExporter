@@ -27,12 +27,12 @@ public class DoorControl : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand !="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
 		{
-			ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 			//Clear the object in hand
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-			playerUW.playerInventory.ObjectInHand="";
+			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 			return true;	
 		}
 		else
@@ -51,7 +51,7 @@ public class DoorControl : object_base {
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
-			switch (objIntUsed.ItemType)
+			switch (objIntUsed.GetItemType())
 				{
 				case ObjectInteraction.KEY: //Key
 				DoorKey dk = ObjectUsed.GetComponent<DoorKey>();
@@ -96,7 +96,7 @@ public class DoorControl : object_base {
 					{
 					if (Pickable==true)
 						{
-						if (playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
+						if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillPicklock, objIntUsed.Quality))
 							{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,121));
 							UnlockDoor();

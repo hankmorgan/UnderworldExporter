@@ -25,14 +25,14 @@ owner != 0 poison trap
 		{
 			if (Random.Range(0,11) >= 7)
 			{
-				playerUW.CurVIT= playerUW.CurVIT- objInt().Quality;
+				GameWorldController.instance.playerUW.CurVIT= GameWorldController.instance.playerUW.CurVIT- objInt().Quality;
 			}
 		}
 		else//poison version
 		{
-			if (playerUW.Poisoned==false)
+			if (GameWorldController.instance.playerUW.Poisoned==false)
 			{
-				playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
+				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetSelf);
 			}		
 		}
 	}

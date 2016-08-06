@@ -202,7 +202,7 @@ public class Character : UWEBase {
 		//////pInv.JustPickedup=true;//To stop me throwing it away immediately.
 		if (objPicked.GetComponent<Rigidbody>() !=null)
 		{								
-			WindowDetect.FreezeMovement(objPicked.gameObject);
+			GameWorldController.FreezeMovement(objPicked.gameObject);
 		}
 		//Clone the object into the inventory
 				if (WindowDetectUW.UsingRoomManager==true)

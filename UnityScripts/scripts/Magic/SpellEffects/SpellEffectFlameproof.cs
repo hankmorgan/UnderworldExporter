@@ -7,18 +7,18 @@ public class SpellEffectFlameproof : SpellEffect {
 
 	public override void ApplyEffect ()
 	{
-		playerUW.FireProof=true;
+		GameWorldController.instance.playerUW.FireProof=true;
 		base.ApplyEffect ();
 	}
 
 	void Update()
 	{
-		playerUW.FireProof=true;
+		GameWorldController.instance.playerUW.FireProof=true;
 	}
 
 	public override void CancelEffect ()
 	{
-		playerUW.FireProof=false;
+		GameWorldController.instance.playerUW.FireProof=false;
 		base.CancelEffect ();
 	}
 

@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UWPalette : MonoBehaviour {
+/// <summary>
+/// Palette class for texture cycling effects. A cycled and default uncycled palette are stored.
+/// </summary>
+public class UWPalette : UWEBase {
 
-		//public Texture2D Pal;
 		float[] red = new float[256];
 		float[] blue = new float[256];
 		float[] green = new float[256];
@@ -12,16 +14,8 @@ public class UWPalette : MonoBehaviour {
 		float[] Defblue = new float[256];
 		float[] Defgreen = new float[256];
 
-		public Texture test;
-		public bool PaletteReady;
-		//public Texture2D SrcImage;
-		//public Texture2D DstImage;
-		//public Sprite newSprite;
-		//private SpriteRenderer sr;
-		// Use this for initialization
 		void Awake () {
-				//Pal= new Texture2D(256, 1 , TextureFormat.ARGB32, false);
-				//DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
+				//Set the palette RGB values
 				SetPal(0,0,0,4);
 				SetPal(1,0,0,0);
 				SetPal(2,252,148,252);
@@ -278,41 +272,15 @@ public class UWPalette : MonoBehaviour {
 				SetPal(253,12,252,12);
 				SetPal(254,0,0,0);
 				SetPal(255,104,104,120);
-				//		Pal.Apply();
-
-				//sr = this.GetComponent<SpriteRenderer>();
-
-				//Removed to improve perf
-				//InvokeRepeating("UpdateAnimation",0.0f,0.2f);
-
-				//Texture2D output = new Texture2D()
-				/*
-		SpriteRenderer sr = this.GetComponent<SpriteRenderer>();
-		Sprite newSprite= Sprite.Create(sr.sprite.texture,new Rect(0,0,sr.sprite.texture.width,sr.sprite.texture.height), new Vector2(0.5f, 0.0f));
-		//int k=0;
-
-
-		for (int i =0; i<sr.sprite.texture.width;i++)
-		{
-			for (int j =0; j<sr.sprite.texture.height;j++)
-			{
-				newSprite.texture.SetPixel(i,j,GetPal ((int)sr.sprite.texture.GetPixel(i,j).r));
-			}
-
-		}
-		newSprite.texture.Apply();
-
-		sr.sprite= newSprite;
-
-*/
-
 		}
 
+		/// <summary>
+		/// Cycles the palette.
+		/// </summary>
+		/// <param name="start">Start index to cycle</param>
+		/// <param name="end">End index to cycle</param>
 		void CyclePalette(int start, int end)
 		{
-
-				//int start=16;
-				//int end=23;
 				for (int i=end; i>=start;i--)
 				{
 						if (i ==start)
@@ -327,27 +295,18 @@ public class UWPalette : MonoBehaviour {
 				}
 		}
 
+
 		void UpdateAnimation()
 		{
-
-
-
-				//newSprite= Sprite.Create( DstImage,new Rect(0,0,DstImage.width,DstImage.height), new Vector2(0.5f, 0.0f));
-				//   sr.sprite= newSprite;
-				//TODO: Seperate palettes for each type of effect depending on source object.
-				CyclePalette(16,22);//fire
-				CyclePalette(48,51);//water?
-				//CyclePalette(190,200);//fountain?
-				//CyclePalette(100,105);//Silver tree
-
-
-
-				//CyclePalette(1,100);//Spell effects somewhere in here.
-				//UITexture uit =GameObject.Find ("animation_test").GetComponent<UITexture>();
-				//uit.mainTexture=DstImage;
+			CyclePalette(16,22);//fire
+			CyclePalette(48,51);//water?
 		}
 
-
+		/// <summary>
+		/// Applies the cycled palette to a greyscale image
+		/// </summary>
+		/// <returns>The palette.</returns>
+		/// <param name="SrcImage">Source image.</param>
 		public Texture2D ApplyPalette(Texture2D SrcImage)
 		{
 				int ColourIndex;
@@ -365,6 +324,11 @@ public class UWPalette : MonoBehaviour {
 				return DstImage;
 		}
 
+		/// <summary>
+		/// Applies the default palette to a greyscale image.
+		/// </summary>
+		/// <returns>The palette default.</returns>
+		/// <param name="SrcImage">Source image.</param>
 		public Texture2D ApplyPaletteDefault(Texture2D SrcImage)
 		{
 				Texture2D DstImage=new Texture2D(SrcImage.width, SrcImage.height ,SrcImage.format, false);
@@ -382,6 +346,13 @@ public class UWPalette : MonoBehaviour {
 				return DstImage;
 		}
 
+		/// <summary>
+		/// Sets the palette values
+		/// </summary>
+		/// <param name="index">Index.</param>
+		/// <param name="Red">Red.</param>
+		/// <param name="Green">Green.</param>
+		/// <param name="Blue">Blue.</param>
 		void SetPal(int index, float Red, float Green, float Blue)
 		{
 				red[index]=(float)Red/255.0f;
@@ -391,10 +362,15 @@ public class UWPalette : MonoBehaviour {
 				Defred[index]=(float)Red/255.0f;
 				Defgreen[index]=(float)Green/255.0f;
 				Defblue[index]=(float)Blue/255.0f;
-
-				//Pal.SetPixel(index,0,new Color(red,green,blue));
 		}
 
+		/// <summary>
+		/// Updates the palette values
+		/// </summary>
+		/// <param name="index">Index.</param>
+		/// <param name="Red">Red.</param>
+		/// <param name="Green">Green.</param>
+		/// <param name="Blue">Blue.</param>
 		void UpdatePal(int index, float Red, float Green, float Blue)
 		{
 				red[index]=Red;
@@ -402,9 +378,14 @@ public class UWPalette : MonoBehaviour {
 				blue[index]=Blue;
 		}
 
+
+		/// <summary>
+		/// Gets the color at the specified index of the cycled palette.
+		/// </summary>
+		/// <returns>The pal.</returns>
+		/// <param name="index">Index.</param>
 		Color GetPal(int index)
 		{   
-				//Debug.Log (index);
 				if (index !=0)
 				{
 						return new Color(red[index],green[index],blue[index]);
@@ -415,8 +396,14 @@ public class UWPalette : MonoBehaviour {
 				}
 		}
 
+
+		/// <summary>
+		/// Gets the color at the index of the default palette.
+		/// </summary>
+		/// <returns>The pal def.</returns>
+		/// <param name="index">Index.</param>
 		Color GetPalDef(int index)
-		{   //Returns the default palette
+		{  
 				if (index !=0)
 				{
 						return new Color(Defred[index],Defgreen[index],Defblue[index]);

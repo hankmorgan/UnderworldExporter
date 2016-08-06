@@ -180,7 +180,7 @@ public class Container : object_base {
 
 	public void OpenContainer()
 	{
-		playerUW.playerInventory.ContainerOffset=0;
+		GameWorldController.instance.playerUW.playerInventory.ContainerOffset=0;
 		ScrollButtonStatsDisplay.ScrollValue=0;
 		ObjectInteraction currObjInt = this.gameObject.GetComponent<ObjectInteraction>();
 		if (currObjInt.PickedUp==false)
@@ -196,18 +196,18 @@ public class Container : object_base {
 		if (this.isOpenOnPanel==false)
 		{
 			this.isOpenOnPanel=true;
-			ContainerParent=playerUW.playerInventory.currentContainer;
+			ContainerParent=GameWorldController.instance.playerUW.playerInventory.currentContainer;
 		}
-		playerUW.playerInventory.currentContainer=this.name;
-		if (playerUW.playerInventory.currentContainer=="")
+		GameWorldController.instance.playerUW.playerInventory.currentContainer=this.name;
+		if (GameWorldController.instance.playerUW.playerInventory.currentContainer=="")
 		{
-			playerUW.playerInventory.currentContainer=playerUW.name;
-			this.ContainerParent=playerUW.name;
+			GameWorldController.instance.playerUW.playerInventory.currentContainer=GameWorldController.instance.playerUW.name;
+			this.ContainerParent=GameWorldController.instance.playerUW.name;
 		}
 		for (int i = 0; i<8; i++)
 		{
 			string sItem = this.GetItemAt(i);
-			playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
+			GameWorldController.instance.playerUW.playerInventory.SetObjectAtSlot(i+11,sItem);
 		}
 		UWHUD.instance.ContainerOpened.GetComponent<ContainerOpened>().BackpackBg.SetActive(true);
 		if (CountItems()>=8)
@@ -227,7 +227,7 @@ public class Container : object_base {
 	{//Removes the contents of a container out in the real world.
 		int counter;
 		TileMap tm =GameWorldController.instance.Tilemap; //GameObject.Find("Tilemap").GetComponent<TileMap>();
-		WindowDetect.FreezeMovement(this.gameObject);
+		GameWorldController.FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
 		for (int i=0; i<MaxCapacity ();i++)
@@ -255,19 +255,19 @@ public class Container : object_base {
 						RemoveItemFromContainer(i);
 						Spilled.transform.position=randomPoint;
 						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-						WindowDetect.UnFreezeMovement(Spilled);
+						GameWorldController.UnFreezeMovement(Spilled);
 					}
 					else
 					{//No where to put the item. Put it at the containers position.
 						RemoveItemFromContainer(i);
 						Spilled.transform.position=this.transform.position;
 						Spilled.GetComponent<ObjectInteraction>().PickedUp=false;
-						WindowDetect.UnFreezeMovement(Spilled);
+						GameWorldController.UnFreezeMovement(Spilled);
 					}
 				}
 			}
 		}
-		WindowDetect.UnFreezeMovement(this.gameObject);
+		GameWorldController.UnFreezeMovement(this.gameObject);
 	}
 
 
@@ -284,7 +284,7 @@ public class Container : object_base {
 					if (item.GetComponent<ObjectInteraction>()!=null)
 					{
 						item.GetComponent<ObjectInteraction>().PickedUp=NewValue;
-						if (item.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.A_PICK_UP_TRIGGER)
+						if (item.GetComponent<ObjectInteraction>().GetItemType()==ObjectInteraction.A_PICK_UP_TRIGGER)
 						{//Special case
 							item.GetComponent<a_pick_up_trigger>().Activate();
 							//if (item==null)
@@ -395,7 +395,7 @@ public class Container : object_base {
 
 	public override bool use ()
 	{
-		GameObject ObjectInHand=playerUW.playerInventory.GetGameObjectInHand();
+		GameObject ObjectInHand=GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand();
 		//TODO:add object to container or open container.
 		//Container cn = this.gameObject.GetComponent<Container>();
 		if (ObjectInHand == null)
@@ -427,7 +427,7 @@ public class Container : object_base {
 			{
 				if ((ObjectInHand.GetComponent<ObjectInteraction>().isQuant==false) || (ObjectInHand.GetComponent<ObjectInteraction>().isEnchanted))
 				{
-					AddItemToContainer(playerUW.playerInventory.ObjectInHand);
+					AddItemToContainer(GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 				}
 				else
 				{
@@ -438,7 +438,7 @@ public class Container : object_base {
 				{//Container is open for display force a refresh.
 					OpenContainer();
 				}
-				playerUW.playerInventory.ObjectInHand= "";
+				GameWorldController.instance.playerUW.playerInventory.ObjectInHand= "";
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 
 				return true;
@@ -496,12 +496,12 @@ public class Container : object_base {
 		{
 			return true;
 		}
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			return true;
 		}
 		//Test the various rules for this slot
-		ObjectInteraction objInt = playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
+		ObjectInteraction objInt = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 		//If in a non player container check that the object in hand can be added to it.
 		bool TypeTest=false;
 		//If in a non player container check that the container has the weight capacity to accept it.
@@ -510,20 +510,20 @@ public class Container : object_base {
 		switch (cn.ObjectsAccepted)
 		{//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
 		case 0://runes
-			TypeTest=(objInt.ItemType==ObjectInteraction.RUNE);break;
+			TypeTest=(objInt.GetItemType()==ObjectInteraction.RUNE);break;
 		case 1://Arrows
-			TypeTest=(objInt.ItemType==ObjectInteraction.AMMO);break;
+			TypeTest=(objInt.GetItemType()==ObjectInteraction.AMMO);break;
 		case 2://Scrolls
 			TypeTest=(
-				(objInt.ItemType==ObjectInteraction.SCROLL)
+				(objInt.GetItemType()==ObjectInteraction.SCROLL)
 				||
-				(objInt.ItemType==ObjectInteraction.MAGICSCROLL)
+				(objInt.GetItemType()==ObjectInteraction.MAGICSCROLL)
 				||
-				(objInt.ItemType==ObjectInteraction.MAP)
+				(objInt.GetItemType()==ObjectInteraction.MAP)
 				);
 			break;
 		case 3: //Edibles
-			TypeTest=(objInt.ItemType==ObjectInteraction.FOOD);break;
+			TypeTest=(objInt.GetItemType()==ObjectInteraction.FOOD);break;
 		default:
 			TypeTest=true;break;
 		}
@@ -564,7 +564,7 @@ public class Container : object_base {
 					}
 					else
 					{
-						if (obj.GetComponent<ObjectInteraction>().ItemType==ObjectInteraction.CONTAINER)
+						if (obj.GetComponent<ObjectInteraction>().GetItemType()==ObjectInteraction.CONTAINER)
 						{
 							string ans= obj.GetComponent<Container>().findItemOfType(itemid);
 							if (ans!="")

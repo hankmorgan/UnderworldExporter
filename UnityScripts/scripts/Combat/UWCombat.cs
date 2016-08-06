@@ -338,7 +338,7 @@ public class UWCombat : Combat {
 				launchedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 
 				launchedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
-				WindowDetect.UnFreezeMovement(launchedItem);
+				GameWorldController.UnFreezeMovement(launchedItem);
 				Vector3 ThrowDir = ray.GetPoint(dropRange) - ray.origin;
 				///Apply the force along the direction of the ray that the player has targetted along.
 				launchedItem.GetComponent<Rigidbody>().AddForce(ThrowDir*force);

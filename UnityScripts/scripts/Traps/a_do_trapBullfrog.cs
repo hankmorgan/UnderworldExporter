@@ -58,7 +58,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 		{
 			for (int y=0; y<8 ; y++)
 			{
-				GameObject platformTile=GameWorldController.FindTile ((BaseX+x),(BaseY+y),1);
+				GameObject platformTile=GameWorldController.FindTile ((BaseX+x),(BaseY+y),TileMap.SURFACE_FLOOR);
 				heights[x,y]=0;
 				StartCoroutine(MoveTile (platformTile.transform, -platformTile.transform.position,0.1f));
 				//platformTile.transform.position = Vector3.zero;
@@ -78,7 +78,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 						//raise or lower by 2
 					if (((heights[targetX+x,targetY+y]<8) && (dir==+1)) || ((heights[targetX+x,targetY+y]>-4) && (dir==-1)))
 						{
-						GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),1);
+						GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),TileMap.SURFACE_FLOOR);
 						StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,(float)(2*dir) * (0.3f),0f) ,0.1f));
 						heights[targetX+x,targetY+y]+=dir*2;	
 						}
@@ -95,7 +95,7 @@ public class a_do_trapBullfrog : a_do_trap_platform {
 						if (((heights[targetX+x,targetY+y]<8) && (dir==+1)) || ((heights[targetX+x,targetY+y]>-4) && (dir==-1)))
 							{
 							//Raise or lower by 1
-							GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),1);
+							GameObject platformTile=GameWorldController.FindTile ((BaseX+targetX+x),(BaseY+targetY+y),TileMap.SURFACE_FLOOR);
 							StartCoroutine(MoveTile (platformTile.transform, new Vector3(0f,(float)(1*dir) * (0.3f),0f) ,0.1f));
 							heights[targetX+x,targetY+y]+=dir;	
 							}

@@ -30,7 +30,7 @@ The path to the sword hilt on Level3
 			for (int j=0; j<=Y;j++)
 			{
 				//Find the tile at the location.
-				GameObject ExistingTile = GameWorldController.FindTile(triggerX+i,triggerY+j,1);
+				GameObject ExistingTile = GameWorldController.FindTile(triggerX+i,triggerY+j,TileMap.SURFACE_FLOOR);
 				//string Tilename = GameWorldController.GetTileName(TileX+i,TileY+j,1); //Var.GetTileName (TileX+i,TileY+j,1); //ExistingTile.name;
 				//Find the tile that becomes the tile at that location.
 				GameObject CTTile =GameWorldController.FindTileByName(this.name + "_" + (i).ToString ("D2") + "_" + (j).ToString ("D2"));   

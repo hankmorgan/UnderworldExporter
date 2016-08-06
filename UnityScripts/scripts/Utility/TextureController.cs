@@ -1,69 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Texture controller for applying palettes (UWPalette) to textures for object sprites.
+/// </summary>
 public class TextureController : UWEBase {
-
-		public int NoOfObjects=500;
-		public int NoOfTextures=500;
+		private int NoOfObjects=500;
+		private int NoOfTextures=500;
 		private bool[] ObjectInUse=new bool[500];
-		//private bool[] TextureInUse=new bool[500];
 		private Texture2D[]ObjectSrcImage=new Texture2D[500];
 		private Texture2D[]ObjectDstImage=new Texture2D[500];
-		//private Texture2D[]TextureSrcImage=new Texture2D[500];
-		//private Texture2D[]TextureDstImage=new Texture2D[500];
 
-		//private bool[] TextureReady=new bool[500];
 		private bool[] ObjectReady=new bool[500];
 		private Sprite[]ObjectDstSprite=new Sprite[500];
-		//private Texture2D preview;
-		//public bool[]isAnimated;
-		UWPalette pal;
+		public UWPalette pal;
 
 		// Use this for initialization
 		void Start () {		
 				ObjectInteraction.tc=this;
-				GameWorldController.tc=this;
-				TMAP.tc=this;
 				pal = this.GetComponent<UWPalette>();
 
 				ObjectInUse=new bool[NoOfObjects];
-				//TextureInUse=new bool[NoOfTextures];
-				//isAnimated=new bool[NoOfObjects];
-
 				ObjectSrcImage = new Texture2D[NoOfObjects];
 				ObjectDstImage = new Texture2D[NoOfObjects];
 				ObjectDstSprite = new Sprite[NoOfObjects];
-
-				//TextureSrcImage = new Texture2D[NoOfTextures];
-				//TextureDstImage = new Texture2D[NoOfTextures];
-				//TextureReady = new bool[NoOfTextures];
-
-
-
-				//	for (int i = 0; i<NoOfObjects;i++)
-				//		{
-				//		ObjectSrcImage[i] = LoadImage (i);
-				//		if (ObjectSrcImage[i]!=null)
-				//			{
-				//			ObjectDstImage[i]=Sprite.Create( ObjectSrcImage[i],new Rect(0,0,ObjectSrcImage[i].width,ObjectSrcImage[i].height), new Vector2(0.5f, 0.0f));
-				//			}
-				//		else
-				//			{
-				//			Debug.Log ("Unable to create sprite :" + i);
-				//			}
-				//		}
-
 		}
 
+		/// <summary>
+		/// Creates a sprite for a item object at the specified object index.
+		/// </summary>
+		/// <returns>The sprite.</returns>
+		/// <param name="index">Index.</param>
+		/// <param name="isAnimated">If set to <c>true</c> is animated.</param>
 		public Sprite RequestSprite(int index, bool isAnimated)
 		{
 				if (ObjectReady[index]==false)
 				{
-						if (pal==null)
-						{
-								pal=this.gameObject.GetComponent<UWPalette>();
-						}
-						//Debug.Log(index);
 						if (ObjectInUse[index]==false)
 						{//Sprite not already loaded. Request it.
 								ObjectSrcImage[index] = LoadImage (_RES +"/Sprites/Object_Greyscale/OBJECTS_BASE_",index);
@@ -87,7 +59,11 @@ public class TextureController : UWEBase {
 				return ObjectDstSprite[index];
 		}
 
-
+		/// <summary>
+		/// Loads the sprite from the specified asset path.
+		/// </summary>
+		/// <returns>The sprite.</returns>
+		/// <param name="AssetPath">Asset path.</param>
 		public Sprite RequestSprite(string AssetPath)
 		{
 				Texture2D img = LoadImage (AssetPath);
@@ -96,56 +72,6 @@ public class TextureController : UWEBase {
 				spr.texture.filterMode=FilterMode.Point;
 				return spr;
 		}
-
-		/*public Texture2D RequestTexture(int index, bool isAnimated)
-	{
-		if(TextureReady[index]==false)
-		{
-			if (pal==null)
-			{
-				pal=this.gameObject.GetComponent<UWPalette>();
-			}
-			if (TextureInUse[index]==false)
-			{//Sprite not already loaded. Request it.
-				TextureSrcImage[index] = LoadImage ("Textures/Palette/UW1_BASE_",index);
-				TextureInUse[index]=true;
-			} 
-			//Apply the current palette to the dst image
-			if (isAnimated==true)
-			{
-				TextureDstImage[index]=pal.ApplyPalette(TextureSrcImage[index]);
-			}
-			else
-			{
-				//Apply the default palette
-				TextureDstImage[index]=pal.ApplyPaletteDefault(TextureSrcImage[index]);
-			}
-			TextureDstImage[index].filterMode=FilterMode.Point;
-			TextureReady[index]=true;
-		}
-
-	//	else
-		//	{
-		//	}
-		//TextureDstImage[index]=pal.ApplyPalette(TextureSrcImage[index]);
-		//TextureDstSprite[index]=Sprite.Create(ObjectDstImage[index] ,new Rect(0,0,ObjectDstImage[index].width,ObjectDstImage[index].height), new Vector2(0.5f, 0.0f));
-
-		return TextureDstImage[index];
-	}*/
-		/**Remved to improve perf 
-
-		void LateUpdate()
-		{
-				//for (int i=0; i<NoOfTextures;i++)
-				//{
-				//	TextureReady[i]=false;
-				//}
-				for (int i=0; i <NoOfObjects;i++)
-				{
-						ObjectReady[i]=false;
-				}
-		}
-		*/
 
 		private Texture2D LoadImage(string BasePath)
 		{

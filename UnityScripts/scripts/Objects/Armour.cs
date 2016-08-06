@@ -7,6 +7,7 @@ using System.Collections;
 /// Contains the string paths for the paperdoll graphics
 public class Armour : Equipment {
 	public int Protection;
+	public string ArmourEquipString;
 	
 	//Paperdoll graphics
 	//TODO:Use Object Masters for these
@@ -26,7 +27,7 @@ public class Armour : Equipment {
 	
 		/// The image to display when worn.
 		/// Takes the image from the Equip[Gender][Quality] strings
-	public Texture2D EquipDisplay;
+	//public Texture2D EquipDisplay;
 
 	/// Permanent spell effect applied by the spell
 	public SpellEffect SpellEffectApplied;
@@ -109,7 +110,7 @@ public class Armour : Equipment {
 				SetEquipTexture(GameWorldController.instance.objectMaster.EquippedIconMaleBestQuality[objInt().item_id]);
 			}
 		}
-	objInt().SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
+	//objInt().SetEquipDisplay(Sprite.Create(EquipDisplay,new Rect(0,0,EquipDisplay.width,EquipDisplay.height), new Vector2(0.5f, 0.5f)));
 	}
 	
 	/// <summary>
@@ -118,7 +119,15 @@ public class Armour : Equipment {
 	/// <param name="EquipTexture">Equip texture.</param>
 	void SetEquipTexture(string EquipTexture)
 	{//Change the paperdoll image
-		EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
+		//EquipDisplay = Resources.Load <Texture2D> (EquipTexture);
+		//objInt().EquipString=EquipTexture;
+		ArmourEquipString=EquipTexture;
+		GameWorldController.instance.playerUW.playerInventory.Refresh(objInt().inventorySlot);
+	}
+
+	public override string getEquipString ()
+	{
+		return ArmourEquipString;
 	}
 
 	public override bool EquipEvent (int slotNo)

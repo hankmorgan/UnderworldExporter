@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Billboard sprites so they always face the player.
+/// </summary>
 public class Billboard : MonoBehaviour
 {
 	//public float adjustment=0.0f;//0.8f;
@@ -9,7 +12,7 @@ public class Billboard : MonoBehaviour
 	{
 		//if (Camera.main!=null)
 		//{
-
+				//Objects will always be upright.
 			if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.gameObject.transform.position)<=8)
 						{//Only rotate near objects.
 								

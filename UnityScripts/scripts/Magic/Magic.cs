@@ -926,7 +926,7 @@ public class Magic : UWEBase {
 						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_182_" +ObjectNo, ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 						Food fd = myObj.AddComponent<Food>();
 						fd.Nutrition=5;//TODO:determine values to use here.
-						WindowDetect.UnFreezeMovement(myObj);
+						GameWorldController.UnFreezeMovement(myObj);
 				}
 		}
 
@@ -969,7 +969,7 @@ public class Magic : UWEBase {
 						}
 						//TODO:Set up these properties 
 						ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, 5, 1, 1, 0, 4, 0, navMeshName);
-						WindowDetect.UnFreezeMovement(myObj);
+						GameWorldController.UnFreezeMovement(myObj);
 				}
 		}
 

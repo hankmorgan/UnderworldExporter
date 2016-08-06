@@ -75,7 +75,7 @@ public class SpellProp  {
 	/* ************Sample enchantment Code *********************
 	public override void onHit (ObjectInteraction objInt)
 	{//Sample enchantment poisons the target.
-	if (objInt.ItemType==ObjectInteraction.NPC_TYPE)
+	if (objInt.GetItemType()==ObjectInteraction.NPC_TYPE)
 		{
 			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,objInt.gameObject,SpellEffect.UW1_Spell_Effect_Poison,Magic.SpellRule_TargetOther);				
 		}		

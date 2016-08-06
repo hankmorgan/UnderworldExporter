@@ -19,11 +19,11 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{//Apply to player
-			if (playerUW==null)
+			if (GameWorldController.instance.playerUW==null)
 			{
-				playerUW= this.GetComponent<UWCharacter>();
+				GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
 			}
-			playerUW.Poisoned=true;
+			GameWorldController.instance.playerUW.Poisoned=true;
 		}
 		else
 		{
@@ -43,7 +43,7 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{
-			playerUW.Poisoned=false;
+			GameWorldController.instance.playerUW.Poisoned=false;
 		}
 		else
 		{
@@ -56,9 +56,9 @@ public class SpellEffectPoison : SpellEffect {
 	{
 		if (isNPC==false)
 		{
-			if (playerUW.Poisoned==true)
+			if (GameWorldController.instance.playerUW.Poisoned==true)
 			{
-				playerUW.CurVIT=playerUW.CurVIT-DOT;
+				GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.CurVIT-DOT;
 			}
 		}
 		else
@@ -66,7 +66,7 @@ public class SpellEffectPoison : SpellEffect {
 			if (npc.Poisoned==true)
 			{
 				npc.npc_hp=npc.npc_hp-DOT;
-				//playerUW.CurVIT=playerUW.CurVIT-10;
+				//GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.CurVIT-10;
 			}
 		}
 
@@ -84,7 +84,7 @@ public class SpellEffectPoison : SpellEffect {
 		}
 		else
 		{
-			if ((playerUW.Poisoned==false) && (Active==true))
+			if ((GameWorldController.instance.playerUW.Poisoned==false) && (Active==true))
 			{
 				CancelEffect();
 			}

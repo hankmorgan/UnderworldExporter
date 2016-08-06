@@ -19,15 +19,15 @@ public class Grave : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			return LookAt ();
 		}
 		else
 		{
 			//TODO: if garamons bones activate something special.
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
-			//return playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
+			//return GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>().FailMessage();
 		}
 	}
 
@@ -59,7 +59,7 @@ public class Grave : object_base {
 							trig.GetComponent<ObjectInteraction>().GetComponent<trigger_base>().Activate();
 						}
 						UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-						playerUW.playerInventory.ObjectInHand="";						
+						GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";						
 						return true;
 					}
 					else
@@ -67,7 +67,7 @@ public class Grave : object_base {
 					//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 					UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
 					UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-					playerUW.playerInventory.ObjectInHand="";
+					GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 					return true;
 					}
 				}
@@ -83,13 +83,13 @@ public class Grave : object_base {
 				//000~001~259~The bones do not seem at rest in the grave, and you take them back.
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,259));
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				playerUW.playerInventory.ObjectInHand="";
+				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 				return true;
 			}
 			else
 			{
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				playerUW.playerInventory.ObjectInHand="";
+				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 				return ObjectUsed.GetComponent<ObjectInteraction>().FailMessage();
 			}
 		}

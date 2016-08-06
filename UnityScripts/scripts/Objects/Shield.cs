@@ -14,7 +14,7 @@ public class Shield : Equipment {
 
 	public override bool EquipEvent (int slotNo)
 	{		
-		if (((slotNo ==7) && (playerUW.isLefty==true)) || ((slotNo ==8) && (playerUW.isLefty==false)))//Only on off hand
+		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==true)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==false)))//Only on off hand
 		{
 			UpdateQuality();
 			if (objInt().isEnchanted==true)
@@ -45,7 +45,7 @@ public class Shield : Equipment {
 					
 				default:
 					//cast enchantment.
-					SpellEffectApplied = playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
+					SpellEffectApplied = GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null,GetActualSpellIndex(),Magic.SpellRule_TargetSelf);
 					if (SpellEffectApplied!=null)
 					{
 						SpellEffectApplied.SetPermanent(true);

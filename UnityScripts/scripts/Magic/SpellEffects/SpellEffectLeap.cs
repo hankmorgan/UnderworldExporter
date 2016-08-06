@@ -7,11 +7,11 @@ public class SpellEffectLeap : SpellEffect {
 
 	public override void ApplyEffect ()
 	{
-		if (playerUW==null)
+		if (GameWorldController.instance.playerUW==null)
 		{
-			playerUW= this.GetComponent<UWCharacter>();
+			GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
 		}
-		playerUW.isLeaping=true;
+		GameWorldController.instance.playerUW.isLeaping=true;
 		base.ApplyEffect ();
 	}
 
@@ -20,13 +20,13 @@ public class SpellEffectLeap : SpellEffect {
 	{
 		if (Active)
 		{//Maintain the effect
-			playerUW.isLeaping=true;
+			GameWorldController.instance.playerUW.isLeaping=true;
 		}
 	}
 
 	public override void CancelEffect ()
 	{
-		playerUW.isLeaping=false;
+		GameWorldController.instance.playerUW.isLeaping=false;
 		base.CancelEffect ();
 	}
 }

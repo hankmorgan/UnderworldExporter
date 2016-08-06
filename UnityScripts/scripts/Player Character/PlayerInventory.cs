@@ -953,7 +953,7 @@ public class PlayerInventory : UWEBase {
 					}
 					else
 					{
-						if (objInt.ItemType==ObjectInteraction.CONTAINER)
+						if (objInt.GetItemType()==ObjectInteraction.CONTAINER)
 						{
 							string find2=obj.GetComponent<Container>().findItemOfType(item_id);
 							if (find2!="")

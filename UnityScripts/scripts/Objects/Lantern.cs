@@ -18,7 +18,7 @@ public class Lantern : LightSource {
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
-			switch (objIntUsed.ItemType)
+			switch (objIntUsed.GetItemType())
 			{
 			case ObjectInteraction.OIL:
 				if (IsOn==true)
@@ -39,7 +39,7 @@ public class Lantern : LightSource {
 					}
 				}
 				UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-				playerUW.playerInventory.ObjectInHand="";
+				GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 				return true;
 			default:
 				return base.ActivateByObject(ObjectUsed);

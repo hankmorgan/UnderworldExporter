@@ -19,7 +19,7 @@ public class WeaponMelee : Weapon {
 			if (EffectId<=447)
 			{//Not a standard effect
 				//Debug.Log ("Casting + "+EffectId + " on " + target.name);
-				playerUW.PlayerMagic.CastEnchantmentImmediate(playerUW.gameObject,target,EffectId,Magic.SpellRule_TargetOther);
+				GameWorldController.instance.playerUW.PlayerMagic.CastEnchantmentImmediate(GameWorldController.instance.playerUW.gameObject,target,EffectId,Magic.SpellRule_TargetOther);
 			}
 		}
 	}

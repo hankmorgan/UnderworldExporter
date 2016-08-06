@@ -173,9 +173,9 @@ public class InventorySlot : GuiBase {
 		if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
 			{ 
 			ObjectInteraction objInt =GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
-			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
+			if ((SlotCategory != objInt.GetItemType()) && (SlotCategory!=-1))
 				{//Slot is not a general use one andThis item type does not go in this slot.
-					Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory + " at " + this.name);
+					Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory + " at " + this.name);
 					DoNotPickup=true;
 				}
 				
@@ -261,9 +261,9 @@ public class InventorySlot : GuiBase {
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
 		{
 			ObjectInteraction objInt = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand ().GetComponent<ObjectInteraction>();
-			if ((SlotCategory != objInt.ItemType) && (SlotCategory!=-1))
+			if ((SlotCategory != objInt.GetItemType()) && (SlotCategory!=-1))
 			{//Slot is not a general use on andThis item type does not go in this slot.
-			//	Debug.Log ("cannot pickup an " + objInt.ItemType + " in a " + SlotCategory);
+			//	Debug.Log ("cannot pickup an " + objInt.GetItemType() + " in a " + SlotCategory);
 				DoNotPickup=true;
 			}
 			//if ((objInt.isQuant==true) && (objInt.isEnchanted==false))

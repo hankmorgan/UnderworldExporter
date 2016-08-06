@@ -53,7 +53,7 @@ public class Coin : object_base {
 		case 161://a Coin
 			if (objInt().GetQty ()>1)
 			{
-				ChangeType(160,objInt().ItemType);
+				ChangeType(160,objInt().GetItemType());
 				//objInt().item_id=160;
 				////objInt().WorldDisplayIndex=160;
 				//objInt().InvDisplayIndex=160;
@@ -63,7 +63,7 @@ public class Coin : object_base {
 		case 160://A stack of coins.
 			if (objInt().GetQty ()==1)
 			{
-				ChangeType(161,objInt().ItemType);
+				ChangeType(161,objInt().GetItemType());
 				//objInt().item_id=161;
 				//objInt().WorldDisplayIndex=161;
 				//objInt().InvDisplayIndex=161;

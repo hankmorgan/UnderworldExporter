@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// </summary>
 public class object_base : UWEBase {
 
-	public static UWCharacter playerUW;
+	//public static UWCharacter playerUW;
 	/// Output control to display text on
 	//public static ScrollController ml;
 	
@@ -67,7 +67,7 @@ public class object_base : UWEBase {
 	public virtual bool LookAt()
 	{
 		//CheckReferences();
-				UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
+		UWHUD.instance.MessageScroll.Add(StringController.instance.GetFormattedObjectNameUW(objInt()));
 		return true;
 	}
 
@@ -83,7 +83,7 @@ public class object_base : UWEBase {
 		{
 			FailMessage();
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-			playerUW.playerInventory.ObjectInHand="";
+			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 			return true;
 		}
 		else
@@ -99,7 +99,7 @@ public class object_base : UWEBase {
 	public virtual bool use()
 	{
 		//CheckReferences();
-		if (playerUW.playerInventory.ObjectInHand =="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
 		{
 			if ((objInt().CanBeUsed==true) && (objInt().PickedUp==true))
 			{
@@ -113,7 +113,7 @@ public class object_base : UWEBase {
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+		return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -137,8 +137,8 @@ public class object_base : UWEBase {
 		/// </summary>
 	public void BecomeObjectInHand()
 	{//In order to use it.
-		UWHUD.instance.CursorIcon= objInt().InventoryDisplay.texture;
-		playerUW.playerInventory.ObjectInHand=this.name;
+		UWHUD.instance.CursorIcon= objInt().GetInventoryDisplay().texture;
+		GameWorldController.instance.playerUW.playerInventory.ObjectInHand=this.name;
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
 	}
@@ -289,7 +289,7 @@ public class object_base : UWEBase {
 		/// <param name="itemType">Item type.</param>
 	public virtual bool ChangeType(int newID, int itemType)
 	{
-		objInt().ChangeType(newID,objInt().ItemType);
+		objInt().ChangeType(newID,objInt().GetItemType());
 		return true;		
 	}
 
@@ -524,4 +524,9 @@ public class object_base : UWEBase {
 					return 30;
 			}			
 	}
+
+		public virtual string getEquipString()
+		{
+			return GameWorldController.instance.objectMaster.path[objInt().item_id];
+		}
 }

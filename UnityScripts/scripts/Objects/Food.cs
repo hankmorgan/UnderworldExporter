@@ -8,7 +8,7 @@ public class Food : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			if (objInt().item_id!=191)
 			{
@@ -24,7 +24,7 @@ public class Food : object_base {
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -32,15 +32,15 @@ public class Food : object_base {
 	public override bool Eat()
 	{//TODO:Implement drag and drop feeding.
 
-		if (Nutrition+playerUW.FoodLevel>=255)
+		if (Nutrition+GameWorldController.instance.playerUW.FoodLevel>=255)
 		{
-			playerUW.FoodLevel=255;
+			GameWorldController.instance.playerUW.FoodLevel=255;
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,126));
 			return false;
 		}
 		else
 		{
-			playerUW.FoodLevel = Nutrition+playerUW.FoodLevel;
+			GameWorldController.instance.playerUW.FoodLevel = Nutrition+GameWorldController.instance.playerUW.FoodLevel;
 			UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
 			objInt().consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.

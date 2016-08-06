@@ -20,15 +20,15 @@ The vision of the moonstone room on Level2. Activated by the orb in the marble r
 
 	IEnumerator ActivateCamera()
 	{
-		playerUW.playerCam.tag="Untagged";
-		playerUW.playerCam.enabled=false;
+		GameWorldController.instance.playerUW.playerCam.tag="Untagged";
+		GameWorldController.instance.playerUW.playerCam.enabled=false;
 		cam.enabled=true;
 		lt.enabled=true;
 		yield return new WaitForSeconds(5.0f);
 		cam.enabled=false;
 		lt.enabled=false;
-		playerUW.playerCam.tag="MainCamera";
-		playerUW.playerCam.enabled=true;
+		GameWorldController.instance.playerUW.playerCam.tag="MainCamera";
+		GameWorldController.instance.playerUW.playerCam.enabled=true;
 	}
 
 	public override void PostActivate ()

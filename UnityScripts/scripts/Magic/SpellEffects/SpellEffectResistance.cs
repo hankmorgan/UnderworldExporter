@@ -7,13 +7,13 @@ public class SpellEffectResistance : SpellEffect {
 
 	public override void ApplyEffect ()
 	{
-		playerUW.Resistance=Value;
+		GameWorldController.instance.playerUW.Resistance=Value;
 		base.ApplyEffect ();
 	}
 
 	public override void CancelEffect ()
 	{
-		playerUW.Resistance=0;
+		GameWorldController.instance.playerUW.Resistance=0;
 		base.CancelEffect ();
 	}
 
@@ -21,9 +21,9 @@ public class SpellEffectResistance : SpellEffect {
 	{//Keeps the value at it's highest possible
 		if (Active)
 		{
-			if (playerUW.Resistance<Value)
+			if (GameWorldController.instance.playerUW.Resistance<Value)
 			{
-				playerUW.Resistance=Value;
+				GameWorldController.instance.playerUW.Resistance=Value;
 			}
 		}
 	}

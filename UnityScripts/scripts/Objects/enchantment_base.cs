@@ -37,7 +37,7 @@ public class enchantment_base : object_base {
 	{
 		//Calculated the effect id of the enchantment. As in the above notes from UWformats.txt
 		int index=objInt().Link-512;
-		if ( objInt().ItemType != ObjectInteraction.RING)
+		if ( objInt().GetItemType() != ObjectInteraction.RING)
 		{
 			if (index<63)
 			{
@@ -83,7 +83,7 @@ public class enchantment_base : object_base {
 				}
 			else
 				{
-					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
 						objInt().isIdentified=true;
 						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));

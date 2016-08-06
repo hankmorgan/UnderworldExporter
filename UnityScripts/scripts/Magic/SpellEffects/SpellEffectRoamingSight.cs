@@ -12,15 +12,15 @@ public class SpellEffectRoamingSight : SpellEffect {
 		/// </summary>
 		public override void ApplyEffect ()
 		{
-				if (playerUW==null)
+				if (GameWorldController.instance.playerUW==null)
 				{
-					playerUW= this.GetComponent<UWCharacter>();
+					GameWorldController.instance.playerUW= this.GetComponent<UWCharacter>();
 				}
-				playerUW.isRoaming=true;
-				OldMana=playerUW.PlayerMagic.CurMana;
-				playerUW.PlayerMagic.CurMana=0;
-				OldPosition = playerUW.transform.position;
-				playerUW.transform.position=new Vector3(OldPosition.x,5.5f,OldPosition.z);
+				GameWorldController.instance.playerUW.isRoaming=true;
+				OldMana=GameWorldController.instance.playerUW.PlayerMagic.CurMana;
+				GameWorldController.instance.playerUW.PlayerMagic.CurMana=0;
+				OldPosition = GameWorldController.instance.playerUW.transform.position;
+				GameWorldController.instance.playerUW.transform.position=new Vector3(OldPosition.x,5.5f,OldPosition.z);
 				base.ApplyEffect();
 		}
 
@@ -29,9 +29,9 @@ public class SpellEffectRoamingSight : SpellEffect {
 		/// </summary>
 		public override void CancelEffect ()
 		{
-			playerUW.isRoaming=false;
-			playerUW.transform.position=OldPosition;
-			playerUW.PlayerMagic.CurMana=OldMana;
+			GameWorldController.instance.playerUW.isRoaming=false;
+			GameWorldController.instance.playerUW.transform.position=OldPosition;
+			GameWorldController.instance.playerUW.PlayerMagic.CurMana=OldMana;
 			base.CancelEffect();
 		}
 }

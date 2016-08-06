@@ -16,9 +16,9 @@ public class Equipment : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand !="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand !="")
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 		else
 		{
@@ -39,7 +39,7 @@ public class Equipment : object_base {
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{
-			switch (objIntUsed.ItemType)
+			switch (objIntUsed.GetItemType())
 			{
 			case ObjectInteraction.ANVIL: //ANVIL
 				{
@@ -84,7 +84,7 @@ public class Equipment : object_base {
 			//TODO:At the moment it suceeds but in future implement failures and breakages.
 			//Find out what the story with the sword of justice is?
 			//Do the result at the end of the animation.
-			if (playerUW.PlayerSkills.TrySkill(Skills.SkillRepair,0))
+			if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillRepair,0))
 			{
 				objInt().Quality = objInt().Quality+5;
 				if (objInt().Quality >63){objInt().Quality=63;}
@@ -97,7 +97,7 @@ public class Equipment : object_base {
 			UpdateQuality();
 		}
 		//cancel the repair 
-		playerUW.playerInventory.ObjectInHand="";
+		GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 		UWHUD.instance.CursorIcon=UWHUD.instance.CursorIconDefault;
 	}
 
@@ -111,7 +111,7 @@ public class Equipment : object_base {
 			}
 			else
 			{
-					if (playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
+					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
 							objInt().isIdentified=true;
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));

@@ -47,7 +47,7 @@ public class GuiBase_Draggable : GuiBase {
 	{
 				if (UWHUD.instance.window.FullScreen==true)
 				{
-						UWHUD.instance.window.updatePositions();	
+						UWHUD.instance.window.updateUIPositions();	
 				}
 		Dragging=false;		
 	}

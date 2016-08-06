@@ -54,7 +54,7 @@ public class LightSource : object_base {
 	public override bool use ()
 	{
 		//CheckReferences();
-		if (playerUW.playerInventory.ObjectInHand == "")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
 			if (objInt().PickedUp==false)
 			{
@@ -77,7 +77,7 @@ public class LightSource : object_base {
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -97,27 +97,27 @@ public class LightSource : object_base {
 		//CheckReferences();
 		//Turn on the torch
 		//Try and put the torch in an shoulder/hand slot if it is not already there.
-		PlayerInventory pInv = playerUW.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
+		PlayerInventory pInv = GameWorldController.instance.playerUW.playerInventory; //GameObject.Find ("Gronk").GetComponent<PlayerInventory>();
 		InventorySlot invSlot = null;
 		if ((pInv.sRightShoulder=="") || (pInv.sRightShoulder==this.name))
 		{						
 			//invSlot=GameObject.Find ("RightShoulder_Slot").GetComponent<InventorySlot>();
-			invSlot=playerUW.playerInventory.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
+			invSlot=GameWorldController.instance.playerUW.playerInventory.RightShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftShoulder=="") || (pInv.sLeftShoulder==this.name))
 		{
 			//invSlot=GameObject.Find ("LeftShoulder_Slot").GetComponent<InventorySlot>();
-			invSlot=playerUW.playerInventory.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
+			invSlot=GameWorldController.instance.playerUW.playerInventory.LeftShoulder_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sRightHand=="") || (pInv.sRightHand==this.name))
 		{
 			//invSlot=GameObject.Find ("RightHand_Slot").GetComponent<InventorySlot>();
-		invSlot=playerUW.playerInventory.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
+		invSlot=GameWorldController.instance.playerUW.playerInventory.RightHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		else if ((pInv.sLeftHand=="") || (pInv.sLeftHand==this.name))
 		{
 			//invSlot=GameObject.Find ("LeftHand_Slot").GetComponent<InventorySlot>();
-				invSlot=playerUW.playerInventory.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
+				invSlot=GameWorldController.instance.playerUW.playerInventory.LeftHand_Slot.gameObject.GetComponent<InventorySlot>();
 		}
 		if (invSlot != null)
 			{
@@ -133,7 +133,7 @@ public class LightSource : object_base {
 			else
 			{//Clone the item and move it's clone to the inventory slot
 				GameObject split = Instantiate(this.gameObject);
-				split.name= split.name+"_"+ playerUW.summonCount++;
+				split.name= split.name+"_"+ GameWorldController.instance.playerUW.summonCount++;
 				split.GetComponent<ObjectInteraction>().Link=1;//Increment and decrement the object count as appropiate;
 				objInt().Link--;
 				split.transform.parent=this.transform.parent;

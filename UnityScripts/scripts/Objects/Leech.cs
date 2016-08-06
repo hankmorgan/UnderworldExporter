@@ -8,17 +8,17 @@ public class Leech : object_base {
 
 public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
-			playerUW.PlayerMagic.CastEnchantment(playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);
+			GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(GameWorldController.instance.playerUW.gameObject,null, SpellEffect.UW1_Spell_Effect_CurePoison,Magic.SpellRule_TargetSelf);
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,224));
-			playerUW.ApplyDamage(Random.Range (1,6));
+			GameWorldController.instance.playerUW.ApplyDamage(Random.Range (1,6));
 			objInt().consumeObject();
 			return true;
 		}
 		else
 		{
-			return ActivateByObject (playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject (GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 }

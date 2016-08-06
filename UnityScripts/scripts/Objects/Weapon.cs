@@ -13,23 +13,23 @@ public class Weapon : Equipment {
 		{
 			ChangeType(218,23);//Change to debris.
 			this.gameObject.AddComponent<object_base>();//Add a generic object base for behaviour
-			playerUW.PlayerCombat.currWeapon=null;
+			GameWorldController.instance.playerUW.PlayerCombat.currWeapon=null;
 			Destroy(this);//Kill me now.
 		}
 	}
 
 	public override bool EquipEvent (int slotNo)
 	{
-		//playerUW.PlayerCombat.currWeapon= this;
-		if (((slotNo ==7) && (playerUW.isLefty==false)) || ((slotNo ==8) && (playerUW.isLefty==true)))
+		//GameWorldController.instance.playerUW.PlayerCombat.currWeapon= this;
+		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==true)))
 		{
 			if (this.GetComponent<WeaponRanged>()!=null)
 			{
-				playerUW.PlayerCombat.currWeaponRanged=(WeaponRanged)this;
+				GameWorldController.instance.playerUW.PlayerCombat.currWeaponRanged=(WeaponRanged)this;
 			}
 			if (this.GetComponent<WeaponMelee>()!=null)
 			{
-				playerUW.PlayerCombat.currWeapon=(WeaponMelee)this;
+				GameWorldController.instance.playerUW.PlayerCombat.currWeapon=(WeaponMelee)this;
 			}
 
 			if (objInt().isEnchanted==true)
@@ -65,10 +65,10 @@ public class Weapon : Equipment {
 
 	public override bool UnEquipEvent (int slotNo)
 	{
-		if (((slotNo ==7) && (playerUW.isLefty==false)) || ((slotNo ==8) && (playerUW.isLefty==true)))
+		if (((slotNo ==7) && (GameWorldController.instance.playerUW.isLefty==false)) || ((slotNo ==8) && (GameWorldController.instance.playerUW.isLefty==true)))
 		{
-			playerUW.PlayerCombat.currWeapon = null;
-			playerUW.PlayerCombat.currWeaponRanged = null;
+			GameWorldController.instance.playerUW.PlayerCombat.currWeapon = null;
+			GameWorldController.instance.playerUW.PlayerCombat.currWeaponRanged = null;
 		}
 		return false;
 	}

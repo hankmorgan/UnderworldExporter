@@ -10,7 +10,7 @@ public class SpellEffectSpeed : SpellEffect {
 
 	public override void ApplyEffect ()
 		{
-			playerUW.speedMultiplier=speedMultiplier;
+			GameWorldController.instance.playerUW.speedMultiplier=speedMultiplier;
 			base.ApplyEffect ();
 		}
 
@@ -18,13 +18,13 @@ public class SpellEffectSpeed : SpellEffect {
 	{
 		if(Active)
 		{
-		playerUW.speedMultiplier=speedMultiplier;			
+		GameWorldController.instance.playerUW.speedMultiplier=speedMultiplier;			
 		}			
 	}
 
 	public override void CancelEffect ()
 	{
-		playerUW.speedMultiplier=1.0f;
+		GameWorldController.instance.playerUW.speedMultiplier=1.0f;
 		base.CancelEffect ();		
 	}
 }

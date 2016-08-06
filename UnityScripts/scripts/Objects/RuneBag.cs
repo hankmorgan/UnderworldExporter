@@ -6,13 +6,13 @@ public class RuneBag : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand == "")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
 			return Activate ();
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -35,10 +35,10 @@ public class RuneBag : object_base {
 		//Test for a valid rune being used on the bag and if so add the rune to the players inventory.
 		if(ObjectUsed.GetComponent<RuneStone>() !=null)
 		{
-			playerUW.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
+			GameWorldController.instance.playerUW.PlayerMagic.PlayerRunes[ObjectUsed.GetComponent<ObjectInteraction>().item_id-232]=true;
 			//Add rune to rune bag and destroy the original object.
 			GameObject.Destroy(ObjectUsed);
-			playerUW.playerInventory.ObjectInHand="";
+			GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 			UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
 			return true;
 		}

@@ -4,17 +4,10 @@ using System.Collections;
 public class TMAP : object_base {
 
 
-	public static TextureController tc;
+	//public static TextureController tc;
 	public string trigger;
 	public int TextureIndex;
 	private SpriteRenderer sr;
-	//public bool isAnimated;
-	//private bool HasUpdated;
-
-	// Use this for initialization
-//	void Start () {
-//		base.Start ();
-//	}
 
 	public override bool LookAt()
 	{
@@ -29,9 +22,9 @@ public class TMAP : object_base {
 			if (triggerObj!=null)
 				{
 				ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
-				if ( (objIntTrigger.ItemType==ObjectInteraction.A_LOOK_TRIGGER)
+				if ( (objIntTrigger.GetItemType()==ObjectInteraction.A_LOOK_TRIGGER)
 				    || 
-				    (objIntTrigger.ItemType==ObjectInteraction.A_USE_TRIGGER)
+				    (objIntTrigger.GetItemType()==ObjectInteraction.A_USE_TRIGGER)
 				    )
 					{
 						objIntTrigger.GetComponent<trigger_base> ().Activate();
@@ -45,7 +38,7 @@ public class TMAP : object_base {
 
 	public override bool use()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			if (trigger != "")
 			{
@@ -54,7 +47,7 @@ public class TMAP : object_base {
 				{
 					ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
 					if (
-						(objIntTrigger.ItemType==ObjectInteraction.A_USE_TRIGGER)
+						(objIntTrigger.GetItemType()==ObjectInteraction.A_USE_TRIGGER)
 					    )
 					{
 						objIntTrigger.GetComponent<trigger_base> ().Activate();
@@ -66,7 +59,7 @@ public class TMAP : object_base {
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
@@ -83,12 +76,12 @@ public class TMAP : object_base {
 					{
 						ObjectInteraction objIntTrigger = triggerObj.GetComponent<ObjectInteraction>();
 						if (
-							(objIntTrigger.ItemType==ObjectInteraction.AN_OPEN_TRIGGER)
+							(objIntTrigger.GetItemType()==ObjectInteraction.AN_OPEN_TRIGGER)
 							)
 						{
 							objIntTrigger.GetComponent<trigger_base> ().Activate();
 							UWHUD.instance.CursorIcon= UWHUD.instance.CursorIconDefault;
-							playerUW.playerInventory.ObjectInHand="";
+							GameWorldController.instance.playerUW.playerInventory.ObjectInHand="";
 							return true;
 						}
 					}

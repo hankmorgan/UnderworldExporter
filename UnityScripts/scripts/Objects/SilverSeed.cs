@@ -10,7 +10,7 @@ public class SilverSeed : object_base {
 		if (objInt().item_id==458)
 		{//The seed is a sapling
 			//Turn it into a seed.
-			//objInt().ChangeType(290,objInt().ItemType);
+			//objInt().ChangeType(290,objInt().GetItemType());
 			objInt().item_id=290;
 			objInt().WorldDisplayIndex=290;
 			objInt().InvDisplayIndex=290;
@@ -21,7 +21,7 @@ public class SilverSeed : object_base {
 			}
 			objInt().UpdateAnimation();//Update the inventory display
 			UWHUD.instance.CursorIcon = objInt().GetInventoryDisplay().texture;
-			playerUW.ResurrectPosition=Vector3.zero;
+			GameWorldController.instance.playerUW.ResurrectPosition=Vector3.zero;
 			objInt().SetWorldDisplay(objInt().GetInventoryDisplay());
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,9));
 
@@ -35,7 +35,7 @@ public class SilverSeed : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 		if ((objInt().item_id==290) && (objInt().PickedUp==true))
 			{
@@ -55,13 +55,13 @@ public class SilverSeed : object_base {
 
 
 				UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
-				playerUW.ResurrectPosition=playerUW.transform.position;
+				GameWorldController.instance.playerUW.ResurrectPosition=GameWorldController.instance.playerUW.transform.position;
 				objInt().gameObject.transform.parent=null;
-				objInt().transform.position=playerUW.transform.position;//TODO:Position the tree properly
+				objInt().transform.position=GameWorldController.instance.playerUW.transform.position;//TODO:Position the tree properly
 
-				playerUW.playerInventory.RemoveItemFromEquipment(objInt().gameObject.name);
-				playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(objInt().gameObject.name);
-				playerUW.playerInventory.Refresh ();
+				GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(objInt().gameObject.name);
+				GameWorldController.instance.playerUW.playerInventory.GetCurrentContainer().RemoveItemFromContainer(objInt().gameObject.name);
+				GameWorldController.instance.playerUW.playerInventory.Refresh ();
 
 				objInt().PickedUp=false;
 				return true;
@@ -73,7 +73,7 @@ public class SilverSeed : object_base {
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 }

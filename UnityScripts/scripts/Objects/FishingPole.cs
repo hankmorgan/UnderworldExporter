@@ -7,7 +7,7 @@ public override bool use ()
 	{
 		if (objInt().PickedUp==true)
 		{
-			if (playerUW.playerInventory.ObjectInHand=="")
+			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 			{
 				GoFish();
 				return true;
@@ -29,8 +29,8 @@ public override bool use ()
 	/// </summary>
 	private void GoFish()
 	{
-		int tileX=(int)(playerUW.transform.position.x/1.2f);
-		int tileY=(int)(playerUW.transform.position.z/1.2f);
+		int tileX=(int)(GameWorldController.instance.playerUW.transform.position.x/1.2f);
+		int tileY=(int)(GameWorldController.instance.playerUW.transform.position.z/1.2f);
 	
 
 		for (int x=-1; x<=1;x++)
@@ -42,16 +42,17 @@ public override bool use ()
 					if (Random.Range (0,10)>=7)
 					{//catch something or test for encumerance
 						//000~001~099~You catch a lovely fish.
-						if ((ObjectInteraction.Weight[182]*0.1f) <= playerUW.playerInventory.getEncumberance())
+						if ((ObjectInteraction.Weight[182]*0.1f) <= GameWorldController.instance.playerUW.playerInventory.getEncumberance())
 						{
 							UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,99));
 							GameObject fishy = CreateFish();
-							playerUW.playerInventory.ObjectInHand=fishy.name;
+							GameWorldController.instance.playerUW.playerInventory.ObjectInHand=fishy.name;
 							ObjectInteraction FishobjInt = fishy.GetComponent<ObjectInteraction>();
 							if (FishobjInt!=null)
 							{
 								FishobjInt.UpdateAnimation();
-								UWHUD.instance.CursorIcon= FishobjInt.InventoryDisplay.texture;
+								UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
+								UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
 							}
 
 							UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
@@ -79,10 +80,10 @@ public override bool use ()
 	{//Create food
 
 		//int ObjectNo = 182;
-		GameObject myObj=  new GameObject("SummonedObject_" + playerUW.PlayerMagic.SummonCount++);
+		GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
-		myObj.transform.position = playerUW.playerInventory.InventoryMarker.transform.position;
-		myObj.transform.parent=playerUW.playerInventory.InventoryMarker.transform;
+		myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
+		myObj.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
 		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_182",true);
 		//CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +ObjectNo, _RES +"/Sprites/Objects/Objects_"+ObjectNo, _RES +"/Sprites/Objects/Objects_"+ObjectNo, ObjectInteraction.FOOD, ObjectNo, 1, 40, 0, 1, 0, 1);
 		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_182", _RES +"/Sprites/Objects/Objects_182", _RES +"/Sprites/Objects/Objects_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);

@@ -737,7 +737,6 @@ public class SpellEffect : UWEBase {
 	///Used when an effect is created by equipment and needs to last as long as the player has equiped the item
 	public bool Permanent;
 	
-	public static UWCharacter playerUW;
 
 
 	/// <summary>

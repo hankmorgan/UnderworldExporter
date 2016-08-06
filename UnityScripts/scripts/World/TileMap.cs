@@ -5,13 +5,26 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
+/// <summary>
+/// Tile map class.
+/// Used for storing tile properties for use in various other scripts and generating the automap.
+/// Tile properties are read in from a text file called [UW1|UW2|Shock]_tileprops.txt
+/// </summary>
 public class TileMap : UWEBase {
+		/// <summary>
+		/// Tile info storage class
+		/// </summary>
 	public TileInfo[] Tiles=new TileInfo[9];
+
+		/// <summary>
+		/// The height of the max ceiling value for this level. Only used in SHOCK moving platform.
+		/// </summary>
 	public int GlobalCeilingHeight = 32;
-	//public static GameObject gronk;
 
-	string LevelName;
-
+	
+		/// <summary>
+		/// Player written Map notes stored in a list.
+		/// </summary>
 	public List<MapNote>[] MapNotes = new List<MapNote>[9];
 
 
@@ -43,41 +56,66 @@ public class TileMap : UWEBase {
 	const int SOUTHWEST=6;
 	const int SOUTHEAST=7;
 
-	//RaycastHit hit = new RaycastHit(); 
-	public int visitTileX; public int visitTileY;
-	public static bool OnGround=false;
-	public static bool OnWater=false;
-	public static bool OnLava=false;
-	public GameObject feet;//For detecting the ground.
-	UWCharacter playerUW;
+		public const int SURFACE_FLOOR =1;
+		public const int SURFACE_CEIL = 2;
+		public const int SURFACE_WALL = 3;
+		public const int SURFACE_SLOPE = 4;
 
+		/// <summary>
+		/// The current tile X that the player is in
+		/// </summary>
+	public int visitTileX;
+		/// <summary>
+		/// The current tile Y that the player is in.
+		/// </summary>
+	public int visitTileY;
+		/// <summary>
+		/// Is the player currently standing on solid ground
+		/// </summary>
+	public static bool OnGround=false;
+		/// <summary>
+		/// Is the player currently standing(swimming) on water
+		/// </summary>
+	public static bool OnWater=false;
+		/// <summary>
+		/// Is the player currently standing on lava.
+		/// </summary>
+	public static bool OnLava=false;
+	//public GameObject feet;//For detecting the ground.
+
+
+		/// <summary>
+		/// Detects where the player currently is an updates their swimming state and auto map as needed.
+		/// </summary>
 	public void PositionDetect()
 	{
-				if (GameWorldController.instance.AtMainMenu==true)
-				{
-						return;
-				}
-		if (playerUW==null)
+		if (GameWorldController.instance.AtMainMenu==true)
 		{
-			playerUW=GameWorldController.instance.playerUW;//gronk.GetComponent<UWCharacter>();
+				return;
 		}
-		visitTileX =(int)(playerUW.transform.position.x/1.2f);
-		visitTileY =(int)(playerUW.transform.position.z/1.2f);
+		visitTileX =(int)(GameWorldController.instance.playerUW.transform.position.x/1.2f);
+		visitTileY =(int)(GameWorldController.instance.playerUW.transform.position.z/1.2f);
 		SetTileVisited(GameWorldController.instance.LevelNo,visitTileX,visitTileY);
-		playerUW.isSwimming=((OnWater) && (!playerUW.isWaterWalking)) ;
+		GameWorldController.instance.playerUW.isSwimming=((OnWater) && (!GameWorldController.instance.playerUW.isWaterWalking)) ;
 
 	}
 
+		/// <summary>
+		/// Returns the current levels tile map info.
+		/// </summary>
 		public TileInfo current()
 		{//Returns the current tile Map info.
 			return Tiles[GameWorldController.instance.LevelNo];
 		}
 
+		/// <summary>
+		/// Checks to see if the tile at a specified location is within the valid game world. (eg is rendered and is not a solid).
+		/// Assumes the map is positioned at 0,0,0
+		/// </summary>
+		/// <returns><c>true</c>, if tile was valided, <c>false</c> otherwise.</returns>
+		/// <param name="location">Location.</param>
 	public bool ValidTile(Vector3 location)
 	{
-		//Checks to see if the tile at a specified location is within the valid game world. (eg is rendered and is not a solid)
-		//Assumes the map is aligned to 0,0,0
-
 		int tileX = (int)(location.x/1.2f);
 		int tileY = (int)(location.y/1.2f);
 		if ((tileX>=64) || (tileX<0) || (tileY>=64) || (tileY<0))
@@ -86,28 +124,36 @@ public class TileMap : UWEBase {
 		}
 		int tileType = GetTileType(GameWorldController.instance.LevelNo,tileX,tileY);
 		int isRendered = GetTileRender(GameWorldController.instance.LevelNo,tileX,tileY);
-		//Debug.Log ("testing at " +location);
-		//if ((tileType!=TILE_SOLID) && (isRendered==1))
-		//{
-			//Debug.Log("valid tile at " + location + " at x=" +tileX + " y=" + tileY + " is a " + tileType + " is " +isRendered);
-		//}
+
 		return ((tileType!=TILE_SOLID) && (isRendered==1));
 	}
 
+		/// <summary>
+		/// Generates a tile map image for the automap for the current level.
+		/// </summary>
+		/// <returns>The map image.</returns>
 		public Texture2D TileMapImage()
 		{
 			return  TileMapImage(GameWorldController.instance.LevelNo);
 		}
 
+		/// <summary>
+		/// Generates a tile map image for the automap for the specified level.
+		/// </summary>
+		/// <returns>The map image.</returns>
+		/// <param name="LevelNo">Level no.</param>
 	public Texture2D TileMapImage(int LevelNo)
-	{//Generates an image of the tilemap for display
-		if (UWHUD.instance.LevelNoDisplay!=null)
-		{
-			UWHUD.instance.LevelNoDisplay.text=(LevelNo+1).ToString();
-		}
+	{
 
+		///The size in pixels of the tiles
 		int TileSize = 4;
+
+		///Sets the map no display
+		UWHUD.instance.LevelNoDisplay.text=(LevelNo+1).ToString();
+		///Uses a cursor icon to display the player.
 		Texture2D playerPosIcon = (Texture2D)Resources.Load (_RES +"/HUD/CURSORS/CURSORS_0018");
+
+		///Creates a blank texture2D of 64x64*TileSize in ARGB32 format.
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
 		//Init the tile map as blank first
 		for (int i = 0; i<63; i++)
@@ -118,16 +164,18 @@ public class TileMap : UWEBase {
 			}
 		}
 
+		///Fills in the tile background colour first
 		for (int i = 0; i<63; i++)
 		{
 			for (int j = 63; j>0; j--)
-			{
+			{//If the tile has been visited and can be rendered.
 				if ((GetTileRender(LevelNo,i,j)==1) && (GetTileVisited(LevelNo,i,j)))
 				{
 					fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.green);
 				}
 			}
 		}
+		///Draws the border lines of the tiles
 		for (int i = 0; i<63; i++)
 		{
 			for (int j = 63; j>0; j--)
@@ -189,22 +237,23 @@ public class TileMap : UWEBase {
 				}
 			}
 		}
+
+		///Only displays the player if they are on the same map as the one being rendered
 		if (LevelNo==GameWorldController.instance.LevelNo)
-		{//Only display the player if they are on the same map
+		{
 			Color[] defaultColour= playerPosIcon.GetPixels();
-			float ratioX = playerUW.transform.position.x / (64.0f*1.2f);
-			float ratioY = playerUW.transform.position.z / (64.0f*1.2f);
+			float ratioX = GameWorldController.instance.playerUW.transform.position.x / (64.0f*1.2f);
+			float ratioY = GameWorldController.instance.playerUW.transform.position.z / (64.0f*1.2f);
 			output.SetPixels((int)(output.width*ratioX), (int)(output.width*ratioY),playerPosIcon.width,playerPosIcon.height,defaultColour);								
 		}
 
 		// Apply all SetPixel calls
 		output.Apply();
 
-	//Display the map notes
-				//Delete the map notes in memory
+	///Display the map notes
+	///Delete the map notes in memory
 				foreach(Transform child in UWHUD.instance.MapPanel.transform)
 				{
-						//Debug.Log(child.name.Substring(0,4) );
 						if (child.name.Substring(0,4) == "_Map")
 						{
 								Destroy(child.transform.gameObject);
@@ -212,31 +261,38 @@ public class TileMap : UWEBase {
 				}
 
 				for (int i=0 ; i < MapNotes[LevelNo].Count;i++)
-				{
+				{///Instantiates the map note template UI control.
 					GameObject myObj = (GameObject)Instantiate(Resources.Load("Prefabs/_MapNoteTemplate"));
 					myObj.transform.parent= UWHUD.instance.MapPanel.transform;
 					myObj.GetComponent<Text>().text = MapNotes[LevelNo][i].NoteText;
 					myObj.GetComponent<RectTransform>().anchoredPosition= MapNotes[LevelNo][i].NotePosition;
 					myObj.GetComponent<MapNoteId>().guid = MapNotes[LevelNo][i].guid;
+					//Move the control so that it sits in front of the map,
 					myObj.GetComponent<RectTransform>().SetSiblingIndex(4);
-						//myObj.transform.SetAsLastSibling();
-				}
-			
+				}		
 
-		return  output;
-		
+		return  output;		
 	}
 
-		private void fillTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
-		{
-			fillTile(GameWorldController.instance.LevelNo, OutputTile, TileX,TileY,TileWidth,TileHeight,GroundColour,WaterColour,LavaColour,BridgeColour);
-		}
 
+		/// <summary>
+		/// Fills in a single tile.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="GroundColour">Ground colour.</param>
+		/// <param name="WaterColour">Water colour.</param>
+		/// <param name="LavaColour">Lava colour.</param>
+		/// <param name="BridgeColour">Bridge colour.</param>
 	private void fillTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
 	{
 		Color TileColorPrimary;
 		Color TileColorSecondary;
-		//Fills a non square tile.
+		///Picks which colour to use based on the tile properties.
 		if (GetIsWater(LevelNo,TileX,TileY)==true)
 			{
 			TileColorPrimary=WaterColour;
@@ -259,7 +315,7 @@ public class TileMap : UWEBase {
 				break;
 				}	
 			case TILE_DIAG_NE:
-				{
+				{//Fills diagonally.
 					for (int i = 0; i<=TileWidth;i++)
 					{
 						for (int j=0;j<=TileHeight;j++)
@@ -277,7 +333,7 @@ public class TileMap : UWEBase {
 					break;
 				}
 			case TILE_DIAG_NW:
-				{
+				{//Fills diagonally.
 				for (int i = 0; i<=TileWidth;i++)
 				{
 					for (int j=0;j<=TileHeight;j++)
@@ -295,7 +351,7 @@ public class TileMap : UWEBase {
 				break;
 				}
 			case TILE_DIAG_SE:
-				{
+			{//Fills diagonally.	
 				for (int i = 0; i<=TileWidth;i++)
 					{
 						for (int j=0;j<=TileHeight;j++)
@@ -313,7 +369,7 @@ public class TileMap : UWEBase {
 				break;
 				}
 			case TILE_DIAG_SW:
-				{
+				{//Fills diagonally.
 				for (int i = 0; i<=TileWidth;i++)
 				{
 					for (int j=0;j<=TileHeight;j++)
@@ -335,12 +391,12 @@ public class TileMap : UWEBase {
 			case TILE_SLOPE_N:
 			case TILE_SLOPE_S:
 			case TILE_SLOPE_W:
-				{
+				{//Files an open tile.
 				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,TileColorPrimary);
 				break;
 				}
 			default:
-				{
+				{//Does not draw anything.
 				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.clear);
 				break;
 				}
@@ -349,7 +405,15 @@ public class TileMap : UWEBase {
 	}
 
 
-
+		/// <summary>
+		/// Draws a solid tile with no border.
+		/// </summary>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
 	private void DrawSolidTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		for (int i = 0; i<TileWidth; i++)
@@ -362,6 +426,16 @@ public class TileMap : UWEBase {
 
 	}
 
+		/// <summary>
+		/// Draws the open tile. Checks the neighbouring tiles to see if it needs to draw a border.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
 	private void DrawOpenTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		//Check the tile to the north
@@ -398,12 +472,22 @@ public class TileMap : UWEBase {
 		}
 	}
 
+		/// <summary>
+		/// Draws a line at the specified border direction.
+		/// </summary>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
+		/// <param name="Direction">The position on the tile where the border has to be drawn.</param>
 	private void DrawLine(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour, int Direction)
-	{//Draws a line at the specified border.
+	{
 		switch (Direction)
 		{
 		case NORTH:
-			{
+			{//Border to the north.
 			for (int i = 0; i<TileWidth; i++)
 				{
 				OutputTile.SetPixel(i+ TileX * TileWidth, TileHeight + TileY * TileHeight,InputColour);
@@ -411,7 +495,7 @@ public class TileMap : UWEBase {
 			break;
 			}
 		case SOUTH:
-			{
+			{//Border to the south.
 			for (int i = 0; i<TileWidth; i++)
 				{
 				OutputTile.SetPixel(i+ TileX * TileWidth, 0 + TileY * TileHeight,InputColour);
@@ -419,7 +503,7 @@ public class TileMap : UWEBase {
 			break;
 			}
 		case EAST:
-			{
+			{//Border to the east.
 			for (int j=0; j<TileHeight;j++)
 				{
 				OutputTile.SetPixel(TileWidth + TileX * TileWidth, j+ TileY * TileHeight,InputColour);
@@ -427,7 +511,7 @@ public class TileMap : UWEBase {
 			break;
 			}
 		case WEST:
-			{
+			{//Border to the west.
 			for (int j=0; j<TileHeight;j++)
 				{
 				OutputTile.SetPixel(0+ TileX * TileWidth, j+ TileY * TileHeight,InputColour);
@@ -435,7 +519,7 @@ public class TileMap : UWEBase {
 			break;
 			}
 		case NORTHEAST:
-			{
+			{//Diagonal
 				for (int k=0; k<=TileHeight; k++)
 				{
 					OutputTile.SetPixel((TileWidth-k)+ TileX * TileWidth, k+ TileY * TileHeight,InputColour);
@@ -443,7 +527,7 @@ public class TileMap : UWEBase {
 				break;
 			}
 		case SOUTHWEST:
-			{
+			{//Diagonal
 			for (int k=0; k<=TileWidth; k++)
 				{
 				OutputTile.SetPixel(k+ TileX * TileWidth, (TileHeight-k)+ TileY * TileHeight,InputColour);
@@ -451,7 +535,7 @@ public class TileMap : UWEBase {
 			break;
 			}
 		case NORTHWEST:
-		{
+		{//Diagonal
 			for (int k=0; k<=TileWidth; k++)
 			{
 				OutputTile.SetPixel(k+ TileX * TileWidth, k+ TileY * TileHeight,InputColour);
@@ -459,7 +543,7 @@ public class TileMap : UWEBase {
 			break;
 		}
 		case SOUTHEAST:
-		{
+		{//Diagonal
 			for (int k=0; k<=TileWidth; k++)
 			{
 				OutputTile.SetPixel(k+ TileX * TileWidth, k+ TileY * TileHeight,InputColour);
@@ -469,12 +553,21 @@ public class TileMap : UWEBase {
 		}
 	}
 
+		/// <summary>
+		/// Draws a diagonal SW tile.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
 	void DrawDiagSW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
-		//DrawOpenTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.magenta);"
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHWEST);
 
-		//Check the tiles to the north and east of this tile
+		//Check the tiles to the north and east of this tile to see what needs to be drawn for borders
 		if (TileY <63)
 			{//north
 			int TileToTest = GetTileType(LevelNo,TileX,TileY+1);
@@ -511,13 +604,21 @@ public class TileMap : UWEBase {
 
 	}
 
-
+		/// <summary>
+		/// Draws the diag NE tile.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
 	void DrawDiagNE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
-		//DrawOpenTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.magenta);
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHEAST);
 
-		//Check the tiles to the south and west of this tile
+		//Check the tiles to the south and west of this tile to see what needs to be drawn.
 		if (TileY >0)
 		{//South
 			int TileToTest = GetTileType(LevelNo,TileX,TileY-1);
@@ -554,6 +655,16 @@ public class TileMap : UWEBase {
 
 	}
 
+		/// <summary>
+		/// Draws the diag NW tile
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
 	void DrawDiagNW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHWEST);
@@ -594,12 +705,20 @@ public class TileMap : UWEBase {
 		}
 	}
 
+		/// <summary>
+		/// Draws the diag SE tile.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="OutputTile">Output tile.</param>
+		/// <param name="TileX">Tile x.</param>
+		/// <param name="TileY">Tile y.</param>
+		/// <param name="TileWidth">Tile width.</param>
+		/// <param name="TileHeight">Tile height.</param>
+		/// <param name="InputColour">Input colour.</param>
 	void DrawDiagSE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
 	{
-		//DrawOpenTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.magenta);
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHEAST);
 	
-		
 		//Check the tiles to the north and west of this tile
 		if (TileY <63)
 		{//north
@@ -657,34 +776,66 @@ public class TileMap : UWEBase {
 		}
 	}
 
-
-		public int GetFloorHeight(int LevelNo,int tileX, int tileY)
+		/// <summary>
+		/// Gets the height of the floor for the specified tile.
+		/// </summary>
+		/// <returns>The floor height.</returns>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+	public int GetFloorHeight(int LevelNo,int tileX, int tileY)
 	{
 				return Tiles[LevelNo].FloorHeight[tileX,tileY];
 	}
 
-		public int GetCeilingHeight(int LevelNo,int tileX, int tileY)
+		/// <summary>
+		/// Gets the height of the ceiling. Will always be the same value in UW1/2 varies in SHOCK.
+		/// </summary>
+		/// <returns>The ceiling height.</returns>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+	public int GetCeilingHeight(int LevelNo,int tileX, int tileY)
 	{
 				return Tiles[LevelNo].CeilingHeight[tileX,tileY];
 	}
 
-		public void SetFloorHeight(int LevelNo,int tileX, int tileY, int newHeight)
+		/// <summary>
+		/// Sets the height of the floor.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="newHeight">New height.</param>
+	public void SetFloorHeight(int LevelNo,int tileX, int tileY, int newHeight)
 	{
-		//Debug.Log ("floor :" + newHeight + " was " + FloorHeight[tileX,tileY]);
 				Tiles[LevelNo].FloorHeight[tileX,tileY]=newHeight;
 	}
 
+		/// <summary>
+		/// Sets the height of the ceiling.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="newHeight">New height.</param>
 		public void SetCeilingHeight(int LevelNo,int tileX, int tileY, int newHeight)
 	{
 		//Debug.Log ("ceil :" + newHeight + " was " + CeilingHeight[tileX,tileY]);
 				Tiles[LevelNo].CeilingHeight[tileX,tileY]=newHeight;
 	}
 
-	private void SetTileVisited(int LevelNo, int tileX, int tileY)
+		/// <summary>
+		/// Sets the tile and it's neighbours as visited. visited.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public void SetTileVisited(int LevelNo, int tileX, int tileY)
 		{
 
 		Tiles[LevelNo].tileVisited[tileX,tileY]=true;
-
+		
 		Tiles[LevelNo].tileVisited[tileX+1,tileY+1]=true;
 		Tiles[LevelNo].tileVisited[tileX+1,tileY]=true;
 		Tiles[LevelNo].tileVisited[tileX+1,tileY-1]=true;
@@ -699,41 +850,50 @@ public class TileMap : UWEBase {
 
 		}
 
-	private bool GetTileVisited(int tileX, int tileY)
-	{
-		return GetTileVisited(GameWorldController.instance.LevelNo,tileX,tileY);
-	}
-
+		/// <summary>
+		/// Has the tile been already visited.
+		/// </summary>
+		/// <returns><c>true</c>, if tile visited was gotten, <c>false</c> otherwise.</returns>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
 	private bool GetTileVisited(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].tileVisited[tileX,tileY];
 	}
 
-	private bool GetIsWater(int tileX, int tileY)
-	{
-		return GetIsWater(GameWorldController.instance.LevelNo,tileX,tileY);
-	}
-
+		/// <summary>
+		/// Is the tile water.
+		/// </summary>
+		/// <returns><c>true</c>, if is water was gotten, <c>false</c> otherwise.</returns>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
 	private bool GetIsWater(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].isWater[tileX,tileY];
 	}
 
-	private bool GetIsLava(int tileX, int tileY)
-	{
-		return GetIsLava(GameWorldController.instance.LevelNo,tileX,tileY);
-	}
-
+	/// <summary>
+	/// Is the tile Lava
+	/// </summary>
+	/// <returns><c>true</c>, if is lava was gotten, <c>false</c> otherwise.</returns>
+	/// <param name="LevelNo">Level no.</param>
+	/// <param name="tileX">Tile x.</param>
+	/// <param name="tileY">Tile y.</param>
 	private bool GetIsLava(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].isLava[tileX,tileY];
 	}
 
-	private void SetIsWater(int tileX, int tileY,int iIsWater)
-	{
-		SetIsWater(GameWorldController.instance.LevelNo,tileX,tileY,iIsWater);
-	}
 
+		/// <summary>
+		/// Sets if the tile is water.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="iIsWater">1 is water, 0 is not.</param>
 	private void SetIsWater(int LevelNo, int tileX, int tileY,int iIsWater)
 	{
 		if (iIsWater==1)
@@ -746,11 +906,13 @@ public class TileMap : UWEBase {
 			}
 	}
 
-	private void SetIsLava(int tileX, int tileY,int iIsLava)
-	{
-		SetIsLava(GameWorldController.instance.LevelNo,tileX,tileY,iIsLava)	;
-	}
-
+	/// <summary>
+	/// Sets if the tile is lava.
+	/// </summary>
+	/// <param name="LevelNo">Level no.</param>
+	/// <param name="tileX">Tile x.</param>
+	/// <param name="tileY">Tile y.</param>
+	/// <param name="iIsLava">I is lava.</param>
 	private void SetIsLava(int LevelNo, int tileX, int tileY,int iIsLava)
 	{
 		if (iIsLava==1)
@@ -763,86 +925,103 @@ public class TileMap : UWEBase {
 		}
 	}
 
-	private void SetTileType(int tileX, int tileY,int itileType)
-	{
-		SetTileType(GameWorldController.instance.LevelNo,tileX,tileY,itileType);
-	}
 
+		/// <summary>
+		/// Sets the type of the tile.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="itileType">Itile type. See tile type constants on this class</param>
 	private void SetTileType(int LevelNo, int tileX, int tileY,int itileType)
 	{
 		Tiles[LevelNo].tileType[tileX,tileY]=itileType;
 	}
 
 
-	private int GetTileType( int tileX, int tileY)
-	{
-		return GetTileType(GameWorldController.instance.LevelNo,tileX,tileY);
-	}
-
+		/// <summary>
+		/// Gets the type of the tile.
+		/// </summary>
+		/// <returns>The tile type.</returns>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
 	private int GetTileType(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].tileType[tileX,tileY];
 	}
 
-	private void SetTileRender(int tileX, int tileY,int iRender)
-	{
-		SetTileRender(GameWorldController.instance.LevelNo,tileX,tileY,iRender);
-	}
-
+		/// <summary>
+		/// Sets the tile render state. Only affects the automap.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="iRender">1= render, 0 = invisible.</param>
 	private void SetTileRender(int LevelNo, int tileX, int tileY,int iRender)
 	{
 		Tiles[LevelNo].Render[tileX,tileY]=iRender;
 	}
 	
-	private int GetTileRender(int tileX, int tileY)
-	{
-		return GetTileRender(GameWorldController.instance.LevelNo,tileX,tileY);
-	}
-
+	/// <summary>
+	/// Gets the tile render state. Only affects the automap.
+	/// </summary>
+	/// <returns>The tile render.</returns>
+	/// <param name="LevelNo">Level no.</param>
+	/// <param name="tileX">Tile x.</param>
+	/// <param name="tileY">Tile y.</param>
 	private int GetTileRender(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].Render[tileX,tileY];
 	}
 
+		/// <summary>
+		/// Sets the tile properties that are read in from tileprops.txt
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="itileType">Itile type.</param>
+		/// <param name="iRender">I render.</param>
+		/// <param name="FloorHeight">Floor height.</param>
+		/// <param name="CeilingHeight">Ceiling height.</param>
+		/// <param name="iIsWater">is water.</param>
+		/// <param name="iIsDoor">is door.</param>
+		/// <param name="iIsLava">is lava.</param>
 	private void SetTileProp(int LevelNo, int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava)
 	{
-
-
-	//	tileType[tileX,tileY]=tileType;
 		SetTileType (LevelNo, tileX,tileY,itileType);
 		Tiles[LevelNo].Render[tileX,tileY]=iRender;
-		//FloorHeight[tileX,tileY]=FloorHeight;
 		SetFloorHeight (LevelNo, tileX,tileY,FloorHeight);
 		SetCeilingHeight (LevelNo, tileX,tileY,CeilingHeight);
-
 		SetIsWater(LevelNo, tileX,tileY,iIsWater);
 		SetIsLava(LevelNo, tileX,tileY,iIsLava);
-		//CeilingHeight[tileX,tileY]=CeilingHeight;
-
 	}
 
 	// Use this for initialization
 	void Start () {
-		Action_Moving_Platform.tm=this.gameObject.GetComponent<TileMap>();
-		//GoblinAI.tm= this.gameObject.GetComponent<TileMap>();
-				for (int i=0; i<9;i++)
-				{
-					Tiles[i] =new TileInfo();
-				}
-				for (int i=0; i<MapNotes.GetUpperBound(0); i ++)
-				{
-						MapNotes[i] = new List<MapNote>();
-				}
-				//THIS IS AWFUL!!!!! 
-				LoadTileMapInfo(Application.dataPath + "//..//" + UWEBase._RES + "_tileprops.txt");
+				//Loads up the tile map info.
+		Action_Moving_Platform.tm=this.gameObject.GetComponent<TileMap>();//Shock related. Need to remove.
+			for (int i=0; i<9;i++)
+			{
+				Tiles[i] =new TileInfo();
+			}
+			for (int i=0; i<MapNotes.GetUpperBound(0); i ++)
+			{
+					MapNotes[i] = new List<MapNote>();
+			}
+			LoadTileMapInfo(Application.dataPath + "//..//" + UWEBase._RES + "_tileprops.txt");
 
-				InvokeRepeating("PositionDetect",0.0f,0.02f);
+			InvokeRepeating("PositionDetect",0.0f,0.02f);
 		}
 
-
+		/// <summary>
+		/// Loads the tile map info from a config file called GAMENAME+ "_tileprops.txt"
+		/// </summary>
+		/// <returns><c>true</c>, if tile map info was loaded, <c>false</c> otherwise.</returns>
+		/// <param name="fileName">File name.</param>
 		public bool LoadTileMapInfo(string fileName)
 		{
-				//Levelno,tilex,tiley,tileType,render,floorheight,ceilingheight,iswater,isdoor,islava
 				string line;
 				StreamReader fileReader = new StreamReader(fileName, Encoding.Default);
 				using (fileReader)
@@ -877,8 +1056,4 @@ public class TileMap : UWEBase {
 						return true;
 				}
 		}
-
-
-
-
 }

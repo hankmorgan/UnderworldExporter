@@ -219,15 +219,15 @@ public class NPC : object_base {
 
 		if ( playerUWReady==false)
 		{//Initialise the relationship of the player to the AI module
-			if(playerUW!=null)
-			{
-				ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",playerUW.gameObject);
+			//if(playerUW!=null)
+			//{
+				ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
 				playerUWReady=true;
-			}
+			//}
 		}
 		else
 		{//The AI is only active when the player is within a certain distance to the player.
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, playerUW.gameObject.transform.position)<=8;
+			ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.gameObject.transform.position)<=8;
 			anim.enabled=ai.AI.IsActive;
 			if (ai.AI.IsActive==false)
 			{
@@ -389,7 +389,7 @@ public class NPC : object_base {
 			oldNPC_ID=NPC_ID;
 		}
 		//Get the relative vector between the player and the npc.
-		direction = playerUW.gameObject.transform.position - this.gameObject.transform.position;
+		direction = GameWorldController.instance.playerUW.gameObject.transform.position - this.gameObject.transform.position;
 		//Convert the direction into an angle.
 		angle = Mathf.Atan2(direction.x,direction.z) * Mathf.Rad2Deg;
 		
@@ -625,7 +625,7 @@ public class NPC : object_base {
 		float weaponRange=1.0f;
 
 		//NPC tries to raycast at the player.
-		Ray ray= new Ray(this.transform.position,playerUW.gameObject.transform.position-this.transform.position);
+		Ray ray= new Ray(this.transform.position,GameWorldController.instance.playerUW.gameObject.transform.position-this.transform.position);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
@@ -638,7 +638,7 @@ public class NPC : object_base {
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
-					playerUW.ApplyDamage(5);
+					GameWorldController.instance.playerUW.ApplyDamage(5);
 				}
 			}
 		}

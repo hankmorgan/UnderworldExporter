@@ -93,17 +93,17 @@ public class UWCharacter : Character {
 
 		//Tells other objects about this component;
 
-		DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		Container.playerUW=this.GetComponent<UWCharacter>();
-		SpellEffect.playerUW=this.GetComponent<UWCharacter>();
+		//DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
+		//Container.playerUW=this.GetComponent<UWCharacter>();
+		//SpellEffect.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		NPC.playerUW=this.GetComponent<UWCharacter>();
+		//NPC.playerUW=this.GetComponent<UWCharacter>();
 		Magic.playerUW=this.GetComponent<UWCharacter>();
-		object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
+		//object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
 		SpellProp.playerUW = this.gameObject.GetComponent<UWCharacter>();
 		
 
-		ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();
+		//ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();
 		UWHUD.instance.InputControl.text="";
 		UWHUD.instance.MessageScroll.Clear ();
 		
@@ -159,7 +159,7 @@ public class UWCharacter : Character {
 				ObjectInteraction objIntInHand = playerInventory.GetGameObjectInHand().GetComponent<ObjectInteraction>();
 				if (objIntInHand!=null)
 				{
-					switch (objIntInHand.ItemType)
+					switch (objIntInHand.GetItemType())
 					{
 						case ObjectInteraction.POLE:
 							return useRange *2;

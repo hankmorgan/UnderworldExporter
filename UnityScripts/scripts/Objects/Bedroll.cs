@@ -5,7 +5,7 @@ public class Bedroll : object_base {
 
 	public override bool use ()
 	{
-		if (playerUW.playerInventory.ObjectInHand=="")
+	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
 			//Rules to implement for sleeping
 			//Only sleep if there are no hostile monsters nearby.
@@ -32,12 +32,12 @@ public class Bedroll : object_base {
 
 			if (!CheckForMonsters())
 			    {
-				ObjectInteraction incense =playerUW.playerInventory.findObjInteractionByID(277); 
+				ObjectInteraction incense =GameWorldController.instance.playerUW.playerInventory.findObjInteractionByID(277); 
 				if (incense!=null)
 					{
 					UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
 					incense.consumeObject ();
-					switch (playerUW.quest().getIncenseDream())
+					switch (GameWorldController.instance.playerUW.quest().getIncenseDream())
 						{
 						case 0:
 						UWHUD.instance.CutScenesFull.SetAnimation="cs013_n01";break;
@@ -49,7 +49,7 @@ public class Bedroll : object_base {
 					}
 				else
 					{	
-						if (playerUW.FoodLevel>=3)					
+					if (GameWorldController.instance.playerUW.FoodLevel>=3)					
 						{
 								if (IsGaramonTime())
 								{//PLay a garamon dream
@@ -63,9 +63,9 @@ public class Bedroll : object_base {
 						}
 					
 					}
-				for (int i=playerUW.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
+				for (int i=GameWorldController.instance.playerUW.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
 					{
-					if (playerUW.FoodLevel>=3)
+					if (GameWorldController.instance.playerUW.FoodLevel>=3)
 						{
 						GameClock.Advance();//Move time forward.
 						}
@@ -73,19 +73,19 @@ public class Bedroll : object_base {
 						{//Too hungry to sleep.
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,17));
 						UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);		
-						playerUW.Fatigue+=i;
+						GameWorldController.instance.playerUW.Fatigue+=i;
 						return true;
 						}
 					}
-				playerUW.Fatigue=29;//Fully rested
-				if (playerUW.CurVIT<playerUW.MaxVIT)
+				GameWorldController.instance.playerUW.Fatigue=29;//Fully rested
+				if (GameWorldController.instance.playerUW.CurVIT<GameWorldController.instance.playerUW.MaxVIT)
 					{//Random regen of an amount of health
-					playerUW.CurVIT += Random.Range (1, playerUW.MaxVIT-playerUW.CurVIT+1);
+					GameWorldController.instance.playerUW.CurVIT += Random.Range (1, GameWorldController.instance.playerUW.MaxVIT-GameWorldController.instance.playerUW.CurVIT+1);
 					}
-				if (playerUW.PlayerMagic.CurMana<playerUW.PlayerMagic.MaxMana)
-				{//Random regen of an amount of mana
-					playerUW.PlayerMagic.CurMana += Random.Range (1, playerUW.PlayerMagic.MaxMana-playerUW.PlayerMagic.CurMana+1);
-				}
+				if (GameWorldController.instance.playerUW.PlayerMagic.CurMana<GameWorldController.instance.playerUW.PlayerMagic.MaxMana)
+					{//Random regen of an amount of mana
+					GameWorldController.instance.playerUW.PlayerMagic.CurMana += Random.Range (1, GameWorldController.instance.playerUW.PlayerMagic.MaxMana-GameWorldController.instance.playerUW.PlayerMagic.CurMana+1);
+					}
 				}
 			else
 			{
@@ -95,7 +95,7 @@ public class Bedroll : object_base {
 		}
 		else
 		{
-			return ActivateByObject(playerUW.playerInventory.GetGameObjectInHand());
+		return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
 
