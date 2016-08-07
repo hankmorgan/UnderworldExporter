@@ -834,8 +834,18 @@ public class TileMap : UWEBase {
 		public void SetTileVisited(int LevelNo, int tileX, int tileY)
 		{
 
-		Tiles[LevelNo].tileVisited[tileX,tileY]=true;
-		
+				MarkTile(LevelNo,tileX,tileY);
+				MarkTile(LevelNo,tileX+1,tileY+1);
+				MarkTile(LevelNo,tileX+1,tileY);
+				MarkTile(LevelNo,tileX+1,tileY-1);
+				MarkTile(LevelNo,tileX+0,tileY+1);
+				MarkTile(LevelNo,tileX+0,tileY);
+				MarkTile(LevelNo,tileX+0,tileY-1);
+				MarkTile(LevelNo,tileX-1,tileY+1);
+				MarkTile(LevelNo,tileX-1,tileY);
+				MarkTile(LevelNo,tileX-1,tileY-1);
+		/*Tiles[LevelNo].tileVisited[tileX,tileY]=true;
+
 		Tiles[LevelNo].tileVisited[tileX+1,tileY+1]=true;
 		Tiles[LevelNo].tileVisited[tileX+1,tileY]=true;
 		Tiles[LevelNo].tileVisited[tileX+1,tileY-1]=true;
@@ -847,7 +857,24 @@ public class TileMap : UWEBase {
 		Tiles[LevelNo].tileVisited[tileX-1,tileY+1]=true;
 		Tiles[LevelNo].tileVisited[tileX-1,tileY]=true;
 		Tiles[LevelNo].tileVisited[tileX-1,tileY-1]=true;
+		*/
 
+		}
+
+		/// <summary>
+		/// Marks the tile as visited and checks if it is in range.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		private void MarkTile(int LevelNo, int tileX, int tileY)
+		{
+				if (((tileX>=0) && (tileX<=63)) 
+						&& 
+						((tileY>=0) && (tileY<=63)))
+				{
+						Tiles[LevelNo].tileVisited[tileX,tileY]=true;
+				}
 		}
 
 		/// <summary>

@@ -344,7 +344,7 @@
 343 0 0 0 entity 83 a_shrine H 0 UW1/Sprites/Objects/OBJECTS_343 1 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_343 UW1/Sprites/Objects/OBJECTS_343 S T U UW1/Sprites/Objects/OBJECTS_343 W x Y 0 1
 344 0 0 0 model 23 a_table H 0 UW1/Sprites/Objects/OBJECTS_344 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_344 UW1/Sprites/Objects/OBJECTS_344 S T U UW1/Sprites/Objects/OBJECTS_344 W x Y 0 1
 345 0 0 0 model 23 a_beam H 0 UW1/Sprites/Objects/OBJECTS_345 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_345 UW1/Sprites/Objects/OBJECTS_345 S T U UW1/Sprites/Objects/OBJECTS_345 W x Y 0 1
-346 0 0 0 model 23 a_moongate H 0 UW1/Sprites/Objects/OBJECTS_346 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_346 UW1/Sprites/Objects/OBJECTS_346 S T U UW1/Sprites/Objects/OBJECTS_346 W x Y 0 1
+346 0 0 0 entity 96 a_moongate H 0 UW1/Sprites/Objects/OBJECTS_346 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_346 UW1/Sprites/Objects/OBJECTS_346 S T U UW1/Sprites/Objects/OBJECTS_346 W x Y 0 1
 347 0 0 0 entity 19 a_barrel H 0 UW1/Sprites/Objects/OBJECTS_347 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_347 UW1/Sprites/Objects/OBJECTS_347 S T U UW1/Sprites/Objects/OBJECTS_347 W x Y 0 1
 348 0 0 0 model 23 a_chair H 0 UW1/Sprites/Objects/OBJECTS_348 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_348 UW1/Sprites/Objects/OBJECTS_348 S T U UW1/Sprites/Objects/OBJECTS_348 W x Y 0 1
 349 0 0 0 entity 19 a_chest H 0 UW1/Sprites/Objects/OBJECTS_349 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_349 UW1/Sprites/Objects/OBJECTS_349 S T U UW1/Sprites/Objects/OBJECTS_349 W x Y 0 1
@@ -363,7 +363,7 @@
 362 0 0 0 entity 25 unknown H 0 UW1/Sprites/Objects/OBJECTS_362 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_362 UW1/Sprites/Objects/OBJECTS_362 S T U UW1/Sprites/Objects/OBJECTS_362 W x Y 0 1
 363 0 0 0 entity 25 unknown H 0 UW1/Sprites/Objects/OBJECTS_363 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_363 UW1/Sprites/Objects/OBJECTS_363 S T U UW1/Sprites/Objects/OBJECTS_363 W x Y 0 1
 364 0 0 0 entity 25 unknown H 0 UW1/Sprites/Objects/OBJECTS_364 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_364 UW1/Sprites/Objects/OBJECTS_364 S T U UW1/Sprites/Objects/OBJECTS_364 W x Y 0 1
-365 0 0 0 model 23 force_field H 0 UW1/Sprites/Objects/OBJECTS_365 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_365 UW1/Sprites/Objects/OBJECTS_365 S T U UW1/Sprites/Objects/OBJECTS_365 W x Y 0 1
+365 0 0 0 entity 95 force_field H 0 UW1/Sprites/Objects/OBJECTS_365 0 L M 1 1 1 UW1/Sprites/Objects/OBJECTS_365 UW1/Sprites/Objects/OBJECTS_365 S T U UW1/Sprites/Objects/OBJECTS_365 W x Y 0 1
 366 0 0 0 entity 34 special_tmap_obj H 0 UW1/Sprites/Objects/OBJECTS_366 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_366 UW1/Sprites/Objects/OBJECTS_366 S T U UW1/Sprites/Objects/OBJECTS_366 W x Y 0 0
 367 0 0 0 entity 35 special_tmap_obj H 0 UW1/Sprites/Objects/OBJECTS_367 0 L M 0 0 0 UW1/Sprites/Objects/OBJECTS_367 UW1/Sprites/Objects/OBJECTS_367 S T U UW1/Sprites/Objects/OBJECTS_367 W x Y 0 0
 368 0 0 0 entity 8 a_button H 0 UW1/Sprites/Objects/OBJECTS_368 0 L M 1 0 1 UW1/Sprites/Objects/OBJECTS_368 UW1/Sprites/Objects/OBJECTS_368 S T U UW1/Sprites/Objects/OBJECTS_368 W x Y 0 0

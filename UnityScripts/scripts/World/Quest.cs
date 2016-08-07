@@ -29,10 +29,25 @@ using System.Collections;
 /// 3: found writ
 /// 4: door to armoury opened
 public class Quest : UWEBase {
+
+		public const int TalismanSword=10;
+		public const int TalismanShield=55;
+		public const int TalismanTaper=147;
+		public const int TalismanCup =174;
+		public const int TalismanBook=276;
+		public const int TalismanWine=191;
+		public const int TalismanRing=54;
+		public const int TalismanBanner=287;
+
 		/// <summary>
 		/// The quest variable integers
 		/// </summary>
 	public int[] QuestVariables=new int[256];
+
+	/// <summary>
+	/// The talismans cast into abyss in order to complete the game.
+	/// </summary>
+	public bool[] TalismansCastIntoAbyss = new bool[8];
 
 		/// <summary>
 		/// Tracks which garamon dream we are at.
@@ -56,4 +71,5 @@ public class Quest : UWEBase {
 		}
 		return IncenseDream++;
 	}
+
 }

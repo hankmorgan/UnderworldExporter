@@ -102,7 +102,7 @@ public class Conversation_2 : Conversation {
 	
 	int func_0106(int param1, int param2)
 	{//My version of have I made my appointment.
-		
+		return 1;
 		int hoursLeft= AppointmentTime - GameClock.ConvertNow ();
 		
 		if (hoursLeft<=0)
@@ -371,14 +371,14 @@ public class Conversation_2 : Conversation {
 			locals[19] = 0;
 			locals[17] = 1;
 			while ( (locals[17] <= locals[16]) && ((locals[19] !=1) || (locals[18]!=1)) ) {
-				
-				if ( locals[2] == 280 ) {
+				//Try and match sword hilt and blade.
+				if  (( locals[3] == 280 ) || ( locals[4] == 280)) {
 					
 					locals[19] = 1;
 					locals[13] = locals[7];
 				} // end if
 				
-				if ( locals[2] == 281 ) {
+				if  (( locals[3] == 281 ) || ( locals[4] == 281)) {
 					
 					locals[18] = 1;
 					locals[14] = locals[7];
@@ -391,13 +391,15 @@ public class Conversation_2 : Conversation {
 			locals[1] = sex( 2, locals[23], locals[22] );
 			
 			if ( (locals[19]==1) && (locals[18]==1)) {
-				
+				//found sword and hilt
 				yield return StartCoroutine(say( locals, 018 ));
 				locals[24] = 19;
 				locals[25] = 20;
 				locals[26] = 0;
 				//locals[45] = babl_menu( 0, locals[24] );
+				TradeSlot.Locked=true;//Stop player from removing items from trade area.
 				yield return StartCoroutine(babl_menu (0,locals,24));
+				TradeSlot.Locked=false;
 				locals[45] = PlayerAnswer;
 				switch ( locals[45] ) {
 					
@@ -408,7 +410,7 @@ public class Conversation_2 : Conversation {
 					
 				case 2:
 					
-					yield return StartCoroutine(func_0ada( locals[13] ));
+					yield return StartCoroutine(func_0ada( 8,locals ));//Takes objects from the list.
 					yield break;
 				} // end if
 				
@@ -477,7 +479,7 @@ public class Conversation_2 : Conversation {
 			//	} // end if
 			
 			//	} // end if
-			yield break;	
+		//	yield break;	
 		label_063b:;
 			//Asks to try again
 			
@@ -589,7 +591,7 @@ public class Conversation_2 : Conversation {
 				yield break;
 			} // end if
 			
-			if ( global[2,0] == 10 ) {//Am I repairing the sword or now.
+			if ( global[2,0] == 10 ) {//Am I repairing the sword or not.
 				
 				yield return StartCoroutine(func_1064());
 			} else {
@@ -902,7 +904,7 @@ public class Conversation_2 : Conversation {
 		yield return StartCoroutine(func_13ac());
 	} // end func
 	
-	IEnumerator func_0ada(int param1) {
+	IEnumerator func_0ada(int param1, int[] param1Locals) {
 		
 		//int locals[46];
 		int[] locals=new int[47];
@@ -911,7 +913,7 @@ public class Conversation_2 : Conversation {
 	label_0ae4:;
 		
 		locals[2] = 2;
-		if ( give_to_npc( 2,locals, param1, locals[2] ) !=1 ) {
+		if ( give_to_npc( 2,param1Locals, param1, locals[2] ) !=1 ) {
 			//if ( !give_to_npc( 2, param1, locals[2] ) ) {
 			
 			yield return StartCoroutine(say( locals, 078 ));
@@ -1246,7 +1248,7 @@ public class Conversation_2 : Conversation {
 			
 			locals[17] = 1;
 		} else {
-			func_11f7( locals[65], locals[4] );
+			yield return StartCoroutine(func_11f7( locals[65], locals[4] ));
 			locals[17] = func_11f7_result; //func_11f7( locals[65], locals[4] );
 			locals[65] = 2;
 		} // end if
@@ -1355,9 +1357,10 @@ public class Conversation_2 : Conversation {
 		do_inv_delete( 1, locals[3] );
 		locals[4] = 10;
 		do_inv_create( 1, locals[4] );
-		locals[1] = find_inv( 2, locals[6], locals[5] );
 		locals[5] = 10;
 		locals[6] = 0;
+		locals[1] = find_inv( 2, locals[6], locals[5] );
+
 		if ( locals[1] > 0 ) {
 			
 			locals[7] = 1;
@@ -1373,7 +1376,7 @@ public class Conversation_2 : Conversation {
 		} // end if
 		
 		locals[15] = 1;
-		func_11f7( locals[15], 1 );
+		yield return StartCoroutine(func_11f7( locals[15], 1 ));
 		//if ( func_11f7( locals[15], 1 ) ) {
 		if (func_11f7_result ==1){
 			locals[16] = 10;
@@ -1462,7 +1465,7 @@ public class Conversation_2 : Conversation {
 			locals[23] = 134;
 		} // end if
 		
-		locals[24] =global[0,0];// param1[0]global[0];
+		locals[24] =global[1,0];// param1[0]global[0];
 		if ( 1 == locals[24] ) {
 			
 			yield return StartCoroutine(say( locals, 135 ));
@@ -1498,7 +1501,7 @@ public class Conversation_2 : Conversation {
 		//} // end if
 		
 		//} // end if
-		
+	label_PAYSHAK:;	
 		if ( locals[3] > 0 ) {
 			
 			locals[47] = 139;
@@ -1530,28 +1533,32 @@ public class Conversation_2 : Conversation {
 			} else {
 				
 				yield return StartCoroutine(say( locals, 141 ));
-				locals[3] = locals[3] + 1;
-			} 
+				locals[3] = locals[3] + 1;				
+			}
+		goto label_PAYSHAK;
 		}
 		else {
 			
 			locals[2] = 1;
 			locals[16] = 0;
 			locals[17] = 0;
+				int counter=0;
 			while ( locals[2] <= locals[5] ) {
 				//TODO:This will need some reworking
-				if ( (locals[10] == 160 || locals[10] == 161) ) {
+				if ( (locals[11+counter] == 160 )|| (locals[11+counter] == 161) ) {
 					
-					locals[16] = locals[16] + count_inv( 1, locals[5] );
-					locals[17] = locals[17] + 1;
-					locals[17] = locals[5];
+					locals[16] = locals[16] + count_inv( 1, locals[6+counter] );
+					locals[18 + locals[17]] = locals[6+counter]; //Copy the item poisition.
+					locals[17] = locals[17] + 1;//No of items found
+					
+					//locals[17] = locals[5];
 				} // end if
-				
+				counter++;
 				locals[2] = locals[2] + 1;
 			} // while
 			
 			//if ( locals[16] >= param2[0]global[0] ) {
-			if ( locals[16] >= global[0,0] ) {
+			if ( locals[16] >=global[1,0] ) {
 				
 				//give_to_npc( 2, locals[18], locals[17] );
 				give_to_npc(2,locals,18,locals[17]);

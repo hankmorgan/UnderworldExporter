@@ -3456,10 +3456,14 @@ public class Magic : UWEBase {
 						//Some cutscences can be played by a spell trap these are as follows (some known cases)
 				case 224:
 						//Debug.Log ("play the intro cutscene");
-						UWHUD.instance.CutScenesFull.SetAnimation="Cutscene_Intro";
+						Cutscene_Intro ci = UWHUD.instance.gameObject.AddComponent<Cutscene_Intro>();
+						UWHUD.instance.CutScenesFull.cs=ci;
+						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 225:
-						Debug.Log ("play the endgame cutscene");
+						Cutscene_EndGame ce = UWHUD.instance.gameObject.AddComponent<Cutscene_EndGame>();
+						UWHUD.instance.CutScenesFull.cs=ce;
+						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 226:
 						Debug.Log ("play the tybal death cutscene");
@@ -3471,7 +3475,10 @@ public class Magic : UWEBase {
 						Debug.Log ("Play the splash screen - Underworld");
 						break;
 				case 234:
-						Debug.Log ("Play the credits");
+						//Debug.Log ("Play the credits");
+						Cutscene_Credits cc = UWHUD.instance.gameObject.AddComponent<Cutscene_Credits>();
+						UWHUD.instance.CutScenesFull.cs=cc;
+						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 235:
 						Debug.Log ("Vision - IN");

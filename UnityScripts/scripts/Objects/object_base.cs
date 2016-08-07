@@ -527,6 +527,6 @@ public class object_base : UWEBase {
 
 		public virtual string getEquipString()
 		{
-			return GameWorldController.instance.objectMaster.path[objInt().item_id];
+			return GameWorldController.instance.objectMaster.particle[objInt().item_id];
 		}
 }

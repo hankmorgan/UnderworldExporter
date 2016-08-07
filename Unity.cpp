@@ -898,6 +898,19 @@ void RenderUnityEntityA_CHANGE_TERRAIN_TRAP(int game, float x, float y, float z,
 
 	}
 
+void RenderUnityEntityForceField(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\tCreateForceField(myObj);");
+	}
+
+void RenderUnityEntityMoonGate(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+	fprintf(UNITY_FILE, "\n\tCreateMoonGate(myObj);");
+	UnityRotation(game, 0, currobj.heading, 0);
+	}
+
 void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{//Flat patch objects used as decals. This should be changed into something like a SHOCK screen model?
 	//params
@@ -1760,6 +1773,8 @@ int target;
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						case 0x28://Emerald puzzle
 							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
+						case 0x3F://End game
+							{fprintf(UNITY_FILE, "\n\tCreate_a_do_trap(myObj,%d,%d);", currobj.quality, currobj.flags); break; }
 						default:
 							{fprintf(UNITY_FILE, "\n\tCreate_trap_base(myObj);"); break; }
 					}
@@ -1930,6 +1945,12 @@ return;
 						case TMAP_SOLID:
 						case TMAP_CLIP:
 							RenderUnityEntityTMAP(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case FORCEFIELD:
+							RenderUnityEntityForceField(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case MOONGATE:
+							RenderUnityEntityMoonGate(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 						case BOOK:
 						case SCROLL:

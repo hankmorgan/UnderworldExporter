@@ -80,6 +80,12 @@ public class GameWorldController : UWEBase {
 	/// The grey scale shader. Reference to allow loading of a hidden shader.
 	/// </summary>
 	public Shader greyScale;
+
+		/// <summary>
+		/// The vortex effect shader.  Reference to allow loading of a hidden shader.
+		/// </summary>
+		public Shader vortex;
+
 	/// <summary>
 	/// Is the game at the main menu or should it start at the mainmenu.
 	/// </summary>

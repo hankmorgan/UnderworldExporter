@@ -51,7 +51,7 @@ public override bool use ()
 							if (FishobjInt!=null)
 							{
 								FishobjInt.UpdateAnimation();
-								UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
+								//UWHUD.instance.CursorIcon= //FishobjInt.InventoryDisplay.texture;
 								UWHUD.instance.CursorIcon= FishobjInt.GetInventoryDisplay().texture ;//FishobjInt.InventoryDisplay.texture;
 							}
 
@@ -80,7 +80,7 @@ public override bool use ()
 	{//Create food
 
 		//int ObjectNo = 182;
-		GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
+	/*	GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
 		myObj.layer=LayerMask.NameToLayer("UWObjects");
 		myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
 		myObj.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
@@ -89,8 +89,10 @@ public override bool use ()
 		ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_182", _RES +"/Sprites/Objects/Objects_182", _RES +"/Sprites/Objects/Objects_182", ObjectInteraction.FOOD, 182, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 
 		Food fd = myObj.AddComponent<Food>();
-		fd.Nutrition=5;//TODO:determine values to use here.
-		return myObj;
+		fd.Nutrition=5;//TODO:determine values to use here.*/
+
+		return ObjectInteraction.CreateNewObject(182).gameObject;
+		//return myObj;
 	}
 
 }

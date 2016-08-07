@@ -16,6 +16,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		{
 				if (cs!=null)
 				{
+						cs.PostCutSceneEvent();
 						PlayingSequence=false;
 						UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
 						Destroy (cs);	
@@ -42,6 +43,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,true);
 		PlayingSequence=true;
 		SkipAnim=false;
+		cs.PreCutsceneEvent();
 		//Begin the image seq
 		StartCoroutine(PlayCutsImageSequence());
 		//Begin the subs seq
@@ -65,8 +67,9 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 		PlayingSequence=false;
 		PostAnimPlay();
 		//TargetControl.gameObject.SetActive(false);
-		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);
-		Destroy (cs);
+		//UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);
+		//Destroy (cs);
+		End();
 		
 	}
 	

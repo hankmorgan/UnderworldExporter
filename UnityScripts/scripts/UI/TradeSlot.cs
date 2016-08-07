@@ -21,6 +21,11 @@ public class TradeSlot : GuiBase {
 	public static bool LookingAt;
 	public static string TempLookAt;
 
+		/// <summary>
+		/// Stop the player from taking items out of the tradeslots
+		/// </summary>
+		public static bool Locked;
+
 	public override void Start()
 	{
 		base.Start();
@@ -54,7 +59,7 @@ public class TradeSlot : GuiBase {
 		//Selected = !Selected;
 		if (LookingAt==true)
 		{return;}//Only look at one thing at a time.
-
+		if (TradeSlot.Locked){return;}
 		ObjectInteraction objInt= GetGameObjectInteraction();
 		if (objInt!=null)
 		{
@@ -88,6 +93,7 @@ public class TradeSlot : GuiBase {
 
 	public void PlayerSlotLeftClick()
 	{
+		if (TradeSlot.Locked){return;}
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand != "")
 		{
 			//put the object in hand in this slot.
@@ -160,6 +166,7 @@ public class TradeSlot : GuiBase {
 		//Left click pickup
 		//right click toggle.
 		//On hover identify?
+		if (TradeSlot.Locked){return;}
 		if (PlayerSlot==true)
 		{
 			if (ptrID == -2)//right click

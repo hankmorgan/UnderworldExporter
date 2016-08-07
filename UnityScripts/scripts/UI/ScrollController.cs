@@ -25,7 +25,8 @@ public class ScrollController : GuiBase {
 			WhatToSay="";
 		}
 		WhatToSay=	WhatToSay.Replace("\\n","\n");
-		string[] Paragraphs = WhatToSay.Split(new string [] {"/m"}, System.StringSplitOptions.None);
+		WhatToSay=WhatToSay.TrimEnd();
+		string[] Paragraphs = WhatToSay.Split(new string [] {"\n"}, System.StringSplitOptions.None);
 		
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 		{
@@ -74,7 +75,8 @@ public class ScrollController : GuiBase {
 			txtToDisplay[i] ="";
 		}
 		ptr=0;
-		PrintList();
+		//PrintList();
+		NewUIOUt.text="";
 			
 	}
 

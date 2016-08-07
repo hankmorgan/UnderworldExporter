@@ -1674,6 +1674,13 @@ public class Conversation : GuiBase {
 
 		switch (item_id)
 		{//Some known cases
+		case 10://A sword
+			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			WeaponMelee weap= myObj.AddComponent<WeaponMelee>();
+						weap.Skill=3;
+						//TODO: add damage values
+			
+			break;
 		case 276://Exploding book
 			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			myObj.AddComponent<ReadableTrap>();

@@ -164,4 +164,20 @@ public class Cuts : GuiBase {
 	{
 				return;	
 	}
+
+	/// <summary>
+	/// Support for code to be called at the start of the cutscene
+	/// </summary>
+	public virtual void PreCutsceneEvent()
+	{
+		return;	
+	}
+
+	/// <summary>
+	/// Support for code to be called after the cutscene ends
+	/// </summary>
+	public virtual void PostCutSceneEvent()
+	{
+			return;		
+	}
 }

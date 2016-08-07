@@ -625,38 +625,11 @@ public class ObjectInteraction : UWEBase {
 										InputObject2.GetComponent<ObjectInteraction>().consumeObject();
 								}
 
-								//Create the new object
-								GameObject myObj=  new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
-								myObj.layer=LayerMask.NameToLayer("UWObjects");
-								myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
-								myObj.transform.parent=GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
-								ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + lstOutput[i],true);
-								ObjectMasters objM = GameWorldController.instance.objectMaster;
-								int x = lstOutput[i];
-								ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f,objM.particle[x],objM.InvIcon[x],objM.InvIcon[x],objM.type[x],x,1,40,0,objM.isMoveable[x],1,0,1,1,0,0,1);
-								switch (lstOutput[i])
-								{
-								case 299://Fishing pole
-										//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), ObjectInteraction.FISHING_POLE, lstOutput[i], 1, 40, 0,1, 1, 0, 1, 1, 0, 0, 1);
-										myObj.AddComponent<FishingPole>();break;
-								case 183://Popcorn
-										//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), ObjectInteraction.FOOD, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-										Food fd = myObj.AddComponent<Food>();
-										fd.Nutrition=5;
-										break;
-								default:
-										//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), _RES +"/Sprites/Objects/Objects_" + lstOutput[i].ToString("000"), 23, lstOutput[i], 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-										myObj.AddComponent<object_base>();break;
+								ObjectInteraction CreatedObjectInt = CreateNewObject (lstOutput[i]);
+								if (CreatedObjectInt != null) {
+										CreatedObjectInt.UpdateAnimation ();
+										UWHUD.instance.CursorIcon = CreatedObjectInt.GetInventoryDisplay ().texture;
 								}
-								GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObj.name;
-								ObjectInteraction CreatedObjectInt = myObj.GetComponent<ObjectInteraction>();
-								if (CreatedObjectInt!=null)
-								{
-										CreatedObjectInt.UpdateAnimation();
-										//UWHUD.instance.CursorIcon=CreatedObjectInt.InventoryDisplay.texture;
-										UWHUD.instance.CursorIcon=CreatedObjectInt.GetInventoryDisplay().texture;
-								}
-
 								UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 								InteractionModeControl.UpdateNow=true;
 								return true;
@@ -687,6 +660,40 @@ public class ObjectInteraction : UWEBase {
 
 				}
 
+		}
+
+		/// <summary>
+		/// Creates a new game object.
+		/// </summary>
+		/// <returns>The new object.</returns>
+		/// <param name="NewItem_id">New item identifier.</param>
+		public static ObjectInteraction CreateNewObject (int NewItem_id)
+		{
+				//Create the new object
+				GameObject myObj = new GameObject ("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
+				myObj.layer = LayerMask.NameToLayer ("UWObjects");
+				myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
+				myObj.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
+				ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
+				ObjectMasters objM = GameWorldController.instance.objectMaster;
+
+				ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [NewItem_id], objM.InvIcon [NewItem_id], objM.InvIcon [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
+				switch (NewItem_id) {
+				case 299:
+						//Fishing pole
+						myObj.AddComponent<FishingPole> ();
+						break;
+				case 182://fish
+				case 183://Popcorn
+						Food fd = myObj.AddComponent<Food> ();
+						fd.Nutrition = 5;
+						break;
+				default:
+						myObj.AddComponent<object_base> ();
+						break;
+				}
+				GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
+				return myObj.GetComponent<ObjectInteraction> ();
 		}
 
 		public int GetHitFrameStart()

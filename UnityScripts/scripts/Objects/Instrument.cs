@@ -12,6 +12,8 @@ public class Instrument : object_base {
 		/// Records the last few notes played for a puzzle.
 	static string NoteRecord;
 
+	public static bool CreatedCup;
+
 	protected override void Start ()
 	{
 		base.Start ();
@@ -90,11 +92,25 @@ public class Instrument : object_base {
 						//354237875
 						if (NoteRecord=="354237875")
 						{
-								UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
-						}
-						else
-						{
-								Debug.Log (NoteRecord);
+								//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
+								if ((GameWorldController.instance.LevelNo==2) && (CreatedCup==false) && (objInt().item_id==292))
+								{
+										int tileX=GameWorldController.instance.Tilemap.visitTileX;
+										int tileY=GameWorldController.instance.Tilemap.visitTileY;
+										if (((tileX >=23) || (tileX<=27)) && ((tileY >=43) || (tileY<=45)))
+										{
+												
+												//create the cup of wonder.
+												ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
+												myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+												UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+												UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+												InteractionModeControl.UpdateNow=true;
+												CreatedCup=true;
+												//An object appears in the air and falls into your hands
+												UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,136));
+										}
+								}
 						}
 				}		
 		}

@@ -251,6 +251,7 @@ public class NPC : object_base {
 				if (npc_attitude==0)
 					{//Combat begin
 					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
+					ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",GameWorldController.instance.playerUW.gameObject.transform.position);
 					}
 				else
 					{//Friendly states
