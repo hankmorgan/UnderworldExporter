@@ -5,5 +5,19 @@ using System.Collections;
 /// </summary>
 public class NPC_Door : NPC {
 
+		/// <summary>
+		/// NPC Does not need a start like NPcs
+		/// </summary>
+	protected override void Start ()
+	{
+		//this.gameObject.tag="NPCs";
+	}
 
+		/// <summary>
+		/// NPC Door update is not required.
+		/// </summary>
+	protected override void Update ()
+	{
+		//base.Update ();
+	}
 }

@@ -155,7 +155,7 @@ public class NPC : object_base {
 
 	protected override void Start () {
 		base.Start();
-		this.gameObject.tag="NPCs";
+		//this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
 		//ai = this.GetComponentInChildren<AIRig>();
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
@@ -194,7 +194,7 @@ public class NPC : object_base {
 		/// Update the NPC state, AI and animations
 		/// </summary>
 		/// AI is only active when the player is close.
-	void Update () {
+	protected virtual void  Update () {
 		if (Frozen)
 		{//NPC will not move until timer is complete.
 			if (FrozenUpdate==0)

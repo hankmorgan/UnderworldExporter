@@ -19,9 +19,19 @@ public class InventorySlot : GuiBase {
 	public const int LEGGINGS =77;
 	public static bool LookingAt;
 	public static string TempLookAt;
-
+	private int InteractionModeValue;
 	private GameObject QuantityObj=null;//Reference to quantity object being picked up
 
+		public void BeginDrag()
+		{
+			if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
+			{
+				InteractionModeValue=UWCharacter.InteractionMode;
+				UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+				InteractionModeControl.UpdateNow=true;
+				ClickEvent(-2);	
+			}
+		}
 
 	void UseFromSlot()
 	{
@@ -68,7 +78,7 @@ public class InventorySlot : GuiBase {
 		ClickEvent(pntr.pointerId);
 	}
 
-		void ClickEvent(int pointerID)
+	void ClickEvent(int pointerID)
 	{
 		if (GameWorldController.instance.playerUW.isRoaming==true)
 		{//No inventory use while using wizard eye.

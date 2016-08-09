@@ -1439,11 +1439,11 @@ void RenderUnityEntityBridgeUW(int game, float x, float y, float z, ObjectItem &
 			RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 			if (currobj.flags >= 2)
 				{
-				fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj, _RES + \"Materials/tmap/uw%d_%03d\", \"%s\", %d);", game, currobj.texture, UniqueObjectName(objList[currobj.link]), currobj.texture);
+				fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj, _RES + \"/Materials/tmap/uw%d_%03d\", \"%s\", %d);", game, currobj.texture, UniqueObjectName(objList[currobj.link]), currobj.texture);
 				}
 			else
 				{
-				fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj, _RES + \"Materials/tmobj/tmobj_%02d\", \"%s\", %d);", 28 + currobj.flags, UniqueObjectName(objList[currobj.link]), 0);
+				fprintf(UNITY_FILE, "\n\tAddBridgeLink(myObj, _RES + \"/Materials/tmobj/tmobj_%02d\", \"%s\", %d);", 28 + currobj.flags, UniqueObjectName(objList[currobj.link]), 0);
 				}
 			}
 
