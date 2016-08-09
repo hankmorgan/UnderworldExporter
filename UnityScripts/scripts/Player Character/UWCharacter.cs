@@ -327,6 +327,7 @@ public class UWCharacter : Character {
 			quant=0;
 		}*/
 		Time.timeScale=1.0f;
+		inputctrl.gameObject.SetActive(false);
 		WindowDetectUW.WaitingForInput=false;
 		inputctrl.text="";
 		inputctrl.text="";
@@ -543,7 +544,8 @@ public class UWCharacter : Character {
 
 								UWHUD.instance.MessageScroll.Set ("Move how many?");
 								InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.GetComponent<UIInput>();
-								inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+								inputctrl.gameObject.SetActive(true);
+								//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
 								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputCharacterQty;
 

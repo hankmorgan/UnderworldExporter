@@ -384,7 +384,8 @@ public class InventorySlot : GuiBase {
 							}
 							//UWHUD.instance.MessageScroll.Set ("Move how many?");
 							InputField inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.GetComponent<UIInput>();
-							inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+							//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.3f);
+							inputctrl.gameObject.SetActive(true);
 						//	UIInput inputctrl =UWHUD.instance.InputControl;
 							inputctrl.text="1";
 														//TODO: Fix me inputctrl.label.text="1";
@@ -425,7 +426,7 @@ public class InventorySlot : GuiBase {
 			quant=0;
 		}*/
 		inputctrl.text="";
-		inputctrl.text="";
+		inputctrl.gameObject.SetActive(false);
 		WindowDetect.WaitingForInput=false;
 		Conversation.EnteringQty=false;
 		if (Conversation.InConversation==false)

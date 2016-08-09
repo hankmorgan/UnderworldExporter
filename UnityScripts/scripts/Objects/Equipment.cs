@@ -46,6 +46,7 @@ public class Equipment : object_base {
 				//Do a difficulty check and prompt for approval.
 				UWHUD.instance.MessageScroll.Set ("[placeholder]You think it will be hard/easy to repair this item");
 				InputField inputctrl =UWHUD.instance.InputControl;
+				inputctrl.gameObject.SetActive(true);
 				inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 				inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputAnvil;
 				inputctrl.contentType= InputField.ContentType.Alphanumeric;
@@ -74,6 +75,7 @@ public class Equipment : object_base {
 	public void OnSubmitPickup(string ans)
 	{
 		Time.timeScale=1.0f;
+		UWHUD.instance.InputControl.gameObject.SetActive(false);
 		WindowDetectUW.WaitingForInput=false;
 		UWHUD.instance.MessageScroll.Clear();//="";
 		if (ans.Substring(0,1).ToUpper() == "Y")

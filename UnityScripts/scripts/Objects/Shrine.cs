@@ -79,7 +79,7 @@ public class Shrine : object_base {
 								//		this.OnSubmitPickup();	
 								//} );
 								//inputctrl.inputType=InputField.InputType.Standard;
-
+								inputctrl.gameObject.SetActive(true);
 								inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputMantraWords;
 
@@ -112,7 +112,7 @@ public class Shrine : object_base {
 		Time.timeScale=1.0f;
 		inputctrl.text="";
 		WindowDetectUW.WaitingForInput=false;
-
+		inputctrl.gameObject.SetActive(false);
 		//Debug.Log ("Value summited");
 
 	}
@@ -153,7 +153,7 @@ public class Shrine : object_base {
 			break;
 		case Mantra_GAR ://Axe 
 			playerSkills.AdvanceSkill(Skills.SkillAxe,SkillPointsToAdd);
-			answer="AXe";break;
+			answer="Axe";break;
 		case Mantra_SOL ://Casting 
 			playerSkills.AdvanceSkill(Skills.SkillCasting,SkillPointsToAdd);
 			answer="Casting";break;
@@ -252,10 +252,19 @@ public class Shrine : object_base {
 		if (HasGivenKey==false)
 		{
 			//Code to spawn key of truth in player hand
-			Debug.Log ("You get the key of truth");
+			//Debug.Log ("You get the key of truth");
 			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,30));//No skills appear
 			//inputctrl.text=UWHUD.instance.MessageScroll.text;
 			Shrine.HasGivenKey=true;
+			//create the key of truth.
+			ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(225);
+			myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+			UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
+			UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+			InteractionModeControl.UpdateNow=true;
+
+
+
 		}
 	}
 
