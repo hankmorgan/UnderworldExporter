@@ -1310,23 +1310,19 @@ public class Magic : UWEBase {
 		{//Gate Travel
 				if (playerUW!=null)
 				{
-						if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo)
-						{//Teleport to level
-								Debug.Log ("moonstone is on another level. (or I forgot to update levelno)");
-								//000~001~273~The moonstone is not available.
-								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,273));
+						if (playerUW.MoonGatePosition != Vector3.zero)
+						{
+								if (playerUW.MoonGateLevel != GameWorldController.instance.LevelNo)
+								{//Teleport to level
+										GameWorldController.instance.SwitchLevel(playerUW.MoonGateLevel);
+								}
+								caster.transform.position = playerUW.MoonGatePosition;
 						}
 						else
 						{
-								if (playerUW.MoonGatePosition != Vector3.zero)
-								{
-										caster.transform.position = playerUW.MoonGatePosition;
-								}
-								else
-								{
-										UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,273));
-								}
+								UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,273));
 						}
+
 				}
 		}
 
@@ -2528,16 +2524,15 @@ public class Magic : UWEBase {
 		/// </summary>
 		/// <returns><c>true</c>, if projectile was cast, <c>false</c> otherwise.</returns>
 		/// <param name="caster">Caster.</param>
-		/// <param name="SpriteName">Sprite name.</param>
 		/// <param name="targetV">Target v.</param>
 		/// <param name="spellprop">Properties for the projectile.</param>
-		bool CastProjectile(GameObject caster, string SpriteName, Vector3 targetV, SpellProp spellprop)
+		bool CastProjectile(GameObject caster, Vector3 targetV, SpellProp spellprop)
 		{//Fires off the projectile at a vector3 position.
 				//float force = ;//200.0f;
 				GameObject projectile = CreateMagicProjectile(caster.transform.position, caster,spellprop);
-				Vector3 direction = (targetV-caster.transform.position);
-				direction.Normalize();
-				LaunchProjectile(projectile,spellprop.Force,direction);
+				//Vector3 direction = (targetV-caster.transform.position);
+				//direction.Normalize();
+				LaunchProjectile(projectile,spellprop.Force,targetV);
 				return true;
 		}	
 
@@ -3230,7 +3225,7 @@ public class Magic : UWEBase {
 						{
 								SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
 								spVOG.init (EffectID);
-								CastProjectile(caster,target,(SpellProp)spVOG);
+								CastProjectile(caster,caster.transform.forward,(SpellProp)spVOG);
 						}
 						SpellResultType=SpellResultNone;
 						break;
@@ -3259,7 +3254,7 @@ public class Magic : UWEBase {
 						{
 								SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
 								spOJ.init (EffectID);
-								CastProjectile(caster,target, (SpellProp)spOJ);
+								CastProjectile(caster,caster.transform.forward, (SpellProp)spOJ);
 						}
 						SpellResultType=SpellResultNone;
 						break;
@@ -3275,7 +3270,7 @@ public class Magic : UWEBase {
 								{
 										SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
 										spOG.init (EffectID);
-										CastProjectile(caster,target, (SpellProp)spOG);
+										CastProjectile(caster,caster.transform.forward, (SpellProp)spOG);
 								}
 								SpellResultType=SpellResultNone;
 								break;
@@ -3291,7 +3286,7 @@ public class Magic : UWEBase {
 								{
 										SpellProp_Fireball spPF =new SpellProp_Fireball();
 										spPF.init (EffectID);
-										CastProjectile(caster,target, (SpellProp)spPF);
+										CastProjectile(caster,caster.transform.forward, (SpellProp)spPF);
 								}
 								SpellResultType=SpellResultNone;
 								break;
@@ -3308,7 +3303,7 @@ public class Magic : UWEBase {
 								{
 										SpellProp_FlameWind spFH =new SpellProp_FlameWind();
 										spFH.init (EffectID);
-										CastProjectile(caster,target, (SpellProp)spFH);
+										CastProjectile(caster,caster.transform.forward, (SpellProp)spFH);
 								}
 								SpellResultType=SpellResultNone;
 								break;

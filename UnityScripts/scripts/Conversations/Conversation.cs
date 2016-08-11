@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /**
 Basic rules for converting conversations.
 Create Subclass of Conversation called Conversation_[whoami]
-Set up the main() as in the _67.
+Set up the main(zak as in the _67.
 Add EndConversation(); to ending function func_0012 (typically)
 Remove startup and void functions.
 Comment out unreachable code.
@@ -1043,6 +1043,92 @@ public class Conversation : GuiBase {
 		return;
 	}
 
+		/// <summary>
+		/// Gives the selected items to the NPC
+		/// </summary>
+		/// <param name="SlotNo">Slot no.</param>
+	private void TakeFromNPC (int SlotNo)
+	{
+		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		TradeSlot npcSlot = UWHUD.instance.npcTrade [SlotNo];
+		//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
+		if (npcSlot.isSelected ()) {
+			//Move the object to the container or to the ground
+			if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+			 {
+				npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+				cn.AddItemToContainer (npcSlot.objectInSlot);
+				GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+				demanded.transform.parent = GameWorldController.instance.InventoryMarker.transform;
+				demanded.transform.position = Vector3.zero;
+				npcSlot.clear ();
+				GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+			}
+			else {
+				GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+				demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+				demanded.transform.position = npc.transform.position;
+				npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+				npcSlot.clear ();
+			}
+		}
+	return;
+	}
+		/// <summary>
+		/// Takes from PCs selected items  ang gives them to the NPC.
+		/// </summary>
+		/// <param name="slotNo">Slot no.</param>
+	void TakeFromPC (int slotNo)
+		{
+		Container cn = npc.GetComponent<Container> ();//GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		TradeSlot pcSlot = UWHUD.instance.playerTrade [slotNo];
+		if (pcSlot.isSelected ()) {
+			//Move the object to the container or to the ground
+			if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+			 {
+				cn.AddItemToContainer (pcSlot.objectInSlot);
+				//Move to the inventory room
+				GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+				demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+				demanded.transform.position = new Vector3 (119f, 2.1f, 119f);
+				pcSlot.clear ();
+			}
+			else {
+				GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
+				demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+				demanded.transform.position = npc.transform.position;
+				pcSlot.clear ();
+			}
+		}
+	}
+		/// <summary>
+		/// Restores the Pcs inventory out of the trade area and back into the current container.
+		/// </summary>
+
+	void RestorePCsInventory ()
+	{
+		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+		for (int i = 0; i <= 3; i++) {
+			TradeSlot npcSlot = UWHUD.instance.playerTrade [i];
+			if (npcSlot.objectInSlot != "") {
+				//Move the object to the players container or to the ground
+				if (Container.GetFreeSlot (cn) != -1)//Is there space in the container.
+				 {
+					npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+					cn.AddItemToContainer (npcSlot.objectInSlot);
+					npcSlot.clear ();
+					GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+				}
+				else {
+					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
+					demanded.transform.parent = GameWorldController.instance.LevelMarker ();
+					demanded.transform.position = npc.transform.position;
+					npc.GetComponent<Container> ().RemoveItemFromContainer (npcSlot.objectInSlot);
+					npcSlot.clear ();
+				}
+			}
+		}
+	}
 
 /// <summary>
 /// Checks the offer.
@@ -1086,51 +1172,18 @@ public class Conversation : GuiBase {
 		{
 			yield return StartCoroutine (say (arg5));
 			//for the moment move to the player's backpack or if no room there drop them on the ground
-			Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
+			//Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot = UWHUD.instance.npcTrade[i];//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
-				if (npcSlot.isSelected())
-				{//Move the object to the container or to the ground
-					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
-					{
-						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-						cn.AddItemToContainer(npcSlot.objectInSlot);
-						npcSlot.clear ();
-						GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
-					}
-					else
-					{
-						GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-						demanded.transform.parent=GameWorldController.instance.LevelMarker();
-						demanded.transform.position=npc.transform.position;
-						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-						npcSlot.clear();
-					}
-				}
+				 TakeFromNPC (i);//Takes from the NPC slot if selected
 			}
 
 
 			//Now give the item to the NPC.
-			cn =npc.gameObject.GetComponent<Container>();
+			//cn =npc.gameObject.GetComponent<Container>();
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot pcSlot =UWHUD.instance.playerTrade[i] ;//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
-				if (pcSlot.isSelected())
-				{//Move the object to the container or to the ground
-					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
-					{
-						cn.AddItemToContainer(pcSlot.objectInSlot);
-						pcSlot.clear ();
-					}
-					else
-					{
-						GameObject demanded = GameObject.Find (pcSlot.objectInSlot);
-						demanded.transform.parent=GameWorldController.instance.LevelMarker();
-						demanded.transform.position=npc.transform.position;
-						pcSlot.clear();
-					}
-				}
+				TakeFromPC (i);
 			}
 		}
 		else
@@ -1176,32 +1229,13 @@ public class Conversation : GuiBase {
                  the items in barter area, e.g. using karma.
    return value: returns 1 when player persuaded the NPC, 0 else
 		 */
-		Container cn = GameObject.Find (GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().currentContainer).GetComponent<Container>();
 		int DemandResult = Random.Range (0,2);
 		if (DemandResult==1)
 		{		
 			//Demand sucessfull
 			for (int i =0; i <=3; i++)
 			{
-				TradeSlot npcSlot =UWHUD.instance.npcTrade[i] ;//GameObject.Find ("Trade_NPC_Slot_" + i).GetComponent<TradeSlot>();
-				if (npcSlot.isSelected())
-				{//Move the object to the container or to the ground
-					if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
-					{
-						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-						cn.AddItemToContainer(npcSlot.objectInSlot);
-						npcSlot.clear ();
-						GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
-					}
-					else
-					{
-						GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-						demanded.transform.parent=GameWorldController.instance.LevelMarker();
-						demanded.transform.position=npc.transform.position;
-						npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-						npcSlot.clear();
-					}
-				}
+				TakeFromNPC (i);//Takes from the NPC slot if selected
 			}
 			yield return StartCoroutine ( say (arg2) );
 		}
@@ -1212,28 +1246,7 @@ public class Conversation : GuiBase {
 		}
 
 		//Move the players items back to his inventory;
-		for (int i =0; i <=3; i++)
-		{
-			TradeSlot npcSlot = UWHUD.instance.playerTrade[i];//GameObject.Find ("Trade_Player_Slot_" + i).GetComponent<TradeSlot>();
-			if (npcSlot.objectInSlot!="")
-			{//Move the object to the players container or to the ground
-				if (Container.GetFreeSlot(cn)!=-1)//Is there space in the container.
-				{
-					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-					cn.AddItemToContainer(npcSlot.objectInSlot);
-					npcSlot.clear ();
-					GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
-				}
-				else
-				{
-					GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
-					demanded.transform.parent=GameWorldController.instance.LevelMarker();
-					demanded.transform.position=npc.transform.position;
-					npc.GetComponent<Container>().RemoveItemFromContainer(npcSlot.objectInSlot);
-					npcSlot.clear();
-				}
-			}
-		}
+		RestorePCsInventory ();
 		PlayerAnswer=DemandResult;
 	}
 

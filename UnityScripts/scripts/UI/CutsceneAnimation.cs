@@ -30,18 +30,25 @@ public class CutsceneAnimation : HudAnimation {
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			break;
 		case "Death_With_Sapling"://Resurrection
-			MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
-			if (mus!=null)
+		//	MusicController mus = GameObject.Find("MusicController").GetComponent<MusicController>();
+			if (GameWorldController.instance.mus!=null)
 			{
 				GameWorldController.instance.playerUW.CurVIT=GameWorldController.instance.playerUW.MaxVIT;
-				mus.Death=false;
-				mus.Combat=false;
-				mus.Fleeing=false;
+				GameWorldController.instance.mus.Death=false;
+				GameWorldController.instance.mus.Combat=false;
+				GameWorldController.instance.mus.Fleeing=false;
 				MusicController.LastAttackCounter=0.0f;
 			}
 			//maincam.enabled=true;
 			GameWorldController.instance.playerUW.playerCam.cullingMask=HudAnimation.NormalCullingMask;
 			SetAnimation= "Anim_Base";//Clears out the animation.
+			
+			GameWorldController.instance.playerUW.gameObject.transform.position=GameWorldController.instance.playerUW.ResurrectPosition;
+			if (GameWorldController.instance.LevelNo!=GameWorldController.instance.playerUW.ResurrectLevel)
+			{
+				GameWorldController.instance.SwitchLevel(GameWorldController.instance.playerUW.ResurrectLevel);
+			}
+			
 			break;
 
 		case "Death"://Forever

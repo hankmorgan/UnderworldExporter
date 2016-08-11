@@ -66,6 +66,11 @@ public class ScrollController : GuiBase {
 		PrintList();
 	}
 
+	public void DirectSet(string text)
+	{
+		NewUIOUt.text=text;	
+	}
+
 	public void Clear()
 	{
 		//uiIn.Clear();//Clear the input list control

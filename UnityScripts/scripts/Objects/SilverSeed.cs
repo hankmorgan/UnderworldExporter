@@ -56,7 +56,8 @@ public class SilverSeed : object_base {
 
 				UWHUD.instance.CursorIcon = UWHUD.instance.CursorIconDefault;
 				GameWorldController.instance.playerUW.ResurrectPosition=GameWorldController.instance.playerUW.transform.position;
-				objInt().gameObject.transform.parent=null;
+				GameWorldController.instance.playerUW.ResurrectLevel=GameWorldController.instance.LevelNo;
+				objInt().gameObject.transform.parent=GameWorldController.instance.LevelMarker();
 				objInt().transform.position=GameWorldController.instance.playerUW.transform.position;//TODO:Position the tree properly
 
 				GameWorldController.instance.playerUW.playerInventory.RemoveItemFromEquipment(objInt().gameObject.name);

@@ -162,6 +162,17 @@ public class InventorySlot : GuiBase {
 	{
 		if (isLeftClick==false)
 		{//Looking at object
+		GameObject currObj=GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);
+
+		if (currObj!=null)
+		{
+				if (currObj.GetComponent<Container>()!=null)
+				{
+						currObj.GetComponent<Container>().OpenContainer();
+						return;
+				}
+		}
+
 			TemporaryLookAt();
 			return;
 		}
@@ -512,7 +523,7 @@ public class InventorySlot : GuiBase {
 			InventorySlot.TempLookAt=UWHUD.instance.MessageScroll.NewUIOUt.text;
 			StartCoroutine(ClearTempLookAt());
 			//UWHUD.instance.MessageScrollTemp.Set (StringController.instance.GetFormattedObjectNameUW(objInt));
-			UWHUD.instance.MessageScroll.Set(StringController.instance.GetFormattedObjectNameUW(objInt));
+			UWHUD.instance.MessageScroll.DirectSet(StringController.instance.GetFormattedObjectNameUW(objInt));
 		}
 	}
 	
@@ -534,7 +545,7 @@ public class InventorySlot : GuiBase {
 		
 		//UWHUD.instance.MessageScroll.SetAnchorX(0.06f);
 		//UWHUD.instance.MessageScrollTemp.SetAnchorX(1.00f);
-		UWHUD.instance.MessageScroll.Set(InventorySlot.TempLookAt);
+		UWHUD.instance.MessageScroll.DirectSet(InventorySlot.TempLookAt);
 	}
 
 

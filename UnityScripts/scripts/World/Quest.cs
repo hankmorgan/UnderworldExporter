@@ -34,7 +34,7 @@ public class Quest : UWEBase {
 		public const int TalismanShield=55;
 		public const int TalismanTaper=147;
 		public const int TalismanCup =174;
-		public const int TalismanBook=276;
+		public const int TalismanBook=310;
 		public const int TalismanWine=191;
 		public const int TalismanRing=54;
 		public const int TalismanBanner=287;

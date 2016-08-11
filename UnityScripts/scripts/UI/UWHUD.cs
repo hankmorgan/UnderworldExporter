@@ -73,7 +73,7 @@ public class UWHUD : HUD {
 		bool RuneBagEnabled=false;
 		bool StatsEnabled=false;
 		bool ConversationEnabled=false;
-		bool CutSceneSmallEnabled=false;
+		bool CutSceneSmallEnabled=true;
 		bool CutSceneFullEnabled=false;
 		bool MapEnabled=false;
 
@@ -163,6 +163,12 @@ public class UWHUD : HUD {
 
 								break;	
 						case 3://Conversation
+								InventoryPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+								PaperDollFemalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+								PaperDollMalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+								StatsDisplayPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
+								RuneBagPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
+
 								InventoryEnabled=true;
 								RuneBagEnabled=false;
 								StatsEnabled=false;
@@ -173,6 +179,13 @@ public class UWHUD : HUD {
 								UpdatePanelStates();
 								break;	
 						case 4://Map
+								InventoryPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+								PaperDollFemalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+								PaperDollMalePanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
+								StatsDisplayPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
+								RuneBagPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
+
+
 								InventoryEnabled=false;
 								RuneBagEnabled=false;
 								StatsEnabled=false;

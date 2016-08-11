@@ -214,7 +214,7 @@ public class Conversation_12 : Conversation {
 		} else {
 			
 			if ( 1 == locals[4] ) {
-				
+						yield return StartCoroutine(func_045b());//Added to fix convo ending.
 			} else {
 				
 				if ( 2 == locals[4] ) {

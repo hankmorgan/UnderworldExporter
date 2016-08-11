@@ -17,10 +17,11 @@ public class MoonStone : object_base {
 		/// </summary>
 		/// TODO: only update when position changes?
 		/// Or find when on spell cast or Update when leaving level.
-	void UpdatePosition()
+	void Update()
 	{
 		if (objInt().PickedUp==false)
 		{
+			GameWorldController.instance.playerUW.MoonGateLevel = GameWorldController.instance.LevelNo;
 			GameWorldController.instance.playerUW.MoonGatePosition=this.transform.position;
 		}
 		else
@@ -28,4 +29,6 @@ public class MoonStone : object_base {
 			GameWorldController.instance.playerUW.MoonGatePosition=Vector3.zero;
 		}
 	}
+
+
 }
