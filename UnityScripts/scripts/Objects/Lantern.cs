@@ -15,6 +15,9 @@ public class Lantern : LightSource {
 		/// Using oil on the lantern increases it's quality.
 	public override bool ActivateByObject (GameObject ObjectUsed)
 	{
+				//000~001~178~You think it is a bad idea to add oil to the lit lantern. \n
+				//000~001~179~Adding oil, you refuel the lantern. \n
+				//000~001~180~The lantern is already full. \n
 		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
 		if (objIntUsed != null) 
 		{

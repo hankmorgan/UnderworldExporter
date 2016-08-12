@@ -10,17 +10,15 @@ public class Food : object_base {
 	{
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
-			if (objInt().item_id!=191)
+			switch(objInt().item_id)
 			{
-				return Eat();
-			}
-			else
-			{//The wine of compassion.
+			case 191://Wine of compassion.
 				//000~001~127~You are unable to open the wine bottle.
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,127));
 				return true;
+			default:
+				return Eat();
 			}
-
 		}
 		else
 		{
@@ -41,7 +39,24 @@ public class Food : object_base {
 		else
 		{
 			GameWorldController.instance.playerUW.FoodLevel = Nutrition+GameWorldController.instance.playerUW.FoodLevel;
-			UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
+			switch (objInt().item_id)
+				{
+				case 192://plants
+				case 207:	
+				case 212:
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,233));
+						break;	
+				case 217://Dead rotworm
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,234));
+					break;
+				case 283://Rotworm stew
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,235));
+					break;
+				default:
+					UWHUD.instance.MessageScroll.Add ("That " + StringController.instance.GetObjectNounUW(objInt()) + foodFlavourText());
+					break;
+				}
+			
 			objInt().consumeObject();//destroy and remove from inventory/world.
 			return true; //Food was eaten.
 		}
@@ -50,13 +65,21 @@ public class Food : object_base {
 	public override bool LookAt()
 	{
 		//Code for when looking at food. Should one day return quantity and smell properly
-		if (objInt().item_id!=191)
+
+		switch(objInt().item_id)
 		{
-			UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),foodSmellText()));
-		}
-		else
-		{//The wine of compassion.
-			UWHUD.instance.MessageScroll.Add ("You see " + StringController.instance.GetString(1,264));
+			case 191://Wine of compassion
+				UWHUD.instance.MessageScroll.Add ("You see " + StringController.instance.GetString(1,264));
+				break;
+			case 192://plants
+			case 207:	
+			case 212:
+			case 217://Dead Rotworm
+				return base.LookAt();
+				break;
+			default:		
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),foodSmellText()));		
+				break;
 		}
 		return true;
 	}
@@ -103,29 +126,29 @@ public class Food : object_base {
 	{
 		if (objInt().Quality == 0)
 		{
-			return StringController.instance.GetString (5,18);//worm
+				return StringController.instance.GetString (5,18);//worm
 		}
 		if ((objInt().Quality >=1) && (objInt().Quality <15))
 		{
-			return StringController.instance.GetString (5,19);//rotten
+				return StringController.instance.GetString (5,19);//rotten
 		}
 		if ((objInt().Quality >=15) && (objInt().Quality <32))
 		{
-			return StringController.instance.GetString (5,20);//smelly
+				return StringController.instance.GetString (5,20);//smelly
 		}
 		if ((objInt().Quality >=32) && (objInt().Quality <40))
 		{
-			return StringController.instance.GetString (5,21);//day old
+				return StringController.instance.GetString (5,21);//day old
 		}
-		
+
 		if ((objInt().Quality >=40) && (objInt().Quality <48))
 		{
-			return StringController.instance.GetString (5,22);//fresh
+				return StringController.instance.GetString (5,22);//fresh
 		}
 		else
 		{
-			return StringController.instance.GetString (5,23);//fresh
-		}
+				return StringController.instance.GetString (5,23);//fresh
+		}	
 	}
 
 	public override bool ApplyAttack (int damage)

@@ -525,8 +525,14 @@ public class object_base : UWEBase {
 			}			
 	}
 
+		/// <summary>
+		/// Gets the sprite name that is displayed when the object is equipped in inventory
+		/// </summary>
+		/// <returns>The equip string.</returns>
 		public virtual string getEquipString()
 		{
 			return GameWorldController.instance.objectMaster.particle[objInt().item_id];
 		}
+
 }
+

@@ -343,14 +343,14 @@ public class WindowDetectUW : WindowDetect {
 				
 					GameObject droppedItem = GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand(); //GameObject.Find(GameWorldController.instance.playerUW.playerInventory.ObjectInHand);
 
-					droppedItem.transform.parent=null;
+					//droppedItem.transform.parent=null;
 					droppedItem.GetComponent<ObjectInteraction>().PickedUp=false;	//Back in the real world
 					droppedItem.GetComponent<ObjectInteraction>().UpdateAnimation();
 					//GameObject InvMarker = GameObject.Find ("InventoryMarker");
 					if (droppedItem.GetComponent<Container>()!=null)
 					{
 						Container.SetPickedUpFlag(droppedItem.GetComponent<Container>(),false);
-						Container.SetItemsParent(droppedItem.GetComponent<Container>(),null);
+						Container.SetItemsParent(droppedItem.GetComponent<Container>(),GameWorldController.instance.LevelMarker());
 						Container.SetItemsPosition (droppedItem.GetComponent<Container>(),GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position);
 					}
 					droppedItem.transform.position=ray.GetPoint(dropRange-0.1f);//GameWorldController.instance.playerUW.transform.position;
@@ -428,7 +428,7 @@ public class WindowDetectUW : WindowDetect {
 		{
 			if (WindowDetect.InMap==false)
 			{
-				if (Event.current.Equals(Event.KeyboardEvent("f")))
+				if ((Event.current.Equals(Event.KeyboardEvent("f")) && (WaitingForInput==false)))
 				{//Toggle full screen.
 					if (FullScreen==true)
 					{
@@ -440,7 +440,7 @@ public class WindowDetectUW : WindowDetect {
 					}
 				}
 
-				if (Event.current.Equals(Event.KeyboardEvent("e")))
+				if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
 				{			
 					if (GameWorldController.instance.playerUW.MouseLookEnabled==false)
 					{//Switch to mouse look.

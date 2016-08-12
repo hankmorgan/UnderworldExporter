@@ -11,7 +11,7 @@ public class ContainerOpened : GuiBase_Draggable {
 	void CloseChildContainer(Container ClosingParent)
 	{//Recursively closes open child containers
 		ClosingParent.isOpenOnPanel=false;
-		for (int i = 0;i<ClosingParent.MaxCapacity();i++)
+		for (int i = 0;i<=ClosingParent.MaxCapacity();i++)
 		{
 			if (ClosingParent.items[i] !="")
 			{
@@ -65,8 +65,8 @@ public class ContainerOpened : GuiBase_Draggable {
 				}
 			}
 			else
-			{
-				GetComponent<RawImage>().texture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetInventoryDisplay().texture;
+			{								
+				GetComponent<RawImage>().texture=DestinationContainer.transform.GetComponent<ObjectInteraction>().GetEquipDisplay().texture;
 				BackpackBg.SetActive(true);
 				if (DestinationContainer.CountItems()>=8)
 				{

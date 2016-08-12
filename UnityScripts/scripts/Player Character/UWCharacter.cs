@@ -27,6 +27,7 @@ public class UWCharacter : Character {
 	public string CharClass;
 	public int CharLevel;
 	public int EXP;
+	public int TrainingPoints;
 	public bool isFemale;
 	public bool isLefty;
 	public bool isSwimming;
@@ -223,11 +224,11 @@ public class UWCharacter : Character {
 		{//Flying spell
 			playerMotor.movement.maxFallSpeed=0.0f;
 			playerMotor.movement.maxForwardSpeed=flySpeed*speedMultiplier;
-			if ((Input.GetKeyDown(KeyCode.R)) || (Input.GetKey(KeyCode.R)))
+			if (((Input.GetKeyDown(KeyCode.R)) || (Input.GetKey(KeyCode.R))) && (WindowDetectUW.WaitingForInput==false))
 			{//Fly up
 					this.GetComponent<CharacterController>().Move(new Vector3(0,0.2f * Time.deltaTime,0));
 			}
-			else if ((Input.GetKeyDown(KeyCode.V)) || (Input.GetKey(KeyCode.V)))
+			else if (((Input.GetKeyDown(KeyCode.V)) || (Input.GetKey(KeyCode.V))) && (WindowDetectUW.WaitingForInput==false))
 			{//Fly down
 				this.GetComponent<CharacterController>().Move(new Vector3(0,-0.2f * Time.deltaTime,0));
 			}
@@ -649,5 +650,94 @@ public class UWCharacter : Character {
 			PlayerMagic.CurMana=PlayerMagic.MaxMana;
 		}
 	}
+
+	public void SetCharLevel(int level)
+	{
+		if (GameWorldController.instance.playerUW.CharLevel<level)
+		{
+			//000~001~147~You have attained experience level
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,147));
+			TrainingPoints+=3;
+		}
+		GameWorldController.instance.playerUW.CharLevel=level;
+	}
+
+		/// <summary>
+		/// Adds an XP reward to the character.
+		/// </summary>
+		/// <param name="xp">Xp.</param>
+		public void AddXP(int xp)
+		{
+				EXP+=xp;
+				if (EXP<=600)				
+				{//1
+						SetCharLevel(1);
+				}
+				else if(EXP<=1200)
+				{//2
+						SetCharLevel(2);
+				}
+				else if(EXP<=1800)
+				{//3
+						SetCharLevel(3);
+				}
+				else if(EXP<=2400)
+				{//4
+						SetCharLevel(4);
+				}
+				else if(EXP<=3000)
+				{//5
+						SetCharLevel(5);
+				}
+				else if (EXP<=3600)				
+				{//6
+						SetCharLevel(6);
+				}
+				else if(EXP<=4200)
+				{//7
+						SetCharLevel(7);
+				}
+				else if(EXP<=4800)
+				{//8
+						SetCharLevel(8);
+				}
+				else if(EXP<=5400)
+				{//9
+						SetCharLevel(9);
+				}
+				else if(EXP<=6000)
+				{//10
+						SetCharLevel(10);
+				}
+				else if (EXP<=6600)
+				{//11
+						SetCharLevel(11);	
+				}
+				else if (EXP<=7200)
+				{//12
+						SetCharLevel(12);
+				}
+				else if (EXP<=7800)
+				{//13
+						SetCharLevel(13);
+				}
+				else if (EXP<=8400)
+				{//14
+						SetCharLevel(14);
+				}
+				else if (EXP<=9000)
+				{//15
+						SetCharLevel(15);
+				}
+				else if (EXP<=9600)
+				{
+						SetCharLevel(16);
+				}
+				else
+				{
+					EXP=9600;
+					SetCharLevel(16);
+				}
+		}
 
 }

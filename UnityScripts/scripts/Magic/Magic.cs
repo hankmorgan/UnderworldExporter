@@ -2653,7 +2653,7 @@ public class Magic : UWEBase {
 		/// </summary>
 		void OnGUI()
 		{
-				if (WindowDetectUW.InMap==true){return;}
+				if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput)){return;}
 				if (
 						(Event.current.Equals(Event.KeyboardEvent("q")))
 						&&

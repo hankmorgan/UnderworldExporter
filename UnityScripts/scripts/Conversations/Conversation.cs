@@ -137,7 +137,7 @@ public class Conversation : GuiBase {
 	public const float SlomoTime=0.1f;
 
 	/// How many characters max in a line of conversation text
-	static int LineWidth = 37 ;
+	//static int LineWidth = 37 ;
 
 
 	//private string[] NPCTradeItems=new string[4];
@@ -420,7 +420,7 @@ public class Conversation : GuiBase {
 		///Temporarily Replaces instances of @GS8 with player name
 		///TODO:Move this out of here to say(locals[], stringNo)
 		string Markup;
-		WhatToSay = WhatToSay.Replace("@GS8" , GameWorldController.instance.playerUW.CharName);
+		//WhatToSay = WhatToSay.Replace("@GS8" , GameWorldController.instance.playerUW.CharName);
 
 		///Sets the markup to colour the text based on print type.
 		switch (PrintType)
@@ -445,6 +445,7 @@ public class Conversation : GuiBase {
 		/// Reset output and column counter after each add
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 			{
+			int RowCounter=0;
 			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
 			int colCounter=0;
 			string Output="";
@@ -458,7 +459,7 @@ public class Conversation : GuiBase {
 				}
 				else
 				{
-					if (StrWords[j].Length+colCounter+1>=LineWidth)
+					if (StrWords[j].Length+colCounter+1>=UWHUD.instance.Conversation_tl.LineWidth)
 					{
 						colCounter=0; 
 						tl.Add (Markup + Output +"</color>");
@@ -882,7 +883,7 @@ public class Conversation : GuiBase {
 			int rangeS = (arg1-1000)*16;
 			int rangeE = rangeS+16;
 			
-			for (int i = 0; i< cn.MaxCapacity ();i++)
+			for (int i = 0; i<= cn.MaxCapacity ();i++)
 			{
 				string itemName=cn.GetItemAt (i);
 				if (itemName!="")
@@ -933,7 +934,7 @@ public class Conversation : GuiBase {
 		int itemCount=0;
 
 		Debug.Log ("Setup to barter. Based on characters inventory at the moment.");
-		for (int i =0 ; i< cn.MaxCapacity(); i++)
+		for (int i =0 ; i<= cn.MaxCapacity(); i++)
 		{
 			if (cn.GetItemAt(i)!="")
 			{

@@ -120,19 +120,24 @@ public class Shrine : object_base {
 
 	private void SubmitMantra(string Mantra)
 	{
-		Debug.Log ("Testing mantra");
+		bool hasPoints=true;
 		int SkillPointsToAdd=2;
 		Skills playerSkills= GameWorldController.instance.playerUW.PlayerSkills;
-		if (inputctrl==null)
+		////if (inputctrl==null)
+		//{
+		//	inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
+		//}
+		if (GameWorldController.instance.playerUW.TrainingPoints==0)
 		{
-			inputctrl =UWHUD.instance.InputControl;//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>();
+			hasPoints=false;
+			return;
 		}
 		string answer="";
 		switch (Mantra.ToUpper())
 		{
 		case Mantra_FAL ://Acrobat 
 			playerSkills.AdvanceSkill(Skills.SkillAcrobat,SkillPointsToAdd);
-			answer="Acrobat";break;
+			answer="Acrobat";break;	
 		case Mantra_HUNN ://Appraise 
 			playerSkills.AdvanceSkill(Skills.SkillAppraise,SkillPointsToAdd);
 			answer="Appraise";break;
@@ -236,15 +241,22 @@ public class Shrine : object_base {
 	
 	if (answer!="")
 		{
-			//Debug.Log (answer);
-			UWHUD.instance.MessageScroll.Add( "You have advanced in " + answer);
+			if (hasPoints)
+			{
+				UWHUD.instance.MessageScroll.Add( "You have advanced in " + answer);
+				GameWorldController.instance.playerUW.TrainingPoints-=1;
+			}
+			else
+			{
+				//000~001~024~You are not ready to advance. \n
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,24));
+			}
 		}
 		else
 		{
 			//Debug.Log ("not a mantra");
 			UWHUD.instance.MessageScroll.Add("That is not a mantra");
 		}
-		//inputctrl.text=UWHUD.instance.MessageScroll.text;
 	}
 
 	public void GiveKeyOfTruth()

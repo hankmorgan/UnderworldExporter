@@ -7,6 +7,10 @@ public class Readable : object_base {
 	{
 	if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand == "")
 		{
+			if ((_RES=="UW1") && (objInt().Link== 769))
+			{//Special case for Rotworm stew recipe
+					return MixRotwormStew();
+			}
 			return Read ();
 		}
 		else
@@ -37,7 +41,7 @@ public class Readable : object_base {
 		case ObjectInteraction.SCROLL://Scroll
 			{
 			if (objInt().PickedUp==true)
-			{
+				{
 				if (objInt().Link==520)
 				{//Special case. Chasm of fire map.
 					UWHUD.instance.CutScenesSmall.SetAnimation="ChasmMap";
@@ -62,4 +66,85 @@ public class Readable : object_base {
 			}
 		}
 	}
+
+		/// <summary>
+		/// Mixs the rotworm stew.
+		/// </summary>
+		/// <returns><c>true</c>, if rotworm stew was mixed, <c>false</c> otherwise.</returns>
+		bool MixRotwormStew()
+		{
+				bool hasPort=false;
+				bool hasGreenMushroom=false;
+				bool hasCorpse=false;
+				bool hasExtraItems=false;
+				//Find a bowl in the players inventory.
+				//Check if it only contains port, a rotworm corpse and a greenmushroom.
+
+				//000~001~148~The bowl does not contain the correct ingredients. \n
+				//000~001~149~You mix the ingredients into a stew. \n
+				//000~001~150~You need a bowl to mix the ingredients. \n
+				Container cn = GameWorldController.instance.playerUW.playerInventory.playerContainer;
+				if (cn!=null)
+				{
+				string BowlName=cn.findItemOfType(142); //Finds the first bowl in the inventory;
+				if (BowlName!="")
+						{
+							GameObject bowl = GameObject.Find(BowlName);
+							if (bowl!=null)
+								{
+										//Search for
+										Container bowlContainer = bowl.GetComponent<Container>();
+										if (bowlContainer!=null)
+										{
+												for (int i=0; i<=bowlContainer.GetCapacity();i++)	
+												{
+														GameObject foundItem = bowlContainer.GetGameObjectAt(i);
+														if (foundItem!=null)
+														{
+																ObjectInteraction foundItemObj = foundItem.GetComponent<ObjectInteraction>();
+																if (foundItemObj!=null)
+																{
+																		switch (foundItemObj.item_id)		
+																		{
+																		case 184://Mushroom
+																				hasGreenMushroom=true;break;
+																		case 190://Port
+																				hasPort=true;break;
+																		case 217://Rotworm Corpse
+																				hasCorpse=true;break;
+																		default:
+																				hasExtraItems=true;break;																			
+																		}
+																}																		
+														}
+												}
+												//Has a bowl. Now test contents.
+												if (
+														(hasCorpse)&&(hasGreenMushroom)&&(hasPort) 
+														&& (!hasExtraItems)
+													)
+												{//Mix port
+														//000~001~149~You mix the ingredients into a stew. \n
+													UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,149));
+														ObjectInteraction bowlObjectInt =bowl.GetComponent<ObjectInteraction>();
+														bowlObjectInt.ChangeType(283,16);
+														Destroy(bowlContainer);
+														bowl.AddComponent<Food>();
+														bowl.GetComponent<Food>().Nutrition=5;
+														return true;
+												}
+												else
+												{//We don't have the items
+													//000~001~148~The bowl does not contain the correct ingredients. \n	
+													UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,148));
+													return true;
+												}
+										}												
+								}
+						}
+				}
+				//000~001~150~You need a bowl to mix the ingredients. \n	
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,150));
+				return true;
+		}
 }

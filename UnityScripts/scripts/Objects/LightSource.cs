@@ -81,6 +81,27 @@ public class LightSource : object_base {
 		}
 	}
 
+
+	public override bool ActivateByObject (GameObject ObjectUsed)
+	{
+		//000~001~182~You think it is a bad idea to add oil to the lit torch. \n
+		ObjectInteraction objIntUsed = ObjectUsed.GetComponent<ObjectInteraction>();
+		if (objIntUsed != null) 
+		{
+				switch (objIntUsed.GetItemType())
+				{
+				case ObjectInteraction.OIL:
+						if (objInt().item_id==149)//Lit torch
+						{
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,182));	
+							return true ;
+						}
+						break;
+				}
+		}
+		return base.ActivateByObject (ObjectUsed);
+	}
+
 		/// <summary>
 		/// Turns the light on if there is a free inventory slot to hold it in.
 		/// </summary>
@@ -148,6 +169,7 @@ public class LightSource : object_base {
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,258));
 		}
 		objInt().RefreshAnim();
+		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 	}
 	
 	/// <summary>
@@ -160,6 +182,7 @@ public class LightSource : object_base {
 		objInt().InvDisplayIndex=ItemIdOff;
 		objInt().isQuant=true;
 		objInt().RefreshAnim();
+		GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 	}
 
 	public override bool LookAt()

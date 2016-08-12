@@ -121,6 +121,19 @@ public class Skills : MonoBehaviour {
 				Swimming=0;
 		}
 
+		public void AdvanceSkill(int SkillNo, int SkillPoints,int SkillPointCost)
+		{//Increase a players skill by the specificed skill let
+			if (GameWorldController.instance.playerUW.TrainingPoints>=SkillPointCost)
+			{
+				AdvanceSkill(SkillNo,SkillPoints);
+			}
+			else
+			{//000~001~024~You are not ready to advance. \n
+				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,24));		
+			}
+		}
+
+
 	public void AdvanceSkill(int SkillNo, int SkillPoints)
 	{//Increase a players skill by the specificed skill let
 		switch (SkillNo)

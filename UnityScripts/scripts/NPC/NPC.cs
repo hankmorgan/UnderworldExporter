@@ -188,6 +188,8 @@ public class NPC : object_base {
 		{
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
+
+		GameWorldController.instance.playerUW.AddXP(npc_power*5);//TODO:Is this set somewhere. Common obj props?
 	}
 
 		/// <summary>
@@ -251,7 +253,10 @@ public class NPC : object_base {
 				if (npc_attitude==0)
 					{//Combat begin
 					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
-					ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",GameWorldController.instance.playerUW.gameObject.transform.position);
+					Vector3 AB = GameWorldController.instance.playerUW.transform.position-this.transform.position;
+					Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
+					//ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",GameWorldController.instance.playerUW.gameObject.transform.position);
+					ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
 					}
 				else
 					{//Friendly states

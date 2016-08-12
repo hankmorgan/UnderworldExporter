@@ -131,53 +131,8 @@ public class PlayerInventory : UWEBase {
 
 	void UpdateUW()
 	{
-		//Check for lights
-		if (lt==null)
-		{
-			lt = this.gameObject.GetComponentInChildren<Light>();
-		}
+				
 
-		ls = null;
-		int MaxBrightness=LightSource.MagicBrightness;//Start with magically generated light.
-		for (int i = 5; i<=8; i++)
-		{
-			ls = null;
-			//Update the gameobject at the slot if needed
-			if (LightGameObjects[i-5]!=null)
-			{
-				if (GetObjectAtSlot(i)!=LightGameObjects[i-5].name)
-				{
-					LightGameObjects[i-5]= GetGameObjectAtSlot(i);
-				}
-			}
-			else
-			{//No object
-				if(GetObjectAtSlot (i)!="")
-				{
-					LightGameObjects[i-5] = GetGameObjectAtSlot(i);
-				}
-			}
-
-			if (GetObjectAtSlot(i) != "")
-			{
-				//GameObject objAtSlot = GetGameObjectAtSlot(i); //GameObject.Find (GetObjectAtSlot(i));
-				if (LightGameObjects[i-5] != null)
-				{
-					ls =LightGameObjects[i-5].GetComponent<LightSource>();
-					if (ls != null)
-					{
-						if (ls.IsOn==true)
-						{
-							if (MaxBrightness < ls.Brightness)
-							{
-								MaxBrightness=ls.Brightness;
-							}
-						}
-					}
-				}
-			}					
-		}
-		lt.range=LightSource.BaseBrightness+MaxBrightness;
 
 		if (playerUW.isFemale==true)
 		{//female
@@ -211,6 +166,48 @@ public class PlayerInventory : UWEBase {
 		return;
 	}
 
+	/// <summary>
+	/// Checks the light sources equiped by the player and makes sure the brightest one is in use
+	/// </summary>
+	public void UpdateLightSources ()
+	{
+		//Check for lights
+		if (lt == null) {
+			lt = this.gameObject.GetComponentInChildren<Light> ();
+		}
+		ls = null;
+		int MaxBrightness = LightSource.MagicBrightness;
+		//Start with magically generated light.
+		for (int i = 5; i <= 8; i++) {
+			ls = null;
+			//Update the gameobject at the slot if needed
+			if (LightGameObjects [i - 5] != null) {
+				if (GetObjectAtSlot (i) != LightGameObjects [i - 5].name) {
+					LightGameObjects [i - 5] = GetGameObjectAtSlot (i);
+				}
+			}
+			else {
+				//No object
+				if (GetObjectAtSlot (i) != "") {
+					LightGameObjects [i - 5] = GetGameObjectAtSlot (i);
+				}
+			}
+			if (GetObjectAtSlot (i) != "") {
+				//GameObject objAtSlot = GetGameObjectAtSlot(i); //GameObject.Find (GetObjectAtSlot(i));
+				if (LightGameObjects [i - 5] != null) {
+					ls = LightGameObjects [i - 5].GetComponent<LightSource> ();
+					if (ls != null) {
+						if (ls.IsOn == true) {
+							if (MaxBrightness < ls.Brightness) {
+								MaxBrightness = ls.Brightness;
+							}
+						}
+					}
+				}
+			}
+		}
+		lt.range = LightSource.BaseBrightness + MaxBrightness;
+	}
 
 	/*	void DisplayGameObject(string objName, UISprite Label, bool isEquipped, ref bool hasChanged)
 	{
@@ -576,7 +573,7 @@ public class PlayerInventory : UWEBase {
 		{
 			UWHUD.instance.Encumberance.text=Mathf.Round(getEncumberance()).ToString();
 		}
-
+		UpdateLightSources();
 	}
 
 
@@ -905,7 +902,7 @@ public class PlayerInventory : UWEBase {
 		}
 
 		//Get the weight of the gronk container as that is alway the top level of the inventory
-		for (int i = 0; i<playerContainer.MaxCapacity();i++)
+		for (int i = 0; i<=playerContainer.MaxCapacity();i++)
 		{
 			if (playerContainer.GetItemAt(i)!="")
 			{
@@ -940,7 +937,7 @@ public class PlayerInventory : UWEBase {
 	public ObjectInteraction findObjInteractionByID(int item_id)
 	{//Returns the first instance of a particular Item id in the players inventory
 		for( int i=0; i<=10;i++)
-		{
+		{//Search the paperdoll slots first.
 			GameObject obj = GetGameObjectAtSlot(i);
 			if (obj!=null)
 			{

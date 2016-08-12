@@ -12,7 +12,7 @@ public class Container : object_base {
 
 	public bool isOpenOnPanel;//Is the container open on the players inventory.
 	public string ContainerParent; //What container is above this one. For passing objects out of the container.
-
+	
 	public int MaxCapacity()
 	{
 		return items.GetUpperBound (0);
@@ -44,7 +44,7 @@ public class Container : object_base {
 
 	public bool AddItemMergedItemToContainer(GameObject item)
 	{
-		for (int i=0; i< MaxCapacity (); i++)
+		for (int i=0; i<=MaxCapacity (); i++)
 		{
 			if (items[i]!="")
 			{
@@ -69,11 +69,11 @@ public class Container : object_base {
 	public bool AddItemToContainer(string item)
 	{
 		int i =0;
-		while ((items[i] !="") && (i <MaxCapacity()))
+		while ((items[i] !="") && (i <=MaxCapacity()))
 			{
 				i++;
 			}
-		if (i<MaxCapacity())
+		if (i<=MaxCapacity())
 			{
 				//items[i] = item;
 				return AddItemToContainer(item,i);
@@ -119,7 +119,7 @@ public class Container : object_base {
 
 	public bool RemoveItemFromContainer(string objectName)
 	{
-		for (int i =0; i<MaxCapacity ();i++)
+		for (int i =0; i<=MaxCapacity ();i++)
 			{
 			if (items[i] == objectName)
 				{
@@ -132,7 +132,7 @@ public class Container : object_base {
 
 	public static bool RemoveItemFromSubContainers(Container cn, string objectName)
 	{
-		for (int i =0; i<cn.MaxCapacity ();i++)
+		for (int i =0; i<=cn.MaxCapacity ();i++)
 		{
 			if (cn.items[i] == objectName)
 			{
@@ -230,7 +230,7 @@ public class Container : object_base {
 		GameWorldController.FreezeMovement(this.gameObject);
 		ObjectInteraction objInt = this.gameObject.GetComponent<ObjectInteraction>();
 		objInt.SetWorldDisplay(objInt.GetEquipDisplay());
-		for (int i=0; i<MaxCapacity ();i++)
+		for (int i=0; i<=MaxCapacity ();i++)
 		{
 			if (GetItemAt (i)!="")
 			{
@@ -273,7 +273,7 @@ public class Container : object_base {
 
 	public static void SetPickedUpFlag(Container cn, bool NewValue)
 	{//Recursivly sets the picked up flag on all items in the container and all sub-container contents.
-		for (int i =0; i<cn.MaxCapacity();i++)
+		for (int i =0; i<=cn.MaxCapacity();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -304,7 +304,7 @@ public class Container : object_base {
 
 	public static void SetItemsPosition(Container cn, Vector3 Position)
 	{
-		for (int i =0; i<cn.MaxCapacity();i++)
+		for (int i =0; i<=cn.MaxCapacity();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -324,7 +324,7 @@ public class Container : object_base {
 
 	public static void SetItemsParent(Container cn, Transform Parent)
 	{
-		for (int i =0; i<cn.MaxCapacity ();i++)
+		for (int i =0; i<=cn.MaxCapacity ();i++)
 		{
 			string ItemName=cn.GetItemAt(i);
 			if (ItemName != "")
@@ -344,7 +344,7 @@ public class Container : object_base {
 
 	public static int GetFreeSlot(Container cn)
 	{//Returns an available slot on the current container.
-		for (int i=0;i<cn.MaxCapacity();i++)
+		for (int i=0;i<=cn.MaxCapacity();i++)
 		{
 			if (cn.GetItemAt (i)=="")
 			{
@@ -362,12 +362,12 @@ public class Container : object_base {
 		int currFreeSlot=-1;
 		string ItemName;
 		bool GetNextSlot=true;
-		for (int i=0;i<cn.MaxCapacity();i++)
+		for (int i=0;i<=cn.MaxCapacity();i++)
 		{
 			//Find the first free slot
 			if (GetNextSlot==true)
 			{
-				for (int j=0;j<cn.MaxCapacity();j++)
+				for (int j=0;j<=cn.MaxCapacity();j++)
 				{
 					ItemName=cn.GetItemAt(j);
 					if (ItemName=="")
@@ -453,7 +453,7 @@ public class Container : object_base {
 	public override float GetWeight ()
 	{//Get the weight of all items in the container
 		float answer=base.GetWeight();//The container has it's own weight as well.
-		for (int i=0; i<MaxCapacity();i++)
+		for (int i=0; i<=MaxCapacity();i++)
 		{
 			if (GetItemAt(i)!="")
 			{
@@ -523,7 +523,7 @@ public class Container : object_base {
 				);
 			break;
 		case 3: //Edibles
-			TypeTest=(objInt.GetItemType()==ObjectInteraction.FOOD);break;
+			TypeTest=((objInt.GetItemType()==ObjectInteraction.FOOD) || (objInt.GetItemType()==ObjectInteraction.POTIONS));break;
 		default:
 			TypeTest=true;break;
 		}
@@ -549,9 +549,14 @@ public class Container : object_base {
 		return (TypeTest && WeightTest);
 	}
 
+		/// <summary>
+		/// Finds the first item of a particular type in the container.
+		/// </summary>
+		/// <returns>The name of the object that matches the itemid</returns>
+		/// <param name="itemid">Itemid.</param>
 	public string findItemOfType(int itemid)
 	{
-		for (int i =0; i<MaxCapacity(); i++ )
+		for (int i =0; i<=MaxCapacity(); i++ )
 		{
 			GameObject obj = GetGameObjectAt(i);
 			if (obj!=null)
@@ -585,7 +590,7 @@ public class Container : object_base {
 		public int CountItems()
 		{
 				int count=0;
-				for (int i =0; i<MaxCapacity(); i++ )
+				for (int i =0; i<=MaxCapacity(); i++ )
 				{
 						if (items[i]!="")
 						{
@@ -595,4 +600,8 @@ public class Container : object_base {
 				return count;
 		}
 
+	public override string getEquipString ()
+	{//Assumes no container is generated as an opened on.
+		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
+	}
 }
