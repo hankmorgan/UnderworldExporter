@@ -480,13 +480,41 @@ public class StringController : UWEBase {
 			(isThisAVowel == "U")
 			)
 		{
-			output = output.Replace("a_","an_");
+			if (output.Contains("a_"))
+			{
+				output = output.Replace("a_","an " + QualityString + " ");
+			}
+			else
+			{
+				if (output.Contains("_"))
+				{
+					output =output.Replace("_", " " + QualityString + " ");	
+				}
+				else
+				{
+					output = QualityString + " " + output + " ";	
+				}				
+			}
 		}
 		else
 		{
-			output = output.Replace("an_","a_");
+			if (output.Contains("an_"))
+			{
+				output = output.Replace("an_","a " +QualityString + " ");					
+			}
+			else
+			{
+				if (output.Contains("_"))
+				{
+					output =output.Replace("_", " " + QualityString + " ");
+				}
+				else
+				{
+					output = QualityString + " " + output + " ";		
+				}			
+			}			
 		}
-		output =output.Replace("_", " " + QualityString + " ");
+		//output =output.Replace("_", " " + QualityString + " ");
 		return GetString(1,260) + output;
 	}
 

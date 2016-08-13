@@ -685,6 +685,7 @@ public class ObjectInteraction : UWEBase {
 						break;
 				case 182://fish
 				case 183://Popcorn
+				case 217://Rotworm corpse						
 						Food fd = myObj.AddComponent<Food> ();
 						fd.Nutrition = 5;
 						break;
@@ -692,33 +693,52 @@ public class ObjectInteraction : UWEBase {
 						myObj.AddComponent<object_base> ();
 						break;
 				}
-				GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
+				//GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
 				return myObj.GetComponent<ObjectInteraction> ();
 		}
 
 		public int GetHitFrameStart()
 		{//What image frames does an weapon hit on this object create.
 
-				if (this.GetComponent<NPC>()==null)
+			if (this.GetComponent<NPC>()==null)
+			{
+					return 45;//Standard explosion
+			}
+			else
+			{
+				switch (GameWorldController.instance.critter.Blood[item_id-64])
 				{
-						return 45;//Standard explosion
+					//Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
+					case 0:
+						return 45;
+					
+					case 8://blood
+					default:
+						return 0;
+							
 				}
-				else
-				{
-						return 0;//Blood spatter.
-				}
+			}
 		}
 
 		public int GetHitFrameEnd()
 		{
-				if (this.GetComponent<NPC>()==null)
+			if (this.GetComponent<NPC>()==null)
+			{
+					return 49;//End of explosion
+			}
+			else
+			{
+				switch (GameWorldController.instance.critter.Blood[item_id-64])
 				{
-						return 49;//End of explosion
+				//Mask 0x0F is the splatter type, 0 for dust, 8 for red blood.
+				case 0:
+						return 49;
+
+				case 8://blood
+				default:
+						return 5;
 				}
-				else
-				{
-						return 5;//end of blood splatter
-				}
+			}
 		}
 
 

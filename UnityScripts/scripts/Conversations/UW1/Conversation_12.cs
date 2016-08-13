@@ -851,6 +851,13 @@ public class Conversation_12 : Conversation {
 		
 	} // end func
 	
+/// <summary>
+/// Determines if the correct item has been returned.
+/// </summary>
+/// <returns>The 0a34.</returns>
+/// <param name="param1">Param1.</param>
+/// <param name="param2">Param2.</param>
+/// <param name="param3">Param3.</param>
 	int func_0a34(int param1, int param2, int param3) {
 		
 		//int locals[25];
@@ -879,7 +886,8 @@ public class Conversation_12 : Conversation {
 		
 		if ( locals[16] > 0 ) {
 			
-			locals[19] = 0;
+			locals[18] = -1;//Added to make sure link is set
+			locals[19] = -1;
 			locals[20] = -1;
 			locals[21] = -1;
 			locals[22] = -1;
@@ -889,14 +897,35 @@ public class Conversation_12 : Conversation {
 			x_obj_stuff( 10,locals, 24, 23, 22, 18, 21, 17, 20, 19, locals[12] );
 			//if ( param2[0]play_hunger != -1 && param2[0]play_hunger != locals[17] ) {
 			//locals[18]=101;//Writ
-			//local[17]=31;//Plate
+			//locals[17]=31;//Plate
+				//Param2 = testing for plate
+				//param1 = testing for writ
 			locals[1] = 0;
-			if ( (param2 != -1) && (param2 != locals[17]) ) {
+				if (param1== -1)
+				{//Testing for plate
+					if (param3== locals[19])	
+					{
+						locals[25] = 1;
+						give_to_npc (2,locals,12,locals[25]);
+						locals[1] = 1;	
+					}
+				}
+				if (param2== -1)
+				{//Testing for writ
+						if ((param1== locals[18]) && (param3==locals[19]))	
+						{
+							locals[25] = 1;
+							give_to_npc (2,locals,12,locals[25]);
+							locals[1] = 1;	
+						}
+				}
+				/*
+				if ( (param2 != -1) && (param2 != locals[20]) ) {//20 was 17
 				locals[1] = 0;
 			} else {
 				
 				//if ( param1[0]play_hunger != -1 && param1[0]play_hunger != locals[18] ) {
-				if ( (param1 != -1) && (param1 != locals[18]) ) {
+				if ( (param1 != -1) && (param1 != locals[18]) ) {//20 was once 18
 					locals[1] = 0;
 				} else {
 					
@@ -911,7 +940,7 @@ public class Conversation_12 : Conversation {
 				//} // end if
 				
 			} // end if
-			
+			*/
 		} // end if
 		
 		return locals[1];
@@ -922,7 +951,7 @@ public class Conversation_12 : Conversation {
 		//int locals[27];
 		int[] locals = new int[28];
 		
-		locals[1] = 314;
+		locals[1] = 314;//The writ
 		locals[2] = -1;
 		locals[3] = 101;
 		if ( func_0a34( locals[3], locals[2], locals[1] ) == 1) {
@@ -1002,7 +1031,7 @@ public class Conversation_12 : Conversation {
 		//int locals[30];
 		int [] locals = new int[31];
 		
-		locals[1] = 172;
+		locals[1] = 172;//plate
 		locals[2] = 31;
 		locals[3] = -1;
 		if ( func_0a34( locals[3], locals[2], locals[1] ) == 1 ) {

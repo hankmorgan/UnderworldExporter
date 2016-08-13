@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class TextureController : UWEBase {
 		private int NoOfObjects=500;
-		private int NoOfTextures=500;
+		//private int NoOfTextures=500;
 		private bool[] ObjectInUse=new bool[500];
 		private Texture2D[]ObjectSrcImage=new Texture2D[500];
 		private Texture2D[]ObjectDstImage=new Texture2D[500];

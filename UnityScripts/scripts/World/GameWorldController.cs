@@ -76,15 +76,21 @@ public class GameWorldController : UWEBase {
 	/// The object master class for storing and reading object properties in an external file
 	/// </summary>
 	public ObjectMasters objectMaster;
+
+	/// <summary>
+	/// The critter properties from objects.dat
+	/// </summary>
+	public Critters critter;
+
 	/// <summary>
 	/// The grey scale shader. Reference to allow loading of a hidden shader.
 	/// </summary>
 	public Shader greyScale;
 
-		/// <summary>
-		/// The vortex effect shader.  Reference to allow loading of a hidden shader.
-		/// </summary>
-		public Shader vortex;
+	/// <summary>
+	/// The vortex effect shader.  Reference to allow loading of a hidden shader.
+	/// </summary>
+	public Shader vortex;
 
 	/// <summary>
 	/// Is the game at the main menu or should it start at the mainmenu.
@@ -97,6 +103,8 @@ public class GameWorldController : UWEBase {
 		UWEBase._RES = game;
 		objectMaster=new ObjectMasters();
 		objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
+		critter = new Critters();
+		critter.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
 	}
 
 	void Start () {

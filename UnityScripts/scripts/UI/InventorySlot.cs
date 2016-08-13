@@ -19,14 +19,16 @@ public class InventorySlot : GuiBase {
 	public const int LEGGINGS =77;
 	public static bool LookingAt;
 	public static string TempLookAt;
-	private int InteractionModeValue;
+	//private int InteractionModeValue;
 	private GameObject QuantityObj=null;//Reference to quantity object being picked up
 
 		public void BeginDrag()
 		{
+			if ((WindowDetectUW.WaitingForInput) || (Conversation.InConversation))
+			{return;}
 			if ( GameWorldController.instance.playerUW.playerInventory.ObjectInHand =="")
 			{
-				InteractionModeValue=UWCharacter.InteractionMode;
+				//InteractionModeValue=UWCharacter.InteractionMode;
 				UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 				InteractionModeControl.UpdateNow=true;
 				ClickEvent(-2);	

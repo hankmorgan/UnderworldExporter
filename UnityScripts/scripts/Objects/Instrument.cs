@@ -90,7 +90,7 @@ public class Instrument : object_base {
 						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,251));
 						GameWorldController.instance.playerUW.mus.Resume();
 						//354237875
-						if (NoteRecord=="354237875")
+						if ((NoteRecord=="354237875") && (objInt().item_id==292))//Flute only
 						{
 								//UWHUD.instance.MessageScroll.Add ("Eyesnack would be proud of your playing");
 								if ((GameWorldController.instance.LevelNo==2) && (CreatedCup==false) && (objInt().item_id==292))
@@ -103,6 +103,7 @@ public class Instrument : object_base {
 												//create the cup of wonder.
 												ObjectInteraction myObjInt = ObjectInteraction.CreateNewObject(174);
 												myObjInt.gameObject.transform.parent=GameWorldController.instance.InventoryMarker.transform;
+												GameWorldController.instance.playerUW.playerInventory.ObjectInHand=myObjInt.name;
 												UWHUD.instance.CursorIcon=myObjInt.GetInventoryDisplay().texture ;
 												UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 												InteractionModeControl.UpdateNow=true;

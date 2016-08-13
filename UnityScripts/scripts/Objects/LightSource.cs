@@ -37,16 +37,20 @@ public class LightSource : object_base {
 			}
 			else
 			{
-				LightTimer-=Time.deltaTime;
-				if (LightTimer<=0)
-				{
-				objInt().Quality--;
-				LightTimer=LightTimerMax;
-				if (objInt().Quality==0)
+				if (objInt().item_id!=147)
+				{//The taper never runs out
+					LightTimer-=Time.deltaTime;
+					if (LightTimer<=0)
 					{
-					SetOff();
-					}
+							objInt().Quality--;
+							LightTimer=LightTimerMax;
+							if (objInt().Quality==0)
+							{
+									SetOff();
+							}
+					}	
 				}
+
 			}
 		}
 	}

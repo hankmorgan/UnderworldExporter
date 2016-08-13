@@ -25,7 +25,7 @@ public class TileMap : UWEBase {
 		/// <summary>
 		/// Player written Map notes stored in a list.
 		/// </summary>
-	public List<MapNote>[] MapNotes = new List<MapNote>[9];
+	public List<MapNote>[] MapNotes = new List<MapNote>[10];
 
 
 	const int TILE_SOLID=0;
@@ -171,7 +171,7 @@ public class TileMap : UWEBase {
 			{//If the tile has been visited and can be rendered.
 				if ((GetTileRender(LevelNo,i,j)==1) && (GetTileVisited(LevelNo,i,j)))
 				{
-					fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.green);
+					fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.cyan);
 				}
 			}
 		}
@@ -293,7 +293,12 @@ public class TileMap : UWEBase {
 		Color TileColorPrimary;
 		Color TileColorSecondary;
 		///Picks which colour to use based on the tile properties.
-		if (GetIsWater(LevelNo,TileX,TileY)==true)
+		if (GetIsBridge(LevelNo,TileX,TileY)==true)
+			{
+				TileColorPrimary=BridgeColour;
+				TileColorSecondary=Color.clear;	
+			}
+		else if (GetIsWater(LevelNo,TileX,TileY)==true)
 			{
 			TileColorPrimary=WaterColour;
 			TileColorSecondary=Color.clear;
@@ -913,6 +918,17 @@ public class TileMap : UWEBase {
 		return Tiles[LevelNo].isLava[tileX,tileY];
 	}
 
+	/// <summary>
+	/// Gets if the tile is a bridge.
+	/// </summary>
+	/// <returns><c>true</c>, if is bridge was gotten, <c>false</c> otherwise.</returns>
+	/// <param name="LevelNo">Level no.</param>
+	/// <param name="tileX">Tile x.</param>
+	/// <param name="tileY">Tile y.</param>
+	private bool GetIsBridge(int LevelNo, int tileX, int tileY)
+	{
+		return Tiles[LevelNo].isBridge[tileX,tileY];
+	}
 
 		/// <summary>
 		/// Sets if the tile is water.
@@ -951,6 +967,25 @@ public class TileMap : UWEBase {
 			Tiles[LevelNo].isLava[tileX,tileY]=false;
 		}
 	}
+
+		/// <summary>
+		/// Marks if the tile has a bridge.
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="iIsBridge">I is bridge.</param>
+		private void SetIsBridge(int LevelNo, int tileX, int tileY,int iIsBridge)
+		{
+			if (iIsBridge==1)
+			{
+				Tiles[LevelNo].isBridge[tileX,tileY]=true;	
+			}
+			else
+			{
+				Tiles[LevelNo].isBridge[tileX,tileY]=false;
+			}
+		}
 
 
 		/// <summary>
@@ -1015,7 +1050,7 @@ public class TileMap : UWEBase {
 		/// <param name="iIsWater">is water.</param>
 		/// <param name="iIsDoor">is door.</param>
 		/// <param name="iIsLava">is lava.</param>
-	private void SetTileProp(int LevelNo, int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava)
+		private void SetTileProp(int LevelNo, int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava, int iIsBridge)
 	{
 		SetTileType (LevelNo, tileX,tileY,itileType);
 		Tiles[LevelNo].Render[tileX,tileY]=iRender;
@@ -1023,6 +1058,7 @@ public class TileMap : UWEBase {
 		SetCeilingHeight (LevelNo, tileX,tileY,CeilingHeight);
 		SetIsWater(LevelNo, tileX,tileY,iIsWater);
 		SetIsLava(LevelNo, tileX,tileY,iIsLava);
+		SetIsBridge(LevelNo,tileX,tileY,iIsBridge);
 	}
 
 	// Use this for initialization
@@ -1073,8 +1109,10 @@ public class TileMap : UWEBase {
 														int.Parse(entries[6]),
 														int.Parse(entries[7]),
 														int.Parse(entries[8]),
-														int.Parse(entries[9])
+														int.Parse(entries[9]),
+														int.Parse(entries[10])
 												);
+														
 										}
 								}
 						}

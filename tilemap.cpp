@@ -1365,7 +1365,14 @@ void setBridgeBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 					{
 					if ((objectMasters[objList[currObj.index].item_id].type == BRIDGE))
 						{
-						LevelInfo[x][y].hasBridge=1;
+						if (currObj.flags < 2)//Only tag the tiles if this is a standard bridge
+							{
+							LevelInfo[x][y].hasBridge = 1;
+							}
+						else
+							{
+							LevelInfo[x][y].hasBridge = 0;
+							}
 						}
 					currObj = objList[currObj.next];
 					} while (currObj.index != 0);

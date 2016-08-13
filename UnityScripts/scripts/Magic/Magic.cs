@@ -307,7 +307,7 @@ public class Magic : UWEBase {
 				case "Uus Por"://Jump
 						{
 								SetSpellCost(2);
-								Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap);
+								Cast_UusPor(caster,SpellEffect.UW1_Spell_Effect_Leap_alt01);
 								break;
 						}//up
 				case "In Bet Mani"://Lesser Heal
@@ -2653,24 +2653,24 @@ public class Magic : UWEBase {
 		/// </summary>
 		void OnGUI()
 		{
-				if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput)){return;}
-				if (
-						(Event.current.Equals(Event.KeyboardEvent("q")))
-						&&
-						(UWHUD.instance.window.JustClicked==false)
-						&&
-						((playerUW.PlayerCombat.AttackCharging==false) && (playerUW.PlayerCombat.AttackExecuting==false))
-				)
-				{//Cast a spell or readies it.
-						if (ReadiedSpell=="")
-						{
-								if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(),ActiveRunes[0],ActiveRunes[1],ActiveRunes[2]))
-								{
-										castSpell(this.gameObject,ActiveRunes[0],ActiveRunes[1],ActiveRunes[2],true);
-										ApplySpellCost();
-								}
-						}
-				}
+			if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (Conversation.InConversation)){return;}
+			if (
+					(Event.current.Equals(Event.KeyboardEvent("q")))
+					&&
+					(UWHUD.instance.window.JustClicked==false)
+					&&
+					((playerUW.PlayerCombat.AttackCharging==false) && (playerUW.PlayerCombat.AttackExecuting==false))
+			)
+			{//Cast a spell or readies it.
+					if (ReadiedSpell=="")
+					{
+							if (TestSpellCast(this.gameObject.GetComponent<UWCharacter>(),ActiveRunes[0],ActiveRunes[1],ActiveRunes[2]))
+							{
+									castSpell(this.gameObject,ActiveRunes[0],ActiveRunes[1],ActiveRunes[2],true);
+									ApplySpellCost();
+							}
+					}
+			}
 		}
 
 		/// <summary>
@@ -2835,21 +2835,21 @@ public class Magic : UWEBase {
 
 
 				case SpellEffect.UW1_Spell_Effect_Leap:
+						if (PassiveArrayIndex!=-1)
+						{
+								Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+						}
+						SpellResultType=SpellResultPassive;
+						break;
+				case SpellEffect.UW1_Spell_Effect_Leap_alt01:
+				case SpellEffect.UW1_Spell_Effect_Leap_alt02:
+						//TODO: Find out which one of these is a magic ring effect!
 						//Player only
 						if (ActiveArrayIndex!=-1)
 						{
 								Cast_Leap(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 								SpellResultType=SpellResultActive;
 						}
-						break;
-				case SpellEffect.UW1_Spell_Effect_Leap_alt01:
-				case SpellEffect.UW1_Spell_Effect_Leap_alt02:
-						//TODO: Find out which one of these is a magic ring effect!
-						if (PassiveArrayIndex!=-1)
-						{
-								Cast_Leap(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-						}
-						SpellResultType=SpellResultPassive;
 						break;
 
 				case SpellEffect.UW1_Spell_Effect_SlowFall:

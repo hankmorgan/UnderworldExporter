@@ -58,7 +58,10 @@ public class enchantment_base : object_base {
 	public override bool LookAt ()
 	{//Look descriptions for different enchantable objects.
 		//string desc;
-		
+		if (objInt().PickedUp==false)
+		{
+			return base.LookAt();
+		}
 		switch (objInt().item_id)
 		{	
 		case 54: //Ring of humility

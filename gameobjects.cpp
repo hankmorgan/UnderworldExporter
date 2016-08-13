@@ -2292,19 +2292,19 @@ void UWCommonObj(int game)
 	fclose(file);
 	addressPtr = 2;
 	j=0;
-	//printf("\nWeapons\n\tSlash\tBash\tStab\tSkill\tDurability");
+	fprintf(LOGFILE, "\nWeapons\nName\tSlash\tBash\tStab\tSkill\tDurability");
 	for (int i = 0; i < 16; i++)
 		{//The weapons table
-		
-		//printf("\n\t%d", getValAtAddress(obj_dat,addressPtr,8));//slash
+		fprintf(LOGFILE, "\n%s", objectMasters[j].desc);
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr, 8));//slash
 		objectMasters[j].uwProperties[UW_PROP_WEAP_SLASH] = getValAtAddress(obj_dat, addressPtr, 8);
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr+1, 8));//bash
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//bash
 		objectMasters[j].uwProperties[UW_PROP_WEAP_BASH] = getValAtAddress(obj_dat, addressPtr+1, 8);
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//stab
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//stab
 		objectMasters[j].uwProperties[UW_PROP_WEAP_STAB] = getValAtAddress(obj_dat, addressPtr+2, 8);
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Skill
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Skill
 		objectMasters[j].uwProperties[UW_PROP_WEAP_SKILL] = getValAtAddress(obj_dat, addressPtr+6, 8);
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr + 7, 8));//Durability
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 7, 8));//Durability
 		objectMasters[j].uwProperties[UW_PROP_DURABILITY] = getValAtAddress(obj_dat, addressPtr+7, 8);
 		//printf("\t%s", objectMasters[j].desc);
 		
@@ -2321,23 +2321,26 @@ void UWCommonObj(int game)
 //			0006   Int8   skill type(3: sword, 4 : axe, 5 : mace, 6 : unarmed)
 //			0007   Int8   durability
 		}
-	//printf("\nAddress is %d\nRanged\n",addressPtr);
-//	printf("\n\tRaw\tAmmo\tDurability");
+j=24;
+fprintf(LOGFILE, "\nAddress is %d\nRanged\n", addressPtr);
+fprintf(LOGFILE, "\n\tName\tAmmo\tDurability");
 	for (int i = 0; i < 16; i++)
 		{//Ranged weapons
 			//0000   Int16  unknown
 			//bits 9 - 15: ammunition needed(+0x10)
 			//	0002   Int8   durability
-	//	printf("\n\t%d", getValAtAddress(obj_dat, addressPtr, 16));
-	//	printf("\t%d", ((getValAtAddress(obj_dat,addressPtr,16)>>9) & 0x7F));//is this right at all????
-		//printf("\t%d", getValAtAddress(obj_dat,addressPtr+2,8));
-	//	printf("\t%s", objectMasters[j].desc);
+		fprintf(LOGFILE, "\n\t%s", objectMasters[j].desc);
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr, 16));
+		fprintf(LOGFILE, "\t%d", ((getValAtAddress(obj_dat, addressPtr, 16) >> 9) & 0x7F));//is this right at all????
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));
+
 		addressPtr = addressPtr + 3;
 		j++;
 		}
 
-	printf("\nAddress is %d\nArmour & Wearable\n", addressPtr);
-	printf("\n\tProt\tDurabil\tUnkn\Category");
+	fprintf(LOGFILE, "\nAddress is %d\nArmour & Wearable\n", addressPtr);
+	fprintf(LOGFILE, "\n\tProt\tDurabil\tUnkn\Category");
+	j = 32;
 	for (int i = 0; i < 32; i++)
 		{
 /*		0000   Int8   protection
@@ -2352,24 +2355,76 @@ void UWCommonObj(int game)
 			08 : hat
 			09 : ring
 */
+		fprintf(LOGFILE, "\n\t%s", objectMasters[j].desc);
 		//printf("\n\t%d",getValAtAddress(obj_dat,addressPtr,8));//Protection
 		objectMasters[j].uwProperties[UW_PROP_ARM_PROTECTION] = getValAtAddress(obj_dat, addressPtr, 8);
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr +1 , 8));//durability
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 1, 8));//durability
 		objectMasters[j].uwProperties[UW_PROP_DURABILITY] = getValAtAddress(obj_dat, addressPtr + 1, 8);
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr +2, 8));//Unknown
-		//printf("\t%d", getValAtAddress(obj_dat, addressPtr +3, 8));//Category
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 2, 8));//Unknown
+		fprintf(LOGFILE, "\t%d", getValAtAddress(obj_dat, addressPtr + 3, 8));//Category
 		//printf("\t%s", objectMasters[j].desc);
 		addressPtr = addressPtr + 4;
 		j++;
 		}
 
-	//printf("\nAddress is %d\nCritters\n", addressPtr);
+
+
+	/*
+	http://wiki.ultimacodex.com/wiki/Ultima_Underworld_Internal_Formats
+	00h 	1 	uint8 	Level 	Level of the creature.
+	01h 	3 	 ?? 	 ?? 	 ??
+	04h 	2 	uint16 	HitPoints 	Average hit points.
+	06h 	1 	uint8 	AttackPower 	Damage on attack.
+	07h 	1 	 ?? 	 ?? 	 ??
+	08h 	1 	uint8 	FluidAndRemains 	A combination of remains after death and the type of blood splatters this produces. Mask 0x0F is the splatter type, 0 for dust, 8 for red blood. Mask 0xF0 is the remains; Nothing = 0x00, RotwormCorpse = 0x20, Rubble = 0x40, WoodChips = 0x60, Bones = 0x80, GreenBloodPool = 0xA0, RedBloodPool = 0xC0, RedBloodPoolGiantSpider = 0xE0.
+	09h 	1 	uint8 	GeneralType 	An index into the strings on page 8, offset 370. This string is the generic name for the creature, like "a creature" for "a goblin" or "a rat" for "a giant rat".
+	0Ah 	1 	uint8 	Passiveness 	Relative passiveness. 255 will never take a swing at you, even if you kill them.
+	0Bh 	1 	 ?? 	 ?? 	 ??
+	0Ch 	1 	uint8 	MovementSpeed 	Speed of movement; 0 is immobile, maxes out at 12 for vampire bat.
+	0Dh 	2 	 ?? 	 ?? 	 ??
+	0Fh 	1 	uint8 	PoisonDamage 	Amount of poison damage this is capable of on attack.
+	10h 	1 	uint8 	Category 	Ethereal = 0x00 (Ethereal critters like ghosts, wisps, and shadow beasts), Humanoid = 0x01 (Humanlike non-thinking forms like lizardmen, trolls, ghouls, and mages), Flying = 0x02 (Flying critters like bats and imps), Swimming = 0x03 (Swimming critters like lurkers), Creeping = 0x04 (Creeping critters like rats and spiders), Crawling = 0x05 (Crawling critters like slugs, worms, reapers (!), and fire elementals (!!)), EarthGolem = 0x11 (Only used for the earth golem), Human = 0x51 (Humanlike thinking forms like goblins, skeletons, mountainmen, fighters, outcasts, and stone and metal golems).
+	11h 	1 	uint8 	EquipmentDamage 	Amount of equipment damage this is capable of on attack.
+	12h 	1 	 ?? 	 ?? 	 ??
+	13h 	9 	Probability[3] 	Probabilities 	Each has the form (uint16 value, uint8 percent). What this means is unknown.
+	1Ch 	12 	 ?? 	 ?? 	 ??
+	28h 	2 	uint16 	Experience 	Experience provided when killed.
+	2Ah 	5 	 ?? 	 ?? 	 ??
+	2Fh 	1 	uint8 	 ?? 	Always 73.
+*/
+j=64;
+	fprintf(LOGFILE, "\nAddress is %d\nCritters\n", addressPtr);
+	fprintf(LOGFILE, "\nLevel\tAvgHit\tAttackPower\tRemains Body\tRemains Blood\tGeneralType\tPassive\tSpeed\tPoison\tCategory\tEquipDamage\tProb Value\tProb Percent\tExp\t73");
 	for (int i = 0; i < 64; i++)
 		{//Critters
+		//fprintf(LOGFILE, "\n%s", objectMasters[j].desc);
+		fprintf(LOGFILE, "\n%d", getValAtAddress(obj_dat, addressPtr + 0, 8));//Level
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 1, 8));
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 2, 8));
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 3, 8));
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 4, 16));//Average Hitpoints
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 6, 8));//Attack power
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 7, 8));
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0xF0);//Remains body
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 8, 8) & 0x0F);//Remains blood
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 9, 8));//General Type
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xA, 8));//Passiveness
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xB, 8));
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xC, 8));//Speed
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xD, 16));
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0xF, 8));//Poison Damage
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x10, 8));//Category
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x11, 8));//Equipment damage
+		//fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x12, 8));//?
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x13, 16));//Probability
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x15, 8));//Probab
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x28, 16));//Exp
+		fprintf(LOGFILE, " %d", getValAtAddress(obj_dat, addressPtr + 0x2F, 8));
 		addressPtr = addressPtr + 48;
 		j++;
 		}
-
+	
+	j = 0;
 	//printf("\nAddress is %d\nContainers\n", addressPtr);
 	//printf("\n\tCap\tTypeofObj\tUnkn\noOfSlots");
 	for (int i = 0; i < 16; i++)

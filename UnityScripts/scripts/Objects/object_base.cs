@@ -12,7 +12,7 @@ public class object_base : UWEBase {
 	//public static ScrollController ml;
 	
 	//The Object interaction that is on this object.
-	//protected ObjectInteraction objInt;
+	private ObjectInteraction _objInt;
 	
 	///A trigger to activate when this object is picked up.
 	public string PickupLink;
@@ -24,7 +24,11 @@ public class object_base : UWEBase {
 	public ObjectInteraction objInt()
 	{
 		//CheckReferences();
-		return this.gameObject.GetComponent<ObjectInteraction>();
+		if (_objInt==null)
+		{
+			_objInt=this.GetComponent<ObjectInteraction>();
+		}
+		return _objInt; //this.gameObject.GetComponent<ObjectInteraction>();
 	}
 
 	protected virtual void Start()

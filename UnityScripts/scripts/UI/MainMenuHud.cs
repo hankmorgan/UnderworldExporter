@@ -57,7 +57,7 @@ public class MainMenuHud : GuiBase {
 				CharGenBody.texture=Resources.Load <Texture2D> (_RES +"/Sprites/texture_blank");
 		}
 
-		void Start()
+		public override void Start()
 		{
 			if (GameWorldController.instance.AtMainMenu)
 			{

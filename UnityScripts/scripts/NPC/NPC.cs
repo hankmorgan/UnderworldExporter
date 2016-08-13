@@ -161,6 +161,7 @@ public class NPC : object_base {
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
 		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
+		ai.AI.Motor.DefaultSpeed=3.0f * (((float)GameWorldController.instance.critter.Speed[objInt().item_id-64]/12.0f)); 
 	}
 
 
@@ -189,7 +190,8 @@ public class NPC : object_base {
 			cnt.SpillContents();//Spill contents is still not 100% reliable so don't expect to get all the items you want.
 		}
 
-		GameWorldController.instance.playerUW.AddXP(npc_power*5);//TODO:Is this set somewhere. Common obj props?
+		//GameWorldController.instance.playerUW.AddXP(npc_power*5);//TODO:Is this set somewhere. Common obj props?
+		GameWorldController.instance.playerUW.AddXP(GameWorldController.instance.critter.Exp[objInt().item_id-64]);
 	}
 
 		/// <summary>
@@ -228,8 +230,8 @@ public class NPC : object_base {
 			//}
 		}
 		else
-		{//The AI is only active when the player is within a certain distance to the player.
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.gameObject.transform.position)<=8;
+		{//The AI is only active when the player is within a certain distance to the player camera.
+			ai.AI.IsActive= Vector3.Distance(this.transform.position, Camera.main.transform.position)<=8;
 			anim.enabled=ai.AI.IsActive;
 			if (ai.AI.IsActive==false)
 			{
@@ -238,6 +240,7 @@ public class NPC : object_base {
 			}
 			//Update the appearance of the NPC
 			UpdateSprite();
+			
 			if (ai.AI.Navigator.CurrentPath!=null)
 			{//Turns the AI around on their route.
 				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
@@ -288,6 +291,7 @@ public class NPC : object_base {
 		/// <returns><c>true</c>, if to was talked, <c>false</c> otherwise.</returns>
 	public override bool TalkTo()
 	{//Begin a conversation.
+		string npcname="";
 		if ((npc_whoami == 255))
 		{
 			//006~007~001~You get no response.
@@ -298,7 +302,13 @@ public class NPC : object_base {
 			if (npc_whoami==0)
 			{//Generic conversation.
 				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
+				npcname= StringController.instance.GetFormattedObjectNameUW(objInt);
 				npc_whoami=256+(objInt.item_id -64);
+			}
+			if (npc_whoami>255)
+			{//Generic conversation.
+				ObjectInteraction objInt=this.GetComponent<ObjectInteraction>();
+				npcname= StringController.instance.GetSimpleObjectNameUW(objInt);
 			}
 			Conversation cnv =this.GetComponent<Conversation>();
 			if (cnv!=null)
@@ -307,7 +317,14 @@ public class NPC : object_base {
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
 				cnv.WhoAmI=npc_whoami;
-				UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);
+				if (npcname=="")
+				{
+					UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						
+				}
+				else
+				{
+					UWHUD.instance.NPCName.text=npcname;	
+				}				
 				UWHUD.instance.PCName.text= GameWorldController.instance.playerUW.CharName;
 				
 				StartCoroutine(cnv.main ());//Conversations operate in coroutines to allow interaction

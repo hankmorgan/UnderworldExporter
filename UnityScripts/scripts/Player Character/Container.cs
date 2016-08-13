@@ -520,6 +520,8 @@ public class Container : object_base {
 				(objInt.GetItemType()==ObjectInteraction.MAGICSCROLL)
 				||
 				(objInt.GetItemType()==ObjectInteraction.MAP)
+				||
+				(objInt.GetItemType()==ObjectInteraction.BOOK)
 				);
 			break;
 		case 3: //Edibles

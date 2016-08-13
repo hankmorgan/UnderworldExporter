@@ -82,7 +82,7 @@ public class UWCombat : Combat {
 	/// Casts a ray from the centre of the screen in mouselook mode or from the cursor position
 	/// Waits a period of time after the release before casting the ray.
 	/// </summary>
-	public override IEnumerator ExecuteMelee()
+		public override IEnumerator ExecuteMelee(string StrikeType)
 	{		
 		yield return new WaitForSeconds(0.4f);
 		
@@ -108,7 +108,37 @@ public class UWCombat : Combat {
 				ObjectInteraction objInt = hit.transform.gameObject.GetComponent<ObjectInteraction>();
 				if (objInt!=null)
 				{
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(10+ Random.Range(0, GameWorldController.instance.playerUW.PlayerSkills.Attack));
+										
+					int StrikeBaseDamage;
+					if (currWeapon==null)
+					{//Fist 
+							//2	4	3	
+							switch (StrikeType.ToUpper())
+							{
+							case "SLASH":
+									StrikeBaseDamage=2;break;
+							case "BASH":
+									StrikeBaseDamage=4;break;
+							case "STAB":
+							default:	
+									StrikeBaseDamage=3;break;
+							}
+					}
+					else
+					{
+							switch (StrikeType.ToUpper())
+							{
+							case "SLASH":
+									StrikeBaseDamage=currWeapon.Slash;break;
+							case "BASH":
+									StrikeBaseDamage=currWeapon.Bash;break;
+							case "STAB":
+							default:	
+									StrikeBaseDamage=currWeapon.Stab;break;
+							}	
+					}
+
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(StrikeBaseDamage+ (Random.Range(0, GameWorldController.instance.playerUW.PlayerSkills.Attack)/2));
 					///Creates a blood splatter at the point of impact
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;
@@ -175,9 +205,10 @@ public class UWCombat : Combat {
 		{
 			if (IsMelee())
 			{///Sets the weapon, race and handedness animation.
-				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + GetStrikeType () +"_" + GetRace () + "_" + GetHand() + "_Execute";
+				string StrikeType=GetStrikeType();
+				UWHUD.instance.wpa.SetAnimation= GetWeapon () + "_" + StrikeType +"_" + GetRace () + "_" + GetHand() + "_Execute";
 				AttackExecuting=true;
-				StartCoroutine(ExecuteMelee());
+				StartCoroutine(ExecuteMelee(StrikeType));
 			}
 			else
 			{//Ranged attack

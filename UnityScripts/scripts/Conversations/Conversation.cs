@@ -287,7 +287,7 @@ public class Conversation : GuiBase {
 
 	public override void Start()
 	{
-		base.Start();
+	//	base.Start();
 		npc = this.GetComponent<NPC>();
 		WhoAmI = npc.npc_whoami;
 	}
@@ -432,7 +432,12 @@ public class Conversation : GuiBase {
 		default:
 				Markup="<color=green>";break;//[00FF00]
 		}		
-		
+				//Make sure the string does not begin with a newline as this can break the markup in some cases.
+		WhatToSay= WhatToSay.Trim();
+		if (WhatToSay.StartsWith("\\n"))
+		{
+			WhatToSay=WhatToSay.Remove(1,2);
+		}
 		///Splits the strings into paragraphs based on [more]
 		string[] Paragraphs = WhatToSay.Split(new string [] {"\\m"}, System.StringSplitOptions.None);
 
@@ -445,7 +450,6 @@ public class Conversation : GuiBase {
 		/// Reset output and column counter after each add
 		for (int i = 0; i<= Paragraphs.GetUpperBound(0);i++)
 			{
-			int RowCounter=0;
 			string[] StrWords = Paragraphs[i].Split(new char [] {' '});
 			int colCounter=0;
 			string Output="";
@@ -623,6 +627,7 @@ public class Conversation : GuiBase {
 		PlayerTypedAnswer="";
 		tl_input.Set(">");
 		InputField inputctrl=UWHUD.instance.InputControl;
+		inputctrl.gameObject.SetActive(true);
 		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 		inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 		inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
@@ -642,7 +647,9 @@ public class Conversation : GuiBase {
 	/// <param name="PlayerTypedAnswerIN">The string the player has typed</param>
 	public void OnSubmitPickup(string PlayerTypedAnswerIN)
 	{
+		InputField inputctrl=UWHUD.instance.InputControl;
 		WaitingForTyping=false;
+		inputctrl.gameObject.SetActive(false);
 		PlayerTypedAnswer= PlayerTypedAnswerIN; 
 	}
 
@@ -1064,6 +1071,7 @@ public class Conversation : GuiBase {
 				demanded.transform.position = Vector3.zero;
 				npcSlot.clear ();
 				GameWorldController.instance.playerUW.GetComponent<PlayerInventory> ().Refresh ();
+				demanded.GetComponent<ObjectInteraction>().PickedUp=true;
 			}
 			else {
 				GameObject demanded = GameObject.Find (npcSlot.objectInSlot);
@@ -1395,7 +1403,7 @@ public class Conversation : GuiBase {
 
 		if (locals[link]==-1)
 			{
-			locals[link]=obj.Link; 
+			locals[link]=obj.Link-512; 
 			}
 		else
 			{
@@ -1409,6 +1417,14 @@ public class Conversation : GuiBase {
 		else
 		{
 			obj.Quality=locals[quality];
+		}
+		if (locals[id]==-1)
+		{
+			locals[id]=obj.item_id; 
+		}
+		else
+		{
+			obj.item_id=locals[id];
 		}
 	}
 
@@ -2016,10 +2032,11 @@ public class Conversation : GuiBase {
 		if (obj!=null)
 		{
 			obj.transform.position = new Vector3( 
-			                                     (((float)tileX) *1.2f), 
-												(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY),
-			                                     (((float)tileY) *1.2f) 
+			                                     (((float)tileX) *1.2f)+0.6f, 
+												(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
+												(((float)tileY) *1.2f) +0.6f
 			                                     );
+			obj.transform.parent=GameWorldController.instance.LevelMarker();
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
 			UWHUD.instance.npcTrade[invSlot].clear();
 		}

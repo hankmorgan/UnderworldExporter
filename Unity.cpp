@@ -2206,6 +2206,7 @@ return;
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityCoin(game, x, y, z, currobj, objList, LevelInfo);
+							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:
 							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
@@ -2262,10 +2263,10 @@ void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
 		{
 		for (int y = 0; y <= 63; y++)
 			{
-			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d);"
+			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d);"
 				, Level, x, y, LevelInfo[x][y].tileType, 
 				LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight, 
-				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, LevelInfo[x][y].isLava);  //TODO:Bridges
+				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, LevelInfo[x][y].isLava, LevelInfo[x][y].hasBridge);  //TODO:Bridges
 			}
 		}
 	fclose(UNITY_FILE);

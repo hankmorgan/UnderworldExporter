@@ -69,6 +69,7 @@ public class ActiveRuneSlot : GuiBase_Draggable {
 		{
 			return;
 		}
+		if ((WindowDetectUW.InMap==true) || (WindowDetectUW.WaitingForInput) || (Conversation.InConversation)){return;}
 
 		if (GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell=="")
 		{

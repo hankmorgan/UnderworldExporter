@@ -109,25 +109,62 @@ public class Equipment : object_base {
 		{
 			if (objInt().isIdentified==true)
 			{
-					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 			}
 			else
 			{
 					if (GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillLore, getIdentificationLevels(GetActualSpellIndex())))
 					{
-							objInt().isIdentified=true;
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
+						objInt().isIdentified=true;
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()) + " of " + StringController.instance.GetString(6,GetActualSpellIndex()));
 					}
 					else
 					{
-							UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt()));		
+						UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()));		
 					}					
 			}
 			return true;
 		}
 		else
 		{
-			return base.LookAt();
+			if (objInt().PickedUp==true)
+			{
+					UWHUD.instance.MessageScroll.Add (StringController.instance.GetFormattedObjectNameUW(objInt(),GetEquipmentConditionString()));		
+			}
+			else
+			{
+					return base.LookAt();					
+			}			
 		}
+	return true;
 	}
+
+		/// <summary>
+		/// Gets the equipment condition.
+		/// </summary>
+		/// <returns>The equipment condition string.</returns>
+		public virtual string GetEquipmentConditionString()
+		{
+			if ((objInt().Quality>0) && (objInt().Quality<=15))
+			{//lowest
+				return StringController.instance.GetString(5,7);
+			}
+			else if ((objInt().Quality>15) && (objInt().Quality<=30))
+			{
+				//Low quality
+				return StringController.instance.GetString(5,8);
+
+			}
+			else if ((objInt().Quality>30) && (objInt().Quality<=45))
+			{
+					//Medium
+				return StringController.instance.GetString(5,9);
+			}
+			else if ((objInt().Quality>45) && (objInt().Quality<=63))
+			{
+					//Best
+				return StringController.instance.GetString(5,10);
+			}
+		return "";
+		}
 }

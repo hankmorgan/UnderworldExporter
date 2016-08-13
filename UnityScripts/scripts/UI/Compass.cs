@@ -176,6 +176,7 @@ public class Compass : GuiBase_Draggable {
 	public void OnClick()
 	{
 		if (Dragging==true){return;}
+				if ((WindowDetectUW.WaitingForInput) || (Conversation.InConversation)) {return;}
 				UWHUD.instance.MessageScroll.Clear ();
 				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (1,64) 
 						+ GameWorldController.instance.playerUW.GetFedStatus() 
