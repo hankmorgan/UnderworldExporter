@@ -58,8 +58,14 @@ public class MusicController : UWEBase {
 	/// </summary>
 	private int playing;
 
+		/// <summary>
+		/// Is a special clip such as a fan fare being played.
+		/// </summary>
 	public bool SpecialClip;//One offs
 
+		/// <summary>
+		/// The main track list. Contains all the tracks that can be played.
+		/// </summary>
 	public AudioClip[] MainTrackList=new AudioClip[12];
 
 		/// <summary>

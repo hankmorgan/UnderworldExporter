@@ -74,7 +74,7 @@ public class UWHUD : HUD {
 		bool StatsEnabled=false;
 		bool ConversationEnabled=false;
 		bool CutSceneSmallEnabled=true;
-		bool CutSceneFullEnabled=false;
+		bool CutSceneFullEnabled=true;
 		bool MapEnabled=false;
 
 		//Hud animation related
@@ -94,6 +94,10 @@ public class UWHUD : HUD {
 			RefreshPanels(-1);
 		}
 
+		/// <summary>
+		/// Refreshs the panels depending on the active mode
+		/// </summary>
+		/// <param name="ActivePanelMode">Active panel mode.</param>
 		public void RefreshPanels(int ActivePanelMode)
 		{
 				
@@ -108,6 +112,7 @@ public class UWHUD : HUD {
 								StatsEnabled=false;
 								ConversationEnabled=false;
 								CutSceneSmallEnabled=true;
+								CutSceneFullEnabled=false;
 								MapEnabled=false;
 								if (chains.ActiveControl>2)
 								{
@@ -204,8 +209,15 @@ public class UWHUD : HUD {
 		}
 
 
+		/// <summary>
+		/// Rotates the inventory panels around.
+		/// </summary>
+		/// <returns>The panels.</returns>
+		/// <param name="fromPanel">From panel.</param>
+		/// <param name="toPanel">To panel.</param>
 		IEnumerator RotatePanels(GameObject fromPanel, GameObject toPanel)
 		{
+				bool refreshed=false;
 				if (fromPanel==toPanel)
 				{
 						UpdatePanelStates();
@@ -229,6 +241,11 @@ public class UWHUD : HUD {
 							toPanel.GetComponent<RectTransform>().rotation = Quaternion.Lerp (toQ,fromQ,index);
 							if (index>=0.5f)
 							{
+										if (refreshed==false)
+										{
+												UpdatePanelStates();
+												refreshed=true;
+										}
 									EnableDisableControl(toPanel,true);
 									EnableDisableControl(fromPanel,false);	
 							}
@@ -242,7 +259,11 @@ public class UWHUD : HUD {
 					}
 					fromPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,-1.0f,0.0f,0.0f);
 					toPanel.GetComponent<RectTransform>().rotation=new Quaternion(0.0f,0.0f,0.0f,0.0f);
-					UpdatePanelStates();
+						if (refreshed==false)
+						{
+								UpdatePanelStates();
+								refreshed=true;
+						}
 					isRotating=false;
 					currentPanel=toPanel;
 				}
@@ -250,7 +271,9 @@ public class UWHUD : HUD {
 
 
 
-
+		/// <summary>
+		/// Updates the panel states as needed.
+		/// </summary>
 		void UpdatePanelStates()
 		{
 				EnableDisableControl (RuneBagPanel,RuneBagEnabled);
@@ -270,7 +293,11 @@ public class UWHUD : HUD {
 				EnableDisableControl(CutsceneFullPanel,CutSceneFullEnabled);	
 		}
 
-
+		/// <summary>
+		/// Enables or disables a control.
+		/// </summary>
+		/// <param name="control">Control.</param>
+		/// <param name="targetState">If set to <c>true</c> target state.</param>
 		public void EnableDisableControl(GameObject control, bool targetState)
 		{
 				control.SetActive(targetState);

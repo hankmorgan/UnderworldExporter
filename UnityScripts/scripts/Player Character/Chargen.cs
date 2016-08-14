@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Chargen {
+public class Chargen : Props {
 		//0 = Gender
 		//1 = Handeness
 		//2 = Class

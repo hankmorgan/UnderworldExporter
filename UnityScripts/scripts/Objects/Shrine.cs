@@ -120,7 +120,6 @@ public class Shrine : object_base {
 
 	private void SubmitMantra(string Mantra)
 	{
-		bool hasPoints=true;
 		int SkillPointsToAdd=2;
 		Skills playerSkills= GameWorldController.instance.playerUW.PlayerSkills;
 		////if (inputctrl==null)
@@ -129,7 +128,8 @@ public class Shrine : object_base {
 		//}
 		if (GameWorldController.instance.playerUW.TrainingPoints==0)
 		{
-			hasPoints=false;
+			//000~001~024~You are not ready to advance. \n
+			UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,24));						
 			return;
 		}
 		string answer="";
@@ -241,20 +241,11 @@ public class Shrine : object_base {
 	
 	if (answer!="")
 		{
-			if (hasPoints)
-			{
-				UWHUD.instance.MessageScroll.Add( "You have advanced in " + answer);
-				GameWorldController.instance.playerUW.TrainingPoints-=1;
-			}
-			else
-			{
-				//000~001~024~You are not ready to advance. \n
-				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,24));
-			}
+			UWHUD.instance.MessageScroll.Add( "You have advanced in " + answer);
+			GameWorldController.instance.playerUW.TrainingPoints-=1;
 		}
 		else
 		{
-			//Debug.Log ("not a mantra");
 			UWHUD.instance.MessageScroll.Add("That is not a mantra");
 		}
 	}

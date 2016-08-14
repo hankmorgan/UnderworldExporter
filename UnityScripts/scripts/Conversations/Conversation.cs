@@ -628,7 +628,7 @@ public class Conversation : GuiBase {
 		tl_input.Set(">");
 		InputField inputctrl=UWHUD.instance.InputControl;
 		inputctrl.gameObject.SetActive(true);
-		inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
+		//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 		inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 		inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
 		inputctrl.contentType= InputField.ContentType.Alphanumeric;

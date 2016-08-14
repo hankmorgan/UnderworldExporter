@@ -507,6 +507,8 @@ public class Container : object_base {
 		//If in a non player container check that the container has the weight capacity to accept it.
 		bool WeightTest=false;
 //		Container curContainer = this;
+		bool CapacityTest=false;
+		
 		switch (cn.ObjectsAccepted)
 		{//objects accepted; 0: runes, 1: arrows, 2: scrolls, 3: edibles, 0xFF: any
 		case 0://runes
@@ -548,7 +550,19 @@ public class Container : object_base {
 		{//000~001~248~That item does not fit.
 			UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,248));
 		}
-		return (TypeTest && WeightTest);
+		
+		if (WeightTest==true)
+		{
+			if (cn.CountItems()<=cn.MaxCapacity())
+			{
+				CapacityTest=true;
+			}
+			else
+			{//000~001~248~That item does not fit.
+				UWHUD.instance.MessageScroll.Add (StringController.instance.GetString(1,248));				
+			}
+		}
+		return (TypeTest && WeightTest && CapacityTest);
 	}
 
 		/// <summary>

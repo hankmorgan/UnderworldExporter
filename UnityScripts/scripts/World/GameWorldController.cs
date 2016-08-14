@@ -140,6 +140,10 @@ public class GameWorldController : UWEBase {
 		return;
 	}
 
+		/// <summary>
+		/// Gets the current level model.
+		/// </summary>
+		/// <returns>The current level model gameobject</returns>
 	public GameObject getCurrentLevelModel()
 	{
 		return GameWorldController.instance.WorldModel[LevelNo];

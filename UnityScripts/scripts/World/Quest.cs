@@ -30,14 +30,39 @@ using System.Collections;
 /// 4: door to armoury opened
 public class Quest : UWEBase {
 
+
+		/// <summary>
+		/// Item ID for the sword of justice
+		/// </summary>
 		public const int TalismanSword=10;
+		/// <summary>
+		/// Item ID for the shield of valor
+		/// </summary>
 		public const int TalismanShield=55;
+		/// <summary>
+		/// Item id for the Taper of sacrifice
+		/// </summary>
 		public const int TalismanTaper=147;
+		/// <summary>
+		/// Item Id for the cup of wonder.
+		/// </summary>
 		public const int TalismanCup =174;
+		/// <summary>
+		/// Item ID for the book of honesty
+		/// </summary>
 		public const int TalismanBook=310;
+		/// <summary>
+		/// Item Id for the wine of compassion.
+		/// </summary>
 		public const int TalismanWine=191;
+		/// <summary>
+		/// Item ID for the ring of humility
+		/// </summary>
 		public const int TalismanRing=54;
-		public const int TalismanBanner=287;
+		/// <summary>
+		/// Item ID for the standard of honour.
+		/// </summary>
+		public const int TalismanHonour=287;
 
 		/// <summary>
 		/// The quest variable integers

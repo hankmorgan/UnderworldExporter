@@ -7,6 +7,10 @@ using UnityStandardAssets.ImageEffects;
 /// </summary>
 public class ShrineLava : UWEBase {
 
+		/// <summary>
+		/// Detects if a talisman has been thrown into the abyss lava trigger.
+		/// </summary>
+		/// <param name="other">Other.</param>
 		void OnTriggerEnter(Collider other)
 		{
 				if (other.gameObject.GetComponent<ObjectInteraction>()!=null)
@@ -14,7 +18,7 @@ public class ShrineLava : UWEBase {
 						ObjectInteraction objInt = other.gameObject.GetComponent<ObjectInteraction>();
 						switch (objInt.item_id)
 						{
-						case Quest.TalismanBanner:
+						case Quest.TalismanHonour:
 								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[0]=true;break;
 						case Quest.TalismanBook:								
 								GameWorldController.instance.playerUW.quest().TalismansCastIntoAbyss[1]=true;break;
@@ -77,6 +81,7 @@ public class ShrineLava : UWEBase {
 		/// <summary>
 		/// Sends the avatar into the ethereal void.
 		/// </summary>
+		/// Spins the avatar and the slasher (specific object name) towards a newly spawned moongate.
 		IEnumerator SuckItAvatar()
 		{
 				//Spawn a moon gate at the center of the lava
