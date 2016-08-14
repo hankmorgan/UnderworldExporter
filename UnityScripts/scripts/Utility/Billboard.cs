@@ -14,7 +14,7 @@ public class Billboard : MonoBehaviour
 		//{
 				//Objects will always be upright.
 				//GameWorldController.instance.playerUW.gameObject.transform.position
-				if (Vector3.Distance(this.transform.position, Camera.main.transform.position)<=8)
+				if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8)
 						{//Only rotate near objects.
 								
 							if (GameWorldController.instance.playerUW.dir!=Vector3.zero)

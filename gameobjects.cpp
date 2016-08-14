@@ -2222,36 +2222,37 @@ void UWCommonObj(int game)
 	fclose(file);
 	int addressPtr = 2;//First 2 bytes are unknown
 	int j = 0;
+	fprintf(LOGFILE, "\n\tHeight\tRadius\tAnimated\tMass\tFlags0\tFlags1\tFlags2\tMagic?\tDecak\tPickable\tFlags6\Container\tValue\tQualClass\tOwned\tQualType\tLookAt\n");
 	for (int i = 0; i < fileSize-2 / 11; i++)
 		{
 		if (j <= 463)
 			{
-			fprintf(LOGFILE, "%s\n", objectMasters[j].desc);
-			fprintf(LOGFILE, "\tHeight = %d\n", getValAtAddress(comobj_dat, addressPtr, 8));
+			//fprintf(LOGFILE, "%s", objectMasters[j].desc);
+			fprintf(LOGFILE, "%d", getValAtAddress(comobj_dat, addressPtr, 8));//Height
 			objectMasters[j].uwProperties[UW_PROP_HEIGHT] = getValAtAddress(comobj_dat, addressPtr, 8);
-			fprintf(LOGFILE, "\tRadius = %d\n", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);
+			fprintf(LOGFILE, ",%d", getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7);//Radius
 			objectMasters[j].uwProperties[UW_PROP_RADIUS] = getValAtAddress(comobj_dat, addressPtr + 1, 16) & 0x7;
-			fprintf(LOGFILE, "\tAnimatedflag? = %d\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);
-			fprintf(LOGFILE, "\tMass = %d * 0.1st\n", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 3) & 0x1);//Animated
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4));//Mass
 			objectMasters[j].uwProperties[UW_PROP_MASS] = (getValAtAddress(comobj_dat, addressPtr + 1, 16) >> 4);
-			fprintf(LOGFILE, "\tFlags (bit 0) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);
-			fprintf(LOGFILE, "\tFlags (bit 1) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);
-			fprintf(LOGFILE, "\tFlags (bit 2) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);
-			fprintf(LOGFILE, "\tFlags (Magic?) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);
-			fprintf(LOGFILE, "\tFlags (Decal) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);
-			fprintf(LOGFILE, "\tFlags (Pickable) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);
-			fprintf(LOGFILE, "\tFlags (bit 6) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);
-			fprintf(LOGFILE, "\tFlags (Container) = %d\n", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8)) & 0x01);//Flags0
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 1) & 0x01);//Flags1
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 2) & 0x01);//Flags2
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 3) & 0x01);//Magic?
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 4) & 0x01);//Decal
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 5) & 0x01);//Pickable
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 6) & 0x01);//Flags6
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 3, 8) >> 7) & 0x01);//Container
 			
-			fprintf(LOGFILE, "\tValue = %d\n", getValAtAddress(comobj_dat, addressPtr + 4, 16));
+			fprintf(LOGFILE, ",%d", getValAtAddress(comobj_dat, addressPtr + 4, 16));//Value
 			objectMasters[j].uwProperties[UW_PROP_VALUE] = getValAtAddress(comobj_dat, addressPtr + 4, 16);
-			fprintf(LOGFILE, "\tQualityClass = %d * 6\n", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);
-			objectMasters[j].uwProperties[UW_PROP_QUALITY] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
-			fprintf(LOGFILE, "\tCan be owned = %d\n", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3);//QualClass
+			objectMasters[j].uwProperties[UW_PROP_QUALITYCLASS] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
+			fprintf(LOGFILE, ",%d", (getValAtAddress(comobj_dat, addressPtr + 7, 8) >> 6) & 0x1);//Ownership
 			objectMasters[j].uwProperties[UW_PROP_OWNER] = (getValAtAddress(comobj_dat, addressPtr + 6, 8) >> 2) & 0x3;
-			fprintf(LOGFILE, "\tQuality Type = %d\n", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);
-			objectMasters[j].uwProperties[UW_PROP_QUALITY] = getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
-			fprintf(LOGFILE, "\tLook at flag = %d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);
+			fprintf(LOGFILE, ",%d", getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF);//QualType
+			objectMasters[j].uwProperties[UW_PROP_QUALITYTYPE] = getValAtAddress(comobj_dat, addressPtr + 10, 8) & 0xF;
+			fprintf(LOGFILE, ",%d\n", (getValAtAddress(comobj_dat, addressPtr + 10, 8) >> 3) & 0x1);//Lookat
 
 			}
 

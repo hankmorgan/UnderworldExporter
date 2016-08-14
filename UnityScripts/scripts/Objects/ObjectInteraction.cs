@@ -106,7 +106,11 @@ public class ObjectInteraction : UWEBase {
 		public const int MOONSTONE =89;
 		public const int LEECH= 91;
 		public const int FISHING_POLE= 92;
-
+		public const int  ZANIUM= 93;
+		public const int  BEDROLL =94;
+		public const int  FORCEFIELD= 95;
+		public const int  MOONGATE= 96;
+		public const int  BOULDER= 97;
 		/// <summary>
 		/// The sprite index number to use when displaying this object in the game world.
 		/// </summary>
@@ -175,7 +179,7 @@ public class ObjectInteraction : UWEBase {
 		public bool animationStarted;
 
 		//Common properties
-
+		/*
 		//Object weights unit * 0.1st
 		public static int[] Weight
 		= {
@@ -219,10 +223,9 @@ public class ObjectInteraction : UWEBase {
 				0,		0,		0,		0
 		};
 
+		*/
 
-		//private bool KillMe;
-		// Use this for initialization
-		//public bool DebugThis;
+
 		void Start () {
 			isAnimated=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
@@ -663,7 +666,7 @@ public class ObjectInteraction : UWEBase {
 		}
 
 		/// <summary>
-		/// Creates a new game object.
+		/// Creates a new game object at run time.
 		/// </summary>
 		/// <returns>The new object.</returns>
 		/// <param name="NewItem_id">New item identifier.</param>
@@ -676,9 +679,20 @@ public class ObjectInteraction : UWEBase {
 				myObj.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
 				ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
-
-				ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [NewItem_id], objM.InvIcon [NewItem_id], objM.InvIcon [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
+				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [NewItem_id], objM.InvIcon [NewItem_id], objM.InvIcon [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
+				//Some known examples that occur
 				switch (NewItem_id) {
+				case 10://Sword of justice
+						myObj.AddComponent<WeaponMelee>();
+						break;
+				case 47://Dragonskin boots
+						myObj.AddComponent<Boots>();
+						objInt.Link=  SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16;
+						objInt.isEnchanted=true;
+						break;
+				case 276://Exploding book
+						myObj.AddComponent<ReadableTrap>();
+						break;
 				case 299:
 						//Fishing pole
 						myObj.AddComponent<FishingPole> ();
@@ -689,12 +703,21 @@ public class ObjectInteraction : UWEBase {
 						Food fd = myObj.AddComponent<Food> ();
 						fd.Nutrition = 5;
 						break;
+				case 314://Scroll given by biden?
+						myObj.AddComponent<Readable>();//Scroll given by Biden
+						break;
+				case 339://Boulders
+				case 340:
+				case 341:
+				case 342:
+						myObj.AddComponent<Boulder>();	
+						break;
 				default:
 						myObj.AddComponent<object_base> ();
 						break;
 				}
 				//GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
-				return myObj.GetComponent<ObjectInteraction> ();
+				return objInt;//myObj.GetComponent<ObjectInteraction> ();
 		}
 
 		public int GetHitFrameStart()

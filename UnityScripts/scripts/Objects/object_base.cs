@@ -240,7 +240,8 @@ public class object_base : UWEBase {
 		}
 		else
 		{
-			return (float)(objInt().GetQty())*ObjectInteraction.Weight[objInt().item_id]*0.1f;
+						
+		return (float)(objInt().GetQty())* GameWorldController.instance.commobj.Mass[objInt().item_id]*0.1f;
 		}
 	}
 

@@ -909,6 +909,7 @@ public class Conversation : GuiBase {
 							demanded.transform.parent= GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
 							npc.GetComponent<Container>().RemoveItemFromContainer(itemName);
 							cnpc.AddItemToContainer(itemName);
+							demanded.GetComponent<ObjectInteraction>().PickedUp=true;
 							GameWorldController.instance.playerUW.GetComponent<PlayerInventory>().Refresh ();
 						}
 						else
@@ -1319,11 +1320,15 @@ public class Conversation : GuiBase {
 		//arg4: inventory item position
 		//description:  unknown TODO
 		//return value: unknown
-			if (UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
-			{
-				UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
-			}
-		return 1;
+		if (UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
+		{
+			UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
+			return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 
@@ -1401,7 +1406,7 @@ public class Conversation : GuiBase {
 			return;
 		}
 
-		if (locals[link]==-1)
+		if (locals[link]<=0)
 			{
 			locals[link]=obj.Link-512; 
 			}
@@ -1410,7 +1415,7 @@ public class Conversation : GuiBase {
 			obj.Link=locals[link]+512;
 			}
 
-		if (locals[quality]==-1)
+		if (locals[quality]<=0)	
 		{
 			locals[quality]=obj.Quality; 
 		}
@@ -1418,7 +1423,7 @@ public class Conversation : GuiBase {
 		{
 			obj.Quality=locals[quality];
 		}
-		if (locals[id]==-1)
+		if (locals[id]<=0)
 		{
 			locals[id]=obj.item_id; 
 		}
@@ -1498,6 +1503,7 @@ public class Conversation : GuiBase {
 		return 0;
 	}
 
+		/*
 	/// <summary>
 	/// Gets the item at slot property link.
 	/// </summary>
@@ -1523,7 +1529,7 @@ public class Conversation : GuiBase {
 		}
 		return 0;
 	}
-
+		*/
 
 		/// <summary>
 		/// checks if the first string contains the second string,
@@ -1697,39 +1703,44 @@ public class Conversation : GuiBase {
 		//description:  creates item in npc inventory
 		//return value: inventory object list position
 
-		GameObject myObj=new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
-		myObj.layer=LayerMask.NameToLayer("UWObjects");
-		myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
-		ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_id,true);
-
+		//GameObject myObj=new GameObject("SummonedObject_" + GameWorldController.instance.playerUW.PlayerMagic.SummonCount++);
+		//myObj.layer=LayerMask.NameToLayer("UWObjects");
+		//myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
+		//ObjectInteraction.CreateObjectGraphics(myObj,_RES +"/Sprites/Objects/Objects_" + item_id,true);
+		
+		ObjectInteraction objint = ObjectInteraction.CreateNewObject(item_id);
+		GameObject myObj = objint.gameObject;
+		/*
 		switch (item_id)
 		{//Some known cases
+				case 0:
 		case 10://A sword
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			WeaponMelee weap= myObj.AddComponent<WeaponMelee>();
-						weap.Skill=3;
-						//TODO: add damage values
+			//weap.Skill=3;
+			//TODO: add damage values
 			
 			break;
 		case 276://Exploding book
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOK, item_id, 0, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			myObj.AddComponent<ReadableTrap>();
 			break;
 		case 47://Dragonskin boots
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
+			//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.BOOT, item_id, SpellEffect.UW1_Spell_Effect_Flameproof_alt01+256-16, 40, 0, 1, 1, 0, 1, 0, 1, 0, 1);
 			//myObj.AddComponent<Boots>();
-			Boots.CreateBoots(myObj, _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", 5, 17);
+			//Boots.CreateBoots(myObj, _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", _RES +"/Sprites/armour/armor_f_0060", _RES +"/Sprites/armour/armor_m_0060", 5, 17);
+			m
 			break;
 		case 314:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_"+item_id.ToString ("000"), ObjectInteraction.SCROLL, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<Readable>();//Scroll given by Biden
 			break;
 		default:
-			ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
+			//ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), _RES +"/Sprites/Objects/Objects_" +item_id.ToString ("000"), ObjectInteraction.SCENERY, item_id, 1, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 			myObj.AddComponent<object_base>();
 			break;
 		}
-
+*/
 		Container npccont = npc.GetComponent<Container>();
 		if(npccont!=null)
 			{
@@ -2031,11 +2042,12 @@ public class Conversation : GuiBase {
 		GameObject obj = GameObject.Find (objName);
 		if (obj!=null)
 		{
-			obj.transform.position = new Vector3( 
-			                                     (((float)tileX) *1.2f)+0.6f, 
-												(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
-												(((float)tileY) *1.2f) +0.6f
-			                                     );
+			//obj.transform.position = new Vector3( 
+			//                                     (((float)tileX) *1.2f)+0.6f, 
+			//									(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
+			//									(((float)tileY) *1.2f) +0.6f
+			//                                     );
+			obj.transform.position=GameWorldController.instance.Tilemap.getTileVector(tileX,tileY);
 			obj.transform.parent=GameWorldController.instance.LevelMarker();
 			npc.GetComponent<Container>().RemoveItemFromContainer(objName);
 			UWHUD.instance.npcTrade[invSlot].clear();

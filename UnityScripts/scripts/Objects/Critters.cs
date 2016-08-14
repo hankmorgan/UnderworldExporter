@@ -7,7 +7,7 @@ using System.IO;
 /// Class for storing critter info from Objects.dat
 /// </summary>
 /// Critter info is stored in an external file critters.txt
-public class Critters {
+public class Critters : Props {
 
 
 		public int[] Level = new int[64];

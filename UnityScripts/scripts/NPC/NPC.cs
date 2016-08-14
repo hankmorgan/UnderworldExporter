@@ -231,11 +231,10 @@ public class NPC : object_base {
 		}
 		else
 		{//The AI is only active when the player is within a certain distance to the player camera.
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, Camera.main.transform.position)<=8;
+			ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
 			anim.enabled=ai.AI.IsActive;
 			if (ai.AI.IsActive==false)
 			{
-				
 				return;
 			}
 			//Update the appearance of the NPC

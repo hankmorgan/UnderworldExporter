@@ -2870,15 +2870,16 @@ public class Magic : UWEBase {
 						break;
 				case SpellEffect.UW1_Spell_Effect_Levitate:
 				case SpellEffect.UW1_Spell_Effect_Fly:
+				case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+				case SpellEffect.UW1_Spell_Effect_Levitate_alt01:						
 						if (ActiveArrayIndex!=-1)
 						{
 								Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
 								SpellResultType=SpellResultActive;
 						}
 						break;
-				case SpellEffect.UW1_Spell_Effect_Levitate_alt01:
+				
 				case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
-				case SpellEffect.UW1_Spell_Effect_Fly_alt01:
 				case SpellEffect.UW1_Spell_Effect_Fly_alt02:							
 						if (PassiveArrayIndex!=-1)
 						{

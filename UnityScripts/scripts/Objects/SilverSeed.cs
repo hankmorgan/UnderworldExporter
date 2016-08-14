@@ -61,11 +61,12 @@ public class SilverSeed : object_base {
 				int tileY= GameWorldController.instance.Tilemap.visitTileY;
 				objInt().gameObject.transform.parent=GameWorldController.instance.LevelMarker();
 				
-				objInt().gameObject.transform.position = new Vector3( 
-						(((float)GameWorldController.instance.Tilemap.visitTileX) *1.2f)+0.6f, 
-						(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
-						(((float)GameWorldController.instance.Tilemap.visitTileY) *1.2f)+0.6f 
-				);
+			//	objInt().gameObject.transform.position = new Vector3( 
+			//			(((float)GameWorldController.instance.Tilemap.visitTileX) *1.2f)+0.6f, 
+			//			(float)GameWorldController.instance.Tilemap.GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
+			//			(((float)GameWorldController.instance.Tilemap.visitTileY) *1.2f)+0.6f 
+			//	);
+				objInt().gameObject.transform.position=GameWorldController.instance.Tilemap.getTileVector(GameWorldController.instance.Tilemap.visitTileX,GameWorldController.instance.Tilemap.visitTileY);
 
 				//objInt().transform.position= new Vector3 (x,z,y);
 				//GameWorldController.instance.playerUW.transform.position;//TODO:Position the tree properly

@@ -83,6 +83,16 @@ public class GameWorldController : UWEBase {
 	public Critters critter;
 
 	/// <summary>
+	/// Common Object Properties
+	/// </summary>
+	public CommonObjProps commobj;
+
+	/// <summary>
+	/// Weapon properties.
+	/// </summary>
+	public WeaponProps weaponprops;
+
+	/// <summary>
 	/// The grey scale shader. Reference to allow loading of a hidden shader.
 	/// </summary>
 	public Shader greyScale;
@@ -91,6 +101,7 @@ public class GameWorldController : UWEBase {
 	/// The vortex effect shader.  Reference to allow loading of a hidden shader.
 	/// </summary>
 	public Shader vortex;
+
 
 	/// <summary>
 	/// Is the game at the main menu or should it start at the mainmenu.
@@ -105,6 +116,10 @@ public class GameWorldController : UWEBase {
 		objectMaster.Load(Application.dataPath + "//..//" + UWEBase._RES + "_object_config.txt");
 		critter = new Critters();
 		critter.Load(Application.dataPath + "//..//" + UWEBase._RES + "_critters.txt");
+		commobj=new CommonObjProps();
+		commobj.Load(Application.dataPath + "//..//" + UWEBase._RES + "_comobj.txt");
+		weaponprops =new WeaponProps();
+		weaponprops.Load(Application.dataPath + "//..//" + UWEBase._RES + "_weapons.txt");
 	}
 
 	void Start () {

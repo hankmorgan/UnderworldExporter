@@ -3,7 +3,7 @@ using System.Collections;
 /// <summary>
 /// For Storing Tile Info for each level.
 /// </summary>
-public class TileInfo {
+public class TileInfo : Props {
 	
 		/// <summary>
 		/// The type of the tile.

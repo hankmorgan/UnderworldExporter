@@ -229,6 +229,11 @@ void RenderUnityEntityCoin(int game, float x, float y, float z, ObjectItem &curr
 	fprintf(UNITY_FILE, "\n\tAddCoin(myObj);");
 	}
 
+void RenderUnityEntityBoulder(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
+	{
+	fprintf(UNITY_FILE, "\n\tAddBoulder(myObj);");
+	}
+
 void RenderUnityEntityInstrument(int game, float x, float y, float z, ObjectItem &currobj, ObjectItem objList[1600], tile LevelInfo[64][64])
 	{
 	fprintf(UNITY_FILE, "\n\tAddInstrument(myObj);");
@@ -2206,6 +2211,12 @@ return;
 							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
 							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
 							RenderUnityEntityCoin(game, x, y, z, currobj, objList, LevelInfo);
+							break;
+						case BOULDER:
+							RenderUnityModel(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnitySprite(game, x, y, z, currobj, objList, LevelInfo, 1);
+							RenderUnityObjectInteraction(game, x, y, z, currobj, objList, LevelInfo);
+							RenderUnityEntityBoulder(game, x, y, z, currobj, objList, LevelInfo);
 							break;
 //SINCE I KEEP FORGETTING TO BREAK> REMEMBER TO BREAK!!!
 						default:

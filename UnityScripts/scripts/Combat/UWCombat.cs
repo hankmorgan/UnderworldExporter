@@ -109,19 +109,19 @@ public class UWCombat : Combat {
 				if (objInt!=null)
 				{
 										
-					int StrikeBaseDamage;
+					int StrikeBaseDamage=0;
 					if (currWeapon==null)
 					{//Fist 
 							//2	4	3	
 							switch (StrikeType.ToUpper())
 							{
 							case "SLASH":
-									StrikeBaseDamage=2;break;
+								WeaponMelee.getMeleeSlash();break;
 							case "BASH":
-									StrikeBaseDamage=4;break;
+								WeaponMelee.getMeleeBash();break;
 							case "STAB":
 							default:	
-									StrikeBaseDamage=3;break;
+								WeaponMelee.getMeleeStab();break;
 							}
 					}
 					else
@@ -129,12 +129,12 @@ public class UWCombat : Combat {
 							switch (StrikeType.ToUpper())
 							{
 							case "SLASH":
-									StrikeBaseDamage=currWeapon.Slash;break;
+									StrikeBaseDamage=currWeapon.GetSlash();break;
 							case "BASH":
-									StrikeBaseDamage=currWeapon.Bash;break;
+									StrikeBaseDamage=currWeapon.GetBash();break;
 							case "STAB":
 							default:	
-									StrikeBaseDamage=currWeapon.Stab;break;
+								StrikeBaseDamage=currWeapon.GetStab();break;
 							}	
 					}
 
@@ -247,7 +247,7 @@ public class UWCombat : Combat {
 	{
 		if (currWeapon!=null)
 		{
-			switch (currWeapon.Skill)
+			switch (currWeapon.GetSkill())
 			{
 			case 3:
 				return "Sword";

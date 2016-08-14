@@ -53,6 +53,7 @@ public class Character : UWEBase {
 	//The camera attached to this gameobject
 	public Camera playerCam;
 
+		public Vector3 CameraPos;
 
 	//The music system
 	public MusicController mus;
@@ -103,6 +104,7 @@ public class Character : UWEBase {
 		currentHeading = CompassHeadings[ (int)Mathf.Round((  (this.gameObject.transform.eulerAngles.y % 360) / 22.5f)) ];
 				dir = Camera.main.transform.forward;//Billboarding
 				dir.y = 0.0f;
+				CameraPos=Camera.main.transform.position;
 	}
 
 	public void UseMode()

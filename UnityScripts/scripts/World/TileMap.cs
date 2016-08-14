@@ -28,24 +28,24 @@ public class TileMap : UWEBase {
 	public List<MapNote>[] MapNotes = new List<MapNote>[10];
 
 
-	const int TILE_SOLID=0;
-	const int TILE_OPEN= 1;
-	const int TILE_DIAG_SE= 2;
-	const int TILE_DIAG_SW =3;
-	const int TILE_DIAG_NE =4;
-	const int TILE_DIAG_NW= 5;
-	const int TILE_SLOPE_N =6;
-	const int TILE_SLOPE_S= 7;
-	const int TILE_SLOPE_E= 8;
-	const int TILE_SLOPE_W= 9;
-	const int TILE_VALLEY_NW =10;
-	const int TILE_VALLEY_NE =11;
-	const int TILE_VALLEY_SE= 12;
-	const int TILE_VALLEY_SW =13;
-	const int TILE_RIDGE_SE =14;
-	const int TILE_RIDGE_SW =15;
-	const int TILE_RIDGE_NW= 16;
-	const int TILE_RIDGE_NE= 17;
+	public const int TILE_SOLID=0;
+	public const int TILE_OPEN= 1;
+	public const int TILE_DIAG_SE= 2;
+	public const int TILE_DIAG_SW =3;
+	public const int TILE_DIAG_NE =4;
+	public const int TILE_DIAG_NW= 5;
+	public const int TILE_SLOPE_N =6;
+	public const int TILE_SLOPE_S= 7;
+	public const int TILE_SLOPE_E= 8;
+	public const int TILE_SLOPE_W= 9;
+	public const int TILE_VALLEY_NW =10;
+	public const int TILE_VALLEY_NE =11;
+	public const int TILE_VALLEY_SE= 12;
+	public const int TILE_VALLEY_SW =13;
+	public const int TILE_RIDGE_SE =14;
+	public const int TILE_RIDGE_SW =15;
+	public const int TILE_RIDGE_NW= 16;
+	public const int TILE_RIDGE_NE= 17;
 
 	const int NORTH =0;
 	const int SOUTH =1;
@@ -761,7 +761,11 @@ public class TileMap : UWEBase {
 		}
 	}
 
-
+	/// <summary>
+	/// Tells if the tile is one of the square open types
+	/// </summary>
+	/// <returns><c>true</c>, if tile open was ised, <c>false</c> otherwise.</returns>
+	/// <param name="TileType">Tile type.</param>
 	public bool isTileOpen(int TileType)
 	{
 		switch (TileType)
@@ -1008,10 +1012,30 @@ public class TileMap : UWEBase {
 		/// <param name="LevelNo">Level no.</param>
 		/// <param name="tileX">Tile x.</param>
 		/// <param name="tileY">Tile y.</param>
-	private int GetTileType(int LevelNo, int tileX, int tileY)
+	public int GetTileType(int LevelNo, int tileX, int tileY)
 	{
 		return Tiles[LevelNo].tileType[tileX,tileY];
 	}
+
+		/// <summary>
+		/// Gets the type of the tile.
+		/// </summary>
+		/// <returns>The tile type.</returns>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public int GetTileType(int tileX, int tileY)
+		{
+				if ((tileX>63) || (tileY>63) || (tileX<0) || (tileY<0))
+				{//Assume out of bounds is solid
+					return TILE_SOLID;
+				}
+				else
+				{
+						return Tiles[GameWorldController.instance.LevelNo].tileType[tileX,tileY];
+				}			
+		}
+
+
 
 		/// <summary>
 		/// Sets the tile render state. Only affects the automap.
@@ -1060,6 +1084,22 @@ public class TileMap : UWEBase {
 		SetIsLava(LevelNo, tileX,tileY,iIsLava);
 		SetIsBridge(LevelNo,tileX,tileY,iIsBridge);
 	}
+
+		/// <summary>
+		/// Gets the vector3 at the center of the tile specified.
+		/// </summary>
+		/// <returns>The tile vector.</returns>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		public Vector3 getTileVector(int tileX,int tileY)
+		{
+				return new Vector3( 
+						(((float)tileX) *1.2f) +0.6f, 
+						(float)GetFloorHeight(GameWorldController.instance.LevelNo,tileX,tileY)  * 0.15f,
+						(((float)tileY) *1.2f) +0.6f 
+				);	
+		}
+
 
 	// Use this for initialization
 	void Start () {

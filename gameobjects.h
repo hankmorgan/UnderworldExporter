@@ -102,6 +102,7 @@
 #define BEDROLL 94
 #define FORCEFIELD 95
 #define MOONGATE 96
+#define BOULDER 97
 #define HIDDENPLACEHOLDER 999
 
 /*SYSTEM SHOCK TRIGGER TYPES. I'm adding 100 to keep them seperate from the above*/
@@ -255,7 +256,8 @@
 #define UW_PROP_MASS 2
 #define UW_PROP_VALUE 3
 #define UW_PROP_OWNER 4
-#define UW_PROP_QUALITY 5
+#define UW_PROP_QUALITYCLASS 5
+#define UW_PROP_QUALITYTYPE 6
 
 //Item type specific properties (for array uwproperites array)
 #define UW_PROP_DURABILITY 10
@@ -437,7 +439,7 @@ struct objectMaster	//For common object properties.
 	char EquippedIconFemaleBest[80];
 	char EquippedIconMaleBest[80];
 
-	int uwProperties[11];
+	int uwProperties[12];
 };
 
 

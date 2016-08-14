@@ -10,7 +10,7 @@ public class Conversation_2 : Conversation {
 	//When Shak wants us to come back for the sword.
 	public int AppointmentTime;
 	//public int AppointmentMinutesEarly;
-	
+	public string ItemUnderRepair;
 	//Enumerator that returns a value
 	int func_11f7_result;
 	public override IEnumerator main() {
@@ -213,12 +213,12 @@ public class Conversation_2 : Conversation {
 				
 			case 1:
 				
-				yield return StartCoroutine(func_0343());
+				yield return StartCoroutine(func_0343());//i need info
 				break;
 				
 			case 2:
 				
-				yield return StartCoroutine(func_03fb());
+				yield return StartCoroutine(func_03fb());//need your skills
 				break;
 			} // end if
 			
@@ -310,12 +310,12 @@ public class Conversation_2 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(func_067e());
+			yield return StartCoroutine(func_067e());//cannot pay
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(func_06e1());
+			yield return StartCoroutine(func_06e1());//i can pay
 			break;
 			
 		} // end switch
@@ -449,7 +449,7 @@ public class Conversation_2 : Conversation {
 					}
 				}
 				else {
-					
+					//Standard repair
 					locals[20] = check_inv_quality( 1, locals[8] );
 					locals[46] = 0;
 					locals[47] = 0;
@@ -551,12 +551,12 @@ public class Conversation_2 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(func_0dfb());
+			yield return StartCoroutine(func_0dfb());//ask to identify
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(func_0443());
+			yield return StartCoroutine(func_0443());//this is in need of repair
 			break;
 			
 		} // end switch
@@ -1028,6 +1028,7 @@ public class Conversation_2 : Conversation {
 	label_0c78:;
 		
 		locals[31] = 1;
+		string itemAt = UWHUD.instance.playerTrade[PassedLocals[param1]].objectInSlot;
 		if (give_to_npc(2,PassedLocals, param1,locals[31]) != 1){
 			//if ( !give_to_npc( 2, param1, locals[31] ) ) {
 			
@@ -1062,6 +1063,7 @@ public class Conversation_2 : Conversation {
 			
 		} 
 		//TODO:Figure this out
+		ItemUnderRepair=itemAt;
 		global[3,1] = 0;
 		global[3,2] = 63 - locals[3] / 2;
 		if ( global[3,2] < 2 ) {
@@ -1105,8 +1107,9 @@ public class Conversation_2 : Conversation {
 		int[] locals =new int[26];
 		
 		yield return StartCoroutine(say( locals, 097 ));
-		locals[2] = 50 + random( 1, locals[1] );
 		locals[1] = 10;
+		locals[2] = 50 + random( 1, locals[1] );
+		UWHUD.instance.npcTrade[2].objectInSlot=ItemUnderRepair;
 		set_inv_quality( 2, locals[2], 2 );
 		locals[3] = 1;
 		yield return StartCoroutine(func_11f7( locals[3], 1 ) );

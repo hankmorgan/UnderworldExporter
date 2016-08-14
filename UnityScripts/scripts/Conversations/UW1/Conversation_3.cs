@@ -152,12 +152,12 @@ public class Conversation_3 : Conversation {
 		locals[1] = 4;
 		privateVariables[6] = get_quest( 1, locals[1] );
 		
-		if ( privateVariables[0] == 1 ) {
+		if ( privateVariables[0] == 1 ) {//spoken already
 			
 			yield return StartCoroutine(func_09f7());
 		} else {
 			
-			privateVariables[2] = 1;
+			privateVariables[2] = 1;//no gift given yet
 			privateVariables[4] = 0;
 			privateVariables[3] = 0;
 			privateVariables[5] = 0;
@@ -174,17 +174,17 @@ public class Conversation_3 : Conversation {
 				
 			case 1:
 				
-				yield return StartCoroutine(func_0373());
+				yield return StartCoroutine(func_0373()); //well met
 				break;
 				
 			case 2:
 				
-				yield return StartCoroutine(func_03bb());
+				yield return StartCoroutine(func_03bb());//o dwarf king
 				break;
 				
 			case 3:
 				
-				yield return StartCoroutine(func_032b());
+				yield return StartCoroutine(func_032b());//your majest
 				break;
 			} // end if
 			
@@ -211,12 +211,12 @@ public class Conversation_3 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(func_03c8());
+			yield return StartCoroutine(func_03c8());//difficult to flatter
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(func_046c());
+			yield return StartCoroutine(func_046c());///insult with flattery
 			break;
 			
 		} // end switch
@@ -262,7 +262,7 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_03c8() {
-		
+		//difficult to flatter
 		//int locals[23];
 		int[] locals=new int[24];
 		
@@ -327,7 +327,7 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_046c() {
-		
+		//Insult thy intelligence
 		//int locals[22];
 		int[] locals=new int[23];
 		
@@ -345,20 +345,20 @@ public class Conversation_3 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(func_04dc());
+			yield return StartCoroutine(func_04dc());//nothing worthy
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(func_054c());
+			yield return StartCoroutine(func_054c());//here is thy gift
 			break;
 			
 		case 3:
 			
-			yield return StartCoroutine(func_07f6());
+			yield return StartCoroutine(func_07f6());//blessing of my company
 			break;
 			
-		case 4:
+		case 4://differenty customs
 			Time.timeScale =SlomoTime;
 			yield return new WaitForSeconds(WaitTime);
 			func_00c2();
@@ -412,7 +412,7 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_054c() {
-		
+		//Here is a gift
 		//int locals[39];
 		int[] locals=new int[40];
 		
@@ -422,15 +422,15 @@ public class Conversation_3 : Conversation {
 		//locals[11] = show_inv( 2, locals[6], locals[1] );
 		locals[11] = show_inv (2,locals,6,1);
 		if ( locals[11] > 0 ) {
-			
+			int i=0;
 			locals[13] = 1;
 			locals[12] = 0;
 			while ( locals[13] <= locals[11] ) {
-				
-				locals[12] = locals[12] + identify_inv( 4, locals[17], locals[15], locals[16], locals[5] );
 				locals[16] = 0;
 				locals[17] = 0;
+				locals[12] = locals[12] + identify_inv( 4, locals[17], locals[15], locals[16], locals[6+i] );
 				locals[13] = locals[13] + 1;
+				i++;
 			} // while
 			
 			//give_to_npc( 2, locals[6], locals[11] );
@@ -731,7 +731,7 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_08bb() {
-		
+		//gazer defeated
 		//int locals[22];
 		int[] locals=new int[23];
 		
@@ -748,12 +748,12 @@ public class Conversation_3 : Conversation {
 			
 		case 1:
 			
-			yield return StartCoroutine(func_0908());
+			yield return StartCoroutine(func_0908());//proud answer
 			break;
 			
 		case 2:
 			
-			yield return StartCoroutine(func_0964());
+			yield return StartCoroutine(func_0964());//humble answer
 			break;
 			
 		} // end switch
@@ -791,7 +791,7 @@ public class Conversation_3 : Conversation {
 		
 	} // end func
 	
-	IEnumerator func_0964() {
+	IEnumerator func_0964() {//humble answer to gazer battle question
 		int[] locals = new int[1];
 		yield return StartCoroutine(say( locals, 064 ));
 		yield return StartCoroutine(func_0971());
@@ -800,7 +800,7 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_0971() {
-		
+		//Rewarded with gem cutter
 		//int locals[45];
 		int[] locals=new int[46];
 		
@@ -814,19 +814,19 @@ public class Conversation_3 : Conversation {
 			yield return StartCoroutine(say( locals, 067 ));
 		} // end if
 		
-		locals[24] = privateVariables[2];
+		locals[24] = privateVariables[2];//Have I given a gift already
 		locals[3] = 68;
 		locals[25] = 1;
 		locals[4] = 69;
 		locals[5] = 0;
 		//locals[45] = babl_fmenu( 0, locals[3], locals[24] );
-		yield return StartCoroutine(babl_fmenu (0,locals,3,24));
+		yield return StartCoroutine(babl_fmenu (0,locals,3,24));//offers a gift in return
 		locals[45] = PlayerAnswer;
 		switch ( locals[45] ) {
 			
 		case 68:
 			
-			yield return StartCoroutine(func_054c());
+			yield return StartCoroutine(func_054c());//give a gift to gold thirst
 			break;
 			
 		case 69:
@@ -842,7 +842,7 @@ public class Conversation_3 : Conversation {
 	IEnumerator func_09f7() {
 		
 		if ( privateVariables[5] == 1 ) {
-			
+			//After I have defeated the gazer and returned to goldthirst for the gem cutter
 			yield return StartCoroutine(func_0a8b());
 		} else {
 			
@@ -863,7 +863,7 @@ public class Conversation_3 : Conversation {
 		//int locals[43];
 		int[] locals=new int[44];
 		
-		yield return StartCoroutine(say( locals, 070 ));
+		yield return StartCoroutine(say( locals, 070 ));//have you defeated
 		locals[22] = privateVariables[6];
 		locals[1] = 71;
 		locals[23] = 1;
@@ -878,7 +878,7 @@ public class Conversation_3 : Conversation {
 			
 		case 71:
 			
-			yield return StartCoroutine(func_08bb());
+			yield return StartCoroutine(func_08bb());//gazer defeated
 			break;
 			
 		case 72:
@@ -896,7 +896,7 @@ public class Conversation_3 : Conversation {
 	} // end func
 	
 	IEnumerator func_0a8b() {
-		
+		//After I have defeated the gazer and after I returned to goldthirst for the gem cutter
 		//int locals[23];
 		int[] locals=new int[24];
 		
@@ -922,9 +922,9 @@ public class Conversation_3 : Conversation {
 			break;
 			
 		case 3:
-			
-			if ( locals[1] == 1) {
-				
+			if (privateVariables[2] == 0){
+			//if ( locals[1] == 1) {
+				//I have given the first gift.
 				yield return StartCoroutine(func_0c20());
 			} else {
 				
@@ -1036,17 +1036,17 @@ public class Conversation_3 : Conversation {
 			
 		case 86:
 			
-			yield return StartCoroutine(func_054c());
+			yield return StartCoroutine(func_054c());//Give a simple gift such as gold
 			break;
 			
 		case 87:
 			
-			yield return StartCoroutine(func_0c20());
+			yield return StartCoroutine(func_0c20());//Give the golden nugget
 			break;
 			
 		case 88:
 			
-			yield return StartCoroutine(func_0779());
+			yield return StartCoroutine(func_0779());//Search of adventure. Only appear when quest is unfulfilled.
 			break;
 			
 		case 89:
@@ -1083,10 +1083,10 @@ public class Conversation_3 : Conversation {
 					give_to_npc(2,locals,16,locals[18]);
 					yield return StartCoroutine( func_0d84());
 				} // end if
-				
-				locals[12] = locals[12] + identify_inv( 4, locals[20], locals[15], locals[19], locals[5] );
 				locals[19] = 0;
-				locals[20] = 0;
+				locals[20] = 0;				
+				locals[12] = locals[12] + identify_inv( 4, locals[20], locals[15], locals[19], locals[5] );
+
 				locals[13] = locals[13] + 1;
 			} // while
 			

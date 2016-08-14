@@ -374,15 +374,15 @@ public class Conversation_90 : Conversation {
 		{
 			locals[14] = 1;
 			if ( locals[14] <= locals[13] ) {
-				
-				if ( locals[6+i] >= 312 && locals[6+i] <= 319 ) {
+
+				if ( locals[1+i] >= 312 && locals[1+i] <= 319 ) {
 					
 					locals[175] = 32;
-					//if ( func_06f7( locals[175], locals[5] ) == 1 ) {
-					if (GetItemAtSlotProperty_Link(locals[1+i]) -512 == locals[175]){
+					if ( func_06f7( locals[175], locals[6+i] ) == 1 ) {
+					//if (GetItemAtSlotProperty_Link(locals[1+i]) -512 == locals[175]){
 						locals[15] = locals[14];
 						locals[11] = 1;//locals[5];
-						locals[176] = locals[1+i];//Set the slot index here.
+						locals[176] = locals[6+i];//Set the slot index here.
 					} // end if
 					
 				} // end if
@@ -396,7 +396,7 @@ public class Conversation_90 : Conversation {
 			
 			//locals[176] = 1;
 			//give_to_npc( 2, locals[11], locals[176] );
-			give_to_npc(2,locals,11,locals[176]);//Just give 1 item at 1 specific slot set above
+			give_to_npc(2,locals,176,locals[11]);//Just give 1 item at 1 specific slot set above
 			privateVariables[2] = 1;
 		} else {
 			
@@ -434,9 +434,9 @@ public class Conversation_90 : Conversation {
 		} // end switch
 		
 		yield return StartCoroutine(say( locals, 032 ));
-		locals[17] = find_inv( 2, locals[201], locals[200] );
 		locals[200] = 188;
 		locals[201] = 0;
+		locals[17] = find_inv( 2, locals[201], locals[200] );
 		if ( locals[17] > 0 ) {
 			
 			locals[202] = 1;
