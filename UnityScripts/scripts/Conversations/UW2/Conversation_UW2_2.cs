@@ -204,7 +204,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				locals[1] = 1;
 				yield return StartCoroutine(print( 1, locals[1] ));
-				yield return StartCoroutine(say( "Help us! Oh, by the Titan, human, thou must help us! That thing is loose in the tower, it is killing us!" ));
+				yield return StartCoroutine(say( locals, "Help us! Oh, by the Titan, human, thou must help us! That thing is loose in the tower, it is killing us!" ));
 				locals[2] = 15;
 				locals[3] = 15;
 				locals[4] = 10001;
@@ -220,7 +220,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[23];
 
-				yield return StartCoroutine(say( "Yes?" ));
+				yield return StartCoroutine(say( locals, "Yes?" ));
 				locals[1] = 4;
 				locals[2] = 5;
 				locals[3] = 0;
@@ -247,7 +247,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[23];
 
-				yield return StartCoroutine(say( "What duty hast thou here? The tower is empty now!" ));
+				yield return StartCoroutine(say( locals, "What duty hast thou here? The tower is empty now!" ));
 				locals[1] = 7;
 				locals[2] = 8;
 				locals[3] = 0;
@@ -275,7 +275,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[23];
 
-				yield return StartCoroutine(say( "Go where thou wilt! Since Bishop took his own life, there is nothing to guard, and no reason to stop thee." ));
+				yield return StartCoroutine(say( locals, "Go where thou wilt! Since Bishop took his own life, there is nothing to guard, and no reason to stop thee." ));
 				locals[1] = 10;
 				locals[2] = 0;
 				//locals[22] = babl_menu( 0, locals[1] );
@@ -294,7 +294,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[23];
 
-				yield return StartCoroutine(say( "Surely. Be on thy way." ));
+				yield return StartCoroutine(say( locals, "Surely. Be on thy way." ));
 				locals[1] = 12;
 				locals[2] = 13;
 				locals[3] = 0;
@@ -324,7 +324,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[23];
 
-				yield return StartCoroutine(say( "Listen, I don't want any trouble here, but thou had best mind thy manners." ));
+				yield return StartCoroutine(say( locals, "Listen, I don't want any trouble here, but thou had best mind thy manners." ));
 				locals[1] = 15;
 				locals[2] = 16;
 				locals[3] = 17;
@@ -366,7 +366,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[7];
 
-				yield return StartCoroutine(say( "So be it, fool!" ));
+				yield return StartCoroutine(say( locals, "So be it, fool!" ));
 				locals[1] = 60;
 				locals[2] = 1;
 				set_quest( 2, locals[2], locals[1] );
@@ -572,7 +572,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 								npc.npc_attitude = 1;
 								npc.npc_goal = 8;
-								yield return StartCoroutine(say( "Halt, intruder! Thou comest here with weapon drawn -- seekest thou to die?!" ));
+								yield return StartCoroutine(say( locals, "Halt, intruder! Thou comest here with weapon drawn -- seekest thou to die?!" ));
 								locals[9] = 37;
 								locals[10] = 38;
 								locals[11] = 0;
@@ -594,7 +594,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						} // end switch
 
-						yield return StartCoroutine(say( "Halt, stranger! I hope thou knowest the password, for we know the rebels are all through these hills." ));
+						yield return StartCoroutine(say( locals, "Halt, stranger! I hope thou knowest the password, for we know the rebels are all through these hills." ));
 						locals[31] = 40;
 						locals[32] = 41;
 						locals[33] = 0;
@@ -648,7 +648,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				if ( privateVariables[2] == 1 ) {
 
-						yield return StartCoroutine(say( "Why dost thou linger here? Be on thy way." ));
+						yield return StartCoroutine(say( locals, "Why dost thou linger here? Be on thy way." ));
 						locals[75] = 46;
 						locals[76] = 47;
 						locals[77] = 48;
@@ -677,14 +677,14 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						} // end switch
 
-						yield return StartCoroutine(say( "Very well." ));
+						yield return StartCoroutine(say( locals, "Very well." ));
 						locals[97] = 30;
 						locals[98] = 34;
 						locals[99] = 0;
 						gronk_door( 3, locals[99], locals[98], locals[97] );
 				} else {
 
-						yield return StartCoroutine(say( "Why dost thou remain here, intruder?" ));
+						yield return StartCoroutine(say( locals, "Why dost thou remain here, intruder?" ));
 						locals[100] = 51;
 						locals[101] = 52;
 						locals[102] = 53;
@@ -726,7 +726,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[25];
 
-				yield return StartCoroutine(say( "Tell us then, what is it?" ));
+				yield return StartCoroutine(say( locals, "Tell us then, what is it?" ));
 				locals[2] = 56;
 				locals[3] = 57;
 				locals[4] = 0;
@@ -748,7 +748,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				//locals[1] = babl_ask( 0 );
 				yield return  StartCoroutine(babl_ask(0));
-				yield return StartCoroutine(say( "\\1@SS1\\0" ));
+				yield return StartCoroutine(say( locals, "\\1@SS1\\0" ));
 				locals[24] = func_064d();
 				if ( contains( 2, PlayerTypedAnswer, locals[24] ) ==1 ) {
 
@@ -766,12 +766,12 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				if ( param1 == 1 ) {
 
-						yield return StartCoroutine(say( "So thou hast entered the prison tower without knowing the password? Thou art a fool!" ));
+						yield return StartCoroutine(say( locals, "So thou hast entered the prison tower without knowing the password? Thou art a fool!" ));
 						locals[2] = 1;
 						func_0593( locals[2] );
 				} else {
 
-						yield return StartCoroutine(say( "Well, then, why should I not kill thee for trespassing?" ));
+						yield return StartCoroutine(say( locals, "Well, then, why should I not kill thee for trespassing?" ));
 				} // end if
 
 				locals[24] = 1;
@@ -854,7 +854,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				case 0:
 
-						yield return StartCoroutine(say( "Do not try any jokes with me, humie -- come back when thou hast found it." ));
+						yield return StartCoroutine(say( locals, "Do not try any jokes with me, humie -- come back when thou hast found it." ));
 						locals[12] = 68;
 						locals[13] = 69;
 						locals[14] = 0;
@@ -897,11 +897,11 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 						x_obj_stuff(9,locals,40,39,38,1,37,36,35,34,3);
 						if ( locals[1] == 33 + 512 ) {
 
-								yield return StartCoroutine(say( "'Tis a poor likeness, but I find no fault in it." ));
+								yield return StartCoroutine(say( locals, "'Tis a poor likeness, but I find no fault in it." ));
 								yield return StartCoroutine(func_0cf1());
 						} else {
 
-								yield return StartCoroutine(say( "This? This is no voucher!" ));
+								yield return StartCoroutine(say( locals, "This? This is no voucher!" ));
 								yield return StartCoroutine(func_0a24(0));
 
 
@@ -911,7 +911,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						if ( privateVariables[6] == 3 ) {
 
-								yield return StartCoroutine(say( "This will put a stop to thy hijinks!" ));
+								yield return StartCoroutine(say( locals, "This will put a stop to thy hijinks!" ));
 								locals[41] = 60;
 								locals[42] = 1;
 								set_quest( 2, locals[42], locals[41] );
@@ -926,7 +926,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 								yield break;
 						} // end if
 
-						yield return StartCoroutine(say( "Well? Which one is it?" ));
+						yield return StartCoroutine(say( locals, "Well? Which one is it?" ));
 						privateVariables[6] = privateVariables[6] + 1;
 						yield return StartCoroutine(func_0abe());
 						break;
@@ -939,7 +939,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[30];
 
-				yield return StartCoroutine(say( "Hee hee hee! No, thou shalt not pass." ));
+				yield return StartCoroutine(say( locals, "Hee hee hee! No, thou shalt not pass." ));
 				locals[1] = 75;
 				locals[2] = 76;
 				locals[3] = 0;
@@ -965,7 +965,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 				yield return StartCoroutine(func_0cf1());
 		label_0ca2:;
 
-				yield return StartCoroutine(say( "We shall see who is in peril! Kill @GS34, comrades!" ));
+				yield return StartCoroutine(say( locals, "We shall see who is in peril! Kill @GS34, comrades!" ));
 				locals[24] = 60;
 				locals[25] = 1;
 				set_quest( 2, locals[25], locals[24] );
@@ -986,7 +986,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				locals[1] = 45;
 				x_exp( 1, locals[1] );
-				yield return StartCoroutine(say( "You may pass, then, stranger.\\p" ));
+				yield return StartCoroutine(say( locals, "You may pass, then, stranger.\\p" ));
 				locals[2] = 30;
 				locals[3] = 34;
 				locals[4] = 0;
@@ -1015,7 +1015,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[7];
 
-				yield return StartCoroutine(say( "Thou dost play with us?  Thou shalt die!" ));
+				yield return StartCoroutine(say( locals, "Thou dost play with us?  Thou shalt die!" ));
 				locals[1] = 60;
 				locals[2] = 1;
 				set_quest( 2, locals[2], locals[1] );
@@ -1034,7 +1034,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[7];
 
-				yield return StartCoroutine(say( "Avatar? Whate'er thou art, thou art an arrogant fool. Dispose of @GS34!" ));
+				yield return StartCoroutine(say( locals, "Avatar? Whate'er thou art, thou art an arrogant fool. Dispose of @GS34!" ));
 				locals[1] = 60;
 				locals[2] = 1;
 				set_quest( 2, locals[2], locals[1] );
@@ -1071,7 +1071,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 								if ( (locals[0] == 160 || locals[0] == 160) ) {
 
-										locals[16] = locals[16] + identify_inv( 4, locals[32], locals[28], locals[31], locals[7] );
+										locals[16] = locals[16] + identify_inv( 4,locals, 32, 28, 31, locals[7] );
 										locals[31] = 0;
 										locals[32] = 0;
 										locals[19] = locals[19] + 1;
@@ -1085,7 +1085,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 								//give_to_npc( 2, locals[21], locals[19] );
 								give_to_npc(2,locals,21,19);
-								yield return StartCoroutine(say( "All right, this is enough. It ain't right, but on a guard's pay I ain't got no choice. If anyone finds out about this, thou shalt die like a dog. Is that clear?" ));
+								yield return StartCoroutine(say( locals, "All right, this is enough. It ain't right, but on a guard's pay I ain't got no choice. If anyone finds out about this, thou shalt die like a dog. Is that clear?" ));
 								locals[33] = 83;
 								locals[34] = 84;
 								locals[35] = 0;
@@ -1112,10 +1112,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 								if ( locals[19] == 0 ) {
 
-										yield return StartCoroutine(say( "Look, I just need gold -- can't take these other goods!" ));
+										yield return StartCoroutine(say( locals, "Look, I just need gold -- can't take these other goods!" ));
 								} else {
 
-										yield return StartCoroutine(say( "Thou must pay me more -- I shall be killed if this is discovered." ));
+										yield return StartCoroutine(say( locals, "Thou must pay me more -- I shall be killed if this is discovered." ));
 								} // end if
 
 								locals[57] = 87;
@@ -1152,11 +1152,11 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 						if ( locals[18] > 2 ) {
 
-								yield return StartCoroutine(say( "I am tired of this foolishness." ));
+								yield return StartCoroutine(say( locals, "I am tired of this foolishness." ));
 								yield return StartCoroutine(func_0d74());
 						} else {
 
-								yield return StartCoroutine(say( "Well? Show me what you have, quickly!" ));
+								yield return StartCoroutine(say( locals, "Well? Show me what you have, quickly!" ));
 								locals[79] = 92;
 								locals[80] = 93;
 								locals[81] = 0;
@@ -1185,7 +1185,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 								yield return StartCoroutine(func_0a24(0));
 						} else {
 
-								yield return StartCoroutine(say( "Good luck to thee, then!" ));
+								yield return StartCoroutine(say( locals, "Good luck to thee, then!" ));
 								Time.timeScale =SlomoTime;
 								yield return new WaitForSeconds(WaitTime);
 								func_0165();
@@ -1200,7 +1200,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[2];
 
-				yield return StartCoroutine(say( "Then thou shalt leave here or die." ));
+				yield return StartCoroutine(say( locals, "Then thou shalt leave here or die." ));
 				locals[1] = 1;
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
@@ -1214,7 +1214,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				locals[1] = 96;
 				yield return StartCoroutine(print( 1, locals[1] ));
-				yield return StartCoroutine(say( "Hey! This one's a rebel! Kill @GS34!" ));
+				yield return StartCoroutine(say( locals, "Hey! This one's a rebel! Kill @GS34!" ));
 				locals[2] = 60;
 				locals[3] = 1;
 				set_quest( 2, locals[3], locals[2] );
@@ -1235,7 +1235,7 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				locals[1] = 98;
 				yield return StartCoroutine(print( 1, locals[1] ));
-				yield return StartCoroutine(say( "Please remain calm, @GS35. I meant only to warn thee of the danger involved in coming here, and asked if thou didst know the password." ));
+				yield return StartCoroutine(say( locals, "Please remain calm, @GS35. I meant only to warn thee of the danger involved in coming here, and asked if thou didst know the password." ));
 		} // end func
 
 		IEnumerator func_10ac() {
@@ -1253,8 +1253,8 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				int[] locals = new int[46];
 
-				yield return StartCoroutine(say( "There is no special key -- just follow standard security procedure!" ));
-				yield return StartCoroutine(say( "O'course, if you've got the cash, I suppose I could...update thee on just what that procedure is." ));
+				yield return StartCoroutine(say( locals, "There is no special key -- just follow standard security procedure!" ));
+				yield return StartCoroutine(say( locals, "O'course, if you've got the cash, I suppose I could...update thee on just what that procedure is." ));
 				locals[1] = 104;
 				locals[2] = 105;
 				locals[3] = 0;
@@ -1275,17 +1275,17 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				} // end switch
 
-				yield return StartCoroutine(say( "Good luck to thee, then!" ));
+				yield return StartCoroutine(say( locals, "Good luck to thee, then!" ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_0165();
 				yield break;
 		label_110f:;
 
-				yield return StartCoroutine(say( "Let's see what y'got!" ));
+				yield return StartCoroutine(say( locals, "Let's see what y'got!" ));
 				locals[23] = 15;
 				func_0e1c( locals[23] );
-				yield return StartCoroutine(say( "I'm only explainin' this once -- the inner door ain't gonna open while you got the outer open. Only one door gets open at a time. Got it?" ));
+				yield return StartCoroutine(say( locals, "I'm only explainin' this once -- the inner door ain't gonna open while you got the outer open. Only one door gets open at a time. Got it?" ));
 				locals[24] = 109;
 				locals[25] = 110;
 				locals[26] = 0;
@@ -1306,10 +1306,10 @@ public class Conversation_UW2_2 :Conversation_UW2 {
 
 				} // end switch
 
-				yield return StartCoroutine(say( "Just remember, only one door opens at a time." ));
+				yield return StartCoroutine(say( locals, "Just remember, only one door opens at a time." ));
 		label_115e:;
 
-				yield return StartCoroutine(say( "Now, thou had best be on thy way!" ));
+				yield return StartCoroutine(say( locals, "Now, thou had best be on thy way!" ));
 				Time.timeScale =SlomoTime;
 				yield return new WaitForSeconds(WaitTime);
 				func_0156();

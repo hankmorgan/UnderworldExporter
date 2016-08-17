@@ -308,7 +308,7 @@ public class Conversation_216 : Conversation {
 			while ( locals[13] <= locals[11] ) {
 				
 				//locals[12] = locals[12] + identify_inv( 4, locals[17], locals[15], locals[16], locals[5] );
-				locals[12] = locals[12] + identify_inv( 4, locals[1], locals[2], locals[3], locals[4] );
+				locals[12] = locals[12] + identify_inv( 4, locals,1,2, 3, locals[4] );
 				locals[16] = 0;
 				locals[17] = 0;
 				locals[13] = locals[13] + 1;

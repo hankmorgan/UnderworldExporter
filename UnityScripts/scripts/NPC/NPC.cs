@@ -153,6 +153,9 @@ public class NPC : object_base {
 	}
 
 
+		/// <summary>
+		/// Initialise some basic info for the NPC ai.
+		/// </summary>
 	protected override void Start () {
 		base.Start();
 		//this.gameObject.tag="NPCs";
@@ -161,7 +164,7 @@ public class NPC : object_base {
 		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
 		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
 		ai.AI.Body=this.gameObject;
-		ai.AI.Motor.DefaultSpeed=0.25f+2.0f * (((float)GameWorldController.instance.critter.Speed[objInt().item_id-64]/12.0f)); 
+		ai.AI.Motor.DefaultSpeed=2.0f * (((float)GameWorldController.instance.critter.Speed[objInt().item_id-64]/12.0f)); 
 		ai.AI.WorkingMemory.SetItem<float>("Speed",ai.AI.Motor.DefaultSpeed);
 	}
 

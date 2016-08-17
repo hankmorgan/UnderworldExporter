@@ -157,7 +157,7 @@ public class Conversation_1 : Conversation {
 		} else {
 			
 			global[0] = 0;
-			yield return StartCoroutine(say( locals, 001 ));
+			yield return StartCoroutine(say( global, locals, 001 ));
 			locals[1] = 2;
 			locals[2] = 3;
 			locals[3] = 4;
@@ -201,7 +201,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 006 ));
+		yield return StartCoroutine(say( global, locals, 006 ));
 		locals[1] = 7;
 		locals[2] = 8;
 		locals[3] = 9;
@@ -249,7 +249,7 @@ public class Conversation_1 : Conversation {
 		int [] locals = new int[23];
 
 		global[0] = 1;
-		yield return StartCoroutine(say( locals, 011 ));
+		yield return StartCoroutine(say( global, locals, 011 ));
 		locals[1] = 12;
 		locals[2] = 13;
 		locals[3] = 14;
@@ -283,7 +283,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 015 ));
+		yield return StartCoroutine(say( global, locals, 015 ));
 		locals[1] = 16;
 		locals[2] = 17;
 		locals[3] = 18;
@@ -317,7 +317,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 019 ));
+		yield return StartCoroutine(say( global, locals, 019 ));
 		locals[1] = 20;
 		locals[2] = 21;
 		locals[3] = 22;
@@ -349,7 +349,7 @@ public class Conversation_1 : Conversation {
 	
 	IEnumerator func_04b3() {
 		int [] locals = new int[1];
-		yield return StartCoroutine(say( locals, 023 ));
+		yield return StartCoroutine(say( global, locals, 023 ));
 		Time.timeScale =SlomoTime;
 		yield return new WaitForSeconds(WaitTime);
 		func_00d1();
@@ -364,7 +364,7 @@ public class Conversation_1 : Conversation {
 		
 		if ( npc.npc_attitude == 1 ) {
 			
-			yield return StartCoroutine(say( locals, 024 ));
+			yield return StartCoroutine(say( global, locals, 024 ));
 			locals[1] = 25;
 			locals[2] = 26;
 			locals[3] = 27;
@@ -403,7 +403,7 @@ public class Conversation_1 : Conversation {
 			
 			
 			
-			yield return StartCoroutine(say( locals, 029 ));
+			yield return StartCoroutine(say( global, locals, 029 ));
 			locals[23] = 30;
 			locals[24] = 31;
 			locals[25] = 32;
@@ -447,7 +447,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 033 ));
+		yield return StartCoroutine(say( global, locals, 033 ));
 		locals[1] = 34;
 		locals[2] = 35;
 		locals[3] = 36;
@@ -483,7 +483,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 037 ));
+		yield return StartCoroutine(say( global, locals, 037 ));
 		locals[1] = 38;
 		locals[2] = 39;
 		locals[3] = 0;
@@ -518,7 +518,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 040 ));
+		yield return StartCoroutine(say( global, locals, 040 ));
 		locals[1] = 41;
 		locals[2] = 42;
 		locals[3] = 43;
@@ -552,7 +552,7 @@ public class Conversation_1 : Conversation {
 		//int locals[22];
 		int [] locals = new int[23];
 		
-		yield return StartCoroutine(say( locals, 044 ));
+		yield return StartCoroutine(say( global, locals, 044 ));
 		locals[1] = 45;
 		locals[2] = 46;
 		locals[3] = 0;

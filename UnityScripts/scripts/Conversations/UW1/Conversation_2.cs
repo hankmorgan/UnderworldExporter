@@ -453,7 +453,7 @@ public class Conversation_2 : Conversation {
 					locals[20] = check_inv_quality( 1, locals[8] );
 					locals[46] = 0;
 					locals[47] = 0;
-					identify_inv( 4, locals[47], locals[2], locals[46], locals[8] );
+					identify_inv( 4, locals, 47, 2, 46, locals[8] );
 					switch ( locals[20] ) {
 						
 					case 16:
@@ -986,9 +986,9 @@ public class Conversation_2 : Conversation {
 		
 		//int locals[75];
 		int[]locals=new int[76];
-		
+		//This is how shak calculates the cost of this
 		locals[1] = 0;
-		locals[2] = identify_inv( 4, locals[8], locals[5], locals[7], PassedLocals[param1] );//TODO:take note of the passedlocals
+		locals[2] = identify_inv( 4, locals, 8, 5, 7, PassedLocals[param1] );//TODO:take note of the passedlocals
 		locals[7] = 0;
 		locals[8] = 0;
 		locals[3] = check_inv_quality( 1, PassedLocals[param1] );
@@ -1227,8 +1227,8 @@ public class Conversation_2 : Conversation {
 
 		locals[63] = 1;
 		locals[64] = 0;
-		locals[2] = identify_inv( 4, locals[64], locals[15], locals[63], locals[10] );
-
+		locals[2] = identify_inv( 4,locals, 64, 15, 63, locals[10] );
+		//locals[18] is the cash value of the item.
 		if ( locals[2] / 5 < 3 ) {
 			
 			locals[18] = 1;
@@ -1256,7 +1256,7 @@ public class Conversation_2 : Conversation {
 			locals[65] = 2;
 		} // end if
 		
-		if ( locals[18] == 1 ) {
+		if ( locals[18] == 1 ) {//Pieces of gold.
 			
 			locals[16] = 109;
 		} else {

@@ -278,7 +278,7 @@ public class Magic : UWEBase {
 				case "Bet In Sanct"://Resist Blows
 						{
 								SetSpellCost(1);
-								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ResistBlows);
+								Cast_ResistanceSpells(caster,SpellEffect.UW1_Spell_Effect_ResistBlows_alt01);
 								break;
 						}//BIS
 				case "Sanct Hur"://Stealth
@@ -2870,21 +2870,20 @@ public class Magic : UWEBase {
 						break;
 				case SpellEffect.UW1_Spell_Effect_Levitate:
 				case SpellEffect.UW1_Spell_Effect_Fly:
-				case SpellEffect.UW1_Spell_Effect_Fly_alt01:
-				case SpellEffect.UW1_Spell_Effect_Levitate_alt01:						
-						if (ActiveArrayIndex!=-1)
-						{
-								Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-								SpellResultType=SpellResultActive;
-						}
-						break;
-				
-				case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
-				case SpellEffect.UW1_Spell_Effect_Fly_alt02:							
 						if (PassiveArrayIndex!=-1)
 						{
 								Cast_Levitate(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
 								SpellResultType=SpellResultPassive;
+						}
+						break;
+				case SpellEffect.UW1_Spell_Effect_Fly_alt01:
+				case SpellEffect.UW1_Spell_Effect_Levitate_alt01:						
+				case SpellEffect.UW1_Spell_Effect_Levitate_alt02:
+				case SpellEffect.UW1_Spell_Effect_Fly_alt02:
+						if (ActiveArrayIndex!=-1)
+						{
+								Cast_Levitate(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+								SpellResultType=SpellResultActive;
 						}
 						break;
 				case SpellEffect.UW1_Spell_Effect_WaterWalk:
@@ -2907,11 +2906,12 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_ThickSkin:
 				case SpellEffect.UW1_Spell_Effect_IronFlesh:
 						{
-								if (ActiveArrayIndex!=-1)
+								if (PassiveArrayIndex!=-1)
 								{
-										Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
-										SpellResultType=SpellResultActive;
+										Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
+										SpellResultType=SpellResultPassive;
 								}
+
 								break;
 						}
 				case SpellEffect.UW1_Spell_Effect_ResistBlows_alt01:
@@ -2921,14 +2921,15 @@ public class Magic : UWEBase {
 				case SpellEffect.UW1_Spell_Effect_ThickSkin_alt02:
 				case SpellEffect.UW1_Spell_Effect_IronFlesh_alt02:
 						{
-								if (PassiveArrayIndex!=-1)
+								if (ActiveArrayIndex!=-1)
 								{
-										Cast_Resistance(caster,playerUW.PassiveSpell,EffectID,PassiveArrayIndex);
-										SpellResultType=SpellResultPassive;
+										Cast_Resistance(caster,playerUW.ActiveSpell,EffectID,ActiveArrayIndex);
+										SpellResultType=SpellResultActive;
 								}
-
 								break;
 						}
+
+
 				case SpellEffect.UW1_Spell_Effect_Stealth:
 				case SpellEffect.UW1_Spell_Effect_Conceal:
 				case SpellEffect.UW1_Spell_Effect_Invisibilty:

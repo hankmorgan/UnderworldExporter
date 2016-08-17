@@ -151,7 +151,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			//UWHUD.instance.RefreshPanels(PANELNAME);
 			SetAnimation= "Anim_Base";//Clears out the animation.
 			mlCuts.Set("");
-			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,true);			
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);			
 		}
 		else
 		{
@@ -178,6 +178,17 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 							Destroy (cs);	
 					}
 			}
+		}
+	}
+	
+		/// <summary>
+	/// Deactivates the fullscreen animation if clicked on during anim_base
+	/// </summary>
+	public void OnClick()
+	{
+		if ((SetAnimation=="Anim_Base") || (SetAnimation==""))
+		{
+			UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);	
 		}
 	}
 }

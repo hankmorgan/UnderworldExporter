@@ -428,11 +428,13 @@ public class ObjectInteraction : UWEBase {
 				ObjectInHand=GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand();
 				if (ObjectInHand != null)
 				{
-						//First do a combineobject test. This will implement object combinatiosn defined by UW1/2
-						if (CombineObject(this.gameObject,ObjectInHand))
-						{
-								return true;
-						}	
+					//First do a combineobject test. This will implement object combinatiosn defined by UW1/2
+					GameObject combined = CombineObject(this.gameObject,ObjectInHand);
+					if (combined!=null)
+					{
+						GameWorldController.instance.playerUW.playerInventory.ObjectInHand = combined.name	;
+						return true;
+					}	
 				}
 
 
@@ -537,7 +539,7 @@ public class ObjectInteraction : UWEBase {
 				return objbase.FailMessage();
 		}
 
-		public bool CombineObject(GameObject InputObject1, GameObject InputObject2)
+		public GameObject CombineObject(GameObject InputObject1, GameObject InputObject2)
 		{//Combines two objects per the UW1/UW2 cmb.dat lists
 				int[] lstInput1= new int[8];
 				int[] lstInput2= new int[8];
@@ -631,15 +633,16 @@ public class ObjectInteraction : UWEBase {
 								ObjectInteraction CreatedObjectInt = CreateNewObject (lstOutput[i]);
 								if (CreatedObjectInt != null) {
 										CreatedObjectInt.UpdateAnimation ();
+										CreatedObjectInt.PickedUp=true;
 										UWHUD.instance.CursorIcon = CreatedObjectInt.GetInventoryDisplay ().texture;
 								}
 								UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
 								InteractionModeControl.UpdateNow=true;
-								return true;
+								return CreatedObjectInt.gameObject;
 						}
 				}
 
-				return false;
+				return null;
 		}
 
 		public void consumeObject()

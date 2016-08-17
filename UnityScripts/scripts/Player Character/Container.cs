@@ -478,7 +478,7 @@ public class Container : object_base {
 
 	public float GetCapacity()
 	{
-		return (float)(Capacity * 0.1f);
+		return (float)(Capacity);
 	}
 
 	public float GetFreeCapacity()

@@ -9,7 +9,7 @@ public class SpellProp_Heal : SpellProp {
 				//TODO:Heal affected by caster ability
 		switch (effectId)
 				{
-				case SpellEffect.UW1_Spell_Effect_LesserHeal:Random.Range (1,10);break;
+				case SpellEffect.UW1_Spell_Effect_LesserHeal:
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt01:
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt02:
 				case SpellEffect.UW1_Spell_Effect_LesserHeal_alt03:

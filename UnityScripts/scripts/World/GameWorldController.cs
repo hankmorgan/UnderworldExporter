@@ -126,11 +126,14 @@ public class GameWorldController : UWEBase {
 		instance=this;
 		if (EnableTextureAnimation==true)
 		{
+			UWHUD.instance.CutsceneFullPanel.SetActive(false);
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
 		if (AtMainMenu)
 		{
 			SwitchLevel(-1);//Turn off all level maps
+			UWHUD.instance.CutsceneFullPanel.SetActive(true);
+			UWHUD.instance.mainmenu.gameObject.SetActive(true);
 			//Freeze player movement and put them at a set location
 			playerUW.playerController.enabled=false;
 			playerUW.playerMotor.enabled=false;

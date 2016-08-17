@@ -283,9 +283,10 @@ public class Conversation_194 : Conversation {
 			if ( func_0623_result==1 ) {
 				//if ( func_0623( locals[4] )==1 ) {
 				
-				locals[2] = identify_inv( 4, locals[115], locals[15], locals[114], locals[18] );
 				locals[114] = 1;
-				locals[115] = 3;
+				locals[115] = 3;				
+				locals[2] = identify_inv( 4,locals, 115, 15, 114, locals[18] );
+
 				yield return StartCoroutine(func_071c(locals[18], locals[17]));
 				if ( func_071c_result == 0 ) {
 					//if ( func_071c( locals[18], locals[17] ) == 0 ) {

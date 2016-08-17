@@ -403,11 +403,29 @@ public class Conversation : GuiBase {
 		/// <param name="StringNo">String no.</param>
 	public IEnumerator say (int[] localsArray, int StringNo)
 	{
-		//Do some string repacement stuff here.
+		//Do some string replacement stuff here.
+		string tmp = FieldReplacement(localsArray, StringController.instance.GetString (StringBlock,StringNo));
 
+		yield return StartCoroutine(say (tmp,NPC_SAY));
 		//Now say the line
-		yield return StartCoroutine (say (StringNo));
+		//yield return StartCoroutine (say (StringNo));
 	}
+
+		public IEnumerator say (int[] GlobalsArray, int[] localsArray, int StringNo)
+		{
+				//Do some string replacement stuff here.
+
+				//Now say the line
+				yield return StartCoroutine (say (StringNo));
+		}
+
+		public IEnumerator say (int[,] GlobalsArray, int[] localsArray, int StringNo)
+		{
+				//Do some string replacement stuff here.
+
+				//Now say the line
+				yield return StartCoroutine (say (StringNo));
+		}
 
 
 		/// <summary>
@@ -436,7 +454,7 @@ public class Conversation : GuiBase {
 		WhatToSay= WhatToSay.Trim();
 		if (WhatToSay.StartsWith("\\n"))
 		{
-			WhatToSay=WhatToSay.Remove(1,2);
+			WhatToSay=WhatToSay.Remove(0,2);
 		}
 		///Splits the strings into paragraphs based on [more]
 		string[] Paragraphs = WhatToSay.Split(new string [] {"\\m"}, System.StringSplitOptions.None);
@@ -496,6 +514,17 @@ public class Conversation : GuiBase {
 	{
 		yield return StartCoroutine (say(WhatToSay, NPC_SAY));
 	}
+
+		/// <summary>
+		/// Say the specified locals and WhatToSay.
+		/// </summary>
+		/// <param name="locals">Locals.</param>
+		/// <param name="WhatToSay">What to say.</param>
+		public IEnumerator say(int[] locals, string WhatToSay)
+		{
+				WhatToSay=FieldReplacement(locals,WhatToSay);
+				yield return StartCoroutine (say(WhatToSay, NPC_SAY));
+		}
 
 		/// <summary>
 		/// The NPC says something
@@ -563,7 +592,8 @@ public class Conversation : GuiBase {
 		{
 			if (localsArray[i]!=0)
 			{
-				tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
+				//tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]).Replace("@GS8",GameWorldController.instance.playerUW.CharName));
+				tl_input.Add(j++ + "." + StringController.instance.GetString(StringBlock,localsArray[i]));
 				MaxAnswer++;
 			}
 			else
@@ -1308,10 +1338,10 @@ public class Conversation : GuiBase {
 		/// </summary>
 		/// <param name="unk1">Unk1.</param>
 		/// <param name="unk2">Unk2.</param>
-		/// <param name="unk3">Unk3.</param>
+		/// <param name="unk3">ItemId Sets the item id of the item into the locals array</param>
 		/// <param name="unk4">Unk4.</param>
 		/// <param name="inventorySlotIndex">Trade slot index.</param>
-	public int identify_inv(int unk1, int unk2, int unk3, int unk4, int tradeSlotIndex)
+		public int identify_inv(int unk1, int[] locals, int unk2, int ItemId, int unk4, int tradeSlotIndex)
 	{
 		//id=0017 name="identify_inv" ret_type=int
 		//	parameters:   arg1:
@@ -1323,6 +1353,7 @@ public class Conversation : GuiBase {
 		if (UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction() != null)
 		{
 			UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().isIdentified=true;	
+			locals[ItemId]=-UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id;//Set as minus to flag this a an item id for string replacement
 			return GameWorldController.instance.commobj.Value[UWHUD.instance.playerTrade[tradeSlotIndex].GetGameObjectInteraction().item_id];//Should this be the value of the item.
 		}
 		else
@@ -2145,4 +2176,35 @@ keep a number of found slots.
 		//Based on usage in conversation 220 I think it means it looks at the same variables as the check variable traps
 		return GameWorldController.instance.variables[VariableIndex];
 	}
+
+
+		/// <summary>
+		/// Replaces the fields in the string with specific known examples for the conversation
+		/// </summary>
+		/// <returns>The replacement.</returns>
+		/// <param name="src">Source.</param>
+		public virtual string FieldReplacement(int[] locals, string src)
+		{
+			//Do my replacesments of Local variables first
+			for (int i=locals.GetUpperBound(0); i>=0;i--)
+			{
+				if (src.Contains("@SS"+i))
+				{//Replaces with a string.
+					if (locals[i]<0)		
+					{//minus means item id
+						src=src.Replace("@SS"+i,StringController.instance.GetString(4, -locals[i]));		
+					}
+					else
+					{
+						src=src.Replace("@SS"+i,StringController.instance.GetString(StringBlock, locals[i]));	
+					}
+							
+				}
+				if (src.Contains("@SI"+i))
+				{//REplaces with a value.
+					src=src.Replace("@SI"+i, locals[i].ToString());		
+				}
+			}
+			return src;	
+		}
 }

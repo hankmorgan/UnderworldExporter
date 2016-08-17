@@ -428,7 +428,7 @@ public class Conversation_3 : Conversation {
 			while ( locals[13] <= locals[11] ) {
 				locals[16] = 0;
 				locals[17] = 0;
-				locals[12] = locals[12] + identify_inv( 4, locals[17], locals[15], locals[16], locals[6+i] );
+				locals[12] = locals[12] + identify_inv( 4,locals,  17, 15, 16, locals[6+i] );
 				locals[13] = locals[13] + 1;
 				i++;
 			} // while
@@ -1085,7 +1085,7 @@ public class Conversation_3 : Conversation {
 				} // end if
 				locals[19] = 0;
 				locals[20] = 0;				
-				locals[12] = locals[12] + identify_inv( 4, locals[20], locals[15], locals[19], locals[5] );
+				locals[12] = locals[12] + identify_inv( 4,locals, 20, 15, 19, locals[5] );
 
 				locals[13] = locals[13] + 1;
 			} // while
