@@ -27,7 +27,7 @@ public class TileMap : UWEBase {
 		/// </summary>
 	public List<MapNote>[] MapNotes = new List<MapNote>[10];
 
-
+	
 	public const int TILE_SOLID=0;
 	public const int TILE_OPEN= 1;
 	public const int TILE_DIAG_SE= 2;
@@ -83,6 +83,59 @@ public class TileMap : UWEBase {
 	public static bool OnLava=false;
 	//public GameObject feet;//For detecting the ground.
 
+	/// <summary>
+	/// The open tile colour.
+	/// </summary>
+		/// RGB as follows
+		/// 116,81,56
+		/// 102,70,47
+		/// 107,75,47
+	public Color[] OpenTileColour=new Color[3];
+
+		/// <summary>
+		/// The water tile colour.
+		/// </summary>
+		/// RGB as follows
+		/// 62,61,134
+		/// 50,51,115
+	public Color[] WaterTileColour=new Color[2];
+		/// <summary>
+		/// The lava tile colour.
+		/// </summary>
+		/// RGB is 
+		/// 115,23,27
+		/// 78,15,14
+	public Color[] LavaTileColour=new Color[2];
+
+		/// <summary>
+		/// The bridge tile colour.
+		/// </summary>
+		/// RGB is 
+		/// 64,28,0
+		/// 59,23,0
+		/// 74,28,0
+	public Color[] BridgeTileColour=new Color[2];
+		/// <summary>
+		/// The stairs tile colour.
+		/// </summary>
+		/// RGB as follows
+		/// 79,52,27
+		/// 70,41,24
+	public Color[] StairsTileColour=new Color[2];
+		/// <summary>
+		/// Wall border colour.
+		/// </summary>
+		/// RBG is
+		/// 66,41,22
+		/// 93,60,37
+		/// 98,65,42
+		/// 88,56,33
+	public Color[] BorderColour = new Color[3];
+
+		/// <summary>
+		/// The background colour of the map.
+		/// </summary>
+		public Color[] Background = new Color[1];
 
 		/// <summary>
 		/// Detects where the player currently is an updates their swimming state and auto map as needed.
@@ -160,7 +213,7 @@ public class TileMap : UWEBase {
 		{
 			for (int j = 63; j>0; j--)
 			{
-				DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
+				DrawSolidTile(output,i,j,TileSize,TileSize,Background);
 			}
 		}
 
@@ -171,7 +224,8 @@ public class TileMap : UWEBase {
 			{//If the tile has been visited and can be rendered.
 				if ((GetTileRender(LevelNo,i,j)==1) && (GetTileVisited(LevelNo,i,j)))
 				{
-					fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.cyan);
+					//fillTile(LevelNo,output,i,j,TileSize,TileSize,Color.gray,Color.blue,Color.red, Color.cyan);
+					fillTile(LevelNo,output,i,j,TileSize,TileSize,OpenTileColour,WaterTileColour,LavaTileColour,BridgeTileColour);
 				}
 			}
 		}
@@ -196,30 +250,30 @@ public class TileMap : UWEBase {
 					case TILE_SLOPE_S:
 					case TILE_SLOPE_N:
 					{
-						DrawOpenTile(LevelNo, output,i,j,TileSize,TileSize,Color.black);
+						DrawOpenTile(LevelNo, output,i,j,TileSize,TileSize,BorderColour);
 						//output.SetPixel(i, j, Color.white);
 						break;
 					}
 					case TILE_DIAG_NE:
 					{
 						//DrawLine (output,i,j,TileSize,TileSize,Color.black,NORTHEAST);
-						DrawDiagNE(LevelNo, output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagNE(LevelNo, output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					case TILE_DIAG_SE:
 					{
 						//DrawLine (output,i,j,TileSize,TileSize,Color.black,SOUTHEAST);
-						DrawDiagSE(LevelNo, output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagSE(LevelNo, output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					case TILE_DIAG_NW:
 					{
-						DrawDiagNW (LevelNo, output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagNW (LevelNo, output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					case TILE_DIAG_SW:
 					{
-						DrawDiagSW(LevelNo, output,i,j,TileSize,TileSize,Color.black);
+						DrawDiagSW(LevelNo, output,i,j,TileSize,TileSize,BorderColour);
 						break;
 					}
 					default:
@@ -232,7 +286,7 @@ public class TileMap : UWEBase {
 				}
 				else
 				{
-					DrawSolidTile(output,i,j,TileSize,TileSize,Color.clear);
+					DrawSolidTile(output,i,j,TileSize,TileSize,Background);
 					//output.SetPixel(i, j, Color.clear);
 				}
 			}
@@ -288,9 +342,9 @@ public class TileMap : UWEBase {
 		/// <param name="WaterColour">Water colour.</param>
 		/// <param name="LavaColour">Lava colour.</param>
 		/// <param name="BridgeColour">Bridge colour.</param>
-	private void fillTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color GroundColour,Color WaterColour, Color LavaColour, Color BridgeColour )
+	private void fillTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] GroundColour,Color[] WaterColour, Color[] LavaColour, Color[] BridgeColour )
 	{
-		Color TileColorPrimary;
+		Color[] TileColorPrimary;
 		Color TileColorSecondary;
 		///Picks which colour to use based on the tile properties.
 		if (GetIsBridge(LevelNo,TileX,TileY)==true)
@@ -327,7 +381,7 @@ public class TileMap : UWEBase {
 						{
 							if (i>=TileHeight-j)
 							{
-							OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,TileColorPrimary);
+								OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,PickColour(TileColorPrimary));
 							}
 							else
 							{
@@ -345,7 +399,7 @@ public class TileMap : UWEBase {
 					{
 						if (i<=j)
 							{
-								OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,TileColorPrimary);
+								OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,PickColour(TileColorPrimary));
 							}
 							else
 							{
@@ -363,7 +417,7 @@ public class TileMap : UWEBase {
 						{
 							if (i>=j)
 							{
-								OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,TileColorPrimary);
+								OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,PickColour(TileColorPrimary));
 							}
 							else
 							{
@@ -381,7 +435,7 @@ public class TileMap : UWEBase {
 					{
 						if (TileWidth-i>=j)
 						{
-							OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,TileColorPrimary);
+							OutputTile.SetPixel(i+TileX*TileWidth,j+TileY*TileHeight,PickColour(TileColorPrimary));
 						}
 						else
 						{
@@ -396,13 +450,13 @@ public class TileMap : UWEBase {
 			case TILE_SLOPE_N:
 			case TILE_SLOPE_S:
 			case TILE_SLOPE_W:
-				{//Files an open tile.
+				{//Fills an open tile.
 				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,TileColorPrimary);
 				break;
 				}
 			default:
 				{//Does not draw anything.
-				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Color.clear);
+				DrawSolidTile(OutputTile,TileX,TileY,TileWidth,TileHeight,Background);
 				break;
 				}
 			}
@@ -419,13 +473,13 @@ public class TileMap : UWEBase {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	private void DrawSolidTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	private void DrawSolidTile(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		for (int i = 0; i<TileWidth; i++)
 		{
 			for (int j=0; j<TileHeight;j++)
 			{
-				OutputTile.SetPixel(i+ TileX * TileWidth, j+ TileY * TileHeight,InputColour);
+				OutputTile.SetPixel(i+ TileX * TileWidth, j+ TileY * TileHeight,PickColour(InputColour));
 			}
 		}
 
@@ -441,14 +495,14 @@ public class TileMap : UWEBase {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	private void DrawOpenTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	private void DrawOpenTile(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		//Check the tile to the north
 		if (TileY<63)
 			{
 			if ((GetTileType(LevelNo, TileX,TileY+1)==TILE_SOLID) && (GetTileRender(LevelNo, TileX,TileY+1)==1))
 				{//Solid tile to the north.
-				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,NORTH);
+				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTH);
 				}
 			}
 		//Check the tile to the south
@@ -456,7 +510,7 @@ public class TileMap : UWEBase {
 			{
 			if ((GetTileType(LevelNo, TileX,TileY-1)==TILE_SOLID) && (GetTileRender(LevelNo,TileX,TileY-1)==1))
 				{//Solid tile to the south.
-					DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,SOUTH);
+					DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 				}
 			}
 		//Check the tile to the east
@@ -464,7 +518,7 @@ public class TileMap : UWEBase {
 			{
 			if ((GetTileType(LevelNo, TileX+1,TileY)==TILE_SOLID) && (GetTileRender(LevelNo, TileX+1,TileY)==1))
 				{
-				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,EAST);
+					DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,EAST);
 				}
 			}
 		//Check the tile to the west
@@ -472,7 +526,7 @@ public class TileMap : UWEBase {
 		{
 		if ((GetTileType(LevelNo, TileX-1,TileY)==TILE_SOLID) && (GetTileRender(LevelNo, TileX-1,TileY)==1))
 			{
-				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,Color.black,WEST);
+			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 	}
@@ -487,7 +541,7 @@ public class TileMap : UWEBase {
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
 		/// <param name="Direction">The position on the tile where the border has to be drawn.</param>
-	private void DrawLine(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour, int Direction)
+	private void DrawLine(Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour, int Direction)
 	{
 		switch (Direction)
 		{
@@ -495,7 +549,7 @@ public class TileMap : UWEBase {
 			{//Border to the north.
 			for (int i = 0; i<TileWidth; i++)
 				{
-				OutputTile.SetPixel(i+ TileX * TileWidth, TileHeight + TileY * TileHeight,InputColour);
+					OutputTile.SetPixel(i+ TileX * TileWidth, TileHeight + TileY * TileHeight,PickColour(InputColour));
 				}
 			break;
 			}
@@ -503,7 +557,7 @@ public class TileMap : UWEBase {
 			{//Border to the south.
 			for (int i = 0; i<TileWidth; i++)
 				{
-				OutputTile.SetPixel(i+ TileX * TileWidth, 0 + TileY * TileHeight,InputColour);
+					OutputTile.SetPixel(i+ TileX * TileWidth, 0 + TileY * TileHeight,PickColour(InputColour));
 				}
 			break;
 			}
@@ -511,7 +565,7 @@ public class TileMap : UWEBase {
 			{//Border to the east.
 			for (int j=0; j<TileHeight;j++)
 				{
-				OutputTile.SetPixel(TileWidth + TileX * TileWidth, j+ TileY * TileHeight,InputColour);
+					OutputTile.SetPixel(TileWidth + TileX * TileWidth, j+ TileY * TileHeight,PickColour(InputColour));
 				}
 			break;
 			}
@@ -519,7 +573,7 @@ public class TileMap : UWEBase {
 			{//Border to the west.
 			for (int j=0; j<TileHeight;j++)
 				{
-				OutputTile.SetPixel(0+ TileX * TileWidth, j+ TileY * TileHeight,InputColour);
+					OutputTile.SetPixel(0+ TileX * TileWidth, j+ TileY * TileHeight,PickColour(InputColour));
 				}
 			break;
 			}
@@ -527,7 +581,7 @@ public class TileMap : UWEBase {
 			{//Diagonal
 				for (int k=0; k<=TileHeight; k++)
 				{
-					OutputTile.SetPixel((TileWidth-k)+ TileX * TileWidth, k+ TileY * TileHeight,InputColour);
+					OutputTile.SetPixel((TileWidth-k)+ TileX * TileWidth, k+ TileY * TileHeight,PickColour(InputColour));
 				}
 				break;
 			}
@@ -535,7 +589,7 @@ public class TileMap : UWEBase {
 			{//Diagonal
 			for (int k=0; k<=TileWidth; k++)
 				{
-				OutputTile.SetPixel(k+ TileX * TileWidth, (TileHeight-k)+ TileY * TileHeight,InputColour);
+					OutputTile.SetPixel(k+ TileX * TileWidth, (TileHeight-k)+ TileY * TileHeight,PickColour(InputColour));
 				}
 			break;
 			}
@@ -543,7 +597,7 @@ public class TileMap : UWEBase {
 		{//Diagonal
 			for (int k=0; k<=TileWidth; k++)
 			{
-				OutputTile.SetPixel(k+ TileX * TileWidth, k+ TileY * TileHeight,InputColour);
+				OutputTile.SetPixel(k+ TileX * TileWidth, k+ TileY * TileHeight,PickColour(InputColour));
 			}
 			break;
 		}
@@ -551,7 +605,7 @@ public class TileMap : UWEBase {
 		{//Diagonal
 			for (int k=0; k<=TileWidth; k++)
 			{
-				OutputTile.SetPixel(k+ TileX * TileWidth, k+ TileY * TileHeight,InputColour);
+				OutputTile.SetPixel(k+ TileX * TileWidth, k+ TileY * TileHeight,PickColour(InputColour));
 			}
 			break;
 		}
@@ -568,7 +622,7 @@ public class TileMap : UWEBase {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagSW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagSW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHWEST);
 
@@ -595,7 +649,7 @@ public class TileMap : UWEBase {
 		{//South
 			if (GetTileType (LevelNo,TileX,TileY-1)== TILE_SOLID)
 			{
-				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
+			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTH);
 			}
 		}
 		
@@ -603,7 +657,7 @@ public class TileMap : UWEBase {
 		{//West
 			if (GetTileType (LevelNo,TileX-1,TileY)== TILE_SOLID)
 			{
-				DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
 			}
 		}
 
@@ -619,7 +673,7 @@ public class TileMap : UWEBase {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagNE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagNE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHEAST);
 
@@ -670,7 +724,7 @@ public class TileMap : UWEBase {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagNW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagNW(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,NORTHWEST);
 		
@@ -720,7 +774,7 @@ public class TileMap : UWEBase {
 		/// <param name="TileWidth">Tile width.</param>
 		/// <param name="TileHeight">Tile height.</param>
 		/// <param name="InputColour">Input colour.</param>
-	void DrawDiagSE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color InputColour)
+	void DrawDiagSE(int LevelNo, Texture2D OutputTile, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
 	{
 		DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,SOUTHEAST);
 	
@@ -760,6 +814,18 @@ public class TileMap : UWEBase {
 			}
 		}
 	}
+
+	/// <summary>
+	/// Picks a random colour from the array of colours
+	/// </summary>
+	/// <returns>The colour selected</returns>
+	/// <param name="Selection">Selection.</param>
+	public Color PickColour(Color[] Selection)
+	{
+		return Selection[Random.Range(0,Selection.GetUpperBound(0)+1)];
+	}
+
+
 
 	/// <summary>
 	/// Tells if the tile is one of the square open types
@@ -895,6 +961,7 @@ public class TileMap : UWEBase {
 		/// <param name="tileY">Tile y.</param>
 	private bool GetTileVisited(int LevelNo, int tileX, int tileY)
 	{
+				return true;
 		return Tiles[LevelNo].tileVisited[tileX,tileY];
 	}
 
