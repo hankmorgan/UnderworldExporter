@@ -510,9 +510,10 @@ void getShockButtons(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr
 void setElevatorProperties(tile LevelInfo[64][64], unsigned char *sub_ark, int add_ptr, ObjectItem objList[1600], int objIndex, short PrintDebug);
 void DebugPrintTriggerVals(unsigned char *sub_ark, int add_ptr, int length);
 
-void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-void setBridgeBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
-void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1025]);
+void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setBridgeBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void SetExitBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
+void setPatchBits(tile LevelInfo[64][64], ObjectItem objList[1600]);
 void SetDeathWatch(ObjectItem objList[1600]);
 void SetBullFrog(tile LevelInfo[64][64], ObjectItem objList[1600], int LevelNo);
 extern objectMaster *objectMasters;

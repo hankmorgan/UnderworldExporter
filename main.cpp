@@ -1480,6 +1480,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				setTileNeighbourCount(LevelInfo);
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setObjectTileXY(game, LevelInfo, objList);
+				SetExitBits(LevelInfo, objList);
 				setDoorBits(LevelInfo, objList);
 				//setCorridors(LevelInfo, &roomIndex);
 				setRooms(LevelInfo, &roomIndex);
@@ -1503,6 +1504,7 @@ void exportMaps(int game, int mode, int LevelNo, char OutFileName[255], char fil
 				setTileNeighbourCount(LevelInfo);
 				BuildObjectListUW(LevelInfo, objList, texture_map, filePath, game, LevelNo);
 				setObjectTileXY(game, LevelInfo, objList);
+				SetExitBits(LevelInfo, objList);
 				setDoorBits(LevelInfo, objList);
 				setBridgeBits(LevelInfo, objList);
 				//setCorridors(LevelInfo, &roomIndex);

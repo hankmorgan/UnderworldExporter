@@ -20,6 +20,7 @@ The path to the sword hilt on Level3
 	//public int TileY;
 	public int X;//The range of tiles to be changed.
 	public int Y;
+	public int NewFloorHeight;
 
 
 	public override void ExecuteTrap (int triggerX, int triggerY, int State)
@@ -31,7 +32,6 @@ The path to the sword hilt on Level3
 			{
 				//Find the tile at the location.
 				GameObject ExistingTile = GameWorldController.FindTile(triggerX+i,triggerY+j,TileMap.SURFACE_FLOOR);
-				//string Tilename = GameWorldController.GetTileName(TileX+i,TileY+j,1); //Var.GetTileName (TileX+i,TileY+j,1); //ExistingTile.name;
 				//Find the tile that becomes the tile at that location.
 				GameObject CTTile =GameWorldController.FindTileByName(this.name + "_" + (i).ToString ("D2") + "_" + (j).ToString ("D2"));   
 				GameObject ReplacementTile =Instantiate(CTTile,CTTile.transform.position,CTTile.transform.rotation) as GameObject;
@@ -44,15 +44,29 @@ The path to the sword hilt on Level3
 				}
 				if (ReplacementTile!=null)
 				{
-					//Debug.Log ("Moving " + ReplacementTile.name );
-					//ReplacementTile.name = Tilename;
 					Vector3 StartPos = ReplacementTile.transform.position;
 					Vector3 EndPos = StartPos + Dist;
 					ReplacementTile.transform.position = Vector3.Lerp (StartPos,EndPos,1.0f);
+					//Change the tile type for the automap
+					GameWorldController.instance.Tilemap.current().tileType[triggerX+i,triggerY+j]=objInt().Quality & 0x1;
+					GameWorldController.instance.Tilemap.current().Render[triggerX+i,triggerY+j]=1;
+					GameWorldController.instance.Tilemap.current().FloorHeight[triggerX+i,triggerY+j]=NewFloorHeight;
+					switch (LayerMask.LayerToName(ReplacementTile.layer).ToUpper() )
+					{
+						case "WATER":
+							GameWorldController.instance.Tilemap.current().isWater[triggerX+i,triggerY+j]=true;
+							GameWorldController.instance.Tilemap.current().isLava[triggerX+i,triggerY+j]=false;
+							break;
+						case "MAPMESH":
+							GameWorldController.instance.Tilemap.current().isWater[triggerX+i,triggerY+j]=false;
+							GameWorldController.instance.Tilemap.current().isLava[triggerX+i,triggerY+j]=false;												
+							break;
+						case "LAVA":
+							GameWorldController.instance.Tilemap.current().isWater[triggerX+i,triggerY+j]=false;
+							GameWorldController.instance.Tilemap.current().isLava[triggerX+i,triggerY+j]=true;
+							break;
+					}
 				}
-				//Change the tile type for the automap
-				GameWorldController.instance.Tilemap.current().tileType[triggerX+i,triggerY+j]=objInt().Quality & 0x1;
-				GameWorldController.instance.Tilemap.current().Render[triggerX+i,triggerY+j]=1;
 			}
 		}
 	}

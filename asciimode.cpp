@@ -15,6 +15,7 @@ Functions for printing out usefull information, tilemaps and object lists.
 //#include "scripting.h"
 #include "asciimode.h"
 #include "utils.h"
+#include "textures.h"
 
 FILE *LOGFILE;
 
@@ -845,6 +846,36 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 				fprintf(LOGFILE, "SetObjectTag(\"%s\", \"LAND_%d\");\n", UniqueObjectName(objList[z]), LevelInfo[x][y].bridgeRegion);
 				}
 			
+			}
+		else if (objectMasters[objList[z].item_id].type == A_CHANGE_TERRAIN_TRAP)
+			{
+			for (int i = 0; i <= objList[z].x; i++)
+				{
+				for (int j = 0; j <= objList[z].y; j++)
+					{	//I can't know what land region I will have yet so I will just assume land 1.
+					int floorTexture;
+					if (objList[z].texture == -1)
+						{
+						floorTexture = LevelInfo[objList[z].tileX + i][objList[z].tileY + j].floorTexture;//?
+						}
+					else
+						{
+						floorTexture = objList[z].texture;
+						}
+					if (textureMasters[floorTexture].water == 1)
+						{
+						fprintf(LOGFILE, "SetObjectTag(\"%s_%02d_%02d\", \"WATER_%d\");\n", UniqueObjectName(objList[z]), i, j, 1);
+						}
+					else if(textureMasters[floorTexture].lava == 1)
+						{
+						fprintf(LOGFILE, "SetObjectTag(\"%s_%02d_%02d\", \"LAVA_%d\");\n", UniqueObjectName(objList[z]), i, j, 1);
+						}
+					else
+						{
+						fprintf(LOGFILE, "SetObjectTag(\"%s_%02d_%02d\", \"LAND_%d\");\n", UniqueObjectName(objList[z]), i, j, 1);
+						}					
+					}
+				}
 			}
 		}
 	}

@@ -5347,6 +5347,9 @@ public class MyTools
 						SetTileTag(2,2,"SOLIDWALL",1);SetTileTag(3,2,"LAND_1", 1);SetTileTag(4,2,"SOLIDWALL",1);SetTileTag(5,2,"LAND_1", 1);SetTileTag(6,2,"SOLIDWALL",1);SetTileTag(18,2,"SOLIDWALL",1);SetTileTag(19,2,"LAND_1", 1);SetTileTag(20,2,"LAND_1", 1);SetTileTag(21,2,"LAND_1", 1);SetTileTag(22,2,"LAND_1", 1);SetTileTag(23,2,"LAND_1", 1);SetTileTag(24,2,"LAND_1", 1);SetTileTag(25,2,"LAND_1", 1);SetTileTag(26,2,"SOLIDWALL",1);SetTileTag(27,2,"SOLIDWALL",1);SetTileTag(28,2,"SOLIDWALL",1);SetTileTag(29,2,"SOLIDWALL",1);SetTileTag(30,2,"SOLIDWALL",1);SetTileTag(31,2,"LAND_1", 1);SetTileTag(32,2,"LAND_1", 1);SetTileTag(33,2,"LAND_1", 1);SetTileTag(34,2,"LAND_1", 1);SetTileTag(35,2,"LAND_1", 1);SetTileTag(36,2,"LAND_1", 1);SetTileTag(37,2,"LAND_1", 1);SetTileTag(38,2,"LAND_1", 1);SetTileTag(39,2,"LAND_1", 1);SetTileTag(40,2,"LAND_1", 1);SetTileTag(41,2,"LAND_1", 1);SetTileTag(42,2,"LAND_1", 1);SetTileTag(43,2,"SOLIDWALL",1);
 						SetTileTag(2,1,"SOLIDWALL",1);SetTileTag(3,1,"LAND_1", 1);SetTileTag(4,1,"LAND_1", 1);SetTileTag(5,1,"LAND_1", 1);SetTileTag(6,1,"SOLIDWALL",1);SetTileTag(19,1,"SOLIDWALL",1);SetTileTag(20,1,"SOLIDWALL",1);SetTileTag(21,1,"SOLIDWALL",1);SetTileTag(23,1,"SOLIDWALL",1);SetTileTag(24,1,"SOLIDWALL",1);SetTileTag(31,1,"SOLIDWALL",1);SetTileTag(32,1,"SOLIDWALL",1);SetTileTag(33,1,"SOLIDWALL",1);SetTileTag(34,1,"SOLIDWALL",1);SetTileTag(35,1,"SOLIDWALL",1);SetTileTag(36,1,"SOLIDWALL",1);SetTileTag(37,1,"SOLIDWALL",1);SetTileTag(38,1,"SOLIDWALL",1);SetTileTag(39,1,"SOLIDWALL",1);SetTileTag(40,1,"SOLIDWALL",1);SetTileTag(41,1,"SOLIDWALL",1);SetTileTag(42,1,"SOLIDWALL",1);
 						SetTileTag(3,0,"SOLIDWALL",1);SetTileTag(4,0,"SOLIDWALL",1);SetTileTag(5,0,"SOLIDWALL",1);SetObjectTag("a_bridge_17_16_02_0610", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_46_07_02_0550_00_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_52_13_02_0587_00_00", "LAND_1");
+						SetObjectTag("a_bridge_17_16_02_0610", "LAND_1");
 						SetObjectTag("a_bridge_17_15_02_0611", "LAND_1");
 						SetObjectTag("a_bridge_17_14_02_0612", "LAND_1");
 						SetObjectTag("a_bridge_45_13_02_0664", "LAND_1");
@@ -5356,6 +5359,7 @@ public class MyTools
 						SetObjectTag("a_bridge_39_17_02_0691", "LAND_1");
 						SetObjectTag("a_bridge_39_16_02_0692", "LAND_1");
 						SetObjectTag("a_bridge_17_13_02_0769", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_48_54_02_0793_00_00", "LAND_1");
 						SetObjectTag("a_bridge_39_15_02_0817", "LAND_1");
 						SetObjectTag("a_bridge_09_43_02_0871", "LAND_1");
 						SetObjectTag("a_bridge_08_43_02_0872", "LAND_1");
@@ -5367,7 +5371,39 @@ public class MyTools
 						SetObjectTag("a_bridge_54_28_02_0958", "LAND_1");
 						SetObjectTag("a_bridge_53_28_02_0959", "LAND_1");
 						SetObjectTag("a_bridge_32_17_02_0963", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_00_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_00_01", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_00_02", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_00_03", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_01_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_01_01", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_01_02", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_01_03", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_02_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_02_01", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_02_02", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_02_03", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_03_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_03_01", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_03_02", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_03_03", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_04_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_04_01", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_04_02", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_04_03", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_05_00", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_05_01", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_05_02", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_08_02_0969_05_03", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_44_12_02_0970_00_00", "WATER_1");
+						SetObjectTag("a_change_terrain_trap_44_12_02_0970_01_00", "WATER_1");
+						SetObjectTag("a_change_terrain_trap_44_12_02_0970_02_00", "WATER_1");
+						SetObjectTag("a_change_terrain_trap_44_12_02_0970_03_00", "WATER_1");
+						SetObjectTag("a_change_terrain_trap_44_12_02_0970_04_00", "WATER_1");
+						SetObjectTag("a_change_terrain_trap_44_12_02_0970_05_00", "LAND_1");
 						SetObjectTag("a_bridge_32_16_02_0991", "LAND_1");
+						SetObjectTag("a_change_terrain_trap_37_10_02_1009_00_00", "LAND_1");
+
 						break;
 				
 				
@@ -8007,7 +8043,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			cap.isTrigger=false;
 			cap.center = new Vector3(0.0f, 0.4f, 0.0f);
 			cap.radius=0.2f;
-			cap.height=0.8f;
+			cap.height=0.7f;
 			break;
 
 			//Medium
@@ -8164,17 +8200,20 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		myObj.AddComponent<a_pit_trap>();
 	}
 
-	static void Create_a_change_terrain_trap(GameObject myObj, int TileX, int TileY, int x, int y)
-	{
-		//Add some gamevars
-		//ObjectVariables objVar =
-		//myObj.AddComponent<ObjectVariables>();
+		static void Create_a_change_terrain_trap(GameObject myObj, int TileX, int TileY, int x, int y)
+		{
+				//Add some gamevars
+				//ObjectVariables objVar =
+				//myObj.AddComponent<ObjectVariables>();
+				Create_a_change_terrain_trap(myObj,TileX,TileY,x,y,10);//Temp version for compatability before I regen all levels
+		}
 
+	static void Create_a_change_terrain_trap(GameObject myObj, int TileX, int TileY, int x, int y, int FloorHeight)
+	{
 		a_change_terrain_trap ctt= myObj.AddComponent<a_change_terrain_trap>();
-		//ctt.TileX=TileX;
-		//ctt.TileY=TileY;
 		ctt.X=x;
 		ctt.Y=y;
+		ctt.NewFloorHeight=FloorHeight;
 	}
 	/*
 	static void Create_a_change_terrain_trap(GameObject myObj, int TileX, int TileY, int x, int y,string Trigger)
@@ -9158,11 +9197,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 	static void CreateWeaponMelee(GameObject myObj, int Slash, int Bash, int Stab, int Skill, int Durability)
 	{
 		WeaponMelee wp = myObj.AddComponent<WeaponMelee>();
-		wp.Slash=Slash;
-		wp.Bash=Bash;
-		wp.Stab=Stab;
-		wp.Skill=Skill;
-		wp.Durability=Durability;
+		//wp.Slash=Slash;
+		//wp.Bash=Bash;
+		//wp.Stab=Stab;
+		//wp.Skill=Skill;
+		//wp.Durability=Durability;
 	}
 
 	static void CreateWeaponRanged(GameObject myObj, int ammoType)
@@ -9180,20 +9219,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			if (tile != null)
 			{
 			tile.tag =tag;
-				switch (tag.Substring(0,4))
-				{
-				case "WATE":
-					tile.layer=LayerMask.NameToLayer ("Water");
-					break;
-				case "SOLI":
-				case "LAND":
-					tile.layer=LayerMask.NameToLayer ("MapMesh");
-					break;
-				case "LAVA":
-					tile.layer=LayerMask.NameToLayer ("Lava");
-					break;
-				}
-
+			SetLayerByTag(tile,tag);
 			}
 		}
 	}
@@ -9204,7 +9230,25 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		if (tile != null)
 		{
 			tile.tag =tag;
+			SetLayerByTag(tile,tag);
 		}
+	}
+
+	static void SetLayerByTag(GameObject tile, string tag)
+	{
+		switch (tag.Substring(0,4))
+		{
+		case "WATE":
+				tile.layer=LayerMask.NameToLayer ("Water");
+				break;
+		case "SOLI":
+		case "LAND":
+				tile.layer=LayerMask.NameToLayer ("MapMesh");
+				break;
+		case "LAVA":
+				tile.layer=LayerMask.NameToLayer ("Lava");
+				break;
+		}	
 	}
 
 	static void SetTileTag(int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsBridge)
@@ -9645,6 +9689,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 		myObj.AddComponent<FishingPole>();
 	}
 
+	static void AddBoulder(GameObject myObj)
+	{
+		myObj.AddComponent<Boulder>();
+	}
+
 	static void AddZanium(GameObject myObj)
 	{
 		myObj.AddComponent<Zanium>();
@@ -9858,7 +9907,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 			{
 				Debug.Log("Transfrom not found"); return;
 			}
-
 				myObj= CreateGameObject("special_tmap_obj_31_01_00_0535",37.799999f,3.600000f,1.270000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 559, 0, 37, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,"uw1_039", "a_use_trigger_99_99_00_0559", 39, false);
@@ -9886,6 +9934,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_large_boulder_09_02_00_0576",11.485714f,0.300000f,2.914286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_340",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", 23, 340, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_blood_stain_14_02_00_0579",17.657143f,2.700000f,2.914286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_222",true);
@@ -9974,7 +10024,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 940, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_dagger_99_99_00_0940", ParentContainer, 0);
 				AddObjectToContainer("a_torch_torches_99_99_00_0936", ParentContainer, 1);
 				AddObjectToContainer("a_map_99_99_00_0941", ParentContainer, 2);
@@ -10073,7 +10123,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_130",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_131", 19, 130, 948, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 250, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_key_99_99_00_0948", ParentContainer, 0);
 				AddObjectToContainer("a_scroll_99_99_00_0956", ParentContainer, 1);
 				AddObjectToContainer("a_rune_bag_99_99_00_0960", ParentContainer, 2);
@@ -10196,7 +10246,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_16_08_00_0580",19.371428f,3.600000f,10.628572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 
 				myObj = new GameObject("a_giant_rat_22_08_00_0254");
 				pos = new Vector3(27.428572f, 3.000000f, 10.457142f);
@@ -10302,7 +10352,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_shortsword_18_10_00_0603",21.771429f,3.600000f,12.171429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_004",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", 1, 4, 0, 9, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 3, 6, 3, 18);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 18);
 
 				myObj= CreateGameObject("special_tmap_obj_23_10_00_0952",28.114285f,3.000000f,12.342857f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 16, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -10338,7 +10388,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 845, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_candle_99_99_00_0845", ParentContainer, 0);
 				AddObjectToContainer("a_mushroom_99_99_00_0614", ParentContainer, 1);
 				AddObjectToContainer("a_cudgel_99_99_00_0613", ParentContainer, 2);
@@ -10379,7 +10429,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 727, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_sling_99_99_00_0727", ParentContainer, 0);
 				AddObjectToContainer("a_sling_stone_99_99_00_0726", ParentContainer, 1);
 				////Container contents complete
@@ -10392,19 +10442,19 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_142",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", 19, 142, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 50, 2, 3);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
 				myObj= CreateGameObject("a_hand_axe_26_12_00_0604",31.371428f,3.000000f,14.914286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_000",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", 1, 0, 0, 14, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 4, 2, 4, 10);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 10);
 
 				myObj= CreateGameObject("a_torch_torches_26_12_00_0605",31.371428f,3.000000f,15.257142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_28_12_00_0583",34.114285f,3.010000f,14.914286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_209",true);
@@ -10555,7 +10605,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_02_15_00_0721",3.428571f,0.300000f,18.685715f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3741468, 3915380);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3806140, 3980052);
 
 				myObj= CreateGameObject("leather_boots_pairs_of_leather_boots_02_15_00_0722",2.914286f,0.300000f,18.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_041",true);
@@ -10668,7 +10718,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_02_18_00_0658",2.420000f,2.700000f,22.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 4, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 
 				myObj= CreateGameObject("a_bone_37_18_00_0809",45.428570f,3.000000f,21.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_196",true);
@@ -10723,7 +10773,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 814, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_ruby_rubies_99_99_00_0814", ParentContainer, 0);
 				////Container contents complete
 
@@ -10845,7 +10895,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_02_25_00_0540",2.571429f,2.700000f,30.857143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 
 
@@ -10879,8 +10929,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_sling_stone_39_27_00_0860",47.142857f,3.000000f,33.257145f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 7, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 7, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_28_28_00_0853",34.114285f,3.600000f,33.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -10927,7 +10977,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_03_33_00_0541",4.457143f,3.600000f,40.285717f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 3, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_buckler_03_33_00_0696",3.942857f,3.600000f,39.771427f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_062",true);
@@ -10976,12 +11026,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_cudgel_53_33_00_0998",64.114288f,3.600000f,40.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_007",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", 1, 7, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 3, 6, 2, 5, 2);
+				CreateWeaponMelee(myObj, 20, 255, 255, 5, 2);
 
 				myObj= CreateGameObject("a_chain_cowl_55_33_00_0804",66.514290f,3.600000f,40.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 3741468, 3934968);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 3806140, 3999640);
 
 
 				myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_34_00_0839",4.285714f,3.600000f,41.657143f);
@@ -10991,8 +11041,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_sling_stone_03_34_00_0957",4.628572f,3.600000f,41.485714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 8, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 8, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 
 
@@ -11076,7 +11126,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 650, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_Mani_stone_99_99_00_0650", ParentContainer, 0);
 				AddObjectToContainer("a_Ylem_stone_99_99_00_0651", ParentContainer, 1);
 				////Container contents complete
@@ -11164,7 +11214,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_11_38_00_0655",14.228572f,3.600000f,45.771431f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 5, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 
 				myObj = new GameObject("a_lurker_26_38_00_0223");
 				pos = new Vector3(31.714285f, 0.900000f, 46.114288f);
@@ -11242,7 +11292,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 9, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
 
-
 				myObj= CreateGameObject("a_plant_38_39_00_0555",45.771431f,3.600000f,46.971432f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_206",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_206", "UW1/Sprites/Objects/OBJECTS_206", "UW1/Sprites/Objects/OBJECTS_206", 24, 206, 1, 40, 0, 0, 0, 0, 1, 1, 0, 0, 1);
@@ -11256,7 +11305,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 684, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_sceptre_99_99_00_0684", ParentContainer, 0);
 				AddObjectToContainer("a_leather_vest_99_99_00_0682", ParentContainer, 1);
 				AddObjectToContainer("an_axe_99_99_00_0683", ParentContainer, 2);
@@ -11485,7 +11534,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_36_47_00_0618",44.228569f,2.700000f,57.428570f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_buckler_37_47_00_1020",44.914288f,2.700000f,57.580002f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_062",true);
@@ -11603,7 +11652,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_349",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_349", "UW1/Sprites/Objects/OBJECTS_349", "UW1/Sprites/Objects/OBJECTS_349", 19, 349, 570, 40, 6, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_coin_99_99_00_0747", ParentContainer, 0);
 				AddObjectToContainer("a_sapphire_99_99_00_0746", ParentContainer, 1);
 				AddObjectToContainer("an_amulet_99_99_00_0745", ParentContainer, 2);
@@ -11618,7 +11667,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 749, 40, 6, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_loaf_of_bread_loaves_of_bread_99_99_00_0749", ParentContainer, 0);
 				////Container contents complete
 
@@ -11627,7 +11676,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 748, 40, 6, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_00_0748", ParentContainer, 0);
 				////Container contents complete
 
@@ -11636,7 +11685,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 757, 40, 6, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_fish_fish_99_99_00_0757", ParentContainer, 0);
 				////Container contents complete
 
@@ -12043,7 +12092,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 694, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_sling_stone_99_99_00_0694", ParentContainer, 0);
 				AddObjectToContainer("a_sling_stone_99_99_00_0958", ParentContainer, 1);
 				////Container contents complete
@@ -12052,13 +12101,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_57_58_00_0703",69.085716f,3.600000f,70.457146f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 1, 40, 9, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 
 				myObj= CreateGameObject("a_gold_coffer_57_58_00_0709",68.914284f,3.600000f,70.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 708, 40, 9, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_coin_99_99_00_0708", ParentContainer, 0);
 				AddObjectToContainer("a_ruby_rubies_99_99_00_0707", ParentContainer, 1);
 				AddObjectToContainer("a_sapphire_99_99_00_0706", ParentContainer, 2);
@@ -12140,7 +12189,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 705, 40, 9, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_fish_fish_99_99_00_0705", ParentContainer, 0);
 				////Container contents complete
 
@@ -12149,7 +12198,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 704, 40, 9, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_loaf_of_bread_loaves_of_bread_99_99_00_0704", ParentContainer, 0);
 				////Container contents complete
 
@@ -12158,7 +12207,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 0, 40, 9, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -12633,7 +12682,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_99_99_00_0122",119.828575f,0.375000f,119.485710f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 				//Supplementary object 201
 				myObj = new GameObject("a_goblin_99_99_00_0201");
 				pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
@@ -12722,7 +12771,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_cudgel_99_99_00_0613",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_007",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", 1, 7, 0, 19, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 3, 6, 2, 5, 2);
+				CreateWeaponMelee(myObj, 20, 255, 255, 5, 2);
 				//Supplementary object 614
 				myObj= CreateGameObject("a_mushroom_99_99_00_0614",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_184",true);
@@ -12745,7 +12794,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_99_99_00_0680",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 0, 30, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3741468, 3741504);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3806140, 3806176);
 				//Supplementary object 681
 				myObj= CreateGameObject("leather_leggings_pairs_of_leather_leggings_99_99_00_0681",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_035",true);
@@ -12760,7 +12809,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("an_axe_99_99_00_0683",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 0, 28, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 				//Supplementary object 684
 				myObj= CreateGameObject("a_sceptre_99_99_00_0684",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_170",true);
@@ -12770,8 +12819,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 694
 				myObj= CreateGameObject("a_sling_stone_99_99_00_0694",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 22, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 22, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 704
 				myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_99_99_00_0704",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_177",true);
@@ -12797,12 +12846,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 9, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-
 				//Supplementary object 726
 				myObj= CreateGameObject("a_sling_stone_99_99_00_0726",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 6, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 6, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 727
 				myObj= CreateGameObject("a_sling_99_99_00_0727",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_024",true);
@@ -12823,7 +12871,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 6, 40, 6, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-
 				//Supplementary object 748
 				myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_00_0748",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_176",true);
@@ -12856,7 +12903,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_99_99_00_0845",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 2, 31, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 				//Supplementary object 934
 				myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_99_99_00_0934",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_177",true);
@@ -12871,12 +12918,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_00_0936",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 940
 				myObj= CreateGameObject("a_dagger_99_99_00_0940",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 15, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 				//Supplementary object 941
 				myObj= CreateGameObject("a_map_99_99_00_0941",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_315",true);
@@ -12916,8 +12963,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 958
 				myObj= CreateGameObject("a_sling_stone_99_99_00_0958",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 14, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 14, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 959
 				myObj= CreateGameObject("an_apple_99_99_00_0959",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_179",true);
@@ -12975,9 +13022,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_small_boulder_36_02_01_0550",43.371429f,3.600000f,3.428571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_small_boulder_36_02_01_0559",43.371429f,3.600000f,3.085714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_stalactite_36_02_01_0552",43.371429f,4.500000f,2.742857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_211",true);
@@ -13010,7 +13061,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_140",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", 19, 140, 0, 40, 10, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 200, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -13054,12 +13105,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_shortsword_61_03_01_0991",74.228569f,1.200000f,4.457143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_004",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", 1, 4, 0, 63, 10, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 3, 6, 3, 18);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 18);
 
 				myObj= CreateGameObject("a_hand_axe_61_03_01_0923",74.228569f,1.200000f,4.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_000",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", 1, 0, 0, 63, 10, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 4, 2, 4, 10);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 10);
 
 				myObj = new GameObject("a_skeleton_22_04_01_0207");
 				pos = new Vector3(27.428572f, 3.600000f, 5.828571f);
@@ -13132,7 +13183,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_21_05_01_0754",25.714285f,3.600000f,7.028571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 
 				myObj= CreateGameObject("an_oil_flask_21_05_01_0755",25.885715f,3.600000f,6.171429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_301",true);
@@ -13160,7 +13211,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_59_05_01_0992",70.971428f,1.200000f,6.171429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 63, 10, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_campfire_59_05_01_0922",71.314285f,1.200000f,6.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_298",true);
@@ -13174,7 +13225,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 15, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-
 
 				myObj = new GameObject("a_mountainman_mountainmen_12_06_01_0238");
 				pos = new Vector3(14.742858f, 1.800000f, 8.057143f);
@@ -13320,7 +13370,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 13, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
 
-
 				myObj = new GameObject("a_mountainman_mountainmen_09_08_01_0255");
 				pos = new Vector3(11.314286f, 2.400000f, 10.114285f);
 				myObj.transform.position = pos;
@@ -13342,10 +13391,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 17, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_10_08_01_0612",12.514286f,2.100000f,10.114285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 17, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("a_fishing_pole_35_08_01_0910",43.180000f,1.500000f,10.285714f);
@@ -13373,10 +13418,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 13, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_09_09_01_0613",11.314286f,2.400000f,11.314286f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 13, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_cauldron_35_09_01_0913",42.514286f,1.500000f,10.820000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_303",true);
@@ -13414,10 +13455,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 13, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_09_10_01_0611",11.314286f,2.100000f,12.514286f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 13, 40, 10, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_mountainman_mountainmen_12_10_01_0237");
 				pos = new Vector3(14.742858f, 1.800000f, 12.342857f);
@@ -13456,10 +13493,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_27_10_01_0633",32.914284f,3.600000f,12.857142f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_acid_slug_27_10_01_0204");
 				pos = new Vector3(33.428574f, 3.600000f, 12.857142f);
@@ -13475,7 +13508,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_crown_28_10_01_0630",33.771427f,3.600000f,13.028572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_048",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_048", "UW1/Sprites/Objects/OBJECTS_048", "uw1/Hud/armour/armor_f_0061", 73, 48, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 3348596, 3501032);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 6362164, 6514600);
 
 				myObj= CreateGameObject("a_blood_stain_41_10_01_0672",49.810287f,3.112500f,12.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_222",true);
@@ -13507,7 +13540,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_chain_cowl_27_11_01_0635",32.914284f,3.600000f,13.714286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 0, 29, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 3348596, 3502212);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 6362164, 6515780);
 
 
 
@@ -13539,10 +13572,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 10, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_58_13_01_0808",70.114288f,2.308500f,16.114286f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 10, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_blood_stain_58_13_01_0692",70.628571f,2.372500f,16.457142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_222",true);
@@ -13550,7 +13579,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_cudgel_58_13_01_0693",69.771431f,2.244500f,15.771428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_007",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", 1, 7, 0, 46, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 3, 6, 2, 5, 2);
+				CreateWeaponMelee(myObj, 20, 255, 255, 5, 2);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_59_13_01_0691",70.971428f,2.400000f,16.628572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_210",true);
@@ -13739,37 +13768,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_09_19_01_0952",11.485714f,0.000000f,23.485716f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_10_19_01_0941",12.171429f,0.000000f,23.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_10_19_01_0941",12.171429f,0.000000f,23.142857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_10_19_01_0951",13.028572f,0.000000f,23.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_10_19_01_0951",13.028572f,0.000000f,23.657143f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_10_19_01_0986",12.171429f,0.000000f,23.828571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_10_19_01_0986",12.171429f,0.000000f,23.828571f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_piece_of_cheese_pieces_of_cheese_29_19_01_0964",35.828571f,3.300000f,23.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_178",true);
@@ -13795,28 +13808,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_08_20_01_0764",10.457142f,0.300000f,25.180000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_09_20_01_0765",10.820000f,0.300000f,25.180000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_09_20_01_0765",10.820000f,0.300000f,25.180000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_10_20_01_0953",12.342857f,0.000000f,24.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_10_20_01_0953",12.342857f,0.000000f,24.342857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_fountain_20_20_01_0961",24.514284f,3.000000f,24.514284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_302",true);
@@ -13958,12 +13959,18 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_large_boulder_42_23_01_0853",51.428570f,3.600000f,28.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_339",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_339", "UW1/Sprites/Objects/OBJECTS_339", "UW1/Sprites/Objects/OBJECTS_339", 23, 339, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_large_boulder_42_23_01_0852",50.914288f,3.600000f,28.628572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_339",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_339", "UW1/Sprites/Objects/OBJECTS_339", "UW1/Sprites/Objects/OBJECTS_339", 23, 339, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_large_boulder_42_23_01_0857",50.742855f,3.600000f,27.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_339",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_339", "UW1/Sprites/Objects/OBJECTS_339", "UW1/Sprites/Objects/OBJECTS_339", 23, 339, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_mail_shirt_47_23_01_0747",57.580002f,3.600000f,28.457144f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_033",true);
@@ -14107,7 +14114,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 583, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_torch_torches_99_99_01_0583", ParentContainer, 0);
 				AddObjectToContainer("an_axe_99_99_01_0594", ParentContainer, 1);
 				AddObjectToContainer("a_dagger_99_99_01_0593", ParentContainer, 2);
@@ -14154,7 +14161,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 581, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_loaf_of_bread_loaves_of_bread_99_99_01_0581", ParentContainer, 0);
 				AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_01_0580", ParentContainer, 1);
 				AddObjectToContainer("an_ear_of_corn_ears_of_corn_99_99_01_0597", ParentContainer, 2);
@@ -14165,7 +14172,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 603, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_rock_hammer_99_99_01_0603", ParentContainer, 0);
 				AddObjectToContainer("an_oil_flask_99_99_01_0607", ParentContainer, 1);
 				AddObjectToContainer("some_leeches_bunches_of_leeches_99_99_01_0598", ParentContainer, 2);
@@ -14176,7 +14183,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_140",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", 19, 140, 569, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 200, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_crossbow_bolt_99_99_01_0569", ParentContainer, 0);
 				AddObjectToContainer("a_buckler_99_99_01_0568", ParentContainer, 1);
 				////Container contents complete
@@ -14201,7 +14208,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 811, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_Por_stone_99_99_01_0811", ParentContainer, 0);
 				AddObjectToContainer("a_Ylem_stone_99_99_01_0810", ParentContainer, 1);
 				////Container contents complete
@@ -14211,7 +14218,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -14327,7 +14334,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_130",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_131", 19, 130, 709, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 250, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_torch_torches_99_99_01_0709", ParentContainer, 0);
 				AddObjectToContainer("an_ear_of_corn_ears_of_corn_99_99_01_0708", ParentContainer, 1);
 				AddObjectToContainer("a_flask_of_port_flasks_of_port_99_99_01_0707", ParentContainer, 2);
@@ -14379,7 +14386,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 861, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_map_case_99_99_01_0861", ParentContainer, 0);
 				AddObjectToContainer("an_Uus_stone_99_99_01_0809", ParentContainer, 1);
 				////Container contents complete
@@ -14442,7 +14449,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_140",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", 19, 140, 863, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 200, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_spike_99_99_01_0863", ParentContainer, 0);
 				////Container contents complete
 
@@ -14454,7 +14461,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 652, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_torch_torches_99_99_01_0652", ParentContainer, 0);
 				AddObjectToContainer("a_block_of_incense_blocks_of_incense_99_99_01_0651", ParentContainer, 1);
 				////Container contents complete
@@ -14488,7 +14495,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_58_37_01_0703",69.942856f,3.600000f,45.257145f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 0, 18, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3348596, 3518260);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 6362164, 6531828);
 
 
 				myObj= CreateGameObject("special_tmap_obj_08_38_01_1009",10.730000f,3.600000f,46.200001f);
@@ -14538,7 +14545,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_chain_cowl_36_38_01_0748",43.220001f,3.600000f,46.457142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 0, 29, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 3348596, 3528880);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 6362164, 6542448);
 
 				myObj= CreateGameObject("a_scroll_36_38_01_0767",43.714287f,3.600000f,46.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_319",true);
@@ -14640,8 +14647,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("an_arrow_09_44_01_0696",10.971428f,0.000000f,53.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 13, 22, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 13, 22, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj = new GameObject("a_headless_headlesses_09_44_01_0240");
 				pos = new Vector3(11.314286f, 0.000000f, 53.314285f);
@@ -14673,7 +14680,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_23_46_01_0698",27.771429f,0.000000f,55.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3348596, 3517080);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 6362164, 6530648);
 
 
 
@@ -14696,12 +14703,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_longsword_59_47_01_0605",71.657143f,3.600000f,56.742855f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_005",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", 1, 5, 0, 26, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 28);
 
 				myObj= CreateGameObject("a_crossbow_bolt_19_48_01_0697",23.657143f,0.000000f,57.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_017",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 1, 17, 13, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 16, 17, 13, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_key_27_48_01_0876",32.914284f,2.700000f,58.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_267",true);
@@ -14769,7 +14776,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_battle_axe_41_50_01_0753",49.714287f,3.600000f,60.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_001",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", 1, 1, 0, 32, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 34);
 
 
 
@@ -14886,7 +14893,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_349",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_349", "UW1/Sprites/Objects/OBJECTS_349", "UW1/Sprites/Objects/OBJECTS_349", 19, 349, 822, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_Mani_stone_99_99_01_0822", ParentContainer, 0);
 				AddObjectToContainer("a_mace_99_99_01_0820", ParentContainer, 1);
 				AddObjectToContainer("a_Hur_stone_99_99_01_0821", ParentContainer, 2);
@@ -14981,17 +14988,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("an_arrow_58_55_01_0647",69.620003f,2.400000f,66.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_59_55_01_0642",71.142853f,2.400000f,66.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 16, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_59_55_01_0642",71.142853f,2.400000f,66.342857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 16, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_bone_59_55_01_0644",71.314285f,2.400000f,66.514290f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_196",true);
@@ -15017,7 +15020,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_15_56_01_0695",18.857141f,0.000000f,67.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_55_56_01_0629",67.180000f,2.400000f,68.057144f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_210",true);
@@ -15144,7 +15147,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 608, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_sling_stone_99_99_01_0608", ParentContainer, 0);
 				AddObjectToContainer("a_sling_99_99_01_0579", ParentContainer, 1);
 				AddObjectToContainer("a_sling_99_99_01_0578", ParentContainer, 2);
@@ -15173,7 +15176,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -15201,6 +15204,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_39_60_01_0660",47.657143f,2.100000f,72.171432f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("special_tmap_obj_39_60_01_1013",47.400002f,2.100000f,73.129997f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 45, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -15287,7 +15292,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_60_61_01_0641",73.028572f,2.400000f,74.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 2, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 
 				//UW Triggers and Traps
 				myObj= CreateGameObject("a_set_variable_trap_99_99_01_0004",120.000000f,1.387500f,119.142860f);
@@ -15860,7 +15865,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_99_99_01_0122",119.828575f,0.375000f,119.485710f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 				//Supplementary object 212
 				myObj = new GameObject("a_goblin_99_99_01_0212");
 				pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
@@ -15931,7 +15936,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_99_99_01_0562",119.314285f,1.200000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 				//Supplementary object 563
 				myObj= CreateGameObject("plate_gauntlets_pairs_of_plate_gauntlets_99_99_01_0563",119.314285f,1.200000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_040",true);
@@ -15941,7 +15946,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("an_axe_99_99_01_0564",119.314285f,1.200000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 				//Supplementary object 565
 				myObj= CreateGameObject("a_red_potion_99_99_01_0565",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_187",true);
@@ -15960,13 +15965,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 569
 				myObj= CreateGameObject("a_crossbow_bolt_99_99_01_0569",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_017",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 1, 17, 20, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 16, 17, 20, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 577
 				myObj= CreateGameObject("a_light_mace_99_99_01_0577",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_008",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", 1, 8, 0, 54, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 10, 4, 5, 15);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 15);
 				//Supplementary object 578
 				myObj= CreateGameObject("a_sling_99_99_01_0578",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_024",true);
@@ -15991,17 +15996,17 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_01_0583",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 3, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 593
 				myObj= CreateGameObject("a_dagger_99_99_01_0593",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 32, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 				//Supplementary object 594
 				myObj= CreateGameObject("an_axe_99_99_01_0594",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 0, 23, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 				//Supplementary object 597
 				myObj= CreateGameObject("an_ear_of_corn_ears_of_corn_99_99_01_0597",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_180",true);
@@ -16025,13 +16030,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 608
 				myObj= CreateGameObject("a_sling_stone_99_99_01_0608",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 44, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 44, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 609
 				myObj= CreateGameObject("a_dagger_99_99_01_0609",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 705, 7, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 				//Supplementary object 651
 				myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_99_99_01_0651",119.314285f,2.700000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_278",true);
@@ -16041,7 +16046,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_01_0652",119.314285f,2.700000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 4, 52, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 706
 				myObj= CreateGameObject("a_bottle_of_ale_bottles_of_ale_99_99_01_0706",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_186",true);
@@ -16061,7 +16066,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_01_0709",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 4, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 766
 				myObj= CreateGameObject("the_Gem_Cutter_of_Coulnes_99_99_01_0766",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_275",true);
@@ -16098,7 +16103,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_99_99_01_0820",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 50, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 				//Supplementary object 821
 				myObj= CreateGameObject("a_Hur_stone_99_99_01_0821",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_224",true);
@@ -16113,7 +16118,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_hand_axe_99_99_01_0849",119.314285f,0.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_000",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", 1, 0, 0, 10, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 4, 2, 4, 10);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 10);
 				//Supplementary object 855
 				myObj= CreateGameObject("chain_boots_pairs_of_chain_boots_99_99_01_0855",119.314285f,0.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_042",true);
@@ -16124,10 +16129,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_99_99_01_0856",119.314285f,0.000000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 860
 				myObj= CreateGameObject("a_scroll_99_99_01_0860",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_312",true);
@@ -16139,7 +16140,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_136",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_137", 19, 136, 860, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 30, 2, 2);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_01_0860", ParentContainer, 0);
 				////Container contents complete
 
@@ -16152,14 +16153,14 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_chain_cowl_99_99_01_0979",119.314285f,0.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 0, 54, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 3348596, 3348632);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 6362164, 6362200);
 				//Supplementary object 1012
 				//Supplementary object 1017
 				//Supplementary object 1020
 				myObj= CreateGameObject("a_jeweled_axe_99_99_01_1020",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_011",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_011", "UW1/Sprites/Objects/OBJECTS_011", "UW1/Sprites/Objects/OBJECTS_011", 1, 11, 714, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 13, 8, 5, 4, 255);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 255);
 
 		}
 
@@ -16178,7 +16179,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				{
 						Debug.Log("Transfrom not found"); return;
 				}
-
 				myObj = new GameObject("a_giant_rat_21_02_02_0228");
 				pos = new Vector3(25.714285f, 3.600000f, 2.914286f);
 				myObj.transform.position = pos;
@@ -16190,13 +16190,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				////Container contents
 				ParentContainer = CreateContainer(myObj, 255, 255, 255);
 
-				myObj= CreateGameObject("special_tmap_obj_42_02_02_1005",51.530003f,3.600000f,3.000000f);
+				myObj= CreateGameObject("special_tmap_obj_42_02_02_1005",51.560001f,3.600000f,3.000000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_141", "" , 141, false);
 				SetRotation(myObj,0,90,0);
 
 
-				myObj= CreateGameObject("special_tmap_obj_05_03_02_0904",6.600000f,3.600000f,4.730000f);
+				myObj= CreateGameObject("special_tmap_obj_05_03_02_0904",6.600000f,3.600000f,4.760000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_140", "" , 140, false);
 				SetRotation(myObj,0,0,0);
@@ -16286,9 +16286,9 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_22_06_02_0909",26.571428f,2.700000f,7.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 10, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
-				myObj= CreateGameObject("special_tmap_obj_23_06_02_0911",28.200001f,2.700000f,7.270000f);
+				myObj= CreateGameObject("special_tmap_obj_23_06_02_0911",28.200001f,2.700000f,7.240000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 14, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_153", "" , 153, false);
 				SetRotation(myObj,0,180,0);
@@ -16486,7 +16486,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_light_mace_42_08_02_0616",50.742855f,3.600000f,9.942857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_008",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", 1, 8, 712, 18, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 6, 10, 4, 5, 15);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 15);
 
 
 				myObj = new GameObject("a_ghost_57_08_02_0191");
@@ -16608,7 +16608,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				////Container contents complete
 
 
-				myObj= CreateGameObject("special_tmap_obj_37_09_02_1010",45.000000f,3.600000f,11.929999f);
+				myObj= CreateGameObject("special_tmap_obj_37_09_02_1010",45.000000f,3.600000f,11.959999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 1007, 40, 3, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,"uw1_168", "a_look_trigger_99_99_02_1007", 168, false);
 				SetRotation(myObj,0,0,0);
@@ -16631,7 +16631,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				ParentContainer = CreateContainer(myObj, 255, 255, 255);
 
 
-				myObj= CreateGameObject("special_tmap_obj_25_10_02_0558",31.130001f,2.400000f,12.600000f);
+				myObj= CreateGameObject("special_tmap_obj_25_10_02_0558",31.160000f,2.400000f,12.600000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 25, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_150", "" , 150, false);
 				SetRotation(myObj,0,90,0);
@@ -16649,14 +16649,14 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_40_11_02_0650",49.028568f,3.600000f,14.228572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 711, 17, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 				AddPickupLink(myObj, "a_pick_up_trigger_99_99_02_0711");
 
 				myObj= CreateGameObject("a_box_boxes_40_11_02_0656",49.028568f,3.600000f,13.714286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 647, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_ruby_rubies_99_99_02_0647", ParentContainer, 0);
 				AddObjectToContainer("a_Rel_stone_99_99_02_0655", ParentContainer, 1);
 				AddObjectToContainer("a_wand_99_99_02_0652", ParentContainer, 2);
@@ -16704,7 +16704,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				AddPickupLink(myObj, "a_pick_up_trigger_99_99_02_0821");
 
 
-				myObj= CreateGameObject("special_tmap_obj_52_12_02_0588",63.000000f,3.600000f,15.530000f);
+				myObj= CreateGameObject("special_tmap_obj_52_12_02_0588",63.000000f,3.600000f,15.559999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 586, 40, 2, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,"uw1_152", "a_look_trigger_99_99_02_0586", 152, false);
 				SetRotation(myObj,0,0,0);
@@ -16806,7 +16806,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 766, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_sapphire_99_99_02_0766", ParentContainer, 0);
 				AddObjectToContainer("a_fish_fish_99_99_02_0765", ParentContainer, 1);
 				////Container contents complete
@@ -16964,16 +16964,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_light_mace_13_24_02_0563",15.942858f,3.600000f,29.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_008",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", 1, 8, 0, 49, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 10, 4, 5, 15);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 15);
 
 				myObj= CreateGameObject("a_coin_13_24_02_0561",16.114286f,3.600000f,29.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 3, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_13_24_02_0561",16.114286f,3.600000f,29.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 3, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("mail_leggings_pairs_of_mail_leggings_13_24_02_0562",15.942858f,3.600000f,29.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_036",true);
@@ -17090,7 +17086,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 565, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_key_99_99_02_0565", ParentContainer, 0);
 				AddObjectToContainer("a_ruby_rubies_99_99_02_0567", ParentContainer, 1);
 				AddObjectToContainer("a_green_potion_99_99_02_0566", ParentContainer, 2);
@@ -17422,13 +17418,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_23_32_02_0624",28.457144f,3.600000f,38.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 5, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_quiver_23_32_02_0629",28.457144f,3.600000f,38.571426f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_141",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", 19, 141, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 0, 2, 1);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -17503,7 +17499,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 571, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_green_potion_99_99_02_0571", ParentContainer, 0);
 				AddObjectToContainer("a_Por_stone_99_99_02_0641", ParentContainer, 1);
 				AddObjectToContainer("an_Ort_stone_99_99_02_0576", ParentContainer, 2);
@@ -17536,7 +17532,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_18_34_02_0621",21.942856f,3.600000f,41.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 713, 19, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3348024, 3498336);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 5837992, 5988304);
 
 				myObj = new GameObject("a_wolf_spider_18_34_02_0215");
 				pos = new Vector3(22.780001f, 3.600000f, 41.314285f);
@@ -17564,7 +17560,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_209", "UW1/Sprites/Objects/OBJECTS_209", "UW1/Sprites/Objects/OBJECTS_209", 23, 209, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddObj_base(myObj);
 
-				myObj= CreateGameObject("special_tmap_obj_32_35_02_0952",39.000000f,3.600000f,42.070000f);
+				myObj= CreateGameObject("special_tmap_obj_32_35_02_0952",39.000000f,3.600000f,42.040001f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 23, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_127", "" , 127, false);
 				SetRotation(myObj,0,180,0);
@@ -17594,7 +17590,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 
 
-				myObj= CreateGameObject("special_tmap_obj_24_36_02_0983",28.869999f,3.600000f,43.799999f);
+				myObj= CreateGameObject("special_tmap_obj_24_36_02_0983",28.840000f,3.600000f,43.799999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 512, 40, 47, 0, 0, 0, 0, 1, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_141", "" , 141, false);
 				SetRotation(myObj,0,270,0);
@@ -17603,7 +17599,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 695, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_02_0695", ParentContainer, 0);
 				AddObjectToContainer("a_key_99_99_02_0865", ParentContainer, 1);
 				////Container contents complete
@@ -17731,7 +17727,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				////Container contents complete
 
 
-				myObj= CreateGameObject("special_tmap_obj_49_38_02_0742",59.930000f,3.600000f,46.200001f);
+				myObj= CreateGameObject("special_tmap_obj_49_38_02_0742",59.959999f,3.600000f,46.200001f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 22, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_040", "" , 40, false);
 				SetRotation(myObj,0,90,0);
@@ -17773,6 +17769,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_49_39_02_0824",59.485714f,3.600000f,47.485714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_plant_03_40_02_0781",3.803429f,2.400000f,48.685715f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_207",true);
@@ -17803,13 +17801,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_35_40_02_0703",42.020000f,3.600000f,48.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_sack_35_40_02_0666",43.028568f,3.600000f,49.028568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 808, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_dagger_99_99_02_0808", ParentContainer, 0);
 				AddObjectToContainer("a_key_99_99_02_0632", ParentContainer, 1);
 				AddObjectToContainer("an_apple_99_99_02_0699", ParentContainer, 2);
@@ -17852,12 +17850,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_218", "UW1/Sprites/Objects/OBJECTS_218", "UW1/Sprites/Objects/OBJECTS_218", 69, 218, 1, 40, 0, 0, 1, 0, 1, 1, 0, 0, 1);
 
-				myObj= CreateGameObject("special_tmap_obj_01_41_02_0941",1.800000f,2.400000f,50.330002f);
+				myObj= CreateGameObject("special_tmap_obj_01_41_02_0941",1.800000f,2.400000f,50.360001f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 25, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_150", "" , 150, false);
 				SetRotation(myObj,0,0,0);
 
-				myObj= CreateGameObject("special_tmap_obj_02_41_02_0940",3.000000f,2.400000f,50.330002f);
+				myObj= CreateGameObject("special_tmap_obj_02_41_02_0940",3.000000f,2.400000f,50.360001f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 25, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_150", "" , 150, false);
 				SetRotation(myObj,0,0,0);
@@ -17917,12 +17915,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				SetReadable(myObj);
 				SetLink(myObj,582);
 
-				myObj= CreateGameObject("special_tmap_obj_08_44_02_0690",10.200000f,1.800000f,53.930000f);
+				myObj= CreateGameObject("special_tmap_obj_08_44_02_0690",10.200000f,1.800000f,53.959999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 25, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_150", "" , 150, false);
 				SetRotation(myObj,0,0,0);
 
-				myObj= CreateGameObject("special_tmap_obj_09_44_02_0873",11.400000f,1.800000f,53.930000f);
+				myObj= CreateGameObject("special_tmap_obj_09_44_02_0873",11.400000f,1.800000f,53.959999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 25, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_150", "" , 150, false);
 				SetRotation(myObj,0,0,0);
@@ -17965,7 +17963,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_136",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_137", 19, 136, 720, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 30, 2, 2);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_02_0720", ParentContainer, 0);
 				////Container contents complete
 
@@ -17973,7 +17971,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_38_44_02_0730",46.114288f,3.600000f,53.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 1, 22, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 
 				myObj= CreateGameObject("a_wooden_shield_38_44_02_0732",46.285713f,3.600000f,52.971432f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_060",true);
@@ -17993,7 +17991,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_battle_axe_38_44_02_0823",45.942856f,3.600000f,53.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_001",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", 1, 1, 0, 42, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 34);
 
 				myObj= CreateGameObject("a_switch_38_44_02_0738",45.619999f,4.200000f,53.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_371",false);
@@ -18030,7 +18028,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("some_grass_bunches_of_grass_22_46_02_0555",26.603428f,3.112500f,55.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_193",true);
 
-				myObj= CreateGameObject("special_tmap_obj_26_46_02_0960",32.330002f,3.032000f,55.799999f);
+				myObj= CreateGameObject("special_tmap_obj_26_46_02_0960",32.360001f,3.032000f,55.799999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 22, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_040", "" , 40, false);
 				SetRotation(myObj,0,90,0);
@@ -18081,7 +18079,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_helmet_54_50_02_0901",65.142853f,3.600000f,61.028568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 0, 25, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 3348024, 3564416);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 5837992, 6054384);
 
 				myObj= CreateGameObject("a_skull_54_50_02_0930",64.971428f,3.600000f,60.685715f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_194",true);
@@ -18097,18 +18095,14 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 8, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_54_50_02_0939",64.971428f,3.600000f,60.342857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 8, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_lantern_54_50_02_0938",65.314285f,3.562500f,60.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 
 
-				myObj= CreateGameObject("special_tmap_obj_07_51_02_0920",9.000000f,0.600000f,61.270000f);
+				myObj= CreateGameObject("special_tmap_obj_07_51_02_0920",9.000000f,0.600000f,61.240002f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_141", "" , 141, false);
 				SetRotation(myObj,0,180,0);
@@ -18152,7 +18146,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_hand_axe_54_51_02_0895",65.657143f,3.600000f,61.220001f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_000",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", "UW1/Sprites/Objects/OBJECTS_000", 1, 0, 712, 16, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 6, 4, 2, 4, 10);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 10);
 
 				myObj= CreateGameObject("a_breastplate_54_51_02_0899",65.314285f,3.600000f,61.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_034",true);
@@ -18192,17 +18186,17 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				////Container contents
 				ParentContainer = CreateContainer(myObj, 255, 255, 255);
 
-				myObj= CreateGameObject("special_tmap_obj_33_52_02_0678",40.200001f,1.800000f,62.469997f);
+				myObj= CreateGameObject("special_tmap_obj_33_52_02_0678",40.200001f,1.800000f,62.439999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_144", "" , 144, false);
 				SetRotation(myObj,0,180,0);
 
-				myObj= CreateGameObject("special_tmap_obj_33_52_02_0729",40.200001f,3.000000f,62.469997f);
+				myObj= CreateGameObject("special_tmap_obj_33_52_02_0729",40.200001f,3.000000f,62.439999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_144", "" , 144, false);
 				SetRotation(myObj,0,180,0);
 
-				myObj= CreateGameObject("special_tmap_obj_33_52_02_0735",40.200001f,3.600000f,62.469997f);
+				myObj= CreateGameObject("special_tmap_obj_33_52_02_0735",40.200001f,3.600000f,62.439999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_144", "" , 144, false);
 				SetRotation(myObj,0,180,0);
@@ -18212,7 +18206,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_141",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", 19, 141, 812, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 0, 2, 1);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("an_arrow_99_99_02_0812", ParentContainer, 0);
 				////Container contents complete
 
@@ -18230,13 +18224,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_49_52_02_0601",59.828568f,1.500000f,62.571430f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 0, 32, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 
 				myObj= CreateGameObject("a_pouch_pouches_49_52_02_0675",59.314285f,1.500000f,62.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 600, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_pick_up_trigger_99_99_02_0600", ParentContainer, 0);
 				AddObjectToContainer("a_red_potion_99_99_02_0665", ParentContainer, 1);
 				AddObjectToContainer("a_Ylem_stone_99_99_02_0658", ParentContainer, 2);
@@ -18280,17 +18274,17 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				ParentContainer = CreateContainer(myObj, 255, 255, 255);
 
 
-				myObj= CreateGameObject("special_tmap_obj_56_53_02_0534",68.329994f,3.600000f,64.199997f);
+				myObj= CreateGameObject("special_tmap_obj_56_53_02_0534",68.360001f,3.600000f,64.199997f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_198", "" , 198, false);
 				SetRotation(myObj,0,90,0);
 
-				myObj= CreateGameObject("special_tmap_obj_56_53_02_0926",68.329994f,3.300000f,64.199997f);
+				myObj= CreateGameObject("special_tmap_obj_56_53_02_0926",68.360001f,3.300000f,64.199997f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 537, 0, 11, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,"uw1_198", "a_look_trigger_99_99_02_0537", 198, false);
 				SetRotation(myObj,0,90,0);
 
-				myObj= CreateGameObject("special_tmap_obj_57_53_02_0541",68.470001f,3.600000f,64.199997f);
+				myObj= CreateGameObject("special_tmap_obj_57_53_02_0541",68.439995f,3.600000f,64.199997f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_198", "" , 198, false);
 				SetRotation(myObj,0,270,0);
@@ -18309,7 +18303,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_58_53_02_0542",70.285713f,3.300000f,64.285713f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3348024, 3479692);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 5837992, 5969660);
 
 				myObj= CreateGameObject("a_leather_vest_58_53_02_0552",70.457146f,3.300000f,64.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_032",true);
@@ -18320,7 +18314,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 918, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_key_99_99_02_0918", ParentContainer, 0);
 				////Container contents complete
 
@@ -18421,7 +18415,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("an_axe_48_55_02_0679",58.779999f,1.500000f,67.180000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 0, 12, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 
 				myObj= CreateGameObject("a_lever_48_55_02_0680",58.779999f,2.100000f,66.857147f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_373",false);
@@ -18433,7 +18427,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_blood_stain_48_55_02_0814",58.114288f,1.500000f,67.028572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_222",true);
 
-				myObj= CreateGameObject("special_tmap_obj_48_55_02_0794",58.200001f,1.500000f,66.070000f);
+				myObj= CreateGameObject("special_tmap_obj_48_55_02_0794",58.200001f,1.500000f,66.039993f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 661, 40, 0, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,"uw1_144", "a_look_trigger_99_99_02_0661", 144, false);
 				SetRotation(myObj,0,180,0);
@@ -18542,18 +18536,18 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 
 
-				myObj= CreateGameObject("special_tmap_obj_07_60_02_0922",9.000000f,0.600000f,73.129997f);
+				myObj= CreateGameObject("special_tmap_obj_07_60_02_0922",9.000000f,0.600000f,73.160004f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 47, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_141", "" , 141, false);
 				SetRotation(myObj,0,0,0);
 
-				myObj= CreateGameObject("special_tmap_obj_38_60_02_0627",46.200001f,3.600000f,72.070000f);
+				myObj= CreateGameObject("special_tmap_obj_38_60_02_0627",46.200001f,3.600000f,72.039993f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 36, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_161", "" , 161, false);
 				SetRotation(myObj,0,180,0);
 
 
-				myObj= CreateGameObject("special_tmap_obj_42_60_02_0626",51.000000f,3.600000f,72.070000f);
+				myObj= CreateGameObject("special_tmap_obj_42_60_02_0626",51.000000f,3.600000f,72.039993f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 35, 0, 0, 0, 0, 0, 0, 0, 1);
 				CreateTMAP(myObj,	"uw1_140", "" , 140, false);
 				SetRotation(myObj,0,180,0);
@@ -18583,7 +18577,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_53_61_02_0927",64.628571f,3.600000f,74.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 2, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("chain_gauntlets_pairs_of_chain_gauntlets_54_61_02_0844",65.142853f,3.492000f,74.379997f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_039",true);
@@ -18593,7 +18587,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_54_61_02_0841",65.980003f,3.069500f,74.057144f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 30, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_plant_54_61_02_0848",65.314285f,3.460000f,74.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_207",true);
@@ -18604,7 +18598,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 929, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("an_ear_of_corn_ears_of_corn_99_99_02_0929", ParentContainer, 0);
 				AddObjectToContainer("a_loaf_of_bread_loaves_of_bread_99_99_02_0645", ParentContainer, 1);
 				////Container contents complete
@@ -18799,7 +18793,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 0, 1, 45, 0, 0, 0, 1, 0, 0, 2, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,57,53,0,0);
+				Create_a_change_terrain_trap(myObj,57,53,0,0,22);
 
 				myObj= CreateGameObject("a_move_trigger_51_61_02_0545",61.799999f,3.600000f,73.800003f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_416",false);
@@ -18817,7 +18811,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 0, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,46,7,0,0);
+				Create_a_change_terrain_trap(myObj,46,7,0,0,8);
 
 				myObj= CreateGameObject("a_set_variable_trap_27_21_02_0577",32.400002f,0.000000f,26.400000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_397",false);
@@ -18859,7 +18853,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 620, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,52,13,0,0);
+				Create_a_change_terrain_trap(myObj,52,13,0,0,24);
 				AddTrapLink(myObj,"a_text_string_trap_99_99_02_0620");
 
 				myObj= CreateGameObject("a_pick_up_trigger_99_99_02_0600",119.314285f,1.500000f,119.314285f);
@@ -18960,7 +18954,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 786, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,48,54,0,0);
+				Create_a_change_terrain_trap(myObj,48,54,0,0,10);
 				AddTrapLink(myObj,"a_look_trigger_99_99_02_0786");
 
 				myObj= CreateGameObject("a_delete_object_trap_49_55_02_0797",58.799999f,0.000000f,66.000000f);
@@ -19136,14 +19130,14 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 549, 1, 63, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,44,8,5,3);
+				Create_a_change_terrain_trap(myObj,44,8,5,3,8);
 				AddTrapLink(myObj,"a_move_trigger_99_99_02_0549");
 
 				myObj= CreateGameObject("a_change_terrain_trap_44_12_02_0970",53.657143f,3.600000f,14.400000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 584, 22, 62, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,44,12,5,0);
+				Create_a_change_terrain_trap(myObj,44,12,5,0,24);
 				AddTrapLink(myObj,"a_text_string_trap_99_99_02_0584");
 
 				myObj= CreateGameObject("a_use_trigger_99_99_02_0971",119.314285f,3.600000f,120.000000f);
@@ -19271,7 +19265,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_389",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", "UW1/Sprites/Objects/OBJECTS_389", 42, 389, 1008, 23, 63, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_change_terrain_trap(myObj,37,10,0,0);
+				Create_a_change_terrain_trap(myObj,37,10,0,0,24);
 				AddTrapLink(myObj,"a_look_trigger_99_99_02_1008");
 
 				myObj= CreateGameObject("a_move_trigger_05_03_02_1013",6.600000f,3.600000f,4.200000f);
@@ -19309,7 +19303,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_99_99_02_0122",119.828575f,0.375000f,119.485710f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 				//Supplementary object 179
 				myObj = new GameObject("a_giant_spider_99_99_02_0179");
 				pos = new Vector3(119.314285f, 3.600000f, 119.314285f);
@@ -19466,7 +19460,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_shortsword_99_99_02_0574",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_004",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", 1, 4, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 3, 6, 3, 18);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 18);
 				//Supplementary object 575
 				myObj= CreateGameObject("a_piece_of_cheese_pieces_of_cheese_99_99_02_0575",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_178",true);
@@ -19492,7 +19486,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 599, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_wand_99_99_02_0599", ParentContainer, 0);
 				AddObjectToContainer("a_red_potion_99_99_02_0598", ParentContainer, 1);
 				AddObjectToContainer("a_Wis_stone_99_99_02_0932", ParentContainer, 2);
@@ -19502,7 +19496,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_99_99_02_0628",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 				//Supplementary object 632
 				myObj= CreateGameObject("a_key_99_99_02_0632",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_259",true);
@@ -19512,12 +19506,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_longsword_99_99_02_0635",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_005",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", 1, 5, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 28);
 				//Supplementary object 640
 				myObj= CreateGameObject("a_torch_torches_99_99_02_0640",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 641
 				myObj= CreateGameObject("a_Por_stone_99_99_02_0641",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_224",true);
@@ -19558,12 +19552,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 7, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-
 				//Supplementary object 687
 				myObj= CreateGameObject("a_candle_99_99_02_0687",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 				//Supplementary object 695
 				myObj= CreateGameObject("a_scroll_99_99_02_0695",118.971428f,3.600000f,119.828575f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_316",true);
@@ -19595,7 +19588,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_99_99_02_0755",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 				//Supplementary object 765
 				myObj= CreateGameObject("a_fish_fish_99_99_02_0765",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_182",true);
@@ -19609,13 +19602,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 767
 				myObj= CreateGameObject("an_arrow_99_99_02_0767",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 10, 17, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 10, 17, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 768
 				myObj= CreateGameObject("a_cudgel_99_99_02_0768",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_007",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", "UW1/Sprites/Objects/OBJECTS_007", 1, 7, 0, 55, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 3, 6, 2, 5, 2);
+				CreateWeaponMelee(myObj, 20, 255, 255, 5, 2);
 				//Supplementary object 784
 				myObj= CreateGameObject("a_scroll_99_99_02_0784",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_318",true);
@@ -19626,12 +19619,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_99_99_02_0808",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 713, 17, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 				//Supplementary object 812
 				myObj= CreateGameObject("an_arrow_99_99_02_0812",119.314285f,1.500000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 17, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 17, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 816
 				myObj= CreateGameObject("a_Des_stone_99_99_02_0816",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_224",true);
@@ -19641,12 +19634,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_shortsword_99_99_02_0849",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_004",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", 1, 4, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 3, 6, 3, 18);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 18);
 				//Supplementary object 853
 				myObj= CreateGameObject("a_shortsword_99_99_02_0853",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_004",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", "UW1/Sprites/Objects/OBJECTS_004", 1, 4, 0, 50, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 3, 6, 3, 18);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 18);
 				//Supplementary object 860
 				myObj= CreateGameObject("a_red_gem_99_99_02_0860",119.485710f,2.587500f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_163",true);
@@ -19672,7 +19665,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_taper_99_99_02_0880",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_147",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_147", "UW1/Sprites/Objects/OBJECTS_147", "UW1/Sprites/Objects/OBJECTS_147", 22, 147, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 3, 0, 151, 147);
+				CreateLight(myObj, 10, -842150451, 151, 147);
 				//Supplementary object 887
 				//Supplementary object 896
 				myObj= CreateGameObject("a_piece_of_meat_pieces_of_meat_99_99_02_0896",119.314285f,3.600000f,119.314285f);
@@ -19723,7 +19716,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				{
 						Debug.Log("Transfrom not found"); return;
 				}
-
 				myObj = new GameObject("a_fighter_05_02_03_0233");
 				pos = new Vector3(6.514286f, 3.600000f, 2.914286f);
 				myObj.transform.position = pos;
@@ -19737,6 +19729,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_06_02_03_0450",8.380000f,3.600000f,3.257143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("special_tmap_obj_07_02_03_0622",9.000000f,3.600000f,2.470000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -19746,6 +19740,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_07_02_03_0457",9.580000f,3.600000f,2.571429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj = new GameObject("a_skeleton_38_02_03_0197");
 				pos = new Vector3(46.114288f, 2.400000f, 2.914286f);
@@ -19776,13 +19772,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_sling_stone_39_02_03_0944",47.657143f,2.400000f,3.085714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 8, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 8, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_sling_stone_39_02_03_0943",47.314285f,2.400000f,2.914286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 16, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 16, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("special_tmap_obj_41_02_03_1015",49.270000f,2.400000f,3.000000f);
@@ -19815,6 +19811,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_small_boulder_07_03_03_0462",9.085714f,3.600000f,3.620000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("a_campfire_13_03_03_0476",16.457142f,3.600000f,4.457143f);
@@ -19941,6 +19939,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_34_05_03_0902",41.980000f,2.700000f,6.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_grass_bunches_of_grass_35_05_03_0895",42.342857f,2.700000f,6.685714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_193",true);
@@ -19968,6 +19968,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_large_boulder_35_05_03_0903",42.857143f,2.700000f,6.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_340",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", 23, 340, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_grass_bunches_of_grass_35_05_03_0893",42.514286f,2.700000f,6.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_193",true);
@@ -19991,6 +19993,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_small_boulder_07_06_03_0969",8.914286f,3.600000f,8.380000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("some_writing_17_06_03_0997",21.580000f,3.900000f,8.057143f);
@@ -20057,6 +20061,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_06_07_03_0806",8.380000f,3.600000f,8.742857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("special_tmap_obj_07_07_03_0846",9.000000f,3.600000f,9.530000f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -20066,9 +20072,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_07_07_03_0968",9.580000f,3.600000f,9.085714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_small_boulder_07_07_03_0967",9.580000f,3.600000f,8.571429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj = new GameObject("a_fighter_13_07_03_0192");
 				pos = new Vector3(16.114286f, 3.600000f, 8.914286f);
@@ -20183,7 +20193,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 578, 40, 13, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_red_potion_99_99_03_0578", ParentContainer, 0);
 				AddObjectToContainer("a_torch_torches_99_99_03_0576", ParentContainer, 1);
 				AddObjectToContainer("some_leeches_bunches_of_leeches_99_99_03_0575", ParentContainer, 2);
@@ -20202,13 +20212,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_longsword_17_09_03_0833",20.571428f,3.600000f,11.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_005",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", 1, 5, 0, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 28);
 
 				myObj= CreateGameObject("a_pack_22_09_03_0848",26.742857f,2.400000f,11.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_130",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_131", 19, 130, 847, 40, 27, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 250, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_torch_torches_99_99_03_0847", ParentContainer, 0);
 				AddObjectToContainer("a_flask_of_port_flasks_of_port_99_99_03_0845", ParentContainer, 1);
 				////Container contents complete
@@ -20332,7 +20342,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_longsword_30_10_03_0915",36.514286f,2.700000f,12.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_005",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", 1, 5, 0, 22, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 28);
 
 				myObj= CreateGameObject("a_skull_30_10_03_0921",36.857143f,2.700000f,12.685714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_195",true);
@@ -20391,7 +20401,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 938, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_candle_99_99_03_0938", ParentContainer, 0);
 				AddObjectToContainer("a_piece_of_cheese_pieces_of_cheese_99_99_03_0937", ParentContainer, 1);
 				////Container contents complete
@@ -20440,7 +20450,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_04_12_03_0538",4.971428f,3.600000f,15.428572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 0, 60, 13, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 
 				myObj= CreateGameObject("plate_boots_pairs_of_plate_boots_04_12_03_0546",5.657143f,3.600000f,15.257142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_043",true);
@@ -20466,7 +20476,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 877, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_lockpick_99_99_03_0877", ParentContainer, 0);
 				AddObjectToContainer("a_scroll_99_99_03_0876", ParentContainer, 1);
 				////Container contents complete
@@ -20499,7 +20509,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 797, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_rock_hammer_99_99_03_0797", ParentContainer, 0);
 				AddObjectToContainer("some_leeches_bunches_of_leeches_99_99_03_0796", ParentContainer, 1);
 				////Container contents complete
@@ -20524,7 +20534,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 812, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_mushroom_99_99_03_0812", ParentContainer, 0);
 				////Container contents complete
 
@@ -20572,7 +20582,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_45_15_03_0880",54.171432f,2.400000f,19.028572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 0, 40, 0, 1, 1, 1, 1, 0, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_52_15_03_0634",62.914288f,2.400000f,18.171429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_209",true);
@@ -20700,7 +20710,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_longsword_19_18_03_0581",23.314285f,3.000000f,22.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_005",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", 1, 5, 713, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 28);
 
 				myObj= CreateGameObject("a_campfire_39_18_03_0858",47.314285f,2.400000f,22.780001f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_298",true);
@@ -20722,7 +20732,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 855, 40, 27, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("an_ear_of_corn_ears_of_corn_99_99_03_0855", ParentContainer, 0);
 				AddObjectToContainer("some_leeches_bunches_of_leeches_99_99_03_0850", ParentContainer, 1);
 				////Container contents complete
@@ -20737,7 +20747,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_142",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", 19, 142, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 50, 2, 3);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -20784,15 +20794,19 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_small_boulder_57_19_03_0774",69.428566f,3.000000f,23.828571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_boulder_58_19_03_0773",69.771431f,3.300000f,23.828571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_chest_19_20_03_0867",23.828571f,3.000000f,24.857143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_349",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_349", "UW1/Sprites/Objects/OBJECTS_349", "UW1/Sprites/Objects/OBJECTS_349", 19, 349, 832, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("a_wand_99_99_03_0866", ParentContainer, 0);
 				AddObjectToContainer("a_coin_99_99_03_0865", ParentContainer, 1);
 				AddObjectToContainer("a_Corp_stone_99_99_03_0656", ParentContainer, 2);
@@ -20859,7 +20873,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 794, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_gold_coin_99_99_03_0794", ParentContainer, 0);
 				AddObjectToContainer("a_bottle_of_water_bottles_of_water_99_99_03_0791", ParentContainer, 1);
 				////Container contents complete
@@ -20885,7 +20899,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 782, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_bottle_of_ale_bottles_of_ale_99_99_03_0782", ParentContainer, 0);
 				AddObjectToContainer("a_mandolin_99_99_03_0784", ParentContainer, 1);
 				////Container contents complete
@@ -20916,7 +20930,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 504, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("an_An_stone_99_99_03_0504", ParentContainer, 0);
 				AddObjectToContainer("a_Sanct_stone_99_99_03_0503", ParentContainer, 1);
 				////Container contents complete
@@ -20937,6 +20951,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_47_22_03_0708",57.428570f,3.300000f,26.571428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj = new GameObject("a_great_troll_49_22_03_0247");
 				pos = new Vector3(59.314285f, 3.300000f, 26.914284f);
@@ -21027,6 +21043,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_small_boulder_49_23_03_0706",59.485714f,3.300000f,28.780001f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_writing_08_24_03_0999",9.620000f,4.200000f,28.820000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_358",false);
@@ -21045,7 +21063,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_136",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_137", 19, 136, 699, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 30, 2, 2);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_03_0699", ParentContainer, 0);
 				////Container contents complete
 
@@ -21064,10 +21082,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 31, 40, 15, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_50_24_03_0705",60.514286f,3.300000f,29.485716f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 31, 40, 15, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_50_24_03_0710",60.514286f,3.300000f,29.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_209",true);
@@ -21120,7 +21134,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_142",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", 19, 142, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 50, 2, 3);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -21142,13 +21156,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_sling_stone_20_27_03_0805",24.514284f,3.600000f,32.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_sling_stone_20_27_03_0807",24.857143f,3.600000f,32.571426f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_016",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 1, 16, 5, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", "UW1/Sprites/Objects/OBJECTS_016", 16, 16, 5, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_chain_57_27_03_0856",69.257141f,2.400000f,32.742855f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_171",true);
@@ -21198,12 +21212,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_helmet_04_29_03_0593",5.314286f,3.600000f,35.828571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 0, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2692904, 2836608);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2430032, 2573736);
 
 				myObj= CreateGameObject("a_helmet_04_29_03_0594",5.314286f,3.600000f,34.820000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 0, 40, 13, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2692904, 2836844);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2430032, 2573972);
 
 				myObj = new GameObject("a_fighter_12_29_03_0193");
 				pos = new Vector3(14.914286f, 3.600000f, 35.314285f);
@@ -21427,7 +21441,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("an_axe_43_36_03_0449",51.942856f,2.400000f,43.542858f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 712, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 
 
 
@@ -21443,7 +21457,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_140",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", "UW1/Sprites/Objects/OBJECTS_140", 19, 140, 828, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 200, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_green_potion_99_99_03_0828", ParentContainer, 0);
 				AddObjectToContainer("an_oil_flask_99_99_03_0506", ParentContainer, 1);
 				AddObjectToContainer("a_mushroom_99_99_03_0507", ParentContainer, 2);
@@ -21492,7 +21506,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_61_38_03_0591",74.057144f,2.400000f,46.285713f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 546, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 2692904, 2836136);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 2430032, 2573264);
 
 				myObj= CreateGameObject("a_blood_stain_61_38_03_0657",73.371429f,2.400000f,45.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_223",true);
@@ -21579,7 +21593,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_42_40_03_0617",51.257145f,2.400000f,48.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_skull_42_40_03_0610",50.914288f,2.400000f,48.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_194",true);
@@ -21836,7 +21850,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_10_45_03_0749",12.171429f,3.600000f,55.028568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 705, 32, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 
 				myObj= CreateGameObject("a_blood_stain_20_45_03_0536",24.514284f,3.600000f,54.514286f);
@@ -21874,7 +21888,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 676, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_Quas_stone_99_99_03_0676", ParentContainer, 0);
 				AddObjectToContainer("an_In_stone_99_99_03_0674", ParentContainer, 1);
 				AddObjectToContainer("an_An_stone_99_99_03_0673", ParentContainer, 2);
@@ -21905,7 +21919,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_39_45_03_0681",47.657143f,1.500000f,54.342857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 0, 40, 0, 1, 1, 1, 1, 0, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 
 
 
@@ -21937,10 +21951,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 23, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_15_46_03_0683",18.342857f,3.600000f,56.057144f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 23, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 
@@ -22097,10 +22107,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_15_50_03_0692",18.514286f,3.000000f,60.514286f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_writing_24_50_03_1009",28.820000f,4.200000f,60.685715f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_358",false);
@@ -22130,10 +22136,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 11, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_33_50_03_0727",40.114285f,2.400000f,60.514286f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 11, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_giant_rat_36_50_03_0199");
 				pos = new Vector3(43.714287f, 2.400000f, 60.514286f);
@@ -22172,10 +22174,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_28_51_03_0728",34.114285f,2.400000f,61.714287f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_bloodworm_28_51_03_0238");
 				pos = new Vector3(34.114285f, 2.400000f, 61.714287f);
@@ -22193,16 +22191,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_battle_axe_35_51_03_0646",42.514286f,2.400000f,61.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_001",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", 1, 1, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 34);
 
 				myObj= CreateGameObject("a_gold_coin_35_51_03_0718",42.514286f,2.400000f,61.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_35_51_03_0718",42.514286f,2.400000f,61.714287f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_bloodworm_36_51_03_0236");
 				pos = new Vector3(43.714287f, 2.400000f, 61.714287f);
@@ -22240,19 +22234,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 9, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_36_52_03_0697",43.714287f,2.400000f,62.914288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 9, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_11_53_03_0686",13.714286f,3.300000f,64.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_11_53_03_0686",13.714286f,3.300000f,64.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_giant_rat_12_53_03_0225");
 				pos = new Vector3(14.914286f, 3.300000f, 64.114288f);
@@ -22268,16 +22254,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_15_53_03_0682",18.171429f,3.000000f,63.771431f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 2, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_gold_coin_17_53_03_0720",20.914284f,3.300000f,64.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_17_53_03_0720",20.914284f,3.300000f,64.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_mongbat_28_53_03_0241");
 				pos = new Vector3(34.114285f, 3.300000f, 64.114288f);
@@ -22307,19 +22289,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_11_54_03_0687",13.714286f,3.300000f,65.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_29_54_03_0729",35.314285f,2.400000f,65.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_29_54_03_0729",35.314285f,2.400000f,65.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_giant_rat_29_54_03_0200");
 				pos = new Vector3(35.314285f, 2.400000f, 65.314285f);
@@ -22336,10 +22310,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_37_54_03_0717",44.914288f,2.400000f,65.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 				myObj = new GameObject("a_mage_08_55_03_0216");
@@ -22368,28 +22338,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_21_55_03_0696",25.714285f,3.300000f,66.514290f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_26_55_03_0698",31.714285f,2.400000f,66.514290f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 7, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_26_55_03_0698",31.714285f,2.400000f,66.514290f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 7, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_33_55_03_0730",40.114285f,2.400000f,66.514290f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_33_55_03_0730",40.114285f,2.400000f,66.514290f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_bloodworm_33_55_03_0237");
 				pos = new Vector3(40.114285f, 2.400000f, 66.514290f);
@@ -22418,10 +22376,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_16_56_03_0688",19.714287f,3.300000f,67.714287f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 
@@ -22434,10 +22388,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_20_58_03_0695",24.514284f,3.300000f,70.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_wolf_spider_29_58_03_0207");
 				pos = new Vector3(35.314285f, 3.000000f, 70.114288f);
@@ -22464,7 +22414,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_battle_axe_05_59_03_0527",7.028571f,3.600000f,71.142853f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_001",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", 1, 1, 707, 63, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 34);
 
 
 				myObj = new GameObject("door_009_059");
@@ -22487,10 +22437,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_16_59_03_0689",19.714287f,3.300000f,71.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 
@@ -22519,10 +22465,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_21_60_03_0690",25.714285f,3.000000f,72.514290f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_writing_46_60_03_1008",56.380001f,4.200000f,72.514290f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_358",false);
@@ -23101,7 +23043,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_99_99_03_0122",119.828575f,0.375000f,119.485710f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 				//Supplementary object 183
 				myObj = new GameObject("a_giant_rat_99_99_03_0183");
 				pos = new Vector3(119.314285f, 2.400000f, 119.314285f);
@@ -23191,7 +23133,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_helmet_99_99_03_0545",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2692904, 2692940);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2430032, 2430068);
 				//Supplementary object 551
 				myObj= CreateGameObject("an_ankh_pendant_99_99_03_0551",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_173",true);
@@ -23201,7 +23143,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_sword_99_99_03_0553",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_013",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", 1, 13, 714, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 14, 7, 11, 3, 255);
+				CreateWeaponMelee(myObj, 0, 1, 2, 3, 255);
 				//Supplementary object 560
 				//Supplementary object 572
 				//Supplementary object 573
@@ -23218,7 +23160,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_03_0576",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 8, 40, 13, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 578
 				myObj= CreateGameObject("a_red_potion_99_99_03_0578",120.000000f,3.600000f,119.828575f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_187",true);
@@ -23239,10 +23181,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 40, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_99_99_03_0643",119.314285f,3.000000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 40, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 653
 				myObj= CreateGameObject("dragon_scales_bunches_of_dragon_scales_99_99_03_0653",119.314285f,3.300000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_285",true);
@@ -23289,10 +23227,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 37, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_99_99_03_0703",119.314285f,3.600000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 37, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 726
 				myObj= CreateGameObject("a_fishing_pole_99_99_03_0726",119.314285f,2.700000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_299",true);
@@ -23323,10 +23257,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_03_0794",119.314285f,3.600000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 2, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 796
 				myObj= CreateGameObject("some_leeches_bunches_of_leeches_99_99_03_0796",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_293",true);
@@ -23357,7 +23287,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_03_0847",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 2, 40, 27, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 850
 				myObj= CreateGameObject("some_leeches_bunches_of_leeches_99_99_03_0850",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_293",true);
@@ -23378,10 +23308,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 42, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_99_99_03_0865",119.314285f,3.000000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 42, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 866
 				myObj= CreateGameObject("a_wand_99_99_03_0866",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_153",true);
@@ -23407,7 +23333,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_99_99_03_0938",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 0, 40, 0, 1, 1, 1, 1, 0, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 
 		}
 
@@ -23637,7 +23563,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_sword_57_05_04_0515",69.085716f,2.400000f,6.857143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_013",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", 1, 13, 705, 41, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 14, 7, 11, 3, 255);
+				CreateWeaponMelee(myObj, 0, 1, 2, 3, 255);
 
 				myObj= CreateGameObject("a_glowing_rock_02_06_04_0731",2.914286f,2.700000f,7.714286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_297",true);
@@ -23693,7 +23619,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 572, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_pouch_pouches_99_99_04_0572", ParentContainer, 0);
 				////Container contents complete
 
@@ -23702,7 +23628,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 618, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_wand_99_99_04_0618", ParentContainer, 0);
 				AddObjectToContainer("a_Tym_stone_99_99_04_0619", ParentContainer, 1);
 				AddObjectToContainer("a_Rel_stone_99_99_04_0615", ParentContainer, 2);
@@ -23718,7 +23644,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_battle_axe_54_06_04_0516",65.828568f,2.400000f,7.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_001",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", 1, 1, 0, 19, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 34);
 
 				myObj= CreateGameObject("a_broken_mace_44_07_04_0518",53.828568f,2.400000f,8.571429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_202",true);
@@ -23908,7 +23834,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_chain_cowl_35_12_04_0530",43.028568f,0.600000f,15.257142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 713, 24, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 6689772, 6818608);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 2758824, 2887660);
 
 				myObj= CreateGameObject("a_green_potion_44_12_04_0857",53.657143f,2.400000f,15.257142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_188",true);
@@ -24029,7 +23955,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_42_16_04_0575",50.571430f,2.100000f,19.371428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_blood_stain_42_16_04_0573",50.742855f,2.100000f,19.542858f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_221",true);
@@ -24037,7 +23963,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_chain_cowl_42_16_04_0574",50.742855f,2.100000f,19.885714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 6689772, 6828992);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 2758824, 2898044);
 
 				myObj= CreateGameObject("a_plant_59_16_04_0513",71.142853f,0.900000f,20.228571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_206",true);
@@ -24533,8 +24459,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_crossbow_bolt_15_32_04_0908",18.171429f,3.300000f,39.428574f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_017",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 1, 17, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 16, 17, 18, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_stalactite_15_32_04_0690",18.514286f,4.500000f,38.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_211",true);
@@ -24660,8 +24586,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_crossbow_bolt_47_35_04_0536",56.742855f,0.037500f,42.171432f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_017",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 1, 17, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 16, 17, 24, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gravestone_47_35_04_0547",56.914288f,0.000000f,42.514286f);
 				SetRotation(myObj,0,0,0);
@@ -24905,8 +24831,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("an_arrow_02_40_04_0860",2.742857f,3.300000f,48.857143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 26, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj = new GameObject("a_giant_rat_06_40_04_0239");
 				pos = new Vector3(7.714286f, 3.300000f, 48.514286f);
@@ -25158,7 +25084,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_mace_43_43_04_0538",51.771431f,0.000000f,52.628571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_014",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_014", "UW1/Sprites/Objects/OBJECTS_014", "UW1/Sprites/Objects/OBJECTS_014", 1, 14, 704, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 9, 17, 5, 5, 255);
+				CreateWeaponMelee(myObj, 50, 3, 2, 5, 255);
 
 				myObj= CreateGameObject("special_tmap_obj_08_44_04_0976",10.200000f,3.600000f,52.869999f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 11, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -25257,7 +25183,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 588, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_book_99_99_04_0588", ParentContainer, 0);
 				AddObjectToContainer("a_lockpick_99_99_04_0587", ParentContainer, 1);
 				AddObjectToContainer("a_flute_99_99_04_0586", ParentContainer, 2);
@@ -25504,13 +25430,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("an_axe_45_50_04_0543",54.857143f,0.000000f,60.857143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 
 				myObj= CreateGameObject("a_sack_48_50_04_0582",58.114288f,0.000000f,60.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 579, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_book_99_99_04_0579", ParentContainer, 0);
 				AddObjectToContainer("a_large_blue_gem_99_99_04_0581", ParentContainer, 1);
 				AddObjectToContainer("a_fish_fish_99_99_04_0580", ParentContainer, 2);
@@ -25664,7 +25590,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_light_mace_55_53_04_0531",66.857147f,0.000000f,63.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_008",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", "UW1/Sprites/Objects/OBJECTS_008", 1, 8, 0, 58, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 6, 10, 4, 5, 15);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 15);
 
 
 				myObj= CreateGameObject("a_skull_59_53_04_0597",71.314285f,0.300000f,64.628571f);
@@ -25818,8 +25744,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("an_arrow_43_55_04_0535",51.942856f,0.000000f,66.857147f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("plate_leggings_pairs_of_plate_leggings_49_55_04_0542",59.314285f,0.000000f,66.514290f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_037",true);
@@ -26340,7 +26266,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_386",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_386", "UW1/Sprites/Objects/OBJECTS_386", "UW1/Sprites/Objects/OBJECTS_386", 39, 386, 0, 0, 17, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_arrow_trap(myObj, 17, 1);
+				Create_a_arrow_trap(myObj, 17, 16);
 
 				myObj= CreateGameObject("a_move_trigger_01_27_04_0622",1.800000f,2.400000f,33.000000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_416",false);
@@ -26744,7 +26670,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_99_99_04_0122",119.828575f,0.375000f,119.485710f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 999, 13, 34, 1, 1, 0, 1, 1, 0, 6, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 				//Supplementary object 196
 				myObj = new GameObject("a_ghost_99_99_04_0196");
 				pos = new Vector3(119.314285f, 0.900000f, 119.314285f);
@@ -26886,7 +26812,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 571, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_red_gem_99_99_04_0571", ParentContainer, 0);
 				////Container contents complete
 
@@ -26964,7 +26890,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_130",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_131", 19, 130, 578, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 250, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_book_99_99_04_0578", ParentContainer, 0);
 				AddObjectToContainer("a_Grav_stone_99_99_04_0603", ParentContainer, 1);
 				AddObjectToContainer("a_Nox_stone_99_99_04_0602", ParentContainer, 2);
@@ -27035,7 +26961,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				{
 						Debug.Log("Transfrom not found"); return;
 				}
-
 				myObj= CreateGameObject("an_Ex_stone_02_02_05_0837",2.571429f,0.900000f,2.571429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_224",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_224", "UW1/Sprites/Objects/OBJECTS_236", "UW1/Sprites/Objects/OBJECTS_236", 6, 236, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
@@ -27045,7 +26970,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_347",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", "UW1/Sprites/Objects/OBJECTS_347", 19, 347, 625, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, -842150451, -842150451, -842150451);
+				ParentContainer = CreateContainer(myObj, 0, -842150451, -842150451);
 				AddObjectToContainer("an_apple_99_99_05_0625", ParentContainer, 0);
 				AddObjectToContainer("a_flask_of_port_flasks_of_port_99_99_05_0624", ParentContainer, 1);
 				AddObjectToContainer("a_red_potion_99_99_05_0605", ParentContainer, 2);
@@ -27075,7 +27000,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 581, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_red_potion_99_99_05_0581", ParentContainer, 0);
 				AddObjectToContainer("a_Nox_stone_99_99_05_0538", ParentContainer, 1);
 				AddObjectToContainer("a_Flam_stone_99_99_05_0537", ParentContainer, 2);
@@ -27086,7 +27011,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_136",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_137", 19, 136, 583, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 30, 2, 2);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_05_0583", ParentContainer, 0);
 				////Container contents complete
 
@@ -27102,7 +27027,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_53_02_05_0580",64.457146f,0.300000f,3.257143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 1, 2, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 
 				myObj= CreateGameObject("a_plant_14_03_05_0626",17.485714f,2.100000f,4.285714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_206",true);
@@ -27215,7 +27140,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_sword_14_08_05_0727",17.980000f,2.100000f,10.114285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_013",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", 1, 13, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 14, 7, 11, 3, 255);
+				CreateWeaponMelee(myObj, 0, 1, 2, 3, 255);
 
 
 				myObj = new GameObject("a_mage_21_08_05_0249");
@@ -27384,12 +27309,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_13_11_05_0851",15.771428f,2.700000f,14.057142f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 				myObj= CreateGameObject("a_dagger_13_11_05_0852",16.285713f,2.700000f,14.228572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 
 				myObj= CreateGameObject("a_skull_15_11_05_0731",18.514286f,2.700000f,13.885715f);
@@ -27451,7 +27376,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_13_12_05_0853",15.942858f,2.700000f,14.571428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 
 				myObj= CreateGameObject("a_loaf_of_bread_loaves_of_bread_03_13_05_0967",4.114285f,0.300000f,16.114286f);
@@ -27479,7 +27404,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 810, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_torch_torches_99_99_05_0810", ParentContainer, 0);
 				AddObjectToContainer("some_leeches_bunches_of_leeches_99_99_05_0809", ParentContainer, 1);
 				AddObjectToContainer("an_oil_flask_99_99_05_0808", ParentContainer, 2);
@@ -27517,7 +27442,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_142",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", "UW1/Sprites/Objects/OBJECTS_142", 19, 142, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 50, 2, 3);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				////Container contents complete
 
 
@@ -27734,7 +27659,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_134",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_134", "UW1/Sprites/Objects/OBJECTS_135", 19, 134, 812, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 20, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_block_of_incense_blocks_of_incense_99_99_05_0812", ParentContainer, 0);
 				////Container contents complete
 
@@ -27943,7 +27868,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_helmet_53_39_05_0754",64.285713f,3.000000f,47.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 0, 8, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 3348420, 3530120);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2363692, 2545392);
 
 				myObj= CreateGameObject("a_blood_stain_53_39_05_0758",63.942856f,3.000000f,47.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_222",true);
@@ -27952,7 +27877,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_132",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_132", "UW1/Sprites/Objects/OBJECTS_133", 19, 132, 846, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_05_0846", ParentContainer, 0);
 				AddObjectToContainer("a_Kal_stone_99_99_05_0847", ParentContainer, 1);
 				////Container contents complete
@@ -27990,7 +27915,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_130",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_131", 19, 130, 750, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 250, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_lantern_99_99_05_0750", ParentContainer, 0);
 				AddObjectToContainer("a_ruby_rubies_99_99_05_0749", ParentContainer, 1);
 				AddObjectToContainer("a_flask_of_port_flasks_of_port_99_99_05_0748", ParentContainer, 2);
@@ -28003,7 +27928,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_axe_54_41_05_0752",65.657143f,3.000000f,50.057144f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_011",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_011", "UW1/Sprites/Objects/OBJECTS_011", "UW1/Sprites/Objects/OBJECTS_011", 1, 11, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 13, 8, 5, 4, 255);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 255);
 
 				myObj= CreateGameObject("some_grass_bunches_of_grass_54_41_05_0755",65.142853f,3.000000f,49.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_193",true);
@@ -28058,10 +27983,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_42_05_0775",69.257141f,2.400000f,51.428570f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_57_42_05_0781",68.571434f,2.400000f,51.428570f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_209",true);
@@ -28075,6 +27996,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_57_42_05_0789",68.914284f,2.400000f,50.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj = new GameObject("a_feral_troll_58_42_05_0219");
 				pos = new Vector3(70.114288f, 2.400000f, 50.914288f);
@@ -28151,37 +28074,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_43_05_0779",69.257141f,2.400000f,52.285713f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_43_05_0778",69.428566f,2.400000f,51.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_43_05_0778",69.428566f,2.400000f,51.942856f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_43_05_0777",68.742859f,2.400000f,51.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_43_05_0777",68.742859f,2.400000f,51.942856f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_43_05_0776",68.742859f,2.400000f,52.628571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_43_05_0776",68.742859f,2.400000f,52.628571f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_plant_57_43_05_0785",68.914284f,4.500000f,52.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_212",true);
@@ -28212,13 +28119,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_59_43_05_0773",70.820000f,2.400000f,52.457142f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_boulder_59_43_05_0790",71.314285f,2.400000f,52.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_03_44_05_0839",3.942857f,3.600000f,53.485714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_209",true);
@@ -28247,10 +28152,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_44_05_0774",69.620003f,2.400000f,52.820000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_plant_58_44_05_0787",70.114288f,4.500000f,53.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_212",true);
@@ -28259,6 +28160,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_58_44_05_0791",70.114288f,2.400000f,53.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 
 
@@ -28341,7 +28244,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_crown_26_46_05_0679",31.542856f,3.600000f,56.057144f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_048",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_048", "UW1/Sprites/Objects/OBJECTS_048", "uw1/Hud/armour/armor_f_0061", 73, 48, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 3348420, 3512420);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 2363692, 2527692);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_38_46_05_0686",46.457142f,1.200000f,55.542858f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_210",true);
@@ -28582,7 +28485,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 716, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_candle_99_99_05_0716", ParentContainer, 0);
 				AddObjectToContainer("a_fishing_pole_99_99_05_0713", ParentContainer, 1);
 				AddObjectToContainer("a_red_gem_99_99_05_0715", ParentContainer, 2);
@@ -28788,7 +28691,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_55_51_05_0696",67.028572f,1.500000f,62.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 717, 42, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 				myObj= CreateGameObject("a_plant_08_52_05_0840",10.285714f,3.600000f,62.742855f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_207",true);
@@ -28912,7 +28815,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("an_axe_59_53_05_0613",70.971428f,2.100000f,64.457146f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_002",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", "UW1/Sprites/Objects/OBJECTS_002", 1, 2, 715, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 10, 6, 8, 4, 25);
+				CreateWeaponMelee(myObj, 250, 255, 255, 4, 25);
 
 				myObj= CreateGameObject("some_grass_bunches_of_grass_02_54_05_0886",3.580000f,3.600000f,64.971428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_193",true);
@@ -28944,12 +28847,12 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_dagger_03_54_05_0889",4.628572f,3.600000f,65.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 24, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 				myObj= CreateGameObject("a_dagger_03_54_05_0890",4.114285f,3.600000f,65.485710f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_003",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", "UW1/Sprites/Objects/OBJECTS_003", 1, 3, 0, 33, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 4, 2, 5, 3, 5);
+				CreateWeaponMelee(myObj, 250, 255, 255, 3, 5);
 
 				myObj= CreateGameObject("a_broken_sword_05_54_05_0880",6.857143f,3.600000f,64.971428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_201",true);
@@ -29121,7 +29024,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_axe_56_56_05_0707",68.228569f,1.800000f,67.542854f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_011",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_011", "UW1/Sprites/Objects/OBJECTS_011", "UW1/Sprites/Objects/OBJECTS_011", 1, 11, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 13, 8, 5, 4, 255);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 255);
 
 				myObj= CreateGameObject("a_skull_56_56_05_0706",67.714287f,1.800000f,67.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_194",true);
@@ -29183,10 +29086,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 11, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_14_57_05_0891",17.314285f,3.600000f,68.914284f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 11, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_14_57_05_0892",17.314285f,3.600000f,69.085716f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_214",true);
@@ -29225,7 +29124,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_23_57_05_0928",28.457144f,3.600000f,69.085716f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_23_57_05_0843",28.114285f,3.600000f,68.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_198",true);
@@ -29346,10 +29245,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_46_59_05_0644",55.371429f,3.411500f,70.971428f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_grass_bunches_of_grass_55_59_05_0684",67.028572f,1.800000f,71.828568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_193",true);
@@ -29770,46 +29665,26 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_05_0607",119.314285f,1.800000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 608
 				myObj= CreateGameObject("a_gold_coin_99_99_05_0608",119.314285f,1.800000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_05_0608",119.314285f,1.800000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 609
 				myObj= CreateGameObject("a_gold_coin_99_99_05_0609",119.314285f,1.800000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_05_0609",119.314285f,1.800000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 610
 				myObj= CreateGameObject("a_gold_coin_99_99_05_0610",119.314285f,1.800000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_05_0610",119.314285f,1.800000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 611
 				myObj= CreateGameObject("a_gold_coin_99_99_05_0611",119.314285f,1.800000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_05_0611",119.314285f,1.800000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 619
 				myObj= CreateGameObject("a_green_potion_99_99_05_0619",119.314285f,1.800000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_188",true);
@@ -29830,7 +29705,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 622, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_green_potion_99_99_05_0622", ParentContainer, 0);
 				AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_05_0621", ParentContainer, 1);
 				////Container contents complete
@@ -29864,7 +29739,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_candle_99_99_05_0716",119.314285f,1.800000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_146",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", "UW1/Sprites/Objects/OBJECTS_146", 22, 146, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 1, 12, 150, 146);
+				CreateLight(myObj, 10, -842150451, 150, 146);
 				//Supplementary object 745
 				myObj= CreateGameObject("a_lockpick_99_99_05_0745",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_257",true);
@@ -29894,7 +29769,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_lantern_99_99_05_0750",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_144",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", "UW1/Sprites/Objects/OBJECTS_144", 88, 144, 1, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLantern(myObj, 4, 10, 148, 144);
+				CreateLantern(myObj, 11, -842150451, 148, 144);
 				//Supplementary object 808
 				myObj= CreateGameObject("an_oil_flask_99_99_05_0808",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_301",true);
@@ -29909,7 +29784,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_torch_torches_99_99_05_0810",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_145",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", "UW1/Sprites/Objects/OBJECTS_145", 22, 145, 2, 40, 0, 1, 1, 1, 1, 1, 0, 0, 1);
-				CreateLight(myObj, 2, 3, 149, 145);
+				CreateLight(myObj, 10, -842150451, 149, 145);
 				//Supplementary object 812
 				myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_99_99_05_0812",119.314285f,3.300000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_278",true);
@@ -29941,7 +29816,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_055",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_055", "UW1/Sprites/Objects/OBJECTS_055", "UW1/Sprites/Objects/OBJECTS_055", 78, 55, 0, 63, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddShield(myObj);
-
 		}
 
 
@@ -29959,7 +29833,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				{
 						Debug.Log("Transfrom not found"); return;
 				}
-
 				myObj = new GameObject("a_deep_lurker_07_01_06_0240");
 				pos = new Vector3(8.914286f, 0.300000f, 1.714286f);
 				myObj.transform.position = pos;
@@ -30339,7 +30212,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_138",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_138", "UW1/Sprites/Objects/OBJECTS_139", 19, 138, 666, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_06_0666", ParentContainer, 0);
 				////Container contents complete
 
@@ -30497,28 +30370,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_38_14_06_0791",46.628571f,3.900000f,17.980000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_38_14_06_0792",45.771431f,3.900000f,17.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_38_14_06_0792",45.771431f,3.900000f,17.657143f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_38_14_06_0793",46.457142f,3.900000f,17.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_38_14_06_0793",46.457142f,3.900000f,17.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_dire_ghost_36_15_06_0193");
 				pos = new Vector3(43.714287f, 3.750000f, 18.514286f);
@@ -30918,7 +30779,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_130",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_130", "UW1/Sprites/Objects/OBJECTS_131", 19, 130, 424, 40, 9, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 250, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_fish_fish_99_99_06_0424", ParentContainer, 0);
 				AddObjectToContainer("a_piece_of_meat_pieces_of_meat_99_99_06_0422", ParentContainer, 1);
 				AddObjectToContainer("an_apple_99_99_06_0421", ParentContainer, 2);
@@ -31228,10 +31089,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_37_36_06_0445",44.742855f,1.200000f,43.371429f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("an_emerald_37_36_06_0447",45.085712f,1.200000f,43.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_167",true);
@@ -31259,17 +31116,17 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_crown_38_36_06_0654",46.628571f,1.200000f,44.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_050",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_050", "UW1/Sprites/Objects/OBJECTS_050", "uw1/Hud/armour/armor_f_0063", 73, 50, 724, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", 3544712, 3702812);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", "uw1/Hud/armour/armor_f_0063", "uw1/Hud/armour/armor_m_0063", 2692716, 2850816);
 
 				myObj= CreateGameObject("a_crown_38_36_06_0486",46.285713f,1.200000f,43.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_048",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_048", "UW1/Sprites/Objects/OBJECTS_048", "uw1/Hud/armour/armor_f_0061", 73, 48, 661, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 3544712, 3663164);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 2692716, 2811168);
 
 				myObj= CreateGameObject("a_crown_38_36_06_0907",46.114288f,1.200000f,43.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_049",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_049", "UW1/Sprites/Objects/OBJECTS_049", "uw1/Hud/armour/armor_f_0062", 73, 49, 661, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", 3544712, 3762520);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", 2692716, 2910524);
 
 				myObj= CreateGameObject("a_gold_chain_38_36_06_0487",45.942856f,1.200000f,43.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_171",true);
@@ -31281,10 +31138,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_38_36_06_0488",46.457142f,1.200000f,43.714287f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 
@@ -31334,10 +31187,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_37_37_06_0480",45.257145f,1.200000f,45.085712f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_chain_37_37_06_0482",45.428570f,1.200000f,44.571430f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_171",true);
@@ -31349,10 +31198,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_38_37_06_0450",46.628571f,1.200000f,45.428570f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_jeweled_shield_38_37_06_0452",46.114288f,1.200000f,44.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_063",true);
@@ -31368,29 +31213,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_38_37_06_0460",46.285713f,1.200000f,45.428570f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_crown_38_37_06_0478",46.457142f,1.200000f,45.085712f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_048",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_048", "UW1/Sprites/Objects/OBJECTS_048", "uw1/Hud/armour/armor_f_0061", 73, 48, 661, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 3544712, 3661276);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 2692716, 2809280);
 
 				myObj= CreateGameObject("a_crown_38_37_06_0481",45.771431f,1.200000f,44.571430f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_049",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_049", "UW1/Sprites/Objects/OBJECTS_049", "uw1/Hud/armour/armor_f_0062", 73, 49, 661, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", 3544712, 3661984);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", "uw1/Hud/armour/armor_f_0062", "uw1/Hud/armour/armor_m_0062", 2692716, 2809988);
 
 				myObj= CreateGameObject("a_gold_coin_38_37_06_0485",46.628571f,1.200000f,44.571430f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_38_37_06_0485",46.628571f,1.200000f,44.571430f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 
@@ -31443,15 +31280,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_37_38_06_0463",45.580002f,1.200000f,45.771431f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_crown_37_38_06_0438",45.085712f,1.200000f,46.285713f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_048",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_048", "UW1/Sprites/Objects/OBJECTS_048", "uw1/Hud/armour/armor_f_0061", 73, 48, 661, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 3544712, 3651836);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 2692716, 2799840);
 
 				myObj= CreateGameObject("a_small_blue_gem_38_38_06_0455",45.771431f,1.200000f,46.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_164",true);
@@ -31463,10 +31296,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_38_38_06_0456",46.628571f,1.200000f,46.628571f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_plate_38_38_06_0458",46.628571f,1.200000f,45.942856f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_172",true);
@@ -31484,10 +31313,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_38_38_06_0461",46.114288f,1.200000f,46.457142f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 20, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_04_39_06_0744",5.485714f,3.000000f,47.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_198",true);
@@ -31628,7 +31453,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_black_sword_34_42_06_0477",41.828568f,3.000000f,50.571430f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_012",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_012", "UW1/Sprites/Objects/OBJECTS_012", "UW1/Sprites/Objects/OBJECTS_012", 1, 12, 708, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 15, 7, 12, 3, 255);
+				CreateWeaponMelee(myObj, 200, 255, 255, 3, 255);
 
 
 				myObj = new GameObject("door_041_042");
@@ -31657,19 +31482,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_32_43_06_0370",38.571426f,3.000000f,52.628571f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_32_43_06_0371",38.914284f,3.000000f,52.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_32_43_06_0371",38.914284f,3.000000f,52.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_broken_axe_32_43_06_0468",39.257145f,3.000000f,52.628571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_200",true);
@@ -31717,7 +31534,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_helmet_32_44_06_0474",38.914284f,3.000000f,53.828568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 516, 63, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 3544712, 3660332);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 2692716, 2808336);
 
 				myObj= CreateGameObject("plate_leggings_pairs_of_plate_leggings_32_44_06_0475",38.571426f,3.000000f,53.828568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_037",true);
@@ -31748,7 +31565,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_141",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", 19, 141, 375, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 0, 2, 1);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("an_arrow_99_99_06_0375", ParentContainer, 0);
 				////Container contents complete
 
@@ -32267,12 +32084,18 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_boulder_08_57_06_0606",10.457142f,3.600000f,69.085716f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_small_boulder_08_57_06_0607",9.771429f,3.600000f,69.257141f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_small_boulder_08_57_06_0608",10.114285f,3.600000f,69.085716f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_342",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", "UW1/Sprites/Objects/OBJECTS_342", 23, 342, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_writing_12_57_06_0618",14.420000f,3.900000f,68.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_358",false);
@@ -32398,7 +32221,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_128",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_128", "UW1/Sprites/Objects/OBJECTS_129", 19, 128, 580, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 125, 255, 255);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_pile_of_bones_piles_of_bones_99_99_06_0580", ParentContainer, 0);
 				AddObjectToContainer("a_skull_99_99_06_0583", ParentContainer, 1);
 				AddObjectToContainer("a_crown_99_99_06_0578", ParentContainer, 2);
@@ -33727,8 +33550,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 375
 				myObj= CreateGameObject("an_arrow_99_99_06_0375",119.314285f,3.000000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_018",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 1, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", "UW1/Sprites/Objects/OBJECTS_018", 16, 18, 19, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 381
 				myObj= CreateGameObject("a_block_of_incense_blocks_of_incense_99_99_06_0381",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_278",true);
@@ -33771,7 +33594,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_crown_99_99_06_0578",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_048",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_048", "UW1/Sprites/Objects/OBJECTS_048", "uw1/Hud/armour/armor_f_0061", 73, 48, 0, 50, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 3544712, 3544748);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", "uw1/Hud/armour/armor_f_0061", "uw1/Hud/armour/armor_m_0061", 2692716, 2692752);
 				//Supplementary object 580
 				myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_99_99_06_0580",118.971428f,2.400000f,119.657135f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_198",true);
@@ -33799,6 +33622,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 740
 				myObj= CreateGameObject("a_large_boulder_99_99_06_0740",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_340",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", 23, 340, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 819
 				//Supplementary object 845
 				//Supplementary object 864
@@ -33806,10 +33631,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_06_0864",119.314285f,3.600000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 877
 				myObj= CreateGameObject("a_key_99_99_06_0877",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_260",true);
@@ -33835,19 +33656,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_06_1017",119.314285f,3.600000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 				//Supplementary object 1018
 				myObj= CreateGameObject("a_gold_coin_99_99_06_1018",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_99_99_06_1018",119.314285f,3.600000f,119.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 		}
 
@@ -33946,7 +33759,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_battle_axe_28_02_07_0587",33.619999f,0.600000f,2.742857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_001",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", "UW1/Sprites/Objects/OBJECTS_001", 1, 1, 717, 57, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 14, 7, 2, 4, 34);
+				CreateWeaponMelee(myObj, 125, 255, 255, 4, 34);
 
 				myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_28_02_07_0588",33.771427f,0.600000f,3.428571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_198",true);
@@ -34492,7 +34305,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_helmet_02_13_07_0810",2.914286f,3.600000f,16.628572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_046",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_046", "UW1/Sprites/Objects/OBJECTS_046", "uw1/Hud/armour/armor_f_0014", 73, 46, 565, 60, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 3543872, 3738788);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0014", "uw1/Hud/armour/armor_m_0014", "uw1/Hud/armour/armor_f_0029", "uw1/Hud/armour/armor_m_0029", "uw1/Hud/armour/armor_f_0044", "uw1/Hud/armour/armor_m_0044", "uw1/Hud/armour/armor_f_0059", "uw1/Hud/armour/armor_m_0059", 1447296, 1642212);
 
 				myObj= CreateGameObject("a_skull_02_13_07_0815",2.914286f,3.600000f,16.114286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_195",true);
@@ -34625,7 +34438,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_38_14_07_0639",46.114288f,0.600000f,17.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 710, 59, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_bone_38_14_07_0641",46.114288f,0.600000f,17.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_196",true);
@@ -34671,7 +34484,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_136",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_136", "UW1/Sprites/Objects/OBJECTS_137", 19, 136, 527, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 30, 2, 2);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_scroll_99_99_07_0527", ParentContainer, 0);
 				////Container contents complete
 
@@ -34696,9 +34509,13 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_large_boulder_07_15_07_0805",9.257143f,3.600000f,19.028572f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_340",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", 23, 340, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_boulder_07_15_07_0806",8.914286f,3.600000f,18.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_341",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", "UW1/Sprites/Objects/OBJECTS_341", 23, 341, 0, 40, 0, 0, 0, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("special_tmap_obj_07_15_07_1008",9.000000f,3.600000f,19.130001f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -34707,6 +34524,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 
 				myObj= CreateGameObject("a_large_boulder_08_15_07_0807",10.114285f,3.600000f,18.514286f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_340",true);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", "UW1/Sprites/Objects/OBJECTS_340", 23, 340, 0, 40, 0, 0, 1, 0, 1, 0, 0, 0, 1);
+				AddObj_base(myObj);
 
 				myObj= CreateGameObject("special_tmap_obj_08_15_07_1009",10.200000f,3.600000f,19.130001f);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", "UW1/Sprites/Objects/OBJECTS_366", 34, 366, 0, 40, 10, 0, 0, 0, 0, 0, 0, 0, 1);
@@ -34832,19 +34651,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 6, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_04_20_07_0987",5.980000f,0.300000f,24.514284f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 6, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_04_20_07_0988",5.980000f,0.600000f,24.685715f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 49, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_04_20_07_0988",5.980000f,0.600000f,24.685715f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 0, 49, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_red_gem_04_20_07_0989",5.314286f,0.600000f,24.514284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_163",true);
@@ -34942,10 +34753,6 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 19, 61, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_10_21_07_0998",12.020000f,0.600000f,25.885715f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 19, 61, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_large_blue_gem_10_21_07_0999",13.180000f,0.600000f,26.379999f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_165",true);
@@ -34987,37 +34794,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 12, 51, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_10_22_07_1002",12.685714f,0.600000f,27.257143f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 12, 51, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_10_22_07_1003",13.180000f,0.600000f,27.085716f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 8, 54, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_10_22_07_1003",13.180000f,0.600000f,27.085716f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 8, 54, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_10_22_07_1005",12.514286f,0.600000f,26.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 4, 57, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_10_22_07_1005",12.514286f,0.600000f,26.914284f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 4, 57, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_10_22_07_1004",12.171429f,0.600000f,27.580000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 2, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_10_22_07_1004",12.171429f,0.600000f,27.580000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 2, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_stalactite_25_22_07_0626",30.514284f,4.500000f,26.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_211",true);
@@ -35086,37 +34877,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 6, 38, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_02_24_07_0994",2.914286f,0.600000f,29.980000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 6, 38, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_02_24_07_0995",3.085714f,0.600000f,28.971428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 16, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_02_24_07_0995",3.085714f,0.600000f,28.971428f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 16, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_02_24_07_0996",2.914286f,0.600000f,29.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 5, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_02_24_07_0996",2.914286f,0.600000f,29.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 5, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_02_24_07_0997",3.428571f,0.600000f,29.980000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 9, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_02_24_07_0997",3.428571f,0.600000f,29.980000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 9, 63, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_sapphire_03_24_07_0991",4.114285f,0.600000f,28.971428f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_166",true);
@@ -35367,7 +35142,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_44_29_07_0847",53.314285f,3.600000f,35.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 709, 50, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
 
 				myObj = new GameObject("a_reaper_46_29_07_0251");
 				pos = new Vector3(55.714287f, 3.600000f, 35.314285f);
@@ -36016,7 +35791,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_chain_cowl_40_45_07_0520",48.685715f,3.600000f,55.028568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_045",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_045", "UW1/Sprites/Objects/OBJECTS_045", "uw1/Hud/armour/armor_f_0013", 73, 45, 714, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 3543872, 3670348);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0013", "uw1/Hud/armour/armor_m_0013", "uw1/Hud/armour/armor_f_0028", "uw1/Hud/armour/armor_m_0028", "uw1/Hud/armour/armor_f_0043", "uw1/Hud/armour/armor_m_0043", "uw1/Hud/armour/armor_f_0058", "uw1/Hud/armour/armor_m_0058", 1447296, 1573772);
 
 				myObj = new GameObject("a_dread_spider_58_45_07_0091");
 				pos = new Vector3(70.114288f, 0.000000f, 54.514286f);
@@ -36050,19 +35825,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_46_07_0940",70.628571f,0.000000f,56.057144f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_58_46_07_0941",70.114288f,0.000000f,55.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_46_07_0941",70.114288f,0.000000f,55.714287f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("an_orb_rock_59_46_07_0795",71.314285f,0.000000f,55.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_274",true);
@@ -36078,19 +35845,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_61_46_07_0938",73.371429f,0.000000f,56.057144f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_61_46_07_0939",73.542854f,0.000000f,55.542858f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_61_46_07_0939",73.542854f,0.000000f,55.542858f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_mongbat_01_47_07_0187");
 				pos = new Vector3(1.714286f, 3.600000f, 56.914288f);
@@ -36129,19 +35888,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_47_07_0931",67.180000f,0.000000f,57.085712f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_55_47_07_0932",66.342857f,0.000000f,57.085712f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_47_07_0932",66.342857f,0.000000f,57.085712f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("an_orb_rock_56_47_07_0522",67.885712f,0.000000f,56.742855f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_274",true);
@@ -36156,28 +35907,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_47_07_0935",68.379997f,0.000000f,56.571430f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_47_07_0936",67.885712f,0.000000f,57.257145f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_47_07_0936",67.885712f,0.000000f,57.257145f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_47_07_0937",67.714287f,0.000000f,56.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_47_07_0937",67.714287f,0.000000f,56.914288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_57_47_07_0907",68.419998f,0.000000f,56.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -36192,19 +35931,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_47_07_0933",69.085716f,0.000000f,57.257145f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_47_07_0934",68.914284f,0.000000f,56.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_47_07_0934",68.914284f,0.000000f,56.914288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_59_47_07_0898",70.971428f,0.000000f,56.571430f);
@@ -36215,56 +35946,32 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_60_47_07_0944",73.028572f,0.000000f,56.742855f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_60_47_07_0945",73.028572f,0.000000f,57.085712f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_60_47_07_0945",73.028572f,0.000000f,57.085712f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_60_47_07_0947",72.514290f,0.000000f,56.914288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 41, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_60_47_07_0947",72.514290f,0.000000f,56.914288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 41, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_coin_61_47_07_0919",73.885712f,0.000000f,57.257145f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 16, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_coin_61_47_07_0919",73.885712f,0.000000f,57.257145f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_160",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", "UW1/Sprites/Objects/OBJECTS_160", 18, 160, 16, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("a_gold_coin_61_47_07_0943",73.542854f,0.000000f,56.571430f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_61_47_07_0943",73.542854f,0.000000f,56.571430f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_61_47_07_0946",73.371429f,0.000000f,57.257145f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_61_47_07_0946",73.371429f,0.000000f,57.257145f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_bones_piles_of_bones_09_48_07_0719",11.314286f,2.700000f,58.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_220",true);
@@ -36313,19 +36020,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_48_07_0929",67.028572f,0.000000f,58.457142f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_55_48_07_0930",66.514290f,0.000000f,58.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_48_07_0930",66.514290f,0.000000f,58.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_56_48_07_0905",67.714287f,0.000000f,58.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -36335,19 +36034,11 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_48_07_0900",68.914284f,0.000000f,57.771431f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_48_07_0899",69.257141f,0.000000f,58.285713f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_48_07_0899",69.257141f,0.000000f,58.285713f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_broken_axe_57_48_07_0901",69.085716f,0.000000f,57.771431f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_200",true);
@@ -36430,44 +36121,28 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_sword_48_49_07_0759",58.628571f,0.000000f,59.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_013",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", "UW1/Sprites/Objects/OBJECTS_013", 1, 13, 719, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 14, 7, 11, 3, 255);
+				CreateWeaponMelee(myObj, 0, 1, 2, 3, 255);
 
 
 				myObj= CreateGameObject("a_gold_coin_55_49_07_0926",67.028572f,0.000000f,59.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_49_07_0926",67.028572f,0.000000f,59.142857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_55_49_07_0925",66.171432f,0.000000f,59.828568f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_49_07_0925",66.171432f,0.000000f,59.828568f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_55_49_07_0924",67.180000f,0.000000f,59.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_49_07_0924",67.180000f,0.000000f,59.657143f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_55_49_07_0923",66.342857f,0.000000f,59.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_55_49_07_0923",66.342857f,0.000000f,59.142857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_56_49_07_0911",67.714287f,0.000000f,59.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -36477,28 +36152,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_49_07_0921",68.228569f,0.000000f,59.314285f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_49_07_0920",67.885712f,0.000000f,58.820000f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_49_07_0920",67.885712f,0.000000f,58.820000f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_49_07_0918",67.542854f,0.000000f,59.485714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_49_07_0918",67.542854f,0.000000f,59.485714f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_57_49_07_0909",68.742859f,0.000000f,59.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_210",true);
@@ -36518,37 +36181,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_49_07_0917",68.742859f,0.000000f,59.142857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_49_07_0915",69.428566f,0.000000f,59.485714f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_49_07_0915",69.428566f,0.000000f,59.485714f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_49_07_0914",68.419998f,0.000000f,59.657143f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_49_07_0914",68.419998f,0.000000f,59.657143f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_49_07_0913",69.085716f,0.000000f,59.142857f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_49_07_0913",69.085716f,0.000000f,59.142857f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 
 				myObj= CreateGameObject("a_piece_of_wood_pieces_of_wood_06_50_07_0720",7.714286f,2.700000f,60.514286f);
@@ -36692,7 +36339,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_leather_cap_36_53_07_0519",43.542858f,3.600000f,64.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_044",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_044", "UW1/Sprites/Objects/OBJECTS_044", "uw1/Hud/armour/armor_f_0012", 73, 44, 719, 40, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 3543872, 3670112);
+				CreateHelm(myObj, "uw1/Hud/armour/armor_f_0012", "uw1/Hud/armour/armor_m_0012", "uw1/Hud/armour/armor_f_0027", "uw1/Hud/armour/armor_m_0027", "uw1/Hud/armour/armor_f_0042", "uw1/Hud/armour/armor_m_0042", "uw1/Hud/armour/armor_f_0057", "uw1/Hud/armour/armor_m_0057", 1447296, 1573536);
 
 				myObj= CreateGameObject("a_bone_39_53_07_0777",47.142857f,3.600000f,64.628571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_196",true);
@@ -36724,28 +36371,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_53_07_0895",68.914284f,2.700000f,64.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_53_07_0894",69.428566f,2.700000f,64.457146f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_53_07_0894",69.428566f,2.700000f,64.457146f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_57_53_07_0893",68.571434f,2.700000f,64.628571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_57_53_07_0893",68.571434f,2.700000f,64.628571f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_57_53_07_0897",69.257141f,2.700000f,64.628571f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -36755,37 +36390,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_53_07_0892",70.114288f,2.700000f,64.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_58_53_07_0891",70.628571f,2.700000f,64.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_53_07_0891",70.628571f,2.700000f,64.114288f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_58_53_07_0890",70.285713f,2.700000f,63.771431f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_53_07_0890",70.285713f,2.700000f,63.771431f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_58_53_07_0889",70.457146f,2.700000f,64.457146f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_58_53_07_0889",70.457146f,2.700000f,64.457146f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_58_53_07_0896",70.114288f,2.700000f,64.114288f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -36843,37 +36462,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_55_07_0880",67.714287f,2.700000f,66.514290f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_55_07_0879",68.057144f,2.700000f,66.857147f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_55_07_0879",68.057144f,2.700000f,66.857147f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_55_07_0878",67.885712f,2.700000f,66.171432f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_55_07_0878",67.885712f,2.700000f,66.171432f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_55_07_0888",67.714287f,2.700000f,66.514290f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_55_07_0888",67.714287f,2.700000f,66.514290f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj = new GameObject("a_giant_rat_57_55_07_0140");
 				pos = new Vector3(68.914284f, 2.700000f, 66.514290f);
@@ -36929,37 +36532,21 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_56_07_0887",67.714287f,2.700000f,67.714287f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_56_07_0883",68.379997f,2.700000f,67.885712f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_56_07_0883",68.379997f,2.700000f,67.885712f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_56_07_0882",67.714287f,2.700000f,67.371429f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_56_07_0882",67.714287f,2.700000f,67.371429f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_56_07_0881",67.885712f,2.700000f,68.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_56_07_0881",67.885712f,2.700000f,68.228569f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_skull_57_56_07_0876",68.914284f,2.700000f,67.714287f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_195",true);
@@ -36969,7 +36556,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_longsword_57_56_07_0873",69.257141f,2.700000f,67.220001f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_005",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", "UW1/Sprites/Objects/OBJECTS_005", 1, 5, 0, 50, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 10, 4, 8, 3, 28);
+				CreateWeaponMelee(myObj, 125, 255, 255, 3, 28);
 
 				myObj= CreateGameObject("a_breastplate_57_56_07_0872",69.428566f,2.700000f,67.542854f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_034",true);
@@ -37027,7 +36614,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_141",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", "UW1/Sprites/Objects/OBJECTS_141", 19, 141, 758, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
 				////Container contents
-				ParentContainer = CreateContainer(myObj, 0, 2, 1);
+				ParentContainer = CreateContainer(myObj, 15, -842150451, -842150451);
 				AddObjectToContainer("a_crossbow_bolt_99_99_07_0758", ParentContainer, 0);
 				////Container contents complete
 
@@ -37041,28 +36628,16 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_57_07_0886",67.714287f,2.700000f,68.914284f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_57_07_0885",68.057144f,2.700000f,68.742859f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_57_07_0885",68.057144f,2.700000f,68.742859f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("a_gold_coin_56_57_07_0884",67.714287f,2.700000f,68.419998f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
 				AddCoin(myObj);
-				myObj= CreateGameObject("a_gold_coin_56_57_07_0884",67.714287f,2.700000f,68.419998f);
-				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_161",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", "UW1/Sprites/Objects/OBJECTS_161", 18, 161, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				AddObj_base(myObj);
 
 				myObj= CreateGameObject("an_orb_rock_57_57_07_0770",68.914284f,2.700000f,68.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_274",true);
@@ -37303,7 +36878,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_bow_18_61_07_0515",22.628572f,2.700000f,74.228569f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_031",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_031", "UW1/Sprites/Objects/OBJECTS_031", "UW1/Sprites/Objects/OBJECTS_031", 1, 31, 0, 40, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateWeaponMelee(myObj, 0, 0, -842150451, -842150451, -842150451);
 
 				myObj= CreateGameObject("a_pile_of_debris_piles_of_debris_18_61_07_0700",21.771429f,2.700000f,73.542854f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_210",true);
@@ -37354,7 +36929,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_jeweled_mace_02_62_07_0518",2.742857f,2.700000f,75.085716f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_014",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_014", "UW1/Sprites/Objects/OBJECTS_014", "UW1/Sprites/Objects/OBJECTS_014", 1, 14, 711, 43, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 9, 17, 5, 5, 255);
+				CreateWeaponMelee(myObj, 50, 3, 2, 5, 255);
 
 				myObj= CreateGameObject("some_rubble_piles_of_rubble_03_62_07_0713",4.114285f,2.700000f,74.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_218",true);
@@ -37392,7 +36967,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_mace_21_62_07_0787",25.714285f,3.600000f,74.914284f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_009",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", "UW1/Sprites/Objects/OBJECTS_009", 1, 9, 717, 59, 0, 1, 1, 0, 1, 1, 1, 8, 1);
-				CreateWeaponMelee(myObj, 8, 16, 5, 5, 25);
+				CreateWeaponMelee(myObj, 30, 2, 2, 5, 25);
 
 				myObj= CreateGameObject("a_skull_21_62_07_0788",25.714285f,3.600000f,74.419998f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_194",true);
@@ -37674,7 +37249,7 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_386",false);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_386", "UW1/Sprites/Objects/OBJECTS_386", "UW1/Sprites/Objects/OBJECTS_386", 39, 386, 0, 0, 17, 0, 0, 0, 1, 0, 0, 1, 1);
 				SetRotation(myObj,0,0,0);
-				Create_a_arrow_trap(myObj, 17, 1);
+				Create_a_arrow_trap(myObj, 17, 16);
 
 				myObj= CreateGameObject("a_move_trigger_58_51_07_0957",70.199997f,3.600000f,61.799999f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_416",false);
@@ -37948,8 +37523,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				//Supplementary object 758
 				myObj= CreateGameObject("a_crossbow_bolt_99_99_07_0758",119.314285f,3.600000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_017",true);
-				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 1, 17, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
-				CreateWeaponMelee(myObj, -842150451, -842150451, -842150451, -842150451, -842150451);
+				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", "UW1/Sprites/Objects/OBJECTS_017", 16, 17, 1, 40, 0, 1, 1, 0, 1, 1, 0, 0, 1);
+				AddObj_base(myObj);
 				//Supplementary object 949
 				myObj= CreateGameObject("a_wand_99_99_07_0949",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_152",true);
@@ -37979,7 +37554,8 @@ string[] strAnimArray_cs400_n01 = {	"cs400_n01_0000",
 				myObj= CreateGameObject("a_broadsword_99_99_07_0954",119.314285f,2.400000f,119.314285f);
 				CreateObjectGraphics(myObj,"UW1/Sprites/Objects/OBJECTS_006",true);
 				CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", "UW1/Sprites/Objects/OBJECTS_006", 1, 6, 0, 30, 0, 1, 1, 0, 1, 0, 0, 0, 1);
-				CreateWeaponMelee(myObj, 13, 6, 10, 3, 34);
+				CreateWeaponMelee(myObj, 20, 255, 255, 3, 34);
+
 			}
 
 		static void Create_UW1_Lvl_8()

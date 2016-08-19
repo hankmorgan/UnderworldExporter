@@ -1382,6 +1382,42 @@ void setBridgeBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 }
 
 
+void SetExitBits(tile LevelInfo[64][64], ObjectItem objList[1600])
+	{//Sets when a tile contains a move trigger that links to a teleport trap that goes to another level.
+	ObjectItem currObj;
+	for (int x = 0; x<64; x++)
+		{
+		for (int y = 0; y<64; y++)
+			{
+			LevelInfo[x][y].hasExit=0;
+			if (LevelInfo[x][y].indexObjectList != 0)
+				{
+				currObj = objList[LevelInfo[x][y].indexObjectList];
+				do
+					{
+					if ((objectMasters[objList[currObj.index].item_id].type == A_MOVE_TRIGGER))
+						{
+						//Now check what it links to.
+						if (currObj.link > 0)
+							{
+							ObjectItem triggerTarget = objList[currObj.link];
+							if ((objectMasters[triggerTarget.item_id].type == A_TELEPORT_TRAP))
+								{
+								if (triggerTarget.zpos > 0)
+									{//This is a teleport that goes to another level.
+									LevelInfo[x][y].hasExit = 1;
+									}
+								}
+							}
+						}
+					currObj = objList[currObj.next];
+					} while (currObj.index != 0);
+				}
+			}
+
+		}
+	}
+
 void setDoorBits(tile LevelInfo[64][64], ObjectItem objList[1600])
 {//So I know if the tile contains a door.
 ObjectItem currObj;

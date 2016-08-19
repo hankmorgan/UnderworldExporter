@@ -76,7 +76,8 @@ int Top; int Bottom;	//Textures in each face
 short noOfNeighbours;	//Non solid neighbour tile count.
 short isWater;		//Set when it has a water texture.
 short isLava;		//Set when it has a lava texture.
-short hasBridge;
+short hasBridge;//Set when the tile contains a bridge.
+short hasExit;//Set when it contains a move trigger that goes to another level.
 //short waterRegion;	//Index to the water contigous area.
 short isCorridor;  //Part of a group of 4 or more tiles with only 2 non solid neighbours
 //short roomRegion;	//Index to the contigous room that the tile is part of.

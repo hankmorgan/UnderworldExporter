@@ -927,22 +927,22 @@ void RenderUnityEntityTMAP(int game, float x, float y, float z, ObjectItem &curr
 	if (currobj.y == 0)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2))/100.0;
-		y=y+0.05;
+		y=y+0.02;
 		}
 	if (currobj.y == 7)
 		{
 		x = (currobj.tileX*BrushSizeX + (BrushSizeX / 2)) / 100.0;
-		y = y - 0.05;
+		y = y - 0.02;
 		}
 	if (currobj.x == 0)
 		{
 		y = (currobj.tileY*BrushSizeY + (BrushSizeY / 2)) / 100.0;
-		x = x + 0.05;
+		x = x + 0.02;
 		}
 	if (currobj.x == 7)
 		{
 		y = (currobj.tileY*BrushSizeX + (BrushSizeY / 2)) / 100.0;
-		x = x - 0.05;
+		x = x - 0.02;
 		}
 
 	//x=(currobj.tileX*BrushSizeX+(BrushSizeX/2));
@@ -1795,7 +1795,7 @@ int target;
 				//	}
 				//else
 				//	{
-					fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d);", currobj.tileX, currobj.tileY, currobj.x, currobj.y);
+				fprintf(UNITY_FILE, "\n\tCreate_a_change_terrain_trap(myObj,%d,%d,%d,%d,%d);", currobj.tileX, currobj.tileY, currobj.x, currobj.y, (currobj.zpos >> 2));
 				//	}
 				break;
 			case  A_SPELLTRAP:
@@ -2273,11 +2273,11 @@ void PrintUnityTileMap(int game, int Level, tile LevelInfo[64][64])
 	for (int x = 0; x <= 63; x++)
 		{
 		for (int y = 0; y <= 63; y++)
-			{
-			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d);"
+			{//TODO:Indicate the door direction.
+			fprintf(UNITY_FILE, "\n\tSetTileProp(%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d);"
 				, Level, x, y, LevelInfo[x][y].tileType, 
 				LevelInfo[x][y].Render, LevelInfo[x][y].floorHeight, LevelInfo[x][y].ceilingHeight, 
-				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, LevelInfo[x][y].isLava, LevelInfo[x][y].hasBridge);  //TODO:Bridges
+				LevelInfo[x][y].isWater, LevelInfo[x][y].isDoor, LevelInfo[x][y].isLava, LevelInfo[x][y].hasBridge, LevelInfo[x][y].hasExit ); 
 			}
 		}
 	fclose(UNITY_FILE);

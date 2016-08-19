@@ -37,4 +37,9 @@ public class TileInfo : Props {
 		/// Is there a bridge in this tile
 		/// </summary>
 		public bool [,] isBridge=new bool[64,64];
+
+		/// <summary>
+		/// Is there a door in this tile
+		/// </summary>
+		public bool [,]  isDoor= new bool[64,64];
 }

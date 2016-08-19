@@ -28,6 +28,11 @@ public class TileMap : UWEBase {
 	public List<MapNote>[] MapNotes = new List<MapNote>[10];
 
 	
+	/// <summary>
+	/// The size of the tile in pixels in the map display
+	/// </summary>
+	public int TileSize = 4;
+
 	public const int TILE_SOLID=0;
 	public const int TILE_OPEN= 1;
 	public const int TILE_DIAG_SE= 2;
@@ -197,10 +202,6 @@ public class TileMap : UWEBase {
 		/// <param name="LevelNo">Level no.</param>
 	public Texture2D TileMapImage(int LevelNo)
 	{
-
-		///The size in pixels of the tiles
-		int TileSize = 4;
-
 		///Sets the map no display
 		UWHUD.instance.LevelNoDisplay.text=(LevelNo+1).ToString();
 		///Uses a cursor icon to display the player.
@@ -208,6 +209,8 @@ public class TileMap : UWEBase {
 
 		///Creates a blank texture2D of 64x64*TileSize in ARGB32 format.
 		Texture2D output= new Texture2D(64 * TileSize, 64 * TileSize, TextureFormat.ARGB32, false);
+		output.filterMode=FilterMode.Point;
+		output.wrapMode=TextureWrapMode.Clamp;
 		//Init the tile map as blank first
 		for (int i = 0; i<63; i++)
 		{
@@ -291,6 +294,18 @@ public class TileMap : UWEBase {
 				}
 			}
 		}
+
+		for (int i = 0; i<63; i++)
+		{
+			for (int j = 63; j>0; j--)
+			{
+				if (GetIsDoor(LevelNo,i,j)==true)
+				{
+					DrawDoor(output,LevelNo,i,j,TileSize,TileSize,BorderColour);
+				}
+			}
+		}
+
 
 		///Only displays the player if they are on the same map as the one being rendered
 		if (LevelNo==GameWorldController.instance.LevelNo)
@@ -527,6 +542,42 @@ public class TileMap : UWEBase {
 		if ((GetTileType(LevelNo, TileX-1,TileY)==TILE_SOLID) && (GetTileRender(LevelNo, TileX-1,TileY)==1))
 			{
 			DrawLine (OutputTile,TileX,TileY,TileWidth,TileHeight,InputColour,WEST);
+			}
+		}
+	}
+
+	/// <summary>
+	///  Draws a door at the tile specified. Checks the neighbouring tiles to find out which one is open
+	/// </summary>
+	/// <param name="OutputTile">Output tile.</param>
+	/// <param name="LevelNo">Level no.</param>
+	/// <param name="TileX">Tile x.</param>
+	/// <param name="TileY">Tile y.</param>
+	/// <param name="TileWidth">Tile width.</param>
+	/// <param name="TileHeight">Tile height.</param>
+	/// <param name="InputColour">Input colour.</param>
+	private void DrawDoor(Texture2D OutputTile, int LevelNo, int TileX, int TileY, int TileWidth, int TileHeight, Color[] InputColour)
+	{
+		bool TileTypeNorth = isTileOpen(GetTileType(LevelNo,TileX,TileY+1));
+		bool TileTypeSouth = isTileOpen(GetTileType(LevelNo,TileX,TileY-1));
+		bool TileTypeEast = isTileOpen(GetTileType(LevelNo,TileX+1,TileY));
+		bool TileTypeWest = isTileOpen(GetTileType(LevelNo,TileX-1,TileY));
+		
+		if (isTileOpen(GetTileType(LevelNo,TileX,TileY)))
+		{	//Don't display if the door is currently in a solid tile
+			if ((TileTypeEast) || (TileTypeWest))
+				{
+					for (int j = 0; j<TileHeight; j++)
+					{
+					OutputTile.SetPixel(TileWidth/2 + TileX * (TileWidth), j+ TileY * TileHeight,PickColour(InputColour));			
+					}
+				}
+			else if ((TileTypeNorth)|| (TileTypeSouth))
+			{
+				for (int i = 0; i<TileWidth; i++)
+				{
+				OutputTile.SetPixel(i+ TileX * TileWidth, TileHeight/2 + TileY * TileHeight,PickColour(InputColour));
+				}
 			}
 		}
 	}
@@ -1000,6 +1051,37 @@ public class TileMap : UWEBase {
 	{
 		return Tiles[LevelNo].isBridge[tileX,tileY];
 	}
+	
+		/// <summary>
+		/// Gets if the tile contains a door.
+		/// </summary>
+		/// <returns><c>true</c>, if is door was gotten, <c>false</c> otherwise.</returns>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		private bool GetIsDoor(int LevelNo, int tileX, int tileY)
+		{
+			return Tiles[LevelNo].isDoor[tileX,tileY];
+		}
+
+		/// <summary>
+		/// Sets if the tile is a door
+		/// </summary>
+		/// <param name="LevelNo">Level no.</param>
+		/// <param name="tileX">Tile x.</param>
+		/// <param name="tileY">Tile y.</param>
+		/// <param name="iIsDoor">I is door.</param>
+		private void SetIsDoor(int LevelNo, int tileX, int tileY,int iIsDoor)
+		{
+			if (iIsDoor==1)
+			{
+				Tiles[LevelNo].isDoor[tileX,tileY]=true;	
+			}
+			else
+			{
+				Tiles[LevelNo].isDoor[tileX,tileY]=false;
+			}
+		}
 
 		/// <summary>
 		/// Sets if the tile is water.
@@ -1142,15 +1224,16 @@ public class TileMap : UWEBase {
 		/// <param name="iIsDoor">is door.</param>
 		/// <param name="iIsLava">is lava.</param>
 		private void SetTileProp(int LevelNo, int tileX, int tileY, int itileType, int iRender, int FloorHeight, int CeilingHeight, int iIsWater, int iIsDoor, int iIsLava, int iIsBridge)
-	{
-		SetTileType (LevelNo, tileX,tileY,itileType);
-		Tiles[LevelNo].Render[tileX,tileY]=iRender;
-		SetFloorHeight (LevelNo, tileX,tileY,FloorHeight);
-		SetCeilingHeight (LevelNo, tileX,tileY,CeilingHeight);
-		SetIsWater(LevelNo, tileX,tileY,iIsWater);
-		SetIsLava(LevelNo, tileX,tileY,iIsLava);
-		SetIsBridge(LevelNo,tileX,tileY,iIsBridge);
-	}
+			{
+				SetTileType (LevelNo, tileX,tileY,itileType);
+				Tiles[LevelNo].Render[tileX,tileY]=iRender;
+				SetFloorHeight (LevelNo, tileX,tileY,FloorHeight);
+				SetCeilingHeight (LevelNo, tileX,tileY,CeilingHeight);
+				SetIsWater(LevelNo, tileX,tileY,iIsWater);
+				SetIsLava(LevelNo, tileX,tileY,iIsLava);
+				SetIsBridge(LevelNo,tileX,tileY,iIsBridge);
+				SetIsDoor(LevelNo,tileX,tileY,iIsDoor);
+			}
 
 		/// <summary>
 		/// Gets the vector3 at the center of the tile specified.
