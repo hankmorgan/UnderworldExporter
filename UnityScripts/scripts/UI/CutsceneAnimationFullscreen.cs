@@ -14,13 +14,13 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 
 		public void End()
 		{
-				if (cs!=null)
-				{
-						cs.PostCutSceneEvent();
-						PlayingSequence=false;
-						UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
-						Destroy (cs);	
-				}
+			if (cs!=null)
+			{
+				cs.PostCutSceneEvent();
+				PlayingSequence=false;
+				UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel.gameObject,false);
+				Destroy (cs);	
+			}
 		}
 
 	public void Begin()
@@ -30,16 +30,7 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			return;
 		}
 		CutsceneTime=0f;
-		//Starts a sequenced cutscene.
-		//GameWorldController.instance.playerUW.playerCam.cullingMask=0;//Stops the camera from rendering.
-		//chains.ActiveControl=5;
-		//UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_CUTS_FULL);
-		//isFullScreen= UWHUD.instance.window.FullScreen;
-		//if (!isFullScreen)
-		//{
-		//	UWHUD.instance.window.SetFullScreen();
-		//}
-		//TargetControl.gameObject.SetActive(true);
+
 		UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,true);
 		PlayingSequence=true;
 		SkipAnim=false;
@@ -60,19 +51,14 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 			yield return new WaitForSeconds(cs.getImageTime(i)-currTime);   //Wait until it is time for the frame
 			currTime = cs.getImageTime(i);                                   //For the next wait.
 			currentFrameLoops = cs.getImageLoops(i);
-			SetAnimation= cs.getImageFrame(i);		
-			Debug.Log(SetAnimation);
+			SetAnimation= cs.getImageFrame(i);	     
 		}
 		SetAnimation= "Anim_Base";//End of anim.
 		PlayingSequence=false;
 		PostAnimPlay();
-		//TargetControl.gameObject.SetActive(false);
-		//UWHUD.instance.EnableDisableControl(UWHUD.instance.CutsceneFullPanel,false);
-		//Destroy (cs);
 		End();
-		
 	}
-	
+
 	public void Loop()
 	{ //Handles the looping of frames for the images.
 		switch (currentFrameLoops)
@@ -92,10 +78,14 @@ public class CutsceneAnimationFullscreen : HudAnimation {
 	{
 		mlCuts.Set("");
 		float currTime=0.0f;
-		for (int i = 0; i<cs.getNoOfSubs(); i++)
+		for (int i = 0; i<=cs.getNoOfSubs(); i++)
 		{
 			yield return new WaitForSeconds(cs.getSubTime(i)-currTime);
 			currTime = cs.getSubTime(i)+cs.getSubDuration (i);//The time the subtitle finishes at.
+            if (i<cs.getNoOfSubs())
+            {//A new sub is due before this one will finish.
+                currTime= Mathf.Min(currTime,cs.getSubTime(i+1));
+            }
 			mlCuts.Set(StringController.instance.GetString(cs.StringBlockNo, cs.getSubIndex(i)));
 			yield return new WaitForSeconds(cs.getSubDuration (i));
 			mlCuts.Set("");//Clear the control.

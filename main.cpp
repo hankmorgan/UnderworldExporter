@@ -252,7 +252,7 @@ int main()
 	uw2_graphics_file[43] = "Cuts\\LBACK006.BYT";
 	uw2_graphics_file[44] = "Cuts\\LBACK007.BYT";
 
-	 char *uw1_cuts_file[45];
+	 char *uw1_cuts_file[47];
 	uw1_cuts_file[0] = "cuts\\cs000.n01";//   black screen
 	uw1_cuts_file[1] = "cuts\\cs000.n02";// * garamon in swirling air
 	uw1_cuts_file[2] = "cuts\\cs000.n03";//   garamon talking
@@ -298,8 +298,10 @@ int main()
 	uw1_cuts_file[42] = "cuts\\cs403.n02";//   death skull end anim
 	uw1_cuts_file[43] = "cuts\\cs404.n01";//   anvil graphics
 	uw1_cuts_file[44] = "cuts\\cs410.n01";//   map piece showing some traps
+	uw1_cuts_file[45] = "cuts\\cs000.n13";
+	uw1_cuts_file[46] = "cuts\\cs000.n14";
 
-	char *uw1_cuts_out_file[45];
+	char *uw1_cuts_out_file[47];
 	uw1_cuts_out_file[0] = "cs000_n01";//   black screen
 	uw1_cuts_out_file[1] = "cs000_n02";// * garamon in swirling air
 	uw1_cuts_out_file[2] = "cs000_n03";//   garamon talking
@@ -345,8 +347,10 @@ int main()
 	uw1_cuts_out_file[42] = "cs403_n02";//   death skull end anim
 	uw1_cuts_out_file[43] = "cs404_n01";//   anvil graphics
 	uw1_cuts_out_file[44] = "cs410_n01";//   map piece showing some traps
+	uw1_cuts_out_file[45] = "cs000_n13";//  ?
+	uw1_cuts_out_file[46] = "cs000_n14";//   ?
 
-	int uw1_cuts_alpha[45];
+	int uw1_cuts_alpha[47];
 	uw1_cuts_alpha[0] = 0;
 	uw1_cuts_alpha[1] = 0;
 	uw1_cuts_alpha[2] = 0;
@@ -392,8 +396,8 @@ int main()
 	uw1_cuts_alpha[42] = 1;
 	uw1_cuts_alpha[43] = 1;
 	uw1_cuts_alpha[44] = 1;
-
-
+	uw1_cuts_alpha[45] = 0;
+	uw1_cuts_alpha[46] = 0;
 
 	const char *shock_graphics_file[18];
 	shock_graphics_file[0] = "res\\DATA\\OBJART.RES";
@@ -1117,7 +1121,8 @@ int main()
 				switch (game)
 					{
 					case UW1:
-						for (int i = 17; i < 45; i++)
+						//for (int i = 17; i < 47; i++)
+						for (int i = 45; i < 47; i++)
 							{
 							char inFile[255];
 							sprintf(inFile, "%s\\%s",path_uw1, uw1_cuts_file[i] ,1);

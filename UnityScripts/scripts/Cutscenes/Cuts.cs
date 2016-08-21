@@ -6,9 +6,7 @@ using System.Collections;
 /// To Use Implement a start funcfion that sets up the arrays in the subclasses. See cutscene_intro.cs as an example
 public class Cuts : GuiBase {
 	
-	
-	//image arrays
-		///The times that the frames begin at
+    ///The times that the frames begin at
 	protected float[] ImageTimes=new float[50]; 
 		///The cut animation that plays at those points.
 	protected string[] ImageFrames=new string[50]; 
@@ -77,7 +75,7 @@ public class Cuts : GuiBase {
 	{
 		return ImageLoops[index];
 	}
-	
+
 		/// <summary>
 		/// Gets the image frame to display
 		/// </summary>
