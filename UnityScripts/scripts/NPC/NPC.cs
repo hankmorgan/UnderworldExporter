@@ -319,7 +319,7 @@ public class NPC : object_base {
 				UWCharacter.InteractionMode=UWCharacter.InteractionModeInConversation;//Set converation mode.
 				Conversation.CurrentConversation=npc_whoami;
 				Conversation.InConversation=true;
-				cnv.WhoAmI=npc_whoami;
+				//cnv.WhoAmI=npc_whoami;
 				if (npcname=="")
 				{
 					UWHUD.instance.NPCName.text= StringController.instance.GetString (7,npc_whoami+16);						

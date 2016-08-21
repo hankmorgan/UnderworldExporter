@@ -140,6 +140,11 @@ public class GameWorldController : UWEBase {
 			playerUW.transform.position=Vector3.zero;
 			mus.InIntro=true;
 		}
+		else
+		{
+			UWHUD.instance.CutsceneFullPanel.SetActive(false);	
+			UWHUD.instance.mainmenu.gameObject.SetActive(false);
+		}
 		return;
 	}
 

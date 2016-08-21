@@ -105,7 +105,7 @@ public class Conversation : GuiBase {
 		/// The maximum value the player can pick from
 	private int MaxAnswer=1;
 		///The npc whoami variable for the NPC
-	public int WhoAmI;
+	//public int WhoAmI;
 
 
 	//public static bool inputRecieved;
@@ -289,7 +289,7 @@ public class Conversation : GuiBase {
 	{
 	//	base.Start();
 		npc = this.GetComponent<NPC>();
-		WhoAmI = npc.npc_whoami;
+		//WhoAmI = npc.npc_whoami;
 	}
 
 	/// <summary>
@@ -301,7 +301,7 @@ public class Conversation : GuiBase {
 		{
 			return;
 		}
-		if ( ! ((CurrentConversation==WhoAmI) && (InConversation==false) && (ConversationOpen==true)) )
+		if ( ! ((CurrentConversation==npc.npc_whoami) && (InConversation==false) && (ConversationOpen==true)) )
 		{
 			if (WaitingForInput)
 			{
@@ -1833,20 +1833,7 @@ public class Conversation : GuiBase {
 		Debug.Log ("Set_Likes_Dislikes(" + unk2 + "," + unk3 +")");
 	}
 
-		/// <summary>
-		/// Sets the attitude.
-		/// Seems to update all npcs of that item type.
-		/// </summary>
-		/// <param name="unk1">Unk1.</param>
-		/// <param name="Attitude">Attitude.</param>
-		/// <param name="NPC_WHO_AM_I">Seems to update all npcs of that item type.</param>
-	public void set_attitude(int unk1, int Attitude, int NPC_WHO_AM_I)
-	{
-		//Occurs in Murgo's conversation but I need to see more examples since that will make characters hostile?
-		//Occurs in bandit and head bandit conversation as well.
-		//Seems to update all npcs of that item type.
-		Debug.Log ("Setting attitude for whoami " + NPC_WHO_AM_I + " to " + Attitude);
-	}
+
 
 	/// <summary>
 	/// compares strings for equality, case independent
@@ -1913,26 +1900,71 @@ public class Conversation : GuiBase {
 		//id=0026 name="set_race_attitude" ret_type=void
 		//parameters:   unknown
 		//description:  sets attitude for a whole race (?)
-		Debug.Log ("set_race_attitude " + attitude);
+		//Debug.Log ("set_race_attitude " + attitude);
+		NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+		int myItemId=npc.objInt().item_id;
+		for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+		{
+			if (foundNPCs[i].objInt().item_id== myItemId)
+			{
+				foundNPCs[i].npc_attitude=attitude;
+			}
+		}
 	}
+
 
 
 		/// <summary>
 		/// Sets the race attitude.
 		/// </summary>
 		/// <param name="unk1">Unk1.</param>
+		/// <param name="gtarg">Gtarg.</param>
 		/// <param name="attitude">Attitude.</param>
 		/// <param name="unk2">Unk2.</param>
-		/// <param name="unk3">Unk3.</param>
-	public void set_race_attitude(int unk1, int attitude, int unk2, int unk3)
+		/// Seems to set attitude for all npcs with the whoami of the same value.
+	public void set_race_attitude(int unk1, int gtarg, int attitude, int unk2)
 	{
 		//Used in Bandit chief conversation Level3
 		//id=0026 name="set_race_attitude" ret_type=void
 		//parameters:   unknown
 		//description:  sets attitude for a whole race (?)
 		//Seems to set attitude for all npcs with the whoami of the same value.
-		Debug.Log ("set_race_attitude " + attitude);
+		//Debug.Log ("set_race_attitude " + attitude);
+		NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+		for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+		{
+			if (foundNPCs[i].npc_whoami== npc.npc_whoami)
+			{
+								Debug.Log("Setting attitude= " + attitude + " for " + foundNPCs[i].name);
+				foundNPCs[i].npc_attitude=attitude;
+				foundNPCs[i].npc_gtarg=gtarg;
+			}
+		}
 	}
+
+	/// <summary>
+	/// Sets the attitude.
+	/// Seems to update all npcs of that item type.
+	/// </summary>
+	/// <param name="unk1">Unk1.</param>
+	/// <param name="Attitude">Attitude.</param>
+	/// <param name="item_id">Seems to update all npcs of that item type.</param>
+	public void set_attitude(int unk1, int attitude, int item_id)
+	{
+			//Occurs in Murgo's conversation but I need to see more examples since that will make characters hostile?
+			//Occurs in bandit and head bandit conversation as well.
+			//Seems to update all npcs of that item type.
+			//Murgo's usage may be bugged as it does not refer to a item id?
+			NPC[] foundNPCs=GameWorldController.instance.LevelMarker().GetComponentsInChildren<NPC>();
+			for (int i=0; i<foundNPCs.GetUpperBound(0);i++)
+			{
+				if (foundNPCs[i].objInt().item_id== item_id)
+				{
+					foundNPCs[i].npc_attitude=attitude;
+				}
+			}
+	}
+
 
 	/// <summary>
 	/// Copies item from player inventory to npc inventory

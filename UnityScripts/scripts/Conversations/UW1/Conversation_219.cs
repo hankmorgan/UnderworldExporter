@@ -51,9 +51,9 @@ public class Conversation_219 : Conversation {
 */
 	void func_008b() {
 		
-		npc.npc_gtarg = 1;
-		npc.npc_goal = 5;
-		npc.npc_attitude = 1;
+		//npc.npc_gtarg = 1;
+		//npc.npc_goal = 5;
+		//npc.npc_attitude = 1;
 		func_0012();
 	} // end func
 	/*
