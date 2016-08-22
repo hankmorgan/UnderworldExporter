@@ -856,7 +856,14 @@ void printRoomRegionsForNavmeshTagging(tile LevelInfo[64][64], ObjectItem objLis
 					int floorTexture;
 					if (objList[z].texture == -1)
 						{
-						floorTexture = LevelInfo[objList[z].tileX + i][objList[z].tileY + j].floorTexture;//?
+						if ((objList[z].tileX != 99) || (objList[z].tileX != 99))
+							{
+							floorTexture = LevelInfo[objList[z].tileX + i][objList[z].tileY + j].floorTexture;//?
+							}
+						else
+							{
+							floorTexture = objList[z].texture;
+							}
 						}
 					else
 						{

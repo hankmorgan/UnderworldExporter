@@ -18,6 +18,7 @@ public class MusicController : UWEBase {
 	//One offs? Stop update while playing these?
 	private const int MUS_INTRO=0;
 	private const int MUS_VICTORY=5;
+	private const int MUS_ENDGAME=11;
 
 	/// <summary>
 	/// Tracks how long ago the last attack took place at.
@@ -52,11 +53,17 @@ public class MusicController : UWEBase {
 	/// Is the player fleeing from combat (recently attacked and no weapon drawn)
 	/// </summary>
 	public bool Fleeing;
+
+	/// <summary>
+	/// is the end game track playing
+	/// </summary>
+	public bool EndGame;
 	
 	/// <summary>
 	/// What track is playing
 	/// </summary>
 	private int playing;
+	
 
 		/// <summary>
 		/// Is a special clip such as a fan fare being played.
@@ -105,6 +112,11 @@ public class MusicController : UWEBase {
 		/// </summary>
 	public int[] MapTracks={11};
 
+	/// <summary>
+	/// Array of possible end game tracks.
+	/// </summary>
+	public int[] EndGameTracks={1};
+
 	private bool StopProcessing;
 	private AudioSource Aud;
 
@@ -151,6 +163,9 @@ public class MusicController : UWEBase {
 		}
 		//Get the highest priorty tracklist to play.
 		switch (GetMaxPriority ()) {
+		case MUS_ENDGAME:
+				ChangeTracklist (EndGameTracks, MUS_DEATH);
+				break;	
 		case MUS_INTRO:
 			ChangeTracklist (IntroTracks, MUS_DEATH);
 			break;
@@ -221,6 +236,10 @@ public class MusicController : UWEBase {
 		if (Death)
 		{
 			return MUS_DEATH;
+		}
+		else if (EndGame)
+		{
+			return MUS_ENDGAME;	
 		}
 		else if (InMap)
 		{

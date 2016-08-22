@@ -9,7 +9,11 @@ public class Conversation_231 : Conversation {
 	public override bool OnDeath ()
 	{
 		//Play the tybal death cutscene.
-		//UWHUD.instance.CutScenesSmall="TybalDeath";
+		GameWorldController.instance.playerUW.quest().isTybalDead=true;
+		GameWorldController.instance.playerUW.quest().GaramonDream=8;//Advance to Tybal is dead range of dreams
+		GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day;//Ensure dream triggers on next sleep
+		GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(this.gameObject,null,226,Magic.SpellRule_TargetSelf);
+
 		return false;
 	}
 	

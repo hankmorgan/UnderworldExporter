@@ -89,10 +89,10 @@ public class UWHUD : HUD {
 			instance=this;
 		}
 
-		void Start()
-		{
-			RefreshPanels(-1);
-		}
+		//void Start()
+		//{
+			//RefreshPanels(-1);
+		//}
 
 		/// <summary>
 		/// Refreshs the panels depending on the active mode

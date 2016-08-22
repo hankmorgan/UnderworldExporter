@@ -51,17 +51,15 @@ public class Bedroll : object_base {
 					{	
 					if (GameWorldController.instance.playerUW.FoodLevel>=3)					
 						{
-								if (IsGaramonTime())
-								{//PLay a garamon dream
-										UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
-										UWHUD.instance.CutScenesFull.SetAnimation="cs000_n04";
-								}
-								else
-								{//Regular sleep with a fade to black
-										UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
-								}	
-						}
-					
+							if (IsGaramonTime())
+							{//PLay a garamon dream
+								PlayGaramonDream(GameWorldController.instance.playerUW.quest().GaramonDream++);								
+							}
+							else
+							{//Regular sleep with a fade to black
+								UWHUD.instance.CutScenesFull.SetAnimation="FadeToBlackSleep";
+							}	
+						}					
 					}
 				for (int i=GameWorldController.instance.playerUW.Fatigue; i<29;i=i+3)//Sleep restores at a rate of 3 points per hour
 					{
@@ -106,7 +104,98 @@ public class Bedroll : object_base {
 
 	private bool IsGaramonTime()
 	{//Is it time for a garamon dream
-		return false;
+		if (GameWorldController.instance.playerUW.quest().isTybalDead)
+		{
+			if (GameWorldController.instance.playerUW.quest().GaramonDream>10)
+			{
+				return false;//All done.
+			}
+		}
+		else
+		{
+			if (GameWorldController.instance.playerUW.quest().GaramonDream>7)
+			{
+				return false;//All done until tybal is dead.
+			}	
+		}
+		if (GameClock.day>=GameWorldController.instance.playerUW.quest().DayGaramonDream)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}		
+	}
+
+	void PlayGaramonDream(int dreamIndex)
+	{
+		int DaysToWait=0;
+		switch (dreamIndex)
+		{
+			case 0:
+				Cutscene_Dream_1 d1 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_1>();
+				UWHUD.instance.CutScenesFull.cs=d1;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 1:
+				Cutscene_Dream_2 d2 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_2>();
+				UWHUD.instance.CutScenesFull.cs=d2;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 2:
+				Cutscene_Dream_3 d3 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_3>();
+				UWHUD.instance.CutScenesFull.cs=d3;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 3:
+				Cutscene_Dream_4 d4 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_4>();
+				UWHUD.instance.CutScenesFull.cs=d4;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 4:
+				Cutscene_Dream_5 d5 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_5>();
+				UWHUD.instance.CutScenesFull.cs=d5;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 5:
+				Cutscene_Dream_6 d6 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_6>();
+				UWHUD.instance.CutScenesFull.cs=d6;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 6:
+				Cutscene_Dream_7 d7 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_7>();
+				UWHUD.instance.CutScenesFull.cs=d7;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 7:
+				Cutscene_Dream_8 d8 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_8>();
+				UWHUD.instance.CutScenesFull.cs=d8;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 8:
+				Cutscene_Dream_9 d9 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_9>();
+				UWHUD.instance.CutScenesFull.cs=d9;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;
+			case 9:
+				Cutscene_Dream_10 d10 = UWHUD.instance.gameObject.AddComponent<Cutscene_Dream_10>();
+				UWHUD.instance.CutScenesFull.cs=d10;
+				UWHUD.instance.CutScenesFull.Begin();
+				DaysToWait=1;
+				break;		
+			}
+
+		GameWorldController.instance.playerUW.quest().DayGaramonDream=GameClock.day+DaysToWait;
 	}
 
 	static void RestoreHealthMana(UWCharacter sunshine)
@@ -129,6 +218,8 @@ public class Bedroll : object_base {
 		RestoreHealthMana(sunshine);
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,18));
 	}
+
+
 
 
 }

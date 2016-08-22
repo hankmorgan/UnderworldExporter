@@ -3463,16 +3463,21 @@ public class Magic : UWEBase {
 						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 226:
-						Debug.Log ("play the tybal death cutscene");
+						Cutscene_Tybal ct = UWHUD.instance.gameObject.AddComponent<Cutscene_Tybal>();
+						UWHUD.instance.CutScenesFull.cs=ct;
+						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 227:
-						Debug.Log ("Play the arial rescue cutscene");
+						Cutscene_Arial ca = UWHUD.instance.gameObject.AddComponent<Cutscene_Arial>();
+						UWHUD.instance.CutScenesFull.cs=ca;
+						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 233:
-						Debug.Log ("Play the splash screen - Underworld");
+						Cutscene_Splash cs = UWHUD.instance.gameObject.AddComponent<Cutscene_Splash>();
+						UWHUD.instance.CutScenesFull.cs=cs;
+						UWHUD.instance.CutScenesFull.Begin();
 						break;
 				case 234:
-						//Debug.Log ("Play the credits");
 						Cutscene_Credits cc = UWHUD.instance.gameObject.AddComponent<Cutscene_Credits>();
 						UWHUD.instance.CutScenesFull.cs=cc;
 						UWHUD.instance.CutScenesFull.Begin();

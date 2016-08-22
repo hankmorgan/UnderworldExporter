@@ -83,6 +83,17 @@ public class Quest : UWEBase {
 		/// </summary>
 	public int IncenseDream;
 
+	/// <summary>
+	/// Tracks the last day that there was a garamon dream.
+	/// </summary>
+	public int DayGaramonDream=-1;
+
+		/// <summary>
+		/// Is tybal dead.
+		/// </summary>
+	public bool isTybalDead;
+
+
 
 	/// <summary>
 	/// Gets the next incense dream
