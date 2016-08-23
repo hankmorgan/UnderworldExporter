@@ -3,8 +3,12 @@ UnderworldExporter
 
 Toolset for converting Ultima Underworld and System Shock 1 levels and objects into other engines. Primarily Unity but earlier versions supported Idtech 4, Source Engine. Most features are geared towards UW1. UW2&SS1 are in cryosleep at the moment but the basic process works for them.
 
-Sample workspace and compiled version using Underworld 1 demo assets
-http://www.mediafire.com/download/9pz6y5j3sf9l59c/uwdemo_dev.zip
+Demo:
+http://www.mediafire.com/download/qde3ragktd91k3r/UW1_20160823.zip
+
+Unity 5 workspace
+http://www.mediafire.com/download/l2xsy09b7q3xnxd/uw1_dev_environment.zip
+
 
 Basic jist of what this does for creating in Unity.
 

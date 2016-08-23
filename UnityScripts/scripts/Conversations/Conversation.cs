@@ -341,7 +341,7 @@ public class Conversation : GuiBase {
 			{
 				//tl_input.gameObject.GetComponent<UIInput>().selected=true;
 				//UWHUD.instance.InputControl.selected=true;
-				UWHUD.instance.InputControl.Select();
+				//UWHUD.instance.InputControl.Select();
 			}
 
 		}
@@ -661,7 +661,7 @@ public class Conversation : GuiBase {
 		//inputctrl.GetComponent<GuiBase>().SetAnchorX(0.08f);
 		inputctrl.gameObject.GetComponent<InputHandler>().target=this.gameObject;
 		inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputConversationWords;
-		inputctrl.contentType= InputField.ContentType.Alphanumeric;
+		inputctrl.contentType= InputField.ContentType.Standard;
 		inputctrl.text="";
 		inputctrl.Select();
 		yield return StartCoroutine(WaitForTypedInput());
