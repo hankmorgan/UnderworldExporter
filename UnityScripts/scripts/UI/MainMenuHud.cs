@@ -281,6 +281,7 @@ public class MainMenuHud : GuiBase {
 						if (option==0)
 						{
 							//Start a new game
+								GameWorldController.instance.playerUW.EXP=50;
 								JourneyOnwards();
 						}
 						else

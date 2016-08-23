@@ -299,9 +299,13 @@ public class TileMap : UWEBase {
 		{
 			for (int j = 63; j>0; j--)
 			{
-				if (GetIsDoor(LevelNo,i,j)==true)
+				if (GetIsDoor(LevelNo,i,j)==true)			
 				{
-					DrawDoor(output,LevelNo,i,j,TileSize,TileSize,BorderColour);
+					if (GetTileVisited(LevelNo,i,j)==true)
+					{
+						DrawDoor(output,LevelNo,i,j,TileSize,TileSize,BorderColour);							
+					}
+					
 				}
 			}
 		}
@@ -1012,7 +1016,6 @@ public class TileMap : UWEBase {
 		/// <param name="tileY">Tile y.</param>
 	private bool GetTileVisited(int LevelNo, int tileX, int tileY)
 	{
-				return true;
 		return Tiles[LevelNo].tileVisited[tileX,tileY];
 	}
 
