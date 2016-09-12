@@ -569,7 +569,16 @@ public class UWCharacter : Character {
 					}
 					else
 					{//000~001~096~You cannot pick that up.
-						UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,96));
+						//Object cannot be picked up. Try and use it instead
+						if (objPicked.CanBeUsed)
+						{
+							UseMode();
+							UWHUD.instance.window.UWWindowWait (1.0f);
+						}	
+						else
+						{
+							UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,96));									
+						}					
 					}
 				}
 			}

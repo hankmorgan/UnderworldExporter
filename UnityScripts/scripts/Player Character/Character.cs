@@ -136,6 +136,7 @@ public class Character : UWEBase {
 					if (objPicked!=null)
 					{
 						objPicked.Use ();
+						UWHUD.instance.window.UWWindowWait (1.0f);
 					}
 				}
 			}
@@ -183,6 +184,13 @@ public class Character : UWEBase {
 						{
 						objPicked=Pickup(objPicked,pInv);
 						}
+					}
+					else
+					{//Object cannot be picked up. Try and use it instead
+						if (objPicked.CanBeUsed)
+						{
+							UseMode();
+						}							
 					}
 				}
 			}

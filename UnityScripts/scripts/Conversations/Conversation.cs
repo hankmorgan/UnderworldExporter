@@ -393,6 +393,7 @@ public class Conversation : GuiBase {
 	public virtual IEnumerator main()
 	{
 		UWHUD.instance.MessageScroll.Add (StringController.instance.GetString (7,1));
+		Conversation.InConversation=false;
 		yield break;
 	}
 

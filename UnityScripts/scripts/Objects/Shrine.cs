@@ -84,7 +84,7 @@ public class Shrine : object_base {
 								inputctrl.gameObject.GetComponent<InputHandler>().currentInputMode=InputHandler.InputMantraWords;
 
 
-								inputctrl.contentType= InputField.ContentType.Alphanumeric;
+								inputctrl.contentType= InputField.ContentType.Standard;
 								//TODO:Fix me inputctrl.selected=true;
 								inputctrl.Select();
 								//TODO:Fix me inputctrl.useLabelTextAtStart=true;

@@ -54,6 +54,7 @@ public class ButtonHandler : object_base {
 	{
 		if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand=="")
 		{
+			Debug.Log("USE!");
 			return Activate ();
 		}
 		else
