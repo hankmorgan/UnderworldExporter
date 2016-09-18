@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Interaction mode button code for controlling the interaction mode of the character.
+/// </summary>
 public class InteractionModeControlItem : GuiBase {
 	//Individual interface modes controls
 
@@ -15,7 +18,7 @@ public class InteractionModeControlItem : GuiBase {
 		{
 			return;
 		}
-		if (isOn==true)
+		if ((isOn==true) && (InteractionMode!=UWCharacter.InteractionModeOptions))
 		{
 			isOn=false;
 			InteractionModeControl.UpdateNow=true;

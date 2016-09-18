@@ -12,6 +12,9 @@ using RAIN.Navigation;
 /// </summary>
 public class ObjectInteraction : UWEBase {
 
+		public AudioSource aud;
+		public static bool PlaySoundEffects=true;
+
 		public const int NPC_TYPE =0;
 		public const int WEAPON =1;
 		public const int ARMOUR =2 ;
@@ -1478,5 +1481,15 @@ public class ObjectInteraction : UWEBase {
 				}
 		}
 
+
+	void OnCollisionEnter(Collision collision) {
+		if (PlaySoundEffects)
+		{
+			if (aud!=null)
+			{
+				aud.Play();		
+			}	
+		}			
+	}
 
 }

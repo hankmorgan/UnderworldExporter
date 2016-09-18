@@ -9,13 +9,14 @@ public class InteractionModeControl : GuiBase_Draggable {
 
 	public static bool UpdateNow=true;
 
+	public OptionsMenuControl OptionsMenu;
 
 	void Update () {
 	
 		if (UpdateNow==true)
 		{
 			UpdateNow=false;
-			for (int i = 0; i<=5;i++)
+			for (int i = 1; i<=5;i++)
 			{
 				if (i != UWCharacter.InteractionMode)
 				{//Off version
@@ -25,6 +26,12 @@ public class InteractionModeControl : GuiBase_Draggable {
 				{//On Version
 					Controls[i].texture=Resources.Load <Texture2D> (_RES +"/HUD/lfti/lfti_"+ ((i*2)+1).ToString("0000"));
 				}
+			}
+			if (UWCharacter.InteractionMode== UWCharacter.InteractionModeOptions)
+			{
+				OptionsMenu.gameObject.SetActive(true);
+				OptionsMenu.initMenu();
+				this.gameObject.SetActive(false);
 			}
 		}
 	}

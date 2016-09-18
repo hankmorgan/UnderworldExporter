@@ -26,6 +26,11 @@ public class MusicController : UWEBase {
 	public static float LastAttackCounter=0.0f;//To track the end of combat.
 
 	/// <summary>
+	/// Is music processing stopped
+	/// </summary>
+	public bool Stopped;
+
+	/// <summary>
 	/// Playing intro music
 	/// </summary>
 	public bool InIntro;
@@ -206,7 +211,11 @@ public class MusicController : UWEBase {
 	{
 		int rnd = Random.Range (0,tracklist.GetUpperBound(0)+1);
 		Aud.clip=MainTrackList[tracklist[rnd]];
-		Aud.Play();
+		if (Stopped==false)
+		{
+			Aud.Play();				
+		}
+		
 
 	}
 	/// <summary>
@@ -216,6 +225,21 @@ public class MusicController : UWEBase {
 	{
 		StopProcessing=true;
 		Aud.Stop ();
+	}
+
+		/// <summary>
+		/// Stops all music processing
+		/// </summary>
+	public void StopAll()
+	{
+		Stop();
+		Stopped=true;
+	}
+
+	public void ResumeAll()
+	{
+		Stopped=false;
+		Resume();	
 	}
 
 		/// <summary>
