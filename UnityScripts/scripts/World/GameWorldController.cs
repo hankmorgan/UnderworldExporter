@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -8,11 +9,13 @@ using System.Collections.Generic;
 /// <summary>
 /// Game world controller for controlling references and various global activities
 /// </summary>
+
 public class GameWorldController : UWEBase {
 
 		/// <summary>
 		/// Enables texture animation effects
 		/// </summary>
+
 	public bool EnableTextureAnimation;
 
 		/// <summary>
@@ -32,7 +35,12 @@ public class GameWorldController : UWEBase {
 		/// <summary>
 		/// What level number we are currently on.
 		/// </summary>
+
 	public int LevelNo;
+
+
+
+
 	/// <summary>
 	/// Array of cycled game palettes for animatione effects.
 	/// </summary>
@@ -57,11 +65,20 @@ public class GameWorldController : UWEBase {
 	/// <summary>
 	/// The player character.
 	/// </summary>
-	public UWCharacter playerUW;
+	[SerializeField]
+	private UWCharacter _playerUW;
+	public UWCharacter playerUW {
+		get { return _playerUW; }
+		set { _playerUW=value; }
+		}
+
+
 	/// <summary>
 	/// The music controller for the game
 	/// </summary>
 	public MusicController mus;
+
+
 	/// <summary>
 	/// The game object that picked up items are parented to.
 	/// </summary>
@@ -102,7 +119,6 @@ public class GameWorldController : UWEBase {
 	/// </summary>
 	public Shader vortex;
 
-
 	/// <summary>
 	/// Is the game at the main menu or should it start at the mainmenu.
 	/// </summary>
@@ -110,6 +126,7 @@ public class GameWorldController : UWEBase {
 
 	void Awake()
 	{
+		//if(LevelSerializer.IsDeserializing)	return;
 		instance=this;
 		UWEBase._RES = game;
 		objectMaster=new ObjectMasters();
@@ -123,13 +140,14 @@ public class GameWorldController : UWEBase {
 	}
 
 	void Start () {
+		//if(LevelSerializer.IsDeserializing)	return;
 		instance=this;
 		if (EnableTextureAnimation==true)
 		{
 			UWHUD.instance.CutsceneFullPanel.SetActive(false);
 			InvokeRepeating("UpdateAnimation",0.2f,0.2f);
 		}
-		if (AtMainMenu)
+		if ((AtMainMenu) && (!LevelSerializer.IsDeserializing))
 		{
 			SwitchLevel(-1);//Turn off all level maps
 			UWHUD.instance.CutsceneFullPanel.SetActive(true);
@@ -142,6 +160,7 @@ public class GameWorldController : UWEBase {
 		}
 		else
 		{
+			AtMainMenu=false;
 			UWHUD.instance.CutsceneFullPanel.SetActive(false);	
 			UWHUD.instance.mainmenu.gameObject.SetActive(false);
 		}

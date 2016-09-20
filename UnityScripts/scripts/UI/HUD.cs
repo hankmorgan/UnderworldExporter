@@ -21,4 +21,5 @@ public class HUD : UWEBase {
 	public GameObject main_window;//The immersive heads up display
 	public RawImage MapDisplay; //should be in a subclass?
 
+		public Text LoadingProgress;
 }

@@ -406,7 +406,9 @@ public class WindowDetectUW : WindowDetect {
 						GameWorldController.instance.playerUW.YAxis.enabled=true;
 						GameWorldController.instance.playerUW.XAxis.enabled=true;
 						GameWorldController.instance.playerUW.MouseLookEnabled=true;
-						Cursor.lockState = CursorLockMode.Locked;						
+												Cursor.lockState = CursorLockMode.Locked;
+												Cursor.visible = false;
+
 						UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
 					}
 					else
@@ -416,10 +418,16 @@ public class WindowDetectUW : WindowDetect {
 						GameWorldController.instance.playerUW.MouseLookEnabled=false;
 						Cursor.lockState = CursorLockMode.None;
 						UWHUD.instance.MouseLookCursor.texture= UWHUD.instance.CursorIconBlank;	
+												//UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;
+
 					}
 				}
 			}
-			
+						if (GameWorldController.instance.playerUW.MouseLookEnabled)
+						{
+								Debug.Log(Event.current.mousePosition);		
+						}
+
 			if (GameWorldController.instance.playerUW.MouseLookEnabled == false)
 			{
 				if ((WindowDetectUW.InMap==true) && (MapInteraction.InteractionMode==2))
@@ -438,6 +446,15 @@ public class WindowDetectUW : WindowDetect {
 					{
 						UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;	
 					}
+								//Added due to unity bug where mouse is offscreen!!!!
+								if (Input.GetMouseButtonDown(0))
+								{
+										OnClick(-1);
+								}
+								if (Input.GetMouseButtonDown(1))
+								{
+										OnClick(-2);
+								}
 				}	
 		}
 	}

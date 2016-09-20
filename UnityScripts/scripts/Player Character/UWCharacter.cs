@@ -77,14 +77,14 @@ public class UWCharacter : Character {
 	public void Awake()
 	{
 		Instance=this;
-		DontDestroyOnLoad(this);
+		//DontDestroyOnLoad(this);
 	}
 
 	public override void Start ()
 	{
 
 		base.Start ();
-
+		GameWorldController.instance.playerUW=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;
 		MouseLookEnabled=false;

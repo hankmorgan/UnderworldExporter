@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+//using Polenter.Serialization;
 
 /// <summary>
 /// Controls the ingame options menu
 /// </summary>
 public class OptionsMenuControl : GuiBase_Draggable {
+
+		public GameObject test;
+
 		private const int SAVE = 0;
 		private const int SAVE_SLOT_0=1;
 		private const int SAVE_SLOT_1=2;
@@ -94,6 +98,10 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		public GameObject QuitMenu;
 		public GameObject QuitYes;
 		public GameObject QuitNo;
+
+		private bool SaveNow;
+		private bool RestoreNow;
+		private int slot;
 
 	public void ButtonClickOptionsMenu(int index)
 	{
@@ -219,6 +227,14 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		SaveSlot_2.SetActive(true);
 		SaveSlot_3.SetActive(true);
 		Save_Cancel.SetActive(true);
+
+				//List the save names
+				UWHUD.instance.MessageScroll.Clear();
+				int i=1;
+				foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
+						{
+							UWHUD.instance.MessageScroll.Add(i++ + " " + sg.Name);
+						}
 	}
 
 	private void OptionRestore()
@@ -237,6 +253,14 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		RestoreSlot_3.SetActive(true);
 		Restore_Cancel.SetActive(true);
 		Restore_State.SetActive(true);
+
+				//List the save names
+				UWHUD.instance.MessageScroll.Clear();
+				int i=1;
+				foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
+				{
+						UWHUD.instance.MessageScroll.Add(i++ + " " + sg.Name);
+				}
 	}
 
 
@@ -329,6 +353,16 @@ public class OptionsMenuControl : GuiBase_Draggable {
 	private void BeginSaveToSlot(int slotNo)
 	{
 		Debug.Log("Begin Save to Slot " + slotNo);
+
+				//SharpSerializer ser = new SharpSerializer();
+				//ser.PropertyProvider.AttributesToIgnore.Clear();
+				//ser.Serialize(GameWorldController.instance.gameObject,"test.xml");
+				//
+				//ser.Serialize(GameWorldController.instance.LevelMarker().gameObject,"mesh.xml");
+				LevelSerializer.useCompression=false;
+				UWHUD.instance.LoadingProgress.text="Saving";
+				slot=slotNo;
+				SaveNow=true;
 	}
 
 		/// <summary>
@@ -337,6 +371,14 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		/// <param name="slotNo">Slot no.</param>
 	private void RestoreFromSlot(int slotNo)
 	{
+		foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+						if (sg.Name=="save_"+slotNo)
+						{
+							RestoreNow=true;
+							slot=slotNo;
+							UWHUD.instance.LoadingProgress.text="Restoring Save";
+						}
+				}
 			Debug.Log("Restoring Save " + slotNo);
 	}
 
@@ -394,5 +436,40 @@ public class OptionsMenuControl : GuiBase_Draggable {
 			QualitySettings.SetQualityLevel(3,true);break;
 		}
 	}
+
+		/*
+		static void HandleLevelSerializerProgress (string section, float complete)
+		{
+				Debug.Log(string.Format("Progress on {0} = {1:0.00%}", section, complete));
+		}
+
+		private void OnEnable() {
+				LevelSerializer.Progress += HandleLevelSerializerProgress;
+		}
+
+		private void OnDisable() {
+				LevelSerializer.Progress -= HandleLevelSerializerProgress;
+		}
+*/
+
+		private void OnGUI() {
+			if (SaveNow)
+			{
+						LevelSerializer.SaveGame("save_"+slot);
+						UWHUD.instance.LoadingProgress.text="";
+						SaveNow=false;
+			}
+			else if (RestoreNow)
+			{
+			RestoreNow=false;
+			foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+					if (sg.Name=="save_"+slot)
+					{					
+					LevelSerializer.LoadSavedLevel(sg.Data,false);
+					UWHUD.instance.LoadingProgress.text="";
+					}
+			}
+		}
+		}
 }
 
