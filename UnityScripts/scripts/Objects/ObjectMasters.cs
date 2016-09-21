@@ -39,7 +39,7 @@ public class ObjectMasters {
 		public string[] EquippedIconMaleLowQuality	= new string[500];
 		public string[] EquippedIconMaleMediumQuality	= new string[500];
 		public string[] EquippedIconMaleBestQuality= new string[500];
-	
+		public int[] ShouldSave=new int[500];
 
 
 	// Use this for initialization

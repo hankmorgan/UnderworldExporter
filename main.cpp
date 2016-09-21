@@ -1262,6 +1262,8 @@ int main()
 		int isAnimated;
 		int useSprite;
 
+		int ShouldSave;
+
 
 		int objClass; int objSubClass; int objSubClassIndex;	//Shock object classes
 
@@ -1378,12 +1380,12 @@ int main()
 						{
 						while (fgets(line, 500, f))
 							{                                                             //v
-							sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s %s %s %s %s %s %s %s %s %d %d",
+							sscanf(line, "%d %d %d %d %s %d %s %s %d %s %d %s %s %d %d %d %s %s %s %s %s %s %s %s %s %d %d %d",
 								&objNo, &objClass, &objSubClass, &objSubClassIndex, &objCat, &objType,
 								&objDesc, &objPath, &hasPart, &objParticle, &hasSound, &objSound, &objBase, &isSolid, &isMoveable, &isInventory, &invIcon,
 								&EquippedIconFemaleLowest, &EquippedIconFemaleLow, &EquippedIconFemaleMedium, &EquippedIconFemaleBest,
 								&EquippedIconMaleLowest, &EquippedIconMaleLow, &EquippedIconMaleMedium, &EquippedIconMaleBest,
-								&isAnimated, &useSprite);
+								&isAnimated, &useSprite, &ShouldSave);
 							objectMasters[objNo].index = objNo;
 							objectMasters[objNo].isSet = 1;
 							objectMasters[objNo].objClass = objClass;
@@ -1431,6 +1433,7 @@ int main()
 								objectMasters[objNo].isAnimated = isAnimated;
 								objectMasters[objNo].useSprite = useSprite;
 								strcpy_s(objectMasters[objNo].InvIcon, invIcon);
+								objectMasters[objNo].ShouldSave = ShouldSave;
 								}
 
 

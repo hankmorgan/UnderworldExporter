@@ -138,7 +138,7 @@ public class NPC : object_base {
 	///To flag initiation of the player into the AI modules
 	private static bool playerUWReady;
 	///AI module for the character.
-	public AIRig ai;	
+	private AIRig ai;	
 	
 	///Can the NPC fire off magic attacks.
 	public bool MagicAttack;	
@@ -161,13 +161,30 @@ public class NPC : object_base {
 		//this.gameObject.tag="NPCs";
 		//Gob = this.GetComponent<GoblinAI>();
 		//ai = this.GetComponentInChildren<AIRig>();
-		ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
-		ai.AI.WorkingMemory.SetItem<bool>("magicAttack",MagicAttack);
-		ai.AI.Body=this.gameObject;
-		ai.AI.Motor.DefaultSpeed=2.0f * (((float)GameWorldController.instance.critter.Speed[objInt().item_id-64]/12.0f)); 
-		ai.AI.WorkingMemory.SetItem<float>("Speed",ai.AI.Motor.DefaultSpeed);
+		//AI_INIT ();
 	}
 
+	void AI_INIT ()
+	{
+		if (ai == null) {
+			GameObject myInstance = Resources.Load ("AI_PREFABS/AI_LAND") as GameObject;
+			GameObject newObj = (GameObject)GameObject.Instantiate (myInstance);
+			newObj.name = this.gameObject.name + "_AI";
+			newObj.transform.position = Vector3.zero;
+			//new Vector3(0,0,0);
+			newObj.transform.parent = this.gameObject.transform;
+			newObj.transform.localPosition = Vector3.zero;
+			//new Vector3(0,0,0);
+			AIRig aiR = newObj.GetComponent<AIRig> ();
+			aiR.AI.Body = this.gameObject;
+			ai = aiR;
+			ai.AI.WorkingMemory.SetItem<GameObject> ("playerUW", GameWorldController.instance.playerUW.gameObject);
+			ai.AI.WorkingMemory.SetItem<bool> ("magicAttack", MagicAttack);
+			ai.AI.Body = this.gameObject;
+			ai.AI.Motor.DefaultSpeed = 2.0f * (((float)GameWorldController.instance.critter.Speed [objInt ().item_id - 64] / 12.0f));
+			ai.AI.WorkingMemory.SetItem<float> ("Speed", ai.AI.Motor.DefaultSpeed);
+		}
+	}
 
 		/// <summary>
 		/// Raises the death events for the player.
@@ -221,26 +238,26 @@ public class NPC : object_base {
 		{//Set the AI death state
 			//Update the appearance of the NPC
 			UpdateSprite();
+			AI_INIT();
 			ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			return;
 		}
 
-		if ( playerUWReady==false)
-		{//Initialise the relationship of the player to the AI module
-			//if(playerUW!=null)
-			//{
-				ai.AI.WorkingMemory.SetItem<GameObject>("playerUW",GameWorldController.instance.playerUW.gameObject);
-				playerUWReady=true;
-			//}
-		}
-		else
-		{//The AI is only active when the player is within a certain distance to the player camera.
-			ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
-			anim.enabled=ai.AI.IsActive;
-			if (ai.AI.IsActive==false)
+
+		//else
+		//{//The AI is only active when the player is within a certain distance to the player camera.
+		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8)
 			{
+				AI_INIT ();
+				ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
+				anim.enabled=true;
+			}
+			else
+			{
+				anim.enabled=false;
 				return;
 			}
+
 			//Update the appearance of the NPC
 			UpdateSprite();
 			
@@ -270,7 +287,7 @@ public class NPC : object_base {
 					}
 			}
 		}
-	}
+	//}
 
 
 		/// <summary>

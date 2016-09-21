@@ -165,6 +165,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 
 	public void initMenu()
 	{
+		Time.timeScale=0.0f;
 		DisplayBG.texture= MainBG;
 		SaveMenu.SetActive(true);
 		RestoreMenu.SetActive(true);
@@ -210,6 +211,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 		InteractionModeControl.UpdateNow=true;
 		this.gameObject.SetActive(false);	
+		Time.timeScale=1.0f;
 	}
 
 	private void OptionSave()
@@ -228,13 +230,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		SaveSlot_3.SetActive(true);
 		Save_Cancel.SetActive(true);
 
-				//List the save names
-				UWHUD.instance.MessageScroll.Clear();
-				int i=1;
-				foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
-						{
-							UWHUD.instance.MessageScroll.Add(i++ + " " + sg.Name);
-						}
+				DisplaySaves ();
 	}
 
 	private void OptionRestore()
@@ -254,15 +250,32 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		Restore_Cancel.SetActive(true);
 		Restore_State.SetActive(true);
 
-				//List the save names
-				UWHUD.instance.MessageScroll.Clear();
-				int i=1;
-				foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
-				{
-						UWHUD.instance.MessageScroll.Add(i++ + " " + sg.Name);
-				}
+		DisplaySaves ();
 	}
 
+	void DisplaySaves ()
+	{
+		string[] saveNames= {"","","",""};
+		//List the save names
+		UWHUD.instance.MessageScroll.Clear ();
+		
+		foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
+		{
+			int SaveIndex=	int.Parse(sg.Name.Replace("save_",""));
+			saveNames[SaveIndex] = sg.Name;
+		}
+		for (int i=0; i<=saveNames.GetUpperBound(0);i++)
+		{
+			if (saveNames[i]!="")
+			{
+				UWHUD.instance.MessageScroll.Add ((i+1) + " " + saveNames[i]);
+			}
+			else
+			{
+				UWHUD.instance.MessageScroll.Add ((i+1) + " No Save Data");	
+			}
+		}
+	}
 
 	private void OptionMusic()
 	{
@@ -455,9 +468,18 @@ public class OptionsMenuControl : GuiBase_Draggable {
 		private void OnGUI() {
 			if (SaveNow)
 			{
+						foreach (LevelSerializer.SaveEntry sgX in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) {
+								if (sgX.Name=="save_"+slot)
+								{					
+										sgX.Delete();
+										break;
+								}
+						}
+
 						LevelSerializer.SaveGame("save_"+slot);
 						UWHUD.instance.LoadingProgress.text="";
 						SaveNow=false;
+						ReturnToGame();
 			}
 			else if (RestoreNow)
 			{
@@ -467,6 +489,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 					{					
 					LevelSerializer.LoadSavedLevel(sg.Data,false);
 					UWHUD.instance.LoadingProgress.text="";
+					ReturnToGame();
 					}
 			}
 		}

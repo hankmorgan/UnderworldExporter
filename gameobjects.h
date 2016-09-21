@@ -429,6 +429,7 @@ struct objectMaster	//For common object properties.
 	short isAnimated;
 	short useSprite;
 	char InvIcon[80];
+	short ShouldSave;
 
 	char EquippedIconFemaleLowest[80];
 	char EquippedIconMaleLowest[80];//and default

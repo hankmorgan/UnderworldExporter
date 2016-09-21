@@ -423,10 +423,7 @@ public class WindowDetectUW : WindowDetect {
 					}
 				}
 			}
-						if (GameWorldController.instance.playerUW.MouseLookEnabled)
-						{
-								Debug.Log(Event.current.mousePosition);		
-						}
+
 
 			if (GameWorldController.instance.playerUW.MouseLookEnabled == false)
 			{
@@ -446,15 +443,67 @@ public class WindowDetectUW : WindowDetect {
 					{
 						UWHUD.instance.MouseLookCursor.texture=UWHUD.instance.CursorIcon;	
 					}
-								//Added due to unity bug where mouse is offscreen!!!!
-								if (Input.GetMouseButtonDown(0))
-								{
-										OnClick(-1);
-								}
-								if (Input.GetMouseButtonDown(1))
-								{
-										OnClick(-2);
-								}
+
+					//Added due to unity bug where mouse is offscreen!!!!
+								//UGH!!!
+					if (UWCharacter.InteractionMode!=UWCharacter.InteractionModeAttack)
+					{
+						if (JustClicked==false)
+						{
+							if (Input.GetMouseButtonDown(0))
+							{CursorInMainWindow=true;
+									OnPress(true,-1);
+							}
+							if (Input.GetMouseButtonDown(1))
+							{CursorInMainWindow=true;
+									OnPress(true,-2);
+							}
+							if (Input.GetMouseButtonUp(0))
+							{CursorInMainWindow=true;
+									OnPress(false,-1);
+									UWWindowWait(1.0f);
+							}
+							if (Input.GetMouseButtonUp(1))
+							{CursorInMainWindow=true;
+									OnPress(false,-2);
+									UWWindowWait(1.0f);
+							}
+							if (Input.GetMouseButton(0))
+							{		CursorInMainWindow=true;								
+									OnClick(-1);
+									UWWindowWait(1.0f);
+							}
+							if (Input.GetMouseButton(1))
+							{CursorInMainWindow=true;
+									OnClick(-2);
+									UWWindowWait(1.0f);
+							}	
+
+						}
+															
+					}
+					else
+					{//Combat mouse clicks
+						CursorInMainWindow=true;
+						if (Input.GetMouseButtonDown(0))
+						{CursorInMainWindow=true;
+								//OnClick(-1);
+								OnPress(true,-1);
+						}
+						if (Input.GetMouseButtonDown(1))
+						{CursorInMainWindow=true;
+								OnPress(true,-2);
+						}
+						if (Input.GetMouseButtonUp(0))
+						{CursorInMainWindow=true;
+								OnPress(false,-1);
+
+						}
+						if (Input.GetMouseButtonUp(1))
+						{CursorInMainWindow=true;
+								OnPress(false,-2);
+						}
+					}
 				}	
 		}
 	}

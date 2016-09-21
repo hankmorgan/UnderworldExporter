@@ -231,6 +231,7 @@ public class ObjectInteraction : UWEBase {
 
 		void Start () {
 			isAnimated=false;
+			animationStarted=false;
 			sr= this.gameObject.GetComponentInChildren<SpriteRenderer>();
 		}
 
@@ -683,7 +684,7 @@ public class ObjectInteraction : UWEBase {
 				myObj.layer = LayerMask.NameToLayer ("UWObjects");
 				myObj.transform.position = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform.position;
 				myObj.transform.parent = GameWorldController.instance.playerUW.playerInventory.InventoryMarker.transform;
-				ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
+				GameObject SpriteObj = ObjectInteraction.CreateObjectGraphics (myObj, _RES + "/Sprites/Objects/Objects_" + NewItem_id, true);
 				ObjectMasters objM = GameWorldController.instance.objectMaster;
 				ObjectInteraction objInt = ObjectInteraction.CreateObjectInteraction (myObj, 0.5f, 0.5f, 0.5f, 0.5f, objM.particle [NewItem_id], objM.InvIcon [NewItem_id], objM.InvIcon [NewItem_id], objM.type [NewItem_id], NewItem_id, 1, 40, 0, objM.isMoveable [NewItem_id], 1, 0, 1, 1, 0, 0, 1);
 				//Some known examples that occur
@@ -723,6 +724,8 @@ public class ObjectInteraction : UWEBase {
 						break;
 				}
 				//GameWorldController.instance.playerUW.playerInventory.ObjectInHand = myObj.name;
+				myObj.AddComponent<StoreInformation>();
+				SpriteObj.AddComponent<StoreInformation>();
 				return objInt;//myObj.GetComponent<ObjectInteraction> ();
 		}
 
@@ -817,7 +820,7 @@ public class ObjectInteraction : UWEBase {
 
 
 
-		public static void CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
+		public static GameObject CreateObjectGraphics(GameObject myObj,string AssetPath, bool BillBoard)
 		{	
 				//Create a sprite.
 				GameObject SpriteController = new GameObject(myObj.name + "_sprite");
@@ -837,6 +840,7 @@ public class ObjectInteraction : UWEBase {
 				{
 						SpriteController.AddComponent<Billboard> ();
 				}
+				return SpriteController;
 		}
 
 		public static ObjectInteraction CreateObjectInteraction(GameObject myObj,float DimX,float DimY,float DimZ, float CenterY, string WorldString, string InventoryString, string EquipString, int ItemType, int ItemId, int link, int Quality, int Owner, int isMoveable, int isUsable, int isAnimated, int useSprite,int isQuant, int isEnchanted, int flags, int inUseFlag ,string ChildName)
