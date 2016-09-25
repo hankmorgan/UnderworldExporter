@@ -398,6 +398,11 @@ public class WindowDetectUW : WindowDetect {
 						SetFullScreen();
 					}
 				}
+				if ((Event.current.Equals(Event.KeyboardEvent("t"))) && (WaitingForInput==false))
+					{//Tracking skill
+						TryTracking();	
+					}
+
 
 				if ((Event.current.Equals(Event.KeyboardEvent("e"))) && (WaitingForInput==false))
 				{			
@@ -506,5 +511,16 @@ public class WindowDetectUW : WindowDetect {
 					}
 				}	
 		}
+	}
+
+	/// <summary>
+	/// Tries the tracking skill to detect nearby monsters
+	/// </summary>
+	void TryTracking()
+	{
+		bool SkillSucess = GameWorldController.instance.playerUW.PlayerSkills.TrySkill(Skills.SkillTrack,Random.Range(0,30));
+		int skillLevel = GameWorldController.instance.playerUW.PlayerSkills.GetSkill(Skills.SkillTrack);
+		Debug.Log("Track test = " + SkillSucess);
+		Skills.TrackMonsters(this.gameObject,(float)skillLevel/3,SkillSucess);
 	}
 }

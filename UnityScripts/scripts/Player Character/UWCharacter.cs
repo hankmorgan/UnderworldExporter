@@ -36,6 +36,9 @@ public class UWCharacter : Character {
 	public float flySpeed;
 	public float walkSpeed;
 	public float speedMultiplier=1.0f;
+	public float swimSpeedMultiplier=1.0f;//Is set to a fractional value when swimming.
+	public float SwimTimer =0.0f;	//How long has the player been swimming. Used to determine when to start applying damage.
+	public float SwimDamageTimer; //For timing out drowning damage.
 	public bool isFloating;
 	public bool isWaterWalking;
 	public bool onGround;//Not currently used.
@@ -71,7 +74,7 @@ public class UWCharacter : Character {
 	public Vector3 MoonGatePosition=Vector3.zero;
 	public int MoonGateLevel = 2;//Domain of the mountainmen
 
-	public float lavaDamageTimer;
+	public float lavaDamageTimer;//How long before applying lava damage
 	public string currRegion;
 
 	public void Awake()
@@ -206,20 +209,38 @@ public class UWCharacter : Character {
 			//Still processing death.
 			return;
 		}
-
 		if (playerCam.enabled==true)
 		{
 			if (isSwimming==true)
 			{
-				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,-0.8f,Camera.main.transform.localPosition.z);
+				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,-0.8f,playerCam.transform.localPosition.z);
+				swimSpeedMultiplier= Mathf.Max((float)(PlayerSkills.Swimming/30.0f),0.1f);
+				SwimTimer = SwimTimer += Time.deltaTime;
+				//Not sure of what UW does here but for the moment 45seconds of damage gree swimming then 15s per skill point
+				if (SwimTimer>=05.0f + PlayerSkills.Swimming*15.0f)
+				{
+					SwimDamageTimer+=Time.deltaTime;
+					if (SwimDamageTimer>=10.0f)//Take Damage every 10 seconds.
+					{
+						ApplyDamage (1);
+						SwimDamageTimer=0.0f;
+					}
+				}
+				else
+				{
+					SwimDamageTimer=0.0f;
+				}
 			}
 			else
 			{
-				Camera.main.transform.localPosition=new Vector3(Camera.main.transform.localPosition.x,0.9198418f,Camera.main.transform.localPosition.z);
+				playerCam.transform.localPosition=new Vector3(playerCam.transform.localPosition.x,0.9198418f,playerCam.transform.localPosition.z);
+				swimSpeedMultiplier=1.0f;
+				SwimTimer=0.0f;
 			}
 		}
 		playerMotor.enabled=((!Paralyzed) && (!GameWorldController.instance.AtMainMenu) && (!Conversation.InConversation));
 		
+
 		if (isFlying)
 		{//Flying spell
 			playerMotor.movement.maxFallSpeed=0.0f;
@@ -242,7 +263,7 @@ public class UWCharacter : Character {
 			else
 			{
 				playerMotor.movement.maxFallSpeed=20.0f;//Default
-				playerMotor.movement.maxForwardSpeed=walkSpeed*speedMultiplier;
+				playerMotor.movement.maxForwardSpeed=walkSpeed*speedMultiplier*swimSpeedMultiplier;
 			}
 		}
 

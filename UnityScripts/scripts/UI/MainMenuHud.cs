@@ -10,6 +10,11 @@ public class MainMenuHud : GuiBase {
 		//References to hud elements
 		public GameObject CharGen;//panel
 		public GameObject OpScr;
+		public GameObject IntroductionButton;
+		public GameObject CreateCharacterButton;
+		public GameObject CreditsButton;
+		public GameObject JourneyOnButton;
+		public GameObject[] SaveGameButtons; 
 		public Text CharName;
 		public Text CharGender;
 		public Text CharClass;
@@ -20,7 +25,7 @@ public class MainMenuHud : GuiBase {
 		public Text[] CharSkillName;
 		public Text[] CharSkillVal;
 		public InputField EnterCharName;
-		public int MenuMode =0; //0=main, 1 = chargen
+		public int MenuMode =0; //0=main, 1 = chargen, 2= save games
 		public int chargenStage=0; 
 		//0 = Gender
 		//1 = Handeness
@@ -78,7 +83,7 @@ public class MainMenuHud : GuiBase {
 
 		void Update()
 		{
-				if (MenuMode==1)
+				if ((MenuMode==1) || (MenuMode==2))
 				{
 						if (Input.GetKey(KeyCode.Escape))
 						{
@@ -126,8 +131,21 @@ public class MainMenuHud : GuiBase {
 							UWHUD.instance.CutScenesFull.Begin();
 							break;
 					case 3:// Journey onwards. In the future will be a link to load menu
-							JourneyOnwards();
+							DisplaySaveGames();
+							MenuMode=2;
 							break;
+					case 4://Reset MainMenu
+							IntroductionButton.SetActive(true);
+							CreateCharacterButton.SetActive(true);
+							CreditsButton.SetActive(true);
+							JourneyOnButton.SetActive(true);
+							for (int i=0; i<SaveGameButtons.GetUpperBound(0);i++)
+							{
+								SaveGameButtons[i].SetActive(false);			
+							}		
+							OpScr.SetActive(true);
+							CharGen.SetActive(false);
+							break;							
 					}		
 				}
 				else
@@ -137,6 +155,61 @@ public class MainMenuHud : GuiBase {
 
 		}
 
+
+		void DisplaySaveGames()
+		{
+				IntroductionButton.SetActive(false);
+				CreateCharacterButton.SetActive(false);
+				CreditsButton.SetActive(false);
+				JourneyOnButton.SetActive(false);
+
+				string[] saveNames= {"","","",""};
+				//List the save names
+				UWHUD.instance.MessageScroll.Clear ();
+
+				foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames [LevelSerializer.PlayerName]) 
+				{
+						int SaveIndex=	int.Parse(sg.Name.Replace("save_",""));
+						saveNames[SaveIndex] = sg.Name;
+				}
+				for (int i=0; i<=saveNames.GetUpperBound(0);i++)
+				{						
+						if (saveNames[i]!="")
+						{
+								SaveGameButtons[i].SetActive(true);	
+								SaveGameButtons[i].GetComponent<Text>().text=saveNames[i];
+						}
+						else
+						{
+								SaveGameButtons[i].SetActive(false);	
+								//UWHUD.instance.MessageScroll.Add ((i+1) + " No Save Data");	
+						}
+				}
+	
+		}
+
+		/// <summary>
+		/// Loads the save at the specified slot
+		/// </summary>
+		/// <param name="SlotNo">Slot no.</param>
+		public void LoadSave(int SlotNo)
+		{
+			if (SlotNo==-1)
+			{//Speedstart
+					JourneyOnwards();
+					return;
+			}
+			foreach (LevelSerializer.SaveEntry sg in LevelSerializer.SavedGames[LevelSerializer.PlayerName]) 
+				{
+					if (sg.Name=="save_"+SlotNo)
+					{					
+						LevelSerializer.LoadSavedLevel(sg.Data,false);
+						UWHUD.instance.LoadingProgress.text="";
+						UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);	
+						Destroy (this.gameObject);
+					}
+				}
+		}
 
 		public void ChargenClick(int option)
 		{
@@ -449,7 +522,9 @@ public class MainMenuHud : GuiBase {
 				}		
 		}
 
-
+		/// <summary>
+		/// Brings the player into the gameworld when starting a new game.
+		/// </summary>
 		public void JourneyOnwards()
 		{
 			GameWorldController.instance.SwitchLevel(0);
