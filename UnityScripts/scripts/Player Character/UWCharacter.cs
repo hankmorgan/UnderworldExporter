@@ -76,6 +76,8 @@ public class UWCharacter : Character {
 
 	public float lavaDamageTimer;//How long before applying lava damage
 	public string currRegion;
+		private bool InventoryReady=false;
+
 
 	public void Awake()
 	{
@@ -87,6 +89,7 @@ public class UWCharacter : Character {
 	{
 
 		base.Start ();
+				InventoryReady=false;
 		GameWorldController.instance.playerUW=this;
 		XAxis.enabled=false;
 		YAxis.enabled=false;
@@ -97,25 +100,13 @@ public class UWCharacter : Character {
 
 		//Tells other objects about this component;
 
-		//DoorControl.playerUW=this.gameObject.GetComponent<UWCharacter>();
-		//Container.playerUW=this.GetComponent<UWCharacter>();
-		//SpellEffect.playerUW=this.GetComponent<UWCharacter>();
 		RuneSlot.playerUW=this.GetComponent<UWCharacter>();
-		//NPC.playerUW=this.GetComponent<UWCharacter>();
 		Magic.playerUW=this.GetComponent<UWCharacter>();
-		//object_base.playerUW= this.gameObject.GetComponent<UWCharacter>();
 		SpellProp.playerUW = this.gameObject.GetComponent<UWCharacter>();
-		
 
-		//ObjectInteraction.playerUW =this.gameObject.GetComponent<UWCharacter>();
 		UWHUD.instance.InputControl.text="";
 		UWHUD.instance.MessageScroll.Clear ();
-		
-	if (SceneManager.GetActiveScene().name =="0")
-		{//Load the first level
-						//Debug.Log("Loading first level");
-				//RoomManager.LoadRoom("1");
-		}
+
 	}
 
 	void PlayerDeath()
@@ -191,6 +182,21 @@ public class UWCharacter : Character {
 	// Update is called once per frame
 	public override void Update () {
 		base.Update ();
+		if (InventoryReady==false)
+		{
+						
+			if (!LevelSerializer.IsDeserializing)
+			{
+				if ((playerInventory!=null))
+				{
+					if (playerInventory.GetCurrentContainer()!=null)
+					{
+							playerInventory.Refresh();
+							InventoryReady=true;				
+					}
+				}	
+			}
+		}
 		if ((WindowDetectUW.WaitingForInput==true) && (Instrument.PlayingInstrument==false))//TODO:Make this cleaner!!
 		{//TODO: This should be in window detect
 			//UWHUD.instance.MessageScroll.gameObject.GetComponent<UIInput>().selected=true;

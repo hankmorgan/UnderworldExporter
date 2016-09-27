@@ -13,10 +13,12 @@ public class SaveGameButton : GuiBase {
 
 		public Text label;
 
-		void Start()
+		public override void Start()
 		{
-			label.color= SaveGameButton.Off;	
+				base.Start();
+				label.color= SaveGameButton.Off;	
 		}
+
 
 		public void OnHoverEnter()
 		{

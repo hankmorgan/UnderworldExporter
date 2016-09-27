@@ -489,6 +489,7 @@ public class OptionsMenuControl : GuiBase_Draggable {
 					{					
 					LevelSerializer.LoadSavedLevel(sg.Data,false);
 					UWHUD.instance.LoadingProgress.text="";
+					GameWorldController.instance.playerUW.playerInventory.Refresh();
 					ReturnToGame();
 					}
 			}

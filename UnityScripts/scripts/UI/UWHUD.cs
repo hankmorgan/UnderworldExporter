@@ -89,6 +89,12 @@ public class UWHUD : HUD {
 			instance=this;
 		}
 
+
+		void Start()
+		{
+				MapPanel.transform.SetAsLastSibling();
+				ConversationPanel.transform.SetAsLastSibling();
+		}
 		//void Start()
 		//{
 			//RefreshPanels(-1);
