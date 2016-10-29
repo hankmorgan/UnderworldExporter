@@ -81,23 +81,21 @@ public class MainMenuHud : GuiBase {
 			}
 		}
 
-		void Update()
+
+		void OnGUI()
 		{
+				CursorPosition.center = Event.current.mousePosition;
+				GUI.DrawTexture (CursorPosition,CursorIcon);
 				if ((MenuMode==1) || (MenuMode==2))
 				{
 						if (Input.GetKey(KeyCode.Escape))
 						{
 								MenuMode=0;
 								OpScr.SetActive(true);
-								CharGen.SetActive(false);							
+								CharGen.SetActive(false);
+								ButtonClickMainMenu(4);
 						}
 				}
-		}
-
-		void OnGUI()
-		{
-				CursorPosition.center = Event.current.mousePosition;
-				GUI.DrawTexture (CursorPosition,CursorIcon);
 		}
 
 
@@ -131,8 +129,8 @@ public class MainMenuHud : GuiBase {
 							UWHUD.instance.CutScenesFull.Begin();
 							break;
 					case 3:// Journey onwards. In the future will be a link to load menu
-							DisplaySaveGames();
-							MenuMode=2;
+								MenuMode=2;
+								DisplaySaveGames();							
 							break;
 					case 4://Reset MainMenu
 							IntroductionButton.SetActive(true);

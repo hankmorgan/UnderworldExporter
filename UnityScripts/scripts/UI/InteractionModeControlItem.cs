@@ -10,7 +10,7 @@ public class InteractionModeControlItem : GuiBase {
 	public int InteractionMode;
 	public bool isOn;
 	public InteractionModeControl imc;
-
+	public KeyCode ShortCutKey;
 
 	public void OnClick()
 	{
@@ -30,6 +30,15 @@ public class InteractionModeControlItem : GuiBase {
 			imc.TurnOffOthers(InteractionMode);
 			InteractionModeControl.UpdateNow=true;
 			UWCharacter.InteractionMode=InteractionMode;
+		}
+	}
+
+
+	void Update()
+	{
+		if (Input.GetKeyUp(ShortCutKey))	
+		{
+				OnClick();
 		}
 	}
 }
