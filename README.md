@@ -22,4 +22,3 @@ Extracts a big old editor script that re-creates the individual game objects to 
 Attached UnityScripts for implementing vanilla game behaviour.
 
 The tool is also a general purpose extractor, decompressor and data dumper.
-
