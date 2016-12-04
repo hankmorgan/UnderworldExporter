@@ -91,4 +91,22 @@ public class TMAP : object_base {
 		}
 		return base.ActivateByObject (ObjectUsed);
 	}
+
+
+
+		public override string ContextMenuDesc(int item_id)
+		{
+			return "";	
+		}
+
+
+		public override string ContextMenuUsedDesc()
+		{
+			return "";	
+		}
+
+		public override string ContextMenuUsedPickup()
+		{
+			return "";	
+		}
 }

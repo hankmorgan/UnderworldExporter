@@ -67,4 +67,9 @@ public class Potion : enchantment_base {
 			return true;
 	}
 
+
+		public override string ContextMenuUsedDesc ()
+		{
+				return "L-Click to consume";
+		}
 }

@@ -150,7 +150,7 @@ public class ObjectInteraction : UWEBase {
 		/// <summary>
 		/// Indicates if the object can be used.
 		/// </summary>
-		public bool CanBeUsed;//unimplemented
+		public bool CanBeUsed;
 
 		/// <summary>
 		/// Tells if object is in the inventory or in the open world in case there is different behaviours needed depending on the case.
@@ -406,6 +406,24 @@ public class ObjectInteraction : UWEBase {
 				return true;
 		}
 
+		/// <summary>
+		/// Looks the description to be displayed in a context menu.
+		/// </summary>
+		/// <returns>The context menu description</returns>
+		public string LookDescriptionContext()
+		{
+			object_base item;
+			item= this.GetComponent<object_base>();
+			if(item!=null)
+			{
+				//return (StringController.instance.GetSimpleObjectNameUW(item_id));
+				return item.GetContextMenuText(item_id,CanBeUsed,CanBePickedUp);
+			}
+			else
+			{
+				return "";
+			}
+		}
 
 		public bool LookDescription()
 		{//Returns the description of this object.

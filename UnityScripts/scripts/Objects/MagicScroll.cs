@@ -15,4 +15,10 @@ public class MagicScroll : enchantment_base {
 			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}		
 	}
+
+
+		public override string ContextMenuUsedDesc ()
+		{
+			return "L-Click to cast";
+		}
 }

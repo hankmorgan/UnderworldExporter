@@ -7,13 +7,20 @@ using UnityEngine.UI;
 /// </summary>
 public class object_base : UWEBase {
 
-	//public static UWCharacter playerUW;
-	/// Output control to display text on
-	//public static ScrollController ml;
+	
 	
 	//The Object interaction that is on this object.
 	private ObjectInteraction _objInt;
 	
+		//For the context menu
+	public static string ItemDesc;
+	public static string UseableDesc;
+	public static string PickableDesc;
+
+	public static bool UseAvail;
+	public static bool PickAvail;
+	public static bool TalkAvail;
+
 	///A trigger to activate when this object is picked up.
 	public string PickupLink;
 
@@ -539,5 +546,51 @@ public class object_base : UWEBase {
 			return GameWorldController.instance.objectMaster.particle[objInt().item_id];
 		}
 
-}
 
+		/// <summary>
+		/// Gets the context menu text.
+		/// </summary>
+		public string GetContextMenuText(int item_id, bool isUseable, bool isPickable)
+		{				
+			ItemDesc= ContextMenuDesc(item_id);
+			TalkAvail=false;
+			if (isUseable)
+			{
+				UseableDesc = ContextMenuUsedDesc();//TODO:Controls
+				UseAvail=true;
+			}
+			else
+			{
+				UseableDesc="";
+				UseAvail=false;
+			}
+
+			if (isPickable)
+			{
+				PickableDesc=ContextMenuUsedPickup();
+				PickAvail=true;
+			}
+			else
+			{
+				PickableDesc="";
+				PickAvail=false;
+			}
+			return ItemDesc + "\n" + UseableDesc + " " + PickableDesc;
+		}
+
+		public virtual string ContextMenuDesc(int item_id)
+		{
+			return StringController.instance.GetSimpleObjectNameUW(item_id);	
+		}
+
+
+		public virtual string ContextMenuUsedDesc()
+		{
+			return "L-Click to use";	
+		}
+
+		public virtual string ContextMenuUsedPickup()
+		{
+			return "R-Click to pickup";	
+		}
+}

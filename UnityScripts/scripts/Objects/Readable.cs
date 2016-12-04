@@ -147,4 +147,9 @@ public class Readable : object_base {
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,150));
 				return true;
 		}
+
+	public override string ContextMenuUsedDesc()
+	{
+		return "L-Click to examine";	
+	}
 }

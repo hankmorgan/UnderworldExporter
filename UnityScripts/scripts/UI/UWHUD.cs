@@ -84,6 +84,9 @@ public class UWHUD : HUD {
 		public Text NPCName;
 
 
+		public Text ContextMenu;
+
+
 		void Awake()
 		{
 			instance=this;

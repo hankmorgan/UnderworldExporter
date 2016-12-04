@@ -407,4 +407,18 @@ public class DoorControl : object_base {
 			return StringController.instance.GetString (5,5);//massive?
 		}
 	} 
+
+
+
+	public override string ContextMenuUsedDesc ()
+	{
+		if (state==false)//Closed
+			{
+				return "L-Click to open";		
+			}
+			else
+			{
+				return "L-Click to close";		
+			}
+	}
 }

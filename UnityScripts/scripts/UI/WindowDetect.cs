@@ -77,6 +77,11 @@ public class WindowDetect : UWEBase {
 	/// </summary>
 	public float WindowWaitCount=0;
 
+		/// <summary>
+		/// Is the UI set to be context sensitive
+		/// </summary>
+	public static bool ContextUI=true;
+
 	public virtual void Start()
 	{
 		CursorPosition = new Rect(

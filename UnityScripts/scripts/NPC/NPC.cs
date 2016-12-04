@@ -693,4 +693,22 @@ public class NPC : object_base {
 	{
 		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,UWCharacter.Instance.gameObject,SpellIndex,Magic.SpellRule_TargetVector);
 	}
+
+	public override string ContextMenuDesc (int item_id)
+	{
+		if(objInt().isIdentified==true)
+		{
+			return StringController.instance.GetString (7,npc_whoami+16);
+		}	
+		else
+		{
+			return base.ContextMenuDesc(item_id);
+		}
+	}
+
+	public override string ContextMenuUsedDesc()
+	{
+		TalkAvail=true;
+		return "L-Click to talk to";
+	}
 }

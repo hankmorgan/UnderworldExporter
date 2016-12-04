@@ -162,4 +162,10 @@ public class Food : object_base {
 		}
 		return true;
 	}
+
+
+		public override string ContextMenuUsedDesc ()
+		{
+			return "L-Click to eat";
+		}
 }

@@ -88,6 +88,38 @@ public class WindowDetectUW : WindowDetect {
 								break;
 						}
 				}
+
+
+			if (ContextUI)
+			{
+				//if (CursorInMainWindow)
+				//{
+					ContextUIMode();			
+				//}					
+			}
+		}
+
+
+		void ContextUIMode()
+		{
+			Ray ray ;
+			if (UWCharacter.Instance.MouseLookEnabled==true)
+			{
+				ray =Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+			}
+			else
+			{
+				ray= Camera.main.ScreenPointToRay(Input.mousePosition);
+			}
+			UWHUD.instance.ContextMenu.text="";
+			RaycastHit hit = new RaycastHit(); 
+			if (Physics.Raycast(ray,out hit,UWCharacter.Instance.GetUseRange()))
+			{
+				if (hit.transform.gameObject.GetComponent<ObjectInteraction>()!=null)
+				{
+					UWHUD.instance.ContextMenu.text=hit.transform.gameObject.GetComponent<ObjectInteraction>().LookDescriptionContext();
+				}
+			}		
 		}
 
 		/// <summary>
@@ -126,44 +158,6 @@ public class WindowDetectUW : WindowDetect {
 				PointerEventData pntr = (PointerEventData)evnt;
 				OnPress(false,pntr.pointerId);
 		}
-
-		/*public void OnHover ()
-		{
-				//base.OnHover (isOver);
-
-				if(! CursorInMainWindow )
-				{
-						GameWorldController.instance.playerUW.PlayerCombat.AttackCharging=false;
-						GameWorldController.instance.playerUW.PlayerCombat.Charge=0;
-						if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
-						{
-								UWHUD.instance.wpa.SetAnimation= GameWorldController.instance.playerUW.PlayerCombat.GetWeapon () +"_Ready_" + GameWorldController.instance.playerUW.PlayerCombat.GetRace () + "_" + GameWorldController.instance.playerUW.PlayerCombat.GetHand();
-						}
-						else
-						{
-								UWHUD.instance.wpa.SetAnimation= "WeaponPutAway";
-						}
-				}
-		}*/
-
-		/*	protected override void OnHover (bool isOver)
-		{
-				base.OnHover (isOver);
-
-				if(! isOver )
-				{
-						GameWorldController.instance.playerUW.PlayerCombat.AttackCharging=false;
-						GameWorldController.instance.playerUW.PlayerCombat.Charge=0;
-						if (UWCharacter.InteractionMode==UWCharacter.InteractionModeAttack)
-						{
-								UWHUD.instance.wpa.SetAnimation= GameWorldController.instance.playerUW.PlayerCombat.GetWeapon () +"_Ready_" + GameWorldController.instance.playerUW.PlayerCombat.GetRace () + "_" + GameWorldController.instance.playerUW.PlayerCombat.GetHand();
-						}
-						else
-						{
-								UWHUD.instance.wpa.SetAnimation= "WeaponPutAway";
-						}
-				}
-		}*/
 
 		protected override void OnPress (bool isPressed, int PtrID)
 		{
@@ -223,46 +217,62 @@ public class WindowDetectUW : WindowDetect {
 		/// <param name="ptrID">Ptr I.</param>
 		void ClickEvent(int ptrID)
 		{
-				if ((GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
-				{
-						//Debug.Log("player has a spell to cast");
-						return;
-				}
+			if ((GameWorldController.instance.playerUW.PlayerMagic.ReadiedSpell!="" ) ||(JustClicked==true))
+			{
+					//Debug.Log("player has a spell to cast");
+					return;
+			}
 
-				switch (UWCharacter.InteractionMode)
+			if (ContextUI)
+			{
+				if ((object_base.UseAvail) && (ptrID==-1))//Use on left click
 				{
-				case UWCharacter.InteractionModeOptions://Options mode
-						return;//do nothing
-				case UWCharacter.InteractionModeTalk://Talk
-						GameWorldController.instance.playerUW.TalkMode();
-						break;
-				case UWCharacter.InteractionModePickup://Pickup
-						if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
-						{
-								UWWindowWait(1.0f);
-								ThrowObjectInHand();
-						}
-						else
-						{
-								GameWorldController.instance.playerUW.PickupMode(ptrID);
-						}			
-						break;
-				case UWCharacter.InteractionModeLook://look
-						GameWorldController.instance.playerUW.LookMode();//do nothing
-						break;
-				case UWCharacter.InteractionModeAttack:	//attack
-						break;
-				case UWCharacter.InteractionModeUse://Use
-						if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
-						{
-								GameWorldController.instance.playerUW.UseMode();
-						}
-						else
-						{
-								GameWorldController.instance.playerUW.UseMode();
-						}
-						break;
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;
 				}
+				if ((object_base.PickAvail) && (ptrID==-2))//Pickup on right click
+				{
+					UWCharacter.InteractionMode=UWCharacter.InteractionModePickup;
+				}
+				if ((object_base.TalkAvail) && (ptrID==-1))//Talk on left click
+				{
+					UWCharacter.InteractionMode=UWCharacter.InteractionModeTalk;
+				}
+			}
+
+			switch (UWCharacter.InteractionMode)
+			{
+			case UWCharacter.InteractionModeOptions://Options mode
+					return;//do nothing
+			case UWCharacter.InteractionModeTalk://Talk
+					GameWorldController.instance.playerUW.TalkMode();
+					break;
+			case UWCharacter.InteractionModePickup://Pickup
+					if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+					{
+							UWWindowWait(1.0f);
+							ThrowObjectInHand();
+					}
+					else
+					{
+							GameWorldController.instance.playerUW.PickupMode(ptrID);
+					}			
+					break;
+			case UWCharacter.InteractionModeLook://look
+					GameWorldController.instance.playerUW.LookMode();//do nothing
+					break;
+			case UWCharacter.InteractionModeAttack:	//attack
+					break;
+			case UWCharacter.InteractionModeUse://Use
+					if (GameWorldController.instance.playerUW.gameObject.GetComponent<PlayerInventory>().ObjectInHand!="")
+					{
+							GameWorldController.instance.playerUW.UseMode();
+					}
+					else
+					{
+							GameWorldController.instance.playerUW.UseMode();
+					}
+					break;
+			}
 		}
 
 		/// <summary>

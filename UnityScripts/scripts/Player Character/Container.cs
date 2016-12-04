@@ -620,4 +620,10 @@ public class Container : object_base {
 	{//Assumes no container is generated as an opened on.
 		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
 	}
+
+	public override string ContextMenuUsedDesc ()
+	{
+		return "L-Click to open";
+	}
+
 }
