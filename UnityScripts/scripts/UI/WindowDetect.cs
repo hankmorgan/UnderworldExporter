@@ -80,7 +80,11 @@ public class WindowDetect : UWEBase {
 		/// <summary>
 		/// Is the UI set to be context sensitive
 		/// </summary>
-	public static bool ContextUI=true;
+		/// 
+	public static bool ContextUIEnabled=true;
+
+	public static bool ContextUIUse=true;
+			
 
 	public virtual void Start()
 	{

@@ -16,7 +16,7 @@ public class InteractionModeControl : GuiBase_Draggable {
 		if (UpdateNow==true)
 		{
 			UpdateNow=false;
-			WindowDetect.ContextUI =((UWCharacter.InteractionModeTalk==UWCharacter.InteractionMode) ||(UWCharacter.InteractionModePickup==UWCharacter.InteractionMode) || (UWCharacter.InteractionModeUse==UWCharacter.InteractionMode));//Only context in use or pickup
+			WindowDetect.ContextUIUse =((UWCharacter.InteractionModeTalk==UWCharacter.InteractionMode) ||(UWCharacter.InteractionModePickup==UWCharacter.InteractionMode) || (UWCharacter.InteractionModeUse==UWCharacter.InteractionMode));//Only context in use or pickup
 			for (int i = 1; i<=5;i++)
 			{
 				if (i != UWCharacter.InteractionMode)

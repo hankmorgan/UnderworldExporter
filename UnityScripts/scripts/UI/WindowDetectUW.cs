@@ -90,7 +90,7 @@ public class WindowDetectUW : WindowDetect {
 				}
 
 
-			if (ContextUI)
+			if (ContextUIEnabled)
 			{
 				//if (CursorInMainWindow)
 				//{
@@ -223,8 +223,8 @@ public class WindowDetectUW : WindowDetect {
 					return;
 			}
 
-			if (ContextUI)
-			{
+			if ((ContextUIEnabled) && (ContextUIUse))
+			{//If context sensitive UI is enabled and it is one of the use modes override the interaction mode.
 				if ((object_base.UseAvail) && (ptrID==-1))//Use on left click
 				{
 					UWCharacter.InteractionMode=UWCharacter.InteractionModeUse;

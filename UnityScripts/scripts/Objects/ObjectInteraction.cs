@@ -417,7 +417,7 @@ public class ObjectInteraction : UWEBase {
 			if(item!=null)
 			{
 				//return (StringController.instance.GetSimpleObjectNameUW(item_id));
-				return item.GetContextMenuText(item_id,CanBeUsed,CanBePickedUp);
+						return item.GetContextMenuText(item_id,CanBeUsed && WindowDetect.ContextUIUse,CanBePickedUp&& WindowDetect.ContextUIUse);
 			}
 			else
 			{
