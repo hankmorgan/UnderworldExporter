@@ -237,4 +237,17 @@ public class LightSource : object_base {
 			}
 			return true;
 	}
+
+		public override string UseVerb()
+		{
+			if (IsOn)
+			{
+				return "douse";
+			}
+			else
+			{
+				return "ignite";
+			}
+		}
+
 }

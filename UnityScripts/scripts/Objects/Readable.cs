@@ -148,8 +148,14 @@ public class Readable : object_base {
 				return true;
 		}
 
-	public override string ContextMenuUsedDesc()
+	public override string UseVerb()
 	{
-		return "L-Click to examine";	
+		return "read";	
 	}
+
+	public override string ExamineVerb ()
+	{
+		return "read";
+	}
+
 }

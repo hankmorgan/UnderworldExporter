@@ -709,6 +709,11 @@ public class NPC : object_base {
 	public override string ContextMenuUsedDesc()
 	{
 		TalkAvail=true;
-		return "L-Click to talk to";
+		return base.ContextMenuUsedDesc();
+	}
+
+	public override string UseVerb ()
+	{
+		return "talk";
 	}
 }

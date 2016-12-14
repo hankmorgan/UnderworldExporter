@@ -283,9 +283,9 @@ public class Shrine : object_base {
 		return use ();
 	}
 
-	public override string ContextMenuUsedDesc ()
+	public override string UseVerb ()
 	{
-		return "L-Click to meditate";	
+		return "meditate";	
 	}
 }
 

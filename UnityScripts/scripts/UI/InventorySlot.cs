@@ -21,6 +21,7 @@ public class InventorySlot : GuiBase {
 	public static string TempLookAt;
 	//private int InteractionModeValue;
 	private GameObject QuantityObj=null;//Reference to quantity object being picked up
+	public static bool Hovering;
 
 		public void BeginDrag()
 		{
@@ -550,5 +551,51 @@ public class InventorySlot : GuiBase {
 		UWHUD.instance.MessageScroll.DirectSet(InventorySlot.TempLookAt);
 	}
 
+		/// <summary>
+		/// Handles hovering over the slot
+		/// </summary>
+		public void OnHoverEnter()
+		{
+			if (GameWorldController.instance.playerUW.playerInventory.ObjectInHand!="")
+			{
+				return;
+			}
+			Hovering=true;
+			UWHUD.instance.ContextMenu.text="";	
+			GameObject currObj=GameWorldController.instance.playerUW.playerInventory.GetGameObjectAtSlot (slotIndex);	
+				if (currObj!=null)
+				{
+						ObjectInteraction objInt=currObj.GetComponent<ObjectInteraction>();
+						if (objInt!=null)
+						{
+								string ObjectName="";
+								string UseString="";
+								ObjectName=StringController.instance.GetSimpleObjectNameUW(objInt.item_id);
+								switch (UWCharacter.InteractionMode)
+								{
+								case UWCharacter.InteractionModeUse:
+										UseString = "L-Click to " + objInt.UseVerb();
+										break;
+								case UWCharacter.InteractionModeLook:
+										UseString = "L-Click to " + objInt.UseVerb() + " R-Click to " + objInt.ExamineVerb();
+										break;
+								case UWCharacter.InteractionModePickup:
+										UseString = "L-Click to " + objInt.UseVerb()+" R-Click to " + objInt.PickupVerb() ;
+										break;
+
+								}
+								UWHUD.instance.ContextMenu.text=ObjectName +"\n"+UseString;
+						}	
+				}
+		}
+
+		/// <summary>
+		/// Handles cancelling hovering over the slot
+		/// </summary>
+		public void OnHoverExit()
+		{
+			UWHUD.instance.ContextMenu.text="";
+				Hovering=false;
+		}
 
 }

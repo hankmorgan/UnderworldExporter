@@ -219,10 +219,10 @@ public class Bedroll : object_base {
 		UWHUD.instance.MessageScroll.Add(StringController.instance.GetString (1,18));
 	}
 
-		public override string ContextMenuUsedDesc ()
-		{
-				return "L-Click to sleep";
-		}
 
+		public override string UseVerb ()
+		{
+			return "sleep";
+		}
 
 }

@@ -410,15 +410,15 @@ public class DoorControl : object_base {
 
 
 
-	public override string ContextMenuUsedDesc ()
+	public override string UseVerb ()
 	{
 		if (state==false)//Closed
 			{
-				return "L-Click to open";		
+				return "open";		
 			}
 			else
 			{
-				return "L-Click to close";		
+				return "close";		
 			}
 	}
 }

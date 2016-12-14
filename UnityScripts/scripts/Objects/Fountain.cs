@@ -22,8 +22,8 @@ public class Fountain : object_base {
 	}
 
 
-		public override string ContextMenuUsedDesc ()
+		public override string UseVerb ()
 		{
-			return "L-Click to drink";
+			return "drink";
 		}
 }

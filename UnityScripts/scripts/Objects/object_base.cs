@@ -21,6 +21,8 @@ public class object_base : UWEBase {
 	public static bool PickAvail;
 	public static bool TalkAvail;
 
+
+
 	///A trigger to activate when this object is picked up.
 	public string PickupLink;
 
@@ -586,11 +588,27 @@ public class object_base : UWEBase {
 
 		public virtual string ContextMenuUsedDesc()
 		{
-			return "L-Click to use";	
+			return "L-Click to " + UseVerb();	
 		}
 
 		public virtual string ContextMenuUsedPickup()
 		{
-			return "R-Click to pickup";	
+			return "R-Click to " + PickupVerb();	
 		}
+
+		public virtual string UseVerb()
+		{
+				return "use";
+		}
+
+		public virtual string PickupVerb()
+		{
+				return "pickup";
+		}
+
+		public virtual string ExamineVerb()
+		{
+				return "examine";
+		}
+
 }

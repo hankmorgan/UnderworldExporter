@@ -90,7 +90,7 @@ public class WindowDetectUW : WindowDetect {
 				}
 
 
-			if (ContextUIEnabled)
+			if ((ContextUIEnabled) && (InventorySlot.Hovering==false))
 			{
 				//if (CursorInMainWindow)
 				//{

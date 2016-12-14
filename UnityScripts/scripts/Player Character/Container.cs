@@ -621,9 +621,9 @@ public class Container : object_base {
 		return GameWorldController.instance.objectMaster.particle[objInt().item_id+1];
 	}
 
-	public override string ContextMenuUsedDesc ()
+	public override string UseVerb ()
 	{
-		return "L-Click to open";
+		return "open";
 	}
 
 }

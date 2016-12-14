@@ -164,8 +164,8 @@ public class Food : object_base {
 	}
 
 
-		public override string ContextMenuUsedDesc ()
+		public override string UseVerb ()
 		{
-			return "L-Click to eat";
+			return "eat";
 		}
 }

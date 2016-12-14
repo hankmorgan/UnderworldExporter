@@ -20,4 +20,10 @@ public class Anvil : object_base {
 			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}		
 	}
+
+
+	public override string UseVerb()
+	{
+		return "repair";
+	}
 }

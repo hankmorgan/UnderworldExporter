@@ -425,6 +425,21 @@ public class ObjectInteraction : UWEBase {
 			}
 		}
 
+		public string UseVerb()
+		{
+			return this.GetComponent<object_base>().UseVerb();
+		}
+
+		public string PickupVerb()
+		{
+				return this.GetComponent<object_base>().PickupVerb();
+		}
+
+		public string ExamineVerb()
+		{
+				return this.GetComponent<object_base>().ExamineVerb();
+		}
+
 		public bool LookDescription()
 		{//Returns the description of this object.
 				object_base item;

@@ -87,4 +87,9 @@ public class SilverSeed : object_base {
 			return ActivateByObject(GameWorldController.instance.playerUW.playerInventory.GetGameObjectInHand());
 		}
 	}
+
+		public override string UseVerb()
+		{
+			return "plant";
+		}
 }

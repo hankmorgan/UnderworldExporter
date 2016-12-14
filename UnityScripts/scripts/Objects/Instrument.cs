@@ -153,4 +153,10 @@ public class Instrument : object_base {
 		this.GetComponent<AudioSource>().pitch =  Mathf.Pow(2.0f, ((float)note)/12.0f);
 		this.GetComponent<AudioSource>().Play();
 	}
+
+
+		public  override string UseVerb()
+		{
+				return "play";
+		}
 }
