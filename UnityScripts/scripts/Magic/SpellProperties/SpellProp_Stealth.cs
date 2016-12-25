@@ -4,9 +4,9 @@ using System.Collections;
 public class SpellProp_Stealth : SpellProp {
 	public int StealthLevel;
 
-	public override void init (int effectId)
+	public override void init (int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		switch(effectId)
 			{
 			case SpellEffect.UW1_Spell_Effect_Stealth:

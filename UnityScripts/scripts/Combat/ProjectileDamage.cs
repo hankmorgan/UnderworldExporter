@@ -13,6 +13,11 @@ public class ProjectileDamage : MonoBehaviour {
 	///What was last hit by the projectile
 	public string LastTarget;
 
+		/// <summary>
+		/// The source of the projectile. (Trap, NPC, player)
+		/// </summary>
+	public GameObject Source;
+
 
 	void Start()
 	{
@@ -40,13 +45,13 @@ public class ProjectileDamage : MonoBehaviour {
 			LastTarget=other.gameObject.name;
 			if (other.gameObject.GetComponent<object_base>()!=null)
 			{
-				other.gameObject.GetComponent<object_base>().ApplyAttack(Damage);
+				other.gameObject.GetComponent<object_base>().ApplyAttack(Damage,Source);
 			}
 			else
 			{
 				if (other.gameObject.GetComponent<UWCharacter>())
 				{
-					other.gameObject.GetComponent<UWCharacter>().ApplyDamage(Damage);
+					other.gameObject.GetComponent<UWCharacter>().ApplyDamage(Damage,Source);
 				}
 				else
 				{//reduce damage on ricochets

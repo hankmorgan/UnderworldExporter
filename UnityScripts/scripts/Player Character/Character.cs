@@ -53,13 +53,16 @@ public class Character : UWEBase {
 	//The camera attached to this gameobject
 	public Camera playerCam;
 
-		public Vector3 CameraPos;
+	public Vector3 CameraPos;
 
 	//The music system
 	public MusicController mus;
 
 	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;
+
+	public GameObject LastEnemyToHitMe;
+	public bool HelpMeMyFriends;
 
 	//public UILabel GetMessageLog()
 	//{
@@ -80,6 +83,14 @@ public class Character : UWEBase {
 		//TODO:Check the players armour and apply damage on a crit
 			
 	}
+
+		//Damage from a known source
+		public void ApplyDamage(int damage, GameObject src)
+		{
+			ApplyDamage(damage);
+			HelpMeMyFriends=true;
+			LastEnemyToHitMe=src;			
+		}
 
 	// Use this for initialization
 	public virtual void Start () {

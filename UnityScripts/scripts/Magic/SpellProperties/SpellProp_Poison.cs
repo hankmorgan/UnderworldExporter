@@ -3,9 +3,9 @@ using System.Collections;
 
 public class SpellProp_Poison : SpellProp {
 
-	public override void init (int effectId)
+	public override void init (int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		impactFrameStart=40;
 		impactFrameEnd=44;
 		switch (effectId)

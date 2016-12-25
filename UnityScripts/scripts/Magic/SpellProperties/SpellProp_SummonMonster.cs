@@ -69,9 +69,9 @@ public class SpellProp_SummonMonster : SpellProp {
 
 	public int RndNPC;
 
-	public override void init(int effectId)
+		public override void init(int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		
 		//Pick a random npc from the list of npcs
 		RndNPC=NPCs[Random.Range(0,NPCs.GetUpperBound(0))];

@@ -389,11 +389,11 @@ public class ObjectInteraction : UWEBase {
 			return true;	
 		}
 
-		public bool Attack(int damage)
+		/*public bool Attack(int damage)
 		{
 				this.GetComponent<object_base>().ApplyAttack(damage);
 				return true;
-		}
+		}*/
 
 		/// <summary>
 		/// Looks the description to be displayed in a context menu.
@@ -1123,7 +1123,7 @@ public class ObjectInteraction : UWEBase {
 				NpcLauncher.transform.localPosition=new Vector3(0.0f,0.5f,0.1f);
 				npc.NPC_Launcher=NpcLauncher;
 
-				myInstance = Resources.Load(_RES+"/animation/AI_Base_Animator") as GameObject;
+				myInstance = Resources.Load(_RES + "/animation/" + _RES + "_Base_Animator") as GameObject;
 				newObj = (GameObject)GameObject.Instantiate(myInstance);
 				newObj.name=myObj.name + "_Sprite";
 				newObj.transform.parent=myObj.transform;
@@ -1248,6 +1248,7 @@ public class ObjectInteraction : UWEBase {
 				int npc_hp, int npc_arms, int npc_power ,
 				int npc_goal, int npc_attitude, int npc_gtarg,
 				int npc_talkedto, int npc_level,int npc_name,
+				string gtarg_name,
 				string NavMeshRegion
 		)
 		{
@@ -1273,6 +1274,7 @@ public class ObjectInteraction : UWEBase {
 						npc.npc_level=npc_level;
 						npc.npc_name=npc_name;       //    (not used in uw1)
 						npc.NavMeshRegion=NavMeshRegion;
+						npc.gtargName=gtarg_name;
 
 						Conversation cnv ;//= myObj.AddComponent<Conversation>();
 						cnv=null;

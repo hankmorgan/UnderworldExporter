@@ -138,7 +138,7 @@ public class UWCombat : Combat {
 							}	
 					}
 
-					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(StrikeBaseDamage+ (Random.Range(0, GameWorldController.instance.playerUW.PlayerSkills.Attack)/2));
+					hit.transform.gameObject.GetComponent<ObjectInteraction>().Attack(StrikeBaseDamage+ (Random.Range(0, GameWorldController.instance.playerUW.PlayerSkills.Attack)/2),GameWorldController.instance.playerUW.gameObject);
 					///Creates a blood splatter at the point of impact
 					GameObject hitimpact = new GameObject(hit.transform.name + "_impact");
 					hitimpact.transform.position=hit.point;
@@ -378,6 +378,7 @@ public class UWCombat : Combat {
 				myObjChild.transform.parent =launchedItem.transform;
 				///Appends ProjectileDamage to the projectile to act as the damage delivery method.
 				ProjectileDamage pd= myObjChild.AddComponent<ProjectileDamage>();
+				pd.Source=GameWorldController.instance.playerUW.gameObject;
 				pd.Damage=10;
 				return true;
 			}

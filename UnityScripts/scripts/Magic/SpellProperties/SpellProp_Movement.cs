@@ -4,9 +4,9 @@ using System.Collections;
 public class SpellProp_Movement : SpellProp {
 //Movement related properties
 	public float Speed;
-	public override void init (int effectId)
+	public override void init (int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 				/*
 		int SpellEffectSlot = CheckActiveSpellEffect(caster);
 		SpellProp_Movement movement = new SpellProp_Movement();

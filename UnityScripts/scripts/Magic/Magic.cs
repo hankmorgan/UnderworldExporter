@@ -651,7 +651,7 @@ public class Magic : UWEBase {
 				else
 				{
 						SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
-						spOJ.init (EffectID);
+						spOJ.init (EffectID,caster);
 						CastProjectile(caster, (SpellProp)spOJ);
 				}
 		}
@@ -672,7 +672,7 @@ public class Magic : UWEBase {
 				else
 				{
 						SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
-						spOG.init (EffectID);
+						spOG.init (EffectID,caster);
 						CastProjectile(caster, (SpellProp)spOG);
 				}
 		}
@@ -693,7 +693,8 @@ public class Magic : UWEBase {
 				else
 				{
 						SpellProp_Fireball spPF =new SpellProp_Fireball();
-						spPF.init (EffectID);
+						spPF.init (EffectID,caster);
+						spPF.caster=caster;
 						CastProjectile(caster, (SpellProp)spPF);
 				}
 		}
@@ -706,7 +707,8 @@ public class Magic : UWEBase {
 		void Cast_FlamHur(GameObject caster, int EffectID)
 		{//Flamewind. Casts instantly.
 				SpellProp_FlameWind spFH =new SpellProp_FlameWind();
-				spFH.init (EffectID);
+				spFH.init (EffectID,caster);
+				spFH.caster=caster;
 				CastProjectile(caster, (SpellProp)spFH);
 		}
 
@@ -718,7 +720,7 @@ public class Magic : UWEBase {
 		void Cast_VasOrtGrav(GameObject caster, int EffectID)
 		{//Sheet lightning
 				SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
-				spVOG.init (EffectID);
+				spVOG.init (EffectID,caster);
 				CastProjectile(caster, (SpellProp)spVOG);
 		}
 
@@ -853,7 +855,7 @@ public class Magic : UWEBase {
 		void Cast_FreezeTime(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mind = new SpellProp_Mind();
-				mind.init(EffectID);		
+				mind.init (EffectID,caster);		
 				//Apply to the player
 				SpellEffectFreezeTime timeFreezePlayer= (SpellEffectFreezeTime)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
 				timeFreezePlayer.counter= mind.counter;
@@ -942,6 +944,25 @@ public class Magic : UWEBase {
 				float dropRange=1.2f;
 				if (!Physics.Raycast(ray,out hit,dropRange))
 				{//No object interferes with the spellcast
+
+						//First determine the target ai to attack
+						//RaycastHit ht;
+						int goal=3;//Default behaviour is to follow the player
+						int gtarg = 1;
+						string targetName="";
+						NPC target = GetNPCTargetRandom(caster,ref hit);
+						//If not make the summon a follower
+						if (target!=null)
+						{
+								//Only attack hostiles or player enemies
+								if (target.npc_attitude==0)
+								{
+								targetName=target.name;
+								gtarg=999;
+								}
+						}
+
+
 						//int ObjectNo = 176 + Random.Range(0,7);
 						GameObject myObj=  new GameObject("SummonedObject_" + SummonCount++);
 						myObj.layer=LayerMask.NameToLayer("NPCs");
@@ -949,10 +970,11 @@ public class Magic : UWEBase {
 						myObj.transform.position = ray.GetPoint(dropRange);
 						myObj.transform.parent = GameWorldController.instance.LevelMarker();
 						SpellProp_SummonMonster spKM = new SpellProp_SummonMonster();
-						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster);
+						spKM.init(SpellEffect.UW1_Spell_Effect_SummonMonster,caster);
+
+						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 
 						ObjectInteraction.CreateNPC(myObj,spKM.RndNPC.ToString(),_RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), 0);
-						ObjectInteraction.CreateObjectInteraction(myObj,0.5f,0.5f,0.5f,0.5f, _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" + spKM.RndNPC.ToString("000"), _RES +"/Sprites/Objects/Objects_" +spKM.RndNPC.ToString("000"), 0, spKM.RndNPC, 0, 31, 1, 0, 1, 0, 1, 0, 0, 0, 1);
 						//Assumes the npc is spawning in the region the player is in
 						string[] Regionarr=	playerUW.currRegion.Split(new string [] {"_"}, System.StringSplitOptions.None);
 						string navMeshName="";
@@ -967,8 +989,12 @@ public class Magic : UWEBase {
 								navMeshName="_WaterMesh_"   +levelno + "_" + Regionarr[1];break;
 
 						}
-						//TODO:Set up these properties 
-						ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, 5, 1, 1, 0, 4, 0, navMeshName);
+
+
+						//TODO:Set up these properties to use correct values
+						ObjectInteraction.SetNPCProps(myObj, 0, 0, 0, 13, 10, 61, 0, 0, goal, 1, gtarg, 0, 4, 0, targetName, navMeshName);
+
+
 						GameWorldController.UnFreezeMovement(myObj);
 				}
 		}
@@ -1049,7 +1075,7 @@ public class Magic : UWEBase {
 				if (npc != null)
 				{
 						SpellProp_Poison poison = new SpellProp_Poison();
-						poison.init(EffectID);						
+						poison.init (EffectID,caster);						
 						//Apply a impact effect to the npc
 						GameObject hitimpact ; 
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1083,7 +1109,7 @@ public class Magic : UWEBase {
 				{
 						//Debug.Log(npc.name);
 						SpellProp_Curse curse = new SpellProp_Curse();
-						curse.init(EffectID);				
+						curse.init (EffectID,caster);				
 						//Apply a impact effect to the npc
 						GameObject hitimpact ; 
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1114,7 +1140,7 @@ public class Magic : UWEBase {
 				if (npc != null)
 				{
 						SpellProp_Mind mindspell = new SpellProp_Mind();
-						mindspell.init(EffectID);
+						mindspell.init (EffectID,caster);
 						//Apply a impact effect to the npc
 						GameObject hitimpact ; 
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1154,7 +1180,7 @@ public class Magic : UWEBase {
 				if (npc != null)
 				{
 						SpellProp_Mind mindspell = new SpellProp_Mind();
-						mindspell.init(EffectID);						
+						mindspell.init (EffectID,caster);						
 						//Apply a impact effect to the npc
 						GameObject hitimpact ;
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1192,7 +1218,7 @@ public class Magic : UWEBase {
 				if (npc != null)
 				{
 						SpellProp_Mind mindspell = new SpellProp_Mind();
-						mindspell.init(EffectID);							
+						mindspell.init (EffectID,caster);							
 						//Apply a impact effect to the npc
 						GameObject hitimpact ; 
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1231,7 +1257,7 @@ public class Magic : UWEBase {
 				if (npc != null)
 				{
 						SpellProp_Mind mindspell = new SpellProp_Mind();
-						mindspell.init(EffectID);						
+						mindspell.init (EffectID,caster);						
 						//Apply a impact effect to the npc
 						GameObject hitimpact ; 
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1265,7 +1291,7 @@ public class Magic : UWEBase {
 				if (npc != null)
 				{
 						SpellProp_Mind mindspell = new SpellProp_Mind();
-						mindspell.init(EffectID);						
+						mindspell.init (EffectID,caster);						
 						//Apply a impact effect to the npc
 						GameObject hitimpact ; 
 						hitimpact= new GameObject(npc.transform.name + "_impact");
@@ -1275,8 +1301,8 @@ public class Magic : UWEBase {
 						Impact imp= hitimpact.AddComponent<Impact>();
 						imp.go(mindspell.impactFrameStart,mindspell.impactFrameEnd);
 						SpellProp_DirectDamage damage = new SpellProp_DirectDamage();
-						damage.init(EffectID);
-						npc.ApplyAttack(damage.BaseDamage);			
+						damage.init (EffectID,caster);
+						npc.ApplyAttack(damage.BaseDamage,caster);			
 				}
 		}
 
@@ -1464,7 +1490,7 @@ public class Magic : UWEBase {
 		void Cast_DetectMonster(GameObject caster, int EffectID)
 		{
 				SpellProp_Mind mind = new SpellProp_Mind();
-				mind.init(EffectID);
+				mind.init (EffectID,caster);
 				Skills.TrackMonsters(caster,(float)mind.BaseDamage,true);
 		}
 
@@ -1593,7 +1619,7 @@ public class Magic : UWEBase {
 		void Cast_Heal(GameObject caster,int EffectID)
 		{
 				SpellProp_Heal healing= new SpellProp_Heal();
-				healing.init(EffectID);
+				healing.init (EffectID,caster);
 				int HP = healing.BaseDamage;
 				if (playerUW!=null)
 				{
@@ -1616,7 +1642,7 @@ public class Magic : UWEBase {
 		void Cast_Resistance(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Eg resist blows, thick skin etc
 				SpellProp_Resistance resist = new SpellProp_Resistance();
-				resist.init(EffectID);				
+				resist.init (EffectID,caster);				
 				SpellEffectResistance sea = (SpellEffectResistance)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectID);
 				sea.Value = resist.BaseDamage;
 				sea.counter= resist.counter;
@@ -1634,7 +1660,7 @@ public class Magic : UWEBase {
 		void Cast_Flameproof(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Eg resist blows, thick skin etc
 				SpellProp_ResistanceAgainstType resist = new SpellProp_ResistanceAgainstType();
-				resist.init(EffectID);
+				resist.init (EffectID,caster);
 				SpellEffectFlameproof sef = (SpellEffectFlameproof)SetSpellEffect (caster,ActiveSpellArray,EffectSlot,EffectID);
 				sef.counter=resist.counter;
 				sef.Go ();
@@ -1649,7 +1675,7 @@ public class Magic : UWEBase {
 		{//Increase (or decrease) the casters mana
 				//UWCharacter playerUW=caster.GetComponent<UWCharacter>();
 				SpellProp_Mana mn = new SpellProp_Mana();
-				mn.init(EffectID);
+				mn.init (EffectID,caster);
 				int MP=mn.BaseDamage;
 				if (playerUW!=null)
 				{
@@ -1672,7 +1698,7 @@ public class Magic : UWEBase {
 		void Cast_Light(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Light spl = new SpellProp_Light();
-				spl.init(EffectID);		
+				spl.init (EffectID,caster);		
 				LightSource.MagicBrightness=spl.BaseDamage;
 				SpellEffect sel= (SpellEffectLight)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
 				sel.Value = spl.BaseDamage;
@@ -1690,7 +1716,7 @@ public class Magic : UWEBase {
 		void Cast_NightVision(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Light spl = new SpellProp_Light();
-				spl.init(EffectID);						
+				spl.init (EffectID,caster);						
 				LightSource.MagicBrightness=spl.BaseDamage;
 				SpellEffect nv= (SpellEffectNightVision)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
 				nv.Value = spl.BaseDamage;
@@ -1710,7 +1736,7 @@ public class Magic : UWEBase {
 		void Cast_Hallucination(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mindspell = new SpellProp_Mind();
-				mindspell.init(EffectID);				
+				mindspell.init (EffectID,caster);				
 				SpellEffect hn= (SpellEffectHallucination)SetSpellEffect(caster, ActiveSpellArray, EffectSlot, EffectID);
 				hn.counter= mindspell.counter;
 				//sel.ApplyEffect();//Apply the effect.
@@ -1729,7 +1755,7 @@ public class Magic : UWEBase {
 		void Cast_Leap(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Movement movement = new SpellProp_Movement();
-				movement.init(EffectID);				
+				movement.init (EffectID,caster);				
 				SpellEffect lep = (SpellEffectLeap)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				lep.counter=movement.counter;
 				lep.Go ();
@@ -1746,7 +1772,7 @@ public class Magic : UWEBase {
 		void Cast_SlowFall(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Movement movement = new SpellProp_Movement();
-				movement.init(EffectID);				
+				movement.init (EffectID,caster);				
 				SpellEffect slf = (SpellEffectSlowFall)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				slf.counter=movement.counter;
 				slf.Go ();
@@ -1763,7 +1789,7 @@ public class Magic : UWEBase {
 		void Cast_RoamingSight(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mindspell = new SpellProp_Mind();
-				mindspell.init(EffectID);				
+				mindspell.init (EffectID,caster);				
 				SpellEffect srs = (SpellEffectRoamingSight)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				srs.counter=mindspell.counter;
 				srs.Go ();
@@ -1780,7 +1806,7 @@ public class Magic : UWEBase {
 		void Cast_Stealth(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{		
 				SpellProp_Stealth stealth = new SpellProp_Stealth();
-				stealth.init(EffectID);				
+				stealth.init (EffectID,caster);				
 				SpellEffectStealth st = (SpellEffectStealth)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				st.counter=stealth.counter;
 				st.StealthLevel=stealth.StealthLevel;
@@ -1811,7 +1837,7 @@ public class Magic : UWEBase {
 				bx.center=new Vector3(0.0f,0.1f,0.0f);
 				bx.isTrigger=true;
 				SpellProp_RuneOfWarding spIJ = new SpellProp_RuneOfWarding();//myObj.AddComponent<SpellProp_RuneOfWarding>();
-				spIJ.init(EffectID);
+				spIJ.init (EffectID,GameWorldController.instance.playerUW.gameObject);
 				awt.spellprop=spIJ;
 				//000~001~276~The Rune of Warding is placed. \n
 				UWHUD.instance.MessageScroll.Add(StringController.instance.GetString(1,276));
@@ -1827,7 +1853,7 @@ public class Magic : UWEBase {
 		public void Cast_Poison(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Poison
 				SpellProp_Poison spp = new SpellProp_Poison();
-				spp.init(EffectID);
+				spp.init (EffectID,caster);
 				SpellEffectPoison sep = (SpellEffectPoison)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.Value=spp.BaseDamage;//Poison will damage the player for 100 hp over it's duration
 				sep.counter=spp.counter; //It will run for x ticks. Ie 10 hp damage per tick
@@ -1849,7 +1875,7 @@ public class Magic : UWEBase {
 		public void Cast_ResistanceAgainstType(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 			SpellProp_ResistanceAgainstType resistProp = new SpellProp_ResistanceAgainstType();
-			resistProp.init(EffectID);
+			resistProp.init (EffectID,caster);
 			SpellEffectResistanceAgainstType resistEffect = (SpellEffectResistanceAgainstType)SetSpellEffect(caster,ActiveSpellArray,EffectSlot,EffectID);
 			//TODO:What properties to apply
 			resistEffect.counter=resistProp.counter;
@@ -1866,7 +1892,7 @@ public class Magic : UWEBase {
 		public void Cast_Paralyze(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Paralyze
 				SpellProp_Mind mindspell = new SpellProp_Mind();
-				mindspell.init(EffectID);	
+				mindspell.init (EffectID,caster);	
 				SpellEffectParalyze sep = (SpellEffectParalyze)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.counter=mindspell.counter; //It will run for x ticks. 
 				if (caster.name!=GameWorldController.instance.playerUW.name)
@@ -1886,7 +1912,7 @@ public class Magic : UWEBase {
 		public void Cast_Telekinesis(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Telekenisis
 				SpellProp_Mind mindspell = new SpellProp_Mind();
-				mindspell.init(EffectID);					
+				mindspell.init (EffectID,caster);					
 				SpellEffectTelekinesis setk = (SpellEffectTelekinesis)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				setk.counter=mindspell.counter; //It will run for x ticks. 
 				setk.Go ();
@@ -1902,7 +1928,7 @@ public class Magic : UWEBase {
 		public void Cast_Levitate(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Levitate
 				SpellProp_Movement flight = new SpellProp_Movement();
-				flight.init(EffectID);
+				flight.init (EffectID,caster);
 				SpellEffectLevitate sep = (SpellEffectLevitate)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.counter=flight.counter; 
 				sep.Go ();
@@ -1918,7 +1944,7 @@ public class Magic : UWEBase {
 		public void Cast_Speed(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Speed
 				SpellProp_Movement movement = new SpellProp_Movement();
-				movement.init(EffectID);
+				movement.init (EffectID,caster);
 				SpellEffectSpeed ses = (SpellEffectSpeed)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				ses.counter=movement.counter;
 				ses.speedMultiplier=movement.Speed;
@@ -1935,7 +1961,7 @@ public class Magic : UWEBase {
 		public void Cast_WaterWalk(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Waterwalk
 				SpellProp_Movement movement = new SpellProp_Movement();
-				movement.init(EffectID);				
+				movement.init (EffectID,caster);				
 				SpellEffectWaterWalk seww = (SpellEffectWaterWalk)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				seww.counter=movement.counter; //It will run for x ticks. 
 				seww.Go ();
@@ -1952,7 +1978,7 @@ public class Magic : UWEBase {
 		public void Cast_MazeNavigation(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{
 				SpellProp_Mind mindspell = new SpellProp_Mind();
-				mindspell.init(EffectID);				
+				mindspell.init (EffectID,caster);				
 				SpellEffectMazeNavigation sem = (SpellEffectMazeNavigation)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sem.counter=mindspell.counter;
 				sem.Go ();
@@ -1968,7 +1994,7 @@ public class Magic : UWEBase {
 		public void Cast_CursedItem(GameObject caster, SpellEffect[] ActiveSpellArray, int EffectID, int EffectSlot)
 		{//Cursed
 				SpellProp_Curse curse = new SpellProp_Curse();
-				curse.init(EffectID);	
+				curse.init (EffectID,caster);	
 				SpellEffectCurse sep = (SpellEffectCurse)SetSpellEffect (caster, ActiveSpellArray,EffectSlot,EffectID);
 				sep.counter=curse.counter; //It will run for x ticks. 
 				if (caster.name!=GameWorldController.instance.playerUW.name)
@@ -2500,11 +2526,11 @@ public class Magic : UWEBase {
 
 				if (Caster.name=="NPC_Launcher")
 				{
-						mgp.caster=Caster.transform.parent.name;
+						mgp.caster=Caster.transform.gameObject;
 				}
 				else
 				{
-						mgp.caster=Caster.name;
+						mgp.caster=Caster;
 				}
 
 				BoxCollider box = projectile.AddComponent<BoxCollider>();
@@ -3170,7 +3196,7 @@ public class Magic : UWEBase {
 						else
 						{
 								SpellProp_SheetLightning spVOG =new SpellProp_SheetLightning();
-								spVOG.init (EffectID);
+								spVOG.init (EffectID,caster);
 								CastProjectile(caster,caster.transform.forward,(SpellProp)spVOG);
 						}
 						SpellResultType=SpellResultNone;
@@ -3199,7 +3225,7 @@ public class Magic : UWEBase {
 						else
 						{
 								SpellProp_MagicArrow spOJ =new SpellProp_MagicArrow();
-								spOJ.init (EffectID);
+								spOJ.init (EffectID,caster);
 								CastProjectile(caster,caster.transform.forward, (SpellProp)spOJ);
 						}
 						SpellResultType=SpellResultNone;
@@ -3215,7 +3241,7 @@ public class Magic : UWEBase {
 								else
 								{
 										SpellProp_ElectricBolt spOG =new SpellProp_ElectricBolt();
-										spOG.init (EffectID);
+										spOG.init (EffectID,caster);
 										CastProjectile(caster,caster.transform.forward, (SpellProp)spOG);
 								}
 								SpellResultType=SpellResultNone;
@@ -3231,7 +3257,8 @@ public class Magic : UWEBase {
 								else
 								{
 										SpellProp_Fireball spPF =new SpellProp_Fireball();
-										spPF.init (EffectID);
+										spPF.init (EffectID,caster);
+										spPF.caster=caster;
 										CastProjectile(caster,caster.transform.forward, (SpellProp)spPF);
 								}
 								SpellResultType=SpellResultNone;
@@ -3248,7 +3275,7 @@ public class Magic : UWEBase {
 								else
 								{
 										SpellProp_FlameWind spFH =new SpellProp_FlameWind();
-										spFH.init (EffectID);
+										spFH.init (EffectID,caster);
 										CastProjectile(caster,caster.transform.forward, (SpellProp)spFH);
 								}
 								SpellResultType=SpellResultNone;

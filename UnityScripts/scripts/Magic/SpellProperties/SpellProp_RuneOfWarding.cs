@@ -3,9 +3,9 @@ using System.Collections;
 
 public class SpellProp_RuneOfWarding : SpellProp {
 	//Rune of Warding
-		public override void init(int effectId)
+	public override void init(int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		//ProjectileSprite = _RES +"/Sprites/Objects/Objects_020";
 		//Force=200.0f;
 		BaseDamage=15;

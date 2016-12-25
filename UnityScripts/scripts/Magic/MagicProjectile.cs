@@ -9,7 +9,7 @@ public class MagicProjectile : MonoBehaviour {
 	/// Has the projectile hit something
 	public bool HasHit;
 	///who has cast the project. It will ignore them to avoid self harm
-	public string caster;
+	public GameObject caster;
 	///Spell properties object to define the behaviour of the projectile
 	public SpellProp spellprop; 
 
@@ -24,7 +24,7 @@ public class MagicProjectile : MonoBehaviour {
 	/// Generates an impact effect
 	void OnCollisionEnter(Collision collision)
 	{//
-	if(collision.gameObject.name== caster)
+		if(collision.gameObject.name== caster.name)
 		{//Prevents the caster from hitting themselves
 			return;
 		}
@@ -47,7 +47,7 @@ public class MagicProjectile : MonoBehaviour {
 				spellprop.onHit(objInt);
 
 				//Applies damage
-				objInt.Attack(spellprop.BaseDamage);
+				objInt.Attack(spellprop.BaseDamage,caster);
 
 				//Create a impact animation to illustrate the collision
 				if(objInt.GetHitFrameStart()>=0)

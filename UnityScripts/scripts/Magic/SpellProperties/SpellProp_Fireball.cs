@@ -7,10 +7,11 @@ public class SpellProp_Fireball : SpellProp {
 	protected float splashDistance;
 	protected int SecondaryStartFrame;
 	protected int SecondaryEndFrame;
-	
-public override void init(int effectId)
+	public GameObject caster; //who casted the spell
+
+	public override void init(int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		ProjectileSprite =UWEBase._RES +"/Sprites/Objects/Objects_020";
 		Force=200.0f;
 		BaseDamage=16;
@@ -42,11 +43,11 @@ public override void init(int effectId)
 			{
 					if (Col.gameObject.GetComponent<ObjectInteraction>()!=null)
 					{
-						Col.gameObject.GetComponent<ObjectInteraction>().Attack(splashDamage);	
+						Col.gameObject.GetComponent<ObjectInteraction>().Attack(splashDamage,caster);	
 					}
 					if (Col.gameObject.GetComponent<UWCharacter>()!=null)
 					{
-						Col.gameObject.GetComponent<UWCharacter>().ApplyDamage(splashDamage);
+						Col.gameObject.GetComponent<UWCharacter>().ApplyDamage(splashDamage,caster);
 					}	
 			}
 		}		

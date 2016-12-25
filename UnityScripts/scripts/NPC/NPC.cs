@@ -248,15 +248,22 @@ public class NPC : object_base {
 			ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_DYING);//Set to death state.
 			return;
 		}
-
+		if (anim==null)
+		{
+				anim=GetComponentInChildren<Animator>();
+		}
 
 		//else
 		//{//The AI is only active when the player is within a certain distance to the player camera.
 		if (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8)
 			{
-				AI_INIT ();
-				ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
-				anim.enabled=true;
+				if (objInt()!=null)
+				{
+						AI_INIT ();
+						ai.AI.IsActive= Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.CameraPos)<=8;
+
+						anim.enabled=true;		
+				}							
 			}
 			else
 			{
@@ -270,13 +277,14 @@ public class NPC : object_base {
 				//Update GTarg
 				if (npc_gtarg==1)
 				{
+					gtargName="";
 					if (gtarg==null)
 					{
 						gtarg=GameWorldController.instance.playerUW.transform.gameObject;				
 					}
 					else
 					{
-						if (gtarg.name!="Gronk")
+						if (gtarg.name!="_Gronk")
 						{
 							gtarg=GameWorldController.instance.playerUW.transform.gameObject;	
 						}
@@ -301,9 +309,23 @@ public class NPC : object_base {
 								}
 						}
 						if(gtarg==null)
-						{
-							Debug.Log("Gtarg needs to be found.");
-							gtarg=GameWorldController.instance.playerUW.transform.gameObject;
+						{//I no longer have a goal. Check what I was doing and revert to a different state.
+							//Cases
+								//NPC Follower who has killed their target->Follow player.
+								if ((npc_attitude>0) && (gtargName!="") && ((npc_goal==5) || (npc_goal==9)))
+									{
+										npc_goal=3;
+										npc_gtarg=1;
+										gtarg=GameWorldController.instance.playerUW.transform.gameObject;
+									}
+
+								//NPC Enemy who has defeated their attacker->Focus on player.
+								if ((npc_attitude==0) && (gtargName!="") && ((npc_goal==5) || (npc_goal==9)))
+								{
+										npc_goal=5;
+										npc_gtarg=1;	
+										gtarg=GameWorldController.instance.playerUW.transform.gameObject;
+								}
 						}
 
 				}
@@ -352,10 +374,26 @@ public class NPC : object_base {
 
 					case 3://Follow target
 							state=AI_STATE_FOLLOW;
-							Vector3 ABf = gtarg.transform.position-this.transform.position;
-							Vector3 MoveposF = gtarg.transform.position + (0.31f * ABf.normalized) ;
-							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
-							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle
+								if (gtarg!=null)
+								{
+									Vector3 ABf = gtarg.transform.position-this.transform.position;
+									Vector3 MoveposF = gtarg.transform.position + (0.31f * ABf.normalized) ;
+									ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
+									ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle										
+								
+									if (gtarg.name=="_Gronk")
+									{//Help out the player dynamically
+										if (GameWorldController.instance.playerUW.HelpMeMyFriends==true)
+										{
+										GameWorldController.instance.playerUW.HelpMeMyFriends=false;
+										//If I'm not already busy with another NPC
+										gtarg=GameWorldController.instance.playerUW.LastEnemyToHitMe;
+										npc_goal=5;
+										npc_gtarg=999;
+										gtargName=GameWorldController.instance.playerUW.LastEnemyToHitMe.name;
+										}
+									}
+								}
 							break;
 								
 				}
@@ -385,10 +423,6 @@ public class NPC : object_base {
 		/// NPC becomes hostile on attack. 
 	public override bool ApplyAttack(int damage)
 	{
-		if(Frozen==false)
-		{
-			npc_attitude=0;//NPC becomes hostile.
-		}	
 		npc_hp=npc_hp-damage;
 		return true;
 	}
@@ -402,13 +436,32 @@ public class NPC : object_base {
 		/// <param name="source">Source.</param>
 	public override bool ApplyAttack (int damage, GameObject source)
 	{
+		if (source!=null)
+		{
+			if (source.name=="_Gronk")
+			{//PLayer attacked.
+				npc_attitude=0;//Make the npc angry with the player.
+				if(Frozen==false)
+				{	
+					//Assumes the player has attacked
+					npc_gtarg=1;
+					gtarg=GameWorldController.instance.playerUW.gameObject;
+					gtargName=gtarg.name;
+					npc_goal=5;
+				}	
+			}
+			else
+			{//NPC attack
+				gtargName=source.name;
+				//Makes the targeted entity attack the object that attacked it.
+				npc_gtarg=999;
+				gtarg=source;
+				gtargName=source.name;
+				npc_goal=5;				
+			}	
+		}
+
 		ApplyAttack(damage);
-		gtargName=source.name;
-		//Makes the targeted entity attack the object that attacked it.
-		npc_gtarg=999;
-		gtarg=source;
-		gtargName=source.name;
-		npc_goal=5;
 		return true;
 	}
 
@@ -792,7 +845,7 @@ public class NPC : object_base {
 			if (hit.transform.name == GameWorldController.instance.playerUW.name)
 				{
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
-					GameWorldController.instance.playerUW.ApplyDamage(5);
+					GameWorldController.instance.playerUW.ApplyDamage(5,this.gameObject);
 				}
 			else
 				{

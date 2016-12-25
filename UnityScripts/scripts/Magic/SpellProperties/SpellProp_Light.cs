@@ -3,9 +3,9 @@ using System.Collections;
 
 public class SpellProp_Light : SpellProp{
 
-		public override void init (int effectId)
+		public override void init (int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 				this.counter=5;//Should counter be a function of the casters casting ability
 				switch(effectId)
 				{//TODO:Review these light values.

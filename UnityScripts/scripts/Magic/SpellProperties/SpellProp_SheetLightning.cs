@@ -4,9 +4,9 @@ using System.Collections;
 public class SpellProp_SheetLightning : SpellProp_Fireball {
 	//Sheet Lightning
 
-	public override void init(int effectId)
+	public override void init(int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		ProjectileSprite = UWEBase._RES +"/Sprites/object_blank";
 		Force=500.0f;
 		BaseDamage=8;

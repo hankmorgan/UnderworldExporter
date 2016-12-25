@@ -4,11 +4,11 @@ using System.Collections;
 public class SpellProp_FlameWind : SpellProp_Fireball {
 	//Flame wind. Aka DOOM.
 
-	public override void init(int effectId)
+	public override void init(int effectId, GameObject SpellCaster)
 	{
 
-		base.init (effectId);
-				ProjectileSprite = UWEBase._RES +"/Sprites/object_blank";
+		base.init (effectId,SpellCaster);
+		ProjectileSprite = UWEBase._RES +"/Sprites/object_blank";
 		Force=500.0f;
 		BaseDamage=16;
 		splashDamage=8;

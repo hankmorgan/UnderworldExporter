@@ -24,16 +24,18 @@ public class SpellProp  {
 	///What impact image is played on a miss.
 	public int impactFrameEnd;
 	public static UWCharacter playerUW;
-
+	
+		public GameObject caster;
 
 		/// <summary>
 		/// Init the specified effectId.
 		/// </summary>
 		/// <param name="effectId">Effect identifier.</param>
-	public virtual void init(int effectId)
+	public virtual void init(int effectId , GameObject SpellCaster)
 	{
 		//Set spell variables
 		//Init the spelleffect applied by the spell.
+		caster=SpellCaster;
 	}
 
 		/// <summary>

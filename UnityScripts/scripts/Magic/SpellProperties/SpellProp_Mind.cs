@@ -8,9 +8,9 @@ public class SpellProp_Mind : SpellProp {
 			SpellProp_Mind mindspell = new SpellProp_Mind();
 			mindspell.init(EffectID);
 		 */
-	public override void init (int effectId)
+		public override void init (int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 		switch (effectId)
 		{		
 		case SpellEffect.UW1_Spell_Effect_Paralyze:

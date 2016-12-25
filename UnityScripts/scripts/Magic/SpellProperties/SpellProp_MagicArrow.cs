@@ -4,10 +4,10 @@ using System.Collections;
 public class SpellProp_MagicArrow : SpellProp {
 	//Properties for the Ort Jux spell.
 
-	public override void init(int effectId)
+	public override void init(int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
-				ProjectileSprite = UWEBase._RES +"/Sprites/Objects/Objects_023";
+		base.init (effectId,SpellCaster);
+		ProjectileSprite = UWEBase._RES +"/Sprites/Objects/Objects_023";
 		Force=200.0f;
 		BaseDamage=3;
 		impactFrameStart=46;

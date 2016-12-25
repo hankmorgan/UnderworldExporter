@@ -3,9 +3,9 @@ using System.Collections;
 
 public class SpellProp_Heal : SpellProp {
 
-		public override void init (int effectId)
+	public override void init (int effectId, GameObject SpellCaster)
 	{
-		base.init (effectId);
+		base.init (effectId,SpellCaster);
 				//TODO:Heal affected by caster ability
 		switch (effectId)
 				{
