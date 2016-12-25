@@ -92,6 +92,8 @@ public class NPC : object_base {
 	public const int AI_STATE_DYING = 2;
 	public const int AI_STATE_STANDING = 3;
 	public const int AI_STATE_WALKING = 4 ;
+	public const int AI_STATE_FLEE = 5 ;
+	public const int AI_STATE_FOLLOW = 6 ;
 
 	/// The Navmesh region the NPC is in
 	public string NavMeshRegion;
@@ -109,6 +111,10 @@ public class NPC : object_base {
 	public int npc_goal;          // goal that NPC has; 5:kill player 6:? 9:?
 	public int npc_attitude;       //attitude; 0:hostile, 1:upset, 2:mellow, 3:friendly
 	public int npc_gtarg;         //goal target; 1:player
+	
+	public GameObject gtarg;
+	public string gtargName;
+
 	public int npc_talkedto;      // is 1 when player already talked to npc
 	public int npc_level;
 	public int npc_name;       //    (not used in uw1)
@@ -261,6 +267,48 @@ public class NPC : object_base {
 			//Update the appearance of the NPC
 			UpdateSprite();
 			
+				//Update GTarg
+				if (npc_gtarg==1)
+				{
+					if (gtarg==null)
+					{
+						gtarg=GameWorldController.instance.playerUW.transform.gameObject;				
+					}
+					else
+					{
+						if (gtarg.name!="Gronk")
+						{
+							gtarg=GameWorldController.instance.playerUW.transform.gameObject;	
+						}
+					}
+				}
+				else
+				{
+					//Inbuilt NPC Gtargs not supported.
+					
+						if (gtarg==null)
+						{
+								if (gtargName!="")
+								{
+										gtarg=GameObject.Find(gtargName);
+								}								
+						}
+						else
+						{
+								if (gtarg.name!=gtargName)
+								{
+									gtarg=GameObject.Find(gtargName);	
+								}
+						}
+						if(gtarg==null)
+						{
+							Debug.Log("Gtarg needs to be found.");
+							gtarg=GameWorldController.instance.playerUW.transform.gameObject;
+						}
+
+				}
+
+
 			if (ai.AI.Navigator.CurrentPath!=null)
 			{//Turns the AI around on their route.
 				Vector3 NextPosition = ai.AI.Navigator.CurrentPath.GetWaypointPosition(ai.AI.Navigator.NextWaypoint);
@@ -273,18 +321,57 @@ public class NPC : object_base {
 			}
 			else
 			{
-				if (npc_attitude==0)
+				switch (npc_goal)
+				{
+					case 0://Standing still
+					case 7:
+					case 10:
+					case 11:
+						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_STANDING);
+						break;
+
+					case 1://Wander randomly
+					case 2:
+					case 4:
+					case 8:
+						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_IDLERANDOM);
+						break;
+
+					case 5://Attack target
+					case 9:
+							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
+							Vector3 AB = GameWorldController.instance.playerUW.transform.position-this.transform.position;
+							//Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
+							Vector3 Movepos = gtarg.transform.position + (0.31f * AB.normalized) ;
+							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
+							break;
+
+					case 6://Run away (morale failure)
+							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FLEE);//Set to idle
+							break;
+
+					case 3://Follow target
+							state=AI_STATE_FOLLOW;
+							Vector3 ABf = gtarg.transform.position-this.transform.position;
+							Vector3 MoveposF = gtarg.transform.position + (0.31f * ABf.normalized) ;
+							ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",MoveposF);
+							ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_FOLLOW);//Set to idle
+							break;
+								
+				}
+
+				/*if (npc_attitude==0)
 					{//Combat begin
 					ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_COMBAT);//Set to combat state.
 					Vector3 AB = GameWorldController.instance.playerUW.transform.position-this.transform.position;
+					//Set this to gtarg
 					Vector3 Movepos = GameWorldController.instance.playerUW.transform.position + (0.31f * AB.normalized) ;
-					//ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",GameWorldController.instance.playerUW.gameObject.transform.position);
 					ai.AI.WorkingMemory.SetItem<Vector3>("MoveTarget",Movepos);
 					}
 				else
 					{//Friendly states
 						ai.AI.WorkingMemory.SetItem<int>("state",state);//Set to idle
-					}
+					}*/
 			}
 		}
 	//}
@@ -305,6 +392,26 @@ public class NPC : object_base {
 		npc_hp=npc_hp-damage;
 		return true;
 	}
+
+		/// <summary>
+		/// Applies the attack from a known source
+		/// </summary>
+		/// <returns>true</returns>
+		/// <c>false</c>
+		/// <param name="damage">Damage.</param>
+		/// <param name="source">Source.</param>
+	public override bool ApplyAttack (int damage, GameObject source)
+	{
+		ApplyAttack(damage);
+		gtargName=source.name;
+		//Makes the targeted entity attack the object that attacked it.
+		npc_gtarg=999;
+		gtarg=source;
+		gtargName=source.name;
+		npc_goal=5;
+		return true;
+	}
+
 		/// <summary>
 		/// Begins a conversation if possible
 		/// </summary>
@@ -665,10 +772,14 @@ public class NPC : object_base {
 	/// </summary>
 	public void ExecuteAttack()
 	{
+		if(gtarg==null)
+		{
+			return;
+		}
 		float weaponRange=1.0f;
 
 		//NPC tries to raycast at the player.
-		Ray ray= new Ray(this.transform.position,GameWorldController.instance.playerUW.gameObject.transform.position-this.transform.position);
+		Ray ray= new Ray(NPC_Launcher.transform.position,gtarg.transform.position-NPC_Launcher.transform.position);
 		RaycastHit hit = new RaycastHit(); 
 		if (Physics.Raycast(ray,out hit,weaponRange))
 		{
@@ -683,6 +794,14 @@ public class NPC : object_base {
 					MusicController.LastAttackCounter=30.0f; //Thirty more seconds of combat music
 					GameWorldController.instance.playerUW.ApplyDamage(5);
 				}
+			else
+				{
+					//Has it hit another npc or object
+					if (hit.transform.GetComponent<ObjectInteraction>()!=null)
+					{
+						hit.transform.GetComponent<ObjectInteraction>().Attack(5, this.gameObject);
+					}
+				}
 			}
 		}
 	}
@@ -691,7 +810,7 @@ public class NPC : object_base {
 	/// </summary>
 	public void ExecuteMagicAttack()
 	{
-		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,UWCharacter.Instance.gameObject,SpellIndex,Magic.SpellRule_TargetVector);
+		UWCharacter.Instance.PlayerMagic.CastEnchantmentImmediate(NPC_Launcher,gtarg,SpellIndex,Magic.SpellRule_TargetVector);
 	}
 
 	public override string ContextMenuDesc (int item_id)

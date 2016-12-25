@@ -770,7 +770,7 @@ switch (game)
 			objList[x].npc_hp = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0x8, 8);
 			
 			objList[x].npc_goal = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) & 0xF;
-			objList[x].npc_gtarg = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 11, 16)>>4 & 0xFF);
+			objList[x].npc_gtarg = (getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xb, 16) >> 4 & 0xFF);
 
 			objList[x].npc_level = getValAtAddress(lev_ark, objectsAddress + address_pointer + 0xd, 16) & 0xF;
 

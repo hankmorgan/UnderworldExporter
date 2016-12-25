@@ -383,25 +383,14 @@ public class ObjectInteraction : UWEBase {
 				return UWHUD.instance.MessageScroll;//MessageLog;
 		}
 
+		public bool Attack (int damage, GameObject source)
+		{
+			this.GetComponent<object_base>().ApplyAttack(damage,source);
+			return true;	
+		}
+
 		public bool Attack(int damage)
 		{
-				/*
-		switch(ItemType)
-		{
-			case NPC_TYPE:
-				{
-					NPC npc = this.GetComponent<NPC>();
-					npc.ApplyAttack(damage);
-					break;
-				}
-			case DOOR:
-			case HIDDENDOOR:
-				{
-				DoorControl dc= this.GetComponent<DoorControl>();
-				dc.ApplyAttack(damage);
-				break;
-				}
-		}*/
 				this.GetComponent<object_base>().ApplyAttack(damage);
 				return true;
 		}

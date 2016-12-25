@@ -694,7 +694,8 @@ void PrintUWObjects(ObjectItem objList[1600])
 			{
 			printf("\n\tTexture: %d" , objList[x].texture );
 			}
-		if (objList[x].npc_whoami >0)
+		//if (objList[x].npc_whoami >=0)
+		if (x<256)
 			{
 			fprintf(LOGFILE, "\n\tNPC HP : %d ", objList[x].npc_hp);
 			fprintf(LOGFILE, "\n\tNPC Goal : %d ", objList[x].npc_goal);

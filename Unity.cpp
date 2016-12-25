@@ -334,6 +334,14 @@ void RenderUnityEntityNPC(int game, float x, float y, float z, ObjectItem &curro
 			currobj.npc_goal, currobj.npc_attitude, currobj.npc_gtarg,
 			currobj.npc_talkedto, currobj.npc_level, currobj.npc_name
 			);
+		if (currobj.npc_gtarg > 1)
+			{//Does not occur in UW1
+			fprintf(UNITY_FILE, "\"%s\" , ",UniqueObjectName(objList[currobj.npc_gtarg]));//Gtarget string
+			}
+		else
+			{
+			fprintf(UNITY_FILE, "\"\" , ");//Gronk
+			}
 		if ((currobj.tileX != 99) && (currobj.tileY != 99))
 			{
 			if (LevelInfo[currobj.tileX][currobj.tileY].isLava==1)

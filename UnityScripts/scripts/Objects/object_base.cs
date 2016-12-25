@@ -74,6 +74,17 @@ public class object_base : UWEBase {
 	}
 
 		/// <summary>
+		/// Applies the attack from a known source
+		/// </summary>
+		/// <returns><c>true</c>, if attack was applyed, <c>false</c> otherwise.</returns>
+		/// <param name="damage">Damage.</param>
+		/// <param name="source">Source.</param>
+	public virtual bool ApplyAttack(int damage, GameObject source)
+	{
+		return false;
+	}
+
+		/// <summary>
 		/// Outputs the look description of the object
 		/// </summary>
 		/// <returns>The <see cref="System.Boolean"/>.</returns>
