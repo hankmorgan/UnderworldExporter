@@ -8,6 +8,11 @@ public class SpellEffectAlly : SpellEffect {
 		public int OriginalState;
 		/// Backup the original attitude of the npc
 		public int OriginalAttitude;
+
+
+		public int OriginalGtarg;
+		public int OriginalGoal;
+
 		public NPC npc;
 		public bool WasActive;
 
@@ -25,8 +30,15 @@ public class SpellEffectAlly : SpellEffect {
 				{
 					OriginalState= npc.state;
 					OriginalAttitude=npc.npc_attitude;
+								OriginalGoal=npc.npc_goal;
+								OriginalGtarg=npc.npc_gtarg;
+
 					npc.state=NPC.AI_STATE_STANDING;	//Temporarily just wander around
 					npc.npc_attitude=NPC.AI_ATTITUDE_MELLOW;
+								//Makes the NPC follow the player
+								npc.npc_goal=3;
+								npc.npc_gtarg=1;
+
 					WasActive=true;
 				}	
 			}
@@ -38,7 +50,9 @@ public class SpellEffectAlly : SpellEffect {
 			if(WasActive==true)
 			{
 				npc.state=OriginalState;
-				npc.npc_attitude=OriginalAttitude;		
+				npc.npc_attitude=OriginalAttitude;	
+						npc.npc_goal=OriginalGoal;
+						npc.npc_gtarg=OriginalGtarg;
 			}
 			base.CancelEffect ();
 		}

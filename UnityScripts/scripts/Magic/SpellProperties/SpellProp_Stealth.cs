@@ -17,12 +17,12 @@ public class SpellProp_Stealth : SpellProp {
 			case SpellEffect.UW1_Spell_Effect_Conceal:
 			case SpellEffect.UW1_Spell_Effect_Conceal_alt01:
 			case SpellEffect.UW1_Spell_Effect_Conceal_alt02:
-					StealthLevel=2;counter=3;break;
+					StealthLevel=3;counter=3;break;
 
 			case SpellEffect.UW1_Spell_Effect_Invisibilty:
 			case SpellEffect.UW1_Spell_Effect_Invisibility_alt01:
 			case SpellEffect.UW1_Spell_Effect_Invisibility_alt02:
-					StealthLevel=3;counter=5;break;
+					StealthLevel=5;counter=5;break;
 			}
 		}
 }

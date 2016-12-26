@@ -9,6 +9,10 @@ public class SpellEffectConfusion : SpellEffect {
 		public int OriginalState;
 		/// Backup the original attitude of the npc
 		public int OriginalAttitude;
+
+		public int OriginalGtarg;
+		public int OriginalGoal;
+
 		public NPC npc;
 		public bool WasActive;
 
@@ -26,8 +30,14 @@ public class SpellEffectConfusion : SpellEffect {
 				{
 					OriginalState= npc.state;
 					OriginalAttitude=npc.npc_attitude;
+					OriginalGoal=npc.npc_goal;
+					OriginalGtarg=npc.npc_gtarg;
+
 					npc.state=NPC.AI_STATE_IDLERANDOM;	//Temporarily just wander around
 					npc.npc_attitude=NPC.AI_ATTITUDE_UPSET;
+					//Makes the NPC wander around
+					npc.npc_goal=1;
+
 					WasActive=true;
 				}	
 			}
@@ -39,7 +49,9 @@ public class SpellEffectConfusion : SpellEffect {
 			if(WasActive==true)
 				{
 					npc.state=OriginalState;
-					npc.npc_attitude=OriginalAttitude;		
+					npc.npc_attitude=OriginalAttitude;	
+						npc.npc_goal=OriginalGoal;
+						npc.npc_gtarg=OriginalGtarg;
 				}
 			base.CancelEffect ();
 		}

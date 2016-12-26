@@ -275,7 +275,7 @@ public class NPC : object_base {
 			UpdateSprite();
 			
 				//Update GTarg
-				if (npc_gtarg==1)
+				if (npc_gtarg<=1)//PC
 				{
 					gtargName="";
 					if (gtarg==null)
@@ -343,6 +343,13 @@ public class NPC : object_base {
 			}
 			else
 			{
+				//If the player comes close and I'm hostile. Make sure I go to combat mode.
+				//Make this variable the detection range when stealth spells are created
+				if ((npc_attitude==0) && (Vector3.Distance(this.transform.position, GameWorldController.instance.playerUW.transform.position)<=GameWorldController.instance.playerUW.DetectionRange))		
+				{
+					npc_goal=5;	//Attack player
+					npc_gtarg=1;
+				}
 				switch (npc_goal)
 				{
 					case 0://Standing still
@@ -356,7 +363,7 @@ public class NPC : object_base {
 					case 2:
 					case 4:
 					case 8:
-						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_IDLERANDOM);
+						ai.AI.WorkingMemory.SetItem<int>("state",AI_STATE_IDLERANDOM);						
 						break;
 
 					case 5://Attack target
@@ -439,7 +446,7 @@ public class NPC : object_base {
 		if (source!=null)
 		{
 			if (source.name=="_Gronk")
-			{//PLayer attacked.
+			{//PLayer attacked the npc
 				npc_attitude=0;//Make the npc angry with the player.
 				if(Frozen==false)
 				{	
@@ -448,6 +455,13 @@ public class NPC : object_base {
 					gtarg=GameWorldController.instance.playerUW.gameObject;
 					gtargName=gtarg.name;
 					npc_goal=5;
+					if (npc_hp<5)//Low health. 20% Chance for morale break
+					{
+					if (Random.Range(0,5)>=4)
+						{
+							GameWorldController.instance.playerUW.PlayerMagic.CastEnchantment(source,this.gameObject,SpellEffect.UW1_Spell_Effect_CauseFear,Magic.SpellRule_TargetOther);
+						}
+					}
 				}	
 			}
 			else

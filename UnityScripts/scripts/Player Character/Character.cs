@@ -34,6 +34,10 @@ public class Character : UWEBase {
 	protected float talkRange=20.0f;
 	protected float lookRange=25.0f;
 
+	/// <summary>
+	/// The detection range for when NPCs can first become away of the PC.
+	/// </summary>
+	public int DetectionRange=6;
 
 	//For controlling switching between mouse look and interaction
 	public MouseLook XAxis;
