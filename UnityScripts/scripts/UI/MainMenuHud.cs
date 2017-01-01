@@ -532,6 +532,7 @@ public class MainMenuHud : GuiBase {
 			GameWorldController.instance.playerUW.playerMotor.enabled=false;
 			GameWorldController.instance.AtMainMenu=false;
 			GameWorldController.instance.playerUW.playerInventory.Refresh();
+			GameWorldController.instance.playerUW.playerInventory.UpdateLightSources();
 			UWHUD.instance.RefreshPanels(UWHUD.HUD_MODE_INVENTORY);
 			Destroy (this.gameObject);
 		}

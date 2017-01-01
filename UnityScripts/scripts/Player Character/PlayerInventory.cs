@@ -207,6 +207,14 @@ public class PlayerInventory : UWEBase {
 			}
 		}
 		lt.range = LightSource.BaseBrightness + MaxBrightness;
+		if(MaxBrightness>0)
+		{
+				playerUW.LightActive=true;
+		}
+		else
+		{
+				playerUW.LightActive=false;
+		}
 	}
 
 	/*	void DisplayGameObject(string objName, UISprite Label, bool isEquipped, ref bool hasChanged)

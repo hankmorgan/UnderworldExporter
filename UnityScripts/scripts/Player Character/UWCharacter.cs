@@ -8,6 +8,7 @@ The basic character. Stats and interaction.
  */ 
 public class UWCharacter : Character {
 
+
 	//What magic spells are currently active on (and cast by) the player. (max 3)
 	//These are the ones that the player can see on the hud.
 	public static UWCharacter Instance;
@@ -44,10 +45,11 @@ public class UWCharacter : Character {
 	public bool onGround;//Not currently used.
 	public bool isTelekinetic;
 	public bool isLeaping;
+	public int StealthLevel; //The level of stealth the character has.
 	
 	public int Resistance; //DR from spells.
 	public bool FireProof;//Takes no damage from lava
-
+	
 	//Character Status
 	public int FoodLevel; //0-35 range.
 	public int Fatigue;   //0-29 range
@@ -76,7 +78,7 @@ public class UWCharacter : Character {
 
 	public float lavaDamageTimer;//How long before applying lava damage
 	public string currRegion;
-		private bool InventoryReady=false;
+	private bool InventoryReady=false;
 
 
 	public void Awake()
@@ -106,7 +108,7 @@ public class UWCharacter : Character {
 
 		UWHUD.instance.InputControl.text="";
 		UWHUD.instance.MessageScroll.Clear ();
-
+		
 	}
 
 	void PlayerDeath()
@@ -323,6 +325,15 @@ public class UWCharacter : Character {
 			lavaDamageTimer=0;
 		}
 	
+		//Calculate how visible the player is.
+		if (LightActive)//The player has a light and is therefore visible at max range.
+				{
+					DetectionRange=BaseDetectionRange;
+				}
+				else
+				{//=MinRange+( (MaxRange-MinRange) * ((30-B4)/30))
+					DetectionRange= MinDetectionRange+ ( ( BaseDetectionRange-MinDetectionRange) * ((30.0f - (GetBaseStealthLevel()+StealthLevel))/30.0f));
+				}
 	}
 
 	public void SpellMode()
@@ -776,4 +787,9 @@ public class UWCharacter : Character {
 				}
 		}
 
+
+		public int GetBaseStealthLevel()
+		{
+			return PlayerSkills.GetSkill(Skills.SkillSneak);
+		}
 }

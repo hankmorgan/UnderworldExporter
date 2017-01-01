@@ -35,9 +35,25 @@ public class Character : UWEBase {
 	protected float lookRange=25.0f;
 
 	/// <summary>
-	/// The detection range for when NPCs can first become away of the PC.
+	/// The calculated detection range for when NPCs can first become aware of the PC.
 	/// </summary>
-	public int DetectionRange=6;
+	public float DetectionRange=6.0f;
+
+	/// <summary>
+	/// At what distance from the player is the AI awake for processing.
+	/// </summary>
+	public const float BaseAIWakeRange=8.0f;
+
+	/// <summary>
+	/// The base detection range for hostile AI who are not currently targetting the player.
+	/// </summary>
+	public const float BaseDetectionRange=6.0f;
+
+	/// <summary>
+	/// The minimum detection range a player can achieve
+	/// </summary>
+	public const float MinDetectionRange=0.2f;
+
 
 	//For controlling switching between mouse look and interaction
 	public MouseLook XAxis;
@@ -65,8 +81,20 @@ public class Character : UWEBase {
 	//Object for picking up quantities
 	protected ObjectInteraction QuantityObj=null;
 
+		/// <summary>
+		/// Tracks the last enemy character to hit th eplayer.
+		/// </summary>
 	public GameObject LastEnemyToHitMe;
-	public bool HelpMeMyFriends;
+
+		/// <summary>
+		/// Signals allied creatures to come help the player.
+		/// </summary>
+		public bool HelpMeMyFriends;
+
+	/// <summary>
+	/// The player has an active lightsource in use.
+	/// </summary>
+	public bool LightActive;
 
 	//public UILabel GetMessageLog()
 	//{
